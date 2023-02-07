@@ -40,7 +40,7 @@ export const JSONSchema = {
             },
             {
               title: 'Assigned Project Key',
-              field: 'project.name',
+              field: 'assignment.project.name',
               align: 'left'
             },
             {

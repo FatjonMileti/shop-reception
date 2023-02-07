@@ -9,7 +9,7 @@ import { renderComponent } from 'utils/dynamicRenderingService'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getInitialTableFilters, getRenderedColumns } from './helpers'
-import { toTableGETUrl, toTablePOSTPayload } from './serializers'
+import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
 
 // import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
@@ -92,7 +92,7 @@ const Table = props => {
       setTotalCount(response.totalCount)
     } catch (error) {
       console.log(error)
-      setItems(mockedRows)
+      setItems(toTableRowItems(mockedRows, columns))
       setTotalCount(mockedRows.length)
     }
   }

@@ -1,3 +1,5 @@
+import get from 'lodash/get'
+
 export const toTableObjects = result =>
   result.map(row => {
     Object.keys(row).map(key => {
@@ -52,3 +54,15 @@ export const toTablePOSTPayload = ({
   ...searchFieldsPayload,
   ...tableFilters
 })
+
+export const toTableRowItems = (items, columns) => {
+  columns.forEach(column => {
+    if (column.field.includes('.')) {
+      items.forEach((item, index) => {
+        items[index][column.field] = get(item, column.field)
+      })
+    }
+  })
+
+  return items
+}
