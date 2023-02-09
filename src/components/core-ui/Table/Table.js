@@ -11,9 +11,9 @@ import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getInitialTableFilters, getRenderedColumns } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
 
-// import { mockedRows } from 'utils/mockedData/teamTimeOffData'
+import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
-import { mockedRows } from 'utils/mockedData/teamAssignmentData'
+// import { mockedRows } from 'utils/mockedData/teamAssignmentData'
 // import { mockedRows } from 'utils/mockedData/capacityOverviewData'
 // import { mockedRows } from 'utils/mockedData/personCapacityData'
 

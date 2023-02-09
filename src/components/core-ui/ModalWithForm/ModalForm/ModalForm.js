@@ -1,4 +1,4 @@
-import { createElement } from 'react'
+import { createElement, useEffect } from 'react'
 import Grid from '@mui/material/Grid'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Components } from 'utils/dynamicRenderingConstants'
@@ -13,6 +13,14 @@ const ModalForm = ({
   saveData,
   closeModal
 }) => {
+  useEffect(() => {
+    formItems.map(formItem => {
+      if (formItem.changeDependencies?.script) {
+        eval(formItem.changeDependencies?.script)
+      }
+    })
+  }, [formItems, editItem])
+
   return (
     <form>
       <Grid container spacing={4}>
@@ -23,17 +31,18 @@ const ModalForm = ({
         </Grid>
         {formItems.map(formItem => {
           const { UIComponent, name, ...rest } = formItem
-          const key = rest.type === 'select' ? `${name}Value` : name
+          const key = rest.payloadKey || name
           const value = editItem[key] ? editItem[key] : rest.type === 'date' ? undefined : ''
 
           return (
             <Grid item key={formItem.name} xs={12} md={gridSize}>
               {createElement(Components[UIComponent], {
                 ...rest,
-                onChange: arg =>
+                onChange: arg => {
                   rest.type === 'date'
                     ? handleInputChange(arg, name)
-                    : handleInputChange(arg.target.value, key),
+                    : handleInputChange(arg.target.value, key)
+                },
                 value
               })}
             </Grid>
