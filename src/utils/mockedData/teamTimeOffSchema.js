@@ -87,14 +87,15 @@ export const JSONSchema = {
                   style: { width: '100%' },
                   label: 'Start Date',
                   id: 'startDate',
-                  changeDependencies: {
-                    script: `
-                      document.getElementById('hours').closest('.MuiGrid-item').style.visibility =
-                        document.getElementById('startDate').value === document.getElementById('endDate').value
-                          ? 'visible'
-                          : 'hidden'
-                    `
-                  }
+                  defaultValue: 'CURRENT_DATE'
+                  // changeDependencies: {
+                  //   script: `
+                  //     document.getElementById('hours').closest('.MuiGrid-item').style.visibility =
+                  //       document.getElementById('startDate').value === document.getElementById('endDate').value
+                  //         ? 'visible'
+                  //         : 'hidden'
+                  //   `
+                  // }
                 },
                 {
                   UIComponent: 'DatePicker',
@@ -102,15 +103,16 @@ export const JSONSchema = {
                   name: 'daysOff.endDate',
                   style: { width: '100%' },
                   label: 'End Date',
-                  id: 'endDate',
-                  changeDependencies: {
-                    script: `
-                      document.getElementById('hours').closest('.MuiGrid-item').style.visibility =
-                        document.getElementById('startDate').value === document.getElementById('endDate').value
-                          ? 'visible'
-                          : 'hidden'
-                    `
-                  }
+                  defaultValue: 'CURRENT_DATE'
+                  // id: 'endDate',
+                  // changeDependencies: {
+                  //   script: `
+                  //     document.getElementById('hours').closest('.MuiGrid-item').style.visibility =
+                  //       document.getElementById('startDate').value === document.getElementById('endDate').value
+                  //         ? 'visible'
+                  //         : 'hidden'
+                  //   `
+                  // }
                 },
                 {
                   UIComponent: 'Input',
@@ -119,7 +121,18 @@ export const JSONSchema = {
                   name: 'daysOff.hours',
                   width: '100%',
                   label: 'Number of hours',
-                  id: 'hours'
+                  id: 'hours',
+                  dependencies: {
+                    conditions: {
+                      operator: 'equal',
+                      value: true,
+                      params: 'daysOff.startDate|daysOff.endDate'
+                    },
+                    UIAttributes: {
+                      onSuccess: { inputProps: { hidden: false } },
+                      onFailure: { inputProps: { hidden: true } }
+                    }
+                  }
                 }
               ],
               formItemsPerRow: 1,
@@ -203,7 +216,19 @@ export const JSONSchema = {
                   variant: 'outlined',
                   name: 'daysOff.hours',
                   width: '100%',
-                  label: 'Number of hours'
+                  label: 'Number of hours',
+                  id: 'hours',
+                  dependencies: {
+                    conditions: {
+                      operator: 'equal',
+                      value: true,
+                      params: 'daysOff.startDate|daysOff.endDate'
+                    },
+                    UIAttributes: {
+                      onSuccess: { inputProps: { hidden: false } },
+                      onFailure: { inputProps: { hidden: true } }
+                    }
+                  }
                 }
               ],
               formItemsPerRow: 1,
@@ -246,19 +271,3 @@ export const JSONSchema = {
     }
   ]
 }
-
-// const changeHoursVisibility = () => {
-//   document.getElementById('hours').closest('.MuiGrid-item').style.visibility =
-//     document.getElementById('startDate').value === document.getElementById('endDate').value
-//       ? 'hidden'
-//       : 'visible'
-// }
-
-// const changeDateListener = event => {
-//   const element = event.target
-//   if (element.id === 'startDate' || element.id === 'endDate') {
-//     changeHoursVisibility()
-//   }
-// }
-
-// document.addEventListener('change', event => changeDateListener(event))

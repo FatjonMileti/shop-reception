@@ -1,7 +1,8 @@
-import { createElement, useEffect } from 'react'
+import { createElement, useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Components } from 'utils/dynamicRenderingConstants'
+import { start } from 'utils/rulesService'
 
 const ModalForm = ({
   modalTitle,
@@ -13,13 +14,19 @@ const ModalForm = ({
   saveData,
   closeModal
 }) => {
+  const [processedFormItems, setProcessedFormItems] = useState(formItems)
+
   useEffect(() => {
-    formItems.map(formItem => {
-      if (formItem.changeDependencies?.script) {
-        eval(formItem.changeDependencies?.script)
+    ;(async () => {
+      // TODO: get the JSON schema; this is a GET to api
+      try {
+        const result = await start(formItems, editItem)
+        setProcessedFormItems(result)
+      } catch (error) {
+        console.log(error)
       }
-    })
-  }, [formItems, editItem])
+    })()
+  }, [editItem, formItems])
 
   return (
     <form>
@@ -29,7 +36,7 @@ const ModalForm = ({
             {modalTitle}
           </Typography>
         </Grid>
-        {formItems.map(formItem => {
+        {processedFormItems.map(formItem => {
           const { UIComponent, name, ...rest } = formItem
           const key = rest.payloadKey || name
           const value = editItem[key] ? editItem[key] : rest.type === 'date' ? undefined : ''
@@ -41,6 +48,8 @@ const ModalForm = ({
                 onChange: arg => {
                   rest.type === 'date'
                     ? handleInputChange(arg, name)
+                    : rest.type === 'checkbox'
+                    ? handleInputChange(arg.target.checked, key)
                     : handleInputChange(arg.target.value, key)
                 },
                 value

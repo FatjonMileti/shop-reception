@@ -6,6 +6,7 @@ import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { ModalForm } from './ModalForm'
 import { useImmer } from 'use-immer'
 import { makeGetRequest, makePostRequest, makePutRequest, makePatchRequest } from 'utils/api'
+import { getEditFormItemDefaults } from 'utils/helpers'
 import { getModalWidth, getGridSize } from './helpers'
 import { toEditItemPayload } from './serializers'
 
@@ -46,8 +47,10 @@ const ModalWithForm = ({
           console.log(error)
         }
       })()
+    } else {
+      setEditItem(getEditFormItemDefaults(formItems))
     }
-  }, [editedItemId])
+  }, [editedItemId, formItems, editedItemUrl, setEditItem])
 
   const modalWidth = useMemo(() => getModalWidth(formItemsPerRow), [formItemsPerRow])
 
@@ -56,6 +59,7 @@ const ModalWithForm = ({
   const handleInputChange = (value, name) => {
     setEditItem(draft => {
       draft[name] = value
+      // TODO remove this
       if (draft[`${name}Value`]) {
         draft[`${name}Value`] = value
       }
