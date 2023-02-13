@@ -12,7 +12,7 @@ export const JSONSchema = {
           width: '80%',
           action: {
             url: '/capacityOverview',
-            type: 'GET'
+            type: 'POST'
           },
           hideCheckbox: true,
           columns: [
@@ -29,17 +29,17 @@ export const JSONSchema = {
             },
             {
               title: 'Total Effort (MD)',
-              field: 'capacity.person.totalEffort',
+              field: 'capacity.totalEffort',
               align: 'left'
             },
             {
               title: 'Total Available (MD)',
-              field: 'capacity.person.totalAvailable',
+              field: 'capacity.totalAvailable',
               align: 'left'
             },
             {
               title: 'Remaining (MD)',
-              field: 'capacity.person.remaining',
+              field: 'capacity.remaining',
               align: 'left'
             }
           ],

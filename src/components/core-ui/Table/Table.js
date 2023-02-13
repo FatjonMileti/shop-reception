@@ -11,10 +11,10 @@ import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getInitialTableFilters, getRenderedColumns } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
 
-import { mockedRows } from 'utils/mockedData/teamTimeOffData'
+// import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
 // import { mockedRows } from 'utils/mockedData/teamAssignmentData'
-// import { mockedRows } from 'utils/mockedData/capacityOverviewData'
+import { mockedRows } from 'utils/mockedData/capacityOverviewData'
 // import { mockedRows } from 'utils/mockedData/personCapacityData'
 
 const Table = props => {
@@ -73,9 +73,6 @@ const Table = props => {
         )
       }
       if (action.type === 'POST') {
-        const searchFieldsPayload = searchText
-          ? tableActions.searchAction.searchFields.map(field => ({ [field]: searchText }))
-          : {}
         response = await makePostRequest(
           url,
           toTablePOSTPayload({
@@ -83,7 +80,8 @@ const Table = props => {
             rowsPerPage,
             order,
             orderBy,
-            searchFieldsPayload,
+            searchText,
+            searchFields: tableActions.searchAction.searchFields,
             tableFilters
           })
         )

@@ -1,4 +1,6 @@
+import get from 'lodash/get'
 import { renderComponent } from 'utils/dynamicRenderingService'
+import { toFiltersUrl } from './serializers'
 
 export const getInitialTableFilters = (searchParams, filters) => {
   let params = {}
@@ -7,32 +9,31 @@ export const getInitialTableFilters = (searchParams, filters) => {
     params[filterKey] = value
   })
 
-  console.log(params)
   return params
 }
 
 export const getRenderedColumns = (columns, tableFilters) =>
   columns.map(column => {
-    const { render } = column
-    if (column.render) {
+    const { render, field } = column
+
+    if (render) {
       return {
         ...column,
         render: row => {
-          if (render.UIComponent === 'Link') {
-            let href = `${render.href}?$id=${row[render.idKeyName]}`
-            if (render.linkFilters?.length) {
-              let url = ''
-              Object.keys(tableFilters).map(key => {
-                if (render.linkFilters.includes(key)) {
-                  url = `${url}&${key}=${tableFilters[key]}`
-                }
-              })
-              href = `${href}${url}`
+          const { UIComponent, idKeyName, href, linkFilters } = render
+
+          if (UIComponent === 'Link') {
+            const id = get(row, idKeyName)
+            let linkHref = `${href}?id=${id}`
+
+            if (linkFilters?.length) {
+              linkHref = `${linkHref}${toFiltersUrl(tableFilters, linkFilters)}`
             }
+
             return renderComponent({
               ...render,
-              href,
-              children: row[column.field]
+              href: linkHref,
+              children: row[field]
             })
           }
           return renderComponent(render)

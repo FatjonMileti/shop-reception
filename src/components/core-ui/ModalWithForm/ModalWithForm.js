@@ -7,8 +7,8 @@ import { ModalForm } from './ModalForm'
 import { useImmer } from 'use-immer'
 import { makeGetRequest, makePostRequest, makePutRequest, makePatchRequest } from 'utils/api'
 import { getEditFormItemDefaults } from 'utils/helpers'
+import { toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
-import { toEditItemPayload } from './serializers'
 
 const sx = {
   position: 'absolute',
@@ -69,7 +69,7 @@ const ModalWithForm = ({
   const saveData = async () => {
     // TODO: save the new data; this is a POST to api
     try {
-      const payload = toEditItemPayload(editItem)
+      const payload = toItemPayload(editItem)
       if (formAction.type === 'POST') {
         await makePostRequest(`${formAction.url}`, payload)
       }
