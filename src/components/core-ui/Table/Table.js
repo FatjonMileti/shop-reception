@@ -22,7 +22,8 @@ const Table = props => {
   let [searchParams] = useSearchParams()
 
   const initialTableFilters = useMemo(
-    () => getInitialTableFilters(searchParams, tableActions?.filters),
+    () =>
+      tableActions?.filters ? getInitialTableFilters(searchParams, tableActions?.filters) : null,
     [searchParams, tableActions?.filters]
   )
 
@@ -169,8 +170,9 @@ const Table = props => {
           totalCount={totalCount}
           rowsPerPage={rest.rowsPerPage || 10}
           isRemote
-          hasNewButton={!!tableActions?.newAction}
-          newButtonOnClick={openNewModal}
+          newButton={
+            tableActions?.newAction ? { isFloatingButton: true, onClick: openNewModal } : null
+          }
           hasSearchInput={!!tableActions?.searchAction}
           handleRemoteData={handleRemoteData}
         />

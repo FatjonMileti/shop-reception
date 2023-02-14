@@ -20,8 +20,12 @@ const ModalForm = ({
     ;(async () => {
       // TODO: get the JSON schema; this is a GET to api
       try {
-        const result = await start(formItems, editItem)
-        setProcessedFormItems(result)
+        if (formItems.some(item => item.dependencies?.conditions)) {
+          const result = await start(formItems, editItem)
+          setProcessedFormItems(result)
+        }
+        const itemsWithScript = formItems.filter(item => item.dependencies?.script)
+        itemsWithScript.forEach(item => Function(item.dependencies.script)())
       } catch (error) {
         console.log(error)
       }

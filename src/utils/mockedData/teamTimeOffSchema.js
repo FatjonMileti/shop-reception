@@ -103,16 +103,17 @@ export const JSONSchema = {
                   name: 'daysOff.endDate',
                   style: { width: '100%' },
                   label: 'End Date',
-                  defaultValue: 'CURRENT_DATE'
-                  // id: 'endDate',
-                  // changeDependencies: {
-                  //   script: `
-                  //     document.getElementById('hours').closest('.MuiGrid-item').style.visibility =
-                  //       document.getElementById('startDate').value === document.getElementById('endDate').value
-                  //         ? 'visible'
-                  //         : 'hidden'
-                  //   `
-                  // }
+                  defaultValue: 'CURRENT_DATE',
+                  id: 'endDate',
+                  dependencies: {
+                    // script: `
+                    //   document.getElementById('hours').closest('.MuiGrid-item').style.visibility =
+                    //     document.getElementById('startDate').value === document.getElementById('endDate').value
+                    //       ? 'visible'
+                    //       : 'hidden'
+                    // `
+                    script: `alert('custom script is evaluated')`
+                  }
                 },
                 {
                   UIComponent: 'Input',

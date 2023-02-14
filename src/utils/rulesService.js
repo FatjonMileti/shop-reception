@@ -59,7 +59,7 @@ export const start = async (formItems, editItem) => {
 
   formItems.forEach((item, index) => {
     const { dependencies } = item
-    if (dependencies) {
+    if (dependencies && !dependencies.script) {
       setItemRule(dependencies, index, engine)
 
       if (dependencies.conditions?.params) {
