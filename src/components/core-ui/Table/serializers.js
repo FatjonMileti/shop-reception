@@ -42,7 +42,7 @@ export const toTableGETUrl = ({
 }
 
 const toSearchFieldsPayload = (searchFields, searchText) =>
-  searchFields.map(field => set({}, field, searchText))
+  searchFields ? searchFields.map(field => set({}, field, searchText)) : ''
 
 export const toTablePOSTPayload = ({
   page,

@@ -14,8 +14,8 @@ import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializer
 // import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
 // import { mockedRows } from 'utils/mockedData/teamAssignmentData'
-import { mockedRows } from 'utils/mockedData/capacityOverviewData'
-// import { mockedRows } from 'utils/mockedData/personCapacityData'
+// import { mockedRows } from 'utils/mockedData/capacityOverviewData'
+import { mockedRows } from 'utils/mockedData/personCapacityData'
 
 const Table = props => {
   const { action, columns, tableActions, tableRowActions, ...rest } = props
@@ -82,7 +82,7 @@ const Table = props => {
             order,
             orderBy,
             searchText,
-            searchFields: tableActions.searchAction.searchFields,
+            searchFields: tableActions.searchAction?.searchFields,
             tableFilters
           })
         )
@@ -171,7 +171,9 @@ const Table = props => {
           rowsPerPage={rest.rowsPerPage || 10}
           isRemote
           newButton={
-            tableActions?.newAction ? { isFloatingButton: true, onClick: openNewModal } : null
+            tableActions?.newAction
+              ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
+              : null
           }
           hasSearchInput={!!tableActions?.searchAction}
           handleRemoteData={handleRemoteData}

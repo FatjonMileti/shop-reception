@@ -52,6 +52,7 @@ export const JSONSchema = {
           tableActions: {
             newAction: {
               modalTitle: 'New Time Off',
+              // isFloatingButton: true,
               formItems: [
                 {
                   UIComponent: 'AsyncSelectInput',

@@ -5,7 +5,7 @@ import { toFiltersUrl } from './serializers'
 export const getInitialTableFilters = (searchParams, filters) => {
   let params = {}
   searchParams.forEach((value, key) => {
-    const filterKey = filters.find(filter => filter.valueFromQP === key)?.name
+    const filterKey = filters.find(filter => filter.variable === key)?.name
     params[filterKey] = value
   })
 

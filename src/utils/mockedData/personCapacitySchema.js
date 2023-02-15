@@ -89,14 +89,14 @@ export const JSONSchema = {
                 type: 'date',
                 name: 'project.startDate',
                 label: 'Start Date',
-                valueFromQP: 'capacity.startDate'
+                variable: 'capacity.startDate'
               },
               {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'project.endDate',
                 label: 'End Date',
-                valueFromQP: 'capacity.endDate'
+                variable: 'capacity.endDate'
               },
               {
                 UIComponent: 'Input',
@@ -104,7 +104,7 @@ export const JSONSchema = {
                 name: 'person.id',
                 label: 'Person Id',
                 inputProps: { hidden: true },
-                valueFromQP: 'id'
+                variable: 'id'
               }
             ]
           }
