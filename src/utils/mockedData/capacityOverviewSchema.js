@@ -55,13 +55,15 @@ export const JSONSchema = {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'capacity.startDate',
-                label: 'Start Date'
+                label: 'Start Date',
+                defaultValue: 'CURRENT_DATE'
               },
               {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'capacity.endDate',
-                label: 'End Date'
+                label: 'End Date',
+                defaultValue: 'CURRENT_DATE'
               }
             ]
           }

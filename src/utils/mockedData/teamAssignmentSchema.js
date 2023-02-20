@@ -1,11 +1,9 @@
 export const JSONSchema = {
   UIComponent: 'Container',
   id: 'teamAssignmentTableContainer',
-  className: '',
   children: [
     {
       UIComponent: 'Box',
-      className: '',
       children: [
         {
           UIComponent: 'Table',
@@ -16,41 +14,36 @@ export const JSONSchema = {
             type: 'GET'
           },
           hideCheckbox: true,
-          orderBy: 'person.name',
+          orderBy: 'teamMember.name',
           columns: [
             {
-              title: '#',
-              field: 'number',
-              align: 'left'
-            },
-            {
               title: 'Domain',
-              field: 'domain.name',
+              field: 'domain',
               align: 'left'
             },
             {
               title: 'Person',
-              field: 'person.name',
+              field: 'teamMember.name',
               align: 'left'
             },
             {
               title: 'Role',
-              field: 'role.name',
+              field: 'role',
               align: 'left'
             },
             {
               title: 'Assigned Project Key',
-              field: 'assignment.project.name',
+              field: 'projectKey',
               align: 'left'
             },
             {
               title: 'Assignment Start Date',
-              field: 'assignment.startDate',
+              field: 'assignmentStartDate',
               align: 'left'
             },
             {
               title: 'Assignment End Date',
-              field: 'assignment.endDate',
+              field: 'assignmentEndDate',
               align: 'left'
             }
           ],
@@ -66,7 +59,7 @@ export const JSONSchema = {
                   type: 'text',
                   readonly: true,
                   variant: 'outlined',
-                  name: 'person.name',
+                  name: 'teamMember.name',
                   width: '100%',
                   label: 'Person'
                 },
@@ -75,7 +68,7 @@ export const JSONSchema = {
                   type: 'text',
                   readonly: true,
                   variant: 'outlined',
-                  name: 'role.name',
+                  name: 'role',
                   width: '100%',
                   label: 'Role'
                 },
@@ -84,21 +77,21 @@ export const JSONSchema = {
                   type: 'text',
                   readonly: true,
                   variant: 'outlined',
-                  name: 'project.name',
+                  name: 'projectKey',
                   width: '100%',
                   label: 'Project Key'
                 },
                 {
                   UIComponent: 'DatePicker',
                   type: 'date',
-                  name: 'assignment.startDate',
+                  name: 'assignmentStartDate',
                   style: { width: '100%' },
                   label: 'Start Date'
                 },
                 {
                   UIComponent: 'DatePicker',
                   type: 'date',
-                  name: 'assignment.endDate',
+                  name: 'assignmentEndDate',
                   style: { width: '100%' },
                   label: 'End Date'
                 }

@@ -1,53 +1,38 @@
 export const mockedRows = [
   {
-    id: 1,
-    number: 1,
-    domain: { name: 'Architecture' },
-    person: {
+    id: '1',
+    domain: 'Architecture',
+    teamMember: {
       name: 'Person 1',
       id: 1
     },
-    role: { name: 'Architect' },
-    assignment: {
-      project: {
-        name: 'Project 1'
-      },
-      startDate: '6/1/2022',
-      endDate: '6/10/2022'
-    }
+    role: 'Architect',
+    assignmentEndDate: '6/10/2022',
+    assignmentStartDate: '6/1/2022',
+    projectKey: 'Project 1'
   },
   {
-    id: 2,
-    number: 2,
-    domain: { name: 'Digital' },
-    person: {
+    id: '2',
+    domain: 'Digital',
+    teamMember: {
       name: 'Person 2',
       id: 2
     },
-    role: { name: 'IT PM' },
-    assignment: {
-      project: {
-        name: 'Project 3'
-      },
-      startDate: '6/1/2022',
-      endDate: '6/10/2022'
-    }
+    role: 'IT PM',
+    assignmentEndDate: '6/10/2022',
+    assignmentStartDate: '6/1/2022',
+    projectKey: 'Project 3'
   },
   {
-    id: 3,
-    number: 3,
-    domain: { name: 'Architecture' },
+    id: '3',
+    domain: 'Architecture',
     person: {
       name: 'Person 1',
       id: 1
     },
-    role: { name: 'Architect' },
-    assignment: {
-      project: {
-        name: 'Project 2'
-      },
-      startDate: '6/3/2022',
-      endDate: '6/16/2022'
-    }
+    role: 'Architect',
+    assignmentEndDate: '6/16/2022',
+    assignmentStartDate: '6/3/2022',
+    projectKey: 'Project 2'
   }
 ]

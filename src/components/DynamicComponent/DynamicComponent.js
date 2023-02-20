@@ -3,11 +3,11 @@ import { renderComponent } from 'utils/dynamicRenderingService'
 import { makeGetRequest } from 'utils/api'
 import s from './DynamicComponent.scss'
 
-// import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/teamTimeOffSchema'
+import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/teamTimeOffSchema'
 // import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/effortMatrixSchema'
 // import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/teamAssignmentSchema'
 // import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/capacityOverviewSchema'
-import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/personCapacitySchema'
+// import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/personCapacitySchema'
 
 const DynamicComponent = props => {
   const [JSONSchema, setJSONSchema] = useState(null)
@@ -16,8 +16,11 @@ const DynamicComponent = props => {
     ;(async () => {
       // TODO: get the JSON schema; this is a GET to api
       try {
-        const result = await makeGetRequest(props.JSONSchemaURL)
-        setJSONSchema(result)
+        // const result = await makeGetRequest(props.JSONSchemaURL)
+        const result = await makeGetRequest(
+          `https://68efe64c-3b2e-4412-a953-046d6f406ce4.mock.pstmn.io/ui-schema?activityId=${props.activityId}&roleId=quis`
+        )
+        setJSONSchema(JSON.parse(result.jsonSchema.replace(/'+/g, '')))
       } catch (error) {
         console.log(error)
         setJSONSchema(JSONSchemaMock)

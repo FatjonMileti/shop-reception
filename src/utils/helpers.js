@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-const getDefaultEditItemValue = value => {
+const getDefaultItemValue = value => {
   switch (value) {
     case 'CURRENT_DATE':
       return dayjs()
@@ -9,11 +9,11 @@ const getDefaultEditItemValue = value => {
   }
 }
 
-export const getEditFormItemDefaults = formItems => {
+export const getItemDefaults = formItems => {
   let result = {}
 
   formItems.forEach(item => {
-    result[item.name] = item.defaultValue ? getDefaultEditItemValue(item.defaultValue) : ''
+    result[item.name] = item.defaultValue ? getDefaultItemValue(item.defaultValue) : ''
   })
 
   return result

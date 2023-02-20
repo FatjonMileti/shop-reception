@@ -11,11 +11,11 @@ import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getInitialTableFilters, getRenderedColumns } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
 
-// import { mockedRows } from 'utils/mockedData/teamTimeOffData'
+import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
 // import { mockedRows } from 'utils/mockedData/teamAssignmentData'
 // import { mockedRows } from 'utils/mockedData/capacityOverviewData'
-import { mockedRows } from 'utils/mockedData/personCapacityData'
+// import { mockedRows } from 'utils/mockedData/personCapacityData'
 
 const Table = props => {
   const { action, columns, tableActions, tableRowActions, ...rest } = props
@@ -60,18 +60,33 @@ const Table = props => {
     try {
       let response
       if (action.type === 'GET') {
+        // response = await makeGetRequest(
+        //   `https://6b467f37-0e21-4336-97b7-62b384ad2733.mock.pstmn.io/${toTableGETUrl({
+        //     url,
+        //     searchText,
+        //     tableActions,
+        //     tableFilters,
+        //     page,
+        //     rowsPerPage,
+        //     order,
+        //     orderBy
+        //   })}`
+        // )
         response = await makeGetRequest(
-          toTableGETUrl({
-            url,
-            searchText,
-            tableActions,
-            tableFilters,
-            page,
-            rowsPerPage,
-            order,
-            orderBy
-          })
+          'https://6b467f37-0e21-4336-97b7-62b384ad2733.mock.pstmn.io/teamAssignments?page=0&size=nisi consequat Ut&order=nisi consequat Ut&orderBy=nisi consequat Ut&filterBy=nisi consequat Ut&filterValue=nisi consequat Ut'
         )
+        // response = await makeGetRequest(
+        //   toTableGETUrl({
+        //     url,
+        //     searchText,
+        //     tableActions,
+        //     tableFilters,
+        //     page,
+        //     rowsPerPage,
+        //     order,
+        //     orderBy
+        //   })
+        // )
       }
       if (action.type === 'POST') {
         response = await makePostRequest(
@@ -87,8 +102,8 @@ const Table = props => {
           })
         )
       }
-      setItems(response.rows)
-      setTotalCount(response.totalCount)
+      setItems(toTableRowItems(response.list, columns))
+      setTotalCount(response.page.totalCount)
     } catch (error) {
       console.log(error)
       setItems(toTableRowItems(mockedRows, columns))

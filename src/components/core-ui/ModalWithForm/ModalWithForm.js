@@ -6,7 +6,7 @@ import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { ModalForm } from './ModalForm'
 import { useImmer } from 'use-immer'
 import { makeGetRequest, makePostRequest, makePutRequest, makePatchRequest } from 'utils/api'
-import { getEditFormItemDefaults } from 'utils/helpers'
+import { getItemDefaults } from 'utils/helpers'
 import { toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
 
@@ -48,7 +48,7 @@ const ModalWithForm = ({
         }
       })()
     } else {
-      setEditItem(getEditFormItemDefaults(formItems))
+      setEditItem(getItemDefaults(formItems))
     }
   }, [editedItemId, formItems, editedItemUrl, setEditItem])
 
@@ -87,13 +87,18 @@ const ModalWithForm = ({
     closeModal()
   }
 
+  const closeModalAndResetForm = () => {
+    closeModal()
+    setEditItem({})
+  }
+
   return (
     <Modal
       {...modalProps}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
       open={isModalOpen}
-      onClose={closeModal}
+      onClose={closeModalAndResetForm}
     >
       <Box
         sx={{
@@ -103,7 +108,7 @@ const ModalWithForm = ({
         }}
       >
         <IconButton style={{ position: 'absolute', top: '1rem', right: '1.5rem' }} withBackground>
-          <Close onClick={closeModal} />
+          <Close onClick={closeModalAndResetForm} />
         </IconButton>
         <ModalForm
           modalTitle={modalTitle}
@@ -113,7 +118,7 @@ const ModalWithForm = ({
           editItem={editItem}
           formButtons={formButtons}
           saveData={saveData}
-          closeModal={closeModal}
+          closeModal={closeModalAndResetForm}
         />
       </Box>
     </Modal>

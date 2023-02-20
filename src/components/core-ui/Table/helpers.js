@@ -1,13 +1,19 @@
 import get from 'lodash/get'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { toFiltersUrl } from './serializers'
+import { getItemDefaults } from 'utils/helpers'
 
 export const getInitialTableFilters = (searchParams, filters) => {
   let params = {}
-  searchParams.forEach((value, key) => {
-    const filterKey = filters.find(filter => filter.variable === key)?.name
-    params[filterKey] = value
-  })
+
+  if (searchParams.length) {
+    searchParams.forEach((value, key) => {
+      const filterKey = filters.find(filter => filter.variable === key)?.name
+      params[filterKey] = value
+    })
+  } else {
+    params = getItemDefaults(filters)
+  }
 
   return params
 }

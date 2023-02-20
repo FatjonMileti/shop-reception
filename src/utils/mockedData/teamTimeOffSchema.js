@@ -89,14 +89,6 @@ export const JSONSchema = {
                   label: 'Start Date',
                   id: 'startDate',
                   defaultValue: 'CURRENT_DATE'
-                  // changeDependencies: {
-                  //   script: `
-                  //     document.getElementById('hours').closest('.MuiGrid-item').style.visibility =
-                  //       document.getElementById('startDate').value === document.getElementById('endDate').value
-                  //         ? 'visible'
-                  //         : 'hidden'
-                  //   `
-                  // }
                 },
                 {
                   UIComponent: 'DatePicker',
@@ -105,16 +97,7 @@ export const JSONSchema = {
                   style: { width: '100%' },
                   label: 'End Date',
                   defaultValue: 'CURRENT_DATE',
-                  id: 'endDate',
-                  dependencies: {
-                    // script: `
-                    //   document.getElementById('hours').closest('.MuiGrid-item').style.visibility =
-                    //     document.getElementById('startDate').value === document.getElementById('endDate').value
-                    //       ? 'visible'
-                    //       : 'hidden'
-                    // `
-                    script: `alert('custom script is evaluated')`
-                  }
+                  id: 'endDate'
                 },
                 {
                   UIComponent: 'Input',

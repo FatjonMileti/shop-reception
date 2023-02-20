@@ -32,7 +32,7 @@ export const getRequest = url => {
 }
 
 export const makeGetRequest = (url, params) => {
-  return axios.get(getBaseUrl(url), params).then(response => response.data)
+  return axios.get(url, params).then(response => response.data)
 }
 
 export const makePostRequest = (url, params, config = {}) =>
