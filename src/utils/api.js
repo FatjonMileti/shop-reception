@@ -47,6 +47,6 @@ export const makeDeleteRequest = (url, params) =>
 export const makePatchRequest = (url, params) =>
   axios.patch(getBaseUrl(url), params).then(response => response.data)
 
-export const loginRedirect = navigate => {
-  navigate(URLS.AUTH_HOME, { replace: true })
+export const loginRedirect = () => {
+  window.location.href = URLS.AUTH_HOME
 }

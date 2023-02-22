@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
@@ -11,8 +11,6 @@ import { authenticate } from 'utils/authService'
 import cn from 'classnames'
 
 const Login = props => {
-  const navigate = useNavigate()
-
   const formSubmit = async values => {
     const { username, password } = values
 
@@ -27,7 +25,7 @@ const Login = props => {
       const token =
         'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJbnZvaWNlIiwiaWF0IjoxNjcxMDI0ODkzLCJleHAiOjE3MDI1NjA5NTksImF1ZCI6Ind3dy5leGFtcGxlLmNvbSIsInN1YiI6ImFkbWluMSJ9.vM4-YbiGlmzYNWyP7PtrATvYwcZjxTpIDUypZFrMJNQ'
       authenticate(token)
-      loginRedirect(navigate)
+      loginRedirect()
     } catch (error) {
       alert('Error logging in')
     }

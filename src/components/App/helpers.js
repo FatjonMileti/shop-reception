@@ -1,42 +1,27 @@
 import { Route } from 'react-router-dom'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
-import { DynamicComponent } from '../DynamicComponent'
 
-export const createRoutes = (page, index) => {
-  const { route, JSONSchemaURL } = page
+export const createRoute = (page, component) => {
+  const { route, ...rest } = page
+
   return (
     <Route
-      key={index}
+      key={route.url}
       path={route.url}
       exact={route.exact}
-      element={<PrivateRoute component={DynamicComponent} JSONSchemaURL={JSONSchemaURL} />}
+      element={<PrivateRoute component={component} {...rest} />}
     />
   )
 }
 
-export const pages = [
+export const mockedPages = [
   {
-    label: 'Home',
+    name: 'Team Assignment',
+    icon: '',
     route: {
-      url: '/',
+      url: '/teamAssignment',
       exact: true
     },
-    JSONSchemaURL: '/jsonSchema/home'
-  },
-  {
-    label: 'Person',
-    route: {
-      url: '/persons/:id',
-      exact: true
-    },
-    JSONSchemaURL: '/jsonSchema/person'
-  },
-  {
-    label: 'Person Capacity',
-    route: {
-      url: '/personCapacity',
-      exact: true
-    },
-    JSONSchemaURL: '/jsonSchema/personCapacity'
+    id: 'teamAssignment'
   }
 ]

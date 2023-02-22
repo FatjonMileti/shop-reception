@@ -18,7 +18,7 @@ const DynamicComponent = props => {
       try {
         // const result = await makeGetRequest(props.JSONSchemaURL)
         const result = await makeGetRequest(
-          `https://68efe64c-3b2e-4412-a953-046d6f406ce4.mock.pstmn.io/ui-schema?activityId=${props.activityId}&roleId=quis`
+          `https://c34672c2-757c-491f-9bf0-089182c88037.mock.pstmn.io/ui-schema?activityId=${props.id}&roleId=quis`
         )
         setJSONSchema(JSON.parse(result.jsonSchema.replace(/'+/g, '')))
       } catch (error) {
