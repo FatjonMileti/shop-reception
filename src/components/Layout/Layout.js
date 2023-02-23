@@ -9,7 +9,7 @@ import s from './Layout.scss'
 
 const drawerWidth = 300
 
-const Layout = ({ children, setGeneralPages, setSubdomainId }) => {
+const Layout = ({ children, setApplicationModulesPages, setSubdomainId }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(true)
 
   const handleOpenMenu = () => {
@@ -34,7 +34,7 @@ const Layout = ({ children, setGeneralPages, setSubdomainId }) => {
             isMenuOpen={isMenuOpen}
             handleCloseMenu={handleCloseMenu}
             drawerWidth={drawerWidth}
-            setGeneralPages={setGeneralPages}
+            setApplicationModulesPages={setApplicationModulesPages}
             setSubdomainId={setSubdomainId}
           />
           <div

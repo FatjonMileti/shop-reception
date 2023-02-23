@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 
-const ServiceDomain = ({ pages }) => {
+const ServiceDomain = ({ applicationPages }) => {
   const navigate = useNavigate()
 
   return (
     <div>
-      {pages.map(app => (
+      {applicationPages.map(app => (
         <div key={app.id} onClick={() => navigate(app.route.url)}>
           {app.name}
         </div>

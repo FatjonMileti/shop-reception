@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Drawer, List } from '@fullscreendigital/carrefour-dex-fe'
-import { toSelectedMenuItems, toGeneralPages, toMenuItems } from './serializers'
+import { toSelectedMenuItems, toApplicationModulesPages, toMenuItems } from './serializers'
 import { Close, AssuredWorkload } from '@mui/icons-material'
 import { makeGetRequest } from 'utils/api'
 import s from './Sidebar.scss'
@@ -27,7 +27,7 @@ const mockedItems = [
   }
 ]
 
-const mockedGeneralPages = [
+const mockedApplicationModulesPages = [
   {
     route: {
       url: '/governance/projectTeam',
@@ -36,7 +36,13 @@ const mockedGeneralPages = [
   }
 ]
 
-const Sidebar = ({ isMenuOpen, handleCloseMenu, drawerWidth, setGeneralPages, setSubdomainId }) => {
+const Sidebar = ({
+  isMenuOpen,
+  handleCloseMenu,
+  drawerWidth,
+  setApplicationModulesPages,
+  setSubdomainId
+}) => {
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
 
@@ -50,11 +56,11 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, drawerWidth, setGeneralPages, se
           'https://c34672c2-757c-491f-9bf0-089182c88037.mock.pstmn.io/application-modules'
         )
         setItems(toMenuItems(result))
-        setGeneralPages(toGeneralPages(result))
+        setApplicationModulesPages(toApplicationModulesPages(result))
       } catch (error) {
         console.log(error)
         setItems(mockedItems)
-        setGeneralPages(mockedGeneralPages)
+        setApplicationModulesPages(mockedApplicationModulesPages)
       }
     })()
   }, [])

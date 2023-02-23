@@ -39,7 +39,7 @@ export const toMenuItems = modules => {
 
 const toRoute = item => ({ route: { url: item.routeURL, exact: item.routePathExact } })
 
-export const toGeneralPages = modules => {
+export const toApplicationModulesPages = modules => {
   let routes = []
 
   modules.forEach(module => {

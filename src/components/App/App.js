@@ -11,11 +11,11 @@ import { mockedPages, createRoute } from './helpers'
 import { makeGetRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { DynamicComponent } from '../DynamicComponent'
-import { toPages } from './serializers'
+import { toApplicationPages } from './serializers'
 
 const App = () => {
-  const [pages, setPages] = useState([])
-  const [generalPages, setGeneralPages] = useState([])
+  const [applicationPages, setApplicationPages] = useState([])
+  const [applicationModulesPages, setApplicationModulesPages] = useState([])
   const [subdomainId, setSubdomainId] = useState(localStorage.getItem('selectedSubdomainId'))
 
   useEffect(() => {
@@ -25,10 +25,10 @@ const App = () => {
           const result = await makeGetRequest(
             `https://c34672c2-757c-491f-9bf0-089182c88037.mock.pstmn.io/activities?submoduleId=${subdomainId}`
           )
-          setPages(toPages(result))
+          setApplicationPages(toApplicationPages(result))
         } catch (error) {
           console.log(error)
-          setPages(mockedPages)
+          setApplicationPages(mockedPages)
         }
       }
     })()
@@ -36,16 +36,21 @@ const App = () => {
 
   return (
     <ThemeProvider theme="light">
-      <Layout setGeneralPages={setGeneralPages} setSubdomainId={setSubdomainId}>
+      <Layout
+        setApplicationModulesPages={setApplicationModulesPages}
+        setSubdomainId={setSubdomainId}
+      >
         <Routes>
           {/* private routes */}
           <Route path={URLS.AUTH_HOME} exact element={<PrivateRoute component={Home} />} />
-          {generalPages.map(page => createRoute({ ...page, pages, setPages }, ServiceDomain))}
-          {pages.map(page => createRoute(page, DynamicComponent))}
+          {applicationModulesPages.map(page =>
+            createRoute({ ...page, applicationPages, setApplicationPages }, ServiceDomain)
+          )}
+          {applicationPages.map(page => createRoute(page, DynamicComponent))}
           {/* end of private routes */}
 
           <Route path={URLS.LOGIN} element={<Login />} />
-          {pages.length && <Route path="*" element={<NotFound />} />}
+          {applicationPages.length && <Route path="*" element={<NotFound />} />}
         </Routes>
       </Layout>
     </ThemeProvider>
