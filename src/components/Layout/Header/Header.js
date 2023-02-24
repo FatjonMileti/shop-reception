@@ -1,40 +1,9 @@
-import { useState } from 'react'
-import { AppBar, Menu } from '@fullscreendigital/carrefour-dex-fe'
-// import {
-//   getHeaderRightItems,
-//   getHeaderRightMenuItems,
-//   getNotificationsItems,
-//   getChatItems
-// } from './helpers'
+import { AppBar } from '@fullscreendigital/carrefour-dex-fe'
+import { NotificationsNoneOutlined } from '@mui/icons-material'
+import { Logo } from './Logo'
+import s from './Header.scss'
 
-const Header = ({ isMenuOpen, handleOpenMenu, drawerWidth }) => {
-  const [chatOpen, setChatOpen] = useState(false)
-  const [chatAnchorEl, setChatAnchorEl] = useState(null)
-  const [notificationsOpen, setNotificationsOpen] = useState(false)
-  const [notificationsAnchorEl, setNotificationsAnchorEl] = useState(null)
-
-  const handleChatButtonClick = event => {
-    setChatAnchorEl(event.currentTarget)
-    setChatOpen(true)
-  }
-
-  const handleChatClose = () => {
-    setChatAnchorEl(null)
-    setChatOpen(false)
-  }
-
-  const handleNotificationsButtonClick = event => {
-    setNotificationsAnchorEl(event.currentTarget)
-    setNotificationsOpen(true)
-  }
-
-  const handleNotificationsClose = () => {
-    setNotificationsAnchorEl(null)
-    setNotificationsOpen(false)
-  }
-
-  const onSearchInputChange = event => console.log(`search word is: ${event.currentTarget.value}`)
-
+const Header = ({ isMenuOpen, drawerWidth }) => {
   return (
     <>
       <AppBar
@@ -50,12 +19,19 @@ const Header = ({ isMenuOpen, handleOpenMenu, drawerWidth }) => {
               }
             : {})
         }}
-        iconButtonProps={{
-          style: { marginRight: '2rem', ...(isMenuOpen && { display: 'none' }) },
-          onClick: handleOpenMenu
+        mainItem={{
+          content: <Logo />,
+          style: {
+            position: 'absolute',
+            left: `calc(50% - 24px)`
+          }
         }}
-        // rightItems={getHeaderRightItems(handleChatButtonClick, handleNotificationsButtonClick)}
-        // rightMenuItems={getHeaderRightMenuItems()}
+        hasBackground
+        menuIcon={
+          <span className={s.notificationsContainer}>
+            <NotificationsNoneOutlined />
+          </span>
+        }
       />
     </>
   )
