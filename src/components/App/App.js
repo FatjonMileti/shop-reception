@@ -28,7 +28,7 @@ const App = () => {
           setApplicationPages(toApplicationPages(result))
         } catch (error) {
           console.log(error)
-          setApplicationPages(mockedPages)
+          setApplicationPages(toApplicationPages(mockedPages))
         }
       }
     })()

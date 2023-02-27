@@ -16,12 +16,19 @@ export const createRoute = (page, component) => {
 
 export const mockedPages = [
   {
+    id: '1',
     name: 'Team Assignment',
-    icon: '',
-    route: {
-      url: '/teamAssignment',
-      exact: true
-    },
-    id: 'teamAssignment'
+    icon: 'HowToRegOutlined',
+    routeURL: '/teamAssignment',
+    routePathExact: true,
+    submoduleId: '1'
+  },
+  {
+    id: '2',
+    name: 'Team Day-Off Management',
+    icon: 'TimerOffOutlined',
+    routeURL: '/teamDayOffManagement',
+    routePathExact: true,
+    submoduleId: '1'
   }
 ]

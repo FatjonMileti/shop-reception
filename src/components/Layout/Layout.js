@@ -7,7 +7,7 @@ import { ErrorBoundary } from 'components/core-ui'
 import { isAuthenticated } from 'utils/authService'
 import s from './Layout.scss'
 
-const drawerWidth = 300
+const drawerWidth = 400
 
 const Layout = ({ children, setApplicationModulesPages, setSubdomainId }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(true)

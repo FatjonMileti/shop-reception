@@ -1,38 +1,82 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Drawer, List } from '@fullscreendigital/carrefour-dex-fe'
+import { Drawer, List, Divider } from '@fullscreendigital/carrefour-dex-fe'
 import { toSelectedMenuItems, toApplicationModulesPages, toMenuItems } from './serializers'
-import { Close, AssuredWorkload } from '@mui/icons-material'
+import {
+  AssuredWorkload,
+  HomeOutlined,
+  NotificationsNoneOutlined,
+  PersonOutlineOutlined,
+  PowerSettingsNewOutlined
+} from '@mui/icons-material'
 import { makeGetRequest } from 'utils/api'
+import { SidebarHeader } from './SidebarHeader'
 import s from './Sidebar.scss'
 
-const mockedItems = [
+const mockedResult = [
   {
-    type: 'icon',
-    primaryText: 'Governance Services',
-    index: 1,
-    icon: <AssuredWorkload />,
-    disablePadding: true,
-    id: '1234',
-    nestedItems: [
+    id: '1',
+    name: 'Governance',
+    icon: 'AssuredWorkload',
+    routePathExact: false,
+    submodules: [
       {
-        type: 'text',
-        primaryText: 'Project Team',
-        index: 13,
-        disablePadding: true,
-        href: 'governance/projectTeam',
-        id: '567'
+        id: '1',
+        name: 'Project Team',
+        icon: 'Groups',
+        routeURL: '/governance/projectTeam',
+        routePathExact: true,
+        moduleId: '1'
+      },
+      {
+        id: '2',
+        name: 'Project Deliverables',
+        icon: 'LocalShipping',
+        routeURL: '/governance/projectDeliverables',
+        routePathExact: true,
+        moduleId: '1'
+      }
+    ]
+  },
+  {
+    id: '2',
+    name: 'Test Domain',
+    icon: 'BarChart',
+    routePathExact: false,
+    submodules: [
+      {
+        id: '3',
+        name: 'Test subdomain',
+        icon: 'BarChart',
+        routeURL: '/testDomain/testSubdomain',
+        routePathExact: true,
+        moduleId: '2'
       }
     ]
   }
 ]
 
-const mockedApplicationModulesPages = [
+const staticItems = [
   {
-    route: {
-      url: '/governance/projectTeam',
-      exact: true
-    }
+    disablePadding: true,
+    icon: <HomeOutlined />,
+    index: 1,
+    primaryText: 'Home',
+    type: 'icon'
+  },
+  {
+    disablePadding: true,
+    icon: <NotificationsNoneOutlined />,
+    index: 2,
+    primaryText: 'Notifications',
+    type: 'icon'
+  },
+  {
+    disablePadding: true,
+    icon: <PersonOutlineOutlined />,
+    index: 2,
+    primaryText: 'Profile',
+    type: 'icon'
   }
 ]
 
@@ -59,8 +103,8 @@ const Sidebar = ({
         setApplicationModulesPages(toApplicationModulesPages(result))
       } catch (error) {
         console.log(error)
-        setItems(mockedItems)
-        setApplicationModulesPages(mockedApplicationModulesPages)
+        setItems(toMenuItems(mockedResult))
+        setApplicationModulesPages(toApplicationModulesPages(mockedResult))
       }
     })()
   }, [])
@@ -83,13 +127,21 @@ const Sidebar = ({
       onClose={handleCloseMenu}
       displayEmptyHeader
       anchor="right"
-      headerContent={
-        <span className={s.logo}>
-          <Close />
-        </span>
-      }
+      headerContent={<SidebarHeader handleCloseMenu={handleCloseMenu} drawerWidth={drawerWidth} />}
     >
-      <div style={{ width: `${drawerWidth}px`, margin: '0 auto' }}>
+      <div className={s.itemsList} style={{ width: `${drawerWidth}px` }}>
+        <nav className={s.section}>
+          <List
+            subheader={{
+              component: 'div',
+              content: '',
+              style: { fontSize: '70%' }
+            }}
+            items={staticItems}
+            onItemClick={handleItemClick}
+          />
+        </nav>
+        <Divider style={{ display: 'block', backgroundColor: '#fff' }} />
         <nav className={s.section}>
           <List
             subheader={{
@@ -101,7 +153,26 @@ const Sidebar = ({
             onItemClick={handleItemClick}
           />
         </nav>
-        {/* <Divider style={{ display: 'block' }} /> */}
+        <Divider style={{ display: 'block', backgroundColor: '#fff' }} />
+        <nav className={s.section}>
+          <List
+            subheader={{
+              component: 'div',
+              content: '',
+              style: { fontSize: '70%' }
+            }}
+            items={[
+              {
+                disablePadding: true,
+                icon: <PowerSettingsNewOutlined />,
+                index: 2,
+                primaryText: 'Sign Out',
+                type: 'icon'
+              }
+            ]}
+            onItemClick={handleItemClick}
+          />
+        </nav>
       </div>
     </Drawer>
   )
