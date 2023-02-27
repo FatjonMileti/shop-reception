@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Drawer, List, Divider } from '@fullscreendigital/carrefour-dex-fe'
 import { toSelectedMenuItems, toApplicationModulesPages, toMenuItems } from './serializers'
 import {
-  AssuredWorkload,
   HomeOutlined,
   NotificationsNoneOutlined,
   PersonOutlineOutlined,
   PowerSettingsNewOutlined
 } from '@mui/icons-material'
 import { makeGetRequest } from 'utils/api'
+import { DrawerContext } from 'contexts'
 import { SidebarHeader } from './SidebarHeader'
 import s from './Sidebar.scss'
 
@@ -80,15 +80,11 @@ const staticItems = [
   }
 ]
 
-const Sidebar = ({
-  isMenuOpen,
-  handleCloseMenu,
-  drawerWidth,
-  setApplicationModulesPages,
-  setSubdomainId
-}) => {
+const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setSubdomainId }) => {
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
+
+  const drawerContext = useContext(DrawerContext)
 
   const navigate = useNavigate()
 
@@ -127,9 +123,11 @@ const Sidebar = ({
       onClose={handleCloseMenu}
       displayEmptyHeader
       anchor="right"
-      headerContent={<SidebarHeader handleCloseMenu={handleCloseMenu} drawerWidth={drawerWidth} />}
+      headerContent={
+        <SidebarHeader handleCloseMenu={handleCloseMenu} drawerWidth={drawerContext.drawerWidth} />
+      }
     >
-      <div className={s.itemsList} style={{ width: `${drawerWidth}px` }}>
+      <div className={s.itemsList} style={{ width: `${drawerContext.drawerWidth}px` }}>
         <nav className={s.section}>
           <List
             subheader={{

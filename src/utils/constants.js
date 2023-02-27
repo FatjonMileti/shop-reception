@@ -9,4 +9,6 @@ export const URL = {
   production: ''
 }
 
+export const DRAWER_WIDTH = 400
+
 export const TOKEN_KEY = 'carrefour-invoice-auth-token'

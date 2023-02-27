@@ -1,16 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import Favicon from 'react-favicon'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 import { ErrorBoundary } from 'components/core-ui'
 import { isAuthenticated } from 'utils/authService'
+import { DrawerContext } from 'contexts'
+import { DRAWER_WIDTH } from 'utils/constants'
 import s from './Layout.scss'
-
-const drawerWidth = 400
 
 const Layout = ({ children, setApplicationModulesPages, setSubdomainId }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(true)
+  const [drawerWidth, setDrawerWidth] = useState(DRAWER_WIDTH)
+
+  useEffect(() => {
+    setDrawerWidth(isMenuOpen ? DRAWER_WIDTH : 0)
+  }, [isMenuOpen])
 
   const handleOpenMenu = () => {
     setIsMenuOpen(true)
@@ -21,35 +26,37 @@ const Layout = ({ children, setApplicationModulesPages, setSubdomainId }) => {
   }
 
   return (
-    <Typography variant="light" component="div">
-      <Favicon url="images/favicon.ico" />
-      {isAuthenticated() ? (
-        <div style={{ display: 'flex' }}>
-          <Header
-            isMenuOpen={isMenuOpen}
-            handleOpenMenu={handleOpenMenu}
-            drawerWidth={drawerWidth}
-          />
-          <Sidebar
-            isMenuOpen={isMenuOpen}
-            handleCloseMenu={handleCloseMenu}
-            drawerWidth={drawerWidth}
-            setApplicationModulesPages={setApplicationModulesPages}
-            setSubdomainId={setSubdomainId}
-          />
-          <div
-            className={s.contentWrapper}
-            style={{
-              ...(isMenuOpen ? { marginRight: `${drawerWidth}px` } : { marginRight: 0 })
-            }}
-          >
-            <ErrorBoundary>{children}</ErrorBoundary>
+    <DrawerContext.Provider
+      value={{
+        drawerWidth,
+        isMenuOpen
+      }}
+    >
+      <Typography variant="light" component="div">
+        <Favicon url="images/favicon.ico" />
+        {isAuthenticated() ? (
+          <div>
+            <Header isMenuOpen={isMenuOpen} handleOpenMenu={handleOpenMenu} />
+            <Sidebar
+              isMenuOpen={isMenuOpen}
+              handleCloseMenu={handleCloseMenu}
+              setApplicationModulesPages={setApplicationModulesPages}
+              setSubdomainId={setSubdomainId}
+            />
+            <div
+              className={s.contentWrapper}
+              style={{
+                ...(isMenuOpen ? { marginRight: `${drawerWidth}px` } : { marginRight: 0 })
+              }}
+            >
+              <ErrorBoundary>{children}</ErrorBoundary>
+            </div>
           </div>
-        </div>
-      ) : (
-        <ErrorBoundary>{children}</ErrorBoundary>
-      )}
-    </Typography>
+        ) : (
+          <ErrorBoundary>{children}</ErrorBoundary>
+        )}
+      </Typography>
+    </DrawerContext.Provider>
   )
 }
 

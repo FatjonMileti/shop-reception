@@ -1,9 +1,13 @@
+import { useContext } from 'react'
 import { AppBar } from '@fullscreendigital/carrefour-dex-fe'
 import { NotificationsNoneOutlined } from '@mui/icons-material'
+import { DrawerContext } from 'contexts'
 import { Logo } from './Logo'
 import s from './Header.scss'
 
-const Header = ({ isMenuOpen, drawerWidth }) => {
+const Header = ({ isMenuOpen }) => {
+  const drawerContext = useContext(DrawerContext)
+
   return (
     <>
       <AppBar
@@ -14,8 +18,8 @@ const Header = ({ isMenuOpen, drawerWidth }) => {
           right: '1px',
           ...(isMenuOpen
             ? {
-                width: `calc(100% - ${drawerWidth}px)`,
-                marginRight: `${drawerWidth}px`
+                width: `calc(100% - ${drawerContext.drawerWidth}px)`,
+                marginRight: `${drawerContext.drawerWidth}px`
               }
             : {})
         }}
