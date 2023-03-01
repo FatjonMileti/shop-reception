@@ -59,6 +59,7 @@ const mockedResult = [
 const staticItems = [
   {
     disablePadding: true,
+    disableGutters: true,
     icon: <HomeOutlined />,
     index: 1,
     primaryText: 'Home',
@@ -66,6 +67,7 @@ const staticItems = [
   },
   {
     disablePadding: true,
+    disableGutters: true,
     icon: <NotificationsNoneOutlined />,
     index: 2,
     primaryText: 'Notifications',
@@ -73,6 +75,7 @@ const staticItems = [
   },
   {
     disablePadding: true,
+    disableGutters: true,
     icon: <PersonOutlineOutlined />,
     index: 2,
     primaryText: 'Profile',
@@ -84,7 +87,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
 
-  const drawerContext = useContext(DrawerContext)
+  const { drawerWidth } = useContext(DrawerContext)
 
   const navigate = useNavigate()
 
@@ -118,16 +121,14 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
 
   return (
     <Drawer
-      variant="permanent"
+      isRightPersistent
       open={isMenuOpen}
       onClose={handleCloseMenu}
       displayEmptyHeader
-      anchor="right"
-      headerContent={
-        <SidebarHeader handleCloseMenu={handleCloseMenu} drawerWidth={drawerContext.drawerWidth} />
-      }
+      disablePadding
+      headerContent={<SidebarHeader handleCloseMenu={handleCloseMenu} drawerWidth={drawerWidth} />}
     >
-      <div className={s.itemsList} style={{ width: `${drawerContext.drawerWidth}px` }}>
+      <div className={s.itemsList} style={{ width: `${drawerWidth}px` }}>
         <nav className={s.section}>
           <List
             subheader={{
@@ -139,7 +140,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
             onItemClick={handleItemClick}
           />
         </nav>
-        <Divider style={{ display: 'block', backgroundColor: '#fff' }} />
+        <Divider style={{ display: 'block', backgroundColor: '#fff', margin: '16px 0' }} />
         <nav className={s.section}>
           <List
             subheader={{
@@ -151,7 +152,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
             onItemClick={handleItemClick}
           />
         </nav>
-        <Divider style={{ display: 'block', backgroundColor: '#fff' }} />
+        <Divider style={{ display: 'block', backgroundColor: '#fff', margin: '16px 0' }} />
         <nav className={s.section}>
           <List
             subheader={{

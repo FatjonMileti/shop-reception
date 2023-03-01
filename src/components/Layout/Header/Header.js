@@ -1,12 +1,12 @@
 import { useContext } from 'react'
-import { AppBar } from '@fullscreendigital/carrefour-dex-fe'
-import { NotificationsNoneOutlined } from '@mui/icons-material'
+import { AppBar, IconButton } from '@fullscreendigital/carrefour-dex-fe'
+import { NotificationsNoneOutlined, DragHandleOutlined } from '@mui/icons-material'
 import { DrawerContext } from 'contexts'
 import { Logo } from './Logo'
 import s from './Header.scss'
 
-const Header = ({ isMenuOpen }) => {
-  const drawerContext = useContext(DrawerContext)
+const Header = ({ handleOpenMenu }) => {
+  const { isMenuOpen } = useContext(DrawerContext)
 
   return (
     <>
@@ -15,13 +15,7 @@ const Header = ({ isMenuOpen }) => {
         position="fixed"
         style={{
           zIndex: '1201',
-          right: '1px',
-          ...(isMenuOpen
-            ? {
-                width: `calc(100% - ${drawerContext.drawerWidth}px)`,
-                marginRight: `${drawerContext.drawerWidth}px`
-              }
-            : {})
+          transition: 'all 0.3s ease'
         }}
         mainItem={{
           content: <Logo />,
@@ -35,6 +29,22 @@ const Header = ({ isMenuOpen }) => {
           <span className={s.notificationsContainer}>
             <NotificationsNoneOutlined />
           </span>
+        }
+        rightItems={
+          isMenuOpen
+            ? []
+            : [
+                {
+                  iconProps: {
+                    icon: (
+                      <IconButton onClick={handleOpenMenu}>
+                        <DragHandleOutlined />
+                      </IconButton>
+                    ),
+                    iconButtonProps: { size: 'large' }
+                  }
+                }
+              ]
         }
       />
     </>

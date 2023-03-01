@@ -6,12 +6,12 @@ import { DrawerContext } from 'contexts'
 import s from './SidebarHeader.scss'
 
 const SidebarHeader = ({ handleCloseMenu }) => {
-  const drawerContext = useContext(DrawerContext)
+  const { drawerWidth } = useContext(DrawerContext)
 
   return (
     <Box
       className={s.menuHeaderContainer}
-      style={{ gridTemplateColumns: `40px ${drawerContext.drawerWidth - 140}px 40px` }}
+      style={{ gridTemplateColumns: `40px ${drawerWidth - 140}px 40px` }}
     >
       <div>
         <Avatar alt="Paula Dan" value="PD" />

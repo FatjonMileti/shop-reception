@@ -10,7 +10,7 @@ import { DRAWER_WIDTH } from 'utils/constants'
 import s from './Layout.scss'
 
 const Layout = ({ children, setApplicationModulesPages, setSubdomainId }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(true)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [drawerWidth, setDrawerWidth] = useState(DRAWER_WIDTH)
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Layout = ({ children, setApplicationModulesPages, setSubdomainId }) => {
         <Favicon url="images/favicon.ico" />
         {isAuthenticated() ? (
           <div>
-            <Header isMenuOpen={isMenuOpen} handleOpenMenu={handleOpenMenu} />
+            <Header handleOpenMenu={handleOpenMenu} />
             <Sidebar
               isMenuOpen={isMenuOpen}
               handleCloseMenu={handleCloseMenu}
