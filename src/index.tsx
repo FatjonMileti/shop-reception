@@ -4,9 +4,10 @@ import { Provider } from 'react-redux'
 import { HistoryRouter as Router } from 'redux-first-history/rr6'
 import { store, history } from './configureStore'
 
-import App from 'components/App/App.js'
+import App from 'components/App/App'
 
 import '!style-loader!css-loader!styles/overrides/css-resetter.css' // eslint-disable-line
+import * as React from 'react'
 
 const rootEl = document.getElementById('app')
 const root = createRoot(rootEl)

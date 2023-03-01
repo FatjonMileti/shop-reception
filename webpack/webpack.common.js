@@ -11,12 +11,16 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg)$/,
         type: 'asset/resource'
-      }
-    ]
+      },
+      // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+      { test: /\.tsx?$/, loader: "ts-loader" },
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      // { test: /\.js$/, loader: "source-map-loader" }, // @fullscreendigital/carrefour-dex-fe does not support types
+    ],
   },
   resolve: {
     modules: ['src', 'node_modules'],
-    extensions: ['*', '.js', '.jsx', '.css', '.scss'],
+    extensions: ['*', '.js', '.jsx', '.css', '.scss', '.ts', '.tsx'],
     alias: {
       'react/jsx-runtime.js': 'react/jsx-runtime',
       'react/jsx-dev-runtime.js': 'react/jsx-dev-runtime'
