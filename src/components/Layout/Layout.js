@@ -43,12 +43,7 @@ const Layout = ({ children, setApplicationModulesPages, setSubdomainId }) => {
               setApplicationModulesPages={setApplicationModulesPages}
               setSubdomainId={setSubdomainId}
             />
-            <div
-              className={s.contentWrapper}
-              style={{
-                ...(isMenuOpen ? { marginRight: `${drawerWidth}px` } : { marginRight: 0 })
-              }}
-            >
+            <div className={s.contentWrapper}>
               <ErrorBoundary>{children}</ErrorBoundary>
             </div>
           </div>

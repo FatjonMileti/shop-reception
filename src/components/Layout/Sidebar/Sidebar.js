@@ -59,15 +59,14 @@ const mockedResult = [
 const staticItems = [
   {
     disablePadding: true,
-    disableGutters: true,
     icon: <HomeOutlined />,
     index: 1,
     primaryText: 'Home',
-    type: 'icon'
+    type: 'icon',
+    href: '/'
   },
   {
     disablePadding: true,
-    disableGutters: true,
     icon: <NotificationsNoneOutlined />,
     index: 2,
     primaryText: 'Notifications',
@@ -75,9 +74,8 @@ const staticItems = [
   },
   {
     disablePadding: true,
-    disableGutters: true,
     icon: <PersonOutlineOutlined />,
-    index: 2,
+    index: 3,
     primaryText: 'Profile',
     type: 'icon'
   }
@@ -127,6 +125,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
       displayEmptyHeader
       disablePadding
       headerContent={<SidebarHeader handleCloseMenu={handleCloseMenu} drawerWidth={drawerWidth} />}
+      headerStyle={{ position: 'fixed', width: '400px', paddingRight: 0, zIndex: 1203 }}
     >
       <div className={s.itemsList} style={{ width: `${drawerWidth}px` }}>
         <nav className={s.section}>
@@ -136,7 +135,10 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
               content: '',
               style: { fontSize: '70%' }
             }}
-            items={staticItems}
+            items={staticItems.map(item => ({
+              ...item,
+              selected: selectedItem === item.index
+            }))}
             onItemClick={handleItemClick}
           />
         </nav>

@@ -1,10 +1,16 @@
 import { Icon } from 'components/core-ui/Icon'
+import { KeyboardArrowRightOutlined } from '@mui/icons-material'
 
 export const toSelectedMenuItems = (items, selectedItemIndex) =>
   items.map(item => {
     const nestedItems = item.nestedItems?.map(item => ({
       ...item,
-      selected: selectedItemIndex === item.index
+      selected: selectedItemIndex === item.index,
+      infoText: (
+        <span style={{ opacity: '0.5' }}>
+          <KeyboardArrowRightOutlined />
+        </span>
+      )
     }))
     return { ...item, selected: selectedItemIndex === item.index, nestedItems }
   })
@@ -22,7 +28,7 @@ const toMenuItem = (item, index, nestedItems) => ({
 
 export const toMenuItems = modules => {
   let items = []
-  let index = 1
+  let index = 4
 
   modules.forEach(module => {
     let nestedItems = []
