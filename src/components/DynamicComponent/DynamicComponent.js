@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { makeGetRequest } from 'utils/api'
-import s from './DynamicComponent.scss'
 
-import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/teamTimeOffSchema'
+// import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/teamTimeOffSchema'
 // import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/effortMatrixSchema'
 // import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/teamAssignmentSchema'
 // import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/capacityOverviewSchema'
-// import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/personCapacitySchema'
+import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/personCapacitySchema'
 
 const DynamicComponent = props => {
   const [JSONSchema, setJSONSchema] = useState(null)
@@ -28,7 +27,7 @@ const DynamicComponent = props => {
     })()
   }, [])
 
-  return <div className={s.container}>{JSONSchema ? renderComponent(JSONSchema) : ''}</div>
+  return <div>{JSONSchema ? renderComponent(JSONSchema) : ''}</div>
 }
 
 export default DynamicComponent

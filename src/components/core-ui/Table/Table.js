@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useImmer } from 'use-immer'
 import dayjs from 'dayjs'
-import { Grid } from '@mui/material'
+import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeGetRequest, makePostRequest } from 'utils/api'
 import { renderComponent } from 'utils/dynamicRenderingService'
@@ -10,12 +10,13 @@ import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getInitialTableFilters, getRenderedColumns } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
+import s from './Table.scss'
 
-import { mockedRows } from 'utils/mockedData/teamTimeOffData'
+// import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
 // import { mockedRows } from 'utils/mockedData/teamAssignmentData'
 // import { mockedRows } from 'utils/mockedData/capacityOverviewData'
-// import { mockedRows } from 'utils/mockedData/personCapacityData'
+import { mockedRows } from 'utils/mockedData/personCapacityData'
 
 const Table = props => {
   const { action, columns, tableActions, tableRowActions, ...rest } = props
@@ -122,79 +123,63 @@ const Table = props => {
   }
 
   return (
-    <Grid container spacing={4}>
-      <Grid item xs={12}>
-        {tableActions?.filters &&
-          tableActions?.filters.map(filter =>
-            renderComponent({
-              ...filter,
-              value: tableFilters[filter.name] || null,
-              onChange: args =>
-                handleFilterChange(
-                  filter.type === 'date' ? dayjs(args).format('MM-DD-YYYY') : args.target.value,
-                  filter.name
-                )
-            })
-          )}
-      </Grid>
-      <Grid item xs={12}>
-        {tableActions?.newAction && (
-          <ModalWithForm
-            {...tableActions.newAction}
-            additionalAction={() =>
-              handleRemoteData(
-                currentPage,
-                currentRowsPerPage,
-                currentOrder,
-                currentOrderBy,
-                searchValue
-              )
-            }
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-          />
-        )}
-        <GeneralTable
-          {...rest}
-          columns={
-            tableRowActions
-              ? renderedColumns.concat({
-                  title: '',
-                  field: 'actions',
-                  align: 'right',
-                  render: row => (
-                    <TableActions
-                      itemId={row.id}
-                      editAction={tableRowActions.editAction}
-                      deleteAction={tableRowActions.deleteAction}
-                      additionalAction={() =>
-                        handleRemoteData(
-                          currentPage,
-                          currentRowsPerPage,
-                          currentOrder,
-                          currentOrderBy,
-                          searchValue
-                        )
-                      }
-                    />
-                  )
-                })
-              : renderedColumns
+    <Box className={s.tableContainer}>
+      {tableActions?.newAction && (
+        <ModalWithForm
+          {...tableActions.newAction}
+          additionalAction={() =>
+            handleRemoteData(
+              currentPage,
+              currentRowsPerPage,
+              currentOrder,
+              currentOrderBy,
+              searchValue
+            )
           }
-          rows={items}
-          totalCount={totalCount}
-          rowsPerPage={rest.rowsPerPage || 10}
-          isRemote
-          newButton={
-            tableActions?.newAction
-              ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
-              : null
-          }
-          hasSearchInput={!!tableActions?.searchAction}
-          handleRemoteData={handleRemoteData}
+          isModalOpen={isNewModalOpen}
+          closeModal={closeNewModal}
         />
-      </Grid>
-    </Grid>
+      )}
+      <GeneralTable
+        {...rest}
+        columns={
+          tableRowActions
+            ? renderedColumns.concat({
+                title: '',
+                field: 'actions',
+                align: 'right',
+                render: row => (
+                  <TableActions
+                    itemId={row.id}
+                    editAction={tableRowActions.editAction}
+                    deleteAction={tableRowActions.deleteAction}
+                    additionalAction={() =>
+                      handleRemoteData(
+                        currentPage,
+                        currentRowsPerPage,
+                        currentOrder,
+                        currentOrderBy,
+                        searchValue
+                      )
+                    }
+                  />
+                )
+              })
+            : renderedColumns
+        }
+        rows={items}
+        totalCount={totalCount}
+        rowsPerPage={rest.rowsPerPage || 10}
+        isRemote
+        newButton={
+          tableActions?.newAction
+            ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
+            : null
+        }
+        hasSearchInput={!!tableActions?.searchAction}
+        handleRemoteData={handleRemoteData}
+      />
+    </Box>
   )
 }
 

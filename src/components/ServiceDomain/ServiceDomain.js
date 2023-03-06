@@ -7,7 +7,7 @@ const ServiceDomain = ({ applicationPages }) => {
   const navigate = useNavigate()
 
   return (
-    <Box className={s.applicationsContainer} style={{ margin: `24px` }}>
+    <Box className={s.applicationsContainer}>
       {applicationPages.map(app => (
         <div
           key={app.id}
