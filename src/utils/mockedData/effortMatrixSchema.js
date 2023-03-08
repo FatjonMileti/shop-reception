@@ -74,16 +74,28 @@ export const JSONSchema = {
               formItems: [
                 {
                   UIComponent: 'Input',
-                  type: 'text',
-                  variant: 'outlined',
+                  type: 'select',
+                  values: [
+                    { value: 'itPM', label: 'IT PM' },
+                    { value: 'businessAnalyst', label: 'Business Analyst' },
+                    { value: 'systemAnalyst', label: 'System Analyst' },
+                    { value: 'solutionArchitect', label: 'Solution Architect' },
+                    { value: 'developer', label: 'Developer' },
+                    { value: 'qaOfficer', label: 'QA Officer' },
+                    { value: 'devOps', label: 'DevOps' },
+                    { value: 'supportEngineer', label: 'Support Engineer' },
+                    { value: 'technicalLead', label: 'Technical Lead' }
+                  ],
                   name: 'role',
+                  variant: 'standard',
                   width: '100%',
-                  label: 'Role'
+                  label: 'Role',
+                  formItemsPerRow: 1
                 },
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'evaluation',
                   width: '100%',
                   label: 'Evaluation',
@@ -92,7 +104,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'analysis',
                   width: '100%',
                   label: 'Analysis',
@@ -101,7 +113,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'design',
                   width: '100%',
                   label: 'Design',
@@ -110,7 +122,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'development',
                   width: '100%',
                   label: 'Development',
@@ -119,7 +131,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'systemTest',
                   width: '100%',
                   label: 'System Test',
@@ -128,7 +140,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'uat',
                   width: '100%',
                   label: 'UAT',
@@ -137,7 +149,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'goLive',
                   width: '100%',
                   label: 'Go-Live',
@@ -146,7 +158,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'soak',
                   width: '100%',
                   label: 'SOAK',
@@ -186,16 +198,17 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'role',
                   width: '100%',
                   label: 'Role',
-                  readonly: true
+                  readonly: true,
+                  formItemsPerRow: 1
                 },
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'evaluation',
                   width: '100%',
                   label: 'Evaluation',
@@ -204,7 +217,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'analysis',
                   width: '100%',
                   label: 'Analysis',
@@ -213,7 +226,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'design',
                   width: '100%',
                   label: 'Design',
@@ -222,7 +235,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'development',
                   width: '100%',
                   label: 'Development',
@@ -231,7 +244,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'systemTest',
                   width: '100%',
                   label: 'System Test',
@@ -240,7 +253,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'uat',
                   width: '100%',
                   label: 'UAT',
@@ -249,7 +262,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'goLive',
                   width: '100%',
                   label: 'Go-Live',
@@ -258,7 +271,7 @@ export const JSONSchema = {
                 {
                   UIComponent: 'Input',
                   type: 'text',
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'soak',
                   width: '100%',
                   label: 'SOAK',

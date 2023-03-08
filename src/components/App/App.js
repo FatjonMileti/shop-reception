@@ -8,7 +8,7 @@ import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
 import { ThemeProvider } from '@fullscreendigital/carrefour-dex-fe'
 import { mockedPages, createRoute } from './helpers'
-import { makeGetRequest } from 'utils/api'
+import { makeDesignerGetRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { DynamicComponent } from '../DynamicComponent'
 import { toApplicationPages } from './serializers'
@@ -22,9 +22,7 @@ const App = () => {
     ;(async () => {
       if (subdomainId) {
         try {
-          const result = await makeGetRequest(
-            `https://c34672c2-757c-491f-9bf0-089182c88037.mock.pstmn.io/activities?submoduleId=${subdomainId}`
-          )
+          const result = await makeDesignerGetRequest(`/activities?submoduleId=${subdomainId}`)
           setApplicationPages(toApplicationPages(result))
         } catch (error) {
           console.log(error)

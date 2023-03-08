@@ -4,7 +4,7 @@ import { useImmer } from 'use-immer'
 import dayjs from 'dayjs'
 import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
-import { makeGetRequest, makePostRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
@@ -13,10 +13,10 @@ import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializer
 import s from './Table.scss'
 
 // import { mockedRows } from 'utils/mockedData/teamTimeOffData'
-// import { mockedRows } from 'utils/mockedData/effortMatrixData'
+import { mockedRows } from 'utils/mockedData/effortMatrixData'
 // import { mockedRows } from 'utils/mockedData/teamAssignmentData'
 // import { mockedRows } from 'utils/mockedData/capacityOverviewData'
-import { mockedRows } from 'utils/mockedData/personCapacityData'
+// import { mockedRows } from 'utils/mockedData/personCapacityData'
 
 const Table = props => {
   const { action, columns, tableActions, tableRowActions, ...rest } = props
@@ -61,36 +61,21 @@ const Table = props => {
     try {
       let response
       if (action.type === 'GET') {
-        // response = await makeGetRequest(
-        //   `https://6b467f37-0e21-4336-97b7-62b384ad2733.mock.pstmn.io/${toTableGETUrl({
-        //     url,
-        //     searchText,
-        //     tableActions,
-        //     tableFilters,
-        //     page,
-        //     rowsPerPage,
-        //     order,
-        //     orderBy
-        //   })}`
-        // )
-        response = await makeGetRequest(
-          'https://6b467f37-0e21-4336-97b7-62b384ad2733.mock.pstmn.io/teamAssignments?page=0&size=nisi consequat Ut&order=nisi consequat Ut&orderBy=nisi consequat Ut&filterBy=nisi consequat Ut&filterValue=nisi consequat Ut'
+        response = await makeCoreGetRequest(
+          toTableGETUrl({
+            url,
+            searchText,
+            tableActions,
+            tableFilters,
+            page,
+            rowsPerPage,
+            order,
+            orderBy
+          })
         )
-        // response = await makeGetRequest(
-        //   toTableGETUrl({
-        //     url,
-        //     searchText,
-        //     tableActions,
-        //     tableFilters,
-        //     page,
-        //     rowsPerPage,
-        //     order,
-        //     orderBy
-        //   })
-        // )
       }
       if (action.type === 'POST') {
-        response = await makePostRequest(
+        response = await makeCorePostRequest(
           url,
           toTablePOSTPayload({
             page,

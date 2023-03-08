@@ -56,7 +56,7 @@ export const JSONSchema = {
                 url: '/persons',
                 type: 'GET'
               },
-              variant: 'outlined',
+              variant: 'standard',
               name: 'person.name',
               payloadKey: 'person.id',
               width: '100%',
@@ -72,7 +72,7 @@ export const JSONSchema = {
               ],
               name: 'daysOff.dayOffType',
               payloadKey: 'daysOff.dayOffType',
-              variant: 'outlined',
+              variant: 'standard',
               width: '100%',
               label: 'Type of day-off'
             },
@@ -83,7 +83,8 @@ export const JSONSchema = {
               style: { width: '100%' },
               label: 'Start Date',
               id: 'startDate',
-              defaultValue: 'CURRENT_DATE'
+              defaultValue: 'CURRENT_DATE',
+              variant: 'standard'
             },
             {
               UIComponent: 'DatePicker',
@@ -92,12 +93,13 @@ export const JSONSchema = {
               style: { width: '100%' },
               label: 'End Date',
               defaultValue: 'CURRENT_DATE',
-              id: 'endDate'
+              id: 'endDate',
+              variant: 'standard'
             },
             {
               UIComponent: 'Input',
               type: 'text',
-              variant: 'outlined',
+              variant: 'standard',
               name: 'daysOff.hours',
               width: '100%',
               label: 'Number of hours',
@@ -138,9 +140,9 @@ export const JSONSchema = {
           }
         },
         searchAction: {
-          searchFields: ['person.name'],
+          searchFields: ['person.name', 'daysOff.dayOffType'],
           inputProps: {
-            variant: 'outlined'
+            variant: 'standard'
           }
         }
       },
@@ -158,7 +160,7 @@ export const JSONSchema = {
                 url: '/persons',
                 type: 'GET'
               },
-              variant: 'outlined',
+              variant: 'standard',
               name: 'person.name',
               width: '100%',
               label: 'Person name'
@@ -172,7 +174,7 @@ export const JSONSchema = {
                 { value: 'teamEvent', label: 'Team Event' }
               ],
               name: 'daysOff.dayOffType',
-              variant: 'outlined',
+              variant: 'standard',
               width: '100%',
               label: 'Type of day-off'
             },
@@ -181,19 +183,21 @@ export const JSONSchema = {
               type: 'date',
               name: 'daysOff.startDate',
               style: { width: '100%' },
-              label: 'Start Date'
+              label: 'Start Date',
+              variant: 'standard'
             },
             {
               UIComponent: 'DatePicker',
               type: 'date',
               name: 'daysOff.endDate',
               style: { width: '100%' },
-              label: 'End Date'
+              label: 'End Date',
+              variant: 'standard'
             },
             {
               UIComponent: 'Input',
               type: 'text',
-              variant: 'outlined',
+              variant: 'standard',
               name: 'daysOff.hours',
               width: '100%',
               label: 'Number of hours',
@@ -216,7 +220,7 @@ export const JSONSchema = {
             {
               UIComponent: 'Button',
               label: 'Cancel',
-              variant: 'outlined',
+              variant: 'standard',
               isCancelButton: true
             },
             {
@@ -234,7 +238,7 @@ export const JSONSchema = {
             {
               UIComponent: 'Button',
               label: 'Cancel',
-              variant: 'outlined',
+              variant: 'standard',
               isCancelButton: true
             },
             {

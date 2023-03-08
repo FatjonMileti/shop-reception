@@ -10,7 +10,7 @@ export const JSONSchema = {
           width: '80%',
           title: 'Team Assignment',
           action: {
-            url: '/teamAssignment',
+            url: '/teamAssignments',
             type: 'GET'
           },
           hideCheckbox: true,
@@ -49,16 +49,16 @@ export const JSONSchema = {
           ],
           tableRowActions: {
             editAction: {
-              updateUrl: '/teamAssignment',
+              updateUrl: '/teamAssignments',
               updateUrlType: 'PUT',
-              getUrl: '/teamAssignment',
+              getUrl: '/teamAssignments',
               getUrlType: 'GET',
               formItems: [
                 {
                   UIComponent: 'Input',
                   type: 'text',
                   readonly: true,
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'teamMember.name',
                   width: '100%',
                   label: 'Person'
@@ -67,7 +67,7 @@ export const JSONSchema = {
                   UIComponent: 'Input',
                   type: 'text',
                   readonly: true,
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'role',
                   width: '100%',
                   label: 'Role'
@@ -76,7 +76,7 @@ export const JSONSchema = {
                   UIComponent: 'Input',
                   type: 'text',
                   readonly: true,
-                  variant: 'outlined',
+                  variant: 'standard',
                   name: 'projectKey',
                   width: '100%',
                   label: 'Project Key'
@@ -86,14 +86,16 @@ export const JSONSchema = {
                   type: 'date',
                   name: 'assignmentStartDate',
                   style: { width: '100%' },
-                  label: 'Start Date'
+                  label: 'Start Date',
+                  variant: 'standard'
                 },
                 {
                   UIComponent: 'DatePicker',
                   type: 'date',
                   name: 'assignmentEndDate',
                   style: { width: '100%' },
-                  label: 'End Date'
+                  label: 'End Date',
+                  variant: 'standard'
                 }
               ],
               formItemsPerRow: 1,

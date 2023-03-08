@@ -8,7 +8,7 @@ import {
   PersonOutlineOutlined,
   PowerSettingsNewOutlined
 } from '@mui/icons-material'
-import { makeGetRequest } from 'utils/api'
+import { makeDesignerGetRequest } from 'utils/api'
 import { DrawerContext } from 'contexts'
 import { SidebarHeader } from './SidebarHeader'
 import s from './Sidebar.scss'
@@ -93,9 +93,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
     ;(async () => {
       // TODO: get the list of items in the menu; this is a GET to api
       try {
-        const result = await makeGetRequest(
-          'https://c34672c2-757c-491f-9bf0-089182c88037.mock.pstmn.io/application-modules'
-        )
+        const result = await makeDesignerGetRequest('/application-modules')
         setItems(toMenuItems(result))
         setApplicationModulesPages(toApplicationModulesPages(result))
       } catch (error) {

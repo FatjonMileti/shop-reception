@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import { makeGetRequest } from 'utils/api'
+import { makeCoreGetRequest } from 'utils/api'
 
 const mockedPersons = [
   { value: '1', label: 'Andrei Ionescu' },
@@ -17,7 +17,7 @@ const AsyncSelectInput = props => {
     ;(async () => {
       // TODO: get the select data; this is a GET to api
       try {
-        const results = await makeGetRequest(action.url)
+        const results = await makeCoreGetRequest(action.url)
         setValues(results)
       } catch (error) {
         console.log(error)

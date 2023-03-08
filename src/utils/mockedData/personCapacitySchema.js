@@ -89,14 +89,16 @@ export const JSONSchema = {
                 type: 'date',
                 name: 'project.startDate',
                 label: 'Start Date',
-                variable: 'capacity.startDate'
+                variable: 'capacity.startDate',
+                variant: 'standard'
               },
               {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'project.endDate',
                 label: 'End Date',
-                variable: 'capacity.endDate'
+                variable: 'capacity.endDate',
+                variant: 'standard'
               },
               {
                 UIComponent: 'Input',

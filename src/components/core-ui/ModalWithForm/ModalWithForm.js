@@ -5,7 +5,12 @@ import { Close } from '@mui/icons-material'
 import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { ModalForm } from './ModalForm'
 import { useImmer } from 'use-immer'
-import { makeGetRequest, makePostRequest, makePutRequest, makePatchRequest } from 'utils/api'
+import {
+  makeCoreGetRequest,
+  makeCorePostRequest,
+  makeCorePutRequest,
+  makeCorePatchRequest
+} from 'utils/api'
 import { getItemDefaults } from 'utils/helpers'
 import { toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
@@ -41,7 +46,7 @@ const ModalWithForm = ({
     if (editedItemId) {
       ;(async () => {
         try {
-          const result = await makeGetRequest(`${editedItemUrl}/${editedItemId}`)
+          const result = await makeCoreGetRequest(`${editedItemUrl}/${editedItemId}`)
           setEditItem(result)
         } catch (error) {
           console.log(error)
@@ -71,13 +76,13 @@ const ModalWithForm = ({
     try {
       const payload = toItemPayload(editItem)
       if (formAction.type === 'POST') {
-        await makePostRequest(`${formAction.url}`, payload)
+        await makeCorePostRequest(`${formAction.url}`, payload)
       }
       if (formAction.type === 'PUT') {
-        await makePutRequest(`${formAction.url}/${editItem.id}`, payload)
+        await makeCorePutRequest(`${formAction.url}/${editItem.id}`, payload)
       }
       if (formAction.type === 'PATCH') {
-        await makePatchRequest(`${formAction.url}/${editItem.id}`, payload)
+        await makeCorePatchRequest(`${formAction.url}/${editItem.id}`, payload)
       }
     } catch (error) {
       console.log(error)

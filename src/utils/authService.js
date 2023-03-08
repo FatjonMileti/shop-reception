@@ -1,7 +1,7 @@
 import { URLS, TOKEN_KEY } from 'utils/constants'
 import { isTokenExpired } from './jwtHelper'
 import jwt_decode from 'jwt-decode'
-import { makeGetRequest } from 'utils/api'
+import { makeCoreGetRequest } from 'utils/api'
 
 export const getToken = () => {
   return localStorage.getItem(TOKEN_KEY)
@@ -30,7 +30,7 @@ export const setToken = token => {
 }
 
 export const refreshToken = async () => {
-  const token = await makeGetRequest('/v1/users/refresh')
+  const token = await makeCoreGetRequest('/v1/users/refresh')
   setToken(token)
 }
 

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import { Close } from '@mui/icons-material'
 import { Button, Typography, IconButton } from '@fullscreendigital/carrefour-dex-fe'
-import { makeDeleteRequest } from 'utils/api'
+import { makeCoreDeleteRequest } from 'utils/api'
 
 const sx = {
   position: 'absolute',
@@ -36,7 +36,7 @@ const ButtonWithConfirmDeleteModal = ({
   const deleteItem = async () => {
     // TODO: save the new data; this is a POST to api
     try {
-      await makeDeleteRequest(`${deleteActionUrl}/${deletedItemId}`)
+      await makeCoreDeleteRequest(`${deleteActionUrl}/${deletedItemId}`)
     } catch (error) {
       console.log(error)
     }

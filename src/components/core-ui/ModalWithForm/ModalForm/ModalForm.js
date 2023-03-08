@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Components } from 'utils/dynamicRenderingConstants'
 import { start } from 'utils/rulesService'
+import { getGridSize } from '../helpers'
 
 const ModalForm = ({
   modalTitle,
@@ -41,12 +42,17 @@ const ModalForm = ({
           </Typography>
         </Grid>
         {processedFormItems.map(formItem => {
-          const { UIComponent, name, ...rest } = formItem
+          const { UIComponent, name, formItemsPerRow, ...rest } = formItem
           const key = rest.payloadKey || name
           const value = editItem[key] ? editItem[key] : rest.type === 'date' ? undefined : ''
 
           return (
-            <Grid item key={formItem.name} xs={12} md={gridSize}>
+            <Grid
+              item
+              key={formItem.name}
+              xs={12}
+              md={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}
+            >
               {createElement(Components[UIComponent], {
                 ...rest,
                 onChange: arg => {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { URLS, URL } from 'utils/constants'
+import { URLS, CORE_URL, DESIGNER_URL } from 'utils/constants'
 import { getToken, logout } from './authService'
 import { isTokenExpired } from './jwtHelper'
 
@@ -23,29 +23,39 @@ axios.interceptors.request.use(
   error => Promise.reject(error)
 )
 
-export const getBaseUrl = url => {
-  return `${URL[process.env.ENV]}${url}`
-}
+export const getCoreBaseUrl = url => `${CORE_URL[process.env.ENV]}${url}`
 
-export const getRequest = url => {
-  return axios.get(getBaseUrl(url)).then(response => response.data)
-}
+export const getDesignerBaseUrl = url => `${DESIGNER_URL[process.env.ENV]}${url}`
 
-export const makeGetRequest = (url, params) => {
-  return axios.get(url, params).then(response => response.data)
-}
+export const makeCoreGetRequest = (url, params) =>
+  axios.get(getCoreBaseUrl(url), params).then(response => response.data)
 
-export const makePostRequest = (url, params, config = {}) =>
-  axios.post(getBaseUrl(url), params, config).then(response => response.data)
+export const makeCorePostRequest = (url, params, config = {}) =>
+  axios.post(getCoreBaseUrl(url), params, config).then(response => response.data)
 
-export const makePutRequest = (url, params) =>
-  axios.put(getBaseUrl(url), params).then(response => response.data)
+export const makeCorePutRequest = (url, params) =>
+  axios.put(getCoreBaseUrl(url), params).then(response => response.data)
 
-export const makeDeleteRequest = (url, params) =>
-  axios.delete(getBaseUrl(url), params).then(response => response.data)
+export const makeCoreDeleteRequest = (url, params) =>
+  axios.delete(getCoreBaseUrl(url), params).then(response => response.data)
 
-export const makePatchRequest = (url, params) =>
-  axios.patch(getBaseUrl(url), params).then(response => response.data)
+export const makeCorePatchRequest = (url, params) =>
+  axios.patch(getCoreBaseUrl(url), params).then(response => response.data)
+
+export const makeDesignerGetRequest = (url, params) =>
+  axios.get(getDesignerBaseUrl(url), params).then(response => response.data)
+
+export const makeDesignerPostRequest = (url, params, config = {}) =>
+  axios.post(getDesignerBaseUrl(url), params, config).then(response => response.data)
+
+export const makeDesignerPutRequest = (url, params) =>
+  axios.put(getDesignerBaseUrl(url), params).then(response => response.data)
+
+export const makeDesignerDeleteRequest = (url, params) =>
+  axios.delete(getDesignerBaseUrl(url), params).then(response => response.data)
+
+export const makeDesignerPatchRequest = (url, params) =>
+  axios.patch(getDesignerBaseUrl(url), params).then(response => response.data)
 
 export const loginRedirect = () => {
   window.location.href = URLS.AUTH_HOME

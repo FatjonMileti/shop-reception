@@ -47,7 +47,7 @@ export const JSONSchema = {
             searchAction: {
               searchFields: ['capacity.person.name'],
               inputProps: {
-                variant: 'outlined'
+                variant: 'standard'
               }
             },
             filters: [
@@ -56,14 +56,16 @@ export const JSONSchema = {
                 type: 'date',
                 name: 'capacity.startDate',
                 label: 'Start Date',
-                defaultValue: 'CURRENT_DATE'
+                defaultValue: 'CURRENT_DATE',
+                variant: 'standard'
               },
               {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'capacity.endDate',
                 label: 'End Date',
-                defaultValue: 'CURRENT_DATE'
+                defaultValue: 'CURRENT_DATE',
+                variant: 'standard'
               }
             ]
           }
