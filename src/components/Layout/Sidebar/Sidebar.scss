@@ -1,3 +1,13 @@
 .itemsList {
   padding: 60px;
 }
+
+@media screen and (max-width: 640px)  {
+  .itemsListContainer {
+    width: 100% !important;
+  }
+
+  .itemsList {
+    width: 100% !important;
+  }
+}

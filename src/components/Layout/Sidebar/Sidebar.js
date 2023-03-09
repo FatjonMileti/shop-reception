@@ -124,6 +124,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
       disablePadding
       headerContent={<SidebarHeader handleCloseMenu={handleCloseMenu} drawerWidth={drawerWidth} />}
       headerStyle={{ position: 'fixed', width: '400px', paddingRight: 0, zIndex: 1203 }}
+      paperClassName={s.itemsListContainer}
     >
       <div className={s.itemsList} style={{ width: `${drawerWidth}px` }}>
         <nav className={s.section}>
