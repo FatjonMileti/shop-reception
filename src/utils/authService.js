@@ -9,7 +9,7 @@ const authApiUrl = 'http://localhost:8283/realms/crf'
 const config = {
   authority: authApiUrl,
   client_id: 'client_dex_be',
-  redirect_uri: 'http://localhost:3000/signin-oidc',
+  redirect_uri: 'http://localhost:8080/login-oidc',
   response_type: 'code',
   scope: 'openid profile',
   post_logout_redirect_uri: 'http://localhost:3000/signout-oidc',
@@ -23,6 +23,10 @@ const userManager = new UserManager(config)
 
 export function signinRedirect() {
   return userManager.signinRedirect()
+}
+
+export function signinRedirectCallback() {
+  return userManager.signinRedirectCallback()
 }
 
 export function signoutRedirect() {

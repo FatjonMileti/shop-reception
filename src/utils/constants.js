@@ -1,6 +1,7 @@
 export const URLS = {
   AUTH_HOME: '/',
-  LOGIN: '/login'
+  LOGIN: '/login',
+  LOGIN_OIDC: '/login-oidc'
 }
 
 export const CORE_URL = {
