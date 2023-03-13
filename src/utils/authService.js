@@ -2,37 +2,22 @@ import { URLS, TOKEN_KEY } from 'utils/constants'
 import { isTokenExpired } from './jwtHelper'
 import jwt_decode from 'jwt-decode'
 import { makeCoreGetRequest } from 'utils/api'
-import { UserManager } from 'oidc-client'
 
-const authApiUrl = 'http://localhost:8283/realms/crf'
-
-const config = {
-  authority: authApiUrl,
-  client_id: 'client_dex_be',
-  redirect_uri: 'http://localhost:8080/login-oidc',
-  response_type: 'code',
+export const oidcConfig = {
+  onSignIn: async user => {
+    setToken(user.id_token)
+    window.location.href = '/'
+  },
+  authority: 'http://localhost:8283/realms/crf',
+  clientId: 'client_dex_be',
+  responseType: 'code',
+  redirectUri: 'http://localhost:8080/login',
   scope: 'openid profile',
-  post_logout_redirect_uri: 'http://localhost:3000/signout-oidc',
+  postLogoutRedirectUri: 'http://localhost:8080/signout-oidc',
   filterProtocolClaims: true,
   loadUserInfo: true,
   code_challenge_method: 'S256',
   code_challenge: 'BoDjvTpczEfPkCvoHQR5RNb2yCBwK-ssaAjhQQCQ9d0'
-}
-
-const userManager = new UserManager(config)
-
-export function signinRedirect() {
-  return userManager.signinRedirect()
-}
-
-export function signinRedirectCallback() {
-  return userManager.signinRedirectCallback()
-}
-
-export function signoutRedirect() {
-  userManager.clearStaleState()
-  userManager.removeUser()
-  return userManager.signoutRedirect()
 }
 
 export const getToken = () => {

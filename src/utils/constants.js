@@ -1,7 +1,6 @@
 export const URLS = {
   AUTH_HOME: '/',
-  LOGIN: '/login',
-  LOGIN_OIDC: '/login-oidc'
+  LOGIN: '/login'
 }
 
 export const CORE_URL = {
@@ -18,4 +17,4 @@ export const DESIGNER_URL = {
 
 export const DRAWER_WIDTH = 400
 
-export const TOKEN_KEY = 'carrefour-invoice-auth-token'
+export const TOKEN_KEY = 'carrefour-dex-id-token'

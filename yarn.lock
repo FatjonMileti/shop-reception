@@ -2629,7 +2629,7 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-crypto-js@^4.0.0:
+crypto-js@^4.0.0, crypto-js@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
   integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
@@ -4680,6 +4680,14 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
+oidc-client-ts@2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/oidc-client-ts/-/oidc-client-ts-2.2.2.tgz#3656f7b7c98e14b3185d2a53fe277da67fd3f87a"
+  integrity sha512-tEpnC1xQX6PMhnDMNEvDhpqnsu0buh29b/sA9a1I5tq6lD87wRAW1rTj49B2+5925I0sQlvU64DoK0Pxeiu7Dg==
+  dependencies:
+    crypto-js "^4.1.1"
+    jwt-decode "^3.1.2"
+
 oidc-client@^1.11.5:
   version "1.11.5"
   resolved "https://registry.yarnpkg.com/oidc-client/-/oidc-client-1.11.5.tgz#020aa193d68a3e1f87a24fcbf50073b738de92bb"
@@ -4690,6 +4698,13 @@ oidc-client@^1.11.5:
     core-js "^3.8.3"
     crypto-js "^4.0.0"
     serialize-javascript "^4.0.0"
+
+oidc-react@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/oidc-react/-/oidc-react-3.0.2.tgz#00871e439bc725a63423533d99ca36308aa24855"
+  integrity sha512-+yPeANN0J/M8XNvcTY5ucCe4vWs6yPA+5I0I9jNwwB3VrtSWVO2h3Oc0/Jqf1paLURBKH1m95Z7ILvHjXvgFRg==
+  dependencies:
+    oidc-client-ts "2.2.2"
 
 on-finished@2.4.1:
   version "2.4.1"
