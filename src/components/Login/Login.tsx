@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 const Login = () => {
-  return null
+  return <div>Redirecting...</div>
 }
 
 export default Login

@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
 import { Home } from '../Home'
 import { Login } from '../Login'
+import { Logout } from '../Logout'
 import { ServiceDomain } from '../ServiceDomain'
 import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
@@ -35,12 +36,12 @@ const App = () => {
   }, [subdomainId])
 
   return (
-    <ThemeProvider theme="light">
-      <Layout
-        setApplicationModulesPages={setApplicationModulesPages}
-        setSubdomainId={setSubdomainId}
-      >
-        <AuthProvider {...oidcConfig}>
+    <AuthProvider {...oidcConfig}>
+      <ThemeProvider theme="light">
+        <Layout
+          setApplicationModulesPages={setApplicationModulesPages}
+          setSubdomainId={setSubdomainId}
+        >
           <Routes>
             {/* private routes */}
             <Route path={URLS.AUTH_HOME} element={<PrivateRoute component={Home} />} />
@@ -51,11 +52,12 @@ const App = () => {
             {/* end of private routes */}
 
             <Route path={URLS.LOGIN} element={<Login />} />
+            <Route path={URLS.LOGOUT} element={<Logout />} />
             {applicationPages.length && <Route path="*" element={<NotFound />} />}
           </Routes>
-        </AuthProvider>
-      </Layout>
-    </ThemeProvider>
+        </Layout>
+      </ThemeProvider>
+    </AuthProvider>
   )
 }
 

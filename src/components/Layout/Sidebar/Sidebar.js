@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from 'oidc-react'
 import { Drawer, List, Divider } from '@fullscreendigital/carrefour-dex-fe'
 import { toSelectedMenuItems, toApplicationModulesPages, toMenuItems } from './serializers'
 import {
@@ -9,6 +10,8 @@ import {
   PowerSettingsNewOutlined
 } from '@mui/icons-material'
 import { makeDesignerGetRequest } from 'utils/api'
+import { logout } from 'utils/authService'
+import { URLS } from 'utils/constants'
 import { DrawerContext } from 'contexts'
 import { SidebarHeader } from './SidebarHeader'
 import s from './Sidebar.scss'
@@ -89,9 +92,10 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
 
   const navigate = useNavigate()
 
+  const auth = useAuth()
+
   useEffect(() => {
     ;(async () => {
-      // TODO: get the list of items in the menu; this is a GET to api
       try {
         const result = await makeDesignerGetRequest('/application-modules')
         setItems(toMenuItems(result))
@@ -113,6 +117,11 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
     setSelectedItem(index)
     localStorage.setItem('selectedSubdomainId', id)
     setSubdomainId(id)
+  }
+
+  const handleLogout = async () => {
+    auth.signOutRedirect()
+    await logout()
   }
 
   return (
@@ -170,7 +179,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
                 type: 'icon'
               }
             ]}
-            onItemClick={handleItemClick}
+            onItemClick={handleLogout}
           />
         </nav>
       </div>
