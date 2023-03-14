@@ -3,7 +3,7 @@ import { URLS } from 'utils/constants'
 import { isAuthenticated } from 'utils/authService'
 
 const PrivateRoute = ({ component: RouteComponent, ...props }) => {
-  return isAuthenticated() ? <RouteComponent {...props} /> : <Navigate to={URLS.LOGIN} />
+  return <RouteComponent {...props} />
 }
 
 export default PrivateRoute
