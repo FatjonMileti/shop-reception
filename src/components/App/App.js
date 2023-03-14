@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
 import { Home } from '../Home'
 import { Login } from '../Login'
+import { LoginOIDC } from '../LoginOIDC'
 import { Logout } from '../Logout'
 import { ServiceDomain } from '../ServiceDomain'
 import { URLS } from 'utils/constants'
@@ -52,6 +53,7 @@ const App = () => {
             {/* end of private routes */}
 
             <Route path={URLS.LOGIN} element={<Login />} />
+            <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
             <Route path={URLS.LOGOUT} element={<Logout />} />
             {applicationPages.length && <Route path="*" element={<NotFound />} />}
           </Routes>

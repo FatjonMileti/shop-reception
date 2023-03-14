@@ -1,6 +1,7 @@
 export const URLS = {
   AUTH_HOME: '/',
-  LOGIN: '/signin-oidc',
+  LOGIN: '/signin',
+  LOGINOIDC: '/signin-oidc',
   LOGOUT: '/signout-oidc'
 }
 

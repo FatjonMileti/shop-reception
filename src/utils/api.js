@@ -14,9 +14,8 @@ axios.interceptors.request.use(
     }
 
     if (isTokenExpired(token)) {
-      debugger
-      // logout()
-      // window.location.href = URLS.LOGIN
+      logout()
+      window.location.href = URLS.LOGIN
     }
 
     return config
