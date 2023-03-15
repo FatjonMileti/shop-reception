@@ -11,7 +11,6 @@ import {
 } from '@mui/icons-material'
 import { makeDesignerGetRequest } from 'utils/api'
 import { logout } from 'utils/authService'
-import { URLS } from 'utils/constants'
 import { DrawerContext } from 'contexts'
 import { SidebarHeader } from './SidebarHeader'
 import s from './Sidebar.scss'

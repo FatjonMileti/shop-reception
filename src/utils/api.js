@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { URLS, CORE_URL, DESIGNER_URL } from 'utils/constants'
+import { URLS } from 'utils/constants'
 import { getToken, logout } from './authService'
 import { isTokenExpired } from './jwtHelper'
 
@@ -24,9 +24,9 @@ axios.interceptors.request.use(
   error => Promise.reject(error)
 )
 
-export const getCoreBaseUrl = url => `${CORE_URL[process.env.ENV]}${url}`
+export const getCoreBaseUrl = url => `${process.env.CORE_URL}${url}`
 
-export const getDesignerBaseUrl = url => `${DESIGNER_URL[process.env.ENV]}${url}`
+export const getDesignerBaseUrl = url => `${process.env.DESIGNER_URL}${url}`
 
 export const makeCoreGetRequest = (url, params) =>
   axios.get(getCoreBaseUrl(url), params).then(response => response.data)

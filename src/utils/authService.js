@@ -7,16 +7,14 @@ export const oidcConfig = {
     setToken(user.id_token)
     window.location.href = '/'
   },
-  authority: 'http://localhost:8283/realms/crf',
-  clientId: 'client_dex_be',
+  authority: process.env.AUTHORITY,
+  clientId: process.env.CLIENT_ID,
   responseType: 'code',
-  redirectUri: 'http://localhost:8080/signin-oidc',
+  redirectUri: process.env.REDIRECT_URI,
   scope: 'openid profile',
-  postLogoutRedirectUri: 'http://localhost:8080/signout-oidc',
+  postLogoutRedirectUri: process.env.POST_LOGOUT_REDIRECT_URI,
   filterProtocolClaims: true,
-  loadUserInfo: true,
-  code_challenge_method: 'S256',
-  code_challenge: 'BoDjvTpczEfPkCvoHQR5RNb2yCBwK-ssaAjhQQCQ9d0'
+  loadUserInfo: true
 }
 
 export const getToken = () => {
