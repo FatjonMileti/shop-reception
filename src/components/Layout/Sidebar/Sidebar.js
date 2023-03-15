@@ -81,7 +81,7 @@ const staticItems = [
   }
 ]
 
-const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setSubdomainId }) => {
+const Sidebar = ({ isMenuOpen, handleCloseMenu, setModules, setApplicationModulesPages, setSubdomainId }) => {
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
 
@@ -94,10 +94,12 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
       // TODO: get the list of items in the menu; this is a GET to api
       try {
         const result = await makeDesignerGetRequest('/application-modules')
+        setModules(result)
         setItems(toMenuItems(result))
         setApplicationModulesPages(toApplicationModulesPages(result))
       } catch (error) {
         console.log(error)
+        setModules(mockedResult)
         setItems(toMenuItems(mockedResult))
         setApplicationModulesPages(toApplicationModulesPages(mockedResult))
       }

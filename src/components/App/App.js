@@ -14,6 +14,7 @@ import { DynamicComponent } from '../DynamicComponent'
 import { toApplicationPages } from './serializers'
 
 const App = () => {
+  const [modules, setModules] = useState([])
   const [applicationPages, setApplicationPages] = useState([])
   const [applicationModulesPages, setApplicationModulesPages] = useState([])
   const [subdomainId, setSubdomainId] = useState(localStorage.getItem('selectedSubdomainId'))
@@ -35,12 +36,13 @@ const App = () => {
   return (
     <ThemeProvider theme="light">
       <Layout
+        setModules={setModules}
         setApplicationModulesPages={setApplicationModulesPages}
         setSubdomainId={setSubdomainId}
       >
         <Routes>
           {/* private routes */}
-          <Route path={URLS.AUTH_HOME} exact element={<PrivateRoute component={Home} />} />
+          <Route path={URLS.AUTH_HOME} exact element={<PrivateRoute component={Home} modules={modules} setSubdomainId={setSubdomainId} />} />
           {applicationModulesPages.map(page =>
             createRoute({ ...page, applicationPages, setApplicationPages }, ServiceDomain)
           )}
