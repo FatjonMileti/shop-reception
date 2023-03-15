@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
 import { Home } from '../Home'
-import { Login } from '../Login'
 import { LoginOIDC } from '../LoginOIDC'
-import { Logout } from '../Logout'
+import { LogoutOIDC } from '../LogoutOIDC'
 import { ServiceDomain } from '../ServiceDomain'
 import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
@@ -52,9 +51,8 @@ const App = () => {
             {applicationPages.map(page => createRoute(page, DynamicComponent))}
             {/* end of private routes */}
 
-            <Route path={URLS.LOGIN} element={<Login />} />
             <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
-            <Route path={URLS.LOGOUT} element={<Logout />} />
+            <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
             {applicationPages.length && <Route path="*" element={<NotFound />} />}
           </Routes>
         </Layout>

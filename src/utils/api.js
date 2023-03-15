@@ -14,9 +14,8 @@ axios.interceptors.request.use(
     }
 
     if (isTokenExpired(token)) {
+      // TODO: what should be done here? We shouldn't get into this situation as the oidc-client should handle this
       console.log('token expired????????????')
-      // logout()
-      // window.location.href = URLS.LOGIN
     }
 
     return config
@@ -57,7 +56,3 @@ export const makeDesignerDeleteRequest = (url, params) =>
 
 export const makeDesignerPatchRequest = (url, params) =>
   axios.patch(getDesignerBaseUrl(url), params).then(response => response.data)
-
-export const loginRedirect = () => {
-  window.location.href = URLS.AUTH_HOME
-}
