@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const LogoutOIDC = () => {
   // TODO display Spinner?
-  return null
+  return <div>Logging out...</div>
 }
 
 export default LogoutOIDC

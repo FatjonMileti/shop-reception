@@ -7,6 +7,9 @@ export const oidcConfig = {
     setToken(user.id_token)
     window.location.href = '/'
   },
+  onSignOut: async options => {
+    debugger
+  },
   authority: process.env.AUTHORITY,
   clientId: process.env.CLIENT_ID,
   responseType: 'code',
