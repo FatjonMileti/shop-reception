@@ -17,28 +17,22 @@ import s from './Table.scss'
 // import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
 // import { mockedRows } from 'utils/mockedData/teamAssignmentData'
-import { mockedRows } from 'utils/mockedData/capacityOverviewData'
-// import { mockedRows } from 'utils/mockedData/personCapacityData'
+// import { mockedRows } from 'utils/mockedData/capacityOverviewData'
+import { mockedRows } from 'utils/mockedData/personCapacityData'
 
 const Table = props => {
   const { action, columns, tableActions, tableRowActions, ...rest } = props
+
   let [searchParams] = useSearchParams()
 
-  const initialTableFilters = useMemo(
-    () =>
-      tableActions?.filters ? getInitialFilterParams(searchParams, tableActions?.filters) : null,
-    [searchParams, tableActions?.filters]
-  )
+  // const initialTableFilters = useMemo(() => {
+
+  //   return tableActions?.filters ? getInitialFilterParams(params, tableActions?.filters) : null
+  // }, [searchParams, tableActions?.filters])
 
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
-  // const [searchValue, setSearchValue] = useState('')
-  // const [currentPage, setCurrentPage] = useState(0)
-  // const [currentRowsPerPage, setCurrentRowsPerPage] = useState(rest.rowsPerPage || 10)
-  // const [currentOrder, setCurrentOrder] = useState(rest.order || 'asc')
-  // const [currentOrderBy, setCurrentOrderBy] = useState(rest.orderBy || '')
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
-  // const [tableFilters, setTableFilters] = useImmer(initialTableFilters)
 
   const [tableState, setTableState] = useImmer({
     page: 0,
@@ -49,16 +43,17 @@ const Table = props => {
     filters: []
   })
 
-  useEffect(() => {
-    setTableState(draft => {
-      draft.filters = initialTableFilters
-    })
-  }, [initialTableFilters])
+  const filtersConfig = useMemo(() => {
+    let params = {}
 
-  const filtersConfig = useMemo(
-    () => tableActions?.filters.map(convertFilterSchemaToFilterConfig) ?? [],
-    [tableActions?.filters]
-  )
+    for (let entry of searchParams.entries()) {
+      const [name, value] = entry
+      params[name] = value
+    }
+    return (
+      tableActions?.filters.map(filter => convertFilterSchemaToFilterConfig(filter, params)) ?? []
+    )
+  }, [tableActions?.filters])
 
   const renderedColumns = useMemo(
     () => getRenderedColumns(columns, tableState.filters),

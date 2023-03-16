@@ -18,3 +18,16 @@ export const getItemDefaults = formItems => {
 
   return result
 }
+
+export const getItemDefaultsAsArray = formItems => {
+  let result = []
+
+  formItems.forEach(item => {
+    result.push({
+      name: item.name,
+      value: item.defaultValue ? getDefaultItemValue(item.defaultValue) : ''
+    })
+  })
+
+  return result
+}

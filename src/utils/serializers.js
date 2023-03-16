@@ -9,3 +9,13 @@ export const toItemPayload = item => {
 
   return payload
 }
+
+export const toArrayItemPayload = item => {
+  let payload = {}
+
+  item.map(i => {
+    set(payload, i.name, i.value)
+  })
+
+  return payload
+}

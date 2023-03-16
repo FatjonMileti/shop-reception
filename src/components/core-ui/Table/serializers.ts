@@ -1,5 +1,5 @@
 import { get, set } from 'lodash'
-import { toItemPayload } from 'utils/serializers'
+import { toArrayItemPayload } from 'utils/serializers'
 
 export const toTableObjects = result =>
   result.map(row => {
@@ -58,7 +58,7 @@ export const toTablePOSTPayload = ({
   order,
   orderBy,
   ...toSearchFieldsPayload(searchFields, searchText),
-  ...toItemPayload(filters)
+  ...toArrayItemPayload(filters)
 })
 
 export const toTableRowItems = (items, columns) => {
@@ -75,9 +75,9 @@ export const toTableRowItems = (items, columns) => {
 
 export const toFiltersUrl = (tableFilters, linkFilters) => {
   let url = ''
-  Object.keys(tableFilters).map(key => {
-    if (linkFilters.includes(key)) {
-      url = `${url}&${key}=${tableFilters[key]}`
+  tableFilters.map(filter => {
+    if (linkFilters.includes(filter.name)) {
+      url = `${url}&${filter.name}=${filter.value}`
     }
   })
   return url
