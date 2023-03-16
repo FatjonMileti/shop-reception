@@ -1,7 +1,6 @@
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const commonPaths = require('./paths')
 const path = require('path')
-const { DefinePlugin } = require('webpack')
 
 // eslint-disable-next-line no-undef
 module.exports = () => ({
@@ -74,13 +73,5 @@ module.exports = () => ({
     hot: true,
     historyApiFallback: true
   },
-  plugins: [
-    new DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-        ENV: JSON.stringify('development')
-      }
-    }),
-    new ReactRefreshWebpackPlugin()
-  ]
+  plugins: [new ReactRefreshWebpackPlugin()]
 })
