@@ -1,5 +1,4 @@
-import get from 'lodash/get'
-import set from 'lodash/set'
+import { get, set } from 'lodash'
 import { toItemPayload } from 'utils/serializers'
 
 export const toTableObjects = result =>
@@ -18,7 +17,7 @@ export const toTableGETUrl = ({
   url,
   searchText,
   tableActions,
-  tableFilters,
+  filters,
   page,
   rowsPerPage,
   order,
@@ -32,9 +31,10 @@ export const toTableGETUrl = ({
   }
 
   let filtersUrl = ''
-  if (tableFilters) {
-    Object.keys(tableFilters).map(key => {
-      filtersUrl = `${filtersUrl}&${key}=${tableFilters[key]}`
+  if (filters) {
+    debugger
+    Object.keys(filters).map(key => {
+      filtersUrl = `${filtersUrl}&${key}=${filters[key]}`
     })
   }
 
@@ -51,14 +51,14 @@ export const toTablePOSTPayload = ({
   orderBy,
   searchText,
   searchFields,
-  tableFilters
+  filters
 }) => ({
   page,
   rowsPerPage,
   order,
   orderBy,
   ...toSearchFieldsPayload(searchFields, searchText),
-  ...toItemPayload(tableFilters)
+  ...toItemPayload(filters)
 })
 
 export const toTableRowItems = (items, columns) => {

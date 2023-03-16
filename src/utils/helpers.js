@@ -1,9 +1,9 @@
 import dayjs from 'dayjs'
 
-const getDefaultItemValue = value => {
+export const getDefaultItemValue = value => {
   switch (value) {
     case 'CURRENT_DATE':
-      return dayjs()
+      return dayjs().format('MM-DD-YYYY')
     default:
       return value
   }

@@ -1,13 +1,15 @@
-import get from 'lodash/get'
+import { get } from 'lodash'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { toFiltersUrl } from './serializers'
-import { getItemDefaults } from 'utils/helpers'
+import { getItemDefaults, getDefaultItemValue } from 'utils/helpers'
+import { FilterParams, FilterSchema } from './TableDefinitions'
 
-export const getInitialTableFilters = (searchParams, filters) => {
+export const getInitialFilterParams = (searchParams, filters: FilterSchema[]): FilterParams => {
   let params = {}
 
   if (searchParams.length) {
     searchParams.forEach((value, key) => {
+      // filter.variable is a path of search params which is for default value
       const filterKey = filters.find(filter => filter.variable === key)?.name
       params[filterKey] = value
     })
@@ -49,3 +51,14 @@ export const getRenderedColumns = (columns, tableFilters) =>
       return column
     }
   })
+
+export const convertFilterSchemaToFilterConfig = (filterSchema: FilterSchema) => {
+  const { name, type, defaultValue, label, ...componentProps } = filterSchema
+  return {
+    name,
+    label,
+    type,
+    value: getDefaultItemValue(defaultValue) ?? null,
+    filter: renderComponent({ ...componentProps, label })
+  }
+}
