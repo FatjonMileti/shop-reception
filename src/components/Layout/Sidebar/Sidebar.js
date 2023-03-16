@@ -119,8 +119,8 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
   }
 
   const handleLogout = async () => {
+    logout()
     auth.signOutRedirect()
-    await logout()
   }
 
   return (
