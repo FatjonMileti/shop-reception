@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useImmer } from 'use-immer'
@@ -6,13 +7,9 @@ import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import {
-  getInitialFilterParams,
-  getRenderedColumns,
-  convertFilterSchemaToFilterConfig
-} from './helpers'
+import { getRenderedColumns, convertFilterSchemaToFilterConfig } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
-import s from './Table.scss'
+import s from './Table.modules.scss'
 
 // import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
@@ -111,7 +108,7 @@ const Table = props => {
   const closeNewModal = () => setIsNewModalOpen(false)
 
   return (
-    <Box>
+    <Box className={s.tableContainer}>
       {tableActions?.newAction && (
         <ModalWithForm
           {...tableActions.newAction}

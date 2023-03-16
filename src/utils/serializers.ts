@@ -1,6 +1,6 @@
-import set from 'lodash/set'
+import { set } from 'lodash'
 
-export const toItemPayload = item => {
+export const toItemPayload = (item: { [key: string]: string }) => {
   let payload = {}
 
   Object.keys(item).forEach(key => {
@@ -10,7 +10,7 @@ export const toItemPayload = item => {
   return payload
 }
 
-export const toArrayItemPayload = item => {
+export const toArrayItemPayload = (item: { name: string; value: string }[]) => {
   let payload = {}
 
   item.map(i => {

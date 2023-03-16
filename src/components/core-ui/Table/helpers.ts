@@ -41,7 +41,7 @@ export const getRenderedColumns = (columns, tableFilters) =>
     }
   })
 
-export const convertFilterSchemaToFilterConfig = (filterSchema: FilterSchema, searchParams: FilterParams[]) => {
+export const convertFilterSchemaToFilterConfig = (filterSchema: FilterSchema, searchParams: FilterParams) => {
   const { name, type, defaultValue, label, ...componentProps } = filterSchema
   return {
     name,
