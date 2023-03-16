@@ -42,6 +42,7 @@ const Home = ({ modules, setSubdomainId }) => {
     <div className={s.homeWrapper}>
       {modules.map((module,index) => { return (
         <Accordion
+          key={module.id}
           summary={
             <Typography variant="medium">
               <span className={s.moduleAccordionSummary}>
@@ -53,8 +54,7 @@ const Home = ({ modules, setSubdomainId }) => {
             <List
               items={toListItems(module.submodules)}
               onItemClick={handleItemClick}
-            />            
-          }
+            />}
           // disableGutters
           defaultExpanded={index==0}
           id={module.id}
