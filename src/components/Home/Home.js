@@ -1,14 +1,11 @@
 import { useNavigate } from 'react-router-dom'
-import { List, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Accordion, List, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
-import { Accordion } from '@fullscreendigital/carrefour-dex-fe'
 import { KeyboardArrowRightOutlined } from '@mui/icons-material'
 import s from './Home.scss'
-import './Home.scss'
 
 
 const Home = ({ modules, setSubdomainId }) => {
-  console.log("[Home] modules: ", modules)
   
   const navigate = useNavigate()
 
@@ -34,7 +31,7 @@ const Home = ({ modules, setSubdomainId }) => {
   const handleItemClick = (event, item) => {
     event.preventDefault()
 
-    const { href, index, id } = item
+    const { href, id } = item
 
     navigate(href)
     localStorage.setItem('selectedSubdomainId', id)
@@ -45,7 +42,13 @@ const Home = ({ modules, setSubdomainId }) => {
     <div className={s.homeWrapper}>
       {modules.map((module,index) => { return (
         <Accordion
-          summary={<Typography variant="medium"><span className={s.moduleAccordionSummary}><Icon iconName={module.icon}/>{module.name}</span></Typography>}
+          summary={
+            <Typography variant="medium">
+              <span className={s.moduleAccordionSummary}>
+                <Icon iconName={module.icon}/>
+                {module.name}
+              </span>
+            </Typography>}
           details={
             <List
               items={toListItems(module.submodules)}
