@@ -2,6 +2,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const commonPaths = require('./paths')
+const Dotenv = require('dotenv-webpack')
 
 // eslint-disable-next-line no-undef
 module.exports = {
@@ -34,7 +35,8 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [{ from: './src/images', to: 'images' }]
-    })
+    }),
+    new Dotenv()
   ],
   target: 'web'
 }

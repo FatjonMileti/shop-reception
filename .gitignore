@@ -4,3 +4,6 @@ dist
 built
 .vscode/
 .DS_Store
+.env
+.npmrc
+.idea/
