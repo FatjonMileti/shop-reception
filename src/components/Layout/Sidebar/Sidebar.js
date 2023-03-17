@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Drawer, List, Divider } from '@fullscreendigital/carrefour-dex-fe'
 import { toSelectedMenuItems, toApplicationModulesPages, toMenuItems } from './serializers'
@@ -9,7 +9,6 @@ import {
   PowerSettingsNewOutlined
 } from '@mui/icons-material'
 import { makeDesignerGetRequest } from 'utils/api'
-import { DrawerContext } from 'contexts'
 import { SidebarHeader } from './SidebarHeader'
 import s from './Sidebar.scss'
 
@@ -82,11 +81,9 @@ const staticItems = [
   }
 ]
 
-const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setSubdomainId }) => {
+const Sidebar = ({ isMenuOpen, handleCloseMenu, setModules, setApplicationModulesPages, setSubdomainId }) => {
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
-
-  const { drawerWidth } = useContext(DrawerContext)
 
   const navigate = useNavigate()
 
@@ -95,10 +92,12 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
       // TODO: get the list of items in the menu; this is a GET to api
       try {
         const result = await makeDesignerGetRequest('/application-modules')
+        setModules(result)
         setItems(toMenuItems(result))
         setApplicationModulesPages(toApplicationModulesPages(result))
       } catch (error) {
         console.log(error)
+        setModules(mockedResult)
         setItems(toMenuItems(mockedResult))
         setApplicationModulesPages(toApplicationModulesPages(mockedResult))
       }
@@ -123,11 +122,11 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, setApplicationModulesPages, setS
       onClose={handleCloseMenu}
       displayEmptyHeader
       disablePadding
-      headerContent={<SidebarHeader handleCloseMenu={handleCloseMenu} drawerWidth={drawerWidth} />}
-      headerStyle={{ position: 'fixed', width: '400px', paddingRight: 0, zIndex: 1203 }}
+      headerContent={<SidebarHeader handleCloseMenu={handleCloseMenu} />}
+      headerClass={s.drawerHeader}
       paperClassName={s.itemsListContainer}
     >
-      <div className={s.itemsList} style={{ width: `${drawerWidth}px` }}>
+      <div className={s.itemsList}>
         <nav className={s.section}>
           <List
             subheader={{

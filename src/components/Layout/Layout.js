@@ -9,7 +9,7 @@ import { DrawerContext } from 'contexts'
 import { DRAWER_WIDTH } from 'utils/constants'
 import s from './Layout.scss'
 
-const Layout = ({ children, setApplicationModulesPages, setSubdomainId }) => {
+const Layout = ({ children, setModules, setApplicationModulesPages, setSubdomainId }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [drawerWidth, setDrawerWidth] = useState(DRAWER_WIDTH)
 
@@ -40,6 +40,7 @@ const Layout = ({ children, setApplicationModulesPages, setSubdomainId }) => {
             <Sidebar
               isMenuOpen={isMenuOpen}
               handleCloseMenu={handleCloseMenu}
+              setModules={setModules}
               setApplicationModulesPages={setApplicationModulesPages}
               setSubdomainId={setSubdomainId}
             />
