@@ -2,6 +2,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const commonPaths = require('./paths')
+const Dotenv = require('dotenv-webpack')
 
 // eslint-disable-next-line no-undef
 module.exports = {
@@ -13,10 +14,10 @@ module.exports = {
         type: 'asset/resource'
       },
       // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-      { test: /\.tsx?$/, loader: "ts-loader" },
+      { test: /\.tsx?$/, loader: 'ts-loader' }
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       // { test: /\.js$/, loader: "source-map-loader" }, // @fullscreendigital/carrefour-dex-fe does not support types
-    ],
+    ]
   },
   resolve: {
     modules: ['src', 'node_modules'],
@@ -34,7 +35,8 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [{ from: './src/images', to: 'images' }]
-    })
+    }),
+    new Dotenv()
   ],
   target: 'web'
 }

@@ -1,18 +1,12 @@
-import { useContext } from 'react'
 import Box from '@mui/material/Box'
 import { Close } from '@mui/icons-material'
 import { Avatar, IconButton } from '@fullscreendigital/carrefour-dex-fe'
-import { DrawerContext } from 'contexts'
 import s from './SidebarHeader.scss'
 
 const SidebarHeader = ({ handleCloseMenu }) => {
-  const { drawerWidth } = useContext(DrawerContext)
 
   return (
-    <Box
-      className={s.menuHeaderContainer}
-      style={{ gridTemplateColumns: `40px ${drawerWidth - 140}px 40px` }}
-    >
+    <Box className={s.menuHeaderContainer}>
       <div>
         <Avatar alt="Paula Dan" value="PD" />
       </div>

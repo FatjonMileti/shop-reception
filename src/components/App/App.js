@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
 import { Home } from '../Home'
-import { Login } from '../Login'
+import { LoginOIDC } from '../LoginOIDC'
+import { LogoutOIDC } from '../LogoutOIDC'
 import { ServiceDomain } from '../ServiceDomain'
 import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
@@ -12,8 +13,11 @@ import { makeDesignerGetRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { DynamicComponent } from '../DynamicComponent'
 import { toApplicationPages } from './serializers'
+import { AuthProvider } from 'oidc-react'
+import { oidcConfig } from 'utils/authService'
 
 const App = () => {
+  const [modules, setModules] = useState([])
   const [applicationPages, setApplicationPages] = useState([])
   const [applicationModulesPages, setApplicationModulesPages] = useState([])
   const [subdomainId, setSubdomainId] = useState(localStorage.getItem('selectedSubdomainId'))
@@ -33,25 +37,29 @@ const App = () => {
   }, [subdomainId])
 
   return (
-    <ThemeProvider theme="light">
-      <Layout
-        setApplicationModulesPages={setApplicationModulesPages}
-        setSubdomainId={setSubdomainId}
-      >
-        <Routes>
-          {/* private routes */}
-          <Route path={URLS.AUTH_HOME} exact element={<PrivateRoute component={Home} />} />
-          {applicationModulesPages.map(page =>
-            createRoute({ ...page, applicationPages, setApplicationPages }, ServiceDomain)
-          )}
-          {applicationPages.map(page => createRoute(page, DynamicComponent))}
-          {/* end of private routes */}
+    <AuthProvider {...oidcConfig}>
+      <ThemeProvider theme="light">
+        <Layout
+          setModules={setModules}
+          setApplicationModulesPages={setApplicationModulesPages}
+          setSubdomainId={setSubdomainId}
+        >
+          <Routes>
+            {/* private routes */}
+            <Route path={URLS.AUTH_HOME} element={<PrivateRoute component={Home} modules={modules} setSubdomainId={setSubdomainId} />} />
+            {applicationModulesPages.map(page =>
+              createRoute({ ...page, applicationPages, setApplicationPages }, ServiceDomain)
+            )}
+            {applicationPages.map(page => createRoute(page, DynamicComponent))}
+            {/* end of private routes */}
 
-          <Route path={URLS.LOGIN} element={<Login />} />
-          {applicationPages.length && <Route path="*" element={<NotFound />} />}
-        </Routes>
-      </Layout>
-    </ThemeProvider>
+            <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
+            <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
+            {applicationPages.length && <Route path="*" element={<NotFound />} />}
+          </Routes>
+        </Layout>
+      </ThemeProvider>
+    </AuthProvider>
   )
 }
 
