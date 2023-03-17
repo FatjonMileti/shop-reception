@@ -42,11 +42,12 @@ export const getRenderedColumns = (columns, tableFilters) =>
   })
 
 export const convertFilterSchemaToFilterConfig = (filterSchema: FilterSchema, searchParams: FilterParams) => {
-  const { name, type, defaultValue, label, ...componentProps } = filterSchema
+  const { name, type, defaultValue, label, required, ...componentProps } = filterSchema
   return {
     name,
     label,
     type,
+    required,
     value: getInitialFilterParam(searchParams, filterSchema),
     filter: renderComponent({ ...componentProps, label })
   }

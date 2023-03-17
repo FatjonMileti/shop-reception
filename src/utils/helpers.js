@@ -1,12 +1,16 @@
 import dayjs from 'dayjs'
 
 export const getDefaultItemValue = value => {
-  switch (value) {
-    case 'CURRENT_DATE':
-      return dayjs().format('MM-DD-YYYY')
-    default:
-      return value
+  if (value.charAt(0) === '#') {
+    switch (value) {
+      case '#CURRENT_DATE':
+        return dayjs().format('MM-DD-YYYY')
+      default:
+        return ''
+    }
   }
+
+  return value
 }
 
 export const getItemDefaults = formItems => {

@@ -29,7 +29,8 @@ export interface FilterSchema {
   UIComponent: FilterComponent
   name: string
   label: string
-  defaultValue?: 'CURRENT_DATE' | null
+  required?: boolean
+  defaultValue?: '#CURRENT_DATE' | null
   variable?: string
 }
 

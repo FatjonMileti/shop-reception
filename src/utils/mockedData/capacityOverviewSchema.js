@@ -53,16 +53,18 @@ export const JSONSchema = {
             type: 'date',
             name: 'capacity.startDate',
             label: 'Start Date',
-            defaultValue: 'CURRENT_DATE',
-            variant: 'standard'
+            defaultValue: '#CURRENT_DATE',
+            variant: 'standard',
+            required: true
           },
           {
             UIComponent: 'DatePicker',
             type: 'date',
             name: 'capacity.endDate',
             label: 'End Date',
-            defaultValue: 'CURRENT_DATE',
-            variant: 'standard'
+            defaultValue: '#CURRENT_DATE',
+            variant: 'standard',
+            required: true
           }
         ]
       }

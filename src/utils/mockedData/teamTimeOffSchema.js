@@ -47,7 +47,6 @@ export const JSONSchema = {
       tableActions: {
         newAction: {
           modalTitle: 'New Time Off',
-          // isFloatingButton: true,
           formItems: [
             {
               UIComponent: 'AsyncSelectInput',
@@ -83,7 +82,7 @@ export const JSONSchema = {
               style: { width: '100%' },
               label: 'Start Date',
               id: 'startDate',
-              defaultValue: 'CURRENT_DATE',
+              defaultValue: '#CURRENT_DATE',
               variant: 'standard'
             },
             {
@@ -92,7 +91,7 @@ export const JSONSchema = {
               name: 'daysOff.endDate',
               style: { width: '100%' },
               label: 'End Date',
-              defaultValue: 'CURRENT_DATE',
+              defaultValue: '#CURRENT_DATE',
               id: 'endDate',
               variant: 'standard'
             },
