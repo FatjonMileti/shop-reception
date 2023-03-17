@@ -46,11 +46,15 @@ module.exports = () => ({
                   return content
                 }
 
+                var correctedPath = path.resolve(commonPaths.root, 'src/styles/_variables.scss')
+                correctedPath = correctedPath.replace(/\\/g, '/');
+
                 return `
-                @import "${path.resolve(commonPaths.root, 'src/styles/_variables.scss')}";
+                @import "${correctedPath}";
 
                 ${content}
               `
+
               }
             }
           }
