@@ -9,23 +9,17 @@ import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getRenderedColumns, convertFilterSchemaToFilterConfig } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
-import s from './Table.modules.scss'
 
 // import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
 // import { mockedRows } from 'utils/mockedData/teamAssignmentData'
-// import { mockedRows } from 'utils/mockedData/capacityOverviewData'
-import { mockedRows } from 'utils/mockedData/personCapacityData'
+import { mockedRows } from 'utils/mockedData/capacityOverviewData'
+// import { mockedRows } from 'utils/mockedData/personCapacityData'
 
 const Table = props => {
   const { action, columns, tableActions, tableRowActions, ...rest } = props
 
   let [searchParams] = useSearchParams()
-
-  // const initialTableFilters = useMemo(() => {
-
-  //   return tableActions?.filters ? getInitialFilterParams(params, tableActions?.filters) : null
-  // }, [searchParams, tableActions?.filters])
 
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
@@ -108,7 +102,7 @@ const Table = props => {
   const closeNewModal = () => setIsNewModalOpen(false)
 
   return (
-    <Box className={s.tableContainer}>
+    <Box>
       {tableActions?.newAction && (
         <ModalWithForm
           {...tableActions.newAction}

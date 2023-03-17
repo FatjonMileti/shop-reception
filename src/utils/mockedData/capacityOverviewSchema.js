@@ -11,6 +11,7 @@ export const JSONSchema = {
         type: 'POST'
       },
       hideCheckbox: true,
+      title: 'Team Capacity Overview',
       columns: [
         {
           title: 'Person',
