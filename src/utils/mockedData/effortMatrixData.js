@@ -1,0 +1,110 @@
+export const mockedRows = [
+  {
+    id: 1,
+    role: 'IT PM',
+    evaluation: '10.00%',
+    analysis: '5.00%',
+    design: '10.00%',
+    development: '10.00%',
+    systemTest: '5.00%',
+    uat: '15.00%',
+    goLive: '25.00%',
+    soak: '20.00%'
+  },
+  {
+    id: 2,
+    role: 'Business Analyst',
+    evaluation: '30.00%',
+    analysis: '15.00%',
+    design: '5.00%',
+    development: '5.00%',
+    systemTest: '',
+    uat: '20.00%',
+    goLive: '15.00%',
+    soak: '10.00%'
+  },
+  {
+    id: 3,
+    role: 'System Analyst',
+    evaluation: '5.00%',
+    analysis: '30.00%',
+    design: '15.00%',
+    development: '15.00%',
+    systemTest: '5.00%',
+    uat: '10.00%',
+    goLive: '10.00%',
+    soak: '10.00%'
+  },
+  {
+    id: 4,
+    role: 'Solution Architect',
+    evaluation: '25.00%',
+    analysis: '20.00%',
+    design: '10.00%',
+    development: '10.00%',
+    systemTest: '5.00%',
+    uat: '10.00%',
+    goLive: '10.00%',
+    soak: '10.00%'
+  },
+  {
+    id: 5,
+    role: 'Developer',
+    evaluation: '',
+    analysis: '5.00%',
+    design: '10.00%',
+    development: '50.00%',
+    systemTest: '15.00%',
+    uat: '10.00%',
+    goLive: '5.00%',
+    soak: '5.00%'
+  },
+  {
+    id: 6,
+    role: 'QA Officer',
+    evaluation: '',
+    analysis: '10.00%',
+    design: '10.00%',
+    development: '25.00%',
+    systemTest: '30.00%',
+    uat: '10.00%',
+    goLive: '5.00%',
+    soak: '10.00%'
+  },
+  {
+    id: 7,
+    role: 'DevOps',
+    evaluation: '',
+    analysis: '',
+    design: '10.00%',
+    development: '15.00%',
+    systemTest: '10.00%',
+    uat: '10.00%',
+    goLive: '35.00%',
+    soak: '20.00%'
+  },
+  {
+    id: 8,
+    role: 'Support Engineer',
+    evaluation: '',
+    analysis: '',
+    design: '',
+    development: '10.00%',
+    systemTest: '',
+    uat: '',
+    goLive: '30.00%',
+    soak: '60.00%'
+  },
+  {
+    id: 9,
+    role: 'Technical Lead',
+    evaluation: '',
+    analysis: '',
+    design: '30.00%',
+    development: '20.00%',
+    systemTest: '15.00%',
+    uat: '10.00%',
+    goLive: '10.00%',
+    soak: '15.00%'
+  }
+]

@@ -1,0 +1,72 @@
+{
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true,
+      "legacyDecorators": true
+    },
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "cypress/globals": true,
+    "amd": true
+  },
+  "globals": {
+    "$Shape": true,
+    "$Keys": true,
+    "process": true
+  },
+  "plugins": [
+    "react",
+    "cypress",
+    "prettier",
+    "react-hooks"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "camelcase": [0, {"ignoreDestructuring": true}],
+    "react/prop-types": "off",
+    "space-before-function-paren": [ "error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
+    "react/display-name": "off",
+    "no-console": [ "warn", {
+      "allow": [ "warn", "error" ]
+    }],
+    "generator-star-spacing": [ "error", {
+      "before": false,
+      "after": true
+    }],
+    "no-duplicate-imports": "error",
+    "prettier/prettier": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "template-curly-spacing": "off",
+    "indent": "off",
+    "arrow-parens": [1, "as-needed"],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-handler-names": "off",
+    "react/jsx-curly-newline": "off",
+    "multiline-ternary": "off",
+    "react/jsx-fragments": "error",
+    "no-debugger": "warn"
+  },
+  "settings": {
+    "react": {
+        "version": "detect"
+    }
+  },
+  "ignorePatterns": ["patches/*"]
+}

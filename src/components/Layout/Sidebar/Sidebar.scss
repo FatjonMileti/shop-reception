@@ -1,0 +1,28 @@
+.itemsList {
+  padding: 60px;
+  width: 400px;
+}
+
+.drawerHeader {
+  position: fixed;
+  width: 400px;
+  padding: 0 8px!important;
+  z-index: 1203;
+}
+
+@media (max-width: 624px)  {
+
+  .itemsListContainer {
+    width: 100%;
+  }
+
+  .itemsList {
+    width: 100%;
+    padding: calc(12px + 0.16*(100vw - 324px));
+    padding-top: 60px;
+  }
+
+  .drawerHeader {
+    width: 100%;
+  }
+}

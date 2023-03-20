@@ -1,29 +1,14 @@
-# README #
+# carrefour-ui-modules
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Setup project
+- create .env file in root folder and copy the contents from .env.example; edit the values for the appropriate environment.
+- create .npmrc file in root folder and copy the contents from .npmrc.example; get an _authToken for the private library and set its value in newly created .npmrc file on the line `//registry.yarnpkg.com/:_authToken=`
 
-### What is this repository for? ###
+## Start project:
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+- install yarn
+- run: `yarn`
+- run: `yarn start`
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+## Build prod:
+- run: `yarn build`
