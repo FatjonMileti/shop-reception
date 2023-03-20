@@ -8,7 +8,7 @@ export const JSONSchema = {
       width: '80%',
       action: {
         url: '/capacityOverview',
-        type: 'POST'
+        type: 'GET'
       },
       hideCheckbox: true,
       title: 'Team Capacity Overview',

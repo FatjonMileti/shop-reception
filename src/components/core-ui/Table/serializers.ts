@@ -1,5 +1,7 @@
 import { get, set } from 'lodash'
 import { toArrayItemPayload } from 'utils/serializers'
+import { Filter } from './TableDefinitions'
+import { getFiltersGetUrl, getSearchFieldsGetUrl } from './helpers'
 
 export const toTableObjects = result =>
   result.map(row => {
@@ -16,27 +18,24 @@ export const toTableObjects = result =>
 export const toTableGETUrl = ({
   url,
   searchText,
-  tableActions,
+  searchFields,
   filters,
   page,
   rowsPerPage,
   order,
   orderBy
+}: {
+  url: string
+  searchText: string
+  searchFields: string[]
+  filters: Filter[]
+  page: number
+  rowsPerPage: number
+  order: string
+  orderBy: string
 }) => {
-  let searchFieldsUrl = ''
-  if (searchText) {
-    tableActions.searchAction.searchFields.map(field => {
-      searchFieldsUrl = `${searchFieldsUrl}&${field}=${searchText}`
-    })
-  }
-
-  let filtersUrl = ''
-  if (filters) {
-    debugger
-    Object.keys(filters).map(key => {
-      filtersUrl = `${filtersUrl}&${key}=${filters[key]}`
-    })
-  }
+  const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
+  const filtersUrl = getFiltersGetUrl(filters)
 
   return `${url}?page=${page}&size=${rowsPerPage}&order=${order}&orderBy=${orderBy}${searchFieldsUrl}${filtersUrl}`
 }
