@@ -1,6 +1,7 @@
 import { get, set } from 'lodash'
 import { toArrayItemPayload } from 'utils/serializers'
 import { Filter } from './TableDefinitions'
+import { SelectOption } from 'components/core-ui/ComboBoxTable/ComboBoxTableDefinitions'
 import { getFiltersGetUrl, getSearchFieldsGetUrl } from './helpers'
 
 export const toTableObjects = result =>
@@ -15,11 +16,15 @@ export const toTableObjects = result =>
     return row
   })
 
+const getAllFilters = (filters: Filter[], comboValue: SelectOption) =>
+  filters.concat(comboValue ? [{ name: comboValue.label, value: comboValue.value }] : [])
+
 export const toTableGETUrl = ({
   url,
   searchText,
   searchFields,
   filters,
+  comboValue,
   page,
   rowsPerPage,
   order,
@@ -29,13 +34,16 @@ export const toTableGETUrl = ({
   searchText: string
   searchFields: string[]
   filters: Filter[]
+  comboValue: SelectOption
   page: number
   rowsPerPage: number
   order: string
   orderBy: string
 }) => {
   const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
-  const filtersUrl = getFiltersGetUrl(filters)
+  const a  = getAllFilters(filters, comboValue)
+  debugger
+  const filtersUrl = getFiltersGetUrl(getAllFilters(filters, comboValue))
 
   return `${url}?page=${page}&size=${rowsPerPage}&order=${order}&orderBy=${orderBy}${searchFieldsUrl}${filtersUrl}`
 }
@@ -50,14 +58,24 @@ export const toTablePOSTPayload = ({
   orderBy,
   searchText,
   searchFields,
-  filters
+  filters,
+  comboValue
+}: {
+  page: number,
+  rowsPerPage: number
+  order: string,
+  orderBy: string,
+  searchText: string,
+  searchFields: string[],
+  filters: Filter[],
+  comboValue: SelectOption
 }) => ({
   page,
   rowsPerPage,
   order,
   orderBy,
   ...toSearchFieldsPayload(searchFields, searchText),
-  ...toArrayItemPayload(filters)
+  ...toArrayItemPayload(getAllFilters(filters, comboValue))
 })
 
 export const toTableRowItems = (items, columns) => {

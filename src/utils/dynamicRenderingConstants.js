@@ -4,8 +4,9 @@ import Grid from '@mui/material/Grid'
 import { Percent } from '@mui/icons-material'
 import { Button, DatePicker, Link, Typography, Checkbox } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncSelectInput } from 'components/core-ui/AsyncSelectInput'
-import { Table } from 'components/core-ui/Table'
+import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
 import { Input } from 'components/core-ui/Input'
+import { Table } from 'components/core-ui/Table'
 
 export const Components = {
   // MUI components
@@ -20,8 +21,9 @@ export const Components = {
   Link,
   Typography,
   Checkbox,
-  // Local components, should be moved in a library????
+  // Local components
   AsyncSelectInput,
+  ComboBoxTable,
   Input,
   Table
 }

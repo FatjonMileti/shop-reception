@@ -1,3 +1,4 @@
+import { Filter } from 'components/core-ui/Table/TableDefinitions'
 import { set } from 'lodash'
 
 export const toItemPayload = (item: { [key: string]: string }) => {
@@ -10,7 +11,7 @@ export const toItemPayload = (item: { [key: string]: string }) => {
   return payload
 }
 
-export const toArrayItemPayload = (item: { name: string; value: string }[]) => {
+export const toArrayItemPayload = (item: Filter[]) => {
   let payload = {}
 
   item.map(i => {

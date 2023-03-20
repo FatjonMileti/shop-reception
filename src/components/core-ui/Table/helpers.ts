@@ -1,7 +1,7 @@
 import { get } from 'lodash'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { toFiltersUrl } from './serializers'
-import { getItemDefaultsAsArray, getDefaultItemValue } from 'utils/helpers'
+import { getDefaultItemValue } from 'utils/helpers'
 import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
 
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): FilterParams => {
@@ -59,10 +59,7 @@ export const convertFilterSchemaToFilterConfig = (
 export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string) => {
   if (!searchText) return ''
 
-  const searchBy = searchFields.reduce(
-    (acc, field) => (acc = acc ? `${acc}|${field}` : field),
-    ''
-  )
+  const searchBy = searchFields.reduce((acc, field) => (acc = acc ? `${acc}|${field}` : field), '')
 
   return `&searchBy=${searchBy}&searchValue=${searchText}`
 }
@@ -74,7 +71,7 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
     (acc, filter) =>
       (acc = [
         acc[0] ? `${acc[0]}|${filter.name}` : filter.name,
-        acc[1] ? `${acc[1]}|${filter.value}` : filter.value
+        acc[1] ? `${acc[1]}|${filter.value}` : `${filter.value}`
       ]),
     ['', '']
   )

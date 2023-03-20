@@ -1,12 +1,16 @@
 import dayjs from 'dayjs'
+import { get } from 'lodash'
+import { getUserInfo } from './authService'
 
 export const getDefaultItemValue = value => {
   if (value.charAt(0) === '#') {
-    switch (value) {
-      case '#CURRENT_DATE':
-        return dayjs().format('MM-DD-YYYY')
-      default:
-        return ''
+    if (value === '#CURRENT_DATE') {
+      return dayjs().format('MM-DD-YYYY')
+    }
+
+    if (value.includes('#TOKEN')) {
+      const userInfo = getUserInfo()
+      return get(userInfo, value.replace('#TOKEN.', ''))
     }
   }
 

@@ -1,7 +1,7 @@
 import { JSXElementConstructor, ReactElement } from 'react'
 export interface Filter {
   name: string
-  value: string
+  value: string | number
 }
 enum FilterType {
   Date = 'date',

@@ -17,7 +17,7 @@ import { mockedRows } from 'utils/mockedData/capacityOverviewData'
 // import { mockedRows } from 'utils/mockedData/personCapacityData'
 
 const Table = props => {
-  const { action, columns, tableActions, tableRowActions, ...rest } = props
+  const { action, columns, tableActions, tableRowActions, comboValue, ...rest } = props
 
   let [searchParams] = useSearchParams()
 
@@ -51,6 +51,18 @@ const Table = props => {
     [columns, tableState.filters]
   )
 
+  useEffect(() => {
+    debugger
+    handleRemoteData(
+      tableState.page,
+      tableState.rowsPerPage,
+      tableState.order,
+      tableState.orderBy,
+      tableState.searchText,
+      tableState.filters
+    )
+  }, [comboValue])
+
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({ page, rowsPerPage, order, orderBy, searchText, filters })
 
@@ -65,6 +77,7 @@ const Table = props => {
             searchText,
             searchFields: tableActions?.searchAction?.searchFields,
             filters,
+            comboValue,
             page,
             rowsPerPage,
             order,
@@ -82,7 +95,8 @@ const Table = props => {
             orderBy,
             searchText,
             searchFields: tableActions.searchAction?.searchFields,
-            filters
+            filters,
+            comboValue
           })
         )
       }
