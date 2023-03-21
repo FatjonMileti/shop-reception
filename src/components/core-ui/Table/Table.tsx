@@ -39,6 +39,8 @@ const Table = props => {
   })
 
   const filtersConfig = useMemo(() => {
+    if (!tableActions?.filters) return []
+
     let params = {}
 
     for (let entry of searchParams.entries()) {
@@ -113,10 +115,8 @@ const Table = props => {
           })
         )
       }
-      // setItems(toTableRowItems(response.list, columns))
-      // setTotalCount(response.page.totalCount)
-      setItems(toTableRowItems(mockedRows, columns))
-      setTotalCount(mockedRows.length)
+      setItems(toTableRowItems(response.list, columns))
+      setTotalCount(response.page.totalCount)
     } catch (error) {
       console.log(error)
       setItems(toTableRowItems(mockedRows, columns))
