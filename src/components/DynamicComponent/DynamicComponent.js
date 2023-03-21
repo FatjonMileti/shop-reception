@@ -13,14 +13,11 @@ const DynamicComponent = props => {
 
   useEffect(() => {
     ;(async () => {
-      // TODO: get the JSON schema; this is a GET to api
       try {
-        // const result = await makeGetRequest(props.JSONSchemaURL)
-        // const result = await makeDesignerGetRequest(
-        //   `/ui-schema?activityId=${props.id}&roleId=GOV_TL`
-        // )
-        // setJSONSchema(JSON.parse(result.jsonSchema.replace(/'+/g, '')))
-        setJSONSchema(JSONSchemaMock)
+        const result = await makeDesignerGetRequest(
+          `/ui-schema?activityId=${props.id}&roleId=GOV_TL`
+        )
+        setJSONSchema(JSON.parse(result.jsonSchema.replace(/'+/g, '')))
       } catch (error) {
         console.log(error)
         setJSONSchema(JSONSchemaMock)
