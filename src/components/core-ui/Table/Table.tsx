@@ -7,7 +7,7 @@ import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import { getRenderedColumns, convertFilterSchemaToFilterConfig } from './helpers'
+import { getRenderedColumns, convertFilterSchemaToFilterConfig, getAllFilters } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
 
 // import { mockedRows } from 'utils/mockedData/teamTimeOffData'
@@ -15,6 +15,8 @@ import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializer
 // import { mockedRows } from 'utils/mockedData/teamAssignmentData'
 import { mockedRows } from 'utils/mockedData/capacityOverviewData'
 // import { mockedRows } from 'utils/mockedData/personCapacityData'
+
+const initialTableState = {}
 
 const Table = props => {
   const { action, columns, tableActions, tableRowActions, comboValue, ...rest } = props
@@ -24,6 +26,8 @@ const Table = props => {
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
+  // This is used to prevent the comboValue to trigger handleRemoteData first time, as it is handled in the lib
+  const [isInitialFetch, setIsInitialFetch] = useState(true)
 
   const [tableState, setTableState] = useImmer({
     page: 0,
@@ -52,19 +56,28 @@ const Table = props => {
   )
 
   useEffect(() => {
-    debugger
-    handleRemoteData(
-      tableState.page,
-      tableState.rowsPerPage,
-      tableState.order,
-      tableState.orderBy,
-      tableState.searchText,
-      tableState.filters
-    )
+    if (!isInitialFetch) {
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
+      )
+    }
   }, [comboValue])
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
-    setTableState({ page, rowsPerPage, order, orderBy, searchText, filters })
+    setTableState({
+      page,
+      rowsPerPage,
+      order,
+      orderBy,
+      searchText,
+      filters
+    })
+    setIsInitialFetch(false)
 
     const url = action.url
 

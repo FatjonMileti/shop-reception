@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { Box } from '@mui/material'
+import { Box, Paper } from '@mui/material'
 import { AsyncSelectInput } from '../AsyncSelectInput'
 import { Table } from '../Table'
 import { SelectOption } from './ComboBoxTableDefinitions'
 import { getDefaultItemValue } from 'utils/helpers'
+import s from './ComboBoxTable.modules.scss'
 
 const ComboBoxTable = props => {
   const { table, combo } = props
@@ -18,10 +19,10 @@ const ComboBoxTable = props => {
 
   return (
     <Box>
-      <Box>
+      <Paper className={s.comboContainer}>
         <AsyncSelectInput {...combo} value={comboValue} setComboValue={setComboValue} />
-      </Box>
-      {comboValue && <Table {...table} comboValue={comboValue} />}
+      </Paper>
+      {comboValue && <Table {...table} comboValue={{ ...comboValue, name: combo.name }} />}
     </Box>
   )
 }

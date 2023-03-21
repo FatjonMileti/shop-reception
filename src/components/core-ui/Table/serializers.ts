@@ -1,8 +1,8 @@
 import { get, set } from 'lodash'
 import { toArrayItemPayload } from 'utils/serializers'
 import { Filter } from './TableDefinitions'
-import { SelectOption } from 'components/core-ui/ComboBoxTable/ComboBoxTableDefinitions'
-import { getFiltersGetUrl, getSearchFieldsGetUrl } from './helpers'
+import { ComboValue } from 'components/core-ui/ComboBoxTable/ComboBoxTableDefinitions'
+import { getFiltersGetUrl, getSearchFieldsGetUrl, getAllFilters } from './helpers'
 
 export const toTableObjects = result =>
   result.map(row => {
@@ -15,9 +15,6 @@ export const toTableObjects = result =>
     })
     return row
   })
-
-const getAllFilters = (filters: Filter[], comboValue: SelectOption) =>
-  filters.concat(comboValue ? [{ name: comboValue.label, value: comboValue.value }] : [])
 
 export const toTableGETUrl = ({
   url,
@@ -34,15 +31,13 @@ export const toTableGETUrl = ({
   searchText: string
   searchFields: string[]
   filters: Filter[]
-  comboValue: SelectOption
+  comboValue: ComboValue
   page: number
   rowsPerPage: number
   order: string
   orderBy: string
 }) => {
   const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
-  const a  = getAllFilters(filters, comboValue)
-  debugger
   const filtersUrl = getFiltersGetUrl(getAllFilters(filters, comboValue))
 
   return `${url}?page=${page}&size=${rowsPerPage}&order=${order}&orderBy=${orderBy}${searchFieldsUrl}${filtersUrl}`
@@ -68,7 +63,7 @@ export const toTablePOSTPayload = ({
   searchText: string,
   searchFields: string[],
   filters: Filter[],
-  comboValue: SelectOption
+  comboValue: ComboValue
 }) => ({
   page,
   rowsPerPage,

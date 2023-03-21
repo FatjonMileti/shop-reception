@@ -3,6 +3,7 @@ import { renderComponent } from 'utils/dynamicRenderingService'
 import { toFiltersUrl } from './serializers'
 import { getDefaultItemValue } from 'utils/helpers'
 import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
+import { ComboValue } from '../ComboBoxTable/ComboBoxTableDefinitions'
 
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): FilterParams => {
   const { variable, defaultValue } = filter
@@ -77,3 +78,6 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
   )
   return `&filterBy=${filterBy}&filterValue=${filterValue}`
 }
+
+export const getAllFilters = (filters: Filter[], comboValue: ComboValue) =>
+  filters.concat(comboValue ? [{ name: comboValue.name, value: comboValue.value }] : [])

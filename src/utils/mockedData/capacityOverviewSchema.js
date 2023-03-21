@@ -13,9 +13,7 @@ export const JSONSchema = {
           type: 'GET'
         },
         variant: 'standard',
-        name: 'person.domain',
-        payloadKey: 'person.domain.id',
-        width: '100%',
+        name: 'domain',
         label: 'Domain',
         defaultValue: '#TOKEN.domain'
       },
