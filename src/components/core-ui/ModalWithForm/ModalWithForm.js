@@ -31,6 +31,7 @@ const ModalWithForm = ({
   modalProps,
   modalTitle,
   formItems,
+  formInfoItems,
   formItemsPerRow,
   formButtons,
   formAction,
@@ -41,6 +42,8 @@ const ModalWithForm = ({
   closeModal
 }) => {
   const [editItem, setEditItem] = useImmer({})
+
+  console.log(formInfoItems)
 
   useEffect(() => {
     if (editedItemId) {
@@ -118,6 +121,7 @@ const ModalWithForm = ({
         <ModalForm
           modalTitle={modalTitle}
           formItems={formItems}
+          formInfoItems={formInfoItems}
           gridSize={gridSize}
           handleInputChange={handleInputChange}
           editItem={editItem}

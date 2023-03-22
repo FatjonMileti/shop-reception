@@ -1,13 +1,15 @@
 import { createElement, useEffect, useState } from 'react'
-import Grid from '@mui/material/Grid'
+import { Grid } from '@mui/material'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Components } from 'utils/dynamicRenderingConstants'
 import { start } from 'utils/rulesService'
 import { getGridSize } from '../helpers'
+import { ModalInfo } from './ModalInfo'
 
 const ModalForm = ({
   modalTitle,
   formItems,
+  formInfoItems,
   gridSize,
   handleInputChange,
   editItem,
@@ -40,6 +42,9 @@ const ModalForm = ({
           <Typography component="h2" variant="medium">
             {modalTitle}
           </Typography>
+        </Grid>
+        <Grid item sx={12} md={12}>
+          <ModalInfo formInfoItems={formInfoItems} editItem={editItem} />
         </Grid>
         {processedFormItems.map(formItem => {
           const { UIComponent, name, formItemsPerRow, ...rest } = formItem

@@ -12,8 +12,8 @@ import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializer
 
 // import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
-// import { mockedRows } from 'utils/mockedData/teamAssignmentData'
-import { mockedRows } from 'utils/mockedData/capacityOverviewData'
+import { mockedRows } from 'utils/mockedData/teamAssignmentData'
+// import { mockedRows } from 'utils/mockedData/capacityOverviewData'
 // import { mockedRows } from 'utils/mockedData/personCapacityData'
 
 const initialTableState = {}
@@ -115,8 +115,10 @@ const Table = props => {
           })
         )
       }
-      setItems(toTableRowItems(response.list, columns))
-      setTotalCount(response.page.totalCount)
+      // setItems(toTableRowItems(response.list, columns))
+      // setTotalCount(response.page.totalCount)
+      setItems(toTableRowItems(mockedRows, columns))
+      setTotalCount(mockedRows.length)
     } catch (error) {
       console.log(error)
       setItems(toTableRowItems(mockedRows, columns))
