@@ -4,11 +4,11 @@
 /********************************************************************************************************************/
 env.APP_GROUP='ro.carrefour'
 env.APP_NAME='dex-front-end'
-env.APP_VERSION='1.0.0-SNAPSHOT'
+env.APP_VERSION='1.0.0'
 /********************************************************************************************************************/
 
 //env.BUILD_ARTIFACT="dex-front-end.jar"
-env.BUILD_DOCKERFILE='./helm/c4-deployment/docker/build.Dockerfile'
+//env.BUILD_DOCKERFILE='./helm/c4-deployment/docker/build.Dockerfile'
 env.BUILD_TEST_COMMAND='yarn'
 
 env.DOCKER_ARTIFACT=true
