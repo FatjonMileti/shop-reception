@@ -9,6 +9,7 @@ import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getRenderedColumns, convertFilterSchemaToFilterConfig, getAllFilters } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
+import s from './Table.modules.scss'
 
 // import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
@@ -131,7 +132,7 @@ const Table = props => {
   const closeNewModal = () => setIsNewModalOpen(false)
 
   return (
-    <Box>
+    <Box className={s.tableContainer}>
       {tableActions?.newAction && (
         <ModalWithForm
           {...tableActions.newAction}
@@ -157,6 +158,8 @@ const Table = props => {
                 title: '',
                 field: 'actions',
                 align: 'right',
+                width: '112px',
+                collapsible: 'true',
                 render: row => (
                   <TableActions
                     itemId={row.id}

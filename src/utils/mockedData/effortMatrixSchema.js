@@ -1,9 +1,11 @@
 export const JSONSchema = {
   UIComponent: 'Box',
+  id: 'the-box',
   className: '',
   children: [
     {
       UIComponent: 'Table',
+      id: 'the-table',
       width: '100%',
       title: 'Effort Matrix',
       action: {
@@ -20,42 +22,48 @@ export const JSONSchema = {
         {
           title: 'Evaluation',
           field: 'evaluation',
-          align: 'left'
+          align: 'center'
         },
         {
           title: 'Analysis',
           field: 'analysis',
-          align: 'left'
+          align: 'center'
         },
         {
           title: 'Design',
           field: 'design',
-          align: 'left'
+          align: 'center',
+          collapsible: true
         },
         {
           title: 'Development',
           field: 'development',
-          align: 'left'
+          align: 'center',
+          collapsible: true
         },
         {
           title: 'System Test',
           field: 'systemTest',
-          align: 'left'
+          align: 'center',
+          collapsible: true
         },
         {
           title: 'UAT',
           field: 'uat',
-          align: 'left'
+          align: 'center',
+          collapsible: true
         },
         {
           title: 'Go-Live',
           field: 'goLive',
-          align: 'left'
+          align: 'center',
+          collapsible: true
         },
         {
           title: 'SOAK',
           field: 'soak',
-          align: 'left'
+          align: 'center',
+          collapsible: true
         }
       ],
       tableActions: {
