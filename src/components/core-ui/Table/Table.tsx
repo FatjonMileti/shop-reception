@@ -11,8 +11,8 @@ import { getRenderedColumns, convertFilterSchemaToFilterConfig, getAllFilters } 
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
 import s from './Table.modules.scss'
 
-import { mockedRows } from 'utils/mockedData/teamTimeOffData'
-// import { mockedRows } from 'utils/mockedData/effortMatrixData'
+// import { mockedRows } from 'utils/mockedData/teamTimeOffData'
+import { mockedRows } from 'utils/mockedData/effortMatrixData'
 // import { mockedRows } from 'utils/mockedData/teamAssignmentData'
 // import { mockedRows } from 'utils/mockedData/capacityOverviewData'
 // import { mockedRows } from 'utils/mockedData/personCapacityData'
