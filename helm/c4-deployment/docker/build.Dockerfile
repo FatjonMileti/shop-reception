@@ -14,6 +14,9 @@ RUN npm --version
 
 RUN npm install -g yarn
 
+RUN @fullscreendigital:registry=https://registry.yarnpkg.com/
+RUN //registry.yarnpkg.com/:_authToken=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
+
 ARG BUILD_TEST_COMMAND
 
 WORKDIR /app
