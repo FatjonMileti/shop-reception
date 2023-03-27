@@ -1,0 +1,12 @@
+.comboContainer {
+  padding: 16px;
+  margin: 16px;
+  & > div {
+    width: 20%;
+  }
+  @media (max-width: 624px) {
+    & > div {
+      width: 100%;
+    }
+  }
+}

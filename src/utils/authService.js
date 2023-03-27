@@ -1,6 +1,6 @@
 import { TOKEN_KEY } from 'utils/constants'
 import { isTokenExpired } from './jwtHelper'
-import { makeCoreGetRequest } from 'utils/api'
+import jwt_decode from 'jwt-decode'
 
 export const oidcConfig = {
   onSignIn: async user => {
@@ -44,11 +44,15 @@ export const setToken = token => {
   authenticate(token)
 }
 
-export const refreshToken = async () => {
-  const token = await makeCoreGetRequest('/v1/users/refresh')
-  setToken(token)
-}
-
 export const logout = () => {
   removeToken()
+}
+
+export const getUserInfo = () => {
+  const token = getToken()
+  try {
+    return token && jwt_decode(token)
+  } catch (e) {
+    console.log('token is not valid')
+  }
 }

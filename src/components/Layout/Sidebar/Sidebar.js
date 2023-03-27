@@ -14,6 +14,7 @@ import { logout } from 'utils/authService'
 import { SidebarHeader } from './SidebarHeader'
 import s from './Sidebar.scss'
 
+// TODO remove this mocked result
 const mockedResult = [
   {
     id: '1',

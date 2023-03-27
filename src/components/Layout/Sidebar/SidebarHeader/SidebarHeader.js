@@ -11,8 +11,8 @@ const SidebarHeader = ({ handleCloseMenu }) => {
         <Avatar alt="Paula Dan" value="PD" />
       </div>
       <div className={s.userName}>Paula Dan</div>
-      <IconButton className={s.logo}>
-        <Close onClick={handleCloseMenu} />
+      <IconButton className={s.logo} onClick={handleCloseMenu}>
+        <Close />
       </IconButton>
     </Box>
   )

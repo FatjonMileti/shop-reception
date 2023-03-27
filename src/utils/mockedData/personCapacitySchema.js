@@ -85,7 +85,8 @@ export const JSONSchema = {
             name: 'project.startDate',
             label: 'Start Date',
             variable: 'capacity.startDate',
-            variant: 'standard'
+            variant: 'standard',
+            required: true
           },
           {
             UIComponent: 'DatePicker',
@@ -93,7 +94,8 @@ export const JSONSchema = {
             name: 'project.endDate',
             label: 'End Date',
             variable: 'capacity.endDate',
-            variant: 'standard'
+            variant: 'standard',
+            required: true
           },
           {
             UIComponent: 'Input',

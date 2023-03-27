@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { AppBar, IconButton } from '@fullscreendigital/carrefour-dex-fe'
+import { AppBar } from '@fullscreendigital/carrefour-dex-fe'
 import { NotificationsNoneOutlined, DragHandleOutlined } from '@mui/icons-material'
 import { DrawerContext } from 'contexts'
 import { Logo } from './Logo'
@@ -35,12 +35,9 @@ const Header = ({ handleOpenMenu }) => {
             ? []
             : [
                 {
+                  onClick: x => handleOpenMenu(x),
                   iconProps: {
-                    icon: (
-                      <IconButton onClick={handleOpenMenu}>
-                        <DragHandleOutlined />
-                      </IconButton>
-                    ),
+                    icon: (<DragHandleOutlined />),
                     iconButtonProps: { size: 'large' }
                   }
                 }

@@ -1,6 +1,8 @@
-import get from 'lodash/get'
-import set from 'lodash/set'
-import { toItemPayload } from 'utils/serializers'
+import { get, set } from 'lodash'
+import { toArrayItemPayload } from 'utils/serializers'
+import { Filter } from './TableDefinitions'
+import { ComboValue } from 'components/core-ui/ComboBoxTable/ComboBoxTableDefinitions'
+import { getFiltersGetUrl, getSearchFieldsGetUrl, getAllFilters } from './helpers'
 
 export const toTableObjects = result =>
   result.map(row => {
@@ -17,26 +19,26 @@ export const toTableObjects = result =>
 export const toTableGETUrl = ({
   url,
   searchText,
-  tableActions,
-  tableFilters,
+  searchFields,
+  filters,
+  comboValue,
   page,
   rowsPerPage,
   order,
   orderBy
+}: {
+  url: string
+  searchText: string
+  searchFields: string[]
+  filters: Filter[]
+  comboValue: ComboValue
+  page: number
+  rowsPerPage: number
+  order: string
+  orderBy: string
 }) => {
-  let searchFieldsUrl = ''
-  if (searchText) {
-    tableActions.searchAction.searchFields.map(field => {
-      searchFieldsUrl = `${searchFieldsUrl}&${field}=${searchText}`
-    })
-  }
-
-  let filtersUrl = ''
-  if (tableFilters) {
-    Object.keys(tableFilters).map(key => {
-      filtersUrl = `${filtersUrl}&${key}=${tableFilters[key]}`
-    })
-  }
+  const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
+  const filtersUrl = getFiltersGetUrl(getAllFilters(filters, comboValue))
 
   return `${url}?page=${page}&size=${rowsPerPage}&order=${order}&orderBy=${orderBy}${searchFieldsUrl}${filtersUrl}`
 }
@@ -51,14 +53,24 @@ export const toTablePOSTPayload = ({
   orderBy,
   searchText,
   searchFields,
-  tableFilters
+  filters,
+  comboValue
+}: {
+  page: number,
+  rowsPerPage: number
+  order: string,
+  orderBy: string,
+  searchText: string,
+  searchFields: string[],
+  filters: Filter[],
+  comboValue: ComboValue
 }) => ({
   page,
   rowsPerPage,
   order,
   orderBy,
   ...toSearchFieldsPayload(searchFields, searchText),
-  ...toItemPayload(tableFilters)
+  ...toArrayItemPayload(getAllFilters(filters, comboValue))
 })
 
 export const toTableRowItems = (items, columns) => {
@@ -75,9 +87,9 @@ export const toTableRowItems = (items, columns) => {
 
 export const toFiltersUrl = (tableFilters, linkFilters) => {
   let url = ''
-  Object.keys(tableFilters).map(key => {
-    if (linkFilters.includes(key)) {
-      url = `${url}&${key}=${tableFilters[key]}`
+  tableFilters.map(filter => {
+    if (linkFilters.includes(filter.name)) {
+      url = `${url}&${filter.name}=${filter.value}`
     }
   })
   return url

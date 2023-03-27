@@ -1,16 +1,15 @@
+import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useImmer } from 'use-immer'
-import dayjs from 'dayjs'
 import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
-import { renderComponent } from 'utils/dynamicRenderingService'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import { getInitialTableFilters, getRenderedColumns } from './helpers'
+import { getRenderedColumns, convertFilterSchemaToFilterConfig, getAllFilters } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
-import s from './Table.scss'
+import s from './Table.modules.scss'
 
 // import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 import { mockedRows } from 'utils/mockedData/effortMatrixData'
@@ -18,43 +17,70 @@ import { mockedRows } from 'utils/mockedData/effortMatrixData'
 // import { mockedRows } from 'utils/mockedData/capacityOverviewData'
 // import { mockedRows } from 'utils/mockedData/personCapacityData'
 
+const initialTableState = {}
+
 const Table = props => {
-  const { action, columns, tableActions, tableRowActions, ...rest } = props
+  const { action, columns, tableActions, tableRowActions, comboValue, ...rest } = props
+
   let [searchParams] = useSearchParams()
 
-  const initialTableFilters = useMemo(
-    () =>
-      tableActions?.filters ? getInitialTableFilters(searchParams, tableActions?.filters) : null,
-    [searchParams, tableActions?.filters]
-  )
-
   const [items, setItems] = useState([])
-  const [totalCount, setTotalCount] = useState()
-  const [searchValue, setSearchValue] = useState('')
-  const [currentPage, setCurrentPage] = useState(0)
-  const [currentRowsPerPage, setCurrentRowsPerPage] = useState(rest.rowsPerPage || 10)
-  const [currentOrder, setCurrentOrder] = useState(rest.order || 'asc')
-  const [currentOrderBy, setCurrentOrderBy] = useState(rest.orderBy || '')
+  const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
-  const [tableFilters, setTableFilters] = useImmer(initialTableFilters)
+  // This is used to prevent the comboValue to trigger handleRemoteData first time, as it is handled in the lib
+  const [isInitialFetch, setIsInitialFetch] = useState(true)
 
-  useEffect(() => {
-    ;(async () => {
-      handleRemoteData(0, rest.rowsPerPage || 10, rest.order || 'asc', rest.orderBy || '')
-    })()
-  }, [tableFilters])
+  const [tableState, setTableState] = useImmer({
+    page: 0,
+    rowsPerPage: rest.rowsPerPage ?? 10,
+    order: rest.order ?? 'asc',
+    orderBy: rest.orderBy ?? '',
+    searchText: '',
+    filters: []
+  })
+
+  const filtersConfig = useMemo(() => {
+    if (!tableActions?.filters) return []
+
+    let params = {}
+
+    for (let entry of searchParams.entries()) {
+      const [name, value] = entry
+      params[name] = value
+    }
+    return (
+      tableActions?.filters.map(filter => convertFilterSchemaToFilterConfig(filter, params)) ?? []
+    )
+  }, [tableActions?.filters])
 
   const renderedColumns = useMemo(
-    () => getRenderedColumns(columns, tableFilters),
-    [columns, tableFilters]
+    () => getRenderedColumns(columns, tableState.filters),
+    [columns, tableState.filters]
   )
 
-  const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText) => {
-    setCurrentPage(page)
-    setCurrentRowsPerPage(rowsPerPage)
-    setCurrentOrder(order)
-    setCurrentOrderBy(orderBy)
-    setSearchValue(searchText)
+  useEffect(() => {
+    if (!isInitialFetch) {
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
+      )
+    }
+  }, [comboValue])
+
+  const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
+    setTableState({
+      page,
+      rowsPerPage,
+      order,
+      orderBy,
+      searchText,
+      filters
+    })
+    setIsInitialFetch(false)
 
     const url = action.url
 
@@ -65,8 +91,9 @@ const Table = props => {
           toTableGETUrl({
             url,
             searchText,
-            tableActions,
-            tableFilters,
+            searchFields: tableActions?.searchAction?.searchFields,
+            filters,
+            comboValue,
             page,
             rowsPerPage,
             order,
@@ -84,7 +111,8 @@ const Table = props => {
             orderBy,
             searchText,
             searchFields: tableActions.searchAction?.searchFields,
-            tableFilters
+            filters,
+            comboValue
           })
         )
       }
@@ -101,12 +129,6 @@ const Table = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
-  const handleFilterChange = (value, name) => {
-    setTableFilters(draft => {
-      draft[name] = value
-    })
-  }
-
   return (
     <Box className={s.tableContainer}>
       {tableActions?.newAction && (
@@ -114,11 +136,12 @@ const Table = props => {
           {...tableActions.newAction}
           additionalAction={() =>
             handleRemoteData(
-              currentPage,
-              currentRowsPerPage,
-              currentOrder,
-              currentOrderBy,
-              searchValue
+              tableState.page,
+              tableState.rowsPerPage,
+              tableState.order,
+              tableState.orderBy,
+              tableState.searchText,
+              tableState.filters
             )
           }
           isModalOpen={isNewModalOpen}
@@ -133,6 +156,8 @@ const Table = props => {
                 title: '',
                 field: 'actions',
                 align: 'right',
+                width: '112px',
+                collapsible: 'true',
                 render: row => (
                   <TableActions
                     itemId={row.id}
@@ -140,11 +165,12 @@ const Table = props => {
                     deleteAction={tableRowActions.deleteAction}
                     additionalAction={() =>
                       handleRemoteData(
-                        currentPage,
-                        currentRowsPerPage,
-                        currentOrder,
-                        currentOrderBy,
-                        searchValue
+                        tableState.page,
+                        tableState.rowsPerPage,
+                        tableState.order,
+                        tableState.orderBy,
+                        tableState.searchText,
+                        tableState.filters
                       )
                     }
                   />
@@ -163,6 +189,7 @@ const Table = props => {
         }
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={handleRemoteData}
+        filters={filtersConfig}
       />
     </Box>
   )

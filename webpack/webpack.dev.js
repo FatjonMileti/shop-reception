@@ -1,6 +1,7 @@
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const commonPaths = require('./paths')
 const path = require('path')
+const Dotenv = require('dotenv-webpack')
 
 // eslint-disable-next-line no-undef
 module.exports = () => ({
@@ -46,14 +47,13 @@ module.exports = () => ({
                 }
 
                 var correctedPath = path.resolve(commonPaths.root, 'src/styles/_variables.scss')
-                correctedPath = correctedPath.replace(/\\/g, '/');
+                correctedPath = correctedPath.replace(/\\/g, '/')
 
                 return `
                 @import "${correctedPath}";
 
                 ${content}
               `
-
               }
             }
           }
@@ -77,5 +77,5 @@ module.exports = () => ({
     hot: true,
     historyApiFallback: true
   },
-  plugins: [new ReactRefreshWebpackPlugin()]
+  plugins: [new ReactRefreshWebpackPlugin(), new Dotenv({ path: '.env.dev' })]
 })
