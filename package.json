@@ -5,8 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack serve --node-env=development --env environment=development",
-    "build:dev": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=uat",
-    "build": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=production",
+    "start:dev": "webpack serve --node-env=development --env environment=development",
+    "build:dev": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=dev",
+    "build:prod": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=production",
     "build:stats": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=production --json > stats.json",
     "clean": "rm -rf node_modules && rm yarn.lock",
     "clean:start": "yarn clean && yarn && yarn start",
@@ -14,7 +15,7 @@
     "build:deploy:dev": "yarn clean && yarn && yarn build:dev",
     "win-build:deploy": "yarn win-clean && yarn && yarn win-build",
     "win-clean": "del /F /Q node_modules",
-    "win-build": "set NODE_OPTIONS=--max_old_space_size=4096 && webpack --node-env=production --env environment=production",
+    "win-build:prod": "set NODE_OPTIONS=--max_old_space_size=4096 && webpack --node-env=production --env environment=production",
     "lint:check": "eslint src/.; exit 0",
     "lint:fix": "eslint --fix src/.; exit 0",
     "tsc": "tsc"

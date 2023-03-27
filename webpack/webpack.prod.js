@@ -7,6 +7,7 @@ const path = require('path')
 const CompressionPlugin = require('compression-webpack-plugin')
 const zopfli = require('@gfx/zopfli')
 const TerserPlugin = require('terser-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 const terserJS = new TerserPlugin({
   parallel: true,
@@ -109,7 +110,8 @@ module.exports = env => ({
     new MiniCssExtractPlugin({
       filename: `${commonPaths.cssFolder}/[name].css`,
       chunkFilename: '[id].css'
-    })
+    }),
+    new Dotenv({ path: '.env.prod' })
   ],
   devtool: 'source-map'
 })
