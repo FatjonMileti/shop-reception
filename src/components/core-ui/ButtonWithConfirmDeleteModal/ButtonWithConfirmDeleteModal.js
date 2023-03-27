@@ -53,8 +53,8 @@ const ButtonWithConfirmDeleteModal = ({
         onClose={closeModal}
       >
         <Box sx={{ ...sx, ...(modalProps ? modalProps.sx : {}) }}>
-          <IconButton style={{ position: 'absolute', top: '1rem', right: '1.5rem' }} withBackground>
-            <Close onClick={closeModal} />
+          <IconButton style={{ position: 'absolute', top: '1rem', right: '1.5rem' }} withBackground onClick={closeModal}>
+            <Close />
           </IconButton>
           <Grid container spacing={4}>
             <Grid item xs={12}>

@@ -110,8 +110,8 @@ const ModalWithForm = ({
           ...(modalProps ? modalProps.sx : {})
         }}
       >
-        <IconButton style={{ position: 'absolute', top: '1rem', right: '1.5rem' }} withBackground>
-          <Close onClick={closeModalAndResetForm} />
+        <IconButton style={{ position: 'absolute', top: '1rem', right: '1.5rem' }} withBackground onClick={closeModalAndResetForm}>
+          <Close />
         </IconButton>
         <ModalForm
           modalTitle={modalTitle}
