@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
+import { toAsyncSelectOptions } from './serializers'
 
-const mockedPersons = [
-  { value: '1', label: 'Andrei Ionescu' },
-  { value: '2', label: 'Mihai Popescu' },
-  { value: '3', label: 'Paula Dan' }
+// const mockedData = [
+//   { value: '1', label: 'Andrei Ionescu' },
+//   { value: '2', label: 'Mihai Popescu' },
+//   { value: '3', label: 'Paula Dan' }
+// ]
+
+const mockedData = [
+  { value: '1', label: 'Domain 1' },
+  { value: '2', label: 'Domain 2' },
+  { value: '3', label: 'Domain 3' }
 ]
 
 const AsyncSelectInput = props => {
@@ -15,18 +22,26 @@ const AsyncSelectInput = props => {
 
   useEffect(() => {
     ;(async () => {
-      // TODO: get the select data; this is a GET to api
       try {
-        const results = await makeCoreGetRequest(action.url)
-        setValues(results)
+        const result = await makeCoreGetRequest(action.url)
+        const { valueKey, labelKey } = action
+        setValues(toAsyncSelectOptions(result.list, valueKey, labelKey))
       } catch (error) {
         console.log(error)
-        setValues(mockedPersons)
+        setValues(mockedData)
       }
     })()
-  }, [])
+  }, [action.url])
 
-  return <Input {...rest} type="select" values={values} />
+  return (
+    <Input
+      {...rest}
+      type="select"
+      values={values}
+      value={props.value ?? ''}
+      onChange={props.onChange}
+    />
+  )
 }
 
 export default AsyncSelectInput

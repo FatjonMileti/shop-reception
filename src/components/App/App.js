@@ -46,7 +46,12 @@ const App = () => {
         >
           <Routes>
             {/* private routes */}
-            <Route path={URLS.AUTH_HOME} element={<PrivateRoute component={Home} modules={modules} setSubdomainId={setSubdomainId} />} />
+            <Route
+              path={URLS.AUTH_HOME}
+              element={
+                <PrivateRoute component={Home} modules={modules} setSubdomainId={setSubdomainId} />
+              }
+            />
             {applicationModulesPages.map(page =>
               createRoute({ ...page, applicationPages, setApplicationPages }, ServiceDomain)
             )}

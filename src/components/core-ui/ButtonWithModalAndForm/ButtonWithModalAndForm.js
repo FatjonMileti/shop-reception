@@ -7,6 +7,7 @@ const ButtonWithModalAndForm = ({
   modalProps,
   modalTitle,
   formItems,
+  formInfoItems,
   formItemsPerRow,
   formButtons,
   formAction,
@@ -27,6 +28,7 @@ const ButtonWithModalAndForm = ({
         modalProps={modalProps}
         modalTitle={modalTitle}
         formItems={formItems}
+        formInfoItems={formInfoItems}
         formItemsPerRow={formItemsPerRow}
         formButtons={formButtons}
         formAction={formAction}

@@ -1,13 +1,16 @@
 import { createElement, useEffect, useState } from 'react'
-import Grid from '@mui/material/Grid'
+import { Grid } from '@mui/material'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Components } from 'utils/dynamicRenderingConstants'
 import { start } from 'utils/rulesService'
 import { getGridSize } from '../helpers'
+import { ModalInfo } from './ModalInfo'
+import { get } from 'lodash'
 
 const ModalForm = ({
   modalTitle,
   formItems,
+  formInfoItems,
   gridSize,
   handleInputChange,
   editItem,
@@ -41,10 +44,16 @@ const ModalForm = ({
             {modalTitle}
           </Typography>
         </Grid>
+        {!!formInfoItems?.length && (
+          <Grid item sx={12} md={12}>
+            <ModalInfo formInfoItems={formInfoItems} editItem={editItem} />
+          </Grid>
+        )}
+
         {processedFormItems.map(formItem => {
           const { UIComponent, name, formItemsPerRow, ...rest } = formItem
           const key = rest.payloadKey || name
-          const value = editItem[key] ? editItem[key] : rest.type === 'date' ? undefined : ''
+          const value = get(editItem, key) ?? (rest.type === 'date' ? undefined : '')
 
           return (
             <Grid
@@ -55,14 +64,15 @@ const ModalForm = ({
             >
               {createElement(Components[UIComponent], {
                 ...rest,
+                value,
+                ...(rest.type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
                 onChange: arg => {
                   rest.type === 'date'
-                    ? handleInputChange(arg, name)
+                    ? handleInputChange(arg, name, rest.type)
                     : rest.type === 'checkbox'
-                    ? handleInputChange(arg.target.checked, key)
-                    : handleInputChange(arg.target.value, key)
-                },
-                value
+                    ? handleInputChange(arg.target.checked, key, rest.type)
+                    : handleInputChange(arg.target.value, key, rest.type)
+                }
               })}
             </Grid>
           )

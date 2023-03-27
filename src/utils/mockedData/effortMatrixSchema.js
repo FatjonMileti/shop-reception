@@ -1,9 +1,11 @@
 export const JSONSchema = {
   UIComponent: 'Box',
+  id: 'the-box',
   className: '',
   children: [
     {
       UIComponent: 'Table',
+      id: 'the-table',
       width: '100%',
       title: 'Effort Matrix',
       action: {
@@ -11,51 +13,65 @@ export const JSONSchema = {
         type: 'GET'
       },
       hideCheckbox: true,
+      stickyRatio: 0.25,
       columns: [
         {
           title: '',
           field: 'role',
-          align: 'left'
+          align: 'left',
+          sticky: true
         },
         {
           title: 'Evaluation',
-          field: 'evaluation',
-          align: 'left'
+          field: 'evaluationPhase',
+          align: 'center',
+          sticky: true,
+          weight: 2
         },
         {
           title: 'Analysis',
-          field: 'analysis',
-          align: 'left'
+          field: 'analysisPhase',
+          align: 'center',
+          sticky: true,
+          width: '20px'
         },
         {
           title: 'Design',
-          field: 'design',
-          align: 'left'
+          field: 'designPhase',
+          align: 'center',
+          collapsible: true
         },
         {
           title: 'Development',
-          field: 'development',
-          align: 'left'
+          field: 'developmentPhase',
+          align: 'center',
+          collapsible: true,
+          width: '20px'
         },
         {
           title: 'System Test',
-          field: 'systemTest',
-          align: 'left'
+          field: 'systemTestPhase',
+          align: 'center',
+          collapsible: true,
+          weight: 0.5
         },
         {
           title: 'UAT',
-          field: 'uat',
-          align: 'left'
+          field: 'uatPhase',
+          align: 'center',
+          collapsible: true
         },
         {
           title: 'Go-Live',
-          field: 'goLive',
-          align: 'left'
+          field: 'goLivePhase',
+          align: 'center',
+          collapsible: true
         },
         {
           title: 'SOAK',
-          field: 'soak',
-          align: 'left'
+          field: 'soakPhase',
+          align: 'center',
+          collapsible: true
         }
       ],
       tableActions: {
@@ -71,15 +87,15 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'select',
               values: [
-                { value: 'itPM', label: 'IT PM' },
-                { value: 'businessAnalyst', label: 'Business Analyst' },
-                { value: 'systemAnalyst', label: 'System Analyst' },
-                { value: 'solutionArchitect', label: 'Solution Architect' },
-                { value: 'developer', label: 'Developer' },
-                { value: 'qaOfficer', label: 'QA Officer' },
-                { value: 'devOps', label: 'DevOps' },
-                { value: 'supportEngineer', label: 'Support Engineer' },
-                { value: 'technicalLead', label: 'Technical Lead' }
+                { value: 'IT PM', label: 'IT PM' },
+                { value: 'Business Analyst', label: 'Business Analyst' },
+                { value: 'System Analyst', label: 'System Analyst' },
+                { value: 'Solution Architect', label: 'Solution Architect' },
+                { value: 'Developer', label: 'Developer' },
+                { value: 'QA Officer', label: 'QA Officer' },
+                { value: 'DevOps', label: 'DevOps' },
+                { value: 'Support Engineer', label: 'Support Engineer' },
+                { value: 'Technical Lead', label: 'Technical Lead' }
               ],
               name: 'role',
               variant: 'standard',
@@ -91,7 +107,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'evaluation',
+              name: 'evaluationPhase',
               width: '100%',
               label: 'Evaluation',
               infoIcon: 'Percent'
@@ -100,7 +116,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'analysis',
+              name: 'analysisPhase',
               width: '100%',
               label: 'Analysis',
               infoIcon: 'Percent'
@@ -109,7 +125,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'design',
+              name: 'designPhase',
               width: '100%',
               label: 'Design',
               infoIcon: 'Percent'
@@ -118,7 +134,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'development',
+              name: 'developmentPhase',
               width: '100%',
               label: 'Development',
               infoIcon: 'Percent'
@@ -127,7 +143,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'systemTest',
+              name: 'systemTestPhase',
               width: '100%',
               label: 'System Test',
               infoIcon: 'Percent'
@@ -136,7 +152,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'uat',
+              name: 'uatPhase',
               width: '100%',
               label: 'UAT',
               infoIcon: 'Percent'
@@ -145,7 +161,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'goLive',
+              name: 'goLivePhase',
               width: '100%',
               label: 'Go-Live',
               infoIcon: 'Percent'
@@ -154,7 +170,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'soak',
+              name: 'soakPhase',
               width: '100%',
               label: 'SOAK',
               infoIcon: 'Percent'
@@ -189,22 +205,13 @@ export const JSONSchema = {
           updateUrlType: 'PUT',
           getUrl: '/effortMatrix',
           getUrlType: 'GET',
+          formInfoItems: [{ name: 'role', label: 'Role' }],
           formItems: [
             {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'role',
-              width: '100%',
-              label: 'Role',
-              readonly: true,
-              formItemsPerRow: 1
-            },
-            {
-              UIComponent: 'Input',
-              type: 'text',
-              variant: 'standard',
-              name: 'evaluation',
+              name: 'evaluationPhase',
               width: '100%',
               label: 'Evaluation',
               infoIcon: 'Percent'
@@ -213,7 +220,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'analysis',
+              name: 'analysisPhase',
               width: '100%',
               label: 'Analysis',
               infoIcon: 'Percent'
@@ -222,7 +229,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'design',
+              name: 'designPhase',
               width: '100%',
               label: 'Design',
               infoIcon: 'Percent'
@@ -231,7 +238,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'development',
+              name: 'developmentPhase',
               width: '100%',
               label: 'Development',
               infoIcon: 'Percent'
@@ -240,7 +247,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'systemTest',
+              name: 'systemTestPhase',
               width: '100%',
               label: 'System Test',
               infoIcon: 'Percent'
@@ -249,7 +256,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'uat',
+              name: 'uatPhase',
               width: '100%',
               label: 'UAT',
               infoIcon: 'Percent'
@@ -258,7 +265,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'goLive',
+              name: 'goLivePhase',
               width: '100%',
               label: 'Go-Live',
               infoIcon: 'Percent'
@@ -267,7 +274,7 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'text',
               variant: 'standard',
-              name: 'soak',
+              name: 'soakPhase',
               width: '100%',
               label: 'SOAK',
               infoIcon: 'Percent'

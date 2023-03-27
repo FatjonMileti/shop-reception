@@ -10,6 +10,7 @@ const TableActions = ({ itemId, editAction, deleteAction, additionalAction }) =>
           buttonProps={{ children: <Edit /> }}
           modalTitle="Edit"
           formItems={editAction.formItems}
+          formInfoItems={editAction.formInfoItems}
           formItemsPerRow={editAction.formItemsPerRow}
           formButtons={editAction.formButtons}
           formAction={{ type: editAction.updateUrlType, url: editAction.updateUrl }}

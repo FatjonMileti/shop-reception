@@ -1,0 +1,21 @@
+.list {
+  border: 1px solid #DEE3F1;
+  background-color: #FBFBFD;
+  padding: 12px;
+  padding-bottom: 0;
+  border-radius: 8px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.label {
+  color: #666666;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 17px;
+}
