@@ -13,21 +13,27 @@ export const JSONSchema = {
         type: 'GET'
       },
       hideCheckbox: true,
+      stickyRatio: 0.25,
       columns: [
         {
           title: '',
           field: 'role',
-          align: 'left'
+          align: 'left',
+          sticky: true
         },
         {
           title: 'Evaluation',
           field: 'evaluation',
-          align: 'center'
+          align: 'center',
+          sticky: true,
+          weight: 2
         },
         {
           title: 'Analysis',
           field: 'analysis',
-          align: 'center'
+          align: 'center',
+          sticky: true,
+          width: '20px'
         },
         {
           title: 'Design',
@@ -39,13 +45,15 @@ export const JSONSchema = {
           title: 'Development',
           field: 'development',
           align: 'center',
-          collapsible: true
+          collapsible: true,
+          width: '20px'
         },
         {
           title: 'System Test',
           field: 'systemTest',
           align: 'center',
-          collapsible: true
+          collapsible: true,
+          weight: 0.5
         },
         {
           title: 'UAT',
