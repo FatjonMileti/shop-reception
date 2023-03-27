@@ -11,9 +11,9 @@ import { getRenderedColumns, convertFilterSchemaToFilterConfig, getAllFilters } 
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
 import s from './Table.modules.scss'
 
-// import { mockedRows } from 'utils/mockedData/teamTimeOffData'
+import { mockedRows } from 'utils/mockedData/teamTimeOffData'
 // import { mockedRows } from 'utils/mockedData/effortMatrixData'
-import { mockedRows } from 'utils/mockedData/teamAssignmentData'
+// import { mockedRows } from 'utils/mockedData/teamAssignmentData'
 // import { mockedRows } from 'utils/mockedData/capacityOverviewData'
 // import { mockedRows } from 'utils/mockedData/personCapacityData'
 
@@ -116,10 +116,8 @@ const Table = props => {
           })
         )
       }
-      // setItems(toTableRowItems(response.list, columns))
-      // setTotalCount(response.page.totalCount)
-      setItems(toTableRowItems(mockedRows, columns))
-      setTotalCount(mockedRows.length)
+      setItems(toTableRowItems(response.list, columns))
+      setTotalCount(response.page.totalCount)
     } catch (error) {
       console.log(error)
       setItems(toTableRowItems(mockedRows, columns))

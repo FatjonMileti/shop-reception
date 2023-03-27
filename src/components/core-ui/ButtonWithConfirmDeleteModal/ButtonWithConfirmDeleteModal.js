@@ -34,7 +34,6 @@ const ButtonWithConfirmDeleteModal = ({
   const closeModal = () => setIsModalOpen(false)
 
   const deleteItem = async () => {
-    // TODO: save the new data; this is a POST to api
     try {
       await makeCoreDeleteRequest(`${deleteActionUrl}/${deletedItemId}`)
     } catch (error) {

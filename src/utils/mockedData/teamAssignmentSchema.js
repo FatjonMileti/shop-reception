@@ -29,7 +29,7 @@ export const JSONSchema = {
         },
         {
           title: 'Assigned Project Key',
-          field: 'projectKey',
+          field: 'project.key',
           align: 'left'
         },
         {
@@ -52,36 +52,9 @@ export const JSONSchema = {
           formInfoItems: [
             { name: 'teamMember.name', label: 'Person' },
             { name: 'role', label: 'Role' },
-            { name: 'projectKey', label: 'Project Key' }
+            { name: 'project.key', label: 'Project Key' }
           ],
           formItems: [
-            // {
-            //   UIComponent: 'Input',
-            //   type: 'text',
-            //   readonly: true,
-            //   variant: 'standard',
-            //   name: 'teamMember.name',
-            //   width: '100%',
-            //   label: 'Person'
-            // },
-            // {
-            //   UIComponent: 'Input',
-            //   type: 'text',
-            //   readonly: true,
-            //   variant: 'standard',
-            //   name: 'role',
-            //   width: '100%',
-            //   label: 'Role'
-            // },
-            // {
-            //   UIComponent: 'Input',
-            //   type: 'text',
-            //   readonly: true,
-            //   variant: 'standard',
-            //   name: 'projectKey',
-            //   width: '100%',
-            //   label: 'Project Key'
-            // },
             {
               UIComponent: 'DatePicker',
               type: 'date',

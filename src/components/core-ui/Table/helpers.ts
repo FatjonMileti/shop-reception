@@ -5,8 +5,11 @@ import { getDefaultItemValue } from 'utils/helpers'
 import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
 import { ComboValue } from '../ComboBoxTable/ComboBoxTableDefinitions'
 
-const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): FilterParams => {
+const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): string => {
   const { variable, defaultValue } = filter
+
+  if (!variable || !defaultValue) return ''
+
   return searchParams[variable] ?? getDefaultItemValue(defaultValue)
 }
 
@@ -46,11 +49,12 @@ export const convertFilterSchemaToFilterConfig = (
   filterSchema: FilterSchema,
   searchParams: FilterParams
 ) => {
-  const { name, type, defaultValue, label, required, ...componentProps } = filterSchema
+  const { name, defaultValue, label, required, ...componentProps } = filterSchema
+
   return {
     name,
     label,
-    type,
+    type: componentProps.type,
     required,
     value: getInitialFilterParam(searchParams, filterSchema),
     filter: renderComponent({ ...componentProps, label })
@@ -80,4 +84,6 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
 }
 
 export const getAllFilters = (filters: Filter[], comboValue: ComboValue) =>
-  filters.concat(comboValue ? [{ name: comboValue.name, value: comboValue.value }] : [])
+  filters
+    .filter(filter => filter.value)
+    .concat(comboValue ? [{ name: comboValue.name, value: comboValue.value }] : [])

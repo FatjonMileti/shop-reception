@@ -13,7 +13,7 @@ export const JSONSchema = {
           type: 'GET'
         },
         variant: 'standard',
-        name: 'domain',
+        name: 'teamMember.domain',
         label: 'Domain',
         defaultValue: '#TOKEN.domain'
       },

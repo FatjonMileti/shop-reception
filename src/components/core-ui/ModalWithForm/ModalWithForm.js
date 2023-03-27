@@ -11,9 +11,10 @@ import {
   makeCorePutRequest,
   makeCorePatchRequest
 } from 'utils/api'
-import { getItemDefaults } from 'utils/helpers'
+import { getItemDefaults, formatPayloadDate } from 'utils/helpers'
 import { toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
+import { set } from 'lodash'
 
 const sx = {
   position: 'absolute',
@@ -43,10 +44,8 @@ const ModalWithForm = ({
 }) => {
   const [editItem, setEditItem] = useImmer({})
 
-  console.log(formInfoItems)
-
   useEffect(() => {
-    if (editedItemId) {
+    if (isModalOpen && editedItemId) {
       ;(async () => {
         try {
           const result = await makeCoreGetRequest(`${editedItemUrl}/${editedItemId}`)
@@ -58,19 +57,15 @@ const ModalWithForm = ({
     } else {
       setEditItem(getItemDefaults(formItems))
     }
-  }, [editedItemId, formItems, editedItemUrl, setEditItem])
+  }, [isModalOpen, editedItemId, formItems, editedItemUrl, setEditItem])
 
   const modalWidth = useMemo(() => getModalWidth(formItemsPerRow), [formItemsPerRow])
 
   const gridSize = useMemo(() => getGridSize(formItemsPerRow), [formItemsPerRow])
 
-  const handleInputChange = (value, name) => {
+  const handleInputChange = (value, name, type) => {
     setEditItem(draft => {
-      draft[name] = value
-      // TODO remove this
-      if (draft[`${name}Value`]) {
-        draft[`${name}Value`] = value
-      }
+      set(draft, name, type === 'date' ? formatPayloadDate(value) : value)
     })
   }
 
@@ -82,10 +77,10 @@ const ModalWithForm = ({
         await makeCorePostRequest(`${formAction.url}`, payload)
       }
       if (formAction.type === 'PUT') {
-        await makeCorePutRequest(`${formAction.url}/${editItem.id}`, payload)
+        await makeCorePutRequest(`${formAction.url}`, payload)
       }
       if (formAction.type === 'PATCH') {
-        await makeCorePatchRequest(`${formAction.url}/${editItem.id}`, payload)
+        await makeCorePatchRequest(`${formAction.url}`, payload)
       }
     } catch (error) {
       console.log(error)
