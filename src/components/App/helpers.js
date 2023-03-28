@@ -30,5 +30,29 @@ export const mockedPages = [
     routeURL: '/teamDayOffManagement',
     routePathExact: true,
     submoduleId: '1'
+  },
+  {
+    id: '3',
+    name: 'Chuchu',
+    icon: 'HowToRegOutlined',
+    routeURL: '/teamAssignment',
+    routePathExact: true,
+    submoduleId: '1'
+  },
+  {
+    id: '4',
+    name: 'HMAC',
+    icon: 'TimerOffOutlined',
+    routeURL: '/teamDayOffManagement',
+    routePathExact: true,
+    submoduleId: '1'
+  },
+  {
+    id: '5',
+    name: 'Extra Stuff',
+    icon: 'HowToRegOutlined',
+    routeURL: '/teamAssignment',
+    routePathExact: true,
+    submoduleId: '1'
   }
 ]
