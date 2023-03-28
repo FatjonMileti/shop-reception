@@ -1,4 +1,4 @@
-FROM node:19
+FROM node:19 as  build
 
 ENV NODE_VERSION 19.8.1
 
@@ -12,6 +12,8 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version
 
+RUN rm -rf /build
+
 RUN npm install -g yarn
 
 RUN npm config set @fullscreendigital:registry=https://registry.yarnpkg.com/
@@ -23,3 +25,4 @@ WORKDIR /app
 ADD . /app
 
 RUN /bin/bash -c "${BUILD_TEST_COMMAND}"
+
