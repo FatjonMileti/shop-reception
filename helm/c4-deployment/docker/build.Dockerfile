@@ -1,28 +1,19 @@
-FROM node:19 as  build
+FROM node:19 as  builder
 
 ENV NODE_VERSION 19.8.1
-
-RUN apt install -y curl
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-ENV NVM_DIR=/root/.nvm
-RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
-ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
-RUN node --version
-RUN npm --version
-
-RUN rm -rf /build
-
-RUN npm install -g yarn
 
 RUN npm config set @fullscreendigital:registry=https://registry.yarnpkg.com/
 RUN npm config set //registry.yarnpkg.com/:_authToken=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
 
 ARG BUILD_TEST_COMMAND
 
-WORKDIR /app
-ADD . /app
+RUN mkdir -p /home/node/app
 
-RUN /bin/bash -c "${BUILD_TEST_COMMAND}"
+WORKDIR /home/node/app
 
+COPY . .
+
+RUN yarn clean && yarn install
+RUN yarn build:prod
+
+CMD ["yarn", "start"]
