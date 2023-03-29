@@ -12,3 +12,8 @@
 
 ## Build prod:
 - run: `yarn build`
+
+
+## docker local build and run
+* docker build . -f helm/c4-deployment/docker/build.Dockerfile -t dex-front-end
+* docker run -p 8085:80 --name dex-front-end-crf -it dex-front-end
