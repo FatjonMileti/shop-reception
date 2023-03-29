@@ -60,7 +60,7 @@ const ModalForm = ({
               item
               key={formItem.name}
               xs={12}
-              md={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}
+              sm={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}
             >
               {createElement(Components[UIComponent], {
                 ...rest,

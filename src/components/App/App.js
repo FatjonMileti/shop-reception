@@ -53,7 +53,7 @@ const App = () => {
               }
             />
             {applicationModulesPages.map(page =>
-              createRoute({ ...page, applicationPages, setApplicationPages }, ServiceDomain)
+              createRoute({ ...page, subdomainId, modules, applicationPages }, ServiceDomain)
             )}
             {applicationPages.map(page => createRoute(page, DynamicComponent))}
             {/* end of private routes */}

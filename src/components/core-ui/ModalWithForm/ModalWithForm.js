@@ -15,6 +15,7 @@ import { getItemDefaults, formatPayloadDate } from 'utils/helpers'
 import { toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
 import { set } from 'lodash'
+import { useMediaQuery } from '@mui/material'
 
 const sx = {
   position: 'absolute',
@@ -95,6 +96,9 @@ const ModalWithForm = ({
     setEditItem({})
   }
 
+  const isXs = useMediaQuery("(max-width:624px)");
+  const isMd = useMediaQuery("(max-width:936px)");
+
   return (
     <Modal
       {...modalProps}
@@ -106,11 +110,11 @@ const ModalWithForm = ({
       <Box
         sx={{
           ...sx,
-          width: modalWidth,
+        width: isXs ? 'calc(100% - 24px)' : isMd ? '80%' : modalWidth,
           ...(modalProps ? modalProps.sx : {})
         }}
       >
-        <IconButton style={{ position: 'absolute', top: '1rem', right: '1.5rem' }} withBackground onClick={closeModalAndResetForm}>
+        <IconButton style={{ position: 'absolute', top: '1rem', right: '1rem' }} withBackground onClick={closeModalAndResetForm}>
           <Close />
         </IconButton>
         <ModalForm
