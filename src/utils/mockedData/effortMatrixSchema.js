@@ -13,65 +13,76 @@ export const JSONSchema = {
         type: 'GET'
       },
       hideCheckbox: true,
-      stickyRatio: 0.25,
+      rowsPerPage: 50,
+      rowsPerPageOptions: [25, 50, 100],
+      // stickyRatio: 0.25,
       columns: [
         {
-          title: '',
+          title: 'Role',
           field: 'role',
           align: 'left',
-          sticky: true
+          // sticky: true,
+          type: 'string'
         },
         {
           title: 'Evaluation',
           field: 'evaluationPhase',
           align: 'center',
-          sticky: true,
-          weight: 2
+          // sticky: true,
+          // weight: 2,
+          type: 'number'
         },
         {
           title: 'Analysis',
           field: 'analysisPhase',
           align: 'center',
-          sticky: true,
-          width: '20px'
+          // sticky: true,
+          // width: '20px',
+          type: 'number'
         },
         {
           title: 'Design',
           field: 'designPhase',
           align: 'center',
-          collapsible: true
+          collapsible: true,
+          type: 'number'
         },
         {
           title: 'Development',
           field: 'developmentPhase',
           align: 'center',
           collapsible: true,
-          width: '20px'
+          // width: '20px',
+          type: 'number'
         },
         {
           title: 'System Test',
           field: 'systemTestPhase',
           align: 'center',
           collapsible: true,
-          weight: 0.5
+          weight: 0.5,
+          type: 'number'
         },
         {
           title: 'UAT',
           field: 'uatPhase',
           align: 'center',
-          collapsible: true
+          collapsible: true,
+          type: 'number'
         },
         {
           title: 'Go-Live',
           field: 'goLivePhase',
           align: 'center',
-          collapsible: true
+          collapsible: true,
+          type: 'number'
         },
         {
           title: 'SOAK',
           field: 'soakPhase',
           align: 'center',
-          collapsible: true
+          collapsible: true,
+          type: 'number'
         }
       ],
       tableActions: {

@@ -12,69 +12,76 @@ export const JSONSchema = {
       hideCheckbox: true,
       columns: [
         {
-          title: '#',
-          field: 'number',
-          align: 'left'
-        },
-        {
           title: 'Person',
           field: 'person.name',
-          align: 'left'
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'IIB Key',
           field: 'person.iibKey',
-          align: 'left'
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'IPB Key',
           field: 'person.ipbKey',
-          align: 'left'
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'Assigned Project',
           field: 'person.assignedProject.name',
-          align: 'left'
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'Role',
           field: 'person.assignedProject.role',
-          align: 'left'
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'T-Shirt Size',
           field: 'person.assignedProject.tshirtSize',
-          align: 'left'
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'Project Stage',
           field: 'person.assignedProject.stage',
-          align: 'left'
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'Estimated Workload',
           field: 'person.assignedProject.estimatedWorkload',
-          align: 'left'
+          align: 'left',
+          type: 'number'
         },
         {
           title: 'T-Shirt Size Multiplier',
           field: 'person.assignedProject.tshirtSizeMultiplier',
-          align: 'left'
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'Real Effort',
           field: 'person.assignedProject.realEffort',
-          align: 'left'
+          align: 'left',
+          type: 'number'
         },
         {
           title: 'Effort (h)',
           field: 'person.assignedProject.hoursEffort',
-          align: 'left'
+          align: 'left',
+          type: 'number'
         },
         {
           title: 'Effort (md)',
           field: 'person.assignedProject.mdEffort',
-          align: 'left'
+          align: 'left',
+          type: 'number'
         }
       ],
       tableActions: {

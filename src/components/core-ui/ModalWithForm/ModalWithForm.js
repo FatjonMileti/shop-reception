@@ -41,7 +41,8 @@ const ModalWithForm = ({
   editedItemUrl,
   additionalAction,
   isModalOpen,
-  closeModal
+  closeModal,
+  comboValue
 }) => {
   const [editItem, setEditItem] = useImmer({})
 
@@ -96,8 +97,8 @@ const ModalWithForm = ({
     setEditItem({})
   }
 
-  const isXs = useMediaQuery("(max-width:624px)");
-  const isMd = useMediaQuery("(max-width:936px)");
+  const isXs = useMediaQuery('(max-width:624px)')
+  const isMd = useMediaQuery('(max-width:936px)')
 
   return (
     <Modal
@@ -110,11 +111,15 @@ const ModalWithForm = ({
       <Box
         sx={{
           ...sx,
-        width: isXs ? 'calc(100% - 24px)' : isMd ? '80%' : modalWidth,
+          width: isXs ? 'calc(100% - 24px)' : isMd ? '80%' : modalWidth,
           ...(modalProps ? modalProps.sx : {})
         }}
       >
-        <IconButton style={{ position: 'absolute', top: '1rem', right: '1rem' }} withBackground onClick={closeModalAndResetForm}>
+        <IconButton
+          style={{ position: 'absolute', top: '1rem', right: '1rem' }}
+          withBackground
+          onClick={closeModalAndResetForm}
+        >
           <Close />
         </IconButton>
         <ModalForm
@@ -127,6 +132,7 @@ const ModalWithForm = ({
           formButtons={formButtons}
           saveData={saveData}
           closeModal={closeModalAndResetForm}
+          comboValue={comboValue}
         />
       </Box>
     </Modal>

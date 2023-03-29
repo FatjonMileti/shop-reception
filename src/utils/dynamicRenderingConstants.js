@@ -3,7 +3,7 @@ import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import { Percent } from '@mui/icons-material'
 import { Button, DatePicker, Link, Typography, Checkbox } from '@fullscreendigital/carrefour-dex-fe'
-import { AsyncSelectInput } from 'components/core-ui/AsyncSelectInput'
+import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
 import { Input } from 'components/core-ui/Input'
 import { Table } from 'components/core-ui/Table'
@@ -22,7 +22,7 @@ export const Components = {
   Typography,
   Checkbox,
   // Local components
-  AsyncSelectInput,
+  AsyncAutocomplete,
   ComboBoxTable,
   Input,
   Table
