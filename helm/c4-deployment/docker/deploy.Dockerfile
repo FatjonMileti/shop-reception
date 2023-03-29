@@ -1,22 +1,25 @@
-FROM debian:bullseye-slim
+FROM node:19-bullseye-slim as builder
 
-ENV NODE_VERSION 19.8.1
+RUN npm config set @fullscreendigital:registry=https://registry.yarnpkg.com/
+RUN npm config set //registry.yarnpkg.com/:_authToken=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
 
-ENV NVM_DIR=/root/.nvm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-RUN . "$NVM_DIR/nvm.sh" \
-    && nvm install ${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" \
-    && nvm use v${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" \
-    && nvm alias default v${NODE_VERSION}
-ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
-
-RUN npm install -g yarn
-
-#ARG BUILD_TEST_COMMAND
+ARG BUILD_TEST_COMMAND
+ARG CLEAN_COMPILE_COMMAND
 
 WORKDIR /app
+
+COPY package*.json /app/
+COPY yarn*.lock /app/
+
+RUN yarn clean && yarn install
+
 ADD . /app
 
-RUN /bin/bash -c "${BUILD_TEST_COMMAND}"
+RUN yarn build:prod
+
+FROM nginx:1.23.4-bullseye
+
+COPY --from=builder /app/build/ /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
