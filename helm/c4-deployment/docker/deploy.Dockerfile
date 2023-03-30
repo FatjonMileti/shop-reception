@@ -3,7 +3,6 @@ FROM node:19-bullseye-slim as builder
 RUN npm config set @fullscreendigital:registry=https://registry.yarnpkg.com/
 RUN npm config set //registry.yarnpkg.com/:_authToken=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
 
-
 ARG BUILD_TEST_COMMAND
 ARG CLEAN_COMPILE_COMMAND
 
@@ -18,4 +17,9 @@ ADD . /app
 
 RUN ${BUILD_TEST_COMMAND}
 
+FROM nginx:1.23.4-bullseye
+
+COPY --from=builder /app/build/ /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
