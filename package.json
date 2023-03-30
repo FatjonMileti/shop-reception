@@ -6,8 +6,6 @@
   "scripts": {
     "start": "webpack serve --node-env=development --env environment=development",
     "start:dev": "webpack serve --node-env=development --env environment=development",
-    "start:uat": "webpack serve --node-env=uat --env environment=uat",
-    "start:prod": "webpack serve --node-env=production --env environment=production",
     "build:dev": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=dev",
     "build:prod": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=production",
     "build:stats": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=production --json > stats.json",
