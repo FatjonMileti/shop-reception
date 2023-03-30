@@ -20,6 +20,5 @@ RUN yarn build:prod
 FROM nginx:1.23.4-bullseye
 
 COPY --from=builder /app/build/ /usr/share/nginx/html
-
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
