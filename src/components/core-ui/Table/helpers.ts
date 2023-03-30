@@ -57,13 +57,14 @@ export const convertFilterSchemaToFilterConfig = (
   filterSchema: FilterSchema,
   searchParams: FilterParams
 ) => {
-  const { name, defaultValue, label, required, ...componentProps } = filterSchema
+  const { name, defaultValue, label, required, hidden, ...componentProps } = filterSchema
 
   return {
     name,
     label,
     type: componentProps.type,
     required,
+    hidden,
     value: getInitialFilterParam(searchParams, filterSchema),
     filter: renderComponent({ ...componentProps, label })
   }

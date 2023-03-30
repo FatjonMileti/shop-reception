@@ -21,8 +21,6 @@ const AsyncAutocomplete = props => {
 
   const { action, comboValue, width, ...rest } = props
 
-  console.log(props)
-
   React.useEffect(() => {
     let active = true
 
@@ -35,7 +33,7 @@ const AsyncAutocomplete = props => {
         let url = action.url
 
         if (comboValue) {
-          url = `${url}?filterBy=${action.comboQueryKey}&filterValue=${comboValue.value}`
+          url = `${url}?size=-1&filterBy=${action.comboQueryKey}&filterValue=${comboValue.value}`
         }
         const result = await makeCoreGetRequest(url)
         const { valueKey, labelKey } = action

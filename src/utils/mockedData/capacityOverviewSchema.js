@@ -6,22 +6,27 @@ export const JSONSchema = {
     {
       UIComponent: 'ComboBoxTable',
       combo: {
-        UIComponent: 'AsyncSelectInput',
+        UIComponent: 'Input',
         type: 'select',
-        action: {
-          url: '/domain',
-          type: 'GET'
-        },
         variant: 'standard',
         name: 'teamMember.domain',
         label: 'Domain',
-        defaultValue: '#TOKEN.domain'
+        values: [
+          { value: 'Store&Supply Chain', label: 'Store&Supply Chain' },
+          { value: 'Digital Platforms', label: 'Digital Platforms' },
+          { value: 'EDI', label: 'EDI' },
+          { value: 'Security', label: 'Security' },
+          { value: 'Enterprise Architecture', label: 'Enterprise Architecture' },
+          { value: 'Innovation', label: 'Innovation' },
+          { value: 'Infra&Support', label: 'Infra&Support' },
+          { value: 'Data Science', label: 'Data Science' }
+        ]
       },
       table: {
         UIComponent: 'Table',
         width: '80%',
         action: {
-          url: '/capacityOverview',
+          url: '/teamCapacity',
           type: 'GET'
         },
         hideCheckbox: true,
@@ -29,43 +34,41 @@ export const JSONSchema = {
         columns: [
           {
             title: 'Person',
-            field: 'capacity.person.name',
+            field: 'teamMember.name',
             align: 'left',
+            type: 'string',
             render: {
               UIComponent: 'Link',
-              href: '/personCapacity',
-              linkFilters: ['capacity.startDate', 'capacity.endDate'],
-              idKeyName: 'capacity.person.id'
+              href: '/individualCapacity',
+              linkFilters: ['startDate', 'endDate'],
+              idKeyName: 'teamMember.id'
             }
           },
           {
             title: 'Total Effort (MD)',
-            field: 'capacity.totalEffort',
-            align: 'left'
+            field: 'totalEffort',
+            align: 'left',
+            type: 'number'
           },
           {
             title: 'Total Available (MD)',
-            field: 'capacity.totalAvailable',
-            align: 'left'
+            field: 'totalAvailable',
+            align: 'left',
+            type: 'number'
           },
           {
             title: 'Remaining (MD)',
-            field: 'capacity.remaining',
-            align: 'left'
+            field: 'remaining',
+            align: 'left',
+            type: 'number'
           }
         ],
         tableActions: {
-          searchAction: {
-            searchFields: ['capacity.person.name'],
-            inputProps: {
-              variant: 'standard'
-            }
-          },
           filters: [
             {
               UIComponent: 'DatePicker',
               type: 'date',
-              name: 'capacity.startDate',
+              name: 'startDate',
               label: 'Start Date',
               defaultValue: '#CURRENT_DATE',
               variant: 'standard',
@@ -74,7 +77,7 @@ export const JSONSchema = {
             {
               UIComponent: 'DatePicker',
               type: 'date',
-              name: 'capacity.endDate',
+              name: 'endDate',
               label: 'End Date',
               defaultValue: '#CURRENT_DATE',
               variant: 'standard',

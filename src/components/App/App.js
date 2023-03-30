@@ -36,6 +36,8 @@ const App = () => {
     })()
   }, [subdomainId])
 
+  console.log(applicationPages)
+
   return (
     <AuthProvider {...oidcConfig}>
       <ThemeProvider theme="light">

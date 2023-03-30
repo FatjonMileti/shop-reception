@@ -6,80 +6,80 @@ export const JSONSchema = {
       UIComponent: 'Table',
       width: '80%',
       action: {
-        url: '/personCapacity',
-        type: 'POST'
+        url: '/individualCapacity',
+        type: 'GET'
       },
       hideCheckbox: true,
       columns: [
         {
           title: 'Person',
-          field: 'person.name',
+          field: 'teamMember.name',
           align: 'left',
           type: 'string'
         },
         {
           title: 'IIB Key',
-          field: 'person.iibKey',
+          field: 'project.key',
           align: 'left',
           type: 'string'
         },
         {
           title: 'IPB Key',
-          field: 'person.ipbKey',
+          field: 'project.ipbKey',
           align: 'left',
           type: 'string'
         },
         {
           title: 'Assigned Project',
-          field: 'person.assignedProject.name',
+          field: 'project.name',
           align: 'left',
           type: 'string'
         },
         {
           title: 'Role',
-          field: 'person.assignedProject.role',
+          field: 'role',
           align: 'left',
           type: 'string'
         },
         {
           title: 'T-Shirt Size',
-          field: 'person.assignedProject.tshirtSize',
+          field: 'tshirtSize',
           align: 'left',
           type: 'string'
         },
         {
           title: 'Project Stage',
-          field: 'person.assignedProject.stage',
+          field: 'stage',
           align: 'left',
           type: 'string'
         },
         {
           title: 'Estimated Workload',
-          field: 'person.assignedProject.estimatedWorkload',
+          field: 'estimatedWorkload',
           align: 'left',
           type: 'number'
         },
         {
           title: 'T-Shirt Size Multiplier',
-          field: 'person.assignedProject.tshirtSizeMultiplier',
+          field: 'tshirtSizeMultiplier',
           align: 'left',
           type: 'string'
         },
         {
           title: 'Real Effort',
-          field: 'person.assignedProject.realEffort',
+          field: 'realEffort',
           align: 'left',
           type: 'number'
         },
         {
           title: 'Effort (h)',
-          field: 'person.assignedProject.hoursEffort',
+          field: 'totalEffortInHours',
           align: 'left',
           type: 'number'
         },
         {
           title: 'Effort (md)',
-          field: 'person.assignedProject.mdEffort',
+          field: 'totalEffortInMD',
           align: 'left',
           type: 'number'
         }
@@ -91,7 +91,7 @@ export const JSONSchema = {
             type: 'date',
             name: 'project.startDate',
             label: 'Start Date',
-            variable: 'capacity.startDate',
+            variable: 'startDate',
             variant: 'standard',
             required: true
           },
@@ -100,7 +100,7 @@ export const JSONSchema = {
             type: 'date',
             name: 'project.endDate',
             label: 'End Date',
-            variable: 'capacity.endDate',
+            variable: 'endDate',
             variant: 'standard',
             required: true
           },
@@ -110,7 +110,8 @@ export const JSONSchema = {
             name: 'person.id',
             label: 'Person Id',
             inputProps: { hidden: true },
-            variable: 'id'
+            variable: 'id',
+            hidden: true
           }
         ]
       }
