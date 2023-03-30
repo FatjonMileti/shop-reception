@@ -9,7 +9,7 @@ import { ArrowBackOutlined } from '@mui/icons-material'
 const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
   const navigate = useNavigate()
   const goBack = () => {
-    navigate(-1)
+    navigate('/')
   }
 
   const { module, submodule } = useMemo(() => {
@@ -55,7 +55,7 @@ const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
             .filter(app => app.isFirstScreen)
             .map(app => (
               <div
-                key={app.id}
+                key={app.screenId}
                 onClick={() => navigate(app.route.url)}
                 className={s.applicationContainer}
               >
