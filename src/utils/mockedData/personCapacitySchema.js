@@ -42,6 +42,18 @@ export const JSONSchema = {
           type: 'string'
         },
         {
+          title: 'Start Date',
+          field: 'startDate',
+          align: 'left',
+          type: 'date'
+        },
+        {
+          title: 'End Date',
+          field: 'endDate',
+          align: 'left',
+          type: 'date'
+        },
+        {
           title: 'T-Shirt Size',
           field: 'tshirtSize',
           align: 'left',
@@ -72,7 +84,25 @@ export const JSONSchema = {
           type: 'number'
         },
         {
-          title: 'Effort (h)',
+          title: 'Total available (h)',
+          field: 'totalAvailableInHours',
+          align: 'left',
+          type: 'number'
+        },
+        {
+          title: 'Total timeoff (h)',
+          field: 'totalTimeOffInHours',
+          align: 'left',
+          type: 'number'
+        },
+        {
+          title: 'Real availability (h)',
+          field: 'realAvailabilityInHours',
+          align: 'left',
+          type: 'number'
+        },
+        {
+          title: 'Total Effort (h)',
           field: 'totalEffortInHours',
           align: 'left',
           type: 'number'

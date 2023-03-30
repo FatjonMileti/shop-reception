@@ -37,7 +37,7 @@ const DynamicComponent = props => {
         setScreen({ 'name': 'chuchu', 'icon': 'BarChart' })
       }
     })()
-  }, [])
+  }, [props.activityId, props.screenId])
 
   return (
     <div>
