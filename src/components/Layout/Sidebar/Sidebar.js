@@ -83,7 +83,13 @@ const staticItems = [
   }
 ]
 
-const Sidebar = ({ isMenuOpen, handleCloseMenu, setModules, setApplicationModulesPages, setSubdomainId }) => {
+const Sidebar = ({
+  isMenuOpen,
+  handleCloseMenu,
+  setModules,
+  setApplicationModulesPages,
+  setSubdomainId
+}) => {
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
 

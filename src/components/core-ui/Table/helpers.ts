@@ -1,21 +1,21 @@
 import { get } from 'lodash'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { toFiltersUrl } from './serializers'
-import { getDefaultItemValue } from 'utils/helpers'
+import { formatUIDate, getDefaultItemValue } from 'utils/helpers'
 import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
 import { ComboValue } from '../ComboBoxTable/ComboBoxTableDefinitions'
 
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): string => {
   const { variable, defaultValue } = filter
 
-  if (!variable || !defaultValue) return ''
+  if (!variable && !defaultValue) return ''
 
   return searchParams[variable] ?? getDefaultItemValue(defaultValue)
 }
 
 export const getRenderedColumns = (columns, tableFilters) =>
   columns.map(column => {
-    const { render, field } = column
+    const { render, field, type } = column
 
     if (render) {
       return {
@@ -40,6 +40,14 @@ export const getRenderedColumns = (columns, tableFilters) =>
           return renderComponent(render)
         }
       }
+    } else if (type === 'date') {
+      return {
+        ...column,
+        render: row => {
+          const date = get(row, field)
+          return formatUIDate(date)
+        }
+      }
     } else {
       return column
     }
@@ -49,13 +57,14 @@ export const convertFilterSchemaToFilterConfig = (
   filterSchema: FilterSchema,
   searchParams: FilterParams
 ) => {
-  const { name, defaultValue, label, required, ...componentProps } = filterSchema
+  const { name, defaultValue, label, required, hidden, ...componentProps } = filterSchema
 
   return {
     name,
     label,
     type: componentProps.type,
     required,
+    hidden,
     value: getInitialFilterParam(searchParams, filterSchema),
     filter: renderComponent({ ...componentProps, label })
   }

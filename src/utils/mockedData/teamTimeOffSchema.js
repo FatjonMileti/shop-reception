@@ -35,30 +35,35 @@ export const JSONSchema = {
           {
             title: 'Person',
             field: 'teamMember.name',
-            align: 'left'
+            align: 'left',
+            type: 'string'
           },
           {
             title: 'Day-Off Type',
             field: 'dayOffType',
-            align: 'left'
+            align: 'left',
+            type: 'string'
           },
           {
             title: 'Start Date',
             field: 'startDate',
             align: 'left',
-            collapsible: true
+            collapsible: true,
+            type: 'date'
           },
           {
             title: 'End Date',
             field: 'endDate',
             align: 'left',
-            collapsible: true
+            collapsible: true,
+            type: 'date'
           },
           {
             title: 'Hours',
             field: 'numberOfHours',
             align: 'left',
-            collapsible: true
+            collapsible: true,
+            type: 'number'
           }
         ],
         tableActions: {
@@ -66,14 +71,14 @@ export const JSONSchema = {
             modalTitle: 'New Time Off',
             formItems: [
               {
-                UIComponent: 'AsyncSelectInput',
-                type: 'select',
+                UIComponent: 'AsyncAutocomplete',
+                type: 'autocomplete',
                 action: {
                   url: '/teamMembers',
                   type: 'GET',
                   valueKey: 'id',
                   labelKey: 'name',
-                  comboFilterBy: 'domain'
+                  comboQueryKey: 'domain'
                 },
                 variant: 'standard',
                 name: 'teamMember.name',
@@ -171,23 +176,8 @@ export const JSONSchema = {
             updateUrlType: 'PUT',
             getUrl: '/teamTimeOff',
             getUrlType: 'GET',
+            formInfoItems: [{ name: 'teamMember.name', label: 'Person name' }],
             formItems: [
-              {
-                UIComponent: 'AsyncSelectInput',
-                type: 'select',
-                action: {
-                  url: '/teamMembers',
-                  type: 'GET',
-                  valueKey: 'id',
-                  labelKey: 'name',
-                  comboFilterBy: 'domain'
-                },
-                variant: 'standard',
-                name: 'teamMember.name',
-                width: '100%',
-                label: 'Person name',
-                payloadKey: 'teamMember.id'
-              },
               {
                 UIComponent: 'Input',
                 type: 'select',

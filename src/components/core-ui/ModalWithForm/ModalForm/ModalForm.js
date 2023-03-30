@@ -16,7 +16,8 @@ const ModalForm = ({
   editItem,
   formButtons,
   saveData,
-  closeModal
+  closeModal,
+  comboValue
 }) => {
   const [processedFormItems, setProcessedFormItems] = useState(formItems)
 
@@ -53,7 +54,7 @@ const ModalForm = ({
         {processedFormItems.map(formItem => {
           const { UIComponent, name, formItemsPerRow, ...rest } = formItem
           const key = rest.payloadKey || name
-          const value = get(editItem, key) ?? (rest.type === 'date' ? undefined : '')
+          const value = get(editItem, name) ?? (rest.type === 'date' ? undefined : '')
 
           return (
             <Grid
@@ -65,13 +66,23 @@ const ModalForm = ({
               {createElement(Components[UIComponent], {
                 ...rest,
                 value,
+                comboValue,
                 ...(rest.type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
                 onChange: arg => {
-                  rest.type === 'date'
-                    ? handleInputChange(arg, name, rest.type)
-                    : rest.type === 'checkbox'
-                    ? handleInputChange(arg.target.checked, key, rest.type)
-                    : handleInputChange(arg.target.value, key, rest.type)
+                  switch (rest.type) {
+                    case 'date':
+                      handleInputChange(arg, name, rest.type)
+                      break
+                    case 'checkbox':
+                      handleInputChange(arg.target.checked, key, rest.type)
+                      break
+                    case 'autocomplete':
+                      handleInputChange(arg?.value, key, rest.type)
+                      break
+                    default:
+                      handleInputChange(arg.target.value, key, rest.type)
+                      break
+                  }
                 }
               })}
             </Grid>

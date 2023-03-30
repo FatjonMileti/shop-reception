@@ -3,6 +3,7 @@ import { KeyboardArrowRightOutlined } from '@mui/icons-material'
 
 export const toSelectedMenuItems = (items, selectedItemIndex) =>
   items.map(item => {
+    const { disablePadding, icon, id, index, primaryText, type } = item
     const nestedItems = item.nestedItems?.map(item => ({
       ...item,
       selected: selectedItemIndex === item.index,
@@ -12,7 +13,16 @@ export const toSelectedMenuItems = (items, selectedItemIndex) =>
         </span>
       )
     }))
-    return { ...item, selected: selectedItemIndex === item.index, nestedItems }
+    return {
+      disablePadding,
+      icon,
+      id,
+      index,
+      primaryText,
+      type,
+      selected: selectedItemIndex === item.index,
+      nestedItems
+    }
   })
 
 const toMenuItem = (item, index, nestedItems) => ({

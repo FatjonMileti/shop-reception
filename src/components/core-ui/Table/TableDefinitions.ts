@@ -30,6 +30,7 @@ export interface FilterSchema {
   name: string
   label: string
   required?: boolean
+  hidden?: boolean
   defaultValue?: '#CURRENT_DATE' | null
   variable?: string
 }

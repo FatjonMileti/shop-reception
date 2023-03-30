@@ -6,75 +6,112 @@ export const JSONSchema = {
       UIComponent: 'Table',
       width: '80%',
       action: {
-        url: '/personCapacity',
-        type: 'POST'
+        url: '/individualCapacity',
+        type: 'GET'
       },
       hideCheckbox: true,
       columns: [
         {
-          title: '#',
-          field: 'number',
-          align: 'left'
-        },
-        {
           title: 'Person',
-          field: 'person.name',
-          align: 'left'
+          field: 'teamMember.name',
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'IIB Key',
-          field: 'person.iibKey',
-          align: 'left'
+          field: 'project.key',
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'IPB Key',
-          field: 'person.ipbKey',
-          align: 'left'
+          field: 'project.ipbKey',
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'Assigned Project',
-          field: 'person.assignedProject.name',
-          align: 'left'
+          field: 'project.name',
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'Role',
-          field: 'person.assignedProject.role',
-          align: 'left'
+          field: 'role',
+          align: 'left',
+          type: 'string'
+        },
+        {
+          title: 'Start Date',
+          field: 'startDate',
+          align: 'left',
+          type: 'date'
+        },
+        {
+          title: 'End Date',
+          field: 'endDate',
+          align: 'left',
+          type: 'date'
         },
         {
           title: 'T-Shirt Size',
-          field: 'person.assignedProject.tshirtSize',
-          align: 'left'
+          field: 'tshirtSize',
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'Project Stage',
-          field: 'person.assignedProject.stage',
-          align: 'left'
+          field: 'stage',
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'Estimated Workload',
-          field: 'person.assignedProject.estimatedWorkload',
-          align: 'left'
+          field: 'estimatedWorkload',
+          align: 'left',
+          type: 'number'
         },
         {
           title: 'T-Shirt Size Multiplier',
-          field: 'person.assignedProject.tshirtSizeMultiplier',
-          align: 'left'
+          field: 'tshirtSizeMultiplier',
+          align: 'left',
+          type: 'string'
         },
         {
           title: 'Real Effort',
-          field: 'person.assignedProject.realEffort',
-          align: 'left'
+          field: 'realEffort',
+          align: 'left',
+          type: 'number'
         },
         {
-          title: 'Effort (h)',
-          field: 'person.assignedProject.hoursEffort',
-          align: 'left'
+          title: 'Total available (h)',
+          field: 'totalAvailableInHours',
+          align: 'left',
+          type: 'number'
+        },
+        {
+          title: 'Total timeoff (h)',
+          field: 'totalTimeOffInHours',
+          align: 'left',
+          type: 'number'
+        },
+        {
+          title: 'Real availability (h)',
+          field: 'realAvailabilityInHours',
+          align: 'left',
+          type: 'number'
+        },
+        {
+          title: 'Total Effort (h)',
+          field: 'totalEffortInHours',
+          align: 'left',
+          type: 'number'
         },
         {
           title: 'Effort (md)',
-          field: 'person.assignedProject.mdEffort',
-          align: 'left'
+          field: 'totalEffortInMD',
+          align: 'left',
+          type: 'number'
         }
       ],
       tableActions: {
@@ -84,7 +121,7 @@ export const JSONSchema = {
             type: 'date',
             name: 'project.startDate',
             label: 'Start Date',
-            variable: 'capacity.startDate',
+            variable: 'startDate',
             variant: 'standard',
             required: true
           },
@@ -93,7 +130,7 @@ export const JSONSchema = {
             type: 'date',
             name: 'project.endDate',
             label: 'End Date',
-            variable: 'capacity.endDate',
+            variable: 'endDate',
             variant: 'standard',
             required: true
           },
@@ -103,7 +140,8 @@ export const JSONSchema = {
             name: 'person.id',
             label: 'Person Id',
             inputProps: { hidden: true },
-            variable: 'id'
+            variable: 'id',
+            hidden: true
           }
         ]
       }

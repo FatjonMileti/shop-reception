@@ -146,6 +146,7 @@ const Table = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
+          comboValue={comboValue}
         />
       )}
       <GeneralTable
@@ -173,6 +174,7 @@ const Table = props => {
                         tableState.filters
                       )
                     }
+                    comboValue={comboValue}
                   />
                 )
               })

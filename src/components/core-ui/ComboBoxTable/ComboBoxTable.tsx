@@ -11,6 +11,10 @@ const ComboBoxTable = props => {
 
   const [comboValue, setComboValue] = React.useState<SelectOption>({ label: '', value: '' })
 
+  React.useEffect(() => {
+    setComboValue(combo.values[0])
+  }, [])
+
   return (
     <Box>
       <Paper className={s.comboContainer}>
