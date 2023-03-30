@@ -24,7 +24,7 @@ const DynamicComponent = props => {
         setJSONSchema(JSONSchemaMock)
       }
     })()
-  }, [])
+  }, [props.activityId, props.screenId])
 
   return <div>{JSONSchema ? renderComponent(JSONSchema) : ''}</div>
 }
