@@ -2,7 +2,7 @@
 replicas: 1
 
 #Application port
-containerPort: 8085
+containerPort: 8080
 
 #Start command
 startCommand: yarn start
