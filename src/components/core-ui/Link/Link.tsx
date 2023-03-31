@@ -9,11 +9,7 @@ export interface LinkProps {
 }
 
 const Link = (props: LinkProps) => {
-  console.log(props)
   return (
-    // <GeneralLink component={RouterLink} href={'aaaa'}>
-    //   {props.children}
-    // </GeneralLink>
     <RouterLink to={props.href}>
       <Typography variant="regular" component="span">
         {props.children}
