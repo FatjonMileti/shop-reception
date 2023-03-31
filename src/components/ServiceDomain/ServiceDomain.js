@@ -4,7 +4,7 @@ import { Icon } from 'components/core-ui/Icon'
 import s from './ServiceDomain.scss'
 import { Divider, IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { useMemo } from 'react'
-import { ArrowBackOutlined } from '@mui/icons-material'
+import { ArrowBackIosNewOutlined } from '@mui/icons-material'
 
 const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
   const navigate = useNavigate()
@@ -28,8 +28,8 @@ const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
   return (
     <Box>
       <Box className={s.moduleHeader}>
-        <IconButton className={s.logo} onClick={goBack}>
-          <ArrowBackOutlined />
+        <IconButton className={s.back} onClick={goBack}>
+          <ArrowBackIosNewOutlined />
         </IconButton>
 
         <Typography variant="medium">
