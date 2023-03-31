@@ -10,7 +10,7 @@ import s from './DynamicComponent.scss'
 import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/capacityOverviewSchema'
 import { Box } from '@mui/material'
 import { IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { ArrowBackOutlined } from '@mui/icons-material'
+import { ArrowBackIosNewOutlined } from '@mui/icons-material'
 import { Icon } from 'components/core-ui/Icon'
 // import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/personCapacitySchema'
 
@@ -42,8 +42,8 @@ const DynamicComponent = props => {
   return (
     <div>
       <Box className={s.moduleHeader}>
-        <IconButton className={s.logo} onClick={goBack}>
-          <ArrowBackOutlined />
+        <IconButton className={s.back} onClick={goBack}>
+          <ArrowBackIosNewOutlined />
         </IconButton>
 
         <Typography variant="medium">
