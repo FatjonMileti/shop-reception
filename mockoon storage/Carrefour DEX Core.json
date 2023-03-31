@@ -1,23 +1,23 @@
 {
-  "uuid": "094c7fb6-810b-482a-9740-a2efc65856f9",
+  "uuid": "db2fc4c5-607e-416b-89bf-7bfd972c8da1",
   "lastMigration": 27,
   "name": "DEX CORE REST API",
   "endpointPrefix": "8081/core/rest/api/v1",
   "latency": 0,
-  "port": 3001,
+  "port": 3004,
   "hostname": "",
   "folders": [],
   "routes": [
     {
-      "uuid": "e5b77c72-d519-44b0-b90a-8b334645d44a",
+      "uuid": "b4ea454f-a787-496f-9265-652c003f39b9",
       "type": "http",
       "documentation": "Get team members list",
       "method": "get",
       "endpoint": "teamMembers",
       "responses": [
         {
-          "uuid": "459e991a-e566-4aa1-92f8-28c92b00f66e",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"1\",\n      \"name\": \"Pop Adrian\",\n      \"domain\": \"Digital\"\n    },\n    {\n      \"id\": \"2\",\n      \"name\": \"Ionescu Matei\",\n      \"domain\": \"Test\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "d4969f47-2789-4a8f-b60e-84397aa956c8",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Pop Adrian\",\n      \"domain\": \"Digital\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted team assignment list",
@@ -38,7 +38,7 @@
           "default": true
         },
         {
-          "uuid": "b957684b-7b4b-43ab-a1a1-409c0b38e6ce",
+          "uuid": "fd51d5ef-e5c4-4a73-9334-6658718ab8df",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -60,7 +60,7 @@
           "default": false
         },
         {
-          "uuid": "3f6e43e1-a130-4cec-83d4-39e5956d461c",
+          "uuid": "19114a0e-708d-4e73-81c5-d7ef8490b099",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -82,7 +82,7 @@
           "default": false
         },
         {
-          "uuid": "e070f67d-a7c0-47cd-89eb-f126c13eed18",
+          "uuid": "51993814-bcde-4b08-9aea-47aa682fdbb7",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -104,7 +104,7 @@
           "default": false
         },
         {
-          "uuid": "eea025a2-3060-488c-a69e-048e93809bb2",
+          "uuid": "ec6d1d98-9b5a-483a-9d8d-879634134774",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -126,7 +126,7 @@
           "default": false
         },
         {
-          "uuid": "5ae2ca9b-2a0b-4d85-835c-e357df6dd7c0",
+          "uuid": "06c49df8-b26b-4748-85b2-1ffc17319e96",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -152,15 +152,15 @@
       "responseMode": null
     },
     {
-      "uuid": "a3569021-8150-42ac-9327-ed444735804b",
+      "uuid": "baa13252-7400-4434-bf06-b643a07d2f92",
       "type": "http",
       "documentation": "Get team capacity list",
       "method": "get",
       "endpoint": "teamCapacity",
       "responses": [
         {
-          "uuid": "f8effe0d-b734-4e01-8e69-dcc9f9e2f670",
-          "body": "{\n  \"list\": [\n    {\n      \"teamMember\": {\n        \"id\": \"1\",\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"totalEffort\": \"3.5\",\n      \"totalAvailable\": \"3.5\",\n      \"remaining\": \"3.5\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "c55ceac3-ac2d-4422-b130-44bae4ae38ce",
+          "body": "{\n  \"list\": [\n    {\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"totalEffort\": 3.5,\n      \"totalAvailable\": 3.5,\n      \"remaining\": 3.5\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted team assignment list",
@@ -181,7 +181,7 @@
           "default": true
         },
         {
-          "uuid": "d6fefa95-167d-4436-84f9-e2784fc09055",
+          "uuid": "bd4de8a2-b0c4-4d77-b52f-b537d90ae1f1",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -203,7 +203,7 @@
           "default": false
         },
         {
-          "uuid": "4e42418d-1989-4a60-8540-df21a102c211",
+          "uuid": "afe54860-02e2-4f50-92f0-123021439818",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -225,7 +225,7 @@
           "default": false
         },
         {
-          "uuid": "eb8405ae-dc5f-4904-b1c3-743829b275fd",
+          "uuid": "751dd51e-d06b-4803-94f6-470bee45355d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -247,7 +247,7 @@
           "default": false
         },
         {
-          "uuid": "75849a93-b044-4d12-ac2b-4764830fbd3f",
+          "uuid": "d3ff492a-f63d-45fc-9d5e-6fbcfbbbbb25",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -269,7 +269,7 @@
           "default": false
         },
         {
-          "uuid": "050f5b70-a7b5-475a-a4aa-3b34bf986cad",
+          "uuid": "e2b64545-4543-4b29-a3da-a2b6e1462523",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -295,15 +295,15 @@
       "responseMode": null
     },
     {
-      "uuid": "0f05e2bc-646a-40cb-9674-9d9cd19934ca",
+      "uuid": "46a6b594-c67c-48d8-8509-f33e8a46d6f2",
       "type": "http",
       "documentation": "Get individual capacity list",
       "method": "get",
       "endpoint": "individualCapacity",
       "responses": [
         {
-          "uuid": "8de9753a-6ecb-480b-afa3-2603ffb21018",
-          "body": "{\n  \"list\": [\n    {\n      \"teamMember\": {\n        \"id\": \"1\",\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"project\": {\n        \"id\": \"1\",\n        \"key\": \"IIB-xxx\",\n        \"name\": \"DEX\",\n        \"tshirtSize\": \"L\"\n      },\n      \"role\": \"IT PM\",\n      \"stage\": \"Design\",\n      \"estimatedWorkload\": \"10\",\n      \"tshirtSizeMultiplier\": \"10\",\n      \"realEffort\": \"20\",\n      \"startDate\": \"2023-03-20\",\n      \"endDate\": \"2023-03-23\",\n      \"totalAvailableInHours\": \"32\",\n      \"totalTimeOffInHours\": \"4\",\n      \"realAvailabilityInHours\": \"28\",\n      \"totalEffortInHours\": \"2.8\",\n      \"totalEffortInMD\": \"0.47\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "ca0c672a-3dbf-4566-95b8-0c5a52f65eef",
+          "body": "{\n  \"list\": [\n    {\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"project\": {\n        \"id\": 1,\n        \"iibKey\": \"IIB-xxx\",\n        \"ipbKey\": \"IPB-xxx\",\n        \"name\": \"DEX\",\n        \"tshirtSize\": \"L\"\n      },\n      \"role\": \"IT PM\",\n      \"stage\": \"Design\",\n      \"estimatedWorkload\": 10,\n      \"tshirtSizeMultiplier\": 10,\n      \"realEffort\": 20,\n      \"startDate\": \"2023-03-20\",\n      \"endDate\": \"2023-03-23\",\n      \"totalAvailableInHours\": 32,\n      \"totalTimeOffInHours\": 4,\n      \"realAvailabilityInHours\": 28,\n      \"totalEffortInHours\": 2.8,\n      \"totalEffortInMD\": 0.47\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted team assignment list",
@@ -324,7 +324,7 @@
           "default": true
         },
         {
-          "uuid": "4f11b5ca-5925-426e-8678-42c096d32523",
+          "uuid": "6721244f-4772-4351-b905-d025e6bf4128",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -346,7 +346,7 @@
           "default": false
         },
         {
-          "uuid": "394a966f-31c9-49cf-b39d-35f4d39489a6",
+          "uuid": "110becb9-95ee-4fff-a0a6-eebf27fd8df6",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -368,7 +368,7 @@
           "default": false
         },
         {
-          "uuid": "e1081004-425b-4a60-85b3-ce54732997d6",
+          "uuid": "53d419d4-f994-4866-894c-6370e21c6b98",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -390,7 +390,7 @@
           "default": false
         },
         {
-          "uuid": "0d136185-67ef-4ae0-8fcb-33f102869bd6",
+          "uuid": "00f394b3-6c21-4c7c-ae8f-c43145f0db7c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -412,7 +412,7 @@
           "default": false
         },
         {
-          "uuid": "1cba3a44-4667-4910-a118-aa5f21748a21",
+          "uuid": "6fcb3619-de02-4e00-b49b-8435cef7f7cf",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -438,15 +438,15 @@
       "responseMode": null
     },
     {
-      "uuid": "42a14c86-5187-4f2c-88f6-ec0084d0f836",
+      "uuid": "def4dfeb-4a7f-4776-b27a-b23e57bd90ba",
       "type": "http",
       "documentation": "Save team assignment entity",
       "method": "post",
       "endpoint": "teamAssignments",
       "responses": [
         {
-          "uuid": "469c4330-5ae1-4cca-ad8c-7016872c1fe2",
-          "body": "{\n  \"id\": \"1\",\n  \"domain\": \"Digital\",\n  \"teamMember\": {\n    \"id\": \"1\",\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"role\": \"Architect\",\n  \"project\": {\n    \"id\": \"1\",\n    \"key\": \"IIB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"assignmentStartDate\": \"2023-01-01\",\n  \"assignmentEndDate\": \"2023-02-01\"\n}",
+          "uuid": "6dc9597f-f32f-495b-8d96-61be71bf47e7",
+          "body": "{\n  \"id\": 1,\n  \"domain\": \"Digital\",\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"role\": \"Architect\",\n  \"project\": {\n    \"id\": 1,\n    \"iibKey\": \"IIB-xxx\",\n    \"ipbKey\": \"IPB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"assignmentStartDate\": \"2023-01-01\",\n  \"assignmentEndDate\": \"2023-02-01\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -467,7 +467,7 @@
           "default": true
         },
         {
-          "uuid": "91b5dc25-2fec-4360-98af-6187ec58250e",
+          "uuid": "e0c415e8-a70a-4373-b6cd-6b438261a02a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -489,7 +489,7 @@
           "default": false
         },
         {
-          "uuid": "5b3e7b2d-dc78-47a9-b71d-099daadf9c34",
+          "uuid": "6d1d6f5d-0f6a-479b-8d1c-aee29e7d258a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -511,7 +511,7 @@
           "default": false
         },
         {
-          "uuid": "7bff721c-8f15-4452-8706-39cb4c6bf8f9",
+          "uuid": "3dde2e25-3e65-455a-af61-a8623b028dad",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -533,7 +533,7 @@
           "default": false
         },
         {
-          "uuid": "d0cb68e7-1bdc-4cdb-a57b-33592463f13c",
+          "uuid": "44a2fc66-a60a-408c-b6e9-f398b114ba5e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -555,7 +555,7 @@
           "default": false
         },
         {
-          "uuid": "872e2b99-0a1c-46db-86ae-26b9143fe131",
+          "uuid": "2c6f3ead-1e28-4d3f-be7a-3aaff823ef74",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -581,15 +581,15 @@
       "responseMode": null
     },
     {
-      "uuid": "1efd1ee8-5068-44d2-9c21-57b134b91923",
+      "uuid": "060ff82d-fc92-460b-933c-ccf95ddd96c3",
       "type": "http",
       "documentation": "Edit team assignment entity",
       "method": "put",
       "endpoint": "teamAssignments",
       "responses": [
         {
-          "uuid": "76a2ebaa-d264-4caf-aff4-1caa2deebeea",
-          "body": "{\n  \"id\": \"1\",\n  \"domain\": \"Digital\",\n  \"teamMember\": {\n    \"id\": \"1\",\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"role\": \"Architect\",\n  \"project\": {\n    \"id\": \"1\",\n    \"key\": \"IIB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"assignmentStartDate\": \"2023-01-01\",\n  \"assignmentEndDate\": \"2023-02-01\"\n}",
+          "uuid": "cb3b7440-4edb-44b5-8b51-3e84e7195425",
+          "body": "{\n  \"id\": 1,\n  \"domain\": \"Digital\",\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"role\": \"Architect\",\n  \"project\": {\n    \"id\": 1,\n    \"iibKey\": \"IIB-xxx\",\n    \"ipbKey\": \"IPB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"assignmentStartDate\": \"2023-01-01\",\n  \"assignmentEndDate\": \"2023-02-01\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -610,7 +610,7 @@
           "default": true
         },
         {
-          "uuid": "5f26d6ac-1d9b-4199-9f39-74569830ef29",
+          "uuid": "89239a83-e46c-4396-b236-5f5c314998fc",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -632,7 +632,7 @@
           "default": false
         },
         {
-          "uuid": "6e1f352b-f1cf-4f95-ac69-d8d1af5b4e8a",
+          "uuid": "4dd15512-8c83-453a-b723-2989dae2dd8f",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -654,7 +654,7 @@
           "default": false
         },
         {
-          "uuid": "e88f7172-7d61-4436-9107-4e1309714785",
+          "uuid": "23e9c568-fd1a-4900-8642-fd85809a6182",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -676,7 +676,7 @@
           "default": false
         },
         {
-          "uuid": "997f3654-d702-4fc1-8aeb-31bf4ff6d7f0",
+          "uuid": "8a11a804-9566-470b-9275-84b463debddd",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -698,7 +698,7 @@
           "default": false
         },
         {
-          "uuid": "84772ddb-6986-4afa-a5f6-724ba73e90a9",
+          "uuid": "0278ae1c-24e7-4764-8550-5b15f31767b3",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -724,15 +724,15 @@
       "responseMode": null
     },
     {
-      "uuid": "8449cdb2-4468-43fc-a73c-f42fadc64eb1",
+      "uuid": "1d6143a9-880a-4c2c-b2b4-4bec71da935e",
       "type": "http",
       "documentation": "Get team assignment list",
       "method": "get",
       "endpoint": "teamAssignments",
       "responses": [
         {
-          "uuid": "5545f3e3-d0ca-43d1-b56c-0d24f9c86c3a",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"1\",\n      \"domain\": \"Digital\",\n      \"teamMember\": {\n        \"id\": \"1\",\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"role\": \"Architect\",\n      \"project\": {\n        \"id\": \"1\",\n        \"key\": \"IIB-xxx\",\n        \"name\": \"DEX\",\n        \"tshirtSize\": \"L\"\n      },\n      \"assignmentStartDate\": \"2023-01-01\",\n      \"assignmentEndDate\": \"2023-02-01\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "05856e07-4461-409d-aade-1d922bf33a42",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"domain\": \"Digital\",\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"role\": \"Architect\",\n      \"project\": {\n        \"id\": 1,\n        \"iibKey\": \"IIB-xxx\",\n        \"ipbKey\": \"IPB-xxx\",\n        \"name\": \"DEX\",\n        \"tshirtSize\": \"L\"\n      },\n      \"assignmentStartDate\": \"2023-01-01\",\n      \"assignmentEndDate\": \"2023-02-01\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted team assignment list",
@@ -753,7 +753,7 @@
           "default": true
         },
         {
-          "uuid": "bc5eff6e-d004-4779-b6b1-27239fe325e1",
+          "uuid": "468060b8-b5cf-4b1b-865d-4a54f50f62f7",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -775,7 +775,7 @@
           "default": false
         },
         {
-          "uuid": "93c2810b-67e9-4584-b9d3-1ffb272f2dce",
+          "uuid": "df319138-6539-4d81-9466-0e318b020a9d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -797,7 +797,7 @@
           "default": false
         },
         {
-          "uuid": "6fbf9e40-28b2-4163-881d-4417617ae334",
+          "uuid": "8c5109fd-4f85-4d29-bc40-67f750edf16a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -819,7 +819,7 @@
           "default": false
         },
         {
-          "uuid": "6a682b2b-179e-4281-8c1c-32a65ad36fcc",
+          "uuid": "ce432e94-c549-411a-9297-98c25c29c0e1",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -841,7 +841,7 @@
           "default": false
         },
         {
-          "uuid": "58054210-a1c1-4d7f-a205-51e4dac983d3",
+          "uuid": "6b2b8957-b82a-4694-9abf-08f7e085044c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -867,15 +867,15 @@
       "responseMode": null
     },
     {
-      "uuid": "cae777a1-794d-4255-8d48-a97e7d46896e",
+      "uuid": "fe7a019c-419e-45dc-9509-72f5f1ada270",
       "type": "http",
       "documentation": "Find team assignment by id",
       "method": "get",
       "endpoint": "teamAssignments/:id",
       "responses": [
         {
-          "uuid": "12345f7a-272f-466e-bd11-49d1537ae021",
-          "body": "{\n  \"id\": \"1\",\n  \"domain\": \"Digital\",\n  \"teamMember\": {\n    \"id\": \"1\",\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"role\": \"Architect\",\n  \"project\": {\n    \"id\": \"1\",\n    \"key\": \"IIB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"assignmentStartDate\": \"2023-01-01\",\n  \"assignmentEndDate\": \"2023-02-01\"\n}",
+          "uuid": "2dfd54c7-79aa-4af2-9740-dcb3db4d7ff5",
+          "body": "{\n  \"id\": 1,\n  \"domain\": \"Digital\",\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"role\": \"Architect\",\n  \"project\": {\n    \"id\": 1,\n    \"iibKey\": \"IIB-xxx\",\n    \"ipbKey\": \"IPB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"assignmentStartDate\": \"2023-01-01\",\n  \"assignmentEndDate\": \"2023-02-01\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -896,7 +896,7 @@
           "default": true
         },
         {
-          "uuid": "1db77378-034a-4f75-b582-c7e0adaae41d",
+          "uuid": "dfa18841-9362-494f-b81a-e00c5a6a332c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -918,7 +918,7 @@
           "default": false
         },
         {
-          "uuid": "f3f2202f-de0c-4956-969d-9b69d69d0669",
+          "uuid": "1f76c76c-bb76-4c5c-889d-eaa8c7680714",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -940,7 +940,7 @@
           "default": false
         },
         {
-          "uuid": "82b9d224-aeae-4b46-8a47-0316ec8218e1",
+          "uuid": "1974e7b3-6613-48e2-a116-f8d662f63b11",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -962,7 +962,7 @@
           "default": false
         },
         {
-          "uuid": "035185f5-db72-4765-ac64-cd22c0e04a6a",
+          "uuid": "20fad1b5-abc4-4676-bbdf-4065fe9e7793",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -984,7 +984,7 @@
           "default": false
         },
         {
-          "uuid": "67919898-2706-4655-8ef6-d13c88101c40",
+          "uuid": "ecaf5b37-78e9-41fc-9324-1be7cfb714da",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1010,14 +1010,14 @@
       "responseMode": null
     },
     {
-      "uuid": "fc2fb0f0-98d2-47f7-8dce-bafa313639b3",
+      "uuid": "d45b7bc1-0bf4-48b6-a53e-3a8cdcf521ce",
       "type": "http",
       "documentation": "Deletes team assignment with given id",
       "method": "delete",
       "endpoint": "teamAssignments/:id",
       "responses": [
         {
-          "uuid": "3907aee2-31cb-4936-8f1f-73348485b556",
+          "uuid": "f5e8cd48-7e0a-463d-a1b3-a334bf742437",
           "body": "",
           "latency": 0,
           "statusCode": 204,
@@ -1039,7 +1039,7 @@
           "default": true
         },
         {
-          "uuid": "a76a8194-d308-42e7-b7d3-4be8fe9ab8e3",
+          "uuid": "cc835f04-de90-4761-96df-429a316956bb",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1061,7 +1061,7 @@
           "default": false
         },
         {
-          "uuid": "53feb1db-0cbf-4848-bbe5-790ec113ea02",
+          "uuid": "712467cb-93cb-4f31-a6ae-1f023c639485",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1083,7 +1083,7 @@
           "default": false
         },
         {
-          "uuid": "eba38f41-4a93-4a53-a11e-d8e21dea2e33",
+          "uuid": "e6c66b92-5968-45e9-badf-e206f4ad8182",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1105,7 +1105,7 @@
           "default": false
         },
         {
-          "uuid": "19a90537-86dd-4a98-9d98-d1935e86ff67",
+          "uuid": "6b01a0d7-1786-4293-be9b-5496c95a8228",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1127,7 +1127,7 @@
           "default": false
         },
         {
-          "uuid": "8766fa74-c7c1-41fd-a131-860c6ddb42af",
+          "uuid": "5c135a28-0e2a-4403-94ed-87b88e1984a8",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1153,15 +1153,15 @@
       "responseMode": null
     },
     {
-      "uuid": "01dd8bb3-7668-4e77-a149-d1594494483c",
+      "uuid": "e7175ee7-f59e-4b63-9ca2-ccf02418c227",
       "type": "http",
       "documentation": "Save team time off entity",
       "method": "post",
       "endpoint": "teamTimeOff",
       "responses": [
         {
-          "uuid": "c6a8f72e-4e88-42ad-a9ca-d9e16269ece2",
-          "body": "{\n  \"id\": \"1\",\n  \"teamMember\": {\n    \"id\": \"1\",\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"projectKey\": \"Project1\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "uuid": "f2767a59-c7b5-432f-8b08-61d00a4e4d1c",
+          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -1182,7 +1182,7 @@
           "default": true
         },
         {
-          "uuid": "042737d9-be15-40f1-9ef4-230643c705a9",
+          "uuid": "1bfd69f7-392f-4c1f-b7f1-231c035003e2",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1204,7 +1204,7 @@
           "default": false
         },
         {
-          "uuid": "ed390c18-52ec-496a-bc22-9ea6d89b5f28",
+          "uuid": "39f9902d-bb67-485d-9cb7-324223845cd4",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1226,7 +1226,7 @@
           "default": false
         },
         {
-          "uuid": "7a4cc1ab-a596-49c9-b343-a23ad25726d9",
+          "uuid": "96f56076-f928-4551-95c5-787ec942b951",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1248,7 +1248,7 @@
           "default": false
         },
         {
-          "uuid": "1a701bfe-1de9-4830-b416-5a9c382809ea",
+          "uuid": "a5ec77b0-2b74-43ad-b7ce-85b2b03a593e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1270,7 +1270,7 @@
           "default": false
         },
         {
-          "uuid": "f22523b9-b494-4d09-b8a0-b66d0e5b5945",
+          "uuid": "a49edf31-be26-477b-b2f8-baff06c29647",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1296,15 +1296,15 @@
       "responseMode": null
     },
     {
-      "uuid": "9834f2d8-5cd4-431e-a82f-ad56caadea85",
+      "uuid": "efb7184f-5195-4698-a7c3-fe977f37e09d",
       "type": "http",
       "documentation": "Edit team time off entity",
       "method": "put",
       "endpoint": "teamTimeOff",
       "responses": [
         {
-          "uuid": "105cc80d-40fe-4644-90ca-a8074dfe8101",
-          "body": "{\n  \"id\": \"1\",\n  \"teamMember\": {\n    \"id\": \"1\",\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"projectKey\": \"Project1\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "uuid": "8aba5150-b79f-4983-aa4b-e0218725fcae",
+          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -1325,7 +1325,7 @@
           "default": true
         },
         {
-          "uuid": "9ece9536-7a09-4428-bfaa-777730487a51",
+          "uuid": "4a42dc21-f935-4284-92fe-e4048c26a08e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1347,7 +1347,7 @@
           "default": false
         },
         {
-          "uuid": "48fb269e-a5d1-4cbf-add5-8d073df99cfd",
+          "uuid": "9ec7eafa-ddad-4d14-8046-bace59c792ab",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1369,7 +1369,7 @@
           "default": false
         },
         {
-          "uuid": "c1b5d9bc-4aba-499f-ab1f-02a98c968091",
+          "uuid": "e3a4fb50-25dd-40f9-a687-bcbcbba1a568",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1391,7 +1391,7 @@
           "default": false
         },
         {
-          "uuid": "63669ed5-d016-4c0a-9098-f1329276d2cc",
+          "uuid": "a21a184a-c034-4c3b-acec-4ed576fa964a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1413,7 +1413,7 @@
           "default": false
         },
         {
-          "uuid": "bbee9edb-9377-4b50-a8a6-dade48313028",
+          "uuid": "0bc0223a-90fe-40a9-8488-7de5f532ff3e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1439,15 +1439,15 @@
       "responseMode": null
     },
     {
-      "uuid": "f29cbfdb-44e5-435b-a88a-bd7ed4282b1f",
+      "uuid": "836581ff-ec32-4748-acc8-d0316254da3b",
       "type": "http",
       "documentation": "Get team time off list",
       "method": "get",
       "endpoint": "teamTimeOff",
       "responses": [
         {
-          "uuid": "61276e65-e87e-4836-995b-98b80a0ab191",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"1\",\n      \"teamMember\": {\n        \"id\": \"1\",\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"dayOffType\": \"Public Holiday\",\n      \"projectKey\": \"Project1\",\n      \"startDate\": \"2023-02-01\",\n      \"endDate\": \"2023-02-01\",\n      \"numberOfHours\": 6\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "ce8c30e5-e1db-4346-b997-d2f25a9c5f63",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"dayOffType\": \"Public Holiday\",\n      \"startDate\": \"2023-02-01\",\n      \"endDate\": \"2023-02-01\",\n      \"numberOfHours\": 6\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted team time off list",
@@ -1468,7 +1468,7 @@
           "default": true
         },
         {
-          "uuid": "eba6e1b6-cd73-45aa-9ec2-e39bfd6bc145",
+          "uuid": "540c7f2d-0f5b-4c7d-a063-c9c54aa89b9d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1490,7 +1490,7 @@
           "default": false
         },
         {
-          "uuid": "11aa0371-7c52-4d4e-ac3f-7a46ff275cb2",
+          "uuid": "28158776-bb9c-4fc4-9d51-a7bbc94e6f86",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1512,7 +1512,7 @@
           "default": false
         },
         {
-          "uuid": "b2a2bd41-916e-489d-9580-9d3d7484a8be",
+          "uuid": "70a67c95-b511-44a7-b0a3-e9dd82d9a924",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1534,7 +1534,7 @@
           "default": false
         },
         {
-          "uuid": "f07b3df3-d180-4d49-83c7-2c54f383262f",
+          "uuid": "3a130680-b76d-43c7-b944-27c5d60545df",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1556,7 +1556,7 @@
           "default": false
         },
         {
-          "uuid": "f50c5d4e-169b-4dd7-b75d-0b89b4893ff4",
+          "uuid": "a651e2d5-fbfe-4235-8a86-05b8367ddd73",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1582,15 +1582,15 @@
       "responseMode": null
     },
     {
-      "uuid": "a2530ff1-4146-407b-9684-9086beffb825",
+      "uuid": "16f31a39-542d-4cbb-8065-a36b12f854d7",
       "type": "http",
       "documentation": "Find team time off by id",
       "method": "get",
       "endpoint": "teamTimeOff/:id",
       "responses": [
         {
-          "uuid": "2ae99e55-644b-4111-a3b6-c5ede6be931c",
-          "body": "{\n  \"id\": \"1\",\n  \"teamMember\": {\n    \"id\": \"1\",\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"projectKey\": \"Project1\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "uuid": "87481f0b-9f4f-4d1b-b465-99ed0aa7af61",
+          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -1611,7 +1611,7 @@
           "default": true
         },
         {
-          "uuid": "fa8bac4e-ba84-4718-8aba-27de98b50a2c",
+          "uuid": "e19edc9c-273c-4c49-b7df-90957759cb07",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1633,7 +1633,7 @@
           "default": false
         },
         {
-          "uuid": "3385b295-9f9a-4878-bbf4-c29f2be87d4d",
+          "uuid": "da39891d-2885-4f4e-a479-bdd48459106d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1655,7 +1655,7 @@
           "default": false
         },
         {
-          "uuid": "a318a154-4b47-43db-9fdb-6d167479b17c",
+          "uuid": "511cffc1-61d2-4393-a598-3e44dbbb3f67",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1677,7 +1677,7 @@
           "default": false
         },
         {
-          "uuid": "de7cce14-0f76-492c-abef-770dba980886",
+          "uuid": "06e2b06f-3511-4fac-97e5-f4f2ec3c6212",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1699,7 +1699,7 @@
           "default": false
         },
         {
-          "uuid": "726925ab-7a97-4c7d-8af3-2cc7da3cf28e",
+          "uuid": "b4dc3c3c-550c-4ce9-9329-09c090cdc4d9",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1725,14 +1725,14 @@
       "responseMode": null
     },
     {
-      "uuid": "cd846fac-81d8-4940-ac42-9a577410b8c0",
+      "uuid": "b28d3a98-c1da-4726-bfac-1aa855ce8d81",
       "type": "http",
       "documentation": "Deletes team time off with given id",
       "method": "delete",
       "endpoint": "teamTimeOff/:id",
       "responses": [
         {
-          "uuid": "c7912bbc-a333-4cc2-a39d-fb7dccc7aacb",
+          "uuid": "d0383b91-3077-4c15-b32a-8c081ab3fefe",
           "body": "",
           "latency": 0,
           "statusCode": 204,
@@ -1754,7 +1754,7 @@
           "default": true
         },
         {
-          "uuid": "ab62a03e-7eaf-4352-84ca-f1ecbfe0cc3e",
+          "uuid": "e59f4a78-8942-432c-a1b2-d220ff079ead",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1776,7 +1776,7 @@
           "default": false
         },
         {
-          "uuid": "a2d2a8e2-3229-40fd-80bc-c9d26f5bdc12",
+          "uuid": "d3421574-4d80-426f-8e2f-45e83a725297",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1798,7 +1798,7 @@
           "default": false
         },
         {
-          "uuid": "2f328944-c0d3-4ded-9311-cb13e3225d97",
+          "uuid": "a76f3e66-a591-4311-b68d-010c33f254d6",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1820,7 +1820,7 @@
           "default": false
         },
         {
-          "uuid": "8e9657f6-be4a-4a8f-aaef-92e2335bfd0d",
+          "uuid": "9cabc595-6e8f-41cc-b27e-828d3ee114be",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1842,7 +1842,7 @@
           "default": false
         },
         {
-          "uuid": "d7995f2b-9a4a-4ab7-b329-f7d3603d3a3c",
+          "uuid": "2446505c-723f-420e-9c09-2eefa7cf6acf",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1868,15 +1868,15 @@
       "responseMode": null
     },
     {
-      "uuid": "ae6ee46c-c2ff-4437-85e6-b023be0712a2",
+      "uuid": "5786d880-0ba2-457c-8975-4aa3164b7ded",
       "type": "http",
       "documentation": "Save effort matrix entity",
       "method": "post",
       "endpoint": "effortMatrix",
       "responses": [
         {
-          "uuid": "dad4f93d-9042-4b78-b615-efe5822746c7",
-          "body": "{\n  \"id\": \"1\",\n  \"role\": \"IT PM\",\n  \"evaluationPhase\": 10,\n  \"analysisPhase\": 5,\n  \"designPhase\": 10,\n  \"developmentPhase\": 10,\n  \"systemTestPhase\": 5,\n  \"uatPhase\": 15,\n  \"goLivePhase\": 5,\n  \"soakPhase\": 5\n}",
+          "uuid": "1ad59165-774f-46e9-bdf2-7a5e0f09c4a8",
+          "body": "{\n  \"id\": 1,\n  \"role\": \"IT PM\",\n  \"evaluationPhase\": 10,\n  \"analysisPhase\": 5,\n  \"designPhase\": 10,\n  \"developmentPhase\": 10,\n  \"systemTestPhase\": 5,\n  \"uatPhase\": 15,\n  \"goLivePhase\": 5,\n  \"soakPhase\": 5\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -1897,7 +1897,7 @@
           "default": true
         },
         {
-          "uuid": "304ad9c1-d532-4930-822d-dca9a03d439e",
+          "uuid": "e6580d75-1a0d-49c9-9bc2-5b0f5397df8e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1919,7 +1919,7 @@
           "default": false
         },
         {
-          "uuid": "5b407cb3-e7f4-438a-9e92-8e10dc78b767",
+          "uuid": "0461fb8a-cd0e-47a8-b945-1ea6ba1086b0",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1941,7 +1941,7 @@
           "default": false
         },
         {
-          "uuid": "97dcc652-f15f-4e10-98d1-f62bf9e6b3e9",
+          "uuid": "709cae23-6d5d-41fa-9499-7d779cdd1ab1",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1963,7 +1963,7 @@
           "default": false
         },
         {
-          "uuid": "18e17308-760d-47e1-b0fe-df292b454cce",
+          "uuid": "2db82ec1-870a-42e6-84ec-9e0dc4c401d6",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1985,7 +1985,7 @@
           "default": false
         },
         {
-          "uuid": "2277d553-6079-4277-8443-1f3db3312e4a",
+          "uuid": "d9073587-56d1-41c2-83d2-e7e5e18429c4",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2011,15 +2011,15 @@
       "responseMode": null
     },
     {
-      "uuid": "240d9ca3-4ef4-4d5e-a4cd-75de5d88b69c",
+      "uuid": "e00cc31b-17ca-4fff-b031-f1b30c1d9699",
       "type": "http",
       "documentation": "Edit effort matrix entity",
       "method": "put",
       "endpoint": "effortMatrix",
       "responses": [
         {
-          "uuid": "a60c6b9f-4556-4230-9d65-3b07298f9763",
-          "body": "{\n  \"id\": \"1\",\n  \"role\": \"IT PM\",\n  \"evaluationPhase\": 10,\n  \"analysisPhase\": 5,\n  \"designPhase\": 10,\n  \"developmentPhase\": 10,\n  \"systemTestPhase\": 5,\n  \"uatPhase\": 15,\n  \"goLivePhase\": 5,\n  \"soakPhase\": 5\n}",
+          "uuid": "48cc086b-7617-425a-a230-f9a652fc9673",
+          "body": "{\n  \"id\": 1,\n  \"role\": \"IT PM\",\n  \"evaluationPhase\": 10,\n  \"analysisPhase\": 5,\n  \"designPhase\": 10,\n  \"developmentPhase\": 10,\n  \"systemTestPhase\": 5,\n  \"uatPhase\": 15,\n  \"goLivePhase\": 5,\n  \"soakPhase\": 5\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -2040,7 +2040,7 @@
           "default": true
         },
         {
-          "uuid": "7e22a476-dc77-45b4-8be0-b32bd5eca968",
+          "uuid": "321d0ba8-fd60-4ab2-ad50-03b5787725d6",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2062,7 +2062,7 @@
           "default": false
         },
         {
-          "uuid": "0b352ae6-46a1-40c1-bdcb-2df81be343aa",
+          "uuid": "1a458ef6-54cd-4e6d-9702-929ff1dc0bca",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2084,7 +2084,7 @@
           "default": false
         },
         {
-          "uuid": "dde6249b-0800-4eaa-a7c8-b2982e90d57f",
+          "uuid": "96b8e9fb-b258-4409-89a2-47ca29ce7870",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2106,7 +2106,7 @@
           "default": false
         },
         {
-          "uuid": "16bd8596-0d09-40de-a736-8e95aaf72f83",
+          "uuid": "0b96ce92-1a70-4e6e-86bb-77b07ce3f53c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2128,7 +2128,7 @@
           "default": false
         },
         {
-          "uuid": "5ab65a93-5876-4fa6-84a3-7e0ffcde5355",
+          "uuid": "e6472fe7-c5c9-4a6a-a691-9b84081f750c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2154,15 +2154,15 @@
       "responseMode": null
     },
     {
-      "uuid": "f3285c35-98cb-4423-8169-1a37caa7f334",
+      "uuid": "0ecf95d5-8aff-4c28-adad-79503b5583ad",
       "type": "http",
       "documentation": "Get effort matrix list",
       "method": "get",
       "endpoint": "effortMatrix",
       "responses": [
         {
-          "uuid": "a05d33b9-6d8f-4edf-8f04-1c0d22d66d85",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"1\",\n      \"role\": \"IT PM\",\n      \"evaluationPhase\": 10,\n      \"analysisPhase\": 5,\n      \"designPhase\": 10,\n      \"developmentPhase\": 10,\n      \"systemTestPhase\": 5,\n      \"uatPhase\": 15,\n      \"goLivePhase\": 5,\n      \"soakPhase\": 5\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "2d818ece-5453-41fe-98e5-59b4288ffb61",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"role\": \"IT PM\",\n      \"evaluationPhase\": 10,\n      \"analysisPhase\": 5,\n      \"designPhase\": 10,\n      \"developmentPhase\": 10,\n      \"systemTestPhase\": 5,\n      \"uatPhase\": 15,\n      \"goLivePhase\": 5,\n      \"soakPhase\": 5\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted effort matrix list",
@@ -2183,7 +2183,7 @@
           "default": true
         },
         {
-          "uuid": "160abf4d-0010-4a9f-b77e-12851c45b412",
+          "uuid": "abcff711-2a2c-44f7-914a-6e204f798c5f",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2205,7 +2205,7 @@
           "default": false
         },
         {
-          "uuid": "e6d9c9cf-c012-4732-86a9-3a458bd80e2b",
+          "uuid": "e4bdf66e-2b95-470a-bbaf-3def3c54e187",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2227,7 +2227,7 @@
           "default": false
         },
         {
-          "uuid": "f5739523-d9b6-4a6b-8c2b-d492bb7c930b",
+          "uuid": "5980c552-d5a4-4658-be77-7f710dc5f41a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2249,7 +2249,7 @@
           "default": false
         },
         {
-          "uuid": "1b1b40a1-c1e9-4d2b-aa99-c55ba83727f5",
+          "uuid": "0bed00c2-831a-4d44-9ef2-f17306eab1ef",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2271,7 +2271,7 @@
           "default": false
         },
         {
-          "uuid": "3e8647d2-97f6-4254-95ac-fbf4e8d27013",
+          "uuid": "faed14fa-f878-4dbb-8716-68dabcd2f069",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2297,15 +2297,15 @@
       "responseMode": null
     },
     {
-      "uuid": "ed00e34e-e270-4a40-8840-398688263c64",
+      "uuid": "5e78be01-ea2d-4308-90dc-db73acddec6b",
       "type": "http",
       "documentation": "Find effort matrix by id",
       "method": "get",
       "endpoint": "effortMatrix/:id",
       "responses": [
         {
-          "uuid": "4bcc049a-1eb8-4f6f-bedb-8f07106a6fec",
-          "body": "{\n  \"id\": \"1\",\n  \"role\": \"IT PM\",\n  \"evaluationPhase\": 10,\n  \"analysisPhase\": 5,\n  \"designPhase\": 10,\n  \"developmentPhase\": 10,\n  \"systemTestPhase\": 5,\n  \"uatPhase\": 15,\n  \"goLivePhase\": 5,\n  \"soakPhase\": 5\n}",
+          "uuid": "0b23633d-deef-4f8d-a871-bba4b5ae31b0",
+          "body": "{\n  \"id\": 1,\n  \"role\": \"IT PM\",\n  \"evaluationPhase\": 10,\n  \"analysisPhase\": 5,\n  \"designPhase\": 10,\n  \"developmentPhase\": 10,\n  \"systemTestPhase\": 5,\n  \"uatPhase\": 15,\n  \"goLivePhase\": 5,\n  \"soakPhase\": 5\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -2326,7 +2326,7 @@
           "default": true
         },
         {
-          "uuid": "8bf8c963-63de-4b5a-9404-8592b427fb1d",
+          "uuid": "1e0c8199-69dd-45a2-8154-fc87a0ace90d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2348,7 +2348,7 @@
           "default": false
         },
         {
-          "uuid": "5b742e39-2c63-4316-9e71-ea0ecb1000e1",
+          "uuid": "c797c41c-6a1a-41eb-beed-f2e8a3a90c17",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2370,7 +2370,7 @@
           "default": false
         },
         {
-          "uuid": "1c68245f-0234-481c-b27b-880bd8a62c87",
+          "uuid": "6d64a1eb-1527-47ba-8bdd-536efd631774",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2392,7 +2392,7 @@
           "default": false
         },
         {
-          "uuid": "569242a7-ba5f-4d51-9e46-6986c68694fa",
+          "uuid": "468015b3-3294-4951-864c-62ca1a2a27e8",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2414,7 +2414,7 @@
           "default": false
         },
         {
-          "uuid": "56c804fc-41e9-4856-9c95-0f64af1fc947",
+          "uuid": "cccc8eb3-b837-4d2a-86fc-42d238365a0b",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2440,14 +2440,14 @@
       "responseMode": null
     },
     {
-      "uuid": "2ca27698-5bbb-409e-aabc-8f24a390b508",
+      "uuid": "21add6d0-bf87-4edd-a486-0862e2eb6dca",
       "type": "http",
       "documentation": "Deletes effort matrix with given id",
       "method": "delete",
       "endpoint": "effortMatrix/:id",
       "responses": [
         {
-          "uuid": "76b8fa31-8fe8-4aec-b0a2-2707e0de097a",
+          "uuid": "a2a97131-2611-4706-b392-ed47d44a763e",
           "body": "",
           "latency": 0,
           "statusCode": 204,
@@ -2469,7 +2469,7 @@
           "default": true
         },
         {
-          "uuid": "3abc2bb7-997f-420f-af44-1de663b53cf9",
+          "uuid": "24aed833-d2df-4f85-b1e3-5a232e13e2e1",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2491,7 +2491,7 @@
           "default": false
         },
         {
-          "uuid": "23a61ca8-7823-464f-a4eb-c5c38979b3be",
+          "uuid": "89eda000-5a30-402c-b803-3e4bacdcf79a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2513,7 +2513,7 @@
           "default": false
         },
         {
-          "uuid": "00851379-482e-48e8-92db-7df43dac5897",
+          "uuid": "1d2147a6-39c2-4bfd-9a9c-d1e212699e49",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2535,7 +2535,7 @@
           "default": false
         },
         {
-          "uuid": "19e47805-cbad-4096-8ee2-458e7adaf176",
+          "uuid": "ad2f5b0b-60b6-4958-a86a-68349df77451",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2557,7 +2557,7 @@
           "default": false
         },
         {
-          "uuid": "7dec59bf-97c5-4a79-bcc0-90b17efc633e",
+          "uuid": "e5cb86a6-ed45-41e1-9320-ed62f26a0b80",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2583,15 +2583,15 @@
       "responseMode": null
     },
     {
-      "uuid": "b95538fb-b31e-4644-8533-b01d67628198",
+      "uuid": "1ab1aa58-7c47-4da9-8ed1-e5e163da3730",
       "type": "http",
       "documentation": "Save project milestone entity",
       "method": "post",
       "endpoint": "projectMilestones",
       "responses": [
         {
-          "uuid": "c2ea4618-33e1-456d-8e66-143863f76f99",
-          "body": "{\n  \"id\": \"1\",\n  \"stage\": \"Design\",\n  \"project\": {\n    \"id\": \"1\",\n    \"key\": \"IIB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\"\n}",
+          "uuid": "9bbb8167-2958-4b76-8df0-fbaaf6aa8573",
+          "body": "{\n  \"id\": 1,\n  \"stage\": \"Design\",\n  \"project\": {\n    \"id\": 1,\n    \"iibKey\": \"IIB-xxx\",\n    \"ipbKey\": \"IPB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -2612,7 +2612,7 @@
           "default": true
         },
         {
-          "uuid": "dedbf700-b4b8-4301-9916-cafa8b7d7931",
+          "uuid": "56efa46e-a08a-49fe-bd31-ca54911d5248",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2634,7 +2634,7 @@
           "default": false
         },
         {
-          "uuid": "82b8248a-f50b-4ba3-bbf4-b6adfc4491b1",
+          "uuid": "24a015c2-eff3-42c2-ad26-4aa35f5ee0e5",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2656,7 +2656,7 @@
           "default": false
         },
         {
-          "uuid": "17db0022-8928-4818-8f3e-d9951513cca4",
+          "uuid": "64f384f4-78da-486c-a4a6-2bf0a44c2479",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2678,7 +2678,7 @@
           "default": false
         },
         {
-          "uuid": "cdf25191-85c9-49a9-9aef-22864f2fcdd0",
+          "uuid": "dc691fd9-3372-44a0-83b2-fcd960824685",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2700,7 +2700,7 @@
           "default": false
         },
         {
-          "uuid": "006f0fa6-e8b8-45c4-9ced-ba829e9e8b36",
+          "uuid": "504a3682-ab73-4b2c-b760-ba0df157fca5",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2726,15 +2726,15 @@
       "responseMode": null
     },
     {
-      "uuid": "24793769-1d36-4e45-959a-80733430803f",
+      "uuid": "ff70197f-2c72-4324-aae5-8155fa0ba97c",
       "type": "http",
       "documentation": "Edit project milestone entity",
       "method": "put",
       "endpoint": "projectMilestones",
       "responses": [
         {
-          "uuid": "deee4b46-a611-4a71-84ef-22b6bc7025eb",
-          "body": "{\n  \"id\": \"1\",\n  \"stage\": \"Design\",\n  \"project\": {\n    \"id\": \"1\",\n    \"key\": \"IIB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\"\n}",
+          "uuid": "fe037588-2402-4d16-953d-6dc23926887a",
+          "body": "{\n  \"id\": 1,\n  \"stage\": \"Design\",\n  \"project\": {\n    \"id\": 1,\n    \"iibKey\": \"IIB-xxx\",\n    \"ipbKey\": \"IPB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -2755,7 +2755,7 @@
           "default": true
         },
         {
-          "uuid": "6cd5cf84-13f1-4e4b-a8c3-0e9582ffe996",
+          "uuid": "b38c1ca8-92fa-4beb-a852-1084da07ed77",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2777,7 +2777,7 @@
           "default": false
         },
         {
-          "uuid": "89a4bd50-42c4-4114-b69a-254397e0129d",
+          "uuid": "e3f8962a-b920-4c87-b8cf-cc291c1fe1c1",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2799,7 +2799,7 @@
           "default": false
         },
         {
-          "uuid": "2312de74-c1f2-44ed-b2e3-deb7f02a29db",
+          "uuid": "3016b28a-21a4-48f2-95e6-7b57f60524a8",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2821,7 +2821,7 @@
           "default": false
         },
         {
-          "uuid": "363b9824-71d9-45e2-afb6-034449ed7bf5",
+          "uuid": "0c1675fb-efa2-428f-8818-30486ea6ee63",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2843,7 +2843,7 @@
           "default": false
         },
         {
-          "uuid": "696370e1-c756-440e-94ee-5e713f23fb14",
+          "uuid": "8ee846a5-2571-49ca-8ff1-c41b5dfc908d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2869,15 +2869,15 @@
       "responseMode": null
     },
     {
-      "uuid": "f3b1e27c-7a80-465f-9a39-abf6d689200d",
+      "uuid": "14671192-0f69-4593-bc14-e05e00dd181d",
       "type": "http",
       "documentation": "Get project milestones list",
       "method": "get",
       "endpoint": "projectMilestones",
       "responses": [
         {
-          "uuid": "6bce24ee-fc9f-44f2-b8b1-8df6fdbc4c91",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"1\",\n      \"stage\": \"Design\",\n      \"project\": {\n        \"id\": \"1\",\n        \"key\": \"IIB-xxx\",\n        \"name\": \"DEX\",\n        \"tshirtSize\": \"L\"\n      },\n      \"startDate\": \"2023-02-01\",\n      \"endDate\": \"2023-02-01\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "3b2a8961-33c0-4f7c-8b0f-39fdbeff0e8f",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"stage\": \"Design\",\n      \"project\": {\n        \"id\": 1,\n        \"iibKey\": \"IIB-xxx\",\n        \"ipbKey\": \"IPB-xxx\",\n        \"name\": \"DEX\",\n        \"tshirtSize\": \"L\"\n      },\n      \"startDate\": \"2023-02-01\",\n      \"endDate\": \"2023-02-01\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted project milestones list",
@@ -2898,7 +2898,7 @@
           "default": true
         },
         {
-          "uuid": "c8903526-8c50-484a-9a96-41c2440b3807",
+          "uuid": "bd5b55eb-ed56-43ec-ad61-1cc38f2c99c4",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2920,7 +2920,7 @@
           "default": false
         },
         {
-          "uuid": "cea2b611-98d9-4386-8de9-e5a20b631683",
+          "uuid": "85d85e8c-2ce1-41ae-a225-0d705dbfb8c7",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2942,7 +2942,7 @@
           "default": false
         },
         {
-          "uuid": "b5f47de4-ade0-4a02-8b8b-97d55f2ed3e0",
+          "uuid": "91a532d8-7012-416a-a440-2023ae9d23a7",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2964,7 +2964,7 @@
           "default": false
         },
         {
-          "uuid": "eece9a9f-c4de-4f46-b9ab-7c23a736cb87",
+          "uuid": "b45c730f-ee1a-4002-aca7-a24ac6ce582f",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2986,7 +2986,7 @@
           "default": false
         },
         {
-          "uuid": "1e3a6bb8-a1d0-4005-880d-9b5672e066bd",
+          "uuid": "65c7e178-0e77-4072-91db-9e6512362e6c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3012,15 +3012,15 @@
       "responseMode": null
     },
     {
-      "uuid": "519ccc8e-c05f-4ce5-bf26-fefed5958a08",
+      "uuid": "fc7112d1-668d-45e6-baca-7bdd5a4ea2dd",
       "type": "http",
       "documentation": "Find project milestone by id",
       "method": "get",
       "endpoint": "projectMilestones/:id",
       "responses": [
         {
-          "uuid": "611f8e8e-413d-4580-84bd-62e3608d7ffb",
-          "body": "{\n  \"id\": \"1\",\n  \"stage\": \"Design\",\n  \"project\": {\n    \"id\": \"1\",\n    \"key\": \"IIB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\"\n}",
+          "uuid": "36935f81-6f9b-4ec9-b5f5-4dc5d9ad523e",
+          "body": "{\n  \"id\": 1,\n  \"stage\": \"Design\",\n  \"project\": {\n    \"id\": 1,\n    \"iibKey\": \"IIB-xxx\",\n    \"ipbKey\": \"IPB-xxx\",\n    \"name\": \"DEX\",\n    \"tshirtSize\": \"L\"\n  },\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -3041,7 +3041,7 @@
           "default": true
         },
         {
-          "uuid": "5c98c954-bf68-4187-aed4-32c804ee726c",
+          "uuid": "40ec56ad-4430-4397-a8d1-a4a536687946",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3063,7 +3063,7 @@
           "default": false
         },
         {
-          "uuid": "ced6cf87-b3d9-4ae6-9a40-575f109b05e3",
+          "uuid": "50d2023f-1a88-40cf-8e57-620c60849e16",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3085,7 +3085,7 @@
           "default": false
         },
         {
-          "uuid": "074e3038-ff7f-4efe-845d-045ab5da7768",
+          "uuid": "abf6a809-93e7-4bdc-8399-6273a3920d2c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3107,7 +3107,7 @@
           "default": false
         },
         {
-          "uuid": "7e0c5011-4b1e-4b04-ac46-9ef422139ebf",
+          "uuid": "9ef0579b-a8fa-43f5-9aef-d5c9bdea8003",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3129,7 +3129,7 @@
           "default": false
         },
         {
-          "uuid": "729493fb-bb7a-4823-94f3-c6b977307ecc",
+          "uuid": "5d5f8a49-b64f-47af-b3b5-3bbe78f44964",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3155,14 +3155,14 @@
       "responseMode": null
     },
     {
-      "uuid": "7c780058-d214-4e65-888e-878d6490c2ca",
+      "uuid": "bd8d0bad-ef56-46bf-ad29-717e0727b830",
       "type": "http",
       "documentation": "Deletes project milestone with given id",
       "method": "delete",
       "endpoint": "projectMilestones/:id",
       "responses": [
         {
-          "uuid": "3fde771e-58df-4f97-81b1-bc799f1e2a5e",
+          "uuid": "cf90b295-ab2e-405f-b348-5142e897bb69",
           "body": "",
           "latency": 0,
           "statusCode": 204,
@@ -3184,7 +3184,7 @@
           "default": true
         },
         {
-          "uuid": "cd5c8719-4694-4273-acb9-5e84cb4cbbbc",
+          "uuid": "01db45cb-ad90-42a7-b9c7-94acd218dc22",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3206,7 +3206,7 @@
           "default": false
         },
         {
-          "uuid": "792fe977-5c0b-489a-8236-458940311a6f",
+          "uuid": "19c21a8a-6818-48cb-b04e-d4130613dec0",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3228,7 +3228,7 @@
           "default": false
         },
         {
-          "uuid": "1aef19e1-e79e-4f5a-ac55-1b8532d00b7e",
+          "uuid": "96ebcbe1-946d-4921-9ca2-a8e3d32dd931",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3250,7 +3250,7 @@
           "default": false
         },
         {
-          "uuid": "9e660330-d45c-493c-a9a8-b3c9689a85ff",
+          "uuid": "b37ac7bb-398e-4f21-a7fd-3f907d382d01",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3272,7 +3272,7 @@
           "default": false
         },
         {
-          "uuid": "ffb8b92e-1965-4b21-94c7-336c2863b32a",
+          "uuid": "0b1f999a-77ed-4779-baab-1a4d975f2db9",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3301,95 +3301,95 @@
   "rootChildren": [
     {
       "type": "route",
-      "uuid": "e5b77c72-d519-44b0-b90a-8b334645d44a"
+      "uuid": "b4ea454f-a787-496f-9265-652c003f39b9"
     },
     {
       "type": "route",
-      "uuid": "a3569021-8150-42ac-9327-ed444735804b"
+      "uuid": "baa13252-7400-4434-bf06-b643a07d2f92"
     },
     {
       "type": "route",
-      "uuid": "0f05e2bc-646a-40cb-9674-9d9cd19934ca"
+      "uuid": "46a6b594-c67c-48d8-8509-f33e8a46d6f2"
     },
     {
       "type": "route",
-      "uuid": "42a14c86-5187-4f2c-88f6-ec0084d0f836"
+      "uuid": "def4dfeb-4a7f-4776-b27a-b23e57bd90ba"
     },
     {
       "type": "route",
-      "uuid": "1efd1ee8-5068-44d2-9c21-57b134b91923"
+      "uuid": "060ff82d-fc92-460b-933c-ccf95ddd96c3"
     },
     {
       "type": "route",
-      "uuid": "8449cdb2-4468-43fc-a73c-f42fadc64eb1"
+      "uuid": "1d6143a9-880a-4c2c-b2b4-4bec71da935e"
     },
     {
       "type": "route",
-      "uuid": "cae777a1-794d-4255-8d48-a97e7d46896e"
+      "uuid": "fe7a019c-419e-45dc-9509-72f5f1ada270"
     },
     {
       "type": "route",
-      "uuid": "fc2fb0f0-98d2-47f7-8dce-bafa313639b3"
+      "uuid": "d45b7bc1-0bf4-48b6-a53e-3a8cdcf521ce"
     },
     {
       "type": "route",
-      "uuid": "01dd8bb3-7668-4e77-a149-d1594494483c"
+      "uuid": "e7175ee7-f59e-4b63-9ca2-ccf02418c227"
     },
     {
       "type": "route",
-      "uuid": "9834f2d8-5cd4-431e-a82f-ad56caadea85"
+      "uuid": "efb7184f-5195-4698-a7c3-fe977f37e09d"
     },
     {
       "type": "route",
-      "uuid": "f29cbfdb-44e5-435b-a88a-bd7ed4282b1f"
+      "uuid": "836581ff-ec32-4748-acc8-d0316254da3b"
     },
     {
       "type": "route",
-      "uuid": "a2530ff1-4146-407b-9684-9086beffb825"
+      "uuid": "16f31a39-542d-4cbb-8065-a36b12f854d7"
     },
     {
       "type": "route",
-      "uuid": "cd846fac-81d8-4940-ac42-9a577410b8c0"
+      "uuid": "b28d3a98-c1da-4726-bfac-1aa855ce8d81"
     },
     {
       "type": "route",
-      "uuid": "ae6ee46c-c2ff-4437-85e6-b023be0712a2"
+      "uuid": "5786d880-0ba2-457c-8975-4aa3164b7ded"
     },
     {
       "type": "route",
-      "uuid": "240d9ca3-4ef4-4d5e-a4cd-75de5d88b69c"
+      "uuid": "e00cc31b-17ca-4fff-b031-f1b30c1d9699"
     },
     {
       "type": "route",
-      "uuid": "f3285c35-98cb-4423-8169-1a37caa7f334"
+      "uuid": "0ecf95d5-8aff-4c28-adad-79503b5583ad"
     },
     {
       "type": "route",
-      "uuid": "ed00e34e-e270-4a40-8840-398688263c64"
+      "uuid": "5e78be01-ea2d-4308-90dc-db73acddec6b"
     },
     {
       "type": "route",
-      "uuid": "2ca27698-5bbb-409e-aabc-8f24a390b508"
+      "uuid": "21add6d0-bf87-4edd-a486-0862e2eb6dca"
     },
     {
       "type": "route",
-      "uuid": "b95538fb-b31e-4644-8533-b01d67628198"
+      "uuid": "1ab1aa58-7c47-4da9-8ed1-e5e163da3730"
     },
     {
       "type": "route",
-      "uuid": "24793769-1d36-4e45-959a-80733430803f"
+      "uuid": "ff70197f-2c72-4324-aae5-8155fa0ba97c"
     },
     {
       "type": "route",
-      "uuid": "f3b1e27c-7a80-465f-9a39-abf6d689200d"
+      "uuid": "14671192-0f69-4593-bc14-e05e00dd181d"
     },
     {
       "type": "route",
-      "uuid": "519ccc8e-c05f-4ce5-bf26-fefed5958a08"
+      "uuid": "fc7112d1-668d-45e6-baca-7bdd5a4ea2dd"
     },
     {
       "type": "route",
-      "uuid": "7c780058-d214-4e65-888e-878d6490c2ca"
+      "uuid": "bd8d0bad-ef56-46bf-ad29-717e0727b830"
     }
   ],
   "proxyMode": false,
