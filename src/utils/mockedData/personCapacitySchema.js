@@ -10,48 +10,56 @@ export const JSONSchema = {
         type: 'GET'
       },
       hideCheckbox: true,
+      stickyRatio: 0.5,
       columns: [
         {
           title: 'Person',
           field: 'teamMember.name',
           align: 'left',
-          type: 'string'
+          type: 'string',
+          sticky: true
         },
         {
           title: 'IIB Key',
           field: 'project.key',
           align: 'left',
-          type: 'string'
+          type: 'string',
+          sticky: true
         },
         {
           title: 'IPB Key',
           field: 'project.ipbKey',
           align: 'left',
-          type: 'string'
+          type: 'string',
+          sticky: true
         },
         {
           title: 'Assigned Project',
           field: 'project.name',
           align: 'left',
-          type: 'string'
+          type: 'string',
+          sticky: true
         },
         {
           title: 'Role',
           field: 'role',
           align: 'left',
-          type: 'string'
+          type: 'string',
+          sticky: true
         },
         {
           title: 'Start Date',
           field: 'startDate',
           align: 'left',
-          type: 'date'
+          type: 'date',
+          sticky: true
         },
         {
           title: 'End Date',
           field: 'endDate',
           align: 'left',
-          type: 'date'
+          type: 'date',
+          sticky: true
         },
         {
           title: 'T-Shirt Size',
@@ -139,7 +147,9 @@ export const JSONSchema = {
             type: 'text',
             name: 'person.id',
             label: 'Person Id',
-            inputProps: { hidden: true },
+            inputProps: {
+              hidden: true
+            },
             variable: 'id',
             hidden: true
           }
