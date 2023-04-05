@@ -4,6 +4,7 @@ export const JSONSchema = {
   children: [
     {
       UIComponent: 'ComboBoxTable',
+      id: 'the-cbt',
       combo: {
         UIComponent: 'Input',
         type: 'select',
@@ -11,20 +12,43 @@ export const JSONSchema = {
         name: 'teamMember.domain',
         label: 'Domain',
         values: [
-          { value: 'Store&Supply Chain', label: 'Store&Supply Chain' },
-          { value: 'Digital Platforms', label: 'Digital Platforms' },
-          { value: 'EDI', label: 'EDI' },
-          { value: 'Security', label: 'Security' },
-          { value: 'Enterprise Architecture', label: 'Enterprise Architecture' },
-          { value: 'Innovation', label: 'Innovation' },
-          { value: 'Infra&Support', label: 'Infra&Support' },
-          { value: 'Data Science', label: 'Data Science' }
+          {
+            value: 'Store&Supply Chain',
+            label: 'Store&Supply Chain'
+          },
+          {
+            value: 'Digital Platforms',
+            label: 'Digital Platforms'
+          },
+          {
+            value: 'EDI',
+            label: 'EDI'
+          },
+          {
+            value: 'Security',
+            label: 'Security'
+          },
+          {
+            value: 'Enterprise Architecture',
+            label: 'Enterprise Architecture'
+          },
+          {
+            value: 'Innovation',
+            label: 'Innovation'
+          },
+          {
+            value: 'Infra&Support',
+            label: 'Infra&Support'
+          },
+          {
+            value: 'Data Science',
+            label: 'Data Science'
+          }
         ]
       },
       table: {
         UIComponent: 'Table',
         width: '80%',
-        title: 'Team members',
         action: {
           url: '/teamTimeOff',
           type: 'GET'
@@ -90,9 +114,18 @@ export const JSONSchema = {
                 UIComponent: 'Input',
                 type: 'select',
                 values: [
-                  { value: 'Public Holiday', label: 'Public Holiday' },
-                  { value: 'Day-Off', label: 'Day-Off' },
-                  { value: 'Team Event', label: 'Team Event' }
+                  {
+                    value: 'Public Holiday',
+                    label: 'Public Holiday'
+                  },
+                  {
+                    value: 'Day-Off',
+                    label: 'Day-Off'
+                  },
+                  {
+                    value: 'Team Event',
+                    label: 'Team Event'
+                  }
                 ],
                 name: 'dayOffType',
                 variant: 'standard',
@@ -103,7 +136,9 @@ export const JSONSchema = {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'startDate',
-                style: { width: '100%' },
+                style: {
+                  width: '100%'
+                },
                 label: 'Start Date',
                 variant: 'standard',
                 defaultValue: '#CURRENT_DATE'
@@ -112,7 +147,9 @@ export const JSONSchema = {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'endDate',
-                style: { width: '100%' },
+                style: {
+                  width: '100%'
+                },
                 label: 'End Date',
                 variant: 'standard',
                 defaultValue: '#CURRENT_DATE'
@@ -132,8 +169,16 @@ export const JSONSchema = {
                     params: 'startDate|endDate'
                   },
                   UIAttributes: {
-                    onSuccess: { inputProps: { hidden: false } },
-                    onFailure: { inputProps: { hidden: true } }
+                    onSuccess: {
+                      inputProps: {
+                        hidden: false
+                      }
+                    },
+                    onFailure: {
+                      inputProps: {
+                        hidden: true
+                      }
+                    }
                   }
                 }
               }
@@ -176,15 +221,29 @@ export const JSONSchema = {
             updateUrlType: 'PUT',
             getUrl: '/teamTimeOff',
             getUrlType: 'GET',
-            formInfoItems: [{ name: 'teamMember.name', label: 'Person name' }],
+            formInfoItems: [
+              {
+                name: 'teamMember.name',
+                label: 'Person name'
+              }
+            ],
             formItems: [
               {
                 UIComponent: 'Input',
                 type: 'select',
                 values: [
-                  { value: 'Public Holiday', label: 'Public Holiday' },
-                  { value: 'Day-Off', label: 'Day-Off' },
-                  { value: 'Team Event', label: 'Team Event' }
+                  {
+                    value: 'Public Holiday',
+                    label: 'Public Holiday'
+                  },
+                  {
+                    value: 'Day-Off',
+                    label: 'Day-Off'
+                  },
+                  {
+                    value: 'Team Event',
+                    label: 'Team Event'
+                  }
                 ],
                 name: 'dayOffType',
                 variant: 'standard',
@@ -195,7 +254,9 @@ export const JSONSchema = {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'startDate',
-                style: { width: '100%' },
+                style: {
+                  width: '100%'
+                },
                 label: 'Start Date',
                 variant: 'standard'
               },
@@ -203,7 +264,9 @@ export const JSONSchema = {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'endDate',
-                style: { width: '100%' },
+                style: {
+                  width: '100%'
+                },
                 label: 'End Date',
                 variant: 'standard'
               },
@@ -222,8 +285,16 @@ export const JSONSchema = {
                     params: 'startDate|endDate'
                   },
                   UIAttributes: {
-                    onSuccess: { inputProps: { hidden: false } },
-                    onFailure: { inputProps: { hidden: true } }
+                    onSuccess: {
+                      inputProps: {
+                        hidden: false
+                      }
+                    },
+                    onFailure: {
+                      inputProps: {
+                        hidden: true
+                      }
+                    }
                   }
                 }
               }

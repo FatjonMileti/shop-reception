@@ -3,6 +3,7 @@ export const JSONSchema = {
   children: [
     {
       UIComponent: 'ComboBoxTable',
+      id: 'the-cbt',
       combo: {
         UIComponent: 'Input',
         type: 'select',
@@ -10,20 +11,43 @@ export const JSONSchema = {
         name: 'teamMember.domain',
         label: 'Domain',
         values: [
-          { value: 'Store&Supply Chain', label: 'Store&Supply Chain' },
-          { value: 'Digital Platforms', label: 'Digital Platforms' },
-          { value: 'EDI', label: 'EDI' },
-          { value: 'Security', label: 'Security' },
-          { value: 'Enterprise Architecture', label: 'Enterprise Architecture' },
-          { value: 'Innovation', label: 'Innovation' },
-          { value: 'Infra&Support', label: 'Infra&Support' },
-          { value: 'Data Science', label: 'Data Science' }
+          {
+            value: 'Store&Supply Chain',
+            label: 'Store&Supply Chain'
+          },
+          {
+            value: 'Digital Platforms',
+            label: 'Digital Platforms'
+          },
+          {
+            value: 'EDI',
+            label: 'EDI'
+          },
+          {
+            value: 'Security',
+            label: 'Security'
+          },
+          {
+            value: 'Enterprise Architecture',
+            label: 'Enterprise Architecture'
+          },
+          {
+            value: 'Innovation',
+            label: 'Innovation'
+          },
+          {
+            value: 'Infra&Support',
+            label: 'Infra&Support'
+          },
+          {
+            value: 'Data Science',
+            label: 'Data Science'
+          }
         ]
       },
       table: {
         UIComponent: 'Table',
         width: '80%',
-        title: 'Team Assignment',
         action: {
           url: '/teamAssignments',
           type: 'GET'
@@ -93,16 +117,27 @@ export const JSONSchema = {
             getUrl: '/teamAssignments',
             getUrlType: 'GET',
             formInfoItems: [
-              { name: 'teamMember.name', label: 'Person' },
-              { name: 'role', label: 'Role' },
-              { name: 'project.key', label: 'Project Key' }
+              {
+                name: 'teamMember.name',
+                label: 'Person'
+              },
+              {
+                name: 'role',
+                label: 'Role'
+              },
+              {
+                name: 'project.key',
+                label: 'Project Key'
+              }
             ],
             formItems: [
               {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'assignmentStartDate',
-                style: { width: '100%' },
+                style: {
+                  width: '100%'
+                },
                 label: 'Start Date',
                 variant: 'standard'
               },
@@ -110,7 +145,9 @@ export const JSONSchema = {
                 UIComponent: 'DatePicker',
                 type: 'date',
                 name: 'assignmentEndDate',
-                style: { width: '100%' },
+                style: {
+                  width: '100%'
+                },
                 label: 'End Date',
                 variant: 'standard'
               }

@@ -29,6 +29,7 @@ const DynamicComponent = props => {
           `/ui-schema?activityId=${props.activityId}&screenId=${props.screenId}`
         )
         // setJSONSchema(JSON.parse(result.jsonSchema.replace(/'+/g, '')))
+        // setJSONSchema(JSON.parse(result.jsonSchema))
         setJSONSchema(result.jsonSchema)
         setScreen(result.screen)
       } catch (error) {

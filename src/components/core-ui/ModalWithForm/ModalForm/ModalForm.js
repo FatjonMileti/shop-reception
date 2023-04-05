@@ -23,7 +23,6 @@ const ModalForm = ({
 
   useEffect(() => {
     ;(async () => {
-      // TODO: get the JSON schema; this is a GET to api
       try {
         if (formItems.some(item => item.dependencies?.conditions)) {
           const result = await start(formItems, editItem)

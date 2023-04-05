@@ -7,7 +7,6 @@ export const JSONSchema = {
       UIComponent: 'Table',
       id: 'the-table',
       width: '100%',
-      title: 'Effort Matrix',
       action: {
         url: '/effortMatrix',
         type: 'GET'
@@ -15,29 +14,23 @@ export const JSONSchema = {
       hideCheckbox: true,
       rowsPerPage: 50,
       rowsPerPageOptions: [25, 50, 100],
-      // stickyRatio: 0.25,
       columns: [
         {
           title: 'Role',
           field: 'role',
           align: 'left',
-          // sticky: true,
           type: 'string'
         },
         {
           title: 'Evaluation',
           field: 'evaluationPhase',
           align: 'center',
-          // sticky: true,
-          // weight: 2,
           type: 'number'
         },
         {
           title: 'Analysis',
           field: 'analysisPhase',
           align: 'center',
-          // sticky: true,
-          // width: '20px',
           type: 'number'
         },
         {
@@ -52,7 +45,6 @@ export const JSONSchema = {
           field: 'developmentPhase',
           align: 'center',
           collapsible: true,
-          // width: '20px',
           type: 'number'
         },
         {
@@ -98,15 +90,42 @@ export const JSONSchema = {
               UIComponent: 'Input',
               type: 'select',
               values: [
-                { value: 'IT PM', label: 'IT PM' },
-                { value: 'Business Analyst', label: 'Business Analyst' },
-                { value: 'System Analyst', label: 'System Analyst' },
-                { value: 'Solution Architect', label: 'Solution Architect' },
-                { value: 'Developer', label: 'Developer' },
-                { value: 'QA Officer', label: 'QA Officer' },
-                { value: 'DevOps', label: 'DevOps' },
-                { value: 'Support Engineer', label: 'Support Engineer' },
-                { value: 'Technical Lead', label: 'Technical Lead' }
+                {
+                  value: 'IT PM',
+                  label: 'IT PM'
+                },
+                {
+                  value: 'Business Analyst',
+                  label: 'Business Analyst'
+                },
+                {
+                  value: 'System Analyst',
+                  label: 'System Analyst'
+                },
+                {
+                  value: 'Solution Architect',
+                  label: 'Solution Architect'
+                },
+                {
+                  value: 'Developer',
+                  label: 'Developer'
+                },
+                {
+                  value: 'QA Officer',
+                  label: 'QA Officer'
+                },
+                {
+                  value: 'DevOps',
+                  label: 'DevOps'
+                },
+                {
+                  value: 'Support Engineer',
+                  label: 'Support Engineer'
+                },
+                {
+                  value: 'Technical Lead',
+                  label: 'Technical Lead'
+                }
               ],
               name: 'role',
               variant: 'standard',
@@ -216,7 +235,12 @@ export const JSONSchema = {
           updateUrlType: 'PUT',
           getUrl: '/effortMatrix',
           getUrlType: 'GET',
-          formInfoItems: [{ name: 'role', label: 'Role' }],
+          formInfoItems: [
+            {
+              name: 'role',
+              label: 'Role'
+            }
+          ],
           formItems: [
             {
               UIComponent: 'Input',

@@ -4,6 +4,7 @@ export const JSONSchema = {
   children: [
     {
       UIComponent: 'Table',
+      id: 'the-table',
       width: '80%',
       action: {
         url: '/individualCapacity',
@@ -21,7 +22,7 @@ export const JSONSchema = {
         },
         {
           title: 'IIB Key',
-          field: 'project.key',
+          field: 'project.iibKey',
           align: 'left',
           type: 'string',
           sticky: true

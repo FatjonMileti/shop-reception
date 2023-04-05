@@ -5,6 +5,7 @@ export const JSONSchema = {
   children: [
     {
       UIComponent: 'ComboBoxTable',
+      id: 'the-cbt',
       combo: {
         UIComponent: 'Input',
         type: 'select',
@@ -12,14 +13,38 @@ export const JSONSchema = {
         name: 'teamMember.domain',
         label: 'Domain',
         values: [
-          { value: 'Store&Supply Chain', label: 'Store&Supply Chain' },
-          { value: 'Digital Platforms', label: 'Digital Platforms' },
-          { value: 'EDI', label: 'EDI' },
-          { value: 'Security', label: 'Security' },
-          { value: 'Enterprise Architecture', label: 'Enterprise Architecture' },
-          { value: 'Innovation', label: 'Innovation' },
-          { value: 'Infra&Support', label: 'Infra&Support' },
-          { value: 'Data Science', label: 'Data Science' }
+          {
+            value: 'Store&Supply Chain',
+            label: 'Store&Supply Chain'
+          },
+          {
+            value: 'Digital Platforms',
+            label: 'Digital Platforms'
+          },
+          {
+            value: 'EDI',
+            label: 'EDI'
+          },
+          {
+            value: 'Security',
+            label: 'Security'
+          },
+          {
+            value: 'Enterprise Architecture',
+            label: 'Enterprise Architecture'
+          },
+          {
+            value: 'Innovation',
+            label: 'Innovation'
+          },
+          {
+            value: 'Infra&Support',
+            label: 'Infra&Support'
+          },
+          {
+            value: 'Data Science',
+            label: 'Data Science'
+          }
         ]
       },
       table: {
@@ -30,7 +55,6 @@ export const JSONSchema = {
           type: 'GET'
         },
         hideCheckbox: true,
-        title: 'Team Capacity Overview',
         columns: [
           {
             title: 'Person',
