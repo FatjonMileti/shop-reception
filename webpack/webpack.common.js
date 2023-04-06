@@ -12,6 +12,10 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         type: 'asset/resource'
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource'
+      },
       // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
       { test: /\.tsx?$/, loader: 'ts-loader' }
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
