@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useSelector } from 'react-redux'
 import { useNotification } from 'hooks'
-import { RootState } from 'store'
+import { RootState } from 'configureStore'
 import { Snackbar } from '@fullscreendigital/carrefour-dex-fe'
 import { SnackbarCloseReason } from '@mui/material'
 
