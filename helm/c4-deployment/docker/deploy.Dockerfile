@@ -11,11 +11,11 @@ WORKDIR /app
 COPY package*.json /app/
 COPY yarn*.lock /app/
 
-RUN yarn clean && yarn install
+RUN ${CLEAN_COMPILE_COMMAND}
 
 ADD . /app
 
-RUN yarn build:prod
+RUN ${BUILD_TEST_COMMAND}
 
 FROM nginx:1.23.4-bullseye
 
