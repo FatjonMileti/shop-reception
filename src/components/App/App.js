@@ -8,7 +8,7 @@ import { ServiceDomain } from '../ServiceDomain'
 import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
 import { ThemeProvider } from '@fullscreendigital/carrefour-dex-fe'
-import { mockedPages, createRoute } from './helpers'
+import { createRoute } from './helpers'
 import { makeDesignerGetRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { DynamicComponent } from '../DynamicComponent'
@@ -29,8 +29,7 @@ const App = () => {
           const result = await makeDesignerGetRequest(`/activities?submoduleId=${subdomainId}`)
           setApplicationPages(toApplicationPages(result))
         } catch (error) {
-          console.log(error)
-          setApplicationPages(toApplicationPages(mockedPages))
+          console.log(error) // should also reset to main screen ?
         }
       }
     })()

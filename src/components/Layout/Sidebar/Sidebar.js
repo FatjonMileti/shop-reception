@@ -14,49 +14,6 @@ import { logout } from 'utils/authService'
 import { SidebarHeader } from './SidebarHeader'
 import s from './Sidebar.scss'
 
-// TODO remove this mocked result
-const mockedResult = [
-  {
-    id: '1',
-    name: 'Governance',
-    icon: 'AssuredWorkload',
-    routePathExact: false,
-    submodules: [
-      {
-        id: '1',
-        name: 'Project Team',
-        icon: 'Groups',
-        routeURL: '/governance/projectTeam',
-        routePathExact: true,
-        moduleId: '1'
-      },
-      {
-        id: '2',
-        name: 'Project Deliverables',
-        icon: 'LocalShipping',
-        routeURL: '/governance/projectDeliverables',
-        routePathExact: true,
-        moduleId: '1'
-      }
-    ]
-  },
-  {
-    id: '2',
-    name: 'Test Domain',
-    icon: 'BarChart',
-    routePathExact: false,
-    submodules: [
-      {
-        id: '3',
-        name: 'Test subdomain',
-        icon: 'BarChart',
-        routeURL: '/testDomain/testSubdomain',
-        routePathExact: true,
-        moduleId: '2'
-      }
-    ]
-  }
-]
 
 const staticItems = [
   {
@@ -105,10 +62,7 @@ const Sidebar = ({
         setItems(toMenuItems(result))
         setApplicationModulesPages(toApplicationModulesPages(result))
       } catch (error) {
-        console.log(error)
-        setModules(mockedResult)
-        setItems(toMenuItems(mockedResult))
-        setApplicationModulesPages(toApplicationModulesPages(mockedResult))
+        console.log(error) // https://giphy.com/embed/oe33xf3B50fsc
       }
     })()
   }, [])

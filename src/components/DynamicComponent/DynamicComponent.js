@@ -4,15 +4,11 @@ import { renderComponent } from 'utils/dynamicRenderingService'
 import { makeDesignerGetRequest } from 'utils/api'
 import s from './DynamicComponent.scss'
 
-// import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/teamTimeOffSchema'
-// import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/effortMatrixSchema'
-// import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/teamAssignmentSchema'
-import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/capacityOverviewSchema'
 import { Box } from '@mui/material'
 import { IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { ArrowBackIosNewOutlined } from '@mui/icons-material'
 import { Icon } from 'components/core-ui/Icon'
-// import { JSONSchema as JSONSchemaMock } from 'utils/mockedData/personCapacitySchema'
+
 
 const DynamicComponent = props => {
   const [JSONSchema, setJSONSchema] = useState(null)
@@ -33,9 +29,7 @@ const DynamicComponent = props => {
         setJSONSchema(result.jsonSchema)
         setScreen(result.screen)
       } catch (error) {
-        console.log(error)
-        setJSONSchema(JSONSchemaMock)
-        setScreen({ 'name': 'chuchu', 'icon': 'BarChart' })
+        console.log(error) // should show main screen ?
       }
     })()
   }, [props.activityId, props.screenId])

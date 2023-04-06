@@ -3,12 +3,6 @@ import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from './serializers'
 
-const mockedData = [
-  { value: '1', label: 'Andrei Ionescu' },
-  { value: '2', label: 'Mihai Popescu' },
-  { value: '3', label: 'Paula Dan' }
-]
-
 interface AsyncAutocompleteOption {
   value: string | number
   label: string
@@ -39,8 +33,7 @@ const AsyncAutocomplete = props => {
         const { valueKey, labelKey } = action
         setOptions(toAsyncSelectOptions(result.list, valueKey, labelKey))
       } catch (error) {
-        console.log(error)
-        setOptions(mockedData)
+        console.log(error) // should still show the unfiltered data ?
       }
     })()
     return () => {
