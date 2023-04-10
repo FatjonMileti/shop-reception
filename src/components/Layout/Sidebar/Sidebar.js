@@ -12,51 +12,8 @@ import {
 import { makeDesignerGetRequest } from 'utils/api'
 import { logout } from 'utils/authService'
 import { SidebarHeader } from './SidebarHeader'
+import { useNotification } from 'hooks'
 import s from './Sidebar.scss'
-
-// TODO remove this mocked result
-const mockedResult = [
-  {
-    id: '1',
-    name: 'Governance',
-    icon: 'AssuredWorkload',
-    routePathExact: false,
-    submodules: [
-      {
-        id: '1',
-        name: 'Project Team',
-        icon: 'Groups',
-        routeURL: '/governance/projectTeam',
-        routePathExact: true,
-        moduleId: '1'
-      },
-      {
-        id: '2',
-        name: 'Project Deliverables',
-        icon: 'LocalShipping',
-        routeURL: '/governance/projectDeliverables',
-        routePathExact: true,
-        moduleId: '1'
-      }
-    ]
-  },
-  {
-    id: '2',
-    name: 'Test Domain',
-    icon: 'BarChart',
-    routePathExact: false,
-    submodules: [
-      {
-        id: '3',
-        name: 'Test subdomain',
-        icon: 'BarChart',
-        routeURL: '/testDomain/testSubdomain',
-        routePathExact: true,
-        moduleId: '2'
-      }
-    ]
-  }
-]
 
 const staticItems = [
   {
@@ -93,6 +50,8 @@ const Sidebar = ({
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
 
+  const { showNotification } = useNotification()
+
   const navigate = useNavigate()
 
   const auth = useAuth()
@@ -105,10 +64,11 @@ const Sidebar = ({
         setItems(toMenuItems(result))
         setApplicationModulesPages(toApplicationModulesPages(result))
       } catch (error) {
-        console.log(error)
-        setModules(mockedResult)
-        setItems(toMenuItems(mockedResult))
-        setApplicationModulesPages(toApplicationModulesPages(mockedResult))
+        // https://giphy.com/embed/oe33xf3B50fsc :))))
+        showNotification({
+          message: `Error while fetching application modules. ${error.message}`,
+          type: 'error'
+        })
       }
     })()
   }, [])

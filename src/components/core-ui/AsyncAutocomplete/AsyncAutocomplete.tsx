@@ -2,12 +2,7 @@ import * as React from 'react'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from './serializers'
-
-const mockedData = [
-  { value: '1', label: 'Andrei Ionescu' },
-  { value: '2', label: 'Mihai Popescu' },
-  { value: '3', label: 'Paula Dan' }
-]
+import { useNotification } from 'hooks'
 
 interface AsyncAutocompleteOption {
   value: string | number
@@ -20,6 +15,8 @@ const AsyncAutocomplete = props => {
   const loading = open && options.length === 0
 
   const { action, comboValue, width, ...rest } = props
+
+  const { showNotification } = useNotification()
 
   React.useEffect(() => {
     let active = true
@@ -39,8 +36,10 @@ const AsyncAutocomplete = props => {
         const { valueKey, labelKey } = action
         setOptions(toAsyncSelectOptions(result.list, valueKey, labelKey))
       } catch (error) {
-        console.log(error)
-        setOptions(mockedData)
+        showNotification({
+          message: `Error while fetching dropdown data. ${error?.message}`,
+          type: 'error'
+        })
       }
     })()
     return () => {

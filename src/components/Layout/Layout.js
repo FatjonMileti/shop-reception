@@ -9,6 +9,7 @@ import { DRAWER_WIDTH } from 'utils/constants'
 import { useAuth } from 'oidc-react'
 import s from './Layout.scss'
 import { setToken } from 'utils/authService'
+import { Notification } from 'components/Notification'
 
 const Layout = ({ children, setModules, setApplicationModulesPages, setSubdomainId }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -45,6 +46,7 @@ const Layout = ({ children, setModules, setApplicationModulesPages, setSubdomain
       <Typography variant="light" component="div">
         <Favicon url="images/favicon.ico" />
         <div>
+          <Notification />
           <Header handleOpenMenu={handleOpenMenu} />
           <Sidebar
             isMenuOpen={isMenuOpen}

@@ -16,6 +16,7 @@ import { toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
 import { set } from 'lodash'
 import { useMediaQuery } from '@mui/material'
+import { useNotification } from 'hooks'
 
 const sx = {
   position: 'absolute',
@@ -46,6 +47,8 @@ const ModalWithForm = ({
 }) => {
   const [editItem, setEditItem] = useImmer({})
 
+  const { showNotification } = useNotification()
+
   useEffect(() => {
     if (isModalOpen && editedItemId) {
       ;(async () => {
@@ -53,7 +56,10 @@ const ModalWithForm = ({
           const result = await makeCoreGetRequest(`${editedItemUrl}/${editedItemId}`)
           setEditItem(result)
         } catch (error) {
-          console.log(error)
+          showNotification({
+            message: `Error while fetching item. ${error?.message}`,
+            type: 'error'
+          })
         }
       })()
     } else {
@@ -77,15 +83,30 @@ const ModalWithForm = ({
       const payload = toItemPayload(editItem)
       if (formAction.type === 'POST') {
         await makeCorePostRequest(`${formAction.url}`, payload)
+        showNotification({
+          message: 'Item created successfully',
+          type: 'success'
+        })
       }
       if (formAction.type === 'PUT') {
         await makeCorePutRequest(`${formAction.url}`, payload)
+        showNotification({
+          message: 'Item saved successfully',
+          type: 'success'
+        })
       }
       if (formAction.type === 'PATCH') {
         await makeCorePatchRequest(`${formAction.url}`, payload)
+        showNotification({
+          message: 'Item saved successfully',
+          type: 'success'
+        })
       }
     } catch (error) {
-      console.log(error)
+      showNotification({
+        message: `Error while saving item. ${error?.message}`,
+        type: 'error'
+      })
     }
     additionalAction && additionalAction()
     setEditItem({})

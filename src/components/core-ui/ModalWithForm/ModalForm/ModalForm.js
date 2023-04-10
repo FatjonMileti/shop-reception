@@ -6,6 +6,7 @@ import { start } from 'utils/rulesService'
 import { getGridSize } from '../helpers'
 import { ModalInfo } from './ModalInfo'
 import { get } from 'lodash'
+import { useNotification } from 'hooks'
 
 const ModalForm = ({
   modalTitle,
@@ -21,9 +22,10 @@ const ModalForm = ({
 }) => {
   const [processedFormItems, setProcessedFormItems] = useState(formItems)
 
+  const { showNotification } = useNotification()
+
   useEffect(() => {
     ;(async () => {
-      // TODO: get the JSON schema; this is a GET to api
       try {
         if (formItems.some(item => item.dependencies?.conditions)) {
           const result = await start(formItems, editItem)
@@ -32,7 +34,10 @@ const ModalForm = ({
         const itemsWithScript = formItems.filter(item => item.dependencies?.script)
         itemsWithScript.forEach(item => Function(item.dependencies.script)())
       } catch (error) {
-        console.log(error)
+        showNotification({
+          message: `Error while setting item rules. ${error}`,
+          type: 'error'
+        })
       }
     })()
   }, [editItem, formItems])

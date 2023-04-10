@@ -7,15 +7,11 @@ import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import { getRenderedColumns, convertFilterSchemaToFilterConfig, getAllFilters } from './helpers'
+import { getRenderedColumns, convertFilterSchemaToFilterConfig } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
+import { useNotification } from 'hooks'
 import s from './Table.modules.scss'
 
-// import { mockedRows } from 'utils/mockedData/teamTimeOffData'
-import { mockedRows } from 'utils/mockedData/effortMatrixData'
-// import { mockedRows } from 'utils/mockedData/teamAssignmentData'
-// import { mockedRows } from 'utils/mockedData/capacityOverviewData'
-// import { mockedRows } from 'utils/mockedData/personCapacityData'
 
 const initialTableState = {}
 
@@ -38,6 +34,8 @@ const Table = props => {
     searchText: '',
     filters: []
   })
+
+  const { showNotification } = useNotification()
 
   const filtersConfig = useMemo(() => {
     if (!tableActions?.filters) return []
@@ -119,9 +117,10 @@ const Table = props => {
       setItems(toTableRowItems(response.list, columns))
       setTotalCount(response.page.totalCount)
     } catch (error) {
-      console.log(error)
-      setItems(toTableRowItems(mockedRows, columns))
-      setTotalCount(mockedRows.length)
+      showNotification({
+        message: `Error while fetching table data. ${error.message}`,
+        type: 'error'
+      })
     }
   }
 

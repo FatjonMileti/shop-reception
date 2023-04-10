@@ -2,7 +2,7 @@ import { get, set } from 'lodash'
 import { toArrayItemPayload } from 'utils/serializers'
 import { Filter } from './TableDefinitions'
 import { ComboValue } from 'components/core-ui/ComboBoxTable/ComboBoxTableDefinitions'
-import { getFiltersGetUrl, getSearchFieldsGetUrl, getAllFilters } from './helpers'
+import { getFiltersGetUrl, getSearchFieldsGetUrl, getAllFilters, getTableQueryUrl } from './helpers'
 
 export const toTableObjects = result =>
   result.map(row => {
@@ -37,10 +37,11 @@ export const toTableGETUrl = ({
   order: string
   orderBy: string
 }) => {
+  const tableQueryUrl = getTableQueryUrl({page, size: rowsPerPage, order, orderBy})
   const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
   const filtersUrl = getFiltersGetUrl(getAllFilters(filters, comboValue))
 
-  return `${url}?page=${page}&size=${rowsPerPage}&order=${order}&orderBy=${orderBy}${searchFieldsUrl}${filtersUrl}`
+  return `${url}?${tableQueryUrl}${searchFieldsUrl}${filtersUrl}`
 }
 
 const toSearchFieldsPayload = (searchFields, searchText) =>

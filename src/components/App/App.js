@@ -8,19 +8,22 @@ import { ServiceDomain } from '../ServiceDomain'
 import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
 import { ThemeProvider } from '@fullscreendigital/carrefour-dex-fe'
-import { mockedPages, createRoute } from './helpers'
+import { createRoute } from './helpers'
 import { makeDesignerGetRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { DynamicComponent } from '../DynamicComponent'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
 import { oidcConfig } from 'utils/authService'
+import { useNotification } from 'hooks'
 
 const App = () => {
   const [modules, setModules] = useState([])
   const [applicationPages, setApplicationPages] = useState([])
   const [applicationModulesPages, setApplicationModulesPages] = useState([])
   const [subdomainId, setSubdomainId] = useState(localStorage.getItem('selectedSubdomainId'))
+
+  const { showNotification } = useNotification()
 
   useEffect(() => {
     ;(async () => {
@@ -29,14 +32,14 @@ const App = () => {
           const result = await makeDesignerGetRequest(`/activities?submoduleId=${subdomainId}`)
           setApplicationPages(toApplicationPages(result))
         } catch (error) {
-          console.log(error)
-          setApplicationPages(toApplicationPages(mockedPages))
+          showNotification({
+            message: `Error while fetching application pages. ${error?.message}`,
+            type: 'error'
+          })
         }
       }
     })()
   }, [subdomainId])
-
-  console.log(applicationPages)
 
   return (
     <AuthProvider {...oidcConfig}>
