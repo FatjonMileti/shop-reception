@@ -12,8 +12,8 @@ import {
 import { makeDesignerGetRequest } from 'utils/api'
 import { logout } from 'utils/authService'
 import { SidebarHeader } from './SidebarHeader'
+import { useNotification } from 'hooks'
 import s from './Sidebar.scss'
-
 
 const staticItems = [
   {
@@ -50,6 +50,8 @@ const Sidebar = ({
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
 
+  const { showNotification } = useNotification()
+
   const navigate = useNavigate()
 
   const auth = useAuth()
@@ -62,7 +64,11 @@ const Sidebar = ({
         setItems(toMenuItems(result))
         setApplicationModulesPages(toApplicationModulesPages(result))
       } catch (error) {
-        console.log(error) // https://giphy.com/embed/oe33xf3B50fsc
+        // https://giphy.com/embed/oe33xf3B50fsc :))))
+        showNotification({
+          message: `Error while fetching application modules. ${error.message}`,
+          type: 'error'
+        })
       }
     })()
   }, [])

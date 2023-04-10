@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid'
 import { Close } from '@mui/icons-material'
 import { Button, Typography, IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreDeleteRequest } from 'utils/api'
+import { useNotification } from 'hooks'
 
 const sx = {
   position: 'absolute',
@@ -29,6 +30,8 @@ const ButtonWithConfirmDeleteModal = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const { showNotification } = useNotification()
+
   const openModal = () => setIsModalOpen(true)
 
   const closeModal = () => setIsModalOpen(false)
@@ -36,8 +39,15 @@ const ButtonWithConfirmDeleteModal = ({
   const deleteItem = async () => {
     try {
       await makeCoreDeleteRequest(`${deleteActionUrl}/${deletedItemId}`)
+      showNotification({
+        message: 'Item deleted successfully',
+        type: 'success'
+      })
     } catch (error) {
-      console.log(error)
+      showNotification({
+        message: `Error while deleting data. ${error?.message}`,
+        type: 'error'
+      })
     }
     additionalAction && additionalAction()
     closeModal()

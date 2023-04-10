@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { makeDesignerGetRequest } from 'utils/api'
+import { useNotification } from 'hooks'
 import s from './DynamicComponent.scss'
 
 import { Box } from '@mui/material'
@@ -9,10 +10,12 @@ import { IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { ArrowBackIosNewOutlined } from '@mui/icons-material'
 import { Icon } from 'components/core-ui/Icon'
 
-
 const DynamicComponent = props => {
   const [JSONSchema, setJSONSchema] = useState(null)
   const [screen, setScreen] = useState(null)
+
+  const { showNotification } = useNotification()
+
   const navigate = useNavigate()
   const goBack = () => {
     navigate(-1)
@@ -24,12 +27,13 @@ const DynamicComponent = props => {
         const result = await makeDesignerGetRequest(
           `/ui-schema?activityId=${props.activityId}&screenId=${props.screenId}`
         )
-        // setJSONSchema(JSON.parse(result.jsonSchema.replace(/'+/g, '')))
-        // setJSONSchema(JSON.parse(result.jsonSchema))
         setJSONSchema(result.jsonSchema)
         setScreen(result.screen)
       } catch (error) {
-        console.log(error) // should show main screen ?
+        showNotification({
+          message: `Error while fetching page schema. ${error.message}`,
+          type: 'error'
+        })
       }
     })()
   }, [props.activityId, props.screenId])

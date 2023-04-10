@@ -7,8 +7,9 @@ import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import { getRenderedColumns, convertFilterSchemaToFilterConfig, getAllFilters } from './helpers'
+import { getRenderedColumns, convertFilterSchemaToFilterConfig } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
+import { useNotification } from 'hooks'
 import s from './Table.modules.scss'
 
 
@@ -33,6 +34,8 @@ const Table = props => {
     searchText: '',
     filters: []
   })
+
+  const { showNotification } = useNotification()
 
   const filtersConfig = useMemo(() => {
     if (!tableActions?.filters) return []
@@ -114,7 +117,10 @@ const Table = props => {
       setItems(toTableRowItems(response.list, columns))
       setTotalCount(response.page.totalCount)
     } catch (error) {
-      console.log(error) // idunno
+      showNotification({
+        message: `Error while fetching table data. ${error.message}`,
+        type: 'error'
+      })
     }
   }
 
