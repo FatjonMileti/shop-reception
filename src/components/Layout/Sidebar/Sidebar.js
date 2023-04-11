@@ -76,6 +76,8 @@ const Sidebar = ({
   const handleItemClick = (event, item) => {
     event.preventDefault()
 
+    handleCloseMenu()
+
     const { href, index, id } = item
 
     navigate(href)
