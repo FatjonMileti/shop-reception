@@ -37,7 +37,7 @@ export const toTableGETUrl = ({
   order: string
   orderBy: string
 }) => {
-  const tableQueryUrl = getTableQueryUrl({page, size: rowsPerPage, order, orderBy})
+  const tableQueryUrl = getTableQueryUrl({ page, size: rowsPerPage, order, orderBy })
   const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
   const filtersUrl = getFiltersGetUrl(getAllFilters(filters, comboValue))
 
@@ -57,13 +57,13 @@ export const toTablePOSTPayload = ({
   filters,
   comboValue
 }: {
-  page: number,
+  page: number
   rowsPerPage: number
-  order: string,
-  orderBy: string,
-  searchText: string,
-  searchFields: string[],
-  filters: Filter[],
+  order: string
+  orderBy: string
+  searchText: string
+  searchFields: string[]
+  filters: Filter[]
   comboValue: ComboValue
 }) => ({
   page,
@@ -76,11 +76,13 @@ export const toTablePOSTPayload = ({
 
 export const toTableRowItems = (items, columns) => {
   columns.forEach(column => {
-    if (column.field.includes('.')) {
-      items.forEach((item, index) => {
-        items[index][column.field] = get(item, column.field)
-      })
-    }
+    items.forEach((item, index) => {
+      if (column.field.includes('.')) {
+        items[index][column.field] = get(item, column.field) || ''
+      } else {
+        items[index][column.field] = item[column.field] || ''
+      }
+    })
   })
 
   return items

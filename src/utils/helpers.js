@@ -9,7 +9,7 @@ export const formatUIDate = date => dayjs(date).format('DD/MM/YYYY')
 export const getDefaultItemValue = value => {
   if (value.charAt(0) === '#') {
     if (value === '#CURRENT_DATE') {
-      return dayjs().format('MM-DD-YYYY')
+      return dayjs().format('YYYY-MM-DD')
     }
 
     if (value.includes('#TOKEN')) {
