@@ -84,9 +84,9 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
   const [filterBy, filterValue] = filters.reduce(
     (acc, filter) =>
       (acc = [
-        acc[0] ? `${acc[0]}|${filter.name}` : filter.name,
+        acc[0] ? `${acc[0]}${encodeURIComponent('|')}${filter.name}` : filter.name,
         acc[1]
-          ? `${acc[1]}|${encodeURIComponent(filter.value)}`
+          ? `${acc[1]}${encodeURIComponent(`|${filter.value}`)}`
           : `${encodeURIComponent(filter.value)}`
       ]),
     ['', '']
@@ -101,6 +101,7 @@ export const getAllFilters = (filters: Filter[], comboValue: ComboValue) =>
 
 export const getTableQueryUrl = params =>
   Object.keys(params).reduce(
-    (acc, key) => (acc = params[key] ? `${acc}&${key}=${params[key]}` : acc),
+    (acc, key) =>
+      (acc = params[key] ? (acc ? `${acc}&${key}=${params[key]}` : `${key}=${params[key]}`) : acc),
     ''
   )
