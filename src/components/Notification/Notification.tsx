@@ -17,7 +17,7 @@ const Notification = () => {
     <Snackbar
       open={notification.open}
       onClose={handleClose}
-      autoHideDuration={notification.timeout}
+      autoHideDuration={notification.timeout || notification.type !== 'error' ? 3000 : undefined}
       alert={{
         severity: notification.type,
         children: notification.message,
