@@ -2,9 +2,9 @@ import dayjs from 'dayjs'
 import { get } from 'lodash'
 import { getUserInfo } from './authService'
 
-export const formatPayloadDate = date => dayjs(date).format('YYYY-MM-DD')
+export const formatPayloadDate = date => (date ? dayjs(date).format('YYYY-MM-DD') : '')
 
-export const formatUIDate = date => dayjs(date).format('DD/MM/YYYY')
+export const formatUIDate = date => (date ? dayjs(date).format('DD/MM/YYYY') : '')
 
 export const getDefaultItemValue = value => {
   if (value.charAt(0) === '#') {
