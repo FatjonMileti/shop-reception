@@ -16,5 +16,5 @@ env.SKIP_BUILD=true
 env.DOCKER_ARTIFACT=true
 env.DEPLOY_DOCKERFILE='./helm/c4-deployment/docker/deploy.Dockerfile'
 env.DEPLOY_IMAGE_NAME='dex/dex-ui-front-end'
-env.BUILD_SECRET=c4pipeline-build-dex-front-end-config
+env.BUILD_SECRET='c4pipeline-build-dex-front-end-config'
 c4pipev1()
