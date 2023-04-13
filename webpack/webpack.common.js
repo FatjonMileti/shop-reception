@@ -2,6 +2,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const commonPaths = require('./paths')
+const path = require('path')
 
 // eslint-disable-next-line no-undef
 module.exports = {
@@ -38,6 +39,21 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [{ from: './src/images', to: 'images' }]
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(
+            commonPaths.root,
+            'node_modules/scandit-sdk/build/',
+            'scandit-engine-sdk.*'
+          ),
+          // copy flattend with [name][ext] pattern
+          to: './static/scandit/[name][ext]',
+          // ignore terser with info about minified state
+          info: { minimized: true }
+        }
+      ]
     })
   ],
   target: 'web'
