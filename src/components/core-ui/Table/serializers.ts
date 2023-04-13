@@ -80,7 +80,11 @@ export const toTableRowItems = (items, columns) => {
       if (column.field.includes('.')) {
         items[index][column.field] = get(item, column.field) || ''
       } else {
-        items[index][column.field] = item[column.field] || ''
+        if (item[column.field] === null) {
+          items[index][column.field] = column.type === 'date' ? null : ''
+        } else {
+          items[index][column.field] = item[column.field]
+        }
       }
     })
   })
