@@ -29,14 +29,16 @@ const staticItems = [
     icon: <NotificationsNoneOutlined />,
     index: 2,
     primaryText: 'Notifications',
-    type: 'icon'
+    type: 'icon',
+    href: '/'
   },
   {
     disablePadding: true,
     icon: <PersonOutlineOutlined />,
     index: 3,
     primaryText: 'Profile',
-    type: 'icon'
+    type: 'icon',
+    href: '/'
   }
 ]
 

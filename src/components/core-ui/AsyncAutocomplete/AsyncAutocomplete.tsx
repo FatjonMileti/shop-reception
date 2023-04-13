@@ -30,7 +30,7 @@ const AsyncAutocomplete = props => {
         let url = action.url
 
         if (comboValue) {
-          url = `${url}?size=-1&filterBy=${action.comboQueryKey}&filterValue=${comboValue.value}`
+          url = `${url}?page=-1&filterBy=${action.comboQueryKey}&filterValue=${comboValue.value}`
         }
         const result = await makeCoreGetRequest(url)
         const { valueKey, labelKey } = action

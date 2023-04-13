@@ -4,11 +4,8 @@ import { Icon } from 'components/core-ui/Icon'
 import { KeyboardArrowRightOutlined } from '@mui/icons-material'
 import s from './Home.scss'
 
-
 const Home = ({ modules, setSubdomainId }) => {
-  
   const navigate = useNavigate()
-
 
   const toListItems = submodules => {
     return submodules.map((item, index) => ({
@@ -40,27 +37,26 @@ const Home = ({ modules, setSubdomainId }) => {
 
   return (
     <div className={s.homeWrapper}>
-      {modules.map((module,index) => { return (
-        <Accordion
-          key={module.id}
-          summary={
-            <Typography variant="medium">
-              <span className={s.moduleAccordionSummary}>
-                <Icon iconName={module.icon}/>
-                {module.name}
-              </span>
-            </Typography>}
-          details={
-            <List
-              items={toListItems(module.submodules)}
-              onItemClick={handleItemClick}
-            />}
-          // disableGutters
-          defaultExpanded={index==0}
-          id={module.id}
-          onChange={function noRefCheck(){}}
-        />
-      )})}
+      {modules.map((module, index) => {
+        return (
+          <Accordion
+            key={module.id}
+            summary={
+              <Typography variant="medium">
+                <span className={s.moduleAccordionSummary}>
+                  <Icon iconName={module.icon} />
+                  {module.name}
+                </span>
+              </Typography>
+            }
+            details={<List items={toListItems(module.submodules)} onItemClick={handleItemClick} />}
+            // disableGutters
+            defaultExpanded={index == 0}
+            id={module.id}
+            onChange={function noRefCheck() {}}
+          />
+        )
+      })}
     </div>
   )
 }
