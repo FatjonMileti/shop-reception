@@ -5,8 +5,8 @@ ARG CLEAN_COMPILE_COMMAND
 ARG BUILD_SECRET
 
 RUN npm config set @fullscreendigital:registry=https://registry.yarnpkg.com/
-RUN npm config set //registry.yarnpkg.com/:_authToken='${BUILD_SECRET}'
-RUN echo ${BUILD_SECRET}
+RUN npm config set //registry.yarnpkg.com/:_authToken="${BUILD_SECRET}"
+RUN echo "${BUILD_SECRET}"
 
 WORKDIR /app
 
