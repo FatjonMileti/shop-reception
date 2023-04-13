@@ -2,13 +2,13 @@ FROM node:19-bullseye-slim as builder
 
 ARG BUILD_TEST_COMMAND
 ARG CLEAN_COMPILE_COMMAND
-ARG BUILD_SECRET
+ARG BUILD_C4SECRET
 
 RUN npm config set @fullscreendigital:registry=https://registry.yarnpkg.com/
-RUN npm config set //registry.yarnpkg.com/:_authToken=${BUILD_SECRET}
+RUN npm config set //registry.yarnpkg.com/:_authToken=${BUILD_C4SECRET}
 
 WORKDIR /app
-RUN echo ${BUILD_SECRET} > test.out && more test.out
+RUN echo ${BUILD_C4SECRET} > test.out && more test.out
 
 COPY package*.json /app/
 COPY yarn*.lock /app/
