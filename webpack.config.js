@@ -6,7 +6,8 @@ const common = require('./webpack/webpack.common')
 
 const envs = {
   development: 'dev',
-  production: 'prod'
+  production: 'prod',
+  uat: 'uat'
 }
 
 const env = envs[process.env.NODE_ENV || 'development']
