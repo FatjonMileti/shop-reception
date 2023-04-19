@@ -3,7 +3,7 @@ import * as ScanditSDK from 'scandit-sdk'
 const licenseKey =
   'AdvCxxxqP9YMDLw4pEJP+dsPe9oXMocaM3lfSBh0s/aVVcbE5wXyA0UM1o80V+UrN2E3jX9d7ZV5XyHxOUBsVKp5yOdlfNJUwFPZNzx7tixcGAyEQQwBmEQllOq/Kf+TXFX3koaYYjYE4lFRIeWZAuicakUJdPasWE+TiDQzW25CVmprMQLQ67AtTO1q38y+ZbQ+b6kkH40AGWInUqvrZYg886XlyZa0NXqYnQUPVPj/LidmyCOYoQVK4oJoQokjIOaK9PuEEIuhxzj0PwCtJAea+LgqpBcZwhy6+dPijJ7ZMq4tc3I9XQAFVA3IUYBdsMuUg2PQKlTnR0ZmUnarXZYNY7gGMusaVaxManTSSOapGVNfuLT1DzkaKJvo+XfeT8Q9gTTkgzj2B0chuahu9PgId4djILV77u6p0gn7MqZxzu6mcXfAr+AbGgB7D95xYs75PrjPbCjVjVPNQJc5npy1eOt98EmRd8J483EyRwjiUAx7zvAKGgWN0SDpbPyL1Rk7zYRnKkQjfXmfHRpKYONAoFYCZVdDfxG6dOjvhgp+Tuz+LV4yvcHA23yVn6GVtpAeRbFcSmc7fm619b0/JRezllH8YtQ7pa06SHzJbdyhVU9/0ec0xsZnp9nbANJORv0GCYZD6Y6AyMh8XMtC02aUy4kkC4YmdlVYrd010/OYuQi8pJ6K0zx12Fel8fB4RqdK2ugfMy8lYrvh1wPMQRi3hOPCNCmZlvYg0uaK3B7gkwa7qjPjVn0FebsZLi+qNLMzu7cb7aNCfYQLDvAIREPWfIdSCjj3ST7zAjRGxw=='
 
-const useScandit = () => {
+const useScandit = ({ onScan }) => {
   const run = async () => {
     ScanditSDK.configure(licenseKey, {
       // engineLocation: 'https://cdn.jsdelivr.net/npm/scandit-sdk'
@@ -22,16 +22,8 @@ const useScandit = () => {
         })
         barcodePicker.applyScanSettings(scanSettings)
         barcodePicker.on('scan', scanResult => {
-          alert(
-            scanResult.barcodes.reduce((string, barcode) => {
-              return (
-                string +
-                `${ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology)}: ${
-                  barcode.data
-                }\n`
-              )
-            }, '')
-          )
+          onScan(scanResult)
+          barcodePicker.destroy()
         })
       })
     })
