@@ -114,7 +114,7 @@ module.exports = env => ({
       filename: `${commonPaths.cssFolder}/[name].css`,
       chunkFilename: '[id].css'
     }),
-    new Dotenv({ path: '.env.prod' })
+    new Dotenv({ path: env.environment === 'uat' ? '.env.uat' : '.env.prod' })
   ],
   devtool: 'source-map'
 })

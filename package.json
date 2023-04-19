@@ -8,6 +8,7 @@
     "start:dev": "webpack serve --node-env=development --env environment=development",
     "build:dev": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=dev",
     "build:prod": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=production",
+    "build:uat": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=uat",
     "build:stats": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=production --json > stats.json",
     "clean": "rm -rf node_modules && rm yarn.lock",
     "clean:start": "yarn clean && yarn && yarn start",
