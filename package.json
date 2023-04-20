@@ -16,6 +16,8 @@
     "build:deploy:dev": "yarn clean && yarn && yarn build:dev",
     "win-build:deploy": "yarn win-clean && yarn && yarn win-build",
     "win-clean": "del /F /Q node_modules",
+    "win-build:dev": "set NODE_OPTIONS=--max_old_space_size=4096 && webpack --node-env=production --env environment=dev",
+    "win-build:uat": "set NODE_OPTIONS=--max_old_space_size=4096 && webpack --node-env=production --env environment=uat",
     "win-build:prod": "set NODE_OPTIONS=--max_old_space_size=4096 && webpack --node-env=production --env environment=production",
     "lint:check": "eslint src/.; exit 0",
     "lint:fix": "eslint --fix src/.; exit 0",
