@@ -699,6 +699,14 @@
     {
       "key": "Access-Control-Allow-Headers",
       "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    },
+    {
+      "key": "Cache-Control",
+      "value": "public, max-age=120"
+    },
+    {
+      "key": "Access-Control-Max-Age",
+      "value": "120"
     }
   ],
   "proxyReqHeaders": [
