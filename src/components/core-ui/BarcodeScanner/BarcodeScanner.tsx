@@ -4,28 +4,45 @@ import { useScandit } from 'hooks'
 
 const BarcodeScanner = () => {
   const [code, setCode] = React.useState('')
-  const [showScanButton, setShowScanButton] = React.useState(true)
+  // const [showScanButton, setShowScanButton] = React.useState(true)
+  const [isVisible, setIsVisible] = React.useState(false)
 
   const onScan = scanResult => {
     setCode(scanResult.barcodes[0].data)
-    setShowScanButton(true)
+    setIsVisible(false)
   }
 
-  const { run } = useScandit({ onScan })
+  const { run } = useScandit({ onScan, isVisible })
 
   const scanCode = () => {
     setCode('')
-    setShowScanButton(false)
-    run()
+    setIsVisible(true)
+    // run()
   }
+
+  React.useEffect(() => {
+    try {
+      run()
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
 
   return (
     <div>
-      {showScanButton && <Button onClick={scanCode} label="Scan code" variant="contained" />}
+      {!isVisible && <Button onClick={scanCode} label="Scan code" variant="contained" />}
       <div style={{ margin: '20px 0' }}>
         <Input value={code} type="text" variant="standard" />
       </div>
-      <div id="scandit-barcode-picker" style={{ maxWidth: '400px', maxHeight: '400px' }} />
+      <div
+        id="scandit-barcode-picker"
+        style={{
+          maxWidth: '400px',
+          maxHeight: '400px',
+          visibility: isVisible ? 'visible' : 'hidden',
+          opacity: isVisible ? 1 : 0,
+        }}
+      />
     </div>
   )
 }
