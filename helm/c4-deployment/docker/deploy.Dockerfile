@@ -16,7 +16,7 @@ RUN yarn clean && yarn install
 
 ADD . /app
 
-RUN yarn build:$TARGET_ENV
+RUN yarn build:${TARGET_ENV}
 
 FROM nginx:1.23.4-bullseye
 
