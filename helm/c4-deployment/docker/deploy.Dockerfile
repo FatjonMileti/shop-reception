@@ -3,6 +3,7 @@ FROM node:19-bullseye-slim as builder
 ARG BUILD_TEST_COMMAND
 ARG CLEAN_COMPILE_COMMAND
 ARG BUILD_SECRET
+ARG TARGET_ENV
 
 RUN npm config set @fullscreendigital:registry=https://registry.yarnpkg.com/
 RUN npm config set //registry.yarnpkg.com/:_authToken=${BUILD_SECRET}
