@@ -4,7 +4,7 @@
   "name": "DEX CORE REST API",
   "endpointPrefix": "8081/core/rest/api/v1",
   "latency": 0,
-  "port": 3004,
+  "port": 3001,
   "hostname": "",
   "folders": [],
   "routes": [
@@ -163,7 +163,7 @@
           "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"totalEffort\": 3.5,\n      \"totalAvailable\": 3.5,\n      \"remaining\": 3.5\n    },\n    {\n      \"id\": 2,\n      \"teamMember\": {\n        \"id\": 2,\n        \"name\": \"Florescu Adina\",\n        \"domain\": \"Security\"\n      },\n      \"totalEffort\": 3.5,\n      \"totalAvailable\": 3.5,\n      \"remaining\": 3.5\n    },\n    {\n      \"id\": 3,\n      \"teamMember\": {\n        \"id\": 3,\n        \"name\": \"Ionescu Mihai\",\n        \"domain\": \"Digital Platforms\"\n      },\n      \"totalEffort\": 3.5,\n      \"totalAvailable\": 3.5,\n      \"remaining\": 3.5\n    },\n    {\n      \"id\": 4,\n      \"teamMember\": {\n        \"id\": 6,\n        \"name\": \"Stanciu Mihaela\",\n        \"domain\": \"Digital Platforms\"\n      },\n      \"totalEffort\": 3.5,\n      \"totalAvailable\": 3.5,\n      \"remaining\": 3.5\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained the paginated, filtered and sorted team assignment list",
+          "label": "Successfully obtained the paginated, filtered and sorted team capacity list",
           "headers": [
             {
               "key": "Content-Type",
@@ -306,7 +306,7 @@
           "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"project\": {\n        \"id\": 1,\n        \"iibKey\": \"IIB-xxx\",\n        \"ipbKey\": \"IPB-xxx\",\n        \"name\": \"DEX\",\n        \"tshirtSize\": \"L\"\n      },\n      \"role\": \"IT PM\",\n      \"stage\": \"Design\",\n      \"estimatedWorkload\": 10,\n      \"tshirtSizeMultiplier\": 10,\n      \"realEffort\": 20,\n      \"startDate\": \"2023-03-20\",\n      \"endDate\": \"2023-03-23\",\n      \"totalAvailableInHours\": 32,\n      \"totalTimeOffInHours\": 4,\n      \"realAvailabilityInHours\": 28,\n      \"totalEffortInHours\": 2.8,\n      \"totalEffortInMD\": 0.47\n    },\n    {\n      \"id\": 2,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"project\": {\n        \"id\": 1,\n        \"iibKey\": \"IIB-fff\",\n        \"ipbKey\": \"IPB-fff\",\n        \"name\": \"Facturare\",\n        \"tshirtSize\": \"L\"\n      },\n      \"role\": \"Architect\",\n      \"stage\": \"Development\",\n      \"estimatedWorkload\": 10,\n      \"tshirtSizeMultiplier\": 10,\n      \"realEffort\": 20,\n      \"startDate\": \"2023-03-23\",\n      \"endDate\": \"2023-03-30\",\n      \"totalAvailableInHours\": 32,\n      \"totalTimeOffInHours\": 4,\n      \"realAvailabilityInHours\": 28,\n      \"totalEffortInHours\": 2.8,\n      \"totalEffortInMD\": 0.47\n    },\n    {\n      \"id\": 3,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"project\": {\n        \"id\": 1,\n        \"iibKey\": \"IIB-sss\",\n        \"ipbKey\": \"IPB-sss\",\n        \"name\": \"Receptie Marfa\",\n        \"tshirtSize\": \"S\"\n      },\n      \"role\": \"IT PM\",\n      \"stage\": \"Design\",\n      \"estimatedWorkload\": 10,\n      \"tshirtSizeMultiplier\": 10,\n      \"realEffort\": 20,\n      \"startDate\": \"2023-04-01\",\n      \"endDate\": \"2023-04-05\",\n      \"totalAvailableInHours\": 32,\n      \"totalTimeOffInHours\": 4,\n      \"realAvailabilityInHours\": 28,\n      \"totalEffortInHours\": 2.8,\n      \"totalEffortInMD\": 0.47\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained the paginated, filtered and sorted team assignment list",
+          "label": "Successfully obtained the paginated, filtered and sorted individual capacity list",
           "headers": [
             {
               "key": "Content-Type",
@@ -585,7 +585,7 @@
       "type": "http",
       "documentation": "Edit team assignment entity",
       "method": "put",
-      "endpoint": "teamAssignments",
+      "endpoint": "teamAssignments/:id",
       "responses": [
         {
           "uuid": "cb3b7440-4edb-44b5-8b51-3e84e7195425",
@@ -1300,7 +1300,7 @@
       "type": "http",
       "documentation": "Edit team time off entity",
       "method": "put",
-      "endpoint": "teamTimeOff",
+      "endpoint": "teamTimeOff/:id",
       "responses": [
         {
           "uuid": "8aba5150-b79f-4983-aa4b-e0218725fcae",
@@ -2015,7 +2015,7 @@
       "type": "http",
       "documentation": "Edit effort matrix entity",
       "method": "put",
-      "endpoint": "effortMatrix",
+      "endpoint": "effortMatrix/:id",
       "responses": [
         {
           "uuid": "48cc086b-7617-425a-a230-f9a652fc9673",
@@ -2730,7 +2730,7 @@
       "type": "http",
       "documentation": "Edit project milestone entity",
       "method": "put",
-      "endpoint": "projectMilestones",
+      "endpoint": "projectMilestones/:id",
       "responses": [
         {
           "uuid": "fe037588-2402-4d16-953d-6dc23926887a",
