@@ -102,6 +102,11 @@ export const getAllFilters = (filters: Filter[], comboValue: ComboValue) =>
 export const getTableQueryUrl = params =>
   Object.keys(params).reduce(
     (acc, key) =>
-      (acc = params[key] ? (acc ? `${acc}&${key}=${params[key]}` : `${key}=${params[key]}`) : acc),
+      (acc =
+        params[key] || params[key] === 0
+          ? acc
+            ? `${acc}&${key}=${params[key]}`
+            : `${key}=${params[key]}`
+          : acc),
     ''
   )
