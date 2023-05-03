@@ -86,6 +86,7 @@ const ModalForm = ({
                       break
                     case 'autocomplete':
                       handleInputChange(arg?.value, key, rest.type)
+                      handleInputChange(arg?.label, name, rest.type)
                       break
                     default:
                       handleInputChange(arg.target.value, key, rest.type)
