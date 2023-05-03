@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import { AppBar } from '@fullscreendigital/carrefour-dex-fe'
 import { NotificationsNoneOutlined, DragHandleOutlined } from '@mui/icons-material'
 import { DrawerContext } from 'contexts'
-import { Logo } from './Logo'
 import s from './Header.scss'
 
 const Header = ({ handleOpenMenu }) => {
@@ -12,19 +11,20 @@ const Header = ({ handleOpenMenu }) => {
     <>
       <AppBar
         id="back-to-top-anchor"
-        position="fixed"
         style={{
           zIndex: '1201',
           transition: 'all 0.3s ease'
         }}
         mainItem={{
-          content: <Logo />,
+          content: <img src="images/carrefour.png" style={{ width: '100%' }} />,
           style: {
             position: 'absolute',
-            left: `calc(50% - 24px)`
+            display: 'flex',
+            width: '60px',
+            left: `calc(50% - 30px)`
           }
         }}
-        hasBackground
+        position="relative"
         menuIcon={
           <span className={s.notificationsContainer}>
             <NotificationsNoneOutlined />
