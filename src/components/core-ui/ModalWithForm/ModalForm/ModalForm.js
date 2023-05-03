@@ -59,7 +59,10 @@ const ModalForm = ({
         {processedFormItems.map(formItem => {
           const { UIComponent, name, formItemsPerRow, ...rest } = formItem
           const key = rest.payloadKey || name
-          const value = get(editItem, name) ?? (rest.type === 'date' ? undefined : '')
+          let value = get(editItem, name)
+          if (value == '' && rest.type === 'date') {
+            value = null; // value=undefined => current date | value=null => input left blank
+          }
 
           return (
             <Grid
