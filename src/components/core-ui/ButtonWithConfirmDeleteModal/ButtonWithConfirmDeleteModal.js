@@ -7,6 +7,7 @@ import { Button, Typography, IconButton } from '@fullscreendigital/carrefour-dex
 import { makeCoreDeleteRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { useMediaQuery } from '@mui/material'
+import s from '../ModalWithForm/ModalForm/ModalForm.scss'
 
 const sx = {
   position: 'absolute',
@@ -15,8 +16,9 @@ const sx = {
   transform: 'translate(-50%, -50%)',
   width: '30%',
   bgcolor: '#fff',
-  boxShadow: 24,
-  p: 4
+  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
+  borderRadius: '8px',
+  p: 4,
 }
 
 const ButtonWithConfirmDeleteModal = ({
@@ -78,13 +80,13 @@ const ButtonWithConfirmDeleteModal = ({
           <Grid container spacing={4}>
             <Grid item xs={12}>
               <Typography component="h2" variant="medium">
-                {modalTitle}
+                <span className={s.modalTitle}>{modalTitle}</span>
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              {modalMessage}
+              <span className={s.modalMessage}>{modalMessage}</span>
             </Grid>
-            <Grid item xs={12} style={{ textAlign: 'right' }}>
+            <Grid item xs={12} className={s.modalButtons}>
               {formButtons.map(formButton => {
                 const { isDeleteButton, ...rest } = formButton
                 return (
@@ -92,7 +94,6 @@ const ButtonWithConfirmDeleteModal = ({
                     key={formButton.label}
                     {...rest}
                     onClick={isDeleteButton ? deleteItem : closeModal}
-                    style={{ marginLeft: '1.2rem' }}
                   />
                 )
               })}

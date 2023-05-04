@@ -7,6 +7,7 @@ import { getGridSize } from '../helpers'
 import { ModalInfo } from './ModalInfo'
 import { get } from 'lodash'
 import { useNotification } from 'hooks'
+import s from './ModalForm.scss'
 
 const ModalForm = ({
   modalTitle,
@@ -47,7 +48,7 @@ const ModalForm = ({
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <Typography component="h2" variant="medium">
-            {modalTitle}
+            <span className={s.modalTitle}>{modalTitle}</span>
           </Typography>
         </Grid>
         {!!formInfoItems?.length && (
@@ -97,7 +98,9 @@ const ModalForm = ({
             </Grid>
           )
         })}
-        <Grid item xs={12} style={{ textAlign: 'right' }}>
+        <Grid item xs={12} style={{padding: "4px"}}/> {/* [~] so that we start counting grid columns again on a new line */}
+        {[...Array(12/gridSize - 1)].map((_,i) => (<Grid item key={i} xs={12} sm={gridSize}/>))}
+        <Grid item xs={12} sm={gridSize} className={s.modalButtons}>
           {formButtons.map(formButton => {
             const { isSaveButton, ...rest } = formButton
             return (
@@ -105,7 +108,6 @@ const ModalForm = ({
                 key={formButton.label}
                 {...rest}
                 onClick={isSaveButton ? saveData : closeModal}
-                style={{ marginLeft: '1.2rem' }}
               />
             )
           })}
