@@ -19,7 +19,7 @@ const useScandit = ({ onScan, isVisible }) => {
     if (localPicker) {
       if (isVisible) {
         localPicker.accessCamera()
-        localPicker.resumeScanning(true)
+        localPicker.resumeScanning()
       } else {
         localPicker.pauseScanning()
       }
@@ -46,6 +46,7 @@ const useScandit = ({ onScan, isVisible }) => {
         barcodePicker.applyScanSettings(scanSettings)
         barcodePicker.on('scan', scanResult => {
           onScan(scanResult)
+          barcodePicker.pauseScanning(true)
           // barcodePicker.setVisible(false)
           // barcodePicker.destroy()
           // setLocalPicker(null)
