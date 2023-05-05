@@ -75,7 +75,8 @@ module.exports = () => ({
     },
     compress: true,
     hot: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    allowedHosts: 'all'
   },
   plugins: [new ReactRefreshWebpackPlugin(), new Dotenv({ path: '.env.dev' })]
 })
