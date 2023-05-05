@@ -24,10 +24,11 @@ const sx = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   bgcolor: '#fff',
-  boxShadow: 24,
   p: 4,
   maxHeight: '80%',
-  overflowY: 'auto'
+  overflowY: 'auto',
+  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
+  borderRadius: '8px'
 }
 
 const ModalWithForm = ({

@@ -47,7 +47,7 @@ const DynamicComponent = props => {
 
         <Typography variant="medium">
           <span className={s.moduleSummary}>
-            <Icon iconName={screen?.icon || props.icon || 'EmojiNature'} />
+            <Icon iconName={screen?.icon || props.icon || 'EmojiNature'} tiny={true} />
             {screen?.name || props.name || ''}
           </span>
         </Typography>
