@@ -1,55 +1,47 @@
 import { useNavigate } from 'react-router-dom'
-import { Accordion, List, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Accordion, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
-import { KeyboardArrowRightOutlined } from '@mui/icons-material'
-import s from './Home.scss'
+import { Box } from '@mui/material'
+import s from '../ServiceDomain/ServiceDomain.scss'
 
 const Home = ({ modules, setSubdomainId }) => {
   const navigate = useNavigate()
 
-  const toListItems = submodules => {
-    return submodules.map((item, index) => ({
-      type: item.icon ? 'icon' : 'text',
-      primaryText: item.name,
-      index: index,
-      icon: <Icon iconName={item.icon} />,
-      disablePadding: true,
-      id: item.id,
-      href: item.routeURL || null,
-      nestedItems: [],
-      infoText: (
-        <span style={{ opacity: '0.5' }}>
-          <KeyboardArrowRightOutlined />
-        </span>
-      )
-    }))
-  }
-
-  const handleItemClick = (event, item) => {
-    event.preventDefault()
-
-    const { href, id } = item
-
-    navigate(href)
-    localStorage.setItem('selectedSubdomainId', id)
-    setSubdomainId(id)
-  }
-
   return (
-    <div className={s.homeWrapper}>
+    <div className={s.modulePaper}>
       {modules.map((module, index) => {
         return (
           <Accordion
             key={module.id}
             summary={
               <Typography variant="medium">
-                <span className={s.moduleAccordionSummary}>
-                  <Icon iconName={module.icon} />
+                <span className={s.moduleSummary}>
+                  <Icon iconName={module.icon} tiny={true} />
                   {module.name}
                 </span>
               </Typography>
             }
-            details={<List items={toListItems(module.submodules)} onItemClick={handleItemClick} />}
+            details={
+              <Box className={s.applicationsWrapper} style={{ justifyContent: 'center' }}>
+                {module.submodules
+                  .map(app => (
+                    <div
+                      key={app.screenId}
+                      onClick={() => {
+                        localStorage.setItem('selectedSubdomainId', app.id)
+                        setSubdomainId(app.id)
+                        navigate(app.routeURL)
+                      }}
+                      className={s.applicationContainer}
+                    >
+                      <div className={s.iconContainer}>
+                        <Icon iconName={app.icon} />
+                      </div>
+                      <span className={s.applicationName}>{app.name}</span>
+                    </div>
+                  ))}
+              </Box>
+            }
             // disableGutters
             defaultExpanded={index == 0}
             id={module.id}

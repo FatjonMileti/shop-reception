@@ -52,6 +52,7 @@
 .applicationsWrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
 
   padding: 72px calc(48px + (100vw - 936px) / 6);
   gap: 72px 0px;

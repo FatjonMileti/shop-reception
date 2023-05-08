@@ -34,7 +34,7 @@ const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
 
         <Typography variant="medium">
           <span className={s.moduleSummary}>
-            <Icon iconName={module?.icon || 'EmojiNature'} />
+            <Icon iconName={module?.icon || 'EmojiNature'} tiny={true} />
             {module?.name || ''}
           </span>
         </Typography>
@@ -44,7 +44,7 @@ const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
         <Box className={s.submoduleHeader}>
           <Typography variant="medium">
             <span className={s.moduleSummary}>
-              <Icon iconName={submodule?.icon || 'EmojiNature'} />
+              <Icon iconName={submodule?.icon || 'EmojiNature'} tiny={true} />
               {submodule?.name || ''}
             </span>
           </Typography>
