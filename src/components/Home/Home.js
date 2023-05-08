@@ -26,7 +26,7 @@ const Home = ({ modules, setSubdomainId }) => {
                 {module.submodules
                   .map(app => (
                     <div
-                      key={app.screenId}
+                      key={app.id}
                       onClick={() => {
                         localStorage.setItem('selectedSubdomainId', app.id)
                         setSubdomainId(app.id)

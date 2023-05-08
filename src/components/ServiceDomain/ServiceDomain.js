@@ -28,16 +28,17 @@ const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
   return (
     <Box>
       <Box className={s.moduleHeader}>
-        <IconButton className={s.back} onClick={goBack}>
-          <ArrowBackIosNewOutlined />
-        </IconButton>
+        <div className={s.backHolder}>
+          <IconButton className={s.back} onClick={goBack}>
+            <ArrowBackIosNewOutlined />
+          </IconButton>
 
-        <Typography variant="medium">
-          <span className={s.backTitle}>
-            {/* <Icon iconName={module?.icon || 'EmojiNature'} tiny={true} /> */}
-            {module?.name || ''}
-          </span>
-        </Typography>
+          <Typography variant="medium">
+            <span className={s.backTitle}>
+              {module?.name || ''}
+            </span>
+          </Typography>
+        </div>
       </Box>
 
       <Paper className={s.modulePaper}>

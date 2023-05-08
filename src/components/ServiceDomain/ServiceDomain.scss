@@ -43,6 +43,16 @@
   color: #121212;
 }
 
+.backHolder {
+  display: flex;
+  align-items: center;
+
+  &:hover .back { background: #0863CC!important; }
+  &:active .back { background: #0757B2!important; }
+  &:hover .backTitle { color: #0863CC; }
+  &:active .backTitle { color: #0757B2; }
+}
+
 .back {
   background: #0970E6!important;
   margin-right: 18px!important;

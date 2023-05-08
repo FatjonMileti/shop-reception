@@ -41,15 +41,17 @@ const DynamicComponent = props => {
   return (
     <div>
       <Box className={s.moduleHeader}>
-        <IconButton className={sd.back} onClick={goBack}>
-          <ArrowBackIosNewOutlined />
-        </IconButton>
+        <div className={sd.backHolder}>
+          <IconButton className={sd.back} onClick={goBack}>
+            <ArrowBackIosNewOutlined />
+          </IconButton>
 
-        <Typography variant="medium">
-          <span className={sd.backTitle}>
-            {screen?.name || props.name || ''}
-          </span>
-        </Typography>
+          <Typography variant="medium">
+            <span className={sd.backTitle}>
+              {screen?.name || props.name || ''}
+            </span>
+          </Typography>
+        </div>
       </Box>
 
       {JSONSchema ? renderComponent(JSONSchema) : ''}
