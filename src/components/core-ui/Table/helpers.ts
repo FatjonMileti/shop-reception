@@ -34,7 +34,8 @@ export const getRenderedColumns = (columns, tableFilters) =>
             return renderComponent({
               ...render,
               href: linkHref,
-              children: row[field]
+              children: row[field],
+              style: { textDecoration: 'none' }
             })
           }
           return renderComponent(render)
