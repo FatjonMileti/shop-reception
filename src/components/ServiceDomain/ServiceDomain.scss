@@ -44,9 +44,24 @@
 }
 
 .back {
-  background: white!important;
-  border: 0.5px groove!important;
+  background: #0970E6!important;
   margin-right: 18px!important;
+  color: white!important;
+}
+
+.backTitle {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+
+  /* monochrome-primary */
+  color: #0970E6;
 }
 
 .applicationsWrapper {

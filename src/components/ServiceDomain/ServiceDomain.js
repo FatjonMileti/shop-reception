@@ -33,8 +33,8 @@ const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
         </IconButton>
 
         <Typography variant="medium">
-          <span className={s.moduleSummary}>
-            <Icon iconName={module?.icon || 'EmojiNature'} tiny={true} />
+          <span className={s.backTitle}>
+            {/* <Icon iconName={module?.icon || 'EmojiNature'} tiny={true} /> */}
             {module?.name || ''}
           </span>
         </Typography>
