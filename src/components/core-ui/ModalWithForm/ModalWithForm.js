@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import Modal from '@mui/material/Modal'
 import Box from '@mui/material/Box'
 import { Close } from '@mui/icons-material'
-import { IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { ModalForm } from './ModalForm'
 import { useImmer } from 'use-immer'
 import {
@@ -17,8 +17,6 @@ import { getModalWidth, getGridSize } from './helpers'
 import { set } from 'lodash'
 import { useMediaQuery, CircularProgress } from '@mui/material'
 import { useNotification } from 'hooks'
-import cn from 'classnames'
-import s from './ModalWithForm.scss'
 
 const sx = {
   position: 'absolute',
@@ -52,12 +50,7 @@ const ModalWithForm = ({
   const [editItem, setEditItem] = useImmer({})
 
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    if (isModalOpen && editItem) {
-      setTimeout(() => setIsLoading(false), 500)
-    }
-  }, [isModalOpen, editItem])
+  
 
   useEffect(() => {
     if (isModalOpen && editedItemId) {
@@ -70,10 +63,15 @@ const ModalWithForm = ({
             message: `Error while fetching item. ${error?.message}`,
             type: 'error'
           })
+        } finally {
+          setTimeout(() => setIsLoading(false), 500)
         }
       })()
     } else {
       setEditItem(getItemDefaults(formItems))
+      if (isModalOpen) {
+        setTimeout(() => setIsLoading(false), 500)
+      }
     }
   }, [isModalOpen, editedItemId, formItems, editedItemUrl, setEditItem])
 
@@ -89,6 +87,7 @@ const ModalWithForm = ({
 
   const saveData = async () => {
     // TODO: save the new data; this is a POST to api
+    setIsLoading(true)
     try {
       const payload = toItemPayload(editItem)
       if (formAction.type === 'POST') {
@@ -120,6 +119,7 @@ const ModalWithForm = ({
     }
     additionalAction && additionalAction()
     closeModalAndResetForm()
+    setIsLoading(false)
   }
 
   const closeModalAndResetForm = () => {
@@ -154,26 +154,25 @@ const ModalWithForm = ({
           <Close />
         </IconButton>
         {isLoading && (
-          <div className={s.progress}>
-            <Typography>
-              <CircularProgress color="inherit" style={{ margin: '40px auto' }} disableShrink />
-            </Typography>
+          <div style={{ display:'flex' }}>
+            <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
+          </div>
+        ) || (
+          <div>
+            <ModalForm
+              modalTitle={modalTitle}
+              formItems={formItems}
+              formInfoItems={formInfoItems}
+              gridSize={gridSize}
+              handleInputChange={handleInputChange}
+              editItem={editItem}
+              formButtons={formButtons}
+              saveData={saveData}
+              closeModal={closeModalAndResetForm}
+              comboValue={comboValue}
+            />
           </div>
         )}
-        <div className={cn({ [s.hidden]: isLoading })}>
-          <ModalForm
-            modalTitle={modalTitle}
-            formItems={formItems}
-            formInfoItems={formInfoItems}
-            gridSize={gridSize}
-            handleInputChange={handleInputChange}
-            editItem={editItem}
-            formButtons={formButtons}
-            saveData={saveData}
-            closeModal={closeModalAndResetForm}
-            comboValue={comboValue}
-          />
-        </div>
       </Box>
     </Modal>
   )

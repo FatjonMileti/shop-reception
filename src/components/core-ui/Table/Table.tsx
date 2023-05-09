@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useImmer } from 'use-immer'
-import { Box } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
@@ -20,6 +20,7 @@ const Table = props => {
 
   let [searchParams] = useSearchParams()
 
+  const [isLoading, setIsLoading] = useState(true)
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
@@ -82,6 +83,7 @@ const Table = props => {
 
     const url = action.url
 
+    setIsLoading(true)
     try {
       let response
       if (action.type === 'GET') {
@@ -122,14 +124,18 @@ const Table = props => {
         type: 'error'
       })
     }
+    setIsLoading(false)
   }
 
   const openNewModal = () => setIsNewModalOpen(true)
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
-  return (
-    <Box className={s.tableContainer}>
+  return (<>
+    <div style={{ display: isLoading ? 'flex' : 'none' }}>
+      <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
+    </div>
+    <Box className={s.tableContainer} style={{ display: isLoading ? 'none' : '' }}>
       {tableActions?.newAction && (
         <ModalWithForm
           {...tableActions.newAction}
@@ -193,7 +199,7 @@ const Table = props => {
         filters={filtersConfig}
       />
     </Box>
-  )
+  </>)
 }
 
 export default Table

@@ -6,11 +6,13 @@ import { useNotification } from 'hooks'
 import s from './DynamicComponent.scss'
 import sd from '../ServiceDomain/ServiceDomain.scss'
 
-import { Box } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import { IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { ArrowBackIosNewOutlined } from '@mui/icons-material'
 
 const DynamicComponent = props => {
+  const [isLoadingSchema, setIsLoadingSchema] = useState(true)
+
   const [JSONSchema, setJSONSchema] = useState(null)
   const [screen, setScreen] = useState(null)
 
@@ -34,11 +36,17 @@ const DynamicComponent = props => {
           message: `Error while fetching page schema. ${error.message}`,
           type: 'error'
         })
+      } finally {
+        setIsLoadingSchema(false)
       }
     })()
   }, [props.activityId, props.screenId])
 
-  return (
+  return isLoadingSchema && (
+    <div style={{ display:'flex' }}>
+      <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
+    </div>
+  ) || (
     <div>
       <Box className={s.moduleHeader}>
         <div className={sd.backHolder}>
