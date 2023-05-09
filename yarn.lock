@@ -1184,9 +1184,9 @@
   integrity sha512-ElyB54bJIhXQYVKjDSvCkPO1iU1tSAeVQJbllWJq1XQSmmA4dgFk8CbiBGpiOPxleE48vDogxCtmMYku4HSVLA==
 
 "@fullscreendigital/carrefour-dex-fe@^1.0.0":
-  version "1.0.204"
-  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-1.0.204.tgz#9f59247dd11c5c374dd6e41e654828d161a641e1"
-  integrity sha512-fEV2kQSCXS0BVWZVj4ek7XRQnS1x1PXtHlTvmOW99RLxgg4bPhKPjnbEObuTD8uSxRv1/9gkiFFzD5Jrqhjmeg==
+  version "1.0.205"
+  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-1.0.205.tgz#afe1682ffe6fc5229b346aa5ef4348befec91b12"
+  integrity sha512-YvfLkJgaOzqZ2Eh2RX35wU6RsYRch5D+BiwmKmIqiqh5BC+j+T5tm3YwDOcAp/eJ2X7myzlECcGI8FQYwMe6/w==
   dependencies:
     "@emotion/react" "^11.9.3"
     "@emotion/styled" "^11.9.3"
@@ -1575,9 +1575,9 @@
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
 "@types/node@*":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.1.0.tgz#258805edc37c327cf706e64c6957f241ca4c4c20"
-  integrity sha512-O+z53uwx64xY7D6roOi4+jApDGFg0qn6WHcxe5QeqjMaTezBO/mxdfFXIVAVVyNWKx84OmPB3L8kbVYOTeN34A==
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.1.1.tgz#afc492e8dbe7f672dd3a13674823522b467a45ad"
+  integrity sha512-uKBEevTNb+l6/aCQaKVnUModfEMjAl98lw2Si9P5y4hLu9tm6AlX2ZIoXZX6Wh9lJueYPrGPKk5WMCNHg/u6/A==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -2764,9 +2764,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.284:
-  version "1.4.385"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.385.tgz#1afd8d6280d510145148777b899ff481c65531ff"
-  integrity sha512-L9zlje9bIw0h+CwPQumiuVlfMcV4boxRjFIWDcLfFqTZNbkwOExBzfmswytHawObQX4OUhtNv8gIiB21kOurIg==
+  version "1.4.387"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.387.tgz#9a93ef1bd01b5898436026401ea3cabb1dd17d7a"
+  integrity sha512-tutLf+alr1/0YqJwKPdstVvDLmxmLb5xNyDLNS0RZmenHcEYk9qKfpKDCVZEKJ00JVbnayJm1MZAbYhYDFpcOw==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -5700,9 +5700,9 @@ terser-webpack-plugin@^5.3.5, terser-webpack-plugin@^5.3.7:
     terser "^5.16.8"
 
 terser@^5.10.0, terser@^5.16.8:
-  version "5.17.1"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-5.17.1.tgz#948f10830454761e2eeedc6debe45c532c83fd69"
-  integrity sha512-hVl35zClmpisy6oaoKALOpS0rDYLxRFLHhRuDlEGTKey9qHjS1w9GMORjuwIMt70Wan4lwsLYyWDVnWgF+KUEw==
+  version "5.17.2"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-5.17.2.tgz#06c9818ae998066234b985abeb57bb7bff29d449"
+  integrity sha512-1D1aGbOF1Mnayq5PvfMc0amAR1y5Z1nrZaGCvI5xsdEfZEVte8okonk02OiaK5fw5hG1GWuuVsakOnpZW8y25A==
   dependencies:
     "@jridgewell/source-map" "^0.3.2"
     acorn "^8.5.0"
