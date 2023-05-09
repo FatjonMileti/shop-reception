@@ -13,7 +13,10 @@ const TableActions = ({ itemId, editAction, deleteAction, additionalAction, comb
           formInfoItems={editAction.formInfoItems}
           formItemsPerRow={editAction.formItemsPerRow}
           formButtons={editAction.formButtons}
-          formAction={{ type: editAction.updateUrlType, url: editAction.updateUrl.replace(":id", itemId) }}
+          formAction={{
+            type: editAction.updateUrlType,
+            url: editAction.updateUrl.replace(':id', itemId)
+          }}
           editedItemId={itemId}
           editedItemUrl={editAction.getUrl}
           additionalAction={additionalAction}

@@ -30,27 +30,6 @@
   padding: 16px;
 }
 
-.moduleSummary {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-
-  font-family: 'Ubuntu';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
-
-  /* monochrome-primary */
-  color: #121212;
-}
-
-.back {
-  background: white!important;
-  border: 0.5px groove!important;
-  margin-right: 18px!important;
-}
-
 .applicationsWrapper {
   display: flex;
   flex-wrap: wrap;

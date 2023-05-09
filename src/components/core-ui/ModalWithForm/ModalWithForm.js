@@ -1,8 +1,8 @@
-import { useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Modal from '@mui/material/Modal'
 import Box from '@mui/material/Box'
 import { Close } from '@mui/icons-material'
-import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
+import { IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { ModalForm } from './ModalForm'
 import { useImmer } from 'use-immer'
 import {
@@ -15,8 +15,10 @@ import { getItemDefaults, formatPayloadDate } from 'utils/helpers'
 import { toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
 import { set } from 'lodash'
-import { useMediaQuery } from '@mui/material'
+import { useMediaQuery, CircularProgress } from '@mui/material'
 import { useNotification } from 'hooks'
+import cn from 'classnames'
+import s from './ModalWithForm.scss'
 
 const sx = {
   position: 'absolute',
@@ -46,9 +48,16 @@ const ModalWithForm = ({
   closeModal,
   comboValue
 }) => {
+  const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer({})
 
   const { showNotification } = useNotification()
+
+  useEffect(() => {
+    if (isModalOpen && editItem) {
+      setTimeout(() => setIsLoading(false), 500)
+    }
+  }, [isModalOpen, editItem])
 
   useEffect(() => {
     if (isModalOpen && editedItemId) {
@@ -110,13 +119,13 @@ const ModalWithForm = ({
       })
     }
     additionalAction && additionalAction()
-    setEditItem({})
-    closeModal()
+    closeModalAndResetForm()
   }
 
   const closeModalAndResetForm = () => {
     closeModal()
     setEditItem({})
+    setIsLoading(true)
   }
 
   const isXs = useMediaQuery('(max-width:624px)')
@@ -144,18 +153,27 @@ const ModalWithForm = ({
         >
           <Close />
         </IconButton>
-        <ModalForm
-          modalTitle={modalTitle}
-          formItems={formItems}
-          formInfoItems={formInfoItems}
-          gridSize={gridSize}
-          handleInputChange={handleInputChange}
-          editItem={editItem}
-          formButtons={formButtons}
-          saveData={saveData}
-          closeModal={closeModalAndResetForm}
-          comboValue={comboValue}
-        />
+        {isLoading && (
+          <div className={s.progress}>
+            <Typography>
+              <CircularProgress color="inherit" style={{ margin: '40px auto' }} disableShrink />
+            </Typography>
+          </div>
+        )}
+        <div className={cn({ [s.hidden]: isLoading })}>
+          <ModalForm
+            modalTitle={modalTitle}
+            formItems={formItems}
+            formInfoItems={formInfoItems}
+            gridSize={gridSize}
+            handleInputChange={handleInputChange}
+            editItem={editItem}
+            formButtons={formButtons}
+            saveData={saveData}
+            closeModal={closeModalAndResetForm}
+            comboValue={comboValue}
+          />
+        </div>
       </Box>
     </Modal>
   )
