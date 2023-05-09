@@ -56,7 +56,6 @@ const ModalForm = ({
             <ModalInfo formInfoItems={formInfoItems} editItem={editItem} />
           </Grid>
         )}
-
         {processedFormItems.map(formItem => {
           const { UIComponent, name, formItemsPerRow, ...rest } = formItem
           const key = rest.payloadKey || name
