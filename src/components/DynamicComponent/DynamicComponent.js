@@ -55,9 +55,7 @@ const DynamicComponent = props => {
           </IconButton>
 
           <Typography variant="medium">
-            <span className={sd.backTitle}>
-              {screen?.name || props.name || ''}
-            </span>
+            <span className={sd.backTitle}>{screen?.name || props.name || ''}</span>
           </Typography>
         </div>
       </Box>

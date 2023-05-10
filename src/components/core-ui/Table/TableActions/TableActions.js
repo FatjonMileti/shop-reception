@@ -2,10 +2,18 @@ import { Edit, Delete } from '@mui/icons-material'
 import { ButtonWithModalAndForm } from '../../ButtonWithModalAndForm'
 import { ButtonWithConfirmDeleteModal } from '../../ButtonWithConfirmDeleteModal'
 
-const TableActions = ({ itemId, editAction, deleteAction, additionalAction, comboValue }) => {
+const TableActions = ({
+  itemId,
+  editAction,
+  deleteAction,
+  additionalAction,
+  comboValue,
+  canEdit,
+  canDelete
+}) => {
   return (
     <div style={{ minWidth: '5rem' }}>
-      {editAction && (
+      {editAction && canEdit && (
         <ButtonWithModalAndForm
           buttonProps={{ children: <Edit /> }}
           modalTitle="Edit"
@@ -23,7 +31,7 @@ const TableActions = ({ itemId, editAction, deleteAction, additionalAction, comb
           comboValue={comboValue}
         />
       )}
-      {deleteAction && (
+      {deleteAction && canDelete && (
         <ButtonWithConfirmDeleteModal
           buttonProps={{ children: <Delete /> }}
           modalTitle="Delete"
