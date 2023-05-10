@@ -12,9 +12,6 @@ import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializer
 import { useNotification } from 'hooks'
 import s from './Table.modules.scss'
 
-
-const initialTableState = {}
-
 const Table = props => {
   const { action, columns, tableActions, tableRowActions, comboValue, ...rest } = props
 
@@ -68,7 +65,7 @@ const Table = props => {
         tableState.filters
       )
     }
-  }, [comboValue])
+  }, [comboValue?.value])
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
@@ -131,75 +128,77 @@ const Table = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
-  return (<>
-    <div style={{ display: isLoading ? 'flex' : 'none' }}>
-      <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
-    </div>
-    <Box className={s.tableContainer} style={{ display: isLoading ? 'none' : '' }}>
-      {tableActions?.newAction && (
-        <ModalWithForm
-          {...tableActions.newAction}
-          additionalAction={() =>
-            handleRemoteData(
-              tableState.page,
-              tableState.rowsPerPage,
-              tableState.order,
-              tableState.orderBy,
-              tableState.searchText,
-              tableState.filters
-            )
+  return (
+    <>
+      <div style={{ display: isLoading ? 'flex' : 'none' }}>
+        <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+      </div>
+      <Box className={s.tableContainer} style={{ display: isLoading ? 'none' : '' }}>
+        {tableActions?.newAction && (
+          <ModalWithForm
+            {...tableActions.newAction}
+            additionalAction={() =>
+              handleRemoteData(
+                tableState.page,
+                tableState.rowsPerPage,
+                tableState.order,
+                tableState.orderBy,
+                tableState.searchText,
+                tableState.filters
+              )
+            }
+            isModalOpen={isNewModalOpen}
+            closeModal={closeNewModal}
+            comboValue={comboValue}
+          />
+        )}
+        <GeneralTable
+          {...rest}
+          columns={
+            tableRowActions
+              ? renderedColumns.concat({
+                  title: '',
+                  field: 'actions',
+                  align: 'right',
+                  width: '112px',
+                  collapsible: 'true',
+                  render: row => (
+                    <TableActions
+                      itemId={row.id}
+                      editAction={tableRowActions.editAction}
+                      deleteAction={tableRowActions.deleteAction}
+                      additionalAction={() =>
+                        handleRemoteData(
+                          tableState.page,
+                          tableState.rowsPerPage,
+                          tableState.order,
+                          tableState.orderBy,
+                          tableState.searchText,
+                          tableState.filters
+                        )
+                      }
+                      comboValue={comboValue}
+                    />
+                  )
+                })
+              : renderedColumns
           }
-          isModalOpen={isNewModalOpen}
-          closeModal={closeNewModal}
-          comboValue={comboValue}
+          rows={items}
+          totalCount={totalCount}
+          rowsPerPage={rest.rowsPerPage || 10}
+          isRemote
+          newButton={
+            tableActions?.newAction
+              ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
+              : null
+          }
+          hasSearchInput={!!tableActions?.searchAction}
+          handleRemoteData={handleRemoteData}
+          filters={filtersConfig}
         />
-      )}
-      <GeneralTable
-        {...rest}
-        columns={
-          tableRowActions
-            ? renderedColumns.concat({
-                title: '',
-                field: 'actions',
-                align: 'right',
-                width: '112px',
-                collapsible: 'true',
-                render: row => (
-                  <TableActions
-                    itemId={row.id}
-                    editAction={tableRowActions.editAction}
-                    deleteAction={tableRowActions.deleteAction}
-                    additionalAction={() =>
-                      handleRemoteData(
-                        tableState.page,
-                        tableState.rowsPerPage,
-                        tableState.order,
-                        tableState.orderBy,
-                        tableState.searchText,
-                        tableState.filters
-                      )
-                    }
-                    comboValue={comboValue}
-                  />
-                )
-              })
-            : renderedColumns
-        }
-        rows={items}
-        totalCount={totalCount}
-        rowsPerPage={rest.rowsPerPage || 10}
-        isRemote
-        newButton={
-          tableActions?.newAction
-            ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
-            : null
-        }
-        hasSearchInput={!!tableActions?.searchAction}
-        handleRemoteData={handleRemoteData}
-        filters={filtersConfig}
-      />
-    </Box>
-  </>)
+      </Box>
+    </>
+  )
 }
 
 export default Table
