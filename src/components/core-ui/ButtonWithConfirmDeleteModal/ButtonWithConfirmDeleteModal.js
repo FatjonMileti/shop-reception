@@ -6,7 +6,7 @@ import { Close } from '@mui/icons-material'
 import { Button, Typography, IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreDeleteRequest } from 'utils/api'
 import { useNotification } from 'hooks'
-import { useMediaQuery } from '@mui/material'
+import { CircularProgress, useMediaQuery } from '@mui/material'
 import s from '../ModalWithForm/ModalForm/ModalForm.scss'
 
 const sx = {
@@ -32,6 +32,7 @@ const ButtonWithConfirmDeleteModal = ({
   additionalAction
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const { showNotification } = useNotification()
 
@@ -40,6 +41,7 @@ const ButtonWithConfirmDeleteModal = ({
   const closeModal = () => setIsModalOpen(false)
 
   const deleteItem = async () => {
+    setIsDeleting(true)
     try {
       await makeCoreDeleteRequest(`${deleteActionUrl}/${deletedItemId}`)
       showNotification({
@@ -53,6 +55,7 @@ const ButtonWithConfirmDeleteModal = ({
       })
     }
     additionalAction && additionalAction()
+    setIsDeleting(false)
     closeModal()
   }
 
@@ -77,28 +80,34 @@ const ButtonWithConfirmDeleteModal = ({
           <IconButton style={{ position: 'absolute', top: '1rem', right: '1rem' }} withBackground onClick={closeModal}>
             <Close />
           </IconButton>
-          <Grid container spacing={4}>
-            <Grid item xs={12}>
-              <Typography component="h2" variant="medium">
-                <span className={s.modalTitle}>{modalTitle}</span>
-              </Typography>
+          {isDeleting && (
+            <div style={{ display:'flex' }}>
+              <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
+            </div>
+          ) || (
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
+                <Typography component="h2" variant="medium">
+                  <span className={s.modalTitle}>{modalTitle}</span>
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <span className={s.modalMessage}>{modalMessage}</span>
+              </Grid>
+              <Grid item xs={12} className={s.modalButtons}>
+                {formButtons.map(formButton => {
+                  const { isDeleteButton, ...rest } = formButton
+                  return (
+                    <Button
+                      key={formButton.label}
+                      {...rest}
+                      onClick={isDeleteButton ? deleteItem : closeModal}
+                    />
+                  )
+                })}
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <span className={s.modalMessage}>{modalMessage}</span>
-            </Grid>
-            <Grid item xs={12} className={s.modalButtons}>
-              {formButtons.map(formButton => {
-                const { isDeleteButton, ...rest } = formButton
-                return (
-                  <Button
-                    key={formButton.label}
-                    {...rest}
-                    onClick={isDeleteButton ? deleteItem : closeModal}
-                  />
-                )
-              })}
-            </Grid>
-          </Grid>
+          )}
         </Box>
       </Modal>
     </>

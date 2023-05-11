@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Box, Paper } from '@mui/material'
+import { Box, CircularProgress, Paper } from '@mui/material'
 import { Icon } from 'components/core-ui/Icon'
 import s from './ServiceDomain.scss'
 import { Divider, IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
@@ -25,7 +25,11 @@ const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
     return { module: mod, submodule: sub }
   }, [subdomainId, modules])
 
-  return (
+  return !applicationPages.length && (
+    <div style={{ display:'flex' }}>
+      <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
+    </div>
+  ) || (
     <Box>
       <Box className={s.moduleHeader}>
         <div className={s.backHolder}>
