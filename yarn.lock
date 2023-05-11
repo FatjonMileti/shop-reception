@@ -1184,9 +1184,9 @@
   integrity sha512-ElyB54bJIhXQYVKjDSvCkPO1iU1tSAeVQJbllWJq1XQSmmA4dgFk8CbiBGpiOPxleE48vDogxCtmMYku4HSVLA==
 
 "@fullscreendigital/carrefour-dex-fe@^1.0.0":
-  version "1.0.205"
-  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-1.0.205.tgz#afe1682ffe6fc5229b346aa5ef4348befec91b12"
-  integrity sha512-YvfLkJgaOzqZ2Eh2RX35wU6RsYRch5D+BiwmKmIqiqh5BC+j+T5tm3YwDOcAp/eJ2X7myzlECcGI8FQYwMe6/w==
+  version "1.0.206"
+  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-1.0.206.tgz#fcac532cb679bde1cdf05a17fdef46edbcb1f98a"
+  integrity sha512-uYlO7xoV4+E41ND30k4j3pk0PaqSgv7vF7Dph/yoQzEUqCE4EwWtwUAQdlmkNAwf2HC/aisawC0zNV5p71x5Xg==
   dependencies:
     "@emotion/react" "^11.9.3"
     "@emotion/styled" "^11.9.3"
