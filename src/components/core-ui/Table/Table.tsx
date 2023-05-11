@@ -10,6 +10,7 @@ import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getRenderedColumns, convertFilterSchemaToFilterConfig } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
 import { useNotification } from 'hooks'
+import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 
 const Table = props => {
@@ -124,6 +125,8 @@ const Table = props => {
     setIsLoading(false)
   }
 
+  const debouncedHandleRemoteData = debounce(handleRemoteData, 500)
+
   const openNewModal = () => setIsNewModalOpen(true)
 
   const closeNewModal = () => setIsNewModalOpen(false)
@@ -193,7 +196,7 @@ const Table = props => {
               : null
           }
           hasSearchInput={!!tableActions?.searchAction}
-          handleRemoteData={handleRemoteData}
+          handleRemoteData={debouncedHandleRemoteData}
           filters={filtersConfig}
         />
       </Box>
