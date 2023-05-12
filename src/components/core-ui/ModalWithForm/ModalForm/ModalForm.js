@@ -52,11 +52,10 @@ const ModalForm = ({
           </Typography>
         </Grid>
         {!!formInfoItems?.length && (
-          <Grid item sx={12} md={12}>
+          <Grid item xs={12} md={12}>
             <ModalInfo formInfoItems={formInfoItems} editItem={editItem} />
           </Grid>
         )}
-
         {processedFormItems.map(formItem => {
           const { UIComponent, name, formItemsPerRow, ...rest } = formItem
           const key = rest.payloadKey || name
