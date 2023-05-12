@@ -3296,6 +3296,721 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "3b45330a-0313-4e12-b271-bed54d0c8e55",
+      "type": "http",
+      "documentation": "Save team time off entity",
+      "method": "post",
+      "endpoint": "myTimeOff",
+      "responses": [
+        {
+          "uuid": "c06bb41b-3ad7-46ec-9d7d-79ccf3487d1f",
+          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful operation",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "1ebdad61-8643-4221-928b-48e902f52ade",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "383d23b9-f28a-46b9-8cfe-9c9fdb0fbad9",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "e3c0221a-e027-45b6-91b7-cb821bb3106f",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "d14501c8-998e-4356-96f4-65c45fc13d5b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "908e479d-428d-4c98-bdb1-8db37346bbca",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "3181983d-d4e5-479e-a847-fd698fa1cbe8",
+      "type": "http",
+      "documentation": "Edit team time off entity",
+      "method": "put",
+      "endpoint": "myTimeOff/:id",
+      "responses": [
+        {
+          "uuid": "a7b37712-5fb3-4ac8-b8e8-37a9cfc78311",
+          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful operation",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "4f4eb610-5cac-45b4-a59b-c21f3d5ae9e2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "cf024df4-9289-45b9-a847-86bbd2bf9643",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "192245d7-1e65-4f82-b717-73f87eae0905",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "a86bb6a0-eea3-464f-a454-ac85a112d5eb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "4e97267a-41f9-4799-b947-1e103fa91cf6",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "292e308e-f9e4-4946-94cc-0f6a826139bf",
+      "type": "http",
+      "documentation": "Get team time off list",
+      "method": "get",
+      "endpoint": "myTimeOff",
+      "responses": [
+        {
+          "uuid": "336d1388-1d45-4548-b7fb-ac8df724f71f",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 4,\n      \"teamMember\": {\n        \"id\": 4,\n        \"name\": \"Dumitrescu Cristina\",\n        \"domain\": \"Data Science\"\n      },\n      \"dayOffType\": \"Team Event\",\n      \"startDate\": \"2023-03-22\",\n      \"endDate\": \"2023-03-22\",\n      \"numberOfHours\": 4\n    },\n    {\n      \"id\": 2,\n      \"teamMember\": {\n        \"id\": 2,\n        \"name\": \"Florescu Adina\",\n        \"domain\": \"Security\"\n      },\n      \"dayOffType\": \"Day-Off\",\n      \"startDate\": \"2023-03-01\",\n      \"endDate\": \"2023-03-01\",\n      \"numberOfHours\": 8\n    },\n    {\n      \"id\": 3,\n      \"teamMember\": {\n        \"id\": 3,\n        \"name\": \"Ionescu Mihai\",\n        \"domain\": \"Digital Platforms\"\n      },\n      \"dayOffType\": \"Public Holiday\",\n      \"startDate\": \"2023-02-01\",\n      \"endDate\": \"2023-02-01\",\n      \"numberOfHours\": 6\n    },\n    {\n      \"id\": 5,\n      \"teamMember\": {\n        \"id\": 5,\n        \"name\": \"Mateescu Florin\",\n        \"domain\": \"EDI\"\n      },\n      \"dayOffType\": \"Day-Off\",\n      \"startDate\": \"2023-03-15\",\n      \"endDate\": \"2023-03-18\"\n    },\n    {\n      \"id\": 1,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"dayOffType\": \"Public Holiday\",\n      \"startDate\": \"2023-02-01\",\n      \"endDate\": \"2023-02-01\",\n      \"numberOfHours\": 6\n    },\n    {\n      \"id\": 6,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"dayOffType\": \"Team Event\",\n      \"startDate\": \"2023-02-23\",\n      \"endDate\": \"2023-02-23\",\n      \"numberOfHours\": 8\n    },\n    {\n      \"id\": 7,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"dayOffType\": \"Day-Off\",\n      \"startDate\": \"2023-02-24\",\n      \"endDate\": \"2023-02-24\",\n      \"numberOfHours\": 8\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted team time off list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "5db14835-a822-48e2-8a51-9075f5e58872",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "0c839f60-c7b6-4bee-9fec-a01dd29f4875",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "b52b137b-a8fb-4827-aabe-3f174f708caa",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "1240e49f-7af1-4b4d-ac78-7c12d15a022e",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "64c0aded-2b07-4d4a-a9b3-4efa0640a565",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "b3da3c60-60c8-4676-a5c7-a9a2a4a9fe4e",
+      "type": "http",
+      "documentation": "Find team time off by id",
+      "method": "get",
+      "endpoint": "myTimeOff/:id",
+      "responses": [
+        {
+          "uuid": "c66268d4-101a-427d-bd8f-00414bbdc8ce",
+          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful operation",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "0c36ee97-fd9b-4cb7-8156-a3ba67ee7966",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "1705102c-2462-4b30-806a-9cb07d300ec2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "0a598ef7-5389-46e0-b934-a92ebff67b2b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "8b6da2db-a6ea-4e72-acc0-62f6effc4692",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "bd8e9c99-a172-4de9-b328-4be328df63e5",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "ebb5b0d6-3422-46fa-ac94-76322fe70e02",
+      "type": "http",
+      "documentation": "Deletes team time off with given id",
+      "method": "delete",
+      "endpoint": "myTimeOff/:id",
+      "responses": [
+        {
+          "uuid": "b67e81bf-ebe9-42c7-ab8b-740b4aabab7e",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Successfully processed request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "70606faf-e4c0-40f1-b3a5-b2b0b9b09f9a",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "0b48d850-37c5-4be3-9d7f-f81ea0981def",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "78ad2053-d431-41ba-864a-94a3b430778a",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "6fe1d17f-cd65-4da1-9427-cae0e11829b4",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "3885a4ee-279e-44a3-b87b-d8dd0b457a70",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -3390,6 +4105,26 @@
     {
       "type": "route",
       "uuid": "bd8d0bad-ef56-46bf-ad29-717e0727b830"
+    },
+    {
+      "type": "route",
+      "uuid": "3b45330a-0313-4e12-b271-bed54d0c8e55"
+    },
+    {
+      "type": "route",
+      "uuid": "3181983d-d4e5-479e-a847-fd698fa1cbe8"
+    },
+    {
+      "type": "route",
+      "uuid": "292e308e-f9e4-4946-94cc-0f6a826139bf"
+    },
+    {
+      "type": "route",
+      "uuid": "b3da3c60-60c8-4676-a5c7-a9a2a4a9fe4e"
+    },
+    {
+      "type": "route",
+      "uuid": "ebb5b0d6-3422-46fa-ac94-76322fe70e02"
     }
   ],
   "proxyMode": false,

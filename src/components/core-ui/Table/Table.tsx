@@ -138,7 +138,7 @@ const Table = props => {
   const closeNewModal = () => setIsNewModalOpen(false)
 
   return (
-    <Box className={s.tableContainer} style={{ display: isLoading ? 'none' : '' }}>
+    <Box className={s.tableContainer}>
       {tableActions?.newAction && canCreate && (
         <ModalWithForm
           {...tableActions.newAction}
