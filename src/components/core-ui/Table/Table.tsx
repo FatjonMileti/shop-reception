@@ -138,77 +138,73 @@ const Table = props => {
   const closeNewModal = () => setIsNewModalOpen(false)
 
   return (
-    <>
-      <div style={{ display: isLoading ? 'flex' : 'none' }}>
-        <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-      </div>
-      <Box className={s.tableContainer} style={{ display: isLoading ? 'none' : '' }}>
-        {tableActions?.newAction && canCreate && (
-          <ModalWithForm
-            {...tableActions.newAction}
-            additionalAction={() =>
-              handleRemoteData(
-                tableState.page,
-                tableState.rowsPerPage,
-                tableState.order,
-                tableState.orderBy,
-                tableState.searchText,
-                tableState.filters
-              )
-            }
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            comboValue={comboValue}
-          />
-        )}
-        <GeneralTable
-          {...rest}
-          columns={
-            tableRowActions && (canEdit || canDelete)
-              ? renderedColumns.concat({
-                  title: '',
-                  field: 'actions',
-                  align: 'right',
-                  width: '112px',
-                  collapsible: 'true',
-                  render: row => (
-                    <TableActions
-                      itemId={row.id}
-                      editAction={tableRowActions.editAction}
-                      deleteAction={tableRowActions.deleteAction}
-                      additionalAction={() =>
-                        handleRemoteData(
-                          tableState.page,
-                          tableState.rowsPerPage,
-                          tableState.order,
-                          tableState.orderBy,
-                          tableState.searchText,
-                          tableState.filters
-                        )
-                      }
-                      comboValue={comboValue}
-                      canEdit={canEdit}
-                      canDelete={canDelete}
-                    />
-                  )
-                })
-              : renderedColumns
+    <Box className={s.tableContainer} style={{ display: isLoading ? 'none' : '' }}>
+      {tableActions?.newAction && canCreate && (
+        <ModalWithForm
+          {...tableActions.newAction}
+          additionalAction={() =>
+            handleRemoteData(
+              tableState.page,
+              tableState.rowsPerPage,
+              tableState.order,
+              tableState.orderBy,
+              tableState.searchText,
+              tableState.filters
+            )
           }
-          rows={items}
-          totalCount={totalCount}
-          rowsPerPage={rest.rowsPerPage || 10}
-          isRemote
-          newButton={
-            tableActions?.newAction && canCreate
-              ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
-              : null
-          }
-          hasSearchInput={!!tableActions?.searchAction}
-          handleRemoteData={debouncedHandleRemoteData}
-          filters={filtersConfig}
+          isModalOpen={isNewModalOpen}
+          closeModal={closeNewModal}
+          comboValue={comboValue}
         />
-      </Box>
-    </>
+      )}
+      <GeneralTable
+        {...rest}
+        columns={
+          tableRowActions && (canEdit || canDelete)
+            ? renderedColumns.concat({
+                title: '',
+                field: 'actions',
+                align: 'right',
+                width: '112px',
+                collapsible: 'true',
+                render: row => (
+                  <TableActions
+                    itemId={row.id}
+                    editAction={tableRowActions.editAction}
+                    deleteAction={tableRowActions.deleteAction}
+                    additionalAction={() =>
+                      handleRemoteData(
+                        tableState.page,
+                        tableState.rowsPerPage,
+                        tableState.order,
+                        tableState.orderBy,
+                        tableState.searchText,
+                        tableState.filters
+                      )
+                    }
+                    comboValue={comboValue}
+                    canEdit={canEdit}
+                    canDelete={canDelete}
+                  />
+                )
+              })
+            : renderedColumns
+        }
+        rows={items}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        rowsPerPage={rest.rowsPerPage || 10}
+        isRemote
+        newButton={
+          tableActions?.newAction && canCreate
+            ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
+            : null
+        }
+        hasSearchInput={!!tableActions?.searchAction}
+        handleRemoteData={debouncedHandleRemoteData}
+        filters={filtersConfig}
+      />
+    </Box>
   )
 }
 
