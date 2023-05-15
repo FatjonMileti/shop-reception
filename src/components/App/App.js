@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
-import { Test } from '../Test'
 import { Home } from '../Home'
 import { LoginOIDC } from '../LoginOIDC'
 import { LogoutOIDC } from '../LogoutOIDC'
@@ -54,11 +53,16 @@ const App = () => {
             {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
             {/* private routes */}
-            <Route path="/test" element={<PrivateRoute component={Test} />} />
             <Route
               path={URLS.AUTH_HOME}
-              element={!applicationModulesPages.length && <LoginOIDC /> ||
-                <PrivateRoute component={Home} modules={modules} setSubdomainId={setSubdomainId} />
+              element={
+                (!applicationModulesPages.length && <LoginOIDC />) || (
+                  <PrivateRoute
+                    component={Home}
+                    modules={modules}
+                    setSubdomainId={setSubdomainId}
+                  />
+                )
               }
             />
             {applicationModulesPages.map(page =>

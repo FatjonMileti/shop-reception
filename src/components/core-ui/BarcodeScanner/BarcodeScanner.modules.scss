@@ -1,0 +1,25 @@
+.scanContainer {
+  margin: 24px 80px 0;
+  background-color: #fff;
+  height: 100%;
+  padding: 16px 0;
+
+  & > div {
+    background-color: #fff;
+  }
+}
+
+.scannerControls {
+  display: grid;
+  grid-template-columns: 1fr 140px 170px;
+  grid-gap: 16px;
+  margin: 0 16px;
+}
+
+.scannerControlItem {
+  line-height: 50px;
+}
+
+.hiddenScnaner {
+  height: 0;
+}
