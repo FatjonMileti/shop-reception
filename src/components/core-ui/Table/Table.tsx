@@ -9,7 +9,7 @@ import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getRenderedColumns, convertFilterSchemaToFilterConfig } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
-import { useNotification } from 'hooks'
+import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 
@@ -35,6 +35,12 @@ const Table = props => {
   })
 
   const { showNotification } = useNotification()
+
+  const { canCreate, canEdit, canDelete } = usePermissions({
+    createRoles: tableActions?.newAction?.allowedRoles,
+    editRoles: tableRowActions?.editAction?.allowedRoles,
+    deleteRoles: tableRowActions?.deleteAction?.allowedRoles
+  })
 
   const filtersConfig = useMemo(() => {
     if (!tableActions?.filters) return []
@@ -133,7 +139,7 @@ const Table = props => {
 
   return (
     <Box className={s.tableContainer}>
-      {tableActions?.newAction && (
+      {tableActions?.newAction && canCreate && (
         <ModalWithForm
           {...tableActions.newAction}
           additionalAction={() =>
@@ -154,7 +160,7 @@ const Table = props => {
       <GeneralTable
         {...rest}
         columns={
-          tableRowActions
+          tableRowActions && (canEdit || canDelete)
             ? renderedColumns.concat({
                 title: '',
                 field: 'actions',
@@ -177,6 +183,8 @@ const Table = props => {
                       )
                     }
                     comboValue={comboValue}
+                    canEdit={canEdit}
+                    canDelete={canDelete}
                   />
                 )
               })
@@ -188,7 +196,7 @@ const Table = props => {
         rowsPerPage={rest.rowsPerPage || 10}
         isRemote
         newButton={
-          tableActions?.newAction
+          tableActions?.newAction && canCreate
             ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
             : null
         }

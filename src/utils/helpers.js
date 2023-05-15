@@ -43,3 +43,6 @@ export const getItemDefaultsAsArray = formItems => {
 
   return result
 }
+
+export const isAllowed = (allowedRoles, currentUserRoles) =>
+  allowedRoles && currentUserRoles.some(r => allowedRoles.includes(r))
