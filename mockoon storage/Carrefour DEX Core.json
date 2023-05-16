@@ -4011,6 +4011,42 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "6ff86d0b-765c-4c8e-85cb-4ca37d7d8f7d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "productStock",
+      "responses": [
+        {
+          "uuid": "f2eeb5e4-c848-4416-9296-b44929ba973a",
+          "body": "{\n    \"list\": [{\n        \"id\": 1,\n        \"code\": \"0036000291452\",\n        \"title\": \"Combina frigorifica ARCTIC AK54305M30MT, 291 l, H 181.3 cm, Clasa F, argintiu\",\n        \"storeStock\": {\n            \"price\": 1499.90,\n            \"currency\": \"lei\",\n            \"eanCode\": \"0897899556\",\n            \"storeCode\": \"42507924\",\n            \"available\": 1,\n            \"sold\": 0,\n            \"reserved\": 1,\n            \"initialStock\": 2,\n            \"imobStock\": 0\n        },\n        \"warehouseStock\": {\n            \"price\": 1499.90,\n            \"currency\": \"lei\",\n            \"eanCode\": \"0918788667\",\n            \"storeCode\": \"53618035\",\n            \"available\": 10,\n            \"sold\": 1,\n            \"reserved\": 3,\n            \"initialStock\": 14,\n            \"imobStock\": 0\n        }\n    }]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "code",
+              "value": "0036000291452",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4125,6 +4161,10 @@
     {
       "type": "route",
       "uuid": "ebb5b0d6-3422-46fa-ac94-76322fe70e02"
+    },
+    {
+      "type": "route",
+      "uuid": "6ff86d0b-765c-4c8e-85cb-4ca37d7d8f7d"
     }
   ],
   "proxyMode": false,

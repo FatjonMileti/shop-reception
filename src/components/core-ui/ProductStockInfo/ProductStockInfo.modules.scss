@@ -1,0 +1,23 @@
+.productStockContainer {
+  margin: 24px 80px 0;
+
+  @media (max-width: 936px) {
+    margin: 24px 24px 0;
+  }
+
+  @media (max-width: 624px) {
+    margin: 18px 12px 0;
+  }
+}
+
+.productTypeTitle {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #121212;
+}

@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Product } from 'components/core-ui/BarcodeScanner/BarcodeScannerDefinitions'
+import { Product, ProductStock } from 'components/core-ui/BarcodeScanner/BarcodeScannerDefinitions'
 
 export interface ProductState {
-  product?: Product
+  title?: string
+  storeStock?: ProductStock
+  warehouseStock?: ProductStock
 }
 
 export const productInitialState: ProductState = {}

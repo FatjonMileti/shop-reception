@@ -2,47 +2,34 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from 'configureStore'
 import { Accordion } from '@fullscreendigital/carrefour-dex-fe'
+import { Icon } from 'components/core-ui/Icon'
+import { Box } from '@mui/material'
+import { ProductStockInfoProps } from './ProductStockInfoDefinitions'
+import { ProductStockDetails } from './ProductStockDetails'
+import s from './ProductStockInfo.modules.scss'
 
-const ProductStockInfo = () => {
+const ProductStockInfo = (props: ProductStockInfoProps) => {
+  const { type, icon, title } = props
+
   const product = useSelector((state: RootState) => state.product)
 
-  return (
-    <Accordion
-      key={module.id}
-      summary={
-        <Typography variant="medium">
-          <span className={s.moduleSummary}>
-            <Icon iconName={module.icon} tiny={true} />
-            {module.name}
+  return product[type] ? (
+    <div className={s.productStockContainer}>
+      <Accordion
+        key={type}
+        summary={
+          <span className={s.productTypeTitle}>
+            <Icon iconName={icon} tiny={true} />
+            {title}
           </span>
-        </Typography>
-      }
-      details={
-        <Box className={s.applicationsWrapper} style={{ justifyContent: 'center' }}>
-          {module.submodules.map(app => (
-            <div
-              key={app.id}
-              onClick={() => {
-                localStorage.setItem('selectedSubdomainId', app.id)
-                setSubdomainId(app.id)
-                navigate(app.routeURL)
-              }}
-              className={s.applicationContainer}
-            >
-              <div className={s.iconContainer}>
-                <Icon iconName={app.icon} />
-              </div>
-              <span className={s.applicationName}>{app.name}</span>
-            </div>
-          ))}
-        </Box>
-      }
-      // disableGutters
-      defaultExpanded={index == 0}
-      id={module.id}
-      onChange={function noRefCheck() {}}
-    />
-  )
+        }
+        details={<ProductStockDetails stock={product[type]} />}
+        defaultExpanded={true}
+        id={type}
+        onChange={function noRefCheck() {}}
+      />
+    </div>
+  ) : null
 }
 
 export default ProductStockInfo

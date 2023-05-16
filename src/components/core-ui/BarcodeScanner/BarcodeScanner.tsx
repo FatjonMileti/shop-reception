@@ -5,12 +5,12 @@ import { useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
 import { makeCoreGetRequest } from 'utils/api'
-import { Product } from './BarcodeScannerDefinitions'
+import { BarecodeScannerProps, ProductStockResponse } from './BarcodeScannerDefinitions'
 import { useDispatch } from 'react-redux'
 import { ProductActions } from 'reducers/productSlice'
 import s from './BarcodeScanner.modules.scss'
 
-const BarcodeScanner = props => {
+const BarcodeScanner = (props: BarecodeScannerProps) => {
   const { action } = props
 
   const dispatch = useDispatch()
@@ -33,10 +33,10 @@ const BarcodeScanner = props => {
   const searchProduct = () => {
     if (code) {
       ;(async () => {
-        let response: { list: Product[] }
+        let response: ProductStockResponse
         if (action.type === 'GET') {
           response = await makeCoreGetRequest(`${action.url}?code=${code}`)
-          dispatch(ProductActions.setProduct({ product: response.list[0] }))
+          dispatch(ProductActions.setProduct({ ...response.list[0] }))
         }
       })()
     }
@@ -63,23 +63,25 @@ const BarcodeScanner = props => {
             onChange={event => setCode(event.currentTarget.value)}
           />
         </div>
-        <div className={s.scannerControlItem}>
-          {!isVisible && (
+        <div className={s.buttonContainer}>
+          {/* <div className={cn(s.scannerControlItem, s.button)}> */}
+            {!isVisible && (
+              <IconButton
+                onClick={scanCode}
+                label="Scaneaza"
+                variant="outlined"
+                startIcon={<Icon iconName="ScannerBlue" tiny={true} />}
+              />
+            )}
+          {/* </div> */}
+          {/* <div className={cn(s.scannerControlItem, s.button)}> */}
             <IconButton
-              onClick={scanCode}
-              label="Scaneaza"
-              variant="outlined"
-              startIcon={<Icon iconName="Scanner" tiny={true} />}
+              onClick={searchProduct}
+              label="Cauta Produs"
+              variant="contained"
+              startIcon={<Icon iconName="Search" tiny={true} />}
             />
-          )}
-        </div>
-        <div className={s.scannerControlItem}>
-          <IconButton
-            onClick={searchProduct}
-            label="Cauta Produs"
-            variant="contained"
-            startIcon={<Icon iconName="Search" tiny={true} />}
-          />
+          {/* </div> */}
         </div>
       </div>
       <div className={cn({ [s.hiddenScnaner]: !isVisible })}>
