@@ -2,6 +2,7 @@ import * as React from 'react'
 import { ProductGeneralInfo } from './ProductGeneralInfo'
 import { KeyValuePairs } from 'components/core-ui/KeyValuePairs'
 import { toProductStockKeyValuePairs } from './serializers'
+import s from './ProductStockDetails.modules.scss'
 
 const ProductStockDetails = ({ stock, infoItems }) => {
   const {
@@ -25,7 +26,13 @@ const ProductStockDetails = ({ stock, infoItems }) => {
         eanCode={eanCode}
         storeCode={storeCode}
       />
-      <KeyValuePairs pairs={toProductStockKeyValuePairs(infoItems, items)} columns={2} />
+      <div>
+      <KeyValuePairs
+        pairs={toProductStockKeyValuePairs(infoItems, items)}
+        columns={2}
+        className={s.stockInfo}
+      />
+      </div>
     </div>
   )
 }

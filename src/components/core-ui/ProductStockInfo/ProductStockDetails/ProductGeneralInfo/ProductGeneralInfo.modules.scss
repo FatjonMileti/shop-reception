@@ -1,0 +1,22 @@
+.infoContainer {
+  display: flex;
+  padding: 32px;
+}
+
+.price {
+  font-size: 36px;
+  color: #D30D1F;
+  flex: 1;
+}
+
+button {
+  height: 44px;
+}
+
+.firstCode, .secondCode {
+  flex: 1;
+}
+
+.secondCode {
+  text-align: right;
+}

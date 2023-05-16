@@ -280,6 +280,28 @@ const SvgIcon_Warehouse = tiny => {
   )
 }
 
+const SvgIcon_Donut = tiny => {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M11 3.08005C14.06 3.52005 16.48 5.94005 16.92 9.00005H19.95C19.48 4.28005 15.72 0.520049 11 0.0500488V3.08005V3.08005ZM16.92 11C16.48 14.06 14.06 16.48 11 16.92V19.9501C15.72 19.4801 19.48 15.72 19.95 11H16.92V11ZM9 16.92C5.61 16.43 3 13.52 3 10C3 6.48005 5.61 3.57005 9 3.08005V0.0500488C3.95 0.550049 0 4.81005 0 10C0 15.19 3.95 19.4501 9 19.9501V16.92V16.92Z"
+        fill="#121212"
+      />
+    </svg>
+  )
+}
+
+const SvgIcon_Add = tiny => {
+  return (
+    <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M9.50004 0.833252C4.44004 0.833252 0.333374 4.93992 0.333374 9.99992C0.333374 15.0599 4.44004 19.1666 9.50004 19.1666C14.56 19.1666 18.6667 15.0599 18.6667 9.99992C18.6667 4.93992 14.56 0.833252 9.50004 0.833252ZM14.0834 10.9166H10.4167V14.5833H8.58337V10.9166H4.91671V9.08325H8.58337V5.41659H10.4167V9.08325H14.0834V10.9166Z"
+        fill="white"
+      />
+    </svg>
+  )
+}
+
 const Icon = ({ iconName, tiny = false }) => {
   switch (iconName) {
     case 'TimerOffOutlined':
@@ -306,6 +328,10 @@ const Icon = ({ iconName, tiny = false }) => {
       return SvgIcon_Store(tiny)
     case 'Warehouse':
       return SvgIcon_Warehouse(tiny)
+    case 'Donut':
+      return SvgIcon_Donut(tiny)
+    case 'Add':
+      return SvgIcon_Add(tiny)
     default: {
       const MaterialIcon = icons[iconName]
       return <MaterialIcon />
