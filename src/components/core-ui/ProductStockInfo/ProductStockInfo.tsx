@@ -9,7 +9,7 @@ import { ProductStockDetails } from './ProductStockDetails'
 import s from './ProductStockInfo.modules.scss'
 
 const ProductStockInfo = (props: ProductStockInfoProps) => {
-  const { type, icon, title } = props
+  const { type, icon, title, infoItems } = props
 
   const product = useSelector((state: RootState) => state.product)
 
@@ -23,7 +23,7 @@ const ProductStockInfo = (props: ProductStockInfoProps) => {
             {title}
           </span>
         }
-        details={<ProductStockDetails stock={product[type]} />}
+        details={<ProductStockDetails stock={product[type]} infoItems={infoItems} />}
         defaultExpanded={true}
         id={type}
         onChange={function noRefCheck() {}}
