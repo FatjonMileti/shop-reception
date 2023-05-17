@@ -17,7 +17,7 @@
       "responses": [
         {
           "uuid": "7e8c83dd-a40b-40d6-8e60-79f64cd003f5",
-          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"AssuredWorkload\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  }\n]",
+          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"AssuredWorkload\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"OMS\",\n    \"icon\": \"Donut\",\n    \"routeURL\": \"/oms1\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"OMS\",\n        \"icon\": \"Donut\",\n        \"routeURL\": \"/oms\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"2\",\n          \"name\": \"OMS\",\n          \"icon\": \"Donut\",\n          \"routeURL\": \"/oms1\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the application modules list",
@@ -163,7 +163,7 @@
           "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Team Day-Off Management\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"1\",\n      \"name\": \"Project Team\",\n      \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"AssuredWorkload\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n    },\n    \"firstScreen\": {\n      \"id\": \"1\",\n      \"name\": \"Screen 1\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/teamDayOffManagement\",\n      \"routePathExact\": true,\n      \"activity\": {\n        \"id\": \"1\",\n        \"name\": \"Team Day-Off Management\",\n        \"icon\": \"TimerOffOutlined\",\n        \"submodule\": {\n          \"id\": \"1\",\n          \"name\": \"Project Team\",\n          \"icon\": \"Groups\",\n          \"routeURL\": \"/projectTeam\",\n          \"routePathExact\": true,\n          \"module\": {\n            \"id\": \"1\",\n            \"name\": \"Governance\",\n            \"icon\": \"AssuredWorkload\",\n            \"routeURL\": \"/governance\",\n            \"routePathExact\": true\n          }\n        }\n      }\n    },\n    \"screens\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Screen 1\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/teamDayOffManagement\",\n        \"routePathExact\": true,\n        \"activity\": {\n          \"id\": \"1\",\n          \"name\": \"Team Day-Off Management\",\n          \"icon\": \"TimerOffOutlined\",\n          \"submodule\": {\n            \"id\": \"1\",\n            \"name\": \"Project Team\",\n            \"icon\": \"Groups\",\n            \"routeURL\": \"/projectTeam\",\n            \"routePathExact\": true,\n            \"module\": {\n              \"id\": \"1\",\n              \"name\": \"Governance\",\n              \"icon\": \"AssuredWorkload\",\n              \"routeURL\": \"/governance\",\n              \"routePathExact\": true\n            }\n          }\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"628\",\n    \"name\": \"My Time-Off\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"1\",\n      \"name\": \"Project Team\",\n      \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"AssuredWorkload\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n    },\n    \"firstScreen\": {\n      \"id\": \"628\",\n      \"name\": \"Screen 1\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/myTimeOff\",\n      \"routePathExact\": true,\n      \"activity\": {\n        \"id\": \"628\",\n        \"name\": \"My Time-Off\",\n        \"icon\": \"TimerOffOutlined\",\n        \"submodule\": {\n          \"id\": \"1\",\n          \"name\": \"Project Team\",\n          \"icon\": \"Groups\",\n          \"routeURL\": \"/projectTeam\",\n          \"routePathExact\": true,\n          \"module\": {\n            \"id\": \"1\",\n            \"name\": \"Governance\",\n            \"icon\": \"AssuredWorkload\",\n            \"routeURL\": \"/governance\",\n            \"routePathExact\": true\n          }\n        }\n      }\n    },\n    \"screens\": [\n      {\n        \"id\": \"628\",\n        \"name\": \"Screen 1\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/myTimeOff\",\n        \"routePathExact\": true,\n        \"activity\": {\n          \"id\": \"628\",\n          \"name\": \"My Time-Off\",\n          \"icon\": \"TimerOffOutlined\",\n          \"submodule\": {\n            \"id\": \"1\",\n            \"name\": \"Project Team\",\n            \"icon\": \"Groups\",\n            \"routeURL\": \"/projectTeam\",\n            \"routePathExact\": true,\n            \"module\": {\n              \"id\": \"1\",\n              \"name\": \"Governance\",\n              \"icon\": \"AssuredWorkload\",\n              \"routeURL\": \"/governance\",\n              \"routePathExact\": true\n            }\n          }\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"Team Assignment\",\n    \"icon\": \"HowToRegOutlined\",\n    \"submodule\": {\n      \"id\": \"1\",\n      \"name\": \"Project Team\",\n      \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"AssuredWorkload\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n    },\n    \"firstScreen\": {\n      \"id\": \"2\",\n      \"name\": \"Screen 1\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/teamAssignment\",\n      \"routePathExact\": true,\n      \"activity\": {\n        \"id\": \"2\",\n        \"name\": \"Team Assignment\",\n        \"icon\": \"HowToRegOutlined\",\n        \"submodule\": {\n          \"id\": \"1\",\n          \"name\": \"Project Team\",\n          \"icon\": \"Groups\",\n          \"routeURL\": \"/projectTeam\",\n          \"routePathExact\": true,\n          \"module\": {\n            \"id\": \"1\",\n            \"name\": \"Governance\",\n            \"icon\": \"AssuredWorkload\",\n            \"routeURL\": \"/governance\",\n            \"routePathExact\": true\n          }\n        }\n      }\n    },\n    \"screens\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"Screen 1\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/teamAssignment\",\n        \"routePathExact\": true,\n        \"activity\": {\n          \"id\": \"2\",\n          \"name\": \"Team Assignment\",\n          \"icon\": \"HowToRegOutlined\",\n          \"submodule\": {\n            \"id\": \"1\",\n            \"name\": \"Project Team\",\n            \"icon\": \"Groups\",\n            \"routeURL\": \"/projectTeam\",\n            \"routePathExact\": true,\n            \"module\": {\n              \"id\": \"1\",\n              \"name\": \"Governance\",\n              \"icon\": \"AssuredWorkload\",\n              \"routeURL\": \"/governance\",\n              \"routePathExact\": true\n            }\n          }\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"3\",\n    \"name\": \"Effort Matrix\",\n    \"icon\": \"DonutSmallOutlined\",\n    \"submodule\": {\n      \"id\": \"1\",\n      \"name\": \"Project Team\",\n      \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"AssuredWorkload\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n    },\n    \"firstScreen\": {\n      \"id\": \"3\",\n      \"name\": \"Screen 1\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/effortMatrix\",\n      \"routePathExact\": true,\n      \"activity\": {\n        \"id\": \"3\",\n        \"name\": \"Effort Matrixt\",\n        \"icon\": \"DonutSmallOutlined\",\n        \"submodule\": {\n          \"id\": \"1\",\n          \"name\": \"Project Team\",\n          \"icon\": \"Groups\",\n          \"routeURL\": \"/projectTeam\",\n          \"routePathExact\": true,\n          \"module\": {\n            \"id\": \"1\",\n            \"name\": \"Governance\",\n            \"icon\": \"AssuredWorkload\",\n            \"routeURL\": \"/governance\",\n            \"routePathExact\": true\n          }\n        }\n      }\n    },\n    \"screens\": [\n      {\n        \"id\": \"3\",\n        \"name\": \"Screen 1\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/effortMatrix\",\n        \"routePathExact\": true,\n        \"activity\": {\n          \"id\": \"3\",\n          \"name\": \"Effort Matrix\",\n          \"icon\": \"DonutSmallOutlined\",\n          \"submodule\": {\n            \"id\": \"1\",\n            \"name\": \"Project Team\",\n            \"icon\": \"Groups\",\n            \"routeURL\": \"/projectTeam\",\n            \"routePathExact\": true,\n            \"module\": {\n              \"id\": \"1\",\n              \"name\": \"Governance\",\n              \"icon\": \"AssuredWorkload\",\n              \"routeURL\": \"/governance\",\n              \"routePathExact\": true\n            }\n          }\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"4\",\n    \"name\": \"Team Capacity Overview\",\n    \"icon\": \"PeopleAltOutlined\",\n    \"submodule\": {\n      \"id\": \"1\",\n      \"name\": \"Project Team\",\n      \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"AssuredWorkload\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n    },\n    \"firstScreen\": {\n      \"id\": \"4\",\n      \"name\": \"Screen 1\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/teamCapacity\",\n      \"routePathExact\": true,\n      \"activity\": {\n        \"id\": \"4\",\n        \"name\": \"Team Capacity Overview\",\n        \"icon\": \"PeopleAltOutlined\",\n        \"submodule\": {\n          \"id\": \"1\",\n          \"name\": \"Project Team\",\n          \"icon\": \"Groups\",\n          \"routeURL\": \"/projectTeam\",\n          \"routePathExact\": true,\n          \"module\": {\n            \"id\": \"1\",\n            \"name\": \"Governance\",\n            \"icon\": \"AssuredWorkload\",\n            \"routeURL\": \"/governance\",\n            \"routePathExact\": true\n          }\n        }\n      }\n    },\n    \"screens\": [\n      {\n        \"id\": \"4\",\n        \"name\": \"Screen 1\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/teamCapacity\",\n        \"routePathExact\": true,\n        \"activity\": {\n          \"id\": \"4\",\n          \"name\": \"Team Capacity Overview\",\n          \"icon\": \"DonutSmallOutlined\",\n          \"submodule\": {\n            \"id\": \"1\",\n            \"name\": \"Project Team\",\n            \"icon\": \"Groups\",\n            \"routeURL\": \"/projectTeam\",\n            \"routePathExact\": true,\n            \"module\": {\n              \"id\": \"1\",\n              \"name\": \"Governance\",\n              \"icon\": \"AssuredWorkload\",\n              \"routeURL\": \"/governance\",\n              \"routePathExact\": true\n            }\n          }\n        }\n      },\n      {\n        \"id\": \"5\",\n        \"name\": \"Screen 2\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/individualCapacity\",\n        \"routePathExact\": true,\n        \"activity\": {\n          \"id\": \"4\",\n          \"name\": \"Team Capacity Overview\",\n          \"icon\": \"DonutSmallOutlined\",\n          \"submodule\": {\n            \"id\": \"1\",\n            \"name\": \"Project Team\",\n            \"icon\": \"Groups\",\n            \"routeURL\": \"/projectTeam\",\n            \"routePathExact\": true,\n            \"module\": {\n              \"id\": \"1\",\n              \"name\": \"Governance\",\n              \"icon\": \"AssuredWorkload\",\n              \"routeURL\": \"/governance\",\n              \"routePathExact\": true\n            }\n          }\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"5\",\n    \"name\": \"Project Milestones\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"5\" },\n    \"screens\": [{\n        \"id\": \"5\",\n        \"routeURL\": \"/projectMilestones\",\n        \"routePathExact\": true\n    }]\n  }\n]",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained the list of activities",
+          "label": "Successfully obtained the list of activities - Governance",
           "headers": [
             {
               "key": "Content-Type",
@@ -174,7 +174,15 @@
           "filePath": "",
           "databucketID": "",
           "sendFileAsBody": false,
-          "rules": [],
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "submoduleID",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
@@ -289,6 +297,31 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false
+        },
+        {
+          "uuid": "3cf0970b-096c-4089-8f85-558293eb7834",
+          "body": "[\n  {\n    \"id\": \"6\",\n    \"name\": \"Scanare Produs\",\n    \"icon\": \"Scanner\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"6\" },\n    \"screens\": [{\n        \"id\": \"6\",\n        \"routeURL\": \"/productScan\",\n        \"routePathExact\": true\n    }]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the list of activities - OMS",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "submoduleId",
+              "value": "2",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
         }
       ],
       "enabled": true,
@@ -303,7 +336,7 @@
       "responses": [
         {
           "uuid": "58306373-c8da-4022-89c5-0d3ec45cc6c0",
-          "body": "{}",
+          "body": "",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained a UI Schema object",
@@ -683,6 +716,38 @@
               "target": "query",
               "modifier": "screenId",
               "value": "5",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "de7b6906-34eb-4978-bde6-079418830342",
+          "body": "{\n    \"id\": \"7\",\n    \"activity\": {\n        \"id\": \"6\",\n        \"name\": \"Scanare Produs\",\n        \"icon\": \"AccountTreeOutlined\",\n        \"submodule\": {\n            \"id\": \"2\",\n            \"name\": \"OMS\",\n            \"icon\": \"BarChart\",\n            \"routeURL\": \"/oms\",\n            \"routePathExact\": true,\n            \"module\": {\n                \"id\": \"2\",\n                \"name\": \"OMS\",\n                \"icon\": \"BarChart\",\n                \"routeURL\": \"/oms1\",\n                \"routePathExact\": true\n            }\n        }\n    },\n    \"screen\": {\n        \"id\": \"7\",\n        \"name\": \"Scanare Produs\",\n        \"icon\": \"AccountTreeOutlined\",\n        \"routeURL\": \"/productScan\",\n        \"routePathExact\": true,\n        \"activity\": {\n            \"id\": \"6\",\n            \"name\": \"Scanare Produs\",\n            \"icon\": \"AccountTreeOutlined\",\n            \"submodule\": {\n                \"id\": \"2\",\n                \"name\": \"OMS\",\n                \"icon\": \"BarChart\",\n                \"routeURL\": \"/oms\",\n                \"routePathExact\": true,\n                \"module\": {\n                    \"id\": \"2\",\n                    \"name\": \"OMS\",\n                    \"icon\": \"BarChart\",\n                    \"routeURL\": \"/oms1\",\n                    \"routePathExact\": true\n                }\n            }\n        }\n    },\n    \"roleId\": \"GOV_TL\",\n    \"jsonSchema\": {\n        \"UIComponent\": \"Box\",\n        \"id\": \"the-box\",\n        \"className\": \"\",\n        \"children\": [{\n                \"UIComponent\": \"BarcodeScanner\",\n                \"id\": \"product-scanner\",\n                \"action\": {\n                    \"url\": \"/productStock\",\n                    \"type\": \"GET\"\n                }\n            },\n            {\n                \"UIComponent\": \"ProductTitle\"\n            },\n            {\n                \"UIComponent\": \"ProductStockInfo\",\n                \"type\": \"storeStock\",\n                \"icon\": \"Store\",\n                \"title\": \"Stoc in magazin\",\n                \"actions\": {\n                    \"otherStocks\": {\n                        \"label\": \"Stoc alte magazine\",\n                        \"variant\": \"outlined\",\n                        \"href\": \"/storesStock\"\n                    }\n                },\n                \"infoItems\": [{\n                        \"name\": \"available\",\n                        \"label\": \"Disponibil:\",\n                        \"suffix\": \"buc\"\n                    },\n                    {\n                        \"name\": \"sold\",\n                        \"label\": \"Vanzari:\",\n                        \"suffix\": \"buc\"\n                    },\n                    {\n                        \"name\": \"reserved\",\n                        \"label\": \"Rezervari:\",\n                        \"suffix\": \"buc\"\n                    },\n                    {\n                        \"name\": \"initialStock\",\n                        \"label\": \"Stoc Initial:\",\n                        \"suffix\": \"buc\"\n                    },\n                    {\n                        \"name\": \"imobStock\",\n                        \"label\": \"Stoc imob:\",\n                        \"suffix\": \"buc\"\n                    }\n                ]\n            },\n            {\n                \"UIComponent\": \"ProductStockInfo\",\n                \"type\": \"warehouseStock\",\n                \"icon\": \"Warehouse\",\n                \"title\": \"Stoc in depozit\",\n                \"infoItems\": [{\n                        \"name\": \"available\",\n                        \"label\": \"Disponibil:\",\n                        \"suffix\": \"buc\"\n                    },\n                    {\n                        \"name\": \"sold\",\n                        \"label\": \"Vanzari:\",\n                        \"suffix\": \"buc\"\n                    },\n                    {\n                        \"name\": \"reserved\",\n                        \"label\": \"Rezervari:\",\n                        \"suffix\": \"buc\"\n                    },\n                    {\n                        \"name\": \"initialStock\",\n                        \"label\": \"Stoc Initial:\",\n                        \"suffix\": \"buc\"\n                    },\n                    {\n                        \"name\": \"imobStock\",\n                        \"label\": \"Stoc imob:\",\n                        \"suffix\": \"buc\"\n                    }\n                ]\n            }\n        ]\n    }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Product Scan",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "6",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "6",
               "invert": false,
               "operator": "equals"
             }

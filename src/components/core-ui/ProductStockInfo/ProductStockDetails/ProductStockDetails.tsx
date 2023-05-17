@@ -1,10 +1,15 @@
 import * as React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ProductGeneralInfo } from './ProductGeneralInfo'
 import { KeyValuePairs } from 'components/core-ui/KeyValuePairs'
+import { Icon } from 'components/core-ui/Icon'
+import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { toProductStockKeyValuePairs } from './serializers'
 import s from './ProductStockDetails.modules.scss'
 
-const ProductStockDetails = ({ stock, infoItems }) => {
+const ProductStockDetails = ({ stock, infoItems, actions }) => {
+  const navigate = useNavigate()
+
   const {
     price,
     currency,
@@ -18,6 +23,7 @@ const ProductStockDetails = ({ stock, infoItems }) => {
   } = stock
 
   const items = { available, sold, reserved, initialStock, imobStock }
+
   return (
     <div>
       <ProductGeneralInfo
@@ -27,11 +33,21 @@ const ProductStockDetails = ({ stock, infoItems }) => {
         storeCode={storeCode}
       />
       <div>
-      <KeyValuePairs
-        pairs={toProductStockKeyValuePairs(infoItems, items)}
-        columns={2}
-        className={s.stockInfo}
-      />
+        <KeyValuePairs
+          pairs={toProductStockKeyValuePairs(infoItems, items)}
+          columns={2}
+          className={s.stockInfo}
+        />
+        {actions?.otherStocks && (
+          <div className={s.otherStocksBtnContainer}>
+            <IconButton
+              onClick={() => navigate(actions.otherStocks.href)}
+              label={actions.otherStocks.label}
+              variant={actions.otherStocks.variant}
+              endIcon={<Icon iconName="Store" tiny={true} />}
+            />
+          </div>
+        )}
       </div>
     </div>
   )
