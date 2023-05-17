@@ -4047,6 +4047,67 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "2beae078-5944-405b-b14a-2d94057727a0",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shoppingCart",
+      "responses": [
+        {
+          "uuid": "d68ee7d8-b802-4c0f-bb31-6548256c3662",
+          "body": "{\n    \"products\": [{\n        \"id\": 1,\n        \"title\": \"Combina frigorifica ARCTIC AK54305M30MT, 291 l, H 181.3 cm, Clasa F, argintiu\",\n        \"price\": 1499.90,\n        \"currency\": \"lei\",\n        \"quantity\": 1,\n        \"totalPrice\": 1499.90\n    }],\n    \"totalPrice\": 1499.90\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "4098eba4-50c4-4aa4-8a9b-53c9937d5e88",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "shoppingCart",
+      "responses": [
+        {
+          "uuid": "ede0edcb-ac28-4923-9ac8-d1fde32ff71d",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4165,6 +4226,14 @@
     {
       "type": "route",
       "uuid": "6ff86d0b-765c-4c8e-85cb-4ca37d7d8f7d"
+    },
+    {
+      "type": "route",
+      "uuid": "2beae078-5944-405b-b14a-2d94057727a0"
+    },
+    {
+      "type": "route",
+      "uuid": "4098eba4-50c4-4aa4-8a9b-53c9937d5e88"
     }
   ],
   "proxyMode": false,

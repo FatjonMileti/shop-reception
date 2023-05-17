@@ -31,6 +31,7 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
         currency={currency}
         eanCode={eanCode}
         storeCode={storeCode}
+        addToCartAction={actions.addToCart}
       />
       <div>
         <KeyValuePairs
@@ -38,12 +39,12 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
           columns={2}
           className={s.stockInfo}
         />
-        {actions?.otherStocks && (
+        {actions?.viewOtherStocks && (
           <div className={s.otherStocksBtnContainer}>
             <IconButton
-              onClick={() => navigate(actions.otherStocks.href)}
-              label={actions.otherStocks.label}
-              variant={actions.otherStocks.variant}
+              onClick={() => navigate(actions.viewOtherStocks.href)}
+              label={actions.viewOtherStocks.label}
+              variant={actions.viewOtherStocks.variant}
               endIcon={<Icon iconName="Store" tiny={true} />}
             />
           </div>

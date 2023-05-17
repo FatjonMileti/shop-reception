@@ -50,7 +50,6 @@ const ModalWithForm = ({
   const [editItem, setEditItem] = useImmer({})
 
   const { showNotification } = useNotification()
-  
 
   useEffect(() => {
     if (isModalOpen && editedItemId) {

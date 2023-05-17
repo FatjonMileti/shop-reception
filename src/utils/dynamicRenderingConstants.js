@@ -10,6 +10,7 @@ import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
 import { ProductTitle } from 'components/core-ui/ProductTitle'
+import { ShoppingCart } from 'components/core-ui/ShoppingCart'
 import { Table } from 'components/core-ui/Table'
 
 export const Components = {
@@ -32,5 +33,6 @@ export const Components = {
   Input,
   ProductStockInfo,
   ProductTitle,
+  ShoppingCart,
   Table
 }

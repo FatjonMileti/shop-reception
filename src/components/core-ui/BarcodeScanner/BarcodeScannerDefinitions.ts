@@ -1,7 +1,4 @@
-type Action = {
-  url: string
-  type: 'GET'
-}
+import { Action } from 'components/utils/definitions/Definitions'
 
 export interface BarecodeScannerProps {
   action: Action
