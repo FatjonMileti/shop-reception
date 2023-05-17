@@ -50,6 +50,12 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
     }
   }, [])
 
+  React.useEffect(() => {
+    return () => {
+      dispatch(ProductActions.clearProduct())
+    }
+  }, [])
+
   return (
     <Paper className={s.scanContainer}>
       <div className={s.scannerControls}>
@@ -64,24 +70,18 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
           />
         </div>
         <div className={s.buttonContainer}>
-          {/* <div className={cn(s.scannerControlItem, s.button)}> */}
-            {!isVisible && (
-              <IconButton
-                onClick={scanCode}
-                label="Scaneaza"
-                variant="outlined"
-                startIcon={<Icon iconName="ScannerBlue" tiny={true} />}
-              />
-            )}
-          {/* </div> */}
-          {/* <div className={cn(s.scannerControlItem, s.button)}> */}
-            <IconButton
-              onClick={searchProduct}
-              label="Cauta Produs"
-              variant="contained"
-              startIcon={<Icon iconName="Search" tiny={true} />}
-            />
-          {/* </div> */}
+          <IconButton
+            onClick={scanCode}
+            label="Scaneaza"
+            variant="outlined"
+            startIcon={<Icon iconName="ScannerBlue" tiny={true} />}
+          />
+          <IconButton
+            onClick={searchProduct}
+            label="Cauta Produs"
+            variant="contained"
+            startIcon={<Icon iconName="Search" tiny={true} />}
+          />
         </div>
       </div>
       <div className={cn({ [s.hiddenScnaner]: !isVisible })}>
