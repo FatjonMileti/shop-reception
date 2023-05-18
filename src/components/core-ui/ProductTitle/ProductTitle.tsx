@@ -7,7 +7,7 @@ const ProductTitle = () => {
   const product = useSelector((state: RootState) => state.product)
 
   return product.title ? (
-    <h2 className={s.productTitlte}>{product.title}</h2>
+    <h2 className={s.productTitle}>{product.title}</h2>
   ) : (
     ''
   )

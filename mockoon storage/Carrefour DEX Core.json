@@ -4108,6 +4108,149 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "c0726f6b-fd44-4cb2-a3f7-f438c138592f",
+      "type": "http",
+      "documentation": "Get stores stock list",
+      "method": "get",
+      "endpoint": "storesStock",
+      "responses": [
+        {
+          "uuid": "501786f2-78af-4ae7-b315-dae46b7cd411",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"store\": {\n        \"id\": 1,\n        \"name\": \"Carrefour Pantelimon\",\n        \"phones\": \"0723 515 228\"\n      },\n      \"stock\": \"14\"\n    },\n    {\n      \"id\": 2,\n      \"store\": {\n        \"id\": 2,\n        \"name\": \"Carrefour Orhideea\",\n        \"phones\": \"0723 515 229 / 0723 525 443\"\n      },\n      \"stock\": \"2\"\n    },\n    {\n      \"id\": 3,\n      \"store\": {\n        \"id\": 3,\n        \"name\": \"Carrefour Colentina\",\n        \"phones\": \"0723 515 230\"\n      },\n      \"stock\": \"0\"\n    },\n    {\n      \"id\": 4,\n      \"store\": {\n        \"id\": 4,\n        \"name\": \"Carrefour Baneasa\",\n        \"phones\": \"0723 515 231\"\n      },\n      \"stock\": \"20\"\n    },\n    {\n      \"id\": 5,\n      \"store\": {\n        \"id\": 5,\n        \"name\": \"Carrefour Antarctica\",\n        \"phones\": \"0723 515 232\"\n      },\n      \"stock\": \"999999\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted project milestones list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "1e5d1add-e159-4bec-95b9-8d6942198aab",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "51d9e68c-51ff-4958-872c-18040eb03fd0",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "8469a27d-6c79-459f-98de-6a959148b845",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "159a4c0d-f149-41b9-80fd-e7267586aeba",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "31b381b6-1e93-41c5-b5d2-e3b14373d040",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4234,6 +4377,10 @@
     {
       "type": "route",
       "uuid": "4098eba4-50c4-4aa4-8a9b-53c9937d5e88"
+    },
+    {
+      "type": "route",
+      "uuid": "c0726f6b-fd44-4cb2-a3f7-f438c138592f"
     }
   ],
   "proxyMode": false,
