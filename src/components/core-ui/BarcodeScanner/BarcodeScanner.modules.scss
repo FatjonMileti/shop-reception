@@ -1,37 +1,28 @@
 .scanContainer {
-  margin: 24px 80px 0;
-  background-color: #fff;
-  height: 100%;
-  padding: 16px 0;
-
-  &>div {
-    background-color: #fff;
-  }
-
-  @media (max-width: 936px) {
-    margin: 24px 24px 0;
-  }
-
+  padding: 16px;
+  margin: 24px;
   @media (max-width: 624px) {
-    margin: 18px 12px 0;
+    margin: 12px;
   }
 }
 
 .scannerControls {
   display: grid;
   grid-template-columns: 1fr 381px;
-  margin: 0 16px 24px 16px;
 
   @media (max-width: 624px) {
-    display: block;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    flex-direction: column;
   }
 }
 
 .buttonContainer {
   display: flex;
   flex-direction: row;
-  gap: 24px;
-  margin-left: 24px;
+  gap: 16px;
+  margin-left: 16px;
 
   @media (max-width: 624px) {
     margin-left: 0px;
@@ -56,6 +47,6 @@
   font-size: 15px;
 }
 
-.hiddenScnaner {
+.hiddenScanner {
   height: 0;
 }

@@ -84,7 +84,7 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
           />
         </div>
       </div>
-      <div className={cn({ [s.hiddenScnaner]: !isVisible })}>
+      <div className={cn({ [s.hiddenScanner]: !isVisible })}>
         <div
           id="scandit-barcode-picker"
           style={{
