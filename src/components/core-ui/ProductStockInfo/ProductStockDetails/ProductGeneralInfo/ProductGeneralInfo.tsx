@@ -41,7 +41,7 @@ const ProductGeneralInfo = ({ price, currency, eanCode, storeCode, addToCartActi
           onClick={addToCart}
           label="Adauga in cos"
           variant="contained"
-          endIcon={<Icon iconName="Add" tiny={true} />}
+          endIcon={<Icon iconName="AddCircle" tiny={true} fill='white' />}
         />
       </div>
       <Divider component="div" />

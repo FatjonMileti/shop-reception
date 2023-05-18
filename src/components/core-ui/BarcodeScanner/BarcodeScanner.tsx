@@ -74,13 +74,13 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
             onClick={scanCode}
             label="Scaneaza"
             variant="outlined"
-            startIcon={<Icon iconName="ScannerBlue" tiny={true} />}
+            startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill='primary' />}
           />
           <IconButton
             onClick={searchProduct}
             label="Cauta Produs"
             variant="contained"
-            startIcon={<Icon iconName="Search" tiny={true} />}
+            startIcon={<Icon iconName="SearchOutlined" tiny={true} fill='white' />}
           />
         </div>
       </div>

@@ -45,7 +45,7 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
               onClick={() => navigate(actions.viewOtherStocks.href)}
               label={actions.viewOtherStocks.label}
               variant={actions.viewOtherStocks.variant}
-              endIcon={<Icon iconName="Store" tiny={true} />}
+              endIcon={<Icon iconName="StoreMallDirectoryOutlined" tiny={true} fill='primary' />}
             />
           </div>
         )}
