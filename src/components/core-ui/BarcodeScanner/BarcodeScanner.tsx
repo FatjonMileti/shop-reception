@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from 'configureStore'
 import { IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Paper } from '@mui/material'
 import { useScandit } from 'hooks'
@@ -6,36 +8,42 @@ import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
 import { makeCoreGetRequest } from 'utils/api'
 import { BarecodeScannerProps, ProductStockResponse } from './BarcodeScannerDefinitions'
-import { useDispatch } from 'react-redux'
 import { ProductActions } from 'reducers/productSlice'
 import s from './BarcodeScanner.modules.scss'
 
 const BarcodeScanner = (props: BarecodeScannerProps) => {
   const { action } = props
 
+  const [code, setCode] = React.useState('')
+
+  const product = useSelector((state: RootState) => state.product)
+
   const dispatch = useDispatch()
 
-  const [code, setCode] = React.useState('')
   const [isVisible, setIsVisible] = React.useState(false)
 
+  React.useEffect(() => {
+    setCode(product.code)
+  }, [product.code])
+
   const onScan = scanResult => {
-    setCode(scanResult.barcodes[0].data)
+    dispatch(ProductActions.setProduct({ code: scanResult.barcodes[0].data }))
     setIsVisible(false)
   }
 
   const { run } = useScandit({ onScan, isVisible })
 
   const scanCode = () => {
-    setCode('')
+    dispatch(ProductActions.clearProduct())
     setIsVisible(true)
   }
 
   const searchProduct = () => {
-    if (code) {
+    if (product.code) {
       ;(async () => {
         let response: ProductStockResponse
         if (action.type === 'GET') {
-          response = await makeCoreGetRequest(`${action.url}?code=${code}`)
+          response = await makeCoreGetRequest(`${action.url}?code=${product.code}`)
           dispatch(ProductActions.setProduct({ ...response.list[0] }))
         }
       })()
@@ -50,11 +58,11 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
     }
   }, [])
 
-  React.useEffect(() => {
-    return () => {
-      dispatch(ProductActions.clearProduct())
-    }
-  }, [])
+  // React.useEffect(() => {
+  //   return () => {
+  //     dispatch(ProductActions.clearProduct())
+  //   }
+  // }, [])
 
   return (
     <Paper className={s.scanContainer}>
@@ -66,7 +74,9 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
             variant="standard"
             label="Introdu codul produsului"
             fullWidth
-            onChange={event => setCode(event.currentTarget.value)}
+            onChange={event =>
+              dispatch(ProductActions.setProduct({ code: event.currentTarget.value }))
+            }
           />
         </div>
         <div className={s.buttonContainer}>
@@ -74,13 +84,13 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
             onClick={scanCode}
             label="Scaneaza"
             variant="outlined"
-            startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill='primary' />}
+            startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
           />
           <IconButton
             onClick={searchProduct}
             label="Cauta Produs"
             variant="contained"
-            startIcon={<Icon iconName="SearchOutlined" tiny={true} fill='white' />}
+            startIcon={<Icon iconName="SearchOutlined" tiny={true} fill="white" />}
           />
         </div>
       </div>

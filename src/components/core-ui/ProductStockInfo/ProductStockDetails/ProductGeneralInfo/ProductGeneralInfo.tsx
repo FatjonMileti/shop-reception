@@ -1,15 +1,19 @@
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Divider, IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
 import { makeCorePostRequest } from 'utils/api'
 import { useNotification } from 'hooks'
+import { ProductActions } from 'reducers/productSlice'
 import s from './ProductGeneralInfo.modules.scss'
 
 const ProductGeneralInfo = ({ price, currency, eanCode, storeCode, addToCartAction }) => {
   const navigate = useNavigate()
 
   const { showNotification } = useNotification()
+
+  const dispatch = useDispatch()
 
   const addToCart = async () => {
     const { action } = addToCartAction
@@ -22,6 +26,7 @@ const ProductGeneralInfo = ({ price, currency, eanCode, storeCode, addToCartActi
           type: 'success'
         })
       }
+      dispatch(ProductActions.clearProduct())
       navigate(addToCartAction.href)
     } catch (error) {
       showNotification({
