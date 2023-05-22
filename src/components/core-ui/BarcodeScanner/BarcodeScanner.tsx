@@ -10,6 +10,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { BarecodeScannerProps, ProductStockResponse } from './BarcodeScannerDefinitions'
 import { ProductActions } from 'reducers/productSlice'
 import s from './BarcodeScanner.modules.scss'
+import { toProduct } from './serializers'
 
 const BarcodeScanner = (props: BarecodeScannerProps) => {
   const { action } = props
@@ -44,7 +45,7 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
         let response: ProductStockResponse
         if (action.type === 'GET') {
           response = await makeCoreGetRequest(`${action.url}?code=${product.code}`)
-          dispatch(ProductActions.setProduct({ ...response.list[0] }))
+          dispatch(ProductActions.setProduct({ ...toProduct(response.product) }))
         }
       })()
     }

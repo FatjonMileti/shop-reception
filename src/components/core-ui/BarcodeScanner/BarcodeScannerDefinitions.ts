@@ -21,7 +21,7 @@ export interface ProductStock {
 }
 
 export interface ProductStockResponse {
-  list: {
+  product: {
     title: string
     storeStock: ProductStock
     warehouseStock: ProductStock

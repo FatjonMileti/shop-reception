@@ -6,9 +6,14 @@ export interface ProductState {
   title?: string
   storeStock?: ProductStock
   warehouseStock?: ProductStock
+  selectedStockTab?: number
+  selectedStockType?: 'storeStock' | 'warehouseStock'
 }
 
-export const productInitialState: ProductState = {}
+export const productInitialState: ProductState = {
+  selectedStockTab: 0,
+  selectedStockType: 'storeStock'
+}
 
 export const ProductSlice = createSlice({
   name: 'product',
