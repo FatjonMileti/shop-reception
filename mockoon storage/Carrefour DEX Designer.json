@@ -300,7 +300,7 @@
         },
         {
           "uuid": "3cf0970b-096c-4089-8f85-558293eb7834",
-          "body": "[{\n\t\t\"id\": \"6\",\n\t\t\"name\": \"Scanare Produs\",\n\t\t\"icon\": \"QrCodeScannerOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"6\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"6\",\n\t\t\t\"routeURL\": \"/productScan\",\n\t\t\t\"routePathExact\": true\n\t\t},{\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/storesStock\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"7\",\n\t\t\"name\": \"Cos de cumparaturi\",\n\t\t\"icon\": \"ShoppingBasketOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"8\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"8\",\n\t\t\t\"routeURL\": \"/shoppingCart\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}\n]",
+          "body": "[{\n\t\t\"id\": \"6\",\n\t\t\"name\": \"Scanare Produs\",\n\t\t\"icon\": \"QrCodeScannerOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"6\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"6\",\n\t\t\t\"routeURL\": \"/productScan\",\n\t\t\t\"routePathExact\": true\n\t\t},{\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/storesStock\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"7\",\n\t\t\"name\": \"Cos de cumparaturi\",\n\t\t\"icon\": \"ShoppingBasketOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"8\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"8\",\n\t\t\t\"routeURL\": \"/shoppingCart\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"8\",\n\t\t\"name\": \"Vanzarile mele\",\n\t\t\"icon\": \"ShoppingBasketOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"9\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/sales\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of activities - OMS",
@@ -837,6 +837,38 @@
             }
           ],
           "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "03c7d7a9-e967-4675-bb5f-d92fdbe03b6a",
+          "body": "{\n\t\"id\": \"9\",\n\t\"activity\": {\n\t\t\"id\": \"7\",\n\t\t\"name\": \"Cos de cumparaturi\",\n\t\t\"icon\": \"ShoppingBasketOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"2\",\n\t\t\t\"name\": \"OMS\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/oms\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"2\",\n\t\t\t\t\"name\": \"OMS\",\n\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\"routeURL\": \"/oms1\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t}\n\t},\n\t\"screen\": {\n\t\t\"id\": \"5\",\n\t\t\"name\": \"Project Milestones\",\n\t\t\"icon\": \"AccountTreeOutlined\",\n\t\t\"routeURL\": \"/projectMilestones\",\n\t\t\"routePathExact\": true,\n\t\t\"activity\": {\n\t\t\t\"id\": \"5\",\n\t\t\t\"name\": \"Project Milestones\",\n\t\t\t\"icon\": \"AccountTreeOutlined\",\n\t\t\t\"submodule\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\"module\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t},\n\t\"roleId\": \"GOV_TL\",\n\t\"jsonSchema\": {\n\t\t\"UIComponent\": \"Box\",\n\t\t\"id\": \"the-box\",\n\t\t\"className\": \"\",\n\t\t\"children\": [{\n\t\t\t\"UIComponent\": \"Table\",\n\t\t\t\"id\": \"the-table\",\n\t\t\t\"width\": \"100%\",\n\t\t\t\"action\": {\n\t\t\t\t\"url\": \"/reports\",\n\t\t\t\t\"type\": \"GET\"\n\t\t\t},\n\t\t\t\"hideCheckbox\": true,\n\t\t\t\"rowsPerPage\": 10,\n\t\t\t\"orderBy\": \"date\",\n\t\t\t\"order\": \"desc\",\n\t\t\t\"columns\": [{\n\t\t\t\t\t\"title\": \"Data\",\n\t\t\t\t\t\"field\": \"date\",\n\t\t\t\t\t\"align\": \"left\",\n\t\t\t\t\t\"type\": \"date\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"title\": \"Denumire\",\n\t\t\t\t\t\"field\": \"name\",\n\t\t\t\t\t\"align\": \"left\",\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"title\": \"Pret\",\n\t\t\t\t\t\"field\": \"price\",\n\t\t\t\t\t\"align\": \"left\",\n\t\t\t\t\t\"type\": \"number\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"tableActions\": {\n\t\t\t\t\"filters\": [{\n                \"UIComponent\": \"DatePicker\",\n                \"type\": \"date\",\n                \"name\": \"startDate\",\n                \"label\": \"Data inceput\",\n                \"defaultValue\": \"#CURRENT_DATE\",\n                \"variant\": \"standard\",\n                \"required\": true\n              },\n              {\n                \"UIComponent\": \"DatePicker\",\n                \"type\": \"date\",\n                \"name\": \"endDate\",\n                \"label\": \"Data sfarsit\",\n                \"defaultValue\": \"#CURRENT_DATE\",\n                \"variant\": \"standard\",\n                \"required\": true\n              }\n\t\t\t\t],\n\t\t\t\t\"downloadAction\": {\n\t\t\t\t  \"action\": {\n\t\t\t\t    \"type\": \"GET\",\n\t\t\t\t    \"url\": \"/downloadReport\"\n\t\t\t\t  }\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "My Sales",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "8",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "9",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false

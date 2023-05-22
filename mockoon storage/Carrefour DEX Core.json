@@ -4251,6 +4251,34 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "46eac378-9cf8-412d-b7e0-2f553731d325",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "reports",
+      "responses": [
+        {
+          "uuid": "3f663da6-8236-4fcd-ac59-8acdec5d9336",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"date\": \"2023-02-01\",\n      \"name\": \"Vanzare 1\",\n      \"price\": 1999.9\n    },\n    {\n      \"id\": 2,\n      \"date\": \"2023-05-01\",\n      \"name\": \"Vanzare 2\",\n      \"price\": 19.9\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4381,6 +4409,10 @@
     {
       "type": "route",
       "uuid": "c0726f6b-fd44-4cb2-a3f7-f438c138592f"
+    },
+    {
+      "type": "route",
+      "uuid": "46eac378-9cf8-412d-b7e0-2f553731d325"
     }
   ],
   "proxyMode": false,
