@@ -10,6 +10,14 @@ const ProductTabs = props => {
   const { value, ...rest } = props
 
   const product = useSelector((state: RootState) => state.product)
+  const [tabLabels, setTabLabels] = React.useState(rest.tabs.map(tab => tab.label))
+
+  React.useEffect(() => {
+    // console.log("[ProductTabs] product: ", product)
+    setTabLabels(rest.tabs.map(tab => tab.content && product[tab.content.id] ? `${tab.content.title} (${product[tab.content.id].available} buc)` : tab.label))
+  }, [product])
+
+  // console.log("[ProductTabs] rest: ", rest)
 
   const dispatch = useDispatch()
 
@@ -28,7 +36,7 @@ const ProductTabs = props => {
 
   return product.title ? (
     <div className={s.productTabs}>
-      <Tabs {...rest} handleChange={handleChange} value={product.selectedStockTab} />
+      <Tabs {...rest} labels={tabLabels} handleChange={handleChange} value={product.selectedStockTab} />
     </div>
   ) : null
 }
