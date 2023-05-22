@@ -40,7 +40,7 @@ const ProductGeneralInfo = ({ price, currency, eanCode, storeCode, addToCartActi
     <div>
       <div className={s.infoContainer}>
         <div className={s.price}>
-          {price} {currency}
+          {price}&nbsp;{currency}
         </div>
         <IconButton
           onClick={addToCart}
