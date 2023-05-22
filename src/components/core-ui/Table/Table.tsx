@@ -2,12 +2,12 @@ import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useImmer } from 'use-immer'
-import { Box, CircularProgress } from '@mui/material'
+import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import { getRenderedColumns, convertFilterSchemaToFilterConfig } from './helpers'
+import { getRenderedColumns, convertFilterSchemaToFilterConfig, download } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
 import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
@@ -33,6 +33,8 @@ const Table = props => {
     searchText: '',
     filters: []
   })
+
+  console.log(tableState.filters)
 
   const { showNotification } = useNotification()
 
@@ -137,6 +139,13 @@ const Table = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
+  const handleDownload = () => {
+    if (tableActions?.downloadAction) {
+      const { action } = tableActions?.downloadAction
+      download(action.url, tableState.filters)
+    }
+  }
+
   return (
     <Box className={s.tableContainer}>
       {tableActions?.newAction && canCreate && (
@@ -200,6 +209,7 @@ const Table = props => {
             ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
             : null
         }
+        downloadButton={{ onClick: handleDownload }}
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
