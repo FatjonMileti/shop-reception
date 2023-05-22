@@ -1192,9 +1192,9 @@
   integrity sha512-LxcyMGxwmTh2lY9FwHPGWOHmYFCZvbrFCBZL4FzSSsxsRPuhrYUg/49/0KDfW8tnIEaEHtfmn6+NPN+1DqaNmA==
 
 "@fullscreendigital/carrefour-dex-fe@^1.0.0":
-  version "1.0.213"
-  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-1.0.213.tgz#2bf19147cebe122a64069a159fff868ea8096592"
-  integrity sha512-GoPa0x9IXbA0AhrxFpSbadVskNtIlwxkiQ6ZgO6vi6XTL+EJzC+AIc27gpBP70KYP+5GZ8kpFfh+0fgP3+M7zw==
+  version "1.0.214"
+  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-1.0.214.tgz#305d3c4ffbc582d563979b2b66c24c4e7cb19cb6"
+  integrity sha512-yqd+MTAdTtsFnVqVs/9QA3z5TIVKyMudp9WKK+v3s+ZNftaHd0QkP1BZONDR2/U4ZAOthuUcOzQhivYFnfqUkg==
   dependencies:
     "@emotion/react" "^11.9.3"
     "@emotion/styled" "^11.9.3"
@@ -5286,9 +5286,9 @@ safe-regex-test@^1.0.0:
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 sass-loader@^13.0.1:
-  version "13.2.2"
-  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-13.2.2.tgz#f97e803993b24012c10d7ba9676548bf7a6b18b9"
-  integrity sha512-nrIdVAAte3B9icfBiGWvmMhT/D+eCDwnk+yA7VE/76dp/WkHX+i44Q/pfo71NYbwj0Ap+PGsn0ekOuU1WFJ2AA==
+  version "13.3.0"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-13.3.0.tgz#ed4a2d555aa10fc99f4daaab425d8d451336bb65"
+  integrity sha512-LeWNswSEujsZnwdn9AuA+Q5wZEAFlU+eORQsDKp35OtGAfFxYxpfk/Ylon+TGGkazSqxi2EHDTqdr3di8r7nCg==
   dependencies:
     klona "^2.0.6"
     neo-async "^2.6.2"

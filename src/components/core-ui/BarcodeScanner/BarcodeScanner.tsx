@@ -24,7 +24,7 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
   const [isVisible, setIsVisible] = React.useState(false)
 
   React.useEffect(() => {
-    setCode(product.code)
+    setCode(product.code || '')
   }, [product.code])
 
   const onScan = scanResult => {
