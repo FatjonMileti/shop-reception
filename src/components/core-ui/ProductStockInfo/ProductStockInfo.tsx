@@ -12,7 +12,11 @@ const ProductStockInfo = (props: ProductStockInfoProps) => {
 
   return (
     <div className={s.productTab}>
-      <ProductStockDetails stock={product[product.selectedStockType]} infoItems={infoItems} actions={actions} />
+      <ProductStockDetails
+        stock={product[product.selectedStockType]}
+        infoItems={infoItems}
+        actions={actions}
+      />
     </div>
   )
 }

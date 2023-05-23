@@ -30,4 +30,5 @@ export interface ProductStockInfoProps {
   title: string
   infoItems: ProductStockInfoItem[]
   actions: ProductStockActions
+  id: string
 }
