@@ -4279,6 +4279,39 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "8a3af82c-ab71-47dc-b55b-16cd8bb854b4",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "productsToDeliver",
+      "responses": [
+        {
+          "uuid": "0ab4f187-b9fe-4a16-bf5d-805cb8a18ecb",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2019-05-01\"\n\t\t\t},\n\t\t\t\"product\": {\n\t\t\t\t\"name\": \"Coca-Cola\",\n\t\t\t\t\"count\": 4\n\t\t\t},\n\t\t\t\"store\": {\n\t\t\t\t\"name\": \"Carrefour Siret\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2023-05-01\"\n\t\t\t},\n\t\t\t\"product\": {\n\t\t\t\t\"name\": \"Chestii\",\n\t\t\t\t\"count\": 83\n\t\t\t},\n\t\t\t\"store\": {\n\t\t\t\t\"name\": \"Carrefour Ploiesti\"\n\t\t\t}\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4413,6 +4446,10 @@
     {
       "type": "route",
       "uuid": "46eac378-9cf8-412d-b7e0-2f553731d325"
+    },
+    {
+      "type": "route",
+      "uuid": "8a3af82c-ab71-47dc-b55b-16cd8bb854b4"
     }
   ],
   "proxyMode": false,
