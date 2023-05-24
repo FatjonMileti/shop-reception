@@ -14,8 +14,13 @@ const Tabs = props => {
       onChange={handleChange}
       tabs={toTabs(tabs, labels)}
       value={value}
-      tabContentBoxStyle={{ padding: 0 }}
-      tabsStyle={{ flex: 1, maxWidth: 'unset' }}
+      tabsContainerStyle={{
+        borderBottom: 1,
+        borderColor: '#E5E5E5',
+        padding: '0 24px'
+      }}
+      // tabContentBoxStyle={{ padding: 0 }}
+      // tabsStyle={{ flex: 1, maxWidth: 'unset' }}
     />
   )
 }
