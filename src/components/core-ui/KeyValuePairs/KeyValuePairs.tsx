@@ -8,7 +8,7 @@ const KeyValuePairs = ({ pairs, columns, className }) => {
       {pairs.map(({ key, value }) => (
         <Grid item xs={12} md={12 / columns} key={key}>
           <div className={s.item}>
-            <span>{key}</span>
+            <span className={s.key}>{key}</span>
             <span>
               <strong>{value}</strong>
             </span>

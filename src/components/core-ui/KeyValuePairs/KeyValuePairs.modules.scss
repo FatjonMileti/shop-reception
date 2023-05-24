@@ -8,6 +8,9 @@
 
   span {
     flex: 1;
+    &.key {
+      color: #666666;
+    }
     &:last-child {
       text-align: right;
     }

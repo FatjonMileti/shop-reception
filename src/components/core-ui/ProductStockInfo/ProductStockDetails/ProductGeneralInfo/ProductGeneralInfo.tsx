@@ -52,10 +52,10 @@ const ProductGeneralInfo = ({ price, currency, eanCode, storeCode, addToCartActi
       <Divider component="div" />
       <div className={s.infoContainer}>
         <span className={s.firstCode}>
-          Cod EAN: <strong>{eanCode}</strong>
+          <span className={s.lightText}>Cod EAN:</span> <strong>{eanCode}</strong>
         </span>
         <span className={s.secondCode}>
-          Cod intern: <strong>{storeCode}</strong>
+          <span className={s.lightText}>Cod intern:</span> <strong>{storeCode}</strong>
         </span>
       </div>
     </div>
