@@ -4498,18 +4498,26 @@
       "responses": [
         {
           "uuid": "9d39b5a8-6485-490a-8a47-2b3027269386",
-          "body": "{\n  \"id\": 1,\n  \"role\": \"IT PM\",\n  \"evaluationPhase\": 10,\n  \"analysisPhase\": 5,\n  \"designPhase\": 10,\n  \"developmentPhase\": 10,\n  \"systemTestPhase\": 5,\n  \"uatPhase\": 15,\n  \"goLivePhase\": 5,\n  \"soakPhase\": 5\n}",
+          "body": "",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
           "headers": [
             {
               "key": "Content-Type",
-              "value": "application/json"
+              "value": "application/pdf"
+            },
+            {
+              "key": "Content-Disposition",
+              "value": "attachment; filename=\"587client646ddfbf650f6.pdf\""
+            },
+            {
+              "key": "Content-Length",
+              "value": "36471"
             }
           ],
-          "bodyType": "INLINE",
-          "filePath": "",
+          "bodyType": "FILE",
+          "filePath": "proforma-598.pdf",
           "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],

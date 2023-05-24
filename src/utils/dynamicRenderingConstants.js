@@ -8,6 +8,7 @@ import { BarcodeScanner } from 'components/core-ui/BarcodeScanner'
 import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
+import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
 import { ProductTabs } from 'components/core-ui/ProductTabs'
 import { ProductTitle } from 'components/core-ui/ProductTitle'
@@ -32,6 +33,7 @@ export const Components = {
   BarcodeScanner,
   ComboBoxTable,
   Input,
+  PdfViewer,
   ProductStockInfo,
   ProductTabs,
   ProductTitle,
