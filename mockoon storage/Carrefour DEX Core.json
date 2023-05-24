@@ -4289,7 +4289,7 @@
       "responses": [
         {
           "uuid": "0ab4f187-b9fe-4a16-bf5d-805cb8a18ecb",
-          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2019-05-01\"\n\t\t\t},\n\t\t\t\"product\": {\n\t\t\t\t\"name\": \"Coca-Cola\",\n\t\t\t\t\"count\": 4\n\t\t\t},\n\t\t\t\"store\": {\n\t\t\t\t\"name\": \"Carrefour Siret\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2023-05-01\"\n\t\t\t},\n\t\t\t\"product\": {\n\t\t\t\t\"name\": \"Chestii\",\n\t\t\t\t\"count\": 83\n\t\t\t},\n\t\t\t\"store\": {\n\t\t\t\t\"name\": \"Carrefour Ploiesti\"\n\t\t\t}\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2019-05-01\"\n\t\t\t},\n\t\t\t\"product\": {\n\t\t\t\t\"name\": \"Coca-Cola\",\n\t\t\t\t\"count\": 4\n\t\t\t},\n\t\t\t\"store\": {\n\t\t\t\t\"name\": \"Carrefour Siret\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"323-c\",\n\t\t\t\t\"date\": \"2023-05-01\"\n\t\t\t},\n\t\t\t\"product\": {\n\t\t\t\t\"name\": \"Chestii\",\n\t\t\t\t\"count\": 83\n\t\t\t},\n\t\t\t\"store\": {\n\t\t\t\t\"name\": \"Carrefour Ploiesti\"\n\t\t\t}\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4308,6 +4308,325 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "282a0ae1-97da-435f-83cf-8d78e2de2703",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "proforma",
+      "responses": [
+        {
+          "uuid": "00efa44e-c0fc-4005-bde5-6e6bfef67f4b",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2019-05-01\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"323-c\",\n\t\t\t\t\"date\": \"2023-05-01\"\n\t\t\t}\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "81b20417-e97d-4aab-a41d-26eee75b9b7e",
+      "type": "http",
+      "documentation": "Deletes proforma with given id",
+      "method": "delete",
+      "endpoint": "proforma/:id",
+      "responses": [
+        {
+          "uuid": "a2bca7a6-d866-4fb3-be0b-059ff7d32905",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Successfully processed request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "fa5911d6-c75c-43a1-91c9-617cbb98b9c2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "47b47709-5966-4ae3-851b-1c9013cb64ba",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "3a2cb5b4-6028-4990-9157-e28e3d6f5643",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "73f6e9a5-a310-456f-aad7-6e2f5d34aac2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "9af23825-2b38-4138-b133-2a919706ac4c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "063bfe9b-18fd-4ed7-8f5d-0a09b97cc4ff",
+      "type": "http",
+      "documentation": "Find proforma by id",
+      "method": "get",
+      "endpoint": "proforma/:id",
+      "responses": [
+        {
+          "uuid": "9d39b5a8-6485-490a-8a47-2b3027269386",
+          "body": "{\n  \"id\": 1,\n  \"role\": \"IT PM\",\n  \"evaluationPhase\": 10,\n  \"analysisPhase\": 5,\n  \"designPhase\": 10,\n  \"developmentPhase\": 10,\n  \"systemTestPhase\": 5,\n  \"uatPhase\": 15,\n  \"goLivePhase\": 5,\n  \"soakPhase\": 5\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful operation",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "0678e463-5493-40e4-995d-ef2b81f05d19",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "31028561-1f94-4a96-9f63-9337e5851e98",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "74b27e1b-66ba-48fe-b61e-cdc37659ed95",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "cf914ba6-7fe8-47b3-94b6-a50813bdd82c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "a8ab73df-91c3-4243-852f-33923cd7c102",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
         }
       ],
       "enabled": true,
@@ -4450,6 +4769,18 @@
     {
       "type": "route",
       "uuid": "8a3af82c-ab71-47dc-b55b-16cd8bb854b4"
+    },
+    {
+      "type": "route",
+      "uuid": "282a0ae1-97da-435f-83cf-8d78e2de2703"
+    },
+    {
+      "type": "route",
+      "uuid": "81b20417-e97d-4aab-a41d-26eee75b9b7e"
+    },
+    {
+      "type": "route",
+      "uuid": "063bfe9b-18fd-4ed7-8f5d-0a09b97cc4ff"
     }
   ],
   "proxyMode": false,

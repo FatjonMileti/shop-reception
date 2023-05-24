@@ -2,11 +2,16 @@ import { useMemo } from 'react'
 import { isAllowed } from 'utils/helpers'
 import { getUserRoles } from 'utils/authService'
 
-const usePermissions = ({ createRoles, editRoles, deleteRoles }) => {
+const usePermissions = ({ createRoles, viewRoles, editRoles, deleteRoles }) => {
   const currentUserRoles = useMemo(() => getUserRoles(), [])
 
   const canCreate = useMemo(
     () => currentUserRoles && isAllowed(createRoles, currentUserRoles),
+    [currentUserRoles]
+  )
+
+  const canView = useMemo(
+    () => currentUserRoles && isAllowed(viewRoles, currentUserRoles),
     [currentUserRoles]
   )
 
@@ -20,7 +25,7 @@ const usePermissions = ({ createRoles, editRoles, deleteRoles }) => {
     [currentUserRoles]
   )
 
-  return { canCreate, canEdit, canDelete }
+  return { canCreate, canView, canEdit, canDelete }
 }
 
 export default usePermissions

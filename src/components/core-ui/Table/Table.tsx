@@ -34,12 +34,13 @@ const Table = props => {
     filters: []
   })
 
-  console.log(tableState.filters)
+  // console.log(tableState.filters)
 
   const { showNotification } = useNotification()
 
-  const { canCreate, canEdit, canDelete } = usePermissions({
+  const { canCreate, canView, canEdit, canDelete } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
+    viewRoles: tableRowActions?.viewAction?.allowedRoles,
     editRoles: tableRowActions?.editAction?.allowedRoles,
     deleteRoles: tableRowActions?.deleteAction?.allowedRoles
   })
@@ -179,6 +180,7 @@ const Table = props => {
                 render: row => (
                   <TableActions
                     itemId={row.id}
+                    viewAction={tableRowActions.viewAction}
                     editAction={tableRowActions.editAction}
                     deleteAction={tableRowActions.deleteAction}
                     additionalAction={() =>
@@ -192,6 +194,7 @@ const Table = props => {
                       )
                     }
                     comboValue={comboValue}
+                    canView={canView}
                     canEdit={canEdit}
                     canDelete={canDelete}
                   />
