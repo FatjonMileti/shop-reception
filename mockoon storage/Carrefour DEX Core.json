@@ -4057,7 +4057,7 @@
       "responses": [
         {
           "uuid": "d68ee7d8-b802-4c0f-bb31-6548256c3662",
-          "body": "{\n    \"products\": [{\n        \"id\": 1,\n        \"title\": \"Combina frigorifica ARCTIC AK54305M30MT, 291 l, H 181.3 cm, Clasa F, argintiu\",\n        \"price\": 1499.90,\n        \"currency\": \"lei\",\n        \"quantity\": 1,\n        \"totalPrice\": 1499.90\n    }],\n    \"totalPrice\": 1499.90\n}",
+          "body": "{\n    \"list\": [{\n        \"id\": 1,\n        \"title\": \"Combina frigorifica ARCTIC AK54305M30MT, 291 l, H 181.3 cm, Clasa F, argintiu\",\n        \"price\": 1499.90,\n        \"currency\": \"lei\",\n        \"quantity\": 1,\n        \"totalPrice\": 1499.90\n    }],\n    \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4261,7 +4261,7 @@
       "responses": [
         {
           "uuid": "3f663da6-8236-4fcd-ac59-8acdec5d9336",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"date\": \"2023-02-01\",\n      \"name\": \"Vanzare 1\",\n      \"price\": 1999.9\n    },\n    {\n      \"id\": 2,\n      \"date\": \"2023-05-01\",\n      \"name\": \"Vanzare 2\",\n      \"price\": 19.9\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"date\": \"2023-02-01\",\n      \"name\": \"Vanzare 1\",\n      \"price\": 1999.9\n    },\n    {\n      \"id\": 2,\n      \"date\": \"2023-05-01\",\n      \"name\": \"Vanzare 2\",\n      \"price\": 19.9\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"total\": 2019.8\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4639,6 +4639,34 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "2c783a8d-c095-4ea3-afb2-d911c56fc356",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "shoppingCart",
+      "responses": [
+        {
+          "uuid": "79b0ca55-b5c7-49c6-920c-522af9f08d01",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4789,6 +4817,10 @@
     {
       "type": "route",
       "uuid": "063bfe9b-18fd-4ed7-8f5d-0a09b97cc4ff"
+    },
+    {
+      "type": "route",
+      "uuid": "2c783a8d-c095-4ea3-afb2-d911c56fc356"
     }
   ],
   "proxyMode": false,

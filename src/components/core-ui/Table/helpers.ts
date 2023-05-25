@@ -112,15 +112,24 @@ export const getTableQueryUrl = params =>
     ''
   )
 
-
 export const download = (url, filters) => {
   const a = document.createElement('a')
   const href = filters.reduce((acc, filter) => `${acc}/${filter.value}`, url)
   console.log(href)
   // TODO replace download url when BE is ready
   // a.href = href
-  a.href = 'https://apps.carrefour.ro/stage_carrefour_assistant_api/api/reports-export/2023-04-01/2023-05-22'
+  a.href =
+    'https://apps.carrefour.ro/stage_carrefour_assistant_api/api/reports-export/2023-04-01/2023-05-22'
   document.body.appendChild(a)
   a.click()
   document.body.removeChild(a)
 }
+
+export const renderTableFooter = (footerElements, summary) =>
+  footerElements.map(element => {
+    // if (element.field) {
+    //   debugger
+    //   return renderComponent({ ...element, value: get(summary, element.field), key: element.id })
+    // }
+    return renderComponent({ ...element, data: summary, key: element.id })
+  })

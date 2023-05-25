@@ -8,12 +8,16 @@ import { BarcodeScanner } from 'components/core-ui/BarcodeScanner'
 import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
+import { List } from 'components/core-ui/List'
 import { PdfViewer } from 'components/core-ui/PdfViewer'
+import { PlusMinusNumberInput } from 'components/core-ui/PlusMinusNumberInput'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
 import { ProductTabs } from 'components/core-ui/ProductTabs'
 import { ProductTitle } from 'components/core-ui/ProductTitle'
+import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
 import { ShoppingCart } from 'components/core-ui/ShoppingCart'
 import { Table } from 'components/core-ui/Table'
+import { TitleText } from 'components/core-ui/TitleText'
 
 export const Components = {
   // MUI components
@@ -25,7 +29,6 @@ export const Components = {
   // Carrefour lib components
   Button,
   DatePicker,
-  Link,
   Typography,
   Checkbox,
   // Local components
@@ -33,10 +36,15 @@ export const Components = {
   BarcodeScanner,
   ComboBoxTable,
   Input,
+  Link,
+  List,
   PdfViewer,
+  PlusMinusNumberInput,
   ProductStockInfo,
   ProductTabs,
   ProductTitle,
+  SimpleKeyValuePairs,
   ShoppingCart,
-  Table
+  Table,
+  TitleText
 }

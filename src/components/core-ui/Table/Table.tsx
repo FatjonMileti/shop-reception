@@ -7,14 +7,20 @@ import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import { getRenderedColumns, convertFilterSchemaToFilterConfig, download } from './helpers'
-import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
+import {
+  getRenderedColumns,
+  convertFilterSchemaToFilterConfig,
+  download,
+  renderTableFooter
+} from './helpers'
+import { toTableGETUrl, toTablePOSTPayload } from './serializers'
+import { toTableRowItems } from 'utils/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 
 const Table = props => {
-  const { action, columns, tableActions, tableRowActions, comboValue, ...rest } = props
+  const { action, columns, tableActions, tableRowActions, comboValue, tableFooter, ...rest } = props
 
   let [searchParams] = useSearchParams()
 
@@ -24,6 +30,7 @@ const Table = props => {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
   // This is used to prevent the comboValue to trigger handleRemoteData first time, as it is handled in the lib
   const [isInitialFetch, setIsInitialFetch] = useState(true)
+  const [summary, setSummary] = useState({})
 
   const [tableState, setTableState] = useImmer({
     page: 0,
@@ -63,6 +70,13 @@ const Table = props => {
     () => getRenderedColumns(columns, tableState.filters),
     [columns, tableState.filters]
   )
+
+  const tableFooterComponent = useMemo(
+    () => tableFooter && renderTableFooter(tableFooter, summary),
+    [tableFooter, summary]
+  )
+
+  console.log(tableFooterComponent)
 
   useEffect(() => {
     if (!isInitialFetch) {
@@ -125,6 +139,7 @@ const Table = props => {
       }
       setItems(toTableRowItems(response.list, columns))
       setTotalCount(response.page.totalCount)
+      setSummary(response.summary)
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${error.message}`,
@@ -217,6 +232,7 @@ const Table = props => {
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
       />
+      {tableFooter && <div style={{ textAlign: 'right' }}>{tableFooterComponent}</div>}
     </Box>
   )
 }

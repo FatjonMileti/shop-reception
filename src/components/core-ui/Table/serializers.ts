@@ -74,24 +74,6 @@ export const toTablePOSTPayload = ({
   ...toArrayItemPayload(getAllFilters(filters, comboValue))
 })
 
-export const toTableRowItems = (items, columns) => {
-  columns.forEach(column => {
-    items.forEach((item, index) => {
-      if (column.field.includes('.')) {
-        items[index][column.field] = get(item, column.field) || ''
-      } else {
-        if (item[column.field] === null || item[column.field] === undefined) {
-          items[index][column.field] = column.type === 'date' ? null : ''
-        } else {
-          items[index][column.field] = item[column.field]
-        }
-      }
-    })
-  })
-
-  return items
-}
-
 export const toFiltersUrl = (tableFilters, linkFilters) => {
   let url = ''
   tableFilters.map(filter => {
