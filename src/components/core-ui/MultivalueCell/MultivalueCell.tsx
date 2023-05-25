@@ -5,7 +5,7 @@ function MultivalueCell(props: MultivalueCellProps) {
   const { value } = props
   const [visible, setVisible] = useState(false)
   const [shortDisplayText, setShortDisplayText] = useState(null)
-  const originalDisplayText = value.join(', ')
+  const [originalDisplayText, setOriginalDisplayText] = useState(null)
 
   useEffect(() => {
     if (value.length <= 2) {
@@ -14,6 +14,8 @@ function MultivalueCell(props: MultivalueCellProps) {
       var remainingCount = value.length - 2
       setShortDisplayText(value.slice(0, 2).join(', ') + '... +' + remainingCount)
     }
+
+    setOriginalDisplayText(value.join(', '))
   }, [value])
 
   return (
