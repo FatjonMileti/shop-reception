@@ -38,6 +38,14 @@ export const getRenderedColumns = (columns, tableFilters) =>
               style: { textDecoration: 'none' }
             })
           }
+
+          if(UIComponent === 'MultivalueCell' || UIComponent === 'IconCell'){
+            return renderComponent({
+              ...render,
+              value: row[field],
+            })
+          }
+
           return renderComponent(render)
         }
       }

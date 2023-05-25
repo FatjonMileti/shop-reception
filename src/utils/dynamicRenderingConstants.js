@@ -8,6 +8,8 @@ import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
 import { Table } from 'components/core-ui/Table'
+import { MultivalueCell } from 'components/core-ui/MultivalueCell'
+import { IconCell } from 'components/core-ui/IconCell'
 
 export const Components = {
   // MUI components
@@ -22,6 +24,8 @@ export const Components = {
   Link,
   Typography,
   Checkbox,
+  MultivalueCell,
+  IconCell,
   // Local components
   AsyncAutocomplete,
   ComboBoxTable,
