@@ -4,4 +4,5 @@ export interface PlusMinusNumberInputProps {
   action: Action
   count: number
   field: string
+  payload?: { [key: string]: string }
 }

@@ -18,7 +18,7 @@ const PlusMinusNumberInput = (props: PlusMinusNumberInputProps) => {
 
   const updateRemoteCount = async () => {
     try {
-      await makeCorePutRequest(`${props.action.url}`, { [props.field]: count })
+      await makeCorePutRequest(`${props.action.url}`, { ...props.payload, [props.field]: count })
     } catch (error) {
       showNotification({
         message: `A aparut o eroare. ${error?.message}`,
@@ -48,9 +48,6 @@ const PlusMinusNumberInput = (props: PlusMinusNumberInputProps) => {
       <IconButton onClick={decreaseValue} startIcon={<Remove />} variant="text" />
       <OutlinedInput type="number" value={count} onChange={changeCount} />
       <IconButton onClick={increaseValue} startIcon={<Add />} variant="text" />
-      {/* <input type="button" value="-" class="button-minus" data-field="quantity" />
-  <input type="number" step="1" max="" value="1" name="quantity" class="quantity-field" />
-  <input type="button" value="+" class="button-plus" data-field="quantity" /> */}
     </div>
   )
 }

@@ -4057,7 +4057,7 @@
       "responses": [
         {
           "uuid": "d68ee7d8-b802-4c0f-bb31-6548256c3662",
-          "body": "{\n    \"list\": [{\n        \"id\": 1,\n        \"title\": \"Combina frigorifica ARCTIC AK54305M30MT, 291 l, H 181.3 cm, Clasa F, argintiu\",\n        \"price\": 1499.90,\n        \"currency\": \"lei\",\n        \"quantity\": 1,\n        \"totalPrice\": 1499.90\n    }],\n    \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n    \"list\": [{\n        \"id\": 1,\n        \"product_title\": \"Combina frigorifica ARCTIC AK54305M30MT, 291 l, H 181.3 cm, Clasa F, argintiu\",\n        \"product_price\": 1499.90,\n        \"quantity\": 1\n    },\n    {\n        \"id\": 2,\n        \"product_title\": \"SUP TV MOB 10\\\"-26\\\" BWMT61TS\",\n        \"product_price\": 19.9,\n        \"quantity\": 3\n    }],\n    \"page\": {\n      \"pageSize\": 10,\n      \"page\": {{faker 'datatype.number'}},\n      \"totalCount\": {{faker 'datatype.number'}},\n      \"pageCount\": {{faker 'datatype.number'}}\n    },\n    \"summary\": {\n      \"price\": 1559.60\n    }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4667,6 +4667,34 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "a6e28b3c-db34-46fd-8ae9-c2137604388c",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "shoppingCart/:id",
+      "responses": [
+        {
+          "uuid": "0b46a08e-3084-4831-acbc-f76d0fa6f818",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4821,6 +4849,10 @@
     {
       "type": "route",
       "uuid": "2c783a8d-c095-4ea3-afb2-d911c56fc356"
+    },
+    {
+      "type": "route",
+      "uuid": "a6e28b3c-db34-46fd-8ae9-c2137604388c"
     }
   ],
   "proxyMode": false,

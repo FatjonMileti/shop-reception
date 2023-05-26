@@ -22,7 +22,8 @@ export const getRenderedColumns = columns =>
             return renderComponent({
               ...render,
               field: column.field,
-              count: get(row, column.field)
+              count: get(row, column.field),
+              payload: { id: row.id }
             })
           }
 

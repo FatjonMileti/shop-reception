@@ -2,10 +2,13 @@ import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import { Percent } from '@mui/icons-material'
-import { Button, Checkbox, DatePicker, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Checkbox, DatePicker, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { BarcodeScanner } from 'components/core-ui/BarcodeScanner'
+import { Button } from 'components/core-ui/Button'
 import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
+import { ContainerBox } from 'components/core-ui/ContainerBox'
+import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
 import { List } from 'components/core-ui/List'
@@ -27,14 +30,16 @@ export const Components = {
   // MUI icons
   Percent,
   // Carrefour lib components
-  Button,
   DatePicker,
   Typography,
   Checkbox,
   // Local components
   AsyncAutocomplete,
   BarcodeScanner,
+  Button,
   ComboBoxTable,
+  ContainerBox,
+  FloatingButton,
   Input,
   Link,
   List,

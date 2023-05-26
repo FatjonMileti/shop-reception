@@ -6,13 +6,14 @@ import { toTableRowItems } from 'utils/serializers'
 import { useNotification } from 'hooks'
 import { getRenderedColumns } from './helpers'
 import s from './List.modules.scss'
+import { ListActions } from './ListActions'
 
 const List = props => {
   const { action, columns, tableRowActions, ...rest } = props
 
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
-  const [totalCount, setTotalCount] = React.useState(0)
+  // const [totalCount, setTotalCount] = React.useState(0)
 
   const { showNotification } = useNotification()
 
@@ -28,7 +29,7 @@ const List = props => {
         response = await makeCoreGetRequest(url)
       }
       setItems(toTableRowItems(response.list, columns))
-      setTotalCount(response.page.totalCount)
+      // setTotalCount(response.page.totalCount)
     } catch (error) {
       showNotification({
         message: `Error while fetching list data. ${error.message}`,
@@ -43,25 +44,20 @@ const List = props => {
       <ListTable
         {...rest}
         columns={
-          // tableRowActions
-          //   ? renderedColumns.concat({
-          //       title: '',
-          //       field: 'actions',
-          //       align: 'right',
-          //       width: '112px',
-          //       collapsible: 'true',
-          //       render: row => (
-          //         <ListActions
-          //           itemId={row.id}
-          //           viewAction={tableRowActions.viewAction}
-          //           editAction={tableRowActions.editAction}
-          //           deleteAction={tableRowActions.deleteAction}
-          //           additionalAction={() => handleRemoteData()}
-          //         />
-          //       )
-          //     })
-          //   : renderedColumns
-          renderedColumns
+          tableRowActions
+            ? renderedColumns.concat({
+                field: 'actions',
+                width: '112px',
+                collapsible: 'true',
+                render: row => (
+                  <ListActions
+                    itemId={row.id}
+                    deleteAction={tableRowActions.deleteAction}
+                    additionalAction={() => handleRemoteData()}
+                  />
+                )
+              })
+            : renderedColumns
         }
         rows={items}
         handleRemoteData={handleRemoteData}
