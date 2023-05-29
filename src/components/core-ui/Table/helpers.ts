@@ -113,9 +113,9 @@ export const getTableQueryUrl = params =>
   )
 
 export const download = (url, filters) => {
+  // TODO use the downloadFile helper from utils
   const a = document.createElement('a')
   const href = filters.reduce((acc, filter) => `${acc}/${filter.value}`, url)
-  console.log(href)
   // TODO replace download url when BE is ready
   // a.href = href
   a.href =

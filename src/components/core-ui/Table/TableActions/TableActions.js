@@ -21,11 +21,7 @@ const TableActions = ({
     <div style={{ minWidth: '5rem' }}>
       {viewAction && canView && (
         <Button
-          onClick={() =>
-            navigate(viewAction.url, {
-              state: { pdfUrl: viewAction.pdfUrl.replace(':id', itemId) }
-            })
-          }
+          onClick={() => navigate(`${viewAction.url}/${itemId}`)}
           style={{ minWidth: '0.7rem' }}
         >
           <Description />

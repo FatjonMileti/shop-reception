@@ -1,24 +1,37 @@
 import * as React from 'react'
-import { pdfjs, Document, Page } from 'react-pdf';
-import { useLocation } from 'react-router-dom'
-import { makeCoreGetRequest } from 'utils/api';
+import { useParams, useNavigate } from 'react-router-dom'
+import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
-import 'react-pdf/dist/esm/Page/TextLayer.css';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import s from './PdfViewer.modules.scss'
 
-const PdfViewer = () => {
-  const location = useLocation()
-  const { pdfUrl } = location.state || {}
+import '!style-loader!css-loader!react-pdf/dist/esm/Page/TextLayer.css'
+import '!style-loader!css-loader!react-pdf/dist/esm/Page/AnnotationLayer.css'
+import { PdfViewerProps } from './PdfViewerDefinitions'
+import { PdfActions } from './PdfActions'
+import { PDFDocument } from './PDFDocument'
+import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
+import { Icon } from '../Icon'
 
-  const [pdfFile, setPdfFile] = React.useState(null)
+const PdfViewer = (props: PdfViewerProps) => {
+  const { action, actions } = props
+
+  const { id } = useParams()
+
+  const navigate = useNavigate()
+
+  const [proform, setProform] = React.useState(null)
+  // [~] from https://github.com/wojtekmaj/react-pdf#usage
+  const [numPages, setNumPages] = React.useState(null)
+  const [pageNumber, setPageNumber] = React.useState(1)
+  const [scale, setScale] = React.useState(1.0)
 
   const { showNotification } = useNotification()
 
   React.useEffect(() => {
     ;(async () => {
       try {
-        const result = await makeCoreGetRequest(pdfUrl, { responseType: 'arraybuffer' })
-        setPdfFile(result)
+        const proformResult = await makeCoreGetRequest(`${action.url}/${id}`)
+        setProform(proformResult)
       } catch (error) {
         showNotification({
           message: `A aparut o eroare la descarcarea fisierului. ${error?.message}`,
@@ -26,36 +39,41 @@ const PdfViewer = () => {
         })
       }
     })()
-  }, [])
+  }, [id])
 
-  // [~] from https://github.com/wojtekmaj/react-pdf#use-external-cdn
-  pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
-
-  // [~] from https://github.com/wojtekmaj/react-pdf#usage
-  const [numPages, setNumPages] = React.useState(null);
-  const [pageNumber, setPageNumber] = React.useState(1);
-
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
-
-  function onDocumentLoadError(error) {
-    showNotification({
-      message: `A aparut o eroare la afisarea fisierului. ${error?.message}`,
-      type: 'error'
-    })
+  const scanReceipt = () => {
+    navigate(`${actions.scanReceiptAction.href}/${id}`)
   }
 
   return (
     <div>
-      <Document file={{data: pdfFile}} onLoadSuccess={onDocumentLoadSuccess} onLoadError={onDocumentLoadError}>
-        <Page pageNumber={pageNumber} />
-      </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
+      <div className={s.scanReceiptContainer}>
+        {proform?.is_active && (<IconButton
+          onClick={scanReceipt}
+          label={actions.scanReceiptAction.label}
+          variant="contained"
+          endIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="white" />}
+        />)}
+      </div>
+      <div className={s.PDFViewer}>
+        <PdfActions
+          pageNumber={pageNumber}
+          numPages={numPages}
+          scale={scale}
+          setScale={setScale}
+          actions={actions}
+          id={id}
+        />
+        <PDFDocument
+          pageNumber={pageNumber}
+          scale={scale}
+          setNumPages={setNumPages}
+          id={id}
+          actions={actions}
+        />
+      </div>
     </div>
-  );
+  )
 }
 
 export default PdfViewer

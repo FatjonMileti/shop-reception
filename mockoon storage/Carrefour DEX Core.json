@@ -4494,7 +4494,7 @@
       "type": "http",
       "documentation": "Find proforma by id",
       "method": "get",
-      "endpoint": "proforma/:id",
+      "endpoint": "proformaPDF/:id",
       "responses": [
         {
           "uuid": "9d39b5a8-6485-490a-8a47-2b3027269386",
@@ -4695,6 +4695,34 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "124121c8-3ee9-4a7b-b0d1-7927ede88294",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "proforma/:id",
+      "responses": [
+        {
+          "uuid": "f7242bba-3c02-41cb-903b-157d1721d89b",
+          "body": "{\n  \"id\": 1,\n  \"is_active\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4837,6 +4865,10 @@
     {
       "type": "route",
       "uuid": "282a0ae1-97da-435f-83cf-8d78e2de2703"
+    },
+    {
+      "type": "route",
+      "uuid": "124121c8-3ee9-4a7b-b0d1-7927ede88294"
     },
     {
       "type": "route",

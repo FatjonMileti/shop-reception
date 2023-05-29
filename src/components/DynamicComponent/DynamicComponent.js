@@ -19,6 +19,7 @@ const DynamicComponent = props => {
   const { showNotification } = useNotification()
 
   const navigate = useNavigate()
+
   const goBack = () => {
     navigate(-1)
   }
