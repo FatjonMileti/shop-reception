@@ -15,6 +15,9 @@ const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
 
   useEffect(() => {
     ;(async () => {
+      if (id == undefined)
+        return
+
       try {
         const pdfResult = await makeCoreGetRequest(`${actions.downloadAction.url}/${id}`, {
           responseType: 'arraybuffer'
@@ -40,7 +43,7 @@ const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
     })
   }
 
-  return (
+  return (id ?
     <div className={s.PDFContainer}>
       <Document
         file={{ data: pdfFile }}
@@ -51,7 +54,7 @@ const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
         <Page pageNumber={pageNumber} scale={scale} loading={() => console.log('page loading')} />
       </Document>
     </div>
-  )
+  : <></>)
 }
 
 export default PDFDocument

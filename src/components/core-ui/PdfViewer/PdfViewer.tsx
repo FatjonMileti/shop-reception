@@ -29,6 +29,9 @@ const PdfViewer = (props: PdfViewerProps) => {
 
   React.useEffect(() => {
     ;(async () => {
+      if (id == undefined)
+        return
+        
       try {
         const proformResult = await makeCoreGetRequest(`${action.url}/${id}`)
         setProform(proformResult)
@@ -45,7 +48,8 @@ const PdfViewer = (props: PdfViewerProps) => {
     navigate(`${actions.scanReceiptAction.href}/${id}`)
   }
 
-  return (
+  // [~] on back from this page we get called with id=undefined by react...
+  return (id ?
     <div>
       <div className={s.scanReceiptContainer}>
         {proform?.is_active && (<IconButton
@@ -73,7 +77,7 @@ const PdfViewer = (props: PdfViewerProps) => {
         />
       </div>
     </div>
-  )
+  : <></>)
 }
 
 export default PdfViewer
