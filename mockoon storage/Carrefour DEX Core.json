@@ -4723,6 +4723,34 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "a2f8ffa6-4e2e-48c7-9e18-491e98d50063",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "client",
+      "responses": [
+        {
+          "uuid": "97be6dbc-4143-46b5-ba56-95167af18d43",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"Tudor Mihai\",\n\t\t\t\"cif\": \"1234\",\n\t\t\t\"address\": \"Magureni\",\n\t\t\t\"phone\": \"0788123456\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"SICHIM MIHAI\",\n\t\t\t\"cif\": \"789\",\n\t\t\t\"address\": \"PL\",\n\t\t\t\"phone\": \"0721123456\"\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4885,6 +4913,10 @@
     {
       "type": "route",
       "uuid": "a6e28b3c-db34-46fd-8ae9-c2137604388c"
+    },
+    {
+      "type": "route",
+      "uuid": "a2f8ffa6-4e2e-48c7-9e18-491e98d50063"
     }
   ],
   "proxyMode": false,

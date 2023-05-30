@@ -1,4 +1,4 @@
-import { Edit, Delete, Description } from '@mui/icons-material'
+import { Edit, Delete, Visibility } from '@mui/icons-material'
 import { ButtonWithModalAndForm } from '../../ButtonWithModalAndForm'
 import { ButtonWithConfirmDeleteModal } from '../../ButtonWithConfirmDeleteModal'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
@@ -24,7 +24,7 @@ const TableActions = ({
           onClick={() => navigate(`${viewAction.url}/${itemId}`)}
           style={{ minWidth: '0.7rem' }}
         >
-          <Description />
+          <Visibility />
         </Button>
       )}
       {editAction && canEdit && (

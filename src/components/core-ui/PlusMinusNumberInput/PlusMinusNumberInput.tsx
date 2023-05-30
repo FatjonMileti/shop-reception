@@ -16,9 +16,9 @@ const PlusMinusNumberInput = (props: PlusMinusNumberInputProps) => {
     setCount(props.count)
   }, [props.count])
 
-  const updateRemoteCount = async () => {
+  const updateRemoteCount = async value => {
     try {
-      await makeCorePutRequest(`${props.action.url}`, { ...props.payload, [props.field]: count })
+      await makeCorePutRequest(`${props.action.url}`, { ...props.payload, [props.field]: value })
     } catch (error) {
       showNotification({
         message: `A aparut o eroare. ${error?.message}`,
@@ -30,17 +30,19 @@ const PlusMinusNumberInput = (props: PlusMinusNumberInputProps) => {
   const changeCount = event => {
     const { value } = event.target
     setCount(value)
-    updateRemoteCount()
+    updateRemoteCount(value)
   }
 
   const increaseValue = () => {
-    setCount(count + 1)
-    updateRemoteCount()
+    const value = count + 1
+    setCount(value)
+    updateRemoteCount(value)
   }
 
   const decreaseValue = () => {
-    setCount(count - 1)
-    updateRemoteCount()
+    const value = count - 1
+    setCount(value)
+    updateRemoteCount(value)
   }
 
   return (

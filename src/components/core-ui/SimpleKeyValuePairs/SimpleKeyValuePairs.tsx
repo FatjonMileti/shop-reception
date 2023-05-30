@@ -9,8 +9,6 @@ const SimpleKeyValuePairs = ({ pairs, data }) => {
     [pairs, data]
   )
 
-  console.log(computedPairs)
-
   return (
     <div className={s.container}>
       {computedPairs.map((pair) => (

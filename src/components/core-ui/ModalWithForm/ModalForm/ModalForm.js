@@ -61,7 +61,7 @@ const ModalForm = ({
           const key = rest.payloadKey || name
           let value = get(editItem, name)
           if (value == '' && rest.type === 'date') {
-            value = null; // value=undefined => current date | value=null => input left blank
+            value = null // value=undefined => current date | value=null => input left blank
           }
 
           return (
@@ -97,8 +97,11 @@ const ModalForm = ({
             </Grid>
           )
         })}
-        <Grid item xs={12} style={{padding: "4px"}}/> {/* [~] so that we start counting grid columns again on a new line */}
-        {[...Array(12/gridSize - 1)].map((_,i) => (<Grid item key={i} xs={12} sm={gridSize}/>))}
+        <Grid item xs={12} style={{ padding: '4px' }} />{' '}
+        {/* [~] so that we start counting grid columns again on a new line */}
+        {[...Array(12 / gridSize - 1)].map((_, i) => (
+          <Grid item key={i} xs={12} sm={gridSize} />
+        ))}
         <Grid item xs={12} sm={gridSize} className={s.modalButtons}>
           {formButtons.map(formButton => {
             const { isSaveButton, ...rest } = formButton

@@ -1,6 +1,4 @@
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid'
+import { Box, Container, Grid } from '@mui/material'
 import { Percent } from '@mui/icons-material'
 import { Checkbox, DatePicker, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
@@ -12,6 +10,7 @@ import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
 import { List } from 'components/core-ui/List'
+import { PageForm } from 'components/core-ui/PageForm'
 import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { PlusMinusNumberInput } from 'components/core-ui/PlusMinusNumberInput'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
@@ -20,6 +19,8 @@ import { ProductTitle } from 'components/core-ui/ProductTitle'
 import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
 import { ShoppingCart } from 'components/core-ui/ShoppingCart'
 import { Table } from 'components/core-ui/Table'
+import { TableSearch } from 'components/core-ui/TableSearch'
+import { Tabs } from 'components/core-ui/Tabs'
 import { TitleText } from 'components/core-ui/TitleText'
 
 export const Components = {
@@ -43,6 +44,7 @@ export const Components = {
   Input,
   Link,
   List,
+  PageForm,
   PdfViewer,
   PlusMinusNumberInput,
   ProductStockInfo,
@@ -51,5 +53,7 @@ export const Components = {
   SimpleKeyValuePairs,
   ShoppingCart,
   Table,
+  TableSearch,
+  Tabs,
   TitleText
 }

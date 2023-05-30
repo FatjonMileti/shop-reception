@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
@@ -20,7 +22,16 @@ import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 
 const Table = props => {
-  const { action, columns, tableActions, tableRowActions, comboValue, tableFooter, ...rest } = props
+  const {
+    action,
+    columns,
+    tableActions,
+    tableRowActions,
+    comboValue,
+    tableFooter,
+    hasGeneralSearch,
+    ...rest
+  } = props
 
   let [searchParams] = useSearchParams()
 
@@ -41,7 +52,7 @@ const Table = props => {
     filters: []
   })
 
-  // console.log(tableState.filters)
+  const table = useSelector((state: RootState) => state.table)
 
   const { showNotification } = useNotification()
 
@@ -75,8 +86,6 @@ const Table = props => {
     () => tableFooter && renderTableFooter(tableFooter, summary),
     [tableFooter, summary]
   )
-
-  console.log(tableFooterComponent)
 
   useEffect(() => {
     if (!isInitialFetch) {
@@ -118,7 +127,9 @@ const Table = props => {
             page,
             rowsPerPage,
             order,
-            orderBy
+            orderBy,
+            hasGeneralSearch,
+            generalSearchText: table.searchText
           })
         )
       }
@@ -133,7 +144,9 @@ const Table = props => {
             searchText,
             searchFields: tableActions.searchAction?.searchFields,
             filters,
-            comboValue
+            comboValue,
+            hasGeneralSearch,
+            generalSearchText: table.searchText
           })
         )
       }
@@ -162,7 +175,7 @@ const Table = props => {
     }
   }
 
-  return (
+  return hasGeneralSearch && !table.searchText.length ? null : (
     <Box className={s.tableContainer}>
       {tableActions?.newAction && canCreate && (
         <ModalWithForm
@@ -185,7 +198,7 @@ const Table = props => {
       <GeneralTable
         {...rest}
         columns={
-          tableRowActions && (canEdit || canDelete)
+          tableRowActions && (canEdit || canDelete || canView)
             ? renderedColumns.concat({
                 title: '',
                 field: 'actions',

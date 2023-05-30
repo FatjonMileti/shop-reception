@@ -152,11 +152,11 @@ const ModalWithForm = ({
         >
           <Close />
         </IconButton>
-        {isLoading && (
-          <div style={{ display:'flex' }}>
-            <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
+        {(isLoading && (
+          <div style={{ display: 'flex' }}>
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
-        ) || (
+        )) || (
           <div>
             <ModalForm
               modalTitle={modalTitle}

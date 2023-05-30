@@ -2,15 +2,15 @@ import * as React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
-import s from './PdfViewer.modules.scss'
-
-import '!style-loader!css-loader!react-pdf/dist/esm/Page/TextLayer.css'
-import '!style-loader!css-loader!react-pdf/dist/esm/Page/AnnotationLayer.css'
 import { PdfViewerProps } from './PdfViewerDefinitions'
 import { PdfActions } from './PdfActions'
 import { PDFDocument } from './PDFDocument'
 import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from '../Icon'
+import s from './PdfViewer.modules.scss'
+
+import '!style-loader!css-loader!react-pdf/dist/esm/Page/TextLayer.css'
+import '!style-loader!css-loader!react-pdf/dist/esm/Page/AnnotationLayer.css'
 
 const PdfViewer = (props: PdfViewerProps) => {
   const { action, actions } = props

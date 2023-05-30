@@ -43,26 +43,28 @@ const DynamicComponent = props => {
     })()
   }, [props.activityId, props.screenId])
 
-  return isLoadingSchema && (
-    <div style={{ display:'flex' }}>
-      <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
-    </div>
-  ) || (
-    <div>
-      <Box className={s.moduleHeader}>
-        <div className={sd.backHolder}>
-          <IconButton className={sd.back} onClick={goBack}>
-            <ArrowBackIosNewOutlined />
-          </IconButton>
+  return (
+    (isLoadingSchema && (
+      <div style={{ display: 'flex' }}>
+        <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+      </div>
+    )) || (
+      <div>
+        <Box className={s.moduleHeader}>
+          <div className={sd.backHolder}>
+            <IconButton className={sd.back} onClick={goBack}>
+              <ArrowBackIosNewOutlined />
+            </IconButton>
 
-          <Typography variant="medium">
-            <span className={sd.backTitle}>{screen?.name || props.name || ''}</span>
-          </Typography>
-        </div>
-      </Box>
+            <Typography variant="medium">
+              <span className={sd.backTitle}>{screen?.name || props.name || ''}</span>
+            </Typography>
+          </div>
+        </Box>
 
-      {JSONSchema ? renderComponent(JSONSchema) : ''}
-    </div>
+        {JSONSchema ? renderComponent(JSONSchema) : ''}
+      </div>
+    )
   )
 }
 

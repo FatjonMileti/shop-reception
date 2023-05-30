@@ -1,0 +1,41 @@
+.searchContainer {
+  padding: 16px;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 173px;
+
+  @media (max-width: 624px) {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+}
+
+.buttonContainer {
+  margin-left: 16px;
+
+  @media (max-width: 624px) {
+    margin-left: 0px;
+  }
+
+  button {
+    line-height: 20px;
+    font-family: "Ubuntu";
+    font-style: normal;
+    font-weight: 500;
+    flex: 1;
+    height: 42px;
+    margin-top: 4px;
+  }
+}
+
+.searchInputContainer {
+  line-height: 50px;
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+}

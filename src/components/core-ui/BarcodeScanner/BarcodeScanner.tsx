@@ -59,12 +59,6 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
     }
   }, [])
 
-  // React.useEffect(() => {
-  //   return () => {
-  //     dispatch(ProductActions.clearProduct())
-  //   }
-  // }, [])
-
   return (
     <Paper className={s.scanContainer}>
       <div className={s.scannerControls}>
