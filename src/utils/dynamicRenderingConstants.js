@@ -11,6 +11,7 @@ import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
 import { List } from 'components/core-ui/List'
 import { PageForm } from 'components/core-ui/PageForm'
+import { PageFormRadio } from 'components/core-ui/PageFormRadio'
 import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { PlusMinusNumberInput } from 'components/core-ui/PlusMinusNumberInput'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
@@ -45,6 +46,7 @@ export const Components = {
   Link,
   List,
   PageForm,
+  PageFormRadio,
   PdfViewer,
   PlusMinusNumberInput,
   ProductStockInfo,

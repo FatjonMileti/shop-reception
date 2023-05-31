@@ -6,15 +6,21 @@ import { formatPayloadDate } from 'utils/helpers'
 import { toItemPayload } from 'utils/serializers'
 import { makeCorePostRequest, makeCorePutRequest, makeCorePatchRequest } from 'utils/api'
 import { useNotification } from 'hooks'
+import cn from 'classnames'
+import { Box } from '@mui/material'
+import s from './PageForm.modules.scss'
 
 const PageForm = props => {
-  const { formItems, formInfoItems, gridSize, formButtons, formAction, ...rest } = props
+  const { formItems, formInfoItems, formButtons, formAction, formItemsPerRow, visible, ...rest } =
+    props
 
   const [isLoading, setIsLoading] = useState(true)
 
   const [editItem, setEditItem] = useImmer({})
 
   const { showNotification } = useNotification()
+
+  const gridSize = 12 / formItemsPerRow
 
   const handleInputChange = (value, name, type) => {
     setEditItem(draft => {
@@ -61,18 +67,20 @@ const PageForm = props => {
   const resetForm = () => {}
 
   return (
-    <ModalForm
-      modalTitle="Adauga client nou"
-      formItems={formItems}
-      formInfoItems={formInfoItems}
-      gridSize={gridSize}
-      handleInputChange={handleInputChange}
-      editItem={editItem}
-      formButtons={formButtons}
-      saveData={saveData}
-      closeModal={resetForm}
-      comboValue={null}
-    />
+    <Box className={cn({ [s.hidden]: !visible })}>
+      <ModalForm
+        modalTitle=""
+        formItems={formItems}
+        formInfoItems={formInfoItems}
+        gridSize={gridSize}
+        handleInputChange={handleInputChange}
+        editItem={editItem}
+        formButtons={formButtons}
+        saveData={saveData}
+        closeModal={resetForm}
+        comboValue={null}
+      />
+    </Box>
   )
 }
 
