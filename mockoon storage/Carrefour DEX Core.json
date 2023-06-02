@@ -4751,6 +4751,118 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "7644dd77-c864-47e2-a78c-0a39a1ad7e5d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "county",
+      "responses": [
+        {
+          "uuid": "8851d4fc-1e23-481a-93ee-ff780c4b1994",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"code\": \"AB\",\n\t\t\t\"name\": \"Alba\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"code\": \"AR\",\n\t\t\t\"name\": \"Arad\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 3,\n\t\t\t\"code\": \"AG\",\n\t\t\t\"name\": \"Arges\"\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "ec0cf8e7-afca-4f19-91a1-f6576eaa95f5",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "city",
+      "responses": [
+        {
+          "uuid": "babde5d0-abdc-4213-8cf7-d98ce5980fe0",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"Abrud\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"Abrud-Sat\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 3,\n\t\t\t\"name\": \"Achimețești\"\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "3606d94d-2550-43e2-8fbf-06921b85ebda",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "client",
+      "responses": [
+        {
+          "uuid": "b031c86d-6447-4511-92b8-0285dd155b4b",
+          "body": "{\n  \"id\": 99999999268,\n  \"address\": \"Address\",\n  \"bank\": \"BT\",\n  \"bank_account\": \"123\",\n  \"cif\": \"99999999268\",\n  \"city\": \"Municipiul Bucuresti\",\n  \"county\": \"Bucuresti\",\n  \"email\": \"paula.dan@fullscreendigital.ro\",\n  \"name\": \"Paula Dan\",\n  \"phone\": \"123\",\n  \"trade_register\": null,\n  \"type\": \"Individual\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "b8ee315f-ec4c-42f9-9b93-dbbd8f27da8b",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "client/:id",
+      "responses": [
+        {
+          "uuid": "f8c400d2-4d3e-49d2-b735-ffa2cb7b7e52",
+          "body": "{\n  \"id\": 99999999268,\n  \"address\": \"Address\",\n  \"bank\": \"BT\",\n  \"bank_account\": \"123\",\n  \"cif\": \"99999999268\",\n  \"city\": \"Municipiul Bucuresti\",\n  \"county\": \"Bucuresti\",\n  \"email\": \"paula.dan@fullscreendigital.ro\",\n  \"name\": \"Paula Dan\",\n  \"phone\": \"123\",\n  \"trade_register\": null,\n  \"type\": \"Individual\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4917,6 +5029,22 @@
     {
       "type": "route",
       "uuid": "a2f8ffa6-4e2e-48c7-9e18-491e98d50063"
+    },
+    {
+      "type": "route",
+      "uuid": "7644dd77-c864-47e2-a78c-0a39a1ad7e5d"
+    },
+    {
+      "type": "route",
+      "uuid": "ec0cf8e7-afca-4f19-91a1-f6576eaa95f5"
+    },
+    {
+      "type": "route",
+      "uuid": "3606d94d-2550-43e2-8fbf-06921b85ebda"
+    },
+    {
+      "type": "route",
+      "uuid": "b8ee315f-ec4c-42f9-9b93-dbbd8f27da8b"
     }
   ],
   "proxyMode": false,

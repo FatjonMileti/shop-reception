@@ -57,11 +57,20 @@ const ModalForm = ({
           </Grid>
         )}
         {processedFormItems.map(formItem => {
-          const { UIComponent, name, formItemsPerRow, ...rest } = formItem
+          const { UIComponent, name, formItemsPerRow, type, ...rest } = formItem
           const key = rest.payloadKey || name
-          let value = get(editItem, name)
-          if (value == '' && rest.type === 'date') {
-            value = null // value=undefined => current date | value=null => input left blank
+          let value
+
+          if (type === 'countyCitySelect') {
+            value = {
+              county: get(editItem, rest.county.name),
+              city: get(editItem, rest.city.name)
+            }
+          } else {
+            value = get(editItem, name)
+            if (value == '' && type === 'date') {
+              value = null // value=undefined => current date | value=null => input left blank
+            }
           }
 
           return (
@@ -73,23 +82,28 @@ const ModalForm = ({
             >
               {createElement(Components[UIComponent], {
                 ...rest,
+                type,
                 value,
                 comboValue,
-                ...(rest.type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
-                onChange: arg => {
-                  switch (rest.type) {
+                ...(type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
+                onChange: (arg, variable) => {
+                  switch (type) {
                     case 'date':
-                      handleInputChange(arg, name, rest.type)
+                      handleInputChange(arg, name, type)
                       break
                     case 'checkbox':
-                      handleInputChange(arg.target.checked, key, rest.type)
+                      handleInputChange(arg.target.checked, key, type)
                       break
                     case 'autocomplete':
-                      handleInputChange(arg?.value, key, rest.type)
-                      handleInputChange(arg?.label, name, rest.type)
+                      handleInputChange(arg?.value, key, type)
+                      handleInputChange(arg?.label, name, type)
+                      break
+                    case 'countyCitySelect':
+                      handleInputChange(arg?.value, rest[variable].name, type)
+                      handleInputChange(arg?.label, rest[variable].name, type)
                       break
                     default:
-                      handleInputChange(arg.target.value, key, rest.type)
+                      handleInputChange(arg.target.value, key, type)
                       break
                   }
                 }

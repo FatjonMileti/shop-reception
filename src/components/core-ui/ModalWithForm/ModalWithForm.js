@@ -74,6 +74,19 @@ const ModalWithForm = ({
     }
   }, [isModalOpen, editedItemId, formItems, editedItemUrl, setEditItem])
 
+  useEffect(() => {
+    const hiddenItems = formItems.filter(item => item.type === 'hidden')
+
+    if (hiddenItems.length) {
+      hiddenItems.map(item => {
+        const { name, type, value } = item
+        setEditItem(draft => {
+          set(draft, name, type === 'date' ? formatPayloadDate(value) : value)
+        })
+      })
+    }
+  }, [formItems])
+
   const modalWidth = useMemo(() => getModalWidth(formItemsPerRow), [formItemsPerRow])
 
   const gridSize = useMemo(() => getGridSize(formItemsPerRow), [formItemsPerRow])

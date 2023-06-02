@@ -3,9 +3,10 @@ import { RadioButtonGroup } from '@fullscreendigital/carrefour-dex-fe'
 import { Paper } from '@mui/material'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import s from './PageFormRadio.modules.scss'
+import { PageFormRadioProps } from './PageFormRadioDefinitions'
 
-const PageFormRadio = props => {
-  const { defaultValue, forms, options, ...rest } = props
+const PageFormRadio = (props: PageFormRadioProps) => {
+  const { defaultValue, forms, options } = props
 
   const [value, setValue] = useState(null)
 

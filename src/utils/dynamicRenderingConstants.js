@@ -6,6 +6,7 @@ import { BarcodeScanner } from 'components/core-ui/BarcodeScanner'
 import { Button } from 'components/core-ui/Button'
 import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
 import { ContainerBox } from 'components/core-ui/ContainerBox'
+import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
@@ -41,6 +42,7 @@ export const Components = {
   Button,
   ComboBoxTable,
   ContainerBox,
+  CountyCitySelect,
   FloatingButton,
   Input,
   Link,

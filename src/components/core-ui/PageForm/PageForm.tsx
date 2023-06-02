@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useImmer } from 'use-immer'
 import { set } from 'lodash'
 import { ModalForm } from '../ModalWithForm/ModalForm'
@@ -11,16 +12,35 @@ import { Box } from '@mui/material'
 import s from './PageForm.modules.scss'
 
 const PageForm = props => {
-  const { formItems, formInfoItems, formButtons, formAction, formItemsPerRow, visible, ...rest } =
+  const { formItems, formInfoItems, formButtons, formAction, formItemsPerRow, visible, href } =
     props
 
   const [isLoading, setIsLoading] = useState(true)
 
   const [editItem, setEditItem] = useImmer({})
 
+  const navigate = useNavigate()
+
   const { showNotification } = useNotification()
 
   const gridSize = 12 / formItemsPerRow
+
+  const setInitialItems = useCallback(async () => {
+    const hiddenItems = formItems.filter(item => item.type === 'hidden')
+
+    if (hiddenItems.length) {
+      hiddenItems.map(item => {
+        const { name, type, value } = item
+        setEditItem(draft => {
+          set(draft, name, type === 'date' ? formatPayloadDate(value) : value)
+        })
+      })
+    }
+  }, [formItems])
+
+  useEffect(() => {
+    setInitialItems()
+  }, [setInitialItems])
 
   const handleInputChange = (value, name, type) => {
     setEditItem(draft => {
@@ -32,26 +52,33 @@ const PageForm = props => {
     setIsLoading(true)
     try {
       const payload = toItemPayload(editItem)
+      let response
       if (formAction.type === 'POST') {
-        await makeCorePostRequest(`${formAction.url}`, payload)
+        response = await makeCorePostRequest(`${formAction.url}`, payload)
         showNotification({
           message: 'Item created successfully',
           type: 'success'
         })
       }
       if (formAction.type === 'PUT') {
-        await makeCorePutRequest(`${formAction.url}`, payload)
+        response = await makeCorePutRequest(`${formAction.url}`, payload)
         showNotification({
           message: 'Item saved successfully',
           type: 'success'
         })
       }
       if (formAction.type === 'PATCH') {
-        await makeCorePatchRequest(`${formAction.url}`, payload)
+        response = await makeCorePatchRequest(`${formAction.url}`, payload)
         showNotification({
           message: 'Item saved successfully',
           type: 'success'
         })
+      }
+
+      setIsLoading(false)
+
+      if (href) {
+        navigate(`${href}/${response.id}`)
       }
     } catch (error) {
       showNotification({
@@ -59,12 +86,12 @@ const PageForm = props => {
         type: 'error'
       })
     }
-    // additionalAction && additionalAction()
-    // closeModalAndResetForm()
-    setIsLoading(false)
   }
 
-  const resetForm = () => {}
+  const resetForm = () => {
+    setEditItem({})
+    setInitialItems()
+  }
 
   return (
     <Box className={cn({ [s.hidden]: !visible })}>
