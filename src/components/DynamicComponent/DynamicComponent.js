@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { makeDesignerGetRequest } from 'utils/api'
-import { useNotification } from 'hooks'
+import { useDataStore, useNotification } from 'hooks'
 import s from './DynamicComponent.scss'
 import sd from '../ServiceDomain/ServiceDomain.scss'
 
@@ -15,6 +15,8 @@ const DynamicComponent = props => {
 
   const [JSONSchema, setJSONSchema] = useState(null)
   const [screen, setScreen] = useState(null)
+
+  const { restore } = useDataStore()
 
   const { showNotification } = useNotification()
 
@@ -62,7 +64,7 @@ const DynamicComponent = props => {
           </div>
         </Box>
 
-        {JSONSchema ? renderComponent(JSONSchema) : ''}
+        {JSONSchema ? renderComponent(restore(JSONSchema)) : ''}
       </div>
     )
   )

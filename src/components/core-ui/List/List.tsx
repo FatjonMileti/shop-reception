@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import { ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableRowItems } from 'utils/serializers'
-import { useNotification } from 'hooks'
+import { useDataStore, useNotification } from 'hooks'
 import { getRenderedColumns } from './helpers'
 import s from './List.modules.scss'
 import { ListActions } from './ListActions'
@@ -16,6 +16,7 @@ const List = props => {
   // const [totalCount, setTotalCount] = React.useState(0)
 
   const { showNotification } = useNotification()
+  const { storeData } = useDataStore()
 
   const renderedColumns = React.useMemo(() => getRenderedColumns(columns), [columns])
 
@@ -28,8 +29,13 @@ const List = props => {
       if (action.type === 'GET') {
         response = await makeCoreGetRequest(url)
       }
+      // console.log("got ", response)
       setItems(toTableRowItems(response.list, columns))
       // setTotalCount(response.page.totalCount)
+      if (action.storeIn) {
+        storeData(action.storeIn, response) // [~] if we store the response first, then this 'response' variable becomes read-only and the following toTableRowItems throws an error
+        // console.log("stored in ", action.storeIn)
+      }
     } catch (error) {
       showNotification({
         message: `Error while fetching list data. ${error.message}`,

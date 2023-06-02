@@ -4057,11 +4057,16 @@
       "responses": [
         {
           "uuid": "d68ee7d8-b802-4c0f-bb31-6548256c3662",
-          "body": "{\n    \"list\": [{\n        \"id\": 1,\n        \"product_title\": \"Combina frigorifica ARCTIC AK54305M30MT, 291 l, H 181.3 cm, Clasa F, argintiu\",\n        \"product_price\": 1499.90,\n        \"quantity\": 1\n    },\n    {\n        \"id\": 2,\n        \"product_title\": \"SUP TV MOB 10\\\"-26\\\" BWMT61TS\",\n        \"product_price\": 19.9,\n        \"quantity\": 3\n    }],\n    \"page\": {\n      \"pageSize\": 10,\n      \"page\": {{faker 'datatype.number'}},\n      \"totalCount\": {{faker 'datatype.number'}},\n      \"pageCount\": {{faker 'datatype.number'}}\n    },\n    \"summary\": {\n      \"price\": 1559.60\n    }\n}",
+          "body": "{\n    \"list\": [{\n        \"id\": 1,\n        \"product_title\": \"Combina frigorifica ARCTIC AK54305M30MT, 291 l, H 181.3 cm, Clasa F, argintiu\",\n        \"product_price\": 1499.90,\n        \"quantity\": 1\n    },\n    {\n        \"id\": 2,\n        \"product_title\": \"SUP TV MOB 10\\\"-26\\\" BWMT61TS\",\n        \"product_price\": 19.9,\n        \"quantity\": 3\n    }],\n    \"page\": {\n      \"pageSize\": 10,\n      \"page\": {{faker 'datatype.number'}},\n      \"totalCount\": {{faker 'datatype.number'}},\n      \"pageCount\": {{faker 'datatype.number'}}\n    },\n    \"summary\": {\n      \"price\": 1559.60,\n      \"itemCount\": 2\n    }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
-          "headers": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
