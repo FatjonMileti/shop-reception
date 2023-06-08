@@ -3,6 +3,7 @@ export type Action = {
   type: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
   valueKey?: string
   labelKey?: string
+  storeIn?: string
 }
 
 export interface SelectOption {

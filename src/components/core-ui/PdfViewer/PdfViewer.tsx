@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { makeCoreGetRequest } from 'utils/api'
-import { useNotification } from 'hooks'
+import { useDataStore, useNotification } from 'hooks'
 import { PdfViewerProps } from './PdfViewerDefinitions'
 import { PdfActions } from './PdfActions'
 import { PDFDocument } from './PDFDocument'
@@ -26,6 +26,7 @@ const PdfViewer = (props: PdfViewerProps) => {
   const [scale, setScale] = React.useState(1.0)
 
   const { showNotification } = useNotification()
+  const { storeData } = useDataStore()
 
   React.useEffect(() => {
     ;(async () => {
@@ -35,6 +36,10 @@ const PdfViewer = (props: PdfViewerProps) => {
       try {
         const proformResult = await makeCoreGetRequest(`${action.url}/${id}`)
         setProform(proformResult)
+        if (action.storeIn) {
+          storeData(action.storeIn, proformResult) // [~] if we store the response first, then this 'response' variable becomes read-only and the following toTableRowItems throws an error
+          // console.log("stored in ", action.storeIn)
+        }  
       } catch (error) {
         showNotification({
           message: `A aparut o eroare la descarcarea fisierului. ${error?.message}`,

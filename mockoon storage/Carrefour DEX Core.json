@@ -4710,11 +4710,16 @@
       "responses": [
         {
           "uuid": "f7242bba-3c02-41cb-903b-157d1721d89b",
-          "body": "{\n  \"id\": 1,\n  \"is_active\": true\n}",
+          "body": "{\n  \"id\": 1,\n  \"name\": 4637,\n  \"is_active\": true\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
-          "headers": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
