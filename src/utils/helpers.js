@@ -56,3 +56,5 @@ export const downloadFile = url => {
   a.click()
   document.body.removeChild(a)
 }
+
+export const delay = ms => new Promise(res => setTimeout(res, ms))

@@ -1,24 +1,30 @@
 import axios from 'axios'
-import { URLS } from 'utils/constants'
-import { getToken, logout } from './authService'
-import { isTokenExpired } from './jwtHelper'
+import { getToken, setTokenInConfig } from './authService'
+import { delay } from './helpers'
 
 axios.interceptors.request.use(
-  config => {
-    const token = getToken()
+  async config => {
+    let token = getToken()
 
-    if (!config.headers.Authorization) {
+    if (!token) {
+      console.log('no token yet!!!!!!!!')
+      await delay(2000)
+      token = getToken()
+      setTokenInConfig(token, config)
+
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+        return config
+      } else {
+        console.log('still no token yet!!!!!!!!')
+        await delay(10000)
+        token = getToken()
+        setTokenInConfig(token, config)
+        return config
       }
+    } else {
+      setTokenInConfig(token, config)
+      return config
     }
-
-    if (isTokenExpired(token)) {
-      // TODO: what should be done here? We shouldn't get into this situation as the oidc-client should handle this
-      console.log('token expired????????????')
-    }
-
-    return config
   },
   error => Promise.reject(error)
 )
