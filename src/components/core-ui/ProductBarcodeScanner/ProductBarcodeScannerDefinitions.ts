@@ -1,6 +1,6 @@
 import { Action } from 'components/utils/definitions/Definitions'
 
-export interface BarecodeScannerProps {
+export interface ProductBarcodeScannerProps {
   action: Action
 }
 

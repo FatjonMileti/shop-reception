@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ProductStock } from 'components/core-ui/BarcodeScanner/BarcodeScannerDefinitions'
+import { ProductStock } from 'components/core-ui/ProductBarcodeScanner/ProductBarcodeScannerDefinitions'
 
 export interface ProductState {
   code?: string

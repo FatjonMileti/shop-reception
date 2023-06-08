@@ -2,7 +2,7 @@ import { Box, Container } from '@mui/material'
 import { Percent } from '@mui/icons-material'
 import { Checkbox, DatePicker, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { BarcodeScanner } from 'components/core-ui/BarcodeScanner'
+import { ProductBarcodeScanner } from 'components/core-ui/ProductBarcodeScanner'
 import { Button } from 'components/core-ui/Button'
 import { Card } from 'components/core-ui/Card'
 import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
@@ -41,7 +41,6 @@ export const Components = {
   Checkbox,
   // Local components
   AsyncAutocomplete,
-  BarcodeScanner,
   Button,
   Card,
   ComboBoxTable,
@@ -58,6 +57,7 @@ export const Components = {
   PageInfo,
   PdfViewer,
   PlusMinusNumberInput,
+  ProductBarcodeScanner,
   ProductStockInfo,
   ProductTabs,
   ProductTitle,

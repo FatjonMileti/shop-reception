@@ -7,12 +7,12 @@ import { useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
 import { makeCoreGetRequest } from 'utils/api'
-import { BarecodeScannerProps, ProductStockResponse } from './BarcodeScannerDefinitions'
+import { ProductBarcodeScannerProps, ProductStockResponse } from './ProductBarcodeScannerDefinitions'
 import { ProductActions } from 'reducers/productSlice'
-import s from './BarcodeScanner.modules.scss'
+import s from './ProductBarcodeScanner.modules.scss'
 import { toProduct } from './serializers'
 
-const BarcodeScanner = (props: BarecodeScannerProps) => {
+const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
 
   const [code, setCode] = React.useState('')
@@ -104,4 +104,4 @@ const BarcodeScanner = (props: BarecodeScannerProps) => {
   )
 }
 
-export default BarcodeScanner
+export default ProductBarcodeScanner
