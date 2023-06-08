@@ -46,3 +46,5 @@ export const getItemDefaultsAsArray = formItems => {
 
 export const isAllowed = (allowedRoles, currentUserRoles) =>
   allowedRoles && currentUserRoles.some(r => allowedRoles.includes(r))
+
+export const delay = ms => new Promise(res => setTimeout(res, ms))
