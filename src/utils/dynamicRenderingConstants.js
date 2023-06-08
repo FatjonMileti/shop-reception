@@ -9,12 +9,14 @@ import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
 import { ContainerBox } from 'components/core-ui/ContainerBox'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
+import { FormItemCheckbox } from 'components/core-ui/FormItemCheckbox'
 import { Grid } from 'components/core-ui/Grid'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
 import { List } from 'components/core-ui/List'
 import { PageForm } from 'components/core-ui/PageForm'
 import { PageFormRadio } from 'components/core-ui/PageFormRadio'
+import { PageInfo } from 'components/core-ui/PageInfo'
 import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { PlusMinusNumberInput } from 'components/core-ui/PlusMinusNumberInput'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
@@ -46,12 +48,14 @@ export const Components = {
   ContainerBox,
   CountyCitySelect,
   FloatingButton,
+  FormItemCheckbox,
   Grid,
   Input,
   Link,
   List,
   PageForm,
   PageFormRadio,
+  PageInfo,
   PdfViewer,
   PlusMinusNumberInput,
   ProductStockInfo,

@@ -1,12 +1,11 @@
-import { createElement, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { Components } from 'utils/dynamicRenderingConstants'
 import { start } from 'utils/rulesService'
-import { getGridSize } from '../helpers'
 import { ModalInfo } from './ModalInfo'
-import { get } from 'lodash'
 import { useNotification } from 'hooks'
+import { FormItem } from './FormItem'
+import { isEmpty } from 'lodash'
 import s from './ModalForm.scss'
 
 const ModalForm = ({
@@ -28,7 +27,7 @@ const ModalForm = ({
   useEffect(() => {
     ;(async () => {
       try {
-        if (formItems.some(item => item.dependencies?.conditions)) {
+        if (formItems.some(item => item.dependencies?.conditions) && !isEmpty(editItem)) {
           const result = await start(formItems, editItem)
           setProcessedFormItems(result)
         }
@@ -58,57 +57,20 @@ const ModalForm = ({
         )}
         {processedFormItems.map(formItem => {
           const { UIComponent, name, formItemsPerRow, type, ...rest } = formItem
-          const key = rest.payloadKey || name
-          let value
-
-          if (type === 'countyCitySelect') {
-            value = {
-              county: get(editItem, rest.county.name),
-              city: get(editItem, rest.city.name)
-            }
-          } else {
-            value = get(editItem, name)
-            if (value == '' && type === 'date') {
-              value = null // value=undefined => current date | value=null => input left blank
-            }
-          }
 
           return (
-            <Grid
-              item
-              key={formItem.name}
-              xs={12}
-              sm={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}
-            >
-              {createElement(Components[UIComponent], {
-                ...rest,
-                type,
-                value,
-                comboValue,
-                ...(type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
-                onChange: (arg, variable) => {
-                  switch (type) {
-                    case 'date':
-                      handleInputChange(arg, name, type)
-                      break
-                    case 'checkbox':
-                      handleInputChange(arg.target.checked, key, type)
-                      break
-                    case 'autocomplete':
-                      handleInputChange(arg?.value, key, type)
-                      handleInputChange(arg?.label, name, type)
-                      break
-                    case 'countyCitySelect':
-                      handleInputChange(arg?.value, rest[variable].name, type)
-                      handleInputChange(arg?.label, rest[variable].name, type)
-                      break
-                    default:
-                      handleInputChange(arg.target.value, key, type)
-                      break
-                  }
-                }
-              })}
-            </Grid>
+            <FormItem
+              key={name}
+              name={name}
+              type={type}
+              editItem={editItem}
+              UIComponent={UIComponent}
+              formItemsPerRow={formItemsPerRow}
+              rest={rest}
+              handleInputChange={handleInputChange}
+              comboValue={comboValue}
+              gridSize={gridSize}
+            />
           )
         })}
         <Grid item xs={12} style={{ padding: '4px' }} />{' '}

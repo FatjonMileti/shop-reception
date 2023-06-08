@@ -36,13 +36,15 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
 
   useEffect(() => {
     setCities([])
-    if (value.county) {
+    if (value.county?.value) {
       ;(async () => {
         try {
           const { action } = city
           const { url, valueKey, labelKey } = action
 
-          const result = await makeCoreGetRequest(`${url}?page=-1&filterBy=countyId&filterValue=${value.county.value}`)
+          const result = await makeCoreGetRequest(
+            `${url}?page=-1&filterBy=countyId&filterValue=${value.county.value}`
+          )
 
           setCities(toAsyncSelectOptions(result.list, valueKey, labelKey))
         } catch (error) {
@@ -53,7 +55,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
         }
       })()
     }
-  }, [value.county])
+  }, [value.county?.value])
 
   return (
     <Grid container spacing={4}>
@@ -72,7 +74,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
             setCountiesOpen(false)
           }}
           loading={countiesOpen && counties.length === 0}
-          value={value.county ?? { label: '', value: '' }}
+          value={value.county?.value ? value.county : { label: '', value: '' }}
           onChange={(_, newValue) => onChange(newValue, 'county')}
         />
       </Grid>
@@ -91,7 +93,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
             setCitiesOpen(false)
           }}
           loading={citiesOpen && cities.length === 0}
-          value={value.city ?? { label: '', value: '' }}
+          value={value.city?.value ? value.city : { label: '', value: '' }}
           onChange={(_, newValue) => onChange(newValue, 'city')}
         />
       </Grid>

@@ -10,7 +10,7 @@ const Card = (props: CardProps) => {
   return (
     <GeneralCard>
       <CardHeader avatar={<Icon iconName={icon} tiny />} title={title} className={s.cardTitle} />
-      <CardContent>card content</CardContent>
+      <CardContent>{renderComponent(content)}</CardContent>
     </GeneralCard>
   )
 }

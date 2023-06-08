@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { useImmer } from 'use-immer'
 import { set } from 'lodash'
 import { ModalForm } from '../ModalWithForm/ModalForm'
-import { formatPayloadDate } from 'utils/helpers'
 import { toItemPayload } from 'utils/serializers'
 import { makeCorePostRequest, makeCorePutRequest, makeCorePatchRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import cn from 'classnames'
 import { Box } from '@mui/material'
 import s from './PageForm.modules.scss'
+import { getItemDefaults } from 'utils/helpers'
 
 const PageForm = props => {
   const { formItems, formInfoItems, formButtons, formAction, formItemsPerRow, visible, href } =
@@ -26,13 +26,15 @@ const PageForm = props => {
   const gridSize = 12 / formItemsPerRow
 
   const setInitialItems = useCallback(async () => {
+    setEditItem(getItemDefaults(formItems))
+
     const hiddenItems = formItems.filter(item => item.type === 'hidden')
 
     if (hiddenItems.length) {
       hiddenItems.map(item => {
         const { name, type, value } = item
         setEditItem(draft => {
-          set(draft, name, type === 'date' ? formatPayloadDate(value) : value)
+          set(draft, name, value)
         })
       })
     }
@@ -44,7 +46,7 @@ const PageForm = props => {
 
   const handleInputChange = (value, name, type) => {
     setEditItem(draft => {
-      set(draft, name, type === 'date' ? formatPayloadDate(value) : value)
+      set(draft, name, value)
     })
   }
 

@@ -27,6 +27,7 @@ const DynamicComponent = props => {
   }
 
   useEffect(() => {
+    setIsLoadingSchema(true)
     ;(async () => {
       try {
         const result = await makeDesignerGetRequest(

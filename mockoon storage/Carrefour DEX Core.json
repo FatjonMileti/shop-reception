@@ -4868,6 +4868,34 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "24120d8f-e165-400d-9762-a35d78d0300f",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "paymentMethods",
+      "responses": [
+        {
+          "uuid": "d5d07238-21af-4f90-b769-718a59683f14",
+          "body": "[\n  {\n    \"key\": \"CASH\",\n    \"value\": \"Numerar\"\n  },\n  {\n    \"key\": \"CREDIT_CARD\",\n    \"value\": \"Card de credit\"\n  },\n  {\n    \"key\": \"CARREFOUR_CARD\",\n    \"value\": \"Card Carrefour\"\n  },\n  {\n    \"key\": \"PAYMENT_ORDER\",\n    \"value\": \"Ordin de plata\"\n  },\n  {\n    \"key\": \"BANK_CREDIT\",\n    \"value\": \"Credit bancar\"\n  },\n  {\n    \"key\": \"TREASURY_ORDER\",\n    \"value\": \"Ordin de plata trezorerie\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5050,6 +5078,10 @@
     {
       "type": "route",
       "uuid": "b8ee315f-ec4c-42f9-9b93-dbbd8f27da8b"
+    },
+    {
+      "type": "route",
+      "uuid": "24120d8f-e165-400d-9762-a35d78d0300f"
     }
   ],
   "proxyMode": false,
