@@ -10,6 +10,7 @@ import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getRenderedColumns, convertFilterSchemaToFilterConfig } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
 import { useNotification } from 'hooks'
+import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 
 const Table = props => {
@@ -124,80 +125,78 @@ const Table = props => {
     setIsLoading(false)
   }
 
+  const debouncedHandleRemoteData = debounce(handleRemoteData, 500)
+
   const openNewModal = () => setIsNewModalOpen(true)
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
   return (
-    <>
-      <div style={{ display: isLoading ? 'flex' : 'none' }}>
-        <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-      </div>
-      <Box className={s.tableContainer} style={{ display: isLoading ? 'none' : '' }}>
-        {tableActions?.newAction && (
-          <ModalWithForm
-            {...tableActions.newAction}
-            additionalAction={() =>
-              handleRemoteData(
-                tableState.page,
-                tableState.rowsPerPage,
-                tableState.order,
-                tableState.orderBy,
-                tableState.searchText,
-                tableState.filters
-              )
-            }
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            comboValue={comboValue}
-          />
-        )}
-        <GeneralTable
-          {...rest}
-          columns={
-            tableRowActions
-              ? renderedColumns.concat({
-                  title: '',
-                  field: 'actions',
-                  align: 'right',
-                  width: '112px',
-                  collapsible: 'true',
-                  render: row => (
-                    <TableActions
-                      itemId={row.id}
-                      editAction={tableRowActions.editAction}
-                      deleteAction={tableRowActions.deleteAction}
-                      additionalAction={() =>
-                        handleRemoteData(
-                          tableState.page,
-                          tableState.rowsPerPage,
-                          tableState.order,
-                          tableState.orderBy,
-                          tableState.searchText,
-                          tableState.filters
-                        )
-                      }
-                      comboValue={comboValue}
-                    />
-                  )
-                })
-              : renderedColumns
+    <Box className={s.tableContainer}>
+      {tableActions?.newAction && (
+        <ModalWithForm
+          {...tableActions.newAction}
+          additionalAction={() =>
+            handleRemoteData(
+              tableState.page,
+              tableState.rowsPerPage,
+              tableState.order,
+              tableState.orderBy,
+              tableState.searchText,
+              tableState.filters
+            )
           }
-          rows={items}
-          totalCount={totalCount}
-          rowsPerPage={rest.rowsPerPage || 10}
-          isRemote
-          newButton={
-            tableActions?.newAction
-              ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
-              : null
-          }
-          hasSearchInput={!!tableActions?.searchAction}
-          handleRemoteData={handleRemoteData}
-          filters={filtersConfig}
+          isModalOpen={isNewModalOpen}
+          closeModal={closeNewModal}
+          comboValue={comboValue}
         />
-      </Box>
-    </>
+      )}
+      <GeneralTable
+        {...rest}
+        columns={
+          tableRowActions
+            ? renderedColumns.concat({
+                title: '',
+                field: 'actions',
+                align: 'right',
+                width: '112px',
+                collapsible: 'true',
+                render: row => (
+                  <TableActions
+                    itemId={row.id}
+                    editAction={tableRowActions.editAction}
+                    deleteAction={tableRowActions.deleteAction}
+                    additionalAction={() =>
+                      handleRemoteData(
+                        tableState.page,
+                        tableState.rowsPerPage,
+                        tableState.order,
+                        tableState.orderBy,
+                        tableState.searchText,
+                        tableState.filters
+                      )
+                    }
+                    comboValue={comboValue}
+                  />
+                )
+              })
+            : renderedColumns
+        }
+        rows={items}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        rowsPerPage={rest.rowsPerPage || 10}
+        isRemote
+        newButton={
+          tableActions?.newAction
+            ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
+            : null
+        }
+        hasSearchInput={!!tableActions?.searchAction}
+        handleRemoteData={debouncedHandleRemoteData}
+        filters={filtersConfig}
+      />
+    </Box>
   )
 }
 
