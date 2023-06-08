@@ -43,3 +43,5 @@ export const getItemDefaultsAsArray = formItems => {
 
   return result
 }
+
+export const delay = ms => new Promise(res => setTimeout(res, ms))

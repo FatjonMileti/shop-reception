@@ -8,7 +8,7 @@ import { DrawerContext } from 'contexts'
 import { DRAWER_WIDTH } from 'utils/constants'
 import { useAuth } from 'oidc-react'
 import s from './Layout.scss'
-import { setToken } from 'utils/authService'
+import { setToken, isAuthenticated } from 'utils/authService'
 import { Notification } from 'components/Notification'
 
 const Layout = ({ children, setModules, setApplicationModulesPages, setSubdomainId }) => {
@@ -48,13 +48,15 @@ const Layout = ({ children, setModules, setApplicationModulesPages, setSubdomain
         <div>
           <Notification />
           <Header handleOpenMenu={handleOpenMenu} />
-          <Sidebar
-            isMenuOpen={isMenuOpen}
-            handleCloseMenu={handleCloseMenu}
-            setModules={setModules}
-            setApplicationModulesPages={setApplicationModulesPages}
-            setSubdomainId={setSubdomainId}
-          />
+          {isAuthenticated() && (
+            <Sidebar
+              isMenuOpen={isMenuOpen}
+              handleCloseMenu={handleCloseMenu}
+              setModules={setModules}
+              setApplicationModulesPages={setApplicationModulesPages}
+              setSubdomainId={setSubdomainId}
+            />
+          )}
           <div className={s.contentWrapper}>
             <ErrorBoundary>{children}</ErrorBoundary>
           </div>
