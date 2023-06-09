@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
-import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { start } from 'utils/rulesService'
 import { ModalInfo } from './ModalInfo'
 import { useNotification } from 'hooks'
 import { FormItem } from './FormItem'
 import { isEmpty } from 'lodash'
+import { Icon } from '../../Icon'
 import s from './ModalForm.scss'
 
 const ModalForm = ({
@@ -80,8 +81,18 @@ const ModalForm = ({
         ))}
         <Grid item xs={12} sm={gridSize} className={s.modalButtons}>
           {formButtons.map(formButton => {
-            const { isSaveButton, ...rest } = formButton
-            return (
+            const { isSaveButton, UIComponent, startIcon, endIcon, iconFill, ...rest } = formButton
+            return UIComponent === 'IconButton' ? (
+              <IconButton
+                key={formButton.label}
+                startIcon={
+                  startIcon && <Icon iconName={startIcon} tiny fill={iconFill || 'white'} />
+                }
+                endIcon={endIcon && <Icon iconName={endIcon} tiny fill={iconFill || 'white'} />}
+                {...rest}
+                onClick={isSaveButton ? saveData : closeModal}
+              />
+            ) : (
               <Button
                 key={formButton.label}
                 {...rest}

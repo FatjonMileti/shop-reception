@@ -7,7 +7,7 @@ import { toAsyncSelectOptions } from '../AsyncAutocomplete/serializers'
 import { useNotification } from 'hooks'
 
 const CountyCitySelect = (props: CountyCitySelectProps) => {
-  const { county, city, value, onChange } = props
+  const { county, city, value, onChange, hidden } = props
 
   const [counties, setCounties] = useState([])
   const [cities, setCities] = useState([])
@@ -57,7 +57,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
     }
   }, [value.county?.value])
 
-  return (
+  return hidden ? null : (
     <Grid container spacing={4}>
       <Grid item xs={12} md={6}>
         <Autocomplete

@@ -9,7 +9,6 @@ import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
 import { ContainerBox } from 'components/core-ui/ContainerBox'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
-import { FormItemCheckbox } from 'components/core-ui/FormItemCheckbox'
 import { Grid } from 'components/core-ui/Grid'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
@@ -47,7 +46,6 @@ export const Components = {
   ContainerBox,
   CountyCitySelect,
   FloatingButton,
-  FormItemCheckbox,
   Grid,
   Input,
   Link,

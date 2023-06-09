@@ -53,12 +53,10 @@ const setEngineEvents = (result, engine) => {
   engine
     .on('success', event => {
       const { index, UIAttributes } = event.params
-      debugger
       result[index] = { ...result[index], ...UIAttributes.onSuccess }
     })
     .on('failure', event => {
       const { index, UIAttributes } = event.params
-      debugger
       result[index] = { ...result[index], ...UIAttributes.onFailure }
     })
 }

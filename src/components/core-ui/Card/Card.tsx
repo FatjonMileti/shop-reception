@@ -8,9 +8,9 @@ const Card = (props: CardProps) => {
   const { title, icon, content, ...rest } = props
 
   return (
-    <GeneralCard>
+    <GeneralCard className={s.cardContainer}>
       <CardHeader avatar={<Icon iconName={icon} tiny />} title={title} className={s.cardTitle} />
-      <CardContent>{renderComponent(content)}</CardContent>
+      <CardContent className={s.cardContent}>{renderComponent(content)}</CardContent>
     </GeneralCard>
   )
 }

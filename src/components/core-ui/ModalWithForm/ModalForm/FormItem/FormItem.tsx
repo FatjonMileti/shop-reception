@@ -14,7 +14,7 @@ const FormItem = ({
   UIComponent
 }) => {
   const value = useMemo(() => {
-    if (type === 'CountyCitySelect') {
+    if (type === 'countyCitySelect') {
       return {
         county: {
           label: get(editItem, rest.county.name),
@@ -25,9 +25,6 @@ const FormItem = ({
           value: get(editItem, rest.city.payloadKey)
         }
       }
-    } else if (type === 'FormItemCheckbox') {
-      const a = rest.formItems.map(formItem => ({ [formItem.name]: get(editItem, formItem.name) }))
-      return rest.formItems.map(formItem => ({ [formItem.name]: get(editItem, formItem.name) }))
     } else {
       const editItemValue = get(editItem, name)
       if (editItemValue == '' && type === 'date') {
@@ -36,9 +33,6 @@ const FormItem = ({
       return editItemValue
     }
   }, [type, editItem, name, rest.county?.name, rest.county?.payloadKey])
-
-  console.log(value)
-  console.log(editItem)
 
   return (
     <Item

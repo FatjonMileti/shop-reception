@@ -15,4 +15,5 @@ export interface CountyCitySelectProps {
     city: SelectOption
   }
   onChange: (value: SelectOption | string, variable: 'county' | 'city') => void
+  hidden?: boolean
 }
