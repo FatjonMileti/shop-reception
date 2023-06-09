@@ -25,7 +25,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     setIsVisible(false)
   }
 
-  const { run } = useScandit({ onScan, isVisible })
+  const { run, destroy } = useScandit({ onScan, isVisible })
 
   const scanCode = () => {
     setIsVisible(true)
@@ -38,6 +38,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             try {
                 const result = await makeCorePostRequest(`${action.url}`, { code })
                 if (action.href) {
+                    await destroy()
                     navigate(action.href)
                 }
             } catch (error) {

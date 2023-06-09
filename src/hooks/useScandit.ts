@@ -58,7 +58,12 @@ const useScandit = ({ onScan, isVisible }) => {
     })
   }
 
-  return { run }
+  const destroy = async () => {
+    localPicker.destroy()
+    setLocalPicker(null)
+  }
+
+  return { run, destroy }
 }
 
 export default useScandit
