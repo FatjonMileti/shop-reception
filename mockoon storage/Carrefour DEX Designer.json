@@ -308,7 +308,7 @@
         },
         {
           "uuid": "3cf0970b-096c-4089-8f85-558293eb7834",
-          "body": "[{\n\t\t\"id\": \"6\",\n\t\t\"name\": \"Scanare Produs\",\n\t\t\"icon\": \"QrCodeScannerOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"6\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"6\",\n\t\t\t\"routeURL\": \"/productScan\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/storesStock\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}, {\n\t\t\"id\": \"414\",\n\t\t\"name\": \"Listare proforme\",\n\t\t\"icon\": \"ReceiptLongRounded\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"414\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"414\",\n\t\t\t\"routeURL\": \"/proformaList\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"415\",\n\t\t\t\"routeURL\": \"/proformaView/:id\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}, {\n\t\t\"id\": \"7\",\n\t\t\"name\": \"Cos de cumparaturi\",\n\t\t\"icon\": \"ShoppingBasketOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"8\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"8\",\n\t\t\t\"routeURL\": \"/shoppingCart\",\n\t\t\t\"routePathExact\": true\n\t\t},\n\t\t{\n\t\t  \"id\": \"10\",\n\t\t\t\"routeURL\": \"/shoppingCartSelectClient\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"name\": \"Selecteaza client\"\n\t\t},\n\t\t{\n\t\t  \"id\": \"11\",\n\t\t\t\"routeURL\": \"/shoppingCartClientDetails/:id\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"name\": \"Date client\"\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"8\",\n\t\t\"name\": \"Vanzarile mele\",\n\t\t\"icon\": \"StackedBarChartOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"9\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/sales\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"413\",\n\t\t\"name\": \"Lista produse de livrat\",\n\t\t\"icon\": \"ShoppingCartCheckoutOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"413\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"413\",\n\t\t\t\"routeURL\": \"/productsToDeliver\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}\n]",
+          "body": "[{\n\t\t\"id\": \"6\",\n\t\t\"name\": \"Scanare Produs\",\n\t\t\"icon\": \"QrCodeScannerOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"6\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"6\",\n\t\t\t\"routeURL\": \"/productScan\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/storesStock\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}, {\n\t\t\"id\": \"414\",\n\t\t\"name\": \"Listare proforme\",\n\t\t\"icon\": \"ReceiptLongRounded\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"414\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"414\",\n\t\t\t\"routeURL\": \"/proformaList\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"415\",\n\t\t\t\"routeURL\": \"/proformaView/:id\",\n\t\t\t\"routePathExact\": true\n\t\t},{\n\t\t\t\"id\": \"416\",\n\t\t\t\"routeURL\": \"/scanReceipt/:id\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}, {\n\t\t\"id\": \"7\",\n\t\t\"name\": \"Cos de cumparaturi\",\n\t\t\"icon\": \"ShoppingBasketOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"8\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"8\",\n\t\t\t\"routeURL\": \"/shoppingCart\",\n\t\t\t\"routePathExact\": true\n\t\t},\n\t\t{\n\t\t  \"id\": \"10\",\n\t\t\t\"routeURL\": \"/shoppingCartSelectClient\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"name\": \"Selecteaza client\"\n\t\t},\n\t\t{\n\t\t  \"id\": \"11\",\n\t\t\t\"routeURL\": \"/shoppingCartClientDetails/:id\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"name\": \"Date client\"\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"8\",\n\t\t\"name\": \"Vanzarile mele\",\n\t\t\"icon\": \"StackedBarChartOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"9\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/sales\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"413\",\n\t\t\"name\": \"Lista produse de livrat\",\n\t\t\"icon\": \"ShoppingCartCheckoutOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"413\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"413\",\n\t\t\t\"routeURL\": \"/productsToDeliver\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of activities - OMS",
@@ -988,6 +988,43 @@
               "target": "query",
               "modifier": "screenId",
               "value": "415",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "aa770c23-0653-465c-ab3a-8996cd1c5272",
+          "body": "{\n\t\"id\": \"7\",\n\t\"activity\": {\n\t\t\"id\": \"6\",\n\t\t\"name\": \"Scanare Produs\",\n\t\t\"icon\": \"AccountTreeOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"2\",\n\t\t\t\"name\": \"OMS\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/oms\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"2\",\n\t\t\t\t\"name\": \"OMS\",\n\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\"routeURL\": \"/oms1\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t}\n\t},\n\t\"screen\": {\n\t\t\"id\": \"7\",\n\t\t\"name\": \"Scanare Bon\",\n\t\t\"icon\": \"AccountTreeOutlined\",\n\t\t\"routeURL\": \"/productScan\",\n\t\t\"routePathExact\": true,\n\t\t\"activity\": {\n\t\t\t\"id\": \"6\",\n\t\t\t\"name\": \"Scanare Produs\",\n\t\t\t\"icon\": \"AccountTreeOutlined\",\n\t\t\t\"submodule\": {\n\t\t\t\t\"id\": \"2\",\n\t\t\t\t\"name\": \"OMS\",\n\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\"routeURL\": \"/oms\",\n\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\"module\": {\n\t\t\t\t\t\"id\": \"2\",\n\t\t\t\t\t\"name\": \"OMS\",\n\t\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\t\"routeURL\": \"/oms1\",\n\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t},\n\t\"roleId\": \"GOV_TL\",\n\t\"jsonSchema\": {\n\t\t\"UIComponent\": \"Box\",\n\t\t\"id\": \"the-box\",\n\t\t\"className\": \"\",\n\t\t\"children\": [{\n\t\t\t\"UIComponent\": \"ReceiptBarcodeScanner\",\n\t\t\t\"id\": \"product-scanner\",\n\t\t\t\"action\": {\n\t\t\t\t\"url\": \"/setReceipt\",\n\t\t\t\t\"type\": \"POST\",\n\t\t\t\t\"href\": \"/customerSearch\"\n\t\t\t}\n\t\t}]\n\t}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Receipt Scan",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "414",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "416",
               "invert": false,
               "operator": "equals"
             }

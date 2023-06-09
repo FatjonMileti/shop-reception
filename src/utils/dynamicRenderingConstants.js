@@ -2,7 +2,6 @@ import { Box, Container } from '@mui/material'
 import { Percent } from '@mui/icons-material'
 import { Checkbox, DatePicker, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { ProductBarcodeScanner } from 'components/core-ui/ProductBarcodeScanner'
 import { Button } from 'components/core-ui/Button'
 import { Card } from 'components/core-ui/Card'
 import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
@@ -18,9 +17,11 @@ import { PageFormRadio } from 'components/core-ui/PageFormRadio'
 import { PageInfo } from 'components/core-ui/PageInfo'
 import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { PlusMinusNumberInput } from 'components/core-ui/PlusMinusNumberInput'
+import { ProductBarcodeScanner } from 'components/core-ui/ProductBarcodeScanner'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
 import { ProductTabs } from 'components/core-ui/ProductTabs'
 import { ProductTitle } from 'components/core-ui/ProductTitle'
+import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
 import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
 import { ShoppingCart } from 'components/core-ui/ShoppingCart'
 import { Table } from 'components/core-ui/Table'
@@ -59,6 +60,7 @@ export const Components = {
   ProductStockInfo,
   ProductTabs,
   ProductTitle,
+  ReceiptBarcodeScanner,
   SimpleKeyValuePairs,
   ShoppingCart,
   Table,

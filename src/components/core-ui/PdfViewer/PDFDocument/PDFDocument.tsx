@@ -37,6 +37,8 @@ const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
   }
 
   const onDocumentLoadError = error => {
+    if (error?.message == "Worker was destroyed") { return }
+
     showNotification({
       message: `A aparut o eroare la afisarea fisierului. ${error?.message}`,
       type: 'error'
