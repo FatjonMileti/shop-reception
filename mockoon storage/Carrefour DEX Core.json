@@ -4327,7 +4327,7 @@
       "responses": [
         {
           "uuid": "00efa44e-c0fc-4005-bde5-6e6bfef67f4b",
-          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2019-05-01\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"323-c\",\n\t\t\t\t\"date\": \"2023-05-01\"\n\t\t\t}\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2019-05-01\",\n\t\t\t\t\"isActive\": true\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"323-c\",\n\t\t\t\t\"date\": \"2023-05-01\",\n\t\t\t\t\"isActive\": true\n\t\t\t}\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4934,6 +4934,90 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "821d8293-24e4-4e74-af37-65c5ee2d701f",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "proforma",
+      "responses": [
+        {
+          "uuid": "66ff9656-c96f-4b4d-883b-51f81caa4ae3",
+          "body": "{\n  \"id\": 679,\n  \"name\": 4637,\n  \"is_active\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "366722d0-0d52-46c8-a9e1-39fc193aeec6",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "invoice",
+      "responses": [
+        {
+          "uuid": "e6c09ac2-9952-43cf-90f0-f7f0166de68e",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "110c97d0-8bb9-436c-b827-b05c5bcf22be",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "proformaAll",
+      "responses": [
+        {
+          "uuid": "0d764c90-6703-4e03-aae6-76c4a35a22af",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2019-05-01\",\n\t\t\t\t\"isActive\": true\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"323-c\",\n\t\t\t\t\"date\": \"2023-05-01\",\n\t\t\t\t\"isActive\": true\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 3,\n\t\t\t\"date\": \"2023-04-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"678-c\",\n\t\t\t\t\"date\": \"2023-05-01\",\n\t\t\t\t\"isActive\": false\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 4,\n\t\t\t\"date\": \"2023-05-11\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"910-ab\",\n\t\t\t\t\"date\": \"2023-05-01\",\n\t\t\t\t\"isActive\": false\n\t\t\t}\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5124,6 +5208,18 @@
     {
       "type": "route",
       "uuid": "6a4443e5-6532-4454-8ce9-b756079d875d"
+    },
+    {
+      "type": "route",
+      "uuid": "821d8293-24e4-4e74-af37-65c5ee2d701f"
+    },
+    {
+      "type": "route",
+      "uuid": "366722d0-0d52-46c8-a9e1-39fc193aeec6"
+    },
+    {
+      "type": "route",
+      "uuid": "110c97d0-8bb9-436c-b827-b05c5bcf22be"
     }
   ],
   "proxyMode": false,

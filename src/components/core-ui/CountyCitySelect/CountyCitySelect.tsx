@@ -36,7 +36,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
 
   useEffect(() => {
     setCities([])
-    if (value.county?.value) {
+    if (value?.county?.value) {
       ;(async () => {
         try {
           const { action } = city
@@ -55,7 +55,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
         }
       })()
     }
-  }, [value.county?.value])
+  }, [value?.county?.value])
 
   return hidden ? null : (
     <Grid container spacing={4}>
@@ -74,7 +74,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
             setCountiesOpen(false)
           }}
           loading={countiesOpen && counties.length === 0}
-          value={value.county?.value ? value.county : { label: '', value: '' }}
+          value={value?.county?.value ? value?.county : { label: '', value: '' }}
           onChange={(_, newValue) => onChange(newValue, 'county')}
         />
       </Grid>
@@ -93,7 +93,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
             setCitiesOpen(false)
           }}
           loading={citiesOpen && cities.length === 0}
-          value={value.city?.value ? value.city : { label: '', value: '' }}
+          value={value?.city?.value ? value?.city : { label: '', value: '' }}
           onChange={(_, newValue) => onChange(newValue, 'city')}
         />
       </Grid>

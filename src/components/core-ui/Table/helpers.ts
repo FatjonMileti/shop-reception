@@ -38,6 +38,15 @@ export const getRenderedColumns = (columns, tableFilters) =>
               style: { textDecoration: 'none' }
             })
           }
+
+          if (UIComponent === 'BooleanIcon') {
+            const value = get(row, field)
+            return renderComponent({
+              ...render,
+              value
+            })
+          }
+
           return renderComponent(render)
         }
       }

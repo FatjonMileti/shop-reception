@@ -32,7 +32,15 @@ const FormItem = ({
       }
       return editItemValue
     }
-  }, [type, editItem, name, rest.county?.name, rest.county?.payloadKey])
+  }, [
+    type,
+    editItem,
+    name,
+    rest.county?.name,
+    rest.county?.payloadKey,
+    rest.city?.name,
+    rest.city?.payloadKey
+  ])
 
   return (
     <Item

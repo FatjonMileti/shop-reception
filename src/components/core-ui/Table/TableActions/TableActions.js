@@ -2,7 +2,7 @@ import { Edit, Delete, Visibility } from '@mui/icons-material'
 import { ButtonWithModalAndForm } from '../../ButtonWithModalAndForm'
 import { ButtonWithConfirmDeleteModal } from '../../ButtonWithConfirmDeleteModal'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 const TableActions = ({
   itemId,
@@ -17,11 +17,22 @@ const TableActions = ({
 }) => {
   const navigate = useNavigate()
 
+  const [searchParams, _] = useSearchParams()
+
   return (
     <div style={{ minWidth: '5rem' }}>
       {viewAction && canView && (
         <Button
-          onClick={() => navigate(`${viewAction.url}/${itemId}`)}
+          onClick={() => {
+            let url = `${viewAction.url}/${itemId}`
+
+            if (viewAction.variable) {
+              const paramValue = searchParams.get(viewAction.variable)
+              url = `${url}?${viewAction.variable}=${paramValue}`
+            }
+
+            navigate(url)
+          }}
           style={{ minWidth: '0.7rem' }}
         >
           <Visibility />

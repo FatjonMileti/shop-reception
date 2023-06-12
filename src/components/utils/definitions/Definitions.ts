@@ -5,6 +5,7 @@ export type Action = {
   labelKey?: string
   storeIn?: string
   href?: string
+  variable?: string
 }
 
 export interface SelectOption {

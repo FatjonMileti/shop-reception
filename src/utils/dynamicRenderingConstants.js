@@ -2,6 +2,7 @@ import { Box, Container } from '@mui/material'
 import { Percent } from '@mui/icons-material'
 import { Checkbox, DatePicker, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { Button } from 'components/core-ui/Button'
 import { Card } from 'components/core-ui/Card'
 import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
@@ -41,6 +42,7 @@ export const Components = {
   Checkbox,
   // Local components
   AsyncAutocomplete,
+  BooleanIcon,
   Button,
   Card,
   ComboBoxTable,
