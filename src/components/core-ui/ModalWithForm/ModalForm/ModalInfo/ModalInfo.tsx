@@ -10,7 +10,7 @@ const ModalInfo = ({
   editItem
 }: {
   formInfoItems: FormInfoItems[]
-  editItem: FormEditItem[]
+  editItem: FormEditItem
 }) => {
   return (
     <Box className={s.list}>

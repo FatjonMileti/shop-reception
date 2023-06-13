@@ -34,7 +34,7 @@ const AsyncAutocomplete = props => {
         }
         const result = await makeCoreGetRequest(url)
         const { valueKey, labelKey } = action
-        setOptions(toAsyncSelectOptions(result.list, valueKey, labelKey))
+        setOptions(toAsyncSelectOptions(result.list || result, valueKey, labelKey))
       } catch (error) {
         showNotification({
           message: `Error while fetching dropdown data. ${error?.message}`,

@@ -31,12 +31,21 @@ const setItemRule = (dependencies, index, engine) => {
 const setItemFact = (index, engine) => {
   engine.addFact(`fact${index}`, (params, almanac) => {
     const keys = params.split('|')
-    return almanac.factValue(keys[0]).then(item1 => {
-      return almanac.factValue(keys[1]).then(item2 => {
-        // TODO add compare function
-        return dayjs(item1).format('DD-MM-YYYY') === dayjs(item2).format('DD-MM-YYYY')
-      })
-    })
+    switch (keys.length) {
+      case 1:
+        return almanac.factValue(keys[0]).then(item => {
+          return !!item
+        })
+      case 2:
+        return almanac.factValue(keys[0]).then(item1 => {
+          return almanac.factValue(keys[1]).then(item2 => {
+            // TODO add compare function
+            return dayjs(item1).format('DD-MM-YYYY') === dayjs(item2).format('DD-MM-YYYY')
+          })
+        })
+      default:
+        return null
+    }
   })
 }
 
@@ -59,6 +68,7 @@ export const start = async (formItems, editItem) => {
 
   formItems.forEach((item, index) => {
     const { dependencies } = item
+
     if (dependencies && !dependencies.script) {
       setItemRule(dependencies, index, engine)
 

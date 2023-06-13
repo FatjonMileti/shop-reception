@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import { get } from 'lodash'
 import { getUserInfo } from './authService'
+import { getCoreBaseUrl } from './api'
 
 export const formatPayloadDate = date => (date ? dayjs(date).format('YYYY-MM-DD') : '')
 
@@ -43,3 +44,17 @@ export const getItemDefaultsAsArray = formItems => {
 
   return result
 }
+
+export const isAllowed = (allowedRoles, currentUserRoles) =>
+  allowedRoles && currentUserRoles.some(r => allowedRoles.includes(r))
+
+export const downloadFile = url => {
+  const a = document.createElement('a')
+  a.href = `${getCoreBaseUrl(url)}`
+  a.setAttribute('download', `FileName.pdf`)
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+}
+
+export const delay = ms => new Promise(res => setTimeout(res, ms))

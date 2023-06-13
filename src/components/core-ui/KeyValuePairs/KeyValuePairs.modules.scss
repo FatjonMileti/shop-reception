@@ -1,0 +1,18 @@
+.item {
+  background-color: #F5FAFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 16px;
+
+  span {
+    flex: 1;
+    &.key {
+      color: #666666;
+    }
+    &:last-child {
+      text-align: right;
+    }
+  }
+}

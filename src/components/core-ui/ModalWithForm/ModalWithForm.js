@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Modal from '@mui/material/Modal'
 import Box from '@mui/material/Box'
 import { Close } from '@mui/icons-material'
@@ -44,13 +45,15 @@ const ModalWithForm = ({
   additionalAction,
   isModalOpen,
   closeModal,
-  comboValue
+  comboValue,
+  href
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer({})
 
   const { showNotification } = useNotification()
-  
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (isModalOpen && editedItemId) {
@@ -75,6 +78,19 @@ const ModalWithForm = ({
     }
   }, [isModalOpen, editedItemId, formItems, editedItemUrl, setEditItem])
 
+  useEffect(() => {
+    const hiddenItems = formItems.filter(item => item.type === 'hidden')
+
+    if (hiddenItems.length) {
+      hiddenItems.map(item => {
+        const { name, type, value } = item
+        setEditItem(draft => {
+          set(draft, name, type === 'date' ? formatPayloadDate(value) : value)
+        })
+      })
+    }
+  }, [formItems])
+
   const modalWidth = useMemo(() => getModalWidth(formItemsPerRow), [formItemsPerRow])
 
   const gridSize = useMemo(() => getGridSize(formItemsPerRow), [formItemsPerRow])
@@ -86,30 +102,34 @@ const ModalWithForm = ({
   }
 
   const saveData = async () => {
-    // TODO: save the new data; this is a POST to api
     setIsLoading(true)
     try {
       const payload = toItemPayload(editItem)
+      let result
       if (formAction.type === 'POST') {
-        await makeCorePostRequest(`${formAction.url}`, payload)
+        result = await makeCorePostRequest(`${formAction.url}`, payload)
         showNotification({
           message: 'Item created successfully',
           type: 'success'
         })
       }
       if (formAction.type === 'PUT') {
-        await makeCorePutRequest(`${formAction.url}`, payload)
+        result = await makeCorePutRequest(`${formAction.url}`, payload)
         showNotification({
           message: 'Item saved successfully',
           type: 'success'
         })
       }
       if (formAction.type === 'PATCH') {
-        await makeCorePatchRequest(`${formAction.url}`, payload)
+        result = await makeCorePatchRequest(`${formAction.url}`, payload)
         showNotification({
           message: 'Item saved successfully',
           type: 'success'
         })
+      }
+
+      if (href && result.id) {
+        navigate(`${href}/${result.id}`)
       }
     } catch (error) {
       showNotification({
@@ -153,11 +173,11 @@ const ModalWithForm = ({
         >
           <Close />
         </IconButton>
-        {isLoading && (
-          <div style={{ display:'flex' }}>
-            <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
+        {(isLoading && (
+          <div style={{ display: 'flex' }}>
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
-        ) || (
+        )) || (
           <div>
             <ModalForm
               modalTitle={modalTitle}
