@@ -7,22 +7,22 @@ const usePermissions = ({ createRoles, viewRoles, editRoles, deleteRoles }) => {
   const currentUserRoles = useMemo(() => getUserRoles(), [])
 
   const canCreate = useMemo(
-    () => currentUserRoles && isAllowed(createRoles, currentUserRoles) || createRoles?.includes(ROLE_ALL),
+    () => createRoles?.includes(ROLE_ALL) || currentUserRoles && isAllowed(createRoles, currentUserRoles),
     [currentUserRoles]
   )
 
   const canView = useMemo(
-    () => currentUserRoles && isAllowed(viewRoles, currentUserRoles) || viewRoles?.includes(ROLE_ALL),
+    () => viewRoles?.includes(ROLE_ALL) || currentUserRoles && isAllowed(viewRoles, currentUserRoles),
     [currentUserRoles]
   )
 
   const canEdit = useMemo(
-    () => currentUserRoles && isAllowed(editRoles, currentUserRoles) || editRoles?.includes(ROLE_ALL),
+    () => editRoles?.includes(ROLE_ALL) || currentUserRoles && isAllowed(editRoles, currentUserRoles),
     [currentUserRoles]
   )
 
   const canDelete = useMemo(
-    () => currentUserRoles && isAllowed(deleteRoles, currentUserRoles) || deleteRoles?.includes(ROLE_ALL),
+    () => deleteRoles?.includes(ROLE_ALL) || currentUserRoles && isAllowed(deleteRoles, currentUserRoles),
     [currentUserRoles]
   )
 
