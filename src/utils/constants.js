@@ -7,3 +7,5 @@ export const URLS = {
 export const DRAWER_WIDTH = 400
 
 export const TOKEN_KEY = 'carrefour-dex-id-token'
+
+export const ROLE_ALL = 'all'
