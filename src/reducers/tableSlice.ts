@@ -1,11 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface TableState {
-  searchText: string
+  searchText?: string
+  filters?: {
+    [name: string] : string | number
+  }
+}
+
+export interface FiltersState {
+  [name: string] : string | number
 }
 
 export const tableInitialState: TableState = {
-  searchText: ''
+  searchText: '',
+  filters: {}
 }
 
 export const TableSlice = createSlice({
@@ -16,7 +24,14 @@ export const TableSlice = createSlice({
       ...state,
       ...action.payload
     }),
-    clearSearchData: state => ({ ...state, searchText: '' })
+    setFilters: (state: TableState, action: PayloadAction<FiltersState>) => ({
+      ...state,
+      filters: {
+        ...state.filters,
+        ...action.payload
+      }
+    }),
+    clearSearchData: state => ({ ...state, searchText: '', filters: {} })
   }
 })
 

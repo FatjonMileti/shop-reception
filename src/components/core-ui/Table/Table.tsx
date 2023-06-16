@@ -53,7 +53,6 @@ const Table = props => {
   })
 
   const table = useSelector((state: RootState) => state.table)
-
   const { showNotification } = useNotification()
 
   const { canCreate, canView, canEdit, canDelete } = usePermissions({
@@ -89,16 +88,26 @@ const Table = props => {
 
   useEffect(() => {
     if (!isInitialFetch) {
+      let tableFilters
+      if (Object.keys(table.filters).length) {
+        tableFilters = Object.keys(table.filters).map(key => ({
+          name: key,
+          value: table.filters[key]
+        }))
+
+        setTableState({ ...tableState, filters: tableFilters})
+      }
+
       handleRemoteData(
         tableState.page,
         tableState.rowsPerPage,
         tableState.order,
         tableState.orderBy,
         tableState.searchText,
-        tableState.filters
+        tableFilters || tableState.filters
       )
     }
-  }, [comboValue?.value])
+  }, [comboValue?.value, table.filters])
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
