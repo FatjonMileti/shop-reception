@@ -7,18 +7,24 @@ import { useDataStore, useNotification } from 'hooks'
 import { getRenderedColumns } from './helpers'
 import s from './List.modules.scss'
 import { ListActions } from './ListActions'
+import { renderTableFooter } from '../Table/helpers'
 
 const List = props => {
-  const { action, columns, tableRowActions, ...rest } = props
+  const { action, columns, tableRowActions, tableFooter, ...rest } = props
 
   const [items, setItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
-  // const [totalCount, setTotalCount] = React.useState(0)
+  const [summary, setSummary] = React.useState({})
 
   const { showNotification } = useNotification()
   const { storeData } = useDataStore()
 
   const renderedColumns = React.useMemo(() => getRenderedColumns(columns), [columns])
+
+  const tableFooterComponent = React.useMemo(
+    () => tableFooter && renderTableFooter(tableFooter, summary),
+    [tableFooter, summary]
+  )
 
   const handleRemoteData = async () => {
     const url = action.url
@@ -29,12 +35,10 @@ const List = props => {
       if (action.type === 'GET') {
         response = await makeCoreGetRequest(url)
       }
-      // console.log("got ", response)
       setItems(toTableRowItems(response.list, columns))
-      // setTotalCount(response.page.totalCount)
+      setSummary(response.summary)
       if (action.storeIn) {
         storeData(action.storeIn, response) // [~] if we store the response first, then this 'response' variable becomes read-only and the following toTableRowItems throws an error
-        // console.log("stored in ", action.storeIn)
       }
     } catch (error) {
       showNotification({
@@ -69,6 +73,7 @@ const List = props => {
         handleRemoteData={handleRemoteData}
         isLoading={isLoading}
       />
+      {tableFooter && <div style={{ textAlign: 'right' }}>{tableFooterComponent}</div>}
     </Box>
   )
 }

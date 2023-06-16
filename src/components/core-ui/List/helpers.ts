@@ -27,6 +27,13 @@ export const getRenderedColumns = columns =>
             })
           }
 
+          if (UIComponent === 'PriceSpan') {
+            return renderComponent({
+              ...render,
+              value: get(row, column.field)
+            })
+          }
+
           return renderComponent(render)
         }
       }

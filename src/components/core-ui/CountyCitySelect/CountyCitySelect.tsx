@@ -7,7 +7,7 @@ import { toAsyncSelectOptions } from '../AsyncAutocomplete/serializers'
 import { useNotification } from 'hooks'
 
 const CountyCitySelect = (props: CountyCitySelectProps) => {
-  const { county, city, value, onChange, hidden } = props
+  const { county, city, value, onChange, hidden, disabled } = props
 
   const [counties, setCounties] = useState([])
   const [cities, setCities] = useState([])
@@ -57,15 +57,14 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
     }
   }, [value?.county?.value])
 
-  return hidden ? null : (
-    <Grid container spacing={4}>
+  return (
+    <Grid container spacing={4} style={hidden ? { display: 'none' } : {}}>
       <Grid item xs={12} md={6}>
         <Autocomplete
           {...county}
           disablePortal
-          id="county-async"
+          id={county.id || "county-async"}
           options={counties}
-          // style={{ width: width ?? 300 }}
           open={countiesOpen}
           onOpen={() => {
             setCountiesOpen(true)
@@ -76,15 +75,15 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           loading={countiesOpen && counties.length === 0}
           value={value?.county?.value ? value?.county : { label: '', value: '' }}
           onChange={(_, newValue) => onChange(newValue, 'county')}
+          disabled={disabled}
         />
       </Grid>
       <Grid item xs={12} md={6}>
         <Autocomplete
           {...city}
           disablePortal
-          id="city-async"
+          id={city.id || "city-async"}
           options={cities}
-          // style={{ width: width ?? 300 }}
           open={citiesOpen}
           onOpen={() => {
             setCitiesOpen(true)
@@ -95,6 +94,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           loading={citiesOpen && cities.length === 0}
           value={value?.city?.value ? value?.city : { label: '', value: '' }}
           onChange={(_, newValue) => onChange(newValue, 'city')}
+          disabled={disabled}
         />
       </Grid>
     </Grid>

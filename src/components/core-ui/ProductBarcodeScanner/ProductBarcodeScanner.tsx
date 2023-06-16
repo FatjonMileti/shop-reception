@@ -44,7 +44,7 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
       ;(async () => {
         let response: ProductStockResponse
         if (action.type === 'GET') {
-          response = await makeCoreGetRequest(`${action.url}?code=${product.code}`)
+          response = await makeCoreGetRequest(`${action.url}/${product.code}`)
           dispatch(ProductActions.setProduct({ ...toProduct(response.product) }))
         }
       })()
