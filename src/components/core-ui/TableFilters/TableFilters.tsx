@@ -14,7 +14,7 @@ function TableFilters(props) {
 
   useEffect(() => {
     return () => {
-      dispatch(TableActions.clearSearchData())
+      dispatch(TableActions.clearFiltersData())
     }
   }, [])
 

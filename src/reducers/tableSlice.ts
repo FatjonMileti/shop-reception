@@ -31,7 +31,8 @@ export const TableSlice = createSlice({
         ...action.payload
       }
     }),
-    clearSearchData: state => ({ ...state, searchText: '', filters: {} })
+    clearSearchData: state => ({ ...state, searchText: '' }),
+    clearFiltersData: state => ({ ...state, filters: {} })
   }
 })
 
