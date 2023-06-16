@@ -27,6 +27,8 @@ import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
 import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
 import { ShoppingCart } from 'components/core-ui/ShoppingCart'
 import { Table } from 'components/core-ui/Table'
+import { MultivalueCell } from 'components/core-ui/MultivalueCell'
+import { IconCell } from 'components/core-ui/IconCell'
 import { TableSearch } from 'components/core-ui/TableSearch'
 import { Tabs } from 'components/core-ui/Tabs'
 import { TitleText } from 'components/core-ui/TitleText'
@@ -41,6 +43,8 @@ export const Components = {
   DatePicker,
   Typography,
   Checkbox,
+  MultivalueCell,
+  IconCell,
   // Local components
   AsyncAutocomplete,
   BooleanIcon,

@@ -39,6 +39,13 @@ export const getRenderedColumns = (columns, tableFilters) =>
             })
           }
 
+          if(UIComponent === 'MultivalueCell' || UIComponent === 'IconCell'){
+            return renderComponent({
+              ...render,
+              value: row[field],
+            })
+          }
+          
           if (UIComponent === 'BooleanIcon') {
             const value = get(row, field)
             return renderComponent({

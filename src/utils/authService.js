@@ -73,5 +73,5 @@ export const getUserInfo = () => {
 export const getUserRoles = () => {
   const userInfo = getUserInfo()
 
-  return userInfo.resource_access[process.env.CLIENT_ID].roles
+  return userInfo.resource_access[process.env.CLIENT_ID]?.roles || []
 }
