@@ -18,12 +18,11 @@ const sx = {
   bgcolor: '#fff',
   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
   borderRadius: '8px',
-  p: 4,
+  p: 4
 }
 
 const ButtonWithConfirmDeleteModal = ({
   buttonProps,
-  modalProps,
   modalTitle,
   modalMessage,
   formButtons,
@@ -66,25 +65,29 @@ const ButtonWithConfirmDeleteModal = ({
     <>
       <Button {...buttonProps} onClick={openModal} style={{ minWidth: '0.7rem' }} />
       <Modal
-        {...modalProps}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         open={isModalOpen}
         onClose={closeModal}
       >
-        <Box sx={{
-          ...sx,
-          width: isXs ? 'calc(100% - 24px)' : isMd ? '50%' : '30%',
-          ...(modalProps ? modalProps.sx : {})
-        }}>
-          <IconButton style={{ position: 'absolute', top: '1rem', right: '1rem' }} withBackground onClick={closeModal}>
+        <Box
+          sx={{
+            ...sx,
+            width: isXs ? 'calc(100% - 24px)' : isMd ? '50%' : '30%'
+          }}
+        >
+          <IconButton
+            style={{ position: 'absolute', top: '1rem', right: '1rem' }}
+            withBackground
+            onClick={closeModal}
+          >
             <Close />
           </IconButton>
-          {isDeleting && (
-            <div style={{ display:'flex' }}>
-              <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
+          {(isDeleting && (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
             </div>
-          ) || (
+          )) || (
             <Grid container spacing={4}>
               <Grid item xs={12}>
                 <Typography component="h2" variant="medium">

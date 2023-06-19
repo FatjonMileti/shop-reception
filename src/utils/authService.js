@@ -69,3 +69,9 @@ export const getUserInfo = () => {
     console.log('token is not valid')
   }
 }
+
+export const getUserRoles = () => {
+  const userInfo = getUserInfo()
+
+  return userInfo.resource_access[process.env.CLIENT_ID]?.roles || []
+}

@@ -1,0 +1,20 @@
+.cardTitle {
+  border-bottom: 1px solid #E5E5E5;
+  color: #121212;
+  padding: 30px 35px;
+
+  span {
+    font-family: 'Ubuntu';
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
+
+.cardContent {
+  padding: 30px 35px !important;
+
+  h1 {
+    margin: 25px 0;
+  }
+}

@@ -38,6 +38,22 @@ export const getRenderedColumns = (columns, tableFilters) =>
               style: { textDecoration: 'none' }
             })
           }
+
+          if(UIComponent === 'MultivalueCell' || UIComponent === 'IconCell'){
+            return renderComponent({
+              ...render,
+              value: row[field],
+            })
+          }
+          
+          if (UIComponent === 'BooleanIcon') {
+            const value = get(row, field)
+            return renderComponent({
+              ...render,
+              value
+            })
+          }
+
           return renderComponent(render)
         }
       }
@@ -111,3 +127,25 @@ export const getTableQueryUrl = params =>
           : acc),
     ''
   )
+
+export const download = (url, filters) => {
+  // TODO use the downloadFile helper from utils
+  const a = document.createElement('a')
+  const href = filters.reduce((acc, filter) => `${acc}/${filter.value}`, url)
+  // TODO replace download url when BE is ready
+  // a.href = href
+  a.href =
+    'https://apps.carrefour.ro/stage_carrefour_assistant_api/api/reports-export/2023-04-01/2023-05-22'
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+}
+
+export const renderTableFooter = (footerElements, summary) =>
+  footerElements.map(element => {
+    // if (element.field) {
+    //   debugger
+    //   return renderComponent({ ...element, value: get(summary, element.field), key: element.id })
+    // }
+    return renderComponent({ ...element, data: summary, key: element.id })
+  })

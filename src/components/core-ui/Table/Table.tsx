@@ -1,20 +1,37 @@
 import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
-import { Box, CircularProgress } from '@mui/material'
+import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import { getRenderedColumns, convertFilterSchemaToFilterConfig } from './helpers'
-import { toTableGETUrl, toTablePOSTPayload, toTableRowItems } from './serializers'
-import { useNotification } from 'hooks'
+import {
+  getRenderedColumns,
+  convertFilterSchemaToFilterConfig,
+  download,
+  renderTableFooter
+} from './helpers'
+import { toTableGETUrl, toTablePOSTPayload } from './serializers'
+import { toTableRowItems } from 'utils/serializers'
+import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 
 const Table = props => {
-  const { action, columns, tableActions, tableRowActions, comboValue, ...rest } = props
+  const {
+    action,
+    columns,
+    tableActions,
+    tableRowActions,
+    comboValue,
+    tableFooter,
+    hasGeneralSearch,
+    ...rest
+  } = props
 
   let [searchParams] = useSearchParams()
 
@@ -24,6 +41,7 @@ const Table = props => {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
   // This is used to prevent the comboValue to trigger handleRemoteData first time, as it is handled in the lib
   const [isInitialFetch, setIsInitialFetch] = useState(true)
+  const [summary, setSummary] = useState({})
 
   const [tableState, setTableState] = useImmer({
     page: 0,
@@ -34,7 +52,15 @@ const Table = props => {
     filters: []
   })
 
+  const table = useSelector((state: RootState) => state.table)
   const { showNotification } = useNotification()
+
+  const { canCreate, canView, canEdit, canDelete } = usePermissions({
+    createRoles: tableActions?.newAction?.allowedRoles,
+    viewRoles: tableRowActions?.viewAction?.allowedRoles,
+    editRoles: tableRowActions?.editAction?.allowedRoles,
+    deleteRoles: tableRowActions?.deleteAction?.allowedRoles
+  })
 
   const filtersConfig = useMemo(() => {
     if (!tableActions?.filters) return []
@@ -55,18 +81,33 @@ const Table = props => {
     [columns, tableState.filters]
   )
 
+  const tableFooterComponent = useMemo(
+    () => tableFooter && renderTableFooter(tableFooter, summary),
+    [tableFooter, summary]
+  )
+
   useEffect(() => {
     if (!isInitialFetch) {
+      let tableFilters
+      if (Object.keys(table.filters).length) {
+        tableFilters = Object.keys(table.filters).map(key => ({
+          name: key,
+          value: table.filters[key]
+        }))
+
+        setTableState({ ...tableState, filters: tableFilters})
+      }
+
       handleRemoteData(
         tableState.page,
         tableState.rowsPerPage,
         tableState.order,
         tableState.orderBy,
         tableState.searchText,
-        tableState.filters
+        tableFilters || tableState.filters
       )
     }
-  }, [comboValue?.value])
+  }, [comboValue?.value, table.filters])
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
@@ -95,7 +136,9 @@ const Table = props => {
             page,
             rowsPerPage,
             order,
-            orderBy
+            orderBy,
+            hasGeneralSearch,
+            generalSearchText: table.searchText
           })
         )
       }
@@ -110,12 +153,15 @@ const Table = props => {
             searchText,
             searchFields: tableActions.searchAction?.searchFields,
             filters,
-            comboValue
+            comboValue,
+            hasGeneralSearch,
+            generalSearchText: table.searchText
           })
         )
       }
       setItems(toTableRowItems(response.list, columns))
       setTotalCount(response.page.totalCount)
+      setSummary(response.summary)
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${error.message}`,
@@ -131,9 +177,16 @@ const Table = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
-  return (
+  const handleDownload = () => {
+    if (tableActions?.downloadAction) {
+      const { action } = tableActions?.downloadAction
+      download(action.url, tableState.filters)
+    }
+  }
+
+  return hasGeneralSearch && !table.searchText.length ? null : (
     <Box className={s.tableContainer}>
-      {tableActions?.newAction && (
+      {tableActions?.newAction && canCreate && (
         <ModalWithForm
           {...tableActions.newAction}
           additionalAction={() =>
@@ -154,7 +207,7 @@ const Table = props => {
       <GeneralTable
         {...rest}
         columns={
-          tableRowActions
+          tableRowActions && (canEdit || canDelete || canView)
             ? renderedColumns.concat({
                 title: '',
                 field: 'actions',
@@ -164,6 +217,7 @@ const Table = props => {
                 render: row => (
                   <TableActions
                     itemId={row.id}
+                    viewAction={tableRowActions.viewAction}
                     editAction={tableRowActions.editAction}
                     deleteAction={tableRowActions.deleteAction}
                     additionalAction={() =>
@@ -177,6 +231,9 @@ const Table = props => {
                       )
                     }
                     comboValue={comboValue}
+                    canView={canView}
+                    canEdit={canEdit}
+                    canDelete={canDelete}
                   />
                 )
               })
@@ -188,14 +245,16 @@ const Table = props => {
         rowsPerPage={rest.rowsPerPage || 10}
         isRemote
         newButton={
-          tableActions?.newAction
+          tableActions?.newAction && canCreate
             ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
             : null
         }
+        downloadButton={tableActions?.downloadAction ? { onClick: handleDownload } : null}
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
       />
+      {tableFooter && <div style={{ textAlign: 'right' }}>{tableFooterComponent}</div>}
     </Box>
   )
 }

@@ -1,12 +1,12 @@
-import { createElement, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
-import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { Components } from 'utils/dynamicRenderingConstants'
+import { Button, IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { start } from 'utils/rulesService'
-import { getGridSize } from '../helpers'
 import { ModalInfo } from './ModalInfo'
-import { get } from 'lodash'
 import { useNotification } from 'hooks'
+import { FormItem } from './FormItem'
+import { isEmpty } from 'lodash'
+import { Icon } from '../../Icon'
 import s from './ModalForm.scss'
 
 const ModalForm = ({
@@ -28,7 +28,7 @@ const ModalForm = ({
   useEffect(() => {
     ;(async () => {
       try {
-        if (formItems.some(item => item.dependencies?.conditions)) {
+        if (formItems.some(item => item.dependencies?.conditions) && !isEmpty(editItem)) {
           const result = await start(formItems, editItem)
           setProcessedFormItems(result)
         }
@@ -57,52 +57,42 @@ const ModalForm = ({
           </Grid>
         )}
         {processedFormItems.map(formItem => {
-          const { UIComponent, name, formItemsPerRow, ...rest } = formItem
-          const key = rest.payloadKey || name
-          let value = get(editItem, name)
-          if (value == '' && rest.type === 'date') {
-            value = null; // value=undefined => current date | value=null => input left blank
-          }
+          const { UIComponent, name, formItemsPerRow, type, ...rest } = formItem
 
           return (
-            <Grid
-              item
-              key={formItem.name}
-              xs={12}
-              sm={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}
-            >
-              {createElement(Components[UIComponent], {
-                ...rest,
-                value,
-                comboValue,
-                ...(rest.type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
-                onChange: arg => {
-                  switch (rest.type) {
-                    case 'date':
-                      handleInputChange(arg, name, rest.type)
-                      break
-                    case 'checkbox':
-                      handleInputChange(arg.target.checked, key, rest.type)
-                      break
-                    case 'autocomplete':
-                      handleInputChange(arg?.value, key, rest.type)
-                      handleInputChange(arg?.label, name, rest.type)
-                      break
-                    default:
-                      handleInputChange(arg.target.value, key, rest.type)
-                      break
-                  }
-                }
-              })}
-            </Grid>
+            <FormItem
+              key={name}
+              name={name}
+              type={type}
+              editItem={editItem}
+              UIComponent={UIComponent}
+              formItemsPerRow={formItemsPerRow}
+              rest={rest}
+              handleInputChange={handleInputChange}
+              comboValue={comboValue}
+              gridSize={gridSize}
+            />
           )
         })}
-        <Grid item xs={12} style={{padding: "4px"}}/> {/* [~] so that we start counting grid columns again on a new line */}
-        {[...Array(12/gridSize - 1)].map((_,i) => (<Grid item key={i} xs={12} sm={gridSize}/>))}
+        <Grid item xs={12} style={{ padding: '4px' }} />{' '}
+        {/* [~] so that we start counting grid columns again on a new line */}
+        {[...Array(12 / gridSize - 1)].map((_, i) => (
+          <Grid item key={i} xs={12} sm={gridSize} />
+        ))}
         <Grid item xs={12} sm={gridSize} className={s.modalButtons}>
           {formButtons.map(formButton => {
-            const { isSaveButton, ...rest } = formButton
-            return (
+            const { isSaveButton, UIComponent, startIcon, endIcon, iconFill, ...rest } = formButton
+            return UIComponent === 'IconButton' ? (
+              <IconButton
+                key={formButton.label}
+                startIcon={
+                  startIcon && <Icon iconName={startIcon} tiny fill={iconFill || 'white'} />
+                }
+                endIcon={endIcon && <Icon iconName={endIcon} tiny fill={iconFill || 'white'} />}
+                {...rest}
+                onClick={isSaveButton ? saveData : closeModal}
+              />
+            ) : (
               <Button
                 key={formButton.label}
                 {...rest}

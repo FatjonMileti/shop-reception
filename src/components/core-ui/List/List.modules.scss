@@ -1,0 +1,11 @@
+.listTableContainer {
+  margin: 24px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+
+  td {
+    background-color: #ffffff;
+  }
+}

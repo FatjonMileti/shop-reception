@@ -55,8 +55,14 @@ const App = () => {
             {/* private routes */}
             <Route
               path={URLS.AUTH_HOME}
-              element={!applicationModulesPages.length && <LoginOIDC /> ||
-                <PrivateRoute component={Home} modules={modules} setSubdomainId={setSubdomainId} />
+              element={
+                (!applicationModulesPages.length && <LoginOIDC />) || (
+                  <PrivateRoute
+                    component={Home}
+                    modules={modules}
+                    setSubdomainId={setSubdomainId}
+                  />
+                )
               }
             />
             {applicationModulesPages.map(page =>

@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import { get } from 'lodash'
 import { getUserInfo } from './authService'
+import { getCoreBaseUrl } from './api'
 
 export const formatPayloadDate = date => (date ? dayjs(date).format('YYYY-MM-DD') : '')
 
@@ -16,6 +17,16 @@ export const getDefaultItemValue = value => {
       const userInfo = getUserInfo()
       return get(userInfo, value.replace('#TOKEN.', ''))
     }
+
+    if (value.includes('QUERY_PARAM')) {
+      const urlParams = new URLSearchParams(window.location.search)
+      return urlParams.get(value.replace('#QUERY_PARAM.', ''))
+    }
+
+    if (value.includes('PATH_PARAM')) {
+      const url = window.location.pathname
+      return url.substring(url.lastIndexOf('/') + 1)
+    }
   }
 
   return value
@@ -26,6 +37,7 @@ export const getItemDefaults = formItems => {
 
   formItems.forEach(item => {
     result[item.name] = item.defaultValue ? getDefaultItemValue(item.defaultValue) : ''
+    result[item.name] = item.value ? getDefaultItemValue(item.value) : ''
   })
 
   return result
@@ -42,6 +54,18 @@ export const getItemDefaultsAsArray = formItems => {
   })
 
   return result
+}
+
+export const isAllowed = (allowedRoles, currentUserRoles) =>
+  allowedRoles && currentUserRoles.some(r => allowedRoles.includes(r))
+
+export const downloadFile = url => {
+  const a = document.createElement('a')
+  a.href = `${getCoreBaseUrl(url)}`
+  a.setAttribute('download', `FileName.pdf`)
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
 }
 
 export const delay = ms => new Promise(res => setTimeout(res, ms))
