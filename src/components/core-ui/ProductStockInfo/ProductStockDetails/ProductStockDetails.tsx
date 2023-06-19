@@ -19,7 +19,8 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
     sold,
     reserved,
     initialStock,
-    imobStock
+    imobStock,
+    isWarehouse
   } = stock
 
   const items = { available, sold, reserved, initialStock, imobStock }
@@ -32,6 +33,7 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
         eanCode={eanCode}
         storeCode={storeCode}
         addToCartAction={actions.addToCart}
+        isWarehouse={isWarehouse}
       />
       <div>
         <KeyValuePairs
@@ -42,7 +44,7 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
         {actions?.viewOtherStocks && (
           <div className={s.otherStocksBtnContainer}>
             <IconButton
-              onClick={() => navigate(actions.viewOtherStocks.href)}
+              onClick={() => navigate(`${actions.viewOtherStocks.href}?ean=${eanCode}`)}
               label={actions.viewOtherStocks.label}
               variant={actions.viewOtherStocks.variant}
               endIcon={<Icon iconName="StoreMallDirectoryOutlined" tiny={true} fill='primary' />}

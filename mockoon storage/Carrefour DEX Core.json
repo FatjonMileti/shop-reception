@@ -13,7 +13,7 @@
       "type": "http",
       "documentation": "Get team members list",
       "method": "get",
-      "endpoint": "teamMembers",
+      "endpoint": "governance/teamMembers",
       "responses": [
         {
           "uuid": "d4969f47-2789-4a8f-b60e-84397aa956c8",
@@ -156,7 +156,7 @@
       "type": "http",
       "documentation": "Get team capacity list",
       "method": "get",
-      "endpoint": "teamCapacity",
+      "endpoint": "governance/teamCapacity",
       "responses": [
         {
           "uuid": "c55ceac3-ac2d-4422-b130-44bae4ae38ce",
@@ -299,7 +299,7 @@
       "type": "http",
       "documentation": "Get individual capacity list",
       "method": "get",
-      "endpoint": "individualCapacity",
+      "endpoint": "governance/individualCapacity",
       "responses": [
         {
           "uuid": "ca0c672a-3dbf-4566-95b8-0c5a52f65eef",
@@ -442,7 +442,7 @@
       "type": "http",
       "documentation": "Save team assignment entity",
       "method": "post",
-      "endpoint": "teamAssignments",
+      "endpoint": "governance/teamAssignments",
       "responses": [
         {
           "uuid": "6dc9597f-f32f-495b-8d96-61be71bf47e7",
@@ -585,7 +585,7 @@
       "type": "http",
       "documentation": "Edit team assignment entity",
       "method": "put",
-      "endpoint": "teamAssignments/:id",
+      "endpoint": "governance/teamAssignments/:id",
       "responses": [
         {
           "uuid": "cb3b7440-4edb-44b5-8b51-3e84e7195425",
@@ -728,7 +728,7 @@
       "type": "http",
       "documentation": "Get team assignment list",
       "method": "get",
-      "endpoint": "teamAssignments",
+      "endpoint": "governance/teamAssignments",
       "responses": [
         {
           "uuid": "05856e07-4461-409d-aade-1d922bf33a42",
@@ -871,7 +871,7 @@
       "type": "http",
       "documentation": "Find team assignment by id",
       "method": "get",
-      "endpoint": "teamAssignments/:id",
+      "endpoint": "governance/teamAssignments/:id",
       "responses": [
         {
           "uuid": "2dfd54c7-79aa-4af2-9740-dcb3db4d7ff5",
@@ -1014,7 +1014,7 @@
       "type": "http",
       "documentation": "Deletes team assignment with given id",
       "method": "delete",
-      "endpoint": "teamAssignments/:id",
+      "endpoint": "governance/teamAssignments/:id",
       "responses": [
         {
           "uuid": "f5e8cd48-7e0a-463d-a1b3-a334bf742437",
@@ -1157,7 +1157,7 @@
       "type": "http",
       "documentation": "Save team time off entity",
       "method": "post",
-      "endpoint": "teamTimeOff",
+      "endpoint": "governance/teamTimeOff",
       "responses": [
         {
           "uuid": "f2767a59-c7b5-432f-8b08-61d00a4e4d1c",
@@ -1300,7 +1300,7 @@
       "type": "http",
       "documentation": "Edit team time off entity",
       "method": "put",
-      "endpoint": "teamTimeOff/:id",
+      "endpoint": "governance/teamTimeOff/:id",
       "responses": [
         {
           "uuid": "8aba5150-b79f-4983-aa4b-e0218725fcae",
@@ -1443,7 +1443,7 @@
       "type": "http",
       "documentation": "Get team time off list",
       "method": "get",
-      "endpoint": "teamTimeOff",
+      "endpoint": "governance/teamTimeOff",
       "responses": [
         {
           "uuid": "ce8c30e5-e1db-4346-b997-d2f25a9c5f63",
@@ -1586,7 +1586,7 @@
       "type": "http",
       "documentation": "Find team time off by id",
       "method": "get",
-      "endpoint": "teamTimeOff/:id",
+      "endpoint": "governance/teamTimeOff/:id",
       "responses": [
         {
           "uuid": "87481f0b-9f4f-4d1b-b465-99ed0aa7af61",
@@ -1729,7 +1729,7 @@
       "type": "http",
       "documentation": "Deletes team time off with given id",
       "method": "delete",
-      "endpoint": "teamTimeOff/:id",
+      "endpoint": "governance/teamTimeOff/:id",
       "responses": [
         {
           "uuid": "d0383b91-3077-4c15-b32a-8c081ab3fefe",
@@ -1872,7 +1872,7 @@
       "type": "http",
       "documentation": "Save effort matrix entity",
       "method": "post",
-      "endpoint": "effortMatrix",
+      "endpoint": "governance/effortMatrix",
       "responses": [
         {
           "uuid": "1ad59165-774f-46e9-bdf2-7a5e0f09c4a8",
@@ -2015,7 +2015,7 @@
       "type": "http",
       "documentation": "Edit effort matrix entity",
       "method": "put",
-      "endpoint": "effortMatrix/:id",
+      "endpoint": "governance/effortMatrix/:id",
       "responses": [
         {
           "uuid": "48cc086b-7617-425a-a230-f9a652fc9673",
@@ -2158,7 +2158,7 @@
       "type": "http",
       "documentation": "Get effort matrix list",
       "method": "get",
-      "endpoint": "effortMatrix",
+      "endpoint": "governance/effortMatrix",
       "responses": [
         {
           "uuid": "2d818ece-5453-41fe-98e5-59b4288ffb61",
@@ -2301,7 +2301,7 @@
       "type": "http",
       "documentation": "Find effort matrix by id",
       "method": "get",
-      "endpoint": "effortMatrix/:id",
+      "endpoint": "governance/effortMatrix/:id",
       "responses": [
         {
           "uuid": "0b23633d-deef-4f8d-a871-bba4b5ae31b0",
@@ -2444,7 +2444,7 @@
       "type": "http",
       "documentation": "Deletes effort matrix with given id",
       "method": "delete",
-      "endpoint": "effortMatrix/:id",
+      "endpoint": "governance/effortMatrix/:id",
       "responses": [
         {
           "uuid": "a2a97131-2611-4706-b392-ed47d44a763e",
@@ -2587,7 +2587,7 @@
       "type": "http",
       "documentation": "Save project milestone entity",
       "method": "post",
-      "endpoint": "projectMilestones",
+      "endpoint": "governance/projectMilestones",
       "responses": [
         {
           "uuid": "9bbb8167-2958-4b76-8df0-fbaaf6aa8573",
@@ -2730,7 +2730,7 @@
       "type": "http",
       "documentation": "Edit project milestone entity",
       "method": "put",
-      "endpoint": "projectMilestones/:id",
+      "endpoint": "governance/projectMilestones/:id",
       "responses": [
         {
           "uuid": "fe037588-2402-4d16-953d-6dc23926887a",
@@ -2873,7 +2873,7 @@
       "type": "http",
       "documentation": "Get project milestones list",
       "method": "get",
-      "endpoint": "projectMilestones",
+      "endpoint": "governance/projectMilestones",
       "responses": [
         {
           "uuid": "3b2a8961-33c0-4f7c-8b0f-39fdbeff0e8f",
@@ -3016,7 +3016,7 @@
       "type": "http",
       "documentation": "Find project milestone by id",
       "method": "get",
-      "endpoint": "projectMilestones/:id",
+      "endpoint": "governance/projectMilestones/:id",
       "responses": [
         {
           "uuid": "36935f81-6f9b-4ec9-b5f5-4dc5d9ad523e",
@@ -3159,7 +3159,7 @@
       "type": "http",
       "documentation": "Deletes project milestone with given id",
       "method": "delete",
-      "endpoint": "projectMilestones/:id",
+      "endpoint": "governance/projectMilestones/:id",
       "responses": [
         {
           "uuid": "cf90b295-ab2e-405f-b348-5142e897bb69",
@@ -3302,7 +3302,7 @@
       "type": "http",
       "documentation": "Save team time off entity",
       "method": "post",
-      "endpoint": "myTimeOff",
+      "endpoint": "governance/myTimeOff",
       "responses": [
         {
           "uuid": "c06bb41b-3ad7-46ec-9d7d-79ccf3487d1f",
@@ -3445,7 +3445,7 @@
       "type": "http",
       "documentation": "Edit team time off entity",
       "method": "put",
-      "endpoint": "myTimeOff/:id",
+      "endpoint": "governance/myTimeOff/:id",
       "responses": [
         {
           "uuid": "a7b37712-5fb3-4ac8-b8e8-37a9cfc78311",
@@ -3588,7 +3588,7 @@
       "type": "http",
       "documentation": "Get team time off list",
       "method": "get",
-      "endpoint": "myTimeOff",
+      "endpoint": "governance/myTimeOff",
       "responses": [
         {
           "uuid": "336d1388-1d45-4548-b7fb-ac8df724f71f",
@@ -3731,7 +3731,7 @@
       "type": "http",
       "documentation": "Find team time off by id",
       "method": "get",
-      "endpoint": "myTimeOff/:id",
+      "endpoint": "governance/myTimeOff/:id",
       "responses": [
         {
           "uuid": "c66268d4-101a-427d-bd8f-00414bbdc8ce",
@@ -3874,7 +3874,7 @@
       "type": "http",
       "documentation": "Deletes team time off with given id",
       "method": "delete",
-      "endpoint": "myTimeOff/:id",
+      "endpoint": "governance/myTimeOff/:id",
       "responses": [
         {
           "uuid": "b67e81bf-ebe9-42c7-ab8b-740b4aabab7e",

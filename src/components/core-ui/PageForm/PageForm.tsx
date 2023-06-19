@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useImmer } from 'use-immer'
 import { set } from 'lodash'
 import { ModalForm } from '../ModalWithForm/ModalForm'
@@ -21,6 +21,8 @@ const PageForm = props => {
 
   const navigate = useNavigate()
 
+  let [searchParams, _] = useSearchParams()
+
   const { showNotification } = useNotification()
 
   const gridSize = 12 / formItemsPerRow
@@ -28,16 +30,16 @@ const PageForm = props => {
   const setInitialItems = useCallback(async () => {
     setEditItem(getItemDefaults(formItems))
 
-    const hiddenItems = formItems.filter(item => item.type === 'hidden')
+    // const hiddenItems = formItems.filter(item => item.type === 'hidden')
 
-    if (hiddenItems.length) {
-      hiddenItems.map(item => {
-        const { name, type, value } = item
-        setEditItem(draft => {
-          set(draft, name, value)
-        })
-      })
-    }
+    // if (hiddenItems.length) {
+    //   hiddenItems.map(item => {
+    //     const { name, type, value } = item
+    //     setEditItem(draft => {
+    //       set(draft, name, value)
+    //     })
+    //   })
+    // }
   }, [formItems])
 
   useEffect(() => {
@@ -46,7 +48,7 @@ const PageForm = props => {
 
   const handleInputChange = (value, name, type) => {
     setEditItem(draft => {
-      set(draft, name, value)
+      draft[name] = value
     })
   }
 
@@ -80,7 +82,11 @@ const PageForm = props => {
       setIsLoading(false)
 
       if (href) {
-        navigate(`${href}/${response.id}`)
+        let url = `${href}/${response.id}`
+        if (formAction.variable) {
+          url = `${url}?${formAction.variable}=${searchParams.get(formAction.variable)}`
+        }
+        navigate(url)
       }
     } catch (error) {
       showNotification({

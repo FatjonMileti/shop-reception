@@ -5,7 +5,10 @@ export const toItemPayload = (item: { [key: string]: string }) => {
   let payload = {}
 
   Object.keys(item).forEach(key => {
-    set(payload, key, item[key])
+    const element = document.getElementById(key) as HTMLInputElement
+    if (!element || !element.disabled) {
+      set(payload, key, item[key])
+    }
   })
 
   return payload

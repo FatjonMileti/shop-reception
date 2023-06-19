@@ -17,6 +17,16 @@ export const getDefaultItemValue = value => {
       const userInfo = getUserInfo()
       return get(userInfo, value.replace('#TOKEN.', ''))
     }
+
+    if (value.includes('QUERY_PARAM')) {
+      const urlParams = new URLSearchParams(window.location.search)
+      return urlParams.get(value.replace('#QUERY_PARAM.', ''))
+    }
+
+    if (value.includes('PATH_PARAM')) {
+      const url = window.location.pathname
+      return url.substring(url.lastIndexOf('/') + 1)
+    }
   }
 
   return value
@@ -27,6 +37,7 @@ export const getItemDefaults = formItems => {
 
   formItems.forEach(item => {
     result[item.name] = item.defaultValue ? getDefaultItemValue(item.defaultValue) : ''
+    result[item.name] = item.value ? getDefaultItemValue(item.value) : ''
   })
 
   return result

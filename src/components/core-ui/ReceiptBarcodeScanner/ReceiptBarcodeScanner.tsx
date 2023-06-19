@@ -38,7 +38,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
       ;(async () => {
         if (action.type === 'POST') {
             try {
-                const result = await makeCorePostRequest(`${action.url}`, { code })
+                const result = await makeCorePostRequest(`${action.url}`, { receiptId: code, proformaId: id })
                 if (action.href) {
                     await destroy()
                     navigate(`${action.href}?${action.variable}=${code}`)

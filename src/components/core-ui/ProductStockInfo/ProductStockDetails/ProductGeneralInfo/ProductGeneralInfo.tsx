@@ -8,7 +8,14 @@ import { useNotification } from 'hooks'
 import { ProductActions } from 'reducers/productSlice'
 import s from './ProductGeneralInfo.modules.scss'
 
-const ProductGeneralInfo = ({ price, currency, eanCode, storeCode, addToCartAction }) => {
+const ProductGeneralInfo = ({
+  price,
+  currency,
+  eanCode,
+  storeCode,
+  addToCartAction,
+  isWarehouse
+}) => {
   const navigate = useNavigate()
 
   const { showNotification } = useNotification()
@@ -20,7 +27,7 @@ const ProductGeneralInfo = ({ price, currency, eanCode, storeCode, addToCartActi
 
     try {
       if (action.type === 'POST') {
-        await makeCorePostRequest(`${action.url}`, { eanCode, storeCode })
+        await makeCorePostRequest(`${action.url}`, { ean: eanCode, quantity: 1, isWarehouse })
         showNotification({
           message: 'Produsul a fost adaugat in cos',
           type: 'success'
@@ -46,7 +53,7 @@ const ProductGeneralInfo = ({ price, currency, eanCode, storeCode, addToCartActi
           onClick={addToCart}
           label="Adauga in cos"
           variant="contained"
-          endIcon={<Icon iconName="AddCircle" tiny={true} fill='white' />}
+          endIcon={<Icon iconName="AddCircle" tiny={true} fill="white" />}
         />
       </div>
       <Divider component="div" />

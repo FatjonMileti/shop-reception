@@ -3,11 +3,11 @@ export const toProduct = product => {
     title,
     ean,
     price,
-    cod_intern,
+    internalCode,
     stock_available,
-    stock_sold,
-    stock_reserved,
-    stock_initial,
+    soldStock,
+    reservedStock,
+    initialStock,
     stock_imob,
     neighbours
   } = product
@@ -18,23 +18,25 @@ export const toProduct = product => {
       price: price,
       currency: 'lei',
       eanCode: ean,
-      storeCode: cod_intern,
+      storeCode: internalCode,
       available: stock_available,
-      sold: stock_sold,
-      reserved: stock_reserved,
-      initialStock: stock_initial,
-      imobStock: stock_imob
+      sold: soldStock,
+      reserved: reservedStock,
+      initialStock: initialStock,
+      imobStock: stock_imob,
+      isWarehouse: false
     },
     warehouseStock: {
       price: neighbours[0]?.price || price,
       currency: 'lei',
       eanCode: neighbours[0]?.ean || ean,
-      storeCode: neighbours[0]?.cod_intern || cod_intern,
+      storeCode: neighbours[0]?.internalCode || internalCode,
       available: neighbours[0]?.stock_available,
-      sold: neighbours[0]?.stock_sold,
-      reserved: neighbours[0]?.stock_reserved,
-      initialStock: neighbours[0]?.stock_initial,
-      imobStock: neighbours[0]?.stock_imob
+      sold: neighbours[0]?.soldStock,
+      reserved: neighbours[0]?.reservedStock,
+      initialStock: neighbours[0]?.initialStock,
+      imobStock: neighbours[0]?.stock_imob,
+      isWarehouse: true
     }
   }
 }

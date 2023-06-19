@@ -5,6 +5,7 @@ export interface CountyCityProps {
   width: string | number
   label: string
   variant: 'outlined' | 'standard'
+  id?: string
 }
 
 export interface CountyCitySelectProps {
@@ -16,4 +17,5 @@ export interface CountyCitySelectProps {
   }
   onChange: (value: SelectOption | string, variable: 'county' | 'city') => void
   hidden?: boolean
+  disabled?: boolean
 }

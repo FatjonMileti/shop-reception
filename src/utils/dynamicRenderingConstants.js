@@ -18,6 +18,7 @@ import { PageFormRadio } from 'components/core-ui/PageFormRadio'
 import { PageInfo } from 'components/core-ui/PageInfo'
 import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { PlusMinusNumberInput } from 'components/core-ui/PlusMinusNumberInput'
+import { PriceSpan } from 'components/core-ui/PriceSpan'
 import { ProductBarcodeScanner } from 'components/core-ui/ProductBarcodeScanner'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
 import { ProductTabs } from 'components/core-ui/ProductTabs'
@@ -63,6 +64,7 @@ export const Components = {
   PageInfo,
   PdfViewer,
   PlusMinusNumberInput,
+  PriceSpan,
   ProductBarcodeScanner,
   ProductStockInfo,
   ProductTabs,
