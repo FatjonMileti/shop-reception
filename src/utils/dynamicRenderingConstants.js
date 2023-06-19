@@ -32,6 +32,7 @@ import { IconCell } from 'components/core-ui/IconCell'
 import { TableSearch } from 'components/core-ui/TableSearch'
 import { Tabs } from 'components/core-ui/Tabs'
 import { TitleText } from 'components/core-ui/TitleText'
+import { TableFilters } from 'components/core-ui/TableFilters'
 
 export const Components = {
   // MUI components
@@ -74,5 +75,6 @@ export const Components = {
   Table,
   TableSearch,
   Tabs,
-  TitleText
+  TitleText,
+  TableFilters
 }
