@@ -30,6 +30,7 @@ const Table = props => {
     comboValue,
     tableFooter,
     hasGeneralSearch,
+    isUserModal,
     ...rest
   } = props
 
@@ -234,6 +235,7 @@ const Table = props => {
                     canView={canView}
                     canEdit={canEdit}
                     canDelete={canDelete}
+                    isUserModal={isUserModal}
                   />
                 )
               })

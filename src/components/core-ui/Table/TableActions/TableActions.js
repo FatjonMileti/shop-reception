@@ -13,7 +13,8 @@ const TableActions = ({
   comboValue,
   canView,
   canEdit,
-  canDelete
+  canDelete,
+  isUserModal
 }) => {
   const navigate = useNavigate()
 
@@ -54,6 +55,7 @@ const TableActions = ({
           editedItemUrl={editAction.getUrl}
           additionalAction={additionalAction}
           comboValue={comboValue}
+          isUserModal={isUserModal}
         />
       )}
       {deleteAction && canDelete && (
