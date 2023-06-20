@@ -5447,6 +5447,34 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "92a6bb4b-202d-4965-87d1-ca58d6c08ad5",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "governance/domain",
+      "responses": [
+        {
+          "uuid": "b415b596-c89b-48b3-a3fd-5e7eb7449aeb",
+          "body": "[\n  {\n\t\t\"domain\": \"Digital Platforms\"\n\t},\n\t{\n\t\t\"domain\": \"Store&Supply Chain\"\n\t},\n\t{\n\t\t\"domain\": \"EDI\"\n\t},\n\t{\n\t\t\"domain\": \"Security\"\n\t},\n\t{\n\t\t\"domain\": \"Enterprise Architecture\"\n\t},\n\t{\n\t\t\"domain\": \"Innovation\"\n\t},\n\t{\n\t\t\"domain\": \"Infra&Support\"\n\t},\n\t{\n\t\t\"domain\": \"Data Science\"\n\t}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5661,6 +5689,10 @@
     {
       "type": "route",
       "uuid": "808143d1-b30d-4d4b-873f-0f638ae91eae"
+    },
+    {
+      "type": "route",
+      "uuid": "92a6bb4b-202d-4965-87d1-ca58d6c08ad5"
     }
   ],
   "proxyMode": false,
@@ -5671,36 +5703,4 @@
     "type": "CERT",
     "pfxPath": "",
     "certPath": "",
-    "keyPath": "",
-    "caPath": "",
-    "passphrase": ""
-  },
-  "cors": true,
-  "headers": [
-    {
-      "key": "Access-Control-Allow-Origin",
-      "value": "*"
-    },
-    {
-      "key": "Access-Control-Allow-Methods",
-      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-    },
-    {
-      "key": "Access-Control-Allow-Headers",
-      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-    }
-  ],
-  "proxyReqHeaders": [
-    {
-      "key": "",
-      "value": ""
-    }
-  ],
-  "proxyResHeaders": [
-    {
-      "key": "",
-      "value": ""
-    }
-  ],
-  "data": []
-}
+ 
