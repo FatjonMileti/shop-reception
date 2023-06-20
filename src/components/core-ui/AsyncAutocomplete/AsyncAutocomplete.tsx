@@ -1,8 +1,10 @@
 import * as React from 'react'
+import { useSelector } from 'react-redux'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from './serializers'
 import { useNotification } from 'hooks'
+import { RootState } from 'configureStore'
 
 interface AsyncAutocompleteOption {
   value: string | number
@@ -14,9 +16,11 @@ const AsyncAutocomplete = props => {
   const [options, setOptions] = React.useState<readonly AsyncAutocompleteOption[]>([])
   const loading = open && options.length === 0
 
-  const { action, comboValue, width, ...rest } = props
+  const { action, width, hasDefaultFirstValue, setFilterValues, ...rest } = props
 
   const { showNotification } = useNotification()
+
+  const filterState = useSelector((state: RootState) => state.table.filters)
 
   React.useEffect(() => {
     let active = true
@@ -25,33 +29,47 @@ const AsyncAutocomplete = props => {
       return undefined
     }
 
-    ;(async () => {
-      try {
-        let url = action.url
+    getOptions()
 
-        if (comboValue) {
-          url = `${url}?page=-1&filterBy=${action.comboQueryKey}&filterValue=${comboValue.value}`
-        }
-        const result = await makeCoreGetRequest(url)
-        const { valueKey, labelKey } = action
-        setOptions(toAsyncSelectOptions(result.list || result, valueKey, labelKey))
-      } catch (error) {
-        showNotification({
-          message: `Error while fetching dropdown data. ${error?.message}`,
-          type: 'error'
-        })
-      }
-    })()
     return () => {
       active = false
     }
   }, [loading])
 
   React.useEffect(() => {
+    if (hasDefaultFirstValue) {
+      getOptions(setFilterValues)
+    }
+  }, [])
+
+  React.useEffect(() => {
     if (!open) {
       setOptions([])
     }
   }, [open])
+
+  const getOptions = async (cb?: (name: string, value: any) => {}) => {
+    try {
+      let url = action.url
+
+      if (action.filterQueryKey && action.localQueryKey) {
+        url = `${url}?page=-1&filterBy=${action.filterQueryKey}&filterValue=${
+          filterState[action.localQueryKey]
+        }`
+      }
+      const result = await makeCoreGetRequest(url)
+      const { valueKey, labelKey } = action
+
+      const resultOptions = toAsyncSelectOptions(result.list || result, valueKey, labelKey) || []
+      setOptions(resultOptions)
+      cb && cb(rest.name, resultOptions[0])
+    } catch (error) {
+      showNotification({
+        message: `Error while fetching dropdown data. ${error?.message}`,
+        type: 'error'
+      })
+    }
+  }
 
   return (
     <Autocomplete

@@ -143,9 +143,5 @@ export const download = (url, filters) => {
 
 export const renderTableFooter = (footerElements, summary) =>
   footerElements.map(element => {
-    // if (element.field) {
-    //   debugger
-    //   return renderComponent({ ...element, value: get(summary, element.field), key: element.id })
-    // }
     return renderComponent({ ...element, data: summary, key: element.id })
   })
