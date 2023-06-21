@@ -1,0 +1,894 @@
+{
+  "uuid": "26650887-dc81-4416-97d5-c87d87b56f48",
+  "lastMigration": 27,
+  "name": "DEX Designer REST API",
+  "endpointPrefix": "8080/rest/api/v1",
+  "latency": 0,
+  "port": 3003,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "e64a8211-d6f8-4579-ae8c-d0294af5b12e",
+      "type": "http",
+      "documentation": "Get application modules",
+      "method": "get",
+      "endpoint": "application-modules",
+      "responses": [
+        {
+          "uuid": "15603b0a-8e77-4bd6-8668-52cbddd2b2bd",
+          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"EventSeatOutlined\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"OMS\",\n    \"icon\": \"DonutLargeTwoTone\",\n    \"routeURL\": \"/oms1\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"OMS\",\n        \"icon\": \"DonutLargeTwoTone\",\n        \"routeURL\": \"/oms\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"2\",\n          \"name\": \"OMS\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/oms1\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"22\",\n    \"name\": \"Bakery\",\n    \"icon\": \"AssuredWorkload\",\n    \"routeURL\": \"/bakery\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"22\",\n        \"name\": \"Admin\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/admin\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"33\",\n        \"name\": \"Formator\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"44\",\n        \"name\": \"Manager magazin\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/storeManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"55\",\n        \"name\": \"Manager regiune\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/regionManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"66\",\n        \"name\": \"Manager zone\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/zoneManager\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the application modules list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "6dcee7bd-6565-44c6-8a1f-4d9681c04a63",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "fbb3109f-02d8-4707-b8c0-600c6523d1cd",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "dace7ac7-73df-4caa-b566-8ee99b9d03ae",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "caa87a51-24ca-4a01-85a4-37af225cb574",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "3f4e1800-de69-4d30-b0fc-5409ff757ab8",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "efa77832-0577-4e56-b41a-442ba5eaf909",
+      "type": "http",
+      "documentation": "Get activities",
+      "method": "get",
+      "endpoint": "activities",
+      "responses": [
+        {
+          "uuid": "f7ca5744-65cd-4bdf-b1fc-be99b451971f",
+          "body": "[{\n\t\t\"id\": \"1\",\n\t\t\"name\": \"Team Day-Off Management\",\n\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamDayOffManagement\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Team Day-Off Management\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamDayOffManagement\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Team Day-Off Management\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"628\",\n\t\t\"name\": \"My Time-Off\",\n\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"628\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/myTimeOff\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"628\",\n\t\t\t\t\"name\": \"My Time-Off\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"628\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/myTimeOff\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"628\",\n\t\t\t\t\"name\": \"My Time-Off\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"2\",\n\t\t\"name\": \"Team Assignment\",\n\t\t\"icon\": \"HowToRegOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"2\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamAssignment\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"2\",\n\t\t\t\t\"name\": \"Team Assignment\",\n\t\t\t\t\"icon\": \"HowToRegOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"2\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamAssignment\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"2\",\n\t\t\t\t\"name\": \"Team Assignment\",\n\t\t\t\t\"icon\": \"HowToRegOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"3\",\n\t\t\"name\": \"Effort Matrix\",\n\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"3\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/effortMatrix\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"3\",\n\t\t\t\t\"name\": \"Effort Matrixt\",\n\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"3\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/effortMatrix\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"3\",\n\t\t\t\t\"name\": \"Effort Matrix\",\n\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"4\",\n\t\t\"name\": \"Team Capacity Overview\",\n\t\t\"icon\": \"PeopleAltOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"4\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamCapacity\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"4\",\n\t\t\t\t\"name\": \"Team Capacity Overview\",\n\t\t\t\t\"icon\": \"PeopleAltOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\t\"id\": \"4\",\n\t\t\t\t\"name\": \"Screen 1\",\n\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\"routeURL\": \"/teamCapacity\",\n\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\"activity\": {\n\t\t\t\t\t\"id\": \"4\",\n\t\t\t\t\t\"name\": \"Team Capacity Overview\",\n\t\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\t\"submodule\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"5\",\n\t\t\t\t\"name\": \"Screen 2\",\n\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\"routeURL\": \"/individualCapacity\",\n\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\"activity\": {\n\t\t\t\t\t\"id\": \"4\",\n\t\t\t\t\t\"name\": \"Team Capacity Overview\",\n\t\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\t\"submodule\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t},\n\t{\n\t\t\"id\": \"5\",\n\t\t\"name\": \"Project Milestones\",\n\t\t\"icon\": \"AssignmentOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"5\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"5\",\n\t\t\t\"routeURL\": \"/projectMilestones\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the list of activities - Governance",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "submoduleID",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "aa334d2e-b9ef-4ca1-b404-4c4214552886",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "658f9bf6-0688-43de-a0c6-a43d3a1bfee1",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "8b9a52cc-9a0b-43cc-bc44-9468c0342044",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "d9271c76-0946-48ea-bf73-0f62ee56ad91",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "fc876716-9a2f-4609-98cf-80a6c35f011c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "42945c68-5cba-43fe-ad93-30aecb33a38e",
+          "body": "[\n {\n    \"id\": \"55\",\n    \"name\": \"Users management\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"55\" },\n    \"screens\": [{\n        \"id\": \"55\",\n        \"routeURL\": \"/usersManagement\",\n        \"routePathExact\": true\n    }]\n  },\n  {\n    \"id\": \"66\",\n    \"name\": \"Gestiune regiuni\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"66\" },\n    \"screens\": [{\n        \"id\": \"66\",\n        \"routeURL\": \"/regions\",\n        \"routePathExact\": true\n    }]\n  },\n  {\n    \"id\": \"77\",\n    \"name\": \"Gestiune zone\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"77\" },\n    \"screens\": [{\n        \"id\": \"77\",\n        \"routeURL\": \"/zones\",\n        \"routePathExact\": true\n    }]\n  },\n  {\n    \"id\": \"88\",\n    \"name\": \"Gestiune magazine\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"88\" },\n    \"screens\": [{\n        \"id\": \"88\",\n        \"routeURL\": \"/stores\",\n        \"routePathExact\": true\n    }]\n  },\n  {\n    \"id\": \"99\",\n    \"name\": \"Gestiune clustere\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"99\" },\n    \"screens\": [{\n        \"id\": \"99\",\n        \"routeURL\": \"/clusters\",\n        \"routePathExact\": true\n    }]\n  },\n  {\n    \"id\": \"111\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"111\" },\n    \"screens\": [{\n        \"id\": \"111\",\n        \"routeURL\": \"/clusters\",\n        \"routePathExact\": true\n    }]\n  },\n  {\n    \"id\": \"122\",\n    \"name\": \"Gestiune produse imagine\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"122\" },\n    \"screens\": [{\n        \"id\": \"122\",\n        \"routeURL\": \"/products\",\n        \"routePathExact\": true\n    }]\n  },\n  {\n    \"id\": \"133\",\n    \"name\": \"Gestiune familii in scopul modulului\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"133\" },\n    \"screens\": [{\n        \"id\": \"133\",\n        \"routeURL\": \"/families\",\n        \"routePathExact\": true\n    }]\n  },\n  {\n    \"id\": \"144\",\n    \"name\": \"Lista de produse ale familiei\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"144\" },\n    \"screens\": [{\n        \"id\": \"144\",\n        \"routeURL\": \"/products\",\n        \"routePathExact\": true\n    }]\n  },\n  {\n    \"id\": \"155\",\n    \"name\": \"Raport de utilizare aplicatie\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": { \"id\": \"155\" },\n    \"screens\": [{\n        \"id\": \"155\",\n        \"routeURL\": \"/usage-report\",\n        \"routePathExact\": true\n    }]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Bakery",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "submoduleId",
+              "value": "22",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "b8bb760b-999c-4ff1-bf4e-667c249b6b41",
+          "body": "[{\n\t\t\"id\": \"6\",\n\t\t\"name\": \"Scanare Produs\",\n\t\t\"icon\": \"QrCodeScannerOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"6\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"6\",\n\t\t\t\"routeURL\": \"/productScan\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/storesStock\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}, {\n\t\t\"id\": \"414\",\n\t\t\"name\": \"Listare proforme\",\n\t\t\"icon\": \"ReceiptLongRounded\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"414\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"414\",\n\t\t\t\"routeURL\": \"/proformaList\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"415\",\n\t\t\t\"routeURL\": \"/proformaView/:id\",\n\t\t\t\"routePathExact\": true\n\t\t},{\n\t\t\t\"id\": \"416\",\n\t\t\t\"routeURL\": \"/scanReceipt/:id\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"417\",\n\t\t\t\"routeURL\": \"/receiptSelectClient\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"418\",\n\t\t\t\"routeURL\": \"/receiptClientDetails/:id\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}, {\n\t\t\"id\": \"7\",\n\t\t\"name\": \"Cos de cumparaturi\",\n\t\t\"icon\": \"ShoppingBasketOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"8\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"8\",\n\t\t\t\"routeURL\": \"/shoppingCart\",\n\t\t\t\"routePathExact\": true\n\t\t},\n\t\t{\n\t\t  \"id\": \"10\",\n\t\t\t\"routeURL\": \"/shoppingCartSelectClient\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"name\": \"Selecteaza client\"\n\t\t},\n\t\t{\n\t\t  \"id\": \"11\",\n\t\t\t\"routeURL\": \"/shoppingCartClientDetails/:id\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"name\": \"Date client\"\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"8\",\n\t\t\"name\": \"Vanzarile mele\",\n\t\t\"icon\": \"StackedBarChartOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"9\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/sales\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"413\",\n\t\t\"name\": \"Lista produse de livrat\",\n\t\t\"icon\": \"ShoppingCartCheckoutOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"413\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"413\",\n\t\t\t\"routeURL\": \"/productsToDeliver\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the list of activities - OMS",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "submoduleId",
+              "value": "2",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "463d3ac6-1ff1-4f9e-879c-312fb7cf4827",
+      "type": "http",
+      "documentation": "Get ui schema",
+      "method": "get",
+      "endpoint": "ui-schema",
+      "responses": [
+        {
+          "uuid": "7c8f46e3-997c-415c-a903-046fd0308d1f",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained a UI Schema object",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "71bdb05d-c07c-4a4a-b1f2-94ae4846304a",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "6fb6daa9-aef2-4bd9-ab90-a329c4e5496e",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "8a253099-3b8f-41b1-8a6e-af3c5996bf9c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "9ed29448-80de-4c00-8ef0-3aa581cb558e",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "e9df599c-84e1-476f-9bf9-b1799b9fd0a7",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "0d102796-6ac5-4e27-8c93-1639d888a239",
+          "body": "{\n  \"id\": \"55\",\n  \"activity\": {\n    \"id\": \"55\",\n    \"name\": \"Effort Matrix\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"1\",\n      \"name\": \"Bakery\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/bakery\",\n      \"routePathExact\": true,\n      \"module\": {\n        \"id\": \"1\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true\n      }\n    }\n  },\n  \"screen\": {\n    \"id\": \"55\",\n    \"name\": \"Users Management\",\n    \"icon\": \"DonutSmallOutlined\",\n    \"routeURL\": \"/usersManagement\",\n    \"routePathExact\": true,\n    \"activity\": {\n      \"id\": \"1\",\n      \"name\": \"Users Management\",\n      \"icon\": \"BarChart\",\n      \"submodule\": {\n        \"id\": \"1\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"BarChart\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true\n        }\n      }\n    }\n  },\n  \"roleId\": \"GOV_TL\",\n  \"jsonSchema\": {\n    \"UIComponent\": \"Box\",\n    \"id\": \"the-box\",\n    \"className\": \"\",\n    \"children\": [\n      {\n        \"UIComponent\": \"Table\",\n        \"id\": \"the-table\",\n        \"width\": \"100%\",\n        \"action\": {\n          \"url\": \"/users\",\n          \"type\": \"GET\"\n        },\n        \"hideCheckbox\": true,\n        \"rowsPerPage\": 50,\n        \"rowsPerPageOptions\": [25, 50, 100],\n        \"columns\": [\n          {\n            \"title\": \"Nume user\",\n            \"field\": \"user.firstName\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Prenume user\",\n            \"field\": \"user.lastName\",\n            \"align\": \"left\",\n            \"type\": \"number\"\n          },\n          {\n            \"title\": \"Magazin(e) asociate\",\n            \"field\": \"analysisPhase\",\n            \"align\": \"left\",\n            \"type\": \"number\"\n          },\n          {\n            \"title\": \"Regiune\",\n            \"field\": \"designPhase\",\n            \"align\": \"left\",\n            \"collapsible\": true,\n            \"type\": \"number\"\n          },\n          {\n            \"title\": \"Rol\",\n            \"field\": \"developmentPhase\",\n            \"align\": \"left\",\n            \"collapsible\": true,\n            \"type\": \"number\"\n          },\n          {\n            \"title\": \"Status\",\n            \"field\": \"systemTestPhase\",\n            \"align\": \"left\",\n            \"collapsible\": true,\n            \"type\": \"number\"\n          }\n        ],\n        \"isUserModal\": true,\n        \"tableRowActions\": {\n          \"editAction\": {\n            \"allowedRoles\": [\"all\"],\n            \"updateUrl\": \"/users/:id\",\n            \"updateUrlType\": \"PUT\",\n            \"getUrl\": \"/users\",\n            \"getUrlType\": \"GET\",\n            \"formInfoItems\": [\n              {\n                \"name\": \"firstName\",\n                \"label\": \"Nume\"\n              },\n              {\n                \"name\": \"lastName\",\n                \"label\": \"Prenume\"\n              }\n            ],\n            \"formItems\": [\n              {\n                \"UIComponent\": \"StructureItem\",\n                \"type\": \"structureItemSelect\",\n                \"roleName\": \"Manager magazin\",\n                \"action\": {\n                  \"url\": \"/store\",\n                  \"type\": \"GET\",\n                  \"valueKey\": \"id\",\n                  \"labelKey\": \"name\"\n                },\n                \"variant\": \"standard\",\n                \"name\": \"region\",\n                \"width\": \"100%\",\n                \"label\": \"Regiune\",\n                \"payloadKey\": \"region\"\n              },\n              {\n                \"UIComponent\": \"StructureItem\",\n                \"type\": \"autocomplete\",\n                \"roleName\": \"Manager regiune\",\n                \"action\": {\n                  \"url\": \"/region\",\n                  \"type\": \"GET\",\n                  \"valueKey\": \"id\",\n                  \"labelKey\": \"name\"\n                },\n                \"variant\": \"standard\",\n                \"name\": \"region\",\n                \"width\": \"100%\",\n                \"label\": \"Regiune\",\n                \"payloadKey\": \"region\"\n              },\n              {\n                \"UIComponent\": \"StructureItem\",\n                \"type\": \"autocomplete\",\n                \"roleName\": \"Formator\",\n                \"action\": {\n                  \"url\": \"/region\",\n                  \"type\": \"GET\",\n                  \"valueKey\": \"id\",\n                  \"labelKey\": \"name\"\n                },\n                \"variant\": \"standard\",\n                \"name\": \"region\",\n                \"width\": \"100%\",\n                \"label\": \"Regiune\",\n                \"payloadKey\": \"region\"\n              }\n            ],\n            \"formItemsPerRow\": 1,\n            \"formButtons\": [\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Cancel\",\n                \"variant\": \"outlined\",\n                \"isCancelButton\": true\n              },\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Save\",\n                \"variant\": \"contained\",\n                \"isSaveButton\": true\n              }\n            ]\n          },\n          \"deleteAction\": {\n            \"url\": \"/effortMatrix\",\n            \"confirmText\": \"Are you sure you want to delete this entry?\",\n            \"formButtons\": [\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Cancel\",\n                \"variant\": \"outlined\",\n                \"isCancelButton\": true\n              },\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Delete\",\n                \"variant\": \"contained\",\n                \"isDeleteButton\": true\n              }\n            ]\n          }\n        }\n      }\n    ]\n  }\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "User Management",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "55",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "55",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "96c9af96-2663-4d29-b9ad-74f212670aba",
+          "body": "{\n  \"id\": \"66\",\n  \"activity\": {\n    \"id\": \"66\",\n    \"name\": \"Gestiune Regiuni\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Bakery\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/bakery\",\n      \"routePathExact\": true,\n      \"module\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true\n      }\n    }\n  },\n  \"screen\": {\n    \"id\": \"66\",\n    \"name\": \"Gestiune regiuni\",\n    \"icon\": \"DonutSmallOutlined\",\n    \"routeURL\": \"/region\",\n    \"routePathExact\": true,\n    \"activity\": {\n      \"id\": \"66\",\n      \"name\": \"Gestiune regiuni\",\n      \"icon\": \"BarChart\",\n      \"submodule\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"BarChart\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true\n        }\n      }\n    }\n  },\n  \"roleId\": \"GOV_TL\",\n  \"jsonSchema\": {\n    \"UIComponent\": \"Box\",\n    \"id\": \"the-box\",\n    \"className\": \"\",\n    \"children\": [\n      {\n        \"UIComponent\": \"Table\",\n        \"id\": \"the-table\",\n        \"width\": \"100%\",\n        \"action\": {\n          \"url\": \"/region\",\n          \"type\": \"GET\"\n        },\n        \"hideCheckbox\": true,\n        \"rowsPerPage\": 50,\n        \"rowsPerPageOptions\": [25, 50, 100],\n        \"columns\": [\n          {\n            \"title\": \"Nume\",\n            \"field\": \"name\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Nume\",\n            \"field\": \"username\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Magazin\",\n            \"field\": \"stores\",\n            \"align\": \"left\",\n            \"type\": \"array\",\n            \"render\": {\n              \"UIComponent\": \"MultivalueCell\",\n              \"idKeyName\": \"store\"\n            }\n          },\n          {\n            \"title\": \"Divizie\",\n            \"field\": \"divisionType\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Status\",\n            \"field\": \"enable\",\n            \"align\": \"center\",\n            \"render\": {\n              \"UIComponent\": \"IconCell\",\n              \"idKeyName\": \"enable\"\n            }\n          }\n        ],\n        \"tableActions\": {\n          \"newAction\": {\n            \"allowedRoles\": [\"all\"],\n            \"modalTitle\": \"Adauga Regiune\",\n            \"formItems\": [\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"text\",\n                \"variant\": \"standard\",\n                \"name\": \"responsible\",\n                \"width\": \"100%\",\n                \"label\": \"Responsabil\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"text\",\n                \"variant\": \"standard\",\n                \"name\": \"name\",\n                \"width\": \"100%\",\n                \"label\": \"Denumire regiune\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"hyper\",\n                    \"label\": \"Hyper\"\n                  },\n                  {\n                    \"value\": \"super\",\n                    \"label\": \"Super\"\n                  }\n                ],\n                \"name\": \"division\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Divizie\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"active\",\n                    \"label\": \"Activ\"\n                  },\n                  {\n                    \"value\": \"inactive\",\n                    \"label\": \"Inactiv\"\n                  }\n                ],\n                \"name\": \"status\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Status\"\n              }\n            ],\n            \"formItemsPerRow\": 1,\n            \"formButtons\": [\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Cancel\",\n                \"variant\": \"outlined\",\n                \"isCancelButton\": true\n              },\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Save\",\n                \"variant\": \"contained\",\n                \"isSaveButton\": true\n              }\n            ],\n            \"formAction\": {\n              \"type\": \"POST\",\n              \"url\": \"/region\"\n            }\n          }\n        },\n        \"tableRowActions\": {\n          \"editAction\": {\n            \"allowedRoles\": [\"all\"],\n            \"updateUrl\": \"/region/:id\",\n            \"updateUrlType\": \"PUT\",\n            \"getUrl\": \"/region\",\n            \"getUrlType\": \"GET\",\n            \"formInfoItems\": [\n              {\n                \"name\": \"responsible.name\",\n                \"label\": \"Responsabil\"\n              }\n            ],\n            \"formItems\": [\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"text\",\n                \"variant\": \"standard\",\n                \"name\": \"name\",\n                \"width\": \"100%\",\n                \"label\": \"Denumire regiune\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"hyper\",\n                    \"label\": \"Hyper\"\n                  },\n                  {\n                    \"value\": \"super\",\n                    \"label\": \"Super\"\n                  }\n                ],\n                \"name\": \"division\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Divizie\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"active\",\n                    \"label\": \"Activ\"\n                  },\n                  {\n                    \"value\": \"inactive\",\n                    \"label\": \"Inactiv\"\n                  }\n                ],\n                \"name\": \"status\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Status\"\n              }\n            ],\n            \"formItemsPerRow\": 1,\n            \"formButtons\": [\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Cancel\",\n                \"variant\": \"outlined\",\n                \"isCancelButton\": true\n              },\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Save\",\n                \"variant\": \"contained\",\n                \"isSaveButton\": true\n              }\n            ]\n          }\n        }\n      }\n    ]\n  }\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Regions management",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "66",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "66",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "77fafa55-a574-4606-83f5-20a9d4bb97c8",
+          "body": "{\n    \"id\": \"99\",\n    \"activity\": {\n      \"id\": \"99\",\n      \"name\": \"Gestiune clustere\",\n      \"icon\": \"TimerOffOutlined\",\n      \"submodule\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"22\",\n          \"name\": \"Bakery\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true\n        }\n      }\n    },\n    \"screen\": {\n      \"id\": \"99\",\n      \"name\": \"Gestiune clustere\",\n      \"icon\": \"DonutSmallOutlined\",\n      \"routeURL\": \"/clusters\",\n      \"routePathExact\": true,\n      \"activity\": {\n        \"id\": \"99\",\n        \"name\": \"Gestiune clustere\",\n        \"icon\": \"BarChart\",\n        \"submodule\": {\n          \"id\": \"22\",\n          \"name\": \"Bakery\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true,\n          \"module\": {\n            \"id\": \"1\",\n            \"name\": \"BarChart\",\n            \"icon\": \"BarChart\",\n            \"routeURL\": \"/bakery\",\n            \"routePathExact\": true\n          }\n        }\n      }\n    },\n    \"roleId\": \"GOV_TL\",\n    \"jsonSchema\": {\n      \"UIComponent\": \"Box\",\n      \"id\": \"the-box\",\n      \"className\": \"\",\n      \"children\": [\n        {\n          \"UIComponent\": \"Table\",\n          \"id\": \"the-table\",\n          \"width\": \"100%\",\n          \"action\": {\n            \"url\": \"/clusters\",\n            \"type\": \"GET\"\n          },\n          \"hideCheckbox\": true,\n          \"rowsPerPage\": 50,\n          \"rowsPerPageOptions\": [25, 50, 100],\n          \"columns\": [\n            {\n              \"title\": \"Denumire\",\n              \"field\": \"name\",\n              \"align\": \"left\",\n              \"type\": \"string\"\n            },\n            {\n              \"title\": \"Obligatoriu/Facultativ\",\n              \"field\": \"required\",\n              \"align\": \"left\",\n              \"type\": \"string\"\n            },\n            {\n              \"title\": \"Status\",\n              \"field\": \"status\",\n              \"align\": \"center\",\n              \"render\": {\n                \"UIComponent\": \"IconCell\",\n                \"idKeyName\": \"status\"\n              }\n            }\n          ],\n          \"tableRowActions\": {\n            \"editAction\": {\n              \"updateUrl\": \"/clusters/:id\",\n              \"updateUrlType\": \"PUT\",\n              \"getUrl\": \"/clusters\",\n              \"getUrlType\": \"GET\",\n              \"formInfoItems\": [\n                {\n                  \"name\": \"name\",\n                  \"label\": \"Denumire\"\n                }\n              ],\n              \"formItems\": [\n                {\n                  \"UIComponent\": \"Input\",\n                  \"type\": \"select\",\n                  \"values\": [\n                    {\n                      \"value\": \"obligatoriu\",\n                      \"label\": \"Obligatoriu\"\n                    },\n                    {\n                      \"value\": \"facultativ\",\n                      \"label\": \"Facultativ\"\n                    }\n                  ],\n                  \"name\": \"required\",\n                  \"variant\": \"standard\",\n                  \"width\": \"100%\",\n                  \"label\": \"Gama produs\"\n                }\n              ],\n              \"formItemsPerRow\": 1,\n              \"formButtons\": [\n                {\n                  \"UIComponent\": \"Button\",\n                  \"label\": \"Cancel\",\n                  \"variant\": \"outlined\",\n                  \"isCancelButton\": true\n                },\n                {\n                  \"UIComponent\": \"Button\",\n                  \"label\": \"Save\",\n                  \"variant\": \"contained\",\n                  \"isSaveButton\": true\n                }\n              ]\n            }\n          }\n        }\n      ]\n    }\n  }",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Clusters management",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "99",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "99",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "30e30dc7-eba6-4920-8303-f9fe3ab731d1",
+          "body": "{\n  \"id\": \"111\",\n  \"activity\": {\n    \"id\": \"111\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Bakery\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/bakery\",\n      \"routePathExact\": true,\n      \"module\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true\n      }\n    }\n  },\n  \"screen\": {\n    \"id\": \"111\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"DonutSmallOutlined\",\n    \"routeURL\": \"/growth\",\n    \"routePathExact\": true,\n    \"activity\": {\n      \"id\": \"111\",\n      \"name\": \"Setari coeficient de crestere\",\n      \"icon\": \"BarChart\",\n      \"submodule\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"BarChart\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true\n        }\n      }\n    }\n  },\n  \"roleId\": \"GOV_TL\",\n  \"jsonSchema\": {\n    \"UIComponent\": \"Box\",\n    \"id\": \"the-box\",\n    \"className\": \"\",\n    \"children\": [\n      {\n        \"UIComponent\": \"Table\",\n        \"id\": \"the-table\",\n        \"width\": \"100%\",\n        \"action\": {\n          \"url\": \"/growth\",\n          \"type\": \"GET\"\n        },\n        \"hideCheckbox\": true,\n        \"rowsPerPage\": 50,\n        \"rowsPerPageOptions\": [25, 50, 100],\n        \"columns\": [\n          {\n            \"title\": \"Divizie\",\n            \"field\": \"division\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Coeficient de crestere\",\n            \"field\": \"growthIndex\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Ultima actualizare\",\n            \"field\": \"lastUpdate\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Data / ora\",\n            \"field\": \"date\",\n            \"align\": \"left\",\n            \"type\": \"date\"\n          }\n        ],\n        \"tableRowActions\": {\n          \"editAction\": {\n            \"updateUrl\": \"/growth/:id\",\n            \"updateUrlType\": \"PUT\",\n            \"getUrl\": \"/growth\",\n            \"getUrlType\": \"GET\",\n            \"formInfoItems\": [\n              {\n                \"name\": \"division\",\n                \"label\": \"Divizie\"\n              }\n            ],\n            \"formItems\": [\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"text\",\n                \"variant\": \"standard\",\n                \"name\": \"growthIndex\",\n                \"width\": \"100%\",\n                \"label\": \"Coeficient de crestere\"\n              }\n            ],\n            \"formItemsPerRow\": 1,\n            \"formButtons\": [\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Cancel\",\n                \"variant\": \"outlined\",\n                \"isCancelButton\": true\n              },\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Save\",\n                \"variant\": \"contained\",\n                \"isSaveButton\": true\n              }\n            ]\n          }\n        }\n      }\n    ]\n  }\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Growth index management",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "111",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "111",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "4b6fc07d-a874-4eb8-8c44-cc0a3addb7b3",
+          "body": "{\n    \"id\": \"122\",\n    \"activity\": {\n      \"id\": \"122\",\n      \"name\": \"Gestiune produse imagine\",\n      \"icon\": \"TimerOffOutlined\",\n      \"submodule\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"22\",\n          \"name\": \"Bakery\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true\n        }\n      }\n    },\n    \"screen\": {\n      \"id\": \"122\",\n      \"name\": \"Gestiune produse imagine\",\n      \"icon\": \"DonutSmallOutlined\",\n      \"routeURL\": \"/products\",\n      \"routePathExact\": true,\n      \"activity\": {\n        \"id\": \"122\",\n        \"name\": \"Gestiune produse imagine\",\n        \"icon\": \"BarChart\",\n        \"submodule\": {\n          \"id\": \"22\",\n          \"name\": \"Bakery\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true,\n          \"module\": {\n            \"id\": \"1\",\n            \"name\": \"BarChart\",\n            \"icon\": \"BarChart\",\n            \"routeURL\": \"/bakery\",\n            \"routePathExact\": true\n          }\n        }\n      }\n    },\n    \"roleId\": \"GOV_TL\",\n    \"jsonSchema\": {\n      \"UIComponent\": \"Box\",\n      \"id\": \"the-box\",\n      \"className\": \"\",\n      \"children\": [\n        {\n          \"UIComponent\": \"Table\",\n          \"id\": \"the-table\",\n          \"width\": \"100%\",\n          \"action\": {\n            \"url\": \"/products\",\n            \"type\": \"GET\"\n          },\n          \"hideCheckbox\": true,\n          \"rowsPerPage\": 50,\n          \"rowsPerPageOptions\": [25, 50, 100],\n          \"columns\": [\n            {\n              \"title\": \"Produs\",\n              \"field\": \"name\",\n              \"align\": \"left\",\n              \"type\": \"string\"\n            },\n            {\n              \"title\": \"Cod METI\",\n              \"field\": \"metiCode\",\n              \"align\": \"left\",\n              \"type\": \"string\"\n            },\n            {\n              \"title\": \"Cod Plu\",\n              \"field\": \"pluCode\",\n              \"align\": \"left\",\n              \"type\": \"string\"\n            },\n            {\n              \"title\": \"Categorie\",\n              \"field\": \"category\",\n              \"align\": \"left\",\n              \"type\": \"string\"\n            }\n          ],\n          \"tableRowActions\": {\n            \"editAction\": {\n              \"updateUrl\": \"/products/:id\",\n              \"updateUrlType\": \"PUT\",\n              \"getUrl\": \"/products\",\n              \"getUrlType\": \"GET\",\n              \"formInfoItems\": [\n                {\n                  \"name\": \"name\",\n                  \"label\": \"Product\"\n                },\n                {\n                  \"name\": \"category\",\n                  \"label\": \"Categorie\"\n                }\n              ],\n              \"formItems\": [\n                {\n                  \"UIComponent\": \"Input\",\n                  \"type\": \"text\",\n                  \"variant\": \"standard\",\n                  \"name\": \"alegeFisier\",\n                  \"width\": \"100%\",\n                  \"label\": \"Alege fisier\"\n                }\n              ],\n              \"formItemsPerRow\": 1,\n              \"formButtons\": [\n                {\n                  \"UIComponent\": \"Button\",\n                  \"label\": \"Cancel\",\n                  \"variant\": \"outlined\",\n                  \"isCancelButton\": true\n                },\n                {\n                  \"UIComponent\": \"Button\",\n                  \"label\": \"Save\",\n                  \"variant\": \"contained\",\n                  \"isSaveButton\": true\n                }\n              ]\n            }\n          }\n        }\n      ]\n    }\n  }\n  ",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Products management",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "122",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "122",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "daead8b1-c15f-44b8-b052-0bbcaaef1d1e",
+          "body": "{\n  \"id\": \"133\",\n  \"activity\": {\n    \"id\": \"133\",\n    \"name\": \"Gestiune familii in scopul modulului\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Bakery\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/bakery\",\n      \"routePathExact\": true,\n      \"module\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true\n      }\n    }\n  },\n  \"screen\": {\n    \"id\": \"133\",\n    \"name\": \"Gestiune familii in scopul modulului\",\n    \"icon\": \"DonutSmallOutlined\",\n    \"routeURL\": \"/families\",\n    \"routePathExact\": true,\n    \"activity\": {\n      \"id\": \"133\",\n      \"name\": \"Gestiune familii in scopul modulului\",\n      \"icon\": \"BarChart\",\n      \"submodule\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"BarChart\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true\n        }\n      }\n    }\n  },\n  \"roleId\": \"GOV_TL\",\n  \"jsonSchema\": {\n    \"UIComponent\": \"Box\",\n    \"id\": \"the-box\",\n    \"className\": \"\",\n    \"children\": [\n      {\n        \"UIComponent\": \"Table\",\n        \"id\": \"the-table\",\n        \"width\": \"100%\",\n        \"action\": {\n          \"url\": \"/families\",\n          \"type\": \"GET\"\n        },\n        \"hideCheckbox\": true,\n        \"rowsPerPage\": 50,\n        \"rowsPerPageOptions\": [25, 50, 100],\n        \"columns\": [\n          {\n            \"title\": \"Cod\",\n            \"field\": \"code\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Nume familie\",\n            \"field\": \"name\",\n            \"align\": \"left\",\n            \"type\": \"string\",\n            \"render\": {\n              \"UIComponent\": \"Link\",\n              \"href\": \"/familyProducts\",\n              \"idKeyName\": \"family.id\"\n            }\n          },\n          {\n            \"title\": \"Modul\",\n            \"field\": \"module\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Status\",\n            \"field\": \"enable\",\n            \"align\": \"left\",\n            \"type\": \"boolean\",\n            \"render\": {\n              \"UIComponent\": \"BooleanIcon\",\n              \"icon\": \"CheckCircleOutline\",\n              \"onSuccess\": \"#33691E\",\n              \"onFailure\": \"#E5E5E5\"\n            }\n          }\n        ],\n        \"tableRowActions\": {\n          \"editAction\": {\n            \"allowedRoles\": [\"all\"],\n            \"updateUrl\": \"/families/:id\",\n            \"updateUrlType\": \"PUT\",\n            \"getUrl\": \"/families\",\n            \"getUrlType\": \"GET\",\n            \"formItems\": [\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"active\",\n                    \"label\": \"Da\"\n                  },\n                  {\n                    \"value\": \"inactive\",\n                    \"label\": \"Nu\"\n                  }\n                ],\n                \"name\": \"status\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Familie in scopul aplicatiei de brutarie\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"bakery\",\n                    \"label\": \"Brutarie\"\n                  }\n                ],\n                \"name\": \"division\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Modul\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"hyper\",\n                    \"label\": \"Hyper\"\n                  },\n                  {\n                    \"value\": \"super\",\n                    \"label\": \"Super\"\n                  }\n                ],\n                \"name\": \"division\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Divizie\"\n              }\n            ],\n            \"formItemsPerRow\": 1,\n            \"formButtons\": [\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Cancel\",\n                \"variant\": \"outlined\",\n                \"isCancelButton\": true\n              },\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Save\",\n                \"variant\": \"contained\",\n                \"isSaveButton\": true\n              }\n            ]\n          }\n        }\n      }\n    ]\n  }\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Family management",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "133",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "133",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "b5dd245a-ca80-438f-83ae-2bbb5426ca8b",
+          "body": "{\n  \"id\": \"144\",\n  \"activity\": {\n    \"id\": \"144\",\n    \"name\": \"Lista de produse ale familiei\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Bakery\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/bakery\",\n      \"routePathExact\": true,\n      \"module\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true\n      }\n    }\n  },\n  \"screen\": {\n    \"id\": \"144\",\n    \"name\": \"Lista de produse ale familiei\",\n    \"icon\": \"PeopleAltOutlined\",\n    \"routeURL\": \"/families\",\n    \"routePathExact\": true,\n    \"activity\": {\n      \"id\": \"133\",\n      \"name\": \"Gestiune familii\",\n      \"icon\": \"BarChart\",\n      \"submodule\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"22\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true\n        }\n      }\n    }\n  },\n  \"roleId\": \"GOV_TL\",\n  \"jsonSchema\": {\n    \"UIComponent\": \"Box\",\n    \"className\": \"\",\n    \"children\": [\n      {\n        \"UIComponent\": \"Table\",\n        \"id\": \"the-table\",\n        \"width\": \"80%\",\n        \"action\": {\n          \"url\": \"/familyProducts\",\n          \"type\": \"GET\"\n        },\n        \"hideCheckbox\": true,\n        \"columns\": [\n          {\n            \"title\": \"Produs\",\n            \"field\": \"name\",\n            \"align\": \"left\",\n            \"type\": \"string\",\n            \"sticky\": true\n          },\n          {\n            \"title\": \"Nume subfamilie\",\n            \"field\": \"subfamiliyName\",\n            \"align\": \"left\",\n            \"type\": \"string\",\n            \"sticky\": true,\n            \"collapsible\": true\n          },\n          {\n            \"title\": \"Trasabilitate familie\",\n            \"field\": \"familyTraceability\",\n            \"align\": \"center\",\n            \"render\": {\n              \"UIComponent\": \"IconCell\",\n              \"idKeyName\": \"status\"\n            }\n          },\n          {\n            \"title\": \"Trasabilitate produs\",\n            \"field\": \"productTraceability\",\n            \"align\": \"center\",\n            \"render\": {\n              \"UIComponent\": \"IconCell\",\n              \"idKeyName\": \"status\"\n            }\n          }\n        ]\n      }\n    ]\n  }\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Family products management",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "133",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "133",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "1906660e-bb8c-4b8b-9e37-31dbf0a17ffb",
+          "body": "{\n  \"id\": \"155\",\n  \"activity\": {\n    \"id\": \"155\",\n    \"name\": \"Raport de utilizare aplicatie\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Bakery\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/bakery\",\n      \"routePathExact\": true,\n      \"module\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true\n      }\n    }\n  },\n  \"screen\": {\n    \"id\": \"122\",\n    \"name\": \"Raport de utilizare aplicatie\",\n    \"icon\": \"DonutSmallOutlined\",\n    \"routeURL\": \"/usage-report\",\n    \"routePathExact\": true,\n    \"activity\": {\n      \"id\": \"122\",\n      \"name\": \"Raport de utilizare aplicatie\",\n      \"icon\": \"BarChart\",\n      \"submodule\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"BarChart\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true\n        }\n      }\n    }\n  },\n  \"roleId\": \"GOV_TL\",\n  \"jsonSchema\": {\n    \"UIComponent\": \"Box\",\n    \"id\": \"the-box\",\n    \"className\": \"\",\n    \"children\": [\n      {\n        \"UIComponent\": \"TableFilters\",\n        \"id\": \"table-search\",\n        \"filterArr\": [\n          {\n            \"UIComponent\": \"DatePicker\",\n            \"type\": \"date\",\n            \"name\": \"startDate\",\n            \"label\": \"Perioada\",\n            \"defaultValue\": \"#CURRENT_DATE\",\n            \"style\": { \"width\": \"326px\" },\n            \"variant\": \"standard\",\n            \"required\": true\n          },\n          {\n            \"UIComponent\": \"AsyncAutocomplete\",\n            \"type\": \"autocomplete\",\n            \"action\": {\n              \"url\": \"/store\",\n              \"type\": \"GET\",\n              \"valueKey\": \"id\",\n              \"labelKey\": \"name\",\n              \"comboQueryKey\": \"domain\"\n            },\n            \"variant\": \"standard\",\n            \"name\": \"store\",\n            \"style\": { \"width\": \"326px\" },\n            \"label\": \"Magazin\",\n            \"payloadKey\": \"store.id\"\n          },\n          {\n            \"UIComponent\": \"AsyncAutocomplete\",\n            \"type\": \"autocomplete\",\n            \"action\": {\n              \"url\": \"/cadentier\",\n              \"type\": \"GET\",\n              \"valueKey\": \"id\",\n              \"labelKey\": \"cadentier\",\n              \"comboQueryKey\": \"domain\"\n            },\n            \"variant\": \"standard\",\n            \"name\": \"store\",\n            \"style\": { \"width\": \"326px\" },\n            \"label\": \"Cadentier + trasabilitate\",\n            \"payloadKey\": \"cadentier.id\"\n          }\n        ]\n      },\n      {\n        \"UIComponent\": \"Table\",\n        \"id\": \"the-table\",\n        \"width\": \"100%\",\n        \"action\": {\n          \"url\": \"/appUsage\",\n          \"type\": \"GET\"\n        },\n        \"hideCheckbox\": true,\n        \"rowsPerPage\": 50,\n        \"rowsPerPageOptions\": [25, 50, 100],\n        \"columns\": [\n          {\n            \"title\": \"Magazin\",\n            \"field\": \"store\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Utilizator\",\n            \"field\": \"user\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Cadantier\",\n            \"field\": \"cadantier\",\n            \"align\": \"left\",\n            \"type\": \"string\",\n            \"render\": {\n              \"UIComponent\": \"BooleanIcon\",\n              \"icon\": \"CheckCircleOutline\",\n              \"onSuccess\": \"#33691E\",\n              \"onFailure\": \"#E5E5E5\"\n            }\n          },\n          {\n            \"title\": \"Print cadantier\",\n            \"field\": \"printCadantier\",\n            \"align\": \"left\",\n            \"type\": \"string\",\n            \"render\": {\n              \"UIComponent\": \"BooleanIcon\",\n              \"icon\": \"CheckCircleOutline\",\n              \"onSuccess\": \"#33691E\",\n              \"onFailure\": \"#E5E5E5\"\n            }\n          },\n          {\n            \"title\": \"Modificare cadantier\",\n            \"field\": \"changeCadantier\",\n            \"align\": \"center\",\n            \"render\": {\n              \"UIComponent\": \"BooleanIcon\",\n              \"icon\": \"CheckCircleOutline\",\n              \"onSuccess\": \"#33691E\",\n              \"onFailure\": \"#E5E5E5\"\n            }\n          },\n          {\n            \"title\": \"Coeficient de crestere magazin\",\n            \"field\": \"growthIndex\",\n            \"align\": \"center\",\n            \"render\": {\n              \"UIComponent\": \"BooleanIcon\",\n              \"icon\": \"CheckCircleOutline\",\n              \"onSuccess\": \"#33691E\",\n              \"onFailure\": \"#E5E5E5\"\n            }\n          },\n          {\n            \"title\": \"Coeficient de crestere produse\",\n            \"field\": \"productGrowthIndex\",\n            \"align\": \"center\",\n            \"render\": {\n              \"UIComponent\": \"BooleanIcon\",\n              \"icon\": \"CheckCircleOutline\",\n              \"onSuccess\": \"#33691E\",\n              \"onFailure\": \"#E5E5E5\"\n            }\n          },\n          {\n            \"title\": \"Accesare aplicatie\",\n            \"field\": \"appUsage\",\n            \"align\": \"center\",\n            \"render\": {\n              \"UIComponent\": \"BooleanIcon\",\n              \"icon\": \"CheckCircleOutline\",\n              \"onSuccess\": \"#33691E\",\n              \"onFailure\": \"#E5E5E5\"\n            }\n          }\n        ],\n        \"tableActions\": {\n          \"filters\": [\n            {\n              \"UIComponent\": \"Input\",\n              \"type\": \"select\",\n              \"values\": [\n                {\n                  \"value\": \"cadentierTracebility\",\n                  \"label\": \"Cadentier + Trasabilitate\"\n                },\n                {\n                  \"value\": \"cadantier\",\n                  \"label\": \"Cadantier\"\n                }\n              ],\n              \"name\": \"module\",\n              \"variant\": \"standard\",\n              \"width\": \"100%\",\n              \"label\": \"Modul\",\n              \"required\": true\n            }\n          ]\n        }\n      }\n    ]\n  }\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Usage report management",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "155",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "155",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "d0effaa5-b7d2-4d88-a514-1e28db9c06a2",
+          "body": "{\n  \"id\": \"77\",\n  \"activity\": {\n    \"id\": \"77\",\n    \"name\": \"Gestiune Zone\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Bakery\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/bakery\",\n      \"routePathExact\": true,\n      \"module\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true\n      }\n    }\n  },\n  \"screen\": {\n    \"id\": \"77\",\n    \"name\": \"Gestiune zone\",\n    \"icon\": \"DonutSmallOutlined\",\n    \"routeURL\": \"/zone\",\n    \"routePathExact\": true,\n    \"activity\": {\n      \"id\": \"77\",\n      \"name\": \"Gestiune zone\",\n      \"icon\": \"BarChart\",\n      \"submodule\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"BarChart\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true\n        }\n      }\n    }\n  },\n  \"roleId\": \"GOV_TL\",\n  \"jsonSchema\": {\n    \"UIComponent\": \"Box\",\n    \"id\": \"the-box\",\n    \"className\": \"\",\n    \"children\": [\n      {\n        \"UIComponent\": \"Table\",\n        \"id\": \"the-table\",\n        \"width\": \"100%\",\n        \"action\": {\n          \"url\": \"/zone\",\n          \"type\": \"GET\"\n        },\n        \"hideCheckbox\": true,\n        \"rowsPerPage\": 50,\n        \"rowsPerPageOptions\": [25, 50, 100],\n        \"columns\": [\n          {\n            \"title\": \"Denumire\",\n            \"field\": \"name\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Nume\",\n            \"field\": \"username\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Magazin\",\n            \"field\": \"stores\",\n            \"align\": \"left\",\n            \"type\": \"array\",\n            \"render\": {\n              \"UIComponent\": \"MultivalueCell\",\n              \"idKeyName\": \"stores\"\n            }\n          },\n          {\n            \"title\": \"Divizie\",\n            \"field\": \"divisionType\",\n            \"align\": \"left\",\n            \"type\": \"number\"\n          },\n          {\n            \"title\": \"Status\",\n            \"field\": \"enable\",\n            \"align\": \"center\",\n            \"type\": \"boolean\",\n            \"render\": {\n              \"UIComponent\": \"BooleanIcon\",\n              \"icon\": \"CheckCircleOutline\",\n              \"onSuccess\": \"#33691E\",\n              \"onFailure\": \"#E5E5E5\"\n            }\n          }\n        ],\n        \"tableActions\": {\n          \"newAction\": {\n            \"allowedRoles\": [\"all\"],\n            \"modalTitle\": \"Adauga Zona\",\n            \"formItems\": [\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"text\",\n                \"variant\": \"standard\",\n                \"name\": \"name\",\n                \"width\": \"100%\",\n                \"label\": \"Denumire\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"text\",\n                \"variant\": \"standard\",\n                \"name\": \"responsible\",\n                \"width\": \"100%\",\n                \"label\": \"Responsabil\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"hyper\",\n                    \"label\": \"Hyper\"\n                  },\n                  {\n                    \"value\": \"super\",\n                    \"label\": \"Super\"\n                  }\n                ],\n                \"name\": \"division\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Divizie\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"active\",\n                    \"label\": \"Activ\"\n                  },\n                  {\n                    \"value\": \"inactive\",\n                    \"label\": \"Inactiv\"\n                  }\n                ],\n                \"name\": \"status\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Status\"\n              }\n            ],\n            \"formItemsPerRow\": 1,\n            \"formButtons\": [\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Cancel\",\n                \"variant\": \"outlined\",\n                \"isCancelButton\": true\n              },\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Save\",\n                \"variant\": \"contained\",\n                \"isSaveButton\": true\n              }\n            ],\n            \"formAction\": {\n              \"type\": \"POST\",\n              \"url\": \"/zone\"\n            }\n          }\n        },\n        \"tableRowActions\": {\n          \"editAction\": {\n            \"allowedRoles\": [\"all\"],\n            \"updateUrl\": \"/regions/:id\",\n            \"updateUrlType\": \"PUT\",\n            \"getUrl\": \"/zone\",\n            \"getUrlType\": \"GET\",\n            \"formItems\": [\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"text\",\n                \"variant\": \"standard\",\n                \"name\": \"name\",\n                \"width\": \"100%\",\n                \"label\": \"Nume zona\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"text\",\n                \"variant\": \"standard\",\n                \"name\": \"responsible\",\n                \"width\": \"100%\",\n                \"label\": \"Responsabil\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"hyper\",\n                    \"label\": \"Hyper\"\n                  },\n                  {\n                    \"value\": \"super\",\n                    \"label\": \"Super\"\n                  }\n                ],\n                \"name\": \"division\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Divizie\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": \"active\",\n                    \"label\": \"Activ\"\n                  },\n                  {\n                    \"value\": \"inactive\",\n                    \"label\": \"Inactiv\"\n                  }\n                ],\n                \"name\": \"enable\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Status\"\n              }\n            ],\n            \"formItemsPerRow\": 1,\n            \"formButtons\": [\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Cancel\",\n                \"variant\": \"outlined\",\n                \"isCancelButton\": true\n              },\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Save\",\n                \"variant\": \"contained\",\n                \"isSaveButton\": true\n              }\n            ]\n          }\n        }\n      }\n    ]\n  }\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Zones management",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "77",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "77",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "fbb002d6-2309-473e-ab38-df97f6408d9d",
+          "body": "{\n  \"id\": \"88\",\n  \"activity\": {\n    \"id\": \"88\",\n    \"name\": \"Gestiune Magazine\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Bakery\",\n      \"icon\": \"BarChart\",\n      \"routeURL\": \"/bakery\",\n      \"routePathExact\": true,\n      \"module\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true\n      }\n    }\n  },\n  \"screen\": {\n    \"id\": \"88\",\n    \"name\": \"Gestiune magazine\",\n    \"icon\": \"DonutSmallOutlined\",\n    \"routeURL\": \"/store\",\n    \"routePathExact\": true,\n    \"activity\": {\n      \"id\": \"88\",\n      \"name\": \"Gestiune zone\",\n      \"icon\": \"BarChart\",\n      \"submodule\": {\n        \"id\": \"22\",\n        \"name\": \"Bakery\",\n        \"icon\": \"BarChart\",\n        \"routeURL\": \"/bakery\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"BarChart\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/bakery\",\n          \"routePathExact\": true\n        }\n      }\n    }\n  },\n  \"roleId\": \"GOV_TL\",\n  \"jsonSchema\": {\n    \"UIComponent\": \"Box\",\n    \"id\": \"the-box\",\n    \"className\": \"\",\n    \"children\": [\n      {\n        \"UIComponent\": \"Table\",\n        \"id\": \"the-table\",\n        \"width\": \"100%\",\n        \"action\": {\n          \"url\": \"/store\",\n          \"type\": \"GET\"\n        },\n        \"hideCheckbox\": true,\n        \"rowsPerPage\": 50,\n        \"rowsPerPageOptions\": [25, 50, 100],\n        \"columns\": [\n          {\n            \"title\": \"Magazin\",\n            \"field\": \"name\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Cod METI\",\n            \"field\": \"metiCode\",\n            \"align\": \"left\",\n            \"type\": \"string\"\n          },\n          {\n            \"title\": \"Divizie\",\n            \"field\": \"divisionType\",\n            \"align\": \"left\"\n          },\n          {\n            \"title\": \"Societate parinte\",\n            \"field\": \"parentSociety\",\n            \"align\": \"left\"\n          },\n          {\n            \"title\": \"Regiune\",\n            \"field\": \"region\",\n            \"align\": \"left\"\n          },\n          {\n            \"title\": \"Zona\",\n            \"field\": \"zone\",\n            \"align\": \"left\"\n          },\n          {\n            \"title\": \"Status\",\n            \"field\": \"enabled\",\n            \"align\": \"center\",\n            \"render\": {\n              \"UIComponent\": \"IconCell\",\n              \"idKeyName\": \"status\"\n            }\n          }\n        ],\n        \"tableRowActions\": {\n          \"editAction\": {\n            \"allowedRoles\": [\"all\"],\n            \"updateUrl\": \"/regions/:id\",\n            \"updateUrlType\": \"PUT\",\n            \"getUrl\": \"/store\",\n            \"getUrlType\": \"GET\",\n            \"formInfoItems\": [\n              {\n                \"name\": \"name\",\n                \"label\": \"Magazin\"\n              },\n              {\n                \"name\": \"parentSociety\",\n                \"label\": \"Societate parinte\"\n              },\n              {\n                \"name\": \"metiCode\",\n                \"label\": \"Cod METI\"\n              },\n              {\n                \"name\": \"divisionType\",\n                \"label\": \"Divizie\"\n              }\n            ],\n            \"formItems\": [\n              {\n                \"UIComponent\": \"AsyncAutocomplete\",\n                \"type\": \"autocomplete\",\n                \"action\": {\n                  \"url\": \"/zone\",\n                  \"type\": \"GET\",\n                  \"valueKey\": \"id\",\n                  \"labelKey\": \"name\"\n                },\n                \"variant\": \"standard\",\n                \"name\": \"zone\",\n                \"width\": \"100%\",\n                \"label\": \"Zona\",\n                \"payloadKey\": \"zone\"\n              },\n              {\n                \"UIComponent\": \"AsyncAutocomplete\",\n                \"type\": \"autocomplete\",\n                \"action\": {\n                  \"url\": \"/region\",\n                  \"type\": \"GET\",\n                  \"valueKey\": \"id\",\n                  \"labelKey\": \"name\"\n                },\n                \"variant\": \"standard\",\n                \"name\": \"region\",\n                \"width\": \"100%\",\n                \"label\": \"Regiune\",\n                \"payloadKey\": \"region\"\n              },\n              {\n                \"UIComponent\": \"Input\",\n                \"type\": \"select\",\n                \"values\": [\n                  {\n                    \"value\": true,\n                    \"label\": \"Activ\"\n                  },\n                  {\n                    \"value\": false,\n                    \"label\": \"Inactiv\"\n                  }\n                ],\n                \"name\": \"enabled\",\n                \"variant\": \"standard\",\n                \"width\": \"100%\",\n                \"label\": \"Status\"\n              }\n            ],\n            \"formItemsPerRow\": 1,\n            \"formButtons\": [\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Cancel\",\n                \"variant\": \"outlined\",\n                \"isCancelButton\": true\n              },\n              {\n                \"UIComponent\": \"Button\",\n                \"label\": \"Save\",\n                \"variant\": \"contained\",\n                \"isSaveButton\": true\n              }\n            ]\n          }\n        }\n      }\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Stores management",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "activityId",
+              "value": "88",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "screenId",
+              "value": "88",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "e64a8211-d6f8-4579-ae8c-d0294af5b12e"
+    },
+    {
+      "type": "route",
+      "uuid": "efa77832-0577-4e56-b41a-442ba5eaf909"
+    },
+    {
+      "type": "route",
+      "uuid": "463d3ac6-1ff1-4f9e-879c-312fb7cf4827"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    },
+    {
+      "key": "Cache-Control",
+      "value": "public, max-age=120"
+    },
+    {
+      "key": "Access-Control-Max-Age",
+      "value": "120"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}

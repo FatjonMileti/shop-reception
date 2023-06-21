@@ -20,6 +20,7 @@ import { toTableRowItems } from 'utils/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
+import { isEmpty } from 'lodash'
 
 const Table = props => {
   const {
@@ -31,6 +32,7 @@ const Table = props => {
     tableFooter,
     hasGeneralSearch,
     isUserModal,
+    hasInitialFilters,
     ...rest
   } = props
 
@@ -40,8 +42,6 @@ const Table = props => {
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
-  // This is used to prevent the comboValue to trigger handleRemoteData first time, as it is handled in the lib
-  const [isInitialFetch, setIsInitialFetch] = useState(true)
   const [summary, setSummary] = useState({})
 
   const [tableState, setTableState] = useImmer({
@@ -88,16 +88,12 @@ const Table = props => {
   )
 
   useEffect(() => {
-    if (!isInitialFetch) {
-      let tableFilters
-      if (Object.keys(table.filters).length) {
-        tableFilters = Object.keys(table.filters).map(key => ({
+    if (hasInitialFilters) {
+      const tableFilters =
+        Object.keys(table.filters).map(key => ({
           name: key,
-          value: table.filters[key]
-        }))
-
-        setTableState({ ...tableState, filters: tableFilters})
-      }
+          value: table.filters[key]?.value ?? table.filters[key]
+        })) || []
 
       handleRemoteData(
         tableState.page,
@@ -105,10 +101,10 @@ const Table = props => {
         tableState.order,
         tableState.orderBy,
         tableState.searchText,
-        tableFilters || tableState.filters
+        tableFilters
       )
     }
-  }, [comboValue?.value, table.filters])
+  }, [table.filters])
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
@@ -119,7 +115,10 @@ const Table = props => {
       searchText,
       filters
     })
-    setIsInitialFetch(false)
+
+    if (hasInitialFilters && isEmpty(table.filters)) {
+      return null
+    }
 
     const url = action.url
 
