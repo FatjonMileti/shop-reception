@@ -6,7 +6,7 @@ import s from './PDFDocument.modules.scss'
 
 // TODO add this in build
 // [~] from https://github.com/wojtekmaj/react-pdf#use-external-cdn
-// pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
 
 const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
   const [pdfFile, setPdfFile] = useState(null)
