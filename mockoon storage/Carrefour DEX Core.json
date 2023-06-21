@@ -5251,18 +5251,6 @@
     },
     {
       "type": "route",
-      "uuid": "8d6ac6f9-382c-411c-97a4-dc922d1aa990"
-    },
-    {
-      "type": "route",
-      "uuid": "8697c2da-4209-4d41-afa6-bad2c8793e06"
-    },
-    {
-      "type": "route",
-      "uuid": "808143d1-b30d-4d4b-873f-0f638ae91eae"
-    },
-    {
-      "type": "route",
       "uuid": "92a6bb4b-202d-4965-87d1-ca58d6c08ad5"
     }
   ],
