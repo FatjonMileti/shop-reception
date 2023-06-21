@@ -1,7 +1,7 @@
 {
   "uuid": "26650887-dc81-4416-97d5-c87d87b56f48",
   "lastMigration": 27,
-  "name": "DEX Designer REST API",
+  "name": "DEX Designer Bakery REST API",
   "endpointPrefix": "8080/rest/api/v1",
   "latency": 0,
   "port": 3003,
