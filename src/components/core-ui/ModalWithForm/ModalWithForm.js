@@ -101,27 +101,27 @@ const ModalWithForm = ({
     })
   }
 
-  const saveData = async () => {
+  const saveData = async data => {
     setIsLoading(true)
+
     try {
-      const payload = toItemPayload(editItem)
       let result
       if (formAction.type === 'POST') {
-        result = await makeCorePostRequest(`${formAction.url}`, payload)
+        result = await makeCorePostRequest(`${formAction.url}`, data)
         showNotification({
           message: 'Item created successfully',
           type: 'success'
         })
       }
       if (formAction.type === 'PUT') {
-        result = await makeCorePutRequest(`${formAction.url}`, payload)
+        result = await makeCorePutRequest(`${formAction.url}`, data)
         showNotification({
           message: 'Item saved successfully',
           type: 'success'
         })
       }
       if (formAction.type === 'PATCH') {
-        result = await makeCorePatchRequest(`${formAction.url}`, payload)
+        result = await makeCorePatchRequest(`${formAction.url}`, data)
         showNotification({
           message: 'Item saved successfully',
           type: 'success'
@@ -142,6 +142,23 @@ const ModalWithForm = ({
     setIsLoading(false)
   }
 
+  const saveFormData = async () => {
+    const formData = new FormData()
+
+    Object.keys(editItem).forEach(key => {
+      if (key !== 'imageUrl' && editItem[key]) {
+        formData.append(key, editItem[key])
+      }
+    })
+
+    await saveData(formData)
+  }
+
+  const saveJSONData = async () => {
+    const payload = toItemPayload(editItem)
+    await saveData(payload)
+  }
+
   const closeModalAndResetForm = () => {
     closeModal()
     setEditItem({})
@@ -150,6 +167,8 @@ const ModalWithForm = ({
 
   const isXs = useMediaQuery('(max-width:624px)')
   const isMd = useMediaQuery('(max-width:936px)')
+
+  const saveFn = formItems.some(item => item.type === 'file') ? saveFormData : saveJSONData
 
   return (
     <Modal
@@ -187,7 +206,7 @@ const ModalWithForm = ({
               handleInputChange={handleInputChange}
               editItem={editItem}
               formButtons={formButtons}
-              saveData={saveData}
+              saveData={saveFn}
               closeModal={closeModalAndResetForm}
               comboValue={comboValue}
             />

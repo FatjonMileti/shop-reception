@@ -12,22 +12,19 @@ const Item = ({
   value,
   comboValue,
   handleInputChange,
+  editItem,
   rest
 }) => {
   const key = rest.payloadKey || name
 
   return (
-    <Grid
-      item
-      key={name}
-      xs={12}
-      sm={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}
-    >
+    <Grid item key={name} xs={12} sm={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}>
       {createElement(Components[UIComponent], {
         ...rest,
         type,
         value,
         comboValue,
+        editItem,
         ...(type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
         name,
         onChange: (arg, variable) => {
@@ -46,8 +43,15 @@ const Item = ({
               handleInputChange(arg?.value, rest[variable].payloadKey, type)
               handleInputChange(arg?.label, rest[variable].name, type)
               break
+            case 'file':
+              console.log(type)
+              if (arg) {
+                handleInputChange(arg?.target.files[0], 'fileObject')
+              } else {
+                handleInputChange(null, 'fileObject')
+              }
             default:
-              handleInputChange(arg.target.value, key, type)
+              handleInputChange(arg?.target?.value, key, type)
               break
           }
         }

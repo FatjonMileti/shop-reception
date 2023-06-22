@@ -1036,6 +1036,177 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "c5dd545f-6427-4b6e-87d4-69028009fe7e",
+      "type": "http",
+      "documentation": "Get products list",
+      "method": "get",
+      "endpoint": "products",
+      "responses": [
+        {
+          "uuid": "7759dbe3-b629-4711-9431-3c53e4efa463",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted products list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "afa381f7-d36b-415a-8a15-3bc788eb2003",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "469ef81e-fe95-400f-84fb-6006d940744c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "54128ec7-27a7-48ad-8b11-4d853685220c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "8cf1e76f-8787-460c-a2b4-8fca273b8841",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "2a722482-4e6e-4228-8796-502bbf414a8b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "415e851e-45d1-46d8-ac57-ec6e5fa5b060",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "products/:id",
+      "responses": [
+        {
+          "uuid": "0f2889ea-f2d7-4961-8c7e-ee49b2784eed",
+          "body": "{\n    \"id\": 1,\n    \"name\": \"Paine alba\",\n    \"category\": \"Paine\",\n    \"imageUrl\": \"https://auchan.vtexassets.com/arquivos/ids/166673/paine-alba-dobrogea-300-g-8865847377950.jpg?v=637985915358900000\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully retrieved a product object",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -1070,6 +1241,14 @@
     {
       "type": "route",
       "uuid": "0586e2df-ebdc-4491-8f0d-bb8162b96530"
+    },
+    {
+      "type": "route",
+      "uuid": "c5dd545f-6427-4b6e-87d4-69028009fe7e"
+    },
+    {
+      "type": "route",
+      "uuid": "415e851e-45d1-46d8-ac57-ec6e5fa5b060"
     }
   ],
   "proxyMode": false,

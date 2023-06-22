@@ -11,7 +11,7 @@ const FormItem = ({
   handleInputChange,
   comboValue,
   gridSize,
-  UIComponent
+  UIComponent,
 }) => {
   const value = useMemo(() => {
     if (type === 'countyCitySelect') {
@@ -44,6 +44,7 @@ const FormItem = ({
 
   return (
     <Item
+      editItem={editItem}
       name={name}
       formItemsPerRow={formItemsPerRow}
       gridSize={gridSize}
