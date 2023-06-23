@@ -88,22 +88,20 @@ const Table = props => {
   )
 
   useEffect(() => {
-    if (hasInitialFilters) {
-      const tableFilters =
-        Object.keys(table.filters).map(key => ({
-          name: key,
-          value: table.filters[key]?.value ?? table.filters[key]
-        })) || []
+    const tableFilters =
+      Object.keys(table.filters).map(key => ({
+        name: key,
+        value: table.filters[key]?.value ?? table.filters[key]
+      })) || []
 
-      handleRemoteData(
-        tableState.page,
-        tableState.rowsPerPage,
-        tableState.order,
-        tableState.orderBy,
-        tableState.searchText,
-        tableFilters
-      )
-    }
+    handleRemoteData(
+      tableState.page,
+      tableState.rowsPerPage,
+      tableState.order,
+      tableState.orderBy,
+      tableState.searchText,
+      tableFilters
+    )
   }, [table.filters])
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
