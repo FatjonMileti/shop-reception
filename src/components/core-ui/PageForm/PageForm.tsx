@@ -82,7 +82,10 @@ const PageForm = props => {
       setIsLoading(false)
 
       if (href) {
-        let url = `${href}/${response.id}`
+        let url = href
+        if (response.id) {
+          url = `${url}/${response.id}`
+        }
         if (formAction.variable) {
           url = `${url}?${formAction.variable}=${searchParams.get(formAction.variable)}`
         }

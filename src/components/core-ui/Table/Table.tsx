@@ -55,11 +55,12 @@ const Table = props => {
   const table = useSelector((state: RootState) => state.table)
   const { showNotification } = useNotification()
 
-  const { canCreate, canView, canEdit, canDelete } = usePermissions({
+  const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
     viewRoles: tableRowActions?.viewAction?.allowedRoles,
     editRoles: tableRowActions?.editAction?.allowedRoles,
-    deleteRoles: tableRowActions?.deleteAction?.allowedRoles
+    deleteRoles: tableRowActions?.deleteAction?.allowedRoles,
+    cancelRoles: tableRowActions?.cancelAction?.allowedRoles
   })
 
   const filtersConfig = useMemo(() => {
@@ -206,7 +207,7 @@ const Table = props => {
       <GeneralTable
         {...rest}
         columns={
-          tableRowActions && (canEdit || canDelete || canView)
+          tableRowActions && (canEdit || canDelete || canView || canCancel)
             ? renderedColumns.concat({
                 title: '',
                 field: 'actions',
@@ -219,6 +220,7 @@ const Table = props => {
                     viewAction={tableRowActions.viewAction}
                     editAction={tableRowActions.editAction}
                     deleteAction={tableRowActions.deleteAction}
+                    cancelAction={tableRowActions.cancelAction}
                     additionalAction={() =>
                       handleRemoteData(
                         tableState.page,
@@ -233,6 +235,7 @@ const Table = props => {
                     canView={canView}
                     canEdit={canEdit}
                     canDelete={canDelete}
+                    canCancel={canCancel}
                   />
                 )
               })

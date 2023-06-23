@@ -90,7 +90,7 @@ export const convertFilterSchemaToFilterConfig = (
 export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string) => {
   if (!searchText) return ''
 
-  const searchBy = searchFields.reduce((acc, field) => (acc = acc ? `${acc}|${field}` : field), '')
+  const searchBy = searchFields.reduce((acc, field) => (acc = acc ? `${acc}${encodeURIComponent('|')}${field}` : field), '')
 
   return `&searchBy=${searchBy}&searchValue=${encodeURIComponent(searchText)}`
 }

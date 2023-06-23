@@ -1,6 +1,7 @@
-import { Edit, Delete, Visibility } from '@mui/icons-material'
+import { Edit, Delete, Visibility, Cancel } from '@mui/icons-material'
 import { ButtonWithModalAndForm } from '../../ButtonWithModalAndForm'
 import { ButtonWithConfirmDeleteModal } from '../../ButtonWithConfirmDeleteModal'
+import { ButtonWithConfirmCancelModal } from '../../ButtonWithConfirmCancelModal'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
@@ -9,15 +10,17 @@ const TableActions = ({
   viewAction,
   editAction,
   deleteAction,
+  cancelAction,
   additionalAction,
   comboValue,
   canView,
   canEdit,
-  canDelete
+  canDelete,
+  canCancel
 }) => {
   const navigate = useNavigate()
 
-  const [searchParams, _] = useSearchParams()
+  const [searchParams] = useSearchParams()
 
   return (
     <div style={{ minWidth: '5rem' }}>
@@ -64,6 +67,20 @@ const TableActions = ({
           formButtons={deleteAction.formButtons}
           deletedItemId={itemId}
           deleteActionUrl={deleteAction.url}
+          additionalAction={additionalAction}
+        />
+      )}
+      {cancelAction && canCancel && (
+        <ButtonWithConfirmCancelModal
+          buttonProps={{ children: <Cancel /> }}
+          modalTitle="Cancel"
+          modalMessage={cancelAction.confirmText}
+          formButtons={cancelAction.formButtons}
+          itemId={itemId}
+          action={{
+            type: cancelAction.type,
+            url: cancelAction.url
+          }}
           additionalAction={additionalAction}
         />
       )}
