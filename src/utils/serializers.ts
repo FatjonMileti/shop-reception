@@ -14,6 +14,17 @@ export const toItemPayload = (item: { [key: string]: string }) => {
   return payload
 }
 
+export const toFormDataPayload = (item: { [key: string]: string }) => {
+  const formData = Object.keys(item).reduce((formData, key) => {
+    if (key !== 'imageUrl' && item[key]) {
+      formData.append(key, item[key])
+    }
+    return formData
+  }, new FormData())
+
+  return formData
+}
+
 export const toArrayItemPayload = (item: Filter[]) => {
   let payload = {}
 
