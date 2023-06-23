@@ -44,7 +44,7 @@ function TableFilters(props) {
                       setFilterValues(name, arg, type)
                       break
                     case 'autocomplete':
-                      setFilterValues(name, arg.value, type)
+                      setFilterValues(name, arg, type)
                       break
                     default:
                       setFilterValues(arg.target.name, arg.target.value, type)

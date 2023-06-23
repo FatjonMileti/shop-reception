@@ -33,6 +33,8 @@ import { TableSearch } from 'components/core-ui/TableSearch'
 import { Tabs } from 'components/core-ui/Tabs'
 import { TitleText } from 'components/core-ui/TitleText'
 import { TableFilters } from 'components/core-ui/TableFilters'
+import { UserModal } from 'components/core-ui/UserModal'
+import { FileUpload } from 'components/core-ui/FileUpload'
 
 export const Components = {
   // MUI components
@@ -76,5 +78,7 @@ export const Components = {
   TableSearch,
   Tabs,
   TitleText,
-  TableFilters
+  TableFilters,
+  UserModal,
+  FileUpload
 }
