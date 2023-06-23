@@ -44,7 +44,6 @@ const Item = ({
               handleInputChange(arg?.label, rest[variable].name, type)
               break
             case 'file':
-              console.log(type)
               if (arg) {
                 handleInputChange(arg?.target.files[0], 'fileObject')
               } else {

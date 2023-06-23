@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import s from './FileUpload.modules.scss'
+import FileViewDetails from './FileViewDetails'
 
 const FileUpload = props => {
   const { value, editItem, fileInputProps, onChange } = props
@@ -9,28 +10,29 @@ const FileUpload = props => {
   const [selectedFile, setSelectedFile] = useState(null)
   const [selectedFileUrl, setSelectedFileUrl] = useState(null)
 
-  useEffect(() => {
-    async function getImageFileFromURL(imageUrl) {
-      try {
-        const response = await fetch(imageUrl)
-        const blob = await response.blob()
+  async function getImageFileFromURL(imageUrl) {
+    try {
+      const response = await fetch(imageUrl)
+      const blob = await response.blob()
 
-        const file = new File([blob], editItem.name, { type: blob.type })
-        return file
-      } catch (error) {
-        console.error('Error fetching image:', error)
-        return null
-      }
+      const file = new File([blob], editItem.name, { type: blob.type })
+      return file
+    } catch (error) {
+      console.error('Error fetching image:', error)
+      return null
     }
+  }
 
+  useEffect(() => {
     if (value) {
-      getImageFileFromURL(value).then(response => {
+      ;(async () => {
+        const response = await getImageFileFromURL(value)
         if (response) {
           const imageURL = URL.createObjectURL(response)
           setSelectedFile(response)
           setSelectedFileUrl(imageURL)
         }
-      })
+      })()
     }
   }, [])
 
@@ -51,19 +53,18 @@ const FileUpload = props => {
   return (
     <div className={s.container}>
       {selectedFile ? (
-        <React.Fragment>
+        <>
           <div className={s.fileContainer}>
-            <div className={s.image}>
-              {displayImage && (
-                <img width="40px" height="40px" src={selectedFileUrl} alt="Selected file" />
-              )}
-              <p className={s.text}>{selectedFile.name}</p>
-            </div>
+            <FileViewDetails
+              selectedFile={selectedFile}
+              selectedFileUrl={selectedFileUrl}
+              displayImage={displayImage}
+            />
             <div className={s.clearButton} onClick={handleClearFile}>
               <DeleteOutlineIcon style={{ marginRight: '9px' }} />
             </div>
           </div>
-        </React.Fragment>
+        </>
       ) : (
         <label htmlFor="file-upload">
           <div className={s.buttonWrapper}>

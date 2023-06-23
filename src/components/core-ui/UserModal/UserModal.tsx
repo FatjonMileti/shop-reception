@@ -181,7 +181,7 @@ function UserModal(props) {
                       structureRole => structureRole.roleId === role.id
                     )
                     const action = {
-                      url: `/${role.url}`,
+                      url: `/structure/role/${role.id}`,
                       type: 'GET',
                       valueKey: 'id',
                       labelKey: 'name'

@@ -36,13 +36,8 @@ function StructureItem(props) {
     ;(async () => {
       try {
         let url = action.url
-
-        if (comboValue) {
-          url = `${url}?page=-1&filterBy=${action.comboQueryKey}&filterValue=${comboValue.value}`
-        }
         const result = await makeCoreGetRequest(url)
-        const { valueKey, labelKey } = action
-        const optionItems = toAsyncSelectOptions(result.list || result, valueKey, labelKey)
+        const optionItems = result.list.map(item => ({ label: item.name, value: item.id }))
         setOptions(optionItems)
 
         const selected = optionItems.find(opt => opt.value === props?.value?.structureId)

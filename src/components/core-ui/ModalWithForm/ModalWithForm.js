@@ -13,7 +13,7 @@ import {
   makeCorePatchRequest
 } from 'utils/api'
 import { getItemDefaults, formatPayloadDate } from 'utils/helpers'
-import { toItemPayload } from 'utils/serializers'
+import { toFormDataPayload, toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
 import { set } from 'lodash'
 import { useMediaQuery, CircularProgress } from '@mui/material'
@@ -143,14 +143,7 @@ const ModalWithForm = ({
   }
 
   const saveFormData = async () => {
-    const formData = new FormData()
-
-    Object.keys(editItem).forEach(key => {
-      if (key !== 'imageUrl' && editItem[key]) {
-        formData.append(key, editItem[key])
-      }
-    })
-
+    const formData = toFormDataPayload(editItem)
     await saveData(formData)
   }
 
