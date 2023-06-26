@@ -10,7 +10,6 @@ const Item = ({
   UIComponent,
   type,
   value,
-  comboValue,
   handleInputChange,
   editItem,
   rest
@@ -23,7 +22,6 @@ const Item = ({
         ...rest,
         type,
         value,
-        comboValue,
         editItem,
         ...(type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
         name,

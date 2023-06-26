@@ -28,7 +28,6 @@ const Table = props => {
     columns,
     tableActions,
     tableRowActions,
-    comboValue,
     tableFooter,
     hasGeneralSearch,
     isUserModal,
@@ -89,21 +88,24 @@ const Table = props => {
   )
 
   useEffect(() => {
-    const tableFilters =
-      Object.keys(table.filters).map(key => ({
-        name: key,
-        value: table.filters[key]?.value ?? table.filters[key]
-      })) || []
-
     handleRemoteData(
       tableState.page,
       tableState.rowsPerPage,
       tableState.order,
       tableState.orderBy,
       tableState.searchText,
-      tableFilters
+      tableState.filters
     )
   }, [table.filters])
+
+  const tableFilters = useMemo(
+    () =>
+      Object.keys(table.filters).map(key => ({
+        name: key,
+        value: table.filters[key]?.value ?? table.filters[key]
+      })) || [],
+    [table.filters]
+  )
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
@@ -131,7 +133,7 @@ const Table = props => {
             searchText,
             searchFields: tableActions?.searchAction?.searchFields,
             filters,
-            comboValue,
+            tableFilters,
             page,
             rowsPerPage,
             order,
@@ -152,7 +154,7 @@ const Table = props => {
             searchText,
             searchFields: tableActions.searchAction?.searchFields,
             filters,
-            comboValue,
+            tableFilters,
             hasGeneralSearch,
             generalSearchText: table.searchText
           })
@@ -200,7 +202,6 @@ const Table = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
-          comboValue={comboValue}
         />
       )}
       <GeneralTable
@@ -230,7 +231,6 @@ const Table = props => {
                         tableState.filters
                       )
                     }
-                    comboValue={comboValue}
                     canView={canView}
                     canEdit={canEdit}
                     canDelete={canDelete}

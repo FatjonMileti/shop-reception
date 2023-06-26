@@ -54,7 +54,7 @@ const AsyncAutocomplete = props => {
 
       if (action.filterQueryKey && action.localQueryKey) {
         url = `${url}?page=-1&filterBy=${action.filterQueryKey}&filterValue=${
-          filterState[action.localQueryKey]
+          filterState[action.localQueryKey]?.value
         }`
       }
       const result = await makeCoreGetRequest(url)

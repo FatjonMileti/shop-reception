@@ -12,7 +12,6 @@ const TableActions = ({
   deleteAction,
   cancelAction,
   additionalAction,
-  comboValue,
   canView,
   canEdit,
   canDelete,
@@ -57,7 +56,6 @@ const TableActions = ({
           editedItemId={itemId}
           editedItemUrl={editAction.getUrl}
           additionalAction={additionalAction}
-          comboValue={comboValue}
           isUserModal={isUserModal}
         />
       )}

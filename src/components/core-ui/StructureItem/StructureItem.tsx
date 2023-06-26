@@ -13,7 +13,6 @@ function StructureItem(props) {
     value,
     selectLabel,
     action,
-    comboValue,
     width,
     ...rest
   } = props

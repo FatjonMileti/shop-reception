@@ -9,7 +9,6 @@ const FormItem = ({
   formItemsPerRow,
   rest,
   handleInputChange,
-  comboValue,
   gridSize,
   UIComponent,
 }) => {
@@ -51,7 +50,6 @@ const FormItem = ({
       UIComponent={UIComponent}
       type={type}
       value={value}
-      comboValue={comboValue}
       handleInputChange={handleInputChange}
       rest={rest}
       key={name}

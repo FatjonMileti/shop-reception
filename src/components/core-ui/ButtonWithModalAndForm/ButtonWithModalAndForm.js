@@ -15,7 +15,6 @@ const ButtonWithModalAndForm = ({
   editedItemId,
   editedItemUrl,
   additionalAction,
-  comboValue,
   isUserModal = false
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -42,7 +41,6 @@ const ButtonWithModalAndForm = ({
           additionalAction={additionalAction}
           isModalOpen={isModalOpen}
           closeModal={closeModal}
-          comboValue={comboValue}
         />
       )}
     </>

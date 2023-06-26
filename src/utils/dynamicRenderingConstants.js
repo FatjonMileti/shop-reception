@@ -5,7 +5,6 @@ import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { Button } from 'components/core-ui/Button'
 import { Card } from 'components/core-ui/Card'
-import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
 import { ContainerBox } from 'components/core-ui/ContainerBox'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
@@ -53,7 +52,6 @@ export const Components = {
   BooleanIcon,
   Button,
   Card,
-  ComboBoxTable,
   ContainerBox,
   CountyCitySelect,
   FloatingButton,

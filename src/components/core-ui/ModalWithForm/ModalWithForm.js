@@ -45,7 +45,6 @@ const ModalWithForm = ({
   additionalAction,
   isModalOpen,
   closeModal,
-  comboValue,
   href
 }) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -201,7 +200,6 @@ const ModalWithForm = ({
               formButtons={formButtons}
               saveData={saveFn}
               closeModal={closeModalAndResetForm}
-              comboValue={comboValue}
             />
           </div>
         )}
