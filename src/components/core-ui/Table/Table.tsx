@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
@@ -21,6 +21,7 @@ import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 import { isEmpty } from 'lodash'
+import { ConfirmationModal } from 'components/core-ui/ConfirmationModal'
 
 const Table = props => {
   const {
@@ -29,7 +30,7 @@ const Table = props => {
     tableActions,
     tableRowActions,
     tableFooter,
-    hasGeneralSearch,
+    generalSearch,
     isUserModal,
     hasInitialFilters,
     ...rest
@@ -42,6 +43,7 @@ const Table = props => {
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
   const [summary, setSummary] = useState({})
+  const [isNoGeneralSearchConfirmModalOpen, setIsNoGeneralSearchConfirmModalOpen] = useState(false)
 
   const [tableState, setTableState] = useImmer({
     page: 0,
@@ -53,7 +55,10 @@ const Table = props => {
   })
 
   const table = useSelector((state: RootState) => state.table)
+
   const { showNotification } = useNotification()
+
+  const navigate = useNavigate()
 
   const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
@@ -96,7 +101,7 @@ const Table = props => {
       tableState.searchText,
       tableState.filters
     )
-  }, [table.filters])
+  }, [table.filters, table.searchText])
 
   const tableFilters = useMemo(
     () =>
@@ -138,7 +143,7 @@ const Table = props => {
             rowsPerPage,
             order,
             orderBy,
-            hasGeneralSearch,
+            hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText
           })
         )
@@ -155,7 +160,7 @@ const Table = props => {
             searchFields: tableActions.searchAction?.searchFields,
             filters,
             tableFilters,
-            hasGeneralSearch,
+            hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText
           })
         )
@@ -163,6 +168,10 @@ const Table = props => {
       setItems(toTableRowItems(response.list, columns))
       setTotalCount(response.page.totalCount)
       setSummary(response.summary)
+
+      if (generalSearch?.noResults && table.searchText && !response.list.length) {
+        openNoGeneralSearchConfirmModal()
+      }
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${error.message}`,
@@ -185,7 +194,16 @@ const Table = props => {
     }
   }
 
-  return hasGeneralSearch && !table.searchText.length ? null : (
+  const openNoGeneralSearchConfirmModal = () => setIsNoGeneralSearchConfirmModalOpen(true)
+
+  const closeNoGeneralSearchConfirmModal = () => setIsNoGeneralSearchConfirmModalOpen(false)
+
+  const noGeneralSearchConfirm = () => {
+    closeNoGeneralSearchConfirmModal()
+    navigate(generalSearch.noResults.action.href)
+  }
+
+  return generalSearch?.hasGeneralSearch && !table.searchText.length ? null : (
     <Box className={s.tableContainer}>
       {tableActions?.newAction && canCreate && (
         <ModalWithForm
@@ -202,6 +220,16 @@ const Table = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
+        />
+      )}
+      {generalSearch?.noResults && (
+        <ConfirmationModal
+          isModalOpen={isNoGeneralSearchConfirmModalOpen}
+          closeModal={closeNoGeneralSearchConfirmModal}
+          modalTitle=""
+          modalMessage={generalSearch.noResults.message}
+          buttons={generalSearch.noResults.buttons}
+          confirm={noGeneralSearchConfirm}
         />
       )}
       <GeneralTable

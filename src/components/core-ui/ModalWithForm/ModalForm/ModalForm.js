@@ -7,7 +7,7 @@ import { useNotification } from 'hooks'
 import { FormItem } from './FormItem'
 import { isEmpty } from 'lodash'
 import { Icon } from '../../Icon'
-import s from './ModalForm.scss'
+import s from './ModalForm.modules.scss'
 
 const ModalForm = ({
   modalTitle,
