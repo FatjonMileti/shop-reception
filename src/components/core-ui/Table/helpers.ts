@@ -3,7 +3,6 @@ import { renderComponent } from 'utils/dynamicRenderingService'
 import { toFiltersUrl } from './serializers'
 import { formatUIDate, getDefaultItemValue } from 'utils/helpers'
 import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
-import { ComboValue } from '../ComboBoxTable/ComboBoxTableDefinitions'
 
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): string => {
   const { variable, defaultValue } = filter
@@ -90,7 +89,7 @@ export const convertFilterSchemaToFilterConfig = (
 export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string) => {
   if (!searchText) return ''
 
-  const searchBy = searchFields.reduce((acc, field) => (acc = acc ? `${acc}|${field}` : field), '')
+  const searchBy = searchFields.reduce((acc, field) => (acc = acc ? `${acc}${encodeURIComponent('|')}${field}` : field), '')
 
   return `&searchBy=${searchBy}&searchValue=${encodeURIComponent(searchText)}`
 }
@@ -111,10 +110,9 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
   return `&filterBy=${filterBy}&filterValue=${filterValue}`
 }
 
-export const getAllFilters = (filters: Filter[], comboValue: ComboValue) =>
+export const getAllFilters = (filters: Filter[]) =>
   filters
     .filter(filter => filter.value)
-    .concat(comboValue ? [{ name: comboValue.name, value: comboValue.value }] : [])
 
 export const getTableQueryUrl = params =>
   Object.keys(params).reduce(

@@ -5020,440 +5020,11 @@
       "responseMode": null
     },
     {
-      "uuid": "8d6ac6f9-382c-411c-97a4-dc922d1aa990",
-      "type": "http",
-      "documentation": "Get team members list",
-      "method": "get",
-      "endpoint": "store",
-      "responses": [
-        {
-          "uuid": "be9f7ec5-c465-4e7e-89f0-bc2516b46077",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Magazin1\",\n      \"metiCode\": \"CodMeti\",\n      \"divisionType\": \"Hyper\",\n      \"parentSociety\": \"Carrefour\",\n      \"zone\": \"Zone1\",\n      \"region\": \"Moldova\",\n      \"enable\": true\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Magazin1\",\n      \"metiCode\": \"CodMeti\",\n      \"divisionType\": \"Hyper\",\n      \"parentSociety\": \"Carrefour\",\n      \"zone\": \"Zone1\",\n      \"region\": \"Moldova\",\n      \"enable\": true\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Magazin1\",\n      \"metiCode\": \"CodMeti\",\n      \"divisionType\": \"Hyper\",\n      \"parentSociety\": \"Carrefour\",\n      \"zone\": \"Zone1\",\n      \"region\": \"Moldova\",\n      \"enable\": true\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Magazin1\",\n      \"metiCode\": \"CodMeti\",\n      \"divisionType\": \"Hyper\",\n      \"parentSociety\": \"Carrefour\",\n      \"zone\": \"Zone1\",\n      \"region\": \"Moldova\",\n      \"enable\": true\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Magazin1\",\n      \"metiCode\": \"CodMeti\",\n      \"divisionType\": \"Hyper\",\n      \"parentSociety\": \"Carrefour\",\n      \"zone\": \"Zone1\",\n      \"region\": \"Moldova\",\n      \"enable\": true\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Magazin1\",\n      \"metiCode\": \"CodMeti\",\n      \"divisionType\": \"Hyper\",\n      \"parentSociety\": \"Carrefour\",\n      \"zone\": \"Zone1\",\n      \"region\": \"Moldova\",\n      \"enable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the paginated, filtered and sorted stores list",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "7c4b8673-b72b-4677-a7ac-2372e723bbe6",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "bca4d33e-33b5-4f98-9351-989691ae210c",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "0f2654d8-8561-4593-8b0c-c84918d65934",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "9b3bac7a-fefc-4907-9fb8-a97f2740e7ff",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "b6a5e857-b579-4790-9b59-0ffa07372e53",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "8697c2da-4209-4d41-afa6-bad2c8793e06",
-      "type": "http",
-      "documentation": "Get team members list",
-      "method": "get",
-      "endpoint": "region",
-      "responses": [
-        {
-          "uuid": "9bfa3b95-a413-4686-b507-5ba7678d1e24",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the paginated, filtered and sorted regions list",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "28244d3c-89f6-44d3-b8f2-13183cab0696",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "2396414b-d614-4225-9e5f-267035715522",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "023275c9-e8b3-4ef0-8dbf-9402f20a7080",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "51984874-3073-4c57-995f-af1c373e632f",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "fed5ba6f-545a-4045-8691-0c3249d20ae8",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "808143d1-b30d-4d4b-873f-0f638ae91eae",
-      "type": "http",
-      "documentation": "Get team members list",
-      "method": "get",
-      "endpoint": "zone",
-      "responses": [
-        {
-          "uuid": "64c70265-edcb-4350-9e09-af53f8a7b961",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the paginated, filtered and sorted zones list",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "f1c1a940-b9e9-4ea9-8ed2-4c788c91c9d3",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "e06b5d1c-3c4c-438f-a44c-49bd18a5974c",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "e6fde223-c28e-475f-b023-12c35b91a99b",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "94268478-6211-4c13-8fbf-7ff00255c147",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "5837c9de-d66d-436b-9651-95560a215d4f",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
       "uuid": "92a6bb4b-202d-4965-87d1-ca58d6c08ad5",
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "governance/domain",
+      "endpoint": "governance/domains",
       "responses": [
         {
           "uuid": "b415b596-c89b-48b3-a3fd-5e7eb7449aeb",
@@ -5680,18 +5251,6 @@
     },
     {
       "type": "route",
-      "uuid": "8d6ac6f9-382c-411c-97a4-dc922d1aa990"
-    },
-    {
-      "type": "route",
-      "uuid": "8697c2da-4209-4d41-afa6-bad2c8793e06"
-    },
-    {
-      "type": "route",
-      "uuid": "808143d1-b30d-4d4b-873f-0f638ae91eae"
-    },
-    {
-      "type": "route",
       "uuid": "92a6bb4b-202d-4965-87d1-ca58d6c08ad5"
     }
   ],
@@ -5703,4 +5262,36 @@
     "type": "CERT",
     "pfxPath": "",
     "certPath": "",
- 
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}

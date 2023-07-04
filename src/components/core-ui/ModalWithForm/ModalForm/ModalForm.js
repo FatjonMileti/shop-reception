@@ -18,8 +18,7 @@ const ModalForm = ({
   editItem,
   formButtons,
   saveData,
-  closeModal,
-  comboValue
+  closeModal
 }) => {
   const [processedFormItems, setProcessedFormItems] = useState(formItems)
 
@@ -69,7 +68,6 @@ const ModalForm = ({
               formItemsPerRow={formItemsPerRow}
               rest={rest}
               handleInputChange={handleInputChange}
-              comboValue={comboValue}
               gridSize={gridSize}
             />
           )

@@ -3,30 +3,43 @@ import { isAllowed } from 'utils/helpers'
 import { getUserRoles } from 'utils/authService'
 import { ROLE_ALL } from 'utils/constants'
 
-const usePermissions = ({ createRoles, viewRoles, editRoles, deleteRoles }) => {
+const usePermissions = ({ createRoles, viewRoles, editRoles, deleteRoles, cancelRoles }) => {
   const currentUserRoles = useMemo(() => getUserRoles(), [])
 
   const canCreate = useMemo(
-    () => createRoles?.includes(ROLE_ALL) || currentUserRoles && isAllowed(createRoles, currentUserRoles),
+    () =>
+      createRoles?.includes(ROLE_ALL) ||
+      (currentUserRoles && isAllowed(createRoles, currentUserRoles)),
     [currentUserRoles]
   )
 
   const canView = useMemo(
-    () => viewRoles?.includes(ROLE_ALL) || currentUserRoles && isAllowed(viewRoles, currentUserRoles),
+    () =>
+      viewRoles?.includes(ROLE_ALL) || (currentUserRoles && isAllowed(viewRoles, currentUserRoles)),
     [currentUserRoles]
   )
 
   const canEdit = useMemo(
-    () => editRoles?.includes(ROLE_ALL) || currentUserRoles && isAllowed(editRoles, currentUserRoles),
+    () =>
+      editRoles?.includes(ROLE_ALL) || (currentUserRoles && isAllowed(editRoles, currentUserRoles)),
     [currentUserRoles]
   )
 
   const canDelete = useMemo(
-    () => deleteRoles?.includes(ROLE_ALL) || currentUserRoles && isAllowed(deleteRoles, currentUserRoles),
+    () =>
+      deleteRoles?.includes(ROLE_ALL) ||
+      (currentUserRoles && isAllowed(deleteRoles, currentUserRoles)),
     [currentUserRoles]
   )
 
-  return { canCreate, canView, canEdit, canDelete }
+  const canCancel = useMemo(
+    () =>
+      cancelRoles?.includes(ROLE_ALL) ||
+      (currentUserRoles && isAllowed(cancelRoles, currentUserRoles)),
+    [currentUserRoles]
+  )
+
+  return { canCreate, canView, canEdit, canDelete, canCancel }
 }
 
 export default usePermissions

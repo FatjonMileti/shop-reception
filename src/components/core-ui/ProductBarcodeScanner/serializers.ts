@@ -4,11 +4,10 @@ export const toProduct = product => {
     ean,
     price,
     internalCode,
-    stock_available,
+    availableStock,
     soldStock,
     reservedStock,
     initialStock,
-    stock_imob,
     neighbours
   } = product
 
@@ -19,11 +18,10 @@ export const toProduct = product => {
       currency: 'lei',
       eanCode: ean,
       storeCode: internalCode,
-      available: stock_available,
+      available: availableStock,
       sold: soldStock,
       reserved: reservedStock,
       initialStock: initialStock,
-      imobStock: stock_imob,
       isWarehouse: false
     },
     warehouseStock: {
@@ -31,11 +29,10 @@ export const toProduct = product => {
       currency: 'lei',
       eanCode: neighbours[0]?.ean || ean,
       storeCode: neighbours[0]?.internalCode || internalCode,
-      available: neighbours[0]?.stock_available,
+      available: neighbours[0]?.availableStock,
       sold: neighbours[0]?.soldStock,
       reserved: neighbours[0]?.reservedStock,
       initialStock: neighbours[0]?.initialStock,
-      imobStock: neighbours[0]?.stock_imob,
       isWarehouse: true
     }
   }

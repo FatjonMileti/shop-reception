@@ -9,22 +9,22 @@ const Home = ({ modules, setSubdomainId }) => {
 
   return (
     <div className={s.modulePaper}>
-      {modules.map((module, index) => {
-        return (
-          <Accordion
-            key={module.id}
-            summary={
-              <Typography variant="medium">
-                <span className={s.moduleSummary}>
-                  <Icon iconName={module.icon} tiny={true} />
-                  {module.name}
-                </span>
-              </Typography>
-            }
-            details={
-              <Box className={s.applicationsWrapper} style={{ justifyContent: 'center' }}>
-                {module.submodules
-                  .map(app => (
+      {modules.length ? (
+        modules.map((module, index) => {
+          return (
+            <Accordion
+              key={module.id}
+              summary={
+                <Typography variant="medium">
+                  <span className={s.moduleSummary}>
+                    <Icon iconName={module.icon} tiny={true} />
+                    {module.name}
+                  </span>
+                </Typography>
+              }
+              details={
+                <Box className={s.applicationsWrapper} style={{ justifyContent: 'center' }}>
+                  {module.submodules.map(app => (
                     <div
                       key={app.id}
                       onClick={() => {
@@ -40,15 +40,18 @@ const Home = ({ modules, setSubdomainId }) => {
                       <span className={s.applicationName}>{app.name}</span>
                     </div>
                   ))}
-              </Box>
-            }
-            // disableGutters
-            defaultExpanded={index == 0}
-            id={module.id}
-            onChange={function noRefCheck() {}}
-          />
-        )
-      })}
+                </Box>
+              }
+              // disableGutters
+              defaultExpanded={index == 0}
+              id={module.id}
+              onChange={function noRefCheck() {}}
+            />
+          )
+        })
+      ) : (
+        <div className={s.emptyWarning}>Nu aveti nici un modul asignat.</div>
+      )}
     </div>
   )
 }

@@ -54,7 +54,7 @@ const AsyncAutocomplete = props => {
 
       if (action.filterQueryKey && action.localQueryKey) {
         url = `${url}?page=-1&filterBy=${action.filterQueryKey}&filterValue=${
-          filterState[action.localQueryKey]
+          filterState[action.localQueryKey]?.value
         }`
       }
       const result = await makeCoreGetRequest(url)
@@ -77,7 +77,8 @@ const AsyncAutocomplete = props => {
       disablePortal
       id="async-demo"
       options={options}
-      style={{ width: width ?? 300 }}
+      //TO DO: fix styling for all autocomplete and filters
+      style={{ maxWidth: width ?? 300 }}
       open={open}
       onOpen={() => {
         setOpen(true)

@@ -17,7 +17,8 @@ const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
 
   const download = () => {
     try {
-      downloadFile(`${actions.downloadAction.url}/${id}`)
+      // downloadFile(`${actions.downloadAction.url}/${id}`)
+      downloadFile(`/proformaPDF/${id}`)
     } catch (error) {
       showNotification({
         message: `A aparut o eroare la descarcarea fisierului. ${error?.message}`,

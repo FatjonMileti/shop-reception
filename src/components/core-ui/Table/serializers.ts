@@ -1,7 +1,6 @@
 import { get, set } from 'lodash'
 import { toArrayItemPayload } from 'utils/serializers'
 import { Filter } from './TableDefinitions'
-import { ComboValue } from 'components/core-ui/ComboBoxTable/ComboBoxTableDefinitions'
 import { getFiltersGetUrl, getSearchFieldsGetUrl, getAllFilters, getTableQueryUrl } from './helpers'
 
 export const toTableObjects = result =>
@@ -21,7 +20,7 @@ export const toTableGETUrl = ({
   searchText,
   searchFields,
   filters,
-  comboValue,
+  tableFilters,
   page,
   rowsPerPage,
   order,
@@ -33,7 +32,7 @@ export const toTableGETUrl = ({
   searchText: string
   searchFields: string[]
   filters: Filter[]
-  comboValue: ComboValue
+  tableFilters: Filter[]
   page: number
   rowsPerPage: number
   order: string
@@ -43,7 +42,7 @@ export const toTableGETUrl = ({
 }) => {
   const tableQueryUrl = getTableQueryUrl({ page, size: rowsPerPage, order, orderBy })
   const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
-  const filtersUrl = getFiltersGetUrl(getAllFilters(filters, comboValue))
+  const filtersUrl = getFiltersGetUrl(getAllFilters(filters.concat(tableFilters)))
   const generalSearchUrl =
     hasGeneralSearch && generalSearchText ? `&keyword=${generalSearchText}` : ''
 
@@ -61,7 +60,7 @@ export const toTablePOSTPayload = ({
   searchText,
   searchFields,
   filters,
-  comboValue,
+  tableFilters,
   hasGeneralSearch,
   generalSearchText
 }: {
@@ -72,7 +71,7 @@ export const toTablePOSTPayload = ({
   searchText: string
   searchFields: string[]
   filters: Filter[]
-  comboValue: ComboValue
+  tableFilters: Filter[]
   hasGeneralSearch: boolean
   generalSearchText: string
 }) => ({
@@ -81,7 +80,7 @@ export const toTablePOSTPayload = ({
   order,
   orderBy,
   ...toSearchFieldsPayload(searchFields, searchText),
-  ...toArrayItemPayload(getAllFilters(filters, comboValue)),
+  ...toArrayItemPayload(getAllFilters(filters.concat(tableFilters))),
   ...(hasGeneralSearch && generalSearchText ? { keyword: generalSearchText } : {})
 })
 

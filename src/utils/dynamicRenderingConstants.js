@@ -5,7 +5,6 @@ import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { Button } from 'components/core-ui/Button'
 import { Card } from 'components/core-ui/Card'
-import { ComboBoxTable } from 'components/core-ui/ComboBoxTable'
 import { ContainerBox } from 'components/core-ui/ContainerBox'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
@@ -33,6 +32,8 @@ import { TableSearch } from 'components/core-ui/TableSearch'
 import { Tabs } from 'components/core-ui/Tabs'
 import { TitleText } from 'components/core-ui/TitleText'
 import { TableFilters } from 'components/core-ui/TableFilters'
+import { UserModal } from 'components/core-ui/UserModal'
+import { FileUpload } from 'components/core-ui/FileUpload'
 
 export const Components = {
   // MUI components
@@ -51,7 +52,6 @@ export const Components = {
   BooleanIcon,
   Button,
   Card,
-  ComboBoxTable,
   ContainerBox,
   CountyCitySelect,
   FloatingButton,
@@ -76,5 +76,7 @@ export const Components = {
   TableSearch,
   Tabs,
   TitleText,
-  TableFilters
+  TableFilters,
+  UserModal,
+  FileUpload
 }

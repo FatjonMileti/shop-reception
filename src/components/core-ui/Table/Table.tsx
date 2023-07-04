@@ -28,9 +28,9 @@ const Table = props => {
     columns,
     tableActions,
     tableRowActions,
-    comboValue,
     tableFooter,
     hasGeneralSearch,
+    isUserModal,
     hasInitialFilters,
     ...rest
   } = props
@@ -55,11 +55,12 @@ const Table = props => {
   const table = useSelector((state: RootState) => state.table)
   const { showNotification } = useNotification()
 
-  const { canCreate, canView, canEdit, canDelete } = usePermissions({
+  const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
     viewRoles: tableRowActions?.viewAction?.allowedRoles,
     editRoles: tableRowActions?.editAction?.allowedRoles,
-    deleteRoles: tableRowActions?.deleteAction?.allowedRoles
+    deleteRoles: tableRowActions?.deleteAction?.allowedRoles,
+    cancelRoles: tableRowActions?.cancelAction?.allowedRoles
   })
 
   const filtersConfig = useMemo(() => {
@@ -87,23 +88,24 @@ const Table = props => {
   )
 
   useEffect(() => {
-    if (hasInitialFilters) {
-      const tableFilters =
-        Object.keys(table.filters).map(key => ({
-          name: key,
-          value: table.filters[key]?.value ?? table.filters[key]
-        })) || []
-
-      handleRemoteData(
-        tableState.page,
-        tableState.rowsPerPage,
-        tableState.order,
-        tableState.orderBy,
-        tableState.searchText,
-        tableFilters
-      )
-    }
+    handleRemoteData(
+      tableState.page,
+      tableState.rowsPerPage,
+      tableState.order,
+      tableState.orderBy,
+      tableState.searchText,
+      tableState.filters
+    )
   }, [table.filters])
+
+  const tableFilters = useMemo(
+    () =>
+      Object.keys(table.filters).map(key => ({
+        name: key,
+        value: table.filters[key]?.value ?? table.filters[key]
+      })) || [],
+    [table.filters]
+  )
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
@@ -131,7 +133,7 @@ const Table = props => {
             searchText,
             searchFields: tableActions?.searchAction?.searchFields,
             filters,
-            comboValue,
+            tableFilters,
             page,
             rowsPerPage,
             order,
@@ -152,7 +154,7 @@ const Table = props => {
             searchText,
             searchFields: tableActions.searchAction?.searchFields,
             filters,
-            comboValue,
+            tableFilters,
             hasGeneralSearch,
             generalSearchText: table.searchText
           })
@@ -200,13 +202,12 @@ const Table = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
-          comboValue={comboValue}
         />
       )}
       <GeneralTable
         {...rest}
         columns={
-          tableRowActions && (canEdit || canDelete || canView)
+          tableRowActions && (canEdit || canDelete || canView || canCancel)
             ? renderedColumns.concat({
                 title: '',
                 field: 'actions',
@@ -219,6 +220,7 @@ const Table = props => {
                     viewAction={tableRowActions.viewAction}
                     editAction={tableRowActions.editAction}
                     deleteAction={tableRowActions.deleteAction}
+                    cancelAction={tableRowActions.cancelAction}
                     additionalAction={() =>
                       handleRemoteData(
                         tableState.page,
@@ -229,10 +231,11 @@ const Table = props => {
                         tableState.filters
                       )
                     }
-                    comboValue={comboValue}
                     canView={canView}
                     canEdit={canEdit}
                     canDelete={canDelete}
+                    canCancel={canCancel}
+                    isUserModal={isUserModal}
                   />
                 )
               })
