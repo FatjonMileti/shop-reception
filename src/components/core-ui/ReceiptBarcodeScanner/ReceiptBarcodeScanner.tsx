@@ -9,7 +9,6 @@ import { ProductBarcodeScannerProps } from '../ProductBarcodeScanner/ProductBarc
 import s from '../ProductBarcodeScanner/ProductBarcodeScanner.modules.scss'
 import { useNavigate, useParams } from 'react-router-dom'
 
-
 const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
 
@@ -37,18 +36,21 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     if (code) {
       ;(async () => {
         if (action.type === 'POST') {
-            try {
-                const result = await makeCorePostRequest(`${action.url}`, { receiptId: code, proformaId: id })
-                if (action.href) {
-                    await destroy()
-                    navigate(`${action.href}?${action.variable}=${code}`)
-                }
-            } catch (error) {
-                showNotification({
-                  message: `Error while sending receipt. ${error?.message}`,
-                  type: 'error'
-                })
+          try {
+            const result = await makeCorePostRequest(`${action.url}`, {
+              receiptId: code,
+              proformaId: id
+            })
+            if (action.href) {
+              await destroy()
+              navigate(`${action.href}?${action.variable}=${code}`)
             }
+          } catch (error) {
+            showNotification({
+              message: `Error while sending receipt. ${error?.message}`,
+              type: 'error'
+            })
+          }
         }
       })()
     }
@@ -62,6 +64,10 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     }
   }, [])
 
+  React.useEffect(() => {
+    document.getElementById('receipt-scan-input').focus()
+  }, [])
+
   return (
     <Paper className={s.scanContainer}>
       <div className={s.scannerControls}>
@@ -73,6 +79,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             label="Introdu codul bonului"
             fullWidth
             onChange={event => setCode(event.currentTarget.value)}
+            id="receipt-scan-input"
           />
         </div>
         <div className={s.buttonContainer}>

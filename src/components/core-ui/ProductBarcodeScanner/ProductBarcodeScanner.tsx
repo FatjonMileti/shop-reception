@@ -7,7 +7,10 @@ import { useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
 import { makeCoreGetRequest } from 'utils/api'
-import { ProductBarcodeScannerProps, ProductStockResponse } from './ProductBarcodeScannerDefinitions'
+import {
+  ProductBarcodeScannerProps,
+  ProductStockResponse
+} from './ProductBarcodeScannerDefinitions'
 import { ProductActions } from 'reducers/productSlice'
 import s from './ProductBarcodeScanner.modules.scss'
 import { toProduct } from './serializers'
@@ -59,6 +62,10 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     }
   }, [])
 
+  React.useEffect(() => {
+    document.getElementById('product-scan-input').focus()
+  }, [])
+
   return (
     <Paper className={s.scanContainer}>
       <div className={s.scannerControls}>
@@ -72,6 +79,7 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             onChange={event =>
               dispatch(ProductActions.setProduct({ code: event.currentTarget.value }))
             }
+            id="product-scan-input"
           />
         </div>
         <div className={s.buttonContainer}>
