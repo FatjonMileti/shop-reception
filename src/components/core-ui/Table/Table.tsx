@@ -87,6 +87,8 @@ const Table = props => {
     [tableFooter, summary]
   )
 
+  // TODO: find a bettwer way to implement this
+  // This is a hack to make the table perform query only when there is an outeside compulsory filter
   useEffect(() => {
     handleRemoteData(
       tableState.page,
@@ -97,6 +99,21 @@ const Table = props => {
       tableState.filters
     )
   }, [table.filters])
+
+  // TODO: find a bettwer way to implement this
+  // This is a hack to make the table perform query only when there is an inside compulsory filter
+  useEffect(() => {
+    if (!items.length){
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
+      )
+    }
+  }, [tableState.filters])
 
   const tableFilters = useMemo(
     () =>
@@ -117,7 +134,15 @@ const Table = props => {
       filters
     })
 
+    // TODO: find a bettwer way to implement this
+    // This is a hack to make the table perform query only when there is an outeside compulsory filter
     if (hasInitialFilters && isEmpty(table.filters)) {
+      return null
+    }
+
+    // TODO: find a bettwer way to implement this
+    // This is a hack to make the table perform query only when there is an inside compulsory filter
+    if (filtersConfig.some(filter => filter.required) && !filters.length) {
       return null
     }
 
