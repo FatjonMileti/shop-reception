@@ -36,9 +36,10 @@ const DynamicTable = props => {
             ) {
               const formattedDate = currentDate.format('D MMMM')
               const newColumn = {
-                align: col.align,
-                type: col.type,
-                render: col.render,
+                ...col,
+                // align: col.align,
+                // type: col.type,
+                // render: col.render,
                 collapsible: true,
                 title: `${col.title} ${formattedDate}`,
                 field: col.field + `.[${datesArray.length}]`
