@@ -1046,7 +1046,7 @@
       "responses": [
         {
           "uuid": "7759dbe3-b629-4711-9431-3c53e4efa463",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\",\n      \"imageUrl\": \"https://mcxtt.vtexassets.com/arquivos/ids/173831/PAINE-DURUM-420-G-LLR233-2.jpg?v=637743905813730000\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\",\n      \"imageUrl\": \"https://mcxtt.vtexassets.com/arquivos/ids/173831/PAINE-DURUM-420-G-LLR233-2.jpg?v=637743905813730000\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\",\n      \"imageUrl\": \"https://mcxtt.vtexassets.com/arquivos/ids/173831/PAINE-DURUM-420-G-LLR233-2.jpg?v=637743905813730000\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\",\n      \"imageUrl\": \"https://mcxtt.vtexassets.com/arquivos/ids/173831/PAINE-DURUM-420-G-LLR233-2.jpg?v=637743905813730000\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\",\n      \"imageUrl\": \"https://mcxtt.vtexassets.com/arquivos/ids/173831/PAINE-DURUM-420-G-LLR233-2.jpg?v=637743905813730000\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"Cod meti\",\n      \"pluCode\": \"Cod plu\",\n      \"category\": \"Paine\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted products list",
@@ -1207,6 +1207,149 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "a79ba798-9721-4cb0-90c1-3104c692c66f",
+      "type": "http",
+      "documentation": "Get app usage list",
+      "method": "get",
+      "endpoint": "cadentierSales",
+      "responses": [
+        {
+          "uuid": "b859774b-5094-4966-89b5-72f244e131d0",
+          "body": "{\n    \"list\": [\n      {\n        \"product\": \"Paine alba\",\n        \"metiCode\": \"Cod1\",\n        \"saleAverage\": 80,\n        \"targetQt\": 100,\n        \"modifiedQt\": 20,\n        \"realSales\": 78,\n        \"clearanceSales\": 12,\n        \"dailyOffer\": true,\n        \"productRange\": \"F\",\n        \"isNew\": true,\n        \"changedBy\": \"Alexandra Dragomir\",\n        \"groups\": [\n          {\n            \"name\": \"6:00-10:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"10:00-14:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"14:00-18:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          }\n        ]\n      },\n      {\n        \"product\": \"Paine alba\",\n        \"metiCode\": \"Cod1\",\n        \"saleAverage\": 80,\n        \"targetQt\": 100,\n        \"modifiedQt\": 20,\n        \"realSales\": 78,\n        \"clearanceSales\": 12,\n        \"productRange\": \"F\",\n        \"dailyOffer\": false,\n        \"isNew\": true,\n        \"changedBy\": \"Alexandra Dragomir\",\n        \"groups\": [\n          {\n            \"name\": \"6:00-10:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"10:00-14:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"14:00-18:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          }\n        ]\n      },\n      {\n        \"product\": \"Paine alba\",\n        \"metiCode\": \"Cod1\",\n        \"saleAverage\": 80,\n        \"targetQt\": 100,\n        \"modifiedQt\": 20,\n        \"realSales\": 78,\n        \"clearanceSales\": 12,\n        \"productRange\": \"F\",\n        \"dailyOffer\": true,\n        \"isNew\": true,\n        \"changedBy\": \"Alexandra Dragomir\",\n        \"groups\": [\n          {\n            \"name\": \"6:00-10:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"10:00-14:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"14:00-18:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          }\n        ]\n      },\n      {\n        \"product\": \"Paine alba\",\n        \"metiCode\": \"Cod1\",\n        \"saleAverage\": 80,\n        \"targetQt\": 100,\n        \"modifiedQt\": 20,\n        \"realSales\": 78,\n        \"clearanceSales\": 12,\n        \"productRange\": \"F\",\n        \"dailyOffer\": false,\n        \"isNew\": true,\n        \"changedBy\": \"Alexandra Dragomir\",\n        \"groups\": [\n          {\n            \"name\": \"6:00-10:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"10:00-14:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"14:00-18:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          }\n        ]\n      },\n      {\n        \"product\": \"Paine alba\",\n        \"metiCode\": \"Cod1\",\n        \"saleAverage\": 80,\n        \"targetQt\": 100,\n        \"modifiedQt\": 20,\n        \"realSales\": 78,\n        \"clearanceSales\": 12,\n        \"productRange\": \"F\",\n        \"dailyOffer\": true,\n        \"isNew\": true,\n        \"changedBy\": \"Alexandra Dragomir\",\n        \"groups\": [\n          {\n            \"name\": \"6:00-10:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"10:00-14:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"14:00-18:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          }\n        ]\n      },\n      {\n        \"product\": \"Paine alba\",\n        \"metiCode\": \"Cod1\",\n        \"saleAverage\": 80,\n        \"targetQt\": 100,\n        \"modifiedQt\": 20,\n        \"realSales\": 78,\n        \"clearanceSales\": 12,\n        \"productRange\": \"F\",\n        \"dailyOffer\": true,\n        \"isNew\": true,\n        \"changedBy\": \"Alexandra Dragomir\",\n        \"groups\": [\n          {\n            \"name\": \"6:00-10:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"10:00-14:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          },\n          {\n            \"name\": \"14:00-18:00\",\n            \"values\": {\n              \"saleAverage\": 80,\n              \"targetQt\": 100,\n              \"modifiedQt\": 20,\n              \"realSales\": 78,\n              \"clearanceSales\": 12,\n              \"dailyOffer\": true\n            }\n          }\n        ]\n      }\n    ],\n    \"page\": {\n      \"pageSize\": 10,\n      \"page\": {{faker 'datatype.number'}},\n      \"totalCount\": {{faker 'datatype.number'}},\n      \"pageCount\": {{faker 'datatype.number'}}\n    }\n  }",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted cadentier sales list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "5ace53e5-143d-430f-b1f2-342078bc01cb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "56521eea-4443-4a5f-bbd7-4654fd4d4f24",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "25d409dd-dc5c-41c3-be72-dfedc9b610e1",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "70324ffc-9a01-44b5-a638-4a57f671d054",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "b67e0f4d-11f8-41bd-b285-31981e1fea6b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -1249,6 +1392,10 @@
     {
       "type": "route",
       "uuid": "0bd1140f-e6f8-45ba-90c6-7f49be1c50ff"
+    },
+    {
+      "type": "route",
+      "uuid": "a79ba798-9721-4cb0-90c1-3104c692c66f"
     }
   ],
   "proxyMode": false,
