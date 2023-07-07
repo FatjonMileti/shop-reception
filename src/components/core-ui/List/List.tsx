@@ -71,7 +71,7 @@ const List = props => {
         handleRemoteData={handleRemoteData}
         isLoading={isLoading}
       />
-      {tableFooter && <div style={{ textAlign: 'right' }}>{tableFooterComponent}</div>}
+      {tableFooter && <div>{tableFooterComponent}</div>}
     </Box>
   )
 }
