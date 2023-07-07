@@ -36,7 +36,7 @@ const TableActions = ({
 
             navigate(url)
           }}
-          style={{ minWidth: '0.7rem' }}
+          style={{ minWidth: '0.7rem', background: 'transparent' }}
         >
           <Visibility />
         </Button>

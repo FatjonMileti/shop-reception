@@ -24,7 +24,7 @@ const ButtonWithModalAndForm = ({
 
   return (
     <>
-      <Button {...buttonProps} onClick={openModal} style={{ minWidth: '0.7rem' }} />
+      <Button {...buttonProps} onClick={openModal} style={{ minWidth: '0.7rem', background: 'transparent' }} />
       {isUserModal ? (
         <UserModal editedItemId={editedItemId} isModalOpen={isModalOpen} closeModal={closeModal} />
       ) : (
