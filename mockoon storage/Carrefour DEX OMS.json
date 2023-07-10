@@ -4307,7 +4307,7 @@
       "responses": [
         {
           "uuid": "667a44e5-d070-465b-8054-dacf0f2693d6",
-          "body": "{\n  \"list\": [\n    {\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"productEan\": \"\",\n      \"productTitle\": \"SUP TV MOB 10\\\"-26\\\" BWMT61TS\",\n      \"productPrice\": {{faker 'datatype.float'}},\n      \"userId\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"total\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"productEan\": \"\",\n      \"productTitle\": \"SUP TV MOB 10\\\"-26\\\" BWMT61TS\",\n      \"productPrice\": {{faker 'datatype.float'}},\n      \"userId\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"total\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of reports filtered by date",
