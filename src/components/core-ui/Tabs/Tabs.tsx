@@ -17,7 +17,7 @@ const Tabs = (props: TabsProps) => {
 
   const onChange = (_, newValue: number) => {
     searchParams.set("tab", `${newValue}`)
-    setSearchParams(searchParams)
+    setSearchParams(searchParams, { replace: true }) // [~] otherwise, onBack (very annoyingly) cycles through tabs if the user flicked through them several times
   }
 
   return (
