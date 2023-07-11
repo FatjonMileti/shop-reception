@@ -11,7 +11,7 @@ import s from './Layout.scss'
 import { setToken, isAuthenticated } from 'utils/authService'
 import { Notification } from 'components/Notification'
 
-const Layout = ({ children, setModules, setApplicationModulesPages, setSubdomainId }) => {
+const Layout = ({ children, modules, setSubdomainId }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [drawerWidth, setDrawerWidth] = useState(DRAWER_WIDTH)
 
@@ -52,8 +52,7 @@ const Layout = ({ children, setModules, setApplicationModulesPages, setSubdomain
             <Sidebar
               isMenuOpen={isMenuOpen}
               handleCloseMenu={handleCloseMenu}
-              setModules={setModules}
-              setApplicationModulesPages={setApplicationModulesPages}
+              modules={modules}
               setSubdomainId={setSubdomainId}
             />
           )}
