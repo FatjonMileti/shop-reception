@@ -29,7 +29,7 @@ const ModalForm = ({
       try {
         if (formItems.some(item => item.dependencies?.conditions) && !isEmpty(editItem)) {
           const result = await start(formItems, editItem)
-          setProcessedFormItems(result)
+          setProcessedFormItems(result.filter(item => !(item.hidden || (item.inputProps && item.inputProps.hidden))))
         }
         const itemsWithScript = formItems.filter(item => item.dependencies?.script)
         itemsWithScript.forEach(item => Function(item.dependencies.script)())
