@@ -104,7 +104,8 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             maxWidth: '400px',
             maxHeight: '400px',
             visibility: isVisible ? 'visible' : 'hidden',
-            opacity: isVisible ? 1 : 0
+            opacity: isVisible ? 1 : 0,
+            marginTop: isVisible ? '16px' : '0'
           }}
         />
       </div>
