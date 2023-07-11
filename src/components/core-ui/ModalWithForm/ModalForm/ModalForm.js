@@ -45,11 +45,12 @@ const ModalForm = ({
   return (
     <form>
       <Grid container spacing={4}>
+        {modalTitle && modalTitle.length > 0 &&
         <Grid item xs={12}>
           <Typography component="h2" variant="medium">
             <span className={s.modalTitle}>{modalTitle}</span>
           </Typography>
-        </Grid>
+        </Grid>}
         {!!formInfoItems?.length && (
           <Grid item xs={12} md={12}>
             <ModalInfo formInfoItems={formInfoItems} editItem={editItem} />
