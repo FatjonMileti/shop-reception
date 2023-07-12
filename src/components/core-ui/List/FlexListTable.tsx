@@ -4,13 +4,15 @@ import {
   Paper
 } from '@mui/material'
 import s from './FlexListTable.modules.scss'
+import { get } from 'lodash'
 
 export type FlexListTableRowType = { [key: string]: any }
 
 export type FlexListTableColumnsType = {
   field: string
   render?: (row: FlexListTableRowType) => React.ReactNode
-  style?: any
+  style?: any,
+  displayIf?: string
 }
 
 export interface FlexListTableProps {
@@ -35,7 +37,7 @@ const FlexListTable = (props: FlexListTableProps) => {
     <div className={s.listStyle} style={props.style}>
         {props.rows.map((row) => (
             <Paper key={row.id} className={s.rowStyle}>
-              {props.columns.map((column) => (
+              {props.columns.filter(column => !column.displayIf || get(row, column.displayIf)).map((column) => (
                 <div key={column.field} style={column.style}>
                   {column.render ? column.render(row) : row[column.field]}
                 </div>
