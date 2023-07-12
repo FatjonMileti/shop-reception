@@ -28,8 +28,7 @@ const Tabs = (props: TabsProps) => {
       value={selectedValue}
       tabsContainerStyle={{
         borderBottom: 1,
-        borderColor: '#E5E5E5',
-        padding: '0 24px'
+        borderColor: '#E5E5E5'
       }}
       tabContentBoxStyle={{ padding: '0' }}
     />
