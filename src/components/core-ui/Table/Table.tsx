@@ -90,20 +90,22 @@ const Table = props => {
   // TODO: find a bettwer way to implement this
   // This is a hack to make the table perform query only when there is an outeside compulsory filter
   useEffect(() => {
-    handleRemoteData(
-      tableState.page,
-      tableState.rowsPerPage,
-      tableState.order,
-      tableState.orderBy,
-      tableState.searchText,
-      tableState.filters
-    )
+    if (!isEmpty(table.filters)) {
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
+      )
+    }
   }, [table.filters])
 
   // TODO: find a bettwer way to implement this
   // This is a hack to make the table perform query only when there is an inside compulsory filter
   useEffect(() => {
-    if (!items.length){
+    if (!items.length && !isEmpty(tableState.filters)){
       handleRemoteData(
         tableState.page,
         tableState.rowsPerPage,
