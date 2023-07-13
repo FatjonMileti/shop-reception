@@ -22,6 +22,7 @@ import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 import { isEmpty } from 'lodash'
 import { ConfirmationModal } from 'components/core-ui/ConfirmationModal'
+import cn from 'classnames'
 
 const Table = props => {
   const {
@@ -36,7 +37,7 @@ const Table = props => {
     ...rest
   } = props
 
-  let [searchParams] = useSearchParams()
+  let [searchParams, setSearchParams] = useSearchParams()
 
   const [isLoading, setIsLoading] = useState(true)
   const [items, setItems] = useState([])
@@ -93,14 +94,16 @@ const Table = props => {
   )
 
   useEffect(() => {
-    handleRemoteData(
-      tableState.page,
-      tableState.rowsPerPage,
-      tableState.order,
-      tableState.orderBy,
-      tableState.searchText,
-      tableState.filters
-    )
+    if (!isEmpty(table.filters) || table.searchText) {
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
+      )
+    }
   }, [table.filters, table.searchText])
 
   const tableFilters = useMemo(
@@ -123,6 +126,10 @@ const Table = props => {
     })
 
     if (hasInitialFilters && isEmpty(table.filters)) {
+      return null
+    }
+
+    if (generalSearch?.hasGeneralSearch && !table.searchText.length) {
       return null
     }
 
@@ -200,11 +207,22 @@ const Table = props => {
 
   const noGeneralSearchConfirm = () => {
     closeNoGeneralSearchConfirmModal()
-    navigate(generalSearch.noResults.action.href)
+
+    const param = searchParams.get('tab')
+
+    if (param) {
+      searchParams.delete('tab')
+    }
+
+    navigate(`${generalSearch.noResults.action.href}&${searchParams}`)
   }
 
-  return generalSearch?.hasGeneralSearch && !table.searchText.length ? null : (
-    <Box className={s.tableContainer}>
+  return (
+    <Box
+      className={cn(s.tableContainer, {
+        [s.hidden]: generalSearch?.hasGeneralSearch && !table.searchText.length
+      })}
+    >
       {tableActions?.newAction && canCreate && (
         <ModalWithForm
           {...tableActions.newAction}

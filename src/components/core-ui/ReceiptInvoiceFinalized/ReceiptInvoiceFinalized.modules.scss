@@ -1,0 +1,14 @@
+.container {
+  padding: 16px;
+  margin: 24px;
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+}
+
+.btnContainer {
+  margin-top: 24px;
+  button {
+    margin-right: 16px;
+  }
+}

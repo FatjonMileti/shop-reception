@@ -22,6 +22,7 @@ import { ProductBarcodeScanner } from 'components/core-ui/ProductBarcodeScanner'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
 import { ProductTabs } from 'components/core-ui/ProductTabs'
 import { ProductTitle } from 'components/core-ui/ProductTitle'
+import { ReceiptInvoiceFinalized } from 'components/core-ui/ReceiptInvoiceFinalized'
 import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
 import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
 import { ShoppingCart } from 'components/core-ui/ShoppingCart'
@@ -69,6 +70,7 @@ export const Components = {
   ProductStockInfo,
   ProductTabs,
   ProductTitle,
+  ReceiptInvoiceFinalized,
   ReceiptBarcodeScanner,
   SimpleKeyValuePairs,
   ShoppingCart,
