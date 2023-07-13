@@ -12,4 +12,9 @@
 
 .productTab {
   color: #121212!important;
+
+  margin: 0 24px;
+  @media (max-width: 624px) {
+    margin: 0 12px;
+  }
 }

@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { Tabs as GeneralTabs } from '@fullscreendigital/carrefour-dex-fe'
 import { toTabsWithLabels, toTabs } from './serializers'
 import { TabsProps } from './TabsDefinitions'
+import { useMediaQuery } from '@mui/material'
 
 const Tabs = (props: TabsProps) => {
   const { tabs, labels, value, handleChange, ...rest } = props
@@ -20,6 +21,8 @@ const Tabs = (props: TabsProps) => {
     setSearchParams(searchParams, { replace: true }) // [~] otherwise, onBack (very annoyingly) cycles through tabs if the user flicked through them several times
   }
 
+  const isXs = useMediaQuery('(max-width:624px)')
+
   return (
     <GeneralTabs
       {...rest}
@@ -28,7 +31,8 @@ const Tabs = (props: TabsProps) => {
       value={selectedValue}
       tabsContainerStyle={{
         borderBottom: 1,
-        borderColor: '#E5E5E5'
+        borderColor: '#E5E5E5',
+        margin: isXs ? '18px 12px 0' : '36px 24px 0'
       }}
       tabContentBoxStyle={{ padding: '0' }}
     />
