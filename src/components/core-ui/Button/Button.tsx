@@ -1,16 +1,18 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button as GeneralButton, IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { ButtonProps } from './ButtonDefinitions'
 import { Icon } from '../Icon'
 
 const Button = (props: ButtonProps) => {
-  const { onClick, href, startIcon, endIcon, ...rest } = props
+  const { onClick, href, startIcon, endIcon, variable, ...rest } = props
 
   const navigate = useNavigate()
 
+  const [searchParams] = useSearchParams()
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (href) {
-      navigate(href)
+      navigate(variable ? `${href}?${variable}=${searchParams.get(variable)}` : href)
     }
     props.onClick && props.onClick(event)
   }
