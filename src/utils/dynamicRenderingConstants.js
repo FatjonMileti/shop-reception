@@ -34,6 +34,9 @@ import { TitleText } from 'components/core-ui/TitleText'
 import { TableFilters } from 'components/core-ui/TableFilters'
 import { UserModal } from 'components/core-ui/UserModal'
 import { FileUpload } from 'components/core-ui/FileUpload'
+import DynamicTable from 'components/core-ui/Table/DynamicTable'
+import GroupTable from 'components/core-ui/Table/GroupTable'
+import { ImageCell } from 'components/core-ui/ImageCell'
 
 export const Components = {
   // MUI components
@@ -78,5 +81,8 @@ export const Components = {
   TitleText,
   TableFilters,
   UserModal,
-  FileUpload
+  FileUpload,
+  DynamicTable,
+  GroupTable,
+  ImageCell
 }

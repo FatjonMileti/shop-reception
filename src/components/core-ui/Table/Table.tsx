@@ -53,6 +53,7 @@ const Table = props => {
   })
 
   const table = useSelector((state: RootState) => state.table)
+
   const { showNotification } = useNotification()
 
   const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({

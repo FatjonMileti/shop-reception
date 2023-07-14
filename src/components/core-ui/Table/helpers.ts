@@ -44,6 +44,14 @@ export const getRenderedColumns = (columns, tableFilters) =>
               value: row[field],
             })
           }
+
+          if(UIComponent === 'ImageCell'){
+            return renderComponent({
+              ...render,
+              imageUrl: row.imageUrl,
+              value: row[field],
+            })
+          }
           
           if (UIComponent === 'BooleanIcon') {
             const value = get(row, field)
