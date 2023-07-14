@@ -1,11 +1,47 @@
-import { Edit, Delete } from '@mui/icons-material'
+import { Edit, Delete, Visibility, Cancel } from '@mui/icons-material'
 import { ButtonWithModalAndForm } from '../../ButtonWithModalAndForm'
 import { ButtonWithConfirmDeleteModal } from '../../ButtonWithConfirmDeleteModal'
+import { ButtonWithConfirmCancelModal } from '../../ButtonWithConfirmCancelModal'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
-const TableActions = ({ itemId, editAction, deleteAction, additionalAction, comboValue }) => {
+const TableActions = ({
+  itemId,
+  viewAction,
+  editAction,
+  deleteAction,
+  cancelAction,
+  additionalAction,
+  canView,
+  canEdit,
+  canDelete,
+  canCancel,
+  isUserModal
+}) => {
+  const navigate = useNavigate()
+
+  const [searchParams] = useSearchParams()
+
   return (
     <div style={{ minWidth: '5rem' }}>
-      {editAction && (
+      {viewAction && canView && (
+        <Button
+          onClick={() => {
+            let url = `${viewAction.url}/${itemId}`
+
+            if (viewAction.variable) {
+              const paramValue = searchParams.get(viewAction.variable)
+              url = `${url}?${viewAction.variable}=${paramValue}`
+            }
+
+            navigate(url)
+          }}
+          style={{ minWidth: '0.7rem', background: 'transparent' }}
+        >
+          <Visibility />
+        </Button>
+      )}
+      {editAction && canEdit && (
         <ButtonWithModalAndForm
           buttonProps={{ children: <Edit /> }}
           modalTitle="Edit"
@@ -20,10 +56,10 @@ const TableActions = ({ itemId, editAction, deleteAction, additionalAction, comb
           editedItemId={itemId}
           editedItemUrl={editAction.getUrl}
           additionalAction={additionalAction}
-          comboValue={comboValue}
+          isUserModal={isUserModal}
         />
       )}
-      {deleteAction && (
+      {deleteAction && canDelete && (
         <ButtonWithConfirmDeleteModal
           buttonProps={{ children: <Delete /> }}
           modalTitle="Delete"
@@ -31,6 +67,20 @@ const TableActions = ({ itemId, editAction, deleteAction, additionalAction, comb
           formButtons={deleteAction.formButtons}
           deletedItemId={itemId}
           deleteActionUrl={deleteAction.url}
+          additionalAction={additionalAction}
+        />
+      )}
+      {cancelAction && canCancel && (
+        <ButtonWithConfirmCancelModal
+          buttonProps={{ children: <Cancel /> }}
+          modalTitle="Cancel"
+          modalMessage={cancelAction.confirmText}
+          formButtons={cancelAction.formButtons}
+          itemId={itemId}
+          action={{
+            type: cancelAction.type,
+            url: cancelAction.url
+          }}
           additionalAction={additionalAction}
         />
       )}

@@ -1,7 +1,6 @@
 import { get, set } from 'lodash'
 import { toArrayItemPayload } from 'utils/serializers'
 import { Filter } from './TableDefinitions'
-import { ComboValue } from 'components/core-ui/ComboBoxTable/ComboBoxTableDefinitions'
 import { getFiltersGetUrl, getSearchFieldsGetUrl, getAllFilters, getTableQueryUrl } from './helpers'
 
 export const toTableObjects = result =>
@@ -21,27 +20,33 @@ export const toTableGETUrl = ({
   searchText,
   searchFields,
   filters,
-  comboValue,
+  tableFilters,
   page,
   rowsPerPage,
   order,
-  orderBy
+  orderBy,
+  hasGeneralSearch,
+  generalSearchText
 }: {
   url: string
   searchText: string
   searchFields: string[]
   filters: Filter[]
-  comboValue: ComboValue
+  tableFilters: Filter[]
   page: number
   rowsPerPage: number
   order: string
   orderBy: string
+  hasGeneralSearch: boolean
+  generalSearchText: string
 }) => {
   const tableQueryUrl = getTableQueryUrl({ page, size: rowsPerPage, order, orderBy })
   const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
-  const filtersUrl = getFiltersGetUrl(getAllFilters(filters, comboValue))
+  const filtersUrl = getFiltersGetUrl(getAllFilters(filters.concat(tableFilters)))
+  const generalSearchUrl =
+    hasGeneralSearch && generalSearchText ? `&keyword=${generalSearchText}` : ''
 
-  return `${url}?${tableQueryUrl}${searchFieldsUrl}${filtersUrl}`
+  return `${url}?${tableQueryUrl}${searchFieldsUrl}${filtersUrl}${generalSearchUrl}`
 }
 
 const toSearchFieldsPayload = (searchFields, searchText) =>
@@ -55,7 +60,9 @@ export const toTablePOSTPayload = ({
   searchText,
   searchFields,
   filters,
-  comboValue
+  tableFilters,
+  hasGeneralSearch,
+  generalSearchText
 }: {
   page: number
   rowsPerPage: number
@@ -64,33 +71,18 @@ export const toTablePOSTPayload = ({
   searchText: string
   searchFields: string[]
   filters: Filter[]
-  comboValue: ComboValue
+  tableFilters: Filter[]
+  hasGeneralSearch: boolean
+  generalSearchText: string
 }) => ({
   page,
   rowsPerPage,
   order,
   orderBy,
   ...toSearchFieldsPayload(searchFields, searchText),
-  ...toArrayItemPayload(getAllFilters(filters, comboValue))
+  ...toArrayItemPayload(getAllFilters(filters.concat(tableFilters))),
+  ...(hasGeneralSearch && generalSearchText ? { keyword: generalSearchText } : {})
 })
-
-export const toTableRowItems = (items, columns) => {
-  columns.forEach(column => {
-    items.forEach((item, index) => {
-      if (column.field.includes('.')) {
-        items[index][column.field] = get(item, column.field) || ''
-      } else {
-        if (item[column.field] === null || item[column.field] === undefined) {
-          items[index][column.field] = column.type === 'date' ? null : ''
-        } else {
-          items[index][column.field] = item[column.field]
-        }
-      }
-    })
-  })
-
-  return items
-}
 
 export const toFiltersUrl = (tableFilters, linkFilters) => {
   let url = ''

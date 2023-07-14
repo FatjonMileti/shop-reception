@@ -13,7 +13,7 @@
       "type": "http",
       "documentation": "Get team members list",
       "method": "get",
-      "endpoint": "teamMembers",
+      "endpoint": "governance/teamMembers",
       "responses": [
         {
           "uuid": "d4969f47-2789-4a8f-b60e-84397aa956c8",
@@ -156,7 +156,7 @@
       "type": "http",
       "documentation": "Get team capacity list",
       "method": "get",
-      "endpoint": "teamCapacity",
+      "endpoint": "governance/teamCapacity",
       "responses": [
         {
           "uuid": "c55ceac3-ac2d-4422-b130-44bae4ae38ce",
@@ -299,7 +299,7 @@
       "type": "http",
       "documentation": "Get individual capacity list",
       "method": "get",
-      "endpoint": "individualCapacity",
+      "endpoint": "governance/individualCapacity",
       "responses": [
         {
           "uuid": "ca0c672a-3dbf-4566-95b8-0c5a52f65eef",
@@ -442,7 +442,7 @@
       "type": "http",
       "documentation": "Save team assignment entity",
       "method": "post",
-      "endpoint": "teamAssignments",
+      "endpoint": "governance/teamAssignments",
       "responses": [
         {
           "uuid": "6dc9597f-f32f-495b-8d96-61be71bf47e7",
@@ -585,7 +585,7 @@
       "type": "http",
       "documentation": "Edit team assignment entity",
       "method": "put",
-      "endpoint": "teamAssignments/:id",
+      "endpoint": "governance/teamAssignments/:id",
       "responses": [
         {
           "uuid": "cb3b7440-4edb-44b5-8b51-3e84e7195425",
@@ -728,7 +728,7 @@
       "type": "http",
       "documentation": "Get team assignment list",
       "method": "get",
-      "endpoint": "teamAssignments",
+      "endpoint": "governance/teamAssignments",
       "responses": [
         {
           "uuid": "05856e07-4461-409d-aade-1d922bf33a42",
@@ -871,7 +871,7 @@
       "type": "http",
       "documentation": "Find team assignment by id",
       "method": "get",
-      "endpoint": "teamAssignments/:id",
+      "endpoint": "governance/teamAssignments/:id",
       "responses": [
         {
           "uuid": "2dfd54c7-79aa-4af2-9740-dcb3db4d7ff5",
@@ -1014,7 +1014,7 @@
       "type": "http",
       "documentation": "Deletes team assignment with given id",
       "method": "delete",
-      "endpoint": "teamAssignments/:id",
+      "endpoint": "governance/teamAssignments/:id",
       "responses": [
         {
           "uuid": "f5e8cd48-7e0a-463d-a1b3-a334bf742437",
@@ -1157,7 +1157,7 @@
       "type": "http",
       "documentation": "Save team time off entity",
       "method": "post",
-      "endpoint": "teamTimeOff",
+      "endpoint": "governance/teamTimeOff",
       "responses": [
         {
           "uuid": "f2767a59-c7b5-432f-8b08-61d00a4e4d1c",
@@ -1300,7 +1300,7 @@
       "type": "http",
       "documentation": "Edit team time off entity",
       "method": "put",
-      "endpoint": "teamTimeOff/:id",
+      "endpoint": "governance/teamTimeOff/:id",
       "responses": [
         {
           "uuid": "8aba5150-b79f-4983-aa4b-e0218725fcae",
@@ -1443,7 +1443,7 @@
       "type": "http",
       "documentation": "Get team time off list",
       "method": "get",
-      "endpoint": "teamTimeOff",
+      "endpoint": "governance/teamTimeOff",
       "responses": [
         {
           "uuid": "ce8c30e5-e1db-4346-b997-d2f25a9c5f63",
@@ -1586,7 +1586,7 @@
       "type": "http",
       "documentation": "Find team time off by id",
       "method": "get",
-      "endpoint": "teamTimeOff/:id",
+      "endpoint": "governance/teamTimeOff/:id",
       "responses": [
         {
           "uuid": "87481f0b-9f4f-4d1b-b465-99ed0aa7af61",
@@ -1729,7 +1729,7 @@
       "type": "http",
       "documentation": "Deletes team time off with given id",
       "method": "delete",
-      "endpoint": "teamTimeOff/:id",
+      "endpoint": "governance/teamTimeOff/:id",
       "responses": [
         {
           "uuid": "d0383b91-3077-4c15-b32a-8c081ab3fefe",
@@ -1872,7 +1872,7 @@
       "type": "http",
       "documentation": "Save effort matrix entity",
       "method": "post",
-      "endpoint": "effortMatrix",
+      "endpoint": "governance/effortMatrix",
       "responses": [
         {
           "uuid": "1ad59165-774f-46e9-bdf2-7a5e0f09c4a8",
@@ -2015,7 +2015,7 @@
       "type": "http",
       "documentation": "Edit effort matrix entity",
       "method": "put",
-      "endpoint": "effortMatrix/:id",
+      "endpoint": "governance/effortMatrix/:id",
       "responses": [
         {
           "uuid": "48cc086b-7617-425a-a230-f9a652fc9673",
@@ -2158,7 +2158,7 @@
       "type": "http",
       "documentation": "Get effort matrix list",
       "method": "get",
-      "endpoint": "effortMatrix",
+      "endpoint": "governance/effortMatrix",
       "responses": [
         {
           "uuid": "2d818ece-5453-41fe-98e5-59b4288ffb61",
@@ -2301,7 +2301,7 @@
       "type": "http",
       "documentation": "Find effort matrix by id",
       "method": "get",
-      "endpoint": "effortMatrix/:id",
+      "endpoint": "governance/effortMatrix/:id",
       "responses": [
         {
           "uuid": "0b23633d-deef-4f8d-a871-bba4b5ae31b0",
@@ -2444,7 +2444,7 @@
       "type": "http",
       "documentation": "Deletes effort matrix with given id",
       "method": "delete",
-      "endpoint": "effortMatrix/:id",
+      "endpoint": "governance/effortMatrix/:id",
       "responses": [
         {
           "uuid": "a2a97131-2611-4706-b392-ed47d44a763e",
@@ -2587,7 +2587,7 @@
       "type": "http",
       "documentation": "Save project milestone entity",
       "method": "post",
-      "endpoint": "projectMilestones",
+      "endpoint": "governance/projectMilestones",
       "responses": [
         {
           "uuid": "9bbb8167-2958-4b76-8df0-fbaaf6aa8573",
@@ -2730,7 +2730,7 @@
       "type": "http",
       "documentation": "Edit project milestone entity",
       "method": "put",
-      "endpoint": "projectMilestones/:id",
+      "endpoint": "governance/projectMilestones/:id",
       "responses": [
         {
           "uuid": "fe037588-2402-4d16-953d-6dc23926887a",
@@ -2873,7 +2873,7 @@
       "type": "http",
       "documentation": "Get project milestones list",
       "method": "get",
-      "endpoint": "projectMilestones",
+      "endpoint": "governance/projectMilestones",
       "responses": [
         {
           "uuid": "3b2a8961-33c0-4f7c-8b0f-39fdbeff0e8f",
@@ -3016,7 +3016,7 @@
       "type": "http",
       "documentation": "Find project milestone by id",
       "method": "get",
-      "endpoint": "projectMilestones/:id",
+      "endpoint": "governance/projectMilestones/:id",
       "responses": [
         {
           "uuid": "36935f81-6f9b-4ec9-b5f5-4dc5d9ad523e",
@@ -3159,7 +3159,7 @@
       "type": "http",
       "documentation": "Deletes project milestone with given id",
       "method": "delete",
-      "endpoint": "projectMilestones/:id",
+      "endpoint": "governance/projectMilestones/:id",
       "responses": [
         {
           "uuid": "cf90b295-ab2e-405f-b348-5142e897bb69",
@@ -3298,301 +3298,15 @@
       "responseMode": null
     },
     {
-      "uuid": "439d888b-baab-42c3-9956-8edec9e547f9",
+      "uuid": "3b45330a-0313-4e12-b271-bed54d0c8e55",
       "type": "http",
-      "documentation": "Get regions",
-      "method": "get",
-      "endpoint": "regions",
-      "responses": [
-        {
-          "uuid": "3613a5de-6bf1-4560-9478-730e58bd5775",
-          "body": "{\n    \"list\": [\n      {\n        \"id\": 1,\n        \"name\": \"Dragos Munteanu\",\n        \"store\": [\"Carrefour Decebal\"],\n        \"division\": \"Hyper\",\n        \"status\": \"active\"\n      },\n      {\n        \"id\": 2,\n        \"name\": \"Dragos Munteanu\",\n        \"store\": [\"Carrefour Decebal\"],\n        \"division\": \"Hyper\",\n        \"status\": \"inactive\"\n      },\n      {\n        \"id\": 3,\n        \"name\": \"Dragos Munteanu\",\n        \"store\": [\"Carrefour Decebal\", \"Carrefour Militari\", \"Carrefour Iancului\", \"Carrefour Muncii\"],\n        \"division\": \"Hyper\",\n        \"status\": \"active\"\n      },\n      {\n        \"id\": 4,\n        \"name\": \"Dragos Munteanu\",\n        \"store\": [\"Carrefour Decebal\"],\n        \"division\": \"Hyper\",\n        \"status\": \"active\"\n      },\n      {\n        \"id\": 5,\n        \"name\": \"Dragos Munteanu\",\n        \"store\": [\"Carrefour Decebal\"],\n        \"division\": \"Hyper\",\n        \"status\": \"active\"\n      }\n    ],\n    \"page\": {\n      \"pageSize\": 10,\n      \"page\": {{faker 'datatype.number'}},\n      \"totalCount\": {{faker 'datatype.number'}},\n      \"pageCount\": {{faker 'datatype.number'}}\n    }\n  }",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the paginated, filtered and sorted regions list",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "cd47b192-3a0a-4cee-bf93-12c7bd7231c7",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "9c3bda26-b9b9-4133-a1eb-361fec9c96a6",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "59037b5f-434e-46e4-b958-9836ebfeac92",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "4fd8d4aa-3814-43ad-91dd-7b82b93eac45",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "f3321de3-1214-4758-a2e3-45e96c06cf72",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "da7fe1dd-6843-4724-81e9-2401c444ae1d",
-      "type": "http",
-      "documentation": "Get team members list",
-      "method": "get",
-      "endpoint": "users",
-      "responses": [
-        {
-          "uuid": "8f0a5863-fa31-4b64-ab75-f9d1e8f78b9b",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Pop Adrian\",\n      \"domain\": \"Digital Platforms\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Florescu Adina\",\n      \"domain\": \"Security\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Ionescu Mihai\",\n      \"domain\": \"Digital Platforms\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Dumitrescu Cristina\",\n      \"domain\": \"Data Science\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Mateescu Florin\",\n      \"domain\": \"EDI\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Stanciu Mihaela\",\n      \"domain\": \"Digital Platforms\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the paginated, filtered and sorted users list",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "6d65b007-fa46-4380-95a0-2ece147f568a",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "3188e558-72e4-4872-81ec-b92a88abfef0",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "6cc1a538-2207-46de-87c9-8bf52dff64c6",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "afaaab3d-ef50-4007-b854-c8871ec033e8",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "0f010218-3351-4ea0-9055-0581de335980",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "fba49264-daa2-43b0-a7e4-4506235b5999",
-      "type": "http",
-      "documentation": "Save effort matrix entity",
+      "documentation": "Save team time off entity",
       "method": "post",
-      "endpoint": "regions",
+      "endpoint": "governance/myTimeOff",
       "responses": [
         {
-          "uuid": "1df8410c-ded5-40d0-b55f-c9d011fe637b",
-          "body": "{\n  \"id\": 1,\n  \"responsible\": {\n    \"id\": 1,\n    \"name\": \"Adrian Pop\"\n  },\n  \"name\": \"Region1\",\n  \"division\": \"hyper\",\n  \"status\": \"active\"\n}",
+          "uuid": "c06bb41b-3ad7-46ec-9d7d-79ccf3487d1f",
+          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -3613,7 +3327,7 @@
           "default": true
         },
         {
-          "uuid": "cc8dae3a-1576-4460-80db-fe3ad6701a53",
+          "uuid": "1ebdad61-8643-4221-928b-48e902f52ade",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3635,7 +3349,7 @@
           "default": false
         },
         {
-          "uuid": "2a860f8a-0541-4cbf-a9f1-a6278c8e26bd",
+          "uuid": "383d23b9-f28a-46b9-8cfe-9c9fdb0fbad9",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3657,7 +3371,7 @@
           "default": false
         },
         {
-          "uuid": "d3178e8b-732c-4187-9a64-7b3028c80fb2",
+          "uuid": "e3c0221a-e027-45b6-91b7-cb821bb3106f",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3679,7 +3393,7 @@
           "default": false
         },
         {
-          "uuid": "9cb18b6f-26a0-43b9-9b08-83781e0725a2",
+          "uuid": "d14501c8-998e-4356-96f4-65c45fc13d5b",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3701,7 +3415,7 @@
           "default": false
         },
         {
-          "uuid": "cc487cf1-56a6-4d41-9990-d24a20abe66d",
+          "uuid": "908e479d-428d-4c98-bdb1-8db37346bbca",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3727,15 +3441,301 @@
       "responseMode": null
     },
     {
-      "uuid": "e10361af-1068-4c54-8cdc-e563abc39623",
+      "uuid": "3181983d-d4e5-479e-a847-fd698fa1cbe8",
+      "type": "http",
+      "documentation": "Edit team time off entity",
+      "method": "put",
+      "endpoint": "governance/myTimeOff/:id",
+      "responses": [
+        {
+          "uuid": "a7b37712-5fb3-4ac8-b8e8-37a9cfc78311",
+          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful operation",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "4f4eb610-5cac-45b4-a59b-c21f3d5ae9e2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "cf024df4-9289-45b9-a847-86bbd2bf9643",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "192245d7-1e65-4f82-b717-73f87eae0905",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "a86bb6a0-eea3-464f-a454-ac85a112d5eb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "4e97267a-41f9-4799-b947-1e103fa91cf6",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "292e308e-f9e4-4946-94cc-0f6a826139bf",
+      "type": "http",
+      "documentation": "Get team time off list",
+      "method": "get",
+      "endpoint": "governance/myTimeOff",
+      "responses": [
+        {
+          "uuid": "336d1388-1d45-4548-b7fb-ac8df724f71f",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"dayOffType\": \"Public Holiday\",\n      \"startDate\": \"2023-02-01\",\n      \"endDate\": \"2023-02-01\",\n      \"numberOfHours\": 6\n    },\n    {\n      \"id\": 6,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"dayOffType\": \"Team Event\",\n      \"startDate\": \"2023-02-23\",\n      \"endDate\": \"2023-02-23\",\n      \"numberOfHours\": 8\n    },\n    {\n      \"id\": 7,\n      \"teamMember\": {\n        \"id\": 1,\n        \"name\": \"Pop Adrian\",\n        \"domain\": \"Digital\"\n      },\n      \"dayOffType\": \"Day-Off\",\n      \"startDate\": \"2023-02-24\",\n      \"endDate\": \"2023-02-24\",\n      \"numberOfHours\": 8\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted team time off list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "5db14835-a822-48e2-8a51-9075f5e58872",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "0c839f60-c7b6-4bee-9fec-a01dd29f4875",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "b52b137b-a8fb-4827-aabe-3f174f708caa",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "1240e49f-7af1-4b4d-ac78-7c12d15a022e",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "64c0aded-2b07-4d4a-a9b3-4efa0640a565",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "b3da3c60-60c8-4676-a5c7-a9a2a4a9fe4e",
       "type": "http",
       "documentation": "Find team time off by id",
       "method": "get",
-      "endpoint": "regions/:id",
+      "endpoint": "governance/myTimeOff/:id",
       "responses": [
         {
-          "uuid": "aca68702-a83e-4dbf-8573-524d270497c7",
-          "body": "{\n  \"id\": 1,\n  \"responsible\": {\n    \"id\": 1,\n    \"name\": \"Adrian Pop\"\n  },\n  \"name\": \"Region1\",\n  \"division\": \"hyper\",\n  \"status\": \"active\"\n}",
+          "uuid": "c66268d4-101a-427d-bd8f-00414bbdc8ce",
+          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -3756,7 +3756,7 @@
           "default": true
         },
         {
-          "uuid": "b46e148d-dd11-4f47-8e54-03ceb4e58ee3",
+          "uuid": "0c36ee97-fd9b-4cb7-8156-a3ba67ee7966",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3778,7 +3778,7 @@
           "default": false
         },
         {
-          "uuid": "9c8ebd17-b7d7-42ac-b6ca-30541e7322aa",
+          "uuid": "1705102c-2462-4b30-806a-9cb07d300ec2",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3800,7 +3800,7 @@
           "default": false
         },
         {
-          "uuid": "77c239e3-006f-4063-a9a0-2069e62c8b22",
+          "uuid": "0a598ef7-5389-46e0-b934-a92ebff67b2b",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3822,7 +3822,7 @@
           "default": false
         },
         {
-          "uuid": "289c984f-b022-491b-b11c-9f5c8066f30e",
+          "uuid": "8b6da2db-a6ea-4e72-acc0-62f6effc4692",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3844,7 +3844,7 @@
           "default": false
         },
         {
-          "uuid": "459fc2ba-6799-4186-90c8-2bbb269a6b3b",
+          "uuid": "bd8e9c99-a172-4de9-b328-4be328df63e5",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3870,18 +3870,18 @@
       "responseMode": null
     },
     {
-      "uuid": "3610d1dd-13ac-4bf7-8fd1-d2e30ab40f03",
+      "uuid": "ebb5b0d6-3422-46fa-ac94-76322fe70e02",
       "type": "http",
-      "documentation": "Edit effort matrix entity",
-      "method": "put",
-      "endpoint": "regions/:id",
+      "documentation": "Deletes team time off with given id",
+      "method": "delete",
+      "endpoint": "governance/myTimeOff/:id",
       "responses": [
         {
-          "uuid": "4cdcfa35-272a-4744-84ba-3d1947f5fe1d",
-          "body": "{\n  \"id\": 1,\n  \"responsible\": {\n    \"id\": 1,\n    \"name\": \"Adrian Pop\"\n  },\n  \"name\": \"Region1\",\n  \"division\": \"hyper\",\n  \"status\": \"inactive\"\n}",
+          "uuid": "b67e81bf-ebe9-42c7-ab8b-740b4aabab7e",
+          "body": "",
           "latency": 0,
-          "statusCode": 200,
-          "label": "Successful operation",
+          "statusCode": 204,
+          "label": "Successfully processed request",
           "headers": [
             {
               "key": "Content-Type",
@@ -3899,7 +3899,7 @@
           "default": true
         },
         {
-          "uuid": "5664ef89-1ea1-4db1-8ed8-b32aed58d30e",
+          "uuid": "70606faf-e4c0-40f1-b3a5-b2b0b9b09f9a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3921,7 +3921,7 @@
           "default": false
         },
         {
-          "uuid": "ad017998-f153-4944-827c-739c3c4cff17",
+          "uuid": "0b48d850-37c5-4be3-9d7f-f81ea0981def",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3943,7 +3943,7 @@
           "default": false
         },
         {
-          "uuid": "0e65b874-e54e-4430-9e4d-a40b9d1e3a06",
+          "uuid": "78ad2053-d431-41ba-864a-94a3b430778a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3965,7 +3965,7 @@
           "default": false
         },
         {
-          "uuid": "ef608f45-ba77-4eb4-99ad-f7b518582644",
+          "uuid": "6fe1d17f-cd65-4da1-9427-cae0e11829b4",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3987,7 +3987,7 @@
           "default": false
         },
         {
-          "uuid": "2901f106-bc57-407f-beac-47b834548a7d",
+          "uuid": "3885a4ee-279e-44a3-b87b-d8dd0b457a70",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -4013,18 +4013,54 @@
       "responseMode": null
     },
     {
-      "uuid": "56f87a4d-20d9-43ae-ba8a-167f09882f6b",
+      "uuid": "6ff86d0b-765c-4c8e-85cb-4ca37d7d8f7d",
       "type": "http",
-      "documentation": "Get regions",
+      "documentation": "",
       "method": "get",
-      "endpoint": "zones",
+      "endpoint": "productStock",
       "responses": [
         {
-          "uuid": "c2855eaa-0058-463c-badb-4d94a5eb1737",
-          "body": "{\n    \"list\": [\n      {\n        \"id\": 1,\n        \"name\": \"Zona1\",\n        \"responsible\": { \"id\": 1, \"name\": \"Dragos Munteanu\" },\n        \"store\": [\"Carrefour Decebal\"],\n        \"division\": \"Hyper\",\n        \"status\": \"active\"\n      },\n      {\n        \"id\": 2,\n        \"name\": \"Zona1\",\n        \"responsible\": { \"id\": 1, \"name\": \"Dragos Munteanu\" },\n        \"store\": [\"Carrefour Decebal\"],\n        \"division\": \"Hyper\",\n        \"status\": \"inactive\"\n      },\n      {\n        \"id\": 3,\n        \"name\": \"Zona1\",\n        \"responsible\": { \"id\": 1, \"name\": \"Dragos Munteanu\" },\n        \"store\": [\"Carrefour Decebal\", \"Carrefour Militari\", \"Carrefour Iancului\", \"Carrefour Muncii\"],\n        \"division\": \"Hyper\",\n        \"status\": \"active\"\n      },\n      {\n        \"id\": 4,\n        \"name\": \"Zona1\",\n        \"responsible\": { \"id\": 1, \"name\": \"Dragos Munteanu\" },\n        \"store\": [\"Carrefour Decebal\"],\n        \"division\": \"Hyper\",\n        \"status\": \"active\"\n      },\n      {\n        \"id\": 5,\n        \"name\": \"Zona1\",\n        \"responsible\": { \"id\": 1, \"name\": \"Dragos Munteanu\" },\n        \"store\": [\"Carrefour Decebal\"],\n        \"division\": \"Hyper\",\n        \"status\": \"active\"\n      }\n    ],\n    \"page\": {\n      \"pageSize\": 10,\n      \"page\": {{faker 'datatype.number'}},\n      \"totalCount\": {{faker 'datatype.number'}},\n      \"pageCount\": {{faker 'datatype.number'}}\n    }\n  }",
+          "uuid": "f2eeb5e4-c848-4416-9296-b44929ba973a",
+          "body": "{\n    \"product\": {\n        \"cod_intern\": \"44501286\",\n        \"ean\": \"3614613092689\",\n        \"has_neighbours\": true,\n        \"marca\": \"BLUESKY\",\n        \"neighbours\": [\n            {\n                \"name\": \"Depozit Brazi\",\n                \"stock_initial\": 1624,\n                \"stock_sold\": 0,\n                \"stock_reserved\": 0,\n                \"stock_available\": 1624,\n                \"stock_imob\": 0,\n                \"is_warehouse\": true\n            }\n        ],\n        \"price\": 19.9,\n        \"stock_initial\": 20,\n        \"stock_reserved\": 0,\n        \"stock_sold\": 0,\n        \"stock_available\": 20,\n        \"stock_imob\": 0,\n        \"title\": \"SUP TV MOB 10\\\"-26\\\" BWMT61TS\",\n        \"tva\": 19\n    }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained the paginated, filtered and sorted regions list",
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "code",
+              "value": "0036000291452",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "2beae078-5944-405b-b14a-2d94057727a0",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shoppingCart",
+      "responses": [
+        {
+          "uuid": "d68ee7d8-b802-4c0f-bb31-6548256c3662",
+          "body": "{\n    \"list\": [{\n        \"id\": 1,\n        \"product_title\": \"Combina frigorifica ARCTIC AK54305M30MT, 291 l, H 181.3 cm, Clasa F, argintiu\",\n        \"product_price\": 1499.90,\n        \"quantity\": 1\n    },\n    {\n        \"id\": 2,\n        \"product_title\": \"SUP TV MOB 10\\\"-26\\\" BWMT61TS\",\n        \"product_price\": 19.9,\n        \"quantity\": 3\n    }],\n    \"page\": {\n      \"pageSize\": 10,\n      \"page\": {{faker 'datatype.number'}},\n      \"totalCount\": {{faker 'datatype.number'}},\n      \"pageCount\": {{faker 'datatype.number'}}\n    },\n    \"summary\": {\n      \"price\": 1559.60,\n      \"itemCount\": 2\n    }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
           "headers": [
             {
               "key": "Content-Type",
@@ -4040,134 +4076,24 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true
-        },
-        {
-          "uuid": "9ab2fd8a-46e1-4be1-be6b-db528677c3c4",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "5db76485-bdbb-4104-8bf8-5024c6721fd9",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "7b9168a7-b49a-4804-a37c-d49f4a93b6b4",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "9811676e-ebf4-4462-87c8-8cca9210372b",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "e81c7dd0-dbd8-4f9d-a757-fbb23aa0041f",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
         }
       ],
       "enabled": true,
       "responseMode": null
     },
     {
-      "uuid": "3e04fafb-6118-4a4a-b634-9e93f83f3730",
+      "uuid": "4098eba4-50c4-4aa4-8a9b-53c9937d5e88",
       "type": "http",
-      "documentation": "Save zone",
+      "documentation": "",
       "method": "post",
-      "endpoint": "zones",
+      "endpoint": "shoppingCart",
       "responses": [
         {
-          "uuid": "f3f51a60-a2c7-43eb-b4b2-30ef1d1c0b51",
-          "body": "{\n  \"id\": 1,\n  \"responsible\": {\n    \"id\": 1,\n    \"name\": \"Adrian Pop\"\n  },\n  \"name\": \"Zone1\",\n  \"division\": \"hyper\",\n  \"status\": \"active\"\n}",
+          "uuid": "ede0edcb-ac28-4923-9ac8-d1fde32ff71d",
+          "body": "{}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successful operation",
+          "label": "",
           "headers": [
             {
               "key": "Content-Type",
@@ -4183,134 +4109,24 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true
-        },
-        {
-          "uuid": "21185557-5e89-4681-9077-86cf914a7bdf",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "e4ae8f39-cb09-472d-9660-8c95f093f858",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "e1350ca3-a98e-49c0-8fd3-b566323db2d7",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "e15a4742-abeb-4bd9-8946-2ac90f55eee3",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "0c99b3d9-757e-46a4-a6d9-8b7b29a9a176",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
         }
       ],
       "enabled": true,
       "responseMode": null
     },
     {
-      "uuid": "ba668e02-fed3-43e3-adc5-35c3cc1cd661",
+      "uuid": "c0726f6b-fd44-4cb2-a3f7-f438c138592f",
       "type": "http",
-      "documentation": "Find zone by id",
+      "documentation": "Get stores stock list",
       "method": "get",
-      "endpoint": "zones/:id",
+      "endpoint": "storesStock",
       "responses": [
         {
-          "uuid": "00b0784e-9b49-4308-b3c2-cf45f58d087a",
-          "body": "{\n  \"id\": 1,\n  \"responsible\": {\n    \"id\": 1,\n    \"name\": \"Dragos Munteanu\"\n  },\n  \"name\": \"Region1\",\n  \"division\": \"hyper\",\n  \"status\": \"active\"\n}",
+          "uuid": "501786f2-78af-4ae7-b315-dae46b7cd411",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"store\": {\n        \"id\": 1,\n        \"name\": \"Carrefour Pantelimon\",\n        \"phones\": \"0723 515 228\"\n      },\n      \"stock\": \"14\"\n    },\n    {\n      \"id\": 2,\n      \"store\": {\n        \"id\": 2,\n        \"name\": \"Carrefour Orhideea\",\n        \"phones\": \"0723 515 229 / 0723 525 443\"\n      },\n      \"stock\": \"2\"\n    },\n    {\n      \"id\": 3,\n      \"store\": {\n        \"id\": 3,\n        \"name\": \"Carrefour Colentina\",\n        \"phones\": \"0723 515 230\"\n      },\n      \"stock\": \"0\"\n    },\n    {\n      \"id\": 4,\n      \"store\": {\n        \"id\": 4,\n        \"name\": \"Carrefour Baneasa\",\n        \"phones\": \"0723 515 231\"\n      },\n      \"stock\": \"20\"\n    },\n    {\n      \"id\": 5,\n      \"store\": {\n        \"id\": 5,\n        \"name\": \"Carrefour Antarctica\",\n        \"phones\": \"0723 515 232\"\n      },\n      \"stock\": \"999999\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successful operation",
+          "label": "Successfully obtained the paginated, filtered and sorted project milestones list",
           "headers": [
             {
               "key": "Content-Type",
@@ -4328,7 +4144,7 @@
           "default": true
         },
         {
-          "uuid": "acf54b72-a422-4f5d-b990-f5c0918bd99c",
+          "uuid": "1e5d1add-e159-4bec-95b9-8d6942198aab",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -4350,7 +4166,7 @@
           "default": false
         },
         {
-          "uuid": "92922dc8-4802-47b7-9342-49d24cfb44f9",
+          "uuid": "51d9e68c-51ff-4958-872c-18040eb03fd0",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -4372,7 +4188,7 @@
           "default": false
         },
         {
-          "uuid": "c66455c9-f062-4437-9daf-12377cbf3732",
+          "uuid": "8469a27d-6c79-459f-98de-6a959148b845",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -4394,7 +4210,7 @@
           "default": false
         },
         {
-          "uuid": "354ef120-5abd-4b10-90a1-a8e96baefef8",
+          "uuid": "159a4c0d-f149-41b9-80fd-e7267586aeba",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -4416,7 +4232,7 @@
           "default": false
         },
         {
-          "uuid": "e1f98bc0-5130-497c-ac60-965dc839c1ae",
+          "uuid": "31b381b6-1e93-41c5-b5d2-e3b14373d040",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -4442,24 +4258,407 @@
       "responseMode": null
     },
     {
-      "uuid": "6b02c5cf-2f0c-432e-8860-cea3a82ac3d8",
+      "uuid": "46eac378-9cf8-412d-b7e0-2f553731d325",
       "type": "http",
-      "documentation": "Edit zone by id",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "reports",
+      "responses": [
+        {
+          "uuid": "3f663da6-8236-4fcd-ac59-8acdec5d9336",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"date\": \"2023-02-01\",\n      \"name\": \"Vanzare 1\",\n      \"price\": 1999.9\n    },\n    {\n      \"id\": 2,\n      \"date\": \"2023-05-01\",\n      \"name\": \"Vanzare 2\",\n      \"price\": 19.9\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"total\": 2019.8\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "8a3af82c-ab71-47dc-b55b-16cd8bb854b4",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "productsToDeliver",
+      "responses": [
+        {
+          "uuid": "0ab4f187-b9fe-4a16-bf5d-805cb8a18ecb",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2019-05-01\"\n\t\t\t},\n\t\t\t\"product\": {\n\t\t\t\t\"name\": \"Coca-Cola\",\n\t\t\t\t\"count\": 4\n\t\t\t},\n\t\t\t\"store\": {\n\t\t\t\t\"name\": \"Carrefour Siret\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"323-c\",\n\t\t\t\t\"date\": \"2023-05-01\"\n\t\t\t},\n\t\t\t\"product\": {\n\t\t\t\t\"name\": \"Chestii\",\n\t\t\t\t\"count\": 83\n\t\t\t},\n\t\t\t\"store\": {\n\t\t\t\t\"name\": \"Carrefour Ploiesti\"\n\t\t\t}\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "282a0ae1-97da-435f-83cf-8d78e2de2703",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "proforma",
+      "responses": [
+        {
+          "uuid": "00efa44e-c0fc-4005-bde5-6e6bfef67f4b",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2019-05-01\",\n\t\t\t\t\"isActive\": true\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"323-c\",\n\t\t\t\t\"date\": \"2023-05-01\",\n\t\t\t\t\"isActive\": true\n\t\t\t}\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "81b20417-e97d-4aab-a41d-26eee75b9b7e",
+      "type": "http",
+      "documentation": "Deletes proforma with given id",
+      "method": "delete",
+      "endpoint": "proforma/:id",
+      "responses": [
+        {
+          "uuid": "a2bca7a6-d866-4fb3-be0b-059ff7d32905",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Successfully processed request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "fa5911d6-c75c-43a1-91c9-617cbb98b9c2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "47b47709-5966-4ae3-851b-1c9013cb64ba",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "3a2cb5b4-6028-4990-9157-e28e3d6f5643",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "73f6e9a5-a310-456f-aad7-6e2f5d34aac2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "9af23825-2b38-4138-b133-2a919706ac4c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "063bfe9b-18fd-4ed7-8f5d-0a09b97cc4ff",
+      "type": "http",
+      "documentation": "Find proforma by id",
+      "method": "get",
+      "endpoint": "proformaPDF/:id",
+      "responses": [
+        {
+          "uuid": "9d39b5a8-6485-490a-8a47-2b3027269386",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful operation",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/pdf"
+            },
+            {
+              "key": "Content-Disposition",
+              "value": "attachment; filename=\"587client646ddfbf650f6.pdf\""
+            },
+            {
+              "key": "Content-Length",
+              "value": "36471"
+            }
+          ],
+          "bodyType": "FILE",
+          "filePath": "proforma-598.pdf",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "0678e463-5493-40e4-995d-ef2b81f05d19",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "31028561-1f94-4a96-9f63-9337e5851e98",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "74b27e1b-66ba-48fe-b61e-cdc37659ed95",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "cf914ba6-7fe8-47b3-94b6-a50813bdd82c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "a8ab73df-91c3-4243-852f-33923cd7c102",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "2c783a8d-c095-4ea3-afb2-d911c56fc356",
+      "type": "http",
+      "documentation": "",
       "method": "put",
-      "endpoint": "zones/:id",
+      "endpoint": "shoppingCart",
       "responses": [
         {
-          "uuid": "0403a542-5ed5-44c7-b086-a8f749f7828c",
-          "body": "{\n  \"id\": 1,\n  \"responsible\": {\n    \"id\": 1,\n    \"name\": \"Dragos munteanu\"\n  },\n  \"name\": \"Region1\",\n  \"division\": \"hyper\",\n  \"status\": \"inactive\"\n}",
+          "uuid": "79b0ca55-b5c7-49c6-920c-522af9f08d01",
+          "body": "{}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successful operation",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
+          "label": "",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -4469,134 +4668,52 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true
-        },
-        {
-          "uuid": "d803f272-6bb2-4315-b5a1-ed1c31632b2c",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "bf341c6b-7271-4b9e-9b27-1bff5d84c444",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "7f436c4c-2241-41f3-ae94-4a5bfd44087a",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "5698738e-977b-4690-9b9f-a4c80bc2290f",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "93071bdb-13c9-47f5-822b-7cfa326f4e16",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
         }
       ],
       "enabled": true,
       "responseMode": null
     },
     {
-      "uuid": "194d3a74-af7e-45bd-b555-2779a5ad687e",
+      "uuid": "a6e28b3c-db34-46fd-8ae9-c2137604388c",
       "type": "http",
-      "documentation": "Get regions",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "shoppingCart/:id",
+      "responses": [
+        {
+          "uuid": "0b46a08e-3084-4831-acbc-f76d0fa6f818",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "124121c8-3ee9-4a7b-b0d1-7927ede88294",
+      "type": "http",
+      "documentation": "",
       "method": "get",
-      "endpoint": "stores",
+      "endpoint": "proforma/:id",
       "responses": [
         {
-          "uuid": "3964af4f-c31b-4ee4-9723-8217f797cbc5",
-          "body": "{\n    \"list\": [\n      {\n        \"id\": 1,\n        \"name\": \"Magazin1\",\n        \"metiCode\": \"cod1\",\n        \"division\": \"Hyper\",\n        \"parentSociety\": \"Carrefour\",\n        \"region\": { \"id\": 1, \"name\": \"Regiune1\" },\n        \"zone\": { \"id\": 1, \"name\": \"Zona1\" },\n        \"status\": \"active\"\n      },\n      {\n        \"id\": 1,\n        \"name\": \"Magazin1\",\n        \"metiCode\": \"cod1\",\n        \"division\": \"Hyper\",\n        \"parentSociety\": \"Carrefour\",\n        \"region\": { \"id\": 1, \"name\": \"Regiune1\" },\n        \"zone\": { \"id\": 1, \"name\": \"Zona1\" },\n        \"status\": \"active\"\n      },\n      {\n        \"id\": 1,\n        \"name\": \"Magazin1\",\n        \"metiCode\": \"cod1\",\n        \"division\": \"Hyper\",\n        \"parentSociety\": \"Carrefour\",\n        \"region\": { \"id\": 1, \"name\": \"Regiune1\" },\n        \"zone\": { \"id\": 1, \"name\": \"Zona1\" },\n        \"status\": \"active\"\n      },\n      {\n        \"id\": 1,\n        \"name\": \"Magazin1\",\n        \"metiCode\": \"cod1\",\n        \"division\": \"Hyper\",\n        \"parentSociety\": \"Carrefour\",\n        \"region\": { \"id\": 1, \"name\": \"Regiune1\" },\n        \"zone\": { \"id\": 1, \"name\": \"Zona1\" },\n        \"status\": \"active\"\n      },\n      {\n        \"id\": 1,\n        \"name\": \"Magazin1\",\n        \"metiCode\": \"cod1\",\n        \"division\": \"Hyper\",\n        \"parentSociety\": \"Carrefour\",\n        \"region\": { \"id\": 1, \"name\": \"Regiune1\" },\n        \"zone\": { \"id\": 1, \"name\": \"Zona1\" },\n        \"status\": \"active\"\n      }\n    ],\n    \"page\": {\n      \"pageSize\": 10,\n      \"page\": {{faker 'datatype.number'}},\n      \"totalCount\": {{faker 'datatype.number'}},\n      \"pageCount\": {{faker 'datatype.number'}}\n    }\n  }",
+          "uuid": "f7242bba-3c02-41cb-903b-157d1721d89b",
+          "body": "{\n  \"id\": 1,\n  \"name\": 4637,\n  \"is_active\": true\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained the paginated, filtered and sorted regions list",
+          "label": "",
           "headers": [
             {
               "key": "Content-Type",
@@ -4612,140 +4729,25 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true
-        },
-        {
-          "uuid": "873d2511-56d1-41e3-b360-a8409169b443",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "b122cf2f-8fd9-431b-871e-d274aefb3f85",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "ac12f425-3da0-4baf-b60e-906bd80bbc13",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "e9645461-63ff-4e53-9803-07673e8a00c2",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "f733799c-3a65-48ff-9e7e-125656742ae4",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
         }
       ],
       "enabled": true,
       "responseMode": null
     },
     {
-      "uuid": "9b5008ad-c0ff-4cb0-a50a-faddcdfeb4a0",
+      "uuid": "a2f8ffa6-4e2e-48c7-9e18-491e98d50063",
       "type": "http",
-      "documentation": "Find zone by id",
+      "documentation": "",
       "method": "get",
-      "endpoint": "stores/:id",
+      "endpoint": "client",
       "responses": [
         {
-          "uuid": "03c68611-ff78-4ae1-9850-2f8515ab0e15",
-          "body": "{\n  \"id\": 1,\n  \"name\": \"Magazin1\",\n  \"metiCode\": \"cod1\",\n  \"division\": \"Hyper\",\n  \"parentSociety\": \"Carrefour\",\n  \"region\": {\n    \"id\": 1,\n    \"name\": \"Regiune1\"\n  },\n  \"zone\": {\n    \"id\": 1,\n    \"name\": \"Zona1\"\n  },\n  \"status\": \"active\"\n}",
+          "uuid": "97be6dbc-4143-46b5-ba56-95167af18d43",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"Tudor Mihai\",\n\t\t\t\"cif\": \"1234\",\n\t\t\t\"address\": \"Magureni\",\n\t\t\t\"phone\": \"0788123456\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"SICHIM MIHAI\",\n\t\t\t\"cif\": \"789\",\n\t\t\t\"address\": \"PL\",\n\t\t\t\"phone\": \"0721123456\"\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successful operation",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
+          "label": "",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -4755,134 +4757,164 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true
-        },
-        {
-          "uuid": "cceed55b-3c55-4bd2-b7a0-a850b88889ad",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "6808f6ee-7627-4484-84d1-6f8196d9c0ce",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "4c0c6a97-1837-4c67-9f60-3dc0f42cfc77",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "d01d5e61-db64-42b2-a197-37003a071383",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "0efaa991-a7ad-4cb9-8cf9-40b1e9993b3d",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
         }
       ],
       "enabled": true,
       "responseMode": null
     },
     {
-      "uuid": "299a63ae-7cd6-43ab-a1de-c7967f147cb4",
+      "uuid": "7644dd77-c864-47e2-a78c-0a39a1ad7e5d",
       "type": "http",
-      "documentation": "Edit zone by id",
-      "method": "put",
-      "endpoint": "stores/:id",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "county",
       "responses": [
         {
-          "uuid": "ec9e0fce-ab49-471b-adbd-48a208370312",
-          "body": "{\n  \"id\": 1,\n  \"name\": \"Magazin1\",\n  \"metiCode\": \"cod1\",\n  \"division\": \"Hyper\",\n  \"parentSociety\": \"Carrefour\",\n  \"region\": {\n    \"id\": 1,\n    \"name\": \"Regiune1\"\n  },\n  \"zone\": {\n    \"id\": 1,\n    \"name\": \"Zona1\"\n  },\n  \"status\": \"active\"\n}",
+          "uuid": "8851d4fc-1e23-481a-93ee-ff780c4b1994",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"code\": \"AB\",\n\t\t\t\"name\": \"Alba\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"code\": \"AR\",\n\t\t\t\"name\": \"Arad\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 3,\n\t\t\t\"code\": \"AG\",\n\t\t\t\"name\": \"Arges\"\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successful operation",
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "ec0cf8e7-afca-4f19-91a1-f6576eaa95f5",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "city",
+      "responses": [
+        {
+          "uuid": "babde5d0-abdc-4213-8cf7-d98ce5980fe0",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"Abrud\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"Abrud-Sat\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 3,\n\t\t\t\"name\": \"Achimețești\"\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "3606d94d-2550-43e2-8fbf-06921b85ebda",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "client",
+      "responses": [
+        {
+          "uuid": "b031c86d-6447-4511-92b8-0285dd155b4b",
+          "body": "{\n  \"id\": 99999999268,\n  \"address\": \"Address\",\n  \"bank\": \"BT\",\n  \"bank_account\": \"123\",\n  \"cif\": \"99999999268\",\n  \"city\": \"Municipiul Bucuresti\",\n  \"county\": \"Bucuresti\",\n  \"email\": \"paula.dan@fullscreendigital.ro\",\n  \"name\": \"Paula Dan\",\n  \"phone\": \"123\",\n  \"trade_register\": null,\n  \"type\": \"Individual\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "b8ee315f-ec4c-42f9-9b93-dbbd8f27da8b",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "client/:id",
+      "responses": [
+        {
+          "uuid": "f8c400d2-4d3e-49d2-b735-ffa2cb7b7e52",
+          "body": "{\n  \"id\": 99999999268,\n  \"address\": \"Address\",\n  \"bank\": \"BT\",\n  \"bank_account\": \"123\",\n  \"cif\": \"99999999268\",\n  \"city\": \"Municipiul Bucuresti\",\n  \"county\": \"Bucuresti\",\n  \"email\": \"paula.dan@fullscreendigital.ro\",\n  \"name\": \"Paula Dan\",\n  \"phone\": \"123\",\n  \"trade_register\": null,\n  \"type\": \"Individual\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "24120d8f-e165-400d-9762-a35d78d0300f",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "paymentMethods",
+      "responses": [
+        {
+          "uuid": "d5d07238-21af-4f90-b769-718a59683f14",
+          "body": "[\n  {\n    \"key\": \"CASH\",\n    \"value\": \"Numerar\"\n  },\n  {\n    \"key\": \"CREDIT_CARD\",\n    \"value\": \"Card de credit\"\n  },\n  {\n    \"key\": \"CARREFOUR_CARD\",\n    \"value\": \"Card Carrefour\"\n  },\n  {\n    \"key\": \"PAYMENT_ORDER\",\n    \"value\": \"Ordin de plata\"\n  },\n  {\n    \"key\": \"BANK_CREDIT\",\n    \"value\": \"Credit bancar\"\n  },\n  {\n    \"key\": \"TREASURY_ORDER\",\n    \"value\": \"Ordin de plata trezorerie\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "6a4443e5-6532-4454-8ce9-b756079d875d",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "setReceipt",
+      "responses": [
+        {
+          "uuid": "15714f0b-bf52-4bb7-933f-eabf670becd5",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
           "headers": [
             {
               "key": "Content-Type",
@@ -4898,19 +4930,25 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true
-        },
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "821d8293-24e4-4e74-af37-65c5ee2d701f",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "proforma",
+      "responses": [
         {
-          "uuid": "62f1307b-df3b-4098-b307-9a531aa55ef7",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "uuid": "66ff9656-c96f-4b4d-883b-51f81caa4ae3",
+          "body": "{\n  \"id\": 679,\n  \"name\": 4637,\n  \"is_active\": true\n}",
           "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -4919,20 +4957,26 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
-        },
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "366722d0-0d52-46c8-a9e1-39fc193aeec6",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "invoice",
+      "responses": [
         {
-          "uuid": "3cafb130-acf3-425e-a0df-bee5999302ba",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "uuid": "e6c09ac2-9952-43cf-90f0-f7f0166de68e",
+          "body": "{}",
           "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -4941,20 +4985,26 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
-        },
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "110c97d0-8bb9-436c-b827-b05c5bcf22be",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "proformaAll",
+      "responses": [
         {
-          "uuid": "5a33df14-5f80-4740-af66-1241cad55a38",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "uuid": "0d764c90-6703-4e03-aae6-76c4a35a22af",
+          "body": "{\n\t\"list\": [{\n\t\t\t\"id\": 1,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"322-c\",\n\t\t\t\t\"date\": \"2019-05-01\",\n\t\t\t\t\"isActive\": true\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"date\": \"2023-02-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"323-c\",\n\t\t\t\t\"date\": \"2023-05-01\",\n\t\t\t\t\"isActive\": true\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 3,\n\t\t\t\"date\": \"2023-04-01\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"678-c\",\n\t\t\t\t\"date\": \"2023-05-01\",\n\t\t\t\t\"isActive\": false\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": 4,\n\t\t\t\"date\": \"2023-05-11\",\n\t\t\t\"proforma\": {\n\t\t\t\t\"id\": \"910-ab\",\n\t\t\t\t\"date\": \"2023-05-01\",\n\t\t\t\t\"isActive\": false\n\t\t\t}\n\t\t}\n\t],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -4963,20 +5013,26 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
-        },
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "92a6bb4b-202d-4965-87d1-ca58d6c08ad5",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "governance/domains",
+      "responses": [
         {
-          "uuid": "c4c9fff1-de83-4676-be80-dab96c68d16d",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "uuid": "b415b596-c89b-48b3-a3fd-5e7eb7449aeb",
+          "body": "[\n  {\n\t\t\"domain\": \"Digital Platforms\"\n\t},\n\t{\n\t\t\"domain\": \"Store&Supply Chain\"\n\t},\n\t{\n\t\t\"domain\": \"EDI\"\n\t},\n\t{\n\t\t\"domain\": \"Security\"\n\t},\n\t{\n\t\t\"domain\": \"Enterprise Architecture\"\n\t},\n\t{\n\t\t\"domain\": \"Innovation\"\n\t},\n\t{\n\t\t\"domain\": \"Infra&Support\"\n\t},\n\t{\n\t\t\"domain\": \"Data Science\"\n\t}\n]",
           "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -4985,29 +5041,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "20a92f26-b6e1-4683-a937-e1667984090c",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
+          "default": true
         }
       ],
       "enabled": true,
@@ -5109,51 +5143,115 @@
     },
     {
       "type": "route",
-      "uuid": "439d888b-baab-42c3-9956-8edec9e547f9"
+      "uuid": "3b45330a-0313-4e12-b271-bed54d0c8e55"
     },
     {
       "type": "route",
-      "uuid": "da7fe1dd-6843-4724-81e9-2401c444ae1d"
+      "uuid": "3181983d-d4e5-479e-a847-fd698fa1cbe8"
     },
     {
       "type": "route",
-      "uuid": "fba49264-daa2-43b0-a7e4-4506235b5999"
+      "uuid": "292e308e-f9e4-4946-94cc-0f6a826139bf"
     },
     {
       "type": "route",
-      "uuid": "e10361af-1068-4c54-8cdc-e563abc39623"
+      "uuid": "b3da3c60-60c8-4676-a5c7-a9a2a4a9fe4e"
     },
     {
       "type": "route",
-      "uuid": "3610d1dd-13ac-4bf7-8fd1-d2e30ab40f03"
+      "uuid": "ebb5b0d6-3422-46fa-ac94-76322fe70e02"
     },
     {
       "type": "route",
-      "uuid": "56f87a4d-20d9-43ae-ba8a-167f09882f6b"
+      "uuid": "6ff86d0b-765c-4c8e-85cb-4ca37d7d8f7d"
     },
     {
       "type": "route",
-      "uuid": "3e04fafb-6118-4a4a-b634-9e93f83f3730"
+      "uuid": "2beae078-5944-405b-b14a-2d94057727a0"
     },
     {
       "type": "route",
-      "uuid": "ba668e02-fed3-43e3-adc5-35c3cc1cd661"
+      "uuid": "4098eba4-50c4-4aa4-8a9b-53c9937d5e88"
     },
     {
       "type": "route",
-      "uuid": "6b02c5cf-2f0c-432e-8860-cea3a82ac3d8"
+      "uuid": "c0726f6b-fd44-4cb2-a3f7-f438c138592f"
     },
     {
       "type": "route",
-      "uuid": "194d3a74-af7e-45bd-b555-2779a5ad687e"
+      "uuid": "46eac378-9cf8-412d-b7e0-2f553731d325"
     },
     {
       "type": "route",
-      "uuid": "9b5008ad-c0ff-4cb0-a50a-faddcdfeb4a0"
+      "uuid": "8a3af82c-ab71-47dc-b55b-16cd8bb854b4"
     },
     {
       "type": "route",
-      "uuid": "299a63ae-7cd6-43ab-a1de-c7967f147cb4"
+      "uuid": "282a0ae1-97da-435f-83cf-8d78e2de2703"
+    },
+    {
+      "type": "route",
+      "uuid": "124121c8-3ee9-4a7b-b0d1-7927ede88294"
+    },
+    {
+      "type": "route",
+      "uuid": "81b20417-e97d-4aab-a41d-26eee75b9b7e"
+    },
+    {
+      "type": "route",
+      "uuid": "063bfe9b-18fd-4ed7-8f5d-0a09b97cc4ff"
+    },
+    {
+      "type": "route",
+      "uuid": "2c783a8d-c095-4ea3-afb2-d911c56fc356"
+    },
+    {
+      "type": "route",
+      "uuid": "a6e28b3c-db34-46fd-8ae9-c2137604388c"
+    },
+    {
+      "type": "route",
+      "uuid": "a2f8ffa6-4e2e-48c7-9e18-491e98d50063"
+    },
+    {
+      "type": "route",
+      "uuid": "ec0cf8e7-afca-4f19-91a1-f6576eaa95f5"
+    },
+    {
+      "type": "route",
+      "uuid": "7644dd77-c864-47e2-a78c-0a39a1ad7e5d"
+    },
+    {
+      "type": "route",
+      "uuid": "3606d94d-2550-43e2-8fbf-06921b85ebda"
+    },
+    {
+      "type": "route",
+      "uuid": "b8ee315f-ec4c-42f9-9b93-dbbd8f27da8b"
+    },
+    {
+      "type": "route",
+      "uuid": "24120d8f-e165-400d-9762-a35d78d0300f"
+    },
+    {
+      "type": "route",
+      "uuid": "6a4443e5-6532-4454-8ce9-b756079d875d"
+    },
+    {
+      "type": "route",
+      "uuid": "821d8293-24e4-4e74-af37-65c5ee2d701f"
+    },
+    {
+      "type": "route",
+      "uuid": "366722d0-0d52-46c8-a9e1-39fc193aeec6"
+    },
+    {
+      "type": "route",
+      "uuid": "110c97d0-8bb9-436c-b827-b05c5bcf22be"
+    },
+    {
+      "type": "route",
+      "uuid": "92a6bb4b-202d-4965-87d1-ca58d6c08ad5"
     }
   ],
   "proxyMode": false,

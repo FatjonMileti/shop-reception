@@ -17,6 +17,19 @@ export const oidcConfig = {
   loadUserInfo: true
 }
 
+export const setTokenInConfig = (token, config) => {
+  if (isTokenExpired(token)) {
+    // TODO: what should be done here? We shouldn't get into this situation as the oidc-client should handle this
+    console.log('token expired????????????')
+  }
+
+  if (!config.headers.Authorization) {
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+  }
+}
+
 export const getToken = () => {
   return localStorage.getItem(TOKEN_KEY)
 }
@@ -55,4 +68,10 @@ export const getUserInfo = () => {
   } catch (e) {
     console.log('token is not valid')
   }
+}
+
+export const getUserRoles = () => {
+  const userInfo = getUserInfo()
+
+  return userInfo.resource_access[process.env.CLIENT_ID]?.roles || []
 }

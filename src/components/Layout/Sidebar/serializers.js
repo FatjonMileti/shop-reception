@@ -29,7 +29,7 @@ const toMenuItem = (item, index, nestedItems) => ({
   type: item.icon ? 'icon' : 'text',
   primaryText: item.name,
   index: index,
-  icon: <Icon iconName={item.icon} />,
+  icon: <Icon iconName={item.icon} tiny fill="white" />,
   disablePadding: true,
   id: item.id,
   href: item.routeURL || null,

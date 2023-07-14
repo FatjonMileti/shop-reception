@@ -1,0 +1,19 @@
+.actions {
+  border-bottom: 1px solid #E5E5E5;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 32px 1fr 80px;
+
+  .pageInfo,
+  .zoomRatio {
+    color: #121212;
+  }
+
+  .zoomContainer {
+    text-align: center;
+  }
+
+  .buttons button {
+    min-width: 30px;
+  }
+}

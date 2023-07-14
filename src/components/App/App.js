@@ -55,7 +55,7 @@ const App = () => {
             {/* private routes */}
             <Route
               path={URLS.AUTH_HOME}
-              element={!applicationModulesPages.length && <LoginOIDC /> ||
+              element={
                 <PrivateRoute component={Home} modules={modules} setSubdomainId={setSubdomainId} />
               }
             />

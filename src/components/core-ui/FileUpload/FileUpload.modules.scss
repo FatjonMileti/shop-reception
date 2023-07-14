@@ -1,0 +1,65 @@
+.container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  
+  .fileContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  
+    .image {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+  
+      .text {
+        font-style: italic;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: #666666;
+      }
+    }
+  
+    .clearButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 36px;
+      height: 36px;
+      color: #0970e6;
+      cursor: pointer;
+      border: 1px solid #0970e6;
+      border-radius: 8px;
+      padding-left: 9px;
+  
+      &:hover {
+        background-color: #0970e6;
+        color: #fff;
+      }
+    }
+  }
+  
+  .buttonWrapper {
+    display: flex;
+    align-items: center;
+    color: #0970e6;
+    padding: 8px;
+    border: 1px solid #0970e6;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 154px;
+  
+    svg {
+      margin-right: 9px;
+    }
+  }
+  
