@@ -7,7 +7,7 @@ import cn from 'classnames'
 import { makeCorePostRequest } from 'utils/api'
 import { ProductBarcodeScannerProps } from '../ProductBarcodeScanner/ProductBarcodeScannerDefinitions'
 import s from '../ProductBarcodeScanner/ProductBarcodeScanner.modules.scss'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
@@ -20,6 +20,8 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const navigate = useNavigate()
 
   const { id } = useParams()
+
+  const [searchParams] = useSearchParams()
 
   const onScan = scanResult => {
     setCode(scanResult.barcodes[0].data)
@@ -43,7 +45,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             })
             if (action.href) {
               await destroy()
-              navigate(`${action.href}?${action.variable}=${code}`)
+              navigate(`${action.href}?${action.variable}=${code}&clientId=${searchParams.get('clientId')}`)
             }
           } catch (error) {
             showNotification({

@@ -4,7 +4,7 @@ import { ButtonProps } from './ButtonDefinitions'
 import { Icon } from '../Icon'
 
 const Button = (props: ButtonProps) => {
-  const { onClick, href, startIcon, endIcon, variable, ...rest } = props
+  const { onClick, href, startIcon, endIcon, variable, idSearchParam, ...rest } = props
 
   const navigate = useNavigate()
 
@@ -12,7 +12,8 @@ const Button = (props: ButtonProps) => {
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (href) {
-      navigate(variable ? `${href}?${variable}=${searchParams.get(variable)}` : href)
+      const href2 = idSearchParam ? `${href}/${searchParams.get(idSearchParam)}` : href
+      navigate(variable ? `${href2}?${variable}=${searchParams.get(variable)}` : href2)
     }
     props.onClick && props.onClick(event)
   }

@@ -27,7 +27,7 @@ const PdfViewer = (props: PdfViewerProps) => {
   const [scale, setScale] = React.useState(1.0)
 
   const { showNotification } = useNotification()
-  const { storeData } = useDataStore()
+  const { storeData, retrieveData } = useDataStore()
 
   React.useEffect(() => {
     ;(async () => {
@@ -57,7 +57,7 @@ const PdfViewer = (props: PdfViewerProps) => {
   }, [isXs])
 
   const scanReceipt = () => {
-    navigate(`${actions.scanReceiptAction.href}/${id}`)
+    navigate(`${actions.scanReceiptAction.href}/${id}?clientId=${retrieveData("proformaDetails.client")}`)
   }
 
   // [~] on back from this page we get called with id=undefined by react...
