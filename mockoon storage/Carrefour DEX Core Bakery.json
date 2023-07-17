@@ -1042,7 +1042,7 @@
           "type": "http",
           "documentation": "Get products list",
           "method": "get",
-          "endpoint": "products",
+          "endpoint": "product",
           "responses": [
               {
                   "uuid": "7759dbe3-b629-4711-9431-3c53e4efa463",
@@ -1779,6 +1779,435 @@
           ],
           "enabled": true,
           "responseMode": null
+      },
+      {
+          "uuid": "d55ba846-57f5-4bee-a931-6583c0d3ba3f",
+          "type": "http",
+          "documentation": "Get cluster list",
+          "method": "get",
+          "endpoint": "cluster",
+          "responses": [
+              {
+                  "uuid": "ad588743-ab1d-464e-b78a-135dae20b660",
+                  "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Paine alba\",\n      \"mandatory\": \"obligatoriu\",\n      \"isEnable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+                  "latency": 0,
+                  "statusCode": 200,
+                  "label": "Successfully obtained the paginated, filtered and sorted clusters list",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": true
+              },
+              {
+                  "uuid": "8ea25a91-0050-46c6-8b64-b79dcc27e2e0",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 400,
+                  "label": "Bad request",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "aa427652-e606-449c-adbb-b7dcc0a03eec",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 401,
+                  "label": "Unauthorized",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "d5f282c7-0b23-480f-ae47-fc96960af0c2",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 403,
+                  "label": "Forbidden",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "3b3993b9-696f-4252-9679-6c7bc6f519c0",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 404,
+                  "label": "The specified resource was not found",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "64fa03a6-811b-4fa5-af5a-e2c850f2cd24",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 500,
+                  "label": "Un unexpected error happened",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              }
+          ],
+          "enabled": true,
+          "responseMode": null
+      },
+      {
+          "uuid": "d715aa91-43bd-440e-8083-c5a6b2f62a16",
+          "type": "http",
+          "documentation": "Get products list",
+          "method": "get",
+          "endpoint": "cluster/:id",
+          "responses": [
+              {
+                  "uuid": "014eb631-3f2b-41b6-9471-2b2217bade95",
+                  "body": "{\n      \"id\": 1,\n      \"name\": \"Paine alba\",\n      \"mandatory\": \"obligatoriu\",\n      \"isEnable\": true\n    }",
+                  "latency": 0,
+                  "statusCode": 200,
+                  "label": "Successfully obtained the paginated, filtered and sortedclusters list",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": true
+              },
+              {
+                  "uuid": "7b1d5d89-24b0-469a-a4a1-79f0c1dc3dc7",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 400,
+                  "label": "Bad request",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "c70e2837-721c-4984-ad85-9bf7fd8c6c8c",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 401,
+                  "label": "Unauthorized",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "afd7710d-fe0d-4ee7-86d0-2675a0065d78",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 403,
+                  "label": "Forbidden",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "9b5b2295-86c8-42e7-977c-279af06c7971",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 404,
+                  "label": "The specified resource was not found",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "dce49314-3c2e-4ccc-a0c2-61f4f143d9f2",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 500,
+                  "label": "Un unexpected error happened",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              }
+          ],
+          "enabled": true,
+          "responseMode": null
+      },
+      {
+          "uuid": "3e72e30c-04f8-4101-afac-c8a7a07ce14a",
+          "type": "http",
+          "documentation": "Get product",
+          "method": "get",
+          "endpoint": "product/:id",
+          "responses": [
+              {
+                  "uuid": "afe327f5-af97-4437-aaf6-74507020fbd7",
+                  "body": "{\n      \"id\": 1,\n      \"name\": \"Paine alba\",\n      \"metiCode\": \"codeMeti1\",\n      \"pluCode\": \"code123\",\n      \"family\": \"#123312\",\n      \"imageUrl\": \"https://mcxtt.vtexassets.com/arquivos/ids/173831/PAINE-DURUM-420-G-LLR233-2.jpg?v=637743905813730000\"\n    }",
+                  "latency": 0,
+                  "statusCode": 200,
+                  "label": "Successfully obtained the paginated, filtered and sortedclusters list",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": true
+              },
+              {
+                  "uuid": "e8a47ef2-263b-496c-a6e7-55b92c501c62",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 400,
+                  "label": "Bad request",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "19961346-1187-4887-99de-338fed5000a7",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 401,
+                  "label": "Unauthorized",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "2a4b2807-d9ee-4c72-aedd-974673bccb6b",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 403,
+                  "label": "Forbidden",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "16213ba1-6791-4ac5-8e1b-b4d1e35fc41c",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 404,
+                  "label": "The specified resource was not found",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              },
+              {
+                  "uuid": "0bea07f8-e8fa-4a49-b87c-9b35b80e24a8",
+                  "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+                  "latency": 0,
+                  "statusCode": 500,
+                  "label": "Un unexpected error happened",
+                  "headers": [
+                      {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                      }
+                  ],
+                  "bodyType": "INLINE",
+                  "filePath": "",
+                  "databucketID": "",
+                  "sendFileAsBody": false,
+                  "rules": [],
+                  "rulesOperator": "OR",
+                  "disableTemplating": false,
+                  "fallbackTo404": false,
+                  "default": false
+              }
+          ],
+          "enabled": true,
+          "responseMode": null
       }
   ],
   "rootChildren": [
@@ -1837,6 +2266,18 @@
       {
           "type": "route",
           "uuid": "2cb598f9-193a-428b-a6c1-e450f12a3526"
+      },
+      {
+          "type": "route",
+          "uuid": "d55ba846-57f5-4bee-a931-6583c0d3ba3f"
+      },
+      {
+          "type": "route",
+          "uuid": "d715aa91-43bd-440e-8083-c5a6b2f62a16"
+      },
+      {
+          "type": "route",
+          "uuid": "3e72e30c-04f8-4101-afac-c8a7a07ce14a"
       }
   ],
   "proxyMode": false,
