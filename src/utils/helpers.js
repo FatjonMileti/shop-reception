@@ -35,10 +35,12 @@ export const getDefaultItemValue = value => {
 export const getItemDefaults = formItems => {
   let result = {}
 
-  formItems.forEach(item => {
-    result[item.name] = item.defaultValue ? getDefaultItemValue(item.defaultValue) : ''
-    result[item.name] = item.value ? getDefaultItemValue(item.value) : ''
-  })
+  formItems
+    .filter(item => item.name)
+    .map(item => {
+      result[item.name] = item.defaultValue ? getDefaultItemValue(item.defaultValue) : ''
+      result[item.name] = item.value ? getDefaultItemValue(item.value) : ''
+    })
 
   return result
 }
