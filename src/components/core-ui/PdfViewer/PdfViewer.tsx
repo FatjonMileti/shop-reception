@@ -11,6 +11,7 @@ import s from './PdfViewer.modules.scss'
 
 import '!style-loader!css-loader!react-pdf/dist/esm/Page/TextLayer.css'
 import '!style-loader!css-loader!react-pdf/dist/esm/Page/AnnotationLayer.css'
+import { useMediaQuery } from '@mui/material'
 
 const PdfViewer = (props: PdfViewerProps) => {
   const { action, actions } = props
@@ -26,7 +27,7 @@ const PdfViewer = (props: PdfViewerProps) => {
   const [scale, setScale] = React.useState(1.0)
 
   const { showNotification } = useNotification()
-  const { storeData } = useDataStore()
+  const { storeData, retrieveData } = useDataStore()
 
   React.useEffect(() => {
     ;(async () => {
@@ -49,8 +50,14 @@ const PdfViewer = (props: PdfViewerProps) => {
     })()
   }, [id])
 
+  const isXs = useMediaQuery('(max-width:624px)')
+
+  React.useEffect(() => {
+    setScale(isXs ? 0.75 : 1.0)
+  }, [isXs])
+
   const scanReceipt = () => {
-    navigate(`${actions.scanReceiptAction.href}/${id}`)
+    navigate(`${actions.scanReceiptAction.href}/${id}?clientId=${retrieveData("proformaDetails.client")}`)
   }
 
   // [~] on back from this page we get called with id=undefined by react...

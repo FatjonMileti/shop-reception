@@ -33,7 +33,7 @@ const PageInfo = (props: PageInfoProps) => {
   }, [action])
 
   return (
-    <Box className={s.infoContainer}>
+    <Box className={s.infoContainer} style={{ marginBottom: '24px' }}>
       <Typography component="h1" variant="medium">
         {get(editItem, title.name)}
       </Typography>

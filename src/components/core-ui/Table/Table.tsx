@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
@@ -21,6 +21,8 @@ import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 import { isEmpty } from 'lodash'
+import { ConfirmationModal } from 'components/core-ui/ConfirmationModal'
+import cn from 'classnames'
 
 const Table = props => {
   const {
@@ -29,19 +31,20 @@ const Table = props => {
     tableActions,
     tableRowActions,
     tableFooter,
-    hasGeneralSearch,
+    generalSearch,
     isUserModal,
     hasInitialFilters,
     ...rest
   } = props
 
-  let [searchParams] = useSearchParams()
+  let [searchParams, setSearchParams] = useSearchParams()
 
   const [isLoading, setIsLoading] = useState(true)
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
   const [summary, setSummary] = useState({})
+  const [isNoGeneralSearchConfirmModalOpen, setIsNoGeneralSearchConfirmModalOpen] = useState(false)
 
   const [tableState, setTableState] = useImmer({
     page: 0,
@@ -55,6 +58,8 @@ const Table = props => {
   const table = useSelector((state: RootState) => state.table)
 
   const { showNotification } = useNotification()
+
+  const navigate = useNavigate()
 
   const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
@@ -88,16 +93,35 @@ const Table = props => {
     [tableFooter, summary]
   )
 
+  // TODO: find a bettwer way to implement this
+  // This is a hack to make the table perform query only when there is an outeside compulsory filter
   useEffect(() => {
-    handleRemoteData(
-      tableState.page,
-      tableState.rowsPerPage,
-      tableState.order,
-      tableState.orderBy,
-      tableState.searchText,
-      tableState.filters
-    )
-  }, [table.filters])
+    if (!isEmpty(table.filters) || table.searchText) {
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
+      )
+    }
+  }, [table.filters, table.searchText])
+
+  // TODO: find a bettwer way to implement this
+  // This is a hack to make the table perform query only when there is an inside compulsory filter
+  useEffect(() => {
+    if (!items.length && !isEmpty(tableState.filters)){
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
+      )
+    }
+  }, [tableState.filters])
 
   const tableFilters = useMemo(
     () =>
@@ -118,7 +142,19 @@ const Table = props => {
       filters
     })
 
+    // TODO: find a bettwer way to implement this
+    // This is a hack to make the table perform query only when there is an outeside compulsory filter
     if (hasInitialFilters && isEmpty(table.filters)) {
+      return null
+    }
+
+    if (generalSearch?.hasGeneralSearch && !table.searchText.length) {
+      return null
+    }
+  
+    // TODO: find a bettwer way to implement this
+    // This is a hack to make the table perform query only when there is an inside compulsory filter
+    if (filtersConfig.some(filter => filter.required) && !filters.length) {
       return null
     }
 
@@ -139,7 +175,7 @@ const Table = props => {
             rowsPerPage,
             order,
             orderBy,
-            hasGeneralSearch,
+            hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText
           })
         )
@@ -156,7 +192,7 @@ const Table = props => {
             searchFields: tableActions.searchAction?.searchFields,
             filters,
             tableFilters,
-            hasGeneralSearch,
+            hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText
           })
         )
@@ -164,6 +200,10 @@ const Table = props => {
       setItems(toTableRowItems(response.list, columns))
       setTotalCount(response.page.totalCount)
       setSummary(response.summary)
+
+      if (generalSearch?.noResults && table.searchText && !response.list.length) {
+        openNoGeneralSearchConfirmModal()
+      }
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${error.message}`,
@@ -186,8 +226,28 @@ const Table = props => {
     }
   }
 
-  return hasGeneralSearch && !table.searchText.length ? null : (
-    <Box className={s.tableContainer}>
+  const openNoGeneralSearchConfirmModal = () => setIsNoGeneralSearchConfirmModalOpen(true)
+
+  const closeNoGeneralSearchConfirmModal = () => setIsNoGeneralSearchConfirmModalOpen(false)
+
+  const noGeneralSearchConfirm = () => {
+    closeNoGeneralSearchConfirmModal()
+
+    const param = searchParams.get('tab')
+
+    if (param) {
+      searchParams.delete('tab')
+    }
+
+    navigate(`${generalSearch.noResults.action.href}&${searchParams}`)
+  }
+
+  return (
+    <Box
+      className={cn(s.tableContainer, {
+        [s.hidden]: generalSearch?.hasGeneralSearch && !table.searchText.length
+      })}
+    >
       {tableActions?.newAction && canCreate && (
         <ModalWithForm
           {...tableActions.newAction}
@@ -203,6 +263,16 @@ const Table = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
+        />
+      )}
+      {generalSearch?.noResults && (
+        <ConfirmationModal
+          isModalOpen={isNoGeneralSearchConfirmModalOpen}
+          closeModal={closeNoGeneralSearchConfirmModal}
+          modalTitle=""
+          modalMessage={generalSearch.noResults.message}
+          buttons={generalSearch.noResults.buttons}
+          confirm={noGeneralSearchConfirm}
         />
       )}
       <GeneralTable

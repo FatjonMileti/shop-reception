@@ -1,0 +1,22 @@
+.listStyle {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rowStyle {
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  @media (max-width: 936px) {
+    padding: 8px;
+    gap: 8px;
+    div:first-child {
+      min-width: 100%!important;
+    }
+  }
+}

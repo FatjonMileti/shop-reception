@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Divider, IconButton } from '@fullscreendigital/carrefour-dex-fe'
+import { Divider, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
 import { makeCorePostRequest } from 'utils/api'
 import { useNotification } from 'hooks'
@@ -14,7 +14,9 @@ const ProductGeneralInfo = ({
   eanCode,
   storeCode,
   addToCartAction,
-  isWarehouse
+  isWarehouse,
+  hasBuyback,
+  buybackOptions
 }) => {
   const navigate = useNavigate()
 
@@ -22,12 +24,14 @@ const ProductGeneralInfo = ({
 
   const dispatch = useDispatch()
 
+  const [selectedBuybackOption, setSelectedBuybackOption] = React.useState(hasBuyback && buybackOptions[0].value || '')
+
   const addToCart = async () => {
     const { action } = addToCartAction
 
     try {
       if (action.type === 'POST') {
-        await makeCorePostRequest(`${action.url}`, { ean: eanCode, quantity: 1, isWarehouse })
+        await makeCorePostRequest(`${action.url}`, { ean: eanCode, quantity: 1, isWarehouse, buyback: selectedBuybackOption })
         showNotification({
           message: 'Produsul a fost adaugat in cos',
           type: 'success'
@@ -57,6 +61,20 @@ const ProductGeneralInfo = ({
         />
       </div>
       <Divider component="div" />
+      {hasBuyback && <div className={s.infoContainer} style={{ justifyContent: 'flex-end' }}>
+        <Input 
+          type='select'
+          name='buyback-input'
+          label='Mod achizitie'
+          values={buybackOptions}
+          value={selectedBuybackOption}
+          variant='standard'
+          width='320px'
+          onChange={event => setSelectedBuybackOption((event.target as any).value)}
+          disabled={buybackOptions.length == 1}
+        />
+      </div>}
+      {hasBuyback && <Divider component="div" />}
       <div className={s.infoContainer}>
         <span className={s.firstCode}>
           <span className={s.lightText}>Cod EAN:</span> <strong>{eanCode}</strong>

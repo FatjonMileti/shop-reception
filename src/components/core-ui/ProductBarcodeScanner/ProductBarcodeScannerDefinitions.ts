@@ -17,7 +17,9 @@ export interface ProductStock {
   sold: number
   reserved: number
   initialStock: number
-  imobStock: number
+  imobStock: number,
+  hasBuyback: boolean,
+  buybackOptions: any
 }
 
 export interface ProductStockResponse {

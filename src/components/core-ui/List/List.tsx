@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Box } from '@mui/material'
-import { ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableRowItems } from 'utils/serializers'
 import { useDataStore, useNotification } from 'hooks'
@@ -8,6 +7,7 @@ import { getRenderedColumns } from './helpers'
 import s from './List.modules.scss'
 import { ListActions } from './ListActions'
 import { renderTableFooter } from '../Table/helpers'
+import FlexListTable from './FlexListTable'
 
 const List = props => {
   const { action, columns, tableRowActions, tableFooter, ...rest } = props
@@ -51,14 +51,12 @@ const List = props => {
 
   return (
     <Box className={s.listTableContainer}>
-      <ListTable
+      <FlexListTable
         {...rest}
         columns={
           tableRowActions
             ? renderedColumns.concat({
                 field: 'actions',
-                width: '112px',
-                collapsible: 'true',
                 render: row => (
                   <ListActions
                     itemId={row.id}
@@ -73,7 +71,7 @@ const List = props => {
         handleRemoteData={handleRemoteData}
         isLoading={isLoading}
       />
-      {tableFooter && <div style={{ textAlign: 'right' }}>{tableFooterComponent}</div>}
+      {tableFooter && <div>{tableFooterComponent}</div>}
     </Box>
   )
 }

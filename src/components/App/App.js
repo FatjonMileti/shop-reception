@@ -16,19 +16,56 @@ import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
 import { oidcConfig } from 'utils/authService'
 import { useNotification } from 'hooks'
+import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
+import { CircularProgress } from '@mui/material'
 
 const App = () => {
   const [modules, setModules] = useState([])
   const [applicationPages, setApplicationPages] = useState([])
   const [applicationModulesPages, setApplicationModulesPages] = useState([])
   const [subdomainId, setSubdomainId] = useState(localStorage.getItem('selectedSubdomainId'))
+  
+  const [isLoadingAppModules, setIsLoadingAppModules] = useState(false)
+  const [hasLoadedAppModules, setHasLoadedAppModules] = useState(false)
+  const [isLoadingActivities, setIsLoadingActivities] = useState(false)
+  const [hasLoadedActivities, setHasLoadedActivities] = useState(-1) // [~] holds the subdomainId for which the activities were loaded
 
   const { showNotification } = useNotification()
 
   useEffect(() => {
+    // console.log("[App] 1st effect called | hasLoadedAppModules: ", hasLoadedAppModules)
     ;(async () => {
-      if (subdomainId) {
+      if (!hasLoadedAppModules && !isLoadingAppModules) {
+        setIsLoadingAppModules(true)
+        
         try {
+          // console.log("[App] will load app modules")
+          const result = await makeDesignerGetRequest('/application-modules')
+          setModules(result)
+          setApplicationModulesPages(toApplicationModulesPages(result))
+        } catch (error) {
+          // https://giphy.com/embed/oe33xf3B50fsc :))))
+          showNotification({
+            message: `Error while fetching application modules. ${error.message}`,
+            type: 'error'
+          })
+        } finally {
+          setHasLoadedAppModules(true)
+          setIsLoadingAppModules(false)
+          // console.log("[App] did load app modules")
+        }
+      }
+    })()
+  }, [hasLoadedAppModules, isLoadingAppModules])
+
+  useEffect(() => {
+    // console.log("[App] 2nd effect called | subdomainId: ", subdomainId, " | hasLoadedAppModules: ", hasLoadedAppModules, " | isLoadingAppModules: ", isLoadingAppModules, " | hasLoadedActivities: ", hasLoadedActivities, " | isLoadingActivities: ", isLoadingActivities)
+    ;(async () => {
+      if (hasLoadedAppModules && !isLoadingAppModules && subdomainId && subdomainId != hasLoadedActivities && !isLoadingActivities) {
+        setIsLoadingActivities(true)
+
+        try {
+          // console.log("[App] will load activities")
           const result = await makeDesignerGetRequest(`/activities?submoduleId=${subdomainId}`)
           setApplicationPages(toApplicationPages(result))
         } catch (error) {
@@ -36,40 +73,49 @@ const App = () => {
             message: `Error while fetching application pages. ${error?.message}`,
             type: 'error'
           })
+        } finally {
+          setHasLoadedActivities(subdomainId)
+          setIsLoadingActivities(false)
+          // console.log("[App] did load activities")
         }
       }
     })()
-  }, [subdomainId])
+  }, [subdomainId, hasLoadedAppModules, isLoadingAppModules, hasLoadedActivities, isLoadingActivities])
 
   return (
     <AuthProvider {...oidcConfig}>
-      <ThemeProvider theme="light">
-        <Layout
-          setModules={setModules}
-          setApplicationModulesPages={setApplicationModulesPages}
-          setSubdomainId={setSubdomainId}
-        >
-          <Routes>
-            {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
+      <ThemeProvider theme="light"> 
+        {((isLoadingAppModules || !hasLoadedAppModules) && (
+          <div style={{ display: 'flex' }}>
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+          </div>
+        )) || (
+          <Layout
+            modules={modules}
+            setSubdomainId={setSubdomainId}
+          >
+            <Routes>
+              {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
-            {/* private routes */}
-            <Route
-              path={URLS.AUTH_HOME}
-              element={
-                <PrivateRoute component={Home} modules={modules} setSubdomainId={setSubdomainId} />
-              }
-            />
-            {applicationModulesPages.map(page =>
-              createRoute({ ...page, subdomainId, modules, applicationPages }, ServiceDomain)
-            )}
-            {applicationPages.map(page => createRoute(page, DynamicComponent))}
-            {/* end of private routes */}
+              {/* private routes */}
+              <Route
+                path={URLS.AUTH_HOME}
+                element={
+                  <PrivateRoute component={Home} modules={modules} setSubdomainId={setSubdomainId} />
+                }
+              />
+              {applicationModulesPages.map(page =>
+                createRoute({ ...page, subdomainId, modules, applicationPages, hasLoadedActivities, isLoadingActivities }, ServiceDomain)
+              )}
+              {applicationPages.map(page => createRoute(page, DynamicComponent))}
+              {/* end of private routes */}
 
-            <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
-            <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
-            {applicationPages.length && <Route path="*" element={<NotFound />} />}
-          </Routes>
-        </Layout>
+              <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
+              <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
+              {applicationPages.length && <Route path="*" element={<NotFound />} />}
+            </Routes>
+          </Layout>
+        )}
       </ThemeProvider>
     </AuthProvider>
   )
