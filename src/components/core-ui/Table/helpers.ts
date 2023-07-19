@@ -1,7 +1,7 @@
 import { get } from 'lodash'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { toFiltersUrl } from './serializers'
-import { formatUIDate, getDefaultItemValue } from 'utils/helpers'
+import { downloadFile, formatUIDate, getDefaultItemValue } from 'utils/helpers'
 import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
 
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): string => {
@@ -127,16 +127,9 @@ export const getTableQueryUrl = params =>
   )
 
 export const download = (url, filters) => {
-  // TODO use the downloadFile helper from utils
-  const a = document.createElement('a')
   const href = filters.reduce((acc, filter) => `${acc}/${filter.value}`, url)
-  // TODO replace download url when BE is ready
-  // a.href = href
-  a.href =
-    'https://apps.carrefour.ro/stage_carrefour_assistant_api/api/reports-export/2023-04-01/2023-05-22'
-  document.body.appendChild(a)
-  a.click()
-  document.body.removeChild(a)
+  console.log(href)
+  downloadFile(href)
 }
 
 export const renderTableFooter = (footerElements, summary) =>

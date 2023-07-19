@@ -1,5 +1,5 @@
 {
-  "uuid": "2810ddb7-e3af-4240-9d78-8e203c2ed45c",
+  "uuid": "162b376f-1922-430a-a672-d5257e3e8e17",
   "lastMigration": 27,
   "name": "DEX SUPPLY OMNI REST API",
   "endpointPrefix": "8081/core/rest/api/v1",
@@ -9,15 +9,15 @@
   "folders": [],
   "routes": [
     {
-      "uuid": "8360e07a-74d7-46fe-8e0b-71c522a5c0af",
+      "uuid": "a4909a1b-030f-445b-bbf5-68ea1509796b",
       "type": "http",
       "documentation": "Get list of cities",
       "method": "get",
       "endpoint": "address/cities",
       "responses": [
         {
-          "uuid": "8a27fdfc-dedd-4914-8662-8631ed684414",
-          "body": "{\n  \"list\": [\n    {\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": 34,\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "ab3ec47e-a40d-4a01-80b7-161bc71e50da",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of cities",
@@ -38,7 +38,7 @@
           "default": true
         },
         {
-          "uuid": "1a6a5879-c63b-4911-b25d-7523b9684a13",
+          "uuid": "729a460f-8349-46f4-b9b3-53c59a2ce92e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -60,7 +60,7 @@
           "default": false
         },
         {
-          "uuid": "422f2a28-3650-4238-9649-61ef27a32f44",
+          "uuid": "dd57da73-1f6f-4f41-93ee-6bbb97c7565e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -82,7 +82,7 @@
           "default": false
         },
         {
-          "uuid": "14ae348c-beb7-4d5c-ab7f-41514445a495",
+          "uuid": "bb364637-04e9-4136-ba90-06df9fb8dab9",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -104,7 +104,7 @@
           "default": false
         },
         {
-          "uuid": "6dfe662e-ec21-46e5-8ec0-a3b08fe00d87",
+          "uuid": "7eec0734-e38e-4d3e-b6b5-7715d6d3a18c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -126,7 +126,7 @@
           "default": false
         },
         {
-          "uuid": "cb1ee1be-0942-4184-bbae-f7a9e63f4a0f",
+          "uuid": "a26b3896-0cbe-4dcc-87f7-2fe7aa85e13e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -152,158 +152,15 @@
       "responseMode": null
     },
     {
-      "uuid": "0a2d48df-6354-4554-a5e2-1c9ef40c4980",
-      "type": "http",
-      "documentation": "Find cities by district id",
-      "method": "get",
-      "endpoint": "address/cities/:districtId",
-      "responses": [
-        {
-          "uuid": "2d53dbbd-e22e-4d07-8f2e-925917753e46",
-          "body": "{\n  \"list\": [\n    {\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": 34,\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the list of cities filtered by the given districtId",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "2b2b222d-55a7-4219-ba23-3602b6cceba3",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "6b7c4a47-9fe1-4c4f-b9ae-dd38dd8d2cb9",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "2b7b4d7d-f528-4d5b-80a8-88b4fa7bdb4d",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "1c8deb71-db6d-45d0-9200-29f651a98bd7",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "013a4aa1-5fcd-4a5c-966a-26711460d85e",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "82c0f2c9-7d4b-4e7b-8dee-352b04e84763",
+      "uuid": "11137c9f-6c76-49d4-988e-3bf1c1cecf18",
       "type": "http",
       "documentation": "Get list of districts",
       "method": "get",
       "endpoint": "address/districts",
       "responses": [
         {
-          "uuid": "fd17954f-5554-4463-8344-b67ac29f71e8",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 34,\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "d1edfdf1-a9d2-4d69-a468-180d55ba55c6",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of districts",
@@ -324,7 +181,7 @@
           "default": true
         },
         {
-          "uuid": "e8982053-4354-49af-a5bc-3cfbe0582063",
+          "uuid": "39982654-3e53-4672-a1f7-0e620838dee6",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -346,7 +203,7 @@
           "default": false
         },
         {
-          "uuid": "428fa944-9efd-45fc-b59e-20d909f36d8d",
+          "uuid": "7d5d5ff0-e7ca-47f4-b24b-b00eb5d4aab6",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -368,7 +225,7 @@
           "default": false
         },
         {
-          "uuid": "a1e3fc53-6d89-4593-b712-8672a8e4a1df",
+          "uuid": "0be78473-aa8c-4471-b92b-6e43347dbb63",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -390,7 +247,7 @@
           "default": false
         },
         {
-          "uuid": "31428c6c-449d-45a2-a88e-e35bb2a69da5",
+          "uuid": "31357d19-77f9-4003-b52f-8018725b0967",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -412,7 +269,7 @@
           "default": false
         },
         {
-          "uuid": "673e91e3-a78d-40a0-b844-c58f286de299",
+          "uuid": "7b10d859-11f4-44ff-9ca2-7ad0d4ab5970",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -438,15 +295,15 @@
       "responseMode": null
     },
     {
-      "uuid": "49f0781c-0297-4a5e-adc9-6edc59b073a5",
+      "uuid": "28604978-f6e2-4d37-932e-229f7b66cb6c",
       "type": "http",
       "documentation": "Find product by EAN",
       "method": "get",
       "endpoint": "product/:ean",
       "responses": [
         {
-          "uuid": "e55bb782-8b9b-46f4-91ee-41706480b5f6",
-          "body": "{\n  \"product\": {\n    \"ean\": \"3614613092689\",\n    \"internalCode\": \"44501286\",\n    \"title\": \"Frigider ARCTIC Eco-X7\",\n    \"brand\": \"ARCTIC\",\n    \"price\": 1089.99,\n    \"initialStock\": 43,\n    \"soldStock\": 29,\n    \"reservedStock\": 2,\n    \"availableStock\": 12,\n    \"tva\": {{faker 'datatype.number'}},\n    \"hasNeighbours\": {{faker 'datatype.boolean'}},\n    \"neighbours\": [\n      {\n        \"name\": \"\",\n        \"initialStock\": 410,\n        \"soldStock\": 22,\n        \"reservedStock\": 8,\n        \"isWarehouse\": {{faker 'datatype.boolean'}},\n        \"availableStock\": 380,\n        \"hasBuyback\": true,\n        \"buybackOptions\": [\n          { \"value\": \"NORMAL_PRICE\", \"label\": \"Pret lista\" },\n          { \"value\": \"INTERNAL_BUYBACK\", \"label\": \"Buyback intern (-120 RON)\" },\n          { \"value\": \"BUYBACK_AFM\", \"label\": \"Buyback AFM (-120 RON)\" }\n        ]\n      }\n    ],\n    \"hasBuyback\": true,\n    \"buybackOptions\": [\n      { \"value\": \"NORMAL_PRICE\", \"label\": \"Pret lista\" },\n      { \"value\": \"INTERNAL_BUYBACK\", \"label\": \"Buyback intern (-120 RON)\" },\n      { \"value\": \"BUYBACK_AFM\", \"label\": \"Buyback AFM (-120 RON)\" }\n    ]\n  }\n}",
+          "uuid": "246b5748-d682-44ac-ba79-c96fb3dee1bd",
+          "body": "{\n  \"ean\": \"3614613092689\",\n  \"code\": \"44501286\",\n  \"familyCode\": {{faker 'datatype.number'}},\n  \"subfamilyCode\": {{faker 'datatype.number'}},\n  \"familyName\": \"\",\n  \"subfamilyName\": \"\",\n  \"name\": \"Frigider ARCTIC Eco-X7\",\n  \"brand\": \"ARCTIC\",\n  \"vat\": {{faker 'datatype.number'}},\n  \"price\": 1089.99,\n  \"storeStock\": {\n    \"initialQuantity\": {{faker 'datatype.number'}},\n    \"soldQuantity\": {{faker 'datatype.number'}},\n    \"reservedQuantity\": {{faker 'datatype.number'}},\n    \"availableQuantity\": {{faker 'datatype.number'}},\n    \"buybackOptions\": [\n      {\n        \"value\": \"\",\n        \"label\": \"\"\n      }\n    ]\n  },\n  \"warehouseStock\": {\n    \"initialQuantity\": {{faker 'datatype.number'}},\n    \"soldQuantity\": {{faker 'datatype.number'}},\n    \"reservedQuantity\": {{faker 'datatype.number'}},\n    \"availableQuantity\": {{faker 'datatype.number'}},\n    \"buybackOptions\": [\n      {\n        \"value\": \"\",\n        \"label\": \"\"\n      }\n    ]\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the product for the given EAN",
@@ -467,7 +324,7 @@
           "default": true
         },
         {
-          "uuid": "6afa5fe0-a8ff-451d-9c9e-9904b1805b78",
+          "uuid": "21f26b46-c275-469e-971b-960aa1d09758",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -489,7 +346,7 @@
           "default": false
         },
         {
-          "uuid": "95b5d831-dd8a-4e0e-b9ed-94096c445a50",
+          "uuid": "ad67b2ca-a349-4a4c-8efe-e99f6087387f",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -511,7 +368,7 @@
           "default": false
         },
         {
-          "uuid": "94be9fed-b444-40a7-90ba-68f18a78313f",
+          "uuid": "fff24fcb-6f00-4ec9-898e-2d4186a3e38a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -533,7 +390,7 @@
           "default": false
         },
         {
-          "uuid": "92cb2957-14ce-4d2f-a608-130a48ce60b6",
+          "uuid": "182ec77b-ae05-4d21-ac2e-cfb7bc0339e1",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -555,7 +412,7 @@
           "default": false
         },
         {
-          "uuid": "80a870c0-dc26-4204-922e-7620b7990558",
+          "uuid": "3ea423e1-a597-45b6-8cf1-7d679380c5bd",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -581,15 +438,15 @@
       "responseMode": null
     },
     {
-      "uuid": "c1d692dd-45b6-41fb-ac0d-734806e3f308",
+      "uuid": "55b3307e-32bd-467e-bb17-5f5b382a7e90",
       "type": "http",
       "documentation": "Add cart product",
       "method": "post",
       "endpoint": "cart/product",
       "responses": [
         {
-          "uuid": "be325b96-b92f-413a-82b3-5ea30d58e1a5",
-          "body": "{\n  \"product\": {\n    \"ean\": \"\",\n    \"internalCode\": \"\",\n    \"title\": \"\",\n    \"brand\": \"\",\n    \"price\": {{faker 'datatype.float'}},\n    \"initialStock\": {{faker 'datatype.number'}},\n    \"soldStock\": {{faker 'datatype.number'}},\n    \"reservedStock\": {{faker 'datatype.number'}},\n    \"tva\": {{faker 'datatype.number'}},\n    \"hasNeighbours\": {{faker 'datatype.boolean'}},\n    \"neighbours\": [\n      {\n        \"name\": \"\",\n        \"initialStock\": {{faker 'datatype.number'}},\n        \"soldStock\": {{faker 'datatype.number'}},\n        \"reservedStock\": {{faker 'datatype.number'}},\n        \"isWarehouse\": {{faker 'datatype.boolean'}}\n      }\n    ]\n  }\n}",
+          "uuid": "4623cfd7-aead-496f-a0c7-0b596a436ec2",
+          "body": "{\n  \"product\": {\n    \"ean\": \"3614613092689\",\n    \"code\": \"44501286\",\n    \"familyCode\": {{faker 'datatype.number'}},\n    \"subfamilyCode\": {{faker 'datatype.number'}},\n    \"familyName\": \"\",\n    \"subfamilyName\": \"\",\n    \"name\": \"Frigider ARCTIC Eco-X7\",\n    \"brand\": \"ARCTIC\",\n    \"vat\": {{faker 'datatype.number'}},\n    \"price\": {{faker 'datatype.float'}},\n    \"storeStock\": {\n      \"initialQuantity\": {{faker 'datatype.number'}},\n      \"soldQuantity\": {{faker 'datatype.number'}},\n      \"reservedQuantity\": {{faker 'datatype.number'}},\n      \"availableQuantity\": {{faker 'datatype.number'}},\n      \"buybackOptions\": [\n        {\n          \"value\": \"\",\n          \"label\": \"\"\n        }\n      ]\n    },\n    \"warehouseStock\": {\n      \"initialQuantity\": {{faker 'datatype.number'}},\n      \"soldQuantity\": {{faker 'datatype.number'}},\n      \"reservedQuantity\": {{faker 'datatype.number'}},\n      \"availableQuantity\": {{faker 'datatype.number'}},\n      \"buybackOptions\": [\n        {\n          \"value\": \"\",\n          \"label\": \"\"\n        }\n      ]\n    }\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained extended info about the added product",
@@ -610,7 +467,7 @@
           "default": true
         },
         {
-          "uuid": "76520178-5847-4496-9833-633bb2606b35",
+          "uuid": "e24ce984-af7d-4648-887d-fe4eef5ef36c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -632,7 +489,7 @@
           "default": false
         },
         {
-          "uuid": "72744a47-1f43-4a9b-b843-02517d41dc0d",
+          "uuid": "027b1257-c812-4945-8765-84ae77f3265a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -654,7 +511,7 @@
           "default": false
         },
         {
-          "uuid": "0de43aa1-326c-4e55-9aae-a5a415e04ca1",
+          "uuid": "8f7978e0-eeb8-4728-9f5f-f4be3ee897e0",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -676,7 +533,7 @@
           "default": false
         },
         {
-          "uuid": "53f8fbea-aab5-468a-9ba4-58b1ec2a6b46",
+          "uuid": "a7019c63-c8c9-4475-93a4-46914f2e1dbc",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -698,7 +555,7 @@
           "default": false
         },
         {
-          "uuid": "08a96b73-e482-4239-9059-78555fa98b81",
+          "uuid": "dde57acf-fc54-46b2-a1b2-ff7bffad1f36",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -724,15 +581,15 @@
       "responseMode": null
     },
     {
-      "uuid": "f07a9faa-b39d-448b-9252-bad478438648",
+      "uuid": "ed1942aa-c459-4c4c-a62c-e335c995dc13",
       "type": "http",
       "documentation": "Update cart product",
       "method": "put",
       "endpoint": "cart/product",
       "responses": [
         {
-          "uuid": "53359ed4-ec9e-4988-91de-96d297e7ff42",
-          "body": "{\n  \"product\": {\n    \"ean\": \"\",\n    \"internalCode\": \"\",\n    \"title\": \"\",\n    \"brand\": \"\",\n    \"price\": {{faker 'datatype.float'}},\n    \"initialStock\": {{faker 'datatype.number'}},\n    \"soldStock\": {{faker 'datatype.number'}},\n    \"reservedStock\": {{faker 'datatype.number'}},\n    \"tva\": {{faker 'datatype.number'}},\n    \"hasNeighbours\": {{faker 'datatype.boolean'}},\n    \"neighbours\": [\n      {\n        \"name\": \"\",\n        \"initialStock\": {{faker 'datatype.number'}},\n        \"soldStock\": {{faker 'datatype.number'}},\n        \"reservedStock\": {{faker 'datatype.number'}},\n        \"isWarehouse\": {{faker 'datatype.boolean'}}\n      }\n    ]\n  }\n}",
+          "uuid": "d214b4cc-c73b-4076-9934-209ce41019bf",
+          "body": "{\n  \"product\": {\n    \"ean\": \"\",\n    \"code\": \"\",\n    \"familyCode\": {{faker 'datatype.number'}},\n    \"subfamilyCode\": {{faker 'datatype.number'}},\n    \"familyName\": \"\",\n    \"subfamilyName\": \"\",\n    \"name\": \"\",\n    \"brand\": \"\",\n    \"vat\": {{faker 'datatype.number'}},\n    \"price\": {{faker 'datatype.float'}},\n    \"storeStock\": {\n      \"initialQuantity\": {{faker 'datatype.number'}},\n      \"soldQuantity\": {{faker 'datatype.number'}},\n      \"reservedQuantity\": {{faker 'datatype.number'}},\n      \"availableQuantity\": {{faker 'datatype.number'}},\n      \"buybackOptions\": [\n        {\n          \"value\": \"\",\n          \"label\": \"\"\n        }\n      ]\n    },\n    \"warehouseStock\": {\n      \"initialQuantity\": {{faker 'datatype.number'}},\n      \"soldQuantity\": {{faker 'datatype.number'}},\n      \"reservedQuantity\": {{faker 'datatype.number'}},\n      \"availableQuantity\": {{faker 'datatype.number'}},\n      \"buybackOptions\": [\n        {\n          \"value\": \"\",\n          \"label\": \"\"\n        }\n      ]\n    }\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained extended info about the updated product",
@@ -753,7 +610,7 @@
           "default": true
         },
         {
-          "uuid": "977e8c6e-e91a-43ba-aee1-4eb16e35fdb4",
+          "uuid": "67724d71-5234-4d62-b999-02d1070c6e2f",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -775,7 +632,7 @@
           "default": false
         },
         {
-          "uuid": "ae810455-fc99-45c3-8e8c-ec8ce5983c7c",
+          "uuid": "18425c21-336f-4541-9766-b3ba1c1863ef",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -797,7 +654,7 @@
           "default": false
         },
         {
-          "uuid": "2f9877a8-61d2-472c-b965-6b2a56d2d851",
+          "uuid": "de2c9c10-e22d-4825-b50c-8c0786a27726",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -819,7 +676,7 @@
           "default": false
         },
         {
-          "uuid": "92721e0e-96bd-43a8-8cff-e8d92c693bdf",
+          "uuid": "0f5273c8-9e3d-4efe-b144-f0fef0a0d0f7",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -841,7 +698,7 @@
           "default": false
         },
         {
-          "uuid": "0cd8124e-78d7-4398-b24d-4d03b554a2ae",
+          "uuid": "0985e1a0-8f08-418f-9b63-48103a7c7feb",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -867,18 +724,18 @@
       "responseMode": null
     },
     {
-      "uuid": "95377f11-7656-4d45-9cae-ef152e7c92a0",
+      "uuid": "121e8c9f-1b4c-4ae3-b6ef-ef7824b56600",
       "type": "http",
       "documentation": "Get cart products",
       "method": "get",
       "endpoint": "cart/product",
       "responses": [
         {
-          "uuid": "e626fa95-67f3-4543-ae2f-c6c995ba7827",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"3614613092689\",\n      \"productEan\": \"3614613092689\",\n      \"productInternalCode\": \"44501286\",\n      \"productTitle\": \"Frigider ARCTIC Eco-X7\",\n      \"productBrand\": \"ARCTIC\",\n      \"productPrice\": 3269.97,\n      \"productStock\": {{faker 'datatype.number'}},\n      \"productTotalPrice\": {{faker 'datatype.number'}},\n      \"quantity\": 3,\n      \"productTva\": {{faker 'datatype.number'}}\n    },{\n      \"id\": \"3614613092681\",\n      \"productEan\": \"3614613092689\",\n      \"productInternalCode\": \"44501286\",\n      \"productTitle\": \"Frigider ARCTIC Eco-X7\",\n      \"productBrand\": \"ARCTIC\",\n      \"productPrice\": 969.99,\n      \"productStock\": {{faker 'datatype.number'}},\n      \"productTotalPrice\": {{faker 'datatype.number'}},\n      \"quantity\": 1,\n      \"productTva\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"Discount achizitie pt Buyback intern:  -120 LEI\"\n    },{\n      \"id\": \"3614613092682\",\n      \"productEan\": \"3614613092689\",\n      \"productInternalCode\": \"44501286\",\n      \"productTitle\": \"Televizor LG 4D\",\n      \"productBrand\": \"LG\",\n      \"productPrice\": 480.20,\n      \"productStock\": {{faker 'datatype.number'}},\n      \"productTotalPrice\": {{faker 'datatype.number'}},\n      \"quantity\": 1,\n      \"productTva\": {{faker 'datatype.number'}}\n    }\n\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 1,\n    \"totalCount\": 1,\n    \"pageCount\": 1\n  },\n  \"summary\": {\n    \"totalItems\": 5,\n    \"totalPrice\": 4720.16\n  }\n}",
+          "uuid": "3057a7c6-5d89-4f34-a7c2-7cc3c1de40d9",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"5577\",\n      \"productEan\": \"3614613092689\",\n      \"productInternalCode\": \"44501286\",\n      \"productName\": \"Frigider ARCTIC Eco-X7\",\n      \"productBrand\": \"ARCTIC\",\n      \"productPrice\": {{faker 'datatype.float'}},\n      \"productStock\": {{faker 'datatype.number'}},\n      \"productTotalPrice\": {{faker 'datatype.number'}},\n      \"quantity\": {{faker 'datatype.number'}},\n      \"productTva\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"Discount achizitie pt Buyback intern:  -120 LEI\",\n      \"reservation\": [\n        {\n          \"storeId\": {{faker 'datatype.number'}},\n          \"storeName\": \"\",\n          \"quantity\": {{faker 'datatype.number'}}\n        }\n      ]\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"totalItems\": {{faker 'datatype.number'}},\n    \"totalPrice\": {{faker 'datatype.float'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained the list of products from shopping cart",
+          "label": "Successfully obtained the list of products from shopping cart with pagination, sorting and filtering",
           "headers": [
             {
               "key": "Content-Type",
@@ -896,7 +753,7 @@
           "default": true
         },
         {
-          "uuid": "7c390699-f7c1-4d9b-963e-f72ab76936a7",
+          "uuid": "cef262fb-bd05-4cde-b23e-57819fb9526b",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -918,7 +775,7 @@
           "default": false
         },
         {
-          "uuid": "0428ef98-b632-4ecf-8fae-35759671821f",
+          "uuid": "a46d8099-4f95-4d61-a542-0a78db3d4a59",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -940,7 +797,7 @@
           "default": false
         },
         {
-          "uuid": "17d3a00d-1b2c-4bab-9fcd-0ee1248cb134",
+          "uuid": "1dee2152-7239-4667-8b79-1858cd191e83",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -962,7 +819,7 @@
           "default": false
         },
         {
-          "uuid": "aa2746e5-0c2e-4344-ba6b-8b359a225e51",
+          "uuid": "8ee58732-46d7-45e3-b62b-5b5b381948fc",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -984,7 +841,7 @@
           "default": false
         },
         {
-          "uuid": "1ba0ab66-d925-4f57-a463-33f1bb851c70",
+          "uuid": "e0cb8617-f7a1-46bd-b84d-383afd06fefa",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1010,14 +867,14 @@
       "responseMode": null
     },
     {
-      "uuid": "05778eb3-7090-481a-b1bf-cc4fc65fc6bb",
+      "uuid": "3d83d3eb-25a9-452b-9b6c-bcc972fdcd03",
       "type": "http",
       "documentation": "Delete cart product",
       "method": "delete",
       "endpoint": "cart/product/:ean",
       "responses": [
         {
-          "uuid": "d95f30dd-87f0-4708-be03-5ea8f2fa7202",
+          "uuid": "9a2d8c68-2ee4-4a3f-8998-1b863885ad11",
           "body": "{\n  \"status\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -1039,7 +896,7 @@
           "default": true
         },
         {
-          "uuid": "86c15c68-be0b-4103-93e0-63cd3d383306",
+          "uuid": "afd5ce8b-4917-4a6a-881d-91e9bc30aaa0",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1061,7 +918,7 @@
           "default": false
         },
         {
-          "uuid": "60efdc9f-f776-437d-a3f1-ca97715502c5",
+          "uuid": "acc25aca-8fa1-4351-a151-781d3312559b",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1083,7 +940,7 @@
           "default": false
         },
         {
-          "uuid": "e85ea0a6-089f-42cc-91e0-9ce10a00c938",
+          "uuid": "265bba90-fc75-4ee2-9f2b-74191c3fa075",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1105,7 +962,7 @@
           "default": false
         },
         {
-          "uuid": "31693a1c-9ca9-4d66-b606-9d0f2dddff11",
+          "uuid": "a70edad2-c8d3-45c7-b050-8b80edd5f2d7",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1127,7 +984,7 @@
           "default": false
         },
         {
-          "uuid": "563972af-ede3-4dc7-af7d-c2469ee10c33",
+          "uuid": "724d0c1c-2246-4608-8732-d8a42cd4d3dd",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1153,14 +1010,14 @@
       "responseMode": null
     },
     {
-      "uuid": "ac71b095-eb35-453c-94a2-575a0d994b06",
+      "uuid": "d32aa5c2-c45c-42ae-bad9-779a316a00f7",
       "type": "http",
       "documentation": "Validate cart",
-      "method": "get",
-      "endpoint": "cart/validate",
+      "method": "post",
+      "endpoint": "cart/product-stock/validation",
       "responses": [
         {
-          "uuid": "9ed555a1-eab9-4e33-a8fd-85048afa4131",
+          "uuid": "32f429e5-afaf-4d60-8940-bcfcf687cd61",
           "body": "{\n  \"status\": {{faker 'datatype.number'}},\n  \"isValid\": {{faker 'datatype.boolean'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -1182,7 +1039,7 @@
           "default": true
         },
         {
-          "uuid": "6c6e467a-5758-4227-9d9a-45c684633da1",
+          "uuid": "ce1ff07f-efbe-401a-a93d-f07ca1cf51ec",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1204,7 +1061,7 @@
           "default": false
         },
         {
-          "uuid": "d4dcc62a-4132-481b-a0c7-607e77125bbd",
+          "uuid": "12e0691a-b07e-4599-ae82-8c871debf59b",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1226,7 +1083,7 @@
           "default": false
         },
         {
-          "uuid": "b135e1b8-bd95-43ec-8038-17342fe3b76a",
+          "uuid": "ee1bd09e-8c05-49ea-9be1-9e78795986e7",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1248,7 +1105,7 @@
           "default": false
         },
         {
-          "uuid": "699cc3a4-d704-49ab-a8cd-742926973f8a",
+          "uuid": "cc96663c-a257-45dd-857c-0d82b20c1934",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1270,7 +1127,7 @@
           "default": false
         },
         {
-          "uuid": "4cd6879c-5c1f-4096-8b65-97c51bf393e3",
+          "uuid": "4d88bfa7-5253-4dbf-a83f-0dd793f4c403",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1296,18 +1153,18 @@
       "responseMode": null
     },
     {
-      "uuid": "aafff4ae-a204-4c21-9241-683b81afdcfd",
+      "uuid": "dc1e5f45-d19e-4168-b572-b7aff300cc5c",
       "type": "http",
-      "documentation": "Find client by name/code/cif",
+      "documentation": "Find client by name/phone/cif",
       "method": "get",
       "endpoint": "client",
       "responses": [
         {
-          "uuid": "c7802330-c508-4ca7-83f1-7dbc91e0f3b2",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 667788,\n      \"email\": \"paula.dan@test.com\",\n      \"phone\": \"1234567\",\n      \"address\": \"Address\",\n      \"district\": {\n        \"id\": 34,\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      },\n      \"city\": {\n        \"name\": \"Bugeac\",\n        \"district\": {\n          \"id\": 34,\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        }\n      },\n      \"name\": \"Paula Dan\",\n      \"cif\": \"667788\",\n      \"tradeRegister\": \"\",\n      \"bank\": \"\",\n      \"bankAccount\": \"\",\n      \"type\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "154c5e32-d2f0-465b-ae87-8f923c6740a5",
+          "body": "{\n  \"list\": [\n    {\n      \"email\": \"paula.dan@test.com\",\n      \"phone\": \"0723666888\",\n      \"address\": \"Strada florilor\",\n      \"district\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      },\n      \"city\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Bugeac\",\n        \"district\": {\n          \"id\": {{faker 'datatype.number'}},\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        }\n      },\n      \"name\": \"Paula Dan\",\n      \"cif\": \"668899\",\n      \"tradeRegister\": \"\",\n      \"bank\": \"\",\n      \"bankAccount\": \"\",\n      \"type\": \"\",\n      \"id\": 668899\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained a list of clients for the given keyword",
+          "label": "Successfully obtained a list of clients with pagination, sorting and filtering",
           "headers": [
             {
               "key": "Content-Type",
@@ -1325,7 +1182,7 @@
           "default": true
         },
         {
-          "uuid": "f61808d5-3bae-4b94-8729-cb436f4130b2",
+          "uuid": "54e09428-a753-4954-99fb-f509833f7638",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1347,7 +1204,7 @@
           "default": false
         },
         {
-          "uuid": "fcc31b65-17e2-4a19-b6f7-88a80b98a33f",
+          "uuid": "713856a5-7919-4f6c-9684-820b17c17436",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1369,7 +1226,7 @@
           "default": false
         },
         {
-          "uuid": "72652be5-f49c-4e8a-a738-31fd5720a177",
+          "uuid": "8aa85729-3f2a-42dd-94fd-c1c6f3064fa7",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1391,7 +1248,7 @@
           "default": false
         },
         {
-          "uuid": "c15a490f-3dd8-46c2-86ec-9b093c9a74fc",
+          "uuid": "b9c6efae-2d4e-4bdd-bb81-db59da183230",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1413,7 +1270,7 @@
           "default": false
         },
         {
-          "uuid": "5fb19ee8-ab33-4ea3-858f-80b7787a597b",
+          "uuid": "8a98f8ba-3393-4eee-8c20-a4c5f1ad5c69",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1439,15 +1296,15 @@
       "responseMode": null
     },
     {
-      "uuid": "2d25b37b-ba5c-4242-8c0a-a7b073029e58",
+      "uuid": "c3e8835b-28d7-49ca-9199-5a535fff52e9",
       "type": "http",
       "documentation": "Add new client",
       "method": "post",
       "endpoint": "client",
       "responses": [
         {
-          "uuid": "2af295cd-39de-49ed-91e0-485f9073808d",
-          "body": "{\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"address\": \"\",\n  \"district\": {\n    \"id\": 34,\n    \"name\": \"Constanta\",\n    \"code\": \"CT\"\n  },\n  \"city\": {\n    \"name\": \"Bugeac\",\n    \"district\": {\n      \"id\": 34,\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    }\n  },\n  \"name\": \"\",\n  \"cif\": \"667788\",\n  \"tradeRegister\": \"\",\n  \"bank\": \"\",\n  \"bankAccount\": \"\",\n  \"type\": \"\",\n  \"id\": \"667788\"\n}",
+          "uuid": "9134a3ed-bda0-4cad-9451-77d0e066e8fc",
+          "body": "{\n  \"email\": \"paula.dan@test.com\",\n  \"phone\": \"0723666888\",\n  \"address\": \"Strada florilor\",\n  \"district\": {\n    \"id\": {{faker 'datatype.number'}},\n    \"name\": \"Constanta\",\n    \"code\": \"CT\"\n  },\n  \"city\": {\n    \"id\": {{faker 'datatype.number'}},\n    \"name\": \"Bugeac\",\n    \"district\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    }\n  },\n  \"name\": \"Paula Dan\",\n  \"cif\": \"668899\",\n  \"tradeRegister\": \"\",\n  \"bank\": \"\",\n  \"bankAccount\": \"\",\n  \"type\": \"\",\n  \"id\": 668899\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully returned info about new client",
@@ -1468,7 +1325,7 @@
           "default": true
         },
         {
-          "uuid": "df1c16f9-1f0e-43ae-a8d6-26dfdd38acb1",
+          "uuid": "03bee6f9-2b27-4474-9acb-50824c5d935b",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1490,7 +1347,7 @@
           "default": false
         },
         {
-          "uuid": "7b5f4afd-57a9-469a-bf87-009ac8dbcc6d",
+          "uuid": "9b74d2be-ecea-41ff-a3db-b17848d6d339",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1512,7 +1369,7 @@
           "default": false
         },
         {
-          "uuid": "4c24a0db-0177-4db0-8f3a-bc1766865527",
+          "uuid": "0e652d21-9044-4541-9e40-c43f4eb629b0",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1534,7 +1391,7 @@
           "default": false
         },
         {
-          "uuid": "9368d017-5218-4e92-a4e9-137e28265faf",
+          "uuid": "6023d09f-76e5-456e-82f7-86c7126e20fa",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1556,7 +1413,7 @@
           "default": false
         },
         {
-          "uuid": "95ee14bc-b688-4ca2-b1ce-62eaf62ef798",
+          "uuid": "88217ebf-1499-45fb-9e05-f22c9dd27aa5",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1582,15 +1439,15 @@
       "responseMode": null
     },
     {
-      "uuid": "2b006ed4-2574-47aa-8723-2b055217767f",
+      "uuid": "e4baac31-92b3-4d27-b754-a33001fa33f5",
       "type": "http",
       "documentation": "Find client by id",
       "method": "get",
       "endpoint": "client/:id",
       "responses": [
         {
-          "uuid": "00681dda-f089-4c92-a113-3d346916fab4",
-          "body": "{\n  \"email\": \"paula.dan@test.com\",\n  \"phone\": \"123456\",\n  \"address\": \"address\",\n  \"district\": {\n    \"id\": 34,\n    \"name\": \"Constanta\",\n    \"code\": \"CT\"\n  },\n  \"city\": {\n    \"name\": \"Bugeac\",\n    \"district\": {\n      \"id\": 34,\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    }\n  },\n  \"name\": \"Paula Dan\",\n  \"cif\": \"667788\",\n  \"tradeRegister\": \"\",\n  \"bank\": \"\",\n  \"bankAccount\": \"\",\n  \"type\": \"\"\n}",
+          "uuid": "d35bfa5a-1157-42ec-9d8a-633902b1b22e",
+          "body": "{\n  \"email\": \"paula.dan@test.com\",\n  \"phone\": \"0723666888\",\n  \"address\": \"Strada florilor\",\n  \"district\": {\n    \"id\": {{faker 'datatype.number'}},\n    \"name\": \"Constanta\",\n    \"code\": \"CT\"\n  },\n  \"city\": {\n    \"id\": {{faker 'datatype.number'}},\n    \"name\": \"Bugeac\",\n    \"district\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    }\n  },\n  \"name\": \"Paula Dan\",\n  \"cif\": \"668899\",\n  \"tradeRegister\": \"\",\n  \"bank\": \"\",\n  \"bankAccount\": \"\",\n  \"type\": \"\",\n  \"id\": 668899\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the client with the given id",
@@ -1611,7 +1468,7 @@
           "default": true
         },
         {
-          "uuid": "ab1b3e31-33b1-4ae2-a59e-3dc53f8a2c63",
+          "uuid": "1fffa004-9628-4550-893a-5ced6904237b",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1633,7 +1490,7 @@
           "default": false
         },
         {
-          "uuid": "3393e3d9-11b9-497c-9c64-9cbe67fd806c",
+          "uuid": "c77f0811-96e6-425c-b000-fed69d236ce2",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1655,7 +1512,7 @@
           "default": false
         },
         {
-          "uuid": "b644d068-5441-4b07-be5a-3c672e680230",
+          "uuid": "d9720607-5b44-42e8-a26e-9deb3072b9fa",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1677,7 +1534,7 @@
           "default": false
         },
         {
-          "uuid": "03fc3893-dc01-457b-867e-cdf25d77b0f7",
+          "uuid": "01b62285-e2ff-438b-96ad-ccabcf0f1ba0",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1699,7 +1556,7 @@
           "default": false
         },
         {
-          "uuid": "aa82a96c-3486-42d2-a7f0-b1fbd54757b1",
+          "uuid": "a62c0780-982c-4d37-b6c3-a1eef1c6f86d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1725,15 +1582,15 @@
       "responseMode": null
     },
     {
-      "uuid": "7d27fc88-045e-4831-bd3e-53b474ddd977",
+      "uuid": "dc933618-3dfb-434b-a495-59f8b1834280",
       "type": "http",
       "documentation": "Find client by cif",
       "method": "get",
-      "endpoint": "client/company-info/:cif",
+      "endpoint": "client/company-info",
       "responses": [
         {
-          "uuid": "44b2523e-8f89-4c05-88d8-def9c846f311",
-          "body": "{\n  \"list\": [\n    {\n      \"email\": \"\",\n      \"phone\": \"\",\n      \"address\": \"\",\n      \"district\": {\n        \"id\": 34,\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      },\n      \"city\": {\n        \"name\": \"Bugeac\",\n        \"district\": {\n          \"id\": 34,\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        }\n      },\n      \"name\": \"\",\n      \"cif\": \"\",\n      \"tradeRegister\": \"\",\n      \"bank\": \"\",\n      \"bankAccount\": \"\",\n      \"type\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "080b01c8-4606-474c-8230-36c2b414eb19",
+          "body": "{\n  \"list\": [\n    {\n      \"email\": \"\",\n      \"phone\": \"\",\n      \"address\": \"\",\n      \"district\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      },\n      \"city\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Bugeac\",\n        \"district\": {\n          \"id\": {{faker 'datatype.number'}},\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        }\n      },\n      \"name\": \"\",\n      \"cif\": \"\",\n      \"tradeRegister\": \"\",\n      \"bank\": \"\",\n      \"bankAccount\": \"\",\n      \"type\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of clients filtered by the given cif",
@@ -1754,7 +1611,7 @@
           "default": true
         },
         {
-          "uuid": "4d737ccf-cb90-4ead-8b55-b1340c0cc922",
+          "uuid": "93a3543a-4315-4d30-a1cd-d4d6ca60fd9e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1776,7 +1633,7 @@
           "default": false
         },
         {
-          "uuid": "7e7100b1-5cd1-4d76-9e44-d3c53a7ba92c",
+          "uuid": "87e4387e-5b85-4219-b209-063bd9dff128",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1798,7 +1655,7 @@
           "default": false
         },
         {
-          "uuid": "0706df9b-1eea-4d4a-ac6b-f5324116f5d5",
+          "uuid": "970e8d17-091f-47cb-a1fe-a9adf77b470e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1820,7 +1677,7 @@
           "default": false
         },
         {
-          "uuid": "462f7070-c5ef-4d29-bfae-3b486c98f1a2",
+          "uuid": "c266742c-f79a-488b-9d20-2b1ca72d1253",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1842,7 +1699,7 @@
           "default": false
         },
         {
-          "uuid": "e900a1a1-ebdf-433e-96e7-dac9fb2816c9",
+          "uuid": "f6f354ac-a50d-435b-8068-d1ecc40814be",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -1868,15 +1725,15 @@
       "responseMode": null
     },
     {
-      "uuid": "e43b41a5-8f5d-4b49-9859-eb98786f14c0",
+      "uuid": "fc84661a-4c97-412e-8c32-0f620e46b940",
       "type": "http",
       "documentation": "Create proforma",
       "method": "post",
       "endpoint": "proforma",
       "responses": [
         {
-          "uuid": "266eb58b-2d2d-4d8c-9f29-9fcb8c4c639b",
-          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"client\": \"\",\n  \"clientName\": \"\",\n  \"cart\": {\n    \"items\": [\n      {\n        \"productEan\": \"\",\n        \"productInternalCode\": \"\",\n        \"productTitle\": \"\",\n        \"productBrand\": \"\",\n        \"productPrice\": {{faker 'datatype.float'}},\n        \"productStock\": {{faker 'datatype.number'}},\n        \"productTotalPrice\": {{faker 'datatype.number'}},\n        \"quantity\": {{faker 'datatype.number'}},\n        \"productTva\": {{faker 'datatype.number'}}\n      }\n    ],\n    \"created\": \"{{faker 'date.recent' 365}}\",\n    \"updated\": \"{{faker 'date.recent' 365}}\",\n    \"price\": {{faker 'datatype.float'}},\n    \"isWarehouse\": {{faker 'datatype.boolean'}}\n  },\n  \"reservations\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"remoteId\": {{faker 'datatype.number'}},\n      \"status\": \"\"\n    }\n  ],\n  \"timestamp\": \"{{faker 'date.recent' 365}}\",\n  \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n  \"paymentMethod\": \"\",\n  \"newDeliveryAddress\": {\n    \"city\": {\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": 34,\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    },\n    \"district\": {\n      \"id\": 34,\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    },\n    \"street\": \"\"\n  },\n  \"isActive\": {{faker 'datatype.boolean'}},\n  \"isDeleted\": {{faker 'datatype.boolean'}},\n  \"isPrinted\": {{faker 'datatype.boolean'}},\n  \"delivery\": {\n    \"date\": \"\",\n    \"isMorning\": {{faker 'datatype.boolean'}}\n  },\n  \"comment\": \"\"\n}",
+          "uuid": "4ea882c9-b750-408c-80c5-f6ce49994ae2",
+          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"client\": \"\",\n  \"clientName\": \"\",\n  \"cart\": {\n    \"items\": [\n      {\n        \"id\": \"\",\n        \"productEan\": \"\",\n        \"productInternalCode\": \"\",\n        \"productName\": \"\",\n        \"productBrand\": \"\",\n        \"productPrice\": {{faker 'datatype.float'}},\n        \"productStock\": {{faker 'datatype.number'}},\n        \"productTotalPrice\": {{faker 'datatype.number'}},\n        \"quantity\": {{faker 'datatype.number'}},\n        \"productTva\": {{faker 'datatype.number'}},\n        \"buybackDiscount\": \"\",\n        \"reservation\": [\n          {\n            \"storeId\": {{faker 'datatype.number'}},\n            \"storeName\": \"\",\n            \"quantity\": {{faker 'datatype.number'}}\n          }\n        ]\n      }\n    ],\n    \"created\": \"{{faker 'date.recent' 365}}\",\n    \"updated\": \"{{faker 'date.recent' 365}}\",\n    \"price\": {{faker 'datatype.float'}},\n    \"isWarehouse\": {{faker 'datatype.boolean'}}\n  },\n  \"reservations\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"remoteId\": {{faker 'datatype.number'}},\n      \"status\": \"\"\n    }\n  ],\n  \"creationDate\": \"{{faker 'date.recent' 365}}\",\n  \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n  \"paymentMethod\": \"\",\n  \"newDeliveryAddress\": {\n    \"city\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    },\n    \"district\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    },\n    \"street\": \"\"\n  },\n  \"isActive\": {{faker 'datatype.boolean'}},\n  \"isDeleted\": {{faker 'datatype.boolean'}},\n  \"isPrinted\": {{faker 'datatype.boolean'}},\n  \"delivery\": {\n    \"date\": \"\",\n    \"isMorning\": {{faker 'datatype.boolean'}}\n  },\n  \"comment\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the newly created proforma",
@@ -1897,7 +1754,7 @@
           "default": true
         },
         {
-          "uuid": "ae4a52b2-6261-4cd4-b573-af159c9e38c4",
+          "uuid": "5b992d7f-8dcb-4724-9530-235977eca33c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -1919,7 +1776,7 @@
           "default": false
         },
         {
-          "uuid": "6dfc7259-67d7-48be-886b-50196fa28dff",
+          "uuid": "1fbd09a3-dcc0-4729-bf1c-642457055772",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -1941,7 +1798,7 @@
           "default": false
         },
         {
-          "uuid": "08dff315-f781-4d2f-9739-ae5ee1083b27",
+          "uuid": "c7fd83b9-7bde-4aee-8366-20d1a44cfe4c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -1963,7 +1820,7 @@
           "default": false
         },
         {
-          "uuid": "e112f58d-f825-4525-ab0b-a59dc93f5a56",
+          "uuid": "18dd16dc-d72c-4a7a-bb2d-4d30c3709407",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -1985,7 +1842,7 @@
           "default": false
         },
         {
-          "uuid": "833ad007-5054-4853-b407-c163050bc788",
+          "uuid": "183a76d0-8446-4313-aebc-2753f0628784",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2011,18 +1868,18 @@
       "responseMode": null
     },
     {
-      "uuid": "06ebaabb-661f-43f8-b3fb-e9483c673205",
+      "uuid": "380c4095-a1cf-4c90-813d-0bb932ab9370",
       "type": "http",
       "documentation": "Get list of proformas",
       "method": "get",
       "endpoint": "proforma",
       "responses": [
         {
-          "uuid": "52aef7b9-9b5e-49c8-8156-68aeae301e20",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"client\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"cart\": {\n        \"items\": [\n          {\n            \"productEan\": \"\",\n            \"productInternalCode\": \"\",\n            \"productTitle\": \"\",\n            \"productBrand\": \"\",\n            \"productPrice\": {{faker 'datatype.float'}},\n            \"productStock\": {{faker 'datatype.number'}},\n            \"productTotalPrice\": {{faker 'datatype.number'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"productTva\": {{faker 'datatype.number'}}\n          }\n        ],\n        \"created\": \"{{faker 'date.recent' 365}}\",\n        \"updated\": \"{{faker 'date.recent' 365}}\",\n        \"price\": {{faker 'datatype.float'}},\n        \"isWarehouse\": {{faker 'datatype.boolean'}}\n      },\n      \"reservations\": [\n        {\n          \"id\": {{faker 'datatype.number'}},\n          \"remoteId\": {{faker 'datatype.number'}},\n          \"status\": \"\"\n        }\n      ],\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n      \"paymentMethod\": \"\",\n      \"newDeliveryAddress\": {\n        \"city\": {\n          \"name\": \"Bugeac\",\n          \"district\": {\n            \"id\": 34,\n            \"name\": \"Constanta\",\n            \"code\": \"CT\"\n          }\n        },\n        \"district\": {\n          \"id\": 34,\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        },\n        \"street\": \"\"\n      },\n      \"isActive\": {{faker 'datatype.boolean'}},\n      \"isDeleted\": {{faker 'datatype.boolean'}},\n      \"isPrinted\": {{faker 'datatype.boolean'}},\n      \"delivery\": {\n        \"date\": \"\",\n        \"isMorning\": {{faker 'datatype.boolean'}}\n      },\n      \"comment\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "a23a8421-5faa-44c2-b091-8e38e036cb5e",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"client\": \"\",\n      \"clientName\": \"\",\n      \"cart\": {\n        \"items\": [\n          {\n            \"id\": \"\",\n            \"productEan\": \"\",\n            \"productInternalCode\": \"\",\n            \"productName\": \"\",\n            \"productBrand\": \"\",\n            \"productPrice\": {{faker 'datatype.float'}},\n            \"productStock\": {{faker 'datatype.number'}},\n            \"productTotalPrice\": {{faker 'datatype.number'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"productTva\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\",\n            \"reservation\": [\n              {\n                \"storeId\": {{faker 'datatype.number'}},\n                \"storeName\": \"\",\n                \"quantity\": {{faker 'datatype.number'}}\n              }\n            ]\n          }\n        ],\n        \"created\": \"{{faker 'date.recent' 365}}\",\n        \"updated\": \"{{faker 'date.recent' 365}}\",\n        \"price\": {{faker 'datatype.float'}},\n        \"isWarehouse\": {{faker 'datatype.boolean'}}\n      },\n      \"reservations\": [\n        {\n          \"id\": {{faker 'datatype.number'}},\n          \"remoteId\": {{faker 'datatype.number'}},\n          \"status\": \"\"\n        }\n      ],\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n      \"paymentMethod\": \"\",\n      \"newDeliveryAddress\": {\n        \"city\": {\n          \"id\": {{faker 'datatype.number'}},\n          \"name\": \"Bugeac\",\n          \"district\": {\n            \"id\": {{faker 'datatype.number'}},\n            \"name\": \"Constanta\",\n            \"code\": \"CT\"\n          }\n        },\n        \"district\": {\n          \"id\": {{faker 'datatype.number'}},\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        },\n        \"street\": \"\"\n      },\n      \"isActive\": {{faker 'datatype.boolean'}},\n      \"isDeleted\": {{faker 'datatype.boolean'}},\n      \"isPrinted\": {{faker 'datatype.boolean'}},\n      \"delivery\": {\n        \"date\": \"\",\n        \"isMorning\": {{faker 'datatype.boolean'}}\n      },\n      \"comment\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained the list of active proformas (filtered by date)",
+          "label": "Successfully obtained the list of active proformas",
           "headers": [
             {
               "key": "Content-Type",
@@ -2040,7 +1897,7 @@
           "default": true
         },
         {
-          "uuid": "bafb460a-ae19-4fa5-9535-cc1440fcac12",
+          "uuid": "ef05f347-b3aa-427a-bddc-9391c048a23d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2062,7 +1919,7 @@
           "default": false
         },
         {
-          "uuid": "0f2657e7-5c66-442f-9d79-aaf4e51636eb",
+          "uuid": "7ef730ab-1b65-4708-8604-aab9f2bfbf29",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2084,7 +1941,7 @@
           "default": false
         },
         {
-          "uuid": "0128ee4c-1232-40bb-8aa7-a280ee90b7db",
+          "uuid": "fcf88b4f-de51-4f28-9175-e306aa55b144",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2106,7 +1963,7 @@
           "default": false
         },
         {
-          "uuid": "d9e430df-ce8e-4dee-95fb-0909de6b100f",
+          "uuid": "72e0e72d-b4e7-4c81-b175-e29010c796c1",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2128,7 +1985,7 @@
           "default": false
         },
         {
-          "uuid": "c262fc4d-323f-486b-92be-61e5e5873c8d",
+          "uuid": "f031bd67-c46d-4fb2-8830-bb300b1318d3",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2154,18 +2011,18 @@
       "responseMode": null
     },
     {
-      "uuid": "4fca4c06-b87b-4ae3-8158-21c1d6a50b02",
+      "uuid": "3d05d6e0-a62e-4d79-92b6-3c3b2511da9f",
       "type": "http",
-      "documentation": "Get processed proformas with their products",
+      "documentation": "Get processed proformas",
       "method": "get",
-      "endpoint": "proforma/products",
+      "endpoint": "proforma/processed",
       "responses": [
         {
-          "uuid": "8412561b-f4fc-4302-8b32-d4c5ac8dc948",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"client\": \"\",\n      \"clientName\": \"\",\n      \"cart\": {\n        \"items\": [\n          {\n            \"productEan\": \"\",\n            \"productInternalCode\": \"\",\n            \"productTitle\": \"\",\n            \"productBrand\": \"\",\n            \"productPrice\": {{faker 'datatype.float'}},\n            \"productStock\": {{faker 'datatype.number'}},\n            \"productTotalPrice\": {{faker 'datatype.number'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"productTva\": {{faker 'datatype.number'}}\n          }\n        ],\n        \"created\": \"{{faker 'date.recent' 365}}\",\n        \"updated\": \"{{faker 'date.recent' 365}}\",\n        \"price\": {{faker 'datatype.float'}},\n        \"isWarehouse\": {{faker 'datatype.boolean'}}\n      },\n      \"reservations\": [\n        {\n          \"id\": {{faker 'datatype.number'}},\n          \"remoteId\": {{faker 'datatype.number'}},\n          \"status\": \"\"\n        }\n      ],\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n      \"paymentMethod\": \"\",\n      \"newDeliveryAddress\": {\n        \"city\": {\n          \"name\": \"Bugeac\",\n          \"district\": {\n            \"id\": 34,\n            \"name\": \"Constanta\",\n            \"code\": \"CT\"\n          }\n        },\n        \"district\": {\n          \"id\": 34,\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        },\n        \"street\": \"\"\n      },\n      \"isActive\": {{faker 'datatype.boolean'}},\n      \"isDeleted\": {{faker 'datatype.boolean'}},\n      \"isPrinted\": {{faker 'datatype.boolean'}},\n      \"delivery\": {\n        \"date\": \"\",\n        \"isMorning\": {{faker 'datatype.boolean'}}\n      },\n      \"comment\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "1ce846de-fa41-488b-a6a6-c7c27bf0311d",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"client\": \"\",\n      \"clientName\": \"\",\n      \"cart\": {\n        \"items\": [\n          {\n            \"id\": \"\",\n            \"productEan\": \"\",\n            \"productInternalCode\": \"\",\n            \"productName\": \"\",\n            \"productBrand\": \"\",\n            \"productPrice\": {{faker 'datatype.float'}},\n            \"productStock\": {{faker 'datatype.number'}},\n            \"productTotalPrice\": {{faker 'datatype.number'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"productTva\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\",\n            \"reservation\": [\n              {\n                \"storeId\": {{faker 'datatype.number'}},\n                \"storeName\": \"\",\n                \"quantity\": {{faker 'datatype.number'}}\n              }\n            ]\n          }\n        ],\n        \"created\": \"{{faker 'date.recent' 365}}\",\n        \"updated\": \"{{faker 'date.recent' 365}}\",\n        \"price\": {{faker 'datatype.float'}},\n        \"isWarehouse\": {{faker 'datatype.boolean'}}\n      },\n      \"reservations\": [\n        {\n          \"id\": {{faker 'datatype.number'}},\n          \"remoteId\": {{faker 'datatype.number'}},\n          \"status\": \"\"\n        }\n      ],\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n      \"paymentMethod\": \"\",\n      \"newDeliveryAddress\": {\n        \"city\": {\n          \"id\": {{faker 'datatype.number'}},\n          \"name\": \"Bugeac\",\n          \"district\": {\n            \"id\": {{faker 'datatype.number'}},\n            \"name\": \"Constanta\",\n            \"code\": \"CT\"\n          }\n        },\n        \"district\": {\n          \"id\": {{faker 'datatype.number'}},\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        },\n        \"street\": \"\"\n      },\n      \"isActive\": {{faker 'datatype.boolean'}},\n      \"isDeleted\": {{faker 'datatype.boolean'}},\n      \"isPrinted\": {{faker 'datatype.boolean'}},\n      \"delivery\": {\n        \"date\": \"\",\n        \"isMorning\": {{faker 'datatype.boolean'}}\n      },\n      \"comment\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained a list of proformas (filtered by date)",
+          "label": "Successfully obtained a list of proformas",
           "headers": [
             {
               "key": "Content-Type",
@@ -2183,7 +2040,7 @@
           "default": true
         },
         {
-          "uuid": "ac7bdedd-672c-4a0d-952d-a0fb1ed73f39",
+          "uuid": "63ec29a4-550f-4d2e-8a17-295c83dff8d2",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2205,7 +2062,7 @@
           "default": false
         },
         {
-          "uuid": "acf63f75-c16a-48f3-bf00-b2a06ba9bab5",
+          "uuid": "f256b47b-34a4-4df6-ba32-915dbd8ed411",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2227,7 +2084,7 @@
           "default": false
         },
         {
-          "uuid": "fb5edab1-d3cf-4315-878c-c30fbf1ac93c",
+          "uuid": "e9f123a2-9935-453f-b083-f24c4250392e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2249,7 +2106,7 @@
           "default": false
         },
         {
-          "uuid": "4666f02d-41c8-452d-b4f9-2f202724d2cf",
+          "uuid": "f11c26d4-ce21-4f4a-b427-f29af8f1906d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2271,7 +2128,7 @@
           "default": false
         },
         {
-          "uuid": "aaeb6595-66ef-4a9d-ade7-c96f7a401101",
+          "uuid": "409fa44f-25d8-4445-83a8-b09699b39e01",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2297,15 +2154,15 @@
       "responseMode": null
     },
     {
-      "uuid": "24a6ef0e-a6ca-4244-aa10-2d4a83a4626e",
+      "uuid": "7eb9d2ac-c6d9-4726-bbdd-07fc5b2e17c8",
       "type": "http",
       "documentation": "Get active proformas",
       "method": "get",
       "endpoint": "proforma/active",
       "responses": [
         {
-          "uuid": "2a21eaf8-4349-4820-aee2-101492dad832",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"client\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"cart\": {\n        \"items\": [\n          {\n            \"productEan\": \"\",\n            \"productInternalCode\": \"\",\n            \"productTitle\": \"\",\n            \"productBrand\": \"\",\n            \"productPrice\": {{faker 'datatype.float'}},\n            \"productStock\": {{faker 'datatype.number'}},\n            \"productTotalPrice\": {{faker 'datatype.number'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"productTva\": {{faker 'datatype.number'}}\n          }\n        ],\n        \"created\": \"{{faker 'date.recent' 365}}\",\n        \"updated\": \"{{faker 'date.recent' 365}}\",\n        \"price\": {{faker 'datatype.float'}},\n        \"isWarehouse\": {{faker 'datatype.boolean'}}\n      },\n      \"reservations\": [\n        {\n          \"id\": {{faker 'datatype.number'}},\n          \"remoteId\": {{faker 'datatype.number'}},\n          \"status\": \"\"\n        }\n      ],\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n      \"paymentMethod\": \"\",\n      \"newDeliveryAddress\": {\n        \"city\": {\n          \"name\": \"Bugeac\",\n          \"district\": {\n            \"id\": 34,\n            \"name\": \"Constanta\",\n            \"code\": \"CT\"\n          }\n        },\n        \"district\": {\n          \"id\": 34,\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        },\n        \"street\": \"\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": {{faker 'datatype.boolean'}},\n      \"isPrinted\": {{faker 'datatype.boolean'}},\n      \"delivery\": {\n        \"date\": \"\",\n        \"isMorning\": {{faker 'datatype.boolean'}}\n      },\n      \"comment\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "05f4330c-9bd9-4d72-aae6-72079f96b524",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"client\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"cart\": {\n        \"items\": [\n          {\n            \"id\": \"\",\n            \"productEan\": \"\",\n            \"productInternalCode\": \"\",\n            \"productName\": \"\",\n            \"productBrand\": \"\",\n            \"productPrice\": {{faker 'datatype.float'}},\n            \"productStock\": {{faker 'datatype.number'}},\n            \"productTotalPrice\": {{faker 'datatype.number'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"productTva\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\",\n            \"reservation\": [\n              {\n                \"storeId\": {{faker 'datatype.number'}},\n                \"storeName\": \"\",\n                \"quantity\": {{faker 'datatype.number'}}\n              }\n            ]\n          }\n        ],\n        \"created\": \"{{faker 'date.recent' 365}}\",\n        \"updated\": \"{{faker 'date.recent' 365}}\",\n        \"price\": {{faker 'datatype.float'}},\n        \"isWarehouse\": {{faker 'datatype.boolean'}}\n      },\n      \"reservations\": [\n        {\n          \"id\": {{faker 'datatype.number'}},\n          \"remoteId\": {{faker 'datatype.number'}},\n          \"status\": \"\"\n        }\n      ],\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n      \"paymentMethod\": \"\",\n      \"newDeliveryAddress\": {\n        \"city\": {\n          \"id\": {{faker 'datatype.number'}},\n          \"name\": \"Bugeac\",\n          \"district\": {\n            \"id\": {{faker 'datatype.number'}},\n            \"name\": \"Constanta\",\n            \"code\": \"CT\"\n          }\n        },\n        \"district\": {\n          \"id\": {{faker 'datatype.number'}},\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        },\n        \"street\": \"\"\n      },\n      \"isActive\": true,\n      \"isDeleted\": {{faker 'datatype.boolean'}},\n      \"isPrinted\": {{faker 'datatype.boolean'}},\n      \"delivery\": {\n        \"date\": \"\",\n        \"isMorning\": {{faker 'datatype.boolean'}}\n      },\n      \"comment\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of active proformas",
@@ -2326,7 +2183,7 @@
           "default": true
         },
         {
-          "uuid": "241e0f87-695f-49ad-816e-02e0d5920846",
+          "uuid": "015cca1b-8f61-40ab-809f-c3f27fc0c1a5",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2348,7 +2205,7 @@
           "default": false
         },
         {
-          "uuid": "01febb6a-8cdc-4545-977b-8c192665ab4e",
+          "uuid": "a3b25e3b-1530-4d2a-b0e7-2b475703b58e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2370,7 +2227,7 @@
           "default": false
         },
         {
-          "uuid": "456ec1d7-0e92-468a-adc2-59e1c5642499",
+          "uuid": "9aa13c98-902e-4c47-beb9-decedbdbed73",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2392,7 +2249,7 @@
           "default": false
         },
         {
-          "uuid": "1d196524-e560-43e8-80d8-1158cc576ea6",
+          "uuid": "63cca2d8-5aba-489c-b7d8-e0e5979fa9cf",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2414,7 +2271,7 @@
           "default": false
         },
         {
-          "uuid": "49385482-8ec7-4dfd-8b01-6e1ed5c887dc",
+          "uuid": "23bdb633-412a-4d13-bcdc-53b0a64987c0",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2440,15 +2297,15 @@
       "responseMode": null
     },
     {
-      "uuid": "bb0bde8e-8085-4233-90b4-8ab0664c4a2e",
+      "uuid": "53c57dc6-d0a4-449f-a8fb-445c6211b50d",
       "type": "http",
       "documentation": "Get all proformas",
       "method": "get",
       "endpoint": "proforma/total",
       "responses": [
         {
-          "uuid": "bd1a1a34-e5e4-4a54-92a3-9e7feb26f583",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"client\": \"\",\n      \"clientName\": \"Mihai Ionescu\",\n      \"cart\": {\n        \"items\": [\n          {\n            \"productEan\": \"\",\n            \"productInternalCode\": \"\",\n            \"productTitle\": \"\",\n            \"productBrand\": \"\",\n            \"productPrice\": {{faker 'datatype.float'}},\n            \"productStock\": {{faker 'datatype.number'}},\n            \"productTotalPrice\": {{faker 'datatype.number'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"productTva\": {{faker 'datatype.number'}}\n          }\n        ],\n        \"created\": \"{{faker 'date.recent' 365}}\",\n        \"updated\": \"{{faker 'date.recent' 365}}\",\n        \"price\": {{faker 'datatype.float'}},\n        \"isWarehouse\": {{faker 'datatype.boolean'}}\n      },\n      \"reservations\": [\n        {\n          \"id\": {{faker 'datatype.number'}},\n          \"remoteId\": {{faker 'datatype.number'}},\n          \"status\": \"\"\n        }\n      ],\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n      \"paymentMethod\": \"\",\n      \"newDeliveryAddress\": {\n        \"city\": {\n          \"name\": \"Bugeac\",\n          \"district\": {\n            \"id\": 34,\n            \"name\": \"Constanta\",\n            \"code\": \"CT\"\n          }\n        },\n        \"district\": {\n          \"id\": 34,\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        },\n        \"street\": \"\"\n      },\n      \"isActive\": {{faker 'datatype.boolean'}},\n      \"isDeleted\": {{faker 'datatype.boolean'}},\n      \"isPrinted\": {{faker 'datatype.boolean'}},\n      \"delivery\": {\n        \"date\": \"\",\n        \"isMorning\": {{faker 'datatype.boolean'}}\n      },\n      \"comment\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "784ba4de-756b-4803-b719-2750ca4c8251",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"client\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"cart\": {\n        \"items\": [\n          {\n            \"id\": \"\",\n            \"productEan\": \"\",\n            \"productInternalCode\": \"\",\n            \"productName\": \"\",\n            \"productBrand\": \"\",\n            \"productPrice\": {{faker 'datatype.float'}},\n            \"productStock\": {{faker 'datatype.number'}},\n            \"productTotalPrice\": {{faker 'datatype.number'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"productTva\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\",\n            \"reservation\": [\n              {\n                \"storeId\": {{faker 'datatype.number'}},\n                \"storeName\": \"\",\n                \"quantity\": {{faker 'datatype.number'}}\n              }\n            ]\n          }\n        ],\n        \"created\": \"{{faker 'date.recent' 365}}\",\n        \"updated\": \"{{faker 'date.recent' 365}}\",\n        \"price\": {{faker 'datatype.float'}},\n        \"isWarehouse\": {{faker 'datatype.boolean'}}\n      },\n      \"reservations\": [\n        {\n          \"id\": {{faker 'datatype.number'}},\n          \"remoteId\": {{faker 'datatype.number'}},\n          \"status\": \"\"\n        }\n      ],\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n      \"paymentMethod\": \"\",\n      \"newDeliveryAddress\": {\n        \"city\": {\n          \"id\": {{faker 'datatype.number'}},\n          \"name\": \"Bugeac\",\n          \"district\": {\n            \"id\": {{faker 'datatype.number'}},\n            \"name\": \"Constanta\",\n            \"code\": \"CT\"\n          }\n        },\n        \"district\": {\n          \"id\": {{faker 'datatype.number'}},\n          \"name\": \"Constanta\",\n          \"code\": \"CT\"\n        },\n        \"street\": \"\"\n      },\n      \"isActive\": {{faker 'datatype.boolean'}},\n      \"isDeleted\": {{faker 'datatype.boolean'}},\n      \"isPrinted\": {{faker 'datatype.boolean'}},\n      \"delivery\": {\n        \"date\": \"\",\n        \"isMorning\": {{faker 'datatype.boolean'}}\n      },\n      \"comment\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of all proformas",
@@ -2469,7 +2326,7 @@
           "default": true
         },
         {
-          "uuid": "f5e0a99a-911b-4ca4-9f24-8cba60017cac",
+          "uuid": "6418d468-d4db-4b03-9c5f-f578e6feba3c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2491,7 +2348,7 @@
           "default": false
         },
         {
-          "uuid": "1837c07a-79f4-4a0b-bfca-51e9bd9208ce",
+          "uuid": "0344baa5-d9e1-443a-92ea-fed9084a907b",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2513,7 +2370,7 @@
           "default": false
         },
         {
-          "uuid": "75db2b72-8c6a-4934-a7c7-88d494e4cf2c",
+          "uuid": "13aa451d-2d2f-45e8-aea6-a214bfe3a00a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2535,7 +2392,7 @@
           "default": false
         },
         {
-          "uuid": "a0f28844-2ade-4dd6-8328-db56bda11c73",
+          "uuid": "a67923a5-2682-4258-bbf1-7ac83dc91ed9",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2557,7 +2414,7 @@
           "default": false
         },
         {
-          "uuid": "d04261df-8ed8-40a2-9369-e00fed8ae55f",
+          "uuid": "79559115-5217-4f8c-95fb-f5165e8459ff",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2583,15 +2440,15 @@
       "responseMode": null
     },
     {
-      "uuid": "f8f5c826-924f-41fb-9e9f-145365452133",
+      "uuid": "08cf48d1-2f89-4315-93df-aebc459a8720",
       "type": "http",
       "documentation": "Get proforma by id",
       "method": "get",
       "endpoint": "proforma/:id",
       "responses": [
         {
-          "uuid": "372287cf-71db-4f2b-9d84-78c220809792",
-          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"client\": \"93331\",\n  \"clientName\": \"\",\n  \"cart\": {\n    \"items\": [\n      {\n        \"productEan\": \"\",\n        \"productInternalCode\": \"\",\n        \"productTitle\": \"\",\n        \"productBrand\": \"\",\n        \"productPrice\": {{faker 'datatype.float'}},\n        \"productStock\": {{faker 'datatype.number'}},\n        \"productTotalPrice\": {{faker 'datatype.number'}},\n        \"quantity\": {{faker 'datatype.number'}},\n        \"productTva\": {{faker 'datatype.number'}}\n      }\n    ],\n    \"created\": \"{{faker 'date.recent' 365}}\",\n    \"updated\": \"{{faker 'date.recent' 365}}\",\n    \"price\": {{faker 'datatype.float'}},\n    \"isWarehouse\": {{faker 'datatype.boolean'}}\n  },\n  \"reservations\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"remoteId\": {{faker 'datatype.number'}},\n      \"status\": \"\"\n    }\n  ],\n  \"timestamp\": \"{{faker 'date.recent' 365}}\",\n  \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n  \"paymentMethod\": \"\",\n  \"newDeliveryAddress\": {\n    \"city\": {\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": 34,\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    },\n    \"district\": {\n      \"id\": 34,\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    },\n    \"street\": \"\"\n  },\n  \"isActive\": true,\n  \"isDeleted\": {{faker 'datatype.boolean'}},\n  \"isPrinted\": {{faker 'datatype.boolean'}},\n  \"delivery\": {\n    \"date\": \"\",\n    \"isMorning\": {{faker 'datatype.boolean'}}\n  },\n  \"comment\": \"\"\n}",
+          "uuid": "a57a6fc6-2a04-4770-ab58-99617623940a",
+          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"client\": \"668899\",\n  \"clientName\": \"\",\n  \"cart\": {\n    \"items\": [\n      {\n        \"id\": \"\",\n        \"productEan\": \"\",\n        \"productInternalCode\": \"\",\n        \"productName\": \"\",\n        \"productBrand\": \"\",\n        \"productPrice\": {{faker 'datatype.float'}},\n        \"productStock\": {{faker 'datatype.number'}},\n        \"productTotalPrice\": {{faker 'datatype.number'}},\n        \"quantity\": {{faker 'datatype.number'}},\n        \"productTva\": {{faker 'datatype.number'}},\n        \"buybackDiscount\": \"\",\n        \"reservation\": [\n          {\n            \"storeId\": {{faker 'datatype.number'}},\n            \"storeName\": \"\",\n            \"quantity\": {{faker 'datatype.number'}}\n          }\n        ]\n      }\n    ],\n    \"created\": \"{{faker 'date.recent' 365}}\",\n    \"updated\": \"{{faker 'date.recent' 365}}\",\n    \"price\": {{faker 'datatype.float'}},\n    \"isWarehouse\": {{faker 'datatype.boolean'}}\n  },\n  \"reservations\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"remoteId\": {{faker 'datatype.number'}},\n      \"status\": \"\"\n    }\n  ],\n  \"creationDate\": \"{{faker 'date.recent' 365}}\",\n  \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n  \"paymentMethod\": \"\",\n  \"newDeliveryAddress\": {\n    \"city\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    },\n    \"district\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    },\n    \"street\": \"\"\n  },\n  \"isActive\": {{faker 'datatype.boolean'}},\n  \"isDeleted\": {{faker 'datatype.boolean'}},\n  \"isPrinted\": {{faker 'datatype.boolean'}},\n  \"delivery\": {\n    \"date\": \"\",\n    \"isMorning\": {{faker 'datatype.boolean'}}\n  },\n  \"comment\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the proforma identified by its id",
@@ -2612,7 +2469,7 @@
           "default": true
         },
         {
-          "uuid": "2bc48346-dcb0-4797-92ad-d829109bc275",
+          "uuid": "a68629a9-52ef-4fab-8596-b2894432409a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2634,7 +2491,7 @@
           "default": false
         },
         {
-          "uuid": "eb63a757-0a11-4408-baa0-bd104b435cc8",
+          "uuid": "f4a677bf-0b59-404a-8e80-bcd2525c64d5",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2656,7 +2513,7 @@
           "default": false
         },
         {
-          "uuid": "65c89099-5b2a-44ff-801a-c7918524b127",
+          "uuid": "bb240b78-7661-4851-a748-17a78f97bd4f",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2678,7 +2535,7 @@
           "default": false
         },
         {
-          "uuid": "00ca65be-8783-4a85-84b4-493f4966a99e",
+          "uuid": "11fc5fb7-e455-4d88-afb2-28c051931ff1",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2700,7 +2557,7 @@
           "default": false
         },
         {
-          "uuid": "aa77f3e9-1324-422d-9806-fb25419607c4",
+          "uuid": "2cc7961e-8de2-44bb-bea7-b61708615144",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2726,15 +2583,15 @@
       "responseMode": null
     },
     {
-      "uuid": "68dd73e6-7de5-4a27-8775-4eb0f0110657",
+      "uuid": "3490e393-f68a-4059-8018-d4f7c0fb64be",
       "type": "http",
       "documentation": "Update proforma",
       "method": "patch",
       "endpoint": "proforma/:id",
       "responses": [
         {
-          "uuid": "76e7917d-b99d-47ea-b8b3-7e341611cfee",
-          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"client\": \"\",\n  \"clientName\": \"\",\n  \"cart\": {\n    \"items\": [\n      {\n        \"productEan\": \"\",\n        \"productInternalCode\": \"\",\n        \"productTitle\": \"\",\n        \"productBrand\": \"\",\n        \"productPrice\": {{faker 'datatype.float'}},\n        \"productStock\": {{faker 'datatype.number'}},\n        \"productTotalPrice\": {{faker 'datatype.number'}},\n        \"quantity\": {{faker 'datatype.number'}},\n        \"productTva\": {{faker 'datatype.number'}}\n      }\n    ],\n    \"created\": \"{{faker 'date.recent' 365}}\",\n    \"updated\": \"{{faker 'date.recent' 365}}\",\n    \"price\": {{faker 'datatype.float'}},\n    \"isWarehouse\": {{faker 'datatype.boolean'}}\n  },\n  \"reservations\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"remoteId\": {{faker 'datatype.number'}},\n      \"status\": \"\"\n    }\n  ],\n  \"timestamp\": \"{{faker 'date.recent' 365}}\",\n  \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n  \"paymentMethod\": \"\",\n  \"newDeliveryAddress\": {\n    \"city\": {\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": 34,\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    },\n    \"district\": {\n      \"id\": 34,\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    },\n    \"street\": \"\"\n  },\n  \"isActive\": {{faker 'datatype.boolean'}},\n  \"isDeleted\": {{faker 'datatype.boolean'}},\n  \"isPrinted\": {{faker 'datatype.boolean'}},\n  \"delivery\": {\n    \"date\": \"\",\n    \"isMorning\": {{faker 'datatype.boolean'}}\n  },\n  \"comment\": \"\"\n}",
+          "uuid": "81a9beb9-7cb4-471a-ae85-6c633c1691a0",
+          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"client\": \"\",\n  \"clientName\": \"\",\n  \"cart\": {\n    \"items\": [\n      {\n        \"id\": \"\",\n        \"productEan\": \"\",\n        \"productInternalCode\": \"\",\n        \"productName\": \"\",\n        \"productBrand\": \"\",\n        \"productPrice\": {{faker 'datatype.float'}},\n        \"productStock\": {{faker 'datatype.number'}},\n        \"productTotalPrice\": {{faker 'datatype.number'}},\n        \"quantity\": {{faker 'datatype.number'}},\n        \"productTva\": {{faker 'datatype.number'}},\n        \"buybackDiscount\": \"\",\n        \"reservation\": [\n          {\n            \"storeId\": {{faker 'datatype.number'}},\n            \"storeName\": \"\",\n            \"quantity\": {{faker 'datatype.number'}}\n          }\n        ]\n      }\n    ],\n    \"created\": \"{{faker 'date.recent' 365}}\",\n    \"updated\": \"{{faker 'date.recent' 365}}\",\n    \"price\": {{faker 'datatype.float'}},\n    \"isWarehouse\": {{faker 'datatype.boolean'}}\n  },\n  \"reservations\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"remoteId\": {{faker 'datatype.number'}},\n      \"status\": \"\"\n    }\n  ],\n  \"creationDate\": \"{{faker 'date.recent' 365}}\",\n  \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n  \"paymentMethod\": \"\",\n  \"newDeliveryAddress\": {\n    \"city\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    },\n    \"district\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    },\n    \"street\": \"\"\n  },\n  \"isActive\": {{faker 'datatype.boolean'}},\n  \"isDeleted\": {{faker 'datatype.boolean'}},\n  \"isPrinted\": {{faker 'datatype.boolean'}},\n  \"delivery\": {\n    \"date\": \"\",\n    \"isMorning\": {{faker 'datatype.boolean'}}\n  },\n  \"comment\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the updated proforma",
@@ -2755,7 +2612,7 @@
           "default": true
         },
         {
-          "uuid": "d514d020-bfb9-44b4-9871-08e9266ab8f2",
+          "uuid": "2ebde2cb-d7f0-4a2f-9cc4-139e6f7065f8",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2777,7 +2634,7 @@
           "default": false
         },
         {
-          "uuid": "eeaed1f9-b2dc-439d-a223-9d04e70f1aec",
+          "uuid": "347c6d41-9ebb-4089-b89f-d36429b07185",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2799,7 +2656,7 @@
           "default": false
         },
         {
-          "uuid": "7f70e95e-24b1-45e2-9304-e34ae90e7679",
+          "uuid": "7058a464-b30f-4ea8-bc54-dfabcf52c807",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2821,7 +2678,7 @@
           "default": false
         },
         {
-          "uuid": "0ca3d330-9827-43a2-8633-f65ad309f305",
+          "uuid": "ae2c1829-e899-45ae-88d4-ce01fc8916d2",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2843,7 +2700,7 @@
           "default": false
         },
         {
-          "uuid": "4f6cd1e4-666d-4324-924f-42680db413fd",
+          "uuid": "fce631a0-2d66-4065-85b8-90d77504c31c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -2869,14 +2726,14 @@
       "responseMode": null
     },
     {
-      "uuid": "a9d5e519-7e8b-4183-bb17-1141d6e2415e",
+      "uuid": "2e0da9d8-6fa2-4228-820a-c63f6c6b16ee",
       "type": "http",
       "documentation": "Update status of proforma to paid",
-      "method": "get",
-      "endpoint": "proforma/paid/:id",
+      "method": "put",
+      "endpoint": "proforma/processing/:id",
       "responses": [
         {
-          "uuid": "9e6a6b38-60a5-4c28-ac06-af7f31844e85",
+          "uuid": "12559e20-62dd-4b25-b92d-e0d49117ad32",
           "body": "{\n  \"success\": {{faker 'datatype.boolean'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -2898,7 +2755,7 @@
           "default": true
         },
         {
-          "uuid": "fbcbd5b9-c51b-40a6-bb75-6a429ab345af",
+          "uuid": "ca5958ed-c970-49e3-9f13-8069b04f2d4d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -2920,7 +2777,7 @@
           "default": false
         },
         {
-          "uuid": "24d27e6e-6c1c-4e8e-90bd-42d34b8f276d",
+          "uuid": "63211d26-da3e-4cfe-a117-38e155ed2172",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -2942,7 +2799,7 @@
           "default": false
         },
         {
-          "uuid": "f6842adc-8e4f-4cb3-b2a2-10347630ca4f",
+          "uuid": "661eae5b-58c4-4afe-bba9-afefa6339024",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -2964,7 +2821,7 @@
           "default": false
         },
         {
-          "uuid": "65c578b8-abf4-4e0b-80c3-48deb5e3cb7d",
+          "uuid": "61f8d1b9-896c-45f5-82d9-40908dc6b1e8",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -2986,7 +2843,7 @@
           "default": false
         },
         {
-          "uuid": "0f488f12-997e-4666-8aed-0181c3ca0cce",
+          "uuid": "d7edcf6a-5c87-4a98-8499-91fbc729c84e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3012,14 +2869,14 @@
       "responseMode": null
     },
     {
-      "uuid": "e226813e-52c1-4ed1-97db-ac0b8c234618",
+      "uuid": "fb7c5733-cefe-4140-94d6-f783237d5fc4",
       "type": "http",
       "documentation": "Update status of proforma to cancelled",
-      "method": "get",
-      "endpoint": "proforma/cancelled/:id",
+      "method": "put",
+      "endpoint": "proforma/cancellation/:id",
       "responses": [
         {
-          "uuid": "0f47c551-aab5-4b2c-ade1-de9fd8db95b7",
+          "uuid": "48615f78-8fec-47ce-bdcf-d853824c5c3a",
           "body": "{\n  \"success\": {{faker 'datatype.boolean'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -3041,7 +2898,7 @@
           "default": true
         },
         {
-          "uuid": "dcf227a8-69c7-4cae-a768-d98640b67e7f",
+          "uuid": "c258801b-61f4-403f-ac7b-e4388d321122",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3063,7 +2920,7 @@
           "default": false
         },
         {
-          "uuid": "b1d592f2-8be9-4dc5-a951-1d79f089aa74",
+          "uuid": "b3b68cd0-a3f6-4b5f-ba72-5b2ec0e07294",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3085,7 +2942,7 @@
           "default": false
         },
         {
-          "uuid": "6bc80b2a-736b-4e1d-962f-55167df4e2bf",
+          "uuid": "42f72d02-3d99-4648-9d85-e00efc623553",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3107,7 +2964,7 @@
           "default": false
         },
         {
-          "uuid": "4ae95ffc-6e89-4c3c-b9f5-9d94f3883768",
+          "uuid": "adb67df2-860a-4a0d-b132-74e0e4b7cfad",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3129,7 +2986,7 @@
           "default": false
         },
         {
-          "uuid": "be206253-468b-4557-abc2-9213fc9d0cd4",
+          "uuid": "2d275c42-f0dd-41a2-a61b-47125af92663",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3155,14 +3012,14 @@
       "responseMode": null
     },
     {
-      "uuid": "8f487ba6-daae-485b-9807-54d4af411ee5",
+      "uuid": "56cdf793-975b-4f89-b8e5-247c4919b7cd",
       "type": "http",
-      "documentation": "Print proforma",
-      "method": "get",
+      "documentation": "Print proforma by date",
+      "method": "post",
       "endpoint": "proforma/print",
       "responses": [
         {
-          "uuid": "fa651ecb-e97e-4e00-bc00-a7f1689134f2",
+          "uuid": "61976a14-70ef-4430-9ed8-38ae3a23ed19",
           "body": "{\n  \"status\": {{faker 'datatype.number'}},\n  \"isValid\": {{faker 'datatype.boolean'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -3184,7 +3041,7 @@
           "default": true
         },
         {
-          "uuid": "09e7a2a5-9c14-4432-ad11-0863c7e953f7",
+          "uuid": "ddddbbb6-e66c-439c-9a1b-eef60331e1bb",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3206,7 +3063,7 @@
           "default": false
         },
         {
-          "uuid": "64cafef2-0f79-4454-9396-c42905bc317b",
+          "uuid": "cd61afa5-7924-4ce5-94db-d3a33434c6b7",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3228,7 +3085,7 @@
           "default": false
         },
         {
-          "uuid": "c8b02a3c-2ae6-40db-a92c-261aaf673ba4",
+          "uuid": "de89f08b-536a-4a4a-a201-4831bccaa321",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3250,7 +3107,7 @@
           "default": false
         },
         {
-          "uuid": "485cd62e-e0b1-4ca7-a8fd-ccb89e22e7b0",
+          "uuid": "cffbd81c-a870-4497-8af1-4d19b1fbd47c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3272,7 +3129,7 @@
           "default": false
         },
         {
-          "uuid": "e3178fc3-4d67-4154-abfc-0c68d6cb89e5",
+          "uuid": "b5f46608-f484-45d3-b3dc-cffdc74f19e0",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3298,18 +3155,18 @@
       "responseMode": null
     },
     {
-      "uuid": "84e75dd5-760e-4fa1-9ce0-82c1f1846cf7",
+      "uuid": "a24a5b32-9d01-40a3-8700-de8d4ffd58a4",
       "type": "http",
-      "documentation": "Update products list and print proforma",
-      "method": "put",
-      "endpoint": "proforma/products/print",
+      "documentation": "Print proforma by its id",
+      "method": "post",
+      "endpoint": "proforma/print/:id",
       "responses": [
         {
-          "uuid": "3d1699db-5daf-416c-960e-c3ba91bcceb1",
+          "uuid": "d57129f6-1418-42b4-b0c8-2982a986a876",
           "body": "{\n  \"status\": {{faker 'datatype.number'}},\n  \"isValid\": {{faker 'datatype.boolean'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully received a message indicating the proforma was updated and printed",
+          "label": "Successfully received a message indicating that proforma was printed",
           "headers": [
             {
               "key": "Content-Type",
@@ -3327,7 +3184,7 @@
           "default": true
         },
         {
-          "uuid": "8bba790f-758e-43c1-9ffa-769a493e8abc",
+          "uuid": "1edfdef9-8e59-42fa-b216-59725d3f2239",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3349,7 +3206,7 @@
           "default": false
         },
         {
-          "uuid": "edfefbc4-f03e-4352-a3ee-cacfd83b2837",
+          "uuid": "e27238bb-75cd-4c75-b261-b2e2f091aea6",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3371,7 +3228,7 @@
           "default": false
         },
         {
-          "uuid": "317555ae-98e8-4100-9e47-20a5437e43f2",
+          "uuid": "8b885445-d98f-41d9-b694-f5e04979ac4d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3393,7 +3250,7 @@
           "default": false
         },
         {
-          "uuid": "30237c56-718c-4fac-8519-6c630d36b650",
+          "uuid": "60f4513e-cd8f-441d-8666-e99d879af38e",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3415,7 +3272,7 @@
           "default": false
         },
         {
-          "uuid": "f89cae29-d667-4b24-82b6-fafae6bfde5a",
+          "uuid": "69316988-b0d7-4f52-a391-5e353b83d872",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3441,14 +3298,14 @@
       "responseMode": null
     },
     {
-      "uuid": "4722376b-d52f-4ce4-983b-0d1e9dfc57bc",
+      "uuid": "0b712b2f-6131-48b6-a7f1-4f32301376e3",
       "type": "http",
       "documentation": "Get proforma in pdf format",
       "method": "get",
       "endpoint": "proforma/pdf",
       "responses": [
         {
-          "uuid": "ce032068-e289-42bf-a11f-cc3fc6391f3d",
+          "uuid": "e5246d38-28d3-41a5-93e7-b548c474aaed",
           "body": "",
           "latency": 0,
           "statusCode": 200,
@@ -3470,7 +3327,7 @@
           "default": true
         },
         {
-          "uuid": "64c312d4-05c5-4b9b-8e22-3d4e838d6581",
+          "uuid": "0563bbe7-aba4-4d38-9b25-91f3a9583bb2",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3492,7 +3349,7 @@
           "default": false
         },
         {
-          "uuid": "3fa4eabe-189c-40cc-8f11-1d3950b39f82",
+          "uuid": "25012b44-c7c2-48d8-a1e3-10c08f3183c0",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3514,7 +3371,7 @@
           "default": false
         },
         {
-          "uuid": "67e2e487-4255-4e8b-a80d-a81eeca89d8d",
+          "uuid": "a6a8d353-132d-44d4-b07b-8f70a2538b14",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3536,7 +3393,7 @@
           "default": false
         },
         {
-          "uuid": "45b75704-9a65-468c-9dd8-9575f8d82d51",
+          "uuid": "cf03936c-8878-4ce7-af5b-919fd904acfd",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3558,7 +3415,7 @@
           "default": false
         },
         {
-          "uuid": "fa27ff03-a880-480a-bcaf-93cad2dcb97f",
+          "uuid": "401d54e7-452e-43ef-b499-17e8203e7163",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3584,14 +3441,14 @@
       "responseMode": null
     },
     {
-      "uuid": "9adbfdba-1ebe-41dc-b5c3-45762abd8835",
+      "uuid": "2cc010cc-926d-4269-afe5-b23f7774c124",
       "type": "http",
       "documentation": "Get proforma by id in pdf format",
       "method": "get",
       "endpoint": "proforma/pdf/:id",
       "responses": [
         {
-          "uuid": "4138a559-f497-4321-baae-09fd1a9df383",
+          "uuid": "89f958f0-b4f4-4eb2-b0c4-025b357452a3",
           "body": "",
           "latency": 0,
           "statusCode": 200,
@@ -3602,8 +3459,8 @@
               "value": "application/pdf"
             }
           ],
-          "bodyType": "INLINE",
-          "filePath": "",
+          "bodyType": "FILE",
+          "filePath": "/Users/pauladan/Library/Application Support/mockoon/storage/proforma-598.pdf",
           "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
@@ -3613,7 +3470,7 @@
           "default": true
         },
         {
-          "uuid": "c8cc314e-3029-45ba-a405-9329266149b1",
+          "uuid": "092e4ad7-144c-4e9b-a850-db607650e0c2",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3635,7 +3492,7 @@
           "default": false
         },
         {
-          "uuid": "4817b387-e4e9-405d-ab6b-4b29bfa2f46a",
+          "uuid": "d12916f6-43be-4bd3-97f6-744c1d2681e3",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3657,7 +3514,7 @@
           "default": false
         },
         {
-          "uuid": "9f2744e5-39a8-4224-bec6-af8d72c8a2f4",
+          "uuid": "2d01beff-6e43-494d-84d7-c6b00052b72a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3679,7 +3536,7 @@
           "default": false
         },
         {
-          "uuid": "748ff739-6c6f-47f6-984a-d70c8c332efd",
+          "uuid": "ed7915ce-41e0-420f-94d6-60c00571b145",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3701,7 +3558,7 @@
           "default": false
         },
         {
-          "uuid": "31377963-4965-49e0-b327-263b9a0023ab",
+          "uuid": "f571b953-f9cf-4153-9779-1953549b5890",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3727,15 +3584,15 @@
       "responseMode": null
     },
     {
-      "uuid": "7c7c4c47-e32a-4492-9493-fd190bd68c06",
+      "uuid": "72073997-5960-4037-9b24-c6b6091a4b19",
       "type": "http",
       "documentation": "Get available payment methods",
       "method": "get",
-      "endpoint": "payment-methods",
+      "endpoint": "proforma/payment-methods",
       "responses": [
         {
-          "uuid": "65d2b13b-846c-41ba-8d3b-9b9e266369d2",
-          "body": "[\n    {\n        \"type\": \"CARREFOUR_CARD\",\n        \"description\": \"Card Carrefour\"\n    },\n    {\n        \"type\": \"TREASURY_ORDER\",\n        \"description\": \"Ordin de plata trezorerie\"\n    },\n    {\n        \"type\": \"BANK_CREDIT\",\n        \"description\": \"Credit bancar\"\n    },\n    {\n        \"type\": \"CASH\",\n        \"description\": \"Numerar\"\n    },\n    {\n        \"type\": \"CREDIT_CARD\",\n        \"description\": \"Card de credit\"\n    },\n    {\n        \"type\": \"PAYMENT_ORDER\",\n        \"description\": \"Ordin de plata\"\n    }\n]",
+          "uuid": "83fa8da4-c733-4365-91fb-44086bb839cb",
+          "body": "[\n  {\n    \"type\": \"CARREFOUR_CARD\",\n    \"description\": \"Card Carrefour\"\n  },\n  {\n    \"type\": \"TREASURY_ORDER\",\n    \"description\": \"Ordin de plata trezorerie\"\n  },\n  {\n    \"type\": \"BANK_CREDIT\",\n    \"description\": \"Credit bancar\"\n  },\n  {\n    \"type\": \"CASH\",\n    \"description\": \"Numerar\"\n  },\n  {\n    \"type\": \"CREDIT_CARD\",\n    \"description\": \"Card de credit\"\n  },\n  {\n    \"type\": \"PAYMENT_ORDER\",\n    \"description\": \"Ordin de plata\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained a list of  available payment methods",
@@ -3749,14 +3606,22 @@
           "filePath": "",
           "databucketID": "",
           "sendFileAsBody": false,
-          "rules": [],
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "payment-methods",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true
         },
         {
-          "uuid": "09a75d51-57c1-492d-8df1-87bf2c84778c",
+          "uuid": "cde51f1d-c56f-4bcb-933e-6f4a332b9133",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -3778,7 +3643,7 @@
           "default": false
         },
         {
-          "uuid": "0fa46f97-d72a-4e86-bcdf-d575879efcde",
+          "uuid": "11d91ee7-7ea2-4e88-8bcb-23c65f579c60",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -3800,7 +3665,7 @@
           "default": false
         },
         {
-          "uuid": "5b67c373-b720-49f2-852b-4be6ee8014fa",
+          "uuid": "514a6540-145c-48a5-83af-49d112ea1c09",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -3822,7 +3687,7 @@
           "default": false
         },
         {
-          "uuid": "95be0656-cd96-4080-955f-517d17bc7d10",
+          "uuid": "2f807364-1acc-494f-82f7-d87d0c262227",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -3844,7 +3709,7 @@
           "default": false
         },
         {
-          "uuid": "6ce6d5fc-a8cb-47da-bf84-5c93c8c406ee",
+          "uuid": "530a7ce1-6c42-4d46-8cd4-aca79f299597",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -3870,300 +3735,14 @@
       "responseMode": null
     },
     {
-      "uuid": "e3bc121e-26b4-4e97-98fb-8b83daf07f2a",
-      "type": "http",
-      "documentation": "Get nearby shops",
-      "method": "get",
-      "endpoint": "nearbyshop",
-      "responses": [
-        {
-          "uuid": "959b33f7-6913-4e8e-a411-0a4f60998e01",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"\",\n      \"name\": \"\",\n      \"address\": \"\",\n      \"phone\": \"\",\n      \"fax\": \"\",\n      \"uic\": \"\",\n      \"deliveries\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained a list of nearby shops",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "f43053d3-df0e-4374-a709-eadd879e85ca",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "046482bb-ed43-4c41-adde-686c25d5b677",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "6ae14149-343e-49ed-bad6-0dff6a5019d3",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "f694d4dc-ad78-4f74-95f9-f18223d9e7c6",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "9b249814-73c1-4008-864e-f4ef2cd7c317",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "afc0fcc7-cfc7-44c4-b143-cc174b1d7327",
-      "type": "http",
-      "documentation": "Get stock of product from nearby shops",
-      "method": "get",
-      "endpoint": "nearbyshop/stock",
-      "responses": [
-        {
-          "uuid": "09d36b4c-4414-48b8-a91f-8cb52ab6d199",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"shopId\": \"1\",\n      \"stock\": {{faker 'datatype.number'}},\n      \"realStock\": {{faker 'datatype.number'}},\n      \"store\": \"CLUJ\",\n      \"phone\": \"0374145900\"\n    },\n    {\n      \"id\": 2,\n      \"shopId\": \"2\",\n      \"stock\": {{faker 'datatype.number'}},\n      \"realStock\": {{faker 'datatype.number'}},\n      \"store\": \"IASI2 FELICIA\",\n      \"phone\": \"0232205050 / 0374146000\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the list of shops along with stock of the product",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "52e38d9c-b274-4f04-81e7-f55416375e12",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "70dcd479-39b8-45e4-b35d-6f1d1e25b2e2",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "43ee2d99-0fdb-4c1a-a737-d5360d42e45c",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "62a5c4fe-afe7-4f40-b89c-9bb398c41f24",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "b0fda613-a2a1-459a-b665-190cb28cf22e",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "6da14630-dcbb-46d3-9e38-6f7ad29c83be",
+      "uuid": "cf0a8c82-9e33-4282-bc14-4edb35c4659f",
       "type": "http",
       "documentation": "Create order",
       "method": "post",
-      "endpoint": "create-order/proforma/:id",
+      "endpoint": "order",
       "responses": [
         {
-          "uuid": "d323fd67-fcc4-4322-a39e-e6bc561ff141",
+          "uuid": "552c3ee5-38e0-4d8b-a540-7e1fe7415d38",
           "body": "{\n  \"orderId\": \"\",\n  \"channelId\": \"\",\n  \"channelOrderId\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -4185,7 +3764,7 @@
           "default": true
         },
         {
-          "uuid": "5897c03e-e2eb-4bac-aea4-8f67f99e04d9",
+          "uuid": "7d7515f2-da0b-431f-aca7-2bc03e1b2628",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -4207,7 +3786,7 @@
           "default": false
         },
         {
-          "uuid": "bf17fd4a-f0ea-4039-b0ad-596d18e3cfec",
+          "uuid": "c3f73de3-6e50-430b-9972-7a6cace8fe44",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -4229,7 +3808,7 @@
           "default": false
         },
         {
-          "uuid": "82e0540b-ee19-46a2-a4ed-24f90376c2e5",
+          "uuid": "4d9fa81d-4370-4610-81c0-dcf6f5ee669c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -4251,7 +3830,7 @@
           "default": false
         },
         {
-          "uuid": "fa1b8606-72e1-410b-9673-c2b442e24785",
+          "uuid": "dad51683-fc44-419c-9c82-f945865114cb",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -4273,7 +3852,7 @@
           "default": false
         },
         {
-          "uuid": "476a8597-ec06-45b4-827b-d83a0647183a",
+          "uuid": "bf7576b8-a694-4c56-bf79-47788a362814",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -4299,15 +3878,158 @@
       "responseMode": null
     },
     {
-      "uuid": "791c41e0-a7ed-406a-b2ee-5d8a4934fbe8",
+      "uuid": "45582320-e3b5-408d-bc74-d67d6bfb95fa",
+      "type": "http",
+      "documentation": "Create order and update the status of proforma",
+      "method": "post",
+      "endpoint": "order/proforma",
+      "responses": [
+        {
+          "uuid": "efbe1ac0-c001-4a94-9a96-f7c8d2780c3a",
+          "body": "{\n  \"orderId\": \"\",\n  \"channelId\": \"\",\n  \"channelOrderId\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained details about newly created order",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "05812842-ce2d-407c-96e8-53426df938cc",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "4b6ec0f0-657c-4102-8190-da4bbcf837a8",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "71b4c553-eba8-4a98-a087-5c568d097201",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "19348fc5-2567-4cc6-9482-7b1c6a3b4f44",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "cbe0cd6b-22f0-4249-8007-7cd89c9e6538",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "76331309-1030-463a-b7fe-874072cb497d",
       "type": "http",
       "documentation": "Get reports from specified period",
       "method": "get",
       "endpoint": "reports",
       "responses": [
         {
-          "uuid": "667a44e5-d070-465b-8054-dacf0f2693d6",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"productEan\": \"\",\n      \"productTitle\": \"SUP TV MOB 10\\\"-26\\\" BWMT61TS\",\n      \"productPrice\": {{faker 'datatype.float'}},\n      \"userId\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"total\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "3b57e8f8-f393-4351-ae68-3970071b409f",
+          "body": "{\n  \"list\": [\n    {\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"productEan\": \"3614613092689\",\n      \"productTitle\": \"Frigider ARCTIC Eco-X7\",\n      \"productPrice\": {{faker 'datatype.float'}},\n      \"userId\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"totalItems\": {{faker 'datatype.number'}},\n    \"totalPrice\": {{faker 'datatype.float'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of reports filtered by date",
@@ -4328,7 +4050,7 @@
           "default": true
         },
         {
-          "uuid": "95786e80-8869-4aa7-a550-b9f9aed16fd3",
+          "uuid": "564a1505-6977-4f2f-8fb4-cc78cd279106",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -4350,7 +4072,7 @@
           "default": false
         },
         {
-          "uuid": "b4319c58-db70-4112-ba1c-8eee97d12aff",
+          "uuid": "3a7ebdf0-d6eb-4ff0-9602-1c5dd1e5d801",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -4372,7 +4094,7 @@
           "default": false
         },
         {
-          "uuid": "7159f32b-8f4e-464f-ab20-30cccca62e44",
+          "uuid": "ebca3b23-8d11-47b5-9de6-1fb22f1d107f",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -4394,7 +4116,7 @@
           "default": false
         },
         {
-          "uuid": "e8e0299b-e3d5-4359-8cce-e2816616a0f6",
+          "uuid": "cef74bb1-3930-465e-80d7-44d1e34d62bc",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -4416,7 +4138,7 @@
           "default": false
         },
         {
-          "uuid": "9e1781d2-6ad0-44d5-8440-f25936ff4f56",
+          "uuid": "afd34e0f-ea20-47f6-905e-9a82cbf41105",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -4442,157 +4164,14 @@
       "responseMode": null
     },
     {
-      "uuid": "0d84ceae-9e5d-4c53-82e9-25e7a337d0c8",
+      "uuid": "6fc88621-d8c8-467c-b351-a396317dc8af",
       "type": "http",
-      "documentation": "Get reports from specified period for given user",
+      "documentation": "Get reports in csv format",
       "method": "get",
-      "endpoint": "reports/:startDate/:endDate/:username",
+      "endpoint": "reports/export",
       "responses": [
         {
-          "uuid": "af209615-1c33-4c77-90ad-736f5021cf27",
-          "body": "{\n  \"list\": [\n    {\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"productEan\": \"\",\n      \"productTitle\": \"\",\n      \"productPrice\": {{faker 'datatype.float'}},\n      \"userId\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the list of reports for specific user filtered by date",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "a4e5e2f1-c4f8-4770-b257-1f6b739d20fe",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "958063a3-b11f-4ce0-9e44-ba318586ac2f",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "f27a5232-fc68-434a-bf4d-ea163e022833",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "5c173074-1d0d-4203-a902-491b66680508",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "c1c89d4e-b92b-4b76-a353-2118f2ebc8f1",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "8bcd2773-55f3-4667-a4c9-69db0a016429",
-      "type": "http",
-      "documentation": "Get reports from specified period in csv format",
-      "method": "get",
-      "endpoint": "reports/export/:startDate/:endDate",
-      "responses": [
-        {
-          "uuid": "11bfffa8-aa8e-46bf-9029-7a79ea31d0e5",
+          "uuid": "403be8df-84cc-437b-8ce5-13c1eb305377",
           "body": "",
           "latency": 0,
           "statusCode": 200,
@@ -4603,8 +4182,8 @@
               "value": "text/csv"
             }
           ],
-          "bodyType": "INLINE",
-          "filePath": "",
+          "bodyType": "FILE",
+          "filePath": "/Users/pauladan/Library/Application Support/mockoon/storage/report-2023-06-01-2023-06-22-.csv",
           "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
@@ -4614,7 +4193,7 @@
           "default": true
         },
         {
-          "uuid": "be52e460-0e4e-47a7-bb85-df87cea261ef",
+          "uuid": "b4af87b3-6244-4f2d-b8d4-74b18537e4d9",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -4636,7 +4215,7 @@
           "default": false
         },
         {
-          "uuid": "cbe8ab13-4d79-4a3b-9b85-c21ec5773efc",
+          "uuid": "6158e0d5-8fad-49f3-8c8d-f11c1b63c357",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -4658,7 +4237,7 @@
           "default": false
         },
         {
-          "uuid": "eee96ece-7918-46af-a48f-aaa5059387c8",
+          "uuid": "d029936d-2682-4cca-84b6-3da32bf22500",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -4680,7 +4259,7 @@
           "default": false
         },
         {
-          "uuid": "5de1c153-8296-4495-9395-1fc2b06e4fea",
+          "uuid": "60b22a07-8d75-48d0-aedc-11192c21de2d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -4702,7 +4281,7 @@
           "default": false
         },
         {
-          "uuid": "fe64d7ec-caff-4a15-90d5-23d7f394aca9",
+          "uuid": "7a73cc1e-f702-41f5-834d-3ca292811d03",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -4728,301 +4307,15 @@
       "responseMode": null
     },
     {
-      "uuid": "48a450fe-095b-4c0f-b72f-fd0c2ef7c727",
+      "uuid": "3cc91cba-4e1d-4711-8a60-478a3b26636f",
       "type": "http",
-      "documentation": "Get reports from specified period for given user",
-      "method": "get",
-      "endpoint": "reports/export/:startDate/:endDate/:username",
-      "responses": [
-        {
-          "uuid": "84a9500b-3b61-41e7-bc4b-c8943e405b00",
-          "body": "",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the list of reports for specific user",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "text/csv"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "60655dca-1123-408e-90c6-d255b2cf8d2c",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "38373975-431b-4bc0-a7f7-78bf0da6c2d0",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "48d98fc4-d3b4-4b14-bdae-13ce5f5ac551",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "2103392c-2e0f-4064-bb93-068a0eba98b9",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "f1044256-927f-422f-897d-626ba2c26fc8",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "6356455e-8372-43f2-9134-f3f2a9b01b66",
-      "type": "http",
-      "documentation": "Get overview of the reports",
+      "documentation": "Get overview of the reports from specified period",
       "method": "get",
       "endpoint": "reports/qlikview",
       "responses": [
         {
-          "uuid": "825aa3cb-0ee8-4a89-aaff-252c9cd50c2b",
-          "body": "{\n  \"list\": [\n    {\n      \"user\": \"\",\n      \"productEan\": \"\",\n      \"quantity\": {{faker 'datatype.number'}},\n      \"productPrice\": {{faker 'datatype.float'}},\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"storeId\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}}\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the summary list",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "3152efb3-e546-4c15-9087-a99417250a05",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "a5d7b1ca-5874-4edd-a9e5-5784454d612d",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "851d8468-17e0-4d68-89c9-87dd0705f180",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "d01db1fc-c7a0-4636-98a9-3520f2412729",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "861b8151-dfb1-49b8-977f-447ba9c749c5",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "b5b1584e-c4e7-4836-a5a3-1fc25d0df51b",
-      "type": "http",
-      "documentation": "Get overview of the reports from specified period",
-      "method": "get",
-      "endpoint": "reports/qlikview/:startDate/:endDate",
-      "responses": [
-        {
-          "uuid": "f9563eb2-e5a9-4ec7-a5cd-e185ab138e9d",
-          "body": "{\n  \"list\": [\n    {\n      \"user\": \"\",\n      \"productEan\": \"\",\n      \"quantity\": {{faker 'datatype.number'}},\n      \"productPrice\": {{faker 'datatype.float'}},\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"storeId\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}}\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "uuid": "97715101-9c2e-4c80-9bfd-e845521d2de5",
+          "body": "{\n  \"list\": [\n    {\n      \"user\": \"\",\n      \"productEan\": \"\",\n      \"quantity\": {{faker 'datatype.number'}},\n      \"productPrice\": {{faker 'datatype.float'}},\n      \"timestamp\": \"{{faker 'date.recent' 365}}\",\n      \"storeId\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}}\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"totalItems\": {{faker 'datatype.number'}},\n    \"totalPrice\": {{faker 'datatype.float'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the summary list from specified period",
@@ -5043,7 +4336,7 @@
           "default": true
         },
         {
-          "uuid": "1d5ac1de-5e78-4ee7-bf4e-bce36592fc26",
+          "uuid": "c01f74c1-6951-45ca-bda4-434eeaa5f9a8",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -5065,7 +4358,7 @@
           "default": false
         },
         {
-          "uuid": "8b186fb0-df91-4826-90ce-214f5081d107",
+          "uuid": "adfc2d3b-26a1-40fd-a573-90695059359c",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -5087,7 +4380,7 @@
           "default": false
         },
         {
-          "uuid": "a34a9fd0-fb55-4f4f-9fd8-3cdc2d7b9c9c",
+          "uuid": "80f6921c-a33c-426c-aba5-4a3bc00f606d",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -5109,7 +4402,7 @@
           "default": false
         },
         {
-          "uuid": "71f9e1bf-664b-450d-bef7-7c64d6654770",
+          "uuid": "eedd2fba-7a59-4271-ae53-12b3a8570a86",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -5131,7 +4424,7 @@
           "default": false
         },
         {
-          "uuid": "a3381f1a-3bf4-4df1-9423-6e6408e4e625",
+          "uuid": "af501e02-731f-4901-8930-31193ae7f074",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -5157,313 +4450,24 @@
       "responseMode": null
     },
     {
-      "uuid": "0df6627b-b66e-4a73-b5c9-a6ffd6f790e8",
+      "uuid": "a6520509-f9f6-4d78-80d8-ca08f77564fc",
       "type": "http",
-      "documentation": "Scan receipt",
-      "method": "post",
-      "endpoint": "receipt/scan",
-      "responses": [
-        {
-          "uuid": "b80bef41-8936-4c96-9e85-7b55e0bdaf9a",
-          "body": "{\n  \"success\": {{faker 'datatype.boolean'}},\n  \"message\": \"\"\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained flag indicating that the operation was successful",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "56694a92-be0c-4cdf-b0c5-e678e0e60b9d",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "53d230b5-dd5b-47df-a41a-9093ec1082cd",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "ecae4977-2c70-4fb4-a9b1-09e4e2ec227e",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "ab6be571-d70b-424e-98f1-a034207c953c",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "c8a5ec6b-a2f5-4965-83c5-44216258150e",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "1bf9d085-89ae-4de7-bf31-68599d4a9dd2",
-      "type": "http",
-      "documentation": "Find proforma by id",
-      "method": "get",
-      "endpoint": "proformaPDF/:id",
-      "responses": [
-        {
-          "uuid": "847ef832-e33e-4135-9fe7-4c543e1b355b",
-          "body": "",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successful operation",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/pdf"
-            },
-            {
-              "key": "Content-Disposition",
-              "value": "attachment; filename=\"587client646ddfbf650f6.pdf\""
-            },
-            {
-              "key": "Content-Length",
-              "value": "36471"
-            }
-          ],
-          "bodyType": "FILE",
-          "filePath": "proforma-598.pdf",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true
-        },
-        {
-          "uuid": "e20ad507-869f-4277-9458-eda7e1de61c5",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "43e44ecb-a911-4995-8467-db8a2c816803",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "c530416e-f72e-4a97-914e-c9c9a3404ffb",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "e0b89487-fe30-4abb-bf28-e5e3d3d68408",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        },
-        {
-          "uuid": "ea730dec-de0b-4ff5-99c7-384e0191301e",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
-    },
-    {
-      "uuid": "d1f531a5-f9ec-4867-9239-cd11c2c79e93",
-      "type": "http",
-      "documentation": "",
+      "documentation": "Create invoice",
       "method": "post",
       "endpoint": "invoice",
       "responses": [
         {
-          "uuid": "267b005f-6d21-4722-b5b5-16f87296a5fd",
-          "body": "{}",
+          "uuid": "49ed3f61-4a96-420e-b1ae-673ced254c56",
+          "body": "{\n  \"filename\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "",
-          "headers": [],
+          "label": "Successfully obtained the filename of the newly created invoice",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -5473,6 +4477,402 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true
+        },
+        {
+          "uuid": "de67f148-892f-4d53-b46b-5fb32c74fbef",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "c2e974b9-b7a6-4cb8-bdda-735a2be9cd21",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "e8b6e6d1-9e19-4a4f-b348-c5db861b562a",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "c4d80d1e-28b2-4f4f-ae96-442fb23c13d0",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "7a13dbde-4aca-4dc5-a7aa-f4da303b1f5b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "70eda95b-03c9-4b97-acc4-3b6c7d291055",
+      "type": "http",
+      "documentation": "Get invoice in pdf format",
+      "method": "get",
+      "endpoint": "invoice/pdf/:id",
+      "responses": [
+        {
+          "uuid": "2fa2ef58-4d46-4654-b0a9-5dfb654489ad",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the pdf containing the speciifed invoice",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/pdf"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "b7ee5874-90c4-4328-8583-8d7062dda771",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "8454e883-1845-4f0e-a73a-b19d028a3ba0",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "a111fe4b-0185-45e1-a51e-5f1878945642",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "743cd233-5d56-4c0c-b99d-33ef983cab96",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "15eb3841-bee2-4f57-818c-1c85a2f2efb8",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "98214178-7a2a-43f5-9baf-aecc48beb479",
+      "type": "http",
+      "documentation": "Print invoice",
+      "method": "post",
+      "endpoint": "invoice/print/:id",
+      "responses": [
+        {
+          "uuid": "ee6d2166-1a08-4734-8d4d-92b64fa59d8d",
+          "body": "{\n  \"status\": {{faker 'datatype.number'}},\n  \"isValid\": {{faker 'datatype.boolean'}},\n  \"message\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained message indicating that the operation was successful",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "6d903a23-1e68-4f94-bf35-5023ff2a3295",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "755a8b54-aea4-4119-a8bb-dff4e45bba96",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "20d940b8-833a-412f-b930-8a3a515bf92b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "fd6ef254-8dac-4fcd-b2ed-d9cb2bae1a45",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "78daa187-f893-4783-b632-540a8d7c4caa",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
         }
       ],
       "enabled": true,
@@ -5482,159 +4882,139 @@
   "rootChildren": [
     {
       "type": "route",
-      "uuid": "8360e07a-74d7-46fe-8e0b-71c522a5c0af"
+      "uuid": "a4909a1b-030f-445b-bbf5-68ea1509796b"
     },
     {
       "type": "route",
-      "uuid": "0a2d48df-6354-4554-a5e2-1c9ef40c4980"
+      "uuid": "11137c9f-6c76-49d4-988e-3bf1c1cecf18"
     },
     {
       "type": "route",
-      "uuid": "82c0f2c9-7d4b-4e7b-8dee-352b04e84763"
+      "uuid": "28604978-f6e2-4d37-932e-229f7b66cb6c"
     },
     {
       "type": "route",
-      "uuid": "49f0781c-0297-4a5e-adc9-6edc59b073a5"
+      "uuid": "55b3307e-32bd-467e-bb17-5f5b382a7e90"
     },
     {
       "type": "route",
-      "uuid": "c1d692dd-45b6-41fb-ac0d-734806e3f308"
+      "uuid": "ed1942aa-c459-4c4c-a62c-e335c995dc13"
     },
     {
       "type": "route",
-      "uuid": "f07a9faa-b39d-448b-9252-bad478438648"
+      "uuid": "121e8c9f-1b4c-4ae3-b6ef-ef7824b56600"
     },
     {
       "type": "route",
-      "uuid": "95377f11-7656-4d45-9cae-ef152e7c92a0"
+      "uuid": "3d83d3eb-25a9-452b-9b6c-bcc972fdcd03"
     },
     {
       "type": "route",
-      "uuid": "05778eb3-7090-481a-b1bf-cc4fc65fc6bb"
+      "uuid": "d32aa5c2-c45c-42ae-bad9-779a316a00f7"
     },
     {
       "type": "route",
-      "uuid": "ac71b095-eb35-453c-94a2-575a0d994b06"
+      "uuid": "dc1e5f45-d19e-4168-b572-b7aff300cc5c"
     },
     {
       "type": "route",
-      "uuid": "aafff4ae-a204-4c21-9241-683b81afdcfd"
+      "uuid": "c3e8835b-28d7-49ca-9199-5a535fff52e9"
     },
     {
       "type": "route",
-      "uuid": "2d25b37b-ba5c-4242-8c0a-a7b073029e58"
+      "uuid": "e4baac31-92b3-4d27-b754-a33001fa33f5"
     },
     {
       "type": "route",
-      "uuid": "2b006ed4-2574-47aa-8723-2b055217767f"
+      "uuid": "dc933618-3dfb-434b-a495-59f8b1834280"
     },
     {
       "type": "route",
-      "uuid": "7d27fc88-045e-4831-bd3e-53b474ddd977"
+      "uuid": "fc84661a-4c97-412e-8c32-0f620e46b940"
     },
     {
       "type": "route",
-      "uuid": "e43b41a5-8f5d-4b49-9859-eb98786f14c0"
+      "uuid": "380c4095-a1cf-4c90-813d-0bb932ab9370"
     },
     {
       "type": "route",
-      "uuid": "06ebaabb-661f-43f8-b3fb-e9483c673205"
+      "uuid": "3d05d6e0-a62e-4d79-92b6-3c3b2511da9f"
     },
     {
       "type": "route",
-      "uuid": "4fca4c06-b87b-4ae3-8158-21c1d6a50b02"
+      "uuid": "7eb9d2ac-c6d9-4726-bbdd-07fc5b2e17c8"
     },
     {
       "type": "route",
-      "uuid": "24a6ef0e-a6ca-4244-aa10-2d4a83a4626e"
+      "uuid": "53c57dc6-d0a4-449f-a8fb-445c6211b50d"
     },
     {
       "type": "route",
-      "uuid": "bb0bde8e-8085-4233-90b4-8ab0664c4a2e"
+      "uuid": "72073997-5960-4037-9b24-c6b6091a4b19"
     },
     {
       "type": "route",
-      "uuid": "f8f5c826-924f-41fb-9e9f-145365452133"
+      "uuid": "08cf48d1-2f89-4315-93df-aebc459a8720"
     },
     {
       "type": "route",
-      "uuid": "68dd73e6-7de5-4a27-8775-4eb0f0110657"
+      "uuid": "3490e393-f68a-4059-8018-d4f7c0fb64be"
     },
     {
       "type": "route",
-      "uuid": "a9d5e519-7e8b-4183-bb17-1141d6e2415e"
+      "uuid": "2e0da9d8-6fa2-4228-820a-c63f6c6b16ee"
     },
     {
       "type": "route",
-      "uuid": "e226813e-52c1-4ed1-97db-ac0b8c234618"
+      "uuid": "fb7c5733-cefe-4140-94d6-f783237d5fc4"
     },
     {
       "type": "route",
-      "uuid": "8f487ba6-daae-485b-9807-54d4af411ee5"
+      "uuid": "56cdf793-975b-4f89-b8e5-247c4919b7cd"
     },
     {
       "type": "route",
-      "uuid": "84e75dd5-760e-4fa1-9ce0-82c1f1846cf7"
+      "uuid": "a24a5b32-9d01-40a3-8700-de8d4ffd58a4"
     },
     {
       "type": "route",
-      "uuid": "4722376b-d52f-4ce4-983b-0d1e9dfc57bc"
+      "uuid": "0b712b2f-6131-48b6-a7f1-4f32301376e3"
     },
     {
       "type": "route",
-      "uuid": "9adbfdba-1ebe-41dc-b5c3-45762abd8835"
+      "uuid": "2cc010cc-926d-4269-afe5-b23f7774c124"
     },
     {
       "type": "route",
-      "uuid": "7c7c4c47-e32a-4492-9493-fd190bd68c06"
+      "uuid": "cf0a8c82-9e33-4282-bc14-4edb35c4659f"
     },
     {
       "type": "route",
-      "uuid": "e3bc121e-26b4-4e97-98fb-8b83daf07f2a"
+      "uuid": "45582320-e3b5-408d-bc74-d67d6bfb95fa"
     },
     {
       "type": "route",
-      "uuid": "afc0fcc7-cfc7-44c4-b143-cc174b1d7327"
+      "uuid": "76331309-1030-463a-b7fe-874072cb497d"
     },
     {
       "type": "route",
-      "uuid": "6da14630-dcbb-46d3-9e38-6f7ad29c83be"
+      "uuid": "6fc88621-d8c8-467c-b351-a396317dc8af"
     },
     {
       "type": "route",
-      "uuid": "791c41e0-a7ed-406a-b2ee-5d8a4934fbe8"
+      "uuid": "3cc91cba-4e1d-4711-8a60-478a3b26636f"
     },
     {
       "type": "route",
-      "uuid": "0d84ceae-9e5d-4c53-82e9-25e7a337d0c8"
+      "uuid": "a6520509-f9f6-4d78-80d8-ca08f77564fc"
     },
     {
       "type": "route",
-      "uuid": "8bcd2773-55f3-4667-a4c9-69db0a016429"
+      "uuid": "70eda95b-03c9-4b97-acc4-3b6c7d291055"
     },
     {
       "type": "route",
-      "uuid": "48a450fe-095b-4c0f-b72f-fd0c2ef7c727"
-    },
-    {
-      "type": "route",
-      "uuid": "6356455e-8372-43f2-9134-f3f2a9b01b66"
-    },
-    {
-      "type": "route",
-      "uuid": "b5b1584e-c4e7-4836-a5a3-1fc25d0df51b"
-    },
-    {
-      "type": "route",
-      "uuid": "0df6627b-b66e-4a73-b5c9-a6ffd6f790e8"
-    },
-    {
-      "type": "route",
-      "uuid": "1bf9d085-89ae-4de7-bf31-68599d4a9dd2"
-    },
-    {
-      "type": "route",
-      "uuid": "d1f531a5-f9ec-4867-9239-cd11c2c79e93"
+      "uuid": "98214178-7a2a-43f5-9baf-aecc48beb479"
     }
   ],
   "proxyMode": false,

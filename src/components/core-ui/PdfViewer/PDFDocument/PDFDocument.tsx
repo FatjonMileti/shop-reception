@@ -19,10 +19,7 @@ const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
         return
 
       try {
-        // const pdfResult = await makeCoreGetRequest(`${actions.downloadAction.url}/${id}`, {
-        //   responseType: 'arraybuffer'
-        // })
-        const pdfResult = await makeCoreGetRequest(`/proformaPDF/${id}`, {
+        const pdfResult = await makeCoreGetRequest(`${actions.downloadAction.url}/${id}`, {
           responseType: 'arraybuffer'
         })
         setPdfFile(pdfResult)
