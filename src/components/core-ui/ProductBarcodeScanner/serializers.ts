@@ -12,7 +12,7 @@ export const toProduct = product => {
       sold: storeStock.soldQuantity,
       reserved: storeStock.reservedQuantity,
       initialStock: storeStock.initialQuantity,
-      hasBuyback: storeStock.hasBuyback,
+      hasBuyback: !!storeStock.buybackOptions?.length,
       buybackOptions: storeStock.buybackOptions,
       isWarehouse: false
     },
@@ -25,7 +25,7 @@ export const toProduct = product => {
       sold: warehouseStock?.soldQuantity,
       reserved: warehouseStock?.reservedQuantity,
       initialStock: warehouseStock?.initialQuantity,
-      hasBuyback: warehouseStock?.hasBuyback,
+      hasBuyback: !!warehouseStock?.buybackOptions?.length,
       buybackOptions: warehouseStock?.buybackOptions,
       isWarehouse: true
     }
