@@ -79,7 +79,7 @@ const ButtonWithConfirmCancelModal = ({
 
   return (
     <>
-      <Button {...buttonProps} onClick={openModal} style={{ minWidth: '0.7rem' }} />
+      <Button {...buttonProps} onClick={openModal} style={{ minWidth: '0.7rem', background: 'transparent' }} />
       <Modal
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
