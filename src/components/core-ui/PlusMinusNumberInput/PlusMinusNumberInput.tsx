@@ -47,9 +47,9 @@ const PlusMinusNumberInput = (props: PlusMinusNumberInputProps) => {
 
   return (
     <div className={s.inputGroup}>
-      <IconButton onClick={decreaseValue} startIcon={<Remove />} variant="text" />
-      <OutlinedInput type="number" value={count} onChange={changeCount} />
-      <IconButton onClick={increaseValue} startIcon={<Add />} variant="text" />
+      <IconButton onClick={decreaseValue}><Remove /></IconButton>
+      <OutlinedInput type="text" inputMode="numeric" value={count} onChange={changeCount} />
+      <IconButton onClick={increaseValue}><Add /></IconButton>
     </div>
   )
 }

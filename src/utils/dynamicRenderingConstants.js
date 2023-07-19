@@ -22,6 +22,7 @@ import { ProductBarcodeScanner } from 'components/core-ui/ProductBarcodeScanner'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
 import { ProductTabs } from 'components/core-ui/ProductTabs'
 import { ProductTitle } from 'components/core-ui/ProductTitle'
+import { ReceiptInvoiceFinalized } from 'components/core-ui/ReceiptInvoiceFinalized'
 import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
 import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
 import { ShoppingCart } from 'components/core-ui/ShoppingCart'
@@ -34,6 +35,9 @@ import { TitleText } from 'components/core-ui/TitleText'
 import { TableFilters } from 'components/core-ui/TableFilters'
 import { UserModal } from 'components/core-ui/UserModal'
 import { FileUpload } from 'components/core-ui/FileUpload'
+import DynamicTable from 'components/core-ui/Table/DynamicTable'
+import GroupTable from 'components/core-ui/Table/GroupTable'
+import { ImageCell } from 'components/core-ui/ImageCell'
 
 export const Components = {
   // MUI components
@@ -69,6 +73,7 @@ export const Components = {
   ProductStockInfo,
   ProductTabs,
   ProductTitle,
+  ReceiptInvoiceFinalized,
   ReceiptBarcodeScanner,
   SimpleKeyValuePairs,
   ShoppingCart,
@@ -78,5 +83,8 @@ export const Components = {
   TitleText,
   TableFilters,
   UserModal,
-  FileUpload
+  FileUpload,
+  DynamicTable,
+  GroupTable,
+  ImageCell
 }

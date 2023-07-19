@@ -39,14 +39,12 @@ const ProductTabs = (props: ProductTabsProps) => {
   }
 
   return product.title ? (
-    <div className={s.productTabs}>
-      <Tabs
-        {...rest}
-        labels={tabLabels}
-        handleChange={handleChange}
-        value={product.selectedStockTab}
-      />
-    </div>
+    <Tabs
+      {...rest}
+      labels={tabLabels}
+      handleChange={handleChange}
+      value={product.selectedStockTab}
+    />
   ) : null
 }
 

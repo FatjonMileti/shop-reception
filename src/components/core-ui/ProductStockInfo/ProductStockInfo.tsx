@@ -4,6 +4,7 @@ import { RootState } from 'configureStore'
 import { ProductStockInfoProps } from './ProductStockInfoDefinitions'
 import { ProductStockDetails } from './ProductStockDetails'
 import s from './ProductStockInfo.modules.scss'
+import { Paper } from '@mui/material'
 
 const ProductStockInfo = (props: ProductStockInfoProps) => {
   const { infoItems, actions } = props
@@ -11,13 +12,13 @@ const ProductStockInfo = (props: ProductStockInfoProps) => {
   const product = useSelector((state: RootState) => state.product)
 
   return (
-    <div className={s.productTab}>
+    <Paper className={s.productTab}>
       <ProductStockDetails
         stock={product[product.selectedStockType]}
         infoItems={infoItems}
         actions={actions}
       />
-    </div>
+    </Paper>
   )
 }
 

@@ -4,4 +4,6 @@ export interface ButtonProps {
   endIcon?: string
   href?: string
   onClick?: (event: React.MouseEvent<HTMLElement>) => void
+  variable?: string
+  idSearchParam?: string
 }

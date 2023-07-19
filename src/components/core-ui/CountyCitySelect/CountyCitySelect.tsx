@@ -73,7 +73,8 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
             setCountiesOpen(false)
           }}
           loading={countiesOpen && counties.length === 0}
-          value={value?.county?.value ? value?.county : { label: '', value: '' }}
+          value={value?.county?.value ? value?.county : null}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
           onChange={(_, newValue) => onChange(newValue, 'county')}
           disabled={disabled}
         />
@@ -92,7 +93,8 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
             setCitiesOpen(false)
           }}
           loading={citiesOpen && cities.length === 0}
-          value={value?.city?.value ? value?.city : { label: '', value: '' }}
+          value={value?.city?.value ? value?.city : null}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
           onChange={(_, newValue) => onChange(newValue, 'city')}
           disabled={disabled}
         />

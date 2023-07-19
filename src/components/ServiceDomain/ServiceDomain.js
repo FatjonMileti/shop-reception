@@ -6,7 +6,7 @@ import { Divider, IconButton, Typography } from '@fullscreendigital/carrefour-de
 import { useMemo } from 'react'
 import { ArrowBackIosNewOutlined } from '@mui/icons-material'
 
-const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
+const ServiceDomain = ({ subdomainId, modules, applicationPages, hasLoadedActivities, isLoadingActivities }) => {
   const navigate = useNavigate()
   const goBack = () => {
     navigate('/')
@@ -25,7 +25,7 @@ const ServiceDomain = ({ subdomainId, modules, applicationPages }) => {
     return { module: mod, submodule: sub }
   }, [subdomainId, modules])
 
-  return !applicationPages.length && (
+  return (!applicationPages.length || hasLoadedActivities != subdomainId || isLoadingActivities) && (
     <div style={{ display:'flex' }}>
       <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
     </div>

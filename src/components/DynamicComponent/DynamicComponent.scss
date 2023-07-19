@@ -3,10 +3,10 @@
   display: flex;
   align-items: center;
 
-  margin: 24px auto 0;
+  margin: 24px auto;
   width: calc(100% - 48px);
   @media (max-width: 624px) {
-    margin: 18px 12px 0;
+    margin: 18px 12px;
     width: calc(100% - 24px);
   }
 }
