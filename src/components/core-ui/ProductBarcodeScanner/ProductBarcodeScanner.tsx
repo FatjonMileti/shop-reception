@@ -14,6 +14,7 @@ import {
 import { ProductActions } from 'reducers/productSlice'
 import s from './ProductBarcodeScanner.modules.scss'
 import { toProduct } from './serializers'
+import { isScannerDevice } from 'utils/helpers'
 
 const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
@@ -83,12 +84,14 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           />
         </div>
         <div className={s.buttonContainer}>
-          <IconButton
-            onClick={scanCode}
-            label="Scaneaza"
-            variant="outlined"
-            startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
-          />
+          {!isScannerDevice() && (
+            <IconButton
+              onClick={scanCode}
+              label="Scaneaza"
+              variant="outlined"
+              startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
+            />
+          )}
           <IconButton
             onClick={searchProduct}
             label="Cauta Produs"

@@ -71,3 +71,9 @@ export const downloadFile = url => {
 }
 
 export const delay = ms => new Promise(res => setTimeout(res, ms))
+
+export const isScannerDevice = () => {
+  const devices = ['DT50', 'EF50'] // [urovo, bluebird]
+  const { userAgent } = window.navigator
+  return devices.some(device => userAgent.includes(device))
+}
