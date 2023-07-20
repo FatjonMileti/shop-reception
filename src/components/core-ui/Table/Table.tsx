@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -12,7 +11,6 @@ import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import {
   getRenderedColumns,
   convertFilterSchemaToFilterConfig,
-  download,
   renderTableFooter
 } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload } from './serializers'
@@ -23,6 +21,7 @@ import s from './Table.modules.scss'
 import { isEmpty } from 'lodash'
 import { ConfirmationModal } from 'components/core-ui/ConfirmationModal'
 import cn from 'classnames'
+import { downloadFile } from 'utils/helpers'
 
 const Table = props => {
   const {
@@ -221,8 +220,22 @@ const Table = props => {
 
   const handleDownload = () => {
     if (tableActions?.downloadAction) {
-      const { action } = tableActions?.downloadAction
-      download(action.url, tableState.filters)
+      const { action } = tableActions.downloadAction
+      const { searchText, filters, order, orderBy } = tableState
+
+      const url = toTableGETUrl({
+        url: action.url,
+        searchText,
+        searchFields: tableActions?.searchAction?.searchFields,
+        filters,
+        tableFilters,
+        order,
+        orderBy,
+        hasGeneralSearch: generalSearch?.hasGeneralSearch,
+        generalSearchText: table.searchText
+      })
+
+      downloadFile(url)
     }
   }
 

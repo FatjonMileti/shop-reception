@@ -33,8 +33,8 @@ export const toTableGETUrl = ({
   searchFields: string[]
   filters: Filter[]
   tableFilters: Filter[]
-  page: number
-  rowsPerPage: number
+  page?: number
+  rowsPerPage?: number
   order: string
   orderBy: string
   hasGeneralSearch: boolean

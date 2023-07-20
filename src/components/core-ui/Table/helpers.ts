@@ -38,13 +38,21 @@ export const getRenderedColumns = (columns, tableFilters) =>
             })
           }
 
-          if(UIComponent === 'MultivalueCell' || UIComponent === 'IconCell'){
+          if (UIComponent === 'MultivalueCell' || UIComponent === 'IconCell') {
             return renderComponent({
               ...render,
-              value: row[field],
+              value: row[field]
             })
           }
-          
+
+          if (UIComponent === 'ImageCell') {
+            return renderComponent({
+              ...render,
+              imageUrl: row.imageUrl,
+              value: row[field]
+            })
+          }
+
           if (UIComponent === 'BooleanIcon') {
             const value = get(row, field)
             return renderComponent({
@@ -89,7 +97,10 @@ export const convertFilterSchemaToFilterConfig = (
 export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string) => {
   if (!searchText) return ''
 
-  const searchBy = searchFields.reduce((acc, field) => (acc = acc ? `${acc}${encodeURIComponent('|')}${field}` : field), '')
+  const searchBy = searchFields.reduce(
+    (acc, field) => (acc = acc ? `${acc}${encodeURIComponent('|')}${field}` : field),
+    ''
+  )
 
   return `&searchBy=${searchBy}&searchValue=${encodeURIComponent(searchText)}`
 }
@@ -110,9 +121,7 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
   return `&filterBy=${filterBy}&filterValue=${filterValue}`
 }
 
-export const getAllFilters = (filters: Filter[]) =>
-  filters
-    .filter(filter => filter.value)
+export const getAllFilters = (filters: Filter[]) => filters.filter(filter => filter.value)
 
 export const getTableQueryUrl = params =>
   Object.keys(params).reduce(
@@ -125,12 +134,6 @@ export const getTableQueryUrl = params =>
           : acc),
     ''
   )
-
-export const download = (url, filters) => {
-  const href = filters.reduce((acc, filter) => `${acc}/${filter.value}`, url)
-  console.log(href)
-  downloadFile(href)
-}
 
 export const renderTableFooter = (footerElements, summary) =>
   footerElements.map(element => {
