@@ -2,7 +2,7 @@
   "uuid": "162b376f-1922-430a-a672-d5257e3e8e17",
   "lastMigration": 27,
   "name": "DEX SUPPLY OMNI REST API",
-  "endpointPrefix": "8081/core/rest/api/v1",
+  "endpointPrefix": "8081/core/rest/api/v1/supply-omni",
   "latency": 0,
   "port": 3001,
   "hostname": "",

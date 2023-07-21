@@ -6,6 +6,7 @@ export type Action = {
   storeIn?: string
   href?: string
   variable?: string
+  errorMessage?: string
 }
 
 export interface SelectOption {
