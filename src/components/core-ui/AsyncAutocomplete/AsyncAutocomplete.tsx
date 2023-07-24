@@ -87,7 +87,7 @@ const AsyncAutocomplete = props => {
         setOpen(false)
       }}
       loading={loading}
-      value={props.value}
+      value={props.value || (props.multiple ? [] : '')}
       onChange={(_, value) => props.onChange(value)}
     />
   )
