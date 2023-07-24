@@ -26,17 +26,20 @@ function StructureItem(props) {
   const { showNotification } = useNotification()
 
   React.useEffect(() => {
-    let active = true
-
     if (defaultChecked) {
       setChecked(true)
     }
+    else{
+      setChecked(false)
+    }
+  },[defaultChecked])
 
+  React.useEffect(() => {
     ;(async () => {
       try {
         let url = action.url
         const result = await makeCoreGetRequest(url)
-        const optionItems = result.list.map(item => ({ label: item.name, value: item.id }))
+        const optionItems = result.map(item => ({ label: item.name, value: item.id }))
         setOptions(optionItems)
 
         const selected = optionItems.find(opt => opt.value === props?.value?.structureId)
@@ -48,10 +51,7 @@ function StructureItem(props) {
         })
       }
     })()
-    return () => {
-      active = false
-    }
-  }, [loading, value])
+  }, [loading, value, defaultChecked])
 
   return (
     <div className={s.container}>
@@ -79,7 +79,7 @@ function StructureItem(props) {
           }}
           loading={loading}
           value={selectedValue ?? ''}
-          onChange={(_, value) => props.onChange(value, roleName.value)}
+          onChange={(_, value) => props.onChange({ structure: value, roleId: roleName.value})}
         />
       )}
     </div>

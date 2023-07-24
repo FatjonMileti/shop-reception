@@ -9,7 +9,7 @@ import Box from '@mui/material/Box'
 import { Close } from '@mui/icons-material'
 import { useImmer } from 'use-immer'
 import { useMediaQuery, CircularProgress } from '@mui/material'
-import { makeCoreGetRequest, makeCorePatchRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
 import { StructureItem } from '../StructureItem'
 
 const sx = {
@@ -68,16 +68,24 @@ function UserModal(props) {
   }
 
   const onStructureChange = payload => {
-    const existingStructureIndex = editItem.structureRoles.findIndex(role => role.id === payload.id)
+    const {
+      structure: { value: structureId },
+      roleId
+    } = payload
+    const existingStructureIndex = editItem.structureRoles.findIndex(role => role.roleId === roleId)
 
     setEditItem(prevState => {
       const structureClone = [...prevState.structureRoles]
 
       if (existingStructureIndex !== -1) {
-        const updateItem = { ...structureClone[existingStructureIndex], ...payload }
+        const updateItem = {
+          ...structureClone[existingStructureIndex],
+          roleId: roleId,
+          structureId: structureId
+        }
         structureClone.splice(existingStructureIndex, 1, updateItem)
       } else {
-        structureClone.push(payload)
+        structureClone.push({ roleId, structureId })
       }
 
       return {
@@ -91,11 +99,11 @@ function UserModal(props) {
     if (isModalOpen && editedItemId) {
       ;(async () => {
         try {
-          const result = await makeCoreGetRequest(`/users/${editedItemId}`)
+          const result = await makeCoreGetRequest(`/user/${editedItemId}`)
           setEditItem(result)
 
           const rolesResult = await makeCoreGetRequest('/role')
-          setRoles(rolesResult.list)
+          setRoles(rolesResult)
         } catch (error) {
           showNotification({
             message: `Error while fetching item. ${error?.message}`,
@@ -117,7 +125,7 @@ function UserModal(props) {
     setIsLoading(true)
     try {
       const payload = editItem
-      await makeCorePatchRequest(`/users/${editedItemId}`, payload)
+      await makeCorePutRequest(`/user/${editedItemId}`, payload)
       showNotification({
         message: 'Item saved successfully',
         type: 'success'
@@ -173,7 +181,7 @@ function UserModal(props) {
                   <ModalInfo formInfoItems={infoItems} editItem={editItem} />
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  {roles.map(role => {
+                  {roles?.map(role => {
                     const isChecked = editItem?.structureRoles?.some(
                       structureRole => structureRole.roleId === role.id
                     )
@@ -186,7 +194,6 @@ function UserModal(props) {
                       valueKey: 'id',
                       labelKey: 'name'
                     }
-
                     return (
                       <StructureItem
                         key={role.id}
