@@ -105,10 +105,8 @@ export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string
   return `&searchBy=${searchBy}&searchValue=${encodeURIComponent(searchText)}`
 }
 
-export const getFiltersGetUrl = (filters: Filter[]) => {
-  if (!filters.length) return ''
-
-  const [filterBy, filterValue] = filters.reduce(
+const getFilterUrlValues = (filters: Filter[]) =>
+  filters.reduce(
     (acc, filter) =>
       (acc = [
         acc[0] ? `${acc[0]}${encodeURIComponent('|')}${filter.name}` : filter.name,
@@ -118,10 +116,25 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
       ]),
     ['', '']
   )
+
+export const getFiltersGetUrl = (filters: Filter[]) => {
+  if (!filters.length) return ''
+
+  const [filterBy, filterValue] = getFilterUrlValues(filters)
+
   return `&filterBy=${filterBy}&filterValue=${filterValue}`
 }
 
-export const getAllFilters = (filters: Filter[]) => filters.filter(filter => filter.value)
+export const getCustomFiltersGetUrl = (filters: Filter[]) => {
+  if (!filters.length) return ''
+
+  const [filterBy, filterValue] = getFilterUrlValues(filters)
+
+  return `&customFieldName=${filterBy}&customFieldValue=${filterValue}`
+}
+
+export const getAllFilters = (filters: Filter[]) =>
+  filters.filter(filter => filter.value !== undefined && filter.value !== '')
 
 export const getTableQueryUrl = params =>
   Object.keys(params).reduce(

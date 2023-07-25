@@ -6,6 +6,9 @@ export interface TableState {
   filters?: {
     [name: string]: any
   }
+  customFilters?: {
+    [name: string]: any
+  }
 }
 
 export interface FiltersState {
@@ -14,7 +17,8 @@ export interface FiltersState {
 
 export const tableInitialState: TableState = {
   searchText: '',
-  filters: {}
+  filters: {},
+  customFilters: {}
 }
 
 export const TableSlice = createSlice({
@@ -32,8 +36,15 @@ export const TableSlice = createSlice({
         ...action.payload
       }
     }),
+    setCustomFilters: (state: TableState, action: PayloadAction<FiltersState>) => ({
+      ...state,
+      customFilters: {
+        ...state.customFilters,
+        ...action.payload
+      }
+    }),
     clearSearchData: state => ({ ...state, searchText: '' }),
-    clearFiltersData: state => ({ ...state, filters: {} })
+    clearFiltersData: state => ({ ...state, filters: {}, customFilters: {} })
   }
 })
 
