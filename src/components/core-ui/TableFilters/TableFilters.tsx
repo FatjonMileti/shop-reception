@@ -44,7 +44,13 @@ function TableFilters(props) {
                       setFilterValues(name, arg, type)
                       break
                     case 'autocomplete':
-                      setFilterValues(name, arg, type)
+                      if (filter.multiple) {
+                        const valuesArray = arg.map(obj => obj.value);
+                        const encodedArr = `[${valuesArray.join(';')}]`;
+                        setFilterValues(name, encodedArr, type)
+                      } else {
+                        setFilterValues(name, arg, type)
+                      }
                       break
                     default:
                       setFilterValues(arg.target.name, arg.target.value, type)
