@@ -1,7 +1,13 @@
 import { get, set } from 'lodash'
 import { toArrayItemPayload } from 'utils/serializers'
 import { Filter } from './TableDefinitions'
-import { getFiltersGetUrl, getSearchFieldsGetUrl, getAllFilters, getTableQueryUrl } from './helpers'
+import {
+  getFiltersGetUrl,
+  getSearchFieldsGetUrl,
+  getAllFilters,
+  getTableQueryUrl,
+  getCustomFiltersGetUrl
+} from './helpers'
 
 export const toTableObjects = result =>
   result.map(row => {
@@ -21,6 +27,7 @@ export const toTableGETUrl = ({
   searchFields,
   filters,
   tableFilters,
+  tableCustomFilters,
   page,
   rowsPerPage,
   order,
@@ -32,7 +39,8 @@ export const toTableGETUrl = ({
   searchText: string
   searchFields: string[]
   filters: Filter[]
-  tableFilters: Filter[]
+  tableFilters?: Filter[]
+  tableCustomFilters?: Filter[]
   page?: number
   rowsPerPage?: number
   order: string
@@ -43,10 +51,11 @@ export const toTableGETUrl = ({
   const tableQueryUrl = getTableQueryUrl({ page, size: rowsPerPage, order, orderBy })
   const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
   const filtersUrl = getFiltersGetUrl(getAllFilters(filters.concat(tableFilters)))
+  const customFiltersUrl = getCustomFiltersGetUrl(getAllFilters(tableCustomFilters))
   const generalSearchUrl =
     hasGeneralSearch && generalSearchText ? `&keyword=${generalSearchText}` : ''
 
-  return `${url}?${tableQueryUrl}${searchFieldsUrl}${filtersUrl}${generalSearchUrl}`
+  return `${url}?${tableQueryUrl}${searchFieldsUrl}${filtersUrl}${generalSearchUrl}${customFiltersUrl}`
 }
 
 const toSearchFieldsPayload = (searchFields, searchText) =>
@@ -61,6 +70,7 @@ export const toTablePOSTPayload = ({
   searchFields,
   filters,
   tableFilters,
+  tableCustomFilters,
   hasGeneralSearch,
   generalSearchText
 }: {
@@ -71,7 +81,8 @@ export const toTablePOSTPayload = ({
   searchText: string
   searchFields: string[]
   filters: Filter[]
-  tableFilters: Filter[]
+  tableFilters?: Filter[]
+  tableCustomFilters?: Filter[]
   hasGeneralSearch: boolean
   generalSearchText: string
 }) => ({
@@ -80,7 +91,7 @@ export const toTablePOSTPayload = ({
   order,
   orderBy,
   ...toSearchFieldsPayload(searchFields, searchText),
-  ...toArrayItemPayload(getAllFilters(filters.concat(tableFilters))),
+  ...toArrayItemPayload(getAllFilters([...filters, ...tableFilters, ...tableCustomFilters])),
   ...(hasGeneralSearch && generalSearchText ? { keyword: generalSearchText } : {})
 })
 
