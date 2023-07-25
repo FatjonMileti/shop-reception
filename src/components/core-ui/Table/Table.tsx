@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
@@ -8,11 +8,7 @@ import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import {
-  getRenderedColumns,
-  convertFilterSchemaToFilterConfig,
-  renderTableFooter
-} from './helpers'
+import { getRenderedColumns, convertFilterSchemaToFilterConfig, renderTableFooter } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload } from './serializers'
 import { toTableRowItems } from 'utils/serializers'
 import { useNotification, usePermissions } from 'hooks'
@@ -21,6 +17,7 @@ import s from './Table.modules.scss'
 import { isEmpty } from 'lodash'
 import { ConfirmationModal } from 'components/core-ui/ConfirmationModal'
 import cn from 'classnames'
+import { TableActions as ReducerTableActions} from 'reducers/tableSlice'
 import { downloadFile } from 'utils/helpers'
 
 const Table = props => {
@@ -36,7 +33,7 @@ const Table = props => {
     ...rest
   } = props
 
-  let [searchParams, setSearchParams] = useSearchParams()
+  let [searchParams] = useSearchParams()
 
   const [isLoading, setIsLoading] = useState(true)
   const [items, setItems] = useState([])
@@ -59,6 +56,8 @@ const Table = props => {
   const { showNotification } = useNotification()
 
   const navigate = useNavigate()
+
+  const dispatch = useDispatch()
 
   const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
@@ -95,7 +94,7 @@ const Table = props => {
   // TODO: find a bettwer way to implement this
   // This is a hack to make the table perform query only when there is an outeside compulsory filter
   useEffect(() => {
-    if (!isEmpty(table.filters) || table.searchText) {
+    if (!isEmpty(table.filters) || table.searchText || !isEmpty(table.customFilters)) {
       handleRemoteData(
         tableState.page,
         tableState.rowsPerPage,
@@ -105,12 +104,12 @@ const Table = props => {
         tableState.filters
       )
     }
-  }, [table.filters, table.searchText])
+  }, [table.filters, table.searchText, table.customFilters])
 
   // TODO: find a bettwer way to implement this
   // This is a hack to make the table perform query only when there is an inside compulsory filter
   useEffect(() => {
-    if (!items.length && !isEmpty(tableState.filters)){
+    if (!items.length && !isEmpty(tableState.filters)) {
       handleRemoteData(
         tableState.page,
         tableState.rowsPerPage,
@@ -131,6 +130,15 @@ const Table = props => {
     [table.filters]
   )
 
+  const tableCustomFilters = useMemo(
+    () =>
+      Object.keys(table.customFilters).map(key => ({
+        name: key,
+        value: table.customFilters[key]?.value ?? table.customFilters[key]
+      })) || [],
+    [table.customFilters]
+  )
+
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
       page,
@@ -143,14 +151,14 @@ const Table = props => {
 
     // TODO: find a bettwer way to implement this
     // This is a hack to make the table perform query only when there is an outeside compulsory filter
-    if (hasInitialFilters && isEmpty(table.filters)) {
+    if (hasInitialFilters && isEmpty(table.filters) && isEmpty(table.customFilters)) {
       return null
     }
 
     if (generalSearch?.hasGeneralSearch && !table.searchText.length) {
       return null
     }
-  
+
     // TODO: find a bettwer way to implement this
     // This is a hack to make the table perform query only when there is an inside compulsory filter
     if (filtersConfig.some(filter => filter.required) && !filters.length) {
@@ -170,6 +178,7 @@ const Table = props => {
             searchFields: tableActions?.searchAction?.searchFields,
             filters,
             tableFilters,
+            tableCustomFilters,
             page,
             rowsPerPage,
             order,
@@ -191,6 +200,7 @@ const Table = props => {
             searchFields: tableActions.searchAction?.searchFields,
             filters,
             tableFilters,
+            tableCustomFilters,
             hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText
           })
@@ -229,6 +239,7 @@ const Table = props => {
         searchFields: tableActions?.searchAction?.searchFields,
         filters,
         tableFilters,
+        tableCustomFilters,
         order,
         orderBy,
         hasGeneralSearch: generalSearch?.hasGeneralSearch,
