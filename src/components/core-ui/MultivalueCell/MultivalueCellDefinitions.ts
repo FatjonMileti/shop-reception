@@ -1,3 +1,5 @@
 export interface MultivalueCellProps {
-    value: string[]
+    value: any,
+    field?: string
+    size?: number
 }

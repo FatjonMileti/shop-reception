@@ -38,21 +38,21 @@ export const getRenderedColumns = (columns, tableFilters) =>
             })
           }
 
-          if(UIComponent === 'MultivalueCell' || UIComponent === 'IconCell'){
+          if (UIComponent === 'MultivalueCell' || UIComponent === 'IconCell') {
             return renderComponent({
               ...render,
-              value: row[field],
+              value: row[field]
             })
           }
 
-          if(UIComponent === 'ImageCell'){
+          if (UIComponent === 'ImageCell') {
             return renderComponent({
               ...render,
               imageUrl: row.imageUrl,
-              value: row[field],
+              value: row[field]
             })
           }
-          
+
           if (UIComponent === 'BooleanIcon') {
             const value = get(row, field)
             return renderComponent({
@@ -97,15 +97,16 @@ export const convertFilterSchemaToFilterConfig = (
 export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string) => {
   if (!searchText) return ''
 
-  const searchBy = searchFields.reduce((acc, field) => (acc = acc ? `${acc}${encodeURIComponent('|')}${field}` : field), '')
+  const searchBy = searchFields.reduce(
+    (acc, field) => (acc = acc ? `${acc}${encodeURIComponent('|')}${field}` : field),
+    ''
+  )
 
   return `&searchBy=${searchBy}&searchValue=${encodeURIComponent(searchText)}`
 }
 
-export const getFiltersGetUrl = (filters: Filter[]) => {
-  if (!filters.length) return ''
-
-  const [filterBy, filterValue] = filters.reduce(
+const getFilterUrlValues = (filters: Filter[]) =>
+  filters.reduce(
     (acc, filter) =>
       (acc = [
         acc[0] ? `${acc[0]}${encodeURIComponent('|')}${filter.name}` : filter.name,
@@ -115,12 +116,25 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
       ]),
     ['', '']
   )
+
+export const getFiltersGetUrl = (filters: Filter[]) => {
+  if (!filters.length) return ''
+
+  const [filterBy, filterValue] = getFilterUrlValues(filters)
+
   return `&filterBy=${filterBy}&filterValue=${filterValue}`
 }
 
+export const getCustomFiltersGetUrl = (filters: Filter[]) => {
+  if (!filters.length) return ''
+
+  const [filterBy, filterValue] = getFilterUrlValues(filters)
+
+  return `&customFieldName=${filterBy}&customFieldValue=${filterValue}`
+}
+
 export const getAllFilters = (filters: Filter[]) =>
-  filters
-    .filter(filter => filter.value)
+  filters.filter(filter => filter.value !== undefined && filter.value !== '')
 
 export const getTableQueryUrl = params =>
   Object.keys(params).reduce(
@@ -133,19 +147,6 @@ export const getTableQueryUrl = params =>
           : acc),
     ''
   )
-
-export const download = (url, filters) => {
-  // TODO use the downloadFile helper from utils
-  const a = document.createElement('a')
-  const href = filters.reduce((acc, filter) => `${acc}/${filter.value}`, url)
-  // TODO replace download url when BE is ready
-  // a.href = href
-  a.href =
-    'https://apps.carrefour.ro/stage_carrefour_assistant_api/api/reports-export/2023-04-01/2023-05-22'
-  document.body.appendChild(a)
-  a.click()
-  document.body.removeChild(a)
-}
 
 export const renderTableFooter = (footerElements, summary) =>
   footerElements.map(element => {

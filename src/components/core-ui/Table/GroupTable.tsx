@@ -9,18 +9,14 @@ import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import {
-  getRenderedColumns,
-  convertFilterSchemaToFilterConfig,
-  download,
-  renderTableFooter
-} from './helpers'
+import { getRenderedColumns, convertFilterSchemaToFilterConfig, renderTableFooter } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload } from './serializers'
 import { toTableRowItems } from 'utils/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 import { isEmpty } from 'lodash'
+import { downloadFile } from 'utils/helpers'
 
 const GroupTable = props => {
   const {
@@ -206,8 +202,22 @@ const GroupTable = props => {
 
   const handleDownload = () => {
     if (tableActions?.downloadAction) {
-      const { action } = tableActions?.downloadAction
-      download(action.url, tableState.filters)
+      const { action } = tableActions.downloadAction
+      const { searchText, filters, order, orderBy } = tableState
+
+      const url = toTableGETUrl({
+        url: action.url,
+        searchText,
+        searchFields: tableActions?.searchAction?.searchFields,
+        filters,
+        tableFilters,
+        order,
+        orderBy,
+        hasGeneralSearch,
+        generalSearchText: table.searchText
+      })
+
+      downloadFile(url)
     }
   }
 
