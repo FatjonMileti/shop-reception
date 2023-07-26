@@ -20,7 +20,9 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
     reserved,
     initialStock,
     imobStock,
-    isWarehouse
+    isWarehouse,
+    hasBuyback,
+    buybackOptions
   } = stock
 
   const items = { available, sold, reserved, initialStock, imobStock }
@@ -34,6 +36,8 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
         storeCode={storeCode}
         addToCartAction={actions.addToCart}
         isWarehouse={isWarehouse}
+        hasBuyback={hasBuyback}
+        buybackOptions={buybackOptions}
       />
       <div>
         <KeyValuePairs

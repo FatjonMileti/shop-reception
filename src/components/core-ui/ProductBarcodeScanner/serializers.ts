@@ -8,7 +8,9 @@ export const toProduct = product => {
     soldStock,
     reservedStock,
     initialStock,
-    neighbours
+    neighbours,
+    hasBuyback,
+    buybackOptions
   } = product
 
   return {
@@ -22,6 +24,8 @@ export const toProduct = product => {
       sold: soldStock,
       reserved: reservedStock,
       initialStock: initialStock,
+      hasBuyback: hasBuyback,
+      buybackOptions: buybackOptions,
       isWarehouse: false
     },
     warehouseStock: {
@@ -33,6 +37,8 @@ export const toProduct = product => {
       sold: neighbours[0]?.soldStock,
       reserved: neighbours[0]?.reservedStock,
       initialStock: neighbours[0]?.initialStock,
+      hasBuyback: neighbours[0]?.hasBuyback,
+      buybackOptions: neighbours[0]?.buybackOptions,
       isWarehouse: true
     }
   }

@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from 'oidc-react'
 import { Drawer, List, Divider } from '@fullscreendigital/carrefour-dex-fe'
-import { toSelectedMenuItems, toApplicationModulesPages, toMenuItems } from './serializers'
+import { toSelectedMenuItems, toMenuItems } from './serializers'
 import {
   HomeOutlined,
   NotificationsNoneOutlined,
   PersonOutlineOutlined,
   PowerSettingsNewOutlined
 } from '@mui/icons-material'
-import { makeDesignerGetRequest } from 'utils/api'
 import { logout } from 'utils/authService'
 import { SidebarHeader } from './SidebarHeader'
 import { useNotification } from 'hooks'
@@ -45,8 +44,7 @@ const staticItems = [
 const Sidebar = ({
   isMenuOpen,
   handleCloseMenu,
-  setModules,
-  setApplicationModulesPages,
+  modules,
   setSubdomainId
 }) => {
   const [items, setItems] = useState([])
@@ -61,19 +59,16 @@ const Sidebar = ({
   useEffect(() => {
     ;(async () => {
       try {
-        const result = await makeDesignerGetRequest('/application-modules')
-        setModules(result)
-        setItems(toMenuItems(result))
-        setApplicationModulesPages(toApplicationModulesPages(result))
+        setItems(toMenuItems(modules))
       } catch (error) {
         // https://giphy.com/embed/oe33xf3B50fsc :))))
         showNotification({
-          message: `Error while fetching application modules. ${error.message}`,
+          message: `Error while setting application module menu items. ${error.message}`,
           type: 'error'
         })
       }
     })()
-  }, [])
+  }, [modules])
 
   const handleItemClick = (event, item) => {
     event.preventDefault()

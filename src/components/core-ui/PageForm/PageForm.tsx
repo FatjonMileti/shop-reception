@@ -108,7 +108,7 @@ const PageForm = props => {
     <Box className={cn({ [s.hidden]: !visible })}>
       <ModalForm
         modalTitle=""
-        formItems={formItems}
+        formItems={formItems.filter(item => item.type != 'hidden')}
         formInfoItems={formInfoItems}
         gridSize={gridSize}
         handleInputChange={handleInputChange}

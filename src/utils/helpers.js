@@ -27,6 +27,10 @@ export const getDefaultItemValue = value => {
       const url = window.location.pathname
       return url.substring(url.lastIndexOf('/') + 1)
     }
+
+    if (value === '#CHECKED') {
+      return true
+    }
   }
 
   return value

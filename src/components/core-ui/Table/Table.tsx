@@ -1,7 +1,6 @@
-import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
@@ -9,18 +8,17 @@ import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import {
-  getRenderedColumns,
-  convertFilterSchemaToFilterConfig,
-  download,
-  renderTableFooter
-} from './helpers'
+import { getRenderedColumns, convertFilterSchemaToFilterConfig, renderTableFooter } from './helpers'
 import { toTableGETUrl, toTablePOSTPayload } from './serializers'
 import { toTableRowItems } from 'utils/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 import { isEmpty } from 'lodash'
+import { ConfirmationModal } from 'components/core-ui/ConfirmationModal'
+import cn from 'classnames'
+import { TableActions as ReducerTableActions} from 'reducers/tableSlice'
+import { downloadFile } from 'utils/helpers'
 
 const Table = props => {
   const {
@@ -29,7 +27,7 @@ const Table = props => {
     tableActions,
     tableRowActions,
     tableFooter,
-    hasGeneralSearch,
+    generalSearch,
     isUserModal,
     hasInitialFilters,
     ...rest
@@ -42,6 +40,7 @@ const Table = props => {
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
   const [summary, setSummary] = useState({})
+  const [isNoGeneralSearchConfirmModalOpen, setIsNoGeneralSearchConfirmModalOpen] = useState(false)
 
   const [tableState, setTableState] = useImmer({
     page: 0,
@@ -55,6 +54,10 @@ const Table = props => {
   const table = useSelector((state: RootState) => state.table)
 
   const { showNotification } = useNotification()
+
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch()
 
   const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
@@ -91,20 +94,22 @@ const Table = props => {
   // TODO: find a bettwer way to implement this
   // This is a hack to make the table perform query only when there is an outeside compulsory filter
   useEffect(() => {
-    handleRemoteData(
-      tableState.page,
-      tableState.rowsPerPage,
-      tableState.order,
-      tableState.orderBy,
-      tableState.searchText,
-      tableState.filters
-    )
-  }, [table.filters])
+    if (!isEmpty(table.filters) || table.searchText || !isEmpty(table.customFilters)) {
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
+      )
+    }
+  }, [table.filters, table.searchText, table.customFilters])
 
   // TODO: find a bettwer way to implement this
   // This is a hack to make the table perform query only when there is an inside compulsory filter
   useEffect(() => {
-    if (!items.length){
+    if (!items.length && !isEmpty(tableState.filters)) {
       handleRemoteData(
         tableState.page,
         tableState.rowsPerPage,
@@ -125,6 +130,15 @@ const Table = props => {
     [table.filters]
   )
 
+  const tableCustomFilters = useMemo(
+    () =>
+      Object.keys(table.customFilters).map(key => ({
+        name: key,
+        value: table.customFilters[key]?.value ?? table.customFilters[key]
+      })) || [],
+    [table.customFilters]
+  )
+
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
       page,
@@ -137,7 +151,11 @@ const Table = props => {
 
     // TODO: find a bettwer way to implement this
     // This is a hack to make the table perform query only when there is an outeside compulsory filter
-    if (hasInitialFilters && isEmpty(table.filters)) {
+    if (hasInitialFilters && isEmpty(table.filters) && isEmpty(table.customFilters)) {
+      return null
+    }
+
+    if (generalSearch?.hasGeneralSearch && !table.searchText.length) {
       return null
     }
 
@@ -160,11 +178,12 @@ const Table = props => {
             searchFields: tableActions?.searchAction?.searchFields,
             filters,
             tableFilters,
+            tableCustomFilters,
             page,
             rowsPerPage,
             order,
             orderBy,
-            hasGeneralSearch,
+            hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText
           })
         )
@@ -181,7 +200,8 @@ const Table = props => {
             searchFields: tableActions.searchAction?.searchFields,
             filters,
             tableFilters,
-            hasGeneralSearch,
+            tableCustomFilters,
+            hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText
           })
         )
@@ -189,6 +209,10 @@ const Table = props => {
       setItems(toTableRowItems(response.list, columns))
       setTotalCount(response.page.totalCount)
       setSummary(response.summary)
+
+      if (generalSearch?.noResults && table.searchText && !response.list.length) {
+        openNoGeneralSearchConfirmModal()
+      }
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${error.message}`,
@@ -206,13 +230,48 @@ const Table = props => {
 
   const handleDownload = () => {
     if (tableActions?.downloadAction) {
-      const { action } = tableActions?.downloadAction
-      download(action.url, tableState.filters)
+      const { action } = tableActions.downloadAction
+      const { searchText, filters, order, orderBy } = tableState
+
+      const url = toTableGETUrl({
+        url: action.url,
+        searchText,
+        searchFields: tableActions?.searchAction?.searchFields,
+        filters,
+        tableFilters,
+        tableCustomFilters,
+        order,
+        orderBy,
+        hasGeneralSearch: generalSearch?.hasGeneralSearch,
+        generalSearchText: table.searchText
+      })
+
+      downloadFile(url)
     }
   }
 
-  return hasGeneralSearch && !table.searchText.length ? null : (
-    <Box className={s.tableContainer}>
+  const openNoGeneralSearchConfirmModal = () => setIsNoGeneralSearchConfirmModalOpen(true)
+
+  const closeNoGeneralSearchConfirmModal = () => setIsNoGeneralSearchConfirmModalOpen(false)
+
+  const noGeneralSearchConfirm = () => {
+    closeNoGeneralSearchConfirmModal()
+
+    const param = searchParams.get('tab')
+
+    if (param) {
+      searchParams.delete('tab')
+    }
+
+    navigate(`${generalSearch.noResults.action.href}&${searchParams}`)
+  }
+
+  return (
+    <Box
+      className={cn(s.tableContainer, {
+        [s.hidden]: generalSearch?.hasGeneralSearch && !table.searchText.length
+      })}
+    >
       {tableActions?.newAction && canCreate && (
         <ModalWithForm
           {...tableActions.newAction}
@@ -228,6 +287,16 @@ const Table = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
+        />
+      )}
+      {generalSearch?.noResults && (
+        <ConfirmationModal
+          isModalOpen={isNoGeneralSearchConfirmModalOpen}
+          closeModal={closeNoGeneralSearchConfirmModal}
+          modalTitle=""
+          modalMessage={generalSearch.noResults.message}
+          buttons={generalSearch.noResults.buttons}
+          confirm={noGeneralSearchConfirm}
         />
       )}
       <GeneralTable

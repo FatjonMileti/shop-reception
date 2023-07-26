@@ -29,7 +29,7 @@ const FormItem = ({
       if (editItemValue == '' && type === 'date') {
         return null // value=undefined => current date | value=null => input left blank
       }
-      return editItemValue
+      return editItemValue || ""
     }
   }, [
     type,

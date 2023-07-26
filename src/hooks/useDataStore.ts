@@ -30,7 +30,11 @@ const useDataStore = () => {
     dispatch(DataStoreActions.setData({ [key]: data }))
   }
 
-  return { restore, storeData } as const
+  const retrieveData = (key: string) => {
+    return get(dataStore, key) || ''
+  }
+
+  return { restore, storeData, retrieveData } as const
 }
 
 export default useDataStore
