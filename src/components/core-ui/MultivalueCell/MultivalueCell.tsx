@@ -34,7 +34,7 @@ function MultivalueCell(props: MultivalueCellProps) {
           {shortDisplayText && (
             <span>
               {shortDisplayText}
-              <span className={s.moreEllipses}>...</span> +{remainingCount}
+              {!!remainingCount && <span>... + {remainingCount}</span>}
             </span>
           )}
         </span>
