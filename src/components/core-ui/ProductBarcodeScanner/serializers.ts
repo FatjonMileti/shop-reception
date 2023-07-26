@@ -1,9 +1,10 @@
 export const toProduct = product => {
-  const { name, ean, price, code, storeStock, warehouseStock } = product
+  const { name, ean, price, code, storeStock, warehouseStock, id } = product
 
   return {
     title: name,
     storeStock: {
+      id,
       price,
       currency: 'lei',
       eanCode: ean,
@@ -17,6 +18,7 @@ export const toProduct = product => {
       isWarehouse: false
     },
     warehouseStock: {
+      id,
       price,
       currency: 'lei',
       eanCode: ean,

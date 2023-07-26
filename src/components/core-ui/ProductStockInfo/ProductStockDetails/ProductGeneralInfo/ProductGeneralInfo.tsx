@@ -11,6 +11,7 @@ import s from './ProductGeneralInfo.modules.scss'
 const ProductGeneralInfo = ({
   price,
   currency,
+  id,
   eanCode,
   storeCode,
   addToCartAction,
@@ -31,7 +32,7 @@ const ProductGeneralInfo = ({
 
     try {
       if (action.type === 'POST') {
-        await makeCorePostRequest(`${action.url}`, { ean: eanCode, quantity: 1, isWarehouse, buyback: selectedBuybackOption })
+        await makeCorePostRequest(`${action.url}`, { id, quantity: 1, isWarehouse, buyback: selectedBuybackOption })
         showNotification({
           message: 'Produsul a fost adaugat in cos',
           type: 'success'

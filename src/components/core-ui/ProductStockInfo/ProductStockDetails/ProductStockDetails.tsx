@@ -1,15 +1,13 @@
-import { useNavigate } from 'react-router-dom'
 import { ProductGeneralInfo } from './ProductGeneralInfo'
 import { KeyValuePairs } from 'components/core-ui/KeyValuePairs'
 import { toProductStockKeyValuePairs } from './serializers'
 import s from './ProductStockDetails.modules.scss'
 
 const ProductStockDetails = ({ stock, infoItems, actions }) => {
-  const navigate = useNavigate()
-
   const {
     price,
     currency,
+    id,
     eanCode,
     storeCode,
     available,
@@ -29,6 +27,7 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
       <ProductGeneralInfo
         price={price}
         currency={currency}
+        id={id}
         eanCode={eanCode}
         storeCode={storeCode}
         addToCartAction={actions.addToCart}
