@@ -30,6 +30,7 @@ const Table = props => {
     generalSearch,
     isUserModal,
     hasInitialFilters,
+    extraUrlParams,
     ...rest
   } = props
 
@@ -91,11 +92,16 @@ const Table = props => {
     [tableFooter, summary]
   )
 
+  // [~] keeps track whether the internal table has called handleRemoteData (when initially setting up its own useEffect)
+  // while this false we don't run handleRemoteData from our external useEffect, to prevent it from running twice on page load
+  const [isTableLoaded, setIsTableLoaded] = useState(false)
+
   // TODO: find a bettwer way to implement this
   // This is a hack to make the table perform query only when there is an outeside compulsory filter
   useEffect(() => {
-    if (!isEmpty(table.filters) || table.searchText || !isEmpty(table.customFilters)) {
-      handleRemoteData(
+    // console.log("[Table:useEffect] isTableLoaded: ", isTableLoaded, "table.filters: ", table.filters, " | table.searchText: ", table.searchText, " | table.customFilters: ", table.customFilters, " | extraUrlParams: ", extraUrlParams)
+      if (isTableLoaded) {
+        handleRemoteData(
         tableState.page,
         tableState.rowsPerPage,
         tableState.order,
@@ -104,22 +110,7 @@ const Table = props => {
         tableState.filters
       )
     }
-  }, [table.filters, table.searchText, table.customFilters])
-
-  // TODO: find a bettwer way to implement this
-  // This is a hack to make the table perform query only when there is an inside compulsory filter
-  useEffect(() => {
-    if (!items.length && !isEmpty(tableState.filters)) {
-      handleRemoteData(
-        tableState.page,
-        tableState.rowsPerPage,
-        tableState.order,
-        tableState.orderBy,
-        tableState.searchText,
-        tableState.filters
-      )
-    }
-  }, [tableState.filters])
+  }, [table.filters, table.searchText, table.customFilters, extraUrlParams])
 
   const tableFilters = useMemo(
     () =>
@@ -140,6 +131,8 @@ const Table = props => {
   )
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
+    // console.log("[Table:handleRemoteData] called")
+
     setTableState({
       page,
       rowsPerPage,
@@ -184,7 +177,8 @@ const Table = props => {
             order,
             orderBy,
             hasGeneralSearch: generalSearch?.hasGeneralSearch,
-            generalSearchText: table.searchText
+            generalSearchText: table.searchText,
+            extraUrlParams: extraUrlParams
           })
         )
       }
@@ -202,7 +196,8 @@ const Table = props => {
             tableFilters,
             tableCustomFilters,
             hasGeneralSearch: generalSearch?.hasGeneralSearch,
-            generalSearchText: table.searchText
+            generalSearchText: table.searchText,
+            extraUrlParams: extraUrlParams
           })
         )
       }
@@ -219,6 +214,7 @@ const Table = props => {
         type: 'error'
       })
     }
+    setIsTableLoaded(true)
     setIsLoading(false)
   }
 

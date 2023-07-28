@@ -16,7 +16,7 @@ const AsyncAutocomplete = props => {
   const [options, setOptions] = React.useState<readonly AsyncAutocompleteOption[]>([])
   const loading = open && options.length === 0
 
-  const { action, width, hasDefaultFirstValue, setFilterValues, ...rest } = props
+  const { action, width, hasDefaultFirstValue, setValueForFilter, setFilterValues, ...rest } = props
 
   const { showNotification } = useNotification()
 
@@ -38,7 +38,7 @@ const AsyncAutocomplete = props => {
 
   React.useEffect(() => {
     if (hasDefaultFirstValue) {
-      getOptions(setFilterValues)
+      getOptions(setValueForFilter)
     }
   }, [])
 
@@ -63,6 +63,7 @@ const AsyncAutocomplete = props => {
       const resultOptions = toAsyncSelectOptions(result.list || result, valueKey, labelKey) || []
       setOptions(resultOptions)
       cb && cb(rest.name, resultOptions[0])
+      setFilterValues && setFilterValues(rest.name, resultOptions[0])
     } catch (error) {
       showNotification({
         message: `Error while fetching dropdown data. ${error?.message}`,
@@ -89,6 +90,7 @@ const AsyncAutocomplete = props => {
       loading={loading}
       value={props.value || (props.multiple ? [] : '')}
       onChange={(_, value) => props.onChange(value)}
+      isOptionEqualToValue={(option, value) => option.value === value.value}
     />
   )
 }

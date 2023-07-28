@@ -33,7 +33,8 @@ export const toTableGETUrl = ({
   order,
   orderBy,
   hasGeneralSearch,
-  generalSearchText
+  generalSearchText,
+  extraUrlParams
 }: {
   url: string
   searchText: string
@@ -46,11 +47,12 @@ export const toTableGETUrl = ({
   order: string
   orderBy: string
   hasGeneralSearch: boolean
-  generalSearchText: string
+  generalSearchText: string,
+  extraUrlParams?: any
 }) => {
   const tableQueryUrl = getTableQueryUrl({ page, size: rowsPerPage, order, orderBy })
   const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
-  const filtersUrl = getFiltersGetUrl(getAllFilters(filters.concat(tableFilters)))
+  const filtersUrl = getFiltersGetUrl(getAllFilters(filters.concat(tableFilters).concat(extraUrlParams ?? [])))
   const customFiltersUrl = getCustomFiltersGetUrl(getAllFilters(tableCustomFilters))
   const generalSearchUrl =
     hasGeneralSearch && generalSearchText ? `&keyword=${generalSearchText}` : ''
@@ -72,7 +74,8 @@ export const toTablePOSTPayload = ({
   tableFilters,
   tableCustomFilters,
   hasGeneralSearch,
-  generalSearchText
+  generalSearchText,
+  extraUrlParams
 }: {
   page: number
   rowsPerPage: number
@@ -84,14 +87,15 @@ export const toTablePOSTPayload = ({
   tableFilters?: Filter[]
   tableCustomFilters?: Filter[]
   hasGeneralSearch: boolean
-  generalSearchText: string
+  generalSearchText: string,
+  extraUrlParams?: any
 }) => ({
   page,
   rowsPerPage,
   order,
   orderBy,
   ...toSearchFieldsPayload(searchFields, searchText),
-  ...toArrayItemPayload(getAllFilters([...filters, ...tableFilters, ...tableCustomFilters])),
+  ...toArrayItemPayload(getAllFilters([...filters, ...tableFilters, ...tableCustomFilters, ...(extraUrlParams ?? [])])),
   ...(hasGeneralSearch && generalSearchText ? { keyword: generalSearchText } : {})
 })
 
