@@ -25,7 +25,7 @@ function FiltersWithResultsTable(props) {
   const filterValuesToUrlParams = useMemo(() => {
     // => [ { "name": "filtername2" }, { "value": "value2" } ]
     return allFiltersHaveValues ? filters.map(filter => ({ name: filter.name, value: filterValues[filter.name]?.value})) : ''
-  }, [allFiltersHaveValues])
+  }, [allFiltersHaveValues, filterValues])
 
   const setValueForFilter = (name, value, type, isCustomField) => {
     console.log("[fwrt:setValueForFilter] | name: ", name, " | value: ", value, " | type: ", type, " | isCustomField: ", isCustomField)
