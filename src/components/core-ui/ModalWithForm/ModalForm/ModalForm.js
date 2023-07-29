@@ -29,7 +29,9 @@ const ModalForm = ({
       try {
         if (formItems.some(item => item.dependencies?.conditions) && !isEmpty(editItem)) {
           const result = await start(formItems, editItem)
-          setProcessedFormItems(result.filter(item => !(item.hidden || (item.inputProps && item.inputProps.hidden))))
+          setProcessedFormItems(
+            result.filter(item => !(item.hidden || (item.inputProps && item.inputProps.hidden)))
+          )
         }
         const itemsWithScript = formItems.filter(item => item.dependencies?.script)
         itemsWithScript.forEach(item => Function(item.dependencies.script)())
@@ -45,12 +47,13 @@ const ModalForm = ({
   return (
     <form>
       <Grid container spacing={4}>
-        {modalTitle && modalTitle.length > 0 &&
-        <Grid item xs={12}>
-          <Typography component="h2" variant="medium">
-            <span className={s.modalTitle}>{modalTitle}</span>
-          </Typography>
-        </Grid>}
+        {modalTitle && modalTitle.length > 0 && (
+          <Grid item xs={12}>
+            <Typography component="h2" variant="medium">
+              <span className={s.modalTitle}>{modalTitle}</span>
+            </Typography>
+          </Grid>
+        )}
         {!!formInfoItems?.length && (
           <Grid item xs={12} md={12}>
             <ModalInfo formInfoItems={formInfoItems} editItem={editItem} />

@@ -8,6 +8,7 @@ import { makeCorePostRequest } from 'utils/api'
 import { ProductBarcodeScannerProps } from '../ProductBarcodeScanner/ProductBarcodeScannerDefinitions'
 import s from '../ProductBarcodeScanner/ProductBarcodeScanner.modules.scss'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { isScannerDevice } from 'utils/helpers'
 
 const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
@@ -45,7 +46,9 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             })
             if (action.href) {
               await destroy()
-              navigate(`${action.href}?${action.variable}=${code}&clientId=${searchParams.get('clientId')}`)
+              navigate(
+                `${action.href}?${action.variable}=${code}&clientId=${searchParams.get('clientId')}`
+              )
             }
           } catch (error) {
             showNotification({
@@ -85,12 +88,14 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           />
         </div>
         <div className={s.buttonContainer}>
-          <IconButton
-            onClick={scanCode}
-            label="Scaneaza"
-            variant="outlined"
-            startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
-          />
+          {!isScannerDevice() && (
+            <IconButton
+              onClick={scanCode}
+              label="Scaneaza"
+              variant="outlined"
+              startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
+            />
+          )}
           <IconButton
             onClick={sendReceipt}
             label="Continua"

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { Add, Remove, FileDownloadOutlined, PrintOutlined } from '@mui/icons-material'
-import { makeCoreGetRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { downloadFile } from 'utils/helpers'
 import s from './PdfActions.modules.scss'
@@ -17,8 +17,7 @@ const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
 
   const download = () => {
     try {
-      // downloadFile(`${actions.downloadAction.url}/${id}`)
-      downloadFile(`/proformaPDF/${id}`)
+      downloadFile(`${actions.downloadAction.url}/${id}`)
     } catch (error) {
       showNotification({
         message: `A aparut o eroare la descarcarea fisierului. ${error?.message}`,
@@ -29,7 +28,17 @@ const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
 
   const print = async () => {
     try {
-      await makeCoreGetRequest(`${actions.printAction.url}/${id}`)
+      if (actions.printAction.type === 'GET') {
+        await makeCoreGetRequest(`${actions.printAction.url}/${id}`)
+      }
+      if (actions.printAction.type === 'POST') {
+        await makeCorePostRequest(`${actions.printAction.url}/${id}`)
+      }
+
+      showNotification({
+        message: 'Fisierul a fost printat cu succes',
+        type: 'success'
+      })
     } catch (error) {
       showNotification({
         message: `A aparut o eroare la printarea fisierului. ${error?.message}`,
