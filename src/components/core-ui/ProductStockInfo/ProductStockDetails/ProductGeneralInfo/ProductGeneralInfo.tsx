@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Divider, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
-import { makeCorePostRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { ProductActions } from 'reducers/productSlice'
 import s from './ProductGeneralInfo.modules.scss'
@@ -19,20 +19,44 @@ const ProductGeneralInfo = ({
   hasBuyback,
   buybackOptions
 }) => {
+  const [selectedBuybackOption, setSelectedBuybackOption] = React.useState(
+    (hasBuyback && buybackOptions[0].value) || ''
+  )
+  const [displayAddToCartBtn, setDisplayAddToCartBtn] = React.useState(false)
+
+  const { action, checkAction } = addToCartAction
+
   const navigate = useNavigate()
 
   const { showNotification } = useNotification()
 
   const dispatch = useDispatch()
 
-  const [selectedBuybackOption, setSelectedBuybackOption] = React.useState(hasBuyback && buybackOptions[0].value || '')
+  React.useEffect(() => {
+    ;(async () => {
+      try {
+        const result = await makeCoreGetRequest(
+          `${checkAction.url}?${checkAction.variable}=${isWarehouse}`
+        )
+        setDisplayAddToCartBtn(result.cartHasProductsFromWarehouse)
+      } catch (error) {
+        showNotification({
+          message: `A aparut o eroarea la afisarea butonului de "Adauga in cos". ${error.message}`,
+          type: 'error'
+        })
+      }
+    })()
+  }, [isWarehouse])
 
   const addToCart = async () => {
-    const { action } = addToCartAction
-
     try {
       if (action.type === 'POST') {
-        await makeCorePostRequest(`${action.url}`, { id, quantity: 1, isWarehouse, buyback: selectedBuybackOption })
+        await makeCorePostRequest(`${action.url}`, {
+          id,
+          quantity: 1,
+          isWarehouse,
+          buyback: selectedBuybackOption
+        })
         showNotification({
           message: 'Produsul a fost adaugat in cos',
           type: 'success'
@@ -54,27 +78,31 @@ const ProductGeneralInfo = ({
         <div className={s.price}>
           {price}&nbsp;{currency}
         </div>
-        <IconButton
-          onClick={addToCart}
-          label="Adauga in cos"
-          variant="contained"
-          endIcon={<Icon iconName="AddCircle" tiny={true} fill="white" />}
-        />
+        {displayAddToCartBtn && (
+          <IconButton
+            onClick={addToCart}
+            label="Adauga in cos"
+            variant="contained"
+            endIcon={<Icon iconName="AddCircle" tiny={true} fill="white" />}
+          />
+        )}
       </div>
       <Divider component="div" />
-      {hasBuyback && <div className={s.infoContainer} style={{ justifyContent: 'flex-end' }}>
-        <Input 
-          type='select'
-          name='buyback-input'
-          label='Mod achizitie'
-          values={buybackOptions}
-          value={selectedBuybackOption}
-          variant='standard'
-          width='320px'
-          onChange={event => setSelectedBuybackOption((event.target as any).value)}
-          disabled={buybackOptions.length == 1}
-        />
-      </div>}
+      {hasBuyback && (
+        <div className={s.infoContainer} style={{ justifyContent: 'flex-end' }}>
+          <Input
+            type="select"
+            name="buyback-input"
+            label="Mod achizitie"
+            values={buybackOptions}
+            value={selectedBuybackOption}
+            variant="standard"
+            width="320px"
+            onChange={event => setSelectedBuybackOption((event.target as any).value)}
+            disabled={buybackOptions.length == 1}
+          />
+        </div>
+      )}
       {hasBuyback && <Divider component="div" />}
       <div className={s.infoContainer}>
         <span className={s.firstCode}>

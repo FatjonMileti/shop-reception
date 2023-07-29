@@ -732,7 +732,7 @@
       "responses": [
         {
           "uuid": "e46b1ce3-1b29-4f8d-89f4-2f9c66bbbffd",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"3614613092689\",\n      \"ean\": \"3614613092689\",\n      \"code\": \"44501286\",\n      \"name\": \"Frigider ARCTIC Eco-X7\",\n      \"brand\": \"ARCTIC\",\n      \"price\": 3269.97,\n      \"quantity\": 3,\n      \"vat\": {{faker 'datatype.number'}}\n    },{\n      \"id\": \"3614613092681\",\n      \"ean\": \"3614613092689\",\n      \"code\": \"44501286\",\n      \"name\": \"Frigider ARCTIC Eco-X7\",\n      \"brand\": \"ARCTIC\",\n      \"price\": 969.99,\n      \"quantity\": 1,\n      \"vat\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"Discount achizitie pt Buyback intern:  -120 LEI\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"totalItems\": {{faker 'datatype.number'}},\n    \"totalPrice\": {{faker 'datatype.float'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"44501286\",\n      \"ean\": \"3614613092689\",\n      \"code\": \"44501286\",\n      \"name\": \"Frigider ARCTIC Eco-X7\",\n      \"brand\": \"ARCTIC\",\n      \"price\": 3269.97,\n      \"quantity\": 3,\n      \"vat\": {{faker 'datatype.number'}}\n    },{\n      \"id\": \"44501286\",\n      \"ean\": \"3614613092689\",\n      \"code\": \"44501286\",\n      \"name\": \"Frigider ARCTIC Eco-X7\",\n      \"brand\": \"ARCTIC\",\n      \"price\": 969.99,\n      \"quantity\": 1,\n      \"vat\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"Discount achizitie pt Buyback intern:  -120 LEI\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"totalItems\": {{faker 'datatype.number'}},\n    \"totalPrice\": {{faker 'datatype.float'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of products from shopping cart with pagination, sorting and filtering",
@@ -4877,6 +4877,34 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "1301c923-e977-4320-9be1-2df207c7b55f",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "cart/product/check",
+      "responses": [
+        {
+          "uuid": "708e656b-bac4-4a6f-883b-10416f143108",
+          "body": "{\n  \"cartHasProductsFromWarehouse\": false\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5015,6 +5043,10 @@
     {
       "type": "route",
       "uuid": "1278af4b-d5f4-40c7-8608-6df106f4c4be"
+    },
+    {
+      "type": "route",
+      "uuid": "1301c923-e977-4320-9be1-2df207c7b55f"
     }
   ],
   "proxyMode": false,
