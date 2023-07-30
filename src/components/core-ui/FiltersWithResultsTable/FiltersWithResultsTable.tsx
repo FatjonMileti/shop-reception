@@ -1,63 +1,96 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Box, Grid, Paper } from '@mui/material'
-import { TableActions } from 'reducers/tableSlice'
+import { useMemo, useState } from 'react'
+import { Grid, Paper } from '@mui/material'
 import { renderComponent } from 'utils/dynamicRenderingService'
-import { RootState } from 'configureStore'
-import { formatPayloadDate, getDefaultItemValue } from 'utils/helpers'
 import s from './FiltersWithResultsTable.modules.scss'
+import { getDefaultItemValue } from 'utils/helpers'
 
 function FiltersWithResultsTable(props) {
-  console.log("[fwrt] props: ", props)
-
   const { filters, table } = props
 
-  const [filterValues, setFilterValues] = useState(Object.assign({}, ...filters.map(filter => ({[filter.name]: null}))))
-  // filterValues => { "filtername1": null, "filtername2": { value: "value2", label: "label2" } }
-  //                 { "teamMember.domain": { value: "Digital Platforms", label: "Digital Platforms" } }
-  // console.log("[fwrt] filterValues2: ", filterValues)
+  const filterByFilters = useMemo(() => filters.filter(filter => !filter.isCustomField), [filters])
+  const customFilterByFilters = useMemo(
+    () => filters.filter(filter => filter.isCustomField),
+    [filters]
+  )
+
+  const [filterValues, setFilterValues] = useState(
+    Object.assign(
+      {},
+      ...filterByFilters.map(filter => ({
+        [filter.name]: filter.defaultValue
+          ? { value: getDefaultItemValue(filter.defaultValue) }
+          : null
+      }))
+    )
+  )
+  const [customFilterValues, setCustomFilterValues] = useState(
+    Object.assign(
+      {},
+      ...customFilterByFilters.map(filter => ({
+        [filter.name]: filter.defaultValue
+          ? { value: getDefaultItemValue(filter.defaultValue) }
+          : null
+      }))
+    )
+  )
 
   const allFiltersHaveValues = useMemo(() => {
-    return Object.values(filterValues).includes(null) == false
-  }, [filterValues])
-  // console.log("[fwrt] allFiltersHaveValues: ", allFiltersHaveValues)
+    return (
+      Object.values(filterValues).includes(null) === false &&
+      Object.values(customFilterValues).includes(null) === false
+    )
+  }, [filterValues, customFilterValues])
 
   const filterValuesToUrlParams = useMemo(() => {
-    // => [ { "name": "filtername2" }, { "value": "value2" } ]
-    return allFiltersHaveValues ? filters.map(filter => ({ name: filter.name, value: filterValues[filter.name]?.value})) : ''
+    return allFiltersHaveValues
+      ? filterByFilters.map(filter => ({
+          name: filter.name,
+          value: filterValues[filter.name]?.value
+        }))
+      : ''
   }, [allFiltersHaveValues, filterValues])
 
+  const customFilterValuesToUrlParams = useMemo(() => {
+    return allFiltersHaveValues
+      ? customFilterByFilters.map(filter => ({
+          name: filter.name,
+          value: customFilterValues[filter.name]?.value
+        }))
+      : ''
+  }, [allFiltersHaveValues, customFilterValues])
+
   const setValueForFilter = (name, value, type, isCustomField) => {
-    console.log("[fwrt:setValueForFilter] | name: ", name, " | value: ", value, " | type: ", type, " | isCustomField: ", isCustomField)
-    setFilterValues({...filterValues, [name]: value})
+    if (isCustomField) {
+      setCustomFilterValues({ ...customFilterValues, [name]: value })
+    } else {
+      setFilterValues({ ...filterValues, [name]: value })
+    }
   }
+
+  console.log(customFilterValues)
 
   return (
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         {filters.map(filter => {
-
           const { name, label, isCustomField, defaultValue, type } = filter
-          // const filterValue = isCustomField ? customFilterState[name] : filterState[name]
-
-          console.log("[fwrt:return:map] filter: ", filter)
-          console.log("[fwrt:return:map] name: ", name, " | label: ", label, " | isCustomField: ", isCustomField, " | defaultValue: ", defaultValue, " | type: ", type)
-          // console.log("[fwrt:return:map] filterValue: ", filterValue)
+          const filterValue = isCustomField
+            ? customFilterValues[filter.name]
+            : filterValues[filter.name]
 
           return (
             <Grid key={name} xs={12} md={3} item>
               {renderComponent({
                 ...filter,
-                value: filterValues[filter.name],
-                // ...(type === 'checkbox'
-                //   ? {
-                //       checked: filterValue ?? getDefaultItemValue(defaultValue)
-                //     }
-                //   : {}),
+                value: filterValue,
+                ...(type === 'checkbox'
+                  ? {
+                      checked: filterValue.value ?? getDefaultItemValue(defaultValue)
+                    }
+                  : {}),
                 label: label,
                 onChange: arg => {
                   const { type, name } = filter
-                  console.log("[fwrt:filter:onchange] arg: ", arg, " | arg.target.name: ", arg.target?.name, " | arg.target.value: ", arg.target?.value, " | type: ", type, " | name: ", name)
                   switch (type) {
                     // case 'date':
                     //   setFilterValues(name, arg, type, isCustomField)
@@ -65,9 +98,9 @@ function FiltersWithResultsTable(props) {
                     case 'autocomplete':
                       setValueForFilter(name, arg, type, isCustomField)
                       break
-                    // case 'checkbox':
-                    //   setFilterValues(name, arg.target.checked, type, isCustomField)
-                    //   break
+                    case 'checkbox':
+                      setValueForFilter(name, { value: arg.target.checked }, type, isCustomField)
+                      break
                     default:
                       setValueForFilter(arg.target.name, arg.target.value, type, isCustomField)
                       break
@@ -77,12 +110,15 @@ function FiltersWithResultsTable(props) {
               })}
             </Grid>
           )
-
         })}
       </Paper>
-      
-      {allFiltersHaveValues && renderComponent({...table, extraUrlParams: filterValuesToUrlParams})}
 
+      {allFiltersHaveValues &&
+        renderComponent({
+          ...table,
+          extraUrlParams: filterValuesToUrlParams,
+          extraCustomUrlParams: customFilterValuesToUrlParams
+        })}
     </div>
   )
 }

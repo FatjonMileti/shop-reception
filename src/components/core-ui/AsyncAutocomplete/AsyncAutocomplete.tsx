@@ -1,10 +1,8 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from './serializers'
 import { useNotification } from 'hooks'
-import { RootState } from 'configureStore'
 
 interface AsyncAutocompleteOption {
   value: string | number
@@ -16,11 +14,17 @@ const AsyncAutocomplete = props => {
   const [options, setOptions] = React.useState<readonly AsyncAutocompleteOption[]>([])
   const loading = open && options.length === 0
 
-  const { action, width, hasDefaultFirstValue, setValueForFilter, setFilterValues, ...rest } = props
+  const {
+    action,
+    width,
+    hasDefaultFirstValue,
+    setValueForFilter,
+    setFilterValues,
+    extraUrlParams,
+    ...rest
+  } = props
 
   const { showNotification } = useNotification()
-
-  const filterState = useSelector((state: RootState) => state.table.filters)
 
   React.useEffect(() => {
     let active = true
@@ -54,7 +58,7 @@ const AsyncAutocomplete = props => {
 
       if (action.filterQueryKey && action.localQueryKey) {
         url = `${url}?page=-1&filterBy=${action.filterQueryKey}&filterValue=${
-          filterState[action.localQueryKey]?.value
+          extraUrlParams.find(param => param.name === action.localQueryKey)?.value
         }`
       }
       const result = await makeCoreGetRequest(url)

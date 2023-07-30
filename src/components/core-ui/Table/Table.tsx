@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
@@ -14,10 +14,8 @@ import { toTableRowItems } from 'utils/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
-import { isEmpty } from 'lodash'
 import { ConfirmationModal } from 'components/core-ui/ConfirmationModal'
 import cn from 'classnames'
-import { TableActions as ReducerTableActions} from 'reducers/tableSlice'
 import { downloadFile } from 'utils/helpers'
 
 const Table = props => {
@@ -31,6 +29,7 @@ const Table = props => {
     isUserModal,
     hasInitialFilters,
     extraUrlParams,
+    extraCustomUrlParams,
     ...rest
   } = props
 
@@ -57,8 +56,6 @@ const Table = props => {
   const { showNotification } = useNotification()
 
   const navigate = useNavigate()
-
-  const dispatch = useDispatch()
 
   const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
@@ -96,12 +93,9 @@ const Table = props => {
   // while this false we don't run handleRemoteData from our external useEffect, to prevent it from running twice on page load
   const [isTableLoaded, setIsTableLoaded] = useState(false)
 
-  // TODO: find a bettwer way to implement this
-  // This is a hack to make the table perform query only when there is an outeside compulsory filter
   useEffect(() => {
-    // console.log("[Table:useEffect] isTableLoaded: ", isTableLoaded, "table.filters: ", table.filters, " | table.searchText: ", table.searchText, " | table.customFilters: ", table.customFilters, " | extraUrlParams: ", extraUrlParams)
-      if (isTableLoaded) {
-        handleRemoteData(
+    if (isTableLoaded) {
+      handleRemoteData(
         tableState.page,
         tableState.rowsPerPage,
         tableState.order,
@@ -110,7 +104,20 @@ const Table = props => {
         tableState.filters
       )
     }
-  }, [table.filters, table.searchText, table.customFilters, extraUrlParams])
+  }, [extraUrlParams, extraCustomUrlParams])
+
+  useEffect(() => {
+    if (table.searchText) {
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
+      )
+    }
+  }, [table.searchText])
 
   const tableFilters = useMemo(
     () =>
@@ -121,18 +128,7 @@ const Table = props => {
     [table.filters]
   )
 
-  const tableCustomFilters = useMemo(
-    () =>
-      Object.keys(table.customFilters).map(key => ({
-        name: key,
-        value: table.customFilters[key]?.value ?? table.customFilters[key]
-      })) || [],
-    [table.customFilters]
-  )
-
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
-    // console.log("[Table:handleRemoteData] called")
-
     setTableState({
       page,
       rowsPerPage,
@@ -141,12 +137,6 @@ const Table = props => {
       searchText,
       filters
     })
-
-    // TODO: find a bettwer way to implement this
-    // This is a hack to make the table perform query only when there is an outeside compulsory filter
-    if (hasInitialFilters && isEmpty(table.filters) && isEmpty(table.customFilters)) {
-      return null
-    }
 
     if (generalSearch?.hasGeneralSearch && !table.searchText.length) {
       return null
@@ -171,14 +161,14 @@ const Table = props => {
             searchFields: tableActions?.searchAction?.searchFields,
             filters,
             tableFilters,
-            tableCustomFilters,
             page,
             rowsPerPage,
             order,
             orderBy,
             hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText,
-            extraUrlParams: extraUrlParams
+            extraUrlParams,
+            extraCustomUrlParams
           })
         )
       }
@@ -194,10 +184,10 @@ const Table = props => {
             searchFields: tableActions.searchAction?.searchFields,
             filters,
             tableFilters,
-            tableCustomFilters,
             hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText,
-            extraUrlParams: extraUrlParams
+            extraUrlParams,
+            extraCustomUrlParams
           })
         )
       }
@@ -235,7 +225,6 @@ const Table = props => {
         searchFields: tableActions?.searchAction?.searchFields,
         filters,
         tableFilters,
-        tableCustomFilters,
         order,
         orderBy,
         hasGeneralSearch: generalSearch?.hasGeneralSearch,
@@ -283,6 +272,7 @@ const Table = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
+          extraUrlParams={extraUrlParams}
         />
       )}
       {generalSearch?.noResults && (

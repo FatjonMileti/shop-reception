@@ -18,7 +18,8 @@ const ModalForm = ({
   editItem,
   formButtons,
   saveData,
-  closeModal
+  closeModal,
+  extraUrlParams = {}
 }) => {
   const [processedFormItems, setProcessedFormItems] = useState(formItems)
 
@@ -73,6 +74,7 @@ const ModalForm = ({
               rest={rest}
               handleInputChange={handleInputChange}
               gridSize={gridSize}
+              extraUrlParams={extraUrlParams}
             />
           )
         })}
