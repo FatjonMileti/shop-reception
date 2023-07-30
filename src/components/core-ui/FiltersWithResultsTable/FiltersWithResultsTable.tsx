@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Grid, Paper } from '@mui/material'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import s from './FiltersWithResultsTable.modules.scss'
-import { getDefaultItemValue } from 'utils/helpers'
+import { formatPayloadDate, getDefaultItemValue } from 'utils/helpers'
 
 function FiltersWithResultsTable(props) {
   const { filters, table } = props
@@ -61,56 +61,64 @@ function FiltersWithResultsTable(props) {
 
   const setValueForFilter = (name, value, type, isCustomField) => {
     if (isCustomField) {
-      setCustomFilterValues({ ...customFilterValues, [name]: value })
+      setCustomFilterValues({
+        ...customFilterValues,
+        [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value
+      })
     } else {
-      setFilterValues({ ...filterValues, [name]: value })
+      setFilterValues({
+        ...filterValues,
+        [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value
+      })
     }
   }
 
-  console.log(customFilterValues)
+  console.log(filterValues)
 
   return (
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
-        {filters.map(filter => {
-          const { name, label, isCustomField, defaultValue, type } = filter
-          const filterValue = isCustomField
-            ? customFilterValues[filter.name]
-            : filterValues[filter.name]
+        <Grid container spacing={4}>
+          {filters.map(filter => {
+            const { name, label, isCustomField, defaultValue, type } = filter
+            const filterValue = isCustomField
+              ? customFilterValues[filter.name]
+              : filterValues[filter.name]
 
-          return (
-            <Grid key={name} xs={12} md={3} item>
-              {renderComponent({
-                ...filter,
-                value: filterValue,
-                ...(type === 'checkbox'
-                  ? {
-                      checked: filterValue.value ?? getDefaultItemValue(defaultValue)
+            return (
+              <Grid key={name} xs={12} md={3} item>
+                {renderComponent({
+                  ...filter,
+                  value: type === 'date' ? filterValue.value : filterValue,
+                  ...(type === 'checkbox'
+                    ? {
+                        checked: filterValue.value ?? getDefaultItemValue(defaultValue)
+                      }
+                    : {}),
+                  label: label,
+                  onChange: arg => {
+                    const { type, name } = filter
+                    switch (type) {
+                      case 'date':
+                        setValueForFilter(name, { value: arg }, type, isCustomField)
+                        break
+                      case 'autocomplete':
+                        setValueForFilter(name, arg, type, isCustomField)
+                        break
+                      case 'checkbox':
+                        setValueForFilter(name, { value: arg.target.checked }, type, isCustomField)
+                        break
+                      default:
+                        setValueForFilter(arg.target.name, arg.target.value, type, isCustomField)
+                        break
                     }
-                  : {}),
-                label: label,
-                onChange: arg => {
-                  const { type, name } = filter
-                  switch (type) {
-                    // case 'date':
-                    //   setFilterValues(name, arg, type, isCustomField)
-                    //   break
-                    case 'autocomplete':
-                      setValueForFilter(name, arg, type, isCustomField)
-                      break
-                    case 'checkbox':
-                      setValueForFilter(name, { value: arg.target.checked }, type, isCustomField)
-                      break
-                    default:
-                      setValueForFilter(arg.target.name, arg.target.value, type, isCustomField)
-                      break
-                  }
-                },
-                setValueForFilter
-              })}
-            </Grid>
-          )
-        })}
+                  },
+                  setValueForFilter
+                })}
+              </Grid>
+            )
+          })}
+        </Grid>
       </Paper>
 
       {allFiltersHaveValues &&
