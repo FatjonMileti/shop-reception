@@ -3,6 +3,7 @@ import { Grid, Paper } from '@mui/material'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import s from './FiltersWithResultsTable.modules.scss'
 import { formatPayloadDate, getDefaultItemValue } from 'utils/helpers'
+import { hasNullFilters } from './helpers'
 
 function FiltersWithResultsTable(props) {
   const { filters, table } = props
@@ -34,12 +35,12 @@ function FiltersWithResultsTable(props) {
     )
   )
 
-  const allFiltersHaveValues = useMemo(() => {
-    return (
-      Object.values(filterValues).includes(null) === false &&
-      Object.values(customFilterValues).includes(null) === false
-    )
-  }, [filterValues, customFilterValues])
+  const allFiltersHaveValues = useMemo(
+    () =>
+      !hasNullFilters(filterByFilters, filterValues) &&
+      !hasNullFilters(customFilterByFilters, customFilterValues),
+    [filterValues, customFilterValues]
+  )
 
   const filterValuesToUrlParams = useMemo(() => {
     return allFiltersHaveValues
@@ -72,8 +73,6 @@ function FiltersWithResultsTable(props) {
       })
     }
   }
-
-  console.log(filterValues)
 
   return (
     <div className={s.mainContainer}>
