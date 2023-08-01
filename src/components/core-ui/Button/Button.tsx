@@ -2,19 +2,38 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button as GeneralButton, IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { ButtonProps } from './ButtonDefinitions'
 import { Icon } from '../Icon'
+import { makeCorePostRequest } from 'utils/api'
+import { useNotification } from 'hooks'
 
 const Button = (props: ButtonProps) => {
-  const { onClick, href, startIcon, endIcon, variable, idSearchParam, ...rest } = props
+  const { onClick, href, action, startIcon, endIcon, variable, idSearchParam, ...rest } = props
 
   const navigate = useNavigate()
 
   const [searchParams] = useSearchParams()
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const { showNotification } = useNotification()
+
+  const handleClick = async (event: React.MouseEvent<HTMLElement>) => {
+    if (action) {
+      const { url, type } = action
+      try {
+        if (type === 'POST') {
+          await makeCorePostRequest(url)
+        }
+      } catch (error) {
+        showNotification({
+          message: `${action.errorMessage ?? ''} ${error?.message}`,
+          type: 'error'
+        })
+      }
+    }
+
     if (href) {
       const href2 = idSearchParam ? `${href}/${searchParams.get(idSearchParam)}` : href
       navigate(variable ? `${href2}?${variable}=${searchParams.get(variable)}` : href2)
     }
+
     props.onClick && props.onClick(event)
   }
 

@@ -1,0 +1,19 @@
+.mainContainer {
+  margin: 24px;
+
+  // background: green!important;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+
+  & > div {
+    margin: 0;
+  }
+}
+
+.filtersContainer {
+  padding: 16px;
+
+  // background: lightcoral!important;
+}

@@ -27,31 +27,37 @@ export const toTableGETUrl = ({
   searchFields,
   filters,
   tableFilters,
-  tableCustomFilters,
   page,
   rowsPerPage,
   order,
   orderBy,
   hasGeneralSearch,
-  generalSearchText
+  generalSearchText,
+  extraUrlParams,
+  extraCustomUrlParams
 }: {
   url: string
   searchText: string
   searchFields: string[]
   filters: Filter[]
   tableFilters?: Filter[]
-  tableCustomFilters?: Filter[]
   page?: number
   rowsPerPage?: number
   order: string
   orderBy: string
   hasGeneralSearch: boolean
   generalSearchText: string
+  extraUrlParams?: Filter[]
+  extraCustomUrlParams?: Filter[]
 }) => {
   const tableQueryUrl = getTableQueryUrl({ page, size: rowsPerPage, order, orderBy })
   const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
-  const filtersUrl = getFiltersGetUrl(getAllFilters(filters.concat(tableFilters)))
-  const customFiltersUrl = getCustomFiltersGetUrl(getAllFilters(tableCustomFilters))
+  const filtersUrl = getFiltersGetUrl(
+    getAllFilters(filters.concat(tableFilters).concat(extraUrlParams ?? []))
+  )
+  const customFiltersUrl = extraCustomUrlParams
+    ? getCustomFiltersGetUrl(getAllFilters(extraCustomUrlParams))
+    : ''
   const generalSearchUrl =
     hasGeneralSearch && generalSearchText ? `&keyword=${generalSearchText}` : ''
 
@@ -70,9 +76,10 @@ export const toTablePOSTPayload = ({
   searchFields,
   filters,
   tableFilters,
-  tableCustomFilters,
   hasGeneralSearch,
-  generalSearchText
+  generalSearchText,
+  extraUrlParams,
+  extraCustomUrlParams
 }: {
   page: number
   rowsPerPage: number
@@ -82,16 +89,24 @@ export const toTablePOSTPayload = ({
   searchFields: string[]
   filters: Filter[]
   tableFilters?: Filter[]
-  tableCustomFilters?: Filter[]
   hasGeneralSearch: boolean
   generalSearchText: string
+  extraUrlParams?: Filter[]
+  extraCustomUrlParams?: Filter[]
 }) => ({
   page,
   rowsPerPage,
   order,
   orderBy,
   ...toSearchFieldsPayload(searchFields, searchText),
-  ...toArrayItemPayload(getAllFilters([...filters, ...tableFilters, ...tableCustomFilters])),
+  ...toArrayItemPayload(
+    getAllFilters([
+      ...filters,
+      ...tableFilters,
+      ...(extraUrlParams ?? []),
+      ...(extraCustomUrlParams ?? [])
+    ])
+  ),
   ...(hasGeneralSearch && generalSearchText ? { keyword: generalSearchText } : {})
 })
 

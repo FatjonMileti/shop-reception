@@ -45,7 +45,8 @@ const ModalWithForm = ({
   additionalAction,
   isModalOpen,
   closeModal,
-  href
+  href,
+  extraUrlParams
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer({})
@@ -200,6 +201,7 @@ const ModalWithForm = ({
               formButtons={formButtons}
               saveData={saveFn}
               closeModal={closeModalAndResetForm}
+              extraUrlParams={extraUrlParams}
             />
           </div>
         )}

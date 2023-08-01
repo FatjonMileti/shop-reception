@@ -39,10 +39,12 @@ export const getDefaultItemValue = value => {
 export const getItemDefaults = formItems => {
   let result = {}
 
-  formItems.forEach(item => {
-    result[item.name] = item.defaultValue ? getDefaultItemValue(item.defaultValue) : ''
-    result[item.name] = item.value ? getDefaultItemValue(item.value) : ''
-  })
+  formItems
+    .filter(item => item.name)
+    .map(item => {
+      result[item.name] = item.defaultValue ? getDefaultItemValue(item.defaultValue) : ''
+      result[item.name] = item.value ? getDefaultItemValue(item.value) : ''
+    })
 
   return result
 }
@@ -73,3 +75,9 @@ export const downloadFile = url => {
 }
 
 export const delay = ms => new Promise(res => setTimeout(res, ms))
+
+export const isScannerDevice = () => {
+  const devices = ['DT50', 'EF50'] // [urovo, bluebird]
+  const { userAgent } = window.navigator
+  return devices.some(device => userAgent.includes(device))
+}

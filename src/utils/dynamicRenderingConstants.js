@@ -27,6 +27,7 @@ import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
 import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
 import { ShoppingCart } from 'components/core-ui/ShoppingCart'
 import { Table } from 'components/core-ui/Table'
+import { FiltersWithResultsTable } from 'components/core-ui/FiltersWithResultsTable'
 import { MultivalueCell } from 'components/core-ui/MultivalueCell'
 import { IconCell } from 'components/core-ui/IconCell'
 import { TableSearch } from 'components/core-ui/TableSearch'
@@ -78,6 +79,7 @@ export const Components = {
   SimpleKeyValuePairs,
   ShoppingCart,
   Table,
+  FiltersWithResultsTable,
   TableSearch,
   Tabs,
   TitleText,
