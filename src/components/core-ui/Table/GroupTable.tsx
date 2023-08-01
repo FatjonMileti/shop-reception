@@ -159,6 +159,7 @@ const GroupTable = props => {
           })
         )
       }
+
       const newColumns = createDynamicColumns(columns, response.list)
       setDynamicColumns(newColumns)
       setItems(toTableRowItems(response.list, newColumns))
@@ -174,18 +175,23 @@ const GroupTable = props => {
   }
 
   const createDynamicColumns = (initialColumns, data) => {
-    const staticColumns = initialColumns.slice().filter(col => !col.isDynamic)
-    const groupColumns = initialColumns.slice().filter(col => col.isGroup)
+    if(!data.length){
+      return initialColumns
+    }
 
-    const newColumns = data[0]?.groups.flatMap((group, index) =>
+    const staticColumns = initialColumns.slice()?.filter(col => !col.isDynamic)
+    const groupColumns = initialColumns.slice()?.filter(col => col.isGroup)
+
+    const newColumns = data[0]?.productSlotsSalesDto.flatMap((group, index) =>
       groupColumns.map(column => {
         const { field, title } = column
         return {
           ...column,
           sticky: false,
           collapsible: true,
-          title: `${group.name} ${title}`,
-          field: `groups.[${index}].values.${field}`
+          minWidth: "200px",
+          title: `${group.start} - ${group.end} ${title}`,
+          field: `productSlotsSalesDto.[${index}].${field}`
         }
       })
     )

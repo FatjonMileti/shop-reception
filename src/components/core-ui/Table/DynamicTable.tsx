@@ -17,6 +17,10 @@ const DynamicTable = props => {
     return columns.reduce(
       (result, col, index) => {
         if (col.isDynamic) {
+          if(!Object.keys(filters).length){
+            return columns
+          }
+
           const { filterDep } = col
           const [startDate, endDate] = filterDep.name
 
