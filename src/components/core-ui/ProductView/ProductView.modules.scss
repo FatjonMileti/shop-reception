@@ -1,0 +1,46 @@
+.content {
+  padding-top: 82px;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  max-width: 706px;
+
+  .title {
+    color: #000;
+    font-family: Ubuntu;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 184.615% */
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  .body {
+    color: #000;
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.4px;
+  }
+}
+
+.productTab {
+  color: #121212 !important;
+  height: 40rem;
+
+  margin: 0 24px;
+  @media (max-width: 624px) {
+    margin: 0 12px;
+  }
+}

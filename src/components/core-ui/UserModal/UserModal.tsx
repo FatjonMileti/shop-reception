@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
-import { Button, IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { ModalInfo } from '../ModalWithForm/ModalForm/ModalInfo'
 import { useNotification } from 'hooks'
 import s from './UserModal.modules.scss'
@@ -37,7 +37,7 @@ const infoItems = [
 ]
 
 function UserModal(props) {
-  const { isModalOpen, closeModal, editedItemId } = props
+  const { isModalOpen, closeModal, editedItemId, formItems } = props
   const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer(null)
   const [roles, setRoles] = useState([])
@@ -207,6 +207,26 @@ function UserModal(props) {
                       />
                     )
                   })}
+                  <Input
+                    onChange={(e: any) =>
+                      setEditItem(prevState => ({ ...prevState, isEnable: e.target.value }))
+                    }
+                    type="select"
+                    name="isEnable"
+                    variant="standard"
+                    width="45%"
+                    label="Status"
+                    values={[
+                      {
+                        value: 'true',
+                        label: 'Activ'
+                      },
+                      {
+                        value: 'false',
+                        label: 'Inactiv'
+                      }
+                    ]}
+                  />
                 </Grid>
                 <Grid item xs={12} sm={12} className={s.modalButtons}>
                   <Button label="Cancel" variant="outlined" onClick={closeModal} />

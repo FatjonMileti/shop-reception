@@ -38,6 +38,7 @@ import { FileUpload } from 'components/core-ui/FileUpload'
 import DynamicTable from 'components/core-ui/Table/DynamicTable'
 import GroupTable from 'components/core-ui/Table/GroupTable'
 import { ImageCell } from 'components/core-ui/ImageCell'
+import { ProductView } from 'components/core-ui/ProductView'
 
 export const Components = {
   // MUI components
@@ -86,5 +87,6 @@ export const Components = {
   FileUpload,
   DynamicTable,
   GroupTable,
-  ImageCell
+  ImageCell,
+  ProductView
 }
