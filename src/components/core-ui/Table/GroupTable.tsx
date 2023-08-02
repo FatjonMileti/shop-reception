@@ -54,12 +54,13 @@ const GroupTable = props => {
 
   const { showNotification } = useNotification()
 
-  const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({
+  const { canCreate, canView, canEdit, canDelete, canCancel, canSeeCustomAction } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
     viewRoles: tableRowActions?.viewAction?.allowedRoles,
     editRoles: tableRowActions?.editAction?.allowedRoles,
     deleteRoles: tableRowActions?.deleteAction?.allowedRoles,
-    cancelRoles: tableRowActions?.cancelAction?.allowedRoles
+    cancelRoles: tableRowActions?.cancelAction?.allowedRoles,
+    customActionRoles: tableRowActions?.customAction?.allowedRoles
   })
 
   const filtersConfig = useMemo(() => {
@@ -243,7 +244,7 @@ const GroupTable = props => {
       <GeneralTable
         {...rest}
         columns={
-          tableRowActions && (canEdit || canDelete || canView || canCancel)
+          tableRowActions && (canEdit || canDelete || canView || canCancel || canSeeCustomAction)
             ? renderedColumns.concat({
                 title: '',
                 field: 'actions',
@@ -257,6 +258,7 @@ const GroupTable = props => {
                     editAction={tableRowActions.editAction}
                     deleteAction={tableRowActions.deleteAction}
                     cancelAction={tableRowActions.cancelAction}
+                    customAction={tableRowActions.customAction}
                     additionalAction={() =>
                       handleRemoteData(
                         tableState.page,
@@ -272,6 +274,7 @@ const GroupTable = props => {
                     canDelete={canDelete}
                     canCancel={canCancel}
                     isUserModal={isUserModal}
+                    canSeeCustomAction={canSeeCustomAction}
                   />
                 )
               })

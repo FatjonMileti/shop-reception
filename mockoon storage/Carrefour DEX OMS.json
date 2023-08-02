@@ -3316,7 +3316,7 @@
               "value": "application/pdf"
             }
           ],
-          "bodyType": "INLINE",
+          "bodyType": "FILE",
           "filePath": "",
           "databucketID": "",
           "sendFileAsBody": false,
@@ -4892,6 +4892,95 @@
           "statusCode": 200,
           "label": "",
           "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "1fd4107b-2bd7-4006-b96b-2068a92a6fa9",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "factura/pdf/:id",
+      "responses": [
+        {
+          "uuid": "6a77943a-ce2b-49d5-b13c-bff2a2c41491",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "FILE",
+          "filePath": "/Users/pauladan/Library/Application Support/mockoon/storage/proforma-598.pdf",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "27ec419c-2f00-403d-bf6a-c16df73cc035",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "factura/:id",
+      "responses": [
+        {
+          "uuid": "50fa983d-e7a3-48ef-bf34-9d7e859d4e54",
+          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"client\": \"667788\",\n  \"clientName\": \"\",\n  \"cart\": {\n    \"items\": [\n      {\n        \"id\": \"\",\n        \"ean\": \"\",\n        \"code\": \"\",\n        \"name\": \"\",\n        \"brand\": \"\",\n        \"price\": {{faker 'datatype.float'}},\n        \"quantity\": {{faker 'datatype.number'}},\n        \"vat\": {{faker 'datatype.number'}},\n        \"buybackDiscount\": \"\"\n      }\n    ],\n    \"created\": \"{{faker 'date.recent' 365}}\",\n    \"updated\": \"{{faker 'date.recent' 365}}\",\n    \"isWarehouse\": {{faker 'datatype.boolean'}}\n  },\n  \"reservations\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"remoteId\": {{faker 'datatype.number'}},\n      \"status\": \"\"\n    }\n  ],\n  \"creationDate\": \"{{faker 'date.recent' 365}}\",\n  \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n  \"paymentMethod\": \"\",\n  \"newDeliveryAddress\": {\n    \"city\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    },\n    \"district\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    },\n    \"street\": \"\"\n  },\n  \"delivery\": {\n    \"date\": \"\",\n    \"isMorning\": {{faker 'datatype.boolean'}}\n  },\n  \"comment\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "860ca8f1-7ae0-45da-b874-70a989845c6c",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "factura/print/:id",
+      "responses": [
+        {
+          "uuid": "a3329261-f25b-4d14-be7f-a3c1ca89edb1",
+          "body": "{\n  \"status\": {{faker 'datatype.number'}},\n  \"isValid\": {{faker 'datatype.boolean'}},\n  \"message\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -5047,6 +5136,18 @@
     {
       "type": "route",
       "uuid": "1301c923-e977-4320-9be1-2df207c7b55f"
+    },
+    {
+      "type": "route",
+      "uuid": "1fd4107b-2bd7-4006-b96b-2068a92a6fa9"
+    },
+    {
+      "type": "route",
+      "uuid": "27ec419c-2f00-403d-bf6a-c16df73cc035"
+    },
+    {
+      "type": "route",
+      "uuid": "860ca8f1-7ae0-45da-b874-70a989845c6c"
     }
   ],
   "proxyMode": false,
