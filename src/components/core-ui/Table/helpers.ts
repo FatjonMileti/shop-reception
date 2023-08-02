@@ -7,7 +7,7 @@ import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): string => {
   const { variable, defaultValue } = filter
 
-  if (!variable && !defaultValue) return ''
+  if (!variable && !defaultValue) return (filter.type == 'date' ? null : '')
 
   return searchParams[variable] ?? getDefaultItemValue(defaultValue)
 }
