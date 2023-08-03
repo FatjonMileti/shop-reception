@@ -65,7 +65,7 @@ const ModalForm = ({
 
           return (
             <FormItem
-              key={name}
+              key={name || rest.id}
               name={name}
               type={type}
               editItem={editItem}
