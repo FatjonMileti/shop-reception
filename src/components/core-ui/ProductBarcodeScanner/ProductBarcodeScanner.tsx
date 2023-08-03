@@ -94,6 +94,8 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             onKeyUp={event => {
               if (event.which == 0) {
                 setIsZerothButtonPressed(false)
+                if (product.code)
+                  searchProduct(event)
               }
             }}
             onBeforeInput={event => {
