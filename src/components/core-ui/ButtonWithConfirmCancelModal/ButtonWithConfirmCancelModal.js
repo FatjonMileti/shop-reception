@@ -43,21 +43,21 @@ const ButtonWithConfirmCancelModal = ({
     setIsCanceling(true)
     try {
       if (action.type === 'POST') {
-        await makeCorePostRequest(`${action.url}`, { id: itemId })
+        await makeCorePostRequest(`${action.url}/${itemId}`)
         showNotification({
           message: 'Anulat cu succes',
           type: 'success'
         })
       }
       if (action.type === 'PUT') {
-        await makeCorePutRequest(`${action.url}`, { id: itemId })
+        await makeCorePutRequest(`${action.url}/${itemId}`)
         showNotification({
           message: 'Anulat cu succes',
           type: 'success'
         })
       }
       if (action.type === 'PATCH') {
-        await makeCorePatchRequest(`${action.url}`, { id: itemId })
+        await makeCorePatchRequest(`${action.url}/${itemId}`)
         showNotification({
           message: 'Anulat cu succes',
           type: 'success'

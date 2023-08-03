@@ -45,7 +45,8 @@ const ModalWithForm = ({
   additionalAction,
   isModalOpen,
   closeModal,
-  href
+  href,
+  extraUrlParams
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer({})
@@ -70,12 +71,12 @@ const ModalWithForm = ({
         }
       })()
     } else {
-      setEditItem(getItemDefaults(formItems))
       if (isModalOpen) {
+        setEditItem(getItemDefaults(formItems))
         setTimeout(() => setIsLoading(false), 500)
       }
     }
-  }, [isModalOpen, editedItemId, formItems, editedItemUrl, setEditItem])
+  }, [isModalOpen, editedItemId, formItems, editedItemUrl])
 
   useEffect(() => {
     const hiddenItems = formItems.filter(item => item.type === 'hidden')
@@ -200,6 +201,7 @@ const ModalWithForm = ({
               formButtons={formButtons}
               saveData={saveFn}
               closeModal={closeModalAndResetForm}
+              extraUrlParams={extraUrlParams}
             />
           </div>
         )}

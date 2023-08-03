@@ -12,7 +12,8 @@ const Item = ({
   value,
   handleInputChange,
   editItem,
-  rest
+  rest,
+  extraUrlParams
 }) => {
   const key = rest.payloadKey || name
 
@@ -25,6 +26,7 @@ const Item = ({
         editItem,
         ...(type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
         name,
+        extraUrlParams,
         onChange: (arg, variable) => {
           switch (type) {
             case 'date':

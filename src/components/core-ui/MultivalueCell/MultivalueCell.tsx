@@ -1,26 +1,50 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { MultivalueCellProps } from './MultivalueCellDefinitions'
+import { getOriginalDisplayText, getShortDisplayText } from './helpers'
+import s from './MultivalueCell.modules.scss'
 
 function MultivalueCell(props: MultivalueCellProps) {
-  const { value } = props
+  const { value, field, size } = props
+
+  const fieldValues = useMemo(() => value.map(val => val[field]), [value])
+
+  const result = useMemo(() => {
+    return getShortDisplayText(fieldValues, size)
+  }, [fieldValues, size])
+
   const [visible, setVisible] = useState(false)
-  const [shortDisplayText, setShortDisplayText] = useState(null)
+  const [shortDisplayText, setShortDisplayText] = useState(result[0])
   const [originalDisplayText, setOriginalDisplayText] = useState(null)
+  const [remainingCount, setRemainingCount] = useState(result[1])
 
   useEffect(() => {
-    if (value.length <= 2) {
-      setShortDisplayText(value.join(', '))
+    if (field) {
+      const [text, remainingCount] = result
+      setShortDisplayText(text)
+      setRemainingCount(remainingCount)
+      setOriginalDisplayText(getOriginalDisplayText(fieldValues))
     } else {
-      var remainingCount = value.length - 2
-      setShortDisplayText(value.slice(0, 2).join(', ') + '... +' + remainingCount)
+      const [text, remainingCount] = getShortDisplayText(value, size)
+      setShortDisplayText(text)
+      setRemainingCount(remainingCount)
+      setOriginalDisplayText(getOriginalDisplayText(value))
     }
-
-    setOriginalDisplayText(value.join(', '))
   }, [value])
 
   return (
-    <div onClick={() => setVisible(!visible)}>
-      {visible ? originalDisplayText : shortDisplayText}
+    <div className={s.textContainer} onClick={() => setVisible(!visible)}>
+      {visible ? (
+        originalDisplayText
+      ) : (
+        <span>
+          {shortDisplayText && (
+            <span>
+              {shortDisplayText}
+              {!!remainingCount && <span className={s.moreEllipses}>... + {remainingCount}</span>}
+            </span>
+          )}
+        </span>
+      )}
     </div>
   )
 }

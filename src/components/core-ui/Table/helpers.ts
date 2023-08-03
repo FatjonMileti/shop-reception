@@ -1,7 +1,7 @@
 import { get } from 'lodash'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { toFiltersUrl } from './serializers'
-import { formatUIDate, getDefaultItemValue } from 'utils/helpers'
+import { downloadFile, formatUIDate, getDefaultItemValue } from 'utils/helpers'
 import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
 
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): string => {

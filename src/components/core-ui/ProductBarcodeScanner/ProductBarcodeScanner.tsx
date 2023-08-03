@@ -14,6 +14,7 @@ import {
 import { ProductActions } from 'reducers/productSlice'
 import s from './ProductBarcodeScanner.modules.scss'
 import { toProduct } from './serializers'
+import { isScannerDevice } from 'utils/helpers'
 
 const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
@@ -48,7 +49,7 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
         let response: ProductStockResponse
         if (action.type === 'GET') {
           response = await makeCoreGetRequest(`${action.url}/${product.code}`)
-          dispatch(ProductActions.setProduct({ ...toProduct(response.product) }))
+          dispatch(ProductActions.setProduct({ ...toProduct(response) }))
         }
       })()
     }
@@ -83,12 +84,14 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           />
         </div>
         <div className={s.buttonContainer}>
-          <IconButton
-            onClick={scanCode}
-            label="Scaneaza"
-            variant="outlined"
-            startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
-          />
+          {!isScannerDevice() && (
+            <IconButton
+              onClick={scanCode}
+              label="Scaneaza"
+              variant="outlined"
+              startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
+            />
+          )}
           <IconButton
             onClick={searchProduct}
             label="Cauta Produs"

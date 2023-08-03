@@ -13,30 +13,20 @@ function TableFilters(props) {
   const tableState = useSelector((state: RootState) => state.table)
 
   const filterState = tableState.filters
-  const customFilterState = tableState.customFilters
 
   useEffect(() => {
     filterArr
       .filter(filter => filter.defaultValue)
       .map(filter => {
-        const { defaultValue, isCustomField, name, type } = filter
+        const { defaultValue, name, type } = filter
         const filterDefaultValue = getDefaultItemValue(defaultValue)
 
-        if (isCustomField) {
-          dispatch(
-            TableActions.setCustomFilters({
-              ...customFilterState,
-              [name]: type === 'date' ? formatPayloadDate(defaultValue) : filterDefaultValue
-            })
-          )
-        } else {
-          dispatch(
-            TableActions.setFilters({
-              ...filterState,
-              [name]: type === 'date' ? formatPayloadDate(defaultValue) : filterDefaultValue
-            })
-          )
-        }
+        dispatch(
+          TableActions.setFilters({
+            ...filterState,
+            [name]: type === 'date' ? formatPayloadDate(defaultValue) : filterDefaultValue
+          })
+        )
       })
   }, [])
 
@@ -46,22 +36,13 @@ function TableFilters(props) {
     }
   }, [])
 
-  const setFilterValues = (name, value, type, isCustomField) => {
-    if (isCustomField) {
-      dispatch(
-        TableActions.setCustomFilters({
-          ...customFilterState,
-          [name]: type === 'date' ? formatPayloadDate(value) : value
-        })
-      )
-    } else {
-      dispatch(
-        TableActions.setFilters({
-          ...filterState,
-          [name]: type === 'date' ? formatPayloadDate(value) : value
-        })
-      )
-    }
+  const setFilterValues = (name, value, type) => {
+    dispatch(
+      TableActions.setFilters({
+        ...filterState,
+        [name]: type === 'date' ? formatPayloadDate(value) : value
+      })
+    )
   }
 
   return (
@@ -69,8 +50,8 @@ function TableFilters(props) {
       <Box>
         <Grid container spacing={4}>
           {filterArr.map(filter => {
-            const { name, label, isCustomField, defaultValue, type } = filter
-            const filterValue = isCustomField ? customFilterState[name] : filterState[name]
+            const { name, label, defaultValue, type } = filter
+            const filterValue = filterState[name]
 
             return (
               <Grid key={name} xs={12} md={3} item>
@@ -87,16 +68,16 @@ function TableFilters(props) {
                     const { type, name } = filter
                     switch (type) {
                       case 'date':
-                        setFilterValues(name, arg, type, isCustomField)
+                        setFilterValues(name, arg, type)
                         break
                       case 'autocomplete':
-                        setFilterValues(name, arg, type, isCustomField)
+                        setFilterValues(name, arg, type)
                         break
                       case 'checkbox':
-                        setFilterValues(name, arg.target.checked, type, isCustomField)
+                        setFilterValues(name, arg.target.checked, type)
                         break
                       default:
-                        setFilterValues(arg.target.name, arg.target.value, type, isCustomField)
+                        setFilterValues(arg.target.name, arg.target.value, type)
                         break
                     }
                   },
