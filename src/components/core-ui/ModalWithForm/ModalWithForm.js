@@ -71,12 +71,12 @@ const ModalWithForm = ({
         }
       })()
     } else {
-      setEditItem(getItemDefaults(formItems))
       if (isModalOpen) {
+        setEditItem(getItemDefaults(formItems))
         setTimeout(() => setIsLoading(false), 500)
       }
     }
-  }, [isModalOpen, editedItemId, formItems, editedItemUrl, setEditItem])
+  }, [isModalOpen, editedItemId, formItems, editedItemUrl])
 
   useEffect(() => {
     const hiddenItems = formItems.filter(item => item.type === 'hidden')

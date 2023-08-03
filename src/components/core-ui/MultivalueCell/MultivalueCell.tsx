@@ -1,19 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { MultivalueCellProps } from './MultivalueCellDefinitions'
 import { getOriginalDisplayText, getShortDisplayText } from './helpers'
 import s from './MultivalueCell.modules.scss'
 
 function MultivalueCell(props: MultivalueCellProps) {
   const { value, field, size } = props
+
+  const fieldValues = useMemo(() => value.map(val => val[field]), [value])
+
+  const result = useMemo(() => {
+    return getShortDisplayText(fieldValues, size)
+  }, [fieldValues, size])
+
   const [visible, setVisible] = useState(false)
-  const [shortDisplayText, setShortDisplayText] = useState(null)
+  const [shortDisplayText, setShortDisplayText] = useState(result[0])
   const [originalDisplayText, setOriginalDisplayText] = useState(null)
-  const [remainingCount, setRemainingCount] = useState(0)
+  const [remainingCount, setRemainingCount] = useState(result[1])
 
   useEffect(() => {
     if (field) {
-      const fieldValues = props.value.map(val => val[field])
-      const [text, remainingCount] = getShortDisplayText(fieldValues, size)
+      const [text, remainingCount] = result
       setShortDisplayText(text)
       setRemainingCount(remainingCount)
       setOriginalDisplayText(getOriginalDisplayText(fieldValues))
@@ -34,7 +40,7 @@ function MultivalueCell(props: MultivalueCellProps) {
           {shortDisplayText && (
             <span>
               {shortDisplayText}
-              {!!remainingCount && <span>... + {remainingCount}</span>}
+              {!!remainingCount && <span className={s.moreEllipses}>... + {remainingCount}</span>}
             </span>
           )}
         </span>
