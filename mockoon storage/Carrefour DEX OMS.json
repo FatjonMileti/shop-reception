@@ -3460,7 +3460,7 @@
             }
           ],
           "bodyType": "FILE",
-          "filePath": "/Users/pauladan/Library/Application Support/mockoon/storage/proforma-598.pdf",
+          "filePath": "proforma-598.pdf",
           "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
@@ -4893,7 +4893,7 @@
           "label": "",
           "headers": [],
           "bodyType": "FILE",
-          "filePath": "/Users/pauladan/Library/Application Support/mockoon/storage/proforma-598.pdf",
+          "filePath": "proforma-598.pdf",
           "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
