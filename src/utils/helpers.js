@@ -36,18 +36,14 @@ export const getDefaultItemValue = value => {
   return value
 }
 
-export const getItemDefaults = formItems => {
-  let result = {}
-
+export const getItemDefaults = formItems =>
   formItems
     .filter(item => item.name)
-    .map(item => {
-      result[item.name] = item.defaultValue ? getDefaultItemValue(item.defaultValue) : ''
-      result[item.name] = item.value ? getDefaultItemValue(item.value) : ''
-    })
-
-  return result
-}
+    .reduce((acc, item) => {
+      acc[item.name] =
+        item.value || item.defaultValue ? getDefaultItemValue(item.value || item.defaultValue) : ''
+      return acc
+    }, {})
 
 export const getItemDefaultsAsArray = formItems => {
   let result = []
