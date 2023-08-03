@@ -1,7 +1,7 @@
 import { get } from 'lodash'
 import { renderComponent } from 'utils/dynamicRenderingService'
 
-export const getRenderedColumns = columns =>
+export const getRenderedColumns = (columns, cb) =>
   columns.map(column => {
     const { render } = column
 
@@ -23,7 +23,8 @@ export const getRenderedColumns = columns =>
               ...render,
               field: column.field,
               count: get(row, column.field),
-              payload: { id: row.id }
+              payload: { id: row.id },
+              additionalAction: cb
             })
           }
 

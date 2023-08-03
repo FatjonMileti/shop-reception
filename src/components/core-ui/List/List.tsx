@@ -19,8 +19,6 @@ const List = props => {
   const { showNotification } = useNotification()
   const { storeData } = useDataStore()
 
-  const renderedColumns = React.useMemo(() => getRenderedColumns(columns), [columns])
-
   const tableFooterComponent = React.useMemo(
     () => tableFooter && renderTableFooter(tableFooter, summary),
     [tableFooter, summary]
@@ -48,6 +46,11 @@ const List = props => {
     }
     setIsLoading(false)
   }
+
+  const renderedColumns = React.useMemo(
+    () => getRenderedColumns(columns, handleRemoteData),
+    [columns]
+  )
 
   return (
     <Box className={s.listTableContainer}>

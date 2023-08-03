@@ -19,6 +19,7 @@ const PlusMinusNumberInput = (props: PlusMinusNumberInputProps) => {
   const updateRemoteCount = async value => {
     try {
       await makeCorePutRequest(`${props.action.url}`, { ...props.payload, [props.field]: value })
+      props.additionalAction && props.additionalAction()
     } catch (error) {
       showNotification({
         message: `A aparut o eroare. ${error?.message}`,
