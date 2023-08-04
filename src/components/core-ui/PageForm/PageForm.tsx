@@ -157,6 +157,7 @@ const PageForm = props => {
         formButtons={formButtons}
         saveData={saveData}
         closeModal={resetForm}
+        isPageForm
       />
     </Box>
   )
