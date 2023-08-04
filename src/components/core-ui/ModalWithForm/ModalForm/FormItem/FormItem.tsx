@@ -30,6 +30,7 @@ const FormItem = ({
       if (editItemValue == '' && type === 'date') {
         return null // value=undefined => current date | value=null => input left blank
       }
+      console.log(editItem)
       return editItemValue || ''
     }
   }, [

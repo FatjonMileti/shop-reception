@@ -1,12 +1,13 @@
 import { Box, Container } from '@mui/material'
 import { Percent } from '@mui/icons-material'
-import { Checkbox, DatePicker, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, Checkbox, DatePicker, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { Button } from 'components/core-ui/Button'
 import { Card } from 'components/core-ui/Card'
 import { ContainerBox } from 'components/core-ui/ContainerBox'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
+import { DownloadModal } from 'components/core-ui/DownloadModal'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Grid } from 'components/core-ui/Grid'
 import { Input } from 'components/core-ui/Input'
@@ -48,10 +49,10 @@ export const Components = {
   // MUI icons
   Percent,
   // Carrefour lib components
+  Autocomplete,
   DatePicker,
   Typography,
   Checkbox,
-  MultivalueCell,
   IconCell,
   // Local components
   AsyncAutocomplete,
@@ -60,11 +61,13 @@ export const Components = {
   Card,
   ContainerBox,
   CountyCitySelect,
+  DownloadModal,
   FloatingButton,
   Grid,
   Input,
   Link,
   List,
+  MultivalueCell,
   PageForm,
   PageFormRadio,
   PageInfo,

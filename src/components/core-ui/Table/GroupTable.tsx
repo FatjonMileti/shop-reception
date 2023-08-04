@@ -17,6 +17,7 @@ import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 import { isEmpty } from 'lodash'
 import { downloadFile } from 'utils/helpers'
+import { DownloadModal } from '../DownloadModal'
 
 const GroupTable = props => {
   const {
@@ -29,6 +30,7 @@ const GroupTable = props => {
     hasGeneralSearch,
     isUserModal,
     hasInitialFilters,
+    extraUrlParams,
     ...rest
   } = props
 
@@ -38,6 +40,7 @@ const GroupTable = props => {
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
+  const [isDownloadModalOpen, setIsDowloadModalOpen] = useState(false)
   const [summary, setSummary] = useState({})
   const [dynamicColumns, setDynamicColumns] = useState([])
 
@@ -175,7 +178,7 @@ const GroupTable = props => {
   }
 
   const createDynamicColumns = (initialColumns, data) => {
-    if(!data.length){
+    if (!data.length) {
       return initialColumns
     }
 
@@ -189,7 +192,7 @@ const GroupTable = props => {
           ...column,
           sticky: false,
           collapsible: true,
-          minWidth: "200px",
+          minWidth: '200px',
           title: `${group.start} - ${group.end} ${title}`,
           field: `productSlotsSalesDto.[${index}].${field}`
         }
@@ -206,9 +209,13 @@ const GroupTable = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
+  const openDownloadModal = () => setIsDowloadModalOpen(true)
+
+  const closeDownloadModal = () => setIsDowloadModalOpen(false)
+
   const handleDownload = () => {
     if (tableActions?.downloadAction) {
-      const { action } = tableActions.downloadAction
+      const { action, selectColumns } = tableActions.downloadAction
       const { searchText, filters, order, orderBy } = tableState
 
       const url = toTableGETUrl({
@@ -244,6 +251,15 @@ const GroupTable = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
+        />
+      )}
+      {tableActions?.downloadAction?.selectColumns && (
+        <DownloadModal
+          {...tableActions.downloadAction}
+          isModalOpen={isDownloadModalOpen}
+          closeModal={closeDownloadModal}
+          columns={tableActions.downloadAction.columns}
+          extraUrlParams={extraUrlParams}
         />
       )}
       <GeneralTable
@@ -293,7 +309,13 @@ const GroupTable = props => {
             ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
             : null
         }
-        downloadButton={tableActions?.downloadAction ? { onClick: handleDownload } : null}
+        downloadButton={
+          tableActions?.downloadAction?.selectColumns
+            ? { onClick: openDownloadModal }
+            : tableActions?.downloadAction
+            ? { onClick: handleDownload }
+            : null
+        }
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
