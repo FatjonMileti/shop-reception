@@ -42,7 +42,7 @@ const Table = props => {
   const [summary, setSummary] = useState({})
   const [isNoGeneralSearchConfirmModalOpen, setIsNoGeneralSearchConfirmModalOpen] = useState(false)
 
-  const [tableState, setTableState] = useImmer({
+  const [tableState, setTableState] = useImmer(window.history.state.tableState || {
     page: 0,
     rowsPerPage: rest.rowsPerPage ?? 10,
     order: rest.order ?? 'asc',
@@ -137,6 +137,18 @@ const Table = props => {
       searchText,
       filters
     })
+
+    window.history.replaceState({
+      ...window.history.state,
+      tableState: {
+        page,
+        rowsPerPage,
+        order,
+        orderBy,
+        searchText,
+        filters
+      }
+    }, document.title)
 
     if (generalSearch?.hasGeneralSearch && !table.searchText.length) {
       return null
@@ -334,6 +346,7 @@ const Table = props => {
         }
         downloadButton={tableActions?.downloadAction ? { onClick: handleDownload } : null}
         hasSearchInput={!!tableActions?.searchAction}
+        tableState={tableState}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
       />
