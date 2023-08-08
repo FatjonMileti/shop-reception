@@ -1,7 +1,6 @@
 import { useNotification } from 'hooks'
 import React from 'react'
 import { makeCoreGetRequest } from 'utils/api'
-import { toAsyncSelectOptions } from '../AsyncAutocomplete/serializers'
 import { Autocomplete, Checkbox } from '@fullscreendigital/carrefour-dex-fe'
 import s from './StructureItem.modules.scss'
 
@@ -14,6 +13,9 @@ function StructureItem(props) {
     selectLabel,
     action,
     width,
+    isTrainee,
+    traineeOptions,
+    setEditItem,
     ...rest
   } = props
 
@@ -28,29 +30,35 @@ function StructureItem(props) {
   React.useEffect(() => {
     if (defaultChecked) {
       setChecked(true)
-    }
-    else{
+    } else {
       setChecked(false)
     }
-  },[defaultChecked])
+  }, [defaultChecked])
 
   React.useEffect(() => {
-    ;(async () => {
-      try {
-        let url = action.url
-        const result = await makeCoreGetRequest(url)
-        const optionItems = result.map(item => ({ label: item.name, value: item.id }))
-        setOptions(optionItems)
+    if (isTrainee) {
+      setOptions(traineeOptions)
 
-        const selected = optionItems.find(opt => opt.value === props?.value?.structureId)
-        setSelectedValue(selected)
-      } catch (error) {
-        showNotification({
-          message: `Error while fetching dropdown data. ${error?.message}`,
-          type: 'error'
-        })
-      }
-    })()
+      const selected = traineeOptions.find(opt => opt.value === props?.value?.structureId)
+      setSelectedValue(selected)
+    } else {
+      ;(async () => {
+        try {
+          let url = action.url
+          const result = await makeCoreGetRequest(url)
+          const optionItems = result.map(item => ({ label: item.name, value: item.id }))
+          setOptions(optionItems)
+
+          const selected = optionItems.find(opt => opt.value === props?.value?.structureId)
+          setSelectedValue(selected)
+        } catch (error) {
+          showNotification({
+            message: `Error while fetching dropdown data. ${error?.message}`,
+            type: 'error'
+          })
+        }
+      })()
+    }
   }, [loading, value, defaultChecked])
 
   return (
@@ -58,7 +66,7 @@ function StructureItem(props) {
       <Checkbox
         checked={checked}
         label={roleName.label}
-        onChange={() => removeAddStructure(roleName.value)}
+        onChange={() => (isTrainee ? setChecked(!checked) : removeAddStructure(roleName.value))}
       />
       {checked && (
         <Autocomplete
@@ -68,7 +76,7 @@ function StructureItem(props) {
           label={selectLabel}
           disablePortal
           id="async-demo"
-          options={options}
+          options={isTrainee ? traineeOptions : options}
           style={{ width: width ?? 300 }}
           open={open}
           onOpen={() => {
@@ -79,7 +87,11 @@ function StructureItem(props) {
           }}
           loading={loading}
           value={selectedValue ?? ''}
-          onChange={(_, value) => props.onChange({ structure: value, roleId: roleName.value})}
+          onChange={(_, value) =>
+            isTrainee
+              ? setEditItem(prev => ({ ...prev, divisionType: value.value }))
+              : props.onChange({ structure: value, roleId: roleName.value })
+          }
         />
       )}
     </div>

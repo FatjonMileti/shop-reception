@@ -36,8 +36,13 @@ const infoItems = [
   }
 ]
 
+const traineeOptions = [
+  { label: 'HYPER', value: 'HYPER'},
+  { label: 'SUPER', value: 'SUPER'}
+]
+
 function UserModal(props) {
-  const { isModalOpen, closeModal, editedItemId, formItems } = props
+  const { isModalOpen, closeModal, editedItemId, additionalAction } = props
   const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer(null)
   const [roles, setRoles] = useState([])
@@ -137,6 +142,7 @@ function UserModal(props) {
       })
     }
 
+    additionalAction && additionalAction()
     closeModalAndResetForm()
     setIsLoading(false)
   }
@@ -181,7 +187,7 @@ function UserModal(props) {
                   <ModalInfo formInfoItems={infoItems} editItem={editItem} />
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  {roles?.map(role => {
+                  {roles?.filter(role => role.name !== 'ADMIN').map(role => {
                     const isChecked = editItem?.structureRoles?.some(
                       structureRole => structureRole.roleId === role.id
                     )
@@ -197,7 +203,10 @@ function UserModal(props) {
                     return (
                       <StructureItem
                         key={role.id}
+                        setEditItem={setEditItem}
                         removeAddStructure={removeAddStructure}
+                        isTrainee={role.name === "TRAINEE"}
+                        traineeOptions={traineeOptions}
                         defaultChecked={isChecked}
                         onChange={onStructureChange}
                         roleName={{ value: role.id, label: role.name }}
@@ -216,6 +225,7 @@ function UserModal(props) {
                     variant="standard"
                     width="45%"
                     label="Status"
+                    value={editItem.enable}
                     values={[
                       {
                         value: 'true',
