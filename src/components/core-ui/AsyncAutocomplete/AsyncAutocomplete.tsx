@@ -42,7 +42,7 @@ const AsyncAutocomplete = props => {
 
   React.useEffect(() => {
     if (hasDefaultFirstValue) {
-      getOptions(setValueForFilter)
+      getOptions(setValueForFilter, setFilterValues)
     }
   }, [])
 
@@ -52,7 +52,7 @@ const AsyncAutocomplete = props => {
     }
   }, [open])
 
-  const getOptions = async (cb?: (name: string, value: any) => {}) => {
+  const getOptions = async (cb1?: (name: string, value: any) => {}, cb2?: (name: string, value: any) => {}) => {
     try {
       let url = action.url
 
@@ -66,8 +66,8 @@ const AsyncAutocomplete = props => {
 
       const resultOptions = toAsyncSelectOptions(result.list || result, valueKey, labelKey) || []
       setOptions(resultOptions)
-      cb && cb(rest.name, resultOptions[0])
-      setFilterValues && setFilterValues(rest.name, resultOptions[0])
+      cb1 && cb1(rest.name, props.value || resultOptions[0])
+      cb2 && cb2(rest.name, props.value || resultOptions[0])
     } catch (error) {
       showNotification({
         message: `Error while fetching dropdown data. ${error?.message}`,
