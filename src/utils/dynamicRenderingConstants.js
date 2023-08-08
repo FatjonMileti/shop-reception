@@ -10,7 +10,6 @@ import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
 import { DownloadModal } from 'components/core-ui/DownloadModal'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Grid } from 'components/core-ui/Grid'
-import { GrowthTable } from 'components/core-ui/GrowthTable'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
 import { List } from 'components/core-ui/List'
@@ -65,7 +64,6 @@ export const Components = {
   DownloadModal,
   FloatingButton,
   Grid,
-  GrowthTable,
   Input,
   Link,
   List,

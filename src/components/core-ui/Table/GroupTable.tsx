@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -7,14 +6,18 @@ import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
-import { TableActions } from './TableActions'
+import { TableActions } from '../Table/TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import { getRenderedColumns, convertFilterSchemaToFilterConfig, renderTableFooter } from './helpers'
-import { toTableGETUrl, toTablePOSTPayload } from './serializers'
+import {
+  getRenderedColumns,
+  convertFilterSchemaToFilterConfig,
+  renderTableFooter
+} from '../Table/helpers'
+import { toTableGETUrl, toTablePOSTPayload } from '../Table/serializers'
 import { toTableRowItems } from 'utils/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
-import s from './Table.modules.scss'
+import s from '../Table/Table.modules.scss'
 import { isEmpty } from 'lodash'
 import { downloadFile } from 'utils/helpers'
 import { DownloadModal } from '../DownloadModal'
@@ -31,6 +34,7 @@ const GroupTable = props => {
     hasInitialFilters,
     extraUrlParams,
     extraCustomUrlParams,
+    dynamicColumn,
     ...rest
   } = props
 
@@ -93,13 +97,13 @@ const GroupTable = props => {
 
   useEffect(() => {
     if (isTableLoaded) {
-    handleRemoteData(
-      tableState.page,
-      tableState.rowsPerPage,
-      tableState.order,
-      tableState.orderBy,
-      tableState.searchText,
-      tableState.filters
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
       )
     }
   }, [extraUrlParams, extraCustomUrlParams])
@@ -192,23 +196,25 @@ const GroupTable = props => {
       return initialColumns
     }
 
-    const staticColumns = initialColumns.slice()?.filter(col => !col.isDynamic)
-    const groupColumns = initialColumns.slice()?.filter(col => col.isGroup)
+    const staticColumns = initialColumns.slice()?.filter(col => !col.isGroup)
+    const groupCols = initialColumns.filter(col => col.isGroup)
 
-    const newColumns = data[0]?.list.flatMap((group, index) =>
-      groupColumns.map(column => {
-        const { field, title } = column
-        return {
-          ...column,
-          sticky: false,
-          collapsible: true,
-          minWidth: '200px',
-          title: `${group.start} - ${group.end} ${title}`,
-          field: `list.[${index}].${field}`
-        }
+    const populated = data.find(item => item.list.length)
+
+    const newColumns = populated.list?.flatMap((interval, index) =>
+    groupCols.map(col => {
+        const additionalName = groupCols.length === 1 ? '' : col.title
+        return (
+          {
+            ...col,
+            start: interval.start.slice(0, -3),
+            end: interval.end.slice(0, -3),
+            title: `${interval.start.slice(0, -3)} - ${interval.end.slice(0, -3)} ${additionalName}`,
+            field: `list.[${index}].${col.field}`
+          } || []
+        )
       })
     )
-
     const dynamicCols = staticColumns.concat(newColumns)
     return dynamicCols
   }
@@ -282,30 +288,32 @@ const GroupTable = props => {
                 align: 'right',
                 width: '112px',
                 collapsible: 'true',
-                render: row => (
-                  <TableActions
-                    itemId={row.id}
-                    viewAction={tableRowActions.viewAction}
-                    editAction={tableRowActions.editAction}
-                    deleteAction={tableRowActions.deleteAction}
-                    cancelAction={tableRowActions.cancelAction}
-                    additionalAction={() =>
-                      handleRemoteData(
-                        tableState.page,
-                        tableState.rowsPerPage,
-                        tableState.order,
-                        tableState.orderBy,
-                        tableState.searchText,
-                        tableState.filters
-                      )
-                    }
-                    canView={canView}
-                    canEdit={canEdit}
-                    canDelete={canDelete}
-                    canCancel={canCancel}
-                    isUserModal={isUserModal}
-                  />
-                )
+                render: row => {
+                  return (
+                    <TableActions
+                      itemId={row.productId}
+                      viewAction={tableRowActions.viewAction}
+                      editAction={tableRowActions.editAction}
+                      deleteAction={tableRowActions.deleteAction}
+                      cancelAction={tableRowActions.cancelAction}
+                      additionalAction={() =>
+                        handleRemoteData(
+                          tableState.page,
+                          tableState.rowsPerPage,
+                          tableState.order,
+                          tableState.orderBy,
+                          tableState.searchText,
+                          tableState.filters
+                        )
+                      }
+                      canView={canView}
+                      canEdit={canEdit}
+                      canDelete={canDelete}
+                      canCancel={canCancel}
+                      isUserModal={isUserModal}
+                    />
+                  )
+                }
               })
             : renderedColumns
         }
