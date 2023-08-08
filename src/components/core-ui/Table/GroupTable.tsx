@@ -23,7 +23,6 @@ const GroupTable = props => {
   const {
     action,
     columns,
-    groupCount,
     tableActions,
     tableRowActions,
     tableFooter,
@@ -31,6 +30,7 @@ const GroupTable = props => {
     isUserModal,
     hasInitialFilters,
     extraUrlParams,
+    extraCustomUrlParams,
     ...rest
   } = props
 
@@ -89,7 +89,10 @@ const GroupTable = props => {
     [tableFooter, summary]
   )
 
+  const [isTableLoaded, setIsTableLoaded] = useState(false)
+
   useEffect(() => {
+    if (isTableLoaded) {
     handleRemoteData(
       tableState.page,
       tableState.rowsPerPage,
@@ -97,8 +100,9 @@ const GroupTable = props => {
       tableState.orderBy,
       tableState.searchText,
       tableState.filters
-    )
-  }, [table.filters])
+      )
+    }
+  }, [extraUrlParams, extraCustomUrlParams])
 
   const tableFilters = useMemo(
     () =>
@@ -141,7 +145,9 @@ const GroupTable = props => {
             order,
             orderBy,
             hasGeneralSearch,
-            generalSearchText: table.searchText
+            generalSearchText: table.searchText,
+            extraUrlParams,
+            extraCustomUrlParams
           })
         )
       }
@@ -158,7 +164,9 @@ const GroupTable = props => {
             filters,
             tableFilters,
             hasGeneralSearch,
-            generalSearchText: table.searchText
+            generalSearchText: table.searchText,
+            extraUrlParams,
+            extraCustomUrlParams
           })
         )
       }
@@ -174,6 +182,8 @@ const GroupTable = props => {
         type: 'error'
       })
     }
+
+    setIsTableLoaded(true)
     setIsLoading(false)
   }
 
@@ -185,7 +195,7 @@ const GroupTable = props => {
     const staticColumns = initialColumns.slice()?.filter(col => !col.isDynamic)
     const groupColumns = initialColumns.slice()?.filter(col => col.isGroup)
 
-    const newColumns = data[0]?.productSlotsSalesDto.flatMap((group, index) =>
+    const newColumns = data[0]?.list.flatMap((group, index) =>
       groupColumns.map(column => {
         const { field, title } = column
         return {
@@ -194,7 +204,7 @@ const GroupTable = props => {
           collapsible: true,
           minWidth: '200px',
           title: `${group.start} - ${group.end} ${title}`,
-          field: `productSlotsSalesDto.[${index}].${field}`
+          field: `list.[${index}].${field}`
         }
       })
     )

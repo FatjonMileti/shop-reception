@@ -209,10 +209,10 @@ function UserModal(props) {
                   })}
                   <Input
                     onChange={(e: any) =>
-                      setEditItem(prevState => ({ ...prevState, isEnable: e.target.value }))
+                      setEditItem(prevState => ({ ...prevState, enable: e.target.value }))
                     }
                     type="select"
-                    name="isEnable"
+                    name="enable"
                     variant="standard"
                     width="45%"
                     label="Status"
