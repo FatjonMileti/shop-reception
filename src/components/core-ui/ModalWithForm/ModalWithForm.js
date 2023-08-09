@@ -128,6 +128,9 @@ const ModalWithForm = ({
         })
       }
 
+      additionalAction && additionalAction()
+      closeModalAndResetForm()
+
       if (href && result.id) {
         navigate(`${href}/${result.id}`)
       }
@@ -137,8 +140,6 @@ const ModalWithForm = ({
         type: 'error'
       })
     }
-    additionalAction && additionalAction()
-    closeModalAndResetForm()
     setIsLoading(false)
   }
 
