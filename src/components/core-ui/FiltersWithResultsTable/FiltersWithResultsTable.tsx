@@ -9,12 +9,9 @@ function FiltersWithResultsTable(props) {
   const { filters, table } = props
 
   const filterByFilters = useMemo(() => filters.filter(filter => !filter.isCustomField), [filters])
-  const customFilterByFilters = useMemo(
-    () => filters.filter(filter => filter.isCustomField),
-    [filters]
-  )
+  const customFilterByFilters = useMemo(() => filters.filter(filter => filter.isCustomField), [filters])
 
-  const [filterValues, setFilterValues] = useState(
+  const [filterValues, setFilterValues] = useState(window.history.state.filteredTableState?.filterValues ||
     Object.assign(
       {},
       ...filterByFilters.map(filter => ({
@@ -24,7 +21,8 @@ function FiltersWithResultsTable(props) {
       }))
     )
   )
-  const [customFilterValues, setCustomFilterValues] = useState(
+
+  const [customFilterValues, setCustomFilterValues] = useState(window.history.state.filteredTableState?.customFilterValues ||
     Object.assign(
       {},
       ...customFilterByFilters.map(filter => ({
@@ -66,11 +64,31 @@ function FiltersWithResultsTable(props) {
         ...customFilterValues,
         [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value
       })
+      window.history.replaceState({
+        ...window.history.state,
+        filteredTableState: {
+          filterValues: filterValues,
+          customFilterValues: {
+            ...customFilterValues,
+            [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value    
+          }
+        }
+      }, document.title)
     } else {
       setFilterValues({
         ...filterValues,
         [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value
       })
+      window.history.replaceState({
+        ...window.history.state,
+        filteredTableState: {
+          customFilterValues: customFilterValues,
+          filterValues: {
+            ...filterValues,
+            [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value    
+          }
+        }
+      }, document.title)
     }
   }
 

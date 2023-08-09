@@ -8,6 +8,7 @@ import s from './List.modules.scss'
 import { ListActions } from './ListActions'
 import { renderTableFooter } from '../Table/helpers'
 import FlexListTable from './FlexListTable'
+import { formatErrorMessage } from 'utils/formatting'
 
 const List = props => {
   const { action, columns, tableRowActions, tableFooter, ...rest } = props
@@ -42,7 +43,7 @@ const List = props => {
       }
     } catch (error) {
       showNotification({
-        message: `Error while fetching list data. ${error.message}`,
+        message: `Error while fetching list data. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

@@ -21,6 +21,7 @@ import s from '../Table/Table.modules.scss'
 import { isEmpty } from 'lodash'
 import { downloadFile } from 'utils/helpers'
 import { DownloadModal } from '../DownloadModal'
+import { formatErrorMessage } from 'utils/formatting'
 
 const GroupTable = props => {
   const {
@@ -182,7 +183,7 @@ const GroupTable = props => {
       setSummary(response.summary)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${error.message}`,
+        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
