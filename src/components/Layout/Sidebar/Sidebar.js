@@ -23,23 +23,23 @@ const staticItems = [
     primaryText: 'Home',
     type: 'icon',
     href: '/'
-  },
-  {
-    disablePadding: true,
-    icon: <NotificationsNoneOutlined />,
-    index: 2,
-    primaryText: 'Notifications',
-    type: 'icon',
-    href: '/'
-  },
-  {
-    disablePadding: true,
-    icon: <PersonOutlineOutlined />,
-    index: 3,
-    primaryText: 'Profile',
-    type: 'icon',
-    href: '/'
   }
+  // {
+  //   disablePadding: true,
+  //   icon: <NotificationsNoneOutlined />,
+  //   index: 2,
+  //   primaryText: 'Notifications',
+  //   type: 'icon',
+  //   href: '/'
+  // },
+  // {
+  //   disablePadding: true,
+  //   icon: <PersonOutlineOutlined />,
+  //   index: 3,
+  //   primaryText: 'Profile',
+  //   type: 'icon',
+  //   href: '/'
+  // }
 ]
 
 const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
