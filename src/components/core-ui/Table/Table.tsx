@@ -17,6 +17,7 @@ import s from './Table.modules.scss'
 import { ConfirmationModal } from 'components/core-ui/ConfirmationModal'
 import cn from 'classnames'
 import { downloadFile } from 'utils/helpers'
+import { formatErrorMessage } from 'utils/formatting'
 
 const Table = props => {
   const {
@@ -42,14 +43,16 @@ const Table = props => {
   const [summary, setSummary] = useState({})
   const [isNoGeneralSearchConfirmModalOpen, setIsNoGeneralSearchConfirmModalOpen] = useState(false)
 
-  const [tableState, setTableState] = useImmer(window.history.state.tableState || {
-    page: 0,
-    rowsPerPage: rest.rowsPerPage ?? 10,
-    order: rest.order ?? 'asc',
-    orderBy: rest.orderBy ?? '',
-    searchText: '',
-    filters: []
-  })
+  const [tableState, setTableState] = useImmer(
+    window.history.state.tableState || {
+      page: 0,
+      rowsPerPage: rest.rowsPerPage ?? 10,
+      order: rest.order ?? 'asc',
+      orderBy: rest.orderBy ?? '',
+      searchText: '',
+      filters: []
+    }
+  )
 
   const table = useSelector((state: RootState) => state.table)
 
@@ -138,17 +141,20 @@ const Table = props => {
       filters
     })
 
-    window.history.replaceState({
-      ...window.history.state,
-      tableState: {
-        page,
-        rowsPerPage,
-        order,
-        orderBy,
-        searchText,
-        filters
-      }
-    }, document.title)
+    window.history.replaceState(
+      {
+        ...window.history.state,
+        tableState: {
+          page,
+          rowsPerPage,
+          order,
+          orderBy,
+          searchText,
+          filters
+        }
+      },
+      document.title
+    )
 
     if (generalSearch?.hasGeneralSearch && !table.searchText.length) {
       return null
@@ -212,7 +218,7 @@ const Table = props => {
       }
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${error.message}`,
+        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

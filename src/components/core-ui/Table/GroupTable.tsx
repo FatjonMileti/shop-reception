@@ -17,6 +17,7 @@ import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 import { isEmpty } from 'lodash'
 import { downloadFile } from 'utils/helpers'
+import { formatErrorMessage } from 'utils/formatting'
 
 const GroupTable = props => {
   const {
@@ -166,7 +167,7 @@ const GroupTable = props => {
       setSummary(response.summary)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${error.message}`,
+        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

@@ -9,6 +9,7 @@ import sd from '../ServiceDomain/ServiceDomain.scss'
 import { Box, CircularProgress } from '@mui/material'
 import { IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { ArrowBackIosNewOutlined } from '@mui/icons-material'
+import { formatErrorMessage } from 'utils/formatting'
 
 const DynamicComponent = props => {
   const [isLoadingSchema, setIsLoadingSchema] = useState(true)
@@ -37,7 +38,7 @@ const DynamicComponent = props => {
         setScreen(result.screen)
       } catch (error) {
         showNotification({
-          message: `Error while fetching page schema. ${error.message}`,
+          message: `Error while fetching page schema. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       } finally {
