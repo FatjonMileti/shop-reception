@@ -14,6 +14,9 @@ export const renderComponent = JSONSchema => {
       key: id,
       ...rest
     },
-    children && (typeof children === 'string' ? children : children.map(c => renderComponent(c)))
+    children &&
+      (typeof children === 'string' || typeof children === 'number'
+        ? children
+        : children.map(c => renderComponent(c)))
   )
 }

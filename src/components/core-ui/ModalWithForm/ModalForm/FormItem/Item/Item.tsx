@@ -16,7 +16,7 @@ const Item = ({
   extraUrlParams
 }) => {
   const key = rest.payloadKey || name
-
+console.log(value)
   return (
     <Grid item key={name} xs={12} sm={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}>
       {createElement(Components[UIComponent], {
@@ -49,6 +49,8 @@ const Item = ({
               } else {
                 handleInputChange(null, 'fileObject')
               }
+            case 'staticAutocomplete':
+
             default:
               handleInputChange(arg?.target?.value, key, type)
               break

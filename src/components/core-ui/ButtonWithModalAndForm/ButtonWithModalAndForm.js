@@ -24,9 +24,18 @@ const ButtonWithModalAndForm = ({
 
   return (
     <>
-      <Button {...buttonProps} onClick={openModal} style={{ minWidth: '0.7rem', background: 'transparent' }} />
+      <Button
+        {...buttonProps}
+        onClick={openModal}
+        style={{ minWidth: '0.7rem', background: 'transparent' }}
+      />
       {isUserModal ? (
-        <UserModal editedItemId={editedItemId} isModalOpen={isModalOpen} closeModal={closeModal} />
+        <UserModal
+          editedItemId={editedItemId}
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+          additionalAction={additionalAction}
+        />
       ) : (
         <ModalWithForm
           modalProps={modalProps}
