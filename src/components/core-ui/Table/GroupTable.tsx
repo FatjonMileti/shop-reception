@@ -291,7 +291,7 @@ const GroupTable = props => {
                 render: row => {
                   return (
                     <TableActions
-                      itemId={row.productId}
+                      itemId={row.id}
                       viewAction={tableRowActions.viewAction}
                       editAction={tableRowActions.editAction}
                       deleteAction={tableRowActions.deleteAction}

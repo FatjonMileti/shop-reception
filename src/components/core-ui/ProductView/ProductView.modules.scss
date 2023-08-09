@@ -5,7 +5,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  width: 100%;
+
+  @media (max-width: 624px) {
+    margin: 0 12px;
+    flex-direction: column-reverse;
+  }
 }
 
 .text {
@@ -38,6 +43,9 @@
 .productTab {
   color: #121212 !important;
   height: 40rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   margin: 0 24px;
   @media (max-width: 624px) {

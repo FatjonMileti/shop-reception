@@ -23,6 +23,7 @@ export const getRenderedColumns = (columns, tableFilters) =>
           const { UIComponent, idKeyName, href, linkFilters } = render
 
           if (UIComponent === 'Link') {
+
             const id = get(row, idKeyName)
             let linkHref = `${href}?id=${id}`
 
