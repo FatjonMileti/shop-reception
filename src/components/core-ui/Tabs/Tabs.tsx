@@ -10,7 +10,7 @@ const Tabs = (props: TabsProps) => {
 
   let [searchParams, setSearchParams] = useSearchParams()
 
-  const [selectedValue, setSelectedValue] = useState(0)
+  const [selectedValue, setSelectedValue] = useState(parseInt(searchParams.get('tab')) || 0)
 
   useEffect(() => {
     setSelectedValue(parseInt(searchParams.get('tab')) || value)
