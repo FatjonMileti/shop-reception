@@ -23,7 +23,6 @@ export const getRenderedColumns = (columns, tableFilters) =>
           const { UIComponent, idKeyName, href, linkFilters } = render
 
           if (UIComponent === 'Link') {
-
             const id = get(row, idKeyName)
             let linkHref = `${href}?id=${id}`
 
@@ -109,16 +108,18 @@ export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string
 const getFilterUrlValues = (filters: Filter[]) =>
   filters.reduce(
     (acc, filter) => {
-      const valuesArray = Array.isArray(filter.value) ? filter.value.map(obj => obj.value) : filter.value;
-      const encodedValue = Array.isArray(valuesArray) ? `[${valuesArray.join(';')}]` : valuesArray;
+      const valuesArray = filter.value
+      const encodedValue = Array.isArray(valuesArray) ? `[${valuesArray.join(';')}]` : valuesArray
       acc = [
         acc[0] ? `${acc[0]}${encodeURIComponent('|')}${filter.name}` : filter.name,
-        acc[1] ? `${acc[1]}${encodeURIComponent(`|${encodedValue}`)}` : `${encodeURIComponent(encodedValue)}`
-      ];
-      return acc;
+        acc[1]
+          ? `${acc[1]}${encodeURIComponent(`|${encodedValue}`)}`
+          : `${encodeURIComponent(encodedValue)}`
+      ]
+      return acc
     },
     ['', '']
-  );
+  )
 
 export const getFiltersGetUrl = (filters: Filter[]) => {
   if (!filters.length) return ''

@@ -56,7 +56,7 @@ const DynamicTable = props => {
       [...columns.filter(col => !col.isDynamic)]
     )
   }, [columns, rest])
-console.log(dynamicColumns)
+
   return <Table columns={dynamicColumns} extraUrlParams={extraUrlParams} {...rest} />
 }
 
