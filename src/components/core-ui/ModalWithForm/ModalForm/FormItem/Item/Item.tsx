@@ -13,10 +13,10 @@ const Item = ({
   handleInputChange,
   editItem,
   rest,
-  extraUrlParams
+  extraUrlParams,
+  errors
 }) => {
   const key = rest.payloadKey || name
-
   return (
     <Grid item key={name} xs={12} sm={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}>
       {createElement(Components[UIComponent], {
@@ -27,6 +27,8 @@ const Item = ({
         ...(type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
         name,
         extraUrlParams,
+        error: !!errors[name],
+        ...(errors[name] ? { helperText: errors[name] } : {} ),
         onChange: (arg, variable) => {
           switch (type) {
             case 'date':
@@ -49,6 +51,8 @@ const Item = ({
               } else {
                 handleInputChange(null, 'fileObject')
               }
+            case 'staticAutocomplete':
+
             default:
               handleInputChange(arg?.target?.value, key, type)
               break

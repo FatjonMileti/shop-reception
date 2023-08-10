@@ -72,8 +72,25 @@ export const downloadFile = url => {
 
 export const delay = ms => new Promise(res => setTimeout(res, ms))
 
-export const isScannerDevice = () => {
+export const isScannerDevice = callbackOtherwise => {
   const devices = ['DT50', 'EF50'] // [urovo, bluebird]
   const { userAgent } = window.navigator
-  return devices.some(device => userAgent.includes(device))
+  if (devices.some(device => userAgent.includes(device)))
+    return
+
+  if ((window.navigator)?.userAgentData) {
+
+    window.navigator.userAgentData.getHighEntropyValues(['model']).then(ua => {
+      if (ua && ua.model && devices.some(device => ua.model.includes(device)))
+        return
+      else {
+        // probably not on a device known to have infrared scanner
+        callbackOtherwise()
+      }
+    });
+
+  } else {
+    // probably not on https, to be allowed access to .userAgentData
+    callbackOtherwise()
+  }
 }

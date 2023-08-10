@@ -12,6 +12,7 @@ import {
 import { logout } from 'utils/authService'
 import { SidebarHeader } from './SidebarHeader'
 import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 import s from './Sidebar.scss'
 
 const staticItems = [
@@ -22,31 +23,26 @@ const staticItems = [
     primaryText: 'Home',
     type: 'icon',
     href: '/'
-  },
-  {
-    disablePadding: true,
-    icon: <NotificationsNoneOutlined />,
-    index: 2,
-    primaryText: 'Notifications',
-    type: 'icon',
-    href: '/'
-  },
-  {
-    disablePadding: true,
-    icon: <PersonOutlineOutlined />,
-    index: 3,
-    primaryText: 'Profile',
-    type: 'icon',
-    href: '/'
   }
+  // {
+  //   disablePadding: true,
+  //   icon: <NotificationsNoneOutlined />,
+  //   index: 2,
+  //   primaryText: 'Notifications',
+  //   type: 'icon',
+  //   href: '/'
+  // },
+  // {
+  //   disablePadding: true,
+  //   icon: <PersonOutlineOutlined />,
+  //   index: 3,
+  //   primaryText: 'Profile',
+  //   type: 'icon',
+  //   href: '/'
+  // }
 ]
 
-const Sidebar = ({
-  isMenuOpen,
-  handleCloseMenu,
-  modules,
-  setSubdomainId
-}) => {
+const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
 
@@ -63,7 +59,9 @@ const Sidebar = ({
       } catch (error) {
         // https://giphy.com/embed/oe33xf3B50fsc :))))
         showNotification({
-          message: `Error while setting application module menu items. ${error.message}`,
+          message: `Error while setting application module menu items. ${formatErrorMessage(
+            error
+          )}`,
           type: 'error'
         })
       }

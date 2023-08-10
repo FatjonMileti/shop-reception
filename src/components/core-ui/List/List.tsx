@@ -8,6 +8,7 @@ import s from './List.modules.scss'
 import { ListActions } from './ListActions'
 import { renderTableFooter } from '../Table/helpers'
 import FlexListTable from './FlexListTable'
+import { formatErrorMessage } from 'utils/formatting'
 
 const List = props => {
   const { action, columns, tableRowActions, tableFooter, ...rest } = props
@@ -18,8 +19,6 @@ const List = props => {
 
   const { showNotification } = useNotification()
   const { storeData } = useDataStore()
-
-  const renderedColumns = React.useMemo(() => getRenderedColumns(columns), [columns])
 
   const tableFooterComponent = React.useMemo(
     () => tableFooter && renderTableFooter(tableFooter, summary),
@@ -42,12 +41,17 @@ const List = props => {
       }
     } catch (error) {
       showNotification({
-        message: `Error while fetching list data. ${error.message}`,
+        message: `Error while fetching list data. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
     setIsLoading(false)
   }
+
+  const renderedColumns = React.useMemo(
+    () => getRenderedColumns(columns, handleRemoteData),
+    [columns]
+  )
 
   return (
     <Box className={s.listTableContainer}>

@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Divider, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
-import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
+import { makeCorePostRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { ProductActions } from 'reducers/productSlice'
 import s from './ProductGeneralInfo.modules.scss'
+import { formatErrorMessage } from 'utils/formatting'
 
 const ProductGeneralInfo = ({
   price,
@@ -35,13 +36,14 @@ const ProductGeneralInfo = ({
   React.useEffect(() => {
     ;(async () => {
       try {
-        const result = await makeCoreGetRequest(
-          `${checkAction.url}?${checkAction.variable}=${isWarehouse}`
-        )
-        setDisplayAddToCartBtn(result.cartHasProductsFromWarehouse)
+        let result
+        if (checkAction.type === 'POST') {
+          result = await makeCorePostRequest(checkAction.url)
+        }
+        setDisplayAddToCartBtn(result[checkAction.variable])
       } catch (error) {
         showNotification({
-          message: `A aparut o eroarea la afisarea butonului de "Adauga in cos". ${error.message}`,
+          message: `A aparut o eroarea la afisarea butonului de "Adauga in cos". ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }

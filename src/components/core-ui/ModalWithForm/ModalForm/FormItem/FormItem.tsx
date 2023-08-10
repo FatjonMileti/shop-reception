@@ -11,7 +11,8 @@ const FormItem = ({
   handleInputChange,
   gridSize,
   UIComponent,
-  extraUrlParams
+  extraUrlParams,
+  errors
 }) => {
   const value = useMemo(() => {
     if (type === 'countyCitySelect') {
@@ -30,7 +31,8 @@ const FormItem = ({
       if (editItemValue == '' && type === 'date') {
         return null // value=undefined => current date | value=null => input left blank
       }
-      return editItemValue || ''
+
+      return editItemValue === false ? editItemValue : editItemValue || ''
     }
   }, [
     type,
@@ -55,6 +57,7 @@ const FormItem = ({
       rest={rest}
       key={name}
       extraUrlParams={extraUrlParams}
+      errors={errors}
     />
   )
 }

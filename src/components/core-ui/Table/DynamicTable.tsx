@@ -6,22 +6,23 @@ import 'dayjs/locale/ro'
 import Table from './Table'
 
 const DynamicTable = props => {
-  const { columns, frequency, ...rest } = props
+  const { columns, frequency, extraUrlParams, ...rest } = props
 
-  const table = useSelector((state: RootState) => state.table)
-  const { filters } = table
+  const startDate = extraUrlParams.find(item => item.name === 'startDate')?.value
+  const endDate = extraUrlParams.find(item => item.name === 'endDate')?.value
 
   dayjs.locale('ro')
 
   const dynamicColumns = useMemo(() => {
     return columns.reduce(
-      (result, col, index) => {
+      (result, col) => {
         if (col.isDynamic) {
-          const { filterDep } = col
-          const [startDate, endDate] = filterDep.name
+          if(!startDate || !endDate){
+            return columns
+          }
 
-          const startValue = filters[startDate] ? dayjs(filters[startDate]) : dayjs(new Date())
-          const endValue = filters[endDate] ? dayjs(filters[endDate]) : dayjs(new Date())
+          const startValue = startDate ? dayjs(startDate) : dayjs(new Date())
+          const endValue = endDate ? dayjs(endDate) : dayjs(new Date())
 
           if (endValue.isAfter(startValue, 'day') || endValue.isSame(startValue, 'day')) {
             const datesArray = []
@@ -36,7 +37,7 @@ const DynamicTable = props => {
                 ...col,
                 collapsible: true,
                 title: `${col.title} ${formattedDate}`,
-                field: col.field + `.[${datesArray.length}]`
+                field: `applicationReportDynamicDtos.[${datesArray.length}].${col.field}`
               }
               datesArray.push(newColumn)
               currentDate = currentDate.add(1, 'day')
@@ -54,9 +55,9 @@ const DynamicTable = props => {
       },
       [...columns.filter(col => !col.isDynamic)]
     )
-  }, [columns, filters])
-
-  return <Table columns={dynamicColumns} {...rest} />
+  }, [columns, rest])
+console.log(dynamicColumns)
+  return <Table columns={dynamicColumns} extraUrlParams={extraUrlParams} {...rest} />
 }
 
 export default DynamicTable

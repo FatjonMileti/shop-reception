@@ -15,9 +15,10 @@ import {
 import { getItemDefaults, formatPayloadDate } from 'utils/helpers'
 import { toFormDataPayload, toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
-import { set } from 'lodash'
+import { set, isEmpty } from 'lodash'
 import { useMediaQuery, CircularProgress } from '@mui/material'
 import { useNotification } from 'hooks'
+import { get } from 'lodash'
 
 const sx = {
   position: 'absolute',
@@ -50,6 +51,7 @@ const ModalWithForm = ({
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer({})
+  const [errors, setErrors] = useState({})
 
   const { showNotification } = useNotification()
 
@@ -103,33 +105,48 @@ const ModalWithForm = ({
 
   const saveData = async data => {
     setIsLoading(true)
-
     try {
-      let result
-      if (formAction.type === 'POST') {
-        result = await makeCorePostRequest(`${formAction.url}`, data)
-        showNotification({
-          message: 'Item created successfully',
-          type: 'success'
-        })
-      }
-      if (formAction.type === 'PUT') {
-        result = await makeCorePutRequest(`${formAction.url}`, data)
-        showNotification({
-          message: 'Item saved successfully',
-          type: 'success'
-        })
-      }
-      if (formAction.type === 'PATCH') {
-        result = await makeCorePatchRequest(`${formAction.url}`, data)
-        showNotification({
-          message: 'Item saved successfully',
-          type: 'success'
-        })
-      }
+      const errors = formItems.reduce((acc, item) => {
+        if (item.required) {
+          const itemValue = item.payloadKey ? get(data, item.payloadKey) : get(data, item.name)
+          if (!itemValue) {
+            acc[item.name] = `${item.label} is required`
+          }
+        }
+        return acc
+      }, {})
+      if (isEmpty(errors)) {
+        let result
+        if (formAction.type === 'POST') {
+          result = await makeCorePostRequest(`${formAction.url}`, data)
+          showNotification({
+            message: 'Item created successfully',
+            type: 'success'
+          })
+        }
+        if (formAction.type === 'PUT') {
+          result = await makeCorePutRequest(`${formAction.url}`, data)
+          showNotification({
+            message: 'Item saved successfully',
+            type: 'success'
+          })
+        }
+        if (formAction.type === 'PATCH') {
+          result = await makeCorePatchRequest(`${formAction.url}`, data)
+          showNotification({
+            message: 'Item saved successfully',
+            type: 'success'
+          })
+        }
 
-      if (href && result.id) {
-        navigate(`${href}/${result.id}`)
+        additionalAction && additionalAction()
+        closeModalAndResetForm()
+
+        if (href && result.id) {
+          navigate(`${href}/${result.id}`)
+        }
+      } else {
+        setErrors(errors)
       }
     } catch (error) {
       showNotification({
@@ -137,8 +154,6 @@ const ModalWithForm = ({
         type: 'error'
       })
     }
-    additionalAction && additionalAction()
-    closeModalAndResetForm()
     setIsLoading(false)
   }
 
@@ -156,6 +171,7 @@ const ModalWithForm = ({
     closeModal()
     setEditItem({})
     setIsLoading(true)
+    setErrors({})
   }
 
   const isXs = useMediaQuery('(max-width:624px)')
@@ -202,6 +218,7 @@ const ModalWithForm = ({
               saveData={saveFn}
               closeModal={closeModalAndResetForm}
               extraUrlParams={extraUrlParams}
+              errors={errors}
             />
           </div>
         )}

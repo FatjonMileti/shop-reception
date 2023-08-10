@@ -28,6 +28,10 @@
   align-items: center;
   gap: 24px;
 
+  &.pageFormButtons {
+    justify-content: right;
+  }
+
   button {
     height: 42px;
     flex: 1;
