@@ -3,7 +3,14 @@ import { isAllowed } from 'utils/helpers'
 import { getUserRoles } from 'utils/authService'
 import { ROLE_ALL } from 'utils/constants'
 
-const usePermissions = ({ createRoles, viewRoles, editRoles, deleteRoles, cancelRoles }) => {
+const usePermissions = ({
+  createRoles,
+  viewRoles,
+  editRoles,
+  deleteRoles,
+  cancelRoles,
+  customActionRoles
+}) => {
   const currentUserRoles = useMemo(() => getUserRoles(), [])
 
   const canCreate = useMemo(
@@ -39,7 +46,14 @@ const usePermissions = ({ createRoles, viewRoles, editRoles, deleteRoles, cancel
     [currentUserRoles]
   )
 
-  return { canCreate, canView, canEdit, canDelete, canCancel }
+  const canSeeCustomAction = useMemo(
+    () =>
+      customActionRoles?.includes(ROLE_ALL) ||
+      (currentUserRoles && isAllowed(customActionRoles, currentUserRoles)),
+    [currentUserRoles]
+  )
+
+  return { canCreate, canView, canEdit, canDelete, canCancel, canSeeCustomAction }
 }
 
 export default usePermissions

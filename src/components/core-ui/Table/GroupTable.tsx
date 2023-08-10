@@ -62,12 +62,13 @@ const GroupTable = props => {
 
   const { showNotification } = useNotification()
 
-  const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({
+  const { canCreate, canView, canEdit, canDelete, canCancel, canSeeCustomAction } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
     viewRoles: tableRowActions?.viewAction?.allowedRoles,
     editRoles: tableRowActions?.editAction?.allowedRoles,
     deleteRoles: tableRowActions?.deleteAction?.allowedRoles,
-    cancelRoles: tableRowActions?.cancelAction?.allowedRoles
+    cancelRoles: tableRowActions?.cancelAction?.allowedRoles,
+    customActionRoles: tableRowActions?.customAction?.allowedRoles
   })
 
   const filtersConfig = useMemo(() => {
@@ -282,39 +283,39 @@ const GroupTable = props => {
       <GeneralTable
         {...rest}
         columns={
-          tableRowActions && (canEdit || canDelete || canView || canCancel)
+          tableRowActions && (canEdit || canDelete || canView || canCancel || canSeeCustomAction)
             ? renderedColumns.concat({
                 title: '',
                 field: 'actions',
                 align: 'right',
                 width: '112px',
                 collapsible: 'true',
-                render: row => {
-                  return (
-                    <TableActions
-                      itemId={row.id}
-                      viewAction={tableRowActions.viewAction}
-                      editAction={tableRowActions.editAction}
-                      deleteAction={tableRowActions.deleteAction}
-                      cancelAction={tableRowActions.cancelAction}
-                      additionalAction={() =>
-                        handleRemoteData(
-                          tableState.page,
-                          tableState.rowsPerPage,
-                          tableState.order,
-                          tableState.orderBy,
-                          tableState.searchText,
-                          tableState.filters
-                        )
-                      }
-                      canView={canView}
-                      canEdit={canEdit}
-                      canDelete={canDelete}
-                      canCancel={canCancel}
-                      isUserModal={isUserModal}
-                    />
-                  )
-                }
+                render: row => (
+                  <TableActions
+                    itemId={row.id}
+                    viewAction={tableRowActions.viewAction}
+                    editAction={tableRowActions.editAction}
+                    deleteAction={tableRowActions.deleteAction}
+                    cancelAction={tableRowActions.cancelAction}
+                    customAction={tableRowActions.customAction}
+                    additionalAction={() =>
+                      handleRemoteData(
+                        tableState.page,
+                        tableState.rowsPerPage,
+                        tableState.order,
+                        tableState.orderBy,
+                        tableState.searchText,
+                        tableState.filters
+                      )
+                    }
+                    canView={canView}
+                    canEdit={canEdit}
+                    canDelete={canDelete}
+                    canCancel={canCancel}
+                    isUserModal={isUserModal}
+                    canSeeCustomAction={canSeeCustomAction}
+                  />
+                )
               })
             : renderedColumns
         }
