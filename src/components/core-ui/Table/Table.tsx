@@ -48,7 +48,7 @@ const Table = props => {
     window.history.state.tableState || {
       page: 0,
       rowsPerPage: rest.rowsPerPage ?? 10,
-      order: rest.order ?? 'asc',
+      order: rest.order ?? '',
       orderBy: rest.orderBy ?? '',
       searchText: '',
       filters: []
