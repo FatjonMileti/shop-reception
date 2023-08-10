@@ -11,7 +11,8 @@ const FormItem = ({
   handleInputChange,
   gridSize,
   UIComponent,
-  extraUrlParams
+  extraUrlParams,
+  errors
 }) => {
   const value = useMemo(() => {
     if (type === 'countyCitySelect') {
@@ -56,6 +57,7 @@ const FormItem = ({
       rest={rest}
       key={name}
       extraUrlParams={extraUrlParams}
+      errors={errors}
     />
   )
 }

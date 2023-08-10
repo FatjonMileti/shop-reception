@@ -158,6 +158,7 @@ const PageForm = props => {
         saveData={saveData}
         closeModal={resetForm}
         isPageForm
+        errors={{}}
       />
     </Box>
   )
