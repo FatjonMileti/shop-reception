@@ -15,7 +15,7 @@ const ButtonWithModalAndForm = ({
   editedItemId,
   editedItemUrl,
   additionalAction,
-  isUserModal = false
+  userModal
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
@@ -29,8 +29,10 @@ const ButtonWithModalAndForm = ({
         onClick={openModal}
         style={{ minWidth: '0.7rem', background: 'transparent' }}
       />
-      {isUserModal ? (
+      {userModal ? (
         <UserModal
+          userModal={userModal}
+          formAction={formAction}
           editedItemId={editedItemId}
           isModalOpen={isModalOpen}
           closeModal={closeModal}

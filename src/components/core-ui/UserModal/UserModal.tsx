@@ -37,7 +37,8 @@ const infoItems = [
 ]
 
 function UserModal(props) {
-  const { isModalOpen, closeModal, editedItemId, additionalAction } = props
+  const { isModalOpen, closeModal, editedItemId, additionalAction, formAction, userModal } = props
+  const { getRolesAction, getStructuresAction } = userModal
   const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer(null)
   const [roles, setRoles] = useState([])
@@ -141,13 +142,13 @@ function UserModal(props) {
     if (isModalOpen && editedItemId) {
       ;(async () => {
         try {
-          const result = await makeCoreGetRequest(`/user/${editedItemId}`)
+          const result = await makeCoreGetRequest(formAction.url)
           setEditItem({
             ...result,
             structureRoles: result.structureRoles
           })
 
-          const rolesResult = await makeCoreGetRequest('/role')
+          const rolesResult = await makeCoreGetRequest(`${getRolesAction}`)
 
           const traineeRoles = rolesResult
             .filter(role => role.name.includes('TRAINEE'))
@@ -176,7 +177,7 @@ function UserModal(props) {
   const saveData = async () => {
     setIsLoading(true)
     try {
-      await makeCorePutRequest(`/user/${editedItemId}`, editItem)
+      await makeCorePutRequest(formAction.url, editItem)
       showNotification({
         message: 'Item saved successfully',
         type: 'success'
@@ -244,7 +245,7 @@ function UserModal(props) {
                           structureRole => structureRole.roleId === role.id
                         )
                         const action = {
-                          url: `/structure/role/${role.id}`,
+                          url: `${getStructuresAction}/${role.id}`,
                           type: 'GET',
                           valueKey: 'id',
                           labelKey: 'name'
