@@ -214,7 +214,8 @@ const GroupTable = props => {
               0,
               -3
             )} ${additionalName}`,
-            field: `list.[${index}].${col.field}`
+            field: `list.[${index}].${col.field}`,
+            disableSorting: true,
           } || []
         )
       })

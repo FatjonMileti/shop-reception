@@ -37,7 +37,8 @@ const DynamicTable = props => {
                 ...col,
                 collapsible: true,
                 title: `${col.title} ${formattedDate}`,
-                field: `applicationReportDynamicDtos.[${datesArray.length}].${col.field}`
+                field: `applicationReportDynamicDtos.[${datesArray.length}].${col.field}`,
+                disableSorting: true,
               }
               datesArray.push(newColumn)
               currentDate = currentDate.add(1, 'day')
