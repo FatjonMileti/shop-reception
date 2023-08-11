@@ -7,6 +7,7 @@ import { useNotification } from 'hooks'
 import { FormItem } from './FormItem'
 import { isEmpty } from 'lodash'
 import { Icon } from '../../Icon'
+import cn from 'classnames'
 import s from './ModalForm.modules.scss'
 
 const ModalForm = ({
@@ -19,7 +20,9 @@ const ModalForm = ({
   formButtons,
   saveData,
   closeModal,
-  extraUrlParams = {}
+  extraUrlParams = {},
+  isPageForm = false,
+  errors
 }) => {
   const [processedFormItems, setProcessedFormItems] = useState(formItems)
 
@@ -65,7 +68,7 @@ const ModalForm = ({
 
           return (
             <FormItem
-              key={name}
+              key={name || rest.id}
               name={name}
               type={type}
               editItem={editItem}
@@ -75,6 +78,7 @@ const ModalForm = ({
               handleInputChange={handleInputChange}
               gridSize={gridSize}
               extraUrlParams={extraUrlParams}
+              errors={errors}
             />
           )
         })}
@@ -83,7 +87,12 @@ const ModalForm = ({
         {[...Array(12 / gridSize - 1)].map((_, i) => (
           <Grid item key={i} xs={12} sm={gridSize} />
         ))}
-        <Grid item xs={12} sm={gridSize} className={s.modalButtons}>
+        <Grid
+          item
+          xs={12}
+          sm={gridSize}
+          className={cn(s.modalButtons, { [s.pageFormButtons]: isPageForm })}
+        >
           {formButtons.map(formButton => {
             const { isSaveButton, UIComponent, startIcon, endIcon, iconFill, ...rest } = formButton
             return UIComponent === 'IconButton' ? (
@@ -93,12 +102,14 @@ const ModalForm = ({
                   startIcon && <Icon iconName={startIcon} tiny fill={iconFill || 'white'} />
                 }
                 endIcon={endIcon && <Icon iconName={endIcon} tiny fill={iconFill || 'white'} />}
+                style={isPageForm ? { maxWidth: 'fit-content' } : {}}
                 {...rest}
                 onClick={isSaveButton ? saveData : closeModal}
               />
             ) : (
               <Button
                 key={formButton.label}
+                style={isPageForm ? { maxWidth: 'fit-content' } : {}}
                 {...rest}
                 onClick={isSaveButton ? saveData : closeModal}
               />

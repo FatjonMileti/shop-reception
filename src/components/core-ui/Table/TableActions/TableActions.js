@@ -4,6 +4,7 @@ import { ButtonWithConfirmDeleteModal } from '../../ButtonWithConfirmDeleteModal
 import { ButtonWithConfirmCancelModal } from '../../ButtonWithConfirmCancelModal'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Icon } from 'components/core-ui/Icon'
 
 const TableActions = ({
   itemId,
@@ -16,7 +17,9 @@ const TableActions = ({
   canEdit,
   canDelete,
   canCancel,
-  userModal
+  userModal,
+  customAction,
+  canSeeCustomAction
 }) => {
   const navigate = useNavigate()
 
@@ -83,6 +86,16 @@ const TableActions = ({
           }}
           additionalAction={additionalAction}
         />
+      )}
+      {customAction && canSeeCustomAction && (
+        <Button
+          onClick={() => {
+            navigate(customAction.url)
+          }}
+          style={{ minWidth: '0.7rem', background: 'transparent' }}
+        >
+          <Icon iconName={customAction.icon} tiny fill="#0970E6" />
+        </Button>
       )}
     </div>
   )

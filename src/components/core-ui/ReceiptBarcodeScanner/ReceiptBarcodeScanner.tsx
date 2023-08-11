@@ -30,6 +30,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   }
 
   const { run, destroy } = useScandit({ onScan, isVisible })
+  const [isUsingScandit, setIsUsingScandit] = React.useState(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
 
   const scanCode = () => {
     setIsVisible(true)
@@ -62,11 +63,14 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   }
 
   React.useEffect(() => {
-    try {
-      run()
-    } catch (error) {
-      console.log(error)
-    }
+    isScannerDevice(() => {
+      try {
+        run()
+        setIsUsingScandit(true)
+      } catch (error) {
+        console.log(error)
+      }
+    })
   }, [])
 
   React.useEffect(() => {
@@ -88,7 +92,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           />
         </div>
         <div className={s.buttonContainer}>
-          {!isScannerDevice() && (
+          {isUsingScandit && (
             <IconButton
               onClick={scanCode}
               label="Scaneaza"

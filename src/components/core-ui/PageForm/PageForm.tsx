@@ -1,19 +1,34 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import { useImmer } from 'use-immer'
 import { set } from 'lodash'
 import { ModalForm } from '../ModalWithForm/ModalForm'
 import { toItemPayload } from 'utils/serializers'
-import { makeCorePostRequest, makeCorePutRequest, makeCorePatchRequest } from 'utils/api'
+import {
+  makeCorePostRequest,
+  makeCorePutRequest,
+  makeCorePatchRequest,
+  makeCoreGetRequest
+} from 'utils/api'
 import { useNotification } from 'hooks'
 import cn from 'classnames'
 import { Box } from '@mui/material'
 import s from './PageForm.modules.scss'
 import { getItemDefaults } from 'utils/helpers'
+import { get } from 'lodash'
+import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 
 const PageForm = props => {
-  const { formItems, formInfoItems, formButtons, formAction, formItemsPerRow, visible, href } =
-    props
+  const {
+    formItems,
+    formInfoItems,
+    formButtons,
+    formAction,
+    formItemsPerRow,
+    visible,
+    href,
+    title
+  } = props
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -21,29 +36,50 @@ const PageForm = props => {
 
   const navigate = useNavigate()
 
+  const { id } = useParams()
+
   let [searchParams, _] = useSearchParams()
 
   const { showNotification } = useNotification()
 
-  const gridSize = 12 / formItemsPerRow
+  const gridSize = formItemsPerRow ? 12 / formItemsPerRow : 12
 
   const setInitialItems = useCallback(async () => {
     setEditItem(getItemDefaults(formItems))
-
-    // const hiddenItems = formItems.filter(item => item.type === 'hidden')
-
-    // if (hiddenItems.length) {
-    //   hiddenItems.map(item => {
-    //     const { name, type, value } = item
-    //     setEditItem(draft => {
-    //       set(draft, name, value)
-    //     })
-    //   })
-    // }
   }, [formItems])
 
+  // const setHiddenItems = () => {
+  //   const hiddenItems = formItems.filter(item => item.type === 'hidden')
+  //   console.log(editItem)
+
+  //   if (hiddenItems.length) {
+  //     hiddenItems.map(item => {
+  //       const { name, value } = item
+  //       setEditItem(draft => {
+  //         set(draft, name, value)
+  //       })
+  //     })
+  //   }
+  // }
+
   useEffect(() => {
-    setInitialItems()
+    if (formAction.getUrl) {
+      ;(async () => {
+        try {
+          const result = await makeCoreGetRequest(`${formAction.getUrl}/${id}`)
+          setEditItem({ ...getItemDefaults(formItems), ...result })
+        } catch (error) {
+          showNotification({
+            message: `Error while fetching item. ${error?.message}`,
+            type: 'error'
+          })
+        } finally {
+          setTimeout(() => setIsLoading(false), 500)
+        }
+      })()
+    } else {
+      setInitialItems()
+    }
   }, [setInitialItems])
 
   const handleInputChange = (value, name, type) => {
@@ -105,7 +141,12 @@ const PageForm = props => {
   }
 
   return (
-    <Box className={cn({ [s.hidden]: !visible })}>
+    <Box className={cn({ [s.hidden]: !visible }, s.formContainer)}>
+      {title && (
+        <Typography component="h1" variant="medium">
+          {get(editItem, title.name)}
+        </Typography>
+      )}
       <ModalForm
         modalTitle=""
         formItems={formItems.filter(item => item.type != 'hidden')}
@@ -116,6 +157,8 @@ const PageForm = props => {
         formButtons={formButtons}
         saveData={saveData}
         closeModal={resetForm}
+        isPageForm
+        errors={{}}
       />
     </Box>
   )

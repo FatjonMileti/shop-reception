@@ -31,16 +31,15 @@ const PdfViewer = (props: PdfViewerProps) => {
 
   React.useEffect(() => {
     ;(async () => {
-      if (id == undefined)
-        return
-        
+      if (id == undefined) return
+
       try {
         const proformResult = await makeCoreGetRequest(`${action.url}/${id}`)
         setProform(proformResult)
         if (action.storeIn) {
           storeData(action.storeIn, proformResult) // [~] if we store the response first, then this 'response' variable becomes read-only and the following toTableRowItems throws an error
           // console.log("stored in ", action.storeIn)
-        }  
+        }
       } catch (error) {
         showNotification({
           message: `A aparut o eroare la descarcarea fisierului. ${error?.message}`,
@@ -57,19 +56,23 @@ const PdfViewer = (props: PdfViewerProps) => {
   }, [isXs])
 
   const scanReceipt = () => {
-    navigate(`${actions.scanReceiptAction.href}/${id}?clientId=${retrieveData("proformaDetails.client")}`)
+    navigate(
+      `${actions.scanReceiptAction.href}/${id}?clientId=${retrieveData('proformaDetails.client')}`
+    )
   }
 
   // [~] on back from this page we get called with id=undefined by react...
-  return (id ?
+  return id ? (
     <div>
       <div className={s.scanReceiptContainer}>
-        {proform?.isActive && (<IconButton
-          onClick={scanReceipt}
-          label={actions.scanReceiptAction.label}
-          variant="contained"
-          endIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="white" />}
-        />)}
+        {proform?.isActive && (
+          <IconButton
+            onClick={scanReceipt}
+            label={actions.scanReceiptAction.label}
+            variant="contained"
+            endIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="white" />}
+          />
+        )}
       </div>
       <div className={s.PDFViewer}>
         <PdfActions
@@ -89,7 +92,9 @@ const PdfViewer = (props: PdfViewerProps) => {
         />
       </div>
     </div>
-  : <></>)
+  ) : (
+    <></>
+  )
 }
 
 export default PdfViewer

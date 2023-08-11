@@ -48,7 +48,7 @@ const Table = props => {
     window.history.state.tableState || {
       page: 0,
       rowsPerPage: rest.rowsPerPage ?? 10,
-      order: rest.order ?? 'asc',
+      order: rest.order ?? '',
       orderBy: rest.orderBy ?? '',
       searchText: '',
       filters: []
@@ -61,12 +61,13 @@ const Table = props => {
 
   const navigate = useNavigate()
 
-  const { canCreate, canView, canEdit, canDelete, canCancel } = usePermissions({
+  const { canCreate, canView, canEdit, canDelete, canCancel, canSeeCustomAction } = usePermissions({
     createRoles: tableActions?.newAction?.allowedRoles,
     viewRoles: tableRowActions?.viewAction?.allowedRoles,
     editRoles: tableRowActions?.editAction?.allowedRoles,
     deleteRoles: tableRowActions?.deleteAction?.allowedRoles,
-    cancelRoles: tableRowActions?.cancelAction?.allowedRoles
+    cancelRoles: tableRowActions?.cancelAction?.allowedRoles,
+    customActionRoles: tableRowActions?.customAction?.allowedRoles
   })
 
   const filtersConfig = useMemo(() => {
@@ -332,7 +333,7 @@ const Table = props => {
       <GeneralTable
         {...rest}
         columns={
-          tableRowActions && (canEdit || canDelete || canView || canCancel)
+          tableRowActions && (canEdit || canDelete || canView || canCancel || canSeeCustomAction)
             ? renderedColumns.concat({
                 title: '',
                 field: 'actions',
@@ -346,6 +347,7 @@ const Table = props => {
                     editAction={tableRowActions.editAction}
                     deleteAction={tableRowActions.deleteAction}
                     cancelAction={tableRowActions.cancelAction}
+                    customAction={tableRowActions.customAction}
                     additionalAction={() =>
                       handleRemoteData(
                         tableState.page,
@@ -361,6 +363,7 @@ const Table = props => {
                     canDelete={canDelete}
                     canCancel={canCancel}
                     userModal={userModal}
+                    canSeeCustomAction={canSeeCustomAction}
                   />
                 )
               })

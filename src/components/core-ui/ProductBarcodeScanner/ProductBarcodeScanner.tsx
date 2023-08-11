@@ -37,35 +37,40 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   }
 
   const { run } = useScandit({ onScan, isVisible })
+  const [isUsingScandit, setIsUsingScandit] = React.useState(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
 
   const scanCode = () => {
     dispatch(ProductActions.clearProduct())
     setIsVisible(true)
   }
 
-  const searchProduct = () => {
+  const searchProduct = async (event) => {
+    event.target.blur() // [~] otherwise, the side button will trigger this click event...
     if (product.code) {
-      ;(async () => {
-        let response: ProductStockResponse
-        if (action.type === 'GET') {
-          response = await makeCoreGetRequest(`${action.url}/${product.code}`)
-          dispatch(ProductActions.setProduct({ ...toProduct(response) }))
-        }
-      })()
+      let response: ProductStockResponse
+      if (action.type === 'GET') {
+        response = await makeCoreGetRequest(`${action.url}/${product.code}`)
+        dispatch(ProductActions.setProduct({ ...toProduct(response) }))
+      }
     }
   }
 
   React.useEffect(() => {
-    try {
-      run()
-    } catch (error) {
-      console.log(error)
-    }
+    isScannerDevice(() => {
+      try {
+        run()
+        setIsUsingScandit(true)
+      } catch (error) {
+        console.log(error)
+      }
+    })
   }, [])
 
   React.useEffect(() => {
     document.getElementById('product-scan-input').focus()
   }, [])
+
+  const [isZerothButtonPressed, setIsZerothButtonPressed] = React.useState(false)
 
   return (
     <Paper className={s.scanContainer}>
@@ -80,11 +85,33 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             onChange={event =>
               dispatch(ProductActions.setProduct({ code: event.currentTarget.value }))
             }
+            onBlur={event => {
+              if (!product.code) {
+                document.getElementById('product-scan-input').focus();
+              }
+            }}
+            onKeyDown={event => {
+              if (event.which == 0) {
+                setIsZerothButtonPressed(true)
+              }
+            }}
+            onKeyUp={event => {
+              if (event.which == 0) {
+                setIsZerothButtonPressed(false)
+                if (product.code)
+                  searchProduct(event)
+              }
+            }}
+            onBeforeInput={event => {
+              if (isZerothButtonPressed) {
+                (document.getElementById('product-scan-input') as HTMLInputElement).value = ''
+              }
+            }}
             id="product-scan-input"
           />
         </div>
         <div className={s.buttonContainer}>
-          {!isScannerDevice() && (
+          {isUsingScandit && (
             <IconButton
               onClick={scanCode}
               label="Scaneaza"
