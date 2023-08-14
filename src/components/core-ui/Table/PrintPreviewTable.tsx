@@ -101,7 +101,7 @@ const PrintPreviewTable = props => {
       let response
       if (action.type === 'GET') {
         response = await makeCoreGetRequest(
-          `${url}?page=0&size=1000&order=${order}&orderBy=${orderBy}&filterBy=${filterBy}&filterValue=${filterValue}`
+          `${url}?page=0&size=1000&order=${order ? order : ''}&orderBy=${orderBy ? orderBy : ''}&filterBy=${filterBy}&filterValue=${filterValue}`
         )
       }
 

@@ -7,7 +7,7 @@ import { Close } from '@mui/icons-material'
 import { Autocomplete, IconButton, Button } from '@fullscreendigital/carrefour-dex-fe'
 import { useMediaQuery } from '@mui/material'
 
-import s from './DownloadModal.modules.scss'
+import s from './PrintModal.modules.scss'
 import { toTableGETUrl } from '../Table/serializers'
 
 const sx = {
@@ -26,7 +26,7 @@ const sx = {
   borderRadius: '8px'
 }
 
-const DownloadModal = ({
+const PrintModal = ({
   modalProps,
   isModalOpen,
   closeModal,
@@ -123,4 +123,4 @@ const DownloadModal = ({
   )
 }
 
-export default DownloadModal
+export default PrintModal

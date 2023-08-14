@@ -15,10 +15,9 @@ import {
 import { getItemDefaults, formatPayloadDate } from 'utils/helpers'
 import { toFormDataPayload, toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
-import { set, isEmpty } from 'lodash'
+import { set, isEmpty, get } from 'lodash'
 import { useMediaQuery, CircularProgress } from '@mui/material'
 import { useNotification } from 'hooks'
-import { get } from 'lodash'
 
 const sx = {
   position: 'absolute',

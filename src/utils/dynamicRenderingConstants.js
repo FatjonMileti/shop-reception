@@ -7,7 +7,7 @@ import { Button } from 'components/core-ui/Button'
 import { Card } from 'components/core-ui/Card'
 import { ContainerBox } from 'components/core-ui/ContainerBox'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
-import { DownloadModal } from 'components/core-ui/DownloadModal'
+import { PrintModal } from 'components/core-ui/PrintModal'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Grid } from 'components/core-ui/Grid'
 import { Input } from 'components/core-ui/Input'
@@ -62,7 +62,7 @@ export const Components = {
   Card,
   ContainerBox,
   CountyCitySelect,
-  DownloadModal,
+  PrintModal,
   FloatingButton,
   Grid,
   Input,

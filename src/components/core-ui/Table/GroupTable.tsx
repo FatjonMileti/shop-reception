@@ -20,7 +20,7 @@ import debounce from 'lodash.debounce'
 import s from '../Table/Table.modules.scss'
 import { isEmpty } from 'lodash'
 import { downloadFile } from 'utils/helpers'
-import { DownloadModal } from '../DownloadModal'
+import PrintModal from '../PrintModal/PrintModal'
 import { formatErrorMessage } from 'utils/formatting'
 
 const GroupTable = props => {
@@ -44,7 +44,7 @@ const GroupTable = props => {
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
-  const [isDownloadModalOpen, setIsDowloadModalOpen] = useState(false)
+  const [isPrintModalOpen, setIsPrintModalOpen] = useState(false)
   const [summary, setSummary] = useState({})
   const [dynamicColumns, setDynamicColumns] = useState([])
 
@@ -236,13 +236,13 @@ const GroupTable = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
-  const openDownloadModal = () => setIsDowloadModalOpen(true)
+  const openDownloadModal = () => setIsPrintModalOpen(true)
 
-  const closeDownloadModal = () => setIsDowloadModalOpen(false)
+  const closeDownloadModal = () => setIsPrintModalOpen(false)
 
   const handleDownload = () => {
     if (tableActions?.downloadAction) {
-      const { action, selectColumns } = tableActions.downloadAction
+      const { action } = tableActions?.downloadAction
       const { searchText, filters, order, orderBy } = tableState
 
       const url = toTableGETUrl({
@@ -281,13 +281,13 @@ const GroupTable = props => {
         />
       )}
       {tableActions?.downloadAction?.selectColumns && (
-        <DownloadModal
+        <PrintModal
           {...tableActions.downloadAction}
           {...tableState}
           tableFilters={tableFilters}
           url={tableActions.downloadAction.action.url}
           dynamicColumns={dynamicColumns}
-          isModalOpen={isDownloadModalOpen}
+          isModalOpen={isPrintModalOpen}
           closeModal={closeDownloadModal}
           columns={tableActions.downloadAction.columns}
           extraUrlParams={extraUrlParams}

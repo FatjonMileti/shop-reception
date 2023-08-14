@@ -240,11 +240,8 @@ const Table = props => {
   
   const handleDownload = () => {
     if (tableActions?.downloadAction) {
-      const { action, selectColumns } = tableActions.downloadAction
+      const { action } = tableActions.downloadAction
       const { searchText, filters, order, orderBy } = tableState
-
-      if (selectColumns) {
-      }
 
       const url = toTableGETUrl({
         url: action.url,
