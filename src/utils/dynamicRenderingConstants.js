@@ -41,6 +41,7 @@ import DynamicTable from 'components/core-ui/Table/DynamicTable'
 import GroupTable from 'components/core-ui/Table/GroupTable'
 import { ImageCell } from 'components/core-ui/ImageCell'
 import { ProductView } from 'components/core-ui/ProductView'
+import PrintPreviewTable from 'components/core-ui/Table/PrintPreviewTable'
 
 export const Components = {
   // MUI components
@@ -93,5 +94,6 @@ export const Components = {
   DynamicTable,
   GroupTable,
   ImageCell,
-  ProductView
+  ProductView,
+  PrintPreviewTable
 }

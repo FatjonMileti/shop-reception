@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import Modal from '@mui/material/Modal'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { Close } from '@mui/icons-material'
 import { Autocomplete, IconButton, Button } from '@fullscreendigital/carrefour-dex-fe'
-import { makeCoreGetRequest } from 'utils/api'
 import { useMediaQuery } from '@mui/material'
 
 import s from './DownloadModal.modules.scss'
-import { useNotification } from 'hooks'
+import { toTableGETUrl } from '../Table/serializers'
 
 const sx = {
   position: 'absolute',
@@ -33,30 +32,46 @@ const DownloadModal = ({
   closeModal,
   columns,
   modalTitle,
-  downloadUrl
+  downloadUrl,
+  dynamicColumns,
+  extraUrlParams,
+  url,
+  tableFilters,
+  ...rest
 }) => {
-  const [value, setValue] = useState(columns)
-  const { showNotification } = useNotification()
+  const columnOptions = useMemo(() => {
+    return dynamicColumns.map(col => ({
+      label: col.title,
+      value: col.field
+    }))
+  }, [dynamicColumns])
+
+  const [value, setValue] = useState(columnOptions)
 
   const closeModalAndResetForm = () => {
     closeModal()
   }
 
   const onSubmit = () => {
-    if (isModalOpen) {
-      ;(async () => {
-        try {
-          await makeCoreGetRequest(`${downloadUrl}/`)
-        } catch (error) {
-          showNotification({
-            message: `Error while fetching item. ${error?.message}`,
-            type: 'error'
-          })
-        } finally {
-          closeModalAndResetForm()
-        }
-      })()
-    }
+    const filters = toTableGETUrl({
+      url,
+      searchText: '',
+      searchFields: [],
+      filters: rest.filters,
+      tableFilters: tableFilters,
+      page: 0,
+      rowsPerPage: 0,
+      order: rest.order,
+      orderBy: rest.orderBy,
+      hasGeneralSearch: false,
+      generalSearchText: '',
+      extraUrlParams
+    })
+
+    const columnsToPrint = encodeURIComponent(value.map(val => val.value))
+    const printUrl = ''.concat(filters, `&columns=${columnsToPrint}`)
+   
+    window.open(printUrl, '_blank');
   }
 
   const isXs = useMediaQuery('(max-width:624px)')
@@ -93,7 +108,7 @@ const DownloadModal = ({
         )}
         <Autocomplete
           multiple={true}
-          options={columns}
+          options={columnOptions}
           value={value}
           onChange={(_, val) => setValue(val)}
           label="Selecteaza coloane"
@@ -101,7 +116,7 @@ const DownloadModal = ({
         />
         <Grid item xs={12} className={s.modalButtons}>
           <Button label="Anuleaza" onClick={closeModal} />
-          <Button variant="contained" label="Printeaza" onClick={() => {}} />
+          <Button variant="contained" label="Previzualizare" onClick={onSubmit} />
         </Grid>
       </Box>
     </Modal>

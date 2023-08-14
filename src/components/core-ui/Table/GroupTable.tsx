@@ -34,7 +34,6 @@ const GroupTable = props => {
     hasInitialFilters,
     extraUrlParams,
     extraCustomUrlParams,
-    dynamicColumn,
     userModal,
     ...rest
   } = props
@@ -216,7 +215,7 @@ const GroupTable = props => {
               -3
             )} ${additionalName}`,
             field: `list.[${index}].${col.field}`,
-            disableSorting: true,
+            disableSorting: true
           } || []
         )
       })
@@ -225,7 +224,9 @@ const GroupTable = props => {
     const orderdCols = newColumns.sort((col1, col2) =>
       col1.start.localeCompare(col2.start, undefined, { numeric: true })
     )
-    const dynamicCols = staticColumns.concat(orderdCols)
+
+    let dynamicCols = staticColumns.concat(orderdCols)
+
     return dynamicCols
   }
 
@@ -282,6 +283,10 @@ const GroupTable = props => {
       {tableActions?.downloadAction?.selectColumns && (
         <DownloadModal
           {...tableActions.downloadAction}
+          {...tableState}
+          tableFilters={tableFilters}
+          url={tableActions.downloadAction.action.url}
+          dynamicColumns={dynamicColumns}
           isModalOpen={isDownloadModalOpen}
           closeModal={closeDownloadModal}
           columns={tableActions.downloadAction.columns}
