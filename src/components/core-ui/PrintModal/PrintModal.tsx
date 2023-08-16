@@ -30,7 +30,6 @@ const PrintModal = ({
   modalProps,
   isModalOpen,
   closeModal,
-  columns,
   modalTitle,
   downloadUrl,
   dynamicColumns,

@@ -61,6 +61,17 @@ export const getItemDefaultsAsArray = formItems => {
 export const isAllowed = (allowedRoles, currentUserRoles) =>
   allowedRoles && currentUserRoles.some(r => allowedRoles.includes(r))
 
+export const formatAndDownloadResponse = fileObject => {
+  const blobUrl = URL.createObjectURL(fileObject)
+
+  const link = document.createElement('a')
+  link.href = blobUrl
+  link.download = 'downloaded-file.xlsx'
+  link.click()
+
+  URL.revokeObjectURL(blobUrl)
+}
+
 export const downloadFile = url => {
   const a = document.createElement('a')
   a.href = `${getCoreBaseUrl(url)}`
@@ -75,20 +86,16 @@ export const delay = ms => new Promise(res => setTimeout(res, ms))
 export const isScannerDevice = callbackOtherwise => {
   const devices = ['DT50', 'EF50'] // [urovo, bluebird]
   const { userAgent } = window.navigator
-  if (devices.some(device => userAgent.includes(device)))
-    return
+  if (devices.some(device => userAgent.includes(device))) return
 
-  if ((window.navigator)?.userAgentData) {
-
+  if (window.navigator?.userAgentData) {
     window.navigator.userAgentData.getHighEntropyValues(['model']).then(ua => {
-      if (ua && ua.model && devices.some(device => ua.model.includes(device)))
-        return
+      if (ua && ua.model && devices.some(device => ua.model.includes(device))) return
       else {
         // probably not on a device known to have infrared scanner
         callbackOtherwise()
       }
-    });
-
+    })
   } else {
     // probably not on https, to be allowed access to .userAgentData
     callbackOtherwise()

@@ -71,10 +71,7 @@ const PrintPreviewTable = props => {
     )
   }, [tableActions?.filters])
 
-  const renderedColumns = useMemo(
-    () => getRenderedColumns(dynamicColumns, []),
-    [dynamicColumns]
-  )
+  const renderedColumns = useMemo(() => getRenderedColumns(dynamicColumns, []), [dynamicColumns])
 
   const tableFooterComponent = useMemo(
     () => tableFooter && renderTableFooter(tableFooter, summary),
@@ -100,8 +97,13 @@ const PrintPreviewTable = props => {
     try {
       let response
       if (action.type === 'GET') {
+        const encodedFilterBy = encodeURIComponent(filterBy)
+        const encodedFilterValue = encodeURIComponent(filterValue)
+
         response = await makeCoreGetRequest(
-          `${url}?page=0&size=1000&order=${order ? order : ''}&orderBy=${orderBy ? orderBy : ''}&filterBy=${filterBy}&filterValue=${filterValue}`
+          order && orderBy
+            ? `${url}?page=0&size=1000&order=${order}&orderBy=${orderBy}&filterBy=${encodedFilterBy}&filterValue=${encodedFilterValue}`
+            : `${url}?page=0&size=1000&filterBy=${encodedFilterBy}&filterValue=${encodedFilterValue}`
         )
       }
 

@@ -19,7 +19,7 @@ import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from '../Table/Table.modules.scss'
 import { isEmpty } from 'lodash'
-import { downloadFile } from 'utils/helpers'
+import { formatAndDownloadResponse } from 'utils/helpers'
 import PrintModal from '../PrintModal/PrintModal'
 import { formatErrorMessage } from 'utils/formatting'
 
@@ -200,6 +200,10 @@ const GroupTable = props => {
     const staticColumns = initialColumns.slice()?.filter(col => !col.isGroup)
     const groupCols = initialColumns.filter(col => col.isGroup)
 
+    if(!groupCols.length){
+      return staticColumns
+    }
+
     const populated = data.find(item => item.list.length)
 
     const newColumns = populated.list?.flatMap((interval, index) =>
@@ -236,28 +240,41 @@ const GroupTable = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
-  const openDownloadModal = () => setIsPrintModalOpen(true)
+  const openPrintModal = () => setIsPrintModalOpen(true)
 
-  const closeDownloadModal = () => setIsPrintModalOpen(false)
+  const closePrintModal = () => setIsPrintModalOpen(false)
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (tableActions?.downloadAction) {
       const { action } = tableActions?.downloadAction
       const { searchText, filters, order, orderBy } = tableState
 
-      const url = toTableGETUrl({
-        url: action.url,
-        searchText,
-        searchFields: tableActions?.searchAction?.searchFields,
-        filters,
-        tableFilters,
-        order,
-        orderBy,
-        hasGeneralSearch,
-        generalSearchText: table.searchText
-      })
+      try {
+        const url = toTableGETUrl({
+          url: action.url,
+          searchText,
+          searchFields: tableActions?.searchAction?.searchFields,
+          filters,
+          tableFilters,
+          order,
+          orderBy,
+          hasGeneralSearch,
+          generalSearchText: table.searchText,
+          extraUrlParams,
+          extraCustomUrlParams
+        })
 
-      downloadFile(url)
+        const response = await makeCoreGetRequest(url, {
+          responseType: 'blob'
+        })
+
+        formatAndDownloadResponse(response)
+      } catch (error) {
+        showNotification({
+          message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
     }
   }
 
@@ -280,16 +297,15 @@ const GroupTable = props => {
           closeModal={closeNewModal}
         />
       )}
-      {tableActions?.downloadAction?.selectColumns && (
+      {tableActions?.printAction?.selectColumns && (
         <PrintModal
-          {...tableActions.downloadAction}
+          {...tableActions.printAction}
           {...tableState}
           tableFilters={tableFilters}
-          url={tableActions.downloadAction.action.url}
+          url={tableActions.printAction.action.url}
           dynamicColumns={dynamicColumns}
           isModalOpen={isPrintModalOpen}
-          closeModal={closeDownloadModal}
-          columns={tableActions.downloadAction.columns}
+          closeModal={closePrintModal}
           extraUrlParams={extraUrlParams}
         />
       )}
@@ -344,13 +360,8 @@ const GroupTable = props => {
             ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
             : null
         }
-        downloadButton={
-          tableActions?.downloadAction?.selectColumns
-            ? { onClick: openDownloadModal }
-            : tableActions?.downloadAction
-            ? { onClick: handleDownload }
-            : null
-        }
+        downloadButton={{ onClick: handleDownload }}
+        printButton={{ onClick: openPrintModal }}
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
