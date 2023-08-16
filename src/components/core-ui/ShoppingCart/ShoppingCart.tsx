@@ -3,6 +3,7 @@ import { Paper } from '@mui/material'
 import { ShoppingCartProps } from './ShoppingCartDefinitions'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 const ShoppingCart = (props: ShoppingCartProps) => {
   const { action } = props
@@ -20,7 +21,7 @@ const ShoppingCart = (props: ShoppingCartProps) => {
         }
       } catch (error) {
         showNotification({
-          message: `A aparut o eroare la obtinerea listei de produse. ${error?.message}`,
+          message: `A aparut o eroare la obtinerea listei de produse. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }

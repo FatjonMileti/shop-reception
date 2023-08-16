@@ -17,6 +17,7 @@ import s from './PageForm.modules.scss'
 import { getItemDefaults } from 'utils/helpers'
 import { get } from 'lodash'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { formatErrorMessage } from 'utils/formatting'
 
 const PageForm = props => {
   const {
@@ -70,7 +71,7 @@ const PageForm = props => {
           setEditItem({ ...getItemDefaults(formItems), ...result })
         } catch (error) {
           showNotification({
-            message: `Error while fetching item. ${error?.message}`,
+            message: `Error while fetching item. ${formatErrorMessage(error)}`,
             type: 'error'
           })
         } finally {
@@ -129,7 +130,7 @@ const PageForm = props => {
       }
     } catch (error) {
       showNotification({
-        message: `Error while saving item. ${error?.message}`,
+        message: `Error while saving item. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

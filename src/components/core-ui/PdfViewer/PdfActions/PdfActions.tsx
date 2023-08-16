@@ -5,6 +5,7 @@ import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { downloadFile } from 'utils/helpers'
 import s from './PdfActions.modules.scss'
+import { formatErrorMessage } from 'utils/formatting'
 
 const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
   const { showNotification } = useNotification()
@@ -20,7 +21,7 @@ const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
       downloadFile(`${actions.downloadAction.url}/${id}`)
     } catch (error) {
       showNotification({
-        message: `A aparut o eroare la descarcarea fisierului. ${error?.message}`,
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -41,7 +42,7 @@ const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
       })
     } catch (error) {
       showNotification({
-        message: `A aparut o eroare la printarea fisierului. ${error?.message}`,
+        message: `A aparut o eroare la printarea fisierului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

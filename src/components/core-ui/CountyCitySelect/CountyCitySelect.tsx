@@ -5,6 +5,7 @@ import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from '../AsyncAutocomplete/serializers'
 import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 const CountyCitySelect = (props: CountyCitySelectProps) => {
   const { county, city, value, onChange, hidden, disabled } = props
@@ -27,7 +28,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
         setCounties(toAsyncSelectOptions(result.list, valueKey, labelKey))
       } catch (error) {
         showNotification({
-          message: `A aparut o eroarea la obtinerea listei de judete. ${error?.message}`,
+          message: `A aparut o eroarea la obtinerea listei de judete. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -49,7 +50,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           setCities(toAsyncSelectOptions(result.list, valueKey, labelKey))
         } catch (error) {
           showNotification({
-            message: `A aparut o eroarea la obtinerea listei de orase. ${error?.message}`,
+            message: `A aparut o eroarea la obtinerea listei de orase. ${formatErrorMessage(error)}`,
             type: 'error'
           })
         }

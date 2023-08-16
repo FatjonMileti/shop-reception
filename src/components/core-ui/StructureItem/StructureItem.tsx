@@ -3,6 +3,7 @@ import React from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import { Autocomplete, Checkbox } from '@fullscreendigital/carrefour-dex-fe'
 import s from './StructureItem.modules.scss'
+import { formatErrorMessage } from 'utils/formatting'
 
 function StructureItem(props) {
   const {
@@ -57,7 +58,7 @@ function StructureItem(props) {
           setSelectedValue(selected)
         } catch (error) {
           showNotification({
-            message: `Error while fetching dropdown data. ${error?.message}`,
+            message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
             type: 'error'
           })
         }
