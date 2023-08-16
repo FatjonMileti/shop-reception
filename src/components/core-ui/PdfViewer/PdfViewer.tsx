@@ -12,6 +12,7 @@ import s from './PdfViewer.modules.scss'
 import '!style-loader!css-loader!react-pdf/dist/esm/Page/TextLayer.css'
 import '!style-loader!css-loader!react-pdf/dist/esm/Page/AnnotationLayer.css'
 import { useMediaQuery } from '@mui/material'
+import { formatErrorMessage } from 'utils/formatting'
 
 const PdfViewer = (props: PdfViewerProps) => {
   const { action, actions } = props
@@ -42,7 +43,7 @@ const PdfViewer = (props: PdfViewerProps) => {
         }
       } catch (error) {
         showNotification({
-          message: `A aparut o eroare la descarcarea fisierului. ${error?.message}`,
+          message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }

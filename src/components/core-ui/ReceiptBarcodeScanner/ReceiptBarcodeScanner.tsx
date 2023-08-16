@@ -9,6 +9,7 @@ import { ProductBarcodeScannerProps } from '../ProductBarcodeScanner/ProductBarc
 import s from '../ProductBarcodeScanner/ProductBarcodeScanner.modules.scss'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { isScannerDevice } from 'utils/helpers'
+import { formatErrorMessage } from 'utils/formatting'
 
 const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
@@ -53,7 +54,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             }
           } catch (error) {
             showNotification({
-              message: `Error while sending receipt. ${error?.message}`,
+              message: `A aparut o eroare la trimiterea bonului. ${formatErrorMessage(error)}`,
               type: 'error'
             })
           }

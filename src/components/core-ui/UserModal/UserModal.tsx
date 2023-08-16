@@ -11,6 +11,7 @@ import { useImmer } from 'use-immer'
 import { useMediaQuery, CircularProgress } from '@mui/material'
 import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
 import { StructureItem } from '../StructureItem'
+import { formatErrorMessage } from 'utils/formatting'
 
 const sx = {
   position: 'absolute',
@@ -111,7 +112,7 @@ function UserModal(props) {
           setRoles(rolesResult)
         } catch (error) {
           showNotification({
-            message: `Error while fetching item. ${error?.message}`,
+            message: `Error while fetching item. ${formatErrorMessage(error)}`,
             type: 'error'
           })
         } finally {
@@ -137,7 +138,7 @@ function UserModal(props) {
       })
     } catch (error) {
       showNotification({
-        message: `Error while saving item. ${error?.message}`,
+        message: `Error while saving item. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

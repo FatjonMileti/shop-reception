@@ -10,6 +10,7 @@ import { useMediaQuery } from '@mui/material'
 
 import s from './DownloadModal.modules.scss'
 import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 const sx = {
   position: 'absolute',
@@ -49,7 +50,7 @@ const DownloadModal = ({
           await makeCoreGetRequest(`${downloadUrl}/`)
         } catch (error) {
           showNotification({
-            message: `Error while fetching item. ${error?.message}`,
+            message: `Error while fetching item. ${formatErrorMessage(error)}`,
             type: 'error'
           })
         } finally {
