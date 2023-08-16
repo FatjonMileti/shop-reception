@@ -1,0 +1,191 @@
+import { useState, useEffect, useMemo, useRef } from 'react'
+import { useLocation, useSearchParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from 'configureStore'
+import { useImmer } from 'use-immer'
+import { Box } from '@mui/material'
+import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
+import { makeCoreGetRequest } from 'utils/api'
+import {
+  getRenderedColumns,
+  convertFilterSchemaToFilterConfig,
+  renderTableFooter
+} from '../Table/helpers'
+import { toTableRowItems } from 'utils/serializers'
+import { useNotification } from 'hooks'
+import debounce from 'lodash.debounce'
+import s from '../Table/Table.modules.scss'
+import { isEmpty } from 'lodash'
+import { formatErrorMessage } from 'utils/formatting'
+import { useReactToPrint } from 'react-to-print'
+
+const PrintPreviewTable = props => {
+  const {
+    action,
+    columns,
+    tableActions,
+    tableRowActions,
+    tableFooter,
+    hasGeneralSearch,
+    hasInitialFilters,
+    extraUrlParams,
+    extraCustomUrlParams,
+    userModal,
+    ...rest
+  } = props
+
+  let [searchParams] = useSearchParams()
+  const location = useLocation()
+  const search = new URLSearchParams(location.search)
+  const printColumns = search.get('columns').split(',')
+  const filterBy = search.get('filterBy')
+  const order = search.get('order')
+  const orderBy = search.get('orderBy')
+  const filterValue = search.get('filterValue')
+
+  const [isLoading, setIsLoading] = useState(true)
+  const [items, setItems] = useState([])
+  const [totalCount, setTotalCount] = useState(0)
+  const [summary, setSummary] = useState({})
+  const [dynamicColumns, setDynamicColumns] = useState([])
+  const componentRef = useRef()
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current
+  })
+
+  const table = useSelector((state: RootState) => state.table)
+
+  const { showNotification } = useNotification()
+
+  const filtersConfig = useMemo(() => {
+    if (!tableActions?.filters) return []
+
+    let params = {}
+
+    for (let entry of searchParams.entries()) {
+      const [name, value] = entry
+      params[name] = value
+    }
+    return (
+      tableActions?.filters.map(filter => convertFilterSchemaToFilterConfig(filter, params)) ?? []
+    )
+  }, [tableActions?.filters])
+
+  const renderedColumns = useMemo(() => getRenderedColumns(dynamicColumns, []), [dynamicColumns])
+
+  const tableFooterComponent = useMemo(
+    () => tableFooter && renderTableFooter(tableFooter, summary),
+    [tableFooter, summary]
+  )
+
+  const [isTableLoaded, setIsTableLoaded] = useState(false)
+
+  useEffect(() => {
+    if (isTableLoaded) {
+      handleRemoteData()
+    }
+  }, [extraUrlParams, extraCustomUrlParams])
+
+  const handleRemoteData = async () => {
+    if (hasInitialFilters && isEmpty(table.filters)) {
+      return null
+    }
+
+    const url = action.url
+
+    setIsLoading(true)
+    try {
+      let response
+      if (action.type === 'GET') {
+        const encodedFilterBy = encodeURIComponent(filterBy)
+        const encodedFilterValue = encodeURIComponent(filterValue)
+
+        response = await makeCoreGetRequest(
+          order && orderBy
+            ? `${url}?page=0&size=1000&order=${order}&orderBy=${orderBy}&filterBy=${encodedFilterBy}&filterValue=${encodedFilterValue}`
+            : `${url}?page=0&size=1000&filterBy=${encodedFilterBy}&filterValue=${encodedFilterValue}`
+        )
+      }
+
+      const newColumns = createDynamicColumns(columns, response.list)
+      setDynamicColumns(newColumns)
+      setItems(toTableRowItems(response.list, newColumns))
+      setTotalCount(response.page.totalCount)
+      setSummary(response.summary)
+    } catch (error) {
+      showNotification({
+        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+
+    setIsTableLoaded(true)
+    setIsLoading(false)
+  }
+
+  const createDynamicColumns = (initialColumns, data) => {
+    if (!data.length) {
+      return initialColumns
+    }
+
+    const staticColumns = initialColumns.slice()?.filter(col => !col.isGroup)
+    const groupCols = initialColumns.filter(col => col.isGroup)
+
+    const populated = data.find(item => item.list.length)
+
+    const newColumns = populated.list?.flatMap((interval, index) =>
+      groupCols.map(col => {
+        const additionalName = groupCols.length === 1 ? '' : col.title
+        return (
+          {
+            ...col,
+            start: interval.start.slice(0, -3),
+            end: interval.end.slice(0, -3),
+            title: `${interval.start.slice(0, -3)} - ${interval.end.slice(
+              0,
+              -3
+            )} ${additionalName}`,
+            field: `list.[${index}].${col.field}`,
+            disableSorting: true
+          } || []
+        )
+      })
+    )
+
+    const orderdCols = newColumns.sort((col1, col2) =>
+      col1.start.localeCompare(col2.start, undefined, { numeric: true })
+    )
+
+    const dynamicCols = staticColumns
+      .concat(orderdCols)
+      .filter(col => printColumns.includes(col.field))
+
+    return dynamicCols
+  }
+
+  const debouncedHandleRemoteData = debounce(handleRemoteData, 500)
+
+  const handleDownload = () => {
+    handlePrint()
+  }
+
+  return (
+    <Box className={s.tableContainer} ref={componentRef}>
+      <GeneralTable
+        {...rest}
+        columns={renderedColumns}
+        rows={items}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        rowsPerPage={rest.rowsPerPage || 10}
+        isRemote
+        downloadButton={{ onClick: handleDownload }}
+        hasSearchInput={!!tableActions?.searchAction}
+        handleRemoteData={debouncedHandleRemoteData}
+        filters={filtersConfig}
+      />
+    </Box>
+  )
+}
+
+export default PrintPreviewTable
