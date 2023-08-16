@@ -77,7 +77,7 @@ const App = () => {
           setApplicationPages(toApplicationPages(result))
         } catch (error) {
           showNotification({
-            message: `Error while fetching application pages. ${error?.message}`,
+            message: `Error while fetching application pages. ${formatErrorMessage(error)}`,
             type: 'error'
           })
         } finally {

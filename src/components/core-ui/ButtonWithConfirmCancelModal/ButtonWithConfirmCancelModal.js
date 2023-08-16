@@ -7,6 +7,7 @@ import { Button, Typography, IconButton } from '@fullscreendigital/carrefour-dex
 import { makeCorePostRequest, makeCorePutRequest, makeCorePatchRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { CircularProgress, useMediaQuery } from '@mui/material'
+import { formatErrorMessage } from 'utils/formatting'
 import s from '../ModalWithForm/ModalForm/ModalForm.modules.scss'
 
 const sx = {
@@ -65,7 +66,7 @@ const ButtonWithConfirmCancelModal = ({
       }
     } catch (error) {
       showNotification({
-        message: `A aparut o eroare la anulare. ${error?.message}`,
+        message: `A aparut o eroare la anulare. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -79,7 +80,11 @@ const ButtonWithConfirmCancelModal = ({
 
   return (
     <>
-      <Button {...buttonProps} onClick={openModal} style={{ minWidth: '0.7rem', background: 'transparent' }} />
+      <Button
+        {...buttonProps}
+        onClick={openModal}
+        style={{ minWidth: '0.7rem', background: 'transparent' }}
+      />
       <Modal
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
