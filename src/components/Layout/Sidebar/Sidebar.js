@@ -83,6 +83,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
 
   const handleLogout = async () => {
     logout()
+    localStorage.removeItem('selectedSubdomainId')
     auth.signOutRedirect()
   }
 

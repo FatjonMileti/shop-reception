@@ -75,3 +75,22 @@ export const getUserRoles = () => {
 
   return userInfo.resource_access[process.env.CLIENT_ID]?.roles || []
 }
+
+export const getUserName = () => {
+  const userInfo = getUserInfo()
+
+  return userInfo.name
+}
+
+export const getUserAvatarString = () => {
+  const userName = getUserName()
+
+  if (userName) {
+    return userName
+      .split(' ')
+      .map(word => word.charAt(0))
+      .join('')
+  }
+
+  return ''
+}
