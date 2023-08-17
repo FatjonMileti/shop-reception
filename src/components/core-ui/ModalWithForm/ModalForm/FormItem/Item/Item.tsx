@@ -1,7 +1,8 @@
-import { createElement } from 'react'
+import { createElement, useMemo } from 'react'
 import { Grid } from '@mui/material'
 import { getGridSize } from 'components/core-ui/ModalWithForm/helpers'
 import { Components } from 'utils/dynamicRenderingConstants'
+import { getNumberValue, getPercentValue } from './helpers'
 
 const Item = ({
   name,
@@ -17,12 +18,25 @@ const Item = ({
   errors
 }) => {
   const key = rest.payloadKey || name
+
+  const computedValue = useMemo(() => {
+    // if (type === 'number') {
+    //   return getNumberValue(value)
+    // }
+
+    if (type === 'percent') {
+      return getPercentValue(value)
+    }
+
+    return value
+  }, [value])
+
   return (
     <Grid item key={name} xs={12} sm={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}>
       {createElement(Components[UIComponent], {
         ...rest,
-        type,
-        value,
+        type: type === 'percent' ? 'number' : type,
+        value: computedValue,
         editItem,
         ...(type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
         name,
@@ -51,8 +65,9 @@ const Item = ({
               } else {
                 handleInputChange(null, 'fileObject')
               }
-            case 'staticAutocomplete':
-
+            case 'percent':
+              debugger
+              handleInputChange(getPercentValue(arg?.target?.value), key, type)
             default:
               handleInputChange(arg?.target?.value, key, type)
               break
