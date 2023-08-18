@@ -363,7 +363,9 @@ const Table = props => {
             ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
             : null
         }
-        downloadButton={{ onClick: handleDownload }}
+        downloadButton={
+          tableActions?.downloadAction ? { onClick: handleDownload } : null
+        }
         hasSearchInput={!!tableActions?.searchAction}
         tableState={tableState}
         handleRemoteData={debouncedHandleRemoteData}
