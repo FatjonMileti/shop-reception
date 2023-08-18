@@ -28,7 +28,7 @@ const Item = ({
         name,
         extraUrlParams,
         error: !!errors[name],
-        ...(errors[name] ? { helperText: errors[name] } : {} ),
+        ...(errors[name] ? { helperText: errors[name] } : {}),
         onChange: (arg, variable) => {
           switch (type) {
             case 'date':

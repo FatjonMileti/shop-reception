@@ -68,7 +68,7 @@ const ProductGeneralInfo = ({
       navigate(addToCartAction.href)
     } catch (error) {
       showNotification({
-        message: `A aparut o eroare la adaugarea produsului in cos. ${error?.message}`,
+        message: `A aparut o eroare la adaugarea produsului in cos. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

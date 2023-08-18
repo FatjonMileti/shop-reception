@@ -6,6 +6,7 @@ import { Add, Remove } from '@mui/icons-material'
 import { OutlinedInput } from '@mui/material'
 import { makeCorePutRequest } from 'utils/api'
 import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 const PlusMinusNumberInput = (props: PlusMinusNumberInputProps) => {
   const [count, setCount] = React.useState(0)
@@ -22,7 +23,7 @@ const PlusMinusNumberInput = (props: PlusMinusNumberInputProps) => {
       props.additionalAction && props.additionalAction()
     } catch (error) {
       showNotification({
-        message: `A aparut o eroare. ${error?.message}`,
+        message: `A aparut o eroare. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

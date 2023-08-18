@@ -8,6 +8,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { PageInfoProps } from './PageInfoDefinitions'
 import { Box } from '@mui/material'
 import s from './PageInfo.modules.scss'
+import { formatErrorMessage } from 'utils/formatting'
 
 const PageInfo = (props: PageInfoProps) => {
   const { action, formInfoItems, title, ...rest } = props
@@ -25,7 +26,7 @@ const PageInfo = (props: PageInfoProps) => {
         setEditItem(result)
       } catch (error) {
         showNotification({
-          message: `A aparut o eroarea la obtinerea datelor. ${error?.message}`,
+          message: `A aparut o eroarea la obtinerea datelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }

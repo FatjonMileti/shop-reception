@@ -3,6 +3,7 @@ import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from './serializers'
 import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 interface AsyncAutocompleteOption {
   value: string | number
@@ -70,7 +71,7 @@ const AsyncAutocomplete = props => {
       cb2 && cb2(rest.name, props.value || resultOptions[0])
     } catch (error) {
       showNotification({
-        message: `Error while fetching dropdown data. ${error?.message}`,
+        message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

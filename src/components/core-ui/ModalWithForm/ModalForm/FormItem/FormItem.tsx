@@ -32,7 +32,7 @@ const FormItem = ({
         return null // value=undefined => current date | value=null => input left blank
       }
 
-      return editItemValue === false ? editItemValue : editItemValue || ''
+      return editItemValue === undefined ? '' : editItemValue
     }
   }, [
     type,

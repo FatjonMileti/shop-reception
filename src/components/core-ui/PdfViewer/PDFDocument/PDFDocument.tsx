@@ -3,6 +3,7 @@ import { pdfjs, Document, Page } from 'react-pdf'
 import { useNotification } from 'hooks'
 import { makeCoreGetRequest } from 'utils/api'
 import s from './PDFDocument.modules.scss'
+import { formatErrorMessage } from 'utils/formatting'
 
 // TODO add this in build
 // [~] from https://github.com/wojtekmaj/react-pdf#use-external-cdn
@@ -25,7 +26,7 @@ const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
         setPdfFile(pdfResult)
       } catch (error) {
         showNotification({
-          message: `A aparut o eroare la descarcarea fisierului. ${error?.message}`,
+          message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -40,7 +41,7 @@ const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
     if (error?.message == "Worker was destroyed") { return }
 
     showNotification({
-      message: `A aparut o eroare la afisarea fisierului. ${error?.message}`,
+      message: `A aparut o eroare la afisarea fisierului. ${formatErrorMessage(error)}`,
       type: 'error'
     })
   }

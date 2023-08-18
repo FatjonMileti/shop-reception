@@ -4,6 +4,7 @@ import { ButtonProps } from './ButtonDefinitions'
 import { Icon } from '../Icon'
 import { makeCorePostRequest } from 'utils/api'
 import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 const Button = (props: ButtonProps) => {
   const { onClick, href, action, startIcon, endIcon, variable, idSearchParam, ...rest } = props
@@ -23,7 +24,7 @@ const Button = (props: ButtonProps) => {
         }
       } catch (error) {
         showNotification({
-          message: `${action.errorMessage ?? ''} ${error?.message}`,
+          message: `${action.errorMessage ?? ''} ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
