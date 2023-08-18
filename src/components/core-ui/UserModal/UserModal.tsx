@@ -176,9 +176,15 @@ function UserModal(props) {
   }, [isModalOpen, editedItemId])
 
   const saveData = async () => {
-    setIsLoading(true)
+    const payload = {
+      ...editItem,
+      structureRoles: editItem.structureRoles.filter(
+        item => Object.keys(item).length && item.roleId
+      )
+    }
+
     try {
-      await makeCorePutRequest(formAction.url, editItem)
+      await makeCorePutRequest(formAction.url, payload)
       showNotification({
         message: 'Item saved successfully',
         type: 'success'

@@ -42,7 +42,7 @@ function StructureItem(props) {
       setOptions(traineeOptions)
 
       const selected = traineeOptions.find(userRole =>
-        editItem.structureRoles.some(option => option.name === userRole.roleId)
+        editItem.structureRoles.some(option => option.roleId === userRole.name)
       )
 
       setSelectedValue(selected)
@@ -74,7 +74,7 @@ function StructureItem(props) {
         onChange={() => {
           if (isTrainee) {
             setChecked(!checked)
-            removeAddStructure(selectedValue.name)
+            removeAddStructure(selectedValue?.name)
           } else {
             removeAddStructure(roleName.value)
           }
