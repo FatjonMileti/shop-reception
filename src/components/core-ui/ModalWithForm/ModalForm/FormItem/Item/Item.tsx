@@ -1,4 +1,4 @@
-import { createElement, useMemo } from 'react'
+import { createElement, useMemo, useState } from 'react'
 import { Grid } from '@mui/material'
 import { getGridSize } from 'components/core-ui/ModalWithForm/helpers'
 import { Components } from 'utils/dynamicRenderingConstants'
@@ -19,24 +19,24 @@ const Item = ({
 }) => {
   const key = rest.payloadKey || name
 
-  const computedValue = useMemo(() => {
-    // if (type === 'number') {
-    //   return getNumberValue(value)
-    // }
+  // const handleOnKeyDown = (event) => { // [~] in case onBeforeInput fails
+  //   console.log("[item] onKeyDown | event.keyCode: ", event.keyCode)
+  //   if ([69, 187, 188, 189, 190].includes(event.keyCode)) // [~] 69=e 187=+ 188=, 189=-, 190=.
+  //     event.preventDefault()
+  // }
 
-    if (type === 'percent') {
-      return getPercentValue(value)
-    }
-
-    return value
-  }, [value])
+  const handleOnBeforeInput = (event) => {
+    // console.log("[item] onBeforeInput | event: ", event)
+    if (/^[0-9]*$/.test(event.data) == false)
+      event.preventDefault()
+  }
 
   return (
     <Grid item key={name} xs={12} sm={formItemsPerRow ? getGridSize(formItemsPerRow) : gridSize}>
       {createElement(Components[UIComponent], {
         ...rest,
         type: type === 'percent' ? 'number' : type,
-        value: computedValue,
+        value: value,
         editItem,
         ...(type === 'date' ? { inputFormat: 'DD/MM/YYYY' } : {}),
         name,
@@ -65,14 +65,16 @@ const Item = ({
               } else {
                 handleInputChange(null, 'fileObject')
               }
+              break
             case 'percent':
-              debugger
               handleInputChange(getPercentValue(arg?.target?.value), key, type)
+              break
             default:
               handleInputChange(arg?.target?.value, key, type)
               break
           }
-        }
+        },
+        ...(type == 'percent' ? {/*onKeyDown: handleOnKeyDown,*/ onBeforeInput: handleOnBeforeInput} : {})
       })}
     </Grid>
   )
