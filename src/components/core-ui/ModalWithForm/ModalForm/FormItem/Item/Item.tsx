@@ -19,12 +19,6 @@ const Item = ({
 }) => {
   const key = rest.payloadKey || name
 
-  // const handleOnKeyDown = (event) => { // [~] in case onBeforeInput fails
-  //   console.log("[item] onKeyDown | event.keyCode: ", event.keyCode)
-  //   if ([69, 187, 188, 189, 190].includes(event.keyCode)) // [~] 69=e 187=+ 188=, 189=-, 190=.
-  //     event.preventDefault()
-  // }
-
   const handleOnBeforeInput = (event) => {
     // console.log("[item] onBeforeInput | event: ", event)
     if (/^[0-9]*$/.test(event.data) == false)
@@ -74,7 +68,7 @@ const Item = ({
               break
           }
         },
-        ...(type == 'percent' ? {/*onKeyDown: handleOnKeyDown,*/ onBeforeInput: handleOnBeforeInput} : {})
+        ...(type == 'percent' ? {onBeforeInput: handleOnBeforeInput} : {})
       })}
     </Grid>
   )
