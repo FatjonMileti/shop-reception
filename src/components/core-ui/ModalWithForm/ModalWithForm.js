@@ -109,7 +109,7 @@ const ModalWithForm = ({
       const errors = formItems.reduce((acc, item) => {
         if (item.required) {
           const itemValue = item.payloadKey ? get(data, item.payloadKey) : get(data, item.name)
-          if (!itemValue) {
+          if (itemValue === '' || itemValue === undefined) {
             acc[item.name] = `${item.label} is required`
           }
         }
