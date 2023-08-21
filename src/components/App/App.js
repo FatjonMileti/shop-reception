@@ -18,13 +18,14 @@ import { oidcConfig } from 'utils/authService'
 import { useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
+import { formatErrorMessage } from 'utils/formatting'
 
 const App = () => {
   const [modules, setModules] = useState([])
   const [applicationPages, setApplicationPages] = useState([])
   const [applicationModulesPages, setApplicationModulesPages] = useState([])
   const [subdomainId, setSubdomainId] = useState(localStorage.getItem('selectedSubdomainId'))
-  
+
   const [isLoadingAppModules, setIsLoadingAppModules] = useState(false)
   const [hasLoadedAppModules, setHasLoadedAppModules] = useState(false)
   const [isLoadingActivities, setIsLoadingActivities] = useState(false)
@@ -37,7 +38,7 @@ const App = () => {
     ;(async () => {
       if (!hasLoadedAppModules && !isLoadingAppModules) {
         setIsLoadingAppModules(true)
-        
+
         try {
           // console.log("[App] will load app modules")
           const result = await makeDesignerGetRequest('/application-modules')
@@ -46,7 +47,7 @@ const App = () => {
         } catch (error) {
           // https://giphy.com/embed/oe33xf3B50fsc :))))
           showNotification({
-            message: `Error while fetching application modules. ${error.message}`,
+            message: `Error while fetching application modules. ${formatErrorMessage(error)}`,
             type: 'error'
           })
         } finally {
@@ -61,7 +62,13 @@ const App = () => {
   useEffect(() => {
     // console.log("[App] 2nd effect called | subdomainId: ", subdomainId, " | hasLoadedAppModules: ", hasLoadedAppModules, " | isLoadingAppModules: ", isLoadingAppModules, " | hasLoadedActivities: ", hasLoadedActivities, " | isLoadingActivities: ", isLoadingActivities)
     ;(async () => {
-      if (hasLoadedAppModules && !isLoadingAppModules && subdomainId && subdomainId != hasLoadedActivities && !isLoadingActivities) {
+      if (
+        hasLoadedAppModules &&
+        !isLoadingAppModules &&
+        subdomainId &&
+        subdomainId != hasLoadedActivities &&
+        !isLoadingActivities
+      ) {
         setIsLoadingActivities(true)
 
         try {
@@ -70,7 +77,7 @@ const App = () => {
           setApplicationPages(toApplicationPages(result))
         } catch (error) {
           showNotification({
-            message: `Error while fetching application pages. ${error?.message}`,
+            message: `Error while fetching application pages. ${formatErrorMessage(error)}`,
             type: 'error'
           })
         } finally {
@@ -80,20 +87,23 @@ const App = () => {
         }
       }
     })()
-  }, [subdomainId, hasLoadedAppModules, isLoadingAppModules, hasLoadedActivities, isLoadingActivities])
+  }, [
+    subdomainId,
+    hasLoadedAppModules,
+    isLoadingAppModules,
+    hasLoadedActivities,
+    isLoadingActivities
+  ])
 
   return (
     <AuthProvider {...oidcConfig}>
-      <ThemeProvider theme="light"> 
+      <ThemeProvider theme="light">
         {((isLoadingAppModules || !hasLoadedAppModules) && (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         )) || (
-          <Layout
-            modules={modules}
-            setSubdomainId={setSubdomainId}
-          >
+          <Layout modules={modules} setSubdomainId={setSubdomainId}>
             <Routes>
               {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
@@ -101,11 +111,25 @@ const App = () => {
               <Route
                 path={URLS.AUTH_HOME}
                 element={
-                  <PrivateRoute component={Home} modules={modules} setSubdomainId={setSubdomainId} />
+                  <PrivateRoute
+                    component={Home}
+                    modules={modules}
+                    setSubdomainId={setSubdomainId}
+                  />
                 }
               />
               {applicationModulesPages.map(page =>
-                createRoute({ ...page, subdomainId, modules, applicationPages, hasLoadedActivities, isLoadingActivities }, ServiceDomain)
+                createRoute(
+                  {
+                    ...page,
+                    subdomainId,
+                    modules,
+                    applicationPages,
+                    hasLoadedActivities,
+                    isLoadingActivities
+                  },
+                  ServiceDomain
+                )
               )}
               {applicationPages.map(page => createRoute(page, DynamicComponent))}
               {/* end of private routes */}

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -7,28 +6,36 @@ import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
-import { TableActions } from './TableActions'
+import { TableActions } from '../Table/TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import { getRenderedColumns, convertFilterSchemaToFilterConfig, renderTableFooter } from './helpers'
-import { toTableGETUrl, toTablePOSTPayload } from './serializers'
+import {
+  getRenderedColumns,
+  convertFilterSchemaToFilterConfig,
+  renderTableFooter
+} from '../Table/helpers'
+import { toTableGETUrl, toTablePOSTPayload } from '../Table/serializers'
 import { toTableRowItems } from 'utils/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
-import s from './Table.modules.scss'
+import s from '../Table/Table.modules.scss'
 import { isEmpty } from 'lodash'
 import { downloadFile } from 'utils/helpers'
+import { DownloadModal } from '../DownloadModal'
+import { formatErrorMessage } from 'utils/formatting'
 
 const GroupTable = props => {
   const {
     action,
     columns,
-    groupCount,
     tableActions,
     tableRowActions,
     tableFooter,
     hasGeneralSearch,
     isUserModal,
     hasInitialFilters,
+    extraUrlParams,
+    extraCustomUrlParams,
+    dynamicColumn,
     ...rest
   } = props
 
@@ -38,6 +45,7 @@ const GroupTable = props => {
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
+  const [isDownloadModalOpen, setIsDowloadModalOpen] = useState(false)
   const [summary, setSummary] = useState({})
   const [dynamicColumns, setDynamicColumns] = useState([])
 
@@ -87,16 +95,20 @@ const GroupTable = props => {
     [tableFooter, summary]
   )
 
+  const [isTableLoaded, setIsTableLoaded] = useState(false)
+
   useEffect(() => {
-    handleRemoteData(
-      tableState.page,
-      tableState.rowsPerPage,
-      tableState.order,
-      tableState.orderBy,
-      tableState.searchText,
-      tableState.filters
-    )
-  }, [table.filters])
+    if (isTableLoaded) {
+      handleRemoteData(
+        tableState.page,
+        tableState.rowsPerPage,
+        tableState.order,
+        tableState.orderBy,
+        tableState.searchText,
+        tableState.filters
+      )
+    }
+  }, [extraUrlParams, extraCustomUrlParams])
 
   const tableFilters = useMemo(
     () =>
@@ -139,7 +151,9 @@ const GroupTable = props => {
             order,
             orderBy,
             hasGeneralSearch,
-            generalSearchText: table.searchText
+            generalSearchText: table.searchText,
+            extraUrlParams,
+            extraCustomUrlParams
           })
         )
       }
@@ -156,10 +170,13 @@ const GroupTable = props => {
             filters,
             tableFilters,
             hasGeneralSearch,
-            generalSearchText: table.searchText
+            generalSearchText: table.searchText,
+            extraUrlParams,
+            extraCustomUrlParams
           })
         )
       }
+
       const newColumns = createDynamicColumns(columns, response.list)
       setDynamicColumns(newColumns)
       setItems(toTableRowItems(response.list, newColumns))
@@ -167,30 +184,39 @@ const GroupTable = props => {
       setSummary(response.summary)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${error.message}`,
+        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
+
+    setIsTableLoaded(true)
     setIsLoading(false)
   }
 
   const createDynamicColumns = (initialColumns, data) => {
-    const staticColumns = initialColumns.slice().filter(col => !col.isDynamic)
-    const groupColumns = initialColumns.slice().filter(col => col.isGroup)
+    if (!data.length) {
+      return initialColumns
+    }
 
-    const newColumns = data[0]?.groups.flatMap((group, index) =>
-      groupColumns.map(column => {
-        const { field, title } = column
-        return {
-          ...column,
-          sticky: false,
-          collapsible: true,
-          title: `${group.name} ${title}`,
-          field: `groups.[${index}].values.${field}`
-        }
+    const staticColumns = initialColumns.slice()?.filter(col => !col.isGroup)
+    const groupCols = initialColumns.filter(col => col.isGroup)
+
+    const populated = data.find(item => item.list.length)
+
+    const newColumns = populated.list?.flatMap((interval, index) =>
+    groupCols.map(col => {
+        const additionalName = groupCols.length === 1 ? '' : col.title
+        return (
+          {
+            ...col,
+            start: interval.start.slice(0, -3),
+            end: interval.end.slice(0, -3),
+            title: `${interval.start.slice(0, -3)} - ${interval.end.slice(0, -3)} ${additionalName}`,
+            field: `list.[${index}].${col.field}`
+          } || []
+        )
       })
     )
-
     const dynamicCols = staticColumns.concat(newColumns)
     return dynamicCols
   }
@@ -201,9 +227,13 @@ const GroupTable = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
+  const openDownloadModal = () => setIsDowloadModalOpen(true)
+
+  const closeDownloadModal = () => setIsDowloadModalOpen(false)
+
   const handleDownload = () => {
     if (tableActions?.downloadAction) {
-      const { action } = tableActions.downloadAction
+      const { action, selectColumns } = tableActions.downloadAction
       const { searchText, filters, order, orderBy } = tableState
 
       const url = toTableGETUrl({
@@ -239,6 +269,15 @@ const GroupTable = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
+        />
+      )}
+      {tableActions?.downloadAction?.selectColumns && (
+        <DownloadModal
+          {...tableActions.downloadAction}
+          isModalOpen={isDownloadModalOpen}
+          closeModal={closeDownloadModal}
+          columns={tableActions.downloadAction.columns}
+          extraUrlParams={extraUrlParams}
         />
       )}
       <GeneralTable
@@ -290,7 +329,13 @@ const GroupTable = props => {
             ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
             : null
         }
-        downloadButton={tableActions?.downloadAction ? { onClick: handleDownload } : null}
+        downloadButton={
+          tableActions?.downloadAction?.selectColumns
+            ? { onClick: openDownloadModal }
+            : tableActions?.downloadAction
+            ? { onClick: handleDownload }
+            : null
+        }
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}

@@ -21,7 +21,8 @@ const ModalForm = ({
   saveData,
   closeModal,
   extraUrlParams = {},
-  isPageForm = false
+  isPageForm = false,
+  errors
 }) => {
   const [processedFormItems, setProcessedFormItems] = useState(formItems)
 
@@ -77,6 +78,7 @@ const ModalForm = ({
               handleInputChange={handleInputChange}
               gridSize={gridSize}
               extraUrlParams={extraUrlParams}
+              errors={errors}
             />
           )
         })}

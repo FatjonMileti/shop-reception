@@ -17,6 +17,7 @@ import s from './Table.modules.scss'
 import { ConfirmationModal } from 'components/core-ui/ConfirmationModal'
 import cn from 'classnames'
 import { downloadFile } from 'utils/helpers'
+import { formatErrorMessage } from 'utils/formatting'
 
 const Table = props => {
   const {
@@ -39,17 +40,20 @@ const Table = props => {
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
+  const [isDownloadModalOpen, setIsDowloadModalOpen] = useState(false)
   const [summary, setSummary] = useState({})
   const [isNoGeneralSearchConfirmModalOpen, setIsNoGeneralSearchConfirmModalOpen] = useState(false)
 
-  const [tableState, setTableState] = useImmer(window.history.state.tableState || {
-    page: 0,
-    rowsPerPage: rest.rowsPerPage ?? 10,
-    order: rest.order ?? 'asc',
-    orderBy: rest.orderBy ?? '',
-    searchText: '',
-    filters: []
-  })
+  const [tableState, setTableState] = useImmer(
+    window.history.state.tableState || {
+      page: 0,
+      rowsPerPage: rest.rowsPerPage ?? 10,
+      order: rest.order ?? '',
+      orderBy: rest.orderBy ?? '',
+      searchText: '',
+      filters: []
+    }
+  )
 
   const table = useSelector((state: RootState) => state.table)
 
@@ -139,17 +143,20 @@ const Table = props => {
       filters
     })
 
-    window.history.replaceState({
-      ...window.history.state,
-      tableState: {
-        page,
-        rowsPerPage,
-        order,
-        orderBy,
-        searchText,
-        filters
-      }
-    }, document.title)
+    window.history.replaceState(
+      {
+        ...window.history.state,
+        tableState: {
+          page,
+          rowsPerPage,
+          order,
+          orderBy,
+          searchText,
+          filters
+        }
+      },
+      document.title
+    )
 
     if (generalSearch?.hasGeneralSearch && !table.searchText.length) {
       return null
@@ -213,7 +220,7 @@ const Table = props => {
       }
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${error.message}`,
+        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -227,10 +234,17 @@ const Table = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
+  const openDownloadModal = () => setIsDowloadModalOpen(true)
+
+  const closeDownloadModal = () => setIsDowloadModalOpen(false)
+  
   const handleDownload = () => {
     if (tableActions?.downloadAction) {
-      const { action } = tableActions.downloadAction
+      const { action, selectColumns } = tableActions.downloadAction
       const { searchText, filters, order, orderBy } = tableState
+
+      if (selectColumns) {
+      }
 
       const url = toTableGETUrl({
         url: action.url,
@@ -285,6 +299,24 @@ const Table = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
+          extraUrlParams={extraUrlParams}
+        />
+      )}
+      {tableActions?.downloadAction?.selectColumns && (
+        <ModalWithForm
+          {...tableActions.downloadAction}
+          additionalAction={() =>
+            handleRemoteData(
+              tableState.page,
+              tableState.rowsPerPage,
+              tableState.order,
+              tableState.orderBy,
+              tableState.searchText,
+              tableState.filters
+            )
+          }
+          isModalOpen={isDownloadModalOpen}
+          closeModal={closeDownloadModal}
           extraUrlParams={extraUrlParams}
         />
       )}
@@ -347,7 +379,13 @@ const Table = props => {
             ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
             : null
         }
-        downloadButton={tableActions?.downloadAction ? { onClick: handleDownload } : null}
+        downloadButton={
+          tableActions?.downloadAction?.selectColumns
+            ? { onClick: openDownloadModal }
+            : tableActions?.downloadAction
+            ? { onClick: handleDownload }
+            : null
+        }
         hasSearchInput={!!tableActions?.searchAction}
         tableState={tableState}
         handleRemoteData={debouncedHandleRemoteData}

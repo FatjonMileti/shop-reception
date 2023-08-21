@@ -7,6 +7,7 @@ import { makeCorePostRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { ProductActions } from 'reducers/productSlice'
 import s from './ProductGeneralInfo.modules.scss'
+import { formatErrorMessage } from 'utils/formatting'
 
 const ProductGeneralInfo = ({
   price,
@@ -42,7 +43,7 @@ const ProductGeneralInfo = ({
         setDisplayAddToCartBtn(result[checkAction.variable])
       } catch (error) {
         showNotification({
-          message: `A aparut o eroarea la afisarea butonului de "Adauga in cos". ${error.message}`,
+          message: `A aparut o eroarea la afisarea butonului de "Adauga in cos". ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -67,7 +68,7 @@ const ProductGeneralInfo = ({
       navigate(addToCartAction.href)
     } catch (error) {
       showNotification({
-        message: `A aparut o eroare la adaugarea produsului in cos. ${error?.message}`,
+        message: `A aparut o eroare la adaugarea produsului in cos. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

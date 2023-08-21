@@ -26,9 +26,7 @@ const Header = ({ handleOpenMenu }) => {
         }}
         position="relative"
         menuIcon={
-          <span className={s.notificationsContainer}>
-            <NotificationsNoneOutlined />
-          </span>
+          <span className={s.notificationsContainer}>{/* <NotificationsNoneOutlined /> */}</span>
         }
         rightItems={
           isMenuOpen
@@ -37,7 +35,7 @@ const Header = ({ handleOpenMenu }) => {
                 {
                   onClick: x => handleOpenMenu(x),
                   iconProps: {
-                    icon: (<DragHandleOutlined />),
+                    icon: <DragHandleOutlined />,
                     iconButtonProps: { size: 'large' }
                   }
                 }

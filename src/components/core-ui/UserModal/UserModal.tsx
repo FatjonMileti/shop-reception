@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
-import { Button, IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { ModalInfo } from '../ModalWithForm/ModalForm/ModalInfo'
 import { useNotification } from 'hooks'
 import s from './UserModal.modules.scss'
@@ -9,8 +9,9 @@ import Box from '@mui/material/Box'
 import { Close } from '@mui/icons-material'
 import { useImmer } from 'use-immer'
 import { useMediaQuery, CircularProgress } from '@mui/material'
-import { makeCoreGetRequest, makeCorePatchRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
 import { StructureItem } from '../StructureItem'
+import { formatErrorMessage } from 'utils/formatting'
 
 const sx = {
   position: 'absolute',
@@ -36,8 +37,13 @@ const infoItems = [
   }
 ]
 
+const traineeOptions = [
+  { label: 'HYPER', value: 'HYPER'},
+  { label: 'SUPER', value: 'SUPER'}
+]
+
 function UserModal(props) {
-  const { isModalOpen, closeModal, editedItemId } = props
+  const { isModalOpen, closeModal, editedItemId, additionalAction } = props
   const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer(null)
   const [roles, setRoles] = useState([])
@@ -68,16 +74,24 @@ function UserModal(props) {
   }
 
   const onStructureChange = payload => {
-    const existingStructureIndex = editItem.structureRoles.findIndex(role => role.id === payload.id)
+    const {
+      structure: { value: structureId },
+      roleId
+    } = payload
+    const existingStructureIndex = editItem.structureRoles.findIndex(role => role.roleId === roleId)
 
     setEditItem(prevState => {
       const structureClone = [...prevState.structureRoles]
 
       if (existingStructureIndex !== -1) {
-        const updateItem = { ...structureClone[existingStructureIndex], ...payload }
+        const updateItem = {
+          ...structureClone[existingStructureIndex],
+          roleId: roleId,
+          structureId: structureId
+        }
         structureClone.splice(existingStructureIndex, 1, updateItem)
       } else {
-        structureClone.push(payload)
+        structureClone.push({ roleId, structureId })
       }
 
       return {
@@ -91,14 +105,14 @@ function UserModal(props) {
     if (isModalOpen && editedItemId) {
       ;(async () => {
         try {
-          const result = await makeCoreGetRequest(`/users/${editedItemId}`)
+          const result = await makeCoreGetRequest(`/user/${editedItemId}`)
           setEditItem(result)
 
           const rolesResult = await makeCoreGetRequest('/role')
-          setRoles(rolesResult.list)
+          setRoles(rolesResult)
         } catch (error) {
           showNotification({
-            message: `Error while fetching item. ${error?.message}`,
+            message: `Error while fetching item. ${formatErrorMessage(error)}`,
             type: 'error'
           })
         } finally {
@@ -117,18 +131,19 @@ function UserModal(props) {
     setIsLoading(true)
     try {
       const payload = editItem
-      await makeCorePatchRequest(`/users/${editedItemId}`, payload)
+      await makeCorePutRequest(`/user/${editedItemId}`, payload)
       showNotification({
         message: 'Item saved successfully',
         type: 'success'
       })
     } catch (error) {
       showNotification({
-        message: `Error while saving item. ${error?.message}`,
+        message: `Error while saving item. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
 
+    additionalAction && additionalAction()
     closeModalAndResetForm()
     setIsLoading(false)
   }
@@ -173,7 +188,7 @@ function UserModal(props) {
                   <ModalInfo formInfoItems={infoItems} editItem={editItem} />
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  {roles.map(role => {
+                  {roles?.filter(role => role.name !== 'ADMIN').map(role => {
                     const isChecked = editItem?.structureRoles?.some(
                       structureRole => structureRole.roleId === role.id
                     )
@@ -186,11 +201,13 @@ function UserModal(props) {
                       valueKey: 'id',
                       labelKey: 'name'
                     }
-
                     return (
                       <StructureItem
                         key={role.id}
+                        setEditItem={setEditItem}
                         removeAddStructure={removeAddStructure}
+                        isTrainee={role.name === "TRAINEE"}
+                        traineeOptions={traineeOptions}
                         defaultChecked={isChecked}
                         onChange={onStructureChange}
                         roleName={{ value: role.id, label: role.name }}
@@ -200,6 +217,27 @@ function UserModal(props) {
                       />
                     )
                   })}
+                  <Input
+                    onChange={(e: any) =>
+                      setEditItem(prevState => ({ ...prevState, enable: e.target.value }))
+                    }
+                    type="select"
+                    name="enable"
+                    variant="standard"
+                    width="45%"
+                    label="Status"
+                    value={editItem.enable}
+                    values={[
+                      {
+                        value: 'true',
+                        label: 'Activ'
+                      },
+                      {
+                        value: 'false',
+                        label: 'Inactiv'
+                      }
+                    ]}
+                  />
                 </Grid>
                 <Grid item xs={12} sm={12} className={s.modalButtons}>
                   <Button label="Cancel" variant="outlined" onClick={closeModal} />
