@@ -6,7 +6,7 @@ import s from './MultivalueCell.modules.scss'
 function MultivalueCell(props: MultivalueCellProps) {
   const { value, field, size } = props
 
-  const formattedValue = useMemo(() => (!value || !Array.isArray(value) ? [] : value), [value])
+  const formattedValue = useMemo(() => (!Array.isArray(value) ? [] : value), [value])
   const fieldValues = useMemo(() => formattedValue.map(val => val[field]), [value])
 
   const result = useMemo(() => {
