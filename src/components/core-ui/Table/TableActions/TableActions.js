@@ -19,7 +19,7 @@ const TableActions = ({
   canCancel,
   customAction,
   canSeeCustomAction,
-  isUserModal
+  userModal
 }) => {
   const navigate = useNavigate()
 
@@ -59,7 +59,7 @@ const TableActions = ({
           editedItemId={itemId}
           editedItemUrl={editAction.getUrl}
           additionalAction={additionalAction}
-          isUserModal={isUserModal}
+          userModal={userModal}
         />
       )}
       {deleteAction && canDelete && (
