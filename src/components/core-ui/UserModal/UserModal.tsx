@@ -39,13 +39,13 @@ const infoItems = [
 
 function UserModal(props) {
   const { isModalOpen, closeModal, editedItemId, additionalAction, formAction, userModal } = props
-  const { getRolesAction, getStructuresAction } = userModal
+  const { getRolesAction, getStructuresAction, getAction } = userModal
   const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer(null)
   const [roles, setRoles] = useState([])
   const [traineeOptions, setTraineeOptions] = useState(null)
   const { showNotification } = useNotification()
-
+console.log(props)
   const closeModalAndResetForm = () => {
     closeModal()
     setEditItem(null)
@@ -143,7 +143,7 @@ function UserModal(props) {
     if (isModalOpen && editedItemId) {
       ;(async () => {
         try {
-          const result = await makeCoreGetRequest(formAction.url)
+          const result = await makeCoreGetRequest(`${getAction}/${editedItemId}`)
           setEditItem({
             ...result,
             structureRoles: result.structureRoles
