@@ -31,10 +31,10 @@ const GroupTable = props => {
     tableRowActions,
     tableFooter,
     hasGeneralSearch,
-    isUserModal,
     hasInitialFilters,
     extraUrlParams,
     extraCustomUrlParams,
+    userModal,
     dynamicColumn,
     ...rest
   } = props
@@ -312,8 +312,8 @@ const GroupTable = props => {
                     canEdit={canEdit}
                     canDelete={canDelete}
                     canCancel={canCancel}
-                    isUserModal={isUserModal}
                     canSeeCustomAction={canSeeCustomAction}
+                    userModal={userModal}
                   />
                 )
               })

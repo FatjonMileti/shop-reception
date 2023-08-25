@@ -17,6 +17,7 @@ function StructureItem(props) {
     isTrainee,
     traineeOptions,
     setEditItem,
+    editItem,
     ...rest
   } = props
 
@@ -40,7 +41,10 @@ function StructureItem(props) {
     if (isTrainee) {
       setOptions(traineeOptions)
 
-      const selected = traineeOptions.find(opt => opt.value === props?.value?.structureId)
+      const selected = traineeOptions.find(userRole =>
+        editItem.structureRoles.some(option => option.roleId === userRole.name)
+      )
+
       setSelectedValue(selected)
     } else {
       ;(async () => {
@@ -67,7 +71,14 @@ function StructureItem(props) {
       <Checkbox
         checked={checked}
         label={roleName.label}
-        onChange={() => (isTrainee ? setChecked(!checked) : removeAddStructure(roleName.value))}
+        onChange={() => {
+          if (isTrainee) {
+            setChecked(!checked)
+            removeAddStructure(selectedValue?.name)
+          } else {
+            removeAddStructure(roleName.value)
+          }
+        }}
       />
       {checked && (
         <Autocomplete
@@ -90,7 +101,7 @@ function StructureItem(props) {
           value={selectedValue ?? ''}
           onChange={(_, value) =>
             isTrainee
-              ? setEditItem(prev => ({ ...prev, divisionType: value.value }))
+              ? props.onChange(value.name)
               : props.onChange({ structure: value, roleId: roleName.value })
           }
         />

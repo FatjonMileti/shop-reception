@@ -27,7 +27,7 @@ const Table = props => {
     tableRowActions,
     tableFooter,
     generalSearch,
-    isUserModal,
+    userModal,
     hasInitialFilters,
     extraUrlParams,
     extraCustomUrlParams,
@@ -363,7 +363,7 @@ const Table = props => {
                     canDelete={canDelete}
                     canCancel={canCancel}
                     canSeeCustomAction={canSeeCustomAction}
-                    isUserModal={isUserModal}
+                    userModal={userModal}
                   />
                 )
               })
