@@ -6,7 +6,8 @@ import s from './MultivalueCell.modules.scss'
 function MultivalueCell(props: MultivalueCellProps) {
   const { value, field, size } = props
 
-  const fieldValues = useMemo(() => value.map(val => val[field]), [value])
+  const formattedValue = useMemo(() => (!Array.isArray(value) ? [] : value), [value])
+  const fieldValues = useMemo(() => formattedValue.map(val => val[field]), [value])
 
   const result = useMemo(() => {
     return getShortDisplayText(fieldValues, size)
@@ -24,10 +25,10 @@ function MultivalueCell(props: MultivalueCellProps) {
       setRemainingCount(remainingCount)
       setOriginalDisplayText(getOriginalDisplayText(fieldValues))
     } else {
-      const [text, remainingCount] = getShortDisplayText(value, size)
+      const [text, remainingCount] = getShortDisplayText(formattedValue, size)
       setShortDisplayText(text)
       setRemainingCount(remainingCount)
-      setOriginalDisplayText(getOriginalDisplayText(value))
+      setOriginalDisplayText(getOriginalDisplayText(formattedValue))
     }
   }, [value])
 
