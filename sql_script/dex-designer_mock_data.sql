@@ -59,7 +59,7 @@ VALUES
     (14, 'Gestiune produse imagine', 'ProductsManagement', null, true, 2),
     (15, 'Raport de utilizare aplicatie', 'AppUsageManagement', null, true, 2),
     (16, 'Raport cadentier + vanzari', 'CadentierSales', null, true, 2),
-    -- Bakery FORMATOR
+    -- Bakery FORMATOR (TRAINEE)
     (17, 'Management produse', 'ProductsManagement', null, true, 3),
     (18, 'Management productie(cadentier)', 'ProductionManagement', null, true, 3),
     (19, 'Coeficient crestere magazin', 'StoresManagement', null, true, 3),
@@ -201,7 +201,10 @@ values
 	(3, 'GG_RO_HQ_IT_DEX_GOV_IT_PM'),
 	(4, 'GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER'),
 	-- Bakery
-    (5, 'GG_RO_HQ_IT_DEX_BAKERY');
+    (5, 'GG_RO_HQ_IT_DEX_BAKERY_ADMIN'),
+    (6, 'GG_RO_HQ_IT_DEX_BAKERY_STORE'),
+    (7, 'GG_RO_HQ_IT_DEX_BAKERY_REGION'),
+    (8, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE');
 
 
 -- roles_activities
@@ -218,15 +221,18 @@ VALUES
     -- GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
     (4, 2), (4, 4), (4, 6),
     -- Bakery
-    -- GG_RO_HQ_IT_DEX_BAKERY
-    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14),
-    (5, 15), (5, 16), (5, 17), (5, 18), (5, 19), (5, 20), (5, 21), (5, 22),
-    (5, 23), (5, 27), (5, 28), (5, 29), (5, 30), (5, 31), (5, 32), (5, 33),
-    (5, 34), (5, 35), (5, 36);
+    -- GG_RO_HQ_IT_DEX_BAKERY_ADMIN
+    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16),
+    -- GG_RO_HQ_IT_DEX_BAKERY_STORE
+    (6, 27), (6, 28), (6, 29), (6, 30), (6, 31),
+    -- GG_RO_HQ_IT_DEX_BAKERY_REGION
+    (7, 32), (7, 33), (7, 34), (7, 35), (7, 36),
+    -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE
+    (8, 17), (8, 18), (8, 19), (8, 20), (8, 21), (8, 22), (8, 23);
 
 
 -- reset sequences
-SELECT setval('"dex-designer".seq_id_roles', 6, true);
+SELECT setval('"dex-designer".seq_id_roles', 9, true);
 SELECT setval('"dex-designer".seq_id_ui_schema', 45, true);
 SELECT setval('"dex-designer".seq_id_screen', 45, true);
 SELECT setval('"dex-designer".seq_id_activity', 37, true);
