@@ -49,7 +49,7 @@ VALUES
     (5, 'Team Capacity', 'PeopleAltOutlined', null, true, 1),
     (6, 'My Time-Off', 'TimerOffOutlined', null, true, 1),
     -- Bakery ADMIN
-    (7, 'Gestiune utiliatori', 'UsersManagement', null, true, 2),
+    (7, 'Gestiune utilizatori', 'UsersManagement', null, true, 2),
     (8, 'Gestiune zone', 'ZonesManagement', null, true, 2),
     (9, 'Gestiune regiuni', 'ZonesManagement', null, true, 2),
     (10, 'Gestiune magazine', 'StoresManagement', null, true, 2),
