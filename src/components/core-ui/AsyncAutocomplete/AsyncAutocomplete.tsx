@@ -53,14 +53,17 @@ const AsyncAutocomplete = props => {
     }
   }, [open])
 
-  const getOptions = async (cb1?: (name: string, value: any) => {}, cb2?: (name: string, value: any) => {}) => {
+  const getOptions = async (
+    cb1?: (name: string, value: any) => {},
+    cb2?: (name: string, value: any) => {}
+  ) => {
     try {
       let url = action.url
 
       if (action.filterQueryKey && action.localQueryKey) {
-        url = `${url}?page=-1&filterBy=${action.filterQueryKey}&filterValue=${
+        url = `${url}?page=-1&filterBy=${action.filterQueryKey}&filterValue=${encodeURIComponent(
           extraUrlParams.find(param => param.name === action.localQueryKey)?.value
-        }`
+        )}`
       }
       const result = await makeCoreGetRequest(url)
       const { valueKey, labelKey } = action

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
 import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { ModalInfo } from '../ModalWithForm/ModalForm/ModalInfo'
@@ -37,16 +37,13 @@ const infoItems = [
   }
 ]
 
-const traineeOptions = [
-  { label: 'HYPER', value: 'HYPER'},
-  { label: 'SUPER', value: 'SUPER'}
-]
-
 function UserModal(props) {
-  const { isModalOpen, closeModal, editedItemId, additionalAction } = props
+  const { isModalOpen, closeModal, editedItemId, additionalAction, formAction, userModal } = props
+  const { getRolesAction, getStructuresAction, getAction } = userModal
   const [isLoading, setIsLoading] = useState(true)
   const [editItem, setEditItem] = useImmer(null)
   const [roles, setRoles] = useState([])
+  const [traineeOptions, setTraineeOptions] = useState(null)
   const { showNotification } = useNotification()
 
   const closeModalAndResetForm = () => {
@@ -62,6 +59,47 @@ function UserModal(props) {
 
       if (existingStructureIndex !== -1) {
         structureClone.splice(existingStructureIndex, 1)
+      } else {
+        structureClone.push({ roleId: id })
+      }
+
+      return {
+        ...prevState,
+        structureRoles: structureClone
+      }
+    })
+  }
+
+  const onTraineeChange = id => {
+    const traineeIdExists = editItem.structureRoles.findIndex(userRole =>
+      traineeOptions.some(option => option.name === userRole.roleId)
+    )
+
+    if (traineeIdExists !== -1) {
+      const temp = [...editItem.structureRoles]
+      temp.splice(traineeIdExists, 1)
+      temp.push({ roleId: id })
+      setEditItem(prev => ({
+        ...prev,
+        structureRoles: temp
+      }))
+    } else {
+      setEditItem(prev => ({
+        ...prev,
+        structureRoles: [...prev.structureRoles, { roleId: id }]
+      }))
+    }
+  }
+
+  const onTraineeRemove = id => {
+    setEditItem(prevState => {
+      const traineeIdExists = editItem.structureRoles.findIndex(userRole =>
+        traineeOptions.some(option => option.name === userRole.roleId)
+      )
+      const structureClone = [...prevState.structureRoles]
+
+      if (traineeIdExists !== -1) {
+        structureClone.splice(traineeIdExists, 1)
       } else {
         structureClone.push({ roleId: id })
       }
@@ -105,11 +143,21 @@ function UserModal(props) {
     if (isModalOpen && editedItemId) {
       ;(async () => {
         try {
-          const result = await makeCoreGetRequest(`/user/${editedItemId}`)
-          setEditItem(result)
+          const result = await makeCoreGetRequest(`${getAction}/${editedItemId}`)
+          setEditItem({
+            ...result,
+            structureRoles: result.structureRoles
+          })
 
-          const rolesResult = await makeCoreGetRequest('/role')
-          setRoles(rolesResult)
+          const rolesResult = await makeCoreGetRequest(`${getRolesAction}`)
+
+          const traineeRoles = rolesResult
+            .filter(role => role.name.includes('TRAINEE'))
+            .map(role => ({ name: role.id, label: role.name }))
+          const otherRoles = rolesResult.filter(role => !role.name.includes('TRAINEE'))
+
+          setRoles(otherRoles)
+          setTraineeOptions(traineeRoles)
         } catch (error) {
           showNotification({
             message: `Error while fetching item. ${formatErrorMessage(error)}`,
@@ -128,10 +176,15 @@ function UserModal(props) {
   }, [isModalOpen, editedItemId])
 
   const saveData = async () => {
-    setIsLoading(true)
+    const payload = {
+      ...editItem,
+      structureRoles: editItem.structureRoles.filter(
+        item => Object.keys(item).length && item.roleId
+      )
+    }
+
     try {
-      const payload = editItem
-      await makeCorePutRequest(`/user/${editedItemId}`, payload)
+      await makeCorePutRequest(formAction.url, payload)
       showNotification({
         message: 'Item saved successfully',
         type: 'success'
@@ -188,35 +241,52 @@ function UserModal(props) {
                   <ModalInfo formInfoItems={infoItems} editItem={editItem} />
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  {roles?.filter(role => role.name !== 'ADMIN').map(role => {
-                    const isChecked = editItem?.structureRoles?.some(
-                      structureRole => structureRole.roleId === role.id
-                    )
-                    const selectedValue = editItem?.structureRoles?.find(
-                      structureRole => structureRole.roleId === role.id
-                    )
-                    const action = {
-                      url: `/structure/role/${role.id}`,
-                      type: 'GET',
-                      valueKey: 'id',
-                      labelKey: 'name'
-                    }
-                    return (
-                      <StructureItem
-                        key={role.id}
-                        setEditItem={setEditItem}
-                        removeAddStructure={removeAddStructure}
-                        isTrainee={role.name === "TRAINEE"}
-                        traineeOptions={traineeOptions}
-                        defaultChecked={isChecked}
-                        onChange={onStructureChange}
-                        roleName={{ value: role.id, label: role.name }}
-                        selectLabel="Structura asociata"
-                        value={selectedValue}
-                        action={action}
-                      />
-                    )
-                  })}
+                  <React.Fragment>
+                    {roles
+                      ?.filter(role => role.name !== 'ADMIN')
+                      .map(role => {
+                        const isChecked = editItem?.structureRoles?.some(
+                          structureRole => structureRole.roleId === role.id
+                        )
+                        const selectedValue = editItem?.structureRoles?.find(
+                          structureRole => structureRole.roleId === role.id
+                        )
+                        const action = {
+                          url: `${getStructuresAction}/${role.id}`,
+                          type: 'GET',
+                          valueKey: 'id',
+                          labelKey: 'name'
+                        }
+                        return (
+                          <StructureItem
+                            key={role.id}
+                            setEditItem={setEditItem}
+                            removeAddStructure={removeAddStructure}
+                            isTrainee={role.name === 'TRAINEE'}
+                            traineeOptions={traineeOptions}
+                            defaultChecked={isChecked}
+                            onChange={onStructureChange}
+                            roleName={{ value: role.id, label: role.name }}
+                            selectLabel="Structura asociata"
+                            value={selectedValue}
+                            action={action}
+                          />
+                        )
+                      })}
+                    <StructureItem
+                      editItem={editItem}
+                      setEditItem={setEditItem}
+                      removeAddStructure={onTraineeRemove}
+                      isTrainee={true}
+                      traineeOptions={traineeOptions}
+                      defaultChecked={traineeOptions.find(userRole =>
+                        editItem.structureRoles?.some(option => option.roleId === userRole.name)
+                      )}
+                      onChange={onTraineeChange}
+                      roleName={{ label: 'TRAINEE' }}
+                      selectLabel="Structura asociata"
+                    />
+                  </React.Fragment>
                   <Input
                     onChange={(e: any) =>
                       setEditItem(prevState => ({ ...prevState, enable: e.target.value }))
