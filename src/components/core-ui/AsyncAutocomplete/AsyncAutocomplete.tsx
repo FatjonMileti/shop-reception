@@ -79,7 +79,7 @@ const AsyncAutocomplete = props => {
       })
     }
   }
-console.log(options)
+
   return (
     <Autocomplete
       {...rest}
