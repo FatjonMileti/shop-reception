@@ -346,8 +346,8 @@ const Table = props => {
                     canEdit={canEdit}
                     canDelete={canDelete}
                     canCancel={canCancel}
-                    userModal={userModal}
                     canSeeCustomAction={canSeeCustomAction}
+                    userModal={userModal}
                   />
                 )
               })

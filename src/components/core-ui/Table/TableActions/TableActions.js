@@ -17,9 +17,9 @@ const TableActions = ({
   canEdit,
   canDelete,
   canCancel,
-  userModal,
   customAction,
-  canSeeCustomAction
+  canSeeCustomAction,
+  userModal
 }) => {
   const navigate = useNavigate()
 

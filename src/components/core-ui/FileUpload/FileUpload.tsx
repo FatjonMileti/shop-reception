@@ -6,7 +6,7 @@ import FileViewDetails from './FileViewDetails'
 
 const FileUpload = props => {
   const { value, editItem, fileInputProps, onChange } = props
-  const { allowedExtensions, displayImage } = fileInputProps
+  const { displayImage } = fileInputProps
   const [selectedFile, setSelectedFile] = useState(null)
   const [selectedFileUrl, setSelectedFileUrl] = useState(null)
 

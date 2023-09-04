@@ -319,34 +319,32 @@ const GroupTable = props => {
                 align: 'right',
                 width: '112px',
                 collapsible: 'true',
-                render: row => {
-                  return (
-                    <TableActions
-                      itemId={row.id}
-                      viewAction={tableRowActions.viewAction}
-                      editAction={tableRowActions.editAction}
-                      deleteAction={tableRowActions.deleteAction}
-                      cancelAction={tableRowActions.cancelAction}
-                      customAction={tableRowActions.customAction}
-                      additionalAction={() =>
-                        handleRemoteData(
-                          tableState.page,
-                          tableState.rowsPerPage,
-                          tableState.order,
-                          tableState.orderBy,
-                          tableState.searchText,
-                          tableState.filters
-                        )
-                      }
-                      canView={canView}
-                      canEdit={canEdit}
-                      canDelete={canDelete}
-                      canCancel={canCancel}
-                      userModal={userModal}
-                      canSeeCustomAction={canSeeCustomAction}
-                    />
-                  )
-                }
+                render: row => (
+                  <TableActions
+                    itemId={row.id}
+                    viewAction={tableRowActions.viewAction}
+                    editAction={tableRowActions.editAction}
+                    deleteAction={tableRowActions.deleteAction}
+                    cancelAction={tableRowActions.cancelAction}
+                    customAction={tableRowActions.customAction}
+                    additionalAction={() =>
+                      handleRemoteData(
+                        tableState.page,
+                        tableState.rowsPerPage,
+                        tableState.order,
+                        tableState.orderBy,
+                        tableState.searchText,
+                        tableState.filters
+                      )
+                    }
+                    canView={canView}
+                    canEdit={canEdit}
+                    canDelete={canDelete}
+                    canCancel={canCancel}
+                    canSeeCustomAction={canSeeCustomAction}
+                    userModal={userModal}
+                  />
+                )
               })
             : renderedColumns
         }
