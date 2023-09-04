@@ -45,7 +45,7 @@ function UserModal(props) {
   const [roles, setRoles] = useState([])
   const [traineeOptions, setTraineeOptions] = useState(null)
   const { showNotification } = useNotification()
-
+console.log(props)
   const closeModalAndResetForm = () => {
     closeModal()
     setEditItem(null)

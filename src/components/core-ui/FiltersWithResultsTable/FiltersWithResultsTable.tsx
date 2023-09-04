@@ -9,28 +9,33 @@ function FiltersWithResultsTable(props) {
   const { filters, table } = props
 
   const filterByFilters = useMemo(() => filters.filter(filter => !filter.isCustomField), [filters])
-  const customFilterByFilters = useMemo(() => filters.filter(filter => filter.isCustomField), [filters])
-
-  const [filterValues, setFilterValues] = useState(window.history.state.filteredTableState?.filterValues ||
-    Object.assign(
-      {},
-      ...filterByFilters.map(filter => ({
-        [filter.name]: filter.defaultValue
-          ? { value: getDefaultItemValue(filter.defaultValue) }
-          : null
-      }))
-    )
+  const customFilterByFilters = useMemo(
+    () => filters.filter(filter => filter.isCustomField),
+    [filters]
   )
 
-  const [customFilterValues, setCustomFilterValues] = useState(window.history.state.filteredTableState?.customFilterValues ||
-    Object.assign(
-      {},
-      ...customFilterByFilters.map(filter => ({
-        [filter.name]: filter.defaultValue
-          ? { value: getDefaultItemValue(filter.defaultValue) }
-          : null
-      }))
-    )
+  const [filterValues, setFilterValues] = useState(
+    window.history.state.filteredTableState?.filterValues ||
+      Object.assign(
+        {},
+        ...filterByFilters.map(filter => ({
+          [filter.name]: filter.defaultValue
+            ? { value: getDefaultItemValue(filter.defaultValue) }
+            : null
+        }))
+      )
+  )
+
+  const [customFilterValues, setCustomFilterValues] = useState(
+    window.history.state.filteredTableState?.customFilterValues ||
+      Object.assign(
+        {},
+        ...customFilterByFilters.map(filter => ({
+          [filter.name]: filter.defaultValue
+            ? { value: getDefaultItemValue(filter.defaultValue) }
+            : null
+        }))
+      )
   )
 
   const allFiltersHaveValues = useMemo(
@@ -44,7 +49,10 @@ function FiltersWithResultsTable(props) {
     return allFiltersHaveValues
       ? filterByFilters.map(filter => ({
           name: filter.name,
-          value: filterValues[filter.name]?.value
+          value:
+            Array.isArray(filterValues[filter.name]) && filterValues[filter.name].length
+              ? filterValues[filter.name].map(item => item.value)
+              : filterValues[filter.name]?.value
         }))
       : ''
   }, [allFiltersHaveValues, filterValues])
@@ -64,31 +72,37 @@ function FiltersWithResultsTable(props) {
         ...customFilterValues,
         [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value
       })
-      window.history.replaceState({
-        ...window.history.state,
-        filteredTableState: {
-          filterValues: filterValues,
-          customFilterValues: {
-            ...customFilterValues,
-            [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value    
+      window.history.replaceState(
+        {
+          ...window.history.state,
+          filteredTableState: {
+            filterValues: filterValues,
+            customFilterValues: {
+              ...customFilterValues,
+              [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value
+            }
           }
-        }
-      }, document.title)
+        },
+        document.title
+      )
     } else {
       setFilterValues({
         ...filterValues,
         [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value
       })
-      window.history.replaceState({
-        ...window.history.state,
-        filteredTableState: {
-          customFilterValues: customFilterValues,
-          filterValues: {
-            ...filterValues,
-            [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value    
+      window.history.replaceState(
+        {
+          ...window.history.state,
+          filteredTableState: {
+            customFilterValues: customFilterValues,
+            filterValues: {
+              ...filterValues,
+              [name]: type === 'date' ? { value: formatPayloadDate(value.value) } : value
+            }
           }
-        }
-      }, document.title)
+        },
+        document.title
+      )
     }
   }
 

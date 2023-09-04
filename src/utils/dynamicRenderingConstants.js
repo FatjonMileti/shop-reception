@@ -7,7 +7,7 @@ import { Button } from 'components/core-ui/Button'
 import { Card } from 'components/core-ui/Card'
 import { ContainerBox } from 'components/core-ui/ContainerBox'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
-import { DownloadModal } from 'components/core-ui/DownloadModal'
+import { PrintModal } from 'components/core-ui/PrintModal'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Grid } from 'components/core-ui/Grid'
 import { Input } from 'components/core-ui/Input'
@@ -42,6 +42,7 @@ import DynamicTable from 'components/core-ui/Table/DynamicTable'
 import GroupTable from 'components/core-ui/Table/GroupTable'
 import { ImageCell } from 'components/core-ui/ImageCell'
 import { ProductView } from 'components/core-ui/ProductView'
+import PrintPreviewTable from 'components/core-ui/Table/PrintPreviewTable'
 
 export const Components = {
   // MUI components
@@ -62,7 +63,7 @@ export const Components = {
   Card,
   ContainerBox,
   CountyCitySelect,
-  DownloadModal,
+  PrintModal,
   FloatingButton,
   Grid,
   Input,
@@ -95,5 +96,6 @@ export const Components = {
   DynamicTable,
   GroupTable,
   ImageCell,
-  ProductView
+  ProductView,
+  PrintPreviewTable
 }

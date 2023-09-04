@@ -8,7 +8,8 @@ import CircularProgress from '@mui/material/CircularProgress'
 
 import s from './ProductView.modules.scss'
 
-function ProductView() {
+function ProductView(props) {
+  const { action } = props
   const [searchParams] = useSearchParams()
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -17,7 +18,7 @@ function ProductView() {
   const handleData = async id => {
     setLoading(true)
 
-    const response = await makeCoreGetRequest(`/products/recipe/${id}`)
+    const response = await makeCoreGetRequest(`${action.url}/${id}`)
     setProduct(response)
 
     setLoading(false)

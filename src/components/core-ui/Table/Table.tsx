@@ -16,7 +16,7 @@ import debounce from 'lodash.debounce'
 import s from './Table.modules.scss'
 import { ConfirmationModal } from 'components/core-ui/ConfirmationModal'
 import cn from 'classnames'
-import { downloadFile } from 'utils/helpers'
+import { downloadFile, formatAndDownloadResponse } from 'utils/helpers'
 import { formatErrorMessage } from 'utils/formatting'
 
 const Table = props => {
@@ -40,7 +40,6 @@ const Table = props => {
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
-  const [isDownloadModalOpen, setIsDowloadModalOpen] = useState(false)
   const [summary, setSummary] = useState({})
   const [isNoGeneralSearchConfirmModalOpen, setIsNoGeneralSearchConfirmModalOpen] = useState(false)
 
@@ -234,17 +233,10 @@ const Table = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
-  const openDownloadModal = () => setIsDowloadModalOpen(true)
-
-  const closeDownloadModal = () => setIsDowloadModalOpen(false)
-  
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (tableActions?.downloadAction) {
-      const { action, selectColumns } = tableActions.downloadAction
+      const { action, isFile } = tableActions.downloadAction
       const { searchText, filters, order, orderBy } = tableState
-
-      if (selectColumns) {
-      }
 
       const url = toTableGETUrl({
         url: action.url,
@@ -255,10 +247,20 @@ const Table = props => {
         order,
         orderBy,
         hasGeneralSearch: generalSearch?.hasGeneralSearch,
-        generalSearchText: table.searchText
+        generalSearchText: table.searchText,
+        extraUrlParams,
+        extraCustomUrlParams
       })
 
-      downloadFile(url)
+      if (isFile) {
+        const response = await makeCoreGetRequest(url, {
+          responseType: 'blob'
+        })
+
+        formatAndDownloadResponse(response)
+      } else {
+        downloadFile(url)
+      }
     }
   }
 
@@ -299,24 +301,6 @@ const Table = props => {
           }
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
-          extraUrlParams={extraUrlParams}
-        />
-      )}
-      {tableActions?.downloadAction?.selectColumns && (
-        <ModalWithForm
-          {...tableActions.downloadAction}
-          additionalAction={() =>
-            handleRemoteData(
-              tableState.page,
-              tableState.rowsPerPage,
-              tableState.order,
-              tableState.orderBy,
-              tableState.searchText,
-              tableState.filters
-            )
-          }
-          isModalOpen={isDownloadModalOpen}
-          closeModal={closeDownloadModal}
           extraUrlParams={extraUrlParams}
         />
       )}
@@ -380,11 +364,7 @@ const Table = props => {
             : null
         }
         downloadButton={
-          tableActions?.downloadAction?.selectColumns
-            ? { onClick: openDownloadModal }
-            : tableActions?.downloadAction
-            ? { onClick: handleDownload }
-            : null
+          tableActions?.downloadAction ? { onClick: handleDownload } : null
         }
         hasSearchInput={!!tableActions?.searchAction}
         tableState={tableState}
