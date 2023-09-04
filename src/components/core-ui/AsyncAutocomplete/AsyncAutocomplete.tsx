@@ -79,7 +79,7 @@ const AsyncAutocomplete = props => {
       })
     }
   }
-
+console.log(options)
   return (
     <Autocomplete
       {...rest}
@@ -99,6 +99,11 @@ const AsyncAutocomplete = props => {
       value={props.value || (props.multiple ? [] : '')}
       onChange={(_, value) => props.onChange(value)}
       isOptionEqualToValue={(option, value) => option.value === value.value}
+      renderOption={(props, option) => (
+        <li {...props} key={option.value}>
+          {option.label}
+        </li>
+      )}
     />
   )
 }
