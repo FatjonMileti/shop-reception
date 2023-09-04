@@ -1,4 +1,4 @@
-import { get, set } from 'lodash'
+import { set } from 'lodash'
 import { toArrayItemPayload } from 'utils/serializers'
 import { Filter } from './TableDefinitions'
 import {

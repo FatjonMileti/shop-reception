@@ -20,6 +20,7 @@ import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { PlusMinusNumberInput } from 'components/core-ui/PlusMinusNumberInput'
 import { PriceSpan } from 'components/core-ui/PriceSpan'
 import { ProductBarcodeScanner } from 'components/core-ui/ProductBarcodeScanner'
+import { ProductNearbyStockInfo } from 'components/core-ui/ProductNearbyStockInfo'
 import { ProductStockInfo } from 'components/core-ui/ProductStockInfo'
 import { ProductTabs } from 'components/core-ui/ProductTabs'
 import { ProductTitle } from 'components/core-ui/ProductTitle'
@@ -75,6 +76,7 @@ export const Components = {
   PlusMinusNumberInput,
   PriceSpan,
   ProductBarcodeScanner,
+  ProductNearbyStockInfo,
   ProductStockInfo,
   ProductTabs,
   ProductTitle,

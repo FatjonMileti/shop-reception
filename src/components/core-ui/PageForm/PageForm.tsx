@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import { useImmer } from 'use-immer'
-import { set } from 'lodash'
 import { ModalForm } from '../ModalWithForm/ModalForm'
 import { toItemPayload } from 'utils/serializers'
 import {

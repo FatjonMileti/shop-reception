@@ -6,6 +6,7 @@ export interface ProductState {
   title?: string
   storeStock?: ProductStock
   warehouseStock?: ProductStock
+  neighboursStock?: ProductStock[]
   selectedStockTab?: number
   selectedStockType?: 'storeStock' | 'warehouseStock'
 }
