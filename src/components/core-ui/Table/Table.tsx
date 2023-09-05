@@ -325,6 +325,7 @@ const Table = props => {
                 width: '112px',
                 disableSorting: true,
                 collapsible: 'true',
+                disableSorting: true,
                 render: row => (
                   <TableActions
                     itemId={row.id}
