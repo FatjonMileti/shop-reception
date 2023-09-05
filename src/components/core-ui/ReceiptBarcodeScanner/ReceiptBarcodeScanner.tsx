@@ -18,7 +18,6 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const [code, setCode] = useState('')
   const [receiptDate, setReceiptDate] = useState(dayjs().format('DD/MM/YYYY'))
   const [isVisible, setIsVisible] = useState(false)
-  const [isContinueEnabled, setIsContinueEnabled] = useState(false)
 
   const { showNotification } = useNotification()
   const navigate = useNavigate()
@@ -46,7 +45,6 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           try {
             await makeCorePostRequest(`${action.url}`, {
               fiscalTicketId: code,
-              proformaId: id,
               fiscalTicketDate: formatPayloadDate(receiptDate)
             })
             if (action.href) {
