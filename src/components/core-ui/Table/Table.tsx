@@ -323,6 +323,7 @@ const Table = props => {
                 field: 'actions',
                 align: 'right',
                 width: '112px',
+                disableSorting: true,
                 collapsible: 'true',
                 render: row => (
                   <TableActions
