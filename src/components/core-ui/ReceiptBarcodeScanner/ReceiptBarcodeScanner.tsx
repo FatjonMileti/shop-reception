@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { useState, useEffect } from 'react'
+import { DatePicker, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Paper } from '@mui/material'
 import { useNotification, useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
@@ -8,15 +8,17 @@ import { makeCorePostRequest } from 'utils/api'
 import { ProductBarcodeScannerProps } from '../ProductBarcodeScanner/ProductBarcodeScannerDefinitions'
 import s from '../ProductBarcodeScanner/ProductBarcodeScanner.modules.scss'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { isScannerDevice } from 'utils/helpers'
+import { formatPayloadDate, isScannerDevice } from 'utils/helpers'
 import { formatErrorMessage } from 'utils/formatting'
+import dayjs from 'dayjs'
 
 const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
 
-  const [code, setCode] = React.useState('')
-
-  const [isVisible, setIsVisible] = React.useState(false)
+  const [code, setCode] = useState('')
+  const [receiptDate, setReceiptDate] = useState(dayjs().format('DD/MM/YYYY'))
+  const [isVisible, setIsVisible] = useState(false)
+  const [isContinueEnabled, setIsContinueEnabled] = useState(false)
 
   const { showNotification } = useNotification()
   const navigate = useNavigate()
@@ -31,20 +33,21 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   }
 
   const { run, destroy } = useScandit({ onScan, isVisible })
-  const [isUsingScandit, setIsUsingScandit] = React.useState(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
+  const [isUsingScandit, setIsUsingScandit] = useState(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
 
   const scanCode = () => {
     setIsVisible(true)
   }
 
   const sendReceipt = () => {
-    if (code) {
+    if (code && receiptDate) {
       ;(async () => {
         if (action.type === 'POST') {
           try {
             const result = await makeCorePostRequest(`${action.url}`, {
               receiptId: code,
-              proformaId: id
+              proformaId: id,
+              date: formatPayloadDate(receiptDate)
             })
             if (action.href) {
               await destroy()
@@ -63,7 +66,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     isScannerDevice(() => {
       try {
         run()
@@ -74,13 +77,13 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     })
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.getElementById('receipt-scan-input').focus()
   }, [])
 
   return (
     <Paper className={s.scanContainer}>
-      <div className={s.scannerControls}>
+      <div className={cn(s.scannerControls, s.receiptScannerControls)}>
         <div className={s.scannerControlItem}>
           <Input
             value={code}
@@ -90,6 +93,16 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             fullWidth
             onChange={event => setCode(event.currentTarget.value)}
             id="receipt-scan-input"
+          />
+        </div>
+        <div className={s.pickerContainer}>
+          <DatePicker
+            label="Alege data bonului"
+            value={receiptDate}
+            variant="standard"
+            required
+            onChange={newValue => setReceiptDate(newValue)}
+            style={{ width: '100%' }}
           />
         </div>
         <div className={s.buttonContainer}>

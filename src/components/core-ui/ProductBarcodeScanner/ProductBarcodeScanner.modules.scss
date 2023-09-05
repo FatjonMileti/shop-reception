@@ -10,11 +10,23 @@
   display: grid;
   grid-template-columns: 1fr 381px;
 
+  &.receiptScannerControls {
+    grid-template-columns: 1fr 241px 381px;
+  }
+
   @media (max-width: 624px) {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
     flex-direction: column;
+  }
+}
+
+.pickerContainer {
+  margin-left: 16px;
+
+  @media (max-width: 624px) {
+    margin-left: 0px;
   }
 }
 
