@@ -35,7 +35,7 @@ const PrintersPopover = ({ actions, id, handlePrintListClose, popoverId, open, a
         await makeCoreGetRequest(`${actions.printAction.url}/${id}`)
       }
       if (actions.printAction.type === 'POST') {
-        await makeCorePostRequest(`${actions.printAction.url}/${id}`, { id: printerId })
+        await makeCorePostRequest(`${actions.printAction.url}/${id}`, { printerId })
       }
 
       handlePrintListClose()

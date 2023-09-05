@@ -44,10 +44,10 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
       ;(async () => {
         if (action.type === 'POST') {
           try {
-            const result = await makeCorePostRequest(`${action.url}`, {
-              receiptId: code,
+            await makeCorePostRequest(`${action.url}`, {
+              fiscalTicketId: code,
               proformaId: id,
-              date: formatPayloadDate(receiptDate)
+              fiscalTicketDate: formatPayloadDate(receiptDate)
             })
             if (action.href) {
               await destroy()
