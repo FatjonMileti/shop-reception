@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'configureStore'
 import { IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
@@ -19,15 +19,15 @@ import { isScannerDevice } from 'utils/helpers'
 const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
 
-  const [code, setCode] = React.useState('')
+  const [code, setCode] = useState('')
 
   const product = useSelector((state: RootState) => state.product)
 
   const dispatch = useDispatch()
 
-  const [isVisible, setIsVisible] = React.useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCode(product.code || '')
   }, [product.code])
 
@@ -37,14 +37,14 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   }
 
   const { run } = useScandit({ onScan, isVisible })
-  const [isUsingScandit, setIsUsingScandit] = React.useState(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
+  const [isUsingScandit, setIsUsingScandit] = useState(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
 
   const scanCode = () => {
     dispatch(ProductActions.clearProduct())
     setIsVisible(true)
   }
 
-  const searchProduct = async (event) => {
+  const searchProduct = async event => {
     event.target.blur() // [~] otherwise, the side button will trigger this click event...
     if (product.code) {
       let response: ProductStockResponse
@@ -55,7 +55,7 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     isScannerDevice(() => {
       try {
         run()
@@ -66,11 +66,11 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     })
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.getElementById('product-scan-input').focus()
   }, [])
 
-  const [isZerothButtonPressed, setIsZerothButtonPressed] = React.useState(false)
+  const [isZerothButtonPressed, setIsZerothButtonPressed] = useState(false)
 
   return (
     <Paper className={s.scanContainer}>
@@ -87,7 +87,7 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             }
             onBlur={event => {
               if (!product.code) {
-                document.getElementById('product-scan-input').focus();
+                document.getElementById('product-scan-input').focus()
               }
             }}
             onKeyDown={event => {
@@ -98,13 +98,12 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             onKeyUp={event => {
               if (event.which == 0) {
                 setIsZerothButtonPressed(false)
-                if (product.code)
-                  searchProduct(event)
+                if (product.code) searchProduct(event)
               }
             }}
             onBeforeInput={event => {
               if (isZerothButtonPressed) {
-                (document.getElementById('product-scan-input') as HTMLInputElement).value = ''
+                ;(document.getElementById('product-scan-input') as HTMLInputElement).value = ''
               }
             }}
             id="product-scan-input"
