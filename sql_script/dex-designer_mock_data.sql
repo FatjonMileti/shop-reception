@@ -204,7 +204,9 @@ values
     (5, 'GG_RO_HQ_IT_DEX_BAKERY_ADMIN'),
     (6, 'GG_RO_HQ_IT_DEX_BAKERY_STORE'),
     (7, 'GG_RO_HQ_IT_DEX_BAKERY_REGION'),
-    (8, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE');
+    (8, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE'),
+    (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
+    (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER');
 
 
 -- roles_activities
@@ -228,11 +230,15 @@ VALUES
     -- GG_RO_HQ_IT_DEX_BAKERY_REGION
     (7, 32), (7, 33), (7, 34), (7, 35), (7, 36),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE
-    (8, 17), (8, 18), (8, 19), (8, 20), (8, 21), (8, 22), (8, 23);
+    (8, 17), (8, 18), (8, 19), (8, 20), (8, 21), (8, 22), (8, 23),
+    -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER
+    (9, 17), (9, 18), (9, 19), (9, 20), (9, 21), (9, 22), (9, 23),
+    -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER
+    (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23);
 
 
 -- reset sequences
-SELECT setval('"dex-designer".seq_id_roles', 9, true);
+SELECT setval('"dex-designer".seq_id_roles', 11, true);
 SELECT setval('"dex-designer".seq_id_ui_schema', 45, true);
 SELECT setval('"dex-designer".seq_id_screen', 45, true);
 SELECT setval('"dex-designer".seq_id_activity', 37, true);
