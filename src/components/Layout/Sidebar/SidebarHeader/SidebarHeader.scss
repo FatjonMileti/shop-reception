@@ -1,15 +1,30 @@
 .menuHeaderContainer {
-  display: flex;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  position: relative;
   width: 100%;
+  margin: 10px 0;
+}
+
+.userInfoContainer {
+  display: flex;
 }
 
 .userName {
   width: 100%;
   line-height: 40px;
+  margin-left: 10px;
 }
 
 .logo {
   line-height: 40px;
-  font-size: 14px;
+  font-size: 14px !important;
+  position: absolute !important;
+  top: 0;
+  right: 0;
+}
+
+.storeInfoContainer {
+  margin-left: 50px;
+  line-height: 40px;
 }
