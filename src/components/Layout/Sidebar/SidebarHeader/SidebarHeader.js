@@ -4,16 +4,21 @@ import { Avatar, IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import s from './SidebarHeader.scss'
 import { getUserName, getUserAvatarString } from 'utils/authService'
 
-const SidebarHeader = ({ handleCloseMenu }) => {
+const SidebarHeader = ({ handleCloseMenu, storeName, regionName }) => {
   const userInfo = getUserName()
   const avatarString = getUserAvatarString()
 
   return (
     <Box className={s.menuHeaderContainer}>
       <div>
-        <Avatar alt={userInfo} value={avatarString} />
+        <div className={s.userInfoContainer}>
+          <Avatar alt={userInfo} value={avatarString} />
+          <span className={s.userName}>{userInfo}</span>
+        </div>
+        {storeName && <div className={s.storeInfoContainer}>Magazin {storeName}</div>}
+        {regionName && <div className={s.storeInfoContainer}>Regiune {regionName}</div>}
       </div>
-      <div className={s.userName}>{userInfo}</div>
+
       <IconButton className={s.logo} onClick={handleCloseMenu}>
         <Close />
       </IconButton>
