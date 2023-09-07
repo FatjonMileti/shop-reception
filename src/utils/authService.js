@@ -94,3 +94,23 @@ export const getUserAvatarString = () => {
 
   return ''
 }
+
+export const getUserStore = () => {
+  const userInfo = getUserInfo()
+
+  if (userInfo.domain_name) {
+    const storeInfo = userInfo.domain_name.split(',').find(info => info.includes('OU=STORE'))
+
+    if (storeInfo) {
+      return storeInfo.split('OU=STORE')[1]
+    }
+  }
+
+  return ''
+}
+
+export const getUserRegion = () => {
+  const userInfo = getUserInfo()
+
+  return userInfo.region_name || ''
+}

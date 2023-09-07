@@ -1,6 +1,12 @@
 .itemsList {
   padding: 60px;
   width: 400px;
+  &.padding90 {
+    padding-top: 90px;
+  }
+  &.padding130 {
+    padding-top: 130px;
+  }
 }
 
 .drawerHeader {
