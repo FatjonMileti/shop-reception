@@ -62,11 +62,13 @@ export const isAllowed = (allowedRoles, currentUserRoles) =>
   allowedRoles && currentUserRoles.some(r => allowedRoles.includes(r))
 
 export const formatAndDownloadResponse = fileObject => {
-  const blobUrl = URL.createObjectURL(fileObject)
+  const { data, headers } = fileObject
+  const fileName = headers.get('content-disposition').split(';')[1]
+  const blobUrl = URL.createObjectURL(data)
 
   const link = document.createElement('a')
   link.href = blobUrl
-  link.download = 'downloaded-file.xlsx'
+  link.download = fileName
   link.click()
 
   URL.revokeObjectURL(blobUrl)

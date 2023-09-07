@@ -5,7 +5,7 @@ import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
-import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
+import { makeCoreGetFileRequest, makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from '../Table/TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import {
@@ -206,9 +206,13 @@ const GroupTable = props => {
 
     const populated = data.find(item => item.list.length)
 
+    if(!populated){
+      return initialColumns
+    }
+
     const newColumns = populated.list?.flatMap((interval, index) =>
       groupCols.map(col => {
-        const additionalName = groupCols.length === 1 ? '' : col.title
+        const additionalName = groupCols?.length === 1 ? '' : col.title
         return (
           {
             ...col,
@@ -264,7 +268,7 @@ const GroupTable = props => {
           extraCustomUrlParams
         })
 
-        const response = await makeCoreGetRequest(url, {
+        const response = await makeCoreGetFileRequest(url, {
           responseType: 'blob'
         })
 
@@ -358,8 +362,8 @@ const GroupTable = props => {
             ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
             : null
         }
-        downloadButton={{ onClick: handleDownload }}
-        printButton={{ onClick: openPrintModal }}
+        downloadButton={tableActions?.downloadAction && { onClick: handleDownload }}
+        printButton={tableActions?.printAction && { onClick: openPrintModal }}
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
