@@ -73,6 +73,12 @@ const setEngineEvents = (result, engine) => {
     })
 }
 
+const setEngineCustomOperators = engine => {
+  engine.addOperator('isEmptyArray', factValue => {
+    return !factValue.length
+  })
+}
+
 export const start = async (formItems, editItem) => {
   const engine = new Engine()
 
@@ -95,6 +101,7 @@ export const start = async (formItems, editItem) => {
   })
 
   setEngineEvents(result, engine)
+  setEngineCustomOperators(engine)
 
   await engine.run(editItem)
 

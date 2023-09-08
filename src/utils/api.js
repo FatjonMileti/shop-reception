@@ -63,4 +63,5 @@ export const makeDesignerDeleteRequest = (url, params) =>
 export const makeDesignerPatchRequest = (url, params) =>
   axios.patch(getDesignerBaseUrl(url), params).then(response => response.data)
 
-export const makeCoreGetFileRequest = (url, params) => axios.get(getCoreBaseUrl(url), params)
+export const makeCoreGetFileRequest = (url, params) =>
+  axios.get(getCoreBaseUrl(url), params).then(response => response)
