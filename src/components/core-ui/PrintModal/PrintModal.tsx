@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Modal from '@mui/material/Modal'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -45,7 +45,11 @@ const PrintModal = ({
     }))
   }, [dynamicColumns])
 
-  const [value, setValue] = useState(columnOptions)
+  const [value, setValue] = useState([])
+
+  useEffect(() => {
+    setValue(columnOptions)
+  }, [dynamicColumns])
 
   const closeModalAndResetForm = () => {
     closeModal()
@@ -67,10 +71,10 @@ const PrintModal = ({
       extraUrlParams
     })
 
-    const columnsToPrint = encodeURIComponent(value.map(val => val.value))
+    const columnsToPrint = encodeURIComponent(value.map(val => val.value).toString())
     const printUrl = ''.concat(filters, `&columns=${columnsToPrint}`)
-   
-    window.open(printUrl, '_blank');
+
+    window.open(printUrl, '_blank')
   }
 
   const isXs = useMediaQuery('(max-width:624px)')
@@ -87,7 +91,7 @@ const PrintModal = ({
         sx={{
           ...sx,
           width: isXs ? 'calc(100% - 24px)' : '415px',
-          height: '472px',
+          height: '572px',
           ...(modalProps ? modalProps.sx : {})
         }}
       >
