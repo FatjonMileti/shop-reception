@@ -9,6 +9,7 @@ import { isEmpty } from 'lodash'
 import { Icon } from '../../Icon'
 import cn from 'classnames'
 import s from './ModalForm.modules.scss'
+import { getRemoteDependencies } from '../helpers'
 
 const ModalForm = ({
   modalTitle,
@@ -31,12 +32,20 @@ const ModalForm = ({
   useEffect(() => {
     ;(async () => {
       try {
+        let result = []
         if (formItems.some(item => item.dependencies?.conditions) && !isEmpty(editItem)) {
-          const result = await start(formItems, editItem)
+          result = await start(formItems, editItem)
+        }
+        if (formItems.some(item => item.dependencies?.action) && !isEmpty(editItem)) {
+          result = await getRemoteDependencies(result)
+        }
+
+        if (result.length) {
           setProcessedFormItems(
             result.filter(item => !(item.hidden || (item.inputProps && item.inputProps.hidden)))
           )
         }
+
         const itemsWithScript = formItems.filter(item => item.dependencies?.script)
         itemsWithScript.forEach(item => Function(item.dependencies.script)())
       } catch (error) {
