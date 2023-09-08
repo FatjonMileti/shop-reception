@@ -303,7 +303,7 @@
       "responses": [
         {
           "uuid": "28ed34a2-4704-499f-96d3-10503e4d2187",
-          "body": "{\n  \"id\": \"44501286\",\n  \"ean\": \"3614613092689\",\n  \"code\": \"44501286\",\n  \"familyCode\": {{faker 'datatype.number'}},\n  \"subfamilyCode\": {{faker 'datatype.number'}},\n  \"familyName\": \"\",\n  \"subfamilyName\": \"\",\n  \"name\": \"Frigider ARCTIC Eco-X7\",\n  \"brand\": \"ARCTIC\",\n  \"vat\": {{faker 'datatype.number'}},\n  \"price\": 969.99,\n  \"storeStock\": {\n    \"initialQuantity\": 7,\n    \"soldQuantity\": 3,\n    \"reservedQuantity\": 0,\n    \"availableQuantity\": 4,\n    \"buybackOptions\": [\n          { \"value\": \"NORMAL_PRICE\", \"label\": \"Pret lista\" },\n          { \"value\": \"INTERNAL_BUYBACK\", \"label\": \"Buyback intern (-120 RON)\" },\n          { \"value\": \"BUYBACK_AFM\", \"label\": \"Buyback AFM\" }\n        ]\n  },\n  \"warehouseStock\": {\n    \"initialQuantity\": 20,\n    \"soldQuantity\": 11,\n    \"reservedQuantity\": 2,\n    \"availableQuantity\": 7,\n    \"buybackOptions\": [\n          { \"value\": \"NORMAL_PRICE\", \"label\": \"Pret lista\" },\n          { \"value\": \"INTERNAL_BUYBACK\", \"label\": \"Buyback intern (-120 RON)\" },\n          { \"value\": \"BUYBACK_AFM\", \"label\": \"Buyback AFM\" }\n        ]\n  }\n}",
+          "body": "{\n  \"id\": \"44501286\",\n  \"ean\": \"3614613092689\",\n  \"code\": \"44501286\",\n  \"familyCode\": {{faker 'datatype.number'}},\n  \"subfamilyCode\": {{faker 'datatype.number'}},\n  \"familyName\": \"\",\n  \"subfamilyName\": \"\",\n  \"name\": \"Frigider ARCTIC Eco-X7\",\n  \"brand\": \"ARCTIC\",\n  \"vat\": {{faker 'datatype.number'}},\n  \"price\": 969.99,\n  \"storeStock\": {\n    \"initialQuantity\": 7,\n    \"soldQuantity\": 3,\n    \"reservedQuantity\": 0,\n    \"availableQuantity\": 4,\n    \"buybackOptions\": [\n          { \"value\": \"NORMAL_PRICE\", \"label\": \"Pret lista\" },\n          { \"value\": \"INTERNAL_BUYBACK\", \"label\": \"Buyback intern (-120 RON)\" },\n          { \"value\": \"BUYBACK_AFM\", \"label\": \"Buyback AFM\" }\n        ]\n  },\n  \"warehouseStock\": {\n    \"initialQuantity\": 20,\n    \"soldQuantity\": 11,\n    \"reservedQuantity\": 2,\n    \"availableQuantity\": 7,\n    \"buybackOptions\": [\n          { \"value\": \"NORMAL_PRICE\", \"label\": \"Pret lista\" },\n          { \"value\": \"INTERNAL_BUYBACK\", \"label\": \"Buyback intern (-120 RON)\" },\n          { \"value\": \"BUYBACK_AFM\", \"label\": \"Buyback AFM\" }\n        ]\n  },\n  \"neighboursStock\": [\n    {\n      \"name\": \"Suceava\",\n      \"initialQuantity\": 11,\n      \"soldQuantity\": 0,\n      \"reservedQuantity\": 0,\n      \"availableQuantity\": 11\n    },\n    {\n      \"name\": \"Pitesti\",\n      \"initialQuantity\": 7,\n      \"soldQuantity\": 2,\n      \"reservedQuantity\": 0,\n      \"availableQuantity\": 5\n    }\n  ]\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the product for the given EAN",
@@ -2449,7 +2449,7 @@
         {
           "uuid": "815f06c0-c335-438b-8c42-5a08d06358a4",
           "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"client\": \"667788\",\n  \"clientName\": \"\",\n  \"cart\": {\n    \"items\": [\n      {\n        \"id\": \"\",\n        \"ean\": \"\",\n        \"code\": \"\",\n        \"name\": \"\",\n        \"brand\": \"\",\n        \"price\": {{faker 'datatype.float'}},\n        \"quantity\": {{faker 'datatype.number'}},\n        \"vat\": {{faker 'datatype.number'}},\n        \"buybackDiscount\": \"\"\n      }\n    ],\n    \"created\": \"{{faker 'date.recent' 365}}\",\n    \"updated\": \"{{faker 'date.recent' 365}}\",\n    \"isWarehouse\": {{faker 'datatype.boolean'}}\n  },\n  \"reservations\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"remoteId\": {{faker 'datatype.number'}},\n      \"status\": \"\"\n    }\n  ],\n  \"creationDate\": \"{{faker 'date.recent' 365}}\",\n  \"deliveryDate\": \"{{date '2019' (now) 'yyyy-MM-dd'}}\",\n  \"paymentMethod\": \"\",\n  \"newDeliveryAddress\": {\n    \"city\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Bugeac\",\n      \"district\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    },\n    \"district\": {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    },\n    \"street\": \"\"\n  },\n  \"isActive\": true,\n  \"isDeleted\": {{faker 'datatype.boolean'}},\n  \"isPrinted\": {{faker 'datatype.boolean'}},\n  \"delivery\": {\n    \"date\": \"\",\n    \"isMorning\": {{faker 'datatype.boolean'}}\n  },\n  \"comment\": \"\"\n}",
-          "latency": 0,
+          "latency": 2000,
           "statusCode": 200,
           "label": "Successfully obtained the proforma identified by its id",
           "headers": [
@@ -3307,7 +3307,7 @@
         {
           "uuid": "10047b45-070e-40c2-b3bb-0df321ae2b23",
           "body": "",
-          "latency": 0,
+          "latency": 5000,
           "statusCode": 200,
           "label": "Successfully obtained pdf containing proformas from given date",
           "headers": [
@@ -4952,7 +4952,12 @@
           "latency": 0,
           "statusCode": 200,
           "label": "",
-          "headers": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -4977,6 +4982,67 @@
         {
           "uuid": "5899d923-c3c8-43e2-96bb-271b08b5e5ce",
           "body": "{\n  \"store\": false,\n  \"deposit\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "253a8d39-d82a-493e-8c65-77177e3084b9",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "printer",
+      "responses": [
+        {
+          "uuid": "bb6b4ca8-ab7b-400e-acf2-c04e53bcc3b7",
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"HP Inc. HP Color LaserJet 5550\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Xerox VersaLink C7000dn A3 Colour LED Laser Printer\"\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Epson WorkForce Pro WF-6090DW\"\n  },\n  {\n    \"id\": 4,\n    \"name\": \"HP Inc. HP Color LaserJet 5550\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "2536c204-3e2d-47fe-af78-7666b2858201",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "cart/product/pickup-location",
+      "responses": [
+        {
+          "uuid": "bf6c1eb5-1a79-477a-bcbb-cc4d9ee40773",
+          "body": "{\n  \"location\": \"store\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -5148,6 +5214,14 @@
     {
       "type": "route",
       "uuid": "4c44ef04-1e94-440c-a7cc-3f2ace452b03"
+    },
+    {
+      "type": "route",
+      "uuid": "253a8d39-d82a-493e-8c65-77177e3084b9"
+    },
+    {
+      "type": "route",
+      "uuid": "2536c204-3e2d-47fe-af78-7666b2858201"
     }
   ],
   "proxyMode": false,
