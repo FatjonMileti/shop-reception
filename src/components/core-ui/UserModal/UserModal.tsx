@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
-import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import {
+  Button,
+  IconButton,
+  Input,
+  Typography,
+  Checkbox
+} from '@fullscreendigital/carrefour-dex-fe'
 import { ModalInfo } from '../ModalWithForm/ModalForm/ModalInfo'
 import { useNotification } from 'hooks'
 import s from './UserModal.modules.scss'
@@ -45,7 +51,7 @@ function UserModal(props) {
   const [roles, setRoles] = useState([])
   const [traineeOptions, setTraineeOptions] = useState(null)
   const { showNotification } = useNotification()
-console.log(props)
+  const [adminRole, setAdminRole] = useState(null)
   const closeModalAndResetForm = () => {
     closeModal()
     setEditItem(null)
@@ -151,11 +157,14 @@ console.log(props)
 
           const rolesResult = await makeCoreGetRequest(`${getRolesAction}`)
 
+          const admin = rolesResult.find(role => role.name === 'ADMIN')
+
           const traineeRoles = rolesResult
             .filter(role => role.name.includes('TRAINEE'))
             .map(role => ({ name: role.id, label: role.name }))
           const otherRoles = rolesResult.filter(role => !role.name.includes('TRAINEE'))
 
+          setAdminRole(admin)
           setRoles(otherRoles)
           setTraineeOptions(traineeRoles)
         } catch (error) {
@@ -273,6 +282,13 @@ console.log(props)
                           />
                         )
                       })}
+                    <Checkbox
+                      checked={editItem.structureRoles?.some(
+                        option => option.roleId === adminRole?.id
+                      )}
+                      label="ADMIN"
+                      onChange={() => removeAddStructure(adminRole?.id)}
+                    />
                     <StructureItem
                       editItem={editItem}
                       setEditItem={setEditItem}
