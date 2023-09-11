@@ -5038,15 +5038,20 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "cart/product/pickup-location",
+      "endpoint": "order/delivery-options",
       "responses": [
         {
           "uuid": "bf6c1eb5-1a79-477a-bcbb-cc4d9ee40773",
-          "body": "{\n  \"location\": \"store\"\n}",
+          "body": "[\n  {\n    \"type\": \"DELIVERY_WAREHOUSE\",\n    \"description\": \"Livrare din depozit\"\n  },\n  {\n    \"type\": \"DELIVERY_STORE\",\n    \"description\": \"Livrare din magazin\"\n  },\n  {\n    \"type\": \"NO_DELIVERY\",\n    \"description\": \"Ridicare din magazin\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "",
-          "headers": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",

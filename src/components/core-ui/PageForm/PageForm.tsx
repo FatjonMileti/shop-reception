@@ -17,6 +17,7 @@ import { getItemDefaults } from 'utils/helpers'
 import { get } from 'lodash'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { formatErrorMessage } from 'utils/formatting'
+import { toProcessedEditItem } from './serializers'
 
 const PageForm = props => {
   const {
@@ -88,10 +89,10 @@ const PageForm = props => {
     })
   }
 
-  const saveData = async () => {
+  const saveData = async (processedFormItems) => {
     setIsLoading(true)
     try {
-      const payload = toItemPayload(editItem)
+      const payload = toItemPayload(toProcessedEditItem(editItem, processedFormItems))
       let response
       if (formAction.type === 'POST') {
         response = await makeCorePostRequest(`${formAction.url}`, payload)
