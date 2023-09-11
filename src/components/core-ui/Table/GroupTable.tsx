@@ -197,8 +197,9 @@ const GroupTable = props => {
       return initialColumns
     }
 
-    const staticColumns = initialColumns.slice()?.filter(col => !col.isGroup)
+    const staticColumns = initialColumns.filter(col => !col.isGroup)
     const groupCols = initialColumns.filter(col => col.isGroup)
+    const groupIndex = initialColumns.findIndex(col => col.isGroup)
 
     if(!groupCols.length){
       return staticColumns
@@ -233,7 +234,8 @@ const GroupTable = props => {
       col1.start.localeCompare(col2.start, undefined, { numeric: true })
     )
 
-    let dynamicCols = staticColumns.concat(orderdCols)
+    let dynamicCols = staticColumns
+    dynamicCols.splice(groupIndex, 0, ...orderdCols)
 
     return dynamicCols
   }
