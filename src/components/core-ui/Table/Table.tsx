@@ -349,6 +349,7 @@ const Table = props => {
                     canCancel={canCancel}
                     canSeeCustomAction={canSeeCustomAction}
                     userModal={userModal}
+                    extraUrlParams={extraUrlParams}
                   />
                 )
               })
