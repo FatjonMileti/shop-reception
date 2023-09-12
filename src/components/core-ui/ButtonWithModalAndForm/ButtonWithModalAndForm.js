@@ -15,7 +15,8 @@ const ButtonWithModalAndForm = ({
   editedItemId,
   editedItemUrl,
   additionalAction,
-  userModal
+  userModal,
+  extraUrlParams
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
@@ -52,6 +53,7 @@ const ButtonWithModalAndForm = ({
           additionalAction={additionalAction}
           isModalOpen={isModalOpen}
           closeModal={closeModal}
+          extraUrlParams={extraUrlParams}
         />
       )}
     </>

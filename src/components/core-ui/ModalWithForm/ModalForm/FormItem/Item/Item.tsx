@@ -45,8 +45,8 @@ const Item = ({
               handleInputChange(arg.target.checked, key, type)
               break
             case 'autocomplete':
-              handleInputChange(arg?.value, key, type)
-              handleInputChange(arg?.label, name, type)
+              handleInputChange(arg?.value || arg, key, type)
+              handleInputChange(arg?.label || arg, name, type)
               break
             case 'static':
               handleInputChange(arg?.value, key, type)

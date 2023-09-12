@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useNotification } from 'hooks'
 import { RootState } from 'configureStore'
@@ -10,6 +10,11 @@ const Notification = () => {
 
   const { clearNotification } = useNotification()
 
+  const autoHideDuration = useMemo(
+    () => (notification.timeout || notification.type === 'error' ? 10000 : 3000),
+    [notification.timeout, notification.type]
+  )
+
   const handleClose = (_: unknown, reason?: SnackbarCloseReason) =>
     reason !== 'clickaway' && clearNotification()
 
@@ -17,7 +22,7 @@ const Notification = () => {
     <Snackbar
       open={notification.open}
       onClose={handleClose}
-      autoHideDuration={notification.timeout || notification.type === 'error' ? 10000 : 3000}
+      autoHideDuration={autoHideDuration}
       alert={{
         severity: notification.type,
         children: notification.message,
