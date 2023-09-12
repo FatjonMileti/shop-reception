@@ -49,7 +49,7 @@ const Item = ({
               handleInputChange(arg?.label, name, type)
               break
             case 'static':
-              handleInputChange(arg.value, key, type)
+              handleInputChange(arg?.value, key, type)
               break
             case 'countyCitySelect':
               handleInputChange(arg?.value, rest[variable].payloadKey, type)
