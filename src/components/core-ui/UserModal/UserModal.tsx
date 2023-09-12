@@ -290,13 +290,6 @@ function UserModal(props) {
                           />
                         )
                       })}
-                    <Checkbox
-                      checked={editItem.structureRoles?.some(
-                        option => option.roleId === adminRole?.id
-                      )}
-                      label="ADMIN"
-                      onChange={() => removeAddStructure(adminRole?.id)}
-                    />
                     <StructureItem
                       editItem={editItem}
                       setEditItem={setEditItem}

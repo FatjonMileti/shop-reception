@@ -19,10 +19,9 @@ const Item = ({
 }) => {
   const key = rest.payloadKey || name
 
-  const handleOnBeforeInput = (event) => {
+  const handleOnBeforeInput = event => {
     // console.log("[item] onBeforeInput | event: ", event)
-    if (/^[0-9]*$/.test(event.data) == false)
-      event.preventDefault()
+    if (/^[0-9]*$/.test(event.data) == false) event.preventDefault()
   }
 
   return (
@@ -49,6 +48,9 @@ const Item = ({
               handleInputChange(arg?.value, key, type)
               handleInputChange(arg?.label, name, type)
               break
+            case 'static':
+              handleInputChange(arg.value, key, type)
+              break
             case 'countyCitySelect':
               handleInputChange(arg?.value, rest[variable].payloadKey, type)
               handleInputChange(arg?.label, rest[variable].name, type)
@@ -68,7 +70,7 @@ const Item = ({
               break
           }
         },
-        ...(type == 'percent' ? {onBeforeInput: handleOnBeforeInput} : {})
+        ...(type == 'percent' ? { onBeforeInput: handleOnBeforeInput } : {})
       })}
     </Grid>
   )
