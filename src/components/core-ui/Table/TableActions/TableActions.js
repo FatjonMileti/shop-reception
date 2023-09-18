@@ -19,7 +19,8 @@ const TableActions = ({
   canCancel,
   customAction,
   canSeeCustomAction,
-  userModal
+  userModal,
+  extraUrlParams = ''
 }) => {
   const navigate = useNavigate()
 
@@ -60,6 +61,7 @@ const TableActions = ({
           editedItemUrl={editAction.getUrl}
           additionalAction={additionalAction}
           userModal={userModal}
+          extraUrlParams={extraUrlParams}
         />
       )}
       {deleteAction && canDelete && (

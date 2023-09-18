@@ -40,6 +40,10 @@ const infoItems = [
   {
     name: 'lastName',
     label: 'Prenume'
+  },
+  {
+    name: 'roles',
+    label: 'Rol'
   }
 ]
 
@@ -167,6 +171,10 @@ function UserModal(props) {
           setAdminRole(admin)
           setRoles(otherRoles)
           setTraineeOptions(traineeRoles)
+
+          if (result.structureRoles.some(struct => struct.roleId === admin.id)) {
+            setEditItem(prev => ({ ...prev, roles: 'ADMIN' }))
+          }
         } catch (error) {
           showNotification({
             message: `Error while fetching item. ${formatErrorMessage(error)}`,
@@ -282,13 +290,6 @@ function UserModal(props) {
                           />
                         )
                       })}
-                    <Checkbox
-                      checked={editItem.structureRoles?.some(
-                        option => option.roleId === adminRole?.id
-                      )}
-                      label="ADMIN"
-                      onChange={() => removeAddStructure(adminRole?.id)}
-                    />
                     <StructureItem
                       editItem={editItem}
                       setEditItem={setEditItem}
