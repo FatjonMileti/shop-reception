@@ -7,7 +7,7 @@ import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): string => {
   const { variable, defaultValue } = filter
 
-  if (!variable && !defaultValue) return (filter.type == 'date' ? null : '')
+  if (!variable && !defaultValue) return filter.type == 'date' ? null : ''
 
   return searchParams[variable] ?? getDefaultItemValue(defaultValue)
 }
@@ -59,6 +59,19 @@ export const getRenderedColumns = (columns, tableFilters) =>
               ...render,
               value
             })
+          }
+
+          if (UIComponent === 'Switch') {
+            if (get(row, column.field) !== '') {
+              return renderComponent({
+                ...render,
+                value: get(row, column.field),
+                pathId: row.id,
+                payloadKey: column.field
+              })
+            } else {
+              return null
+            }
           }
 
           return renderComponent(render)

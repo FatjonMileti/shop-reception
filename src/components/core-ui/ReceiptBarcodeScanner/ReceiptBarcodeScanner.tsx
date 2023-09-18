@@ -16,7 +16,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
 
   const [code, setCode] = useState('')
-  const [receiptDate, setReceiptDate] = useState(dayjs().format('DD/MM/YYYY'))
+  const [receiptDate, setReceiptDate] = useState(dayjs())
   const [isVisible, setIsVisible] = useState(false)
 
   const { showNotification } = useNotification()
