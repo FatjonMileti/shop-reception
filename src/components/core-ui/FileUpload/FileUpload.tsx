@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import s from './FileUpload.modules.scss'
@@ -12,7 +12,7 @@ const FileUpload = props => {
 
   async function getImageFileFromURL(imageUrl) {
     try {
-      const response = await fetch(imageUrl)
+      const response = await fetch(imageUrl, { mode: 'no-cors' })
       const blob = await response.blob()
 
       const file = new File([blob], editItem.name, { type: blob.type })
@@ -28,9 +28,8 @@ const FileUpload = props => {
       ;(async () => {
         const response = await getImageFileFromURL(value)
         if (response) {
-          const imageURL = URL.createObjectURL(response)
           setSelectedFile(response)
-          setSelectedFileUrl(imageURL)
+          setSelectedFileUrl(value)
         }
       })()
     }
