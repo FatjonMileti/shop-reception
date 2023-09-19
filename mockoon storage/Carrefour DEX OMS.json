@@ -3316,8 +3316,8 @@
               "value": "application/pdf"
             }
           ],
-          "bodyType": "INLINE",
-          "filePath": "",
+          "bodyType": "FILE",
+          "filePath": "proforma-598.pdf",
           "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
@@ -4154,6 +4154,435 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "d4e43cec-90cb-4e7f-8e51-047689657d6f",
+      "type": "http",
+      "documentation": "Get active orders",
+      "method": "get",
+      "endpoint": "order/with-invoice",
+      "responses": [
+        {
+          "uuid": "f21b5d8d-1048-4b3c-8a3d-4a74d8409627",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained list of active proformas",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "51111d2f-5492-4698-8330-0d0c76f0ca24",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "8e8cca37-362e-44c4-af10-d6f34a6074b6",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "bf4a9783-b76d-4053-b898-0bace247a556",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "b34e68bd-89b9-4005-83a8-8c97d12826b3",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "bb8b35bb-ddfe-4bcd-935a-2c782cd4374d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "2b4f5d27-4cd0-4568-8bf5-db90e8489d62",
+      "type": "http",
+      "documentation": "Get not-so-active orders",
+      "method": "get",
+      "endpoint": "order/without-invoice",
+      "responses": [
+        {
+          "uuid": "4acd4d27-daf2-49c8-9496-13f7ebc4a101",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"773\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained list of active proformas",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "2094851f-7215-4cbe-b4f7-e1fbeac22cb2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "8aa9af81-8df8-4d2d-aa3f-5a7025abc85d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "bd6707dc-cd8b-4f89-a9a1-1eb571a0b085",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "8f86a62a-91ca-4971-b442-b7afa955f367",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "b1a316ec-ac13-4798-9446-e36e63eb6539",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "c2aefdc6-b9d2-4e4b-b8c7-aba2304b0382",
+      "type": "http",
+      "documentation": "Get proforma by orderId",
+      "method": "get",
+      "endpoint": "order/invoice/:orderId",
+      "responses": [
+        {
+          "uuid": "11af26c6-6b26-4fc5-b8b5-7e20d0d8c7f4",
+          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"proformaId\": {{faker 'datatype.number'}},\n  \"clientId\": \"667788\",\n  \"clientName\": \"\",\n  \"agentName\": \"\",\n  \"products\": [\n    {\n      \"id\": \"\",\n      \"ean\": \"\",\n      \"internalCode\": \"\",\n      \"name\": \"\",\n      \"brand\": \"\",\n      \"price\": {{faker 'datatype.float'}},\n      \"quantity\": {{faker 'datatype.number'}},\n      \"vat\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"\"\n    }\n  ],\n  \"totalAmount\": {{faker 'datatype.float'}},\n  \"paymentMethod\": \"\",\n  \"deliveryType\": \"\",\n  \"paid\": true,\n  \"hasInvoice\": {{faker 'datatype.boolean'}},\n  \"creationDate\": \"\",\n  \"lastModifiedDate\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the proforma identified by orderId",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "5d4371b0-17b3-4d77-b69b-f33b806b94c2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "67d170c0-2116-44c2-a9f6-11fc38c485e7",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "33416c6f-e22f-4259-8a97-e30715432b89",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "6fbcb166-0783-458b-95f2-86181e1bae02",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "b30cde39-44c9-484e-86d6-fbc27753e7e0",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4243,6 +4672,10 @@
     },
     {
       "type": "route",
+      "uuid": "c2aefdc6-b9d2-4e4b-b8c7-aba2304b0382"
+    },
+    {
+      "type": "route",
       "uuid": "ff1d84a8-0eab-4ccb-8f37-479e1c307127"
     },
     {
@@ -4272,6 +4705,14 @@
     {
       "type": "route",
       "uuid": "4dddbdc3-2857-46ea-b276-6683c3e6dd71"
+    },
+    {
+      "type": "route",
+      "uuid": "d4e43cec-90cb-4e7f-8e51-047689657d6f"
+    },
+    {
+      "type": "route",
+      "uuid": "2b4f5d27-4cd0-4568-8bf5-db90e8489d62"
     }
   ],
   "proxyMode": false,
