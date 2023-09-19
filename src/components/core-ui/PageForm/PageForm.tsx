@@ -89,10 +89,15 @@ const PageForm = props => {
     })
   }
 
-  const saveData = async (processedFormItems) => {
+  const saveData = async processedFormItems => {
     setIsLoading(true)
     try {
-      const payload = toItemPayload(toProcessedEditItem(editItem, processedFormItems))
+      const payload = toItemPayload(
+        toProcessedEditItem(
+          editItem,
+          processedFormItems.concat(formItems.filter(item => item.type === 'hidden'))
+        )
+      )
       let response
       if (formAction.type === 'POST') {
         response = await makeCorePostRequest(`${formAction.url}`, payload)
@@ -150,7 +155,7 @@ const PageForm = props => {
       )}
       <ModalForm
         modalTitle=""
-        formItems={formItems.filter(item => item.type != 'hidden')}
+        formItems={formItems.filter(item => item.type !== 'hidden')}
         formInfoItems={formInfoItems}
         gridSize={gridSize}
         handleInputChange={handleInputChange}

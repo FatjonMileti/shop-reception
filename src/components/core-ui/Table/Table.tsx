@@ -186,6 +186,7 @@ const Table = props => {
             orderBy,
             hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText,
+            generalSearchFields: generalSearch?.searchFields,
             extraUrlParams,
             extraCustomUrlParams
           })
@@ -205,6 +206,7 @@ const Table = props => {
             tableFilters,
             hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText,
+            generalSearchFields: generalSearch?.searchFields,
             extraUrlParams,
             extraCustomUrlParams
           })
@@ -248,6 +250,7 @@ const Table = props => {
         orderBy,
         hasGeneralSearch: generalSearch?.hasGeneralSearch,
         generalSearchText: table.searchText,
+        generalSearchFields: generalSearch?.searchFields,
         extraUrlParams,
         extraCustomUrlParams
       })

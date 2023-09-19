@@ -142,6 +142,14 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
   return `&filterBy=${filterBy}&filterValue=${filterValue}`
 }
 
+export const getSearchGetUrl = (searchFields: string[], searchText: string) => {
+  if (!searchText) return ''
+  const searchBy = encodeURIComponent(searchFields.join(','))
+  const searchValue = encodeURIComponent(searchText)
+
+  return `&searchBy=${searchBy}&searchValue=${searchValue}`
+}
+
 export const getCustomFiltersGetUrl = (filters: Filter[]) => {
   if (!filters.length) return ''
 

@@ -62,7 +62,7 @@ const PdfViewer = (props: PdfViewerProps) => {
 
   const scanReceipt = () => {
     navigate(
-      `${actions.scanReceiptAction.href}/${id}?clientId=${retrieveData('proformaDetails.client')}`
+      `${actions.scanReceiptAction.href}/${id}?clientId=${retrieveData('proformaDetails.clientId')}`
     )
   }
 
@@ -75,7 +75,7 @@ const PdfViewer = (props: PdfViewerProps) => {
     ) : (
       <div>
         <div className={s.scanReceiptContainer}>
-          {proform?.isActive && (
+          {proform?.paid && (
             <IconButton
               onClick={scanReceipt}
               label={actions.scanReceiptAction.label}

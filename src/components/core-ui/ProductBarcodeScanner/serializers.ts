@@ -32,12 +32,11 @@ export const toProduct = product => {
       isWarehouse: true
     },
     neighboursStock: neighboursStock.map(stock => ({
-      name: stock.name,
+      name: stock.storeName,
       available: stock.availableQuantity,
       sold: stock.soldQuantity,
       reserved: stock.reservedQuantity,
       initialStock: stock.initialQuantity
-      // isWarehouse: false
     }))
   }
 }

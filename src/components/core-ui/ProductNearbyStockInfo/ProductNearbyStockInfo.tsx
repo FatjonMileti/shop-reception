@@ -14,8 +14,6 @@ const ProductNearbyStockInfo = props => {
   return product.title ? (
     <Box className={s.productTab}>
       <Box className={s.title}>{title}</Box>
-      {/* <Paper className={s.productTab}>
-        <Box className={s.neighboursBox}> */}
       <Box className={s.neighboursBox}>
         {product.neighboursStock.map(stock => (
           <Accordion
@@ -34,15 +32,12 @@ const ProductNearbyStockInfo = props => {
                 />
               </Box>
             }
-            // disableGutters
             defaultExpanded
             id={stock.name}
             onChange={function noRefCheck() {}}
           />
         ))}
       </Box>
-      {/* </Box>
-      </Paper> */}
     </Box>
   ) : null
 }
