@@ -42,8 +42,8 @@ function ProductView(props) {
               {product.fabricationMethod}
             </div>
           </div>
-          <div>
-            <img width={250} height={250} src={product.imageUrl}/>
+          <div className={s.productImageContainer}>
+            <img className={s.productImage} src={product.imageUrl}/>
           </div>
         </div>
       )}
