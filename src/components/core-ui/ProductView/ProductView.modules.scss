@@ -1,7 +1,5 @@
 .content {
-  padding-top: 82px;
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding: 64px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -63,5 +61,6 @@
 
 .productImage {
   width: 60%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }

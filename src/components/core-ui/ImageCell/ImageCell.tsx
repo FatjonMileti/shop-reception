@@ -12,6 +12,7 @@ const sx = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '50%',
+  height: '80%',
   bgcolor: '#fff',
   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
   borderRadius: '8px',
@@ -64,7 +65,7 @@ const ImageCell = (props: ImageCellProps) => {
           >
             <Close />
           </IconButton>
-          <Box>
+          <Box className={s.modalImageContainer}>
             <img src={imageUrl} className={s.modalImage} alt="Selected file" />
           </Box>
         </Box>
