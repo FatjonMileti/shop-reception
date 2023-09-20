@@ -14,7 +14,7 @@ import {
   renderTableFooter
 } from '../Table/helpers'
 import { toTableGETUrl, toTablePOSTPayload } from '../Table/serializers'
-import { toTableRowItems } from 'utils/serializers'
+import { toDynamicTableItems, toTableRowItems } from 'utils/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from '../Table/Table.modules.scss'
@@ -178,7 +178,7 @@ const GroupTable = props => {
 
       const newColumns = createDynamicColumns(columns, response.list)
       setDynamicColumns(newColumns)
-      setItems(toTableRowItems(response.list, newColumns))
+      setItems(toTableRowItems(toDynamicTableItems(response.list), newColumns))
       setTotalCount(response.page.totalCount)
       setSummary(response.summary)
     } catch (error) {
@@ -214,6 +214,7 @@ const GroupTable = props => {
     const newColumns = populated.list?.flatMap((interval, index) =>
       groupCols.map(col => {
         const additionalName = groupCols?.length === 1 ? '' : col.title
+
         return (
           {
             ...col,
@@ -223,7 +224,7 @@ const GroupTable = props => {
               0,
               -3
             )} ${additionalName}`,
-            field: `list.[${index}].${col.field}`,
+            field: `list.${interval.name}.${col.field}`,
             disableSorting: true
           } || []
         )

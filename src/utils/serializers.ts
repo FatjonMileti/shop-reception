@@ -52,3 +52,13 @@ export const toTableRowItems = (items, columns) => {
 
   return items
 }
+
+export const toDynamicTableItems = items =>
+  items.map(item => {
+    const newList = item.list.reduce((acc, i) => {
+      acc[i.name] = i
+      return acc
+    }, {})
+
+    return { ...item, list: newList }
+  })
