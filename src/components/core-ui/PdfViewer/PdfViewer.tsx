@@ -35,21 +35,23 @@ const PdfViewer = (props: PdfViewerProps) => {
     ;(async () => {
       if (id == undefined) return
 
-      try {
-        setIsLoading(true)
+      if (action) {
+        try {
+          setIsLoading(true)
 
-        const proformResult = await makeCoreGetRequest(`${action.url}/${id}`)
-        setProform(proformResult)
-        if (action.storeIn) {
-          storeData(action.storeIn, proformResult) // [~] if we store the response first, then this 'response' variable becomes read-only and the following toTableRowItems throws an error
+          const proformResult = await makeCoreGetRequest(`${action.url}/${id}`)
+          setProform(proformResult)
+          if (action.storeIn) {
+            storeData(action.storeIn, proformResult) // [~] if we store the response first, then this 'response' variable becomes read-only and the following toTableRowItems throws an error
+          }
+        } catch (error) {
+          showNotification({
+            message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
         }
-
+      } else {
         setIsLoading(false)
-      } catch (error) {
-        showNotification({
-          message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
       }
     })()
   }, [id])
