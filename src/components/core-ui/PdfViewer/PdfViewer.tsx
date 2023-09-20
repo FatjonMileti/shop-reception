@@ -44,6 +44,7 @@ const PdfViewer = (props: PdfViewerProps) => {
           if (action.storeIn) {
             storeData(action.storeIn, proformResult) // [~] if we store the response first, then this 'response' variable becomes read-only and the following toTableRowItems throws an error
           }
+          setIsLoading(false)
         } catch (error) {
           showNotification({
             message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
