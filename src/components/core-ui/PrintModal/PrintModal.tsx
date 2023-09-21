@@ -40,18 +40,18 @@ const PrintModal = ({
 }) => {
   const columnOptions = useMemo(() => {
     return dynamicColumns
-      .filter(col => col.defaultPrintSelected)
       .map(col => ({
         label: col.title,
-        value: col.field
+        value: col.field,
+        defaultPrintSelected: col.defaultPrintSelected
       }))
   }, [dynamicColumns])
 
   const [value, setValue] = useState([])
 
   useEffect(() => {
-    setValue(columnOptions)
-  }, [dynamicColumns])
+    setValue(columnOptions.filter(col => col.defaultPrintSelected))
+  }, [columnOptions])
 
   const closeModalAndResetForm = () => {
     closeModal()
