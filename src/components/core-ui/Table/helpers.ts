@@ -53,7 +53,7 @@ export const getRenderedColumns = (columns, tableFilters) =>
             })
           }
 
-          if (UIComponent === 'BooleanIcon') {
+          if (UIComponent === 'BooleanIcon' || UIComponent === 'BooleanText') {
             const value = get(row, field)
             return renderComponent({
               ...render,
