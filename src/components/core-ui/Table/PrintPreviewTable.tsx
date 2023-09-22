@@ -179,7 +179,7 @@ const PrintPreviewTable = props => {
         totalCount={totalCount}
         rowsPerPage={rest.rowsPerPage || 10}
         isRemote
-        downloadButton={{ onClick: handleDownload }}
+        printButton={{ onClick: handleDownload }}
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
