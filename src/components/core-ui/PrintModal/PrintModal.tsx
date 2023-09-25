@@ -39,17 +39,19 @@ const PrintModal = ({
   ...rest
 }) => {
   const columnOptions = useMemo(() => {
-    return dynamicColumns.map(col => ({
-      label: col.title,
-      value: col.field
-    }))
+    return dynamicColumns
+      .map(col => ({
+        label: col.title,
+        value: col.field,
+        defaultPrintSelected: col.defaultPrintSelected
+      }))
   }, [dynamicColumns])
 
   const [value, setValue] = useState([])
 
   useEffect(() => {
-    setValue(columnOptions)
-  }, [dynamicColumns])
+    setValue(columnOptions.filter(col => col.defaultPrintSelected))
+  }, [columnOptions])
 
   const closeModalAndResetForm = () => {
     closeModal()
@@ -90,8 +92,7 @@ const PrintModal = ({
       <Box
         sx={{
           ...sx,
-          width: isXs ? 'calc(100% - 24px)' : '415px',
-          height: '572px',
+          width: isXs ? 'calc(100% - 24px)' : '50%',
           ...(modalProps ? modalProps.sx : {})
         }}
       >
@@ -102,24 +103,33 @@ const PrintModal = ({
         >
           <Close />
         </IconButton>
-        {modalTitle && modalTitle.length > 0 && (
+        <Grid container spacing={4}>
+          {modalTitle && modalTitle.length > 0 && (
+            <Grid item xs={12}>
+              <Typography component="h2" variant="medium">
+                <span className={s.modalTitle}>{modalTitle}</span>
+              </Typography>
+            </Grid>
+          )}
           <Grid item xs={12}>
-            <Typography component="h2" variant="medium">
-              <span className={s.modalTitle}>{modalTitle}</span>
-            </Typography>
+            <Autocomplete
+              multiple={true}
+              options={columnOptions}
+              value={value}
+              onChange={(_, val) => setValue(val)}
+              label="Selecteaza coloane"
+              variant="standard"
+            />
           </Grid>
-        )}
-        <Autocomplete
-          multiple={true}
-          options={columnOptions}
-          value={value}
-          onChange={(_, val) => setValue(val)}
-          label="Selecteaza coloane"
-          variant="standard"
-        />
-        <Grid item xs={12} className={s.modalButtons}>
-          <Button label="Anuleaza" onClick={closeModal} />
-          <Button variant="contained" label="Previzualizare" onClick={onSubmit} />
+          <Grid item xs={12}>
+            <Grid container spacing={4}>
+              <Grid item xs={6}></Grid>
+              <Grid item xs={6} className={s.modalButtons}>
+                <Button label="Anuleaza" onClick={closeModal} />
+                <Button variant="contained" label="Previzualizare" onClick={onSubmit} />
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
       </Box>
     </Modal>

@@ -13,6 +13,10 @@ export const getDefaultItemValue = value => {
       return dayjs().format('YYYY-MM-DD')
     }
 
+    if (value === '#YESTERDAY') {
+      return dayjs().add(-1, 'day').format('YYYY-MM-DD')
+    }
+
     if (value.includes('#TOKEN')) {
       const userInfo = getUserInfo()
       return get(userInfo, value.replace('#TOKEN.', ''))

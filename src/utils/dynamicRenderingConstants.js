@@ -4,10 +4,12 @@ import { Autocomplete, Checkbox, DatePicker, Typography } from '@fullscreendigit
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { StaticAutocomplete } from 'components/core-ui/StaticAutocomplete'
 import { BooleanIcon } from 'components/core-ui/BooleanIcon'
+import { BooleanText } from 'components/core-ui/BooleanText'
 import { Button } from 'components/core-ui/Button'
 import { Card } from 'components/core-ui/Card'
 import { ContainerBox } from 'components/core-ui/ContainerBox'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
+import { DescriptionText } from 'components/core-ui/DescriptionText'
 import { PrintModal } from 'components/core-ui/PrintModal'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Grid } from 'components/core-ui/Grid'
@@ -62,10 +64,12 @@ export const Components = {
   AsyncAutocomplete,
   StaticAutocomplete,
   BooleanIcon,
+  BooleanText,
   Button,
   Card,
   ContainerBox,
   CountyCitySelect,
+  DescriptionText,
   PrintModal,
   FloatingButton,
   Grid,

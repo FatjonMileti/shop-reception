@@ -11,7 +11,7 @@ import {
   convertFilterSchemaToFilterConfig,
   renderTableFooter
 } from '../Table/helpers'
-import { toTableRowItems } from 'utils/serializers'
+import { toDynamicTableItems, toTableRowItems } from 'utils/serializers'
 import { useNotification } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from '../Table/Table.modules.scss'
@@ -109,7 +109,7 @@ const PrintPreviewTable = props => {
 
       const newColumns = createDynamicColumns(columns, response.list)
       setDynamicColumns(newColumns)
-      setItems(toTableRowItems(response.list, newColumns))
+      setItems(toTableRowItems(toDynamicTableItems(response.list), newColumns))
       setTotalCount(response.page.totalCount)
       setSummary(response.summary)
     } catch (error) {
@@ -145,7 +145,7 @@ const PrintPreviewTable = props => {
               0,
               -3
             )} ${additionalName}`,
-            field: `list.[${index}].${col.field}`,
+            field: `list.${interval.name}.${col.field}`,
             disableSorting: true
           } || []
         )
@@ -179,7 +179,7 @@ const PrintPreviewTable = props => {
         totalCount={totalCount}
         rowsPerPage={rest.rowsPerPage || 10}
         isRemote
-        downloadButton={{ onClick: handleDownload }}
+        printButton={{ onClick: handleDownload }}
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
