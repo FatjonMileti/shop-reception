@@ -37,15 +37,22 @@ const ImageCell = (props: ImageCellProps) => {
     }
   }
 
+  const handleOnError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    event.currentTarget.src = 'images/default-product-image.svg'
+  }
+
   return (
     <div className={s.container}>
       <img
         className={cn(s.image, { [s.clickable]: imageUrl })}
         src={imageUrl ?? 'images/default-product-image.svg'}
         alt="Selected file"
+        onError={handleOnError}
         onClick={clickImage}
       />
-      {value}
+      <span className={s.descriptionText} title={value}>
+        {value}
+      </span>
       <Modal
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
