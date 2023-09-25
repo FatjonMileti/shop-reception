@@ -7,7 +7,7 @@ import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): string => {
   const { variable, defaultValue } = filter
 
-  if (!variable && !defaultValue) return (filter.type == 'date' ? null : '')
+  if (!variable && !defaultValue) return filter.type == 'date' ? null : ''
 
   return searchParams[variable] ?? getDefaultItemValue(defaultValue)
 }
@@ -53,7 +53,11 @@ export const getRenderedColumns = (columns, tableFilters) =>
             })
           }
 
-          if (UIComponent === 'BooleanIcon' || UIComponent === 'BooleanText') {
+          if (
+            UIComponent === 'BooleanIcon' ||
+            UIComponent === 'BooleanText' ||
+            UIComponent === 'DescriptionText'
+          ) {
             const value = get(row, field)
             return renderComponent({
               ...render,
