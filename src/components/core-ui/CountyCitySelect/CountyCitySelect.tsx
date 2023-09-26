@@ -44,7 +44,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           const { url, valueKey, labelKey } = action
 
           const result = await makeCoreGetRequest(
-            `${url}?page=-1&filterBy=countyId&filterValue=${value.county.value}`
+            `${url}?page=-1&filterBy=county.id&filterValue=${value.county.value}`
           )
 
           setCities(toAsyncSelectOptions(result.list, valueKey, labelKey))

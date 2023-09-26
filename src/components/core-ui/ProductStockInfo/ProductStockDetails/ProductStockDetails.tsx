@@ -1,6 +1,6 @@
 import { ProductGeneralInfo } from './ProductGeneralInfo'
 import { KeyValuePairs } from 'components/core-ui/KeyValuePairs'
-import { toProductStockKeyValuePairs } from './serializers'
+import { toProductStockKeyValuePairs } from 'utils/serializers'
 import s from './ProductStockDetails.modules.scss'
 
 const ProductStockDetails = ({ stock, infoItems, actions }) => {

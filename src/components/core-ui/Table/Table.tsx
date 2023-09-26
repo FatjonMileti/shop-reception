@@ -186,6 +186,7 @@ const Table = props => {
             orderBy,
             hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText,
+            generalSearchFields: generalSearch?.searchFields,
             extraUrlParams,
             extraCustomUrlParams
           })
@@ -205,6 +206,7 @@ const Table = props => {
             tableFilters,
             hasGeneralSearch: generalSearch?.hasGeneralSearch,
             generalSearchText: table.searchText,
+            generalSearchFields: generalSearch?.searchFields,
             extraUrlParams,
             extraCustomUrlParams
           })
@@ -248,6 +250,7 @@ const Table = props => {
         orderBy,
         hasGeneralSearch: generalSearch?.hasGeneralSearch,
         generalSearchText: table.searchText,
+        generalSearchFields: generalSearch?.searchFields,
         extraUrlParams,
         extraCustomUrlParams
       })
@@ -328,6 +331,7 @@ const Table = props => {
                 render: row => (
                   <TableActions
                     itemId={row.id}
+                    row={row}
                     viewAction={tableRowActions.viewAction}
                     editAction={tableRowActions.editAction}
                     deleteAction={tableRowActions.deleteAction}

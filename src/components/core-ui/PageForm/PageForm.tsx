@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import { useImmer } from 'use-immer'
-import { set } from 'lodash'
 import { ModalForm } from '../ModalWithForm/ModalForm'
 import { toItemPayload } from 'utils/serializers'
 import {
@@ -18,6 +17,7 @@ import { getItemDefaults } from 'utils/helpers'
 import { get } from 'lodash'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { formatErrorMessage } from 'utils/formatting'
+import { toProcessedEditItem } from './serializers'
 
 const PageForm = props => {
   const {
@@ -89,10 +89,15 @@ const PageForm = props => {
     })
   }
 
-  const saveData = async () => {
+  const saveData = async processedFormItems => {
     setIsLoading(true)
     try {
-      const payload = toItemPayload(editItem)
+      const payload = toItemPayload(
+        toProcessedEditItem(
+          editItem,
+          processedFormItems.concat(formItems.filter(item => item.type === 'hidden'))
+        )
+      )
       let response
       if (formAction.type === 'POST') {
         response = await makeCorePostRequest(`${formAction.url}`, payload)
@@ -150,7 +155,7 @@ const PageForm = props => {
       )}
       <ModalForm
         modalTitle=""
-        formItems={formItems.filter(item => item.type != 'hidden')}
+        formItems={formItems.filter(item => item.type !== 'hidden')}
         formInfoItems={formInfoItems}
         gridSize={gridSize}
         handleInputChange={handleInputChange}

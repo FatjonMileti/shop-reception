@@ -1,6 +1,7 @@
 import Engine from 'json-rules-engine'
 import dayjs from 'dayjs'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isEqual } from 'lodash'
+import { makeCoreGetRequest } from 'utils/api'
 
 const getItemRules = (conditions, UIAttributes, index) => ({
   conditions: {
@@ -77,6 +78,10 @@ const setEngineCustomOperators = engine => {
   engine.addOperator('isEmptyArray', factValue => {
     return !factValue.length
   })
+
+  engine.addOperator('isRemoteValueEqual', (factValue, jsonValue) => {
+    return isEqual(factValue, jsonValue)
+  })
 }
 
 export const start = async (formItems, editItem) => {
@@ -87,15 +92,28 @@ export const start = async (formItems, editItem) => {
   formItems.forEach((item, index) => {
     const { dependencies } = item
 
-    if (dependencies && !dependencies.script && !dependencies.action) {
-      setItemRule(dependencies, index, engine)
+    if (dependencies && !dependencies.scrip) {
+      if (dependencies.action) {
+        const { url, conditions, UIAttributes } = dependencies.action
 
-      if (dependencies.conditions?.params) {
-        setItemFact(index, engine)
-      }
+        setItemRule({ conditions, UIAttributes }, index, engine)
 
-      if (Array.isArray(dependencies.conditions)) {
-        setItemFacts(engine, dependencies.conditions)
+        engine.addFact(`fact${index}`, async (params, almanac) => {
+          const response = await makeCoreGetRequest(url)
+          return almanac.factValue(params).then(() => {
+            return response
+          })
+        })
+      } else {
+        setItemRule(dependencies, index, engine)
+
+        if (dependencies.conditions?.params) {
+          setItemFact(index, engine)
+        }
+
+        if (Array.isArray(dependencies.conditions)) {
+          setItemFacts(engine, dependencies.conditions)
+        }
       }
     }
   })
