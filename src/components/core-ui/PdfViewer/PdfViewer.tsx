@@ -78,7 +78,7 @@ const PdfViewer = (props: PdfViewerProps) => {
     ) : (
       <div>
         <div className={s.scanReceiptContainer}>
-          {proform?.paid && actions.scanReceiptAction && (
+          {!proform?.paid && actions.scanReceiptAction && (
             <IconButton
               onClick={scanReceipt}
               label={actions.scanReceiptAction.label}
