@@ -4,7 +4,7 @@ import { Paper } from '@mui/material'
 import { useNotification, useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
-import { makeCorePostRequest } from 'utils/api'
+import { makeCorePutRequest } from 'utils/api'
 import { ProductBarcodeScannerProps } from '../ProductBarcodeScanner/ProductBarcodeScannerDefinitions'
 import s from '../ProductBarcodeScanner/ProductBarcodeScanner.modules.scss'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
@@ -16,9 +16,8 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
 
   const [code, setCode] = useState('')
-  const [receiptDate, setReceiptDate] = useState(dayjs().format('DD/MM/YYYY'))
+  const [receiptDate, setReceiptDate] = useState(dayjs())
   const [isVisible, setIsVisible] = useState(false)
-  const [isContinueEnabled, setIsContinueEnabled] = useState(false)
 
   const { showNotification } = useNotification()
   const navigate = useNavigate()
@@ -42,17 +41,17 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const sendReceipt = () => {
     if (code && receiptDate) {
       ;(async () => {
-        if (action.type === 'POST') {
+        if (action.type === 'PUT') {
           try {
-            const result = await makeCorePostRequest(`${action.url}`, {
-              receiptId: code,
-              proformaId: id,
-              date: formatPayloadDate(receiptDate)
+            await makeCorePutRequest(`${action.url}/${id}`, {
+              fiscalTicketId: code,
+              fiscalTicketDate: formatPayloadDate(receiptDate)
             })
+
             if (action.href) {
               await destroy()
               navigate(
-                `${action.href}?${action.variable}=${code}&clientId=${searchParams.get('clientId')}`
+                `${action.href}?${action.variable}=${id}&clientId=${searchParams.get('clientId')}`
               )
             }
           } catch (error) {
@@ -83,7 +82,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
 
   return (
     <Paper className={s.scanContainer}>
-      <div className={s.scannerControls}>
+      <div className={cn(s.scannerControls, s.receiptScannerControls)}>
         <div className={s.scannerControlItem}>
           <Input
             value={code}
@@ -95,7 +94,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             id="receipt-scan-input"
           />
         </div>
-        <div>
+        <div className={s.pickerContainer}>
           <DatePicker
             label="Alege data bonului"
             value={receiptDate}

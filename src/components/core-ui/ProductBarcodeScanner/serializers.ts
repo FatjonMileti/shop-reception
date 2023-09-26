@@ -1,5 +1,5 @@
 export const toProduct = product => {
-  const { name, ean, price, code, storeStock, warehouseStock, id } = product
+  const { id, name, ean, price, code, storeStock, warehouseStock, neighboursStock } = product
 
   return {
     title: name,
@@ -30,6 +30,13 @@ export const toProduct = product => {
       hasBuyback: !!warehouseStock?.buybackOptions?.length,
       buybackOptions: warehouseStock?.buybackOptions,
       isWarehouse: true
-    }
+    },
+    neighboursStock: neighboursStock.map(stock => ({
+      name: stock.storeName,
+      available: stock.availableQuantity,
+      sold: stock.soldQuantity,
+      reserved: stock.reservedQuantity,
+      initialStock: stock.initialQuantity
+    }))
   }
 }

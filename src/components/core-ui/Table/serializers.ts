@@ -1,4 +1,4 @@
-import { get, set } from 'lodash'
+import { set } from 'lodash'
 import { toArrayItemPayload } from 'utils/serializers'
 import { Filter } from './TableDefinitions'
 import {
@@ -6,7 +6,8 @@ import {
   getSearchFieldsGetUrl,
   getAllFilters,
   getTableQueryUrl,
-  getCustomFiltersGetUrl
+  getCustomFiltersGetUrl,
+  getSearchGetUrl
 } from './helpers'
 
 export const toTableObjects = result =>
@@ -33,6 +34,7 @@ export const toTableGETUrl = ({
   orderBy,
   hasGeneralSearch,
   generalSearchText,
+  generalSearchFields,
   extraUrlParams,
   extraCustomUrlParams
 }: {
@@ -47,6 +49,7 @@ export const toTableGETUrl = ({
   orderBy: string
   hasGeneralSearch: boolean
   generalSearchText: string
+  generalSearchFields?: string[]
   extraUrlParams?: Filter[]
   extraCustomUrlParams?: Filter[]
 }) => {
@@ -59,7 +62,9 @@ export const toTableGETUrl = ({
     ? getCustomFiltersGetUrl(getAllFilters(extraCustomUrlParams))
     : ''
   const generalSearchUrl =
-    hasGeneralSearch && generalSearchText ? `&keyword=${generalSearchText}` : ''
+    hasGeneralSearch && generalSearchText
+      ? getSearchGetUrl(generalSearchFields, generalSearchText)
+      : ''
 
   return `${url}?${tableQueryUrl}${searchFieldsUrl}${filtersUrl}${generalSearchUrl}${customFiltersUrl}`
 }
@@ -78,6 +83,7 @@ export const toTablePOSTPayload = ({
   tableFilters,
   hasGeneralSearch,
   generalSearchText,
+  generalSearchFields,
   extraUrlParams,
   extraCustomUrlParams
 }: {
@@ -91,6 +97,7 @@ export const toTablePOSTPayload = ({
   tableFilters?: Filter[]
   hasGeneralSearch: boolean
   generalSearchText: string
+  generalSearchFields?: string[]
   extraUrlParams?: Filter[]
   extraCustomUrlParams?: Filter[]
 }) => ({
@@ -107,7 +114,9 @@ export const toTablePOSTPayload = ({
       ...(extraCustomUrlParams ?? [])
     ])
   ),
-  ...(hasGeneralSearch && generalSearchText ? { keyword: generalSearchText } : {})
+  ...(hasGeneralSearch && generalSearchText
+    ? generalSearchFields.map(field => ({ [field]: generalSearchText }))
+    : {})
 })
 
 export const toFiltersUrl = (tableFilters, linkFilters) => {

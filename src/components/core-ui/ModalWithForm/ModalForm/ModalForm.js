@@ -113,14 +113,18 @@ const ModalForm = ({
                 endIcon={endIcon && <Icon iconName={endIcon} tiny fill={iconFill || 'white'} />}
                 style={isPageForm ? { maxWidth: 'fit-content' } : {}}
                 {...rest}
-                onClick={isSaveButton ? saveData : closeModal}
+                onClick={() => {
+                  isSaveButton ? saveData(processedFormItems) : closeModal()
+                }}
               />
             ) : (
               <Button
                 key={formButton.label}
                 style={isPageForm ? { maxWidth: 'fit-content' } : {}}
                 {...rest}
-                onClick={isSaveButton ? saveData : closeModal}
+                onClick={() => {
+                  isSaveButton ? saveData(processedFormItems) : closeModal()
+                }}
               />
             )
           })}

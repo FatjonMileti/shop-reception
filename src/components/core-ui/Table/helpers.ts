@@ -1,7 +1,7 @@
 import { get } from 'lodash'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { toFiltersUrl } from './serializers'
-import { downloadFile, formatUIDate, getDefaultItemValue } from 'utils/helpers'
+import { formatUIDate, getDefaultItemValue } from 'utils/helpers'
 import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
 
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): string => {
@@ -63,6 +63,19 @@ export const getRenderedColumns = (columns, tableFilters) =>
               ...render,
               value
             })
+          }
+
+          if (UIComponent === 'Switch') {
+            if (get(row, column.field) !== '') {
+              return renderComponent({
+                ...render,
+                value: get(row, column.field),
+                pathId: row.id,
+                payloadKey: column.field
+              })
+            } else {
+              return null
+            }
           }
 
           return renderComponent(render)
@@ -133,6 +146,14 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
   return `&filterBy=${filterBy}&filterValue=${filterValue}`
 }
 
+export const getSearchGetUrl = (searchFields: string[], searchText: string) => {
+  if (!searchText) return ''
+  const searchBy = encodeURIComponent(searchFields.join(','))
+  const searchValue = encodeURIComponent(searchText)
+
+  return `&searchBy=${searchBy}&searchValue=${searchValue}`
+}
+
 export const getCustomFiltersGetUrl = (filters: Filter[]) => {
   if (!filters.length) return ''
 
@@ -142,7 +163,7 @@ export const getCustomFiltersGetUrl = (filters: Filter[]) => {
 }
 
 export const getAllFilters = (filters: Filter[]) =>
-  filters.filter(filter => filter.value !== undefined && filter.value !== '')
+  filters.filter(filter => filter.value !== undefined && filter.value !== '' && filter.value !== null)
 
 export const getTableQueryUrl = params =>
   Object.keys(params).reduce(
