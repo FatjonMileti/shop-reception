@@ -5,7 +5,7 @@ import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
-import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
+import { makeCoreGetFileRequest, makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from './TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import { getRenderedColumns, convertFilterSchemaToFilterConfig, renderTableFooter } from './helpers'
@@ -256,7 +256,7 @@ const Table = props => {
       })
 
       if (isFile) {
-        const response = await makeCoreGetRequest(url, {
+        const response = await makeCoreGetFileRequest(url, {
           responseType: 'blob'
         })
 
