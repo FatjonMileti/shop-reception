@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import { get } from 'lodash'
-import { getUserInfo } from './authService'
+import { getUserInfo, getToken } from './authService'
 import { getCoreBaseUrl } from './api'
 
 export const formatPayloadDate = date => (date ? dayjs(date).format('YYYY-MM-DD') : '')
@@ -67,7 +67,13 @@ export const isAllowed = (allowedRoles, currentUserRoles) =>
 
 export const formatAndDownloadResponse = fileObject => {
   const { data, headers } = fileObject
-  const fileName = headers.get('content-disposition').split(';')[1]
+  let fileName
+  try {
+    console.log(headers)
+    fileName = headers.get('Content-Disposition').split(';')[1].split('filename=')[1]
+  } catch (error) {
+    fileName = 'test.pdf'
+  }
   const blobUrl = URL.createObjectURL(data)
 
   const link = document.createElement('a')

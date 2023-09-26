@@ -2,10 +2,11 @@ import { useMemo, useState } from 'react'
 import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { Add, Remove, FileDownloadOutlined, PrintOutlined } from '@mui/icons-material'
 import { useNotification } from 'hooks'
-import { downloadFile } from 'utils/helpers'
+import { formatAndDownloadResponse } from 'utils/helpers'
 import s from './PdfActions.modules.scss'
 import { formatErrorMessage } from 'utils/formatting'
 import { PrintersPopover } from './PrintersPopover'
+import { makeCoreGetFileRequest } from 'utils/api'
 
 const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
   const { showNotification } = useNotification()
@@ -21,9 +22,13 @@ const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
 
   const zoomOut = () => setScale(scale - 0.25)
 
-  const download = () => {
+  const download = async () => {
     try {
-      downloadFile(`${actions.downloadAction.url}/${id}`)
+      const response = await makeCoreGetFileRequest(`${actions.downloadAction.url}/${id}`, {
+        responseType: 'blob'
+      })
+
+      formatAndDownloadResponse(response)
     } catch (error) {
       showNotification({
         message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
