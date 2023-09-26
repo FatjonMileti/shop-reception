@@ -69,7 +69,6 @@ export const formatAndDownloadResponse = fileObject => {
   const { data, headers } = fileObject
   let fileName
   try {
-    console.log(headers)
     fileName = headers.get('Content-Disposition').split(';')[1].split('filename=')[1]
   } catch (error) {
     fileName = 'test.pdf'
