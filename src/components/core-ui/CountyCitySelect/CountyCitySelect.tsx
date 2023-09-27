@@ -8,7 +8,7 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 
 const CountyCitySelect = (props: CountyCitySelectProps) => {
-  const { county, city, value, onChange, hidden, disabled } = props
+  const { county, city, value, onChange, hidden, disabled, error, helperText, required } = props
 
   const [counties, setCounties] = useState([])
   const [cities, setCities] = useState([])
@@ -50,7 +50,9 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           setCities(toAsyncSelectOptions(result.list, valueKey, labelKey))
         } catch (error) {
           showNotification({
-            message: `A aparut o eroarea la obtinerea listei de orase. ${formatErrorMessage(error)}`,
+            message: `A aparut o eroarea la obtinerea listei de orase. ${formatErrorMessage(
+              error
+            )}`,
             type: 'error'
           })
         }
@@ -58,13 +60,15 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
     }
   }, [value?.county?.value])
 
+  console.log(value)
+
   return (
     <Grid container spacing={4} style={hidden ? { display: 'none' } : {}}>
       <Grid item xs={12} md={6}>
         <Autocomplete
           {...county}
           disablePortal
-          id={county.id || "county-async"}
+          id={county.id || 'county-async'}
           options={counties}
           open={countiesOpen}
           onOpen={() => {
@@ -78,13 +82,20 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           isOptionEqualToValue={(option, value) => option.value === value.value}
           onChange={(_, newValue) => onChange(newValue, 'county')}
           disabled={disabled}
+          error={error && !value?.county?.value}
+          helperText={
+            error && !value?.county?.value && helperText.includes('required')
+              ? 'Judet is required'
+              : ''
+          }
+          required={required}
         />
       </Grid>
       <Grid item xs={12} md={6}>
         <Autocomplete
           {...city}
           disablePortal
-          id={city.id || "city-async"}
+          id={city.id || 'city-async'}
           options={cities}
           open={citiesOpen}
           onOpen={() => {
@@ -98,6 +109,13 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           isOptionEqualToValue={(option, value) => option.value === value.value}
           onChange={(_, newValue) => onChange(newValue, 'city')}
           disabled={disabled}
+          error={error && !value?.city?.value}
+          helperText={
+            error && !value?.city?.value && helperText.includes('required')
+              ? 'Oras is required'
+              : ''
+          }
+          required={required}
         />
       </Grid>
     </Grid>
