@@ -1161,7 +1161,7 @@
       "responses": [
         {
           "uuid": "15b33254-eace-4136-956a-c9dcc1e7a08c",
-          "body": "{\n  \"store\": false,\n  \"deposit\": true\n}",
+          "body": "{\n  \"store\": true,\n  \"deposit\": false\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained store flag set to true if product can be added to cart from store/deposit set to true if can be added from deposit",
@@ -2019,7 +2019,7 @@
       "responses": [
         {
           "uuid": "5ef75a7a-8608-4219-b365-bd936ddcf0d6",
-          "body": "[\n  {\n    \"type\": \"DELIVERY_WAREHOUSE\",\n    \"description\": \"Livrare din depozit\"\n  },\n  {\n    \"type\": \"DELIVERY_STORE\",\n    \"description\": \"Livrare din magazin\"\n  },\n  {\n    \"type\": \"NO_DELIVERY\",\n    \"description\": \"Ridicare din magazin\"\n  }\n]",
+          "body": "[\n  {\n    \"type\": \"DELIVERY_STORE\",\n    \"description\": \"Livrare din magazin\"\n  },\n  {\n    \"type\": \"NO_DELIVERY\",\n    \"description\": \"Ridicare din magazin\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Succesfully obtained the list of available options that can be choosen",
@@ -2734,7 +2734,7 @@
       "responses": [
         {
           "uuid": "0faa97eb-bbea-4d2d-9a3b-55aa2402ae5e",
-          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"proformaId\": {{faker 'datatype.number'}},\n  \"clientId\": \"667788\",\n  \"clientName\": \"\",\n  \"agentName\": \"\",\n  \"products\": [\n    {\n      \"id\": \"\",\n      \"ean\": \"\",\n      \"internalCode\": \"\",\n      \"name\": \"\",\n      \"brand\": \"\",\n      \"price\": {{faker 'datatype.float'}},\n      \"quantity\": {{faker 'datatype.number'}},\n      \"vat\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"\"\n    }\n  ],\n  \"totalAmount\": {{faker 'datatype.float'}},\n  \"paymentMethod\": \"\",\n  \"deliveryType\": \"\",\n  \"paid\": true,\n  \"hasInvoice\": {{faker 'datatype.boolean'}},\n  \"creationDate\": \"\",\n  \"lastModifiedDate\": \"\"\n}",
+          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"proformaId\": {{faker 'datatype.number'}},\n  \"clientId\": \"667788\",\n  \"clientName\": \"\",\n  \"agentName\": \"\",\n  \"products\": [\n    {\n      \"id\": \"\",\n      \"ean\": \"\",\n      \"internalCode\": \"\",\n      \"name\": \"\",\n      \"brand\": \"\",\n      \"price\": {{faker 'datatype.float'}},\n      \"quantity\": {{faker 'datatype.number'}},\n      \"vat\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"\"\n    }\n  ],\n  \"totalAmount\": {{faker 'datatype.float'}},\n  \"paymentMethod\": \"\",\n  \"deliveryType\": \"\",\n  \"paid\": false,\n  \"hasInvoice\": {{faker 'datatype.boolean'}},\n  \"creationDate\": \"\",\n  \"lastModifiedDate\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the proforma identified by orderId",

@@ -60,8 +60,6 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
     }
   }, [value?.county?.value])
 
-  console.log(value)
-
   return (
     <Grid container spacing={4} style={hidden ? { display: 'none' } : {}}>
       <Grid item xs={12} md={6}>

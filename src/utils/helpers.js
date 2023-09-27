@@ -116,7 +116,18 @@ export const isScannerDevice = callbackOtherwise => {
 export const getFormErrors = (formItems, data) =>
   formItems.reduce((acc, item) => {
     if (item.required) {
-      const itemValue = item.payloadKey ? get(data, item.payloadKey) : get(data, item.name)
+      let itemValue
+      if (item.UIComponent === 'CountyCitySelect') {
+        const countyValue = get(data, item.county.payloadKey)
+        const cityValue = get(data, item.city.payloadKey)
+        if (!countyValue || !cityValue) {
+          itemValue = ''
+        } else {
+          itemValue = `${countyValue}-${cityValue}`
+        }
+      } else {
+        itemValue = item.payloadKey ? get(data, item.payloadKey) : get(data, item.name)
+      }
       if (itemValue === '' || itemValue === undefined) {
         acc[item.name] = `${item.label || ''} is required`
       }
