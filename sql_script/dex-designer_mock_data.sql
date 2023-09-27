@@ -245,7 +245,7 @@ values
   (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
   (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER');
   -- Supply OMNI
-  -- (11, 'GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN');
+  (11, 'GG_RO_HQ_IT-C4ASSIST');
 
 
 -- roles_activities
@@ -275,8 +275,8 @@ VALUES
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER
     (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23),
     -- Supply OMNI
-    -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
-    (1, 37), (1, 38), (1, 39), (1, 40), (1, 41);
+    -- GG_RO_HQ_IT-C4ASSIST
+    (11, 37), (11, 38), (11, 39), (11, 40), (11, 41);
 
 
 -- reset sequences
