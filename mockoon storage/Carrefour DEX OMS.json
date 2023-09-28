@@ -4164,7 +4164,7 @@
       "responses": [
         {
           "uuid": "f21b5d8d-1048-4b3c-8a3d-4a74d8409627",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"Livrare din magazin\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\",\n      \"prepared\": false\n    },\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"Livrare din depozit\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of active proformas",
@@ -4307,7 +4307,7 @@
       "responses": [
         {
           "uuid": "4acd4d27-daf2-49c8-9496-13f7ebc4a101",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"773\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"773\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"Livrare din depozit\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of active proformas",
@@ -4583,6 +4583,34 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "4cf5600c-94f5-4695-85ab-95c96750965f",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "proforma/:id",
+      "responses": [
+        {
+          "uuid": "7f713d27-ee46-4ed6-8791-87b4deca2794",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4713,6 +4741,10 @@
     {
       "type": "route",
       "uuid": "2b4f5d27-4cd0-4568-8bf5-db90e8489d62"
+    },
+    {
+      "type": "route",
+      "uuid": "4cf5600c-94f5-4695-85ab-95c96750965f"
     }
   ],
   "proxyMode": false,
@@ -4723,36 +4755,4 @@
     "type": "CERT",
     "pfxPath": "",
     "certPath": "",
-    "keyPath": "",
-    "caPath": "",
-    "passphrase": ""
-  },
-  "cors": true,
-  "headers": [
-    {
-      "key": "Access-Control-Allow-Origin",
-      "value": "*"
-    },
-    {
-      "key": "Access-Control-Allow-Methods",
-      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-    },
-    {
-      "key": "Access-Control-Allow-Headers",
-      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-    }
-  ],
-  "proxyReqHeaders": [
-    {
-      "key": "",
-      "value": ""
-    }
-  ],
-  "proxyResHeaders": [
-    {
-      "key": "",
-      "value": ""
-    }
-  ],
-  "data": []
-}
+ 
