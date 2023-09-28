@@ -107,6 +107,7 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
               }
             }}
             id="product-scan-input"
+            required
           />
         </div>
         <div className={s.buttonContainer}>

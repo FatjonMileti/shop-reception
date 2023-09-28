@@ -92,6 +92,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             fullWidth
             onChange={event => setCode(event.currentTarget.value)}
             id="receipt-scan-input"
+            required
           />
         </div>
         <div className={s.pickerContainer}>
