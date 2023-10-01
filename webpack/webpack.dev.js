@@ -78,5 +78,8 @@ module.exports = env => ({
     historyApiFallback: true,
     allowedHosts: 'all'
   },
-  plugins: [new ReactRefreshWebpackPlugin(), new Dotenv({ path: `.env.${env.environment}` })]
+  plugins: [
+    new ReactRefreshWebpackPlugin(),
+    new Dotenv({ path: env.environment === 'local' ? '.env.local' : '.env.dev' })
+  ]
 })

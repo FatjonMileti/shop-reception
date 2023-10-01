@@ -3,6 +3,7 @@ import { Box } from '@mui/material'
 import { FormInfoItems, FormEditItem } from './ModalInfoDefinitions'
 import { get } from 'lodash'
 import s from './ModalInfo.modules.scss'
+import { renderComponent } from 'utils/dynamicRenderingService'
 
 const ModalInfo = ({
   formInfoItems,
@@ -18,9 +19,13 @@ const ModalInfo = ({
         return (
           <Box key={item.name} className={s.item}>
             <div className={s.label}>{item.label}:</div>
-            <div className={s.value} title={itemValue}>
-              {itemValue}
-            </div>
+            {item.render ? (
+              <div className={s.value}>{renderComponent({ ...item.render, value: itemValue })}</div>
+            ) : (
+              <div className={s.value} title={itemValue}>
+                {itemValue}
+              </div>
+            )}
           </Box>
         )
       })}

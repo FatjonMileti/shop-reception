@@ -69,7 +69,6 @@ export const formatAndDownloadResponse = fileObject => {
   const { data, headers } = fileObject
   let fileName
   try {
-    console.log(headers)
     fileName = headers.get('Content-Disposition').split(';')[1].split('filename=')[1]
   } catch (error) {
     fileName = 'test.pdf'
@@ -113,3 +112,25 @@ export const isScannerDevice = callbackOtherwise => {
     callbackOtherwise()
   }
 }
+
+export const getFormErrors = (formItems, data) =>
+  formItems.reduce((acc, item) => {
+    if (item.required) {
+      let itemValue
+      if (item.UIComponent === 'CountyCitySelect') {
+        const countyValue = get(data, item.county.payloadKey)
+        const cityValue = get(data, item.city.payloadKey)
+        if (!countyValue || !cityValue) {
+          itemValue = ''
+        } else {
+          itemValue = `${countyValue}-${cityValue}`
+        }
+      } else {
+        itemValue = item.payloadKey ? get(data, item.payloadKey) : get(data, item.name)
+      }
+      if (itemValue === '' || itemValue === undefined) {
+        acc[item.name] = `${item.label || ''} is required`
+      }
+    }
+    return acc
+  }, {})
