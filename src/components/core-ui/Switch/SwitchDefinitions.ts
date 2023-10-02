@@ -6,4 +6,13 @@ export interface SwitchProps {
   successMessage?: string
   value?: boolean
   pathId?: string | number
+  confirmModal?: ConfirmSwitchModalProps
+}
+
+export interface ConfirmSwitchModalProps {
+  modalTitle: string
+  toggleTrueMessage: string
+  toggleFalseMessage: string
+  cancelButtonText: string
+  confirmButtonText: string
 }

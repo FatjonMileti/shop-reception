@@ -11,7 +11,7 @@ const ProductNearbyStockInfo = props => {
 
   const product = useSelector((state: RootState) => state.product)
 
-  return product.title ? (
+  return product.title && product.neighboursStock.length ? (
     <Box className={s.productTab}>
       <Box className={s.neighboursBox}>
         <Accordion
