@@ -159,7 +159,7 @@ export const getCustomFiltersGetUrl = (filters: Filter[]) => {
 
   const [filterBy, filterValue] = getFilterUrlValues(filters)
 
-  return `&customFieldName=${filterBy}&customFieldValue=${filterValue}`
+  return `&${filterBy}=${filterValue}`
 }
 
 export const getAllFilters = (filters: Filter[]) =>
