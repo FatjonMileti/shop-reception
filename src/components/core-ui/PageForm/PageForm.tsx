@@ -130,7 +130,11 @@ const PageForm = props => {
             url = `${url}/${response.id}`
           }
           if (formAction.variable) {
-            url = `${url}?${formAction.variable}=${searchParams.get(formAction.variable)}`
+            if (formAction.setInPath) {
+              url = `${href}/${searchParams.get(formAction.variable)}`
+            } else {
+              url = `${url}?${formAction.variable}=${searchParams.get(formAction.variable)}`
+            }
           }
           navigate(url)
         }
