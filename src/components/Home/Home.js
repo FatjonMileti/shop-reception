@@ -35,7 +35,7 @@ const Home = ({ modules, setSubdomainId }) => {
                       className={s.applicationContainer}
                     >
                       <div className={s.iconContainer}>
-                        <Icon iconName={app.icon} />
+                        <Icon iconName={app.icon} fill="white" />
                       </div>
                       <span className={s.applicationName}>{app.name}</span>
                     </div>
