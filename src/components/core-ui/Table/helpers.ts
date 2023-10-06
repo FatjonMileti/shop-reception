@@ -148,7 +148,7 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
 
 export const getSearchGetUrl = (searchFields: string[], searchText: string) => {
   if (!searchText) return ''
-  const searchBy = encodeURIComponent(searchFields.join(','))
+  const searchBy = encodeURIComponent(searchFields.join('|'))
   const searchValue = encodeURIComponent(searchText)
 
   return `&searchBy=${searchBy}&searchValue=${searchValue}`
@@ -159,7 +159,7 @@ export const getCustomFiltersGetUrl = (filters: Filter[]) => {
 
   const [filterBy, filterValue] = getFilterUrlValues(filters)
 
-  return `&customFieldName=${filterBy}&customFieldValue=${filterValue}`
+  return `&${filterBy}=${filterValue}`
 }
 
 export const getAllFilters = (filters: Filter[]) =>

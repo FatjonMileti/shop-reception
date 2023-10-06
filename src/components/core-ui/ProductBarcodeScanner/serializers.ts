@@ -1,5 +1,5 @@
 export const toProduct = product => {
-  const { id, name, ean, price, code, storeStock, warehouseStock, neighboursStock } = product
+  const { id, name, ean, price, internalCode, storeStock, warehouseStock, neighboursStock } = product
 
   return {
     title: name,
@@ -8,7 +8,7 @@ export const toProduct = product => {
       price,
       currency: 'lei',
       eanCode: ean,
-      storeCode: code,
+      storeCode: internalCode,
       available: storeStock.availableQuantity,
       sold: storeStock.soldQuantity,
       reserved: storeStock.reservedQuantity,
@@ -22,7 +22,7 @@ export const toProduct = product => {
       price,
       currency: 'lei',
       eanCode: ean,
-      storeCode: code,
+      storeCode: internalCode,
       available: warehouseStock?.availableQuantity,
       sold: warehouseStock?.soldQuantity,
       reserved: warehouseStock?.reservedQuantity,
@@ -31,12 +31,12 @@ export const toProduct = product => {
       buybackOptions: warehouseStock?.buybackOptions,
       isWarehouse: true
     },
-    neighboursStock: neighboursStock.map(stock => ({
+    neighboursStock: neighboursStock?.map(stock => ({
       name: stock.storeName,
       available: stock.availableQuantity,
       sold: stock.soldQuantity,
       reserved: stock.reservedQuantity,
       initialStock: stock.initialQuantity
-    }))
+    })) ?? []
   }
 }

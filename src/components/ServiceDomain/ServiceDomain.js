@@ -6,7 +6,13 @@ import { Divider, IconButton, Typography } from '@fullscreendigital/carrefour-de
 import { useMemo } from 'react'
 import { ArrowBackIosNewOutlined } from '@mui/icons-material'
 
-const ServiceDomain = ({ subdomainId, modules, applicationPages, hasLoadedActivities, isLoadingActivities }) => {
+const ServiceDomain = ({
+  subdomainId,
+  modules,
+  applicationPages,
+  hasLoadedActivities,
+  isLoadingActivities
+}) => {
   const navigate = useNavigate()
   const goBack = () => {
     navigate('/')
@@ -25,54 +31,54 @@ const ServiceDomain = ({ subdomainId, modules, applicationPages, hasLoadedActivi
     return { module: mod, submodule: sub }
   }, [subdomainId, modules])
 
-  return (!applicationPages.length || hasLoadedActivities != subdomainId || isLoadingActivities) && (
-    <div style={{ display:'flex' }}>
-      <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
-    </div>
-  ) || (
-    <Box>
-      <Box className={s.moduleHeader}>
-        <div className={s.backHolder}>
-          <IconButton className={s.back} onClick={goBack}>
-            <ArrowBackIosNewOutlined />
-          </IconButton>
+  return (
+    ((!applicationPages.length || hasLoadedActivities != subdomainId || isLoadingActivities) && (
+      <div style={{ display: 'flex' }}>
+        <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+      </div>
+    )) || (
+      <Box>
+        <Box className={s.moduleHeader}>
+          <div className={s.backHolder}>
+            <IconButton className={s.back} onClick={goBack}>
+              <ArrowBackIosNewOutlined />
+            </IconButton>
 
-          <Typography variant="medium">
-            <span className={s.backTitle}>
-              {module?.name || ''}
-            </span>
-          </Typography>
-        </div>
-      </Box>
-
-      <Paper className={s.modulePaper}>
-        <Box className={s.submoduleHeader}>
-          <Typography variant="medium">
-            <span className={s.moduleSummary}>
-              <Icon iconName={submodule?.icon || 'EmojiNature'} tiny={true} />
-              {submodule?.name || ''}
-            </span>
-          </Typography>
+            <Typography variant="medium">
+              <span className={s.backTitle}>{module?.name || ''}</span>
+            </Typography>
+          </div>
         </Box>
-        <Divider component="hr" variant="middle" />
-        <Box className={s.applicationsWrapper}>
-          {applicationPages
-            .filter(app => app.isFirstScreen)
-            .map(app => (
-              <div
-                key={app.screenId}
-                onClick={() => navigate(app.route.url)}
-                className={s.applicationContainer}
-              >
-                <div className={s.iconContainer}>
-                  <Icon iconName={app.icon} />
+
+        <Paper className={s.modulePaper}>
+          <Box className={s.submoduleHeader}>
+            <Typography variant="medium">
+              <span className={s.moduleSummary}>
+                <Icon iconName={submodule?.icon || 'EmojiNature'} tiny={true} />
+                {submodule?.name || ''}
+              </span>
+            </Typography>
+          </Box>
+          <Divider component="hr" variant="middle" />
+          <Box className={s.applicationsWrapper}>
+            {applicationPages
+              .filter(app => app.isFirstScreen)
+              .map(app => (
+                <div
+                  key={app.screenId}
+                  onClick={() => navigate(app.route.url)}
+                  className={s.applicationContainer}
+                >
+                  <div className={s.iconContainer}>
+                    <Icon iconName={app.icon} fill="white" />
+                  </div>
+                  <span className={s.applicationName}>{app.name}</span>
                 </div>
-                <span className={s.applicationName}>{app.name}</span>
-              </div>
-            ))}
-        </Box>
-      </Paper>
-    </Box>
+              ))}
+          </Box>
+        </Paper>
+      </Box>
+    )
   )
 }
 
