@@ -34,6 +34,7 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
         isWarehouse={isWarehouse}
         hasBuyback={hasBuyback}
         buybackOptions={buybackOptions}
+        available={available}
       />
       <div>
         <KeyValuePairs

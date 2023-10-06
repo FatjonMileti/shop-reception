@@ -66,13 +66,13 @@ const App = () => {
         hasLoadedAppModules &&
         !isLoadingAppModules &&
         subdomainId &&
+        subdomainId !== 'undefined' &&
         subdomainId != hasLoadedActivities &&
         !isLoadingActivities
       ) {
         setIsLoadingActivities(true)
 
         try {
-          // console.log("[App] will load activities")
           const result = await makeDesignerGetRequest(`/activities?submoduleId=${subdomainId}`)
           setApplicationPages(toApplicationPages(result))
         } catch (error) {
@@ -83,7 +83,6 @@ const App = () => {
         } finally {
           setHasLoadedActivities(subdomainId)
           setIsLoadingActivities(false)
-          // console.log("[App] did load activities")
         }
       }
     })()
