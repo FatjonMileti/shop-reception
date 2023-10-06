@@ -39,6 +39,9 @@ const PdfViewer = (props: PdfViewerProps) => {
         try {
           setIsLoading(true)
 
+          if (action.storeIn) {
+            storeData(action.storeIn, {}) // [~] if we store the response first, then this 'response' variable becomes read-only and the following toTableRowItems throws an error
+          }
           const proformResult = await makeCoreGetRequest(`${action.url}/${id}`)
           setProform(proformResult)
           if (action.storeIn) {
