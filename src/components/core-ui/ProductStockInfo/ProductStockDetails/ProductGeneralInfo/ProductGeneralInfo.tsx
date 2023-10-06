@@ -18,7 +18,8 @@ const ProductGeneralInfo = ({
   addToCartAction,
   isWarehouse,
   hasBuyback,
-  buybackOptions
+  buybackOptions,
+  available
 }) => {
   const [selectedBuybackOption, setSelectedBuybackOption] = useState(
     (hasBuyback && buybackOptions[0].value) || ''
@@ -89,7 +90,7 @@ const ProductGeneralInfo = ({
           label="Adauga in cos"
           variant="contained"
           endIcon={<Icon iconName="AddCircle" tiny={true} fill="white" />}
-          disabled={!displayAddToCartBtn}
+          disabled={!displayAddToCartBtn || !available}
           sx={displayAddToCartBtn ? {} : { opacity: 0.5 }}
         />
       </div>
