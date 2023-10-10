@@ -53,6 +53,7 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     if (product.code) {
       try {
         setIsLoading(true)
+        dispatch(ProductActions.setProduct({ title: '' }))
         let response: ProductStockResponse
         if (action.type === 'GET') {
           response = await makeCoreGetRequest(`${action.url}/${product.code}`)
