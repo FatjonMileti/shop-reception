@@ -183,6 +183,7 @@ const PrintPreviewTable = props => {
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
+        classes={{ headerClass: s.printPreviewHeader, rowClass: s.printPreviewRow }}
       />
     </Box>
   )

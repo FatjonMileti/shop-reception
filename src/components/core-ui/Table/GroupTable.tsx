@@ -371,6 +371,7 @@ const GroupTable = props => {
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
+        classes={{ headerClass: s.printPreviewHeader, rowClass: s.printPreviewRow }}
       />
       {tableFooter && <div style={{ textAlign: 'right' }}>{tableFooterComponent}</div>}
     </Box>
