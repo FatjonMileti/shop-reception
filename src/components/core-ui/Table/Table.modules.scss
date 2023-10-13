@@ -8,3 +8,8 @@
 .hidden {
   display: none;
 }
+
+.printPreviewHeader, .printPreviewRow {
+  font-size: 10px !important;
+  padding: 2px !important;
+}
