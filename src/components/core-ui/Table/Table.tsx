@@ -169,6 +169,13 @@ const Table = props => {
 
     const url = action.url
 
+    if (isLoading && !!items.length) {
+       showNotification({
+           message: `Te rog asteapta pana vor fi afisate toate magazinele.`,
+           type: 'error'
+       })
+    }
+
     setIsLoading(true)
     try {
       let response
