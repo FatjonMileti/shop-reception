@@ -15,7 +15,7 @@ const ModalInfo = ({
   return (
     <Box className={s.list}>
       {formInfoItems.map(item => {
-        const itemValue = get(editItem, item.name)
+        const itemValue = get(editItem, item.name) || '-'
         return (
           <Box key={item.name} className={s.item}>
             <div className={s.label}>{item.label}:</div>

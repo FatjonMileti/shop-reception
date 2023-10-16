@@ -48,8 +48,11 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     setIsVisible(true)
   }
 
-  const searchProduct = async event => {
-    event.target.blur() // [~] otherwise, the side button will trigger this click event...
+  const searchProduct = async (event = null) => {
+    if (event) {
+      event.target.blur() // [~] otherwise, the side button will trigger this click event...
+    }
+
     if (product.code) {
       try {
         setIsLoading(true)

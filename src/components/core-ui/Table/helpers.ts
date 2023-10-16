@@ -70,8 +70,7 @@ export const getRenderedColumns = (columns, tableFilters) =>
               return renderComponent({
                 ...render,
                 value: get(row, column.field),
-                pathId: row.id,
-                payloadKey: column.field
+                pathId: row.id
               })
             } else {
               return null

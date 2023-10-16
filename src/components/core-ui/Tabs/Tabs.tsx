@@ -35,6 +35,7 @@ const Tabs = (props: TabsProps) => {
         margin: isXs ? '18px 12px 0' : '36px 24px 0'
       }}
       tabContentBoxStyle={{ padding: '0' }}
+      tabsStyle={{ fontSize: isXs ? '0.8rem !important' : '1rem' }}
     />
   )
 }
