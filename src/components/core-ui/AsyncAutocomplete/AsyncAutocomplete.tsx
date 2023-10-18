@@ -5,6 +5,7 @@ import { toAsyncSelectOptions } from './serializers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { useMediaQuery } from '@mui/material'
+import s from './AsyncAutocomplete.modules.scss'
 
 interface AsyncAutocompleteOption {
   value: string | number
@@ -86,7 +87,7 @@ const AsyncAutocomplete = props => {
 
   return (
 <>
-  {loading && loadInfoMessage && <span style={{color: "#C9971C", fontSize: "medium"}}>{loadInfoMessage}</span>}
+  {loading && loadInfoMessage && <span className={s.infoMessage}>{loadInfoMessage}</span>}
   <Autocomplete
       {...rest}
       disablePortal
@@ -106,9 +107,9 @@ const AsyncAutocomplete = props => {
       onChange={(_, value) => props.onChange(value)}
       isOptionEqualToValue={(option, value) => option.value === value.value}
       renderOption={(props, option) => (
-          <li {...props} key={option.value}>
-            {option.label}
-          </li>
+        <li {...props} key={option.value}>
+          {option.label}
+        </li>
       )}
   />
 </>
