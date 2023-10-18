@@ -7,6 +7,7 @@ export interface SwitchProps {
   value?: boolean
   pathId?: string | number
   confirmModal?: ConfirmSwitchModalProps
+  disableOnToggle?: boolean
 }
 
 export interface ConfirmSwitchModalProps {

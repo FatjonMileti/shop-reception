@@ -50,20 +50,6 @@ const PageForm = props => {
     setEditItem(getItemDefaults(formItems))
   }, [formItems])
 
-  // const setHiddenItems = () => {
-  //   const hiddenItems = formItems.filter(item => item.type === 'hidden')
-  //   console.log(editItem)
-
-  //   if (hiddenItems.length) {
-  //     hiddenItems.map(item => {
-  //       const { name, value } = item
-  //       setEditItem(draft => {
-  //         set(draft, name, value)
-  //       })
-  //     })
-  //   }
-  // }
-
   useEffect(() => {
     if (formAction.getUrl) {
       ;(async () => {

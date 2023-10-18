@@ -11,7 +11,6 @@ const useDataStore = () => {
   const restoreText = (text: string) => {
     Array.from(text.matchAll(/§{(.*)}/g), match => {
       let key = match[1]
-      // console.log("key:", key, "| value:", get(dataStore, key))
       const value = get(dataStore, key)
       text = text.replace(match[0], value === undefined ? '' : value)
     })
