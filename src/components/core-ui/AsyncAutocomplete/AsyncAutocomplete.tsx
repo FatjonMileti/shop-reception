@@ -23,6 +23,7 @@ const AsyncAutocomplete = props => {
     setValueForFilter,
     setFilterValues,
     extraUrlParams,
+    loadInfoMessage,
     ...rest
   } = props
 
@@ -84,7 +85,9 @@ const AsyncAutocomplete = props => {
   }
 
   return (
-    <Autocomplete
+<>
+  {loading && loadInfoMessage && <span style={{color: "#C9971C", fontSize: "medium"}}>{loadInfoMessage}</span>}
+  <Autocomplete
       {...rest}
       disablePortal
       id="async-demo"
@@ -103,11 +106,12 @@ const AsyncAutocomplete = props => {
       onChange={(_, value) => props.onChange(value)}
       isOptionEqualToValue={(option, value) => option.value === value.value}
       renderOption={(props, option) => (
-        <li {...props} key={option.value}>
-          {option.label}
-        </li>
+          <li {...props} key={option.value}>
+            {option.label}
+          </li>
       )}
-    />
+  />
+</>
   )
 }
 
