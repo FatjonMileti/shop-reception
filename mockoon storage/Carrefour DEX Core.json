@@ -4115,7 +4115,7 @@
       "responses": [
         {
           "uuid": "38485b8f-4ccd-43ca-9257-46c941bf18b6",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Diana Vasilescu\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 1,\n        \"name\": \"BLS\"\n      },\n      \"name\": \"Mircea Dumitru\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Ioana Alexandra Stamate\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Avram Mihai\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Florin Ion\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Diana Vasilescu\",\n      \"position\": {\n        \"id\": 9,\n        \"name\": \"Lucrator universal\"\n      }\n    },\n    {\n      \"id\": 6,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Florin Gusa\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4148,7 +4148,7 @@
       "responses": [
         {
           "uuid": "db72bf61-671e-4ba2-b4e7-0b8be10b5fde",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Cristi Marculescu\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Cristi Marculescu\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Pintilie Ionut\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Irina Ioana Vasile\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Tudor Petcu\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Maria Dragan\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4181,7 +4181,7 @@
       "responses": [
         {
           "uuid": "e0176e67-ef4e-4bc2-8b0c-9f1454acd56b",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 3,\n      \"name\": \"APLS\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"BRINGO\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"PCG\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"BLS\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"EPCS\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"TEXTILE\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"APLS\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"PCG\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"BO\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"E-COM/BRINGO\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4214,7 +4214,7 @@
       "responses": [
         {
           "uuid": "fc5570b6-4c7d-4fb4-b77d-103899c60059",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 7,\n      \"name\": \"Sef echipa\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 7,\n      \"name\": \"Sef echipa\"\n    },\n    {\n      \"id\": 8,\n      \"name\": \"Caiser\"\n    },\n    {\n      \"id\": 9,\n      \"name\": \"Lucrator universal\"\n    },\n    {\n      \"id\": 10,\n      \"name\": \"Asistent vanzari\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4275,7 +4275,7 @@
       "responses": [
         {
           "uuid": "ca5495e1-25fb-48d4-a7f1-e84ae01f0b78",
-          "body": "{\n  \"id\": 1,\n  \"department\": {\n    \"id\": 5,\n    \"name\": \"PGC\"\n  },\n  \"name\": \"Cristi Marculescu\",\n  \"position\": {\n    \"id\": 7,\n    \"name\": \"Sef echipa\"\n  }\n}",
+          "body": "{\n  \"id\": 1,\n  \"department\": {\n    \"id\": 2,\n    \"name\": \"EPCS\"\n  },\n  \"name\": \"Cristi Marculescu\",\n  \"position\": {\n    \"id\": 10,\n    \"name\": \"Asistent vanzari\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
