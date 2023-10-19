@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react'
-import {
-  CircularProgress,
-  Paper
-} from '@mui/material'
+import { CircularProgress, Paper } from '@mui/material'
 import s from './FlexListTable.modules.scss'
 import { get } from 'lodash'
 
@@ -11,7 +8,7 @@ export type FlexListTableRowType = { [key: string]: any }
 export type FlexListTableColumnsType = {
   field: string
   render?: (row: FlexListTableRowType) => React.ReactNode
-  style?: any,
+  style?: any
   displayIf?: string
 }
 
@@ -22,6 +19,7 @@ export interface FlexListTableProps {
   isLoading: boolean
   style?: any
   className?: string
+  noResultsMessage?: string
 }
 
 const FlexListTable = (props: FlexListTableProps) => {
@@ -35,15 +33,21 @@ const FlexListTable = (props: FlexListTableProps) => {
     </div>
   ) : (
     <div className={s.listStyle} style={props.style}>
-        {props.rows.map((row) => (
-            <Paper key={row.id} className={s.rowStyle}>
-              {props.columns.filter(column => !column.displayIf || get(row, column.displayIf)).map((column) => (
+      {props.rows.length ? (
+        props.rows.map(row => (
+          <Paper key={row.id} className={s.rowStyle}>
+            {props.columns
+              .filter(column => !column.displayIf || get(row, column.displayIf))
+              .map(column => (
                 <div key={column.field} style={column.style}>
                   {column.render ? column.render(row) : row[column.field]}
                 </div>
               ))}
-            </Paper>
-        ))}
+          </Paper>
+        ))
+      ) : (
+        <h1 className={s.infoMessage}>{props.noResultsMessage}</h1>
+      )}
     </div>
   )
 }

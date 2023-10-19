@@ -21,7 +21,7 @@ const sx = {
 }
 
 const Switch = (props: SwitchProps) => {
-  const { action, payloadKey, successMessage, value, pathId, confirmModal } = props
+  const { action, payloadKey, successMessage, value, pathId, confirmModal, disableOnToggle } = props
 
   const [checked, setChecked] = useState(value || false)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -35,6 +35,11 @@ const Switch = (props: SwitchProps) => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target
+
+    if (disableOnToggle && !checked) {
+      return null
+    }
+
     setTempChecked(checked)
     openModal()
   }
@@ -77,6 +82,7 @@ const Switch = (props: SwitchProps) => {
         onChange={handleChange}
         inputProps={{ 'aria-label': 'controlled' }}
         className={s.switch}
+        disabled={disableOnToggle && checked}
       />
       <Modal
         aria-labelledby="modal-modal-title"

@@ -5,9 +5,12 @@ import { TitleTextProps } from './TitleTextDefinitions'
 
 const TitleText = (props: TitleTextProps) => {
   return (
-    <span className={cn(s.title, props.className)} style={props.style}>
-      {props.text}
-    </span>
+    <>
+      {props.quantity && <div>Cantitate buyback: {props.quantity}</div>}
+      <span className={cn(s.title, props.className)} style={props.style}>
+        {props.text}
+      </span>
+    </>
   )
 }
 

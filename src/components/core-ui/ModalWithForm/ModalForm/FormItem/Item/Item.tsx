@@ -20,7 +20,6 @@ const Item = ({
   const key = rest.payloadKey || name
 
   const handleOnBeforeInput = event => {
-    // console.log("[item] onBeforeInput | event: ", event)
     if (/^[0-9]*$/.test(event.data) == false) event.preventDefault()
   }
 

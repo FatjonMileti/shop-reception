@@ -27,6 +27,9 @@
 
   @media (max-width: 624px) {
     margin-left: 0px;
+    & > div > div {
+      width: 100%;
+    }
   }
 }
 

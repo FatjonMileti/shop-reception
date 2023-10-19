@@ -285,6 +285,44 @@ const GroupTable = props => {
     }
   }
 
+  const updatedRenderedColumns = [
+    {
+      title: '',
+      field: 'actions',
+      align: 'right',
+      width: '112px',
+      collapsible: 'true',
+      render: row => (
+        <TableActions
+          itemId={row.id}
+          row={row}
+          viewAction={tableRowActions.viewAction}
+          editAction={tableRowActions.editAction}
+          deleteAction={tableRowActions.deleteAction}
+          cancelAction={tableRowActions.cancelAction}
+          customAction={tableRowActions.customAction}
+          additionalAction={() =>
+            handleRemoteData(
+              tableState.page,
+              tableState.rowsPerPage,
+              tableState.order,
+              tableState.orderBy,
+              tableState.searchText,
+              tableState.filters
+            )
+          }
+          canView={canView}
+          canEdit={canEdit}
+          canDelete={canDelete}
+          canCancel={canCancel}
+          canSeeCustomAction={canSeeCustomAction}
+          userModal={userModal}
+        />
+      ),
+    },
+    ...renderedColumns,
+  ];
+
   return hasGeneralSearch && !table.searchText.length ? null : (
     <Box className={s.tableContainer}>
       {tableActions?.newAction && canCreate && (
@@ -320,41 +358,7 @@ const GroupTable = props => {
         {...rest}
         columns={
           tableRowActions && (canEdit || canDelete || canView || canCancel || canSeeCustomAction)
-            ? renderedColumns.concat({
-                title: '',
-                field: 'actions',
-                align: 'right',
-                width: '112px',
-                collapsible: 'true',
-                render: row => (
-                  <TableActions
-                    itemId={row.id}
-                    row={row}
-                    viewAction={tableRowActions.viewAction}
-                    editAction={tableRowActions.editAction}
-                    deleteAction={tableRowActions.deleteAction}
-                    cancelAction={tableRowActions.cancelAction}
-                    customAction={tableRowActions.customAction}
-                    additionalAction={() =>
-                      handleRemoteData(
-                        tableState.page,
-                        tableState.rowsPerPage,
-                        tableState.order,
-                        tableState.orderBy,
-                        tableState.searchText,
-                        tableState.filters
-                      )
-                    }
-                    canView={canView}
-                    canEdit={canEdit}
-                    canDelete={canDelete}
-                    canCancel={canCancel}
-                    canSeeCustomAction={canSeeCustomAction}
-                    userModal={userModal}
-                  />
-                )
-              })
-            : renderedColumns
+            ? updatedRenderedColumns : renderedColumns
         }
         rows={items}
         isLoading={isLoading}
@@ -371,6 +375,7 @@ const GroupTable = props => {
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
+        classes={{ headerClass: s.printPreviewHeader, rowClass: s.printPreviewRow }}
       />
       {tableFooter && <div style={{ textAlign: 'right' }}>{tableFooterComponent}</div>}
     </Box>
