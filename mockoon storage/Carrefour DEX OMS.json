@@ -732,7 +732,7 @@
       "responses": [
         {
           "uuid": "70735733-b763-4894-b7b8-65512d6fb38b",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"44501286\",\n      \"ean\": \"3614613092689\",\n      \"internalCode\": \"44501286\",\n      \"name\": \"Frigider ARCTIC Eco-X7\",\n      \"brand\": \"ARCTIC\",\n      \"price\": 2909.97,\n      \"quantity\": 3,\n      \"vat\": {{faker 'datatype.number'}}\n    },{\n      \"id\": \"44501287\",\n      \"ean\": \"3614613092689\",\n      \"code\": \"44501286\",\n      \"name\": \"Frigider ARCTIC Eco-X7\",\n      \"brand\": \"ARCTIC\",\n      \"price\": 969.99,\n      \"quantity\": 1,\n      \"vat\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"Discount achizitie pt Buyback intern:  -120 LEI\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"totalItems\": 4,\n    \"totalPrice\": 3879.96\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"44501286\",\n      \"ean\": \"3614613092689\",\n      \"internalCode\": \"44501286\",\n      \"name\": \"Frigider ARCTIC Eco-X7\",\n      \"brand\": \"ARCTIC\",\n      \"price\": 2909.97,\n      \"quantity\": 3,\n      \"vat\": {{faker 'datatype.number'}}\n    },{\n      \"id\": \"44501287\",\n      \"ean\": \"3614613092689\",\n      \"code\": \"44501286\",\n      \"name\": \"Frigider ARCTIC Eco-X7\",\n      \"brand\": \"ARCTIC\",\n      \"initialPrice\": 1939.98,\n      \"price\": 1699.98,\n      \"quantity\": 2,\n      \"vat\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"Discount achizitie pt Buyback intern:  -240 LEI\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"totalItems\": 4,\n    \"totalPrice\": 3879.96\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of products from shopping cart with pagination, sorting and filtering",
@@ -4755,4 +4755,73 @@
       "type": "route",
       "uuid": "96793750-455c-4d56-b3f2-28b46361293f"
     },
- 
+    {
+      "type": "route",
+      "uuid": "b1687aff-4416-47fe-b1bb-133e688dcfb1"
+    },
+    {
+      "type": "route",
+      "uuid": "b3ae5e0e-b0bf-48c5-a1f8-4c30311c7f98"
+    },
+    {
+      "type": "route",
+      "uuid": "4dddbdc3-2857-46ea-b276-6683c3e6dd71"
+    },
+    {
+      "type": "route",
+      "uuid": "d4e43cec-90cb-4e7f-8e51-047689657d6f"
+    },
+    {
+      "type": "route",
+      "uuid": "2b4f5d27-4cd0-4568-8bf5-db90e8489d62"
+    },
+    {
+      "type": "route",
+      "uuid": "4cf5600c-94f5-4695-85ab-95c96750965f"
+    },
+    {
+      "type": "route",
+      "uuid": "e761fbac-002a-4f5e-a318-aefd91001c02"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}
