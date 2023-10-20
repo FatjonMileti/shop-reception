@@ -2,9 +2,8 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'configureStore'
-import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
-import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
+import { Table as GeneralTable, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import {
   getRenderedColumns,
@@ -31,6 +30,7 @@ const PrintPreviewTable = props => {
     extraUrlParams,
     extraCustomUrlParams,
     userModal,
+    showAbbrev,
     ...rest
   } = props
 
@@ -56,6 +56,19 @@ const PrintPreviewTable = props => {
   const table = useSelector((state: RootState) => state.table)
 
   const { showNotification } = useNotification()
+
+  const filterDate = useMemo(() => {
+    if (!filterBy || !filterValue) {
+      return null
+    }
+    
+    let filters = filterBy.split("|")
+    if (filters.includes("date") == false) {
+      return null
+    } else {
+      return filterValue.split("|")[filters.indexOf("date")]
+    }
+  }, [filterBy, filterValue])
 
   const filtersConfig = useMemo(() => {
     if (!tableActions?.filters) return []
@@ -170,21 +183,39 @@ const PrintPreviewTable = props => {
   }
 
   return (
-    <Box className={s.tableContainer} ref={componentRef}>
-      <GeneralTable
-        {...rest}
-        columns={renderedColumns}
-        rows={items}
-        isLoading={isLoading}
-        totalCount={totalCount}
-        rowsPerPage={rest.rowsPerPage || 10}
-        isRemote
-        printButton={{ onClick: handleDownload }}
-        hasSearchInput={!!tableActions?.searchAction}
-        handleRemoteData={debouncedHandleRemoteData}
-        filters={filtersConfig}
-        classes={{ headerClass: s.printPreviewHeader, rowClass: s.printPreviewRow }}
-      />
+    <Box ref={componentRef}>
+      {filterDate ?
+      <Box className={s.tableContainer}>
+        <Typography variant="regular" style={{ color: "black", fontSize: "18px" }}>
+          {filterDate}
+        </Typography>
+      </Box> : <></>}
+      {showAbbrev ?
+      <Box className={s.tableContainer}>
+        <Typography variant="regular" style={{ color: "black", fontSize: "12px" }}>
+          <pre>
+            CP = cantitati propuse<br/>
+            MV = medie vanzari<br/>
+            CM = cantitati modificate
+          </pre>
+        </Typography>
+      </Box> : <></>}      
+      <Box className={s.tableContainer}>
+        <GeneralTable
+          {...rest}
+          columns={renderedColumns}
+          rows={items}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          rowsPerPage={rest.rowsPerPage || 10}
+          isRemote
+          printButton={{ onClick: handleDownload }}
+          hasSearchInput={!!tableActions?.searchAction}
+          handleRemoteData={debouncedHandleRemoteData}
+          filters={filtersConfig}
+          classes={{ headerClass: s.printPreviewHeader, rowClass: s.printPreviewRow }}
+        />
+      </Box>
     </Box>
   )
 }
