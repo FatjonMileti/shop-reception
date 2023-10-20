@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
 import { Home } from '../Home'
+import { TeamDayOffManagement } from '../TeamDayOffManagement'
 import { LoginOIDC } from '../LoginOIDC'
 import { LogoutOIDC } from '../LogoutOIDC'
 import { ServiceDomain } from '../ServiceDomain'
@@ -117,6 +118,16 @@ const App = () => {
                   />
                 }
               />
+              <Route
+                path={URLS.AUTH_TEAM_DAY_OFF_MANAGEMENT}
+                element={
+                  <PrivateRoute
+                    component={TeamDayOffManagement}
+                    applicationPages={applicationPages}
+                    checkIsAuthorized
+                  />
+                }
+              />
               {applicationModulesPages.map(page =>
                 createRoute(
                   {
@@ -130,7 +141,7 @@ const App = () => {
                   ServiceDomain
                 )
               )}
-              {applicationPages.map(page => createRoute(page, DynamicComponent))}
+              {/* {applicationPages.map(page => createRoute(page, DynamicComponent))} */}
               {/* end of private routes */}
 
               <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />

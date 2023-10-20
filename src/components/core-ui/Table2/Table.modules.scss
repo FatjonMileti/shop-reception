@@ -1,0 +1,15 @@
+.tableContainer {
+    margin: 0 24px;
+    @media (max-width: 624px) {
+        margin: 0 12px;
+    }
+}
+
+.hidden {
+  display: none;
+}
+
+.printPreviewHeader, .printPreviewRow {
+  font-size: 10px !important;
+  padding: 2px !important;
+}

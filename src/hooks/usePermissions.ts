@@ -4,12 +4,12 @@ import { getUserRoles } from 'utils/authService'
 import { ROLE_ALL } from 'utils/constants'
 
 const usePermissions = ({
-  createRoles,
-  viewRoles,
-  editRoles,
-  deleteRoles,
-  cancelRoles,
-  customActionRoles
+  createRoles = [],
+  viewRoles = [],
+  editRoles = [],
+  deleteRoles = [],
+  cancelRoles = [],
+  customActionRoles = []
 }) => {
   const currentUserRoles = useMemo(() => getUserRoles(), [])
 

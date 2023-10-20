@@ -1,5 +1,6 @@
 export const URLS = {
   AUTH_HOME: '/',
+  AUTH_TEAM_DAY_OFF_MANAGEMENT: '/teamDayOffManagement2',
   LOGINOIDC: '/signin-oidc',
   LOGOUTOIDC: '/signout-oidc'
 }
