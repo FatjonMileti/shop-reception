@@ -33,7 +33,7 @@ export const getRenderedColumns = (columns, cb) =>
             return renderComponent({
               ...render,
               value: get(row, column.field),
-              initialValue: row.initialPrice
+              discountValue: row.discountedPrice
             })
           }
 

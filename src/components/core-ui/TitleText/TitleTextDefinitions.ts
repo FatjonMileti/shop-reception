@@ -3,4 +3,5 @@ export interface TitleTextProps {
   quantity?: number
   className?: string
   style?: any
+  showBuybackDetails?: boolean
 }
