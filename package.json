@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack serve --node-env=development --env environment=development",
+    "start:local": "webpack serve --node-env=development --env environment=local --port 3000",
     "start:dev": "webpack serve --node-env=development --env environment=development",
     "build:dev": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=dev",
     "build:prod": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=production",
@@ -47,6 +48,7 @@
     "react-pdf": "^6.2.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.2",
+    "react-to-print": "^2.14.13",
     "redux-create-reducer": "^2.0.1",
     "redux-first-history": "^5.0.12",
     "scandit-sdk": "^5.13.1",

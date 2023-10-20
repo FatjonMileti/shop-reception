@@ -10,6 +10,6 @@ export interface PdfViewerActions {
 }
 
 export interface PdfViewerProps {
-  action: Action
+  action?: Action
   actions: PdfViewerActions
 }

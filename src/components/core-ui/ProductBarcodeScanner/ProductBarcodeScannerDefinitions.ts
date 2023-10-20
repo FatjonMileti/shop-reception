@@ -9,17 +9,18 @@ export interface Product {
 }
 
 export interface ProductStock {
-  price: number
-  currency: string
-  eanCode: string
-  storeCode: string
+  price?: number
+  currency?: string
+  eanCode?: string
+  storeCode?: string
   available: number
   sold: number
   reserved: number
   initialStock: number
   imobStock: number,
-  hasBuyback: boolean,
-  buybackOptions: any
+  hasBuyback?: boolean,
+  buybackOptions?: any,
+  name?: string
 }
 
 export interface ProductStockResponse {

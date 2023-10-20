@@ -1,8 +1,8 @@
-import * as React from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'configureStore'
 import { IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Paper } from '@mui/material'
+import { Paper, CircularProgress } from '@mui/material'
 import { useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
@@ -15,19 +15,23 @@ import { ProductActions } from 'reducers/productSlice'
 import s from './ProductBarcodeScanner.modules.scss'
 import { toProduct } from './serializers'
 import { isScannerDevice } from 'utils/helpers'
+import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
 
-  const [code, setCode] = React.useState('')
+  const [code, setCode] = useState('')
+  const [isVisible, setIsVisible] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const product = useSelector((state: RootState) => state.product)
 
   const dispatch = useDispatch()
 
-  const [isVisible, setIsVisible] = React.useState(false)
+  const { showNotification } = useNotification()
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCode(product.code || '')
   }, [product.code])
 
@@ -37,25 +41,38 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   }
 
   const { run } = useScandit({ onScan, isVisible })
-  const [isUsingScandit, setIsUsingScandit] = React.useState(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
+  const [isUsingScandit, setIsUsingScandit] = useState(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
 
   const scanCode = () => {
     dispatch(ProductActions.clearProduct())
     setIsVisible(true)
   }
 
-  const searchProduct = async (event) => {
-    event.target.blur() // [~] otherwise, the side button will trigger this click event...
+  const searchProduct = async (event = null) => {
+    if (event) {
+      event.target.blur() // [~] otherwise, the side button will trigger this click event...
+    }
+
     if (product.code) {
-      let response: ProductStockResponse
-      if (action.type === 'GET') {
-        response = await makeCoreGetRequest(`${action.url}/${product.code}`)
-        dispatch(ProductActions.setProduct({ ...toProduct(response) }))
+      try {
+        setIsLoading(true)
+        dispatch(ProductActions.setProduct({ title: '' }))
+        let response: ProductStockResponse
+        if (action.type === 'GET') {
+          response = await makeCoreGetRequest(`${action.url}/${product.code}`)
+          dispatch(ProductActions.setProduct({ ...toProduct(response) }))
+        }
+        setIsLoading(false)
+      } catch (error) {
+        showNotification({
+          message: `A aparut o eroare la cautarea produsului. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
       }
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     isScannerDevice(() => {
       try {
         run()
@@ -66,11 +83,11 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     })
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.getElementById('product-scan-input').focus()
   }, [])
 
-  const [isZerothButtonPressed, setIsZerothButtonPressed] = React.useState(false)
+  const [isZerothButtonPressed, setIsZerothButtonPressed] = useState(false)
 
   return (
     <Paper className={s.scanContainer}>
@@ -87,7 +104,7 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             }
             onBlur={event => {
               if (!product.code) {
-                document.getElementById('product-scan-input').focus();
+                document.getElementById('product-scan-input').focus()
               }
             }}
             onKeyDown={event => {
@@ -98,16 +115,16 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             onKeyUp={event => {
               if (event.which == 0) {
                 setIsZerothButtonPressed(false)
-                if (product.code)
-                  searchProduct(event)
+                if (product.code) searchProduct(event)
               }
             }}
             onBeforeInput={event => {
               if (isZerothButtonPressed) {
-                (document.getElementById('product-scan-input') as HTMLInputElement).value = ''
+                ;(document.getElementById('product-scan-input') as HTMLInputElement).value = ''
               }
             }}
             id="product-scan-input"
+            required
           />
         </div>
         <div className={s.buttonContainer}>
@@ -139,6 +156,11 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           }}
         />
       </div>
+      {isLoading && (
+        <div style={{ display: 'flex' }}>
+          <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+        </div>
+      )}
     </Paper>
   )
 }

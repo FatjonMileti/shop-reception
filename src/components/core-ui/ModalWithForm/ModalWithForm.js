@@ -12,10 +12,10 @@ import {
   makeCorePutRequest,
   makeCorePatchRequest
 } from 'utils/api'
-import { getItemDefaults, formatPayloadDate } from 'utils/helpers'
+import { getItemDefaults, formatPayloadDate, getFormErrors } from 'utils/helpers'
 import { toFormDataPayload, toItemPayload } from 'utils/serializers'
 import { getModalWidth, getGridSize } from './helpers'
-import { set, isEmpty, get } from 'lodash'
+import { set, isEmpty } from 'lodash'
 import { useMediaQuery, CircularProgress } from '@mui/material'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
@@ -106,15 +106,7 @@ const ModalWithForm = ({
   const saveData = async data => {
     setIsLoading(true)
     try {
-      const errors = formItems.reduce((acc, item) => {
-        if (item.required) {
-          const itemValue = item.payloadKey ? get(data, item.payloadKey) : get(data, item.name)
-          if (itemValue === '' || itemValue === undefined) {
-            acc[item.name] = `${item.label} is required`
-          }
-        }
-        return acc
-      }, {})
+      const errors = getFormErrors(formItems, data)
       if (isEmpty(errors)) {
         let result
         if (formAction.type === 'POST') {

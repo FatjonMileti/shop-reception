@@ -1,13 +1,13 @@
 import { get } from 'lodash'
 import { renderComponent } from 'utils/dynamicRenderingService'
 import { toFiltersUrl } from './serializers'
-import { downloadFile, formatUIDate, getDefaultItemValue } from 'utils/helpers'
+import { formatUIDate, getDefaultItemValue } from 'utils/helpers'
 import { FilterParams, FilterSchema, Filter } from './TableDefinitions'
 
 const getInitialFilterParam = (searchParams: FilterParams, filter: FilterSchema): string => {
   const { variable, defaultValue } = filter
 
-  if (!variable && !defaultValue) return (filter.type == 'date' ? null : '')
+  if (!variable && !defaultValue) return filter.type == 'date' ? null : ''
 
   return searchParams[variable] ?? getDefaultItemValue(defaultValue)
 }
@@ -23,7 +23,6 @@ export const getRenderedColumns = (columns, tableFilters) =>
           const { UIComponent, idKeyName, href, linkFilters } = render
 
           if (UIComponent === 'Link') {
-
             const id = get(row, idKeyName)
             let linkHref = `${href}?id=${id}`
 
@@ -54,12 +53,28 @@ export const getRenderedColumns = (columns, tableFilters) =>
             })
           }
 
-          if (UIComponent === 'BooleanIcon') {
+          if (
+            UIComponent === 'BooleanIcon' ||
+            UIComponent === 'BooleanText' ||
+            UIComponent === 'DescriptionText'
+          ) {
             const value = get(row, field)
             return renderComponent({
               ...render,
               value
             })
+          }
+
+          if (UIComponent === 'Switch') {
+            if (get(row, column.field) !== '') {
+              return renderComponent({
+                ...render,
+                value: get(row, column.field),
+                pathId: row.id
+              })
+            } else {
+              return null
+            }
           }
 
           return renderComponent(render)
@@ -109,16 +124,18 @@ export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string
 const getFilterUrlValues = (filters: Filter[]) =>
   filters.reduce(
     (acc, filter) => {
-      const valuesArray = Array.isArray(filter.value) ? filter.value.map(obj => obj.value) : filter.value;
-      const encodedValue = Array.isArray(valuesArray) ? `[${valuesArray.join(';')}]` : valuesArray;
+      const valuesArray = filter.value
+      const encodedValue = Array.isArray(valuesArray) ? `[${valuesArray.join(';')}]` : valuesArray
       acc = [
         acc[0] ? `${acc[0]}${encodeURIComponent('|')}${filter.name}` : filter.name,
-        acc[1] ? `${acc[1]}${encodeURIComponent(`|${encodedValue}`)}` : `${encodeURIComponent(encodedValue)}`
-      ];
-      return acc;
+        acc[1]
+          ? `${acc[1]}${encodeURIComponent(`|${encodedValue}`)}`
+          : `${encodeURIComponent(encodedValue)}`
+      ]
+      return acc
     },
     ['', '']
-  );
+  )
 
 export const getFiltersGetUrl = (filters: Filter[]) => {
   if (!filters.length) return ''
@@ -128,16 +145,24 @@ export const getFiltersGetUrl = (filters: Filter[]) => {
   return `&filterBy=${filterBy}&filterValue=${filterValue}`
 }
 
+export const getSearchGetUrl = (searchFields: string[], searchText: string) => {
+  if (!searchText) return ''
+  const searchBy = encodeURIComponent(searchFields.join('|'))
+  const searchValue = encodeURIComponent(searchText)
+
+  return `&searchBy=${searchBy}&searchValue=${searchValue}`
+}
+
 export const getCustomFiltersGetUrl = (filters: Filter[]) => {
   if (!filters.length) return ''
 
   const [filterBy, filterValue] = getFilterUrlValues(filters)
 
-  return `&customFieldName=${filterBy}&customFieldValue=${filterValue}`
+  return `&${filterBy}=${filterValue}`
 }
 
 export const getAllFilters = (filters: Filter[]) =>
-  filters.filter(filter => filter.value !== undefined && filter.value !== '')
+  filters.filter(filter => filter.value !== undefined && filter.value !== '' && filter.value !== null)
 
 export const getTableQueryUrl = params =>
   Object.keys(params).reduce(

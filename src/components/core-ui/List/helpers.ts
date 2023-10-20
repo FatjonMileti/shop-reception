@@ -14,7 +14,8 @@ export const getRenderedColumns = (columns, cb) =>
           if (UIComponent === 'TitleText') {
             return renderComponent({
               ...render,
-              text: get(row, column.field)
+              text: get(row, column.field),
+              quantity: row.quantity
             })
           }
 
@@ -31,7 +32,8 @@ export const getRenderedColumns = (columns, cb) =>
           if (UIComponent === 'PriceSpan') {
             return renderComponent({
               ...render,
-              value: get(row, column.field)
+              value: get(row, column.field),
+              initialValue: row.initialPrice
             })
           }
 

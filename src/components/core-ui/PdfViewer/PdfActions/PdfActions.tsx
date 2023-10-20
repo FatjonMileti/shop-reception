@@ -1,14 +1,20 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { Add, Remove, FileDownloadOutlined, PrintOutlined } from '@mui/icons-material'
-import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { useNotification } from 'hooks'
-import { downloadFile } from 'utils/helpers'
+import { formatAndDownloadResponse } from 'utils/helpers'
 import s from './PdfActions.modules.scss'
 import { formatErrorMessage } from 'utils/formatting'
+import { PrintersPopover } from './PrintersPopover'
+import { makeCoreGetFileRequest } from 'utils/api'
 
 const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
   const { showNotification } = useNotification()
+
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
+
+  const open = Boolean(anchorEl)
+  const popoverId = open ? 'simple-popover' : undefined
 
   const currentZoomPercent = useMemo(() => scale * 100, [scale])
 
@@ -16,9 +22,13 @@ const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
 
   const zoomOut = () => setScale(scale - 0.25)
 
-  const download = () => {
+  const download = async () => {
     try {
-      downloadFile(`${actions.downloadAction.url}/${id}`)
+      const response = await makeCoreGetFileRequest(`${actions.downloadAction.url}/${id}`, {
+        responseType: 'blob'
+      })
+
+      formatAndDownloadResponse(response)
     } catch (error) {
       showNotification({
         message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
@@ -27,25 +37,12 @@ const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
     }
   }
 
-  const print = async () => {
-    try {
-      if (actions.printAction.type === 'GET') {
-        await makeCoreGetRequest(`${actions.printAction.url}/${id}`)
-      }
-      if (actions.printAction.type === 'POST') {
-        await makeCorePostRequest(`${actions.printAction.url}/${id}`)
-      }
+  const handlePrintBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
 
-      showNotification({
-        message: 'Fisierul a fost printat cu succes',
-        type: 'success'
-      })
-    } catch (error) {
-      showNotification({
-        message: `A aparut o eroare la printarea fisierului. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
-    }
+  const handlePrintListClose = () => {
+    setAnchorEl(null)
   }
 
   return (
@@ -60,7 +57,20 @@ const PdfActions = ({ pageNumber, numPages, scale, setScale, actions, id }) => {
       </div>
       <div className={s.buttons}>
         <IconButton onClick={download} startIcon={<FileDownloadOutlined />} variant="text" />
-        <IconButton onClick={print} startIcon={<PrintOutlined />} variant="text" />
+        <IconButton
+          aria-describedby={popoverId}
+          onClick={handlePrintBtnClick}
+          startIcon={<PrintOutlined />}
+          variant="text"
+        />
+        <PrintersPopover
+          actions={actions}
+          id={id}
+          handlePrintListClose={handlePrintListClose}
+          popoverId={popoverId}
+          open={open}
+          anchorEl={anchorEl}
+        />
       </div>
     </div>
   )

@@ -4,6 +4,8 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from './serializers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
+import { useMediaQuery } from '@mui/material'
+import s from './AsyncAutocomplete.modules.scss'
 
 interface AsyncAutocompleteOption {
   value: string | number
@@ -22,6 +24,7 @@ const AsyncAutocomplete = props => {
     setValueForFilter,
     setFilterValues,
     extraUrlParams,
+    loadInfoMessage,
     ...rest
   } = props
 
@@ -53,6 +56,8 @@ const AsyncAutocomplete = props => {
     }
   }, [open])
 
+  const isXs = useMediaQuery('(max-width:624px)')
+
   const getOptions = async (
     cb1?: (name: string, value: any) => {},
     cb2?: (name: string, value: any) => {}
@@ -81,13 +86,15 @@ const AsyncAutocomplete = props => {
   }
 
   return (
-    <Autocomplete
+<>
+  {loading && loadInfoMessage && <span className={s.infoMessage}>{loadInfoMessage}</span>}
+  <Autocomplete
       {...rest}
       disablePortal
       id="async-demo"
       options={options}
       //TO DO: fix styling for all autocomplete and filters
-      style={{ maxWidth: width ?? 300 }}
+      style={{ maxWidth: isXs ? '100%' : width ?? 300 }}
       open={open}
       onOpen={() => {
         setOpen(true)
@@ -99,7 +106,13 @@ const AsyncAutocomplete = props => {
       value={props.value || (props.multiple ? [] : '')}
       onChange={(_, value) => props.onChange(value)}
       isOptionEqualToValue={(option, value) => option.value === value.value}
-    />
+      renderOption={(props, option) => (
+        <li {...props} key={option.value}>
+          {option.label}
+        </li>
+      )}
+  />
+</>
   )
 }
 

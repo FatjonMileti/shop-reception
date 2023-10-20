@@ -38,17 +38,32 @@ export const toArrayItemPayload = (item: Filter[]) => {
 export const toTableRowItems = (items, columns) => {
   columns.map(column => {
     items.map((item, index) => {
+      let value
       if (column.field.includes('.')) {
-        items[index][column.field] = get(item, column.field) || ''
+        value = get(item, column.field)
       } else {
-        if (item[column.field] === null || item[column.field] === undefined) {
-          items[index][column.field] = column.type === 'date' ? null : ''
-        } else {
-          items[index][column.field] = item[column.field]
-        }
+        value = item[column.field]
+      }
+
+      if (value === null || value === undefined) {
+        items[index][column.field] = ''
+      } else {
+        items[index][column.field] = value
       }
     })
   })
-
   return items
 }
+
+export const toProductStockKeyValuePairs = (infoItems, items) =>
+  infoItems.map(item => ({ key: item.label, value: items[item.name] }))
+
+export const toDynamicTableItems = items =>
+  items.map(item => {
+    const newList = item.list.reduce((acc, i) => {
+      acc[i.name] = i
+      return acc
+    }, {})
+
+    return { ...item, list: newList }
+  })

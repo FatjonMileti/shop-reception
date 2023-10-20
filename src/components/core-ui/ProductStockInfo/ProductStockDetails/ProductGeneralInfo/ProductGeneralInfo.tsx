@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Divider, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
@@ -18,12 +18,13 @@ const ProductGeneralInfo = ({
   addToCartAction,
   isWarehouse,
   hasBuyback,
-  buybackOptions
+  buybackOptions,
+  available
 }) => {
-  const [selectedBuybackOption, setSelectedBuybackOption] = React.useState(
+  const [selectedBuybackOption, setSelectedBuybackOption] = useState(
     (hasBuyback && buybackOptions[0].value) || ''
   )
-  const [displayAddToCartBtn, setDisplayAddToCartBtn] = React.useState(false)
+  const [displayAddToCartBtn, setDisplayAddToCartBtn] = useState(false)
 
   const { action, checkAction } = addToCartAction
 
@@ -33,7 +34,7 @@ const ProductGeneralInfo = ({
 
   const dispatch = useDispatch()
 
-  React.useEffect(() => {
+  useEffect(() => {
     ;(async () => {
       try {
         let result
@@ -43,7 +44,9 @@ const ProductGeneralInfo = ({
         setDisplayAddToCartBtn(result[checkAction.variable])
       } catch (error) {
         showNotification({
-          message: `A aparut o eroarea la afisarea butonului de "Adauga in cos". ${formatErrorMessage(error)}`,
+          message: `A aparut o eroarea la afisarea butonului de "Adauga in cos". ${formatErrorMessage(
+            error
+          )}`,
           type: 'error'
         })
       }
@@ -51,26 +54,28 @@ const ProductGeneralInfo = ({
   }, [isWarehouse])
 
   const addToCart = async () => {
-    try {
-      if (action.type === 'POST') {
-        await makeCorePostRequest(`${action.url}`, {
-          id,
-          quantity: 1,
-          isWarehouse,
-          buyback: selectedBuybackOption
-        })
+    if (displayAddToCartBtn) {
+      try {
+        if (action.type === 'POST') {
+          await makeCorePostRequest(`${action.url}`, {
+            id,
+            quantity: 1,
+            isWarehouse,
+            buyback: selectedBuybackOption
+          })
+          showNotification({
+            message: 'Produsul a fost adaugat in cos',
+            type: 'success'
+          })
+        }
+        dispatch(ProductActions.clearProduct())
+        navigate(addToCartAction.href)
+      } catch (error) {
         showNotification({
-          message: 'Produsul a fost adaugat in cos',
-          type: 'success'
+          message: `A aparut o eroare la adaugarea produsului in cos. ${formatErrorMessage(error)}`,
+          type: 'error'
         })
       }
-      dispatch(ProductActions.clearProduct())
-      navigate(addToCartAction.href)
-    } catch (error) {
-      showNotification({
-        message: `A aparut o eroare la adaugarea produsului in cos. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
     }
   }
 
@@ -80,14 +85,14 @@ const ProductGeneralInfo = ({
         <div className={s.price}>
           {price}&nbsp;{currency}
         </div>
-        {displayAddToCartBtn && (
-          <IconButton
-            onClick={addToCart}
-            label="Adauga in cos"
-            variant="contained"
-            endIcon={<Icon iconName="AddCircle" tiny={true} fill="white" />}
-          />
-        )}
+        <IconButton
+          onClick={addToCart}
+          label="Adauga in cos"
+          variant="contained"
+          endIcon={<Icon iconName="AddCircle" tiny={true} fill="white" />}
+          disabled={!displayAddToCartBtn || !available}
+          sx={displayAddToCartBtn ? {} : { opacity: 0.5 }}
+        />
       </div>
       <Divider component="div" />
       {hasBuyback && (

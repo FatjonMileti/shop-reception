@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import { get } from 'lodash'
-import { getUserInfo } from './authService'
+import { getUserInfo, getToken } from './authService'
 import { getCoreBaseUrl } from './api'
 
 export const formatPayloadDate = date => (date ? dayjs(date).format('YYYY-MM-DD') : '')
@@ -11,6 +11,10 @@ export const getDefaultItemValue = value => {
   if (value.charAt(0) === '#') {
     if (value === '#CURRENT_DATE') {
       return dayjs().format('YYYY-MM-DD')
+    }
+
+    if (value === '#YESTERDAY') {
+      return dayjs().add(-1, 'day').format('YYYY-MM-DD')
     }
 
     if (value.includes('#TOKEN')) {
@@ -61,6 +65,24 @@ export const getItemDefaultsAsArray = formItems => {
 export const isAllowed = (allowedRoles, currentUserRoles) =>
   allowedRoles && currentUserRoles.some(r => allowedRoles.includes(r))
 
+export const formatAndDownloadResponse = fileObject => {
+  const { data, headers } = fileObject
+  let fileName
+  try {
+    fileName = headers.get('Content-Disposition').split(';')[1].split('filename=')[1]
+  } catch (error) {
+    fileName = 'test.pdf'
+  }
+  const blobUrl = URL.createObjectURL(data)
+
+  const link = document.createElement('a')
+  link.href = blobUrl
+  link.download = fileName
+  link.click()
+
+  URL.revokeObjectURL(blobUrl)
+}
+
 export const downloadFile = url => {
   const a = document.createElement('a')
   a.href = `${getCoreBaseUrl(url)}`
@@ -75,22 +97,40 @@ export const delay = ms => new Promise(res => setTimeout(res, ms))
 export const isScannerDevice = callbackOtherwise => {
   const devices = ['DT50', 'EF50'] // [urovo, bluebird]
   const { userAgent } = window.navigator
-  if (devices.some(device => userAgent.includes(device)))
-    return
+  if (devices.some(device => userAgent.includes(device))) return
 
-  if ((window.navigator)?.userAgentData) {
-
+  if (window.navigator?.userAgentData) {
     window.navigator.userAgentData.getHighEntropyValues(['model']).then(ua => {
-      if (ua && ua.model && devices.some(device => ua.model.includes(device)))
-        return
+      if (ua && ua.model && devices.some(device => ua.model.includes(device))) return
       else {
         // probably not on a device known to have infrared scanner
         callbackOtherwise()
       }
-    });
-
+    })
   } else {
     // probably not on https, to be allowed access to .userAgentData
     callbackOtherwise()
   }
 }
+
+export const getFormErrors = (formItems, data) =>
+  formItems.reduce((acc, item) => {
+    if (item.required) {
+      let itemValue
+      if (item.UIComponent === 'CountyCitySelect') {
+        const countyValue = get(data, item.county.payloadKey)
+        const cityValue = get(data, item.city.payloadKey)
+        if (!countyValue || !cityValue) {
+          itemValue = ''
+        } else {
+          itemValue = `${countyValue}-${cityValue}`
+        }
+      } else {
+        itemValue = item.payloadKey ? get(data, item.payloadKey) : get(data, item.name)
+      }
+      if (itemValue === '' || itemValue === undefined) {
+        acc[item.name] = `${item.label || ''} is required`
+      }
+    }
+    return acc
+  }, {})

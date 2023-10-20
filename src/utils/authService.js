@@ -94,3 +94,15 @@ export const getUserAvatarString = () => {
 
   return ''
 }
+
+export const getUserStore = () => {
+  const userInfo = getUserInfo()
+
+  return userInfo.store_name || ''
+}
+
+export const getUserRegion = () => {
+  const userInfo = getUserInfo()
+
+  return userInfo.region_name || ''
+}

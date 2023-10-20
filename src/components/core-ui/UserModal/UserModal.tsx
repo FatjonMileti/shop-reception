@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
-import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import {
+  Button,
+  IconButton,
+  Input,
+  Typography,
+  Checkbox
+} from '@fullscreendigital/carrefour-dex-fe'
 import { ModalInfo } from '../ModalWithForm/ModalForm/ModalInfo'
 import { useNotification } from 'hooks'
 import s from './UserModal.modules.scss'
@@ -34,6 +40,10 @@ const infoItems = [
   {
     name: 'lastName',
     label: 'Prenume'
+  },
+  {
+    name: 'roles',
+    label: 'Rol'
   }
 ]
 
@@ -45,7 +55,7 @@ function UserModal(props) {
   const [roles, setRoles] = useState([])
   const [traineeOptions, setTraineeOptions] = useState(null)
   const { showNotification } = useNotification()
-
+  const [adminRole, setAdminRole] = useState(null)
   const closeModalAndResetForm = () => {
     closeModal()
     setEditItem(null)
@@ -151,13 +161,20 @@ function UserModal(props) {
 
           const rolesResult = await makeCoreGetRequest(`${getRolesAction}`)
 
+          const admin = rolesResult.find(role => role.name === 'ADMIN')
+
           const traineeRoles = rolesResult
             .filter(role => role.name.includes('TRAINEE'))
             .map(role => ({ name: role.id, label: role.name }))
           const otherRoles = rolesResult.filter(role => !role.name.includes('TRAINEE'))
 
+          setAdminRole(admin)
           setRoles(otherRoles)
           setTraineeOptions(traineeRoles)
+
+          if (result.structureRoles.some(struct => struct.roleId === admin.id)) {
+            setEditItem(prev => ({ ...prev, roles: 'ADMIN' }))
+          }
         } catch (error) {
           showNotification({
             message: `Error while fetching item. ${formatErrorMessage(error)}`,

@@ -4,7 +4,7 @@ const path = require('path')
 const Dotenv = require('dotenv-webpack')
 
 // eslint-disable-next-line no-undef
-module.exports = () => ({
+module.exports = env => ({
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
   output: {
@@ -78,5 +78,8 @@ module.exports = () => ({
     historyApiFallback: true,
     allowedHosts: 'all'
   },
-  plugins: [new ReactRefreshWebpackPlugin(), new Dotenv({ path: '.env.dev' })]
+  plugins: [
+    new ReactRefreshWebpackPlugin(),
+    new Dotenv({ path: env.environment === 'local' ? '.env.local' : '.env.dev' })
+  ]
 })

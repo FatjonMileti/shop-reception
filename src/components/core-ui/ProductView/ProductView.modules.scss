@@ -1,7 +1,5 @@
 .content {
-  padding-top: 82px;
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding: 64px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -42,13 +40,27 @@
 
 .productTab {
   color: #121212 !important;
-  height: 40rem;
+  height: 30rem;
   display: flex;
-  align-items: center;
   justify-content: center;
 
   margin: 0 24px;
   @media (max-width: 624px) {
     margin: 0 12px;
+    height: 22rem;
   }
+}
+
+.productImageContainer {
+  text-align: right;
+
+  @media (max-width: 624px) {
+    text-align: left;
+  }
+}
+
+.productImage {
+  width: 60%;
+  height: 100%;
+  object-fit: cover;
 }

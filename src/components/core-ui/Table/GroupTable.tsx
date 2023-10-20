@@ -5,7 +5,7 @@ import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
-import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
+import { makeCoreGetFileRequest, makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from '../Table/TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
 import {
@@ -14,13 +14,13 @@ import {
   renderTableFooter
 } from '../Table/helpers'
 import { toTableGETUrl, toTablePOSTPayload } from '../Table/serializers'
-import { toTableRowItems } from 'utils/serializers'
+import { toDynamicTableItems, toTableRowItems } from 'utils/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import debounce from 'lodash.debounce'
 import s from '../Table/Table.modules.scss'
 import { isEmpty } from 'lodash'
-import { downloadFile } from 'utils/helpers'
-import { DownloadModal } from '../DownloadModal'
+import { formatAndDownloadResponse } from 'utils/helpers'
+import PrintModal from '../PrintModal/PrintModal'
 import { formatErrorMessage } from 'utils/formatting'
 
 const GroupTable = props => {
@@ -35,7 +35,6 @@ const GroupTable = props => {
     extraUrlParams,
     extraCustomUrlParams,
     userModal,
-    dynamicColumn,
     ...rest
   } = props
 
@@ -45,7 +44,7 @@ const GroupTable = props => {
   const [items, setItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
-  const [isDownloadModalOpen, setIsDowloadModalOpen] = useState(false)
+  const [isPrintModalOpen, setIsPrintModalOpen] = useState(false)
   const [summary, setSummary] = useState({})
   const [dynamicColumns, setDynamicColumns] = useState([])
 
@@ -179,7 +178,7 @@ const GroupTable = props => {
 
       const newColumns = createDynamicColumns(columns, response.list)
       setDynamicColumns(newColumns)
-      setItems(toTableRowItems(response.list, newColumns))
+      setItems(toTableRowItems(toDynamicTableItems(response.list), newColumns))
       setTotalCount(response.page.totalCount)
       setSummary(response.summary)
     } catch (error) {
@@ -198,26 +197,47 @@ const GroupTable = props => {
       return initialColumns
     }
 
-    const staticColumns = initialColumns.slice()?.filter(col => !col.isGroup)
+    const staticColumns = initialColumns.filter(col => !col.isGroup)
     const groupCols = initialColumns.filter(col => col.isGroup)
+    const groupIndex = initialColumns.findIndex(col => col.isGroup)
+
+    if(!groupCols.length){
+      return staticColumns
+    }
 
     const populated = data.find(item => item.list.length)
 
+    if(!populated){
+      return initialColumns
+    }
+
     const newColumns = populated.list?.flatMap((interval, index) =>
-    groupCols.map(col => {
-        const additionalName = groupCols.length === 1 ? '' : col.title
+      groupCols.map(col => {
+        const additionalName = groupCols?.length === 1 ? '' : col.title
+
         return (
           {
             ...col,
             start: interval.start.slice(0, -3),
             end: interval.end.slice(0, -3),
-            title: `${interval.start.slice(0, -3)} - ${interval.end.slice(0, -3)} ${additionalName}`,
-            field: `list.[${index}].${col.field}`
+            title: `${interval.start.slice(0, -3)} - ${interval.end.slice(
+              0,
+              -3
+            )} ${additionalName}`,
+            field: `list.${interval.name}.${col.field}`,
+            disableSorting: true
           } || []
         )
       })
     )
-    const dynamicCols = staticColumns.concat(newColumns)
+
+    const orderdCols = newColumns.sort((col1, col2) =>
+      col1.start.localeCompare(col2.start, undefined, { numeric: true })
+    )
+
+    let dynamicCols = staticColumns
+    dynamicCols.splice(groupIndex, 0, ...orderdCols)
+
     return dynamicCols
   }
 
@@ -227,30 +247,81 @@ const GroupTable = props => {
 
   const closeNewModal = () => setIsNewModalOpen(false)
 
-  const openDownloadModal = () => setIsDowloadModalOpen(true)
+  const openPrintModal = () => setIsPrintModalOpen(true)
 
-  const closeDownloadModal = () => setIsDowloadModalOpen(false)
+  const closePrintModal = () => setIsPrintModalOpen(false)
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (tableActions?.downloadAction) {
-      const { action, selectColumns } = tableActions.downloadAction
+      const { action } = tableActions?.downloadAction
       const { searchText, filters, order, orderBy } = tableState
 
-      const url = toTableGETUrl({
-        url: action.url,
-        searchText,
-        searchFields: tableActions?.searchAction?.searchFields,
-        filters,
-        tableFilters,
-        order,
-        orderBy,
-        hasGeneralSearch,
-        generalSearchText: table.searchText
-      })
+      try {
+        const url = toTableGETUrl({
+          url: action.url,
+          searchText,
+          searchFields: tableActions?.searchAction?.searchFields,
+          filters,
+          tableFilters,
+          order,
+          orderBy,
+          hasGeneralSearch,
+          generalSearchText: table.searchText,
+          extraUrlParams,
+          extraCustomUrlParams
+        })
 
-      downloadFile(url)
+        const response = await makeCoreGetFileRequest(url, {
+          responseType: 'blob'
+        })
+
+        formatAndDownloadResponse(response)
+      } catch (error) {
+        showNotification({
+          message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
     }
   }
+
+  const updatedRenderedColumns = [
+    {
+      title: '',
+      field: 'actions',
+      align: 'right',
+      width: '112px',
+      collapsible: 'true',
+      render: row => (
+        <TableActions
+          itemId={row.id}
+          row={row}
+          viewAction={tableRowActions.viewAction}
+          editAction={tableRowActions.editAction}
+          deleteAction={tableRowActions.deleteAction}
+          cancelAction={tableRowActions.cancelAction}
+          customAction={tableRowActions.customAction}
+          additionalAction={() =>
+            handleRemoteData(
+              tableState.page,
+              tableState.rowsPerPage,
+              tableState.order,
+              tableState.orderBy,
+              tableState.searchText,
+              tableState.filters
+            )
+          }
+          canView={canView}
+          canEdit={canEdit}
+          canDelete={canDelete}
+          canCancel={canCancel}
+          canSeeCustomAction={canSeeCustomAction}
+          userModal={userModal}
+        />
+      ),
+    },
+    ...renderedColumns,
+  ];
 
   return hasGeneralSearch && !table.searchText.length ? null : (
     <Box className={s.tableContainer}>
@@ -271,12 +342,15 @@ const GroupTable = props => {
           closeModal={closeNewModal}
         />
       )}
-      {tableActions?.downloadAction?.selectColumns && (
-        <DownloadModal
-          {...tableActions.downloadAction}
-          isModalOpen={isDownloadModalOpen}
-          closeModal={closeDownloadModal}
-          columns={tableActions.downloadAction.columns}
+      {tableActions?.printAction?.selectColumns && (
+        <PrintModal
+          {...tableActions.printAction}
+          {...tableState}
+          tableFilters={tableFilters}
+          url={tableActions.printAction.action.url}
+          dynamicColumns={dynamicColumns}
+          isModalOpen={isPrintModalOpen}
+          closeModal={closePrintModal}
           extraUrlParams={extraUrlParams}
         />
       )}
@@ -284,40 +358,7 @@ const GroupTable = props => {
         {...rest}
         columns={
           tableRowActions && (canEdit || canDelete || canView || canCancel || canSeeCustomAction)
-            ? renderedColumns.concat({
-                title: '',
-                field: 'actions',
-                align: 'right',
-                width: '112px',
-                collapsible: 'true',
-                render: row => (
-                  <TableActions
-                    itemId={row.id}
-                    viewAction={tableRowActions.viewAction}
-                    editAction={tableRowActions.editAction}
-                    deleteAction={tableRowActions.deleteAction}
-                    cancelAction={tableRowActions.cancelAction}
-                    customAction={tableRowActions.customAction}
-                    additionalAction={() =>
-                      handleRemoteData(
-                        tableState.page,
-                        tableState.rowsPerPage,
-                        tableState.order,
-                        tableState.orderBy,
-                        tableState.searchText,
-                        tableState.filters
-                      )
-                    }
-                    canView={canView}
-                    canEdit={canEdit}
-                    canDelete={canDelete}
-                    canCancel={canCancel}
-                    canSeeCustomAction={canSeeCustomAction}
-                    userModal={userModal}
-                  />
-                )
-              })
-            : renderedColumns
+            ? updatedRenderedColumns : renderedColumns
         }
         rows={items}
         isLoading={isLoading}
@@ -329,16 +370,12 @@ const GroupTable = props => {
             ? { isFloatingButton: tableActions.newAction.isFloatingButton, onClick: openNewModal }
             : null
         }
-        downloadButton={
-          tableActions?.downloadAction?.selectColumns
-            ? { onClick: openDownloadModal }
-            : tableActions?.downloadAction
-            ? { onClick: handleDownload }
-            : null
-        }
+        downloadButton={tableActions?.downloadAction && { onClick: handleDownload }}
+        printButton={tableActions?.printAction && { onClick: openPrintModal }}
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
+        classes={{ headerClass: s.printPreviewHeader, rowClass: s.printPreviewRow }}
       />
       {tableFooter && <div style={{ textAlign: 'right' }}>{tableFooterComponent}</div>}
     </Box>

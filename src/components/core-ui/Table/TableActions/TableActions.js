@@ -8,6 +8,7 @@ import { Icon } from 'components/core-ui/Icon'
 
 const TableActions = ({
   itemId,
+  row,
   viewAction,
   editAction,
   deleteAction,
@@ -19,7 +20,8 @@ const TableActions = ({
   canCancel,
   customAction,
   canSeeCustomAction,
-  userModal
+  userModal,
+  extraUrlParams = ''
 }) => {
   const navigate = useNavigate()
 
@@ -60,6 +62,7 @@ const TableActions = ({
           editedItemUrl={editAction.getUrl}
           additionalAction={additionalAction}
           userModal={userModal}
+          extraUrlParams={extraUrlParams}
         />
       )}
       {deleteAction && canDelete && (
@@ -90,7 +93,9 @@ const TableActions = ({
       {customAction && canSeeCustomAction && (
         <Button
           onClick={() => {
-            navigate(customAction.url)
+            var url = customAction.url
+            customAction.keys?.forEach(key => { url = url.replace(`:${key}`, row[key])})
+            navigate(url)
           }}
           style={{ minWidth: '0.7rem', background: 'transparent' }}
         >

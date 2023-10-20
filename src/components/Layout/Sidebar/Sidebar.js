@@ -9,10 +9,11 @@ import {
   PersonOutlineOutlined,
   PowerSettingsNewOutlined
 } from '@mui/icons-material'
-import { logout } from 'utils/authService'
+import { logout, getUserStore, getUserRegion } from 'utils/authService'
 import { SidebarHeader } from './SidebarHeader'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
+import cn from 'classnames'
 import s from './Sidebar.scss'
 
 const staticItems = [
@@ -43,6 +44,9 @@ const staticItems = [
 ]
 
 const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
+  const storeName = getUserStore()
+  const regionName = getUserRegion()
+
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
 
@@ -94,11 +98,23 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
       onClose={handleCloseMenu}
       displayEmptyHeader
       disablePadding
-      headerContent={<SidebarHeader handleCloseMenu={handleCloseMenu} />}
+      headerContent={
+        <SidebarHeader
+          handleCloseMenu={handleCloseMenu}
+          storeName={storeName}
+          regionName={regionName}
+        />
+      }
       headerClass={s.drawerHeader}
       paperClassName={s.itemsListContainer}
     >
-      <div className={s.itemsList}>
+      <div
+        className={cn(
+          s.itemsList,
+          { [s.padding90]: storeName || regionName },
+          { [s.padding130]: storeName && regionName }
+        )}
+      >
         <nav className={s.section}>
           <List
             subheader={{
