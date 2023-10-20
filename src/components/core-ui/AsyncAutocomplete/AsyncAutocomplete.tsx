@@ -70,7 +70,10 @@ const AsyncAutocomplete = props => {
           extraUrlParams.find(param => param.name === action.localQueryKey)?.value
         )}`
       }
-      const result = await makeCoreGetRequest(url)
+
+      const result = await makeCoreGetRequest(url, {
+        params: props.queryParams || {}
+      })
       const { valueKey, labelKey } = action
 
       const resultOptions = toAsyncSelectOptions(result.list || result, valueKey, labelKey) || []

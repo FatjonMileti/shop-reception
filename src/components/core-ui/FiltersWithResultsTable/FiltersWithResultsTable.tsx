@@ -116,6 +116,17 @@ function FiltersWithResultsTable(props) {
               ? customFilterValues[filter.name]
               : filterValues[filter.name]
 
+            let queryParams = {}
+
+            if (Array.isArray(filter?.siblingValuesAsQueryParams)) {
+              filter.siblingValuesAsQueryParams.forEach(siblingName => {
+                const siblingValue = filterValues[siblingName]?.value
+                if (siblingValue) {
+                  queryParams[siblingName] = siblingValue
+                }
+              })
+            }
+
             return (
               <Grid key={name} xs={12} md={3} item>
                 {renderComponent({
@@ -144,7 +155,9 @@ function FiltersWithResultsTable(props) {
                         break
                     }
                   },
-                  setValueForFilter
+                  setValueForFilter,
+                  extraUrlParams: customFilterValuesToUrlParams,
+                  queryParams
                 })}
               </Grid>
             )
