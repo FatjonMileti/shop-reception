@@ -24,7 +24,7 @@ export const getRenderedColumns = (columns, cb) =>
               ...render,
               field: column.field,
               count: get(row, column.field),
-              payload: { id: row.id },
+              payload: { id: row.id, purchaseOption: row.purchaseOption },
               additionalAction: cb
             })
           }
