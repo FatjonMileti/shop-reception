@@ -42,11 +42,11 @@ import { TitleText } from 'components/core-ui/TitleText'
 import { TableFilters } from 'components/core-ui/TableFilters'
 import { UserModal } from 'components/core-ui/UserModal'
 import { FileUpload } from 'components/core-ui/FileUpload'
-import DynamicTable from 'components/core-ui/Table/DynamicTable'
-import GroupTable from 'components/core-ui/Table/GroupTable'
+// import DynamicTable from 'components/core-ui/Table/DynamicTable'
+// import GroupTable from 'components/core-ui/Table/GroupTable'
 import { ImageCell } from 'components/core-ui/ImageCell'
 import { ProductView } from 'components/core-ui/ProductView'
-import PrintPreviewTable from 'components/core-ui/Table/PrintPreviewTable'
+// import PrintPreviewTable from 'components/core-ui/Table/PrintPreviewTable'
 
 export const Components = {
   // MUI components
@@ -101,9 +101,9 @@ export const Components = {
   TableFilters,
   UserModal,
   FileUpload,
-  DynamicTable,
-  GroupTable,
+  // DynamicTable,
+  // GroupTable,
   ImageCell,
   ProductView,
-  PrintPreviewTable
+  // PrintPreviewTable
 }

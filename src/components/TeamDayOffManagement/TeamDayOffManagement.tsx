@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Grid, Paper } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete2'
+import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
-import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete2/serializers'
+import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toTableGETUrl } from 'components/core-ui/Table2/serializers'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { Table } from 'components/core-ui/Table2'
+import { Table } from 'components/core-ui/Table'
 
 // const table = {
 //   action: {

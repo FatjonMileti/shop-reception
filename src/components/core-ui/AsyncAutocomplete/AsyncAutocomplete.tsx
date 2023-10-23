@@ -1,94 +1,25 @@
 import * as React from 'react'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
-import { makeCoreGetRequest } from 'utils/api'
-import { toAsyncSelectOptions } from './serializers'
-import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
 import { useMediaQuery } from '@mui/material'
-import s from './AsyncAutocomplete.modules.scss'
+import { AsyncAutocompleteProps } from './AsyncAutocompleteDefinitions'
 
-interface AsyncAutocompleteOption {
-  value: string | number
-  label: string
-}
-
-const AsyncAutocomplete = props => {
-  const [open, setOpen] = React.useState(false)
-  const [options, setOptions] = React.useState<readonly AsyncAutocompleteOption[]>([])
-  const loading = open && options.length === 0
-
+const AsyncAutocomplete = (props: AsyncAutocompleteProps) => {
   const {
-    action,
+    value,
+    options,
+    onChange,
+    onBlur,
     width,
-    hasDefaultFirstValue,
-    setValueForFilter,
-    setFilterValues,
-    extraUrlParams,
-    loadInfoMessage,
     ...rest
   } = props
-
-  const { showNotification } = useNotification()
-
-  React.useEffect(() => {
-    let active = true
-
-    if (!loading) {
-      return undefined
-    }
-
-    getOptions()
-
-    return () => {
-      active = false
-    }
-  }, [loading])
-
-  React.useEffect(() => {
-    if (hasDefaultFirstValue) {
-      getOptions(setValueForFilter, setFilterValues)
-    }
-  }, [])
-
-  React.useEffect(() => {
-    if (!open) {
-      setOptions([])
-    }
-  }, [open])
+  
+  const [open, setOpen] = React.useState(false)
+  const loading = open && options.length === 0
 
   const isXs = useMediaQuery('(max-width:624px)')
 
-  const getOptions = async (
-    cb1?: (name: string, value: any) => {},
-    cb2?: (name: string, value: any) => {}
-  ) => {
-    try {
-      let url = action.url
-
-      if (action.filterQueryKey && action.localQueryKey) {
-        url = `${url}?page=-1&filterBy=${action.filterQueryKey}&filterValue=${encodeURIComponent(
-          extraUrlParams.find(param => param.name === action.localQueryKey)?.value
-        )}`
-      }
-      const result = await makeCoreGetRequest(url)
-      const { valueKey, labelKey } = action
-
-      const resultOptions = toAsyncSelectOptions(result.list || result, valueKey, labelKey) || []
-      setOptions(resultOptions)
-      cb1 && cb1(rest.name, props.value || resultOptions[0])
-      cb2 && cb2(rest.name, props.value || resultOptions[0])
-    } catch (error) {
-      showNotification({
-        message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
-    }
-  }
-
   return (
-<>
-  {loading && loadInfoMessage && <span className={s.infoMessage}>{loadInfoMessage}</span>}
-  <Autocomplete
+    <Autocomplete
       {...rest}
       disablePortal
       id="async-demo"
@@ -103,16 +34,15 @@ const AsyncAutocomplete = props => {
         setOpen(false)
       }}
       loading={loading}
-      value={props.value || (props.multiple ? [] : '')}
-      onChange={(_, value) => props.onChange(value)}
+      value={value}
+      onChange={(_, value) => onChange(value)}
       isOptionEqualToValue={(option, value) => option.value === value.value}
       renderOption={(props, option) => (
         <li {...props} key={option.value}>
           {option.label}
         </li>
       )}
-  />
-</>
+    />
   )
 }
 

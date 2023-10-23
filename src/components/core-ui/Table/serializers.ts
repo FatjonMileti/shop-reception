@@ -39,16 +39,16 @@ export const toTableGETUrl = ({
   extraCustomUrlParams
 }: {
   url: string
-  searchText: string
-  searchFields: string[]
-  filters: Filter[]
+  searchText?: string
+  searchFields?: string[]
+  filters?: Filter[]
   tableFilters?: Filter[]
   page?: number
   rowsPerPage?: number
-  order: string
-  orderBy: string
-  hasGeneralSearch: boolean
-  generalSearchText: string
+  order?: string
+  orderBy?: string
+  hasGeneralSearch?: boolean
+  generalSearchText?: string
   generalSearchFields?: string[]
   extraUrlParams?: Filter[]
   extraCustomUrlParams?: Filter[]
