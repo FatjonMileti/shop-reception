@@ -44,6 +44,19 @@ const AsyncAutocomplete = props => {
     }
   }, [loading])
 
+  const queryParams = React.useMemo(() => {
+      let qp = {}
+      if (Array.isArray(props?.siblingValuesAsQueryParams) && props.siblingValues) {
+          props.siblingValuesAsQueryParams.forEach(siblingName => {
+              const siblingValue = props.siblingValues[siblingName]?.value
+              if (siblingValue) {
+                  qp[siblingName] = siblingValue
+              }
+          })
+      }
+      return qp
+  }, [props.siblingValues])
+
   React.useEffect(() => {
     if (hasDefaultFirstValue) {
       getOptions(setValueForFilter, setFilterValues)
@@ -70,7 +83,10 @@ const AsyncAutocomplete = props => {
           extraUrlParams.find(param => param.name === action.localQueryKey)?.value
         )}`
       }
-      const result = await makeCoreGetRequest(url)
+
+      const result = await makeCoreGetRequest(url, {
+        params: queryParams
+      })
       const { valueKey, labelKey } = action
 
       const resultOptions = toAsyncSelectOptions(result.list || result, valueKey, labelKey) || []
