@@ -24,8 +24,6 @@ const AsyncAutocomplete = (props: AsyncAutocompleteProps) => {
       disablePortal
       id="async-demo"
       options={options}
-      //TO DO: fix styling for all autocomplete and filters
-      style={{ maxWidth: isXs ? '100%' : width ?? 300 }}
       open={open}
       onOpen={() => {
         setOpen(true)

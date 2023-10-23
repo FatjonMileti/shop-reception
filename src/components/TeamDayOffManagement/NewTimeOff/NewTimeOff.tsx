@@ -1,102 +1,79 @@
 import { useEffect, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import { Grid } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { makeCoreGetRequest } from 'utils/api'
-import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
-import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import s from 'components/core-ui/Modal/Modal.modules.scss'
 
-const NewTimeOff = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [teamMembers, setTeamMembers] = useState(null)
+const initialValues = {
+  teamMember: { value: '', label: '' },
+  dayOffType: '',
+  startDate: '',
+  endDate: '',
+  numberOfHours: ''
+}
 
-  const { showNotification } = useNotification()
-
-  useEffect(() => {
-    ;(async () => {
-      try {
-        const result = await makeCoreGetRequest(`/governance/teamMembers?`)
-
-        const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
-        setTeamMembers(resultOptions)
-      } catch (error) {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    })()
-  }, [])
-
-  const openModal = () => setIsModalOpen(true)
-
-  const closeModal = () => setIsModalOpen(false)
+const NewTimeOff = props => {
+  const { teamMembers, isModalOpen, closeModal, isEdit, editItem } = props
 
   const formSubmit = async values => {
-    debugger
+    console.log(values)
   }
 
   return (
-    <Modal open={isModalOpen} onClose={closeModal} modalTitle="New Time Off">
+    <Modal
+      isModalOpen={isModalOpen}
+      closeModal={closeModal}
+      modalTitle={isEdit ? 'Edit Time Off' : 'New Time Off'}
+    >
       <Formik
-        // props={{}}
-        initialValues={{
-          teamMemberName: { value: '', label: '' },
-          dayOffType: '',
-          startDate: '',
-          endDate: '',
-          numberOfHours: ''
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          formSubmit(values).then(() => setTimeout(() => setSubmitting(false), 2000))
-        }}
-        validationSchema={Yup.object().shape({
-          teamMemberName: Yup.object().shape({
-            label: Yup.string().required('Team member is required'),
-            value: Yup.string().required('Team member is required')
-          }),
-          dayOffType: Yup.object().shape({
-            label: Yup.string().required('Day-off type is required'),
-            value: Yup.string().required('Day-off type is required')
-          }),
-          startDate: Yup.date().required('Start date is required'),
-          endDate: Yup.date().required('End date is required'),
-          numberOfHours: Yup.number()
-        })}
+        initialValues={initialValues}
+        onSubmit={formSubmit}
+        // validationSchema={Yup.object().shape({
+        //   teamMember: Yup.object().shape({
+        //     label: Yup.string().required('Team member is required'),
+        //     value: Yup.string().required('Team member is required')
+        //   }),
+        //   dayOffType: Yup.object().shape({
+        //     label: Yup.string().required('Day-off type is required'),
+        //     value: Yup.string().required('Day-off type is required')
+        //   }),
+        //   startDate: Yup.date().required('Start date is required'),
+        //   endDate: Yup.date().required('End date is required'),
+        //   numberOfHours: Yup.number()
+        // })}
       >
-        {props => {
-          const {
-            values,
-            touched,
-            errors,
-            isSubmitting,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-            setFieldValue
-          } = props
-          return (
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={4}>
-                <Grid xs={12} md={3} item>
+        {({ handleChange, values, setFieldValue }) => (
+          <Form>
+            <Grid container spacing={4}>
+              {isEdit ? (
+                <div>{editItem.teamMemberName}</div>
+              ) : (
+                <Grid xs={12} item>
                   <AsyncAutocomplete
                     variant="standard"
-                    name="teamMemberName"
+                    name="teamMember"
                     label="Team member"
-                    options={[]}
-                    onChange={handleChange}
+                    options={teamMembers}
+                    onChange={value =>
+                      setFieldValue('teamMember', value ?? { value: '', label: '' })
+                    }
                     // onBlur={handleBlur}
-                    value={values.teamMemberName}
+                    value={values.teamMember}
                     // disabled={isSubmitting}
                   />
                 </Grid>
+              )}
+
+              <Grid xs={12} item className={s.modalButtons}>
+                <Button variant="outlined" label="Cancel" onClick={closeModal} />
+                <Button variant="contained" type="submit" label="Submit" />
               </Grid>
-            </form>
-          )
-        }}
+            </Grid>
+          </Form>
+        )}
       </Formik>
     </Modal>
   )

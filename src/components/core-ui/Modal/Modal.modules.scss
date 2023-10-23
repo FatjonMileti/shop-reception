@@ -1,0 +1,48 @@
+
+.modalTitle {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 30px;
+
+  /* monochrome-primary */
+  color: #121212;
+}
+
+.modalMessage {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  /* text-color-secondary */
+  color: #666666;
+}
+
+.modalButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+
+  &.pageFormButtons {
+    justify-content: right;
+  }
+
+  button {
+    height: 42px;
+    flex: 1;
+
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+
+    text-align: center;
+    text-transform: uppercase;
+  }
+}

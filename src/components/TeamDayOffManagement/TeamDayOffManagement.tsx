@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Grid, Paper } from '@mui/material'
+import { useEffect, useMemo, useState } from 'react'
+import { Box, Grid, Paper } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -9,6 +9,9 @@ import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { Table } from 'components/core-ui/Table'
+import { NewTimeOff } from './NewTimeOff'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import { Edit } from '@mui/icons-material'
 
 // const table = {
 //   action: {
@@ -358,6 +361,10 @@ const TeamDayOffManagement = () => {
   const [tableItems, setTableItems] = useState([])
   const [totalCount, setTotalCount] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
+  const [teamMembers, setTeamMembers] = useState(null)
+  const [isNewModalOpen, setIsNewModalOpen] = useState(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [selectedEditRow, setSelectedEditRow] = useState(0)
 
   const { showNotification } = useNotification()
 
@@ -400,6 +407,69 @@ const TeamDayOffManagement = () => {
       setDomainFilterValue(filterOptions[0])
     }
   }, [filterOptions])
+
+  useEffect(() => {
+    if (domainFilterValue) {
+      ;(async () => {
+        try {
+          const result = await makeCoreGetRequest(
+            `/governance/teamMembers?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
+              domainFilterValue?.value
+            )}`
+          )
+          const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
+          setTeamMembers(resultOptions)
+        } catch (error) {
+          showNotification({
+            message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        }
+      })()
+    }
+  }, [domainFilterValue])
+
+  const openNewModal = () => setIsNewModalOpen(true)
+
+  const closeNewModal = () => setIsNewModalOpen(false)
+
+  const openEditModal = () => setIsEditModalOpen(true)
+
+  const closeEditModal = () => setIsEditModalOpen(false)
+
+  const selectEditRow = row => {
+    setSelectedEditRow(row)
+    openEditModal()
+  }
+
+  const columnsWithActions = useMemo(() => {
+    let result = columns
+    if (canEdit || canDelete) {
+      const actionsRow = {
+        title: '',
+        field: 'actions',
+        align: 'right',
+        width: '112px',
+        collapsible: 'true',
+        render: row => (
+          <div>
+            {canEdit && (
+              <Button
+                onClick={() => selectEditRow(row)}
+                style={{ minWidth: '0.7rem', background: 'transparent' }}
+                label=""
+              >
+                <Edit />
+              </Button>
+            )}
+          </div>
+        )
+      } as any
+
+      result = [...columns, actionsRow]
+    }
+    return result
+  }, [columns, canEdit, canDelete, teamMembers])
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
@@ -448,16 +518,31 @@ const TeamDayOffManagement = () => {
         </Grid>
       </Paper>
       {domainFilterValue && (
-        <Table
-          hideCheckbox
-          orderBy="teamMember.name"
-          order="asc"
-          columns={columns}
-          items={tableItems}
-          fetchData={fetchData}
-          isLoading={isLoading}
-          
-        />
+        <Box>
+          <NewTimeOff
+            teamMembers={teamMembers}
+            isModalOpen={isNewModalOpen}
+            openModal={openNewModal}
+            closeModal={closeNewModal}
+          />
+          <NewTimeOff
+            isModalOpen={isEditModalOpen}
+            openModal={openEditModal}
+            closeModal={closeEditModal}
+            editItem={selectedEditRow}
+            isEdit
+          />
+          <Table
+            hideCheckbox
+            orderBy="teamMember.name"
+            order="asc"
+            columns={columnsWithActions}
+            items={tableItems}
+            fetchData={fetchData}
+            isLoading={isLoading}
+            newButton={canCreate ? { onClick: openNewModal } : null}
+          />
+        </Box>
       )}
     </div>
   )
