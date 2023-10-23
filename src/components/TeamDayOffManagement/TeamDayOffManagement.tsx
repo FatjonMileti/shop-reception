@@ -448,21 +448,13 @@ const TeamDayOffManagement = () => {
         render: row => (
           <div>
             {canEdit && (
-              <>
-                <Button
-                  onClick={openEditModal}
-                  style={{ minWidth: '0.7rem', background: 'transparent' }}
-                  label=""
-                >
-                  <Edit />
-                </Button>
-                <NewTimeOff
-                  isModalOpen={isEditModalOpen}
-                  openModal={openEditModal}
-                  closeModal={closeEditModal}
-                  isEdit
-                />
-              </>
+              <Button
+                onClick={openEditModal}
+                style={{ minWidth: '0.7rem', background: 'transparent' }}
+                label=""
+              >
+                <Edit />
+              </Button>
             )}
           </div>
         )
@@ -526,6 +518,12 @@ const TeamDayOffManagement = () => {
             isModalOpen={isNewModalOpen}
             openModal={openNewModal}
             closeModal={closeNewModal}
+          />
+          <NewTimeOff
+            isModalOpen={isEditModalOpen}
+            openModal={openEditModal}
+            closeModal={closeEditModal}
+            isEdit
           />
           <Table
             hideCheckbox
