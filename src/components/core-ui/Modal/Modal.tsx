@@ -17,7 +17,7 @@ const sx = {
 }
 
 const Modal = props => {
-  const { isModalOpen, closeModal, modalTitle, children, buttons } = props
+  const { isModalOpen, closeModal, modalTitle, children } = props
 
   const isXs = useMediaQuery('(max-width:624px)')
   const isMd = useMediaQuery('(max-width:936px)')
@@ -42,7 +42,6 @@ const Modal = props => {
         >
           <Close />
         </IconButton>
-
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <Typography component="h2" variant="medium">
@@ -51,9 +50,6 @@ const Modal = props => {
           </Grid>
           <Grid item xs={12}>
             {children}
-          </Grid>
-          <Grid item xs={12} className={s.modalButtons}>
-            {buttons}
           </Grid>
         </Grid>
       </Box>
