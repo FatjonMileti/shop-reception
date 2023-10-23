@@ -364,6 +364,7 @@ const TeamDayOffManagement = () => {
   const [teamMembers, setTeamMembers] = useState(null)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [selectedEditRow, setSelectedEditRow] = useState(0)
 
   const { showNotification } = useNotification()
 
@@ -436,6 +437,11 @@ const TeamDayOffManagement = () => {
 
   const closeEditModal = () => setIsEditModalOpen(false)
 
+  const selectEditRow = row => {
+    setSelectedEditRow(row)
+    openEditModal()
+  }
+
   const columnsWithActions = useMemo(() => {
     let result = columns
     if (canEdit || canDelete) {
@@ -449,7 +455,7 @@ const TeamDayOffManagement = () => {
           <div>
             {canEdit && (
               <Button
-                onClick={openEditModal}
+                onClick={() => selectEditRow(row)}
                 style={{ minWidth: '0.7rem', background: 'transparent' }}
                 label=""
               >
@@ -523,6 +529,7 @@ const TeamDayOffManagement = () => {
             isModalOpen={isEditModalOpen}
             openModal={openEditModal}
             closeModal={closeEditModal}
+            editItem={selectedEditRow}
             isEdit
           />
           <Table

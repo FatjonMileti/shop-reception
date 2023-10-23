@@ -16,11 +16,10 @@ const initialValues = {
 }
 
 const NewTimeOff = props => {
-  const { teamMembers, isModalOpen, closeModal, isEdit } = props
+  const { teamMembers, isModalOpen, closeModal, isEdit, editItem } = props
 
   const formSubmit = async values => {
     console.log(values)
-    debugger
   }
 
   return (
@@ -49,7 +48,9 @@ const NewTimeOff = props => {
         {({ handleChange, values, setFieldValue }) => (
           <Form>
             <Grid container spacing={4}>
-              {!isEdit && (
+              {isEdit ? (
+                <div>{editItem.teamMemberName}</div>
+              ) : (
                 <Grid xs={12} item>
                   <AsyncAutocomplete
                     variant="standard"
