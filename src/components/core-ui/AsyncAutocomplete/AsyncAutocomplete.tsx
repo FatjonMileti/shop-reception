@@ -16,8 +16,6 @@ const AsyncAutocomplete = (props: AsyncAutocompleteProps) => {
   const [open, setOpen] = React.useState(false)
   const loading = open && options.length === 0
 
-  const isXs = useMediaQuery('(max-width:624px)')
-
   return (
     <Autocomplete
       {...rest}
