@@ -324,23 +324,6 @@ const GroupTable = props => {
     ...renderedColumns,
   ];
 
-  const renderAbbreviationLegend = () => {
-    if (showAbbrev) {
-      return (
-        <Box className={s.tableContainer}>
-          <Typography variant="regular" style={{ color: "black", fontSize: "12px" }}>
-            <pre>
-              CP = cantitati propuse<br/>
-              MV = medie vanzari<br/>
-              CM = cantitati modificate
-            </pre>
-          </Typography>
-        </Box>
-      );
-    }
-    return null;
-  };
-
   return hasGeneralSearch && !table.searchText.length ? null : (
     <Box className={s.tableContainer}>
       {tableActions?.newAction && canCreate && (
@@ -372,7 +355,17 @@ const GroupTable = props => {
           extraUrlParams={extraUrlParams}
         />
       )}
-      {renderAbbreviationLegend()}
+      {showAbbrev && (
+        <Box className={s.tableContainer}>
+          <Typography variant="regular" style={{ color: "black", fontSize: "12px" }}>
+            <pre>
+              CP = cantitati propuse<br/>
+              MV = medie vanzari<br/>
+              CM = cantitati modificate
+            </pre>
+          </Typography>
+        </Box>
+      )}
       <GeneralTable
         {...rest}
         columns={
