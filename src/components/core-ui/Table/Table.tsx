@@ -1,8 +1,18 @@
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
+import { useEffect } from 'react'
 import { useImmer } from 'use-immer'
 
-const Table = (props) => {
-  const { columns, items, isLoading, fetchData, totalCount, ...rest } = props
+const Table = props => {
+  const {
+    columns,
+    items,
+    isLoading,
+    fetchData,
+    totalCount,
+    shouldRefreshData,
+    setShouldRefreshData,
+    ...rest
+  } = props
 
   const [tableState, setTableState] = useImmer(
     window.history.state.tableState || {
@@ -14,6 +24,16 @@ const Table = (props) => {
       filters: []
     }
   )
+
+  useEffect(() => {
+    ;(async () => {
+      if (shouldRefreshData) {
+        const { page, rowsPerPage, order, orderBy, searchText, filters } = tableState
+        await handleRemoteData(page, rowsPerPage, order, orderBy, searchText, filters)
+        setShouldRefreshData(false)
+      }
+    })()
+  }, [shouldRefreshData])
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
@@ -40,7 +60,7 @@ const Table = (props) => {
       document.title
     )
 
-    await fetchData({page, rowsPerPage, order, orderBy, tableFilters: filters})
+    await fetchData({ page, rowsPerPage, order, orderBy, tableFilters: filters })
   }
 
   return (

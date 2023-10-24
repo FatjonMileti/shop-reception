@@ -7,13 +7,14 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 
 const DeleteTimeOff = props => {
-  const { isModalOpen, closeModal, deleteItem } = props
+  const { isModalOpen, closeModal, deleteItem, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
   const onDelete = async () => {
     try {
       await makeCoreDeleteRequest(`/governance/teamTimeOff/${deleteItem.id}`)
       closeModal()
+      setShouldRefreshData(true)
     } catch (error) {
       showNotification({
         message: `Error while deleting data. ${formatErrorMessage(error)}`,

@@ -368,6 +368,7 @@ const TeamDayOffManagement = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [selectedEditRow, setSelectedEditRow] = useState(0)
   const [selectedDeleteRow, setSelectedDeleteRow] = useState(0)
+  const [shouldRefreshData, setShouldRefreshData] = useState(false)
 
   const { showNotification } = useNotification()
 
@@ -491,6 +492,7 @@ const TeamDayOffManagement = () => {
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
+    setShouldRefreshData(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -555,6 +557,7 @@ const TeamDayOffManagement = () => {
             openModal={openDeleteModal}
             closeModal={closeDeleteModal}
             deleteItem={selectedDeleteRow}
+            setShouldRefreshData={setShouldRefreshData}
             isDelete
           />
           <Table
@@ -566,6 +569,9 @@ const TeamDayOffManagement = () => {
             fetchData={fetchData}
             isLoading={isLoading}
             newButton={canCreate ? { onClick: openNewModal } : null}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
           />
         </Box>
       )}
