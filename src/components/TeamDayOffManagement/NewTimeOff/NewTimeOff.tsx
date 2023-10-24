@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
-import { Form, Formik } from 'formik'
+import { ErrorMessage, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import { Grid } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
@@ -25,13 +25,15 @@ const validationSchema = Yup.object().shape({
   //   label: Yup.string().required('Day-off type is required'),
   //   value: Yup.string().required('Day-off type is required')
   // }),
-  startDate: Yup.date().required('Start date is required'),
-  endDate: Yup.date().when('startDate', (startDate, schema) => {
-    if (startDate) {
-      return schema.min(startDate, 'Invalid end date')
-    }
-    return schema
-  })
+  startDate: Yup.date().required('Start date is required').typeError('Invalid date format'),
+  endDate: Yup.date()
+    .required('End date is required')
+    .typeError('Invalid date format')
+    .when('startDate', (startDate, schema) =>
+      !isNaN(Date.parse(startDate[0]))
+        ? schema.min(startDate, 'End date must be after start date')
+        : schema
+    )
   // numberOfHours: Yup.number()
 })
 
@@ -42,6 +44,7 @@ const NewTimeOff = props => {
     const startDate = dayjs(new Date(values.startDate)).format('YYYY-MM-DD')
     // On yup validation the value stored on schema is malformed when an invalid end date was selected
     const endDate = dayjs(new Date(values.endDate['$d'] || values.endDate)).format('YYYY-MM-DD')
+    // console.log(values.endDate)
     console.log({ ...values, startDate, endDate })
   }
 
@@ -82,6 +85,8 @@ const NewTimeOff = props => {
                       value={values.startDate}
                       onChange={value => setFieldValue('startDate', value)}
                       label="Start date"
+                      error={!!errors.startDate}
+                      helperText={errors.startDate as string}
                     ></DatePicker>
                   </Grid>
                   <Grid xs={12} item>
@@ -89,8 +94,8 @@ const NewTimeOff = props => {
                       value={values.endDate}
                       onChange={value => setFieldValue('endDate', value)}
                       label="End date"
-                      error={!!errors.endDate?.[0]}
-                      helperText="End time cannot be before start time"
+                      error={!!errors.endDate}
+                      helperText={errors.endDate as string}
                     ></DatePicker>
                   </Grid>
                 </>
