@@ -4,15 +4,8 @@ import { useMediaQuery } from '@mui/material'
 import { AsyncAutocompleteProps } from './AsyncAutocompleteDefinitions'
 
 const AsyncAutocomplete = (props: AsyncAutocompleteProps) => {
-  const {
-    value,
-    options,
-    onChange,
-    onBlur,
-    width,
-    ...rest
-  } = props
-  
+  const { value, options, onChange, onBlur, width, ...rest } = props
+
   const [open, setOpen] = React.useState(false)
   const loading = open && options.length === 0
 
