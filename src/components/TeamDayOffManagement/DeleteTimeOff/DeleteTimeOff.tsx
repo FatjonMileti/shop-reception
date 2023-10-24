@@ -31,7 +31,7 @@ const DeleteTimeOff = props => {
 
         <Grid xs={12} item className={s.modalButtons}>
           <Button variant="outlined" label="Cancel" onClick={closeModal} />
-          <Button variant="contained" label={'Delete'} onClick={onDelete} />
+          <Button variant="contained" label="Delete" onClick={onDelete} />
         </Grid>
       </Grid>
     </Modal>
