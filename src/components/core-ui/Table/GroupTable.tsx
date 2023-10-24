@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from 'configureStore'
 import { useImmer } from 'use-immer'
 import { Box } from '@mui/material'
-import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
+import { Table as GeneralTable, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetFileRequest, makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { TableActions } from '../Table/TableActions'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
@@ -35,6 +35,7 @@ const GroupTable = props => {
     extraUrlParams,
     extraCustomUrlParams,
     userModal,
+    showAbbrev,
     ...rest
   } = props
 
@@ -353,6 +354,17 @@ const GroupTable = props => {
           closeModal={closePrintModal}
           extraUrlParams={extraUrlParams}
         />
+      )}
+      {showAbbrev && (
+        <Box className={s.tableContainer}>
+          <Typography variant="regular" style={{ color: "black", fontSize: "12px" }}>
+            <pre>
+              CP = cantitati propuse<br/>
+              MV = medie vanzari<br/>
+              CM = cantitati modificate
+            </pre>
+          </Typography>
+        </Box>
       )}
       <GeneralTable
         {...rest}
