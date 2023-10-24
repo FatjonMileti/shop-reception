@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react'
-import { Modal } from 'components/core-ui/Modal'
-import { ErrorMessage, Form, Formik } from 'formik'
-import * as Yup from 'yup'
+import { Button, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Grid } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { Button, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { Modal } from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import dayjs from 'dayjs'
+import { Form, Formik } from 'formik'
+import * as Yup from 'yup'
 
 const initialValues = {
   teamMember: { value: '', label: '' },
@@ -48,6 +47,15 @@ const NewTimeOff = props => {
     console.log({ ...values, startDate, endDate })
   }
 
+  const mapStringDate = (dateAsString: string): Date => {
+    const components = dateAsString.split('/')
+    const date = new Date()
+    date.setDate(Number(components[0]))
+    date.setMonth(Number(components[1]) - 1)
+    date.setFullYear(Number(components[2]))
+    return date
+  }
+
   return (
     <Modal
       isModalOpen={isModalOpen}
@@ -80,26 +88,26 @@ const NewTimeOff = props => {
                       // disabled={isSubmitting}
                     />
                   </Grid>
-                  <Grid xs={12} item>
-                    <DatePicker
-                      value={values.startDate}
-                      onChange={value => setFieldValue('startDate', value)}
-                      label="Start date"
-                      error={!!errors.startDate}
-                      helperText={errors.startDate as string}
-                    ></DatePicker>
-                  </Grid>
-                  <Grid xs={12} item>
-                    <DatePicker
-                      value={values.endDate}
-                      onChange={value => setFieldValue('endDate', value)}
-                      label="End date"
-                      error={!!errors.endDate}
-                      helperText={errors.endDate as string}
-                    ></DatePicker>
-                  </Grid>
                 </>
               )}
+              <Grid xs={12} item>
+                <DatePicker
+                  value={editItem?.startDate ? mapStringDate(editItem.startDate) : values.startDate}
+                  onChange={value => setFieldValue('startDate', value)}
+                  label="Start date"
+                  error={!!errors.startDate}
+                  helperText={errors.startDate as string}
+                ></DatePicker>
+              </Grid>
+              <Grid xs={12} item>
+                <DatePicker
+                  value={editItem?.endDate ? mapStringDate(editItem.endDate) : values.endDate}
+                  onChange={value => setFieldValue('endDate', value)}
+                  label="End date"
+                  error={!!errors.endDate}
+                  helperText={errors.endDate as string}
+                ></DatePicker>
+              </Grid>
 
               <Grid xs={12} item className={s.modalButtons}>
                 <Button variant="outlined" label="Cancel" onClick={closeModal} />
