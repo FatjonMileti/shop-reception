@@ -11,7 +11,8 @@ import { toTableRowItems } from './serializers'
 import { Table } from 'components/core-ui/Table'
 import { NewTimeOff } from './NewTimeOff'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { Edit } from '@mui/icons-material'
+import { Delete, Edit } from '@mui/icons-material'
+import { DeleteTimeOff } from './DeleteTimeOff'
 
 // const table = {
 //   action: {
@@ -364,7 +365,9 @@ const TeamDayOffManagement = () => {
   const [teamMembers, setTeamMembers] = useState(null)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [selectedEditRow, setSelectedEditRow] = useState(0)
+  const [selectedDeleteRow, setSelectedDeleteRow] = useState(0)
 
   const { showNotification } = useNotification()
 
@@ -437,9 +440,18 @@ const TeamDayOffManagement = () => {
 
   const closeEditModal = () => setIsEditModalOpen(false)
 
+  const openDeleteModal = () => setIsDeleteModalOpen(true)
+
+  const closeDeleteModal = () => setIsDeleteModalOpen(false)
+
   const selectEditRow = row => {
     setSelectedEditRow(row)
     openEditModal()
+  }
+
+  const selectDeleteRow = row => {
+    setSelectedDeleteRow(row)
+    openDeleteModal()
   }
 
   const columnsWithActions = useMemo(() => {
@@ -452,7 +464,7 @@ const TeamDayOffManagement = () => {
         width: '112px',
         collapsible: 'true',
         render: row => (
-          <div>
+          <Box display="flex">
             {canEdit && (
               <Button
                 onClick={() => selectEditRow(row)}
@@ -462,7 +474,13 @@ const TeamDayOffManagement = () => {
                 <Edit />
               </Button>
             )}
-          </div>
+
+            {canDelete && (
+              <Button onClick={() => selectDeleteRow(row)} label="">
+                <Delete />
+              </Button>
+            )}
+          </Box>
         )
       } as any
 
@@ -531,6 +549,13 @@ const TeamDayOffManagement = () => {
             closeModal={closeEditModal}
             editItem={selectedEditRow}
             isEdit
+          />
+          <DeleteTimeOff
+            isModalOpen={isDeleteModalOpen}
+            openModal={openDeleteModal}
+            closeModal={closeDeleteModal}
+            deleteItem={selectedDeleteRow}
+            isDelete
           />
           <Table
             hideCheckbox
