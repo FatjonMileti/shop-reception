@@ -2,16 +2,15 @@ import { Modal } from 'components/core-ui/Modal'
 import { Grid, Typography } from '@mui/material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import axios from 'axios'
+import { makeCoreDeleteRequest } from 'utils/api'
 
 const DeleteTimeOff = props => {
   const { isModalOpen, closeModal, deleteItem } = props
 
   const onDelete = async () => {
-    const apiUrl = `/governance/teamTimeOff/${deleteItem.id}`
-
     try {
-      await axios.delete(apiUrl)
+      await makeCoreDeleteRequest(`/governance/teamTimeOff/${deleteItem.id}`)
+      closeModal();
     } catch (error) {
       console.error('Error DELETE timeoff request:', error)
     }
