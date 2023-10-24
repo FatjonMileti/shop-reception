@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
@@ -16,21 +16,18 @@ const initialValues = {
 }
 
 const NewTimeOff = props => {
-  const { teamMembers, isModalOpen, closeModal, isEdit, editItem, isDelete } = props
+  const { teamMembers, isModalOpen, closeModal, isEdit, editItem } = props
 
   const formSubmit = async values => {
-    if (isDelete) {
-      console.log('delete')
-      return
-    }
-
     console.log(values)
   }
 
-  const modalTitle = isDelete ? 'Delete' : isEdit ? 'Edit Time Off' : 'New Time Off'
-
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={modalTitle}>
+    <Modal
+      isModalOpen={isModalOpen}
+      closeModal={closeModal}
+      modalTitle={isEdit ? 'Edit Time Off' : 'New Time Off'}
+    >
       <Formik
         initialValues={initialValues}
         onSubmit={formSubmit}
@@ -51,12 +48,10 @@ const NewTimeOff = props => {
         {({ handleChange, values, setFieldValue }) => (
           <Form>
             <Grid container spacing={4}>
-              <Grid xs={12} item>
-                {isDelete ? (
-                  <Typography>Are you sure you want to delete this entry?</Typography>
-                ) : isEdit ? (
-                  <Typography>{editItem.teamMemberName}</Typography>
-                ) : (
+              {isEdit ? (
+                <div>{editItem.teamMemberName}</div>
+              ) : (
+                <Grid xs={12} item>
                   <AsyncAutocomplete
                     variant="standard"
                     name="teamMember"
@@ -69,12 +64,12 @@ const NewTimeOff = props => {
                     value={values.teamMember}
                     // disabled={isSubmitting}
                   />
-                )}
-              </Grid>
+                </Grid>
+              )}
 
               <Grid xs={12} item className={s.modalButtons}>
                 <Button variant="outlined" label="Cancel" onClick={closeModal} />
-                <Button variant="contained" type="submit" label={isDelete ? 'Delete' : 'Submit'} />
+                <Button variant="contained" type="submit" label="Submit" />
               </Grid>
             </Grid>
           </Form>

@@ -12,6 +12,7 @@ import { Table } from 'components/core-ui/Table'
 import { NewTimeOff } from './NewTimeOff'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
+import { DeleteTimeOff } from './DeleteTimeOff'
 
 // const table = {
 //   action: {
@@ -366,6 +367,7 @@ const TeamDayOffManagement = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [selectedEditRow, setSelectedEditRow] = useState(0)
+  const [selectedDeleteRow, setSelectedDeleteRow] = useState(0)
 
   const { showNotification } = useNotification()
 
@@ -447,6 +449,11 @@ const TeamDayOffManagement = () => {
     openEditModal()
   }
 
+  const selectDeleteRow = row => {
+    setSelectedDeleteRow(row)
+    openDeleteModal()
+  }
+
   const columnsWithActions = useMemo(() => {
     let result = columns
     if (canEdit || canDelete) {
@@ -469,7 +476,7 @@ const TeamDayOffManagement = () => {
             )}
 
             {canDelete && (
-              <Button onClick={() => openDeleteModal()} label="">
+              <Button onClick={() => selectDeleteRow(row)} label="">
                 <Delete />
               </Button>
             )}
@@ -543,10 +550,11 @@ const TeamDayOffManagement = () => {
             editItem={selectedEditRow}
             isEdit
           />
-          <NewTimeOff
+          <DeleteTimeOff
             isModalOpen={isDeleteModalOpen}
             openModal={openDeleteModal}
             closeModal={closeDeleteModal}
+            deleteItem={selectedDeleteRow}
             isDelete
           />
           <Table
