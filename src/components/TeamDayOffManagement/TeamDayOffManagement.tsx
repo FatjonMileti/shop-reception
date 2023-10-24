@@ -9,6 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { Table } from 'components/core-ui/Table'
+import { Input } from 'components/core-ui/Input'
 import { NewTimeOff } from './NewTimeOff'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
@@ -572,6 +573,22 @@ const TeamDayOffManagement = () => {
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
+            filters={[
+              {
+                name: 'teamMember.name',
+                filter: (
+                  <Input
+                    type="text"
+                    name="teamMember.name"
+                    label="Team member"
+                    variant="standard"
+                    value=''
+                  />
+                ),
+                type: 'text',
+                label: 'Team member',
+              }
+            ]}
           />
         </Box>
       )}
