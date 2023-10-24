@@ -3,16 +3,22 @@ import { Grid, Typography } from '@mui/material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { makeCoreDeleteRequest } from 'utils/api'
+import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 const DeleteTimeOff = props => {
   const { isModalOpen, closeModal, deleteItem } = props
+  const { showNotification } = useNotification()
 
   const onDelete = async () => {
     try {
       await makeCoreDeleteRequest(`/governance/teamTimeOff/${deleteItem.id}`)
-      closeModal();
+      closeModal()
     } catch (error) {
-      console.error('Error DELETE timeoff request:', error)
+      showNotification({
+        message: `Error while deleting data. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
     }
   }
 
