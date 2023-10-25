@@ -7,6 +7,7 @@ import s from 'components/core-ui/Modal/Modal.modules.scss'
 import dayjs from 'dayjs'
 import {Form, Formik} from 'formik'
 import * as Yup from 'yup'
+import {FormInfoItems} from '../FormInfoItems'
 
 const initialValues = {
     teamMember: null, // {value: '', label: ''}
@@ -78,7 +79,9 @@ const NewTimeOff = props => {
                     <Form>
                         <Grid container spacing={4}>
                             {isEdit ? (
-                                <div>{editItem.teamMemberName}</div>
+                                <FormInfoItems
+                                    items={[{label: 'Person name:', name: editItem.teamMemberName}]}
+                                />
                             ) : (
                                 <>
                                     <Grid xs={12} item>
