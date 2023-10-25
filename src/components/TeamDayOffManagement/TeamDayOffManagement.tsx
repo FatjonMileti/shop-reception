@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Box, Grid, Paper } from '@mui/material'
+import { Box, Grid, Paper, debounce } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -9,6 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { Table } from 'components/core-ui/Table'
+import { Input } from 'components/core-ui/Input'
 import { NewTimeOff } from './NewTimeOff'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
@@ -519,6 +520,7 @@ const TeamDayOffManagement = () => {
       })
     }
   }
+  const debouncedHandleRemoteData = debounce(fetchData, 500)
 
   return (
     <div className={s.mainContainer}>
@@ -566,12 +568,28 @@ const TeamDayOffManagement = () => {
             order="asc"
             columns={columnsWithActions}
             items={tableItems}
-            fetchData={fetchData}
+            fetchData={debouncedHandleRemoteData}
             isLoading={isLoading}
             newButton={canCreate ? { onClick: openNewModal } : null}
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
+            filters={[
+              {
+                name: 'teamMember.name',
+                filter: (
+                  <Input
+                    type="text"
+                    name="teamMember.name"
+                    label="Team member"
+                    variant="standard"
+                    value=""
+                  />
+                ),
+                type: 'text',
+                label: 'Team member'
+              }
+            ]}
           />
         </Box>
       )}
