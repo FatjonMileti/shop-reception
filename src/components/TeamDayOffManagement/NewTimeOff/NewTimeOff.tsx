@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
 import { Form, Formik } from 'formik'
-import * as Yup from 'yup'
 import { Grid } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
+import { FormInfoItems } from '../FormInfoItems'
 
 const initialValues = {
   teamMember: { value: '', label: '' },
@@ -48,10 +47,12 @@ const NewTimeOff = props => {
         {({ handleChange, values, setFieldValue }) => (
           <Form>
             <Grid container spacing={4}>
-              {isEdit ? (
-                <div>{editItem.teamMemberName}</div>
-              ) : (
-                <Grid xs={12} item>
+              <Grid xs={12} item>
+                {isEdit ? (
+                  <FormInfoItems
+                    items={[{ label: 'Person name:', name: editItem.teamMemberName }]}
+                  />
+                ) : (
                   <AsyncAutocomplete
                     variant="standard"
                     name="teamMember"
@@ -64,8 +65,8 @@ const NewTimeOff = props => {
                     value={values.teamMember}
                     // disabled={isSubmitting}
                   />
-                </Grid>
-              )}
+                )}
+              </Grid>
 
               <Grid xs={12} item className={s.modalButtons}>
                 <Button variant="outlined" label="Cancel" onClick={closeModal} />
