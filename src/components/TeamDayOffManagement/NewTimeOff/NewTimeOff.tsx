@@ -1,12 +1,12 @@
 import {useEffect, useState} from 'react'
-import {Modal} from 'components/core-ui/Modal'
-import {ErrorMessage, Form, Formik} from 'formik'
-import * as Yup from 'yup'
+import {Button, DatePicker, Input} from '@fullscreendigital/carrefour-dex-fe'
 import {Grid} from '@mui/material'
 import {AsyncAutocomplete} from 'components/core-ui/AsyncAutocomplete'
-import {Button, DatePicker, Input} from '@fullscreendigital/carrefour-dex-fe'
+import {Modal} from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import dayjs from 'dayjs'
+import {Form, Formik} from 'formik'
+import * as Yup from 'yup'
 
 const initialValues = {
     teamMember: null, // {value: '', label: ''}
@@ -39,11 +39,11 @@ const validationSchema = Yup.object().shape({
 
 const areEqualDates = (startDate, endDate) => {
 
-    if(!(startDate instanceof Date)){
+    if (!(startDate instanceof Date)) {
         startDate = startDate.$d;
     }
 
-    if(!(endDate instanceof Date)){
+    if (!(endDate instanceof Date)) {
         endDate = endDate.$d;
     }
 
@@ -116,7 +116,7 @@ const NewTimeOff = props => {
                                             variant="standard"
                                             width="100%"
                                             value={values.dayOffType}
-                                            onChange={ (event) => {
+                                            onChange={(event) => {
                                                 const inputValue = (event.target as HTMLInputElement).value;
                                                 setFieldValue('dayOffType', inputValue);
                                             }}
