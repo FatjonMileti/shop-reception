@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Box, Grid, Paper } from '@mui/material'
+import { Box, Grid, Paper, debounce } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -520,6 +520,7 @@ const TeamDayOffManagement = () => {
       })
     }
   }
+  const debouncedHandleRemoteData = debounce(fetchData, 500)
 
   return (
     <div className={s.mainContainer}>
@@ -567,7 +568,7 @@ const TeamDayOffManagement = () => {
             order="asc"
             columns={columnsWithActions}
             items={tableItems}
-            fetchData={fetchData}
+            fetchData={debouncedHandleRemoteData}
             isLoading={isLoading}
             newButton={canCreate ? { onClick: openNewModal } : null}
             totalCount={totalCount}
@@ -582,11 +583,11 @@ const TeamDayOffManagement = () => {
                     name="teamMember.name"
                     label="Team member"
                     variant="standard"
-                    value=''
+                    value=""
                   />
                 ),
                 type: 'text',
-                label: 'Team member',
+                label: 'Team member'
               }
             ]}
           />
