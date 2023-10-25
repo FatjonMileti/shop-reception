@@ -144,7 +144,8 @@ function FiltersWithResultsTable(props) {
                         break
                     }
                   },
-                  setValueForFilter
+                  setValueForFilter,
+                  siblingValues: filterValues
                 })}
               </Grid>
             )
