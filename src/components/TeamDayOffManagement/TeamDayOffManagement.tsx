@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Box, Grid, Paper } from '@mui/material'
+import { Box, Grid, Paper, debounce } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -12,6 +12,7 @@ import { Table } from 'components/core-ui/Table'
 import { NewTimeOff } from './NewTimeOff'
 import {Button, DatePicker, Input} from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
+import {DeleteTimeOff} from "./DeleteTimeOff";
 
 // const table = {
 //   action: {
@@ -364,6 +365,7 @@ const TeamDayOffManagement = () => {
   const [teamMembers, setTeamMembers] = useState(null)
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [selectedEditRow, setSelectedEditRow] = useState(0)
   const [selectedDeleteRow, setSelectedDeleteRow] = useState(0)
   const [shouldRefreshData, setShouldRefreshData] = useState(false)
@@ -445,9 +447,18 @@ const TeamDayOffManagement = () => {
 
   const closeEditModal = () => setIsEditModalOpen(false)
 
+  const openDeleteModal = () => setIsDeleteModalOpen(true)
+
+  const closeDeleteModal = () => setIsDeleteModalOpen(false)
+
   const selectEditRow = row => {
     setSelectedEditRow(row)
     openEditModal()
+  }
+
+  const selectDeleteRow = row => {
+    setSelectedDeleteRow(row)
+    openDeleteModal()
   }
 
   const columnsWithActions = useMemo(() => {
@@ -460,7 +471,7 @@ const TeamDayOffManagement = () => {
         width: '112px',
         collapsible: 'true',
         render: row => (
-          <div>
+          <Box display="flex">
             {canEdit && (
               <Button
                 onClick={() => selectEditRow(row)}
@@ -470,7 +481,13 @@ const TeamDayOffManagement = () => {
                 <Edit />
               </Button>
             )}
-          </div>
+
+            {canDelete && (
+              <Button onClick={() => selectDeleteRow(row)} label="">
+                <Delete />
+              </Button>
+            )}
+          </Box>
         )
       } as any
 
@@ -481,6 +498,7 @@ const TeamDayOffManagement = () => {
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
+    setShouldRefreshData(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -507,6 +525,8 @@ const TeamDayOffManagement = () => {
       })
     }
   }
+  const debouncedHandleRemoteData = debounce(fetchData, 500)
+
   return (
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
@@ -540,13 +560,21 @@ const TeamDayOffManagement = () => {
             editItem={selectedEditRow}
             isEdit
           />
+          <DeleteTimeOff
+            isModalOpen={isDeleteModalOpen}
+            openModal={openDeleteModal}
+            closeModal={closeDeleteModal}
+            deleteItem={selectedDeleteRow}
+            setShouldRefreshData={setShouldRefreshData}
+            isDelete
+          />
           <Table
             hideCheckbox
             orderBy="teamMember.name"
             order="asc"
             columns={columnsWithActions}
             items={tableItems}
-            fetchData={fetchData}
+            fetchData={debouncedHandleRemoteData}
             isLoading={isLoading}
             newButton={canCreate ? { onClick: openNewModal } : null}
             totalCount={totalCount}
