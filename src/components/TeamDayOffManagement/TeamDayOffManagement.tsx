@@ -10,8 +10,8 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { Table } from 'components/core-ui/Table'
 import { NewTimeOff } from './NewTimeOff'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { Edit } from '@mui/icons-material'
+import {Button, DatePicker, Input} from '@fullscreendigital/carrefour-dex-fe'
+import { Delete, Edit } from '@mui/icons-material'
 
 // const table = {
 //   action: {
@@ -365,6 +365,14 @@ const TeamDayOffManagement = () => {
   const [isNewModalOpen, setIsNewModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [selectedEditRow, setSelectedEditRow] = useState(0)
+  const [selectedDeleteRow, setSelectedDeleteRow] = useState(0)
+  const [shouldRefreshData, setShouldRefreshData] = useState(false)
+  const [tableFilter, setTableFilter] = useState({
+    "teamMember": null,
+    'dayOffType': null,
+    'startDate': null,
+    'endDate': null,
+  })
 
   const { showNotification } = useNotification()
 
@@ -499,7 +507,6 @@ const TeamDayOffManagement = () => {
       })
     }
   }
-
   return (
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
@@ -526,6 +533,7 @@ const TeamDayOffManagement = () => {
             closeModal={closeNewModal}
           />
           <NewTimeOff
+            teamMembers={teamMembers}
             isModalOpen={isEditModalOpen}
             openModal={openEditModal}
             closeModal={closeEditModal}
@@ -541,6 +549,63 @@ const TeamDayOffManagement = () => {
             fetchData={fetchData}
             isLoading={isLoading}
             newButton={canCreate ? { onClick: openNewModal } : null}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            filters={[
+              {
+                name: 'teamMember.name',
+                filter: (
+                    <Input
+                        type="text"
+                        name="teamMember.name"
+                        label="Team member"
+                        variant="standard"
+                        value=''
+                    />
+                ),
+                type: 'text',
+                label: 'Team member',
+              },
+              {
+                filter:
+                    <Input
+                        type="text"
+                        name="teamMember.dayOffType"
+                        label="Type of day-off"
+                        variant="standard"
+                        onChange={value => setTableFilter({...tableFilter, 'dayOffType': value})}
+                        value={tableFilter.dayOffType}
+                    />,
+                label: 'Type of day-off',
+                name: 'teamMember.dayOffType',
+                type: 'text'
+              },
+              {
+                filter: <DatePicker
+                    label="Start Date"
+                    variant="standard"
+                    onChange={value => setTableFilter({...tableFilter, 'startDate': value})}
+                    value={tableFilter.startDate}
+                />,
+                label: 'Start Date',
+                name: 'startDate',
+                type: 'date',
+                value: tableFilter.startDate
+              },
+              {
+                filter: <DatePicker
+                    label="End Date"
+                    variant="standard"
+                    onChange={value => setTableFilter({...tableFilter, 'endDate': value})}
+                    value={tableFilter.endDate}
+                />,
+                label: 'End Date',
+                name: 'endDate',
+                type: 'date',
+                value: tableFilter.endDate
+              },
+            ]}
           />
         </Box>
       )}

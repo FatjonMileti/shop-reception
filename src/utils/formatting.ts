@@ -1,1 +1,8 @@
-export const formatErrorMessage = error => error.response.data?.message
+export const formatErrorMessage = error => {
+    let data = error.response?.data
+
+    if(data != null){
+        return data?.message
+    }
+    return ""
+}

@@ -12,5 +12,5 @@ export interface AsyncAutocompleteProps {
   onChange: (value: any) => void
   onBlur?: () => void
   disableClearable?: boolean
-  width?: string | number
+  style?: any
 }
