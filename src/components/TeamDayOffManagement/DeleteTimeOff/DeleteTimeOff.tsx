@@ -5,14 +5,25 @@ import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { makeCoreDeleteRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
+import { Item } from '../interfaces'
 
-const DeleteTimeOff = props => {
+interface DeleteTimeOffProps {
+  isModalOpen: boolean
+  closeModal: Function
+  deleteItem: Item | number
+  setShouldRefreshData: Function
+}
+
+const DeleteTimeOff: React.FC<DeleteTimeOffProps> = props => {
   const { isModalOpen, closeModal, deleteItem, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
   const onDelete = async () => {
     try {
-      await makeCoreDeleteRequest(`/governance/teamTimeOff/${deleteItem.id}`)
+      const itemId = (deleteItem as Item)?.id;
+
+      await makeCoreDeleteRequest(`/governance/teamTimeOff/${itemId}`)
+
       closeModal()
       setShouldRefreshData(true)
     } catch (error) {
@@ -31,7 +42,7 @@ const DeleteTimeOff = props => {
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={closeModal} />
+          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
           <Button variant="contained" label="Delete" onClick={onDelete} />
         </Grid>
       </Grid>
