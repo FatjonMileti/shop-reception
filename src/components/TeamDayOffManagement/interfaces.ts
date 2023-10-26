@@ -1,4 +1,5 @@
 export interface Item {
+  teamMemberId: string
   dayOffType: string
   endDate: Date
   startDate: Date
@@ -17,9 +18,10 @@ export interface TeamMember {
   value: string
 }
 
-export interface TableFilter {
-  teamMember: string
+export interface TimeOffValues {
+  teamMember: TeamMember
   dayOffType: string
-  startDate: Date
-  endDate: Date
+  startDate: any
+  endDate: any
+  numberOfHours?: number
 }

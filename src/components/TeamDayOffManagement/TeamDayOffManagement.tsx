@@ -10,44 +10,12 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { Table } from 'components/core-ui/Table'
 import { Input } from 'components/core-ui/Input'
 import { NewTimeOff } from './NewTimeOff'
-import { Button, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
 import { DeleteTimeOff } from './DeleteTimeOff'
-import { Item, TableFilter, TeamMember, ValueLabelInterface } from './interfaces'
-import { PermissionRoles } from 'utils/enums'
+import { Item, ValueLabelInterface } from './interfaces'
 import { toTableRowItems } from './serializers'
-
-const columns = [
-  {
-    title: 'Person',
-    field: 'teamMemberName',
-    align: 'left'
-  },
-  {
-    title: 'Day-Off Type',
-    field: 'dayOffType',
-    align: 'left'
-  },
-  {
-    title: 'Start Date',
-    field: 'startDate',
-    align: 'left',
-    collapsible: true
-  },
-  {
-    title: 'End Date',
-    field: 'endDate',
-    align: 'left',
-    collapsible: true
-  },
-  {
-    title: 'Hours',
-    field: 'numberOfHours',
-    align: 'left',
-    collapsible: true,
-    disableSorting: true
-  }
-]
+import { columns, roles } from './helpers'
 
 const TeamDayOffManagement = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
@@ -61,33 +29,11 @@ const TeamDayOffManagement = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<Item | number>(0)
-  const [tableFilter, setTableFilter] = useState<TableFilter>({
-    teamMember: null,
-    dayOffType: null,
-    startDate: null,
-    endDate: null
-  })
+  const [selectedRow, setSelectedRow] = useState<Item>(null)
 
   const { showNotification } = useNotification()
 
-  const { canCreate, canEdit, canDelete } = usePermissions({
-    createRoles: [
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-    ],
-    editRoles: [
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-    ],
-    deleteRoles: [
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-    ]
-  })
+  const { canCreate, canEdit, canDelete } = usePermissions(roles)
 
   useEffect(() => {
     ;(async () => {
@@ -228,50 +174,6 @@ const TeamDayOffManagement = () => {
       filter: (
         <Input type="text" name="teamMember.name" label="Team member" variant="standard" value="" />
       )
-    },
-    {
-      name: 'teamMember.dayOffType',
-      label: 'Type of day-off',
-      type: 'text',
-
-      filter: (
-        <Input
-          type="text"
-          name="teamMember.dayOffType"
-          label="Type of day-off"
-          variant="standard"
-          onChange={value => setTableFilter({ ...tableFilter, dayOffType: value })}
-          value={tableFilter.dayOffType}
-        />
-      )
-    },
-    {
-      name: 'startDate',
-      label: 'Start Date',
-      type: 'date',
-      value: tableFilter.startDate,
-      filter: (
-        <DatePicker
-          label="Start Date"
-          variant="standard"
-          onChange={value => setTableFilter({ ...tableFilter, startDate: value })}
-          value={tableFilter.startDate}
-        />
-      )
-    },
-    {
-      label: 'End Date',
-      name: 'endDate',
-      type: 'date',
-      value: tableFilter.endDate,
-      filter: (
-        <DatePicker
-          label="End Date"
-          variant="standard"
-          onChange={value => setTableFilter({ ...tableFilter, endDate: value })}
-          value={tableFilter.endDate}
-        />
-      )
     }
   ]
 
@@ -298,11 +200,13 @@ const TeamDayOffManagement = () => {
             teamMembers={teamMembers}
             isModalOpen={isNewModalOpen}
             closeModal={closeNewModal}
+            setShouldRefreshData={setShouldRefreshData}
           />
           <NewTimeOff
             isModalOpen={isEditModalOpen}
             closeModal={closeEditModal}
             editItem={selectedRow}
+            setShouldRefreshData={setShouldRefreshData}
             isEdit
           />
           <DeleteTimeOff
@@ -313,7 +217,7 @@ const TeamDayOffManagement = () => {
           />
           <Table
             hideCheckbox
-            orderBy="teamMember.name"
+            orderBy="teamMemberName"
             order="asc"
             columns={columnsWithActions}
             items={tableItems}

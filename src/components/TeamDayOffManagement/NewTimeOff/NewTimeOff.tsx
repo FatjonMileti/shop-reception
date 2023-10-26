@@ -6,25 +6,46 @@ import { Modal } from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { Form, Formik } from 'formik'
 import { FormInfoItems } from '../FormInfoItems'
-import { Item, TeamMember } from '../interfaces'
-import { areSameDayDates, formatPayloadDate } from 'utils/helpers'
+import { Item, TeamMember, TimeOffValues } from '../interfaces'
+import { areSameDayDates } from 'utils/helpers'
 import { dayOfTypes, getInitialValues, getValidationSchema } from './helpers'
+import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { toTimeOffPayload } from './serializers'
+import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]
   isModalOpen: boolean
   closeModal: Function
+  setShouldRefreshData: Function
   isEdit?: boolean
-  editItem?: Item | number
+  editItem?: Item
 }
 
 const NewTimeOff: React.FC<NewTimeOffProps> = props => {
-  const { teamMembers, isModalOpen, closeModal, isEdit, editItem } = props
+  const { teamMembers, isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData } = props
 
-  const formSubmit = async values => {
-    const startDate = formatPayloadDate(values.startDate)
-    const endDate = formatPayloadDate(values.endDate)
-    console.log({ ...values, startDate, endDate })
+  const { showNotification } = useNotification()
+
+  const formSubmit = async (values: TimeOffValues) => {
+    try {
+      const payload = toTimeOffPayload(values, editItem)
+
+      if (isEdit) {
+        makeCorePutRequest(`/governance/teamTimeOff/${editItem.id}`, payload)
+      } else {
+        makeCorePostRequest('/governance/teamTimeOff', payload)
+      }
+
+      setShouldRefreshData(true)
+      closeModal()
+    } catch (error) {
+      showNotification({
+        message: `Error while saving time off data. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
   }
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
@@ -114,8 +135,8 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
                     label="Number of hours"
                     fullWidth
                     variant="standard"
-                    // value={values.numberOfHours}
-                    onChange={value => setFieldValue('numberOfHours', value)}
+                    value={values.numberOfHours}
+                    onChange={event => setFieldValue('numberOfHours', event.currentTarget.value)}
                     error={!!errors.numberOfHours}
                     helperText={errors.numberOfHours as string}
                   />

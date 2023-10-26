@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import { formatUIDate } from 'utils/helpers'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import * as Yup from 'yup'
 
 export const dayOfTypes = [
@@ -61,13 +62,15 @@ export const getValidationSchema = editItem =>
     // numberOfHours: Yup.number().min(1).max(8)
   })
 
-export const getInitialValues = editItem =>
-  editItem
+export const getInitialValues = editItem => {
+  dayjs.extend(customParseFormat)
+
+  return editItem
     ? {
         teamMember: editItem.teamMemberName,
         dayOffType: editItem.dayOffType,
-        startDate: formatUIDate(editItem.startDate),
-        endDate: formatUIDate(editItem.endDate),
+        startDate: dayjs(editItem.startDate, 'DD/MM/YYYY'),
+        endDate: dayjs(editItem.endDate, 'DD/MM/YYYY'),
         numberOfHours: editItem.numberOfHours
       }
     : {
@@ -77,3 +80,4 @@ export const getInitialValues = editItem =>
         endDate: dayjs(),
         numberOfHours: null
       }
+}
