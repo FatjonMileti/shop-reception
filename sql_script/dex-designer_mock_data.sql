@@ -45,11 +45,11 @@ INSERT INTO
     "dex-designer".activity (id, name, icon, route_url, route_path_exact, id_application_submodule)
 VALUES
     -- Governance
-    (1, 'Team Day-Off Management', 'TimerOffOutlined', null , true, 1),
-    (2, 'Team Assignment', 'HowToRegOutlined', null, true, 1),
-    (3, 'Effort Matrix', 'DonutSmallOutlined', null, true, 1),
-    (4, 'Project Milestones', 'AccountTreeOutlined', null, true, 1),
-    (5, 'Team Capacity', 'PeopleAltOutlined', null, true, 1),
+    (1, 'Team Assignment', 'HowToRegOutlined', null, true, 1),
+    (2, 'Team Capacity', 'PeopleAltOutlined', null, true, 1),
+    (3, 'Project Milestones', 'AccountTreeOutlined', null, true, 1),
+    (4, 'Effort Matrix', 'DonutSmallOutlined', null, true, 1),
+    (5, 'Team Day-Off Management', 'TimerOffOutlined', null , true, 1),
     (6, 'My Time-Off', 'TimerOffOutlined', null, true, 1),
     -- Bakery ADMIN
     (7, 'Gestiune utilizatori', 'UsersManagement', null, true, 2),
@@ -95,12 +95,12 @@ INSERT INTO
     "dex-designer".screen (id, name, icon, route_url, route_path_exact, activity_id, is_first_screen)
 VALUES
     -- Governance
-    (1, 'Team Day-Off Management', 'TimerOffOutlined', '/teamDayOffManagement', true, 1, true),
-    (2, 'Team Assignment', 'HowToRegOutlined', '/teamAssignment', true, 2, true),
-    (3, 'Effort Matrix', 'DonutSmallOutlined', '/effortMatrix', true, 3, true),
-    (4, 'Project Milestones', 'AccountTreeOutlined', '/projectMilestones', true, 4, true),
-    (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/teamCapacity', true, 5, true),
-    (6, 'Individual Capacity', 'PeopleAltOutlined', '/individualCapacity', true, 5, false),
+    (1, 'Team Day-Off Management', 'TimerOffOutlined', '/teamDayOffManagement', true, 5, true),
+    (2, 'Team Assignment', 'HowToRegOutlined', '/teamAssignment', true, 1, true),
+    (3, 'Effort Matrix', 'DonutSmallOutlined', '/effortMatrix', true, 4, true),
+    (4, 'Project Milestones', 'AccountTreeOutlined', '/projectMilestones', true, 3, true),
+    (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/teamCapacity', true, 2, true),
+    (6, 'Individual Capacity', 'PeopleAltOutlined', '/individualCapacity', true, 2, false),
     (7, 'My Time-Off', 'TimerOffOutlined', '/myTimeOff', true, 6, true),
     -- Bakery ADMIN
     (8 , 'Gestiune utilizatori', 'UsersManagement', '/usersManagement', true, 7, true),
