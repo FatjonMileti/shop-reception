@@ -158,7 +158,7 @@ const ModalWithForm = ({
         let result
         if (formAction.type === 'POST') {
           const url = formData.getAll('imageUrl')
-            ? formAction.updateWithImageUrl
+            ? formAction.url
             : formAction.updateWithoutImageUrl
           result = await makeCorePostRequest(`${url}`, formData)
           showNotification({
