@@ -11,6 +11,8 @@ import { useMutation } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
 import { TeamAssignmentItem } from '../../interfaces'
 import { FormInfoItems } from 'components/governance/TeamDayOffManagement/FormInfoItems'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+dayjs.extend(customParseFormat)
 
 interface EditTeamAssignmentProps {
   isModalOpen: boolean
