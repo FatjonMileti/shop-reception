@@ -41,3 +41,11 @@ export interface TeamAssignmentTableFilter {
   ipbKey: string
   assignedProject: string
 }
+
+export interface TimeOffValues {
+  teamMember: TeamMember
+  dayOffType: string
+  startDate: any
+  endDate: any
+  numberOfHours?: number
+}

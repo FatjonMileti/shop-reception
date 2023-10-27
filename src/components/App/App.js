@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
 import { Home } from '../Home'
-import { TeamDayOffManagement } from '../TeamDayOffManagement'
 import { LoginOIDC } from '../LoginOIDC'
 import { LogoutOIDC } from '../LogoutOIDC'
 import { ServiceDomain } from '../ServiceDomain'
@@ -12,7 +11,6 @@ import { ThemeProvider } from '@fullscreendigital/carrefour-dex-fe'
 import { createRoute } from './helpers'
 import { makeDesignerGetRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
-import { DynamicComponent } from '../DynamicComponent'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
 import { oidcConfig } from 'utils/authService'
@@ -20,9 +18,9 @@ import { useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
-import { TeamAssignment } from '../TeamAssignment'
 import { QueryClient, QueryCache, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { useGovernanceRoutes } from 'components/governance/routes'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -113,6 +111,8 @@ const App = () => {
     isLoadingActivities
   ])
 
+  const governanceRoutes = useGovernanceRoutes(applicationPages)
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider {...oidcConfig}>
@@ -126,52 +126,32 @@ const App = () => {
               <Routes>
                 {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
-                {/* private routes */}
-                <Route
-                  path={URLS.AUTH_HOME}
-                  element={
-                    <PrivateRoute
-                      component={Home}
-                      modules={modules}
-                      setSubdomainId={setSubdomainId}
-                    />
-                  }
-                />
-                <Route
-                  path={URLS.AUTH_TEAM_DAY_OFF_MANAGEMENT}
-                  element={
-                    <PrivateRoute
-                      component={TeamDayOffManagement}
-                      applicationPages={applicationPages}
-                      checkIsAuthorized
-                    />
-                  }
-                />
-                <Route
-                  path={URLS.AUTH_TEAM_ASSIGNMENT}
-                  element={
-                    <PrivateRoute
-                      component={TeamAssignment}
-                      applicationPages={applicationPages}
-                      checkIsAuthorized
-                    />
-                  }
-                />
-                {applicationModulesPages.map(page =>
-                  createRoute(
-                    {
-                      ...page,
-                      subdomainId,
-                      modules,
-                      applicationPages,
-                      hasLoadedActivities,
-                      isLoadingActivities
-                    },
-                    ServiceDomain
-                  )
-                )}
-                {/* {applicationPages.map(page => createRoute(page, DynamicComponent))} */}
-                {/* end of private routes */}
+              {/* private routes */}
+              <Route
+                path={URLS.AUTH_HOME}
+                element={
+                  <PrivateRoute
+                    component={Home}
+                    modules={modules}
+                    setSubdomainId={setSubdomainId}
+                  />
+                }
+              />
+              {governanceRoutes}
+              {applicationModulesPages.map(page =>
+                createRoute(
+                  {
+                    ...page,
+                    subdomainId,
+                    modules,
+                    applicationPages,
+                    hasLoadedActivities,
+                    isLoadingActivities
+                  },
+                  ServiceDomain
+                )
+              )}
+              {/* end of private routes */}
 
                 <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
                 <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />

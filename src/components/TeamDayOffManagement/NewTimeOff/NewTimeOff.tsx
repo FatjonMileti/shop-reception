@@ -1,78 +1,56 @@
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import { Button, DatePicker, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Grid } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { Modal } from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import dayjs from 'dayjs'
 import { Form, Formik } from 'formik'
-import * as Yup from 'yup'
 import { FormInfoItems } from '../FormInfoItems'
-import { TeamDayOffManagementItem, TeamMember } from '../../interfaces'
+import { TeamDayOffManagementItem, TeamMember, TimeOffValues } from '../../../components/interfaces'
+import { areSameDayDates } from 'utils/helpers'
+import { dayOfTypes, getInitialValues, getValidationSchema } from './helpers'
+import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { toTimeOffPayload } from './serializers'
+import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]
   isModalOpen: boolean
   closeModal: Function
+  setShouldRefreshData: Function
   isEdit?: boolean
   editItem?: TeamDayOffManagementItem | number
 }
 
-const initialValues = {
-  teamMember: null, // {value: '', label: ''}
-  dayOffType: '',
-  startDate: new Date(),
-  endDate: new Date(),
-  numberOfHours: ''
-}
-
-const validationSchema = Yup.object().shape({
-  teamMember: Yup.object().shape({
-    label: Yup.string().required('Team member is required'),
-    value: Yup.string().required('Team member is required')
-  }),
-  // dayOffType: Yup.object().shape({
-  //   label: Yup.string().required('Day-off type is required'),
-  //   value: Yup.string().required('Day-off type is required')
-  // }),
-  startDate: Yup.date().required('Start date is required').typeError('Invalid date format'),
-  endDate: Yup.date()
-    .required('End date is required')
-    .typeError('Invalid date format')
-    .when('startDate', (startDate, schema) =>
-      !isNaN(Date.parse(startDate[0]))
-        ? schema.min(startDate, 'End date must be after start date')
-        : schema
-    )
-  // numberOfHours: Yup.number()
-})
-
-const areEqualDates = (startDate, endDate): boolean => {
-  if (!(startDate instanceof Date)) {
-    startDate = startDate.$d
-  }
-
-  if (!(endDate instanceof Date)) {
-    endDate = endDate.$d
-  }
-
-  return (
-    startDate.getFullYear() == endDate.getFullYear() &&
-    startDate.getMonth() == endDate.getMonth() &&
-    startDate.getDate() == endDate.getDate()
-  )
-}
-
 const NewTimeOff: React.FC<NewTimeOffProps> = props => {
-  const { teamMembers, isModalOpen, closeModal, isEdit, editItem } = props
+  const { teamMembers, isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData } = props
 
-  const formSubmit = async values => {
-    const startDate = dayjs(new Date(values.startDate)).format('YYYY-MM-DD')
-    // On yup validation the value stored on schema is malformed when an invalid end date was selected
-    const endDate = dayjs(new Date(values.endDate['$d'] || values.endDate)).format('YYYY-MM-DD')
-    // console.log(values.endDate)
-    console.log({ ...values, startDate, endDate })
+  const { showNotification } = useNotification()
+
+  const formSubmit = async (values: TimeOffValues) => {
+    try {
+      const payload = toTimeOffPayload(values, (editItem as TeamDayOffManagementItem))
+
+      if (isEdit) {
+        makeCorePutRequest(`/governance/teamTimeOff/${(editItem as TeamDayOffManagementItem)?.id}`, payload)
+      } else {
+        makeCorePostRequest('/governance/teamTimeOff', payload)
+      }
+
+      setShouldRefreshData(true)
+      closeModal()
+    } catch (error) {
+      showNotification({
+        message: `Error while saving time off data. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
   }
+
+  const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+
+  const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
   return (
     <Modal
@@ -99,12 +77,11 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
                     name="teamMember"
                     label="Team member"
                     options={teamMembers}
-                    onChange={value =>
-                      setFieldValue('teamMember', value ?? { value: '', label: '' })
-                    }
-                    // onBlur={handleBlur}
+                    onChange={value => setFieldValue('teamMember', value)}
                     value={values.teamMember}
-                    // disabled={isSubmitting}
+                    error={!!errors.teamMember}
+                    helperText={errors.teamMember as string}
+                    required
                   />
                 )}
               </Grid>
@@ -112,20 +89,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
                 <Input
                   label="Type of day-off"
                   type="select"
-                  values={[
-                    {
-                      label: 'Team Event',
-                      value: 'Team Event'
-                    },
-                    {
-                      label: 'Day-Off',
-                      value: 'Day-Off'
-                    },
-                    {
-                      label: 'Public Holiday',
-                      value: 'Public Holiday'
-                    }
-                  ]}
+                  values={dayOfTypes}
                   variant="standard"
                   width="100%"
                   value={values.dayOffType}
@@ -135,8 +99,10 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
                   }}
                   error={!!errors.dayOffType}
                   helperText={errors.dayOffType as string}
+                  required
                 />
               </Grid>
+
               <Grid xs={12} item>
                 <DatePicker
                   value={values.startDate}
@@ -146,7 +112,8 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
                   style={{ width: '100%' }}
                   error={!!errors.startDate}
                   helperText={errors.startDate as string}
-                ></DatePicker>
+                  required
+                />
               </Grid>
               <Grid xs={12} item>
                 <DatePicker
@@ -157,16 +124,21 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
                   style={{ width: '100%' }}
                   error={!!errors.endDate}
                   helperText={errors.endDate as string}
-                ></DatePicker>
+                  required
+                />
               </Grid>
-              {areEqualDates(values.startDate, values.endDate) && (
+              {areSameDayDates(values.startDate, values.endDate) && (
                 <Grid item xs={12}>
                   <Input
                     type="number"
                     name="numberOfHours"
                     label="Number of hours"
-                    fullWidth={true}
+                    fullWidth
                     variant="standard"
+                    value={values.numberOfHours}
+                    onChange={event => setFieldValue('numberOfHours', event.currentTarget.value)}
+                    error={!!errors.numberOfHours}
+                    helperText={errors.numberOfHours as string}
                   />
                 </Grid>
               )}
