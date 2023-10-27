@@ -6,13 +6,13 @@ import { Modal } from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { Form, Formik } from 'formik'
 import { FormInfoItems } from '../FormInfoItems'
-import { TeamDayOffManagementItem, TeamMember, TimeOffValues } from '../../../components/interfaces'
 import { areSameDayDates } from 'utils/helpers'
 import { dayOfTypes, getInitialValues, getValidationSchema } from './helpers'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { toTimeOffPayload } from './serializers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
+import { TeamDayOffManagementItem, TeamMember, TimeOffValues } from 'components/interfaces'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]

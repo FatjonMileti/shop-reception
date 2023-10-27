@@ -14,9 +14,9 @@ import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
 import { DeleteTimeOff } from './DeleteTimeOff'
 import { toTableRowItems } from './serializers'
-import { TeamDayOffManagementItem, TeamDayOffManagementTableFilter, TeamMember, ValueLabelInterface } from '../interfaces'
 import { PermissionRoles } from 'utils/enums'
 import { columns, roles } from './helpers'
+import { TeamDayOffManagementItem, TeamDayOffManagementTableFilter, ValueLabelInterface } from 'components/interfaces'
 
 const TeamDayOffManagement = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)

@@ -3,14 +3,14 @@ import { CircularProgress, Grid } from '@mui/material'
 import { Button, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { useNotification } from 'hooks'
-import { TeamAssignmentItem } from '../../interfaces'
-import { FormInfoItems } from 'components/TeamDayOffManagement/FormInfoItems'
 import { useFormik } from 'formik'
 import dayjs from 'dayjs'
 import { validationSchema } from './helpers'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
+import { TeamAssignmentItem } from 'components/interfaces'
+import { FormInfoItems } from 'components/governance/TeamDayOffManagement/FormInfoItems'
 
 interface EditTeamAssignmentProps {
   isModalOpen: boolean

@@ -1,8 +1,8 @@
-import { TeamDayOffManagement } from 'components/TeamDayOffManagement'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { Route } from 'react-router-dom'
 import { URLS } from './constants'
-import { TeamAssignment } from 'components/TeamAssignment'
+import { TeamDayOffManagement } from './TeamDayOffManagement'
+import { TeamAssignment } from './TeamAssignment'
 
 export const useGovernanceRoutes = applicationPages => {
   return (
