@@ -157,9 +157,7 @@ const ModalWithForm = ({
       if (isEmpty(errors)) {
         let result
         if (formAction.type === 'POST') {
-          const url = formData.getAll('imageUrl')
-            ? formAction.url
-            : formAction.updateWithoutImageUrl
+          const url = formData.has('fileObject') ? formAction.url : formAction.updateWithoutImageUrl
           result = await makeCorePostRequest(`${url}`, formData)
           showNotification({
             message: 'Item created successfully',
