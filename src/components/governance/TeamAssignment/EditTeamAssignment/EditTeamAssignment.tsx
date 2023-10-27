@@ -66,7 +66,14 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
         new Date(values.assignmentEndDate['$d'] || values.assignmentEndDate)
       ).format('YYYY-MM-DD')
 
-      const valuesToSubmit = { assignmentStartDate, assignmentEndDate }
+      const valuesToSubmit = {
+        id: values.id,
+        project: { id: (editItem as TeamAssignmentItem)?.projectId },
+        teamMember: { id: (editItem as TeamAssignmentItem)?.teamMemberId },
+        role: values.role,
+        assignmentStartDate,
+        assignmentEndDate
+      }
       mutate(valuesToSubmit)
     }
   })

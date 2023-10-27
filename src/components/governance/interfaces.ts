@@ -16,6 +16,8 @@ export interface TeamAssignmentItem {
   ipbKey: string
   role: string
   teamMemberName: string
+  teamMemberId: string
+  projectId: string
 }
 
 export interface ValueLabelInterface {
