@@ -124,27 +124,6 @@ const TeamAssignment: React.FC = props => {
     }
   }, [filterOptions])
 
-  useEffect(() => {
-    if (domainFilterValue) {
-      ;(async () => {
-        try {
-          const result = await makeCoreGetRequest(
-            `/governance/teamAssignments?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
-              domainFilterValue?.value
-            )}`
-          )
-          const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
-          setTeamMembers(resultOptions)
-        } catch (error) {
-          showNotification({
-            message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-            type: 'error'
-          })
-        }
-      })()
-    }
-  }, [domainFilterValue])
-
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
 

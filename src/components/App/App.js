@@ -21,6 +21,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { QueryClient, QueryCache, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { useGovernanceRoutes } from 'components/governance/routes'
+import { useVolumetryRoutes } from 'components/volumetry/routes'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -112,10 +113,11 @@ const App = () => {
   ])
 
   const governanceRoutes = useGovernanceRoutes(applicationPages)
+  const volumetryRoutes = useVolumetryRoutes(applicationPages)
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider {...oidcConfig}>
+    <AuthProvider {...oidcConfig}>
+      <QueryClientProvider client={queryClient}>
         <ThemeProvider theme="light">
           {((isLoadingAppModules || !hasLoadedAppModules) && (
             <div style={{ display: 'flex' }}>
@@ -126,32 +128,33 @@ const App = () => {
               <Routes>
                 {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
-              {/* private routes */}
-              <Route
-                path={URLS.AUTH_HOME}
-                element={
-                  <PrivateRoute
-                    component={Home}
-                    modules={modules}
-                    setSubdomainId={setSubdomainId}
-                  />
-                }
-              />
-              {governanceRoutes}
-              {applicationModulesPages.map(page =>
-                createRoute(
-                  {
-                    ...page,
-                    subdomainId,
-                    modules,
-                    applicationPages,
-                    hasLoadedActivities,
-                    isLoadingActivities
-                  },
-                  ServiceDomain
-                )
-              )}
-              {/* end of private routes */}
+                {/* private routes */}
+                <Route
+                  path={URLS.AUTH_HOME}
+                  element={
+                    <PrivateRoute
+                      component={Home}
+                      modules={modules}
+                      setSubdomainId={setSubdomainId}
+                    />
+                  }
+                />
+                {governanceRoutes}
+                {volumetryRoutes}
+                {applicationModulesPages.map(page =>
+                  createRoute(
+                    {
+                      ...page,
+                      subdomainId,
+                      modules,
+                      applicationPages,
+                      hasLoadedActivities,
+                      isLoadingActivities
+                    },
+                    ServiceDomain
+                  )
+                )}
+                {/* end of private routes */}
 
                 <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
                 <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
@@ -160,9 +163,10 @@ const App = () => {
             </Layout>
           )}
         </ThemeProvider>
-      </AuthProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </AuthProvider>
   )
 }
 

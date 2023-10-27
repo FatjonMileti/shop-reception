@@ -22,7 +22,8 @@ INSERT INTO
 VALUES
     (1, 'Governance', 'AssuredWorkload', '/governance', true),
     (2, 'Bakery', 'EventSeatOutlined', '/bakery', true),
-    (3, 'Suply OMNI', 'DonutLargeTwoTone', '/supplyOmni', true);
+    (3, 'Suply OMNI', 'DonutLargeTwoTone', '/supplyOmni', true),
+    (4, 'Volumetry', 'DonutLargeTwoTone', '/volumetry', true);
 
 
 -- application submodule with module id
@@ -37,7 +38,9 @@ VALUES
     (4, 'Manager magazin/raion', 'StoreManager', '/storeManager', true, 2),
     (5, 'Manager regiune', 'RegionManager', '/regionManager', true, 2),
     -- Supply OMNI
-    (6, 'Supply OMNI', 'DonutLargeTwoTone', 'supplyOmni', true, 3);
+    (6, 'Supply OMNI', 'DonutLargeTwoTone', '/supplyOmni', true, 3),
+    -- Volumetry
+    (7, 'Administrare Angajati', 'UsersManagement', '/employeeManagement', true, 4);
 
 
 -- activity with submodule id
@@ -87,7 +90,9 @@ VALUES
     (38, 'Cos de cumparaturi', 'ShoppingBasketOutlined', null, true, 6),
     (39, 'Listare proforme', 'ReceiptLongRounded', null, true, 6),
     (40, 'Vanzarile mele', 'StackedBarChartOutlined', null, true, 6),
-    (41, 'Comenzi finalizate', 'AccountBalance', null, true, 6);
+    (41, 'Comenzi finalizate', 'AccountBalance', null, true, 6),
+    -- Volumetry
+    (42, 'Management Angajati', 'UsersManagement', null, true, 7);
 
 
 -- screen with activity id (some are first screens)
@@ -96,7 +101,7 @@ INSERT INTO
 VALUES
     -- Governance
     (1, 'Team Day-Off Management', 'TimerOffOutlined', '/governance/projectTeam/teamDayOffManagement', true, 1, true),
-    (2, 'Team Assignment', 'HowToRegOutlined', '/teamAssignment', true, 2, true),
+    (2, 'Team Assignment', 'HowToRegOutlined', '/governance/projectTeam/teamAssignment', true, 2, true),
     (3, 'Effort Matrix', 'DonutSmallOutlined', '/effortMatrix', true, 3, true),
     (4, 'Project Milestones', 'AccountTreeOutlined', '/projectMilestones', true, 4, true),
     (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/teamCapacity', true, 5, true),
@@ -156,7 +161,9 @@ VALUES
     (54, 'Listare proforme', '', '/proformaList', true, 39, true),
     (55, 'Vanzarile mele', '', '/sales', true, 40, true),
     (56, 'Comenzi finalizate', '', '/bills', true, 41, true),
-    (57, 'PDF factura', '', '/bills/:id', true, 41, false);
+    (57, 'PDF factura', '', '/bills/:id', true, 41, false),
+    -- Volumetry
+    (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true);
 
 
 -- UI Schema with activity id and screen id
@@ -276,7 +283,10 @@ VALUES
     (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23),
     -- Supply OMNI
     -- GG_RO_HQ_IT-C4ASSIST
-    (11, 37), (11, 38), (11, 39), (11, 40), (11, 41);
+    (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
+    --Volumetry
+    -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
+    (1, 42);
 
 
 -- reset sequences
