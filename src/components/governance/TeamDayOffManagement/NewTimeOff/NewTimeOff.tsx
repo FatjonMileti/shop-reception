@@ -4,15 +4,14 @@ import { Grid } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { Modal } from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { Form, Formik } from 'formik'
+import { useFormik } from 'formik'
 import { FormInfoItems } from '../FormInfoItems'
-import { areSameDayDates } from 'utils/helpers'
+import { areSameDayDates, formatPayloadDate } from 'utils/helpers'
 import { dayOfTypes, getInitialValues, getValidationSchema } from './helpers'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
-import { toTimeOffPayload } from './serializers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { TeamDayOffManagementItem, TeamMember, TimeOffValues } from 'components/interfaces'
+import { TeamDayOffManagementItem, TeamMember, TimeOffValues } from '../../interfaces'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]
@@ -28,128 +27,141 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
 
   const { showNotification } = useNotification()
 
-  const formSubmit = async (values: TimeOffValues) => {
-    try {
-      const payload = toTimeOffPayload(values, (editItem as TeamDayOffManagementItem))
-
-      if (isEdit) {
-        makeCorePutRequest(`/governance/teamTimeOff/${(editItem as TeamDayOffManagementItem)?.id}`, payload)
-      } else {
-        makeCorePostRequest('/governance/teamTimeOff', payload)
-      }
-
-      setShouldRefreshData(true)
-      closeModal()
-    } catch (error) {
-      showNotification({
-        message: `Error while saving time off data. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
-    }
-  }
-
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
 
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
+  const formik = useFormik({
+    enableReinitialize: true,
+    validateOnChange: false,
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: async (values: any) => {
+      try {
+        const payload = {
+          teamMember: {
+            id: isEdit ? (editItem as TeamDayOffManagementItem).id : values.teamMember.value
+          },
+          dayOffType: values.dayOffType,
+          startDate: formatPayloadDate(values.startDate),
+          endDate: formatPayloadDate(values.endDate),
+          ...(values.numberOfHours && { numberOfHours: values.numberOfHours })
+        }
+
+        if (isEdit) {
+          makeCorePutRequest(`/governance/teamTimeOff/${formik.values.id}`, payload)
+        } else {
+          makeCorePostRequest('/governance/teamTimeOff', payload)
+        }
+
+        setShouldRefreshData(true)
+        closeModal()
+      } catch (error) {
+        showNotification({
+          message: `Error while saving time off data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  })
   return (
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
       modalTitle={isEdit ? 'Edit Time Off' : 'New Time Off'}
     >
-      <Formik
-        initialValues={initialValues}
-        onSubmit={formSubmit}
-        validationSchema={validationSchema}
-      >
-        {({ handleChange, values, setFieldValue, errors }) => (
-          <Form>
-            <Grid container spacing={4}>
-              <Grid xs={12} item>
-                {isEdit ? (
-                  <FormInfoItems
-                    items={[{ label: 'Person name:', name: (editItem as TeamDayOffManagementItem)?.teamMemberName }]}
-                  />
-                ) : (
-                  <AsyncAutocomplete
-                    variant="standard"
-                    name="teamMember"
-                    label="Team member"
-                    options={teamMembers}
-                    onChange={value => setFieldValue('teamMember', value)}
-                    value={values.teamMember}
-                    error={!!errors.teamMember}
-                    helperText={errors.teamMember as string}
-                    required
-                  />
-                )}
-              </Grid>
-              <Grid xs={12} item>
-                <Input
-                  label="Type of day-off"
-                  type="select"
-                  values={dayOfTypes}
-                  variant="standard"
-                  width="100%"
-                  value={values.dayOffType}
-                  onChange={event => {
-                    const inputValue = (event.target as HTMLInputElement).value
-                    setFieldValue('dayOffType', inputValue)
-                  }}
-                  error={!!errors.dayOffType}
-                  helperText={errors.dayOffType as string}
-                  required
-                />
-              </Grid>
+      <Grid container spacing={4}>
+        <Grid xs={12} item>
+          {isEdit ? (
+            <FormInfoItems
+              items={[
+                {
+                  label: 'Person name:',
+                  name: (editItem as TeamDayOffManagementItem)?.teamMemberName
+                }
+              ]}
+            />
+          ) : (
+            <AsyncAutocomplete
+              variant="standard"
+              name="teamMember"
+              label="Team member"
+              options={teamMembers}
+              onChange={value => formik.setFieldValue('teamMember', value)}
+              value={formik.values.teamMember}
+              error={!!formik.errors.teamMember}
+              helperText={formik.errors.teamMember as string}
+              required
+            />
+          )}
+        </Grid>
+        <Grid xs={12} item>
+          <Input
+            label="Type of day-off"
+            type="select"
+            values={dayOfTypes}
+            variant="standard"
+            width="100%"
+            value={formik.values.dayOffType}
+            onChange={event => {
+              const inputValue = (event.target as HTMLInputElement).value
+              formik.setFieldValue('dayOffType', inputValue)
+            }}
+            error={!!formik.errors.dayOffType}
+            helperText={formik.errors.dayOffType as string}
+            required
+          />
+        </Grid>
 
-              <Grid xs={12} item>
-                <DatePicker
-                  value={values.startDate}
-                  onChange={value => setFieldValue('startDate', value)}
-                  label="Start date"
-                  variant="standard"
-                  style={{ width: '100%' }}
-                  error={!!errors.startDate}
-                  helperText={errors.startDate as string}
-                  required
-                />
-              </Grid>
-              <Grid xs={12} item>
-                <DatePicker
-                  value={values.endDate}
-                  onChange={value => setFieldValue('endDate', value)}
-                  label="End date"
-                  variant="standard"
-                  style={{ width: '100%' }}
-                  error={!!errors.endDate}
-                  helperText={errors.endDate as string}
-                  required
-                />
-              </Grid>
-              {areSameDayDates(values.startDate, values.endDate) && (
-                <Grid item xs={12}>
-                  <Input
-                    type="number"
-                    name="numberOfHours"
-                    label="Number of hours"
-                    fullWidth
-                    variant="standard"
-                    value={values.numberOfHours}
-                    onChange={event => setFieldValue('numberOfHours', event.currentTarget.value)}
-                    error={!!errors.numberOfHours}
-                    helperText={errors.numberOfHours as string}
-                  />
-                </Grid>
-              )}
-              <Grid xs={12} item className={s.modalButtons}>
-                <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-                <Button variant="contained" type="submit" label="Submit" />
-              </Grid>
-            </Grid>
-          </Form>
+        <Grid xs={12} item>
+          <DatePicker
+            value={formik.values.startDate}
+            onChange={value => formik.setFieldValue('startDate', value)}
+            label="Start date"
+            variant="standard"
+            style={{ width: '100%' }}
+            error={!!formik.errors.startDate}
+            helperText={formik.errors.startDate as string}
+            required
+          />
+        </Grid>
+        <Grid xs={12} item>
+          <DatePicker
+            value={formik.values.endDate}
+            onChange={value => formik.setFieldValue('endDate', value)}
+            label="End date"
+            variant="standard"
+            style={{ width: '100%' }}
+            error={!!formik.errors.endDate}
+            helperText={formik.errors.endDate as string}
+            required
+          />
+        </Grid>
+        {areSameDayDates(formik.values.startDate, formik.values.endDate) && (
+          <Grid item xs={12}>
+            <Input
+              type="number"
+              name="numberOfHours"
+              label="Number of hours"
+              fullWidth
+              variant="standard"
+              value={formik.values.numberOfHours}
+              onChange={event => formik.setFieldValue('numberOfHours', event.currentTarget.value)}
+              error={!!formik.errors.numberOfHours}
+              helperText={formik.errors.numberOfHours as string}
+            />
+          </Grid>
         )}
-      </Formik>
+        <Grid xs={12} item className={s.modalButtons}>
+          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+          <Button
+            variant="contained"
+            type="submit"
+            label="Submit"
+            onClick={() => formik.handleSubmit()}
+          />
+        </Grid>
+      </Grid>
     </Modal>
   )
 }

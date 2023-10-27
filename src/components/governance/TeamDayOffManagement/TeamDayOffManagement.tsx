@@ -16,7 +16,11 @@ import { DeleteTimeOff } from './DeleteTimeOff'
 import { toTableRowItems } from './serializers'
 import { PermissionRoles } from 'utils/enums'
 import { columns, roles } from './helpers'
-import { TeamDayOffManagementItem, TeamDayOffManagementTableFilter, ValueLabelInterface } from 'components/interfaces'
+import {
+  TeamDayOffManagementItem,
+  TeamDayOffManagementTableFilter,
+  ValueLabelInterface
+} from '../interfaces'
 
 const TeamDayOffManagement = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)

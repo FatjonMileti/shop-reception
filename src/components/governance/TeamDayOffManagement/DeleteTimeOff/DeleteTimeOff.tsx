@@ -5,7 +5,7 @@ import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { makeCoreDeleteRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { TeamDayOffManagementItem } from 'components/interfaces'
+import { TeamDayOffManagementItem } from '../../interfaces'
 
 interface DeleteTimeOffProps {
   isModalOpen: boolean

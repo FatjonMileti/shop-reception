@@ -9,7 +9,7 @@ import { validationSchema } from './helpers'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
-import { TeamAssignmentItem } from 'components/interfaces'
+import { TeamAssignmentItem } from '../../interfaces'
 import { FormInfoItems } from 'components/governance/TeamDayOffManagement/FormInfoItems'
 
 interface EditTeamAssignmentProps {
