@@ -8,14 +8,14 @@ import dayjs from 'dayjs'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import { FormInfoItems } from '../FormInfoItems'
-import { Item, TeamMember } from '../interfaces'
+import { TeamDayOffManagementItem, TeamMember } from '../../interfaces'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]
   isModalOpen: boolean
   closeModal: Function
   isEdit?: boolean
-  editItem?: Item | number
+  editItem?: TeamDayOffManagementItem | number
 }
 
 const initialValues = {
@@ -91,7 +91,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
               <Grid xs={12} item>
                 {isEdit ? (
                   <FormInfoItems
-                    items={[{ label: 'Person name:', name: (editItem as Item)?.teamMemberName }]}
+                    items={[{ label: 'Person name:', name: (editItem as TeamDayOffManagementItem)?.teamMemberName }]}
                   />
                 ) : (
                   <AsyncAutocomplete

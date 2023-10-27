@@ -13,9 +13,9 @@ import { NewTimeOff } from './NewTimeOff'
 import { Button, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
 import { DeleteTimeOff } from './DeleteTimeOff'
-import { Item, TableFilter, TeamMember, ValueLabelInterface } from './interfaces'
-import { PermissionRoles } from 'utils/enums'
 import { toTableRowItems } from './serializers'
+import { TeamDayOffManagementItem, TeamDayOffManagementTableFilter, TeamMember, ValueLabelInterface } from '../interfaces'
+import { PermissionRoles } from 'utils/enums'
 
 const columns = [
   {
@@ -52,7 +52,7 @@ const columns = [
 const TeamDayOffManagement = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
   const [filterOptions, setFilterOptions] = useState<ValueLabelInterface[]>([])
-  const [tableItems, setTableItems] = useState<Item[]>([])
+  const [tableItems, setTableItems] = useState<TeamDayOffManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
@@ -61,8 +61,8 @@ const TeamDayOffManagement = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<Item | number>(0)
-  const [tableFilter, setTableFilter] = useState<TableFilter>({
+  const [selectedRow, setSelectedRow] = useState<TeamDayOffManagementItem | number>(0)
+  const [tableFilter, setTableFilter] = useState<TeamDayOffManagementTableFilter>({
     teamMember: null,
     dayOffType: null,
     startDate: null,

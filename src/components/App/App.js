@@ -20,7 +20,25 @@ import { useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
+import { TeamAssignment } from '../TeamAssignment'
+import { QueryClient, QueryCache, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false
+    }
+  },
+  queryCache: new QueryCache({
+    onError: (error, query) => {
+      if (query.state.status === 'error') {
+        console.log(`Something went wront: ${error.message}`)
+      }
+    }
+  })
+})
 const App = () => {
   const [modules, setModules] = useState([])
   const [applicationPages, setApplicationPages] = useState([])
@@ -96,62 +114,75 @@ const App = () => {
   ])
 
   return (
-    <AuthProvider {...oidcConfig}>
-      <ThemeProvider theme="light">
-        {((isLoadingAppModules || !hasLoadedAppModules) && (
-          <div style={{ display: 'flex' }}>
-            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-          </div>
-        )) || (
-          <Layout modules={modules} setSubdomainId={setSubdomainId}>
-            <Routes>
-              {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider {...oidcConfig}>
+        <ThemeProvider theme="light">
+          {((isLoadingAppModules || !hasLoadedAppModules) && (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+            </div>
+          )) || (
+            <Layout modules={modules} setSubdomainId={setSubdomainId}>
+              <Routes>
+                {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
-              {/* private routes */}
-              <Route
-                path={URLS.AUTH_HOME}
-                element={
-                  <PrivateRoute
-                    component={Home}
-                    modules={modules}
-                    setSubdomainId={setSubdomainId}
-                  />
-                }
-              />
-              <Route
-                path={URLS.AUTH_TEAM_DAY_OFF_MANAGEMENT}
-                element={
-                  <PrivateRoute
-                    component={TeamDayOffManagement}
-                    applicationPages={applicationPages}
-                    checkIsAuthorized
-                  />
-                }
-              />
-              {applicationModulesPages.map(page =>
-                createRoute(
-                  {
-                    ...page,
-                    subdomainId,
-                    modules,
-                    applicationPages,
-                    hasLoadedActivities,
-                    isLoadingActivities
-                  },
-                  ServiceDomain
-                )
-              )}
-              {/* {applicationPages.map(page => createRoute(page, DynamicComponent))} */}
-              {/* end of private routes */}
+                {/* private routes */}
+                <Route
+                  path={URLS.AUTH_HOME}
+                  element={
+                    <PrivateRoute
+                      component={Home}
+                      modules={modules}
+                      setSubdomainId={setSubdomainId}
+                    />
+                  }
+                />
+                <Route
+                  path={URLS.AUTH_TEAM_DAY_OFF_MANAGEMENT}
+                  element={
+                    <PrivateRoute
+                      component={TeamDayOffManagement}
+                      applicationPages={applicationPages}
+                      checkIsAuthorized
+                    />
+                  }
+                />
+                <Route
+                  path={URLS.AUTH_TEAM_ASSIGNMENT}
+                  element={
+                    <PrivateRoute
+                      component={TeamAssignment}
+                      applicationPages={applicationPages}
+                      checkIsAuthorized
+                    />
+                  }
+                />
+                {applicationModulesPages.map(page =>
+                  createRoute(
+                    {
+                      ...page,
+                      subdomainId,
+                      modules,
+                      applicationPages,
+                      hasLoadedActivities,
+                      isLoadingActivities
+                    },
+                    ServiceDomain
+                  )
+                )}
+                {/* {applicationPages.map(page => createRoute(page, DynamicComponent))} */}
+                {/* end of private routes */}
 
-              <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
-              <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
-              {applicationPages.length && <Route path="*" element={<NotFound />} />}
-            </Routes>
-          </Layout>
-        )}
-      </ThemeProvider>
-    </AuthProvider>
+                <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
+                <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
+                {applicationPages.length && <Route path="*" element={<NotFound />} />}
+              </Routes>
+            </Layout>
+          )}
+        </ThemeProvider>
+      </AuthProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   )
 }
 

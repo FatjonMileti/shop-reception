@@ -1,0 +1,319 @@
+import { useEffect, useMemo, useState } from 'react'
+import { Box, Grid, Paper, debounce } from '@mui/material'
+import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
+import { makeCoreGetRequest } from 'utils/api'
+import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
+import { useNotification, usePermissions } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { toTableRowItems } from './serializers'
+import { Table } from 'components/core-ui/Table'
+import { Input } from 'components/core-ui/Input'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import { Edit } from '@mui/icons-material'
+import { PermissionRoles } from 'utils/enums'
+import {
+  TeamAssignmentItem,
+  TeamAssignmentTableFilter,
+  ValueLabelInterface
+} from 'components/interfaces'
+import { EditTeamAssignment } from './EditTeamAssignment'
+
+const columns = [
+  {
+    title: 'Person',
+    field: 'teamMemberName',
+    align: 'left'
+  },
+  {
+    title: 'Role',
+    field: 'role',
+    align: 'left'
+  },
+  {
+    title: 'IIB Key',
+    field: 'iibKey',
+    align: 'left',
+    collapsible: true
+  },
+  {
+    title: 'IPB Key',
+    field: 'ipbKey',
+    align: 'left',
+    collapsible: true
+  },
+  {
+    title: 'Assigned Project',
+    field: 'assignedProject',
+    align: 'left',
+    collapsible: true
+  },
+  {
+    title: 'Assignment Start Date',
+    field: 'assignmentStartDate',
+    align: 'left',
+    collapsible: true
+  },
+  {
+    title: 'Assignment End Date',
+    field: 'assignmentEndDate',
+    align: 'left',
+    collapsible: true
+  }
+]
+
+const TeamAssignment: React.FC = props => {
+  const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
+  const [filterOptions, setFilterOptions] = useState<ValueLabelInterface[]>([])
+  const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [teamMembers, setTeamMembers] = useState(null)
+
+  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<TeamAssignmentItem | number>(0)
+
+  const [tableFilter, setTableFilter] = useState<TeamAssignmentTableFilter>({
+    teamMemberName: null,
+    iibKey: null,
+    ipbKey: null,
+    assignedProject: null
+  })
+
+  const { showNotification } = useNotification()
+
+  const { canCreate, canEdit, canDelete } = usePermissions({
+    createRoles: [
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
+    ],
+    editRoles: [
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
+    ],
+    deleteRoles: [
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
+    ]
+  })
+
+  useEffect(() => {
+    ;(async () => {
+      try {
+        const result = await makeCoreGetRequest('/governance/domains')
+
+        const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
+        setFilterOptions(resultOptions)
+      } catch (error) {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    })()
+  }, [])
+
+  useEffect(() => {
+    if (filterOptions.length) {
+      setDomainFilterValue(filterOptions[0])
+    }
+  }, [filterOptions])
+
+  useEffect(() => {
+    if (domainFilterValue) {
+      ;(async () => {
+        try {
+          const result = await makeCoreGetRequest(
+            `/governance/teamAssignments?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
+              domainFilterValue?.value
+            )}`
+          )
+          const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
+          setTeamMembers(resultOptions)
+        } catch (error) {
+          showNotification({
+            message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        }
+      })()
+    }
+  }, [domainFilterValue])
+
+  const openEditModal = (): void => setIsEditModalOpen(true)
+  const closeEditModal = (): void => setIsEditModalOpen(false)
+
+  const selectRow = row => {
+    setSelectedRow(row)
+    openEditModal()
+  }
+
+  const columnsWithActions = useMemo(() => {
+    let result = columns
+    if (canEdit || canDelete) {
+      const actionsRow = {
+        title: '',
+        field: 'actions',
+        align: 'right',
+        width: '112px',
+        collapsible: 'true',
+        render: row => (
+          <Box display="flex">
+            {canEdit && (
+              <Button
+                onClick={() => selectRow(row)}
+                style={{ minWidth: '0.7rem', background: 'transparent' }}
+                label=""
+              >
+                <Edit />
+              </Button>
+            )}
+          </Box>
+        )
+      } as any
+
+      result = [...columns, actionsRow]
+    }
+    return result
+  }, [columns, canEdit, canDelete, teamMembers])
+
+  const handleFilterChange = value => {
+    setDomainFilterValue(value)
+    setShouldRefreshData(true)
+  }
+
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+    setIsLoading(true)
+    try {
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: '/governance/teamAssignments',
+          filters: [{ name: 'teamMember.domain', value: domainFilterValue.value }],
+          tableFilters,
+          page,
+          rowsPerPage,
+          order,
+          orderBy
+        })
+      )
+      setTableItems(toTableRowItems(response.list))
+      setTotalCount(response.page.totalCount)
+      setIsLoading(false)
+    } catch (error) {
+      showNotification({
+        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+  const debouncedHandleRemoteData = debounce(fetchData, 500)
+
+  const tableFilterFields = [
+    {
+      name: 'teamMember.name',
+      label: 'Person',
+      type: 'text',
+      filter: (
+        <Input type="text" name="teamMember.name" label="Person" variant="standard" value="" />
+      )
+    },
+    {
+      name: 'project.name',
+      label: 'Assigned Project',
+      type: 'text',
+
+      filter: (
+        <Input
+          type="text"
+          name="assignedProject"
+          label="Assigned Project"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, assignedProject: value })}
+          value={tableFilter.assignedProject}
+        />
+      )
+    },
+    {
+      name: 'project.iibKey',
+      label: 'IIB Key',
+      type: 'text',
+
+      filter: (
+        <Input
+          type="text"
+          name="iibKey"
+          label="IIB Key"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, iibKey: value })}
+          value={tableFilter.iibKey}
+        />
+      )
+    },
+    {
+      name: 'project.ipbKey',
+      label: 'IPB Key',
+      type: 'text',
+
+      filter: (
+        <Input
+          type="text"
+          name="ipbKey"
+          label="IPB Key"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, ipbKey: value })}
+          value={tableFilter.ipbKey}
+        />
+      )
+    }
+  ]
+  return (
+    <div className={s.mainContainer}>
+      <Paper className={s.filtersContainer}>
+        <Grid container spacing={4}>
+          <Grid xs={12} md={3} item>
+            <AsyncAutocomplete
+              variant="standard"
+              name="teamMember.domain"
+              label="Domain"
+              disableClearable
+              value={domainFilterValue}
+              options={filterOptions}
+              onChange={handleFilterChange}
+            />
+          </Grid>
+        </Grid>
+      </Paper>
+      {domainFilterValue && (
+        <Box>
+          <EditTeamAssignment
+            isModalOpen={isEditModalOpen}
+            closeModal={closeEditModal}
+            editItem={selectedRow}
+          />
+          <Table
+            hideCheckbox
+            orderBy="teamMember.name"
+            order="asc"
+            columns={columnsWithActions}
+            items={tableItems}
+            fetchData={debouncedHandleRemoteData}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            filters={tableFilterFields}
+          />
+        </Box>
+      )}
+    </div>
+  )
+}
+
+export default TeamAssignment
