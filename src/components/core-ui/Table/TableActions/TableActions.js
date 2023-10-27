@@ -56,7 +56,12 @@ const TableActions = ({
           formButtons={editAction.formButtons}
           formAction={{
             type: editAction.updateUrlType,
-            url: editAction.updateUrl.replace(':id', itemId)
+            url: editAction.updateUrl?.replace(':id', itemId),
+            ...(editAction.updateWithoutImageUrl
+              ? {
+                  updateWithoutImageUrl: editAction.updateWithoutImageUrl.replace(':id', itemId)
+                }
+              : {})
           }}
           editedItemId={itemId}
           editedItemUrl={editAction.getUrl}
