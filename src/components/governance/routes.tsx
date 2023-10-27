@@ -7,16 +7,7 @@ import { TeamAssignment } from 'components/TeamAssignment'
 export const useGovernanceRoutes = applicationPages => {
   return (
     <>
-      <Route
-        element={
-          <PrivateRoute
-            component={TeamDayOffManagement}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
-        }
-        path={URLS.AUTH_PROJECT_TEAM}
-      >
+      <Route path={URLS.AUTH_PROJECT_TEAM}>
         <Route
           path={URLS.AUTH_TEAM_DAY_OFF_MANAGEMENT}
           element={
