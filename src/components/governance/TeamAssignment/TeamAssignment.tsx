@@ -17,7 +17,7 @@ import {
   TeamAssignmentItem,
   TeamAssignmentTableFilter,
   ValueLabelInterface
-} from 'components/interfaces'
+} from '../interfaces'
 import { EditTeamAssignment } from './EditTeamAssignment'
 
 const columns = [
@@ -71,9 +71,7 @@ const TeamAssignment: React.FC = props => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [teamMembers, setTeamMembers] = useState(null)
 
-  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<TeamAssignmentItem | number>(0)
 

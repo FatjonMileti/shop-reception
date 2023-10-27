@@ -9,8 +9,10 @@ import { validationSchema } from './helpers'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
-import { TeamAssignmentItem } from 'components/interfaces'
+import { TeamAssignmentItem } from '../../interfaces'
 import { FormInfoItems } from 'components/governance/TeamDayOffManagement/FormInfoItems'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+dayjs.extend(customParseFormat)
 
 interface EditTeamAssignmentProps {
   isModalOpen: boolean
