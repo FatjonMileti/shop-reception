@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
 import { Home } from '../Home'
-import { TeamDayOffManagement } from '../TeamDayOffManagement'
 import { LoginOIDC } from '../LoginOIDC'
 import { LogoutOIDC } from '../LogoutOIDC'
 import { ServiceDomain } from '../ServiceDomain'
@@ -12,7 +11,6 @@ import { ThemeProvider } from '@fullscreendigital/carrefour-dex-fe'
 import { createRoute } from './helpers'
 import { makeDesignerGetRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
-import { DynamicComponent } from '../DynamicComponent'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
 import { oidcConfig } from 'utils/authService'
@@ -20,6 +18,7 @@ import { useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
+import { useGovernanceRoutes } from 'components/governance/routes'
 
 const App = () => {
   const [modules, setModules] = useState([])
@@ -95,6 +94,8 @@ const App = () => {
     isLoadingActivities
   ])
 
+  const governanceRoutes = useGovernanceRoutes(applicationPages)
+
   return (
     <AuthProvider {...oidcConfig}>
       <ThemeProvider theme="light">
@@ -118,16 +119,7 @@ const App = () => {
                   />
                 }
               />
-              <Route
-                path={URLS.AUTH_TEAM_DAY_OFF_MANAGEMENT}
-                element={
-                  <PrivateRoute
-                    component={TeamDayOffManagement}
-                    applicationPages={applicationPages}
-                    checkIsAuthorized
-                  />
-                }
-              />
+              {governanceRoutes}
               {applicationModulesPages.map(page =>
                 createRoute(
                   {
@@ -141,7 +133,6 @@ const App = () => {
                   ServiceDomain
                 )
               )}
-              {/* {applicationPages.map(page => createRoute(page, DynamicComponent))} */}
               {/* end of private routes */}
 
               <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
