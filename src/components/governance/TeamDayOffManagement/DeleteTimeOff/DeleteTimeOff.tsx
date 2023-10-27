@@ -5,12 +5,12 @@ import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { makeCoreDeleteRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { Item } from '../interfaces'
+import { TeamDayOffManagementItem } from 'components/interfaces'
 
 interface DeleteTimeOffProps {
   isModalOpen: boolean
   closeModal: Function
-  deleteItem: Item | number
+  deleteItem: TeamDayOffManagementItem | number
   setShouldRefreshData: Function
 }
 
@@ -20,7 +20,7 @@ const DeleteTimeOff: React.FC<DeleteTimeOffProps> = props => {
 
   const onDelete = async () => {
     try {
-      const itemId = (deleteItem as Item)?.id;
+      const itemId = (deleteItem as TeamDayOffManagementItem)?.id;
 
       await makeCoreDeleteRequest(`/governance/teamTimeOff/${itemId}`)
 

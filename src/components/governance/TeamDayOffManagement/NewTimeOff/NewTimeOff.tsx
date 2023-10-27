@@ -6,13 +6,13 @@ import { Modal } from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { Form, Formik } from 'formik'
 import { FormInfoItems } from '../FormInfoItems'
-import { Item, TeamMember, TimeOffValues } from '../interfaces'
 import { areSameDayDates } from 'utils/helpers'
 import { dayOfTypes, getInitialValues, getValidationSchema } from './helpers'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { toTimeOffPayload } from './serializers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
+import { TeamDayOffManagementItem, TeamMember, TimeOffValues } from 'components/interfaces'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]
@@ -20,7 +20,7 @@ interface NewTimeOffProps {
   closeModal: Function
   setShouldRefreshData: Function
   isEdit?: boolean
-  editItem?: Item
+  editItem?: TeamDayOffManagementItem | number
 }
 
 const NewTimeOff: React.FC<NewTimeOffProps> = props => {
@@ -30,10 +30,10 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
 
   const formSubmit = async (values: TimeOffValues) => {
     try {
-      const payload = toTimeOffPayload(values, editItem)
+      const payload = toTimeOffPayload(values, (editItem as TeamDayOffManagementItem))
 
       if (isEdit) {
-        makeCorePutRequest(`/governance/teamTimeOff/${editItem.id}`, payload)
+        makeCorePutRequest(`/governance/teamTimeOff/${(editItem as TeamDayOffManagementItem)?.id}`, payload)
       } else {
         makeCorePostRequest('/governance/teamTimeOff', payload)
       }
@@ -69,7 +69,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
               <Grid xs={12} item>
                 {isEdit ? (
                   <FormInfoItems
-                    items={[{ label: 'Person name:', name: (editItem as Item)?.teamMemberName }]}
+                    items={[{ label: 'Person name:', name: (editItem as TeamDayOffManagementItem)?.teamMemberName }]}
                   />
                 ) : (
                   <AsyncAutocomplete

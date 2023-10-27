@@ -1,39 +1,108 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Box, Grid, Paper, debounce } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import s from './TeamDayOffManagement.modules.scss'
+import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { toTableRowItems } from './serializers'
 import { Table } from 'components/core-ui/Table'
 import { Input } from 'components/core-ui/Input'
-import { NewTimeOff } from './NewTimeOff'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { Delete, Edit } from '@mui/icons-material'
-import { DeleteTimeOff } from './DeleteTimeOff'
-import { Item, ValueLabelInterface } from './interfaces'
-import { toTableRowItems } from './serializers'
-import { columns, roles } from './helpers'
+import { Edit } from '@mui/icons-material'
+import { PermissionRoles } from 'utils/enums'
+import {
+  TeamAssignmentItem,
+  TeamAssignmentTableFilter,
+  ValueLabelInterface
+} from 'components/interfaces'
+import { EditTeamAssignment } from './EditTeamAssignment'
 
-const TeamDayOffManagement = () => {
+const columns = [
+  {
+    title: 'Person',
+    field: 'teamMemberName',
+    align: 'left'
+  },
+  {
+    title: 'Role',
+    field: 'role',
+    align: 'left'
+  },
+  {
+    title: 'IIB Key',
+    field: 'iibKey',
+    align: 'left',
+    collapsible: true
+  },
+  {
+    title: 'IPB Key',
+    field: 'ipbKey',
+    align: 'left',
+    collapsible: true
+  },
+  {
+    title: 'Assigned Project',
+    field: 'assignedProject',
+    align: 'left',
+    collapsible: true
+  },
+  {
+    title: 'Assignment Start Date',
+    field: 'assignmentStartDate',
+    align: 'left',
+    collapsible: true
+  },
+  {
+    title: 'Assignment End Date',
+    field: 'assignmentEndDate',
+    align: 'left',
+    collapsible: true
+  }
+]
+
+const TeamAssignment: React.FC = props => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
   const [filterOptions, setFilterOptions] = useState<ValueLabelInterface[]>([])
-  const [tableItems, setTableItems] = useState<Item[]>([])
+  const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-
   const [teamMembers, setTeamMembers] = useState(null)
+
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<Item>(null)
+  const [selectedRow, setSelectedRow] = useState<TeamAssignmentItem | number>(0)
+
+  const [tableFilter, setTableFilter] = useState<TeamAssignmentTableFilter>({
+    teamMemberName: null,
+    iibKey: null,
+    ipbKey: null,
+    assignedProject: null
+  })
 
   const { showNotification } = useNotification()
 
-  const { canCreate, canEdit, canDelete } = usePermissions(roles)
+  const { canCreate, canEdit, canDelete } = usePermissions({
+    createRoles: [
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
+    ],
+    editRoles: [
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
+    ],
+    deleteRoles: [
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
+    ]
+  })
 
   useEffect(() => {
     ;(async () => {
@@ -62,7 +131,7 @@ const TeamDayOffManagement = () => {
       ;(async () => {
         try {
           const result = await makeCoreGetRequest(
-            `/governance/teamMembers?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
+            `/governance/teamAssignments?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
               domainFilterValue?.value
             )}`
           )
@@ -78,23 +147,16 @@ const TeamDayOffManagement = () => {
     }
   }, [domainFilterValue])
 
-  const openNewModal = (): void => setIsNewModalOpen(true)
-  const closeNewModal = (): void => setIsNewModalOpen(false)
-
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
 
-  const openDeleteModal = (): void => setIsDeleteModalOpen(true)
-  const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
-
-  const selectRow = (row, action) => {
+  const selectRow = row => {
     setSelectedRow(row)
-    action === 'edit' ? openEditModal() : openDeleteModal()
+    openEditModal()
   }
 
   const columnsWithActions = useMemo(() => {
     let result = columns
-
     if (canEdit || canDelete) {
       const actionsRow = {
         title: '',
@@ -106,17 +168,11 @@ const TeamDayOffManagement = () => {
           <Box display="flex">
             {canEdit && (
               <Button
-                onClick={() => selectRow(row, 'edit')}
+                onClick={() => selectRow(row)}
                 style={{ minWidth: '0.7rem', background: 'transparent' }}
                 label=""
               >
                 <Edit />
-              </Button>
-            )}
-
-            {canDelete && (
-              <Button onClick={() => selectRow(row, 'delete')} label="">
-                <Delete />
               </Button>
             )}
           </Box>
@@ -138,7 +194,7 @@ const TeamDayOffManagement = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/governance/teamTimeOff',
+          url: '/governance/teamAssignments',
           filters: [{ name: 'teamMember.domain', value: domainFilterValue.value }],
           tableFilters,
           page,
@@ -147,14 +203,7 @@ const TeamDayOffManagement = () => {
           orderBy
         })
       )
-
-      const responseList = response.list.map(item =>
-        typeof item.numberOfHours === 'undefined' || item.numberOfHours === null
-          ? { ...item, numberOfHours: '' }
-          : item
-      )
-
-      setTableItems(toTableRowItems(responseList))
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -169,14 +218,61 @@ const TeamDayOffManagement = () => {
   const tableFilterFields = [
     {
       name: 'teamMember.name',
-      label: 'Team member',
+      label: 'Person',
       type: 'text',
       filter: (
-        <Input type="text" name="teamMember.name" label="Team member" variant="standard" value="" />
+        <Input type="text" name="teamMember.name" label="Person" variant="standard" value="" />
+      )
+    },
+    {
+      name: 'project.name',
+      label: 'Assigned Project',
+      type: 'text',
+
+      filter: (
+        <Input
+          type="text"
+          name="assignedProject"
+          label="Assigned Project"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, assignedProject: value })}
+          value={tableFilter.assignedProject}
+        />
+      )
+    },
+    {
+      name: 'project.iibKey',
+      label: 'IIB Key',
+      type: 'text',
+
+      filter: (
+        <Input
+          type="text"
+          name="iibKey"
+          label="IIB Key"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, iibKey: value })}
+          value={tableFilter.iibKey}
+        />
+      )
+    },
+    {
+      name: 'project.ipbKey',
+      label: 'IPB Key',
+      type: 'text',
+
+      filter: (
+        <Input
+          type="text"
+          name="ipbKey"
+          label="IPB Key"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, ipbKey: value })}
+          value={tableFilter.ipbKey}
+        />
       )
     }
   ]
-
   return (
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
@@ -196,34 +292,19 @@ const TeamDayOffManagement = () => {
       </Paper>
       {domainFilterValue && (
         <Box>
-          <NewTimeOff
-            teamMembers={teamMembers}
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <NewTimeOff
+          <EditTeamAssignment
             isModalOpen={isEditModalOpen}
             closeModal={closeEditModal}
             editItem={selectedRow}
-            setShouldRefreshData={setShouldRefreshData}
-            isEdit
-          />
-          <DeleteTimeOff
-            isModalOpen={isDeleteModalOpen}
-            closeModal={closeDeleteModal}
-            deleteItem={selectedRow}
-            setShouldRefreshData={setShouldRefreshData}
           />
           <Table
             hideCheckbox
-            orderBy="teamMemberName"
+            orderBy="teamMember.name"
             order="asc"
             columns={columnsWithActions}
             items={tableItems}
             fetchData={debouncedHandleRemoteData}
             isLoading={isLoading}
-            newButton={canCreate ? { onClick: openNewModal } : null}
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
@@ -235,4 +316,4 @@ const TeamDayOffManagement = () => {
   )
 }
 
-export default TeamDayOffManagement
+export default TeamAssignment

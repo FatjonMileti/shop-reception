@@ -18,8 +18,25 @@ import { useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
+import { QueryClient, QueryCache, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { useGovernanceRoutes } from 'components/governance/routes'
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false
+    }
+  },
+  queryCache: new QueryCache({
+    onError: (error, query) => {
+      if (query.state.status === 'error') {
+        console.log(`Something went wront: ${error.message}`)
+      }
+    }
+  })
+})
 const App = () => {
   const [modules, setModules] = useState([])
   const [applicationPages, setApplicationPages] = useState([])
@@ -97,16 +114,17 @@ const App = () => {
   const governanceRoutes = useGovernanceRoutes(applicationPages)
 
   return (
-    <AuthProvider {...oidcConfig}>
-      <ThemeProvider theme="light">
-        {((isLoadingAppModules || !hasLoadedAppModules) && (
-          <div style={{ display: 'flex' }}>
-            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-          </div>
-        )) || (
-          <Layout modules={modules} setSubdomainId={setSubdomainId}>
-            <Routes>
-              {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider {...oidcConfig}>
+        <ThemeProvider theme="light">
+          {((isLoadingAppModules || !hasLoadedAppModules) && (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+            </div>
+          )) || (
+            <Layout modules={modules} setSubdomainId={setSubdomainId}>
+              <Routes>
+                {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
               {/* private routes */}
               <Route
@@ -135,14 +153,16 @@ const App = () => {
               )}
               {/* end of private routes */}
 
-              <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
-              <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
-              {applicationPages.length && <Route path="*" element={<NotFound />} />}
-            </Routes>
-          </Layout>
-        )}
-      </ThemeProvider>
-    </AuthProvider>
+                <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
+                <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
+                {applicationPages.length && <Route path="*" element={<NotFound />} />}
+              </Routes>
+            </Layout>
+          )}
+        </ThemeProvider>
+      </AuthProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   )
 }
 
