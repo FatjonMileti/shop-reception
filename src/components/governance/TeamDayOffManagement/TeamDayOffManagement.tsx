@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Box, Grid, Paper, debounce } from '@mui/material'
+import { Box, CircularProgress, Grid, Paper, debounce } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -14,80 +14,76 @@ import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
 import { DeleteTimeOff } from './DeleteTimeOff'
 import { toTableRowItems } from './serializers'
-import { PermissionRoles } from 'utils/enums'
 import { columns, roles } from './helpers'
 import {
   TeamDayOffManagementItem,
   TeamDayOffManagementTableFilter,
   ValueLabelInterface
 } from '../interfaces'
+import { useQuery } from 'react-query'
 
 const TeamDayOffManagement = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
-  const [filterOptions, setFilterOptions] = useState<ValueLabelInterface[]>([])
   const [tableItems, setTableItems] = useState<TeamDayOffManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  const [teamMembers, setTeamMembers] = useState(null)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<TeamDayOffManagementItem | number>(0)
-  const [tableFilter, setTableFilter] = useState<TeamDayOffManagementTableFilter>({
-    teamMember: null,
-    dayOffType: null,
-    startDate: null,
-    endDate: null
-  })
 
   const { showNotification } = useNotification()
 
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
 
-  useEffect(() => {
-    ;(async () => {
-      try {
-        const result = await makeCoreGetRequest('/governance/domains')
+  const {
+    data: filterOptions,
+    isLoading: isFilterOptionsLoading,
+  } = useQuery(
+    ['domains'],
+    async () => {
+      const result = await makeCoreGetRequest('/governance/domains')
+      const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
 
-        const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
-        setFilterOptions(resultOptions)
-      } catch (error) {
+      setDomainFilterValue(resultOptions[0])
+      return resultOptions || []
+    },
+    {
+      onError: error => {
         showNotification({
           message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
-    })()
-  }, [])
-
-  useEffect(() => {
-    if (filterOptions.length) {
-      setDomainFilterValue(filterOptions[0])
     }
-  }, [filterOptions])
+  )
 
-  useEffect(() => {
-    if (domainFilterValue) {
-      ;(async () => {
-        try {
-          const result = await makeCoreGetRequest(
-            `/governance/teamMembers?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
-              domainFilterValue?.value
-            )}`
-          )
-          const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
-          setTeamMembers(resultOptions)
-        } catch (error) {
-          showNotification({
-            message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-            type: 'error'
-          })
-        }
-      })()
+  const { data: teamMembers, isLoading: isTeamMembersLoading } = useQuery(
+    ['teamMembers', domainFilterValue],
+    async () => {
+      if (domainFilterValue === null) {
+        return null
+      }
+
+      const result = await makeCoreGetRequest(
+        `/governance/teamMembers?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
+          domainFilterValue?.value
+        )}`
+      )
+      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
+      return resultOptions || null
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
     }
-  }, [domainFilterValue])
+  )
 
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
@@ -175,7 +171,6 @@ const TeamDayOffManagement = () => {
       })
     }
   }
-  const debouncedHandleRemoteData = debounce(fetchData, 500)
 
   const tableFilterFields = [
     {
@@ -192,6 +187,12 @@ const TeamDayOffManagement = () => {
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
+          {(isFilterOptionsLoading || isTeamMembersLoading) && (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+            </div>
+          )}
+
           <Grid xs={12} md={3} item>
             <AsyncAutocomplete
               variant="standard"
@@ -232,7 +233,7 @@ const TeamDayOffManagement = () => {
             order="asc"
             columns={columnsWithActions}
             items={tableItems}
-            fetchData={debouncedHandleRemoteData}
+            fetchData={fetchData}
             isLoading={isLoading}
             newButton={canCreate ? { onClick: openNewModal } : null}
             totalCount={totalCount}
