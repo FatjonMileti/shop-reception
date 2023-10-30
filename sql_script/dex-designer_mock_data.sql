@@ -100,8 +100,8 @@ INSERT INTO
     "dex-designer".screen (id, name, icon, route_url, route_path_exact, activity_id, is_first_screen)
 VALUES
     -- Governance
-    (1, 'Team Day-Off Management', 'TimerOffOutlined', '/teamDayOffManagement', true, 5, true),
-    (2, 'Team Assignment', 'HowToRegOutlined', '/teamAssignment', true, 1, true),
+    (1, 'Team Day-Off Management', 'TimerOffOutlined', '/governance/projectTeam/teamDayOffManagement', true, 5, true),
+    (2, 'Team Assignment', 'HowToRegOutlined', '/governance/projectTeam/teamAssignment', true, 1, true),
     (3, 'Effort Matrix', 'DonutSmallOutlined', '/effortMatrix', true, 4, true),
     (4, 'Project Milestones', 'AccountTreeOutlined', '/projectMilestones', true, 3, true),
     (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/teamCapacity', true, 2, true),
