@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Box, Grid, Paper, debounce } from '@mui/material'
+import { useMemo, useState } from 'react'
+import { Box, CircularProgress, Grid, Paper, debounce } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -13,12 +13,9 @@ import { Input } from 'components/core-ui/Input'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Edit } from '@mui/icons-material'
 import { PermissionRoles } from 'utils/enums'
-import {
-  TeamAssignmentItem,
-  TeamAssignmentTableFilter,
-  ValueLabelInterface
-} from '../interfaces'
+import { TeamAssignmentItem, TeamAssignmentTableFilter, ValueLabelInterface } from '../interfaces'
 import { EditTeamAssignment } from './EditTeamAssignment'
+import { useQuery } from 'react-query'
 
 const columns = [
   {
@@ -65,7 +62,6 @@ const columns = [
 
 const TeamAssignment: React.FC = props => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
-  const [filterOptions, setFilterOptions] = useState<ValueLabelInterface[]>([])
   const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -102,27 +98,25 @@ const TeamAssignment: React.FC = props => {
     ]
   })
 
-  useEffect(() => {
-    ;(async () => {
-      try {
-        const result = await makeCoreGetRequest('/governance/domains')
+  const {
+    data: filterOptions,
+    isLoading: isFilterOptionsLoading,
+    error,
+    isError
+  } = useQuery(['domains'], async () => {
+    const result = await makeCoreGetRequest('/governance/domains')
+    const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
 
-        const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
-        setFilterOptions(resultOptions)
-      } catch (error) {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    })()
-  }, [])
-
-  useEffect(() => {
-    if (filterOptions.length) {
-      setDomainFilterValue(filterOptions[0])
+    setDomainFilterValue(resultOptions[0])
+    return resultOptions || []
+  }, {
+    onError: error => {
+      showNotification({
+        message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
     }
-  }, [filterOptions])
+  })
 
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
@@ -250,10 +244,17 @@ const TeamAssignment: React.FC = props => {
       )
     }
   ]
+
   return (
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
+          {isFilterOptionsLoading && (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+            </div>
+          )}
+
           <Grid xs={12} md={3} item>
             <AsyncAutocomplete
               variant="standard"
