@@ -18,10 +18,11 @@ interface EditTeamAssignmentProps {
   isModalOpen: boolean
   closeModal: Function
   editItem: TeamAssignmentItem | number
+  setShouldRefreshData: Function
 }
 
 const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
-  const { isModalOpen, closeModal, editItem } = props
+  const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
   const editTeamAssignment = async values => {
@@ -33,6 +34,8 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
 
   const { isLoading, mutate } = useMutation(editTeamAssignment, {
     onSuccess: res => {
+      setShouldRefreshData(true)
+      closeModal()
       showNotification({
         message: 'Item edited successfully',
         type: 'success'
@@ -52,8 +55,11 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
     initialValues: {
       id: (editItem as TeamAssignmentItem)?.id || 0,
       assignedProject: (editItem as TeamAssignmentItem)?.assignedProject || '',
-      assignmentEndDate: (editItem as TeamAssignmentItem)?.assignmentEndDate,
-      assignmentStartDate: (editItem as TeamAssignmentItem)?.assignmentStartDate,
+      assignmentEndDate: dayjs((editItem as TeamAssignmentItem)?.assignmentEndDate, 'DD/MM/YYYY'),
+      assignmentStartDate: dayjs(
+        (editItem as TeamAssignmentItem)?.assignmentStartDate,
+        'DD/MM/YYYY'
+      ),
       iibKey: (editItem as TeamAssignmentItem)?.iibKey || '',
       ipbKey: (editItem as TeamAssignmentItem)?.ipbKey || '',
       role: (editItem as TeamAssignmentItem)?.role || '',

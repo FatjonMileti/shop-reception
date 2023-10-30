@@ -5,6 +5,7 @@ export interface TeamDayOffManagementItem {
   id: number
   numberOfHours: number
   teamMemberName: string
+  teamMemberId: string
 }
 
 export interface TeamAssignmentItem {

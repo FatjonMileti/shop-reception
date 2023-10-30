@@ -40,7 +40,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
       try {
         const payload = {
           teamMember: {
-            id: isEdit ? (editItem as TeamDayOffManagementItem).id : values.teamMember.value
+            id: isEdit ? (editItem as TeamDayOffManagementItem).teamMemberId : values.teamMember.value
           },
           dayOffType: values.dayOffType,
           startDate: formatPayloadDate(values.startDate),
@@ -49,9 +49,9 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
         }
 
         if (isEdit) {
-          makeCorePutRequest(`/governance/teamTimeOff/${formik.values.id}`, payload)
+          await makeCorePutRequest(`/governance/teamTimeOff/${formik.values.id}`, payload)
         } else {
-          makeCorePostRequest('/governance/teamTimeOff', payload)
+          await makeCorePostRequest('/governance/teamTimeOff', payload)
         }
 
         setShouldRefreshData(true)
