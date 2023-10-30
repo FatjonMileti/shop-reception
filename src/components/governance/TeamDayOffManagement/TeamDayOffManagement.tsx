@@ -171,7 +171,6 @@ const TeamDayOffManagement = () => {
       })
     }
   }
-  const debouncedHandleRemoteData = debounce(fetchData, 500)
 
   const tableFilterFields = [
     {
@@ -234,7 +233,7 @@ const TeamDayOffManagement = () => {
             order="asc"
             columns={columnsWithActions}
             items={tableItems}
-            fetchData={debouncedHandleRemoteData}
+            fetchData={fetchData}
             isLoading={isLoading}
             newButton={canCreate ? { onClick: openNewModal } : null}
             totalCount={totalCount}

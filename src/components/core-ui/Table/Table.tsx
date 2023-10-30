@@ -1,4 +1,5 @@
 import { Table as GeneralTable } from '@fullscreendigital/carrefour-dex-fe'
+import { debounce } from '@mui/material'
 import { useEffect } from 'react'
 import { useImmer } from 'use-immer'
 
@@ -69,7 +70,7 @@ const Table = props => {
       columns={columns}
       rows={items}
       isLoading={isLoading}
-      handleRemoteData={handleRemoteData}
+      handleRemoteData={debounce(handleRemoteData, 500)}
       totalCount={totalCount}
       isRemote
     />

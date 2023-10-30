@@ -184,7 +184,6 @@ const TeamAssignment: React.FC = props => {
       })
     }
   }
-  const debouncedHandleRemoteData = debounce(fetchData, 500)
 
   const tableFilterFields = [
     {
@@ -281,7 +280,7 @@ const TeamAssignment: React.FC = props => {
             order="asc"
             columns={columnsWithActions}
             items={tableItems}
-            fetchData={debouncedHandleRemoteData}
+            fetchData={fetchData}
             isLoading={isLoading}
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
