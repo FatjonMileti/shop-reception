@@ -4,8 +4,20 @@ import s from './PriceSpan.modules.scss'
 const PriceSpan = (props: PriceSpanProps) => {
   return (
     <span style={{ color: props.color }}>
-      <strong>{props.value} {props.currency}</strong>
-      {props.initialValue && (<span className={s.intialPrice}>{props.initialValue} {props.currency}</span>)}
+      {props.discountValue ? (
+        <>
+          <strong>
+            {props.discountValue} {props.currency}
+          </strong>
+          <span className={s.intialPrice}>
+            {props.value} {props.currency}
+          </span>
+        </>
+      ) : (
+        <strong>
+          {props.value} {props.currency}
+        </strong>
+      )}
     </span>
   )
 }

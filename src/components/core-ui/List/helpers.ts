@@ -24,7 +24,7 @@ export const getRenderedColumns = (columns, cb) =>
               ...render,
               field: column.field,
               count: get(row, column.field),
-              payload: { id: row.id },
+              payload: { id: row.id, purchaseOption: row.purchaseOption },
               additionalAction: cb
             })
           }
@@ -33,7 +33,7 @@ export const getRenderedColumns = (columns, cb) =>
             return renderComponent({
               ...render,
               value: get(row, column.field),
-              initialValue: row.initialPrice
+              discountValue: row.discountedPrice
             })
           }
 
