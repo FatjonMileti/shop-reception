@@ -8,4 +8,8 @@ export interface Tab {
 
 export interface TabsProps {
   tabs: Tab[]
+  labels?: string[]
+  handleChange?: (event: React.SyntheticEvent, value: number) => void
+  value?: number
+  id?: string
 }
