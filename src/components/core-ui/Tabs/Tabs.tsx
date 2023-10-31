@@ -9,10 +9,16 @@ const Tabs = (props: TabsProps) => {
 
   let [searchParams, setSearchParams] = useSearchParams()
 
-  const [selectedValue, setSelectedValue] = useState(parseInt(searchParams.get('tab')) || 0)
+  const [selectedValue, setSelectedValue] = useState<number>(0)
 
   useEffect(() => {
-    setSelectedValue(parseInt(searchParams.get('tab')))
+    if (searchParams.get('tab') === null) {
+      setSelectedValue(0)
+      searchParams.set('tab', `0`)
+      setSearchParams(searchParams, { replace: true })
+    } else {
+      setSelectedValue(parseInt(searchParams.get('tab')))
+    }
   }, [searchParams.get('tab')])
 
   const onChange = (_, newValue: number) => {
