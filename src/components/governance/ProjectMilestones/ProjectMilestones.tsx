@@ -5,6 +5,8 @@ import { useMemo, useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { toTableRowItems } from './serializer'
+import { Input } from 'components/core-ui/Input'
+import s from '../ProjectMilestones/ProjectMilestones.modules.scss'
 
 const columns = [
   {
@@ -48,6 +50,13 @@ const ProjectMilestones = () => {
   const [totalCount, setTotalCount] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
+  const [tableFilter, setTableFilter] = useState({
+    projectName: null,
+    stage: null,
+    iibKey: null,
+    ipbKey: null
+  })
+
   const columnsWithActions = useMemo(() => columns, [])
 
   const { showNotification } = useNotification()
@@ -76,20 +85,81 @@ const ProjectMilestones = () => {
     }
   }
 
-  return (
-    <div>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <Table
-          columns={columnsWithActions}
-          items={tableItems}
-          fetchData={fetchData}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          filters={[]}
+  const tableFilterFields = [
+    {
+      name: 'projectName',
+      label: 'Project name',
+      type: 'text',
+      filter: (
+        <Input
+          type="text"
+          name="projectName"
+          label="Project name"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, projectName: value })}
+          value={tableFilter.projectName}
         />
-      )}
+      )
+    },
+    {
+      name: 'stage',
+      label: 'Stage',
+      type: 'text',
+      filter: (
+        <Input
+          type="text"
+          name="stage"
+          label="Stage"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, stage: value })}
+          value={tableFilter.projectName}
+        />
+      )
+    },
+    {
+      name: 'iibKey',
+      label: 'IIB Key',
+      type: 'text',
+      filter: (
+        <Input
+          type="text"
+          name="iibKey"
+          label="IIB Key"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, iibKey: value })}
+          value={tableFilter.iibKey}
+        />
+      )
+    },
+    {
+      name: 'ipbKey',
+      label: 'IPB Key',
+      type: 'text',
+      filter: (
+        <Input
+          type="text"
+          name="ipbKey"
+          label="IPB Key"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, ipbKey: value })}
+          value={tableFilter.ipbKey}
+        />
+      )
+    }
+  ]
+
+  return (
+    <div className={s.mainContainer}>
+      <Table
+        hideCheckbox
+        order="asc"
+        columns={columnsWithActions}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        filters={tableFilterFields}
+      />
     </div>
   )
 }
