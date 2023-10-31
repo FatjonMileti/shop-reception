@@ -19,7 +19,7 @@ export interface ProductStock {
   initialStock: number
   imobStock: number,
   hasBuyback?: boolean,
-  buybackOptions?: any,
+  purchaseOptions?: any,
   name?: string
 }
 

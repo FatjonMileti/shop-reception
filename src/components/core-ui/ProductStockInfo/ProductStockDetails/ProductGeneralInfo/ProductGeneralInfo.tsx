@@ -18,11 +18,11 @@ const ProductGeneralInfo = ({
   addToCartAction,
   isWarehouse,
   hasBuyback,
-  buybackOptions,
+  purchaseOptions,
   available
 }) => {
   const [selectedBuybackOption, setSelectedBuybackOption] = useState(
-    (hasBuyback && buybackOptions[0].value) || ''
+    (hasBuyback && purchaseOptions[0].value) || ''
   )
   const [displayAddToCartBtn, setDisplayAddToCartBtn] = useState(false)
 
@@ -61,7 +61,7 @@ const ProductGeneralInfo = ({
             id,
             quantity: 1,
             isWarehouse,
-            buyback: selectedBuybackOption
+            purchaseOption: selectedBuybackOption
           })
           showNotification({
             message: 'Produsul a fost adaugat in cos',
@@ -101,12 +101,12 @@ const ProductGeneralInfo = ({
             type="select"
             name="buyback-input"
             label="Mod achizitie"
-            values={buybackOptions}
+            values={purchaseOptions}
             value={selectedBuybackOption}
             variant="standard"
             width="320px"
             onChange={event => setSelectedBuybackOption((event.target as any).value)}
-            disabled={buybackOptions.length == 1}
+            disabled={purchaseOptions.length == 1}
           />
         </div>
       )}

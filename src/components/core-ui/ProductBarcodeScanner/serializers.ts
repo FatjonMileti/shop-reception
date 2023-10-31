@@ -13,8 +13,8 @@ export const toProduct = product => {
       sold: storeStock.soldQuantity,
       reserved: storeStock.reservedQuantity,
       initialStock: storeStock.initialQuantity,
-      hasBuyback: !!storeStock.buybackOptions?.length,
-      buybackOptions: storeStock.buybackOptions,
+      hasBuyback: !!storeStock.purchaseOptions?.length,
+      purchaseOptions: storeStock.purchaseOptions,
       isWarehouse: false
     },
     warehouseStock: {
@@ -27,8 +27,8 @@ export const toProduct = product => {
       sold: warehouseStock?.soldQuantity,
       reserved: warehouseStock?.reservedQuantity,
       initialStock: warehouseStock?.initialQuantity,
-      hasBuyback: !!warehouseStock?.buybackOptions?.length,
-      buybackOptions: warehouseStock?.buybackOptions,
+      hasBuyback: !!warehouseStock?.purchaseOptions?.length,
+      purchaseOptions: warehouseStock?.purchaseOptions,
       isWarehouse: true
     },
     neighboursStock: neighboursStock?.map(stock => ({

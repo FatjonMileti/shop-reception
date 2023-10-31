@@ -21,7 +21,7 @@ const sx = {
 }
 
 const Switch = (props: SwitchProps) => {
-  const { action, payloadKey, successMessage, value, pathId, confirmModal, disableOnToggle } = props
+  const { action, successMessage, value, pathId, confirmModal, disableOnToggle } = props
 
   const [checked, setChecked] = useState(value || false)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -52,7 +52,7 @@ const Switch = (props: SwitchProps) => {
           url = `${url}/${pathId}`
         }
 
-        await makeCorePutRequest(url, { [payloadKey]: tempChecked })
+        await makeCorePutRequest(url)
 
         setChecked(tempChecked)
 

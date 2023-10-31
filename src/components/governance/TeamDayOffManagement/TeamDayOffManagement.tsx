@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Box, CircularProgress, Grid, Paper, debounce } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './TeamDayOffManagement.modules.scss'
@@ -15,11 +15,7 @@ import { Delete, Edit } from '@mui/icons-material'
 import { DeleteTimeOff } from './DeleteTimeOff'
 import { toTableRowItems } from './serializers'
 import { columns, roles } from './helpers'
-import {
-  TeamDayOffManagementItem,
-  TeamDayOffManagementTableFilter,
-  ValueLabelInterface
-} from '../interfaces'
+import { TeamDayOffManagementItem, ValueLabelInterface } from '../interfaces'
 import { useQuery } from 'react-query'
 
 const TeamDayOffManagement = () => {
@@ -38,10 +34,7 @@ const TeamDayOffManagement = () => {
 
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
 
-  const {
-    data: filterOptions,
-    isLoading: isFilterOptionsLoading,
-  } = useQuery(
+  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
     ['domains'],
     async () => {
       const result = await makeCoreGetRequest('/governance/domains')

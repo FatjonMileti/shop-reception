@@ -41,6 +41,9 @@ const ProductTabs = (props: ProductTabsProps) => {
   return product.title ? (
     <Tabs
       {...rest}
+      // labels={tabLabels}
+      // handleChange={handleChange}
+      // value={product.selectedStockTab}
     />
   ) : null
 }

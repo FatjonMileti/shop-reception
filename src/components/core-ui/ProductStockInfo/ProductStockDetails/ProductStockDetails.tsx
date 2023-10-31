@@ -17,7 +17,7 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
     imobStock,
     isWarehouse,
     hasBuyback,
-    buybackOptions
+    purchaseOptions
   } = stock
 
   const items = { available, sold, reserved, initialStock, imobStock }
@@ -33,7 +33,7 @@ const ProductStockDetails = ({ stock, infoItems, actions }) => {
         addToCartAction={actions.addToCart}
         isWarehouse={isWarehouse}
         hasBuyback={hasBuyback}
-        buybackOptions={buybackOptions}
+        purchaseOptions={purchaseOptions}
         available={available}
       />
       <div>
