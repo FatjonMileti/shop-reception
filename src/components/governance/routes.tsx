@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { URLS } from './constants'
 import { TeamDayOffManagement } from './TeamDayOffManagement'
 import { TeamAssignment } from './TeamAssignment'
+import { EffortMatrix } from "./EffortMatrix";
 
 export const useGovernanceRoutes = applicationPages => {
   return (
@@ -13,6 +14,16 @@ export const useGovernanceRoutes = applicationPages => {
           element={
             <PrivateRoute
               component={TeamDayOffManagement}
+              applicationPages={applicationPages}
+              checkIsAuthorized
+            />
+          }
+        />
+        <Route
+          path={URLS.AUTH_EFFORT_MATRIX}
+          element={
+            <PrivateRoute
+              component={EffortMatrix}
               applicationPages={applicationPages}
               checkIsAuthorized
             />
