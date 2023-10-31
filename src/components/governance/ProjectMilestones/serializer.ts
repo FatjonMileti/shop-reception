@@ -1,4 +1,6 @@
-export const toTableRowItems = items =>
+import { ProjectMilestonesModel, TableRowModel } from './models'
+
+export const toTableRowItems = (items: ProjectMilestonesModel[]): TableRowModel[] =>
   items.map(item => ({
     id: item.id,
     projectName: item.project.name,
