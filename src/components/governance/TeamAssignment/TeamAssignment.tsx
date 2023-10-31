@@ -273,6 +273,7 @@ const TeamAssignment: React.FC = props => {
             isModalOpen={isEditModalOpen}
             closeModal={closeEditModal}
             editItem={selectedRow}
+            setShouldRefreshData={setShouldRefreshData}
           />
           <Table
             hideCheckbox
