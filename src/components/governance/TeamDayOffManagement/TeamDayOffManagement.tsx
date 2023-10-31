@@ -12,11 +12,11 @@ import { Input } from 'components/core-ui/Input'
 import { NewTimeOff } from './NewTimeOff'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
-import { DeleteTimeOff } from './DeleteTimeOff'
 import { toTableRowItems } from './serializers'
 import { columns, roles } from './helpers'
 import { TeamDayOffManagementItem, ValueLabelInterface } from '../interfaces'
 import { useQuery } from 'react-query'
+import DeleteConfirmationModal from "../../Common/DeleteConfirmationModal/DeleteConfirmationModal";
 
 const TeamDayOffManagement = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
@@ -28,7 +28,7 @@ const TeamDayOffManagement = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<TeamDayOffManagementItem | number>(0)
+  const [selectedRow, setSelectedRow] = useState<TeamDayOffManagementItem>()
 
   const { showNotification } = useNotification()
 
@@ -214,11 +214,12 @@ const TeamDayOffManagement = () => {
             setShouldRefreshData={setShouldRefreshData}
             isEdit
           />
-          <DeleteTimeOff
+          <DeleteConfirmationModal
             isModalOpen={isDeleteModalOpen}
             closeModal={closeDeleteModal}
-            deleteItem={selectedRow}
+            deleteItem={`${selectedRow?.id}`}
             setShouldRefreshData={setShouldRefreshData}
+            actionUrl="/governance/teamTimeOff/:id"
           />
           <Table
             hideCheckbox

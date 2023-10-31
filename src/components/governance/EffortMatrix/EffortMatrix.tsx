@@ -12,14 +12,22 @@ import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
 import { toTableRowItems } from './serializers'
 import { columns, roles } from './helpers'
-import { TeamDayOffManagementItem, ValueLabelInterface } from '../interfaces'
+import { EffortMatrix, ValueLabelInterface } from '../interfaces'
 import { useQuery } from 'react-query'
+import DeleteConfirmationModal from "../../Common/DeleteConfirmationModal/DeleteConfirmationModal";
+import EffortMatrixFormModal from "./NewEffortMatrix/EffortMatrixFormModal";
 
 const EffortMatrix = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
-  const [tableItems, setTableItems] = useState<TeamDayOffManagementItem[]>([])
+  const [tableItems, setTableItems] = useState<EffortMatrix[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+
+  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<EffortMatrix>()
 
   const { showNotification } = useNotification()
 
@@ -81,9 +89,18 @@ const EffortMatrix = () => {
     return result
   }, [columns, canEdit, canDelete])
 
+  const openNewModal = (): void => setIsNewModalOpen(true)
+  const closeNewModal = (): void => setIsNewModalOpen(false)
+
+  const openEditModal = (): void => setIsEditModalOpen(true)
+  const closeEditModal = (): void => setIsEditModalOpen(false)
+
+  const openDeleteModal = (): void => setIsDeleteModalOpen(true)
+  const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
   const selectRow = (row, action) => {
-    alert(action);
+    setSelectedRow(row)
+    action === 'edit' ? openEditModal() : openDeleteModal()
   }
 
   const handleFilterChange = value => {
@@ -147,6 +164,27 @@ const EffortMatrix = () => {
       </Paper>
       {domainFilterValue && (
         <Box>
+          <EffortMatrixFormModal
+            isModalOpen={isNewModalOpen}
+            closeModal={closeNewModal}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+          <EffortMatrixFormModal
+            isModalOpen={isEditModalOpen}
+            closeModal={closeEditModal}
+            setShouldRefreshData={setShouldRefreshData}
+            editItem={selectedRow}
+            roles={[]}
+            isEdit
+          />
+
+          <DeleteConfirmationModal
+            isModalOpen={isDeleteModalOpen}
+            closeModal={closeDeleteModal}
+            deleteItem={`${selectedRow?.id}`}
+            setShouldRefreshData={setShouldRefreshData}
+            actionUrl="/governance/effortMatrix/:id"
+          />
           <Table
             hideCheckbox
             orderBy="role"
@@ -156,6 +194,9 @@ const EffortMatrix = () => {
             fetchData={fetchData}
             isLoading={isLoading}
             totalCount={totalCount}
+            newButton={canCreate ? { onClick: openNewModal } : null}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
           />
         </Box>
       )}

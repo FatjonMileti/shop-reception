@@ -5,24 +5,22 @@ import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { makeCoreDeleteRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { TeamDayOffManagementItem } from '../../interfaces'
 
-interface DeleteTimeOffProps {
+interface DeleteConfirmationProps {
   isModalOpen: boolean
   closeModal: Function
-  deleteItem: TeamDayOffManagementItem | number
+  deleteItem: string
   setShouldRefreshData: Function
+  actionUrl: string
 }
 
-const DeleteTimeOff: React.FC<DeleteTimeOffProps> = props => {
-  const { isModalOpen, closeModal, deleteItem, setShouldRefreshData } = props
+const DeleteConfirmationModal: React.FC<DeleteConfirmationProps> = props => {
+  const { isModalOpen, closeModal, deleteItem, setShouldRefreshData, actionUrl } = props
   const { showNotification } = useNotification()
 
   const onDelete = async () => {
     try {
-      const itemId = (deleteItem as TeamDayOffManagementItem)?.id;
-
-      await makeCoreDeleteRequest(`/governance/teamTimeOff/${itemId}`)
+      await makeCoreDeleteRequest(actionUrl.replace(":id", deleteItem))
 
       closeModal()
       setShouldRefreshData(true)
@@ -50,4 +48,4 @@ const DeleteTimeOff: React.FC<DeleteTimeOffProps> = props => {
   )
 }
 
-export default DeleteTimeOff
+export default DeleteConfirmationModal
