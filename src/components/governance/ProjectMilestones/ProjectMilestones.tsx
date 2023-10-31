@@ -23,13 +23,13 @@ const tableColumns = [
     align: 'left'
   },
   {
-    title: 'iibKey',
+    title: 'IIBKey',
     field: 'iibKey',
     align: 'left',
     collapsible: true
   },
   {
-    title: 'ipbKey',
+    title: 'IPBKey',
     field: 'ipbKey',
     align: 'left',
     collapsible: true
@@ -78,7 +78,7 @@ const buildTableFilterInputs = (
         label="Stage"
         variant="standard"
         onChange={(value: string) => setTableFilter({ ...tableFilter, stage: value })}
-        value={tableFilter.projectName}
+        value={tableFilter.stage}
       />
     )
   },
