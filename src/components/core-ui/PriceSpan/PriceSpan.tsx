@@ -4,10 +4,10 @@ import s from './PriceSpan.modules.scss'
 const PriceSpan = (props: PriceSpanProps) => {
   return (
     <span style={{ color: props.color }}>
-      {props.discountValue ? (
+      {props.discountLabel ? (
         <>
           <strong>
-            {props.discountValue} {props.currency}
+            {props.totalPrice} {props.currency}
           </strong>
           <span className={s.intialPrice}>
             {props.value} {props.currency}
@@ -15,7 +15,7 @@ const PriceSpan = (props: PriceSpanProps) => {
         </>
       ) : (
         <strong>
-          {props.value} {props.currency}
+          {props.totalPrice} {props.currency}
         </strong>
       )}
     </span>
