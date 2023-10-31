@@ -10,7 +10,7 @@ const PriceSpan = (props: PriceSpanProps) => {
             {props.totalPrice} {props.currency}
           </strong>
           <span className={s.intialPrice}>
-            {props.value} {props.currency}
+            {props.totalPriceWithoutDiscount} {props.currency}
           </span>
         </>
       ) : (
