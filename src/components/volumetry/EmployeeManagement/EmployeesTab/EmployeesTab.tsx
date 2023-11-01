@@ -27,7 +27,7 @@ const tableFilterFields = [
     label: 'Nume',
     type: 'text',
 
-    filter: <Input type="text" name="name" label="Name" variant="standard" />
+    filter: <Input type="text" name="name" label="Nume" variant="standard" />
   },
   {
     name: 'position',
