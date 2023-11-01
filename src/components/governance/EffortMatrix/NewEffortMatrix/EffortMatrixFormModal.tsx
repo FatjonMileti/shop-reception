@@ -88,7 +88,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
               variant="standard"
               name="role"
               label="Role"
-              options={roles}
+              options={roles ?? []}
               onChange={value => formik.setFieldValue('role', value)}
               value={formik.values.role}
               error={!!formik.errors.role}

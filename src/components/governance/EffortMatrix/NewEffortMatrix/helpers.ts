@@ -3,7 +3,12 @@ import { EffortMatrix } from "components/governance/interfaces";
 
 export const getValidationSchema = editItem =>
   Yup.object().shape({
-    role: Yup.string().required(),
+    role: editItem
+      ? Yup.string()
+      : Yup.object().shape({
+        label: Yup.string().required('The Role field is required'),
+        value: Yup.string().required('The Role field is required')
+      }),
     evaluationPhase: Yup.number().required(),
     analysisPhase: Yup.number().required(),
     designPhase: Yup.number().required(),
@@ -30,13 +35,13 @@ export const getInitialValues = (editItem: EffortMatrix) => {
     }
     : {
       role: null,
-      evaluationPhase: null,
-      analysisPhase: null,
-      designPhase: null,
-      developmentPhase: null,
-      systemTestPhase: null,
-      uatPhase: null,
-      rolloutPhase: null,
-      hypercarePhase: null
+      evaluationPhase: '',
+      analysisPhase: '',
+      designPhase: '',
+      developmentPhase: '',
+      systemTestPhase: '',
+      uatPhase: '',
+      rolloutPhase: '',
+      hypercarePhase: ''
     };
 };

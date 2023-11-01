@@ -52,6 +52,31 @@ const EffortMatrix = () => {
     }
   )
 
+  const { data: roleOptions, isLoading: isRoleOptionsLoading } = useQuery(
+    ['teamMembers', domainFilterValue],
+    async () => {
+      if (domainFilterValue === null) {
+        return null
+      }
+
+      const result = await makeCoreGetRequest(
+        `/governance/teamMembers?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
+          domainFilterValue?.value
+        )}`
+      )
+      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
+      return resultOptions || null
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
 
   const columnsWithActions = useMemo(() => {
     let result = columns
@@ -143,7 +168,7 @@ const EffortMatrix = () => {
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
-          {(isFilterOptionsLoading) && (
+          {(isFilterOptionsLoading || isRoleOptionsLoading) && (
             <div style={{ display: 'flex' }}>
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
             </div>
@@ -156,7 +181,7 @@ const EffortMatrix = () => {
               label="Domain"
               disableClearable
               value={domainFilterValue}
-              options={filterOptions}
+              options={filterOptions ?? []}
               onChange={handleFilterChange}
             />
           </Grid>
@@ -168,13 +193,13 @@ const EffortMatrix = () => {
             isModalOpen={isNewModalOpen}
             closeModal={closeNewModal}
             setShouldRefreshData={setShouldRefreshData}
+            roles={roleOptions}
           />
           <EffortMatrixFormModal
             isModalOpen={isEditModalOpen}
             closeModal={closeEditModal}
             setShouldRefreshData={setShouldRefreshData}
             editItem={selectedRow}
-            roles={[]}
             isEdit
           />
 
