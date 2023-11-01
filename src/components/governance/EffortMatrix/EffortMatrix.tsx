@@ -14,7 +14,7 @@ import { toTableRowItems } from './serializers'
 import { columns, roles } from './helpers'
 import { EffortMatrix, ValueLabelInterface } from '../interfaces'
 import { useQuery } from 'react-query'
-import DeleteConfirmationModal from "../../Common/DeleteConfirmationModal/DeleteConfirmationModal";
+import DeleteConfirmationModal from "components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal";
 import EffortMatrixFormModal from "./NewEffortMatrix/EffortMatrixFormModal";
 
 const EffortMatrix = () => {
