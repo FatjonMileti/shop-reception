@@ -146,8 +146,8 @@ const EditMerchandiser: React.FC<EditMerchandiserProps> = props => {
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-          <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+          <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
         </Grid>
       </Grid>
     </Modal>

@@ -27,22 +27,22 @@ const DeleteMerchandiser: React.FC<DeleteMerchandiserProps> = props => {
       setShouldRefreshData(true)
     } catch (error) {
       showNotification({
-        message: `Error while deleting data. ${formatErrorMessage(error)}`,
+        message: `Eroare la stergerea merchandiserului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
   }
 
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Delete'}>
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Sterge'}>
       <Grid container spacing={4}>
         <Grid xs={12} item>
-          <Typography>Sunteti sigur ca vreti sa stergeti acest merchendiser?</Typography>
+          <Typography>Sunteti sigur ca vreti sa stergeti acest merchandiser?</Typography>
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-          <Button variant="contained" label="Delete" onClick={onDelete} />
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+          <Button variant="contained" label="Sterge" onClick={onDelete} />
         </Grid>
       </Grid>
     </Modal>
