@@ -1,13 +1,12 @@
-import { GovernanceResponseModel } from '../shared/models'
 
-export type TableFilters = {
+export interface TableFilters {
   projectName: string
   stage: string
   iibKey: string
   ipbKey: string
 }
 
-export type TableRowModel = {
+export interface TableRowModel {
   id: number
   projectName: string
   stage: string
@@ -17,9 +16,7 @@ export type TableRowModel = {
   endDate: string
 }
 
-export type ProjectMilestonesResponseModel = GovernanceResponseModel<ProjectMilestonesModel>
-
-export type ProjectMilestonesModel = {
+export interface ProjectMilestonesModel  {
   id: number
   stage: string
   project: ProjectModel
@@ -27,7 +24,7 @@ export type ProjectMilestonesModel = {
   endDate: string
 }
 
-export type ProjectModel = {
+export interface ProjectModel  {
   id: number
   iibKey: string
   ipbKey: string

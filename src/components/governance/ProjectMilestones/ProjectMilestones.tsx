@@ -4,122 +4,12 @@ import { useNotification } from 'hooks'
 import { useMemo, useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
-import { toTableRowItems } from './serializer'
-import { Input } from 'components/core-ui/Input'
 import s from '../ProjectMilestones/ProjectMilestones.modules.scss'
-import { ProjectMilestonesResponseModel, TableFilters, TableRowModel } from './models'
-
-const RESOURCE_URI = '/governance/projectMilestones'
-
-const tableColumns = [
-  {
-    title: 'Project',
-    field: 'projectName',
-    align: 'left'
-  },
-  {
-    title: 'Stage',
-    field: 'stage',
-    align: 'left'
-  },
-  {
-    title: 'IIBKey',
-    field: 'iibKey',
-    align: 'left',
-    collapsible: true
-  },
-  {
-    title: 'IPBKey',
-    field: 'ipbKey',
-    align: 'left',
-    collapsible: true
-  },
-  {
-    title: 'StartDate',
-    field: 'startDate',
-    align: 'left',
-    collapsible: true
-  },
-  {
-    title: 'EndDate',
-    field: 'endDate',
-    align: 'left',
-    collapsible: true
-  }
-]
-
-const buildTableFilterInputs = (
-  tableFilter: TableFilters,
-  setTableFilter: (tableFilters: TableFilters) => void
-) => [
-  {
-    name: 'projectName',
-    label: 'Project name',
-    type: 'text',
-    filter: (
-      <Input
-        type="text"
-        name="projectName"
-        label="Project name"
-        variant="standard"
-        onChange={(value: string) => setTableFilter({ ...tableFilter, projectName: value })}
-        value={tableFilter.projectName}
-      />
-    )
-  },
-  {
-    name: 'stage',
-    label: 'Stage',
-    type: 'text',
-    filter: (
-      <Input
-        type="text"
-        name="stage"
-        label="Stage"
-        variant="standard"
-        onChange={(value: string) => setTableFilter({ ...tableFilter, stage: value })}
-        value={tableFilter.stage}
-      />
-    )
-  },
-  {
-    name: 'iibKey',
-    label: 'IIB Key',
-    type: 'text',
-    filter: (
-      <Input
-        type="text"
-        name="iibKey"
-        label="IIB Key"
-        variant="standard"
-        onChange={(value: string) => setTableFilter({ ...tableFilter, iibKey: value })}
-        value={tableFilter.iibKey}
-      />
-    )
-  },
-  {
-    name: 'ipbKey',
-    label: 'IPB Key',
-    type: 'text',
-    filter: (
-      <Input
-        type="text"
-        name="ipbKey"
-        label="IPB Key"
-        variant="standard"
-        onChange={value => setTableFilter({ ...tableFilter, ipbKey: value })}
-        value={tableFilter.ipbKey}
-      />
-    )
-  }
-]
-
-const defaultTableFilters: TableFilters = {
-  projectName: null,
-  stage: null,
-  iibKey: null,
-  ipbKey: null
-}
+import { GovernanceResponseModel } from '../shared/models'
+import { ProjectMilestonesModel, TableFilters, TableRowModel } from './models'
+import { toTableRowItems } from './serializer'
+import { buildTableFilterInputs } from './utils'
+import { RESOURCE_URI, defaultTableFilters, tableColumns } from './constants'
 
 const ProjectMilestones = () => {
   const { showNotification } = useNotification()
@@ -150,7 +40,7 @@ const ProjectMilestones = () => {
           order,
           orderBy
         })
-      )) as ProjectMilestonesResponseModel
+      )) as GovernanceResponseModel<ProjectMilestonesModel>
       onHandlingFetchResponse(response.page.totalCount, toTableRowItems(response.list))
     } catch (error) {
       showNotification({
