@@ -1,0 +1,30 @@
+.productTab {
+  color: #121212 !important;
+
+  margin: 36px 0px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+
+  .title {
+    color: #121212;
+    font-family: "Ubuntu";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 32px;
+    margin: 36px 0;
+  }
+}
+
+.neighboursBox {
+  &>div>div {
+
+    border-bottom: none !important;
+  }
+
+  .infoItems {
+    margin: 20px;
+  }
+}

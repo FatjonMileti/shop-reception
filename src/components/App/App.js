@@ -22,6 +22,7 @@ import { QueryClient, QueryCache, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { useGovernanceRoutes } from 'components/governance/routes'
 import { useVolumetryRoutes } from 'components/volumetry/routes'
+import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -114,6 +115,7 @@ const App = () => {
 
   const governanceRoutes = useGovernanceRoutes(applicationPages)
   const volumetryRoutes = useVolumetryRoutes(applicationPages)
+  const supplyOmniRoutes = useSupplyOmniRoutes(applicationPages)
 
   return (
     <AuthProvider {...oidcConfig}>
@@ -141,6 +143,7 @@ const App = () => {
                 />
                 {governanceRoutes}
                 {volumetryRoutes}
+                {supplyOmniRoutes}
                 {applicationModulesPages.map(page =>
                   createRoute(
                     {
