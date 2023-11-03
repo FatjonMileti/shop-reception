@@ -1,3 +1,4 @@
 export const URLS = {
-  AUTH_PRODUCT_SCAN: '/productScan',
+  AUTH_SUPPLY_OMNI: 'supplyOmni',
+  AUTH_PRODUCT_SCAN: 'productScan',
 }
