@@ -26,10 +26,8 @@ interface ProductGeneralInfoProps {
 const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighboursStock }) => {
   const { showNotification } = useNotification()
 
-  const hasBuyback = product.purchaseOptions.find(item => item.value === 'BUYBACK_AFM')
-
   const [selectedBuybackOption, setSelectedBuybackOption] = useState(
-    (hasBuyback && product.purchaseOptions[0].value) || ''
+    product.purchaseOptions[0].value || ''
   )
 
   const { data: productStock, isLoading: isLoadingProductStock } = useQuery(
@@ -106,23 +104,21 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
         </div>
         <Divider component="div" />
 
-        {hasBuyback && (
-          <div className={s.infoContainer} style={{ justifyContent: 'flex-end' }}>
-            <Input
-              type="select"
-              name="buyback-input"
-              label="Mod achizitie"
-              values={product.purchaseOptions}
-              value={selectedBuybackOption}
-              variant="standard"
-              width="320px"
-              onChange={event => setSelectedBuybackOption((event.target as any).value)}
-              disabled={product.purchaseOptions.length == 1}
-            />
-          </div>
-        )}
+        <div className={s.infoContainer} style={{ justifyContent: 'flex-end' }}>
+          <Input
+            type="select"
+            name="buyback-input"
+            label="Mod achizitie"
+            values={product.purchaseOptions}
+            value={selectedBuybackOption}
+            variant="standard"
+            width="320px"
+            onChange={event => setSelectedBuybackOption((event.target as any).value)}
+            disabled={product.purchaseOptions.length == 1}
+          />
+        </div>
 
-        {hasBuyback && <Divider component="div" />}
+        <Divider component="div" />
 
         <div className={s.infoContainer}>
           <span className={s.firstCode}>
