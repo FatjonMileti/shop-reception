@@ -1,3 +1,19 @@
+.mainContainer {
+  margin: 24px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+
+  & > div {
+    margin: 0;
+  }
+}
+
+.filtersContainer {
+  padding: 16px;
+}
+
 .productTitle {
   color: #121212;
   font-family: "Ubuntu";
@@ -5,7 +21,7 @@
   font-weight: 500;
   font-size: 28px;
   line-height: 32px;
-  margin: 36px 24px 0;
+  margin: 36px 0;
 
   @media (max-width: 624px) {
     margin: 18px 12px 0;
