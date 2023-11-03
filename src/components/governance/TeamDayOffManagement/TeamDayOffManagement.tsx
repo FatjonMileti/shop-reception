@@ -180,23 +180,23 @@ const TeamDayOffManagement = () => {
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
-          {(isFilterOptionsLoading || isTeamMembersLoading) && (
+          {isFilterOptionsLoading || isTeamMembersLoading ? (
             <div style={{ display: 'flex' }}>
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
             </div>
+          ) : (
+            <Grid xs={12} md={3} item>
+              <AsyncAutocomplete
+                variant="standard"
+                name="teamMember.domain"
+                label="Domain"
+                disableClearable
+                value={domainFilterValue}
+                options={filterOptions}
+                onChange={handleFilterChange}
+              />
+            </Grid>
           )}
-
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="standard"
-              name="teamMember.domain"
-              label="Domain"
-              disableClearable
-              value={domainFilterValue}
-              options={filterOptions}
-              onChange={handleFilterChange}
-            />
-          </Grid>
         </Grid>
       </Paper>
       {domainFilterValue && (
