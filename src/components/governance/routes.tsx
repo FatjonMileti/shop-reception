@@ -3,7 +3,8 @@ import { Route } from 'react-router-dom'
 import { URLS } from './constants'
 import { TeamDayOffManagement } from './TeamDayOffManagement'
 import { TeamAssignment } from './TeamAssignment'
-import { EffortMatrix } from "./EffortMatrix";
+import { EffortMatrix } from "./EffortMatrix"
+import { ProjectMilestones } from './ProjectMilestones'
 
 export const useGovernanceRoutes = applicationPages => {
   return (
@@ -34,6 +35,16 @@ export const useGovernanceRoutes = applicationPages => {
           element={
             <PrivateRoute
               component={TeamAssignment}
+              applicationPages={applicationPages}
+              checkIsAuthorized
+            />
+          }
+        />
+        <Route
+          path={URLS.AUTH_PROJECT_MILESTONES}
+          element={
+            <PrivateRoute
+              component={ProjectMilestones}
               applicationPages={applicationPages}
               checkIsAuthorized
             />

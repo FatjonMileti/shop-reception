@@ -1,23 +1,22 @@
-import { useSelector } from 'react-redux'
-import { RootState } from 'configureStore'
-import { Paper, Box } from '@mui/material'
+import { Box } from '@mui/material'
 import { Accordion, Typography, Table } from '@fullscreendigital/carrefour-dex-fe'
-import { KeyValuePairs } from 'components/core-ui/KeyValuePairs'
-import { toProductStockKeyValuePairs } from 'utils/serializers'
 import s from './ProductNearbyStockInfo.modules.scss'
+import { NeighboursStock } from '../interfaces'
 
-const ProductNearbyStockInfo = props => {
-  const { title, infoItems } = props
+interface ProductNearbyStockInfoProps {
+  neighboursStock: NeighboursStock[]
+}
 
-  const product = useSelector((state: RootState) => state.product)
+const ProductNearbyStockInfo: React.FC<ProductNearbyStockInfoProps> = props => {
+  const { neighboursStock } = props
 
-  return product.title && product.neighboursStock.length ? (
+  return (
     <Box className={s.productTab}>
       <Box className={s.neighboursBox}>
         <Accordion
           summary={
             <Typography variant="medium">
-              <span>{title}</span>
+              <span>Stock in magazine invecinate</span>
             </Typography>
           }
           details={
@@ -27,7 +26,7 @@ const ProductNearbyStockInfo = props => {
                   { title: 'Magazin', field: 'name', align: 'left' },
                   { title: 'Stoc', field: 'available', align: 'left' }
                 ]}
-                rows={product.neighboursStock}
+                rows={neighboursStock}
                 isLoading={false}
                 hideCheckbox
                 disablePagination
@@ -39,7 +38,7 @@ const ProductNearbyStockInfo = props => {
         />
       </Box>
     </Box>
-  ) : null
+  )
 }
 
 export default ProductNearbyStockInfo

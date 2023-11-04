@@ -56,7 +56,7 @@ export const toTableGETUrl = ({
   const tableQueryUrl = getTableQueryUrl({ page, size: rowsPerPage, order, orderBy })
   const searchFieldsUrl = getSearchFieldsGetUrl(searchFields, searchText)
   const filtersUrl = getFiltersGetUrl(
-    getAllFilters(filters.concat(tableFilters).concat(extraUrlParams ?? []))
+    getAllFilters([...(filters || []), ...(tableFilters || []), ...(extraUrlParams || [])])
   )
   const customFiltersUrl = extraCustomUrlParams
     ? getCustomFiltersGetUrl(getAllFilters(extraCustomUrlParams))
