@@ -13,10 +13,11 @@ import { NewTimeOff } from './NewTimeOff'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
 import { toTableRowItems } from './serializers'
-import { columns, roles } from './helpers'
+import { columns } from './helpers'
+import { roles } from '../helpers'
 import { TeamDayOffManagementItem, ValueLabelInterface } from '../interfaces'
 import { useQuery } from 'react-query'
-import DeleteConfirmationModal from "components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal";
+import DeleteConfirmationModal from "components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal"
 
 const TeamDayOffManagement = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)

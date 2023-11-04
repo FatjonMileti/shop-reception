@@ -1,4 +1,6 @@
-export const toTableRowItems = items => items.map(item => ({
+import { EffortMatrix } from "../interfaces"
+
+export const toTableRowItems = (items: EffortMatrix[]) => items.map((item: EffortMatrix) => ({
   id: item.id,
   role: item.role,
   evaluationPhase: item.evaluationPhase,
@@ -9,4 +11,4 @@ export const toTableRowItems = items => items.map(item => ({
   uatPhase: item.uatPhase,
   rolloutPhase: item.rolloutPhase,
   hypercarePhase: item.hypercarePhase
-}));
+}))
