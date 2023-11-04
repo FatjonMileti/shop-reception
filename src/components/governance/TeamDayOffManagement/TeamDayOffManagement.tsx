@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { Box, CircularProgress, Grid, Paper, debounce } from '@mui/material'
+import React, { useMemo, useState } from 'react'
+import { Box, CircularProgress, Grid, Paper, debounce, Typography } from "@mui/material"
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -217,9 +217,10 @@ const TeamDayOffManagement = () => {
           <DeleteConfirmationModal
             isModalOpen={isDeleteModalOpen}
             closeModal={closeDeleteModal}
-            deleteItem={`${selectedRow?.id}`}
-            setShouldRefreshData={setShouldRefreshData}
             actionUrl="/governance/teamTimeOff/:id"
+            itemId={`${selectedRow?.id}`}
+            content={<Typography>Are you sure you want to delete this entry?</Typography>}
+            setShouldRefreshData={setShouldRefreshData}
           />
           <Table
             hideCheckbox
