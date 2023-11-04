@@ -10,7 +10,7 @@ import { getInitialValues, getValidationSchema } from './helpers'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { EffortMatrix, Role } from "../../interfaces";
+import { EffortMatrix, Role } from "../../interfaces"
 
 interface NewEffortMatrixProps {
   roles?: Role[]
