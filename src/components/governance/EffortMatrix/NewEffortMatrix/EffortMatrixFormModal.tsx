@@ -23,7 +23,6 @@ interface NewEffortMatrixProps {
 
 const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
   const { roles, isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData } = props
-
   const { showNotification } = useNotification()
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])

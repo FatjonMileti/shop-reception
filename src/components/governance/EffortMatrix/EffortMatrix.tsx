@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Box, CircularProgress, Grid, Paper, debounce, Typography } from "@mui/material"
+import { Box, CircularProgress, Grid, Paper, debounce, Typography } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './EffortMatrix.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -13,10 +13,10 @@ import { Delete, Edit } from '@mui/icons-material'
 import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { roles } from '../helpers'
-import { EffortMatrix, ValueLabelInterface } from '../interfaces'
+import { EffortMatrix, Role, ValueLabelInterface } from '../interfaces'
 import { useQuery } from 'react-query'
-import DeleteConfirmationModal from "components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal"
-import EffortMatrixFormModal from "./NewEffortMatrix/EffortMatrixFormModal"
+import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
+import EffortMatrixFormModal from './NewEffortMatrix/EffortMatrixFormModal'
 
 const EffortMatrix = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
@@ -29,6 +29,7 @@ const EffortMatrix = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<EffortMatrix>()
+  const [roleOptions, setRoleOptions] = useState<Role[]>([])
 
   const { showNotification } = useNotification()
 
@@ -52,32 +53,6 @@ const EffortMatrix = () => {
       }
     }
   )
-
-  const { data: roleOptions, isLoading: isRoleOptionsLoading } = useQuery(
-    ['teamMembers', domainFilterValue],
-    async () => {
-      if (domainFilterValue === null) {
-        return null
-      }
-
-      const result = await makeCoreGetRequest(
-        `/governance/teamMembers?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
-          domainFilterValue?.value
-        )}`
-      )
-      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
-      return resultOptions || null
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
 
   const columnsWithActions = useMemo(() => {
     let result = columns
@@ -154,9 +129,12 @@ const EffortMatrix = () => {
           : item
       )
 
+      const roleOptionsList = response.list.map(item => ({ value: item.role, label: item.role }))
+
       setTableItems(toTableRowItems(responseList))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
+      setRoleOptions(roleOptionsList)
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -164,12 +142,11 @@ const EffortMatrix = () => {
       })
     }
   }
-
   return (
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
-          {(isFilterOptionsLoading || isRoleOptionsLoading) && (
+          {isFilterOptionsLoading && (
             <div style={{ display: 'flex' }}>
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
             </div>
