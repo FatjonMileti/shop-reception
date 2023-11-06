@@ -1,5 +1,4 @@
 export const URLS = {
-  AUTH_SUPPLY_OMNI: 'supplyOmni',
-  AUTH_SHOPPING_CART: 'shoppingCart',
+  AUTH_SHOPPING_CART: 'supplyOmni/shoppingCart',
   AUTH_PRODUCT_SCAN: 'supplyOmni/productScan'
 }

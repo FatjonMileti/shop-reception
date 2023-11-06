@@ -1,17 +1,17 @@
-import { Box, CircularProgress, Paper, Typography } from '@mui/material'
+import { Box, CircularProgress, Typography } from '@mui/material'
 import { useNotification } from 'hooks'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import s from './ShoppingCart.modules.scss'
-import { Delete, Remove, Add, InsertDriveFileOutlined } from '@mui/icons-material'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { useState } from 'react'
-import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
+import { InsertDriveFileOutlined } from '@mui/icons-material'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import { ProductInfo } from './ProductInfo'
 
 const ShoppingCart = () => {
   const { showNotification } = useNotification()
   const queryClient = useQueryClient()
+
   const { data: products, isLoading: isLoadingGetProducts } = useQuery(
     ['cart-products'],
     async () => {
@@ -55,11 +55,6 @@ const ShoppingCart = () => {
       }
     }
   )
-
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
-  const openDeleteModal = () => setIsDeleteModalOpen(true)
-  const closeDeleteModal = () => setIsDeleteModalOpen(false)
-
   return (
     <div className={s.mainContainer}>
       {isLoadingGetProducts || isLoadingUpdateCart ? (
@@ -69,74 +64,7 @@ const ShoppingCart = () => {
           <Typography color="grey">Produse in cos: {products.summary.totalItems}</Typography>
 
           {products.list.map(product => (
-            <Paper key={product.id} className={s.filtersContainer}>
-              <Box className={s.cartContainer}>
-                <Typography fontWeight="600">{product.name}</Typography>
-
-                <Box className={s.cartContainer}>
-                  <Box className={s.cartContainer}>
-                    <Button
-                      onClick={() =>
-                        updateCartMutation({ quantity: product.quantity - 1, id: product.id })
-                      }
-                      label=""
-                    >
-                      <Remove />
-                    </Button>
-                    <Input
-                      type={'text'}
-                      variant={'outlined'}
-                      defaultValue={product.quantity}
-                      width="64px"
-                      onBlur={(event: any) =>
-                        updateCartMutation({ quantity: event.target.value, id: product.id })
-                      }
-                    />
-                    <Button
-                      onClick={() =>
-                        updateCartMutation({ quantity: product.quantity + 1, id: product.id })
-                      }
-                      label=""
-                    >
-                      <Add />
-                    </Button>
-                  </Box>
-
-                  <Box>
-                    <Typography fontWeight="600" color="red">
-                      {product.price} lei
-                    </Typography>
-                    {product.totalPriceWithoutDiscount && (
-                      <Typography
-                        color="grey"
-                        fontSize={15}
-                        textAlign={'center'}
-                        sx={{ textDecoration: 'line-through' }}
-                      >
-                        {product.totalPriceWithoutDiscount} lei
-                      </Typography>
-                    )}
-                  </Box>
-
-                  <Button onClick={openDeleteModal} label="">
-                    <Delete />
-                  </Button>
-
-                  <DeleteConfirmationModal
-                    isModalOpen={isDeleteModalOpen}
-                    closeModal={closeDeleteModal}
-                    itemId={product.id}
-                    setShouldRefreshData={() =>
-                      queryClient.invalidateQueries({
-                        queryKey: ['cart-products']
-                      })
-                    }
-                    actionUrl="/supply-omni/cart/product/:id"
-                    content={'Sunteti sigur ca vreti sa stergeti acest produs din cos?'}
-                  />
-                </Box>
-              </Box>
-            </Paper>
+            <ProductInfo product={product} updateCartMutation={updateCartMutation} />
           ))}
 
           <Box className={s.totalPriceContainer}>
