@@ -7,7 +7,6 @@ import { TaskManagement } from './TaskManagement'
 export const useVolumetryRoutes = applicationPages => {
   return (
     <>
-    <Route path={URLS.AUTH_EMPLOYEE}>
       <Route
         path={URLS.AUTH_EMPLOYEE_MANAGEMENT}
         element={
@@ -18,8 +17,6 @@ export const useVolumetryRoutes = applicationPages => {
           />
         }
       />
-    </Route>
-    <Route path={URLS.AUTH_TASK}>
       <Route
         path={URLS.AUTH_TASK_MANAGEMENT}
         element={
@@ -30,7 +27,6 @@ export const useVolumetryRoutes = applicationPages => {
           />
         }
       />
-    </Route>
     </>
   )
 }

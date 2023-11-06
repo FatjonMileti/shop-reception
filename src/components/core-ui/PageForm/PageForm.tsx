@@ -67,6 +67,7 @@ const PageForm = props => {
       })()
     } else {
       setInitialItems()
+      setIsLoading(false)
     }
   }, [setInitialItems])
 
@@ -161,6 +162,7 @@ const PageForm = props => {
         closeModal={resetForm}
         isPageForm
         errors={errors}
+        isLoading={isLoading}
       />
     </Box>
   )

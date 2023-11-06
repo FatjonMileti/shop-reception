@@ -33,7 +33,9 @@ export const getRenderedColumns = (columns, cb) =>
             return renderComponent({
               ...render,
               value: get(row, column.field),
-              discountValue: row.discountedPrice
+              totalPrice: row.totalPrice,
+              discountLabel: row.discountLabel,
+              totalPriceWithoutDiscount: row.totalPriceWithoutDiscount
             })
           }
 
