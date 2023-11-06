@@ -50,7 +50,7 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
   })
 
   const formik = useFormik({
-    enableReinitialize: true,
+    enableReinitialize: false,
     validateOnChange: false,
     initialValues: {
       id: (editItem as TeamAssignmentItem)?.id || 0,
