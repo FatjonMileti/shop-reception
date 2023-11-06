@@ -34,25 +34,6 @@ const EffortMatrix = () => {
 
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
 
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
-    ['domains'],
-    async () => {
-      const result = await makeCoreGetRequest('/governance/domains')
-      const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
-
-      setDomainFilterValue(resultOptions[0])
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
   const columnsWithActions = useMemo(() => {
     let result = columns
 
@@ -114,7 +95,6 @@ const EffortMatrix = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/governance/effortMatrix',
-          filters: [{ name: 'teamMember.domain', value: domainFilterValue.value }],
           tableFilters,
           page,
           rowsPerPage,
@@ -136,6 +116,7 @@ const EffortMatrix = () => {
       setIsLoading(false)
       setRoleOptions(roleOptionsList)
     } catch (error) {
+      console.log('debug', error);
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'
@@ -145,15 +126,7 @@ const EffortMatrix = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Grid container spacing={4}>
-        {isFilterOptionsLoading && (
-          <div style={{ display: 'flex' }}>
-            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-          </div>
-        )}
-      </Grid>
 
-      {domainFilterValue && (
         <Box>
           <EffortMatrixFormModal
             isModalOpen={isNewModalOpen}
@@ -191,7 +164,6 @@ const EffortMatrix = () => {
             setShouldRefreshData={setShouldRefreshData}
           />
         </Box>
-      )}
     </div>
   )
 }
