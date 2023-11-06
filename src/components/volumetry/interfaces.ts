@@ -18,7 +18,7 @@ export interface TaskManagementItem {
   estimateEndTime: string
   frequency: string
   prodStandardValue: string
-  umStandardProd: string
+  prodStandardUM: string
   workVolumeSource: string
   priority: number
   status: boolean

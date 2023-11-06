@@ -51,7 +51,7 @@ export const columns = [
   },
   {
     title: 'UM standard productivitate',
-    field: 'umStandardProd',
+    field: 'prodStandardUM',
     align: 'left',
     type: 'string'
   },
