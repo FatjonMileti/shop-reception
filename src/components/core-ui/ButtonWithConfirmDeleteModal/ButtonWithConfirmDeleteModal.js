@@ -29,7 +29,8 @@ const ButtonWithConfirmDeleteModal = ({
   formButtons,
   deletedItemId,
   deleteActionUrl,
-  additionalAction
+  additionalAction,
+  deleteActionQueryParams = null
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
@@ -43,7 +44,12 @@ const ButtonWithConfirmDeleteModal = ({
   const deleteItem = async () => {
     setIsDeleting(true)
     try {
-      await makeCoreDeleteRequest(`${deleteActionUrl}/${deletedItemId}`)
+      let url = `${deleteActionUrl}/${deletedItemId}`
+
+      if (deleteActionQueryParams) {
+        url = `${url}?${deleteActionQueryParams}`
+      }
+      await makeCoreDeleteRequest(url)
       showNotification({
         message: 'Item deleted successfully',
         type: 'success'
