@@ -22,6 +22,7 @@ import { QueryClient, QueryCache, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { useGovernanceRoutes } from 'components/governance/routes'
 import { useVolumetryRoutes } from 'components/volumetry/routes'
+import { useBakeryRoutes } from 'components/bakery/routes'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -114,6 +115,7 @@ const App = () => {
 
   const governanceRoutes = useGovernanceRoutes(applicationPages)
   const volumetryRoutes = useVolumetryRoutes(applicationPages)
+  const bakeryRoutes = useBakeryRoutes(applicationPages)
 
   return (
     <AuthProvider {...oidcConfig}>
@@ -140,6 +142,7 @@ const App = () => {
                   }
                 />
                 {governanceRoutes}
+                {bakeryRoutes}
                 {volumetryRoutes}
                 {applicationModulesPages.map(page =>
                   createRoute(

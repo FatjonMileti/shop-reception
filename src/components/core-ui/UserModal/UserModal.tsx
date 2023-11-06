@@ -167,7 +167,7 @@ function UserModal(props) {
             .filter(role => role.name.includes('TRAINEE'))
             .map(role => ({ name: role.id, label: role.name }))
           const otherRoles = rolesResult.filter(role => !role.name.includes('TRAINEE'))
-
+          
           setAdminRole(admin)
           setRoles(otherRoles)
           setTraineeOptions(traineeRoles)
