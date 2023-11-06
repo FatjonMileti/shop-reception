@@ -102,11 +102,11 @@ VALUES
     -- Governance
     (1, 'Team Day-Off Management', 'TimerOffOutlined', '/governance/projectTeam/teamDayOffManagement', true, 5, true),
     (2, 'Team Assignment', 'HowToRegOutlined', '/governance/projectTeam/teamAssignment', true, 1, true),
-    (3, 'Effort Matrix', 'DonutSmallOutlined', '/effortMatrix', true, 4, true),
-    (4, 'Project Milestones', 'AccountTreeOutlined', '/projectMilestones', true, 3, true),
-    (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/teamCapacity', true, 2, true),
-    (6, 'Individual Capacity', 'PeopleAltOutlined', '/individualCapacity', true, 2, false),
-    (7, 'My Time-Off', 'TimerOffOutlined', '/myTimeOff', true, 6, true),
+    (3, 'Effort Matrix', 'DonutSmallOutlined', '/governance/projectTeam/effortMatrix', true, 4, true),
+    (4, 'Project Milestones', 'AccountTreeOutlined', '/governance/projectTeam/projectMilestones', true, 3, true),
+    (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/governance/projectTeam/teamCapacity', true, 2, true),
+    (6, 'Individual Capacity', 'PeopleAltOutlined', '/governance/projectTeam/individualCapacity', true, 2, false),
+    (7, 'My Time-Off', 'TimerOffOutlined', '/governance/projectTeam/myTimeOff', true, 6, true),
     -- Bakery ADMIN
     (8 , 'Gestiune utilizatori', 'UsersManagement', '/usersManagement', true, 7, true),
     (9 , 'Gestiune zone', 'ZonesManagement', '/zones', true, 8, true),
@@ -149,7 +149,7 @@ VALUES
     (43, 'Raport vanzari + cadentier', 'CadentierSales', '/cadentier-sales-region', true , 35, true),
     (44, 'Raport utilizare aplicatie', 'CadentierSales', '/usage-report-region', true , 36, true),
     -- Supply OMNI
-    (45, 'Scanare produs', 'QrCodeScannerOutlined', '/productScan', true, 37, true),
+    (45, 'Scanare produs', 'QrCodeScannerOutlined', '/supplyOmni/productScan', true, 37, true),
     (46, 'Cos de cumparaturi', 'ShoppingBasketOutlined', '/shoppingCart', true, 38, true),
     (47, 'Selecteaza client', '', '/shoppingCartSelectClient', true, 38, false),
     (48, 'Date client', '', '/shoppingCartClientDetails/:id', true, 38, false),
