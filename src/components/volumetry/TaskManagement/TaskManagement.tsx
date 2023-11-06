@@ -11,6 +11,7 @@ import { useNotification } from 'hooks'
 import { Input } from 'components/core-ui/Input'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
+import { NewTask } from './NewTask'
 
 export const columns = [
   {
@@ -44,7 +45,7 @@ export const columns = [
     type: 'string'
   },
   {
-    title: 'Valoare standard prod',
+    title: 'Valoare standard productivitate',
     field: 'prodStandardValue',
     align: 'left',
     type: 'string'
@@ -204,12 +205,12 @@ const TaskManagement = () => {
           setShouldRefreshData={setShouldRefreshData}
           isEdit
         />
-        <DeleteTask
+        {/* <DeleteTask
           isModalOpen={isDeleteModalOpen}
           closeModal={closeDeleteModal}
           deleteItem={selectedRow}
           setShouldRefreshData={setShouldRefreshData}
-        />
+        /> */}
         <Table
           hideCheckbox
           orderBy="department.name"

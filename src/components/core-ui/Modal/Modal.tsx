@@ -9,7 +9,7 @@ const sx = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '30%',
+  width: '50%',
   bgcolor: '#fff',
   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
   borderRadius: '8px',
@@ -17,7 +17,7 @@ const sx = {
 }
 
 const Modal = props => {
-  const { isModalOpen, closeModal, modalTitle, children } = props
+  const { isModalOpen, closeModal, modalTitle, children, modalWidth = null } = props
 
   const isXs = useMediaQuery('(max-width:624px)')
   const isMd = useMediaQuery('(max-width:936px)')
@@ -32,7 +32,7 @@ const Modal = props => {
       <Box
         sx={{
           ...sx,
-          width: isXs ? 'calc(100% - 24px)' : isMd ? '50%' : '30%'
+          width: isXs ? 'calc(100% - 24px)' : modalWidth || isMd ? '50%' : '30%'
         }}
       >
         <IconButton
