@@ -7,6 +7,18 @@ export interface TeamDayOffManagementItem {
   teamMemberName: string
   teamMemberId: string
 }
+export interface EffortMatrix {
+  id: number,
+  role: string,
+  evaluationPhase: number,
+  analysisPhase: number,
+  designPhase: number,
+  developmentPhase: number,
+  systemTestPhase: number,
+  uatPhase: number,
+  rolloutPhase: number,
+  hypercarePhase: number
+}
 
 export interface TeamAssignmentItem {
   assignedProject: string
@@ -27,6 +39,11 @@ export interface ValueLabelInterface {
 }
 
 export interface TeamMember {
+  label: string
+  value: string
+}
+
+export interface Role {
   label: string
   value: string
 }
