@@ -20,7 +20,6 @@ function TableFilters(props) {
       .map(filter => {
         const { defaultValue, name, type } = filter
         const filterDefaultValue = getDefaultItemValue(defaultValue)
-
         dispatch(
           TableActions.setFilters({
             ...filterState,
