@@ -1,9 +1,7 @@
-import React, { useMemo, useState } from 'react'
-import { Box, CircularProgress, Grid, Paper, debounce, Typography } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { useMemo, useState } from 'react'
+import { Box, Typography } from '@mui/material'
 import s from './EffortMatrix.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
-import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -14,12 +12,10 @@ import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { roles } from '../helpers'
 import { EffortMatrix, Role, ValueLabelInterface } from '../interfaces'
-import { useQuery } from 'react-query'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import EffortMatrixFormModal from './NewEffortMatrix/EffortMatrixFormModal'
 
 const EffortMatrix = () => {
-  const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
   const [tableItems, setTableItems] = useState<EffortMatrix[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -34,25 +30,6 @@ const EffortMatrix = () => {
   const { showNotification } = useNotification()
 
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
-
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
-    ['domains'],
-    async () => {
-      const result = await makeCoreGetRequest('/governance/domains')
-      const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
-
-      setDomainFilterValue(resultOptions[0])
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
 
   const columnsWithActions = useMemo(() => {
     let result = columns
@@ -104,17 +81,12 @@ const EffortMatrix = () => {
     action === 'edit' ? openEditModal() : openDeleteModal()
   }
 
-  const handleFilterChange = value => {
-    setDomainFilterValue(value)
-  }
-
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/governance/effortMatrix',
-          filters: [{ name: 'teamMember.domain', value: domainFilterValue.value }],
           tableFilters,
           page,
           rowsPerPage,
@@ -142,30 +114,10 @@ const EffortMatrix = () => {
       })
     }
   }
+
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
-        <Grid container spacing={4}>
-          {isFilterOptionsLoading && (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          )}
 
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="standard"
-              name="teamMember.domain"
-              label="Domain"
-              disableClearable
-              value={domainFilterValue}
-              options={filterOptions ?? []}
-              onChange={handleFilterChange}
-            />
-          </Grid>
-        </Grid>
-      </Paper>
-      {domainFilterValue && (
         <Box>
           <EffortMatrixFormModal
             isModalOpen={isNewModalOpen}
@@ -203,7 +155,6 @@ const EffortMatrix = () => {
             setShouldRefreshData={setShouldRefreshData}
           />
         </Box>
-      )}
     </div>
   )
 }
