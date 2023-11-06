@@ -1,4 +1,3 @@
 export const URLS = {
-  AUTH_EMPLOYEE: 'volumetry/employee',
-  AUTH_EMPLOYEE_MANAGEMENT: 'employeeManagement'
+  AUTH_EMPLOYEE_MANAGEMENT: 'volumetry/employee/employeeManagement'
 }
