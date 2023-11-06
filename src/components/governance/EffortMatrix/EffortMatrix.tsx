@@ -1,8 +1,7 @@
 import { useMemo, useState } from 'react'
-import { Box, CircularProgress, Grid, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import s from './EffortMatrix.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
-import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import { useNotification, usePermissions } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -13,12 +12,10 @@ import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { roles } from '../helpers'
 import { EffortMatrix, Role, ValueLabelInterface } from '../interfaces'
-import { useQuery } from 'react-query'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import EffortMatrixFormModal from './NewEffortMatrix/EffortMatrixFormModal'
 
 const EffortMatrix = () => {
-  const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
   const [tableItems, setTableItems] = useState<EffortMatrix[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -84,11 +81,6 @@ const EffortMatrix = () => {
     action === 'edit' ? openEditModal() : openDeleteModal()
   }
 
-  const handleFilterChange = value => {
-    setDomainFilterValue(value)
-    setShouldRefreshData(true)
-  }
-
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
@@ -116,7 +108,6 @@ const EffortMatrix = () => {
       setIsLoading(false)
       setRoleOptions(roleOptionsList)
     } catch (error) {
-      console.log('debug', error);
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'
