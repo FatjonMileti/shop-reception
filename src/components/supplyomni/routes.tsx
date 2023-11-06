@@ -2,6 +2,7 @@ import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { Route } from 'react-router-dom'
 import { URLS } from './constants'
 import { ProductScan } from './ProductScan'
+import { ShoppingCart } from './ShoppingCart'
 
 export const useSupplyOmniRoutes = applicationPages => {
   return (
@@ -11,6 +12,16 @@ export const useSupplyOmniRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ProductScan}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_SHOPPING_CART}
+        element={
+          <PrivateRoute
+            component={ShoppingCart}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
