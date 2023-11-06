@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from 'react'
-import { Box, CircularProgress, Grid, Paper, debounce, Typography } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { useMemo, useState } from 'react'
+import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import s from './EffortMatrix.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
@@ -106,6 +105,7 @@ const EffortMatrix = () => {
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
+    setShouldRefreshData(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -142,29 +142,17 @@ const EffortMatrix = () => {
       })
     }
   }
+
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
-        <Grid container spacing={4}>
-          {isFilterOptionsLoading && (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          )}
+      <Grid container spacing={4}>
+        {isFilterOptionsLoading && (
+          <div style={{ display: 'flex' }}>
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+          </div>
+        )}
+      </Grid>
 
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="standard"
-              name="teamMember.domain"
-              label="Domain"
-              disableClearable
-              value={domainFilterValue}
-              options={filterOptions ?? []}
-              onChange={handleFilterChange}
-            />
-          </Grid>
-        </Grid>
-      </Paper>
       {domainFilterValue && (
         <Box>
           <EffortMatrixFormModal
