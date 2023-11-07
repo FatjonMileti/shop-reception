@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Box, CircularProgress, Grid, Paper, debounce } from '@mui/material'
+import { Box, CircularProgress, Grid, Paper } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -87,12 +87,7 @@ const TeamAssignment: React.FC = props => {
     ]
   })
 
-  const {
-    data: filterOptions,
-    isLoading: isFilterOptionsLoading,
-    error,
-    isError
-  } = useQuery(
+  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
     ['domains'],
     async () => {
       const result = await makeCoreGetRequest('/governance/domains')
