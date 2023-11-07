@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { Box, CircularProgress, Grid, Paper, debounce } from '@mui/material'
+import React, { useMemo, useState } from 'react'
+import { Box, CircularProgress, Grid, Paper, debounce, Typography } from "@mui/material"
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -12,11 +12,12 @@ import { Input } from 'components/core-ui/Input'
 import { NewTimeOff } from './NewTimeOff'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
-import { DeleteTimeOff } from './DeleteTimeOff'
 import { toTableRowItems } from './serializers'
-import { columns, roles } from './helpers'
+import { columns } from './helpers'
+import { roles } from '../helpers'
 import { TeamDayOffManagementItem, ValueLabelInterface } from '../interfaces'
 import { useQuery } from 'react-query'
+import DeleteConfirmationModal from "components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal"
 
 const TeamDayOffManagement = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
@@ -28,7 +29,7 @@ const TeamDayOffManagement = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<TeamDayOffManagementItem | number>(0)
+  const [selectedRow, setSelectedRow] = useState<TeamDayOffManagementItem>()
 
   const { showNotification } = useNotification()
 
@@ -180,23 +181,23 @@ const TeamDayOffManagement = () => {
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
-          {(isFilterOptionsLoading || isTeamMembersLoading) && (
+          {isFilterOptionsLoading || isTeamMembersLoading ? (
             <div style={{ display: 'flex' }}>
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
             </div>
+          ) : (
+            <Grid xs={12} md={3} item>
+              <AsyncAutocomplete
+                variant="standard"
+                name="teamMember.domain"
+                label="Domain"
+                disableClearable
+                value={domainFilterValue}
+                options={filterOptions}
+                onChange={handleFilterChange}
+              />
+            </Grid>
           )}
-
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="standard"
-              name="teamMember.domain"
-              label="Domain"
-              disableClearable
-              value={domainFilterValue}
-              options={filterOptions}
-              onChange={handleFilterChange}
-            />
-          </Grid>
         </Grid>
       </Paper>
       {domainFilterValue && (
@@ -214,10 +215,12 @@ const TeamDayOffManagement = () => {
             setShouldRefreshData={setShouldRefreshData}
             isEdit
           />
-          <DeleteTimeOff
+          <DeleteConfirmationModal
             isModalOpen={isDeleteModalOpen}
             closeModal={closeDeleteModal}
-            deleteItem={selectedRow}
+            actionUrl="/governance/teamTimeOff/:id"
+            itemId={`${selectedRow?.id}`}
+            content={<Typography>Are you sure you want to delete this entry?</Typography>}
             setShouldRefreshData={setShouldRefreshData}
           />
           <Table

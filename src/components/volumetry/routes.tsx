@@ -5,7 +5,7 @@ import { EmployeeManagement } from './EmployeeManagement'
 
 export const useVolumetryRoutes = applicationPages => {
   return (
-    <Route path={URLS.AUTH_EMPLOYEE}>
+    <>
       <Route
         path={URLS.AUTH_EMPLOYEE_MANAGEMENT}
         element={
@@ -16,6 +16,6 @@ export const useVolumetryRoutes = applicationPages => {
           />
         }
       />
-    </Route>
+    </>
   )
 }

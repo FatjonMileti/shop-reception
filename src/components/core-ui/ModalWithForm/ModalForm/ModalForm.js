@@ -23,7 +23,8 @@ const ModalForm = ({
   closeModal,
   extraUrlParams = {},
   isPageForm = false,
-  errors
+  errors,
+  isLoading = false
 }) => {
   const [processedFormItems, setProcessedFormItems] = useState(formItems)
 
@@ -116,6 +117,7 @@ const ModalForm = ({
                 onClick={() => {
                   isSaveButton ? saveData(processedFormItems) : closeModal()
                 }}
+                disabled={isLoading}
               />
             ) : (
               <Button
