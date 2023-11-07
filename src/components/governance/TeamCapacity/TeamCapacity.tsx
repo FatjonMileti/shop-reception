@@ -72,9 +72,7 @@ const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
   const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [teamMembers, setTeamMembers] = useState(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<TeamAssignmentItem | number>(0)
 
   const [tableFilter, setTableFilter] = useState<TeamCapacityTableFilter>({
     teamMemberName: null,
@@ -108,27 +106,6 @@ const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
       }
     }
   )
-
-  const selectRow = row => {
-    setSelectedRow(row)
-  }
-
-  const columnsWithActions = useMemo(() => {
-    let result = columns
-    if (1 < 2) {
-      const actionsRow = {
-        title: '',
-        field: 'actions',
-        align: 'right',
-        width: '112px',
-        collapsible: 'true',
-        render: row => <Box display="flex"></Box>
-      } as any
-
-      result = [...columns, actionsRow]
-    }
-    return result
-  }, [columns, teamMembers])
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
@@ -243,7 +220,6 @@ const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
             hideCheckbox
             orderBy="teamMember.name"
             order="asc"
-            columns={columnsWithActions}
             items={tableItems}
             fetchData={fetchData}
             isLoading={isLoading}
