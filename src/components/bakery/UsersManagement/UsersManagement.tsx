@@ -1,24 +1,43 @@
-import { Box, Grid, Paper } from '@mui/material'
+import { Box } from '@mui/material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from './UsersManagement.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useMemo, useState } from 'react'
-import { columns, roles } from './helpers'
-import { useNotification, usePermissions } from 'hooks'
+import { useNotification } from 'hooks'
 import { Edit } from '@mui/icons-material'
 import { UsersManagementItem } from '../interfaces'
-import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { toTableRowItems } from './serializers'
 import { IconCell } from 'components/core-ui/IconCell'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { EditUser } from './EditUser'
 import { UserModal } from 'components/core-ui/UserModal'
+import { MultivalueCell } from 'components/core-ui/MultivalueCell'
+
+const columns = [
+  {
+    title: 'Nume user',
+    field: 'lastName',
+    align: 'left'
+  },
+  {
+    title: 'Prenume User',
+    field: 'firstName',
+    align: 'left'
+  },
+  {
+    title: 'Magazin',
+    field: 'storeName',
+    align: 'left'
+  },
+  {
+    title: 'Regiune',
+    field: 'regionName',
+    align: 'left',
+    collapsible: true
+  },
+]
 
 const UsersManagement = () => {
-  const { canEdit } = usePermissions(roles)
   const [selectedRow, setSelectedRow] = useState<UsersManagementItem | null>(null)
   const [tableItems, setTableItems] = useState<UsersManagementItem[]>([])
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
@@ -45,7 +64,7 @@ const UsersManagement = () => {
           orderBy
         })
       )
-      setTableItems(toTableRowItems(response.list))
+      setTableItems(response.list)
 
       setTotalCount(response.page.totalCount)
 
@@ -58,17 +77,25 @@ const UsersManagement = () => {
     }
   }
 
-  const handleFilterChange = value => {
-    // setDomainFilterValue(value)
-    setShouldRefreshData(true)
-  }
-
   const selectRow = (row, action) => {
     setSelectedRow(row)
     action === 'edit' && openEditModal()
   }
   const columnsWithActions = useMemo(() => {
     let result = columns
+
+    const roleColumn = {
+      title: 'Rol',
+      field: 'roles',
+      align: 'left',
+      width: '140px',
+      collapsible: 'true',
+      render: row => (
+        <Box>
+          <MultivalueCell value={row.roles} />
+        </Box>
+      )
+    } as any
 
     const statusColumn = {
       title: 'Status',
@@ -78,54 +105,43 @@ const UsersManagement = () => {
       collapsible: 'true',
       render: row => (
         <Box>
-          {/* <IconCell value={'active'} /> */}
-          <IconCell value={row.status ? 'active' : 'inactive'} />
+          <IconCell value={row.enable ? 'active' : 'inactive'} />
         </Box>
       )
     } as any
 
-    if (canEdit) {
-      const actionsRow = {
-        title: '',
-        field: 'actions',
-        align: 'right',
-        width: '70px',
-        collapsible: 'true',
-        render: row => (
-          <Box display="flex">
-            {canEdit && (
-              <Button
-                onClick={() => selectRow(row, 'edit')}
-                style={{ minWidth: '0.7rem', background: 'transparent' }}
-                label=""
-              >
-                <Edit />
-              </Button>
-            )}
-          </Box>
-        )
-      } as any
+    let actionsRow = {
+      title: '',
+      field: 'actions',
+      align: 'right',
+      width: '70px',
+      collapsible: 'true',
+      render: row => (
+        <Box display="flex">          
+            <Button
+              onClick={() => selectRow(row, 'edit')}
+              style={{ minWidth: '0.7rem', background: 'transparent' }}
+              label=""
+            >
+              <Edit />
+            </Button>          
+        </Box>
+      )
+    } as any
 
-      result = [...columns, statusColumn, actionsRow]
-    }
+    result = [...columns, roleColumn, statusColumn, actionsRow]
     return result
-  }, [columns, canEdit])
+  }, [columns])
 
   return (
     <div className={s.mainContainer}>
+      {/* TODO add table search bar after UI redesign */}
       <Box>
-        {/* <EditUser
-          isModalOpen={isEditModalOpen}
-          closeModal={closeEditModal}
-          editItem={selectedRow}
-          setShouldRefreshData={setShouldRefreshData}
-        /> */}
         <UserModal
           isModalOpen={isEditModalOpen}
           closeModal={closeEditModal}
           editedItemId={selectedRow?.id}
-          // additionalAction={}
-          // formAction={}
+          formAction={{ url: `/bakery/user/${selectedRow?.id}` }}
           userModal={{
             getAction: '/bakery/user',
             getRolesAction: '/bakery/role',

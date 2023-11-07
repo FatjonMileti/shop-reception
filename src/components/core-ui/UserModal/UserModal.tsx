@@ -158,7 +158,6 @@ function UserModal(props) {
             ...result,
             structureRoles: result.structureRoles
           })
-
           const rolesResult = await makeCoreGetRequest(`${getRolesAction}`)
 
           const admin = rolesResult.find(role => role.name === 'ADMIN')
@@ -199,7 +198,6 @@ function UserModal(props) {
         item => Object.keys(item).length && item.roleId
       )
     }
-
     try {
       await makeCorePutRequest(formAction.url, payload)
       showNotification({
@@ -259,7 +257,7 @@ function UserModal(props) {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <React.Fragment>
-                    {roles
+                    {editItem && roles
                       ?.filter(role => role.name !== 'ADMIN')
                       .map(role => {
                         const isChecked = editItem?.structureRoles?.some(
@@ -297,7 +295,7 @@ function UserModal(props) {
                       isTrainee={true}
                       traineeOptions={traineeOptions}
                       defaultChecked={traineeOptions.find(userRole =>
-                        editItem.structureRoles?.some(option => option.roleId === userRole.name)
+                        editItem?.structureRoles?.some(option => option.roleId === userRole.name)
                       )}
                       onChange={onTraineeChange}
                       roleName={{ label: 'TRAINEE' }}
@@ -313,7 +311,7 @@ function UserModal(props) {
                     variant="standard"
                     width="45%"
                     label="Status"
-                    value={editItem.enable}
+                    value={editItem?.enable}
                     values={[
                       {
                         value: 'true',
