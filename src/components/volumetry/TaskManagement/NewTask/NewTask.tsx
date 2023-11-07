@@ -1,24 +1,51 @@
 import { TaskManagementItem } from 'components/volumetry/interfaces'
 import { useNotification } from 'hooks'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from 'utils/formatting'
 import { Modal } from 'components/core-ui/Modal'
-import { Grid } from '@mui/material'
-import { Input, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { CircularProgress, Grid } from '@mui/material'
+import { Button, Checkbox, Input, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { useMutation, useQuery } from 'react-query'
+import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
+import s from 'components/core-ui/Modal/Modal.modules.scss'
+import { toTaskPayload } from './serializers'
 
 interface NewTaskProps {
   isModalOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
   isEdit?: boolean
-  editItem?: TaskManagementItem | number
+  editItemId?: string | number
 }
 
 const NewTask: React.FC<NewTaskProps> = props => {
-  const { isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData } = props
+  const { isModalOpen, closeModal, isEdit, editItemId, setShouldRefreshData } = props
+
+  const { data: editItem } = useQuery(
+    ['task', editItemId],
+    async () => {
+      if (editItemId) {
+        const result = await makeCoreGetRequest(`/volumetry/task/${editItemId}`)
+
+        return result || null
+      }
+      return null
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A aparut o eroare la obtinerea detaliilor taskului. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
 
   const { showNotification } = useNotification()
 
@@ -26,37 +53,116 @@ const NewTask: React.FC<NewTaskProps> = props => {
 
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
+  const { data: departmentFilterOptions } = useQuery(
+    ['departments'],
+    async () => {
+      const result = await makeCoreGetRequest('/volumetry/department')
+      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
+
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A aparut o eroare la obtinerea departamentelor. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: frequencyFilterOptions } = useQuery(
+    ['frequencies'],
+    async () => {
+      const result = await makeCoreGetRequest('/volumetry/frequency')
+      const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
+
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A aparut o eroare la obtinerea frecventelor. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: prodStandardUMFilterOptions } = useQuery(
+    ['prodStandardUM'],
+    async () => {
+      const result = await makeCoreGetRequest('/volumetry/productivityStandardUM')
+      const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
+
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A aparut o eroare la obtinerea Unitatilor de masura a activitatii standard ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: workVolumeSourceFilterOptions } = useQuery(
+    ['workVolumeSource'],
+    async () => {
+      const result = await makeCoreGetRequest('/volumetry/workVolumeSource')
+      const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
+
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A aparut o eroare la obtinerea Unitatilor de masura a activitatii standard ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const submitTask = async values => {
+    if (editItem) {
+      await makeCorePutRequest(`/volumetry/task/${(editItem as TaskManagementItem)?.id}`, values)
+    } else {
+      await makeCorePostRequest('/volumetry/task/', values)
+    }
+  }
+
+  const { isLoading, mutate } = useMutation(submitTask, {
+    onSuccess: res => {
+      setShouldRefreshData(true)
+      closeModal()
+      showNotification({
+        message: 'Taskul a fost salvat cu succes',
+        type: 'success'
+      })
+    },
+    onError: res => {
+      showNotification({
+        message: `A aparut o eroare la salvarea taskului. ${formatErrorMessage(res)}`,
+        type: 'error'
+      })
+    }
+  })
+
+  console.log(initialValues)
+
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      try {
-        // const payload = {
-        //   teamMember: {
-        //     id: isEdit ? (editItem as TeamDayOffManagementItem).teamMemberId : values.teamMember.value
-        //   },
-        //   dayOffType: values.dayOffType,
-        //   startDate: formatPayloadDate(values.startDate),
-        //   endDate: formatPayloadDate(values.endDate),
-        //   ...(values.numberOfHours && { numberOfHours: values.numberOfHours })
-        // }
-
-        // if (isEdit) {
-        //   await makeCorePutRequest(`/governance/teamTimeOff/${formik.values.id}`, payload)
-        // } else {
-        //   await makeCorePostRequest('/governance/teamTimeOff', payload)
-        // }
-
-        setShouldRefreshData(true)
-        closeModal()
-      } catch (error) {
-        showNotification({
-          message: `Error while saving time off data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
+      mutate(toTaskPayload(values))
     }
   })
 
@@ -68,6 +174,9 @@ const NewTask: React.FC<NewTaskProps> = props => {
       modalWidth="50%"
     >
       <Grid container spacing={4}>
+        {isLoading && (
+          <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+        )}
         <Grid xs={12} item>
           <Input
             type="text"
@@ -82,7 +191,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
             required
           />
         </Grid>
-        <Grid xs={12} md={6} item>
+        {/* <Grid xs={12} md={6} item>
           <TimePicker
             label="Ora estimata de inceput"
             value={formik.values.estimateStartTime}
@@ -101,18 +210,19 @@ const NewTask: React.FC<NewTaskProps> = props => {
             helperText={formik.errors.taskName as string}
             required
           />
-        </Grid>
+        </Grid> */}
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
             variant="standard"
-            name="departmentName"
-            label="Departamanet"
-            value={formik.values.departmentName}
-            options={[]}
-            onChange={value => formik.setFieldValue('departmentName', value)}
-            error={!!formik.errors.departmentName}
-            helperText={formik.errors.departmentName as string}
+            name="departments"
+            label="Departament"
+            value={formik.values.departments || []}
+            options={departmentFilterOptions}
+            onChange={value => formik.setFieldValue('departments', value)}
+            error={!!formik.errors.departments}
+            helperText={formik.errors.departments as string}
             required
+            multiple
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -121,7 +231,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
             name="frequency"
             label="Frecventa"
             value={formik.values.frequency}
-            options={[]}
+            options={frequencyFilterOptions}
             onChange={value => formik.setFieldValue('frequency', value)}
             error={!!formik.errors.frequency}
             helperText={formik.errors.frequency as string}
@@ -147,7 +257,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
             name="prodStandardUM"
             label="UM standard productivitate"
             value={formik.values.prodStandardUM}
-            options={[]}
+            options={prodStandardUMFilterOptions}
             onChange={value => formik.setFieldValue('prodStandardUM', value)}
             error={!!formik.errors.prodStandardUM}
             helperText={formik.errors.prodStandardUM as string}
@@ -160,7 +270,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
             name="workVolumeSource"
             label="Sursa volum de lucru"
             value={formik.values.workVolumeSource}
-            options={[]}
+            options={workVolumeSourceFilterOptions}
             onChange={value => formik.setFieldValue('workVolumeSource', value)}
             error={!!formik.errors.workVolumeSource}
             helperText={formik.errors.workVolumeSource as string}
@@ -181,7 +291,14 @@ const NewTask: React.FC<NewTaskProps> = props => {
           />
         </Grid>
         <Grid xs={12} md={6} item>
-          <Input
+          <Checkbox
+            checked={formik.values.status}
+            label="Activ"
+            onChange={event => formik.setFieldValue('status', event.target.checked)}
+            // error={!!formik.errors.status}
+            // helperText={formik.errors.status as string}
+          />
+          {/* <Input
             label="Status"
             type="select"
             values={[]}
@@ -195,7 +312,11 @@ const NewTask: React.FC<NewTaskProps> = props => {
             error={!!formik.errors.status}
             helperText={formik.errors.status as string}
             required
-          />
+          /> */}
+        </Grid>
+        <Grid xs={12} item className={s.modalButtons}>
+          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+          <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
         </Grid>
       </Grid>
     </Modal>

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './TaskManagement.modules.scss'
 import BooleanIcon from 'components/core-ui/BooleanIcon/BooleanIcon'
@@ -12,11 +12,14 @@ import { Input } from 'components/core-ui/Input'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Delete, Edit } from '@mui/icons-material'
 import { NewTask } from './NewTask'
+import { toTableItems } from './serializers'
+import { useQuery } from 'react-query'
+import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 
 export const columns = [
   {
     title: 'Departament',
-    field: 'departmentName',
+    field: 'departments',
     align: 'left',
     type: 'string'
   },
@@ -81,12 +84,10 @@ export const columns = [
 
 const tableFilterFields = [
   {
-    name: 'departmentName',
+    name: 'departments',
     label: 'Departament',
     type: 'text',
-    filter: (
-      <Input type="text" name="departmentName" label="Departament" variant="standard" value="" />
-    )
+    filter: <Input type="text" name="departments" label="Departament" variant="standard" value="" />
   },
   {
     name: 'taskName',
@@ -116,7 +117,7 @@ const TaskManagement = () => {
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<TaskManagementItem | number>(0)
+  const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
 
   const { showNotification } = useNotification()
 
@@ -134,7 +135,7 @@ const TaskManagement = () => {
         })
       )
 
-      setTableItems(response.list)
+      setTableItems(toTableItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -155,8 +156,15 @@ const TaskManagement = () => {
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
   const selectRow = (row, action) => {
-    setSelectedRow(row)
-    action === 'edit' ? openEditModal() : openDeleteModal()
+    setSelectedRowId(row.id)
+
+    if (action === 'edit') {
+      openEditModal()
+    }
+
+    if (action === 'delete') {
+      openDeleteModal()
+    }
   }
 
   const columnsWithActions = useMemo(() => {
@@ -201,21 +209,23 @@ const TaskManagement = () => {
         <NewTask
           isModalOpen={isEditModalOpen}
           closeModal={closeEditModal}
-          editItem={selectedRow}
+          editItemId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
           isEdit
         />
-        {/* <DeleteTask
+        <DeleteConfirmationModal
           isModalOpen={isDeleteModalOpen}
           closeModal={closeDeleteModal}
-          deleteItem={selectedRow}
+          actionUrl="/volumetry/task/:id"
+          itemId={selectedRowId}
+          content={<Typography>Are you sure you want to delete this entry?</Typography>}
           setShouldRefreshData={setShouldRefreshData}
-        /> */}
+        />
         <Table
           hideCheckbox
           orderBy="department.name"
           order="desc"
-          columns={columns}
+          columns={columnsWithActions}
           items={tableItems}
           fetchData={fetchData}
           isLoading={isLoading}

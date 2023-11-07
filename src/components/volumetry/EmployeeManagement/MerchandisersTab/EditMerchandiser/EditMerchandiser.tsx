@@ -103,7 +103,7 @@ const EditMerchandiser: React.FC<EditMerchandiserProps> = props => {
 
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'}>
-      <Grid container spacing={2}>
+      <Grid container spacing={4}>
         {(isLoading || isVolumetryDepartmentLoading || isVolumetryPositionLoading) && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         )}
