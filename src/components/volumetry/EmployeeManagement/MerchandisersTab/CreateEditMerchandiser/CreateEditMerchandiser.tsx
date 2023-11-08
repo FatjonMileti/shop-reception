@@ -8,32 +8,35 @@ import { validationSchema } from './helpers'
 import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useMutation, useQuery } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
-import { NewMerchandiserItem, ValueLabelInterface } from 'components/volumetry/interfaces'
+import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 
-interface NewMerchandiserProps {
+interface CreateEditMerchandiserProps {
   isModalOpen: boolean
   closeModal: Function
+  editItem?: EmployeeManagementItem | number
   setShouldRefreshData: Function
 }
 
-const NewMerchandiser: React.FC<NewMerchandiserProps> = props => {
-  const { isModalOpen, closeModal, setShouldRefreshData } = props
+const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
+  const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
-  const addMerchandiser = async values => {
-    await makeCorePostRequest(
-      `/volumetry/merchendiser`,
-      values
-    )
+  const mutateMerchandiser = async values => {
+    editItem
+      ? await makeCorePutRequest(
+          `/volumetry/merchendiser/${(editItem as EmployeeManagementItem)?.id}`,
+          values
+        )
+      : await makeCorePostRequest(`/volumetry/merchendiser`, values)
   }
 
-  const { isLoading, mutate } = useMutation(addMerchandiser, {
+  const { isLoading, mutate } = useMutation(mutateMerchandiser, {
     onSuccess: res => {
       setShouldRefreshData(true)
       closeModal()
       showNotification({
-        message: 'Item added successfully',
+        message: editItem ? 'Item edited successfully' : 'Item added successfully',
         type: 'success'
       })
     },
@@ -89,18 +92,19 @@ const NewMerchandiser: React.FC<NewMerchandiserProps> = props => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      name: '',
-      departmentName:  '',
-      position: ''
+      id: (editItem as EmployeeManagementItem)?.id || 0,
+      name: (editItem as EmployeeManagementItem)?.name || '',
+      departmentName: (editItem as EmployeeManagementItem)?.departmentName || '',
+      position: (editItem as EmployeeManagementItem)?.position || ''
     },
     validationSchema: validationSchema,
-    onSubmit: async (values: NewMerchandiserItem) => {
+    onSubmit: async (values: EmployeeManagementItem) => {
       mutate(values)
     }
   })
 
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'New merchandiser'}>
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'}>
       <Grid container spacing={2}>
         {(isLoading || isVolumetryDepartmentLoading || isVolumetryPositionLoading) && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -152,4 +156,4 @@ const NewMerchandiser: React.FC<NewMerchandiserProps> = props => {
   )
 }
 
-export default NewMerchandiser
+export default CreateEditMerchandiser

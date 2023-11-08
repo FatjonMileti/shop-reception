@@ -15,8 +15,7 @@ import { Input } from 'components/core-ui/Input'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { columns, roles } from './helpers'
 import { DeleteMerchandiser } from './DeleteMerchandiser'
-import { EditMerchandiser } from './EditMerchandiser'
-import { NewMerchandiser } from './NewMerchandiser'
+import { CreateEditMerchandiser } from './CreateEditMerchandiser'
 
 const tableFilterFields = [
   {
@@ -185,7 +184,7 @@ const MerchandisersTab = () => {
 
       {storeFilterValue && (
         <Box>
-          <NewMerchandiser
+          <CreateEditMerchandiser
             isModalOpen={isNewModalOpen}
             closeModal={closeNewModal}
             setShouldRefreshData={setShouldRefreshData}
@@ -196,7 +195,7 @@ const MerchandisersTab = () => {
             deleteItem={selectedRow}
             setShouldRefreshData={setShouldRefreshData}
           />
-          <EditMerchandiser
+          <CreateEditMerchandiser
             isModalOpen={isEditModalOpen}
             closeModal={closeEditModal}
             editItem={selectedRow}
