@@ -2,9 +2,7 @@ import * as Yup from 'yup'
 
 export const getInitialValues = editItem => ({
   ...(editItem?.id ? { id: editItem?.id } : {}),
-  departments: editItem
-    ? editItem?.departments.map(department => ({ value: department.id, label: department.name }))
-    : [],
+  department: editItem ? { value: editItem.department.id, label: editItem.department.name } : null,
   taskName: editItem?.taskName ?? '',
   estimateStartTime: editItem?.estimateStartTime ?? '',
   estimateEndTime: editItem?.estimateEndTime ?? '',
@@ -25,12 +23,10 @@ export const getValidationSchema = editItem =>
     taskName: Yup.string().required(),
     estimateStartTime: Yup.date().required(),
     estimateEndTime: Yup.date().required(),
-    departments: Yup.array().of(
-      Yup.object().shape({
-        label: Yup.string().required('Departament is required'),
-        value: Yup.string().required('Departament is required')
-      })
-    ),
+    department: Yup.object().shape({
+      label: Yup.string().required('Departament is required'),
+      value: Yup.string().required('Departament is required')
+    }),
     frequency: Yup.object().shape({
       label: Yup.string().required('Frequency is required'),
       value: Yup.string().required('Frequency is required')

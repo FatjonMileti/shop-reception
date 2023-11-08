@@ -1,6 +1,6 @@
 export const toTableItems = items => items.map(item => ({
   id: item.id,
-  departments: item.departments.map(department => department.name).join(','),
+  department: item.department.name,
   taskName: item.taskName,
   estimateStartTime: item.estimateStartTime,
   estimateEndTime: item.estimateEndTime,

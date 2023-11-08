@@ -12,7 +12,7 @@ export interface EmployeeManagementItem {
 
 export interface TaskManagementItem {
   id: string | number
-  departments: string
+  department: string
   taskName: string
   estimateStartTime: string
   estimateEndTime: string

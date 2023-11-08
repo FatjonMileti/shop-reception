@@ -165,6 +165,8 @@ const NewTask: React.FC<NewTaskProps> = props => {
     }
   })
 
+  console.log(formik.errors)
+
   return (
     <Modal
       isModalOpen={isModalOpen}
@@ -223,15 +225,14 @@ const NewTask: React.FC<NewTaskProps> = props => {
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
             variant="outlined"
-            name="departments"
+            name="department"
             label="Departament"
-            value={formik.values.departments || []}
+            value={formik.values.department || []}
             options={departmentFilterOptions}
-            onChange={value => formik.setFieldValue('departments', value)}
-            error={!!formik.errors.departments}
-            helperText={formik.errors.departments as string}
+            onChange={value => formik.setFieldValue('department', value)}
+            error={!!formik.errors.department}
+            helperText={formik.errors.department as string}
             required
-            multiple
           />
         </Grid>
         <Grid xs={12} md={6} item>

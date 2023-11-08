@@ -17,7 +17,7 @@ import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/
 export const columns = [
   {
     title: 'Departament',
-    field: 'departments',
+    field: 'department',
     align: 'left',
     type: 'string'
   },
@@ -91,10 +91,10 @@ export const columns = [
 
 const tableFilterFields = [
   {
-    name: 'departments',
+    name: 'department',
     label: 'Departament',
     type: 'text',
-    filter: <Input type="text" name="departments" label="Departament" variant="outlined" value="" />
+    filter: <Input type="text" name="department" label="Departament" variant="outlined" value="" />
   },
   {
     name: 'taskName',
