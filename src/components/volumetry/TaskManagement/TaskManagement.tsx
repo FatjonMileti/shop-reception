@@ -9,11 +9,9 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { Input } from 'components/core-ui/Input'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { Delete, Edit } from '@mui/icons-material'
+import { Add } from '@mui/icons-material'
 import { NewTask } from './NewTask'
 import { toTableItems } from './serializers'
-import { useQuery } from 'react-query'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 
 export const columns = [
@@ -27,49 +25,57 @@ export const columns = [
     title: 'Nume task',
     field: 'taskName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '250px'
   },
   {
     title: 'Ora estimata de inceput',
     field: 'estimateStartTime',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    collapsible: true
   },
   {
     title: 'Ora estimata de final',
     field: 'estimateEndTime',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    collapsible: true
   },
   {
     title: 'Frecventa',
     field: 'frequency',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    collapsible: true
   },
   {
     title: 'Valoare standard productivitate',
     field: 'prodStandardValue',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    collapsible: true
   },
   {
     title: 'UM standard productivitate',
     field: 'prodStandardUM',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    collapsible: true
   },
   {
     title: 'Sursa volum de lucru',
     field: 'workVolumeSource',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    collapsible: true
   },
   {
     title: 'Prioritate',
     field: 'priority',
     align: 'left',
-    type: 'number'
+    type: 'number',
+    collapsible: true
   },
   {
     title: 'Stare',
@@ -78,7 +84,8 @@ export const columns = [
     type: 'string',
     render: row => (
       <BooleanIcon icon="CheckOutlined" value={row.status} onSuccess="#33691E" onFailure="E5E5E5" />
-    )
+    ),
+    collapsible: true
   }
 ]
 
@@ -87,25 +94,25 @@ const tableFilterFields = [
     name: 'departments',
     label: 'Departament',
     type: 'text',
-    filter: <Input type="text" name="departments" label="Departament" variant="standard" value="" />
+    filter: <Input type="text" name="departments" label="Departament" variant="outlined" value="" />
   },
   {
     name: 'taskName',
     label: 'Nume Task',
     type: 'text',
-    filter: <Input type="text" name="taskName" label="Nume" variant="standard" />
+    filter: <Input type="text" name="taskName" label="Nume" variant="outlined" />
   },
   {
     name: 'priority',
     label: 'Prioritate',
     type: 'number',
-    filter: <Input type="number" name="priority" label="Prioritate" variant="standard" />
+    filter: <Input type="number" name="priority" label="Prioritate" variant="outlined" />
   },
   {
     name: 'state',
     label: 'Stare',
     type: 'boolean',
-    filter: <Input type="text" name="state" label="Stare" variant="standard" />
+    filter: <Input type="text" name="state" label="Stare" variant="outlined" />
   }
 ]
 
@@ -155,8 +162,8 @@ const TaskManagement = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
-  const selectRow = (row, action) => {
-    setSelectedRowId(row.id)
+  const selectRow = (rowId: number, action: string) => {
+    setSelectedRowId(rowId)
 
     if (action === 'edit') {
       openEditModal()
@@ -166,37 +173,6 @@ const TaskManagement = () => {
       openDeleteModal()
     }
   }
-
-  const columnsWithActions = useMemo(() => {
-    let result = columns
-
-    const actionsRow = {
-      title: '',
-      field: 'actions',
-      align: 'right',
-      width: '112px',
-      collapsible: 'true',
-      render: row => (
-        <Box display="flex">
-          <Button
-            onClick={() => selectRow(row, 'edit')}
-            style={{ minWidth: '0.7rem', background: 'transparent' }}
-            label=""
-          >
-            <Edit />
-          </Button>
-
-          <Button onClick={() => selectRow(row, 'delete')} label="">
-            <Delete />
-          </Button>
-        </Box>
-      )
-    } as any
-
-    result = [...columns, actionsRow]
-
-    return result
-  }, [columns])
 
   return (
     <div className={s.mainContainer}>
@@ -225,15 +201,38 @@ const TaskManagement = () => {
           hideCheckbox
           orderBy="department.name"
           order="desc"
-          columns={columnsWithActions}
+          columns={columns}
           items={tableItems}
           fetchData={fetchData}
           isLoading={isLoading}
-          newButton={{ onClick: openNewModal }}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
           filters={tableFilterFields}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => selectRow(rowId, 'edit')
+            },
+            {
+              label: 'Delete',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#d9534f',
+              onClick: (e, rowId) => selectRow(rowId, 'delete')
+            }
+          ]}
+          rowActionsWidth="130px"
+          toolbarActions={[
+            {
+              label: 'Adauga',
+              icon: <Add />,
+              onClick: openNewModal
+            }
+          ]}
         />
       </Box>
     </div>

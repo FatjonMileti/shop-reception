@@ -1,6 +1,6 @@
 import { TaskManagementItem } from 'components/volumetry/interfaces'
 import { useNotification } from 'hooks'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from 'utils/formatting'
@@ -154,15 +154,14 @@ const NewTask: React.FC<NewTaskProps> = props => {
     }
   })
 
-  console.log(initialValues)
-
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any) => {
+    onSubmit: async (values: any, { resetForm }) => {
       mutate(toTaskPayload(values))
+      resetForm()
     }
   })
 
@@ -183,15 +182,23 @@ const NewTask: React.FC<NewTaskProps> = props => {
             name="taskName"
             label="Nume task"
             fullWidth
-            variant="standard"
+            variant="outlined"
             value={formik.values.taskName}
             onChange={event => formik.setFieldValue('taskName', event.currentTarget.value)}
             error={!!formik.errors.taskName}
             helperText={formik.errors.taskName as string}
             required
+            inputProps={{
+              style: {
+                height: '40px'
+              }
+            }}
+            inputLabelProps={{
+              style: { lineHeight: '40px' }
+            }}
           />
         </Grid>
-        {/* <Grid xs={12} md={6} item>
+        <Grid xs={12} md={6} item>
           <TimePicker
             label="Ora estimata de inceput"
             value={formik.values.estimateStartTime}
@@ -199,6 +206,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
             error={!!formik.errors.taskName}
             helperText={formik.errors.taskName as string}
             required
+            style={{ width: '100%' }}
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -209,11 +217,12 @@ const NewTask: React.FC<NewTaskProps> = props => {
             error={!!formik.errors.taskName}
             helperText={formik.errors.taskName as string}
             required
+            style={{ width: '100%' }}
           />
-        </Grid> */}
+        </Grid>
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
-            variant="standard"
+            variant="outlined"
             name="departments"
             label="Departament"
             value={formik.values.departments || []}
@@ -227,7 +236,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
         </Grid>
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
-            variant="standard"
+            variant="outlined"
             name="frequency"
             label="Frecventa"
             value={formik.values.frequency}
@@ -244,16 +253,24 @@ const NewTask: React.FC<NewTaskProps> = props => {
             name="prodStandardValue"
             label="Valoare standard productivitate"
             fullWidth
-            variant="standard"
+            variant="outlined"
             value={formik.values.prodStandardValue}
             onChange={event => formik.setFieldValue('prodStandardValue', event.currentTarget.value)}
             error={!!formik.errors.prodStandardValue}
             helperText={formik.errors.prodStandardValue as string}
+            inputProps={{
+              style: {
+                height: '40px'
+              }
+            }}
+            inputLabelProps={{
+              style: { lineHeight: '40px' }
+            }}
           />
         </Grid>
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
-            variant="standard"
+            variant="outlined"
             name="prodStandardUM"
             label="UM standard productivitate"
             value={formik.values.prodStandardUM}
@@ -266,7 +283,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
         </Grid>
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
-            variant="standard"
+            variant="outlined"
             name="workVolumeSource"
             label="Sursa volum de lucru"
             value={formik.values.workVolumeSource}
@@ -283,11 +300,19 @@ const NewTask: React.FC<NewTaskProps> = props => {
             name="priority"
             label="Prioritate"
             fullWidth
-            variant="standard"
+            variant="outlined"
             value={formik.values.priority}
             onChange={event => formik.setFieldValue('priority', event.currentTarget.value)}
             error={!!formik.errors.priority}
             helperText={formik.errors.priority as string}
+            inputProps={{
+              style: {
+                height: '40px'
+              }
+            }}
+            inputLabelProps={{
+              style: { lineHeight: '40px' }
+            }}
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -295,28 +320,11 @@ const NewTask: React.FC<NewTaskProps> = props => {
             checked={formik.values.status}
             label="Activ"
             onChange={event => formik.setFieldValue('status', event.target.checked)}
-            // error={!!formik.errors.status}
-            // helperText={formik.errors.status as string}
           />
-          {/* <Input
-            label="Status"
-            type="select"
-            values={[]}
-            variant="standard"
-            width="100%"
-            value={formik.values.status}
-            onChange={event => {
-              const inputValue = (event.target as HTMLInputElement).value
-              formik.setFieldValue('status', inputValue)
-            }}
-            error={!!formik.errors.status}
-            helperText={formik.errors.status as string}
-            required
-          /> */}
         </Grid>
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-          <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+          <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
         </Grid>
       </Grid>
     </Modal>
