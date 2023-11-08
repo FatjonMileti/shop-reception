@@ -5,11 +5,11 @@ import { useMemo, useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import s from '../ProjectMilestones/ProjectMilestones.modules.scss'
-import { GovernanceResponseModel } from '../shared/models'
 import { ProjectMilestonesModel, TableFilters, TableRowModel } from './models'
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
 import { RESOURCE_URI, defaultTableFilters, tableColumns } from './constants'
+import { BasePageResponseModel } from 'shared/models'
 
 const ProjectMilestones = () => {
   const { showNotification } = useNotification()
@@ -40,7 +40,7 @@ const ProjectMilestones = () => {
           order,
           orderBy
         })
-      )) as GovernanceResponseModel<ProjectMilestonesModel>
+      )) as BasePageResponseModel<ProjectMilestonesModel>
       onHandlingFetchResponse(response.page.totalCount, toTableRowItems(response.list))
     } catch (error) {
       showNotification({
