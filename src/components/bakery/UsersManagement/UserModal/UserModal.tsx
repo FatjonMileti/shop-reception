@@ -7,7 +7,7 @@ import {
   Typography,
   Checkbox
 } from '@fullscreendigital/carrefour-dex-fe'
-import { ModalInfo } from '../ModalWithForm/ModalForm/ModalInfo'
+import { ModalInfo } from '../../../core-ui/ModalWithForm/ModalForm/ModalInfo'
 import { useNotification } from 'hooks'
 import s from './UserModal.modules.scss'
 import Modal from '@mui/material/Modal'
@@ -16,7 +16,7 @@ import { Close } from '@mui/icons-material'
 import { useImmer } from 'use-immer'
 import { useMediaQuery, CircularProgress } from '@mui/material'
 import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
-import { StructureItem } from '../StructureItem'
+import { StructureItem } from './StructureItem'
 import { formatErrorMessage } from 'utils/formatting'
 
 const sx = {
@@ -211,7 +211,7 @@ function UserModal(props) {
       })
     }
 
-    additionalAction && additionalAction()
+    additionalAction && additionalAction(false)
     closeModalAndResetForm()
     setIsLoading(false)
   }

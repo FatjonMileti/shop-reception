@@ -10,8 +10,9 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { IconCell } from 'components/core-ui/IconCell'
-import { UserModal } from 'components/core-ui/UserModal'
+import { UserModal } from 'components/bakery/UsersManagement/UserModal'
 import { MultivalueCell } from 'components/core-ui/MultivalueCell'
+import { toTableRowItems } from './serializers'
 
 const columns = [
   {
@@ -64,7 +65,7 @@ const UsersManagement = () => {
           orderBy
         })
       )
-      setTableItems(response.list)
+      setTableItems(toTableRowItems(response.list))
 
       setTotalCount(response.page.totalCount)
 
@@ -82,8 +83,6 @@ const UsersManagement = () => {
     action === 'edit' && openEditModal()
   }
   const columnsWithActions = useMemo(() => {
-    let result = columns
-
     const roleColumn = {
       title: 'Rol',
       field: 'roles',
@@ -129,8 +128,7 @@ const UsersManagement = () => {
       )
     } as any
 
-    result = [...columns, roleColumn, statusColumn, actionsRow]
-    return result
+    return [...columns, roleColumn, statusColumn, actionsRow]
   }, [columns])
 
   return (
@@ -142,6 +140,7 @@ const UsersManagement = () => {
           closeModal={closeEditModal}
           editedItemId={selectedRow?.id}
           formAction={{ url: `/bakery/user/${selectedRow?.id}` }}
+          additionalAction={() => setShouldRefreshData(true)}
           userModal={{
             getAction: '/bakery/user',
             getRolesAction: '/bakery/role',
