@@ -15,7 +15,6 @@ import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Grid } from 'components/core-ui/Grid'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
-import { List } from 'components/core-ui/List'
 import { PageForm } from 'components/core-ui/PageForm'
 import { PageFormRadio } from 'components/core-ui/PageFormRadio'
 import { PageInfo } from 'components/core-ui/PageInfo'
@@ -34,7 +33,6 @@ import { IconCell } from 'components/core-ui/IconCell'
 import { TableSearch } from 'components/core-ui/TableSearch'
 import { Tabs } from 'components/core-ui/Tabs'
 import { TitleText } from 'components/core-ui/TitleText'
-import { TableFilters } from 'components/core-ui/TableFilters'
 import { UserModal } from 'components/core-ui/UserModal'
 import { FileUpload } from 'components/core-ui/FileUpload'
 // import DynamicTable from 'components/core-ui/Table/DynamicTable'
@@ -70,7 +68,6 @@ export const Components = {
   Grid,
   Input,
   Link,
-  List,
   MultivalueCell,
   PageForm,
   PageFormRadio,
@@ -88,12 +85,11 @@ export const Components = {
   TableSearch,
   Tabs,
   TitleText,
-  TableFilters,
   UserModal,
   FileUpload,
   // DynamicTable,
   // GroupTable,
   ImageCell,
-  ProductView,
+  ProductView
   // PrintPreviewTable
 }
