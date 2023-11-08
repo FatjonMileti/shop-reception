@@ -10,6 +10,7 @@ import { CircularProgress, Paper } from '@mui/material'
 import { useQuery, useMutation } from 'react-query'
 import { ProductNearbyStockInfo } from '../ProductNearbyStockInfo'
 import { NeighboursStock, Product } from '../interfaces'
+import { useNavigate } from 'react-router-dom'
 
 interface CartItem {
   id: string
@@ -25,6 +26,7 @@ interface ProductGeneralInfoProps {
 
 const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighboursStock }) => {
   const { showNotification } = useNotification()
+  const navigate = useNavigate()
 
   const [selectedBuybackOption, setSelectedBuybackOption] = useState(
     product.purchaseOptions[0].value || ''
@@ -62,6 +64,7 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
         message: 'Produsul a fost adaugat in cos',
         type: 'success'
       })
+      navigate('/supplyOmni/shoppingCart')
     },
     onError: res => {
       showNotification({
