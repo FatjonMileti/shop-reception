@@ -15,7 +15,6 @@ import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Grid } from 'components/core-ui/Grid'
 import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
-import { List } from 'components/core-ui/List'
 import { PageForm } from 'components/core-ui/PageForm'
 import { PageFormRadio } from 'components/core-ui/PageFormRadio'
 import { PageInfo } from 'components/core-ui/PageInfo'
@@ -70,7 +69,6 @@ export const Components = {
   Grid,
   Input,
   Link,
-  List,
   MultivalueCell,
   PageForm,
   PageFormRadio,
