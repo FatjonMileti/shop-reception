@@ -34,7 +34,6 @@ import { IconCell } from 'components/core-ui/IconCell'
 import { TableSearch } from 'components/core-ui/TableSearch'
 import { Tabs } from 'components/core-ui/Tabs'
 import { TitleText } from 'components/core-ui/TitleText'
-import { TableFilters } from 'components/core-ui/TableFilters'
 import { UserModal } from 'components/core-ui/UserModal'
 import { FileUpload } from 'components/core-ui/FileUpload'
 // import DynamicTable from 'components/core-ui/Table/DynamicTable'
@@ -88,12 +87,11 @@ export const Components = {
   TableSearch,
   Tabs,
   TitleText,
-  TableFilters,
   UserModal,
   FileUpload,
   // DynamicTable,
   // GroupTable,
   ImageCell,
-  ProductView,
+  ProductView
   // PrintPreviewTable
 }

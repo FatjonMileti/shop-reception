@@ -223,6 +223,7 @@ const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
             items={tableItems}
             fetchData={fetchData}
             isLoading={isLoading}
+            columns={columns}
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
