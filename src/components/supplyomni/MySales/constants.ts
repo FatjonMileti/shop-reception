@@ -40,6 +40,6 @@ export const tableColumns = [
 ]
 
 export const defaultTableFilters: TableFilters = {
-  startDate: null,
-  endDate: null
+  startDate: new Date(),
+  endDate: new Date()
 }

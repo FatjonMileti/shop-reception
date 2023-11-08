@@ -1,6 +1,5 @@
-import { Input } from 'components/core-ui/Input'
-import { TableFilters } from './models'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { TableFilters } from './models'
 
 export const buildTableFilterInputs = (
   tableFilter: TableFilters,

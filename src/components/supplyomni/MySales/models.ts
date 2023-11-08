@@ -1,5 +1,5 @@
 import { Filter } from 'components/core-ui/Table/TableDefinitions'
-import { BasePageResponseModel } from 'shared/models'
+import { BasePageResponseModel } from 'shared/interfaces'
 
 export interface TableState {
   order: string

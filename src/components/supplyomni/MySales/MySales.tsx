@@ -72,8 +72,7 @@ export const MySales = () => {
   const handleDownload = async () => {
     const { tableFilters, order, orderBy } = tableState
     const url = toTableGETUrl({
-      // TODO: Replace with real URL
-      url: '/supply-omni/sales/download',
+      url: '/supply-omni/reports/export/csv',
       tableFilters,
       order,
       orderBy

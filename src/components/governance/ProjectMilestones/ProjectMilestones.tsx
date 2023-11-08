@@ -9,7 +9,7 @@ import { ProjectMilestonesModel, TableFilters, TableRowModel } from './models'
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
 import { RESOURCE_URI, defaultTableFilters, tableColumns } from './constants'
-import { BasePageResponseModel } from 'shared/models'
+import { BasePageResponseModel } from 'shared/interfaces'
 
 const ProjectMilestones = () => {
   const { showNotification } = useNotification()
