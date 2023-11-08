@@ -122,6 +122,7 @@ const EditZone: React.FC<EditZoneProps> = props => {
                 value={formik.values.divisionType}
                 onChange={event => formik.setFieldValue('divisionType', (event.target as HTMLInputElement).value)}
                 required
+                disabled={Boolean(formik.values.stores.length)}
               />
             </Grid>
             

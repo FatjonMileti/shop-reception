@@ -41,7 +41,7 @@ const AddZone: React.FC<AddZoneProps> = props => {
           setShouldRefreshData(true)
           closeModal()
           showNotification({
-            message: 'Item edited successfully',
+            message: 'Item added successfully',
             type: 'success'
           })
         },
@@ -75,7 +75,7 @@ const AddZone: React.FC<AddZoneProps> = props => {
     })
 
     return (
-        <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'}>
+        <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Adauga Zona'}>
           <Grid container spacing={2}>
             {(isLoading) && (
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />

@@ -131,6 +131,7 @@ const Zones = () => {
 
   return (
     <div className={s.mainContainer}>
+      {/* TODO add search bar after modifications have been pushed */}
       <Box className={s.addZoneContainer}>
           <Button
               onClick={() => openAddModal()}
