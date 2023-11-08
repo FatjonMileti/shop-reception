@@ -1,5 +1,4 @@
 export const URLS = {
-  AUTH_ADMIN: 'bakery/admin',
-  AUTH_USERS_MANAGEMENT: 'usersManagement',
-  AUTH_ZONES: 'zones'
+  AUTH_USERS_MANAGEMENT: 'bakery/admin/usersManagement',
+  AUTH_ZONES: 'bakery/admin/zones'
 }

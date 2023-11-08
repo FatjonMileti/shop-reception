@@ -8,8 +8,13 @@
     & > div {
       margin: 0;
     }
-  }
+}
   
-  .filtersContainer {
-    padding: 16px;
-  }
+.filtersContainer {
+  padding: 16px;
+}
+
+.addZoneContainer {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -26,10 +26,11 @@ export interface EditZoneItem {
   id: string
 }
 
-export interface NewZoneItem {
+export interface AddZoneItem {
   name: string
   responsible: string
   divisionType: string
   enable: string
+  stores: string[]
   id: string
 }

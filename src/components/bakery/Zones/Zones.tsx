@@ -1,27 +1,26 @@
-import { Box, Grid, Paper } from '@mui/material'
+import { Box } from '@mui/material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from './Zones.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useMemo, useState } from 'react'
 import { columns } from './helpers'
-import { useNotification, usePermissions } from 'hooks'
+import { useNotification } from 'hooks'
 import { Edit } from '@mui/icons-material'
-import { UsersManagementItem, ZoneItem } from '../interfaces'
-import { useQuery } from 'react-query'
+import AddIcon from '@mui/icons-material/Add';
+import { ZoneItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { IconCell } from 'components/core-ui/IconCell'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { UserModal } from 'components/core-ui/UserModal'
-import { TableSearch } from 'components/core-ui/TableSearch'
 import { MultivalueCell } from 'components/core-ui/MultivalueCell'
 import { EditZone } from './EditZone'
+import { AddZone } from './AddZone'
 
 const Zones = () => {
   const [selectedRow, setSelectedRow] = useState<ZoneItem | null>(null)
   const [tableItems, setTableItems] = useState<ZoneItem[]>([])
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -29,6 +28,9 @@ const Zones = () => {
 
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
+
+  const openAddModal = (): void => setIsAddModalOpen(true)
+  const closeAddModal = (): void => setIsAddModalOpen(false)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -129,6 +131,20 @@ const Zones = () => {
 
   return (
     <div className={s.mainContainer}>
+      <Box className={s.addZoneContainer}>
+          <Button
+              onClick={() => openAddModal()}
+              style={{ minWidth: '0.7rem', background: 'transparent' }}
+              label=""
+          >
+              <AddIcon />
+          </Button>  
+          <AddZone
+            isModalOpen={isAddModalOpen}
+            closeModal={closeAddModal}
+            setShouldRefreshData={setShouldRefreshData}
+          />  
+      </Box>
       <Box>
         <EditZone
           isModalOpen={isEditModalOpen}

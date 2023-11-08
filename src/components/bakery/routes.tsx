@@ -5,7 +5,7 @@ import { Zones } from './Zones'
 
 export const useBakeryRoutes = applicationPages => {
   return (
-    <Route path={URLS.AUTH_ADMIN}>
+    <>
       {/* <Route
         path={URLS.AUTH_USERS_MANAGEMENT}
         element={
@@ -26,6 +26,6 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
-    </Route>
+    </>
   )
 }

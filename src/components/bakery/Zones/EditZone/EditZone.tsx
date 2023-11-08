@@ -28,6 +28,7 @@ const statuses = [
 ]
 
 const EditZone: React.FC<EditZoneProps> = props => {
+  //TODO ask alexandra why some dropdowns are disabled on UAT
     const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
     const { showNotification } = useNotification()
 
