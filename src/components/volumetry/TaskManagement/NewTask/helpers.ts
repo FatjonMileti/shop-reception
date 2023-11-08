@@ -23,8 +23,8 @@ export const getInitialValues = editItem => ({
 export const getValidationSchema = editItem =>
   Yup.object().shape({
     taskName: Yup.string().required(),
-    // estimateStartTime: Yup.string().required(),
-    // estimateEndTime: Yup.string().required(),
+    estimateStartTime: Yup.date().required(),
+    estimateEndTime: Yup.date().required(),
     departments: Yup.array().of(
       Yup.object().shape({
         label: Yup.string().required('Departament is required'),
