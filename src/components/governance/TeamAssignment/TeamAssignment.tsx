@@ -80,21 +80,10 @@ const TeamAssignment: React.FC = props => {
 
   const { showNotification } = useNotification()
 
-  const { canCreate, canEdit, canDelete } = usePermissions({
-    createRoles: [
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-    ],
+  const { canEdit } = usePermissions({
     editRoles: [
       PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-    ],
-    deleteRoles: [
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL
     ]
   })
 
@@ -127,7 +116,7 @@ const TeamAssignment: React.FC = props => {
 
   const columnsWithActions = useMemo(() => {
     let result = columns
-    if (canEdit || canDelete) {
+    if (canEdit) {
       const actionsRow = {
         title: '',
         field: 'actions',
@@ -152,7 +141,7 @@ const TeamAssignment: React.FC = props => {
       result = [...columns, actionsRow]
     }
     return result
-  }, [columns, canEdit, canDelete, teamMembers])
+  }, [columns, canEdit, teamMembers])
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)

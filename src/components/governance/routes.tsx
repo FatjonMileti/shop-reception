@@ -5,6 +5,7 @@ import { TeamDayOffManagement } from './TeamDayOffManagement'
 import { TeamAssignment } from './TeamAssignment'
 import { EffortMatrix } from './EffortMatrix'
 import { ProjectMilestones } from './ProjectMilestones'
+import { TeamCapacity } from './TeamCapacity'
 
 export const useGovernanceRoutes = applicationPages => {
   return (
@@ -44,6 +45,16 @@ export const useGovernanceRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ProjectMilestones}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_TEAM_CAPACITY}
+        element={
+          <PrivateRoute
+            component={TeamCapacity}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
