@@ -26,8 +26,11 @@ export const validationSchema = Yup.object().shape({
   tradeRegister: Yup.string().required(),
   bank: Yup.string().required(),
   bankAccount: Yup.string().required(),
-  phone: Yup.string().required(),
-  email: Yup.string().required(),
+  phone: Yup.string()
+    .required()
+    .min(10, 'Trebuie sa aiba exact 10 cifre')
+    .max(10, 'Trebuie sa aiba exact 10 cifre'),
+  email: Yup.string().email().required(),
   address: Yup.string().required(),
   county: Yup.object().shape({
     id: Yup.string().required(),

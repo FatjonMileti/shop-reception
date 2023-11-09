@@ -17,7 +17,8 @@ const PersoanaFizica: React.FC = () => {
   const navigate = useNavigate()
 
   const addNewClient = async (values: any) => {
-    await makeCorePostRequest(`/supply-omni/client`, values)
+    const result = await makeCorePostRequest(`/supply-omni/client`, values)
+    return result
   }
 
   const { mutate } = useMutation(addNewClient, {
@@ -115,7 +116,7 @@ const PersoanaFizica: React.FC = () => {
             action: {
               url: '/supply-omni/address/counties',
               type: 'GET',
-              valueKey: 'name',
+              valueKey: 'id',
               labelKey: 'name'
             },
             width: 100,
@@ -126,7 +127,7 @@ const PersoanaFizica: React.FC = () => {
             action: {
               url: '/supply-omni/address/cities',
               type: 'GET',
-              valueKey: 'name',
+              valueKey: 'id',
               labelKey: 'name'
             },
             width: 100,
@@ -134,8 +135,8 @@ const PersoanaFizica: React.FC = () => {
             variant: 'standard'
           }}
           value={{
-            county: { value: formik.values.county.name, label: formik.values.county.name },
-            city: { value: formik.values.city.name, label: formik.values.city.name }
+            county: { value: formik.values.county.id, label: formik.values.county.name },
+            city: { value: formik.values.city.id, label: formik.values.city.name }
           }}
           onChange={(newValue: CountyCityInterface, fieldToUpdate: string) =>
             onUpdateValues(fieldToUpdate, { id: newValue.value, name: newValue.label })
