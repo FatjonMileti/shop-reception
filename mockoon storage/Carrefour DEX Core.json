@@ -1,6 +1,6 @@
 {
   "uuid": "db2fc4c5-607e-416b-89bf-7bfd972c8da1",
-  "lastMigration": 28,
+  "lastMigration": 29,
   "name": "DEX CORE REST API",
   "endpointPrefix": "8081/core/rest/api/v1",
   "latency": 0,
@@ -4543,7 +4543,7 @@
       "responses": [
         {
           "uuid": "992f860e-3d73-44d3-bc80-e0976b8d2897",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    },\n    {\n      \"id\": 2,\n      \"department\": [{\"id\": 1, \"name\": \"BLS\"}],\n      \"taskName\": \"112233Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    },\n    {\n      \"id\": 2,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"112233Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4679,7 +4679,7 @@
       "responses": [
         {
           "uuid": "a407087e-cd9b-4b3f-a944-2098b06f378e",
-          "body": "{\n  \"id\": 1,\n  \"department\": {\n    \"id\": 1,\n    \"name\": \"BLS\"\n  },\n  \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n  \"estimateStartTime\": \"06:30\",\n  \"estimateEndTime\": \"8:30\",\n  \"frequency\": {\n    \"id\": 1,\n    \"name\": \"zilnic\"\n  },\n  \"prodStandardValue\": \"2.0\",\n  \"prodStandardUM\": {\n    \"id\": 1,\n    \"name\": \"tur/ora\"\n  },\n  \"workVolumeSource\": {\n    \"id\": 1,\n    \"name\": \"Meti\"\n  },\n  \"priority\": 1,\n  \"status\": true\n}",
+          "body": "{\n  \"id\": 1,\n  \"department\": {\n    \"id\": 1,\n    \"name\": \"BLS\"\n  },\n  \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n  \"estimateStartTime\": \"06:30\",\n  \"estimateEndTime\": \"08:30\",\n  \"frequency\": {\n    \"id\": 1,\n    \"name\": \"zilnic\"\n  },\n  \"prodStandardValue\": \"2.0\",\n  \"prodStandardUM\": {\n    \"id\": 1,\n    \"name\": \"tur/ora\"\n  },\n  \"workVolumeSource\": {\n    \"id\": 1,\n    \"name\": \"Meti\"\n  },\n  \"priority\": 1,\n  \"status\": true\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
