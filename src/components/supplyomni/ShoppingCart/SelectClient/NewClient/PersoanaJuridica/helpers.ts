@@ -9,8 +9,15 @@ export const initialValues = {
   phone: '',
   email: '',
   address: '',
-  county: '',
-  city: ''
+  city: {
+    id: '',
+    name: ''
+  },
+  county: {
+    id: '',
+    name: ''
+  },
+  type: 'Company'
 }
 
 export const validationSchema = Yup.object().shape({
@@ -22,6 +29,13 @@ export const validationSchema = Yup.object().shape({
   phone: Yup.string().required(),
   email: Yup.string().required(),
   address: Yup.string().required(),
-  county: Yup.string().required(),
-  city: Yup.string().required()
+  county: Yup.object().shape({
+    id: Yup.string().required(),
+    name: Yup.string().required()
+  }),
+  city: Yup.object().shape({
+    id: Yup.string().required(),
+    name: Yup.string().required()
+  }),
+  type: Yup.string().required()
 })

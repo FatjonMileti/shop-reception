@@ -10,20 +10,23 @@ import { makeCorePostRequest } from 'utils/api'
 import { ChangeEvent } from 'react'
 import { initialValues, validationSchema } from './helpers'
 import { CountyCityInterface, PersoanaJuridica } from '../interfaces'
+import { useNavigate } from 'react-router-dom'
 
 const PersoanaJuridica: React.FC = () => {
   const { showNotification } = useNotification()
+  const navigate = useNavigate()
 
   const addNewClient = async (values: PersoanaJuridica) => {
     await makeCorePostRequest(`/supply-omni/client`, values)
   }
 
   const { mutate } = useMutation(addNewClient, {
-    onSuccess: () => {
+    onSuccess: (data: any) => {
       showNotification({
         message: 'Clientul a fost salvat cu success!',
         type: 'success'
       })
+      navigate(`/shoppingCartClientDetails/${data?.id}`)
     },
     onError: res => {
       showNotification({
@@ -50,7 +53,7 @@ const PersoanaJuridica: React.FC = () => {
     }
   })
 
-  const onUpdateValues = (field: string, value: string) => {
+  const onUpdateValues = (field: string, value: any) => {
     formik.setFieldValue(field, value)
   }
 
@@ -181,11 +184,11 @@ const PersoanaJuridica: React.FC = () => {
             variant: 'standard'
           }}
           value={{
-            county: { value: formik.values.county, label: formik.values.county },
-            city: { value: formik.values.city, label: formik.values.city }
+            county: { value: formik.values.county.name, label: formik.values.county.name },
+            city: { value: formik.values.city.name, label: formik.values.city.name }
           }}
           onChange={(newValue: CountyCityInterface, fieldToUpdate: string) =>
-            onUpdateValues(fieldToUpdate, newValue.value)
+            onUpdateValues(fieldToUpdate, { id: newValue.value, name: newValue.label })
           }
         />
       </Box>

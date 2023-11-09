@@ -28,6 +28,12 @@ export interface PersoanaJuridica {
   phone: string
   email: string
   address: string
-  county: string
-  city: string
+  county: {
+    id: string
+    name: string
+  }
+  city: {
+    id: string
+    name: string
+  }
 }
