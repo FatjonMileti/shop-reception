@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { ModalWithForm } from 'components/core-ui/ModalWithForm'
-import { UserModal } from '../UserModal'
+import { UserModal } from '../../bakery/UsersManagement/UserModal'
 
 const ButtonWithModalAndForm = ({
   buttonProps,

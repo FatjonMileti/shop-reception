@@ -22,6 +22,7 @@ import { QueryClient, QueryCache, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { useGovernanceRoutes } from 'components/governance/routes'
 import { useVolumetryRoutes } from 'components/volumetry/routes'
+import { useBakeryRoutes } from 'components/bakery/routes'
 import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
 
 const queryClient = new QueryClient({
@@ -115,6 +116,7 @@ const App = () => {
 
   const governanceRoutes = useGovernanceRoutes(applicationPages)
   const volumetryRoutes = useVolumetryRoutes(applicationPages)
+  const bakeryRoutes = useBakeryRoutes(applicationPages)
   const supplyOmniRoutes = useSupplyOmniRoutes(applicationPages)
 
   return (
@@ -142,6 +144,7 @@ const App = () => {
                   }
                 />
                 {governanceRoutes}
+                {bakeryRoutes}
                 {volumetryRoutes}
                 {supplyOmniRoutes}
                 {applicationModulesPages.map(page =>
