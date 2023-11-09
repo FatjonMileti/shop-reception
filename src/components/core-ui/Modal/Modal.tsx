@@ -10,10 +10,12 @@ const sx = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '50%',
+  maxHeight: '90%',
   bgcolor: '#fff',
   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
   borderRadius: '8px',
-  p: 4
+  p: 4,
+  overflow: 'scroll'
 }
 
 const Modal = props => {
