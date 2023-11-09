@@ -13,7 +13,6 @@ import { DescriptionText } from 'components/core-ui/DescriptionText'
 import { PrintModal } from 'components/core-ui/PrintModal'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Grid } from 'components/core-ui/Grid'
-import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
 import { PageForm } from 'components/core-ui/PageForm'
 import { PageFormRadio } from 'components/core-ui/PageFormRadio'
@@ -66,7 +65,6 @@ export const Components = {
   PrintModal,
   FloatingButton,
   Grid,
-  Input,
   Link,
   MultivalueCell,
   PageForm,
