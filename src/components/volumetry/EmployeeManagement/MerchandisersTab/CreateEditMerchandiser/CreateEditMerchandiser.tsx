@@ -36,13 +36,17 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
       setShouldRefreshData(true)
       closeModal()
       showNotification({
-        message: editItem ? 'Item edited successfully' : 'Item added successfully',
+        message: editItem
+          ? 'Merchandiserul a fost editat cu success!'
+          : 'Merchandiserul a fost adaugat cu success!',
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while fetching dropdown data. ${formatErrorMessage(res)}`,
+        message: editItem
+          ? `Eroare la editarea merchandiserului. ${formatErrorMessage(res)}`
+          : `Eroare la adaugarea merchandiserului. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }

@@ -44,6 +44,8 @@ const tableFilterFields = [
 
 const MerchandisersTab = () => {
   const { showNotification } = useNotification()
+
+  // TODO: De actualizat cand primim update cu drepturile fiecarui rol
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
 
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
