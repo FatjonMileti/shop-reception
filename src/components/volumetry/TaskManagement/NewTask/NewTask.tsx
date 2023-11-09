@@ -12,7 +12,7 @@ import { useMutation, useQuery } from 'react-query'
 import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { toTaskPayload } from './serializers'
+import { fromTaskPayload, toTaskPayload } from './serializers'
 
 interface NewTaskProps {
   isModalOpen: boolean
@@ -31,7 +31,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
       if (editItemId) {
         const result = await makeCoreGetRequest(`/volumetry/task/${editItemId}`)
 
-        return result || null
+        return fromTaskPayload(result) || null
       }
       return null
     },

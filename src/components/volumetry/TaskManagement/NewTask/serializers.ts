@@ -1,4 +1,4 @@
-import dayjs from "dayjs"
+import dayjs from 'dayjs'
 
 export const toTaskPayload = values => {
   return {
@@ -14,3 +14,9 @@ export const toTaskPayload = values => {
     workVolumeSource: values.workVolumeSource.value
   }
 }
+
+export const fromTaskPayload = result => ({
+  ...result,
+  estimateStartTime: dayjs(result.estimateStartTime, 'HH:mm'),
+  estimateEndTime: dayjs(result.estimateEndTime, 'HH:mm')
+})
