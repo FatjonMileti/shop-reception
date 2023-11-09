@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
+// import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from './UsersManagement.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useMemo, useState } from 'react'
@@ -109,26 +109,26 @@ const UsersManagement = () => {
       )
     } as any
 
-    let actionsRow = {
-      title: '',
-      field: 'actions',
-      align: 'right',
-      width: '70px',
-      collapsible: 'true',
-      render: row => (
-        <Box display="flex">          
-            <Button
-              onClick={() => selectRow(row, 'edit')}
-              style={{ minWidth: '0.7rem', background: 'transparent' }}
-              label=""
-            >
-              <Edit />
-            </Button>          
-        </Box>
-      )
-    } as any
+    // let actionsRow = {
+    //   title: '',
+    //   field: 'actions',
+    //   align: 'right',
+    //   width: '70px',
+    //   collapsible: 'true',
+    //   render: row => (
+    //     <Box display="flex">          
+    //         <Button
+    //           onClick={() => selectRow(row, 'edit')}
+    //           style={{ minWidth: '0.7rem', background: 'transparent' }}
+    //           label=""
+    //         >
+    //           <Edit />
+    //         </Button>          
+    //     </Box>
+    //   )
+    // } as any
 
-    return [...columns, roleColumn, statusColumn, actionsRow]
+    return [...columns, roleColumn, statusColumn]
   }, [columns])
 
   return (
@@ -157,6 +157,16 @@ const UsersManagement = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
+          rowActions={[
+            { 
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => selectRow(rowId, 'edit')
+            }
+          ]}
+          rowActionsWidth="130px"
         />
       </Box>
     </div>

@@ -24,7 +24,6 @@ import { useGovernanceRoutes } from 'components/governance/routes'
 import { useVolumetryRoutes } from 'components/volumetry/routes'
 import { useBakeryRoutes } from 'components/bakery/routes'
 import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
-import { useBakeryRoutes } from 'components/bakery/routes'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -119,7 +118,6 @@ const App = () => {
   const volumetryRoutes = useVolumetryRoutes(applicationPages)
   const bakeryRoutes = useBakeryRoutes(applicationPages)
   const supplyOmniRoutes = useSupplyOmniRoutes(applicationPages)
-  const bakeryRoutes = useBakeryRoutes(applicationPages)
 
   return (
     <AuthProvider {...oidcConfig}>
