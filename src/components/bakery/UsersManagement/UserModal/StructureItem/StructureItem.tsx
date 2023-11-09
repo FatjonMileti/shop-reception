@@ -42,7 +42,7 @@ function StructureItem(props) {
       setOptions(traineeOptions)
 
       const selected = traineeOptions.find(userRole =>
-        editItem.structureRoles.some(option => option.roleId === userRole.name)
+        editItem?.structureRoles?.some(option => option.roleId === userRole.name)
       )
 
       setSelectedValue(selected)

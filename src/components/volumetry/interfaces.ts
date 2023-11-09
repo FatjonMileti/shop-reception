@@ -9,3 +9,9 @@ export interface EmployeeManagementItem {
   name: string
   position: string
 }
+
+export interface NewMerchandiserItem {
+  name: string
+  departmentName: string
+  position: string
+}
