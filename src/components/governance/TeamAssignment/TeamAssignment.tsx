@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Box, CircularProgress, Grid, Paper, debounce } from '@mui/material'
+import { Box, CircularProgress, Grid, Paper } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -80,43 +80,31 @@ const TeamAssignment: React.FC = props => {
 
   const { showNotification } = useNotification()
 
-  const { canCreate, canEdit, canDelete } = usePermissions({
-    createRoles: [
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-    ],
+  const { canEdit } = usePermissions({
     editRoles: [
       PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-    ],
-    deleteRoles: [
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
+      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL
     ]
   })
 
-  const {
-    data: filterOptions,
-    isLoading: isFilterOptionsLoading,
-    error,
-    isError
-  } = useQuery(['domains'], async () => {
-    const result = await makeCoreGetRequest('/governance/domains')
-    const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
+  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
+    ['domains'],
+    async () => {
+      const result = await makeCoreGetRequest('/governance/domains')
+      const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
 
-    setDomainFilterValue(resultOptions[0])
-    return resultOptions || []
-  }, {
-    onError: error => {
-      showNotification({
-        message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      setDomainFilterValue(resultOptions[0])
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
     }
-  })
+  )
 
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
@@ -128,7 +116,7 @@ const TeamAssignment: React.FC = props => {
 
   const columnsWithActions = useMemo(() => {
     let result = columns
-    if (canEdit || canDelete) {
+    if (canEdit) {
       const actionsRow = {
         title: '',
         field: 'actions',
@@ -153,7 +141,7 @@ const TeamAssignment: React.FC = props => {
       result = [...columns, actionsRow]
     }
     return result
-  }, [columns, canEdit, canDelete, teamMembers])
+  }, [columns, canEdit, teamMembers])
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)

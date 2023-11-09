@@ -12,6 +12,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { TeamAssignmentItem } from '../../interfaces'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { toTeamAssignmentPayload } from './serializers'
 dayjs.extend(customParseFormat)
 
 interface EditTeamAssignmentProps {
@@ -50,7 +51,7 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
   })
 
   const formik = useFormik({
-    enableReinitialize: true,
+    enableReinitialize: false,
     validateOnChange: false,
     initialValues: {
       id: (editItem as TeamAssignmentItem)?.id || 0,
@@ -67,26 +68,13 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      const assignmentStartDate = dayjs(new Date(values.assignmentStartDate)).format('YYYY-MM-DD')
-      const assignmentEndDate = dayjs(
-        new Date(values.assignmentEndDate['$d'] || values.assignmentEndDate)
-      ).format('YYYY-MM-DD')
-
-      const valuesToSubmit = {
-        id: values.id,
-        project: { id: (editItem as TeamAssignmentItem)?.projectId },
-        teamMember: { id: (editItem as TeamAssignmentItem)?.teamMemberId },
-        role: values.role,
-        assignmentStartDate,
-        assignmentEndDate
-      }
-      mutate(valuesToSubmit)
+      mutate(toTeamAssignmentPayload(values, editItem))
     }
   })
 
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'}>
-      <Grid container spacing={2}>
+      <Grid container spacing={4}>
         {isLoading && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         )}
