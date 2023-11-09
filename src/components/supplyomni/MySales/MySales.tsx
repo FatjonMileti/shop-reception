@@ -21,11 +21,11 @@ export const MySales = () => {
     orderBy: null,
     tableFilters: null
   })
-  const [tableItems, setTableItems] = useState([])
+  const [tableItems, setTableItems] = useState<TableRowModel[]>([])
   const [tableFilters, setTableFilters] = useState<TableFilters>(defaultTableFilters)
-  const [totalCount, setTotalCount] = useState(0)
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [isLoading, setIsLoading] = useState(true)
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [totalPrice, setTotalPrice] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const columnsWithActions = useMemo(() => tableColumns, [])
   const tableFilterInputs = useMemo(() => buildTableFilterInputs(tableFilters, setTableFilters), [])
@@ -111,10 +111,10 @@ export const MySales = () => {
         alignItems="center"
         className={s.totalContainer}
       >
-        <Typography variant="medium" style={{ marginRight: 3 + 'rem', fontSize: 1.25 + 'rem' }}>
+        <Typography variant="medium" style={{ marginRight: '3rem', fontSize: '1.25rem' }}>
           Total:
         </Typography>
-        <Typography variant="medium" style={{ fontSize: 1.25 + 'em', color: 'black' }}>
+        <Typography variant="medium" style={{ fontSize: '1.25rem', color: 'black' }}>
           {totalPrice}
         </Typography>
       </Grid>
