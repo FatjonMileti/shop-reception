@@ -5,42 +5,48 @@ import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { useNotification } from 'hooks'
 import { useFormik } from 'formik'
 import { validationSchema } from './helpers'
-import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useMutation, useQuery } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 
-interface EditMerchandiserProps {
+interface CreateEditMerchandiserProps {
   isModalOpen: boolean
   closeModal: Function
-  editItem: EmployeeManagementItem | number
+  editItem?: EmployeeManagementItem | number
   setShouldRefreshData: Function
 }
 
-const EditMerchandiser: React.FC<EditMerchandiserProps> = props => {
+const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
   const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
-  const editTeamAssignment = async values => {
-    await makeCorePutRequest(
-      `/volumetry/merchendiser/${(editItem as EmployeeManagementItem)?.id}`,
-      values
-    )
+  const mutateMerchandiser = async values => {
+    editItem
+      ? await makeCorePutRequest(
+          `/volumetry/merchendiser/${(editItem as EmployeeManagementItem)?.id}`,
+          values
+        )
+      : await makeCorePostRequest(`/volumetry/merchendiser`, values)
   }
 
-  const { isLoading, mutate } = useMutation(editTeamAssignment, {
+  const { isLoading, mutate } = useMutation(mutateMerchandiser, {
     onSuccess: res => {
       setShouldRefreshData(true)
       closeModal()
       showNotification({
-        message: 'Item edited successfully',
+        message: editItem
+          ? 'Merchandiserul a fost editat cu success!'
+          : 'Merchandiserul a fost adaugat cu success!',
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while fetching dropdown data. ${formatErrorMessage(res)}`,
+        message: editItem
+          ? `Eroare la editarea merchandiserului. ${formatErrorMessage(res)}`
+          : `Eroare la adaugarea merchandiserului. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
@@ -92,8 +98,8 @@ const EditMerchandiser: React.FC<EditMerchandiserProps> = props => {
     initialValues: {
       id: (editItem as EmployeeManagementItem)?.id || 0,
       name: (editItem as EmployeeManagementItem)?.name || '',
-      departmentName: (editItem as EmployeeManagementItem).departmentName || '',
-      position: (editItem as EmployeeManagementItem).position || ''
+      departmentName: (editItem as EmployeeManagementItem)?.departmentName || '',
+      position: (editItem as EmployeeManagementItem)?.position || ''
     },
     validationSchema: validationSchema,
     onSubmit: async (values: EmployeeManagementItem) => {
@@ -154,4 +160,4 @@ const EditMerchandiser: React.FC<EditMerchandiserProps> = props => {
   )
 }
 
-export default EditMerchandiser
+export default CreateEditMerchandiser
