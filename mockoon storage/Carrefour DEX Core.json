@@ -1,6 +1,6 @@
 {
   "uuid": "db2fc4c5-607e-416b-89bf-7bfd972c8da1",
-  "lastMigration": 28,
+  "lastMigration": 29,
   "name": "DEX CORE REST API",
   "endpointPrefix": "8081/core/rest/api/v1",
   "latency": 0,
@@ -4252,7 +4252,7 @@
       "responses": [
         {
           "uuid": "e0d42fac-76d1-49fb-9bdc-732148a75b6a",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Carrefour Baneasa\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Carrefour Colosseum\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Carrefour Orhideea\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Carrefour Militari\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Carrefour Park Lake\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Carrefour Veranda\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Carrefour Baneasa\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Carrefour Colosseum\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Carrefour Orhideea\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Carrefour Militari\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Carrefour Park Lake\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Carrefour Veranda\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4286,7 +4286,7 @@
       "responses": [
         {
           "uuid": "38485b8f-4ccd-43ca-9257-46c941bf18b6",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 1,\n        \"name\": \"BLS\"\n      },\n      \"name\": \"Mircea Dumitru\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Ioana Alexandra Stamate\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Avram Mihai\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Florin Ion\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Diana Vasilescu\",\n      \"position\": {\n        \"id\": 9,\n        \"name\": \"Lucrator universal\"\n      }\n    },\n    {\n      \"id\": 6,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Florin Gusa\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 1,\n        \"name\": \"BLS\"\n      },\n      \"name\": \"Mircea Dumitru\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Ioana Alexandra Stamate\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Avram Mihai\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Florin Ion\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Diana Vasilescu\",\n      \"position\": {\n        \"id\": 9,\n        \"name\": \"Lucrator universal\"\n      }\n    },\n    {\n      \"id\": 6,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Florin Gusa\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4320,7 +4320,7 @@
       "responses": [
         {
           "uuid": "db72bf61-671e-4ba2-b4e7-0b8be10b5fde",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Cristi Marculescu\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Pintilie Ionut\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Irina Ioana Vasile\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Tudor Petcu\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Maria Dragan\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Cristi Marculescu\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Pintilie Ionut\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Irina Ioana Vasile\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Tudor Petcu\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Maria Dragan\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4354,7 +4354,7 @@
       "responses": [
         {
           "uuid": "e0176e67-ef4e-4bc2-8b0c-9f1454acd56b",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"BLS\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"EPCS\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"TEXTILE\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"APLS\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"PCG\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"BO\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"E-COM/BRINGO\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"BLS\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"EPCS\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"TEXTILE\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"APLS\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"PCG\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"BO\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"E-COM/BRINGO\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4388,7 +4388,7 @@
       "responses": [
         {
           "uuid": "fc5570b6-4c7d-4fb4-b77d-103899c60059",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 7,\n      \"name\": \"Sef echipa\"\n    },\n    {\n      \"id\": 8,\n      \"name\": \"Caiser\"\n    },\n    {\n      \"id\": 9,\n      \"name\": \"Lucrator universal\"\n    },\n    {\n      \"id\": 10,\n      \"name\": \"Asistent vanzari\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 7,\n      \"name\": \"Sef echipa\"\n    },\n    {\n      \"id\": 8,\n      \"name\": \"Caiser\"\n    },\n    {\n      \"id\": 9,\n      \"name\": \"Lucrator universal\"\n    },\n    {\n      \"id\": 10,\n      \"name\": \"Asistent vanzari\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4514,6 +4514,263 @@
       "responses": [
         {
           "uuid": "2b12e0f8-46ae-4f02-bea3-62672fa83bb2",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "1bc0e3eb-eaf5-4657-94ce-058eec4f2aac",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/task",
+      "responses": [
+        {
+          "uuid": "992f860e-3d73-44d3-bc80-e0976b8d2897",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    },\n    {\n      \"id\": 2,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"112233Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "ac8f76e5-3647-4b9b-922a-5f8753ce7425",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/frequency",
+      "responses": [
+        {
+          "uuid": "0b321483-7d64-4168-96b8-364472323d72",
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"zilnic\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"ocazional\"\n  },\n  {\n    \"id\": 3,\n    \"name\": \"saptamanal\"\n  },\n  {\n    \"id\": 4,\n    \"name\": \"L,Ma,Mi,J,V\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "22254d8f-208f-4fe3-8cae-8317ab4488cf",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/productivityStandardUM",
+      "responses": [
+        {
+          "uuid": "ba6e71de-f36a-47f9-ab44-4e3e08a247ea",
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"SN/ora\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"articol/ora\"\n  },\n  {\n    \"id\": 3,\n    \"name\": \"palet/ora\"\n  },\n  {\n    \"id\": 4,\n    \"name\": \"unitati/ora\"\n  },\n  {\n    \"id\": 5,\n    \"name\": \"element/ora\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "08931dc4-c02f-40a9-b0c0-ca7b270203f0",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/workVolumeSource",
+      "responses": [
+        {
+          "uuid": "7f7c4418-af51-4760-a939-1911cdc17724",
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Meti\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "ce2e08d5-537e-46c6-808e-ff0541e30358",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/task/:id",
+      "responses": [
+        {
+          "uuid": "a407087e-cd9b-4b3f-a944-2098b06f378e",
+          "body": "{\n  \"id\": 1,\n  \"department\": {\n    \"id\": 1,\n    \"name\": \"BLS\"\n  },\n  \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n  \"estimateStartTime\": \"06:30\",\n  \"estimateEndTime\": \"08:30\",\n  \"frequency\": {\n    \"id\": 1,\n    \"name\": \"zilnic\"\n  },\n  \"prodStandardValue\": \"2.0\",\n  \"prodStandardUM\": {\n    \"id\": 1,\n    \"name\": \"tur/ora\"\n  },\n  \"workVolumeSource\": {\n    \"id\": 1,\n    \"name\": \"Meti\"\n  },\n  \"priority\": 1,\n  \"status\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "eb7142d7-4669-4dbe-b223-2eb11fbe3934",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "volumetry/task/:id",
+      "responses": [
+        {
+          "uuid": "0d3f3620-c4a8-4192-a737-c35ebcdf3bce",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "dc02a546-b450-439e-bf1d-3bffc7f926cb",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "volumetry/task",
+      "responses": [
+        {
+          "uuid": "1fec295e-b87e-402f-b265-58e374971cae",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "cbc28fa3-ee8e-42bf-9d89-e860525de038",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "volumetry/task/:id",
+      "responses": [
+        {
+          "uuid": "1b061358-9924-4d1a-8fe7-c4b9f4b615da",
           "body": "{}",
           "latency": 0,
           "statusCode": 200,
@@ -4691,6 +4948,38 @@
     {
       "type": "route",
       "uuid": "1abd0193-5b4a-4363-8b99-50b07bf6eb0e"
+    },
+    {
+      "type": "route",
+      "uuid": "1bc0e3eb-eaf5-4657-94ce-058eec4f2aac"
+    },
+    {
+      "type": "route",
+      "uuid": "ac8f76e5-3647-4b9b-922a-5f8753ce7425"
+    },
+    {
+      "type": "route",
+      "uuid": "22254d8f-208f-4fe3-8cae-8317ab4488cf"
+    },
+    {
+      "type": "route",
+      "uuid": "08931dc4-c02f-40a9-b0c0-ca7b270203f0"
+    },
+    {
+      "type": "route",
+      "uuid": "ce2e08d5-537e-46c6-808e-ff0541e30358"
+    },
+    {
+      "type": "route",
+      "uuid": "eb7142d7-4669-4dbe-b223-2eb11fbe3934"
+    },
+    {
+      "type": "route",
+      "uuid": "dc02a546-b450-439e-bf1d-3bffc7f926cb"
+    },
+    {
+      "type": "route",
+      "uuid": "cbc28fa3-ee8e-42bf-9d89-e860525de038"
     }
   ],
   "proxyMode": false,

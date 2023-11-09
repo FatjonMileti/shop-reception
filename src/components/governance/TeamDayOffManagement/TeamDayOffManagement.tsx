@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react'
-import { Box, CircularProgress, Grid, Paper, debounce, Typography } from "@mui/material"
+import { useMemo, useState } from 'react'
+import { Box, CircularProgress, Grid, Paper, Typography } from "@mui/material"
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from './TeamDayOffManagement.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'

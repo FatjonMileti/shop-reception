@@ -64,6 +64,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
       }
     }
   })
+
   return (
     <Modal
       isModalOpen={isModalOpen}
