@@ -1,4 +1,4 @@
-import { Box, Paper } from '@mui/material'
+import { Grid, Paper } from '@mui/material'
 import s from './NewClient.modules.scss'
 import { ChangeEvent, useState } from 'react'
 import { PersoanaFizica } from './PersoanaFizica'
@@ -19,8 +19,8 @@ const NewClient: React.FC = () => {
   return (
     <div className={s.mainContainer}>
       <Paper sx={{ display: 'flex', justifyContent: 'center', padding: '12px' }}>
-        <Box sx={{ width: '600px' }}>
-          <Box>
+        <Grid container spacing={3} width={'600px'} display={'flex'} flexDirection={'column'}>
+          <Grid item>
             <label className={s.select}>
               <input
                 type="radio"
@@ -42,10 +42,10 @@ const NewClient: React.FC = () => {
               />
               Persoana juridica
             </label>
-          </Box>
+          </Grid>
 
-          {renderClientType[clientType]}
-        </Box>
+          <Grid item>{renderClientType[clientType]}</Grid>
+        </Grid>
       </Paper>
     </div>
   )

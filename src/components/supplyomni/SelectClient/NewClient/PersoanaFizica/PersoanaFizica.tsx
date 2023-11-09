@@ -1,6 +1,5 @@
-import { Box } from '@mui/material'
+import { Grid } from '@mui/material'
 import { useNotification } from 'hooks'
-import s from '../NewClient.modules.scss'
 import { useMutation } from 'react-query'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
@@ -43,14 +42,7 @@ const PersoanaFizica: React.FC = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: PersoanaFizica) => {
-      try {
-        mutate(values)
-      } catch (error) {
-        showNotification({
-          message: `Error while saving time off data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
+      mutate(values)
     }
   })
 
@@ -59,8 +51,8 @@ const PersoanaFizica: React.FC = () => {
   }
 
   return (
-    <Box>
-      <Box className={s.row}>
+    <Grid container spacing={4}>
+      <Grid item xs={12}>
         <Input
           type="text"
           name="name"
@@ -70,10 +62,12 @@ const PersoanaFizica: React.FC = () => {
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('name', e.target.value)}
           required
+          error={!!formik.errors.name}
+          helperText={formik.errors.name as string}
         />
-      </Box>
+      </Grid>
 
-      <Box className={s.row} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Grid item xs={12} display={'flex'} justifyContent={'space-between'}>
         <Input
           type="text"
           name="phone"
@@ -83,6 +77,8 @@ const PersoanaFizica: React.FC = () => {
           width="280px"
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('phone', e.target.value)}
           required
+          error={!!formik.errors.phone}
+          helperText={formik.errors.phone as string}
         />
         <Input
           type="text"
@@ -93,23 +89,27 @@ const PersoanaFizica: React.FC = () => {
           width="280px"
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('email', e.target.value)}
           required
+          error={!!formik.errors.email}
+          helperText={formik.errors.email as string}
         />
-      </Box>
+      </Grid>
 
-      <Box className={s.row}>
+      <Grid item xs={12}>
         <Input
           type="text"
-          name="fullAddress"
+          name="address"
           label="Adresa"
           variant="standard"
           value={formik.values.address}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('address', e.target.value)}
           required
+          error={!!formik.errors.address}
+          helperText={formik.errors.address as string}
         />
-      </Box>
+      </Grid>
 
-      <Box className={s.row}>
+      <Grid item xs={12}>
         <CountyCitySelect
           required
           county={{
@@ -141,13 +141,15 @@ const PersoanaFizica: React.FC = () => {
           onChange={(newValue: CountyCityInterface, fieldToUpdate: string) =>
             onUpdateValues(fieldToUpdate, { id: newValue.value, name: newValue.label })
           }
+          error={!!formik.errors.county || !!formik.errors.city}
+          helperText="required"
         />
-      </Box>
+      </Grid>
 
-      <Box className={s.row} sx={{ textAlign: 'right' }}>
+      <Grid item xs={12} textAlign={'right'}>
         <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   )
 }
 

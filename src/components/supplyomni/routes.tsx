@@ -4,8 +4,8 @@ import { URLS } from './constants'
 import { ProductScan } from './ProductScan'
 import { MySales } from './MySales'
 import { ShoppingCart } from './ShoppingCart'
-import { SelectClient } from './ShoppingCart/SelectClient'
-import { ClientDetails } from './ShoppingCart/SelectClient/ClientDetails'
+import { SelectClient } from './SelectClient'
+import { ClientDetails } from './SelectClient/ClientDetails'
 
 export const useSupplyOmniRoutes = applicationPages => {
   return (

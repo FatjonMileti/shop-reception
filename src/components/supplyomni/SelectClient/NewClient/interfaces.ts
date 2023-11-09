@@ -9,11 +9,11 @@ export interface PersoanaFizica {
   email: string
   address: string
   county: {
-    id: string
+    id: string | number
     name: string
   }
   city: {
-    id: string
+    id: string | number
     name: string
   }
   type: string
@@ -29,11 +29,11 @@ export interface PersoanaJuridica {
   email: string
   address: string
   county: {
-    id: string
+    id: string | number
     name: string
   }
   city: {
-    id: string
+    id: string | number
     name: string
   }
 }
