@@ -150,8 +150,8 @@ VALUES
     (44, 'Raport utilizare aplicatie', 'CadentierSales', '/usage-report-region', true , 36, true),
     -- Supply OMNI
     (45, 'Scanare produs', 'QrCodeScannerOutlined', '/supplyOmni/productScan', true, 37, true),
-    (46, 'Cos de cumparaturi', 'ShoppingBasketOutlined', '/shoppingCart', true, 38, true),
-    (47, 'Selecteaza client', '', '/shoppingCartSelectClient', true, 38, false),
+    (46, 'Cos de cumparaturi', 'ShoppingBasketOutlined', '/supplyOmni/shoppingCart', true, 38, true),
+    (47, 'Selecteaza client', '', '/supplyOmni/shoppingCartSelectClient', true, 38, false),
     (48, 'Date client', '', '/shoppingCartClientDetails/:id', true, 38, false),
     (49, 'PDF proforma', '', '/proformaView/:id', true, 38, false),
     (50, 'Scanare Bon', '', '/scanReceipt/:id', true, 38, false),
