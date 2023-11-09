@@ -1,4 +1,4 @@
-import { AsyncAutocompleteOption } from "components/core-ui/AsyncAutocomplete/AsyncAutocompleteDefinitions"
+import { AsyncAutocompleteOption } from 'components/core-ui/AsyncAutocomplete/AsyncAutocompleteDefinitions'
 
 export interface ValueLabelInterface {
   value: string
@@ -9,6 +9,12 @@ export interface EmployeeManagementItem {
   id: string | number
   departmentName: string
   name: string
+  position: string
+}
+
+export interface NewMerchandiserItem {
+  name: string
+  departmentName: string
   position: string
 }
 

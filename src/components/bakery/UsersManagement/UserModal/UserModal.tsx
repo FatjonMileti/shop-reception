@@ -7,7 +7,7 @@ import {
   Typography,
   Checkbox
 } from '@fullscreendigital/carrefour-dex-fe'
-import { ModalInfo } from '../ModalWithForm/ModalForm/ModalInfo'
+import { ModalInfo } from '../../../core-ui/ModalWithForm/ModalForm/ModalInfo'
 import { useNotification } from 'hooks'
 import s from './UserModal.modules.scss'
 import Modal from '@mui/material/Modal'
@@ -16,7 +16,7 @@ import { Close } from '@mui/icons-material'
 import { useImmer } from 'use-immer'
 import { useMediaQuery, CircularProgress } from '@mui/material'
 import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
-import { StructureItem } from '../StructureItem'
+import { StructureItem } from './StructureItem'
 import { formatErrorMessage } from 'utils/formatting'
 
 const sx = {
@@ -158,7 +158,6 @@ function UserModal(props) {
             ...result,
             structureRoles: result.structureRoles
           })
-
           const rolesResult = await makeCoreGetRequest(`${getRolesAction}`)
 
           const admin = rolesResult.find(role => role.name === 'ADMIN')
@@ -167,7 +166,7 @@ function UserModal(props) {
             .filter(role => role.name.includes('TRAINEE'))
             .map(role => ({ name: role.id, label: role.name }))
           const otherRoles = rolesResult.filter(role => !role.name.includes('TRAINEE'))
-
+          
           setAdminRole(admin)
           setRoles(otherRoles)
           setTraineeOptions(traineeRoles)
@@ -199,7 +198,6 @@ function UserModal(props) {
         item => Object.keys(item).length && item.roleId
       )
     }
-
     try {
       await makeCorePutRequest(formAction.url, payload)
       showNotification({
@@ -213,7 +211,7 @@ function UserModal(props) {
       })
     }
 
-    additionalAction && additionalAction()
+    additionalAction && additionalAction(false)
     closeModalAndResetForm()
     setIsLoading(false)
   }
@@ -259,7 +257,7 @@ function UserModal(props) {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <React.Fragment>
-                    {roles
+                    {editItem && roles
                       ?.filter(role => role.name !== 'ADMIN')
                       .map(role => {
                         const isChecked = editItem?.structureRoles?.some(
@@ -297,7 +295,7 @@ function UserModal(props) {
                       isTrainee={true}
                       traineeOptions={traineeOptions}
                       defaultChecked={traineeOptions.find(userRole =>
-                        editItem.structureRoles?.some(option => option.roleId === userRole.name)
+                        editItem?.structureRoles?.some(option => option.roleId === userRole.name)
                       )}
                       onChange={onTraineeChange}
                       roleName={{ label: 'TRAINEE' }}
@@ -313,7 +311,7 @@ function UserModal(props) {
                     variant="standard"
                     width="45%"
                     label="Status"
-                    value={editItem.enable}
+                    value={editItem?.enable}
                     values={[
                       {
                         value: 'true',

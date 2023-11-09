@@ -62,6 +62,13 @@ export interface TeamAssignmentTableFilter {
   assignedProject: string
 }
 
+export interface TeamCapacityTableFilter {
+  teamMemberName: string
+  endDate: Date
+  startDate: Date
+  baseRole: string
+}
+
 export interface TimeOffValues {
   teamMember: TeamMember
   dayOffType: string

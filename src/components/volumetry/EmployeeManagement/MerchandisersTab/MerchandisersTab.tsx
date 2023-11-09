@@ -15,7 +15,7 @@ import { Input } from 'components/core-ui/Input'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { columns, roles } from './helpers'
 import { DeleteMerchandiser } from './DeleteMerchandiser'
-import { EditMerchandiser } from './EditMerchandiser'
+import { CreateEditMerchandiser } from './CreateEditMerchandiser'
 
 const tableFilterFields = [
   {
@@ -44,13 +44,16 @@ const tableFilterFields = [
 
 const MerchandisersTab = () => {
   const { showNotification } = useNotification()
-  const { canEdit, canDelete } = usePermissions(roles)
+
+  // TODO: De actualizat cand primim update cu drepturile fiecarui rol
+  const { canCreate, canEdit, canDelete } = usePermissions(roles)
 
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
+  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<EmployeeManagementItem | number>(0)
@@ -75,6 +78,9 @@ const MerchandisersTab = () => {
       }
     }
   )
+
+  const openNewModal = (): void => setIsNewModalOpen(true)
+  const closeNewModal = (): void => setIsNewModalOpen(false)
 
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
@@ -180,13 +186,18 @@ const MerchandisersTab = () => {
 
       {storeFilterValue && (
         <Box>
+          <CreateEditMerchandiser
+            isModalOpen={isNewModalOpen}
+            closeModal={closeNewModal}
+            setShouldRefreshData={setShouldRefreshData}
+          />
           <DeleteMerchandiser
             isModalOpen={isDeleteModalOpen}
             closeModal={closeDeleteModal}
             deleteItem={selectedRow}
             setShouldRefreshData={setShouldRefreshData}
           />
-          <EditMerchandiser
+          <CreateEditMerchandiser
             isModalOpen={isEditModalOpen}
             closeModal={closeEditModal}
             editItem={selectedRow}
@@ -197,6 +208,7 @@ const MerchandisersTab = () => {
             hideCheckbox
             orderBy="department.name"
             order="desc"
+            newButton={canCreate ? { onClick: openNewModal } : null}
             columns={columnsWithActions}
             items={tableItems}
             fetchData={fetchData}
