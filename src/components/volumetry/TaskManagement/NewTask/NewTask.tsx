@@ -1,6 +1,6 @@
-import { TaskManagementItem } from 'components/volumetry/interfaces'
+import { TaskManagementEditItem, TaskManagementItem } from 'components/volumetry/interfaces'
 import { useNotification } from 'hooks'
-import { useMemo } from 'react'
+import { ChangeEvent, useMemo } from 'react'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from 'utils/formatting'
@@ -129,7 +129,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
     }
   )
 
-  const submitTask = async values => {
+  const submitTask = async (values: TaskManagementItem) => {
     if (editItem) {
       await makeCorePutRequest(`/volumetry/task/${(editItem as TaskManagementItem)?.id}`, values)
     } else {
@@ -159,13 +159,11 @@ const NewTask: React.FC<NewTaskProps> = props => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any, { resetForm }) => {
+    onSubmit: async (values: TaskManagementEditItem, { resetForm }) => {
       mutate(toTaskPayload(values))
       resetForm()
     }
   })
-
-  console.log(formik.errors)
 
   return (
     <Modal
@@ -186,7 +184,9 @@ const NewTask: React.FC<NewTaskProps> = props => {
             fullWidth
             variant="outlined"
             value={formik.values.taskName}
-            onChange={event => formik.setFieldValue('taskName', event.currentTarget.value)}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue('taskName', event.currentTarget.value)
+            }
             error={!!formik.errors.taskName}
             helperText={formik.errors.taskName as string}
             required
@@ -227,7 +227,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
             variant="outlined"
             name="department"
             label="Departament"
-            value={formik.values.department || []}
+            value={formik.values.department}
             options={departmentFilterOptions}
             onChange={value => formik.setFieldValue('department', value)}
             error={!!formik.errors.department}
@@ -256,7 +256,9 @@ const NewTask: React.FC<NewTaskProps> = props => {
             fullWidth
             variant="outlined"
             value={formik.values.prodStandardValue}
-            onChange={event => formik.setFieldValue('prodStandardValue', event.currentTarget.value)}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue('prodStandardValue', event.currentTarget.value)
+            }
             error={!!formik.errors.prodStandardValue}
             helperText={formik.errors.prodStandardValue as string}
             inputProps={{
@@ -303,7 +305,9 @@ const NewTask: React.FC<NewTaskProps> = props => {
             fullWidth
             variant="outlined"
             value={formik.values.priority}
-            onChange={event => formik.setFieldValue('priority', event.currentTarget.value)}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue('priority', event.currentTarget.value)
+            }
             error={!!formik.errors.priority}
             helperText={formik.errors.priority as string}
             inputProps={{

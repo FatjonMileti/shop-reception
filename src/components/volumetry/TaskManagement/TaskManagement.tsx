@@ -107,13 +107,14 @@ const tableFilterFields = [
     label: 'Prioritate',
     type: 'number',
     filter: <Input type="number" name="priority" label="Prioritate" variant="outlined" />
-  },
-  {
-    name: 'state',
-    label: 'Stare',
-    type: 'boolean',
-    filter: <Input type="text" name="state" label="Stare" variant="outlined" />
   }
+  // TODO see what should be used here for boolean
+  // {
+  //   name: 'state',
+  //   label: 'Stare',
+  //   type: 'boolean',
+  //   filter: <Input type="text" name="state" label="Stare" variant="outlined" />
+  // }
 ]
 
 const TaskManagement = () => {
