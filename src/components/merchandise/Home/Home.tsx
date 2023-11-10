@@ -1,11 +1,10 @@
 import { Grid, Container, Paper } from "@mui/material"
-import { Input, Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
+import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
 import s from "./Home.modules.scss"
-import { boolean } from "yup"
 
 const Home = () => {
-  var isShopUser = false;
-  var isHubUser = true;
+  var isShopUser = true;
+  var isHubUser = false;
   var isWareHouseUser = false;
 
   const getTitle = () => {
@@ -22,7 +21,8 @@ const Home = () => {
   return (
     <Paper className={s.paper}>
       <Container component="main" maxWidth="xs" className={s.container}>
-        <Typography component="h2" variant="medium" style={{ textAlign: "center", textTransform: "uppercase" }}>
+        <Typography component="h2" variant="regular" style={{ textAlign: "center", textTransform: "uppercase" }}>Carrefour Operațional</Typography>
+        <Typography component="h3" variant="medium" style={{ textAlign: "center", textTransform: "uppercase" }}>
           {getTitle()}
         </Typography>
         <form>
