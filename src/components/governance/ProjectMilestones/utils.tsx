@@ -6,17 +6,17 @@ export const buildTableFilterInputs = (
   setTableFilter: (tableFilters: TableFilters) => void
 ) => [
   {
-    name: 'projectName',
+    name: 'project.name',
     label: 'Project name',
     type: 'text',
     filter: (
       <Input
         type="text"
-        name="projectName"
+        name="project.name"
         label="Project name"
         variant="standard"
-        onChange={(value: string) => setTableFilter({ ...tableFilter, projectName: value })}
-        value={tableFilter.projectName}
+        onChange={(value: string) => setTableFilter({ ...tableFilter, "project.name": value })}
+        value={tableFilter["project.name"]}
       />
     )
   },
@@ -42,11 +42,11 @@ export const buildTableFilterInputs = (
     filter: (
       <Input
         type="text"
-        name="iibKey"
+        name="project.iibKey"
         label="IIB Key"
         variant="standard"
-        onChange={(value: string) => setTableFilter({ ...tableFilter, iibKey: value })}
-        value={tableFilter.iibKey}
+        onChange={(value: string) => setTableFilter({ ...tableFilter, "project.iibKey": value })}
+        value={tableFilter["project.iibKey"]}
       />
     )
   },
@@ -57,11 +57,11 @@ export const buildTableFilterInputs = (
     filter: (
       <Input
         type="text"
-        name="ipbKey"
+        name="project.ipbKey"
         label="IPB Key"
         variant="standard"
-        onChange={value => setTableFilter({ ...tableFilter, ipbKey: value })}
-        value={tableFilter.ipbKey}
+        onChange={value => setTableFilter({ ...tableFilter, "project.ipbKey": value })}
+        value={tableFilter["project.ipbKey"]}
       />
     )
   }
