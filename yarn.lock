@@ -1253,7 +1253,7 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.1.6.tgz#22958c042e10b67463997bd6ea7115fe28cbcaf9"
   integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
 
-"@fullscreendigital/carrefour-dex-fe@^2.0.4":
+"@fullscreendigital/carrefour-dex-fe@^2.0.0":
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-2.0.5.tgz#300d36ac0c6e7170b3c5e84e96a27130861ed502"
   integrity sha512-pvrfyhEf9eg3ambtvGo9KPnmeJtuEl2qssqkTmTyQnIo4rO81dm4NYK1YjTdxC0kTtAPG/0hneN8zjIe8SvpsA==
