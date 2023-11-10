@@ -67,30 +67,33 @@ const PersoanaFizica: React.FC = () => {
         />
       </Grid>
 
-      <Grid item xs={12} display={'flex'} justifyContent={'space-between'}>
+      <Grid item xs={12} md={6}>
         <Input
           type="text"
           name="phone"
           label="Telefon"
           variant="standard"
           value={formik.values.phone}
-          width="280px"
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('phone', e.target.value)}
           required
           error={!!formik.errors.phone}
           helperText={formik.errors.phone as string}
+          fullWidth
         />
+      </Grid>
+
+      <Grid item xs={12} md={6}>
         <Input
           type="text"
           name="email"
           label="Email"
           variant="standard"
           value={formik.values.email}
-          width="280px"
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('email', e.target.value)}
           required
           error={!!formik.errors.email}
           helperText={formik.errors.email as string}
+          fullWidth
         />
       </Grid>
 

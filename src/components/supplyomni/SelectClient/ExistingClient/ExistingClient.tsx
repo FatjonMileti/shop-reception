@@ -10,12 +10,13 @@ import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { columns, toTableRowItems } from './helpers'
 import VisibilityIcon from '@mui/icons-material/Visibility'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CreateClientModal } from './CreateClientModal'
 
 const ExistingClient: React.FC = () => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const [searchField, setSearchField] = useState<string>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -54,35 +55,11 @@ const ExistingClient: React.FC = () => {
     }
   }
 
-  const columnsWithActions = useMemo(() => {
-    const actionsRow = {
-      title: '',
-      field: 'actions',
-      align: 'right',
-      width: '112px',
-      collapsible: 'true',
-      render: row => (
-        <Box display="flex">
-          <Button
-            onClick={() => navigate(`/shoppingCartClientDetails/${row.id}`)}
-            style={{ minWidth: '0.7rem', background: 'transparent' }}
-            label=""
-          >
-            <VisibilityIcon />
-          </Button>
-        </Box>
-      )
-    } as any
-
-    return [...columns, actionsRow]
-  }, [columns])
-
   const openCreateClientTab = (): void => {
-    const currentUrl = new URL(window.location.href)
-    currentUrl.searchParams.set('tab', '1')
-    navigate(currentUrl.pathname + currentUrl.search)
+    setSearchParams({ tab: '1' })
+    const searchString = searchParams.toString()
+    navigate(window.location.pathname + '?' + searchString)
   }
-
   return (
     <>
       {isLoading && (
@@ -142,13 +119,22 @@ const ExistingClient: React.FC = () => {
               hideCheckbox
               orderBy="name"
               order="asc"
-              columns={columnsWithActions}
+              columns={columns}
               items={tableItems}
               fetchData={() => {}}
               isLoading={isLoading}
               totalCount={totalCount}
               shouldRefreshData={shouldRefreshData}
               setShouldRefreshData={setShouldRefreshData}
+              rowActions={[
+                {
+                  label: 'Detalii',
+                  labelColor: 'white',
+                  typographyVariant: 'medium',
+                  backgroundColor: '#16a085',
+                  onClick: (e, rowId) => navigate(`/shoppingCartClientDetails/${rowId}`)
+                }
+              ]}
             />
           </div>
         )}
