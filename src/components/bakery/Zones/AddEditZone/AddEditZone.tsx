@@ -132,6 +132,8 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
                     width="100%"
                     value={formik.values.divisionType}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue('divisionType', (event.target as HTMLInputElement).value)}
+                    error={!!formik.errors.divisionType}
+                    helperText={formik.errors.divisionType as string}
                     required
                 />
                 </Grid>
