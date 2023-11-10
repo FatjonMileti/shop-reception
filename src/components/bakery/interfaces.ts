@@ -20,3 +20,10 @@ export interface UserItem {
   traineeAssociatedStructure: string
   status: string
 }
+
+export interface AddRegionItem {
+  divisionType: string
+  enable: string
+  name: string
+  responsible: string
+}
