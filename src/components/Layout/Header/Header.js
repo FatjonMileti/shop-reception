@@ -47,7 +47,7 @@ const MobileAppBar = ({ handleOpenMenu }) => {
   const navigate = useNavigate()
   const location = useLocation()
   return <AppBar
-    hideMenuIcon={location.pathname === "/merchandise/home" || !location.pathname.includes("merchandise")}
+    hideMenuIcon={location.pathname.includes("/merchandise/home") || !location.pathname.includes("merchandise")}
     menuIcon={<Grid container>
       <Grid item xs={6} style={{ marginRight: "-7px" }}>
         <ArrowBackIos />

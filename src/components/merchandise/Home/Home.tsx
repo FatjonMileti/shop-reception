@@ -1,10 +1,13 @@
 import { Grid, Container, Paper } from "@mui/material"
 import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
 import s from "./Home.modules.scss"
+import { URLS } from '../constants'
+import { useNavigate } from "react-router-dom"
 
 const Home = () => {
-  var isShopUser = true;
-  var isHubUser = false;
+  const navigate = useNavigate();
+  var isShopUser = false;
+  var isHubUser = true;
   var isWareHouseUser = false;
 
   const getTitle = () => {
@@ -21,8 +24,8 @@ const Home = () => {
   return (
     <Paper className={s.paper}>
       <Container component="main" maxWidth="xs" className={s.container}>
-        <Typography component="h2" variant="regular" style={{ textAlign: "center", textTransform: "uppercase" }}>Carrefour Operațional</Typography>
-        <Typography component="h3" variant="medium" style={{ textAlign: "center", textTransform: "uppercase" }}>
+        <Typography component="h3" variant="regular" style={{ textAlign: "center", textTransform: "uppercase" }}>Carrefour Operațional</Typography>
+        <Typography component="h2" variant="medium" style={{ textAlign: "center", textTransform: "uppercase" }}>
           {getTitle()}
         </Typography>
         <form>
@@ -33,6 +36,9 @@ const Home = () => {
                 variant="contained"
                 label="RECEPȚIE MARFǍ"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_GOODS_RECEPTION);
+                }}
               />
             </Grid>}
             {(isShopUser || isHubUser) && <Grid item xs={12}>
@@ -41,6 +47,9 @@ const Home = () => {
                 variant="contained"
                 label="RETUR AMBALAJE/MARFǍ"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_GOODS_RETURN);
+                }}
               />
             </Grid>}
             {isShopUser && <Grid item xs={12}>
