@@ -5,7 +5,6 @@ import {
   IconButton,
   Input,
   Typography,
-  Checkbox
 } from '@fullscreendigital/carrefour-dex-fe'
 import { ModalInfo } from '../../../core-ui/ModalWithForm/ModalForm/ModalInfo'
 import { useNotification } from 'hooks'
