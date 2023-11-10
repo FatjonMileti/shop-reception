@@ -75,7 +75,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             />
           ) : (
             <AsyncAutocomplete
-              variant="standard"
+              variant="outlined"
               name="role"
               label="Role"
               options={effortMatrixRoles}
@@ -95,7 +95,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
               formik.setFieldValue('evaluationPhase', (event.target as HTMLInputElement).value)
             }
             label="Evaluation"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.evaluationPhase}
             helperText={formik.errors.evaluationPhase as string}
@@ -110,7 +110,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
               formik.setFieldValue('analysisPhase', (event.target as HTMLInputElement).value)
             }
             label="Analysis"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.analysisPhase}
             helperText={formik.errors.analysisPhase as string}
@@ -125,7 +125,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
               formik.setFieldValue('designPhase', (event.target as HTMLInputElement).value)
             }
             label="Design"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.designPhase}
             helperText={formik.errors.designPhase as string}
@@ -140,7 +140,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
               formik.setFieldValue('developmentPhase', (event.target as HTMLInputElement).value)
             }
             label="Development"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.developmentPhase}
             helperText={formik.errors.developmentPhase as string}
@@ -155,7 +155,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
               formik.setFieldValue('systemTestPhase', (event.target as HTMLInputElement).value)
             }
             label="System Test"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.systemTestPhase}
             helperText={formik.errors.systemTestPhase as string}
@@ -170,7 +170,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
               formik.setFieldValue('uatPhase', (event.target as HTMLInputElement).value)
             }
             label="UAT"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.uatPhase}
             helperText={formik.errors.uatPhase as string}
@@ -185,7 +185,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
               formik.setFieldValue('rolloutPhase', (event.target as HTMLInputElement).value)
             }
             label="Roll-Out"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.rolloutPhase}
             helperText={formik.errors.rolloutPhase as string}
@@ -200,7 +200,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
               formik.setFieldValue('hypercarePhase', (event.target as HTMLInputElement).value)
             }
             label="Hypercare"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.hypercarePhase}
             helperText={formik.errors.hypercarePhase as string}

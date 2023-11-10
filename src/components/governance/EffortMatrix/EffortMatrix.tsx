@@ -93,7 +93,6 @@ const EffortMatrix = () => {
           editItem={selectedRow}
           isEdit
         />
-
         <DeleteConfirmationModal
           isModalOpen={isDeleteModalOpen}
           closeModal={closeDeleteModal}
