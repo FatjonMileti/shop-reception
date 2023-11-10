@@ -1,12 +1,10 @@
 import { Box } from '@mui/material'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from './Zones.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useMemo, useState } from 'react'
 import { columns } from './helpers'
 import { useNotification } from 'hooks'
-import { Edit } from '@mui/icons-material'
-import AddIcon from '@mui/icons-material/Add';
+import { Add } from '@mui/icons-material'
 import { ZoneItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -17,12 +15,12 @@ import { EditZone } from './EditZone'
 import { AddZone } from './AddZone'
 
 const Zones = () => {
-  const [selectedRow, setSelectedRow] = useState<ZoneItem | null>(null)
   const [tableItems, setTableItems] = useState<ZoneItem[]>([])
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
+  const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
 
@@ -60,14 +58,15 @@ const Zones = () => {
     }
   }
 
-  const selectRow = (row, action) => {
-    setSelectedRow(row)
-    action === 'edit' && openEditModal()
+  const selectRow = (rowId: number, action: string) => {
+    setSelectedRowId(rowId)
+
+    if (action === 'edit') {
+      openEditModal()
+    }
   }
 
   const columnsWithActions = useMemo(() => {
-    let result = columns
-
     const storesColumn = {
       title: 'Magazin',
       field: 'stores',
@@ -106,51 +105,22 @@ const Zones = () => {
       )
     } as any
 
-    let actionsRow = {
-      title: '',
-      field: 'actions',
-      align: 'right',
-      width: '70px',
-      collapsible: 'true',
-      render: row => (
-        <Box display="flex">          
-            <Button
-              onClick={() => selectRow(row, 'edit')}
-              style={{ minWidth: '0.7rem', background: 'transparent' }}
-              label=""
-            >
-              <Edit />
-            </Button>          
-        </Box>
-      )
-    } as any
-
-    result = [...columns, storesColumn, divisionTypeColumn, statusColumn, actionsRow]
-    return result
+    return [...columns, storesColumn, divisionTypeColumn, statusColumn]
   }, [columns])
 
   return (
     <div className={s.mainContainer}>
-      {/* TODO add search bar after modifications have been pushed */}
-      <Box className={s.addZoneContainer}>
-          <Button
-              onClick={() => openAddModal()}
-              style={{ minWidth: '0.7rem', background: 'transparent' }}
-              label=""
-          >
-              <AddIcon />
-          </Button>  
-          <AddZone
-            isModalOpen={isAddModalOpen}
-            closeModal={closeAddModal}
-            setShouldRefreshData={setShouldRefreshData}
-          />  
-      </Box>
+      {/* TODO add search bar after redesigns */}
       <Box>
+        <AddZone
+          isModalOpen={isAddModalOpen}
+          closeModal={closeAddModal}
+          setShouldRefreshData={setShouldRefreshData}
+        />  
         <EditZone
           isModalOpen={isEditModalOpen}
           closeModal={closeEditModal}
-          editItem={selectedRow}
+          editItemId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
           />
         <Table
@@ -162,6 +132,23 @@ const Zones = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => selectRow(rowId, 'edit')
+            }
+          ]}
+          rowActionsWidth="130px"
+          toolbarActions={[
+            {
+              label: 'Adauga Zona',
+              icon: <Add />,
+              onClick: openAddModal
+            }
+          ]}
         />
       </Box>
     </div>

@@ -11,7 +11,7 @@ import { dayOfTypes, getInitialValues, getValidationSchema } from './helpers'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { TeamDayOffManagementItem, TeamMember, TimeOffValues } from '../../interfaces'
+import { TeamDayOffManagementItem, TeamMember } from '../../interfaces'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]

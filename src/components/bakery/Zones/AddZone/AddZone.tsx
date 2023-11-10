@@ -57,7 +57,7 @@ const AddZone: React.FC<AddZoneProps> = props => {
         enableReinitialize: true,
         validateOnChange: false,
         initialValues: {
-          id: '',
+          id: '', // TODO should be a way to generate new ids
           name: '',
           responsible: '',
           enable: '',
