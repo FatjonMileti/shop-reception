@@ -2,11 +2,10 @@ import { Grid, Container, Paper } from "@mui/material"
 import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
 import s from "./GoodsReturn.modules.scss"
 import { URLS } from '../constants'
+import useRoles from "../useRoles"
 
 const GoodsReturn = () => {
-  var isShopUser = false;
-  var isHubUser = true;
-  var isWareHouseUser = false;
+  const { isShopUser, isHubUser, isWareHouseUser } = useRoles();
 
   const getTitle = () => {
     if (isShopUser) {

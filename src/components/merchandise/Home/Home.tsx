@@ -3,12 +3,11 @@ import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
 import s from "./Home.modules.scss"
 import { URLS } from '../constants'
 import { useNavigate } from "react-router-dom"
+import useRoles from "../useRoles"
 
 const Home = () => {
   const navigate = useNavigate();
-  var isShopUser = false;
-  var isHubUser = true;
-  var isWareHouseUser = false;
+  const { isShopUser, isHubUser, isWareHouseUser } = useRoles();
 
   const getTitle = () => {
     if (isShopUser) {
