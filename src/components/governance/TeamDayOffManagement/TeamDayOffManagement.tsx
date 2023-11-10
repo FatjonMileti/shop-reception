@@ -1,23 +1,22 @@
-import { useMemo, useState } from 'react'
-import { Box, CircularProgress, Grid, Paper, Typography } from "@mui/material"
+import { Add } from '@mui/icons-material'
+import { Box, CircularProgress, Grid, Paper, Typography } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import s from './TeamDayOffManagement.modules.scss'
-import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
-import { useNotification, usePermissions } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
-import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { Table } from 'components/core-ui/Table'
+import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Input } from 'components/core-ui/Input'
-import { NewTimeOff } from './NewTimeOff'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { Delete, Edit } from '@mui/icons-material'
-import { toTableRowItems } from './serializers'
-import { columns } from './helpers'
-import { roles } from '../helpers'
-import { TeamDayOffManagementItem, ValueLabelInterface } from '../interfaces'
+import { Table } from 'components/core-ui/Table'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { useNotification, usePermissions } from 'hooks'
+import { useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
-import DeleteConfirmationModal from "components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal"
+import { makeCoreGetRequest } from 'utils/api'
+import { formatErrorMessage } from 'utils/formatting'
+import { roles } from './helpers'
+import { TeamDayOffManagementItem, ValueLabelInterface } from '../interfaces'
+import { NewTimeOff } from './NewTimeOff'
+import s from './TeamDayOffManagement.modules.scss'
+import { columns } from './helpers'
+import { toTableRowItems } from './serializers'
 
 const TeamDayOffManagement = () => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
@@ -88,46 +87,50 @@ const TeamDayOffManagement = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
-  const selectRow = (row, action) => {
-    setSelectedRow(row)
-    action === 'edit' ? openEditModal() : openDeleteModal()
-  }
+  const rowActions = useMemo(() => {
+    let actions
 
-  const columnsWithActions = useMemo(() => {
-    let result = columns
+    const selectRow = (rowId, action) => {
+      const item = tableItems.find(item => item.id === rowId)
+      setSelectedRow(item)
+      action === 'edit' ? openEditModal() : openDeleteModal()
+    }
 
     if (canEdit || canDelete) {
-      const actionsRow = {
-        title: '',
-        field: 'actions',
-        align: 'right',
-        width: '112px',
-        collapsible: 'true',
-        render: row => (
-          <Box display="flex">
-            {canEdit && (
-              <Button
-                onClick={() => selectRow(row, 'edit')}
-                style={{ minWidth: '0.7rem', background: 'transparent' }}
-                label=""
-              >
-                <Edit />
-              </Button>
-            )}
-
-            {canDelete && (
-              <Button onClick={() => selectRow(row, 'delete')} label="">
-                <Delete />
-              </Button>
-            )}
-          </Box>
-        )
-      } as any
-
-      result = [...columns, actionsRow]
+      actions = [
+        {
+          label: 'Edit',
+          labelColor: 'white',
+          typographyVariant: 'medium',
+          backgroundColor: '#0970E6',
+          onClick: (e, rowId) => selectRow(rowId, 'edit')
+        },
+        {
+          label: 'Delete',
+          labelColor: 'white',
+          typographyVariant: 'medium',
+          backgroundColor: '#CC4010',
+          onClick: (e, rowId) => selectRow(rowId, 'delete')
+        }
+      ]
     }
-    return result
-  }, [columns, canEdit, canDelete, teamMembers])
+    return actions
+  }, [columns, canEdit, canDelete, teamMembers, tableItems])
+
+  const toolbarActions = useMemo(() => {
+    let actions
+    if (canCreate) {
+      actions = [
+        {
+          label: 'Add',
+          icon: <Add></Add>,
+          onClick: e => openNewModal()
+        }
+      ]
+    }
+
+    return actions
+  }, [canCreate])
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
@@ -172,7 +175,7 @@ const TeamDayOffManagement = () => {
       label: 'Team member',
       type: 'text',
       filter: (
-        <Input type="text" name="teamMember.name" label="Team member" variant="standard" value="" />
+        <Input type="text" name="teamMember.name" label="Team member" variant="outlined" value="" />
       )
     }
   ]
@@ -227,15 +230,22 @@ const TeamDayOffManagement = () => {
             hideCheckbox
             orderBy="teamMemberName"
             order="asc"
-            columns={columnsWithActions}
+            columns={columns}
             items={tableItems}
             fetchData={fetchData}
             isLoading={isLoading}
-            newButton={canCreate ? { onClick: openNewModal } : null}
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
+            rowActions={rowActions}
+            rowActionsWidth="130px"
+            toolbarActions={toolbarActions}
+            filtersLabel="Filters"
+            filtersButtonLabel="Filters"
+            appliedFiltersLabel="Filters"
+            cancelFiltersButtonLabel="Cancel"
+            applyFiltersButtonLabel="Apply"
           />
         </Box>
       )}

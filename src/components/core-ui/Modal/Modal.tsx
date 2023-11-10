@@ -34,7 +34,8 @@ const Modal = props => {
       <Box
         sx={{
           ...sx,
-          width: isXs ? 'calc(100% - 24px)' : modalWidth || isMd ? '50%' : '30%'
+          width: isXs ? 'calc(100% - 24px)' : modalWidth || isMd ? '50%' : '30%',
+          overflow: 'auto'
         }}
       >
         <IconButton
