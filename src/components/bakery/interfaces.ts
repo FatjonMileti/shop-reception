@@ -17,20 +17,11 @@ export interface ZoneItem {
   id: string
 }
 
-export interface EditZoneItem {
+export interface AddEditZoneItem {
+  id?: string | number
   name: string
   responsible: string
+  enable: string | boolean
   divisionType: string
-  enable: string
   stores: string[]
-  id: string
-}
-
-export interface AddZoneItem {
-  name: string
-  responsible: string
-  divisionType: string
-  enable: string
-  stores: string[]
-  id: string
 }
