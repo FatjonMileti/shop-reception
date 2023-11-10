@@ -4,8 +4,8 @@ import s from "./GoodsReturn.modules.scss"
 import { URLS } from '../constants'
 
 const GoodsReturn = () => {
-  var isShopUser = true;
-  var isHubUser = false;
+  var isShopUser = false;
+  var isHubUser = true;
   var isWareHouseUser = false;
 
   const getTitle = () => {
@@ -44,7 +44,31 @@ const GoodsReturn = () => {
                 style={{ width: "100%" }}
               />
             </Grid>}
-            {isShopUser && <Grid item xs={12}>
+            {isHubUser && <Grid item xs={12}>
+              <Button
+                type="button"
+                variant="contained"
+                label="RETURURI AȘTEPTATE"
+                style={{ width: "100%" }}
+              />
+            </Grid>}
+            {isHubUser && <Grid item xs={12}>
+              <Button
+                type="button"
+                variant="contained"
+                label="RETUR ÎN CURS DE RECEPȚIE"
+                style={{ width: "100%" }}
+              />
+            </Grid>}
+            {isHubUser && <Grid item xs={12}>
+              <Button
+                type="button"
+                variant="contained"
+                label="ÎNREGISTRARE RETUR"
+                style={{ width: "100%" }}
+              />
+            </Grid>}
+            {(isShopUser || isHubUser) && <Grid item xs={12}>
               <Button
                 type="button"
                 variant="contained"

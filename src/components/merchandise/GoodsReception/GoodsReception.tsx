@@ -4,8 +4,8 @@ import s from "./GoodsReception.modules.scss"
 import { URLS } from '../constants'
 
 const GoodsReception = () => {
-  var isShopUser = true;
-  var isHubUser = false;
+  var isShopUser = false;
+  var isHubUser = true;
   var isWareHouseUser = false;
 
   const getTitle = () => {
@@ -36,7 +36,7 @@ const GoodsReception = () => {
                 style={{ width: "100%" }}
               />
             </Grid>}
-            {isShopUser && <Grid item xs={12}>
+            {(isShopUser || isHubUser) && <Grid item xs={12}>
               <Button
                 type="button"
                 variant="contained"
@@ -49,6 +49,38 @@ const GoodsReception = () => {
                 type="button"
                 variant="contained"
                 label="VALIDATE LIVRARE"
+                style={{ width: "100%" }}
+              />
+            </Grid>}
+            {isHubUser && <Grid item xs={12}>
+              <Button
+                type="button"
+                variant="contained"
+                label="CAMIOANE ASTEPTATE"
+                style={{ width: "100%" }}
+              />
+            </Grid>}
+            {isHubUser && <Grid item xs={12}>
+              <Button
+                type="button"
+                variant="contained"
+                label="ÎNREGISTREAZǍ CAMION"
+                style={{ width: "100%" }}
+              />
+            </Grid>}
+            {isHubUser && <Grid item xs={12}>
+              <Button
+                type="button"
+                variant="contained"
+                label="ÎN PROCESARE EXPENDIȚIE"
+                style={{ width: "100%" }}
+              />
+            </Grid>}
+            {isHubUser && <Grid item xs={12}>
+              <Button
+                type="button"
+                variant="contained"
+                label="CAMIOANE EXPEDIATE"
                 style={{ width: "100%" }}
               />
             </Grid>}
