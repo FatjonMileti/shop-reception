@@ -8,16 +8,6 @@ export interface UsersManagementItem {
   id: string
 }
 
-export interface EditUserItem {
-  lastName: string
-  firstName: string
-  storeName: string
-  regionName: number
-  roles: string[]
-  enable: boolean
-  id: string
-}
-
 export interface ZoneItem {
   name: string
   responsible: string

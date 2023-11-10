@@ -1,5 +1,4 @@
 import { Box } from '@mui/material'
-// import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from './UsersManagement.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useMemo, useState } from 'react'

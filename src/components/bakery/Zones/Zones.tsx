@@ -2,7 +2,6 @@ import { Box } from '@mui/material'
 import s from './Zones.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useMemo, useState } from 'react'
-import { columns } from './helpers'
 import { useNotification } from 'hooks'
 import { Add } from '@mui/icons-material'
 import { ZoneItem } from '../interfaces'
@@ -13,6 +12,19 @@ import { IconCell } from 'components/core-ui/IconCell'
 import { MultivalueCell } from 'components/core-ui/MultivalueCell'
 import { EditZone } from './EditZone'
 import { AddZone } from './AddZone'
+
+const columns = [
+  {
+    title: 'Nume zona',
+    field: 'name',
+    align: 'left'
+  },
+  {
+    title: 'Responsabil',
+    field: 'responsible',
+    align: 'left'
+  },
+]
 
 const Zones = () => {
   const [tableItems, setTableItems] = useState<ZoneItem[]>([])
