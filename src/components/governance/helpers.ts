@@ -1,4 +1,4 @@
-import { PermissionRoles } from "../../utils/enums"
+import { PermissionRoles } from '../../utils/enums'
 
 export const roles = {
   createRoles: [

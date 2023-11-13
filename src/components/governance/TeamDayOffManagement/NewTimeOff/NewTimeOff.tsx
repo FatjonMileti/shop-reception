@@ -40,7 +40,9 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
       try {
         const payload = {
           teamMember: {
-            id: isEdit ? (editItem as TeamDayOffManagementItem).teamMemberId : values.teamMember.value
+            id: isEdit
+              ? (editItem as TeamDayOffManagementItem).teamMemberId
+              : values.teamMember.value
           },
           dayOffType: values.dayOffType,
           startDate: formatPayloadDate(values.startDate),
