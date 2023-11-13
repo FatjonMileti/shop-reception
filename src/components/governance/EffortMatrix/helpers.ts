@@ -1,4 +1,4 @@
-import { PermissionRoles } from 'utils/enums'
+import { PermissionRoles } from "utils/enums"
 
 export const columns = [
   {
@@ -70,3 +70,15 @@ export const columns = [
     suffix: '%'
   }
 ]
+
+export const roles = {
+  createRoles: [
+    PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
+  ],
+  editRoles: [
+    PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
+  ],
+  deleteRoles: [
+    PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
+  ]
+}

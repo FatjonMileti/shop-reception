@@ -11,7 +11,7 @@ import { dayOfTypes, getInitialValues, getValidationSchema } from './helpers'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { TeamDayOffManagementItem, TeamMember, TimeOffValues } from '../../interfaces'
+import { TeamDayOffManagementItem, TeamMember } from '../../interfaces'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]
@@ -84,7 +84,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             />
           ) : (
             <AsyncAutocomplete
-              variant="standard"
+              variant="outlined"
               name="teamMember"
               label="Team member"
               options={teamMembers}
@@ -101,7 +101,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             label="Type of day-off"
             type="select"
             values={dayOfTypes}
-            variant="standard"
+            variant="outlined"
             width="100%"
             value={formik.values.dayOffType}
             onChange={event => {
@@ -119,7 +119,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             value={formik.values.startDate}
             onChange={value => formik.setFieldValue('startDate', value)}
             label="Start date"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.startDate}
             helperText={formik.errors.startDate as string}
@@ -131,7 +131,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             value={formik.values.endDate}
             onChange={value => formik.setFieldValue('endDate', value)}
             label="End date"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.endDate}
             helperText={formik.errors.endDate as string}
@@ -145,7 +145,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
               name="numberOfHours"
               label="Number of hours"
               fullWidth
-              variant="standard"
+              variant="outlined"
               value={formik.values.numberOfHours}
               onChange={event => formik.setFieldValue('numberOfHours', event.currentTarget.value)}
               error={!!formik.errors.numberOfHours}

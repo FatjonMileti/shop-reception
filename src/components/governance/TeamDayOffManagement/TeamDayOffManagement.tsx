@@ -1,3 +1,4 @@
+import { Add } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Paper, Typography } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
@@ -10,7 +11,7 @@ import { useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
-import { roles } from '../helpers'
+import { roles } from './helpers'
 import { TeamDayOffManagementItem, ValueLabelInterface } from '../interfaces'
 import { NewTimeOff } from './NewTimeOff'
 import s from './TeamDayOffManagement.modules.scss'
@@ -86,14 +87,14 @@ const TeamDayOffManagement = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
-  const selectRow = (rowId, action) => {
-    const item = tableItems.find(item => item.id === rowId)
-    setSelectedRow(item)
-    action === 'edit' ? openEditModal() : openDeleteModal()
-  }
-
   const rowActions = useMemo(() => {
     let actions
+
+    const selectRow = (rowId, action) => {
+      const item = tableItems.find(item => item.id === rowId)
+      setSelectedRow(item)
+      action === 'edit' ? openEditModal() : openDeleteModal()
+    }
 
     if (canEdit || canDelete) {
       actions = [
@@ -114,7 +115,22 @@ const TeamDayOffManagement = () => {
       ]
     }
     return actions
-  }, [columns, canEdit, canDelete, teamMembers])
+  }, [columns, canEdit, canDelete, teamMembers, tableItems])
+
+  const toolbarActions = useMemo(() => {
+    let actions
+    if (canCreate) {
+      actions = [
+        {
+          label: 'Add',
+          icon: <Add></Add>,
+          onClick: e => openNewModal()
+        }
+      ]
+    }
+
+    return actions
+  }, [canCreate])
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
@@ -218,13 +234,18 @@ const TeamDayOffManagement = () => {
             items={tableItems}
             fetchData={fetchData}
             isLoading={isLoading}
-            newButton={canCreate ? { onClick: openNewModal } : null}
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
             rowActions={rowActions}
             rowActionsWidth="130px"
+            toolbarActions={toolbarActions}
+            filtersLabel="Filters"
+            filtersButtonLabel="Filters"
+            appliedFiltersLabel="Filters"
+            cancelFiltersButtonLabel="Cancel"
+            applyFiltersButtonLabel="Apply"
           />
         </Box>
       )}

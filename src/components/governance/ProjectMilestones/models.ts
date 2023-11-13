@@ -1,17 +1,17 @@
 
 export interface TableFilters {
-  projectName: string
+  "project.name": string
   stage: string
-  iibKey: string
-  ipbKey: string
+  "project.iibKey": string
+  "project.ipbKey": string
 }
 
 export interface TableRowModel {
   id: number
-  projectName: string
+  "project.name": string
   stage: string
-  iibKey: string
-  ipbKey: string
+  "project.iibKey": string
+  "project.ipbKey": string
   startDate: string
   endDate: string
 }

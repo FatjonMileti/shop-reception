@@ -7,11 +7,11 @@ import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { Table } from 'components/core-ui/Table'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { Delete, Edit } from '@mui/icons-material'
+import { Add, Delete, Edit } from '@mui/icons-material'
 import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
-import { roles } from '../helpers'
-import { EffortMatrix, Role, ValueLabelInterface } from '../interfaces'
+import { roles } from './helpers'
+import { EffortMatrix, Role } from '../interfaces'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import EffortMatrixFormModal from './NewEffortMatrix/EffortMatrixFormModal'
 
@@ -25,47 +25,10 @@ const EffortMatrix = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<EffortMatrix>()
-  const [roleOptions, setRoleOptions] = useState<Role[]>([])
 
   const { showNotification } = useNotification()
 
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
-
-  const columnsWithActions = useMemo(() => {
-    let result = columns
-
-    if (canEdit || canDelete) {
-      const actionsRow = {
-        title: '',
-        field: 'actions',
-        align: 'right',
-        width: '112px',
-        collapsible: 'true',
-        render: row => (
-          <Box display="flex">
-            {canEdit && (
-              <Button
-                onClick={() => selectRow(row, 'edit')}
-                style={{ minWidth: '0.7rem', background: 'transparent' }}
-                label=""
-              >
-                <Edit />
-              </Button>
-            )}
-
-            {canDelete && (
-              <Button onClick={() => selectRow(row, 'delete')} label="">
-                <Delete />
-              </Button>
-            )}
-          </Box>
-        )
-      } as any
-
-      result = [...columns, actionsRow]
-    }
-    return result
-  }, [columns, canEdit, canDelete])
 
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
@@ -76,9 +39,12 @@ const EffortMatrix = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
-  const selectRow = (row, action) => {
-    setSelectedRow(row)
-    action === 'edit' ? openEditModal() : openDeleteModal()
+  const selectRow = (rowId, action) => {
+    const row = tableItems.find(item => item.id === rowId)
+    if (row) {
+      setSelectedRow(row)
+      action === 'edit' ? openEditModal() : openDeleteModal()
+    }
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -101,12 +67,9 @@ const EffortMatrix = () => {
           : item
       )
 
-      const roleOptionsList = response.list.map(item => ({ value: item.role, label: item.role }))
-
       setTableItems(toTableRowItems(responseList))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
-      setRoleOptions(roleOptionsList)
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -117,44 +80,69 @@ const EffortMatrix = () => {
 
   return (
     <div className={s.mainContainer}>
-
-        <Box>
-          <EffortMatrixFormModal
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            setShouldRefreshData={setShouldRefreshData}
-            roles={roleOptions}
-          />
-          <EffortMatrixFormModal
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            setShouldRefreshData={setShouldRefreshData}
-            editItem={selectedRow}
-            isEdit
-          />
-
-          <DeleteConfirmationModal
-            isModalOpen={isDeleteModalOpen}
-            closeModal={closeDeleteModal}
-            actionUrl="/governance/effortMatrix/:id"
-            itemId={`${selectedRow?.id}`}
-            content={<Typography>Are you sure you want to delete this entry?</Typography>}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <Table
-            hideCheckbox
-            orderBy="role"
-            order="asc"
-            columns={columnsWithActions}
-            items={tableItems}
-            fetchData={fetchData}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            newButton={canCreate ? { onClick: openNewModal } : null}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-        </Box>
+      <Box>
+        <EffortMatrixFormModal
+          isModalOpen={isNewModalOpen}
+          closeModal={closeNewModal}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <EffortMatrixFormModal
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+          setShouldRefreshData={setShouldRefreshData}
+          editItem={selectedRow}
+          isEdit
+        />
+        <DeleteConfirmationModal
+          isModalOpen={isDeleteModalOpen}
+          closeModal={closeDeleteModal}
+          actionUrl="/governance/effortMatrix/:id"
+          itemId={`${selectedRow?.id}`}
+          content={<Typography>Are you sure you want to delete this entry?</Typography>}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <Table
+          hideCheckbox
+          orderBy="role"
+          order="asc"
+          columns={columns}
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          newButton={canCreate ? { onClick: openNewModal } : null}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          rowActions={[
+            canEdit
+              ? {
+                  label: 'Edit',
+                  labelColor: 'white',
+                  typographyVariant: 'medium',
+                  backgroundColor: '#16a085',
+                  onClick: (e, rowId) => selectRow(rowId, 'edit')
+                }
+              : {},
+            canDelete
+              ? {
+                  label: 'Delete',
+                  labelColor: 'white',
+                  typographyVariant: 'medium',
+                  backgroundColor: '#d9534f',
+                  onClick: (e, rowId) => selectRow(rowId, 'delete')
+                }
+              : {}
+          ]}
+          rowActionsWidth="130px"
+          toolbarActions={[
+            {
+              label: 'Adauga',
+              icon: <Add />,
+              onClick: openNewModal
+            }
+          ]}
+        />
+      </Box>
     </div>
   )
 }
