@@ -7,11 +7,12 @@ import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { useFormik } from 'formik'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { areSameDayDates, formatPayloadDate } from 'utils/helpers'
-import { dayOfTypes, getInitialValues, getValidationSchema } from './helpers'
+import { getInitialValues, getValidationSchema } from './helpers'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { TeamDayOffManagementItem, TeamMember } from '../../interfaces'
+import { dayOfTypes } from 'components/governance/helpers'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]
@@ -40,7 +41,9 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
       try {
         const payload = {
           teamMember: {
-            id: isEdit ? (editItem as TeamDayOffManagementItem).teamMemberId : values.teamMember.value
+            id: isEdit
+              ? (editItem as TeamDayOffManagementItem).teamMemberId
+              : values.teamMember.value
           },
           dayOffType: values.dayOffType,
           startDate: formatPayloadDate(values.startDate),
