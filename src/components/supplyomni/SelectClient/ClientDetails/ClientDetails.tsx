@@ -15,8 +15,7 @@ const ClientDetails: React.FC = props => {
   const { data: client, isLoading: isClientLoading } = useQuery(
     ['client-info'],
     async () => {
-      const response = await makeCoreGetRequest(`/supply-omni/client/${id}`)
-      return response
+      return await makeCoreGetRequest(`/supply-omni/client/${id}`)
     },
     {
       onError: error => {
@@ -27,21 +26,16 @@ const ClientDetails: React.FC = props => {
       }
     }
   )
-
-  if (isClientLoading) {
-    return (
-      <div style={{ display: 'flex' }}>
-        <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-      </div>
-    )
-  }
-
   return (
     <div className={s.mainContainer}>
-      <Grid container spacing={4}>
-        <ClientData client={client} />
-        <PaymentMethod clientId={client.id} />
-      </Grid>
+      {isClientLoading ? (
+        <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+      ) : (
+        <Grid container spacing={4}>
+          <ClientData client={client} />
+          <PaymentMethod clientId={client.id} />
+        </Grid>
+      )}
     </div>
   )
 }
