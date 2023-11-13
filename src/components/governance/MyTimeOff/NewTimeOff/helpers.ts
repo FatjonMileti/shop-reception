@@ -3,21 +3,6 @@ import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { areSameDayDates } from 'utils/helpers'
 import * as Yup from 'yup'
 
-export const dayOfTypes = [
-  {
-    value: 'Public Holiday',
-    label: 'Public Holiday'
-  },
-  {
-    value: 'Day-Off',
-    label: 'Day-Off'
-  },
-  {
-    value: 'Team Event',
-    label: 'Team Event'
-  }
-]
-
 export const getValidationSchema = () =>
   Yup.object().shape({
     dayOffType: Yup.string().required('Day-off type is required'),

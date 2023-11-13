@@ -3,21 +3,6 @@ import { areSameDayDates, formatUIDate } from 'utils/helpers'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import * as Yup from 'yup'
 
-export const dayOfTypes = [
-  {
-    value: 'Public Holiday',
-    label: 'Public Holiday'
-  },
-  {
-    value: 'Day-Off',
-    label: 'Day-Off'
-  },
-  {
-    value: 'Team Event',
-    label: 'Team Event'
-  }
-]
-
 export const getValidationSchema = editItem =>
   Yup.object().shape({
     editTeamMember: Yup.boolean(),

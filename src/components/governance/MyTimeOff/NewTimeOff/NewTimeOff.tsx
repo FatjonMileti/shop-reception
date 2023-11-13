@@ -9,7 +9,8 @@ import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { areSameDayDates, formatPayloadDate } from 'utils/helpers'
 import { TableRowModel } from '../interfaces'
-import { dayOfTypes, getInitialValues, getValidationSchema } from './helpers'
+import { getInitialValues, getValidationSchema } from './helpers'
+import { dayOfTypes } from 'components/governance/helpers'
 
 interface NewTimeOffProps {
   isModalOpen: boolean
@@ -37,14 +38,13 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
       try {
         const payload = {
           teamMember: {
-            id: isEdit ? (editItem as TableRowModel).teamMemberId : values.teamMember.value
+            id: isEdit ? (editItem as TableRowModel).teamMemberId : null
           },
           dayOffType: values.dayOffType,
           startDate: formatPayloadDate(values.startDate),
           endDate: formatPayloadDate(values.endDate),
           ...(values.numberOfHours && { numberOfHours: values.numberOfHours })
         }
-
         if (isEdit) {
           await makeCorePutRequest(`/governance/myTimeOff/${formik.values.id}`, payload)
         } else {

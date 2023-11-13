@@ -8,7 +8,6 @@ import { useMemo, useState } from 'react'
 import { BasePageResponseModel } from 'shared/interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
-import { formatUIDate } from 'utils/helpers'
 import s from './MyTimeOff.modules.scss'
 import { NewTimeOff } from './NewTimeOff'
 import { columns } from './helpers'
@@ -37,16 +36,12 @@ const MyTimeOff = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
-  const selectRow = useMemo(
-    () => (rowId, action) => {
+  const rowActions = useMemo(() => {
+    const selectRow = (rowId: number, action: string) => {
       const item = tableItems.find(item => item.id === rowId)
       setSelectedRow(item)
       action === 'edit' ? openEditModal() : openDeleteModal()
-    },
-    [tableItems]
-  )
-
-  const rowActions = useMemo(() => {
+    }
     let actions = [
       {
         label: 'Edit',
@@ -65,7 +60,7 @@ const MyTimeOff = () => {
     ]
 
     return actions
-  }, [columns])
+  }, [columns, tableItems])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

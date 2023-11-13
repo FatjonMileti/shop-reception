@@ -17,3 +17,18 @@ export const roles = {
     PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
   ]
 }
+
+export const dayOfTypes = [
+  {
+    value: 'Public Holiday',
+    label: 'Public Holiday'
+  },
+  {
+    value: 'Day-Off',
+    label: 'Day-Off'
+  },
+  {
+    value: 'Team Event',
+    label: 'Team Event'
+  }
+]
