@@ -20,9 +20,8 @@ const NewAddress: React.FC<NewAddressProps> = props => {
           control={
             <Checkbox
               checked={formik.values.hasDeliveryDate}
-              onClick={() =>
-                onFieldUpdate('hasDeliveryDate', !formik.values.hasDifferentDeliveryAddress)
-              }
+              onClick={() => onFieldUpdate('hasDeliveryDate', !formik.values.hasDeliveryDate)}
+              disabled
             />
           }
           label="Adauga data de livrare"
