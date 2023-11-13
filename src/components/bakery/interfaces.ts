@@ -8,17 +8,22 @@ export interface UsersManagementItem {
   id: string
 }
 
-export interface UserItem {
-  lastName: string
-  firstName: string
-  role: string
-  isRegionManager: boolean
-  regionAssociatedStructure: string
-  isStoreManager: boolean
-  storeAssociatedStructure: string
-  isTrainee: boolean
-  traineeAssociatedStructure: string
-  status: string
+export interface ZoneItem {
+  name: string
+  responsible: string
+  divisionType: string
+  enable: string
+  stores: string[]
+  id: string
+}
+
+export interface AddEditZoneItem {
+  id?: string | number
+  name: string
+  responsible: string
+  enable: string | boolean
+  divisionType: string
+  stores: string[]
 }
 
 export interface AddRegionItem {
