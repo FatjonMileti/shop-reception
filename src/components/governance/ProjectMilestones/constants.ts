@@ -5,7 +5,7 @@ export const RESOURCE_URI = '/governance/projectMilestones'
 export const tableColumns = [
   {
     title: 'Project',
-    field: 'projectName',
+    field: 'project.name',
     align: 'left'
   },
   {
@@ -15,13 +15,13 @@ export const tableColumns = [
   },
   {
     title: 'IIBKey',
-    field: 'iibKey',
+    field: 'project.iibKey',
     align: 'left',
     collapsible: true
   },
   {
     title: 'IPBKey',
-    field: 'ipbKey',
+    field: 'project.ipbKey',
     align: 'left',
     collapsible: true
   },
@@ -40,8 +40,8 @@ export const tableColumns = [
 ]
 
 export const defaultTableFilters: TableFilters = {
-  projectName: null,
+  "project.name": null,
   stage: null,
-  iibKey: null,
-  ipbKey: null
+  "project.iibKey": null,
+  "project.ipbKey": null
 }

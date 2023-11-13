@@ -1,0 +1,20 @@
+.mainContainer {
+  margin: 24px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+}
+
+.select {
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.radioButton {
+  margin: 0 5px;
+}
+
+.row {
+  margin-top: 24px;
+}

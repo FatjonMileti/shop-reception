@@ -1,5 +1,4 @@
 import { Box } from '@mui/material'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from './UsersManagement.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useMemo, useState } from 'react'
@@ -39,12 +38,12 @@ const columns = [
 ]
 
 const UsersManagement = () => {
-  const [selectedRow, setSelectedRow] = useState<UsersManagementItem | null>(null)
   const [tableItems, setTableItems] = useState<UsersManagementItem[]>([])
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
   const { showNotification } = useNotification()
 
   const openEditModal = (): void => setIsEditModalOpen(true)
@@ -78,10 +77,14 @@ const UsersManagement = () => {
     }
   }
 
-  const selectRow = (row, action) => {
-    setSelectedRow(row)
-    action === 'edit' && openEditModal()
+  const selectRow = (rowId: number, action: string) => {
+    setSelectedRowId(rowId)
+
+    if (action === 'edit') {
+      openEditModal()
+    }
   }
+
   const columnsWithActions = useMemo(() => {
     const roleColumn = {
       title: 'Rol',
@@ -109,26 +112,7 @@ const UsersManagement = () => {
       )
     } as any
 
-    let actionsRow = {
-      title: '',
-      field: 'actions',
-      align: 'right',
-      width: '70px',
-      collapsible: 'true',
-      render: row => (
-        <Box display="flex">          
-            <Button
-              onClick={() => selectRow(row, 'edit')}
-              style={{ minWidth: '0.7rem', background: 'transparent' }}
-              label=""
-            >
-              <Edit />
-            </Button>          
-        </Box>
-      )
-    } as any
-
-    return [...columns, roleColumn, statusColumn, actionsRow]
+    return [...columns, roleColumn, statusColumn]
   }, [columns])
 
   return (
@@ -138,8 +122,8 @@ const UsersManagement = () => {
         <UserModal
           isModalOpen={isEditModalOpen}
           closeModal={closeEditModal}
-          editedItemId={selectedRow?.id}
-          formAction={{ url: `/bakery/user/${selectedRow?.id}` }}
+          editedItemId={selectedRowId}
+          formAction={{ url: `/bakery/user/${selectedRowId}` }}
           additionalAction={() => setShouldRefreshData(true)}
           userModal={{
             getAction: '/bakery/user',
@@ -157,6 +141,16 @@ const UsersManagement = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
+          rowActions={[
+            { 
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => selectRow(rowId, 'edit')
+            }
+          ]}
+          rowActionsWidth="130px"
         />
       </Box>
     </div>
