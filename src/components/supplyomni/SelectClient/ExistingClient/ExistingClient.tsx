@@ -131,7 +131,7 @@ const ExistingClient: React.FC = () => {
                   labelColor: 'white',
                   typographyVariant: 'medium',
                   backgroundColor: '#33691E',
-                  onClick: (e, rowId) => navigate(`/shoppingCartClientDetails/${rowId}`)
+                  onClick: (e, rowId) => navigate(`/supplyOmni/shoppingCartClientDetails/${rowId}`)
                 }
               ]}
             />
