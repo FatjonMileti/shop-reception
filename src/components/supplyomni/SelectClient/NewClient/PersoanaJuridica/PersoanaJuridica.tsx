@@ -67,26 +67,29 @@ const PersoanaJuridica: React.FC = () => {
         />
       </Grid>
 
-      <Grid item xs={12} display={'flex'} justifyContent={'space-between'}>
+      <Grid item xs={12} md={6}>
         <Input
           type="text"
           name="cif"
           label="CIF/COD"
           variant="standard"
           value={formik.values.cif}
-          width="280px"
+          fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('cif', e.target.value)}
           required
           error={!!formik.errors.cif}
           helperText={formik.errors.cif as string}
         />
+      </Grid>
+
+      <Grid item xs={12} md={6}>
         <Input
           type="text"
           name="tradeRegister"
           label="Registrul Comertului"
           variant="standard"
           value={formik.values.tradeRegister}
-          width="280px"
+          fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             onUpdateValues('tradeRegister', e.target.value)
           }
@@ -96,26 +99,29 @@ const PersoanaJuridica: React.FC = () => {
         />
       </Grid>
 
-      <Grid item xs={12} display={'flex'} justifyContent={'space-between'}>
+      <Grid item xs={12} md={6}>
         <Input
           type="text"
           name="bank"
           label="Banca"
           variant="standard"
           value={formik.values.bank}
-          width="280px"
+          fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('bank', e.target.value)}
           required
           error={!!formik.errors.bank}
           helperText={formik.errors.bank as string}
         />
+      </Grid>
+
+      <Grid item xs={12} md={6}>
         <Input
           type="text"
           name="bankAccount"
           label="IBAN"
           variant="standard"
           value={formik.values.bankAccount}
-          width="280px"
+          fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             onUpdateValues('bankAccount', e.target.value)
           }
@@ -124,27 +130,29 @@ const PersoanaJuridica: React.FC = () => {
           helperText={formik.errors.bankAccount as string}
         />
       </Grid>
-
-      <Grid item xs={12} display={'flex'} justifyContent={'space-between'}>
+      <Grid item xs={12} md={6}>
         <Input
           type="number"
           name="phone"
           label="Telefon"
           variant="standard"
           value={formik.values.phone}
-          width="280px"
+          fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('phone', e.target.value)}
           required
           error={!!formik.errors.phone}
           helperText={formik.errors.phone as string}
         />
+      </Grid>
+
+      <Grid item xs={12} md={6}>
         <Input
           type="text"
           name="email"
           label="Email"
           variant="standard"
           value={formik.values.email}
-          width="280px"
+          fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('email', e.target.value)}
           required
           error={!!formik.errors.email}
