@@ -5,7 +5,7 @@ import { getStylePosition } from './helpers'
 import { useMemo } from 'react'
 
 const FloatingButton = (props: FloatingButtonProps) => {
-  const { href, backgroundColor, position, ...rest } = props
+  const { href, backgroundColor, position, type } = props
 
   const navigate = useNavigate()
 
@@ -19,7 +19,7 @@ const FloatingButton = (props: FloatingButtonProps) => {
 
   return (
     <FloatingActionButton
-      {...rest}
+      type={type}
       onClick={handleClick}
       sx={{
         backgroundColor,
