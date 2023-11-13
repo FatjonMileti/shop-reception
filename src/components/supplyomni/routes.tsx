@@ -6,6 +6,7 @@ import { MySales } from './MySales'
 import { ShoppingCart } from './ShoppingCart'
 import { SelectClient } from './SelectClient'
 import { ClientDetails } from './SelectClient/ClientDetails'
+import { ProformaView } from './ProformaView'
 
 export const useSupplyOmniRoutes = applicationPages => {
   return (
@@ -43,6 +44,16 @@ export const useSupplyOmniRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ClientDetails}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PROFORMA_VIEW}
+        element={
+          <PrivateRoute
+            component={ProformaView}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
