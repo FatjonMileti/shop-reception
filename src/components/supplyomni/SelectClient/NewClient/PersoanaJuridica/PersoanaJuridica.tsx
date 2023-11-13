@@ -205,7 +205,7 @@ const PersoanaJuridica: React.FC = () => {
             city: { value: formik.values.city.id, label: formik.values.city.name }
           }}
           onChange={(newValue: CountyCityInterface, fieldToUpdate: string) =>
-            onUpdateValues(fieldToUpdate, { id: newValue.value, name: newValue.label })
+            onUpdateValues(fieldToUpdate, { id: newValue?.value, name: newValue?.label })
           }
           error={!!formik.errors.county || !!formik.errors.city}
           helperText="required"
