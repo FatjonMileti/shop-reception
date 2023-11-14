@@ -1,6 +1,7 @@
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { URLS } from './constants'
 import { Route } from 'react-router-dom'
+import { Regions } from './Regions'
 import { Zones } from './Zones'
 import { UsersManagement } from './UsersManagement'
 
@@ -17,7 +18,7 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
-       <Route
+      <Route
         path={URLS.AUTH_ZONES}
         element={
           <PrivateRoute
@@ -25,6 +26,16 @@ export const useBakeryRoutes = applicationPages => {
             applicationPages={applicationPages}
             checkIsAuthorized
           />
+        }
+      />
+      <Route
+        path={URLS.AUTH_REGIONS}
+        element={
+          <PrivateRoute
+            component={Regions}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+        />
         }
       />
     </>
