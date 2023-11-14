@@ -6,6 +6,7 @@ import { Home } from "./Home"
 import { GoodsReception } from "./GoodsReception"
 import { GoodsReturn } from "./GoodsReturn"
 import { ListTrucks } from "./GoodsReception/ListTrucks"
+import { AddTruck } from "./GoodsReception/ListTrucks/AddTruck"
 import { ReceptionProcessing } from "./GoodsReception/RceptionProcessing"
 import { Delivery } from "./GoodsReception/Delivery"
 import { ConfirmReturnTrucks } from "./GoodsReturn/ConfirmReturnTrucks"
@@ -30,10 +31,14 @@ export const useMerchandiseRoutes = applicationPages => {
         path={URLS.AUTH_GOODS_RETURN}
         element={<GoodsReturn />}
       />
-      <Route
-        path={URLS.AUTH_LIST_TRUCKS}
-        element={<ListTrucks />}
-      />
+        <Route
+          path={URLS.AUTH_LIST_TRUCKS}
+          element={<ListTrucks />}
+        />
+        <Route
+          path={URLS.AUTH_ADD_TRUCK}
+          element={<AddTruck />}
+        />
       <Route
         path={URLS.AUTH_RECEPTION_PROCESSING}
         element={<ReceptionProcessing />}

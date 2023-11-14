@@ -1,29 +1,30 @@
 import { Grid, Container, Paper } from "@mui/material"
 import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
 import s from "./GoodsReturn.modules.scss"
-import { URLS } from '../constants'
+import { URLS } from "../constants"
 import useRoles from "../useRoles"
 import { useNavigate } from "react-router-dom"
 
 const GoodsReturn = () => {
-  const { isShopUser, isHubUser, isWareHouseUser } = useRoles();
-  const navigate = useNavigate();
+  const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
+  const navigate = useNavigate()
 
   const getTitle = () => {
     if (isShopUser) {
-      return "Hyper Oradea";
+      return "Hyper Oradea"
     } else if (isHubUser) {
-      return "HUB CLUJ";
+      return "HUB CLUJ"
     } else if (isWareHouseUser) {
-      return "DEPOZIT CEFIN AMBIENT";
+      return "DEPOZIT CEFIN AMBIENT"
     }
-    return "Nu";
+    return "Nu"
   }
 
   return (
     <Paper className={s.paper}>
       <Container component="main" maxWidth="xs" className={s.container}>
-        <Typography component="h3" variant="regular" style={{ textAlign: "center", textTransform: "uppercase" }}>Carrefour Operațional</Typography>
+        <Typography component="h3" variant="regular" style={{ textAlign: "center", textTransform: "uppercase" }}>Carrefour
+          Operațional</Typography>
         <Typography component="h2" variant="medium" style={{ textAlign: "center", textTransform: "uppercase" }}>
           {getTitle()}
         </Typography>
@@ -87,7 +88,7 @@ const GoodsReturn = () => {
         </form>
       </Container>
     </Paper>
-  );
+  )
 }
 
 export default GoodsReturn

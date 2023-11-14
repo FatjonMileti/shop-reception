@@ -3,9 +3,11 @@ import { Button, Divider, Typography } from "@fullscreendigital/carrefour-dex-fe
 import s from "./ListTrucks.modules.scss"
 import { URLS } from "../../constants"
 import useRoles from "../../useRoles"
+import { useNavigate } from "react-router-dom"
 
 const ListTrucks = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
+  const navigate = useNavigate()
 
   const getTitle = () => {
     if (isShopUser) {
@@ -34,7 +36,8 @@ const ListTrucks = () => {
       <form>
         <Grid container spacing={2} className={s.wrapper}>
           <Grid item xs={12}>
-            <Typography component="h4" variant="medium" style={{ textAlign: "center", textTransform: "uppercase", color: 'black' }}>
+            <Typography component="h4" variant="medium"
+                        style={{ textAlign: "center", textTransform: "uppercase", color: "black" }}>
               Selecteazǎ Camion
             </Typography>
             {list.map((item: Truck, index) => (
@@ -53,6 +56,9 @@ const ListTrucks = () => {
               variant="contained"
               label="ADAUGǍ CAMION"
               style={{ width: "100%" }}
+              onClick={() => {
+                navigate(URLS.AUTH_ADD_TRUCK)
+              }}
             />
           </Grid>}
         </Grid>
