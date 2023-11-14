@@ -7,6 +7,7 @@ import { EffortMatrix } from './EffortMatrix'
 import { ProjectMilestones } from './ProjectMilestones'
 import { TeamCapacity } from './TeamCapacity'
 import { MyTimeOff } from './MyTimeOff'
+import { IndividualCapacity } from './IndividualCapacity'
 
 export const useGovernanceRoutes = applicationPages => {
   return (
@@ -69,6 +70,12 @@ export const useGovernanceRoutes = applicationPages => {
             applicationPages={applicationPages}
             checkIsAuthorized
           />
+        }
+      />
+      <Route
+        path={URLS.AUTH_INDIVIDUAL_CAPACITY}
+        element={
+          <PrivateRoute component={IndividualCapacity} applicationPages={applicationPages} />
         }
       />
     </>
