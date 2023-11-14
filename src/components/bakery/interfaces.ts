@@ -26,9 +26,10 @@ export interface AddEditZoneItem {
   stores: string[]
 }
 
-export interface AddRegionItem {
+export interface AddEditRegionItem {
+  id?: string | number
   divisionType: string
-  enable: string
+  enable: string | boolean
   name: string
   responsible: string
 }

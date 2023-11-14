@@ -8,48 +8,8 @@ import { UsersManagementItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { MultivalueCell } from 'components/core-ui/MultivalueCell'
-import { BooleanIcon } from 'components/core-ui/BooleanIcon'
-import { AddRegion } from './AddRegion'
-
-const columns = [
-  {
-    title: 'Denumire regiune',
-    field: 'name',
-    align: 'left'
-  },
-  {
-    title: 'Responsabil',
-    field: 'responsible',
-    align: 'left'
-  },
-  {
-    title: 'Magazin',
-    field: 'stores',
-    align: 'left',
-    render: row => (
-        <Box>
-            <MultivalueCell value={row.stores} />
-        </Box>
-    )
-  },
-  {
-    title: 'Divizie',
-    field: 'divisionType',
-    align: 'left',
-    collapsible: true
-  },
-  {
-    title: 'Status',
-    field: 'enable',
-    align: 'left',
-    type: 'string',
-    render: row => (
-      <BooleanIcon icon="CheckOutlined" value={row.enable} onSuccess="#33691E" onFailure="E5E5E5" />
-    ),
-    collapsible: true
-  }
-]
+import { AddEditRegion } from './AddEditRegion'
+import { columns } from './helpers'
 
 const Regions = () => {
   const [tableItems, setTableItems] = useState<UsersManagementItem[]>([])
@@ -107,11 +67,18 @@ const Regions = () => {
     <div className={s.mainContainer}>
       {/* TODO add table search bar after UI redesign */}
       <Box>
-        <AddRegion
-            isModalOpen={isAddModalOpen}
-            closeModal={closeAddModal}
+          <AddEditRegion 
+             isModalOpen={isAddModalOpen}
+             closeModal={closeAddModal}
+             setShouldRefreshData={setShouldRefreshData}
+          />
+          <AddEditRegion 
+            isModalOpen={isEditModalOpen}
+            closeModal={closeEditModal}
             setShouldRefreshData={setShouldRefreshData}
-        />
+            editRegionId={selectedRowId}
+            isEdit
+          />
         <Table
           hideCheckbox
           columns={columns}
