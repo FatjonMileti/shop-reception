@@ -5,9 +5,11 @@ import { Login } from "./Login"
 import { Home } from "./Home"
 import { GoodsReception } from "./GoodsReception"
 import { GoodsReturn } from "./GoodsReturn"
-import { ListTrucks } from "./ListTrucks"
-import { ReceptionProcessing } from "./RceptionProcessing"
-import { Delivery } from "./Delivery"
+import { ListTrucks } from "./GoodsReception/ListTrucks"
+import { ReceptionProcessing } from "./GoodsReception/RceptionProcessing"
+import { Delivery } from "./GoodsReception/Delivery"
+import { ConfirmReturnTrucks } from "./GoodsReturn/ConfirmReturnTrucks"
+import { OrderReturnTruck } from "./GoodsReturn/OrderReturnTruck"
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -39,6 +41,14 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_DELIVERY}
         element={<Delivery />}
+      />
+      <Route
+        path={URLS.AUTH_CONFIRM_RETURN_TRUCKS}
+        element={<ConfirmReturnTrucks />}
+      />
+      <Route
+        path={URLS.AUTH_ORDER_RETURN_TRUCK}
+        element={<OrderReturnTruck />}
       />
     </>
   )

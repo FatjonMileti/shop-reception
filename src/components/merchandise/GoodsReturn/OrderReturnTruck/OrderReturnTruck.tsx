@@ -1,10 +1,10 @@
 import { Grid, Container, Paper, Box } from "@mui/material"
 import { Typography } from "@fullscreendigital/carrefour-dex-fe"
-import s from "./Delivery.modules.scss"
-import { URLS } from "../constants"
-import useRoles from "../useRoles"
+import s from "./OrderReturnTruck.modules.scss"
+import { URLS } from "../../constants"
+import useRoles from "../../useRoles"
 
-const Delivery = () => {
+const OrderReturnTruck = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
 
   const getTitle = () => {
@@ -30,12 +30,9 @@ const Delivery = () => {
           <Grid item xs={12}>
             <Typography component="h4" variant="medium"
                         style={{ textAlign: "center", textTransform: "uppercase", color: "black" }}>
-              VALIDATE LIVRARE
+              COMANDA CAMION RETUR
             </Typography>
-            <Box style={{ margin: "10px", padding: "20px" }}>
-              <Typography variant="light" component="p" style={{ textAlign: "center", textTransform: "uppercase" }}>nu
-                existǎ camioane de validat</Typography>
-            </Box>
+
           </Grid>
         </Grid>
       </form>
@@ -43,4 +40,4 @@ const Delivery = () => {
   )
 }
 
-export default Delivery
+export default OrderReturnTruck

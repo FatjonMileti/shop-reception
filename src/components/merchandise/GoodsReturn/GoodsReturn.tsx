@@ -3,9 +3,11 @@ import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
 import s from "./GoodsReturn.modules.scss"
 import { URLS } from '../constants'
 import useRoles from "../useRoles"
+import { useNavigate } from "react-router-dom"
 
 const GoodsReturn = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles();
+  const navigate = useNavigate();
 
   const getTitle = () => {
     if (isShopUser) {
@@ -33,6 +35,9 @@ const GoodsReturn = () => {
                 variant="contained"
                 label="COMANDA CAMION RETUR"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_ORDER_RETURN_TRUCK)
+                }}
               />
             </Grid>}
             {isShopUser && <Grid item xs={12}>
@@ -41,6 +46,9 @@ const GoodsReturn = () => {
                 variant="contained"
                 label="CAMIOANE RETUR CONFIRMATE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_CONFIRM_RETURN_TRUCKS)
+                }}
               />
             </Grid>}
             {isHubUser && <Grid item xs={12}>

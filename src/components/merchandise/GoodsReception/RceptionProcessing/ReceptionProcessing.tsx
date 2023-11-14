@@ -1,8 +1,8 @@
 import { Grid, Container, Paper } from "@mui/material"
 import { Button, Divider, Typography } from "@fullscreendigital/carrefour-dex-fe"
 import s from "./ReceptionProcessing.modules.scss"
-import { URLS } from "../constants"
-import useRoles from "../useRoles"
+import { URLS } from "../../constants"
+import useRoles from "../../useRoles"
 
 const ReceptionProcessing = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
