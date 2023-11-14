@@ -26,7 +26,7 @@ const PersoanaFizica: React.FC = () => {
         message: 'Clientul a fost salvat cu success!',
         type: 'success'
       })
-      navigate(`/shoppingCartClientDetails/${data?.id}`)
+      navigate(`/supplyOmni/shoppingCartClientDetails/${data?.id}`)
     },
     onError: res => {
       showNotification({

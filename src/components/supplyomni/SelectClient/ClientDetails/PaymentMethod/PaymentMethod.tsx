@@ -13,12 +13,14 @@ import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined'
 import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useMutation } from 'react-query'
+import { useNavigate } from 'react-router-dom'
 
 interface PaymentMethodProps {
   clientId: string
 }
 const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   const { showNotification } = useNotification()
+  const navigate = useNavigate()
   const { clientId } = props
 
   const { data: paymentOptions, isLoading: isPaymentOptionsLoading } = useQuery(
@@ -62,12 +64,12 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   }
 
   const { isLoading: isLoadingAddOrder, mutate } = useMutation(addOrder, {
-    onSuccess: res => {
-      // TODO: Navigate to supplyOmny/proformaView/:id
+    onSuccess: (data: any) => {
       showNotification({
         message: 'Comanda a fost inregistrata cu success!',
         type: 'success'
       })
+      navigate(`/supplyOmni/proformaView/${data?.id}`)
     },
     onError: res => {
       showNotification({
