@@ -3,19 +3,17 @@ import s from './Families.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
-import { Add } from '@mui/icons-material'
 import { FamiliesItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-// import { AddEditRegion } from './AddEditRegion'
 import { columns } from './helpers'
 import { toTableRowItems } from './serializers'
+import { EditFamily } from './EditFamily'
 
 const Families = () => {
   const [tableItems, setTableItems] = useState<FamiliesItem[]>([])
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -65,14 +63,12 @@ const Families = () => {
     <div className={s.mainContainer}>
       {/* TODO add table search bar after UI redesign */}
       <Box>
-          {/* 
-          <AddEditRegion 
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            setShouldRefreshData={setShouldRefreshData}
-            editRegionId={selectedRowId}
-            isEdit
-          /> */}
+        <EditFamily 
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+          setShouldRefreshData={setShouldRefreshData}
+          editFamilyId={selectedRowId}
+        />
         <Table
           hideCheckbox
           columns={columns}

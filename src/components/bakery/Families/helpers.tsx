@@ -1,7 +1,5 @@
-import { Box } from '@mui/material'
-import { IconCell } from 'components/core-ui/IconCell'
-import { MultivalueCell } from 'components/core-ui/MultivalueCell'
-import * as Yup from 'yup'
+import { ImageCell } from 'components/core-ui/ImageCell'
+import { Link } from 'components/core-ui/Link'
 
 export const divisionTypes = [
     { label: 'Super', value: 'SUPER' }, 
@@ -9,7 +7,7 @@ export const divisionTypes = [
     { label: 'Hyper&Super', value: 'HYPER_AND_SUPER'}
 ]
 
-  export const famInBakeryScope = [
+  export const famInBakeryScopes = [
       { label: "Da", value: "Da" },
       { label: "Nu", value: "Nu" }
   ]
@@ -23,7 +21,15 @@ export const columns = [
   {
     title: 'Nume familie',
     field: 'name',
-    align: 'left'
+    align: 'left',
+    render: (row: any) => (
+      <Link
+        href={`/bakery/admin/family-products?id=${row.id}`}
+        style={{ textDecoration: 'inherit' }}
+      >
+        {row.name}
+      </Link>
+    )
   },
   {
     title: 'Divizie',
@@ -39,13 +45,29 @@ export const columns = [
   }
 ]
 
+export const columnsFamilyProducts = [
+  {
+    title: 'Produs',
+    field: 'name',
+    align: 'left',
+    render: (row: any) => (
+      <ImageCell imageUrl={row.imageUrl} value={row.name} />
+    )
+  },
+  {
+    title: 'Nume subfamilie',
+    field: 'subfamily',
+    align: 'left'
+  },
+]
+
 export const getInitialValues = editItem => ({
-    ...(editItem?.id ? { id: editItem?.id } : {}),
+    id: editItem?.id ?? '',
     code: editItem?.code ?? '',
     name: editItem?.name ?? '',
-    enable: editItem?.enable || '',
+    enable: editItem?.enable ? "Da" : "Nu",
     divisionType: editItem?.divisionType ?? '',
-    moduleName: editItem?.moduleName || '',
-    moduleId: editItem?.moduleId || ''
+    moduleName: editItem?.moduleName ?? '',
+    moduleId: editItem?.moduleId ?? ''
 })
 

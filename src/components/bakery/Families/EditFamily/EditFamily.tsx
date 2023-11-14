@@ -6,10 +6,12 @@ import { useFormik } from 'formik'
 import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { EditFamilyItem } from '../../interfaces'
+import { EditFamilyItem, ValueLabelInterface } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
-import { getInitialValues, famInBakeryScope, divisionTypes } from '../helpers'
-import { ChangeEvent, useMemo } from 'react'
+import { getInitialValues, famInBakeryScopes, divisionTypes } from '../helpers'
+import { ChangeEvent, useMemo, useState } from 'react'
+import { toAsyncSelectOptions } from '../serializers'
+import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 
 interface EditFamilyProps {
   isModalOpen: boolean
@@ -20,13 +22,35 @@ interface EditFamilyProps {
 
 const EditFamily: React.FC<EditFamilyProps> = props => {
     const { isModalOpen, closeModal, setShouldRefreshData, editFamilyId } = props
+    const [moduleValue, setModuleValue] = useState<ValueLabelInterface>(null)
     const { showNotification } = useNotification()
+
+    const { data: modules, isLoading: isModulesLoading, refetch: refetchModules } = useQuery(
+      ['modules'],
+      async () => {
+        const result = await makeCoreGetRequest('/bakery/module')
+        const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
+
+        setModuleValue(resultOptions[0])
+        return resultOptions || []
+      },
+      {
+        onError: error => {
+          showNotification({
+            message: `Error while fetching module dropdown data. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        },
+        enabled: false
+      }
+    )
 
     const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
         ['family', editFamilyId],
         async () => {
           if (editFamilyId) {
             const result = await makeCoreGetRequest(`/bakery/family/${editFamilyId}`)
+            refetchModules();
             return result || null
           }
           return null
@@ -44,7 +68,6 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
     )
 
     const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
-    // const validationSchema = useMemo(() => getValidationSchema(), [editItem])
 
     const submitTask = async (values: EditFamilyItem) => {
         await makeCorePutRequest(`/bakery/family/${editFamilyId}`, values)
@@ -55,7 +78,7 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
           setShouldRefreshData(true)
           closeModal()
           showNotification({
-            message: `Family edited successfully'`,
+            message: `Family edited successfully`,
             type: 'success'
           })
         },
@@ -74,13 +97,18 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
         onSubmit: async (values: EditFamilyItem, { resetForm }) => {
             const payload = {
                 ...values,
-                enable: values.enable === 'Active'
+                enable: values.enable === 'Da'
             }
             mutate(payload)
             resetForm()
         }
     })
 
+    const handleModuleChange = value => {
+      setModuleValue(value)
+      setShouldRefreshData(true)
+    }
+    
     return (
         <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'} modalWidth="50%">
           <Grid container spacing={2}>
@@ -88,61 +116,48 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
             ) : ( 
             <>
-              {/* <Grid xs={12} item>
-                <Input
-                    type="text"
-                    name="responsible"
-                    label="Responsabil"
-                    fullWidth
-                    variant="standard"
-                    value={formik.values.responsible}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue('responsible', event.currentTarget.value)}
-                    error={!!formik.errors.responsible}
-                    helperText={formik.errors.responsible as string}
-                />
-              </Grid>
-              <Grid xs={12} item>
-                <Input
-                  type="text"
-                  name="name"
-                  label="Denumire regiune"
-                  fullWidth
-                  variant="standard"
-                  value={formik.values.name}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue('name', event.currentTarget.value)}
-                  error={!!formik.errors.name}
-                  helperText={formik.errors.name as string}
-                />
-              </Grid>
-    
               <Grid xs={12} item>
                 <Input
                   type="select"
-                  variant="standard"
+                  variant="outlined"
+                  name="enable"
+                  label="Familie in scopul aplicatiei de brutarie"
+                  values={famInBakeryScopes}
+                  width="100%"
+                  value={formik.values.enable}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue('enable', (event.target as HTMLInputElement).value)}
+                />
+              </Grid>
+
+              {isModulesLoading ? (
+                <div style={{ display: 'flex' }}>
+                  <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+                </div>
+              ) : (
+                <Grid xs={12} md={3} item>
+                  <AsyncAutocomplete
+                    variant="outlined"
+                    name="moduleName"
+                    label="Zona"
+                    value={moduleValue}
+                    options={modules}
+                    onChange={handleModuleChange}
+                  />
+                </Grid>
+              )}
+
+              <Grid xs={12} item>
+                <Input
+                  type="select"
+                  variant="outlined"
                   name="divisionType"
                   label="Divizie"
                   values={divisionTypes}
                   width="100%"
                   value={formik.values.divisionType}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue('divisionType', (event.target as HTMLInputElement).value)}
-                  error={!!formik.errors.divisionType}
-                  helperText={formik.errors.divisionType as string}
-                  required
                 />
               </Grid>
-            
-              <Grid xs={12} item>
-                <Input
-                  type="select"
-                  variant="standard"
-                  name="enable"
-                  label="Status"
-                  values={statuses}
-                  width="100%"
-                  value={formik.values.enable}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue('enable', (event.target as HTMLInputElement).value)}
-                />
-              </Grid> */}
     
               <Grid xs={12} item className={s.modalButtons}>
                 <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />

@@ -84,7 +84,7 @@ function StructureItem(props) {
         <Autocomplete
           {...rest}
           disableClearable
-          variant="standard"
+          variant="outlined"
           label={selectLabel}
           disablePortal
           id="async-demo"

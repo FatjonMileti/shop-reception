@@ -44,22 +44,26 @@ export interface AddEditRegionItem {
 }
 
 export interface FamiliesItem {
-  code: string
+  code: string | number
   name: string
   divisionType: string
   moduleName: string
+  moduleId: string
+  enable: string | boolean
   id: string
+
 }
 
 export interface EditFamilyItem {
-    id: string
-    name: string
-    code: number
-    enable: string | boolean
-    moduleName: string
-    moduleId: string
-    divisionType: string
+  id: string
+  name: string
+  code: number
+  enable: string | boolean
+  moduleName: string
+  moduleId: string
+  divisionType: string
 }
+
 export interface StoreItem {
   name: string
   metiCode: string
