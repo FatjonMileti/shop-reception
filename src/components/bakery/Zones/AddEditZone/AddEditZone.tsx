@@ -80,7 +80,7 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
         onSubmit: async (values: AddEditZoneItem, { resetForm }) => {
             const payload = {
                 ...values,
-                enable: values.enable === 'Active' ? true : false
+                enable: values.enable === 'Active'
             }
             mutate(payload)
             resetForm()
