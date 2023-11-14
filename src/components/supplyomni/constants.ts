@@ -4,5 +4,6 @@ export const URLS = {
   AUTH_SELECT_CLIENT: 'supplyOmni/shoppingCartSelectClient',
   AUTH_CLIENT_DETAILS: `supplyOmni/shoppingCartClientDetails/:id`,
   AUTH_PROFORMA_VIEW: `/supplyOmni/proformaView/:id`,
+  AUTH_SCAN_RECEIPT: `/supplyOmni/scanReceipt/:id`,
   MY_SALES: 'supplyOmni/sales'
 }
