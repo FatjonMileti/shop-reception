@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { URLS } from './constants'
 import { UsersManagement } from './UsersManagement'
 import { Zones } from './Zones'
+import { Regions } from './Regions'
 import { Stores } from './Stores'
 
 export const useBakeryRoutes = applicationPages => {
@@ -36,6 +37,16 @@ export const useBakeryRoutes = applicationPages => {
             applicationPages={applicationPages}
             checkIsAuthorized
           />
+        } 
+      />
+      <Route
+        path={URLS.AUTH_REGIONS}
+        element={
+          <PrivateRoute
+            component={Regions}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+        />
         }
       />
     </>

@@ -26,6 +26,23 @@ export interface AddEditZoneItem {
   stores: string[]
 }
 
+export interface RegionItem {
+  name: string
+  responsible: string
+  divisionType: string
+  enable: string
+  stores: string[]
+  id: string
+}
+
+export interface AddEditRegionItem {
+  id?: string | number
+  divisionType: string
+  enable: string | boolean
+  name: string
+  responsible: string
+}
+
 export interface StoreItem {
   name: string
   metiCode: string
