@@ -3,6 +3,7 @@ import { Route } from "react-router-dom"
 import { URLS } from "./constants"
 import { Login } from "./Login"
 import { Home } from "./Home"
+import { PackagingInventoryUpdate } from "./PackagingInventoryUpdate"
 import { GoodsReception } from "./GoodsReception"
 import { GoodsReturn } from "./GoodsReturn"
 import { ListTrucks } from "./GoodsReception/ListTrucks"
@@ -54,6 +55,10 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_ORDER_RETURN_TRUCK}
         element={<OrderReturnTruck />}
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_INVENTORY_UPDATE}
+        element={<PackagingInventoryUpdate />}
       />
     </>
   )

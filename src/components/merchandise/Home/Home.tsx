@@ -57,6 +57,9 @@ const Home = () => {
                 variant="contained"
                 label="ACTUALIZARE INVENTAR AMBALAJE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_PACKAGING_INVENTORY_UPDATE);
+                }}
               />
             </Grid>}
             {isWareHouseUser && <Grid item xs={12}>
