@@ -65,18 +65,18 @@ const Zones = () => {
     <div className={s.mainContainer}>
       {/* TODO add search bar after redesigns */}
       <Box>
-          <AddEditZone 
-             isModalOpen={isAddModalOpen}
-             closeModal={closeAddModal}
-             setShouldRefreshData={setShouldRefreshData}
-          />
-          <AddEditZone 
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
+        <AddEditZone 
+            isModalOpen={isAddModalOpen}
+            closeModal={closeAddModal}
             setShouldRefreshData={setShouldRefreshData}
-            editZoneId={selectedRowId}
-            isEdit
-          />
+        />
+        <AddEditZone 
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+          setShouldRefreshData={setShouldRefreshData}
+          editZoneId={selectedRowId}
+          isEdit
+        />
         <Table
           hideCheckbox
           columns={columns}

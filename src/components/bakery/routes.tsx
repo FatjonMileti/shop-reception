@@ -1,9 +1,10 @@
 import { PrivateRoute } from 'components/utils/PrivateRoute'
-import { URLS } from './constants'
 import { Route } from 'react-router-dom'
-import { Regions } from './Regions'
-import { Zones } from './Zones'
+import { URLS } from './constants'
 import { UsersManagement } from './UsersManagement'
+import { Zones } from './Zones'
+import { Regions } from './Regions'
+import { Stores } from './Stores'
 import { Families } from './Families'
 
 export const useBakeryRoutes = applicationPages => {
@@ -28,6 +29,16 @@ export const useBakeryRoutes = applicationPages => {
             checkIsAuthorized
           />
         }
+      />
+      <Route
+        path={URLS.AUTH_STORES}
+        element={
+          <PrivateRoute
+            component={Stores}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        } 
       />
       <Route
         path={URLS.AUTH_REGIONS}
