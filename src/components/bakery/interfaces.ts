@@ -33,3 +33,21 @@ export interface AddEditRegionItem {
   name: string
   responsible: string
 }
+
+export interface FamiliesItem {
+  code: string
+  name: string
+  divisionType: string
+  moduleName: string
+  id: string
+}
+
+export interface EditFamilyItem {
+    id: string
+    name: string
+    code: number
+    enable: string | boolean
+    moduleName: string
+    moduleId: string
+    divisionType: string
+}
