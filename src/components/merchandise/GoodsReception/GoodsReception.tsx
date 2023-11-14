@@ -3,9 +3,11 @@ import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
 import s from "./GoodsReception.modules.scss"
 import { URLS } from '../constants'
 import useRoles from "../useRoles"
+import { useNavigate } from "react-router-dom"
 
 const GoodsReception = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles();
+  const navigate = useNavigate();
 
   const getTitle = () => {
     if (isShopUser) {
@@ -33,6 +35,9 @@ const GoodsReception = () => {
                 variant="contained"
                 label="LISTǍ CAMIOANE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_LIST_TRUCKS);
+                }}
               />
             </Grid>}
             {(isShopUser || isHubUser) && <Grid item xs={12}>
@@ -41,6 +46,9 @@ const GoodsReception = () => {
                 variant="contained"
                 label="ÎN PROCESARE RECEPȚIE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_RECEPTION_PROCESSING);
+                }}
               />
             </Grid>}
             {isShopUser && <Grid item xs={12}>
@@ -49,6 +57,9 @@ const GoodsReception = () => {
                 variant="contained"
                 label="VALIDATE LIVRARE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_DELIVERY);
+                }}
               />
             </Grid>}
             {isHubUser && <Grid item xs={12}>

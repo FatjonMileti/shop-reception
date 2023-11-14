@@ -5,6 +5,9 @@ import { Login } from "./Login"
 import { Home } from "./Home"
 import { GoodsReception } from "./GoodsReception"
 import { GoodsReturn } from "./GoodsReturn"
+import { ListTrucks } from "./ListTrucks"
+import { ReceptionProcessing } from "./RceptionProcessing"
+import { Delivery } from "./Delivery"
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -24,6 +27,18 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_GOODS_RETURN}
         element={<GoodsReturn />}
+      />
+      <Route
+        path={URLS.AUTH_LIST_TRUCKS}
+        element={<ListTrucks />}
+      />
+      <Route
+        path={URLS.AUTH_RECEPTION_PROCESSING}
+        element={<ReceptionProcessing />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY}
+        element={<Delivery />}
       />
     </>
   )
