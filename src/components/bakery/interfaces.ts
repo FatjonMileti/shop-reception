@@ -25,3 +25,30 @@ export interface AddEditZoneItem {
   divisionType: string
   stores: string[]
 }
+
+export interface StoreItem {
+  name: string
+  metiCode: string
+  divisionType: string
+  parentSociety: string
+  region: string
+  zone: string
+  enable: string
+  id: string
+}
+
+export interface EditStoreItem {
+  id?: string | number
+  name: string
+  divisionType: string
+  enable: string | boolean
+  metiCode: string
+  parentSociety: string
+  region: string
+  zone: string
+}
+
+export interface ValueLabelInterface {
+  value: string
+  label: string
+}
