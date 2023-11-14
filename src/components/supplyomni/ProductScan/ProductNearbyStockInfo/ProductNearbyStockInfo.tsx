@@ -16,15 +16,15 @@ const ProductNearbyStockInfo: React.FC<ProductNearbyStockInfoProps> = props => {
         <Accordion
           summary={
             <Typography variant="medium">
-              <span>Stock in magazine invecinate</span>
+              <span>Stoc in magazine invecinate</span>
             </Typography>
           }
           details={
             <Box className={s.infoItems}>
               <Table
                 columns={[
-                  { title: 'Magazin', field: 'name', align: 'left' },
-                  { title: 'Stoc', field: 'available', align: 'left' }
+                  { title: 'Magazin', field: 'name', align: 'left', disableSorting: true },
+                  { title: 'Stoc', field: 'available', align: 'left', disableSorting: true }
                 ]}
                 rows={neighboursStock}
                 isLoading={false}

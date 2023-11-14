@@ -143,7 +143,7 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
           />
         </div>
       </Paper>
-      {neighboursStock && <ProductNearbyStockInfo neighboursStock={neighboursStock} />}
+      {!!neighboursStock.length && <ProductNearbyStockInfo neighboursStock={neighboursStock} />}
     </div>
   )
 }

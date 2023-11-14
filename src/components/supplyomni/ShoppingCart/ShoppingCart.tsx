@@ -6,11 +6,14 @@ import { formatErrorMessage } from 'utils/formatting'
 import s from './ShoppingCart.modules.scss'
 import { InsertDriveFileOutlined } from '@mui/icons-material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { ProductInfo } from './ProductInfo'
+import { ProductInfo } from '../ProductInfo'
+import { useNavigate } from 'react-router-dom'
+import { FloatingButton } from 'components/core-ui/FloatingButton'
 
 const ShoppingCart = () => {
   const { showNotification } = useNotification()
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
 
   const { data: products, isLoading: isLoadingGetProducts } = useQuery(
     ['cart-products'],
@@ -78,13 +81,14 @@ const ShoppingCart = () => {
             </Box>
 
             <Button
-              onClick={() => console.log('finish order')}
+              onClick={() => navigate('/supplyOmni/shoppingCartSelectClient')}
               label=""
               variant="contained"
               style={{ marginTop: '16px' }}
             >
               <InsertDriveFileOutlined /> FINALIZEAZA PROFORMA
             </Button>
+            <FloatingButton type="add" href="/supplyOmni/productScan" backgroundColor="red" />
           </Box>
         </>
       )}

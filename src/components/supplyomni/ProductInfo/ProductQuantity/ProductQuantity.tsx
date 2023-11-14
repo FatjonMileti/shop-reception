@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import s from '../../ShoppingCart.modules.scss'
+import s from '../../ShoppingCart/ShoppingCart.modules.scss'
 import { Remove, Add } from '@mui/icons-material'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 

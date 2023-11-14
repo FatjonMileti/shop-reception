@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from '@mui/material'
 import { useQueryClient } from 'react-query'
-import s from '../ShoppingCart.modules.scss'
+import s from '../ShoppingCart/ShoppingCart.modules.scss'
 import { Delete } from '@mui/icons-material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { useState } from 'react'

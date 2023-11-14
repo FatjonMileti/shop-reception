@@ -8,15 +8,15 @@ export interface TeamDayOffManagementItem {
   teamMemberId: string
 }
 export interface EffortMatrix {
-  id: number,
-  role: string,
-  evaluationPhase: number,
-  analysisPhase: number,
-  designPhase: number,
-  developmentPhase: number,
-  systemTestPhase: number,
-  uatPhase: number,
-  rolloutPhase: number,
+  id: number
+  role: string
+  evaluationPhase: number
+  analysisPhase: number
+  designPhase: number
+  developmentPhase: number
+  systemTestPhase: number
+  uatPhase: number
+  rolloutPhase: number
   hypercarePhase: number
 }
 
