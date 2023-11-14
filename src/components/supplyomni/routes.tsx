@@ -7,6 +7,7 @@ import { ShoppingCart } from './ShoppingCart'
 import { SelectClient } from './SelectClient'
 import { ClientDetails } from './SelectClient/ClientDetails'
 import { ProformaView } from './ProformaView'
+import { ScanReceipt } from './ScanReceipt'
 
 export const useSupplyOmniRoutes = applicationPages => {
   return (
@@ -54,6 +55,16 @@ export const useSupplyOmniRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ProformaView}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_SCAN_RECEIPT}
+        element={
+          <PrivateRoute
+            component={ScanReceipt}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

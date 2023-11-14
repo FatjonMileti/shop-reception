@@ -48,10 +48,11 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
               fiscalTicketDate: formatPayloadDate(receiptDate)
             })
 
+
             if (action.href) {
               await destroy()
               navigate(
-                `${action.href}?${action.variable}=${id}&clientId=${searchParams.get('clientId')}`
+                `/supplyOmni/${action.href}?${action.variable}=${id}&clientId=${searchParams.get('clientId')}`
               )
             }
           } catch (error) {
