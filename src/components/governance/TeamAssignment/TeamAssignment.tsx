@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Box, CircularProgress, Grid, Paper } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
@@ -10,7 +10,6 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { Table } from 'components/core-ui/Table'
 import { Input } from 'components/core-ui/Input'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Edit } from '@mui/icons-material'
 import { PermissionRoles } from 'utils/enums'
 import { TeamAssignmentItem, TeamAssignmentTableFilter, ValueLabelInterface } from '../interfaces'
@@ -65,7 +64,6 @@ const TeamAssignment: React.FC = props => {
   const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [teamMembers, setTeamMembers] = useState(null)
 
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -113,35 +111,6 @@ const TeamAssignment: React.FC = props => {
     setSelectedRow(row)
     openEditModal()
   }
-
-  const columnsWithActions = useMemo(() => {
-    let result = columns
-    if (canEdit) {
-      const actionsRow = {
-        title: '',
-        field: 'actions',
-        align: 'right',
-        width: '112px',
-        collapsible: 'true',
-        render: row => (
-          <Box display="flex">
-            {canEdit && (
-              <Button
-                onClick={() => selectRow(row)}
-                style={{ minWidth: '0.7rem', background: 'transparent' }}
-                label=""
-              >
-                <Edit />
-              </Button>
-            )}
-          </Box>
-        )
-      } as any
-
-      result = [...columns, actionsRow]
-    }
-    return result
-  }, [columns, canEdit, teamMembers])
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
@@ -267,7 +236,7 @@ const TeamAssignment: React.FC = props => {
             hideCheckbox
             orderBy="teamMember.name"
             order="asc"
-            columns={columnsWithActions}
+            columns={columns}
             items={tableItems}
             fetchData={fetchData}
             isLoading={isLoading}
@@ -275,6 +244,17 @@ const TeamAssignment: React.FC = props => {
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
+            rowActions={[
+              {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#0970E6',
+                onClick: (e, rowId) => {
+                  selectRow(tableItems.find(item => item.id === rowId))
+                }
+              }
+            ]}
           />
         </Box>
       )}
