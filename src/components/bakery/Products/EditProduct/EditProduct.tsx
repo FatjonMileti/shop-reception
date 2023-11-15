@@ -9,9 +9,10 @@ import { formatErrorMessage } from 'utils/formatting'
 import { EditProductItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { getInitialValues } from '../helpers'
-import { useMemo, useState } from 'react'
+import { ChangeEvent, useMemo, useState } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { FileUpload } from 'components/core-ui/FileUpload'
+import { toFormDataPayload } from 'utils/serializers'
 
 interface EditProductProps {
   isModalOpen: boolean
@@ -23,7 +24,8 @@ interface EditProductProps {
 const EditProduct: React.FC<EditProductProps> = props => {
     const { isModalOpen, closeModal, setShouldRefreshData, editProductId } = props
     const { showNotification } = useNotification()
-    const [isImgUploaded, setIsImgUploaded] = useState(null);
+    const [isFileUploaded, setIsFileUploaded] = useState(false);
+    const [uploadedFile, setUploadedFile] = useState(null);
     const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
         ['product', editProductId],
         async () => {
@@ -45,14 +47,21 @@ const EditProduct: React.FC<EditProductProps> = props => {
         }
     )
 
+    const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
+      if(event) {
+        const file = event.target.files[0];
+        setUploadedFile(file);
+        setIsFileUploaded(true);
+      } else {
+        setUploadedFile(null);
+        setIsFileUploaded(false);
+      }
+    }
+
     const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
 
-    const submitTask = async (values: EditProductItem) => {
-        if(isImgUploaded) {
-          await makeCorePostRequest(`/bakery/product/management/upload/${editProductId}`, values)
-        } else {
-          await makeCorePostRequest(`/bakery/product/management/delete/${editProductId}`, values)
-        }
+    const submitTask = async (values: any) => {
+      await makeCorePostRequest(`/bakery/product/management/${isFileUploaded ? 'upload' : 'delete'}/${editProductId}`, values)
     }
 
     const { isLoading, mutate } = useMutation(submitTask, {
@@ -76,25 +85,15 @@ const EditProduct: React.FC<EditProductProps> = props => {
         enableReinitialize: true,
         validateOnChange: false,
         initialValues: initialValues,
-        onSubmit: async (values: EditProductItem, { resetForm }) => {
-            const payload = {
-                ...values,
-                ...(isImgUploaded ? { fileObject: 'xxx' } : {}),
-            }
+        onSubmit: async (values: any, { resetForm }) => {
+            const payload = toFormDataPayload(values)
+            payload.append("fileObject", uploadedFile);
+
             mutate(payload)
             resetForm()
         }
     })
-
-    const onFileUpload = (x) => {
-      if(x) {  //TODO figure out what fileObject in uat post payload means
-        console.log('xxxxxxxxxxxxxxx',x);
-        console.log('xxxxxxxxxxxxxxx',x.target.files);
-        console.log('imageUrl', URL.createObjectURL(x.target.files[0]))
-        setIsImgUploaded(true);
-      }
-      else { console.log('yyyyyyyyyy',x)}
-    }
+    
     return (
         <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'} modalWidth="50%">
           <Grid container spacing={2}>
