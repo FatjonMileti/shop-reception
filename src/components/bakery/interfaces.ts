@@ -43,6 +43,27 @@ export interface AddEditRegionItem {
   responsible: string
 }
 
+export interface FamiliesItem {
+  code: string | number
+  name: string
+  divisionType: string
+  moduleName: string
+  moduleId: string
+  enable: string | boolean
+  id: string
+
+}
+
+export interface EditFamilyItem {
+  id: string
+  name: string
+  code: number
+  enable: string | boolean
+  moduleName: string
+  moduleId: string
+  divisionType: string
+}
+
 export interface StoreItem {
   name: string
   metiCode: string
@@ -63,6 +84,20 @@ export interface EditStoreItem {
   parentSociety: string
   region: string
   zone: string
+}
+
+export interface ClustersItem {
+  name: string
+  mandatory: string
+  enable: string | boolean
+  id: string
+}
+
+export interface EditClusterItem {
+  name: string
+  mandatory: string | boolean
+  enable: string | boolean
+  id: string
 }
 
 export interface ValueLabelInterface {

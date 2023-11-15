@@ -27,7 +27,7 @@ const EditStore: React.FC<EditStoreProps> = props => {
     const [zoneValue, setZoneValue] = useState<ValueLabelInterface>(null)
     const [regionValue, setRegionValue] = useState<ValueLabelInterface>(null)
 
-    const { data: zones, isLoading: isZonesLoading } = useQuery(
+    const { data: zones, isLoading: isZonesLoading, refetch: refetchZones } = useQuery(
       ['zones'],
       async () => {
         const result = await makeCoreGetRequest('/bakery/zone/all')
@@ -42,11 +42,12 @@ const EditStore: React.FC<EditStoreProps> = props => {
             message: `Error while fetching zone dropdown data. ${formatErrorMessage(error)}`,
             type: 'error'
           })
-        }
+        },
+        enabled: false
       }
     )
 
-    const { data: regions, isLoading: isRegionsLoading } = useQuery(
+    const { data: regions, isLoading: isRegionsLoading, refetch: refetchRegions } = useQuery(
       ['regions'],
       async () => {
         const result = await makeCoreGetRequest('/bakery/region/all')
@@ -61,7 +62,8 @@ const EditStore: React.FC<EditStoreProps> = props => {
             message: `Error while fetching region dropdown data. ${formatErrorMessage(error)}`,
             type: 'error'
           })
-        }
+        },
+        enabled: false
       }
     )
 
@@ -70,6 +72,8 @@ const EditStore: React.FC<EditStoreProps> = props => {
         async () => {
           if (editStoreId) {
             const result = await makeCoreGetRequest(`/bakery/store/${editStoreId}`)
+            refetchZones()
+            refetchRegions()
             return result || null
           }
           return null
@@ -165,14 +169,14 @@ const EditStore: React.FC<EditStoreProps> = props => {
                 </div>
               ) : (
                 <Grid xs={12} md={3} item>
-                  <AsyncAutocomplete
-                    variant="standard"
-                    name="zone"
-                    label="Zona"
-                    value={zoneValue}
-                    options={zones}
-                    onChange={handleZoneChange}
-                  />
+                    <AsyncAutocomplete
+                      variant="outlined"
+                      name="zone"
+                      label="Zona"
+                      value={zoneValue}
+                      options={zones}
+                      onChange={handleZoneChange}
+                    />
                 </Grid>
               )}
 
@@ -183,7 +187,7 @@ const EditStore: React.FC<EditStoreProps> = props => {
               ) : (
                 <Grid xs={12} md={3} item>
                   <AsyncAutocomplete
-                    variant="standard"
+                    variant="outlined"
                     name="region"
                     label="Regiune"
                     value={regionValue}
