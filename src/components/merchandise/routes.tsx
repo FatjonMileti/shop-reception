@@ -13,6 +13,9 @@ import { Delivery } from "./GoodsReception/Delivery"
 import { ConfirmReturnTrucks } from "./GoodsReturn/ConfirmReturnTrucks"
 import { OrderReturnTruck } from "./GoodsReturn/OrderReturnTruck"
 import { ExpectedTrucks } from "./GoodsReturn/ExpectedTrucks"
+import { RegisterTruck } from "./GoodsReception/RegisterTruck"
+import { ExpenditureProcessing } from "./GoodsReception/ExpenditureProcessing"
+import { ShippedTrucks } from "./GoodsReception/ShippedTrucks"
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -64,6 +67,18 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_EXPECTED_TRUCKS}
         element={<ExpectedTrucks />}
+      />
+      <Route
+        path={URLS.AUTH_REGISTER_TRUCK}
+        element={<RegisterTruck />}
+      />
+      <Route
+        path={URLS.AUTH_EXPENDITURE_PROCESSING}
+        element={<ExpenditureProcessing />}
+      />
+      <Route
+        path={URLS.AUTH_SHIPPED_TRUCKS}
+        element={<ShippedTrucks />}
       />
     </>
   )

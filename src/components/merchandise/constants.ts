@@ -11,7 +11,7 @@ export const URLS = {
   AUTH_ORDER_RETURN_TRUCK: "/merchandise/order-return-truck",
   AUTH_PACKAGING_INVENTORY_UPDATE: "/merchandise/packaging-inventory-update",
   AUTH_EXPECTED_TRUCKS: "/merchandise/expected-trucks",
-  AUTH_REGISTER_TRUCK: "/merchandise/register-trucks",
+  AUTH_REGISTER_TRUCK: "/merchandise/register-truck",
   AUTH_EXPENDITURE_PROCESSING: "/merchandise/expenditure-processing",
   AUTH_SHIPPED_TRUCKS: "/merchandise/shipped-trucks",
   AUTH_EXPECTED_RETURNS: "/merchandise/expected-returns",
