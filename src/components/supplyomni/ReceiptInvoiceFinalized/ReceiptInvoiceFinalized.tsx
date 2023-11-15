@@ -11,16 +11,16 @@ const ReceiptInvoiceFinalized: React.FC = () => {
 
   return (
     <Paper className={s.container}>
-      <Alert severity="success">Comanda finalizata</Alert>
+      <Alert severity="success">Comandă finalizată</Alert>
       <Box className={s.btnContainer}>
         <Button
           variant="contained"
-          label="Factura fiscala"
+          label="Factură fiscală"
           onClick={() =>
             navigate(`/supplyOmni/receiptClientDetails/${clientId}?orderId=${orderId}`)
           }
         />
-        <Button variant="contained" label="Vanzarile mele" onClick={() => {}} />
+        <Button variant="contained" label="Vânzările mele" onClick={() => {}} />
       </Box>
     </Paper>
   )
