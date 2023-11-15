@@ -120,3 +120,22 @@ export interface ValueLabelInterface {
   value: string
   label: string
 }
+
+export interface EditProductItem {
+  name: string
+  imageUrl: string
+  id: string
+  pluCode: string | number
+  metiCode: string | number
+  familyModuleName: string
+  fileObject?: any
+}
+
+export interface ProductItem {
+  id: string
+  name: string
+  pluCode: string | number
+  metiCode: string | number
+  familyModuleName: string
+  imageUrl: string
+}
