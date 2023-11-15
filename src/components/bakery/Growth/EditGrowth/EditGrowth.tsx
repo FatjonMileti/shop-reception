@@ -6,10 +6,10 @@ import { useFormik } from 'formik'
 import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { EditGrowthItem, EditStoreItem, ValueLabelInterface } from '../../interfaces'
+import { EditGrowthItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
-import { getInitialValues } from '../helpers'
-import { ChangeEvent, useMemo, useState } from 'react'
+import { getInitialValues, getValidationSchema } from '../helpers'
+import { ChangeEvent, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
 interface EditStoreProps {
@@ -45,6 +45,7 @@ const EditGrowth: React.FC<EditStoreProps> = props => {
     )
 
     const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+    const validationSchema = useMemo(() => getValidationSchema(), [editItem])
 
     const submitTask = async (values: EditGrowthItem) => {
         await makeCorePutRequest(`/bakery/user/growth/${editGrowthId}`, values)
@@ -71,6 +72,7 @@ const EditGrowth: React.FC<EditStoreProps> = props => {
         enableReinitialize: true,
         validateOnChange: false,
         initialValues: initialValues,
+        validationSchema: validationSchema,
         onSubmit: async (values: EditGrowthItem, { resetForm }) => {
             const payload = {
                 ...values,
@@ -97,7 +99,7 @@ const EditGrowth: React.FC<EditStoreProps> = props => {
                 
               <Grid xs={12} item>
                 <Input
-                    type="number"
+                    type="text"
                     name="growth"
                     label="Coeficient de crestere"
                     fullWidth

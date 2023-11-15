@@ -8,6 +8,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { columns } from './helpers'
+import { EditGrowth } from './EditGrowth'
 
 const Growth = () => {
   const [tableItems, setTableItems] = useState<GrowthItem[]>([])
@@ -27,7 +28,7 @@ const Growth = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/growth',
+          url: '/bakery/user/growth/tempApiUrl', //TODO figure out why mockoons breaks this
           filters: [],
           tableFilters,
           page,
@@ -59,14 +60,13 @@ const Growth = () => {
 
   return (
     <div className={s.mainContainer}>
-      {/* TODO add table search bar after UI redesign */}
-      <Box>
-          {/* <EditGrowth 
+        <Box>
+          <EditGrowth 
             isModalOpen={isEditModalOpen}
             closeModal={closeEditModal}
             setShouldRefreshData={setShouldRefreshData}
             editGrowthId={selectedRowId}
-          /> */}
+          />
         <Table
           hideCheckbox
           columns={columns}
