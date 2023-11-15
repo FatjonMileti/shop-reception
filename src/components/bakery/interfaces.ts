@@ -65,6 +65,22 @@ export interface EditStoreItem {
   zone: string
 }
 
+export interface GrowthItem {
+  id: string
+  type: string
+  growth: string
+  username: string
+  lastChange: string
+}
+
+export interface EditGrowthItem {
+  id: string
+  type: string
+  growth: string
+  username: string
+  lastChange: string
+}
+
 export interface ValueLabelInterface {
   value: string
   label: string
