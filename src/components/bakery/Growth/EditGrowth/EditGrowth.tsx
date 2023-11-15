@@ -12,14 +12,14 @@ import { getInitialValues, getValidationSchema } from '../helpers'
 import { ChangeEvent, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
-interface EditStoreProps {
+interface EditGrowthProps {
   isModalOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
   editGrowthId?: string | number
 }
 
-const EditGrowth: React.FC<EditStoreProps> = props => {
+const EditGrowth: React.FC<EditGrowthProps> = props => {
     const { isModalOpen, closeModal, setShouldRefreshData, editGrowthId } = props
     const { showNotification } = useNotification()
 
