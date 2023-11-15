@@ -3,11 +3,17 @@ import PortraitOutlinedIcon from '@mui/icons-material/PortraitOutlined'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { Client } from '../interfaces'
 
+interface Buttons {
+  topButton: React.ReactNode
+  bottomButton: React.ReactNode
+}
+
 interface ClientDataProps {
   client: Client
+  buttons?: Buttons
 }
 const ClientData: React.FC<ClientDataProps> = props => {
-  const { client } = props
+  const { client, buttons } = props
 
   const clientInfo = [
     {
@@ -38,13 +44,18 @@ const ClientData: React.FC<ClientDataProps> = props => {
           </Typography>
         </Box>
         <Divider />
-        <Box paddingX={4} paddingTop={4}>
+        <Box paddingX={4} paddingTop={4} sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="h5" fontWeight={600}>
             {client.name}
           </Typography>
+          {buttons?.topButton}
         </Box>
         <Box padding={4}>
           <FormInfoItems items={clientInfo} />
+
+          <Grid item mt={4} sx={{ textAlign: 'right' }}>
+            {buttons?.bottomButton}
+          </Grid>
         </Box>
       </Paper>
     </Grid>

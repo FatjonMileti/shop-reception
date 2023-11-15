@@ -1,0 +1,19 @@
+.container {
+  padding: 16px;
+  margin: 24px;
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+}
+
+.btnContainer {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  @media (max-width: 624px) {
+    button {
+      width: 100%;
+    }
+  }
+}

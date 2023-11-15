@@ -4,7 +4,11 @@ import { ChangeEvent, useState } from 'react'
 import { PersoanaFizica } from './PersoanaFizica'
 import { PersoanaJuridica } from './PersoanaJuridica'
 
-const NewClient: React.FC = () => {
+interface NewClientProps {
+  selectNewClient?: boolean
+}
+
+const NewClient: React.FC<NewClientProps> = ({ selectNewClient }) => {
   const [clientType, setClientType] = useState<string>('persoanaFizica')
 
   const onClientTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -12,8 +16,8 @@ const NewClient: React.FC = () => {
   }
 
   const renderClientType = {
-    persoanaFizica: <PersoanaFizica />,
-    persoanaJuridica: <PersoanaJuridica />
+    persoanaFizica: <PersoanaFizica selectNewClient={selectNewClient} />,
+    persoanaJuridica: <PersoanaJuridica selectNewClient={selectNewClient} />
   }
 
   return (
