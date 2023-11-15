@@ -59,7 +59,7 @@ const AddTruck = () => {
         <Grid item xs={12}>
           <Typography component="h4" variant="medium"
                       style={{ textAlign: "center", textTransform: "uppercase", color: "black" }}>
-            COMANDA CAMION RETUR
+            ADAUGǍ CAMION
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>

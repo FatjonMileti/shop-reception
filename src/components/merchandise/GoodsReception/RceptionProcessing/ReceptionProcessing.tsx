@@ -19,9 +19,8 @@ const ReceptionProcessing = () => {
   }
 
   const list: Truck[] = [
-    { name: "Truck 1", description: "Description for Truck 1" },
-    { name: "Truck 2", description: "Description for Truck 2" },
-    { name: "Truck 3", description: "Description for Truck 3" }
+    { name: "Camion 2", description: "Descriere camion 2" },
+    { name: "Camion 3", description: "Descriere camion 3" }
   ]
 
   return (

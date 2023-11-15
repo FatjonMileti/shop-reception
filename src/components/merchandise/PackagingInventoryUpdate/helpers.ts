@@ -2,9 +2,9 @@ import * as Yup from "yup"
 
 export const getValidationSchema = () =>
   Yup.object().shape({
-    supportType: Yup.string().required(),
-    quality: Yup.number().required(),
-    defective: Yup.number().required()
+    supportType: Yup.string().required("Tipul de suport este un câmp obligatoriu"),
+    quality: Yup.number().required("calitatea este un domeniu obligatoriu"),
+    defective: Yup.number().required("defect este un câmp obligatoriu")
   })
 
 export const initialValues = {
