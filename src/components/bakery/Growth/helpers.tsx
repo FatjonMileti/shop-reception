@@ -1,17 +1,4 @@
-import { Box } from '@mui/material'
-import { IconCell } from 'components/core-ui/IconCell'
-import { MultivalueCell } from 'components/core-ui/MultivalueCell'
 import * as Yup from 'yup'
-
-// export const divisionTypes = [
-//     { label: 'Super', value: 'SUPER' }, 
-//     { label: 'Hyper', value: 'HYPER' } 
-// ]
-
-// export const statuses = [
-//     { label: "Active", value: "Active" },
-//     { label: "Inactive", value: "Inactive" }
-// ]
 
 export const columns = [
   {
