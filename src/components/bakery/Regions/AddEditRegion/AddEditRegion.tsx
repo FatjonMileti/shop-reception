@@ -80,7 +80,7 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
         onSubmit: async (values: AddEditRegionItem, { resetForm }) => {
             const payload = {
                 ...values,
-                enable: values.enable === 'Active' ? true : false
+                enable: values.enable === 'Active'
             }
             mutate(payload)
             resetForm()
@@ -100,7 +100,7 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
                     name="responsible"
                     label="Responsabil"
                     fullWidth
-                    variant="standard"
+                    variant="outlined"
                     value={formik.values.responsible}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue('responsible', event.currentTarget.value)}
                     error={!!formik.errors.responsible}
@@ -113,7 +113,7 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
                   name="name"
                   label="Denumire regiune"
                   fullWidth
-                  variant="standard"
+                  variant="outlined"
                   value={formik.values.name}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue('name', event.currentTarget.value)}
                   error={!!formik.errors.name}
@@ -124,7 +124,7 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
               <Grid xs={12} item>
                 <Input
                   type="select"
-                  variant="standard"
+                  variant="outlined"
                   name="divisionType"
                   label="Divizie"
                   values={divisionTypes}
@@ -140,7 +140,7 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
               <Grid xs={12} item>
                 <Input
                   type="select"
-                  variant="standard"
+                  variant="outlined"
                   name="enable"
                   label="Status"
                   values={statuses}
