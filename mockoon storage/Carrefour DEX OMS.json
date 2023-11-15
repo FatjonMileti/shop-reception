@@ -3899,16 +3899,12 @@
             {
               "key": "Content-Type",
               "value": "text/csv"
-            },
-            {
-              "key": "Content-Disposition",
-              "value": "attachment;filename=\"test.cvs\""
             }
           ],
-          "bodyType": "FILE",
-          "filePath": "D:\\Workspace\\Carrefour\\dex-front-end\\mockoon storage\\report-2023-06-01-2023-06-22-.csv",
+          "bodyType": "INLINE",
+          "filePath": "",
           "databucketID": "",
-          "sendFileAsBody": true,
+          "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
           "disableTemplating": false,
@@ -4842,40 +4838,6 @@
       ],
       "enabled": true,
       "responseMode": null
-    },
-    {
-      "uuid": "351e51c6-c3be-429c-8e77-e132a040d017",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "sales",
-      "responses": [
-        {
-          "uuid": "86571849-5021-4e42-a9c1-9a89d96a3022",
-          "body": "{\r\n\t\"list\": [\r\n\t\t{\r\n\t\t\t\"id\": \"476\",\r\n\t\t\t\"orderCreationDate\": \"2023-11-02T10:08:16.614611+02:00\",\r\n\t\t\t\"productEan\": \"8059019005980\",\r\n\t\t\t\"productName\": \"MS.SP+USC. C ACSWS4852 CANDY\",\r\n\t\t\t\"productQuantity\": 1,\r\n\t\t\t\"productPrice\": 2149.99,\r\n\t\t\t\"username\": \"user01\",\r\n\t\t\t\"totalPrice\": 2149.99,\r\n\t\t\t\"proformaId\": 381\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"id\": \"432\",\r\n\t\t\t\"orderCreationDate\": \"2023-04-02T11:30:16.614611+02:00\",\r\n\t\t\t\"productEan\": \"25345353543343\",\r\n\t\t\t\"productName\": \"Aspire 5 A515-58M\",\r\n\t\t\t\"productQuantity\": 2,\r\n\t\t\t\"productPrice\": 3499.99,\r\n\t\t\t\"username\": \"user21\",\r\n\t\t\t\"totalPrice\": 6999.98,\r\n\t\t\t\"proformaId\": 234\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"id\": \"123\",\r\n\t\t\t\"orderCreationDate\": \"2023-10-08T10:38:22.614611+02:00\",\r\n\t\t\t\"productEan\": \"253453535345\",\r\n\t\t\t\"productName\": \"Infinissima KP173B10\",\r\n\t\t\t\"productQuantity\": 1,\r\n\t\t\t\"productPrice\": 249.99,\r\n\t\t\t\"username\": \"user01\",\r\n\t\t\t\"totalPrice\": 249.99,\r\n\t\t\t\"proformaId\": 23424\r\n\t\t}\r\n\t],\r\n  \"page\": {\r\n    \"pageSize\": 10,\r\n    \"page\": {{faker 'datatype.number'}},\r\n    \"totalCount\": {{faker 'datatype.number'}},\r\n    \"pageCount\": {{faker 'datatype.number'}}\r\n  },\r\n\t\"summary\": {\r\n\t\t\"totalItems\": 4,\r\n\t\t\"totalPrice\": 9399.96\r\n\t}\r\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id"
-        }
-      ],
-      "enabled": true,
-      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5014,10 +4976,6 @@
     {
       "type": "route",
       "uuid": "e761fbac-002a-4f5e-a318-aefd91001c02"
-    },
-    {
-      "type": "route",
-      "uuid": "351e51c6-c3be-429c-8e77-e132a040d017"
     }
   ],
   "proxyMode": false,
@@ -5045,10 +5003,6 @@
     {
       "key": "Access-Control-Allow-Headers",
       "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-    },
-    {
-      "key": "Access-Control-Expose-Headers",
-      "value": "*"
     }
   ],
   "proxyReqHeaders": [

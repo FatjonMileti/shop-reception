@@ -9,11 +9,16 @@ import { makeCorePostRequest } from 'utils/api'
 import { ChangeEvent } from 'react'
 import { initialValues, validationSchema } from './helpers'
 import { CountyCityInterface, PersoanaJuridica } from '../interfaces'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
-const PersoanaJuridica: React.FC = () => {
+interface PersoanaJuridicaProps {
+  selectNewClient: boolean
+}
+
+const PersoanaJuridica: React.FC<PersoanaJuridicaProps> = ({ selectNewClient }) => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   const addNewClient = async (values: PersoanaJuridica) => {
     const result = await makeCorePostRequest(`/supply-omni/client`, values)
@@ -26,7 +31,12 @@ const PersoanaJuridica: React.FC = () => {
         message: 'Clientul a fost salvat cu success!',
         type: 'success'
       })
-      navigate(`/supplyOmni/shoppingCartClientDetails/${data?.id}`)
+
+      selectNewClient
+        ? navigate(
+            `/supplyOmni/receiptClientDetails/${data?.id}?orderId=${searchParams.get('orderId')}`
+          )
+        : navigate(`/supplyOmni/shoppingCartClientDetails/${data?.id}`)
     },
     onError: res => {
       showNotification({

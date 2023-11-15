@@ -5,5 +5,8 @@ export const URLS = {
   AUTH_SCAN_RECEIPT: '/supplyOmni/scanReceipt/:id',
   AUTH_CLIENT_DETAILS: 'supplyOmni/shoppingCartClientDetails/:id',
   AUTH_PROFORMA_VIEW: '/supplyOmni/proformaView/:id',
+  AUTH_RECEIPT_INVOICE: '/supplyOmni/receiptInvoiceFinalized',
+  AUTH_RECEIPT_CLIENT: '/supplyOmni/receiptClientDetails/:id',
+  AUTH_RECEIPT_SELECT_CLIENT: '/supplyOmni/receiptSelectClient',
   MY_SALES: 'supplyOmni/sales'
 }
