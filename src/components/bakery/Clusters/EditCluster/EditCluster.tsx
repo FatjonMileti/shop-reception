@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { EditClusterItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { getInitialValues, gamaProdus } from '../helpers'
-import { ChangeEvent, useMemo, useState } from 'react'
+import { ChangeEvent, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
 interface EditClusterProps {

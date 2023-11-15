@@ -86,6 +86,22 @@ export interface EditStoreItem {
   zone: string
 }
 
+export interface GrowthItem {
+  id: string
+  type: string
+  growth: string
+  username: string
+  lastChange: string
+}
+
+export interface EditGrowthItem {
+  id: string
+  type: string
+  growth: string
+  username: string
+  lastChange: string
+} 
+
 export interface ClustersItem {
   name: string
   mandatory: string
@@ -103,4 +119,23 @@ export interface EditClusterItem {
 export interface ValueLabelInterface {
   value: string
   label: string
+}
+
+export interface EditProductItem {
+  name: string
+  imageUrl: string
+  id: string
+  pluCode: string | number
+  metiCode: string | number
+  familyModuleName: string
+  fileObject?: any
+}
+
+export interface ProductItem {
+  id: string
+  name: string
+  pluCode: string | number
+  metiCode: string | number
+  familyModuleName: string
+  imageUrl: string
 }

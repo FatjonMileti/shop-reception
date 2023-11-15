@@ -38,13 +38,13 @@ const ReceiptClientDetails: React.FC = () => {
   const { isLoading, mutate } = useMutation(generateInvoice, {
     onSuccess: () => {
       showNotification({
-        message: `Factura a fost generata cu success.`,
+        message: `Factura a fost generată cu success.`,
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `A aparut o eroare la generarea facturii. ${formatErrorMessage(res)}`,
+        message: `A apărut o eroare la generarea facturii. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
@@ -60,14 +60,14 @@ const ReceiptClientDetails: React.FC = () => {
           buttons={{
             topButton: (
               <Button
-                label="Modifica client"
+                label="Modifică client"
                 variant="contained"
                 onClick={() => navigate(`/supplyOmni/receiptSelectClient?orderId=${orderId}`)}
               />
             ),
             bottomButton: (
               <Button
-                label="Genereaza factura"
+                label="Generează factură"
                 variant="contained"
                 onClick={() => mutate({ customerId: id, orderId })}
               />
