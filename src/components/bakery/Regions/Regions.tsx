@@ -4,7 +4,7 @@ import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
 import { Add } from '@mui/icons-material'
-import { UsersManagementItem } from '../interfaces'
+import { RegionItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
@@ -12,7 +12,7 @@ import { AddEditRegion } from './AddEditRegion'
 import { columns } from './helpers'
 
 const Regions = () => {
-  const [tableItems, setTableItems] = useState<UsersManagementItem[]>([])
+  const [tableItems, setTableItems] = useState<RegionItem[]>([])
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)

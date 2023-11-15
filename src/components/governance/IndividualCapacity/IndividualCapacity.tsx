@@ -1,0 +1,322 @@
+import React, { useEffect, useMemo, useState } from 'react'
+import { Box, CircularProgress, Grid, Paper } from '@mui/material'
+import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
+import { makeCoreGetRequest } from 'utils/api'
+import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
+import { useNotification, usePermissions } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { Table } from 'components/core-ui/Table'
+import { Input } from 'components/core-ui/Input'
+import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import {
+  IndividualCapacityTableFilter,
+  TeamAssignmentItem,
+  TeamCapacityTableFilter,
+  ValueLabelInterface
+} from '../interfaces'
+import { useQuery } from 'react-query'
+import { Link } from 'components/core-ui/Link'
+import { useParams, useSearchParams } from 'react-router-dom'
+import dayjs from 'dayjs'
+
+interface EditTeamAssignmentProps {
+  isModalOpen: boolean
+  closeModal: Function
+  setShouldRefreshData: Function
+}
+
+const columns = [
+  {
+    title: 'Person',
+    field: 'teamMemberName',
+    align: 'left',
+    type: 'string',
+    sticky: true
+  },
+  {
+    title: 'IIB Key',
+    field: 'projectIibKey',
+    align: 'left',
+    type: 'string',
+    sticky: true,
+    collapsible: true
+  },
+  {
+    title: 'IPB Key',
+    field: 'projectIpbKey',
+    align: 'left',
+    type: 'string',
+    sticky: true,
+    collapsible: true
+  },
+  {
+    title: 'Assigned Project',
+    field: 'projectName',
+    align: 'left',
+    type: 'string',
+    sticky: true
+  },
+  {
+    title: 'Role',
+    field: 'assignedRole',
+    align: 'left',
+    type: 'string',
+    sticky: true,
+    collapsible: true
+  },
+  {
+    title: 'Start Date',
+    field: 'startDate',
+    align: 'left',
+    type: 'date',
+    sticky: true,
+    collapsible: true
+  },
+  {
+    title: 'End Date',
+    field: 'endDate',
+    align: 'left',
+    type: 'date',
+    sticky: true,
+    collapsible: true
+  },
+  {
+    title: 'T-Shirt Size',
+    field: 'projectTShirtSize',
+    align: 'left',
+    type: 'string',
+    collapsible: true
+  },
+  {
+    title: 'Project Stage',
+    field: 'projectMilestoneStage',
+    align: 'left',
+    type: 'string',
+    collapsible: true
+  },
+  {
+    title: 'Estimated Workload',
+    field: 'estimatedWorkload',
+    align: 'left',
+    type: 'number',
+    collapsible: true
+  },
+  {
+    title: 'T-Shirt Size Multiplier',
+    field: 'tshirtSizeMultiplier',
+    align: 'left',
+    type: 'string',
+    collapsible: true
+  },
+  {
+    title: 'Real Effort',
+    field: 'realEffort',
+    align: 'left',
+    type: 'number',
+    collapsible: true
+  },
+  {
+    title: 'Total available (h)',
+    field: 'totalAvailable',
+    align: 'left',
+    type: 'number',
+    collapsible: true
+  },
+  {
+    title: 'Total timeoff (h)',
+    field: 'totalTimeOff',
+    align: 'left',
+    type: 'number',
+    collapsible: true
+  },
+  {
+    title: 'Real availability (h)',
+    field: 'realAvailability',
+    align: 'left',
+    type: 'number',
+    collapsible: true
+  },
+  {
+    title: 'Total Effort (h)',
+    field: 'totalEffortHours',
+    align: 'left',
+    type: 'number',
+    collapsible: true
+  },
+  {
+    title: 'Effort (md)',
+    field: 'totalEffortManDays',
+    align: 'left',
+    type: 'number',
+    collapsible: true
+  }
+]
+
+const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
+  const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
+  const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const [tableFilter, setTableFilter] = useState<IndividualCapacityTableFilter>({
+    teamMemberId: null,
+    startDate: searchParams.get('startDate'),
+    endDate: null
+  })
+
+  const { id } = useParams()
+
+  const { showNotification } = useNotification()
+
+  const {
+    data: filterOptions,
+    isLoading: isFilterOptionsLoading,
+    error,
+    isError
+  } = useQuery(
+    ['domains'],
+    async () => {
+      const result = await makeCoreGetRequest('/governance/domains')
+      const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
+
+      setDomainFilterValue(resultOptions[0])
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const handleFilterChange = value => {
+    setDomainFilterValue(value)
+    setShouldRefreshData(true)
+  }
+
+  const fetchData = async ({ tableFilters }) => {
+    setIsLoading(true)
+    try {
+      const test = tableFilters.map((filter, index) => {
+        if (!filter.value && !!searchParams.get(filter.name)) {
+          return { name: filter.name, value: searchParams.get(filter.name) }
+        }
+        return filter
+      })
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: '/governance/individualCapacity',
+          extraUrlParams: [{ name: 'id', value: id }],
+          tableFilters: test
+        })
+      )
+
+      setTableItems(response.list)
+      setTotalCount(response.page.totalCount)
+      setIsLoading(false)
+    } catch (error) {
+      showNotification({
+        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const tableFilterFields = [
+    {
+      name: 'teamMemberId',
+      label: 'Person Id',
+      type: 'text',
+
+      filter: (
+        <Input
+          type="text"
+          name="teamMemberId"
+          label="Person Id"
+          variant="standard"
+          onChange={value => setTableFilter({ ...tableFilter, teamMemberId: value })}
+          value={tableFilter.teamMemberId}
+        />
+      )
+    },
+    {
+      name: 'startDate',
+      label: 'Start Date',
+      type: 'date',
+      filter: (
+        <DatePicker
+          value={tableFilter.startDate}
+          onChange={value => setTableFilter({ ...tableFilter, startDate: value })}
+          label="Start date"
+          variant="standard"
+        />
+      )
+    },
+    {
+      name: 'endDate',
+      label: 'End Date',
+      type: 'date',
+      filter: (
+        <DatePicker
+          value={tableFilter.startDate}
+          onChange={value => setTableFilter({ ...tableFilter, startDate: value })}
+          label="Start date"
+          variant="standard"
+        />
+      )
+    }
+  ]
+
+  return (
+    <div className={s.mainContainer}>
+      <Paper className={s.filtersContainer}>
+        <Grid container spacing={4}>
+          {isFilterOptionsLoading && (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+            </div>
+          )}
+
+          <Grid xs={12} md={3} item>
+            <AsyncAutocomplete
+              variant="standard"
+              name="teamMember.domain"
+              label="Domain"
+              disableClearable
+              value={domainFilterValue}
+              options={filterOptions}
+              onChange={handleFilterChange}
+            />
+          </Grid>
+        </Grid>
+      </Paper>
+      {domainFilterValue && (
+        <Box>
+          <Table
+            hideCheckbox
+            orderBy="teamMember.name"
+            order="asc"
+            items={tableItems}
+            fetchData={fetchData}
+            isLoading={isLoading}
+            columns={columns}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            filters={tableFilterFields}
+          />
+        </Box>
+      )}
+    </div>
+  )
+}
+
+export default IndividualCapacity

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Box, CircularProgress, Grid, Paper } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
@@ -12,6 +12,9 @@ import { Input } from 'components/core-ui/Input'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { TeamAssignmentItem, TeamCapacityTableFilter, ValueLabelInterface } from '../interfaces'
 import { useQuery } from 'react-query'
+import { Link } from 'components/core-ui/Link'
+import { useSearchParams } from 'react-router-dom'
+import { buildTableFilterInputs } from '../ProjectMilestones/utils'
 
 interface EditTeamAssignmentProps {
   isModalOpen: boolean
@@ -19,60 +22,69 @@ interface EditTeamAssignmentProps {
   setShouldRefreshData: Function
 }
 
-const columns = [
-  {
-    title: 'Person',
-    field: 'teamMemberName',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Total Effort (MD)',
-    field: 'totalEffort',
-    align: 'left',
-    type: 'number'
-  },
-  {
-    title: 'Total Available (MD)',
-    field: 'totalAvailable',
-    align: 'left',
-    type: 'number'
-  },
-  {
-    title: 'Remaining (MD)',
-    field: 'remaining',
-    align: 'left',
-    type: 'number'
-  },
-  {
-    title: 'Number Of Projects',
-    field: 'numberOfProjects',
-    align: 'left',
-    type: 'number',
-    collapsible: true
-  },
-  {
-    title: 'Base Role',
-    field: 'baseRole',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Assigned Roles',
-    field: 'assignedRoles',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  }
-]
-
 const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
   const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const columns = [
+    {
+      title: 'Person',
+      field: 'teamMemberName',
+      align: 'left',
+      type: 'string',
+      render: (row: any) => (
+        <Link
+          href={`/governance/projectTeam/individualCapacity/${row.id}?${searchParams}`}
+          style={{ textDecoration: 'inherit' }}
+        >
+          {row.teamMemberName}
+        </Link>
+      )
+    },
+    {
+      title: 'Total Effort (MD)',
+      field: 'totalEffort',
+      align: 'left',
+      type: 'number'
+    },
+    {
+      title: 'Total Available (MD)',
+      field: 'totalAvailable',
+      align: 'left',
+      type: 'number'
+    },
+    {
+      title: 'Remaining (MD)',
+      field: 'remaining',
+      align: 'left',
+      type: 'number'
+    },
+    {
+      title: 'Number Of Projects',
+      field: 'numberOfProjects',
+      align: 'left',
+      type: 'number',
+      collapsible: true
+    },
+    {
+      title: 'Base Role',
+      field: 'baseRole',
+      align: 'left',
+      type: 'string',
+      collapsible: true
+    },
+    {
+      title: 'Assigned Roles',
+      field: 'assignedRoles',
+      align: 'left',
+      type: 'string',
+      collapsible: true
+    }
+  ]
 
   const [tableFilter, setTableFilter] = useState<TeamCapacityTableFilter>({
     teamMemberName: null,
@@ -126,7 +138,16 @@ const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
           orderBy
         })
       )
-
+      if (
+        tableFilters &&
+        tableFilters.length > 3 &&
+        (tableFilters[2].value || tableFilters[3].value)
+      ) {
+        setSearchParams({
+          startDate: tableFilters[2].value ?? '',
+          endDate: tableFilters[3].value ?? ''
+        })
+      }
       setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
