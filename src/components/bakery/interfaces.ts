@@ -86,6 +86,20 @@ export interface EditStoreItem {
   zone: string
 }
 
+export interface ClustersItem {
+  name: string
+  mandatory: string
+  enable: string | boolean
+  id: string
+}
+
+export interface EditClusterItem {
+  name: string
+  mandatory: string | boolean
+  enable: string | boolean
+  id: string
+}
+
 export interface ValueLabelInterface {
   value: string
   label: string

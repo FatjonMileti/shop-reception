@@ -3,6 +3,7 @@ export const URLS = {
   AUTH_ZONES: 'bakery/admin/zones',
   AUTH_REGIONS: 'bakery/admin/regions',
   AUTH_STORES: 'bakery/admin/stores',
+  AUTH_CLUSTERS: 'bakery/admin/clusters',
   AUTH_FAMILIES: 'bakery/admin/families',
   AUTH_FAMILY_PRODUCTS: 'bakery/admin/family-products'
 }

@@ -58,7 +58,7 @@ export const getInitialValues = editItem => ({
     ...(editItem?.id ? { id: editItem?.id } : {}),
     name: editItem?.name ?? '',
     divisionType: editItem?.divisionType ?? '',
-    enable: editItem?.enable ? 'Active' : 'Inactive' || '',
+    enable: editItem?.enable ? 'Active' : 'Inactive',
     metiCode: editItem?.metiCode ?? '',
     parentSociety: editItem?.parentSociety ?? '',
     region: editItem?.region ?? '',
