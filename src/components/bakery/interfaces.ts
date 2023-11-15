@@ -130,3 +130,12 @@ export interface EditProductItem {
   familyModuleName: string
   fileObject?: any
 }
+
+export interface ProductItem {
+  id: string
+  name: string
+  pluCode: string | number
+  metiCode: string | number
+  familyModuleName: string
+  imageUrl: string
+}

@@ -3,7 +3,7 @@ import s from './Products.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
-import { StoreItem } from '../interfaces'
+import { ProductItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
@@ -12,7 +12,7 @@ import { toTableRowItems } from './serializers'
 import { EditProduct } from './EditProduct'
 
 const Products = () => {
-  const [tableItems, setTableItems] = useState<StoreItem[]>([])
+  const [tableItems, setTableItems] = useState<ProductItem[]>([])
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
