@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 import { IconCell } from 'components/core-ui/IconCell'
 import { TableFilters } from './interfaces'
+import dayjs from 'dayjs'
 
 export const RESOURCE_URI = '/supply-omni/order'
 
@@ -47,8 +48,8 @@ export const tableColumns = [
 ]
 
 export const defaultTableFilters: TableFilters = {
-  startDate: new Date(),
-  endDate: new Date(),
+  startDate: dayjs(new Date(), 'DD/MM/YYYY'),
+  endDate: dayjs(new Date(), 'DD/MM/YYYY'),
   agentName: null,
   clientName: null,
   productsName: null,

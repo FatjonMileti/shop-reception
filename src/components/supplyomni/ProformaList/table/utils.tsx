@@ -1,6 +1,6 @@
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
-import { TableFilters } from './interfaces'
 import { Input } from 'components/core-ui/Input'
+import { TableFilters } from './interfaces'
 
 export const buildTableFilterInputs = (
   tableFilter: TableFilters,
@@ -75,7 +75,7 @@ export const buildTableFilterInputs = (
       <DatePicker
         label="Data inceput"
         variant="standard"
-        onChange={(value: Date) => setTableFilter({ ...tableFilter, startDate: value })}
+        onChange={(value: any) => console.log(value)}
         value={tableFilter.startDate}
       />
     )
@@ -88,7 +88,7 @@ export const buildTableFilterInputs = (
       <DatePicker
         label="Data sfarsit"
         variant="standard"
-        onChange={(value: Date) => setTableFilter({ ...tableFilter, endDate: value })}
+        onChange={(value: any) => console.log(value)}
         value={tableFilter.endDate}
       />
     )

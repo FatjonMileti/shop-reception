@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { BasePageResponseModel } from 'shared/interfaces'
 
 export interface ProformaTableProps {
@@ -8,8 +9,8 @@ export interface TableFilters {
   agentName: string
   clientName: string
   proformaId: number
-  startDate: Date
-  endDate: Date
+  startDate: dayjs.Dayjs
+  endDate: dayjs.Dayjs
   productsName: string
 }
 

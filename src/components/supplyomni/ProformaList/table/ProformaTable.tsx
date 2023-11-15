@@ -17,6 +17,8 @@ import { buildTableFilterInputs } from './utils'
 import { Box, Typography } from '@mui/material'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { useNavigate } from 'react-router-dom'
+import { Checkbox } from '@fullscreendigital/carrefour-dex-fe'
+import { Filter } from 'components/core-ui/Table/TableDefinitions'
 
 export const ProformaTable: React.FC<ProformaTableProps> = props => {
   const { proformaType } = props
@@ -24,12 +26,15 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
 
-  const [tableState, setTableState] = useState({
+  const [tableItems, setTableItems] = useState<TableRowModel[]>([])
+  const [currentFilters, setCurrentFilters] = useState({
+    page: null,
+    rowsPerPage: null,
     order: null,
     orderBy: null,
-    tableFilters: null
+    tableFilters: null,
+    myProformas: null
   })
-  const [tableItems, setTableItems] = useState<TableRowModel[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [selectedRow, setSelectedRow] = useState<TableRowModel>()
   const [tableFilters, setTableFilters] = useState<TableFilters>(defaultTableFilters)
@@ -75,10 +80,18 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
     return actions
   }, [tableColumns, tableItems])
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, myProformas }) => {
     setIsLoading(true)
     try {
-      tableFilters
+      let filters: Filter[]
+      if (myProformas) {
+        filters = [
+          {
+            name: 'myProformas',
+            value: String(myProformas)
+          }
+        ]
+      }
       const response = (await makeCoreGetRequest(
         toTableGETUrl({
           url: `/supply-omni/order${proformaType === 'active' ? '/active' : ''}`,
@@ -86,13 +99,21 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
           page,
           rowsPerPage,
           order,
-          orderBy
+          orderBy,
+          filters
         })
       )) as ProformaListResponseModel
       setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
-      setTableState({ order, orderBy, tableFilters })
+      setCurrentFilters({
+        page,
+        rowsPerPage,
+        order,
+        orderBy,
+        tableFilters,
+        myProformas
+      })
     } catch (error) {
       setIsLoading(false)
       showNotification({
@@ -112,6 +133,10 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
           itemId={`${selectedRow?.proformaId}`}
           content={<Typography>Are you sure you want to delete this entry?</Typography>}
           setShouldRefreshData={setShouldRefreshData}
+        />
+        <Checkbox
+          label="Proformele mele"
+          onChange={event => fetchData({ ...currentFilters, myProformas: event.target.checked })}
         />
         <Table
           hideCheckbox
