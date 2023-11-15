@@ -66,8 +66,11 @@ const GoodsReception = () => {
               <Button
                 type="button"
                 variant="contained"
-                label="CAMIOANE ASTEPTATE"
+                label="CAMIOANE AȘTEPTATE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_EXPECTED_TRUCKS);
+                }}
               />
             </Grid>}
             {isHubUser && <Grid item xs={12}>
@@ -76,6 +79,9 @@ const GoodsReception = () => {
                 variant="contained"
                 label="ÎNREGISTREAZǍ CAMION"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_REGISTER_TRUCK);
+                }}
               />
             </Grid>}
             {isHubUser && <Grid item xs={12}>
@@ -84,6 +90,9 @@ const GoodsReception = () => {
                 variant="contained"
                 label="ÎN PROCESARE EXPENDIȚIE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_EXPENDITURE_PROCESSING);
+                }}
               />
             </Grid>}
             {isHubUser && <Grid item xs={12}>
@@ -92,6 +101,9 @@ const GoodsReception = () => {
                 variant="contained"
                 label="CAMIOANE EXPEDIATE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_SHIPPED_TRUCKS);
+                }}
               />
             </Grid>}
           </Grid>

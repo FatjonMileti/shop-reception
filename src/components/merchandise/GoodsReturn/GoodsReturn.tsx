@@ -58,6 +58,9 @@ const GoodsReturn = () => {
                 variant="contained"
                 label="RETURURI AȘTEPTATE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_EXPECTED_RETURNS)
+                }}
               />
             </Grid>}
             {isHubUser && <Grid item xs={12}>
@@ -66,6 +69,9 @@ const GoodsReturn = () => {
                 variant="contained"
                 label="RETUR ÎN CURS DE RECEPȚIE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_IN_PROGRESS_RETURN)
+                }}
               />
             </Grid>}
             {isHubUser && <Grid item xs={12}>
@@ -74,6 +80,9 @@ const GoodsReturn = () => {
                 variant="contained"
                 label="ÎNREGISTRARE RETUR"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_RECORD_RETURN)
+                }}
               />
             </Grid>}
             {(isShopUser || isHubUser) && <Grid item xs={12}>
@@ -82,6 +91,9 @@ const GoodsReturn = () => {
                 variant="contained"
                 label="CONTINUARE RETUR"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_CONTINUE_RETURN)
+                }}
               />
             </Grid>}
           </Grid>

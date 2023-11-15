@@ -68,6 +68,9 @@ const Home = () => {
                 variant="contained"
                 label="RETURURI AŞTEPTATE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_EXPECTED_RETURNS);
+                }}
               />
             </Grid>}
             {isWareHouseUser && <Grid item xs={12}>
@@ -76,6 +79,9 @@ const Home = () => {
                 variant="contained"
                 label="RETUR ÎN CURS DE RECEPȚIE"
                 style={{ width: "100%" }}
+                onClick={() => {
+                  navigate(URLS.AUTH_IN_PROGRESS_RETURN);
+                }}
               />
             </Grid>}
           </Grid>

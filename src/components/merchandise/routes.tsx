@@ -12,6 +12,7 @@ import { ReceptionProcessing } from "./GoodsReception/RceptionProcessing"
 import { Delivery } from "./GoodsReception/Delivery"
 import { ConfirmReturnTrucks } from "./GoodsReturn/ConfirmReturnTrucks"
 import { OrderReturnTruck } from "./GoodsReturn/OrderReturnTruck"
+import { ExpectedTrucks } from "./GoodsReturn/ExpectedTrucks"
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -59,6 +60,10 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_PACKAGING_INVENTORY_UPDATE}
         element={<PackagingInventoryUpdate />}
+      />
+      <Route
+        path={URLS.AUTH_EXPECTED_TRUCKS}
+        element={<ExpectedTrucks />}
       />
     </>
   )
