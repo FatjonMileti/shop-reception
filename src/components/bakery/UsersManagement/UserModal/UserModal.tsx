@@ -307,7 +307,7 @@ function UserModal(props) {
                     }
                     type="select"
                     name="enable"
-                    variant="standard"
+                    variant="outlined"
                     width="45%"
                     label="Status"
                     value={editItem?.enable}
