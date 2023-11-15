@@ -16,6 +16,10 @@ import { ExpectedTrucks } from "./GoodsReturn/ExpectedTrucks"
 import { RegisterTruck } from "./GoodsReception/RegisterTruck"
 import { ExpenditureProcessing } from "./GoodsReception/ExpenditureProcessing"
 import { ShippedTrucks } from "./GoodsReception/ShippedTrucks"
+import { ExpectedReturns } from "./GoodsReturn/ExpectedReturns"
+import { InProgressReturn } from "./GoodsReturn/InProgressReturn"
+import { ContinueReturn } from "./GoodsReturn/ContinueReturn"
+import RecordReturn from "./GoodsReturn/RecordReturn/RecordReturn"
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -79,6 +83,22 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_SHIPPED_TRUCKS}
         element={<ShippedTrucks />}
+      />
+      <Route
+        path={URLS.AUTH_EXPECTED_RETURNS}
+        element={<ExpectedReturns />}
+      />
+      <Route
+        path={URLS.AUTH_IN_PROGRESS_RETURN}
+        element={<InProgressReturn />}
+      />
+      <Route
+        path={URLS.AUTH_CONTINUE_RETURN}
+        element={<ContinueReturn />}
+      />
+      <Route
+        path={URLS.AUTH_RECORD_RETURN}
+        element={<RecordReturn />}
       />
     </>
   )
