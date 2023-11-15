@@ -5,6 +5,7 @@ import { UsersManagement } from './UsersManagement'
 import { Zones } from './Zones'
 import { Regions } from './Regions'
 import { Stores } from './Stores'
+import { Growth } from './Growth'
 import { Clusters } from './Clusters'
 import { Families } from './Families'
 import { FamilyProducts } from './Families/FamilyProducts'
@@ -47,6 +48,16 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={Regions}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+        />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GROWTH}
+        element={
+          <PrivateRoute
+            component={Growth}
             applicationPages={applicationPages}
             checkIsAuthorized
         />
