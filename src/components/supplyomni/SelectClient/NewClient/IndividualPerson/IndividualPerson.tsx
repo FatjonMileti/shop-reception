@@ -8,14 +8,14 @@ import { useFormik } from 'formik'
 import { makeCorePostRequest } from 'utils/api'
 import { ChangeEvent } from 'react'
 import { initialValues, validationSchema } from './helpers'
-import { CountyCityInterface, PersoanaFizica } from '../interfaces'
+import { CountyCityInterface, IndividualPerson } from '../interfaces'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-interface PersoanaFizicaProps {
+interface IndividualPersonProps {
   selectNewClient: boolean
 }
 
-const PersoanaFizica: React.FC<PersoanaFizicaProps> = ({ selectNewClient }) => {
+const IndividualPerson: React.FC<IndividualPersonProps> = ({ selectNewClient }) => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
@@ -50,7 +50,7 @@ const PersoanaFizica: React.FC<PersoanaFizicaProps> = ({ selectNewClient }) => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: PersoanaFizica) => {
+    onSubmit: async (values: IndividualPerson) => {
       mutate(values)
     }
   })
@@ -165,4 +165,4 @@ const PersoanaFizica: React.FC<PersoanaFizicaProps> = ({ selectNewClient }) => {
   )
 }
 
-export default PersoanaFizica
+export default IndividualPerson

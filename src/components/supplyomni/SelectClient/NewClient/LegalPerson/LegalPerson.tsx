@@ -8,19 +8,19 @@ import { useFormik } from 'formik'
 import { makeCorePostRequest } from 'utils/api'
 import { ChangeEvent } from 'react'
 import { initialValues, validationSchema } from './helpers'
-import { CountyCityInterface, PersoanaJuridica } from '../interfaces'
+import { CountyCityInterface, LegalPerson } from '../interfaces'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-interface PersoanaJuridicaProps {
+interface LegalPersonProps {
   selectNewClient: boolean
 }
 
-const PersoanaJuridica: React.FC<PersoanaJuridicaProps> = ({ selectNewClient }) => {
+const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
 
-  const addNewClient = async (values: PersoanaJuridica) => {
+  const addNewClient = async (values: LegalPerson) => {
     const result = await makeCorePostRequest(`/supply-omni/client`, values)
     return result
   }
@@ -51,7 +51,7 @@ const PersoanaJuridica: React.FC<PersoanaJuridicaProps> = ({ selectNewClient }) 
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: PersoanaJuridica) => {
+    onSubmit: async (values: LegalPerson) => {
       mutate(values)
     }
   })
@@ -229,4 +229,4 @@ const PersoanaJuridica: React.FC<PersoanaJuridicaProps> = ({ selectNewClient }) 
   )
 }
 
-export default PersoanaJuridica
+export default LegalPerson

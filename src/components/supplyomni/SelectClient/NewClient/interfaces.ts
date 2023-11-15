@@ -3,7 +3,7 @@ export interface CountyCityInterface {
   label: string
 }
 
-export interface PersoanaFizica {
+export interface IndividualPerson {
   name: string
   phone: string
   email: string
@@ -19,7 +19,7 @@ export interface PersoanaFizica {
   type: string
 }
 
-export interface PersoanaJuridica {
+export interface LegalPerson {
   name: string
   cif: string
   tradeRegister: string
