@@ -8,6 +8,7 @@ import { SelectClient } from './SelectClient'
 import { ClientDetails } from './SelectClient/ClientDetails'
 import { ProformaView } from './ProformaView'
 import { ScanReceipt } from './ScanReceipt'
+import { ProformaLists } from './ProformaList'
 import { ReceiptInvoiceFinalized } from './ReceiptInvoiceFinalized'
 import { ReceiptClientDetails } from './ReceiptClientDetails'
 import { ReceiptSelectClient } from './ReceiptSelectClient'
@@ -58,6 +59,16 @@ export const useSupplyOmniRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ProformaView}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PROFORMA_LIST}
+        element={
+          <PrivateRoute
+            component={ProformaLists}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
