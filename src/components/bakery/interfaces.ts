@@ -139,3 +139,13 @@ export interface ProductItem {
   familyModuleName: string
   imageUrl: string
 }
+
+export interface ValueLabelInterface {
+  value: string
+  label: string
+}
+
+export interface IdNameInterface {
+  id: string,
+  name: string
+}
