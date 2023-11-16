@@ -30,7 +30,7 @@ const Delivery = () => {
           <Grid item xs={12}>
             <Typography component="h4" variant="medium"
                         style={{ textAlign: "center", textTransform: "uppercase", color: "black" }}>
-              VALIDATE LIVRARE
+              VALIDARE LIVRARE
             </Typography>
             <Box style={{ margin: "10px", padding: "20px" }}>
               <Typography variant="light" component="p" style={{ textAlign: "center", textTransform: "uppercase" }}>nu

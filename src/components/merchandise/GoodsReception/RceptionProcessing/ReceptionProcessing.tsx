@@ -34,7 +34,7 @@ const ReceptionProcessing = () => {
         <Grid container spacing={2} className={s.wrapper}>
           <Grid item xs={12}>
             <Typography component="h4" variant="medium" style={{ textAlign: "center", textTransform: "uppercase", color: 'black' }}>
-              În procesare receptie
+              În procesare recepție
             </Typography>
             {list.map((item: Truck, index) => (
               <Paper key={index} elevation={3} style={{ margin: "10px", padding: "20px" }}>

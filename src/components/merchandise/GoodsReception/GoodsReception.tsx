@@ -55,7 +55,7 @@ const GoodsReception = () => {
               <Button
                 type="button"
                 variant="contained"
-                label="VALIDATE LIVRARE"
+                label="VALIDARE LIVRARE"
                 style={{ width: "100%" }}
                 onClick={() => {
                   navigate(URLS.AUTH_DELIVERY);
@@ -88,10 +88,10 @@ const GoodsReception = () => {
               <Button
                 type="button"
                 variant="contained"
-                label="ÎN PROCESARE EXPENDIȚIE"
+                label="ÎN PROCESARE EXPEDIȚIE"
                 style={{ width: "100%" }}
                 onClick={() => {
-                  navigate(URLS.AUTH_EXPENDITURE_PROCESSING);
+                  navigate(URLS.AUTH_PROCESSING_SHIPMENT);
                 }}
               />
             </Grid>}

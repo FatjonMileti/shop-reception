@@ -77,7 +77,7 @@ export const useMerchandiseRoutes = applicationPages => {
         element={<RegisterTruck />}
       />
       <Route
-        path={URLS.AUTH_EXPENDITURE_PROCESSING}
+        path={URLS.AUTH_PROCESSING_SHIPMENT}
         element={<ExpenditureProcessing />}
       />
       <Route

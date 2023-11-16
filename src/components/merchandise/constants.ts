@@ -12,7 +12,7 @@ export const URLS = {
   AUTH_PACKAGING_INVENTORY_UPDATE: "/merchandise/packaging-inventory-update",
   AUTH_EXPECTED_TRUCKS: "/merchandise/expected-trucks",
   AUTH_REGISTER_TRUCK: "/merchandise/register-truck",
-  AUTH_EXPENDITURE_PROCESSING: "/merchandise/expenditure-processing",
+  AUTH_PROCESSING_SHIPMENT: "/merchandise/processing-shipment",
   AUTH_SHIPPED_TRUCKS: "/merchandise/shipped-trucks",
   AUTH_EXPECTED_RETURNS: "/merchandise/expected-returns",
   AUTH_IN_PROGRESS_RETURN: "/merchandise/in-progress-return",

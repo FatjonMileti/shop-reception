@@ -59,13 +59,13 @@ const OrderReturnTruck = () => {
         <Grid item xs={12}>
           <Typography component="h4" variant="medium"
                       style={{ textAlign: "center", textTransform: "uppercase", color: "black" }}>
-            COMANDA CAMION RETUR
+            COMANDǍ CAMION RETUR
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Input
                 type="select"
-                label="Locatie descarcare"
+                label="Locație descǎrcare"
                 variant="standard"
                 width="100%"
                 value={formik.values.location}
@@ -77,7 +77,7 @@ const OrderReturnTruck = () => {
             <Grid item xs={12}>
               <Input
                 type="number"
-                label="Numar stive"
+                label="Numǎr stive"
                 variant="standard"
                 width="100%"
                 value={formik.values.stacks}
@@ -88,14 +88,14 @@ const OrderReturnTruck = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography component="p" variant="regular">
-                Pot fi initate comenzi de minim 25 stive si maxim 33.
+                Pot fi inițiate comenzi de minim 25 stive și maxim 33.
               </Typography>
             </Grid>
             <Grid container alignItems="center" justifyContent="center" style={{ marginTop: "20px" }}>
               <Button
                 type="button"
                 variant="contained"
-                label="TRANSMITERE COMANDA"
+                label="TRANSMITERE COMANDǍ"
                 onClick={() => formik.handleSubmit()}
               />
             </Grid>

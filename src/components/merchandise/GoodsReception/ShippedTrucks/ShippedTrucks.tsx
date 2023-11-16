@@ -34,7 +34,7 @@ const ShippedTrucks = () => {
             </Typography>
             <Box style={{ margin: "10px", padding: "20px" }}>
               <Typography variant="light" component="p" style={{ textAlign: "center", textTransform: "uppercase" }}>Nu
-                existǎ camioane expendiate.</Typography>
+                existǎ camioane expediate.</Typography>
             </Box>
           </Grid>
         </Grid>

@@ -7,6 +7,9 @@ import { useMemo } from "react"
 import { getValidationSchema } from "./helpers"
 import { useNavigate } from "react-router-dom"
 import { URLS } from "../constants"
+import FlagIcon from '@mui/icons-material/Flag';
+import PersonIcon from '@mui/icons-material/Person';
+import LockIcon from '@mui/icons-material/Lock';
 
 const Login = () => {
   const { showNotification } = useNotification()
@@ -17,6 +20,7 @@ const Login = () => {
     enableReinitialize: false,
     validateOnChange: false,
     initialValues: {
+      language: "romanian",
       username: "",
       password: ""
     },
@@ -25,6 +29,7 @@ const Login = () => {
       try {
 
         const payload = {
+          language: formik.values.language,
           username: formik.values.username,
           password: formik.values.password
         }
@@ -43,15 +48,39 @@ const Login = () => {
   return (
     <Container component="main" maxWidth="xs" style={{ margin: "auto", marginTop: "20px" }}>
       <Typography component="h1" variant="medium" style={{ textAlign: "center" }}>
-        Login
+        Bine ai venit!
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Input
+            type="select"
+            label="Limba"
+            variant="standard"
+            values={[
+              {
+                value: "romanian",
+                label: "Românǎ"
+              },
+              {
+                value: "english",
+                label: "English"
+              }
+            ]}
+            width="100%"
+            // infoIcon={<FlagIcon />}
+            value={formik.values.language}
+            onChange={event => formik.setFieldValue("language", (event.target as HTMLInputElement).value)}
+            error={!!formik.errors.language}
+            helperText={formik.errors.language as string}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Input
             type="text"
-            label="Username"
+            label="Nume utlizator"
             variant="standard"
             fullWidth={true}
+            // infoIcon={<PersonIcon />}
             value={formik.values.username}
             onChange={event => formik.setFieldValue("username", (event.target as HTMLInputElement).value)}
             error={!!formik.errors.username}
@@ -61,9 +90,10 @@ const Login = () => {
         <Grid item xs={12}>
           <Input
             type="password"
-            label="Password"
+            label="Parolǎ"
             variant="standard"
             width="100%"
+            // infoIcon={<LockIcon />}
             value={formik.values.password}
             onChange={event => formik.setFieldValue("password", (event.target as HTMLInputElement).value)}
             error={!!formik.errors.password}
@@ -74,7 +104,7 @@ const Login = () => {
           <Button
             type="submit"
             variant="contained"
-            label="Sign In"
+            label="AUTENTIFICARE"
             onClick={() => formik.handleSubmit()}
           />
         </Grid>

@@ -65,7 +65,7 @@ const RegisterTruck = () => {
             <Grid item xs={12}>
               <Input
                 type="text"
-                label="Numâr înmatriculare"
+                label="Număr înmatriculare"
                 variant="standard"
                 width="100%"
                 value={formik.values.registrationNumber}

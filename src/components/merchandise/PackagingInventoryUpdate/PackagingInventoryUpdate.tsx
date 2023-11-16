@@ -102,7 +102,7 @@ const PackagingInventoryUpdate = () => {
               <Button
                 type="button"
                 variant="contained"
-                label="CONFIRMIǍ"
+                label="CONFIRMǍ"
                 onClick={() => formik.handleSubmit()}
               />
             </Grid>

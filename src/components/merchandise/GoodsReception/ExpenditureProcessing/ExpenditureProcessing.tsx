@@ -30,7 +30,7 @@ const ExpenditureProcessing = () => {
           <Grid item xs={12}>
             <Typography component="h4" variant="medium"
                         style={{ textAlign: "center", textTransform: "uppercase", color: "black" }}>
-              ÎN PROCESARE EXPENDIȚIE
+              ÎN PROCESARE EXPEDIȚIE
             </Typography>
             <Box style={{ margin: "10px", padding: "20px" }}>
               <Typography variant="light" component="p" style={{ textAlign: "center", textTransform: "uppercase" }}>Nu

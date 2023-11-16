@@ -34,7 +34,7 @@ const GoodsReturn = () => {
               <Button
                 type="button"
                 variant="contained"
-                label="COMANDA CAMION RETUR"
+                label="COMANDǍ CAMION RETUR"
                 style={{ width: "100%" }}
                 onClick={() => {
                   navigate(URLS.AUTH_ORDER_RETURN_TRUCK)

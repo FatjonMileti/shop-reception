@@ -61,7 +61,7 @@ const ExpectedTrucks = () => {
             <Grid item xs={12}>
               <Input
                 type="select"
-                label="SELECTEAZÂ CAMION"
+                label="SELECTEAZǍ CAMION"
                 variant="standard"
                 width="100%"
                 value={formik.values.truck}
@@ -74,7 +74,7 @@ const ExpectedTrucks = () => {
               <Button
                 type="button"
                 variant="contained"
-                label="CONFIRM CAMION"
+                label="CONFIRMĂ CAMION"
                 style={{ width: "100%" }}
                 onClick={() => {
                   formik.handleSubmit()

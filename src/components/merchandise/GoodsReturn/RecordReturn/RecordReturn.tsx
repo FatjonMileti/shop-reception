@@ -102,7 +102,7 @@ const RecordReturn = () => {
               <Button
                 type="button"
                 variant="contained"
-                label="TRANSMITERE COMANDA"
+                label="TRANSMITERE COMANDǍ"
                 onClick={() => formik.handleSubmit()}
               />
             </Grid>
