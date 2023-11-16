@@ -139,3 +139,26 @@ export interface ProductItem {
   familyModuleName: string
   imageUrl: string
 }
+
+export interface ApplicationReportDynamicDtosItem {
+  date: Date
+  printCadentier: boolean
+  modifyCadentier: boolean
+  modifyStoreGrowth: boolean
+  modifyProductGrowth: boolean
+  login: boolean
+}
+
+export interface UsageReportItem {
+  storeName: string
+  username: string
+  lastAccess: Date
+  lastChange: Date
+  applicationReportDynamicDtos: ApplicationReportDynamicDtosItem[]
+}
+
+export interface UsageReportTableFilter {
+  store: string[]
+  startDate: Date
+  endDate: Date
+}

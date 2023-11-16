@@ -17,22 +17,29 @@ export const columns = [
     {
       title: 'Magazin',
       field: 'storeName',
-      align: 'left'
+      align: 'left',
+      sticky: true,
+      stickyRation: 0.20
     },
     {
       title: 'Utilizatori',
       field: 'username',
-      align: 'left'
+      align: 'left',
+      sticky: true,
+      stickyRation: 0.20
     },
     {
       title: 'Data ultimei accesari',
       field: 'lastAccess',
       align: 'left',
+      sticky: true
     },
     {
       title: 'Data ultimei modificari',
       field: 'lastChange',
       align: 'left',
+      sticky: true,
+      stickyRation: 0.20
     },
     {
       title: 'Descarcare Cadantier',
