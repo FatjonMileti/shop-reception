@@ -9,6 +9,9 @@ import { ClientDetails } from './SelectClient/ClientDetails'
 import { ProformaView } from './ProformaView'
 import { ScanReceipt } from './ScanReceipt'
 import { ProformaLists } from './ProformaList'
+import { ReceiptInvoiceFinalized } from './ReceiptInvoiceFinalized'
+import { ReceiptClientDetails } from './ReceiptClientDetails'
+import { ReceiptSelectClient } from './ReceiptSelectClient'
 
 export const useSupplyOmniRoutes = applicationPages => {
   return (
@@ -63,13 +66,49 @@ export const useSupplyOmniRoutes = applicationPages => {
       />
       <Route
         path={URLS.AUTH_PROFORMA_LIST}
-        element={<PrivateRoute component={ProformaLists} applicationPages={applicationPages} />}
+        element={
+          <PrivateRoute
+            component={ProformaLists}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
       <Route
         path={URLS.AUTH_SCAN_RECEIPT}
         element={
           <PrivateRoute
             component={ScanReceipt}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_RECEIPT_INVOICE}
+        element={
+          <PrivateRoute
+            component={ReceiptInvoiceFinalized}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_RECEIPT_CLIENT}
+        element={
+          <PrivateRoute
+            component={ReceiptClientDetails}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_RECEIPT_SELECT_CLIENT}
+        element={
+          <PrivateRoute
+            component={ReceiptSelectClient}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

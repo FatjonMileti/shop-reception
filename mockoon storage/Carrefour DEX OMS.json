@@ -3899,16 +3899,12 @@
             {
               "key": "Content-Type",
               "value": "text/csv"
-            },
-            {
-              "key": "Content-Disposition",
-              "value": "attachment;filename=\"test.cvs\""
             }
           ],
-          "bodyType": "FILE",
-          "filePath": "D:\\Workspace\\Carrefour\\dex-front-end\\mockoon storage\\report-2023-06-01-2023-06-22-.csv",
+          "bodyType": "INLINE",
+          "filePath": "",
           "databucketID": "",
-          "sendFileAsBody": true,
+          "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
           "disableTemplating": false,
@@ -5078,10 +5074,6 @@
     {
       "key": "Access-Control-Allow-Headers",
       "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
-    },
-    {
-      "key": "Access-Control-Expose-Headers",
-      "value": "*"
     }
   ],
   "proxyReqHeaders": [

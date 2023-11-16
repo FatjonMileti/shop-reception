@@ -9,13 +9,18 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { columns, toTableRowItems } from './helpers'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { CreateClientModal } from './CreateClientModal'
 
-const ExistingClient: React.FC = () => {
+interface ExistingClientProps {
+  selectNewClient?: boolean
+}
+
+const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
+  const { id } = useParams()
 
   const [searchField, setSearchField] = useState<string>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -131,7 +136,14 @@ const ExistingClient: React.FC = () => {
                   labelColor: 'white',
                   typographyVariant: 'medium',
                   backgroundColor: '#33691E',
-                  onClick: (e, rowId) => navigate(`/supplyOmni/shoppingCartClientDetails/${rowId}`)
+                  onClick: (e, rowId) =>
+                    selectNewClient
+                      ? navigate(
+                          `/supplyOmni/receiptClientDetails/${rowId}?orderId=${searchParams.get(
+                            'orderId'
+                          )}`
+                        )
+                      : navigate(`/supplyOmni/shoppingCartClientDetails/${rowId}`)
                 }
               ]}
             />

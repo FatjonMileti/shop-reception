@@ -1,19 +1,23 @@
 import { Grid, Paper } from '@mui/material'
 import s from './NewClient.modules.scss'
 import { ChangeEvent, useState } from 'react'
-import { PersoanaFizica } from './PersoanaFizica'
-import { PersoanaJuridica } from './PersoanaJuridica'
+import { IndividualPerson } from './IndividualPerson'
+import { LegalPerson } from './LegalPerson'
 
-const NewClient: React.FC = () => {
-  const [clientType, setClientType] = useState<string>('persoanaFizica')
+interface NewClientProps {
+  selectNewClient?: boolean
+}
+
+const NewClient: React.FC<NewClientProps> = ({ selectNewClient }) => {
+  const [clientType, setClientType] = useState<string>('individualPerson')
 
   const onClientTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
     setClientType(e.target.value)
   }
 
   const renderClientType = {
-    persoanaFizica: <PersoanaFizica />,
-    persoanaJuridica: <PersoanaJuridica />
+    individualPerson: <IndividualPerson selectNewClient={selectNewClient} />,
+    legalPerson: <LegalPerson selectNewClient={selectNewClient} />
   }
 
   return (
@@ -24,8 +28,8 @@ const NewClient: React.FC = () => {
             <label className={s.select}>
               <input
                 type="radio"
-                value="persoanaFizica"
-                checked={clientType === 'persoanaFizica'}
+                value="individualPerson"
+                checked={clientType === 'individualPerson'}
                 onChange={onClientTypeChange}
                 className={s.radioButton}
               />
@@ -35,8 +39,8 @@ const NewClient: React.FC = () => {
             <label className={s.select}>
               <input
                 type="radio"
-                value="persoanaJuridica"
-                checked={clientType === 'persoanaJuridica'}
+                value="legalPerson"
+                checked={clientType === 'legalPerson'}
                 onChange={onClientTypeChange}
                 className={s.radioButton}
               />
