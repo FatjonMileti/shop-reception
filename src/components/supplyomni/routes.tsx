@@ -8,6 +8,9 @@ import { SelectClient } from './SelectClient'
 import { ClientDetails } from './SelectClient/ClientDetails'
 import { ProformaView } from './ProformaView'
 import { ScanReceipt } from './ScanReceipt'
+import { ReceiptInvoiceFinalized } from './ReceiptInvoiceFinalized'
+import { ReceiptClientDetails } from './ReceiptClientDetails'
+import { ReceiptSelectClient } from './ReceiptSelectClient'
 
 export const useSupplyOmniRoutes = applicationPages => {
   return (
@@ -65,6 +68,36 @@ export const useSupplyOmniRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ScanReceipt}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_RECEIPT_INVOICE}
+        element={
+          <PrivateRoute
+            component={ReceiptInvoiceFinalized}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_RECEIPT_CLIENT}
+        element={
+          <PrivateRoute
+            component={ReceiptClientDetails}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_RECEIPT_SELECT_CLIENT}
+        element={
+          <PrivateRoute
+            component={ReceiptSelectClient}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

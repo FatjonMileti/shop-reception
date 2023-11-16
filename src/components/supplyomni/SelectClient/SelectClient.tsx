@@ -2,15 +2,19 @@ import { Tabs } from 'components/core-ui/Tabs'
 import { ExistingClient } from './ExistingClient'
 import { NewClient } from './NewClient'
 
-const SelectClient: React.FC = () => {
+interface SelectClientProps {
+  selectNewClient?: boolean
+}
+
+const SelectClient: React.FC<SelectClientProps> = ({ selectNewClient }) => {
   const tabs = [
     {
-      content: <ExistingClient />,
+      content: <ExistingClient selectNewClient={selectNewClient} />,
       label: 'Client existent',
       tabIndex: 0
     },
     {
-      content: <NewClient />,
+      content: <NewClient selectNewClient={selectNewClient} />,
       label: 'Client nou',
       tabIndex: 1
     }

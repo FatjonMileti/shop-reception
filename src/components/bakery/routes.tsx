@@ -9,6 +9,7 @@ import { Growth } from './Growth'
 import { Clusters } from './Clusters'
 import { Families } from './Families'
 import { FamilyProducts } from './Families/FamilyProducts'
+import { Products } from './Products'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -98,6 +99,16 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={FamilyProducts}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+        />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PRODUCTS}
+        element={
+          <PrivateRoute
+            component={Products}
             applicationPages={applicationPages}
             checkIsAuthorized
         />

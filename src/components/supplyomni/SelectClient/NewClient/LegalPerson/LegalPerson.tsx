@@ -8,14 +8,19 @@ import { useFormik } from 'formik'
 import { makeCorePostRequest } from 'utils/api'
 import { ChangeEvent } from 'react'
 import { initialValues, validationSchema } from './helpers'
-import { CountyCityInterface, PersoanaJuridica } from '../interfaces'
-import { useNavigate } from 'react-router-dom'
+import { CountyCityInterface, LegalPerson } from '../interfaces'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
-const PersoanaJuridica: React.FC = () => {
+interface LegalPersonProps {
+  selectNewClient: boolean
+}
+
+const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
-  const addNewClient = async (values: PersoanaJuridica) => {
+  const addNewClient = async (values: LegalPerson) => {
     const result = await makeCorePostRequest(`/supply-omni/client`, values)
     return result
   }
@@ -26,7 +31,12 @@ const PersoanaJuridica: React.FC = () => {
         message: 'Clientul a fost salvat cu success!',
         type: 'success'
       })
-      navigate(`/supplyOmni/shoppingCartClientDetails/${data?.id}`)
+
+      selectNewClient
+        ? navigate(
+            `/supplyOmni/receiptClientDetails/${data?.id}?orderId=${searchParams.get('orderId')}`
+          )
+        : navigate(`/supplyOmni/shoppingCartClientDetails/${data?.id}`)
     },
     onError: res => {
       showNotification({
@@ -41,7 +51,7 @@ const PersoanaJuridica: React.FC = () => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: PersoanaJuridica) => {
+    onSubmit: async (values: LegalPerson) => {
       mutate(values)
     }
   })
@@ -219,4 +229,4 @@ const PersoanaJuridica: React.FC = () => {
   )
 }
 
-export default PersoanaJuridica
+export default LegalPerson

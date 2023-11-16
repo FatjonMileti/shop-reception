@@ -20,7 +20,6 @@ import { PageInfo } from 'components/core-ui/PageInfo'
 import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { PlusMinusNumberInput } from 'components/core-ui/PlusMinusNumberInput'
 import { PriceSpan } from 'components/core-ui/PriceSpan'
-import { ReceiptInvoiceFinalized } from 'components/core-ui/ReceiptInvoiceFinalized'
 import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
 import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
 import { ShoppingCart } from 'components/core-ui/ShoppingCart'
@@ -73,7 +72,6 @@ export const Components = {
   PdfViewer,
   PlusMinusNumberInput,
   PriceSpan,
-  ReceiptInvoiceFinalized,
   ReceiptBarcodeScanner,
   SimpleKeyValuePairs,
   ShoppingCart,
