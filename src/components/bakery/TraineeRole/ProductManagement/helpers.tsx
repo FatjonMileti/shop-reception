@@ -27,68 +27,57 @@ export const columns = [
   {
     title: 'Cod EAN',
     field: 'eanCodes',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Cod PLU',
     field: 'pluCode',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Cod APPEL PRIX',
     field: 'appelCodes',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Raion',
     field: 'familyModuleName',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Familie',
     field: 'familyName',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Subfamilie',
     field: 'subfamily',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'UB',
     field: 'unitBusiness',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Status',
     field: 'status',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Furnizor',
     field: 'provider',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Metoda fabricatie',
     field: 'fabricationMethod',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Cluster',
     field: 'clusterName',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Obligatoriu',
@@ -97,25 +86,31 @@ export const columns = [
       <Box>
         <IconCell value={row.clusterMandatory ? 'active' : 'inactive'} />
       </Box>
-    ),
-    collapsible: true
+    )
   },
   {
     title: 'Produs Cadentier',
-    field: 'test',
+    field: 'scheduleProduct',
     align: 'left',
-    collapsible: true
+    render: (row: TableItem) => (
+      <Box>
+        <IconCell value={row.scheduleProduct ? 'active' : 'inactive'} />
+      </Box>
+    )
   },
   {
     title: 'Stoc minim prezentare',
     field: 'minStock',
-    align: 'left',
-    collapsible: true
+    align: 'left'
   },
   {
     title: 'Produs nou',
     field: 'newProduct',
     align: 'left',
-    collapsible: true
+    render: (row: TableItem) => (
+      <Box>
+        <IconCell value={row.newProduct ? 'active' : 'inactive'} />
+      </Box>
+    )
   }
 ]
