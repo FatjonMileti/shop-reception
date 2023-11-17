@@ -9,3 +9,7 @@ export interface BasePageResponseModel<T> {
   list: T[]
   page: PageDetailsModel
 }
+
+export interface GovernanceDomainModel {
+  domain: string
+}
