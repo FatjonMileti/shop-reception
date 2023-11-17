@@ -96,16 +96,6 @@ export const useBakeryRoutes = applicationPages => {
         }
       />
       <Route
-        path={URLS.AUTH_USAGE_REPORT}
-        element={
-          <PrivateRoute
-            component={FamilyProducts}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-        />
-        }
-      />
-      <Route
         path={URLS.AUTH_PRODUCTS}
         element={
           <PrivateRoute

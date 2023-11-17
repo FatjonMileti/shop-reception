@@ -3,49 +3,41 @@ import { IconCell } from 'components/core-ui/IconCell'
 import { MultivalueCell } from 'components/core-ui/MultivalueCell'
 import * as Yup from 'yup'
 
-export const divisionTypes = [
-    { label: 'Super', value: 'SUPER' }, 
-    { label: 'Hyper', value: 'HYPER' } 
-]
-
-export const statuses = [
-    { label: "Active", value: "Active" },
-    { label: "Inactive", value: "Inactive" }
-]
-
 export const columns = [
     {
       title: 'Magazin',
       field: 'storeName',
       align: 'left',
       sticky: true,
-      stickyRation: 0.20
     },
     {
-      title: 'Utilizatori',
+      title: 'Utilizator',
       field: 'username',
       align: 'left',
       sticky: true,
-      stickyRation: 0.20
     },
     {
       title: 'Data ultimei accesari',
       field: 'lastAccess',
       align: 'left',
-      sticky: true
+      sticky: true,
     },
     {
       title: 'Data ultimei modificari',
       field: 'lastChange',
       align: 'left',
       sticky: true,
-      stickyRation: 0.20
     },
     {
       title: 'Descarcare Cadantier',
       field: 'printCadentier',
       align: 'left',
       minWidth: '160px',
+      filterDep: {
+        name: ["startDate", "endDate"],
+        type: 'daily'
+      },
+      isDynamic: true,
       render: row => (
         <Box>
           <IconCell value={'active'}/>
@@ -57,6 +49,11 @@ export const columns = [
         field: 'modifyCadentier',
         align: 'left',
         minWidth: '200px',
+        filterDep: {
+          name: ["startDate", "endDate"],
+          type: 'daily'
+        },
+        isDynamic: true,
         render: row => (
             <Box>
               <IconCell value={'inactive'} />
@@ -68,6 +65,11 @@ export const columns = [
         field: 'modifyStoreGrowth',
         align: 'left',
         minWidth: '250px',
+        filterDep: {
+          name: ["startDate", "endDate"],
+          type: 'daily'
+        },
+        isDynamic: true,
         render: row => (
             <Box>
               <IconCell value={'active'} />
@@ -79,6 +81,11 @@ export const columns = [
         field: 'modifyProductGrowth',
         align: 'left',
         minWidth: '250px',
+        filterDep: {
+          name: ["startDate", "endDate"],
+          type: 'daily'
+        },
+        isDynamic: true,
         render: row => (
             <Box>
               <IconCell value={'active'} />
@@ -90,6 +97,11 @@ export const columns = [
         field: 'login',
         align: 'left',
         minWidth: '180px',
+        filterDep: {
+          name: ["startDate", "endDate"],
+          type: 'daily'
+        },
+        isDynamic: true,
         render: row => (
             <Box>
               <IconCell value={'active'} />

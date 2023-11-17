@@ -128,7 +128,7 @@ export interface EditProductItem {
   pluCode: string | number
   metiCode: string | number
   familyModuleName: string
-  fileObject?: any
+  fileObject?: File
 }
 
 export interface ProductItem {
@@ -158,7 +158,8 @@ export interface UsageReportItem {
 }
 
 export interface UsageReportTableFilter {
-  store: string[]
+  store: ValueLabelInterface[]
+  // store: string[]
   startDate: Date
   endDate: Date
 }

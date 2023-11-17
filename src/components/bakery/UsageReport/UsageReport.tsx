@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Grid, Paper } from '@mui/material'
 import s from './UsageReport.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
@@ -11,7 +11,7 @@ import { columns } from './helpers'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useQuery } from 'react-query'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
-import { toAsyncSelectOptions } from './serializers'
+import { toAsyncSelectOptions, toTableRowItems } from './serializers'
 
 const UsageReport = () => {
   const [tableItems, setTableItems] = useState<ZoneItem[]>([])
@@ -22,8 +22,8 @@ const UsageReport = () => {
   
   const [tableFilter, setTableFilter] = useState<UsageReportTableFilter>({
     store: null,
-    startDate: null,
-    endDate: null
+    startDate: new Date('2023-11-14'),
+    endDate: new Date('2023-11-14')
   })
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -41,7 +41,7 @@ const UsageReport = () => {
           orderBy
         })
       )
-      setTableItems(response.list)
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -69,9 +69,10 @@ const UsageReport = () => {
           type: 'error'
         })
       },
-      // enabled: false
+      enabled: false
     }
   )
+    console.log(stores)
 
   const tableFilterFields = [
     {
@@ -98,6 +99,7 @@ const UsageReport = () => {
             onChange={value => setTableFilter({ ...tableFilter, endDate: value })}
             label="Data sfarsit"
             variant="standard"
+            required
           />
         )
       },
@@ -115,7 +117,6 @@ const UsageReport = () => {
       //           variant="outlined"
       //           name="store"
       //           label="Sursa volum de lucru"
-      //           // loadInfoMessage="Te rog asteapta pana vor fi afisate toate magazinele"
       //           value={tableFilter.store}
       //           options={stores}
       //           onChange={value => setTableFilter({ ...tableFilter, store: tableFilter.store.push(String(value))})}
@@ -129,8 +130,23 @@ const UsageReport = () => {
 
   return (
     <div className={s.mainContainer}>
+      <Paper className={s.filtersContainer}>
+        <Grid container spacing={4}>
+          <Grid xs={12} md={3} item>
+            <AsyncAutocomplete
+              variant="outlined"
+              name="store"
+              label="Magazin"
+              disableClearable
+              value={store.value}
+              options={storeOptions}
+              // onChange={handleFilterChange}
+            />
+          </Grid>
+        </Grid>
+      </Paper>
       <Box>
-        {/* <Table
+        <Table
           hideCheckbox
           columns={columns}
           items={tableItems}
@@ -139,7 +155,12 @@ const UsageReport = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-        /> */}
+          // filters={tableFilterFields}
+          stickyRatio={0.45}
+          maxHeight="600px"
+          hasStickyHeader
+          frequency="day"
+        />
       </Box>
     </div>
   )
