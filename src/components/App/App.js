@@ -24,6 +24,7 @@ import { useGovernanceRoutes } from 'components/governance/routes'
 import { useVolumetryRoutes } from 'components/volumetry/routes'
 import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
 import { useMerchandiseRoutes } from "../merchandise/routes";
+import { useShopReceptionRoutes } from "../shop-reception/routes"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -118,6 +119,7 @@ const App = () => {
   const volumetryRoutes = useVolumetryRoutes(applicationPages)
   const supplyOmniRoutes = useSupplyOmniRoutes(applicationPages)
   const merchandiseRoutes = useMerchandiseRoutes(applicationPages)
+  const shopReceptionRoutes = useShopReceptionRoutes(applicationPages)
 
   return (
     <AuthProvider {...oidcConfig}>
@@ -147,6 +149,7 @@ const App = () => {
                 {volumetryRoutes}
                 {supplyOmniRoutes}
                 {merchandiseRoutes}
+                {shopReceptionRoutes}
                 {applicationModulesPages.map(page =>
                   createRoute(
                     {

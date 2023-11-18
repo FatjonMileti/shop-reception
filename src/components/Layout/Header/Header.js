@@ -27,6 +27,17 @@ const DesktopAppBar = ({ handleOpenMenu }) => {
     menuIcon={
       <span className={s.notificationsContainer}>{/* <NotificationsNoneOutlined /> */}</span>
     }
+    leftItems={
+      [
+        {
+          onClick: x => handleOpenMenu(x),
+          iconProps: {
+            icon: <Menu />,
+            iconButtonProps: { size: "large" }
+          }
+        }
+      ]
+    }
     rightItems={
       isMenuOpen
         ? []
