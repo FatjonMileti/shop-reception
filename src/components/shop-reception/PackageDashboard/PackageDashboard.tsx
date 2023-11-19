@@ -10,35 +10,35 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 
 const links = [
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="FireTruck" fill="white" />,
     title: "Listă camioane retur"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="Inventory2" fill="white" />,
     title: "Rulaj ambalaje"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="ShoppingBag" fill="white" />,
     title: "Sold ambalaje"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="AssignmentReturn" fill="white" />,
     title: "Litigii ambalaje - Retur magazine"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="Bloodtype" fill="white" />,
     title: "Diferenţe tip ambalaj"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="KeyboardReturn" fill="white" />,
     title: "Ambalaje returnate"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="ConfirmationNumber" fill="white" />,
     title: "Conformitate ambalaje"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="MoreTime" fill="white" />,
     title: "Litigii ambalaje - Administrare timer"
   }
 ]
@@ -53,7 +53,7 @@ const PackageDashboard = () => {
   return (
     <Paper className={s.paper}>
       <Typography component="h2" variant="regular"
-                  style={{ textAlign: "center", textTransform: "uppercase" }}>Tabloul de bord pachet</Typography>
+                  style={{ textAlign: "center", textTransform: "uppercase" }}>Ambalaje</Typography>
 
       <Toolbar className={s.toolbar}>
         <Button

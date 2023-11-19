@@ -10,31 +10,31 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 
 const links = [
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="AirplaneTicket" fill="white" />,
     title: "Bonuri de livrare"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="FireTruck" fill="white" />,
     title: "Listă camioane marfă"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="BugReport" fill="white" />,
     title: "Suporţi cu destinaţie eronată"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="SentimentDissatisfied" fill="white" />,
     title: "Produse necomandate"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="AttachFileSharp" fill="white" />,
     title: "Fişiere Meti"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="ListAlt" fill="white" />,
     title: "Produse cu diferenţe"
   },
   {
-    icon: <Icon iconName="Admin" fill="white" />,
+    icon: <Icon iconName="HelpCenter" fill="white" />,
     title: "Transabilitate suport"
   }
 ]
@@ -49,7 +49,7 @@ const ReceptionDashboard = () => {
   return (
     <Paper className={s.paper}>
       <Typography component="h2" variant="regular"
-                  style={{ textAlign: "center", textTransform: "uppercase" }}>Tabloul de bord de recepție</Typography>
+                  style={{ textAlign: "center", textTransform: "uppercase" }}>Recepţie marfă</Typography>
 
       <Toolbar className={s.toolbar}>
         <Button

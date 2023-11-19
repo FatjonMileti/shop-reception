@@ -69,7 +69,7 @@ const AdminDashboard = () => {
   return (
     <Paper className={s.paper}>
       <Typography component="h2" variant="regular"
-                  style={{ textAlign: "center", textTransform: "uppercase" }}>Tabloul de bord administrativ</Typography>
+                  style={{ textAlign: "center", textTransform: "uppercase" }}>Administrare</Typography>
 
       <Toolbar className={s.toolbar}>
         <Button

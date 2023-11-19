@@ -17,9 +17,6 @@ const Home = () => {
 
   return (
     <Paper className={s.paper}>
-      <Typography component="h2" variant="regular"
-                  style={{ textAlign: "center", textTransform: "uppercase" }}>ACASĂ</Typography>
-
       <Toolbar className={s.toolbar}>
         <Button label="Manual utilizare aplicaţie mobil" size="small" variant="outlined">
           <DownloadIcon />
