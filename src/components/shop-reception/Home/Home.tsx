@@ -5,6 +5,8 @@ import { URLS } from "../constants"
 import { useNavigate } from "react-router-dom"
 import { Icon } from "../../core-ui/Icon"
 import { IconBox } from "../IconBox"
+import DownloadIcon from '@mui/icons-material/Download';
+import Toolbar from "@mui/material/Toolbar"
 
 const Home = () => {
   const navigate = useNavigate()
@@ -17,6 +19,22 @@ const Home = () => {
     <Paper className={s.paper}>
       <Typography component="h2" variant="regular"
                   style={{ textAlign: "center", textTransform: "uppercase" }}>ACASĂ</Typography>
+
+      <Toolbar className={s.toolbar}>
+        <Button label="Manual utilizare aplicaţie mobil" size="small" variant="outlined">
+          <DownloadIcon />
+        </Button>
+        <Button label="Manual utilizare aplicaţie administrare" size="small" variant="outlined">
+          <DownloadIcon />
+        </Button>
+        <Button label="APK Receptie Marfa V0.7.4" size="small" variant="outlined">
+          <DownloadIcon />
+        </Button>
+        <Button label="APK Receptie Marfa V0.7.5" size="small" variant="outlined">
+          <DownloadIcon />
+        </Button>
+      </Toolbar>
+
       <Box className={s.container}>
         <IconBox
           icon={<Icon iconName="Admin" fill="white" />}
