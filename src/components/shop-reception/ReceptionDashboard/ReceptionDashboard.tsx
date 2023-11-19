@@ -1,34 +1,40 @@
-import { Grid, Container, Paper, Box } from "@mui/material"
+import { Paper, Box } from "@mui/material"
 import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
 import s from "./ReceptionDashboard.modules.scss"
 import { URLS } from "../constants"
 import { useNavigate } from "react-router-dom"
 import { Icon } from "../../core-ui/Icon"
 import { IconBox } from "../IconBox"
-import DownloadIcon from "@mui/icons-material/Download"
 import Toolbar from "@mui/material/Toolbar"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 
 const links = [
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Bonuri de livrare"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Listă camioane marfă"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Suporţi cu destinaţie eronată"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Produse necomandate"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Fişiere Meti"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Produse cu diferenţe"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Transabilitate suport"
   }
 ]
@@ -59,7 +65,7 @@ const ReceptionDashboard = () => {
       <Box className={s.container}>
         {links.map((link, index) => (
           <IconBox
-            icon={<Icon iconName="Admin" fill="white" />}
+            icon={link.icon}
             onClick={() => null}
             title={link.title}
           />

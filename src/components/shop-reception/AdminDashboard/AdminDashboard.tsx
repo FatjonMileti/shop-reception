@@ -5,44 +5,56 @@ import { URLS } from "../constants"
 import { useNavigate } from "react-router-dom"
 import { Icon } from "../../core-ui/Icon"
 import { IconBox } from "../IconBox"
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import Toolbar from "@mui/material/Toolbar"
 
 const links = [
   {
+    icon: <Icon iconName="Storage" fill="white" />,
     title: "Administrare depozite"
   },
   {
+    icon: <Icon iconName="DeviceHub" fill="white" />,
     title: "Administrare huburi"
   },
   {
+    icon: <Icon iconName="ShoppingBasket" fill="white" />,
     title: "Administrare magazine"
   },
   {
+    icon: <Icon iconName="Public" fill="white" />,
     title: "Administrare regiuni"
   },
   {
+    icon: <Icon iconName="VerticalAlignBottom" fill="white" />,
     title: "Centralizare magazine şi huburi"
   },
   {
+    icon: <Icon iconName="AdfScanner" fill="white" />,
     title: "Administrare tipuri de scanare"
   },
   {
+    icon: <Icon iconName="RuleFolder" fill="white" />,
     title: "Prag valabilitate subfamilii"
   },
   {
+    icon: <Icon iconName="Inventory" fill="white" />,
     title: "Listă produse METI"
   },
   {
+    icon: <Icon iconName="Favorite" fill="white" />,
     title: "Administrare produse sensibile"
   },
   {
+    icon: <Icon iconName="Recycling" fill="white" />,
     title: "Administrare tipuri de ambalaje"
   },
   {
+    icon: <Icon iconName="AccessAlarm" fill="white" />,
     title: "Administrare produse cu DLC scurt"
   },
   {
+    icon: <Icon iconName="DocumentScanner" fill="white" />,
     title: "Fişiere recepţie Infolog"
   }
 ]
@@ -73,7 +85,7 @@ const AdminDashboard = () => {
       <Box className={s.container}>
         {links.map((link, index) => (
           <IconBox
-            icon={<Icon iconName="Admin" fill="white" />}
+            icon={link.icon ?? <Icon iconName="Admin" fill="white" />}
             onClick={() => null}
             title={link.title}
           />

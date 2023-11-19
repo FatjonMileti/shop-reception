@@ -10,27 +10,35 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 
 const links = [
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Listă camioane retur"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Rulaj ambalaje"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Sold ambalaje"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Litigii ambalaje - Retur magazine"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Diferenţe tip ambalaj"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Ambalaje returnate"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Conformitate ambalaje"
   },
   {
+    icon: <Icon iconName="Admin" fill="white" />,
     title: "Litigii ambalaje - Administrare timer"
   }
 ]
@@ -61,7 +69,7 @@ const PackageDashboard = () => {
       <Box className={s.container}>
         {links.map((link, index) => (
           <IconBox
-            icon={<Icon iconName="Admin" fill="white" />}
+            icon={link.icon}
             onClick={() => null}
             title={link.title}
           />
