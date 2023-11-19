@@ -14,7 +14,7 @@ import s from "./AdminHeader.scss"
 
 const AdminHeader = ({ handleOpenMenu }) => {
   const [anchorEl, setAnchorEl] = useState(null)
-  const [selectedLanguage, setSelectedLanguage] = useState("English")
+  const [selectedLanguage, setSelectedLanguage] = useState("Română")
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget)
@@ -62,8 +62,8 @@ const AdminHeader = ({ handleOpenMenu }) => {
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
+        <MenuItem onClick={() => handleLanguageSelect("Română")}>Română</MenuItem>
         <MenuItem onClick={() => handleLanguageSelect("English")}>English</MenuItem>
-        <MenuItem onClick={() => handleLanguageSelect("Romanian")}>Romanian</MenuItem>
         {/* Add more language options as needed */}
       </Menu>
       <Typography variant="body2" color="inherit" sx={{ marginLeft: 1 }}>

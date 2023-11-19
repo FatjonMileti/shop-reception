@@ -4,6 +4,7 @@ import s from "./Home.modules.scss"
 import { URLS } from "../constants"
 import { useNavigate } from "react-router-dom"
 import { Icon } from "../../core-ui/Icon"
+import { IconBox } from "../IconBox"
 
 const Home = () => {
   const navigate = useNavigate()
@@ -14,41 +15,24 @@ const Home = () => {
 
   return (
     <Paper className={s.paper}>
-      <Typography component="h2" variant="regular" style={{ textAlign: "center", textTransform: "uppercase" }}>Home</Typography>
+      <Typography component="h2" variant="regular"
+                  style={{ textAlign: "center", textTransform: "uppercase" }}>ACASĂ</Typography>
       <Box className={s.container}>
-        <Box className={s.applicationsWrapper}>
-          <div
-            onClick={() => null}
-            className={s.applicationContainer}
-          >
-            <div className={s.iconContainer}>
-              <Icon iconName="Admin" fill="white" />
-            </div>
-            <span className={s.applicationName}>Administration</span>
-          </div>
-        </Box>
-        <Box className={s.applicationsWrapper}>
-          <div
-            onClick={() => null}
-            className={s.applicationContainer}
-          >
-            <div className={s.iconContainer}>
-              <Icon iconName="StoreManager" fill="white" />
-            </div>
-            <span className={s.applicationName}>Shop reception</span>
-          </div>
-        </Box>
-        <Box className={s.applicationsWrapper}>
-          <div
-            onClick={() => null}
-            className={s.applicationContainer}
-          >
-            <div className={s.iconContainer}>
-              <Icon iconName="ClustersManagement" fill="white" />
-            </div>
-            <span className={s.applicationName}>Packages</span>
-          </div>
-        </Box>
+        <IconBox
+          icon={<Icon iconName="Admin" fill="white" />}
+          onClick={() => null}
+          title="Administrare"
+        />
+        <IconBox
+          icon={<Icon iconName="StoreManager" fill="white" />}
+          onClick={() => null}
+          title="Recepţie marfă"
+        />
+        <IconBox
+          icon={<Icon iconName="ClustersManagement" fill="white" />}
+          onClick={() => null}
+          title="Ambalaje"
+        />
       </Box>
     </Paper>
   )
