@@ -40,7 +40,10 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
         const payload = toEffortMatrixPayload(formik.values)
 
         if (isEdit) {
-          await makeCorePutRequest(`/governance/effortMatrix/${formik.values.id}`, payload)
+          await makeCorePutRequest(`/governance/effortMatrix/${formik.values.id}`, {
+            ...payload,
+            role: formik.values.role
+          })
         } else {
           await makeCorePostRequest('/governance/effortMatrix', payload)
         }
