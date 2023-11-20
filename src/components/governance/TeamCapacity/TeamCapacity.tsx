@@ -15,13 +15,7 @@ import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { TeamAssignmentItem, TeamCapacityTableFilter, ValueLabelInterface } from '../interfaces'
 import { buildColumns, buildTableFilterFields } from './utils'
 
-interface EditTeamAssignmentProps {
-  isModalOpen: boolean
-  closeModal: Function
-  setShouldRefreshData: Function
-}
-
-const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
+const TeamCapacity = () => {
   const { dispatchFetchDomains } = useGovernanceDomains()
   const storedGovernanceDomains = useSelector((state: RootState) => state.governanceDomains.domains)
 
@@ -137,7 +131,6 @@ const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
             columns={tableColumns}
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
           />
         </Box>

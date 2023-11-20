@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { SelectOption } from 'components/utils/definitions/Definitions'
 
 export interface TableState {
   searchText?: string

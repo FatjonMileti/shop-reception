@@ -206,6 +206,7 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/governance/individualCapacity',
+          filters: [{ name: 'teamMember.domain', value: domainFilterValue.value }],
           extraUrlParams: [{ name: 'id', value: id }],
           tableFilters: test
         })
