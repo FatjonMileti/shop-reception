@@ -244,17 +244,15 @@ const TeamAssignment: React.FC = props => {
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
             rowActions={[
-              canEdit
-                ? {
-                    label: 'Edit',
-                    labelColor: 'white',
-                    typographyVariant: 'medium',
-                    backgroundColor: '#0970E6',
-                    onClick: (e, rowId) => {
-                      selectRow(tableItems.find(item => item.id === rowId))
-                    }
-                  }
-                : {}
+              canEdit && {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#0970E6',
+                onClick: (e, rowId) => {
+                  selectRow(tableItems.find(item => item.id === rowId))
+                }
+              }
             ]}
           />
         </Box>
