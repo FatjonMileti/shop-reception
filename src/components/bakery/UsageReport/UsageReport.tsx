@@ -7,7 +7,7 @@ import { UsageReportItem, ValueLabelInterface } from '../interfaces'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { columns, formatAndDownloadResponse, stickyColumns } from './helpers'
+import { columns, formatAndDownloadResponse } from './helpers'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useQuery } from 'react-query'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
@@ -22,7 +22,7 @@ const UsageReport = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
   
-  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>({value: '', label: ''});
+  const [storeFilterValue, setStoreFilterValue] = useState({ label: '', value:''});
   const [startDateFilterValue, setStartDateFilterValue] = useState(dayjs())
   const [endDateFilterValue, setEndDateFilterValue] = useState(dayjs())
 
@@ -34,9 +34,9 @@ const UsageReport = () => {
         toTableGETUrl({
           url: '/bakery/report/application',
           filters: [
-            // { name: 'storeName', value: storeFilterValue.value},
-            // { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-            // { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+            { name: 'storeName', value: storeFilterValue.value},
+            { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
+            { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
           ],
           tableFilters,
           page,
@@ -45,8 +45,7 @@ const UsageReport = () => {
           orderBy
         })
       )
-      // setTableItems(toTableRowItems(response.list))
-      // setTableItems(response.list)
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -153,7 +152,7 @@ const UsageReport = () => {
               value={storeFilterValue}
               options={stores}
               onChange={(val) => handleFilterChange('store', val)}
-              // multiple={true} //TODO once value accept array of values
+              // multiple={true} //TODO correct once value accept array of values
             />
           </Grid>
           )
@@ -163,8 +162,7 @@ const UsageReport = () => {
       <Box>
         <Table
           hideCheckbox
-          // columns={columns(startDateFilterValue, endDateFilterValue)}
-          columns={stickyColumns}
+          columns={columns(startDateFilterValue, endDateFilterValue)}
           items={tableItems}
           fetchData={fetchData}
           isLoading={isLoading}

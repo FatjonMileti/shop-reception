@@ -1,39 +1,9 @@
 import { Box } from '@mui/material'
 import { IconCell } from 'components/core-ui/IconCell'
 import dayjs from 'dayjs'
-import { UsageReportItem } from '../interfaces'
-
-
-export const stickyColumns = [
-  {
-    title: 'Magazin',
-    field: 'storeName',
-    align: 'left',
-    sticky: true,
-  },
-  {
-    title: 'Utilizator',
-    field: 'username',
-    align: 'left',
-    sticky: true,
-  },
-  {
-    title: 'Data ultimei accesari',
-    field: 'lastAccess',
-    align: 'left',
-    sticky: true,
-  },
-  {
-    title: 'Data ultimei modificari',
-    field: 'lastChange',
-    align: 'left',
-    sticky: true,
-  },
-]
 
 export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
   let currentDate = startDate
-  // let currentDate = dayjs(startDate)
 
   const stickyColumns = [
     {
@@ -68,11 +38,10 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
   let modifyProductGrowthColumns = []
   let loginColumns = []
   
-  
   while (currentDate.isBefore(endDate) || currentDate.isSame(endDate, 'day')) {
     const day = dayjs(currentDate).format('D')
     const month = dayjs(currentDate).format('MMMM')
-    
+
     printCandentierColumns.push({
       title: `Descarcare Cadantier ${day} ${month}`,
       field: 'printCadentier',
@@ -85,11 +54,10 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       isDynamic: true,
       render: row => (
         <Box>
-          <IconCell value={row.applicationReportDynamicDtos[0].printCadentier ? 'active' : 'inactive'}/>
+          <IconCell value={row.applicationReportDynamicDtos.find(dto => dto.date === currentDate.format('YYYY-MM-DD'))?.printCadentier ? 'active' : 'inactive'}/>
         </Box>
       )
     });
-
     modifyCadentierColumns.push({
       title: `Modificare cadantier ${day} ${month}`,
       field: 'modifyCadentier',
@@ -102,11 +70,10 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       isDynamic: true,
       render: row => (
           <Box>
-            <IconCell value={row.applicationReportDynamicDtos[0].modifyCadentier ? 'active' : 'inactive'} />
+            <IconCell value={row.applicationReportDynamicDtos.find(dto => dto.date === currentDate.format('YYYY-MM-DD'))?.modifyCadentier ? 'active' : 'inactive'} />
           </Box>
       )
     })
-
     modifyStoreGrowthColumns.push({
       title: `Coeficient de crestere magazin ${day} ${month}`,
       field: 'modifyStoreGrowth',
@@ -119,11 +86,10 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       isDynamic: true,
       render: row => (
           <Box>
-            <IconCell value={row.applicationReportDynamicDtos[0].modifyStoreGrowth ? 'active' : 'inactive'} />
+            <IconCell value={row.applicationReportDynamicDtos.find(dto => dto.date === currentDate.format('YYYY-MM-DD'))?.modifyStoreGrowth ? 'active' : 'inactive'} />
           </Box>
       )
     })
-
     modifyProductGrowthColumns.push({
       title: `Coeficient de crestere produse ${day} ${month}`,
       field: 'modifyProductGrowth',
@@ -134,13 +100,12 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
         type: 'daily'
       },
       isDynamic: true,
-      render: row => {console.log(row); return (
+      render: row => (
           <Box>
-            <IconCell value={row.applicationReportDynamicDtos[0].modifyProductGrowth ? 'active' : 'inactive'} />
+            <IconCell value={row.applicationReportDynamicDtos.find(dto => dto.date === currentDate.format('YYYY-MM-DD'))?.modifyProductGrowth ? 'active' : 'inactive'} />
           </Box>
       )}
-    })
-
+    )
     loginColumns.push({
       title: `Accesare applicatie ${day} ${month}`,
       field: 'login',
@@ -153,7 +118,7 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       isDynamic: true,
       render: row => (
           <Box>
-            <IconCell value={row.applicationReportDynamicDtos[0].login ? 'active' : 'inactive'} />
+            <IconCell value={row.applicationReportDynamicDtos.find(dto => dto.date === currentDate.format('YYYY-MM-DD'))?.login ? 'active' : 'inactive'} />
           </Box>
       )
     })
@@ -163,114 +128,6 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
 
   return [...stickyColumns, ...printCandentierColumns, ...modifyCadentierColumns, ...modifyStoreGrowthColumns, ...modifyProductGrowthColumns, ...loginColumns]
 }
-
-//  export const columns = [
-//     {
-//       title: 'Magazin',
-//       field: 'storeName',
-//       align: 'left',
-//       sticky: true,
-//     },
-//     {
-//       title: 'Utilizator',
-//       field: 'username',
-//       align: 'left',
-//       sticky: true,
-//     },
-//     {
-//       title: 'Data ultimei accesari',
-//       field: 'lastAccess',
-//       align: 'left',
-//       sticky: true,
-//     },
-//     {
-//       title: 'Data ultimei modificari',
-//       field: 'lastChange',
-//       align: 'left',
-//       sticky: true,
-//     },
-//     {
-//       title: 'Descarcare Cadantier',
-//       field: 'printCadentier',
-//       align: 'center',
-//       minWidth: '160px',
-//       filterDep: {
-//         name: ["startDate", "endDate"],
-//         type: 'daily'
-//       },
-//       isDynamic: true,
-//       render: row => (
-//         <Box>
-//           <IconCell value={row.applicationReportDynamicDtos[0].printCadentier ? 'active' : 'inactive'}/>
-//         </Box>
-//       )
-//     },
-//     {
-//         title: 'Modificare cadantier',
-//         field: 'modifyCadentier',
-//         align: 'center',
-//         minWidth: '200px',
-//         filterDep: {
-//           name: ["startDate", "endDate"],
-//           type: 'daily'
-//         },
-//         isDynamic: true,
-//         render: row => (
-//             <Box>
-//               <IconCell value={row.applicationReportDynamicDtos[0].modifyCadentier ? 'active' : 'inactive'} />
-//             </Box>
-//         )
-//     },
-//     {
-//         title: 'Coeficient de crestere magazin',
-//         field: 'modifyStoreGrowth',
-//         align: 'center',
-//         minWidth: '250px',
-//         filterDep: {
-//           name: ["startDate", "endDate"],
-//           type: 'daily'
-//         },
-//         isDynamic: true,
-//         render: row => (
-//             <Box>
-//               <IconCell value={row.applicationReportDynamicDtos[0].modifyStoreGrowth ? 'active' : 'inactive'} />
-//             </Box>
-//         )
-//     },
-//     {
-//         title: 'Coeficient de crestere produse',
-//         field: 'modifyProductGrowth',
-//         align: 'center',
-//         minWidth: '250px',
-//         filterDep: {
-//           name: ["startDate", "endDate"],
-//           type: 'daily'
-//         },
-//         isDynamic: true,
-//         render: row => {console.log(row); return (
-//             <Box>
-//               <IconCell value={row.applicationReportDynamicDtos[0].modifyProductGrowth ? 'active' : 'inactive'} />
-//             </Box>
-//         )}
-//     },
-//     {
-//         title: 'Accesare applicatie',
-//         field: 'login',
-//         align: 'center',
-//         minWidth: '180px',
-//         filterDep: {
-//           name: ["startDate", "endDate"],
-//           type: 'daily'
-//         },
-//         isDynamic: true,
-//         render: row => (
-//             <Box>
-//               <IconCell value={row.applicationReportDynamicDtos[0].login ? 'active' : 'inactive'} />
-//             </Box>
-//         )
-//     }
-// ]
-
 
 export const formatAndDownloadResponse = fileObject => {
   const { data, headers } = fileObject
