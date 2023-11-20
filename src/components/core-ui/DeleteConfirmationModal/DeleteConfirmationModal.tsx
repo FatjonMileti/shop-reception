@@ -11,7 +11,7 @@ interface DeleteConfirmationProps {
   isModalOpen: boolean
   closeModal: Function
   actionUrl: string
-  itemId: string
+  itemId: string | number
   content: ReactNode
   deleteLabel?: string
   cancelLabel?: string
@@ -33,7 +33,7 @@ const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
 
   const onDelete = async () => {
     try {
-      await makeCoreDeleteRequest(actionUrl.replace(":id", itemId))
+      await makeCoreDeleteRequest(actionUrl.replace(":id", `${itemId}`))
 
       closeModal()
       if (setShouldRefreshData) {

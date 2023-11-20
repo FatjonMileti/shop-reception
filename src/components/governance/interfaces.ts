@@ -8,15 +8,15 @@ export interface TeamDayOffManagementItem {
   teamMemberId: string
 }
 export interface EffortMatrix {
-  id: number,
-  role: string,
-  evaluationPhase: number,
-  analysisPhase: number,
-  designPhase: number,
-  developmentPhase: number,
-  systemTestPhase: number,
-  uatPhase: number,
-  rolloutPhase: number,
+  id: number
+  role: string
+  evaluationPhase: number
+  analysisPhase: number
+  designPhase: number
+  developmentPhase: number
+  systemTestPhase: number
+  uatPhase: number
+  rolloutPhase: number
   hypercarePhase: number
 }
 
@@ -60,6 +60,19 @@ export interface TeamAssignmentTableFilter {
   iibKey: string
   ipbKey: string
   assignedProject: string
+}
+
+export interface TeamCapacityTableFilter {
+  teamMemberName: string
+  endDate: Date
+  startDate?: Date
+  baseRole: string
+}
+
+export interface IndividualCapacityTableFilter {
+  teamMemberId: string
+  endDate: Date
+  startDate: Date | string
 }
 
 export interface TimeOffValues {

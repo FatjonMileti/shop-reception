@@ -1,5 +1,6 @@
 export interface FloatingButtonProps {
-  position: string
+  position?: string
+  type?: "add" | "notification" | "navigate" | "like"
   href?: string
   backgroundColor?: string
 }

@@ -13,16 +13,13 @@ import { DescriptionText } from 'components/core-ui/DescriptionText'
 import { PrintModal } from 'components/core-ui/PrintModal'
 import { FloatingButton } from 'components/core-ui/FloatingButton'
 import { Grid } from 'components/core-ui/Grid'
-import { Input } from 'components/core-ui/Input'
 import { Link } from 'components/core-ui/Link'
-import { List } from 'components/core-ui/List'
 import { PageForm } from 'components/core-ui/PageForm'
 import { PageFormRadio } from 'components/core-ui/PageFormRadio'
 import { PageInfo } from 'components/core-ui/PageInfo'
 import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { PlusMinusNumberInput } from 'components/core-ui/PlusMinusNumberInput'
 import { PriceSpan } from 'components/core-ui/PriceSpan'
-import { ReceiptInvoiceFinalized } from 'components/core-ui/ReceiptInvoiceFinalized'
 import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
 import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
 import { ShoppingCart } from 'components/core-ui/ShoppingCart'
@@ -34,8 +31,7 @@ import { IconCell } from 'components/core-ui/IconCell'
 import { TableSearch } from 'components/core-ui/TableSearch'
 import { Tabs } from 'components/core-ui/Tabs'
 import { TitleText } from 'components/core-ui/TitleText'
-import { TableFilters } from 'components/core-ui/TableFilters'
-import { UserModal } from 'components/core-ui/UserModal'
+import { UserModal } from 'components/bakery/UsersManagement/UserModal'
 import { FileUpload } from 'components/core-ui/FileUpload'
 // import DynamicTable from 'components/core-ui/Table/DynamicTable'
 // import GroupTable from 'components/core-ui/Table/GroupTable'
@@ -68,9 +64,7 @@ export const Components = {
   PrintModal,
   FloatingButton,
   Grid,
-  Input,
   Link,
-  List,
   MultivalueCell,
   PageForm,
   PageFormRadio,
@@ -78,7 +72,6 @@ export const Components = {
   PdfViewer,
   PlusMinusNumberInput,
   PriceSpan,
-  ReceiptInvoiceFinalized,
   ReceiptBarcodeScanner,
   SimpleKeyValuePairs,
   ShoppingCart,
@@ -88,12 +81,11 @@ export const Components = {
   TableSearch,
   Tabs,
   TitleText,
-  TableFilters,
   UserModal,
   FileUpload,
   // DynamicTable,
   // GroupTable,
   ImageCell,
-  ProductView,
+  ProductView
   // PrintPreviewTable
 }

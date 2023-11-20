@@ -7,11 +7,12 @@ import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { useFormik } from 'formik'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { areSameDayDates, formatPayloadDate } from 'utils/helpers'
-import { dayOfTypes, getInitialValues, getValidationSchema } from './helpers'
+import { getInitialValues, getValidationSchema } from './helpers'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { TeamDayOffManagementItem, TeamMember, TimeOffValues } from '../../interfaces'
+import { TeamDayOffManagementItem, TeamMember } from '../../interfaces'
+import { dayOfTypes } from 'components/governance/helpers'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]
@@ -40,7 +41,9 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
       try {
         const payload = {
           teamMember: {
-            id: isEdit ? (editItem as TeamDayOffManagementItem).teamMemberId : values.teamMember.value
+            id: isEdit
+              ? (editItem as TeamDayOffManagementItem).teamMemberId
+              : values.teamMember.value
           },
           dayOffType: values.dayOffType,
           startDate: formatPayloadDate(values.startDate),
@@ -64,6 +67,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
       }
     }
   })
+
   return (
     <Modal
       isModalOpen={isModalOpen}
@@ -83,7 +87,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             />
           ) : (
             <AsyncAutocomplete
-              variant="standard"
+              variant="outlined"
               name="teamMember"
               label="Team member"
               options={teamMembers}
@@ -100,7 +104,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             label="Type of day-off"
             type="select"
             values={dayOfTypes}
-            variant="standard"
+            variant="outlined"
             width="100%"
             value={formik.values.dayOffType}
             onChange={event => {
@@ -118,7 +122,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             value={formik.values.startDate}
             onChange={value => formik.setFieldValue('startDate', value)}
             label="Start date"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.startDate}
             helperText={formik.errors.startDate as string}
@@ -130,7 +134,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             value={formik.values.endDate}
             onChange={value => formik.setFieldValue('endDate', value)}
             label="End date"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.endDate}
             helperText={formik.errors.endDate as string}
@@ -144,7 +148,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
               name="numberOfHours"
               label="Number of hours"
               fullWidth
-              variant="standard"
+              variant="outlined"
               value={formik.values.numberOfHours}
               onChange={event => formik.setFieldValue('numberOfHours', event.currentTarget.value)}
               error={!!formik.errors.numberOfHours}
