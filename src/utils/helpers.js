@@ -2,10 +2,15 @@ import dayjs from 'dayjs'
 import { get } from 'lodash'
 import { getUserInfo } from './authService'
 import { getCoreBaseUrl } from './api'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+
+dayjs.extend(customParseFormat)
 
 export const formatPayloadDate = date => (date ? dayjs(date).format('YYYY-MM-DD') : '')
 
 export const formatUIDate = date => (date ? dayjs(date).format('DD/MM/YYYY') : '')
+
+export const getDatePickerDate = date => (date ? dayjs(date, 'DD/MM/YYYY') : '')
 
 export const areSameDayDates = (startDate, endDate) =>
   startDate && endDate && dayjs(startDate).isSame(dayjs(endDate), 'day')

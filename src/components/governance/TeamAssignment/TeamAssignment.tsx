@@ -10,7 +10,6 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { Table } from 'components/core-ui/Table'
 import { Input } from 'components/core-ui/Input'
-import { Edit } from '@mui/icons-material'
 import { PermissionRoles } from 'utils/enums'
 import { TeamAssignmentItem, TeamAssignmentTableFilter, ValueLabelInterface } from '../interfaces'
 import { EditTeamAssignment } from './EditTeamAssignment'
@@ -19,7 +18,7 @@ import { useQuery } from 'react-query'
 const columns = [
   {
     title: 'Person',
-    field: 'teamMemberName',
+    field: 'teamMember.name',
     align: 'left'
   },
   {
@@ -29,19 +28,19 @@ const columns = [
   },
   {
     title: 'IIB Key',
-    field: 'iibKey',
+    field: 'project.iibKey',
     align: 'left',
     collapsible: true
   },
   {
     title: 'IPB Key',
-    field: 'ipbKey',
+    field: 'project.ipbKey',
     align: 'left',
     collapsible: true
   },
   {
     title: 'Assigned Project',
-    field: 'assignedProject',
+    field: 'project.name',
     align: 'left',
     collapsible: true
   },
@@ -245,15 +244,17 @@ const TeamAssignment: React.FC = props => {
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
             rowActions={[
-              {
-                label: 'Edit',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#0970E6',
-                onClick: (e, rowId) => {
-                  selectRow(tableItems.find(item => item.id === rowId))
-                }
-              }
+              canEdit
+                ? {
+                    label: 'Edit',
+                    labelColor: 'white',
+                    typographyVariant: 'medium',
+                    backgroundColor: '#0970E6',
+                    onClick: (e, rowId) => {
+                      selectRow(tableItems.find(item => item.id === rowId))
+                    }
+                  }
+                : {}
             ]}
           />
         </Box>
