@@ -12,6 +12,7 @@ import { columns } from './helpers'
 import { TableItem } from './interfaces'
 import { ValueLabelInterface } from 'components/governance/interfaces'
 import { IdNameInterface } from 'components/bakery/interfaces'
+import { toStoreFilterItems } from './serializers'
 
 const ProductManagement = () => {
   const { showNotification } = useNotification()
@@ -25,10 +26,8 @@ const ProductManagement = () => {
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/trainee/all')
-      const resultOptions = result.map(
-        (item: IdNameInterface): ValueLabelInterface => ({ label: item.name, value: item.id })
-      )
-      return resultOptions || []
+
+      return toStoreFilterItems(result) || []
     },
     {
       onError: error => {
@@ -82,12 +81,13 @@ const ProductManagement = () => {
           ) : (
             <AsyncAutocomplete
               variant="standard"
-              name="store.id"
+              name="store"
               label="Magazin"
               disableClearable
               value={storeFilterValue}
               options={filterOptions}
               onChange={handleFilterChange}
+              applyCustomStyle
             />
           )}
         </Grid>
