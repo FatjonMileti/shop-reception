@@ -27,7 +27,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@fullscreendigital/carrefour-dex-fe": "^2.0.7",
+    "@fullscreendigital/carrefour-dex-fe": "^2.0.8",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.13",
     "@reduxjs/toolkit": "^1.9.3",

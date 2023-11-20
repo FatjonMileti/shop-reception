@@ -156,10 +156,3 @@ export interface UsageReportItem {
   lastChange: Date
   applicationReportDynamicDtos: ApplicationReportDynamicDtosItem[]
 }
-
-export interface UsageReportTableFilter {
-  store: ValueLabelInterface[]
-  // store: string[]
-  startDate: Date
-  endDate: Date
-}

@@ -1,30 +1,30 @@
-import { Box, Grid, Paper } from '@mui/material'
+import { Box, CircularProgress, Grid, Paper } from '@mui/material'
 import s from './UsageReport.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
-import { UsageReportTableFilter, ValueLabelInterface, ZoneItem } from '../interfaces'
-import { makeCoreGetRequest } from 'utils/api'
+import { UsageReportItem, ValueLabelInterface } from '../interfaces'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { columns } from './helpers'
+import { columns, formatAndDownloadResponse, stickyColumns } from './helpers'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useQuery } from 'react-query'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { toAsyncSelectOptions, toTableRowItems } from './serializers'
+import dayjs from 'dayjs'
+import { FileDownloadOutlined } from '@mui/icons-material'
 
 const UsageReport = () => {
-  const [tableItems, setTableItems] = useState<ZoneItem[]>([])
+  const [tableItems, setTableItems] = useState<UsageReportItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
   
-  const [tableFilter, setTableFilter] = useState<UsageReportTableFilter>({
-    store: null,
-    startDate: new Date('2023-11-14'),
-    endDate: new Date('2023-11-14')
-  })
+  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>({value: '', label: ''});
+  const [startDateFilterValue, setStartDateFilterValue] = useState(dayjs())
+  const [endDateFilterValue, setEndDateFilterValue] = useState(dayjs())
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -33,7 +33,11 @@ const UsageReport = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/report/application',
-          filters: [],
+          filters: [
+            // { name: 'storeName', value: storeFilterValue.value},
+            // { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
+            // { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+          ],
           tableFilters,
           page,
           rowsPerPage,
@@ -41,7 +45,8 @@ const UsageReport = () => {
           orderBy
         })
       )
-      setTableItems(toTableRowItems(response.list))
+      // setTableItems(toTableRowItems(response.list))
+      // setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -52,14 +57,12 @@ const UsageReport = () => {
     }
   }
 
-  const { data: stores, isLoading: isStoresLoading, refetch: refetchStores } = useQuery(
+  const { data: stores, isLoading: isStoresLoading } = useQuery(
     ['store'],
     async () => {
-      const result = await makeCoreGetRequest('/bakery/store/all')
+      const result = await makeCoreGetRequest('/bakery/store/all/stores') //TODO mockoon returns wrong so made a temp api
       const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
 
-    //   setModuleValue(resultOptions[0])
-      
       return resultOptions || []
     },
     {
@@ -69,97 +72,115 @@ const UsageReport = () => {
           type: 'error'
         })
       },
-      enabled: false
     }
   )
-    console.log(stores)
 
-  const tableFilterFields = [
-    {
-        name: 'startDate',
-        label: 'Data inceput',
-        type: 'date',
-        filter: (
-          <DatePicker
-            value={tableFilter.startDate}
-            onChange={value => setTableFilter({ ...tableFilter, startDate: value })}
-            label="Data inceput"
-            variant="standard"
-            required
-          />
-        )
-      },
-      {
-        name: 'endDate',
-        label: 'Data sfarsit',
-        type: 'date',
-        filter: (
-          <DatePicker
-            value={tableFilter.endDate}
-            onChange={value => setTableFilter({ ...tableFilter, endDate: value })}
-            label="Data sfarsit"
-            variant="standard"
-            required
-          />
-        )
-      },
-      // {
-      //   name: 'store',
-      //   label: 'Magazin',
-      //   type: 'autocomplete',
-      //   filter: <>
-      //       { isStoresLoading ? ( 
-      //       <div style={{ display: 'flex' }}>
-      //           Te rog asteapta pana vor fi afisate toate magazinele
-      //       </div>
-      //       ) : (
-      //       <AsyncAutocomplete
-      //           variant="outlined"
-      //           name="store"
-      //           label="Sursa volum de lucru"
-      //           value={tableFilter.store}
-      //           options={stores}
-      //           onChange={value => setTableFilter({ ...tableFilter, store: tableFilter.store.push(String(value))})}
-      //           multiple
-      //       />
-      //       )
-      //       }
-      //   </>
-      // }
-  ]
+  const handleFilterChange = (filter: 'startDate' | 'endDate' | 'store', value: any): void => {
+    switch(filter) {
+      case 'store': 
+        setStoreFilterValue(value)
+        setShouldRefreshData(true);
+        break
+      case 'startDate': 
+        setStartDateFilterValue( dayjs(value) )
+        setShouldRefreshData(true);
+        break
+      case 'endDate': 
+        setEndDateFilterValue( dayjs(value) )
+        setShouldRefreshData(true);
+        break
+      default: return;
+    }
+  }
+
+  const handleDownload = async () => {
+    const url = toTableGETUrl({
+      url: '/bakery/report/download/application',
+      filters: [
+        { name: 'storeName', value: storeFilterValue.value},
+        { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
+        { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      ]
+    })
+    try {
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `Error while download file. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
 
   return (
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
+        <Grid xs={12} md={3} item>
+          <DatePicker
+            value={startDateFilterValue}
+            onChange={(val) => handleFilterChange('startDate', val)}
+            label="Data inceput"
+            variant="outlined"
+            required
+          />
+        </Grid>
+
+        <Grid xs={12} md={3} item>
+          <DatePicker
+            value={endDateFilterValue}
+            onChange={(val) => handleFilterChange('endDate', val)}
+            label="Data sfarsit"
+            variant="outlined"
+            required
+          />
+        </Grid>
+
+        {isStoresLoading ? (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+            </div>
+          ) : (
           <Grid xs={12} md={3} item>
             <AsyncAutocomplete
               variant="outlined"
               name="store"
               label="Magazin"
               disableClearable
-              value={store.value}
-              options={storeOptions}
-              // onChange={handleFilterChange}
+              value={storeFilterValue}
+              options={stores}
+              onChange={(val) => handleFilterChange('store', val)}
+              // multiple={true} //TODO once value accept array of values
             />
           </Grid>
+          )
+        }
         </Grid>
       </Paper>
       <Box>
         <Table
           hideCheckbox
-          columns={columns}
+          // columns={columns(startDateFilterValue, endDateFilterValue)}
+          columns={stickyColumns}
           items={tableItems}
           fetchData={fetchData}
           isLoading={isLoading}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          // filters={tableFilterFields}
           stickyRatio={0.45}
           maxHeight="600px"
           hasStickyHeader
           frequency="day"
+          toolbarActions={[
+            {
+              icon: <FileDownloadOutlined />,
+              onClick: () => handleDownload()
+            }
+          ]}
         />
       </Box>
     </div>
