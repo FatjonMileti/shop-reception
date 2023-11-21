@@ -62,7 +62,7 @@ const Table = props => {
       document.title
     )
 
-    await fetchData({ page, rowsPerPage, order, orderBy, tableFilters: filters })
+    await fetchData({ page, rowsPerPage, order, orderBy, tableFilters: filters, searchText })
   }
 
   return (
