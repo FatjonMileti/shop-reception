@@ -10,6 +10,7 @@ import { Clusters } from './Clusters'
 import { Families } from './Families'
 import { FamilyProducts } from './Families/FamilyProducts'
 import { Products } from './Products'
+import { SalesCadentier } from './SalesCadentier'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -99,6 +100,16 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={Products}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+        />
+        }
+      />
+      <Route
+        path={URLS.AUTH_SALES_CADENTIER}
+        element={
+          <PrivateRoute
+            component={SalesCadentier}
             applicationPages={applicationPages}
             checkIsAuthorized
         />

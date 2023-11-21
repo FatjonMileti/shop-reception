@@ -8,4 +8,5 @@ export const URLS = {
   AUTH_FAMILIES: 'bakery/admin/families',
   AUTH_FAMILY_PRODUCTS: 'bakery/admin/family-products',
   AUTH_PRODUCTS: 'bakery/admin/products',
+  AUTH_SALES_CADENTIER: 'bakery/admin/sales-cadentier'
 }

@@ -139,3 +139,29 @@ export interface ProductItem {
   familyModuleName: string
   imageUrl: string
 }
+
+export interface SalesCadentierListItem {
+  start: string
+  end: string
+  average: number
+  calculation: number
+  quantityToProduce: number
+  realSales: number
+  clearanceSales: number
+  name: string
+}
+export interface SalesCadentierItem {
+    productName: string
+    productMetiCode: number
+    productImageUrl: string
+    inPromotion: boolean
+    clusterMandatory: boolean
+    newProduct: boolean
+    username: string
+    average: number
+    calculation: number
+    quantityToProduce: number
+    realSales: number
+    clearanceSales: number
+    list: SalesCadentierListItem[]
+}

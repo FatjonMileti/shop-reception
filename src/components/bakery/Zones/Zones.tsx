@@ -79,6 +79,7 @@ const Zones = () => {
         />
         <Table
           hideCheckbox
+          hasSearchInput
           columns={columns}
           items={tableItems}
           fetchData={fetchData}

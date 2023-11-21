@@ -1,9 +1,5 @@
-import { Flag } from '@mui/icons-material'
 import { Box } from '@mui/material'
-import { BooleanIcon } from 'components/core-ui/BooleanIcon'
-import { BooleanText } from 'components/core-ui/BooleanText'
 import { IconCell } from 'components/core-ui/IconCell'
-import { ImageCell } from 'components/core-ui/ImageCell'
 
 export const statuses = [
     { label: "Active", value: "Active" },
@@ -12,84 +8,49 @@ export const statuses = [
 
 export const columns = [
     {
-      title: 'Produs',
-      field: 'productName',
-      align: 'left',
-      sticky: true,
-      render: row => (
-        <ImageCell imageUrl={row.imageUrl} value={row.productName} />
-      )
+      title: 'Magazin',
+      field: 'name',
+      align: 'left'
     },
     {
       title: 'Cod METI',
-      field: 'productMetiCode',
-      align: 'left',
-      sticky: true
+      field: 'metiCode',
+      align: 'left'
     },
     {
-      title: 'Medie vanzari',
-      field: 'average',
+      title: 'Divizie',
+      field: 'divisionType',
       align: 'left',
-      minWidth: "140px"
+      collapsible: true,
     },
     {
-      title: 'Cantitati propuse',
-      field: 'quantityToProduce',
+      title: 'Societate parinte',
+      field: 'parentSociety',
       align: 'left',
-      minWidth: '140px'
+      collapsible: true,
     },
     {
-      title: 'Cantitati modificate',
-      field: 'calculation',
+      title: 'Regiune',
+      field: 'region',
       align: 'left',
-      minWidth: '140px'
+      collapsible: true,
     },
     {
-      title: 'Vanzari realse',
-      field: 'realSales',
+      title: 'Zona',
+      field: 'zone',
       align: 'left',
-      minWidth: '140px',
-      isGroup: true
+      collapsible: true,
     },
     {
-      title: 'Vanzari in destocaj',
-      field: 'clearanceSales',
+      title: 'Status',
+      field: 'enable',
       align: 'left',
-      minWidth: '140px',
-      isGroup: true
-    },
-    {
-      title: 'Gama produs',
-      field: 'productRange',
-      align: 'left',
-      minWidth: '140px',
-      isGroup: true,
+      collapsible: 'true',
       render: row => (
-        <BooleanText onSuccess='O' onFailure='F' value={row.productRange} />
+        <Box>
+          <IconCell value={row.enable ? 'active' : 'inactive'} />
+        </Box>
       )
-    },
-    {
-      title: 'Oferta in ziua respectiva',
-      field: 'inPromotion',
-      align: 'left',
-      minWidth: '200px',
-      render: row => (
-        <BooleanIcon icon={'Flag'} value={row.inPromotion} onSuccess='#33691E' onFailure='#E5E5E5'/>
-      )
-    },
-    {
-      title: 'Produs nou',
-      field: 'newProduct',
-      align: 'left',
-      render: row => (
-        <BooleanIcon icon={'Flag'} value={row.newProduct} onSuccess='#33691E' onFailure='#E5E5E5'/>
-      )
-    },
-    {
-      title: 'Ultima pers care a modificat fisierul',
-      field: 'changedBy',
-      align: 'left',
-      minWidth: '200px'
     }
   ]
 
