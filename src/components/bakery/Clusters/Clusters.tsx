@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import s from './Clusters.modules.scss'
+import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
@@ -58,7 +58,6 @@ const Clusters = () => {
 
   return (
     <div className={s.mainContainer}>
-      {/* TODO add search bar after redesigns */}
       <Box>
         <EditCluster 
           isModalOpen={isEditModalOpen}

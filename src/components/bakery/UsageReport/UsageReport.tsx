@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Grid, Paper } from '@mui/material'
-import s from './UsageReport.modules.scss'
+import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
@@ -22,7 +22,7 @@ const UsageReport = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
   
-  const [storeFilterValue, setStoreFilterValue] = useState({ label: '', value:''});
+  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([]);
   const [startDateFilterValue, setStartDateFilterValue] = useState(dayjs())
   const [endDateFilterValue, setEndDateFilterValue] = useState(dayjs())
 
@@ -34,7 +34,7 @@ const UsageReport = () => {
         toTableGETUrl({
           url: '/bakery/report/application',
           filters: [
-            { name: 'storeName', value: storeFilterValue.value},
+            { name: 'storeName', value: storeFilterValue.map(val => val.value)},
             { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
             { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
           ],
@@ -59,7 +59,7 @@ const UsageReport = () => {
   const { data: stores, isLoading: isStoresLoading } = useQuery(
     ['store'],
     async () => {
-      const result = await makeCoreGetRequest('/bakery/store/all/stores') //TODO mockoon returns wrong so made a temp api
+      const result = await makeCoreGetRequest('/bakery/store/all')
       const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
 
       return resultOptions || []
@@ -96,7 +96,7 @@ const UsageReport = () => {
     const url = toTableGETUrl({
       url: '/bakery/report/download/application',
       filters: [
-        { name: 'storeName', value: storeFilterValue.value},
+        { name: 'storeName', value: storeFilterValue[0].value},
         { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
         { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
       ]
@@ -152,7 +152,7 @@ const UsageReport = () => {
               value={storeFilterValue}
               options={stores}
               onChange={(val) => handleFilterChange('store', val)}
-              // multiple={true} //TODO correct once value accept array of values
+              multiple={true}
             />
           </Grid>
           )

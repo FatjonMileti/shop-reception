@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import s from './Zones.modules.scss'
+import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
@@ -27,7 +27,7 @@ const Zones = () => {
   const openAddModal = (): void => setIsAddModalOpen(true)
   const closeAddModal = (): void => setIsAddModalOpen(false)
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
 
     try {
@@ -36,6 +36,8 @@ const Zones = () => {
           url: '/bakery/zone',
           filters: [],
           tableFilters,
+          searchText,
+          searchFields: ['name', 'responsible', 'stores'],
           page,
           rowsPerPage,
           order,
@@ -63,7 +65,6 @@ const Zones = () => {
 
   return (
     <div className={s.mainContainer}>
-      {/* TODO add search bar after redesigns */}
       <Box>
         <AddEditZone 
             isModalOpen={isAddModalOpen}
@@ -79,6 +80,7 @@ const Zones = () => {
         />
         <Table
           hideCheckbox
+          hasSearchInput
           columns={columns}
           items={tableItems}
           fetchData={fetchData}

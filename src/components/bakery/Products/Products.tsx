@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import s from './Products.modules.scss'
+import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
@@ -23,7 +23,7 @@ const Products = () => {
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
 
     try {
@@ -31,6 +31,8 @@ const Products = () => {
         toTableGETUrl({
           url: '/bakery/product/management',
           filters: [],
+          searchFields: ["name","metiCode","pluCode"],
+          searchText,
           tableFilters,
           page,
           rowsPerPage,
@@ -59,7 +61,6 @@ const Products = () => {
 
   return (
     <div className={s.mainContainer}>
-      {/* TODO add search bar after redesigns */}
       <Box>
         <EditProduct
           isModalOpen={isEditModalOpen}
@@ -69,6 +70,7 @@ const Products = () => {
           />
         <Table
           hideCheckbox
+          hasSearchInput
           columns={columns}
           items={tableItems}
           fetchData={fetchData}

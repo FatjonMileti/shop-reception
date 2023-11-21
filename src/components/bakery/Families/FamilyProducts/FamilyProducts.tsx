@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import s from './FamilyProducts.modules.scss'
+import s from '../../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
@@ -50,7 +50,6 @@ const FamilyProducts = () => {
 
   return (
     <div className={s.mainContainer}>
-      {/* TODO add table search bar after UI redesign */}
       <Box>
         <Table
           hideCheckbox
