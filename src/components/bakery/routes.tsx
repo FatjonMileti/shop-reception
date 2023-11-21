@@ -10,6 +10,7 @@ import { Clusters } from './Clusters'
 import { Families } from './Families'
 import { FamilyProducts } from './Families/FamilyProducts'
 import { Products } from './Products'
+import { ProductManagementRegion } from './RegionManagerRole/ProductManagementRegion'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -99,6 +100,19 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={Products}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+        />
+        }
+      />
+
+      {/* region manager role */}
+
+      <Route
+        path={URLS.AUTH_PRODUCT_MANAGEMENT_REGION}
+        element={
+          <PrivateRoute
+            component={ProductManagementRegion}
             applicationPages={applicationPages}
             checkIsAuthorized
         />
