@@ -11,8 +11,7 @@ import Table from 'components/core-ui/Table/Table'
 import { columns } from './helpers'
 import { TableItem } from './interfaces'
 import { ValueLabelInterface } from 'components/governance/interfaces'
-import { IdNameInterface } from 'components/bakery/interfaces'
-import { toStoreFilterItems } from './serializers'
+import { toStoreFilterItems, toTableRowItems } from './serializers'
 
 const ProductManagement = () => {
   const { showNotification } = useNotification()
@@ -59,7 +58,7 @@ const ProductManagement = () => {
           orderBy
         })
       )
-      setTableItems(response.list)
+      setTableItems(toTableRowItems(response.list))
 
       setTotalCount(response.page.totalCount)
 
