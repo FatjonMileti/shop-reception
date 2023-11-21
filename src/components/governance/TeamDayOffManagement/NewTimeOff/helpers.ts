@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { areSameDayDates, formatUIDate } from 'utils/helpers'
+import { areSameDayDates, formatUIDate, getDatePickerDate } from 'utils/helpers'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import * as Yup from 'yup'
 
@@ -49,15 +49,13 @@ export const getValidationSchema = editItem =>
   })
 
 export const getInitialValues = editItem => {
-  dayjs.extend(customParseFormat)
-
   return editItem
     ? {
         id: editItem.id,
         teamMember: editItem.teamMemberName,
         dayOffType: editItem.dayOffType,
-        startDate: dayjs(editItem.startDate, 'DD/MM/YYYY'),
-        endDate: dayjs(editItem.endDate, 'DD/MM/YYYY'),
+        startDate: getDatePickerDate(editItem.startDate),
+        endDate: getDatePickerDate(editItem.endDate),
         numberOfHours: editItem.numberOfHours
       }
     : {
