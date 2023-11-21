@@ -12,6 +12,7 @@ const Table = props => {
     totalCount,
     shouldRefreshData,
     setShouldRefreshData,
+    rowsPerPage,
     ...rest
   } = props
 
@@ -73,6 +74,7 @@ const Table = props => {
       handleRemoteData={debounce(handleRemoteData, 500)}
       totalCount={totalCount}
       isRemote
+      rowsPerPage={props.rowsPerPage || 10}
     />
   )
 }

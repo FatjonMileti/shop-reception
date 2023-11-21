@@ -49,15 +49,15 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
-  const navigateToPrint = () => {
-    navigate(`/supplyOmni/proformaPrint`)
+  const navigateToPrint = (id: number) => {
+    navigate(`/supplyOmni/proformaView/${id}`)
   }
 
   const rowActions = useMemo(() => {
     const selectRow = (rowId: number, action: string) => {
       const item = tableItems.find(item => item.id === rowId)
       setSelectedRow(item)
-      action === 'print' ? navigateToPrint() : openDeleteModal()
+      action === 'print' ? navigateToPrint(item.id) : openDeleteModal()
     }
 
     const actions = [
@@ -73,7 +73,7 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
         labelColor: 'white',
         typographyVariant: 'medium',
         backgroundColor: '#0970E6',
-        onClick: (e, rowId) => selectRow(rowId, 'edit')
+        onClick: (e, rowId) => selectRow(rowId, 'print')
       }
     ]
 
