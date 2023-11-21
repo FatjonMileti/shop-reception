@@ -36,7 +36,7 @@ export const buildTableFilterInputs = (
     )
   },
   {
-    name: 'iibKey',
+    name: 'project.iibKey',
     label: 'IIB Key',
     type: 'text',
     filter: (
@@ -51,7 +51,7 @@ export const buildTableFilterInputs = (
     )
   },
   {
-    name: 'ipbKey',
+    name: 'project.ipbKey',
     label: 'IPB Key',
     type: 'text',
     filter: (
