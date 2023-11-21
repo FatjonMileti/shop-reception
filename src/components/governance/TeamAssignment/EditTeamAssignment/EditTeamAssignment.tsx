@@ -11,9 +11,8 @@ import { useMutation } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
 import { TeamAssignmentItem } from '../../interfaces'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { toTeamAssignmentPayload } from './serializers'
-dayjs.extend(customParseFormat)
+import { getDatePickerDate } from 'utils/helpers'
 
 interface EditTeamAssignmentProps {
   isModalOpen: boolean
@@ -51,20 +50,14 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
   })
 
   const formik = useFormik({
-    enableReinitialize: false,
+    enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
       id: (editItem as TeamAssignmentItem)?.id || 0,
-      assignedProject: (editItem as TeamAssignmentItem)?.assignedProject || '',
-      assignmentEndDate: dayjs((editItem as TeamAssignmentItem)?.assignmentEndDate, 'DD/MM/YYYY'),
-      assignmentStartDate: dayjs(
-        (editItem as TeamAssignmentItem)?.assignmentStartDate,
-        'DD/MM/YYYY'
-      ),
-      iibKey: (editItem as TeamAssignmentItem)?.iibKey || '',
-      ipbKey: (editItem as TeamAssignmentItem)?.ipbKey || '',
-      role: (editItem as TeamAssignmentItem)?.role || '',
-      teamMemberName: (editItem as TeamAssignmentItem)?.teamMemberName || ''
+      assignmentEndDate: getDatePickerDate((editItem as TeamAssignmentItem)?.assignmentEndDate),
+      assignmentStartDate: getDatePickerDate(
+        (editItem as TeamAssignmentItem)?.assignmentStartDate
+      )
     },
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
@@ -82,14 +75,14 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
         <Grid xs={12} item>
           <FormInfoItems
             items={[
-              { label: 'Person:', name: (editItem as TeamAssignmentItem)?.teamMemberName },
+              { label: 'Person:', name: editItem['teamMember.name']},
               {
                 label: 'Role:',
                 name: (editItem as TeamAssignmentItem)?.role
               },
               {
                 label: 'Project:',
-                name: (editItem as TeamAssignmentItem)?.assignedProject
+                name: editItem['project.name']
               }
             ]}
           />
@@ -100,7 +93,7 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
             value={formik.values.assignmentStartDate}
             onChange={value => formik.setFieldValue('assignmentStartDate', value)}
             label="Start date"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.assignmentStartDate}
             helperText={formik.errors.assignmentStartDate as string}
@@ -112,7 +105,7 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
             value={formik.values.assignmentEndDate}
             onChange={value => formik.setFieldValue('assignmentEndDate', value)}
             label="End date"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.assignmentEndDate}
             helperText={formik.errors.assignmentEndDate as string}

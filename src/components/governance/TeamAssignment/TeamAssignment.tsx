@@ -19,7 +19,7 @@ import { toTableRowItems } from './serializers'
 const columns = [
   {
     title: 'Person',
-    field: 'teamMemberName',
+    field: 'teamMember.name',
     align: 'left'
   },
   {
@@ -29,19 +29,19 @@ const columns = [
   },
   {
     title: 'IIB Key',
-    field: 'iibKey',
+    field: 'project.iibKey',
     align: 'left',
     collapsible: true
   },
   {
     title: 'IPB Key',
-    field: 'ipbKey',
+    field: 'project.ipbKey',
     align: 'left',
     collapsible: true
   },
   {
     title: 'Assigned Project',
-    field: 'assignedProject',
+    field: 'project.name',
     align: 'left',
     collapsible: true
   },
@@ -244,7 +244,7 @@ const TeamAssignment: React.FC = props => {
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
             rowActions={[
-              {
+              canEdit && {
                 label: 'Edit',
                 labelColor: 'white',
                 typographyVariant: 'medium',
