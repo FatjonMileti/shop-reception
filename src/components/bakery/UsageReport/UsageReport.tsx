@@ -23,8 +23,8 @@ const UsageReport = () => {
   const { showNotification } = useNotification()
   
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([]);
-  const [startDateFilterValue, setStartDateFilterValue] = useState(dayjs())
-  const [endDateFilterValue, setEndDateFilterValue] = useState(dayjs())
+  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
+  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
