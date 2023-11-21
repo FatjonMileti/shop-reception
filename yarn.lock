@@ -1253,10 +1253,10 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.1.6.tgz#22958c042e10b67463997bd6ea7115fe28cbcaf9"
   integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
 
-"@fullscreendigital/carrefour-dex-fe@^2.0.0":
-  version "2.0.10"
-  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-2.0.10.tgz#d5411b6102872806d3919cdedfa27007e50fd7fb"
-  integrity sha512-LqBuu1Wmg0y6ULU7Gax5RlKK3TJOgiOHU9sPVLSJrBt27cXRKkhWCHZx845RuvtbjGVbaz0DZIl4C7N+R1zZLQ==
+"@fullscreendigital/carrefour-dex-fe@^2.0.8":
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-2.0.9.tgz#54e05a61949b9442dfc8ae8a3945db0091918924"
+  integrity sha512-XQabiT5slzODmezmMqIZPV0P+vCN723r5L+R4GINDFkCD+YccEOJ5Vb0LwE7liJF2AnPXqo3bjG8GvNkTFnHZg==
   dependencies:
     "@emotion/react" "^11.9.3"
     "@emotion/styled" "^11.9.3"
@@ -1646,9 +1646,9 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "20.9.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.9.2.tgz#002815c8e87fe0c9369121c78b52e800fadc0ac6"
-  integrity sha512-WHZXKFCEyIUJzAwh3NyyTHYSR35SevJ6mZ1nWwJafKtiQbqRTIKSRcw3Ma3acqgsent3RRDqeVwpHntMk+9irg==
+  version "20.9.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.9.1.tgz#9d578c610ce1e984adda087f685ace940954fe19"
+  integrity sha512-HhmzZh5LSJNS5O8jQKpJ/3ZcrrlG6L70hpGqMIAoM9YVD0YBRNWYsfwcXq8VnSjlNpCpgLzMXdiPo+dxcvSmiA==
   dependencies:
     undici-types "~5.26.4"
 
@@ -2886,9 +2886,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.535:
-  version "1.4.588"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.588.tgz#d553f3c008e73488fb181fdf2601fdb0b1ffbb78"
-  integrity sha512-soytjxwbgcCu7nh5Pf4S2/4wa6UIu+A3p03U2yVr53qGxi1/VTR3ENI+p50v+UxqqZAfl48j3z55ud7VHIOr9w==
+  version "1.4.587"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.587.tgz#d8b864f21338b60798d447a3d83b90753f701d07"
+  integrity sha512-RyJX0q/zOkAoefZhB9XHghGeATVP0Q3mwA253XD/zj2OeXc+JZB9pCaEv6R578JUYaWM9PRhye0kXvd/V1cQ3Q==
 
 emoji-regex@^9.2.2:
   version "9.2.2"
