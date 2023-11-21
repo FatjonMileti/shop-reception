@@ -127,6 +127,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
 
         <Box padding={4}>
           <AsyncAutocomplete
+            applyCustomStyle
             variant="standard"
             name="delivery-options"
             label="Alege tipul de livrare"

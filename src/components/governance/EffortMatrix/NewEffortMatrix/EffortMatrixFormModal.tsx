@@ -79,6 +79,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
               name="role"
               label="Role"
               options={effortMatrixRoles}
+              applyCustomStyle
               onChange={value => formik.setFieldValue('role', value)}
               value={formik.values.role}
               error={!!formik.errors.role}
