@@ -95,14 +95,15 @@ const ProductionManagement = () => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
     try {
+      const filters = [
+        { name: 'date', value: planningDate.format('YYYY-MM-DD') },
+        { name: 'store', value: storeFilterValue?.value },
+        { name: 'subfamilies', value: subfamiliesFilterValue?.map(val => val.value) }
+      ]
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/cadentier',
-          filters: [
-            { name: 'date', value: planningDate.format('YYYY-MM-DD') },
-            { name: 'store', value: storeFilterValue?.value },
-            { name: 'subfamilies', value: subfamiliesFilterValue?.map(val => val.value) }
-          ],
+          filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -127,13 +128,23 @@ const ProductionManagement = () => {
       setTableState({
         order,
         orderBy,
-        tableFilters: [
-          ...tableFilters,
-          { name: 'date', value: planningDate.format('YYYY-MM-DD') },
-          { name: 'store', value: storeFilterValue?.value },
-          { name: 'subfamilies', value: subfamiliesFilterValue?.map(val => val.value) }
-        ]
+        tableFilters: filters
       })
+
+      window.history.replaceState(
+        {
+          ...window.history.state,
+          tableState: {
+            page,
+            rowsPerPage,
+            order,
+            orderBy,
+            searchText,
+            filters
+          }
+        },
+        document.title
+      )
 
       return response
     } catch (error) {
@@ -162,8 +173,6 @@ const ProductionManagement = () => {
       enabled: false
     }
   )
-
-  console.log('debug ProductionManagement', tableState)
 
   return (
     <div className={s.mainContainer}>
@@ -245,7 +254,6 @@ const ProductionManagement = () => {
                 order={tableState.order}
                 orderBy={tableState.orderBy}
                 tableFilters={tableState.tableFilters}
-                filters={tableState.tableFilters}
               />
             )}
           </>

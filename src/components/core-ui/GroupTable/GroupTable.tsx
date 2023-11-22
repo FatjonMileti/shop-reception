@@ -27,10 +27,9 @@ const GroupTable = props => {
       order: rest.order ?? '',
       orderBy: rest.orderBy ?? '',
       searchText: '',
-      filters: rest.tableFilters
+      filters: rest.tableFilters || []
     }
   )
-  console.log('debug GroupTable', window.history.state.tableState, rest.tableFilters)
 
   const [dynamicColumns, setDynamicColumns] = useState([])
   const [dynamicItems, setDynamicItems] = useState([])
@@ -46,35 +45,9 @@ const GroupTable = props => {
         setShouldRefreshData(false)
       }
     })()
-  }, [shouldRefreshData])
+  }, [shouldRefreshData, rest.tableFilters])
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
-    setTableState({
-      page,
-      rowsPerPage,
-      order,
-      orderBy,
-      searchText,
-      filters
-    })
-
-    window.history.replaceState(
-      {
-        ...window.history.state,
-        tableState: {
-          page,
-          rowsPerPage,
-          order,
-          orderBy,
-          searchText,
-          filters
-        }
-      },
-      document.title
-    )
-
-    console.log('debug handle remote', filters)
-
     const response = await fetchData({
       page,
       rowsPerPage,
@@ -92,11 +65,13 @@ const GroupTable = props => {
 
   const tableFilters = useMemo(
     () =>
-      Object.keys(tableState.filters).map(key => ({
-        name: key,
-        value: tableState.filters[key]?.value ?? tableState.filters[key]
+      Object.keys(window.history.state.tableState.filters).map(key => ({
+        name: window.history.state.tableState.filters[key].name,
+        value:
+          window.history.state.tableState.filters[key]?.value ??
+          window.history.state.tableState.filters
       })) || [],
-    [tableState.filters]
+    [window.history.state.tableState.filters]
   )
 
   const toolbarActions = !props.hasPrintAction
