@@ -50,6 +50,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
 
         setShouldRefreshData(true)
         closeModal()
+        formik.resetForm()
       } catch (error) {
         showNotification({
           message: `Error while saving effort matrix data. ${formatErrorMessage(error)}`,
