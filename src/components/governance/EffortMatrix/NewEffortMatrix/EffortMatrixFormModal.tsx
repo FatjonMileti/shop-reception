@@ -104,6 +104,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             error={!!formik.errors.evaluationPhase}
             helperText={formik.errors.evaluationPhase as string}
             required
+            suffix="%"
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -119,6 +120,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             error={!!formik.errors.analysisPhase}
             helperText={formik.errors.analysisPhase as string}
             required
+            suffix="%"
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -134,6 +136,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             error={!!formik.errors.designPhase}
             helperText={formik.errors.designPhase as string}
             required
+            suffix="%"
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -149,6 +152,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             error={!!formik.errors.developmentPhase}
             helperText={formik.errors.developmentPhase as string}
             required
+            suffix="%"
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -164,6 +168,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             error={!!formik.errors.systemTestPhase}
             helperText={formik.errors.systemTestPhase as string}
             required
+            suffix="%"
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -179,6 +184,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             error={!!formik.errors.uatPhase}
             helperText={formik.errors.uatPhase as string}
             required
+            suffix="%"
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -194,6 +200,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             error={!!formik.errors.rolloutPhase}
             helperText={formik.errors.rolloutPhase as string}
             required
+            suffix="%"
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -209,6 +216,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             error={!!formik.errors.hypercarePhase}
             helperText={formik.errors.hypercarePhase as string}
             required
+            suffix="%"
           />
         </Grid>
         <Grid xs={12} item className={s.modalButtons}>
