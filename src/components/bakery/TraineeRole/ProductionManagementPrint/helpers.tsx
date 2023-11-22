@@ -47,7 +47,6 @@ export const columns = [
     title: 'MV',
     field: 'average',
     align: 'left',
-    disableSorting: false,
     isGroup: true,
     type: 'string'
   },
@@ -55,7 +54,6 @@ export const columns = [
     title: 'CP',
     field: 'calculation',
     align: 'left',
-    disableSorting: false,
     isGroup: true,
     type: 'string'
   },
@@ -63,7 +61,6 @@ export const columns = [
     title: 'CM',
     field: 'quantityToProduce',
     align: 'left',
-    disableSorting: false,
     isGroup: true,
     type: 'string'
   },

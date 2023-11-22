@@ -23,7 +23,7 @@ const GroupTable = props => {
   const [tableState, setTableState] = useImmer(
     window.history.state.tableState || {
       page: 0,
-      rowsPerPage: rest.rowsPerPage ?? 10,
+      rowsPerPage: rest.rowsPerPage ?? 25,
       order: rest.order ?? '',
       orderBy: rest.orderBy ?? '',
       searchText: '',
@@ -105,6 +105,7 @@ const GroupTable = props => {
         totalCount={totalCount}
         isRemote
         toolbarActions={toolbarActions}
+        hasCustomPagination
       />
 
       <PrintModal

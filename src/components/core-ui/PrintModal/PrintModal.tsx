@@ -39,12 +39,11 @@ const PrintModal = ({
   ...rest
 }) => {
   const columnOptions = useMemo(() => {
-    return dynamicColumns
-      .map(col => ({
-        label: col.title,
-        value: col.field,
-        defaultPrintSelected: col.defaultPrintSelected
-      }))
+    return dynamicColumns.map(col => ({
+      label: col.title,
+      value: col.field,
+      defaultPrintSelected: col.defaultPrintSelected
+    }))
   }, [dynamicColumns])
 
   const [value, setValue] = useState([])
@@ -72,8 +71,6 @@ const PrintModal = ({
       extraUrlParams
     })
 
-
-    console.log('debug PrintModal', rest.filters, tableFilters)
     const columnsToPrint = encodeURIComponent(value.map(val => val.value).toString())
     const printUrl = ''.concat(filters, `&columns=${columnsToPrint}`)
 

@@ -23,7 +23,6 @@ const PrintPreviewTable = props => {
     tableActions,
     tableRowActions,
     tableFooter,
-    hasGeneralSearch,
     hasInitialFilters,
     extraUrlParams,
     extraCustomUrlParams,
@@ -133,16 +132,14 @@ const PrintPreviewTable = props => {
 
   return (
     <Box ref={componentRef}>
-      {filterDate ? (
+      {filterDate && (
         <Box className={s.tableContainer}>
           <Typography variant="regular" style={{ color: 'black', fontSize: '18px' }}>
             {filterDate}
           </Typography>
         </Box>
-      ) : (
-        <></>
       )}
-      {showAbbrev ? (
+      {showAbbrev && (
         <Box className={s.tableContainer}>
           <Typography variant="regular" style={{ color: 'black', fontSize: '12px' }}>
             <pre>
@@ -154,8 +151,6 @@ const PrintPreviewTable = props => {
             </pre>
           </Typography>
         </Box>
-      ) : (
-        <></>
       )}
       <Box className={s.tableContainer}>
         <GeneralTable
@@ -167,6 +162,7 @@ const PrintPreviewTable = props => {
           disablePagination
           handleRemoteData={debouncedHandleRemoteData}
           filters={filtersConfig}
+          hasCustomPagination
           toolbarActions={[
             {
               label: 'Printeaza',

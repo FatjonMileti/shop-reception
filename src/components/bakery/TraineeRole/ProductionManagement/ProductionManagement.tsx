@@ -13,7 +13,7 @@ import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
-import { formatAndDownloadResponse } from 'utils/helpers'
+import { formatAndDownloadResponse, formatPayloadDate } from 'utils/helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { SubfamilyItem, TableItem, TableState } from './interfaces'
 dayjs.extend(customParseFormat)
@@ -96,7 +96,7 @@ const ProductionManagement = () => {
     setIsLoading(true)
     try {
       const filters = [
-        { name: 'date', value: planningDate.format('YYYY-MM-DD') },
+        { name: 'date', value: formatPayloadDate(planningDate) },
         { name: 'store', value: storeFilterValue?.value },
         { name: 'subfamilies', value: subfamiliesFilterValue?.map(val => val.value) }
       ]
@@ -104,9 +104,8 @@ const ProductionManagement = () => {
         toTableGETUrl({
           url: '/bakery/region/cadentier',
           filters,
-          tableFilters,
           page,
-          rowsPerPage,
+          rowsPerPage: 25,
           order,
           orderBy,
           searchText,
@@ -119,6 +118,7 @@ const ProductionManagement = () => {
           ]
         })
       )
+
       setTableItems(response.list)
 
       setTotalCount(response.page.totalCount)
@@ -136,7 +136,7 @@ const ProductionManagement = () => {
           ...window.history.state,
           tableState: {
             page,
-            rowsPerPage,
+            rowsPerPage: 25,
             order,
             orderBy,
             searchText,
@@ -166,7 +166,7 @@ const ProductionManagement = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching file. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },
@@ -199,7 +199,6 @@ const ProductionManagement = () => {
                   variant="standard"
                   name="store.id"
                   label="Magazin"
-                  disableClearable
                   value={storeFilterValue}
                   options={filterOptions}
                   onChange={handleFilterChange}
@@ -210,7 +209,6 @@ const ProductionManagement = () => {
                   variant="standard"
                   name="subfamilies"
                   label="Subfamilie"
-                  disableClearable
                   value={subfamiliesFilterValue}
                   options={subfamiliesOptions || []}
                   onChange={handleSubfamiliesChange}
