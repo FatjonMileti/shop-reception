@@ -73,6 +73,8 @@ const PrintModal = ({
       extraUrlParams
     })
 
+
+    console.log('debug PrintModal', rest.filters, tableFilters)
     const columnsToPrint = encodeURIComponent(value.map(val => val.value).toString())
     const printUrl = ''.concat(filters, `&columns=${columnsToPrint}`)
 

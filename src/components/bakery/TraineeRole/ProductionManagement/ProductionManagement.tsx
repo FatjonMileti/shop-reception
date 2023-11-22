@@ -26,7 +26,7 @@ const ProductionManagement = () => {
   const [tableItems, setTableItems] = useState<TableItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [planningDate, setPlanningDate] = useState(dayjs())
-  const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface>(null)
+  const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
 
   const [tableState, setTableState] = useState<TableState>({
     order: null,
@@ -86,13 +86,13 @@ const ProductionManagement = () => {
     setShouldRefreshData(true)
   }
 
-  const handleSubfamiliesChange = (value: ValueLabelInterface): void => {
+  const handleSubfamiliesChange = (value: ValueLabelInterface[]): void => {
     setSubfamiliesFilterValue(value)
     if (storeFilterValue === null) return
     setShouldRefreshData(true)
   }
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
@@ -101,13 +101,21 @@ const ProductionManagement = () => {
           filters: [
             { name: 'date', value: planningDate.format('YYYY-MM-DD') },
             { name: 'store', value: storeFilterValue?.value },
-            { name: 'subfamilies', value: subfamiliesFilterValue?.value || '' }
+            { name: 'subfamilies', value: subfamiliesFilterValue?.map(val => val.value) }
           ],
           tableFilters,
           page,
           rowsPerPage,
           order,
-          orderBy
+          orderBy,
+          searchText,
+          searchFields: [
+            'productName',
+            'productMetiCode',
+            'average',
+            'calculation',
+            'quantityToProduce'
+          ]
         })
       )
       setTableItems(response.list)
@@ -119,7 +127,12 @@ const ProductionManagement = () => {
       setTableState({
         order,
         orderBy,
-        tableFilters: [...tableFilters, { name: 'date', value: planningDate.format('YYYY-MM-DD') }]
+        tableFilters: [
+          ...tableFilters,
+          { name: 'date', value: planningDate.format('YYYY-MM-DD') },
+          { name: 'store', value: storeFilterValue?.value },
+          { name: 'subfamilies', value: subfamiliesFilterValue?.map(val => val.value) }
+        ]
       })
 
       return response
@@ -149,6 +162,8 @@ const ProductionManagement = () => {
       enabled: false
     }
   )
+
+  console.log('debug ProductionManagement', tableState)
 
   return (
     <div className={s.mainContainer}>
@@ -190,6 +205,7 @@ const ProductionManagement = () => {
                   value={subfamiliesFilterValue}
                   options={subfamiliesOptions || []}
                   onChange={handleSubfamiliesChange}
+                  multiple
                 />
               </Grid>
             </Grid>
@@ -229,6 +245,7 @@ const ProductionManagement = () => {
                 order={tableState.order}
                 orderBy={tableState.orderBy}
                 tableFilters={tableState.tableFilters}
+                filters={tableState.tableFilters}
               />
             )}
           </>

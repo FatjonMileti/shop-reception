@@ -27,9 +27,10 @@ const GroupTable = props => {
       order: rest.order ?? '',
       orderBy: rest.orderBy ?? '',
       searchText: '',
-      filters: rest.tableFilters ?? []
+      filters: rest.tableFilters
     }
   )
+  console.log('debug GroupTable', window.history.state.tableState, rest.tableFilters)
 
   const [dynamicColumns, setDynamicColumns] = useState([])
   const [dynamicItems, setDynamicItems] = useState([])
@@ -72,7 +73,16 @@ const GroupTable = props => {
       document.title
     )
 
-    const response = await fetchData({ page, rowsPerPage, order, orderBy, tableFilters: filters })
+    console.log('debug handle remote', filters)
+
+    const response = await fetchData({
+      page,
+      rowsPerPage,
+      order,
+      orderBy,
+      tableFilters: filters,
+      searchText
+    })
 
     const newDynamicColumns = createDynamicColumns(columns, response.list)
     setDynamicColumns(newDynamicColumns)

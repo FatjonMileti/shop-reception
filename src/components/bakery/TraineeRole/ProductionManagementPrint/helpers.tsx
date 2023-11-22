@@ -6,47 +6,41 @@ export const columns = [
     title: 'Produs',
     field: 'productName',
     align: 'left',
-    type: 'string',
-    width: 60,
+    type: 'string'
   },
   {
     title: 'Cod METI',
     field: 'productMetiCode',
     align: 'left',
-    type: 'string',
-    width: 30,
+    type: 'string'
   },
 
   {
     title: 'Subfamilie',
     field: 'subfamily',
     align: 'left',
-    type: 'string',
-    width: 18
+    type: 'string'
   },
   {
     title: 'MV',
     field: 'average',
     align: 'left',
     minWidth: '140px',
-    type: 'string',
-    width: 18
+    type: 'string'
   },
   {
     title: 'CP',
     field: 'calculation',
     align: 'left',
     minWidth: '140px',
-    type: 'string',
-    width: 18
+    type: 'string'
   },
   {
     title: 'CM',
     field: 'quantityToProduce',
     align: 'left',
     minWidth: '140px',
-    type: 'string',
-    width: 18
+    type: 'string'
   },
 
   {
@@ -55,8 +49,7 @@ export const columns = [
     align: 'left',
     disableSorting: false,
     isGroup: true,
-    type: 'string',
-    width: 18
+    type: 'string'
   },
   {
     title: 'CP',
@@ -64,8 +57,7 @@ export const columns = [
     align: 'left',
     disableSorting: false,
     isGroup: true,
-    type: 'string',
-    width: 18
+    type: 'string'
   },
   {
     title: 'CM',
@@ -73,8 +65,7 @@ export const columns = [
     align: 'left',
     disableSorting: false,
     isGroup: true,
-    type: 'string',
-    width: 18
+    type: 'string'
   },
 
   {
@@ -84,12 +75,14 @@ export const columns = [
     type: 'string',
     render: (row: any) => (
       <Box>
-        <BooleanIcon value={row.inPromotion} icon={'Flag'}
+        <BooleanIcon
+          value={row.inPromotion}
+          icon={'Flag'}
           onSuccess="#33691E"
-          onFailure="#E5E5E5" />
+          onFailure="#E5E5E5"
+        />
       </Box>
-    ),
-    width: 18
+    )
   },
   {
     title: 'Oferta in ziua respectiva',
@@ -105,8 +98,7 @@ export const columns = [
           onFailure="#E5E5E5"
         />
       </Box>
-    ),
-    width: 18
+    )
   },
   {
     title: 'Produs nou',
@@ -117,14 +109,12 @@ export const columns = [
       <Box>
         <BooleanIcon value={row.newProduct} icon={'Flag'} onSuccess="#33691E" onFailure="#E5E5E5" />
       </Box>
-    ),
-    width: 18
+    )
   },
   {
     title: 'Ultima persoana care a modificat fisierul',
     field: 'username',
     align: 'left',
-    width: 40,
     type: 'string'
   }
 ]
