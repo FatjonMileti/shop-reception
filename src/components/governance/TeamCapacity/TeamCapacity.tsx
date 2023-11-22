@@ -1,91 +1,30 @@
-import React, { useEffect, useMemo, useState } from 'react'
 import { Box, CircularProgress, Grid, Paper } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
-import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
-import { useNotification, usePermissions } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
-import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { Table } from 'components/core-ui/Table'
-import { Input } from 'components/core-ui/Input'
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
-import { TeamAssignmentItem, TeamCapacityTableFilter, ValueLabelInterface } from '../interfaces'
-import { useQuery } from 'react-query'
-import { Link } from 'components/core-ui/Link'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { RootState } from 'configureStore'
+import { useNotification } from 'hooks'
+import { useGovernanceDomains } from 'hooks/useGovernanceDomains'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
-import { buildTableFilterInputs } from '../ProjectMilestones/utils'
+import { makeCoreGetRequest } from 'utils/api'
+import { formatErrorMessage } from 'utils/formatting'
+import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
+import { TeamAssignmentItem, TeamCapacityTableFilter, ValueLabelInterface } from '../interfaces'
+import { buildColumns, buildTableFilterFields } from './utils'
 
-interface EditTeamAssignmentProps {
-  isModalOpen: boolean
-  closeModal: Function
-  setShouldRefreshData: Function
-}
+const TeamCapacity = () => {
+  const { dispatchFetchDomains } = useGovernanceDomains()
+  const storedGovernanceDomains = useSelector((state: RootState) => state.governanceDomains.domains)
 
-const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
+  const [domainFilterOptions, setDomainFilterOptions] = useState<ValueLabelInterface[]>(null)
+
   const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  const columns = [
-    {
-      title: 'Person',
-      field: 'teamMemberName',
-      align: 'left',
-      type: 'string',
-      render: (row: any) => (
-        <Link
-          href={`/governance/projectTeam/individualCapacity/${row.id}?${searchParams}`}
-          style={{ textDecoration: 'inherit' }}
-        >
-          {row.teamMemberName}
-        </Link>
-      )
-    },
-    {
-      title: 'Total Effort (MD)',
-      field: 'totalEffort',
-      align: 'left',
-      type: 'number'
-    },
-    {
-      title: 'Total Available (MD)',
-      field: 'totalAvailable',
-      align: 'left',
-      type: 'number'
-    },
-    {
-      title: 'Remaining (MD)',
-      field: 'remaining',
-      align: 'left',
-      type: 'number'
-    },
-    {
-      title: 'Number Of Projects',
-      field: 'numberOfProjects',
-      align: 'left',
-      type: 'number',
-      collapsible: true
-    },
-    {
-      title: 'Base Role',
-      field: 'baseRole',
-      align: 'left',
-      type: 'string',
-      collapsible: true
-    },
-    {
-      title: 'Assigned Roles',
-      field: 'assignedRoles',
-      align: 'left',
-      type: 'string',
-      collapsible: true
-    }
-  ]
-
   const [tableFilter, setTableFilter] = useState<TeamCapacityTableFilter>({
     teamMemberName: null,
     baseRole: null,
@@ -93,31 +32,29 @@ const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
     endDate: null
   })
 
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+
   const { showNotification } = useNotification()
 
-  const {
-    data: filterOptions,
-    isLoading: isFilterOptionsLoading,
-    error,
-    isError
-  } = useQuery(
-    ['domains'],
-    async () => {
-      const result = await makeCoreGetRequest('/governance/domains')
-      const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
-
-      setDomainFilterValue(resultOptions[0])
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
+  const tableFilterFields = useMemo(
+    () => buildTableFilterFields(tableFilter, setTableFilter),
+    [tableFilter]
   )
+  const tableColumns = useMemo(() => buildColumns(searchParams), [searchParams])
+
+  useEffect(() => {
+    ;(async () => {
+      if (storedGovernanceDomains === null) {
+        dispatchFetchDomains()
+      } else {
+        const resultOptions =
+          toAsyncSelectOptions(storedGovernanceDomains, 'domain', 'domain') || []
+        setDomainFilterValue(resultOptions[0])
+        setDomainFilterOptions(resultOptions)
+      }
+    })()
+  }, [storedGovernanceDomains])
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
@@ -159,64 +96,11 @@ const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
     }
   }
 
-  const tableFilterFields = [
-    {
-      name: 'teamMemberName',
-      label: 'Person',
-      type: 'text',
-      filter: <Input type="text" name="teamMemberName" label="Person" variant="standard" value="" />
-    },
-    {
-      name: 'baseRole',
-      label: 'Base Role',
-      type: 'text',
-
-      filter: (
-        <Input
-          type="text"
-          name="baseRole"
-          label="Base Role"
-          variant="standard"
-          onChange={value => setTableFilter({ ...tableFilter, baseRole: value })}
-          value={tableFilter.baseRole}
-        />
-      )
-    },
-    {
-      name: 'startDate',
-      label: 'Start Date',
-      type: 'date',
-
-      filter: (
-        <DatePicker
-          value={tableFilter.startDate}
-          onChange={value => setTableFilter({ ...tableFilter, startDate: value })}
-          label="Start date"
-          variant="standard"
-        />
-      )
-    },
-    {
-      name: 'endDate',
-      label: 'End Date',
-      type: 'date',
-
-      filter: (
-        <DatePicker
-          value={tableFilter.endDate}
-          onChange={value => setTableFilter({ ...tableFilter, endDate: value })}
-          label="End date"
-          variant="standard"
-        />
-      )
-    }
-  ]
-
   return (
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
-          {isFilterOptionsLoading && (
+          {!storedGovernanceDomains && (
             <div style={{ display: 'flex' }}>
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
             </div>
@@ -230,7 +114,7 @@ const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
               label="Domain"
               disableClearable
               value={domainFilterValue}
-              options={filterOptions}
+              options={domainFilterOptions}
               onChange={handleFilterChange}
             />
           </Grid>
@@ -245,10 +129,9 @@ const TeamCapacity: React.FC<EditTeamAssignmentProps> = props => {
             items={tableItems}
             fetchData={fetchData}
             isLoading={isLoading}
-            columns={columns}
+            columns={tableColumns}
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
           />
         </Box>
