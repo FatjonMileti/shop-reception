@@ -156,3 +156,8 @@ export interface UsageReportItem {
   lastChange: Date
   applicationReportDynamicDtos: ApplicationReportDynamicDtosItem[]
 }
+
+export interface IdNameInterface {
+  id: string,
+  name: string
+}
