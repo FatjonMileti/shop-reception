@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { NotificationActions, NotificationState } from 'components/Notification/notificationSlice'
+import { NotificationActions, NotificationState } from 'reducers/notificationSlice'
 
 const useNotification = () => {
   const dispatch = useDispatch()

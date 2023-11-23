@@ -27,7 +27,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@fullscreendigital/carrefour-dex-fe": "^2.0.7",
+    "@fullscreendigital/carrefour-dex-fe": "^2.0.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.13",
     "@reduxjs/toolkit": "^1.9.3",
@@ -73,6 +73,7 @@
     "@babel/preset-react": "^7.16.7",
     "@gfx/zopfli": "^1.0.15",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.8",
+    "@types/material-ui": "^0.21.14",
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "compression-webpack-plugin": "^10.0.0",

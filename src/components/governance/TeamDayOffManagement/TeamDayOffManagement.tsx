@@ -6,8 +6,8 @@ import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/
 import { Input } from 'components/core-ui/Input'
 import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { useNotification, usePermissions } from 'hooks'
-import { useMemo, useState } from 'react'
+import { useGovernanceDomains, useNotification, usePermissions } from 'hooks'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
@@ -17,9 +17,16 @@ import { NewTimeOff } from './NewTimeOff'
 import s from './TeamDayOffManagement.modules.scss'
 import { columns } from './helpers'
 import { toTableRowItems } from './serializers'
+import { RootState } from 'configureStore'
+import { useSelector } from 'react-redux'
 
 const TeamDayOffManagement = () => {
+  const { dispatchFetchDomains } = useGovernanceDomains()
+  const storedGovernanceDomains = useSelector((state: RootState) => state.governanceDomains.domains)
+
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
+  const [domainFilterOptions, setDomainFilterOptions] = useState<ValueLabelInterface[]>(null)
+
   const [tableItems, setTableItems] = useState<TeamDayOffManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -34,24 +41,18 @@ const TeamDayOffManagement = () => {
 
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
 
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
-    ['domains'],
-    async () => {
-      const result = await makeCoreGetRequest('/governance/domains')
-      const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
-
-      setDomainFilterValue(resultOptions[0])
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
+  useEffect(() => {
+    ;(async () => {
+      if (storedGovernanceDomains === null) {
+        dispatchFetchDomains()
+      } else {
+        const resultOptions =
+          toAsyncSelectOptions(storedGovernanceDomains, 'domain', 'domain') || []
+        setDomainFilterValue(resultOptions[0])
+        setDomainFilterOptions(resultOptions)
       }
-    }
-  )
+    })()
+  }, [storedGovernanceDomains])
 
   const { data: teamMembers, isLoading: isTeamMembersLoading } = useQuery(
     ['teamMembers', domainFilterValue],
@@ -184,19 +185,20 @@ const TeamDayOffManagement = () => {
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
-          {isFilterOptionsLoading || isTeamMembersLoading ? (
+          {!storedGovernanceDomains || isTeamMembersLoading ? (
             <div style={{ display: 'flex' }}>
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
             </div>
           ) : (
             <Grid xs={12} md={3} item>
               <AsyncAutocomplete
+                applyCustomStyle
                 variant="standard"
                 name="teamMember.domain"
                 label="Domain"
                 disableClearable
                 value={domainFilterValue}
-                options={filterOptions}
+                options={domainFilterOptions}
                 onChange={handleFilterChange}
               />
             </Grid>
