@@ -75,6 +75,7 @@ const Table = props => {
       totalCount={totalCount}
       isRemote
       rowsPerPage={props.rowsPerPage || 10}
+      hasCustomPagination
     />
   )
 }
