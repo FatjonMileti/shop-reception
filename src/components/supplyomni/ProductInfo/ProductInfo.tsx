@@ -69,7 +69,7 @@ const ProductInfo: React.FC<ProductInfoProps> = props => {
                   queryKey: ['cart-products']
                 })
               }
-              actionUrl="/supply-omni/cart/product/:id?purchaseOption=INTERNAL_BUYBACK"
+              actionUrl={`/supply-omni/cart/product/:id?purchaseOption=${product.purchaseOption}`}
               content={'Sunteti sigur ca vreti sa stergeti acest produs din cos?'}
             />
           </Box>
