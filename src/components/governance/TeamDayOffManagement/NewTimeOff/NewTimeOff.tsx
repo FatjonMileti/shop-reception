@@ -88,6 +88,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
           ) : (
             <AsyncAutocomplete
               variant="outlined"
+              applyCustomStyle
               name="teamMember"
               label="Team member"
               options={teamMembers}

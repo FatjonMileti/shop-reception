@@ -1,25 +1,23 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Box, CircularProgress, Grid, Paper } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
-import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
-import { useNotification, usePermissions } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
-import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { Table } from 'components/core-ui/Table'
 import { Input } from 'components/core-ui/Input'
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { Table } from 'components/core-ui/Table'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { RootState } from 'configureStore'
+import { useGovernanceDomains, useNotification } from 'hooks'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useParams, useSearchParams } from 'react-router-dom'
+import { makeCoreGetRequest } from 'utils/api'
+import { formatErrorMessage } from 'utils/formatting'
+import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import {
   IndividualCapacityTableFilter,
   TeamAssignmentItem,
-  TeamCapacityTableFilter,
   ValueLabelInterface
 } from '../interfaces'
-import { useQuery } from 'react-query'
-import { Link } from 'components/core-ui/Link'
-import { useParams, useSearchParams } from 'react-router-dom'
-import dayjs from 'dayjs'
 
 interface EditTeamAssignmentProps {
   isModalOpen: boolean
@@ -155,7 +153,12 @@ const columns = [
 ]
 
 const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
+  const { dispatchFetchDomains } = useGovernanceDomains()
+  const storedGovernanceDomains = useSelector((state: RootState) => state.governanceDomains.domains)
+
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
+  const [domainFilterOptions, setDomainFilterOptions] = useState<ValueLabelInterface[]>(null)
+
   const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -173,29 +176,18 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
 
   const { showNotification } = useNotification()
 
-  const {
-    data: filterOptions,
-    isLoading: isFilterOptionsLoading,
-    error,
-    isError
-  } = useQuery(
-    ['domains'],
-    async () => {
-      const result = await makeCoreGetRequest('/governance/domains')
-      const resultOptions = toAsyncSelectOptions(result, 'domain', 'domain') || []
-
-      setDomainFilterValue(resultOptions[0])
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
+  useEffect(() => {
+    ;(async () => {
+      if (storedGovernanceDomains === null) {
+        dispatchFetchDomains()
+      } else {
+        const resultOptions =
+          toAsyncSelectOptions(storedGovernanceDomains, 'domain', 'domain') || []
+        setDomainFilterValue(resultOptions[0])
+        setDomainFilterOptions(resultOptions)
       }
-    }
-  )
+    })()
+  }, [storedGovernanceDomains])
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
@@ -214,6 +206,7 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/governance/individualCapacity',
+          filters: [{ name: 'teamMember.domain', value: domainFilterValue.value }],
           extraUrlParams: [{ name: 'id', value: id }],
           tableFilters: test
         })
@@ -279,7 +272,7 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
-          {isFilterOptionsLoading && (
+          {!storedGovernanceDomains && (
             <div style={{ display: 'flex' }}>
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
             </div>
@@ -287,12 +280,13 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
 
           <Grid xs={12} md={3} item>
             <AsyncAutocomplete
+              applyCustomStyle
               variant="standard"
               name="teamMember.domain"
               label="Domain"
               disableClearable
               value={domainFilterValue}
-              options={filterOptions}
+              options={domainFilterOptions}
               onChange={handleFilterChange}
             />
           </Grid>

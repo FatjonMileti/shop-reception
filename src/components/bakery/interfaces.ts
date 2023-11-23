@@ -165,3 +165,8 @@ export interface SalesCadentierItem {
     clearanceSales: number
     list: SalesCadentierListItem[]
 }
+
+export interface IdNameInterface {
+  id: string,
+  name: string
+}
