@@ -230,7 +230,7 @@ const TeamDayOffManagement = () => {
           />
           <Table
             hideCheckbox
-            orderBy="teamMemberName"
+            orderBy="teamMember.name"
             order="asc"
             columns={columns}
             items={tableItems}
