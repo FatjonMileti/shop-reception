@@ -35,7 +35,8 @@ const ShoppingCart = () => {
   const updateCartItemQuantity = async values => {
     await makeCorePutRequest(`/supply-omni/cart/product`, {
       quantity: values.quantity,
-      id: values.id
+      id: values.id,
+      purchaseOption: values.purchaseOption
     })
   }
 
@@ -44,7 +45,7 @@ const ShoppingCart = () => {
     {
       onSuccess: res => {
         showNotification({
-          message: 'Item edited successfully',
+          message: 'Cantitatea produsului a fost modificata cu succes.',
           type: 'success'
         })
 
@@ -52,15 +53,16 @@ const ShoppingCart = () => {
       },
       onError: res => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(res)}`,
+          message: `A aparut o eroare la schimbarea cantitatii. ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
     }
   )
+
   return (
     <div className={s.mainContainer}>
-      {isLoadingGetProducts || isLoadingUpdateCart ? (
+      {isLoadingGetProducts ? (
         <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
       ) : (
         <>
