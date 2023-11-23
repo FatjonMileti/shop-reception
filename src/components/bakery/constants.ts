@@ -9,5 +9,7 @@ export const URLS = {
   AUTH_FAMILY_PRODUCTS: 'bakery/admin/family-products',
   AUTH_PRODUCTS: 'bakery/admin/products',
   AUTH_SALES_CADENTIER: 'bakery/admin/sales-cadentier',
-  AUTH_PRODUCT_MANAGEMENT: 'bakery/formator/product-management-formator'
+  AUTH_PRODUCT_MANAGEMENT: 'bakery/formator/product-management-formator',
+  AUTH_PRODUCTION_MANAGEMENT: 'bakery/formator/cadentier-formator',
+  AUTH_PRODUCTION_MANAGEMENT_PRINT: 'bakery/formator/cadentier-formator-print'
 }
