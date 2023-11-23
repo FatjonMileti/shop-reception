@@ -48,6 +48,7 @@ const ProductInfo: React.FC<ProductInfoProps> = props => {
               updateCartMutation={updateCartMutation}
               quantity={product.quantity}
               id={product.id}
+              purchaseOption={product.purchaseOption}
             />
 
             <ProductPrice
