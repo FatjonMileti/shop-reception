@@ -30,7 +30,8 @@ const GroupTable = props => {
       filters: rest.tableFilters || []
     }
   )
-
+    console.log('tableState',tableState);
+    console.log('rest',rest);
   const [dynamicColumns, setDynamicColumns] = useState([])
   const [dynamicItems, setDynamicItems] = useState([])
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)

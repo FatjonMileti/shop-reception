@@ -3,7 +3,7 @@ import s from './SalesCadentier.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
-import { StoreItem } from '../interfaces'
+import { StoreItem, ValueLabelInterface } from '../interfaces'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
@@ -13,8 +13,10 @@ import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
 import { useQuery } from 'react-query'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { formatAndDownloadResponse } from 'utils/helpers'
-import { FileDownloadOutlined } from '@mui/icons-material'
+import { formatAndDownloadResponse, formatPayloadDate } from 'utils/helpers'
+import { DownloadOutlined, FileDownloadOutlined } from '@mui/icons-material'
+import { GroupTable } from 'components/core-ui/GroupTable'
+import { TableState } from './interfaces'
 
 const SalesCadentier = () => {
   const [tableItems, setTableItems] = useState<StoreItem[]>([])
@@ -24,33 +26,13 @@ const SalesCadentier = () => {
   const { showNotification } = useNotification()
 
   const [dateFilterValue, setDateFilterValue] = useState(dayjs().subtract(1, 'day'))
-  const [storeFilterValue, setStoreFilterValue] = useState(null)
+  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
   
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
-    setIsLoading(true)
-
-    try {
-      const response = await makeCoreGetRequest(
-        toTableGETUrl({
-          url: '/bakery/report/product/sale/cadentier',
-          filters: [],
-          tableFilters,
-          page,
-          rowsPerPage,
-          order,
-          orderBy
-        })
-      )
-      setTableItems(toTableRowItems(response.list))
-      setTotalCount(response.page.totalCount)
-      setIsLoading(false)
-    } catch (error) {
-      showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
-    }
-  }
+  const [tableState, setTableState] = useState<TableState>({
+    order: null,
+    orderBy: null,
+    tableFilters: null
+  })
 
   const { data: stores, isLoading: isStoresLoading } = useQuery(
     ['store'],
@@ -70,9 +52,19 @@ const SalesCadentier = () => {
   )
 
   const handleFilterChange = (filter: 'date' | 'store', value: any): void => {
+    const filters = [
+      { name: 'date', value: formatPayloadDate(dateFilterValue) },
+      { name: 'store', value: storeFilterValue?.value },
+    ];
+
     switch(filter) {
       case 'store': 
         setStoreFilterValue(value)
+        if (storeFilterValue === null) return
+        setTableState({
+          ...tableState,
+          tableFilters: filters 
+        })
         setShouldRefreshData(true);
         break
       case 'date': 
@@ -82,6 +74,56 @@ const SalesCadentier = () => {
       default: return;
     }
   }
+
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+    setIsLoading(true)
+
+    try {
+      const filters = [
+        { name: 'date', value: formatPayloadDate(dateFilterValue) },
+        { name: 'store', value: storeFilterValue?.value },
+      ]
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: '/bakery/report/product/sale/cadentier',
+          filters: filters,
+          tableFilters,
+          page,
+          rowsPerPage,
+          order,
+          orderBy
+        })
+      )
+      setTableItems(response.list)
+      setTotalCount(response.page.totalCount)
+      setIsLoading(false)
+      setTableState({
+        order,
+        orderBy,
+        tableFilters: filters
+      })
+      window.history.replaceState(
+        {
+          ...window.history.state,
+          tableState: {
+            page,
+            rowsPerPage: 25,
+            order,
+            orderBy,
+            filters
+          }
+        },
+        document.title
+      )
+      return response
+    } catch (error) {
+      showNotification({
+        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
   const handleDownload = async () => {
     const url = toTableGETUrl({
       url: '/bakery/report/download/sale',
@@ -102,7 +144,7 @@ const SalesCadentier = () => {
       })
     }
   }
-console.log(columns())
+
   return (
     <div className={s.mainContainer}>
         <Paper className={s.filtersContainer}>
@@ -136,7 +178,7 @@ console.log(columns())
         </Paper>
         {storeFilterValue && (
             <Box>
-                <Table
+                {/* <Table
                 hideCheckbox
                 columns={columns()}
                 items={tableItems}
@@ -156,6 +198,33 @@ console.log(columns())
                     onClick: () => handleDownload()
                     }
                 ]}
+                /> */}
+                 <GroupTable
+                  hideCheckbox
+                  columns={columns}
+                  items={tableItems}
+                  fetchData={fetchData}
+                  isLoading={isLoading}
+                  totalCount={totalCount}
+                  shouldRefreshData={shouldRefreshData}
+                  setShouldRefreshData={setShouldRefreshData}
+                  stickyRatio={0.2}
+                  groupCount={3}
+                  frequency='day'
+                  hasStickyHeader
+                  maxHeight={'600px'}
+                  hasSearchInput
+                  toolbarActions={[
+                    {
+                      label: 'Descarca',
+                      icon: <DownloadOutlined />,
+                      onClick: () => handleDownload()
+                    }
+                  ]}
+                  order={tableState.order}
+                  orderBy={tableState.orderBy}
+                  tableFilters={tableState.tableFilters}
+                  filters={tableState.tableFilters}
                 />
             </Box>
         )}
