@@ -132,6 +132,7 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
             variant="standard"
             name="department.name"
             label="Selecteaza magazin"
+            applyCustomStyle
             disableClearable
             value={{ value: formik.values.departmentName, label: formik.values.departmentName }}
             options={volumetryDepartmentOptions}

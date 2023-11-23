@@ -192,6 +192,7 @@ const TeamDayOffManagement = () => {
           ) : (
             <Grid xs={12} md={3} item>
               <AsyncAutocomplete
+                applyCustomStyle
                 variant="standard"
                 name="teamMember.domain"
                 label="Domain"

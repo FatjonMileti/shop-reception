@@ -157,6 +157,7 @@ const EmployeesTab = () => {
           <AsyncAutocomplete
             variant="standard"
             name="name"
+            applyCustomStyle
             label="Nume"
             disableClearable
             value={nameFilterValue}
@@ -211,6 +212,7 @@ const EmployeesTab = () => {
           <Grid xs={12} md={3} item>
             <AsyncAutocomplete
               variant="standard"
+              applyCustomStyle
               name="store.id"
               label="Selecteaza magazin"
               disableClearable
