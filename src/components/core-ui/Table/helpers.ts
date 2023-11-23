@@ -162,7 +162,9 @@ export const getCustomFiltersGetUrl = (filters: Filter[]) => {
 }
 
 export const getAllFilters = (filters: Filter[]) =>
-  filters.filter(filter => filter.value !== undefined && filter.value !== '' && filter.value !== null)
+  filters.filter(
+    filter => filter.value !== undefined && filter.value !== '' && filter.value !== null
+  )
 
 export const getTableQueryUrl = params =>
   Object.keys(params).reduce(
