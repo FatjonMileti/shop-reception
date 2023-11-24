@@ -1,4 +1,4 @@
-import { CircularProgress, Paper } from '@mui/material'
+import { Box, CircularProgress, Paper } from '@mui/material'
 import s from './ExistingClient.modules.scss'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Table } from 'components/core-ui/Table'
@@ -20,11 +20,11 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
-  const { id } = useParams()
 
-  const [searchField, setSearchField] = useState<string>(null)
+  const [searchField, setSearchField] = useState<string>('')
+  const [showTable, setShowTable] = useState(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [tableItems, setTableItems] = useState(null)
+  const [tableItems, setTableItems] = useState([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [isCreateClientModalOpen, setIsCreateClientModalOpen] = useState<boolean>(false)
@@ -81,37 +81,38 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
       )}
 
       <div className={s.mainContainer}>
-        <Paper sx={{ display: 'flex', justifyContent: 'space-between', padding: '12px' }}>
-          <Input
-            type="text"
-            name="name"
-            label="CUI / Nume / Telefon"
-            variant="standard"
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchField(e.target.value)}
-            value={searchField}
-            width="80%"
-            style={{ justifyContent: 'center' }}
-          />
-          <Button
-            onClick={() =>
-              searchField &&
-              fetchData({
-                page: 0,
-                rowsPerPage: 5,
-                order: 'asc',
-                orderBy: 'name',
-                tableFilters: {}
-              })
-            }
-            label=""
-            variant="contained"
-            style={{ marginTop: '16px' }}
-          >
-            <SearchOutlinedIcon /> CAUTA CLIENT
-          </Button>
+        <Paper className={s.searchPaper}>
+          <Box className={s.searchContainer}>
+            <div>
+              <Input
+                type="text"
+                name="name"
+                label="CUI / Nume / Telefon"
+                variant="outlined"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchField(e.target.value)}
+                value={searchField}
+                fullWidth
+                style={{ justifyContent: 'center' }}
+              />
+            </div>
+            <Button
+              onClick={() => {
+                if (searchField) {
+                  // to avoid initiallly making 2 calls
+                  showTable && setShouldRefreshData(true)
+                  setShowTable(true)
+                }
+              }}
+              label=""
+              variant="contained"
+              style={{ marginTop: '16px', marginLeft: '16px' }}
+            >
+              <SearchOutlinedIcon /> CAUTA CLIENT
+            </Button>
+          </Box>
         </Paper>
 
-        {tableItems && (
+        {searchField && showTable && (
           <div
             style={{
               display: 'flex',
@@ -125,14 +126,14 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
               order="asc"
               columns={columns}
               items={tableItems}
-              fetchData={() => {}}
+              fetchData={fetchData}
               isLoading={isLoading}
               totalCount={totalCount}
               shouldRefreshData={shouldRefreshData}
               setShouldRefreshData={setShouldRefreshData}
               rowActions={[
                 {
-                  label: 'Detalii',
+                  label: 'Selecteaza',
                   labelColor: 'white',
                   typographyVariant: 'medium',
                   backgroundColor: '#33691E',
