@@ -94,8 +94,6 @@ export const MySales = () => {
     <div className={s.mainContainer}>
       <Table
         hideCheckbox
-        order="desc"
-        orderBy="orderCreationDate"
         columns={columnsWithActions}
         items={tableItems}
         fetchData={fetchData}
