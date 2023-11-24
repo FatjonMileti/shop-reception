@@ -121,7 +121,7 @@ export const useSupplyOmniRoutes = applicationPages => {
           <PrivateRoute
             component={BillsTables}
             applicationPages={applicationPages}
-            checkIsAuthorized
+            // checkIsAuthorized
           />
         }
       />

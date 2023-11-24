@@ -12,12 +12,18 @@ import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import SubmitModal from '../SubmitModal/SubmitModal'
 import s from './BillsTable.modules.scss'
-import { defaultTableFilters, tableColumns } from './constants'
+import {
+  GENERATE_INVOICE_BUTTON_LABEL,
+  SHOW_INVOICE_BUTTON_LABEL,
+  STORE_DELIVERY_TYPE,
+  defaultTableFilters,
+  tableColumns
+} from './constants'
 import {
   BillsResponseModel,
   BillsTableProps,
   DeliveryOptionModel,
-  RowActionType,
+  TableType,
   TableFilters,
   TableRowModel
 } from './interaces'
@@ -25,7 +31,7 @@ import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
 
 export const BillsTable: React.FC<BillsTableProps> = props => {
-  const { urlResource, rowAction } = { ...props }
+  const { urlResource, tableType } = props
 
   const { showNotification } = useNotification()
   const navigate = useNavigate()
@@ -40,12 +46,12 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
   const [isPrepareOrderModalOpen, setIsPrepareOrderModalOpen] = useState<boolean>(false)
 
   const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(null)
-  const [withMyOrders, setWithMyOrders] = useState(null)
+  const [withMyOrders, setWithMyOrders] = useState(true)
 
   const openPrepareOrderModal = (): void => setIsPrepareOrderModalOpen(true)
   const closePrepareOrderModal = (): void => setIsPrepareOrderModalOpen(false)
 
-  const handleDepartmentFilterChange = (value): void => {
+  const handleDeliveryOptionFilterChange = (value): void => {
     setSelectedDeliveryOption(value)
     setShouldRefreshData(true)
   }
@@ -56,7 +62,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
   }
 
   const columnsWithActions = useMemo(() => {
-    if (rowAction === RowActionType.PAID) {
+    if (tableType === TableType.ALL) {
       const onPrepareOrder = row => {
         setSelectedRow(row)
         openPrepareOrderModal()
@@ -69,11 +75,11 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           align: 'left',
           render: row => (
             <Box key={row.id}>
-              {row.prepared !== null && (
+              {row.deliveryType === STORE_DELIVERY_TYPE && (
                 <Switch
                   key={row.id}
                   checked={row.prepared}
-                  disabled={row.prepared !== false}
+                  disabled={row.prepared === true}
                   onChange={() => onPrepareOrder(row)}
                 />
               )}
@@ -88,23 +94,26 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
   const tableFilterInputs = useMemo(() => buildTableFilterInputs(tableFilters, setTableFilters), [])
 
   const rowActions = useMemo(() => {
-    if (rowAction !== RowActionType.PAID) {
-      const selectRow = (rowId: number, action: RowActionType) => {
+    if (tableType !== TableType.ALL) {
+      const selectRow = (rowId: number, action: TableType) => {
         const item = tableItems.find(item => item.id === rowId)
         setSelectedRow(item)
-        if (action === RowActionType.WITH_INVOICE) {
+        if (action === TableType.WITH_INVOICE) {
           navigate(`/supplyOmni/bills/${item.id}`)
-        } else if (action === RowActionType.WITHOUT_INVOICE) {
+        } else if (action === TableType.WITHOUT_INVOICE) {
           navigate(`/supplyOmni/receiptClientDetails/${item.clientId}?orderId=${item.id}`)
         }
       }
       const actions = [
         {
-          label: rowAction.toString(),
+          label:
+            tableType === TableType.WITH_INVOICE
+              ? SHOW_INVOICE_BUTTON_LABEL
+              : GENERATE_INVOICE_BUTTON_LABEL,
           labelColor: 'white',
           typographyVariant: 'medium',
           backgroundColor: '#0970E6',
-          onClick: (e, rowId) => selectRow(rowId, rowAction)
+          onClick: (e, rowId) => selectRow(rowId, tableType)
         }
       ]
       return actions
@@ -124,7 +133,9 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Eroare la preluarea datelor de optiuni pentru livrare. ${formatErrorMessage(
+            error
+          )}`,
           type: 'error'
         })
       }
@@ -134,16 +145,12 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
+      const extraCustomUrlParams: Filter[] = [
+        ...tableFilters,
+        { name: 'myOrders', value: String(withMyOrders) }
+      ]
+
       let filters: Filter[] = []
-      if (withMyOrders) {
-        filters = [
-          ...filters,
-          {
-            name: 'myOrders',
-            value: String(withMyOrders)
-          }
-        ]
-      }
       if (selectedDeliveryOption) {
         filters = [
           ...filters,
@@ -161,7 +168,8 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           rowsPerPage,
           order,
           orderBy,
-          filters
+          filters,
+          extraCustomUrlParams
         })
       )) as BillsResponseModel
       setTableItems(toTableRowItems(response.list))
@@ -170,7 +178,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
     } catch (error) {
       setIsLoading(false)
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `Eroare la preluarea datelor pentru tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -202,7 +210,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
                 label="Tip livrare"
                 value={selectedDeliveryOption}
                 options={deliveryTypeOptions}
-                onChange={handleDepartmentFilterChange}
+                onChange={handleDeliveryOptionFilterChange}
               />
             </Grid>
           </Grid>

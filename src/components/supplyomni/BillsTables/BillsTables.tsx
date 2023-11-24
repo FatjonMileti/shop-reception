@@ -5,21 +5,18 @@ import {
   WITHOUT_INVOICE_RESOURCE_URI,
   WITH_INVOICE_RESOURCE_URI
 } from './BillsTable/constants'
-import { RowActionType } from './BillsTable/interaces'
+import { TableType } from './BillsTable/interaces'
 
 export const BillsTables = () => {
   const tabs = [
     {
-      content: <BillsTable urlResource={ALL_RESOURCE_URI} rowAction={RowActionType.PAID} />,
+      content: <BillsTable urlResource={ALL_RESOURCE_URI} tableType={TableType.ALL} />,
       label: 'TOATE COMENZILE',
       tabIndex: 0
     },
     {
       content: (
-        <BillsTable
-          urlResource={WITH_INVOICE_RESOURCE_URI}
-          rowAction={RowActionType.WITH_INVOICE}
-        />
+        <BillsTable urlResource={WITH_INVOICE_RESOURCE_URI} tableType={TableType.WITH_INVOICE} />
       ),
       label: 'COMENZI CU FACTURA',
       tabIndex: 1
@@ -28,7 +25,7 @@ export const BillsTables = () => {
       content: (
         <BillsTable
           urlResource={WITHOUT_INVOICE_RESOURCE_URI}
-          rowAction={RowActionType.WITHOUT_INVOICE}
+          tableType={TableType.WITHOUT_INVOICE}
         />
       ),
       label: 'COMENZI FARA FACTURA',

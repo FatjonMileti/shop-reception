@@ -3,7 +3,7 @@ import { BasePageResponseModel } from 'shared/interfaces'
 
 export interface BillsTableProps {
   urlResource: string
-  rowAction: RowActionType
+  tableType: TableType
 }
 
 export interface TableFilters {
@@ -51,8 +51,8 @@ export interface DeliveryOptionModel {
 
 export type BillsResponseModel = BasePageResponseModel<BillModel>
 
-export enum RowActionType {
-  PAID = 'Pregateste comanda',
-  WITH_INVOICE = 'Vizualizare factura',
-  WITHOUT_INVOICE = 'Genereaza factura'
+export enum TableType {
+  ALL,
+  WITH_INVOICE,
+  WITHOUT_INVOICE
 }

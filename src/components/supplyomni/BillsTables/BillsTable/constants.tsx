@@ -5,6 +5,11 @@ export const ALL_RESOURCE_URI = '/supply-omni/order/paid'
 export const WITH_INVOICE_RESOURCE_URI = '/supply-omni/order/with-invoice'
 export const WITHOUT_INVOICE_RESOURCE_URI = '/supply-omni/order/without-invoice'
 
+export const STORE_DELIVERY_TYPE = 'Livrare din magazin'
+
+export const SHOW_INVOICE_BUTTON_LABEL = 'Vizualizare factura'
+export const GENERATE_INVOICE_BUTTON_LABEL = 'Genereaza factura'
+
 export const SUBMIT_MODAL_CONTENT =
   'Esti sigur ca ai pregatit comanda? Aceasta actiune nu mai poate fi anulata!'
 

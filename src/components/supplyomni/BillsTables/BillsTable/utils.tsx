@@ -1,6 +1,6 @@
-import { Input } from 'components/core-ui/Input'
-import { RowActionType, TableFilters, TableRowModel } from './interaces'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { Input } from 'components/core-ui/Input'
+import { TableFilters } from './interaces'
 
 export const buildTableFilterInputs = (
   tableFilter: TableFilters,
@@ -15,7 +15,7 @@ export const buildTableFilterInputs = (
         type="text"
         name="agentName"
         label="Nume agent"
-        variant="standard"
+        variant="outlined"
         onChange={value => setTableFilter({ ...tableFilter, agentName: value })}
         value={tableFilter.agentName}
       />
@@ -30,22 +30,22 @@ export const buildTableFilterInputs = (
         type="text"
         name="clientName"
         label="Nume client"
-        variant="standard"
+        variant="outlined"
         onChange={value => setTableFilter({ ...tableFilter, clientName: value })}
         value={tableFilter.clientName}
       />
     )
   },
   {
-    name: 'productsName',
+    name: 'products.name',
     label: 'Nume produse',
     type: 'text',
     filter: (
       <Input
         type="text"
-        name="productsName"
+        name="products.name"
         label="Nume produs"
-        variant="standard"
+        variant="outlined"
         onChange={value => setTableFilter({ ...tableFilter, productsName: value })}
         value={tableFilter.productsName}
       />
@@ -60,7 +60,7 @@ export const buildTableFilterInputs = (
         type="number"
         name="id"
         label="Numar comanda"
-        variant="standard"
+        variant="outlined"
         onChange={value => setTableFilter({ ...tableFilter, id: value })}
         value={tableFilter.id}
       />
@@ -74,8 +74,8 @@ export const buildTableFilterInputs = (
     filter: (
       <DatePicker
         label="Data inceput"
-        variant="standard"
-        onChange={(value: any) => console.log(value)}
+        variant="outlined"
+        onChange={(value: any) => setTableFilter({ ...tableFilter, startDate: value })}
         value={tableFilter.startDate}
       />
     )
@@ -87,8 +87,8 @@ export const buildTableFilterInputs = (
     filter: (
       <DatePicker
         label="Data sfarsit"
-        variant="standard"
-        onChange={(value: any) => console.log(value)}
+        variant="outlined"
+        onChange={(value: any) => setTableFilter({ ...tableFilter, endDate: value })}
         value={tableFilter.endDate}
       />
     )
