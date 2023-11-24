@@ -82,7 +82,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
               items={[
                 {
                   label: 'Person name:',
-                  name: (editItem as TeamDayOffManagementItem)?.teamMemberName
+                  name: (editItem as TeamDayOffManagementItem)?.['teamMember.name']
                 }
               ]}
             />
