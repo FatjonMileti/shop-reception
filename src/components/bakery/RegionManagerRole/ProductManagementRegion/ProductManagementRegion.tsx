@@ -1,9 +1,8 @@
 import { Box, CircularProgress, Divider, Grid } from '@mui/material'
-import s from './ProductManagementRegion.modules.scss'
+import s from '../../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
-import { Add } from '@mui/icons-material'
 import { ProductManagementItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -29,7 +28,7 @@ const ProductManagementRegion = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/region/store/products',
+          url: '/bakery/region/store/products/x',
           filters: [],
           searchText,
           searchFields: ["name","metiCode","pluCode","familyName"],
