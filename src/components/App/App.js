@@ -25,8 +25,8 @@ import { useVolumetryRoutes } from 'components/volumetry/routes'
 import { useBakeryRoutes } from 'components/bakery/routes'
 import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
 import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
-import { useMerchandiseRoutes } from "../merchandise/routes";
-import { useShopReceptionRoutes } from "../shop-reception/routes"
+import { useMerchandiseRoutes } from '../merchandise/routes'
+import { useShopReceptionRoutes } from '../shop-reception/routes'
 
 const queryClient = new QueryClient({
   defaultOptions: {
