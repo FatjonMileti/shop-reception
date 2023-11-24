@@ -32,6 +32,7 @@ const GroupTable = props => {
   )
     console.log('tableState',tableState);
     console.log('rest',rest);
+    console.log('window histoy',window.history.state);
   const [dynamicColumns, setDynamicColumns] = useState([])
   const [dynamicItems, setDynamicItems] = useState([])
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)

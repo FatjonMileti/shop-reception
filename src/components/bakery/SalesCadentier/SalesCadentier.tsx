@@ -14,7 +14,7 @@ import dayjs from 'dayjs'
 import { useQuery } from 'react-query'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { formatAndDownloadResponse, formatPayloadDate } from 'utils/helpers'
-import { DownloadOutlined, FileDownloadOutlined } from '@mui/icons-material'
+import { DownloadOutlined } from '@mui/icons-material'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { TableState } from './interfaces'
 
@@ -86,7 +86,7 @@ const SalesCadentier = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/report/product/sale/cadentier',
-          filters: filters,
+          filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -102,6 +102,7 @@ const SalesCadentier = () => {
         orderBy,
         tableFilters: filters
       })
+      console.log('filters', filters);
       window.history.replaceState(
         {
           ...window.history.state,
@@ -115,6 +116,8 @@ const SalesCadentier = () => {
         },
         document.title
       )
+
+      console.log('window.history.state 2222222',window.history.state)
       return response
     } catch (error) {
       showNotification({
