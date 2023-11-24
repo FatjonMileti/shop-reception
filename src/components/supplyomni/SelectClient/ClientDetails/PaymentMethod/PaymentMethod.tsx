@@ -92,6 +92,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
       if (values.hasDifferentDeliveryAddress === false) {
         delete values['county']
         delete values['city']
+        delete values['newDeliveryAddress']
       }
       mutate(values)
     }
