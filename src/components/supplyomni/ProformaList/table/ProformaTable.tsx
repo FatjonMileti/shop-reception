@@ -141,7 +141,7 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
         <Table
           hideCheckbox
           order="desc"
-          orderBy="orderCreationDate"
+          orderBy="creationDate"
           columns={columnsWithActions}
           items={tableItems}
           fetchData={fetchData}
