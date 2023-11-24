@@ -18,11 +18,9 @@ import { PageForm } from 'components/core-ui/PageForm'
 import { PageFormRadio } from 'components/core-ui/PageFormRadio'
 import { PageInfo } from 'components/core-ui/PageInfo'
 import { PdfViewer } from 'components/core-ui/PdfViewer'
-import { PlusMinusNumberInput } from 'components/core-ui/PlusMinusNumberInput'
 import { PriceSpan } from 'components/core-ui/PriceSpan'
 import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
 import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
-import { ShoppingCart } from 'components/core-ui/ShoppingCart'
 import { Switch } from 'components/core-ui/Switch'
 import { Table } from 'components/core-ui/Table'
 import { FiltersWithResultsTable } from 'components/core-ui/FiltersWithResultsTable'
@@ -70,11 +68,9 @@ export const Components = {
   PageFormRadio,
   PageInfo,
   PdfViewer,
-  PlusMinusNumberInput,
   PriceSpan,
   ReceiptBarcodeScanner,
   SimpleKeyValuePairs,
-  ShoppingCart,
   Switch,
   Table,
   FiltersWithResultsTable,

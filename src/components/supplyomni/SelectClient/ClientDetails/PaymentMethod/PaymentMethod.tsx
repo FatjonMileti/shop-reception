@@ -89,6 +89,11 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
+      if (values.hasDifferentDeliveryAddress === false) {
+        delete values['county']
+        delete values['city']
+        delete values['newDeliveryAddress']
+      }
       mutate(values)
     }
   })
@@ -127,6 +132,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
 
         <Box padding={4}>
           <AsyncAutocomplete
+            applyCustomStyle
             variant="standard"
             name="delivery-options"
             label="Alege tipul de livrare"

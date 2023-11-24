@@ -8,7 +8,18 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 
 const CountyCitySelect = (props: CountyCitySelectProps) => {
-  const { county, city, value, onChange, hidden, disabled, error, helperText, required } = props
+  const {
+    county,
+    city,
+    value,
+    onChange,
+    hidden,
+    disabled,
+    error,
+    helperText,
+    required,
+    variant = 'standard'
+  } = props
 
   const [counties, setCounties] = useState([])
   const [cities, setCities] = useState([])
@@ -87,6 +98,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
               : ''
           }
           required={required}
+          variant={variant}
         />
       </Grid>
       <Grid item xs={12} md={6}>
@@ -114,6 +126,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
               : ''
           }
           required={required}
+          variant={variant}
         />
       </Grid>
     </Grid>

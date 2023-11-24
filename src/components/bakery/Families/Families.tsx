@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import s from './Families.modules.scss'
+import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
@@ -23,7 +23,7 @@ const Families = () => {
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
 
     try {
@@ -32,6 +32,8 @@ const Families = () => {
           url: '/bakery/family',
           filters: [],
           tableFilters,
+          searchText,
+          searchFields: ["code","name","moduleName"],
           page,
           rowsPerPage,
           order,
@@ -61,7 +63,6 @@ const Families = () => {
 
   return (
     <div className={s.mainContainer}>
-      {/* TODO add table search bar after UI redesign */}
       <Box>
         <EditFamily 
           isModalOpen={isEditModalOpen}
@@ -71,6 +72,7 @@ const Families = () => {
         />
         <Table
           hideCheckbox
+          hasSearchInput
           columns={columns}
           items={tableItems}
           fetchData={fetchData}

@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import s from './UsersManagement.modules.scss'
+import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useMemo, useState } from 'react'
 import { useNotification } from 'hooks'
@@ -49,7 +49,7 @@ const UsersManagement = () => {
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
 
     try {
@@ -57,6 +57,8 @@ const UsersManagement = () => {
         toTableGETUrl({
           url: '/bakery/user',
           filters: [],
+          searchText,
+          searchFields: ["firstName","lastName","storeName","regionName","roles"],
           tableFilters,
           page,
           rowsPerPage,
@@ -117,7 +119,6 @@ const UsersManagement = () => {
 
   return (
     <div className={s.mainContainer}>
-      {/* TODO add table search bar after UI redesign */}
       <Box>
         <UserModal
           isModalOpen={isEditModalOpen}
@@ -134,6 +135,7 @@ const UsersManagement = () => {
         />
         <Table
           hideCheckbox
+          hasSearchInput
           columns={columnsWithActions}
           items={tableItems}
           fetchData={fetchData}

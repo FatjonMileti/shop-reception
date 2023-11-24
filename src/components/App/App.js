@@ -24,6 +24,7 @@ import { useGovernanceRoutes } from 'components/governance/routes'
 import { useVolumetryRoutes } from 'components/volumetry/routes'
 import { useBakeryRoutes } from 'components/bakery/routes'
 import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
+import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -129,6 +130,11 @@ const App = () => {
             </div>
           )) || (
             <Layout modules={modules} setSubdomainId={setSubdomainId}>
+              <BackButtonTitle
+                applicationPages={applicationPages}
+                modules={modules}
+                subdomainId={subdomainId}
+              ></BackButtonTitle>
               <Routes>
                 {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
