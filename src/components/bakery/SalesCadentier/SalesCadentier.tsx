@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Grid, Paper } from '@mui/material'
-import s from './SalesCadentier.modules.scss'
+import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
@@ -37,7 +37,7 @@ const SalesCadentier = () => {
   const { data: stores, isLoading: isStoresLoading } = useQuery(
     ['store'],
     async () => {
-      const result = await makeCoreGetRequest('/bakery/store/all/stores') //TODO mockoon returns wrong so made a temp api
+      const result = await makeCoreGetRequest('/bakery/store/all')
       const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
       return resultOptions || []
     },
