@@ -21,4 +21,5 @@ export interface CountyCitySelectProps {
   error?: boolean
   helperText?: string
   required?: boolean
+  variant?: "standard" | "outlined"
 }

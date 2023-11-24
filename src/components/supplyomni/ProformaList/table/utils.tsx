@@ -37,13 +37,13 @@ export const buildTableFilterInputs = (
     )
   },
   {
-    name: 'productsName',
+    name: 'products.name',
     label: 'Nume produse',
     type: 'text',
     filter: (
       <Input
         type="text"
-        name="productsName"
+        name="products.name"
         label="Nume produs"
         variant="standard"
         onChange={value => setTableFilter({ ...tableFilter, productsName: value })}

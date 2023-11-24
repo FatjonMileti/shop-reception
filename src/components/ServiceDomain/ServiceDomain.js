@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom'
+import { Divider, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Box, CircularProgress, Paper } from '@mui/material'
+import BackButton from 'components/core-ui/BackButtonTitle/BackButton/BackButton'
 import { Icon } from 'components/core-ui/Icon'
-import s from './ServiceDomain.scss'
-import { Divider, IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { useMemo } from 'react'
-import { ArrowBackIosNewOutlined } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
+import s from './ServiceDomain.scss'
 
 const ServiceDomain = ({
   subdomainId,
@@ -40,13 +40,7 @@ const ServiceDomain = ({
       <Box>
         <Box className={s.moduleHeader}>
           <div className={s.backHolder}>
-            <IconButton className={s.back} onClick={goBack}>
-              <ArrowBackIosNewOutlined />
-            </IconButton>
-
-            <Typography variant="medium">
-              <span className={s.backTitle}>{module?.name || ''}</span>
-            </Typography>
+            <BackButton text={submodule?.name} onNavBack={goBack}></BackButton>
           </div>
         </Box>
 

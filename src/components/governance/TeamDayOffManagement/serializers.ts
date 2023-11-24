@@ -2,7 +2,7 @@ import { formatUIDate } from "utils/helpers";
 
 export const toTableRowItems = items => items.map(item => ({
   id: item.id,
-  teamMemberName: item.teamMember.name,
+  'teamMember.name': item.teamMember.name,
   teamMemberId: item.teamMember.id,
   dayOffType: item.dayOffType,
   startDate: formatUIDate(item.startDate),

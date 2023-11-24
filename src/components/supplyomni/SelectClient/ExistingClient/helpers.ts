@@ -3,10 +3,10 @@ import { RowItem } from './interfaces'
 export const toTableRowItems = (items: RowItem[]) =>
   items.map(item => ({
     id: item.id,
-    name: item.name,
-    cif: item.cif,
-    address: item.address.fullAddress,
-    phone: item.phone
+    name: item.name || '',
+    cif: item.cif || '',
+    address: item.address.fullAddress || '',
+    phone: item.phone || ''
   }))
 
 export const columns = [
