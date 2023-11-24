@@ -14,7 +14,7 @@ const NewAddress: React.FC<NewAddressProps> = props => {
   const { onFieldUpdate, formik } = props
 
   return (
-    <Box padding={4}>
+    <Box paddingLeft={4}>
       <FormGroup>
         <FormControlLabel
           control={
