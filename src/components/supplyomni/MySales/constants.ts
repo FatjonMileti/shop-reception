@@ -1,6 +1,6 @@
 import { TableFilters } from './models'
 
-export const RESOURCE_URI = '/supply-omni/sales'
+export const RESOURCE_URI = '/supply-omni/reports'
 
 export const tableColumns = [
   {

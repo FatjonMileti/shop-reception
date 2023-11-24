@@ -192,6 +192,7 @@ const TeamDayOffManagement = () => {
           ) : (
             <Grid xs={12} md={3} item>
               <AsyncAutocomplete
+                applyCustomStyle
                 variant="standard"
                 name="teamMember.domain"
                 label="Domain"
@@ -229,7 +230,7 @@ const TeamDayOffManagement = () => {
           />
           <Table
             hideCheckbox
-            orderBy="teamMemberName"
+            orderBy="teamMember.name"
             order="asc"
             columns={columns}
             items={tableItems}

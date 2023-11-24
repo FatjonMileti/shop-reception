@@ -153,7 +153,7 @@ const EmployeesTab = () => {
   const tableFilterFields = [
     {
       filter: (
-        <div style={{ width: '100%' }}>
+        <div className={s.autoCompleteStyles}>
           <AsyncAutocomplete
             variant="standard"
             name="name"
@@ -168,7 +168,7 @@ const EmployeesTab = () => {
     },
     {
       filter: (
-        <div style={{ width: '100%' }}>
+        <div className={s.autoCompleteStyles}>
           <AsyncAutocomplete
             variant="standard"
             name="department.name"
@@ -183,7 +183,7 @@ const EmployeesTab = () => {
     },
     {
       filter: (
-        <div style={{ width: '100%' }}>
+        <div className={s.autoCompleteStyles}>
           <AsyncAutocomplete
             variant="standard"
             name="position"
@@ -211,6 +211,7 @@ const EmployeesTab = () => {
           <Grid xs={12} md={3} item>
             <AsyncAutocomplete
               variant="standard"
+              applyCustomStyle
               name="store.id"
               label="Selecteaza magazin"
               disableClearable
