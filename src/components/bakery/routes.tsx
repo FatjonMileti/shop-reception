@@ -11,6 +11,7 @@ import { Families } from './Families'
 import { FamilyProducts } from './Families/FamilyProducts'
 import { Products } from './Products'
 import { SalesCadentier } from './SalesCadentier'
+import { UsageReport } from './UsageReport'
 import { ProductManagement } from './TraineeRole/ProductManagement'
 import { ProductionManagement } from './TraineeRole/ProductionManagement'
 import { ProductionManagementPrint } from './TraineeRole/ProductionManagementPrint'
@@ -92,16 +93,14 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
-
-      {/* Formator */}
       <Route
-        path={URLS.AUTH_PRODUCT_MANAGEMENT}
+        path={URLS.AUTH_USAGE_REPORT}
         element={
           <PrivateRoute
-            component={ProductManagement}
+            component={UsageReport}
             applicationPages={applicationPages}
             checkIsAuthorized
-          />
+        />
         }
       />
       <Route
@@ -114,6 +113,21 @@ export const useBakeryRoutes = applicationPages => {
         />
         }
       />
+
+      
+      {/* Formator */}
+      <Route
+        path={URLS.AUTH_PRODUCT_MANAGEMENT}
+        element={
+          <PrivateRoute
+            component={ProductManagement}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+     
+      
       <Route
         path={URLS.AUTH_PRODUCTION_MANAGEMENT}
         element={
