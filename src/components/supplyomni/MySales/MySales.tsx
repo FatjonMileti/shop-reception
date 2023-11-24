@@ -8,7 +8,7 @@ import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { formatAndDownloadResponse } from 'utils/helpers'
 import s from './MySales.modules.scss'
-import { defaultTableFilters, tableColumns } from './constants'
+import { RESOURCE_URI, defaultTableFilters, tableColumns } from './constants'
 import { MySalesResponseModel, TableFilters, TableRowModel, TableState } from './models'
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
@@ -46,7 +46,7 @@ export const MySales = () => {
     try {
       const response = (await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/supply-omni/sales',
+          url: RESOURCE_URI,
           tableFilters,
           page,
           rowsPerPage,
