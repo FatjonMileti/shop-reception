@@ -89,6 +89,10 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
+      if (values.hasDifferentDeliveryAddress === false) {
+        delete values['county']
+        delete values['city']
+      }
       mutate(values)
     }
   })
