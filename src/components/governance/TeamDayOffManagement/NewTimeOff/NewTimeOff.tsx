@@ -59,6 +59,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
 
         setShouldRefreshData(true)
         closeModal()
+        formik.resetForm()
       } catch (error) {
         showNotification({
           message: `Error while saving time off data. ${formatErrorMessage(error)}`,
@@ -81,7 +82,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
               items={[
                 {
                   label: 'Person name:',
-                  name: (editItem as TeamDayOffManagementItem)?.teamMemberName
+                  name: (editItem as TeamDayOffManagementItem)?.['teamMember.name']
                 }
               ]}
             />
@@ -154,6 +155,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
               onChange={event => formik.setFieldValue('numberOfHours', event.currentTarget.value)}
               error={!!formik.errors.numberOfHours}
               helperText={formik.errors.numberOfHours as string}
+              inputProps={{min: '0'}}
             />
           </Grid>
         )}

@@ -13,3 +13,11 @@ export interface RowItem {
   address: Address
   phone: string
 }
+
+export interface TableRowItem {
+  id: string
+  name: string
+  cif: string
+  address: string
+  phone: string
+}

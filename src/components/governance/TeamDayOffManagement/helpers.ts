@@ -3,7 +3,7 @@ import { PermissionRoles } from 'utils/enums'
 export const columns = [
   {
     title: 'Person',
-    field: 'teamMemberName',
+    field: 'teamMember.name',
     align: 'left'
   },
   {
