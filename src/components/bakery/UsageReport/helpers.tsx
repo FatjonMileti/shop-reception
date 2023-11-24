@@ -1,9 +1,21 @@
 import { Box } from '@mui/material'
 import { IconCell } from 'components/core-ui/IconCell'
 import dayjs from 'dayjs'
+import { useMemo } from 'react';
+
+export const ColumnsComponent = ( startDate: dayjs.Dayjs, endDate: dayjs.Dayjs ) => {
+  const memoizedColumns = useMemo(() => columns(startDate, endDate), [startDate, endDate]);
+
+  return (memoizedColumns);
+};
 
 export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
   let currentDate = startDate
+  let printCandentierColumns = []
+  let modifyCadentierColumns = []
+  let modifyStoreGrowthColumns = []
+  let modifyProductGrowthColumns = []
+  let loginColumns = []
 
   const stickyColumns = [
     {
@@ -31,13 +43,6 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       sticky: true,
     },
   ]
-
-  let printCandentierColumns = []
-  let modifyCadentierColumns = []
-  let modifyStoreGrowthColumns = []
-  let modifyProductGrowthColumns = []
-  let loginColumns = []
-  
   while (currentDate.isBefore(endDate) || currentDate.isSame(endDate, 'day')) {
     const day = dayjs(currentDate).format('D')
     const month = dayjs(currentDate).format('MMMM')
@@ -125,9 +130,8 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
 
     currentDate = currentDate.add(1, 'day');
   }
-
-  return [...stickyColumns, ...printCandentierColumns, ...modifyCadentierColumns, ...modifyStoreGrowthColumns, ...modifyProductGrowthColumns, ...loginColumns]
-}
+  return [...stickyColumns, ...printCandentierColumns, ...modifyCadentierColumns, ...modifyStoreGrowthColumns, ...modifyProductGrowthColumns, ...loginColumns];
+};
 
 export const formatAndDownloadResponse = fileObject => {
   const { data, headers } = fileObject
