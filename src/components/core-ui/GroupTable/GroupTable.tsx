@@ -61,16 +61,13 @@ const GroupTable = props => {
 
     setDynamicItems(toTableRowItems(toDynamicTableItems(response.list), newDynamicColumns))
   }
-
-  const filters = rest.tableFilters || window.history.state?.tableState?.filters
+  const filters = rest.tableFilters || window.history.state?.tableState?.filters || []
 
   const tableFilters = useMemo(
     () =>
       Object.keys(filters).map(key => ({
         name: filters[key].name,
-        value:
-          filters[key]?.value ??
-          filters
+        value: filters[key]?.value ?? filters
       })) || [],
     [filters]
   )
