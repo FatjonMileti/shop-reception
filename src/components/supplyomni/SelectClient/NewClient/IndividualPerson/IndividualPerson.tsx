@@ -66,7 +66,7 @@ const IndividualPerson: React.FC<IndividualPersonProps> = ({ selectNewClient }) 
           type="text"
           name="name"
           label="Nume Prenume"
-          variant="standard"
+          variant="outlined"
           value={formik.values.name}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('name', e.target.value)}
@@ -81,7 +81,7 @@ const IndividualPerson: React.FC<IndividualPersonProps> = ({ selectNewClient }) 
           type="text"
           name="phone"
           label="Telefon"
-          variant="standard"
+          variant="outlined"
           value={formik.values.phone}
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('phone', e.target.value)}
           required
@@ -96,7 +96,7 @@ const IndividualPerson: React.FC<IndividualPersonProps> = ({ selectNewClient }) 
           type="text"
           name="email"
           label="Email"
-          variant="standard"
+          variant="outlined"
           value={formik.values.email}
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('email', e.target.value)}
           required
@@ -111,7 +111,7 @@ const IndividualPerson: React.FC<IndividualPersonProps> = ({ selectNewClient }) 
           type="text"
           name="address"
           label="Adresa"
-          variant="standard"
+          variant="outlined"
           value={formik.values.address}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('address', e.target.value)}
@@ -124,6 +124,7 @@ const IndividualPerson: React.FC<IndividualPersonProps> = ({ selectNewClient }) 
       <Grid item xs={12}>
         <CountyCitySelect
           required
+          variant="outlined"
           county={{
             action: {
               url: '/supply-omni/address/counties',
