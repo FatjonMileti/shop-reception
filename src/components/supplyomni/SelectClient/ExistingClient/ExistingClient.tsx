@@ -9,8 +9,9 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { columns, toTableRowItems } from './helpers'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CreateClientModal } from './CreateClientModal'
+import { RowItem, TableRowItem } from './interfaces'
 
 interface ExistingClientProps {
   selectNewClient?: boolean
@@ -22,9 +23,9 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const [searchField, setSearchField] = useState<string>('')
-  const [showTable, setShowTable] = useState(false)
+  const [showTable, setShowTable] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [tableItems, setTableItems] = useState([])
+  const [tableItems, setTableItems] = useState<TableRowItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [isCreateClientModalOpen, setIsCreateClientModalOpen] = useState<boolean>(false)
@@ -64,6 +65,7 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
     const searchString = searchParams.toString()
     navigate(window.location.pathname + '?' + searchString)
   }
+
   return (
     <>
       {isLoading && (
