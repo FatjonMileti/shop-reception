@@ -34,8 +34,6 @@ const Login = () => {
           password: formik.values.password
         }
 
-        console.log(payload)
-
         navigate(URLS.AUTH_MERCHANDISE_HOME, { replace: true })
       } catch (error) {
         showNotification({

@@ -21,11 +21,10 @@ const AddTruck = () => {
       try {
 
         const payload = {
-          username: formik.values.username,
-          password: formik.values.password
+          registrationNumber: formik.values.registrationNumber,
+          driver: formik.values.driver,
+          sealNumber: formik.values.sealNumber,
         }
-
-        console.log(payload)
 
       } catch (error) {
         showNotification({

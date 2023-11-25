@@ -21,11 +21,10 @@ const PackagingInventoryUpdate = () => {
       try {
 
         const payload = {
-          username: formik.values.username,
-          password: formik.values.password
+          supportType: formik.values.supportType,
+          quality: formik.values.quality,
+          defective: formik.values.defective
         }
-
-        console.log(payload)
 
       } catch (error) {
         showNotification({

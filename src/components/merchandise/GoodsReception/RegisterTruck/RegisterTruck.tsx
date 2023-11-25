@@ -21,11 +21,8 @@ const RegisterTruck = () => {
       try {
 
         const payload = {
-          username: formik.values.username,
-          password: formik.values.password
+          registrationNumber: formik.values.registrationNumber,
         }
-
-        console.log(payload)
 
       } catch (error) {
         showNotification({

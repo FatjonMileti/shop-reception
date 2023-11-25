@@ -21,11 +21,9 @@ const OrderReturnTruck = () => {
       try {
 
         const payload = {
-          username: formik.values.username,
-          password: formik.values.password
+          location: formik.values.location,
+          stacks: formik.values.stacks
         }
-
-        console.log(payload)
 
       } catch (error) {
         showNotification({
