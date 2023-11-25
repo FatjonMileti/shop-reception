@@ -1,27 +1,15 @@
-import { Grid, Container, Paper, Box } from '@mui/material'
+import { Grid, Container } from '@mui/material'
 import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import s from './RegisterTruck.modules.scss'
-import useRoles from '../../useRoles'
 import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { useNotification } from '../../../../hooks'
+import TitleHeader from '../../TitleHeader/TitleHeader'
 
 const RegisterTruck = () => {
-  const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
   const { showNotification } = useNotification()
-
-  const getTitle = () => {
-    if (isShopUser) {
-      return 'Hyper Oradea'
-    } else if (isHubUser) {
-      return 'HUB CLUJ'
-    } else if (isWareHouseUser) {
-      return 'DEPOZIT CEFIN AMBIENT'
-    }
-    return 'Nu'
-  }
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -50,11 +38,7 @@ const RegisterTruck = () => {
 
   return (
     <Container component="main" maxWidth="xs" className={s.container}>
-      <Typography component="h3" variant="regular" style={{ textAlign: 'center', textTransform: 'uppercase' }}>Carrefour
-        Operațional</Typography>
-      <Typography component="h2" variant="medium" style={{ textAlign: 'center', textTransform: 'uppercase' }}>
-        {getTitle()}
-      </Typography>
+      <TitleHeader />
       <Grid container spacing={2} className={s.wrapper}>
         <Grid item xs={12}>
           <Typography component="h4" variant="medium"

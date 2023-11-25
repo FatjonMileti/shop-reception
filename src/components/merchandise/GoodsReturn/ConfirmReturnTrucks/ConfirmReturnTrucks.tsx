@@ -1,30 +1,12 @@
 import { Grid, Container, Paper, Box } from '@mui/material'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import s from './ConfirmReturnTrucks.modules.scss'
-import { URLS } from '../../constants'
-import useRoles from '../../useRoles'
+import TitleHeader from '../../TitleHeader/TitleHeader'
 
 const ConfirmReturnTrucks = () => {
-  const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
-
-  const getTitle = () => {
-    if (isShopUser) {
-      return 'Hyper Oradea'
-    } else if (isHubUser) {
-      return 'HUB CLUJ'
-    } else if (isWareHouseUser) {
-      return 'DEPOZIT CEFIN AMBIENT'
-    }
-    return 'Nu'
-  }
-
   return (
     <Container component='main' maxWidth='xs' className={s.container}>
-      <Typography component='h3' variant='regular' style={{ textAlign: 'center', textTransform: 'uppercase' }}>Carrefour
-        Operațional</Typography>
-      <Typography component='h2' variant='medium' style={{ textAlign: 'center', textTransform: 'uppercase' }}>
-        {getTitle()}
-      </Typography>
+      <TitleHeader />
       <form>
         <Grid container spacing={2} className={s.wrapper}>
           <Grid item xs={12}>

@@ -9,22 +9,12 @@ import { formatErrorMessage } from '../../../../utils/formatting'
 import { useNotification } from '../../../../hooks'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
+import TitleHeader from '../../TitleHeader/TitleHeader'
 
 const ExpectedTrucks = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
   const { showNotification } = useNotification()
   const navigate = useNavigate()
-
-  const getTitle = () => {
-    if (isShopUser) {
-      return 'Hyper Oradea'
-    } else if (isHubUser) {
-      return 'HUB CLUJ'
-    } else if (isWareHouseUser) {
-      return 'DEPOZIT CEFIN AMBIENT'
-    }
-    return 'Nu'
-  }
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -46,11 +36,7 @@ const ExpectedTrucks = () => {
 
   return (
     <Container component='main' maxWidth='xs' className={s.container}>
-      <Typography component='h3' variant='regular' style={{ textAlign: 'center', textTransform: 'uppercase' }}>Carrefour
-        Operațional</Typography>
-      <Typography component='h2' variant='medium' style={{ textAlign: 'center', textTransform: 'uppercase' }}>
-        {getTitle()}
-      </Typography>
+      <TitleHeader />
       <Grid container spacing={2} className={s.wrapper}>
         <Grid item xs={12}>
           <Typography component='h4' variant='medium'

@@ -4,21 +4,11 @@ import s from './ListTrucks.modules.scss'
 import { URLS } from '../../constants'
 import useRoles from '../../useRoles'
 import { useNavigate } from 'react-router-dom'
+import TitleHeader from '../../TitleHeader/TitleHeader'
 
 const ListTrucks = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
   const navigate = useNavigate()
-
-  const getTitle = () => {
-    if (isShopUser) {
-      return 'Hyper Oradea'
-    } else if (isHubUser) {
-      return 'HUB CLUJ'
-    } else if (isWareHouseUser) {
-      return 'DEPOZIT CEFIN AMBIENT'
-    }
-    return 'Nu'
-  }
 
   const list: Truck[] = [
     { name: 'Camion 1', description: 'Descriere camion 1' },
@@ -28,11 +18,7 @@ const ListTrucks = () => {
 
   return (
     <Container component="main" maxWidth="xs" className={s.container}>
-      <Typography component="h3" variant="regular" style={{ textAlign: 'center', textTransform: 'uppercase' }}>Carrefour
-        Operațional</Typography>
-      <Typography component="h2" variant="medium" style={{ textAlign: 'center', textTransform: 'uppercase' }}>
-        {getTitle()}
-      </Typography>
+      <TitleHeader />
       <form>
         <Grid container spacing={2} className={s.wrapper}>
           <Grid item xs={12}>
