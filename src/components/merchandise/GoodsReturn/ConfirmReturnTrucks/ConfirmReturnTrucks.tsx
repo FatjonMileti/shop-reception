@@ -1,4 +1,4 @@
-import { Grid, Container, Paper, Box } from '@mui/material'
+import { Grid, Container, Box } from '@mui/material'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import s from './ConfirmReturnTrucks.modules.scss'
 import TitleHeader from '../../TitleHeader/TitleHeader'
