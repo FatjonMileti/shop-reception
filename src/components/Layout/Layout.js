@@ -10,12 +10,10 @@ import { useAuth } from 'oidc-react'
 import s from './Layout.scss'
 import { setToken, isAuthenticated } from 'utils/authService'
 import { Notification } from 'components/Notification'
-import { AdminHeader } from './AdminHeader'
 
 const Layout = ({ children, modules, setSubdomainId }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [drawerWidth, setDrawerWidth] = useState(DRAWER_WIDTH)
-  const isAdminPannel = window.location.pathname.includes('shop-reception')
 
   const auth = useAuth()
 
@@ -49,20 +47,14 @@ const Layout = ({ children, modules, setSubdomainId }) => {
         <Favicon url="images/favicon.ico" />
         <div>
           <Notification />
-          {!isAdminPannel ? (
-            <>
-              <Header handleOpenMenu={handleOpenMenu} />
-              {isAuthenticated() && (
-                <Sidebar
-                  isMenuOpen={isMenuOpen}
-                  handleCloseMenu={handleCloseMenu}
-                  modules={modules}
-                  setSubdomainId={setSubdomainId}
-                />
-              )}
-            </>
-          ) : (
-            <AdminHeader />
+          <Header handleOpenMenu={handleOpenMenu} />
+          {isAuthenticated() && (
+            <Sidebar
+              isMenuOpen={isMenuOpen}
+              handleCloseMenu={handleCloseMenu}
+              modules={modules}
+              setSubdomainId={setSubdomainId}
+            />
           )}
           <div className={s.contentWrapper}>
             <ErrorBoundary>{children}</ErrorBoundary>
