@@ -16,7 +16,6 @@ const ReceptionProcessing = () => {
       <form>
         <Grid container spacing={2} className={s.wrapper}>
           <Grid item xs={12}>
-            <TitleHeader />
             {list.map((item: Truck, index) => (
               <Paper key={index} elevation={3} style={{ margin: '10px', padding: '20px' }}>
                 <Typography variant="medium" component="h5">{item.name}</Typography>
