@@ -75,13 +75,15 @@ const OrderReturnTruck = () => {
                 Pot fi inițiate comenzi de minim 25 stive și maxim 33.
               </Typography>
             </Grid>
-            <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
-              <Button
-                type='button'
-                variant='contained'
-                label='TRANSMITERE COMANDǍ'
-                onClick={() => formik.handleSubmit()}
-              />
+            <Grid item xs={12}>
+              <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='TRANSMITERE COMANDǍ'
+                  onClick={() => formik.handleSubmit()}
+                />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
