@@ -1,1 +1,1 @@
-export { default as IconBox } from "./IconBox"
+export { default as IconBox } from './IconBox'

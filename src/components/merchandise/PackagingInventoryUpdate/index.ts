@@ -1,1 +1,1 @@
-export { default as PackagingInventoryUpdate } from "./PackagingInventoryUpdate"
+export { default as PackagingInventoryUpdate } from './PackagingInventoryUpdate'

@@ -1,1 +1,1 @@
-export { default as RegisterTruck } from "./RegisterTruck"
+export { default as RegisterTruck } from './RegisterTruck'

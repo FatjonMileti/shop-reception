@@ -1,1 +1,1 @@
-export { default as ListTrucks } from "./ListTrucks"
+export { default as ListTrucks } from './ListTrucks'

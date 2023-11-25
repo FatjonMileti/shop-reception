@@ -7,26 +7,43 @@ import s from './Header.scss'
 const Header = ({ handleOpenMenu }) => {
   const { isMenuOpen } = useContext(DrawerContext)
 
-  return (<>
-    <AppBar
-      id="back-to-top-anchor"
-      style={{
-        zIndex: '1201', transition: 'all 0.3s ease'
-      }}
-      mainItem={{
-        content: <img src="images/carrefour.png" style={{ width: '100%' }} />, style: {
-          position: 'absolute', display: 'flex', width: '60px', left: `calc(50% - 30px)`
+  return (
+    <>
+      <AppBar
+        id="back-to-top-anchor"
+        style={{
+          zIndex: '1201',
+          transition: 'all 0.3s ease'
+        }}
+        mainItem={{
+          content: <img src="images/carrefour.png" style={{ width: '100%' }} />,
+          style: {
+            position: 'absolute',
+            display: 'flex',
+            width: '60px',
+            left: 'calc(50% - 30px)'
+          }
+        }}
+        position="relative"
+        menuIcon={
+          <span className={s.notificationsContainer}>{/* <NotificationsNoneOutlined /> */}</span>
         }
-      }}
-      position="relative"
-      menuIcon={<span className={s.notificationsContainer}>{/* <NotificationsNoneOutlined /> */}</span>}
-      rightItems={isMenuOpen ? [] : [{
-        onClick: x => handleOpenMenu(x), iconProps: {
-          icon: <DragHandleOutlined />, iconButtonProps: { size: 'large' }
+        rightItems={
+          isMenuOpen
+            ? []
+            : [
+                {
+                  onClick: x => handleOpenMenu(x),
+                  iconProps: {
+                    icon: <DragHandleOutlined />,
+                    iconButtonProps: { size: 'large' }
+                  }
+                }
+              ]
         }
-      }]}
-    />
-  </>)
+      />
+    </>
+  )
 }
 
 export default Header

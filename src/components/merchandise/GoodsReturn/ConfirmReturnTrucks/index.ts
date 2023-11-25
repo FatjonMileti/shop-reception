@@ -1,1 +1,1 @@
-export { default as ConfirmReturnTrucks } from "./ConfirmReturnTrucks"
+export { default as ConfirmReturnTrucks } from './ConfirmReturnTrucks'

@@ -1,1 +1,1 @@
-export { default as GoodsReturn } from "./GoodsReturn"
+export { default as GoodsReturn } from './GoodsReturn'

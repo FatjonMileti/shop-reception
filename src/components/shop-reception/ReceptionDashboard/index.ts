@@ -1,1 +1,1 @@
-export { default as ReceptionDashboard } from "./ReceptionDashboard"
+export { default as ReceptionDashboard } from './ReceptionDashboard'

@@ -1,30 +1,31 @@
-import { Grid, Container, Paper } from "@mui/material"
-import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
-import s from "./GoodsReception.modules.scss"
+import { Grid, Container, Paper } from '@mui/material'
+import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import s from './GoodsReception.modules.scss'
 import { URLS } from '../constants'
-import useRoles from "../useRoles"
-import { useNavigate } from "react-router-dom"
+import useRoles from '../useRoles'
+import { useNavigate } from 'react-router-dom'
 
 const GoodsReception = () => {
-  const { isShopUser, isHubUser, isWareHouseUser } = useRoles();
-  const navigate = useNavigate();
+  const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
+  const navigate = useNavigate()
 
   const getTitle = () => {
     if (isShopUser) {
-      return "Hyper Oradea";
+      return 'Hyper Oradea'
     } else if (isHubUser) {
-      return "HUB CLUJ";
+      return 'HUB CLUJ'
     } else if (isWareHouseUser) {
-      return "DEPOZIT CEFIN AMBIENT";
+      return 'DEPOZIT CEFIN AMBIENT'
     }
-    return "Nu";
+    return 'Nu'
   }
 
   return (
     <Paper className={s.paper}>
       <Container component="main" maxWidth="xs" className={s.container}>
-        <Typography component="h3" variant="regular" style={{ textAlign: "center", textTransform: "uppercase" }}>Carrefour Operațional</Typography>
-        <Typography component="h2" variant="medium" style={{ textAlign: "center", textTransform: "uppercase" }}>
+        <Typography component="h3" variant="regular" style={{ textAlign: 'center', textTransform: 'uppercase' }}>Carrefour
+          Operațional</Typography>
+        <Typography component="h2" variant="medium" style={{ textAlign: 'center', textTransform: 'uppercase' }}>
           {getTitle()}
         </Typography>
         <form>
@@ -34,9 +35,9 @@ const GoodsReception = () => {
                 type="button"
                 variant="contained"
                 label="LISTǍ CAMIOANE"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 onClick={() => {
-                  navigate(URLS.AUTH_LIST_TRUCKS);
+                  navigate(URLS.AUTH_LIST_TRUCKS)
                 }}
               />
             </Grid>}
@@ -45,9 +46,9 @@ const GoodsReception = () => {
                 type="button"
                 variant="contained"
                 label="ÎN PROCESARE RECEPȚIE"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 onClick={() => {
-                  navigate(URLS.AUTH_RECEPTION_PROCESSING);
+                  navigate(URLS.AUTH_RECEPTION_PROCESSING)
                 }}
               />
             </Grid>}
@@ -56,9 +57,9 @@ const GoodsReception = () => {
                 type="button"
                 variant="contained"
                 label="VALIDARE LIVRARE"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 onClick={() => {
-                  navigate(URLS.AUTH_DELIVERY);
+                  navigate(URLS.AUTH_DELIVERY)
                 }}
               />
             </Grid>}
@@ -67,9 +68,9 @@ const GoodsReception = () => {
                 type="button"
                 variant="contained"
                 label="CAMIOANE AȘTEPTATE"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 onClick={() => {
-                  navigate(URLS.AUTH_EXPECTED_TRUCKS);
+                  navigate(URLS.AUTH_EXPECTED_TRUCKS)
                 }}
               />
             </Grid>}
@@ -78,9 +79,9 @@ const GoodsReception = () => {
                 type="button"
                 variant="contained"
                 label="ÎNREGISTREAZǍ CAMION"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 onClick={() => {
-                  navigate(URLS.AUTH_REGISTER_TRUCK);
+                  navigate(URLS.AUTH_REGISTER_TRUCK)
                 }}
               />
             </Grid>}
@@ -89,9 +90,9 @@ const GoodsReception = () => {
                 type="button"
                 variant="contained"
                 label="ÎN PROCESARE EXPEDIȚIE"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 onClick={() => {
-                  navigate(URLS.AUTH_PROCESSING_SHIPMENT);
+                  navigate(URLS.AUTH_PROCESSING_SHIPMENT)
                 }}
               />
             </Grid>}
@@ -100,9 +101,9 @@ const GoodsReception = () => {
                 type="button"
                 variant="contained"
                 label="CAMIOANE EXPEDIATE"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 onClick={() => {
-                  navigate(URLS.AUTH_SHIPPED_TRUCKS);
+                  navigate(URLS.AUTH_SHIPPED_TRUCKS)
                 }}
               />
             </Grid>}
@@ -110,7 +111,7 @@ const GoodsReception = () => {
         </form>
       </Container>
     </Paper>
-  );
+  )
 }
 
 export default GoodsReception

@@ -1,1 +1,1 @@
-export { default as ReceptionProcessing } from "./ReceptionProcessing"
+export { default as ReceptionProcessing } from './ReceptionProcessing'

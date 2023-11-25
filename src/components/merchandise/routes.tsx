@@ -1,25 +1,25 @@
-import { PrivateRoute } from "components/utils/PrivateRoute"
-import { Route } from "react-router-dom"
-import { URLS } from "./constants"
-import { Login } from "./Login"
-import { Home } from "./Home"
-import { PackagingInventoryUpdate } from "./PackagingInventoryUpdate"
-import { GoodsReception } from "./GoodsReception"
-import { GoodsReturn } from "./GoodsReturn"
-import { ListTrucks } from "./GoodsReception/ListTrucks"
-import { AddTruck } from "./GoodsReception/ListTrucks/AddTruck"
-import { ReceptionProcessing } from "./GoodsReception/RceptionProcessing"
-import { Delivery } from "./GoodsReception/Delivery"
-import { ConfirmReturnTrucks } from "./GoodsReturn/ConfirmReturnTrucks"
-import { OrderReturnTruck } from "./GoodsReturn/OrderReturnTruck"
-import { ExpectedTrucks } from "./GoodsReturn/ExpectedTrucks"
-import { RegisterTruck } from "./GoodsReception/RegisterTruck"
-import { ExpenditureProcessing } from "./GoodsReception/ExpenditureProcessing"
-import { ShippedTrucks } from "./GoodsReception/ShippedTrucks"
-import { ExpectedReturns } from "./GoodsReturn/ExpectedReturns"
-import { InProgressReturn } from "./GoodsReturn/InProgressReturn"
-import { ContinueReturn } from "./GoodsReturn/ContinueReturn"
-import RecordReturn from "./GoodsReturn/RecordReturn/RecordReturn"
+import { PrivateRoute } from 'components/utils/PrivateRoute'
+import { Route } from 'react-router-dom'
+import { URLS } from './constants'
+import { Login } from './Login'
+import { Home } from './Home'
+import { PackagingInventoryUpdate } from './PackagingInventoryUpdate'
+import { GoodsReception } from './GoodsReception'
+import { GoodsReturn } from './GoodsReturn'
+import { ListTrucks } from './GoodsReception/ListTrucks'
+import { AddTruck } from './GoodsReception/ListTrucks/AddTruck'
+import { ReceptionProcessing } from './GoodsReception/RceptionProcessing'
+import { Delivery } from './GoodsReception/Delivery'
+import { ConfirmReturnTrucks } from './GoodsReturn/ConfirmReturnTrucks'
+import { OrderReturnTruck } from './GoodsReturn/OrderReturnTruck'
+import { ExpectedTrucks } from './GoodsReturn/ExpectedTrucks'
+import { RegisterTruck } from './GoodsReception/RegisterTruck'
+import { ExpenditureProcessing } from './GoodsReception/ExpenditureProcessing'
+import { ShippedTrucks } from './GoodsReception/ShippedTrucks'
+import { ExpectedReturns } from './GoodsReturn/ExpectedReturns'
+import { InProgressReturn } from './GoodsReturn/InProgressReturn'
+import { ContinueReturn } from './GoodsReturn/ContinueReturn'
+import RecordReturn from './GoodsReturn/RecordReturn/RecordReturn'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -40,14 +40,14 @@ export const useMerchandiseRoutes = applicationPages => {
         path={URLS.AUTH_GOODS_RETURN}
         element={<GoodsReturn />}
       />
-        <Route
-          path={URLS.AUTH_LIST_TRUCKS}
-          element={<ListTrucks />}
-        />
-        <Route
-          path={URLS.AUTH_ADD_TRUCK}
-          element={<AddTruck />}
-        />
+      <Route
+        path={URLS.AUTH_LIST_TRUCKS}
+        element={<ListTrucks />}
+      />
+      <Route
+        path={URLS.AUTH_ADD_TRUCK}
+        element={<AddTruck />}
+      />
       <Route
         path={URLS.AUTH_RECEPTION_PROCESSING}
         element={<ReceptionProcessing />}

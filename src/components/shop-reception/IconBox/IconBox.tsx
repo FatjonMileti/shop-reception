@@ -1,6 +1,6 @@
-import { Box } from "@mui/material"
-import s from "./IconBox.modules.scss"
-import React from "react"
+import { Box } from '@mui/material'
+import s from './IconBox.modules.scss'
+import React from 'react'
 
 interface IconBoxProps {
   onClick: () => void;

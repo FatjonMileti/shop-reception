@@ -1,1 +1,1 @@
-export { default as ExpenditureProcessing } from "./ExpenditureProcessing"
+export { default as ExpenditureProcessing } from './ExpenditureProcessing'

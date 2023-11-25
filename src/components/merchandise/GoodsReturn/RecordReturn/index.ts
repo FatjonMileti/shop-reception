@@ -1,1 +1,1 @@
-export { default as OrderReturnTruck } from "./RecordReturn"
+export { default as OrderReturnTruck } from './RecordReturn'

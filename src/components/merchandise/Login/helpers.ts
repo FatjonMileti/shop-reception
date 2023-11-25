@@ -1,4 +1,4 @@
-import * as Yup from "yup"
+import * as Yup from 'yup'
 
 export const getValidationSchema = () =>
   Yup.object().shape({

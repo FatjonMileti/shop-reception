@@ -1,10 +1,10 @@
-import { PrivateRoute } from "components/utils/PrivateRoute"
-import { Route } from "react-router-dom"
-import { URLS } from "./constants"
-import { Home } from "./Home"
-import { AdminDashboard } from "./AdminDashboard"
-import { ReceptionDashboard } from "./ReceptionDashboard"
-import { PackageDashboard } from "./PackageDashboard"
+import { PrivateRoute } from 'components/utils/PrivateRoute'
+import { Route } from 'react-router-dom'
+import { URLS } from './constants'
+import { Home } from './Home'
+import { AdminDashboard } from './AdminDashboard'
+import { ReceptionDashboard } from './ReceptionDashboard'
+import { PackageDashboard } from './PackageDashboard'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (

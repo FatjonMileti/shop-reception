@@ -1,41 +1,41 @@
-import { Paper, Box } from "@mui/material"
-import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe"
-import s from "./ReceptionDashboard.modules.scss"
-import { URLS } from "../constants"
-import { useNavigate } from "react-router-dom"
-import { Icon } from "../../core-ui/Icon"
-import { IconBox } from "../IconBox"
-import Toolbar from "@mui/material/Toolbar"
-import ArrowBackIcon from "@mui/icons-material/ArrowBack"
+import { Paper, Box } from '@mui/material'
+import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import s from './ReceptionDashboard.modules.scss'
+import { URLS } from '../constants'
+import { useNavigate } from 'react-router-dom'
+import { Icon } from '../../core-ui/Icon'
+import { IconBox } from '../IconBox'
+import Toolbar from '@mui/material/Toolbar'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 const links = [
   {
-    icon: <Icon iconName="AirplaneTicket" fill="white" />,
-    title: "Bonuri de livrare"
+    icon: <Icon iconName='AirplaneTicket' fill='white' />,
+    title: 'Bonuri de livrare'
   },
   {
-    icon: <Icon iconName="FireTruck" fill="white" />,
-    title: "Listă camioane marfă"
+    icon: <Icon iconName='FireTruck' fill='white' />,
+    title: 'Listă camioane marfă'
   },
   {
-    icon: <Icon iconName="BugReport" fill="white" />,
-    title: "Suporţi cu destinaţie eronată"
+    icon: <Icon iconName='BugReport' fill='white' />,
+    title: 'Suporţi cu destinaţie eronată'
   },
   {
-    icon: <Icon iconName="SentimentDissatisfied" fill="white" />,
-    title: "Produse necomandate"
+    icon: <Icon iconName='SentimentDissatisfied' fill='white' />,
+    title: 'Produse necomandate'
   },
   {
-    icon: <Icon iconName="AttachFileSharp" fill="white" />,
-    title: "Fişiere Meti"
+    icon: <Icon iconName='AttachFileSharp' fill='white' />,
+    title: 'Fişiere Meti'
   },
   {
-    icon: <Icon iconName="ListAlt" fill="white" />,
-    title: "Produse cu diferenţe"
+    icon: <Icon iconName='ListAlt' fill='white' />,
+    title: 'Produse cu diferenţe'
   },
   {
-    icon: <Icon iconName="HelpCenter" fill="white" />,
-    title: "Transabilitate suport"
+    icon: <Icon iconName='HelpCenter' fill='white' />,
+    title: 'Transabilitate suport'
   }
 ]
 
@@ -43,19 +43,19 @@ const ReceptionDashboard = () => {
   const navigate = useNavigate()
 
   const getTitle = () => {
-    return "Nu"
+    return 'Nu'
   }
 
   return (
     <Paper className={s.paper}>
-      <Typography component="h2" variant="regular"
-                  style={{ textAlign: "center", textTransform: "uppercase" }}>Recepţie marfă</Typography>
+      <Typography component='h2' variant='regular'
+                  style={{ textAlign: 'center', textTransform: 'uppercase' }}>Recepţie marfă</Typography>
 
       <Toolbar className={s.toolbar}>
         <Button
-          label="Back"
-          size="small"
-          variant="contained"
+          label='Back'
+          size='small'
+          variant='contained'
           onClick={() => navigate(URLS.AUTH_HOME)}
         >
           <ArrowBackIcon />
