@@ -16,61 +16,65 @@ const GoodsReturn = () => {
         <TitleHeader />
         <form>
           <Grid container spacing={2} className={s.wrapper}>
-            {isShopUser && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='COMANDǍ CAMION RETUR'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_ORDER_RETURN_TRUCK)
-                }}
-              />
-            </Grid>}
-            {isShopUser && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='CAMIOANE RETUR CONFIRMATE'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_CONFIRM_RETURN_TRUCKS)
-                }}
-              />
-            </Grid>}
-            {isHubUser && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='RETURURI AȘTEPTATE'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_EXPECTED_RETURNS)
-                }}
-              />
-            </Grid>}
-            {isHubUser && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='RETUR ÎN CURS DE RECEPȚIE'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_IN_PROGRESS_RETURN)
-                }}
-              />
-            </Grid>}
-            {isHubUser && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='ÎNREGISTRARE RETUR'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_RECORD_RETURN)
-                }}
-              />
-            </Grid>}
+            {isShopUser && <>
+              <Grid item xs={12}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='COMANDǍ CAMION RETUR'
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(URLS.AUTH_ORDER_RETURN_TRUCK)
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='CAMIOANE RETUR CONFIRMATE'
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(URLS.AUTH_CONFIRM_RETURN_TRUCKS)
+                  }}
+                />
+              </Grid>
+            </>}
+            {isHubUser && <>
+              <Grid item xs={12}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='RETURURI AȘTEPTATE'
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(URLS.AUTH_EXPECTED_RETURNS)
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='RETUR ÎN CURS DE RECEPȚIE'
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(URLS.AUTH_IN_PROGRESS_RETURN)
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='ÎNREGISTRARE RETUR'
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(URLS.AUTH_RECORD_RETURN)
+                  }}
+                />
+              </Grid>
+            </>}
             {(isShopUser || isHubUser) && <Grid item xs={12}>
               <Button
                 type='button'

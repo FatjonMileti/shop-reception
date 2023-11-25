@@ -16,28 +16,30 @@ const Home = () => {
         <TitleHeader />
         <form>
           <Grid container spacing={2} className={s.wrapper}>
-            {(isShopUser || isHubUser) && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='RECEPȚIE MARFǍ'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_GOODS_RECEPTION)
-                }}
-              />
-            </Grid>}
-            {(isShopUser || isHubUser) && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='RETUR AMBALAJE/MARFǍ'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_GOODS_RETURN)
-                }}
-              />
-            </Grid>}
+            {(isShopUser || isHubUser) && <>
+              <Grid item xs={12}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='RECEPȚIE MARFǍ'
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(URLS.AUTH_GOODS_RECEPTION)
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='RETUR AMBALAJE/MARFǍ'
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(URLS.AUTH_GOODS_RETURN)
+                  }}
+                />
+              </Grid>
+            </>}
             {isShopUser && <Grid item xs={12}>
               <Button
                 type='button'
@@ -49,28 +51,30 @@ const Home = () => {
                 }}
               />
             </Grid>}
-            {isWareHouseUser && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='RETURURI AŞTEPTATE'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_EXPECTED_RETURNS)
-                }}
-              />
-            </Grid>}
-            {isWareHouseUser && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='RETUR ÎN CURS DE RECEPȚIE'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_IN_PROGRESS_RETURN)
-                }}
-              />
-            </Grid>}
+            {isWareHouseUser && <>
+              <Grid item xs={12}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='RETURURI AŞTEPTATE'
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(URLS.AUTH_EXPECTED_RETURNS)
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='RETUR ÎN CURS DE RECEPȚIE'
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(URLS.AUTH_IN_PROGRESS_RETURN)
+                  }}
+                />
+              </Grid>
+            </>}
           </Grid>
         </form>
       </Container>
