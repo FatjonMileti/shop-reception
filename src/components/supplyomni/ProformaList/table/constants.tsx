@@ -9,7 +9,8 @@ export const tableColumns = [
   {
     title: 'Numar Proforma',
     field: 'proformaId',
-    align: 'left'
+    align: 'left',
+    disableSorting: true
   },
   {
     title: 'Data Proforma',
@@ -20,30 +21,34 @@ export const tableColumns = [
     title: 'Nume Agent',
     field: 'agentName',
     align: 'left',
+    disableSorting: true,
     collapsible: true
   },
   {
     title: 'Nume client',
     field: 'clientName',
     align: 'left',
+    disableSorting: true,
     collapsible: true
   },
   {
     title: 'Lista produse',
     field: 'products',
     align: 'left',
+    disableSorting: true,
     collapsible: true
   },
   {
     title: 'Activ',
     field: 'paid',
     align: 'left',
+    disableSorting: true,
+    collapsible: true,
     render: row => (
       <Box>
         <IconCell value={row.paid ? 'inactive' : 'active'} />
       </Box>
-    ),
-    collapsible: true
+    )
   }
 ]
 
