@@ -90,10 +90,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
         <Grid xs={12} item>
           <DatePicker
             value={formik.values.startDate}
-            onChange={value => {
-              debugger
-              formik.setFieldValue('startDate', value)
-            }}
+            onChange={value => formik.setFieldValue('startDate', value)}
             label="Start date"
             variant="standard"
             style={{ width: '100%' }}
