@@ -13,30 +13,6 @@ import { UserModal } from 'components/bakery/UsersManagement/UserModal'
 import { MultivalueCell } from 'components/core-ui/MultivalueCell'
 import { toTableRowItems } from './serializers'
 
-const columns = [
-  {
-    title: 'Nume user',
-    field: 'lastName',
-    align: 'left'
-  },
-  {
-    title: 'Prenume User',
-    field: 'firstName',
-    align: 'left'
-  },
-  {
-    title: 'Magazin',
-    field: 'storeName',
-    align: 'left'
-  },
-  {
-    title: 'Regiune',
-    field: 'regionName',
-    align: 'left',
-    collapsible: true
-  },
-]
-
 const UsersManagement = () => {
   const [tableItems, setTableItems] = useState<UsersManagementItem[]>([])
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)

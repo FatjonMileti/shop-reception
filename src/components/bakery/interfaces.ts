@@ -161,3 +161,20 @@ export interface IdNameInterface {
   id: string,
   name: string
 }
+
+export interface StructureRole {
+  id: string
+  roleId: string
+  structureId: string 
+  structureType?: string
+}
+
+export interface EditUserItem {
+  id: string
+  username: string
+  enable: boolean | string
+  email: string
+  firstName: string
+  lastName: string
+  structureRoles: StructureRole[]
+}
