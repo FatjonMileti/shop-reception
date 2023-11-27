@@ -53,6 +53,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
 
         setShouldRefreshData(true)
         closeModal()
+        formik.resetForm()
       } catch (error) {
         showNotification({
           message: `Error while saving time off data. ${formatErrorMessage(error)}`,
@@ -89,7 +90,10 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
         <Grid xs={12} item>
           <DatePicker
             value={formik.values.startDate}
-            onChange={value => formik.setFieldValue('startDate', value)}
+            onChange={value => {
+              debugger
+              formik.setFieldValue('startDate', value)
+            }}
             label="Start date"
             variant="standard"
             style={{ width: '100%' }}
