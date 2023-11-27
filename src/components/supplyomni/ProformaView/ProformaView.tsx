@@ -20,7 +20,7 @@ const ProformaView = () => {
           }}
           actions={{
             downloadAction: { url: '/supply-omni/order/proforma/pdf', type: 'GET' },
-            printAction: { url: '/supply-omni/order/proforma/print', type: 'GET' },
+            printAction: { url: '/supply-omni/order/proforma/print', type: 'POST' },
             scanReceiptAction: { href: '/supplyOmni/scanReceipt', label: 'Scaneaza bon' },
             printersAction: { url: '/supply-omni/printer', type: 'GET' }
           }}
