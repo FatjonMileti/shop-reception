@@ -36,7 +36,7 @@ const ProformaView = () => {
   return (
     <div className={s.mainContainer}>
       <Grid item xs={12}>
-        <Typography color={'grey'}>PDF proforma: {proform.proformaId}</Typography>
+        <Typography color={'grey'}>PDF proforma: {proform?.proformaId}</Typography>
       </Grid>
 
       <Grid item xs={12}>

@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-
 import { PdfViewerProps } from './PdfViewerDefinitions'
 import { PdfActions } from './PdfActions'
 import { PDFDocument } from './PDFDocument'
 import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
-import { Icon } from '../Icon'
 import s from './PdfViewer.modules.scss'
-
 import '!style-loader!css-loader!react-pdf/dist/esm/Page/TextLayer.css'
 import '!style-loader!css-loader!react-pdf/dist/esm/Page/AnnotationLayer.css'
 import { CircularProgress, useMediaQuery } from '@mui/material'
-import { formatErrorMessage } from 'utils/formatting'
+import { Icon } from 'components/core-ui/Icon'
 
 const PdfViewer = (props: PdfViewerProps) => {
   const { actions, proform, isLoading } = props
