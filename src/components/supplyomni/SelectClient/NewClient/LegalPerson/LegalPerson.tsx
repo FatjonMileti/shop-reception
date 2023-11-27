@@ -67,7 +67,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           type="text"
           name="name"
           label="Nume"
-          variant="standard"
+          variant="outlined"
           value={formik.values.name}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('name', e.target.value)}
@@ -82,7 +82,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           type="text"
           name="cif"
           label="CIF/COD"
-          variant="standard"
+          variant="outlined"
           value={formik.values.cif}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('cif', e.target.value)}
@@ -97,7 +97,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           type="text"
           name="tradeRegister"
           label="Registrul Comertului"
-          variant="standard"
+          variant="outlined"
           value={formik.values.tradeRegister}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -114,7 +114,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           type="text"
           name="bank"
           label="Banca"
-          variant="standard"
+          variant="outlined"
           value={formik.values.bank}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('bank', e.target.value)}
@@ -129,7 +129,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           type="text"
           name="bankAccount"
           label="IBAN"
-          variant="standard"
+          variant="outlined"
           value={formik.values.bankAccount}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -145,7 +145,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           type="number"
           name="phone"
           label="Telefon"
-          variant="standard"
+          variant="outlined"
           value={formik.values.phone}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('phone', e.target.value)}
@@ -160,7 +160,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           type="text"
           name="email"
           label="Email"
-          variant="standard"
+          variant="outlined"
           value={formik.values.email}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('email', e.target.value)}
@@ -175,7 +175,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           type="text"
           name="address"
           label="Adresa"
-          variant="standard"
+          variant="outlined"
           value={formik.values.address}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('address', e.target.value)}
@@ -188,6 +188,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
       <Grid item xs={12}>
         <CountyCitySelect
           required
+          variant="outlined"
           county={{
             action: {
               url: '/supply-omni/address/counties',

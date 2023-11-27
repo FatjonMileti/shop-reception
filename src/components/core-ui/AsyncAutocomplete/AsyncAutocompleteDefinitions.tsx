@@ -4,7 +4,7 @@ export interface AsyncAutocompleteOption {
 }
 
 export interface AsyncAutocompleteProps {
-  value: AsyncAutocompleteOption
+  value: AsyncAutocompleteOption | AsyncAutocompleteOption[]
   options: AsyncAutocompleteOption[]
   name: string
   label: string

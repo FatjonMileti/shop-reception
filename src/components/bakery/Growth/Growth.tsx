@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import s from './Growth.modules.scss'
+import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
@@ -28,7 +28,7 @@ const Growth = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/user/growth/tempApiUrl', //TODO figure out why mockoons breaks this
+          url: '/bakery/user/growth',
           filters: [],
           tableFilters,
           page,

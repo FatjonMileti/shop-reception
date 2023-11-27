@@ -10,7 +10,10 @@ import { Clusters } from './Clusters'
 import { Families } from './Families'
 import { FamilyProducts } from './Families/FamilyProducts'
 import { Products } from './Products'
+import { UsageReport } from './UsageReport'
 import { ProductManagement } from './TraineeRole/ProductManagement'
+import { ProductionManagement } from './TraineeRole/ProductionManagement'
+import { ProductionManagementPrint } from './TraineeRole/ProductionManagementPrint'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -96,6 +99,36 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ProductManagement}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_USAGE_REPORT}
+        element={
+          <PrivateRoute
+            component={UsageReport}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+        />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PRODUCTION_MANAGEMENT}
+        element={
+          <PrivateRoute
+            component={ProductionManagement}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PRODUCTION_MANAGEMENT_PRINT}
+        element={
+          <PrivateRoute
+            component={ProductionManagementPrint}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

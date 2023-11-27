@@ -1,4 +1,5 @@
 import { Box, CircularProgress, Typography } from '@mui/material'
+import { Typography as CustomTypography } from '@fullscreendigital/carrefour-dex-fe'
 import { useNotification } from 'hooks'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
@@ -35,7 +36,8 @@ const ShoppingCart = () => {
   const updateCartItemQuantity = async values => {
     await makeCorePutRequest(`/supply-omni/cart/product`, {
       quantity: values.quantity,
-      id: values.id
+      id: values.id,
+      purchaseOption: values.purchaseOption
     })
   }
 
@@ -44,7 +46,7 @@ const ShoppingCart = () => {
     {
       onSuccess: res => {
         showNotification({
-          message: 'Item edited successfully',
+          message: 'Cantitatea produsului a fost modificata cu succes.',
           type: 'success'
         })
 
@@ -52,44 +54,53 @@ const ShoppingCart = () => {
       },
       onError: res => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(res)}`,
+          message: `A aparut o eroare la schimbarea cantitatii. ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
     }
   )
+
   return (
     <div className={s.mainContainer}>
-      {isLoadingGetProducts || isLoadingUpdateCart ? (
+      {isLoadingGetProducts ? (
         <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
       ) : (
         <>
-          <Typography color="grey">Produse in cos: {products.summary.totalItems}</Typography>
+          {products.list.length ? (
+            <>
+              <Typography color="grey">Produse in cos: {products.summary.totalItems}</Typography>
 
-          {products.list.map(product => (
-            <ProductInfo product={product} updateCartMutation={updateCartMutation} />
-          ))}
+              {products.list.map(product => (
+                <ProductInfo product={product} updateCartMutation={updateCartMutation} />
+              ))}
 
-          <Box className={s.totalPriceContainer}>
-            <Box className={s.cartContainer}>
-              <Typography fontWeight={'600'} color={'#000'} mr={6}>
-                Total de plata:
-              </Typography>
-              <Typography fontWeight={'600'} fontSize={18} color={'#0970E6'}>
-                {products.summary.totalPrice}
-              </Typography>
-            </Box>
+              <Box className={s.totalPriceContainer}>
+                <Box className={s.cartContainer}>
+                  <Typography fontWeight={'600'} color={'#000'} mr={6}>
+                    Total de plata:
+                  </Typography>
+                  <Typography fontWeight={'600'} fontSize={18} color={'#0970E6'}>
+                    {products.summary.totalPrice}
+                  </Typography>
+                </Box>
 
-            <Button
-              onClick={() => navigate('/supplyOmni/shoppingCartSelectClient')}
-              label=""
-              variant="contained"
-              style={{ marginTop: '16px' }}
-            >
-              <InsertDriveFileOutlined /> FINALIZEAZA PROFORMA
-            </Button>
-            <FloatingButton type="add" href="/supplyOmni/productScan" backgroundColor="red" />
-          </Box>
+                <Button
+                  onClick={() => navigate('/supplyOmni/shoppingCartSelectClient')}
+                  label=""
+                  variant="contained"
+                  style={{ marginTop: '16px' }}
+                >
+                  <InsertDriveFileOutlined /> FINALIZEAZA PROFORMA
+                </Button>
+              </Box>
+            </>
+          ) : (
+            <CustomTypography variant="medium" component="h1" style={{ textAlign: 'center' }}>
+              Nu aveti produse in cos
+            </CustomTypography>
+          )}
+          <FloatingButton type="add" href="/supplyOmni/productScan" backgroundColor="red" />
         </>
       )}
     </div>

@@ -5,3 +5,12 @@
     margin: 12px;
   }
 }
+
+.searchPaper {
+  padding: 16px;
+}
+
+.searchContainer {
+  display: grid;
+  grid-template-columns: 1fr 173px;
+}
