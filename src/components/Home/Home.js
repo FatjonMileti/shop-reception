@@ -1,14 +1,31 @@
 import { useNavigate } from 'react-router-dom'
-import { Accordion, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import {
+  Accordion,
+  Salutation,
+  Typography,
+  WeatherWidget
+} from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
 import { Box } from '@mui/material'
 import s from '../ServiceDomain/ServiceDomain.scss'
+import { useGetLocation } from 'hooks'
+import { CircularProgress } from '@mui/material'
 
 const Home = ({ modules, setSubdomainId }) => {
   const navigate = useNavigate()
+  const { location, loading: isLocationLoading, error: isErrorGettingLocation } = useGetLocation()
 
   return (
     <div className={s.modulePaper}>
+      <Salutation name="Utilizator" />
+      {isLocationLoading ? (
+        <div style={{ display: 'flex' }}>
+          <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+        </div>
+      ) : (
+        <WeatherWidget location={isErrorGettingLocation ? "Bucuresti" : location} />
+      )}
+
       {modules.length ? (
         modules.map((module, index) => {
           return (
