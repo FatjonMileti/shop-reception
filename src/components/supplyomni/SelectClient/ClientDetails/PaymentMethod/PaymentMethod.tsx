@@ -118,7 +118,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
             <Grid item md={6} sm={12} xs={12}>
               <Box padding={4} paddingBottom={0}>
                 <AsyncAutocomplete
-                  variant="standard"
+                  variant="outlined"
                   name="payment-methods"
                   label="Metoda de plata"
                   disableClearable
@@ -141,7 +141,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
             <Grid item md={6} sm={12} xs={12}>
               <Box padding={4}>
                 <AsyncAutocomplete
-                  variant="standard"
+                  variant="outlined"
                   name="delivery-options"
                   label="Alege tipul de livrare"
                   disableClearable

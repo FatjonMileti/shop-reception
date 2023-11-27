@@ -49,7 +49,7 @@ const NewAddress: React.FC<NewAddressProps> = props => {
               type="text"
               name="address"
               label="Adresa"
-              variant="standard"
+              variant="outlined"
               value={formik.values.newDeliveryAddress.address}
               fullWidth
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -75,7 +75,7 @@ const NewAddress: React.FC<NewAddressProps> = props => {
                 },
                 width: 100,
                 label: 'Judet',
-                variant: 'standard'
+                variant: 'outlined'
               }}
               city={{
                 action: {
@@ -86,7 +86,7 @@ const NewAddress: React.FC<NewAddressProps> = props => {
                 },
                 width: 100,
                 label: 'Oras',
-                variant: 'standard'
+                variant: 'outlined'
               }}
               value={{
                 county: { value: formik.values.county.id, label: formik.values.county.name },
