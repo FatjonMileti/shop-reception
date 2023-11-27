@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Grid, Typography } from '@mui/material'
-import { PdfViewer } from 'components/core-ui/PdfViewer'
+import { PdfViewer } from './PdfViewer'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import s from './ProformaView.modules.scss'
