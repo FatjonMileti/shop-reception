@@ -20,7 +20,9 @@ const ReceiptInvoiceFinalized: React.FC = () => {
             navigate(`/supplyOmni/receiptClientDetails/${clientId}?orderId=${orderId}`)
           }
         />
-        <Button variant="contained" label="Vânzările mele" onClick={() => {}} />
+        <Button variant="contained" label="Vânzările mele" onClick={() => {
+          navigate(`/supplyOmni/sales`)
+        }} />
       </Box>
     </Paper>
   )
