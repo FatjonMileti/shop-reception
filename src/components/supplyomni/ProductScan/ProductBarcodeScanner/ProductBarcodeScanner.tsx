@@ -80,19 +80,13 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
 
   return (
     <Paper className={s.scanContainer}>
-      {isLoading && (
-        <div style={{ display: 'flex' }}>
-          <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-        </div>
-      )}
-
       <div className={s.scannerControls}>
         <div className={s.scannerControlItem}>
           <Input
             autoFocus
             value={productCode}
             type="text"
-            variant="standard"
+            variant="outlined"
             label="Introdu codul produsului"
             fullWidth
             onChange={event => setProductCode(event.currentTarget.value)}
@@ -138,6 +132,11 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           />
         </div>
       </div>
+      {isLoading && (
+        <div style={{ display: 'flex' }}>
+          <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+        </div>
+      )}
       <div className={cn({ [s.hiddenScanner]: !isVisible })}>
         <div
           id="scandit-barcode-picker"
