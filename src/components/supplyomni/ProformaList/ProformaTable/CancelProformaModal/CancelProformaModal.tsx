@@ -20,7 +20,6 @@ const CancelProformaModal = (props: CancelProformaModalProps) => {
 
   const cancelProforma = async () => {
     try {
-      debugger
       await makeCorePutRequest(`/supply-omni/order/cancellation/${orderId}`)
 
       closeModal()
