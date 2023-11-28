@@ -12,6 +12,7 @@ import { ProformaLists } from './ProformaList'
 import { ReceiptInvoiceFinalized } from './ReceiptInvoiceFinalized'
 import { ReceiptClientDetails } from './ReceiptClientDetails'
 import { ReceiptSelectClient } from './ReceiptSelectClient'
+import BillsTables from './BillsTables'
 
 export const useSupplyOmniRoutes = applicationPages => {
   return (
@@ -21,7 +22,7 @@ export const useSupplyOmniRoutes = applicationPages => {
         element={<PrivateRoute component={ProductScan} applicationPages={applicationPages} />}
       />
       <Route
-        path={URLS.MY_SALES}
+        path={URLS.AUTH_MY_SALES}
         element={<PrivateRoute component={MySales} applicationPages={applicationPages} />}
       />
       <Route
@@ -109,6 +110,16 @@ export const useSupplyOmniRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ReceiptSelectClient}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_BILLS_TABLES}
+        element={
+          <PrivateRoute
+            component={BillsTables}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

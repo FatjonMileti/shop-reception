@@ -10,20 +10,22 @@ import { Box } from '@mui/material'
 import s from '../ServiceDomain/ServiceDomain.scss'
 import { useGetLocation } from 'hooks'
 import { CircularProgress } from '@mui/material'
+import { getUserFirstName } from '../../utils/authService'
 
 const Home = ({ modules, setSubdomainId }) => {
   const navigate = useNavigate()
   const { location, loading: isLocationLoading, error: isErrorGettingLocation } = useGetLocation()
+  const username = getUserFirstName()
 
   return (
     <div className={s.modulePaper}>
-      <Salutation name="Utilizator" />
+      <Salutation name={username} />
       {isLocationLoading ? (
         <div style={{ display: 'flex' }}>
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         </div>
       ) : (
-        <WeatherWidget location={isErrorGettingLocation ? "Bucuresti" : location} />
+        <WeatherWidget location={isErrorGettingLocation ? 'Bucuresti' : location} />
       )}
 
       {modules.length ? (
