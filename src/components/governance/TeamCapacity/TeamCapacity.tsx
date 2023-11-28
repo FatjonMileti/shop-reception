@@ -130,6 +130,7 @@ const TeamCapacity = () => {
             columns={tableColumns}
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
           />
         </Box>
