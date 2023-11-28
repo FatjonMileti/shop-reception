@@ -25,28 +25,35 @@ const EditUser: React.FC<EditUserProps> = props => {
     const { isModalOpen, closeModal, setShouldRefreshData, editUserId } = props
     const { showNotification } = useNotification()
 
-    const [regionId, setRegionId]=useState('');
-    const [storeId, setStoreId]=useState('');
-
-    const [rolesVal, setRolesVal]=useState([])
-    const [traineeTypes, setTraineeTypes] = useState<ValueLabelInterface[]>(null);
+    const [regionId, setRegionId]=useState('')
+    const [storeId, setStoreId]=useState('')
+    const [traceabilityId, setTraceabilityId]=useState('')
+    const [adminId, setAdminId]=useState('')
+    const [isAdmin, setIsAdmin]=useState(false)
+    const [traineeTypes, setTraineeTypes] = useState<ValueLabelInterface[]>(null)
 
     const [isRegionManagerChecked, setIsRegionManagerChecked] = useState(false)
-    const [regionMgValue, setRegionMgValue] = useState<ValueLabelInterface>(null);
+    const [regionMgValue, setRegionMgValue] = useState<ValueLabelInterface>(null)
 
     const [isStoreManagerChecked, setIsStoreManagerChecked ] = useState(false)
     const [storeMgValue, setStoreMgValue] = useState<ValueLabelInterface>(null)
-    
+
     const [isTraineeChecked, setIsTraineeChecked] = useState(false)
     const [traineeValue, setTraineeValue] = useState<ValueLabelInterface>(null)
     
-    const [isSectionChecked, setIsSectionChecked] = useState(false)
+    const [isTraceabilityOpChecked, setIsTraceabilityOpChecked] = useState(false)
+    const [traceabilityOpValue, setTraceabilityOpValue] = useState<ValueLabelInterface>(null)
 
-    const { data: roles, refetch: refetchRoles } = useQuery(
+    const { data: roles } = useQuery(
       ['role'],
       async () => {
         const result = await makeCoreGetRequest('/bakery/role')
-        setRolesVal(result || []);
+        if(result) {
+          setRegionId(result.find(el => el.name === 'REGION_MANAGER')?.id)
+          setStoreId(result.find(el => el.name === 'STORE_MANAGER')?.id)
+          setTraceabilityId(result.find(el => el.name === 'TRACEABILITY_OPERATOR')?.id)
+          setAdminId(result.find(el => el.name === 'ADMIN')?.id)
+        }
         return result || []
       },
       {
@@ -64,10 +71,9 @@ const EditUser: React.FC<EditUserProps> = props => {
       async () => {
         if (editUserId) {
           const result = await makeCoreGetRequest(`/bakery/user/${editUserId}`)
-          if(result)setRegionId(result.structureRoles.find(strRole => strRole.structureType === 'REGION_MANAGER').roleId)
-          if(result)setStoreId(result.structureRoles.find(strRole => strRole.structureType === 'STORE_MANAGER').roleId)
           refetchStructRegion()
           refetchStructStore()
+          refetchStructTraceabilityOp()
           return result || null
         }
         return null
@@ -85,12 +91,9 @@ const EditUser: React.FC<EditUserProps> = props => {
   )
 
     const { data: structRegion, isLoading: isStructRegionLoading, refetch: refetchStructRegion } = useQuery(
-      // ['regions', rolesVal?.find(role => role.name === 'REGION_MANAGER').id || ''] ,
-      ['regions', 'id'],
-      // ['regions', editItemVal?.structureRoles?.find(strRole => strRole.structureType === 'REGION').roleId],
+      ['regions', regionId],
       async () => { 
-        const result = await makeCoreGetRequest(`/bakery/structure/role/:id`)
-        // const result = await makeCoreGetRequest(`/bakery/structure/role/${editItemVal?.structureRoles?.find(strRole => strRole.structureType === 'REGION').roleId}`)
+        const result = await makeCoreGetRequest(`/bakery/structure/role/${regionId}`)
         const resultOptions = toAsyncSelectOptions(result, 'id', 'name')
 
         return resultOptions || []
@@ -107,11 +110,9 @@ const EditUser: React.FC<EditUserProps> = props => {
     )
 
     const { data: structStore, isLoading: isStructStoreLoading, refetch: refetchStructStore } = useQuery(
-      // ['stores', editItemVal?.structureRoles?.find(strRole => strRole.structureType === 'STORE').roleId], 
-      // ['stores', rolesVal?.find(role => role.name === 'STORE_MANAGER').id || ''], 
-      ['regions', 'id'],
+      ['stores', storeId],
       async () => {
-        const result = await makeCoreGetRequest(`/bakery/structure/role/:id`)
+        const result = await makeCoreGetRequest(`/bakery/structure/role/${storeId}`)
         const resultOptions = toAsyncSelectOptions(result, 'id', 'name')
 
         return resultOptions || []
@@ -120,6 +121,25 @@ const EditUser: React.FC<EditUserProps> = props => {
         onError: error => {
           showNotification({
             message: `Error while fetching store manager dropdown data. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        },
+        enabled: false
+      }
+    )
+
+    const { data: structTraceabilityOp, isLoading: isStructTraceabilityOpLoading, refetch: refetchStructTraceabilityOp } = useQuery(
+      ['traceabilityOp', traceabilityId],
+      async () => {
+        const result = await makeCoreGetRequest(`/bakery/structure/role/${traceabilityId}`)
+        const resultOptions = toAsyncSelectOptions(result, 'id', 'name')
+
+        return resultOptions || []
+      },
+      {
+        onError: error => {
+          showNotification({
+            message: `Error while fetching traceability operator dropdown data. ${formatErrorMessage(error)}`,
             type: 'error'
           })
         },
@@ -158,30 +178,38 @@ const EditUser: React.FC<EditUserProps> = props => {
             const payload = {
                 ...values,
                 enable: values.enable === 'Active',
-                // structureRoles: editItem.structureRoles.map(
-                //   strRole => {
-                //     "roleId": roles?.find(role => role.id === regionMgValue.value).id,
-                //       "structureId": regionMgValue.value,
-                //       "structureType": "REGION"
-                //   }
-                // )
-                // structureRoles: [
-                // ...(isRegionManagerChecked ? { 
-                //   "roleId": roles?.find(role => role.id === regionMgValue.value).id,
-                //   "structureId": regionMgValue.value,
-                //   "structureType": "REGION"
-                // } : {}),
-                // ...(isStoreManagerChecked ? { 
-                //   "roleId": roles?.find(role => role.id === storeMgValue.value).id,
-                //   "structureId": storeMgValue.value,
-                //   "structureType": "STORE"
-                // } : {}),
-                // ...(isTraineeChecked ? { 
-                //   "roleId": roles?.find(role => role.id === traineeValue.value).id,
-                //   "structureId": traineeValue.value,
-                //   "structureType": null
-                // } : {}),
-                // ]
+                structureRoles: [
+                  ...(isRegionManagerChecked ? 
+                    [{
+                      "roleId": regionId,
+                      "structureId": regionMgValue.value,
+                      "structureType": "REGION"
+                    }] : []),
+                  ...(isStoreManagerChecked ? 
+                    [{
+                      "roleId": storeId,
+                      "structureId": storeMgValue.value,
+                      "structureType": "STORE"
+                    }] : []),
+                  ...(isTraceabilityOpChecked ? 
+                    [{
+                      "roleId": traceabilityId,
+                      "structureId": traceabilityOpValue.value,
+                      "structureType": "STORE"
+                    }] : []),
+                  ...(isTraineeChecked ? 
+                    [{
+                      "roleId": traineeValue.value,
+                      "structureId": null,
+                      "structureType": null
+                    }] : [])   ,
+                  ...(isAdmin ? 
+                    [{
+                      "roleId": adminId,
+                      "structureId": null,
+                      "structureType": null
+                    }] : []),             
+                ]
             }
             mutate(payload)
             resetForm()
@@ -192,33 +220,40 @@ const EditUser: React.FC<EditUserProps> = props => {
       switch(field) {
         case 'regionMg': 
           setRegionMgValue(value)
-          setShouldRefreshData(true)
           break
         case 'storeMg': 
           setStoreMgValue(value)
-          setShouldRefreshData(true)
+          break
+        case 'traceabilityOp': 
+          setTraceabilityOpValue(value)
           break
         default:
           setTraineeValue(value)
-          setShouldRefreshData(true)
           break
       }
     }
     
     useEffect(() => {
       if(editItem && roles && structRegion && structStore) {
-        editItem.structureRoles.forEach(strRole => {
-          const role = roles?.find(role => role.id === strRole.roleId);
-          console.log('role', role)
+        editItem?.structureRoles?.forEach(strRole => {
+          const role = roles?.find(role => role.id === strRole.roleId)
           if(role?.name === 'REGION_MANAGER') {
             const findRegion = structRegion?.find(reg => reg.value === strRole.structureId)
             setIsRegionManagerChecked(true)
-            setRegionMgValue({label: findRegion.label , value: findRegion.id})
+            setRegionMgValue({label: findRegion?.label , value: findRegion?.value})
           }
           if(role?.name === 'STORE_MANAGER') {
-            const findStore = structStore?.find(reg => reg.value === strRole.structureId)
+            const findStore = structStore?.find(str => str.value === strRole.structureId)
             setIsStoreManagerChecked(true)
-            setStoreMgValue({label: findStore.label , value: findStore.id})
+            setStoreMgValue({label: findStore?.label , value: findStore?.value})
+          }
+          if(role?.name === 'TRACEABILITY_OPERATOR') {
+            const findTrcOpStore = structTraceabilityOp?.find(str => str.value === strRole.structureId)
+            setIsTraceabilityOpChecked(true)
+            setTraceabilityOpValue({label: findTrcOpStore?.label , value: findTrcOpStore?.value})
+          }
+          if(role?.name === 'ADMIN') {
+            setIsAdmin(true)
           }
           if(role?.name.includes('TRAINEE')) {
             const findTrainee = roles?.find(role => role.id === strRole.roleId)
@@ -228,21 +263,16 @@ const EditUser: React.FC<EditUserProps> = props => {
         })
       }
 
-    },[roles, editItem, structRegion, structStore])
+    },[roles, editItem, structRegion, structStore, structTraceabilityOp])
 
     useEffect(() => {
-      if(rolesVal?.length) {
+      if(roles?.length) {
         const traineeTypes = []
-        rolesVal?.map(role => role.name.includes('TRAINEE') && traineeTypes.push(role))
+        roles?.map(role => role.name.includes('TRAINEE') && traineeTypes.push(role))
         setTraineeTypes(toAsyncSelectOptions(traineeTypes, 'id', 'name'))
         if(traineeTypes) setIsTraineeChecked(true)
       }
     },[roles])
-
-    useEffect(() => {
-      if(isRegionManagerChecked) refetchStructRegion()
-      if(isStoreManagerChecked) refetchStructStore()
-    },[isStoreManagerChecked, isRegionManagerChecked])
 
     return (
         <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'} modalWidth="50%">
@@ -254,14 +284,16 @@ const EditUser: React.FC<EditUserProps> = props => {
               <Grid xs={12} item>
                 <FormInfoItems
                   items={[
-                    { label: 'Nume:', name: (editItem as EditUserItem)?.firstName },
+                    { label: 'Nume:', 
+                      name: (editItem as EditUserItem)?.firstName || '-' 
+                    },
                     {
                       label: 'Prenume:',
-                      name: (editItem as EditUserItem)?.lastName
+                      name: (editItem as EditUserItem)?.lastName || '-'
                     },
                     {
                       label: 'Rol:',
-                      name: '-' //TODO ask ale
+                      name: isAdmin ? 'ADMIN' : '-'
                     }
                   ]}
                 />
@@ -290,6 +322,7 @@ const EditUser: React.FC<EditUserProps> = props => {
                         value={regionMgValue}
                         options={structRegion}
                         onChange={(val) => handleChange('regionMg', val)}
+                        required={isRegionManagerChecked}
                       />
                     </Grid>
                   )}
@@ -319,10 +352,41 @@ const EditUser: React.FC<EditUserProps> = props => {
                       value={storeMgValue}
                       options={structStore}
                       onChange={(val) => handleChange('storeMg', val)}
+                      
                       />
                   </Grid>
                 )}
               </>
+              }
+
+              <Grid xs={12} item>
+                <Checkbox
+                  checked={isTraceabilityOpChecked}
+                  label={'TRACEABILITY_OPERATOR'}
+                  onChange={() => setIsTraceabilityOpChecked(!isTraceabilityOpChecked)}
+                />
+              </Grid>
+              {isTraceabilityOpChecked &&
+                 <>
+                 {isStructTraceabilityOpLoading ? (
+                   <div style={{ display: 'flex' }}>
+                     <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+                   </div>
+                 ) : (
+                   <Grid xs={12} item>
+                     <AsyncAutocomplete
+                       disableClearable
+                       variant="outlined"
+                       name="traceability_operator"
+                       label="Structura asociata"
+                       value={traceabilityOpValue}
+                       options={structTraceabilityOp}
+                       onChange={(val) => handleChange('traceabilityOp', val)}
+                       
+                       />
+                   </Grid>
+                 )}
+               </>
               }
 
               <Grid xs={12} item>

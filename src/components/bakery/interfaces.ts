@@ -164,8 +164,8 @@ export interface IdNameInterface {
 
 export interface StructureRole {
   id?: string
-  roleId: string
-  structureId: string 
+  roleId?: string
+  structureId?: string 
   structureType?: string
 }
 
@@ -175,5 +175,5 @@ export interface EditUserItem {
   email: string
   firstName: string
   lastName: string
-  structureRoles: StructureRole[]
+  structureRoles: StructureRole[] | []
 }
