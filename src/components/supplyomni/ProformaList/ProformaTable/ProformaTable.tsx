@@ -27,20 +27,13 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
   const navigate = useNavigate()
 
   const [tableItems, setTableItems] = useState<TableRowModel[]>([])
-  const [currentFilters, setCurrentFilters] = useState({
-    page: null,
-    rowsPerPage: null,
-    order: null,
-    orderBy: null,
-    tableFilters: null,
-    myProformas: null
-  })
   const [totalCount, setTotalCount] = useState<number>(0)
   const [selectedRow, setSelectedRow] = useState<TableRowModel>()
   const [tableFilters, setTableFilters] = useState<TableFilters>(defaultTableFilters)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
+  const [withMyProforma, setWithMyProforma] = useState(true)
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false)
 
   const columnsWithActions = useMemo(() => tableColumns, [])
@@ -51,6 +44,11 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
 
   const navigateToPrint = (id: number) => {
     navigate(`/supplyOmni/proformaView/${id}`)
+  }
+
+  const handleWithMyProformaFilterChange = (value): void => {
+    setWithMyProforma(value)
+    setShouldRefreshData(true)
   }
 
   const rowActions = useMemo(() => {
@@ -80,18 +78,14 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
     return actions
   }, [tableColumns, tableItems])
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, myProformas }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
-      let filters: Filter[]
-      if (myProformas) {
-        filters = [
-          {
-            name: 'myProformas',
-            value: String(myProformas)
-          }
-        ]
-      }
+      const extraCustomUrlParams: Filter[] = [
+        ...tableFilters,
+        { name: 'myProformas', value: String(withMyProforma) }
+      ]
+
       const response = (await makeCoreGetRequest(
         toTableGETUrl({
           url: `/supply-omni/order${proformaType === 'active' ? '/active' : ''}`,
@@ -100,20 +94,12 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
           rowsPerPage,
           order,
           orderBy,
-          filters
+          extraCustomUrlParams
         })
       )) as ProformaListResponseModel
       setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
-      setCurrentFilters({
-        page,
-        rowsPerPage,
-        order,
-        orderBy,
-        tableFilters,
-        myProformas
-      })
     } catch (error) {
       setIsLoading(false)
       showNotification({
@@ -134,7 +120,8 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
         />
         <Checkbox
           label="Proformele mele"
-          onChange={event => fetchData({ ...currentFilters, myProformas: event.target.checked })}
+          checked={withMyProforma}
+          onChange={event => handleWithMyProformaFilterChange(event.target.checked)}
         />
         <Table
           hideCheckbox
