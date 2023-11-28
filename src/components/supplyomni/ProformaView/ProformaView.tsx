@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Grid, Typography } from '@mui/material'
+import { CircularProgress, Grid, Typography } from '@mui/material'
 import { PdfViewer } from './PdfViewer'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
@@ -40,16 +40,22 @@ const ProformaView = () => {
       </Grid>
 
       <Grid item xs={12}>
-        <PdfViewer
-          proform={proform}
-          isLoading={isLoading}
-          actions={{
-            downloadAction: { url: '/supply-omni/order/proforma/pdf', type: 'GET' },
-            printAction: { url: '/supply-omni/order/proforma/print', type: 'POST' },
-            scanReceiptAction: { href: '/supplyOmni/scanReceipt', label: 'Scaneaza bon' },
-            printersAction: { url: '/supply-omni/printer', type: 'GET' }
-          }}
-        />
+        {isLoading ? (
+          <div style={{ display: 'flex' }}>
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+          </div>
+        ) : (
+          <PdfViewer
+            proform={proform}
+            isLoading={isLoading}
+            actions={{
+              downloadAction: { url: '/supply-omni/order/proforma/pdf', type: 'GET' },
+              printAction: { url: '/supply-omni/order/proforma/print', type: 'POST' },
+              scanReceiptAction: { href: '/supplyOmni/scanReceipt', label: 'Scaneaza bon' },
+              printersAction: { url: '/supply-omni/printer', type: 'GET' }
+            }}
+          />
+        )}
       </Grid>
     </div>
   )
