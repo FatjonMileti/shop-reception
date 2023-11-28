@@ -911,7 +911,7 @@
       "responses": [
         {
           "uuid": "a2ef067f-4a87-470a-8476-851785b607fd",
-          "body": "{\r\n    \"id\": \"002d351e-d5cc-46ac-9db2-3689c1bbf004\",\r\n    \"firstName\": \"Andreea - Madalina\",\r\n    \"lastName\": \"Pastrav\",\r\n    \"enable\": true,\r\n    \"structureRoles\": [\r\n        {\r\n            \"id\": \"67b53748-2738-4707-b03f-c0e3aa294385\",\r\n            \"roleId\": \"cf19f97b-b081-424c-8f44-1c5696a66cda\",\r\n            \"structureId\": \"b0610a3d-0cee-4688-8454-3575d8a62366\",\r\n            \"structureType\": \"REGION\"\r\n        },\r\n        {\r\n            \"id\": \"7d3b83ad-7006-4773-ae15-7c39e6a2d2bc\",\r\n            \"roleId\": \"e1d141e1-aa95-4a57-acaa-b2fc98b98a16\",\r\n            \"structureId\": \"3c5508c9-434a-4c29-9557-078304e799fe\",\r\n            \"structureType\": \"STORE\"\r\n        },\r\n        {\r\n            \"id\": \"4a670d67-a1f1-4106-b7a5-efae76e78f60\",\r\n            \"roleId\": \"4ab6d91c-fd63-47df-8215-c330086bc221\",\r\n            \"structureId\": null,\r\n            \"structureType\": null\r\n        }\r\n    ],\r\n    \"oidcId\": \"4120ddef-6a04-41f4-9890-550ee409198a\"\r\n}",
+          "body": "{\r\n    \"id\": \"002d351e-d5cc-46ac-9db2-3689c1bbf004\",\r\n    \"firstName\": \"Andreea - Madalina\",\r\n    \"lastName\": \"Pastrav\",\r\n    \"enable\": true,\r\n    \"structureRoles\": [\r\n        {\r\n            \"id\": \"67b53748-2738-4707-b03f-c0e3aa294385\",\r\n            \"roleId\": \"cf19f97b-b081-424c-8f44-1c5696a66cda\",\r\n            \"structureId\": \"b0610a3d-0cee-4688-8454-3575d8a62366\",\r\n            \"structureType\": \"REGION\"\r\n        },\r\n       \r\n        {\r\n            \"id\": \"4a670d67-a1f1-4106-b7a5-efae76e78f60\",\r\n            \"roleId\": \"4ab6d91c-fd63-47df-8215-c330086bc221\",\r\n            \"structureId\": null,\r\n            \"structureType\": null\r\n        }\r\n    ],\r\n    \"oidcId\": \"4120ddef-6a04-41f4-9890-550ee409198a\"\r\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully retrieved a user object",
@@ -3142,6 +3142,40 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "73c69bc3-e64c-4a9d-9d13-e43a2ba23763",
+      "type": "http",
+      "documentation": "Edit user by id",
+      "method": "put",
+      "endpoint": "user/:id",
+      "responses": [
+        {
+          "uuid": "770fcef0-b389-47fa-8d85-fb1bc960fda8",
+          "body": "{\r\n    \"id\": \"002d351e-d5cc-46ac-9db2-3689c1bbf004\",\r\n    \"firstName\": \"Andreea - Madalina\",\r\n    \"lastName\": \"Pastrav\",\r\n    \"enable\": true,\r\n    \"structureRoles\": [\r\n        {\r\n            \"id\": \"67b53748-2738-4707-b03f-c0e3aa294385\",\r\n            \"roleId\": \"cf19f97b-b081-424c-8f44-1c5696a66cda\",\r\n            \"structureId\": \"b0610a3d-0cee-4688-8454-3575d8a62366\",\r\n            \"structureType\": \"REGION\"\r\n        },\r\n        {\r\n            \"id\": \"7d3b83ad-7006-4773-ae15-7c39e6a2d2bc\",\r\n            \"roleId\": \"e1d141e1-aa95-4a57-acaa-b2fc98b98a16\",\r\n            \"structureId\": \"3c5508c9-434a-4c29-9557-078304e799fe\",\r\n            \"structureType\": \"STORE\"\r\n        },\r\n        {\r\n            \"id\": \"4a670d67-a1f1-4106-b7a5-efae76e78f60\",\r\n            \"roleId\": \"4ab6d91c-fd63-47df-8215-c330086bc221\",\r\n            \"structureId\": null,\r\n            \"structureType\": null\r\n        }\r\n    ],\r\n    \"oidcId\": \"4120ddef-6a04-41f4-9890-550ee409198a\"\r\n}",
+          "latency": 0,
+          "statusCode": 202,
+          "label": "Successfully updated user",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -3167,11 +3201,19 @@
     },
     {
       "type": "route",
+      "uuid": "73c69bc3-e64c-4a9d-9d13-e43a2ba23763"
+    },
+    {
+      "type": "route",
       "uuid": "41a7ec0a-e849-4a0f-ac62-edd4fce735b4"
     },
     {
       "type": "route",
       "uuid": "0586e2df-ebdc-4491-8f0d-bb8162b96530"
+    },
+    {
+      "type": "route",
+      "uuid": "2b685adf-0d87-4907-bd38-fdc9974ef7d7"
     },
     {
       "type": "route",
@@ -3280,10 +3322,6 @@
     {
       "type": "route",
       "uuid": "8ffa4391-57c2-443b-84b2-6c0f4e344918"
-    },
-    {
-      "type": "route",
-      "uuid": "2b685adf-0d87-4907-bd38-fdc9974ef7d7"
     }
   ],
   "proxyMode": false,
