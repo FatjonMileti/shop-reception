@@ -13,6 +13,7 @@ export interface TableFilters {
 }
 
 export interface TableRowModel {
+  proformaId?: number
   orderCreationDate: string
   productName: string
   productEan: string
@@ -26,15 +27,15 @@ export interface MySalesResponseModel extends BasePageResponseModel<SaleModel> {
 }
 
 export interface SaleModel {
-  id: number
+  id?: number
   orderCreationDate: Date
   productEan: string
   productName: string
   productQuantity: number
   productPrice: number
-  username: string
+  username?: string
   totalPrice: number
-  proformaId: number
+  proformaId?: number
 }
 
 export interface SummaryModel {
