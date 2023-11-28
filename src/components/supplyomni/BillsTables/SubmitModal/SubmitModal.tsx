@@ -29,7 +29,7 @@ const SubmitModal: FC<ModalProps> = props => {
       }
     } catch (error) {
       showNotification({
-        message: `Error on set order as prepared. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
