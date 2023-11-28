@@ -23,10 +23,6 @@ import RecordReturn from './GoodsReturn/RecordReturn/RecordReturn'
 export const useMerchandiseRoutes = applicationPages => {
   return (
     <>
-      {/*<Route
-        path={URLS.AUTH_MERCHANDISE_HOME}
-        element={<Home />}
-      />*/}
       <Route
         path={URLS.AUTH_GOODS_RECEPTION}
         element={<GoodsReception />}
