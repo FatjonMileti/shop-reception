@@ -1,4 +1,4 @@
-import { formatUIDate } from "utils/helpers";
+import { formatUIDate } from 'utils/helpers'
 
 export const toTableRowItems = items => items.map(item => ({
   id: item.id,
