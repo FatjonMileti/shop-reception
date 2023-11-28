@@ -9,7 +9,12 @@ export const URLS = {
   AUTH_FAMILY_PRODUCTS: 'bakery/admin/family-products',
   AUTH_USAGE_REPORT: 'bakery/admin/usage-report',
   AUTH_PRODUCTS: 'bakery/admin/products',
+
+  /* Formator role */
   AUTH_PRODUCT_MANAGEMENT: 'bakery/formator/product-management-formator',
   AUTH_PRODUCTION_MANAGEMENT: 'bakery/formator/cadentier-formator',
-  AUTH_PRODUCTION_MANAGEMENT_PRINT: 'bakery/formator/cadentier-formator-print'
+  AUTH_PRODUCTION_MANAGEMENT_PRINT: 'bakery/formator/cadentier-formator-print',
+
+  /* Region manager role */
+  AUTH_PRODUCT_MANAGEMENT_REGION: 'bakery/regionManager/product-management-region',
 }
