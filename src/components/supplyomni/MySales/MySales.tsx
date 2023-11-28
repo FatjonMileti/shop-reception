@@ -43,6 +43,7 @@ export const MySales = () => {
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
+
     try {
       const response = (await makeCoreGetRequest(
         toTableGETUrl({
