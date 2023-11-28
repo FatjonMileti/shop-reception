@@ -173,6 +173,7 @@ const MerchandisersTab = () => {
           <Grid xs={12} md={3} item>
             <AsyncAutocomplete
               variant="standard"
+              applyCustomStyle
               name="store.id"
               label="Selecteaza magazin"
               disableClearable

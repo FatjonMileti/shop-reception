@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import s from './Regions.modules.scss'
+import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
@@ -27,7 +27,7 @@ const Regions = () => {
   const openAddModal = (): void => setIsAddModalOpen(true)
   const closeAddModal = (): void => setIsAddModalOpen(false)
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
 
     try {
@@ -35,6 +35,8 @@ const Regions = () => {
         toTableGETUrl({
           url: '/bakery/region',
           filters: [],
+          searchText,
+          searchFields: ["name","stores","divisionType"],
           tableFilters,
           page,
           rowsPerPage,
@@ -65,7 +67,6 @@ const Regions = () => {
 
   return (
     <div className={s.mainContainer}>
-      {/* TODO add table search bar after UI redesign */}
       <Box>
           <AddEditRegion 
              isModalOpen={isAddModalOpen}
@@ -81,6 +82,7 @@ const Regions = () => {
           />
         <Table
           hideCheckbox
+          hasSearchInput
           columns={columns}
           items={tableItems}
           fetchData={fetchData}
