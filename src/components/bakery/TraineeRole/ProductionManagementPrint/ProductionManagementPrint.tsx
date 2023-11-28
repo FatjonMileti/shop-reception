@@ -1,4 +1,4 @@
-import s from './ProductionManagementPrint.modules.scss'
+import s from '../../commonStyles.modules.scss'
 import { Grid } from '@mui/material'
 import { columns } from './helpers'
 import { PrintPreviewTable } from 'components/core-ui/PrintPreviewTable'

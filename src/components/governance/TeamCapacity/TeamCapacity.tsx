@@ -6,7 +6,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { RootState } from 'configureStore'
 import { useNotification } from 'hooks'
 import { useGovernanceDomains } from 'hooks/useGovernanceDomains'
-import React, { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import { makeCoreGetRequest } from 'utils/api'
@@ -28,8 +28,8 @@ const TeamCapacity = () => {
   const [tableFilter, setTableFilter] = useState<TeamCapacityTableFilter>({
     teamMemberName: null,
     baseRole: null,
-    startDate: null,
-    endDate: null
+    startDate: new Date(),
+    endDate: new Date()
   })
 
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -98,28 +98,26 @@ const TeamCapacity = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
-        <Grid container spacing={4}>
-          {!storedGovernanceDomains && (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          )}
+      <Grid container spacing={4}>
+        {!storedGovernanceDomains && (
+          <div style={{ display: 'flex' }}>
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+          </div>
+        )}
 
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              applyCustomStyle
-              variant="standard"
-              name="teamMember.domain"
-              label="Domain"
-              disableClearable
-              value={domainFilterValue}
-              options={domainFilterOptions}
-              onChange={handleFilterChange}
-            />
-          </Grid>
+        <Grid xs={12} md={2} item style={{ padding: 0 }}>
+          <AsyncAutocomplete
+            applyCustomStyle
+            variant="outlined"
+            name="teamMember.domain"
+            label="Domain"
+            disableClearable
+            value={domainFilterValue}
+            options={domainFilterOptions}
+            onChange={handleFilterChange}
+          />
         </Grid>
-      </Paper>
+      </Grid>
       {domainFilterValue && (
         <Box>
           <Table
@@ -132,6 +130,7 @@ const TeamCapacity = () => {
             columns={tableColumns}
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
           />
         </Box>

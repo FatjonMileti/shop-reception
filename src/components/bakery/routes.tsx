@@ -11,6 +11,7 @@ import { Families } from './Families'
 import { FamilyProducts } from './Families/FamilyProducts'
 import { Products } from './Products'
 import { SalesCadentier } from './SalesCadentier'
+import { ProductManagementRegion } from './RegionManagerRole/ProductManagementRegion'
 import { UsageReport } from './UsageReport'
 import { ProductManagement } from './TraineeRole/ProductManagement'
 import { ProductionManagement } from './TraineeRole/ProductionManagement'
@@ -143,6 +144,19 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ProductionManagementPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      
+
+      {/* region manager role */}
+      <Route
+        path={URLS.AUTH_PRODUCT_MANAGEMENT_REGION}
+        element={
+          <PrivateRoute
+            component={ProductManagementRegion}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

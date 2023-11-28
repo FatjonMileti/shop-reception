@@ -10,7 +10,12 @@ export const URLS = {
   AUTH_USAGE_REPORT: 'bakery/admin/usage-report',
   AUTH_PRODUCTS: 'bakery/admin/products',
   AUTH_SALES_CADENTIER: 'bakery/admin/sales-cadentier',
+
+  /* Formator role */
   AUTH_PRODUCT_MANAGEMENT: 'bakery/formator/product-management-formator',
   AUTH_PRODUCTION_MANAGEMENT: 'bakery/formator/cadentier-formator',
-  AUTH_PRODUCTION_MANAGEMENT_PRINT: 'bakery/formator/cadentier-formator-print'
+  AUTH_PRODUCTION_MANAGEMENT_PRINT: 'bakery/formator/cadentier-formator-print',
+
+  /* Region manager role */
+  AUTH_PRODUCT_MANAGEMENT_REGION: 'bakery/regionManager/product-management-region',
 }

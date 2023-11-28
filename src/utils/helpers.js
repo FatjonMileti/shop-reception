@@ -96,7 +96,7 @@ export const formatAndDownloadResponse = fileObject => {
 export const downloadFile = url => {
   const a = document.createElement('a')
   a.href = `${getCoreBaseUrl(url)}`
-  a.setAttribute('download', `FileName.pdf`)
+  a.setAttribute('download', 'FileName.pdf')
   document.body.appendChild(a)
   a.click()
   document.body.removeChild(a)

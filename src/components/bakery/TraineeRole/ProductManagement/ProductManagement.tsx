@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import s from './ProductManagement.modules.scss'
+import s from '../../commonStyles.modules.scss'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'

@@ -18,6 +18,7 @@ import {
   TeamAssignmentItem,
   ValueLabelInterface
 } from '../interfaces'
+import { formatPayloadDate } from 'utils/helpers'
 
 interface EditTeamAssignmentProps {
   isModalOpen: boolean
@@ -169,7 +170,7 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
   const [tableFilter, setTableFilter] = useState<IndividualCapacityTableFilter>({
     teamMemberId: null,
     startDate: searchParams.get('startDate'),
-    endDate: null
+    endDate: searchParams.get('endDate')
   })
 
   const { id } = useParams()
@@ -197,7 +198,7 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
   const fetchData = async ({ tableFilters }) => {
     setIsLoading(true)
     try {
-      const test = tableFilters.map((filter, index) => {
+      const getTableFilters = tableFilters.map((filter, index) => {
         if (!filter.value && !!searchParams.get(filter.name)) {
           return { name: filter.name, value: searchParams.get(filter.name) }
         }
@@ -208,7 +209,7 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
           url: '/governance/individualCapacity',
           filters: [{ name: 'teamMember.domain', value: domainFilterValue.value }],
           extraUrlParams: [{ name: 'id', value: id }],
-          tableFilters: test
+          tableFilters: getTableFilters
         })
       )
 
@@ -244,6 +245,8 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
       name: 'startDate',
       label: 'Start Date',
       type: 'date',
+      value: formatPayloadDate(tableFilter.startDate),
+
       filter: (
         <DatePicker
           value={tableFilter.startDate}
@@ -257,11 +260,13 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
       name: 'endDate',
       label: 'End Date',
       type: 'date',
+      value: formatPayloadDate(tableFilter.endDate),
+
       filter: (
         <DatePicker
-          value={tableFilter.startDate}
-          onChange={value => setTableFilter({ ...tableFilter, startDate: value })}
-          label="Start date"
+          value={tableFilter.endDate}
+          onChange={value => setTableFilter({ ...tableFilter, endDate: value })}
+          label="End date"
           variant="standard"
         />
       )
@@ -270,28 +275,26 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
 
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
-        <Grid container spacing={4}>
-          {!storedGovernanceDomains && (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          )}
+      <Grid container spacing={4}>
+        {!storedGovernanceDomains && (
+          <div style={{ display: 'flex' }}>
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+          </div>
+        )}
 
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              applyCustomStyle
-              variant="standard"
-              name="teamMember.domain"
-              label="Domain"
-              disableClearable
-              value={domainFilterValue}
-              options={domainFilterOptions}
-              onChange={handleFilterChange}
-            />
-          </Grid>
+        <Grid xs={12} md={2} item style={{ padding: 0 }}>
+          <AsyncAutocomplete
+            applyCustomStyle
+            variant="outlined"
+            name="teamMember.domain"
+            label="Domain"
+            disableClearable
+            value={domainFilterValue}
+            options={domainFilterOptions}
+            onChange={handleFilterChange}
+          />
         </Grid>
-      </Paper>
+      </Grid>
       {domainFilterValue && (
         <Box>
           <Table
