@@ -1,64 +1,26 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { makeCoreGetRequest } from 'utils/api'
-import { useDataStore, useNotification } from 'hooks'
 import { PdfViewerProps } from './PdfViewerDefinitions'
 import { PdfActions } from './PdfActions'
 import { PDFDocument } from './PDFDocument'
 import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
-import { Icon } from '../Icon'
 import s from './PdfViewer.modules.scss'
-
 import '!style-loader!css-loader!react-pdf/dist/esm/Page/TextLayer.css'
 import '!style-loader!css-loader!react-pdf/dist/esm/Page/AnnotationLayer.css'
 import { CircularProgress, useMediaQuery } from '@mui/material'
-import { formatErrorMessage } from 'utils/formatting'
+import { Icon } from 'components/core-ui/Icon'
 
 const PdfViewer = (props: PdfViewerProps) => {
-  const { action, actions } = props
-  const [isLoading, setIsLoading] = useState(true)
+  const { actions, proform, isLoading } = props
 
   const { id } = useParams()
 
   const navigate = useNavigate()
 
-  const [proform, setProform] = useState(null)
   // [~] from https://github.com/wojtekmaj/react-pdf#usage
   const [numPages, setNumPages] = useState(null)
   const [pageNumber, setPageNumber] = useState(1)
   const [scale, setScale] = useState(1.0)
-
-  const { showNotification } = useNotification()
-  const { storeData, retrieveData } = useDataStore()
-
-  useEffect(() => {
-    ;(async () => {
-      if (id == undefined) return
-
-      if (action) {
-        try {
-          setIsLoading(true)
-
-          if (action.storeIn) {
-            storeData(action.storeIn, {}) // [~] if we store the response first, then this 'response' variable becomes read-only and the following toTableRowItems throws an error
-          }
-          const proformResult = await makeCoreGetRequest(`${action.url}/${id}`)
-          setProform(proformResult)
-          if (action.storeIn) {
-            storeData(action.storeIn, proformResult) // [~] if we store the response first, then this 'response' variable becomes read-only and the following toTableRowItems throws an error
-          }
-          setIsLoading(false)
-        } catch (error) {
-          showNotification({
-            message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
-            type: 'error'
-          })
-        }
-      } else {
-        setIsLoading(false)
-      }
-    })()
-  }, [id])
 
   const isXs = useMediaQuery('(max-width:624px)')
 
@@ -67,9 +29,7 @@ const PdfViewer = (props: PdfViewerProps) => {
   }, [isXs])
 
   const scanReceipt = () => {
-    navigate(
-      `${actions.scanReceiptAction.href}/${id}?clientId=${retrieveData('proformaDetails.clientId')}`
-    )
+    navigate(`${actions.scanReceiptAction.href}/${id}?clientId=${proform.clientId}`)
   }
 
   // [~] on back from this page we get called with id=undefined by ..
