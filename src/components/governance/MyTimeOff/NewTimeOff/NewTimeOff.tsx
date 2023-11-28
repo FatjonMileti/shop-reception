@@ -53,6 +53,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
 
         setShouldRefreshData(true)
         closeModal()
+        formik.resetForm()
       } catch (error) {
         showNotification({
           message: `Error while saving time off data. ${formatErrorMessage(error)}`,

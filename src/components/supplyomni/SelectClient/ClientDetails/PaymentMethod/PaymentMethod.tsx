@@ -14,6 +14,7 @@ import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
+import { toOrderPayload } from './serializers'
 
 interface PaymentMethodProps {
   clientId: string
@@ -60,7 +61,8 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   )
 
   const addOrder = async values => {
-    await makeCorePostRequest(`/supply-omni/order`, values)
+    const result = await makeCorePostRequest(`/supply-omni/order`, values)
+    return result
   }
 
   const { isLoading: isLoadingAddOrder, mutate } = useMutation(addOrder, {
@@ -89,12 +91,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      if (values.hasDifferentDeliveryAddress === false) {
-        delete values['county']
-        delete values['city']
-        delete values['newDeliveryAddress']
-      }
-      mutate(values)
+      mutate(toOrderPayload(values))
     }
   })
 

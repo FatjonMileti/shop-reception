@@ -38,9 +38,11 @@
   flex-direction: row;
   gap: 16px;
   margin-left: 16px;
+  margin-top: 12px;
 
   @media (max-width: 624px) {
     margin-left: 0px;
+    margin-top: 0;
   }
 
   button {

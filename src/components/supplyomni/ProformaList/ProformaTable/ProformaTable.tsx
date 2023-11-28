@@ -15,12 +15,12 @@ import {
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
 import { Box, Typography } from '@mui/material'
-import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { useNavigate } from 'react-router-dom'
 import { Checkbox } from '@fullscreendigital/carrefour-dex-fe'
 import { Filter } from 'components/core-ui/Table/TableDefinitions'
+import { CancelProformaModal } from './CancelProformaModal'
 
-export const ProformaTable: React.FC<ProformaTableProps> = props => {
+const ProformaTable: React.FC<ProformaTableProps> = props => {
   const { proformaType } = props
 
   const { showNotification } = useNotification()
@@ -41,13 +41,13 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false)
 
   const columnsWithActions = useMemo(() => tableColumns, [])
   const tableFilterInputs = useMemo(() => buildTableFilterInputs(tableFilters, setTableFilters), [])
 
-  const openDeleteModal = (): void => setIsDeleteModalOpen(true)
-  const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
+  const openCancelModal = (): void => setIsCancelModalOpen(true)
+  const closeCancelModal = (): void => setIsCancelModalOpen(false)
 
   const navigateToPrint = (id: number) => {
     navigate(`/supplyOmni/proformaView/${id}`)
@@ -57,19 +57,19 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
     const selectRow = (rowId: number, action: string) => {
       const item = tableItems.find(item => item.id === rowId)
       setSelectedRow(item)
-      action === 'print' ? navigateToPrint(item.id) : openDeleteModal()
+      action === 'print' ? navigateToPrint(item.id) : openCancelModal()
     }
 
     const actions = [
       proformaType === 'active' && {
-        label: 'Sterge',
+        label: 'Anuleaza',
         labelColor: 'white',
         typographyVariant: 'medium',
         backgroundColor: '#CC4010',
         onClick: (e, rowId) => selectRow(rowId, 'delete')
       },
       {
-        label: 'Printare',
+        label: 'Detalii',
         labelColor: 'white',
         typographyVariant: 'medium',
         backgroundColor: '#0970E6',
@@ -126,12 +126,10 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
   return (
     <div className={s.mainContainer}>
       <Box>
-        <DeleteConfirmationModal
-          isModalOpen={isDeleteModalOpen}
-          closeModal={closeDeleteModal}
-          actionUrl="/supply-omni/order/:id"
-          itemId={`${selectedRow?.proformaId}`}
-          content={<Typography>Are you sure you want to delete this entry?</Typography>}
+        <CancelProformaModal
+          isModalOpen={isCancelModalOpen}
+          closeModal={closeCancelModal}
+          orderId={`${selectedRow?.id}`}
           setShouldRefreshData={setShouldRefreshData}
         />
         <Checkbox
@@ -148,7 +146,7 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
           isLoading={isLoading}
           totalCount={totalCount}
           rowActions={rowActions}
-          rowActionsWidth="130px"
+          rowActionsWidth="200px"
           filters={tableFilterInputs}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
@@ -157,3 +155,5 @@ export const ProformaTable: React.FC<ProformaTableProps> = props => {
     </div>
   )
 }
+
+export default ProformaTable
