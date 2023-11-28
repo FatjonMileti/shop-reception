@@ -28,8 +28,8 @@ const TeamCapacity = () => {
   const [tableFilter, setTableFilter] = useState<TeamCapacityTableFilter>({
     teamMemberName: null,
     baseRole: null,
-    startDate: null,
-    endDate: null
+    startDate: new Date(),
+    endDate: new Date()
   })
 
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
