@@ -13,7 +13,7 @@ import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
 import { useQuery } from 'react-query'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { formatAndDownloadResponse, formatPayloadDate } from 'utils/helpers'
+import { formatAndDownloadResponse, formatPayloadDate, getPreviousDay } from 'utils/helpers'
 import { DownloadOutlined } from '@mui/icons-material'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { TableState } from './interfaces'
@@ -25,7 +25,7 @@ const SalesCadentier = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
 
-  const [dateFilterValue, setDateFilterValue] = useState(dayjs().subtract(1, 'day'))
+  const [dateFilterValue, setDateFilterValue] = useState(getPreviousDay())
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
   
   const [tableState, setTableState] = useState<TableState>({
@@ -38,7 +38,7 @@ const SalesCadentier = () => {
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/all')
-      const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
+      const resultOptions = toAsyncSelectOptions(result, 'id', 'name')
       return resultOptions || []
     },
     {
@@ -102,7 +102,7 @@ const SalesCadentier = () => {
         orderBy,
         tableFilters: filters
       })
-      console.log('filters', filters);
+
       window.history.replaceState(
         {
           ...window.history.state,
@@ -117,7 +117,6 @@ const SalesCadentier = () => {
         document.title
       )
 
-      console.log('window.history.state 2222222',window.history.state)
       return response
     } catch (error) {
       showNotification({
@@ -181,27 +180,6 @@ const SalesCadentier = () => {
         </Paper>
         {storeFilterValue && (
             <Box>
-                {/* <Table
-                hideCheckbox
-                columns={columns()}
-                items={tableItems}
-                fetchData={fetchData}
-                isLoading={isLoading}
-                totalCount={totalCount}
-                shouldRefreshData={shouldRefreshData}
-                setShouldRefreshData={setShouldRefreshData}
-                stickyRatio={0.2}
-                groupCount={3}
-                frequency='day'
-                hasStickyHeader={true}
-                maxHeight="600px"
-                toolbarActions={[
-                    {
-                    icon: <FileDownloadOutlined />,
-                    onClick: () => handleDownload()
-                    }
-                ]}
-                /> */}
                  <GroupTable
                   hideCheckbox
                   columns={columns}

@@ -5,6 +5,7 @@ import { useImmer } from 'use-immer'
 import { toDynamicTableItems, toTableRowItems } from 'utils/serializers'
 import { PrintModal } from '../PrintModal'
 import { createDynamicColumns } from './helpers'
+
 const GroupTable = props => {
   const {
     columns,
@@ -28,9 +29,7 @@ const GroupTable = props => {
       filters: rest.tableFilters || []
     }
   )
-    console.log('tableState',tableState);
-    console.log('rest',rest);
-    console.log('window histoy',window.history.state);
+
   const [dynamicColumns, setDynamicColumns] = useState([])
   const [dynamicItems, setDynamicItems] = useState([])
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
@@ -112,17 +111,3 @@ const GroupTable = props => {
   )
 }
 export default GroupTable
-
-
-
-
-
-
-
-
-
-
-
-
-
-
