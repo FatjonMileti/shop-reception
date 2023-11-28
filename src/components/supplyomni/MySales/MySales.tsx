@@ -36,7 +36,7 @@ export const MySales = () => {
     list: TableRowModel[]
   ) => {
     setTotalCount(totalCount)
-    setTableItems(list)
+    setTableItems(toTableRowItems(list, true))
     setTotalPrice(totalPrice)
     setIsLoading(false)
   }
@@ -58,7 +58,7 @@ export const MySales = () => {
       onHandlingFetchResponse(
         response.page.totalCount,
         response.summary.totalPrice,
-        toTableRowItems(response.list)
+        toTableRowItems(response.list, false)
       )
       setTableState({ order, orderBy, tableFilters })
     } catch (error) {
