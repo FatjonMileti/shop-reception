@@ -88,7 +88,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           <Input
             value={code}
             type="text"
-            variant="standard"
+            variant="outlined"
             label="Introdu codul bonului"
             fullWidth
             onChange={event => setCode(event.currentTarget.value)}
@@ -100,7 +100,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           <DatePicker
             label="Alege data bonului"
             value={receiptDate}
-            variant="standard"
+            variant="outlined"
             required
             onChange={newValue => setReceiptDate(newValue)}
           />

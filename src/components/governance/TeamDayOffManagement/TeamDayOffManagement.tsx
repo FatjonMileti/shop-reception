@@ -183,28 +183,26 @@ const TeamDayOffManagement = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
-        <Grid container spacing={4}>
-          {!storedGovernanceDomains || isTeamMembersLoading ? (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          ) : (
-            <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
-                applyCustomStyle
-                variant="standard"
-                name="teamMember.domain"
-                label="Domain"
-                disableClearable
-                value={domainFilterValue}
-                options={domainFilterOptions}
-                onChange={handleFilterChange}
-              />
-            </Grid>
-          )}
-        </Grid>
-      </Paper>
+      <Grid container spacing={4}>
+        {!storedGovernanceDomains || isTeamMembersLoading ? (
+          <div style={{ display: 'flex' }}>
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+          </div>
+        ) : (
+          <Grid xs={12} md={2} item style={{ padding: 0 }}>
+            <AsyncAutocomplete
+              applyCustomStyle
+              variant="outlined"
+              name="teamMember.domain"
+              label="Domain"
+              disableClearable
+              value={domainFilterValue}
+              options={domainFilterOptions}
+              onChange={handleFilterChange}
+            />
+          </Grid>
+        )}
+      </Grid>
       {domainFilterValue && (
         <Box>
           <NewTimeOff
