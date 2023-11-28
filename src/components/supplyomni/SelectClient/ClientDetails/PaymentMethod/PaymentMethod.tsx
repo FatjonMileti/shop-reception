@@ -14,6 +14,7 @@ import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
+import { toOrderPayload } from './serializers'
 
 interface PaymentMethodProps {
   clientId: string
@@ -60,7 +61,8 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   )
 
   const addOrder = async values => {
-    await makeCorePostRequest(`/supply-omni/order`, values)
+    const result = await makeCorePostRequest(`/supply-omni/order`, values)
+    return result
   }
 
   const { isLoading: isLoadingAddOrder, mutate } = useMutation(addOrder, {
@@ -89,12 +91,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      if (values.hasDifferentDeliveryAddress === false) {
-        delete values['county']
-        delete values['city']
-        delete values['newDeliveryAddress']
-      }
-      mutate(values)
+      mutate(toOrderPayload(values))
     }
   })
 
@@ -113,51 +110,67 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
         </Box>
         <Divider />
 
-        <Box padding={4} paddingBottom={0}>
-          <AsyncAutocomplete
-            variant="standard"
-            name="payment-methods"
-            label="Metoda de plata"
-            disableClearable
-            value={
-              paymentOptions?.find(item => item.value === formik.values.paymentMethod)?.label || ''
-            }
-            options={paymentOptions || []}
-            onChange={paymentMethod => formik.setFieldValue('paymentMethod', paymentMethod.value)}
-            required
-            error={!!formik.errors.paymentMethod}
-            helperText={formik.errors.paymentMethod as string}
-          />
-        </Box>
-
-        <Box padding={4}>
-          <AsyncAutocomplete
-            applyCustomStyle
-            variant="standard"
-            name="delivery-options"
-            label="Alege tipul de livrare"
-            disableClearable
-            value={
-              deliveryOptions?.find(item => item.value === formik.values.deliveryType)?.label || ''
-            }
-            options={deliveryOptions || []}
-            onChange={deliveryType => formik.setFieldValue('deliveryType', deliveryType.value)}
-            required
-            error={!!formik.errors.deliveryType}
-            helperText={formik.errors.deliveryType as string}
-          />
-        </Box>
-
-        <NewAddress
-          formik={formik}
-          onFieldUpdate={(key, value) => formik.setFieldValue(key, value)}
-        />
-
-        <Box padding={4} textAlign={'right'}>
-          <Button variant="contained" label={''} onClick={() => formik.handleSubmit()}>
-            <PictureAsPdfOutlinedIcon /> PROFORMA IN FORMAT PDF
-          </Button>
-        </Box>
+        <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start">
+          <Grid container>
+            <Grid item md={6} sm={12} xs={12}>
+              <Box padding={4} paddingBottom={0}>
+                <AsyncAutocomplete
+                  variant="outlined"
+                  name="payment-methods"
+                  label="Metoda de plata"
+                  disableClearable
+                  value={
+                    paymentOptions?.find(item => item.value === formik.values.paymentMethod)
+                      ?.label || ''
+                  }
+                  options={paymentOptions || []}
+                  onChange={paymentMethod =>
+                    formik.setFieldValue('paymentMethod', paymentMethod.value)
+                  }
+                  required
+                  error={!!formik.errors.paymentMethod}
+                  helperText={formik.errors.paymentMethod as string}
+                />
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item md={6} sm={12} xs={12}>
+              <Box padding={4}>
+                <AsyncAutocomplete
+                  variant="outlined"
+                  name="delivery-options"
+                  label="Alege tipul de livrare"
+                  disableClearable
+                  value={
+                    deliveryOptions?.find(item => item.value === formik.values.deliveryType)
+                      ?.label || ''
+                  }
+                  options={deliveryOptions || []}
+                  onChange={deliveryType =>
+                    formik.setFieldValue('deliveryType', deliveryType.value)
+                  }
+                  required
+                  error={!!formik.errors.deliveryType}
+                  helperText={formik.errors.deliveryType as string}
+                />
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <NewAddress
+              formik={formik}
+              onFieldUpdate={(key, value) => formik.setFieldValue(key, value)}
+            />
+          </Grid>
+          <Grid container p={4} justifyContent="flex-end">
+            <Grid item>
+              <Button variant="contained" label={''} onClick={() => formik.handleSubmit()}>
+                <PictureAsPdfOutlinedIcon /> PROFORMA IN FORMAT PDF
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
       </Paper>
     </Grid>
   )

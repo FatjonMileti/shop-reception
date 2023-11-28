@@ -1,5 +1,5 @@
 import { Tabs } from 'components/core-ui/Tabs'
-import { ProformaTable } from './table/ProformaTable'
+import { ProformaTable } from './ProformaTable'
 
 export const ProformaLists = () => {
   const tabs = [

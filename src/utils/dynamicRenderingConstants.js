@@ -17,7 +17,6 @@ import { Link } from 'components/core-ui/Link'
 import { PageForm } from 'components/core-ui/PageForm'
 import { PageFormRadio } from 'components/core-ui/PageFormRadio'
 import { PageInfo } from 'components/core-ui/PageInfo'
-import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { PriceSpan } from 'components/core-ui/PriceSpan'
 import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
 import { SimpleKeyValuePairs } from 'components/core-ui/SimpleKeyValuePairs'
@@ -67,7 +66,6 @@ export const Components = {
   PageForm,
   PageFormRadio,
   PageInfo,
-  PdfViewer,
   PriceSpan,
   ReceiptBarcodeScanner,
   SimpleKeyValuePairs,

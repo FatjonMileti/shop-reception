@@ -3,6 +3,7 @@ import { SaleModel, TableRowModel } from './models'
 
 export const toTableRowItems = (items: SaleModel[]): TableRowModel[] =>
   items.map((item: SaleModel) => ({
+    proformaId: item.proformaId,
     orderCreationDate: formatPayloadDate(item.orderCreationDate),
     productName: item.productName,
     productEan: item.productEan,

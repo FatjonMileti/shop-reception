@@ -10,7 +10,14 @@ export interface PdfViewerActions {
   }
 }
 
+export interface Proform {
+  id: string | number
+  paid: boolean
+  clientId: string | number
+}
+
 export interface PdfViewerProps {
-  action?: Action
+  proform: Proform
   actions: PdfViewerActions
+  isLoading: boolean
 }

@@ -6,10 +6,9 @@ export const toTableRowItems = (items: TimeOffModel[]): TableRowModel[] =>
     (item: TimeOffModel) =>
       ({
         id: item.id,
-        teamMemberId: item.teamMember.id,
         dayOffType: item.dayOffType || '',
         startDate: formatUIDate(item.startDate),
         endDate: formatUIDate(item.endDate),
-        numberOfHours: item.numberOfHours || 0
+        numberOfHours: item.numberOfHours || ''
       } as TableRowModel)
   )
