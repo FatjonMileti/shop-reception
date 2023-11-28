@@ -27,31 +27,37 @@ export const tableColumns = [
   {
     title: 'Nume agent',
     field: 'agentName',
-    align: 'left'
+    align: 'left',
+    disableSorting: true,
+    collapsible: true
   },
   {
     title: 'Nume client',
     field: 'clientName',
     align: 'left',
+    disableSorting: true,
     collapsible: true
   },
   {
     title: 'Lista produse',
     field: 'productsName',
     align: 'left',
-    collapsible: true
+    collapsible: true,
+    disableSorting: true
   },
   {
     title: 'Tip livrare',
     field: 'deliveryType',
     align: 'left',
-    collapsible: true
+    collapsible: true,
+    disableSorting: true
   },
   {
     title: 'Status',
     field: 'status',
     align: 'left',
-    collapsible: true
+    collapsible: true,
+    disableSorting: true
   }
 ]
 
