@@ -1,7 +1,6 @@
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { TableFilters } from './models'
-import dayjs from 'dayjs'
-import { formatPayloadDate, getDatePickerDate } from 'utils/helpers'
+import { formatPayloadDate } from 'utils/helpers'
 
 export const buildTableFilterInputs = (
   tableFilter: TableFilters,
@@ -18,7 +17,7 @@ export const buildTableFilterInputs = (
         label="Data inceput"
         variant="standard"
         onChange={(value: Date) => setTableFilter({ ...tableFilter, startDate: value })}
-        value={dayjs('2022-12-29')}
+        value={tableFilter.startDate}
       />
     )
   },
@@ -33,7 +32,7 @@ export const buildTableFilterInputs = (
         label="Data sfarsit"
         variant="standard"
         onChange={(value: Date) => setTableFilter({ ...tableFilter, endDate: value })}
-        value={dayjs('2022-12-29')}
+        value={tableFilter.endDate}
       />
     )
   }
