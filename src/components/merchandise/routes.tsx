@@ -1,7 +1,6 @@
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { Route } from 'react-router-dom'
 import { URLS } from './constants'
-import { Home } from './Home'
 import { PackagingInventoryUpdate } from './PackagingInventoryUpdate'
 import { GoodsReception } from './GoodsReception'
 import { GoodsReturn } from './GoodsReturn'
