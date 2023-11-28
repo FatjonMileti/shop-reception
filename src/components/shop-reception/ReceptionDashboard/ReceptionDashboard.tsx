@@ -8,36 +8,45 @@ import { IconBox } from '../IconBox'
 import Toolbar from '@mui/material/Toolbar'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
-const links = [
-  {
-    icon: <Icon iconName='AirplaneTicket' fill='white' />,
-    title: 'Bonuri de livrare'
-  },
-  {
-    icon: <Icon iconName='FireTruck' fill='white' />,
-    title: 'Listă camioane marfă'
-  },
-  {
-    icon: <Icon iconName='BugReport' fill='white' />,
-    title: 'Suporţi cu destinaţie eronată'
-  },
-  {
-    icon: <Icon iconName='SentimentDissatisfied' fill='white' />,
-    title: 'Produse necomandate'
-  },
-  {
-    icon: <Icon iconName='AttachFileSharp' fill='white' />,
-    title: 'Fişiere Meti'
-  },
-  {
-    icon: <Icon iconName='ListAlt' fill='white' />,
-    title: 'Produse cu diferenţe'
-  },
-  {
-    icon: <Icon iconName='HelpCenter' fill='white' />,
-    title: 'Transabilitate suport'
-  }
-]
+const getList = (navigate) => {
+  return [
+    {
+      icon: <Icon iconName='AirplaneTicket' fill='white' />,
+      title: 'Bonuri de livrare',
+      onClick: () => navigate(URLS.AUTH_DELIVERY_SLIPS_LIST)
+    },
+    {
+      icon: <Icon iconName='FireTruck' fill='white' />,
+      title: 'Listă camioane marfă',
+      onClick: () => navigate(URLS.AUTH_TRUCK_LIST)
+    },
+    {
+      icon: <Icon iconName='BugReport' fill='white' />,
+      title: 'Suporţi cu destinaţie eronată',
+      onClick: () => navigate(URLS.AUTH_SUPPORT_WRONG_DESTINATION)
+    },
+    {
+      icon: <Icon iconName='SentimentDissatisfied' fill='white' />,
+      title: 'Produse necomandate',
+      onClick: () => navigate(URLS.AUTH_UNORDERED_PRODUCTS)
+    },
+    {
+      icon: <Icon iconName='AttachFileSharp' fill='white' />,
+      title: 'Fişiere Meti',
+      onClick: () => navigate(URLS.AUTH_METI_FILES)
+    },
+    {
+      icon: <Icon iconName='ListAlt' fill='white' />,
+      title: 'Produse cu diferenţe',
+      onClick: () => null
+    },
+    {
+      icon: <Icon iconName='HelpCenter' fill='white' />,
+      title: 'Transabilitate suport',
+      onClick: () => null
+    }
+  ]
+}
 
 const ReceptionDashboard = () => {
   const navigate = useNavigate()
@@ -63,10 +72,10 @@ const ReceptionDashboard = () => {
       </Toolbar>
 
       <Box className={s.container}>
-        {links.map((link, index) => (
+        {getList(navigate).map((link, index) => (
           <IconBox
             icon={link.icon}
-            onClick={() => null}
+            onClick={link.onClick}
             title={link.title}
           />
         ))}
