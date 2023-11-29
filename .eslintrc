@@ -33,6 +33,7 @@
     "prettier"
   ],
   "rules": {
+    "quotes": ["error", "single"],
     "camelcase": [0, {"ignoreDestructuring": true}],
     "react/prop-types": "off",
     "space-before-function-paren": [ "error", {

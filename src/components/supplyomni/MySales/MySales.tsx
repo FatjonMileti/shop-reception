@@ -36,13 +36,14 @@ export const MySales = () => {
     list: TableRowModel[]
   ) => {
     setTotalCount(totalCount)
-    setTableItems(list)
+    setTableItems(toTableRowItems(list, true))
     setTotalPrice(totalPrice)
     setIsLoading(false)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
+
     try {
       const response = (await makeCoreGetRequest(
         toTableGETUrl({
@@ -57,7 +58,7 @@ export const MySales = () => {
       onHandlingFetchResponse(
         response.page.totalCount,
         response.summary.totalPrice,
-        toTableRowItems(response.list)
+        toTableRowItems(response.list, false)
       )
       setTableState({ order, orderBy, tableFilters })
     } catch (error) {
