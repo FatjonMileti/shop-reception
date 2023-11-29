@@ -15,6 +15,8 @@ import { UsageReport } from './UsageReport'
 import { ProductManagement } from './TraineeRole/ProductManagement'
 import { ProductionManagement } from './TraineeRole/ProductionManagement'
 import { ProductionManagementPrint } from './TraineeRole/ProductionManagementPrint'
+import { GrowthRegion } from './RegionManagerRole/GrowthRegion'
+import { GrowthRegionPrint } from './RegionManagerRole/GrowthRegionPrint'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -22,11 +24,7 @@ export const useBakeryRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_USERS_MANAGEMENT}
         element={
-          <PrivateRoute
-            component={UsersManagement}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={UsersManagement} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
@@ -56,51 +54,31 @@ export const useBakeryRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_CLUSTERS}
         element={
-          <PrivateRoute
-            component={Clusters}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={Clusters} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_FAMILIES}
         element={
-          <PrivateRoute
-            component={Families}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={Families} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_FAMILY_PRODUCTS}
         element={
-          <PrivateRoute
-            component={FamilyProducts}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={FamilyProducts} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_PRODUCTS}
         element={
-          <PrivateRoute
-            component={Products}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={Products} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_USAGE_REPORT}
         element={
-          <PrivateRoute
-            component={UsageReport}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-        />
+          <PrivateRoute component={UsageReport} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
 
@@ -108,31 +86,19 @@ export const useBakeryRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_PRODUCT_MANAGEMENT}
         element={
-          <PrivateRoute
-            component={ProductManagement}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={ProductManagement} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_PRODUCTION_MANAGEMENT}
         element={
-          <PrivateRoute
-            component={ProductionManagement}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={ProductionManagement} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_PRODUCTION_MANAGEMENT_PRINT}
         element={
-          <PrivateRoute
-            component={ProductionManagementPrint}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={ProductionManagementPrint} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       
@@ -141,11 +107,19 @@ export const useBakeryRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_PRODUCT_MANAGEMENT_REGION}
         element={
-          <PrivateRoute
-            component={ProductManagementRegion}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={ProductManagementRegion} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GROWTH_REGION}
+        element={
+          <PrivateRoute component={GrowthRegion} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GROWTH_REGION_PRINT}
+        element={
+          <PrivateRoute component={GrowthRegionPrint} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
     </>
