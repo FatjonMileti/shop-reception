@@ -21,6 +21,9 @@ import SubFamilyValidityThreshold from './SubFamilyValidityThreshold/SubFamilyVa
 import { MetiProducts } from './MetiProducts'
 import { SensitiveProducts } from './SensitiveProducts'
 import { PackingTypes } from './PackingTypes'
+import { DLCProducts } from './DLCProducts'
+import { ReceptionFiles } from './ReceptionFiles'
+import { CentralizeStoresHub } from './CentralizeStoresHub'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -104,6 +107,18 @@ export const useShopReceptionRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_ADMIN_PACKING_TYPES}
         element={<PackingTypes />}
+      />
+      <Route
+        path={URLS.AUTH_MANAGE_DLC_PRODUCTS}
+        element={<DLCProducts />}
+      />
+      <Route
+        path={URLS.AUTH_RECEPTION_FILES_INFO}
+        element={<ReceptionFiles />}
+      />
+      <Route
+        path={URLS.AUTH_CENTRALIZATION_STORES_HUB}
+        element={<CentralizeStoresHub />}
       />
     </>
   )
