@@ -74,8 +74,9 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
       isModalOpen={isModalOpen}
       closeModal={closeModal}
       modalTitle={isEdit ? 'Edit Time Off' : 'New Time Off'}
+      modalWidth="50%"
     >
-      <Grid container spacing={4}>
+      <Grid container spacing={4} justifyContent="flex-end">
         <Grid xs={12} item>
           {isEdit ? (
             <FormInfoItems
@@ -88,8 +89,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             />
           ) : (
             <AsyncAutocomplete
-              variant="outlined"
-              applyCustomStyle
+              variant="standard"
               name="teamMember"
               label="Team member"
               options={teamMembers}
@@ -155,11 +155,11 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
               onChange={event => formik.setFieldValue('numberOfHours', event.currentTarget.value)}
               error={!!formik.errors.numberOfHours}
               helperText={formik.errors.numberOfHours as string}
-              inputProps={{min: '0'}}
+              inputProps={{ min: '0' }}
             />
           </Grid>
         )}
-        <Grid xs={12} item className={s.modalButtons}>
+        <Grid xs={12} md={6} item className={s.modalButtons}>
           <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
           <Button
             variant="contained"
