@@ -1,60 +1,48 @@
 export const columns = [
   {
-    title: 'Tip magazin',
+    title: 'Cod ambalaj',
     field: 'raceCode',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Cod magazin',
+    title: 'Coduri suplimentare',
     field: 'raceCode',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Nume magazin',
+    title: 'Denumire',
     field: 'raceCode',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Raion',
+    title: 'Principal',
     field: 'store',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Familie',
+    title: 'Combinație',
     field: 'warehouseName',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Subfamilie',
+    title: 'Activ',
     field: 'warehouseName',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Cod UB',
+    title: 'Returnabil',
     field: 'store',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Cod Produs',
-    field: 'store',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Editeazǎ',
-    field: 'store',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Șterge',
+    title: 'Cod de bare generat',
     field: 'store',
     align: 'left',
     type: 'string'
