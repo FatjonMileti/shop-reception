@@ -10,6 +10,8 @@ import { DeliverySlipsList } from './DeliverySlipsList'
 import { SupportWrongDestination } from './SupportWrongDestination'
 import { UnorderedProducts } from './UnorderedProducts'
 import { MetiFiles } from './MetiFiles'
+import { DifferencesProducts } from './DifferencesProducts'
+import { SupportTradability } from './SupportTradability'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -49,6 +51,14 @@ export const useShopReceptionRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_METI_FILES}
         element={<MetiFiles />}
+      />
+      <Route
+        path={URLS.AUTH_DIFFERENCES_PRODUCTS}
+        element={<DifferencesProducts />}
+      />
+      <Route
+        path={URLS.AUTH_SUPPORT_TRADABILITY}
+        element={<SupportTradability />}
       />
     </>
   )

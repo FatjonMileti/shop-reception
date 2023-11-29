@@ -38,12 +38,12 @@ const getList = (navigate) => {
     {
       icon: <Icon iconName='ListAlt' fill='white' />,
       title: 'Produse cu diferenţe',
-      onClick: () => null
+      onClick: () => navigate(URLS.AUTH_DIFFERENCES_PRODUCTS)
     },
     {
       icon: <Icon iconName='HelpCenter' fill='white' />,
       title: 'Transabilitate suport',
-      onClick: () => null
+      onClick: () => navigate(URLS.AUTH_SUPPORT_TRADABILITY)
     }
   ]
 }
