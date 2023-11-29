@@ -134,11 +134,7 @@ const App = () => {
             </div>
           )) || (
             <Layout modules={modules} setSubdomainId={setSubdomainId}>
-              <BackButtonTitle
-                applicationPages={applicationPages}
-                modules={modules}
-                subdomainId={subdomainId}
-              ></BackButtonTitle>
+              <BackButtonTitle applicationPages={applicationPages}></BackButtonTitle>
               <Routes>
                 {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
