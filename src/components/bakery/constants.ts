@@ -15,6 +15,7 @@ export const URLS = {
   AUTH_PRODUCT_MANAGEMENT: 'bakery/formator/product-management-formator',
   AUTH_PRODUCTION_MANAGEMENT: 'bakery/formator/cadentier-formator',
   AUTH_PRODUCTION_MANAGEMENT_PRINT: 'bakery/formator/cadentier-formator-print',
+  AUTH_STORE_GROWTH_COEFFICIENT: 'bakery/formator/product-growth-index-formator',
 
   /* Region manager role */
   AUTH_PRODUCT_MANAGEMENT_REGION: 'bakery/regionManager/product-management-region',
