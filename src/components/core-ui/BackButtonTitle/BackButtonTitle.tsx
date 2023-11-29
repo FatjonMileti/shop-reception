@@ -3,61 +3,66 @@ import BackButton from './BackButton/BackButton'
 import { useLocation, useNavigate } from 'react-router'
 import { useMemo } from 'react'
 
-const BackButtonMechanism = ({ applicationPages, modules, subdomainId }) => {
+const BackButtonTitle = ({ applicationPages }) => {
   const location = useLocation()
   const navigate = useNavigate()
 
   const memoized = useMemo(() => {
     let currentApplicationName = ''
-    let lastRoutePath = ''
-    let submodule = null
-    let showBackButton = false
+    let shouldShowBackButton = false
 
     if (location.pathname !== '') {
-      let currentUrlSegments = location.pathname.split('/')
-      const lastSegment = currentUrlSegments[currentUrlSegments.length - 2]
+      const matchedApplication = applicationPages.find(app =>
+        isRouteMatching(app.route.url, location.pathname)
+      )
 
-      const lastRouteUrl = applicationPages.find(page => page.route.url.includes(lastSegment))
-
-      if (lastRouteUrl) {
-        lastRoutePath = lastSegment
+      if (matchedApplication) {
+        currentApplicationName = matchedApplication.screenName
+        shouldShowBackButton = true
       }
-
-      const currentApplication = applicationPages.find(app => app.route.url === location.pathname)
-      if (currentApplication) {
-        currentApplicationName = currentApplication.name
-        showBackButton = true
-      }
-    }
-
-    const module = modules.find(module => module.id === subdomainId)
-
-    if (module && lastRoutePath) {
-      submodule = module.submodules.find(submodule => submodule.routeURL.includes(lastRoutePath))
     }
 
     return {
       currentApplicationName,
-      submodule,
-      showBackButton
+      shouldShowBackButton
     }
-  }, [location.pathname, applicationPages, modules, subdomainId])
+  }, [location.pathname, applicationPages])
 
-  const { currentApplicationName, submodule, showBackButton } = memoized
+  const { currentApplicationName, shouldShowBackButton } = memoized
 
-  const navBack = () => {
-    navigate(submodule ? submodule.routeURL : '/')
+  const navigateBack = () => {
+    navigate(-1)
   }
 
-  return showBackButton ? (
+  return shouldShowBackButton ? (
     <Box
       sx={{
-        marginLeft: '1.5rem'
+        margin: '24px 80px 0 0',
+        padding: '0 8px',
+        display: 'flex',
+        alignItems: 'center'
       }}
     >
-      <BackButton text={currentApplicationName} onNavBack={navBack}></BackButton>
+      <BackButton text={currentApplicationName} onNavBack={navigateBack}></BackButton>
     </Box>
   ) : null
 }
 
-export default BackButtonMechanism
+const isRouteMatching = (templateRoute, realRoute) => {
+  const templateParts = templateRoute.split('/')
+  const realParts = realRoute.split('/')
+
+  if (templateParts.length !== realParts.length) {
+    return false
+  }
+
+  for (let i = 0; i < templateParts.length; i++) {
+    if (templateParts[i] !== realParts[i] && !templateParts[i].startsWith(':')) {
+      return false
+    }
+  }
+
+  return true
+}
+
+export default BackButtonTitle

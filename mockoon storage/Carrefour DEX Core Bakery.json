@@ -2573,7 +2573,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "store/all",
+      "endpoint": "store/all/stores",
       "responses": [
         {
           "uuid": "3951332d-786b-4bf6-9b77-1cbd06c81feb",

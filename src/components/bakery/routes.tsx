@@ -10,6 +10,7 @@ import { Clusters } from './Clusters'
 import { Families } from './Families'
 import { FamilyProducts } from './Families/FamilyProducts'
 import { Products } from './Products'
+import { SalesCadentier } from './SalesCadentier'
 import { ProductManagementRegion } from './RegionManagerRole/ProductManagementRegion'
 import { UsageReport } from './UsageReport'
 import { ProductManagement } from './TraineeRole/ProductManagement'
@@ -104,7 +105,18 @@ export const useBakeryRoutes = applicationPages => {
         />
         }
       />
+      <Route
+        path={URLS.AUTH_SALES_CADENTIER}
+        element={
+          <PrivateRoute
+            component={SalesCadentier}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+        />
+        }
+      />
 
+      
       {/* Formator */}
       <Route
         path={URLS.AUTH_PRODUCT_MANAGEMENT}
@@ -116,6 +128,8 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
+     
+      
       <Route
         path={URLS.AUTH_PRODUCTION_MANAGEMENT}
         element={
