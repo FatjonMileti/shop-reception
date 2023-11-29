@@ -36,7 +36,7 @@ const columns = [
   },
   {
     title: 'IIB Key',
-    field: 'projectIibKey',
+    field: 'projectlibKey',
     align: 'left',
     type: 'string',
     sticky: true,
