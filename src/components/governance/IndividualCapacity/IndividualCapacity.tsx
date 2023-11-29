@@ -36,7 +36,7 @@ const columns = [
   },
   {
     title: 'IIB Key',
-    field: 'projectlibKey',
+    field: 'projectIibKey',
     align: 'left',
     type: 'string',
     sticky: true,
@@ -248,6 +248,7 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
       <Box>
         <Table
           hideCheckbox
+          stickyRatio={0.5}
           orderBy="teamMemberName"
           order="asc"
           items={tableItems}
