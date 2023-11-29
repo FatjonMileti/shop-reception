@@ -12,6 +12,11 @@ import { UnorderedProducts } from './UnorderedProducts'
 import { MetiFiles } from './MetiFiles'
 import { DifferencesProducts } from './DifferencesProducts'
 import { SupportTradability } from './SupportTradability'
+import { AdminDeposit } from './AdminDeposit'
+import { AdminHub } from './AdminHub'
+import { AdminStore } from './AdminStore'
+import { AdminRegions } from './AdminRegions'
+import { ManageScanTypes } from './ManageScanTypes'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -59,6 +64,26 @@ export const useShopReceptionRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_SUPPORT_TRADABILITY}
         element={<SupportTradability />}
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_DEPOSIT}
+        element={<AdminDeposit />}
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_HUB}
+        element={<AdminHub />}
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_STORE}
+        element={<AdminStore />}
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_REGIONS}
+        element={<AdminRegions />}
+      />
+      <Route
+        path={URLS.AUTH_MANAGE_SCAN_TYPES}
+        element={<ManageScanTypes />}
       />
     </>
   )
