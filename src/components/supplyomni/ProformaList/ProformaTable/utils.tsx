@@ -1,6 +1,7 @@
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Input } from 'components/core-ui/Input'
 import { TableFilters } from './interfaces'
+import { formatPayloadDate } from 'utils/helpers'
 
 export const buildTableFilterInputs = (
   tableFilter: TableFilters,
@@ -15,7 +16,7 @@ export const buildTableFilterInputs = (
         type="text"
         name="agentName"
         label="Nume agent"
-        variant="standard"
+        variant="outlined"
         onChange={value => setTableFilter({ ...tableFilter, agentName: value })}
         value={tableFilter.agentName}
       />
@@ -30,7 +31,7 @@ export const buildTableFilterInputs = (
         type="text"
         name="clientName"
         label="Nume client"
-        variant="standard"
+        variant="outlined"
         onChange={value => setTableFilter({ ...tableFilter, clientName: value })}
         value={tableFilter.clientName}
       />
@@ -45,7 +46,7 @@ export const buildTableFilterInputs = (
         type="text"
         name="products.name"
         label="Nume produs"
-        variant="standard"
+        variant="outlined"
         onChange={value => setTableFilter({ ...tableFilter, productsName: value })}
         value={tableFilter.productsName}
       />
@@ -60,7 +61,7 @@ export const buildTableFilterInputs = (
         type="number"
         name="proformaId"
         label="Numar proforma"
-        variant="standard"
+        variant="outlined"
         onChange={value => setTableFilter({ ...tableFilter, proformaId: value })}
         value={tableFilter.proformaId}
       />
@@ -71,11 +72,12 @@ export const buildTableFilterInputs = (
     name: 'startDate',
     label: 'Data inceput',
     type: 'date',
+    value: formatPayloadDate(tableFilter.startDate),
     filter: (
       <DatePicker
         label="Data inceput"
-        variant="standard"
-        onChange={(value: any) => console.log(value)}
+        variant="outlined"
+        onChange={(value: any) => setTableFilter({ ...tableFilter, startDate: value })}
         value={tableFilter.startDate}
       />
     )
@@ -84,11 +86,14 @@ export const buildTableFilterInputs = (
     name: 'endDate',
     label: 'Data sfarsit',
     type: 'date',
+    value: formatPayloadDate(tableFilter.endDate),
     filter: (
       <DatePicker
         label="Data sfarsit"
-        variant="standard"
-        onChange={(value: any) => console.log(value)}
+        variant="outlined"
+        onChange={value => {
+          setTableFilter({ ...tableFilter, endDate: value })
+        }}
         value={tableFilter.endDate}
       />
     )

@@ -8,10 +8,11 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { useQuery } from 'react-query'
-import { toAsyncSelectOptions, toTableRowItems } from './serializers'
+import { toTableRowItems } from './serializers'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { columns } from './helpers'
+import { toAsyncSelectOptions } from 'components/bakery/commonSerializers'
 
 const ProductManagementRegion = () => {
   const [tableItems, setTableItems] = useState<ProductManagementItem[]>([])
@@ -28,7 +29,7 @@ const ProductManagementRegion = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/region/store/products/x',
+          url: '/bakery/region/store/products',
           filters: [],
           searchText,
           searchFields: ["name","metiCode","pluCode","familyName"],

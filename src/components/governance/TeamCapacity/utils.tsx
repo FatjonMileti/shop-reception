@@ -2,6 +2,7 @@ import { Input } from 'components/core-ui/Input'
 import { TeamCapacityTableFilter } from '../interfaces'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Link } from 'components/core-ui/Link'
+import { formatPayloadDate } from 'utils/helpers'
 
 export const buildTableFilterFields = (
   tableFilter: TeamCapacityTableFilter,
@@ -33,6 +34,7 @@ export const buildTableFilterFields = (
     name: 'startDate',
     label: 'Start Date',
     type: 'date',
+    value: formatPayloadDate(tableFilter.startDate),
 
     filter: (
       <DatePicker
@@ -47,6 +49,7 @@ export const buildTableFilterFields = (
     name: 'endDate',
     label: 'End Date',
     type: 'date',
+    value: formatPayloadDate(tableFilter.endDate),
 
     filter: (
       <DatePicker

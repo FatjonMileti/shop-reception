@@ -10,8 +10,8 @@ import { EditFamilyItem, ValueLabelInterface } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { getInitialValues, famInBakeryScopes, divisionTypes } from '../helpers'
 import { ChangeEvent, useMemo, useState } from 'react'
-import { toAsyncSelectOptions } from '../serializers'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { toAsyncSelectOptions } from 'components/bakery/commonSerializers'
 
 interface EditFamilyProps {
   isModalOpen: boolean
