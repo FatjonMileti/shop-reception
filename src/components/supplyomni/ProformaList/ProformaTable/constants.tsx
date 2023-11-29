@@ -53,8 +53,8 @@ export const tableColumns = [
 ]
 
 export const defaultTableFilters: TableFilters = {
-  startDate: dayjs(new Date(), 'DD/MM/YYYY'),
-  endDate: dayjs(new Date(), 'DD/MM/YYYY'),
+  startDate: null,
+  endDate: null,
   agentName: null,
   clientName: null,
   productsName: null,
