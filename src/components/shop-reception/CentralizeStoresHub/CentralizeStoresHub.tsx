@@ -79,7 +79,7 @@ const CentralizeStoresHub = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TitleHeader title='Administrare magazine' />
+        <TitleHeader title='Centralizare magazine și huburi' />
       </Grid>
       <Grid item xs={12}>
         <Paper className={s.filterPaper}>
