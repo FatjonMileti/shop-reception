@@ -3056,6 +3056,40 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "9a60c5aa-a812-4004-bdb1-a868de7180a9",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "region/trainee/growth",
+      "responses": [
+        {
+          "uuid": "99fbcc5e-94c4-4199-8709-6d627f06c91c",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"5d1ad82d-b0bd-4aff-8606-01b735e2e074\",\n      \"name\": \"Test Alexandra\",\n      \"growth\": 1234,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"HYPER\"\n    },\n    {\n      \"id\": \"b0610a3d-0cee-4688-8454-3575d8a62366\",\n      \"name\": \"Cluj-Mures\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"cf2bd30f-be9b-4999-abbf-f177c75bb6c4\",\n      \"name\": \"Test 2\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"57bf2cfb-43c0-4b8d-8b0a-c0961254c4c5\",\n      \"name\": \"Test 3\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"6e04a4ba-e909-4072-aa15-bb0e0dd33006\",\n      \"name\": \"Brasov\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"6b1d3418-dc7a-4d81-8fa1-329a6ded2ba0\",\n      \"name\": \"Iasi Neamt Botosani\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"65710696-7c93-4cbf-abc2-77935ecc44db\",\n      \"name\": \"Galati-Bacau-Vaslui\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"9c01a51b-6881-4415-bb1f-3b48ece68c97\",\n      \"name\": \"Bucuresti 2\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"1a2c5358-9e9b-4473-9fd2-86325353872d\",\n      \"name\": \"Prahova-Buzau\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"734b1f97-ebd4-4f40-8c37-cca712110b60\",\n      \"name\": \"Test Silvia 4\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"454870b2-b41c-4773-bd53-fe19364af20f\",\n      \"name\": \"Bucuresti 1\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"7252da03-13e6-4665-b0d9-2e984f5593d4\",\n      \"name\": \"Timis Caras\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"b1b7249e-fdc3-4954-b46f-2fc6750d2e14\",\n      \"name\": \"Dolj Mehedinti\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"a2678fed-652b-4769-a9eb-5e2075921258\",\n      \"name\": \"Timis Arad\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"73e720d6-23b8-4a29-bbed-b98b909afdd2\",\n      \"name\": \"Bihor-Maramures\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"7f0f9cd5-ca3b-4864-84fa-21b1560c3658\",\n      \"name\": \"Sibiu Valcea Olt\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"cc0741e9-be6d-42c7-a6c7-a1b0f54fc316\",\n      \"name\": \"Express Bucuresti-Ploiesti\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"33b8a5c6-57a3-4df9-ae79-59f618d0a210\",\n      \"name\": \"Express Sibiu-Brasov\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"c5c1635c-4e43-42ba-80d1-ab58be67f809\",\n      \"name\": \"Nord-Est\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"38119151-63b1-48f5-bcb9-97b5fc18a48a\",\n      \"name\": \"Express Nord-Vest\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"21159de2-5e8b-4b14-8b31-416ef9a20655\",\n      \"name\": \"Express Bucuresti-Constanta\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"2a0e8fc1-af2f-4886-9a63-5154988b0e4c\",\n      \"name\": \"Express Bucuresti-Pitesti\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"ff081f73-6ed1-4724-90f2-f85ea1070fb0\",\n      \"name\": \"Express Floresti-Baia Mare\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"3a8d272e-b066-45d8-897b-a3310653535e\",\n      \"name\": \"Express Cluj\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    },\n    {\n      \"id\": \"d9489330-0929-4a9d-ad8e-11fbacbd75e6\",\n      \"name\": \"a\",\n      \"growth\": -11,\n      \"username\": \"test_dex_bakery\",\n      \"lastChange\": \"2023-11-15\",\n      \"divisionType\": \"SUPER\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 25,\n    \"page\": 0,\n    \"totalCount\": 29,\n    \"pageCount\": 2\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -3202,6 +3236,10 @@
     {
       "type": "route",
       "uuid": "8384a29e-310f-4f12-bae8-1244f84b184e"
+    },
+    {
+      "type": "route",
+      "uuid": "9a60c5aa-a812-4004-bdb1-a868de7180a9"
     }
   ],
   "proxyMode": false,
