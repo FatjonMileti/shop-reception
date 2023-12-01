@@ -24,5 +24,15 @@ export const URLS = {
   AUTH_ADMIN_SENSITIVE_PRODUCTS: '/shop-reception/products/sensitive',
   AUTH_ADMIN_PACKING_TYPES: '/shop-reception/admin/packing-types',
   AUTH_MANAGE_DLC_PRODUCTS: '/shop-reception/products/dlc',
-  AUTH_RECEPTION_FILES_INFO: '/shop-reception/reception-files'
+  AUTH_RECEPTION_FILES_INFO: '/shop-reception/reception-files',
+
+  // package dashboard
+  AUTH_RETURN_TRUCK_LIST: '/shop-reception/truck/list/return',
+  AUTH_ROLLING_PACKAGES: '/shop-reception/packages/rolling',
+  AUTH_BALANCE_PACKAGING: '/shop-reception/packages/balance',
+  AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS: '/shop-reception/packaging-disputes/store-returns',
+  AUTH_PACKAGING_TYPES_DIFFERENCES: '/shop-reception/packaging/types/differences',
+  AUTH_RETURNED_PACKAGING: '/shop-reception/packaging/returned',
+  AUTH_PACKAGING_COMPLIANCE: '/shop-reception/packaging/compliance',
+  AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION: '/shop-reception/packaging-disputes/timer'
 }
