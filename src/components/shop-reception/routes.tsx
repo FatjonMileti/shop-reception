@@ -25,6 +25,7 @@ import { DLCProducts } from './DLCProducts'
 import { ReceptionFiles } from './ReceptionFiles'
 import { CentralizeStoresHub } from './CentralizeStoresHub'
 import { ReturnTruckList } from './ReturnTruckList'
+import { RollingPackages } from './RollingPackages'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -124,6 +125,10 @@ export const useShopReceptionRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_RETURN_TRUCK_LIST}
         element={<ReturnTruckList />}
+      />
+      <Route
+        path={URLS.AUTH_ROLLING_PACKAGES}
+        element={<RollingPackages />}
       />
     </>
   )
