@@ -26,6 +26,12 @@ import { ReceptionFiles } from './ReceptionFiles'
 import { CentralizeStoresHub } from './CentralizeStoresHub'
 import { ReturnTruckList } from './ReturnTruckList'
 import { RollingPackages } from './RollingPackages'
+import BalancePackages from './BalancePackages/BalancePackages'
+import PackagingDisputes from './PackagingDisputes/PackagingDisputes'
+import PackagingTypesDifferences from './PackagingTypesDifferences/PackagingTypesDifferences'
+import ReturnedPackaging from './ReturnedPackaging/ReturnedPackaging'
+import PackagingCompliance from './PackagingCompliance/PackagingCompliance'
+import PackagingDisputesTimer from './PackagingDisputesTimer/PackagingDisputesTimer'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -129,6 +135,30 @@ export const useShopReceptionRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_ROLLING_PACKAGES}
         element={<RollingPackages />}
+      />
+      <Route
+        path={URLS.AUTH_BALANCE_PACKAGING}
+        element={<BalancePackages />}
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS}
+        element={<PackagingDisputes />}
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_TYPES_DIFFERENCES}
+        element={<PackagingTypesDifferences />}
+      />
+      <Route
+        path={URLS.AUTH_RETURNED_PACKAGING}
+        element={<ReturnedPackaging />}
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_COMPLIANCE}
+        element={<PackagingCompliance />}
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION}
+        element={<PackagingDisputesTimer />}
       />
     </>
   )
