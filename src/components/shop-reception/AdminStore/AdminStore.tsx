@@ -10,36 +10,52 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
+import { AdminHubForm } from '../AdminHub/AdminHubForm'
+import { AdminStoreForm } from './AdminStoreForm'
 
 const AdminStore = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<AdminStore[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<AdminStore>()
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
+
+  const openNewModal = (): void => setIsNewModalOpen(true)
+  const closeNewModal = (): void => setIsNewModalOpen(false)
+
+  const openEditModal = (rowId: number|string): void => {
+    selectRow(rowId)
+    setIsEditModalOpen(true)
+  }
+  const closeEditModal = (): void => setIsEditModalOpen(false)
+
+  const selectRow = (rowId: number|string) => {
+    const row = tableItems.find(item => item.id === rowId)
+    if (row) {
+      setSelectedRow(row)
+    }
+  }
 
   useEffect(() => {
     setTableItems([
       {
         id: 1,
-        store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        storeCode: "10",
+        name: "CLUJ",
+        storeType: "HYPER",
+        METIVersion: "V9",
+        adCode: "9",
+        grams: 100,
+        region: "",
+        ip: "10.191.47.22",
+        way: "/default/",
+        quantities: "Nu",
+        active: false,
+        hourlyIntervals: 43,
       }
     ])
   }, [])
@@ -81,6 +97,18 @@ const AdminStore = () => {
         <TitleHeader title='Administrare magazine' />
       </Grid>
       <Grid item xs={12} style={{ margin: '8px' }}>
+        <AdminStoreForm
+          isModalOpen={isNewModalOpen}
+          closeModal={closeNewModal}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <AdminStoreForm
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+          setShouldRefreshData={setShouldRefreshData}
+          editItem={selectedRow}
+          isEdit
+        />
         <Table
           hideCheckbox
           orderBy='role'
@@ -92,18 +120,26 @@ const AdminStore = () => {
           totalCount={totalCount}
           newButton={{
             onClick: (): void => {
-
+              openNewModal()
             }
           }}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => openEditModal(rowId)
+            }
+          ]}
           rowActionsWidth='130px'
           toolbarActions={[
             {
               label: 'Magazin',
               icon: <AddIcon />,
-              onClick: null
+              onClick: openNewModal
             }
           ]}
         />

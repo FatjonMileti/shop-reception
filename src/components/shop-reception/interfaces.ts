@@ -53,3 +53,19 @@ interface AdminHub {
   hourlyIntervals: number;
   active: boolean;
 }
+
+interface AdminStore {
+  id: number;
+  storeCode: string;
+  name: string;
+  storeType: string;
+  METIVersion: string;
+  adCode: string;
+  grams: number;
+  region: string;
+  ip: string;
+  way: string;
+  quantities: string;
+  active: boolean;
+  hourlyIntervals: number;
+}

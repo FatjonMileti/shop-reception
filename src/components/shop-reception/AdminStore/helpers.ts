@@ -1,85 +1,73 @@
 export const columns = [
   {
     title: 'Cod Magazin',
-    field: 'raceCode',
+    field: 'storeCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Nume',
-    field: 'warehouseName',
+    field: 'name',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip Magazin',
-    field: 'store',
+    field: 'storeType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Versiune METI',
-    field: 'store',
+    field: 'METIVersion',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cod AD',
-    field: 'store',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Societate',
-    field: 'store',
+    field: 'adCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Abatere receptie produse (grame)',
-    field: 'store',
+    field: 'grams',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Regiune',
-    field: 'store',
+    field: 'region',
     align: 'left',
     type: 'string'
   },
   {
     title: 'IP SFTP',
-    field: 'store',
+    field: 'ip',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cale SFTP',
-    field: 'store',
+    field: 'way',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Permite editare cantitǎți recepționate',
-    field: 'raceCode',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Poate chema Camion de retur',
-    field: 'raceCode',
+    field: 'quantities',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Activ',
-    field: 'truckLocation',
+    field: 'active',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Adresã',
-    field: 'raceCode',
+    title: 'Intervale orare',
+    field: 'hourlyIntervals',
     align: 'left',
     type: 'string'
   }
