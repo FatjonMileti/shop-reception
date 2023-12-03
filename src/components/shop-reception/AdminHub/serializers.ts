@@ -1,20 +1,9 @@
-export const toTableRowItems = (items: TruckItem[]) => items.map((item: TruckItem) => ({
+export const toTableRowItems = (items: AdminHub[]) => items.map((item: AdminHub) => ({
   id: item.id,
-  store: item.store,
-  hub: item.hub,
-  warehouseName: item.warehouseName,
-  truckLocation: item.truckLocation,
-  registrationNumber: item.registrationNumber,
-  driverCode: item.driverCode,
-  raceCode: item.raceCode,
-  seals: item.seals,
-  deliveryReceipts: item.deliveryReceipts,
-  complianceDocuments: item.complianceDocuments,
-  thermodiagramConformity: item.thermodiagramConformity,
-  receptionWithinHours: item.receptionWithinHours,
-  sealCompliance: item.sealCompliance,
-  status: item.status,
-  registrationDate: item.registrationDate,
-  registrationOperator: item.registrationOperator,
-  eTransportStatus: item.eTransportStatus
+  hubCode: item.hubCode,
+  name: item.name,
+  hubType: item.hubType,
+  address: item.address,
+  hourlyIntervals: item.hourlyIntervals,
+  active: item.active
 }))

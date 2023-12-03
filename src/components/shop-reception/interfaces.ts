@@ -43,3 +43,13 @@ interface AdminDeposit {
   emails: string;
   active: boolean;
 }
+
+interface AdminHub {
+  id: number;
+  hubCode: string;
+  name: string;
+  hubType: string;
+  address: string;
+  hourlyIntervals: number;
+  active: boolean;
+}

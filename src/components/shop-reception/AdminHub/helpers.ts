@@ -1,43 +1,37 @@
 export const columns = [
   {
     title: 'Cod hub',
-    field: 'raceCode',
+    field: 'hubCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Nume',
-    field: 'warehouseName',
+    field: 'name',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip hub',
-    field: 'store',
+    field: 'hubType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Adresã',
-    field: 'hub',
+    field: 'address',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Activ',
-    field: 'truckLocation',
+    field: 'active',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Intervale orare',
-    field: 'registrationNumber',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Editeazã',
-    field: 'driverCode',
+    field: 'hourlyIntervals',
     align: 'left',
     type: 'string'
   }
