@@ -77,3 +77,10 @@ interface AdminRegion {
   regionManager: string;
   active: boolean;
 }
+
+interface CentralizeStoresHub {
+  id: number;
+  store: string;
+  deposit: string;
+  hubs: string;
+}

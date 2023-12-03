@@ -11,36 +11,38 @@ import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
 import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import { AdminStoreForm } from '../AdminStore/AdminStoreForm'
+import { EditForm } from './EditForm'
 
 const CentralizeStoresHub = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<CentralizeStoresHub[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<CentralizeStoresHub>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
+
+  const openEditForm = (rowId: number|string) => {
+    selectRow(rowId)
+    setIsOpenEditModal(true)
+  }
+  const closeEditForm = () => setIsOpenEditModal(false)
+  const selectRow = (rowId: number|string) => {
+    const row = tableItems.find(item => item.id === rowId)
+    if (row) {
+      setSelectedRow(row)
+    }
+  }
 
   useEffect(() => {
     setTableItems([
       {
         id: 1,
-        store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        store: 'BANEASA (7)',
+        deposit: 'DEPOZIT BRAZI NON FOOD, DEPOZIT CEFIN AMBIENT, DEPOZIT CEFIN APLS, DEPOZIT CEFIN LEGUME - FRUCTE, DEPOZIT CONGELATE, DEPOZIT PESTE\t',
+        hubs: '',
       }
     ])
   }, [])
@@ -136,6 +138,12 @@ const CentralizeStoresHub = () => {
         </Paper>
       </Grid>
       <Grid item xs={12} style={{ margin: '8px' }}>
+        <EditForm
+          isModalOpen={isOpenEditModal}
+          closeModal={closeEditForm}
+          setShouldRefreshData={setShouldRefreshData}
+          editItem={selectedRow}
+        />
         <Table
           hideCheckbox
           orderBy='role'
@@ -145,14 +153,17 @@ const CentralizeStoresHub = () => {
           fetchData={() => null}
           isLoading={isLoading}
           totalCount={totalCount}
-          newButton={{
-            onClick: (): void => {
-
-            }
-          }}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => openEditForm(rowId)
+            }
+          ]}
           rowActionsWidth='130px'
         />
       </Grid>
