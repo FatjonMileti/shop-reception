@@ -1,51 +1,32 @@
 export const columns = [
   {
-    title: 'Cod deposit',
-    field: 'raceCode',
+    title: 'Cod depozit',
+    field: 'depositCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Nume',
-    field: 'warehouseName',
+    field: 'name',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip depozit',
-    field: 'store',
+    field: 'depositType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Procent valabilitate',
-    field: 'hub',
+    field: 'validityPercentage',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Activ',
-    field: 'truckLocation',
+    field: 'active',
     align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Acceptǎ Retur Ambalaje',
-    field: 'registrationNumber',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'C.I.F',
-    field: 'driverCode',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Sediul',
-    field: 'seals',
-    align: 'left',
-    collapsible: true,
     type: 'string'
   }
 ]

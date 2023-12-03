@@ -32,3 +32,14 @@ interface DeliverySlip {
   destinationReachedSupports: string;
   registrationDate: string;
 }
+
+interface AdminDeposit {
+  id: number;
+  depositCode: string;
+  name: string;
+  depositType: string;
+  address: string;
+  validityPercentage: string;
+  emails: string;
+  active: boolean;
+}
