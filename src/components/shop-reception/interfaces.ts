@@ -96,3 +96,15 @@ interface ScanType {
   lastDate: string;
   active: boolean;
 }
+
+interface SensitiveProduct {
+  id: number;
+  storeType: string;
+  storeCode: string;
+  storeName: string;
+  district: string;
+  family: string;
+  subfamily: string;
+  UbCode: string;
+  productCode: string;
+}
