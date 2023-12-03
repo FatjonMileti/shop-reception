@@ -1,31 +1,25 @@
 export const columns = [
   {
     title: 'Cod Regiune',
-    field: 'raceCode',
+    field: 'regionCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Denumire',
-    field: 'warehouseName',
+    field: 'name',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Responsabil regiune',
-    field: 'store',
+    field: 'regionManager',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Activ',
-    field: 'truckLocation',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Editeazã',
-    field: 'driverCode',
+    field: 'active',
     align: 'left',
     type: 'string'
   }

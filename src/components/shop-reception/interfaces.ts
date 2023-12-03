@@ -69,3 +69,11 @@ interface AdminStore {
   active: boolean;
   hourlyIntervals: number;
 }
+
+interface AdminRegion {
+  id: number;
+  regionCode: string;
+  name: string;
+  regionManager: string;
+  active: boolean;
+}
