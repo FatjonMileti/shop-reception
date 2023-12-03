@@ -84,3 +84,15 @@ interface CentralizeStoresHub {
   deposit: string;
   hubs: string;
 }
+
+interface ScanType {
+  id: number;
+  storeType: string;
+  region: string;
+  storeCode: string;
+  storeName: string;
+  scanType: string;
+  startDate: string;
+  lastDate: string;
+  active: boolean;
+}

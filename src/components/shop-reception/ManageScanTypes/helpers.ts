@@ -1,61 +1,49 @@
 export const columns = [
   {
     title: 'Tip magazin',
-    field: 'raceCode',
+    field: 'storeType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Regiune',
-    field: 'warehouseName',
+    field: 'region',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cod magazin',
-    field: 'warehouseName',
+    field: 'storeCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Nume magazin',
-    field: 'store',
+    field: 'storeName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip scanare',
-    field: 'store',
+    field: 'scanType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ start',
-    field: 'registrationDate',
+    field: 'startDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ Sfarșit',
-    field: 'registrationDate',
+    field: 'lastDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Activ',
-    field: 'truckLocation',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Editeazǎ',
-    field: 'driverCode',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Șterge',
-    field: 'driverCode',
+    field: 'active',
     align: 'left',
     type: 'string'
   }

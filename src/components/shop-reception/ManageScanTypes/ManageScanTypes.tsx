@@ -1,5 +1,4 @@
 import { Grid, Paper } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
@@ -12,36 +11,46 @@ import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
 import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import { ScanTypeForm } from './ScanTypeForm'
 
 const ManageScanTypes = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<ScanType[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<ScanType>()
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
+
+  const openNewModal = (): void => setIsNewModalOpen(true)
+  const closeNewModal = (): void => setIsNewModalOpen(false)
+
+  const openEditModal = (rowId: number|string): void => {
+    selectRow(rowId)
+    setIsEditModalOpen(true)
+  }
+  const closeEditModal = (): void => setIsEditModalOpen(false)
+
+  const selectRow = (rowId: number|string) => {
+    const row = tableItems.find(item => item.id === rowId)
+    if (row) {
+      setSelectedRow(row)
+    }
+  }
 
   useEffect(() => {
     setTableItems([
       {
         id: 1,
-        store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        storeType: 'CRAIOVA (3054)',
+        region: '',
+        storeCode: 'DEP',
+        storeName: 'DEPOZIT BRAZI NON FOOD',
+        scanType: 'PH01DEP',
+        startDate: '25-10-2023',
+        lastDate: '25-10-2023',
+        active: true
       }
     ])
   }, [])
@@ -71,10 +80,6 @@ const ManageScanTypes = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (
@@ -153,6 +158,18 @@ const ManageScanTypes = () => {
         </Paper>
       </Grid>
       <Grid item xs={12} style={{ margin: '8px' }}>
+        <ScanTypeForm
+          isModalOpen={isNewModalOpen}
+          closeModal={closeNewModal}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <ScanTypeForm
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+          setShouldRefreshData={setShouldRefreshData}
+          editItem={selectedRow}
+          isEdit
+        />
         <Table
           hideCheckbox
           orderBy='role'
@@ -164,18 +181,26 @@ const ManageScanTypes = () => {
           totalCount={totalCount}
           newButton={{
             onClick: (): void => {
-
+              openNewModal()
             }
           }}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => openEditModal(rowId)
+            }
+          ]}
           rowActionsWidth='130px'
           toolbarActions={[
             {
               label: 'Regula scanare',
               icon: <AddIcon />,
-              onClick: null
+              onClick: openNewModal
             }
           ]}
         />
