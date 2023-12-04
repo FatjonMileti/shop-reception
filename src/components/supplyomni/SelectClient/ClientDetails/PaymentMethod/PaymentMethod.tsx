@@ -18,15 +18,12 @@ import { toOrderPayload } from './serializers'
 
 interface PaymentMethodProps {
   clientId: string
-  currentOrder?: boolean
 }
 const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
   const { clientId } = props
-  let { currentOrder } = props
 
-  currentOrder = true
   const { data: paymentOptions, isLoading: isPaymentOptionsLoading } = useQuery(
     ['payment-methods'],
     async () => {
