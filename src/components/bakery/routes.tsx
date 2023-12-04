@@ -19,6 +19,7 @@ import { ProductionManagementPrint } from './TraineeRole/ProductionManagementPri
 import { StoreGrowthCoefficient } from './TraineeRole/StoreGrowthCoefficient'
 import { ProductsGrowthCoefficient } from './TraineeRole/ProductsGrowthCoefficient'
 import { RegionGrowthCoefficient } from './TraineeRole/RegionGrowthCoefficient'
+import { ApplicationUsageReport } from './TraineeRole/ApplicationUsageReport'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -180,6 +181,18 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
+      <Route
+        path={URLS.AUTH_APPLICATION_USAGE_REPORT}
+        element={
+          <PrivateRoute
+            component={ApplicationUsageReport}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+
 
       {/* region manager role */}
       <Route
