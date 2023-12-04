@@ -18,12 +18,15 @@ import { toOrderPayload } from './serializers'
 
 interface PaymentMethodProps {
   clientId: string
+  currentOrder?: boolean
 }
 const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
   const { clientId } = props
+  let { currentOrder } = props
 
+  currentOrder = true
   const { data: paymentOptions, isLoading: isPaymentOptionsLoading } = useQuery(
     ['payment-methods'],
     async () => {
@@ -45,7 +48,9 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   const { data: deliveryOptions, isLoading: isDeliveryOptionsLoading } = useQuery(
     ['delivery-options'],
     async () => {
-      const result = await makeCoreGetRequest('/supply-omni/order/delivery-options')
+      const result = await makeCoreGetRequest(
+        '/supply-omni/order/delivery-options?currentOrder=true'
+      )
       const resultOptions = toAsyncSelectOptions(result, 'type', 'description') || []
 
       return resultOptions || []
@@ -81,7 +86,10 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
     }
   })
 
-  const initialValues = useMemo(() => getInitialValues(clientId), [clientId])
+  const initialValues = useMemo(
+    () => getInitialValues(clientId, deliveryOptions?.[1].value),
+    [clientId, deliveryOptions]
+  )
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
 

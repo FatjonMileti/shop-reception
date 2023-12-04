@@ -105,7 +105,7 @@ const TeamCapacity = () => {
           </div>
         )}
 
-        <Grid xs={12} md={2} item style={{ padding: 0 }}>
+        <Grid xs={3} md={3} sm={3} item style={{ padding: 0 }}>
           <AsyncAutocomplete
             applyCustomStyle
             variant="outlined"

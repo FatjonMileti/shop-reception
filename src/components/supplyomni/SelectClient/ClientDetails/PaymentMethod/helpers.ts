@@ -43,12 +43,12 @@ export const validationSchema = Yup.object().shape({
   type: Yup.string().required()
 })
 
-export const getInitialValues = clientId => ({
+export const getInitialValues = (clientId, deliveryType?: any) => ({
   clientId: clientId || '',
   city: {},
   county: {},
   paymentMethod: '',
-  deliveryType: '',
+  deliveryType: deliveryType || '',
   hasDeliveryDate: false,
   hasDifferentDeliveryAddress: false,
   newDeliveryAddress: { address: '' }
