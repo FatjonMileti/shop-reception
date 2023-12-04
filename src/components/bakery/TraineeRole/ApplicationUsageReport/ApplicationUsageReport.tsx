@@ -16,6 +16,7 @@ import dayjs from 'dayjs'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { ColumnsComponent, formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
+import { formatBakeryPayloadDate } from 'utils/helpers'
 
 const ApplicationUsageReport = () => {
   const { showNotification } = useNotification()
@@ -77,7 +78,6 @@ const ApplicationUsageReport = () => {
   }
 
   const handleFilterChange = (filter: 'startDate' | 'endDate' | 'store', value: any): void => {
-    console.log('debug', value)
     switch (filter) {
       case 'store':
         setStoreFilterValue(value)
@@ -101,8 +101,8 @@ const ApplicationUsageReport = () => {
       url: '/bakery/report/download/application',
       filters: [
         { name: 'storeName', value: storeFilterValue[0]?.value },
-        { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-        { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') }
+        { name: 'startDate', value: formatBakeryPayloadDate(startDateFilterValue) },
+        { name: 'endDate', value: formatBakeryPayloadDate(endDateFilterValue) }
       ]
     })
     try {
@@ -112,7 +112,7 @@ const ApplicationUsageReport = () => {
       formatAndDownloadResponse(response)
     } catch (error) {
       showNotification({
-        message: `Error while download file. ${formatErrorMessage(error)}`,
+        message: `Error while downloading file. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
