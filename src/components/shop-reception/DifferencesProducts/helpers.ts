@@ -7,73 +7,73 @@ export const columns = [
   },
   {
     title: 'Magazin',
-    field: 'warehouseName',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Depozit',
     field: 'store',
     align: 'left',
     type: 'string'
   },
   {
+    title: 'Depozit',
+    field: 'warehouse',
+    align: 'left',
+    type: 'string'
+  },
+  {
     title: 'Nume produs',
-    field: 'raceCode',
+    field: 'productName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Comandǎ de origine',
-    field: 'raceCode',
+    field: 'homeOrder',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Comandǎ Meti',
-    field: 'raceCode',
+    field: 'metiOrder',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Unitate de mǎsurǎ',
-    field: 'raceCode',
+    field: 'unitOfMeasure',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cantitate așteptatǎ',
-    field: 'raceCode',
+    field: 'expectedQuantity',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cantitate receptionată calitativă',
-    field: 'raceCode',
+    field: 'qualitativeReceivedQuantity',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cantitate receptionată defectǎ',
-    field: 'raceCode',
+    field: 'defectiveReceivedQuantity',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Abatere (grame)',
-    field: 'raceCode',
+    field: 'grams',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cantitate trimisǎ în stoc',
-    field: 'raceCode',
+    field: 'inStockQuantity',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Diferențǎ',
-    field: 'raceCode',
+    field: 'difference',
     align: 'left',
     type: 'string'
   },
@@ -85,20 +85,14 @@ export const columns = [
   },
   {
     title: 'Datǎ trimitere către Meti',
-    field: 'raceCode',
+    field: 'sentToMeti',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Operator integrare',
-    field: 'raceCode',
+    field: 'integrationOperator',
     align: 'left',
     type: 'string'
-  },
-  {
-    title: 'Descarcǎ imagini',
-    field: 'raceCode',
-    align: 'left',
-    type: 'string'
-  },
+  }
 ]

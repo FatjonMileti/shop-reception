@@ -1,49 +1,49 @@
 export const columns = [
   {
     title: 'Cod ambalaj',
-    field: 'raceCode',
+    field: 'packagingCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Coduri suplimentare',
-    field: 'raceCode',
+    field: 'additionalCodes',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Denumire',
-    field: 'raceCode',
+    field: 'name',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Principal',
-    field: 'store',
+    field: 'main',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Combinație',
-    field: 'warehouseName',
+    field: 'combination',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Activ',
-    field: 'warehouseName',
+    field: 'active',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Returnabil',
-    field: 'store',
+    field: 'return',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cod de bare generat',
-    field: 'store',
+    field: 'generatedBarcode',
     align: 'left',
     type: 'string'
   }

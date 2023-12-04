@@ -1,24 +1,17 @@
-import { Paper, Box, Grid } from '@mui/material'
-import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './DeliverySlipsList.modules.scss'
-import { URLS } from '../constants'
-import { useNavigate } from 'react-router-dom'
+import { Paper, Grid } from '@mui/material'
+import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import s from '../CommonStyles.modules.scss'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { Add as AddIcon } from '@mui/icons-material'
 import { useEffect, useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import { FormInfoItems } from '../../core-ui/FormInfoItems'
-import { EffortMatrix } from '../../governance/interfaces'
-import { AsyncAutocomplete } from '../../core-ui/AsyncAutocomplete'
 import TitleHeader from '../TitleHeader/TitleHeader'
 
 const DeliverySlipsList = () => {
-  const navigate = useNavigate()
   const [tableItems, setTableItems] = useState<DeliverySlip[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -77,7 +70,7 @@ const DeliverySlipsList = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Paper className={s.paper}>
+        <Paper className={s.filterPaper}>
           <TitleHeader title='Bonuri de livrare' />
           <Grid container spacing={4}>
             <Grid xs={12} md={4} item>
@@ -156,13 +149,6 @@ const DeliverySlipsList = () => {
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[]}
           rowActionsWidth='130px'
-          toolbarActions={[
-            // {
-            //   label: "Adauga",
-            //   icon: <AddIcon />,
-            //   onClick: null
-            // }
-          ]}
         />
       </Grid>
     </Grid>

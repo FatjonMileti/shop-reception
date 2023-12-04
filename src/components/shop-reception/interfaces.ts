@@ -119,3 +119,82 @@ interface SubFamilyValidityThreshold {
   district: string;
   validityThreshold: string;
 }
+
+interface PackingType {
+  id: number;
+  packagingCode: string;
+  additionalCodes: string;
+  name: string;
+  main: string;
+  combination: string;
+  active: boolean;
+  return: string;
+  generatedBarcode: string;
+}
+
+interface BalancePackage {
+  id: number;
+  store: string;
+  hub: string;
+  society: string;
+  supportType: string;
+  qualitativeInventory: string;
+  theoreticalStock: string;
+  inventoryDefect: string;
+  difference: string;
+  finalStockAfterInventory: string;
+  inventoryManager: string;
+  inventoryDate: string;
+  inventoryUpdate: string;
+  inventoryHistory: string;
+}
+
+interface DifferencesProduct {
+  id: number;
+  deliverySlip: string;
+  store: string;
+  warehouse: string;
+  productName: string;
+  homeOrder: string;
+  metiOrder: string;
+  unitOfMeasure: string;
+  expectedQuantity: string;
+  qualitativeReceivedQuantity: string;
+  defectiveReceivedQuantity: string;
+  grams: string;
+  inStockQuantity: number;
+  difference: string;
+  raceCode: string;
+  sentToMeti: string;
+  integrationOperator: string;
+}
+
+interface DLCProducts {
+  id: number;
+  storeType: string;
+  storeCode: string;
+  storeName: string;
+  district: string;
+  family: string;
+  subfamily: string;
+  UbCode: string;
+  productCode: string;
+}
+
+interface MetiFile {
+  id: number;
+  deliverySlip: string;
+  store: string;
+  warehouse: string;
+  integrationOperator: string;
+  status: string;
+  sentFile: string;
+  receivedFile: string;
+  sentToMeti: string;
+  receivedFromMeti: string;
+  productsDifferences: string;
+  metiProductDifferences: string;
+  exportNonIntegratedProducts: string;
+  error: boolean;
+  forgot: boolean;
+}
