@@ -11,13 +11,38 @@ import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
 import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import { DLCProductsForm } from './DLCProductsForm'
+import { ImportProductsForm } from './ImportProductsForm'
 
 const DLCProducts = () => {
   const [tableItems, setTableItems] = useState<DLCProducts[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [isImportProductsModalOpen, setIsImportProductsModalOpen] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<DLCProducts>()
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
+
+  const openNewModal = (): void => setIsNewModalOpen(true)
+  const closeNewModal = (): void => setIsNewModalOpen(false)
+
+  const openImportProductsModal = (): void => setIsImportProductsModalOpen(true)
+  const closeImportProductsModal = (): void => setIsImportProductsModalOpen(false)
+
+  const openEditModal = (rowId: number|string): void => {
+    selectRow(rowId)
+    setIsEditModalOpen(true)
+  }
+  const closeEditModal = (): void => setIsEditModalOpen(false)
+
+  const selectRow = (rowId: number|string) => {
+    const row = tableItems.find(item => item.id === rowId)
+    if (row) {
+      setSelectedRow(row)
+    }
+  }
 
   useEffect(() => {
     setTableItems([
@@ -167,6 +192,23 @@ const DLCProducts = () => {
         </Paper>
       </Grid>
       <Grid item xs={12} style={{ margin: '8px' }}>
+        <DLCProductsForm
+          isModalOpen={isNewModalOpen}
+          closeModal={closeNewModal}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <ImportProductsForm
+          isModalOpen={isImportProductsModalOpen}
+          closeModal={closeImportProductsModal}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <DLCProductsForm
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+          setShouldRefreshData={setShouldRefreshData}
+          editItem={selectedRow}
+          isEdit
+        />
         <Table
           hideCheckbox
           orderBy='role'
@@ -178,18 +220,26 @@ const DLCProducts = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => openEditModal(rowId)
+            }
+          ]}
           rowActionsWidth='130px'
           toolbarActions={[
             {
-              label: 'Importǎ produse sensibile',
+              label: 'Importǎ produse DLC scurt',
               icon: <AddIcon />,
-              onClick: null
+              onClick: openImportProductsModal
             },
             {
-              label: 'Produse sensibile',
+              label: 'Produse DLC scurt',
               icon: <AddIcon />,
-              onClick: null
+              onClick: openNewModal
             }
           ]}
         />
