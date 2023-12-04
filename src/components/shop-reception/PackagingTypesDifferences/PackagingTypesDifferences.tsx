@@ -15,7 +15,7 @@ import TitleHeader from '../TitleHeader/TitleHeader'
 
 const PackagingTypesDifferences = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<PackagingTypesDifference[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -25,23 +25,17 @@ const PackagingTypesDifferences = () => {
     setTableItems([
       {
         id: 1,
+        warehouse: 'DEPOZIT BRAZI NON FOOD',
         store: 'CRAIOVA (3054)',
         hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        society: 'PH01DEP',
+        supportCode: 'DEPOZITBRA',
+        deliverySlip: '3095940',
+        expectedSupportType: '256822',
+        supportTypeConfirmed: 'DEPOZITBRA',
+        registrationNumber: '3095940',
+        date: '25-10-2023',
+        downloadImages: 'Inexistent'
       }
     ])
   }, [])

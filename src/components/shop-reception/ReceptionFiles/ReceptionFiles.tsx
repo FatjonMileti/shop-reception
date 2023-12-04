@@ -1,5 +1,4 @@
 import { Grid, Paper } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { useEffect, useState } from 'react'
@@ -13,8 +12,7 @@ import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 
 const ReceptionFiles = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<ReceptionFile[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -24,23 +22,14 @@ const ReceptionFiles = () => {
     setTableItems([
       {
         id: 1,
+        deliverySlip: 'PH01DEP',
+        warehouse: 'DEPOZIT BRAZI NON FOOD',
         store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        date: '25-10-2023',
+        success: 'DEPOZITBRA',
+        failureReason: '3095940',
+        fileDownloaded: '256822',
+        reProcessing: 'Inexistent'
       }
     ])
   }, [])

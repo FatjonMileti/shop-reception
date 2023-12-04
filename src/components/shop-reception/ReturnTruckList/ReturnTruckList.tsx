@@ -15,7 +15,7 @@ import TitleHeader from '../TitleHeader/TitleHeader'
 
 const ReturnTruckList = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<ReturnTruck[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -26,22 +26,23 @@ const ReturnTruckList = () => {
       {
         id: 1,
         store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
+        viaHub: 'DEPOZIT BRAZI NON FOOD',
+        warehouseSupplier: 'DEPOZIT BRAZI NON FOOD',
+        society: '',
+        route: 'PH01DEP',
+        registrationNumber: 'DEPOZITBRA',
+        driveNumber: '3095940',
+        returnPackaging: '',
         seals: '',
-        deliveryReceipts: '256822',
+        shopNotices: '',
+        hubNotices: '',
         complianceDocuments: '',
         thermodiagramConformity: '',
         receptionWithinHours: '',
         sealCompliance: '',
-        status: 'Înregistrat',
+        status: '',
         registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        shippingDate: '25-10-2023'
       }
     ])
   }, [])

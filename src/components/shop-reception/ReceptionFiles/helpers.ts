@@ -1,49 +1,49 @@
 export const columns = [
   {
     title: 'Bon livrare',
-    field: 'raceCode',
+    field: 'deliverySlip',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Depozit',
-    field: 'raceCode',
+    field: 'warehouse',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Magazin',
-    field: 'raceCode',
+    field: 'store',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ',
-    field: 'store',
+    field: 'date',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Succes',
-    field: 'warehouseName',
+    field: 'success',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Motiv eșuare',
-    field: 'warehouseName',
+    field: 'failureReason',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Descarca fișierul',
-    field: 'store',
+    field: 'fileDownloaded',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Reprocesare',
-    field: 'store',
+    field: 'reProcessing',
     align: 'left',
     type: 'string'
   }

@@ -15,7 +15,7 @@ import TitleHeader from '../TitleHeader/TitleHeader'
 
 const PackagingCompliance = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<PackagingCompliance[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -26,22 +26,13 @@ const PackagingCompliance = () => {
       {
         id: 1,
         store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        warehouse: 'DEPOZIT BRAZI NON FOOD',
+        deliverySlip: 'PH01DEP',
+        supportType: 'DEPOZITBRA',
+        supportCode: '3095940',
+        supportCompliance: '256822',
+        receptionDate: '25-10-2023',
+        downloadImages: 'Inexistent'
       }
     ])
   }, [])

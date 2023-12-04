@@ -1,67 +1,67 @@
 export const columns = [
   {
     title: 'Depozit',
-    field: 'store',
+    field: 'warehouse',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip Magazin',
-    field: 'hub',
+    field: 'storeType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Magazin',
-    field: 'hub',
+    field: 'store',
     align: 'left',
     type: 'string'
   },
   {
     title: 'via',
-    field: 'warehouseName',
+    field: 'via',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Societate',
-    field: 'truckLocation',
+    field: 'society',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ task magazin',
-    field: 'registrationNumber',
+    field: 'shopTaskDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ rezolvare task magazin',
-    field: 'registrationNumber',
+    field: 'storeTaskSolutionDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Notificari trimise catre magazin',
-    field: 'registrationNumber',
+    field: 'notificationsSent',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Numǎr aviz magazin',
-    field: 'registrationNumber',
+    field: 'shopNoticeNumber',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ aviz magazin',
-    field: 'registrationNumber',
+    field: 'shopNoticeDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Status',
-    field: 'driverCode',
+    field: 'status',
     align: 'left',
     type: 'string'
   }

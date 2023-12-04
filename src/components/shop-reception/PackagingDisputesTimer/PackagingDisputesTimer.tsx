@@ -13,7 +13,7 @@ import TitleHeader from '../TitleHeader/TitleHeader'
 
 const PackagingDisputesTimer = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<PackagingDisputeTimer[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -23,23 +23,9 @@ const PackagingDisputesTimer = () => {
     setTableItems([
       {
         id: 1,
-        store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        timerType: 'CRAIOVA (3054)',
+        timerValue: '3095940',
+        timerDescription: 'Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent'
       }
     ])
   }, [])

@@ -1,79 +1,79 @@
 export const columns = [
   {
     title: 'Cod cursǎ',
-    field: 'deliverySlip',
+    field: 'raceCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip cursǎ',
-    field: 'deliverySlip',
+    field: 'raceType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Loc încǎrcare',
-    field: 'warehouseName',
+    field: 'loadingPlace',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Data încǎrcare',
-    field: 'warehouseName',
+    field: 'uploadDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Numǎr masina_DEPOZIT',
-    field: 'store',
+    field: 'carNumber',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Nume Depozit',
-    field: 'store',
+    field: 'warehouseName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Nume șofer',
-    field: 'store',
+    field: 'driverName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Telefon șofer',
-    field: 'store',
+    field: 'driverPhone',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Denumire Hub',
-    field: 'deliverySlip',
+    field: 'hubName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Denumire Magazin',
-    field: 'deliverySlip',
+    field: 'storeName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Societate',
-    field: 'deliverySlip',
+    field: 'society',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Categorie marfa',
-    field: 'deliverySlip',
+    field: 'goodsCategory',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Numǎr paleți',
-    field: 'deliverySlip',
+    field: 'numberOfPallets',
     align: 'left',
     type: 'string'
   },

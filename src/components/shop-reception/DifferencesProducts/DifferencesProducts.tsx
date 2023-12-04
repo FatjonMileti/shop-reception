@@ -177,7 +177,7 @@ const DifferencesProducts = () => {
                 type='text'
                 onChange={event => null
                 }
-                label='Selecteazã datâ'
+                label='Selecteazǎ datâ'
                 variant='outlined'
                 style={{ width: '100%' }}
               />

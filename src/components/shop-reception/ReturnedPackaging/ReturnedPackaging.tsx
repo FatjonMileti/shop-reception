@@ -1,7 +1,6 @@
 import { Paper, Grid } from '@mui/material'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../CommonStyles.modules.scss'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Download as DownloadIcon } from '@mui/icons-material'
@@ -14,8 +13,7 @@ import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
 
 const ReturnedPackaging = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<ReturnedPackaging[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -26,22 +24,23 @@ const ReturnedPackaging = () => {
       {
         id: 1,
         store: 'CRAIOVA (3054)',
+        warehouse: 'DEPOZIT BRAZI NON FOOD',
         hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        society: '',
+        packageCodeLoaded: 'PH01DEP',
+        packTypeLoaded: 'DEPOZITBRA',
+        quantityLoaded: '3095940',
+        downloadedAmount: '',
+        shopNoticeNumber: '256822',
+        seal: '',
+        shopShipmentDate: '',
+        noticeHub: '',
+        route: '',
+        registrationNumber: '',
+        returnPacking: '',
+        verificationDate: '25-10-2023',
+        checkOperator: '',
+        status: 'Înregistrat'
       }
     ])
   }, [])

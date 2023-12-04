@@ -15,7 +15,7 @@ import TitleHeader from '../TitleHeader/TitleHeader'
 
 const PackagingDisputes = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<PackagingDispute[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -25,23 +25,17 @@ const PackagingDisputes = () => {
     setTableItems([
       {
         id: 1,
+        warehouse: 'DEPOZIT BRAZI NON FOOD',
+        storeType: 'CRAIOVA',
         store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        via: 'PH01DEP',
+        society: 'DEPOZITBRA',
+        shopTaskDate: '25-10-2023',
+        shopNoticeDate: '25-10-2023',
+        storeTaskSolutionDate: '25-10-2023',
+        notificationsSent: '256822',
+        shopNoticeNumber: '256822',
+        status: 'Înregistrat'
       }
     ])
   }, [])

@@ -2,7 +2,6 @@ import { Grid, Paper } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { Add as AddIcon } from '@mui/icons-material'
 import { useEffect, useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
@@ -15,7 +14,7 @@ import { Input } from '@fullscreendigital/carrefour-dex-fe'
 
 const MetiProducts = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<MetiProduct[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -25,23 +24,14 @@ const MetiProducts = () => {
     setTableItems([
       {
         id: 1,
-        store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        productCode: 'CRAIOVA (3054)',
+        productName: 'DEPOZIT BRAZI NON FOOD',
+        measurementUnit: 'PH01DEP',
+        validDays: 'DEPOZITBRA',
+        district: '3095940',
+        family: '256822',
+        subfamily: 'Înregistrat',
+        subfamilyValidityThreshold: 'Inexistent'
       }
     ])
   }, [])

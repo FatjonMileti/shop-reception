@@ -1,7 +1,6 @@
 import { Paper, Grid } from '@mui/material'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../CommonStyles.modules.scss'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Download as DownloadIcon } from '@mui/icons-material'
@@ -14,8 +13,7 @@ import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
 
 const RollingPackages = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<RollingPackages[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -25,23 +23,22 @@ const RollingPackages = () => {
     setTableItems([
       {
         id: 1,
+        warehouse: 'DEPOZIT BRAZI NON FOOD',
         store: 'CRAIOVA (3054)',
         hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
+        society: '',
+        expectedSupportType: '',
+        confirmedSupportType: '',
         truckLocation: '',
         registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        supportCode: 'DEPOZITBRA',
+        deliverySlip: '3095940',
+        noticeNumber: '',
+        entry: '256822',
+        lesire: '',
+        finalStockAfterInventory: '',
+        date: '25-10-2023',
+        image: 'Înregistrat'
       }
     ])
   }, [])
