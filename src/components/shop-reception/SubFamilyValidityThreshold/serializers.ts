@@ -1,20 +1,10 @@
-export const toTableRowItems = (items: TruckItem[]) => items.map((item: TruckItem) => ({
+export const toTableRowItems = (items: SubFamilyValidityThreshold[]) => items.map((item: SubFamilyValidityThreshold) => ({
   id: item.id,
-  store: item.store,
-  hub: item.hub,
-  warehouseName: item.warehouseName,
-  truckLocation: item.truckLocation,
-  registrationNumber: item.registrationNumber,
-  driverCode: item.driverCode,
-  raceCode: item.raceCode,
-  seals: item.seals,
-  deliveryReceipts: item.deliveryReceipts,
-  complianceDocuments: item.complianceDocuments,
-  thermodiagramConformity: item.thermodiagramConformity,
-  receptionWithinHours: item.receptionWithinHours,
-  sealCompliance: item.sealCompliance,
-  status: item.status,
-  registrationDate: item.registrationDate,
-  registrationOperator: item.registrationOperator,
-  eTransportStatus: item.eTransportStatus
+  subfamilyCode: item.subfamilyCode,
+  familyCode: item.familyCode,
+  subfamily: item.subfamily,
+  family: item.family,
+  districtCode: item.districtCode,
+  district: item.district,
+  validityThreshold: item.validityThreshold
 }))

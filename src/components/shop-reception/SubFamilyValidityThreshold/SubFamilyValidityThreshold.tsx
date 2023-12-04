@@ -1,8 +1,6 @@
 import { Grid, Paper } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { Add as AddIcon } from '@mui/icons-material'
 import { useEffect, useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
@@ -12,36 +10,41 @@ import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
 import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import { EditForm } from '../CentralizeStoresHub/EditForm'
+import { SubFamilyValidityThresholdForm } from './SubFamilyValidityThresholdForm'
 
 const SubFamilyValidityThreshold = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<SubFamilyValidityThreshold[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<SubFamilyValidityThreshold>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
+
+  const openEditForm = (rowId: number|string) => {
+    selectRow(rowId)
+    setIsOpenEditModal(true)
+  }
+  const closeEditForm = () => setIsOpenEditModal(false)
+  const selectRow = (rowId: number|string) => {
+    const row = tableItems.find(item => item.id === rowId)
+    if (row) {
+      setSelectedRow(row)
+    }
+  }
 
   useEffect(() => {
     setTableItems([
       {
         id: 1,
-        store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
+        subfamilyCode: 'CRAIOVA (3054)',
+        familyCode: 'CRAIOVA (3054)',
+        subfamily: 'DEPOZIT BRAZI NON FOOD',
+        family: 'PH01DEP',
+        districtCode: 'DEPOZITBRA',
+        district: 'DEPOZITBRA',
+        validityThreshold: '3095940'
       }
     ])
   }, [])
@@ -71,10 +74,6 @@ const SubFamilyValidityThreshold = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (
@@ -137,6 +136,12 @@ const SubFamilyValidityThreshold = () => {
         </Paper>
       </Grid>
       <Grid item xs={12} style={{ margin: '8px' }}>
+        <SubFamilyValidityThresholdForm
+          isModalOpen={isOpenEditModal}
+          closeModal={closeEditForm}
+          setShouldRefreshData={setShouldRefreshData}
+          editItem={selectedRow}
+        />
         <Table
           hideCheckbox
           orderBy='role'
@@ -148,7 +153,15 @@ const SubFamilyValidityThreshold = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => openEditForm(rowId)
+            }
+          ]}
           rowActionsWidth='130px'
         />
       </Grid>
