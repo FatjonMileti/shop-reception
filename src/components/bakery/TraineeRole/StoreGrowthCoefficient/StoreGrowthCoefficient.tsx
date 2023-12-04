@@ -10,7 +10,7 @@ import Table from 'components/core-ui/Table/Table'
 import { toTableRowItems } from './serializers'
 import { TableItem } from './interfaces'
 
-const ProductManagement = () => {
+const StoreGrowthCoefficient = () => {
   const { showNotification } = useNotification()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<TableItem[]>([])
@@ -60,4 +60,4 @@ const ProductManagement = () => {
   )
 }
 
-export default ProductManagement
+export default StoreGrowthCoefficient
