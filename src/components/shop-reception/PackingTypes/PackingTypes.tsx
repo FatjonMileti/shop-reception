@@ -48,9 +48,9 @@ const PackingTypes = () => {
         additionalCodes: 'DEPOZIT BRAZI NON FOOD',
         name: 'PH01DEP',
         main: 'DEPOZITBRA',
-        combination: '3095940',
+        combination: false,
         active: true,
-        return: '256822',
+        return: true,
         generatedBarcode: 'Înregistrat'
       }
     ])

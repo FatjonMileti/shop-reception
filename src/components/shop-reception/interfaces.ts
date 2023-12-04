@@ -126,9 +126,9 @@ interface PackingType {
   additionalCodes: string;
   name: string;
   main: string;
-  combination: string;
+  combination: boolean;
   active: boolean;
-  return: string;
+  return: boolean;
   generatedBarcode: string;
 }
 
