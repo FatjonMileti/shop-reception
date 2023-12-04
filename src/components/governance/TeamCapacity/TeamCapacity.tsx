@@ -122,7 +122,7 @@ const TeamCapacity = () => {
         <Box>
           <Table
             hideCheckbox
-            orderBy="teamMember.name"
+            orderBy="teamMemberName"
             order="asc"
             items={tableItems}
             fetchData={fetchData}

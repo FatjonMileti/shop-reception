@@ -154,12 +154,6 @@ const columns = [
 ]
 
 const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
-  const { dispatchFetchDomains } = useGovernanceDomains()
-  const storedGovernanceDomains = useSelector((state: RootState) => state.governanceDomains.domains)
-
-  const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
-  const [domainFilterOptions, setDomainFilterOptions] = useState<ValueLabelInterface[]>(null)
-
   const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -177,25 +171,11 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
 
   const { showNotification } = useNotification()
 
-  useEffect(() => {
-    ;(async () => {
-      if (storedGovernanceDomains === null) {
-        dispatchFetchDomains()
-      } else {
-        const resultOptions =
-          toAsyncSelectOptions(storedGovernanceDomains, 'domain', 'domain') || []
-        setDomainFilterValue(resultOptions[0])
-        setDomainFilterOptions(resultOptions)
-      }
-    })()
-  }, [storedGovernanceDomains])
-
   const handleFilterChange = value => {
-    setDomainFilterValue(value)
     setShouldRefreshData(true)
   }
 
-  const fetchData = async ({ tableFilters }) => {
+  const fetchData = async ({ tableFilters, rowsPerPage, order, orderBy }) => {
     setIsLoading(true)
     try {
       const getTableFilters = tableFilters.map((filter, index) => {
@@ -207,9 +187,11 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/governance/individualCapacity',
-          filters: [{ name: 'teamMember.domain', value: domainFilterValue.value }],
-          extraUrlParams: [{ name: 'id', value: id }],
-          tableFilters: getTableFilters
+          filters: [{ name: 'teamMember.id', value: id }],
+          tableFilters: getTableFilters,
+          orderBy,
+          rowsPerPage,
+          order
         })
       )
 
@@ -225,22 +207,6 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
   }
 
   const tableFilterFields = [
-    {
-      name: 'teamMemberId',
-      label: 'Person Id',
-      type: 'text',
-
-      filter: (
-        <Input
-          type="text"
-          name="teamMemberId"
-          label="Person Id"
-          variant="standard"
-          onChange={value => setTableFilter({ ...tableFilter, teamMemberId: value })}
-          value={tableFilter.teamMemberId}
-        />
-      )
-    },
     {
       name: 'startDate',
       label: 'Start Date',
@@ -276,42 +242,25 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
   return (
     <div className={s.mainContainer}>
       <Grid container spacing={4}>
-        {!storedGovernanceDomains && (
-          <div style={{ display: 'flex' }}>
-            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-          </div>
-        )}
-
-        <Grid xs={12} md={2} item style={{ padding: 0 }}>
-          <AsyncAutocomplete
-            applyCustomStyle
-            variant="outlined"
-            name="teamMember.domain"
-            label="Domain"
-            disableClearable
-            value={domainFilterValue}
-            options={domainFilterOptions}
-            onChange={handleFilterChange}
-          />
-        </Grid>
+        <Grid xs={12} md={2} item style={{ padding: 0 }}></Grid>
       </Grid>
-      {domainFilterValue && (
-        <Box>
-          <Table
-            hideCheckbox
-            orderBy="teamMember.name"
-            order="asc"
-            items={tableItems}
-            fetchData={fetchData}
-            isLoading={isLoading}
-            columns={columns}
-            totalCount={totalCount}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            filters={tableFilterFields}
-          />
-        </Box>
-      )}
+
+      <Box>
+        <Table
+          hideCheckbox
+          stickyRatio={0.5}
+          orderBy="teamMemberName"
+          order="asc"
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          columns={columns}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          filters={tableFilterFields}
+        />
+      </Box>
     </div>
   )
 }

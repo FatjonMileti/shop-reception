@@ -19,7 +19,6 @@ const GroupTable = props => {
     printUrl,
     ...rest
   } = props
-
   const [tableState, setTableState] = useImmer(
     window.history.state.tableState || {
       page: 0,
@@ -36,7 +35,6 @@ const GroupTable = props => {
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
   const openPrintModal = (): void => setIsPrintModalOpen(true)
   const closePrintModal = (): void => setIsPrintModalOpen(false)
-
   useEffect(() => {
     ;(async () => {
       if (shouldRefreshData) {
@@ -46,7 +44,6 @@ const GroupTable = props => {
       }
     })()
   }, [shouldRefreshData, window.history.state.tableState])
-
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     const response = await fetchData({
       page,
@@ -58,7 +55,6 @@ const GroupTable = props => {
     })
     const newDynamicColumns = createDynamicColumns(columns, response.list)
     setDynamicColumns(newDynamicColumns)
-
     setDynamicItems(toTableRowItems(toDynamicTableItems(response.list), newDynamicColumns))
   }
   const filters = rest.tableFilters || window.history.state?.tableState?.filters || []
@@ -71,13 +67,11 @@ const GroupTable = props => {
       })) || [],
     [filters]
   )
-
   const toolbarActions = !props.hasPrintAction
     ? props.toolbarActions
     : props.toolbarActions.map(action =>
         action.label === 'Printeaza' ? { ...action, onClick: () => openPrintModal() } : action
       )
-
   return (
     <>
       {showAbbrev && (
@@ -93,7 +87,6 @@ const GroupTable = props => {
           </Typography>
         </Box>
       )}
-
       <GeneralTable
         {...rest}
         columns={dynamicColumns}
@@ -105,7 +98,6 @@ const GroupTable = props => {
         toolbarActions={toolbarActions}
         hasCustomPagination
       />
-
       <PrintModal
         {...tableState}
         tableFilters={tableFilters}
@@ -118,5 +110,4 @@ const GroupTable = props => {
     </>
   )
 }
-
 export default GroupTable

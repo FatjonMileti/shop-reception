@@ -1,0 +1,1 @@
+export { default as ReceptionFiles } from './ReceptionFiles'

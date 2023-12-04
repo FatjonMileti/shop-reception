@@ -32,3 +32,90 @@ interface DeliverySlip {
   destinationReachedSupports: string;
   registrationDate: string;
 }
+
+interface AdminDeposit {
+  id: number;
+  depositCode: string;
+  name: string;
+  depositType: string;
+  address: string;
+  validityPercentage: string;
+  emails: string;
+  active: boolean;
+}
+
+interface AdminHub {
+  id: number;
+  hubCode: string;
+  name: string;
+  hubType: string;
+  address: string;
+  hourlyIntervals: number;
+  active: boolean;
+}
+
+interface AdminStore {
+  id: number;
+  storeCode: string;
+  name: string;
+  storeType: string;
+  METIVersion: string;
+  adCode: string;
+  grams: number;
+  region: string;
+  ip: string;
+  way: string;
+  quantities: string;
+  active: boolean;
+  hourlyIntervals: number;
+}
+
+interface AdminRegion {
+  id: number;
+  regionCode: string;
+  name: string;
+  regionManager: string;
+  active: boolean;
+}
+
+interface CentralizeStoresHub {
+  id: number;
+  store: string;
+  deposit: string;
+  hubs: string;
+}
+
+interface ScanType {
+  id: number;
+  storeType: string;
+  region: string;
+  storeCode: string;
+  storeName: string;
+  scanType: string;
+  startDate: string;
+  lastDate: string;
+  active: boolean;
+}
+
+interface SensitiveProduct {
+  id: number;
+  storeType: string;
+  storeCode: string;
+  storeName: string;
+  district: string;
+  family: string;
+  subfamily: string;
+  UbCode: string;
+  productCode: string;
+}
+
+interface SubFamilyValidityThreshold {
+  id: number;
+  familyCode: string;
+  subfamilyCode: string;
+  subfamily: string;
+  family: string;
+  districtCode: string;
+  district: string;
+  validityThreshold: string;
+}
