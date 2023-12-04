@@ -19,6 +19,7 @@ import { ProductionManagementPrint } from './TraineeRole/ProductionManagementPri
 import { StoreGrowthCoefficient } from './TraineeRole/StoreGrowthCoefficient'
 import { ProductsGrowthCoefficient } from './TraineeRole/ProductsGrowthCoefficient'
 import { ApplicationUsageReport } from './TraineeRole/ApplicationUsageReport'
+import { CadentierReportAndSales } from './TraineeRole/CadentierReportAndSales'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -177,6 +178,16 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ApplicationUsageReport}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_CADENTIER_REPORT_AND_SALES}
+        element={
+          <PrivateRoute
+            component={CadentierReportAndSales}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
