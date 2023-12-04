@@ -1,0 +1,1 @@
+export { default as ManageScanTypes } from './ManageScanTypes'
