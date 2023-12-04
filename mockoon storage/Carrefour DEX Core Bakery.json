@@ -3274,10 +3274,6 @@
     {
       "type": "route",
       "uuid": "9a60c5aa-a812-4004-bdb1-a868de7180a9"
-    },
-    {
-      "type": "route",
-      "uuid": "db496501-3074-4632-9b52-9763caae5172"
     }
   ],
   "proxyMode": false,
