@@ -1,6 +1,6 @@
 import { Paper, Box, Grid } from '@mui/material'
 import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './TruckList.modules.scss'
+import s from '../CommonStyles.modules.scss'
 import { URLS } from '../constants'
 import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
@@ -84,7 +84,7 @@ const TruckList = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Paper className={s.paper}>
+        <Paper className={s.filterPaper}>
           <TitleHeader title='Listă camioane marfă' />
           <Grid container spacing={4}>
             <Grid xs={12} md={4} item>

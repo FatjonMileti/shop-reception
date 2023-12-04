@@ -66,7 +66,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
       modalTitle={isEdit ? 'Edit Effort Matrix' : 'New Effort Matrix'}
       modalWidth="50%"
     >
-      <Grid container spacing={4}>
+      <Grid container spacing={4} justifyContent="flex-end">
         <Grid xs={12} item>
           {isEdit ? (
             <FormInfoItems
@@ -79,11 +79,10 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             />
           ) : (
             <AsyncAutocomplete
-              variant="outlined"
+              variant="standard"
               name="role"
               label="Role"
               options={effortMatrixRoles}
-              applyCustomStyle
               onChange={value => formik.setFieldValue('role', value)}
               value={formik.values.role}
               error={!!formik.errors.role}
@@ -228,7 +227,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             inputProps={{ min: '0', max: '100' }}
           />
         </Grid>
-        <Grid xs={12} item className={s.modalButtons}>
+        <Grid xs={12} md={6} item className={s.modalButtons}>
           <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
           <Button
             variant="contained"
