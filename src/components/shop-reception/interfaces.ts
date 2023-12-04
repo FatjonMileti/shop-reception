@@ -108,3 +108,14 @@ interface SensitiveProduct {
   UbCode: string;
   productCode: string;
 }
+
+interface SubFamilyValidityThreshold {
+  id: number;
+  familyCode: string;
+  subfamilyCode: string;
+  subfamily: string;
+  family: string;
+  districtCode: string;
+  district: string;
+  validityThreshold: string;
+}

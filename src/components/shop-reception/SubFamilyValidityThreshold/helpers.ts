@@ -1,37 +1,31 @@
 export const columns = [
   {
     title: 'Cod sub familie',
-    field: 'raceCode',
+    field: 'familyCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Sub familie',
-    field: 'warehouseName',
+    field: 'subfamily',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Familie',
-    field: 'warehouseName',
+    field: 'family',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Raion',
-    field: 'store',
+    field: 'district',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Prag valabilitate',
-    field: 'store',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Editeazǎ',
-    field: 'driverCode',
+    field: 'validityThreshold',
     align: 'left',
     type: 'string'
   }
