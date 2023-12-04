@@ -18,6 +18,7 @@ import { ProductionManagement } from './TraineeRole/ProductionManagement'
 import { ProductionManagementPrint } from './TraineeRole/ProductionManagementPrint'
 import { StoreGrowthCoefficient } from './TraineeRole/StoreGrowthCoefficient'
 import { ProductsGrowthCoefficient } from './TraineeRole/ProductsGrowthCoefficient'
+import { ApplicationUsageReport } from './TraineeRole/ApplicationUsageReport'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -166,6 +167,16 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ProductsGrowthCoefficient}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_APPLICATION_USAGE_REPORT}
+        element={
+          <PrivateRoute
+            component={ApplicationUsageReport}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

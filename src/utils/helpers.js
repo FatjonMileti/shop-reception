@@ -10,6 +10,8 @@ export const getPreviousDay = () => dayjs().subtract(1, 'day')
 
 export const formatPayloadDate = date => (date ? dayjs(date).format('YYYY-MM-DD') : '')
 
+export const formatBakeryPayloadDate = date => (date ? dayjs(date).format('DD-MM-YYYY') : '')
+
 export const formatUIDate = date => (date ? dayjs(date).format('DD/MM/YYYY') : '')
 
 export const getDatePickerDate = date => (date ? dayjs(date, 'DD/MM/YYYY') : '')
