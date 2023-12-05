@@ -1,6 +1,7 @@
 import { Box } from "@mui/material"
 import { IconCell } from "components/core-ui/IconCell"
 import { MultivalueCell } from "components/core-ui/MultivalueCell"
+import * as Yup from 'yup'
 
 export const columns = [
   {
@@ -54,6 +55,7 @@ export const statuses = [
     { label: "Active", value: "Active" },
     { label: "Inactive", value: "Inactive" }
 ]
+
 export const getInitialValues = editItem => ({
     id: editItem?.id ?? '',
     oidcId: editItem?.oidcId ?? '',
@@ -62,4 +64,11 @@ export const getInitialValues = editItem => ({
     firstName: editItem?.firstName ?? '',
     lastName: editItem?.lastName ?? '',
     structureRoles: editItem?.structureRoles ?? []
+})
+
+export const getValidationSchema = () => Yup.object({
+  region_manager: Yup.string().required(),
+  store_manager: Yup.string().required(),
+  traceability_operator: Yup.string().required(),
+  trainee: Yup.string().required(),
 })

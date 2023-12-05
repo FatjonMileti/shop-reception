@@ -8,9 +8,9 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { EditUserItem, ValueLabelInterface } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
-import { getInitialValues, statuses } from '../helpers'
+import { getInitialValues, getValidationSchema, statuses } from '../helpers'
 import { ChangeEvent, useMemo, useState, useEffect } from 'react'
-import { toAsyncSelectOptions } from '../serializers'
+import { getStructureRoles, toAsyncSelectOptions } from '../serializers'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
@@ -81,7 +81,7 @@ const EditUser: React.FC<EditUserProps> = props => {
       {
         onError: error => {
           showNotification({
-            message: `A aparut o eroare la obtinerea detaliilor userului. ${formatErrorMessage(
+            message: `Error while fetching user data. ${formatErrorMessage(
               error
             )}`,
             type: 'error'
@@ -147,8 +147,6 @@ const EditUser: React.FC<EditUserProps> = props => {
       }
     )
 
-    const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
-
     const submitTask = async (values: EditUserItem) => {
         await makeCorePutRequest(`/bakery/user/${editUserId}`, values)
     }
@@ -170,46 +168,34 @@ const EditUser: React.FC<EditUserProps> = props => {
         }
     })
 
+    const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+    const validationSchema = useMemo(() => getValidationSchema(), [editItem])
+    const getStructureRolesProps = {
+      isRegionManagerChecked,
+      isStoreManagerChecked,
+      isTraceabilityOpChecked,
+      isTraineeChecked,
+      isAdmin,
+      regionId,
+      storeId,
+      adminId,
+      traceabilityId,
+      regionMgValue,
+      storeMgValue,
+      traceabilityOpValue,
+      traineeValue
+    }
+
     const formik = useFormik({
         enableReinitialize: true,
         validateOnChange: false,
         initialValues: initialValues,
+        validationSchema: validationSchema,
         onSubmit: async (values: EditUserItem, { resetForm }) => {
             const payload = {
                 ...values,
                 enable: values.enable === 'Active',
-                structureRoles: [
-                  ...(isRegionManagerChecked ? 
-                    [{
-                      "roleId": regionId,
-                      "structureId": regionMgValue.value,
-                      "structureType": "REGION"
-                    }] : []),
-                  ...(isStoreManagerChecked ? 
-                    [{
-                      "roleId": storeId,
-                      "structureId": storeMgValue.value,
-                      "structureType": "STORE"
-                    }] : []),
-                  ...(isTraceabilityOpChecked ? 
-                    [{
-                      "roleId": traceabilityId,
-                      "structureId": traceabilityOpValue.value,
-                      "structureType": "STORE"
-                    }] : []),
-                  ...(isTraineeChecked ? 
-                    [{
-                      "roleId": traineeValue.value,
-                      "structureId": null,
-                      "structureType": null
-                    }] : [])   ,
-                  ...(isAdmin ? 
-                    [{
-                      "roleId": adminId,
-                      "structureId": null,
-                      "structureType": null
-                    }] : []),             
-                ]
+                structureRoles: getStructureRoles(getStructureRolesProps)
             }
             mutate(payload)
             resetForm()
@@ -267,8 +253,8 @@ const EditUser: React.FC<EditUserProps> = props => {
 
     useEffect(() => {
       if(roles?.length) {
-        const traineeTypes = []
-        roles?.map(role => role.name.includes('TRAINEE') && traineeTypes.push(role))
+        let traineeTypes = []
+        roles?.forEach(role => role.name.includes('TRAINEE') && traineeTypes.push(role))
         setTraineeTypes(toAsyncSelectOptions(traineeTypes, 'id', 'name'))
         if(traineeTypes) setIsTraineeChecked(true)
       }
@@ -323,6 +309,8 @@ const EditUser: React.FC<EditUserProps> = props => {
                         options={structRegion}
                         onChange={(val) => handleChange('regionMg', val)}
                         required={isRegionManagerChecked}
+                        // error={!!formik.errors.role}
+                        // helperText={formik.errors.role as string}
                       />
                     </Grid>
                   )}

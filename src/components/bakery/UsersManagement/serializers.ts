@@ -21,3 +21,53 @@ export const toAsyncSelectOptions = (data, valueKey, labelKey) =>
     value: get(item, valueKey),
     label: toAsyncSelectLabel(item, labelKey)
 }))
+
+export const getStructureRoles = (props) => {
+  const {
+    isRegionManagerChecked,
+    isStoreManagerChecked,
+    isTraceabilityOpChecked,
+    isTraineeChecked,
+    isAdmin,
+    regionId,
+    storeId,
+    adminId,
+    traceabilityId,
+    regionMgValue,
+    storeMgValue,
+    traceabilityOpValue,
+    traineeValue
+  } = props;
+  return [
+    ...(isRegionManagerChecked ? 
+      [{
+        "roleId": regionId,
+        "structureId": regionMgValue.value,
+        "structureType": "REGION"
+      }] : []),
+    ...(isStoreManagerChecked ? 
+      [{
+        "roleId": storeId,
+        "structureId": storeMgValue.value,
+        "structureType": "STORE"
+      }] : []),
+    ...(isTraceabilityOpChecked ? 
+      [{
+        "roleId": traceabilityId,
+        "structureId": traceabilityOpValue.value,
+        "structureType": "STORE"
+      }] : []),
+    ...(isTraineeChecked ? 
+      [{
+        "roleId": traineeValue.value,
+        "structureId": null,
+        "structureType": null
+      }] : [])   ,
+    ...(isAdmin ? 
+      [{
+        "roleId": adminId,
+        "structureId": null,
+        "structureType": null
+      }] : []),             
+  ]
+}

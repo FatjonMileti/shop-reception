@@ -35,7 +35,7 @@ const EditCluster: React.FC<EditClusterProps> = props => {
         {
           onError: error => {
             showNotification({
-              message: `A aparut o eroare la obtinerea detaliilor clusterului. ${formatErrorMessage(
+              message: `Error while fetching cluster data. ${formatErrorMessage(
                 error
               )}`,
               type: 'error'
