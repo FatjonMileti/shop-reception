@@ -1,6 +1,7 @@
 import { Add } from '@mui/icons-material'
-import { Box, CircularProgress, Grid, Paper, Typography } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { Box, CircularProgress, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
+// import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete' 
+import { FilterDataSelect } from 'components/core-ui/FilterDataSelect'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Input } from 'components/core-ui/Input'
@@ -40,6 +41,7 @@ const TeamDayOffManagement = () => {
   const { showNotification } = useNotification()
 
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
+  const isXs = useMediaQuery('(max-width:624px)')
 
   useEffect(() => {
     ;(async () => {
@@ -183,14 +185,24 @@ const TeamDayOffManagement = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Grid container spacing={4}>
+      <Grid sx={{width:'100%', display:'block'}} container>
         {!storedGovernanceDomains || isTeamMembersLoading ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
-          <Grid xs={12} md={2} item style={{ padding: 0 }}>
-            <AsyncAutocomplete
+          <Grid item style={{ display:'block', padding: 0 }}>
+            <FilterDataSelect name="teamMember.domain" 
+                selectedData={domainFilterValue} 
+                label="Domain" 
+                showCounter={true} 
+                showSearch={true} 
+                counterLabel='Select category'
+                noDataFoundLabel='No results!'
+                options={domainFilterOptions} 
+                onSelect={handleFilterChange} 
+            />
+            {/* <AsyncAutocomplete
               applyCustomStyle
               variant="outlined"
               name="teamMember.domain"
@@ -199,8 +211,10 @@ const TeamDayOffManagement = () => {
               value={domainFilterValue}
               options={domainFilterOptions}
               onChange={handleFilterChange}
-            />
+            /> */}
+            
           </Grid>
+       
         )}
       </Grid>
       {domainFilterValue && (

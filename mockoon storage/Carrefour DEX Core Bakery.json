@@ -758,11 +758,11 @@
       "type": "http",
       "documentation": "Get users list",
       "method": "get",
-      "endpoint": "users",
+      "endpoint": "user",
       "responses": [
         {
           "uuid": "c209f3e2-915f-4672-b8d0-00dc17b00389",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"username\": \"Ion Popescu\",\n      \"isEnable\": true,\n      \"email\": \"ion@popescu\",\n      \"firstName\": \"Ion\",\n      \"lastName\": \"Popescu\",\n      \"structureRoles\": [\n        { \"id\": 1, \"roleName\": \"Manager regiune\", \"structureName\": \"Muntenia\" },\n        { \"id\": 1, \"roleName\": \"Manager magazin\", \"structureName\": \"Carrefour Baneasa\" }\n      ]\n    },\n    {\n      \"id\": 2,\n      \"username\": \"Ion Popescu\",\n      \"isEnable\": true,\n      \"email\": \"ion@popescu\",\n      \"firstName\": \"Ion\",\n      \"lastName\": \"Popescu\",\n      \"structureRoles\": [\n        { \"id\": 1, \"roleName\": \"Manager regiune\", \"structureName\": \"Muntenia\" },\n        { \"id\": 1, \"roleName\": \"Manager magazin\", \"structureName\": \"Carrefour Baneasa\" }\n      ]\n    },\n    {\n      \"id\": 3,\n      \"username\": \"Ion Popescu\",\n      \"isEnable\": true,\n      \"email\": \"ion@popescu\",\n      \"firstName\": \"Ion\",\n      \"lastName\": \"Popescu\",\n      \"structureRoles\": [\n        { \"id\": 1, \"roleName\": \"Manager regiune\", \"structureName\": \"Muntenia\" },\n        { \"id\": 1, \"roleName\": \"Manager magazin\", \"structureName\": \"Carrefour Baneasa\" }\n      ]\n    },\n    {\n      \"id\": 4,\n      \"username\": \"Ion Popescu\",\n      \"isEnable\": true,\n      \"email\": \"ion@popescu\",\n      \"firstName\": \"Ion\",\n      \"lastName\": \"Popescu\",\n      \"structureRoles\": [\n        { \"id\": 1, \"roleName\": \"Manager regiune\", \"structureName\": \"Muntenia\" },\n        { \"id\": 1, \"roleName\": \"Manager magazin\", \"structureName\": \"Carrefour Baneasa\" }\n      ]\n    },\n    {\n      \"id\": 5,\n      \"username\": \"Ion Popescu\",\n      \"isEnable\": true,\n      \"email\": \"ion@popescu\",\n      \"firstName\": \"Ion\",\n      \"lastName\": \"Popescu\",\n      \"structureRoles\": [\n        { \"id\": 1, \"roleName\": \"Manager regiune\", \"structureName\": \"Muntenia\" },\n        { \"id\": 1, \"roleName\": \"Manager magazin\", \"structureName\": \"Carrefour Baneasa\" }\n      ]\n    },\n    {\n      \"id\": 6,\n     \"username\": \"Ion Popescu\",\n      \"isEnable\": true,\n      \"email\": \"ion@popescu\",\n      \"firstName\": \"Ion\",\n      \"lastName\": \"Popescu\",\n      \"structureRoles\": [\n        { \"id\": 1, \"roleName\": \"Manager regiune\", \"structureName\": \"Muntenia\" },\n        { \"id\": 1, \"roleName\": \"Manager magazin\", \"structureName\": \"Carrefour Baneasa\" }\n      ]\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"id\": \"002d351e-d5cc-46ac-9db2-3689c1bbf004\",\r\n            \"firstName\": \"Andreea - Madalina\",\r\n            \"lastName\": \"Pastrav\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"REGION_MANAGER\",\r\n                \"STORE_MANAGER\",\r\n                \"TRAINEE\"\r\n            ],\r\n            \"storeName\": \"HYPER ARAD\",\r\n            \"regionName\": \"Cluj-Mures\"\r\n        },\r\n        {\r\n            \"id\": \"007523d3-81b8-48f2-be37-9ef4d074a38d\",\r\n            \"firstName\": \"Claudia Elena\",\r\n            \"lastName\": \"Nedelcu\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"EXPR BUC TOWER RESIDENCE\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"00a3bcae-643a-437e-af10-0da444d92757\",\r\n            \"firstName\": \"Constantin Cosmin\",\r\n            \"lastName\": \"Gheorghe\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"EXPR BUC ION CAMPINEANU\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"00c9fcdf-92c0-40d7-9414-7229477fef4a\",\r\n            \"firstName\": \"Marian-Vasile\",\r\n            \"lastName\": \"Silea\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"EXPR SIBIU MIHAI VITEAZU\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"0144dfee-2bca-4f3d-81cf-4f7776f3bc17\",\r\n            \"firstName\": \"Alexandru\",\r\n            \"lastName\": \"Bura\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"IASI1\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"014738c3-17a3-4f97-b67b-3caa7da69568\",\r\n            \"firstName\": \"Ionut\",\r\n            \"lastName\": \"Calabalic\",\r\n            \"enable\": false,\r\n            \"roles\": [],\r\n            \"storeName\": null,\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"015472d9-17ec-4cdd-b99c-2996d84362c6\",\r\n            \"firstName\": \"Mihaela-Adriana\",\r\n            \"lastName\": \"Rochian\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"205 ORSOVA\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"017e47d0-559e-4e5b-910f-9a2681279f59\",\r\n            \"firstName\": \"Cristian Vasile\",\r\n            \"lastName\": \"Morindau\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"SUPER GALATI2\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"01915b8e-0a32-4dfc-8021-556090a24a7a\",\r\n            \"firstName\": \"Viorica\",\r\n            \"lastName\": \"Melinte\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"808 ONESTI\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"01aeafca-7608-40c2-9045-fe71a2c30527\",\r\n            \"firstName\": \"Elena\",\r\n            \"lastName\": \"Iordache\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"EXPR FIENI RUNCULUI\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"01cda11a-437c-49fa-9d73-abdc31ff1560\",\r\n            \"firstName\": \"Viorica\",\r\n            \"lastName\": \"Vaman\",\r\n            \"enable\": true,\r\n            \"roles\": [],\r\n            \"storeName\": null,\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"0200b6c2-cf9f-42c2-9d0b-79f311565b99\",\r\n            \"firstName\": \"Daniel - Razvan\",\r\n            \"lastName\": \"Pavel\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"SUPER CAMPINA\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"0219c02d-9fec-4582-bbb0-9d5daf47f5d7\",\r\n            \"firstName\": \"Loredana\",\r\n            \"lastName\": \"Manea\",\r\n            \"enable\": false,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"206 VALCEA\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"02689d89-8246-4450-8c3e-97d5d0dcc25d\",\r\n            \"firstName\": \"Monica Adriana\",\r\n            \"lastName\": \"Stanescu\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"SUPER DROBETA2\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"02716bcf-d124-4f77-948c-339c52c6a67d\",\r\n            \"firstName\": \"Cristian - Sebastian\",\r\n            \"lastName\": \"Tirean\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"SATUMARE\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"027cd71b-a64c-45cf-ae77-6076f5b75fe7\",\r\n            \"firstName\": \"Adriana\",\r\n            \"lastName\": \"Tudose\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"SUPER VALEACALUG\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"02a247a5-a788-4aa1-9f03-74f93ed0560f\",\r\n            \"firstName\": \"Dumitru\",\r\n            \"lastName\": \"Nestian\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"SUPER VASLUI\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"02a7ad2d-4a7e-4a69-9e90-8d437ae41f8d\",\r\n            \"firstName\": \"Madalina\",\r\n            \"lastName\": \"Rogozan\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"SUPER CONSTANTA5\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"02c7e6bb-a06f-4ee8-b821-c577cb4b56b5\",\r\n            \"firstName\": \"Monika Katalin\",\r\n            \"lastName\": \"Cadar\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"EXPR ORADEA6 REPUBLICII\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"02e66728-4095-4f67-a0a4-410e2de39f13\",\r\n            \"firstName\": \"Cosmina - Victoria\",\r\n            \"lastName\": \"Niculescu\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"SUPER TARGUJIU3\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"030d152a-f6c3-4696-9f9b-0ebc8e538196\",\r\n            \"firstName\": \"Ioana\",\r\n            \"lastName\": \"Chiriac\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"Expr Bucuresti Unirii\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"03a6216d-d654-44aa-80c4-b34f3cab0750\",\r\n            \"firstName\": \"Ancuta - Liliana - Nicoleta\",\r\n            \"lastName\": \"Guta\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"EXPR BUCURESTI SINCAI\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"03aa7f3e-936c-4f79-8907-c0a06076e811\",\r\n            \"firstName\": \"Teodora\",\r\n            \"lastName\": \"Vlad\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"SUPER GORJULUI\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"03f470fe-6e6f-4f13-be60-dc3461fc8515\",\r\n            \"firstName\": \"Mihaela - Elena\",\r\n            \"lastName\": \"Pirvan\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"UNIREA\",\r\n            \"regionName\": null\r\n        },\r\n        {\r\n            \"id\": \"041553eb-04f0-4b26-980c-243d792dd117\",\r\n            \"firstName\": \"Georgiana Cristina\",\r\n            \"lastName\": \"Ciuta\",\r\n            \"enable\": true,\r\n            \"roles\": [\r\n                \"STORE_MANAGER\"\r\n            ],\r\n            \"storeName\": \"SUPER CAMPINA\",\r\n            \"regionName\": null\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 1206,\r\n        \"pageCount\": 49\r\n    }\r\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted families list",
@@ -907,15 +907,20 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "users/:id",
+      "endpoint": "user/:id",
       "responses": [
         {
           "uuid": "a2ef067f-4a87-470a-8476-851785b607fd",
-          "body": "{\n    \"id\": 1,\n    \"username\": \"Ion Popescu\",\n    \"isEnable\": true,\n    \"email\": \"ion@popescu\",\n    \"firstName\": \"Ion\",\n    \"lastName\": \"Popescu\",\n    \"structureRoles\": [\n      { \"id\": 1, \"roleId\": 1, \"structureId\": 1 },\n      { \"id\": 1, \"roleId\": 2, \"structureId\": 1 }\n    ]\n  }",
+          "body": "{\r\n    \"id\": \"efb5788c-862d-404a-bf2c-2d526851d748\",\r\n    \"firstName\": \"Silvia-Alina\",\r\n    \"lastName\": \"Sulea\",\r\n    \"enable\": true,\r\n    \"structureRoles\": [\r\n        {\r\n            \"id\": \"3ba7c2f9-7f9f-4195-a0ce-3dc7254a307f\",\r\n            \"roleId\": \"cf19f97b-b081-424c-8f44-1c5696a66cda\",\r\n            \"structureId\": \"b1b7249e-fdc3-4954-b46f-2fc6750d2e14\",\r\n            \"structureType\": \"REGION\"\r\n        },\r\n        {\r\n            \"id\": \"534e390a-c8c8-4e32-808d-e75bad7f3839\",\r\n            \"roleId\": \"e1d141e1-aa95-4a57-acaa-b2fc98b98a16\",\r\n            \"structureId\": \"7252da03-13e6-4665-b0d9-2e984f5593d4\",\r\n            \"structureType\": \"STORE\"\r\n        },\r\n        {\r\n            \"id\": \"66a133a0-c60f-48c6-ab72-067e8088ef23\",\r\n            \"roleId\": \"f917d979-233f-4044-a6f4-99e9efe4de6b\",\r\n            \"structureId\": null,\r\n            \"structureType\": null\r\n        },\r\n        {\r\n            \"id\": \"999c1962-a222-4499-806b-d10acfe430a3\",\r\n            \"roleId\": \"4d420afb-261e-4593-90d3-4ab46557ac10\",\r\n            \"structureId\": null,\r\n            \"structureType\": null\r\n        }\r\n    ],\r\n    \"oidcId\": \"2440abde-69c9-4631-bd3c-01da7ea27d05\"\r\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully retrieved a user object",
-          "headers": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -940,7 +945,7 @@
       "responses": [
         {
           "uuid": "bda4104d-2c0f-422e-b0cd-7f1c5f4843d3",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Manager magazin\",\n      \"url\": \"store\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Manager regiune\",\n      \"url\": \"region\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Formator\",\n      \"url\": \"region\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "body": "[\r\n    {\r\n        \"id\": \"cf19f97b-b081-424c-8f44-1c5696a66cda\",\r\n        \"name\": \"REGION_MANAGER\"\r\n    },\r\n    {\r\n        \"id\": \"e1d141e1-aa95-4a57-acaa-b2fc98b98a16\",\r\n        \"name\": \"STORE_MANAGER\"\r\n    },\r\n    {\r\n        \"id\": \"f917d979-233f-4044-a6f4-99e9efe4de6b\",\r\n        \"name\": \"ADMIN\"\r\n    },\r\n    {\r\n        \"id\": \"xyz\",\r\n        \"name\": \"TRACEABILITY_OPERATOR\"\r\n    },\r\n    {\r\n        \"id\": \"4ab6d91c-fd63-47df-8215-c330086bc221\",\r\n        \"name\": \"TRAINEE_HYPER_SUPER\"\r\n    },\r\n    {\r\n        \"id\": \"4d420afb-261e-4593-90d3-4ab46557ac10\",\r\n        \"name\": \"TRAINEE_HYPER\"\r\n    },\r\n    {\r\n        \"id\": \"6b311098-e7ca-4a2a-af52-480110590686\",\r\n        \"name\": \"TRAINEE_SUPER\"\r\n    }\r\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted roles list",
@@ -2573,7 +2578,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "store/all/x",
+      "endpoint": "store/all",
       "responses": [
         {
           "uuid": "3951332d-786b-4bf6-9b77-1cbd06c81feb",
@@ -2988,6 +2993,189 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "2b685adf-0d87-4907-bd38-fdc9974ef7d7",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "structure/role/:id",
+      "responses": [
+        {
+          "uuid": "bee4817f-aa4d-4c88-bbe7-2e55e2415752",
+          "body": "[\r\n    {\r\n        \"id\": \"b0610a3d-0cee-4688-8454-3575d8a62366\",\r\n        \"name\": \"Cluj-Mures\"\r\n    },\r\n    {\r\n        \"id\": \"415f0a50-d24f-418e-986c-a079f24bf459\",\r\n        \"name\": \"Test Silvia Hyper\"\r\n    },\r\n    {\r\n        \"id\": \"3c5508c9-434a-4c29-9557-078304e799fe\",\r\n        \"name\": \"Express Bucuresti-Ploiesti\"\r\n    },\r\n    {\r\n        \"id\": \"7252da03-13e6-4665-b0d9-2e984f5593d4\",\r\n        \"name\": \"Timis Caras\"\r\n    },\r\n    {\r\n        \"id\": \"c7bdf691-f3cb-4c08-8343-4c873f6fb980\",\r\n        \"name\": \"qwe\"\r\n    },\r\n    {\r\n        \"id\": \"c5c1635c-4e43-42ba-80d1-ab58be67f809\",\r\n        \"name\": \"Nord-Est\"\r\n    },\r\n    {\r\n        \"id\": \"57bf2cfb-43c0-4b8d-8b0a-c0961254c4c5\",\r\n        \"name\": \"Test 3\"\r\n    },\r\n    {\r\n        \"id\": \"5d1ad82d-b0bd-4aff-8606-01b735e2e074\",\r\n        \"name\": \"Test Alexandra\"\r\n    },\r\n    {\r\n        \"id\": \"6e04a4ba-e909-4072-aa15-bb0e0dd33006\",\r\n        \"name\": \"Brasov\"\r\n    },\r\n    {\r\n        \"id\": \"cf2bd30f-be9b-4999-abbf-f177c75bb6c4\",\r\n        \"name\": \"Test 2\"\r\n    },\r\n    {\r\n        \"id\": \"1a2c5358-9e9b-4473-9fd2-86325353872d\",\r\n        \"name\": \"Prahova-Buzau\"\r\n    },\r\n    {\r\n        \"id\": \"7f0f9cd5-ca3b-4864-84fa-21b1560c3658\",\r\n        \"name\": \"Sibiu Valcea Olt\"\r\n    },\r\n    {\r\n        \"id\": \"9c01a51b-6881-4415-bb1f-3b48ece68c97\",\r\n        \"name\": \"Bucuresti 2\"\r\n    },\r\n    {\r\n        \"id\": \"3a8d272e-b066-45d8-897b-a3310653535e\",\r\n        \"name\": \"Express Cluj\"\r\n    },\r\n    {\r\n        \"id\": \"0b66c50a-afe5-4da0-bff6-1704a2069f3e\",\r\n        \"name\": \"xxx\"\r\n    },\r\n    {\r\n        \"id\": \"ff081f73-6ed1-4724-90f2-f85ea1070fb0\",\r\n        \"name\": \"Express Floresti-Baia Mare\"\r\n    },\r\n    {\r\n        \"id\": \"d9489330-0929-4a9d-ad8e-11fbacbd75e6\",\r\n        \"name\": \"a\"\r\n    },\r\n    {\r\n        \"id\": \"b1b7249e-fdc3-4954-b46f-2fc6750d2e14\",\r\n        \"name\": \"Dolj Mehedinti\"\r\n    },\r\n    {\r\n        \"id\": \"6b1d3418-dc7a-4d81-8fa1-329a6ded2ba0\",\r\n        \"name\": \"Iasi Neamt Botosani\"\r\n    },\r\n    {\r\n        \"id\": \"2a0e8fc1-af2f-4886-9a63-5154988b0e4c\",\r\n        \"name\": \"Express Bucuresti-Pitesti\"\r\n    },\r\n    {\r\n        \"id\": \"33b8a5c6-57a3-4df9-ae79-59f618d0a210\",\r\n        \"name\": \"Express Sibiu-Brasov\"\r\n    },\r\n    {\r\n        \"id\": \"73e720d6-23b8-4a29-bbed-b98b909afdd2\",\r\n        \"name\": \"Bihor-Maramures\"\r\n    },\r\n    {\r\n        \"id\": \"0e24dacc-2d90-4997-88d9-3b1d79a0c5db\",\r\n        \"name\": \"Constanta - Braila\"\r\n    },\r\n    {\r\n        \"id\": \"65710696-7c93-4cbf-abc2-77935ecc44db\",\r\n        \"name\": \"Galati-Bacau-Vaslui\"\r\n    },\r\n    {\r\n        \"id\": \"454870b2-b41c-4773-bd53-fe19364af20f\",\r\n        \"name\": \"Bucuresti 1\"\r\n    },\r\n    {\r\n        \"id\": \"a2678fed-652b-4769-a9eb-5e2075921258\",\r\n        \"name\": \"Timis Arad\"\r\n    },\r\n    {\r\n        \"id\": \"21159de2-5e8b-4b14-8b31-416ef9a20655\",\r\n        \"name\": \"Express Bucuresti-Constanta\"\r\n    },\r\n    {\r\n        \"id\": \"734b1f97-ebd4-4f40-8c37-cca712110b60\",\r\n        \"name\": \"Test Silvia 4\"\r\n    },\r\n    {\r\n        \"id\": \"38119151-63b1-48f5-bcb9-97b5fc18a48a\",\r\n        \"name\": \"Express Nord-Vest\"\r\n    }\r\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "c0b5c222-6117-4942-ac3d-03cc69127860",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "69727ab4-e10d-466e-b9cf-29887a1d3237",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "c301618a-31af-4026-8c4d-2ef27e4f56af",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "85e0ed96-f36e-4d42-b39f-bc239253e395",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "192be717-6e2c-4164-bae1-7471ad4b14ce",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "73c69bc3-e64c-4a9d-9d13-e43a2ba23763",
+      "type": "http",
+      "documentation": "Edit user by id",
+      "method": "put",
+      "endpoint": "user/:id",
+      "responses": [
+        {
+          "uuid": "770fcef0-b389-47fa-8d85-fb1bc960fda8",
+          "body": "{\r\n    \"id\": \"002d351e-d5cc-46ac-9db2-3689c1bbf004\",\r\n    \"firstName\": \"Andreea - Madalina\",\r\n    \"lastName\": \"Pastrav\",\r\n    \"email\": \"pastrav.andreea@yahoo.com\",\r\n    \"enable\": true,\r\n    \"structureRoles\": [\r\n        {\r\n            \"id\": \"67b53748-2738-4707-b03f-c0e3aa294385\",\r\n            \"roleId\": \"cf19f97b-b081-424c-8f44-1c5696a66cda\",\r\n            \"structureId\": \"b0610a3d-0cee-4688-8454-3575d8a62366\",\r\n            \"structureType\": \"REGION\"\r\n        },\r\n        {\r\n            \"id\": \"7d3b83ad-7006-4773-ae15-7c39e6a2d2bc\",\r\n            \"roleId\": \"e1d141e1-aa95-4a57-acaa-b2fc98b98a16\",\r\n            \"structureId\": \"3c5508c9-434a-4c29-9557-078304e799fe\",\r\n            \"structureType\": \"STORE\"\r\n        },\r\n        {\r\n            \"id\": \"4a670d67-a1f1-4106-b7a5-efae76e78f60\",\r\n            \"roleId\": \"4ab6d91c-fd63-47df-8215-c330086bc221\",\r\n            \"structureId\": null,\r\n            \"structureType\": null\r\n        }\r\n    ],\r\n    \"oidcId\": \"4120ddef-6a04-41f4-9890-550ee409198a\"\r\n}",
+          "latency": 0,
+          "statusCode": 202,
+          "label": "Successfully updated user",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -3013,11 +3201,19 @@
     },
     {
       "type": "route",
+      "uuid": "73c69bc3-e64c-4a9d-9d13-e43a2ba23763"
+    },
+    {
+      "type": "route",
       "uuid": "41a7ec0a-e849-4a0f-ac62-edd4fce735b4"
     },
     {
       "type": "route",
       "uuid": "0586e2df-ebdc-4491-8f0d-bb8162b96530"
+    },
+    {
+      "type": "route",
+      "uuid": "2b685adf-0d87-4907-bd38-fdc9974ef7d7"
     },
     {
       "type": "route",

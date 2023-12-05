@@ -35,7 +35,7 @@ const EditGrowth: React.FC<EditGrowthProps> = props => {
         {
           onError: error => {
             showNotification({
-              message: `A aparut o eroare la obtinerea detaliilor coeficientului de crestere. ${formatErrorMessage(
+              message: `Error while fetching growth data. ${formatErrorMessage(
                 error
               )}`,
               type: 'error'

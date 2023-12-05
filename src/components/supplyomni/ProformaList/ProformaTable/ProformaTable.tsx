@@ -1,9 +1,14 @@
+import { Checkbox } from '@fullscreendigital/carrefour-dex-fe'
+import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
+import { Filter } from 'components/core-ui/Table/TableDefinitions'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { useNotification } from 'hooks'
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
+import { CancelProformaModal } from './CancelProformaModal'
 import s from './ProformaTable.modules.scss'
 import { defaultTableFilters, tableColumns } from './constants'
 import {
@@ -14,11 +19,6 @@ import {
 } from './interfaces'
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
-import { Box, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
-import { Checkbox } from '@fullscreendigital/carrefour-dex-fe'
-import { Filter } from 'components/core-ui/Table/TableDefinitions'
-import { CancelProformaModal } from './CancelProformaModal'
 
 const ProformaTable: React.FC<ProformaTableProps> = props => {
   const { proformaType } = props

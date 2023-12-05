@@ -10,8 +10,8 @@ import { EditFamilyItem, ValueLabelInterface } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { getInitialValues, famInBakeryScopes, divisionTypes } from '../helpers'
 import { ChangeEvent, useMemo, useState } from 'react'
-import { toAsyncSelectOptions } from '../serializers'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { toAsyncSelectOptions } from 'components/bakery/commonSerializers'
 
 interface EditFamilyProps {
   isModalOpen: boolean
@@ -58,7 +58,7 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
         {
           onError: error => {
             showNotification({
-              message: `A aparut o eroare la obtinerea detaliilor familiei. ${formatErrorMessage(
+              message: `Error while fetching family data. ${formatErrorMessage(
                 error
               )}`,
               type: 'error'

@@ -140,6 +140,31 @@ export interface ProductItem {
   imageUrl: string
 }
 
+export interface SalesCadentierListItem {
+  start: string
+  end: string
+  average: number
+  calculation: number
+  quantityToProduce: number
+  realSales: number
+  clearanceSales: number
+  name: string
+}
+export interface SalesCadentierItem {
+    productName: string
+    productMetiCode: number
+    productImageUrl: string
+    inPromotion: boolean
+    clusterMandatory: boolean
+    newProduct: boolean
+    username: string
+    average: number
+    calculation: number
+    quantityToProduce: number
+    realSales: number
+    clearanceSales: number
+    list: SalesCadentierListItem[]
+}
 export interface ApplicationReportDynamicDtosItem {
   date: Date
   printCadentier: boolean
@@ -160,4 +185,20 @@ export interface UsageReportItem {
 export interface IdNameInterface {
   id: string,
   name: string
+}
+
+export interface StructureRole {
+  id?: string
+  roleId?: string
+  structureId?: string 
+  structureType?: string
+}
+
+export interface EditUserItem {
+  id: string
+  enable: boolean | string
+  email: string
+  firstName: string
+  lastName: string
+  structureRoles: StructureRole[] | []
 }

@@ -7,13 +7,14 @@ import { UsageReportItem, ValueLabelInterface } from '../interfaces'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { ColumnsComponent, columns, formatAndDownloadResponse } from './helpers'
+import { ColumnsComponent, formatAndDownloadResponse } from './helpers'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useQuery } from 'react-query'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
-import { toAsyncSelectOptions, toTableRowItems } from './serializers'
+import { toTableRowItems } from './serializers'
 import dayjs from 'dayjs'
 import { FileDownloadOutlined } from '@mui/icons-material'
+import { toAsyncSelectOptions } from '../commonSerializers'
 
 const UsageReport = () => {
   const [tableItems, setTableItems] = useState<UsageReportItem[]>([])
