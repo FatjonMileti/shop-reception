@@ -4792,14 +4792,14 @@
       "responseMode": null
     },
     {
-      "uuid": "a133b672-419b-4cff-9ecb-3d8180133cbd",
+      "uuid": "3ad38cf2-eb48-430c-b6b7-a463ada8ec22",
       "type": "http",
       "documentation": "",
       "method": "get",
       "endpoint": "volumetry/taskAllocation",
       "responses": [
         {
-          "uuid": "22166eca-9652-4400-87da-138a42221344",
+          "uuid": "556eb651-5b3c-4cbb-8370-b14a17045d57",
           "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    },\n    {\n      \"id\": 2,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"112233Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
@@ -5017,7 +5017,7 @@
     },
     {
       "type": "route",
-      "uuid": "a133b672-419b-4cff-9ecb-3d8180133cbd"
+      "uuid": "3ad38cf2-eb48-430c-b6b7-a463ada8ec22"
     }
   ],
   "proxyMode": false,
