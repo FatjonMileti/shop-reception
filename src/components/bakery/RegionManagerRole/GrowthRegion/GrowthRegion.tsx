@@ -248,7 +248,7 @@ const GrowthRegion = () => {
                 ]}
                 showAbbrev
                 hasPrintAction
-                printUrl={'/bakery/formator/cadentier-region-print'}
+                printUrl={'/bakery/regionManager/cadentier-region-print'}
                 order={tableState.order}
                 orderBy={tableState.orderBy}
                 tableFilters={tableState.tableFilters}

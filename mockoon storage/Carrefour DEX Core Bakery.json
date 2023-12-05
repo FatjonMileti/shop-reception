@@ -2748,7 +2748,7 @@
       "type": "http",
       "documentation": "Get store products list",
       "method": "get",
-      "endpoint": "region/store/products/x",
+      "endpoint": "region/store/products",
       "responses": [
         {
           "uuid": "c2092ba7-819b-4692-bc25-36e0e27e4031",
