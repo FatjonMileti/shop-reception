@@ -380,7 +380,7 @@
           "body": "[\n  {\n    \"id\": \"121\",\n    \"name\": \"Management angajati\",\n    \"icon\": \"PeopleAltOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"199\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"199\",\n        \"routeURL\": \"/volumetry/employee/employeeManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained the list of activities - Volumetry",
+          "label": "Successfully obtained the list of activities - Volumetry Employees management",
           "headers": [
             {
               "key": "Content-Type",
@@ -396,6 +396,37 @@
               "target": "query",
               "modifier": "submoduleId",
               "value": "3",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "39fcbfbf-1e24-4cb2-ae1c-4a33427845da",
+          "body": "[\n  {\n    \"id\": \"122\",\n    \"name\": \"Management task-uri\",\n    \"icon\": \"FactCheckOutlined\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the list of activities - Volumetry Tasks management",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "submoduleId",
+              "value": "4",
               "invert": false,
               "operator": "equals"
             }
