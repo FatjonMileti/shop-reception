@@ -4790,6 +4790,40 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "a133b672-419b-4cff-9ecb-3d8180133cbd",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/taskAllocation",
+      "responses": [
+        {
+          "uuid": "22166eca-9652-4400-87da-138a42221344",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    },\n    {\n      \"id\": 2,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"112233Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4980,6 +5014,10 @@
     {
       "type": "route",
       "uuid": "cbc28fa3-ee8e-42bf-9d89-e860525de038"
+    },
+    {
+      "type": "route",
+      "uuid": "a133b672-419b-4cff-9ecb-3d8180133cbd"
     }
   ],
   "proxyMode": false,
