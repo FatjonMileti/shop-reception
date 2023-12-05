@@ -17,6 +17,7 @@ import { formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import { columns } from './helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
+import { toTableRowItems } from './serializers'
 
 const CadentierReportAndSales = () => {
   const { showNotification } = useNotification()
@@ -62,7 +63,7 @@ const CadentierReportAndSales = () => {
           orderBy
         })
       )
-      setTableItems(response.list)
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
 
@@ -117,7 +118,7 @@ const CadentierReportAndSales = () => {
               <DatePicker
                 label="Planificare pentru"
                 value={planningDateFilterValue}
-                variant="standard"
+                variant="outlined"
                 required
                 onChange={handlePlanningDateFilterChange}
               />
@@ -128,7 +129,7 @@ const CadentierReportAndSales = () => {
             ) : (
               <Grid xs={12} md={3} item>
                 <AsyncAutocomplete
-                  variant="standard"
+                  variant="outlined"
                   applyCustomStyle
                   name="store.id"
                   label="Selecteaza magazin"
