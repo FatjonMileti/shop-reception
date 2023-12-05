@@ -47,12 +47,21 @@ const AsyncAutocomplete = props => {
   const queryParams = React.useMemo(() => {
       let qp = {}
       if (Array.isArray(props?.siblingValuesAsQueryParams) && props.siblingValues) {
-          props.siblingValuesAsQueryParams.forEach(siblingName => {
-              const siblingValue = props.siblingValues[siblingName]?.value
-              if (siblingValue) {
-                  qp[siblingName] = siblingValue
-              }
-          })
+        props.siblingValuesAsQueryParams.forEach(siblingName => {
+
+          let  siblingValue
+
+          if (Array.isArray(props.siblingValues[siblingName])) {
+            siblingValue = props.siblingValues[siblingName].map(selectedOption => {
+              return selectedOption.value
+            })
+          } else {
+              siblingValue = props.siblingValues[siblingName]?.value
+          }
+            if (siblingValue) {
+                qp[siblingName] = siblingValue
+            }
+        })
       }
       return qp
   }, [props.siblingValues])
@@ -85,7 +94,10 @@ const AsyncAutocomplete = props => {
       }
 
       const result = await makeCoreGetRequest(url, {
-        params: queryParams
+        params: queryParams,
+        paramsSerializer: {
+          indexes: null
+        }
       })
       const { valueKey, labelKey } = action
 
