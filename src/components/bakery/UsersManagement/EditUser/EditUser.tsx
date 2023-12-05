@@ -300,8 +300,8 @@ const EditUser: React.FC<EditUserProps> = props => {
                         options={structRegion}
                         onChange={(val) => handleChange('regionMg', val)}
                         required={isRegionManagerChecked}
-                        error={!!formik.errors.region_manager}
-                        helperText={formik.errors.region_manager as string}
+                        error={isRegionManagerChecked && !regionMgValue?.value}
+                        helperText={isRegionManagerChecked && !regionMgValue?.value && 'Region manager is required'}
                       />
                     </Grid>
                   )}
@@ -331,7 +331,9 @@ const EditUser: React.FC<EditUserProps> = props => {
                       value={storeMgValue}
                       options={structStore}
                       onChange={(val) => handleChange('storeMg', val)}
-                      
+                      required={isStoreManagerChecked}
+                      error={isStoreManagerChecked && !storeMgValue?.value}
+                      helperText={isStoreManagerChecked && !storeMgValue?.value && 'Store manager is required'}
                       />
                   </Grid>
                 )}
@@ -361,7 +363,9 @@ const EditUser: React.FC<EditUserProps> = props => {
                        value={traceabilityOpValue}
                        options={structTraceabilityOp}
                        onChange={(val) => handleChange('traceabilityOp', val)}
-                       
+                       required={isTraceabilityOpChecked}
+                       error={isTraceabilityOpChecked && !traceabilityOpValue?.value}
+                       helperText={isTraceabilityOpChecked && !traceabilityOpValue?.value && 'Traceability operator is required'}
                        />
                    </Grid>
                  )}
@@ -385,6 +389,9 @@ const EditUser: React.FC<EditUserProps> = props => {
                     value={traineeValue}
                     options={traineeTypes}
                     onChange={(val) => handleChange('trainee', val)}
+                    required={isTraineeChecked}
+                    error={isTraineeChecked && !traineeValue?.value}
+                    helperText={isTraineeChecked && !traineeValue?.value && 'Trainee is required'}
                     />
                 </Grid>
               }
