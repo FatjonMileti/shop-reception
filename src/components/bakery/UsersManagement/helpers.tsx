@@ -1,7 +1,6 @@
 import { Box } from "@mui/material"
 import { IconCell } from "components/core-ui/IconCell"
 import { MultivalueCell } from "components/core-ui/MultivalueCell"
-import * as Yup from 'yup'
 
 export const columns = [
   {
@@ -66,9 +65,14 @@ export const getInitialValues = editItem => ({
     structureRoles: editItem?.structureRoles ?? []
 })
 
-export const getValidationSchema = () => Yup.object({
-  region_manager: Yup.string().required(),
-  store_manager: Yup.string().required(),
-  traceability_operator: Yup.string().required(),
-  trainee: Yup.string().required(),
-})
+export const updateStateWithExistingValues = (strRole, findFromList, setChecked, setValues, isTrainee = false) => {
+  if(isTrainee) {
+    const findTrainee = findFromList?.find(role => role.id === strRole.roleId)
+    setChecked(true)
+    setValues({label: findTrainee?.name , value: findTrainee?.id})
+  } else {
+    const findItem = findFromList?.find(item => item.value === strRole.structureId)
+    setChecked(true)
+    setValues({label: findItem?.label , value: findItem?.value})
+  }
+}

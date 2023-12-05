@@ -8,7 +8,7 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { EditUserItem, ValueLabelInterface } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
-import { getInitialValues, getValidationSchema, statuses } from '../helpers'
+import { getInitialValues, statuses, updateStateWithExistingValues } from '../helpers'
 import { ChangeEvent, useMemo, useState, useEffect } from 'react'
 import { getStructureRoles, toAsyncSelectOptions } from '../serializers'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
@@ -169,7 +169,6 @@ const EditUser: React.FC<EditUserProps> = props => {
     })
 
     const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
-    const validationSchema = useMemo(() => getValidationSchema(), [editItem])
     const getStructureRolesProps = {
       isRegionManagerChecked,
       isStoreManagerChecked,
@@ -186,12 +185,12 @@ const EditUser: React.FC<EditUserProps> = props => {
       traineeValue
     }
 
+    //TODO find better way to validate data
     const formik = useFormik({
         enableReinitialize: true,
         validateOnChange: false,
         initialValues: initialValues,
-        validationSchema: validationSchema,
-        onSubmit: async (values: EditUserItem, { resetForm }) => {
+        onSubmit: async (values: any, { resetForm }) => {
             const payload = {
                 ...values,
                 enable: values.enable === 'Active',
@@ -201,7 +200,7 @@ const EditUser: React.FC<EditUserProps> = props => {
             resetForm()
         }
     })
-
+  
     const handleChange = (field, value) => {
       switch(field) {
         case 'regionMg': 
@@ -223,28 +222,12 @@ const EditUser: React.FC<EditUserProps> = props => {
       if(editItem && roles && structRegion && structStore) {
         editItem?.structureRoles?.forEach(strRole => {
           const role = roles?.find(role => role.id === strRole.roleId)
-          if(role?.name === 'REGION_MANAGER') {
-            const findRegion = structRegion?.find(reg => reg.value === strRole.structureId)
-            setIsRegionManagerChecked(true)
-            setRegionMgValue({label: findRegion?.label , value: findRegion?.value})
-          }
-          if(role?.name === 'STORE_MANAGER') {
-            const findStore = structStore?.find(str => str.value === strRole.structureId)
-            setIsStoreManagerChecked(true)
-            setStoreMgValue({label: findStore?.label , value: findStore?.value})
-          }
-          if(role?.name === 'TRACEABILITY_OPERATOR') {
-            const findTrcOpStore = structTraceabilityOp?.find(str => str.value === strRole.structureId)
-            setIsTraceabilityOpChecked(true)
-            setTraceabilityOpValue({label: findTrcOpStore?.label , value: findTrcOpStore?.value})
-          }
+          if(role?.name === 'REGION_MANAGER') updateStateWithExistingValues(strRole, structRegion, setIsRegionManagerChecked, setRegionMgValue)
+          if(role?.name === 'STORE_MANAGER') updateStateWithExistingValues(strRole, structStore, setIsStoreManagerChecked, setStoreMgValue)
+          if(role?.name === 'TRACEABILITY_OPERATOR') updateStateWithExistingValues(strRole, structTraceabilityOp, setIsTraceabilityOpChecked, setTraceabilityOpValue)
+          if(role?.name.includes('TRAINEE')) updateStateWithExistingValues(strRole, roles, setIsTraineeChecked, setTraineeValue, true)
           if(role?.name === 'ADMIN') {
             setIsAdmin(true)
-          }
-          if(role?.name.includes('TRAINEE')) {
-            const findTrainee = roles?.find(role => role.id === strRole.roleId)
-            setIsTraineeChecked(true)
-            setTraineeValue({label: findTrainee?.name , value: findTrainee?.id})
           }
         })
       }
@@ -252,11 +235,19 @@ const EditUser: React.FC<EditUserProps> = props => {
     },[roles, editItem, structRegion, structStore, structTraceabilityOp])
 
     useEffect(() => {
-      if(roles?.length) {
-        let traineeTypes = []
-        roles?.forEach(role => role.name.includes('TRAINEE') && traineeTypes.push(role))
-        setTraineeTypes(toAsyncSelectOptions(traineeTypes, 'id', 'name'))
-        if(traineeTypes) setIsTraineeChecked(true)
+      if (roles?.length) {
+        const traineeTypes = roles.reduce((accumulator, role) => {
+          if (role.name.includes('TRAINEE')) {
+            accumulator.push(role);
+          }
+          return accumulator;
+        }, []);
+      
+        setTraineeTypes(toAsyncSelectOptions(traineeTypes, 'id', 'name'));
+      
+        if (traineeTypes.length) {
+          setIsTraineeChecked(true);
+        }
       }
     },[roles])
 
@@ -309,8 +300,8 @@ const EditUser: React.FC<EditUserProps> = props => {
                         options={structRegion}
                         onChange={(val) => handleChange('regionMg', val)}
                         required={isRegionManagerChecked}
-                        // error={!!formik.errors.role}
-                        // helperText={formik.errors.role as string}
+                        error={!!formik.errors.region_manager}
+                        helperText={formik.errors.region_manager as string}
                       />
                     </Grid>
                   )}
