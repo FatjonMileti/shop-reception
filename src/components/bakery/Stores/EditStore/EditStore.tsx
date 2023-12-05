@@ -81,7 +81,7 @@ const EditStore: React.FC<EditStoreProps> = props => {
         {
           onError: error => {
             showNotification({
-              message: `A aparut o eroare la obtinerea detaliilor zonei. ${formatErrorMessage(
+              message: `Error while fetching store data. ${formatErrorMessage(
                 error
               )}`,
               type: 'error'

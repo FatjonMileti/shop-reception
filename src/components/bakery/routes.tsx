@@ -28,11 +28,7 @@ export const useBakeryRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_USERS_MANAGEMENT}
         element={
-          <PrivateRoute
-            component={UsersManagement}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={UsersManagement} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
@@ -62,61 +58,38 @@ export const useBakeryRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_CLUSTERS}
         element={
-          <PrivateRoute
-            component={Clusters}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={Clusters} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_FAMILIES}
         element={
-          <PrivateRoute
-            component={Families}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={Families} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_FAMILY_PRODUCTS}
         element={
-          <PrivateRoute
-            component={FamilyProducts}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={FamilyProducts} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_PRODUCTS}
         element={
-          <PrivateRoute
-            component={Products}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={Products} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_USAGE_REPORT}
         element={
           <PrivateRoute
-            component={UsageReport}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+            component={UsageReport} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_SALES_CADENTIER}
         element={
-          <PrivateRoute
-            component={SalesCadentier}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={SalesCadentier} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
 
@@ -124,72 +97,44 @@ export const useBakeryRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_PRODUCT_MANAGEMENT}
         element={
-          <PrivateRoute
-            component={ProductManagement}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={ProductManagement} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
 
       <Route
         path={URLS.AUTH_PRODUCTION_MANAGEMENT}
         element={
-          <PrivateRoute
-            component={ProductionManagement}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={ProductionManagement} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_PRODUCTION_MANAGEMENT_PRINT}
         element={
-          <PrivateRoute
-            component={ProductionManagementPrint}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={ProductionManagementPrint} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_STORE_GROWTH_COEFFICIENT}
         element={
-          <PrivateRoute
-            component={StoreGrowthCoefficient}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={StoreGrowthCoefficient} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_PRODUCTS_GROWTH_COEFFICIENT}
         element={
-          <PrivateRoute
-            component={ProductsGrowthCoefficient}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={ProductsGrowthCoefficient} applicationPages={applicationPages}checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_REGION_GROWTH_COEFFICIENT}
         element={
-          <PrivateRoute
-            component={RegionGrowthCoefficient}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={RegionGrowthCoefficient} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
         path={URLS.AUTH_APPLICATION_USAGE_REPORT}
         element={
-          <PrivateRoute
-            component={ApplicationUsageReport}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={ApplicationUsageReport} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
       <Route
@@ -208,11 +153,7 @@ export const useBakeryRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_PRODUCT_MANAGEMENT_REGION}
         element={
-          <PrivateRoute
-            component={ProductManagementRegion}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
+          <PrivateRoute component={ProductManagementRegion} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
     </>
