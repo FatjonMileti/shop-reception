@@ -45,7 +45,9 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   const { data: deliveryOptions, isLoading: isDeliveryOptionsLoading } = useQuery(
     ['delivery-options'],
     async () => {
-      const result = await makeCoreGetRequest('/supply-omni/order/delivery-options')
+      const result = await makeCoreGetRequest(
+        '/supply-omni/order/delivery-options?currentOrder=true'
+      )
       const resultOptions = toAsyncSelectOptions(result, 'type', 'description') || []
 
       return resultOptions || []
@@ -81,7 +83,10 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
     }
   })
 
-  const initialValues = useMemo(() => getInitialValues(clientId), [clientId])
+  const initialValues = useMemo(
+    () => getInitialValues(clientId, deliveryOptions?.[0].value),
+    [clientId, deliveryOptions]
+  )
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
 

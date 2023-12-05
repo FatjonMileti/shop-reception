@@ -1,0 +1,56 @@
+import { ImageCell } from 'components/core-ui/ImageCell'
+
+export const columns = [
+  {
+    title: 'Produs',
+    field: 'productName',
+    align: 'left',
+    type: 'string',
+    width: '170px',
+    render: (row: any) => <ImageCell imageUrl={row.imageUrl} value={row.name} />
+  },
+  {
+    title: 'Cod METI',
+    field: 'metiCode',
+    align: 'left',
+    type: 'string',
+    width: '150px'
+  },
+  {
+    title: 'Cod familie',
+    field: 'familyCode',
+    align: 'left',
+    type: 'string',
+    width: '150px'
+  },
+  {
+    title: 'Coeficient general',
+    field: 'generalGrowth',
+    align: 'left',
+    type: 'string',
+    width: '200px'
+  },
+  {
+    title: 'Ultima actualizare',
+    field: 'username',
+    align: 'left',
+    type: 'string',
+    width: '200px'
+  },
+  {
+    title: 'Ultima modificare',
+    field: 'lastChange',
+    align: 'left',
+    type: 'date',
+    width: '200px'
+  },
+  {
+    title: 'Coeficient',
+    field: 'growth',
+    align: 'left',
+    type: 'string',
+    width: '200px',
+    disableSorting: true,
+    isGroup: true
+  }
+]

@@ -10,6 +10,28 @@ import { DeliverySlipsList } from './DeliverySlipsList'
 import { SupportWrongDestination } from './SupportWrongDestination'
 import { UnorderedProducts } from './UnorderedProducts'
 import { MetiFiles } from './MetiFiles'
+import { DifferencesProducts } from './DifferencesProducts'
+import { SupportTradability } from './SupportTradability'
+import { AdminDeposit } from './AdminDeposit'
+import { AdminHub } from './AdminHub'
+import { AdminStore } from './AdminStore'
+import { AdminRegions } from './AdminRegions'
+import { ManageScanTypes } from './ManageScanTypes'
+import SubFamilyValidityThreshold from './SubFamilyValidityThreshold/SubFamilyValidityThreshold'
+import { MetiProducts } from './MetiProducts'
+import { SensitiveProducts } from './SensitiveProducts'
+import { PackingTypes } from './PackingTypes'
+import { DLCProducts } from './DLCProducts'
+import { ReceptionFiles } from './ReceptionFiles'
+import { CentralizeStoresHub } from './CentralizeStoresHub'
+import { ReturnTruckList } from './ReturnTruckList'
+import { RollingPackages } from './RollingPackages'
+import BalancePackages from './BalancePackages/BalancePackages'
+import PackagingDisputes from './PackagingDisputes/PackagingDisputes'
+import PackagingTypesDifferences from './PackagingTypesDifferences/PackagingTypesDifferences'
+import ReturnedPackaging from './ReturnedPackaging/ReturnedPackaging'
+import PackagingCompliance from './PackagingCompliance/PackagingCompliance'
+import PackagingDisputesTimer from './PackagingDisputesTimer/PackagingDisputesTimer'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -49,6 +71,94 @@ export const useShopReceptionRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_METI_FILES}
         element={<MetiFiles />}
+      />
+      <Route
+        path={URLS.AUTH_DIFFERENCES_PRODUCTS}
+        element={<DifferencesProducts />}
+      />
+      <Route
+        path={URLS.AUTH_SUPPORT_TRADABILITY}
+        element={<SupportTradability />}
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_DEPOSIT}
+        element={<AdminDeposit />}
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_HUB}
+        element={<AdminHub />}
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_STORE}
+        element={<AdminStore />}
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_REGIONS}
+        element={<AdminRegions />}
+      />
+      <Route
+        path={URLS.AUTH_MANAGE_SCAN_TYPES}
+        element={<ManageScanTypes />}
+      />
+      <Route
+        path={URLS.AUTH_SUBFAMILY_VALIDITY_THRESHOLD}
+        element={<SubFamilyValidityThreshold />}
+      />
+      <Route
+        path={URLS.AUTH_METI_PRODUCTS}
+        element={<MetiProducts />}
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_SENSITIVE_PRODUCTS}
+        element={<SensitiveProducts />}
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_PACKING_TYPES}
+        element={<PackingTypes />}
+      />
+      <Route
+        path={URLS.AUTH_MANAGE_DLC_PRODUCTS}
+        element={<DLCProducts />}
+      />
+      <Route
+        path={URLS.AUTH_RECEPTION_FILES_INFO}
+        element={<ReceptionFiles />}
+      />
+      <Route
+        path={URLS.AUTH_CENTRALIZATION_STORES_HUB}
+        element={<CentralizeStoresHub />}
+      />
+      <Route
+        path={URLS.AUTH_RETURN_TRUCK_LIST}
+        element={<ReturnTruckList />}
+      />
+      <Route
+        path={URLS.AUTH_ROLLING_PACKAGES}
+        element={<RollingPackages />}
+      />
+      <Route
+        path={URLS.AUTH_BALANCE_PACKAGING}
+        element={<BalancePackages />}
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS}
+        element={<PackagingDisputes />}
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_TYPES_DIFFERENCES}
+        element={<PackagingTypesDifferences />}
+      />
+      <Route
+        path={URLS.AUTH_RETURNED_PACKAGING}
+        element={<ReturnedPackaging />}
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_COMPLIANCE}
+        element={<PackagingCompliance />}
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION}
+        element={<PackagingDisputesTimer />}
       />
     </>
   )

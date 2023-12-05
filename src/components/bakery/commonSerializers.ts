@@ -11,3 +11,9 @@ export const toAsyncSelectOptions = (data, valueKey, labelKey) =>
     value: get(item, valueKey),
     label: toAsyncSelectLabel(item, labelKey)
 }))
+
+export const toStoreFilterItems = items =>
+  items.map(item => ({
+    label: item.name || '',
+    value: item.id || ''
+  }))

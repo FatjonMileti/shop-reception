@@ -10,11 +10,16 @@ import { Clusters } from './Clusters'
 import { Families } from './Families'
 import { FamilyProducts } from './Families/FamilyProducts'
 import { Products } from './Products'
+import { SalesCadentier } from './SalesCadentier'
 import { ProductManagementRegion } from './RegionManagerRole/ProductManagementRegion'
 import { UsageReport } from './UsageReport'
 import { ProductManagement } from './TraineeRole/ProductManagement'
 import { ProductionManagement } from './TraineeRole/ProductionManagement'
 import { ProductionManagementPrint } from './TraineeRole/ProductionManagementPrint'
+import { StoreGrowthCoefficient } from './TraineeRole/StoreGrowthCoefficient'
+import { ProductsGrowthCoefficient } from './TraineeRole/ProductsGrowthCoefficient'
+import { RegionGrowthCoefficient } from './TraineeRole/RegionGrowthCoefficient'
+import { ApplicationUsageReport } from './TraineeRole/ApplicationUsageReport'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -100,7 +105,17 @@ export const useBakeryRoutes = applicationPages => {
             component={UsageReport}
             applicationPages={applicationPages}
             checkIsAuthorized
-        />
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_SALES_CADENTIER}
+        element={
+          <PrivateRoute
+            component={SalesCadentier}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
 
@@ -115,6 +130,7 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
+
       <Route
         path={URLS.AUTH_PRODUCTION_MANAGEMENT}
         element={
@@ -135,7 +151,48 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
-      
+      <Route
+        path={URLS.AUTH_STORE_GROWTH_COEFFICIENT}
+        element={
+          <PrivateRoute
+            component={StoreGrowthCoefficient}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PRODUCTS_GROWTH_COEFFICIENT}
+        element={
+          <PrivateRoute
+            component={ProductsGrowthCoefficient}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_REGION_GROWTH_COEFFICIENT}
+        element={
+          <PrivateRoute
+            component={RegionGrowthCoefficient}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_APPLICATION_USAGE_REPORT}
+        element={
+          <PrivateRoute
+            component={ApplicationUsageReport}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+
 
       {/* region manager role */}
       <Route
