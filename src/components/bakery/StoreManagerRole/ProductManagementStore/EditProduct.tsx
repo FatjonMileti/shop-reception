@@ -8,7 +8,7 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { ProductItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
-import { getInitialValues } from './helpers'
+import { editStoreValidationSchema, getInitialValues } from './helpers'
 import { ChangeEvent, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
@@ -51,7 +51,7 @@ export const EditProduct: React.FC<EditProductProps> = props => {
       await makeCorePutRequest(`/bakery/product/${editProductId}`, values)
     },
     {
-      onSuccess: res => {
+      onSuccess: () => {
         setShouldRefreshData(true)
         closeModal()
         showNotification({
@@ -72,6 +72,7 @@ export const EditProduct: React.FC<EditProductProps> = props => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: initialValues,
+    validationSchema: editStoreValidationSchema,
     onSubmit: async (values: any, { resetForm }) => {
       editProductMutation.mutate(values)
       resetForm()
@@ -123,6 +124,8 @@ export const EditProduct: React.FC<EditProductProps> = props => {
                       (event.target as HTMLInputElement).value
                     )
                   }}
+                  error={!!formik.errors.scheduleProduct}
+                  helperText={formik.errors.scheduleProduct as string}
                 />
               </Grid>
 
@@ -137,6 +140,8 @@ export const EditProduct: React.FC<EditProductProps> = props => {
                   onChange={(event: ChangeEvent<HTMLInputElement>) =>
                     formik.setFieldValue('minStock', event.currentTarget.value)
                   }
+                  error={!!formik.errors.minStock}
+                  helperText={formik.errors.minStock as string}
                 />
               </Grid>
             </Grid>

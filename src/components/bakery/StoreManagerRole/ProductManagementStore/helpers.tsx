@@ -1,6 +1,7 @@
 import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { DescriptionText } from 'components/core-ui/DescriptionText'
 import { ImageCell } from 'components/core-ui/ImageCell'
+import * as Yup from 'yup'
 
 export const columns = [
   {
@@ -130,3 +131,8 @@ export const getInitialValues = editItem => ({
   scheduleProduct: editItem?.scheduleProduct ?? '',
   minStock: editItem?.minStock ?? ''
 })
+
+export const editStoreValidationSchema = Yup.object().shape({
+  minStock: Yup.string(),
+  scheduleProduct: Yup.string()
+});

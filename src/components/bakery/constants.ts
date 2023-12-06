@@ -21,7 +21,7 @@ export const URLS = {
   AUTH_APPLICATION_USAGE_REPORT: 'bakery/formator/usage-report-formator',
 
   /* Store manager role */
-  AUTH_PRODUCT_MANAGEMENT_STORE : '/bakery/store-management/product-management',
+  AUTH_PRODUCT_MANAGEMENT_STORE : '/bakery/storeManager/product-management',
 
   /* Region manager role */
   AUTH_PRODUCT_MANAGEMENT_REGION: 'bakery/regionManager/product-management-region',
