@@ -23,7 +23,11 @@ const TaskAllocation = () => {
     ['departments'],
     async () => {
       const result = await makeCoreGetRequest('/volumetry/department')
-      return toDepartmentOptions(result.list)
+      const departmentOptions = toDepartmentOptions(result.list)
+
+      setDepartmentFilterValue(departmentOptions[0])
+
+      return departmentOptions
     },
     {
       onError: error => {
