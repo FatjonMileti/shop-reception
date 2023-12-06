@@ -40,7 +40,8 @@ VALUES
     -- Supply OMNI
     (6, 'Supply OMNI', 'DonutLargeTwoTone', '/supplyOmni', true, 3),
     -- Volumetry
-    (7, 'Administrare Angajati', 'UsersManagement', '/employeeManagement', true, 4);
+    (7, 'Administrare Angajati', 'UsersManagement', '/employeeManagement', true, 4),
+    (8, 'Administrare Task-uri', 'UsersManagement', '/tasksManagement', true, 4);
 
 
 -- activity with submodule id
@@ -92,7 +93,9 @@ VALUES
     (40, 'Vanzarile mele', 'StackedBarChartOutlined', null, true, 6),
     (41, 'Comenzi achitate', 'AccountBalance', null, true, 6),
     -- Volumetry
-    (42, 'Management Angajati', 'UsersManagement', null, true, 7);
+    (42, 'Management Angajati', 'UsersManagement', null, true, 7),
+    (43, 'Management Task-uri', 'UsersManagement', null, true, 8),
+    (44, 'Alocare Task-uri', 'UsersManagement', null, true, 8);
 
 
 -- screen with activity id (some are first screens)
@@ -163,7 +166,9 @@ VALUES
     (56, 'Comenzi achitate', '', '/supplyOmni/bills', true, 41, true),
     (57, 'PDF factura', '', '/supplyOmni/bills/:id', true, 41, false),
     -- Volumetry
-    (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true);
+    (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true),
+    (59, 'Management task-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
+    (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true);
 
 
 -- UI Schema with activity id and screen id
@@ -286,7 +291,9 @@ VALUES
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
     --Volumetry
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
-    (1, 42);
+    (1, 42),
+    (1, 43),
+    (1, 44);
 
 
 -- reset sequences
