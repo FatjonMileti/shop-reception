@@ -1,4 +1,6 @@
-const HomeMenuBackground = () => (
+import React from 'react'
+
+const HomeMenu: React.FC = () => (
   <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect
       y="0.5"
@@ -28,4 +30,4 @@ const HomeMenuBackground = () => (
   </svg>
 )
 
-export default HomeMenuBackground
+export default HomeMenu

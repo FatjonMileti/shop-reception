@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GroupVolumetry: React.FC = () => (
+const GroupVolumetryHome: React.FC = () => (
   <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="70" height="70" rx="14.5455" fill="url(#paint0_linear_555_29622)" />
     <path
@@ -35,4 +35,4 @@ const GroupVolumetry: React.FC = () => (
   </svg>
 )
 
-export default GroupVolumetry
+export default GroupVolumetryHome

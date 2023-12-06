@@ -1,6 +1,6 @@
 import React from 'react'
 
-const IconUsersMenuBackground: React.FC = () => (
+const UsersMenu: React.FC = () => (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect
       width="32"
@@ -41,4 +41,4 @@ const IconUsersMenuBackground: React.FC = () => (
   </svg>
 )
 
-export default IconUsersMenuBackground
+export default UsersMenu

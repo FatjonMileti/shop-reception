@@ -1,6 +1,6 @@
 import React from 'react'
 
-const IconFileBackground: React.FC = () => (
+const ReportsVolumetryMenu: React.FC = () => (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect
       width="32"
@@ -29,4 +29,4 @@ const IconFileBackground: React.FC = () => (
   </svg>
 )
 
-export default IconFileBackground
+export default ReportsVolumetryMenu

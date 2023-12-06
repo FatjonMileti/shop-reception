@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AssignmentVolumetry: React.FC = () => (
+const ReportsVolumetryHome: React.FC = () => (
   <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="70" height="70" rx="14.5455" fill="url(#paint0_linear_555_29630)" />
     <g clip-path="url(#clip0_555_29630)">
@@ -36,4 +36,4 @@ const AssignmentVolumetry: React.FC = () => (
   </svg>
 )
 
-export default AssignmentVolumetry
+export default ReportsVolumetryHome

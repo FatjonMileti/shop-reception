@@ -1,7 +1,7 @@
 import React from 'react'
 
-const name: React.FC = () => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+const ListVolumetryMenu: React.FC = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect
       width="32"
       height="32"
@@ -29,4 +29,4 @@ const name: React.FC = () => (
   </svg>
 )
 
-export default name
+export default ListVolumetryMenu

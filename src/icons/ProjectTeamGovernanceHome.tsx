@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProjectTeamGovernance: React.FC = () => (
+const ProjectTeamGovernanceHome: React.FC = () => (
   <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="70" height="70" rx="14.5455" fill="url(#paint0_linear_984_19461)" />
     <path
@@ -43,4 +43,4 @@ const ProjectTeamGovernance: React.FC = () => (
   </svg>
 )
 
-export default ProjectTeamGovernance
+export default ProjectTeamGovernanceHome
