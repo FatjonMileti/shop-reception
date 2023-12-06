@@ -58,7 +58,7 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
         {
           onError: error => {
             showNotification({
-              message: `A aparut o eroare la obtinerea detaliilor familiei. ${formatErrorMessage(
+              message: `Error while fetching family data. ${formatErrorMessage(
                 error
               )}`,
               type: 'error'
