@@ -36,10 +36,10 @@ const Tabs = (props: TabsProps) => {
       tabsContainerStyle={{
         borderBottom: 1,
         borderColor: '#E5E5E5',
-        margin: isXs ? '18px 12px 0' : '36px 24px 0'
+        margin: isXs ? '18px 12px 0' : '36px 0 0'
       }}
       tabContentBoxStyle={{ padding: '0' }}
-      tabsStyle={{ fontSize: isXs ? '0.8rem !important' : '1rem' }}
+      tabsStyle={{ fontSize: isXs ? '1rem !important' : '1rem', textTransform:'none' }}
     />
   )
 }

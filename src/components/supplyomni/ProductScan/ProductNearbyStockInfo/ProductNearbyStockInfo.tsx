@@ -1,7 +1,8 @@
-import { Box } from '@mui/material'
-import { Accordion, Typography, Table } from '@fullscreendigital/carrefour-dex-fe'
+import { Box, Typography } from '@mui/material'
+import { Table, Accordion } from '@fullscreendigital/carrefour-dex-fe'
 import s from './ProductNearbyStockInfo.modules.scss'
 import { NeighboursStock } from '../interfaces'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface ProductNearbyStockInfoProps {
   neighboursStock: NeighboursStock[]
@@ -11,7 +12,7 @@ const ProductNearbyStockInfo: React.FC<ProductNearbyStockInfoProps> = props => {
   const { neighboursStock } = props
 
   return (
-    <Box className={s.productTab}>
+    <Box className={s.productTab} style={{marginLeft:0, marginRight:0, borderRadius:'8px'}}>
       <Box className={s.neighboursBox}>
         <Accordion
           summary={
