@@ -8,5 +8,5 @@ export const toListTableRows = items =>
     id: item.id,
     summary: <TaskSummary item={item} />,
     details: <TaskDescription item={item} />,
-    borderLeftColor: 'red'
+    borderLeftColor: '#0970E6'
   }))
