@@ -1,0 +1,36 @@
+.capsuleContainer {
+  display: flex;
+  padding-left: 4px;
+  align-items: center;
+  gap: 4px;
+  border-radius: 2px;
+  background: rgba(0, 79, 155, 0.15);
+}
+
+.capsuleLabel {
+  color: #052351;
+  font-family: Ubuntu;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.4px;
+}
+
+.capsuleValue {
+  display: flex;
+  padding: 0px 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 2px;
+  background: #004f9b;
+
+  color: #fff;
+
+  font-family: Ubuntu;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+}

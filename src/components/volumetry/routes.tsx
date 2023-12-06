@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { URLS } from './constants'
 import { EmployeeManagement } from './EmployeeManagement'
 import { TaskManagement } from './TaskManagement'
+import { TaskAllocation } from './TaskAllocation'
 
 export const useVolumetryRoutes = applicationPages => {
   return (
@@ -22,6 +23,16 @@ export const useVolumetryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={TaskManagement}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_TASK_ALLOCATION}
+        element={
+          <PrivateRoute
+            component={TaskAllocation}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
