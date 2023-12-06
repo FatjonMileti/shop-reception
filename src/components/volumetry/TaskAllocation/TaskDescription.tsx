@@ -24,7 +24,7 @@ const TaskDescription = item => {
           variant="contained"
           label="Selecteaza angajat"
           onClick={() => openModal()}
-          style={{ borderRadius: '100px', textTransform: 'none' }}
+          style={{ textTransform: 'none' }}
         />
       </Grid>
 
