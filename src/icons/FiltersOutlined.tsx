@@ -1,11 +1,6 @@
-{
-  /* <svg width="38" height="24" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-</svg> */
-}
-
 import React from 'react'
 
-const IconArrowLeft: React.FC = () => (
+const FiltersOutlined: React.FC = () => (
   <svg width="38" height="24" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="0.5" y="0.5" width="37" height="23" rx="11.5" stroke="#0970E6" />
     <path
@@ -15,4 +10,4 @@ const IconArrowLeft: React.FC = () => (
   </svg>
 )
 
-export default IconArrowLeft
+export default FiltersOutlined
