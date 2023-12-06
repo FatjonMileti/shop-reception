@@ -20,6 +20,8 @@ import { StoreGrowthCoefficient } from './TraineeRole/StoreGrowthCoefficient'
 import { ProductsGrowthCoefficient } from './TraineeRole/ProductsGrowthCoefficient'
 import { ApplicationUsageReport } from './TraineeRole/ApplicationUsageReport'
 
+import { ProductManagementStore } from './StoreManagerRole/ProductManagementStore'
+
 export const useBakeryRoutes = applicationPages => {
   return (
     <>
@@ -104,7 +106,7 @@ export const useBakeryRoutes = applicationPages => {
             component={UsageReport}
             applicationPages={applicationPages}
             checkIsAuthorized
-        />
+          />
         }
       />
       <Route
@@ -114,11 +116,10 @@ export const useBakeryRoutes = applicationPages => {
             component={SalesCadentier}
             applicationPages={applicationPages}
             checkIsAuthorized
-        />
+          />
         }
       />
 
-      
       {/* Formator */}
       <Route
         path={URLS.AUTH_PRODUCT_MANAGEMENT}
@@ -130,8 +131,7 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
-     
-      
+
       <Route
         path={URLS.AUTH_PRODUCTION_MANAGEMENT}
         element={
@@ -182,7 +182,18 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
-      
+
+      {/* store manager role */}
+      <Route
+        path={URLS.AUTH_PRODUCT_MANAGEMENT_STORE}
+        element={
+          <PrivateRoute
+            component={ProductManagementStore}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
 
       {/* region manager role */}
       <Route

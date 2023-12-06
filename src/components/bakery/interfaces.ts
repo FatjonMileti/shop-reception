@@ -137,7 +137,8 @@ export interface ProductItem {
   pluCode: string | number
   metiCode: string | number
   familyModuleName: string
-  imageUrl: string
+  imageUrl: string,
+  cluster: ClustersItem
 }
 
 export interface SalesCadentierListItem {
