@@ -22,6 +22,8 @@ import { RegionGrowthCoefficient } from './TraineeRole/RegionGrowthCoefficient'
 import { ApplicationUsageReport } from './TraineeRole/ApplicationUsageReport'
 import { CadentierSalesRegion } from './RegionManagerRole/CadentierSalesRegion'
 
+import { ProductManagementStore } from './StoreManagerRole/ProductManagementStore'
+
 export const useBakeryRoutes = applicationPages => {
   return (
     <>
@@ -83,13 +85,20 @@ export const useBakeryRoutes = applicationPages => {
         path={URLS.AUTH_USAGE_REPORT}
         element={
           <PrivateRoute
-            component={UsageReport} applicationPages={applicationPages} checkIsAuthorized />
+            component={UsageReport}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_SALES_CADENTIER}
         element={
-          <PrivateRoute component={SalesCadentier} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={SalesCadentier}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
 
@@ -138,6 +147,17 @@ export const useBakeryRoutes = applicationPages => {
         }
       />
 
+      {/* store manager role */}
+      <Route
+        path={URLS.AUTH_PRODUCT_MANAGEMENT_STORE}
+        element={
+          <PrivateRoute
+            component={ProductManagementStore}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
 
 
       {/* region manager role */}
