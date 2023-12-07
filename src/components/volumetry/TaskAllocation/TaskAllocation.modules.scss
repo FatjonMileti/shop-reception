@@ -1,0 +1,47 @@
+.mainContainer {
+  margin: 24px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+
+  & > div {
+    margin: 0;
+  }
+}
+
+.departmentName {
+  color: #0970e6;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 16px;
+}
+
+.taskName {
+  color: #052351;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.modalButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+
+  button {
+    height: 42px;
+    flex: 1;
+
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+
+    text-align: center;
+    text-transform: uppercase;
+  }
+}

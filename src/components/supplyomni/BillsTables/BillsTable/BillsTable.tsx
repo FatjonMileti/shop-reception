@@ -1,6 +1,7 @@
 import { Checkbox } from '@fullscreendigital/carrefour-dex-fe'
-import { Box, Grid, Switch } from '@mui/material'
+import { Box, Grid, Switch, FormControlLabel, useMediaQuery } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { FilterDataSelect } from 'components/core-ui/FilterDataSelect'
 import { Table } from 'components/core-ui/Table'
 import { Filter } from 'components/core-ui/Table/TableDefinitions'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -48,11 +49,13 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
   const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(null)
   const [withMyOrders, setWithMyOrders] = useState(true)
 
+  const isXs = useMediaQuery('(max-width:624px)')
+
   const openPrepareOrderModal = (): void => setIsPrepareOrderModalOpen(true)
   const closePrepareOrderModal = (): void => setIsPrepareOrderModalOpen(false)
 
   const handleDeliveryOptionFilterChange = (value): void => {
-    setSelectedDeliveryOption(value)
+    setSelectedDeliveryOption(value || null)
     setShouldRefreshData(true)
   }
 
@@ -128,7 +131,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
       const result = (await makeCoreGetRequest(
         '/supply-omni/order/delivery-options'
       )) as DeliveryOptionModel[]
-      return result.map(item => ({ label: item.description, value: item.type }))
+      return result.map(item => ({ label: item.description, value: item.type }));
     },
     {
       onError: error => {
@@ -194,30 +197,41 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           setShouldRefreshData={setShouldRefreshData}
         />
         {deliveryTypeOptions && (
-          <Grid container>
-            <Grid xs={12} md={3} item>
-              <Checkbox
+          <Grid sx={isXs ? {} : {position:'absolute', width:'50%', zIndex:3}} container>
+            
+            <Grid xs={12} sm={6} md={6} lg={6} item>
+              {/* <Checkbox
                 style={{ paddingTop: '0.7rem' }}
                 label="Comenzile mele"
                 checked={withMyOrders}
                 onChange={event => handleWithMyOrdersFilterChange(event.target.checked)}
-              />
+              /> */}
+
+              <FormControlLabel name="my_orders" label="Comenzile mele" sx={{color:'#052351'}} control={
+                  <Switch checked={withMyOrders} onChange={event => handleWithMyOrdersFilterChange(event.target.checked)} />
+              } />
             </Grid>
-            <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
+            <Grid xs={12} sm={6} md={6} lg={6} item>
+              <FilterDataSelect name={'deliveryTypes'} allTypesLabel="Toate tipurile" placeholderButton={'Tip livrare'} selectedData={selectedDeliveryOption} options={deliveryTypeOptions} showSearch={false} showCounter={false} onSelect={handleDeliveryOptionFilterChange} />
+              {/* <AsyncAutocomplete
                 variant="standard"
                 name="deliveryTypes"
                 label="Tip livrare"
                 value={selectedDeliveryOption}
                 options={deliveryTypeOptions}
                 onChange={handleDeliveryOptionFilterChange}
-              />
+              /> */}
             </Grid>
           </Grid>
         )}
+
+          
+
         <Table
           hideCheckbox
           order="desc"
+          showCounter={isXs}
+          counterLabel={isXs ? "Total comenzi" : undefined}
           orderBy="creationDate"
           columns={columnsWithActions}
           items={tableItems}
@@ -230,6 +244,8 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
         />
+      
+
       </Box>
     </div>
   )
