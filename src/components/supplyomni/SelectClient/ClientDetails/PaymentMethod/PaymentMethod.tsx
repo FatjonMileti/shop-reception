@@ -103,10 +103,6 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   return (
     <Grid item xs={12} md={6}>
       <Paper>
-        {(isPaymentOptionsLoading || isDeliveryOptionsLoading || isLoadingAddOrder) && (
-          <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-        )}
-
         <Box padding={4} sx={{ display: 'flex', alignItems: 'center' }}>
           <PaymentsOutlinedIcon />
           <Typography variant="h6" fontWeight={600} ml={2}>
@@ -169,10 +165,20 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
             />
           </Grid>
           <Grid container p={4} justifyContent="flex-end">
-            <Grid item>
-              <Button variant="contained" label={''} onClick={() => formik.handleSubmit()}>
-                <PictureAsPdfOutlinedIcon /> PROFORMA IN FORMAT PDF
-              </Button>
+            <Grid item xs={12}>
+              <div style={{ display: 'flex', justifyContent: 'right' }}>
+                {isLoadingAddOrder && (
+                  <CircularProgress color="primary" disableShrink style={{ marginRight: '16px' }} />
+                )}
+                <Button
+                  variant="contained"
+                  label={''}
+                  onClick={() => formik.handleSubmit()}
+                  disabled={isLoadingAddOrder}
+                >
+                  <PictureAsPdfOutlinedIcon /> PROFORMA IN FORMAT PDF
+                </Button>
+              </div>
             </Grid>
           </Grid>
         </Grid>

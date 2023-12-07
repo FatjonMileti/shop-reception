@@ -37,7 +37,9 @@ const FilterDataSelect = (props: FilterDataSelectProps) => {
 
   useEffect(() => {
     if (props.options) {
-      setOptions(props.options);
+      let crtOptions = props.options;
+      if(props.allTypesLabel) crtOptions = [{ label: props.allTypesLabel, value: '' }, ...props.options];
+      setOptions(crtOptions);
     }
   }, [props.options?.length]);
 
@@ -48,14 +50,17 @@ const FilterDataSelect = (props: FilterDataSelectProps) => {
       });
       setOptions(filteredData);
     } else if (props.options) {
-      setOptions(props.options);
+      let crtOptions = props.options;
+      if(props.allTypesLabel) crtOptions = [{ label: props.allTypesLabel, value: '' }, ...props.options];
+      setOptions(crtOptions);
     } 
   }, [searchValue]);
 
   const getList = () => {
+    
       return  <List dense={true} sx={{ minWidth:400 }}>
-        { options?.length > 0 && options.map((item:any) => {
-          return <StyledListItem className={ selectedData?.value == item.value ? 'selectedItem' : '' } onClick={ev => {  props.onSelect(item); setOpen(false);  }}>
+        { options?.length > 0 && options.map((item:any, index:any) => {
+          return <StyledListItem key={'ddlst'+index} className={ selectedData?.value == item.value ? 'selectedItem' : '' } onClick={ev => {  props.onSelect(item); setOpen(false);  }}>
             {item.label}
           </StyledListItem>
           })
@@ -119,7 +124,7 @@ const FilterDataSelect = (props: FilterDataSelectProps) => {
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
             >
-              {selectedData?.label ? selectedData?.label : 'N/A'}
+              {selectedData?.label || props.placeholderButton || 'Select'}
             </StyledButton>
         </Box>
       </Stack>
