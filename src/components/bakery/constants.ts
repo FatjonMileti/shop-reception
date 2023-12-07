@@ -19,6 +19,7 @@ export const URLS = {
   AUTH_PRODUCTS_GROWTH_COEFFICIENT: 'bakery/formator/growth-index-formator',
   AUTH_REGION_GROWTH_COEFFICIENT: 'bakery/formator/growth-region-formator',
   AUTH_APPLICATION_USAGE_REPORT: 'bakery/formator/usage-report-formator',
+  AUTH_CADENTIER_REPORT_AND_SALES: 'bakery/formator/sales-cadentier-formator',
 
   /* Store manager role */
   AUTH_PRODUCT_MANAGEMENT_STORE : '/bakery/storeManager/product-management',
