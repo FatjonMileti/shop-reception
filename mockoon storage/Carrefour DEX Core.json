@@ -4853,6 +4853,40 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "3e00012b-3320-48c5-94de-35ba1a002e50",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/taskAllocation/details/:id",
+      "responses": [
+        {
+          "uuid": "ec8ef1a0-f23f-4a51-8237-803d5c646b39",
+          "body": "{\n  \"list\": [\n    {\n      \"employee\": {\n        \"name\": \"Florin Avramescu\",\n        \"id\": 0\n      },\n      \"startTime\": {\n        \"isStarted\": false,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"10:30\"\n      },\n      \"volume\": {\n        \"value\": 4,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 0\n    },\n    {\n      \"employee\": {\n        \"name\": \"Ioana Alexandra Stamate\",\n        \"id\": 1\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 40\n    },\n    {\n      \"employee\": {\n        \"name\": \"Florina Toma\",\n        \"id\": 2\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": true,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"customText\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \"\n    },\n    {\n      \"employee\": {\n        \"name\": \"Diana Vasilescu\",\n        \"id\": 3\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"isOverdue\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5051,6 +5085,10 @@
     {
       "type": "route",
       "uuid": "d062937f-4849-4ed5-809e-16cd598a5e16"
+    },
+    {
+      "type": "route",
+      "uuid": "3e00012b-3320-48c5-94de-35ba1a002e50"
     }
   ],
   "proxyMode": false,
