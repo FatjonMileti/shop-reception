@@ -38,6 +38,8 @@ const DynamicTable = props => {
                 collapsible: true,
                 title: `${col.title} ${formattedDate}`,
                 field: `applicationReportDynamicDtos.[${datesArray.length}].${col.field}`,
+                originalField: col.field,
+                find: { date: currentDate.format('YYYY-MM-DD') },
                 disableSorting: true,
               }
               datesArray.push(newColumn)
