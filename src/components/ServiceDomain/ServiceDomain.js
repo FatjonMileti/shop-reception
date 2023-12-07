@@ -2,6 +2,7 @@ import { Divider, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Box, CircularProgress, Paper } from '@mui/material'
 import BackButton from 'components/core-ui/BackButtonTitle/BackButton/BackButton'
 import { Icon } from 'components/core-ui/Icon'
+import { Icon_v2 } from 'components/core-ui/Icon_v2'
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import s from './ServiceDomain.scss'
@@ -63,9 +64,10 @@ const ServiceDomain = ({
                   onClick={() => navigate(app.route.url)}
                   className={s.applicationContainer}
                 >
-                  <div className={s.iconContainer}>
-                    <Icon iconName={app.icon} fill="white" />
-                  </div>
+                  {/* <div className={s.iconContainer}> */}
+                  {/* <Icon iconName={app.icon} fill="white" /> */}
+                  <Icon_v2 iconName={app.icon} iconType="Subcategory" />
+                  {/* </div> */}
                   <span className={s.applicationName}>{app.name}</span>
                 </div>
               ))}

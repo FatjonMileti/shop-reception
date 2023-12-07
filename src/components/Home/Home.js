@@ -1,16 +1,15 @@
-import { useNavigate } from 'react-router-dom'
 import {
   Accordion,
   Salutation,
   Typography,
   WeatherWidget
 } from '@fullscreendigital/carrefour-dex-fe'
+import { Box, CircularProgress } from '@mui/material'
 import { Icon } from 'components/core-ui/Icon'
-import { Box } from '@mui/material'
-import s from '../ServiceDomain/ServiceDomain.scss'
 import { useGetLocation } from 'hooks'
-import { CircularProgress } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import { getUserFirstName } from '../../utils/authService'
+import s from '../ServiceDomain/ServiceDomain.scss'
 
 const Home = ({ modules, setSubdomainId }) => {
   const navigate = useNavigate()
