@@ -10,6 +10,7 @@ import { useGetLocation } from 'hooks'
 import { useNavigate } from 'react-router-dom'
 import { getUserFirstName } from '../../utils/authService'
 import s from '../ServiceDomain/ServiceDomain.scss'
+import { Icon_v2 } from 'components/core-ui/Icon_v2'
 
 const Home = ({ modules, setSubdomainId }) => {
   const navigate = useNavigate()
@@ -52,9 +53,7 @@ const Home = ({ modules, setSubdomainId }) => {
                       }}
                       className={s.applicationContainer}
                     >
-                      <div className={s.iconContainer}>
-                        <Icon iconName={app.icon} fill="white" />
-                      </div>
+                      <Icon_v2 iconName={app.icon} iconType="Home" />
                       <span className={s.applicationName}>{app.name}</span>
                     </div>
                   ))}
