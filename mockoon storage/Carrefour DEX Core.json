@@ -4790,6 +4790,69 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "3ad38cf2-eb48-430c-b6b7-a463ada8ec22",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/taskAllocation",
+      "responses": [
+        {
+          "uuid": "556eb651-5b3c-4cbb-8370-b14a17045d57",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    },\n    {\n      \"id\": 2,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"112233Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "d062937f-4849-4ed5-809e-16cd598a5e16",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "volumetry/taskAllocation/assignEmployee",
+      "responses": [
+        {
+          "uuid": "75f762e8-77fa-405b-9a1f-5705dab4a7c5",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4980,6 +5043,14 @@
     {
       "type": "route",
       "uuid": "cbc28fa3-ee8e-42bf-9d89-e860525de038"
+    },
+    {
+      "type": "route",
+      "uuid": "3ad38cf2-eb48-430c-b6b7-a463ada8ec22"
+    },
+    {
+      "type": "route",
+      "uuid": "d062937f-4849-4ed5-809e-16cd598a5e16"
     }
   ],
   "proxyMode": false,
