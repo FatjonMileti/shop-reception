@@ -22,6 +22,7 @@ import { RegionGrowthCoefficient } from './TraineeRole/RegionGrowthCoefficient'
 import { ApplicationUsageReport } from './TraineeRole/ApplicationUsageReport'
 
 import { ProductManagementStore } from './StoreManagerRole/ProductManagementStore'
+import { UsageReportRegion } from './RegionManagerRole/UsageReportRegion'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -164,6 +165,12 @@ export const useBakeryRoutes = applicationPages => {
         path={URLS.AUTH_PRODUCT_MANAGEMENT_REGION}
         element={
           <PrivateRoute component={ProductManagementRegion} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_USAGE_REPORT_REGION}
+        element={
+          <PrivateRoute component={UsageReportRegion} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
     </>
