@@ -32,7 +32,7 @@ const ApplicationUsageReport = () => {
   const { data: storesFilterOptions, isLoading: isStoresFilterOptionsLoading } = useQuery(
     ['store'],
     async () => {
-      const result = await makeCoreGetRequest('/bakery/store/all')
+      const result = await makeCoreGetRequest('/bakery/store/trainee/all')
 
       return toStoreFilterItems(result) || []
     },
@@ -51,7 +51,7 @@ const ApplicationUsageReport = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/report/application',
+          url: '/bakery/report/trainee/application',
           filters: [
             { name: 'storeName', value: storeFilterValue.map(val => val.value) },
             { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
