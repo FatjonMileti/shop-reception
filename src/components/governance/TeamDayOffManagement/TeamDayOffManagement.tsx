@@ -1,6 +1,5 @@
 import { Add } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
-// import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { FilterDataSelect } from 'components/core-ui/FilterDataSelect'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
@@ -206,16 +205,6 @@ const TeamDayOffManagement = () => {
               options={domainFilterOptions}
               onSelect={handleFilterChange}
             />
-            {/* <AsyncAutocomplete
-              applyCustomStyle
-              variant="outlined"
-              name="teamMember.domain"
-              label="Domain"
-              disableClearable
-              value={domainFilterValue}
-              options={domainFilterOptions}
-              onChange={handleFilterChange}
-            /> */}
           </Grid>
         )}
       </Grid>
