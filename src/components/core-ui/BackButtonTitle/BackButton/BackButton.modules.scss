@@ -6,3 +6,17 @@
   font-weight: 700;
   line-height: 1.5rem;
 }
+
+.arrowStyles {
+  margin: 24px 80px 0 0;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+.absoluteArrowStyles {
+  position: absolute;
+  left: 8px;
+  top: 11px;
+  z-index: 1;
+}
