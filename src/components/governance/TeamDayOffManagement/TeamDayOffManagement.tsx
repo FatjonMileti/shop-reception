@@ -1,6 +1,6 @@
 import { Add } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
-// import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete' 
+// import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { FilterDataSelect } from 'components/core-ui/FilterDataSelect'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
@@ -20,6 +20,7 @@ import { columns } from './helpers'
 import { toTableRowItems } from './serializers'
 import { RootState } from 'configureStore'
 import { useSelector } from 'react-redux'
+import { DeleteActionHome, EditActionHome } from 'icons'
 
 const TeamDayOffManagement = () => {
   const { dispatchFetchDomains } = useGovernanceDomains()
@@ -105,6 +106,7 @@ const TeamDayOffManagement = () => {
           label: 'Edit',
           labelColor: 'white',
           typographyVariant: 'medium',
+          desktopIcon: <EditActionHome />,
           backgroundColor: '#0970E6',
           onClick: (e, rowId) => selectRow(rowId, 'edit')
         },
@@ -113,6 +115,7 @@ const TeamDayOffManagement = () => {
           labelColor: 'white',
           typographyVariant: 'medium',
           backgroundColor: '#CC4010',
+          desktopIcon: <DeleteActionHome />,
           onClick: (e, rowId) => selectRow(rowId, 'delete')
         }
       ]
@@ -185,22 +188,23 @@ const TeamDayOffManagement = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Grid sx={{width:'100%', display:'block'}} container>
+      <Grid sx={{ width: '100%', display: 'block' }} container>
         {!storedGovernanceDomains || isTeamMembersLoading ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
-          <Grid item style={{ display:'block', padding: 0 }}>
-            <FilterDataSelect name="teamMember.domain" 
-                selectedData={domainFilterValue} 
-                label="Domain" 
-                showCounter={true} 
-                showSearch={true} 
-                counterLabel='Select category'
-                noDataFoundLabel='No results!'
-                options={domainFilterOptions} 
-                onSelect={handleFilterChange} 
+          <Grid item style={{ display: 'block', padding: 0 }}>
+            <FilterDataSelect
+              name="teamMember.domain"
+              selectedData={domainFilterValue}
+              label="Domain"
+              showCounter={true}
+              showSearch={true}
+              counterLabel="Select category"
+              noDataFoundLabel="No results!"
+              options={domainFilterOptions}
+              onSelect={handleFilterChange}
             />
             {/* <AsyncAutocomplete
               applyCustomStyle
@@ -212,9 +216,7 @@ const TeamDayOffManagement = () => {
               options={domainFilterOptions}
               onChange={handleFilterChange}
             /> */}
-            
           </Grid>
-       
         )}
       </Grid>
       {domainFilterValue && (

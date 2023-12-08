@@ -1,7 +1,10 @@
 import { Box } from '@mui/system'
 import BackButton from './BackButton/BackButton'
+import s from './BackButton/BackButton.modules.scss'
+
 import { useLocation, useNavigate } from 'react-router'
 import { useMemo } from 'react'
+import cn from 'classnames'
 
 const BackButtonTitle = ({ applicationPages }) => {
   const location = useLocation()
@@ -37,22 +40,12 @@ const BackButtonTitle = ({ applicationPages }) => {
     navigate(-1)
   }
 
-  const arrowStyles = {
-    margin: '24px 80px 0 0',
-    padding: '0 8px',
-    display: 'flex',
-    alignItems: 'center'
-  }
-
-  const absoluteArrowStyles = {
-    position: 'absolute',
-    left: '8px',
-    top: '11px',
-    zIndex: '1'
-  }
-
   return shouldShowBackButton ? (
-    <Box sx={currentName === 'Management task-uri' ? absoluteArrowStyles : arrowStyles}>
+    <Box
+      className={
+        currentName === 'Management task-uri' ? cn(s.absoluteArrowStyles) : cn(s.arrowStyles)
+      }
+    >
       <BackButton text={currentApplicationName} onNavBack={navigateBack}></BackButton>
     </Box>
   ) : null
