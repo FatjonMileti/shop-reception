@@ -1,15 +1,36 @@
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Grid } from '@mui/material'
 import { Capsule } from 'components/core-ui/Capsule'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AssignEmployee from './AssignEmployee'
+import Employee from './Employee'
 
-const TaskDescription = item => {
-  const { frequency, taskName, department } = item.item
+interface TaskDescriptionProps {
+  item: any // TODO: To add type when db schema is defined
+  employees?: any[] // TODO: To add type when db schema is defined
+}
+
+const TaskDescription: React.FC<TaskDescriptionProps> = props => {
+  const { item, employees } = props
+
+  const { frequency, taskName, department } = item.item || item
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   const openModal = (): void => setIsModalOpen(true)
   const closeModal = (): void => setIsModalOpen(false)
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 900)
+    }
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
     <Grid container flexDirection="column">
@@ -19,12 +40,20 @@ const TaskDescription = item => {
         </Grid>
       </Grid>
 
-      <Grid item my={1}>
+      {employees && (
+        <Grid container flexDirection="column" pr={2}>
+          {employees.map(employee => (
+            <Employee employee={employee} />
+          ))}
+        </Grid>
+      )}
+
+      <Grid item my={1} xs={12} style={{ marginRight: '15px' }}>
         <Button
           variant="contained"
           label="Selecteaza angajat"
           onClick={() => openModal()}
-          style={{ textTransform: 'none' }}
+          style={{ textTransform: 'none', width: isMobile ? '100%' : 'auto' }}
         />
       </Grid>
 
