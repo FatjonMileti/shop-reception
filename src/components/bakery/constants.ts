@@ -26,4 +26,6 @@ export const URLS = {
 
   /* Region manager role */
   AUTH_PRODUCT_MANAGEMENT_REGION: 'bakery/regionManager/product-management-region',
+  AUTH_GROWTH_REGION: 'bakery/regionManager/growth-region',
+  AUTH_GROWTH_REGION_PRINT: 'bakery/regionManager/cadentier-region-print',
 }

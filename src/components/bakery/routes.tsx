@@ -16,6 +16,8 @@ import { UsageReport } from './UsageReport'
 import { ProductManagement } from './TraineeRole/ProductManagement'
 import { ProductionManagement } from './TraineeRole/ProductionManagement'
 import { ProductionManagementPrint } from './TraineeRole/ProductionManagementPrint'
+import { GrowthRegion } from './RegionManagerRole/GrowthRegion'
+import { GrowthRegionPrint } from './RegionManagerRole/GrowthRegionPrint'
 import { StoreGrowthCoefficient } from './TraineeRole/StoreGrowthCoefficient'
 import { ProductsGrowthCoefficient } from './TraineeRole/ProductsGrowthCoefficient'
 import { RegionGrowthCoefficient } from './TraineeRole/RegionGrowthCoefficient'
@@ -226,6 +228,18 @@ export const useBakeryRoutes = applicationPages => {
             applicationPages={applicationPages}
             checkIsAuthorized
           />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GROWTH_REGION}
+        element={
+          <PrivateRoute component={GrowthRegion} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GROWTH_REGION_PRINT}
+        element={
+          <PrivateRoute component={GrowthRegionPrint} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
     </>
