@@ -23,6 +23,23 @@ export interface ProductManagementItem {
     imageUrl: string
 }
 
+export interface ApplicationReportDynamicDtosItem {
+    date: Date
+    printCadentier: boolean
+    modifyCadentier: boolean
+    modifyStoreGrowth: boolean
+    modifyProductGrowth: boolean
+    login: boolean
+}
+  
+export interface UsageReportTableItem {
+    storeName: string
+    username: string
+    lastAccess: Date
+    lastChange: Date
+    applicationReportDynamicDtos: ApplicationReportDynamicDtosItem[]
+}
+  
 export interface GrowthIndexItem {
     id: string
     name: string
