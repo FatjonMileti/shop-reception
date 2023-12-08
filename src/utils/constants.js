@@ -10,4 +10,6 @@ export const DRAWER_WIDTH = 400
 
 export const TOKEN_KEY = 'carrefour-dex-id-token'
 
+export const FIREBASE_TOKEN_KEY = 'carrefour-dex-firebase-token'
+
 export const ROLE_ALL = 'all'

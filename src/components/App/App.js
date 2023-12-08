@@ -9,11 +9,11 @@ import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
 import { ThemeProvider } from '@fullscreendigital/carrefour-dex-fe'
 import { createRoute } from './helpers'
-import { makeDesignerGetRequest } from 'utils/api'
+import { makeDesignerGetRequest, makeNotificationsPutRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
-import { oidcConfig } from 'utils/authService'
+import { oidcConfig, getFirebaseToken } from 'utils/authService'
 import { useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
@@ -56,13 +56,30 @@ const App = () => {
   const [isLoadingActivities, setIsLoadingActivities] = useState(false)
   const [hasLoadedActivities, setHasLoadedActivities] = useState(-1) // [~] holds the subdomainId for which the activities were loaded
 
+  const [fbToken, setFbToken] = useState(null)
+
   const { showNotification } = useNotification()
 
-  const [isTokenFound, setTokenFound] = useState(false)
-  getFBToken(setTokenFound)
+  console.log(process.env.FIREBASE_API_KEY)
+
+  useEffect(() => {
+    ;(async () => {
+      await getFBToken(setFbToken)
+    })()
+  }, [])
+
+  useEffect(() => {
+    ;(async () => {
+      if (fbToken && !getFirebaseToken()) {
+        await makeNotificationsPutRequest('/association', {
+          deviceToken: fbToken
+        })
+      }
+    })()
+  }, [fbToken])
+
   onMessageListener()
     .then(payload => {
-      debugger
       showNotification({ message: payload?.notification?.title + payload?.notification?.body })
     })
     .catch(err => console.log('failed: ', err))

@@ -1,8 +1,9 @@
 import { initializeApp } from 'firebase/app'
 import { getMessaging, getToken, onMessage } from 'firebase/messaging'
+import { removeFirebaseToken, setFirebaseToken } from './authService'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDK0c5EfHOLcO8Pmg6UGhrWfoE2a4tj7n4',
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: 'communicationgatewayapi.firebaseapp.com',
   projectId: 'communicationgatewayapi',
   storageBucket: 'communicationgatewayapi.appspot.com',
@@ -13,7 +14,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig)
 const messaging = getMessaging(firebaseApp)
 
-export const getFBToken = setTokenFound => {
+export const getFBToken = async (setToken) => {
   return getToken(messaging, {
     vapidKey:
       'BH25kT8DTRXxDviLr1RQ0RRvDzUCf-P1EteteGf0a9ryxfy_144JqLEIBPS13rPqGJo4z7NtjGzaZXqIr1hRojE'
@@ -21,17 +22,21 @@ export const getFBToken = setTokenFound => {
     .then(currentToken => {
       if (currentToken) {
         console.log('current token for client: ', currentToken)
-        setTokenFound(true)
+        setFirebaseToken(currentToken)
+        setToken(currentToken)
         // Track the token -> client mapping, by sending to backend server
         // show on the UI that permission is secured
       } else {
         console.log('No registration token available. Request permission to generate one.')
-        setTokenFound(false)
+        removeFirebaseToken()
+        setToken(null)
         // shows on the UI that permission is required
       }
     })
     .catch(err => {
       console.log('An error occurred while retrieving token. ', err)
+      removeFirebaseToken()
+      setToken(null)
       // catch error while creating client token
     })
 }
