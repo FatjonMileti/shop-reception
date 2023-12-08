@@ -3,7 +3,7 @@ import s from './TaskAllocation.modules.scss'
 import { ChatIcon, EmployeeIcon } from 'icons'
 import { Capsule } from 'components/core-ui/Capsule'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { getCapsuleColor } from './helpers'
 
 interface EmployeeProps {
@@ -26,17 +26,25 @@ const Employee: React.FC<EmployeeProps> = props => {
     }
   }, [])
 
-  const isTaskStarted = employee.startTime.isStarted
-  const isTaskEnded = employee.endTime.isEnded
+  const taskCurrentState = useMemo(() => {
+    const isTaskStarted = employee.startTime.isStarted
+    const isTaskEnded = employee.endTime.isEnded
 
-  const startButton = !isTaskStarted && !isTaskEnded
-  const stopButton = isTaskStarted && !isTaskEnded
+    const showStartButton = !isTaskStarted && !isTaskEnded
+    const showStopButton = isTaskStarted && !isTaskEnded
 
-  const customCapsuleColors = getCapsuleColor(isTaskStarted, isTaskEnded, employee.isOverdue)
+    return { isTaskStarted, isTaskEnded, showStartButton, showStopButton }
+  }, [employee.startTime.isStarted, employee.endTime.isEnded])
+
+  const customCapsuleColors = getCapsuleColor(
+    taskCurrentState.isTaskStarted,
+    taskCurrentState.isTaskEnded,
+    employee.isOverdue
+  )
 
   return (
     <Grid item mt={1} className={s.employeeContainer} flexDirection={'column'} overflow={'hidden'}>
-      <Grid container style={{ padding: '8px 12px 8px', gap: '12px', alignItems: 'center' }}>
+      <Grid container  className={s.employeeInfo} >
         <Grid item xs={12} md={2} sx={{ display: 'flex' }}>
           <EmployeeIcon />
           <p className={s.employeeName}>{employee.employee.name}</p>
@@ -72,7 +80,7 @@ const Employee: React.FC<EmployeeProps> = props => {
 
               <p className={s.customText}>{employee.customText}</p>
             </>
-          ) : !isTaskStarted && !isTaskEnded ? (
+          ) : !taskCurrentState.isTaskStarted && !taskCurrentState.isTaskEnded ? (
             <></>
           ) : (
             <Grid container>
@@ -95,11 +103,11 @@ const Employee: React.FC<EmployeeProps> = props => {
           )}
         </Grid>
 
-        {(startButton || stopButton) && (
+        {(taskCurrentState.showStartButton || taskCurrentState.showStopButton) && (
           <Grid item xs={12} md={2} className={s.actionButtonContainer}>
             <Button
               variant="contained"
-              label={startButton ? 'Start' : 'Stop'}
+              label={taskCurrentState.showStartButton ? 'Start' : 'Stop'}
               style={{
                 height: '30px',
                 width: isMobile ? '100%' : 'auto'
