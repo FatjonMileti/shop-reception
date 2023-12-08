@@ -7,7 +7,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import Table from 'components/core-ui/Table/Table'
 import { toTableRowItems } from './serializers'
-import { TableItem } from '../interfaces'
+import { UsageReportTableItem } from '../interfaces'
 import { DownloadOutlined } from '@mui/icons-material'
 import { useQuery } from 'react-query'
 import { toStoreFilterItems } from 'components/bakery/commonSerializers'
@@ -21,7 +21,7 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 const UsageReportRegion = () => {
   const { showNotification } = useNotification()
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [tableItems, setTableItems] = useState<TableItem[]>([])
+  const [tableItems, setTableItems] = useState<UsageReportTableItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
