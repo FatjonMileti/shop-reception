@@ -19,6 +19,8 @@ import {
 } from 'icons/supplyOmni'
 import {
   EmployeeManagementSubcategory,
+  AssignTasksSubcategory,
+  ManagementTasksSubcategory,
   AssignmentVolumetryHome,
   GroupVolumetryHome
 } from 'icons/volumetry'
@@ -46,6 +48,8 @@ const IconComponents = {
   PaidOrdersSubcategory,
   // Volumetry
   EmployeeManagementSubcategory,
+  ManagementTasksSubcategory,
+  AssignTasksSubcategory,
   AssignmentVolumetryHome,
   GroupVolumetryHome
 }
