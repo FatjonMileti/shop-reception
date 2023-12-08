@@ -1,24 +1,33 @@
-import EffortMatrixSubcategory from 'icons/governance/submodules/EffortMatrixSubcategory'
-import ProjectMilestonesSubcategory from 'icons/governance/submodules/ProjectMilestonesSubcategory'
-import TeamAssignmentSubcategory from 'icons/governance/submodules/TeamAssignmentSubcategory'
-import TeamCapacitySubcategory from 'icons/governance/submodules/TeamCapacitySubcategory'
-import TeamDayOffManagementSubcategory from 'icons/governance/submodules/TeamDayOffManagementSubcategory'
-import { createElement } from 'react'
+import {
+  EffortMatrixSubcategory,
+  ProjectMilestonesSubcategory,
+  ProjectTeamGovernanceHome,
+  ProjectTeamGovernanceMenu,
+  TeamAssignmentSubcategory,
+  TeamCapacitySubcategory,
+  TeamDayOffManagementSubcategory
+} from 'icons/governance'
+import { FolderIcon } from 'icons/shared'
+import {
+  SupplyOmniHome,
+  MySalesSubcategory,
+  PaidOrdersSubcategory,
+  ProductScanSubcategory,
+  ProformaListSubcategory,
+  ShoppingCartSubcategory,
+  SupplyOmniMenu
+} from 'icons/supplyOmni'
+import {
+  EmployeeManagementSubcategory,
+  AssignmentVolumetryHome,
+  GroupVolumetryHome
+} from 'icons/volumetry'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
-import ProductScanSubcategory from 'icons/supplyOmni/submodules/ProductScanSubcategory'
-import ProformaListSubcategory from 'icons/supplyOmni/submodules/ProformaListSubcategory'
-import MySalesSubcategory from 'icons/supplyOmni/submodules/MySalesSubcategory'
-import ShoppingCartSubcategory from 'icons/supplyOmni/submodules/ShoppingCartSubcategory'
-import PaidOrdersSubcategory from 'icons/supplyOmni/submodules/PaidOrdersSubcategory'
-import EmployeeManagementSubcategory from 'icons/volumetry/submodules/EmployeeManagementSubcategory'
-import ProjectTeamGovernanceHome from 'icons/governance/ProjectTeamGovernanceHome'
-import ProjectTeamGovernanceMenu from 'icons/governance/ProjectTeamGovernanceMenu'
-import SupplyOmniHome from 'icons/supplyOmni/SupplyOmniHome'
-import SupplyOmniMenu from 'icons/supplyOmni/SupplyOmniMenu'
-import AssignmentVolumetryHome from 'icons/volumetry/AssignmentVolumetryHome'
-import GroupVolumetryHome from 'icons/volumetry/GroupVolumetryHome'
+import { createElement } from 'react'
 
 const IconComponents = {
+  // Shared
+  FolderIcon,
   // Governance
   ProjectTeamGovernanceHome,
   ProjectTeamGovernanceMenu,
@@ -41,7 +50,7 @@ const IconComponents = {
   GroupVolumetryHome
 }
 
-export type IconType = 'Menu' | 'Home' | 'Subcategory'
+export type IconType = 'Menu' | 'Home' | 'Subcategory' | 'Icon'
 
 interface IconProps {
   iconName: string
