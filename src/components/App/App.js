@@ -27,6 +27,8 @@ import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
 import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
 import { useMerchandiseRoutes } from '../merchandise/routes'
 import { useShopReceptionRoutes } from '../shop-reception/routes'
+import { getFBToken, onMessageListener } from 'utils/firebase'
+import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -55,6 +57,15 @@ const App = () => {
   const [hasLoadedActivities, setHasLoadedActivities] = useState(-1) // [~] holds the subdomainId for which the activities were loaded
 
   const { showNotification } = useNotification()
+
+  const [isTokenFound, setTokenFound] = useState(false)
+  getFBToken(setTokenFound)
+  onMessageListener()
+    .then(payload => {
+      debugger
+      showNotification({ message: payload?.notification?.title + payload?.notification?.body })
+    })
+    .catch(err => console.log('failed: ', err))
 
   useEffect(() => {
     // console.log("[App] 1st effect called | hasLoadedAppModules: ", hasLoadedAppModules)

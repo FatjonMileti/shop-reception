@@ -85,7 +85,7 @@ export const getUserName = () => {
 export const getUserFirstName = () => {
   const userInfo = getUserInfo()
 
-  return userInfo.given_name
+  return userInfo?.given_name
 }
 
 export const getUserAvatarString = () => {

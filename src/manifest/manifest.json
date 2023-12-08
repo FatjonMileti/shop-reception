@@ -1,0 +1,19 @@
+{
+  "short_name": "DEX",
+  "name": "DEX app",
+  "icons": [
+    {
+      "src": "../images/favicon.ico",
+      "sizes": "64x64"
+    },
+    {
+      "src": "../images/logo.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ],
+  "start_url": "../",
+  "display": "standalone",
+  "theme_color": "#27ae60",
+  "background_color": "#fff"
+}
