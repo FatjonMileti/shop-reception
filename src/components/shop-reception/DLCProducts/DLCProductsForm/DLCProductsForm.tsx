@@ -14,11 +14,12 @@ interface NewAdminDepositProps {
   isModalOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
-  editItem?: SubFamilyValidityThreshold
+  editItem?: DLCProducts
+  isEdit?: boolean
 }
 
-const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => {
-  const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
+const DLCProductsForm: React.FC<NewAdminDepositProps> = props => {
+  const { isModalOpen, closeModal, editItem, isEdit, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
@@ -49,7 +50,7 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={'Editare prag valabilitate'}
+      modalTitle={isEdit ? 'Editare produse cu DLC scurt' : 'Adăugare regulă produse cu DLC scurt'}
       modalWidth="50%"
     >
       <Grid container spacing={4} justifyContent="flex-end">
@@ -57,90 +58,30 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
           <FormInfoItems
             items={[
               {
-                label: 'Cod familie:',
-                name: editItem?.familyCode
+                label: 'Magazin:',
+                name: editItem?.storeName
               }
             ]}
           />
         </Grid>
         <Grid xs={12} md={6} item>
           <Input
-            type="text"
-            value={formik.values.subfamilyCode}
+            type="select"
+            value={formik.values.storeName}
             onChange={event =>
-              formik.setFieldValue('subfamilyCode', (event.target as HTMLInputElement).value)
+              formik.setFieldValue('storeName', (event.target as HTMLInputElement).value)
             }
-            label="Cod sub familie"
+            label="Magazin"
             variant="outlined"
             style={{ width: '100%' }}
-            error={!!formik.errors.subfamilyCode}
-            helperText={formik.errors.subfamilyCode as string}
+            error={!!formik.errors.storeName}
+            helperText={formik.errors.storeName as string}
             required
           />
         </Grid>
         <Grid xs={12} md={6} item>
           <Input
-            type="text"
-            value={formik.values.subfamily}
-            onChange={event =>
-              formik.setFieldValue('subfamily', (event.target as HTMLInputElement).value)
-            }
-            label="Sub familie"
-            variant="outlined"
-            style={{ width: '100%' }}
-            error={!!formik.errors.subfamily}
-            helperText={formik.errors.subfamily as string}
-            required
-          />
-        </Grid>
-        <Grid xs={12} md={6} item>
-          <Input
-            type="text"
-            value={formik.values.familyCode}
-            onChange={event =>
-              formik.setFieldValue('familyCode', (event.target as HTMLInputElement).value)
-            }
-            label="Cod familie"
-            variant="outlined"
-            style={{ width: '100%' }}
-            error={!!formik.errors.familyCode}
-            helperText={formik.errors.familyCode as string}
-            required
-          />
-        </Grid>
-        <Grid xs={12} md={6} item>
-          <Input
-            type="text"
-            value={formik.values.family}
-            onChange={event =>
-              formik.setFieldValue('family', (event.target as HTMLInputElement).value)
-            }
-            label="Familie"
-            variant="outlined"
-            style={{ width: '100%' }}
-            error={!!formik.errors.family}
-            helperText={formik.errors.family as string}
-            required
-          />
-        </Grid>
-        <Grid xs={12} md={6} item>
-          <Input
-            type="text"
-            value={formik.values.districtCode}
-            onChange={event =>
-              formik.setFieldValue('districtCode', (event.target as HTMLInputElement).value)
-            }
-            label="Cod raion"
-            variant="outlined"
-            style={{ width: '100%' }}
-            error={!!formik.errors.districtCode}
-            helperText={formik.errors.districtCode as string}
-            required
-          />
-        </Grid>
-        <Grid xs={12} md={6} item>
-          <Input
-            type="text"
+            type="select"
             value={formik.values.district}
             onChange={event =>
               formik.setFieldValue('district', (event.target as HTMLInputElement).value)
@@ -155,20 +96,64 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
         </Grid>
         <Grid xs={12} md={6} item>
           <Input
-            type="number"
-            value={formik.values.validityThreshold}
+            type="select"
+            value={formik.values.family}
             onChange={event =>
-              formik.setFieldValue('validityThreshold', (event.target as HTMLInputElement).value)
+              formik.setFieldValue('family', (event.target as HTMLInputElement).value)
             }
-            label="Prag valabilitate"
+            label="Familie"
             variant="outlined"
             style={{ width: '100%' }}
-            error={!!formik.errors.validityThreshold}
-            helperText={formik.errors.validityThreshold as string}
+            error={!!formik.errors.family}
+            helperText={formik.errors.family as string}
             required
           />
         </Grid>
-        <Grid xs={12} md={6} item />
+        <Grid xs={12} md={6} item>
+          <Input
+            type="select"
+            value={formik.values.subfamily}
+            onChange={event =>
+              formik.setFieldValue('subfamily', (event.target as HTMLInputElement).value)
+            }
+            label="Subfamilie"
+            variant="outlined"
+            style={{ width: '100%' }}
+            error={!!formik.errors.subfamily}
+            helperText={formik.errors.subfamily as string}
+            required
+          />
+        </Grid>
+        <Grid xs={12} md={6} item>
+          <Input
+            type="select"
+            value={formik.values.UbCode}
+            onChange={event =>
+              formik.setFieldValue('UbCode', (event.target as HTMLInputElement).value)
+            }
+            label="Cod UB"
+            variant="outlined"
+            style={{ width: '100%' }}
+            error={!!formik.errors.UbCode}
+            helperText={formik.errors.UbCode as string}
+            required
+          />
+        </Grid>
+        <Grid xs={12} md={6} item>
+          <Input
+            type="select"
+            value={formik.values.productCode}
+            onChange={event =>
+              formik.setFieldValue('productCode', (event.target as HTMLInputElement).value)
+            }
+            label="Cod Produs"
+            variant="outlined"
+            style={{ width: '100%' }}
+            error={!!formik.errors.productCode}
+            helperText={formik.errors.productCode as string}
+            required
+          />
+        </Grid>
         <Grid xs={12} item className={s.modalButtons}>
           <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
           <Button
@@ -183,4 +168,4 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
   )
 }
 
-export default SubFamilyValidityThresholdForm
+export default DLCProductsForm

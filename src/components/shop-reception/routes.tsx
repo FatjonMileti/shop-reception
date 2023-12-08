@@ -32,6 +32,7 @@ import { PackagingTypesDifferences } from './PackagingTypesDifferences'
 import { ReturnedPackaging } from './ReturnedPackaging'
 import { PackagingCompliance } from './PackagingCompliance'
 import { PackagingDisputesTimer } from './PackagingDisputesTimer'
+import { ShowDeliverySlip } from './DeliverySlipsList/ShowDeliverySlip'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -159,6 +160,10 @@ export const useShopReceptionRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION}
         element={<PackagingDisputesTimer />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_SLIP}
+        element={<ShowDeliverySlip />}
       />
     </>
   )

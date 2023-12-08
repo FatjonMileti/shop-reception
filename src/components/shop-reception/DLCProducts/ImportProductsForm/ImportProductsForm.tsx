@@ -67,7 +67,7 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={' Importă produse sensibile'}
+      modalTitle={'Importă produse DLC scurt'}
       modalWidth='50%'
     >
       <Grid container spacing={4} justifyContent='flex-end'>

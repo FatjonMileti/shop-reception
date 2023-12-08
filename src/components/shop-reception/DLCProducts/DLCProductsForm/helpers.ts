@@ -1,26 +1,24 @@
 import * as Yup from 'yup'
 
-export const getValidationSchema = (editItem: SubFamilyValidityThreshold) =>
+export const getValidationSchema = (editItem: DLCProducts) =>
   Yup.object().shape({
     id: Yup.number().required(),
-    subfamilyCode: Yup.string().required(),
-    familyCode: Yup.string().required(),
-    subfamily: Yup.string().required(),
-    family: Yup.string().required(),
-    districtCode: Yup.string().required(),
+    storeName: Yup.string().required(),
     district: Yup.string().required(),
-    validityThreshold: Yup.number().required()
+    family: Yup.string().required(),
+    subfamily: Yup.string().required(),
+    UbCode: Yup.string().required(),
+    productCode: Yup.string().required(),
   })
 
-export const getInitialValues = (editItem: SubFamilyValidityThreshold) => {
+export const getInitialValues = (editItem: DLCProducts) => {
   return {
     id: editItem?.id || null,
-    subfamilyCode: editItem?.subfamilyCode || null,
-    familyCode: editItem?.familyCode || null,
-    subfamily: editItem?.subfamily || null,
-    family: editItem?.family || null,
-    districtCode: editItem?.districtCode || null,
+    storeName: editItem?.storeName || null,
     district: editItem?.district || null,
-    validityThreshold: editItem?.validityThreshold || null
+    family: editItem?.family || null,
+    subfamily: editItem?.subfamily || null,
+    UbCode: editItem?.UbCode || null,
+    productCode: editItem?.productCode || null,
   }
 }

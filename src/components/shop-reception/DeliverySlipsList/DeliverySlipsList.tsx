@@ -10,6 +10,8 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
+import { useNavigate } from 'react-router-dom'
+import { URLS } from '../constants'
 
 const DeliverySlipsList = () => {
   const [tableItems, setTableItems] = useState<DeliverySlip[]>([])
@@ -17,6 +19,7 @@ const DeliverySlipsList = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setTableItems([
@@ -61,10 +64,6 @@ const DeliverySlipsList = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (
@@ -147,7 +146,17 @@ const DeliverySlipsList = () => {
           newButton={null}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
+          rowActions={[
+            {
+              label: 'Show',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => {
+                navigate(URLS.AUTH_DELIVERY_SLIP.replace(":id", rowId))
+              }
+            }
+          ]}
           rowActionsWidth='130px'
         />
       </Grid>

@@ -6,6 +6,7 @@ export const URLS = {
   AUTH_PACKAGE_DASHBOARD: '/shop-reception/package/dashboard',
   AUTH_TRUCK_LIST: '/shop-reception/truck/list',
   AUTH_DELIVERY_SLIPS_LIST: '/shop-reception/delivery/slips',
+  AUTH_DELIVERY_SLIP: '/shop-reception/delivery/slip/:id',
   AUTH_SUPPORT_WRONG_DESTINATION: '/shop-reception/support/wrong-destination',
   AUTH_UNORDERED_PRODUCTS: '/shop-reception/products/unordered',
   AUTH_METI_FILES: '/shop-reception/files/meti',
