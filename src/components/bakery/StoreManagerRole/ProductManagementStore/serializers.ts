@@ -1,0 +1,23 @@
+export const toTableRowItems = items =>
+  items.map(item => ({
+    id: item.id || '',
+    productName: item.productName || '',
+    metiCode: item.metiCode || '',
+    eanCodes: item.eanCodes || '',
+    pluCode: item.pluCode || '',
+    appelCodes: item.appelCodes || '',
+    familyModuleName: item.familyModuleName || '',
+    familyName: item.familyName || '',
+    subfamily: item.subfamily || '',
+    unitBusiness: item.unitBusiness || '',
+    enable: item.enable,
+    status: item.status || '',
+    provider: item.provider || '',
+    fabricationMethod: item.fabricationMethod || '',
+    clusterName: item.clusterName || '',
+    clusterMandatory: item.clusterMandatory,
+    scheduleProduct: item.scheduleProduct,
+    minStock: item.minStock || 0,
+    newProduct: item.newProduct || '',
+    imageUrl: item.imageUrl || ''
+  }))
