@@ -10,12 +10,14 @@ import { CircularProgress, Grid, debounce } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import TaskDescription from './TaskDescription'
 
 const TaskAllocation = () => {
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
-  const [rows, setRows] = useState([])
-  const [totalCount, setTotalCount] = useState(0)
-  const [isLoading, setIsLoading] = useState(false)
+  const [rows, setRows] = useState([]) // TODO: To add interface when db schema is defined
+  const [tableItems, setTableItems] = useState([]) // TODO: To add interface when db schema is defined
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const { showNotification } = useNotification()
 
@@ -45,6 +47,14 @@ const TaskAllocation = () => {
     setDepartmentFilterValue(value)
   }
 
+  const handleRemoteDetails = async (rowId: string) => {
+    const response = await makeCoreGetRequest(`/volumetry/taskAllocation/details/${rowId}`)
+    const data = await response
+    const item = tableItems.find(tableItem => tableItem.id === rowId)
+
+    return <TaskDescription item={item} employees={data.list} />
+  }
+
   const fetchData = async (page, rowsPerPage, tableFilters) => {
     setIsLoading(true)
     try {
@@ -59,6 +69,7 @@ const TaskAllocation = () => {
       )
 
       setRows(toListTableRows(response.list))
+      setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -77,7 +88,7 @@ const TaskAllocation = () => {
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
-          <Grid xs={12} md={2} item style={{ padding: 0 }}>
+          <Grid xs={4} md={2} item style={{ padding: 0 }}>
             <AsyncAutocomplete
               variant="outlined"
               name="teamMember.domain"
@@ -95,6 +106,7 @@ const TaskAllocation = () => {
         <ListTable
           rows={rows}
           handleRemoteData={debounce(fetchData, 500)}
+          handleRemoteDetails={handleRemoteDetails}
           isLoading={isLoading}
           totalCount={totalCount}
         />
