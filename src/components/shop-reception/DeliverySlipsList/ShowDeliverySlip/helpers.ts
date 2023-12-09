@@ -1,18 +1,18 @@
 export const columns = [
   {
-    title: 'Magazin',
+    title: 'Numǎr comandǎ',
     field: 'store',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Nume depozit',
+    title: 'Cod suport',
     field: 'warehouseName',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Bon Livrare',
+    title: 'Etichetǎ suport',
     field: 'deliverySlip',
     align: 'left',
     type: 'string'

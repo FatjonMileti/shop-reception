@@ -1,4 +1,4 @@
-import { Paper, Grid } from '@mui/material'
+import { Paper, Grid, Typography } from '@mui/material'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../CommonStyles.modules.scss'
 import { Table } from '../../../core-ui/Table'
@@ -76,6 +76,51 @@ const ShowDeliverySlip = () => {
           <TitleHeader title={`Bonuri de livrare ${id}`} />
           <Grid container spacing={4}>
             <Grid xs={12} md={4} item>
+              <Typography variant='h6' display='inline'>
+                Depozit sursǎ:
+              </Typography>
+              <Typography variant='body1' display='inline'>
+                DEPOZIT CONGELATE
+              </Typography>
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Typography variant='h6' display='inline'>
+                Datǎ estimatǎ de livrare:
+              </Typography>
+              <Typography variant='body1' display='inline'>
+                15/11/2023
+              </Typography>
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Typography variant='h6' display='inline'>
+                Cod cursǎ:
+              </Typography>
+              <Typography variant='body1' display='inline'>
+                00053548
+              </Typography>
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Typography variant='h6' display='inline'>
+                Numǎrul de suporți așteptați:
+              </Typography>
+              <Typography variant='body1' display='inline'>
+                33
+              </Typography>
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Typography variant='h6' display='inline'>
+                Numǎrul de suporți ajunși la
+                destinațic:
+              </Typography>
+              <Typography variant='body1' display='inline'>
+                0
+              </Typography>
+            </Grid>
+          </Grid>
+        </Paper>
+        <Paper className={s.filterPaper}>
+          <Grid container spacing={4}>
+            <Grid xs={12} md={4} item>
               <Input
                 type='select'
                 onChange={event => null}
@@ -111,12 +156,12 @@ const ShowDeliverySlip = () => {
               <Input
                 type='select'
                 onChange={event => null}
-                label='Selectează depozit'
+                label='Selectează comandǎ'
                 variant='outlined'
                 style={{ width: '100%' }}
                 values={[
                   {
-                    label: 'Selectează depozit',
+                    label: 'Selectează comandǎ',
                     value: 'none'
                   }
                 ]}
@@ -127,12 +172,12 @@ const ShowDeliverySlip = () => {
               <Input
                 type='select'
                 onChange={event => null}
-                label='Selectează status'
+                label='Selectează comandǎ originalǎ'
                 variant='outlined'
                 style={{ width: '100%' }}
                 values={[
                   {
-                    label: 'Selectează status',
+                    label: 'Selectează comanda originala',
                     value: 'none'
                   }
                 ]}
@@ -141,12 +186,130 @@ const ShowDeliverySlip = () => {
             </Grid>
             <Grid xs={12} md={4} item>
               <Input
-                type='text'
-                onChange={event => null
-                }
-                label='Cod cursă'
+                type='select'
+                onChange={event => null}
+                label='Selectează produs'
                 variant='outlined'
                 style={{ width: '100%' }}
+                values={[
+                  {
+                    label: 'Selectează produs',
+                    value: 'none'
+                  }
+                ]}
+                value={'none'}
+              />
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Input
+                type='select'
+                onChange={event => null}
+                label='Selectează sensibil'
+                variant='outlined'
+                style={{ width: '100%' }}
+                values={[
+                  {
+                    label: 'Selectează sensibil',
+                    value: 'none'
+                  }
+                ]}
+                value={'none'}
+              />
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Input
+                type='select'
+                onChange={event => null}
+                label='Selectează produs lipsǎ'
+                variant='outlined'
+                style={{ width: '100%' }}
+                values={[
+                  {
+                    label: 'Selectează produs lipsǎ',
+                    value: 'none'
+                  }
+                ]}
+                value={'none'}
+              />
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Input
+                type='select'
+                onChange={event => null}
+                label='Selectează produs verificat'
+                variant='outlined'
+                style={{ width: '100%' }}
+                values={[
+                  {
+                    label: 'Selectează produs verificat',
+                    value: 'none'
+                  }
+                ]}
+                value={'none'}
+              />
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Input
+                type='select'
+                onChange={event => null}
+                label='Selectează DLC scurt'
+                variant='outlined'
+                style={{ width: '100%' }}
+                values={[
+                  {
+                    label: 'Selectează DLC scurt',
+                    value: 'none'
+                  }
+                ]}
+                value={'none'}
+              />
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Input
+                type='select'
+                onChange={event => null}
+                label='Selectează prioritar vǎnzare'
+                variant='outlined'
+                style={{ width: '100%' }}
+                values={[
+                  {
+                    label: 'Selectează prioritar vǎnzare',
+                    value: 'none'
+                  }
+                ]}
+                value={'none'}
+              />
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Input
+                type='select'
+                onChange={event => null}
+                label='Selectează procentul de valabilitate'
+                variant='outlined'
+                style={{ width: '100%' }}
+                values={[
+                  {
+                    label: 'Selectează procentul de valabilitate',
+                    value: 'none'
+                  }
+                ]}
+                value={'none'}
+              />
+            </Grid>
+            <Grid xs={12} md={4} item>
+              <Input
+                type='select'
+                onChange={event => null}
+                label='Selectează SGR'
+                variant='outlined'
+                style={{ width: '100%' }}
+                values={[
+                  {
+                    label: 'Selectează SGR',
+                    value: 'none'
+                  }
+                ]}
+                value={'none'}
               />
             </Grid>
           </Grid>
