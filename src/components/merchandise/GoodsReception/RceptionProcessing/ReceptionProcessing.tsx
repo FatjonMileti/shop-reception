@@ -1,6 +1,6 @@
 import { Grid, Container, Paper } from '@mui/material'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './ReceptionProcessing.modules.scss'
+import s from '../../Common.modules.scss'
 import TitleHeader from '../../TitleHeader/TitleHeader'
 
 const ReceptionProcessing = () => {

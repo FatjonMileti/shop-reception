@@ -1,6 +1,6 @@
 import { Grid, Container } from '@mui/material'
 import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './OrderReturnTruck.modules.scss'
+import s from '../../Common.modules.scss'
 import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
@@ -37,12 +37,12 @@ const OrderReturnTruck = () => {
   return (
     <Container component='main' maxWidth='xs' className={s.container}>
       <TitleHeader />
+      <Typography component='h4' variant='medium'
+                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
+        COMANDǍ CAMION RETUR
+      </Typography>
       <Grid container spacing={2} className={s.wrapper}>
         <Grid item xs={12}>
-          <Typography component='h4' variant='medium'
-                      style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-            COMANDǍ CAMION RETUR
-          </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Input

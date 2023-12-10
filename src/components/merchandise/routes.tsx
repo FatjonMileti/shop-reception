@@ -17,7 +17,9 @@ import { ShippedTrucks } from './GoodsReception/ShippedTrucks'
 import { ExpectedReturns } from './GoodsReturn/ExpectedReturns'
 import { InProgressReturn } from './GoodsReturn/InProgressReturn'
 import { ContinueReturn } from './GoodsReturn/ContinueReturn'
-import RecordReturn from './GoodsReturn/RecordReturn/RecordReturn'
+import { RecordReturn } from './GoodsReturn/RecordReturn'
+import { SupportCode } from './GoodsReception/RegisterTruck/SupportCode'
+import { RecordReturnDetail } from './GoodsReturn/RecordReturn/RecordReturnDetail'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -89,6 +91,14 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_RECORD_RETURN}
         element={<RecordReturn />}
+      />
+      <Route
+        path={URLS.AUTH_SUPPORT_CODE}
+        element={<SupportCode />}
+      />
+      <Route
+        path={URLS.AUTH_RECORD_RETURN_DETAIL}
+        element={<RecordReturnDetail />}
       />
     </>
   )

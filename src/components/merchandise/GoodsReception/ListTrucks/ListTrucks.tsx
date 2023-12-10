@@ -1,6 +1,6 @@
 import { Grid, Container, Paper } from '@mui/material'
 import { Button, Divider, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './ListTrucks.modules.scss'
+import s from '../../Common.modules.scss'
 import { URLS } from '../../constants'
 import useRoles from '../../useRoles'
 import { useNavigate } from 'react-router-dom'
@@ -19,13 +19,13 @@ const ListTrucks = () => {
   return (
     <Container component="main" maxWidth="xs" className={s.container}>
       <TitleHeader />
+      <Typography component="h4" variant="medium"
+                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
+        Selecteazǎ Camion
+      </Typography>
       <form>
         <Grid container spacing={2} className={s.wrapper}>
           <Grid item xs={12}>
-            <Typography component="h4" variant="medium"
-                        style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-              Selecteazǎ Camion
-            </Typography>
             {list.map((item: Truck, index) => (
               <Paper key={index} elevation={3} style={{ margin: '10px', padding: '20px' }}>
                 <Typography variant="medium" component="h5">{item.name}</Typography>

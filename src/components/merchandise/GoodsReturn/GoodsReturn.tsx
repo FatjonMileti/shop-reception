@@ -1,6 +1,7 @@
 import { Grid, Container, Paper } from '@mui/material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from './GoodsReturn.modules.scss'
+import cs from '../Common.modules.scss'
 import { URLS } from '../constants'
 import useRoles from '../useRoles'
 import { useNavigate } from 'react-router-dom'
@@ -12,10 +13,10 @@ const GoodsReturn = () => {
 
   return (
     <Paper className={s.paper}>
-      <Container component='main' maxWidth='xs' className={s.container}>
+      <Container component='main' maxWidth='xs' className={cs.container}>
         <TitleHeader />
         <form>
-          <Grid container spacing={2} className={s.wrapper}>
+          <Grid container spacing={2} className={cs.wrapper}>
             {isShopUser && <>
               <Grid item xs={12}>
                 <Button

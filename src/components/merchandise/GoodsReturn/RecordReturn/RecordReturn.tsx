@@ -1,14 +1,17 @@
 import { Grid, Container } from '@mui/material'
 import { Button, Checkbox, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './RecordReturn.modules.scss'
+import s from '../../Common.modules.scss'
 import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { useNotification } from '../../../../hooks'
 import TitleHeader from '../../TitleHeader/TitleHeader'
+import { useNavigate } from 'react-router-dom'
+import { URLS } from '../../constants'
 
 const RecordReturn = () => {
+  const navigate = useNavigate()
   const { showNotification } = useNotification()
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
@@ -19,6 +22,8 @@ const RecordReturn = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
+
+        navigate(URLS.AUTH_RECORD_RETURN_DETAIL)
 
       } catch (error) {
         showNotification({
@@ -32,12 +37,12 @@ const RecordReturn = () => {
   return (
     <Container component='main' maxWidth='xs' className={s.container}>
       <TitleHeader />
+      <Typography component='h4' variant='medium'
+                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
+        ÎNREGISTRARE RETUR
+      </Typography>
       <Grid container spacing={2} className={s.wrapper}>
         <Grid item xs={12}>
-          <Typography component='h4' variant='medium'
-                      style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-            ÎNREGISTRARE RETUR
-          </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Input
@@ -46,6 +51,12 @@ const RecordReturn = () => {
                 variant='standard'
                 width='100%'
                 value={formik.values.destination}
+                values={[
+                  {
+                    value: 'none',
+                    label: 'Nu'
+                  }
+                ]}
                 onChange={event => formik.setFieldValue('destination', (event.target as HTMLInputElement).value)}
                 error={!!formik.errors.destination}
                 helperText={formik.errors.destination as string}
