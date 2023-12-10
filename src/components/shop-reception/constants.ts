@@ -5,11 +5,14 @@ export const URLS = {
   AUTH_RECEPTION_DASHBOARD: '/shop-reception/reception/dashboard',
   AUTH_PACKAGE_DASHBOARD: '/shop-reception/package/dashboard',
   AUTH_TRUCK_LIST: '/shop-reception/truck/list',
+  AUTH_TRUCK_DETAIL: '/shop-reception/truck/:id',
   AUTH_DELIVERY_SLIPS_LIST: '/shop-reception/delivery/slips',
   AUTH_DELIVERY_SLIP: '/shop-reception/delivery/slip/:id',
   AUTH_SUPPORT_WRONG_DESTINATION: '/shop-reception/support/wrong-destination',
+  AUTH_SUPPORT_WRONG_DESTINATION_DETAIL: '/shop-reception/support/wrong-destination/from/:id',
   AUTH_UNORDERED_PRODUCTS: '/shop-reception/products/unordered',
   AUTH_METI_FILES: '/shop-reception/files/meti',
+  AUTH_METI_FILE_DETAIL: '/shop-reception/files/meti/:id',
   AUTH_DIFFERENCES_PRODUCTS: '/shop-reception/products/differences',
   AUTH_SUPPORT_TRADABILITY: '/shop-reception/support/tradability',
 
@@ -31,9 +34,12 @@ export const URLS = {
   AUTH_RETURN_TRUCK_LIST: '/shop-reception/truck/list/return',
   AUTH_ROLLING_PACKAGES: '/shop-reception/packages/rolling',
   AUTH_BALANCE_PACKAGING: '/shop-reception/packages/balance',
+  AUTH_BALANCE_PACKAGING_FORM: '/shop-reception/packages/balance/form/:id',
+  AUTH_BALANCE_PACKAGING_HISTORY: '/shop-reception/packages/balance/history/:id',
   AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS: '/shop-reception/packaging-disputes/store-returns',
   AUTH_PACKAGING_TYPES_DIFFERENCES: '/shop-reception/packaging/types/differences',
   AUTH_RETURNED_PACKAGING: '/shop-reception/packaging/returned',
   AUTH_PACKAGING_COMPLIANCE: '/shop-reception/packaging/compliance',
-  AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION: '/shop-reception/packaging-disputes/timer'
+  AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION: '/shop-reception/packaging-disputes/timer',
+  AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL: '/shop-reception/packaging-disputes/timer/:id'
 }

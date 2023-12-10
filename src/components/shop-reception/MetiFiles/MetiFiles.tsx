@@ -11,6 +11,7 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
+import { useNavigate } from 'react-router-dom'
 
 const MetiFiles = () => {
   const [tableItems, setTableItems] = useState<MetiFile[]>([])
@@ -18,6 +19,7 @@ const MetiFiles = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setTableItems([
@@ -164,15 +166,18 @@ const MetiFiles = () => {
           newButton={null}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            // {
-            //   label: "Adauga",
-            //   icon: <AddIcon />,
-            //   onClick: null
-            // }
+          rowActions={[
+            {
+              label: 'Show',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => {
+                navigate(URLS.AUTH_METI_FILE_DETAIL.replace(":id", rowId))
+              }
+            }
           ]}
+          rowActionsWidth='130px'
         />
       </Grid>
     </Grid>

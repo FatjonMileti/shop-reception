@@ -1,7 +1,6 @@
 import { Paper, Grid } from '@mui/material'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../CommonStyles.modules.scss'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { useEffect, useState } from 'react'
@@ -13,7 +12,6 @@ import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
 
 const SupportTradability = () => {
-  const navigate = useNavigate()
   const [tableItems, setTableItems] = useState<SupportTradability[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -66,10 +64,6 @@ const SupportTradability = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (

@@ -72,10 +72,6 @@ const ReturnedPackaging = () => {
     }
   }
 
-  const getTitle = () => {
-    return 'Nu'
-  }
-
   return (
     <Grid container spacing={2}>
       <Grid xs={12} item>

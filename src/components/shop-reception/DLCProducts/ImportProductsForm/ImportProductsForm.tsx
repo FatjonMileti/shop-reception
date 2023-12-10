@@ -4,13 +4,11 @@ import { Grid } from '@mui/material'
 import { Modal } from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { useFormik } from 'formik'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toAdminDepositPayload } from './serializers'
 import { FileUpload } from '../../../core-ui/FileUpload'
-import { EditProductItem } from '../../../bakery/interfaces'
 import { toFormDataPayload } from '../../../../utils/serializers'
 
 interface NewAdminDepositProps {

@@ -12,6 +12,7 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
+import { URLS } from '../constants'
 
 const BalancePackages = () => {
   const navigate = useNavigate()
@@ -67,10 +68,6 @@ const BalancePackages = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (
@@ -158,10 +155,28 @@ const BalancePackages = () => {
           fetchData={() => null}
           isLoading={isLoading}
           totalCount={totalCount}
-          newButton={null}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#4191ed',
+              onClick: (e, rowId) => {
+                navigate(URLS.AUTH_BALANCE_PACKAGING_FORM.replace(":id", rowId))
+              }
+            },
+            {
+              label: 'Show',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => {
+                navigate(URLS.AUTH_BALANCE_PACKAGING_HISTORY.replace(":id", rowId))
+              }
+            }
+          ]}
           rowActionsWidth='130px'
           toolbarActions={[
             {

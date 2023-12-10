@@ -10,6 +10,8 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
+import { URLS } from '../constants'
+import { useNavigate } from 'react-router-dom'
 
 const SupportWrongDestination = () => {
   const [tableItems, setTableItems] = useState<SupportWrongDestination[]>([])
@@ -17,6 +19,7 @@ const SupportWrongDestination = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setTableItems([
@@ -65,10 +68,6 @@ const SupportWrongDestination = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (
@@ -177,15 +176,18 @@ const SupportWrongDestination = () => {
           newButton={null}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            // {
-            //   label: "Adauga",
-            //   icon: <AddIcon />,
-            //   onClick: null
-            // }
+          rowActions={[
+            {
+              label: 'Show',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => {
+                navigate(URLS.AUTH_SUPPORT_WRONG_DESTINATION_DETAIL.replace(":id", rowId))
+              }
+            }
           ]}
+          rowActionsWidth='130px'
         />
       </Grid>
     </Grid>

@@ -77,4 +77,70 @@ export const columns = [
     align: 'left',
     type: 'string'
   },
+  {
+    title: 'Număr paleți descărcati',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Dată prezentare - descărcare in HUB',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Oră prezentare in HUB',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Oră descărcare in HUB',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Dată încărcare marfă din HUB',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Oră încărcare marfă din HUB',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Număr masina_HUB',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Nume şofer',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Număr paleți încărcati',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Dată descărcare marfă la magazin',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Oră descărcare marfă la magazin',
+    field: 'numberOfPallets',
+    align: 'left',
+    type: 'string'
+  }
 ]

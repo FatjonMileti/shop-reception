@@ -10,6 +10,8 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
+import { URLS } from '../constants'
+import { useNavigate } from 'react-router-dom'
 
 const TruckList = () => {
   const [tableItems, setTableItems] = useState<TruckItem[]>([])
@@ -17,11 +19,12 @@ const TruckList = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setTableItems([
       {
-        id: 1,
+        id: 2341,
         store: 'CRAIOVA (3054)',
         hub: '',
         warehouseName: 'DEPOZIT BRAZI NON FOOD',
@@ -68,10 +71,6 @@ const TruckList = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (
@@ -260,15 +259,18 @@ const TruckList = () => {
           newButton={null}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            // {
-            //   label: "Adauga",
-            //   icon: <AddIcon />,
-            //   onClick: null
-            // }
+          rowActions={[
+            {
+              label: 'Show',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => {
+                navigate(URLS.AUTH_TRUCK_DETAIL.replace(":id", rowId))
+              }
+            }
           ]}
+          rowActionsWidth='130px'
         />
       </Grid>
     </Grid>

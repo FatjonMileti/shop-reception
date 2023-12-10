@@ -2,7 +2,6 @@ import { Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { Download as DownloadIcon } from '@mui/icons-material'
 import { useEffect, useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
@@ -10,6 +9,7 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
 import TitleHeader from '../TitleHeader/TitleHeader'
+import { URLS } from '../constants'
 
 const PackagingDisputesTimer = () => {
   const navigate = useNavigate()
@@ -57,10 +57,6 @@ const PackagingDisputesTimer = () => {
     }
   }
 
-  const getTitle = () => {
-    return 'Nu'
-  }
-
   return (
     <Grid container spacing={2}>
       <Grid xs={12} item>
@@ -79,7 +75,17 @@ const PackagingDisputesTimer = () => {
           newButton={null}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
+          rowActions={[
+            {
+              label: 'Show',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => {
+                navigate(URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL.replace(":id", rowId))
+              }
+            }
+          ]}
           rowActionsWidth='130px'
         />
       </Grid>
