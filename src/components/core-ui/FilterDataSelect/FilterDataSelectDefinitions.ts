@@ -4,6 +4,7 @@ export interface FilterDataSelectOption {
 }
   
 export interface FilterDataSelectProps { 
+placeholderButton?: string
 selectedData: FilterDataSelectOption
 options: FilterDataSelectOption[] | []
 name: string
@@ -12,5 +13,6 @@ showSearch?: boolean,
 showCounter?: boolean,
 counterLabel?: string,
 noDataFoundLabel?: string,
+allTypesLabel?: string,
 onSelect: (value: any) => void
 }

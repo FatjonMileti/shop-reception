@@ -6,7 +6,7 @@ const path = require('path')
 
 // eslint-disable-next-line no-undef
 module.exports = {
-  entry: [commonPaths.entryPath],
+  entry: [commonPaths.entryPath, commonPaths.firebaseMessagingSWPath],
   module: {
     rules: [
       {
@@ -43,11 +43,9 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(
-            commonPaths.root,
-            'node_modules/scandit-sdk/build/',
-            'scandit-engine-sdk.*'
-          ).replace(/\\/g, '/'),
+          from: path
+            .resolve(commonPaths.root, 'node_modules/scandit-sdk/build/', 'scandit-engine-sdk.*')
+            .replace(/\\/g, '/'),
           // copy flattend with [name][ext] pattern
           to: './static/scandit/[name][ext]',
           // ignore terser with info about minified state

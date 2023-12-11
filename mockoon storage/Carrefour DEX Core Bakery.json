@@ -2748,7 +2748,7 @@
       "type": "http",
       "documentation": "Get store products list",
       "method": "get",
-      "endpoint": "region/store/products/x",
+      "endpoint": "region/store/products",
       "responses": [
         {
           "uuid": "c2092ba7-819b-4692-bc25-36e0e27e4031",
@@ -3176,6 +3176,40 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "9f9f9fc7-e8ec-40de-aa70-565a016a95c7",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "report/download/sale",
+      "responses": [
+        {
+          "uuid": "66118fd3-9351-4013-a9c7-ec35c6bb44f6",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Disposition",
+              "value": "attachment; filename=ApplicationReports2023-09-26_2023-09-26.xlsx"
+            }
+          ],
+          "bodyType": "FILE",
+          "filePath": "/Users/pauladan/Library/Application Support/mockoon/storage/proforma-598.pdf",
+          "databucketID": "",
+          "sendFileAsBody": true,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -3322,6 +3356,26 @@
     {
       "type": "route",
       "uuid": "8ffa4391-57c2-443b-84b2-6c0f4e344918"
+    },
+    {
+      "type": "route",
+      "uuid": "551bc09c-826a-48ff-9756-1e867ca91758"
+    },
+    {
+      "type": "route",
+      "uuid": "8384a29e-310f-4f12-bae8-1244f84b184e"
+    },
+    {
+      "type": "route",
+      "uuid": "9a60c5aa-a812-4004-bdb1-a868de7180a9"
+    },
+    {
+      "type": "route",
+      "uuid": "db496501-3074-4632-9b52-9763caae5172"
+    },
+    {
+      "type": "route",
+      "uuid": "9f9f9fc7-e8ec-40de-aa70-565a016a95c7"
     }
   ],
   "proxyMode": false,
