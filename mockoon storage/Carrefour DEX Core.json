@@ -1209,7 +1209,7 @@
       "responses": [
         {
           "uuid": "f2767a59-c7b5-432f-8b08-61d00a4e4d1c",
-          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "body": "[\n  {\n    \"id\": 1,\n    \"teamMember\": {\n      \"id\": 1,\n      \"name\": \"Pop Adrian\",\n      \"domain\": \"Digital\"\n    },\n    \"dayOffType\": \"Public Holiday\",\n    \"startDate\": \"2023-02-01\",\n    \"endDate\": \"2023-02-01\",\n    \"numberOfHours\": 6\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -1358,7 +1358,7 @@
       "responses": [
         {
           "uuid": "8aba5150-b79f-4983-aa4b-e0218725fcae",
-          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "body": "[\n  {\n    \"id\": 1,\n    \"teamMember\": {\n      \"id\": 1,\n      \"name\": \"Pop Adrian\",\n      \"domain\": \"Digital\"\n    },\n    \"dayOffType\": \"Public Holiday\",\n    \"startDate\": \"2023-02-01\",\n    \"endDate\": \"2023-02-01\",\n    \"numberOfHours\": 6\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -3444,7 +3444,7 @@
       "responses": [
         {
           "uuid": "c06bb41b-3ad7-46ec-9d7d-79ccf3487d1f",
-          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "body": "[\n  {\n    \"id\": 1,\n    \"teamMember\": {\n      \"id\": 1,\n      \"name\": \"Pop Adrian\",\n      \"domain\": \"Digital\"\n    },\n    \"dayOffType\": \"Public Holiday\",\n    \"startDate\": \"2023-02-01\",\n    \"endDate\": \"2023-02-01\",\n    \"numberOfHours\": 6\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -3593,7 +3593,7 @@
       "responses": [
         {
           "uuid": "a7b37712-5fb3-4ac8-b8e8-37a9cfc78311",
-          "body": "{\n  \"id\": 1,\n  \"teamMember\": {\n    \"id\": 1,\n    \"name\": \"Pop Adrian\",\n    \"domain\": \"Digital\"\n  },\n  \"dayOffType\": \"Public Holiday\",\n  \"startDate\": \"2023-02-01\",\n  \"endDate\": \"2023-02-01\",\n  \"numberOfHours\": 6\n}",
+          "body": "[\n  {\n    \"id\": 1,\n    \"teamMember\": {\n      \"id\": 1,\n      \"name\": \"Pop Adrian\",\n      \"domain\": \"Digital\"\n    },\n    \"dayOffType\": \"Public Holiday\",\n    \"startDate\": \"2023-02-01\",\n    \"endDate\": \"2023-02-01\",\n    \"numberOfHours\": 6\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -5036,9 +5036,162 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "d8d5879f-7522-4805-82c3-5fbdcd175240",
+      "type": "http",
+      "documentation": "Get team members list",
+      "method": "get",
+      "endpoint": "governance/publicHolidays/:year",
+      "responses": [
+        {
+          "uuid": "aae62948-c4b6-49fb-8200-bd1a223a58d9",
+          "body": "[\n  {\n    \"id\": 1,\n    \"date\": \"{{urlParam 'year'}}-01-01\",\n    \"description\": \"Anul Nou\"\n  },\n  {\n    \"id\": 2,\n    \"date\": \"{{urlParam 'year'}}-01-02\",\n    \"description\": \"Anul Nou\"\n  },\n  {\n    \"id\": 3,\n    \"date\": \"{{urlParam 'year'}}-01-02\",\n    \"description\": \"Ziua Unirii Principatelor Române\"\n  },\n  {\n    \"id\": 4,\n    \"date\": \"{{urlParam 'year'}}-04-14\",\n    \"description\": \"Vinerea Mare\"\n  },\n  {\n    \"id\": 5,\n    \"date\": \"{{urlParam 'year'}}-04-16\",\n    \"description\": \"Paște ortodox\"\n  },\n  {\n    \"id\": 6,\n    \"date\": \"{{urlParam 'year'}}-04-17\",\n    \"description\": \"Paște ortodox\"\n  },\n  {\n    \"id\": 7,\n    \"date\": \"{{urlParam 'year'}}-12-25\",\n    \"description\": \"Crăciunul\"\n  },\n  {\n    \"id\": 8,\n    \"date\": \"{{urlParam 'year'}}-12-26\",\n    \"description\": \"Crăciunul\"\n  }\n]",
+          "latency": 150,
+          "statusCode": 200,
+          "label": "Successfully obtained the public holidays for param year",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "0dca18b4-6c67-4e10-b294-82bf1a2d4d15",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "249d54a7-0fc1-4dbb-a1cf-b075f7e321f3",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "c2e59f8b-9e38-4539-981c-fc189e3bb38d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "d352af74-9470-4bf9-8fe5-f55bb02cee9f",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "1232b411-8339-4c18-a5af-c986b0ecb8c4",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "d8d5879f-7522-4805-82c3-5fbdcd175240"
+    },
     {
       "type": "route",
       "uuid": "b4ea454f-a787-496f-9265-652c003f39b9"
