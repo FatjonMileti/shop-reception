@@ -35,6 +35,8 @@
     "classnames": "^2.3.1",
     "dayjs": "^1.11.7",
     "dotenv-webpack": "^8.0.1",
+    "file-loader": "^6.2.0",
+    "firebase": "^10.7.1",
     "formik": "^2.2.9",
     "history": "^5.3.0",
     "immer": "^9.0.17",

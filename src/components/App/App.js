@@ -9,12 +9,12 @@ import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
 import { ThemeProvider } from '@fullscreendigital/carrefour-dex-fe'
 import { createRoute } from './helpers'
-import { makeDesignerGetRequest } from 'utils/api'
+import { makeDesignerGetRequest, makeNotificationsPutRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
-import { oidcConfig } from 'utils/authService'
-import { useNotification } from 'hooks'
+import { oidcConfig, getFirebaseToken } from 'utils/authService'
+import { useFirebaseNotification, useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
@@ -27,6 +27,7 @@ import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
 import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
 import { useMerchandiseRoutes } from '../merchandise/routes'
 import { useShopReceptionRoutes } from '../shop-reception/routes'
+import { getFBToken, onMessageListener } from 'utils/firebase'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,7 +55,36 @@ const App = () => {
   const [isLoadingActivities, setIsLoadingActivities] = useState(false)
   const [hasLoadedActivities, setHasLoadedActivities] = useState(-1) // [~] holds the subdomainId for which the activities were loaded
 
+  const [fbToken, setFbToken] = useState(null)
+
   const { showNotification } = useNotification()
+  const { showFirebaseNotification } = useFirebaseNotification()
+
+  useEffect(() => {
+    ;(async () => {
+      await getFBToken(setFbToken)
+    })()
+  }, [])
+
+  useEffect(() => {
+    ;(async () => {
+      if (fbToken && !getFirebaseToken()) {
+        await makeNotificationsPutRequest('/association', {
+          deviceToken: fbToken
+        })
+      }
+    })()
+  }, [fbToken])
+
+  onMessageListener()
+    .then(payload => {
+      showFirebaseNotification({
+        title: payload?.notification?.title,
+        message: payload?.notification?.body,
+        link: payload?.fcmOptions?.link
+      })
+    })
+    .catch(err => console.log('failed: ', err))
 
   useEffect(() => {
     // console.log("[App] 1st effect called | hasLoadedAppModules: ", hasLoadedAppModules)
