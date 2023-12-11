@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { useSearchParams } from 'react-router-dom'
 import { makeCoreGetRequest } from 'utils/api'
 import { toAsyncSelectOptions } from './serializers'
 import { useNotification } from 'hooks'
@@ -30,6 +31,9 @@ const AsyncAutocomplete = props => {
 
   const { showNotification } = useNotification()
 
+  let [searchParams] = useSearchParams()
+  console.log(searchParams, searchParams.size)
+
   React.useEffect(() => {
     let active = true
 
@@ -46,7 +50,14 @@ const AsyncAutocomplete = props => {
 
   const queryParams = React.useMemo(() => {
       let qp = {}
-      if (Array.isArray(props?.siblingValuesAsQueryParams) && props.siblingValues) {
+
+      if (searchParams.size > 0) {
+        for (let entry of searchParams.entries()) {
+          const [name, value] = entry
+          qp["store"] = value
+          console.log('id: ', value)
+        }
+      } else if (Array.isArray(props?.siblingValuesAsQueryParams) && props.siblingValues) {
         props.siblingValuesAsQueryParams.forEach(siblingName => {
 
           let  siblingValue
