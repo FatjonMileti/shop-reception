@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Button, DatePicker, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '@mui/material'
+import { CircularProgress, Grid } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { Modal } from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
@@ -13,6 +13,7 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { TeamDayOffManagementItem, TeamMember } from '../../interfaces'
 import { dayOfTypes } from 'components/governance/helpers'
+import { usePublicHolidaysForDatePicker } from '../../PublicHolidays/hooks/usePublicHolidaysForDatePicker'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]
@@ -29,8 +30,10 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
   const { showNotification } = useNotification()
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
-
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
+
+  const { arePublicHolidaysLoading, datePickerShouldDisablePublicHolidaysDates } =
+    usePublicHolidaysForDatePicker()
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -123,6 +126,9 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
           <DatePicker
             value={formik.values.startDate}
             onChange={value => formik.setFieldValue('startDate', value)}
+            shouldDisableDate={datePickerShouldDisablePublicHolidaysDates}
+            loading={arePublicHolidaysLoading}
+            renderLoading={() => <CircularProgress color="primary" />}
             label="Start date"
             variant="outlined"
             style={{ width: '100%' }}
@@ -135,6 +141,9 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
           <DatePicker
             value={formik.values.endDate}
             onChange={value => formik.setFieldValue('endDate', value)}
+            shouldDisableDate={datePickerShouldDisablePublicHolidaysDates}
+            loading={arePublicHolidaysLoading}
+            renderLoading={() => <CircularProgress color="primary" />}
             label="End date"
             variant="outlined"
             style={{ width: '100%' }}

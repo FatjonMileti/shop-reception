@@ -1,4 +1,4 @@
-import { Add } from '@mui/icons-material'
+import { Add, CalendarMonth } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
 import { FilterDataSelect } from 'components/core-ui/FilterDataSelect'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
@@ -7,7 +7,7 @@ import { Input } from 'components/core-ui/Input'
 import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { useGovernanceDomains, useNotification, usePermissions } from 'hooks'
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
@@ -20,6 +20,7 @@ import { toTableRowItems } from './serializers'
 import { RootState } from 'configureStore'
 import { useSelector } from 'react-redux'
 import { DeleteActionHome, EditActionHome } from 'icons'
+import { PublicHolidays } from '../PublicHolidays'
 
 const TeamDayOffManagement = () => {
   const { dispatchFetchDomains } = useGovernanceDomains()
@@ -35,6 +36,7 @@ const TeamDayOffManagement = () => {
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const [isPublicHolidaysModalOpen, setIsPublicHolidaysModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<TeamDayOffManagementItem>()
 
@@ -90,6 +92,9 @@ const TeamDayOffManagement = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
+  const openPublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(true)
+  const closePublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(false)
+
   const rowActions = useMemo(() => {
     let actions
 
@@ -123,15 +128,20 @@ const TeamDayOffManagement = () => {
   }, [columns, canEdit, canDelete, teamMembers, tableItems])
 
   const toolbarActions = useMemo(() => {
-    let actions
+    const actions = [
+      {
+        label: 'Holidays',
+        icon: <CalendarMonth />,
+        onClick: () => openPublicHolidaysModal()
+      }
+    ]
+
     if (canCreate) {
-      actions = [
-        {
-          label: 'Add',
-          icon: <Add></Add>,
-          onClick: e => openNewModal()
-        }
-      ]
+      actions.push({
+        label: 'Add',
+        icon: <Add />,
+        onClick: () => openNewModal()
+      })
     }
 
     return actions
@@ -210,6 +220,10 @@ const TeamDayOffManagement = () => {
       </Grid>
       {domainFilterValue && (
         <Box>
+          <PublicHolidays
+            isModalOpen={isPublicHolidaysModalOpen}
+            closeModal={closePublicHolidaysModal}
+          ></PublicHolidays>
           <NewTimeOff
             teamMembers={teamMembers}
             isModalOpen={isNewModalOpen}
