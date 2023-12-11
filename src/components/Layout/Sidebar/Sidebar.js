@@ -22,22 +22,22 @@ const staticItems = [
     href: '/'
   },
 
-  {
-    disablePadding: true,
-    icon: <Icon_v2 iconName="Notifications" iconType="Menu" />,
-    index: 2,
-    primaryText: 'Notificari',
-    type: 'icon',
-    href: '/'
-  },
-  {
-    disablePadding: true,
-    icon: <Icon_v2 iconName="User" iconType="Menu" />,
-    index: 3,
-    primaryText: 'Contul meu',
-    type: 'icon',
-    href: '/'
-  }
+  // {
+  //   disablePadding: true,
+  //   icon: <Icon_v2 iconName="Notifications" iconType="Menu" />,
+  //   index: 2,
+  //   primaryText: 'Notificari',
+  //   type: 'icon',
+  //   href: '/'
+  // },
+  // {
+  //   disablePadding: true,
+  //   icon: <Icon_v2 iconName="User" iconType="Menu" />,
+  //   index: 3,
+  //   primaryText: 'Contul meu',
+  //   type: 'icon',
+  //   href: '/'
+  // }
 ]
 
 const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
