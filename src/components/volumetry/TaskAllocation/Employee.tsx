@@ -124,7 +124,7 @@ const Employee: React.FC<EmployeeProps> = props => {
                 width: isMobile ? '100%' : 'auto'
               }}
               onClick={() => {
-                if (!startButton) {
+                if (!taskCurrentState.showStartButton) {
                   openStopTaskModal()
                 }
               }}
