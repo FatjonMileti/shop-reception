@@ -93,42 +93,6 @@ const MerchandisersTab = () => {
     action === 'edit' ? openEditModal() : openDeleteModal()
   }
 
-  const columnsWithActions = useMemo(() => {
-    let result = columns
-
-    if (canEdit || canDelete) {
-      const actionsRow = {
-        title: '',
-        field: 'actions',
-        align: 'right',
-        width: '112px',
-        collapsible: 'true',
-        render: row => (
-          <Box display="flex">
-            {canEdit && (
-              <Button
-                onClick={() => selectRow(row, 'edit')}
-                style={{ minWidth: '0.7rem', background: 'transparent' }}
-                label=""
-              >
-                <Edit />
-              </Button>
-            )}
-
-            {canDelete && (
-              <Button onClick={() => selectRow(row, 'delete')} label="">
-                <Delete />
-              </Button>
-            )}
-          </Box>
-        )
-      } as any
-
-      result = [...columns, actionsRow]
-    }
-    return result
-  }, [columns, canEdit, canDelete])
-
   const handleFilterChange = (value: ValueLabelInterface): void => {
     setStoreFilterValue(value)
     setShouldRefreshData(true)
@@ -210,7 +174,7 @@ const MerchandisersTab = () => {
             orderBy="department.name"
             order="desc"
             newButton={canCreate ? { onClick: openNewModal } : null}
-            columns={columnsWithActions}
+            columns={columns}
             items={tableItems}
             fetchData={fetchData}
             isLoading={isLoading}
@@ -218,6 +182,23 @@ const MerchandisersTab = () => {
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
+            rowActions={[
+              {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                onClick: (e, row) => selectRow(row, 'edit')
+              },
+              {
+                label: 'Delete',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#d9534f',
+                onClick: (e, row) => selectRow(row, 'delete')
+              }
+            ]}
+            rowActionsWidth="130px"
           />
         </Box>
       )}

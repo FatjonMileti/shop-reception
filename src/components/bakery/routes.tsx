@@ -22,12 +22,14 @@ import { StoreGrowthCoefficient } from './TraineeRole/StoreGrowthCoefficient'
 import { ProductsGrowthCoefficient } from './TraineeRole/ProductsGrowthCoefficient'
 import { RegionGrowthCoefficient } from './TraineeRole/RegionGrowthCoefficient'
 import { ApplicationUsageReport } from './TraineeRole/ApplicationUsageReport'
+import { CadentierSalesRegion } from './RegionManagerRole/CadentierSalesRegion'
 import { GrowthIndex } from './RegionManagerRole/GrowthIndex'
 import { GrowthIndexView } from './RegionManagerRole/GrowthIndex/GrowthIndexView'
 import { GrowthIndexProductsView } from './RegionManagerRole/GrowthIndex/GrowthIndexProductsView'
 import { CadentierReportAndSales } from './TraineeRole/CadentierReportAndSales'
 
 import { ProductManagementStore } from './StoreManagerRole/ProductManagementStore'
+import { UsageReportRegion } from './RegionManagerRole/UsageReportRegion'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -261,6 +263,18 @@ export const useBakeryRoutes = applicationPages => {
         path={URLS.AUTH_GROWTH_INDEX_PRODUCTS_VIEW}
         element={
           <PrivateRoute component={GrowthIndexProductsView} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_USAGE_REPORT_REGION}
+        element={
+          <PrivateRoute component={UsageReportRegion} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_CADENTIER_SALES_REGION}
+        element={
+          <PrivateRoute component={CadentierSalesRegion} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
     </>

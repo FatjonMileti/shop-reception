@@ -23,7 +23,8 @@ VALUES
     (1, 'Governance', 'AssuredWorkload', '/governance', true),
     (2, 'Bakery', 'EventSeatOutlined', '/bakery', true),
     (3, 'Suply OMNI', 'DonutLargeTwoTone', '/supplyOmni', true),
-    (4, 'Volumetry', 'DonutLargeTwoTone', '/volumetry', true);
+    (4, 'Volumetry', 'DonutLargeTwoTone', '/volumetry', true),
+    (5, 'Shop Reception', 'DonutLargeTwoTone', '/shop-reception', true);
 
 
 -- application submodule with module id
@@ -41,7 +42,9 @@ VALUES
     (6, 'Supply OMNI', 'DonutLargeTwoTone', '/supplyOmni', true, 3),
     -- Volumetry
     (7, 'Administrare Angajati', 'UsersManagement', '/employeeManagement', true, 4),
-    (8, 'Administrare Task-uri', 'UsersManagement', '/tasksManagement', true, 4);
+    (8, 'Administrare Task-uri', 'UsersManagement', '/tasksManagement', true, 4),
+    -- Shop Reception
+    (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5);
 
 
 -- activity with submodule id
@@ -95,7 +98,9 @@ VALUES
     -- Volumetry
     (42, 'Management Angajati', 'UsersManagement', null, true, 7),
     (43, 'Management Task-uri', 'UsersManagement', null, true, 8),
-    (44, 'Alocare Task-uri', 'UsersManagement', null, true, 8);
+    (44, 'Alocare Task-uri', 'UsersManagement', null, true, 8),
+    -- Shop Reception
+    (45, 'Admin magazin', 'UsersManagement', null, true, 9);
 
 
 -- screen with activity id (some are first screens)
@@ -168,7 +173,9 @@ VALUES
     -- Volumetry
     (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true),
     (59, 'Management task-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
-    (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true);
+    (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
+    -- Shop Reception
+    (61, 'Screen 1', '', '/url', true, 45, true);
 
 
 -- UI Schema with activity id and screen id
@@ -293,7 +300,10 @@ VALUES
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     (1, 42),
     (1, 43),
-    (1, 44);
+    (1, 44),
+    -- Shop Reception
+    -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
+    (1, 45);
 
 
 -- reset sequences
