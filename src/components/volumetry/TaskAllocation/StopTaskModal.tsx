@@ -30,13 +30,13 @@ const StopTaskModal: React.FC<StopTaskModalProps> = props => {
     onSuccess: res => {
       closeModal()
       showNotification({
-        message: `Task stopped successfully`,
+        message: `Taskul a fost oprit cu succes!`,
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to stop task, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
