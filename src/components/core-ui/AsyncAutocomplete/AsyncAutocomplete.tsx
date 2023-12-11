@@ -30,9 +30,7 @@ const AsyncAutocomplete = props => {
   } = props
 
   const { showNotification } = useNotification()
-
   let [searchParams] = useSearchParams()
-  console.log(searchParams, searchParams.size)
 
   React.useEffect(() => {
     let active = true
@@ -55,7 +53,6 @@ const AsyncAutocomplete = props => {
         for (let entry of searchParams.entries()) {
           const [name, value] = entry
           qp["store"] = value
-          console.log('id: ', value)
         }
       } else if (Array.isArray(props?.siblingValuesAsQueryParams) && props.siblingValues) {
         props.siblingValuesAsQueryParams.forEach(siblingName => {
@@ -74,6 +71,11 @@ const AsyncAutocomplete = props => {
             }
         })
       }
+
+      // if (searchParams.size > 0 && Object.keys(qp).length === 0) {
+      //   console.log('No sibling values, filter from searchParams')
+      // }
+
       return qp
   }, [props.siblingValues])
 
