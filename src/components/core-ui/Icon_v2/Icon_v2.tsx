@@ -25,6 +25,46 @@ import {
   GroupVolumetryHome
 } from 'icons/volumetry'
 
+import {
+  AdminMenu,
+  FormatorMenu,
+  RegionManagerMenu,
+  StoreManagerMenu,
+  TraceabilityOperatorMenu,
+  AdminHome,
+  FormatorHome,
+  StoreManagerHome,
+  TraceabilityOperatorHome,
+  RegionManagerHome,
+  UsersManagementSubcategory,
+  ZonesSubcategory,
+  RegionsSubcategory,
+  StoresSubcategory,
+  FamiliesSubcategory,
+  ClustersSubcategory,
+  GrowthSubcategory,
+  ProductsSubcategory,
+  UsageReportSubcategory,
+  SalesCadentierSubcategory,
+  IngredientsSubcategory,
+  SalesCadentierFormatorSubcategory,
+  UsageReportFormatorSubcategory,
+  GrowthIndexFormatorSubcategory,
+  GrowthRegionFormatorSubcategory,
+  CadentierFormatorSubcategory,
+  ProductGrowthIndexFormatorSubcategory,
+  ProductManagementFormatorSubcategory,
+  ProductManagementRegionSubcategory,
+  GrowthRegionSubcategory,
+  GrowthIndexSubcategory,
+  CadentierSalesRegionSubcategory,
+  UsageReportRegionSubcategory,
+  ProductManagementSubcategory,
+  CadentierStoreSubcategory,
+  GrowthIndexStoreSubcategory,
+  ProductGrowthIndexSubcategory,
+  CadentierSalesStoreSubcategory
+} from 'icons/bakery'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { createElement } from 'react'
 import {
@@ -73,7 +113,52 @@ const IconComponents = {
   ChairMenu,
   VolumetryMenu,
   EmployeeManagementMenu,
-  ManagementTasksMenu
+  ManagementTasksMenu,
+  // Bakery
+  //home
+  AdminHome,
+  FormatorHome,
+  StoreManagerHome,
+  TraceabilityOperatorHome,
+  RegionManagerHome,
+  //menu
+  AdminMenu,
+  FormatorMenu,
+  RegionManagerMenu,
+  StoreManagerMenu,
+  TraceabilityOperatorMenu,
+  //admin
+  UsersManagementSubcategory,
+  ZonesSubcategory,
+  RegionsSubcategory,
+  StoresSubcategory,
+  FamiliesSubcategory,
+  ClustersSubcategory,
+  GrowthSubcategory,
+  ProductsSubcategory,
+  UsageReportSubcategory,
+  SalesCadentierSubcategory,
+  IngredientsSubcategory,
+  //formator
+  SalesCadentierFormatorSubcategory,
+  UsageReportFormatorSubcategory,
+  GrowthIndexFormatorSubcategory,
+  GrowthRegionFormatorSubcategory,
+  CadentierFormatorSubcategory,
+  ProductGrowthIndexFormatorSubcategory,
+  ProductManagementFormatorSubcategory,
+  //regionMg
+  ProductManagementRegionSubcategory,
+  GrowthRegionSubcategory,
+  GrowthIndexSubcategory,
+  CadentierSalesRegionSubcategory,
+  UsageReportRegionSubcategory,
+  //storeMg
+  ProductManagementSubcategory,
+  CadentierStoreSubcategory,
+  GrowthIndexStoreSubcategory,
+  ProductGrowthIndexSubcategory,
+  CadentierSalesStoreSubcategory
 }
 
 export type IconType = 'Menu' | 'Home' | 'Subcategory' | 'Icon'

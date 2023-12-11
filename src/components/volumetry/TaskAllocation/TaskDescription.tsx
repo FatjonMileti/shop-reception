@@ -43,7 +43,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
       {employees && (
         <Grid container flexDirection="column" pr={2}>
           {employees.map(employee => (
-            <Employee employee={employee} />
+            <Employee employee={employee} task={item}/>
           ))}
         </Grid>
       )}
