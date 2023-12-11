@@ -107,18 +107,22 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
         </div>
         <Divider component="div" />
 
-        <div className={s.infoContainer} style={{ justifyContent: 'flex-end' }}>
+        <div className={s.infoContainer} style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
+          <div>
+
           <Input
             type="select"
             name="buyback-input"
             label="Mod achizitie"
             values={product.purchaseOptions}
             value={selectedBuybackOption}
-            variant="standard"
+            variant="outlined"
             width="320px"
             onChange={event => setSelectedBuybackOption((event.target as any).value)}
             disabled={product.purchaseOptions.length == 1}
           />
+          </div>
+
         </div>
 
         <Divider component="div" />

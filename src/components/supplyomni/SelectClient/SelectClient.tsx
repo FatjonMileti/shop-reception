@@ -1,15 +1,15 @@
-import { Grid } from '@mui/material'
+import { CircularProgress, Grid } from '@mui/material'
 import { Paper } from '@mui/material'
 import { Tabs } from 'components/core-ui/Tabs'
 import { Box, useMediaQuery } from '@mui/material'
 import { ExistingClient } from './ExistingClient'
 import { NewClient } from './NewClient'
 
-import { useQuery, useMutation, useQueryClient } from 'react-query'
+import { useQuery } from 'react-query'
 import { ShoppingCartStepper } from '../../core-ui/ShoppingCartStepper'
 import { ShoppingCartSummary } from '../ShoppingCart'
 import { useNotification } from 'hooks'
-import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
+import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 
 interface SelectClientProps {
@@ -17,9 +17,8 @@ interface SelectClientProps {
 }
 
 const SelectClient: React.FC<SelectClientProps> = ({ selectNewClient }) => {
-
-  const { showNotification } = useNotification();
-  const isXs = useMediaQuery('(max-width:624px)');
+  const { showNotification } = useNotification()
+  const isXs = useMediaQuery('(max-width:624px)')
 
   const { data: products, isLoading: isLoadingGetProducts } = useQuery(
     ['cart-products'],
@@ -38,38 +37,50 @@ const SelectClient: React.FC<SelectClientProps> = ({ selectNewClient }) => {
     }
   )
 
-        const tabs = [
-          {
-            content: <ExistingClient selectNewClient={selectNewClient} />,
-            label: 'Client existent',
-            tabIndex: 0
-          },
-          {
-            content: <NewClient selectNewClient={selectNewClient} />,
-            label: 'Client nou',
-            tabIndex: 1
-          }
-        ]
+  const tabs = [
+    {
+      content: <ExistingClient selectNewClient={selectNewClient} />,
+      label: 'Client existent',
+      tabIndex: 0
+    },
+    {
+      content: <NewClient selectNewClient={selectNewClient} />,
+      label: 'Client nou',
+      tabIndex: 1
+    }
+  ]
 
-        
-       return  <Box sx={!isXs ? {margin: '24px'} : {margin: '12px'}}>
-                  <Grid sx={{mt:1}} container spacing={2}>
-                    <Grid item xs={12}>
-                        <ShoppingCartStepper activeStep={1} />
-                    </Grid>
-                    <Grid style={{paddingTop:'16px', marginTop:0, height:'auto', paddingLeft:'30px'}} item xs={12} md={8} >
-                        <Paper sx={{pt:0, pb:2, minHeight:'400px'}}>
-                          <Box sx={{pl:3, pr:3, pt:0}}>
-                            <Tabs tabsContainerStyle={{ borderBottom: 1, borderColor: '#E5E5E5',margin: 0 }} tabs={tabs} />
-                          </Box>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                      <ShoppingCartSummary sx={{pl:2, pr:2}} order={products || {}} />
-                    </Grid>
-                </Grid>
+  return (
+    <Box sx={!isXs ? { margin: '24px' } : { margin: '12px' }}>
+      {isLoadingGetProducts ? (
+        <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+      ) : (
+        <Grid sx={{ mt: 1 }} container spacing={2}>
+          <Grid item xs={12}>
+            <ShoppingCartStepper activeStep={1} />
+          </Grid>
+          <Grid
+            style={{ paddingTop: '16px', marginTop: 0, height: 'auto', paddingLeft: '30px' }}
+            item
+            xs={12}
+            md={8}
+          >
+            <Paper sx={{ pt: 0, pb: 2, minHeight: '400px' }}>
+              <Box sx={{ pl: 3, pr: 3, pt: 0 }}>
+                <Tabs
+                  tabsContainerStyle={{ borderBottom: 1, borderColor: '#E5E5E5', margin: 0 }}
+                  tabs={tabs}
+                />
               </Box>
-
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <ShoppingCartSummary sx={{ pl: 2, pr: 2 }} order={products || {}} />
+          </Grid>
+        </Grid>
+      )}
+    </Box>
+  )
 }
 
 export default SelectClient

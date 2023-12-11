@@ -33,13 +33,17 @@ const Tabs = (props: TabsProps) => {
       onChange={onChange}
       tabs={tabs}
       value={selectedValue}
-      tabsContainerStyle={tabsContainerStyle ? tabsContainerStyle : {
-        borderBottom: 1,
-        borderColor: '#E5E5E5',
-        margin: isXs ? '18px 12px 0' : '36px 0 0'
-      }}
+      tabsContainerStyle={
+        tabsContainerStyle
+          ? tabsContainerStyle
+          : {
+              borderBottom: 1,
+              borderColor: '#E5E5E5',
+              margin: isXs ? '18px 12px 0' : '36px 0 0'
+            }
+      }
       tabContentBoxStyle={{ padding: '0' }}
-      tabsStyle={{ fontSize: isXs ? '1rem !important' : '1rem', textTransform:'none' }}
+      tabsStyle={{ fontSize: isXs ? '1rem !important' : '1rem', textTransform: 'none' }}
     />
   )
 }

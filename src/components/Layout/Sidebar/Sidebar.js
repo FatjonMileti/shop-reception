@@ -93,7 +93,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
 
   return (
     <Drawer
-    isLeftPersistent
+      isLeftPersistent
       open={isMenuOpen}
       onClose={handleCloseMenu}
       displayEmptyHeader

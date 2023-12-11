@@ -50,7 +50,6 @@ const NewAddress: React.FC<NewAddressProps> = props => {
               name="address"
               label="Adresa"
               variant="outlined"
-              // style={{'& .MuiOutlinedInput-root' : {padding:'8px'}}}
               value={formik.values.newDeliveryAddress.address}
               fullWidth
               onChange={(e: ChangeEvent<HTMLInputElement>) =>

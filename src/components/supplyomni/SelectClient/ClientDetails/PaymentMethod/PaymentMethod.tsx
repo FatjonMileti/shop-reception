@@ -1,5 +1,11 @@
-import { Box, CircularProgress, Divider, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
-import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined'
+import {
+  Box,
+  CircularProgress,
+  Divider,
+  Grid,
+  Typography,
+  useMediaQuery
+} from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useMemo } from 'react'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
@@ -16,14 +22,14 @@ import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { toOrderPayload } from './serializers'
 
-
 interface PaymentMethodProps {
   clientId: string
 }
+
 const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
-  const isXs = useMediaQuery('(max-width:624px)');
+  const isXs = useMediaQuery('(max-width:624px)')
   const { clientId } = props
 
   const { data: paymentOptions, isLoading: isPaymentOptionsLoading } = useQuery(
@@ -103,28 +109,29 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   })
 
   return (
-    // <Grid item xs={12} md={6}>
-      <Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', padding:'16px 8px' }}>
-          {/* <PaymentsOutlinedIcon /> */}
-          <Typography fontWeight={600} ml={2}>
-            Metoda de plata
-          </Typography>
-        </Box>
-        <Divider />
+    <Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', padding: '16px 8px' }}>
+        <Typography fontWeight={600} ml={2}>
+          Metoda de plata
+        </Typography>
+      </Box>
+      <Divider />
 
-        <Grid container>
-          <Grid item md={12} sm={12} xs={12}>
-            <Box padding={4} paddingBottom={0}>
+      <Grid container>
+        <Grid item md={12} sm={12} xs={12}>
+          <Box padding={4} paddingBottom={0}>
+            {isPaymentOptionsLoading ? (
+              <CircularProgress color="primary" disableShrink style={{ marginRight: '16px' }} />
+            ) : (
               <AsyncAutocomplete
                 variant="outlined"
                 name="payment-methods"
                 label="Metoda de plata"
                 disableClearable
-                style={{'& .MuiOutlinedInput-root' : {padding:0 }}}
+                style={{ '& .MuiOutlinedInput-root': { padding: 0 } }}
                 value={
-                  paymentOptions?.find(item => item.value === formik.values.paymentMethod)
-                    ?.label || ''
+                  paymentOptions?.find(item => item.value === formik.values.paymentMethod)?.label ||
+                  ''
                 }
                 options={paymentOptions || []}
                 onChange={paymentMethod =>
@@ -134,58 +141,60 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
                 error={!!formik.errors.paymentMethod}
                 helperText={formik.errors.paymentMethod as string}
               />
-            </Box>
-          </Grid>
-          
-          <Grid item md={12} sm={12} xs={12}>
-            <Box padding={4} paddingBottom={0}>
+            )}
+          </Box>
+        </Grid>
+
+        <Grid item md={12} sm={12} xs={12}>
+          <Box padding={4} paddingBottom={0}>
+            {isDeliveryOptionsLoading ? (
+              <CircularProgress color="primary" disableShrink style={{ marginRight: '16px' }} />
+            ) : (
               <AsyncAutocomplete
                 variant="outlined"
                 name="delivery-options"
                 label="Alege tipul de livrare"
                 disableClearable
                 value={
-                  deliveryOptions?.find(item => item.value === formik.values.deliveryType)
-                    ?.label || ''
+                  deliveryOptions?.find(item => item.value === formik.values.deliveryType)?.label ||
+                  ''
                 }
                 options={deliveryOptions || []}
-                onChange={deliveryType =>
-                  formik.setFieldValue('deliveryType', deliveryType.value)
-                }
-                style={{'& .MuiOutlinedInput-root' : {padding:0 }}}
+                onChange={deliveryType => formik.setFieldValue('deliveryType', deliveryType.value)}
+                style={{ '& .MuiOutlinedInput-root': { padding: 0 } }}
                 required
                 error={!!formik.errors.deliveryType}
                 helperText={formik.errors.deliveryType as string}
               />
-            </Box>
-          </Grid>
-          <Grid item md={12} sm={12} xs={12}>
-            <NewAddress
-              formik={formik}
-              onFieldUpdate={(key, value) => formik.setFieldValue(key, value)}
-            />
-          </Grid>
-          <Grid container p={4} justifyContent="flex-end">
-            <Grid item xs={12}>
-              <div style={{ display: 'flex', justifyContent: 'right' }}>
-                {isLoadingAddOrder && (
-                  <CircularProgress color="primary" disableShrink style={{ marginRight: '16px' }} />
-                )}
-                <Button
-                  variant="contained"
-                  label={''}
-                  style={!isXs ? {} : {width:'100%'}}
-                  onClick={() => formik.handleSubmit()}
-                  disabled={isLoadingAddOrder}
-                >
-                  <PictureAsPdfOutlinedIcon /> PROFORMA IN FORMAT PDF
-                </Button>
-              </div>
-            </Grid>
+            )}
+          </Box>
+        </Grid>
+        <Grid item md={12} sm={12} xs={12}>
+          <NewAddress
+            formik={formik}
+            onFieldUpdate={(key, value) => formik.setFieldValue(key, value)}
+          />
+        </Grid>
+        <Grid container p={4} justifyContent="flex-end">
+          <Grid item xs={12}>
+            <div style={{ display: 'flex', justifyContent: 'right' }}>
+              {isLoadingAddOrder && (
+                <CircularProgress color="primary" disableShrink style={{ marginRight: '16px' }} />
+              )}
+              <Button
+                variant="contained"
+                label={''}
+                style={!isXs ? {} : { width: '100%' }}
+                onClick={() => formik.handleSubmit()}
+                disabled={isLoadingAddOrder}
+              >
+                <PictureAsPdfOutlinedIcon /> PROFORMA IN FORMAT PDF
+              </Button>
+            </div>
           </Grid>
         </Grid>
-      </Box>
-    // </Grid>
+      </Grid>
+    </Box>
   )
 }
 
