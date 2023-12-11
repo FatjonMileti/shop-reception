@@ -2,22 +2,21 @@ import { initializeApp } from 'firebase/app'
 import { getMessaging, getToken, onMessage } from 'firebase/messaging'
 import { removeFirebaseToken, setFirebaseToken } from './authService'
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: 'communicationgatewayapi.firebaseapp.com',
-  projectId: 'communicationgatewayapi',
-  storageBucket: 'communicationgatewayapi.appspot.com',
-  messagingSenderId: '337960741708',
-  appId: '1:337960741708:web:8318e4584800d55880fde9'
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROCESS_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIRE_BASE_APP_ID
 }
 
 const firebaseApp = initializeApp(firebaseConfig)
 const messaging = getMessaging(firebaseApp)
 
-export const getFBToken = async (setToken) => {
+export const getFBToken = async setToken => {
   return getToken(messaging, {
-    vapidKey:
-      'BH25kT8DTRXxDviLr1RQ0RRvDzUCf-P1EteteGf0a9ryxfy_144JqLEIBPS13rPqGJo4z7NtjGzaZXqIr1hRojE'
+    vapidKey: process.env.FIREBASE_VAPID_KEY
   })
     .then(currentToken => {
       if (currentToken) {
