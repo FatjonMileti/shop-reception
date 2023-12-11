@@ -14,7 +14,7 @@ import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
 import { oidcConfig, getFirebaseToken } from 'utils/authService'
-import { useNotification } from 'hooks'
+import { useFirebaseNotification, useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
@@ -28,7 +28,6 @@ import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
 import { useMerchandiseRoutes } from '../merchandise/routes'
 import { useShopReceptionRoutes } from '../shop-reception/routes'
 import { getFBToken, onMessageListener } from 'utils/firebase'
-
 
 // const firebaseConfig = new URLSearchParams({
 //   apiKey: process.env.FIREBASE_API_KEY
@@ -64,6 +63,7 @@ const App = () => {
   const [fbToken, setFbToken] = useState(null)
 
   const { showNotification } = useNotification()
+  const { showFirebaseNotification } = useFirebaseNotification()
 
   console.log(process.env.FIREBASE_API_KEY)
 
@@ -85,7 +85,9 @@ const App = () => {
 
   onMessageListener()
     .then(payload => {
-      showNotification({ message: payload?.notification?.title + payload?.notification?.body })
+      showFirebaseNotification({
+        message: payload?.notification?.title + payload?.notification?.body
+      })
     })
     .catch(err => console.log('failed: ', err))
 
