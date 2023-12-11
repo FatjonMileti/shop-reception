@@ -86,7 +86,8 @@ const App = () => {
   onMessageListener()
     .then(payload => {
       showFirebaseNotification({
-        message: payload?.notification?.title + payload?.notification?.body
+        title: payload?.notification?.title,
+        message: payload?.notification?.body
       })
     })
     .catch(err => console.log('failed: ', err))

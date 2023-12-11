@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface FirebaseNotificationState {
   open?: boolean
   type?: AlertColor
+  title?: string
   message?: string
   timeout?: number | null
 }
@@ -11,6 +12,7 @@ export interface FirebaseNotificationState {
 export const notificationInitialState: FirebaseNotificationState = {
   open: false,
   type: 'info',
+  title: '',
   message: '',
   timeout: null
 }

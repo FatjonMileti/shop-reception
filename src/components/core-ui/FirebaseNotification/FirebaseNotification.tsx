@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { useFirebaseNotification } from 'hooks'
 import { RootState } from 'configureStore'
 import { Snackbar } from '@fullscreendigital/carrefour-dex-fe'
-import { SnackbarCloseReason } from '@mui/material'
+import { Box, SnackbarCloseReason } from '@mui/material'
 
 const FirebaseNotification = () => {
   const notification = useSelector((state: RootState) => state.firebaseNotification)
@@ -12,14 +12,18 @@ const FirebaseNotification = () => {
   const handleClose = (_: unknown, reason?: SnackbarCloseReason) =>
     reason !== 'clickaway' && clearFirebaseNotification()
 
-  debugger
   return (
     <Snackbar
       open={notification.open}
       onClose={handleClose}
       alert={{
         severity: notification.type,
-        children: notification.message,
+        children: (
+          <Box>
+            <Box>{notification.title}</Box>
+            <Box>{notification.message}</Box>
+          </Box>
+        ),
         variant: 'standard'
       }}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
