@@ -1,15 +1,15 @@
 import { useState, useEffect, MouseEvent } from 'react';
-import {Box, Button, Typography, InputBase, Paper, List, Popover, Stack, useMediaQuery } from '@mui/material';
+import {Box, Button, Checkbox, InputBase, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Paper, Popover, Stack, Typography, useMediaQuery } from '@mui/material';
 import { KeyboardArrowDown as KeyboardArrowDownIcon, Search as SearchIcon, Close as CloseIcon} from '@mui/icons-material';
-import { FilterDataSelectProps } from './FilterDataSelectDefinitions'
-import { StyledBadge, StyledDrawer, StyledButton, StyledListItem } from './FilterDataSelectStyles'
+import { FilterDataSelectProps, FilterDataSelectOption } from './FilterDataSelectDefinitions'
+import { StyledBadge, StyledDrawer, StyledButton, StyledListItem, StyledMultiListItem, StyledGreyCheckbox } from './FilterDataSelectStyles'
 
 const FilterDataSelect = (props: FilterDataSelectProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [componentToOpen, setComponentToOpen] = useState<string>('menu');
   const [open, setOpen] = useState<Boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
-  const [selectedData, setSelectedData] = useState<any | {}>({});
+  const [selectedData, setSelectedData] = useState<any[]>([]);
   const [options, setOptions] = useState<any | {}>({});
   // const open = Boolean(anchorEl);
 
@@ -29,10 +29,18 @@ const FilterDataSelect = (props: FilterDataSelectProps) => {
   const handleClose = () => { setAnchorEl(null); setOpen(false); };
 
   useEffect(() => {
-    if (props.selectedData) {
-      setSelectedData(props.selectedData);
+
+    if(props.defaultSelectedData) {
+
+      if(!(props.defaultSelectedData instanceof Array) && Object.keys(props.defaultSelectedData).length > 0) {
+        setSelectedData([props.defaultSelectedData]);
+      } else if((props.defaultSelectedData instanceof Array) && props.defaultSelectedData.length > 0) {
+        setSelectedData(props.defaultSelectedData);
+      }
+
     }
-  }, [props.selectedData]);
+      
+  }, []);
 
 
   useEffect(() => {
@@ -51,29 +59,128 @@ const FilterDataSelect = (props: FilterDataSelectProps) => {
       setOptions(filteredData);
     } else if (props.options) {
       let crtOptions = props.options;
-      if(props.allTypesLabel) crtOptions = [{ label: props.allTypesLabel, value: '' }, ...props.options];
       setOptions(crtOptions);
     } 
   }, [searchValue]);
 
+  const changeAllSelectedData = async () => { 
+    if(props.multiSelect === true){
+        if(selectedData.length == props.options.length){
+          setSelectedData([]);
+        } else {
+          setSelectedData(props.options);
+        }
+
+        if(props.onSelect) props.onSelect([]);
+
+      } else {
+
+        setSelectedData([]);
+        if(props.onSelect) props.onSelect({});
+
+      }
+
+  }
+
+  const changeSelectedData = async (itm:any) => { 
+      if(props.multiSelect === true){
+
+          let crtSelectedData = [...selectedData];
+
+          let selectedValues = crtSelectedData.map((i:any) => i.value);
+          if(selectedValues.indexOf(itm.value) !== -1){
+            crtSelectedData = crtSelectedData.filter((i:any) => i.value != itm.value && i.value);
+          } else {
+            crtSelectedData.push(itm);
+          }
+
+          setSelectedData(crtSelectedData);
+
+          if(props.onSelect) props.onSelect(crtSelectedData);
+          
+      } else {
+          if(!itm.value) 
+          setSelectedData([]);
+          else
+          setSelectedData([itm]);
+
+          if(props.onSelect) props.onSelect(itm);
+
+      }
+
+      return;
+  }
+
   const getList = () => {
-    
-      return  <List dense={true} sx={{ minWidth:400 }}>
-        { options?.length > 0 && options.map((item:any, index:any) => {
-          return <StyledListItem key={'ddlst'+index} className={ selectedData?.value == item.value ? 'selectedItem' : '' } onClick={ev => {  props.onSelect(item); setOpen(false);  }}>
-            {item.label}
-          </StyledListItem>
-          })
+   
+      if(!props.multiSelect) {
+            return  <List dense={true} sx={{ minWidth:400 }}>
+              { props?.allTypesLabel &&
+                <StyledListItem onClick={ev => { changeAllSelectedData();  setOpen(false);  }} >{props?.allTypesLabel}</StyledListItem>
+              }
+              { options?.length > 0 && options.map((item:any, index:any) => {
+                return <StyledListItem key={'ddlst'+index} className={ selectedData && selectedData[0] && selectedData[0].value == item.value ? 'selectedItem' : '' } onClick={ev => { changeSelectedData(item);  setOpen(false);  }}>
+                  {item.label}
+                </StyledListItem>
+                })
+              }
+              { !options?.length &&
+              <StyledListItem className='noDataItem'>{props.noDataFoundLabel || 'No data found!'}</StyledListItem>
+              }
+              </List>
+
+        } else {
+
+              return  <List dense={true} sx={{ minWidth:400 }}>
+              { props?.allTypesLabel &&  
+                        <StyledMultiListItem key={'ddmltlst_alldata'}>
+                          <ListItemButton role={undefined} onClick={ ev => { changeAllSelectedData();  }} dense disableRipple>
+                            <ListItemIcon>
+                              <StyledGreyCheckbox 
+                                edge="start" 
+                                checked={(selectedData.length == props.options.length)}
+                                tabIndex={-1}
+                                disableRipple
+                                inputProps={{ 'aria-labelledby': 'lblid_all' }}
+                              />
+                            </ListItemIcon>
+                            <ListItemText id={'lblid_all'} sx={{ fontStyle:'italic', color:'#999a9b' }} primary={props?.allTypesLabel} />
+                          </ListItemButton>
+                          </StyledMultiListItem>
+              }
+              { options?.length > 0 && options.map((item:any, index:any) => {
+
+                  const isChecked = selectedData.length > 0 ? (selectedData.map((s:any) => s?.value).indexOf(item?.value) !== -1) : false;
+                  
+                  return <StyledMultiListItem key={'ddmltlst'+index}>
+                          <ListItemButton role={undefined} onClick={ ev => { changeSelectedData(item);  }} dense disableRipple>
+                            <ListItemIcon>
+                              <Checkbox 
+                                edge="start" 
+                                checked={isChecked}
+                                tabIndex={-1}
+                                disableRipple
+                                sx={{ color:'#1976d2' }}
+                                inputProps={{ 'aria-labelledby': 'lblid_' + index }}
+                              />
+                            </ListItemIcon>
+                            <ListItemText id={'lblid_' + index} primary={item.label} />
+                          </ListItemButton>
+                          </StyledMultiListItem>
+
+                })
+              }
+              { !options?.length &&
+              <StyledListItem className='noDataItem'>{props.noDataFoundLabel || 'No data found!'}</StyledListItem>
+              }
+              </List>
+
         }
-        { !options?.length &&
-         <StyledListItem className='noDataItem'>{props.noDataFoundLabel || 'No data found!'}</StyledListItem>
-        }
-        </List>
   }
 
   const getSearchInput = () => {
-
-    if(!props.showCounter || !props.showSearch) return null;
+ 
+    if(!props.showCounter && !props.showSearch) return null;
 
     return <Box sx={{ padding:'1rem 1rem 0.5rem 1rem', width:'100%' }}>
           { (props.showCounter === true) &&
@@ -92,7 +199,6 @@ const FilterDataSelect = (props: FilterDataSelectProps) => {
               placeholder="Search"
               onChange={(e) => { setSearchValue(e.target.value); }}
               inputProps={{ 'aria-label': 'search' }}
-
             />
             {(searchValue.length > 0) && 
               <CloseIcon className='closeIcon' onClick={(e) => { setSearchValue(''); }} sx={{color:'#316ede', mr:1, cursor:'pointer', fontSize:'1.2rem'}} />
@@ -102,7 +208,27 @@ const FilterDataSelect = (props: FilterDataSelectProps) => {
         </Box>
   }
 
-  let btnStyle: object = { backgroundColor:'#0970E6',borderRadius:6, lineHeight:2, padding:'.3rem 1.5rem', fontSize:'.8rem', fontWeight:600, minWidth:'250px', textTransform:'initial' }
+  const getDisplayValue = () => {
+
+      let displayedValue = props.placeholderButton || 'Select';
+
+      if(selectedData.length > 0)
+      {
+        if(selectedData.length == props.options.length && props.allTypesLabel) {
+          displayedValue = props.allTypesLabel;
+        } else {
+          displayedValue = selectedData.filter((i:any) => i.value).map((i:any) => i.label).join(', ');
+        }
+        
+      }  
+      
+      return displayedValue;
+
+  }
+
+  let btnStyle: object = { 
+    backgroundColor:'#0970E6',borderRadius:6, lineHeight:2, padding:'.3rem 1.5rem', fontSize:'.8rem', fontWeight:600, minWidth:'250px', width:'250px', textTransform:'initial',  
+  }
   if(isXs) btnStyle = {...btnStyle, width:'100%'};
 
   return (
@@ -124,7 +250,7 @@ const FilterDataSelect = (props: FilterDataSelectProps) => {
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
             >
-              {selectedData?.label || props.placeholderButton || 'Select'}
+              <Typography sx={{whiteSpace: 'nowrap', fontSize:'.9rem', width:'80%', overflow: 'hidden', textOverflow: "ellipsis"}}>{getDisplayValue()}</Typography>
             </StyledButton>
         </Box>
       </Stack>

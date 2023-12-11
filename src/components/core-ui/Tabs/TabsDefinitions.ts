@@ -7,5 +7,6 @@ export interface Tab {
 }
 
 export interface TabsProps {
-  tabs: Tab[]
+  tabs: Tab[],
+  tabsContainerStyle?: any
 }

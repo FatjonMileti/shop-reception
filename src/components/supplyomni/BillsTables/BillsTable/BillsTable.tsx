@@ -130,7 +130,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
     async () => {
       const result = (await makeCoreGetRequest(
         '/supply-omni/order/delivery-options'
-      )) as DeliveryOptionModel[]
+      )) as DeliveryOptionModel[];
       return result.map(item => ({ label: item.description, value: item.type }));
     },
     {
@@ -198,35 +198,16 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
         />
         {deliveryTypeOptions && (
           <Grid sx={isXs ? {} : {position:'absolute', width:'50%', zIndex:3}} container>
-            
             <Grid xs={12} sm={6} md={6} lg={6} item>
-              {/* <Checkbox
-                style={{ paddingTop: '0.7rem' }}
-                label="Comenzile mele"
-                checked={withMyOrders}
-                onChange={event => handleWithMyOrdersFilterChange(event.target.checked)}
-              /> */}
-
               <FormControlLabel name="my_orders" label="Comenzile mele" sx={{color:'#052351'}} control={
                   <Switch checked={withMyOrders} onChange={event => handleWithMyOrdersFilterChange(event.target.checked)} />
               } />
             </Grid>
             <Grid xs={12} sm={6} md={6} lg={6} item>
-              <FilterDataSelect name={'deliveryTypes'} allTypesLabel="Toate tipurile" placeholderButton={'Tip livrare'} selectedData={selectedDeliveryOption} options={deliveryTypeOptions} showSearch={false} showCounter={false} onSelect={handleDeliveryOptionFilterChange} />
-              {/* <AsyncAutocomplete
-                variant="standard"
-                name="deliveryTypes"
-                label="Tip livrare"
-                value={selectedDeliveryOption}
-                options={deliveryTypeOptions}
-                onChange={handleDeliveryOptionFilterChange}
-              /> */}
+              <FilterDataSelect multiSelect={true} name={'deliveryTypes'} allTypesLabel="Toate tipurile" placeholderButton={'Tip livrare'} defaultSelectedData={selectedDeliveryOption} showSearch={true} showCounter={true} options={deliveryTypeOptions} onSelect={handleDeliveryOptionFilterChange} />
             </Grid>
           </Grid>
         )}
-
-          
-
         <Table
           hideCheckbox
           order="desc"
@@ -245,7 +226,6 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           setShouldRefreshData={setShouldRefreshData}
         />
       
-
       </Box>
     </div>
   )

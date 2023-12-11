@@ -14,7 +14,7 @@ const NewAddress: React.FC<NewAddressProps> = props => {
   const { onFieldUpdate, formik } = props
 
   return (
-    <Box paddingLeft={4}>
+    <Box padding={4}>
       <FormGroup>
         <FormControlLabel
           control={
@@ -50,6 +50,7 @@ const NewAddress: React.FC<NewAddressProps> = props => {
               name="address"
               label="Adresa"
               variant="outlined"
+              // style={{'& .MuiOutlinedInput-root' : {padding:'8px'}}}
               value={formik.values.newDeliveryAddress.address}
               fullWidth
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -63,7 +64,7 @@ const NewAddress: React.FC<NewAddressProps> = props => {
             />
           </Box>
 
-          <Box paddingY={2}>
+          <Box paddingY={4}>
             <CountyCitySelect
               required
               county={{

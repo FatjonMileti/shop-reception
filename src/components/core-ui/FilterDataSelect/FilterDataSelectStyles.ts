@@ -1,4 +1,4 @@
-import { Button, ButtonProps, Badge, BadgeProps, Drawer, DrawerProps, ListItem } from '@mui/material';
+import { Button, ButtonProps, Badge, BadgeProps, Drawer, DrawerProps, ListItem, Checkbox } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
@@ -25,8 +25,15 @@ export const StyledButton = styled(Button)<ButtonProps>(({ theme }) => ({
       position:'absolute', right:'20px', float:'right'
     },
   }));
+
+export const StyledGreyCheckbox = styled(Checkbox)({
+  color:'#999a9b', 
+  '&.MuiCheckbox-colorPrimary': {
+    color:'#999a9b !important'
+  },
+});  
   
-  
+
 export const StyledListItem = styled(ListItem)({
     fontSize: 14,
     cursor: 'pointer',
@@ -35,6 +42,39 @@ export const StyledListItem = styled(ListItem)({
     color: '#3375f0',
     borderBottom: '1px solid #ececec',
     padding:'.6rem 1.5rem',
+    '&:hover': {
+      backgroundColor: '#e8f1fb',
+      color:'#3375f0'
+    },
+    '&.selectedItem': {
+      backgroundColor: '#ffffff',
+      color:'#ea4124'
+    },
+    '&.noDataItem': {
+      backgroundColor: '#ffffff',
+      color:'#989898',
+      fontStyle: 'italic',
+      fontSize: '14px',
+      cursor: 'default', 
+      lineHeight: '10rem',
+      textAlign:'center',
+      display:'block',
+      borderBottom:'none'
+    }
+  });
+
+  export const StyledMultiListItem = styled(ListItem)({
+    fontSize: 14,
+    cursor: 'pointer',
+    textDecoration: 'none',
+    backgroundColor: '#f7f8fa',
+    color: '#3375f0',
+    borderBottom: '1px solid #ececec',
+    padding:0,
+    '& .MuiListItemIcon-root': {
+      minWidth:'2px',
+      color:'#3375f0'
+    },
     '&:hover': {
       backgroundColor: '#e8f1fb',
       color:'#3375f0'

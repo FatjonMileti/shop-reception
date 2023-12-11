@@ -193,7 +193,7 @@ const TeamDayOffManagement = () => {
         ) : (
           <Grid item style={{ display:'block', padding: 0 }}>
             <FilterDataSelect name="teamMember.domain" 
-                selectedData={domainFilterValue} 
+                defaultSelectedData={domainFilterValue} 
                 label="Domain" 
                 showCounter={true} 
                 showSearch={true} 

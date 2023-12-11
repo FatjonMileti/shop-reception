@@ -5,10 +5,11 @@ export interface FilterDataSelectOption {
   
 export interface FilterDataSelectProps { 
 placeholderButton?: string
-selectedData: FilterDataSelectOption
+defaultSelectedData?: FilterDataSelectOption | {} | FilterDataSelectOption[] | [] 
 options: FilterDataSelectOption[] | []
 name: string
 label?: string
+multiSelect?: boolean,
 showSearch?: boolean,
 showCounter?: boolean,
 counterLabel?: string,

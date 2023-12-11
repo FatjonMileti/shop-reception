@@ -5,7 +5,7 @@ import { TabsProps } from './TabsDefinitions'
 import { useMediaQuery } from '@mui/material'
 
 const Tabs = (props: TabsProps) => {
-  const { tabs } = props
+  const { tabs, tabsContainerStyle } = props
 
   let [searchParams, setSearchParams] = useSearchParams()
 
@@ -33,7 +33,7 @@ const Tabs = (props: TabsProps) => {
       onChange={onChange}
       tabs={tabs}
       value={selectedValue}
-      tabsContainerStyle={{
+      tabsContainerStyle={tabsContainerStyle ? tabsContainerStyle : {
         borderBottom: 1,
         borderColor: '#E5E5E5',
         margin: isXs ? '18px 12px 0' : '36px 0 0'

@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Paper } from '@mui/material'
+import { Box, CircularProgress, Paper, Typography, Grid } from '@mui/material'
 import s from './ExistingClient.modules.scss'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Table } from 'components/core-ui/Table'
@@ -12,6 +12,7 @@ import { columns, toTableRowItems } from './helpers'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CreateClientModal } from './CreateClientModal'
 import { RowItem, TableRowItem } from './interfaces'
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
 interface ExistingClientProps {
   selectNewClient?: boolean
@@ -82,8 +83,8 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
         />
       )}
 
-      <div className={s.mainContainer}>
-        <Paper className={s.searchPaper}>
+      
+        <Box className={s.searchPaper}>
           <Box className={s.searchContainer}>
             <div>
               <Input
@@ -112,9 +113,9 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
               <SearchOutlinedIcon /> CAUTA CLIENT
             </Button>
           </Box>
-        </Paper>
+        </Box>
 
-        {searchField && showTable && (
+        {(searchField && showTable) ? (
           <div
             style={{
               display: 'flex',
@@ -138,7 +139,7 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
                   label: 'Selecteaza',
                   labelColor: 'white',
                   typographyVariant: 'medium',
-                  backgroundColor: '#33691E',
+                  backgroundColor: '#0970E6',
                   onClick: (e, rowId) =>
                     selectNewClient
                       ? navigate(
@@ -151,8 +152,18 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
               ]}
             />
           </div>
+        ) : (
+
+                <Grid sx={{mt:4}} container justifyContent="center" spacing={2}>
+                       <Box sx={{ textAlign:'center' }}>
+                           <PersonSearchIcon sx={{ fontSize:'100px', color:'#cecece'}} /><br />
+                           <Typography sx={{ fontSize:'14px', color:'#cecece'}} >Cauta client</Typography><br />
+                       </Box>
+                 </Grid>
+
+
         )}
-      </div>
+      
     </>
   )
 }
