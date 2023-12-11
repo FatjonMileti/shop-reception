@@ -19,8 +19,8 @@ export const getFBToken = async setToken => {
     vapidKey: process.env.FIREBASE_VAPID_KEY
   })
     .then(currentToken => {
+      debugger
       if (currentToken) {
-        setFirebaseToken(currentToken)
         setToken(currentToken)
         // Track the token -> client mapping, by sending to backend server
         // show on the UI that permission is secured

@@ -13,7 +13,7 @@ import { makeDesignerGetRequest, makeNotificationsPutRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
-import { oidcConfig, getFirebaseToken } from 'utils/authService'
+import { oidcConfig, getFirebaseToken, setFirebaseToken } from 'utils/authService'
 import { useFirebaseNotification, useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
@@ -68,10 +68,14 @@ const App = () => {
 
   useEffect(() => {
     ;(async () => {
-      if (fbToken && !getFirebaseToken()) {
+      const localToken = getFirebaseToken()
+      debugger
+      if (fbToken && fbToken !== localToken) {
+        debugger
         await makeNotificationsPutRequest('/association', {
           deviceToken: fbToken
         })
+        setFirebaseToken(fbToken)
       }
     })()
   }, [fbToken])
