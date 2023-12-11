@@ -6,13 +6,7 @@ const path = require('path')
 
 // eslint-disable-next-line no-undef
 module.exports = {
-  entry: {
-    main: commonPaths.entryPath,
-    'firebase-messaging-sw': commonPaths.firebaseMessagingSWPath
-  },
-  stats: {
-    errorDetails: true // --display-error-details
-  },
+  entry: [commonPaths.entryPath],
   module: {
     rules: [
       {

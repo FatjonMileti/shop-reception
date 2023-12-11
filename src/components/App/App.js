@@ -28,6 +28,7 @@ import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
 import { useMerchandiseRoutes } from '../merchandise/routes'
 import { useShopReceptionRoutes } from '../shop-reception/routes'
 import { getFBToken, onMessageListener } from 'utils/firebase'
+import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -69,9 +70,7 @@ const App = () => {
   useEffect(() => {
     ;(async () => {
       const localToken = getFirebaseToken()
-      debugger
       if (fbToken && fbToken !== localToken) {
-        debugger
         await makeNotificationsPutRequest('/association', {
           deviceToken: fbToken
         })
