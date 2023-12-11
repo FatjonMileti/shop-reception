@@ -1,7 +1,10 @@
 import { Box } from '@mui/system'
 import BackButton from './BackButton/BackButton'
+import s from './BackButton/BackButton.modules.scss'
+
 import { useLocation, useNavigate } from 'react-router'
 import { useMemo } from 'react'
+import cn from 'classnames'
 
 const BackButtonTitle = ({ applicationPages }) => {
   const location = useLocation()
@@ -9,6 +12,7 @@ const BackButtonTitle = ({ applicationPages }) => {
 
   const memoized = useMemo(() => {
     let currentApplicationName = ''
+    let currentName = ''
     let shouldShowBackButton = false
 
     if (location.pathname !== '') {
@@ -18,17 +22,19 @@ const BackButtonTitle = ({ applicationPages }) => {
 
       if (matchedApplication) {
         currentApplicationName = matchedApplication.screenName
+        currentName = matchedApplication.name
         shouldShowBackButton = true
       }
     }
 
     return {
       currentApplicationName,
+      currentName,
       shouldShowBackButton
     }
   }, [location.pathname, applicationPages])
 
-  const { currentApplicationName, shouldShowBackButton } = memoized
+  const { currentApplicationName, shouldShowBackButton, currentName } = memoized
 
   const navigateBack = () => {
     navigate(-1)
@@ -36,12 +42,9 @@ const BackButtonTitle = ({ applicationPages }) => {
 
   return shouldShowBackButton ? (
     <Box
-      sx={{
-        margin: '24px 80px 0 0',
-        padding: '0 8px',
-        display: 'flex',
-        alignItems: 'center'
-      }}
+      className={
+        currentName === 'Management task-uri' ? cn(s.absoluteArrowStyles) : cn(s.arrowStyles)
+      }
     >
       <BackButton text={currentApplicationName} onNavBack={navigateBack}></BackButton>
     </Box>

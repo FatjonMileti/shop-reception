@@ -22,3 +22,8 @@ export { default as ListVolumetryHome } from './ListVolumetryHome'
 export { default as ReportsVolumetryHome } from './ReportsVolumetryHome'
 
 export { default as DailyPresenceSubcategory } from './DailyPresenceSubcategory'
+
+export { default as EmployeeIcon } from './EmployeeIcon'
+export { default as ChatIcon } from './ChatIcon'
+export { default as EditActionHome } from './EditActionHome'
+export { default as DeleteActionHome } from './DeleteActionHome'
