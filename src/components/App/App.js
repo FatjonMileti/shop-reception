@@ -29,11 +29,6 @@ import { useMerchandiseRoutes } from '../merchandise/routes'
 import { useShopReceptionRoutes } from '../shop-reception/routes'
 import { getFBToken, onMessageListener } from 'utils/firebase'
 
-// const firebaseConfig = new URLSearchParams({
-//   apiKey: process.env.FIREBASE_API_KEY
-// }).toString()
-// import `asset/resource?name=firebase-messaging-sw.js!./firebase-messaging-sw.js?`
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
