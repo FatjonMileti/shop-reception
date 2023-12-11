@@ -1,4 +1,4 @@
-import { TOKEN_KEY } from 'utils/constants'
+import { FIREBASE_TOKEN_KEY, TOKEN_KEY } from 'utils/constants'
 import { isTokenExpired } from './jwtHelper'
 import jwt_decode from 'jwt-decode'
 
@@ -36,6 +36,18 @@ export const getToken = () => {
 
 const removeToken = () => {
   return localStorage.removeItem(TOKEN_KEY)
+}
+
+export const getFirebaseToken = () => {
+  return localStorage.getItem(FIREBASE_TOKEN_KEY)
+}
+
+export const removeFirebaseToken = () => {
+  return localStorage.removeItem(FIREBASE_TOKEN_KEY)
+}
+
+export const setFirebaseToken = token => {
+  localStorage.setItem(FIREBASE_TOKEN_KEY, token)
 }
 
 export const isAuthenticated = () => {
@@ -85,7 +97,7 @@ export const getUserName = () => {
 export const getUserFirstName = () => {
   const userInfo = getUserInfo()
 
-  return userInfo.given_name
+  return userInfo?.given_name
 }
 
 export const getUserAvatarString = () => {

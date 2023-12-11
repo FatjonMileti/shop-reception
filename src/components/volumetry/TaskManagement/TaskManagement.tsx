@@ -13,6 +13,7 @@ import { Add } from '@mui/icons-material'
 import { NewTask } from './NewTask'
 import { toTableItems } from './serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
+import { DeleteActionHome, EditActionHome } from 'icons'
 
 export const columns = [
   {
@@ -216,6 +217,7 @@ const TaskManagement = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
+              desktopIcon: <EditActionHome />,
               onClick: (e, rowId) => selectRow(rowId, 'edit')
             },
             {
@@ -223,6 +225,7 @@ const TaskManagement = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#d9534f',
+              desktopIcon: <DeleteActionHome />,
               onClick: (e, rowId) => selectRow(rowId, 'delete')
             }
           ]}

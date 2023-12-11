@@ -15,6 +15,7 @@ import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { TeamAssignmentItem, TeamAssignmentTableFilter, ValueLabelInterface } from '../interfaces'
 import { EditTeamAssignment } from './EditTeamAssignment'
 import { toTableRowItems } from './serializers'
+import { EditActionHome } from 'icons'
 
 const columns = [
   {
@@ -248,6 +249,7 @@ const TeamAssignment: React.FC = props => {
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#0970E6',
+                desktopIcon: <EditActionHome />,
                 onClick: (e, rowId) => {
                   selectRow(tableItems.find(item => item.id === rowId))
                 }

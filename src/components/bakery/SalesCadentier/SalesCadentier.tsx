@@ -1,13 +1,11 @@
 import { Box, CircularProgress, Grid, Paper } from '@mui/material'
 import s from '../commonStyles.modules.scss'
-import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
 import { StoreItem, ValueLabelInterface } from '../interfaces'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { toAsyncSelectOptions, toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
@@ -16,7 +14,8 @@ import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { formatAndDownloadResponse, formatPayloadDate, getPreviousDay } from 'utils/helpers'
 import { DownloadOutlined } from '@mui/icons-material'
 import { GroupTable } from 'components/core-ui/GroupTable'
-import { TableState } from './interfaces'
+import { TableState } from '../interfaces'
+import { toAsyncSelectOptions } from '../commonSerializers'
 
 const SalesCadentier = () => {
   const [tableItems, setTableItems] = useState<StoreItem[]>([])

@@ -4891,7 +4891,7 @@
     {
       "uuid": "71a861d9-cdb9-4ade-a034-566466c8cf1c",
       "type": "http",
-      "documentation": "Edit team time off entity",
+      "documentation": "",
       "method": "put",
       "endpoint": "volumetry/taskAllocation/details/:id",
       "responses": [
