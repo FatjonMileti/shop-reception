@@ -22,7 +22,7 @@ const Notification = () => {
     <Snackbar
       open={notification.open}
       onClose={handleClose}
-      autoHideDuration={autoHideDuration}
+      // autoHideDuration={autoHideDuration}
       alert={{
         severity: notification.type,
         children: notification.message,
