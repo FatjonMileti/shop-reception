@@ -20,7 +20,6 @@ export const getFBToken = async setToken => {
   })
     .then(currentToken => {
       if (currentToken) {
-        console.log('current token for client: ', currentToken)
         setFirebaseToken(currentToken)
         setToken(currentToken)
         // Track the token -> client mapping, by sending to backend server

@@ -60,8 +60,6 @@ const App = () => {
   const { showNotification } = useNotification()
   const { showFirebaseNotification } = useFirebaseNotification()
 
-  console.log(process.env.FIREBASE_API_KEY)
-
   useEffect(() => {
     ;(async () => {
       await getFBToken(setFbToken)
