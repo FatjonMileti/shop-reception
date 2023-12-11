@@ -5,7 +5,12 @@ export { default as StoreManagerHome } from './StoreManagerHome'
 export { default as TraceabilityOperatorHome } from './TraceabilityOperatorHome'
 export { default as RegionManagerHome } from './RegionManagerHome'
  
-// TODO add bakery menu icon after its created
+/* bakery menu */
+export { default as AdminMenu } from './AdminMenu'
+export { default as FormatorMenu } from './FormatorMenu'
+export { default as StoreManagerMenu } from './StoreManagerMenu'
+export { default as TraceabilityOperatorMenu } from './TraceabilityOperatorMenu'
+export { default as RegionManagerMenu } from './RegionManagerMenu'
 
 /* admin sub */
 export { default as UsersManagementSubcategory } from './submodules/admin/UsersManagementSubcategory'

@@ -25,6 +25,11 @@ import {
   GroupVolumetryHome
 } from 'icons/volumetry'
 import {
+  AdminMenu,
+  FormatorMenu,
+  RegionManagerMenu,
+  StoreManagerMenu,
+  TraceabilityOperatorMenu,
   AdminHome,
   FormatorHome,
   StoreManagerHome,
@@ -94,6 +99,12 @@ const IconComponents = {
   StoreManagerHome,
   TraceabilityOperatorHome,
   RegionManagerHome,
+    //menu
+  AdminMenu,
+  FormatorMenu,
+  RegionManagerMenu,
+  StoreManagerMenu,
+  TraceabilityOperatorMenu,
     //admin
   UsersManagementSubcategory,
   ZonesSubcategory,
