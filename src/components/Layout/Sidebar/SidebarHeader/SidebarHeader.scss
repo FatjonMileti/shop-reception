@@ -3,11 +3,28 @@
   grid-template-columns: 1fr 30px;
   position: relative;
   width: 100%;
-  margin: 10px 0;
+  // margin: 10px 0;
 }
 
 .userInfoContainer {
   display: flex;
+  flex-direction: column;
+  // margin: 0 60px;
+  margin: 20px 24px;
+}
+
+.userAvatarContainer {
+  display: flex;
+  flex-direction: column;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 1.266px solid #0970e6;
+  background: #f5faff;
+
+  justify-content: center;
+  align-items: center;
 }
 
 .userName {

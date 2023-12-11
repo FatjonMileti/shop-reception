@@ -1,46 +1,43 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from 'oidc-react'
-import { Drawer, List, Divider } from '@fullscreendigital/carrefour-dex-fe'
+import { Drawer, List } from '@fullscreendigital/carrefour-dex-fe'
 import { toSelectedMenuItems, toMenuItems } from './serializers'
-import {
-  HomeOutlined,
-  NotificationsNoneOutlined,
-  PersonOutlineOutlined,
-  PowerSettingsNewOutlined
-} from '@mui/icons-material'
 import { logout, getUserStore, getUserRegion } from 'utils/authService'
 import { SidebarHeader } from './SidebarHeader'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import cn from 'classnames'
 import s from './Sidebar.scss'
+import { Box, Typography } from '@mui/material'
+import { Icon_v2 } from 'components/core-ui/Icon_v2'
 
 const staticItems = [
   {
     disablePadding: true,
-    icon: <HomeOutlined />,
+    icon: <Icon_v2 iconName="Home" iconType="Menu" />,
     index: 1,
-    primaryText: 'Home',
+    primaryText: 'Prima pagina',
+    type: 'icon',
+    href: '/'
+  },
+
+  {
+    disablePadding: true,
+    icon: <Icon_v2 iconName="Notifications" iconType="Menu" />,
+    index: 2,
+    primaryText: 'Notificari',
+    type: 'icon',
+    href: '/'
+  },
+  {
+    disablePadding: true,
+    icon: <Icon_v2 iconName="User" iconType="Menu" />,
+    index: 3,
+    primaryText: 'Contul meu',
     type: 'icon',
     href: '/'
   }
-  // {
-  //   disablePadding: true,
-  //   icon: <NotificationsNoneOutlined />,
-  //   index: 2,
-  //   primaryText: 'Notifications',
-  //   type: 'icon',
-  //   href: '/'
-  // },
-  // {
-  //   disablePadding: true,
-  //   icon: <PersonOutlineOutlined />,
-  //   index: 3,
-  //   primaryText: 'Profile',
-  //   type: 'icon',
-  //   href: '/'
-  // }
 ]
 
 const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
@@ -93,7 +90,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
 
   return (
     <Drawer
-    isLeftPersistent
+      isLeftPersistent
       open={isMenuOpen}
       onClose={handleCloseMenu}
       displayEmptyHeader
@@ -129,7 +126,14 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
             onItemClick={handleItemClick}
           />
         </nav>
-        <Divider style={{ display: 'block', backgroundColor: '#fff', margin: '16px 0' }} />
+
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography style={{ margin: '24px 8px 24px 24px', fontSize: '20px', fontWeight: 700 }}>
+            My apps
+          </Typography>
+          <Icon_v2 iconName="Folder" iconType="Icon" />
+        </Box>
+
         <nav className={s.section}>
           <List
             subheader={{
@@ -141,7 +145,8 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
             onItemClick={handleItemClick}
           />
         </nav>
-        <Divider style={{ display: 'block', backgroundColor: '#fff', margin: '16px 0' }} />
+
+        <br />
         <nav className={s.section}>
           <List
             subheader={{
@@ -152,7 +157,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
             items={[
               {
                 disablePadding: true,
-                icon: <PowerSettingsNewOutlined />,
+                icon: <Icon_v2 iconName="Logout" iconType="Menu" />,
                 index: 2,
                 primaryText: 'Sign Out',
                 type: 'icon'
