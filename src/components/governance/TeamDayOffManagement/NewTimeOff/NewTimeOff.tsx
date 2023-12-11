@@ -127,6 +127,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             value={formik.values.startDate}
             onChange={value => formik.setFieldValue('startDate', value)}
             shouldDisableDate={datePickerShouldDisablePublicHolidaysDates}
+            footNoteText={'Public holidays are not selectable.'}
             loading={arePublicHolidaysLoading}
             renderLoading={() => <CircularProgress color="primary" />}
             label="Start date"
@@ -142,6 +143,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             value={formik.values.endDate}
             onChange={value => formik.setFieldValue('endDate', value)}
             shouldDisableDate={datePickerShouldDisablePublicHolidaysDates}
+            footNoteText={'Public holidays are not selectable.'}
             loading={arePublicHolidaysLoading}
             renderLoading={() => <CircularProgress color="primary" />}
             label="End date"
