@@ -87,7 +87,8 @@ const App = () => {
     .then(payload => {
       showFirebaseNotification({
         title: payload?.notification?.title,
-        message: payload?.notification?.body
+        message: payload?.notification?.body,
+        link: payload?.fcmOptions?.link
       })
     })
     .catch(err => console.log('failed: ', err))

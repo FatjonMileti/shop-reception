@@ -6,6 +6,7 @@ export interface FirebaseNotificationState {
   type?: AlertColor
   title?: string
   message?: string
+  link?: string
   timeout?: number | null
 }
 
@@ -14,6 +15,7 @@ export const notificationInitialState: FirebaseNotificationState = {
   type: 'info',
   title: '',
   message: '',
+  link: '',
   timeout: null
 }
 

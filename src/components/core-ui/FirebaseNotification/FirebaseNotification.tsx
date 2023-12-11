@@ -12,6 +12,12 @@ const FirebaseNotification = () => {
   const handleClose = (_: unknown, reason?: SnackbarCloseReason) =>
     reason !== 'clickaway' && clearFirebaseNotification()
 
+  const clickNotification = () => {
+    if (notification.link) {
+      window.location.replace(notification.link)
+    }
+  }
+
   return (
     <Snackbar
       open={notification.open}
@@ -19,7 +25,7 @@ const FirebaseNotification = () => {
       alert={{
         severity: notification.type,
         children: (
-          <Box>
+          <Box onClick={clickNotification} style={{ cursor: 'pointer' }}>
             <Box>{notification.title}</Box>
             <Box>{notification.message}</Box>
           </Box>
