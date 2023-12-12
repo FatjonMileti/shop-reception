@@ -8,8 +8,8 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { EditProductGrowthIndexItem, ProductGrowthIndexListItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
-import { getInitialValues } from '../helpers'
-import { ChangeEvent, useMemo, useState } from 'react'
+import { getInitialValues, getValidationSchema } from '../helpers'
+import { ChangeEvent, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
 interface EditProductGrowthIndexProps {
@@ -45,6 +45,7 @@ const EditProductGrowthIndex: React.FC<EditProductGrowthIndexProps> = props => {
     )
 
     const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+    const validationSchema = useMemo(() => getValidationSchema(), [editItem])
 
     const submitTask = async (values: EditProductGrowthIndexItem) => {
         await makeCorePutRequest(`/bakery/product/growth/${editProductGrowthIndexId}`, values)
@@ -71,16 +72,13 @@ const EditProductGrowthIndex: React.FC<EditProductGrowthIndexProps> = props => {
         enableReinitialize: true,
         validateOnChange: false,
         initialValues: initialValues,
+        validationSchema: validationSchema,
         onSubmit: async (values: EditProductGrowthIndexItem, { resetForm }) => {
-            const payload = {
-                ...values,
-            }
-            mutate(payload)
+            mutate(values)
             resetForm()
         }
     })
-    const editItemList = editItem && Object.values(editItem.map);
-    console.log(editItemList)
+
     return (
         <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'} modalWidth="50%">
           <Grid container spacing={2}>
@@ -100,7 +98,7 @@ const EditProductGrowthIndex: React.FC<EditProductGrowthIndexProps> = props => {
                 />
               </Grid>
                 
-              <Grid xs={12} item>
+              <Grid xs={12} container spacing={3} margin="0">
                 <Grid item xs={4}>
                     <Input
                         type="text"
@@ -110,18 +108,22 @@ const EditProductGrowthIndex: React.FC<EditProductGrowthIndexProps> = props => {
                         width="100%"
                         value={formik.values.generalGrowth}
                         onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue('generalGrowth', (event.target as HTMLInputElement).value)}
+                        error={!!formik.errors?.generalGrowth}
+                        helperText={formik.errors?.generalGrowth as string}
                     />
                 </Grid>
-                {editItemList?.map((mapItem: EditProductGrowthIndexItem, index) => 
+                {Object.keys(formik.values.map).map((mapKey: string) => 
                     <Grid item xs={4}>
                         <Input
                             type="text"
                             variant="outlined"
-                            name="growth"
-                            label={`${mapItem.start}-${mapItem.end}`}
+                            name={`map.${mapKey}.growth`}
+                            label={`${formik.values.map?.[mapKey].start.slice(0,5)} - ${formik.values.map?.[mapKey].end.slice(0,5)}`}
                             width="100%"
-                            value={formik.values.growth}
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue('growth', (event.target as HTMLInputElement).value)}
+                            value={formik.values?.map?.[mapKey]?.growth}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => formik.setFieldValue(`map.${mapKey}.growth`, (event.target as HTMLInputElement).value)}
+                            error={!!formik.errors?.map?.[mapKey]?.growth}
+                            helperText={formik.errors?.map?.[mapKey]?.growth as string}
                         />
                     </Grid>
                 )}
