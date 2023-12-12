@@ -81,11 +81,13 @@ const App = () => {
 
   onMessageListener()
     .then(payload => {
-      showFirebaseNotification({
-        title: payload?.notification?.title,
-        message: payload?.notification?.body,
-        link: payload?.fcmOptions?.link
-      })
+      if (payload) {
+        showFirebaseNotification({
+          title: payload.notification?.title,
+          message: payload.notification?.body,
+          link: payload.fcmOptions?.link
+        })
+      }
     })
     .catch(err => console.log('failed: ', err))
 
