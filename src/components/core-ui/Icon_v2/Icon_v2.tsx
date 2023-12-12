@@ -22,7 +22,8 @@ import {
   AssignTasksSubcategory,
   ManagementTasksSubcategory,
   AssignmentVolumetryHome,
-  GroupVolumetryHome
+  GroupVolumetryHome,
+  TasksVolumetryHome
 } from 'icons/volumetry'
 import {
   AdminMenu,
@@ -92,20 +93,21 @@ const IconComponents = {
   AssignTasksSubcategory,
   AssignmentVolumetryHome,
   GroupVolumetryHome,
-  // Bakery 
-    //home
+  TasksVolumetryHome,
+  // Bakery
+  //home
   AdminHome,
   FormatorHome,
   StoreManagerHome,
   TraceabilityOperatorHome,
   RegionManagerHome,
-    //menu
+  //menu
   AdminMenu,
   FormatorMenu,
   RegionManagerMenu,
   StoreManagerMenu,
   TraceabilityOperatorMenu,
-    //admin
+  //admin
   UsersManagementSubcategory,
   ZonesSubcategory,
   RegionsSubcategory,
@@ -117,7 +119,7 @@ const IconComponents = {
   UsageReportSubcategory,
   SalesCadentierSubcategory,
   IngredientsSubcategory,
-    //formator
+  //formator
   SalesCadentierFormatorSubcategory,
   UsageReportFormatorSubcategory,
   GrowthIndexFormatorSubcategory,
@@ -125,13 +127,13 @@ const IconComponents = {
   CadentierFormatorSubcategory,
   ProductGrowthIndexFormatorSubcategory,
   ProductManagementFormatorSubcategory,
-    //regionMg
+  //regionMg
   ProductManagementRegionSubcategory,
   GrowthRegionSubcategory,
   GrowthIndexSubcategory,
   CadentierSalesRegionSubcategory,
   UsageReportRegionSubcategory,
-    //storeMg
+  //storeMg
   ProductManagementSubcategory,
   CadentierStoreSubcategory,
   GrowthIndexStoreSubcategory,
