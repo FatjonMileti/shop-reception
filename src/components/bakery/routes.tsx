@@ -34,6 +34,7 @@ import { ProductGrowthIndex } from './StoreManagerRole/ProductGrowthIndex'
 import { ProductionManagementStore } from './StoreManagerRole/ProductionManagementStore'
 import { ProductionManagementStorePrint } from './StoreManagerRole/ProductionManagementStorePrint'
 import { GrowthIndexStore } from './StoreManagerRole/GrowthIndexStore'
+import ReportAndSalesStore from './StoreManagerRole/ReportAndSalesStore/ReportAndSalesStore'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -265,6 +266,17 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={GrowthIndexStore}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_AND_SALES_STORE}
+        element={
+          <PrivateRoute
+            component={ReportAndSalesStore}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
