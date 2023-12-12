@@ -14,13 +14,13 @@ import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { DownloadOutlined } from '@mui/icons-material'
 import { columns } from './helpers'
-import { formatAndDownloadResponse, formatPayloadDate } from 'utils/helpers'
+import { formatAndDownloadResponse, formatPayloadDate, getPreviousDay } from 'utils/helpers'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 
 const ReportAndSalesStore = () => {
   const { showNotification } = useNotification()
 
-  const [planningDate, setPlanningDate] = useState(dayjs().subtract(1, 'day'))
+  const [planningDate, setPlanningDate] = useState(getPreviousDay())
   const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
   const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
 
