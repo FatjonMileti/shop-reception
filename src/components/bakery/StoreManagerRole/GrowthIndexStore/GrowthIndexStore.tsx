@@ -2,20 +2,21 @@ import s from '../../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { Box } from '@mui/material'
 
-import {columns} from './helpers'
+import { columns, getInitialValues } from './helpers'
 import { useState } from 'react'
-import { FamiliesItem } from '../../interfaces'
-import { makeCoreGetRequest } from '../../../../utils/api'
-import { toTableGETUrl } from '../../../core-ui/Table/serializers'
-import { formatErrorMessage } from '../../../../utils/formatting'
-import { useNotification } from '../../../../hooks'
+import { makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { formatErrorMessage } from 'utils/formatting'
+import { useNotification } from 'hooks'
 import { EditGrowthIndex } from './EditGrowthIndex'
+import { GrowthIndex } from './interfaces'
+import { EditActionHome } from 'icons'
 
 const GrowthIndexStore = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
-  const [tableItems, setTableItems] = useState<FamiliesItem[]>([])
+  const [tableItems, setTableItems] = useState<GrowthIndex[]>([])
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
@@ -38,7 +39,7 @@ const GrowthIndexStore = () => {
           orderBy
         })
       )
-      setTableItems(response.list)
+      setTableItems(response.list.map(getInitialValues))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -76,7 +77,8 @@ const GrowthIndexStore = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
-              onClick: (e, rowId) => selectRow(rowId)
+              onClick: (e, rowId) => selectRow(rowId),
+              desktopIcon: <EditActionHome />
             }
           ]}
         />

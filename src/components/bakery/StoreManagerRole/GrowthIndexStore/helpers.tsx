@@ -28,7 +28,7 @@ export const columns = [
   }
 ]
 
-export const getInitialValues = (editItem?: any): GrowthIndex =>  ({
+export const getInitialValues = (editItem?: Partial<GrowthIndex>): GrowthIndex =>  ({
   id: editItem?.id ?? '',
   name: editItem?.name ?? '',
   growth: editItem?.growth ?? 0,
@@ -36,9 +36,6 @@ export const getInitialValues = (editItem?: any): GrowthIndex =>  ({
   lastChange: editItem?.lastChange ?? '',
   divisionType: editItem?.divisionType ?? ''
 })
-
-
-
 
 export const editGrowthIndexValidationSchema = Yup.object().shape({
   growth: Yup.number().required()

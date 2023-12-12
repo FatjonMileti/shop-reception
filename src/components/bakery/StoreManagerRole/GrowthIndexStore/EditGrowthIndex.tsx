@@ -1,15 +1,15 @@
 import { Modal } from 'components/core-ui/Modal'
 import { CircularProgress, Grid } from '@mui/material'
-import { FormInfoItems } from '../../../core-ui/FormInfoItems'
+import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { useMutation, useQuery } from 'react-query'
-import { makeCoreGetRequest, makeCorePutRequest } from '../../../../utils/api'
-import { formatErrorMessage } from '../../../../utils/formatting'
-import { useNotification } from '../../../../hooks'
+import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
+import { formatErrorMessage } from 'utils/formatting'
+import { useNotification } from 'hooks'
 import { GrowthIndex } from './interfaces'
 import { useFormik } from 'formik'
 import { ChangeEvent, useMemo } from 'react'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../core-ui/Modal/Modal.modules.scss'
+import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { editGrowthIndexValidationSchema, getInitialValues } from './helpers'
 
 interface EditGrowthIndexProps {
@@ -95,7 +95,7 @@ export const EditGrowthIndex = ({
               <FormInfoItems
                 items={[
                   {
-                    label: 'Magazin',
+                    label: 'Magazin:',
                     name: (growthIndexQuery.data as GrowthIndex)?.name
                   }
                 ]}
@@ -106,7 +106,7 @@ export const EditGrowthIndex = ({
               <Grid xs={12} item>
                 <Input
                   type="text"
-                  variant="standard"
+                  variant="outlined"
                   name="growth"
                   label="Coeficient"
                   width="100%"
