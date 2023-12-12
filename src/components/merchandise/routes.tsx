@@ -20,6 +20,7 @@ import { ContinueReturn } from './GoodsReturn/ContinueReturn'
 import { RecordReturn } from './GoodsReturn/RecordReturn'
 import { SupportCode } from './GoodsReception/RegisterTruck/SupportCode'
 import { RecordReturnDetail } from './GoodsReturn/RecordReturn/RecordReturnDetail'
+import { TruckDetail } from './GoodsReception/ListTrucks/TruckDetail'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -99,6 +100,10 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_RECORD_RETURN_DETAIL}
         element={<RecordReturnDetail />}
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_DETAIL}
+        element={<TruckDetail />}
       />
     </>
   )

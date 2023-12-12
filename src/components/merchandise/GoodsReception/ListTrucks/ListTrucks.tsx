@@ -11,9 +11,9 @@ const ListTrucks = () => {
   const navigate = useNavigate()
 
   const list: Truck[] = [
-    { name: 'Camion 1', description: 'Descriere camion 1' },
-    { name: 'Camion 2', description: 'Descriere camion 2' },
-    { name: 'Camion 3', description: 'Descriere camion 3' }
+    { id: 1, name: 'Camion 1', description: 'Descriere camion 1'},
+    { id: 2, name: 'Camion 2', description: 'Descriere camion 2'},
+    { id: 3, name: 'Camion 3', description: 'Descriere camion 3'}
   ]
 
   return (
@@ -27,7 +27,9 @@ const ListTrucks = () => {
         <Grid container spacing={2} className={s.wrapper}>
           <Grid item xs={12}>
             {list.map((item: Truck, index) => (
-              <Paper key={index} elevation={3} style={{ margin: '10px', padding: '20px' }}>
+              <Paper key={index} elevation={3} style={{ margin: '10px', padding: '20px' }} onClick={() => {
+                navigate(URLS.AUTH_TRUCK_DETAIL.replace(":id", item.id.toString()))
+              }}>
                 <Typography variant="medium" component="h5">{item.name}</Typography>
                 <Typography variant="medium" component="p">{item.description}</Typography>
               </Paper>

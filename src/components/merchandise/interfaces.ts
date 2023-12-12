@@ -1,4 +1,5 @@
 interface Truck {
-  name: string,
+  id: number
+  name: string
   description?: string
 }
