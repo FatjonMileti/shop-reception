@@ -1,5 +1,5 @@
-import { Icon } from 'components/core-ui/Icon'
 import { KeyboardArrowRightOutlined } from '@mui/icons-material'
+import { Icon_v2 } from 'components/core-ui/Icon_v2'
 
 export const toSelectedMenuItems = (items, selectedItemIndex) =>
   items.map(item => {
@@ -24,12 +24,11 @@ export const toSelectedMenuItems = (items, selectedItemIndex) =>
       nestedItems
     }
   })
-
 const toMenuItem = (item, index, nestedItems) => ({
   type: item.icon ? 'icon' : 'text',
   primaryText: item.name,
   index: index,
-  icon: <Icon iconName={item.icon} tiny fill="white" />,
+  icon: <Icon_v2 iconName={item.icon} iconType="Menu" />,
   disablePadding: true,
   id: item.id,
   href: item.routeURL || null,
