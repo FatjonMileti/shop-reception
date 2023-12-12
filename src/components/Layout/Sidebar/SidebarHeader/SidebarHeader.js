@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
 import { Close } from '@mui/icons-material'
-import { Avatar, IconButton } from '@fullscreendigital/carrefour-dex-fe'
+import { Avatar, IconButton, Salutation } from '@fullscreendigital/carrefour-dex-fe'
 import s from './SidebarHeader.scss'
 import { getUserName, getUserAvatarString } from 'utils/authService'
 
@@ -10,10 +10,16 @@ const SidebarHeader = ({ handleCloseMenu, storeName, regionName }) => {
 
   return (
     <Box className={s.menuHeaderContainer}>
-      <div>
+      <div style={{ margin: '0 12px' }}>
         <div className={s.userInfoContainer}>
-          <Avatar alt={userInfo} value={avatarString} />
-          <span className={s.userName}>{userInfo}</span>
+          <div className={s.userAvatarContainer}>
+            <Avatar
+              alt={userInfo}
+              value={avatarString}
+              style={{ borderRadius: '8px', width: '56px', height: '56px' }}
+            />
+          </div>
+          <Salutation name={userInfo} onlyName />
         </div>
         {storeName && <div className={s.storeInfoContainer}>Magazin {storeName}</div>}
         {regionName && <div className={s.storeInfoContainer}>Regiune {regionName}</div>}

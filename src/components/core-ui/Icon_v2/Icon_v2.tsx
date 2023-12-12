@@ -22,8 +22,12 @@ import {
   AssignTasksSubcategory,
   ManagementTasksSubcategory,
   AssignmentVolumetryHome,
-  GroupVolumetryHome
+  GroupVolumetryHome,
+  TasksVolumetryHome,
+  EmployeeManagementHome,
+  ManagementTasksHome
 } from 'icons/volumetry'
+
 import {
   AdminMenu,
   FormatorMenu,
@@ -66,6 +70,17 @@ import {
 } from 'icons/bakery'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { createElement } from 'react'
+import {
+  HomeMenu,
+  NotificationsMenu,
+  UserMenu,
+  LogoutMenu,
+  UsersMenu,
+  ChairMenu,
+  VolumetryMenu,
+  EmployeeManagementMenu,
+  ManagementTasksMenu
+} from 'icons'
 
 const IconComponents = {
   // Shared
@@ -92,20 +107,33 @@ const IconComponents = {
   AssignTasksSubcategory,
   AssignmentVolumetryHome,
   GroupVolumetryHome,
-  // Bakery 
-    //home
+  TasksVolumetryHome,
+  EmployeeManagementHome,
+  ManagementTasksHome,
+  // Bakery
+  // Menu
+  HomeMenu,
+  NotificationsMenu,
+  UserMenu,
+  LogoutMenu,
+  UsersMenu,
+  ChairMenu,
+  VolumetryMenu,
+  EmployeeManagementMenu,
+  ManagementTasksMenu,
+  //home
   AdminHome,
   FormatorHome,
   StoreManagerHome,
   TraceabilityOperatorHome,
   RegionManagerHome,
-    //menu
+  //menu
   AdminMenu,
   FormatorMenu,
   RegionManagerMenu,
   StoreManagerMenu,
   TraceabilityOperatorMenu,
-    //admin
+  //admin
   UsersManagementSubcategory,
   ZonesSubcategory,
   RegionsSubcategory,
@@ -117,7 +145,7 @@ const IconComponents = {
   UsageReportSubcategory,
   SalesCadentierSubcategory,
   IngredientsSubcategory,
-    //formator
+  //formator
   SalesCadentierFormatorSubcategory,
   UsageReportFormatorSubcategory,
   GrowthIndexFormatorSubcategory,
@@ -125,13 +153,13 @@ const IconComponents = {
   CadentierFormatorSubcategory,
   ProductGrowthIndexFormatorSubcategory,
   ProductManagementFormatorSubcategory,
-    //regionMg
+  //regionMg
   ProductManagementRegionSubcategory,
   GrowthRegionSubcategory,
   GrowthIndexSubcategory,
   CadentierSalesRegionSubcategory,
   UsageReportRegionSubcategory,
-    //storeMg
+  //storeMg
   ProductManagementSubcategory,
   CadentierStoreSubcategory,
   GrowthIndexStoreSubcategory,

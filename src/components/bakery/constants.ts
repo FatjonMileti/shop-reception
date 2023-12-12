@@ -22,7 +22,11 @@ export const URLS = {
   AUTH_CADENTIER_REPORT_AND_SALES: 'bakery/formator/sales-cadentier-formator',
 
   /* Store manager role */
-  AUTH_PRODUCT_MANAGEMENT_STORE : '/bakery/storeManager/product-management',
+  AUTH_PRODUCT_MANAGEMENT_STORE : 'bakery/storeManager/product-management',
+  AUTH_PRODUCTION_MANAGEMENT_STORE : 'bakery/storeManager/cadentier-store',
+  AUTH_PRODUCTION_MANAGEMENT_STORE_PRINT: 'bakery/storeManager/cadentier-store-print',
+
+  AUTH_GROWTH_INDEX_STORE : 'bakery/storeManager/growth-index',
 
   /* Region manager role */
   AUTH_PRODUCT_MANAGEMENT_REGION: 'bakery/regionManager/product-management-region',

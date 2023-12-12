@@ -153,7 +153,7 @@ const ProductManagementStore = () => {
           <Grid xs={12} md={12} container justifyContent={'space-between'}>
             <Grid xs={12} md={3} item>
               <AsyncAutocomplete
-                variant="standard"
+                variant="outlined"
                 name="family"
                 label="Familie"
                 value={familiesFilterValue}
@@ -164,7 +164,7 @@ const ProductManagementStore = () => {
             </Grid>
             <Grid xs={12} md={3} item>
               <AsyncAutocomplete
-                variant="standard"
+                variant="outlined"
                 name="subfamily"
                 label="Subfamilie"
                 value={subfamiliesFilterValue}
