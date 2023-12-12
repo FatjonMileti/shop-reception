@@ -4,6 +4,7 @@ export const URLS = {
   AUTH_LIST_TRUCKS: '/merchandise/list-trucks',
   AUTH_TRUCK_DETAIL: '/merchandise/truck/:id',
   AUTH_ADD_TRUCK: '/merchandise/add-trucks',
+  AUTH_ADD_TRUCK_STEP_2: '/merchandise/add-trucks/step-2',
   AUTH_RECEPTION_PROCESSING: '/merchandise/reception-processing',
   AUTH_DELIVERY: '/merchandise/delivery',
   AUTH_CONFIRM_RETURN_TRUCKS: '/merchandise/confirm-return-trucks',

@@ -21,6 +21,7 @@ import { RecordReturn } from './GoodsReturn/RecordReturn'
 import { SupportCode } from './GoodsReception/RegisterTruck/SupportCode'
 import { RecordReturnDetail } from './GoodsReturn/RecordReturn/RecordReturnDetail'
 import { TruckDetail } from './GoodsReception/ListTrucks/TruckDetail'
+import { AddTruckStep2 } from './GoodsReception/ListTrucks/AddTruckStep2'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -40,6 +41,10 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_ADD_TRUCK}
         element={<AddTruck />}
+      />
+      <Route
+        path={URLS.AUTH_ADD_TRUCK_STEP_2}
+        element={<AddTruckStep2 />}
       />
       <Route
         path={URLS.AUTH_RECEPTION_PROCESSING}

@@ -46,6 +46,16 @@ const OrderReturnTruck = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Input
+                type='text'
+                label='Locație in...'
+                variant='standard'
+                width='100%'
+                value={'HYPER ORADEA2'}
+                readonly
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Input
                 type='select'
                 label='Locație descǎrcare'
                 variant='standard'

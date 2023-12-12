@@ -7,8 +7,11 @@ import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import TitleHeader from '../../../TitleHeader/TitleHeader'
+import { useNavigate } from 'react-router-dom'
+import { URLS } from '../../../constants'
 
 const AddTruck = () => {
+  const navigate = useNavigate()
   const { showNotification } = useNotification()
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
@@ -19,12 +22,13 @@ const AddTruck = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-
         const payload = {
           registrationNumber: formik.values.registrationNumber,
           driver: formik.values.driver,
           sealNumber: formik.values.sealNumber
         }
+
+        navigate(URLS.AUTH_ADD_TRUCK_STEP_2)
 
       } catch (error) {
         showNotification({
