@@ -1,5 +1,4 @@
 import { Box, Grid, Switch, FormControlLabel, useMediaQuery } from '@mui/material'
-import { FilterDataSelect } from 'components/core-ui/FilterDataSelect'
 import { Table } from 'components/core-ui/Table'
 import { Filter } from 'components/core-ui/Table/TableDefinitions'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -28,6 +27,7 @@ import {
 } from './interaces'
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 export const BillsTable: React.FC<BillsTableProps> = props => {
   const { urlResource, tableType } = props
