@@ -30,6 +30,8 @@ import { CadentierReportAndSales } from './TraineeRole/CadentierReportAndSales'
 
 import { ProductManagementStore } from './StoreManagerRole/ProductManagementStore'
 import { UsageReportRegion } from './RegionManagerRole/UsageReportRegion'
+import { ProductionManagementStore } from './StoreManagerRole/ProductionManagementStore'
+import { ProductionManagementStorePrint } from './StoreManagerRole/ProductionManagementStorePrint'
 import { GrowthIndexStore } from './StoreManagerRole/GrowthIndexStore'
 
 export const useBakeryRoutes = applicationPages => {
@@ -219,6 +221,28 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ProductManagementStore}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_PRODUCTION_MANAGEMENT_STORE}
+        element={
+          <PrivateRoute
+            component={ProductionManagementStore}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_PRODUCTION_MANAGEMENT_STORE_PRINT}
+        element={
+          <PrivateRoute
+            component={ProductionManagementStorePrint}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

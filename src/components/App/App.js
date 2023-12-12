@@ -13,7 +13,7 @@ import { makeDesignerGetRequest, makeNotificationsPutRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
-import { oidcConfig, getFirebaseToken } from 'utils/authService'
+import { oidcConfig, getFirebaseToken, setFirebaseToken } from 'utils/authService'
 import { useFirebaseNotification, useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
@@ -28,6 +28,7 @@ import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
 import { useMerchandiseRoutes } from '../merchandise/routes'
 import { useShopReceptionRoutes } from '../shop-reception/routes'
 import { getFBToken, onMessageListener } from 'utils/firebase'
+import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -68,21 +69,25 @@ const App = () => {
 
   useEffect(() => {
     ;(async () => {
-      if (fbToken && !getFirebaseToken()) {
+      const localToken = getFirebaseToken()
+      if (fbToken && fbToken !== localToken) {
         await makeNotificationsPutRequest('/association', {
           deviceToken: fbToken
         })
+        setFirebaseToken(fbToken)
       }
     })()
   }, [fbToken])
 
   onMessageListener()
     .then(payload => {
-      showFirebaseNotification({
-        title: payload?.notification?.title,
-        message: payload?.notification?.body,
-        link: payload?.fcmOptions?.link
-      })
+      if (payload) {
+        showFirebaseNotification({
+          title: payload.notification?.title,
+          message: payload.notification?.body,
+          link: payload.fcmOptions?.link
+        })
+      }
     })
     .catch(err => console.log('failed: ', err))
 
