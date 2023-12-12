@@ -11,6 +11,7 @@ import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { EditGrowthIndex } from './EditGrowthIndex'
 import { generatePath, useNavigate } from "react-router-dom";
+import { EditActionHome, ViewActionHome } from 'icons'
 
 const GrowthIndex = () => {
   const [tableItems, setTableItems] = useState<GrowthIndexItem[]>([])
@@ -83,18 +84,20 @@ const GrowthIndex = () => {
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[
             {
-              label: 'Edit',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              onClick: (e, rowId) => selectRow(rowId, 'edit')
-            },
-            {
               label: 'View',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
+              desktopIcon: <ViewActionHome />,
               onClick: (e, rowId) => selectRow(rowId, 'view')
+            },
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              desktopIcon: <EditActionHome />,
+              onClick: (e, rowId) => selectRow(rowId, 'edit')
             },
           ]}
           rowActionsWidth="130px"

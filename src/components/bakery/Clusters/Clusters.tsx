@@ -9,6 +9,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { columns } from './helpers'
 import { EditCluster } from './EditCluster'
+import { EditActionHome } from 'icons'
 
 const Clusters = () => {
   const [tableItems, setTableItems] = useState<ClustersItem[]>([])
@@ -80,6 +81,7 @@ const Clusters = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
+              desktopIcon: <EditActionHome />,
               onClick: (e, rowId) => selectRow(rowId, 'edit')
             }
           ]}

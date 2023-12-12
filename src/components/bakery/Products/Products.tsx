@@ -10,6 +10,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { columns } from './helpers'
 import { toTableRowItems } from './serializers'
 import { EditProduct } from './EditProduct'
+import { EditActionHome } from 'icons'
 
 const Products = () => {
   const [tableItems, setTableItems] = useState<ProductItem[]>([])
@@ -84,6 +85,7 @@ const Products = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
+              desktopIcon: <EditActionHome />,
               onClick: (e, rowId) => selectRow(rowId, 'edit')
             }
           ]}
