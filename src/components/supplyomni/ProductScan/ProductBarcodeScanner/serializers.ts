@@ -1,5 +1,16 @@
 export const toProduct = product => {
-  const { id, name, ean, price, internalCode, storeStock, warehouseStock, neighboursStock } = product
+  const {
+    id,
+    name,
+    ean,
+    price,
+    internalCode,
+    storeStock,
+    warehouseStock,
+    neighboursStock,
+    storeProductState,
+    warehouseProductState
+  } = product
 
   return {
     title: name,
@@ -15,7 +26,8 @@ export const toProduct = product => {
       initialStock: storeStock.initialQuantity,
       hasBuyback: !!storeStock.purchaseOptions?.length,
       purchaseOptions: storeStock.purchaseOptions,
-      isWarehouse: false
+      isWarehouse: false,
+      state: storeProductState
     },
     warehouseStock: {
       id,
@@ -29,14 +41,16 @@ export const toProduct = product => {
       initialStock: warehouseStock?.initialQuantity,
       hasBuyback: !!warehouseStock?.purchaseOptions?.length,
       purchaseOptions: warehouseStock?.purchaseOptions,
-      isWarehouse: true
+      isWarehouse: true,
+      state: warehouseProductState
     },
-    neighboursStock: neighboursStock?.map(stock => ({
-      name: stock.storeName,
-      available: stock.availableQuantity,
-      sold: stock.soldQuantity,
-      reserved: stock.reservedQuantity,
-      initialStock: stock.initialQuantity
-    })) ?? []
+    neighboursStock:
+      neighboursStock?.map(stock => ({
+        name: stock.storeName,
+        available: stock.availableQuantity,
+        sold: stock.soldQuantity,
+        reserved: stock.reservedQuantity,
+        initialStock: stock.initialQuantity
+      })) ?? []
   }
 }
