@@ -1,6 +1,5 @@
 import { Add } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
-import { FilterDataSelect } from 'components/core-ui/FilterDataSelect'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Input } from 'components/core-ui/Input'
@@ -20,6 +19,7 @@ import { toTableRowItems } from './serializers'
 import { RootState } from 'configureStore'
 import { useSelector } from 'react-redux'
 import { DeleteActionHome, EditActionHome } from 'icons'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const TeamDayOffManagement = () => {
   const { dispatchFetchDomains } = useGovernanceDomains()
@@ -196,7 +196,7 @@ const TeamDayOffManagement = () => {
           <Grid item style={{ display: 'block', padding: 0 }}>
             <FilterDataSelect
               name="teamMember.domain"
-              selectedData={domainFilterValue}
+              defaultSelectedData={domainFilterValue}
               label="Domain"
               showCounter={true}
               showSearch={true}
