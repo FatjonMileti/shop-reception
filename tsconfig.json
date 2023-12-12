@@ -10,7 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     // "strict": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "lib": ["dom", "es2021", "webworker"]
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "*/node_modules/"]
