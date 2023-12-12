@@ -25,6 +25,7 @@ import {
   GroupVolumetryHome,
   TasksVolumetryHome
 } from 'icons/volumetry'
+
 import {
   AdminMenu,
   FormatorMenu,
@@ -67,6 +68,17 @@ import {
 } from 'icons/bakery'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { createElement } from 'react'
+import {
+  HomeMenu,
+  NotificationsMenu,
+  UserMenu,
+  LogoutMenu,
+  UsersMenu,
+  ChairMenu,
+  VolumetryMenu,
+  EmployeeManagementMenu,
+  ManagementTasksMenu
+} from 'icons'
 
 const IconComponents = {
   // Shared
@@ -95,6 +107,16 @@ const IconComponents = {
   GroupVolumetryHome,
   TasksVolumetryHome,
   // Bakery
+  // Menu
+  HomeMenu,
+  NotificationsMenu,
+  UserMenu,
+  LogoutMenu,
+  UsersMenu,
+  ChairMenu,
+  VolumetryMenu,
+  EmployeeManagementMenu,
+  ManagementTasksMenu,
   //home
   AdminHome,
   FormatorHome,
