@@ -128,7 +128,7 @@ const TeamDayOffManagement = () => {
   }, [columns, canEdit, canDelete, teamMembers, tableItems])
 
   const toolbarActions = useMemo(() => {
-    const actions = [
+    let actions = [
       {
         label: 'Holidays',
         icon: <CalendarMonth />,
@@ -137,11 +137,14 @@ const TeamDayOffManagement = () => {
     ]
 
     if (canCreate) {
-      actions.push({
-        label: 'Add',
-        icon: <Add />,
-        onClick: () => openNewModal()
-      })
+      actions = [
+        ...actions,
+        {
+          label: 'Add',
+          icon: <Add />,
+          onClick: () => openNewModal()
+        }
+      ]
     }
 
     return actions
@@ -223,7 +226,7 @@ const TeamDayOffManagement = () => {
           <PublicHolidays
             isModalOpen={isPublicHolidaysModalOpen}
             closeModal={closePublicHolidaysModal}
-          ></PublicHolidays>
+          />
           <NewTimeOff
             teamMembers={teamMembers}
             isModalOpen={isNewModalOpen}

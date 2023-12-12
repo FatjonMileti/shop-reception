@@ -4,7 +4,7 @@ import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/
 import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { useNotification } from 'hooks'
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { BasePageResponseModel } from 'shared/interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
@@ -100,7 +100,7 @@ const MyTimeOff = () => {
         <PublicHolidays
           isModalOpen={isPublicHolidaysModalOpen}
           closeModal={closePublicHolidaysModal}
-        ></PublicHolidays>
+        />
         <NewTimeOff
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}

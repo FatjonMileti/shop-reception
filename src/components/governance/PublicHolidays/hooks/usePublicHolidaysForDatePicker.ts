@@ -38,30 +38,29 @@ export const usePublicHolidaysForDatePicker = () => {
     })
   }, [publicHolidaysYearsLoading])
 
-  function loadPublicHolidays(year: number) {
-    makeCoreGetRequest(`/governance/publicHolidays/${year}`)
-      .then(resp => {
-        setPublicHolidaysPerYear(currentPublicHolidays => {
-          currentPublicHolidays = {
-            ...currentPublicHolidays
-          }
-          currentPublicHolidays[year] = resp
-          return currentPublicHolidays
-        })
+  async function loadPublicHolidays(year: number) {
+    try {
+      const response = await makeCoreGetRequest(`/governance/publicHolidays/${year}`)
+      setPublicHolidaysPerYear(currentPublicHolidays => {
+        currentPublicHolidays = {
+          ...currentPublicHolidays
+        }
+        currentPublicHolidays[year] = response
+
+        return currentPublicHolidays
       })
-      .catch(() => {
-        // set an empty response for public holidays on error
-        setPublicHolidaysPerYear(currentPublicHolidays => {
-          currentPublicHolidays = {
-            ...currentPublicHolidays
-          }
-          currentPublicHolidays[year] = []
-          return currentPublicHolidays
-        })
+    } catch (error) {
+      setPublicHolidaysPerYear(currentPublicHolidays => {
+        currentPublicHolidays = {
+          ...currentPublicHolidays
+        }
+        currentPublicHolidays[year] = []
+
+        return currentPublicHolidays
       })
-      .finally(() => {
-        removeYearFromLoadingQueue(year)
-      })
+    } finally {
+      removeYearFromLoadingQueue(year)
+    }
   }
 
   const debouncedAddToLoadingQueue = debounce(year => {
@@ -78,9 +77,9 @@ export const usePublicHolidaysForDatePicker = () => {
       debouncedAddToLoadingQueue(year)
     }
 
-    return publicHolidaysPerYear[year]
-      ?.map(publicHoliday => dayjs(publicHoliday.date))
-      .some(publicHolidayDate => publicHolidayDate.isSame(datePickerDate))
+    return publicHolidaysPerYear[year]?.some(publicHoliday =>
+      dayjs(publicHoliday.date).isSame(datePickerDate)
+    )
   }
 
   return {
