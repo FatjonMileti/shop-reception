@@ -1,11 +1,4 @@
-import {
-  Box,
-  CircularProgress,
-  Divider,
-  Grid,
-  Typography,
-  useMediaQuery
-} from '@mui/material'
+import { Box, CircularProgress, Divider, Grid, Typography, useMediaQuery } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useMemo } from 'react'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
@@ -108,6 +101,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
     }
   })
 
+  // TODO: Move styles external
   return (
     <Box>
       <Box sx={{ display: 'flex', alignItems: 'center', padding: '16px 8px' }}>

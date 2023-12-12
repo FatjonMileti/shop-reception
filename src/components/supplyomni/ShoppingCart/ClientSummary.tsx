@@ -10,6 +10,7 @@ const ClientSummary = ({ client }) => {
     { label: 'Telefon', value: client?.phone || 'N/A' }
   ]
 
+  // TODO: Move styles external
   return (
     <Box style={{ paddingTop: '24px' }}>
       <Typography sx={{ fontSize: '1.1rem', color: '#052351' }}>Detalii client</Typography>

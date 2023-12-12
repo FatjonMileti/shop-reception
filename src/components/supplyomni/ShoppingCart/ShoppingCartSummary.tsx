@@ -3,7 +3,7 @@ import OrderSummary from './OrderSummary'
 import ClientSummary from './ClientSummary'
 
 const ShoppingCartSummary = (props: any) => {
-  const { order, client, deliveryPayment, sx } = props
+  const { order, client, sx } = props
 
   return (
     <Box sx={sx}>

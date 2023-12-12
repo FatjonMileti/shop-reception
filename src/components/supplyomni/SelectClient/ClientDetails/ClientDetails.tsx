@@ -46,7 +46,7 @@ const ClientDetails: React.FC = props => {
       }
     }
   )
-
+  // TODO: Move styles external
   return (
     <Box sx={!isXs ? { margin: '24px' } : { margin: '12px' }}>
       <Grid sx={{ mt: 1 }} container spacing={2}>

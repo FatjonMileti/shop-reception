@@ -11,6 +11,7 @@ const ShoppingCartStepper = (props: ShoppingCartStepperProps) => {
   const { activeStep } = props
   const isXS = useMediaQuery('(max-width:624px)')
 
+  // TODO: Move styles external
   return (
     <>
       {isXS ? (

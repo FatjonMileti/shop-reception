@@ -27,7 +27,7 @@ const Tabs = (props: TabsProps) => {
   }
 
   const isXs = useMediaQuery('(max-width:624px)')
-
+  // TODO: Move styles external
   return (
     <GeneralTabs
       onChange={onChange}

@@ -11,6 +11,7 @@ const ReceiptInvoiceFinalized: React.FC = () => {
   const orderId = searchParams.get('orderId')
   const isXs = useMediaQuery('(max-width:624px)')
 
+  // TODO: Move styles external
   return (
     <Box sx={!isXs ? { margin: '24px' } : { margin: '12px' }}>
       <Grid sx={{ mt: 1 }} container spacing={5}>

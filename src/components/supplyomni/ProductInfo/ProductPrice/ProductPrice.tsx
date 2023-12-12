@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material'
 
 interface ProductPriceProps {
-  totalPrice: number;
-  totalPriceWithoutDiscount: number;
-  style?: any;
+  totalPrice: number
+  totalPriceWithoutDiscount: number
+  style?: any
 }
 const ProductPrice: React.FC<ProductPriceProps> = props => {
   const { totalPrice, totalPriceWithoutDiscount, style } = props
@@ -19,7 +19,9 @@ const ProductPrice: React.FC<ProductPriceProps> = props => {
           fontSize={15}
           textAlign={'center'}
           sx={{ textDecoration: 'line-through' }}
-        >{totalPriceWithoutDiscount} lei</Typography>
+        >
+          {totalPriceWithoutDiscount} lei
+        </Typography>
       )}
     </Box>
   )

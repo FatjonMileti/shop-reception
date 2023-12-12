@@ -66,6 +66,7 @@ const ShoppingCart = () => {
     }
   )
 
+  // TODO: Move styles external
   return (
     <div className={s.mainContainer}>
       {isLoadingGetProducts || isLoadingUpdateCart ? (

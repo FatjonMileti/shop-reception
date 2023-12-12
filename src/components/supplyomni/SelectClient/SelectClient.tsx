@@ -53,6 +53,7 @@ const SelectClient: React.FC<SelectClientProps> = ({ selectNewClient }) => {
   const isShowStepper = localStorage.getItem('isStepperStep')
   const isShowOrderSummary = localStorage.getItem('isStepperStep')
 
+  // TODO: Move styles external
   return (
     <Box sx={!isXs ? { margin: '24px' } : { margin: '12px' }}>
       {isLoadingGetProducts ? (

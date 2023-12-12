@@ -39,6 +39,7 @@ const ProductInfo: React.FC<ProductInfoProps> = props => {
   const openDeleteModal = () => setIsDeleteModalOpen(true)
   const closeDeleteModal = () => setIsDeleteModalOpen(false)
 
+  // TODO: Move styles external
   return (
     <>
       <Paper

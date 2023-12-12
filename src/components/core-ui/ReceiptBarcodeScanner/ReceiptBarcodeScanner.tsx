@@ -18,7 +18,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const [code, setCode] = useState('')
   const [receiptDate, setReceiptDate] = useState(dayjs())
   const [isVisible, setIsVisible] = useState(false)
-  const isXs = useMediaQuery('(max-width:624px)');
+  const isXs = useMediaQuery('(max-width:624px)')
   const { showNotification } = useNotification()
   const navigate = useNavigate()
 
@@ -48,11 +48,12 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
               fiscalTicketDate: formatPayloadDate(receiptDate)
             })
 
-
             if (action.href) {
               await destroy()
               navigate(
-                `/supplyOmni/${action.href}?${action.variable}=${id}&clientId=${searchParams.get('clientId')}`
+                `/supplyOmni/${action.href}?${action.variable}=${id}&clientId=${searchParams.get(
+                  'clientId'
+                )}`
               )
             }
           } catch (error) {
@@ -81,144 +82,87 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     document.getElementById('receipt-scan-input').focus()
   }, [])
 
-
   return (
-
-      <div>
-        <Grid container>
-          <Grid xs={12} sm={12} md={6} lg={6} item>
-            <div className={s.scannerControlItem} style={{ marginBottom: '16px' }}>
+    <div>
+      <Grid container>
+        <Grid xs={12} sm={12} md={6} lg={6} item>
+          <div className={s.scannerControlItem} style={{ marginBottom: '16px' }}>
             <Input
               value={code}
               type="text"
               variant="outlined"
               label="Introdu codul bonului"
-              style={{ '& .MuiOutlinedInput-input':{padding:'16px'} }}
+              style={{ '& .MuiOutlinedInput-input': { padding: '16px' } }}
               fullWidth
               onChange={event => setCode(event.currentTarget.value)}
               id="receipt-scan-input"
               required
             />
-            </div>
-          </Grid>
-          <Grid xs={12} sm={12} md={6} lg={6} item>
-          <div className={s.pickerContainer} style={{ paddingLeft:0, marginBottom: '16px' }}>
+          </div>
+        </Grid>
+        <Grid xs={12} sm={12} md={6} lg={6} item>
+          <div className={s.pickerContainer} style={{ paddingLeft: 0, marginBottom: '16px' }}>
             <DatePicker
               label="Alege data bonului"
               value={receiptDate}
               variant="outlined"
-              style={{padding:0, width:'100%', '& .MuiTextField-root': {padding:0, width:'100%'}}}
+              style={{
+                padding: 0,
+                width: '100%',
+                '& .MuiTextField-root': { padding: 0, width: '100%' }
+              }}
               closeButtonLabel="Inchide"
               confirmButtonLabel="Confirma"
               required
               onChange={newValue => setReceiptDate(newValue)}
             />
-            </div>
-          </Grid>
-          <Grid xs={12} sm={12} md={12} lg={12} item>
-              {/* <div className={s.buttonContainer}> */}
-              <Stack sx={{mt:1, mb:3}} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 1, md: 1 }}>
-                  {isUsingScandit && (
-                    <Box sx={!isXs ? {} : {width:'100%'}}>
-                      <IconButton
-                        sx={!isXs ? {} : {width:'100%'}}
-                        onClick={scanCode}
-                        label="Scaneaza"
-                        variant="outlined"
-                        startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
-                      />
-                    </Box>
-                  )}
-                  <Box sx={!isXs ? {} : {width:'100%'}}>
-                    <IconButton
-                    sx={!isXs ? {} : {width:'100%'}}
-                      onClick={sendReceipt}
-                      label="Continua"
-                      variant="contained"
-                      endIcon={<Icon iconName="ArrowRightSharp" tiny={true} fill="white" />}
-                    />
-                  </Box>
-              </Stack>
-          </Grid>
-          <Grid xs={12} md={12} lg={6} item>
-            <div className={cn({ [s.hiddenScanner]: !isVisible })}>
-                <div
-                  id="scandit-barcode-picker"
-                  style={{
-                    maxWidth: '400px',
-                    maxHeight: '400px',
-                    visibility: isVisible ? 'visible' : 'hidden',
-                    opacity: isVisible ? 1 : 0,
-                    marginTop: isVisible ? '16px' : '0'
-                  }}
-                />
-              </div>
-          </Grid>
-
+          </div>
         </Grid>
-        </div>
-        
-  )
-
-
-  {/* return (
-    <Paper className={s.scanContainer}>
-      <div className={cn(s.scannerControls, s.receiptScannerControls)}>
-        <div className={s.scannerControlItem}>
-          <Input
-            value={code}
-            type="text"
-            variant="outlined"
-            label="Introdu codul bonului"
-            fullWidth
-            onChange={event => setCode(event.currentTarget.value)}
-            id="receipt-scan-input"
-            required
-          />
-        </div>
-        <div className={s.pickerContainer}>
-          <DatePicker
-            label="Alege data bonului"
-            value={receiptDate}
-            variant="outlined"
-            style={{padding:0}}
-            closeButtonLabel="Inchide"
-            confirmButtonLabel="Confirma"
-            required
-            onChange={newValue => setReceiptDate(newValue)}
-          />
-        </div>
-        <div className={s.buttonContainer}>
-          {isUsingScandit && (
-            <IconButton
-              onClick={scanCode}
-              label="Scaneaza"
-              variant="outlined"
-              startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
+        <Grid xs={12} sm={12} md={12} lg={12} item>
+          <Stack
+            sx={{ mt: 1, mb: 3 }}
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={{ xs: 1, sm: 1, md: 1 }}
+          >
+            {isUsingScandit && (
+              <Box sx={!isXs ? {} : { width: '100%' }}>
+                <IconButton
+                  sx={!isXs ? {} : { width: '100%' }}
+                  onClick={scanCode}
+                  label="Scaneaza"
+                  variant="outlined"
+                  startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
+                />
+              </Box>
+            )}
+            <Box sx={!isXs ? {} : { width: '100%' }}>
+              <IconButton
+                sx={!isXs ? {} : { width: '100%' }}
+                onClick={sendReceipt}
+                label="Continua"
+                variant="contained"
+                endIcon={<Icon iconName="ArrowRightSharp" tiny={true} fill="white" />}
+              />
+            </Box>
+          </Stack>
+        </Grid>
+        <Grid xs={12} md={12} lg={6} item>
+          <div className={cn({ [s.hiddenScanner]: !isVisible })}>
+            <div
+              id="scandit-barcode-picker"
+              style={{
+                maxWidth: '400px',
+                maxHeight: '400px',
+                visibility: isVisible ? 'visible' : 'hidden',
+                opacity: isVisible ? 1 : 0,
+                marginTop: isVisible ? '16px' : '0'
+              }}
             />
-          )}
-          <IconButton
-            onClick={sendReceipt}
-            label="Continua"
-            variant="contained"
-            endIcon={<Icon iconName="ArrowRightSharp" tiny={true} fill="white" />}
-          />
-        </div>
-      </div>
-      <div className={cn({ [s.hiddenScanner]: !isVisible })}>
-        <div
-          id="scandit-barcode-picker"
-          style={{
-            maxWidth: '400px',
-            maxHeight: '400px',
-            visibility: isVisible ? 'visible' : 'hidden',
-            opacity: isVisible ? 1 : 0,
-            marginTop: isVisible ? '16px' : '0'
-          }}
-        />
-      </div>
-    </Paper> 
-  )*/}
+          </div>
+        </Grid>
+      </Grid>
+    </div>
+  )
 }
 
 export default ReceiptBarcodeScanner
