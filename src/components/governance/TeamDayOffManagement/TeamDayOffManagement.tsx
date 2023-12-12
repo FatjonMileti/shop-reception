@@ -1,13 +1,12 @@
 import { Add, CalendarMonth } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
-import { FilterDataSelect } from 'components/core-ui/FilterDataSelect'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Input } from 'components/core-ui/Input'
 import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { useGovernanceDomains, useNotification, usePermissions } from 'hooks'
-import React, { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
@@ -20,6 +19,7 @@ import { toTableRowItems } from './serializers'
 import { RootState } from 'configureStore'
 import { useSelector } from 'react-redux'
 import { DeleteActionHome, EditActionHome } from 'icons'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { PublicHolidays } from '../PublicHolidays'
 
 const TeamDayOffManagement = () => {
@@ -209,7 +209,7 @@ const TeamDayOffManagement = () => {
           <Grid item style={{ display: 'block', padding: 0 }}>
             <FilterDataSelect
               name="teamMember.domain"
-              selectedData={domainFilterValue}
+              defaultSelectedData={domainFilterValue}
               label="Domain"
               showCounter={true}
               showSearch={true}
