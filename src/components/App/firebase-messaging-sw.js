@@ -13,11 +13,11 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 const messaging = firebase.messaging()
-
+// 
 // Initialize redirect URL when notification is pressed on BACKGROUND
 self.addEventListener('notificationclick', event => {
   event.notification.close() // Close the notification
-
+// 
   event.waitUntil(
     clients.openWindow(event.fcmOptions.link) // Open the URL
   )

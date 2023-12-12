@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getMessaging, getToken, onMessage } from 'firebase/messaging'
+import { getMessaging, getToken, isSupported, onMessage } from 'firebase/messaging'
 import { removeFirebaseToken, setFirebaseToken } from './authService'
 
 export const firebaseConfig = {
@@ -12,10 +12,22 @@ export const firebaseConfig = {
 }
 
 const firebaseApp = initializeApp(firebaseConfig)
-const messaging = getMessaging(firebaseApp)
+const messaging = (async () => {
+  try {
+    const isSupportedBrowser = await isSupported()
+    if (isSupportedBrowser) {
+      return getMessaging(firebaseApp)
+    }
+    console.log('Firebase not supported this browser')
+    return null
+  } catch (err) {
+    console.log(err)
+    return null
+  }
+})()
 
 export const getFBToken = async setToken => {
-  return getToken(messaging, {
+  return getToken(await messaging, {
     vapidKey: process.env.FIREBASE_VAPID_KEY
   })
     .then(currentToken => {
@@ -38,10 +50,16 @@ export const getFBToken = async setToken => {
     })
 }
 
-export const onMessageListener = () =>
-  new Promise(resolve => {
-    onMessage(messaging, payload => {
-      console.log('payload', payload)
-      resolve(payload)
-    })
-  })
+export const onMessageListener = async () => {
+  try {
+    const isSupportedBrowser = await isSupported()
+    if (isSupportedBrowser) {
+      return new Promise(async resolve => {
+        onMessage(await messaging, payload => {
+          console.log('payload', payload)
+          resolve(payload)
+        })
+      })
+    }
+  } catch (error) {}
+}

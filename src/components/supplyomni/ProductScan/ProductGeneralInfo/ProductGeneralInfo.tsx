@@ -93,9 +93,13 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
 
       <Paper>
         <div className={s.infoContainer}>
-          <div className={s.price}>
-            {product.price}&nbsp;{product.currency}
-          </div>
+          {product.state === 'INACTIVE' ? (
+            <div className={s.inactiveInfo}>Produsul este inactiv momentan</div>
+          ) : (
+            <div className={s.price}>
+              {product.price}&nbsp;{product.currency}
+            </div>
+          )}
           <IconButton
             onClick={onSubmitAddToCart}
             label="Adauga in cos"
