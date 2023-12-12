@@ -15,6 +15,7 @@ export const URLS = {
   AUTH_METI_FILE_DETAIL: '/shop-reception/files/meti/:id',
   AUTH_DIFFERENCES_PRODUCTS: '/shop-reception/products/differences',
   AUTH_SUPPORT_TRADABILITY: '/shop-reception/support/tradability',
+  AUTH_SGR_PRODUCTS: '/shop-reception/products/sgr',
 
   // admin dashboard
   AUTH_ADMIN_DEPOSIT: '/shop-reception/admin/deposit',
