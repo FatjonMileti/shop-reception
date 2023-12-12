@@ -6,7 +6,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import s from './ProformaView.modules.scss'
 import { formatErrorMessage } from 'utils/formatting'
-
+import { useSearchParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { ShoppingCartStepper } from '../../core-ui/ShoppingCartStepper'
 import { ShoppingCartSummary } from '../ShoppingCart'
@@ -19,6 +19,7 @@ const ProformaView = () => {
   const isXs = useMediaQuery('(max-width:624px)')
   const navigate = useNavigate()
   const { id } = useParams()
+  const [searchParams, _] = useSearchParams()
 
   const { showNotification } = useNotification()
 
@@ -59,12 +60,12 @@ const ProformaView = () => {
   const { data: client, isLoading: isClientLoading } = useQuery(
     ['client-info'],
     async () => {
-      return await makeCoreGetRequest(`/supply-omni/client/${id}`)
+      return await makeCoreGetRequest(`/supply-omni/client/${searchParams.get('clientId')}`)
     },
     {
       onError: error => {
         showNotification({
-          message: `A apărut o eroare la căutarea produsului. ${formatErrorMessage(error)}`,
+          message: `A apărut o eroare la căutarea clientului. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -96,7 +97,7 @@ const ProformaView = () => {
                   actions={{
                     downloadAction: { url: '/supply-omni/order/proforma/pdf', type: 'GET' },
                     printAction: { url: '/supply-omni/order/proforma/print', type: 'POST' },
-                    scanReceiptAction: { href: '/supplyOmni/scanReceipt', label: 'Scaneaza bon' },
+                    scanReceiptAction: { href: `/supplyOmni/scanReceipt?clientId=${searchParams.get('clientId')}`, label: 'Scaneaza bon' },
                     printersAction: { url: '/supply-omni/printer', type: 'GET' }
                   }}
                 />

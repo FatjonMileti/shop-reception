@@ -74,7 +74,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
         message: 'Comanda a fost inregistrata cu success!',
         type: 'success'
       })
-      navigate(`/supplyOmni/proformaView/${data?.id}`)
+      navigate(`/supplyOmni/proformaView/${data?.id}?clientId=${clientId}`)
     },
     onError: res => {
       showNotification({

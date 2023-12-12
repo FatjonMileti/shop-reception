@@ -4,9 +4,9 @@ import s from './OrderSummary.modules.scss'
 const OrderSummary = ({ order }) => {
   const orderSummaryPrice = [
     { label: 'Produse comandate', value: order?.summary?.totalItems || 'N/A' },
-    { label: 'Cost produse', value: `${order?.summary?.totalPrice || 'N/A'}  lei` },
-    { label: 'Discount total', value: '- lei' },
-    { label: 'Total TVA', value: '- lei' }
+    { label: 'Cost produse', value: `${order?.summary?.totalPrice || 'N/A'}  lei` }
+    // { label: 'Discount total', value: '- lei' },
+    // { label: 'Total TVA', value: '- lei' }
   ]
 
   return (

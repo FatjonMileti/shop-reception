@@ -92,7 +92,6 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
               type="text"
               variant="outlined"
               label="Introdu codul bonului"
-              style={{ '& .MuiOutlinedInput-input': { padding: '16px' } }}
               fullWidth
               onChange={event => setCode(event.currentTarget.value)}
               id="receipt-scan-input"

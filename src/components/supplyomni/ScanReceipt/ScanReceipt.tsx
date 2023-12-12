@@ -1,7 +1,7 @@
 import s from './ScanReceipt.modules.scss'
 import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
 import { useState, useEffect } from 'react'
-
+import { useSearchParams } from 'react-router-dom'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { useParams, useNavigate } from 'react-router-dom'
@@ -25,6 +25,7 @@ const ScanReceipt = () => {
   const { showNotification } = useNotification()
   const { id } = useParams()
   const [proform, setProform] = useState(null)
+  const [searchParams, _] = useSearchParams()
 
   useEffect(() => {
     ;(async () => {
@@ -63,12 +64,12 @@ const ScanReceipt = () => {
   const { data: client, isLoading: isClientLoading } = useQuery(
     ['client-info'],
     async () => {
-      return await makeCoreGetRequest(`/supply-omni/client/${id}`)
+      return await makeCoreGetRequest(`/supply-omni/client/${searchParams.get('clientId')}`)
     },
     {
       onError: error => {
         showNotification({
-          message: `A apărut o eroare la căutarea produsului. ${formatErrorMessage(error)}`,
+          message: `A apărut o eroare la căutarea clientului. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
