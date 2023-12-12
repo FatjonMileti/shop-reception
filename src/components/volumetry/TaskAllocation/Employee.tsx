@@ -5,13 +5,15 @@ import { Capsule } from 'components/core-ui/Capsule'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { useEffect, useMemo, useState } from 'react'
 import { getCapsuleColor } from './helpers'
+import StopTaskModal from './StopTaskModal'
 
 interface EmployeeProps {
   employee: any // TODO: To add type when db schema is defined
+  task: any // TODO: To add type when db schema is defined
 }
 
 const Employee: React.FC<EmployeeProps> = props => {
-  const { employee } = props
+  const { employee, task } = props
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 900)
 
@@ -41,6 +43,15 @@ const Employee: React.FC<EmployeeProps> = props => {
     taskCurrentState.isTaskEnded,
     employee.isOverdue
   )
+
+  const [isOpenStopTaskModal, setIsOpenStopTaskModal] = useState<boolean>(false)
+  const openStopTaskModal = () => {
+    setIsOpenStopTaskModal(true)
+  }
+
+  const closeStopTaskModal = () => {
+    setIsOpenStopTaskModal(false)
+  }
 
   return (
     <Grid item mt={1} className={s.employeeContainer} flexDirection={'column'} overflow={'hidden'}>
@@ -112,10 +123,21 @@ const Employee: React.FC<EmployeeProps> = props => {
                 height: '30px',
                 width: isMobile ? '100%' : 'auto'
               }}
+              onClick={() => {
+                if (!taskCurrentState.showStartButton) {
+                  openStopTaskModal()
+                }
+              }}
             />
           </Grid>
         )}
       </Grid>
+      <StopTaskModal
+        isModalOpen={isOpenStopTaskModal}
+        closeModal={closeStopTaskModal}
+        employee={employee}
+        task={task}
+      />
     </Grid>
   )
 }
