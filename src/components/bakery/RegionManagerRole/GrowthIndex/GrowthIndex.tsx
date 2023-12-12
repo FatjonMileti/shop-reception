@@ -87,7 +87,7 @@ const GrowthIndex = () => {
               label: 'View',
               labelColor: 'white',
               typographyVariant: 'medium',
-              backgroundColor: '#16a085',
+              backgroundColor: '#000000',
               desktopIcon: <ViewActionHome />,
               onClick: (e, rowId) => selectRow(rowId, 'view')
             },
@@ -95,7 +95,7 @@ const GrowthIndex = () => {
               label: 'Edit',
               labelColor: 'white',
               typographyVariant: 'medium',
-              backgroundColor: '#16a085',
+              backgroundColor: '#000000',
               desktopIcon: <EditActionHome />,
               onClick: (e, rowId) => selectRow(rowId, 'edit')
             },
