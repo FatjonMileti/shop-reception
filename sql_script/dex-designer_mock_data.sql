@@ -32,17 +32,17 @@ INSERT INTO
     "dex-designer".application_submodule (id, name, icon, route_url, route_path_exact, id_application_module)
 VALUES
     -- Governance
-    (1, 'Project Team', 'Groups', '/projectTeam', true, 1),
+    (1, 'Project Team', 'ProjectTeamGovernance', '/projectTeam', true, 1),
     -- Bakery
     (2, 'Admin', 'AdminHome', '/admin', true, 2),
     (3, 'Formator', 'FormatorHome', '/formator', true, 2),
     (4, 'Manager magazin/raion', 'StoreManagerHome', '/storeManager', true, 2),
     (5, 'Manager regiune', 'RegionManagerHome', '/regionManager', true, 2),
     -- Supply OMNI
-    (6, 'Supply OMNI', 'DonutLargeTwoTone', '/supplyOmni', true, 3),
+    (6, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true, 3),
     -- Volumetry
-    (7, 'Administrare Angajati', 'UsersManagement', '/employeeManagement', true, 4),
-    (8, 'Administrare Task-uri', 'UsersManagement', '/tasksManagement', true, 4),
+    (7, 'Administrare Angajati', 'GroupVolumetry', '/employeeManagement', true, 4),
+    (8, 'Administrare Task-uri', 'TasksVolumetry', '/tasksManagement', true, 4),
     -- Shop Reception
     (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5);
 
@@ -52,12 +52,12 @@ INSERT INTO
     "dex-designer".activity (id, name, icon, route_url, route_path_exact, id_application_submodule)
 VALUES
     -- Governance
-    (1, 'Team Assignment', 'HowToRegOutlined', null, true, 1),
-    (2, 'Team Capacity', 'PeopleAltOutlined', null, true, 1),
-    (3, 'Project Milestones', 'AccountTreeOutlined', null, true, 1),
-    (4, 'Effort Matrix', 'DonutSmallOutlined', null, true, 1),
-    (5, 'Team Day-Off Management', 'TimerOffOutlined', null , true, 1),
-    (6, 'My Time-Off', 'TimerOffOutlined', null, true, 1),
+    (1, 'Team Assignment', 'TeamAssignment', null, true, 1),
+    (2, 'Team Capacity', 'TeamCapacity', null, true, 1),
+    (3, 'Project Milestones', 'ProjectMilestones', null, true, 1),
+    (4, 'Effort Matrix', 'EffortMatrix', null, true, 1),
+    (5, 'Team Day-Off Management', 'TeamDayOffManagement', null , true, 1),
+    (6, 'My Time-Off', 'TeamDayOffManagement', null, true, 1),
     -- Bakery ADMIN
     (7, 'Gestiune utilizatori', 'UsersManagementSubcategory', null, true, 2),
     (8, 'Gestiune zone', 'ZonesSubcategory', null, true, 2),
@@ -90,15 +90,15 @@ VALUES
     (35, 'Raport vanzari + cadentier', 'CadentierSalesRegionSubcategory', null, true, 5),
     (36, 'Raport utilizare aplicatie', 'UsageReportRegionSubcategory', null, true, 5),
     -- Supply OMNI
-    (37, 'Scanare produs', 'QrCodeScannerOutlined', null, true, 6),
-    (38, 'Cos de cumparaturi', 'ShoppingBasketOutlined', null, true, 6),
-    (39, 'Listare proforme', 'ReceiptLongRounded', null, true, 6),
-    (40, 'Vanzarile mele', 'StackedBarChartOutlined', null, true, 6),
-    (41, 'Comenzi achitate', 'AccountBalance', null, true, 6),
+    (37, 'Scanare produs', 'ProductScan', null, true, 6),
+    (38, 'Cos de cumparaturi', 'ShoppingCart', null, true, 6),
+    (39, 'Listare proforme', 'ProformaList', null, true, 6),
+    (40, 'Vanzarile mele', 'MySales', null, true, 6),
+    (41, 'Comenzi achitate', 'PaidOrders', null, true, 6),
     -- Volumetry
-    (42, 'Management Angajati', 'UsersManagement', null, true, 7),
-    (43, 'Management Task-uri', 'UsersManagement', null, true, 8),
-    (44, 'Alocare Task-uri', 'UsersManagement', null, true, 8),
+    (42, 'Management Angajati', 'EmployeeManagement', null, true, 7),
+    (43, 'Management Task-uri', 'ManagementTasks', null, true, 8),
+    (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
     -- Shop Reception
     (45, 'Admin magazin', 'UsersManagement', null, true, 9);
 
