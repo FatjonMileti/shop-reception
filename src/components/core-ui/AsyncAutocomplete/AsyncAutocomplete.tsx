@@ -72,10 +72,6 @@ const AsyncAutocomplete = props => {
         })
       }
 
-      // if (searchParams.size > 0 && Object.keys(qp).length === 0) {
-      //   console.log('No sibling values, filter from searchParams')
-      // }
-
       return qp
   }, [props.siblingValues])
 
