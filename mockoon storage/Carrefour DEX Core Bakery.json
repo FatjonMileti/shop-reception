@@ -3178,33 +3178,1225 @@
       "responseMode": null
     },
     {
-      "uuid": "9f9f9fc7-e8ec-40de-aa70-565a016a95c7",
+      "uuid": "fe5c95a9-1d95-4806-a178-66385448f104",
       "type": "http",
-      "documentation": "",
+      "documentation": "Get store list",
       "method": "get",
-      "endpoint": "report/download/sale",
+      "endpoint": "region/growth",
       "responses": [
         {
-          "uuid": "66118fd3-9351-4013-a9c7-ec35c6bb44f6",
-          "body": "{}",
+          "uuid": "fa684854-5fd2-4f3b-864a-ad431caceba9",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"id\": \"b0610a3d-0cee-4688-8454-3575d8a62366\",\r\n            \"name\": \"Cluj-Mures\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 1,\r\n        \"pageCount\": 1\r\n    }\r\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "",
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
           "headers": [
             {
-              "key": "Content-Disposition",
-              "value": "attachment; filename=ApplicationReports2023-09-26_2023-09-26.xlsx"
+              "key": "Content-Type",
+              "value": "application/json"
             }
           ],
-          "bodyType": "FILE",
-          "filePath": "/Users/pauladan/Library/Application Support/mockoon/storage/proforma-598.pdf",
+          "bodyType": "INLINE",
+          "filePath": "",
           "databucketID": "",
-          "sendFileAsBody": true,
+          "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "0d902464-605e-4e80-a8ee-d2fd7c180e5b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "f885ecf8-1a62-4731-966e-9db6a69ce6f6",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "af416946-8e9c-423c-b5df-65b15596e168",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "78abe253-9ede-416f-91bc-3ce1f30a590d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "da9b65cc-7770-447e-a971-d75b1d6af1ec",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "94abd665-7c8d-462d-95d0-381ada741911",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "put",
+      "endpoint": "region/growth",
+      "responses": [
+        {
+          "uuid": "b1dbf4a9-239c-4f0f-a4be-546e3e050da2",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "8c00f77f-151a-451c-be5a-e9094ca72920",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "6004109e-7369-403f-94bd-a4f49b1a2f9e",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "ed685e8d-35fc-42be-8b0a-73c4540054a4",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "beea3e64-7407-4cdb-ba5b-8e0697eb19ac",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "40f2f221-ae41-4a25-bc9c-cd1a83767fbf",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "907f2e5e-cb4f-4465-b28c-66ebeaf8f3d5",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "region/growth/:id",
+      "responses": [
+        {
+          "uuid": "fe620386-de78-49d5-a51d-4ee2f3ea9c33",
+          "body": "{\r\n    \"id\": \"b0610a3d-0cee-4688-8454-3575d8a62366\",\r\n    \"name\": \"Cluj-Mures\",\r\n    \"growth\": -11,\r\n    \"username\": \"test_dex_bakery\",\r\n    \"lastChange\": \"2023-12-06\",\r\n    \"divisionType\": \"SUPER\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "650c22f8-43c4-4196-be01-457485905d00",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "7af0ee40-b583-4950-afed-595ebe4ab372",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "3607eaeb-902f-4ec4-b06d-6f8942e1a014",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "8f60f661-361b-4479-b7b6-df18afc66925",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "8a6dc023-4290-4426-ae68-1ec133a0f3db",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "4594c86d-19bd-4a64-ab76-efa32cd10e5e",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "region/store/growth",
+      "responses": [
+        {
+          "uuid": "96a51892-47f2-4ff9-85e6-b878558912cf",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"id\": \"665e450b-ae44-4bf1-b86f-994d50f481b1\",\r\n            \"name\": \"BISTRITA2\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"2c722e9a-27dd-4f54-913e-4413dd6b7ad2\",\r\n            \"name\": \"601 BISTRITA\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"ec14d16b-b768-4735-bfdf-e5249d5bfdba\",\r\n            \"name\": \"SUPER TG MURES VOINICEILOR\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"529dfcfc-50e4-410f-8b30-9eb1aa0f36fd\",\r\n            \"name\": \"SUPER CLUJ2\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"a57083aa-cc8a-4109-89e9-e3226246b129\",\r\n            \"name\": \"SUPER CLUJ13\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"5d913f92-de3e-48a2-868b-fdf46ad339a5\",\r\n            \"name\": \"SUPER DEJ\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"0c5517bf-12ea-4c25-8443-40a732cb8455\",\r\n            \"name\": \"713 CLUJ ZORILOR\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"69957217-2366-41dc-a713-b9212d3f11fb\",\r\n            \"name\": \"714 TG MURES DAMBU\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"d8a1d021-bb3c-4818-8e32-2b78476fbcb2\",\r\n            \"name\": \"708 TURDA\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"4bf72129-b718-40c0-afe7-29b94de1bd49\",\r\n            \"name\": \"SUPER CLUJ3\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"ff70a2a8-d7b0-4992-a3c7-5ddc1184d081\",\r\n            \"name\": \"SUPER GILAU\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"668aeb93-17a7-4364-84eb-c0d156d0d13e\",\r\n            \"name\": \"SUPER TGMURES2\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"b48a8971-5d14-43bf-b866-b3c256a09afb\",\r\n            \"name\": \"704 CLUJ CENTRAL\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"06e0f338-2472-4f9c-bc53-d2c712ae5be2\",\r\n            \"name\": \"SUPER TGMURES\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"92b780bc-22db-43ca-9613-9c4b42847686\",\r\n            \"name\": \"SUPER CLUJ5\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 15,\r\n        \"pageCount\": 1\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "09f97ab1-7493-4f41-a6d5-8dd580004b01",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "f775c2a7-d0c7-40a1-8297-6f1e029f058d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "170c4c2f-ce09-4183-a621-d74774e0c6ab",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "0e5c8a4b-5c55-440e-b886-1bd46fb5605e",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "775bebe8-184c-4468-b45f-2b7415790c72",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "35b37d4b-0355-493f-abf9-18c713b50298",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "product/trainee/growth",
+      "responses": [
+        {
+          "uuid": "7de883fb-819d-4f3c-99af-9c3be04ffe8a",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"id\": \"00f61a72-0ec8-4468-bf5e-db26d3926cab\",\r\n            \"productName\": \"COZONAC MIEL MARE 400GARDELEAN\",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/231/23501839.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=83dc214092cf1a8f999de724b1f6843717118c6ae03e99334ff16f7e81b3161bea4d199b25f2bc45176b94aaefccfbfb4da29715fe30c44adb4210c791655a41aac8ac13093fd1c139ba295ab938a31cc2ff492e05f4cc745c0b5eb48163f0d693be3f516c09edc72697904b2ce4b3c06d2191293ecd9a27f655a6e7cd843621b512105cb0c06422224a85d4278f6b49b37076427ddf6993b7fa649c343c6493826ae80f65254a1e3de2a0210e5a56f1dad4fa10013a2abee1d57a83b8a45d87c63ac6560330bdda76781ff015e1dd78c533619642e9434069a3d4b42e086e6e25f7533ba002be68ccea144f17d6cd5e7b080fbdbbe073740d719d0b69eb8bd8\",\r\n            \"metiCode\": 23501839,\r\n            \"familyCode\": 231,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"0984c43c-b93d-49d0-8866-2c9699ba7a1f\",\r\n            \"productName\": \"CASEROLA PLASTIC DP221B(2PRAJ)\",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23002041.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=47747d977f815284d939b644ebfb00845b62b634d741d35e4538b13b766e35f427b44b13227c003573b43ce670e544f73c35320065e3c83c299bf3821f2ba0b15d6282a29c135710ecf77baa2f6c3870a769fa05d39f79f66907d8002ec8029128fa79d70ca0f6016b639d7dd8ae56d68028de88dd3c695a27746a38f916a7f909cb7224aec2249d83b695e71773ebc8accb501a8dd1304e32385f262a40be3e3936fd4f7b28201b00c6801f7e04b29fc224952709df190cd341f115f59b5a2a245ee7a8fddf2869f693aac637fa2d5edd95b605fc069a0844a3285fd0bb1f73b16215172bf971fa6d2b25c8c81da0fdd297b845a125787f19c344cc718e94e5\",\r\n            \"metiCode\": 23002041,\r\n            \"familyCode\": 234,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"0f1af6b5-76b8-4edd-b5f3-ab158d840caf\",\r\n            \"productName\": \"ALBA CA ZAPADA AMB 250G EBE   \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23508906.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=a87916cc43a60f03d996d6add75d0e9b62e895196e05c64ba79144eb2ec7d5fca79735e49560fdb18f4f8698e6585ed8629ad0976626a6ac67469e9734c56136e88e28c5cf3c125b78800f7d24b084c3c8f3ca2490c6100f8980c41e06569960c6d8c81ccfd7fd722de67e9430a4c3668a5debedaa3aa47effea20ea993a54de20139df6d0df72ecd61818e54f785cc63cafa11d1f73f877ac57a068d2b1f03619d9878dece1df948d43c2c77c1d58403b221f9c299c06f126e943acef7a875f89a9e7f3e6ab366ef4f1c0ddd3d9fa6a9b19c81488381df39ca6bc8a966ed82b67bca02254d48f50b851eca6e36d919c4aeb52e77fdd0e6ffee601a7e004a32f\",\r\n            \"metiCode\": 23508906,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"10de5b1d-4fbc-4076-a9e4-46afc2765fb1\",\r\n            \"productName\": \"CUTIE TORT  25X25             \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23500890.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=6b624e4daae6cdac1f9b0709b35df8130b652bafe9e1357638ea0eb704e040df054645ae0b9eeb8e7548e1c9bb53171ccd04ceffef684ae3ed40cceeecfb67cde553e00828905cfc00a0eacbf3575acd5ed4331dd96339204c477641887a672df7644c9f002520f938d956eac3c6c3100439c70cf9ab1a5a6595aa0d781d073fe174a1a36823d51685aba2efb8fa60e35cc9e982bdcf1de7e862137dc6c01f29166fca4ae2187d4e6bfa9f40163759f9873b80e51e1a9b59d099fbcdb8c5483e07f320f35be7f24e240c3bf420b9f423a1af55668c106f23672e29e298d804b440cf414b06d0967a6be939f3238785adcf3491a44bc31137c364c6b0168da3b5\",\r\n            \"metiCode\": 23500890,\r\n            \"familyCode\": 234,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"1348cf01-5276-47f8-aa43-c165cff583f2\",\r\n            \"productName\": \"CASOLETA PET 1GOG 250 ML      \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23509450.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=9d93dcc141d5eabb3950f6e1e001cc0328e369b9003bd3a95575667c99231e60742caf8a4941d3476d9d08db42ec5ee3cae879eb74ce8449c3915739993189bb6d3d16b5438454d47c2c9acd933a68962c3da858f17cda44253bca0d444944eede3134dad80e890c6f731d7e42aaf6d4833b12bc98fed3a67c26fb0d7caa891cce6ad30593aa12c4ea8eb20bc4246b37485b3e2d4ba6531a1c7570d9238f1fcfd40f8d0336a71314f12657de371bdb39c60ea2e9683bf15b199103b71869851f59a3ab5629a324f3cbed75b6370ce474f740805c0b67e50f431279c0ac9f5eb8b1d99a17a42dc21ca306ce81ce5ed930b0580c25b3e60f7283809336624f8657\",\r\n            \"metiCode\": 23509450,\r\n            \"familyCode\": 234,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"176ffa62-923e-44fb-99c4-076d12005a51\",\r\n            \"productName\": \"PRAJ. CRANTANEL X2 230G SNVIL \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23510361.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=11213eae3df23d5e331b8825b921ad5d7a075ec4164d94aff66dc2d37c30d4f6131a6d7269ca3c78ffb711d0e839f4792f513c3d5249b4812594f1582517c5383386e52abd0f5832a58b72a143f55c7ac7b934fa16aa7105f539fbac4950019d4d1efeb0619ce2df018449fe2729120f9f35e8247caeae89e519597f90fdf55319e2aa5d666176b2812d3abd2edd0020d86dec9a95525102bbf2ba312e33bdb57ad4d8bce9deceaf70696698b6e74d8b27a99297d33e9c782582d92011acc9d28bebba720ba688d6551d0a467170db8cddbf1e338dd1d9944e5c9eb3b394dbdddcca02839ab242c58ba3e033cf42df962ed65ff5cd9eeb289df72cefa223333d\",\r\n            \"metiCode\": 23510361,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"1c801b9b-f224-462f-9671-de97a671e13a\",\r\n            \"productName\": \"PUNGA ORG UPG 17X35           \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23507459.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=3ffe89921a510b899f6f3baa2aeaebb5fdce19f912a6a107972899d6e1bce3b851861bbcdabccb5c359406af0186b30e5fb4dddbace1dfca0dfc75aa5ce0d9071588959bd16e0ca3aeab5ad91ee86d7424697835f1e9771867bfde00b7deace97c3c04b95677d742f149d0e6393aab9f67e4f26317b0dff57611638a02d0255b6f85544bfb790946d4a56d4c45f28397b17ef7f544c2d56dc33fcfe38d68d7d9f463ed1c82835d3d6bc06592bf810d75e20d508eae94f4268802cafb39fb82cc7b2b613719261926224d5d65eb607d26528a96fb1939e268c57aa4738c70efa11b56760bd9013de6e3d229f7ff24cca609428a7bf0eaecbc0b0ec60bee289923\",\r\n            \"metiCode\": 23507459,\r\n            \"familyCode\": 234,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"24b12c6c-a90a-4564-94d5-4e9d81adada4\",\r\n            \"productName\": \"PRAJITURA MIERE 300G EBE      \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23509652.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=98a848d5d26cb22a222c7d48fa8baf0c0aae95d1b6b4813e98f1f97b777e5c202ca8d56e8b7cc4e57682c4c574430f05b2ea30c5ce07a488a0c4beb701a5e7cd88b6d44a940f8c6f9d760b5570c265bd1461baab670227b4db2b94df162fb5501ca8059653a7013e4fa37391228f42691a83113f6fa0c672ae82b17d489456e714ba041131dcc765e4d3f6d2816e5f8735497c8758d1c5c0751154ab2ac51dd6b97efb5117dfab7a150d6de2b797642f2ea8011b83decf67b7501d6a09e6af15a393b4917ee8e978fe260bbb6db7bb695b51ef7c8a4040f746044697d7743f0a6e1378f9ca5b7cf3f994d4eb0152b095f0e3d9d8926a7383401819db320c50ad\",\r\n            \"metiCode\": 23509652,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"283f920e-4aed-40f4-b9d5-fe806ba05e53\",\r\n            \"productName\": \"HARTIE COACERE PP4060         \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/28000139.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5750ff079e3a1f2c58564a5171e104460c17cbb58150e1ba45b96126157450ed083ab6d835554c190e6bc704b95a57e08a59091221594d87968bc34d73b80520161d3daf84227e1d4a183f77ed20046e9a1d3677f9d7325cc99886dab40ef05726bb8c6f4f6443d4647bf8643ca223c8dd86c36fb8661679dde413e3dba8c1e6e7a1c0e33567bf1d9597ee7ffd684cbf9769e9c127424c50ad19ea35a23a2c7e108918a04ddc5320329fbabb0188b495346664cf92597f602b03ff1a098f953037d79bfb034072caaf71ebbb787e24b1e8f2702a35131e08380b407c9046cd255ec34b97fb31c26f15a56d5d291fc257a3b863cc06cd0fe6e80128da5911d40f\",\r\n            \"metiCode\": 28000139,\r\n            \"familyCode\": 234,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"28d86f96-6188-4be8-b9c4-269510f8cfae\",\r\n            \"productName\": \"ECLER AROMA BANANE X2 170G ECL\",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23509630.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=4a7da5b5f35134c8f99dddc522462ab85b2bfb35e985c0b238ca265df8040ebb613839800d8cbc781f13fb80c66ea9db67136b2e792d52acf1742e21abfeb59ef21a0885e7d64457483e09a51c1e588b2a8949f5cd152f22695c7877afc8772a0edd5342d8370c3e52116822de9ccdf48db6f8a6da267decc70de09ec4e02e3e40f5347928c0c4a8742da206d8e4da3c11e62499369fe0fe77088914fcfb906823a986f9e50caf24a0206ae163bd8df58c73ea9e6af502cc92613d3a73bec5fd624a1c053f4d50226f659f277337b0cc77f8438e01eae717eecd88f4d4f192a91bfc87d816ef21d72da7a22b4c1b58ca9b0f8bb418638d90998e12ddab094c77\",\r\n            \"metiCode\": 23509630,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"28e9f492-2ea9-4085-a858-c08e8fd89ca0\",\r\n            \"productName\": \"PAINE ALBA TARANEASC DRAGON MP\",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/233/23502278.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=8677ac8146df2fef40578cd0ff15f9d464d9bb6908a579c1a7e2aff810d9e29243384e9d45541439de82fe8d86bd10fa8ea7b6b4d6bae041bd6b401ddb235aa459c32d6514174bbb30cfc8babf162e3bbfe9ec82b780102060f1ee78493c61668a18c489e75ef4fb3ede7b3bfdcd53cbf064d9020d8b8287d1e1c53740de57c5d7ebe6527c4c5ee3bb28f627d878ac74840cf4c7716bed7b35e9c9cb500f6894db8fbee3f4ef0299bf42bce789c8962bb48861ea8351283257b6de6286ea41200b02fd4c4be5dff1ee1a886d05d02c3733b5fe88791897d198a30738ce031154b4921425f8886b6943ebebbb2919e59cebc86677f3cc1889f26b67a8a98683b4\",\r\n            \"metiCode\": 23502278,\r\n            \"familyCode\": 233,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"3073b25e-6c2d-440a-ba86-733b586051f6\",\r\n            \"productName\": \"PAINE SEMINTE KG              \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/233/23500874.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=3b3bdb376c7becb4e1c0f402651ec7a449ff0b6809566ab15556d613985be4e67dae650ca3799863d570d4901eeee18f20693ed6d79da9babd2d242404ec930a7090dea691584470660f4365d9ef7979c0eb1c14681e8685cb749586b8aa95d2d3a467b89d9a0459e4831addc1f837ee3b09ea117f51add796b17f8e2b6dd72c583d45529c8f17caade0149b4d21a54390295f562269d36be461cead9dfa2233254176983af54a93974cdd6b07fa5be4fface0fe00f61aa8969d477c9c4c08c56c93f4e6413e4d1e445fc7d05e632c5d12700d1789079211218a16eb10ab3e54adcbd069181f206fad8f600f0c2798432092ee40312371b91b7f6ea9077911b1\",\r\n            \"metiCode\": 23500874,\r\n            \"familyCode\": 233,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"327cbf7a-ebcb-44d9-b489-ecd23eace2c2\",\r\n            \"productName\": \"TORT TIRAMISU 1KG NATURAL     \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23510347.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=64dc41c3824413a6f740d7b776ef479183ed5d2cb7e3a63b18c13ebf24d5e76b5d0520bf6d605f0797a5c1a517beb7b22eb5860a34a2283adf829c6065ed1950af7cfb1c5cfb732e6de32ba5e23363855c2a8fa11afae0fa70ba8e3b9a9724d2779a646fed1dccd3acd13972644a0441fdc50ce89cf82bba141bd815798787ba0423293084d2198aa2d28b64ab9f4c73995899473217a0bdf3047d346eccbae106380a4a31382d729c3f5f96adb7b90236574c7b245dae29f809312e73eb0e6ad35c66d4558a795755b3d97d33d26a239398e49471ccd5df3173165ad768c55648fd7dc5261b1a322267451de220e9432b95a2347021d197faae93a872ff981e\",\r\n            \"metiCode\": 23510347,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"329dd1c2-d0ff-419c-a9fc-eb8e676ca99f\",\r\n            \"productName\": \"BALLS CIOCOLATA 500G TRANDAF  \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23506524.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=9ebc1aa7cd1f843eb578954956bcb28526be728121b92383f2f333dc089a96ae268eb1e6577481cbf4f80abe30498ed5e0f680326ac3a4524bad41fd6711896e1934d8f99feb11c4dee5b1733aaad24703a3a64c10afbd4e8579b4f727d08eac387941e89089c0e26247c6ab471d969a159ae6a3c1f8c77a1899c33dba29144012adbd2e6b9d63083e96624a865b2335314fd0229bf84a4edb969e82d798c0a94c8f0fdffd8b9e59c53aa4dc5aea15187f2b9a096b3b65430538c4a28bd786965308c994d2173ef10eb2f2ba073341ce332cb4a3979ea01f46bc5176efc1121213295f73e438f4b8e1926900f24cda369dfc71da23889ceba78efe1816929946\",\r\n            \"metiCode\": 23506524,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"32fb184f-f3a8-4109-8328-691baae2b9d5\",\r\n            \"productName\": \"MACARONS  ASORTAT 160G        \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23510276.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=0c629427f0f8e64e1c39685820f981ca654f9810079de497652d9181747bfaeb5bcbd2fd253f57854e65edfecdb76fbb35fc66451ff6a19f9a57f46e802137d5d08befa4dc94f2ac87734d0653a22f4079625e6a944bd862f823218a8376e402e5dc122d69d9e0e23844b0470b578dbdc5c17cfe0bef79755f0b0b916796e092e46bd651c8cadeb73fd3b5e663b861955c912f5addb8c6fdf6a15ae662f6d001a6b4daf1ad6efb33dbc6ced75604ba6eaee9cc9028ef53e9d823678af28b0bcd175f1386df288e1d92bcb874df75e569c38d8c99de7cd160017699efc634484a0ca972352792159afbf462603a351f2201c72f0a98e69a47d1764a744d052150\",\r\n            \"metiCode\": 23510276,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"3a28b986-aa4b-4eee-8f1b-08b2e179d2e8\",\r\n            \"productName\": \"PRAJ. CHERRY F X2 240G SNVILLE\",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23510360.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=599848c832debc0f92d0aba68298ac6ff7aaea5cfc80099dc40e3dc46447d2ccd1c5fddfbcdf8b34057ebb67afce2bb7f95b5a8f694a40837add9a6134e5fa091383959c741ed151a9ef5d87ca4c3d456d77a074d4c6b877e53098c8e8bd7c63a4f9794596bb4309bceadf000dc9c75ed601801e266c8cbc3c0faca570f2c5b78853dc0907929586209c7e50b0ef2bcb8f9c135618c6e72e519b1d852691ac7031c4f16363ac73a4fb89918ea360b5b23785c6ce71f1632b8282bdedcf85649af0880aaad4b19b4934ab665c4db6ccf46d511b89fb4617796998061c1c535d6ae06fc3c918b99af0b7ecf03d2320bb749b2e9c98098dfb46d37ba8c8a511cf4c\",\r\n            \"metiCode\": 23510360,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"3a67a33c-ce5b-4cd1-998f-86f8d7221016\",\r\n            \"productName\": \"AMANDINA X2 280G ANT          \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23508693.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=a073df084c4245858f8ed6064fbbc245bd2de24ea2d086bdf5f5e5b215c6db7d3f8f8f950392d6dc33a43cdd2a813627bf61c94b9d71257ab8e08641b2a34416a3c8e96345a4c7d5b3d70a2a446a3b3ad6dddf36bf3ac0f0e960e93a738e4048e7d630b4a8a8ca240cfb1958743ddbcc581f6a3b182b9871dae9fbf8c78c9ee75cae590c0c0481f753bd94b9c753dac1ecae9afec58013453768ffe66ceca8c4c3c7207afd6fe5a645dc29e7f9213d6f7e685c1b83970c240c7e807701b4da09b7d8f3d03acd5d9a24b6e8d9e09775994db8f1291d48accc0b95a985a9f0b2479fcd85a4ce8c4ca31e786df67095328321297a8db05feb0938326299e58a2083\",\r\n            \"metiCode\": 23508693,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"3abd92ac-b3ff-467b-b212-3adafe5026c9\",\r\n            \"productName\": \"TAVITE CARTON 23 X 24.5 T11   \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/28000609.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=859070aba90b88dbf42fada10d44188dd26dd413756d8cf5d9e9e50cec4fdd1d0b248774a3642fb6170a7d858d09d09f8d6c723436066a7a7c299fca8b781c0b2cf4567fab2370841d9a68a67a6d676278cfa82dcf9f23840471ca064ca245d4ed48a3d72a9aa81996d57629fa1db854cdde095a0515fbe6f621e24577df1cf481a91966c6dd52e340cbed4f51c31aa80921e8721c90826bed52dfb4f69004ebbaf7420dd20744172c589716ffc26cde571b9c06fc5e1beef57a906efcb8e14dee3d7abc4221861e688611fee2b9163480195800e7de154bef4fc17930aae5b13b3079bdcd3ca90de21d24faa12882534e8ddf9152f04ae3503ed822ead936b4\",\r\n            \"metiCode\": 28000609,\r\n            \"familyCode\": 234,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"3d344dd2-01f6-4d76-aaf9-561831d5f520\",\r\n            \"productName\": \"PRAJ CARPATI X2 180G TRANDAF  \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23510830.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=7cd97b0f2caafab023718441fad8bed1e998587185b37709778172d5305cac506a7a691e02a179225ff1a3f06b18f74cff0725cf9c0d46b491278a8692f7cbfb3e4a3bd61dc71c63ee60e5839c5a0eade11d29a372b071e21c2b373c06dc5d285c25ec1f1c36c040b2367f0ab88a7b294066841fb7911eaebf0397fd078112a201fd0f12e94d3c41df18cbd44a0d5181374c5b2d9a74bd0f0406b7b987375717d870607659e618d9835ce3722e6740a4edc8efd2a24db4adddf448c34bb2c781482037c180cc3daeff7ed9357f5722867875505509b6c909ef2feb51e9672f6d8076612fc1f62b3b5f17d35f12c65c2837d0d8b5ef22c7c20ba38df97acf74cd\",\r\n            \"metiCode\": 23510830,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"3df86002-283f-44d1-bce5-e680a24ea858\",\r\n            \"productName\": \"TAVITA CARTON 13.5X19.5 T6    \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/28000589.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=52f3d6f410eb085baa25e27dbe9bdd28bc4bb6e2c4912e54bf9ffb91c9e35a06b34a37bfbf57bd25375d8a7e006a8c39c330fd1caa19c2eb1caf9fbac9cde053c7d1fe8a62d60391f622bc6999956212fefa139cd9f933a1c07c1ef6b87f8d6f7721996881f73780cc3e6cf7270e7a60f356404215d4f1e0b7a323d156331aec33c388ed843919d35cb61d8cda6b603313bbfc59aae880c9c9e5dc2965fc62882d241d3550767bb2905c46fb0f1ffa9ec091f6c9adcbc0c86901f674203704dcef817d3cbe1e92adfea70ae04527d7411640de8a7d7b028fe569ab1069b060c1ffd3e337b640746e94b1c8d536284e89da489a9ba4d0b860a93a6244d0942245\",\r\n            \"metiCode\": 28000589,\r\n            \"familyCode\": 234,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"438c5b9a-c22b-46a6-9204-898b1ebacdfe\",\r\n            \"productName\": \"PUNGA ORG UPG 24X35           \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23507460.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=1d381569f26b5d07a1837a721c2fbda95de89df904d9e6d94adb3f9d569dd44f73941e2f0930d9b274dfe4b9ac2c5b55643daf79c8a654cf162201acdfa184630530db653cb545e04e41efa20ab752708300e927b4f7591a35f49cfe55d59dcc378935cf781729dc8c105ec195a70adf86e63ff232e854ad29fbdd1fe544b277b3cf54d375e954e368467c5d1db89e2a3cf5aeca6dd8569b67f5396db104607c73893a47363e810c9ee9f212ee45b7a3f5b164ff70089f2aaea6bf9a2fd13214ab931c629635cdbedfc5010d7f7933ed38d91aa3be7111e0fb66892281903e58682c0f073f3ffceb65c55bfc4643f48206207c52d21489509f7fe2561b499e6d\",\r\n            \"metiCode\": 23507460,\r\n            \"familyCode\": 234,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"48b87a8a-d2e2-4abe-9c38-e245af003288\",\r\n            \"productName\": \"TORT AMANDINA 1 KG NATURAL    \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23510346.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=50c35ca118f627aac8caafdbf4bfd0c088d604393fded027f2559764b4c0dbf7b80f207a8539ac758d0e6f24d53a042954c18cd18c20d85ed8ebdd1853e3d19d3a072b8ba3f622ed63a3f1047c547eab0ea600b219e05cbc2c5638a9a877fb696922ef3df56690ec9b1833fef6280b7ee69839523fc7c77214910c3a45f464a945e4c3352df4dfd803ca57e424bd5fcee3cf6a12ea5393634dfa06ad436e79b781f809795bfc66f25d8d524a9e29c0352408f3a5a73c3ef7860082d1b23a751109728207c4ff31513ab56a04a8f474b7d595a5ef087d6990c09b78a6eeeeebf8293c9e2f5e1be0a54118b7c3f9bcb88e929ad6c58079ee50aebdf14854e8561e\",\r\n            \"metiCode\": 23510346,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"4ed9f073-8639-435f-8a90-0436e25b6fb7\",\r\n            \"productName\": \"TORT PROFITEROL CIOCO 1KG TND \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23510800.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=0f111f9569ea0778aef694e85ac7ff13ab02c863193a6c2c78fed250c98b5002be26dd23004e63fe248b790dbee2e6ae5abc8508ca9100cf616d05dc22a0ca95ddd7f9c8c97afc5a6b1d9c7817434fdbfcb844386ac59d632d7a024bc49ae2a5a4788af6160eae8fe739e33034ee949c6eb92aef8109a91bb5f785d167dcf78cf934fea8cd125c3f9e61affff9074c2a20c351e7211859cc0476aab6fc3be021cefba2c041636d8d2ea5160c261297750dfd01b7a44f92b5ce5f307143caeb23fd406bfb08acf302fa10369f7962c34875c5b38248e3d43a3b28f6c47f12bc6046445fad08c85e2ba6d0b009fd527e68a2d15dbee4df8e2e714ef7bfbeb9d2ce\",\r\n            \"metiCode\": 23510800,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"500cc3a6-1e36-4b47-b581-dece8c4fd50e\",\r\n            \"productName\": \"MANUSI UNICA FOLOS R23 100BUC \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23000714.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=028093cc44e481704625191141054fe65071267398372bdcd3c178757d6ba1de2fce9fa9ff125719fdfd4c4b91d34f513cb1cb3b5cb832fbc9cce8f95022025f9f95416cc2b1d10de064eb1b8b3b50e771e4b2f614ba9deef47cd79e98ea101e98a1b563672773b1a3953fe9fdce0ce451ab2bbbaa8ce8a882f27840ca6970da8dc6c7db220df039c5809f15f9073ec3c36a7d3e60fa9e560cb263f4c78700c26c68f7df9c682f9131fb11d3e88aad1b3f50ce09fed2c6bab630d77409ab6113d3a01ea3d17e995dec317946126a04747e9db17a23ab43595c4c42da499e12199e3230879ccc766b5a24ff884ab1b733913f242a2f48abd85fe8f1acc5cb0cc3\",\r\n            \"metiCode\": 23000714,\r\n            \"familyCode\": 234,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"526a4cf1-d867-4144-95c7-cc8a4c1b10f2\",\r\n            \"productName\": \"PROFITEROL 300G ANT           \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23510466.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231207%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231207T114128Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=05b165386f5b50e76efcf8c6f27b97cae3904040769e0d35055d39cdb09b24b21f4e5b9550e59c0ad57c2c2ff719f9393ca6b3d95f31240454dceb78e87bcba8c63226e639670fc1820066463b8228041c1a6b5e94092f39fe1fa0ec096abc06bd9d96f34cabbc4e72f0d17bad5fa3066d943ecb38425048ac64e56b6448ea8ff9c4530577ccc71db863f8bade01c4be2be1561ba2fe012338248de44fe7668841acc946a29e69a97109ec46b48dbb350e7ecd47db8c33d14fbd4aef9af3de6b428e3bbeae09fc62b062cd7e8637a620451f2d9c309d6625b0f66fa16e5ae68d8d6b1257d4324b6c67703d9c02d9992a571819452544a221d7a1161f6ed667aa\",\r\n            \"metiCode\": 23510466,\r\n            \"familyCode\": 232,\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 73,\r\n        \"pageCount\": 3\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "53f020bf-44f7-4159-ba0f-3f479c2cf60c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "2662aabc-1ebb-4a1d-9c51-c2e95a14a629",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "38401e04-0b09-46c5-b7c3-84a75dafa7e3",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "d7a6f273-ebf4-4755-8161-07f9fc591c64",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "edea7aed-9c65-4aa3-a9b2-cf96b73aa7cd",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "4bc9a2c2-1e28-470a-a372-12faa2d8d431",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "store/families",
+      "responses": [
+        {
+          "uuid": "5d8a5aad-47c8-4481-84e9-fb6a005de376",
+          "body": "[\r\n    {\r\n        \"id\": \"09cabf9b-04b7-4a3d-b398-8fbc641b480c\",\r\n        \"name\": \"BRUTARIE\"\r\n    },\r\n    {\r\n        \"id\": \"53ae92be-1bef-4312-8083-bc21a28978f0\",\r\n        \"name\": \"PRODUSE CONGELATE\"\r\n    },\r\n    {\r\n        \"id\": \"5ef5c339-54e0-45ac-8c3c-deabf14797a4\",\r\n        \"name\": \"VIENOISERIE\"\r\n    },\r\n    {\r\n        \"id\": \"63d7c132-cd98-4315-8a88-af3b0c1b203a\",\r\n        \"name\": \"AMBALAJE\"\r\n    },\r\n    {\r\n        \"id\": \"6c493d40-d8c6-4622-9a20-dec57105e324\",\r\n        \"name\": \"COFETARIE PROASPATA\"\r\n    },\r\n    {\r\n        \"id\": \"f06f53cd-07ce-42e9-a6fd-c3c8cd68103f\",\r\n        \"name\": \"BIO\"\r\n    }\r\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "c24880ac-567a-4287-9e97-d78975ebb648",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "store/product/growth",
+      "responses": [
+        {
+          "uuid": "d1101cbc-25a3-4110-9440-85e79f56bd48",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"id\": \"500cc3a6-1e36-4b47-b581-dece8c4fd50e\",\r\n            \"productName\": \"MANUSI UNICA FOLOS R23 100BUC \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23000714.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=8c12b07a2d1084e81ecf4c14390fa2bd28f070bb75c7d8fa760f4dce95e53077922755dad562c85b2abff15d2ca12c3f56ea96980e36f0de8980b9f77277c3fb98c2e9362ebf14ca1c9f9df2278779ba1ade22bdf611b5ceeda33bd0ac2e93524e11b3ff7e30d97f46f55cc2f787cf92fedbbcdd248032348198eaf93a96a68feedbcfffd9852d7e8316250691c0b64effee4932eb6888810670254a1eb3cd981a7cb4eccbae4f2f07759fec093efe948ecd0ed8e862b85a57fc1d0444eaf897645cd343560b608a87b3fed86a7f07dc80fc5f324d45be7d01167161309d522d5a40b4f754bde6c748e67e4c887d6a582f59dc56bfae67e674744c94c59ef11a\",\r\n            \"metiCode\": 23000714,\r\n            \"familyCode\": 234,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"ab4210d4-85e3-4bca-bb27-6389571dbf58\",\r\n            \"productName\": \"MINIBAGHETA ALBA 47G LLR003   \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23000870.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=4a15c1aeaaab6b79b44accd937f64101da26ca7228cfc393b15967446cb366ce07bdc0d60d3b413890847c9bc26395e87ae19234dbe2db8d1b3410bc860b5a0093d6abbd882ea36e72a923127290a5170e84c2872808cada7c9e6304cd83a6d92ec83f273b96be0dad629e2d98ed44eeb825e2c715454d1a5cfbaea758426f3455746bd1e7fa2628905708d38207c1c5a3b3b3ce7157fcd3d17a32efd9adff05a225b410f4aa90c5ca96e45a16aea80d3bba6a94956a2d83380ca556863e5677a3316b3dd29c57ce00e47abbefc73b78f489986def2a2890b2076645ee33a0816112a2b91fe12933249cab301ce08ab89fa23ee1f201f4d5c1d9a9fc6f4cb3fa\",\r\n            \"metiCode\": 23000870,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"ab27c92a-617e-42f2-a96f-ad57b78fda35\",\r\n            \"productName\": \"MELC CU UNT SI STAFIDE 72G LLR\",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23001923.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=7d8c5a994645fa52895c03cbd6529d2ecf7d52259b1b63c32948e9d30be731b5a476765dfa18cc720888c960cecea5458aac248a63eb612e026447ea9d23b93081c927a9f8acb5b3cb8872bfc96042fe8b11e7d6dfa05a63b81eea61f168d3cc6becf55b835ac0181a3e843e47ba48c7800b36ac94e13a2cd2305c29c61fa02381ffce2cfb56f5a00f5a1c1418da9c04c56db769c27adf192c000b1431f9e92fdad2f2872dd676c6102c3090a20799bb80adda8dcab9bf5da8a2f92d8928438e778216cb9668e61a03571d92bb033e8932c4d1a71cfa74e5834d2e64fdfd259f78c581df356929116a697d535f5f6b4d1c4e636a8bd9e6761e90455dc534bc30\",\r\n            \"metiCode\": 23001923,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"b4e2ed1d-f412-446f-80e7-7bd813fbb49b\",\r\n            \"productName\": \"MELC NUCA 70G LLR             \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23002190.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=324289be00f24489cdcab5cc9c37cdf068d9a0a7b7685a56fd9e35008f380dd86997248255add325fb8e8a2342a6708026cd560d57a7d33a0d18ad2ec1f70c9ed35c506cefdc54d464bf991c77578de959b12a733c688d27f32266bf38e64cdea634f584e9bf633311d697abfc0149d16c4029cac9ce045ea508dec04a37b6d4e2b9d1daae7e4ff15babd9f9f1423a1f667efa8460b69ed170dcc95770754015570857df551dce3112b5919adfead02733c7263c8c1714e74120dde0b1ac73765221d5f3dc360d00b066b917d1ae8d75f6b1d74b502c562faeb2a402b90c5801251df42e6bc9ceb85f035cd3fe9262bc5ce8bf9369d80f7b001a53be32853054\",\r\n            \"metiCode\": 23002190,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"cdb5386b-acc4-4c2e-8c49-5b83eb77bba3\",\r\n            \"productName\": \"STRUDEL MERE 78G LLR          \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23002539.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=39c50a313ebc230c2f1807022524b708221ac04c306cd2d2a3f580f078b818e66e3e5f1337b001706d35c93e6af4c4ca3659630864d4f404dbdbbbb152c848ee0b25efb73578414c89d232acbfa1127517286678b2f48dd50c91486532454f2548716dece8ed10435734375e65fb3efca0a407bb71d8785366b1918f23e2b41463024359213a9075a825ec75af633630476eba09265b20bfa2076a2942e6688357c2b364e266efdc9e2b4ea12884cd6ee72a488bffbbced033d7b45739d3c00feab21a1bbf409dddf355239dbbf6b8290f3d69b22159ae9688ef494414d0f45f56cd116e09cdc601fdc4912fed3918bee16474ab05f017a0ec774a9876836c5a\",\r\n            \"metiCode\": 23002539,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"a40f7a00-faf0-418b-b94d-b9ab8082df9f\",\r\n            \"productName\": \"PLACINTA  CU BRANZA 90G       \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23002876.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=59ee9a13fd2241a28f9458caeda4cf45d05be3877a25908f6a0df242a195e42582b68b8d373e17ed7369af9569db03216c28ecae4c5343680079842174385a541195757de3c00a5e8d2ec72d83c9a9a1690d120520506e9dfe345acc53696d097d5c6f1d5e28047eafd32548e88637b7eae5fcf6706645d5c889b3652cabb0b7601015fb6debef8ca40f88f893884d4b0e1b8e90f760144ca4acd7fa544a14cffae5cc640751b94147efcd6c2d18cbbb5ab8034ab109e028e0857a8884c2b91e124ad97df2a63180512fee3d526e84e7ed4429cf0ce3386c086506a636b928b4c4c9d3b93a73ca6b6141b57e8d23388830cb21f240ffcadb6414b70caa3c3e86\",\r\n            \"metiCode\": 23002876,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"4b5227ab-25d2-4376-b824-4a0b1bbd41eb\",\r\n            \"productName\": \"COVRIG FL SOARELUI PETRU 70G  \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23004312.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=72e2b6484859f166fcb7290e3a717dbe5c6dd20124be7a597ee4902611ddae070a205c5695967b25acff0fb8a771a25e158ab73b7bb848ee048d9afaa01772b1eee3420d62fec073e5ec8b3af5e487b9ad2d83f4c4d5b3d4e4ccf952a9fda5fd2b1ff16bd541c77729a08350181633b8f39de2a49f744a3922545375c8f5667b05764c76143316d59e1ab3499ec192b7dec356c1f239a2b06cb9b8a6fa5270d197b7c03acbbfe0d9a819dd11e79fa926143bb2bf99de13f4a487d5d686440f8afb2e359297f6e8bfab67892e356cb7b3dc8e6f47b14c1c456551f8c6060216e687df83b5011357bf77bc34967c68028216a29f6919565c20bead83b341599587\",\r\n            \"metiCode\": 23004312,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"2972d904-53f1-4562-ab1c-3df6b73f158d\",\r\n            \"productName\": \"MERDENEA CU BRANZA  77G PANOV \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23004768.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=51f63ad8c8fbd6e306b504ffb827541e8ae37e91c0caa5e34d0d1e4b860e681e25a5771b11722bd0b07562baa235e9be8e909e05f26ce4aab8fa878d00643fa89277e15215e48efbeb1b7cf91ab680b1d02c1d781cd9dea241c925742792a814bc30eb1dc7661052fd24323fc2fbde10f3adbd4a828799e1184197e5422a6c5733cae951271d6d98ca7fc2be4618216aec511451169f0f438ed60c24a9329a1ec9cb5fd4b137133cc19aa38a2831810d141cdb33343b06e2c568d887f2c291a8dbe84ca941368dcb9291f7d47e03c2d488195532a30680c03ebe8325a6ab2a0b657b2d277f7ca4ca930f00f24717a6c22e5cfb87262f3c65adcf080686202c0c\",\r\n            \"metiCode\": 23004768,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"dde3d972-429a-4761-b56c-7c38392a062b\",\r\n            \"productName\": \"CHIFLA KAISER 58G LIDAS       \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23005154.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=02cbeed4e7012c1d1d649928902307195dc5666e2ffc7b5bdd8d0eae25347b25dd3e3596e504919ee32eea64fbbc465e96c8e3cc0fe1d3120088ad9ba4043e74099d74dbba2b1ae1dc46426d98dec9b1bfb1a6fbfd8898d8daa74c795b6a77f9fc5b6db9c3c9df48a4e4589800844f828123d57e767bb65479ca4584bc334cd697977f3922dab9d600aaea9d1ae7cd9ad26950a228410f0dd06752eee51eea93cbf1a8f248fe715aa55d8457609f7db7792886ac588b3634a8df52ecdb6e82b397199b268cd1378bda4e6b49d2ceabfea9a750cbee08c1c8d7d5d4fa00fcbee7de368bd71d57681499fd92774a873b7ac66fbebba685271e72453e3dc25fad5a\",\r\n            \"metiCode\": 23005154,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"5c4a52f5-224b-4a6e-bfc3-f3362df7a050\",\r\n            \"productName\": \"CHIFLA KAISER  SUSAN 58G LIDAS\",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23005156.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=930e74f516e75173b8cc0e39abe3e0d86463a37e9b7d9b696a7bde01bc292d1e418307d236c76290ca2493c539de72b0efc22906cf644eb055a5a2639049f8040b8947455d9d338d3767e0772606ee38c6c2e57d026af06b85477d56138658af84710a4fcf62599590787c06c40ff06efe00c6adf20a4a62d0857058859349755a699354ecdb0610eaccb76bb23652971a9365523c304230392cc6fb965283bcf693b3323943e7f08efec5cc680a07479c0cba0ae8605b168071618714480afa15b7e8b61d65b01a8cfb22e6c31587de085f959299ca6513b5c8829a4081e938a1c3eb56d34de3d1467f81b735f891adecc92422cf6ee5db0119ad71f77baf53\",\r\n            \"metiCode\": 23005156,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"b45a47e8-ccf8-4fcd-b859-606cbba66133\",\r\n            \"productName\": \"CHIFLA KAISER MULTICEREALE 58G\",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23005158.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=01ec62a15830294a47c03ab6bba506703850a340ab131de41468c5cc87be0d89b9eb9aa8a344d7be4800ae2721e626d65217f8f851134cd6c518ed7f016a33e913135a4e336f3f3675833c9d3be3078a4bbc6845a0c6610e13c4f9ef333612e7866882dd22e4fe13ba80ed649b232a0c9ea3167fe955b2ba746735a17c01fb589237deb1bbba9f99047e791b0600417e33eccb04f8ac65cc9bdc78089f9cebcef37bfb184e9a08400ba9b9afc5d1d5085135ab109b8db62284fed69e6c1bf0016b3e545015750ffaccb29081e19ca6bbd74e73c693ac18051bfcbe6ce44de2cded3c8380cc1da10c15c212b947d0078045b27682b01cfee7c23bcb61c447d746\",\r\n            \"metiCode\": 23005158,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"7a768480-194a-459f-854e-1e8cdee63ddd\",\r\n            \"productName\": \"BAGHETA FRENCH 300G LLR       \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23500108.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=13495cf32239a549c8ce29036ee9edc09eca4c2932e62366deea0e70639b5028a09c335a3e9b89559fcb684471c36c2fb49b54e2ef5116508fc1396556863b1b2ae7e222ece4d887d6c1b6faf0434cb6c749d2b1d41215b03adb1fdadb12963797bb4d734d32263328e35af43868f5e8561159eceb982324abf19f3491abb0b08642b3553694bf678eaf0f95165e921f7a90fef2465f734c8982320f36697a4331060ddd08473db018a7f3064e704467533ebacd1b4803f850dba6a8af5d21bd1d6a68decc20a34b50cd4f4b52b60c35418405d4529e1a2f80d1c75b6af228a6be6c85906f51c1cf0d77a975e3ab7163be704c77843df1f1359a3f3e601a25b4\",\r\n            \"metiCode\": 23500108,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"b802039e-1975-4ac7-aacb-4dd1832159ae\",\r\n            \"productName\": \"PAINE MULTICEREALE 400G LLR   \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23501889.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=26cf5c7752e93bfbf6a288af2b9ca163f87ce52acda0239c1e25a4cbe012448621d70264be71297bf8ebedec819d84e37b156b4e029fb8b67a8473fbcb8393c46ef8aa9e73309e69a5b1be0b45b05af1721776baa143b25ce7c2a0f53c28f88720a8ca77bc2fa50a316d4b12cb420dac9cf8aee4b5d037bf30096ff248d65b24979043fd99ed0ca1e9ebcc46b01b1d892b8746d562c18d0dc737b47a6c529de49cb7e7e1e9b432a635155ba402b23a375107ddd2b7ae10e78bd8aade865e4633c92d691f1169a1a78a1dc308b2d1a51509e6e84aa8c447076b2f14963548e4308b18d67014cfbb99be5d50b71061cbf1b646f519d803560d1f0166a49d8eca87\",\r\n            \"metiCode\": 23501889,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"374de95d-4af5-4c30-9692-01e970ff546d\",\r\n            \"productName\": \"CIABATTA MAXI 300G LLR        \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23502473.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=2983bf33cab6bd6fb31dc8ec8255b5ab98d47bcb35db01ef220693bb99bbcfdf5832ded1e7abc313ac2a01a0f2f75cd9b457050e1d9bc7ed07f4d77920fc537910b162c846bde57a11f319a24c377f5619ebf52f589b44e30d2ef343e176a4c9a0e7729bcd113d60c84ce1fd20b662f6f82655741c7d2a29b053c421cae96de8c05e2aac1546d7ad01467012e3cc74017de68998e9c8c845fff26adb37dfd1acd4079e973b48533e97a6783ca0091076533763ff74d5cdfb515a5962d4e7f5a5a1ec4d10822bf62302584e3ddb45922d515ba3259a7821b1cb7711d131af7ba1e6104708b4a932141245df8bcdd180db32e30d5e93d4fc178959064203284790\",\r\n            \"metiCode\": 23502473,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"7659b7b7-805d-4d97-99b0-4495d80cc754\",\r\n            \"productName\": \"FOIETAJ XL PIZZA 80G FORNETTI \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23502634.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=9c714b126d07b0b16ffeda7f0d0d9557a2b27e1f17709c0f75b6fe646618d12f6f7b15cfbb2f63248609b8bc35079cbf554815bea178616f98b9d3e6567f74ccf5a68cb9c38a47452faebe54673c6bd393eeabdb29e8b9e6ed0da07ed46bee7c4b01751ecaefd685bda387cfa574130b8eb1b25037ea54f41f3c0c0df4fbc9fef9c9fe06a2cf6aa4fb1a4bd83903179169c1a16fa5d4fc226e2d1f2a21c5d12a3460ed849dee6d7897c38d487afd44dab7841ecde81acc27ff9071ae8b70ee6dec4b3c9a15ae1698d82de32e4e04dfcf1a8b7dce825f54a9d38b49e3ca3cd0be7c27cdc0658e02cacb4cde13eaf115d7b4e0e9c4bee863329882b968f696b49b\",\r\n            \"metiCode\": 23502634,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"8f469390-78a4-4bc3-bb71-64a0090cad9f\",\r\n            \"productName\": \"MUFFIN CIOCO 90G WEST         \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23502645.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=6feaf2681c7ffcab6af1261fdf52e17084d151de927150c5ecddaa5a66a6a7669d10d3eb17b33d20053c3a54a8b2cd8768038afb96cae9c91b054329bdab2187b0d84c25892ace3ba2ecd0be61c276171bc27980a31cf01b12716b4514a075f0752a4a5726c353f61989a7230924519ce16ab03999b0c7bd0a6f94c91604bef7f20424cc95222434eaa2d799824d045734bde0816a233b6d54a0b86f8bf9cbcac6123b4b0f21f9570503086976a7c1cd584fb6acda851b31954cd103efca4d3d04918b3b41e8a0401b009395920a2f978aa1a87e0764252bbf59be1611e00d355cf3e8b84af7df718d62eca8d4ea2dca3c18d0cb5e76cb518deac34a11b6008c\",\r\n            \"metiCode\": 23502645,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"aef56a1f-a53f-4f95-a5df-b6d50aa6d2e3\",\r\n            \"productName\": \"TRIGON CU TELEMEA 77G LLR     \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23503009.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=0b622a607b56f3107d459d7b248a6a9460039373968332723977e23db213505aa535da3f65baf9fbffadf7d04ee8cc2cd2a5ca243cec11f957d8ece2a2d098d98e7c27d1733c7a85445bc5dc4c2fdc17013bff3fe9b512c8e4d7778ce42105087535fca04bfc646ad3da5eeb375c4a187b4386847aa55a36552bdc269e37127dacb76b07823d7cf786c0ed4f6025d511806ce763f9f22cb1637822f9a643dd6b4e87f430ea142e955d8740ce2d0d0abdf18d67afb9c32ade473d2d7a064f955383b10d8eb939ef2030059f3f5d49eb567bb8a7331b1d1bc59d92ac89a72999f7bb0ab0a4235e3fe6bb94e0d6360e7a90b64cf70f624f3707a2fdfdd7480f2e31\",\r\n            \"metiCode\": 23503009,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"69fb49c4-844c-46ab-9692-4b7c904b7396\",\r\n            \"productName\": \"DOTS GOGOASA BERLINA CACAO 90G\",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23503405.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=38573bb472982b8fa6d8222bb0a865035d0dff5ac2af2153a5ec7d21bc394a44551dcbed8980eb61ab0c421da8515b084eb74afb1fc4a2ce0012f18d9eb50547494c3a4f6828751f47d837929d3eeaf8bb61c505a6376c5167de1c7520dd3029c97b13f2264b21ef417d78408d4d8d861b0051fecdf0e96f36a6ca1e5294ccdb396ca4fc5a83728b63437439a26b1e26785e3bb7f3373489c18fe8e322cbb96b1210385f5aa40c3ea30bb97afe628c7a512884989f63a91e64812fd777b19401833854d3c93e8a714e511622069f361f00cca040b865462e6dd0de93d37f7309dd75a300b33e05cf71b22de81126fe099c7c2e0f9af2c2f94605de0359dfd879\",\r\n            \"metiCode\": 23503405,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"ffee4881-a96d-446d-9a77-8ca1e3dedcc0\",\r\n            \"productName\": \"DOTS GOGOASA GLAZ ROZ 60G     \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23503407.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=7bf6d0d0fefa50a06880df6855d474d735498bbd71bbbbf7e0fd25227b8c7f7930d653e677f9c803c50398960770892b251fe6ad3556557b386977bc1c017a9b7443487ef253c9ff96146bbc87eadd671917dc77f3c5caf405bc10e953caa0e84f2c8703c75647cdd5f22d47da818ffef97ef291a60aea073cd4d3010bcc2ffb8568457aad22c7929a81b233d481b442bc7883291ade3900aa85352b08433c6cb47a642fb880e23a5ad5d2eb83259adeddb8513b3fab47f2aabccec103d645b739d36d664103fa5c09c5f0a42c4e26ccc8cf3e1ea6bae54fdbf728e5cf73f27d8feeeb23b8e43855d93b4e00ef3a9fd54f46db27f373ae6c0ad36bf0acc020b3\",\r\n            \"metiCode\": 23503407,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"14399eb5-d1e9-4c7f-b6c8-88c855f8b577\",\r\n            \"productName\": \"PLACINTA U DOVLEAC 122G       \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23504366.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=a5ff0ae20038bb96ce4a282548aec3cad4664d975db9ae8ed7a0b4b8d1376b84527f003ea5cf36612e911ddda931aa4d3dd31bf8f99f92c69e7fd14ea1bca863d69a0441fa453b9b774f92e7be7a29b60d06021bdbc78b39f42539c0751d259cfafb2d32f6be2bdfde4470aabe7e12a272aa914d92f4d410bea3c14d4cc90a542d8d4bce1fe74bf941100d837591cd864d57c7d85b8791d1d7b0e06f817ee57d6fa84aab9269282f0df3ae017a9ace5b4a706e7857d4b7887a1e9bdc2117b23036a7c029009ae0cf3ac62a307cc2c70ac163a874b7285623cd9d3bcddf68ef2d3ca470accdd8f30180617887ce02a5f2d50ddd611280fcd8e9d8a5256d3db7b0\",\r\n            \"metiCode\": 23504366,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"ec523540-0630-48d2-972e-cc0d355857b2\",\r\n            \"productName\": \"CERC CU MERE 160G ALFA        \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23504874.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=521f6444769757aec647fc443e1278565bad20d901ddd69d0250826da3ef45c086dc3b99005f2bbf7d031421905d83d276f19652776e4198f71020792b785c1034a561f1828dbbd67c854361bdd441ead6153be41fc4039f79365ba47e96dc04d20e2c65fb3969efa7035d2885c56446025f5c3b3839f60c2beadd0b4196562ee36e0603dc6f53c666d5fec9aaeeff1291d85af6bff21608b05b8dc99541c107aebd9bf60cf107ab9bb3d3a9cda2b46d9a6ef567f58bf3e80bbb53fcb3cd3e542d1d1c8d846a3a834135c95f9ca9add4c56e0683b5b0a8b297fc996e920639b359a1fe5d82becc9b9ccbc3dda2163f60082ee915be222df4f53ef035d281e193\",\r\n            \"metiCode\": 23504874,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"35f86412-c05e-4e27-b6f8-5d119d7826b1\",\r\n            \"productName\": \"DEMI BAGHETA FRENCH 100G LLR00\",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23504883.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=118ff5f36e097e566619fd18c52169f153d87c733699765ba7cf7dab76b7b9988ad7f1d8d97e092516efbda0fa08d54d35981ddf2478c833316876db6330e4761dc1432efcc1099b98991e08146a23c2b57a9fadc2694a3ddb51bfc8384babe1f2445510444436f46efafb6cf10a7273d0ff3d6ec9b473987ecdf1847537df2ca5389ecc844a1f0b969e70a9f5681a22d257f1ef5e846bdabd2d9a2c9aa520f1992612e6cdab7d36380fc56ef90d48f4894c942edcd2bd290a4f60edd0be664033fb3a5d2e439cdcd3e9690e9bd9911671c609c08ca2a8375a47fe0b00b9bb0be942eaafe807af1ef360a692950837bb3fd712835bb952739bf1179d24ef5e7d\",\r\n            \"metiCode\": 23504883,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"f18dae5c-e712-4a08-a5f8-54a506d9f11a\",\r\n            \"productName\": \"RULOU DUBLU CIUPERCI 162G     \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23505873.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=0e5772abbdeffa4b268061f7713b9524d1215e05ca26fe86aa4f54e35718df99cf113bb0fd258af958ed4ea6863467f20ccf8cfad3454f02a69d9b29d24c1261544dd3a830d30388dc3464cf1fa4c60089cb5a7f15df5cb446b297c39bf0c6a53cdb28db541de29fd2b33048f4840c5742d8824f00a2bc9d356f94ffec803b60c7711d5094aed6318ee298cf3846cd6d931d4fa049fa9dfad1ae49e1c87124d3aa83d45da1b3195a32e5b82fa79739e742cc60f00377d776e861c8f5d729afcd9078224214586991c6cfe0b091d5fb1ec38b2de75e7cf27a7046a2165fd67d69059b69637b06836b1f356c2784f5bd4c11eb18e4b8a12dbe835cea58d7029a2d\",\r\n            \"metiCode\": 23505873,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"fcdae9e9-e01c-44af-8f68-47bf7f7caf32\",\r\n            \"productName\": \"CROISSANT CACAO ALUNE 77G LMN \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23506323.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=a284853cb8d73661269fa379a666d7bb31e9e3c39e938bb9781a634ddb05fcb4a02d964dc8227cedc945a416db8c955545908a3c0d08a244896a49a2eacd8b004117fd12df764e60e1d50f68b19dcc767fda05e43c8c65de699468b8243ecd4ec6f0b7d74743aae5d8dea96297b48fa802386f61792a87442322b0feb2b7123d07440eb53e9b6f50c5099991b6f960e3b339ffb6b2ea41a96806b359fad38020f51435fa96694574a22984461d3207f8021944cb0e72b0e4ef3770893dd9956ed606b39683c9c147edb2da5971ba6fcab62896f7d5f0ba7a9af6c5cca61ee003c1fca835ca79c2efdc133bacd012ac1d3250e7b6d1ddb828e750f447a274697b\",\r\n            \"metiCode\": 23506323,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"39122f09-90a9-424a-a7cf-af32389c492b\",\r\n            \"productName\": \"CROISSANT 22% UNT 45G CRF     \",\r\n            \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23506579.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T095555Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=554f48f95e1784af9d7d6fba98db7ecd26b40e114d75942f0b0d5caa15d5c62de86f8b17790f4f8553de650ac9364c7f77a509330f4cec2525a9127914d6c4691a421f6bf98cfbeb938e906f1f393c7118871990daa1e39b938bb1bce928b1be474dba182b5bdf48569d1e742e7f658c210d4b6007effe7c829f6327afeedd04c8dcd721e32559b50641490e0e4ead2702a92b07e157af134689ed2d125c6165c7d98c8be137345761bffc9f92841c416e7ddb6814b604bf1df8a8bad8f2034be313e87307f2553d2aecaa6614774b50a0f8f113c26c09221b444cc42e65097053c94425e51dce606611bfe37407147e07f3befba355ff91aa9fbdfd6a094257\",\r\n            \"metiCode\": 23506579,\r\n            \"familyCode\": 238,\r\n            \"familyName\": \"PRODUSE CONGELATE\",\r\n            \"generalGrowth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"list\": [\r\n                {\r\n                    \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval5\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"growth\": -11,\r\n                    \"name\": \"interval3\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 101,\r\n        \"pageCount\": 5\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "1605f579-097b-487d-96dc-0656fb003eb5",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "b274763b-e965-4d8b-a92e-edf3855b4f0f",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "22b1dc39-9ca0-4cff-9582-02380995d0b2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "b1861aee-3d5c-45d0-a2f5-629cfa8b1ee7",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "d4b10519-8b78-4f05-8f6b-ff1c2f7a04fa",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "efecbc43-050f-41f1-be68-caf0d04bad71",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "product/growth/:id",
+      "responses": [
+        {
+          "uuid": "20a6b63d-d4ce-421d-a77c-d141c725d0df",
+          "body": "{\r\n    \"id\": \"500cc3a6-1e36-4b47-b581-dece8c4fd50e\",\r\n    \"productName\": \"MANUSI UNICA FOLOS R23 100BUC \",\r\n    \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23000714.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20231211%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20231211T103828Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=9c5fb861239a87312db1a144947a122beb92937b22f3f4721ae1876e7629995b7c99cfd1f0da4356b1b2ef0bceb38faf19d796ac47ad279de00faa1b2fd13e88265fc3d6d6e89a641d3001166eaaaae188d9228220fc4ce58fad3d0b871b6ea87dc93ed394e3f0ad30bd2c6b09c82d349e5bfa5f2b54976c3d942839b2f5717d9b9a556a599e2efab5e6e4084bb85a8713dd34a8aee7a747e75122dbb64044761895783fc194553ba8476888af522ef8ef0f0099441e77291d03eba8e995e5ba5f9ac526666a95063ba27f779552868d0f3e9df7913e055067a194aa4e808280f837dd4c0bb48645fece5c0a860a14f6b13a1261247e49b306b34a9bc6a6cfcc\",\r\n    \"metiCode\": 23000714,\r\n    \"familyCode\": 234,\r\n    \"generalGrowth\": -11,\r\n    \"username\": null,\r\n    \"lastChange\": null,\r\n    \"map\": {\r\n        \"interval1\": {\r\n            \"timeSlotId\": \"2ef3eed7-396a-490d-921d-6cfc558e9636\",\r\n            \"start\": \"06:00:00\",\r\n            \"end\": \"10:00:00\",\r\n            \"growth\": -11,\r\n            \"name\": \"interval1\"\r\n        },\r\n        \"interval2\": {\r\n            \"timeSlotId\": \"9603e212-a0d6-4d0c-8775-619c17ed7151\",\r\n            \"start\": \"10:00:00\",\r\n            \"end\": \"14:00:00\",\r\n            \"growth\": -11,\r\n            \"name\": \"interval2\"\r\n        },\r\n        \"interval3\": {\r\n            \"timeSlotId\": \"c2eb678a-edc9-4301-90b8-a9397fbdc46f\",\r\n            \"start\": \"14:00:00\",\r\n            \"end\": \"18:00:00\",\r\n            \"growth\": -11,\r\n            \"name\": \"interval3\"\r\n        },\r\n        \"interval4\": {\r\n            \"timeSlotId\": \"7ae12713-e585-4754-9b92-967dd69e8145\",\r\n            \"start\": \"18:00:00\",\r\n            \"end\": \"22:00:00\",\r\n            \"growth\": -11,\r\n            \"name\": \"interval4\"\r\n        },\r\n        \"interval5\": {\r\n            \"timeSlotId\": \"4c2880d8-b854-4108-87da-6b17d8bf2ad4\",\r\n            \"start\": \"22:00:00\",\r\n            \"end\": \"06:00:00\",\r\n            \"growth\": -11,\r\n            \"name\": \"interval5\"\r\n        }\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "afbb6d6f-54a0-410b-ba4c-db3496b4aa22",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "7e21fe07-24ed-4d8d-830d-1cf0f32d168c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "cd545bd8-0792-4314-9d19-67a4323b14fd",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "a2200973-c061-4feb-be25-a8042f2a5511",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "880a9eaa-be9d-4e1f-bbed-c109fa903251",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "b2b98f66-8552-4795-9960-8c07727f11ed",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "put",
+      "endpoint": "product/growth/:id",
+      "responses": [
+        {
+          "uuid": "470e7704-b935-4881-94fd-1f3c2ef712c1",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "7fc1e2bc-12ac-41d7-84c9-10950563c8fe",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "8c41c6f7-2134-4e64-a6ca-8916b190a5d7",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "084b0586-9378-4bf9-a6cd-a513311809fb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "3a52849e-bf2c-4983-8110-93d2cb89c35f",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "56b139b9-5181-48db-9f80-1491ae9a046a",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
           "crudKey": "id"
         }
       ],
@@ -3359,23 +4551,39 @@
     },
     {
       "type": "route",
-      "uuid": "551bc09c-826a-48ff-9756-1e867ca91758"
+      "uuid": "fe5c95a9-1d95-4806-a178-66385448f104"
     },
     {
       "type": "route",
-      "uuid": "8384a29e-310f-4f12-bae8-1244f84b184e"
+      "uuid": "94abd665-7c8d-462d-95d0-381ada741911"
     },
     {
       "type": "route",
-      "uuid": "9a60c5aa-a812-4004-bdb1-a868de7180a9"
+      "uuid": "907f2e5e-cb4f-4465-b28c-66ebeaf8f3d5"
     },
     {
       "type": "route",
-      "uuid": "db496501-3074-4632-9b52-9763caae5172"
+      "uuid": "4594c86d-19bd-4a64-ab76-efa32cd10e5e"
     },
     {
       "type": "route",
-      "uuid": "9f9f9fc7-e8ec-40de-aa70-565a016a95c7"
+      "uuid": "35b37d4b-0355-493f-abf9-18c713b50298"
+    },
+    {
+      "type": "route",
+      "uuid": "4bc9a2c2-1e28-470a-a372-12faa2d8d431"
+    },
+    {
+      "type": "route",
+      "uuid": "c24880ac-567a-4287-9e97-d78975ebb648"
+    },
+    {
+      "type": "route",
+      "uuid": "efecbc43-050f-41f1-be68-caf0d04bad71"
+    },
+    {
+      "type": "route",
+      "uuid": "b2b98f66-8552-4795-9960-8c07727f11ed"
     }
   ],
   "proxyMode": false,
