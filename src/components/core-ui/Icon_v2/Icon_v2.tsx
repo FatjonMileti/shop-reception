@@ -22,7 +22,8 @@ import {
   AssignTasksSubcategory,
   ManagementTasksSubcategory,
   AssignmentVolumetryHome,
-  GroupVolumetryHome
+  GroupVolumetryHome,
+  TasksVolumetryHome
 } from 'icons/volumetry'
 
 import {
@@ -104,6 +105,8 @@ const IconComponents = {
   AssignTasksSubcategory,
   AssignmentVolumetryHome,
   GroupVolumetryHome,
+  TasksVolumetryHome,
+  // Bakery
   // Menu
   HomeMenu,
   NotificationsMenu,
@@ -114,7 +117,6 @@ const IconComponents = {
   VolumetryMenu,
   EmployeeManagementMenu,
   ManagementTasksMenu,
-  // Bakery
   //home
   AdminHome,
   FormatorHome,

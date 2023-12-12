@@ -4,3 +4,4 @@ export { default as AssignTasksSubcategory } from './submodules/AssignTasksSubca
 
 export { default as AssignmentVolumetryHome } from './AssignmentVolumetryHome'
 export { default as GroupVolumetryHome } from './GroupVolumetryHome'
+export { default as TasksVolumetryHome } from './TasksVolumetryHome'
