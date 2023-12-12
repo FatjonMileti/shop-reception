@@ -1,6 +1,6 @@
 {
   "uuid": "1f9ef1c7-063b-4d73-9657-84d557b762e7",
-  "lastMigration": 29,
+  "lastMigration": 32,
   "name": "DEX Designer REST API",
   "endpointPrefix": "8080/rest/api/v1",
   "latency": 0,
@@ -17,7 +17,7 @@
       "responses": [
         {
           "uuid": "4d188e2a-9b20-46cc-bbcb-a9f8352f4a6e",
-          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"EventSeatOutlined\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"ProjectTeamGovernance\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"Supply Omni\",\n    \"icon\": \"DonutLargeTwoTone\",\n    \"routeURL\": \"/oms1\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"Supply Omni\",\n        \"icon\": \"SupplyOmni\",\n        \"routeURL\": \"/oms\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"2\",\n          \"name\": \"OMS\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/oms1\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"3\",\n    \"name\": \"Volumetrie\",\n    \"icon\": \"DonutLargeTwoTone\",\n    \"routeURL\": \"/volumetry\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"3\",\n        \"name\": \"Administrare angajati\",\n        \"icon\": \"GroupVolumetry\",\n        \"routeURL\": \"/volumetry/employees\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"3\",\n          \"name\": \"Volumetrie\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/volumetry\",\n          \"routePathExact\": true\n        }\n      },\n      {\n        \"id\": \"4\",\n        \"name\": \"Administrare task-uri\",\n        \"icon\": \"GroupVolumetry\",\n        \"routeURL\": \"/volumetry/tasksManagement\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"3\",\n          \"name\": \"Volumetrie\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/volumetry\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"22\",\n    \"name\": \"Bakery\",\n    \"icon\": \"AssuredWorkload\",\n    \"routeURL\": \"/bakery\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"22\",\n        \"name\": \"Admin\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/admin\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"33\",\n        \"name\": \"Formator\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"44\",\n        \"name\": \"Manager magazin\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/storeManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"55\",\n        \"name\": \"Manager regiune\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/regionManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"66\",\n        \"name\": \"Manager zone\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/zoneManager\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
+          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"Chair\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"ProjectTeamGovernance\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"Supply Omni\",\n    \"icon\": \"SupplyOmni\",\n    \"routeURL\": \"/oms1\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"Supply Omni\",\n        \"icon\": \"SupplyOmni\",\n        \"routeURL\": \"/oms\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"2\",\n          \"name\": \"OMS\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/oms1\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"3\",\n    \"name\": \"Volumetrie\",\n    \"icon\": \"Volumetry\",\n    \"routeURL\": \"/volumetry\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"3\",\n        \"name\": \"Administrare angajati\",\n        \"icon\": \"EmployeeManagement\",\n        \"routeURL\": \"/volumetry/employees\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"3\",\n          \"name\": \"Volumetrie\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/volumetry\",\n          \"routePathExact\": true\n        }\n      },\n      {\n        \"id\": \"4\",\n        \"name\": \"Administrare task-uri\",\n        \"icon\": \"ManagementTasks\",\n        \"routeURL\": \"/volumetry/tasksManagement\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"3\",\n          \"name\": \"Volumetrie\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/volumetry\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"22\",\n    \"name\": \"Bakery\",\n    \"icon\": \"AssuredWorkload\",\n    \"routeURL\": \"/bakery\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"22\",\n        \"name\": \"Admin\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/admin\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"33\",\n        \"name\": \"Formator\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"44\",\n        \"name\": \"Manager magazin\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/storeManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"55\",\n        \"name\": \"Manager regiune\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/regionManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"66\",\n        \"name\": \"Manager zone\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/zoneManager\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the application modules list",
@@ -36,7 +36,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ed1a6d29-881b-4a1b-9075-043c4911fd2d",
@@ -59,7 +60,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "be072f8c-7035-4a82-af93-3e1660664f25",
@@ -90,7 +92,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "cacb2292-3f2b-409d-9762-2d4d6b7c430a",
@@ -113,7 +116,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5e660c1a-42f7-447a-b434-4a1c5f419e82",
@@ -136,7 +140,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "7cd1505a-ffed-4cba-97d7-74bc493956ce",
@@ -159,10 +164,10 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -201,7 +206,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "dbd7b5f1-d7e9-444b-a8ea-92a5a16b47ed",
@@ -224,7 +230,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b37983ee-0167-4a94-8e23-ca0ff7435d54",
@@ -247,7 +254,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "be9d6334-e0c9-48c3-9f55-efc513ce9cf1",
@@ -270,7 +278,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ff8b28e2-d526-40ec-853d-aaabccec52d9",
@@ -293,7 +302,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "06f13eac-0eff-4b20-acd2-ab0d423c6153",
@@ -316,7 +326,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d7e5e4c5-da04-4242-8f24-4dbe41b7b994",
@@ -342,7 +353,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3cf0970b-096c-4089-8f85-558293eb7834",
@@ -373,7 +385,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "62ec1227-05a5-44e9-bb4a-6c71777f62a7",
@@ -404,7 +417,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "7fd6f51c-58b2-4f58-bdd1-d94ec055f9a0",
@@ -435,10 +449,10 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -469,7 +483,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "175ae47c-d070-419d-aaa2-35109a3744a7",
@@ -492,7 +507,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bfc2862b-c726-4fff-8677-14b06a77abaa",
@@ -515,7 +531,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0b31f50b-0d99-478b-aec6-4ebf57bbcc4d",
@@ -538,7 +555,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5fa557a5-547e-4579-ba1c-cfad519fbd9a",
@@ -561,7 +579,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "cb7a5644-d676-4bc8-bcd7-42b386ea9f78",
@@ -584,7 +603,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "240dbd94-c34e-4d5b-8e60-88f9c96b4d9e",
@@ -622,7 +642,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b78becea-73d2-4f39-a898-cd4e666c6dba",
@@ -660,7 +681,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "de30b61d-540c-4354-8905-5f90fdef6a0a",
@@ -698,7 +720,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e67f4586-0ea2-48c3-9b66-06a99b31cdf4",
@@ -736,7 +759,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0ac33c63-c6e6-4baf-8350-112ce713f881",
@@ -774,7 +798,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "101caae8-61ac-4553-b83f-4e1c6503c09f",
@@ -812,7 +837,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "cf838a51-dc2f-4b83-b047-93c236ab0e10",
@@ -850,7 +876,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "de7b6906-34eb-4978-bde6-079418830342",
@@ -888,7 +915,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "12dfa738-ae54-4a1a-8528-30720eda1315",
@@ -926,7 +954,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "03c7d7a9-e967-4675-bb5f-d92fdbe03b6a",
@@ -964,7 +993,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "acb7eb3e-9339-4541-af94-1be0ac27cec1",
@@ -1002,7 +1032,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2f9a2e9a-31d2-4de8-bc7a-dae8219d73f1",
@@ -1040,7 +1071,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "aa770c23-0653-465c-ab3a-8996cd1c5272",
@@ -1078,7 +1110,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fb10a635-beb0-4a5e-9643-9790bf658891",
@@ -1116,7 +1149,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3e21453b-4160-488a-b546-8bf1d2165f99",
@@ -1154,7 +1188,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "39b81d10-07e8-4b7c-ac4f-7f63d8af5f61",
@@ -1192,7 +1227,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "56d07966-32d5-45b8-8cc6-0f0aa3dc3a13",
@@ -1230,7 +1266,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "755c8eaa-c2bf-42d8-b5f2-a5e2d602699f",
@@ -1268,7 +1305,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "68fea7da-f1b7-4286-81ec-7b259c89e8bb",
@@ -1306,7 +1344,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ab419c2d-d5ba-4dc2-aeb0-32873fcb78c2",
@@ -1344,7 +1383,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "685aa35a-fc5f-4e8c-9469-687130bcb220",
@@ -1382,10 +1422,10 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     }
   ],
@@ -1450,5 +1490,6 @@
       "value": ""
     }
   ],
-  "data": []
+  "data": [],
+  "callbacks": []
 }
