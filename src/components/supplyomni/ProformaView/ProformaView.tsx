@@ -44,13 +44,13 @@ const ProformaView = () => {
   const { data: products, isLoading: isLoadingGetProducts } = useQuery(
     ['cart-products'],
     async () => {
-      const response = await makeCoreGetRequest(`/supply-omni/cart/product`)
+      const response = await makeCoreGetRequest(`/supply-omni/order/proforma/${id}`)
       return response
     },
     {
       onError: error => {
         showNotification({
-          message: `A aparut o eroare la obtinerea listei de produse. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea detaiilor comenzii. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
