@@ -14,6 +14,7 @@ import { CreateClientModal } from './CreateClientModal'
 import { TableRowItem } from './interfaces'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import { Edit } from '@mui/icons-material'
+import { Icon_v2 } from 'components/core-ui/Icon_v2'
 
 interface ExistingClientProps {
   selectNewClient?: boolean
@@ -140,7 +141,7 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#0970E6',
-                desktopIcon: <Edit />,
+                desktopIcon: <Icon_v2  iconName="Eye" iconType="Icon" />, 
                 onClick: (e, rowId) =>
                   selectNewClient
                     ? navigate(

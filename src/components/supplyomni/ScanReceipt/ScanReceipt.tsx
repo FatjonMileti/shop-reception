@@ -1,10 +1,9 @@
 import s from './ScanReceipt.modules.scss'
 import { ReceiptBarcodeScanner } from 'components/core-ui/ReceiptBarcodeScanner'
-import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
   Box,
   Paper,
@@ -20,41 +19,29 @@ import { ShoppingCartSummary } from '../ShoppingCart'
 import { makeCoreGetRequest } from 'utils/api'
 
 const ScanReceipt = () => {
-  const [isLoading, setIsLoading] = useState(true)
   const isXs = useMediaQuery('(max-width:624px)')
   const { showNotification } = useNotification()
   const { id } = useParams()
-  const [proform, setProform] = useState(null)
   const [searchParams, _] = useSearchParams()
 
-  useEffect(() => {
-    ;(async () => {
-      if (id == undefined) return
-
-      try {
-        setIsLoading(true)
-        const proformResult = await makeCoreGetRequest(`/supply-omni/order/proforma/${id}`)
-        setProform(proformResult)
-        setIsLoading(false)
-      } catch (error) {
-        showNotification({
-          message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    })()
-  }, [id])
-
-  const { data: products, isLoading: isLoadingGetProducts } = useQuery(
-    ['cart-products'],
+  const { data: proform, isLoading: isLoadingGetProform } = useQuery(
+    ['proform'],
     async () => {
-      const response = await makeCoreGetRequest(`/supply-omni/cart/product`)
-      return response
+      const response = await makeCoreGetRequest(`/supply-omni/order/proforma/${id}`)
+      return {
+        ...response,
+        summary: {
+          totalItems: response.products.length,
+          totalPrice: response.totalAmount
+        }
+      }
     },
     {
       onError: error => {
         showNotification({
-          message: `A aparut o eroare la obtinerea listei de produse. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea detaiilor comenzii. ${formatErrorMessage(
+            error
+          )}`,
           type: 'error'
         })
       }
@@ -106,13 +93,13 @@ const ScanReceipt = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={4}>
-          {isClientLoading || isLoadingGetProducts || isLoading ? (
+          {isClientLoading || isLoadingGetProform ? (
             <CircularProgress color="primary" disableShrink style={{ marginRight: '16px' }} />
           ) : (
             <ShoppingCartSummary
               sx={{ pl: 2, pr: 2 }}
               client={client || {}}
-              order={products || {}}
+              order={proform || {}}
               deliveryPayment={
                 proform
                   ? { paymentMethod: proform?.paymentMethod, deliveryType: proform?.deliveryType }

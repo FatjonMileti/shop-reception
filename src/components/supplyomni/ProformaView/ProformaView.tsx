@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Box, Paper, CircularProgress, Grid, useMediaQuery } from '@mui/material'
 import { PdfViewer } from './PdfViewer'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
-import s from './ProformaView.modules.scss'
 import { formatErrorMessage } from 'utils/formatting'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
@@ -14,8 +12,6 @@ import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
 
 const ProformaView = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [proform, setProform] = useState(null)
   const isXs = useMediaQuery('(max-width:624px)')
   const navigate = useNavigate()
   const { id } = useParams()
@@ -23,34 +19,24 @@ const ProformaView = () => {
 
   const { showNotification } = useNotification()
 
-  useEffect(() => {
-    ;(async () => {
-      if (id == undefined) return
-
-      try {
-        setIsLoading(true)
-        const proformResult = await makeCoreGetRequest(`/supply-omni/order/proforma/${id}`)
-        setProform(proformResult)
-        setIsLoading(false)
-      } catch (error) {
-        showNotification({
-          message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    })()
-  }, [id])
-
-  const { data: products, isLoading: isLoadingGetProducts } = useQuery(
-    ['cart-products'],
+  const { data: proform, isLoading: isLoadingGetProform } = useQuery(
+    ['proform'],
     async () => {
       const response = await makeCoreGetRequest(`/supply-omni/order/proforma/${id}`)
-      return response
+      return {
+        ...response,
+        summary: {
+          totalItems: response.products.length,
+          totalPrice: response.totalAmount
+        }
+      }
     },
     {
       onError: error => {
         showNotification({
-          message: `A aparut o eroare la obtinerea detaiilor comenzii. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea detaiilor comenzii. ${formatErrorMessage(
+            error
+          )}`,
           type: 'error'
         })
       }
@@ -86,18 +72,21 @@ const ProformaView = () => {
         >
           <Paper sx={{ pt: 0, pb: 2, minHeight: '400px' }}>
             <Box sx={{ pt: 0, overflow: 'hidden' }}>
-              {isLoading ? (
+              {isLoadingGetProform ? (
                 <div style={{ display: 'flex' }}>
                   <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
                 </div>
               ) : (
                 <PdfViewer
                   proform={proform}
-                  isLoading={isLoading}
+                  isLoading={isLoadingGetProform}
                   actions={{
                     downloadAction: { url: '/supply-omni/order/proforma/pdf', type: 'GET' },
                     printAction: { url: '/supply-omni/order/proforma/print', type: 'POST' },
-                    scanReceiptAction: { href: `/supplyOmni/scanReceipt?clientId=${searchParams.get('clientId')}`, label: 'Scaneaza bon' },
+                    scanReceiptAction: {
+                      href: `/supplyOmni/scanReceipt?clientId=${searchParams.get('clientId')}`,
+                      label: 'Scaneaza bon'
+                    },
                     printersAction: { url: '/supply-omni/printer', type: 'GET' }
                   }}
                 />
@@ -106,14 +95,14 @@ const ProformaView = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={4}>
-          {isLoadingGetProducts || isClientLoading ? (
+          {isLoadingGetProform || isClientLoading ? (
             <div style={{ display: 'flex' }}>
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
             </div>
           ) : (
             <ShoppingCartSummary
               sx={{ pl: 2, pr: 2, mb: 3 }}
-              order={products || {}}
+              order={proform || {}}
               client={client || {}}
               deliveryPayment={
                 proform
