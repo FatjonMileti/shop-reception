@@ -93,7 +93,10 @@ const ShoppingCart = () => {
                   <ShoppingCartSummary sx={{ pl: 2, pr: 2 }} order={products || {}} />
                   <Box sx={{ pl: 2, pr: 2 }}>
                     <Button
-                      onClick={() => navigate('/supplyOmni/shoppingCartSelectClient')}
+                      onClick={() => {
+                        navigate('/supplyOmni/shoppingCartSelectClient')
+                        localStorage.setItem('isStepperStep', 'true')
+                      }}
                       label=""
                       variant="contained"
                       style={{ marginTop: '26px', width: '100%' }}

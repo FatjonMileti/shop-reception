@@ -13,6 +13,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CreateClientModal } from './CreateClientModal'
 import { TableRowItem } from './interfaces'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch'
+import { Edit } from '@mui/icons-material'
 
 interface ExistingClientProps {
   selectNewClient?: boolean
@@ -139,6 +140,7 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#0970E6',
+                desktopIcon: <Edit />,
                 onClick: (e, rowId) =>
                   selectNewClient
                     ? navigate(

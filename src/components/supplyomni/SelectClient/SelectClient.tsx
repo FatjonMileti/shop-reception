@@ -50,20 +50,25 @@ const SelectClient: React.FC<SelectClientProps> = ({ selectNewClient }) => {
     }
   ]
 
+  const isShowStepper = localStorage.getItem('isStepperStep')
+  const isShowOrderSummary = localStorage.getItem('isStepperStep')
+
   return (
     <Box sx={!isXs ? { margin: '24px' } : { margin: '12px' }}>
       {isLoadingGetProducts ? (
         <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
       ) : (
         <Grid sx={{ mt: 1 }} container spacing={2}>
-          <Grid item xs={12}>
-            <ShoppingCartStepper activeStep={1} />
-          </Grid>
+          {isShowStepper && (
+            <Grid item xs={12}>
+              <ShoppingCartStepper activeStep={1} />
+            </Grid>
+          )}
           <Grid
             style={{ paddingTop: '16px', marginTop: 0, height: 'auto', paddingLeft: '30px' }}
             item
             xs={12}
-            md={8}
+            md={isShowOrderSummary ? 8 : 12}
           >
             <Paper sx={{ pt: 0, pb: 2, minHeight: '400px' }}>
               <Box sx={{ pl: 3, pr: 3, pt: 0 }}>
@@ -74,9 +79,11 @@ const SelectClient: React.FC<SelectClientProps> = ({ selectNewClient }) => {
               </Box>
             </Paper>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <ShoppingCartSummary sx={{ pl: 2, pr: 2 }} order={products || {}} />
-          </Grid>
+          {isShowOrderSummary && (
+            <Grid item xs={12} md={4}>
+              <ShoppingCartSummary sx={{ pl: 2, pr: 2 }} order={products || {}} />
+            </Grid>
+          )}
         </Grid>
       )}
     </Box>

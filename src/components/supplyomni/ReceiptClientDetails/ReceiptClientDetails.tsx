@@ -62,7 +62,10 @@ const ReceiptClientDetails: React.FC = () => {
               <Button
                 label="Modifică client"
                 variant="contained"
-                onClick={() => navigate(`/supplyOmni/receiptSelectClient?orderId=${orderId}`)}
+                onClick={() => {
+                  navigate(`/supplyOmni/receiptSelectClient?orderId=${orderId}`)
+                  localStorage.removeItem('isStepperStep')
+                }}
               />
             ),
             bottomButton: (
