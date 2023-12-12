@@ -11,6 +11,7 @@ import { useMutation, useQuery } from 'react-query'
 import { editStoreValidationSchema, getInitialValues } from './helpers'
 import { ChangeEvent, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
+import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 
 interface EditProductionProps {
   isModalOpen: boolean
@@ -44,7 +45,10 @@ export const EditProduction: React.FC<EditProductionProps> = props => {
     }
   )
 
-  const initialValues = useMemo(() => getInitialValues(productionQuery.data), [productionQuery.data])
+  const initialValues = useMemo(
+    () => getInitialValues(productionQuery.data),
+    [productionQuery.data]
+  )
 
   const productionMutation = useMutation(
     async (values: any) => {
@@ -88,123 +92,70 @@ export const EditProduction: React.FC<EditProductionProps> = props => {
           <>
             <Grid xs={12} item>
               <FormInfoItems
-                items={
-                  [
-                    {
-                      label: "Produs",
-                      name: (productionQuery.data as TableItem)?.productName
-                    },
-                    {
-                      label: "Medie vanzari",
-                      name: (productionQuery.data as TableItem)?.average.toString()
-                    },
-                    {
-                      label: "Cant. propusa",
-                      name: (productionQuery.data as TableItem)?.quantityToProduce.toString()
-                    },
-                    {
-                      "label": "Gama produs",
-                      name: (productionQuery.data as TableItem)?.clusterMandatory ? "O" : "F",
-                    },
-                    {
-                      label: "Promotie",
-                      name: (productionQuery.data as TableItem)?.inPromotion ? "Y" : "N"
-                      // "render": {
-                      //   "UIComponent": "BooleanIcon",
-                      //   "icon": "Flag",
-                      //   "onSuccess": "#33691E",
-                      //   "onFailure": "#E5E5E5"
-                      // }
-                    }
-                  ]
-
-
-                }
+                items={[
+                  {
+                    label: 'Produs:',
+                    name: (productionQuery.data as TableItem)?.productName
+                  },
+                  {
+                    label: 'Medie vanzari:',
+                    name: (productionQuery.data as TableItem)?.average
+                      ? (productionQuery.data as TableItem)?.average?.toString()
+                      : '-'
+                  },
+                  {
+                    label: 'Cant. propusa:',
+                    name: (productionQuery.data as TableItem)?.quantityToProduce
+                      ? (productionQuery.data as TableItem)?.quantityToProduce.toString()
+                      : '-'
+                  },
+                  {
+                    label: 'Gama produs:',
+                    name: (productionQuery.data as TableItem)?.clusterMandatory ? 'O' : 'F'
+                  },
+                  {
+                    label: 'Promotie:',
+                    name: (productionQuery.data as TableItem)?.inPromotion ? 'Y' : 'N',
+                    render: item => (
+                      <BooleanIcon
+                        icon={'Flag'}
+                        onSuccess={'#33691E'}
+                        onFailure={'#E5E5E5'}
+                        value={(productionQuery.data as TableItem)?.inPromotion}
+                      />
+                    )
+                  }
+                ]}
               />
             </Grid>
 
-            <Grid container spacing={3}  item>
-
-              <Grid xs={12} md={4} item>
-                <Input
-                  type="number"
-                  variant="standard"
-                  name="map.interval1.quantityToProduce"
-                  label="06:00 - 10:00"
-                  width="100%"
-                  value={formik.values?.map?.interval1?.quantityToProduce?.toString()}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    formik.setFieldValue('map.interval1.quantityToProduce', event.currentTarget.value)
-                  }
-                  error={!!formik.errors?.map?.interval1?.quantityToProduce}
-                  helperText={formik.errors?.map?.interval1?.quantityToProduce as string}
-                />
-              </Grid>
-
-              <Grid xs={12} md={4} item>
-                <Input
-                  type="number"
-                  variant="standard"
-                  name="map.interval2.quantityToProduce"
-                  label="10:00 - 14:00"
-                  width="100%"
-                  value={formik.values?.map?.interval2?.quantityToProduce?.toString()}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    formik.setFieldValue('map.interval2.quantityToProduce', event.currentTarget.value)
-                  }
-                  error={!!formik.errors?.map?.interval2?.quantityToProduce}
-                  helperText={formik.errors?.map?.interval2?.quantityToProduce as string}
-                />
-              </Grid>
-
-              <Grid xs={12} md={4} item>
-                <Input
-                  type="number"
-                  variant="standard"
-                  name="map.interval3.quantityToProduce"
-                  label="14:00 - 18:00"
-                  width="100%"
-                  value={formik.values?.map?.interval3?.quantityToProduce?.toString()}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    formik.setFieldValue('map.interval3.quantityToProduce', event.currentTarget.value)
-                  }
-                  error={!!formik.errors?.map?.interval3?.quantityToProduce}
-                  helperText={formik.errors?.map?.interval3?.quantityToProduce as string}
-                />
-              </Grid>
-
-              <Grid xs={12} md={4} item>
-                <Input
-                  type="number"
-                  variant="standard"
-                  name="map.interval4.quantityToProduce"
-                  label="18:00 - 22:00"
-                  width="100%"
-                  value={formik.values?.map?.interval4?.quantityToProduce?.toString()}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    formik.setFieldValue('map.interval4.quantityToProduce', event.currentTarget.value)
-                  }
-                  error={!!formik.errors?.map?.interval4?.quantityToProduce}
-                  helperText={formik.errors?.map?.interval4?.quantityToProduce as string}
-                />
-              </Grid>
-
-              <Grid xs={12} md={4} item>
-                <Input
-                  type="number"
-                  variant="standard"
-                  name="map.interval4.quantityToProduce"
-                  label="22:00 - 06:00"
-                  width="100%"
-                  value={formik.values?.map?.interval5?.quantityToProduce?.toString()}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    formik.setFieldValue('map.interval5.quantityToProduce', event.currentTarget.value)
-                  }
-                  error={!!formik.errors?.map?.interval5?.quantityToProduce}
-                  helperText={formik.errors?.map?.interval5?.quantityToProduce as string}
-                />
-              </Grid>
-
+            <Grid container spacing={3} item>
+              {[
+                "06:00 - 10:00",
+                "10:00 - 14:00",
+                "14:00 - 18:00",
+                "18:00 - 22:00",
+                "22:00 - 06:00"
+              ].map((interval,i) => (
+                <Grid xs={12} md={4} item key={i}>
+                  <Input
+                    type="number"
+                    variant="outlined"
+                    name={`map.interval${i+1}.quantityToProduce`}
+                    label={interval}
+                    width="100%"
+                    value={formik.values?.map?.[`interval${i+1}`]?.quantityToProduce?.toString()}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                      formik.setFieldValue(
+                        `map.interval${i+1}.quantityToProduce`,
+                        event.currentTarget.value
+                      )
+                    }
+                    error={!!formik.errors?.map?.[`interval${i+1}`]?.quantityToProduce}
+                    helperText={formik.errors?.map?.[`interval${i+1}`]?.quantityToProduce as string}
+                  />
+                </Grid>
+              ))}
             </Grid>
 
             <Grid xs={12} item className={s.modalButtons}>
