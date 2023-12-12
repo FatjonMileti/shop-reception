@@ -16,6 +16,7 @@ import { TeamAssignmentItem, TeamAssignmentTableFilter, ValueLabelInterface } fr
 import { EditTeamAssignment } from './EditTeamAssignment'
 import { toTableRowItems } from './serializers'
 import { EditActionHome } from 'icons'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const columns = [
   {
@@ -211,15 +212,16 @@ const TeamAssignment: React.FC = props => {
         )}
 
         <Grid xs={12} md={2} item style={{ padding: 0 }}>
-          <AsyncAutocomplete
-            applyCustomStyle
-            variant="outlined"
+          <FilterDataSelect
             name="teamMember.domain"
+            defaultSelectedData={domainFilterValue}
             label="Domain"
-            disableClearable
-            value={domainFilterValue}
+            showCounter={true}
+            showSearch={true}
+            counterLabel="Select category"
+            noDataFoundLabel="No results!"
             options={domainFilterOptions}
-            onChange={handleFilterChange}
+            onSelect={handleFilterChange}
           />
         </Grid>
       </Grid>
