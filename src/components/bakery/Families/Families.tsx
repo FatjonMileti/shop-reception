@@ -10,7 +10,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { columns } from './helpers'
 import { toTableRowItems } from './serializers'
 import { EditFamily } from './EditFamily'
-import { EditActionHome } from 'icons'
+import { EditActionIcon } from 'icons'
 
 const Families = () => {
   const [tableItems, setTableItems] = useState<FamiliesItem[]>([])
@@ -87,7 +87,7 @@ const Families = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
-              desktopIcon: <EditActionHome />,
+              desktopIcon: <EditActionIcon />,
               onClick: (e, rowId) => selectRow(rowId, 'edit')
             },
           ]}

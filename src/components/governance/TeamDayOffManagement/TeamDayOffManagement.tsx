@@ -18,7 +18,7 @@ import { columns } from './helpers'
 import { toTableRowItems } from './serializers'
 import { RootState } from 'configureStore'
 import { useSelector } from 'react-redux'
-import { DeleteActionHome, EditActionHome } from 'icons'
+import { DeleteActionIcon, EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const TeamDayOffManagement = () => {
@@ -105,7 +105,7 @@ const TeamDayOffManagement = () => {
           label: 'Edit',
           labelColor: 'white',
           typographyVariant: 'medium',
-          desktopIcon: <EditActionHome />,
+          desktopIcon: <EditActionIcon />,
           backgroundColor: '#0970E6',
           onClick: (e, rowId) => selectRow(rowId, 'edit')
         },
@@ -114,7 +114,7 @@ const TeamDayOffManagement = () => {
           labelColor: 'white',
           typographyVariant: 'medium',
           backgroundColor: '#CC4010',
-          desktopIcon: <DeleteActionHome />,
+          desktopIcon: <DeleteActionIcon />,
           onClick: (e, rowId) => selectRow(rowId, 'delete')
         }
       ]

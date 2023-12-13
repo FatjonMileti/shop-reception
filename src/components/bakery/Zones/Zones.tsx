@@ -10,7 +10,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { AddEditZone } from './AddEditZone'
 import { columns } from './helpers'
-import { EditActionHome } from 'icons'
+import { EditActionIcon } from 'icons'
 
 const Zones = () => {
   const [tableItems, setTableItems] = useState<ZoneItem[]>([])
@@ -95,7 +95,7 @@ const Zones = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
-              desktopIcon: <EditActionHome />,
+              desktopIcon: <EditActionIcon />,
               onClick: (e, rowId) => selectRow(rowId, 'edit')
             }
           ]}

@@ -10,7 +10,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { EditGrowthIndex } from './EditGrowthIndex'
 import { GrowthIndex } from './interfaces'
-import { EditActionHome } from 'icons'
+import { EditActionIcon } from 'icons'
 
 const GrowthIndexStore = () => {
 
@@ -78,7 +78,7 @@ const GrowthIndexStore = () => {
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
               onClick: (e, rowId) => selectRow(rowId),
-              desktopIcon: <EditActionHome />
+              desktopIcon: <EditActionIcon />
             }
           ]}
         />

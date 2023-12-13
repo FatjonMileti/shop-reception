@@ -10,8 +10,8 @@ import { formatErrorMessage } from 'utils/formatting'
 import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { EditGrowthIndex } from './EditGrowthIndex'
-import { generatePath, useNavigate } from "react-router-dom";
-import { EditActionHome, ViewActionHome } from 'icons'
+import { useNavigate } from "react-router-dom";
+import {EditActionIcon, ViewActionIcon } from 'icons'
 
 const GrowthIndex = () => {
   const [tableItems, setTableItems] = useState<GrowthIndexItem[]>([])
@@ -88,7 +88,7 @@ const GrowthIndex = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#000000',
-              desktopIcon: <ViewActionHome />,
+              desktopIcon: <ViewActionIcon />,
               onClick: (e, rowId) => selectRow(rowId, 'view')
             },
             {
@@ -96,7 +96,7 @@ const GrowthIndex = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#000000',
-              desktopIcon: <EditActionHome />,
+              desktopIcon: <EditActionIcon />,
               onClick: (e, rowId) => selectRow(rowId, 'edit')
             },
           ]}
