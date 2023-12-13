@@ -103,7 +103,12 @@ const AsyncAutocomplete = props => {
         )}`
       }
 
-      const result = await makeCoreGetRequest(url, queryParams)
+      const result = await makeCoreGetRequest(url, {
+        params: queryParams,
+        paramsSerializer: {
+          indexes: null
+        }
+      })
 
       // let result
       //
