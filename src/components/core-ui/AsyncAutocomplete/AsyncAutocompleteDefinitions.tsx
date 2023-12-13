@@ -16,5 +16,6 @@ export interface AsyncAutocompleteProps {
   helperText?: string
   required?: boolean
   multiple?: boolean
+  style?: any
   applyCustomStyle?: boolean
 }

@@ -92,6 +92,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
       return tableColumns
     }
   }, [])
+
   const tableFilterInputs = useMemo(() => buildTableFilterInputs(tableFilters, setTableFilters), [])
 
   const rowActions = useMemo(() => {
@@ -197,13 +198,6 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
         {deliveryTypeOptions && (
           <Grid sx={isXs ? {} : { position: 'absolute', width: '50%', zIndex: 3 }} container>
             <Grid xs={12} sm={6} md={6} lg={6} item>
-              {/* <Checkbox
-                style={{ paddingTop: '0.7rem' }}
-                label="Comenzile mele"
-                checked={withMyOrders}
-                onChange={event => handleWithMyOrdersFilterChange(event.target.checked)}
-              /> */}
-
               <FormControlLabel
                 name="my_orders"
                 label="Comenzile mele"
@@ -218,27 +212,19 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
             </Grid>
             <Grid xs={12} sm={6} md={6} lg={6} item>
               <FilterDataSelect
+                multiSelect={true}
                 name={'deliveryTypes'}
                 allTypesLabel="Toate tipurile"
                 placeholderButton={'Tip livrare'}
                 defaultSelectedData={selectedDeliveryOption}
+                showSearch={true}
+                showCounter={true}
                 options={deliveryTypeOptions}
-                showSearch={false}
-                showCounter={false}
                 onSelect={handleDeliveryOptionFilterChange}
               />
-              {/* <AsyncAutocomplete
-                variant="standard"
-                name="deliveryTypes"
-                label="Tip livrare"
-                value={selectedDeliveryOption}
-                options={deliveryTypeOptions}
-                onChange={handleDeliveryOptionFilterChange}
-              /> */}
             </Grid>
           </Grid>
         )}
-
         <Table
           hideCheckbox
           order="desc"

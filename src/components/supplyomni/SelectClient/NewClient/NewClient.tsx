@@ -1,4 +1,4 @@
-import { Grid, Paper } from '@mui/material'
+import { Grid, Paper, Box } from '@mui/material'
 import s from './NewClient.modules.scss'
 import { ChangeEvent, useState } from 'react'
 import { IndividualPerson } from './IndividualPerson'
@@ -22,7 +22,7 @@ const NewClient: React.FC<NewClientProps> = ({ selectNewClient }) => {
 
   return (
     <div className={s.mainContainer}>
-      <Paper sx={{ display: 'flex', justifyContent: 'center', padding: '12px' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', padding: '12px' }}>
         <Grid container spacing={3} width={'600px'} display={'flex'} flexDirection={'column'}>
           <Grid item>
             <label className={s.select}>
@@ -50,7 +50,7 @@ const NewClient: React.FC<NewClientProps> = ({ selectNewClient }) => {
 
           <Grid item>{renderClientType[clientType]}</Grid>
         </Grid>
-      </Paper>
+      </Box>
     </div>
   )
 }
