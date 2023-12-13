@@ -13,7 +13,7 @@ import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { columns } from './helpers'
 import { FamilyItem, SubfamilyItem } from '../interfaces'
-import { StaticAutocomplete } from '../../../core-ui/StaticAutocomplete'
+import { StaticAutocomplete } from 'components/core-ui/StaticAutocomplete'
 import { EditProduct } from './EditProduct'
 import { EditActionHome } from 'icons'
 
@@ -219,8 +219,8 @@ const ProductManagementStore = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
-              desktopIcon: <EditActionHome />,
-              onClick: (e, rowId) => selectRow(rowId)
+              onClick: (e, rowId) => selectRow(rowId),
+              desktopIcon: <EditActionHome />
             }
           ]}
           rowActionsWidth="130px"

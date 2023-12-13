@@ -305,6 +305,7 @@ const ProductionManagementStore = () => {
                   desktopIcon: <EditActionHome />
                 }
               ]}
+              rowActionsWidth="130px"
             />
           </>
         )}

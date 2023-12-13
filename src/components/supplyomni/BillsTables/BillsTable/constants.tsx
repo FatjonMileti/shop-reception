@@ -2,8 +2,8 @@ import dayjs from 'dayjs'
 import { TableFilters } from './interaces'
 
 export const ALL_RESOURCE_URI = '/supply-omni/order/paid'
-export const WITH_INVOICE_RESOURCE_URI = '/supply-omni/order/with-invoice'
-export const WITHOUT_INVOICE_RESOURCE_URI = '/supply-omni/order/without-invoice'
+export const WITH_INVOICE_RESOURCE_URI = '/supply-omni/order/paid/with-invoice'
+export const WITHOUT_INVOICE_RESOURCE_URI = '/supply-omni/order/paid/without-invoice'
 
 export const STORE_DELIVERY_TYPE = 'Livrare din magazin'
 
