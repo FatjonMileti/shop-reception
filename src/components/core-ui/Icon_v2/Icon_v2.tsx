@@ -34,6 +34,7 @@ import {
   RegionManagerMenu,
   StoreManagerMenu,
   TraceabilityOperatorMenu,
+  BakeryMenu,
   AdminHome,
   FormatorHome,
   StoreManagerHome,
@@ -113,6 +114,7 @@ const IconComponents = {
   ManagementTasksHome,
   // Bakery
   // Menu
+  BakeryMenu,
   HomeMenu,
   NotificationsMenu,
   UserMenu,
