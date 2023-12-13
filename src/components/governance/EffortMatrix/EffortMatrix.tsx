@@ -14,7 +14,7 @@ import { roles } from './helpers'
 import { EffortMatrix, Role } from '../interfaces'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import EffortMatrixFormModal from './NewEffortMatrix/EffortMatrixFormModal'
-import { DeleteActionHome, EditActionHome } from 'icons'
+import { DeleteActionIcon, EditActionIcon } from 'icons'
 
 const EffortMatrix = () => {
   const [tableItems, setTableItems] = useState<EffortMatrix[]>([])
@@ -121,7 +121,7 @@ const EffortMatrix = () => {
                   labelColor: 'white',
                   typographyVariant: 'medium',
                   backgroundColor: '#16a085',
-                  desktopIcon: <EditActionHome />,
+                  desktopIcon: <EditActionIcon />,
 
                   onClick: (e, rowId) => selectRow(rowId, 'edit')
                 }
@@ -132,7 +132,7 @@ const EffortMatrix = () => {
                   labelColor: 'white',
                   typographyVariant: 'medium',
                   backgroundColor: '#d9534f',
-                  desktopIcon: <DeleteActionHome />,
+                  desktopIcon: <DeleteActionIcon />,
 
                   onClick: (e, rowId) => selectRow(rowId, 'delete')
                 }

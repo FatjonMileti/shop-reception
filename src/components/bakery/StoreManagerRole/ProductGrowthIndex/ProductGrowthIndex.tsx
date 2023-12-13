@@ -8,7 +8,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { columns } from './helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { ProductGrowthIndexItem } from '../interfaces'
-import { EditActionHome } from 'icons'
+import { EditActionIcon } from 'icons'
 import { toTableRowItems } from './serializers'
 import { EditProductGrowthIndex } from './EditProductGrowthIndex'
 
@@ -93,7 +93,7 @@ const ProductGrowthIndex = () => {
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#16a085',
-                desktopIcon: <EditActionHome />,
+                desktopIcon: <EditActionIcon />,
                 onClick: (e, rowId) => selectRow(rowId, 'edit')
               }
             ]}

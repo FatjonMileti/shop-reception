@@ -19,8 +19,9 @@ import { SubfamilyItem, TableItem, TableState } from './interfaces'
 import { FamilyItem } from '../interfaces'
 import { EditProduction } from './EditProduction'
 import { URLS } from '../../constants'
+import { EditActionIcon } from 'icons'
 dayjs.extend(customParseFormat)
-import {EditActionHome} from 'icons'
+
 const ProductionManagementStore = () => {
   const { showNotification } = useNotification()
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -302,7 +303,7 @@ const ProductionManagementStore = () => {
                   typographyVariant: 'medium',
                   backgroundColor: '#16a085',
                   onClick: (e, rowId) => selectRow(rowId),
-                  desktopIcon: <EditActionHome />
+                  desktopIcon: <EditActionIcon />
                 }
               ]}
               rowActionsWidth="130px"
