@@ -98,8 +98,10 @@ const ProductionManagement = () => {
       const filters = [
         { name: 'date', value: formatPayloadDate(planningDate) },
         { name: 'store', value: storeFilterValue?.value },
-        { name: 'subfamilies', value: subfamiliesFilterValue?.map(val => val.value) }
-      ]
+        { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
+      ].filter(
+        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+      )
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/cadentier',
@@ -158,7 +160,19 @@ const ProductionManagement = () => {
   const { isLoading: isLoadingDownloadFile, refetch: refetchDownloadFile } = useQuery(
     ['download'],
     async () => {
-      const response = await makeCoreGetFileRequest(`/bakery/report/download/cadentier`, {
+
+      const url = toTableGETUrl({
+        url: '/bakery/report/download/cadentier',
+        filters: [
+          { name: 'date', value: formatPayloadDate(planningDate) },
+          { name: 'store', value: storeFilterValue?.value },
+          { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
+        ].filter(
+          f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+        )
+      })
+
+      const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
       return formatAndDownloadResponse(response)
