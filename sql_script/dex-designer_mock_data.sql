@@ -20,10 +20,10 @@ DELETE FROM "dex-designer".application_module;
 INSERT INTO
     "dex-designer".application_module (id, name, icon, route_url, route_path_exact)
 VALUES
-    (1, 'Governance', 'AssuredWorkload', '/governance', true),
+    (1, 'Governance', 'Chair', '/governance', true),
     (2, 'Bakery', 'EventSeatOutlined', '/bakery', true),
-    (3, 'Suply OMNI', 'DonutLargeTwoTone', '/supplyOmni', true),
-    (4, 'Volumetry', 'DonutLargeTwoTone', '/volumetry', true),
+    (3, 'Suply OMNI', 'SupplyOmni', '/supplyOmni', true),
+    (4, 'Volumetry', 'Volumetry', '/volumetry', true),
     (5, 'Shop Reception', 'DonutLargeTwoTone', '/shop-reception', true);
 
 
@@ -41,8 +41,8 @@ VALUES
     -- Supply OMNI
     (6, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true, 3),
     -- Volumetry
-    (7, 'Administrare Angajati', 'GroupVolumetry', '/employeeManagement', true, 4),
-    (8, 'Administrare Task-uri', 'TasksVolumetry', '/tasksManagement', true, 4),
+    (7, 'Administrare Angajati', 'EmployeeManagement', '/employeeManagement', true, 4),
+    (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
     -- Shop Reception
     (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5);
 
@@ -300,10 +300,10 @@ VALUES
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     (1, 42),
     (1, 43),
-    (1, 44),
+    (1, 44);
     -- Shop Reception
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
-    (1, 45);
+    -- (1, 45);
 
 
 -- reset sequences
