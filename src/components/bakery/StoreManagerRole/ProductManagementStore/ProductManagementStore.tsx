@@ -15,7 +15,7 @@ import { columns } from './helpers'
 import { FamilyItem, SubfamilyItem } from '../interfaces'
 import { StaticAutocomplete } from 'components/core-ui/StaticAutocomplete'
 import { EditProduct } from './EditProduct'
-import { EditActionHome } from 'icons'
+import { EditActionIcon } from 'icons'
 
 const ProductManagementStore = () => {
   const [tableItems, setTableItems] = useState<ProductManagementItem[]>([])
@@ -220,7 +220,7 @@ const ProductManagementStore = () => {
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
               onClick: (e, rowId) => selectRow(rowId),
-              desktopIcon: <EditActionHome />
+              desktopIcon: <EditActionIcon />
             }
           ]}
           rowActionsWidth="130px"

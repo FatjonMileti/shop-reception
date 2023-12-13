@@ -13,7 +13,7 @@ import { NewTimeOff } from './NewTimeOff'
 import { columns } from './helpers'
 import { TableRowModel, TimeOffModel } from './interfaces'
 import { toTableRowItems } from './serializers'
-import { DeleteActionHome, EditActionHome } from 'icons'
+import { DeleteActionIcon, EditActionIcon } from 'icons'
 import { PublicHolidays } from '../PublicHolidays'
 
 const MyTimeOff = () => {
@@ -54,7 +54,7 @@ const MyTimeOff = () => {
         labelColor: 'white',
         typographyVariant: 'medium',
         backgroundColor: '#0970E6',
-        desktopIcon: <EditActionHome />,
+        desktopIcon: <EditActionIcon />,
         onClick: (e, rowId) => selectRow(rowId, 'edit')
       },
       {
@@ -62,7 +62,7 @@ const MyTimeOff = () => {
         labelColor: 'white',
         typographyVariant: 'medium',
         backgroundColor: '#CC4010',
-        desktopIcon: <DeleteActionHome />,
+        desktopIcon: <DeleteActionIcon />,
         onClick: (e, rowId) => selectRow(rowId, 'delete')
       }
     ]

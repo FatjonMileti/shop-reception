@@ -10,6 +10,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { AddEditRegion } from './AddEditRegion'
 import { columns } from './helpers'
+import { EditActionIcon } from 'icons'
 
 const Regions = () => {
   const [tableItems, setTableItems] = useState<RegionItem[]>([])
@@ -96,6 +97,7 @@ const Regions = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
+              desktopIcon: <EditActionIcon />,
               onClick: (e, rowId) => selectRow(rowId, 'edit')
             },
           ]}
