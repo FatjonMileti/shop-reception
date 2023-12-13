@@ -14,7 +14,7 @@ const NewAddress: React.FC<NewAddressProps> = props => {
   const { onFieldUpdate, formik } = props
 
   return (
-    <Box paddingLeft={4}>
+    <Box padding={4}>
       <FormGroup>
         <FormControlLabel
           control={
@@ -63,7 +63,7 @@ const NewAddress: React.FC<NewAddressProps> = props => {
             />
           </Box>
 
-          <Box paddingY={2}>
+          <Box paddingY={4}>
             <CountyCitySelect
               required
               county={{
