@@ -75,7 +75,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             label="Type of day-off"
             type="select"
             values={dayOfTypes}
-            variant="standard"
+            variant="outlined"
             width="100%"
             value={formik.values.dayOffType}
             onChange={event => {
@@ -92,7 +92,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             value={formik.values.startDate}
             onChange={value => formik.setFieldValue('startDate', value)}
             label="Start date"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.startDate}
             helperText={formik.errors.startDate as string}
@@ -104,7 +104,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             value={formik.values.endDate}
             onChange={value => formik.setFieldValue('endDate', value)}
             label="End date"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.endDate}
             helperText={formik.errors.endDate as string}
@@ -118,7 +118,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
               name="numberOfHours"
               label="Number of hours"
               fullWidth
-              variant="standard"
+              variant="outlined"
               value={formik.values.numberOfHours}
               onChange={event => formik.setFieldValue('numberOfHours', event.currentTarget.value)}
               error={!!formik.errors.numberOfHours}

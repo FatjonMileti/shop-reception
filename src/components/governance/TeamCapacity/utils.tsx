@@ -35,6 +35,7 @@ export const buildTableFilterFields = (
     label: 'Start Date',
     type: 'date',
     value: formatPayloadDate(tableFilter.startDate),
+    required: true,
 
     filter: (
       <DatePicker
@@ -50,6 +51,7 @@ export const buildTableFilterFields = (
     label: 'End Date',
     type: 'date',
     value: formatPayloadDate(tableFilter.endDate),
+    required: true,
 
     filter: (
       <DatePicker

@@ -154,14 +154,17 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
 
       let filters: Filter[] = []
       if (selectedDeliveryOption) {
+        const deliveryOptions = selectedDeliveryOption.map(option => option.value)
+
         filters = [
           ...filters,
           {
             name: 'deliveryType',
-            value: String(selectedDeliveryOption.value)
+            value: deliveryOptions.join('|')
           }
         ]
       }
+
       const response = (await makeCoreGetRequest(
         toTableGETUrl({
           url: urlResource,

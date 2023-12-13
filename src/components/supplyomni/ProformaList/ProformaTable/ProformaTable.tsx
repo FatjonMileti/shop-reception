@@ -123,16 +123,24 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
           checked={withMyProforma}
           onChange={event => handleWithMyProformaFilterChange(event.target.checked)}
         /> */}
-        <FormControlLabel sx={isXs ? {} : {position:'absolute', width:'50%', zIndex:3, color:'#052351'}} name="my_bills1" label="Facturile mele proforme"  control={
-                  <Switch checked={withMyProforma} onChange={event => handleWithMyProformaFilterChange(event.target.checked)} />
-              } />
+        <FormControlLabel
+          sx={isXs ? {} : { position: 'absolute', width: '50%', zIndex: 3, color: '#052351' }}
+          name="my_bills1"
+          label="Proformele mele"
+          control={
+            <Switch
+              checked={withMyProforma}
+              onChange={event => handleWithMyProformaFilterChange(event.target.checked)}
+            />
+          }
+        />
         <Table
           hideCheckbox
           order="desc"
           orderBy="creationDate"
           columns={columnsWithActions}
           showCounter={isXs}
-          counterLabel={isXs ? "Total facturi proforme" : undefined}
+          counterLabel={isXs ? 'Total facturi proforme' : undefined}
           items={tableItems}
           fetchData={fetchData}
           isLoading={isLoading}

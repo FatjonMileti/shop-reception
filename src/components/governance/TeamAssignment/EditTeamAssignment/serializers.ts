@@ -11,7 +11,7 @@ export const toTeamAssignmentPayload = (values, editItem) => {
     id: values.id,
     project: { id: (editItem as TeamAssignmentItem)?.projectId },
     teamMember: { id: (editItem as TeamAssignmentItem)?.teamMemberId },
-    role: values.role,
+    role: editItem.role,
     assignmentStartDate,
     assignmentEndDate
   }
