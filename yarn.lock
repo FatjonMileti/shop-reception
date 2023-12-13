@@ -323,7 +323,7 @@
     "@babel/helper-plugin-utils" "^7.22.5"
     "@babel/plugin-syntax-export-default-from" "^7.23.3"
 
-"@babel/plugin-proposal-export-namespace-from@^7.12.13":
+"@babel/plugin-proposal-export-namespace-from@^7.12.13", "@babel/plugin-proposal-export-namespace-from@^7.18.9":
   version "7.18.9"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-export-namespace-from/-/plugin-proposal-export-namespace-from-7.18.9.tgz#5f7313ab348cdb19d590145f9247540e94761203"
   integrity sha512-k1NtHyOMvlDDFeb9G5PhUXuGj8m/wiwojgQVEhJ/fsVsMCpLyOP4h0uGEjYJKrRI+EVPlb5Jk+Gt9P97lOGwtA==
@@ -1634,10 +1634,11 @@
   integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
 
 "@fullscreendigital/carrefour-dex-fe@^2.0.0":
-  version "2.0.28"
-  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-2.0.28.tgz#62fc0dd497251e9ea93de4001aa5700cc5370fa8"
-  integrity sha512-DtSvB+2Zn3J4rvdyKau7dLjml/h+WCBLY9cmNzqhsnhs2Jkt3Ef1ZOSU5xiHDAISSBL/VitX6T/710uF3zvfIw==
+  version "2.0.30"
+  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-2.0.30.tgz#1888880ccfd3c72de2b6cf9fa87397bc62e11e0e"
+  integrity sha512-AfRCFNk/D/ByLlpegWdyzJFlYZDQ5pnLXlF0GGprpnGcSS6dwR4d1L3hOMnr/rTzqhB/+Mq2pKIfxkDKfisECQ==
   dependencies:
+    "@babel/plugin-proposal-export-namespace-from" "^7.18.9"
     "@emotion/react" "^11.9.3"
     "@emotion/styled" "^11.9.3"
     "@mui/icons-material" "^5.8.4"
