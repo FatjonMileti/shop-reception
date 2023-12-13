@@ -99,7 +99,7 @@ const TeamAssignment: React.FC = props => {
       } else {
         const resultOptions =
           toAsyncSelectOptions(storedGovernanceDomains, 'domain', 'domain') || []
-        setDomainFilterValue(resultOptions[0])
+        setDomainFilterValue({ value: resultOptions[0].value, label: resultOptions[0].label })
         setDomainFilterOptions(resultOptions)
       }
     })()
@@ -201,29 +201,28 @@ const TeamAssignment: React.FC = props => {
       )
     }
   ]
-
   return (
     <div className={s.mainContainer}>
       <Grid container spacing={4}>
-        {!storedGovernanceDomains && (
+        {!storedGovernanceDomains || domainFilterValue === null ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
+        ) : (
+          <Grid xs={12} md={2} item style={{ padding: 0 }}>
+            <FilterDataSelect
+              name="teamMember.domain"
+              defaultSelectedData={domainFilterValue}
+              label="Domain"
+              showCounter={true}
+              showSearch={true}
+              counterLabel="Select category"
+              noDataFoundLabel="No results!"
+              options={domainFilterOptions}
+              onSelect={handleFilterChange}
+            />
+          </Grid>
         )}
-
-        <Grid xs={12} md={2} item style={{ padding: 0 }}>
-          <FilterDataSelect
-            name="teamMember.domain"
-            defaultSelectedData={domainFilterValue}
-            label="Domain"
-            showCounter={true}
-            showSearch={true}
-            counterLabel="Select category"
-            noDataFoundLabel="No results!"
-            options={domainFilterOptions}
-            onSelect={handleFilterChange}
-          />
-        </Grid>
       </Grid>
       {domainFilterValue && (
         <Box>
