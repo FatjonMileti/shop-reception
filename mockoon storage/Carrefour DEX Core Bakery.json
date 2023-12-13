@@ -166,7 +166,7 @@
       "responses": [
         {
           "uuid": "95f07012-6757-43a0-8bac-52bc59c76d70",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Moldova\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Moldova\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Moldova\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Moldova\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Moldova\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Moldova\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Moldova\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted regions list",
@@ -315,7 +315,7 @@
       "responses": [
         {
           "uuid": "9f8d637c-f11c-4eb3-8ddd-d2f6cd1eb25d",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": false\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Zone1\",\n      \"username\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Zone1\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Zone1\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Zone1\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Zone1\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": false\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Zone1\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Zone1\",\n      \"responsible\": \"Ion Munteanu\",\n      \"divisionType\": \"Hyper\",\n      \"stores\": [\"Carrefour Muncii\", \"Carrefour Amzei\", \"Carrefour Titan\"],\n      \"enable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted zones list",
@@ -1868,7 +1868,7 @@
       "responses": [
         {
           "uuid": "ad588743-ab1d-464e-b78a-135dae20b660",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Paine alba\",\n      \"mandatory\": \"obligatoriu\",\n      \"isEnable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"id\": \"f22b456a-2bea-4252-aca5-a8c4352c09eb\",\r\n            \"name\": \"00\",\r\n            \"mandatory\": false,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"b0dd7689-dce3-4700-805e-abc156d4a098\",\r\n            \"name\": \"W7\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"4f277d26-57ae-4025-985d-788f8250c361\",\r\n            \"name\": \"HF\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"a5ef2342-8e08-43cf-8c02-9e3d1a874c7d\",\r\n            \"name\": \"Z1\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"674f4c12-d4d4-485b-bd95-3e2aa763be93\",\r\n            \"name\": \"HP\",\r\n            \"mandatory\": false,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"a344074f-bd60-4f48-8499-26fe48bcfd49\",\r\n            \"name\": \"E0\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"0bc0640e-a08e-4ddc-bba3-022f84cb7984\",\r\n            \"name\": \"W3\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"19ac89c5-11ff-4f28-9741-689b5edc2ebc\",\r\n            \"name\": \"HC\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"a2e20cc6-85d5-41e7-887a-b583b186481e\",\r\n            \"name\": \"SQ\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"220984a2-ff3d-40c1-ad51-436db5fc0cdd\",\r\n            \"name\": \"MK\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"5964a557-8d96-414f-950a-2b1bec635d0f\",\r\n            \"name\": \"QW\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"fd6ebc8f-171d-4b63-b784-757fcd15512d\",\r\n            \"name\": \"Z2\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"cd2c4b9b-a6e4-4f73-91d6-71b48ba8819c\",\r\n            \"name\": \"D1\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"1d4a806c-73d3-40e6-86ff-5614811a9333\",\r\n            \"name\": \"HK\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"80a1f5d0-4cb7-4f0c-bdfd-2df3ca2eee38\",\r\n            \"name\": \"H6\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"05f36565-9ef2-4245-899d-3adff7790dfc\",\r\n            \"name\": \"H4\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"1f101419-0c4d-4893-a633-e1b4395ef7e2\",\r\n            \"name\": \"DA\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"22565ef4-59d4-4aba-8df3-20627fa45429\",\r\n            \"name\": \"HV\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"a82060f0-9cd1-46d6-b4f5-ac46a226c8ff\",\r\n            \"name\": \"S1\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"b9b1ce82-5c40-4dfa-8036-8a7d600052c6\",\r\n            \"name\": \"E1\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"4af42557-4f37-4c78-8edd-131a82d37ac6\",\r\n            \"name\": \"S0\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"755b8cb0-ad17-4402-ba9c-041dae4d2b12\",\r\n            \"name\": \"S4\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"ece76b23-1ed5-485e-a38f-19a6707b38a6\",\r\n            \"name\": \"S2\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"87c91397-a712-4a05-ba68-77dd453a8848\",\r\n            \"name\": \"ET\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        },\r\n        {\r\n            \"id\": \"cd8b0240-37f7-42b7-91c4-3babbba9c831\",\r\n            \"name\": \"AV\",\r\n            \"mandatory\": true,\r\n            \"enable\": true\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 167,\r\n        \"pageCount\": 7\r\n    }\r\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted clusters list",
@@ -4402,6 +4402,487 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "8bb3e000-4b4d-45a5-abc4-6ab65338710d",
+      "type": "http",
+      "documentation": "Get products list",
+      "method": "get",
+      "endpoint": "family",
+      "responses": [
+        {
+          "uuid": "d73f5ae3-5a34-4e42-9cc8-0a7bac144d04",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"id\": \"6c493d40-d8c6-4622-9a20-dec57105e324\",\r\n            \"name\": \"COFETARIE PROASPATA\",\r\n            \"code\": 232,\r\n            \"enable\": true,\r\n            \"moduleName\": \"BRUTARIE COFETARIE\",\r\n            \"moduleId\": \"83447db4-fa94-4794-9484-ad33f048c2f8\",\r\n            \"divisionType\": \"HYPER\"\r\n        },\r\n        {\r\n            \"id\": \"79ad40aa-7bb2-48c2-8562-0d1806454248\",\r\n            \"name\": \"DEPOZIT ACUMULATORI\",\r\n            \"code\": 399,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"f06f53cd-07ce-42e9-a6fd-c3c8cd68103f\",\r\n            \"name\": \"BIO\",\r\n            \"code\": 237,\r\n            \"enable\": true,\r\n            \"moduleName\": \"BRUTARIE COFETARIE\",\r\n            \"moduleId\": \"83447db4-fa94-4794-9484-ad33f048c2f8\",\r\n            \"divisionType\": \"HYPER\"\r\n        },\r\n        {\r\n            \"id\": \"ec49552b-009e-4623-81d8-a24d02866178\",\r\n            \"name\": \"BRANZA PBR\",\r\n            \"code\": 205,\r\n            \"enable\": false,\r\n            \"moduleName\": \"BRUTARIE COFETARIE\",\r\n            \"moduleId\": \"83447db4-fa94-4794-9484-ad33f048c2f8\",\r\n            \"divisionType\": \"HYPER\"\r\n        },\r\n        {\r\n            \"id\": \"7caffc73-ade2-4312-a4d3-bde5c9a7d9d3\",\r\n            \"name\": \"`sleep 11`\",\r\n            \"code\": 0,\r\n            \"enable\": false,\r\n            \"moduleName\": \"BRUTARIE COFETARIE\",\r\n            \"moduleId\": \"83447db4-fa94-4794-9484-ad33f048c2f8\",\r\n            \"divisionType\": \"HYPER\"\r\n        },\r\n        {\r\n            \"id\": \"09cabf9b-04b7-4a3d-b398-8fbc641b480c\",\r\n            \"name\": \"BRUTARIE\",\r\n            \"code\": 230,\r\n            \"enable\": true,\r\n            \"moduleName\": \"BRUTARIE COFETARIE\",\r\n            \"moduleId\": \"83447db4-fa94-4794-9484-ad33f048c2f8\",\r\n            \"divisionType\": \"HYPER\"\r\n        },\r\n        {\r\n            \"id\": \"4db272b8-23d2-4eb3-a646-a800e30bebf3\",\r\n            \"name\": \"LENJERIE PAT UNI\",\r\n            \"code\": 650,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"9f6f0717-7c31-4fff-bcfd-2da9088c5a96\",\r\n            \"name\": \"LENJERIE PAT FANTEZIE / SETURI\",\r\n            \"code\": 651,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"be86af10-c3ce-45e4-ae18-950f892e5105\",\r\n            \"name\": \"ACCESORII TEXTILE DE CASA\",\r\n            \"code\": 652,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"b9bc7448-11fd-4ca3-8aed-0f185d2a641d\",\r\n            \"name\": \"PATURA / CUVERTURA PAT\",\r\n            \"code\": 653,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"204348c8-4910-4fff-9bf7-77626ab744b5\",\r\n            \"name\": \"PILOTE\",\r\n            \"code\": 654,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"49224996-d78b-436f-b16f-46bb012e5453\",\r\n            \"name\": \"LENJERIE BAIE\",\r\n            \"code\": 655,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"2fdd6a61-7df9-47cc-80f4-3045c2c48ba5\",\r\n            \"name\": \"ARTICOLE MASA SI BUCATARIE\",\r\n            \"code\": 656,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"da7b3d5f-4f96-4d6b-9577-a11f781b1f3b\",\r\n            \"name\": \"PERDELE / DÉCOR\",\r\n            \"code\": 657,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"5057d8ca-ca3c-4c1a-8d19-741edec13127\",\r\n            \"name\": \"PERNE\",\r\n            \"code\": 658,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"bbfbe4bd-953b-422e-b92e-61496b30fdba\",\r\n            \"name\": \"MERCERIE\",\r\n            \"code\": 659,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"d8004961-e7ae-4ac3-aa59-08af602062ed\",\r\n            \"name\": \"BEBE\",\r\n            \"code\": 660,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"8de90c96-fddd-4066-915f-ce7417743ed4\",\r\n            \"name\": \"COPII\",\r\n            \"code\": 661,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"091fda03-2104-41e9-8d23-b345795e5951\",\r\n            \"name\": \"FEMEI\",\r\n            \"code\": 662,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"e2391e3c-a961-488d-97ae-c98e1ac81c4e\",\r\n            \"name\": \"BARBATI\",\r\n            \"code\": 663,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"21261147-02b2-4fc5-91b7-367449cccbe7\",\r\n            \"name\": \"UMBRELE\",\r\n            \"code\": 664,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"22a6209a-0793-4685-aa1c-b6dc7940dcba\",\r\n            \"name\": \"OCHELARI\",\r\n            \"code\": 665,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"5ea6c605-8bf4-4b1b-8b19-6c66990f3a6a\",\r\n            \"name\": \"BIJUTERII FANTEZIE\",\r\n            \"code\": 666,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"5cb9a167-d2d3-4f2e-ab64-946258254198\",\r\n            \"name\": \"LENJERIE CORP BEBE\",\r\n            \"code\": 670,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        },\r\n        {\r\n            \"id\": \"2eb58542-60b1-49ed-9a9c-1fe99b995fb0\",\r\n            \"name\": \"SOSETE/DRESURI BEBE\",\r\n            \"code\": 671,\r\n            \"enable\": false,\r\n            \"moduleName\": null,\r\n            \"moduleId\": null,\r\n            \"divisionType\": null\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 341,\r\n        \"pageCount\": 14\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted family products list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "6b42e9d0-a3bb-4b34-9732-b832f5ccb49b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "a05df2c0-8c7d-47ac-848a-c221a7c4fa6c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "b6c015cc-20f2-4e7d-ac04-ee0d9233ff10",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "c35305aa-256d-4a5d-b73a-64b6862a304b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "a371bffc-7c3b-470c-8fb2-5d5f27161cea",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "e31f299c-2f16-4328-9ae5-cd2ef0ffa228",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "user/growth",
+      "responses": [
+        {
+          "uuid": "8d2e1c18-9193-4e9b-841c-ef0394160ef1",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"id\": \"14907595-fe19-4d17-8fe1-d7196cd83ab5\",\r\n            \"type\": \"HYPERMARKET\",\r\n            \"growth\": 1234,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\"\r\n        },\r\n        {\r\n            \"id\": \"72973f76-95f0-4776-bff2-be4db2834185\",\r\n            \"type\": \"SUPERMARKET\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\"\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 2,\r\n        \"pageCount\": 1\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "4ca2f20c-c4d1-4d85-a864-eb61de028ae0",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "9e33e06b-276b-428c-acfe-e654f51731b1",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "d2ec53ff-7a70-4118-a0d7-a7259a068798",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "c999ce8b-1ae8-4cd9-b7d8-e190baeb89f0",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "32ecfa8e-34fc-4f65-b694-0be82dedbabb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "9f1eef85-3cce-4dce-960a-8ffae23e58ea",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "region/trainee/growth",
+      "responses": [
+        {
+          "uuid": "896fe681-5560-46b8-8ca8-b70f8717bf87",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"id\": \"5d1ad82d-b0bd-4aff-8606-01b735e2e074\",\r\n            \"name\": \"Test Alexandra\",\r\n            \"growth\": 1234,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"HYPER\"\r\n        },\r\n        {\r\n            \"id\": \"cf2bd30f-be9b-4999-abbf-f177c75bb6c4\",\r\n            \"name\": \"Test 2\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"b0610a3d-0cee-4688-8454-3575d8a62366\",\r\n            \"name\": \"Cluj-Mures\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-12-06\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"57bf2cfb-43c0-4b8d-8b0a-c0961254c4c5\",\r\n            \"name\": \"Test 3\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"6e04a4ba-e909-4072-aa15-bb0e0dd33006\",\r\n            \"name\": \"Brasov\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"6b1d3418-dc7a-4d81-8fa1-329a6ded2ba0\",\r\n            \"name\": \"Iasi Neamt Botosani\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"65710696-7c93-4cbf-abc2-77935ecc44db\",\r\n            \"name\": \"Galati-Bacau-Vaslui\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"9c01a51b-6881-4415-bb1f-3b48ece68c97\",\r\n            \"name\": \"Bucuresti 2\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"1a2c5358-9e9b-4473-9fd2-86325353872d\",\r\n            \"name\": \"Prahova-Buzau\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"734b1f97-ebd4-4f40-8c37-cca712110b60\",\r\n            \"name\": \"Test Silvia 4\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"454870b2-b41c-4773-bd53-fe19364af20f\",\r\n            \"name\": \"Bucuresti 1\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"7252da03-13e6-4665-b0d9-2e984f5593d4\",\r\n            \"name\": \"Timis Caras\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"b1b7249e-fdc3-4954-b46f-2fc6750d2e14\",\r\n            \"name\": \"Dolj Mehedinti\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"a2678fed-652b-4769-a9eb-5e2075921258\",\r\n            \"name\": \"Timis Arad\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"73e720d6-23b8-4a29-bbed-b98b909afdd2\",\r\n            \"name\": \"Bihor-Maramures\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"7f0f9cd5-ca3b-4864-84fa-21b1560c3658\",\r\n            \"name\": \"Sibiu Valcea Olt\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"cc0741e9-be6d-42c7-a6c7-a1b0f54fc316\",\r\n            \"name\": \"Express Bucuresti-Ploiesti\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"33b8a5c6-57a3-4df9-ae79-59f618d0a210\",\r\n            \"name\": \"Express Sibiu-Brasov\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"c5c1635c-4e43-42ba-80d1-ab58be67f809\",\r\n            \"name\": \"Nord-Est\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"38119151-63b1-48f5-bcb9-97b5fc18a48a\",\r\n            \"name\": \"Express Nord-Vest\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"21159de2-5e8b-4b14-8b31-416ef9a20655\",\r\n            \"name\": \"Express Bucuresti-Constanta\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"2a0e8fc1-af2f-4886-9a63-5154988b0e4c\",\r\n            \"name\": \"Express Bucuresti-Pitesti\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"ff081f73-6ed1-4724-90f2-f85ea1070fb0\",\r\n            \"name\": \"Express Floresti-Baia Mare\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"3a8d272e-b066-45d8-897b-a3310653535e\",\r\n            \"name\": \"Express Cluj\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"d9489330-0929-4a9d-ad8e-11fbacbd75e6\",\r\n            \"name\": \"a\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 29,\r\n        \"pageCount\": 2\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "d2ce5327-cd16-48b0-8b80-962eb35ba904",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "02579c19-4a85-4aad-9709-d224ee37ffde",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "03b36974-4cb2-4990-b38c-f9a3fa080336",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "241016f0-622c-4762-901f-109ee57632b8",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "fee887b9-c9c2-4d21-99a8-210d864963d8",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "8789980a-37cf-46a1-9d33-52de5593b9fb",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "store/trainee/growth",
+      "responses": [
+        {
+          "uuid": "1f4367be-9e12-4ecb-a562-37195dd2ef02",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"id\": \"e98b0127-f100-413a-893c-ea82463a582d\",\r\n            \"name\": \"ROMAN\",\r\n            \"growth\": 1234,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"HYPER\"\r\n        },\r\n        {\r\n            \"id\": \"3c5508c9-434a-4c29-9557-078304e799fe\",\r\n            \"name\": \"HYPER ARAD\",\r\n            \"growth\": 1234,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"HYPER\"\r\n        },\r\n        {\r\n            \"id\": \"ca888846-d3d8-4375-a5dd-99ae1857cd85\",\r\n            \"name\": \"Expr Buc Teiul Doamnei\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"be1a816b-c112-401d-84f7-43d6a19b1e44\",\r\n            \"name\": \"Express Mosnita Veche\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"46790a64-e55d-4711-9244-ab8e92cb79f9\",\r\n            \"name\": \"SUPER TARGUJIU2\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"f8dd8b56-69c1-4fb3-9431-ca5aeab533d0\",\r\n            \"name\": \"SUPER NOJORID\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"9032f58f-2a0f-4f74-b372-0dc2babce6b8\",\r\n            \"name\": \"EXPR FLORESTI STEJARI 66\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"b8870a11-93ad-4f3d-954a-7634e117872e\",\r\n            \"name\": \"318 CONSTANTA TOMIS\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"c84c24ba-4209-47aa-9173-d2800771e9f7\",\r\n            \"name\": \"EXPR BRASOV VLAHUTA\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"e95f43c8-3da2-425b-8bea-f5eeabcbf265\",\r\n            \"name\": \"EXPR IASI COSTACHE NEGRI\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"e72a5c13-354e-40bb-a19f-68e376930a44\",\r\n            \"name\": \"BRASOV9\",\r\n            \"growth\": 1234,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"HYPER\"\r\n        },\r\n        {\r\n            \"id\": \"b471a55e-9693-4dab-8c4b-1160ed401ff2\",\r\n            \"name\": \"EXPR IASI GEMI\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"0927ec98-fe97-44c5-8e63-eb5229e9101b\",\r\n            \"name\": \"EXPR BUC TOWER RESIDENCE\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"f5a0b36f-5034-4787-ad50-6e098d9ced6a\",\r\n            \"name\": \"SUPER MOINESTI\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"86bc9a79-6fae-4129-afac-ce730b83c727\",\r\n            \"name\": \"EXPRESS GALATI PIERSICULUI\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"4449a4b6-ab1a-4c78-b7f5-0a01a5dd23d0\",\r\n            \"name\": \"EXPR FLORESTI AVRAM IANCU\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"077c3d63-b5f8-4032-88b0-37e52fcd6e44\",\r\n            \"name\": \"SUPER CONSTANTA5\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"e39e94ec-1264-4480-8483-e8307257a1fc\",\r\n            \"name\": \"SUPER IASI NICIMAN\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"e4119383-3119-4f72-b88e-5d7f6cd27fc1\",\r\n            \"name\": \"BRASOV2\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"9603b756-642e-4ce4-b7ff-74effaabe408\",\r\n            \"name\": \"EXPR HUSI STEFAN\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"72f2f005-29c5-44a9-a749-1173e298edbc\",\r\n            \"name\": \"SUPER TGFRUMOS\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"c01262b0-b770-4b7a-8655-e8a59a74cb73\",\r\n            \"name\": \"131 FERDINAND\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"6a8bc381-0edd-48da-8216-e0baac3cec52\",\r\n            \"name\": \"308 BRAILA 2\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"b06f0e90-e401-4ecc-9677-a31107820c71\",\r\n            \"name\": \"EXPR SLOBOZIA MATEI BASARAB\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        },\r\n        {\r\n            \"id\": \"59ce25ff-70ea-41af-85b4-bdb7207d81ff\",\r\n            \"name\": \"411 BRASOV COSMOS\",\r\n            \"growth\": -11,\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastChange\": \"2023-11-15\",\r\n            \"divisionType\": \"SUPER\"\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 380,\r\n        \"pageCount\": 16\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4584,6 +5065,22 @@
     {
       "type": "route",
       "uuid": "b2b98f66-8552-4795-9960-8c07727f11ed"
+    },
+    {
+      "type": "route",
+      "uuid": "8bb3e000-4b4d-45a5-abc4-6ab65338710d"
+    },
+    {
+      "type": "route",
+      "uuid": "e31f299c-2f16-4328-9ae5-cd2ef0ffa228"
+    },
+    {
+      "type": "route",
+      "uuid": "9f1eef85-3cce-4dce-960a-8ffae23e58ea"
+    },
+    {
+      "type": "route",
+      "uuid": "8789980a-37cf-46a1-9d33-52de5593b9fb"
     }
   ],
   "proxyMode": false,

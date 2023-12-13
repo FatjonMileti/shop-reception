@@ -12,6 +12,7 @@ import { MultivalueCell } from 'components/core-ui/MultivalueCell'
 import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { EditUser } from './EditUser'
+import { EditActionIcon } from 'icons'
 
 const UsersManagement = () => {
   const [tableItems, setTableItems] = useState<UsersManagementItem[]>([])
@@ -88,6 +89,7 @@ const UsersManagement = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
+              desktopIcon: <EditActionIcon />,
               onClick: (e, rowId) => selectRow(rowId, 'edit')
             }
           ]}

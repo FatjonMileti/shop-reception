@@ -15,7 +15,7 @@ import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { TeamAssignmentItem, TeamAssignmentTableFilter, ValueLabelInterface } from '../interfaces'
 import { EditTeamAssignment } from './EditTeamAssignment'
 import { toTableRowItems } from './serializers'
-import { EditActionHome } from 'icons'
+import { EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const columns = [
@@ -251,7 +251,7 @@ const TeamAssignment: React.FC = props => {
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#0970E6',
-                desktopIcon: <EditActionHome />,
+                desktopIcon: <EditActionIcon />,
                 onClick: (e, rowId) => {
                   selectRow(tableItems.find(item => item.id === rowId))
                 }
