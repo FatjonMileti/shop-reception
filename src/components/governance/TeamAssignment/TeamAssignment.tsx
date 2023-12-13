@@ -99,7 +99,7 @@ const TeamAssignment: React.FC = props => {
       } else {
         const resultOptions =
           toAsyncSelectOptions(storedGovernanceDomains, 'domain', 'domain') || []
-        setDomainFilterValue({ value: resultOptions[0].value, label: resultOptions[0].label })
+        setDomainFilterValue(resultOptions[0])
         setDomainFilterOptions(resultOptions)
       }
     })()
