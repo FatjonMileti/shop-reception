@@ -212,6 +212,7 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
       label: 'Start Date',
       type: 'date',
       value: formatPayloadDate(tableFilter.startDate),
+      required: true,
 
       filter: (
         <DatePicker
@@ -227,6 +228,7 @@ const IndividualCapacity: React.FC<EditTeamAssignmentProps> = props => {
       label: 'End Date',
       type: 'date',
       value: formatPayloadDate(tableFilter.endDate),
+      required: true,
 
       filter: (
         <DatePicker
