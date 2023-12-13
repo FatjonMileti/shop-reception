@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { useSearchParams } from 'react-router-dom'
-import { makeCoreGetRequest } from 'utils/api'
+import {makeCoreGetRequest, makeCorePostRequest} from 'utils/api'
 import { toAsyncSelectOptions } from './serializers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
@@ -25,6 +25,7 @@ const AsyncAutocomplete = props => {
     setValueForFilter,
     setFilterValues,
     extraUrlParams,
+    isPost,
     loadInfoMessage,
     ...rest
   } = props
@@ -62,13 +63,13 @@ const AsyncAutocomplete = props => {
           if (Array.isArray(props.siblingValues[siblingName])) {
             siblingValue = props.siblingValues[siblingName].map(selectedOption => {
               return selectedOption.value
-            })
+            }).join(',')
           } else {
               siblingValue = props.siblingValues[siblingName]?.value
           }
-            if (siblingValue) {
-                qp[siblingName] = siblingValue
-            }
+          if (siblingValue) {
+              qp[siblingName] = siblingValue
+          }
         })
       }
 
@@ -102,12 +103,24 @@ const AsyncAutocomplete = props => {
         )}`
       }
 
-      const result = await makeCoreGetRequest(url, {
-        params: queryParams,
-        paramsSerializer: {
-          indexes: null
-        }
-      })
+      const result = await makeCoreGetRequest(url, queryParams)
+
+      // let result
+      //
+      // if (isPost) {
+      //   result = await makeCorePostRequest(url, queryParams)
+      // } else {
+      //   result = await makeCoreGetRequest(url, {
+      //     params: queryParams,
+      //     paramsSerializer: {
+      //       indexes: null
+      //     }
+      //   })
+      // }
+
+      // /families
+      // /cadentier/families
+
       const { valueKey, labelKey } = action
 
       const resultOptions = toAsyncSelectOptions(result.list || result, valueKey, labelKey) || []
