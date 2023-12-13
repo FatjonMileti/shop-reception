@@ -1,9 +1,9 @@
-import { Grid, Container, Paper } from '@mui/material'
-import { Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Grid, Container } from '@mui/material'
 import s from '../../Common.modules.scss'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
+import { TruckCard } from '../../../shop-reception/TruckCard'
 
 const ReceptionProcessing = () => {
   const navigate = useNavigate()
@@ -20,12 +20,13 @@ const ReceptionProcessing = () => {
         <Grid container spacing={2} className={s.wrapper}>
           <Grid item xs={12}>
             {list.map((item: Truck, index) => (
-              <Paper key={index} elevation={3} style={{ margin: '10px', padding: '20px' }} onClick={() => {
-                navigate(URLS.AUTH_TRUCK_DETAIL.replace(":id", item.id.toString()))
-              }}>
-                <Typography variant='medium' component='h5'>{item.name}</Typography>
-                <Typography variant='medium' component='p'>{item.description}</Typography>
-              </Paper>
+              <TruckCard
+                key={index}
+                onClick={() => {
+                  navigate(URLS.AUTH_SUPPORT_CODE)
+                }}
+                truck={item}
+              />
             ))}
           </Grid>
         </Grid>

@@ -1,7 +1,7 @@
 import { Grid, Paper } from '@mui/material'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../CommonStyles.modules.scss'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
 
 const BalancePackageForm = () => {
   return <Grid container spacing={2}>

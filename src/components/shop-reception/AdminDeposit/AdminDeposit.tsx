@@ -8,9 +8,8 @@ import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import TitleHeader from '../TitleHeader/TitleHeader'
+import { TitleHeader } from '../TitleHeader'
 import { AdminDepositForm } from './AdminDepositForm'
-import { EffortMatrix } from '../../governance/interfaces'
 
 const AdminDeposit = () => {
   const [tableItems, setTableItems] = useState<AdminDeposit[]>([])

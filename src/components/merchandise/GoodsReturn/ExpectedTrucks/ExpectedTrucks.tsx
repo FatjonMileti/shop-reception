@@ -9,7 +9,7 @@ import { formatErrorMessage } from '../../../../utils/formatting'
 import { useNotification } from '../../../../hooks'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
 
 const ExpectedTrucks = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()

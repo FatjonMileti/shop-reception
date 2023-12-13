@@ -4,22 +4,23 @@ import s from '../../Common.modules.scss'
 import { URLS } from '../../constants'
 import useRoles from '../../useRoles'
 import { useNavigate } from 'react-router-dom'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
+import { TruckCard } from '../../../shop-reception/TruckCard'
 
 const ListTrucks = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
   const navigate = useNavigate()
 
   const list: Truck[] = [
-    { id: 1, name: 'Camion 1', description: 'Descriere camion 1'},
-    { id: 2, name: 'Camion 2', description: 'Descriere camion 2'},
-    { id: 3, name: 'Camion 3', description: 'Descriere camion 3'}
+    { id: 1, name: 'Camion 1', description: 'Descriere camion 1' },
+    { id: 2, name: 'Camion 2', description: 'Descriere camion 2' },
+    { id: 3, name: 'Camion 3', description: 'Descriere camion 3' }
   ]
 
   return (
-    <Container component="main" maxWidth="xs" className={s.container}>
+    <Container component='main' maxWidth='xs' className={s.container}>
       <TitleHeader />
-      <Typography component="h4" variant="medium"
+      <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         Selecteazǎ Camion
       </Typography>
@@ -27,12 +28,13 @@ const ListTrucks = () => {
         <Grid container spacing={2} className={s.wrapper}>
           <Grid item xs={12}>
             {list.map((item: Truck, index) => (
-              <Paper key={index} elevation={3} style={{ margin: '10px', padding: '20px' }} onClick={() => {
-                navigate(URLS.AUTH_TRUCK_DETAIL.replace(":id", item.id.toString()))
-              }}>
-                <Typography variant="medium" component="h5">{item.name}</Typography>
-                <Typography variant="medium" component="p">{item.description}</Typography>
-              </Paper>
+              <TruckCard
+                key={index}
+                onClick={() => {
+                  navigate(URLS.AUTH_TRUCK_DETAIL.replace(':id', item.id.toString()))
+                }}
+                truck={item}
+              />
             ))}
           </Grid>
           <Grid item xs={12}>
@@ -40,9 +42,9 @@ const ListTrucks = () => {
           </Grid>
           {(isShopUser || isHubUser) && <Grid item xs={12}>
             <Button
-              type="button"
-              variant="contained"
-              label="ADAUGǍ CAMION"
+              type='button'
+              variant='contained'
+              label='ADAUGǍ CAMION'
               style={{ width: '100%' }}
               onClick={() => {
                 navigate(URLS.AUTH_ADD_TRUCK)

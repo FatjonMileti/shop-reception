@@ -5,7 +5,7 @@ import cs from '../Common.modules.scss'
 import { URLS } from '../constants'
 import useRoles from '../useRoles'
 import { useNavigate } from 'react-router-dom'
-import TitleHeader from '../TitleHeader/TitleHeader'
+import { TitleHeader } from '../TitleHeader'
 
 const GoodsReception = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()

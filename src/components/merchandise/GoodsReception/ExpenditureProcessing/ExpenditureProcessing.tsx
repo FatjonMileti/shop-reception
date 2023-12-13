@@ -1,14 +1,15 @@
 import { Grid, Container, Box, Paper } from '@mui/material'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../Common.modules.scss'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
+import { TruckCard } from '../../../shop-reception/TruckCard'
 
 const list: Truck[] = [
-  { id: 1, name: 'FD', description: '12-12-2023 14:01'},
-  { id: 2, name: '55', description: '12-12-2023 14:01'},
-  { id: 3, name: '75', description: '12-12-2023 14:01'},
+  { id: 1, name: 'FD', description: '12-12-2023 14:01' },
+  { id: 2, name: '55', description: '12-12-2023 14:01' },
+  { id: 3, name: '75', description: '12-12-2023 14:01' }
 ]
 
 const ExpenditureProcessing = () => {
@@ -30,12 +31,12 @@ const ExpenditureProcessing = () => {
           </Grid>}
           <Grid item xs={12}>
             {list.map((item: Truck, index) => (
-              <Paper key={index} elevation={3} style={{ margin: '10px', padding: '20px' }} onClick={() => {
-                navigate(URLS.AUTH_SUPPORT_CODE)
-              }}>
-                <Typography variant="medium" component="h5">{item.name}</Typography>
-                <Typography variant="medium" component="p">{item.description}</Typography>
-              </Paper>
+              <TruckCard
+                key={index}
+                onClick={() => {
+                  navigate(URLS.AUTH_SUPPORT_CODE)
+                }}
+                truck={item} />
             ))}
           </Grid>
         </Grid>

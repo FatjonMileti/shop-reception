@@ -1,7 +1,7 @@
 import { Grid, Container, Paper, Box } from '@mui/material'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../Common.modules.scss'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
 
 const ShippedTrucks = () => {
   return (

@@ -1,5 +1,5 @@
 import { Grid, Paper, Typography } from '@mui/material'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
 import { useParams } from 'react-router-dom'
 import s from '../../CommonStyles.modules.scss'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'

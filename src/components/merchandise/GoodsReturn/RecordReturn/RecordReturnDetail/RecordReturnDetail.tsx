@@ -6,7 +6,7 @@ import { getValidationSchema, initialValues, columns } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
-import TitleHeader from '../../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../../TitleHeader'
 
 const RecordReturnDetail = () => {
   const { showNotification } = useNotification()
