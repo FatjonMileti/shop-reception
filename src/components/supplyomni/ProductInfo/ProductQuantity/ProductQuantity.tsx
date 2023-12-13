@@ -1,7 +1,6 @@
-import { Box } from '@mui/material'
-import s from '../../ShoppingCart/ShoppingCart.modules.scss'
+import { Box, Stack, TextField  } from '@mui/material'
 import { Remove, Add } from '@mui/icons-material'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button  } from '@fullscreendigital/carrefour-dex-fe'
 
 interface ProductQuantityProps {
   quantity: number
@@ -13,30 +12,21 @@ const ProductQuantity: React.FC<ProductQuantityProps> = props => {
   const { quantity, id, purchaseOption, updateCartMutation } = props
 
   return (
-    <Box className={s.cartContainer}>
-      <Button
-        onClick={() => updateCartMutation({ quantity: quantity - 1, id, purchaseOption })}
-        label=""
-      >
-        <Remove />
-      </Button>
-      <Input
-        type={'text'}
-        variant={'outlined'}
-        value={`${quantity}`}
-        width="64px"
-        onBlur={(event: any) =>
-          updateCartMutation({ quantity: event.target.value, id, purchaseOption })
+    <Stack direction='row' spacing={{ xs: 0, sm: 0, md: 0 }}>
+      <Button style={{ minWidth:'30px' }} onClick={() => updateCartMutation({ quantity: quantity - 1, id, purchaseOption })} label=""><Remove /></Button>
+      <Box textAlign={'center'}>
+      <TextField onBlur={(event: any) => updateCartMutation({ quantity: event.target.value, id, purchaseOption })} sx={{ textAlign:'center', width:"64px", lineHeight:'30px', heightLast:'46px', textAlignLast:'center', p:0, '& .MuiOutlinedInput-input': {padding:1} }} id="outlined-basic" variant="outlined" value={`${quantity}`} />
+      <Box style={{ fontSize:'10px' }}>buc.</Box>
+      {/* <TextField style={{ textAlign:'center', width:"64px" }} type={'text'} variant={'outlined'} value={`${quantity}`}  
+             onBlur={(event: any) => updateCartMutation({ quantity: event.target.value, id, purchaseOption })
         }
-      />
-      <Button
-        onClick={() => updateCartMutation({ quantity: quantity + 1, id, purchaseOption })}
-        label=""
-      >
-        <Add />
-      </Button>
-    </Box>
+      /> */}
+      </Box>
+      <Button style={{ minWidth:'30px' }} onClick={() => updateCartMutation({ quantity: quantity + 1, id, purchaseOption })} label=""><Add /></Button>
+    </Stack>
   )
 }
 
 export default ProductQuantity
+
+

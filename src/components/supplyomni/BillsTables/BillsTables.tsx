@@ -7,7 +7,7 @@ import {
 } from './BillsTable/constants'
 import { TableType } from './BillsTable/interaces'
 
-export const BillsTables = () => { 
+export const BillsTables = () => {
   const tabs = [
     {
       content: <BillsTable urlResource={ALL_RESOURCE_URI} tableType={TableType.ALL} />,
@@ -28,7 +28,7 @@ export const BillsTables = () => {
           tableType={TableType.WITHOUT_INVOICE}
         />
       ),
-      label: 'Comenzi fara factura', 
+      label: 'Comenzi fara factura',
       tabIndex: 2
     }
   ]

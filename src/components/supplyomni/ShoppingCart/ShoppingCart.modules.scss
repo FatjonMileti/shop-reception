@@ -4,12 +4,16 @@
   @media (max-width: 624px) {
     margin: 12px;
   }
-
 }
 
 .filtersContainer {
   padding: 16px;
   margin: 16px 0;
+}
+
+.firstFiltersContainer {
+  padding: 16px;
+  margin: 0 0 16px 0 !important;
 }
 
 .cartContainer {

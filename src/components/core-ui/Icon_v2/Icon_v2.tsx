@@ -79,7 +79,8 @@ import {
   ChairMenu,
   VolumetryMenu,
   EmployeeManagementMenu,
-  ManagementTasksMenu
+  ManagementTasksMenu,
+  EyeIcon
 } from 'icons'
 
 const IconComponents = {
@@ -164,7 +165,8 @@ const IconComponents = {
   CadentierStoreSubcategory,
   GrowthIndexStoreSubcategory,
   ProductGrowthIndexSubcategory,
-  CadentierSalesStoreSubcategory
+  CadentierSalesStoreSubcategory,
+  EyeIcon
 }
 
 export type IconType = 'Menu' | 'Home' | 'Subcategory' | 'Icon'
