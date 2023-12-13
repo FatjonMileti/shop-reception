@@ -57,9 +57,11 @@ export const onMessageListener = async () => {
       return new Promise(async resolve => {
         onMessage(await messaging, payload => {
           console.log('payload', payload)
-          resolve(payload)
+          return resolve(payload)
         })
       })
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log('error', error)
+  }
 }
