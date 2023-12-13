@@ -19,6 +19,7 @@ import {
 } from './interfaces'
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
+import { CancelActionIcon, InvoiceActionIcon } from 'icons'
 
 const ProformaTable: React.FC<ProformaTableProps> = props => {
   const { proformaType } = props
@@ -59,21 +60,25 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
     }
 
     const actions = [
-      proformaType === 'active' && {
-        label: 'Anuleaza',
-        labelColor: 'white',
-        typographyVariant: 'medium',
-        backgroundColor: '#CC4010',
-        onClick: (e, rowId) => selectRow(rowId, 'delete')
-      },
+      proformaType === 'active'
+        ? {
+            label: 'Anuleaza',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#CC4010',
+            desktopIcon: <CancelActionIcon />,
+            onClick: (e, rowId) => selectRow(rowId, 'delete')
+          }
+        : null,
       {
         label: 'Detalii',
         labelColor: 'white',
         typographyVariant: 'medium',
         backgroundColor: '#0970E6',
+        desktopIcon: <InvoiceActionIcon />,
         onClick: (e, rowId) => selectRow(rowId, 'print')
       }
-    ]
+    ].filter(Boolean)
 
     return actions
   }, [tableColumns, tableItems])
@@ -108,7 +113,6 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
       })
     }
   }
-
   return (
     <div className={s.mainContainer}>
       <Box>
