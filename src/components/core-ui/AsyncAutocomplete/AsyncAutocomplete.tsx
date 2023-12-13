@@ -25,7 +25,6 @@ const AsyncAutocomplete = props => {
     setValueForFilter,
     setFilterValues,
     extraUrlParams,
-    isPost,
     loadInfoMessage,
     ...rest
   } = props
@@ -109,23 +108,6 @@ const AsyncAutocomplete = props => {
           indexes: null
         }
       })
-
-      // let result
-      //
-      // if (isPost) {
-      //   result = await makeCorePostRequest(url, queryParams)
-      // } else {
-      //   result = await makeCoreGetRequest(url, {
-      //     params: queryParams,
-      //     paramsSerializer: {
-      //       indexes: null
-      //     }
-      //   })
-      // }
-
-      // /families
-      // /cadentier/families
-
       const { valueKey, labelKey } = action
 
       const resultOptions = toAsyncSelectOptions(result.list || result, valueKey, labelKey) || []
