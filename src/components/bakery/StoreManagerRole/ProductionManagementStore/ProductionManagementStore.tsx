@@ -19,8 +19,9 @@ import { SubfamilyItem, TableItem, TableState } from './interfaces'
 import { FamilyItem } from '../interfaces'
 import { EditProduction } from './EditProduction'
 import { URLS } from '../../constants'
+import { EditActionIcon } from 'icons'
 dayjs.extend(customParseFormat)
-import {EditActionIcon} from 'icons'
+
 const ProductionManagementStore = () => {
   const { showNotification } = useNotification()
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)

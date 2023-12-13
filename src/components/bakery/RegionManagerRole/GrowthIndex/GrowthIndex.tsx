@@ -11,7 +11,7 @@ import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { EditGrowthIndex } from './EditGrowthIndex'
 import { useNavigate } from "react-router-dom";
-import {EditActionIcon, ViewActionIcon } from 'icons'
+import { EditActionIcon, ViewActionIcon } from 'icons'
 
 const GrowthIndex = () => {
   const [tableItems, setTableItems] = useState<GrowthIndexItem[]>([])
