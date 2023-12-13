@@ -204,7 +204,7 @@ const TeamAssignment: React.FC = props => {
 
   return (
     <div className={s.mainContainer}>
-      <Grid container spacing={4}>
+      <Grid container>
         {!storedGovernanceDomains && (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
