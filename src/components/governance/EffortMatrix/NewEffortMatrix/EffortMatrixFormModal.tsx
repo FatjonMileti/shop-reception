@@ -79,7 +79,7 @@ const EffortMatrixFormModal: React.FC<NewEffortMatrixProps> = props => {
             />
           ) : (
             <AsyncAutocomplete
-              variant="standard"
+              variant="outlined"
               name="role"
               label="Role"
               options={effortMatrixRoles}
