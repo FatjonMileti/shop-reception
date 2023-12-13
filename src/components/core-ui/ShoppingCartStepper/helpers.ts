@@ -3,26 +3,26 @@ import { Steps } from './interfaces'
 export const shoppingCartSteps: Steps[] = [
   {
     title: 'Validare produse',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    description: ''
   },
   {
     title: 'Selecteaza client',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    description: ''
   },
   {
     title: 'Detalii plata si livrare',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    description: ''
   },
   {
     title: 'Plasare comanda',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    description: ''
   },
   {
     title: 'Verificare bon',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    description: ''
   },
   {
     title: 'Finalizare factura',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    description: ''
   }
 ]

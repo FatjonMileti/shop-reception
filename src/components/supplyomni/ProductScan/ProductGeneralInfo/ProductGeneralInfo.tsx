@@ -6,7 +6,7 @@ import { useNotification } from 'hooks'
 import s from './ProductGeneralInfo.modules.scss'
 import { formatErrorMessage } from 'utils/formatting'
 import { KeyValuePairs } from 'components/core-ui/KeyValuePairs'
-import { CircularProgress, Paper } from '@mui/material'
+import { CircularProgress, Paper, useMediaQuery } from '@mui/material'
 import { useQuery, useMutation } from 'react-query'
 import { ProductNearbyStockInfo } from '../ProductNearbyStockInfo'
 import { NeighboursStock, Product } from '../interfaces'
@@ -27,6 +27,7 @@ interface ProductGeneralInfoProps {
 const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighboursStock }) => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
+  const isXs = useMediaQuery('(max-width:430px)')
 
   const [selectedBuybackOption, setSelectedBuybackOption] = useState(
     product.purchaseOptions[0].value || ''
@@ -111,22 +112,21 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
         </div>
         <Divider component="div" />
 
-        <div className={s.infoContainer} style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
-          <div>
-
-          <Input
-            type="select"
-            name="buyback-input"
-            label="Mod achizitie"
-            values={product.purchaseOptions}
-            value={selectedBuybackOption}
-            variant="outlined"
-            width="320px"
-            onChange={event => setSelectedBuybackOption((event.target as any).value)}
-            disabled={product.purchaseOptions.length == 1}
-          />
+        <div className={s.infoContainer}>
+          <div className={s.buyOption}>
+            <Input
+              type="select"
+              name="buyback-input"
+              label="Mod achizitie"
+              values={product.purchaseOptions}
+              value={selectedBuybackOption}
+              variant="outlined"
+              width={isXs ? '100%' : '320px'}
+              onChange={event => setSelectedBuybackOption((event.target as any).value)}
+              disabled={product.purchaseOptions.length == 1}
+              fullWidth
+            />
           </div>
-
         </div>
 
         <Divider component="div" />

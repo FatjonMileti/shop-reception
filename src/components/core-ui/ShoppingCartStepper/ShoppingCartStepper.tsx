@@ -11,6 +11,8 @@ const ShoppingCartStepper = (props: ShoppingCartStepperProps) => {
   const { activeStep } = props
   const isXS = useMediaQuery('(max-width:624px)')
 
+  const hasActiveStepDescription =
+    shoppingCartSteps[activeStep] && shoppingCartSteps[activeStep].description.length > 0
   // TODO: Move styles external
   return (
     <>
@@ -68,13 +70,16 @@ const ShoppingCartStepper = (props: ShoppingCartStepperProps) => {
               </Typography>
             </Box>
           </Box>
-          <Box>
+          <Box sx={!hasActiveStepDescription && { display: 'flex', alignItems: 'center' }}>
             <Typography style={{ fontWeight: 'bold' }}>
               {shoppingCartSteps[activeStep] ? shoppingCartSteps[activeStep].title : ''}
             </Typography>
-            <Typography style={{ color: '#727272', fontSize: '14px' }}>
-              {shoppingCartSteps[activeStep] ? shoppingCartSteps[activeStep].description : ''}
-            </Typography>
+
+            {hasActiveStepDescription && (
+              <Typography style={{ color: '#727272', fontSize: '14px' }}>
+                {shoppingCartSteps[activeStep].description}
+              </Typography>
+            )}
           </Box>
         </Stack>
       ) : (
