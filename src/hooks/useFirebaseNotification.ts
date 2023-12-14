@@ -12,9 +12,9 @@ const useFirebaseNotification = () => {
     .then((payload: any) => {
       if (payload) {
         showFirebaseNotification({
-          title: payload.notification?.title,
-          message: payload.notification?.body,
-          link: payload.fcmOptions?.link
+          title: payload.data?.title,
+          message: payload.data?.body,
+          link: payload.data?.route
         })
       }
     })
