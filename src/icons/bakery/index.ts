@@ -11,6 +11,7 @@ export { default as FormatorMenu } from './FormatorMenu'
 export { default as StoreManagerMenu } from './StoreManagerMenu'
 export { default as TraceabilityOperatorMenu } from './TraceabilityOperatorMenu'
 export { default as RegionManagerMenu } from './RegionManagerMenu'
+export { default as BakeryMenu } from './BakeryMenu'
 
 /* admin sub */
 export { default as UsersManagementSubcategory } from './submodules/admin/UsersManagementSubcategory'

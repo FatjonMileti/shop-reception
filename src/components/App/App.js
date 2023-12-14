@@ -14,7 +14,7 @@ import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
 import { oidcConfig, getFirebaseToken, setFirebaseToken } from 'utils/authService'
-import { useFirebaseNotification, useNotification } from 'hooks'
+import { useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
 import { formatErrorMessage } from 'utils/formatting'
@@ -27,7 +27,7 @@ import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
 import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
 import { useMerchandiseRoutes } from '../merchandise/routes'
 import { useShopReceptionRoutes } from '../shop-reception/routes'
-import { getFBToken, onMessageListener } from 'utils/firebase'
+import { getFBToken } from 'utils/firebase'
 import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
 
 const queryClient = new QueryClient({
@@ -59,7 +59,6 @@ const App = () => {
   const [fbToken, setFbToken] = useState(null)
 
   const { showNotification } = useNotification()
-  const { showFirebaseNotification } = useFirebaseNotification()
 
   useEffect(() => {
     ;(async () => {
@@ -79,17 +78,11 @@ const App = () => {
     })()
   }, [fbToken])
 
-  onMessageListener()
-    .then(payload => {
-      if (payload) {
-        showFirebaseNotification({
-          title: payload.notification?.title,
-          message: payload.notification?.body,
-          link: payload.fcmOptions?.link
-        })
-      }
-    })
-    .catch(err => console.log('failed: ', err))
+  useEffect(() => {
+    ;(async () => {
+      await getFBToken(setFbToken)
+    })()
+  }, [])
 
   useEffect(() => {
     // console.log("[App] 1st effect called | hasLoadedAppModules: ", hasLoadedAppModules)

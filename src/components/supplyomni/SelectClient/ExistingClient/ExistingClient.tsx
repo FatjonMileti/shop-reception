@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Paper, Typography, Grid } from '@mui/material'
+import { Box, CircularProgress, Typography, Grid } from '@mui/material'
 import s from './ExistingClient.modules.scss'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Table } from 'components/core-ui/Table'
@@ -13,8 +13,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CreateClientModal } from './CreateClientModal'
 import { TableRowItem } from './interfaces'
 import PersonSearchIcon from '@mui/icons-material/PersonSearch'
-import { Edit } from '@mui/icons-material'
-import { Icon_v2 } from 'components/core-ui/Icon_v2'
+import { ViewActionIcon } from 'icons'
 
 interface ExistingClientProps {
   selectNewClient?: boolean
@@ -141,7 +140,7 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#0970E6',
-                desktopIcon: <Icon_v2  iconName="Eye" iconType="Icon" />, 
+                desktopIcon: <ViewActionIcon />,
                 onClick: (e, rowId) =>
                   selectNewClient
                     ? navigate(

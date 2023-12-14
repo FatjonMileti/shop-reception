@@ -19,6 +19,7 @@ import {
 } from './interfaces'
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
+import { CancelActionIcon, InvoiceActionIcon } from 'icons'
 
 const ProformaTable: React.FC<ProformaTableProps> = props => {
   const { proformaType } = props
@@ -59,21 +60,25 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
     }
 
     const actions = [
-      proformaType === 'active' && {
-        label: 'Anuleaza',
-        labelColor: 'white',
-        typographyVariant: 'medium',
-        backgroundColor: '#CC4010',
-        onClick: (e, rowId) => selectRow(rowId, 'delete')
-      },
+      proformaType === 'active'
+        ? {
+            label: 'Anuleaza',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#CC4010',
+            desktopIcon: <CancelActionIcon />,
+            onClick: (e, rowId) => selectRow(rowId, 'delete')
+          }
+        : null,
       {
         label: 'Detalii',
         labelColor: 'white',
         typographyVariant: 'medium',
         backgroundColor: '#0970E6',
+        desktopIcon: <InvoiceActionIcon />,
         onClick: (e, rowId) => selectRow(rowId, 'print')
       }
-    ]
+    ].filter(Boolean)
 
     return actions
   }, [tableColumns, tableItems])
@@ -108,7 +113,6 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
       })
     }
   }
-
   return (
     <div className={s.mainContainer}>
       <Box>
@@ -123,16 +127,24 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
           checked={withMyProforma}
           onChange={event => handleWithMyProformaFilterChange(event.target.checked)}
         /> */}
-        <FormControlLabel sx={isXs ? {} : {position:'absolute', width:'50%', zIndex:3, color:'#052351'}} name="my_bills1" label="Facturile mele proforme"  control={
-                  <Switch checked={withMyProforma} onChange={event => handleWithMyProformaFilterChange(event.target.checked)} />
-              } />
+        <FormControlLabel
+          sx={isXs ? {} : { position: 'absolute', width: '50%', zIndex: 3, color: '#052351' }}
+          name="my_bills1"
+          label="Proformele mele"
+          control={
+            <Switch
+              checked={withMyProforma}
+              onChange={event => handleWithMyProformaFilterChange(event.target.checked)}
+            />
+          }
+        />
         <Table
           hideCheckbox
           order="desc"
           orderBy="creationDate"
           columns={columnsWithActions}
           showCounter={isXs}
-          counterLabel={isXs ? "Total facturi proforme" : undefined}
+          counterLabel={isXs ? 'Total facturi proforme' : undefined}
           items={tableItems}
           fetchData={fetchData}
           isLoading={isLoading}

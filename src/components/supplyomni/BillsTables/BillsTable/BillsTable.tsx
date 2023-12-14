@@ -28,6 +28,7 @@ import {
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { InvoiceActionIcon, ViewActionIcon } from 'icons'
 
 export const BillsTable: React.FC<BillsTableProps> = props => {
   const { urlResource, tableType } = props
@@ -115,6 +116,8 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           labelColor: 'white',
           typographyVariant: 'medium',
           backgroundColor: '#0970E6',
+          desktopIcon:
+            tableType === TableType.WITH_INVOICE ? <ViewActionIcon /> : <InvoiceActionIcon />,
           onClick: (e, rowId) => selectRow(rowId, tableType)
         }
       ]
@@ -154,14 +157,17 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
 
       let filters: Filter[] = []
       if (selectedDeliveryOption) {
+        const deliveryOptions = selectedDeliveryOption.map(option => option.value)
+
         filters = [
           ...filters,
           {
             name: 'deliveryType',
-            value: String(selectedDeliveryOption.value)
+            value: deliveryOptions.join('|')
           }
         ]
       }
+
       const response = (await makeCoreGetRequest(
         toTableGETUrl({
           url: urlResource,

@@ -34,6 +34,7 @@ import {
   RegionManagerMenu,
   StoreManagerMenu,
   TraceabilityOperatorMenu,
+  BakeryMenu,
   AdminHome,
   FormatorHome,
   StoreManagerHome,
@@ -80,7 +81,6 @@ import {
   VolumetryMenu,
   EmployeeManagementMenu,
   ManagementTasksMenu,
-  EyeIcon
 } from 'icons'
 
 const IconComponents = {
@@ -113,6 +113,7 @@ const IconComponents = {
   ManagementTasksHome,
   // Bakery
   // Menu
+  BakeryMenu,
   HomeMenu,
   NotificationsMenu,
   UserMenu,
@@ -166,7 +167,6 @@ const IconComponents = {
   GrowthIndexStoreSubcategory,
   ProductGrowthIndexSubcategory,
   CadentierSalesStoreSubcategory,
-  EyeIcon
 }
 
 export type IconType = 'Menu' | 'Home' | 'Subcategory' | 'Icon'

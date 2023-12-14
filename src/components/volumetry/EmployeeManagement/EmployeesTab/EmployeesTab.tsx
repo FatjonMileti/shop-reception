@@ -118,6 +118,7 @@ const EmployeesTab = () => {
   }
   const handleDepartmentFilterChange = (value: ValueLabelInterface): void => {
     setDepartmentFilterValue(value)
+    setShouldRefreshData(true)
   }
   const handlePositionFilterChange = (value: ValueLabelInterface): void => {
     setPositionFilterValue(value)
@@ -130,7 +131,12 @@ const EmployeesTab = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/employee',
-          filters: [{ name: 'store.name', value: storeFilterValue.value }],
+          filters: [
+            { name: 'store.name', value: storeFilterValue.value },
+            { name: 'name', value: nameFilterValue.value },
+            { name: 'position', value: positionFilterValue.value },
+            { name: 'department.name', value: departmentFilterValue.value },
+          ],
           tableFilters,
           page,
           rowsPerPage,

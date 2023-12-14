@@ -13,12 +13,35 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 const messaging = firebase.messaging()
-// 
-// Initialize redirect URL when notification is pressed on BACKGROUND
-self.addEventListener('notificationclick', event => {
-  event.notification.close() // Close the notification
-// 
-  event.waitUntil(
-    clients.openWindow(event.fcmOptions.link) // Open the URL
-  )
-})
+
+if (messaging) {
+  messaging.onBackgroundMessage(payload => {
+    console.log('[firebase-messaging-sw.js] Received background message ', payload)
+    // Customize notification here
+    const notificationTitle = payload.data.title
+    const notificationOptions = {
+      body: payload.data.body,
+      data: {
+        url: payload.data.route
+      }
+    }
+    
+    return self.registration.showNotification(notificationTitle, notificationOptions)
+  })
+
+  self.addEventListener('notificationclick', event => {
+    event.notification.close()
+    event.waitUntil(
+      clients.matchAll({ type: 'window' }).then(function (clientList) {
+        for (let i = 0; i < clientList.length; i++) {
+          const client = clientList[i]
+          if (client.url === '/' && 'focus' in client) {
+            if (event.notification.data.url) client.href(event.notification.data.url)
+            return client.focus()
+          }
+        }
+        if (clients.openWindow) return clients.openWindow(event.notification.data.url || '/')
+      })
+    )
+  })
+}
