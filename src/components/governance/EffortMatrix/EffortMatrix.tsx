@@ -147,6 +147,7 @@ const EffortMatrix = () => {
             }
           ]}
           rowsPerPageOptions={[20, 50, 100]}
+          rowsPerPage={50}
         />
       </Box>
     </div>
