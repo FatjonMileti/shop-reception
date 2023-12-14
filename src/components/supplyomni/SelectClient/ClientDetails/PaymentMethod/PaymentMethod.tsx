@@ -113,55 +113,65 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
 
       <Grid container>
         <Grid item md={12} sm={12} xs={12}>
-          <Box padding={4} paddingBottom={0}>
-            {isPaymentOptionsLoading ? (
-              <CircularProgress color="primary" disableShrink style={{ marginRight: '16px' }} />
-            ) : (
-              <AsyncAutocomplete
-                variant="outlined"
-                name="payment-methods"
-                label="Metoda de plata"
-                disableClearable
-                style={{ '& .MuiOutlinedInput-root': { padding: 0 } }}
-                value={
-                  paymentOptions?.find(item => item.value === formik.values.paymentMethod)?.label ||
-                  ''
-                }
-                options={paymentOptions || []}
-                onChange={paymentMethod =>
-                  formik.setFieldValue('paymentMethod', paymentMethod.value)
-                }
-                required
-                error={!!formik.errors.paymentMethod}
-                helperText={formik.errors.paymentMethod as string}
-              />
-            )}
-          </Box>
+          <Grid container>
+            <Grid item md={6} xs={12}>
+              <Box padding={4} paddingBottom={0}>
+                {isPaymentOptionsLoading ? (
+                  <CircularProgress color="primary" disableShrink style={{ marginRight: '16px' }} />
+                ) : (
+                  <AsyncAutocomplete
+                    variant="outlined"
+                    name="payment-methods"
+                    label="Metoda de plata"
+                    disableClearable
+                    style={{ '& .MuiOutlinedInput-root': { padding: 0 } }}
+                    value={
+                      paymentOptions?.find(item => item.value === formik.values.paymentMethod)
+                        ?.label || ''
+                    }
+                    options={paymentOptions || []}
+                    onChange={paymentMethod =>
+                      formik.setFieldValue('paymentMethod', paymentMethod.value)
+                    }
+                    required
+                    error={!!formik.errors.paymentMethod}
+                    helperText={formik.errors.paymentMethod as string}
+                  />
+                )}
+              </Box>
+            </Grid>
+          </Grid>
         </Grid>
 
         <Grid item md={12} sm={12} xs={12}>
-          <Box padding={4} paddingBottom={0}>
-            {isDeliveryOptionsLoading ? (
-              <CircularProgress color="primary" disableShrink style={{ marginRight: '16px' }} />
-            ) : (
-              <AsyncAutocomplete
-                variant="outlined"
-                name="delivery-options"
-                label="Alege tipul de livrare"
-                disableClearable
-                value={
-                  deliveryOptions?.find(item => item.value === formik.values.deliveryType)?.label ||
-                  ''
-                }
-                options={deliveryOptions || []}
-                onChange={deliveryType => formik.setFieldValue('deliveryType', deliveryType.value)}
-                style={{ '& .MuiOutlinedInput-root': { padding: 0 } }}
-                required
-                error={!!formik.errors.deliveryType}
-                helperText={formik.errors.deliveryType as string}
-              />
-            )}
-          </Box>
+          <Grid container>
+            <Grid item md={6} xs={12}>
+              <Box padding={4} paddingBottom={0}>
+                {isDeliveryOptionsLoading ? (
+                  <CircularProgress color="primary" disableShrink style={{ marginRight: '16px' }} />
+                ) : (
+                  <AsyncAutocomplete
+                    variant="outlined"
+                    name="delivery-options"
+                    label="Alege tipul de livrare"
+                    disableClearable
+                    value={
+                      deliveryOptions?.find(item => item.value === formik.values.deliveryType)
+                        ?.label || ''
+                    }
+                    options={deliveryOptions || []}
+                    onChange={deliveryType =>
+                      formik.setFieldValue('deliveryType', deliveryType.value)
+                    }
+                    style={{ '& .MuiOutlinedInput-root': { padding: 0 } }}
+                    required
+                    error={!!formik.errors.deliveryType}
+                    helperText={formik.errors.deliveryType as string}
+                  />
+                )}
+              </Box>
+            </Grid>
+          </Grid>
         </Grid>
         <Grid item md={12} sm={12} xs={12}>
           <NewAddress
