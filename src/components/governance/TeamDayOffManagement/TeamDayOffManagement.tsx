@@ -1,5 +1,5 @@
-import { Add, CalendarMonth } from '@mui/icons-material'
-import { Box, CircularProgress, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
+import { Add, CalendarMonthOutlined } from '@mui/icons-material'
+import { Box, CircularProgress, Grid, Typography, useMediaQuery } from '@mui/material'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Input } from 'components/core-ui/Input'
@@ -131,7 +131,7 @@ const TeamDayOffManagement = () => {
     let actions = [
       {
         label: 'Holidays',
-        icon: <CalendarMonth />,
+        icon: <CalendarMonthOutlined />,
         onClick: () => openPublicHolidaysModal()
       }
     ]
