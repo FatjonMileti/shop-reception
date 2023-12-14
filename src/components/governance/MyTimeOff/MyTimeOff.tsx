@@ -1,4 +1,4 @@
-import { Add } from '@mui/icons-material'
+import { Add, CalendarMonth } from '@mui/icons-material'
 import { Box, Typography } from '@mui/material'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Table } from 'components/core-ui/Table'
@@ -14,6 +14,7 @@ import { columns } from './helpers'
 import { TableRowModel, TimeOffModel } from './interfaces'
 import { toTableRowItems } from './serializers'
 import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { PublicHolidays } from '../PublicHolidays'
 
 const MyTimeOff = () => {
   const [tableItems, setTableItems] = useState<TableRowModel[]>([])
@@ -23,6 +24,7 @@ const MyTimeOff = () => {
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const [isPublicHolidaysModalOpen, setIsPublicHolidaysModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<TableRowModel>()
 
@@ -36,6 +38,9 @@ const MyTimeOff = () => {
 
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
+
+  const openPublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(true)
+  const closePublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(false)
 
   const rowActions = useMemo(() => {
     const selectRow = (rowId: number, action: string) => {
@@ -92,6 +97,10 @@ const MyTimeOff = () => {
   return (
     <div className={s.mainContainer}>
       <Box>
+        <PublicHolidays
+          isModalOpen={isPublicHolidaysModalOpen}
+          closeModal={closePublicHolidaysModal}
+        />
         <NewTimeOff
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
@@ -127,6 +136,11 @@ const MyTimeOff = () => {
           rowActions={rowActions}
           rowActionsWidth="130px"
           toolbarActions={[
+            {
+              label: 'Holidays',
+              icon: <CalendarMonth />,
+              onClick: () => openPublicHolidaysModal()
+            },
             {
               label: 'Adauga',
               icon: <Add />,

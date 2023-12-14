@@ -1,4 +1,4 @@
-import { Add } from '@mui/icons-material'
+import { Add, CalendarMonth } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
@@ -20,6 +20,7 @@ import { RootState } from 'configureStore'
 import { useSelector } from 'react-redux'
 import { DeleteActionIcon, EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { PublicHolidays } from '../PublicHolidays'
 
 const TeamDayOffManagement = () => {
   const { dispatchFetchDomains } = useGovernanceDomains()
@@ -35,6 +36,7 @@ const TeamDayOffManagement = () => {
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const [isPublicHolidaysModalOpen, setIsPublicHolidaysModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<TeamDayOffManagementItem>()
 
@@ -90,6 +92,9 @@ const TeamDayOffManagement = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
+  const openPublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(true)
+  const closePublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(false)
+
   const rowActions = useMemo(() => {
     let actions
 
@@ -123,13 +128,21 @@ const TeamDayOffManagement = () => {
   }, [columns, canEdit, canDelete, teamMembers, tableItems])
 
   const toolbarActions = useMemo(() => {
-    let actions
+    let actions = [
+      {
+        label: 'Holidays',
+        icon: <CalendarMonth />,
+        onClick: () => openPublicHolidaysModal()
+      }
+    ]
+
     if (canCreate) {
       actions = [
+        ...actions,
         {
           label: 'Add',
-          icon: <Add></Add>,
-          onClick: e => openNewModal()
+          icon: <Add />,
+          onClick: () => openNewModal()
         }
       ]
     }
@@ -210,6 +223,10 @@ const TeamDayOffManagement = () => {
       </Grid>
       {domainFilterValue && (
         <Box>
+          <PublicHolidays
+            isModalOpen={isPublicHolidaysModalOpen}
+            closeModal={closePublicHolidaysModal}
+          />
           <NewTimeOff
             teamMembers={teamMembers}
             isModalOpen={isNewModalOpen}

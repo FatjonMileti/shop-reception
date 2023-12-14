@@ -20,10 +20,6 @@ export const roles = {
 
 export const dayOfTypes = [
   {
-    value: 'Public Holiday',
-    label: 'Public Holiday'
-  },
-  {
     value: 'Day-Off',
     label: 'Day-Off'
   },
