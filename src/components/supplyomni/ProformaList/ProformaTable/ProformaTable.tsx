@@ -43,8 +43,8 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
   const openCancelModal = (): void => setIsCancelModalOpen(true)
   const closeCancelModal = (): void => setIsCancelModalOpen(false)
 
-  const navigateToPrint = (id: number) => {
-    navigate(`/supplyOmni/proformaView/${id}`)
+  const navigateToPrint = (id: number, clientId: string | number) => {
+    navigate(`/supplyOmni/proformaView/${id}?clientId=${clientId}`)
   }
 
   const handleWithMyProformaFilterChange = (value): void => {
@@ -56,7 +56,7 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
     const selectRow = (rowId: number, action: string) => {
       const item = tableItems.find(item => item.id === rowId)
       setSelectedRow(item)
-      action === 'print' ? navigateToPrint(item.id) : openCancelModal()
+      action === 'print' ? navigateToPrint(item.id, item.clientId) : openCancelModal()
     }
 
     const actions = [

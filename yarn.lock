@@ -1634,9 +1634,9 @@
   integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
 
 "@fullscreendigital/carrefour-dex-fe@^2.0.0":
-  version "2.0.32"
-  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-2.0.32.tgz#c9b4e419af84e18b96ae1f92d314aa6f96e2b0bb"
-  integrity sha512-QYWyB42L+BWn1f0A8N0A+ZA1z6kcjt3/7l4poxhaMXWabhIr0uv6GSk2tMYiO8dHJb+eT5ZdDOu7kbak8Pv2SA==
+  version "2.0.33"
+  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-2.0.33.tgz#bf3dfa846b22a9b3a7bcbf6195cc4b981ee3e36a"
+  integrity sha512-5cjc2VDbP6J6fW9FL7P1AO6GQ2lQrvWfB8Dv9f2ipsPptMfejkVm9WK3PdFP4uownz0ALlGIhvRl0U3uIVPJog==
   dependencies:
     "@babel/plugin-proposal-export-namespace-from" "^7.18.9"
     "@emotion/react" "^11.9.3"
