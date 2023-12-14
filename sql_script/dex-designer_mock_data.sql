@@ -71,7 +71,7 @@ VALUES
     (16, 'Raport cadentier + vanzari', 'SalesCadentier', null, true, 2),
     -- Bakery FORMATOR (TRAINEE)
     (17, 'Management produse', 'ProductManagementFormator', null, true, 3),
-    (18, 'Management productie(cadentier)', 'CadentierFormator', null, true, 3),
+    (18, 'Management productie (cadentier)', 'CadentierFormator', null, true, 3),
     (19, 'Coeficient crestere magazin', 'ProductGrowthIndexFormator', null, true, 3),
     (20, 'Setari coeficient de crestere', 'GrowthIndexFormator', null, true, 3),
     (21, 'Coeficient crestere regiune', 'GrowthRegionFormator', null, true, 3),
@@ -79,13 +79,13 @@ VALUES
     (23, 'Raport cadentier + vanzari', 'SalesCadentierFormator', null, true, 3),
     -- Bakery STORE_MANAGER
     (27, 'Management produse', 'ProductManagement', null, true, 4),
-    (28, 'Management productie(cadentier)', 'CadentierStore', null, true, 4),
+    (28, 'Management productie (cadentier)', 'CadentierStore', null, true, 4),
     (29, 'Coeficient crestere magazin', 'GrowthIndexStore', null, true, 4),
     (30, 'Setari coeficient de crestere', 'ProductGrowthIndex', null, true, 4),
     (31, 'Raport vanzari + cadentier', 'CadentierSalesStore', null, true, 4),
     -- Bakery REGION_MANAGER
     (32, 'Management produse', 'ProductManagementRegion', null, true, 5),
-    (33, 'Management productie(cadentier)', 'GrowthRegion', null, true, 5),
+    (33, 'Management productie (cadentier)', 'GrowthRegion', null, true, 5),
     (34, 'Coeficient crestere regiune', 'GrowthIndex', null, true, 5),
     (35, 'Raport vanzari + cadentier', 'CadentierSalesRegion', null, true, 5),
     (36, 'Raport utilizare aplicatie', 'UsageReportRegion', null, true, 5),
@@ -129,7 +129,7 @@ VALUES
     (18, 'Raport cadentier + vanzari', 'SalesCadentier', '/bakery/admin/sales-cadentier', true, 16, true),
     -- Bakery FORMATOR
     (19, 'Management produse', 'ProductManagementFormator', '/bakery/formator/product-management-formator', true, 17, true),
-    (20, 'Management productie(cadentier)', 'CadentierFormator', '/bakery/formator/cadentier-formator', true, 18, true),
+    (20, 'Management productie (cadentier)', 'CadentierFormator', '/bakery/formator/cadentier-formator', true, 18, true),
     (21, 'Print cadentier', 'CadentierFormator', '/bakery/formator/cadentier-formator-print', true, 18, false),
     (22, 'Detalii produs', 'CadentierFormator', '/bakery/formator/cadentier-details-formator', true, 18, false),
     (23, 'Coeficient crestere magazin', 'ProductGrowthIndexFormator', '/bakery/formator/product-growth-index-formator', true, 19, true),
