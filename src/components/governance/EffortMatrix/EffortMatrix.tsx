@@ -146,6 +146,7 @@ const EffortMatrix = () => {
               onClick: openNewModal
             }
           ]}
+          rowsPerPageOptions={[20, 50, 100]}
         />
       </Box>
     </div>
