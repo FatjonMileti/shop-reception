@@ -1,4 +1,3 @@
-import { Add, CalendarMonthOutlined } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Typography, useMediaQuery } from '@mui/material'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
@@ -18,7 +17,7 @@ import { columns } from './helpers'
 import { toTableRowItems } from './serializers'
 import { RootState } from 'configureStore'
 import { useSelector } from 'react-redux'
-import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { AddActionIcon, CalendarActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { PublicHolidays } from '../PublicHolidays'
 
@@ -131,7 +130,7 @@ const TeamDayOffManagement = () => {
     let actions = [
       {
         label: 'Holidays',
-        icon: <CalendarMonthOutlined />,
+        icon: <CalendarActionIcon />,
         onClick: () => openPublicHolidaysModal()
       }
     ]
@@ -141,7 +140,7 @@ const TeamDayOffManagement = () => {
         ...actions,
         {
           label: 'Add',
-          icon: <Add />,
+          icon: <AddActionIcon />,
           onClick: () => openNewModal()
         }
       ]
