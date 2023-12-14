@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { useSearchParams } from 'react-router-dom'
-import { makeCoreGetRequest } from 'utils/api'
+import {makeCoreGetRequest, makeCorePostRequest} from 'utils/api'
 import { toAsyncSelectOptions } from './serializers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
@@ -62,13 +62,13 @@ const AsyncAutocomplete = props => {
           if (Array.isArray(props.siblingValues[siblingName])) {
             siblingValue = props.siblingValues[siblingName].map(selectedOption => {
               return selectedOption.value
-            })
+            }).join(',')
           } else {
               siblingValue = props.siblingValues[siblingName]?.value
           }
-            if (siblingValue) {
-                qp[siblingName] = siblingValue
-            }
+          if (siblingValue) {
+              qp[siblingName] = siblingValue
+          }
         })
       }
 
