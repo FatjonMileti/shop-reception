@@ -1,4 +1,3 @@
-import { Add, CalendarMonthOutlined } from '@mui/icons-material'
 import { Box, Typography } from '@mui/material'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Table } from 'components/core-ui/Table'
@@ -13,7 +12,7 @@ import { NewTimeOff } from './NewTimeOff'
 import { columns } from './helpers'
 import { TableRowModel, TimeOffModel } from './interfaces'
 import { toTableRowItems } from './serializers'
-import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { AddActionIcon, CalendarActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { PublicHolidays } from '../PublicHolidays'
 
 const MyTimeOff = () => {
@@ -138,12 +137,12 @@ const MyTimeOff = () => {
           toolbarActions={[
             {
               label: 'Holidays',
-              icon: <CalendarMonthOutlined />,
+              icon: <CalendarActionIcon />,
               onClick: () => openPublicHolidaysModal()
             },
             {
               label: 'Adauga',
-              icon: <Add />,
+              icon: <AddActionIcon />,
               onClick: openNewModal
             }
           ]}

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Box, Typography } from '@mui/material'
 import s from './EffortMatrix.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -6,15 +6,13 @@ import { useNotification, usePermissions } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { Table } from 'components/core-ui/Table'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { Add, Delete, Edit } from '@mui/icons-material'
 import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { roles } from './helpers'
-import { EffortMatrix, Role } from '../interfaces'
+import { EffortMatrix } from '../interfaces'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import EffortMatrixFormModal from './NewEffortMatrix/EffortMatrixFormModal'
-import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 
 const EffortMatrix = () => {
   const [tableItems, setTableItems] = useState<EffortMatrix[]>([])
@@ -142,7 +140,7 @@ const EffortMatrix = () => {
           toolbarActions={[
             {
               label: 'Adauga',
-              icon: <Add />,
+              icon: <AddActionIcon />,
               onClick: openNewModal
             }
           ]}
