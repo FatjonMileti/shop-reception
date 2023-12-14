@@ -1,4 +1,4 @@
-import { Add, CalendarMonth } from '@mui/icons-material'
+import { Add, CalendarMonthOutlined } from '@mui/icons-material'
 import { Box, Typography } from '@mui/material'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Table } from 'components/core-ui/Table'
@@ -138,7 +138,7 @@ const MyTimeOff = () => {
           toolbarActions={[
             {
               label: 'Holidays',
-              icon: <CalendarMonth />,
+              icon: <CalendarMonthOutlined />,
               onClick: () => openPublicHolidaysModal()
             },
             {
