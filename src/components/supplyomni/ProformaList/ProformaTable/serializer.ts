@@ -10,5 +10,6 @@ export const toTableRowItems = (items: ProformaModel[]): TableRowModel[] =>
     agentName: item.agentName,
     clientName: item.clientName,
     products: item.products.map(product => product.name).join(', '),
-    paid: item.paid
+    paid: item.paid,
+    clientId: item.clientId
   }))

@@ -1,6 +1,8 @@
 .itemsList {
-  padding: 60px;
+  padding: 24px;
   width: 400px;
+  margin-top: 150px;
+
   &.padding90 {
     padding-top: 90px;
   }
@@ -12,20 +14,20 @@
 .drawerHeader {
   position: fixed;
   width: 400px;
-  padding: 0 8px!important;
+  padding: 0 8px !important;
   z-index: 1203;
 }
 
-@media (max-width: 624px)  {
-
+@media (max-width: 624px) {
   .itemsListContainer {
     width: 100%;
   }
 
   .itemsList {
     width: 100%;
-    padding: calc(12px + 0.16*(100vw - 324px));
+    padding: calc(12px + 0.16 * (100vw - 324px));
     padding-top: 60px;
+    margin-top: 120px;
   }
 
   .drawerHeader {

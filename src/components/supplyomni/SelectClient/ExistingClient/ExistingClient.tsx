@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Paper } from '@mui/material'
+import { Box, CircularProgress, Typography, Grid } from '@mui/material'
 import s from './ExistingClient.modules.scss'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Table } from 'components/core-ui/Table'
@@ -11,7 +11,9 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { columns, toTableRowItems } from './helpers'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CreateClientModal } from './CreateClientModal'
-import { RowItem, TableRowItem } from './interfaces'
+import { TableRowItem } from './interfaces'
+import PersonSearchIcon from '@mui/icons-material/PersonSearch'
+import { ViewActionIcon } from 'icons'
 
 interface ExistingClientProps {
   selectNewClient?: boolean
@@ -82,77 +84,85 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
         />
       )}
 
-      <div className={s.mainContainer}>
-        <Paper className={s.searchPaper}>
-          <Box className={s.searchContainer}>
-            <div>
-              <Input
-                type="text"
-                name="name"
-                label="CUI / Nume / Telefon"
-                variant="outlined"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchField(e.target.value)}
-                value={searchField}
-                fullWidth
-                style={{ justifyContent: 'center' }}
-              />
-            </div>
-            <Button
-              onClick={() => {
-                if (searchField) {
-                  // to avoid initiallly making 2 calls
-                  showTable && setShouldRefreshData(true)
-                  setShowTable(true)
-                }
-              }}
-              label=""
-              variant="contained"
-              style={{ marginTop: '16px', marginLeft: '16px' }}
-            >
-              <SearchOutlinedIcon /> CAUTA CLIENT
-            </Button>
-          </Box>
-        </Paper>
-
-        {searchField && showTable && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '12px'
-            }}
-          >
-            <Table
-              hideCheckbox
-              orderBy="name"
-              order="asc"
-              columns={columns}
-              items={tableItems}
-              fetchData={fetchData}
-              isLoading={isLoading}
-              totalCount={totalCount}
-              shouldRefreshData={shouldRefreshData}
-              setShouldRefreshData={setShouldRefreshData}
-              rowActions={[
-                {
-                  label: 'Selecteaza',
-                  labelColor: 'white',
-                  typographyVariant: 'medium',
-                  backgroundColor: '#33691E',
-                  onClick: (e, rowId) =>
-                    selectNewClient
-                      ? navigate(
-                          `/supplyOmni/receiptClientDetails/${rowId}?orderId=${searchParams.get(
-                            'orderId'
-                          )}`
-                        )
-                      : navigate(`/supplyOmni/shoppingCartClientDetails/${rowId}`)
-                }
-              ]}
+      <Box className={s.searchPaper}>
+        <Box className={s.searchContainer}>
+          <div>
+            <Input
+              type="text"
+              name="name"
+              label="CUI / Nume / Telefon"
+              variant="outlined"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchField(e.target.value)}
+              value={searchField}
+              fullWidth
+              style={{ justifyContent: 'center' }}
             />
           </div>
-        )}
-      </div>
+          <Button
+            onClick={() => {
+              if (searchField) {
+                // to avoid initiallly making 2 calls
+                showTable && setShouldRefreshData(true)
+                setShowTable(true)
+              }
+            }}
+            label=""
+            variant="contained"
+            style={{ marginTop: '16px', marginLeft: '16px' }}
+          >
+            <SearchOutlinedIcon /> CAUTA CLIENT
+          </Button>
+        </Box>
+      </Box>
+
+      {searchField && showTable ? (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: '12px'
+          }}
+        >
+          <Table
+            hideCheckbox
+            orderBy="name"
+            order="asc"
+            columns={columns}
+            items={tableItems}
+            fetchData={fetchData}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            rowActions={[
+              {
+                label: 'Selecteaza',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#0970E6',
+                desktopIcon: <ViewActionIcon />,
+                onClick: (e, rowId) =>
+                  selectNewClient
+                    ? navigate(
+                        `/supplyOmni/receiptClientDetails/${rowId}?orderId=${searchParams.get(
+                          'orderId'
+                        )}`
+                      )
+                    : navigate(`/supplyOmni/shoppingCartClientDetails/${rowId}`)
+              }
+            ]}
+          />
+        </div>
+      ) : (
+        <Grid sx={{ mt: 4 }} container justifyContent="center" spacing={2}>
+          <Box sx={{ textAlign: 'center' }}>
+            <PersonSearchIcon sx={{ fontSize: '100px', color: '#cecece' }} />
+            <br />
+            <Typography sx={{ fontSize: '14px', color: '#cecece' }}>Cauta client</Typography>
+            <br />
+          </Box>
+        </Grid>
+      )}
     </>
   )
 }

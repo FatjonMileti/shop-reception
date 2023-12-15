@@ -20,10 +20,10 @@ DELETE FROM "dex-designer".application_module;
 INSERT INTO
     "dex-designer".application_module (id, name, icon, route_url, route_path_exact)
 VALUES
-    (1, 'Governance', 'AssuredWorkload', '/governance', true),
-    (2, 'Bakery', 'EventSeatOutlined', '/bakery', true),
-    (3, 'Suply OMNI', 'DonutLargeTwoTone', '/supplyOmni', true),
-    (4, 'Volumetry', 'DonutLargeTwoTone', '/volumetry', true),
+    (1, 'Governance', 'Chair', '/governance', true),
+    (2, 'Bakery', 'Bakery', '/bakery', true),
+    (3, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true),
+    (4, 'Volumetry', 'Volumetry', '/volumetry', true),
     (5, 'Shop Reception', 'DonutLargeTwoTone', '/shop-reception', true);
 
 
@@ -32,17 +32,17 @@ INSERT INTO
     "dex-designer".application_submodule (id, name, icon, route_url, route_path_exact, id_application_module)
 VALUES
     -- Governance
-    (1, 'Project Team', 'Groups', '/projectTeam', true, 1),
+    (1, 'Project Team', 'ProjectTeamGovernance', '/projectTeam', true, 1),
     -- Bakery
-    (2, 'Admin', 'AdminHome', '/admin', true, 2),
-    (3, 'Formator', 'FormatorHome', '/formator', true, 2),
-    (4, 'Manager magazin/raion', 'StoreManagerHome', '/storeManager', true, 2),
-    (5, 'Manager regiune', 'RegionManagerHome', '/regionManager', true, 2),
+    (2, 'Admin', 'Admin', '/admin', true, 2),
+    (3, 'Formator', 'Formator', '/formator', true, 2),
+    (4, 'Manager magazin/raion', 'StoreManager', '/storeManager', true, 2),
+    (5, 'Manager regiune', 'RegionManager', '/regionManager', true, 2),
     -- Supply OMNI
-    (6, 'Supply OMNI', 'DonutLargeTwoTone', '/supplyOmni', true, 3),
+    (6, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true, 3),
     -- Volumetry
-    (7, 'Administrare Angajati', 'UsersManagement', '/employeeManagement', true, 4),
-    (8, 'Administrare Task-uri', 'UsersManagement', '/tasksManagement', true, 4),
+    (7, 'Administrare Angajati', 'EmployeeManagement', '/employeeManagement', true, 4),
+    (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
     -- Shop Reception
     (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5);
 
@@ -52,53 +52,53 @@ INSERT INTO
     "dex-designer".activity (id, name, icon, route_url, route_path_exact, id_application_submodule)
 VALUES
     -- Governance
-    (1, 'Team Assignment', 'HowToRegOutlined', null, true, 1),
-    (2, 'Team Capacity', 'PeopleAltOutlined', null, true, 1),
-    (3, 'Project Milestones', 'AccountTreeOutlined', null, true, 1),
-    (4, 'Effort Matrix', 'DonutSmallOutlined', null, true, 1),
-    (5, 'Team Day-Off Management', 'TimerOffOutlined', null , true, 1),
-    (6, 'My Time-Off', 'TimerOffOutlined', null, true, 1),
+    (1, 'Team Assignment', 'TeamAssignment', null, true, 1),
+    (2, 'Team Capacity', 'TeamCapacity', null, true, 1),
+    (3, 'Project Milestones', 'ProjectMilestones', null, true, 1),
+    (4, 'Effort Matrix', 'EffortMatrix', null, true, 1),
+    (5, 'Team Day-Off Management', 'TeamDayOffManagement', null , true, 1),
+    (6, 'My Time-Off', 'TeamDayOffManagement', null, true, 1),
     -- Bakery ADMIN
-    (7, 'Gestiune utilizatori', 'UsersManagementSubcategory', null, true, 2),
-    (8, 'Gestiune zone', 'ZonesSubcategory', null, true, 2),
-    (9, 'Gestiune regiuni', 'RegionsSubcategory', null, true, 2),
-    (10, 'Gestiune magazine', 'StoresSubcategory', null, true, 2),
-    (11, 'Gestiune familii in scopul modulului', 'FamiliesSubcategory', null, true, 2),
-    (12, 'Gestiune clustere', 'ClustersSubcategory', null, true, 2),
-    (13, 'Setari coeficient de crestere', 'GrowthSubcategory', null, true, 2),
-    (14, 'Gestiune produse imagine', 'ProductsSubcategory', null, true, 2),
-    (15, 'Raport de utilizare aplicatie', 'UsageReportSubcategory', null, true, 2),
-    (16, 'Raport cadentier + vanzari', 'SalesCadentierSubcategory', null, true, 2),
+    (7, 'Gestiune utilizatori', 'UsersManagement', null, true, 2),
+    (8, 'Gestiune zone', 'Zones', null, true, 2),
+    (9, 'Gestiune regiuni', 'Regions', null, true, 2),
+    (10, 'Gestiune magazine', 'Stores', null, true, 2),
+    (11, 'Gestiune familii in scopul modulului', 'Families', null, true, 2),
+    (12, 'Gestiune clustere', 'Clusters', null, true, 2),
+    (13, 'Setari coeficient de crestere', 'Growth', null, true, 2),
+    (14, 'Gestiune produse imagine', 'Products', null, true, 2),
+    (15, 'Raport de utilizare aplicatie', 'UsageReport', null, true, 2),
+    (16, 'Raport cadentier + vanzari', 'SalesCadentier', null, true, 2),
     -- Bakery FORMATOR (TRAINEE)
-    (17, 'Management produse', 'ProductManagementFormatorSubcategory', null, true, 3),
-    (18, 'Management productie(cadentier)', 'CadentierFormatorSubcategory', null, true, 3),
-    (19, 'Coeficient crestere magazin', 'ProductGrowthIndexFormatorSubcategory', null, true, 3),
-    (20, 'Setari coeficient de crestere', 'GrowthIndexFormatorSubcategory', null, true, 3),
-    (21, 'Coeficient crestere regiune', 'GrowthRegionFormatorSubcategory', null, true, 3),
-    (22, 'Raport de utilizare aplicatie', 'UsageReportFormatorSubcategory', null, true, 3),
-    (23, 'Raport cadentier + vanzari', 'SalesCadentierFormatorSubcategory', null, true, 3),
+    (17, 'Management produse', 'ProductManagementFormator', null, true, 3),
+    (18, 'Management productie (cadentier)', 'CadentierFormator', null, true, 3),
+    (19, 'Coeficient crestere magazin', 'ProductGrowthIndexFormator', null, true, 3),
+    (20, 'Setari coeficient de crestere', 'GrowthIndexFormator', null, true, 3),
+    (21, 'Coeficient crestere regiune', 'GrowthRegionFormator', null, true, 3),
+    (22, 'Raport de utilizare aplicatie', 'UsageReportFormator', null, true, 3),
+    (23, 'Raport cadentier + vanzari', 'SalesCadentierFormator', null, true, 3),
     -- Bakery STORE_MANAGER
-    (27, 'Management produse', 'ProductManagementSubcategory', null, true, 4),
-    (28, 'Management productie(cadentier)', 'CadentierStoreSubcategory', null, true, 4),
-    (29, 'Coeficient crestere magazin', 'GrowthIndexStoreSubcategory', null, true, 4),
-    (30, 'Setari coeficient de crestere', 'ProductGrowthIndexSubcategory', null, true, 4),
-    (31, 'Raport vanzari + cadentier', 'CadentierSalesStoreSubcategory', null, true, 4),
+    (27, 'Management produse', 'ProductManagement', null, true, 4),
+    (28, 'Management productie (cadentier)', 'CadentierStore', null, true, 4),
+    (29, 'Coeficient crestere magazin', 'GrowthIndexStore', null, true, 4),
+    (30, 'Setari coeficient de crestere', 'ProductGrowthIndex', null, true, 4),
+    (31, 'Raport vanzari + cadentier', 'CadentierSalesStore', null, true, 4),
     -- Bakery REGION_MANAGER
-    (32, 'Management produse', 'ProductManagementRegionSubcategory', null, true, 5),
-    (33, 'Management productie(cadentier)', 'GrowthRegionSubcategory', null, true, 5),
-    (34, 'Coeficient crestere regiune', 'GrowthIndexSubcategory', null, true, 5),
-    (35, 'Raport vanzari + cadentier', 'CadentierSalesRegionSubcategory', null, true, 5),
-    (36, 'Raport utilizare aplicatie', 'UsageReportRegionSubcategory', null, true, 5),
+    (32, 'Management produse', 'ProductManagementRegion', null, true, 5),
+    (33, 'Management productie (cadentier)', 'GrowthRegion', null, true, 5),
+    (34, 'Coeficient crestere regiune', 'GrowthIndex', null, true, 5),
+    (35, 'Raport vanzari + cadentier', 'CadentierSalesRegion', null, true, 5),
+    (36, 'Raport utilizare aplicatie', 'UsageReportRegion', null, true, 5),
     -- Supply OMNI
-    (37, 'Scanare produs', 'QrCodeScannerOutlined', null, true, 6),
-    (38, 'Cos de cumparaturi', 'ShoppingBasketOutlined', null, true, 6),
-    (39, 'Listare proforme', 'ReceiptLongRounded', null, true, 6),
-    (40, 'Vanzarile mele', 'StackedBarChartOutlined', null, true, 6),
-    (41, 'Comenzi achitate', 'AccountBalance', null, true, 6),
+    (37, 'Scanare produs', 'ProductScan', null, true, 6),
+    (38, 'Cos de cumparaturi', 'ShoppingCart', null, true, 6),
+    (39, 'Listare proforme', 'ProformaList', null, true, 6),
+    (40, 'Vanzarile mele', 'MySales', null, true, 6),
+    (41, 'Comenzi achitate', 'PaidOrders', null, true, 6),
     -- Volumetry
-    (42, 'Management Angajati', 'UsersManagement', null, true, 7),
-    (43, 'Management Task-uri', 'UsersManagement', null, true, 8),
-    (44, 'Alocare Task-uri', 'UsersManagement', null, true, 8),
+    (42, 'Management Angajati', 'EmployeeManagement', null, true, 7),
+    (43, 'Management Task-uri', 'ManagementTasks', null, true, 8),
+    (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
     -- Shop Reception
     (45, 'Admin magazin', 'UsersManagement', null, true, 9);
 
@@ -117,45 +117,45 @@ VALUES
     (7, 'My Time-Off', 'TimerOffOutlined', '/governance/projectTeam/myTimeOff', true, 6, true),
     -- Bakery ADMIN
     (8 , 'Gestiune utilizatori', 'UsersManagement', '/bakery/admin/usersManagement', true, 7, true),
-    (9 , 'Gestiune zone', 'ZonesManagement', '/bakery/admin/zones', true, 8, true),
-    (10, 'Gestiune regiuni', 'ZonesManagement', '/bakery/admin/regions', true, 9, true),
-    (11, 'Gestiune magazine', 'StoresManagement', '/bakery/admin/stores', true, 10, true),
-    (12, 'Gestiune familii in scopul modulului', 'UsersManagement', '/bakery/admin/families', true, 11, true),
+    (9 , 'Gestiune zone', 'Zones', '/bakery/admin/zones', true, 8, true),
+    (10, 'Gestiune regiuni', 'Regions', '/bakery/admin/regions', true, 9, true),
+    (11, 'Gestiune magazine', 'Stores', '/bakery/admin/stores', true, 10, true),
+    (12, 'Gestiune familii in scopul modulului', 'Families', '/bakery/admin/families', true, 11, true),
     (13, 'Lista de produse ale familiei', 'PeopleAltOutlined', '/bakery/admin/family-products', true, 11, false),
-    (14, 'Gestiune clustere', 'ClustersManagement', '/bakery/admin/clusters', true, 12, true),
-    (15, 'Setari coeficient de crestere', 'GrowthManagement', '/bakery/admin/growth', true, 13, true),
-    (16, 'Gestiune produse imagine', 'UsersManagement', '/bakery/admin/products', true, 14, true),
-    (17, 'Raport de utilizare aplicatie', 'AppUsageManagement', '/bakery/admin/usage-report', true, 15, true),
-    (18, 'Raport cadentier + vanzari', 'CadentierSales', '/bakery/admin/sales-cadentier', true, 16, true),
+    (14, 'Gestiune clustere', 'Clusters', '/bakery/admin/clusters', true, 12, true),
+    (15, 'Setari coeficient de crestere', 'Growth', '/bakery/admin/growth', true, 13, true),
+    (16, 'Gestiune produse imagine', 'Products', '/bakery/admin/products', true, 14, true),
+    (17, 'Raport de utilizare aplicatie', 'UsageReport', '/bakery/admin/usage-report', true, 15, true),
+    (18, 'Raport cadentier + vanzari', 'SalesCadentier', '/bakery/admin/sales-cadentier', true, 16, true),
     -- Bakery FORMATOR
-    (19, 'Management produse', 'ProductsManagement', '/bakery/formator/product-management-formator', true, 17, true),
-    (20, 'Management productie(cadentier)', 'ProductionManagement', '/bakery/formator/cadentier-formator', true, 18, true),
-    (21, 'Print cadentier', 'ProductionManagement', '/bakery/formator/cadentier-formator-print', true, 18, false),
-    (22, 'Detalii produs', 'ProductionManagement', '/bakery/formator/cadentier-details-formator', true, 18, false),
-    (23, 'Coeficient crestere magazin', 'StoresManagement', '/bakery/formator/product-growth-index-formator', true, 19, true),
-    (24, 'Setari coeficient de crestere', 'GrowthIndex', '/bakery/formator/growth-index-formator', true, 20, true),
-    (25, 'Coeficient crestere regiune', 'ZonesManagement', '/bakery/formator/growth-region-formator', true, 21, true),
+    (19, 'Management produse', 'ProductManagementFormator', '/bakery/formator/product-management-formator', true, 17, true),
+    (20, 'Management productie (cadentier)', 'CadentierFormator', '/bakery/formator/cadentier-formator', true, 18, true),
+    (21, 'Print cadentier', 'CadentierFormator', '/bakery/formator/cadentier-formator-print', true, 18, false),
+    (22, 'Detalii produs', 'CadentierFormator', '/bakery/formator/cadentier-details-formator', true, 18, false),
+    (23, 'Coeficient crestere magazin', 'ProductGrowthIndexFormator', '/bakery/formator/product-growth-index-formator', true, 19, true),
+    (24, 'Setari coeficient de crestere', 'GrowthIndexFormator', '/bakery/formator/growth-index-formator', true, 20, true),
+    (25, 'Coeficient crestere regiune', 'GrowthRegionFormator', '/bakery/formator/growth-region-formator', true, 21, true),
     (26, 'Coeficient crestere magazin', 'ClustersManagement', '/bakery/formator/growthIndexView/:id', true, 21, false),
     (27, 'Setari coeficient de crestere', 'GrowthManagement', '/bakery/formator/growthIndexProdcutsView/:id', true, 21, false),
-    (28, 'Raport de utilizare aplicatie', 'AppUsageManagement', '/bakery/formator/usage-report-formator', true, 22, true),
-    (29, 'Raport cadentier + vanzari', 'CadentierSales', '/bakery/formator/sales-cadentier-formator', true, 23, true),
+    (28, 'Raport de utilizare aplicatie', 'UsageReportFormator', '/bakery/formator/usage-report-formator', true, 22, true),
+    (29, 'Raport cadentier + vanzari', 'SalesCadentierFormator', '/bakery/formator/sales-cadentier-formator', true, 23, true),
     -- Bakery STORE_MANAGER
-    (30, 'Management produse', 'ProductsManagement', '/bakery/storeManager/product-management', true , 27, true),
-    (31, 'Management productie', 'ProductionManagement', '/bakery/storeManager/cadentier-store', true , 28, true),
+    (30, 'Management produse', 'ProductManagement', '/bakery/storeManager/product-management', true , 27, true),
+    (31, 'Management productie', 'CandetierStore', '/bakery/storeManager/cadentier-store', true , 28, true),
     (32, 'Print cadentier', 'ProductionManagement', '/bakery/storeManager/cadentier-store-print', true, 28, false),
     (33, 'Detalii produs', 'ProductionManagement', '/bakery/storeManager/cadentier-details', true , 28, false),
-    (34, 'Coeficient crestere magazin', 'StoresManagement', '/bakery/storeManager/growth-index', true , 29, true),
-    (35, 'Coeficientul de crestere la nivelul produselor din magazin', 'StoresManagement', '/bakery/storeManager/product-growth-index', true , 30, true),
-    (36, 'Raport vanzari + cadentier', 'CadentierSales', '/bakery/storeManager/cadentier-sales-store', true , 31, true),
+    (34, 'Coeficient crestere magazin', 'GrowthIndexStore', '/bakery/storeManager/growth-index', true , 29, true),
+    (35, 'Coeficientul de crestere la nivelul produselor din magazin', 'ProductGrowthIndex', '/bakery/storeManager/product-growth-index', true , 30, true),
+    (36, 'Raport vanzari + cadentier', 'CadentierSalesStore', '/bakery/storeManager/cadentier-sales-store', true , 31, true),
     -- Bakery REGION_MANAGER
-    (37, 'Management produse', 'ProductsManagement', '/bakery/regionManager/product-management-region', true , 32, true),
-    (38, 'Management productie', 'ProductionManagement', '/bakery/regionManager/growth-region', true , 33, true),
+    (37, 'Management produse', 'ProductManagementRegion', '/bakery/regionManager/product-management-region', true , 32, true),
+    (38, 'Management productie', 'GrowthRegion', '/bakery/regionManager/growth-region', true , 33, true),
     (39, 'Print cadentier', 'ProductionManagement', '/bakery/regionManager/cadentier-region-print', true, 33, false),
-    (40, 'Coeficient crestere regiune', 'StoresManagement', '/bakery/regionManager/growth-index', true , 34, true),
+    (40, 'Coeficient crestere regiune', 'GrowthIndex', '/bakery/regionManager/growth-index', true , 34, true),
     (41, 'Coeficientul de crestere la nivelul regiunii', 'StoresManagement', '/bakery/regionManager/growthIndexView/:id', true , 34, false),
     (42, 'Setari coeficient de crestere la nivelul produselor din magazin', 'StoresManagement', '/bakery/regionManager/growthIndexProdcutsView', true , 34, false),
-    (43, 'Raport vanzari + cadentier', 'CadentierSales', '/bakery/regionManager/cadentier-sales-region', true , 35, true),
-    (44, 'Raport utilizare aplicatie', 'CadentierSales', '/bakery/regionManager/usage-report-region', true , 36, true),
+    (43, 'Raport vanzari + cadentier', 'CadentierSalesRegion', '/bakery/regionManager/cadentier-sales-region', true , 35, true),
+    (44, 'Raport utilizare aplicatie', 'UsageReportRegion', '/bakery/regionManager/usage-report-region', true , 36, true),
     -- Supply OMNI
     (45, 'Scanare produs', 'QrCodeScannerOutlined', '/supplyOmni/productScan', true, 37, true),
     (46, 'Cos de cumparaturi', 'ShoppingBasketOutlined', '/supplyOmni/shoppingCart', true, 38, true),
@@ -296,14 +296,14 @@ VALUES
     -- Supply OMNI
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
-    --Volumetry
+    -- Volumetry
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     (1, 42),
     (1, 43),
-    (1, 44),
+    (1, 44);
     -- Shop Reception
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
-    (1, 45);
+    -- (1, 45);
 
 
 -- reset sequences

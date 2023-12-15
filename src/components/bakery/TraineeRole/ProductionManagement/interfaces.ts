@@ -32,6 +32,11 @@ export interface TableItem {
   username: string
 }
 
+export interface FamilyItem {
+  id: string
+  name: string
+}
+
 export interface SubfamilyItem {
   index: number
   subFamily: string

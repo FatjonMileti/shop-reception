@@ -88,7 +88,7 @@ const TaskAllocation = () => {
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
-          <Grid xs={4} md={2} item style={{ padding: 0 }}>
+          <Grid xs={4} md={3} item style={{ padding: 0 }}>
             <AsyncAutocomplete
               variant="outlined"
               name="teamMember.domain"

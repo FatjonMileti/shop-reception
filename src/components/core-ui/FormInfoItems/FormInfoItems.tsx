@@ -5,6 +5,7 @@ import s from './FormInfoItems.modules.scss'
 interface FormItem {
   label: string
   name: string
+  render?: (item: FormItem) => React.JSX.Element
 }
 
 interface FormInfoItemsProps {
@@ -20,7 +21,7 @@ const FormInfoItems: React.FC<FormInfoItemsProps> = props => {
         <Box key={item.name} className={s.item}>
           <Box className={s.label}>{item.label}</Box>
           <Box className={s.value} title={item.name}>
-            {item.name}
+            {item?.render ? item.render(item) : item.name}
           </Box>
         </Box>
       ))}

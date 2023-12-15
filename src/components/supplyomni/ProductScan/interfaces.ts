@@ -21,6 +21,7 @@ export interface Product {
   sold: number
   storeCode: string
   purchaseOptions: PurchaseOptions[]
+  state?: 'ACTIVE' | 'INACTIVE'
 }
 
 export interface ProductStockResponse {

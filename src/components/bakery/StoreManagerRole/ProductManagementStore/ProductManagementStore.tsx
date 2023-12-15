@@ -13,8 +13,9 @@ import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { columns } from './helpers'
 import { FamilyItem, SubfamilyItem } from '../interfaces'
-import { StaticAutocomplete } from '../../../core-ui/StaticAutocomplete'
+import { StaticAutocomplete } from 'components/core-ui/StaticAutocomplete'
 import { EditProduct } from './EditProduct'
+import { EditActionIcon } from 'icons'
 
 const ProductManagementStore = () => {
   const [tableItems, setTableItems] = useState<ProductManagementItem[]>([])
@@ -153,7 +154,7 @@ const ProductManagementStore = () => {
           <Grid xs={12} md={12} container justifyContent={'space-between'}>
             <Grid xs={12} md={3} item>
               <AsyncAutocomplete
-                variant="standard"
+                variant="outlined"
                 name="family"
                 label="Familie"
                 value={familiesFilterValue}
@@ -164,7 +165,7 @@ const ProductManagementStore = () => {
             </Grid>
             <Grid xs={12} md={3} item>
               <AsyncAutocomplete
-                variant="standard"
+                variant="outlined"
                 name="subfamily"
                 label="Subfamilie"
                 value={subfamiliesFilterValue}
@@ -218,7 +219,8 @@ const ProductManagementStore = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
-              onClick: (e, rowId) => selectRow(rowId)
+              onClick: (e, rowId) => selectRow(rowId),
+              desktopIcon: <EditActionIcon />
             }
           ]}
           rowActionsWidth="130px"

@@ -7,6 +7,14 @@ export interface TeamDayOffManagementItem {
   teamMemberName: string
   teamMemberId: string
 }
+export interface PublicHolidayItem {
+  id: number
+  description: string
+  date: string
+}
+export interface PublicHolidaysPerYear {
+  [year: number]: PublicHolidayItem[]
+}
 export interface EffortMatrix {
   id: number
   role: string
