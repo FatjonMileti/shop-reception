@@ -22,7 +22,7 @@ INSERT INTO
 VALUES
     (1, 'Governance', 'Chair', '/governance', true),
     (2, 'Bakery', 'Bakery', '/bakery', true),
-    (3, 'Suply OMNI', 'SupplyOmni', '/supplyOmni', true),
+    (3, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true),
     (4, 'Volumetry', 'Volumetry', '/volumetry', true),
     (5, 'Shop Reception', 'DonutLargeTwoTone', '/shop-reception', true);
 
@@ -296,7 +296,7 @@ VALUES
     -- Supply OMNI
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
-    --Volumetry
+    -- Volumetry
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     (1, 42),
     (1, 43),
