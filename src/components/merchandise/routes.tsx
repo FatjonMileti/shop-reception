@@ -18,10 +18,18 @@ import { ExpectedReturns } from './GoodsReturn/ExpectedReturns'
 import { InProgressReturn } from './GoodsReturn/InProgressReturn'
 import { ContinueReturn } from './GoodsReturn/ContinueReturn'
 import { RecordReturn } from './GoodsReturn/RecordReturn'
-import { SupportCode } from './GoodsReception/RegisterTruck/SupportCode'
+import { SupportCode } from './SupportCode'
 import { RecordReturnDetail } from './GoodsReturn/RecordReturn/RecordReturnDetail'
 import { TruckDetail } from './GoodsReception/ListTrucks/TruckDetail'
 import { AddTruckStep2 } from './GoodsReception/ListTrucks/AddTruckStep2'
+import { ApproveTruck } from './SupportCode/ApproveTruck'
+import { Step1 } from './GoodsReception/RegisterTruck/Step1'
+import { Step2 } from './GoodsReception/RegisterTruck/Step2'
+import { Step3 } from './GoodsReception/RegisterTruck/Step3'
+import { Step4 } from './GoodsReception/RegisterTruck/Step4'
+import { Step5 } from './GoodsReception/RegisterTruck/Step5'
+import { Step6 } from './GoodsReception/RegisterTruck/Step6'
+import { Step7 } from './GoodsReception/RegisterTruck/Step7'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -109,6 +117,38 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_TRUCK_DETAIL}
         element={<TruckDetail />}
+      />
+      <Route
+        path={URLS.AUTH_APPROVE_TRUCK}
+        element={<ApproveTruck />}
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_STEP_1}
+        element={<Step1 />}
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_STEP_2}
+        element={<Step2 />}
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_STEP_3}
+        element={<Step3 />}
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_STEP_4}
+        element={<Step4 />}
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_STEP_5}
+        element={<Step5 />}
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_STEP_6}
+        element={<Step6 />}
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_STEP_7}
+        element={<Step7 />}
       />
     </>
   )

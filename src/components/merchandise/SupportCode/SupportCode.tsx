@@ -1,16 +1,71 @@
 import { Grid, Container, Paper } from '@mui/material'
-import { Button, Divider, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../Common.modules.scss'
-import { useMemo } from 'react'
+import { Button, Checkbox, Divider, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import s from '../Common.modules.scss'
+import { useMemo, useState } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
-import { formatErrorMessage } from '../../../../../utils/formatting'
-import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../../TitleHeader'
+import { formatErrorMessage } from '../../../utils/formatting'
+import { useNotification } from '../../../hooks'
+import { TitleHeader } from '../TitleHeader'
 import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
+
+const checkboxes = [
+  {
+    field: 'confirm',
+    label: 'Conform'
+  },
+  {
+    field: 'confirm',
+    label: 'Infoliere neconforma'
+  },
+  {
+    field: 'confirm',
+    label: 'Lipsa banda sigilare'
+  },
+  {
+    field: 'confirm',
+    label: 'Lipsa banda promo'
+  },
+  {
+    field: 'confirm',
+    label: 'Palet suprainaltat'
+  },
+  {
+    field: 'confirm',
+    label: 'Constructie defectuoasa'
+  },
+  {
+    field: 'confirm',
+    label: 'Palet rasturnat asigurat'
+  },
+  {
+    field: 'confirm',
+    label: 'Palet rasturnat ne-asigurat in camion'
+  },
+  {
+    field: 'confirm',
+    label: 'Palet lovit'
+  }
+]
 
 const SupportCode = () => {
   const { showNotification } = useNotification()
+  const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
+  const [isSearching, setIsSearching] = useState<boolean>(false)
+  const [isFinalizing, setIsFinalizing] = useState<boolean>(false)
+
+  const toggleShowConfirmation = () => {
+    setShowConfirmation(!showConfirmation)
+  }
+
+  const toggleIsSearching = () => {
+    setIsSearching(!isSearching)
+  }
+
+  const toggleIsFinalizing = () => {
+    toggleIsSearching()
+    setIsFinalizing(!isFinalizing)
+  }
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -63,9 +118,7 @@ const SupportCode = () => {
             </Grid>
             <Grid item xs={2}>
               <IconButton
-                onClick={() => {
-
-                }}
+                onClick={toggleIsSearching}
               >
                 <ManageSearchIcon />
               </IconButton>
@@ -83,7 +136,7 @@ const SupportCode = () => {
                 />
               </Grid>
             </Grid>
-            <Grid item xs={12}>
+            {isSearching && <Grid item xs={12}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <Typography variant='medium' component='p'>Numǎr suport: 46565454516</Typography>
@@ -112,10 +165,25 @@ const SupportCode = () => {
                       type='button'
                       variant='contained'
                       label='CONFORMITATE SUPORT'
-                      onClick={() => null}
+                      onClick={toggleShowConfirmation}
                     />
                   </Grid>
                 </Grid>
+                {showConfirmation && <Grid item xs={12}>
+                  <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
+                    <Grid container spacing={2}>
+                      {checkboxes.map(checkbox => {
+                        return <Grid item xs={12}>
+                          <Checkbox
+                            checked={false}
+                            onChange={event => formik.setFieldValue(checkbox.field, (event.target as HTMLInputElement).value)}
+                            label={checkbox.label}
+                          />
+                        </Grid>
+                      })}
+                    </Grid>
+                  </Paper>
+                </Grid>}
                 <Grid item xs={12}>
                   <Grid container alignItems='center' justifyContent='center'>
                     <Button
@@ -132,18 +200,29 @@ const SupportCode = () => {
                       type='button'
                       variant='contained'
                       label='CONFIRM TIP SUPORT'
-                      onClick={() => null}
+                      onClick={toggleIsFinalizing}
                     />
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+            </Grid>}
             <Grid item xs={12}>
               <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
                 <Typography variant='medium' component='p'>Numǎr camion: 56</Typography>
                 <Typography variant='medium' component='p'>Numǎr suporți scanați: 0</Typography>
               </Paper>
             </Grid>
+            {isFinalizing && <Grid item xs={12}>
+              <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='FINALIZEAZĂ'
+                  size='large'
+                  onClick={() => formik.handleSubmit()}
+                />
+              </Grid>
+            </Grid>}
           </Grid>
         </Grid>
       </Grid>
