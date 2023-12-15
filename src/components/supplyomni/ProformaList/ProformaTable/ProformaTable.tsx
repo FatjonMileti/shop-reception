@@ -1,7 +1,5 @@
-import { Checkbox } from '@fullscreendigital/carrefour-dex-fe'
 import { Box, Switch, FormControlLabel, useMediaQuery } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
-import { Filter } from 'components/core-ui/Table/TableDefinitions'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { useNotification } from 'hooks'
 import { useMemo, useState } from 'react'
@@ -86,20 +84,15 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
-      const extraCustomUrlParams: Filter[] = [
-        ...tableFilters,
-        { name: 'myProformas', value: String(withMyProforma) }
-      ]
-
       const response = (await makeCoreGetRequest(
         toTableGETUrl({
           url: `/supply-omni/order${proformaType === 'active' ? '/active' : ''}`,
           tableFilters,
+          filters: [{ name: 'myProformas', value: String(withMyProforma) }],
           page,
           rowsPerPage,
           order,
-          orderBy,
-          extraCustomUrlParams
+          orderBy
         })
       )) as ProformaListResponseModel
       setTableItems(toTableRowItems(response.list))
