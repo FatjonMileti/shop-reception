@@ -64,8 +64,8 @@ export interface TeamAssignmentTableFilter {
 
 export interface TeamCapacityTableFilter {
   teamMemberName: string
-  endDate?: Date
-  startDate?: Date
+  endDate?: Date | string
+  startDate?: Date | string
   baseRole: string
 }
 
@@ -81,4 +81,9 @@ export interface TimeOffValues {
   startDate: any
   endDate: any
   numberOfHours?: number
+}
+
+export interface TeamCapacityQueryFilter {
+  name: string
+  value: string
 }

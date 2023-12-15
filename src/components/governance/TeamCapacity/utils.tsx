@@ -1,8 +1,9 @@
 import { Input } from 'components/core-ui/Input'
-import { TeamCapacityTableFilter } from '../interfaces'
+import { TeamCapacityQueryFilter, TeamCapacityTableFilter } from '../interfaces'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Link } from 'components/core-ui/Link'
 import { formatPayloadDate } from 'utils/helpers'
+import dayjs from 'dayjs'
 
 export const buildTableFilterFields = (
   tableFilter: TeamCapacityTableFilter,
@@ -64,7 +65,13 @@ export const buildTableFilterFields = (
   }
 ]
 
-export const buildColumns = (searchParams: URLSearchParams) => [
+export const buildColumns = ({
+  startDate,
+  endDate
+}: {
+  startDate: Date | string
+  endDate: Date | string
+}) => [
   {
     title: 'Person',
     field: 'teamMemberName',
@@ -72,7 +79,7 @@ export const buildColumns = (searchParams: URLSearchParams) => [
     type: 'string',
     render: (row: any) => (
       <Link
-        href={`/governance/projectTeam/individualCapacity/${row.id}?${searchParams}`}
+        href={`/governance/projectTeam/individualCapacity/${row.id}?startDate=${startDate}&endDate=${endDate}`}
         style={{ textDecoration: 'inherit' }}
       >
         {row.teamMemberName}
@@ -119,3 +126,11 @@ export const buildColumns = (searchParams: URLSearchParams) => [
     collapsible: true
   }
 ]
+
+export const mapToTableFilters = (
+  array: Array<TeamCapacityQueryFilter>
+): TeamCapacityTableFilter => {
+  const tableFilters = {}
+  array.forEach(item => (tableFilters[item.name] = item.value))
+  return tableFilters as TeamCapacityTableFilter
+}
