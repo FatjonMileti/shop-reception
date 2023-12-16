@@ -33,6 +33,7 @@ import { Step7 } from './GoodsReception/RegisterTruck/Step7'
 import { ExpectedReturnDetail } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetail'
 import { ExpectedReturnDetailStep2 } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetailStep2'
 import { ExpectedReturnDetailStep3 } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetailStep3'
+import { DeliveryDetail } from './GoodsReception/Delivery/DeliveryDetail'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -164,6 +165,10 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_3}
         element={<ExpectedReturnDetailStep3 />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_DETAIL}
+        element={<DeliveryDetail />}
       />
     </>
   )

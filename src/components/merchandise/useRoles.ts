@@ -1,6 +1,6 @@
 const useRoles = () => {
-  var isShopUser = false
-  var isHubUser = true
+  var isShopUser = true
+  var isHubUser = false
   var isWareHouseUser = false
   return { isShopUser, isHubUser, isWareHouseUser }
 }

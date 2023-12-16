@@ -77,6 +77,16 @@ const RecordReturnDetail = () => {
                 columns={columns}
                 isLoading={false}
                 rows={[]}
+                disablePagination={true}
+              />
+            </Grid>
+            <Grid container alignItems='center' justifyContent='space-around' style={{ marginTop: '20px' }}>
+              <Button
+                type='button'
+                variant='contained'
+                label='PRINT'
+                size='large'
+                onClick={null}
               />
             </Grid>
             <Grid container alignItems='center' justifyContent='space-around' style={{ marginTop: '20px' }}>
