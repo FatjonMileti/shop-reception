@@ -30,6 +30,9 @@ import { Step4 } from './GoodsReception/RegisterTruck/Step4'
 import { Step5 } from './GoodsReception/RegisterTruck/Step5'
 import { Step6 } from './GoodsReception/RegisterTruck/Step6'
 import { Step7 } from './GoodsReception/RegisterTruck/Step7'
+import { ExpectedReturnDetail } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetail'
+import { ExpectedReturnDetailStep2 } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetailStep2'
+import { ExpectedReturnDetailStep3 } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetailStep3'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -149,6 +152,18 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_TRUCK_STEP_7}
         element={<Step7 />}
+      />
+      <Route
+        path={URLS.AUTH_EXPECTED_RETURN_DETAIL}
+        element={<ExpectedReturnDetail />}
+      />
+      <Route
+        path={URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2}
+        element={<ExpectedReturnDetailStep2 />}
+      />
+      <Route
+        path={URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_3}
+        element={<ExpectedReturnDetailStep3 />}
       />
     </>
   )

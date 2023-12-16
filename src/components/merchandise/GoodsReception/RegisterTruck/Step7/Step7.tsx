@@ -1,8 +1,7 @@
 import { Grid, Container, Paper } from '@mui/material'
-import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
-import { CameraAlt as CameraIcon } from '@mui/icons-material'
 
 const Step7 = () => {
 
