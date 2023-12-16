@@ -34,6 +34,7 @@ import { ExpectedReturnDetail } from './GoodsReturn/ExpectedReturns/ExpectedRetu
 import { ExpectedReturnDetailStep2 } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetailStep2'
 import { ExpectedReturnDetailStep3 } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetailStep3'
 import { ExpectedReturnDetailFinal } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetailFinal'
+import { DeliveryDetail } from './GoodsReception/Delivery/DeliveryDetail'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -169,6 +170,10 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_EXPECTED_RETURN_DETAIL_FINAL}
         element={<ExpectedReturnDetailFinal />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_DETAIL}
+        element={<DeliveryDetail />}
       />
     </>
   )
