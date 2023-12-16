@@ -3,6 +3,8 @@ import { Button, Input, Typography, IconButton } from '@fullscreendigital/carref
 import s from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
 import { CameraAlt as CameraIcon } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
+import { URLS } from '../../../constants'
 
 const rows = [
   { id: 'POL', title: 'POLITA ROLLS FLORI' },
@@ -10,7 +12,7 @@ const rows = [
 ]
 
 const ExpectedReturnDetailStep3 = () => {
-
+  const navigate = useNavigate()
   return (
     <Container component='main' maxWidth='xs' className={s.container}>
       <TitleHeader />
@@ -85,7 +87,7 @@ const ExpectedReturnDetailStep3 = () => {
                     variant='contained'
                     label='SUMAR CAMION'
                     onClick={() => {
-
+                      navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL_FINAL)
                     }}
                   />
                 </Grid>

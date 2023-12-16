@@ -27,6 +27,7 @@ export const URLS = {
   AUTH_EXPECTED_RETURN_DETAIL: '/merchandise/expected-return/detail',
   AUTH_EXPECTED_RETURN_DETAIL_STEP_2: '/merchandise/expected-return/detail-step-2',
   AUTH_EXPECTED_RETURN_DETAIL_STEP_3: '/merchandise/expected-return/detail-step-3',
+  AUTH_EXPECTED_RETURN_DETAIL_FINAL: '/merchandise/expected-return/detail-step-final',
   AUTH_IN_PROGRESS_RETURN: '/merchandise/in-progress-return',
   AUTH_RECORD_RETURN: '/merchandise/record-return',
   AUTH_RECORD_RETURN_DETAIL: '/merchandise/record-return/detail',
