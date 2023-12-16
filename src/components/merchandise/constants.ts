@@ -32,5 +32,8 @@ export const URLS = {
   AUTH_IN_PROGRESS_RETURN: '/merchandise/in-progress-return',
   AUTH_RECORD_RETURN: '/merchandise/record-return',
   AUTH_RECORD_RETURN_DETAIL: '/merchandise/record-return/detail',
-  AUTH_CONTINUE_RETURN: '/merchandise/continue-return'
+  AUTH_CONTINUE_RETURN: '/merchandise/continue-return',
+  AUTH_CONTINUE_RETURN_DETAIL: '/merchandise/continue-return/detail',
+  AUTH_CONTINUE_RETURN_DETAIL_2: '/merchandise/continue-return/detail/2',
+  AUTH_CONTINUE_RETURN_DETAIL_FINAL: '/merchandise/continue-return/detail/final',
 }

@@ -35,6 +35,9 @@ import { ExpectedReturnDetailStep2 } from './GoodsReturn/ExpectedReturns/Expecte
 import { ExpectedReturnDetailStep3 } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetailStep3'
 import { ExpectedReturnDetailFinal } from './GoodsReturn/ExpectedReturns/ExpectedReturnDetailFinal'
 import { DeliveryDetail } from './GoodsReception/Delivery/DeliveryDetail'
+import { ContinueReturnDetail } from './GoodsReturn/ContinueReturn/ContinueReturnDetail'
+import { ContinueReturnDetail2 } from './GoodsReturn/ContinueReturn/ContinueReturnDetail2'
+import { ContinueReturnDetailFinal } from './GoodsReturn/ContinueReturn/ContinueReturnDetailFinal'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -174,6 +177,18 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_DELIVERY_DETAIL}
         element={<DeliveryDetail />}
+      />
+      <Route
+        path={URLS.AUTH_CONTINUE_RETURN_DETAIL}
+        element={<ContinueReturnDetail />}
+      />
+      <Route
+        path={URLS.AUTH_CONTINUE_RETURN_DETAIL_2}
+        element={<ContinueReturnDetail2 />}
+      />
+      <Route
+        path={URLS.AUTH_CONTINUE_RETURN_DETAIL_FINAL}
+        element={<ContinueReturnDetailFinal />}
       />
     </>
   )

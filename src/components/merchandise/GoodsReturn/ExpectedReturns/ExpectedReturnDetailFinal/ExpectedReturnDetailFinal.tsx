@@ -1,8 +1,7 @@
 import { Grid, Container, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
-import { Button, Input, Typography, IconButton } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
-import { CameraAlt as CameraIcon } from '@mui/icons-material'
 
 const rows = [
   { id: 'POL', title: 'POLITA ROLLS FLORI', expect: 1, downloads: 1 },
