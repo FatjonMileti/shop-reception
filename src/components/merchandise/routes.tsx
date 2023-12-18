@@ -38,6 +38,18 @@ import { DeliveryDetail } from './GoodsReception/Delivery/DeliveryDetail'
 import { ContinueReturnDetail } from './GoodsReturn/ContinueReturn/ContinueReturnDetail'
 import { ContinueReturnDetail2 } from './GoodsReturn/ContinueReturn/ContinueReturnDetail2'
 import { ContinueReturnDetailFinal } from './GoodsReturn/ContinueReturn/ContinueReturnDetailFinal'
+import { DeliveryCompleteScan } from './GoodsReception/Delivery/DeliveryDetail/DeliveryCompleteScan'
+import { DeliverySensitiveProducts } from './GoodsReception/Delivery/DeliveryDetail/DeliverySensitiveProducts'
+import { DeliveryRandomSupport } from './GoodsReception/Delivery/DeliveryDetail/DeliveryRandomSupport'
+import {
+  DeliveryCompleteScanStep1
+} from './GoodsReception/Delivery/DeliveryDetail/DeliveryCompleteScan/DeliveryCompleteScanStep1'
+import {
+    DeliveryCompleteScanStep2
+} from './GoodsReception/Delivery/DeliveryDetail/DeliveryCompleteScan/DeliveryCompleteScanStep2'
+import {
+    DeliveryCompleteScanStep3
+} from './GoodsReception/Delivery/DeliveryDetail/DeliveryCompleteScan/DeliveryCompleteScanStep3'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -177,6 +189,34 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_DELIVERY_DETAIL}
         element={<DeliveryDetail />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_COMPLETE_SCAN}
+        element={<DeliveryCompleteScan />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_COMPLETE_SCAN_STEP_1}
+        element={<DeliveryCompleteScanStep1 />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_COMPLETE_SCAN_STEP_2}
+        element={<DeliveryCompleteScanStep2 />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_COMPLETE_SCAN_STEP_3}
+        element={<DeliveryCompleteScanStep3 />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS}
+        element={<DeliverySensitiveProducts />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_RANDOM_SUPPORT}
+        element={<DeliveryRandomSupport />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_RANDOM_PRODUCT}
+        element={<DeliveryRandomSupport />}
       />
       <Route
         path={URLS.AUTH_CONTINUE_RETURN_DETAIL}

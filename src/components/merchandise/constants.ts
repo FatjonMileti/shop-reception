@@ -16,6 +16,13 @@ export const URLS = {
   AUTH_RECEPTION_PROCESSING: '/merchandise/reception-processing',
   AUTH_DELIVERY: '/merchandise/delivery',
   AUTH_DELIVERY_DETAIL: '/merchandise/delivery/detail',
+  AUTH_DELIVERY_COMPLETE_SCAN: '/merchandise/delivery/full-scan',
+  AUTH_DELIVERY_COMPLETE_SCAN_STEP_1: '/merchandise/delivery/full-scan/step-1',
+  AUTH_DELIVERY_COMPLETE_SCAN_STEP_2: '/merchandise/delivery/full-scan/step-2',
+  AUTH_DELIVERY_COMPLETE_SCAN_STEP_3: '/merchandise/delivery/full-scan/step-3',
+  AUTH_DELIVERY_SENSITIVE_PRODUCTS: '/merchandise/delivery/sensitive-products',
+  AUTH_DELIVERY_RANDOM_SUPPORT: '/merchandise/delivery/random-support',
+  AUTH_DELIVERY_RANDOM_PRODUCT: '/merchandise/delivery/random-product',
   AUTH_CONFIRM_RETURN_TRUCKS: '/merchandise/confirm-return-trucks',
   AUTH_ORDER_RETURN_TRUCK: '/merchandise/order-return-truck',
   AUTH_PACKAGING_INVENTORY_UPDATE: '/merchandise/packaging-inventory-update',
@@ -35,5 +42,5 @@ export const URLS = {
   AUTH_CONTINUE_RETURN: '/merchandise/continue-return',
   AUTH_CONTINUE_RETURN_DETAIL: '/merchandise/continue-return/detail',
   AUTH_CONTINUE_RETURN_DETAIL_2: '/merchandise/continue-return/detail/2',
-  AUTH_CONTINUE_RETURN_DETAIL_FINAL: '/merchandise/continue-return/detail/final',
+  AUTH_CONTINUE_RETURN_DETAIL_FINAL: '/merchandise/continue-return/detail/final'
 }

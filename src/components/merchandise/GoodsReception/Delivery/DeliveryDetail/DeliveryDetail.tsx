@@ -3,6 +3,7 @@ import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
 import { useNavigate } from 'react-router-dom'
+import { URLS } from '../../../constants'
 
 const list: Truck[] = [
   { id: 1, name: 'Camion 1', description: 'Descriere camion 1' }
@@ -32,7 +33,7 @@ const Delivery = () => {
                 variant='contained'
                 label='SCANARE INTEGRALǍ'
                 size='large'
-                onClick={null}
+                onClick={() => navigate(URLS.AUTH_DELIVERY_COMPLETE_SCAN)}
               />
             </Grid>
           </Grid>
@@ -43,7 +44,7 @@ const Delivery = () => {
                 variant='contained'
                 label='PRODUSE SENSIBILE'
                 size='large'
-                onClick={null}
+                onClick={() => navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS)}
                 />
             </Grid>
           </Grid>
@@ -54,7 +55,7 @@ const Delivery = () => {
                 variant='contained'
                 label='SUPORT ALEATOR'
                 size='large'
-                onClick={null}
+                onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_SUPPORT)}
                 />
             </Grid>
           </Grid>
@@ -65,7 +66,7 @@ const Delivery = () => {
                 variant='contained'
                 label='PRODUSE ALEATOR'
                 size='large'
-                onClick={null}
+                onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT)}
                 />
             </Grid>
           </Grid>
