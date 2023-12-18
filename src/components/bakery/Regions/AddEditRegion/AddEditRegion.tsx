@@ -35,7 +35,7 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
         {
           onError: error => {
             showNotification({
-              message: `Error while fetching zone data. ${formatErrorMessage(
+              message: `Error while fetching region data. ${formatErrorMessage(
                 error
               )}`,
               type: 'error'

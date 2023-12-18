@@ -36,7 +36,7 @@ const ProductionManagement = () => {
     tableFilters: null
   })
 
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
+  const { data: filterOptions } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/trainee/all')
@@ -48,7 +48,7 @@ const ProductionManagement = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -79,14 +79,14 @@ const ProductionManagement = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
     }
   )
 
-  const { data: subfamiliesOptions, isLoading: isSubfamilierOptionsLoading } = useQuery(
+  const { data: subfamiliesOptions } = useQuery(
     ['cadentier-subfamilies', storeFilterValue?.value, familiesFilterValue.map(({ value }) => value)],
     async () => {
       const result = await makeCoreGetRequest(
@@ -112,7 +112,7 @@ const ProductionManagement = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },
@@ -204,7 +204,7 @@ const ProductionManagement = () => {
     }
   }
 
-  const { isLoading: isLoadingDownloadFile, refetch: refetchDownloadFile } = useQuery(
+  const { refetch: refetchDownloadFile } = useQuery(
     ['download'],
     async () => {
       const url = toTableGETUrl({
@@ -239,95 +239,89 @@ const ProductionManagement = () => {
   return (
     <div className={s.mainContainer}>
       <Grid container>
-        {isFilterOptionsLoading || isSubfamilierOptionsLoading || isLoadingDownloadFile ? (
-          <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-        ) : (
-          <>
-            <Grid xs={12} md={12} container spacing={5}>
-              <Grid xs={12} md={3} item>
-                <DatePicker
-                  label="Planificare pentru"
-                  value={planningDate}
-                  variant="outlined"
-                  required
-                  onChange={value => {
-                    setPlanningDate(dayjs(value))
-                    setShouldRefreshData(true)
-                  }}
-                />
-              </Grid>
-              <Grid xs={12} md={3} item>
-                <AsyncAutocomplete
-                  variant="outlined"
-                  name="store.id"
-                  label="Magazin"
-                  value={storeFilterValue}
-                  options={filterOptions}
-                  onChange={handleStoreFilterChange}
-                />
-              </Grid>
-              <Grid xs={12} md={3} item>
-                <AsyncAutocomplete
-                  variant="outlined"
-                  name="family"
-                  label="Familie"
-                  value={familiesFilterValue}
-                  options={familiesQuery.data || []}
-                  onChange={handleFamiliesChange}
-                  multiple
-                />
-              </Grid>
-              <Grid xs={12} md={3} item>
-                <AsyncAutocomplete
-                  variant="outlined"
-                  name="subfamilies"
-                  label="Subfamilie"
-                  value={subfamiliesFilterValue}
-                  options={subfamiliesOptions || []}
-                  onChange={handleSubfamiliesChange}
-                  multiple
-                />
-              </Grid>
-            </Grid>
+        <Grid xs={12} md={12} container spacing={5}>
+          <Grid xs={12} md={3} item>
+            <DatePicker
+              label="Planificare pentru"
+              value={planningDate}
+              variant="outlined"
+              required
+              onChange={value => {
+                setPlanningDate(dayjs(value))
+                setShouldRefreshData(true)
+              }}
+            />
+          </Grid>
+          <Grid xs={12} md={3} item>
+            <AsyncAutocomplete
+              variant="outlined"
+              name="store.id"
+              label="Magazin"
+              value={storeFilterValue}
+              options={filterOptions}
+              onChange={handleStoreFilterChange}
+            />
+          </Grid>
+          <Grid xs={12} md={3} item>
+            <AsyncAutocomplete
+              variant="outlined"
+              name="family"
+              label="Familie"
+              value={familiesFilterValue}
+              options={familiesQuery.data || []}
+              onChange={handleFamiliesChange}
+              multiple
+            />
+          </Grid>
+          <Grid xs={12} md={3} item>
+            <AsyncAutocomplete
+              variant="outlined"
+              name="subfamilies"
+              label="Subfamilie"
+              value={subfamiliesFilterValue}
+              options={subfamiliesOptions || []}
+              onChange={handleSubfamiliesChange}
+              multiple
+            />
+          </Grid>
+        </Grid>
 
-            <Grid xs={12} item paddingTop={2}>
-              <Divider />
-            </Grid>
+        <Grid xs={12} item paddingTop={2}>
+          <Divider />
+        </Grid>
 
-            {storeFilterValue && (
-              <GroupTable
-                hideCheckbox
-                columns={columns}
-                items={tableItems}
-                fetchData={fetchData}
-                isLoading={isLoading}
-                totalCount={totalCount}
-                shouldRefreshData={shouldRefreshData}
-                setShouldRefreshData={setShouldRefreshData}
-                stickyRatio={0.3}
-                hasStickyHeader
-                maxHeight={'600px'}
-                hasSearchInput
-                toolbarActions={[
-                  {
-                    label: 'Descarca',
-                    icon: <DownloadOutlined />,
-                    onClick: () => refetchDownloadFile()
-                  },
-                  {
-                    label: 'Printeaza',
-                    icon: <PrintOutlined />
-                  }
-                ]}
-                showAbbrev
-                hasPrintAction
-                printUrl={'/bakery/formator/cadentier-formator-print'}
-                order={tableState.order}
-                orderBy={tableState.orderBy}
-                tableFilters={tableState.tableFilters}
-              />
-            )}
-          </>
+        {storeFilterValue && (
+          <GroupTable
+            hideCheckbox
+            columns={columns}
+            items={tableItems}
+            fetchData={fetchData}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            stickyRatio={0.3}
+            hasStickyHeader
+            maxHeight={'600px'}
+            hasSearchInput
+            toolbarActions={[
+              {
+                label: 'Descarca',
+                icon: <DownloadOutlined />,
+                onClick: () => refetchDownloadFile()
+              },
+              {
+                label: 'Printeaza',
+                icon: <PrintOutlined />
+              }
+            ]}
+            showAbbrev
+            hasPrintAction
+            printUrl={'/bakery/formator/cadentier-formator-print'}
+            order={tableState.order}
+            orderBy={tableState.orderBy}
+            tableFilters={tableState.tableFilters}
+          />
         )}
       </Grid>
     </div>

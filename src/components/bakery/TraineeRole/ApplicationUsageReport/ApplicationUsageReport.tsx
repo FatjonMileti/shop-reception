@@ -16,7 +16,6 @@ import dayjs from 'dayjs'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { ColumnsComponent, formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
-import { formatBakeryPayloadDate } from 'utils/helpers'
 
 const ApplicationUsageReport = () => {
   const { showNotification } = useNotification()
@@ -29,7 +28,7 @@ const ApplicationUsageReport = () => {
   const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
   const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
 
-  const { data: storesFilterOptions, isLoading: isStoresFilterOptionsLoading } = useQuery(
+  const { data: storesFilterOptions } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/trainee/all')
@@ -39,7 +38,7 @@ const ApplicationUsageReport = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -150,22 +149,17 @@ const ApplicationUsageReport = () => {
               onChange={val => handleFilterChange('endDate', val)}
             />
           </Grid>
-
-          {isStoresFilterOptionsLoading ? (
-            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-          ) : (
-            <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
-                variant="outlined"
-                name="store.id"
-                label="Magazin"
-                value={storeFilterValue}
-                options={storesFilterOptions}
-                onChange={val => handleFilterChange('store', val)}
-                multiple={true}
-              />
-            </Grid>
-          )}
+          <Grid xs={12} md={3} item>
+            <AsyncAutocomplete
+              variant="outlined"
+              name="store.id"
+              label="Magazin"
+              value={storeFilterValue}
+              options={storesFilterOptions}
+              onChange={val => handleFilterChange('store', val)}
+              multiple={true}
+            />
+          </Grid>
         </Grid>
       </Paper>
 

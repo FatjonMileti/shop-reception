@@ -37,7 +37,7 @@ const CadentierSalesRegion = () => {
     tableFilters: null
   })
 
-  const { data: stores, isLoading: isStoresLoading } = useQuery(
+  const { data: stores } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/region/all')
@@ -78,14 +78,14 @@ const CadentierSalesRegion = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
     }
   )
 
-  const { data: subfamiliesOptions, isLoading: isSubfamilierOptionsLoading } = useQuery(
+  const { data: subfamiliesOptions } = useQuery(
     ['subfamilies', storeFilterValue?.value, familiesFilterValue.map(({ value }) => value)],
     async () => {
       const result = await makeCoreGetRequest(
@@ -111,7 +111,7 @@ const CadentierSalesRegion = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },

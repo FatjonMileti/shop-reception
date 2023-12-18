@@ -58,7 +58,7 @@ const ProductionManagementStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -87,7 +87,7 @@ const ProductionManagementStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }

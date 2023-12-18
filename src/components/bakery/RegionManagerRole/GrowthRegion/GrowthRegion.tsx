@@ -36,7 +36,7 @@ const GrowthRegion = () => {
     tableFilters: null
   })
 
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
+  const { data: filterOptions } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/region/all')
@@ -48,14 +48,14 @@ const GrowthRegion = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
     }
   )
 
-  const { data: subfamiliesOptions, isLoading: isSubfamilierOptionsLoading } = useQuery(
+  const { data: subfamiliesOptions } = useQuery(
     ['subfamilies'],
     async () => {
       const result = await makeCoreGetRequest(
@@ -74,7 +74,7 @@ const GrowthRegion = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },
@@ -86,7 +86,7 @@ const GrowthRegion = () => {
     ['families', storeFilterValue?.value],
     async () => {
       const result = await makeCoreGetRequest(
-        '/bakery/store/cadentier/families/x',
+        '/bakery/store/cadentier/families',
         {
           params: {
             store: storeFilterValue?.value,
@@ -106,7 +106,7 @@ const GrowthRegion = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -202,7 +202,7 @@ const GrowthRegion = () => {
     }
   }
 
-  const { isLoading: isLoadingDownloadFile, refetch: refetchDownloadFile } = useQuery(
+  const { refetch: refetchDownloadFile } = useQuery(
     ['download'],
     async () => {
       const response = await makeCoreGetFileRequest(`/bakery/report/download/cadentier`, {

@@ -32,7 +32,7 @@ const CadentierReportAndSales = () => {
   const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
   const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
 
-  const { data: storesFilterOptions, isLoading: isStoresFilterOptionsLoading } = useQuery(
+  const { data: storesFilterOptions } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/all')
@@ -42,7 +42,7 @@ const CadentierReportAndSales = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -73,14 +73,14 @@ const CadentierReportAndSales = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
     }
   )
 
-  const { data: subfamiliesOptions, isLoading: isSubfamilierOptionsLoading } = useQuery(
+  const { data: subfamiliesOptions } = useQuery(
     ['subfamilies', storeFilterValue?.value, familiesFilterValue.map(({ value }) => value)],
     async () => {
       const result = await makeCoreGetRequest(
@@ -106,7 +106,7 @@ const CadentierReportAndSales = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },

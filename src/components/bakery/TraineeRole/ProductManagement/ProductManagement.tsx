@@ -27,7 +27,7 @@ const ProductManagement = () => {
   const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
   const [scheduleProductFilterValue, setScheduleProductFilterValue] = useState<ValueLabelInterface>(null)
   
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
+  const { data: filterOptions } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/trainee/all')
@@ -37,7 +37,7 @@ const ProductManagement = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -68,14 +68,14 @@ const ProductManagement = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
     }
   )
 
-  const { data: subfamiliesOptions, isLoading: isSubfamilierOptionsLoading } = useQuery(
+  const { data: subfamiliesOptions } = useQuery(
     ['subfamilies', storeFilterValue?.value, familiesFilterValue.map(({ value }) => value)],
     async () => {
       const result = await makeCoreGetRequest(
@@ -101,7 +101,7 @@ const ProductManagement = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },

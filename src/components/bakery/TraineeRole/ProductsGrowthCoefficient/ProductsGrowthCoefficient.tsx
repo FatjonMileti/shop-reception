@@ -23,7 +23,7 @@ const ProductsGrowthCoefficient = () => {
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
   const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
 
-  const { data: stores, isLoading: isStoresLoading } = useQuery(
+  const { data: stores } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/trainee/all')
@@ -33,7 +33,7 @@ const ProductsGrowthCoefficient = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -58,7 +58,7 @@ const ProductsGrowthCoefficient = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }

@@ -61,7 +61,7 @@ const UsageReport = () => {
     }
   }
 
-  const { data: stores, isLoading: isStoresLoading } = useQuery(
+  const { data: stores } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/all')
@@ -146,25 +146,17 @@ const UsageReport = () => {
               required
             />
           </Grid>
-
-          {isStoresLoading ? (
-              <div style={{ display: 'flex' }}>
-                <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-              </div>
-            ) : (
-            <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
-                variant="outlined"
-                name="store"
-                label="Magazin"
-                value={storeFilterValue}
-                options={stores}
-                onChange={(val) => handleFilterChange('store', val)}
-                multiple={true}
-              />
-            </Grid>
-            )
-          }
+          <Grid xs={12} md={3} item>
+            <AsyncAutocomplete
+              variant="outlined"
+              name="store"
+              label="Magazin"
+              value={storeFilterValue}
+              options={stores}
+              onChange={(val) => handleFilterChange('store', val)}
+              multiple={true}
+            />
+          </Grid>          
         </Grid>
       </Paper>
 
