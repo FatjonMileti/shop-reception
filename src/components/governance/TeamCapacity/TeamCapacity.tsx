@@ -12,9 +12,9 @@ import { formatErrorMessage } from 'utils/formatting'
 import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { TeamAssignmentItem, TeamCapacityTableFilter, ValueLabelInterface } from '../interfaces'
 import { buildColumns, buildTableFilterFields, mapToTableFilters } from './utils'
-import dayjs from 'dayjs'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableRowItems } from './helpers'
+import { formatPayloadDate } from 'utils/helpers'
 
 const TeamCapacity = () => {
   const { dispatchFetchDomains } = useGovernanceDomains()
@@ -29,8 +29,8 @@ const TeamCapacity = () => {
   const [tableFilter, setTableFilter] = useState<TeamCapacityTableFilter>({
     teamMemberName: null,
     baseRole: null,
-    startDate: dayjs(new Date()).format('YYYY-MM-DD'),
-    endDate: dayjs(new Date()).format('YYYY-MM-DD')
+    startDate: formatPayloadDate(new Date()),
+    endDate: formatPayloadDate(new Date())
   })
 
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)

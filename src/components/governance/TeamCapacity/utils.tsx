@@ -3,7 +3,6 @@ import { TeamCapacityQueryFilter, TeamCapacityTableFilter } from '../interfaces'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Link } from 'components/core-ui/Link'
 import { formatPayloadDate } from 'utils/helpers'
-import dayjs from 'dayjs'
 
 export const buildTableFilterFields = (
   tableFilter: TeamCapacityTableFilter,
@@ -127,10 +126,8 @@ export const buildColumns = ({
   }
 ]
 
-export const mapToTableFilters = (
-  array: Array<TeamCapacityQueryFilter>
-): TeamCapacityTableFilter => {
-  const tableFilters = {}
-  array.forEach(item => (tableFilters[item.name] = item.value))
-  return tableFilters as TeamCapacityTableFilter
-}
+export const mapToTableFilters = (array: Array<TeamCapacityQueryFilter>): TeamCapacityTableFilter =>
+  array.reduce((tableFilters, item) => {
+    tableFilters[item.name] = item.value
+    return tableFilters
+  }, {} as TeamCapacityTableFilter)
