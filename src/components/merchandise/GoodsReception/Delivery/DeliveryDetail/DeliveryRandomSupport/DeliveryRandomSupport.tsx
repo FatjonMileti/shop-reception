@@ -65,7 +65,7 @@ const DeliveryRandomSupport = () => {
             <Button
               type='button'
               variant='contained'
-              label='SCANEAZǍ PPRODUSE'
+              label='SCANEAZǍ PRODUSE'
               onClick={() => formik.submitForm()}
             />
           </Grid>

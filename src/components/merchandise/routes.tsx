@@ -60,6 +60,12 @@ import {
 import {
     DeliveryRandomSupportConfirm
 } from './GoodsReception/Delivery/DeliveryDetail/DeliveryRandomSupport/DeliveryRandomSupportConfirm'
+import {
+    DeliveryRandomProductFinal
+} from './GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct/DeliveryRandomProductFinal'
+import {
+    DeliveryRandomProductConfirm
+} from './GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct/DeliveryRandomProductConfirm'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -239,6 +245,14 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_DELIVERY_RANDOM_PRODUCT}
         element={<DeliveryRandomProduct />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_RANDOM_PRODUCT_FINAL}
+        element={<DeliveryRandomProductFinal />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_RANDOM_PRODUCT_CONFIRM}
+        element={<DeliveryRandomProductConfirm />}
       />
       <Route
         path={URLS.AUTH_CONTINUE_RETURN_DETAIL}
