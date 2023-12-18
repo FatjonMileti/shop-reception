@@ -1,4 +1,3 @@
-import { Add } from '@mui/icons-material'
 import { Box, Typography } from '@mui/material'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Table } from 'components/core-ui/Table'
@@ -13,6 +12,8 @@ import { NewTimeOff } from './NewTimeOff'
 import { columns } from './helpers'
 import { TableRowModel, TimeOffModel } from './interfaces'
 import { toTableRowItems } from './serializers'
+import { AddActionIcon, CalendarActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
+import { PublicHolidays } from '../PublicHolidays'
 
 const MyTimeOff = () => {
   const [tableItems, setTableItems] = useState<TableRowModel[]>([])
@@ -22,6 +23,7 @@ const MyTimeOff = () => {
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const [isPublicHolidaysModalOpen, setIsPublicHolidaysModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<TableRowModel>()
 
@@ -36,6 +38,9 @@ const MyTimeOff = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
+  const openPublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(true)
+  const closePublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(false)
+
   const rowActions = useMemo(() => {
     const selectRow = (rowId: number, action: string) => {
       const item = tableItems.find(item => item.id === rowId)
@@ -48,6 +53,7 @@ const MyTimeOff = () => {
         labelColor: 'white',
         typographyVariant: 'medium',
         backgroundColor: '#0970E6',
+        desktopIcon: <EditActionIcon />,
         onClick: (e, rowId) => selectRow(rowId, 'edit')
       },
       {
@@ -55,6 +61,7 @@ const MyTimeOff = () => {
         labelColor: 'white',
         typographyVariant: 'medium',
         backgroundColor: '#CC4010',
+        desktopIcon: <DeleteActionIcon />,
         onClick: (e, rowId) => selectRow(rowId, 'delete')
       }
     ]
@@ -89,6 +96,10 @@ const MyTimeOff = () => {
   return (
     <div className={s.mainContainer}>
       <Box>
+        <PublicHolidays
+          isModalOpen={isPublicHolidaysModalOpen}
+          closeModal={closePublicHolidaysModal}
+        />
         <NewTimeOff
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
@@ -125,8 +136,13 @@ const MyTimeOff = () => {
           rowActionsWidth="130px"
           toolbarActions={[
             {
+              label: 'Holidays',
+              icon: <CalendarActionIcon />,
+              onClick: () => openPublicHolidaysModal()
+            },
+            {
               label: 'Adauga',
-              icon: <Add />,
+              icon: <AddActionIcon />,
               onClick: openNewModal
             }
           ]}

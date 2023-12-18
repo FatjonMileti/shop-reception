@@ -16,9 +16,25 @@ import { UsageReport } from './UsageReport'
 import { ProductManagement } from './TraineeRole/ProductManagement'
 import { ProductionManagement } from './TraineeRole/ProductionManagement'
 import { ProductionManagementPrint } from './TraineeRole/ProductionManagementPrint'
+import { GrowthRegion } from './RegionManagerRole/GrowthRegion'
+import { GrowthRegionPrint } from './RegionManagerRole/GrowthRegionPrint'
 import { StoreGrowthCoefficient } from './TraineeRole/StoreGrowthCoefficient'
 import { ProductsGrowthCoefficient } from './TraineeRole/ProductsGrowthCoefficient'
+import { RegionGrowthCoefficient } from './TraineeRole/RegionGrowthCoefficient'
 import { ApplicationUsageReport } from './TraineeRole/ApplicationUsageReport'
+import { CadentierSalesRegion } from './RegionManagerRole/CadentierSalesRegion'
+import { GrowthIndex } from './RegionManagerRole/GrowthIndex'
+import { GrowthIndexView } from './RegionManagerRole/GrowthIndex/GrowthIndexView'
+import { GrowthIndexProductsView } from './RegionManagerRole/GrowthIndex/GrowthIndexProductsView'
+import { CadentierReportAndSales } from './TraineeRole/CadentierReportAndSales'
+
+import { ProductManagementStore } from './StoreManagerRole/ProductManagementStore'
+import { UsageReportRegion } from './RegionManagerRole/UsageReportRegion'
+import { ProductGrowthIndex } from './StoreManagerRole/ProductGrowthIndex'
+import { ProductionManagementStore } from './StoreManagerRole/ProductionManagementStore'
+import { ProductionManagementStorePrint } from './StoreManagerRole/ProductionManagementStorePrint'
+import { GrowthIndexStore } from './StoreManagerRole/GrowthIndexStore'
+import ReportAndSalesStore from './StoreManagerRole/ReportAndSalesStore/ReportAndSalesStore'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -104,7 +120,7 @@ export const useBakeryRoutes = applicationPages => {
             component={UsageReport}
             applicationPages={applicationPages}
             checkIsAuthorized
-        />
+          />
         }
       />
       <Route
@@ -114,11 +130,10 @@ export const useBakeryRoutes = applicationPages => {
             component={SalesCadentier}
             applicationPages={applicationPages}
             checkIsAuthorized
-        />
+          />
         }
       />
 
-      
       {/* Formator */}
       <Route
         path={URLS.AUTH_PRODUCT_MANAGEMENT}
@@ -130,8 +145,7 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
-     
-      
+
       <Route
         path={URLS.AUTH_PRODUCTION_MANAGEMENT}
         element={
@@ -173,6 +187,16 @@ export const useBakeryRoutes = applicationPages => {
         }
       />
       <Route
+        path={URLS.AUTH_REGION_GROWTH_COEFFICIENT}
+        element={
+          <PrivateRoute
+            component={RegionGrowthCoefficient}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
         path={URLS.AUTH_APPLICATION_USAGE_REPORT}
         element={
           <PrivateRoute
@@ -182,7 +206,82 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
-      
+      <Route
+        path={URLS.AUTH_CADENTIER_REPORT_AND_SALES}
+        element={
+          <PrivateRoute
+            component={CadentierReportAndSales}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      {/* store manager role */}
+      <Route
+        path={URLS.AUTH_PRODUCT_MANAGEMENT_STORE}
+        element={
+          <PrivateRoute
+            component={ProductManagementStore}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PRODUCT_GROWTH_INDEX}
+        element={
+          <PrivateRoute
+            component={ProductGrowthIndex}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_PRODUCTION_MANAGEMENT_STORE}
+        element={
+          <PrivateRoute
+            component={ProductionManagementStore}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_PRODUCTION_MANAGEMENT_STORE_PRINT}
+        element={
+          <PrivateRoute
+            component={ProductionManagementStorePrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_GROWTH_INDEX_STORE}
+        element={
+          <PrivateRoute
+            component={GrowthIndexStore}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_AND_SALES_STORE}
+        element={
+          <PrivateRoute
+            component={ReportAndSalesStore}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
 
       {/* region manager role */}
       <Route
@@ -193,6 +292,48 @@ export const useBakeryRoutes = applicationPages => {
             applicationPages={applicationPages}
             checkIsAuthorized
           />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GROWTH_REGION}
+        element={
+          <PrivateRoute component={GrowthRegion} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GROWTH_REGION_PRINT}
+        element={
+          <PrivateRoute component={GrowthRegionPrint} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GROWTH_INDEX}
+        element={
+          <PrivateRoute component={GrowthIndex} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GROWTH_INDEX_VIEW}
+        element={
+          <PrivateRoute component={GrowthIndexView} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GROWTH_INDEX_PRODUCTS_VIEW}
+        element={
+          <PrivateRoute component={GrowthIndexProductsView} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_USAGE_REPORT_REGION}
+        element={
+          <PrivateRoute component={UsageReportRegion} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+      <Route
+        path={URLS.AUTH_CADENTIER_SALES_REGION}
+        element={
+          <PrivateRoute component={CadentierSalesRegion} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
     </>

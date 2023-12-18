@@ -21,8 +21,9 @@ const ProductsGrowthCoefficient = () => {
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
+  const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
 
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
+  const { data: stores } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/trainee/all')
@@ -32,7 +33,32 @@ const ProductsGrowthCoefficient = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const familiesQuery = useQuery(
+    ['families'],
+    async () => {
+      const result = await makeCoreGetRequest(
+        '/bakery/store/families',
+        {
+          params: {
+            store: storeFilterValue?.value
+          },
+          paramsSerializer: { indexes: null }
+        }
+      )
+
+      return toStoreFilterItems(result) || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -41,11 +67,17 @@ const ProductsGrowthCoefficient = () => {
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
+    const filters = [
+      { name: 'store', value: storeFilterValue?.value },
+      { name: 'family', value: familiesFilterValue?.map(val => val.value) },
+    ].filter(
+      f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+    )
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/product/trainee/growth',
-          filters: [{ name: 'store', value: storeFilterValue.value }],
+          filters: filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -67,30 +99,43 @@ const ProductsGrowthCoefficient = () => {
     }
   }
 
-  const handleFilterChange = (value: ValueLabelInterface): void => {
+  const handleStoreFilterChange = (value: ValueLabelInterface): void => {
     setStoreFilterValue(value)
     if (storeFilterValue === null) return
+    setShouldRefreshData(true)
+  }
+
+  const handleFamiliesFilterChange = (value: ValueLabelInterface[]): void => {
+    setFamiliesFilterValue(value)
+    if (familiesFilterValue === null) return
     setShouldRefreshData(true)
   }
 
   return (
     <div className={s.mainContainer}>
       <Grid container>
-        <Grid xs={12} md={4} item>
-          {isFilterOptionsLoading ? (
-            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-          ) : (
-            <AsyncAutocomplete
-              variant="standard"
-              name="store"
-              label="Magazin"
-              disableClearable
-              value={storeFilterValue}
-              options={filterOptions}
-              onChange={handleFilterChange}
-              applyCustomStyle
-            />
-          )}
+        <Grid xs={12} md={12} spacing={2} container marginBottom={2}>
+          <Grid xs={12} md={4} item>
+              <AsyncAutocomplete
+                variant="outlined"
+                name="store"
+                label="Magazin"
+                value={storeFilterValue}
+                options={stores}
+                onChange={handleStoreFilterChange}
+              />
+          </Grid>
+          <Grid xs={12} md={4} item>
+              <AsyncAutocomplete
+                variant="outlined"
+                name="family"
+                label="Familie"
+                value={familiesFilterValue}
+                options={familiesQuery.data || []}
+                onChange={handleFamiliesFilterChange}
+                multiple
+              />
+          </Grid>
         </Grid>
 
         {storeFilterValue && (

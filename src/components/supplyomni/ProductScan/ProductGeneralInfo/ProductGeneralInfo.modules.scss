@@ -7,17 +7,35 @@
   button {
     height: 44px;
   }
+
+  @media (max-width: 430px) {
+    flex-direction: column;
+  }
 }
 
 .price {
-  font-size: 36px;
-  color: #D30D1F;
+  font-size: 28px;
+  color: #d30d1f;
+  flex: 1;
+  font-weight: bold;
+
+  @media (max-width: 430px) {
+    text-align: center;
+  }
+}
+
+.inactiveInfo {
   flex: 1;
   font-weight: bold;
 }
 
-.firstCode, .secondCode {
+.firstCode,
+.secondCode {
   flex: 1;
+
+  @media (max-width: 430px) {
+    text-align: left !important;
+  }
 }
 
 .secondCode {
@@ -28,3 +46,7 @@
   color: #666666;
 }
 
+.buyOption {
+  max-width: 100%;
+
+}

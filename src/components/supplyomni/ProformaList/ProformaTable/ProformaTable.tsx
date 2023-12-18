@@ -1,7 +1,5 @@
-import { Checkbox } from '@fullscreendigital/carrefour-dex-fe'
-import { Box } from '@mui/material'
+import { Box, Switch, FormControlLabel, useMediaQuery } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
-import { Filter } from 'components/core-ui/Table/TableDefinitions'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { useNotification } from 'hooks'
 import { useMemo, useState } from 'react'
@@ -19,13 +17,14 @@ import {
 } from './interfaces'
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
+import { CancelActionIcon, InvoiceActionIcon } from 'icons'
 
 const ProformaTable: React.FC<ProformaTableProps> = props => {
   const { proformaType } = props
 
   const { showNotification } = useNotification()
   const navigate = useNavigate()
-
+  const isXs = useMediaQuery('(max-width:624px)')
   const [tableItems, setTableItems] = useState<TableRowModel[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [selectedRow, setSelectedRow] = useState<TableRowModel>()
@@ -42,8 +41,8 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
   const openCancelModal = (): void => setIsCancelModalOpen(true)
   const closeCancelModal = (): void => setIsCancelModalOpen(false)
 
-  const navigateToPrint = (id: number) => {
-    navigate(`/supplyOmni/proformaView/${id}`)
+  const navigateToPrint = (id: number, clientId: string | number) => {
+    navigate(`/supplyOmni/proformaView/${id}?clientId=${clientId}`)
   }
 
   const handleWithMyProformaFilterChange = (value): void => {
@@ -55,25 +54,29 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
     const selectRow = (rowId: number, action: string) => {
       const item = tableItems.find(item => item.id === rowId)
       setSelectedRow(item)
-      action === 'print' ? navigateToPrint(item.id) : openCancelModal()
+      action === 'print' ? navigateToPrint(item.id, item.clientId) : openCancelModal()
     }
 
     const actions = [
-      proformaType === 'active' && {
-        label: 'Anuleaza',
-        labelColor: 'white',
-        typographyVariant: 'medium',
-        backgroundColor: '#CC4010',
-        onClick: (e, rowId) => selectRow(rowId, 'delete')
-      },
+      proformaType === 'active'
+        ? {
+            label: 'Anuleaza',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#CC4010',
+            desktopIcon: <CancelActionIcon />,
+            onClick: (e, rowId) => selectRow(rowId, 'delete')
+          }
+        : null,
       {
         label: 'Detalii',
         labelColor: 'white',
         typographyVariant: 'medium',
         backgroundColor: '#0970E6',
+        desktopIcon: <InvoiceActionIcon />,
         onClick: (e, rowId) => selectRow(rowId, 'print')
       }
-    ]
+    ].filter(Boolean)
 
     return actions
   }, [tableColumns, tableItems])
@@ -81,20 +84,15 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
-      const extraCustomUrlParams: Filter[] = [
-        ...tableFilters,
-        { name: 'myProformas', value: String(withMyProforma) }
-      ]
-
       const response = (await makeCoreGetRequest(
         toTableGETUrl({
           url: `/supply-omni/order${proformaType === 'active' ? '/active' : ''}`,
           tableFilters,
+          filters: [{ name: 'myProformas', value: String(withMyProforma) }],
           page,
           rowsPerPage,
           order,
-          orderBy,
-          extraCustomUrlParams
+          orderBy
         })
       )) as ProformaListResponseModel
       setTableItems(toTableRowItems(response.list))
@@ -108,7 +106,6 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
       })
     }
   }
-
   return (
     <div className={s.mainContainer}>
       <Box>
@@ -118,16 +115,29 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
           orderId={`${selectedRow?.id}`}
           setShouldRefreshData={setShouldRefreshData}
         />
-        <Checkbox
+        {/* <Checkbox
           label="Proformele mele"
           checked={withMyProforma}
           onChange={event => handleWithMyProformaFilterChange(event.target.checked)}
+        /> */}
+        <FormControlLabel
+          sx={isXs ? {} : { position: 'absolute', width: '50%', zIndex: 3, color: '#052351' }}
+          name="my_bills1"
+          label="Proformele mele"
+          control={
+            <Switch
+              checked={withMyProforma}
+              onChange={event => handleWithMyProformaFilterChange(event.target.checked)}
+            />
+          }
         />
         <Table
           hideCheckbox
           order="desc"
           orderBy="creationDate"
           columns={columnsWithActions}
+          showCounter={isXs}
+          counterLabel={isXs ? 'Total facturi proforme' : undefined}
           items={tableItems}
           fetchData={fetchData}
           isLoading={isLoading}

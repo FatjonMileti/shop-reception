@@ -9,11 +9,11 @@ import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
 import { ThemeProvider } from '@fullscreendigital/carrefour-dex-fe'
 import { createRoute } from './helpers'
-import { makeDesignerGetRequest } from 'utils/api'
+import { makeDesignerGetRequest, makeNotificationsPutRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
-import { oidcConfig } from 'utils/authService'
+import { oidcConfig, getFirebaseToken, setFirebaseToken } from 'utils/authService'
 import { useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
@@ -27,6 +27,8 @@ import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
 import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
 import { useMerchandiseRoutes } from '../merchandise/routes'
 import { useShopReceptionRoutes } from '../shop-reception/routes'
+import { getFBToken } from 'utils/firebase'
+import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,7 +56,33 @@ const App = () => {
   const [isLoadingActivities, setIsLoadingActivities] = useState(false)
   const [hasLoadedActivities, setHasLoadedActivities] = useState(-1) // [~] holds the subdomainId for which the activities were loaded
 
+  const [fbToken, setFbToken] = useState(null)
+
   const { showNotification } = useNotification()
+
+  useEffect(() => {
+    ;(async () => {
+      await getFBToken(setFbToken)
+    })()
+  }, [])
+
+  useEffect(() => {
+    ;(async () => {
+      const localToken = getFirebaseToken()
+      if (fbToken && fbToken !== localToken) {
+        await makeNotificationsPutRequest('/association', {
+          deviceToken: fbToken
+        })
+        setFirebaseToken(fbToken)
+      }
+    })()
+  }, [fbToken])
+
+  useEffect(() => {
+    ;(async () => {
+      await getFBToken(setFbToken)
+    })()
+  }, [])
 
   useEffect(() => {
     // console.log("[App] 1st effect called | hasLoadedAppModules: ", hasLoadedAppModules)

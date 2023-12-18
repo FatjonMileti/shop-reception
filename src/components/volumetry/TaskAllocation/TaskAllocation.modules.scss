@@ -1,0 +1,122 @@
+.mainContainer {
+  margin: 24px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+
+  & > div {
+    margin: 0;
+  }
+}
+
+.departmentName {
+  color: #0970e6;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 16px;
+}
+
+.taskName {
+  color: #052351;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.modalButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+
+  button {
+    height: 42px;
+    flex: 1;
+
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.employeeContainer {
+  display: flex;
+  min-width: 296px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid rgba(5, 35, 81, 0.1);
+  width: 100%;
+  margin-right: 12px;
+}
+
+.employeeName {
+  color: #052351;
+  font-family: Ubuntu;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 166.667% */
+  margin: 0 8px;
+}
+
+.customText {
+  color: #000;
+  font-family: Ubuntu;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 200% */
+  margin: 0;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.capsules {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.employeeProgress {
+  font-family: Ubuntu;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px; /* 133.333% */
+
+  display: flex;
+  padding: 0px 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 30px;
+  border-radius: 2px;
+  color: #fff;
+}
+
+@media (max-width: 899px) {
+  .capsules {
+    flex-wrap: wrap;
+  }
+  .actionButtonContainer {
+    justify-content: center;
+  }
+}
+
+.employeeInfo {
+  padding: 8px 12px 8px;
+  gap: 12px;
+  align-items: center;
+}

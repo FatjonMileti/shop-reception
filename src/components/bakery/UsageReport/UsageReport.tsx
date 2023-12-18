@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid, Paper } from '@mui/material'
+import { Box, CircularProgress, Divider, Grid, Paper } from '@mui/material'
 import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
@@ -30,15 +30,19 @@ const UsageReport = () => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
 
+    const filters = [
+      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      ...(storeFilterValue && storeFilterValue.length > 0
+        ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
+        : []),
+    ];
+
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/report/application',
-          filters: [
-            { name: 'storeName', value: storeFilterValue.map(val => val.value)},
-            { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-            { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
-          ],
+          filters: filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -57,7 +61,7 @@ const UsageReport = () => {
     }
   }
 
-  const { data: stores, isLoading: isStoresLoading } = useQuery(
+  const { data: stores } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/all')
@@ -94,13 +98,17 @@ const UsageReport = () => {
   }
 
   const handleDownload = async () => {
+    const filters = [
+      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'store', value: storeFilterValue[0]?.value },
+    ].filter(
+      f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+    )
+
     const url = toTableGETUrl({
       url: '/bakery/report/download/application',
-      filters: [
-        { name: 'storeName', value: storeFilterValue[0].value},
-        { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-        { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
-      ]
+      filters: filters
     })
     try {
       const response = await makeCoreGetFileRequest(url, {
@@ -119,47 +127,43 @@ const UsageReport = () => {
     <div className={s.mainContainer}>
       <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
-        <Grid xs={12} md={3} item>
-          <DatePicker
-            value={startDateFilterValue}
-            onChange={(val) => handleFilterChange('startDate', val)}
-            label="Data inceput"
-            variant="outlined"
-            required
-          />
-        </Grid>
+          <Grid xs={12} md={3} item>
+            <DatePicker
+              value={startDateFilterValue}
+              onChange={(val) => handleFilterChange('startDate', val)}
+              label="Data inceput"
+              variant="outlined"
+              required
+            />
+          </Grid>
 
-        <Grid xs={12} md={3} item>
-          <DatePicker
-            value={endDateFilterValue}
-            onChange={(val) => handleFilterChange('endDate', val)}
-            label="Data sfarsit"
-            variant="outlined"
-            required
-          />
-        </Grid>
-
-        {isStoresLoading ? (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          ) : (
+          <Grid xs={12} md={3} item>
+            <DatePicker
+              value={endDateFilterValue}
+              onChange={(val) => handleFilterChange('endDate', val)}
+              label="Data sfarsit"
+              variant="outlined"
+              required
+            />
+          </Grid>
           <Grid xs={12} md={3} item>
             <AsyncAutocomplete
               variant="outlined"
               name="store"
               label="Magazin"
-              disableClearable
               value={storeFilterValue}
               options={stores}
               onChange={(val) => handleFilterChange('store', val)}
               multiple={true}
             />
-          </Grid>
-          )
-        }
+          </Grid>          
         </Grid>
       </Paper>
+
+      <Grid xs={12} item>
+        <Divider />
+      </Grid>
+      
       <Box>
         <Table
           hideCheckbox

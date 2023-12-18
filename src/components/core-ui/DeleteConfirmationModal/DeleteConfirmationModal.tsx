@@ -12,6 +12,7 @@ interface DeleteConfirmationProps {
   closeModal: Function
   actionUrl: string
   itemId: string | number
+  title?: string
   content: ReactNode
   deleteLabel?: string
   cancelLabel?: string
@@ -24,6 +25,7 @@ const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
     closeModal,
     actionUrl,
     itemId,
+    title,
     content,
     deleteLabel,
     cancelLabel,
@@ -48,7 +50,7 @@ const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
   }
 
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle="Delete">
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={title || "Delete"}>
       <Grid container spacing={4}>
         <Grid xs={12} item>
           {content}

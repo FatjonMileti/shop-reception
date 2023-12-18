@@ -9,7 +9,8 @@ import { DRAWER_WIDTH } from 'utils/constants'
 import { useAuth } from 'oidc-react'
 import s from './Layout.scss'
 import { setToken, isAuthenticated } from 'utils/authService'
-import { Notification } from 'components/Notification'
+import { Notification } from './Notification'
+import { FirebaseNotification } from 'components/core-ui/FirebaseNotification'
 
 const Layout = ({ children, modules, setSubdomainId }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -47,6 +48,7 @@ const Layout = ({ children, modules, setSubdomainId }) => {
         <Favicon url="images/favicon.ico" />
         <div>
           <Notification />
+          <FirebaseNotification />
           <Header handleOpenMenu={handleOpenMenu} />
           {isAuthenticated() && (
             <Sidebar

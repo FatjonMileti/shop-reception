@@ -1,5 +1,5 @@
 import { Button, DatePicker, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '@mui/material'
+import { CircularProgress, Grid } from '@mui/material'
 import { Modal } from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { useFormik } from 'formik'
@@ -11,6 +11,7 @@ import { areSameDayDates, formatPayloadDate } from 'utils/helpers'
 import { TableRowModel } from '../interfaces'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { dayOfTypes } from 'components/governance/helpers'
+import { usePublicHolidaysForDatePicker } from '../../PublicHolidays/hooks/usePublicHolidaysForDatePicker'
 
 interface NewTimeOffProps {
   isModalOpen: boolean
@@ -26,8 +27,10 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
   const { showNotification } = useNotification()
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
-
   const validationSchema = useMemo(() => getValidationSchema(), [editItem])
+
+  const { arePublicHolidaysLoading, datePickerShouldDisablePublicHolidaysDates } =
+    usePublicHolidaysForDatePicker()
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -75,7 +78,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
             label="Type of day-off"
             type="select"
             values={dayOfTypes}
-            variant="standard"
+            variant="outlined"
             width="100%"
             value={formik.values.dayOffType}
             onChange={event => {
@@ -91,8 +94,12 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
           <DatePicker
             value={formik.values.startDate}
             onChange={value => formik.setFieldValue('startDate', value)}
+            shouldDisableDate={datePickerShouldDisablePublicHolidaysDates}
+            footNoteText={'Public holidays are not selectable.'}
+            loading={arePublicHolidaysLoading}
+            renderLoading={() => <CircularProgress color="primary" />}
             label="Start date"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.startDate}
             helperText={formik.errors.startDate as string}
@@ -103,8 +110,12 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
           <DatePicker
             value={formik.values.endDate}
             onChange={value => formik.setFieldValue('endDate', value)}
+            shouldDisableDate={datePickerShouldDisablePublicHolidaysDates}
+            footNoteText={'Public holidays are not selectable.'}
+            loading={arePublicHolidaysLoading}
+            renderLoading={() => <CircularProgress color="primary" />}
             label="End date"
-            variant="standard"
+            variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.endDate}
             helperText={formik.errors.endDate as string}
@@ -118,7 +129,7 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
               name="numberOfHours"
               label="Number of hours"
               fullWidth
-              variant="standard"
+              variant="outlined"
               value={formik.values.numberOfHours}
               onChange={event => formik.setFieldValue('numberOfHours', event.currentTarget.value)}
               error={!!formik.errors.numberOfHours}

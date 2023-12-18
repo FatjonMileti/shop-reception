@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Box, Typography } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './TaskManagement.modules.scss'
@@ -9,10 +9,10 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { Input } from 'components/core-ui/Input'
-import { Add } from '@mui/icons-material'
 import { NewTask } from './NewTask'
 import { toTableItems } from './serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
+import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 
 export const columns = [
   {
@@ -216,6 +216,7 @@ const TaskManagement = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
+              desktopIcon: <EditActionIcon />,
               onClick: (e, rowId) => selectRow(rowId, 'edit')
             },
             {
@@ -223,6 +224,7 @@ const TaskManagement = () => {
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#d9534f',
+              desktopIcon: <DeleteActionIcon />,
               onClick: (e, rowId) => selectRow(rowId, 'delete')
             }
           ]}
@@ -230,7 +232,7 @@ const TaskManagement = () => {
           toolbarActions={[
             {
               label: 'Adauga',
-              icon: <Add />,
+              icon: <AddActionIcon />,
               onClick: openNewModal
             }
           ]}

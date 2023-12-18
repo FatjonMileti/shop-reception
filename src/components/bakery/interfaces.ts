@@ -137,7 +137,8 @@ export interface ProductItem {
   pluCode: string | number
   metiCode: string | number
   familyModuleName: string
-  imageUrl: string
+  imageUrl: string,
+  cluster?: ClustersItem
 }
 
 export interface SalesCadentierListItem {
@@ -185,4 +186,31 @@ export interface UsageReportItem {
 export interface IdNameInterface {
   id: string,
   name: string
+}
+
+export interface StructureRole {
+  id?: string
+  roleId?: string
+  structureId?: string 
+  structureType?: string
+}
+
+export interface EditUserItem {
+  id: string
+  enable: boolean | string
+  email: string
+  firstName: string
+  lastName: string
+  structureRoles: StructureRole[] | []
+}
+
+export interface TableState {
+  order: string
+  orderBy: string
+  tableFilters: Filter[]
+}
+
+export interface Filter {
+  name: string
+  value: string | number | string[]
 }

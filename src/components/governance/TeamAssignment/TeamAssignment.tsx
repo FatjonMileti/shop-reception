@@ -15,6 +15,8 @@ import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { TeamAssignmentItem, TeamAssignmentTableFilter, ValueLabelInterface } from '../interfaces'
 import { EditTeamAssignment } from './EditTeamAssignment'
 import { toTableRowItems } from './serializers'
+import { EditActionIcon } from 'icons'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const columns = [
   {
@@ -199,28 +201,28 @@ const TeamAssignment: React.FC = props => {
       )
     }
   ]
-
   return (
     <div className={s.mainContainer}>
       <Grid container spacing={4}>
-        {!storedGovernanceDomains && (
+        {!storedGovernanceDomains || domainFilterValue === null ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
+        ) : (
+          <Grid xs={12} md={2} item style={{ padding: 0 }}>
+            <FilterDataSelect
+              name="teamMember.domain"
+              defaultSelectedData={domainFilterValue}
+              label="Domain"
+              showCounter={true}
+              showSearch={true}
+              counterLabel="Select category"
+              noDataFoundLabel="No results!"
+              options={domainFilterOptions}
+              onSelect={handleFilterChange}
+            />
+          </Grid>
         )}
-
-        <Grid xs={12} md={2} item style={{ padding: 0 }}>
-          <AsyncAutocomplete
-            applyCustomStyle
-            variant="outlined"
-            name="teamMember.domain"
-            label="Domain"
-            disableClearable
-            value={domainFilterValue}
-            options={domainFilterOptions}
-            onChange={handleFilterChange}
-          />
-        </Grid>
       </Grid>
       {domainFilterValue && (
         <Box>
@@ -248,6 +250,7 @@ const TeamAssignment: React.FC = props => {
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#0970E6',
+                desktopIcon: <EditActionIcon />,
                 onClick: (e, rowId) => {
                   selectRow(tableItems.find(item => item.id === rowId))
                 }

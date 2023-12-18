@@ -1,6 +1,4 @@
-import { Add } from '@mui/icons-material'
-import { Box, CircularProgress, Grid, Paper, Typography } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { Box, CircularProgress, Grid, Typography, useMediaQuery } from '@mui/material'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Input } from 'components/core-ui/Input'
@@ -19,6 +17,9 @@ import { columns } from './helpers'
 import { toTableRowItems } from './serializers'
 import { RootState } from 'configureStore'
 import { useSelector } from 'react-redux'
+import { AddActionIcon, CalendarActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { PublicHolidays } from '../PublicHolidays'
 
 const TeamDayOffManagement = () => {
   const { dispatchFetchDomains } = useGovernanceDomains()
@@ -34,12 +35,14 @@ const TeamDayOffManagement = () => {
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const [isPublicHolidaysModalOpen, setIsPublicHolidaysModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<TeamDayOffManagementItem>()
 
   const { showNotification } = useNotification()
 
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
+  const isXs = useMediaQuery('(max-width:624px)')
 
   useEffect(() => {
     ;(async () => {
@@ -88,6 +91,9 @@ const TeamDayOffManagement = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
+  const openPublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(true)
+  const closePublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(false)
+
   const rowActions = useMemo(() => {
     let actions
 
@@ -103,6 +109,7 @@ const TeamDayOffManagement = () => {
           label: 'Edit',
           labelColor: 'white',
           typographyVariant: 'medium',
+          desktopIcon: <EditActionIcon />,
           backgroundColor: '#0970E6',
           onClick: (e, rowId) => selectRow(rowId, 'edit')
         },
@@ -111,6 +118,7 @@ const TeamDayOffManagement = () => {
           labelColor: 'white',
           typographyVariant: 'medium',
           backgroundColor: '#CC4010',
+          desktopIcon: <DeleteActionIcon />,
           onClick: (e, rowId) => selectRow(rowId, 'delete')
         }
       ]
@@ -119,13 +127,21 @@ const TeamDayOffManagement = () => {
   }, [columns, canEdit, canDelete, teamMembers, tableItems])
 
   const toolbarActions = useMemo(() => {
-    let actions
+    let actions = [
+      {
+        label: 'Holidays',
+        icon: <CalendarActionIcon />,
+        onClick: () => openPublicHolidaysModal()
+      }
+    ]
+
     if (canCreate) {
       actions = [
+        ...actions,
         {
           label: 'Add',
-          icon: <Add></Add>,
-          onClick: e => openNewModal()
+          icon: <AddActionIcon />,
+          onClick: () => openNewModal()
         }
       ]
     }
@@ -183,28 +199,33 @@ const TeamDayOffManagement = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Grid container spacing={4}>
+      <Grid sx={{ width: '100%', display: 'block' }} container>
         {!storedGovernanceDomains || isTeamMembersLoading ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
-          <Grid xs={12} md={2} item style={{ padding: 0 }}>
-            <AsyncAutocomplete
-              applyCustomStyle
-              variant="outlined"
+          <Grid item style={{ display: 'block', padding: 0 }}>
+            <FilterDataSelect
               name="teamMember.domain"
+              defaultSelectedData={domainFilterValue}
               label="Domain"
-              disableClearable
-              value={domainFilterValue}
+              showCounter={true}
+              showSearch={true}
+              counterLabel="Select category"
+              noDataFoundLabel="No results!"
               options={domainFilterOptions}
-              onChange={handleFilterChange}
+              onSelect={handleFilterChange}
             />
           </Grid>
         )}
       </Grid>
       {domainFilterValue && (
         <Box>
+          <PublicHolidays
+            isModalOpen={isPublicHolidaysModalOpen}
+            closeModal={closePublicHolidaysModal}
+          />
           <NewTimeOff
             teamMembers={teamMembers}
             isModalOpen={isNewModalOpen}

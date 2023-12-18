@@ -14,6 +14,8 @@ import { formatErrorMessage } from 'utils/formatting'
 import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { TeamAssignmentItem, TeamCapacityTableFilter, ValueLabelInterface } from '../interfaces'
 import { buildColumns, buildTableFilterFields } from './utils'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { toTableRowItems } from './helpers'
 
 const TeamCapacity = () => {
   const { dispatchFetchDomains } = useGovernanceDomains()
@@ -85,7 +87,7 @@ const TeamCapacity = () => {
           endDate: tableFilters[3].value ?? ''
         })
       }
-      setTableItems(response.list)
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -99,24 +101,25 @@ const TeamCapacity = () => {
   return (
     <div className={s.mainContainer}>
       <Grid container spacing={4}>
-        {!storedGovernanceDomains && (
+        {!storedGovernanceDomains || domainFilterValue === null ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
+        ) : (
+          <Grid xs={12} md={2} item style={{ padding: 0 }}>
+            <FilterDataSelect
+              name="teamMember.domain"
+              defaultSelectedData={domainFilterValue}
+              label="Domain"
+              showCounter={true}
+              showSearch={true}
+              counterLabel="Select category"
+              noDataFoundLabel="No results!"
+              options={domainFilterOptions}
+              onSelect={handleFilterChange}
+            />
+          </Grid>
         )}
-
-        <Grid xs={12} md={2} item style={{ padding: 0 }}>
-          <AsyncAutocomplete
-            applyCustomStyle
-            variant="outlined"
-            name="teamMember.domain"
-            label="Domain"
-            disableClearable
-            value={domainFilterValue}
-            options={domainFilterOptions}
-            onChange={handleFilterChange}
-          />
-        </Grid>
       </Grid>
       {domainFilterValue && (
         <Box>

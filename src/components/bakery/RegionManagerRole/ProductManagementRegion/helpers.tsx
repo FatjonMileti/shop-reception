@@ -2,6 +2,11 @@ import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { DescriptionText } from 'components/core-ui/DescriptionText'
 import { ImageCell } from 'components/core-ui/ImageCell'
 
+export const scheduleProductValues = [
+  { label: 'Da', value: true },
+  { label: 'Nu', value: false }
+]
+
 export const columns = [
     {
       title: 'Produs',

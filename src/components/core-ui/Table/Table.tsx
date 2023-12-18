@@ -13,6 +13,7 @@ const Table = props => {
     shouldRefreshData,
     setShouldRefreshData,
     rowsPerPage,
+    rowsPerPageOptions,
     ...rest
   } = props
 
@@ -75,6 +76,7 @@ const Table = props => {
       totalCount={totalCount}
       isRemote
       rowsPerPage={props.rowsPerPage || 10}
+      rowsPerPageOptions={props.rowsPerPageOptions}
       hasCustomPagination
     />
   )
