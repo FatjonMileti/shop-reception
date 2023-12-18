@@ -5,7 +5,7 @@ import { Table } from '../../../core-ui/Table'
 import { detailsColumns } from './helpers'
 import { useEffect, useState } from 'react'
 import { useNotification } from '../../../../hooks'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
 import { useParams } from 'react-router-dom'
 import { Download as DownloadIcon } from '@mui/icons-material'
 

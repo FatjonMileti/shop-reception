@@ -69,6 +69,11 @@ const getLink = (navigate) => {
       icon: <Icon iconName='DocumentScanner' fill='white' />,
       title: 'Fişiere recepţie Infolog',
       onClick: () => navigate(URLS.AUTH_RECEPTION_FILES_INFO)
+    },
+    {
+      icon: <Icon iconName='Star' fill='white' />,
+      title: 'Administrare produse SGR',
+      onClick: () => navigate(URLS.AUTH_SGR_PRODUCTS)
     }
   ]
 }

@@ -3,7 +3,7 @@ import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../CommonStyles.modules.scss'
 import { FileUpload } from '../../../core-ui/FileUpload'
 import { ChangeEvent, useState } from 'react'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
 
 const SupportWrongDestinationDetail = () => {
   const [uploadedFile, setUploadedFile] = useState(null)

@@ -55,14 +55,14 @@ const DLCProductsForm: React.FC<NewAdminDepositProps> = props => {
     >
       <Grid container spacing={4} justifyContent="flex-end">
         <Grid xs={12} item>
-          <FormInfoItems
+          {isEdit && <FormInfoItems
             items={[
               {
                 label: 'Magazin:',
                 name: editItem?.storeName
               }
             ]}
-          />
+          />}
         </Grid>
         <Grid xs={12} md={6} item>
           <Input

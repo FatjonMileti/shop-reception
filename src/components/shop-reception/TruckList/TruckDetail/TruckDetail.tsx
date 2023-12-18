@@ -1,7 +1,7 @@
 import { Paper, Grid, Typography } from '@mui/material'
 import s from '../../CommonStyles.modules.scss'
 import React, { useState } from 'react'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
 import { useParams } from 'react-router-dom'
 import { Tabs } from '@fullscreendigital/carrefour-dex-fe'
 import { Tab1, Tab2, Tab3, Tab4, Tab5 } from './Tabs'

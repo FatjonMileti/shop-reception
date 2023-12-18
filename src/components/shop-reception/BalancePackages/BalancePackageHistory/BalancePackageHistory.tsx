@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material'
-import TitleHeader from '../../TitleHeader/TitleHeader'
+import { TitleHeader } from '../../TitleHeader'
 import { Table } from '../../../core-ui/Table'
 import { columns } from './helpers'
 import { useEffect, useState } from 'react'

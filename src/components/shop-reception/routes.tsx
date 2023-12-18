@@ -39,6 +39,7 @@ import { SupportWrongDestinationDetail } from './SupportWrongDestination/Support
 import { PackagingDisputesTimerDetail } from './PackagingDisputesTimer/PackagingDisputesTimerDetail'
 import { BalancePackageHistory } from './BalancePackages/BalancePackageHistory'
 import { BalancePackageForm } from './BalancePackages/BalancePackageForm'
+import { SGRProducts } from './SGRProducts'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -194,6 +195,10 @@ export const useShopReceptionRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_BALANCE_PACKAGING_HISTORY}
         element={<BalancePackageHistory />}
+      />
+      <Route
+        path={URLS.AUTH_SGR_PRODUCTS}
+        element={<SGRProducts />}
       />
     </>
   )

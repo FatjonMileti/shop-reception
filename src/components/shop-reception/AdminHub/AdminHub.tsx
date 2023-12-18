@@ -9,8 +9,7 @@ import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import TitleHeader from '../TitleHeader/TitleHeader'
-import { AdminDepositForm } from '../AdminDeposit/AdminDepositForm'
+import { TitleHeader } from '../TitleHeader'
 import { AdminHubForm } from './AdminHubForm'
 
 const AdminHub = () => {

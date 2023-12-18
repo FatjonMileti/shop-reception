@@ -10,7 +10,7 @@ import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import TitleHeader from '../TitleHeader/TitleHeader'
+import { TitleHeader } from '../TitleHeader'
 import { useNavigate } from 'react-router-dom'
 
 const MetiFiles = () => {
