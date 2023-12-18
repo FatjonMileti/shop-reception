@@ -15,6 +15,7 @@ import { columns, roles } from './helpers'
 import { DeleteMerchandiser } from './DeleteMerchandiser'
 import { CreateEditMerchandiser } from './CreateEditMerchandiser'
 import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const tableFilterFields = [
   {
@@ -133,16 +134,17 @@ const MerchandisersTab = () => {
             </div>
           )}
 
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="standard"
-              applyCustomStyle
+          <Grid xs={12} md={12} item>
+            <FilterDataSelect
               name="store.id"
+              defaultSelectedData={storeFilterValue}
               label="Selecteaza magazin"
-              disableClearable
-              value={storeFilterValue}
+              showCounter={true}
+              showSearch={true}
+              counterLabel="Select department"
+              noDataFoundLabel="No results!"
               options={filterOptions}
-              onChange={handleFilterChange}
+              onSelect={handleFilterChange}
             />
           </Grid>
         </Grid>

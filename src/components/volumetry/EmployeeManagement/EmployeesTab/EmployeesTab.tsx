@@ -12,6 +12,7 @@ import { toTableRowItems } from './serializers'
 import { Input } from 'components/core-ui/Input'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { columns } from './helpers'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const EmployeesTab = () => {
   const { showNotification } = useNotification()
@@ -135,7 +136,7 @@ const EmployeesTab = () => {
             { name: 'store.name', value: storeFilterValue.value },
             { name: 'name', value: nameFilterValue.value },
             { name: 'position', value: positionFilterValue.value },
-            { name: 'department.name', value: departmentFilterValue.value },
+            { name: 'department.name', value: departmentFilterValue.value }
           ],
           tableFilters,
           page,
@@ -214,16 +215,17 @@ const EmployeesTab = () => {
             </div>
           )}
 
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="standard"
-              applyCustomStyle
+          <Grid xs={12} md={12} item>
+            <FilterDataSelect
               name="store.id"
+              defaultSelectedData={storeFilterValue}
               label="Selecteaza magazin"
-              disableClearable
-              value={storeFilterValue}
+              showCounter={true}
+              showSearch={true}
+              counterLabel="Select department"
+              noDataFoundLabel="No results!"
               options={filterOptions}
-              onChange={handleStoreFilterChange}
+              onSelect={handleStoreFilterChange}
             />
           </Grid>
         </Grid>
