@@ -113,13 +113,13 @@ const ProductManagementRegion = () => {
 
   const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
     setFamiliesFilterValue(value)
-    if (storeFilterValue === null) return
+    if (familiesFilterValue === null) return
     setShouldRefreshData(true)
   }
 
   const handleSubfamiliesChange = (value: ValueLabelInterface[]): void => {
     setSubfamiliesFilterValue(value)
-    if (storeFilterValue === null) return
+    if (subfamiliesFilterValue === null) return
     setShouldRefreshData(true)
   }
 

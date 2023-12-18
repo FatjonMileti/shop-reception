@@ -49,7 +49,7 @@ const ProductManagementStore = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/product',
-          filters,
+          filters: filters,
           searchText,
           searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
           tableFilters,
@@ -151,7 +151,7 @@ const ProductManagementStore = () => {
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
-          <Grid xs={12} md={12} container justifyContent={'space-between'}>
+          <Grid xs={12} md={12} container spacing={5}>
             <Grid xs={12} md={3} item>
               <AsyncAutocomplete
                 variant="outlined"

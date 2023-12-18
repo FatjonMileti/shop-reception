@@ -96,7 +96,6 @@ const ProductionManagementStore = () => {
 
   const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
     setFamiliesFilterValue(value)
-    setSubfamiliesFilterValue([])
     setShouldRefreshData(true)
   }
 
@@ -118,7 +117,7 @@ const ProductionManagementStore = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/store/cadentier',
-          filters,
+          filters: filters,
           page,
           rowsPerPage: 25,
           order,
@@ -214,7 +213,7 @@ const ProductionManagementStore = () => {
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         ) : (
           <>
-            <Grid xs={12} md={12} container justifyContent={'space-between'}>
+            <Grid xs={12} md={12} container spacing={5}>
               <Grid xs={12} md={3} item>
                 <DatePicker
                   label="Planificare pentru"
@@ -295,7 +294,6 @@ const ProductionManagementStore = () => {
               order={tableState.order}
               orderBy={tableState.orderBy}
               tableFilters={tableState.tableFilters}
-
               rowActions={[
                 {
                   label: 'Edit',

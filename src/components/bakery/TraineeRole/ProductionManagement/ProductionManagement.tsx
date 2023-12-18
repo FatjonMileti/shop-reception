@@ -120,7 +120,7 @@ const ProductionManagement = () => {
     }
   )
 
-  const handleFilterChange = (value: ValueLabelInterface): void => {
+  const handleStoreFilterChange = (value: ValueLabelInterface): void => {
     setStoreFilterValue(value)
     if (storeFilterValue === null) return
     setShouldRefreshData(true)
@@ -128,13 +128,13 @@ const ProductionManagement = () => {
 
   const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
     setFamiliesFilterValue(value)
-    if (storeFilterValue === null) return
+    if (familiesFilterValue === null) return
     setShouldRefreshData(true)
   }
 
   const handleSubfamiliesChange = (value: ValueLabelInterface[]): void => {
     setSubfamiliesFilterValue(value)
-    if (storeFilterValue === null) return
+    if (subfamiliesFilterValue === null) return
     setShouldRefreshData(true)
   }
 
@@ -263,7 +263,7 @@ const ProductionManagement = () => {
                   label="Magazin"
                   value={storeFilterValue}
                   options={filterOptions}
-                  onChange={handleFilterChange}
+                  onChange={handleStoreFilterChange}
                 />
               </Grid>
               <Grid xs={12} md={3} item>

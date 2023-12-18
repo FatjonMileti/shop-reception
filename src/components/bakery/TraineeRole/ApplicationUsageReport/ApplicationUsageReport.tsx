@@ -53,7 +53,7 @@ const ApplicationUsageReport = () => {
       { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
       { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
       ...(storeFilterValue && storeFilterValue.length > 0
-        ? [{ name: 'storeName', value: storeFilterValue.map(val => val.value) }]
+        ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
         : []),
     ];
 
@@ -102,13 +102,17 @@ const ApplicationUsageReport = () => {
   }
 
   const handleDownload = async () => {
+    const filters = [
+      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'store', value: storeFilterValue[0]?.value },
+    ].filter(
+      f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+    )
+
     const url = toTableGETUrl({
       url: '/bakery/report/download/application',
-      filters: [
-        { name: 'storeName', value: storeFilterValue[0]?.value },
-        { name: 'startDate', value: formatBakeryPayloadDate(startDateFilterValue) },
-        { name: 'endDate', value: formatBakeryPayloadDate(endDateFilterValue) }
-      ]
+      filters: filters
     })
     try {
       const response = await makeCoreGetFileRequest(url, {
