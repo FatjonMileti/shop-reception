@@ -168,7 +168,7 @@ const EditStore: React.FC<EditStoreProps> = props => {
                   <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
                 </div>
               ) : (
-                <Grid xs={12} md={3} item>
+                <Grid xs={12} item>
                     <AsyncAutocomplete
                       variant="outlined"
                       name="zone"
@@ -176,6 +176,7 @@ const EditStore: React.FC<EditStoreProps> = props => {
                       value={zoneValue}
                       options={zones}
                       onChange={handleZoneChange}
+                      style={{ minWidth: '100%'}}
                     />
                 </Grid>
               )}
@@ -185,12 +186,13 @@ const EditStore: React.FC<EditStoreProps> = props => {
                   <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
                 </div>
               ) : (
-                <Grid xs={12} md={3} item>
+                <Grid xs={12} item>
                   <AsyncAutocomplete
                     variant="outlined"
                     name="region"
                     label="Regiune"
                     value={regionValue}
+                    style={{ width: '100%'}}
                     options={regions}
                     onChange={handleRegionChange}
                   />

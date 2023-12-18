@@ -134,7 +134,7 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
                   <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
                 </div>
               ) : (
-                <Grid xs={12} md={3} item>
+                <Grid xs={12} item>
                   <AsyncAutocomplete
                     variant="outlined"
                     name="moduleName"

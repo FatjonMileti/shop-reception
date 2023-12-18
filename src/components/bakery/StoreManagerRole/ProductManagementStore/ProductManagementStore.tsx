@@ -176,7 +176,6 @@ const ProductManagementStore = () => {
             </Grid>
             <Grid xs={12} md={3} item>
               <StaticAutocomplete
-                applyCustomStyle
                 variant="outlined"
                 name="scheduleProduct"
                 label="Produs cadentier"

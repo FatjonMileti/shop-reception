@@ -1,6 +1,6 @@
 import s from '../../commonStyles.modules.scss'
 import { useNotification } from 'hooks'
-import { CircularProgress, Divider, Grid } from '@mui/material'
+import { Box, CircularProgress, Divider, Grid, Paper } from '@mui/material'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -48,15 +48,20 @@ const ApplicationUsageReport = () => {
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
+
+    const filters = [
+      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      ...(storeFilterValue && storeFilterValue.length > 0
+        ? [{ name: 'storeName', value: storeFilterValue.map(val => val.value) }]
+        : []),
+    ];
+
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/report/trainee/application',
-          filters: [
-            { name: 'storeName', value: storeFilterValue.map(val => val.value) },
-            { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-            { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') }
-          ],
+          filters: filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -120,74 +125,73 @@ const ApplicationUsageReport = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Grid container>
-        <>
-          <Grid xs={12} md={12} container justifyContent={'space-between'}>
-            <Grid xs={12} md={3} item>
-              <DatePicker
-                label="Data inceput"
-                value={startDateFilterValue}
-                variant="standard"
-                required
-                onChange={val => handleFilterChange('startDate', val)}
-              />
-            </Grid>
-            <Grid xs={12} md={3} item>
-              <DatePicker
-                label="Data sfarsit"
-                value={endDateFilterValue}
-                variant="standard"
-                required
-                onChange={val => handleFilterChange('endDate', val)}
-              />
-            </Grid>
-
-            {isStoresFilterOptionsLoading ? (
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            ) : (
-              <Grid xs={12} md={3} item>
-                <AsyncAutocomplete
-                  variant="standard"
-                  applyCustomStyle
-                  name="store.id"
-                  label="Selecteaza magazin"
-                  disableClearable
-                  value={storeFilterValue}
-                  options={storesFilterOptions}
-                  onChange={val => handleFilterChange('store', val)}
-                  multiple={true}
-                />
-              </Grid>
-            )}
+      <Paper className={s.filtersContainer}>
+        <Grid container spacing={4}>
+          <Grid xs={12} md={3} item>
+            <DatePicker
+              label="Data inceput"
+              value={startDateFilterValue}
+              variant="outlined"
+              required
+              onChange={val => handleFilterChange('startDate', val)}
+            />
           </Grid>
 
-          <Grid xs={12} item>
-            <Divider />
+          <Grid xs={12} md={3} item>
+            <DatePicker
+              label="Data sfarsit"
+              value={endDateFilterValue}
+              variant="outlined"
+              required
+              onChange={val => handleFilterChange('endDate', val)}
+            />
           </Grid>
 
-          <Table
-            hideCheckbox
-            columns={ColumnsComponent(startDateFilterValue, endDateFilterValue)}
-            items={tableItems}
-            fetchData={fetchData}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            stickyRatio={0.45}
-            hasStickyHeader
-            maxHeight={'600px'}
-            frequency="day"
-            toolbarActions={[
-              {
-                label: 'Descarca',
-                icon: <DownloadOutlined />,
-                onClick: () => handleDownload()
-              }
-            ]}
-          />
-        </>
+          {isStoresFilterOptionsLoading ? (
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+          ) : (
+            <Grid xs={12} md={3} item>
+              <AsyncAutocomplete
+                variant="outlined"
+                name="store.id"
+                label="Magazin"
+                value={storeFilterValue}
+                options={storesFilterOptions}
+                onChange={val => handleFilterChange('store', val)}
+                multiple={true}
+              />
+            </Grid>
+          )}
+        </Grid>
+      </Paper>
+
+      <Grid xs={12} item>
+        <Divider />
       </Grid>
+
+      <Box>
+        <Table
+          hideCheckbox
+          columns={ColumnsComponent(startDateFilterValue, endDateFilterValue)}
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          stickyRatio={0.45}
+          hasStickyHeader
+          maxHeight={'600px'}
+          frequency="day"
+          toolbarActions={[
+            {
+              label: 'Descarca',
+              icon: <DownloadOutlined />,
+              onClick: () => handleDownload()
+            }
+          ]}
+        />
+      </Box>
     </div>
   )
 }

@@ -128,7 +128,6 @@ const ProductionManagement = () => {
 
   const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
     setFamiliesFilterValue(value)
-    setSubfamiliesFilterValue([])
     if (storeFilterValue === null) return
     setShouldRefreshData(true)
   }
@@ -145,6 +144,7 @@ const ProductionManagement = () => {
       const filters = [
         { name: 'date', value: formatPayloadDate(planningDate) },
         { name: 'store', value: storeFilterValue?.value },
+        { name: 'family', value: familiesFilterValue?.map(val => val.value) },
         { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
       ].filter(
         f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
@@ -212,6 +212,7 @@ const ProductionManagement = () => {
         filters: [
           { name: 'date', value: formatPayloadDate(planningDate) },
           { name: 'store', value: storeFilterValue?.value },
+          { name: 'family', value: familiesFilterValue?.map(val => val.value) },
           { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
         ].filter(
           f =>
@@ -242,7 +243,7 @@ const ProductionManagement = () => {
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         ) : (
           <>
-            <Grid xs={12} md={12} container spacing={5} justifyContent={'space-between'}>
+            <Grid xs={12} md={12} container spacing={5}>
               <Grid xs={12} md={3} item>
                 <DatePicker
                   label="Planificare pentru"

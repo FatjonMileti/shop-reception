@@ -26,8 +26,8 @@ const FamilyProducts = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: `/bakery/product/family/${id}`,
-          filters: [],
+          url: `/bakery/product/family`,
+          filters: [{ name: 'family', value: id }],
           tableFilters,
           page,
           rowsPerPage,

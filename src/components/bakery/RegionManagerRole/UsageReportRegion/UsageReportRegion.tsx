@@ -127,7 +127,7 @@ const UsageReportRegion = () => {
               <DatePicker
                 label="Data inceput"
                 value={startDateFilterValue}
-                variant="standard"
+                variant="outlined"
                 required
                 onChange={val => handleFilterChange('startDate', val)}
               />
@@ -136,7 +136,7 @@ const UsageReportRegion = () => {
               <DatePicker
                 label="Data sfarsit"
                 value={endDateFilterValue}
-                variant="standard"
+                variant="outlined"
                 required
                 onChange={val => handleFilterChange('endDate', val)}
               />
@@ -147,11 +147,9 @@ const UsageReportRegion = () => {
             ) : (
               <Grid xs={12} md={3} item>
                 <AsyncAutocomplete
-                  variant="standard"
-                  applyCustomStyle
+                  variant="outlined"
                   name="store.id"
                   label="Selecteaza magazin"
-                  disableClearable
                   value={storeFilterValue}
                   options={storesFilterOptions}
                   onChange={val => handleFilterChange('store', val)}

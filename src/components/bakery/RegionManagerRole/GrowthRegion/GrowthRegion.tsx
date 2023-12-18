@@ -186,7 +186,7 @@ const GrowthRegion = () => {
                 <DatePicker
                   label="Planificare pentru"
                   value={planningDate}
-                  variant="standard"
+                  variant="outlined"
                   required
                   onChange={value => {
                     setPlanningDate(dayjs(value))
@@ -196,7 +196,7 @@ const GrowthRegion = () => {
               </Grid>
               <Grid xs={12} md={3} item>
                 <AsyncAutocomplete
-                  variant="standard"
+                  variant="outlined"
                   name="store.id"
                   label="Magazin"
                   value={storeFilterValue}
@@ -206,7 +206,7 @@ const GrowthRegion = () => {
               </Grid>
               <Grid xs={12} md={3} item>
                 <AsyncAutocomplete
-                  variant="standard"
+                  variant="outlined"
                   name="subfamilies"
                   label="Subfamilie"
                   value={subfamiliesFilterValue}
