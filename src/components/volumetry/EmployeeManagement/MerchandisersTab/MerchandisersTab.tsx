@@ -14,7 +14,7 @@ import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetr
 import { columns, roles } from './helpers'
 import { DeleteMerchandiser } from './DeleteMerchandiser'
 import { CreateEditMerchandiser } from './CreateEditMerchandiser'
-import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 
 const tableFilterFields = [
   {
@@ -172,7 +172,6 @@ const MerchandisersTab = () => {
             hideCheckbox
             orderBy="department.name"
             order="desc"
-            newButton={canCreate ? { onClick: openNewModal } : null}
             columns={columns}
             items={tableItems}
             fetchData={fetchData}
@@ -200,6 +199,13 @@ const MerchandisersTab = () => {
               }
             ]}
             rowActionsWidth="130px"
+            toolbarActions={[
+              {
+                label: 'Add',
+                icon: <AddActionIcon />,
+                onClick: () => (canCreate ? openNewModal() : null)
+              }
+            ]}
           />
         </Box>
       )}
