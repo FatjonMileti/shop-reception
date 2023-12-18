@@ -50,6 +50,9 @@ import {
 import {
     DeliveryCompleteScanStep3
 } from './GoodsReception/Delivery/DeliveryDetail/DeliveryCompleteScan/DeliveryCompleteScanStep3'
+import {
+    DeliverySensitiveProductsConfirm
+} from './GoodsReception/Delivery/DeliveryDetail/DeliverySensitiveProducts/DeliverySensitiveProductsConfirm'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -209,6 +212,10 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS}
         element={<DeliverySensitiveProducts />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM}
+        element={<DeliverySensitiveProductsConfirm />}
       />
       <Route
         path={URLS.AUTH_DELIVERY_RANDOM_SUPPORT}

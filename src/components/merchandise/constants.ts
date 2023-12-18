@@ -21,6 +21,7 @@ export const URLS = {
   AUTH_DELIVERY_COMPLETE_SCAN_STEP_2: '/merchandise/delivery/full-scan/step-2',
   AUTH_DELIVERY_COMPLETE_SCAN_STEP_3: '/merchandise/delivery/full-scan/step-3',
   AUTH_DELIVERY_SENSITIVE_PRODUCTS: '/merchandise/delivery/sensitive-products',
+  AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM: '/merchandise/delivery/sensitive-products/confirm',
   AUTH_DELIVERY_RANDOM_SUPPORT: '/merchandise/delivery/random-support',
   AUTH_DELIVERY_RANDOM_PRODUCT: '/merchandise/delivery/random-product',
   AUTH_CONFIRM_RETURN_TRUCKS: '/merchandise/confirm-return-trucks',
