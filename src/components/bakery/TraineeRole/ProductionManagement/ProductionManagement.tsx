@@ -145,6 +145,7 @@ const ProductionManagement = () => {
       const filters = [
         { name: 'date', value: formatPayloadDate(planningDate) },
         { name: 'store', value: storeFilterValue?.value },
+        { name: 'family', value: familiesFilterValue?.map(val => val.value) },
         { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
       ].filter(
         f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
@@ -212,6 +213,7 @@ const ProductionManagement = () => {
         filters: [
           { name: 'date', value: formatPayloadDate(planningDate) },
           { name: 'store', value: storeFilterValue?.value },
+          { name: 'family', value: familiesFilterValue?.map(val => val.value) },
           { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
         ].filter(
           f =>
