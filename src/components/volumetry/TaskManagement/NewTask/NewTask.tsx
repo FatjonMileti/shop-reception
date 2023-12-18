@@ -190,14 +190,6 @@ const NewTask: React.FC<NewTaskProps> = props => {
             error={!!formik.errors.taskName}
             helperText={formik.errors.taskName as string}
             required
-            inputProps={{
-              style: {
-                height: '40px'
-              }
-            }}
-            inputLabelProps={{
-              style: { lineHeight: '40px' }
-            }}
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -208,6 +200,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
             error={!!formik.errors.taskName}
             helperText={formik.errors.taskName as string}
             required
+            variant="outlined"
             style={{ width: '100%' }}
           />
         </Grid>
@@ -219,6 +212,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
             error={!!formik.errors.taskName}
             helperText={formik.errors.taskName as string}
             required
+            variant="outlined"
             style={{ width: '100%' }}
           />
         </Grid>
@@ -263,14 +257,6 @@ const NewTask: React.FC<NewTaskProps> = props => {
             }
             error={!!formik.errors.prodStandardValue}
             helperText={formik.errors.prodStandardValue as string}
-            inputProps={{
-              style: {
-                height: '40px'
-              }
-            }}
-            inputLabelProps={{
-              style: { lineHeight: '40px' }
-            }}
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -314,14 +300,6 @@ const NewTask: React.FC<NewTaskProps> = props => {
             }
             error={!!formik.errors.priority}
             helperText={formik.errors.priority as string}
-            inputProps={{
-              style: {
-                height: '40px'
-              }
-            }}
-            inputLabelProps={{
-              style: { lineHeight: '40px' }
-            }}
           />
         </Grid>
         <Grid xs={12} md={6} item>
