@@ -150,11 +150,6 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
-      const extraCustomUrlParams: Filter[] = [
-        ...tableFilters,
-        { name: 'myOrders', value: String(withMyOrders) }
-      ]
-
       let filters: Filter[] = []
       if (selectedDeliveryOption) {
         const deliveryOptions = selectedDeliveryOption.map(option => option.value)
@@ -172,12 +167,11 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
         toTableGETUrl({
           url: urlResource,
           tableFilters,
+          filters: [{ name: 'myOrders', value: String(withMyOrders) }],
           page,
           rowsPerPage,
           order,
           orderBy,
-          filters,
-          extraCustomUrlParams
         })
       )) as BillsResponseModel
       setTableItems(toTableRowItems(response.list))
