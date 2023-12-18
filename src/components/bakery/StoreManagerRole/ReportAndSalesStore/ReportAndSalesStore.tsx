@@ -50,7 +50,7 @@ const ReportAndSalesStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -79,7 +79,7 @@ const ReportAndSalesStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -130,7 +130,7 @@ const ReportAndSalesStore = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/store/cadentier',
-          filters,
+          filters: filters,
           page,
           rowsPerPage: 25,
           order,
@@ -174,7 +174,6 @@ const ReportAndSalesStore = () => {
 
   const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
     setFamiliesFilterValue(value)
-    setSubfamiliesFilterValue([])
     setShouldRefreshData(true)
   }
 
@@ -190,7 +189,7 @@ const ReportAndSalesStore = () => {
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         ) : (
           <>
-            <Grid xs={12} md={12} container justifyContent={'space-between'}>
+            <Grid xs={12} md={12} container spacing={5}>
               <Grid xs={12} md={3} item>
                 <DatePicker
                   label="Planificare pentru"

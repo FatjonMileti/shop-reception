@@ -49,7 +49,7 @@ const ProductManagementStore = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/product',
-          filters,
+          filters: filters,
           searchText,
           searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
           tableFilters,
@@ -85,7 +85,7 @@ const ProductManagementStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -112,7 +112,7 @@ const ProductManagementStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -151,7 +151,7 @@ const ProductManagementStore = () => {
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
-          <Grid xs={12} md={12} container justifyContent={'space-between'}>
+          <Grid xs={12} md={12} container spacing={5}>
             <Grid xs={12} md={3} item>
               <AsyncAutocomplete
                 variant="outlined"
@@ -176,7 +176,6 @@ const ProductManagementStore = () => {
             </Grid>
             <Grid xs={12} md={3} item>
               <StaticAutocomplete
-                applyCustomStyle
                 variant="outlined"
                 name="scheduleProduct"
                 label="Produs cadentier"

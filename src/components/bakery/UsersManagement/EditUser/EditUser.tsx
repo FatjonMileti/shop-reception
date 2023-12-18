@@ -90,7 +90,7 @@ const EditUser: React.FC<EditUserProps> = props => {
       }
   )
 
-    const { data: structRegion, isLoading: isStructRegionLoading, refetch: refetchStructRegion } = useQuery(
+    const { data: structRegion, refetch: refetchStructRegion } = useQuery(
       ['regions', regionId],
       async () => { 
         const result = await makeCoreGetRequest(`/bakery/structure/role/${regionId}`)
@@ -109,7 +109,7 @@ const EditUser: React.FC<EditUserProps> = props => {
       }
     )
 
-    const { data: structStore, isLoading: isStructStoreLoading, refetch: refetchStructStore } = useQuery(
+    const { data: structStore, refetch: refetchStructStore } = useQuery(
       ['stores', storeId],
       async () => {
         const result = await makeCoreGetRequest(`/bakery/structure/role/${storeId}`)
@@ -128,7 +128,7 @@ const EditUser: React.FC<EditUserProps> = props => {
       }
     )
 
-    const { data: structTraceabilityOp, isLoading: isStructTraceabilityOpLoading, refetch: refetchStructTraceabilityOp } = useQuery(
+    const { data: structTraceabilityOp, refetch: refetchStructTraceabilityOp } = useQuery(
       ['traceabilityOp', traceabilityId],
       async () => {
         const result = await makeCoreGetRequest(`/bakery/structure/role/${traceabilityId}`)
@@ -219,7 +219,7 @@ const EditUser: React.FC<EditUserProps> = props => {
     }
     
     useEffect(() => {
-      if(editItem && roles && structRegion && structStore) {
+      if(editItem?.structureRoles?.length && editItem && roles && structRegion && structStore && structTraceabilityOp) {
         editItem?.structureRoles?.forEach(strRole => {
           const role = roles?.find(role => role.id === strRole.roleId)
           if(role?.name === 'REGION_MANAGER') updateStateWithExistingValues(strRole, structRegion, setIsRegionManagerChecked, setRegionMgValue)
@@ -244,10 +244,6 @@ const EditUser: React.FC<EditUserProps> = props => {
         }, []);
       
         setTraineeTypes(toAsyncSelectOptions(traineeTypes, 'id', 'name'));
-      
-        if (traineeTypes.length) {
-          setIsTraineeChecked(true);
-        }
       }
     },[roles])
 
@@ -284,28 +280,20 @@ const EditUser: React.FC<EditUserProps> = props => {
                 />
               </Grid>
               {isRegionManagerChecked && 
-                <>
-                  {isStructRegionLoading ? (
-                    <div style={{ display: 'flex' }}>
-                      <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-                    </div>
-                  ) : (
-                    <Grid xs={12} item>
-                      <AsyncAutocomplete
-                        disableClearable
-                        variant="outlined"
-                        name="region_manager"
-                        label="Structura asociata"
-                        value={regionMgValue}
-                        options={structRegion}
-                        onChange={(val) => handleChange('regionMg', val)}
-                        required={isRegionManagerChecked}
-                        error={isRegionManagerChecked && !regionMgValue?.value}
-                        helperText={isRegionManagerChecked && !regionMgValue?.value && 'Region manager is required'}
-                      />
-                    </Grid>
-                  )}
-                </>
+                <Grid xs={12} item>
+                  <AsyncAutocomplete
+                    disableClearable
+                    variant="outlined"
+                    name="region_manager"
+                    label="Structura asociata"
+                    value={regionMgValue}
+                    options={structRegion}
+                    onChange={(val) => handleChange('regionMg', val)}
+                    required={isRegionManagerChecked}
+                    error={isRegionManagerChecked && !regionMgValue?.value}
+                    helperText={isRegionManagerChecked && !regionMgValue?.value && 'Region manager is required'}
+                  />
+                </Grid> 
               }
 
               <Grid xs={12} item>
@@ -316,28 +304,20 @@ const EditUser: React.FC<EditUserProps> = props => {
                 />
               </Grid>
               {isStoreManagerChecked &&
-              <>
-                {isStructStoreLoading ? (
-                  <div style={{ display: 'flex' }}>
-                    <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-                  </div>
-                ) : (
-                  <Grid xs={12} item>
-                    <AsyncAutocomplete
-                      disableClearable
-                      variant="outlined"
-                      name="store_manager"
-                      label="Structura asociata"
-                      value={storeMgValue}
-                      options={structStore}
-                      onChange={(val) => handleChange('storeMg', val)}
-                      required={isStoreManagerChecked}
-                      error={isStoreManagerChecked && !storeMgValue?.value}
-                      helperText={isStoreManagerChecked && !storeMgValue?.value && 'Store manager is required'}
-                      />
-                  </Grid>
-                )}
-              </>
+                <Grid xs={12} item>
+                  <AsyncAutocomplete
+                    disableClearable
+                    variant="outlined"
+                    name="store_manager"
+                    label="Structura asociata"
+                    value={storeMgValue}
+                    options={structStore}
+                    onChange={(val) => handleChange('storeMg', val)}
+                    required={isStoreManagerChecked}
+                    error={isStoreManagerChecked && !storeMgValue?.value}
+                    helperText={isStoreManagerChecked && !storeMgValue?.value && 'Store manager is required'}
+                    />
+                </Grid>
               }
 
               <Grid xs={12} item>
@@ -348,28 +328,20 @@ const EditUser: React.FC<EditUserProps> = props => {
                 />
               </Grid>
               {isTraceabilityOpChecked &&
-                 <>
-                 {isStructTraceabilityOpLoading ? (
-                   <div style={{ display: 'flex' }}>
-                     <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-                   </div>
-                 ) : (
-                   <Grid xs={12} item>
-                     <AsyncAutocomplete
-                       disableClearable
-                       variant="outlined"
-                       name="traceability_operator"
-                       label="Structura asociata"
-                       value={traceabilityOpValue}
-                       options={structTraceabilityOp}
-                       onChange={(val) => handleChange('traceabilityOp', val)}
-                       required={isTraceabilityOpChecked}
-                       error={isTraceabilityOpChecked && !traceabilityOpValue?.value}
-                       helperText={isTraceabilityOpChecked && !traceabilityOpValue?.value && 'Traceability operator is required'}
-                       />
-                   </Grid>
-                 )}
-               </>
+                <Grid xs={12} item>
+                  <AsyncAutocomplete
+                    disableClearable
+                    variant="outlined"
+                    name="traceability_operator"
+                    label="Structura asociata"
+                    value={traceabilityOpValue}
+                    options={structTraceabilityOp}
+                    onChange={(val) => handleChange('traceabilityOp', val)}
+                    required={isTraceabilityOpChecked}
+                    error={isTraceabilityOpChecked && !traceabilityOpValue?.value}
+                    helperText={isTraceabilityOpChecked && !traceabilityOpValue?.value && 'Traceability operator is required'}
+                    />
+                </Grid>
               }
 
               <Grid xs={12} item>

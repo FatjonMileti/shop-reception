@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { DescriptionText } from 'components/core-ui/DescriptionText'
 import { ImageCell } from 'components/core-ui/ImageCell'
@@ -10,7 +11,9 @@ export const columns = [
     align: 'left',
     width: '200px',
     sticky: true,
-    render: row => <ImageCell imageUrl={row.imageUrl} value={row.productName} />
+    render: row => <Box>
+      <ImageCell imageUrl={row.imageUrl} value={row.productName} />
+      </Box>
   },
   {
     title: 'Cod METI',

@@ -152,7 +152,7 @@ VALUES
     (38, 'Management productie', 'GrowthRegion', '/bakery/regionManager/growth-region', true , 33, true),
     (39, 'Print cadentier', 'ProductionManagement', '/bakery/regionManager/cadentier-region-print', true, 33, false),
     (40, 'Coeficient crestere regiune', 'GrowthIndex', '/bakery/regionManager/growth-index', true , 34, true),
-    (41, 'Coeficientul de crestere la nivelul regiunii', 'StoresManagement', '/bakery/regionManager/growthIndexView/:id', true , 34, false),
+    (41, 'Coeficientul de crestere la nivelul regiunii', 'StoresManagement', '/bakery/regionManager/growthIndexView', true , 34, false),
     (42, 'Setari coeficient de crestere la nivelul produselor din magazin', 'StoresManagement', '/bakery/regionManager/growthIndexProdcutsView', true , 34, false),
     (43, 'Raport vanzari + cadentier', 'CadentierSalesRegion', '/bakery/regionManager/cadentier-sales-region', true , 35, true),
     (44, 'Raport utilizare aplicatie', 'UsageReportRegion', '/bakery/regionManager/usage-report-region', true , 36, true),

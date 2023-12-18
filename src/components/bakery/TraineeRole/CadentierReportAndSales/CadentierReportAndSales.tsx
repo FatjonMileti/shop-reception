@@ -1,6 +1,6 @@
 import s from '../../commonStyles.modules.scss'
 import { useNotification } from 'hooks'
-import { CircularProgress, Divider, Grid } from '@mui/material'
+import { Box, CircularProgress, Divider, Grid, Paper } from '@mui/material'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -18,6 +18,7 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 import { columns } from './helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { toTableRowItems } from './serializers'
+import { FamilyItem, SubfamilyItem } from '../ProductionManagement/interfaces'
 
 const CadentierReportAndSales = () => {
   const { showNotification } = useNotification()
@@ -28,8 +29,10 @@ const CadentierReportAndSales = () => {
 
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
   const [planningDateFilterValue, setPlanningDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
+  const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
+  const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
 
-  const { data: storesFilterOptions, isLoading: isStoresFilterOptionsLoading } = useQuery(
+  const { data: storesFilterOptions } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/all')
@@ -39,23 +42,116 @@ const CadentierReportAndSales = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
     }
   )
 
+  const familiesQuery = useQuery(
+    ['families', storeFilterValue?.value],
+    async () => {
+      const result = await makeCoreGetRequest(
+        '/bakery/store/families',
+        {
+          params: {
+            store: storeFilterValue?.value,
+          },
+          paramsSerializer: { indexes: null }
+        }
+      )
+
+      const resultOptions = result.map(
+        (item: FamilyItem): ValueLabelInterface => ({
+          label: item.name,
+          value: item.id
+        })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: subfamiliesOptions } = useQuery(
+    ['subfamilies', storeFilterValue?.value, familiesFilterValue.map(({ value }) => value)],
+    async () => {
+      const result = await makeCoreGetRequest(
+        '/bakery/store/families/subfamilies',
+        {
+          params: {
+            store: storeFilterValue?.value,
+            family: familiesFilterValue.map(({ value }) => value)
+          },
+          paramsSerializer: { indexes: null }
+        }
+      )
+
+      const resultOptions = result.map(
+        (item: SubfamilyItem): ValueLabelInterface => ({
+          label: item.subFamily,
+          value: item.subFamily
+        })
+      )
+
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: storeFilterValue !== null
+    }
+  )
+
+  const handleStoreFilterChange = (value: ValueLabelInterface): void => {
+    setStoreFilterValue(value)
+    if (storeFilterValue === null) return
+    setShouldRefreshData(true)
+  }
+
+  const handlePlanningDateFilterChange = (value: string): void => {
+    setPlanningDateFilterValue(dayjs(value))
+    setShouldRefreshData(true)
+  }
+
+  const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
+    setFamiliesFilterValue(value)
+    if (familiesFilterValue === null) return
+    setShouldRefreshData(true)
+  }
+
+  const handleSubfamiliesChange = (value: ValueLabelInterface[]): void => {
+    setSubfamiliesFilterValue(value)
+    if (subfamiliesFilterValue === null) return
+    setShouldRefreshData(true)
+  }
+
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
+      const filters = [
+        { name: 'date', value: formatBakeryPayloadDate(planningDateFilterValue) },
+        { name: 'store', value: storeFilterValue.value },
+        { name: 'family', value: familiesFilterValue?.map(val => val.value) },
+        { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
+      ].filter(
+        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+      )
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/report/product/sale/cadentier',
-          filters: [
-            { name: 'store', value: storeFilterValue.value },
-            { name: 'date', value: formatBakeryPayloadDate(planningDateFilterValue) }
-          ],
+          filters: filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -74,18 +170,6 @@ const CadentierReportAndSales = () => {
         type: 'error'
       })
     }
-  }
-
-  const handleStoreFilterChange = (value: ValueLabelInterface): void => {
-    setStoreFilterValue(value)
-    if (storeFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
-  const handlePlanningDateFilterChange = (value: string): void => {
-    setPlanningDateFilterValue(dayjs(value))
-    if (storeFilterValue === null) return
-    setShouldRefreshData(true)
   }
 
   const handleDownload = async () => {
@@ -111,9 +195,8 @@ const CadentierReportAndSales = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Grid container>
-        <>
-          <Grid xs={12} md={12} container justifyContent={'space-between'}>
+        <Paper className={s.filtersContainer}>
+          <Grid container spacing={4}>
             <Grid xs={12} md={3} item>
               <DatePicker
                 label="Planificare pentru"
@@ -123,30 +206,47 @@ const CadentierReportAndSales = () => {
                 onChange={handlePlanningDateFilterChange}
               />
             </Grid>
-
-            {isStoresFilterOptionsLoading ? (
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            ) : (
-              <Grid xs={12} md={3} item>
-                <AsyncAutocomplete
-                  variant="outlined"
-                  applyCustomStyle
-                  name="store.id"
-                  label="Selecteaza magazin"
-                  disableClearable
-                  value={storeFilterValue}
-                  options={storesFilterOptions}
-                  onChange={handleStoreFilterChange}
-                />
-              </Grid>
-            )}
+            <Grid xs={12} md={3} item>
+              <AsyncAutocomplete
+                variant="outlined"
+                name="store.id"
+                label="Magazin"
+                value={storeFilterValue}
+                options={storesFilterOptions}
+                onChange={handleStoreFilterChange}
+              />
+            </Grid>
+            <Grid xs={12} md={3} item>
+              <AsyncAutocomplete
+                variant="outlined"
+                name="family"
+                label="Familie"
+                value={familiesFilterValue}
+                options={familiesQuery.data || []}
+                onChange={handleFamiliesChange}
+                multiple
+              />
+            </Grid>
+            <Grid xs={12} md={3} item>
+              <AsyncAutocomplete
+                variant="outlined"
+                name="subfamilies"
+                label="Subfamilie"
+                value={subfamiliesFilterValue}
+                options={subfamiliesOptions || []}
+                onChange={handleSubfamiliesChange}
+                multiple
+              />
+            </Grid>
           </Grid>
+        </Paper>
 
-          <Grid xs={12} item>
-            <Divider />
-          </Grid>
+        <Grid xs={12} item>
+          <Divider />
+        </Grid>
 
-          {storeFilterValue && (
+        {storeFilterValue && (
+          <Box>
             <GroupTable
               hideCheckbox
               columns={columns}
@@ -169,9 +269,8 @@ const CadentierReportAndSales = () => {
                 }
               ]}
             />
-          )}
-        </>
-      </Grid>
+          </Box>
+        )}
     </div>
   )
 }

@@ -35,7 +35,7 @@ const EditProductGrowthIndex: React.FC<EditProductGrowthIndexProps> = props => {
         {
           onError: error => {
             showNotification({
-              message: `Error while fetching store data. ${formatErrorMessage(
+              message: `Error while fetching product growth index data. ${formatErrorMessage(
                 error
               )}`,
               type: 'error'
