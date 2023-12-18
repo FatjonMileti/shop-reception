@@ -53,6 +53,13 @@ import {
 import {
     DeliverySensitiveProductsConfirm
 } from './GoodsReception/Delivery/DeliveryDetail/DeliverySensitiveProducts/DeliverySensitiveProductsConfirm'
+import { DeliveryRandomProduct } from './GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct'
+import {
+    DeliveryRandomSupportFinal
+} from './GoodsReception/Delivery/DeliveryDetail/DeliveryRandomSupport/DeliveryRandomSupportFinal'
+import {
+    DeliveryRandomSupportConfirm
+} from './GoodsReception/Delivery/DeliveryDetail/DeliveryRandomSupport/DeliveryRandomSupportConfirm'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -222,8 +229,16 @@ export const useMerchandiseRoutes = applicationPages => {
         element={<DeliveryRandomSupport />}
       />
       <Route
+        path={URLS.AUTH_DELIVERY_RANDOM_SUPPORT_FINAL}
+        element={<DeliveryRandomSupportFinal />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_RANDOM_SUPPORT_CONFIRM}
+        element={<DeliveryRandomSupportConfirm />}
+      />
+      <Route
         path={URLS.AUTH_DELIVERY_RANDOM_PRODUCT}
-        element={<DeliveryRandomSupport />}
+        element={<DeliveryRandomProduct />}
       />
       <Route
         path={URLS.AUTH_CONTINUE_RETURN_DETAIL}
