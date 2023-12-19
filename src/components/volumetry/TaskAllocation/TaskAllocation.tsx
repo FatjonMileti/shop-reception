@@ -8,7 +8,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { toDepartmentOptions, toListTableRows } from './serializers'
 import { CircularProgress, Grid, debounce } from '@mui/material'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import TaskDescription from './TaskDescription'
 
@@ -89,15 +89,16 @@ const TaskAllocation = () => {
           </div>
         ) : (
           <Grid xs={4} md={3} item style={{ padding: 0 }}>
-            <AsyncAutocomplete
-              variant="outlined"
+            <FilterDataSelect
               name="teamMember.domain"
+              defaultSelectedData={departmentFilterValue}
               label="Department"
-              disableClearable
-              value={departmentFilterValue}
+              showCounter={true}
+              showSearch={true}
+              counterLabel="Select department"
+              noDataFoundLabel="No results!"
               options={departments}
-              onChange={handleDepartmentFilterChange}
-              applyCustomStyle
+              onSelect={handleDepartmentFilterChange}
             />
           </Grid>
         )}
