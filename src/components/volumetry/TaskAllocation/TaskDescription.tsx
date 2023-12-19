@@ -13,7 +13,7 @@ interface TaskDescriptionProps {
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const { item, employees } = props
 
-  const { frequency, taskName, department } = item.item || item
+  const { taskName, department } = item.item || item
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   const openModal = (): void => setIsModalOpen(true)
@@ -34,16 +34,10 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
 
   return (
     <Grid container flexDirection="column">
-      <Grid container>
-        <Grid item mr={1}>
-          <Capsule label="Frecventa" value={frequency.name} />
-        </Grid>
-      </Grid>
-
       {employees && (
         <Grid container flexDirection="column" pr={2}>
           {employees.map(employee => (
-            <Employee employee={employee} task={item}/>
+            <Employee employee={employee} task={item} />
           ))}
         </Grid>
       )}
