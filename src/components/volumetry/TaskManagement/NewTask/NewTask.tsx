@@ -219,7 +219,6 @@ const NewTask: React.FC<NewTaskProps> = props => {
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
             variant="outlined"
-            applyCustomStyle
             name="department"
             label="Departament"
             value={formik.values.department}
@@ -233,7 +232,6 @@ const NewTask: React.FC<NewTaskProps> = props => {
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
             variant="outlined"
-            applyCustomStyle
             name="frequency"
             label="Frecventa"
             value={formik.values.frequency}
@@ -262,7 +260,6 @@ const NewTask: React.FC<NewTaskProps> = props => {
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
             variant="outlined"
-            applyCustomStyle
             name="prodStandardUM"
             label="UM standard productivitate"
             value={formik.values.prodStandardUM}
@@ -277,7 +274,6 @@ const NewTask: React.FC<NewTaskProps> = props => {
           <AsyncAutocomplete
             variant="outlined"
             name="workVolumeSource"
-            applyCustomStyle
             label="Sursa volum de lucru"
             value={formik.values.workVolumeSource}
             options={workVolumeSourceFilterOptions}
