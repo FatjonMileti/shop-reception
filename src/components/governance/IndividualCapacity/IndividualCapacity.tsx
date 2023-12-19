@@ -1,28 +1,22 @@
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Box, Grid } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import dayjs from 'dayjs'
 import { useNotification } from 'hooks'
 import { useMemo, useState } from 'react'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
-import { formatPayloadDate } from 'utils/helpers'
 import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { IndividualCapacityTableFilter, TeamAssignmentItem } from '../interfaces'
 import { columns } from './constants'
 import { buildTableFilterInputs } from './utils'
-import BackButton from 'components/core-ui/BackButtonTitle/BackButton/BackButton'
-import { URLS } from '../constants'
 
 const IndividualCapacity = () => {
   const [tableItems, setTableItems] = useState<TeamAssignmentItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-
-  const navigate = useNavigate()
 
   const { showNotification } = useNotification()
 
@@ -80,10 +74,6 @@ const IndividualCapacity = () => {
 
   return (
     <div className={s.mainContainer}>
-      <BackButton
-        text="Team capacity table"
-        onNavBack={() => navigate(`/${URLS.AUTH_TEAM_CAPACITY}`)}
-      />
       <Grid container spacing={4}>
         <Grid xs={12} md={2} item style={{ padding: 0 }}></Grid>
       </Grid>

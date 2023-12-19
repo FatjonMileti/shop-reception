@@ -1,8 +1,6 @@
-import { Box, CircularProgress, Grid, Paper } from '@mui/material'
+import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './MerchandisersTab.modules.scss'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification, usePermissions } from 'hooks'
@@ -14,7 +12,7 @@ import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetr
 import { columns, roles } from './helpers'
 import { DeleteMerchandiser } from './DeleteMerchandiser'
 import { CreateEditMerchandiser } from './CreateEditMerchandiser'
-import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 
 const tableFilterFields = [
   {
@@ -57,27 +55,6 @@ const MerchandisersTab = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<EmployeeManagementItem | number>(0)
 
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
-    ['merchandisers-store'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/store')
-      const resultOptions = result.list.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
-      )
-
-      setStoreFilterValue(resultOptions[0])
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
 
@@ -87,14 +64,10 @@ const MerchandisersTab = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
-  const selectRow = (row, action) => {
-    setSelectedRow(row)
+  const selectRowId = (rowId, action) => {
+    const item = tableItems.find(item => item.id === rowId)
+    setSelectedRow(item)
     action === 'edit' ? openEditModal() : openDeleteModal()
-  }
-
-  const handleFilterChange = (value: ValueLabelInterface): void => {
-    setStoreFilterValue(value)
-    setShouldRefreshData(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -125,29 +98,6 @@ const MerchandisersTab = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
-        <Grid container spacing={4}>
-          {isFilterOptionsLoading && (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          )}
-
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="standard"
-              applyCustomStyle
-              name="store.id"
-              label="Selecteaza magazin"
-              disableClearable
-              value={storeFilterValue}
-              options={filterOptions}
-              onChange={handleFilterChange}
-            />
-          </Grid>
-        </Grid>
-      </Paper>
-
       {storeFilterValue && (
         <Box>
           <CreateEditMerchandiser
@@ -172,7 +122,6 @@ const MerchandisersTab = () => {
             hideCheckbox
             orderBy="department.name"
             order="desc"
-            newButton={canCreate ? { onClick: openNewModal } : null}
             columns={columns}
             items={tableItems}
             fetchData={fetchData}
@@ -188,7 +137,7 @@ const MerchandisersTab = () => {
                 typographyVariant: 'medium',
                 backgroundColor: '#16a085',
                 desktopIcon: <EditActionIcon />,
-                onClick: (e, row) => selectRow(row, 'edit')
+                onClick: (e, rowId) => selectRowId(rowId, 'edit')
               },
               {
                 label: 'Delete',
@@ -196,10 +145,17 @@ const MerchandisersTab = () => {
                 typographyVariant: 'medium',
                 backgroundColor: '#d9534f',
                 desktopIcon: <DeleteActionIcon />,
-                onClick: (e, row) => selectRow(row, 'delete')
+                onClick: (e, rowId) => selectRowId(rowId, 'delete')
               }
             ]}
             rowActionsWidth="130px"
+            toolbarActions={[
+              {
+                label: 'Add',
+                icon: <AddActionIcon />,
+                onClick: () => (canCreate ? openNewModal() : null)
+              }
+            ]}
           />
         </Box>
       )}
