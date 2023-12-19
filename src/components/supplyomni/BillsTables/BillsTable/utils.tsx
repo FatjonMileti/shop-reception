@@ -1,6 +1,7 @@
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Input } from 'components/core-ui/Input'
 import { TableFilters } from './interaces'
+import { formatPayloadDate } from 'utils/helpers'
 
 export const buildTableFilterInputs = (
   tableFilter: TableFilters,
@@ -71,6 +72,7 @@ export const buildTableFilterInputs = (
     name: 'startDate',
     label: 'Data inceput',
     type: 'date',
+    value: formatPayloadDate(tableFilter.startDate),
     filter: (
       <DatePicker
         label="Data inceput"
@@ -80,15 +82,19 @@ export const buildTableFilterInputs = (
       />
     )
   },
+
   {
     name: 'endDate',
     label: 'Data sfarsit',
     type: 'date',
+    value: formatPayloadDate(tableFilter.endDate),
     filter: (
       <DatePicker
         label="Data sfarsit"
         variant="outlined"
-        onChange={(value: any) => setTableFilter({ ...tableFilter, endDate: value })}
+        onChange={value => {
+          setTableFilter({ ...tableFilter, endDate: value })
+        }}
         value={tableFilter.endDate}
       />
     )
