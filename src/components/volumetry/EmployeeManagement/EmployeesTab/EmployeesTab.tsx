@@ -87,15 +87,12 @@ const EmployeesTab = () => {
 
   const handleNameFilterChange = (value: ValueLabelInterface): void => {
     setNameFilterValue(value)
-    setShouldRefreshData(true)
   }
   const handleDepartmentFilterChange = (value: ValueLabelInterface): void => {
     setDepartmentFilterValue(value)
-    setShouldRefreshData(true)
   }
   const handlePositionFilterChange = (value: ValueLabelInterface): void => {
     setPositionFilterValue(value)
-    setShouldRefreshData(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -138,7 +135,7 @@ const EmployeesTab = () => {
       filter: (
         <div className={s.autoCompleteStyles}>
           <AsyncAutocomplete
-            variant="standard"
+            variant="outlined"
             name="name"
             label="Nume"
             disableClearable
@@ -153,7 +150,7 @@ const EmployeesTab = () => {
       filter: (
         <div className={s.autoCompleteStyles}>
           <AsyncAutocomplete
-            variant="standard"
+            variant="outlined"
             name="department.name"
             label="Departament"
             disableClearable
@@ -168,7 +165,7 @@ const EmployeesTab = () => {
       filter: (
         <div className={s.autoCompleteStyles}>
           <AsyncAutocomplete
-            variant="standard"
+            variant="outlined"
             name="position"
             label="Position"
             disableClearable

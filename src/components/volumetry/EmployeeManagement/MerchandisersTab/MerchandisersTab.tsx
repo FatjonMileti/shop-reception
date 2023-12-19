@@ -13,31 +13,8 @@ import { columns, roles } from './helpers'
 import { DeleteMerchandiser } from './DeleteMerchandiser'
 import { CreateEditMerchandiser } from './CreateEditMerchandiser'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
-
-const tableFilterFields = [
-  {
-    name: 'department.name',
-    label: 'Departament',
-    type: 'text',
-    filter: (
-      <Input type="text" name="department.name" label="Departament" variant="standard" value="" />
-    )
-  },
-  {
-    name: 'name',
-    label: 'Nume',
-    type: 'text',
-
-    filter: <Input type="text" name="name" label="Nume" variant="standard" />
-  },
-  {
-    name: 'position',
-    label: 'Functie',
-    type: 'text',
-
-    filter: <Input type="text" name="position" label="Functie" variant="standard" />
-  }
-]
+import { useQuery } from 'react-query'
+import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 
 const MerchandisersTab = () => {
   const { showNotification } = useNotification()
@@ -45,7 +22,9 @@ const MerchandisersTab = () => {
   // TODO: De actualizat cand primim update cu drepturile fiecarui rol
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
 
-  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
+  const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
+  const [nameFilterValue, setNameFilterValue] = useState<ValueLabelInterface>(null)
+  const [positionFilterValue, setPositionFilterValue] = useState<ValueLabelInterface>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
@@ -70,13 +49,96 @@ const MerchandisersTab = () => {
     action === 'edit' ? openEditModal() : openDeleteModal()
   }
 
+  const { data: filterOptionsDepartment } = useQuery(
+    ['department'],
+    async () => {
+      const resultDepartment = await makeCoreGetRequest('/volumetry/department')
+
+      const resultOptionsDepartment = resultDepartment.list.map(
+        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
+      )
+      setDepartmentFilterValue(resultOptionsDepartment[0])
+      return resultOptionsDepartment || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: filterOptionsName } = useQuery(
+    ['employee'],
+    async () => {
+      const resultName = await makeCoreGetRequest('/volumetry/employee')
+
+      const resultOptionsName = resultName.list.map(
+        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
+      )
+      setNameFilterValue(resultOptionsName[0])
+      return resultOptionsName || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: filterOptionsPosition } = useQuery(
+    ['position'],
+    async () => {
+      const resultPosition = await makeCoreGetRequest('/volumetry/position')
+
+      const resultOptionsPosition = resultPosition.list.map(
+        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
+      )
+      setPositionFilterValue(resultOptionsPosition[0])
+      return resultOptionsPosition || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const handleNameFilterChange = (value: ValueLabelInterface): void => {
+    setNameFilterValue(value)
+  }
+  const handleDepartmentFilterChange = (value: ValueLabelInterface): void => {
+    setDepartmentFilterValue(value)
+  }
+  const handlePositionFilterChange = (value: ValueLabelInterface): void => {
+    setPositionFilterValue(value)
+  }
+
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
+
     try {
+      const filters =
+        nameFilterValue && positionFilterValue && departmentFilterValue
+          ? [
+              { name: 'name', value: nameFilterValue.value },
+              { name: 'position', value: positionFilterValue.value },
+              { name: 'department.name', value: departmentFilterValue.value }
+            ]
+          : []
+
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/merchendiser',
-          filters: [{ name: 'store.name', value: storeFilterValue.value }],
+          filters: filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -96,69 +158,115 @@ const MerchandisersTab = () => {
     }
   }
 
+  const tableFilterFields = [
+    {
+      filter: (
+        <div className={s.autoCompleteStyles}>
+          <AsyncAutocomplete
+            variant="outlined"
+            name="name"
+            label="Nume"
+            disableClearable
+            value={nameFilterValue}
+            options={filterOptionsName}
+            onChange={handleNameFilterChange}
+          />
+        </div>
+      )
+    },
+    {
+      filter: (
+        <div className={s.autoCompleteStyles}>
+          <AsyncAutocomplete
+            variant="outlined"
+            name="department.name"
+            label="Departament"
+            disableClearable
+            value={departmentFilterValue}
+            options={filterOptionsDepartment}
+            onChange={handleDepartmentFilterChange}
+          />
+        </div>
+      )
+    },
+    {
+      filter: (
+        <div className={s.autoCompleteStyles}>
+          <AsyncAutocomplete
+            variant="outlined"
+            name="position"
+            label="Position"
+            disableClearable
+            value={positionFilterValue}
+            options={filterOptionsPosition}
+            onChange={handlePositionFilterChange}
+          />
+        </div>
+      )
+    }
+  ]
+
   return (
     <div className={s.mainContainer}>
-      {storeFilterValue && (
-        <Box>
-          <CreateEditMerchandiser
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <DeleteMerchandiser
-            isModalOpen={isDeleteModalOpen}
-            closeModal={closeDeleteModal}
-            deleteItem={selectedRow}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <CreateEditMerchandiser
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            editItem={selectedRow}
-            setShouldRefreshData={setShouldRefreshData}
-          />
+      <Box>
+        <CreateEditMerchandiser
+          isModalOpen={isNewModalOpen}
+          closeModal={closeNewModal}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <DeleteMerchandiser
+          isModalOpen={isDeleteModalOpen}
+          closeModal={closeDeleteModal}
+          deleteItem={selectedRow}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <CreateEditMerchandiser
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+          editItem={selectedRow}
+          setShouldRefreshData={setShouldRefreshData}
+        />
 
-          <Table
-            hideCheckbox
-            orderBy="department.name"
-            order="desc"
-            columns={columns}
-            items={tableItems}
-            fetchData={fetchData}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            filters={tableFilterFields}
-            rowActions={[
-              {
-                label: 'Edit',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#16a085',
-                desktopIcon: <EditActionIcon />,
-                onClick: (e, rowId) => selectRowId(rowId, 'edit')
-              },
-              {
-                label: 'Delete',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#d9534f',
-                desktopIcon: <DeleteActionIcon />,
-                onClick: (e, rowId) => selectRowId(rowId, 'delete')
-              }
-            ]}
-            rowActionsWidth="130px"
-            toolbarActions={[
-              {
-                label: 'Add',
-                icon: <AddActionIcon />,
-                onClick: () => (canCreate ? openNewModal() : null)
-              }
-            ]}
-          />
-        </Box>
-      )}
+        <Table
+          hideCheckbox
+          orderBy="department.name"
+          order="desc"
+          columns={columns}
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          filters={tableFilterFields}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              desktopIcon: <EditActionIcon />,
+              onClick: (e, rowId) => selectRowId(rowId, 'edit')
+            },
+            {
+              label: 'Delete',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#d9534f',
+              desktopIcon: <DeleteActionIcon />,
+              onClick: (e, rowId) => selectRowId(rowId, 'delete')
+            }
+          ]}
+          rowActionsWidth="130px"
+          toolbarActions={[
+            {
+              label: 'Add',
+              icon: <AddActionIcon />,
+              onClick: () => (canCreate ? openNewModal() : null)
+            }
+          ]}
+        />
+      </Box>
     </div>
   )
 }
