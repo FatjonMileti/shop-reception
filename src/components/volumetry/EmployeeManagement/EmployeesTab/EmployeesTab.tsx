@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid, Paper } from '@mui/material'
+import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './EmployeesTab.modules.scss'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
@@ -9,13 +9,11 @@ import { useNotification } from 'hooks'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { Input } from 'components/core-ui/Input'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { columns } from './helpers'
 
 const EmployeesTab = () => {
   const { showNotification } = useNotification()
-  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
   const [nameFilterValue, setNameFilterValue] = useState<ValueLabelInterface>(null)
   const [positionFilterValue, setPositionFilterValue] = useState<ValueLabelInterface>(null)
@@ -23,27 +21,6 @@ const EmployeesTab = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
-
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
-    ['store'],
-    async () => {
-      const resultStore = await makeCoreGetRequest('/volumetry/store')
-      const resultOptionsStore = resultStore.list.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
-      )
-
-      setStoreFilterValue(resultOptionsStore[0])
-      return resultOptionsStore || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
 
   const { data: filterOptionsDepartment } = useQuery(
     ['department'],
@@ -108,10 +85,6 @@ const EmployeesTab = () => {
     }
   )
 
-  const handleStoreFilterChange = (value: ValueLabelInterface): void => {
-    setStoreFilterValue(value)
-    setShouldRefreshData(true)
-  }
   const handleNameFilterChange = (value: ValueLabelInterface): void => {
     setNameFilterValue(value)
     setShouldRefreshData(true)
@@ -128,15 +101,19 @@ const EmployeesTab = () => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
+      const filters =
+        nameFilterValue && positionFilterValue && departmentFilterValue
+          ? [
+              { name: 'name', value: nameFilterValue.value },
+              { name: 'position', value: positionFilterValue.value },
+              { name: 'department.name', value: departmentFilterValue.value }
+            ]
+          : []
+
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/employee',
-          filters: [
-            { name: 'store.name', value: storeFilterValue.value },
-            { name: 'name', value: nameFilterValue.value },
-            { name: 'position', value: positionFilterValue.value },
-            { name: 'department.name', value: departmentFilterValue.value },
-          ],
+          filters: filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -206,46 +183,21 @@ const EmployeesTab = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
-        <Grid container spacing={4}>
-          {isFilterOptionsLoading && (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          )}
-
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="standard"
-              applyCustomStyle
-              name="store.id"
-              label="Selecteaza magazin"
-              disableClearable
-              value={storeFilterValue}
-              options={filterOptions}
-              onChange={handleStoreFilterChange}
-            />
-          </Grid>
-        </Grid>
-      </Paper>
-
-      {storeFilterValue && nameFilterValue && positionFilterValue && departmentFilterValue && (
-        <Box width={'100%'}>
-          <Table
-            hideCheckbox
-            orderBy="department.name"
-            order="desc"
-            columns={columns}
-            items={tableItems}
-            fetchData={fetchData}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            filters={tableFilterFields}
-          />
-        </Box>
-      )}
+      <Box width={'100%'}>
+        <Table
+          hideCheckbox
+          orderBy="department.name"
+          order="desc"
+          columns={columns}
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          filters={tableFilterFields}
+        />
+      </Box>
     </div>
   )
 }
