@@ -32,11 +32,10 @@ if (messaging) {
   self.addEventListener('notificationclick', event => {
     event.notification.close()
     event.waitUntil(
-      clients.matchAll({ type: 'window' }).then(function (clientList) {
+      clients.matchAll({ includeUncontrolled: true, type: 'window' }).then(function (clientList) {
         for (let i = 0; i < clientList.length; i++) {
           const client = clientList[i]
           if (client.url === event.notification.data.url && 'focus' in client) {
-            if (event.notification.data.url) client.href(event.notification.data.url)
             return client.focus()
           }
         }
