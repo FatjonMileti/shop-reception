@@ -60,10 +60,12 @@ const ProformaView = () => {
 
   return (
     <Box sx={!isXs ? { margin: '24px' } : { margin: '12px' }}>
-      <Grid sx={{ mt: 1 }} container spacing={2}>
-        <Grid item xs={12}>
-          <ShoppingCartStepper activeStep={3} />
-        </Grid>
+      <Grid sx={{ mt: 1, justifyContent: proform?.paid ? 'center' : '' }} container spacing={2}>
+        {!proform?.paid && (
+          <Grid item xs={12}>
+            <ShoppingCartStepper activeStep={3} />
+          </Grid>
+        )}
         <Grid
           style={{ paddingTop: '16px', marginTop: 0, height: 'auto', paddingLeft: '30px' }}
           item
@@ -94,24 +96,24 @@ const ProformaView = () => {
             </Box>
           </Paper>
         </Grid>
-        <Grid item xs={12} md={4}>
-          {isLoadingGetProform || isClientLoading ? (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          ) : (
-            <ShoppingCartSummary
-              sx={{ pl: 2, pr: 2, mb: 3 }}
-              order={proform || {}}
-              client={client || {}}
-              deliveryPayment={
-                proform
-                  ? { paymentMethod: proform?.paymentMethod, deliveryType: proform?.deliveryType }
-                  : {}
-              }
-            />
-          )}
-          {!proform?.paid && (
+        {!proform?.paid && (
+          <Grid item xs={12} md={4}>
+            {isLoadingGetProform || isClientLoading ? (
+              <div style={{ display: 'flex' }}>
+                <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+              </div>
+            ) : (
+              <ShoppingCartSummary
+                sx={{ pl: 2, pr: 2, mb: 3 }}
+                order={proform || {}}
+                client={client || {}}
+                deliveryPayment={
+                  proform
+                    ? { paymentMethod: proform?.paymentMethod, deliveryType: proform?.deliveryType }
+                    : {}
+                }
+              />
+            )}
             <IconButton
               onClick={ev => navigate(`/supplyOmni/scanReceipt/${id}?clientId=${proform.clientId}`)}
               label={'Scaneaza bon'}
@@ -119,8 +121,8 @@ const ProformaView = () => {
               sx={{ width: '100%' }}
               endIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="white" />}
             />
-          )}
-        </Grid>
+          </Grid>
+        )}
       </Grid>
     </Box>
   )
