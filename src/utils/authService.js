@@ -3,9 +3,14 @@ import { isTokenExpired } from './jwtHelper'
 import jwt_decode from 'jwt-decode'
 
 export const oidcConfig = {
+  onBeforeSignIn: () => {
+    localStorage.setItem('beforeLogin', location.pathname)
+  },
   onSignIn: async user => {
     setToken(user.id_token)
-    window.location.href = '/'
+    const beforeLoginUrl = localStorage.getItem('beforeLogin')
+    localStorage.removeItem('beforeLogin')
+    window.location.href = beforeLoginUrl
   },
   authority: process.env.AUTHORITY,
   clientId: process.env.CLIENT_ID,
