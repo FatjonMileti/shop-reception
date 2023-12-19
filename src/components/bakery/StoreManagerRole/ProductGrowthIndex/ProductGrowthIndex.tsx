@@ -151,6 +151,8 @@ const ProductGrowthIndex = () => {
             }
           ]}
           rowActionsWidth="130px"
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </Grid>
     </div>

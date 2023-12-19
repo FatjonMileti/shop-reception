@@ -60,6 +60,8 @@ const FamilyProducts = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </Box>
     </div>
