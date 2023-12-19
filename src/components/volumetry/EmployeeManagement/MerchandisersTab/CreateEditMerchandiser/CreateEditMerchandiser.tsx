@@ -108,7 +108,11 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
   })
 
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'}>
+    <Modal
+      isModalOpen={isModalOpen}
+      closeModal={closeModal}
+      modalTitle={editItem ? 'Editeaza' : 'Adauga'}
+    >
       <Grid container spacing={4}>
         {(isLoading || isVolumetryDepartmentLoading || isVolumetryPositionLoading) && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
