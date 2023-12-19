@@ -16,7 +16,6 @@ import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const EmployeesTab = () => {
   const { showNotification } = useNotification()
-  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
   const [nameFilterValue, setNameFilterValue] = useState<ValueLabelInterface>(null)
   const [positionFilterValue, setPositionFilterValue] = useState<ValueLabelInterface>(null)
@@ -25,26 +24,6 @@ const EmployeesTab = () => {
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
 
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
-    ['store'],
-    async () => {
-      const resultStore = await makeCoreGetRequest('/volumetry/store')
-      const resultOptionsStore = resultStore.list.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
-      )
-
-      setStoreFilterValue(resultOptionsStore[0])
-      return resultOptionsStore || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
 
   const { data: filterOptionsDepartment } = useQuery(
     ['department'],
@@ -109,10 +88,6 @@ const EmployeesTab = () => {
     }
   )
 
-  const handleStoreFilterChange = (value: ValueLabelInterface): void => {
-    setStoreFilterValue(value)
-    setShouldRefreshData(true)
-  }
   const handleNameFilterChange = (value: ValueLabelInterface): void => {
     setNameFilterValue(value)
     setShouldRefreshData(true)
@@ -133,7 +108,6 @@ const EmployeesTab = () => {
         toTableGETUrl({
           url: '/volumetry/employee',
           filters: [
-            { name: 'store.name', value: storeFilterValue.value },
             { name: 'name', value: nameFilterValue.value },
             { name: 'position', value: positionFilterValue.value },
             { name: 'department.name', value: departmentFilterValue.value }
@@ -207,31 +181,7 @@ const EmployeesTab = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
-        <Grid container spacing={4}>
-          {isFilterOptionsLoading && (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          )}
-
-          <Grid xs={12} md={12} item>
-            <FilterDataSelect
-              name="store.id"
-              defaultSelectedData={storeFilterValue}
-              label="Selecteaza magazin"
-              showCounter={true}
-              showSearch={true}
-              counterLabel="Select department"
-              noDataFoundLabel="No results!"
-              options={filterOptions}
-              onSelect={handleStoreFilterChange}
-            />
-          </Grid>
-        </Grid>
-      </Paper>
-
-      {storeFilterValue && nameFilterValue && positionFilterValue && departmentFilterValue && (
+      {nameFilterValue && positionFilterValue && departmentFilterValue && (
         <Box width={'100%'}>
           <Table
             hideCheckbox

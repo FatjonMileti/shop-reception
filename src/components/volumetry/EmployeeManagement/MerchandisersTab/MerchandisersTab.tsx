@@ -58,27 +58,6 @@ const MerchandisersTab = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<EmployeeManagementItem | number>(0)
 
-  const { data: filterOptions, isLoading: isFilterOptionsLoading } = useQuery(
-    ['merchandisers-store'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/store')
-      const resultOptions = result.list.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
-      )
-
-      setStoreFilterValue(resultOptions[0])
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
 
@@ -91,11 +70,6 @@ const MerchandisersTab = () => {
   const selectRow = (row, action) => {
     setSelectedRow(row)
     action === 'edit' ? openEditModal() : openDeleteModal()
-  }
-
-  const handleFilterChange = (value: ValueLabelInterface): void => {
-    setStoreFilterValue(value)
-    setShouldRefreshData(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -126,30 +100,6 @@ const MerchandisersTab = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
-        <Grid container spacing={4}>
-          {isFilterOptionsLoading && (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          )}
-
-          <Grid xs={12} md={12} item>
-            <FilterDataSelect
-              name="store.id"
-              defaultSelectedData={storeFilterValue}
-              label="Selecteaza magazin"
-              showCounter={true}
-              showSearch={true}
-              counterLabel="Select department"
-              noDataFoundLabel="No results!"
-              options={filterOptions}
-              onSelect={handleFilterChange}
-            />
-          </Grid>
-        </Grid>
-      </Paper>
-
       {storeFilterValue && (
         <Box>
           <CreateEditMerchandiser
