@@ -1,7 +1,6 @@
 import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './EmployeesTab.modules.scss'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
@@ -11,7 +10,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { columns } from './helpers'
-import { Autocomplete, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
 const EmployeesTab = () => {
   const { showNotification } = useNotification()
