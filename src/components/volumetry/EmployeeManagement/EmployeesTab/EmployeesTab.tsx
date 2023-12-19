@@ -24,7 +24,6 @@ const EmployeesTab = () => {
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
 
-
   const { data: filterOptionsDepartment } = useQuery(
     ['department'],
     async () => {
@@ -181,23 +180,21 @@ const EmployeesTab = () => {
 
   return (
     <div className={s.mainContainer}>
-      {nameFilterValue && positionFilterValue && departmentFilterValue && (
-        <Box width={'100%'}>
-          <Table
-            hideCheckbox
-            orderBy="department.name"
-            order="desc"
-            columns={columns}
-            items={tableItems}
-            fetchData={fetchData}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            filters={tableFilterFields}
-          />
-        </Box>
-      )}
+      <Box width={'100%'}>
+        <Table
+          hideCheckbox
+          orderBy="department.name"
+          order="desc"
+          columns={columns}
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          filters={tableFilterFields}
+        />
+      </Box>
     </div>
   )
 }
