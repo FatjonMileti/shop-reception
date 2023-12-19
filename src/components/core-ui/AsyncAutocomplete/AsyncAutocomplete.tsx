@@ -24,7 +24,7 @@ const AsyncAutocomplete = (props: AsyncAutocompleteProps) => {
       loading={loading}
       value={value}
       style={style || {}}
-      onChange={(_, value) => onChange(value)}
+      onChange={(_, value) => onChange && onChange(value)}
       isOptionEqualToValue={(option, value) => option.value === value.value}
       renderOption={(props, option) => (
         <li {...props} key={option.value}>
