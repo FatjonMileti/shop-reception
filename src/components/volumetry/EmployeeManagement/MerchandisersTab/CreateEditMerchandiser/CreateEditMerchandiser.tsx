@@ -123,7 +123,7 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
             name="name"
             label="Nume merchendiser"
             fullWidth
-            variant="standard"
+            variant="outlined"
             value={formik.values.name}
             onChange={event => formik.setFieldValue('name', event.currentTarget.value)}
             error={!!formik.errors.name}
@@ -133,7 +133,7 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
 
         <Grid xs={12} item>
           <AsyncAutocomplete
-            variant="standard"
+            variant="outlined"
             name="department.name"
             label="Selecteaza magazin"
             applyCustomStyle
@@ -146,7 +146,7 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
 
         <Grid xs={12} item>
           <AsyncAutocomplete
-            variant="standard"
+            variant="outlined"
             name="position.name"
             label="Selecteaza functia"
             disableClearable

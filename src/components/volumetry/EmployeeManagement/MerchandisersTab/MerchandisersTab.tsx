@@ -87,8 +87,9 @@ const MerchandisersTab = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
-  const selectRow = (row, action) => {
-    setSelectedRow(row)
+  const selectRowId = (rowId, action) => {
+    const item = tableItems.find(item => item.id === rowId)
+    setSelectedRow(item)
     action === 'edit' ? openEditModal() : openDeleteModal()
   }
 
@@ -187,7 +188,7 @@ const MerchandisersTab = () => {
                 typographyVariant: 'medium',
                 backgroundColor: '#16a085',
                 desktopIcon: <EditActionIcon />,
-                onClick: (e, row) => selectRow(row, 'edit')
+                onClick: (e, rowId) => selectRowId(rowId, 'edit')
               },
               {
                 label: 'Delete',
@@ -195,7 +196,7 @@ const MerchandisersTab = () => {
                 typographyVariant: 'medium',
                 backgroundColor: '#d9534f',
                 desktopIcon: <DeleteActionIcon />,
-                onClick: (e, row) => selectRow(row, 'delete')
+                onClick: (e, rowId) => selectRowId(rowId, 'delete')
               }
             ]}
             rowActionsWidth="130px"
