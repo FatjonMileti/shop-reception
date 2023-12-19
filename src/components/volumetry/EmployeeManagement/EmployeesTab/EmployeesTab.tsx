@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid, Paper } from '@mui/material'
+import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './EmployeesTab.modules.scss'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
@@ -9,10 +9,8 @@ import { useNotification } from 'hooks'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { Input } from 'components/core-ui/Input'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { columns } from './helpers'
-import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const EmployeesTab = () => {
   const { showNotification } = useNotification()
