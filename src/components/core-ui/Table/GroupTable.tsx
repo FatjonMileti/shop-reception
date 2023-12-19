@@ -100,7 +100,7 @@ const GroupTable = props => {
   useEffect(() => {
     if (isTableLoaded) {
       handleRemoteData(
-        tableState.page,
+        0, //tableState.page,
         tableState.rowsPerPage,
         tableState.order,
         tableState.orderBy,
@@ -182,6 +182,10 @@ const GroupTable = props => {
       setItems(toTableRowItems(toDynamicTableItems(response.list), newColumns))
       setTotalCount(response.page.totalCount)
       setSummary(response.summary)
+      setTableState({
+        ...tableState,
+        page: response.page.page
+      })
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -388,6 +392,9 @@ const GroupTable = props => {
         handleRemoteData={debouncedHandleRemoteData}
         filters={filtersConfig}
         classes={{ headerClass: s.printPreviewHeader, rowClass: s.printPreviewRow }}
+        tableState={{
+          page: tableState.page
+        }}
       />
       {tableFooter && <div style={{ textAlign: 'right' }}>{tableFooterComponent}</div>}
     </Box>
