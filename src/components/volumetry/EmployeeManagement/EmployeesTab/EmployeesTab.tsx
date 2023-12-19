@@ -132,6 +132,10 @@ const EmployeesTab = () => {
 
   const tableFilterFields = [
     {
+      name: 'name',
+      label: 'Nume',
+      type: 'autocomplete',
+      value: nameFilterValue,
       filter: (
         <div className={s.autoCompleteStyles}>
           <AsyncAutocomplete
@@ -147,6 +151,10 @@ const EmployeesTab = () => {
       )
     },
     {
+      name: 'department',
+      label: 'Departament',
+      type: 'autocomplete',
+      value: departmentFilterValue,
       filter: (
         <div className={s.autoCompleteStyles}>
           <AsyncAutocomplete
@@ -162,6 +170,10 @@ const EmployeesTab = () => {
       )
     },
     {
+      name: 'position',
+      label: 'Position',
+      type: 'autocomplete',
+      value: positionFilterValue,
       filter: (
         <div className={s.autoCompleteStyles}>
           <AsyncAutocomplete
