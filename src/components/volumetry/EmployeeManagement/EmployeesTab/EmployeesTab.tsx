@@ -103,14 +103,19 @@ const EmployeesTab = () => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
+      const filters =
+        nameFilterValue && positionFilterValue && departmentFilterValue
+          ? [
+              { name: 'name', value: nameFilterValue.value },
+              { name: 'position', value: positionFilterValue.value },
+              { name: 'department.name', value: departmentFilterValue.value }
+            ]
+          : []
+
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/employee',
-          filters: [
-            { name: 'name', value: nameFilterValue.value },
-            { name: 'position', value: positionFilterValue.value },
-            { name: 'department.name', value: departmentFilterValue.value }
-          ],
+          filters: filters,
           tableFilters,
           page,
           rowsPerPage,
