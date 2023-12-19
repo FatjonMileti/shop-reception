@@ -26,6 +26,7 @@ const EditProduct: React.FC<EditProductProps> = props => {
     const { showNotification } = useNotification()
     const [isFileUploaded, setIsFileUploaded] = useState(false);
     const [uploadedFile, setUploadedFile] = useState(null);
+    
     const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
         ['product', editProductId],
         async () => {
@@ -38,7 +39,7 @@ const EditProduct: React.FC<EditProductProps> = props => {
         {
           onError: error => {
             showNotification({
-              message: `Error while fetching zone data. ${formatErrorMessage(
+              message: `Error while fetching product data. ${formatErrorMessage(
                 error
               )}`,
               type: 'error'

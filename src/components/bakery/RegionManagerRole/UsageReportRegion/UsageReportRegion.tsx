@@ -16,7 +16,6 @@ import dayjs from 'dayjs'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { ColumnsComponent, formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
-import { formatBakeryPayloadDate } from 'utils/helpers'
 
 const UsageReportRegion = () => {
   const { showNotification } = useNotification()
@@ -29,7 +28,7 @@ const UsageReportRegion = () => {
   const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
   const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
 
-  const { data: storesFilterOptions, isLoading: isStoresFilterOptionsLoading } = useQuery(
+  const { data: storesFilterOptions } = useQuery(
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/region/all')
@@ -39,7 +38,7 @@ const UsageReportRegion = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -49,14 +48,17 @@ const UsageReportRegion = () => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
+      const filters = [
+        { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
+        { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+        { name: 'store', value: storeFilterValue?.map(val => val.value) },
+      ].filter(
+        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+      )
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/application',
-          filters: [
-            { name: 'storeName', value: storeFilterValue.map(val => val.value) },
-            { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-            { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') }
-          ],
+          filters: filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -97,13 +99,17 @@ const UsageReportRegion = () => {
   }
 
   const handleDownload = async () => {
+    const filters = [
+      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'store', value: storeFilterValue?.map(val => val.value) },
+    ].filter(
+      f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+    )
+
     const url = toTableGETUrl({
       url: '/bakery/region/download/application',
-      filters: [
-        { name: 'storeName', value: storeFilterValue[0]?.value },
-        { name: 'startDate', value: formatBakeryPayloadDate(startDateFilterValue) },
-        { name: 'endDate', value: formatBakeryPayloadDate(endDateFilterValue) }
-      ]
+      filters: filters
     })
     try {
       const response = await makeCoreGetFileRequest(url, {
@@ -121,72 +127,63 @@ const UsageReportRegion = () => {
   return (
     <div className={s.mainContainer}>
       <Grid container>
-        <>
-          <Grid xs={12} md={12} container justifyContent={'space-between'}>
-            <Grid xs={12} md={3} item>
-              <DatePicker
-                label="Data inceput"
-                value={startDateFilterValue}
-                variant="standard"
-                required
-                onChange={val => handleFilterChange('startDate', val)}
-              />
-            </Grid>
-            <Grid xs={12} md={3} item>
-              <DatePicker
-                label="Data sfarsit"
-                value={endDateFilterValue}
-                variant="standard"
-                required
-                onChange={val => handleFilterChange('endDate', val)}
-              />
-            </Grid>
-
-            {isStoresFilterOptionsLoading ? (
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            ) : (
-              <Grid xs={12} md={3} item>
-                <AsyncAutocomplete
-                  variant="standard"
-                  applyCustomStyle
-                  name="store.id"
-                  label="Selecteaza magazin"
-                  disableClearable
-                  value={storeFilterValue}
-                  options={storesFilterOptions}
-                  onChange={val => handleFilterChange('store', val)}
-                  multiple={true}
-                />
-              </Grid>
-            )}
+        <Grid xs={12} md={12} container spacing={5}>
+          <Grid xs={12} md={3} item>
+            <DatePicker
+              label="Data inceput"
+              value={startDateFilterValue}
+              variant="outlined"
+              required
+              onChange={val => handleFilterChange('startDate', val)}
+            />
           </Grid>
-
-          <Grid xs={12} item>
-            <Divider />
+          <Grid xs={12} md={3} item>
+            <DatePicker
+              label="Data sfarsit"
+              value={endDateFilterValue}
+              variant="outlined"
+              required
+              onChange={val => handleFilterChange('endDate', val)}
+            />
           </Grid>
+          <Grid xs={12} md={3} item>
+            <AsyncAutocomplete
+              variant="outlined"
+              name="store.id"
+              label="Selecteaza magazin"
+              value={storeFilterValue}
+              options={storesFilterOptions}
+              onChange={val => handleFilterChange('store', val)}
+              multiple={true}
+            />
+          </Grid>
+        </Grid>
 
-          <Table
-            hideCheckbox
-            columns={ColumnsComponent(startDateFilterValue, endDateFilterValue)}
-            items={tableItems}
-            fetchData={fetchData}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            stickyRatio={0.45}
-            hasStickyHeader
-            maxHeight={'600px'}
-            frequency="day"
-            toolbarActions={[
-              {
-                label: 'Descarca',
-                icon: <DownloadOutlined />,
-                onClick: () => handleDownload()
-              }
-            ]}
-          />
-        </>
+        <Grid xs={12} item paddingTop={2}>
+          <Divider />
+        </Grid>
+
+        <Table
+          hideCheckbox
+          columns={ColumnsComponent(startDateFilterValue, endDateFilterValue)}
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          stickyRatio={0.45}
+          hasStickyHeader
+          maxHeight={'600px'}
+          frequency="day"
+          toolbarActions={[
+            {
+              label: 'Descarca',
+              icon: <DownloadOutlined />,
+              onClick: () => handleDownload()
+            }
+          ]}
+        />
       </Grid>
     </div>
   )

@@ -43,6 +43,7 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       sticky: true,
     },
   ]
+  
   while (currentDate.isBefore(endDate) || currentDate.isSame(endDate, 'day')) {
     const day = dayjs(currentDate).format('D')
     const month = dayjs(currentDate).format('MMMM')

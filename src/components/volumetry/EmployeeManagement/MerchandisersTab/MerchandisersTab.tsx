@@ -14,7 +14,7 @@ import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetr
 import { columns, roles } from './helpers'
 import { DeleteMerchandiser } from './DeleteMerchandiser'
 import { CreateEditMerchandiser } from './CreateEditMerchandiser'
-import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 
 const tableFilterFields = [
   {
@@ -87,8 +87,9 @@ const MerchandisersTab = () => {
   const openDeleteModal = (): void => setIsDeleteModalOpen(true)
   const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
-  const selectRow = (row, action) => {
-    setSelectedRow(row)
+  const selectRowId = (rowId, action) => {
+    const item = tableItems.find(item => item.id === rowId)
+    setSelectedRow(item)
     action === 'edit' ? openEditModal() : openDeleteModal()
   }
 
@@ -172,7 +173,6 @@ const MerchandisersTab = () => {
             hideCheckbox
             orderBy="department.name"
             order="desc"
-            newButton={canCreate ? { onClick: openNewModal } : null}
             columns={columns}
             items={tableItems}
             fetchData={fetchData}
@@ -188,7 +188,7 @@ const MerchandisersTab = () => {
                 typographyVariant: 'medium',
                 backgroundColor: '#16a085',
                 desktopIcon: <EditActionIcon />,
-                onClick: (e, row) => selectRow(row, 'edit')
+                onClick: (e, rowId) => selectRowId(rowId, 'edit')
               },
               {
                 label: 'Delete',
@@ -196,10 +196,17 @@ const MerchandisersTab = () => {
                 typographyVariant: 'medium',
                 backgroundColor: '#d9534f',
                 desktopIcon: <DeleteActionIcon />,
-                onClick: (e, row) => selectRow(row, 'delete')
+                onClick: (e, rowId) => selectRowId(rowId, 'delete')
               }
             ]}
             rowActionsWidth="130px"
+            toolbarActions={[
+              {
+                label: 'Add',
+                icon: <AddActionIcon />,
+                onClick: () => (canCreate ? openNewModal() : null)
+              }
+            ]}
           />
         </Box>
       )}

@@ -109,7 +109,7 @@ export const EditProduct: React.FC<EditProductProps> = props => {
               <Grid xs={12} item>
                 <Input
                   type="select"
-                  variant="standard"
+                  variant="outlined"
                   name="scheduleProduct"
                   label="Produs cadentier"
                   width="100%"
@@ -132,7 +132,7 @@ export const EditProduct: React.FC<EditProductProps> = props => {
               <Grid xs={12} item>
                 <Input
                   type="text"
-                  variant="standard"
+                  variant="outlined"
                   name="minStock"
                   label="Stoc minim de prezentare"
                   width="100%"
