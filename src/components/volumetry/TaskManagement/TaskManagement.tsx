@@ -29,7 +29,7 @@ export const columns = [
     width: '250px'
   },
   {
-    title: 'Ora estimata de inceput',
+    title: 'Ora recomandata de inceput',
     field: 'estimateStartTime',
     align: 'left',
     type: 'string',
@@ -50,7 +50,7 @@ export const columns = [
     collapsible: true
   },
   {
-    title: 'Valoare standard productivitate',
+    title: 'Valoare productivitate standard',
     field: 'prodStandardValue',
     align: 'left',
     type: 'string',
@@ -124,7 +124,6 @@ const TaskManagement = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
 
   const { showNotification } = useNotification()
@@ -160,19 +159,9 @@ const TaskManagement = () => {
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
 
-  const openDeleteModal = (): void => setIsDeleteModalOpen(true)
-  const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
-
-  const selectRow = (rowId: number, action: string) => {
+  const selectRow = (rowId: number) => {
     setSelectedRowId(rowId)
-
-    if (action === 'edit') {
-      openEditModal()
-    }
-
-    if (action === 'delete') {
-      openDeleteModal()
-    }
+    openEditModal()
   }
 
   return (
@@ -189,14 +178,6 @@ const TaskManagement = () => {
           editItemId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
           isEdit
-        />
-        <DeleteConfirmationModal
-          isModalOpen={isDeleteModalOpen}
-          closeModal={closeDeleteModal}
-          actionUrl="/volumetry/task/:id"
-          itemId={selectedRowId}
-          content={<Typography>Are you sure you want to delete this entry?</Typography>}
-          setShouldRefreshData={setShouldRefreshData}
         />
         <Table
           hideCheckbox
@@ -217,15 +198,7 @@ const TaskManagement = () => {
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
               desktopIcon: <EditActionIcon />,
-              onClick: (e, rowId) => selectRow(rowId, 'edit')
-            },
-            {
-              label: 'Delete',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#d9534f',
-              desktopIcon: <DeleteActionIcon />,
-              onClick: (e, rowId) => selectRow(rowId, 'delete')
+              onClick: (e, rowId) => selectRow(rowId)
             }
           ]}
           rowActionsWidth="130px"

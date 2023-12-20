@@ -82,6 +82,26 @@ const NewTask: React.FC<NewTaskProps> = props => {
     }
   )
 
+  const { data: priorityFilterOptions } = useQuery(
+    ['priority'],
+    async () => {
+      const result = await makeCoreGetRequest('/volumetry/priority')
+      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
+
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A aparut o eroare la obtinerea listei de prioritati. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
   const { data: departmentFilterOptions, isLoading: isDepartmentLoading } = useQuery(
     ['departments', formik.values.category?.value],
     async () => {
@@ -102,6 +122,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
       enabled: formik.values.category !== null
     }
   )
+
   const { data: raionFilterOptions, isLoading: isRaionLoading } = useQuery(
     ['raion', formik.values.department?.value],
     async () => {
@@ -209,7 +230,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={isEdit ? 'Editeaza Task' : 'Creaza Task'}
+      modalTitle={isEdit ? 'Editeaza task template' : 'Creeaza task template'}
       modalWidth="50%"
     >
       <Grid container spacing={4}>
@@ -289,7 +310,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
         )}
         <Grid xs={12} md={6} item>
           <TimePicker
-            label="Ora estimata de inceput"
+            label="Ora recomandata de inceput"
             value={formik.values.estimateStartTime}
             onChange={newValue => formik.setFieldValue('estimateStartTime', newValue)}
             error={!!formik.errors.taskName}
@@ -329,8 +350,9 @@ const NewTask: React.FC<NewTaskProps> = props => {
           <Input
             type="number"
             name="prodStandardValue"
-            label="Valoare standard productivitate"
+            label="Valoare productivitate standard"
             fullWidth
+            required
             variant="outlined"
             value={formik.values.prodStandardValue}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
@@ -338,6 +360,9 @@ const NewTask: React.FC<NewTaskProps> = props => {
             }
             error={!!formik.errors.prodStandardValue}
             helperText={formik.errors.prodStandardValue as string}
+            inputProps={{
+              step: '0.1'
+            }}
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -367,19 +392,18 @@ const NewTask: React.FC<NewTaskProps> = props => {
           />
         </Grid>
         <Grid xs={12} md={6} item>
-          <Input
-            type="number"
+          <AsyncAutocomplete
+            variant="outlined"
             name="priority"
             label="Prioritate"
-            fullWidth
-            variant="outlined"
             value={formik.values.priority}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('priority', event.currentTarget.value)
-            }
+            options={priorityFilterOptions}
+            onChange={value => formik.setFieldValue('priority', value)}
             error={!!formik.errors.priority}
             helperText={formik.errors.priority as string}
+            required
           />
+
         </Grid>
         <Grid xs={12} md={6} item sx={{ display: 'flex' }}>
           <Checkbox

@@ -4785,7 +4785,7 @@
       "responses": [
         {
           "uuid": "7f7c4418-af51-4760-a939-1911cdc17724",
-          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Meti\"\n  }\n]",
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -5283,6 +5283,40 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "33edd441-4c55-40ff-bb89-d9d650d3f240",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/priority",
+      "responses": [
+        {
+          "uuid": "d8298498-ef42-408c-8d95-195a801da4aa",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Prioritate 1\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Prioritate 2\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Prioritate 3\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Prioritate 4\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Prioritate 5\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Prioritate 6\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"Prioritate 7\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5501,6 +5535,10 @@
     {
       "type": "route",
       "uuid": "b22143cc-fa60-4f5c-963f-e4e889eb0676"
+    },
+    {
+      "type": "route",
+      "uuid": "33edd441-4c55-40ff-bb89-d9d650d3f240"
     }
   ],
   "proxyMode": false,

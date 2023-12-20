@@ -16,7 +16,7 @@ export const getInitialValues = editItem => ({
   workVolumeSource: editItem
     ? { value: editItem.workVolumeSource.id, label: editItem.workVolumeSource.name }
     : null,
-  priority: editItem?.priority ?? '',
+  priority: editItem?.priority ?? null,
   status: editItem?.status ?? true
 })
 
@@ -52,6 +52,9 @@ export const getValidationSchema = editItem =>
       label: Yup.string().required('Source is required'),
       value: Yup.string().required('Source is required')
     }),
-    priority: Yup.number().required(),
+    priority: Yup.object().shape({
+      label: Yup.string().required('Priority is required'),
+      value: Yup.string().required('Priority is required')
+    }),
     status: Yup.boolean()
   })
