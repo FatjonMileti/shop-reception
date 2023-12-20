@@ -230,7 +230,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={isEdit ? 'Editeaza task template' : 'Creeaza task template'}
+      modalTitle={isEdit ? 'Editeaza task template' : 'Task Template'}
       modalWidth="50%"
     >
       <Grid container spacing={4}>
