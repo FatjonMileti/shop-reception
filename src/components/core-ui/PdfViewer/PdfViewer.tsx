@@ -38,16 +38,6 @@ const PdfViewer = (props: PdfViewerProps) => {
       </div>
     ) : (
       <div>
-        {/* <div className={s.scanReceiptContainer}>
-          {!proform?.paid && actions.scanReceiptAction && (
-            <IconButton
-              onClick={scanReceipt}
-              label={actions.scanReceiptAction.label}
-              variant="contained"
-              endIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="white" />}
-            />
-          )}
-        </div> */}
         <div className={s.PDFViewer}>
           <PdfActions
             pageNumber={pageNumber}
