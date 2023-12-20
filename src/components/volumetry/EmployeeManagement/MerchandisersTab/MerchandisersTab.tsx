@@ -141,7 +141,6 @@ const MerchandisersTab = () => {
         <Autocomplete
           variant="outlined"
           label="Nume"
-          disableClearable
           options={filterOptionsName}
         />
       )
@@ -155,7 +154,6 @@ const MerchandisersTab = () => {
         <Autocomplete
           variant="outlined"
           label="Departament"
-          disableClearable
           options={filterOptionsDepartment}
         />
       )
@@ -169,7 +167,6 @@ const MerchandisersTab = () => {
         <Autocomplete
           variant="outlined"
           label="Position"
-          disableClearable
           options={filterOptionsPosition}
         />
       )
@@ -231,7 +228,7 @@ const MerchandisersTab = () => {
             {
               label: 'Add',
               icon: <AddActionIcon />,
-              onClick: () => (canCreate ? openNewModal() : null)
+              onClick: () => (canCreate ? openNewModal() : null) // TODO: To verify permissions with the BE
             }
           ]}
         />
