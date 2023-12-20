@@ -1,5 +1,4 @@
 import { Box, CircularProgress, Grid, Paper } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -8,14 +7,14 @@ import { useNotification } from 'hooks'
 import { useGovernanceDomains } from 'hooks/useGovernanceDomains'
 import { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useSearchParams } from 'react-router-dom'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { TeamAssignmentItem, TeamCapacityTableFilter, ValueLabelInterface } from '../interfaces'
-import { buildColumns, buildTableFilterFields } from './utils'
+import { buildColumns, buildTableFilterFields, mapToTableFilters } from './utils'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableRowItems } from './helpers'
+import { formatPayloadDate } from 'utils/helpers'
 
 const TeamCapacity = () => {
   const { dispatchFetchDomains } = useGovernanceDomains()
@@ -30,12 +29,11 @@ const TeamCapacity = () => {
   const [tableFilter, setTableFilter] = useState<TeamCapacityTableFilter>({
     teamMemberName: null,
     baseRole: null,
-    startDate: new Date(),
-    endDate: new Date()
+    startDate: formatPayloadDate(new Date()),
+    endDate: formatPayloadDate(new Date())
   })
 
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [searchParams, setSearchParams] = useSearchParams()
 
   const { showNotification } = useNotification()
 
@@ -43,7 +41,10 @@ const TeamCapacity = () => {
     () => buildTableFilterFields(tableFilter, setTableFilter),
     [tableFilter]
   )
-  const tableColumns = useMemo(() => buildColumns(searchParams), [searchParams])
+  const tableColumns = useMemo(
+    () => buildColumns({ startDate: tableFilter.startDate, endDate: tableFilter.endDate }),
+    [tableFilter]
+  )
 
   useEffect(() => {
     ;(async () => {
@@ -77,15 +78,10 @@ const TeamCapacity = () => {
           orderBy
         })
       )
-      if (
-        tableFilters &&
-        tableFilters.length > 3 &&
-        (tableFilters[2].value || tableFilters[3].value)
-      ) {
-        setSearchParams({
-          startDate: tableFilters[2].value ?? '',
-          endDate: tableFilters[3].value ?? ''
-        })
+
+      if (tableFilters && tableFilters.length > 3) {
+        const newTableFilter = mapToTableFilters(tableFilters)
+        setTableFilter(newTableFilter)
       }
       setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
