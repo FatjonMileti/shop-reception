@@ -4,12 +4,12 @@ export interface AsyncAutocompleteOption {
 }
 
 export interface AsyncAutocompleteProps {
-  value: AsyncAutocompleteOption | AsyncAutocompleteOption[]
+  value?: AsyncAutocompleteOption | AsyncAutocompleteOption[]
   options: AsyncAutocompleteOption[]
   name: string
   label: string
   variant: 'outlined' | 'standard'
-  onChange: (value: any) => void
+  onChange?: (value: any) => void
   onBlur?: () => void
   disableClearable?: boolean
   error?: boolean

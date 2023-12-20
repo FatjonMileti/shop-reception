@@ -7,37 +7,13 @@ import { useNotification, usePermissions } from 'hooks'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { Input } from 'components/core-ui/Input'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { columns, roles } from './helpers'
 import { DeleteMerchandiser } from './DeleteMerchandiser'
 import { CreateEditMerchandiser } from './CreateEditMerchandiser'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
-
-const tableFilterFields = [
-  {
-    name: 'department.name',
-    label: 'Departament',
-    type: 'text',
-    filter: (
-      <Input type="text" name="department.name" label="Departament" variant="standard" value="" />
-    )
-  },
-  {
-    name: 'name',
-    label: 'Nume',
-    type: 'text',
-
-    filter: <Input type="text" name="name" label="Nume" variant="standard" />
-  },
-  {
-    name: 'position',
-    label: 'Functie',
-    type: 'text',
-
-    filter: <Input type="text" name="position" label="Functie" variant="standard" />
-  }
-]
+import { useQuery } from 'react-query'
+import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
 const MerchandisersTab = () => {
   const { showNotification } = useNotification()
@@ -45,7 +21,6 @@ const MerchandisersTab = () => {
   // TODO: De actualizat cand primim update cu drepturile fiecarui rol
   const { canCreate, canEdit, canDelete } = usePermissions(roles)
 
-  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
@@ -70,13 +45,73 @@ const MerchandisersTab = () => {
     action === 'edit' ? openEditModal() : openDeleteModal()
   }
 
+  const { data: filterOptionsDepartment } = useQuery(
+    ['department'],
+    async () => {
+      const resultDepartment = await makeCoreGetRequest('/volumetry/department')
+
+      const resultOptionsDepartment = resultDepartment.list.map(
+        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
+      )
+      return resultOptionsDepartment || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: filterOptionsName } = useQuery(
+    ['employee'],
+    async () => {
+      const resultName = await makeCoreGetRequest('/volumetry/employee')
+
+      const resultOptionsName = resultName.list.map(
+        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
+      )
+      return resultOptionsName || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: filterOptionsPosition } = useQuery(
+    ['position'],
+    async () => {
+      const resultPosition = await makeCoreGetRequest('/volumetry/position')
+
+      const resultOptionsPosition = resultPosition.list.map(
+        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
+      )
+      return resultOptionsPosition || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
+
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/merchendiser',
-          filters: [{ name: 'store.name', value: storeFilterValue.value }],
           tableFilters,
           page,
           rowsPerPage,
@@ -96,69 +131,108 @@ const MerchandisersTab = () => {
     }
   }
 
+  const tableFilterFields = [
+    {
+      name: 'name',
+      label: 'Nume',
+      type: 'autocomplete',
+      value: '',
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Nume"
+          options={filterOptionsName}
+        />
+      )
+    },
+    {
+      name: 'department',
+      label: 'Departament',
+      type: 'autocomplete',
+      value: '',
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Departament"
+          options={filterOptionsDepartment}
+        />
+      )
+    },
+    {
+      name: 'position',
+      label: 'Position',
+      type: 'autocomplete',
+      value: '',
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Position"
+          options={filterOptionsPosition}
+        />
+      )
+    }
+  ]
   return (
     <div className={s.mainContainer}>
-      {storeFilterValue && (
-        <Box>
-          <CreateEditMerchandiser
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <DeleteMerchandiser
-            isModalOpen={isDeleteModalOpen}
-            closeModal={closeDeleteModal}
-            deleteItem={selectedRow}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <CreateEditMerchandiser
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            editItem={selectedRow}
-            setShouldRefreshData={setShouldRefreshData}
-          />
+      <Box>
+        <CreateEditMerchandiser
+          isModalOpen={isNewModalOpen}
+          closeModal={closeNewModal}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <DeleteMerchandiser
+          isModalOpen={isDeleteModalOpen}
+          closeModal={closeDeleteModal}
+          deleteItem={selectedRow}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <CreateEditMerchandiser
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+          editItem={selectedRow}
+          setShouldRefreshData={setShouldRefreshData}
+        />
 
-          <Table
-            hideCheckbox
-            orderBy="department.name"
-            order="desc"
-            columns={columns}
-            items={tableItems}
-            fetchData={fetchData}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            filters={tableFilterFields}
-            rowActions={[
-              {
-                label: 'Edit',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#16a085',
-                desktopIcon: <EditActionIcon />,
-                onClick: (e, rowId) => selectRowId(rowId, 'edit')
-              },
-              {
-                label: 'Delete',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#d9534f',
-                desktopIcon: <DeleteActionIcon />,
-                onClick: (e, rowId) => selectRowId(rowId, 'delete')
-              }
-            ]}
-            rowActionsWidth="130px"
-            toolbarActions={[
-              {
-                label: 'Add',
-                icon: <AddActionIcon />,
-                onClick: () => (canCreate ? openNewModal() : null)
-              }
-            ]}
-          />
-        </Box>
-      )}
+        <Table
+          hideCheckbox
+          orderBy="department.name"
+          order="desc"
+          columns={columns}
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          filters={tableFilterFields}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              desktopIcon: <EditActionIcon />,
+              onClick: (e, rowId) => selectRowId(rowId, 'edit')
+            },
+            {
+              label: 'Delete',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#d9534f',
+              desktopIcon: <DeleteActionIcon />,
+              onClick: (e, rowId) => selectRowId(rowId, 'delete')
+            }
+          ]}
+          rowActionsWidth="130px"
+          toolbarActions={[
+            {
+              label: 'Add',
+              icon: <AddActionIcon />,
+              onClick: () => (canCreate ? openNewModal() : null) // TODO: To verify permissions with the BE
+            }
+          ]}
+        />
+      </Box>
     </div>
   )
 }
