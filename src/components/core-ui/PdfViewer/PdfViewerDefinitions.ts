@@ -4,7 +4,7 @@ export interface PdfViewerActions {
   downloadAction: Action
   printAction: Action
   printersAction: Action
-  scanReceiptAction: {
+  scanReceiptAction?: {
     href: string
     label: string
   }
@@ -17,7 +17,7 @@ export interface Proform {
 }
 
 export interface PdfViewerProps {
-  proform: Proform
   actions: PdfViewerActions
-  isLoading: boolean
+  proform?: Proform
+  isLoading?: boolean
 }

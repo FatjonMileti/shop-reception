@@ -12,7 +12,6 @@ const BackButtonTitle = ({ applicationPages }) => {
 
   const memoized = useMemo(() => {
     let currentApplicationName = ''
-    let currentName = ''
     let shouldShowBackButton = false
 
     if (location.pathname !== '') {
@@ -22,30 +21,24 @@ const BackButtonTitle = ({ applicationPages }) => {
 
       if (matchedApplication) {
         currentApplicationName = matchedApplication.screenName
-        currentName = matchedApplication.name
         shouldShowBackButton = true
       }
     }
 
     return {
       currentApplicationName,
-      currentName,
       shouldShowBackButton
     }
   }, [location.pathname, applicationPages])
 
-  const { currentApplicationName, shouldShowBackButton, currentName } = memoized
+  const { currentApplicationName, shouldShowBackButton } = memoized
 
   const navigateBack = () => {
     navigate(-1)
   }
 
   return shouldShowBackButton ? (
-    <Box
-      className={
-        currentName === 'Management task-uri' ? cn(s.absoluteArrowStyles) : cn(s.arrowStyles)
-      }
-    >
+    <Box>
       <BackButton text={currentApplicationName} onNavBack={navigateBack}></BackButton>
     </Box>
   ) : null
