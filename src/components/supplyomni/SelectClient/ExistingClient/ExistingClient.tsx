@@ -3,7 +3,7 @@ import s from './ExistingClient.modules.scss'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Table } from 'components/core-ui/Table'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
@@ -63,9 +63,11 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
   }
 
   const openCreateClientTab = (): void => {
-    setSearchParams({ tab: '1' })
-    const searchString = searchParams.toString()
-    navigate(window.location.pathname + '?' + searchString)
+    setSearchParams(prevSearchParams => {
+      const updatedSearchParams = new URLSearchParams(prevSearchParams)
+      updatedSearchParams.set('tab', '1')
+      return updatedSearchParams
+    }, {replace: true})
   }
 
   return (
