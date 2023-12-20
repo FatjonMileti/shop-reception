@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { Box, Paper, CircularProgress, Grid, useMediaQuery } from '@mui/material'
-import { PdfViewer } from './PdfViewer'
+import { PdfViewer } from 'components/core-ui/PdfViewer'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
@@ -34,7 +34,7 @@ const ProformaView = () => {
     {
       onError: error => {
         showNotification({
-          message: `A aparut o eroare la obtinerea detaiilor comenzii. ${formatErrorMessage(
+          message: `A aparut o eroare la obtinerea detaiilor proformei. ${formatErrorMessage(
             error
           )}`,
           type: 'error'
