@@ -97,7 +97,7 @@ VALUES
     (41, 'Comenzi achitate', 'PaidOrders', null, true, 6),
     -- Volumetry
     (42, 'Management Angajati', 'EmployeeManagement', null, true, 7),
-    (43, 'Management Task-uri', 'ManagementTasks', null, true, 8),
+    (43, 'Management task template', 'ManagementTasks', null, true, 8),
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
     -- Shop Reception
     (45, 'Admin magazin', 'UsersManagement', null, true, 9);
@@ -172,7 +172,7 @@ VALUES
     (57, 'PDF factura', '', '/supplyOmni/bills/:id', true, 41, false),
     -- Volumetry
     (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true),
-    (59, 'Management task-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
+    (59, 'Management task template', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
     -- Shop Reception
     (61, 'Screen 1', '', '/url', true, 45, true);
