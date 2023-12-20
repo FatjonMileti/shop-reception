@@ -102,7 +102,6 @@ const NewTask: React.FC<NewTaskProps> = props => {
       enabled: formik.values.category !== null
     }
   )
-  console.log('debug values', formik.values)
   const { data: raionFilterOptions, isLoading: isRaionLoading } = useQuery(
     ['raion', formik.values.department?.value],
     async () => {
@@ -291,7 +290,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
         <Grid xs={12} md={6} item>
           <TimePicker
             label="Ora estimata de inceput"
-            value={null}
+            value={formik.values.estimateStartTime}
             onChange={newValue => formik.setFieldValue('estimateStartTime', newValue)}
             error={!!formik.errors.taskName}
             helperText={formik.errors.taskName as string}
