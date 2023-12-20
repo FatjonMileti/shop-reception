@@ -66,6 +66,6 @@ export const defaultTableFilters: TableFilters = {
   agentName: null,
   productsName: null,
   id: null,
-  startDate: dayjs(new Date(), 'DD/MM/YYYY'),
-  endDate: dayjs(new Date(), 'DD/MM/YYYY')
+  startDate: null,
+  endDate: null
 }
