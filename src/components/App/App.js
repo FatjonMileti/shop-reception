@@ -70,10 +70,14 @@ const App = () => {
     ;(async () => {
       const localToken = getFirebaseToken()
       if (fbToken && fbToken !== localToken) {
-        await makeNotificationsPutRequest('/association', {
-          deviceToken: fbToken
-        })
-        setFirebaseToken(fbToken)
+        try {
+          await makeNotificationsPutRequest('/association', {
+            deviceToken: fbToken
+          })
+          setFirebaseToken(fbToken)
+        } catch (error) {
+          console.log(error)
+        }
       }
     })()
   }, [fbToken])
