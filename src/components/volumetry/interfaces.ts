@@ -36,7 +36,9 @@ export interface TaskManagementEditItem {
   taskName: string
   estimateStartTime: Date
   estimateEndTime: Date
-  department: AsyncAutocompleteOption
+  department: AsyncAutocompleteOption | number
+  category: AsyncAutocompleteOption | number
+  raion: AsyncAutocompleteOption[] | number[]
   frequency: AsyncAutocompleteOption
   prodStandardValue: number
   prodStandardUM: AsyncAutocompleteOption

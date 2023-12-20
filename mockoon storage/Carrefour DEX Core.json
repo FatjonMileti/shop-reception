@@ -4819,7 +4819,7 @@
       "responses": [
         {
           "uuid": "a407087e-cd9b-4b3f-a944-2098b06f378e",
-          "body": "{\n  \"id\": 1,\n  \"department\": {\n    \"id\": 1,\n    \"name\": \"BLS\"\n  },\n  \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n  \"estimateStartTime\": \"06:30\",\n  \"estimateEndTime\": \"08:30\",\n  \"frequency\": {\n    \"id\": 1,\n    \"name\": \"zilnic\"\n  },\n  \"prodStandardValue\": \"2.0\",\n  \"prodStandardUM\": {\n    \"id\": 1,\n    \"name\": \"tur/ora\"\n  },\n  \"workVolumeSource\": {\n    \"id\": 1,\n    \"name\": \"Meti\"\n  },\n  \"priority\": 1,\n  \"status\": true\n}",
+          "body": "{\n  \"id\": 1,\n  \"department\": {\n    \"id\": 1,\n    \"name\": \"BLS\"\n  },\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Category 1\"\n  },\n  \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n  \"estimateStartTime\": \"06:30\",\n  \"estimateEndTime\": \"08:30\",\n  \"frequency\": {\n    \"id\": 1,\n    \"name\": \"zilnic\"\n  },\n  \"prodStandardValue\": \"2.0\",\n  \"prodStandardUM\": {\n    \"id\": 1,\n    \"name\": \"tur/ora\"\n  },\n  \"workVolumeSource\": {\n    \"id\": 1,\n    \"name\": \"Meti\"\n  },\n  \"priority\": 1,\n  \"status\": true\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -5181,6 +5181,108 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "85e44311-fab6-42fe-a1f7-de3e2c774aaa",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/category",
+      "responses": [
+        {
+          "uuid": "c186c029-0c03-4f01-846a-1e4d1c76697f",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Category 1\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Category 2\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Category 3\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Category 4\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Category 5\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Category 6\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"Category 7\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "6bc13870-c31c-41d3-ac3e-185580d69c57",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/department/:id",
+      "responses": [
+        {
+          "uuid": "7c8241e9-eacc-47f4-b186-650fd4aeb8b8",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"ABC\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"BCD\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"CDE\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"DEF\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"EFG\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"FGH\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"GHI\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "b22143cc-fa60-4f5c-963f-e4e889eb0676",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/raion/:id",
+      "responses": [
+        {
+          "uuid": "f63ac177-f4c9-4531-b710-e134130fe4ec",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Raion 1\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Raion 2\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Raion 3\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Raion 4\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Raion 5\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Raion 6\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"Raion 7\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5387,6 +5489,18 @@
     {
       "type": "route",
       "uuid": "71a861d9-cdb9-4ade-a034-566466c8cf1c"
+    },
+    {
+      "type": "route",
+      "uuid": "85e44311-fab6-42fe-a1f7-de3e2c774aaa"
+    },
+    {
+      "type": "route",
+      "uuid": "6bc13870-c31c-41d3-ac3e-185580d69c57"
+    },
+    {
+      "type": "route",
+      "uuid": "b22143cc-fa60-4f5c-963f-e4e889eb0676"
     }
   ],
   "proxyMode": false,

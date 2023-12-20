@@ -18,4 +18,5 @@ export interface AsyncAutocompleteProps {
   multiple?: boolean
   style?: any
   applyCustomStyle?: boolean
+  disabled?: boolean
 }
