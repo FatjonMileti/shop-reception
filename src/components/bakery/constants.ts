@@ -39,4 +39,8 @@ export const URLS = {
   AUTH_GROWTH_INDEX_PRODUCTS_VIEW: 'bakery/regionManager/growthIndexProductsView',
   AUTH_GROWTH_REGION: 'bakery/regionManager/growth-region',
   AUTH_GROWTH_REGION_PRINT: 'bakery/regionManager/cadentier-region-print',
+
+  /* Region manager role */
+  AUTH_PRODUCT_MANAGEMENT_TRACEABILITY : 'bakery/traceabilityOperator/product-management',
+
 }

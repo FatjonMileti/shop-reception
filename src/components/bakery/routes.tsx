@@ -35,6 +35,9 @@ import { ProductionManagementStore } from './StoreManagerRole/ProductionManageme
 import { ProductionManagementStorePrint } from './StoreManagerRole/ProductionManagementStorePrint'
 import { GrowthIndexStore } from './StoreManagerRole/GrowthIndexStore'
 import ReportAndSalesStore from './StoreManagerRole/ReportAndSalesStore/ReportAndSalesStore'
+import {
+  ProductManagementTraceability
+} from './Traceability/ProductManagementTraceability/ProductManagementTraceability'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -334,6 +337,15 @@ export const useBakeryRoutes = applicationPages => {
         path={URLS.AUTH_CADENTIER_SALES_REGION}
         element={
           <PrivateRoute component={CadentierSalesRegion} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+
+
+      {/* traceability operator role */}
+      <Route
+        path={URLS.AUTH_PRODUCT_MANAGEMENT_TRACEABILITY}
+        element={
+          <PrivateRoute component={ProductManagementTraceability} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
     </>
