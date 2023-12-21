@@ -390,7 +390,7 @@
         },
         {
           "uuid": "62ec1227-05a5-44e9-bb4a-6c71777f62a7",
-          "body": "[\n  {\n    \"id\": \"121\",\n    \"name\": \"Management angajati\",\n    \"icon\": \"EmployeeManagement\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"199\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"199\",\n        \"routeURL\": \"/volumetry/employee/employeeManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"122\",\n    \"name\": \"Management task template\",\n    \"icon\": \"ManagementTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
+          "body": "[\n  {\n    \"id\": \"121\",\n    \"name\": \"Management angajati\",\n    \"icon\": \"EmployeeManagement\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"199\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"199\",\n        \"routeURL\": \"/volumetry/employee/employeeManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"122\",\n    \"name\": \"Management task template-uri\",\n    \"icon\": \"ManagementTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of activities - Volumetry",
@@ -422,7 +422,7 @@
         },
         {
           "uuid": "7fd6f51c-58b2-4f58-bdd1-d94ec055f9a0",
-          "body": "[\n  {\n    \"id\": \"122\",\n    \"name\": \"Management task template\",\n    \"icon\": \"ManagementTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"123\",\n    \"name\": \"Alocare task-uri\",\n    \"icon\": \"AssignTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskAllocation\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
+          "body": "[\n  {\n    \"id\": \"122\",\n    \"name\": \"Management task template-uri\",\n    \"icon\": \"ManagementTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"123\",\n    \"name\": \"Alocare task-uri\",\n    \"icon\": \"AssignTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskAllocation\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of activities - Volumetry Tasks management",
