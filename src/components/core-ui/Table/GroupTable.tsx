@@ -100,7 +100,7 @@ const GroupTable = props => {
   useEffect(() => {
     if (isTableLoaded) {
       handleRemoteData(
-        tableState.page,
+        0,
         tableState.rowsPerPage,
         tableState.order,
         tableState.orderBy,
@@ -386,6 +386,7 @@ const GroupTable = props => {
         printButton={tableActions?.printAction && { onClick: openPrintModal }}
         hasSearchInput={!!tableActions?.searchAction}
         handleRemoteData={debouncedHandleRemoteData}
+        tableState={tableState}
         filters={filtersConfig}
         classes={{ headerClass: s.printPreviewHeader, rowClass: s.printPreviewRow }}
       />
