@@ -11,18 +11,18 @@ import { formatErrorMessage } from 'utils/formatting'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 
-interface CreateEditMerchandiserProps {
+interface CreateEditCollaboratorProps {
   isModalOpen: boolean
   closeModal: Function
   editItem?: EmployeeManagementItem | number
   setShouldRefreshData: Function
 }
 
-const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
+const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
   const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
-  const mutateMerchandiser = async values => {
+  const mutateCollaborator = async values => {
     editItem
       ? await makeCorePutRequest(
           `/volumetry/merchendiser/${(editItem as EmployeeManagementItem)?.id}`,
@@ -31,22 +31,22 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
       : await makeCorePostRequest(`/volumetry/merchendiser`, values)
   }
 
-  const { isLoading, mutate } = useMutation(mutateMerchandiser, {
+  const { isLoading, mutate } = useMutation(mutateCollaborator, {
     onSuccess: res => {
       setShouldRefreshData(true)
       closeModal()
       showNotification({
         message: editItem
-          ? 'Merchandiserul a fost editat cu success!'
-          : 'Merchandiserul a fost adaugat cu success!',
+          ? 'Colaboratorul a fost editat cu success!'
+          : 'Colaboratorul a fost adaugat cu success!',
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
         message: editItem
-          ? `Eroare la editarea merchandiserului. ${formatErrorMessage(res)}`
-          : `Eroare la adaugarea merchandiserului. ${formatErrorMessage(res)}`,
+          ? `Eroare la editarea colaboratorului. ${formatErrorMessage(res)}`
+          : `Eroare la adaugarea colaboratorului. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
@@ -99,7 +99,8 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
       id: (editItem as EmployeeManagementItem)?.id || 0,
       name: (editItem as EmployeeManagementItem)?.name || '',
       departmentName: (editItem as EmployeeManagementItem)?.departmentName || '',
-      position: (editItem as EmployeeManagementItem)?.position || ''
+      position: (editItem as EmployeeManagementItem)?.position || '',
+      employer: (editItem as EmployeeManagementItem)?.employer || ''
     },
     validationSchema: validationSchema,
     onSubmit: async (values: EmployeeManagementItem) => {
@@ -111,7 +112,7 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={editItem ? 'Editeaza' : 'Adauga'}
+      modalTitle={editItem ? 'Editeaza colaborator' : 'Adauga colaborator'}
     >
       <Grid container spacing={4}>
         {(isLoading || isVolumetryDepartmentLoading || isVolumetryPositionLoading) && (
@@ -121,7 +122,7 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
           <Input
             type="text"
             name="name"
-            label="Nume merchendiser"
+            label="Nume colaborator"
             fullWidth
             variant="outlined"
             value={formik.values.name}
@@ -136,7 +137,6 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
             variant="outlined"
             name="department.name"
             label="Selecteaza magazin"
-            applyCustomStyle
             disableClearable
             value={{ value: formik.values.departmentName, label: formik.values.departmentName }}
             options={volumetryDepartmentOptions}
@@ -156,6 +156,20 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
           />
         </Grid>
 
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            name="employer"
+            label="Angajator"
+            fullWidth
+            variant="outlined"
+            value={formik.values.employer}
+            onChange={event => formik.setFieldValue('employer', event.currentTarget.value)}
+            error={!!formik.errors.employer}
+            helperText={formik.errors.employer as string}
+          />
+        </Grid>
+
         <Grid xs={12} item className={s.modalButtons}>
           <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
           <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
@@ -165,4 +179,4 @@ const CreateEditMerchandiser: React.FC<CreateEditMerchandiserProps> = props => {
   )
 }
 
-export default CreateEditMerchandiser
+export default CreateEditCollaborator

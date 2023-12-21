@@ -1,13 +1,13 @@
 import { Tabs } from 'components/core-ui/Tabs'
 import { EmployeesTab } from './EmployeesTab'
-import { MerchandisersTab } from './MerchandisersTab'
+import { CollaboratorsTab } from './CollaboratorsTab'
 
 const EmployeeManagement = () => {
   return (
     <Tabs
       tabs={[
         { label: 'Angajati', tabIndex: 0, content: <EmployeesTab /> },
-        { label: 'Merchandisers', tabIndex: 1, content: <MerchandisersTab /> }
+        { label: 'Colaboratori', tabIndex: 1, content: <CollaboratorsTab /> }
       ]}
     />
   )

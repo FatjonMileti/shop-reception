@@ -10,12 +10,7 @@ export interface EmployeeManagementItem {
   departmentName: string
   name: string
   position: string
-}
-
-export interface NewMerchandiserItem {
-  name: string
-  departmentName: string
-  position: string
+  employer: string
 }
 
 export interface TaskManagementItem {

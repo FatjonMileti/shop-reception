@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
-import s from './MerchandisersTab.modules.scss'
+import s from './CollaboratorsTab.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification, usePermissions } from 'hooks'
@@ -9,13 +9,13 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { columns, roles } from './helpers'
-import { DeleteMerchandiser } from './DeleteMerchandiser'
-import { CreateEditMerchandiser } from './CreateEditMerchandiser'
+import { DeleteCollaborator } from './DeleteCollaborator'
+import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { useQuery } from 'react-query'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
-const MerchandisersTab = () => {
+const CollaboratorsTab = () => {
   const { showNotification } = useNotification()
 
   // TODO: De actualizat cand primim update cu drepturile fiecarui rol
@@ -137,13 +137,7 @@ const MerchandisersTab = () => {
       label: 'Nume',
       type: 'autocomplete',
       value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Nume"
-          options={filterOptionsName}
-        />
-      )
+      filter: <Autocomplete variant="outlined" label="Nume" options={filterOptionsName} />
     },
     {
       name: 'department',
@@ -151,11 +145,7 @@ const MerchandisersTab = () => {
       type: 'autocomplete',
       value: '',
       filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Departament"
-          options={filterOptionsDepartment}
-        />
+        <Autocomplete variant="outlined" label="Departament" options={filterOptionsDepartment} />
       )
     },
     {
@@ -163,30 +153,24 @@ const MerchandisersTab = () => {
       label: 'Position',
       type: 'autocomplete',
       value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Position"
-          options={filterOptionsPosition}
-        />
-      )
+      filter: <Autocomplete variant="outlined" label="Position" options={filterOptionsPosition} />
     }
   ]
   return (
     <div className={s.mainContainer}>
       <Box>
-        <CreateEditMerchandiser
+        <CreateEditCollaborator
           isModalOpen={isNewModalOpen}
           closeModal={closeNewModal}
           setShouldRefreshData={setShouldRefreshData}
         />
-        <DeleteMerchandiser
+        <DeleteCollaborator
           isModalOpen={isDeleteModalOpen}
           closeModal={closeDeleteModal}
           deleteItem={selectedRow}
           setShouldRefreshData={setShouldRefreshData}
         />
-        <CreateEditMerchandiser
+        <CreateEditCollaborator
           isModalOpen={isEditModalOpen}
           closeModal={closeEditModal}
           editItem={selectedRow}
@@ -237,4 +221,4 @@ const MerchandisersTab = () => {
   )
 }
 
-export default MerchandisersTab
+export default CollaboratorsTab
