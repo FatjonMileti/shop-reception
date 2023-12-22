@@ -55,7 +55,6 @@ const StopTaskModal: React.FC<StopTaskModalProps> = props => {
     }
   })
 
-  console.log('debug', formik.values)
   return (
     <Modal
       isModalOpen={isModalOpen}
