@@ -22,7 +22,7 @@ INSERT INTO
 VALUES
     (1, 'Governance', 'Chair', '/governance', true),
     (2, 'Bakery', 'Bakery', '/bakery', true),
-    (3, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true),
+    (3, 'Supply OMNI Offline', 'SupplyOmni', '/supplyOmni', true),
     (4, 'Volumetry', 'Volumetry', '/volumetry', true),
     (5, 'Shop Reception', 'DonutLargeTwoTone', '/shop-reception', true);
 
@@ -39,7 +39,7 @@ VALUES
     (4, 'Manager magazin/raion', 'StoreManager', '/storeManager', true, 2),
     (5, 'Manager regiune', 'RegionManager', '/regionManager', true, 2),
     -- Supply OMNI
-    (6, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true, 3),
+    (6, 'Supply OMNI Offline', 'SupplyOmni', '/supplyOmni', true, 3),
     -- Volumetry
     (7, 'Administrare Angajati', 'EmployeeManagement', '/employeeManagement', true, 4),
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
