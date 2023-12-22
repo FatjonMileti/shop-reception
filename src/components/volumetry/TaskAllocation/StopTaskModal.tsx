@@ -73,7 +73,6 @@ const StopTaskModal: React.FC<StopTaskModalProps> = props => {
           />
         </Grid>
 
-
         <Grid xs={12} item>
           <Input
             type="text"

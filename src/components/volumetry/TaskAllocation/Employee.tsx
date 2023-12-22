@@ -6,6 +6,10 @@ import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { useEffect, useMemo, useState } from 'react'
 import { getCapsuleColor } from './helpers'
 import StopTaskModal from './StopTaskModal'
+import { makeCorePutRequest } from 'utils/api'
+import { useMutation } from 'react-query'
+import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
 
 interface EmployeeProps {
   employee: any // TODO: To add type when db schema is defined
@@ -14,7 +18,7 @@ interface EmployeeProps {
 
 const Employee: React.FC<EmployeeProps> = props => {
   const { employee, task } = props
-
+  const { showNotification } = useNotification()
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 900)
 
   useEffect(() => {
@@ -45,6 +49,7 @@ const Employee: React.FC<EmployeeProps> = props => {
   )
 
   const [isOpenStopTaskModal, setIsOpenStopTaskModal] = useState<boolean>(false)
+
   const openStopTaskModal = () => {
     setIsOpenStopTaskModal(true)
   }
@@ -53,9 +58,30 @@ const Employee: React.FC<EmployeeProps> = props => {
     setIsOpenStopTaskModal(false)
   }
 
+  const submitStartTask = async () => {
+    await makeCorePutRequest(`/volumetry/taskAllocation/start/${task.id}`, {
+      isStarted: true
+    })
+  }
+
+  const { isLoading, mutate: handleStartTask } = useMutation(submitStartTask, {
+    onSuccess: res => {
+      showNotification({
+        message: `Taskul a fost inceput cu succes!`,
+        type: 'success'
+      })
+    },
+    onError: res => {
+      showNotification({
+        message: `A aparut o eroare ${formatErrorMessage(res)}`,
+        type: 'error'
+      })
+    }
+  })
+
   return (
     <Grid item mt={1} className={s.employeeContainer} flexDirection={'column'} overflow={'hidden'}>
-      <Grid container  className={s.employeeInfo} >
+      <Grid container className={s.employeeInfo}>
         <Grid item xs={12} md={2} sx={{ display: 'flex' }}>
           <EmployeeIcon />
           <p className={s.employeeName}>{employee.employee.name}</p>
@@ -124,6 +150,10 @@ const Employee: React.FC<EmployeeProps> = props => {
                 width: isMobile ? '100%' : 'auto'
               }}
               onClick={() => {
+                if (taskCurrentState.showStartButton) {
+                  handleStartTask()
+                }
+
                 if (!taskCurrentState.showStartButton) {
                   openStopTaskModal()
                 }

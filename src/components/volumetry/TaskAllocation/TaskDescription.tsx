@@ -1,6 +1,5 @@
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Grid } from '@mui/material'
-import { Capsule } from 'components/core-ui/Capsule'
 import { useEffect, useState } from 'react'
 import AssignEmployee from './AssignEmployee'
 import Employee from './Employee'
