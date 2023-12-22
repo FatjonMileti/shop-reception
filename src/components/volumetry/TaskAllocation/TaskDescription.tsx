@@ -12,7 +12,7 @@ interface TaskDescriptionProps {
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const { item, employees } = props
-
+  
   const { taskName, department } = item.item || item
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
@@ -56,6 +56,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         closeModal={closeModal}
         taskName={taskName}
         department={department.name}
+        prodStandardUM={item.prodStandardUM}
       />
     </Grid>
   )

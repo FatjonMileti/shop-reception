@@ -19,6 +19,13 @@ export const columns = [
     align: 'left',
     collapsible: true,
     type: 'string'
+  },
+  {
+    title: 'Angajator',
+    field: 'employer',
+    align: 'left',
+    collapsible: true,
+    type: 'string'
   }
 ]
 

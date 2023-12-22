@@ -46,7 +46,8 @@ const StopTaskModal: React.FC<StopTaskModalProps> = props => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      customText: ''
+      customText: '',
+      volum: ''
     },
     onSubmit: async (values, { resetForm }) => {
       mutate(values)
@@ -66,9 +67,25 @@ const StopTaskModal: React.FC<StopTaskModalProps> = props => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: task.taskName },
-              { label: 'Dep.:', name: task.department.name },
+              { label: 'Dep./Raion:', name: task.department.name },
               { label: 'Angajat:', name: employee.employee.name }
             ]}
+          />
+        </Grid>
+
+
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            variant="outlined"
+            name="volume"
+            label="Volum"
+            value={formik.values.volum}
+            width="100%"
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue('volum', (event.target as HTMLInputElement).value)
+            }
+            required
           />
         </Grid>
 
@@ -76,7 +93,7 @@ const StopTaskModal: React.FC<StopTaskModalProps> = props => {
           <Input
             type="textarea"
             variant="outlined"
-            name="mandatory"
+            name="message"
             label="Mesaj"
             value={formik.values.customText}
             width="100%"
@@ -84,6 +101,7 @@ const StopTaskModal: React.FC<StopTaskModalProps> = props => {
               formik.setFieldValue('customText', (event.target as HTMLInputElement).value)
             }
             rows={7}
+            required
           />
         </Grid>
 
