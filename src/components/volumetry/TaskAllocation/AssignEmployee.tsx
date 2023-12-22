@@ -91,7 +91,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: taskName },
-              { label: 'Dep./Raion:', name: department },
+              { label: 'Departament/Raion:', name: department },
               { label: 'UM:', name: `${prodStandardUM.name}/${prodStandardUM.unit}` }
             ]}
           />
