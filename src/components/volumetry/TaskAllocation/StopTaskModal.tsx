@@ -47,7 +47,8 @@ const StopTaskModal: React.FC<StopTaskModalProps> = props => {
     validateOnChange: false,
     initialValues: {
       customText: '',
-      volum: ''
+      volum: '',
+      isStopped: true
     },
     onSubmit: async (values, { resetForm }) => {
       mutate(values)
@@ -67,7 +68,7 @@ const StopTaskModal: React.FC<StopTaskModalProps> = props => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: task.taskName },
-              { label: 'Dep./Raion:', name: task.department.name },
+              { label: 'Departament/Raion:', name: task.department.name },
               { label: 'Angajat:', name: employee.employee.name }
             ]}
           />
