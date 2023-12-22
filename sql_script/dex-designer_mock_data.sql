@@ -113,7 +113,7 @@ VALUES
     (3, 'Effort Matrix', 'DonutSmallOutlined', '/governance/projectTeam/effortMatrix', true, 4, true),
     (4, 'Project Milestones', 'AccountTreeOutlined', '/governance/projectTeam/projectMilestones', true, 3, true),
     (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/governance/projectTeam/teamCapacity', true, 2, true),
-    (6, 'Individual Capacity', 'PeopleAltOutlined', '/governance/projectTeam/individualCapacity', true, 2, false),
+    (6, 'Individual Capacity', 'PeopleAltOutlined', '/governance/projectTeam/individualCapacity/:id', true, 2, false),
     (7, 'My Time-Off', 'TimerOffOutlined', '/governance/projectTeam/myTimeOff', true, 6, true),
     -- Bakery ADMIN
     (8 , 'Gestiune utilizatori', 'UsersManagement', '/bakery/admin/usersManagement', true, 7, true),

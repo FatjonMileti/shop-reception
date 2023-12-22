@@ -1,5 +1,6 @@
 import TaskDescription from './TaskDescription'
 import TaskSummary from './TaskSummary'
+import { getEmployeeGroupName } from './helpers'
 
 export const toDepartmentOptions = data => data.map(item => ({ label: item.name, value: item.id }))
 
@@ -9,4 +10,11 @@ export const toListTableRows = items =>
     summary: <TaskSummary item={item} />,
     details: <TaskDescription item={item} />,
     borderLeftColor: '#0970E6'
+  }))
+
+export const toEmployeeFilterItems = items =>
+  items.map(item => ({
+    label: item.name || '',
+    value: item.id || '',
+    groupBy: getEmployeeGroupName(item.work_group)
   }))
