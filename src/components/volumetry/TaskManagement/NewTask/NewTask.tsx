@@ -257,7 +257,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
           <AsyncAutocomplete
             variant="outlined"
             name="category"
-            label="Category"
+            label="Categorie"
             value={formik.values.category}
             options={categoryFilterOptions}
             onChange={value => {
