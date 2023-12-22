@@ -19,4 +19,5 @@ export interface AsyncAutocompleteProps {
   style?: any
   applyCustomStyle?: boolean
   disabled?: boolean
+  groupBy?: (option: any) => string
 }

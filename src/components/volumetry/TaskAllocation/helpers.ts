@@ -1,9 +1,3 @@
-export const toEmployeeFilterItems = items =>
-  items.map(item => ({
-    label: item.name || '',
-    value: item.id || ''
-  }))
-
 export const getCapsuleColor = (isTaskStarted, isTaskEnded, isOverdue) => {
   if (isOverdue) {
     return { label: 'rgba(211, 13, 31, 0.15)', value: '#D30D1F', progress: 'error' }
@@ -18,4 +12,17 @@ export const getCapsuleColor = (isTaskStarted, isTaskEnded, isOverdue) => {
   }
 
   return { label: '', value: '' }
+}
+
+export const getEmployeeGroupName = groupBy => {
+  switch (groupBy) {
+    case 'ON_SHIFT':
+      return 'Angajati pe tura'
+    case 'OFF_SHIFT':
+      return 'Angajati care nu sunt pe tura'
+    case 'MERCHENDISER':
+      return 'Colaboratori'
+    default:
+      return ''
+  }
 }

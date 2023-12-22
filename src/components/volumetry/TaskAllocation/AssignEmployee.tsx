@@ -11,7 +11,7 @@ import { useMutation, useQuery } from 'react-query'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { toEmployeeFilterItems } from './helpers'
+import { toEmployeeFilterItems } from './serializers'
 
 interface AssignEmployeeProps {
   isModalOpen: boolean
@@ -101,6 +101,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
               onChange={(value: ChangeEvent<HTMLInputElement>) =>
                 formik.setFieldValue('selectEmployee', value)
               }
+              groupBy={option => option.groupBy}
             />
           )}
         </Grid>
