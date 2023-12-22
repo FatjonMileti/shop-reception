@@ -13,11 +13,13 @@ import { NewTask } from './NewTask'
 import { toTableItems } from './serializers'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
+import { IconCell } from 'components/core-ui/IconCell'
+import { DescriptionText } from 'components/core-ui/DescriptionText'
 
 export const columns = [
   {
-    title: 'Departament',
-    field: 'department',
+    title: 'Departament / Raioane',
+    field: 'rayons',
     align: 'left',
     type: 'string'
   },
@@ -50,15 +52,8 @@ export const columns = [
     collapsible: true
   },
   {
-    title: 'Valoare productivitate standard',
-    field: 'prodStandardValue',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'UM standard productivitate',
-    field: 'prodStandardUM',
+    title: 'Productivitate',
+    field: 'standardProductivityValue',
     align: 'left',
     type: 'string',
     collapsible: true
@@ -68,7 +63,9 @@ export const columns = [
     field: 'workVolumeSource',
     align: 'left',
     type: 'string',
-    collapsible: true
+    collapsible: true,
+    minWidth: '200px',
+    render: row => <DescriptionText value={row.workVolumeSource} />
   },
   {
     title: 'Prioritate',
@@ -78,14 +75,23 @@ export const columns = [
     collapsible: true
   },
   {
-    title: 'Stare',
-    field: 'status',
+    title: 'Categorie',
+    field: 'category',
     align: 'left',
     type: 'string',
-    render: row => (
-      <BooleanIcon icon="CheckOutlined" value={row.status} onSuccess="#33691E" onFailure="E5E5E5" />
-    ),
     collapsible: true
+  },
+  {
+    title: 'Activ',
+    field: 'isActive',
+    align: 'left',
+    type: 'string',
+    collapsible: true,
+    render: row => (
+      <Box>
+        <IconCell value={row.status ? 'active' : 'inactive'} />
+      </Box>
+    )
   }
 ]
 
