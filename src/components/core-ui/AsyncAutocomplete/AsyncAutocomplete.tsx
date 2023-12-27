@@ -1,11 +1,10 @@
-import * as React from 'react'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
-import { useMediaQuery } from '@mui/material'
+import { useState } from 'react'
 import { AsyncAutocompleteProps } from './AsyncAutocompleteDefinitions'
 
 const AsyncAutocomplete = (props: AsyncAutocompleteProps) => {
   const { value, options, onChange, onBlur, style, ...rest } = props
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   const loading = open && options?.length === 0
 
   return (
