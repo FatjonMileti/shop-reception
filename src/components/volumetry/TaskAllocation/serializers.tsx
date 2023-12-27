@@ -1,3 +1,4 @@
+import Employee from './Employee'
 import TaskDescription from './TaskDescription'
 import TaskSummary from './TaskSummary'
 import { getEmployeeGroupName } from './helpers'
@@ -17,4 +18,10 @@ export const toEmployeeFilterItems = items =>
     label: item.name || '',
     value: item.id || '',
     groupBy: getEmployeeGroupName(item.work_group)
+  }))
+
+export const toEmployeesItems = (item, employees) =>
+  employees.map(employee => ({
+    id: employee.id,
+    content: <Employee employee={employee} task={item} />
   }))

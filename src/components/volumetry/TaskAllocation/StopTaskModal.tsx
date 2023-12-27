@@ -60,7 +60,7 @@ const StopTaskModal: React.FC<StopTaskModalProps> = props => {
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={'Selecteaza angajat'}
+      modalTitle={'Opreste task'}
       modalWidth="50%"
     >
       <Grid container spacing={2}>

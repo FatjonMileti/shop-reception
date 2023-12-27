@@ -77,6 +77,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  @media (max-width: 624px) {
+    width: 400px;
+  }
 }
 
 .capsules {
@@ -116,7 +119,7 @@
 }
 
 .employeeInfo {
-  padding: 8px 12px 8px;
+  padding: 0;
   gap: 12px;
   align-items: center;
 }

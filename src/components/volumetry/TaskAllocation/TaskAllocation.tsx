@@ -10,6 +10,8 @@ import { CircularProgress, Grid, debounce } from '@mui/material'
 import { FilterDataSelect, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import TaskDescription from './TaskDescription'
+import { EditActionIcon } from 'icons'
+import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
 
 const TaskAllocation = () => {
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
@@ -17,6 +19,9 @@ const TaskAllocation = () => {
   const [tableItems, setTableItems] = useState([]) // TODO: To add interface when db schema is defined
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState(0) // TODO: To add interface when db schema is defined
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const { showNotification } = useNotification()
 
@@ -79,6 +84,15 @@ const TaskAllocation = () => {
     }
   }
 
+  const openEditTaskModal = (): void => setIsEditTaskModalOpen(true)
+
+  const closeEditTaskModal = (): void => setIsEditTaskModalOpen(false)
+
+  const selectRow = row => {
+    setSelectedRow(row)
+    openEditTaskModal()
+  }
+
   return (
     <div className={s.mainContainer}>
       <Grid container spacing={4}>
@@ -103,13 +117,32 @@ const TaskAllocation = () => {
         )}
       </Grid>
       {departmentFilterValue && (
-        <ListTable
-          rows={rows}
-          handleRemoteData={debounce(fetchData, 500)}
-          handleRemoteDetails={handleRemoteDetails}
-          isLoading={isLoading}
-          totalCount={totalCount}
-        />
+        <>
+          <ListTable
+            rows={rows}
+            handleRemoteData={debounce(fetchData, 500)}
+            handleRemoteDetails={handleRemoteDetails}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            rowActions={[
+              {
+                label: 'Editeaza',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#0970E6',
+                desktopIcon: <EditActionIcon />,
+                onClick: (e, rowId) => selectRow(tableItems.find(item => item.id === rowId))
+              }
+            ]}
+            rowActionsWidth="90px"
+          />
+          <EditCurrentTaskTemplate
+            isModalOpen={isEditTaskModalOpen}
+            closeModal={closeEditTaskModal}
+            editItem={selectedRow}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+        </>
       )}
     </div>
   )
