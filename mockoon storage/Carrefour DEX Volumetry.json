@@ -941,7 +941,7 @@
       "responses": [
         {
           "uuid": "8cc70d6b-007a-4993-b2c3-fdedeffe3885",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int' max=99999}},\n      \"name\": \"\",\n      \"rayonsOrDepartment\": \"\",\n      \"recommendedStartHour\": \"\",\n      \"recommendedEndHour\": \"\",\n      \"frequency\": \"\",\n      \"standardProductivityValue\": {{faker 'number.int' max=99999}},\n      \"measurementUnit\": \"\",\n      \"priority\": \"{{oneOf (array '1 - Ridicat')}}\",\n      \"workVolumeSource\": \"\",\n      \"volumetryLocationCategory\": \"\",\n      \"isActive\": {{faker 'datatype.boolean'}}\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int' max=99999}},\n    \"totalCount\": {{faker 'number.int' max=99999}},\n    \"pageCount\": {{faker 'number.int' max=99999}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int' max=99999}},\n      \"name\": \"Task\",\n      \"rayonsOrDepartment\": \"Raion 1\",\n      \"recommendedStartHour\": \"08:00\",\n      \"recommendedEndHour\": \"10:00\",\n      \"frequency\": \"Zilnic\",\n      \"standardProductivityValue\": {{faker 'number.int' max=99999}},\n      \"measurementUnit\": \"ora\",\n      \"priority\": \"{{oneOf (array '1 - Ridicat')}}\",\n      \"workVolumeSource\": \"120\",\n      \"volumetryLocationCategory\": \"Categorie\",\n      \"isActive\": {{faker 'datatype.boolean'}}\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int' max=99999}},\n    \"totalCount\": {{faker 'number.int' max=99999}},\n    \"pageCount\": {{faker 'number.int' max=99999}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted task templates list",
@@ -1249,7 +1249,7 @@
       "responses": [
         {
           "uuid": "f5da5f4b-bb48-42d1-9d68-f866d8d960b2",
-          "body": "{\n  \"id\": {{faker 'number.int' max=99999}},\n  \"name\": \"\",\n  \"rayonsOrDepartment\": \"\",\n  \"recommendedStartHour\": \"\",\n  \"recommendedEndHour\": \"\",\n  \"frequency\": \"\",\n  \"standardProductivityValue\": {{faker 'number.int' max=99999}},\n  \"measurementUnit\": \"\",\n  \"priority\": \"{{oneOf (array '1 - Ridicat')}}\",\n  \"workVolumeSource\": \"\",\n  \"volumetryLocationCategory\": \"\",\n  \"isActive\": {{faker 'datatype.boolean'}}\n}",
+          "body": "    {\n      \"id\": {{faker 'number.int' max=99999}},\n      \"name\": \"Task\",\n      \"rayonsOrDepartment\": \"Raion 1\",\n      \"recommendedStartHour\": \"08:00\",\n      \"recommendedEndHour\": \"10:00\",\n      \"frequency\": \"Zilnic\",\n      \"standardProductivityValue\": {{faker 'number.int' max=99999}},\n      \"measurementUnit\": \"ora\",\n      \"priority\": \"{{oneOf (array '1 - Ridicat')}}\",\n      \"workVolumeSource\": \"120\",\n      \"volumetryLocationCategory\": \"Categorie\",\n      \"isActive\": {{faker 'datatype.boolean'}}\n    }",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained task template for given id",
@@ -1707,11 +1707,11 @@
       "type": "http",
       "documentation": "Get list of possible frequencies",
       "method": "get",
-      "endpoint": "task-templates/frequencies",
+      "endpoint": "task-templatess/frequencies",
       "responses": [
         {
           "uuid": "4052a88a-a2bc-49a7-8bd7-240d75e86925",
-          "body": "[\n  \"\"\n]",
+          "body": "[\n  \"Zilnic\", \"Saptamanal\"\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of frequencies",
@@ -1861,11 +1861,11 @@
       "type": "http",
       "documentation": "Get list of possible measurement units",
       "method": "get",
-      "endpoint": "task-templates/measurement-units",
+      "endpoint": "task-templatess/measurement-units",
       "responses": [
         {
           "uuid": "eab676f7-674f-43c9-a8d5-421923f525f4",
-          "body": "[\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"name\": \"\",\n    \"description\": \"\"\n  }\n]",
+          "body": "[\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"name\": \"Ora\",\n    \"description\": \"\"\n  },\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"name\": \"Metru\",\n    \"description\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of measurement units",
@@ -2015,11 +2015,11 @@
       "type": "http",
       "documentation": "Get list of possible priorities",
       "method": "get",
-      "endpoint": "task-templates/priorities",
+      "endpoint": "task-templatess/priorities",
       "responses": [
         {
           "uuid": "77c3097d-98e2-403a-af53-260b216b1e22",
-          "body": "[\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"value\": \"\",\n    \"description\": \"\"\n  }\n]",
+          "body": "[\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"value\": \"Prio 1\",\n    \"description\": \"\"\n  },\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"value\": \"Prio 2\",\n    \"description\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of priorities",
@@ -3559,7 +3559,7 @@
       "responses": [
         {
           "uuid": "5ce95062-20e8-4192-989e-061bffed5d59",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int' max=99999}},\n      \"measurementUnit\": \"\",\n      \"totalWorkload\": {{faker 'number.int' max=99999}},\n      \"averageWorkload\": {{faker 'number.int' max=99999}}\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int' max=99999}},\n    \"totalCount\": {{faker 'number.int' max=99999}},\n    \"pageCount\": {{faker 'number.int' max=99999}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int' max=99999}},\n      \"measurementUnit\": \"Something\",\n      \"totalWorkload\": {{faker 'number.int' max=99999}},\n      \"averageWorkload\": {{faker 'number.int' max=99999}}\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int' max=99999}},\n    \"totalCount\": {{faker 'number.int' max=99999}},\n    \"pageCount\": {{faker 'number.int' max=99999}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained work volume reports",
@@ -4175,7 +4175,7 @@
       "responses": [
         {
           "uuid": "676b2697-77ca-46d2-8417-70aca17de6c3",
-          "body": "[\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"category\": \"\",\n    \"description\": \"\"\n  }\n]",
+          "body": "[\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"category\": \"Category 1\",\n    \"description\": \"\"\n  },\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"category\": \"Category 2\",\n    \"description\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of location categories",
@@ -4348,6 +4348,314 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "04bc8f02-20c0-425c-91a9-65a0049bfcf6",
+      "type": "http",
+      "documentation": "Get list of departments",
+      "method": "get",
+      "endpoint": "locations/departments/:id",
+      "responses": [
+        {
+          "uuid": "9f13051d-a4d9-42c4-b912-77d56151cb5f",
+          "body": "[\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"name\": \"Front-End\",\n    \"description\": \"FE\"\n  },\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"name\": \"Back-End\",\n    \"description\": \"BE\"\n  },\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"name\": \"DevOps\",\n    \"description\": \"DEVOPS\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained list of departments",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c5c5ed78-2672-4390-91e0-16d634d7bf99",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "2b0c2344-6b5d-449f-9797-60698293117c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ef8182f7-e6b8-447d-87f6-fded6eeb474a",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "8eb16828-db5f-47fc-8317-000e9523afec",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e38e4984-ea81-4b58-90f2-3fc75c554149",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "An unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "30127909-ff8c-46f6-b10c-4ddaffdc8a66",
+      "type": "http",
+      "documentation": "Get list of departments",
+      "method": "get",
+      "endpoint": "locations/raions/:id",
+      "responses": [
+        {
+          "uuid": "fb8edabb-d1f4-46dc-945d-c128091a5028",
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Raion 1\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Raion 2\"\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Raion 3\"\n  },\n  {\n    \"id\": 4,\n    \"name\": \"Raion 4\"\n  },\n  {\n    \"id\": 5,\n    \"name\": \"Raion 5\"\n  },\n  {\n    \"id\": 6,\n    \"name\": \"Raion 6\"\n  },\n  {\n    \"id\": 7,\n    \"name\": \"Raion 7\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained list of departments",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "7848a7e8-00dd-46b8-9334-849d292e6ea9",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "342d5b0b-a44a-48a5-8598-861de0c9ba05",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "faf50541-6bea-4627-9eb8-9bf70fe301bb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e2f0bcc3-7af6-4338-8623-fdbe37d77a09",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "fc680e33-ff46-492e-bcb7-56a4a7e974c7",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "An unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -4466,6 +4774,14 @@
     {
       "type": "route",
       "uuid": "4405042a-a579-43e2-ac63-b093342d9e26"
+    },
+    {
+      "type": "route",
+      "uuid": "04bc8f02-20c0-425c-91a9-65a0049bfcf6"
+    },
+    {
+      "type": "route",
+      "uuid": "30127909-ff8c-46f6-b10c-4ddaffdc8a66"
     }
   ],
   "proxyMode": false,

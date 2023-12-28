@@ -27,10 +27,10 @@ const CollaboratorsTab = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
-  const [modal, setModal] = useState<string>(null)
   const [selectedRow, setSelectedRow] = useState<EmployeeManagementItem>(null)
+  const [modal, setModal] = useState<CRUDAction>(null)
 
-  const openModal = (action: string) => setModal(action)
+  const openModal = (action: CRUDAction) => setModal(action)
   const closeModal = () => setModal(null)
 
   const selectRowId = (rowId: number, action: CRUDAction) => {

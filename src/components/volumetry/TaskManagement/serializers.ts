@@ -1,13 +1,16 @@
-export const toTableItems = items => items.map(item => ({
+import { TaskManagementItem } from "../interfaces";
+
+export const toTableItems = items => items.map((item: TaskManagementItem) => ({
   id: item.id,
-  department: item.department.name,
-  taskName: item.taskName,
-  estimateStartTime: item.estimateStartTime,
-  estimateEndTime: item.estimateEndTime,
-  frequency: item.frequency.name,
-  prodStandardValue: item.prodStandardValue,
-  prodStandardUM: item.prodStandardUM.name,
-  workVolumeSource: item.workVolumeSource.name,
+  rayonsOrDepartment: item.rayonsOrDepartment,
+  name: item.name,
+  recommendedStartHour: item.recommendedStartHour,
+  recommendedEndHour: item.recommendedEndHour,
+  frequency: item.frequency,
+  standardProductivityValue: item.standardProductivityValue,
+  measurementUnit: item.measurementUnit,
+  workVolumeSource: item.workVolumeSource,
   priority: item.priority,
-  status: item.status
+  isActive: item.isActive,
+  volumetryLocationCategory: item.volumetryLocationCategory
 }))

@@ -16,31 +16,18 @@ export interface EmployeeManagementItem {
 
 export interface TaskManagementItem {
   id?: string | number
-  department: string
-  taskName: string
-  estimateStartTime: string
-  estimateEndTime: string
-  frequency: string
-  prodStandardValue: string
-  prodStandardUM: string
-  workVolumeSource: string
-  priority: number
-  status: boolean
-}
-
-export interface TaskManagementEditItem {
-  taskName: string
-  estimateStartTime: Date
-  estimateEndTime: Date
-  department: AsyncAutocompleteOption | number
-  category: AsyncAutocompleteOption | number
-  raion: AsyncAutocompleteOption[] | number[]
-  frequency: AsyncAutocompleteOption
-  prodStandardValue: number
-  prodStandardUM: AsyncAutocompleteOption
-  workVolumeSource: AsyncAutocompleteOption
-  priority: number
-  status: boolean
+  name: string
+  rayonsOrDepartment: string | AsyncAutocompleteOption
+  recommendedStartHour: string
+  recommendedEndHour: string
+  frequency: string | AsyncAutocompleteOption
+  standardProductivityValue: number
+  measurementUnit: string | AsyncAutocompleteOption
+  workVolumeSource: string | AsyncAutocompleteOption
+  priority: string
+  isActive: boolean
+  volumetryLocationCategory: string | AsyncAutocompleteOption
+  raion?: string | AsyncAutocompleteOption
 }
 
 export interface Department {
