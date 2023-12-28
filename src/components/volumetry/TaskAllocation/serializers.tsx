@@ -5,11 +5,17 @@ import { getEmployeeGroupName } from './helpers'
 
 export const toDepartmentOptions = data => data.map(item => ({ label: item.name, value: item.id }))
 
-export const toListTableRows = items =>
+export const toListTableRows = (items, shouldRefreshData, setShouldRefreshData) =>
   items.map(item => ({
     id: item.id,
     summary: <TaskSummary item={item} />,
-    details: <TaskDescription item={item} />,
+    details: (
+      <TaskDescription
+        item={item}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+      />
+    ),
     borderLeftColor: '#0970E6'
   }))
 

@@ -30,7 +30,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
   const { showNotification } = useNotification()
 
   const editCurrentTemplate = async values => {
-    await makeCorePutRequest(`/volumetry/task/current/${editItem?.id}`, values)
+    await makeCorePutRequest(`/volumetry/task/${editItem?.id}`, values)
   }
 
   const { isLoading, mutate } = useMutation(editCurrentTemplate, {

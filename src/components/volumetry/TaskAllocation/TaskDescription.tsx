@@ -10,17 +10,18 @@ import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/
 
 interface TaskDescriptionProps {
   item: any // TODO: To add type when db schema is defined
+  shouldRefreshData: boolean
+  setShouldRefreshData: (status: boolean) => void
   employees?: any[] // TODO: To add type when db schema is defined
 }
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
-  const { item, employees } = props
+  const { item, employees, shouldRefreshData, setShouldRefreshData } = props
 
   const { taskName, department } = item.item || item
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [employeesItems, setEmployeesItems] = useState([])
   const [selectedRow, setSelectedRow] = useState(null) // TODO: To add interface when db schema is defined
-  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
 
