@@ -2,7 +2,6 @@ import { Button, ListTableActionsItems } from '@fullscreendigital/carrefour-dex-
 import { Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import AssignEmployee from './AssignEmployee'
-import Employee from './Employee'
 import { toEmployeesItems } from './serializers'
 import { DeleteActionIcon, EditActionIcon } from 'icons'
 import { EditAllocationModal } from './EditAllocationModal'
@@ -11,7 +10,7 @@ import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/
 interface TaskDescriptionProps {
   item: any // TODO: To add type when db schema is defined
   shouldRefreshData: boolean
-  setShouldRefreshData: (status: boolean) => void
+  setShouldRefreshData: Function
   employees?: any[] // TODO: To add type when db schema is defined
 }
 
@@ -26,7 +25,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
 
   useEffect(() => {
-    setEmployeesItems(toEmployeesItems(item, employees))
+    setEmployeesItems(toEmployeesItems(item, employees, setShouldRefreshData))
   }, [employees])
 
   const openModal = (): void => setIsModalOpen(true)

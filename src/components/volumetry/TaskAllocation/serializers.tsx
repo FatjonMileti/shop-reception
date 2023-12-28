@@ -26,8 +26,10 @@ export const toEmployeeFilterItems = items =>
     groupBy: getEmployeeGroupName(item.work_group)
   }))
 
-export const toEmployeesItems = (item, employees) =>
+export const toEmployeesItems = (item, employees, setShouldRefreshData) =>
   employees.map(employee => ({
     id: employee.id,
-    content: <Employee employee={employee} task={item} />
+    content: (
+      <Employee employee={employee} task={item} setShouldRefreshData={setShouldRefreshData} />
+    )
   }))

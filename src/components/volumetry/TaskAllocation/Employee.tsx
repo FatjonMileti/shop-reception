@@ -5,19 +5,20 @@ import { Capsule } from 'components/core-ui/Capsule'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { useEffect, useMemo, useState } from 'react'
 import { getCapsuleColor } from './helpers'
-import StopTaskModal from './StopTaskModal'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
+import { EditAllocationModal } from './EditAllocationModal'
 
 interface EmployeeProps {
   employee: any // TODO: To add type when db schema is defined
   task: any // TODO: To add type when db schema is defined
+  setShouldRefreshData: Function
 }
 
 const Employee: React.FC<EmployeeProps> = props => {
-  const { employee, task } = props
+  const { employee, task, setShouldRefreshData } = props
   const { showNotification } = useNotification()
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 900)
 
@@ -164,11 +165,12 @@ const Employee: React.FC<EmployeeProps> = props => {
           </Grid>
         )}
       </Grid>
-      <StopTaskModal
+      <EditAllocationModal
         isModalOpen={isOpenStopTaskModal}
         closeModal={closeStopTaskModal}
         employee={employee}
         task={task}
+        setShouldRefreshData={setShouldRefreshData}
       />
     </Box>
   )

@@ -10,13 +10,15 @@ import { makeCorePutRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
+import { getFormInitialValues } from './helpers'
 
 interface EditAllocationModalProps {
   isModalOpen: boolean
   closeModal: Function
-  editItem: any // TODO: To add interface when db schema is defined
   task: any // TODO: To add interface when db schema is defined
   setShouldRefreshData: Function
+  editItem?: any // TODO: To add interface when db schema is defined
+  employee?: any // TODO: To add type when db schema is defined
 }
 
 const validationSchema = yup.object({
@@ -26,12 +28,15 @@ const validationSchema = yup.object({
 })
 
 const EditAllocationModal = (props: EditAllocationModalProps) => {
-  const { isModalOpen, closeModal, editItem, setShouldRefreshData, task } = props
+  const { isModalOpen, closeModal, editItem, employee, setShouldRefreshData, task } = props
 
   const { showNotification } = useNotification()
 
   const editCurrentAllocation = async values => {
-    await makeCorePutRequest(`/volumetry/taskAllocation/details/${editItem?.id}`, values)
+    await makeCorePutRequest(
+      `/volumetry/taskAllocation/details/${editItem ? editItem?.id : employee.employee.id}`,
+      values
+    )
   }
 
   const { isLoading, mutate } = useMutation(editCurrentAllocation, {
@@ -39,13 +44,15 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
       setShouldRefreshData(true)
       closeModal()
       showNotification({
-        message: 'Alocarea a fost editata cu succes',
+        message: editItem ? 'Alocarea a fost editata cu succes' : 'Taskul a fost oprit cu succes',
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `A aparut o eroare la editarea alocarii. ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la ${
+          editItem ? 'editarea alocarii' : 'oprirea taskului'
+        }. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
@@ -54,14 +61,11 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    initialValues: {
-      id: editItem?.id || 0,
-      volume: editItem?.volume?.value || '',
-      customText: editItem?.customText || ''
-    },
+    initialValues: getFormInitialValues(editItem),
     validationSchema: validationSchema,
-    onSubmit: async (values: any) => {
+    onSubmit: async (values: any, { resetForm }) => {
       mutate(values)
+      resetForm()
     }
   })
 
@@ -69,7 +73,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={'Editeaza alocare'}
+      modalTitle={editItem ? 'Editeaza alocare' : 'Opreste task'}
       modalWidth="50%"
     >
       <Grid container spacing={2}>
@@ -78,7 +82,10 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
             items={[
               { label: 'Task:', name: task?.taskName },
               { label: 'Departament/Raion:', name: task?.department?.name },
-              { label: 'Angajat:', name: editItem?.employee?.name }
+              {
+                label: 'Angajat:',
+                name: editItem ? editItem?.employee?.name : employee?.employee?.name
+              }
             ]}
           />
         </Grid>
@@ -92,7 +99,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
             value={formik.values.volume}
             width="100%"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('volum', (event.target as HTMLInputElement).value)
+              formik.setFieldValue('volume', (event.target as HTMLInputElement).value)
             }
             required
           />
@@ -110,6 +117,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
               formik.setFieldValue('customText', (event.target as HTMLInputElement).value)
             }
             rows={7}
+            required={!!employee}
           />
         </Grid>
 
