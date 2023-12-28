@@ -5,13 +5,15 @@ import s from './TaskManagement.modules.scss'
 import { CRUDAction, TaskManagementItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { Input } from 'components/core-ui/Input'
 import { toTableItems } from './serializers'
 import { AddActionIcon, EditActionIcon } from 'icons'
 import { IconCell } from 'components/core-ui/IconCell'
 import { DescriptionText } from 'components/core-ui/DescriptionText'
 import { handleQueryError } from '../utils'
 import { CreateEditTask } from './CreateEditTask'
+import { VOLUMETRY_TASKS_URL } from './constants'
+import { buildTableFilterFields } from './utils'
+import { getCategoriesOptions, getDepartmentsOptions, getFrequencyOptions } from '../api'
 
 export const columns = [
   {
@@ -92,34 +94,6 @@ export const columns = [
   }
 ]
 
-const tableFilterFields = [
-  {
-    name: 'rayonsOrDepartment',
-    label: 'Departament',
-    type: 'text',
-    filter: <Input type="text" name="rayonsOrDepartment" label="Departament" variant="outlined" />
-  },
-  {
-    name: 'name',
-    label: 'Nume Task',
-    type: 'text',
-    filter: <Input type="text" name="name" label="Nume" variant="outlined" />
-  },
-  {
-    name: 'priority',
-    label: 'Prioritate',
-    type: 'number',
-    filter: <Input type="number" name="priority" label="Prioritate" variant="outlined" />
-  }
-  // TODO see what should be used here for boolean
-  // {
-  //   name: 'state',
-  //   label: 'Stare',
-  //   type: 'boolean',
-  //   filter: <Input type="text" name="state" label="Stare" variant="outlined" />
-  // }
-]
-
 const TaskManagement = () => {
   const [tableItems, setTableItems] = useState<TaskManagementItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -127,12 +101,16 @@ const TaskManagement = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRowId, setSelectedRowId] = useState<string | number>(null)
 
+  const { data: categoryOptions } = getCategoriesOptions()
+  const { data: departmentOptions } = getDepartmentsOptions()
+  const { data: frequencyOptions } = getFrequencyOptions()
+
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/volumetry/task-templates',
+          url: VOLUMETRY_TASKS_URL,
           tableFilters,
           page,
           rowsPerPage,
@@ -184,7 +162,11 @@ const TaskManagement = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          filters={tableFilterFields}
+          filters={buildTableFilterFields(
+            departmentOptions || [],
+            frequencyOptions || [],
+            categoryOptions || []
+          )}
           rowActions={[
             {
               label: 'Edit',

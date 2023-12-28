@@ -1,23 +1,24 @@
-import { Grid, LinearProgress } from '@mui/material'
+import { Box, Grid, LinearProgress } from '@mui/material'
 import s from './TaskAllocation.modules.scss'
 import { ChatIcon, EmployeeIcon } from 'icons'
 import { Capsule } from 'components/core-ui/Capsule'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { useEffect, useMemo, useState } from 'react'
 import { getCapsuleColor } from './helpers'
-import StopTaskModal from './StopTaskModal'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
+import { EditAllocationModal } from './EditAllocationModal'
 
 interface EmployeeProps {
   employee: any // TODO: To add type when db schema is defined
   task: any // TODO: To add type when db schema is defined
+  setShouldRefreshData: Function
 }
 
 const Employee: React.FC<EmployeeProps> = props => {
-  const { employee, task } = props
+  const { employee, task, setShouldRefreshData } = props
   const { showNotification } = useNotification()
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 900)
 
@@ -80,7 +81,7 @@ const Employee: React.FC<EmployeeProps> = props => {
   })
 
   return (
-    <Grid item mt={1} className={s.employeeContainer} flexDirection={'column'} overflow={'hidden'}>
+    <Box>
       <Grid container className={s.employeeInfo}>
         <Grid item xs={12} md={2} sx={{ display: 'flex' }}>
           <EmployeeIcon />
@@ -110,13 +111,15 @@ const Employee: React.FC<EmployeeProps> = props => {
 
         <Grid item xs={12} md={2} sx={{ display: 'flex' }}>
           {employee.customText ? (
-            <>
-              <Grid item mr={1} sx={{ display: 'flex', alignItems: 'center' }}>
+            <Grid container>
+              <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
                 <ChatIcon />
               </Grid>
 
-              <p className={s.customText}>{employee.customText}</p>
-            </>
+              <Grid item xs={11} className={s.customText}>
+                {employee.customText}
+              </Grid>
+            </Grid>
           ) : !taskCurrentState.isTaskStarted && !taskCurrentState.isTaskEnded ? (
             <></>
           ) : (
@@ -162,13 +165,14 @@ const Employee: React.FC<EmployeeProps> = props => {
           </Grid>
         )}
       </Grid>
-      <StopTaskModal
+      <EditAllocationModal
         isModalOpen={isOpenStopTaskModal}
         closeModal={closeStopTaskModal}
         employee={employee}
         task={task}
+        setShouldRefreshData={setShouldRefreshData}
       />
-    </Grid>
+    </Box>
   )
 }
 

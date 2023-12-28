@@ -5,6 +5,11 @@ export interface ValueLabelInterface {
   label: string | number
 }
 
+export interface AutocompleteOption {
+  label: string
+  value: string | number
+}
+
 export interface EmployeeManagementItem {
   id: string | number
   department: string
