@@ -1,16 +1,17 @@
 import { AsyncAutocompleteOption } from 'components/core-ui/AsyncAutocomplete/AsyncAutocompleteDefinitions'
 
 export interface ValueLabelInterface {
-  value: string
-  label: string
+  value: string | number
+  label: string | number
 }
 
 export interface EmployeeManagementItem {
   id: string | number
-  departmentName: string
-  name: string
-  position: string
+  department: string
+  fullName: string
+  jobTitle: string
   employer: string
+  location?: string
 }
 
 export interface TaskManagementItem {
@@ -41,3 +42,11 @@ export interface TaskManagementEditItem {
   priority: number
   status: boolean
 }
+
+export interface Department {
+  id: number
+  name: string
+  description: string
+}
+
+export type CRUDAction = 'create' | 'edit' | 'delete'

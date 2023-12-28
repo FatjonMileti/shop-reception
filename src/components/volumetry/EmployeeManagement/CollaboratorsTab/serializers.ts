@@ -1,8 +1,9 @@
 export const toTableRowItems = items =>
   items.map(item => ({
     id: item.id,
-    departmentName: item.department.name || '',
-    name: item.name || '',
-    position: item.position.name || '',
-    employer:  item.employer || ''
+    fullName: item.fullName || '',
+    jobTitle: item.jobTitle || '',
+    department: item.department || '',
+    location: item.location || '',
+    employer: item.employer || ''
   }))
