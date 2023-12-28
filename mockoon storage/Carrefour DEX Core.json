@@ -5003,7 +5003,7 @@
       "responses": [
         {
           "uuid": "ec8ef1a0-f23f-4a51-8237-803d5c646b39",
-          "body": "{\n  \"list\": [\n    {\n      \"employee\": {\n        \"name\": \"Florin Avramescu\",\n        \"id\": 0\n      },\n      \"startTime\": {\n        \"isStarted\": false,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"10:30\"\n      },\n      \"volume\": {\n        \"value\": 4,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 0\n    },\n    {\n      \"employee\": {\n        \"name\": \"Ioana Alexandra Stamate\",\n        \"id\": 1\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 40\n    },\n    {\n      \"employee\": {\n        \"name\": \"Florina Toma\",\n        \"id\": 2\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": true,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"customText\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \"\n    },\n    {\n      \"employee\": {\n        \"name\": \"Diana Vasilescu\",\n        \"id\": 3\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"isOverdue\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"employee\": {\n        \"name\": \"Florin Avramescu\",\n        \"id\": 0\n      },\n      \"startTime\": {\n        \"isStarted\": false,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"10:30\"\n      },\n      \"volume\": {\n        \"value\": 4,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 0\n    },\n    {\n      \"id\": 2,\n      \"employee\": {\n        \"name\": \"Ioana Alexandra Stamate\",\n        \"id\": 1\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 40\n    },\n    {\n      \"id\": 3,\n      \"employee\": {\n        \"name\": \"Florina Toma\",\n        \"id\": 2\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": true,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"customText\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \"\n    },\n    {\n      \"id\": 4,\n      \"employee\": {\n        \"name\": \"Diana Vasilescu\",\n        \"id\": 3\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"isOverdue\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -5471,6 +5471,35 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "ba1c2449-2c1b-4973-adcc-56ec68ef0517",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "volumetry/taskAllocation/details/:id",
+      "responses": [
+        {
+          "uuid": "1846346f-22a6-4e67-8845-c985b0faac44",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5697,6 +5726,10 @@
     {
       "type": "route",
       "uuid": "cbba3735-1240-434d-b05f-c61233c3b0bb"
+    },
+    {
+      "type": "route",
+      "uuid": "ba1c2449-2c1b-4973-adcc-56ec68ef0517"
     }
   ],
   "proxyMode": false,

@@ -1,5 +1,4 @@
 import { Box, CircularProgress, Grid, Paper } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 import { Input } from 'components/core-ui/Input'
 import { Table } from 'components/core-ui/Table'
