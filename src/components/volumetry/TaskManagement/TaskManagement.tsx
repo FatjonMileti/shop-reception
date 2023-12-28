@@ -1,127 +1,25 @@
-import { useState } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
+
 import { Table } from 'components/core-ui/Table'
-import s from './TaskManagement.modules.scss'
-import BooleanIcon from 'components/core-ui/BooleanIcon/BooleanIcon'
-import { TaskManagementItem } from '../interfaces'
-import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { formatErrorMessage } from 'utils/formatting'
+import {
+  VOLUMETRY_CATEGORIES_URL,
+  VOLUMETRY_DEPARTMENTS_URL,
+  VOLUMETRY_FREQUENCIES_URL,
+  VOLUMETRY_TASKS_URL,
+  columns
+} from 'components/volumetry/TaskManagement/constants'
 import { useNotification } from 'hooks'
-import { Input } from 'components/core-ui/Input'
+import { AddActionIcon, EditActionIcon } from 'icons'
+import { useState } from 'react'
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest } from 'utils/api'
+import { formatErrorMessage } from 'utils/formatting'
+import { TaskManagementItem } from '../interfaces'
 import { NewTask } from './NewTask'
+import s from './TaskManagement.modules.scss'
 import { toTableItems } from './serializers'
-import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
-import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
-import { IconCell } from 'components/core-ui/IconCell'
-import { DescriptionText } from 'components/core-ui/DescriptionText'
-
-export const columns = [
-  {
-    title: 'Departament / Raioane',
-    field: 'rayons',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Nume task',
-    field: 'taskName',
-    align: 'left',
-    type: 'string',
-    width: '250px'
-  },
-  {
-    title: 'Ora recomandata de inceput',
-    field: 'estimateStartTime',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Ora estimata de final',
-    field: 'estimateEndTime',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Frecventa',
-    field: 'frequency',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Productivitate',
-    field: 'standardProductivityValue',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Sursa volum de lucru',
-    field: 'workVolumeSource',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    minWidth: '200px',
-    render: row => <DescriptionText value={row.workVolumeSource} />
-  },
-  {
-    title: 'Prioritate',
-    field: 'priority',
-    align: 'left',
-    type: 'number',
-    collapsible: true
-  },
-  {
-    title: 'Categorie',
-    field: 'category',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Activ',
-    field: 'isActive',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    render: row => (
-      <Box>
-        <IconCell value={row.status ? 'active' : 'inactive'} />
-      </Box>
-    )
-  }
-]
-
-const tableFilterFields = [
-  {
-    name: 'department',
-    label: 'Departament',
-    type: 'text',
-    filter: <Input type="text" name="department" label="Departament" variant="outlined" value="" />
-  },
-  {
-    name: 'taskName',
-    label: 'Nume Task',
-    type: 'text',
-    filter: <Input type="text" name="taskName" label="Nume" variant="outlined" />
-  },
-  {
-    name: 'priority',
-    label: 'Prioritate',
-    type: 'number',
-    filter: <Input type="number" name="priority" label="Prioritate" variant="outlined" />
-  }
-  // TODO see what should be used here for boolean
-  // {
-  //   name: 'state',
-  //   label: 'Stare',
-  //   type: 'boolean',
-  //   filter: <Input type="text" name="state" label="Stare" variant="outlined" />
-  // }
-]
+import { buildTableFilterFields, mapToValueLabel } from './utils'
 
 const TaskManagement = () => {
   const [tableItems, setTableItems] = useState<TaskManagementItem[]>([])
@@ -139,7 +37,7 @@ const TaskManagement = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/volumetry/task',
+          url: VOLUMETRY_TASKS_URL,
           tableFilters,
           page,
           rowsPerPage,
@@ -158,6 +56,63 @@ const TaskManagement = () => {
       })
     }
   }
+
+  const { data: departmentFilterOptions, isLoading: isDepartmentOptionsLoading } = useQuery(
+    ['departmentOptions'],
+    async () => {
+      const result = await makeCoreGetRequest(VOLUMETRY_DEPARTMENTS_URL)
+      const options = mapToValueLabel(result.list) || []
+      return options
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Eroare la primire optiuni filtre pentru departamente. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: frequencyFilterOptions, isLoading: isFrequencyOptionsLoading } = useQuery(
+    ['frequencyOptions'],
+    async () => {
+      const result = await makeCoreGetRequest(VOLUMETRY_FREQUENCIES_URL)
+      const options = mapToValueLabel(result) || []
+      return options
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Eroare la primire optiuni filtre pentru frecventa. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: categoryFilterOptions, isLoading: isCategoryOptionsLoading } = useQuery(
+    ['categoryOptions'],
+    async () => {
+      const result = await makeCoreGetRequest(VOLUMETRY_CATEGORIES_URL)
+      const options = mapToValueLabel(result.list) || []
+      return options
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Eroare la primire optiuni filtre pentru categorie. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
 
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
@@ -196,7 +151,11 @@ const TaskManagement = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          filters={tableFilterFields}
+          filters={buildTableFilterFields(
+            departmentFilterOptions || [],
+            frequencyFilterOptions || [],
+            categoryFilterOptions || []
+          )}
           rowActions={[
             {
               label: 'Edit',
