@@ -41,3 +41,10 @@ export interface TaskManagementEditItem {
   priority: number
   status: boolean
 }
+
+export interface EvaluationReportSummary {
+  departmentTotalExcutedTasks: number
+  departmentAppliedVolumetryProcessPercentage: number
+  departmentUtilizedVsStandardHours: number
+  departmentUtilizedVsStandardFTE: number
+}
