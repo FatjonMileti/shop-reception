@@ -1,6 +1,6 @@
 import { Grid, Container, Paper } from '@mui/material'
 import { Button, Checkbox, Divider, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../Common.modules.scss'
+import cs from '../Common.modules.scss'
 import { useMemo, useState } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
@@ -9,7 +9,7 @@ import { useNotification } from '../../../hooks'
 import { TitleHeader } from '../TitleHeader'
 import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
 
-const checkboxes = [
+const options = [
   {
     field: 'confirm',
     label: 'Conform'
@@ -54,15 +54,15 @@ const SupportCode = () => {
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [isFinalizing, setIsFinalizing] = useState<boolean>(false)
 
-  const toggleShowConfirmation = () => {
+  const toggleShowConfirmation = (): void => {
     setShowConfirmation(!showConfirmation)
   }
 
-  const toggleIsSearching = () => {
+  const toggleIsSearching = (): void => {
     setIsSearching(!isSearching)
   }
 
-  const toggleIsFinalizing = () => {
+  const toggleIsFinalizing = (): void => {
     toggleIsSearching()
     setIsFinalizing(!isFinalizing)
   }
@@ -76,9 +76,7 @@ const SupportCode = () => {
     onSubmit: async (values: any) => {
       try {
 
-        const payload = {
-          supportCode: formik.values.supportCode
-        }
+        const payload = formik.values
 
         showNotification({
           message: 'codul de suport nu a fost găsit',
@@ -95,13 +93,13 @@ const SupportCode = () => {
   })
 
   return (
-    <Container component='main' maxWidth='xs' className={s.container}>
+    <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
       <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         Cod Suport
       </Typography>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={10}>
@@ -172,15 +170,14 @@ const SupportCode = () => {
                 {showConfirmation && <Grid item xs={12}>
                   <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
                     <Grid container spacing={2}>
-                      {checkboxes.map(checkbox => {
-                        return <Grid item xs={12}>
+                      {options.map(option => <Grid item xs={12}>
                           <Checkbox
                             checked={false}
-                            onChange={event => formik.setFieldValue(checkbox.field, (event.target as HTMLInputElement).value)}
-                            label={checkbox.label}
+                            onChange={event => formik.setFieldValue(option.field, (event.target as HTMLInputElement).value)}
+                            label={option.label}
                           />
                         </Grid>
-                      })}
+                      )}
                     </Grid>
                   </Paper>
                 </Grid>}

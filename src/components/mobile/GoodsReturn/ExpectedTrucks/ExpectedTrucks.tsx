@@ -1,6 +1,6 @@
 import { Grid, Container, Paper, Box } from '@mui/material'
 import { Button, Divider, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../Common.modules.scss'
+import cs from '../../Common.modules.scss'
 import useRoles from '../../useRoles'
 import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
@@ -35,13 +35,13 @@ const ExpectedTrucks = () => {
   })
 
   return (
-    <Container component='main' maxWidth='xs' className={s.container}>
+    <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
       <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         CAMIOANE AȘTEPTATE
       </Typography>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

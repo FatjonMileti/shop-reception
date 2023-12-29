@@ -1,4 +1,4 @@
-export const toAdminDepositPayload = (payload) => ({
+export const toPayload = (payload) => ({
   id: payload.id,
   depositCode: payload.depositCode,
   name: payload.name,

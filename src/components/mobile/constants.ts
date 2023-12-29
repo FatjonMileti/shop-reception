@@ -46,6 +46,6 @@ export const URLS = {
   AUTH_RECORD_RETURN_DETAIL: '/shop-reception/mobile/record-return/detail',
   AUTH_CONTINUE_RETURN: '/shop-reception/mobile/continue-return',
   AUTH_CONTINUE_RETURN_DETAIL: '/shop-reception/mobile/continue-return/detail',
-  AUTH_CONTINUE_RETURN_DETAIL_2: '/shop-reception/mobile/continue-return/detail/2',
+  AUTH_CONTINUE_RETURN_DETAIL_2: '/shop-reception/mobile/continue-return/detail-2',
   AUTH_CONTINUE_RETURN_DETAIL_FINAL: '/shop-reception/mobile/continue-return/detail/final'
 }

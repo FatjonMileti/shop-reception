@@ -8,7 +8,7 @@ import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toAdminDepositPayload } from './serializers'
+import { toPayload } from './serializers'
 
 interface NewAdminDepositProps {
   isModalOpen: boolean
@@ -33,7 +33,7 @@ const ScanTypeForm: React.FC<NewAdminDepositProps> = props => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const payload = toAdminDepositPayload(formik.values)
+        const payload = toPayload(formik.values)
 
         if (isEdit) {
         } else {

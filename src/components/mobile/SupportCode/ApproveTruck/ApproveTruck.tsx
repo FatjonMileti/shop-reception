@@ -1,6 +1,6 @@
 import { Grid, Container, Table, TableContainer, Paper, TableHead, TableCell, TableBody, TableRow } from '@mui/material'
 import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../Common.modules.scss'
+import cs from '../../Common.modules.scss'
 import { TitleHeader } from '../../TitleHeader'
 
 const rows = [
@@ -23,13 +23,13 @@ const rows = [
 
 const ApproveTruck = () => {
   return (
-    <Container component='main' maxWidth='xs' className={s.container}>
+    <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
       <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         Cod Suport
       </Typography>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

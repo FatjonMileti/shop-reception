@@ -1,6 +1,6 @@
 import { Grid, Container, Paper, Box } from '@mui/material'
 import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../Common.modules.scss'
+import cs from '../Common.modules.scss'
 import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
@@ -20,11 +20,7 @@ const PackagingInventoryUpdate = () => {
     onSubmit: async (values: any) => {
       try {
 
-        const payload = {
-          supportType: formik.values.supportType,
-          quality: formik.values.quality,
-          defective: formik.values.defective
-        }
+        const payload = formik.values
 
       } catch (error) {
         showNotification({
@@ -36,13 +32,13 @@ const PackagingInventoryUpdate = () => {
   })
 
   return (
-    <Container component='main' maxWidth='xs' className={s.container}>
+    <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
       <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         ACTUALIZARE INVENTAR AMBALAJE
       </Typography>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

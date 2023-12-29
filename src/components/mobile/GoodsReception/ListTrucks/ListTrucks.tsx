@@ -1,6 +1,6 @@
 import { Grid, Container, Paper } from '@mui/material'
 import { Button, Divider, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../Common.modules.scss'
+import cs from '../../Common.modules.scss'
 import { URLS } from '../../constants'
 import useRoles from '../../useRoles'
 import { useNavigate } from 'react-router-dom'
@@ -11,29 +11,29 @@ const ListTrucks = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
   const navigate = useNavigate()
 
-  const list: Truck[] = [
+  const trucks: Truck[] = [
     { id: 1, name: 'Camion 1', description: 'Descriere camion 1' },
     { id: 2, name: 'Camion 2', description: 'Descriere camion 2' },
     { id: 3, name: 'Camion 3', description: 'Descriere camion 3' }
   ]
 
   return (
-    <Container component='main' maxWidth='xs' className={s.container}>
+    <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
       <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         Selecteazǎ Camion
       </Typography>
       <form>
-        <Grid container spacing={2} className={s.wrapper}>
+        <Grid container spacing={2} className={cs.wrapper}>
           <Grid item xs={12}>
-            {list.map((item: Truck, index) => (
+            {trucks.map((truck: Truck, index) => (
               <TruckCard
-                key={index}
+                key={truck.id}
                 onClick={() => {
-                  navigate(URLS.AUTH_TRUCK_DETAIL.replace(':id', item.id.toString()))
+                  navigate(URLS.AUTH_TRUCK_DETAIL.replace(':id', truck.id.toString()))
                 }}
-                truck={item}
+                truck={truck}
               />
             ))}
           </Grid>

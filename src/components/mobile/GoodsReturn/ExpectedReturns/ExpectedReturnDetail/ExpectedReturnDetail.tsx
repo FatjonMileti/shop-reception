@@ -1,6 +1,6 @@
 import { Grid, Container } from '@mui/material'
 import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../Common.modules.scss'
+import cs from '../../../Common.modules.scss'
 import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
@@ -24,11 +24,7 @@ const ExpectedReturnDetail = () => {
     onSubmit: async (values: any) => {
       try {
 
-        const payload = {
-          registrationNumber: formik.values.registrationNumber,
-          driver: formik.values.driver,
-          sealNumber: formik.values.sealNumber
-        }
+        const payload = formik.values
         navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2)
 
       } catch (error) {
@@ -41,13 +37,13 @@ const ExpectedReturnDetail = () => {
   })
 
   return (
-    <Container component='main' maxWidth='xs' className={s.container}>
+    <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
       <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         RETURURI AȘTEPTATE CAMION
       </Typography>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

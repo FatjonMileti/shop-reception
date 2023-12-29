@@ -7,7 +7,7 @@ import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toAdminDepositPayload } from './serializers'
+import { toPayload } from './serializers'
 import { FileUpload } from '../../../core-ui/FileUpload'
 import { toFormDataPayload } from '../../../../utils/serializers'
 
@@ -28,11 +28,15 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
   const validationSchema = useMemo(() => getValidationSchema(), [])
 
   const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event) {
+    try {
       const file = event.target.files[0]
       setUploadedFile(file)
       setIsFileUploaded(true)
-    } else {
+    } catch (e) {
+      showNotification({
+        message: `Error while adding file. ${formatErrorMessage(e)}`,
+        type: 'error'
+      })
       setUploadedFile(null)
       setIsFileUploaded(false)
     }
@@ -48,7 +52,7 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
       payload.append('fileObject', uploadedFile)
 
       try {
-        const payload = toAdminDepositPayload(formik.values)
+        const payload = toPayload(formik.values)
 
         setShouldRefreshData(true)
         closeModal()
@@ -93,7 +97,7 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
         <Grid xs={12} item>
           <FileUpload
             value={formik.values.file}
-            fileInputProps={{ displayImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt094LI3kTxh-hGY85ko1D6Z5DT9sEbkeqGWX-dbiEQg&s'}}
+            fileInputProps={{ displayImage: 'https://picsum.photos/seed/picsum/200/150' }}
             onChange={onFileUpload}
           />
         </Grid>

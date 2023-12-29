@@ -1,6 +1,6 @@
 import { Grid, Container, Paper } from '@mui/material'
 import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../Common.modules.scss'
+import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
 import { CameraAlt as CameraIcon } from '@mui/icons-material'
 import { useNotification } from '../../../../../hooks'
@@ -8,6 +8,7 @@ import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../utils/formatting'
+import { toPayload } from './serializers'
 
 const ContinueReturnDetailFinal = () => {
   const { showNotification } = useNotification()
@@ -20,6 +21,7 @@ const ContinueReturnDetailFinal = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
+        const payload = toPayload(formik.values)
 
       } catch (error) {
         showNotification({
@@ -31,13 +33,13 @@ const ContinueReturnDetailFinal = () => {
   })
 
   return (
-    <Container component='main' maxWidth='xs' className={s.container}>
+    <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
       <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         CONTINUARE RETUR CAMION
       </Typography>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

@@ -1,6 +1,6 @@
 import { Grid, Container } from '@mui/material'
 import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../Common.modules.scss'
+import cs from '../../../Common.modules.scss'
 import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
@@ -20,12 +20,7 @@ const TruckDetail = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-
-        const payload = {
-          registrationNumber: formik.values.registrationNumber,
-          driver: formik.values.driver,
-          sealNumber: formik.values.sealNumber
-        }
+        const payload = formik.values
 
       } catch (error) {
         showNotification({
@@ -37,13 +32,13 @@ const TruckDetail = () => {
   })
 
   return (
-    <Container component='main' maxWidth='xs' className={s.container}>
+    <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
       <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         DETALIU CAMION
       </Typography>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -74,7 +69,8 @@ const TruckDetail = () => {
               </IconButton>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant='medium' component='p'>Confirm documentele pentru depozit DEPOZIT DEVA APLS</Typography>
+              <Typography variant='medium' component='p'>Confirm documentele pentru depozit DEPOZIT DEVA
+                APLS</Typography>
             </Grid>
             <Grid item xs={12}>
               <Input

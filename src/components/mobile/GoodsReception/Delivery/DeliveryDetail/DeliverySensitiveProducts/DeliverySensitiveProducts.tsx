@@ -1,12 +1,13 @@
 import { Box, Container, Grid, Paper } from '@mui/material'
-import s from '../../../../Common.modules.scss'
+import cs from '../../../../Common.modules.scss'
 import { TitleHeader } from '../../../../TitleHeader'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { URLS } from '../../../../constants'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { SensitiveProduct } from '../../../SensitiveProduct'
 
-const list: SensitiveProduct[] = [
+const sensitiveProducts: SensitiveProduct[] = [
   {
     id: 1,
     storeType: 'B1',
@@ -22,14 +23,14 @@ const list: SensitiveProduct[] = [
 
 const DeliverySensitiveProducts = () => {
   const navigate = useNavigate()
-  return <Container component='main' maxWidth='xs' className={s.container}>
+  return <Container component='main' maxWidth='xs' className={cs.container}>
     <TitleHeader />
     <Typography component='h4' variant='medium'
                 style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
       PRODUSE SENSIBILE VALIDARE LIVRARE
     </Typography>
     <form>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
             <Typography variant='medium' component='h5'>PRODUSE SENSIBILE</Typography>
@@ -38,18 +39,13 @@ const DeliverySensitiveProducts = () => {
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          {list.map((item: SensitiveProduct, index) => (
-            <Paper elevation={3} style={{ margin: '10px', padding: '20px' }} onClick={() => {
+          {sensitiveProducts.map((item: SensitiveProduct, index) => (
+            <SensitiveProduct onClick={() => {
               navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM)
-            }}>
-              <Typography variant='medium' component='h5'>Etichetă suport: {item.UbCode}</Typography>
-              <Typography variant='medium' component='h5'>Număr suport: {item.productCode}</Typography>
-              <Typography variant='medium' component='h5'>BL: {item.storeCode}</Typography>
-              <Typography variant='medium' component='h5'>15-12-2023 21:48</Typography>
-            </Paper>
+            }} item={item} />
           ))}
         </Grid>
-        {list.length === 0 && <Grid item xs={12}>
+        {sensitiveProducts.length === 0 && <Grid item xs={12}>
           <Box style={{ margin: '10px', padding: '20px' }}>
             <Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>nu
               existǎ camioane de validat</Typography>

@@ -1,4 +1,4 @@
-import s from '../../../../../Common.modules.scss'
+import cs from '../../../../../Common.modules.scss'
 import { TitleHeader } from '../../../../../TitleHeader'
 import { Button, Divider, IconButton, Input, Table, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Container, Grid, Paper } from '@mui/material'
@@ -23,14 +23,14 @@ const DeliveryRandomProductConfirm = () => {
     }
   })
 
-  return <Container component='main' maxWidth='xs' className={s.container}>
+  return <Container component='main' maxWidth='xs' className={cs.container}>
     <TitleHeader />
     <Typography component='h4' variant='medium'
                 style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
       PRODUSE ALEATOR VALIDARE LIVRARE
     </Typography>
     <form>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
             <Typography variant='medium' component='p'>PRODUSE ALEATOR</Typography>

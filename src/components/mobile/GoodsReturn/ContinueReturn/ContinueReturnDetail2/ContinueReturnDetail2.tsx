@@ -1,6 +1,6 @@
 import { Grid, Container, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../Common.modules.scss'
+import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
 import { useNavigate } from 'react-router-dom'
 import { URLS } from '../../../constants'
@@ -14,13 +14,13 @@ const ContinueReturnDetail2 = () => {
   const navigate = useNavigate()
 
   return (
-    <Container component='main' maxWidth='xs' className={s.container}>
+    <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
       <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         CONTINUARE RETUR CAMION
       </Typography>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

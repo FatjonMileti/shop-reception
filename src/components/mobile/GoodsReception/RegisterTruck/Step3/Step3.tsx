@@ -1,19 +1,19 @@
 import { Grid, Container, Paper, Divider } from '@mui/material'
 import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../Common.modules.scss'
+import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
 import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
 
 const Step3 = () => {
 
   return (
-    <Container component='main' maxWidth='xs' className={s.container}>
+    <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
       <Typography component='h4' variant='medium'
                   style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
         ÎNREGISTREAZǍ CAMION
       </Typography>
-      <Grid container spacing={2} className={s.wrapper}>
+      <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
             <Typography variant='medium' component='p'>Numǎr camion: ASDS23</Typography>

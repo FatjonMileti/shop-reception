@@ -105,27 +105,27 @@ const TruckDetail = () => {
           }}
           tabs={[
             {
-              content: Tab1(),
+              content: <Tab1 />,
               label: 'Suporţi în camion',
               tabIndex: 0
             },
             {
-              content: Tab2(),
+              content: <Tab2 />,
               label: 'Imagini',
               tabIndex: 1
             },
             {
-              content: Tab3(),
+              content: <Tab3 />,
               label: 'Sigilii',
               tabIndex: 2
             },
             {
-              content: Tab4(),
+              content: <Tab4 />,
               label: 'Conformitate documente şi interval orar',
               tabIndex: 3
             },
             {
-              content: Tab5(),
+              content: <Tab5 />,
               label: 'Conformitate termodiagrama',
               tabIndex: 4
             }

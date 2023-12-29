@@ -7,7 +7,7 @@ import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toAdminDepositPayload } from './serializers'
+import { toPayload } from './serializers'
 import { FileUpload } from '../../../core-ui/FileUpload'
 import { toFormDataPayload } from '../../../../utils/serializers'
 
@@ -48,7 +48,7 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
       payload.append('fileObject', uploadedFile)
 
       try {
-        const payload = toAdminDepositPayload(formik.values)
+        const payload = toPayload(formik.values)
 
         setShouldRefreshData(true)
         closeModal()
