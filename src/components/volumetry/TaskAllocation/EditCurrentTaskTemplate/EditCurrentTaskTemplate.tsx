@@ -7,10 +7,10 @@ import { useNotification } from 'hooks'
 import { ChangeEvent } from 'react'
 import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
-import { formatErrorMessage } from 'utils/formatting'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { toCurrentTaskPayload } from './serializers'
+import { handleQueryError } from 'components/volumetry/utils'
 
 interface EditCurrentTaskTemplateProps {
   isModalOpen: boolean
@@ -42,12 +42,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
         type: 'success'
       })
     },
-    onError: res => {
-      showNotification({
-        message: `A aparut o eroare la editarea volumului. ${formatErrorMessage(res)}`,
-        type: 'error'
-      })
-    }
+    onError: error => handleQueryError(error, 'A aparut o eroare la editarea volumului.')
   })
 
   const formik = useFormik({

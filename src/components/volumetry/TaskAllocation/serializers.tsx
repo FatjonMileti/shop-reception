@@ -21,9 +21,9 @@ export const toListTableRows = (items, shouldRefreshData, setShouldRefreshData) 
 
 export const toEmployeeFilterItems = items =>
   items.map(item => ({
-    label: item.name || '',
+    label: item.fullName || '',
     value: item.id || '',
-    groupBy: getEmployeeGroupName(item.work_group)
+    groupBy: getEmployeeGroupName(item.shiftCategory)
   }))
 
 export const toEmployeesItems = (item, employees, setShouldRefreshData) =>

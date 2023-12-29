@@ -41,4 +41,4 @@ export interface Department {
   description: string
 }
 
-export type CRUDAction = 'create' | 'edit' | 'delete'
+export type CRUDAction = 'create' | 'read' | 'edit' | 'delete'
