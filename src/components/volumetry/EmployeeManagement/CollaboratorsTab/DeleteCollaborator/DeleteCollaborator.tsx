@@ -6,20 +6,20 @@ import { makeCoreDeleteRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 
-interface DeleteMerchandiserProps {
+interface DeleteCollaboratorProps {
   isModalOpen: boolean
   closeModal: Function
   deleteItem: any
   setShouldRefreshData: Function
 }
 
-const DeleteMerchandiser: React.FC<DeleteMerchandiserProps> = props => {
+const DeleteCollaborator: React.FC<DeleteCollaboratorProps> = props => {
   const { isModalOpen, closeModal, deleteItem, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
   const onDelete = async () => {
     try {
-      const itemId = (deleteItem as any)?.id;
+      const itemId = (deleteItem as any)?.id
 
       await makeCoreDeleteRequest(`/volumetry/merchendiser/${itemId}`)
 
@@ -27,7 +27,7 @@ const DeleteMerchandiser: React.FC<DeleteMerchandiserProps> = props => {
       setShouldRefreshData(true)
     } catch (error) {
       showNotification({
-        message: `Eroare la stergerea merchandiserului. ${formatErrorMessage(error)}`,
+        message: `Eroare la stergerea colaboratorului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -37,7 +37,7 @@ const DeleteMerchandiser: React.FC<DeleteMerchandiserProps> = props => {
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Sterge'}>
       <Grid container spacing={4}>
         <Grid xs={12} item>
-          <Typography>Sunteti sigur ca vreti sa stergeti acest merchandiser?</Typography>
+          <Typography>Sunteti sigur ca vreti sa stergeti acest colaborator?</Typography>
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
@@ -49,4 +49,4 @@ const DeleteMerchandiser: React.FC<DeleteMerchandiserProps> = props => {
   )
 }
 
-export default DeleteMerchandiser
+export default DeleteCollaborator

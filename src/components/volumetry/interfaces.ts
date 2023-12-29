@@ -10,12 +10,7 @@ export interface EmployeeManagementItem {
   departmentName: string
   name: string
   position: string
-}
-
-export interface NewMerchandiserItem {
-  name: string
-  departmentName: string
-  position: string
+  employer: string
 }
 
 export interface TaskManagementItem {
@@ -36,7 +31,9 @@ export interface TaskManagementEditItem {
   taskName: string
   estimateStartTime: Date
   estimateEndTime: Date
-  department: AsyncAutocompleteOption
+  department: AsyncAutocompleteOption | number
+  category: AsyncAutocompleteOption | number
+  raion: AsyncAutocompleteOption[] | number[]
   frequency: AsyncAutocompleteOption
   prodStandardValue: number
   prodStandardUM: AsyncAutocompleteOption

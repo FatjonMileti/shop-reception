@@ -11,17 +11,23 @@ import { useMutation, useQuery } from 'react-query'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { toEmployeeFilterItems } from './helpers'
+import { toEmployeeFilterItems } from './serializers'
 
+interface ProdStandardUM {
+  id: number
+  name: string
+  unit: string
+}
 interface AssignEmployeeProps {
   isModalOpen: boolean
   closeModal: Function
   taskName: string
   department: string
+  prodStandardUM: ProdStandardUM
 }
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
-  const { isModalOpen, closeModal, taskName, department } = props
+  const { isModalOpen, closeModal, taskName, department, prodStandardUM } = props
   const { showNotification } = useNotification()
 
   const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } = useQuery(
@@ -85,7 +91,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: taskName },
-              { label: 'Dep.:', name: department }
+              { label: 'Departament/Raion:', name: department },
+              { label: 'UM:', name: `${prodStandardUM.name}/${prodStandardUM.unit}` }
             ]}
           />
         </Grid>
@@ -101,6 +108,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
               onChange={(value: ChangeEvent<HTMLInputElement>) =>
                 formik.setFieldValue('selectEmployee', value)
               }
+              groupBy={option => option.groupBy}
             />
           )}
         </Grid>
@@ -109,7 +117,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <Input
             type="text"
             name="volume"
-            label="Volum paleti/ora"
+            label={`Volum ${prodStandardUM.name}/${prodStandardUM.unit}`}
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue('volume', event.target.value)

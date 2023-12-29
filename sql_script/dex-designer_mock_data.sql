@@ -22,7 +22,7 @@ INSERT INTO
 VALUES
     (1, 'Governance', 'Chair', '/governance', true),
     (2, 'Bakery', 'Bakery', '/bakery', true),
-    (3, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true),
+    (3, 'Supply OMNI Offline', 'SupplyOmni', '/supplyOmni', true),
     (4, 'Volumetry', 'Volumetry', '/volumetry', true),
     (5, 'Shop Reception', 'DonutLargeTwoTone', '/shop-reception', true);
 
@@ -39,7 +39,7 @@ VALUES
     (4, 'Manager magazin/raion', 'StoreManager', '/storeManager', true, 2),
     (5, 'Manager regiune', 'RegionManager', '/regionManager', true, 2),
     -- Supply OMNI
-    (6, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true, 3),
+    (6, 'Supply OMNI Offline', 'SupplyOmni', '/supplyOmni', true, 3),
     -- Volumetry
     (7, 'Administrare Angajati', 'EmployeeManagement', '/employeeManagement', true, 4),
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
@@ -97,7 +97,7 @@ VALUES
     (41, 'Comenzi achitate', 'PaidOrders', null, true, 6),
     -- Volumetry
     (42, 'Management Angajati', 'EmployeeManagement', null, true, 7),
-    (43, 'Management Task-uri', 'ManagementTasks', null, true, 8),
+    (43, 'Management task template-uri', 'ManagementTasks', null, true, 8),
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
     -- Shop Reception
     (45, 'Admin magazin', 'UsersManagement', null, true, 9);
@@ -113,7 +113,7 @@ VALUES
     (3, 'Effort Matrix', 'DonutSmallOutlined', '/governance/projectTeam/effortMatrix', true, 4, true),
     (4, 'Project Milestones', 'AccountTreeOutlined', '/governance/projectTeam/projectMilestones', true, 3, true),
     (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/governance/projectTeam/teamCapacity', true, 2, true),
-    (6, 'Individual Capacity', 'PeopleAltOutlined', '/governance/projectTeam/individualCapacity', true, 2, false),
+    (6, 'Individual Capacity', 'PeopleAltOutlined', '/governance/projectTeam/individualCapacity/:id', true, 2, false),
     (7, 'My Time-Off', 'TimerOffOutlined', '/governance/projectTeam/myTimeOff', true, 6, true),
     -- Bakery ADMIN
     (8 , 'Gestiune utilizatori', 'UsersManagement', '/bakery/admin/usersManagement', true, 7, true),
@@ -172,7 +172,7 @@ VALUES
     (57, 'PDF factura', '', '/supplyOmni/bills/:id', true, 41, false),
     -- Volumetry
     (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true),
-    (59, 'Management task-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
+    (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
     -- Shop Reception
     (61, 'Screen 1', '', '/url', true, 45, true);

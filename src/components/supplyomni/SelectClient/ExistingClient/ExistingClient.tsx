@@ -67,13 +67,8 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
       const updatedSearchParams = new URLSearchParams(prevSearchParams)
       updatedSearchParams.set('tab', '1')
       return updatedSearchParams
-    })
+    }, {replace: true})
   }
-
-  useEffect(() => {
-    const searchString = searchParams.toString()
-    navigate(window.location.pathname + '?' + searchString)
-  }, [searchParams])
 
   return (
     <>

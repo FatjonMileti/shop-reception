@@ -1,121 +1,25 @@
-import { useState } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
+
 import { Table } from 'components/core-ui/Table'
-import s from './TaskManagement.modules.scss'
-import BooleanIcon from 'components/core-ui/BooleanIcon/BooleanIcon'
-import { TaskManagementItem } from '../interfaces'
-import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { formatErrorMessage } from 'utils/formatting'
+import {
+  VOLUMETRY_CATEGORIES_URL,
+  VOLUMETRY_DEPARTMENTS_URL,
+  VOLUMETRY_FREQUENCIES_URL,
+  VOLUMETRY_TASKS_URL,
+  columns
+} from 'components/volumetry/TaskManagement/constants'
 import { useNotification } from 'hooks'
-import { Input } from 'components/core-ui/Input'
+import { AddActionIcon, EditActionIcon } from 'icons'
+import { useState } from 'react'
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest } from 'utils/api'
+import { formatErrorMessage } from 'utils/formatting'
+import { TaskManagementItem } from '../interfaces'
 import { NewTask } from './NewTask'
+import s from './TaskManagement.modules.scss'
 import { toTableItems } from './serializers'
-import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
-import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
-
-export const columns = [
-  {
-    title: 'Departament',
-    field: 'department',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Nume task',
-    field: 'taskName',
-    align: 'left',
-    type: 'string',
-    width: '250px'
-  },
-  {
-    title: 'Ora estimata de inceput',
-    field: 'estimateStartTime',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Ora estimata de final',
-    field: 'estimateEndTime',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Frecventa',
-    field: 'frequency',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Valoare standard productivitate',
-    field: 'prodStandardValue',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'UM standard productivitate',
-    field: 'prodStandardUM',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Sursa volum de lucru',
-    field: 'workVolumeSource',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Prioritate',
-    field: 'priority',
-    align: 'left',
-    type: 'number',
-    collapsible: true
-  },
-  {
-    title: 'Stare',
-    field: 'status',
-    align: 'left',
-    type: 'string',
-    render: row => (
-      <BooleanIcon icon="CheckOutlined" value={row.status} onSuccess="#33691E" onFailure="E5E5E5" />
-    ),
-    collapsible: true
-  }
-]
-
-const tableFilterFields = [
-  {
-    name: 'department',
-    label: 'Departament',
-    type: 'text',
-    filter: <Input type="text" name="department" label="Departament" variant="outlined" value="" />
-  },
-  {
-    name: 'taskName',
-    label: 'Nume Task',
-    type: 'text',
-    filter: <Input type="text" name="taskName" label="Nume" variant="outlined" />
-  },
-  {
-    name: 'priority',
-    label: 'Prioritate',
-    type: 'number',
-    filter: <Input type="number" name="priority" label="Prioritate" variant="outlined" />
-  }
-  // TODO see what should be used here for boolean
-  // {
-  //   name: 'state',
-  //   label: 'Stare',
-  //   type: 'boolean',
-  //   filter: <Input type="text" name="state" label="Stare" variant="outlined" />
-  // }
-]
+import { buildTableFilterFields, mapToValueLabel } from './utils'
 
 const TaskManagement = () => {
   const [tableItems, setTableItems] = useState<TaskManagementItem[]>([])
@@ -124,7 +28,6 @@ const TaskManagement = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
 
   const { showNotification } = useNotification()
@@ -134,7 +37,7 @@ const TaskManagement = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/volumetry/task',
+          url: VOLUMETRY_TASKS_URL,
           tableFilters,
           page,
           rowsPerPage,
@@ -154,25 +57,72 @@ const TaskManagement = () => {
     }
   }
 
+  const { data: departmentFilterOptions, isLoading: isDepartmentOptionsLoading } = useQuery(
+    ['departmentOptions'],
+    async () => {
+      const result = await makeCoreGetRequest(VOLUMETRY_DEPARTMENTS_URL)
+      const options = mapToValueLabel(result.list) || []
+      return options
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Eroare la primire optiuni filtre pentru departamente. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: frequencyFilterOptions, isLoading: isFrequencyOptionsLoading } = useQuery(
+    ['frequencyOptions'],
+    async () => {
+      const result = await makeCoreGetRequest(VOLUMETRY_FREQUENCIES_URL)
+      const options = mapToValueLabel(result) || []
+      return options
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Eroare la primire optiuni filtre pentru frecventa. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: categoryFilterOptions, isLoading: isCategoryOptionsLoading } = useQuery(
+    ['categoryOptions'],
+    async () => {
+      const result = await makeCoreGetRequest(VOLUMETRY_CATEGORIES_URL)
+      const options = mapToValueLabel(result.list) || []
+      return options
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Eroare la primire optiuni filtre pentru categorie. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
 
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
 
-  const openDeleteModal = (): void => setIsDeleteModalOpen(true)
-  const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
-
-  const selectRow = (rowId: number, action: string) => {
+  const selectRow = (rowId: number) => {
     setSelectedRowId(rowId)
-
-    if (action === 'edit') {
-      openEditModal()
-    }
-
-    if (action === 'delete') {
-      openDeleteModal()
-    }
+    openEditModal()
   }
 
   return (
@@ -190,14 +140,6 @@ const TaskManagement = () => {
           setShouldRefreshData={setShouldRefreshData}
           isEdit
         />
-        <DeleteConfirmationModal
-          isModalOpen={isDeleteModalOpen}
-          closeModal={closeDeleteModal}
-          actionUrl="/volumetry/task/:id"
-          itemId={selectedRowId}
-          content={<Typography>Are you sure you want to delete this entry?</Typography>}
-          setShouldRefreshData={setShouldRefreshData}
-        />
         <Table
           hideCheckbox
           orderBy="department.name"
@@ -209,7 +151,11 @@ const TaskManagement = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          filters={tableFilterFields}
+          filters={buildTableFilterFields(
+            departmentFilterOptions || [],
+            frequencyFilterOptions || [],
+            categoryFilterOptions || []
+          )}
           rowActions={[
             {
               label: 'Edit',
@@ -217,15 +163,7 @@ const TaskManagement = () => {
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
               desktopIcon: <EditActionIcon />,
-              onClick: (e, rowId) => selectRow(rowId, 'edit')
-            },
-            {
-              label: 'Delete',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#d9534f',
-              desktopIcon: <DeleteActionIcon />,
-              onClick: (e, rowId) => selectRow(rowId, 'delete')
+              onClick: (e, rowId) => selectRow(rowId)
             }
           ]}
           rowActionsWidth="130px"

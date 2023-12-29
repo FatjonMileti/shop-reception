@@ -53,10 +53,61 @@ const NewTask: React.FC<NewTaskProps> = props => {
 
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
-  const { data: departmentFilterOptions } = useQuery(
-    ['departments'],
+  const formik = useFormik({
+    enableReinitialize: true,
+    validateOnChange: false,
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: async (values: TaskManagementEditItem, { resetForm }) => {
+      mutate(toTaskPayload(values))
+      resetForm()
+    }
+  })
+
+  const { data: categoryFilterOptions } = useQuery(
+    ['category'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/department')
+      const result = await makeCoreGetRequest('/volumetry/category')
+      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
+
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A aparut o eroare la obtinerea categoriilor. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: priorityFilterOptions } = useQuery(
+    ['priority'],
+    async () => {
+      const result = await makeCoreGetRequest('/volumetry/priority')
+      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
+
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A aparut o eroare la obtinerea listei de prioritati. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: departmentFilterOptions, isLoading: isDepartmentLoading } = useQuery(
+    ['departments', formik.values.category?.value],
+    async () => {
+      const result = await makeCoreGetRequest(
+        `/volumetry/department/${formik.values.category?.value}`
+      )
       const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
 
       return resultOptions || []
@@ -67,7 +118,28 @@ const NewTask: React.FC<NewTaskProps> = props => {
           message: `A aparut o eroare la obtinerea departamentelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
-      }
+      },
+      enabled: formik.values.category !== null
+    }
+  )
+
+  const { data: raionFilterOptions, isLoading: isRaionLoading } = useQuery(
+    ['raion', formik.values.department?.value],
+    async () => {
+      const result = await makeCoreGetRequest(`/volumetry/raion/${formik.values.department?.value}`)
+      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
+
+      formik.setFieldValue('raion', resultOptions) // Select all by default
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A aparut o eroare la obtinerea raioanelor. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: formik.values.department !== null
     }
   )
 
@@ -154,22 +226,11 @@ const NewTask: React.FC<NewTaskProps> = props => {
     }
   })
 
-  const formik = useFormik({
-    enableReinitialize: true,
-    validateOnChange: false,
-    initialValues: initialValues,
-    validationSchema: validationSchema,
-    onSubmit: async (values: TaskManagementEditItem, { resetForm }) => {
-      mutate(toTaskPayload(values))
-      resetForm()
-    }
-  })
-
   return (
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={isEdit ? 'Editeaza Task' : 'Creaza Task'}
+      modalTitle={isEdit ? 'Editeaza task template' : 'Creeaza task template'}
       modalWidth="50%"
     >
       <Grid container spacing={4}>
@@ -193,8 +254,63 @@ const NewTask: React.FC<NewTaskProps> = props => {
           />
         </Grid>
         <Grid xs={12} md={6} item>
+          <AsyncAutocomplete
+            variant="outlined"
+            name="category"
+            label="Categorie"
+            value={formik.values.category}
+            options={categoryFilterOptions}
+            onChange={value => {
+              formik.setFieldValue('category', value)
+              formik.setFieldValue('department', null)
+            }}
+            error={!!formik.errors.category}
+            helperText={formik.errors.category as string}
+            required
+          />
+        </Grid>
+
+        {!isDepartmentLoading && (
+          <Grid xs={12} md={6} item>
+            <AsyncAutocomplete
+              variant="outlined"
+              name="department"
+              label="Departament"
+              value={formik.values.department}
+              disabled={formik.values.category === null}
+              options={departmentFilterOptions || []}
+              onChange={value => {
+                formik.setFieldValue('department', value)
+                formik.setFieldValue('raion', null)
+              }}
+              error={!!formik.errors.department}
+              helperText={formik.errors.department as string}
+              required
+            />
+          </Grid>
+        )}
+
+        {formik.values.department !== null && !isRaionLoading && (
+          <Grid xs={12} md={12} item>
+            <AsyncAutocomplete
+              variant="outlined"
+              name="raion"
+              label="Raion"
+              value={formik.values.raion || []}
+              options={raionFilterOptions}
+              onChange={value => {
+                formik.setFieldValue('raion', value)
+              }}
+              error={!!formik.errors.raion}
+              helperText={formik.errors.raion as string}
+              required
+              multiple
+            />
+          </Grid>
+        )}
+        <Grid xs={12} md={6} item>
           <TimePicker
-            label="Ora estimata de inceput"
+            label="Ora recomandata de inceput"
             value={formik.values.estimateStartTime}
             onChange={newValue => formik.setFieldValue('estimateStartTime', newValue)}
             error={!!formik.errors.taskName}
@@ -216,19 +332,7 @@ const NewTask: React.FC<NewTaskProps> = props => {
             style={{ width: '100%' }}
           />
         </Grid>
-        <Grid xs={12} md={6} item>
-          <AsyncAutocomplete
-            variant="outlined"
-            name="department"
-            label="Departament"
-            value={formik.values.department}
-            options={departmentFilterOptions}
-            onChange={value => formik.setFieldValue('department', value)}
-            error={!!formik.errors.department}
-            helperText={formik.errors.department as string}
-            required
-          />
-        </Grid>
+
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
             variant="outlined"
@@ -246,8 +350,9 @@ const NewTask: React.FC<NewTaskProps> = props => {
           <Input
             type="number"
             name="prodStandardValue"
-            label="Valoare standard productivitate"
+            label="Valoare productivitate standard"
             fullWidth
+            required
             variant="outlined"
             value={formik.values.prodStandardValue}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
@@ -255,6 +360,9 @@ const NewTask: React.FC<NewTaskProps> = props => {
             }
             error={!!formik.errors.prodStandardValue}
             helperText={formik.errors.prodStandardValue as string}
+            inputProps={{
+              step: '0.1'
+            }}
           />
         </Grid>
         <Grid xs={12} md={6} item>
@@ -284,21 +392,20 @@ const NewTask: React.FC<NewTaskProps> = props => {
           />
         </Grid>
         <Grid xs={12} md={6} item>
-          <Input
-            type="number"
+          <AsyncAutocomplete
+            variant="outlined"
             name="priority"
             label="Prioritate"
-            fullWidth
-            variant="outlined"
             value={formik.values.priority}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('priority', event.currentTarget.value)
-            }
+            options={priorityFilterOptions}
+            onChange={value => formik.setFieldValue('priority', value)}
             error={!!formik.errors.priority}
             helperText={formik.errors.priority as string}
+            required
           />
+
         </Grid>
-        <Grid xs={12} md={6} item>
+        <Grid xs={12} md={6} item sx={{ display: 'flex' }}>
           <Checkbox
             checked={formik.values.status}
             label="Activ"
