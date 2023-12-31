@@ -5500,6 +5500,35 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "8aca656d-df76-47ae-b8db-fa4cca0c55bf",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/evaluationReports",
+      "responses": [
+        {
+          "uuid": "2e93e9ea-daa2-48a5-8d5b-f9754f938bad",
+          "body": "{\r\n  \"list\": [\r\n    {\r\n        \"id\": \"1\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 10,\r\n        \"totalExcutedTasks\": 8,\r\n        \"appliedVolumetryProcessPercentage\": 75,\r\n        \"utilizedVsStandardHours\": -1.25,\r\n        \"utilizedVsStandardFTE\": -0.8\r\n    },\r\n    {\r\n        \"id\": \"2\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 15,\r\n        \"totalExcutedTasks\": 12,\r\n        \"appliedVolumetryProcessPercentage\": 80,\r\n        \"utilizedVsStandardHours\": -0.75,\r\n        \"utilizedVsStandardFTE\": -0.5\r\n    },\r\n    {\r\n        \"id\": \"3\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 20,\r\n        \"totalExcutedTasks\": 18,\r\n        \"appliedVolumetryProcessPercentage\": 90,\r\n        \"utilizedVsStandardHours\": 1.5,\r\n        \"utilizedVsStandardFTE\": 1.2\r\n    },\r\n    {\r\n        \"id\": \"4\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 12,\r\n        \"totalExcutedTasks\": 10,\r\n        \"appliedVolumetryProcessPercentage\": 83.33,\r\n        \"utilizedVsStandardHours\": -2.5,\r\n        \"utilizedVsStandardFTE\": -1.6\r\n    }\r\n  ],\r\n  \"page\": {\r\n    \"pageSize\": 10,\r\n    \"page\": {{faker 'number.int'}},\r\n    \"totalCount\": {{faker 'number.int'}},\r\n    \"pageCount\": {{faker 'number.int'}}\r\n  },\r\n  \"summary\": {\r\n    \"departmentTotalExcutedTasks\": {{faker 'number.int' min=0 max=10}},\r\n    \"departmentAppliedVolumetryProcessPercentage\": {{faker 'number.int' min=0 max=100}},\r\n    \"departmentUtilizedVsStandardHours\": {{faker 'number.float' min=-999 max=999 precision=2}},\r\n    \"departmentUtilizedVsStandardFTE\": {{faker 'number.float' min=-100 max=100 precision=2}}\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5730,6 +5759,10 @@
     {
       "type": "route",
       "uuid": "ba1c2449-2c1b-4973-adcc-56ec68ef0517"
+    },
+    {
+      "type": "route",
+      "uuid": "8aca656d-df76-47ae-b8db-fa4cca0c55bf"
     }
   ],
   "proxyMode": false,
