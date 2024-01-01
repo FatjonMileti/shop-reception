@@ -33,11 +33,7 @@ const OrderReturnTruck = () => {
 
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
-      <Typography component='h4' variant='medium'
-                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-        COMANDǍ CAMION RETUR
-      </Typography>
+      <TitleHeader title='COMANDǍ CAMION RETUR' />
       <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Grid container spacing={2}>

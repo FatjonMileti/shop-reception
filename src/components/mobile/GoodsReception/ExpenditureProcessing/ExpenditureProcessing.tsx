@@ -16,11 +16,7 @@ const ExpenditureProcessing = () => {
   const navigate = useNavigate()
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
-      <Typography component='h4' variant='medium'
-                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-        ÎN PROCESARE EXPEDIȚIE
-      </Typography>
+      <TitleHeader title='ÎN PROCESARE EXPEDIȚIE' />
       <form>
         <Grid container spacing={2} className={cs.wrapper}>
           {trucks.length === 0 && <Grid item xs={12}>

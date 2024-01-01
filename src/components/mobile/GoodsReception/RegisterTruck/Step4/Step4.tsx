@@ -8,11 +8,7 @@ const Step4 = () => {
 
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
-      <Typography component='h4' variant='medium'
-                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-        ÎNREGISTREAZǍ CAMION
-      </Typography>
+      <TitleHeader title='ÎNREGISTREAZǍ CAMION' />
       <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>

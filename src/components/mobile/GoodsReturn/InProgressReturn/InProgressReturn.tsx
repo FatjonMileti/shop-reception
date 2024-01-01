@@ -15,11 +15,7 @@ const InProgressReturn = () => {
   const navigate = useNavigate()
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
-      <Typography component='h4' variant='medium'
-                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-        RETUR ÎN CURS DE RECEPȚIE
-      </Typography>
+      <TitleHeader title='RETUR ÎN CURS DE RECEPȚIE' />
       <form>
         <Grid container spacing={2} className={cs.wrapper}>
           <Grid item xs={12}>

@@ -13,11 +13,7 @@ const ExpectedReturns = () => {
   const navigate = useNavigate()
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
-      <Typography component='h4' variant='medium'
-                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-        RETURURI AȘTEPTATE
-      </Typography>
+      <TitleHeader title='RETURURI AȘTEPTATE' />
       <form>
         <Grid container spacing={2} className={cs.wrapper}>
           {trucks.map((item: Truck, index) => (

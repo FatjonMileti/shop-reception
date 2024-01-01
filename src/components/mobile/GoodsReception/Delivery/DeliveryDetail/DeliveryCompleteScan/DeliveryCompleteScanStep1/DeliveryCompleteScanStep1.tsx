@@ -24,11 +24,7 @@ const DeliveryCompleteScanStep1 = () => {
 
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
-      <Typography component='h4' variant='medium'
-                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-        VALIDARE LIVRARE SCANARE INTEGRALǍ
-      </Typography>
+      <TitleHeader title='VALIDARE LIVRARE SCANARE INTEGRALǍ' />
       <form>
         <Grid container spacing={2} className={cs.wrapper}>
           <Grid item xs={12}>

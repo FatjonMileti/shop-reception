@@ -15,7 +15,7 @@ const ReceptionProcessing = () => {
 
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
+      <TitleHeader title='Procesarea Recepției' />
       <form>
         <Grid container spacing={2} className={cs.wrapper}>
           <Grid item xs={12}>

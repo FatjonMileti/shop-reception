@@ -24,11 +24,7 @@ const DeliveryRandomSupportFinal = () => {
 
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
-      <Typography component='h4' variant='medium'
-                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-        SUPORT ALEATOR VALIDARE LIVRARE
-      </Typography>
+      <TitleHeader title='SUPORT ALEATOR VALIDARE LIVRARE' />
       <form>
         <Grid container spacing={2} className={cs.wrapper}>
           <Grid item xs={12}>

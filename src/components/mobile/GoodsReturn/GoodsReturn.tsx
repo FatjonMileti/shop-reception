@@ -14,7 +14,7 @@ const GoodsReturn = () => {
   return (
     <Paper className={s.paper}>
       <Container component='main' maxWidth='xs' className={cs.container}>
-        <TitleHeader />
+        <TitleHeader title='Returneaza Marfa' />
         <form>
           <Grid container spacing={2} className={cs.wrapper}>
             {isShopUser && <>

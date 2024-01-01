@@ -14,7 +14,7 @@ const GoodsReception = () => {
   return (
     <Paper className={s.paper}>
       <Container component='main' maxWidth='xs' className={cs.container}>
-        <TitleHeader />
+        <TitleHeader title='Receptie Marfa' />
         <form>
           <Grid container spacing={2} className={cs.wrapper}>
             {isShopUser && <>
@@ -76,16 +76,16 @@ const GoodsReception = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='ÎN PROCESARE EXPEDIȚIE'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_PROCESSING_SHIPMENT)
-                }}
-              />
-            </Grid>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='ÎN PROCESARE EXPEDIȚIE'
+                  style={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(URLS.AUTH_PROCESSING_SHIPMENT)
+                  }}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <Button
                   type='button'

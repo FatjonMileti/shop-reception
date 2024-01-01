@@ -25,11 +25,7 @@ const DeliveryRandomProductConfirm = () => {
 
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
-      <Typography component='h4' variant='medium'
-                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-        PRODUSE ALEATOR VALIDARE LIVRARE
-      </Typography>
+      <TitleHeader title="PRODUSE ALEATOR VALIDARE LIVRARE" />
       <form>
         <Grid container spacing={2} className={cs.wrapper}>
           <Grid item xs={12}>

@@ -36,11 +36,7 @@ const ExpectedTrucks = () => {
 
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
-      <Typography component='h4' variant='medium'
-                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-        CAMIOANE AȘTEPTATE
-      </Typography>
+      <TitleHeader title='CAMIOANE AȘTEPTATE' />
       <Grid container spacing={2} className={cs.wrapper}>
         <Grid item xs={12}>
           <Grid container spacing={2}>

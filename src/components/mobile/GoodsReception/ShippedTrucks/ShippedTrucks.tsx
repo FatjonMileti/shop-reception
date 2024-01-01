@@ -6,11 +6,7 @@ import { TitleHeader } from '../../TitleHeader'
 const ShippedTrucks = () => {
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader />
-      <Typography component='h4' variant='medium'
-                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-        CAMIOANE EXPEDIATE
-      </Typography>
+      <TitleHeader title='CAMIOANE EXPEDIATE' />
       <form>
         <Grid container spacing={2} className={cs.wrapper}>
           <Grid item xs={12}>
