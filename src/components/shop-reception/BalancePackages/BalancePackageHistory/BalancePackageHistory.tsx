@@ -31,25 +31,27 @@ const BalancePackageHistory = () => {
     ])
   }, [])
 
-  return <Grid container spacing={2}>
-    <Grid xs={12} item>
-      <TitleHeader title='Istoric inventar' />
+  return (
+    <Grid container spacing={2}>
+      <Grid xs={12} item>
+        <TitleHeader title='Istoric inventar' />
+      </Grid>
+      <Grid item xs={12} style={{ margin: '8px' }}>
+        <Table
+          hideCheckbox
+          orderBy='role'
+          order='asc'
+          columns={columns}
+          items={tableItems}
+          fetchData={null}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+      </Grid>
     </Grid>
-    <Grid item xs={12} style={{ margin: '8px' }}>
-      <Table
-        hideCheckbox
-        orderBy='role'
-        order='asc'
-        columns={columns}
-        items={tableItems}
-        fetchData={() => null}
-        isLoading={isLoading}
-        totalCount={totalCount}
-        shouldRefreshData={shouldRefreshData}
-        setShouldRefreshData={setShouldRefreshData}
-      />
-    </Grid>
-  </Grid>
+  )
 }
 
 export default BalancePackageHistory

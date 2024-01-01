@@ -21,7 +21,7 @@ const ReceptionProcessing = () => {
           <Grid item xs={12}>
             {trucks.map((item: Truck, index) => (
               <TruckCard
-                key={index}
+                key={item.id}
                 onClick={() => {
                   navigate(URLS.AUTH_SUPPORT_CODE)
                 }}

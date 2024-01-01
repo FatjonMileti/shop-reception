@@ -1,25 +1,8 @@
-import { Grid, Container, Table, TableContainer, Paper, TableHead, TableCell, TableBody, TableRow } from '@mui/material'
-import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Grid, Container, Box } from '@mui/material'
+import { Button, Table, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../Common.modules.scss'
 import { TitleHeader } from '../../TitleHeader'
-
-const rows = [
-  { title: 'Suport inexistent' },
-  { title: 'PALET EURO' },
-  { title: 'PALET TIP EURO' },
-  { title: 'PALET INDUSTRIAL/ATIPIC 100x120' },
-  { title: 'PALET CHEP' },
-  { title: 'ROLLS CHEP' },
-  { title: 'ROLLS CU GRATAR' },
-  { title: 'PALET DUSSELDORF' },
-  { title: 'ROLLS FLORI' },
-  { title: 'BOX LEMN' },
-  { title: 'PALET CHEP PLASTIC 80x120' },
-  { title: 'PALET PLASTIC' },
-  { title: 'PALET CHEP JUMATATE 80x60' },
-  { title: 'BOX PLASTIC' },
-  { title: 'BOX METALIC' }
-]
+import { columns, rows } from './helpers'
 
 const ApproveTruck = () => {
   return (
@@ -33,45 +16,22 @@ const ApproveTruck = () => {
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align='center'>TIP AMBALAJ</TableCell>
-                      <TableCell align='center'>CANTITATE</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        key={row.title}
-                      >
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.title}</Typography>
-                        </TableCell>
-                        <TableCell component='th' scope='row'>
-                          <Input
-                            type='text'
-                            variant='standard'
-                            width='100%'
-                            value='0'
-                          />
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <Table
+                columns={columns}
+                isLoading={false}
+                rows={rows}
+                disablePagination={true}
+              />
             </Grid>
             <Grid item xs={12}>
-              <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+              <Box className={cs.buttonWrapper}>
                 <Button
                   type='button'
                   variant='contained'
                   label='CONFIRMĂ AMBALAJE'
-                  onClick={() => null}
+                  onClick={null}
                 />
-              </Grid>
+              </Box>
             </Grid>
           </Grid>
         </Grid>

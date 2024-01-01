@@ -1,4 +1,4 @@
-import { Grid, Container } from '@mui/material'
+import { Grid, Container, Box } from '@mui/material'
 import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
@@ -46,24 +46,24 @@ const Step1 = () => {
               </IconButton>
             </Grid>
             <Grid item xs={12}>
-              <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+              <Box className={cs.buttonWrapper}>
                 <Button
                   type='button'
                   variant='contained'
                   label='ADAUGĂ ALT SIGILIU'
-                  onClick={() => null}
+                  onClick={null}
                 />
-              </Grid>
+              </Box>
             </Grid>
             <Grid item xs={12}>
-              <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+              <Box className={cs.buttonWrapper}>
                 <Button
                   type='button'
                   variant='contained'
                   label='FINALIZEAZǍ'
-                  onClick={() => null}
+                  onClick={null}
                 />
-              </Grid>
+              </Box>
             </Grid>
           </Grid>
         </Grid>

@@ -1,4 +1,4 @@
-import { Grid, Container, Paper, Divider } from '@mui/material'
+import { Grid, Container, Paper, Divider, Box } from '@mui/material'
 import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
@@ -39,14 +39,14 @@ const Step3 = () => {
           </Divider>
         </Grid>
         <Grid item xs={12}>
-          <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+          <Box className={cs.buttonWrapper}>
             <Button
               type='button'
               variant='contained'
               label='SCANEAZǍ TIP AMBALAJ'
-              onClick={() => null}
+              onClick={null}
             />
-          </Grid>
+          </Box>
         </Grid>
         <Grid item xs={12}>
           <Input
@@ -65,14 +65,14 @@ const Step3 = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+          <Box className={cs.buttonWrapper}>
             <Button
               type='button'
               variant='contained'
               label='PASUL URMǍTOR'
-              onClick={() => null}
+              onClick={null}
             />
-          </Grid>
+          </Box>
         </Grid>
       </Grid>
     </Container>

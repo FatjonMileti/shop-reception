@@ -1,4 +1,4 @@
-import { Grid, Container, Paper } from '@mui/material'
+import { Grid, Container, Paper, Box } from '@mui/material'
 import { Button, Checkbox, Divider, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../Common.modules.scss'
 import { useMemo, useState } from 'react'
@@ -125,14 +125,14 @@ const SupportCode = () => {
               <Divider>SAU</Divider>
             </Grid>
             <Grid item xs={12}>
-              <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+              <Box className={cs.buttonWrapper}>
                 <Button
                   type='button'
                   variant='contained'
                   label='SCANEAZǍ SUPORT'
                   onClick={() => formik.handleSubmit()}
                 />
-              </Grid>
+              </Box>
             </Grid>
             {isSearching && <Grid item xs={12}>
               <Grid container spacing={2}>
@@ -187,7 +187,7 @@ const SupportCode = () => {
                       type='button'
                       variant='contained'
                       label='ALTE AMBALAJE'
-                      onClick={() => null}
+                      onClick={null}
                     />
                   </Grid>
                 </Grid>
@@ -210,7 +210,7 @@ const SupportCode = () => {
               </Paper>
             </Grid>
             {isFinalizing && <Grid item xs={12}>
-              <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+              <Box className={cs.buttonWrapper}>
                 <Button
                   type='button'
                   variant='contained'
@@ -218,7 +218,7 @@ const SupportCode = () => {
                   size='large'
                   onClick={() => formik.handleSubmit()}
                 />
-              </Grid>
+              </Box>
             </Grid>}
           </Grid>
         </Grid>

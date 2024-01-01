@@ -18,40 +18,42 @@ const SupportWrongDestinationDetail = () => {
       setIsFileUploaded(false)
     }
   }
-  return <Grid container spacing={2}>
-    <Grid item xs={12}>
-      <Paper className={s.filterPaper}>
-        <TitleHeader title=' Rezolvă suportul' />
-        <Grid container spacing={4}>
-          <Grid xs={12} item>
-            <Input
-              type='textarea'
-              onChange={event => null}
-              label='Comentariu'
-              variant='outlined'
-              style={{ width: '100%' }}
-              value={'none'}
-            />
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Paper className={s.filterPaper}>
+          <TitleHeader title=' Rezolvă suportul' />
+          <Grid container spacing={4}>
+            <Grid xs={12} item>
+              <Input
+                type='textarea'
+                onChange={event => null}
+                label='Comentariu'
+                variant='outlined'
+                style={{ width: '100%' }}
+                value={'none'}
+              />
+            </Grid>
+            <Grid xs={12} item>
+              <FileUpload
+                value={null}
+                fileInputProps={{ displayImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt094LI3kTxh-hGY85ko1D6Z5DT9sEbkeqGWX-dbiEQg&s' }}
+                onChange={onFileUpload}
+              />
+            </Grid>
+            <Grid xs={12} item>
+              <Button
+                variant='contained'
+                type='submit'
+                label='Salvează'
+                onClick={null}
+              />
+            </Grid>
           </Grid>
-          <Grid xs={12} item>
-            <FileUpload
-              value={null}
-              fileInputProps={{ displayImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt094LI3kTxh-hGY85ko1D6Z5DT9sEbkeqGWX-dbiEQg&s'}}
-              onChange={onFileUpload}
-            />
-          </Grid>
-          <Grid xs={12} item>
-            <Button
-              variant='contained'
-              type='submit'
-              label='Salvează'
-              onClick={null}
-            />
-          </Grid>
-        </Grid>
-      </Paper>
+        </Paper>
+      </Grid>
     </Grid>
-  </Grid>
+  )
 }
 
 export default SupportWrongDestinationDetail

@@ -1,10 +1,9 @@
-import { Grid, Container, Paper } from '@mui/material'
+import { Grid, Container, Paper, Box } from '@mui/material'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
 
 const Step7 = () => {
-
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
       <TitleHeader />
@@ -16,36 +15,36 @@ const Step7 = () => {
         <Grid item xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+              <Box className={cs.buttonWrapper}>
                 <Button
                   type='button'
                   variant='contained'
                   label='CAMION GOL'
-                  onClick={() => null}
+                  onClick={null}
                 />
-              </Grid>
+              </Box>
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+            <Box className={cs.buttonWrapper}>
               <Button
                 type='button'
                 variant='contained'
                 label='RESIGILEAZĂ CAMION'
-                onClick={() => null}
+                onClick={null}
               />
-            </Grid>
+            </Box>
           </Grid>
           <Grid item xs={12}>
-            <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+            <Box className={cs.buttonWrapper}>
               <Button
                 type='button'
                 variant='contained'
                 label='RETUR AMBALAJE'
-                onClick={() => null}
+                onClick={null}
                 disabled
               />
-            </Grid>
+            </Box>
           </Grid>
           <Grid item xs={12}>
             <Paper elevation={3} style={{ marginTop: '30px', padding: '20px' }}>

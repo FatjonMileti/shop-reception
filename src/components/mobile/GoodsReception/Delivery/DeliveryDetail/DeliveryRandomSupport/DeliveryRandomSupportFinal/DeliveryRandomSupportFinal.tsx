@@ -22,70 +22,72 @@ const DeliveryRandomSupportFinal = () => {
     }
   })
 
-  return <Container component='main' maxWidth='xs' className={cs.container}>
-    <TitleHeader />
-    <Typography component='h4' variant='medium'
-                style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-      SUPORT ALEATOR VALIDARE LIVRARE
-    </Typography>
-    <form>
-      <Grid container spacing={2} className={cs.wrapper}>
-        <Grid item xs={12}>
-          <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
-            <Typography variant='medium' component='p'>SUPORT ALEATOR</Typography>
-            <Typography variant='medium' component='p'>Număr înmatriculare: BA32489</Typography>
-            <Typography variant='medium' component='p'>Produse verificate: 0 / 4</Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
-            <Typography variant='medium' component='p'>Etichetă suport: 45745865416</Typography>
-            <Typography variant='medium' component='p'>Număr suport: 545465</Typography>
-            <Typography variant='medium' component='p'>Produse verificate: 0</Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={10}>
-          <Input
-            type='text'
-            label='Cod Produse'
-            variant='standard'
-            width='100%'
-            value={formik.values.productCode}
-            onChange={event => formik.setFieldValue('productCode', (event.target as HTMLInputElement).value)}
-            error={!!formik.errors.productCode}
-            helperText={formik.errors.productCode as string}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <IconButton>
-            <ManageSearchIcon />
-          </IconButton>
-        </Grid>
-        <Grid item xs={12}>
-          <Divider>SAU</Divider>
-        </Grid>
-        <Grid item xs={12} style={{ marginTop: '20px' }}>
-          <Grid container alignItems='center' justifyContent='center'>
-            <Button
-              type='button'
-              variant='contained'
-              label='SCANEAZǍ PRODUSE'
-              onClick={() => null}
+  return (
+    <Container component='main' maxWidth='xs' className={cs.container}>
+      <TitleHeader />
+      <Typography component='h4' variant='medium'
+                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
+        SUPORT ALEATOR VALIDARE LIVRARE
+      </Typography>
+      <form>
+        <Grid container spacing={2} className={cs.wrapper}>
+          <Grid item xs={12}>
+            <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
+              <Typography variant='medium' component='p'>SUPORT ALEATOR</Typography>
+              <Typography variant='medium' component='p'>Număr înmatriculare: BA32489</Typography>
+              <Typography variant='medium' component='p'>Produse verificate: 0 / 4</Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
+              <Typography variant='medium' component='p'>Etichetă suport: 45745865416</Typography>
+              <Typography variant='medium' component='p'>Număr suport: 545465</Typography>
+              <Typography variant='medium' component='p'>Produse verificate: 0</Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={10}>
+            <Input
+              type='text'
+              label='Cod Produse'
+              variant='standard'
+              width='100%'
+              value={formik.values.productCode}
+              onChange={event => formik.setFieldValue('productCode', (event.target as HTMLInputElement).value)}
+              error={!!formik.errors.productCode}
+              helperText={formik.errors.productCode as string}
             />
           </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container alignItems='center' justifyContent='center'>
-            <Button
-              type='button'
-              variant='contained'
-              label='FINALIZEAZĂ SUPORT'
-              onClick={() => formik.submitForm()}
-            />
+          <Grid item xs={2}>
+            <IconButton>
+              <ManageSearchIcon />
+            </IconButton>
+          </Grid>
+          <Grid item xs={12}>
+            <Divider>SAU</Divider>
+          </Grid>
+          <Grid item xs={12} style={{ marginTop: '20px' }}>
+            <Grid container alignItems='center' justifyContent='center'>
+              <Button
+                type='button'
+                variant='contained'
+                label='SCANEAZǍ PRODUSE'
+                onClick={null}
+              />
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container alignItems='center' justifyContent='center'>
+              <Button
+                type='button'
+                variant='contained'
+                label='FINALIZEAZĂ SUPORT'
+                onClick={() => formik.submitForm()}
+              />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </form>
-  </Container>
+      </form>
+    </Container>
+  )
 }
 export default DeliveryRandomSupportFinal

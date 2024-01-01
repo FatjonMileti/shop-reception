@@ -9,17 +9,19 @@ interface IconBoxProps {
 }
 
 const IconBox: React.FC<IconBoxProps> = (props) => {
-  return <Box className={s.applicationsWrapper}>
-    <div
-      onClick={props.onClick}
-      className={s.applicationContainer}
-    >
-      <div className={s.iconContainer}>
-        {props.icon}
+  return (
+    <Box className={s.applicationsWrapper}>
+      <div
+        onClick={props.onClick}
+        className={s.applicationContainer}
+      >
+        <div className={s.iconContainer}>
+          {props.icon}
+        </div>
+        <span className={s.applicationName}>{props.title}</span>
       </div>
-      <span className={s.applicationName}>{props.title}</span>
-    </div>
-  </Box>
+    </Box>
+  )
 }
 
 export default IconBox

@@ -25,7 +25,7 @@ const InProgressReturn = () => {
           <Grid item xs={12}>
             {trucks.map((item: Truck, index) => (
               <TruckCard
-                key={index}
+                key={item.id}
                 onClick={() => {
                   navigate(URLS.AUTH_TRUCK_DETAIL.replace(':id', item.id.toString()))
                 }}

@@ -22,74 +22,76 @@ const DeliveryCompleteScanStep1 = () => {
     }
   })
 
-  return <Container component='main' maxWidth='xs' className={cs.container}>
-    <TitleHeader />
-    <Typography component='h4' variant='medium'
-                style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
-      VALIDARE LIVRARE SCANARE INTEGRALǍ
-    </Typography>
-    <form>
-      <Grid container spacing={2} className={cs.wrapper}>
-        <Grid item xs={12}>
-          <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
-            <Typography variant='medium' component='p'>SCANARE INTEGRALǍ</Typography>
-            <Typography variant='medium' component='p'>Număr înmatriculare: BA32489</Typography>
-            <Typography variant='medium' component='p'>BL: 545465</Typography>
-            <Typography variant='medium' component='p'>Suporți verificați: 0 / 4</Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={10}>
-          <Input
-            type='text'
-            label='Cod Suport'
-            variant='standard'
-            width='100%'
-            value={formik.values.supportCode}
-            onChange={event => formik.setFieldValue('supportCode', (event.target as HTMLInputElement).value)}
-            error={!!formik.errors.supportCode}
-            helperText={formik.errors.supportCode as string}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <IconButton>
-            <ManageSearchIcon />
-          </IconButton>
-        </Grid>
-        <Grid item xs={12}>
-          <Divider>SAU</Divider>
-        </Grid>
-        <Grid item xs={12} style={{ marginTop: '20px' }}>
-          <Grid container alignItems='center' justifyContent='center'>
-            <Button
-              type='button'
-              variant='contained'
-              label='SCANEAZǍ SUPORT'
-              onClick={() => null}
+  return (
+    <Container component='main' maxWidth='xs' className={cs.container}>
+      <TitleHeader />
+      <Typography component='h4' variant='medium'
+                  style={{ textAlign: 'center', textTransform: 'uppercase', color: 'black' }}>
+        VALIDARE LIVRARE SCANARE INTEGRALǍ
+      </Typography>
+      <form>
+        <Grid container spacing={2} className={cs.wrapper}>
+          <Grid item xs={12}>
+            <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
+              <Typography variant='medium' component='p'>SCANARE INTEGRALǍ</Typography>
+              <Typography variant='medium' component='p'>Număr înmatriculare: BA32489</Typography>
+              <Typography variant='medium' component='p'>BL: 545465</Typography>
+              <Typography variant='medium' component='p'>Suporți verificați: 0 / 4</Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={10}>
+            <Input
+              type='text'
+              label='Cod Suport'
+              variant='standard'
+              width='100%'
+              value={formik.values.supportCode}
+              onChange={event => formik.setFieldValue('supportCode', (event.target as HTMLInputElement).value)}
+              error={!!formik.errors.supportCode}
+              helperText={formik.errors.supportCode as string}
             />
           </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container alignItems='center' justifyContent='center'>
-            <Button
-              type='button'
-              variant='contained'
-              label='FINALIZEAZĂ'
-              onClick={() => null}
-            />
+          <Grid item xs={2}>
+            <IconButton>
+              <ManageSearchIcon />
+            </IconButton>
+          </Grid>
+          <Grid item xs={12}>
+            <Divider>SAU</Divider>
+          </Grid>
+          <Grid item xs={12} style={{ marginTop: '20px' }}>
+            <Grid container alignItems='center' justifyContent='center'>
+              <Button
+                type='button'
+                variant='contained'
+                label='SCANEAZǍ SUPORT'
+                onClick={null}
+              />
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container alignItems='center' justifyContent='center'>
+              <Button
+                type='button'
+                variant='contained'
+                label='FINALIZEAZĂ'
+                onClick={null}
+              />
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container alignItems='center' justifyContent='center'>
+              <Button
+                type='button'
+                variant='contained'
+                label='SUMAR BL'
+                onClick={() => formik.handleSubmit()}
+              />
+            </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <Grid container alignItems='center' justifyContent='center'>
-            <Button
-              type='button'
-              variant='contained'
-              label='SUMAR BL'
-              onClick={() => formik.handleSubmit()}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-    </form>
-  </Container>
+      </form>
+    </Container>
+  )
 }
 export default DeliveryCompleteScanStep1

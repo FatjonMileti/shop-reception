@@ -200,7 +200,7 @@ const PackagingCompliance = () => {
           order='asc'
           columns={columns}
           items={tableItems}
-          fetchData={() => null}
+          fetchData={null}
           isLoading={isLoading}
           totalCount={totalCount}
           newButton={null}

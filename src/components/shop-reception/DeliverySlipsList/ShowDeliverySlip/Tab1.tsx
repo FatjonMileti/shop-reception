@@ -288,7 +288,7 @@ const Tab1 = () => {
           order='asc'
           columns={detailsColumns}
           items={tableItems}
-          fetchData={() => null}
+          fetchData={null}
           isLoading={isLoading}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}

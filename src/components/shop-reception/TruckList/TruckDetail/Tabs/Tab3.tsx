@@ -17,7 +17,7 @@ const Tab3 = () => {
       order='asc'
       columns={tab3Columns}
       items={tableItems}
-      fetchData={() => null}
+      fetchData={null}
       isLoading={isLoading}
       totalCount={totalCount}
       newButton={null}

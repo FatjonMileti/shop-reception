@@ -5,7 +5,7 @@ import { TitleHeader } from '../../../TitleHeader'
 import { useNavigate } from 'react-router-dom'
 import { URLS } from '../../../constants'
 
-const Delivery = () => {
+const DeliveryDetail = () => {
   const navigate = useNavigate()
   return (
     <Container component='main' maxWidth='xs' className={cs.container}>
@@ -23,7 +23,7 @@ const Delivery = () => {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+            <Box className={cs.buttonWrapper}>
               <Button
                 type='button'
                 variant='contained'
@@ -31,10 +31,10 @@ const Delivery = () => {
                 size='large'
                 onClick={() => navigate(URLS.AUTH_DELIVERY_COMPLETE_SCAN)}
               />
-            </Grid>
+            </Box>
           </Grid>
           <Grid item xs={12}>
-            <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+            <Box className={cs.buttonWrapper}>
               <Button
                 type='button'
                 variant='contained'
@@ -42,10 +42,10 @@ const Delivery = () => {
                 size='large'
                 onClick={() => navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS)}
                 />
-            </Grid>
+            </Box>
           </Grid>
           <Grid item xs={12}>
-            <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+            <Box className={cs.buttonWrapper}>
               <Button
                 type='button'
                 variant='contained'
@@ -53,10 +53,10 @@ const Delivery = () => {
                 size='large'
                 onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_SUPPORT)}
                 />
-            </Grid>
+            </Box>
           </Grid>
           <Grid item xs={12}>
-            <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+            <Box className={cs.buttonWrapper}>
               <Button
                 type='button'
                 variant='contained'
@@ -64,7 +64,7 @@ const Delivery = () => {
                 size='large'
                 onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT)}
                 />
-            </Grid>
+            </Box>
           </Grid>
         </Grid>
       </form>
@@ -72,4 +72,4 @@ const Delivery = () => {
   )
 }
 
-export default Delivery
+export default DeliveryDetail

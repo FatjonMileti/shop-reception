@@ -1,4 +1,4 @@
-import { Grid, Container, Paper } from '@mui/material'
+import { Grid, Container, Paper, Box } from '@mui/material'
 import { Button, Table, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
@@ -38,14 +38,14 @@ const Step1 = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
+              <Box className={cs.buttonWrapper}>
                 <Button
                   type='button'
                   variant='contained'
                   label='CONFIRMǍ AMBALAJE'
-                  onClick={() => null}
+                  onClick={null}
                 />
-              </Grid>
+              </Box>
             </Grid>
           </Grid>
         </Grid>

@@ -1,4 +1,4 @@
-import { Grid, Container } from '@mui/material'
+import { Grid, Container, Box } from '@mui/material'
 import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../Common.modules.scss'
 import { useMemo } from 'react'
@@ -58,13 +58,15 @@ const RegisterTruck = () => {
                 helperText={formik.errors.registrationNumber as string}
               />
             </Grid>
-            <Grid container alignItems='center' justifyContent='center' style={{ marginTop: '20px' }}>
-              <Button
-                type='button'
-                variant='contained'
-                label='PASUL URMǍTOR'
-                onClick={() => formik.handleSubmit()}
-              />
+            <Grid item xs={12}>
+              <Box className={cs.buttonWrapper}>
+                <Button
+                  type='button'
+                  variant='contained'
+                  label='PASUL URMǍTOR'
+                  onClick={() => formik.handleSubmit()}
+                />
+              </Box>
             </Grid>
           </Grid>
         </Grid>
