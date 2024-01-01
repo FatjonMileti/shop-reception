@@ -25,7 +25,7 @@ if (messaging) {
         url: payload.data.route
       }
     }
-
+    
     return self.registration.showNotification(notificationTitle, notificationOptions)
   })
 
