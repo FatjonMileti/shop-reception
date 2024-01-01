@@ -9,6 +9,7 @@ import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../../TitleHeader'
 import { useNavigate } from 'react-router-dom'
 import { URLS } from '../../../constants'
+import { toPayload } from './serializers'
 
 const AddTruck = () => {
   const navigate = useNavigate()
@@ -22,7 +23,7 @@ const AddTruck = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const payload = formik.values
+        const payload = toPayload(formik.values)
 
         navigate(URLS.AUTH_ADD_TRUCK_STEP_2)
 
