@@ -20,7 +20,7 @@ const staticItems = [
     primaryText: 'Prima pagina',
     type: 'icon',
     href: '/'
-  }
+  },
 
   // {
   //   disablePadding: true,
@@ -46,7 +46,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
 
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
-  const sidebarRef = useRef(null)
+  const sidebarRef = useRef(null);
 
   const { showNotification } = useNotification()
 
@@ -55,18 +55,18 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
   const auth = useAuth()
 
   useEffect(() => {
-    const handleOutsideClick = event => {
+    const handleOutsideClick = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-        handleCloseMenu()
+        handleCloseMenu();
       }
-    }
+    };
 
-    document.addEventListener('mousedown', handleOutsideClick)
+    document.addEventListener('mousedown', handleOutsideClick);
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
-    }
-  }, [handleCloseMenu])
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [handleCloseMenu]);
 
   useEffect(() => {
     ;(async () => {
