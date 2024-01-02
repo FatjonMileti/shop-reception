@@ -1,13 +1,14 @@
-import { Grid, Container, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
-import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Grid, Container, Paper } from '@mui/material'
+import { Button, Typography, Table } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
 import { useNavigate } from 'react-router-dom'
 import { URLS } from '../../../constants'
+import { columns } from './helpers'
 
 const rows = [
-  { id: 'POL', title: 'POLITA ROLLS FLORI', expect: 1 },
-  { id: 'IND', title: 'PALET INDUSTRIAL/ATPIC 100x120', expect: 2 }
+  { packageType: 'POL', title: 'POLITA ROLLS FLORI', expect: 1 },
+  { packageType: 'IND', title: 'PALET INDUSTRIAL/ATPIC 100x120', expect: 2 }
 ]
 
 const ContinueReturnDetail2 = () => {
@@ -31,34 +32,12 @@ const ContinueReturnDetail2 = () => {
               <Typography variant='medium' component='h4'>Sumar Ambalaje</Typography>
             </Grid>
             <Grid item xs={12}>
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align='center'>Tip Ambalaje</TableCell>
-                      <TableCell align='center'></TableCell>
-                      <TableCell align='center'>Numǎr Ambalaje</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        key={row.id}
-                      >
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.id}</Typography>
-                        </TableCell>
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.title}</Typography>
-                        </TableCell>
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.expect}</Typography>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <Table
+                columns={columns}
+                isLoading={false}
+                rows={rows}
+                disablePagination={true}
+              />
             </Grid>
             <Grid item xs={12}>
               <Grid container style={{ marginTop: '20px' }} spacing={2}>

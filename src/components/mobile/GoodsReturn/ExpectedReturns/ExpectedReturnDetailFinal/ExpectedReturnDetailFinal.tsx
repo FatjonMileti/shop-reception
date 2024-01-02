@@ -1,7 +1,8 @@
-import { Grid, Container, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
-import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Grid, Container, Paper } from '@mui/material'
+import { Button, Typography, Table } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
+import { columns } from './helpers'
 
 const rows = [
   { id: 'POL', title: 'POLITA ROLLS FLORI', expect: 1, downloads: 1 },
@@ -24,38 +25,12 @@ const ExpectedReturnDetailFinal = () => {
               <Typography variant='medium' component='h4'>Sumar Recepție Ambalaje</Typography>
             </Grid>
             <Grid item xs={12}>
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align='center'></TableCell>
-                      <TableCell align='center'></TableCell>
-                      <TableCell align='center'>Așteptat</TableCell>
-                      <TableCell align='center'>Descărcate</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        key={row.id}
-                      >
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.id}</Typography>
-                        </TableCell>
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.title}</Typography>
-                        </TableCell>
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.expect}</Typography>
-                        </TableCell>
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.downloads}</Typography>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <Table
+                columns={columns}
+                isLoading={false}
+                rows={rows}
+                disablePagination={true}
+              />
             </Grid>
             <Grid item xs={12}>
               <Grid container style={{ marginTop: '20px' }} spacing={2}>

@@ -1,14 +1,41 @@
-import { Grid, Container, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
-import { Button, Input, Typography, IconButton } from '@fullscreendigital/carrefour-dex-fe'
+import { Grid, Container, Paper } from '@mui/material'
+import { Button, Input, Typography, IconButton, Table } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
 import { CameraAlt as CameraIcon } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { URLS } from '../../../constants'
+import { columns } from './helpers'
 
 const rows = [
-  { id: 'POL', title: 'POLITA ROLLS FLORI' },
-  { id: 'IND', title: 'PALET INDUSTRIAL/ATI PIC 100x120' }
+  {
+    id: 'POL', title: 'POLITA ROLLS FLORI', amount: (
+      <Input
+        type='text'
+        variant='standard'
+        width='100%'
+        value='0'
+      />
+    ), action: (
+      <IconButton>
+        <CameraIcon />
+      </IconButton>
+    )
+  },
+  {
+    id: 'IND', title: 'PALET INDUSTRIAL/ATI PIC 100x120', amount: (
+      <Input
+        type='text'
+        variant='standard'
+        width='100%'
+        value='0'
+      />
+    ), action: (
+      <IconButton>
+        <CameraIcon />
+      </IconButton>
+    )
+  }
 ]
 
 const ExpectedReturnDetailStep3 = () => {
@@ -27,45 +54,12 @@ const ExpectedReturnDetailStep3 = () => {
               <Typography variant='medium' component='h4'>Recepție retur</Typography>
             </Grid>
             <Grid item xs={12}>
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align='center'></TableCell>
-                      <TableCell align='center'></TableCell>
-                      <TableCell align='center'>CANTITATE</TableCell>
-                      <TableCell align='center'></TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        key={row.title}
-                      >
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.id}</Typography>
-                        </TableCell>
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.title}</Typography>
-                        </TableCell>
-                        <TableCell component='th' scope='row'>
-                          <Input
-                            type='text'
-                            variant='standard'
-                            width='100%'
-                            value='0'
-                          />
-                        </TableCell>
-                        <TableCell component='th' scope='row'>
-                          <IconButton>
-                            <CameraIcon />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <Table
+                columns={columns}
+                isLoading={false}
+                rows={rows}
+                disablePagination={true}
+              />
             </Grid>
             <Grid item xs={12}>
               <Input

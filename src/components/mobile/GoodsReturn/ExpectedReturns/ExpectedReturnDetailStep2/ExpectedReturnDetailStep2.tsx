@@ -1,12 +1,20 @@
-import { Grid, Container, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
-import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Grid, Container, Paper } from '@mui/material'
+import { Button, Input, Typography, Table } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
 import { useNavigate } from 'react-router-dom'
 import { URLS } from '../../../constants'
+import { columns } from './helpers'
 
 const rows = [
-  { title: 'ORADEA2' },
+  { store: 'ORADEA2', number: (
+      <Input
+        type='text'
+        variant='standard'
+        width='100%'
+        value='0'
+      />
+    ) },
 ]
 
 const ExpectedReturnDetailStep2 = () => {
@@ -25,35 +33,12 @@ const ExpectedReturnDetailStep2 = () => {
               <Typography variant='medium' component='h4'>Descărcare stive</Typography>
             </Grid>
             <Grid item xs={12}>
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align='center'>MAGAZIN</TableCell>
-                      <TableCell align='center'>NUMĂR STIVE</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        key={row.title}
-                      >
-                        <TableCell component='th' scope='row'>
-                          <Typography variant='medium'>{row.title}</Typography>
-                        </TableCell>
-                        <TableCell component='th' scope='row'>
-                          <Input
-                            type='text'
-                            variant='standard'
-                            width='100%'
-                            value='0'
-                          />
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <Table
+                columns={columns}
+                isLoading={false}
+                rows={rows}
+                disablePagination={true}
+              />
             </Grid>
             <Grid container style={{ marginTop: '20px' }} spacing={2}>
               <Grid item xs={12} style={{ textAlign: 'center' }}>
