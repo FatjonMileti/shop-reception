@@ -42,3 +42,10 @@ export interface Department {
 }
 
 export type CRUDAction = 'create' | 'read' | 'edit' | 'delete'
+
+export interface EvaluationReportSummary {
+  departmentTotalExcutedTasks: number
+  departmentAppliedVolumetryProcessPercentage: number
+  departmentUtilizedVsStandardHours: number
+  departmentUtilizedVsStandardFTE: number
+}
