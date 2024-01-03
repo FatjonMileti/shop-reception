@@ -4,7 +4,7 @@ import { Modal } from 'components/core-ui/Modal'
 import s from './TaskAllocation.modules.scss'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { Input } from 'components/core-ui/Input'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useMemo } from 'react'
 import { useFormik } from 'formik'
 import { makeCorePostRequest } from 'utils/api'
 import { useMutation } from 'react-query'
@@ -53,11 +53,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      selectEmployee: {
-        value: '',
-        label: ''
-      },
-      volume: ''
+      selectEmployee: null,
+      volume: null
     },
     onSubmit: async (values, { resetForm }) => {
       const payload = { volume: values.volume, selectEmployee: values.selectEmployee.value }

@@ -72,11 +72,21 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
   const { data: measurementUnitsOptions } = getMeasurementUnitsOptions(showNotification)
   const { data: workVolumeSourceOptions } = getWorkVolumesOptions(showNotification)
 
-  const submitTask = async (values: TaskManagementItem) => {
+  const submitTask = async values => {
+    const payload = {
+      ...values,
+      volumetryLocationCategory: values.volumetryLocationCategory.value,
+      rayonsOrDepartment: values.rayonsOrDepartment.value,
+      raion: values.raion.value,
+      frequency: values.frequency.value,
+      measurementUnit: values.measurementUnit.value,
+      workVolumeSource: values.workVolumeSource.value,
+      priority: values.priority.value
+    }
     if (editItem) {
-      await makeCorePutRequest(`/volumetry/task-templates/${editItemId}`, values)
+      await makeCorePutRequest(`/volumetry/task-templates/${editItemId}`, payload)
     } else {
-      await makeCorePostRequest('/volumetry/task-templates/', values)
+      await makeCorePostRequest('/volumetry/task-templates/', payload)
     }
   }
 
