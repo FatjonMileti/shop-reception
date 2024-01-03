@@ -100,7 +100,8 @@ const TaskAllocation = () => {
         toListTableRows(
           response.list,
           shouldRefreshAllocationsData,
-          setShouldRefreshAllocationsData
+          setShouldRefreshAllocationsData,
+          setShouldRefreshTaskData
         )
       )
       setTableItems(response.list)
