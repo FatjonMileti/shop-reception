@@ -69,7 +69,7 @@ const CollaboratorsTab = () => {
 
   const tableFilterFields = [
     {
-      name: 'name',
+      name: 'fullName',
       label: 'Nume',
       type: 'autocomplete',
       value: '',
