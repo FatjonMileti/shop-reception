@@ -77,6 +77,7 @@ const TaskAllocation = () => {
         employees={data.list}
         shouldRefreshData={shouldRefreshAllocationsData}
         setShouldRefreshData={setShouldRefreshAllocationsData}
+        setShouldRefreshTaskData={setShouldRefreshTaskData}
       />
     )
   }

@@ -7,7 +7,7 @@ import { Input } from 'components/core-ui/Input'
 import { ChangeEvent } from 'react'
 import { useFormik } from 'formik'
 import { makeCorePostRequest } from 'utils/api'
-import { useMutation} from 'react-query'
+import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
@@ -24,10 +24,12 @@ interface AssignEmployeeProps {
   taskName: string
   department: string
   prodStandardUM: ProdStandardUM
+  setShouldRefreshData: Function
 }
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
-  const { isModalOpen, closeModal, taskName, department, prodStandardUM } = props
+  const { isModalOpen, closeModal, taskName, department, prodStandardUM, setShouldRefreshData } =
+    props
   const { showNotification } = useNotification()
 
   const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } = getEmployeesOptions()
@@ -43,6 +45,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
         message: `Employee assigned successfully!`,
         type: 'success'
       })
+
+      setShouldRefreshData(true)
     },
     onError: error => handleQueryError(error, 'A aparut o eroare la asignarea angajatului.')
   })
