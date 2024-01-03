@@ -35,7 +35,7 @@ VALUES
     (1, 'Project Team', 'ProjectTeamGovernance', '/projectTeam', true, 1),
     -- Bakery
     (2, 'Admin', 'Admin', '/admin', true, 2),
-    (3, 'Formator', 'Formator', '/formator', true, 2),
+    (3, 'Formator/ RQ Regional', 'Formator', '/formator', true, 2),
     (4, 'Manager magazin/raion', 'StoreManager', '/storeManager', true, 2),
     (5, 'Manager regiune', 'RegionManager', '/regionManager', true, 2),
     -- Supply OMNI
