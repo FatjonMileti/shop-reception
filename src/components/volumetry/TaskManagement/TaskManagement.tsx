@@ -37,7 +37,7 @@ export const columns = [
     collapsible: true
   },
   {
-    title: 'Ora estimata de final',
+    title: 'Ora recomandata de final',
     field: 'recommendedEndHour',
     align: 'left',
     type: 'string',

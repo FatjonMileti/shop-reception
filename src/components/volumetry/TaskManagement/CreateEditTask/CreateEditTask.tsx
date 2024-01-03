@@ -189,7 +189,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
 
         <Grid xs={12} md={6} item>
           <TimePicker
-            label="Ora estimata de sfarsit"
+            label="Ora recomandata de sfarsit"
             value={formik.values.recommendedEndHour}
             onChange={newValue => formik.setFieldValue('recommendedEndHour', newValue)}
             error={!!formik.errors.recommendedEndHour}

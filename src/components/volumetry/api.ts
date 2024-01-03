@@ -1,8 +1,7 @@
 import { makeCoreGetRequest } from 'utils/api'
 import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
-import { handleQueryError } from './utils'
-import { fromTaskPayload } from './TaskManagement/CreateEditTask/serializers'
+import { fromTaskPayload, handleQueryError } from './utils'
 import { toEmployeeFilterItems } from './TaskAllocation/serializers'
 
 export const getEmployeeNamesOptions = () => {

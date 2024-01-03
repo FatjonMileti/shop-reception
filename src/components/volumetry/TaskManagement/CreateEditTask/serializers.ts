@@ -14,11 +14,5 @@ export const toTaskPayload = (values: TaskManagementItem) => ({
   measurementUnit: values.measurementUnit,
   workVolumeSource: values.workVolumeSource,
   priority: values.priority,
-  isActive: values.isActive,
-})
-
-export const fromTaskPayload = result => ({
-  ...result,
-  recommendedStartHour: dayjs(result.recommendedStartHour, 'HH:mm'),
-  recommendedEndHour: dayjs(result.recommendedEndHour, 'HH:mm')
+  isActive: values.isActive
 })
