@@ -30,7 +30,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
   const { isModalOpen, closeModal, taskName, department, prodStandardUM } = props
   const { showNotification } = useNotification()
 
-  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } = getEmployeesOptions()
+  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } =
+    getEmployeesOptions(showNotification)
 
   const assignEmployee = async values => {
     await makeCorePostRequest('/volumetry/taskAllocation/assignEmployee', values)
@@ -44,7 +45,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
         type: 'success'
       })
     },
-    onError: error => handleQueryError(error, 'A aparut o eroare la asignarea angajatului.')
+    onError: error =>
+      handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
   const formik = useFormik({

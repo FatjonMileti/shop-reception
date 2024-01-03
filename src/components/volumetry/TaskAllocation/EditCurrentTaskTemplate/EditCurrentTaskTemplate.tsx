@@ -42,7 +42,8 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
         type: 'success'
       })
     },
-    onError: error => handleQueryError(error, 'A aparut o eroare la editarea volumului.')
+    onError: error =>
+      handleQueryError(error, 'A aparut o eroare la editarea volumului.', showNotification)
   })
 
   const formik = useFormik({
