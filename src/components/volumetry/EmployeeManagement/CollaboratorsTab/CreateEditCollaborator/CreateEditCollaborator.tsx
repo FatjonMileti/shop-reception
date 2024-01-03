@@ -53,7 +53,11 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
       })
     },
     onError: error =>
-      handleQueryError(error, `Eroare la ${editItem ? 'editarea' : 'adaugarea colaboratorului.'}`)
+      handleQueryError(
+        error,
+        `Eroare la ${editItem ? 'editarea' : 'adaugarea colaboratorului.'}`,
+        showNotification
+      )
   })
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])

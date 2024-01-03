@@ -58,7 +58,7 @@ const TaskAllocation = () => {
   }, [shouldRefreshAllocationsData])
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
-    getDepartmentsOptions()
+    getDepartmentsOptions(showNotification)
 
   const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
@@ -108,7 +108,12 @@ const TaskAllocation = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      error => handleQueryError(error, 'A aparut o eroare la obtinerea datelor pentru tabel.')
+      error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea datelor pentru tabel.',
+          showNotification
+        )
     }
   }
 
