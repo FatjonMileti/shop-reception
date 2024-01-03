@@ -14,6 +14,7 @@ import {
   getJobTitlesOptions
 } from 'components/volumetry/api'
 import { handleQueryError } from 'components/volumetry/utils'
+import { useNotification } from 'hooks'
 
 const EmployeesTab = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -21,9 +22,11 @@ const EmployeesTab = () => {
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
 
-  const { data: departmentsOptions } = getDepartmentsOptions()
-  const { data: employeeNamesOptions } = getEmployeeNamesOptions()
-  const { data: jobTitlesOptions } = getJobTitlesOptions()
+  const { showNotification } = useNotification()
+
+  const { data: departmentsOptions } = getDepartmentsOptions(showNotification)
+  const { data: employeeNamesOptions } = getEmployeeNamesOptions(showNotification)
+  const { data: jobTitlesOptions } = getJobTitlesOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -43,7 +46,7 @@ const EmployeesTab = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      handleQueryError(error, 'Error while fetching job titles')
+      handleQueryError(error, 'Error while fetching job titles', showNotification)
     }
   }
 

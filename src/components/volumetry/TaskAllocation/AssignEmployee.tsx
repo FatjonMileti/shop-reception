@@ -7,7 +7,7 @@ import { Input } from 'components/core-ui/Input'
 import { ChangeEvent } from 'react'
 import { useFormik } from 'formik'
 import { makeCorePostRequest } from 'utils/api'
-import { useMutation} from 'react-query'
+import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
@@ -30,7 +30,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
   const { isModalOpen, closeModal, taskName, department, prodStandardUM } = props
   const { showNotification } = useNotification()
 
-  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } = getEmployeesOptions()
+  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } =
+    getEmployeesOptions(showNotification)
 
   const assignEmployee = async values => {
     await makeCorePostRequest('/volumetry/taskAllocation/assignEmployee', values)
@@ -44,7 +45,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
         type: 'success'
       })
     },
-    onError: error => handleQueryError(error, 'A aparut o eroare la asignarea angajatului.')
+    onError: error =>
+      handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
   const formik = useFormik({

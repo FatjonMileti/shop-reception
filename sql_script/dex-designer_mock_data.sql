@@ -99,8 +99,9 @@ VALUES
     (42, 'Management Angajati', 'EmployeeManagement', null, true, 7),
     (43, 'Management task template-uri', 'ManagementTasks', null, true, 8),
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
+    (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 7),
     -- Shop Reception
-    (45, 'Admin magazin', 'UsersManagement', null, true, 9);
+    (46, 'Admin magazin', 'UsersManagement', null, true, 9);
 
 
 -- screen with activity id (some are first screens)
@@ -174,8 +175,9 @@ VALUES
     (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true),
     (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
+    (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
     -- Shop Reception
-    (61, 'Screen 1', '', '/url', true, 45, true);
+    (62, 'Screen 1', '', '/url', true, 46, true);
 
 
 -- UI Schema with activity id and screen id
@@ -300,10 +302,11 @@ VALUES
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     (1, 42),
     (1, 43),
-    (1, 44);
+    (1, 44),
+    (1, 45);
     -- Shop Reception
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
-    -- (1, 45);
+    -- (1, 46);
 
 
 -- reset sequences
