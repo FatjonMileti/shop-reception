@@ -89,7 +89,7 @@ export const columns = [
     collapsible: true,
     render: row => (
       <Box>
-        <IconCell value={row.status ? 'active' : 'inactive'} />
+        <IconCell value={row.isActive ? 'active' : 'inactive'} />
       </Box>
     )
   }
