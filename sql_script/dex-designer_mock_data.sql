@@ -103,7 +103,7 @@ VALUES
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
     (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 7),
     -- Shop Reception
-    (46, 'Admin magazin', 'UsersManagement', null, true, 9);
+    (46, 'Admin magazin', 'UsersManagement', null, true, 9),
     -- Bakery TRACEABILITY OP
     (47, 'Management produse', 'ProductManagementTO', null, true, 10),
     (48, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
@@ -186,7 +186,7 @@ VALUES
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
     -- Shop Reception
-    (62, 'Screen 1', '', '/url', true, 46, true);
+    (62, 'Screen 1', '', '/url', true, 46, true),
     -- Bakery TRACEABILITY-OPERATOR
     (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
     (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
@@ -316,7 +316,7 @@ VALUES
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER
     (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY
-    (12, 46), (12, 47), (12, 48), (12, 49), (12, 50), (12, 51),
+    (12, 47), (12, 48), (12, 49), (12, 50), (12, 51), (12, 52),
     -- Supply OMNI
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
