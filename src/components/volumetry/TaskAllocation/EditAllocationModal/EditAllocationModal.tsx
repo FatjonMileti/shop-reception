@@ -51,7 +51,8 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     onError: error =>
       handleQueryError(
         error,
-        `A aparut o eroare la ${editItem ? 'editarea alocarii' : 'oprirea taskului'}.`
+        `A aparut o eroare la ${editItem ? 'editarea alocarii' : 'oprirea taskului'}.`,
+        showNotification
       )
   })
 

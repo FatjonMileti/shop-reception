@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './CollaboratorsTab.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
-import { usePermissions } from 'hooks'
+import { useNotification, usePermissions } from 'hooks'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -39,10 +39,13 @@ const CollaboratorsTab = () => {
     openModal(action)
   }
 
+  const { showNotification } = useNotification()
+
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
-    getDepartmentsOptions()
-  const { data: contractorsNamesOptions } = getContractorsNamesOptions()
-  const { data: jobTitlesOptions, isLoading: isjobTitlesOptionsLoading } = getJobTitlesOptions()
+    getDepartmentsOptions(showNotification)
+  const { data: contractorsNamesOptions } = getContractorsNamesOptions(showNotification)
+  const { data: jobTitlesOptions, isLoading: isjobTitlesOptionsLoading } =
+    getJobTitlesOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -63,7 +66,7 @@ const CollaboratorsTab = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      handleQueryError(error, 'Error while fetching table data.')
+      handleQueryError(error, 'Error while fetching table data.', showNotification)
     }
   }
 

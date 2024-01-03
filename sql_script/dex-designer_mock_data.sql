@@ -101,15 +101,16 @@ VALUES
     (42, 'Management Angajati', 'EmployeeManagement', null, true, 7),
     (43, 'Management task template-uri', 'ManagementTasks', null, true, 8),
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
+    (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 7),
     -- Shop Reception
-    (45, 'Admin magazin', 'UsersManagement', null, true, 9),
+    (46, 'Admin magazin', 'UsersManagement', null, true, 9);
     -- Bakery TRACEABILITY OP
-    (46, 'Management produse', 'ProductManagementTO', null, true, 10),
-    (47, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
-    (48, 'Trasabilitate congelate', 'FrozenTraceabilityTO', null, true, 10),
-    (49, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', null, true, 10),
-    (50, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
-    (51, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10);
+    (47, 'Management produse', 'ProductManagementTO', null, true, 10),
+    (48, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
+    (49, 'Trasabilitate congelate', 'FrozenTraceabilityTO', null, true, 10),
+    (50, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', null, true, 10),
+    (51, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
+    (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10);
 
 
 -- screen with activity id (some are first screens)
@@ -183,17 +184,19 @@ VALUES
     (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true),
     (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
+    (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
     -- Shop Reception
-    (61, 'Screen 1', '', '/url', true, 45, true),
+    (62, 'Screen 1', '', '/url', true, 46, true);
     -- Bakery TRACEABILITY-OPERATOR
-    (62, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 46, true),
-    (63, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 47, true),
-    (64, 'Trasabilitate congelate', 'FrozenTraceabilityTO', '/bakery/traceabilityOperator/frozen-traceability', true, 48, true),
-    (65, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', '/bakery/traceabilityOperator/own-production-traceability', true, 49, true),
-    (66, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report', true, 50, true),
-    (67, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report-print', true, 50, false),
-    (68, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 51, true),
-    (69, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 51, false);
+    (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
+    (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
+    (65, 'Trasabilitate congelate', 'FrozenTraceabilityTO', '/bakery/traceabilityOperator/frozen-traceability', true, 49, true),
+    (66, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', '/bakery/traceabilityOperator/own-production-traceability', true, 50, true),
+    (67, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report', true, 51, true),
+    (68, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report-print', true, 51, false),
+    (69, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 52, true),
+    (70, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 52, false);
+
 
 -- UI Schema with activity id and screen id
 INSERT INTO
@@ -321,10 +324,11 @@ VALUES
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     (1, 42),
     (1, 43),
-    (1, 44);
+    (1, 44),
+    (1, 45);
     -- Shop Reception
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
-    -- (1, 45);
+    -- (1, 46);
 
 
 -- reset sequences
