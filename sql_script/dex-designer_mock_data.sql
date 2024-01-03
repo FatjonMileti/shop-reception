@@ -22,7 +22,7 @@ INSERT INTO
 VALUES
     (1, 'Governance', 'Chair', '/governance', true),
     (2, 'Bakery', 'Bakery', '/bakery', true),
-    (3, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true),
+    (3, 'Supply OMNI Offline', 'SupplyOmni', '/supplyOmni', true),
     (4, 'Volumetry', 'Volumetry', '/volumetry', true),
     (5, 'Shop Reception', 'DonutLargeTwoTone', '/shop-reception', true);
 
@@ -35,11 +35,11 @@ VALUES
     (1, 'Project Team', 'ProjectTeamGovernance', '/projectTeam', true, 1),
     -- Bakery
     (2, 'Admin', 'Admin', '/admin', true, 2),
-    (3, 'Formator', 'Formator', '/formator', true, 2),
+    (3, 'Formator/ RQ Regional', 'Formator', '/formator', true, 2),
     (4, 'Manager magazin/raion', 'StoreManager', '/storeManager', true, 2),
     (5, 'Manager regiune', 'RegionManager', '/regionManager', true, 2),
     -- Supply OMNI
-    (6, 'Supply OMNI', 'SupplyOmni', '/supplyOmni', true, 3),
+    (6, 'Supply OMNI Offline', 'SupplyOmni', '/supplyOmni', true, 3),
     -- Volumetry
     (7, 'Administrare Angajati', 'EmployeeManagement', '/employeeManagement', true, 4),
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
@@ -113,7 +113,7 @@ VALUES
     (3, 'Effort Matrix', 'DonutSmallOutlined', '/governance/projectTeam/effortMatrix', true, 4, true),
     (4, 'Project Milestones', 'AccountTreeOutlined', '/governance/projectTeam/projectMilestones', true, 3, true),
     (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/governance/projectTeam/teamCapacity', true, 2, true),
-    (6, 'Individual Capacity', 'PeopleAltOutlined', '/governance/projectTeam/individualCapacity', true, 2, false),
+    (6, 'Individual Capacity', 'PeopleAltOutlined', '/governance/projectTeam/individualCapacity/:id', true, 2, false),
     (7, 'My Time-Off', 'TimerOffOutlined', '/governance/projectTeam/myTimeOff', true, 6, true),
     -- Bakery ADMIN
     (8 , 'Gestiune utilizatori', 'UsersManagement', '/bakery/admin/usersManagement', true, 7, true),

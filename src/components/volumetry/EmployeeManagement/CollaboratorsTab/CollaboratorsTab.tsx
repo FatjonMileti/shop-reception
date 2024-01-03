@@ -1,0 +1,167 @@
+import { Box } from '@mui/material'
+import { Table } from 'components/core-ui/Table'
+import s from './CollaboratorsTab.modules.scss'
+import { makeCoreGetRequest } from 'utils/api'
+import { usePermissions } from 'hooks'
+import { useState } from 'react'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { toTableRowItems } from './serializers'
+import { CRUDAction, EmployeeManagementItem } from 'components/volumetry/interfaces'
+import { columns, roles } from './helpers'
+import { DeleteCollaborator } from './DeleteCollaborator'
+import { CreateEditCollaborator } from './CreateEditCollaborator'
+import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
+import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import {
+  getDepartmentsOptions,
+  getContractorsNamesOptions,
+  getJobTitlesOptions
+} from 'components/volumetry/api'
+import { handleQueryError } from 'components/volumetry/utils'
+
+const CollaboratorsTab = () => {
+  // TODO: De actualizat cand primim update cu drepturile fiecarui rol
+  const { canCreate, canEdit, canDelete } = usePermissions(roles)
+
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [selectedRow, setSelectedRow] = useState<EmployeeManagementItem>(null)
+  const [modal, setModal] = useState<CRUDAction>(null)
+
+  const openModal = (action: CRUDAction) => setModal(action)
+  const closeModal = () => setModal(null)
+
+  const selectRowId = (rowId: number, action: CRUDAction) => {
+    const item = tableItems.find((item: EmployeeManagementItem) => item.id === rowId)
+    setSelectedRow(item)
+    openModal(action)
+  }
+
+  const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
+    getDepartmentsOptions()
+  const { data: contractorsNamesOptions } = getContractorsNamesOptions()
+  const { data: jobTitlesOptions, isLoading: isjobTitlesOptionsLoading } = getJobTitlesOptions()
+
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+    setIsLoading(true)
+
+    try {
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: '/volumetry/workers/contractors',
+          tableFilters,
+          page,
+          rowsPerPage,
+          order,
+          orderBy
+        })
+      )
+
+      setTableItems(toTableRowItems(response.list))
+      setTotalCount(response.page.totalCount)
+      setIsLoading(false)
+    } catch (error) {
+      handleQueryError(error, 'Error while fetching table data.')
+    }
+  }
+
+  const tableFilterFields = [
+    {
+      name: 'name',
+      label: 'Nume',
+      type: 'autocomplete',
+      value: '',
+      filter: <Autocomplete variant="outlined" label="Nume" options={contractorsNamesOptions} />
+    },
+    {
+      name: 'department',
+      label: 'Departament',
+      type: 'autocomplete',
+      value: '',
+      filter: <Autocomplete variant="outlined" label="Departament" options={departmentsOptions} />
+    },
+    {
+      name: 'position',
+      label: 'Position',
+      type: 'autocomplete',
+      value: '',
+      filter: <Autocomplete variant="outlined" label="Position" options={jobTitlesOptions} />
+    }
+  ]
+
+  return (
+    <div className={s.mainContainer}>
+      <Box>
+        <CreateEditCollaborator
+          isModalOpen={modal === 'create'}
+          closeModal={closeModal}
+          setShouldRefreshData={setShouldRefreshData}
+          departmentsOptions={departmentsOptions}
+          isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
+          jobTitlesOptions={jobTitlesOptions}
+          isjobTitlesOptionsLoading={isjobTitlesOptionsLoading}
+        />
+        <DeleteCollaborator
+          isModalOpen={modal === 'delete'}
+          closeModal={closeModal}
+          itemId={selectedRow?.id}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <CreateEditCollaborator
+          isModalOpen={modal === 'edit'}
+          closeModal={closeModal}
+          editItem={selectedRow}
+          setShouldRefreshData={setShouldRefreshData}
+          departmentsOptions={departmentsOptions}
+          isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
+          jobTitlesOptions={jobTitlesOptions}
+          isjobTitlesOptionsLoading={isjobTitlesOptionsLoading}
+        />
+
+        <Table
+          hideCheckbox
+          orderBy="department.name"
+          order="desc"
+          columns={columns}
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          filters={tableFilterFields}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              desktopIcon: <EditActionIcon />,
+              onClick: (_e, rowId: number) => selectRowId(rowId, 'edit')
+            },
+            {
+              label: 'Delete',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#d9534f',
+              desktopIcon: <DeleteActionIcon />,
+              onClick: (_e, rowId: number) => selectRowId(rowId, 'delete')
+            }
+          ]}
+          rowActionsWidth="130px"
+          toolbarActions={[
+            {
+              label: 'Add',
+              icon: <AddActionIcon />,
+              onClick: () => (canCreate ? setModal('create') : null) // TODO: To verify permissions with the BE
+            }
+          ]}
+        />
+      </Box>
+    </div>
+  )
+}
+
+export default CollaboratorsTab

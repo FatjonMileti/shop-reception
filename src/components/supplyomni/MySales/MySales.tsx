@@ -9,18 +9,13 @@ import { formatErrorMessage } from 'utils/formatting'
 import { formatAndDownloadResponse } from 'utils/helpers'
 import s from './MySales.modules.scss'
 import { RESOURCE_URI, defaultTableFilters, tableColumns } from './constants'
-import { MySalesResponseModel, TableFilters, TableRowModel, TableState } from './models'
+import { MySalesResponseModel, TableFilters, TableRowModel } from './models'
 import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
+import { DownloadIcon } from 'icons'
 
 export const MySales = () => {
   const { showNotification } = useNotification()
-
-  const [tableState, setTableState] = useState<TableState>({
-    order: null,
-    orderBy: null,
-    tableFilters: null
-  })
   const [tableItems, setTableItems] = useState<TableRowModel[]>([])
   const [tableFilters, setTableFilters] = useState<TableFilters>(defaultTableFilters)
   const [totalCount, setTotalCount] = useState<number>(0)
@@ -43,7 +38,6 @@ export const MySales = () => {
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
-
     try {
       const response = (await makeCoreGetRequest(
         toTableGETUrl({
@@ -60,7 +54,6 @@ export const MySales = () => {
         response.summary.totalPrice,
         toTableRowItems(response.list, false)
       )
-      setTableState({ order, orderBy, tableFilters })
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -70,14 +63,15 @@ export const MySales = () => {
     }
   }
 
-  const handleDownload = async () => {
-    const { tableFilters, order, orderBy } = tableState
+  const handleDownload = async (tableState, e) => {
+    const { filters, order, orderBy } = tableState
     const url = toTableGETUrl({
       url: '/supply-omni/reports/export/csv',
-      tableFilters,
+      tableFilters: filters,
       order,
       orderBy
     })
+
     try {
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
@@ -101,7 +95,13 @@ export const MySales = () => {
         isLoading={isLoading}
         totalCount={totalCount}
         filters={tableFilterInputs}
-        downloadButton={{ onClick: handleDownload }}
+        toolbarActions={[
+          {
+            label: 'Download',
+            icon: <DownloadIcon />,
+            onClick: handleDownload
+          }
+        ]}
       />
       <Grid
         container

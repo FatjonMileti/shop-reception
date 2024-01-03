@@ -1,7 +1,10 @@
+import { EmployeeManagementItem } from 'components/volumetry/interfaces'
+
 export const toTableRowItems = items =>
-  items.map(item => ({
+  items.map((item: EmployeeManagementItem) => ({
     id: item.id,
-    departmentName: item.department.name,
-    name: item.name,
-    position: item.position.name
+    fullName: item.fullName || '',
+    jobTitle: item.jobTitle || '',
+    department: item.department || '',
+    location: item.location || ''
   }))

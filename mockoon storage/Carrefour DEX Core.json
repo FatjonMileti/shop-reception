@@ -4426,7 +4426,7 @@
       "responses": [
         {
           "uuid": "38485b8f-4ccd-43ca-9257-46c941bf18b6",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 1,\n        \"name\": \"BLS\"\n      },\n      \"name\": \"Mircea Dumitru\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Ioana Alexandra Stamate\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Avram Mihai\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Florin Ion\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Diana Vasilescu\",\n      \"position\": {\n        \"id\": 9,\n        \"name\": \"Lucrator universal\"\n      }\n    },\n    {\n      \"id\": 6,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Florin Gusa\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 1,\n        \"name\": \"BLS\"\n      },\n      \"name\": \"Mircea Dumitru\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      },\n      \"work_group\": \"ON_SHIFT\"\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Ioana Alexandra Stamate\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      },\n      \"work_group\": \"ON_SHIFT\"\n    },\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Avram Mihai\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      },\n      \"work_group\": \"ON_SHIFT\"\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Florin Ion\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      },\n      \"work_group\": \"OFF_SHIFT\"\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Diana Vasilescu\",\n      \"position\": {\n        \"id\": 9,\n        \"name\": \"Lucrator universal\"\n      },\n      \"work_group\": \"MERCHENDISER\"\n    },\n    {\n      \"id\": 6,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Florin Gusa\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      },\n      \"work_group\": \"MERCHENDISER\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -5003,7 +5003,7 @@
       "responses": [
         {
           "uuid": "ec8ef1a0-f23f-4a51-8237-803d5c646b39",
-          "body": "{\n  \"list\": [\n    {\n      \"employee\": {\n        \"name\": \"Florin Avramescu\",\n        \"id\": 0\n      },\n      \"startTime\": {\n        \"isStarted\": false,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"10:30\"\n      },\n      \"volume\": {\n        \"value\": 4,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 0\n    },\n    {\n      \"employee\": {\n        \"name\": \"Ioana Alexandra Stamate\",\n        \"id\": 1\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 40\n    },\n    {\n      \"employee\": {\n        \"name\": \"Florina Toma\",\n        \"id\": 2\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": true,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"customText\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \"\n    },\n    {\n      \"employee\": {\n        \"name\": \"Diana Vasilescu\",\n        \"id\": 3\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"isOverdue\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"employee\": {\n        \"name\": \"Florin Avramescu\",\n        \"id\": 0\n      },\n      \"startTime\": {\n        \"isStarted\": false,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"10:30\"\n      },\n      \"volume\": {\n        \"value\": 4,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 0\n    },\n    {\n      \"id\": 2,\n      \"employee\": {\n        \"name\": \"Ioana Alexandra Stamate\",\n        \"id\": 1\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 40\n    },\n    {\n      \"id\": 3,\n      \"employee\": {\n        \"name\": \"Florina Toma\",\n        \"id\": 2\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": true,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"customText\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \"\n    },\n    {\n      \"id\": 4,\n      \"employee\": {\n        \"name\": \"Diana Vasilescu\",\n        \"id\": 3\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"isOverdue\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -5037,7 +5037,7 @@
       "responses": [
         {
           "uuid": "283c9bf3-d70f-4de1-9290-5d7ce019c3db",
-          "body": "{\n\n  \"customText\": \"Custom text here\",\n  \n}",
+          "body": "{\n\n  \"customText\": \"Custom text here\",\n  \"volum\": 123\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successful operation",
@@ -5317,6 +5317,218 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "cbba3735-1240-434d-b05f-c61233c3b0bb",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "volumetry/taskAllocation/start/:id",
+      "responses": [
+        {
+          "uuid": "a5013e88-eb74-45a5-a039-51594608a769",
+          "body": "{\n  \"isStarted\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful operation",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "fe5762e4-02de-4b2f-8daa-7a43fbca7156",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cf06631a-0475-4f03-8438-f7130e20ba7b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c00399ad-fb29-48ac-954e-6e8633393188",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "d5018124-a0fd-4e52-bfad-6d3caacdfee3",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "bb6a2ff9-d118-44d4-bcae-5875064d527f",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ba1c2449-2c1b-4973-adcc-56ec68ef0517",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "volumetry/taskAllocation/details/:id",
+      "responses": [
+        {
+          "uuid": "1846346f-22a6-4e67-8845-c985b0faac44",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "8aca656d-df76-47ae-b8db-fa4cca0c55bf",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/evaluationReports",
+      "responses": [
+        {
+          "uuid": "2e93e9ea-daa2-48a5-8d5b-f9754f938bad",
+          "body": "{\r\n  \"list\": [\r\n    {\r\n        \"id\": \"1\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 10,\r\n        \"totalExcutedTasks\": 8,\r\n        \"appliedVolumetryProcessPercentage\": 75,\r\n        \"utilizedVsStandardHours\": -1.25,\r\n        \"utilizedVsStandardFTE\": -0.8\r\n    },\r\n    {\r\n        \"id\": \"2\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 15,\r\n        \"totalExcutedTasks\": 12,\r\n        \"appliedVolumetryProcessPercentage\": 80,\r\n        \"utilizedVsStandardHours\": -0.75,\r\n        \"utilizedVsStandardFTE\": -0.5\r\n    },\r\n    {\r\n        \"id\": \"3\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 20,\r\n        \"totalExcutedTasks\": 18,\r\n        \"appliedVolumetryProcessPercentage\": 90,\r\n        \"utilizedVsStandardHours\": 1.5,\r\n        \"utilizedVsStandardFTE\": 1.2\r\n    },\r\n    {\r\n        \"id\": \"4\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 12,\r\n        \"totalExcutedTasks\": 10,\r\n        \"appliedVolumetryProcessPercentage\": 83.33,\r\n        \"utilizedVsStandardHours\": -2.5,\r\n        \"utilizedVsStandardFTE\": -1.6\r\n    }\r\n  ],\r\n  \"page\": {\r\n    \"pageSize\": 10,\r\n    \"page\": {{faker 'number.int'}},\r\n    \"totalCount\": {{faker 'number.int'}},\r\n    \"pageCount\": {{faker 'number.int'}}\r\n  },\r\n  \"summary\": {\r\n    \"departmentTotalExcutedTasks\": {{faker 'number.int' min=0 max=10}},\r\n    \"departmentAppliedVolumetryProcessPercentage\": {{faker 'number.int' min=0 max=100}},\r\n    \"departmentUtilizedVsStandardHours\": {{faker 'number.float' min=-999 max=999 precision=2}},\r\n    \"departmentUtilizedVsStandardFTE\": {{faker 'number.float' min=-100 max=100 precision=2}}\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5539,6 +5751,18 @@
     {
       "type": "route",
       "uuid": "33edd441-4c55-40ff-bb89-d9d650d3f240"
+    },
+    {
+      "type": "route",
+      "uuid": "cbba3735-1240-434d-b05f-c61233c3b0bb"
+    },
+    {
+      "type": "route",
+      "uuid": "ba1c2449-2c1b-4973-adcc-56ec68ef0517"
+    },
+    {
+      "type": "route",
+      "uuid": "8aca656d-df76-47ae-b8db-fa4cca0c55bf"
     }
   ],
   "proxyMode": false,
