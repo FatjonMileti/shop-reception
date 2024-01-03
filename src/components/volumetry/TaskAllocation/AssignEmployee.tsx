@@ -31,7 +31,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
   const { showNotification } = useNotification()
 
   const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } =
-    getEmployeesOptions(showNotification)
+    getEmployeesOptions(showNotification, isModalOpen)
 
   const assignEmployee = async values => {
     await makeCorePostRequest('/volumetry/taskAllocation/assignEmployee', values)

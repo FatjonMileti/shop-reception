@@ -268,7 +268,7 @@ export const getRaionsOptions = (
   )
 }
 
-export const getEmployeesOptions = (showNotification: Function) => {
+export const getEmployeesOptions = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(
     ['employees-options'],
     async () => {
@@ -292,7 +292,9 @@ export const getEmployeesOptions = (showNotification: Function) => {
     },
     {
       onError: error =>
-        handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification)
+        handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification),
+        
+        enabled: validateQuery
     }
   )
 }
