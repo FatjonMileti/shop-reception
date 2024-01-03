@@ -31,7 +31,7 @@ const EvaluationReports = () => {
     setShouldRefreshData(true)
   }
 
-  const fetchData = async (order, orderBy) => {
+  const fetchData = async ({ order, orderBy }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
