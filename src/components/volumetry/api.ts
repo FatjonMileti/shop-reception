@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 import { fromTaskPayload, handleQueryError } from './utils'
 import { toEmployeeFilterItems } from './TaskAllocation/serializers'
 
-export const getEmployeeNamesOptions = () => {
+export const getEmployeeNamesOptions = (showNotification: Function) => {
   return useQuery(
     ['employees-name'],
     async () => {
@@ -17,12 +17,12 @@ export const getEmployeeNamesOptions = () => {
       return resultOptions || []
     },
     {
-      onError: error => handleQueryError(error, 'Error while fetching employees ')
+      onError: error => handleQueryError(error, 'Error while fetching employees ', showNotification)
     }
   )
 }
 
-export const getDepartmentsOptions = () => {
+export const getDepartmentsOptions = (showNotification: Function) => {
   return useQuery(
     ['departments'],
     async () => {
@@ -37,13 +37,14 @@ export const getDepartmentsOptions = () => {
       onError: error =>
         handleQueryError(
           error,
-          'A aparut o eroare la preluarea datelor de optiuni pentru departamente.'
+          'A aparut o eroare la preluarea datelor de optiuni pentru departamente.',
+          showNotification
         )
     }
   )
 }
 
-export const getJobTitlesOptions = () => {
+export const getJobTitlesOptions = (showNotification: Function) => {
   return useQuery(
     ['job-titles'],
     async () => {
@@ -58,12 +59,12 @@ export const getJobTitlesOptions = () => {
       return resultOptions || []
     },
     {
-      onError: error => handleQueryError(error, 'Error while fetching job titles')
+      onError: error => handleQueryError(error, 'Error while fetching job titles', showNotification)
     }
   )
 }
 
-export const getContractorsNamesOptions = () => {
+export const getContractorsNamesOptions = (showNotification: Function) => {
   return useQuery(
     ['contractors-names'],
     async () => {
@@ -76,12 +77,12 @@ export const getContractorsNamesOptions = () => {
       return resultOptions || []
     },
     {
-      onError: error => handleQueryError(error, 'Error while fetching employees ')
+      onError: error => handleQueryError(error, 'Error while fetching employees ', showNotification)
     }
   )
 }
 
-export const getTask = (itemId: string | number) => {
+export const getTask = (itemId: string | number, showNotification: Function) => {
   return useQuery(
     ['task', itemId],
     async () => {
@@ -94,12 +95,16 @@ export const getTask = (itemId: string | number) => {
     },
     {
       onError: error =>
-        handleQueryError(error, 'A aparut o eroare la obtinerea detaliilor taskului.')
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea detaliilor taskului.',
+          showNotification
+        )
     }
   )
 }
 
-export const getCategoriesOptions = () => {
+export const getCategoriesOptions = (showNotification: Function) => {
   return useQuery(
     ['categories'],
     async () => {
@@ -113,12 +118,13 @@ export const getCategoriesOptions = () => {
       return resultOptions || []
     },
     {
-      onError: error => handleQueryError(error, 'A aparut o eroare la obtinerea categoriilor.')
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea categoriilor.', showNotification)
     }
   )
 }
 
-export const getPrioritiesOptions = () => {
+export const getPrioritiesOptions = (showNotification: Function) => {
   return useQuery(
     ['priority'],
     async () => {
@@ -132,12 +138,13 @@ export const getPrioritiesOptions = () => {
       return resultOptions || []
     },
     {
-      onError: error => handleQueryError(error, 'A aparut o eroare la obtinerea prioritatilor.')
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea prioritatilor.', showNotification)
     }
   )
 }
 
-export const getFrequencyOptions = () => {
+export const getFrequencyOptions = (showNotification: Function) => {
   return useQuery(
     ['frequency'],
     async () => {
@@ -151,12 +158,13 @@ export const getFrequencyOptions = () => {
       return resultOptions || []
     },
     {
-      onError: error => handleQueryError(error, 'A aparut o eroare la obtinerea frecventelor.')
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea frecventelor.', showNotification)
     }
   )
 }
 
-export const getMeasurementUnitsOptions = () => {
+export const getMeasurementUnitsOptions = (showNotification: Function) => {
   return useQuery(
     ['measurement-units'],
     async () => {
@@ -171,12 +179,16 @@ export const getMeasurementUnitsOptions = () => {
     },
     {
       onError: error =>
-        handleQueryError(error, 'A aparut o eroare la obtinerea unitatilor de masura.')
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea unitatilor de masura.',
+          showNotification
+        )
     }
   )
 }
 
-export const getWorkVolumesOptions = () => {
+export const getWorkVolumesOptions = (showNotification: Function) => {
   return useQuery(
     ['work-volumes'],
     async () => {
@@ -191,14 +203,19 @@ export const getWorkVolumesOptions = () => {
     },
     {
       onError: error =>
-        handleQueryError(error, 'A aparut o eroare la obtinerea rapoartelor de volum de lucru.')
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea rapoartelor de volum de lucru.',
+          showNotification
+        )
     }
   )
 }
 
 export const getCategoryDepartmentsOptions = (
   categoryId: number,
-  shouldFetchDepartments: boolean
+  shouldFetchDepartments: boolean,
+  showNotification: Function
 ) => {
   return useQuery(
     ['category-departments', categoryId],
@@ -213,7 +230,12 @@ export const getCategoryDepartmentsOptions = (
       return resultOptions || []
     },
     {
-      onError: error => handleQueryError(error, 'A aparut o eroare la obtinerea departamentelor.'),
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea departamentelor.',
+          showNotification
+        ),
       enabled: shouldFetchDepartments
     }
   )
@@ -222,7 +244,8 @@ export const getCategoryDepartmentsOptions = (
 export const getRaionsOptions = (
   departmentId: number,
   shouldFetchRaions: boolean,
-  callback: Function
+  callback: Function,
+  showNotification: Function
 ) => {
   return useQuery(
     ['raions', departmentId],
@@ -238,13 +261,14 @@ export const getRaionsOptions = (
       return resultOptions || []
     },
     {
-      onError: error => handleQueryError(error, 'A aparut o eroare la obtinerea raioanelor.'),
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea raioanelor.', showNotification),
       enabled: shouldFetchRaions
     }
   )
 }
 
-export const getEmployeesOptions = () => {
+export const getEmployeesOptions = (showNotification: Function) => {
   return useQuery(
     ['employees-options'],
     async () => {
@@ -267,7 +291,8 @@ export const getEmployeesOptions = () => {
       return toEmployeeFilterItems(employeesWithShifts) || []
     },
     {
-      onError: error => handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.')
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification)
     }
   )
 }

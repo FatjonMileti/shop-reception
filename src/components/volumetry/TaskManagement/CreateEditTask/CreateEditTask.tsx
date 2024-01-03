@@ -35,7 +35,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
   const { isModalOpen, closeModal, isEdit, editItemId, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
-  const { data: editItem } = getTask(editItemId)
+  const { data: editItem } = getTask(editItemId, showNotification)
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItemId, editItem])
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItemId])
@@ -56,26 +56,37 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
   const departmentId = formik.values.rayonsOrDepartment?.value
   const shouldFetchRaions = formik.values.rayonsOrDepartment !== null
 
-  const { data: categoryOptions } = getCategoriesOptions()
-  const { data: priorityOptions } = getPrioritiesOptions()
+  const { data: categoryOptions } = getCategoriesOptions(showNotification)
+  const { data: priorityOptions } = getPrioritiesOptions(showNotification)
   const { data: departmentOptions, isLoading: isDepartmentsOptionsLoading } =
-    getCategoryDepartmentsOptions(categoryId, shouldFetchDepartments)
+    getCategoryDepartmentsOptions(categoryId, shouldFetchDepartments, showNotification)
 
   const { data: raionOptions, isLoading: isRaionOptionsLoading } = getRaionsOptions(
     departmentId,
     shouldFetchRaions,
-    value => formik.setFieldValue('raion', value)
+    value => formik.setFieldValue('raion', value),
+    showNotification
   )
 
-  const { data: frequencyOptions } = getFrequencyOptions()
-  const { data: measurementUnitsOptions } = getMeasurementUnitsOptions()
-  const { data: workVolumeSourceOptions } = getWorkVolumesOptions()
+  const { data: frequencyOptions } = getFrequencyOptions(showNotification)
+  const { data: measurementUnitsOptions } = getMeasurementUnitsOptions(showNotification)
+  const { data: workVolumeSourceOptions } = getWorkVolumesOptions(showNotification)
 
-  const submitTask = async (values: TaskManagementItem) => {
+  const submitTask = async values => {
+    const payload = {
+      ...values,
+      volumetryLocationCategory: values.volumetryLocationCategory.value,
+      rayonsOrDepartment: values.rayonsOrDepartment.value,
+      raion: values.raion.value,
+      frequency: values.frequency.value,
+      measurementUnit: values.measurementUnit.value,
+      workVolumeSource: values.workVolumeSource.value,
+      priority: values.priority.value
+    }
     if (editItem) {
-      await makeCorePutRequest(`/volumetry/task-templates/${editItemId}`, values)
+      await makeCorePutRequest(`/volumetry/task-templates/${editItemId}`, payload)
     } else {
-      await makeCorePostRequest('/volumetry/task-templates/', values)
+      await makeCorePostRequest('/volumetry/task-templates/', payload)
     }
   }
 
@@ -88,7 +99,8 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
         type: 'success'
       })
     },
-    onError: error => handleQueryError(error, 'A aparut o eroare la salvarea taskului.')
+    onError: error =>
+      handleQueryError(error, 'A aparut o eroare la salvarea taskului.', showNotification)
   })
 
   return (

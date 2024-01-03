@@ -4,6 +4,7 @@ import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { makeCoreDeleteRequest } from 'utils/api'
 import { handleQueryError } from 'components/volumetry/utils'
+import { useNotification } from 'hooks'
 
 interface DeleteCollaboratorProps {
   isModalOpen: boolean
@@ -15,6 +16,8 @@ interface DeleteCollaboratorProps {
 const DeleteCollaborator: React.FC<DeleteCollaboratorProps> = props => {
   const { isModalOpen, closeModal, itemId, setShouldRefreshData } = props
 
+  const { showNotification } = useNotification()
+
   const onDelete = async () => {
     try {
       await makeCoreDeleteRequest(`/volumetry/workers/contractors/${itemId}`)
@@ -22,7 +25,7 @@ const DeleteCollaborator: React.FC<DeleteCollaboratorProps> = props => {
       closeModal()
       setShouldRefreshData(true)
     } catch (error) {
-      handleQueryError(error, 'Eroare la stergerea colaboratorului ')
+      handleQueryError(error, 'Eroare la stergerea colaboratorului ', showNotification)
     }
   }
 
