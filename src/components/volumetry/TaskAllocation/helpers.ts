@@ -20,7 +20,7 @@ export const getEmployeeGroupName = groupBy => {
       return 'Angajati pe tura'
     case 'OFF_SHIFT':
       return 'Angajati care nu sunt pe tura'
-    case 'MERCHENDISER':
+    case 'COLLABORATOR':
       return 'Colaboratori'
     default:
       return ''

@@ -1,25 +1,25 @@
 import { Input } from 'components/core-ui/Input'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { STATE_OPTIONS } from './constants'
-import { ValueLabelInterface } from '../interfaces'
+import { AutocompleteOption } from '../interfaces'
 
 export const buildTableFilterFields = (
-  departmentOptions: ValueLabelInterface[],
-  frequencyOptions: ValueLabelInterface[],
-  categoryOptions: ValueLabelInterface[]
+  departmentOptions: AutocompleteOption[],
+  frequencyOptions: AutocompleteOption[],
+  categoryOptions: AutocompleteOption[]
 ) => [
   {
-    name: 'department',
+    name: 'rayonsOrDepartment',
     label: 'Dapartament',
     type: 'autocomplete',
     value: '',
     filter: <Autocomplete label="Departament" variant="outlined" options={departmentOptions} />
   },
   {
-    name: 'taskName',
+    name: 'name',
     label: 'Nume Task',
     type: 'text',
-    filter: <Input type="text" name="taskName" label="Nume" variant="outlined" />
+    filter: <Input type="text" name="name" label="Nume" variant="outlined" />
   },
   {
     name: 'priority',
@@ -49,7 +49,7 @@ export const buildTableFilterFields = (
     )
   },
   {
-    name: 'category',
+    name: 'volumetryLocationCategory',
     label: 'Categorie',
     type: 'autocomplete',
     value: '',
@@ -57,6 +57,6 @@ export const buildTableFilterFields = (
   }
 ]
 
-export const mapToValueLabel = (list): ValueLabelInterface[] => {
+export const mapToValueLabel = (list): AutocompleteOption[] => {
   return list.map(item => ({ label: item.name, value: item.name }))
 }

@@ -4,31 +4,43 @@ import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { useNotification } from 'hooks'
 import { useFormik } from 'formik'
-import { validationSchema } from './helpers'
-import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
-import { useMutation, useQuery } from 'react-query'
-import { formatErrorMessage } from 'utils/formatting'
-import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
+import { getInitialValues, getValidationSchema } from './helpers'
+import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { useMutation } from 'react-query'
+import { EmployeeManagementItem } from 'components/volumetry/interfaces'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { handleQueryError } from 'components/volumetry/utils'
+import { AsyncAutocompleteOption } from 'components/core-ui/AsyncAutocomplete/AsyncAutocompleteDefinitions'
+import { useMemo } from 'react'
 
 interface CreateEditCollaboratorProps {
   isModalOpen: boolean
   closeModal: Function
-  editItem?: EmployeeManagementItem | number
+  editItem?: EmployeeManagementItem
   setShouldRefreshData: Function
+  departmentsOptions: AsyncAutocompleteOption[]
+  isDepartmentsOptionsLoading: boolean
+  jobTitlesOptions: AsyncAutocompleteOption[]
+  isjobTitlesOptionsLoading: boolean
 }
 
 const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
-  const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
+  const {
+    isModalOpen,
+    closeModal,
+    editItem,
+    setShouldRefreshData,
+    departmentsOptions,
+    isDepartmentsOptionsLoading,
+    jobTitlesOptions,
+    isjobTitlesOptionsLoading
+  } = props
   const { showNotification } = useNotification()
 
-  const mutateCollaborator = async values => {
+  const mutateCollaborator = async (values: EmployeeManagementItem) => {
     editItem
-      ? await makeCorePutRequest(
-          `/volumetry/merchendiser/${(editItem as EmployeeManagementItem)?.id}`,
-          values
-        )
-      : await makeCorePostRequest(`/volumetry/merchendiser`, values)
+      ? await makeCorePutRequest(`/volumetry/workers/contractors/${editItem?.id}`, values)
+      : await makeCorePostRequest(`/volumetry/workers/contractors`, values)
   }
 
   const { isLoading, mutate } = useMutation(mutateCollaborator, {
@@ -36,72 +48,21 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
       setShouldRefreshData(true)
       closeModal()
       showNotification({
-        message: editItem
-          ? 'Colaboratorul a fost editat cu success!'
-          : 'Colaboratorul a fost adaugat cu success!',
+        message: `Colaboratorul a fost ${editItem ? 'editat' : 'adaugat'} cu succes!`,
         type: 'success'
       })
     },
-    onError: res => {
-      showNotification({
-        message: editItem
-          ? `Eroare la editarea colaboratorului. ${formatErrorMessage(res)}`
-          : `Eroare la adaugarea colaboratorului. ${formatErrorMessage(res)}`,
-        type: 'error'
-      })
-    }
+    onError: error =>
+      handleQueryError(error, `Eroare la ${editItem ? 'editarea' : 'adaugarea colaboratorului.'}`)
   })
 
-  const { data: volumetryDepartmentOptions, isLoading: isVolumetryDepartmentLoading } = useQuery(
-    ['volumetry-department'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/department')
-      const resultOptions = result.list.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
-      )
-
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const { data: volumetryPositionOptions, isLoading: isVolumetryPositionLoading } = useQuery(
-    ['volumetry-position'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/position')
-      const resultOptions = result.list.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
-      )
-
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
+  const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+  const validationSchema = useMemo(() => getValidationSchema(), [editItem])
 
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    initialValues: {
-      id: (editItem as EmployeeManagementItem)?.id || 0,
-      name: (editItem as EmployeeManagementItem)?.name || '',
-      departmentName: (editItem as EmployeeManagementItem)?.departmentName || '',
-      position: (editItem as EmployeeManagementItem)?.position || '',
-      employer: (editItem as EmployeeManagementItem)?.employer || ''
-    },
+    initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: EmployeeManagementItem) => {
       mutate(values)
@@ -115,7 +76,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
       modalTitle={editItem ? 'Editeaza colaborator' : 'Adauga colaborator'}
     >
       <Grid container spacing={4}>
-        {(isLoading || isVolumetryDepartmentLoading || isVolumetryPositionLoading) && (
+        {(isLoading || isDepartmentsOptionsLoading || isjobTitlesOptionsLoading) && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         )}
         <Grid xs={12} item>
@@ -125,10 +86,10 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             label="Nume colaborator"
             fullWidth
             variant="outlined"
-            value={formik.values.name}
-            onChange={event => formik.setFieldValue('name', event.currentTarget.value)}
-            error={!!formik.errors.name}
-            helperText={formik.errors.name as string}
+            value={formik.values.fullName}
+            onChange={event => formik.setFieldValue('fullName', event.currentTarget.value)}
+            error={!!formik.errors.fullName}
+            helperText={formik.errors.fullName as string}
           />
         </Grid>
 
@@ -138,9 +99,9 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             name="department.name"
             label="Selecteaza magazin"
             disableClearable
-            value={{ value: formik.values.departmentName, label: formik.values.departmentName }}
-            options={volumetryDepartmentOptions}
-            onChange={event => formik.setFieldValue('departmentName', event.value)}
+            value={{ value: formik.values.department, label: formik.values.department }}
+            options={departmentsOptions || []}
+            onChange={event => formik.setFieldValue('department', event.value)}
           />
         </Grid>
 
@@ -150,9 +111,9 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             name="position.name"
             label="Selecteaza functia"
             disableClearable
-            value={{ value: formik.values.position, label: formik.values.position }}
-            options={volumetryPositionOptions}
-            onChange={event => formik.setFieldValue('position', event.value)}
+            value={{ value: formik.values.jobTitle, label: formik.values.jobTitle }}
+            options={jobTitlesOptions || []}
+            onChange={event => formik.setFieldValue('jobTitle', event.value)}
           />
         </Grid>
 

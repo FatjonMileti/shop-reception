@@ -3,7 +3,7 @@ import BooleanIcon from 'components/core-ui/BooleanIcon/BooleanIcon'
 import { DescriptionText } from 'components/core-ui/DescriptionText'
 import { IconCell } from 'components/core-ui/IconCell'
 
-export const VOLUMETRY_TASKS_URL = '/volumetry/task'
+export const VOLUMETRY_TASKS_URL = '/volumetry/task-templates'
 export const VOLUMETRY_DEPARTMENTS_URL = '/volumetry/department?&size=-1'
 export const VOLUMETRY_FREQUENCIES_URL = '/volumetry/frequency?&size=-1'
 export const VOLUMETRY_CATEGORIES_URL = '/volumetry/category?&size=-1'

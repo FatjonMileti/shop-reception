@@ -3,33 +3,26 @@ import { Grid, Typography } from '@mui/material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { makeCoreDeleteRequest } from 'utils/api'
-import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
+import { handleQueryError } from 'components/volumetry/utils'
 
 interface DeleteCollaboratorProps {
   isModalOpen: boolean
   closeModal: Function
-  deleteItem: any
+  itemId: string | number
   setShouldRefreshData: Function
 }
 
 const DeleteCollaborator: React.FC<DeleteCollaboratorProps> = props => {
-  const { isModalOpen, closeModal, deleteItem, setShouldRefreshData } = props
-  const { showNotification } = useNotification()
+  const { isModalOpen, closeModal, itemId, setShouldRefreshData } = props
 
   const onDelete = async () => {
     try {
-      const itemId = (deleteItem as any)?.id
-
-      await makeCoreDeleteRequest(`/volumetry/merchendiser/${itemId}`)
+      await makeCoreDeleteRequest(`/volumetry/workers/contractors/${itemId}`)
 
       closeModal()
       setShouldRefreshData(true)
     } catch (error) {
-      showNotification({
-        message: `Eroare la stergerea colaboratorului. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      handleQueryError(error, 'Eroare la stergerea colaboratorului ')
     }
   }
 

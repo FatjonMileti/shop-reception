@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
 import s from './TaskAllocation.modules.scss'
 import { ValueLabelInterface } from '../interfaces'
-import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toDepartmentOptions, toListTableRows } from './serializers'
+import { toListTableRows } from './serializers'
 import { CircularProgress, Grid, debounce } from '@mui/material'
 import { FilterDataSelect, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import TaskDescription from './TaskDescription'
 import { EditActionIcon } from 'icons'
 import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
+import { getDepartmentsOptions } from '../api'
+import { handleQueryError } from '../utils'
 
 const TaskAllocation = () => {
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
@@ -56,36 +57,17 @@ const TaskAllocation = () => {
     })()
   }, [shouldRefreshAllocationsData])
 
-  const { data: departments, isLoading: isDepartmentsLoading } = useQuery(
-    ['departments'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/department')
-      const departmentOptions = toDepartmentOptions(result.list)
+  const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
+    getDepartmentsOptions()
 
-      setDepartmentFilterValue(departmentOptions[0])
-
-      return departmentOptions
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A aparut o eroare la preluarea datelor de optiuni pentru departamente. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const handleDepartmentFilterChange = value => {
+  const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
     setShouldRefreshTaskData(true)
   }
 
   const handleRemoteDetails = async (rowId: string) => {
     setSelectedRowId(rowId)
-    const response = await makeCoreGetRequest(`/volumetry/taskAllocation/details/${rowId}`)
+    const response = await makeCoreGetRequest(`/volumetry/task-allocation/details/${rowId}`)
     const data = await response
     const item = tableItems.find(tableItem => tableItem.id === rowId)
 
@@ -105,7 +87,7 @@ const TaskAllocation = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/volumetry/taskAllocation',
+          url: '/volumetry/task-allocation',
           filters: [{ name: 'department', value: departmentFilterValue.value }],
           tableFilters,
           page,
@@ -124,15 +106,11 @@ const TaskAllocation = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      showNotification({
-        message: `Error while fetching list data. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      error => handleQueryError(error, 'A aparut o eroare la obtinerea datelor pentru tabel.')
     }
   }
 
   const openEditTaskModal = (): void => setIsEditTaskModalOpen(true)
-
   const closeEditTaskModal = (): void => setIsEditTaskModalOpen(false)
 
   const selectRow = row => {
@@ -143,7 +121,7 @@ const TaskAllocation = () => {
   return (
     <div className={s.mainContainer}>
       <Grid container spacing={4}>
-        {isDepartmentsLoading ? (
+        {isDepartmentsOptionsLoading ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
@@ -157,8 +135,8 @@ const TaskAllocation = () => {
               showSearch={true}
               counterLabel="Select department"
               noDataFoundLabel="No results!"
-              options={departments}
-              onSelect={handleDepartmentFilterChange}
+              options={departmentsOptions}
+              onSelect={handleDepartmentOptionChange}
             />
           </Grid>
         )}

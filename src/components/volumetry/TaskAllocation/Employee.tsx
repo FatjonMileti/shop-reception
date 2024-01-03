@@ -8,8 +8,8 @@ import { getCapsuleColor } from './helpers'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
 import { EditAllocationModal } from './EditAllocationModal'
+import { handleQueryError } from '../utils'
 
 interface EmployeeProps {
   employee: any // TODO: To add type when db schema is defined
@@ -72,12 +72,7 @@ const Employee: React.FC<EmployeeProps> = props => {
         type: 'success'
       })
     },
-    onError: res => {
-      showNotification({
-        message: `A aparut o eroare ${formatErrorMessage(res)}`,
-        type: 'error'
-      })
-    }
+    onError: error => handleQueryError(error, 'A aparut o eroare la inceperea taskului.')
   })
 
   return (
