@@ -33,7 +33,7 @@ INSERT INTO
 VALUES
     -- Governance
     (1, 'Project Team', 'ProjectTeamGovernance', '/projectTeam', true, 1),
-    -- Bakery
+    -- Bakery p1
     (2, 'Admin', 'Admin', '/admin', true, 2),
     (3, 'Formator/ RQ Regional', 'Formator', '/formator', true, 2),
     (4, 'Manager magazin/raion', 'StoreManager', '/storeManager', true, 2),
@@ -44,7 +44,9 @@ VALUES
     (7, 'Administrare Angajati', 'EmployeeManagement', '/employeeManagement', true, 4),
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
     -- Shop Reception
-    (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5);
+    (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5),
+    -- Bakery p2
+    (10, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2);
 
 
 -- activity with submodule id
@@ -100,7 +102,14 @@ VALUES
     (43, 'Management task template-uri', 'ManagementTasks', null, true, 8),
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
     -- Shop Reception
-    (45, 'Admin magazin', 'UsersManagement', null, true, 9);
+    (45, 'Admin magazin', 'UsersManagement', null, true, 9),
+    -- Bakery TRACEABILITY OP
+    (46, 'Management produse', 'ProductManagementTO', null, true, 10),
+    (47, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
+    (48, 'Trasabilitate congelate', 'FrozenTraceabilityTO', null, true, 10),
+    (49, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', null, true, 10),
+    (50, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
+    (51, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10);
 
 
 -- screen with activity id (some are first screens)
@@ -175,8 +184,16 @@ VALUES
     (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
     -- Shop Reception
-    (61, 'Screen 1', '', '/url', true, 45, true);
-
+    (61, 'Screen 1', '', '/url', true, 45, true),
+    -- Bakery TRACEABILITY-OPERATOR
+    (62, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 46, true),
+    (63, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 47, true),
+    (64, 'Trasabilitate congelate', 'FrozenTraceabilityTO', '/bakery/traceabilityOperator/frozen-traceability', true, 48, true),
+    (65, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', '/bakery/traceabilityOperator/own-production-traceability', true, 49, true),
+    (66, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report', true, 50, true),
+    (67, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report-print', true, 50, false),
+    (68, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 51, true),
+    (69, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 51, false);
 
 -- UI Schema with activity id and screen id
 INSERT INTO
@@ -263,6 +280,8 @@ values
   (8, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE'),
   (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
   (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER'),
+  (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
+--   TODO
   -- Supply OMNI
   (11, 'GG_RO_HQ_IT-C4ASSIST');
 
@@ -293,6 +312,8 @@ VALUES
     (9, 17), (9, 18), (9, 19), (9, 20), (9, 21), (9, 22), (9, 23),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER
     (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23),
+    -- GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY
+    (12, 46), (12, 47), (12, 48), (12, 49), (12, 50), (12, 51),
     -- Supply OMNI
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
