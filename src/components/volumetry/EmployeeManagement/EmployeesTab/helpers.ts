@@ -1,19 +1,19 @@
 export const columns = [
   {
     title: 'Departament',
-    field: 'departmentName',
+    field: 'department',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Nume',
-    field: 'name',
+    field: 'fullName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Functie',
-    field: 'position',
+    field: 'jobTitle',
     align: 'left',
     collapsible: true,
     type: 'string'

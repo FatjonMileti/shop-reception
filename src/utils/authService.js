@@ -4,13 +4,18 @@ import jwt_decode from 'jwt-decode'
 
 export const oidcConfig = {
   onBeforeSignIn: () => {
-    localStorage.setItem('beforeLogin', location.pathname)
+    if (!process.env.POST_LOGOUT_REDIRECT_URI.includes(location.pathname)) {
+      localStorage.setItem('beforeLogin', location.pathname)
+    }
   },
   onSignIn: async user => {
     setToken(user.id_token)
     const beforeLoginUrl = localStorage.getItem('beforeLogin')
     localStorage.removeItem('beforeLogin')
-    window.location.href = beforeLoginUrl
+    window.location.href = beforeLoginUrl ? beforeLoginUrl : '/'
+  },
+  onSignOut: () => {
+    localStorage.removeItem('beforeLogin')
   },
   authority: process.env.AUTHORITY,
   clientId: process.env.CLIENT_ID,

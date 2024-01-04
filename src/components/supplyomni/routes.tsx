@@ -13,6 +13,7 @@ import { ReceiptInvoiceFinalized } from './ReceiptInvoiceFinalized'
 import { ReceiptClientDetails } from './ReceiptClientDetails'
 import { ReceiptSelectClient } from './ReceiptSelectClient'
 import BillsTables from './BillsTables'
+import { Bill } from './Bill'
 
 export const useSupplyOmniRoutes = applicationPages => {
   return (
@@ -120,6 +121,16 @@ export const useSupplyOmniRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={BillsTables}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_BILL}
+        element={
+          <PrivateRoute
+            component={Bill}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
