@@ -1,12 +1,12 @@
 import { JSXElementConstructor, ReactElement } from 'react'
 export interface Filter {
   name: string
-  value: string | string[] | AutoCompleteValue | AutoCompleteValue[] | null
+  value: string | number | string[] | AutoCompleteValue | AutoCompleteValue[] | null
 }
 
 export interface AutoCompleteValue {
-  label: string;
-  value: string;
+  label: string
+  value: string
 }
 
 enum FilterType {
