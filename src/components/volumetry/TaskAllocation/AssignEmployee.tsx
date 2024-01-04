@@ -4,42 +4,37 @@ import { Modal } from 'components/core-ui/Modal'
 import s from './TaskAllocation.modules.scss'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { Input } from 'components/core-ui/Input'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useMemo } from 'react'
 import { useFormik } from 'formik'
-import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
-import { useMutation, useQuery } from 'react-query'
+import { makeCorePostRequest } from 'utils/api'
+import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { toEmployeeFilterItems } from './helpers'
+import { getEmployeesOptions } from '../api'
+import { handleQueryError } from '../utils'
 
+interface ProdStandardUM {
+  id: number
+  name: string
+  unit: string
+}
 interface AssignEmployeeProps {
   isModalOpen: boolean
   closeModal: Function
   taskName: string
   department: string
+  prodStandardUM: ProdStandardUM
+  setShouldRefreshData: Function
 }
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
-  const { isModalOpen, closeModal, taskName, department } = props
+  const { isModalOpen, closeModal, taskName, department, prodStandardUM, setShouldRefreshData } =
+    props
   const { showNotification } = useNotification()
 
-  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } = useQuery(
-    ['employees'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/employee')
+  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } =
+    getEmployeesOptions(showNotification, isModalOpen)
 
-      return toEmployeeFilterItems(result.list) || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
   const assignEmployee = async values => {
     await makeCorePostRequest('/volumetry/taskAllocation/assignEmployee', values)
   }
@@ -51,24 +46,19 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
         message: `Employee assigned successfully!`,
         type: 'success'
       })
+
+      setShouldRefreshData(true)
     },
-    onError: res => {
-      showNotification({
-        message: `Error while assigning employee, ${formatErrorMessage(res)}`,
-        type: 'error'
-      })
-    }
+    onError: error =>
+      handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      selectEmployee: {
-        value: '',
-        label: ''
-      },
-      volume: ''
+      selectEmployee: null,
+      volume: null
     },
     onSubmit: async (values, { resetForm }) => {
       const payload = { volume: values.volume, selectEmployee: values.selectEmployee.value }
@@ -85,7 +75,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: taskName },
-              { label: 'Dep.:', name: department }
+              { label: 'Departament/Raion:', name: department },
+              { label: 'UM:', name: `${prodStandardUM.name}/${prodStandardUM.unit}` }
             ]}
           />
         </Grid>
@@ -101,6 +92,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
               onChange={(value: ChangeEvent<HTMLInputElement>) =>
                 formik.setFieldValue('selectEmployee', value)
               }
+              groupBy={option => option.groupBy}
             />
           )}
         </Grid>
@@ -109,7 +101,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <Input
             type="text"
             name="volume"
-            label="Volum paleti/ora"
+            label="Volum"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue('volume', event.target.value)

@@ -119,7 +119,7 @@ const ProductionManagementStore = () => {
           url: '/bakery/store/cadentier',
           filters: filters,
           page,
-          rowsPerPage: 25,
+          rowsPerPage,
           order,
           orderBy,
           searchText,
@@ -148,7 +148,7 @@ const ProductionManagementStore = () => {
           ...window.history.state,
           tableState: {
             page,
-            rowsPerPage: 25,
+            rowsPerPage,
             order,
             orderBy,
             searchText,
@@ -305,6 +305,8 @@ const ProductionManagementStore = () => {
                 }
               ]}
               rowActionsWidth="130px"
+              rowsPerPage={25}
+              rowsPerPageOptions={[25, 50, 100]}
             />
           </>
         )}

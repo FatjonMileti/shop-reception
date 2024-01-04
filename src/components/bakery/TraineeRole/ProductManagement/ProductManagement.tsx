@@ -235,6 +235,8 @@ const ProductManagement = () => {
             hasStickyHeader
             maxHeight={'600px'}
             hasSearchInput
+            rowsPerPage={25}
+            rowsPerPageOptions={[25, 50, 100]}
           />
         )}
       </Grid>

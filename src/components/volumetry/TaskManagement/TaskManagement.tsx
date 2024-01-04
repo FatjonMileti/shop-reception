@@ -1,43 +1,45 @@
 import { useState } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './TaskManagement.modules.scss'
-import BooleanIcon from 'components/core-ui/BooleanIcon/BooleanIcon'
-import { TaskManagementItem } from '../interfaces'
+import { CRUDAction, TaskManagementItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { formatErrorMessage } from 'utils/formatting'
-import { useNotification } from 'hooks'
-import { Input } from 'components/core-ui/Input'
-import { NewTask } from './NewTask'
 import { toTableItems } from './serializers'
-import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
-import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
+import { AddActionIcon, EditActionIcon } from 'icons'
+import { IconCell } from 'components/core-ui/IconCell'
+import { DescriptionText } from 'components/core-ui/DescriptionText'
+import { handleQueryError } from '../utils'
+import { CreateEditTask } from './CreateEditTask'
+import { VOLUMETRY_TASKS_URL } from './constants'
+import { buildTableFilterFields } from './utils'
+import { getCategoriesOptions, getDepartmentsOptions, getFrequencyOptions } from '../api'
+import { useNotification } from 'hooks'
 
 export const columns = [
   {
-    title: 'Departament',
-    field: 'department',
+    title: 'Departament / Raioane',
+    field: 'rayonsOrDepartment',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Nume task',
-    field: 'taskName',
+    field: 'name',
     align: 'left',
     type: 'string',
     width: '250px'
   },
   {
     title: 'Ora recomandata de inceput',
-    field: 'estimateStartTime',
+    field: 'recommendedStartHour',
     align: 'left',
     type: 'string',
     collapsible: true
   },
   {
-    title: 'Ora estimata de final',
-    field: 'estimateEndTime',
+    title: 'Ora recomandata de final',
+    field: 'recommendedEndHour',
     align: 'left',
     type: 'string',
     collapsible: true
@@ -50,15 +52,8 @@ export const columns = [
     collapsible: true
   },
   {
-    title: 'Valoare productivitate standard',
-    field: 'prodStandardValue',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'UM standard productivitate',
-    field: 'prodStandardUM',
+    title: 'Productivitate',
+    field: 'standardProductivityValue',
     align: 'left',
     type: 'string',
     collapsible: true
@@ -68,7 +63,9 @@ export const columns = [
     field: 'workVolumeSource',
     align: 'left',
     type: 'string',
-    collapsible: true
+    collapsible: true,
+    minWidth: '200px',
+    render: row => <DescriptionText value={row.workVolumeSource} />
   },
   {
     title: 'Prioritate',
@@ -78,43 +75,24 @@ export const columns = [
     collapsible: true
   },
   {
-    title: 'Stare',
-    field: 'status',
+    title: 'Categorie',
+    field: 'volumetryLocationCategory',
     align: 'left',
     type: 'string',
-    render: row => (
-      <BooleanIcon icon="CheckOutlined" value={row.status} onSuccess="#33691E" onFailure="E5E5E5" />
-    ),
     collapsible: true
-  }
-]
-
-const tableFilterFields = [
-  {
-    name: 'department',
-    label: 'Departament',
-    type: 'text',
-    filter: <Input type="text" name="department" label="Departament" variant="outlined" value="" />
   },
   {
-    name: 'taskName',
-    label: 'Nume Task',
-    type: 'text',
-    filter: <Input type="text" name="taskName" label="Nume" variant="outlined" />
-  },
-  {
-    name: 'priority',
-    label: 'Prioritate',
-    type: 'number',
-    filter: <Input type="number" name="priority" label="Prioritate" variant="outlined" />
+    title: 'Activ',
+    field: 'isActive',
+    align: 'left',
+    type: 'string',
+    collapsible: true,
+    render: row => (
+      <Box>
+        <IconCell value={row.isActive ? 'active' : 'inactive'} />
+      </Box>
+    )
   }
-  // TODO see what should be used here for boolean
-  // {
-  //   name: 'state',
-  //   label: 'Stare',
-  //   type: 'boolean',
-  //   filter: <Input type="text" name="state" label="Stare" variant="outlined" />
-  // }
 ]
 
 const TaskManagement = () => {
@@ -122,18 +100,20 @@ const TaskManagement = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
+  const [selectedRowId, setSelectedRowId] = useState<string | number>(null)
 
   const { showNotification } = useNotification()
+
+  const { data: categoryOptions } = getCategoriesOptions(showNotification)
+  const { data: departmentOptions } = getDepartmentsOptions(showNotification)
+  const { data: frequencyOptions } = getFrequencyOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/volumetry/task',
+          url: VOLUMETRY_TASKS_URL,
           tableFilters,
           page,
           rowsPerPage,
@@ -146,35 +126,30 @@ const TaskManagement = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      handleQueryError(error, 'Error while fetching table data', showNotification)
     }
   }
 
-  const openNewModal = (): void => setIsNewModalOpen(true)
-  const closeNewModal = (): void => setIsNewModalOpen(false)
-
-  const openEditModal = (): void => setIsEditModalOpen(true)
-  const closeEditModal = (): void => setIsEditModalOpen(false)
+  const [modal, setModal] = useState<CRUDAction>(null)
+  const openModal = (action: CRUDAction) => setModal(action)
+  const closeModal = () => setModal(null)
 
   const selectRow = (rowId: number) => {
     setSelectedRowId(rowId)
-    openEditModal()
+    openModal('edit')
   }
 
   return (
     <div className={s.mainContainer}>
       <Box>
-        <NewTask
-          isModalOpen={isNewModalOpen}
-          closeModal={closeNewModal}
+        <CreateEditTask
+          isModalOpen={modal === 'create'}
+          closeModal={closeModal}
           setShouldRefreshData={setShouldRefreshData}
         />
-        <NewTask
-          isModalOpen={isEditModalOpen}
-          closeModal={closeEditModal}
+        <CreateEditTask
+          isModalOpen={modal === 'edit'}
+          closeModal={closeModal}
           editItemId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
           isEdit
@@ -190,7 +165,11 @@ const TaskManagement = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          filters={tableFilterFields}
+          filters={buildTableFilterFields(
+            departmentOptions || [],
+            frequencyOptions || [],
+            categoryOptions || []
+          )}
           rowActions={[
             {
               label: 'Edit',
@@ -198,7 +177,7 @@ const TaskManagement = () => {
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
               desktopIcon: <EditActionIcon />,
-              onClick: (e, rowId) => selectRow(rowId)
+              onClick: (_e, rowId: number) => selectRow(rowId)
             }
           ]}
           rowActionsWidth="130px"
@@ -206,7 +185,7 @@ const TaskManagement = () => {
             {
               label: 'Adauga',
               icon: <AddActionIcon />,
-              onClick: openNewModal
+              onClick: () => openModal('create')
             }
           ]}
         />

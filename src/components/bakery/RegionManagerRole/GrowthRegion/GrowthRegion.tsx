@@ -136,7 +136,7 @@ const GrowthRegion = () => {
     setShouldRefreshData(true)
   }
 
-  const fetchData = async ({ page, order, orderBy, searchText }) => {
+  const fetchData = async ({ page, order, orderBy, rowsPerPage, searchText }) => {
     setIsLoading(true)
     try {
       const filters = [
@@ -152,7 +152,7 @@ const GrowthRegion = () => {
           url: '/bakery/region/cadentier',
           filters: filters,
           page,
-          rowsPerPage: 25,
+          rowsPerPage,
           order,
           orderBy,
           searchText,
@@ -183,7 +183,7 @@ const GrowthRegion = () => {
           ...window.history.state,
           tableState: {
             page,
-            rowsPerPage: 25,
+            rowsPerPage,
             order,
             orderBy,
             searchText,
@@ -303,6 +303,8 @@ const GrowthRegion = () => {
             order={tableState.order}
             orderBy={tableState.orderBy}
             tableFilters={tableState.tableFilters}
+            rowsPerPage={25}
+            rowsPerPageOptions={[25, 50, 100]}
           />
         )}
       </Grid>

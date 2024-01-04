@@ -49,4 +49,10 @@ export { default as GrowthIndexStoreSubcategory } from './submodules/storeManage
 export { default as ProductGrowthIndexSubcategory } from './submodules/storeManager/ProductGrowthIndexSubcategory'
 export { default as CadentierSalesStoreSubcategory } from './submodules/storeManager/CadentierSalesStoreSubcategory'
 
-/* TODO add traceability operator sub icons once screens are created */
+/* traceability operator sub  */
+export { default as FrozenTraceabilityReportTOSubcategory } from './submodules/traceabilityOperator/FrozenTraceabilityReportTOSubcategory'
+export { default as FrozenTraceabilityTOSubcategory } from './submodules/traceabilityOperator/FrozenTraceabilityTOSubcategory'
+export { default as OwnProductionTraceabilityReportTOSubcategory } from './submodules/traceabilityOperator/OwnProductionTraceabilityReportTOSubcategory'
+export { default as OwnProductionTraceabilityTOSubcategory } from './submodules/traceabilityOperator/OwnProductionTraceabilityTOSubcategory'
+export { default as ProductManagementTOSubcategory } from './submodules/traceabilityOperator/ProductManagementTOSubcategory'
+export { default as ReceivedProductsTOSubcategory } from './submodules/traceabilityOperator/ReceivedProductsTOSubcategory'

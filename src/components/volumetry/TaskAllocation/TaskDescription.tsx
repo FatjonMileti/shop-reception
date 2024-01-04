@@ -1,23 +1,36 @@
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '@mui/material'
-import { Capsule } from 'components/core-ui/Capsule'
+import { Button, ListTableActionsItems } from '@fullscreendigital/carrefour-dex-fe'
+import { Box, Grid, Typography, useMediaQuery } from '@mui/material'
 import { useEffect, useState } from 'react'
 import AssignEmployee from './AssignEmployee'
-import Employee from './Employee'
+import { toEmployeesItems } from './serializers'
+import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { EditAllocationModal } from './EditAllocationModal'
+import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
+import { CRUDAction } from '../interfaces'
 
 interface TaskDescriptionProps {
   item: any // TODO: To add type when db schema is defined
+  shouldRefreshData: boolean
+  setShouldRefreshData: Function
+  setShouldRefreshTaskData: Function
   employees?: any[] // TODO: To add type when db schema is defined
 }
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
-  const { item, employees } = props
+  const { item, employees, setShouldRefreshData, setShouldRefreshTaskData } = props
 
   const { taskName, department } = item.item || item
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [employeesItems, setEmployeesItems] = useState([])
+  const [selectedRow, setSelectedRow] = useState(null) // TODO: To add interface when db schema is defined
 
-  const openModal = (): void => setIsModalOpen(true)
-  const closeModal = (): void => setIsModalOpen(false)
+  useEffect(() => {
+    setEmployeesItems(toEmployeesItems(item, employees, setShouldRefreshData))
+  }, [employees])
+
+  const [modal, setModal] = useState<CRUDAction>(null)
+
+  const openModal = (action): void => setModal(action)
+  const closeModal = (): void => setModal(null)
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 900)
 
@@ -32,13 +45,51 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
     }
   }, [])
 
+  const selectRow = (row, action) => {
+    setSelectedRow(row)
+    openModal(action)
+  }
+
   return (
     <Grid container flexDirection="column">
       {employees && (
         <Grid container flexDirection="column" pr={2}>
-          {employees.map(employee => (
-            <Employee employee={employee} task={item} />
-          ))}
+          <Box
+            sx={{
+              width: isMobile ? '100% !important' : 'auto'
+            }}
+          >
+            <ListTableActionsItems
+              items={employeesItems}
+              rowActions={[
+                {
+                  label: 'Editeaza',
+                  labelColor: 'white',
+                  typographyVariant: 'medium',
+                  backgroundColor: '#0970E6',
+                  desktopIcon: <EditActionIcon />,
+                  onClick: (_e, rowId) =>
+                    selectRow(
+                      employees.find(item => item.id === rowId),
+                      'edit'
+                    )
+                },
+                {
+                  label: 'Sterge',
+                  labelColor: 'white',
+                  typographyVariant: 'medium',
+                  backgroundColor: '#d9534f',
+                  desktopIcon: <DeleteActionIcon />,
+                  onClick: (_e, rowId) =>
+                    selectRow(
+                      employees.find(item => item.id === rowId),
+                      'delete'
+                    )
+                }
+              ]}
+              rowActionsWidth="200px"
+            />
+          </Box>
         </Grid>
       )}
 
@@ -46,16 +97,34 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         <Button
           variant="contained"
           label="Selecteaza angajat"
-          onClick={() => openModal()}
+          onClick={() => openModal('read')}
           style={{ textTransform: 'none', width: isMobile ? '100%' : 'auto' }}
         />
       </Grid>
 
       <AssignEmployee
-        isModalOpen={isModalOpen}
+        isModalOpen={modal === 'read'}
         closeModal={closeModal}
         taskName={taskName}
         department={department.name}
+        prodStandardUM={item.prodStandardUM}
+        setShouldRefreshData={setShouldRefreshTaskData}
+      />
+      <EditAllocationModal
+        isModalOpen={modal === 'edit'}
+        closeModal={closeModal}
+        editItem={selectedRow}
+        task={item}
+        setShouldRefreshData={setShouldRefreshData}
+      />
+      <DeleteConfirmationModal
+        isModalOpen={modal === 'delete'}
+        closeModal={closeModal}
+        actionUrl="/volumetry/taskAllocation/details/:id"
+        itemId={`${selectedRow?.id}`}
+        content={<Typography>Sunteti sigur ca vreti sa stergeti aceasta alocare?</Typography>}
+        setShouldRefreshData={setShouldRefreshData}
+        title="Sterge alocare"
       />
     </Grid>
   )

@@ -288,6 +288,8 @@ const ProductManagementStore = () => {
           rowActionsWidth="130px"
           filters={drawerFilters}
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </Box>
     </div>

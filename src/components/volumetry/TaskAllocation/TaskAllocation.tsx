@@ -1,66 +1,92 @@
-import { useState } from 'react'
-import s from './TaskAllocation.modules.scss'
-import { ValueLabelInterface } from '../interfaces'
-import { useQuery } from 'react-query'
-import { makeCoreGetRequest } from 'utils/api'
-import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
-import { toDepartmentOptions, toListTableRows } from './serializers'
-import { CircularProgress, Grid, debounce } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { FilterDataSelect, ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import { CircularProgress, Grid, debounce } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { EditActionIcon } from 'icons'
+import { useEffect, useState } from 'react'
+import { makeCoreGetRequest } from 'utils/api'
+import { getDepartmentsOptions } from '../api'
+import { ValueLabelInterface } from '../interfaces'
+import { handleQueryError } from '../utils'
+import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
+import s from './TaskAllocation.modules.scss'
 import TaskDescription from './TaskDescription'
+import { toListTableRows } from './serializers'
+import { useNotification } from 'hooks'
 
 const TaskAllocation = () => {
+  const { showNotification } = useNotification()
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
   const [rows, setRows] = useState([]) // TODO: To add interface when db schema is defined
   const [tableItems, setTableItems] = useState([]) // TODO: To add interface when db schema is defined
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  const { showNotification } = useNotification()
-
-  const { data: departments, isLoading: isDepartmentsLoading } = useQuery(
-    ['departments'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/department')
-      const departmentOptions = toDepartmentOptions(result.list)
-
-      setDepartmentFilterValue(departmentOptions[0])
-
-      return departmentOptions
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A aparut o eroare la preluarea datelor de optiuni pentru departamente. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      }
+  const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState(0) // TODO: To add interface when db schema is defined
+  const [shouldRefreshTaskData, setShouldRefreshTaskData] = useState<boolean>(false)
+  const [shouldRefreshAllocationsData, setShouldRefreshAllocationsData] = useState<boolean>(false)
+  const [tableState, setTableState] = useState(
+    window.history.state.tableState || {
+      page: 0,
+      rowsPerPage: 10,
+      tableFilters: []
     }
   )
+  const [selectedRowId, setSelectedRowId] = useState('')
 
-  const handleDepartmentFilterChange = value => {
+  useEffect(() => {
+    ;(async () => {
+      if (shouldRefreshTaskData) {
+        const { page, rowsPerPage, tableFilters } = tableState
+        await fetchData(page, rowsPerPage, tableFilters)
+        setShouldRefreshTaskData(false)
+      }
+    })()
+  }, [shouldRefreshTaskData])
+
+  useEffect(() => {
+    ;(async () => {
+      // TODO check when BE is done that the data is refreshed when changing allocations
+      if (shouldRefreshAllocationsData) {
+        const details = await handleRemoteDetails(selectedRowId)
+        const newRows = rows.map(row => (row.id === selectedRowId ? { ...row, details } : row))
+        setRows(newRows)
+        setShouldRefreshAllocationsData(false)
+      }
+    })()
+  }, [shouldRefreshAllocationsData])
+
+  const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
+    getDepartmentsOptions(showNotification, setDepartmentFilterValue)
+
+  const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
+    setShouldRefreshTaskData(true)
   }
 
   const handleRemoteDetails = async (rowId: string) => {
-    const response = await makeCoreGetRequest(`/volumetry/taskAllocation/details/${rowId}`)
+    setSelectedRowId(rowId)
+    const response = await makeCoreGetRequest(`/volumetry/task-allocation/details/${rowId}`)
     const data = await response
     const item = tableItems.find(tableItem => tableItem.id === rowId)
 
-    return <TaskDescription item={item} employees={data.list} />
+    return (
+      <TaskDescription
+        item={item}
+        employees={data.list}
+        shouldRefreshData={shouldRefreshAllocationsData}
+        setShouldRefreshData={setShouldRefreshAllocationsData}
+        setShouldRefreshTaskData={setShouldRefreshTaskData}
+      />
+    )
   }
 
   const fetchData = async (page, rowsPerPage, tableFilters) => {
     setIsLoading(true)
+    setTableState({ page, rowsPerPage, tableFilters })
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/volumetry/taskAllocation',
+          url: '/volumetry/task-allocation',
           filters: [{ name: 'department', value: departmentFilterValue.value }],
           tableFilters,
           page,
@@ -68,22 +94,39 @@ const TaskAllocation = () => {
         })
       )
 
-      setRows(toListTableRows(response.list))
+      setRows(
+        toListTableRows(
+          response.list,
+          shouldRefreshAllocationsData,
+          setShouldRefreshAllocationsData,
+          setShouldRefreshTaskData
+        )
+      )
       setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      showNotification({
-        message: `Error while fetching list data. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea datelor pentru tabel.',
+          showNotification
+        )
     }
+  }
+
+  const openEditTaskModal = (): void => setIsEditTaskModalOpen(true)
+  const closeEditTaskModal = (): void => setIsEditTaskModalOpen(false)
+
+  const selectRow = row => {
+    setSelectedRow(row)
+    openEditTaskModal()
   }
 
   return (
     <div className={s.mainContainer}>
       <Grid container spacing={4}>
-        {isDepartmentsLoading ? (
+        {isDepartmentsOptionsLoading ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
@@ -97,20 +140,39 @@ const TaskAllocation = () => {
               showSearch={true}
               counterLabel="Select department"
               noDataFoundLabel="No results!"
-              options={departments}
-              onSelect={handleDepartmentFilterChange}
+              options={departmentsOptions}
+              onSelect={handleDepartmentOptionChange}
             />
           </Grid>
         )}
       </Grid>
       {departmentFilterValue && (
-        <ListTable
-          rows={rows}
-          handleRemoteData={debounce(fetchData, 500)}
-          handleRemoteDetails={handleRemoteDetails}
-          isLoading={isLoading}
-          totalCount={totalCount}
-        />
+        <>
+          <ListTable
+            rows={rows}
+            handleRemoteData={debounce(fetchData, 500)}
+            handleRemoteDetails={handleRemoteDetails}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            rowActions={[
+              {
+                label: 'Editeaza',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#0970E6',
+                desktopIcon: <EditActionIcon />,
+                onClick: (e, rowId) => selectRow(tableItems.find(item => item.id === rowId))
+              }
+            ]}
+            rowActionsWidth="90px"
+          />
+          <EditCurrentTaskTemplate
+            isModalOpen={isEditTaskModalOpen}
+            closeModal={closeEditTaskModal}
+            editItem={selectedRow}
+            setShouldRefreshData={setShouldRefreshTaskData}
+          />
+        </>
       )}
     </div>
   )

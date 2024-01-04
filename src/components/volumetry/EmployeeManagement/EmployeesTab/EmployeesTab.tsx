@@ -1,90 +1,39 @@
 import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './EmployeesTab.modules.scss'
-import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
-import { formatErrorMessage } from 'utils/formatting'
-import { useNotification } from 'hooks'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
+import { EmployeeManagementItem } from 'components/volumetry/interfaces'
 import { columns } from './helpers'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import {
+  getDepartmentsOptions,
+  getEmployeeNamesOptions,
+  getJobTitlesOptions
+} from 'components/volumetry/api'
+import { handleQueryError } from 'components/volumetry/utils'
+import { useNotification } from 'hooks'
 
 const EmployeesTab = () => {
-  const { showNotification } = useNotification()
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
 
-  const { data: filterOptionsDepartment } = useQuery(
-    ['department'],
-    async () => {
-      const resultDepartment = await makeCoreGetRequest('/volumetry/department')
+  const { showNotification } = useNotification()
 
-      const resultOptionsDepartment = resultDepartment.list.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
-      )
-      return resultOptionsDepartment || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const { data: filterOptionsName } = useQuery(
-    ['employee'],
-    async () => {
-      const resultName = await makeCoreGetRequest('/volumetry/employee')
-
-      const resultOptionsName = resultName.list.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
-      )
-      return resultOptionsName || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const { data: filterOptionsPosition } = useQuery(
-    ['position'],
-    async () => {
-      const resultPosition = await makeCoreGetRequest('/volumetry/position')
-
-      const resultOptionsPosition = resultPosition.list.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
-      )
-      return resultOptionsPosition || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
+  const { data: departmentsOptions } = getDepartmentsOptions(showNotification)
+  const { data: employeeNamesOptions } = getEmployeeNamesOptions(showNotification)
+  const { data: jobTitlesOptions } = getJobTitlesOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/volumetry/employee',
+          url: '/volumetry/workers/employees',
           tableFilters,
           page,
           rowsPerPage,
@@ -97,16 +46,13 @@ const EmployeesTab = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      handleQueryError(error, 'Error while fetching job titles', showNotification)
     }
   }
 
   const tableFilterFields = [
     {
-      name: 'name',
+      name: 'fullName',
       label: 'Nume',
       type: 'autocomplete',
       value: '',
@@ -115,7 +61,7 @@ const EmployeesTab = () => {
           variant="outlined"
           label="Nume"
           disableClearable
-          options={filterOptionsName}
+          options={employeeNamesOptions}
         />
       )
     },
@@ -129,7 +75,7 @@ const EmployeesTab = () => {
           variant="outlined"
           label="Departament"
           disableClearable
-          options={filterOptionsDepartment}
+          options={departmentsOptions}
         />
       )
     },
@@ -143,7 +89,7 @@ const EmployeesTab = () => {
           variant="outlined"
           label="Position"
           disableClearable
-          options={filterOptionsPosition}
+          options={jobTitlesOptions}
         />
       )
     }
