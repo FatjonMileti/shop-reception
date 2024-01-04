@@ -150,11 +150,13 @@ const Employee: React.FC<EmployeeProps> = props => {
               }}
               onClick={e => {
                 if (taskCurrentState.showStartButton) {
+                  e.preventDefault()
                   e.stopPropagation()
                   handleStartTask()
                 }
                 if (!taskCurrentState.showStartButton) {
                   e.preventDefault()
+                  e.stopPropagation()
                   openStopTaskModal()
                 }
               }}
