@@ -19,6 +19,7 @@ const GroupTable = props => {
     printUrl,
     ...rest
   } = props
+
   const [tableState, setTableState] = useImmer(
     window.history.state.tableState || {
       page: 0,
@@ -44,15 +45,34 @@ const GroupTable = props => {
       }
     })()
   }, [shouldRefreshData, window.history.state.tableState])
+
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
-    const response = await fetchData({
+    setTableState({
       page,
       rowsPerPage,
       order,
       orderBy,
-      tableFilters: filters,
-      searchText
+      searchText,
+      filters
     })
+
+    window.history.replaceState(
+      {
+        ...window.history.state,
+        tableState: {
+          page,
+          rowsPerPage,
+          order,
+          orderBy,
+          searchText,
+          filters
+        }
+      },
+      document.title
+    )
+
+    const response = await fetchData({ page, rowsPerPage, order, orderBy, tableFilters: filters, searchText })
+
     const newDynamicColumns = createDynamicColumns(columns, response.list)
     setDynamicColumns(newDynamicColumns)
     setDynamicItems(toTableRowItems(toDynamicTableItems(response.list), newDynamicColumns))

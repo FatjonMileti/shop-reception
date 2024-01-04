@@ -188,6 +188,8 @@ const ApplicationUsageReport = () => {
               onClick: () => handleDownload()
             }
           ]}
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </Box>
     </div>
