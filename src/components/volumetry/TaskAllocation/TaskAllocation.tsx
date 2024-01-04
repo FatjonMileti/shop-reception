@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react'
-import s from './TaskAllocation.modules.scss'
-import { ValueLabelInterface } from '../interfaces'
-import { makeCoreGetRequest } from 'utils/api'
-import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
-import { toListTableRows } from './serializers'
-import { CircularProgress, Grid, debounce } from '@mui/material'
 import { FilterDataSelect, ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import { CircularProgress, Grid, debounce } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import TaskDescription from './TaskDescription'
 import { EditActionIcon } from 'icons'
-import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
+import { useEffect, useState } from 'react'
+import { makeCoreGetRequest } from 'utils/api'
 import { getDepartmentsOptions } from '../api'
+import { ValueLabelInterface } from '../interfaces'
 import { handleQueryError } from '../utils'
+import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
+import s from './TaskAllocation.modules.scss'
+import TaskDescription from './TaskDescription'
+import { toListTableRows } from './serializers'
 
 const TaskAllocation = () => {
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
@@ -32,8 +30,6 @@ const TaskAllocation = () => {
     }
   )
   const [selectedRowId, setSelectedRowId] = useState('')
-
-  const { showNotification } = useNotification()
 
   useEffect(() => {
     ;(async () => {
@@ -58,7 +54,7 @@ const TaskAllocation = () => {
   }, [shouldRefreshAllocationsData])
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
-    getDepartmentsOptions()
+    getDepartmentsOptions(setDepartmentFilterValue)
 
   const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
@@ -106,7 +102,7 @@ const TaskAllocation = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      error => handleQueryError(error, 'A aparut o eroare la obtinerea datelor pentru tabel.')
+      handleQueryError(error, 'A aparut o eroare la obtinerea datelor pentru tabel.')
     }
   }
 

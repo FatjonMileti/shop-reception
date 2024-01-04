@@ -22,7 +22,9 @@ export const getEmployeeNamesOptions = () => {
   )
 }
 
-export const getDepartmentsOptions = () => {
+export const getDepartmentsOptions = (
+  setDefaultOptionCallback?: (defaultValue: ValueLabelInterface) => void
+) => {
   return useQuery(
     ['departments'],
     async () => {
@@ -31,6 +33,11 @@ export const getDepartmentsOptions = () => {
       const resultOptions = result.map(
         (item): ValueLabelInterface => ({ label: item.name, value: item.name })
       )
+
+      if (resultOptions?.length && !!setDefaultOptionCallback) {
+        setDefaultOptionCallback(resultOptions[0])
+      }
+
       return resultOptions || []
     },
     {
