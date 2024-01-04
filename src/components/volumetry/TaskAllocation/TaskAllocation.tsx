@@ -11,8 +11,10 @@ import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
 import s from './TaskAllocation.modules.scss'
 import TaskDescription from './TaskDescription'
 import { toListTableRows } from './serializers'
+import { useNotification } from 'hooks'
 
 const TaskAllocation = () => {
+  const { showNotification } = useNotification()
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
   const [rows, setRows] = useState([]) // TODO: To add interface when db schema is defined
   const [tableItems, setTableItems] = useState([]) // TODO: To add interface when db schema is defined
@@ -54,7 +56,7 @@ const TaskAllocation = () => {
   }, [shouldRefreshAllocationsData])
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
-    getDepartmentsOptions(setDepartmentFilterValue)
+    getDepartmentsOptions(showNotification, setDepartmentFilterValue)
 
   const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
@@ -102,7 +104,12 @@ const TaskAllocation = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      handleQueryError(error, 'A aparut o eroare la obtinerea datelor pentru tabel.')
+      error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea datelor pentru tabel.',
+          showNotification
+        )
     }
   }
 

@@ -941,7 +941,7 @@
       "responses": [
         {
           "uuid": "8cc70d6b-007a-4993-b2c3-fdedeffe3885",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int' max=99999}},\n      \"name\": \"Task\",\n      \"rayonsOrDepartment\": \"Raion 1\",\n      \"recommendedStartHour\": \"08:00\",\n      \"recommendedEndHour\": \"10:00\",\n      \"frequency\": \"Zilnic\",\n      \"standardProductivityValue\": {{faker 'number.int' max=99999}},\n      \"measurementUnit\": \"ora\",\n      \"priority\": \"{{oneOf (array '1 - Ridicat')}}\",\n      \"workVolumeSource\": \"120\",\n      \"volumetryLocationCategory\": \"Categorie\",\n      \"isActive\": {{faker 'datatype.boolean'}}\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int' max=99999}},\n    \"totalCount\": {{faker 'number.int' max=99999}},\n    \"pageCount\": {{faker 'number.int' max=99999}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int' max=99999}},\n      \"name\": \"Task\",\n      \"rayonsOrDepartment\": \"Raion 1\",\n      \"recommendedStartHour\": \"08:00\",\n      \"recommendedEndHour\": \"10:00\",\n      \"frequency\": \"Zilnic\",\n      \"standardProductivityValue\": {{faker 'number.int' max=99999}},\n      \"measurementUnit\": \"ora\",\n      \"priority\": \"{{oneOf (array '1 - Ridicat')}}\",\n      \"workVolumeSource\": \"120\",\n      \"volumetryLocationCategory\": \"Categorie\",\n      \"isActive\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int' max=99999}},\n    \"totalCount\": {{faker 'number.int' max=99999}},\n    \"pageCount\": {{faker 'number.int' max=99999}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted task templates list",
@@ -5147,6 +5147,40 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "107106ef-f93f-4ea5-909d-125cda073c6a",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "evaluationReports",
+      "responses": [
+        {
+          "uuid": "57f51929-e080-44a6-a388-301d56ec49e0",
+          "body": "{\r\n  \"list\": [\r\n    {\r\n        \"id\": \"1\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 10,\r\n        \"totalExcutedTasks\": 8,\r\n        \"appliedVolumetryProcessPercentage\": 75,\r\n        \"utilizedVsStandardHours\": -1.25,\r\n        \"utilizedVsStandardFTE\": -0.8\r\n    },\r\n    {\r\n        \"id\": \"2\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 15,\r\n        \"totalExcutedTasks\": 12,\r\n        \"appliedVolumetryProcessPercentage\": 80,\r\n        \"utilizedVsStandardHours\": -0.75,\r\n        \"utilizedVsStandardFTE\": -0.5\r\n    },\r\n    {\r\n        \"id\": \"3\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 20,\r\n        \"totalExcutedTasks\": 18,\r\n        \"appliedVolumetryProcessPercentage\": 90,\r\n        \"utilizedVsStandardHours\": 1.5,\r\n        \"utilizedVsStandardFTE\": 1.2\r\n    },\r\n    {\r\n        \"id\": \"4\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 12,\r\n        \"totalExcutedTasks\": 10,\r\n        \"appliedVolumetryProcessPercentage\": 83.33,\r\n        \"utilizedVsStandardHours\": -2.5,\r\n        \"utilizedVsStandardFTE\": -1.6\r\n    }\r\n  ],\r\n  \"page\": {\r\n    \"pageSize\": 10,\r\n    \"page\": {{faker 'number.int'}},\r\n    \"totalCount\": {{faker 'number.int'}},\r\n    \"pageCount\": {{faker 'number.int'}}\r\n  },\r\n  \"summary\": {\r\n    \"departmentTotalExcutedTasks\": {{faker 'number.int' min=0 max=10}},\r\n    \"departmentAppliedVolumetryProcessPercentage\": {{faker 'number.int' min=0 max=100}},\r\n    \"departmentUtilizedVsStandardHours\": {{faker 'number.float' min=-999 max=999 precision=2}},\r\n    \"departmentUtilizedVsStandardFTE\": {{faker 'number.float' min=-100 max=100 precision=2}}\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5289,6 +5323,10 @@
     {
       "type": "route",
       "uuid": "d28b80e7-065c-4f40-8110-cb577dcc188e"
+    },
+    {
+      "type": "route",
+      "uuid": "107106ef-f93f-4ea5-909d-125cda073c6a"
     }
   ],
   "proxyMode": false,

@@ -4,16 +4,24 @@ export const getInitialValues = item => {
   return {
     ...(item?.id ? { id: item?.id } : {}),
     name: item?.name ?? '',
-    rayonsOrDepartment: item?.rayonsOrDepartment ?? null,
-    volumetryLocationCategory: item?.volumetryLocationCategory ?? null,
-    raion: item?.raion ?? null,
+    rayonsOrDepartment: item?.rayonsOrDepartment
+      ? { label: item.rayonsOrDepartment, value: item.rayonsOrDepartment }
+      : null,
+    volumetryLocationCategory: item?.volumetryLocationCategory
+      ? { label: item.volumetryLocationCategory, value: item.volumetryLocationCategory }
+      : null,
+    raion: item?.raion ? { label: item.raion, value: item.raion } : null,
     recommendedStartHour: item?.recommendedStartHour ?? null,
     recommendedEndHour: item?.recommendedEndHour ?? null,
-    frequency: item?.frequency ?? '',
+    frequency: item?.frequency ? { label: item.frequency, value: item.frequency } : null,
     standardProductivityValue: item?.standardProductivityValue ?? '',
-    measurementUnit: item?.measurementUnit ?? '',
-    workVolumeSource: item?.workVolumeSource ?? '',
-    priority: item?.priority ?? null,
+    measurementUnit: item?.measurementUnit
+      ? { label: item.measurementUnit, value: item.measurementUnit }
+      : null,
+    workVolumeSource: item?.workVolumeSource
+      ? { label: item.workVolumeSource, value: item.workVolumeSource }
+      : null,
+    priority: item?.priority ? { label: item.priority, value: item.priority } : null,
     isActive: item?.isActive ?? true
   }
 }
@@ -21,40 +29,54 @@ export const getInitialValues = item => {
 // TODO: add validation messages
 export const getValidationSchema = item =>
   Yup.object().shape({
-    name: Yup.string().required(),
-    rayonsOrDepartment: Yup.object().shape({
-      label: Yup.string().required('Departament is required'),
-      value: Yup.string().required('Departament is required')
-    }),
-    volumetryLocationCategory: Yup.object().shape({
-      label: Yup.string().required('Category is required'),
-      value: Yup.string().required('Category is required')
-    }),
-    raion: Yup.array().of(
-      Yup.object({
-        label: Yup.string().required('Category is required'),
-        value: Yup.string().required('Category is required')
+    name: Yup.string().required('Acest camp este obligatoriu.'),
+    rayonsOrDepartment: Yup.object()
+      .shape({
+        label: Yup.string().required(),
+        value: Yup.string().required()
       })
-    ),
-    recommendedStartHour: Yup.date().required(),
-    recommendedEndHour: Yup.date().required(),
-    frequency: Yup.object().shape({
-      label: Yup.string().required('Frequency is required'),
-      value: Yup.string().required('Frequency is required')
-    }),
-    standardProductivityValue: Yup.string().required(),
-    measurementUnit: Yup.object().shape({
-      label: Yup.string().required('UM standard productivitate is required'),
-      value: Yup.string().required('UM standard productivitate is required')
-    }),
-    workVolumeSource: Yup.object().shape({
-      label: Yup.string().required('Source is required'),
-      value: Yup.string().required('Source is required')
-    }),
+      .required('Acest camp este obligatoriu.'),
+    volumetryLocationCategory: Yup.object()
+      .shape({
+        label: Yup.string().required(),
+        value: Yup.string().required()
+      })
+      .required('Acest camp este obligatoriu.'),
+    raion: Yup.array()
+      .of(
+        Yup.object({
+          label: Yup.string().required(),
+          value: Yup.string().required()
+        })
+      )
+      .required('Acest camp este obligatoriu.'),
+    recommendedStartHour: Yup.date().required('Acest camp este obligatoriu.'),
+    recommendedEndHour: Yup.date().required('Acest camp este obligatoriu.'),
+    frequency: Yup.object()
+      .shape({
+        label: Yup.string().required(),
+        value: Yup.string().required()
+      })
+      .required('Acest camp este obligatoriu.'),
+    standardProductivityValue: Yup.string().required('Acest camp este obligatoriu.'),
+    measurementUnit: Yup.object()
+      .shape({
+        label: Yup.string().required(),
+        value: Yup.string().required()
+      })
+      .required('Acest camp este obligatoriu.'),
+    workVolumeSource: Yup.object()
+      .shape({
+        label: Yup.string().required(),
+        value: Yup.string().required()
+      })
+      .required('Acest camp este obligatoriu.'),
 
-    priority: Yup.object().shape({
-      label: Yup.string().required('Priority is required'),
-      value: Yup.string().required('Priority is required')
-    }),
+    priority: Yup.object()
+      .shape({
+        label: Yup.string().required(),
+        value: Yup.string().required()
+      })
+      .required('Acest camp este obligatoriu.'),
     status: Yup.boolean()
   })

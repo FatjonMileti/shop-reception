@@ -72,7 +72,8 @@ const Employee: React.FC<EmployeeProps> = props => {
         type: 'success'
       })
     },
-    onError: error => handleQueryError(error, 'A aparut o eroare la inceperea taskului.')
+    onError: error =>
+      handleQueryError(error, 'A aparut o eroare la inceperea taskului.', showNotification)
   })
 
   return (

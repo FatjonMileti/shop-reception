@@ -7,15 +7,11 @@ import { ValueLabelInterface } from 'components/governance/interfaces'
 import { columns } from 'components/volumetry/EmployeeManagement/EvaluationReports/helpers'
 import { useNotification } from 'hooks'
 import { useState } from 'react'
-import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
-import { formatErrorMessage } from 'utils/formatting'
 import s from './EvaluationReports.modules.scss'
-import {
-  toDepartmentOptions,
-  toTableRowItems
-} from 'components/volumetry/EmployeeManagement/EvaluationReports/serializers'
+import { toTableRowItems } from 'components/volumetry/EmployeeManagement/EvaluationReports/serializers'
 import { EvaluationReportSummary } from 'components/volumetry/interfaces'
+import { getDepartmentsOptions } from 'components/volumetry/api'
 
 const EvaluationReports = () => {
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
@@ -27,34 +23,15 @@ const EvaluationReports = () => {
 
   const { showNotification } = useNotification()
 
-  const { data: departments, isLoading: isDepartmentsLoading } = useQuery(
-    ['departments'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/department')
-      const departmentOptions = toDepartmentOptions(result.list)
-
-      setDepartmentFilterValue(departmentOptions[0])
-
-      return departmentOptions
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A aparut o eroare la preluarea datelor de optiuni pentru departamente. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      }
-    }
-  )
+  const { data: departments, isLoading: isDepartmentsLoading } =
+    getDepartmentsOptions(showNotification)
 
   const handleDepartmentFilterChange = value => {
     setDepartmentFilterValue(value)
     setShouldRefreshData(true)
   }
 
-  const fetchData = async (order, orderBy) => {
+  const fetchData = async ({ order, orderBy }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
