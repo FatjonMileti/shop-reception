@@ -16,6 +16,8 @@ import { FamilyItem, SubfamilyItem } from '../interfaces'
 import { StaticAutocomplete } from 'components/core-ui/StaticAutocomplete'
 import { EditProduct } from './EditProduct'
 import { EditActionIcon } from 'icons'
+import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import {FilterValue} from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/TableFilters/TableFilters'
 
 const ProductManagementStore = () => {
   const [tableItems, setTableItems] = useState<ProductManagementItem[]>([])
@@ -32,11 +34,16 @@ const ProductManagementStore = () => {
 
   const { showNotification } = useNotification()
 
+  const [liveTableFilters, setLiveTableFilters] = React.useState<FilterValue[]>([])
+
+  console.log("liveTableFilters: ", liveTableFilters)
+
+
   const filters = React.useMemo(() => {
     return [
-      { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-      { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) },
-      { name: 'scheduleProduct', value: productFilterValue?.value }
+      // { name: 'family', value: familiesFilterValue?.map(val => val.value) },
+      // { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) },
+      // { name: 'scheduleProduct', value: productFilterValue?.value }
     ].filter(
       f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
     )
@@ -49,7 +56,7 @@ const ProductManagementStore = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/product',
-          filters: filters,
+          // filters: filters,
           searchText,
           searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
           tableFilters,
@@ -93,11 +100,16 @@ const ProductManagementStore = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', familiesFilterValue.map(({ value }) => value)],
+    ['subfamilies-store',
+      // familiesFilterValue.map(({ value }) => value)
+      liveTableFilters.find(filter => filter.name === 'family')?.value
+    ],
     async () => {
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
-          family: familiesFilterValue.map(({ value }) => value)
+          family: ((liveTableFilters.find(filter => filter.name === 'family')?.value || []) as ValueLabelInterface[]).map(({ value }) => value)
+
+          // familiesFilterValue.map(({ value }) => value)
         },
         paramsSerializer: { indexes: null }
       })
@@ -143,6 +155,57 @@ const ProductManagementStore = () => {
     openEditModal()
   }
 
+  const drawerFilters = [
+    {
+      name: 'family',
+      value: '',
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Familie"
+          disableClearable
+          options={families.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Familie',
+      clearFiltersOnChange: ['subfamily']
+    },
+     {
+      name: 'subfamily',
+      value: '',
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Subfamilie"
+          disableClearable
+          options={subfamilies.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Subfamilie',
+    },
+    {
+      name: 'scheduleProduct',
+      value: '',
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Produs cadentier"
+          disableClearable
+          options={[
+            { value: 'true', label: 'Da' },
+            { value: 'false', label: 'Nu' }
+          ]}
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Produs cadentier'
+    },
+  ]
+
   return (
     <div className={s.mainContainer}>
       <Box>
@@ -153,39 +216,39 @@ const ProductManagementStore = () => {
         ) : (
           <Grid xs={12} md={12} container spacing={5}>
             <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
-                variant="outlined"
-                name="family"
-                label="Familie"
-                value={familiesFilterValue}
-                options={families.data || []}
-                onChange={handleFamiliesChange}
-                multiple
-              />
+              {/*<AsyncAutocomplete*/}
+              {/*  variant="outlined"*/}
+              {/*  name="family"*/}
+              {/*  label="Familie"*/}
+              {/*  value={familiesFilterValue}*/}
+              {/*  options={families.data || []}*/}
+              {/*  onChange={handleFamiliesChange}*/}
+              {/*  multiple*/}
+              {/*/>*/}
             </Grid>
             <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
-                variant="outlined"
-                name="subfamily"
-                label="Subfamilie"
-                value={subfamiliesFilterValue}
-                options={subfamilies.data || []}
-                onChange={handleSubfamiliesChange}
-                multiple
-              />
+              {/*<AsyncAutocomplete*/}
+              {/*  variant="outlined"*/}
+              {/*  name="subfamily"*/}
+              {/*  label="Subfamilie"*/}
+              {/*  value={subfamiliesFilterValue}*/}
+              {/*  options={subfamilies.data || []}*/}
+              {/*  onChange={handleSubfamiliesChange}*/}
+              {/*  multiple*/}
+              {/*/>*/}
             </Grid>
             <Grid xs={12} md={3} item>
-              <StaticAutocomplete
-                variant="outlined"
-                name="scheduleProduct"
-                label="Produs cadentier"
-                value={productFilterValue}
-                options={[
-                  { value: true, label: 'Da' },
-                  { value: false, label: 'Nu' }
-                ]}
-                onChange={handleProductChange}
-              />
+              {/*<StaticAutocomplete*/}
+              {/*  variant="outlined"*/}
+              {/*  name="scheduleProduct"*/}
+              {/*  label="Produs cadentier"*/}
+              {/*  value={productFilterValue}*/}
+              {/*  options={[*/}
+              {/*    { value: true, label: 'Da' },*/}
+              {/*    { value: false, label: 'Nu' }*/}
+              {/*  ]}*/}
+              {/*  onChange={handleProductChange}*/}
+              {/*/>*/}
             </Grid>
           </Grid>
         )}
@@ -223,6 +286,8 @@ const ProductManagementStore = () => {
             }
           ]}
           rowActionsWidth="130px"
+          filters={drawerFilters}
+          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         />
       </Box>
     </div>
