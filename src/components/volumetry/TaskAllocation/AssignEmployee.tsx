@@ -101,7 +101,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <Input
             type="text"
             name="volume"
-            label={`Volum ${prodStandardUM.name}/${prodStandardUM.unit}`}
+            label="Volum"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue('volume', event.target.value)
