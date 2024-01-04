@@ -22,7 +22,7 @@ export const getEmployeeNamesOptions = (showNotification: Function) => {
   )
 }
 
-export const getDepartmentsOptions = (showNotification: Function) => {
+export const getDepartmentsOptions = (showNotification: Function, callback?: Function) => {
   return useQuery(
     ['departments'],
     async () => {
@@ -31,6 +31,8 @@ export const getDepartmentsOptions = (showNotification: Function) => {
       const resultOptions = result.map(
         (item): ValueLabelInterface => ({ label: item.name, value: item.name })
       )
+
+      callback && callback(resultOptions);
       return resultOptions || []
     },
     {

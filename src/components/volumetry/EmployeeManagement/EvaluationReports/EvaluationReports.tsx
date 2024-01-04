@@ -24,7 +24,7 @@ const EvaluationReports = () => {
   const { showNotification } = useNotification()
 
   const { data: departments, isLoading: isDepartmentsLoading } =
-    getDepartmentsOptions(showNotification)
+    getDepartmentsOptions(showNotification, (values) => setDepartmentFilterValue(values[0]))
 
   const handleDepartmentFilterChange = value => {
     setDepartmentFilterValue(value)
@@ -66,6 +66,7 @@ const EvaluationReports = () => {
       onClick: () => print()
     }
   ]
+  console.log('debug2', departments)
 
   return (
     <div className={s.mainContainer}>
@@ -78,7 +79,7 @@ const EvaluationReports = () => {
           <Grid xs={4} md={3} item style={{ padding: 0 }}>
             <FilterDataSelect
               name="department"
-              defaultSelectedData={departmentFilterValue}
+              defaultSelectedData={departmentFilterValue || departments[0]}
               label=""
               showCounter={true}
               showSearch={true}
