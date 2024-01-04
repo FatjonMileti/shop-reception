@@ -77,6 +77,7 @@ const TaskAllocation = () => {
         employees={data.list}
         shouldRefreshData={shouldRefreshAllocationsData}
         setShouldRefreshData={setShouldRefreshAllocationsData}
+        setShouldRefreshTaskData={setShouldRefreshTaskData}
       />
     )
   }
@@ -99,7 +100,8 @@ const TaskAllocation = () => {
         toListTableRows(
           response.list,
           shouldRefreshAllocationsData,
-          setShouldRefreshAllocationsData
+          setShouldRefreshAllocationsData,
+          setShouldRefreshTaskData
         )
       )
       setTableItems(response.list)

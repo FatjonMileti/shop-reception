@@ -24,10 +24,12 @@ interface AssignEmployeeProps {
   taskName: string
   department: string
   prodStandardUM: ProdStandardUM
+  setShouldRefreshData: Function
 }
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
-  const { isModalOpen, closeModal, taskName, department, prodStandardUM } = props
+  const { isModalOpen, closeModal, taskName, department, prodStandardUM, setShouldRefreshData } =
+    props
   const { showNotification } = useNotification()
 
   const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } =
@@ -44,6 +46,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
         message: `Employee assigned successfully!`,
         type: 'success'
       })
+
+      setShouldRefreshData(true)
     },
     onError: error =>
       handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
