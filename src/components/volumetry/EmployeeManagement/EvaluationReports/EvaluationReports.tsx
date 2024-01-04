@@ -67,7 +67,6 @@ const EvaluationReports = () => {
       onClick: () => print()
     }
   ]
-  console.log('debug2', departments)
 
   return (
     <div className={s.mainContainer}>
