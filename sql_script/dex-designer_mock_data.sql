@@ -60,7 +60,7 @@ VALUES
     (4, 'Effort Matrix', 'EffortMatrix', null, true, 1),
     (5, 'Team Day-Off Management', 'TeamDayOffManagement', null , true, 1),
     (6, 'My Time-Off', 'TeamDayOffManagement', null, true, 1),
-    -- Bakery ADMIN
+    -- Bakery ADMIN p1
     (7, 'Gestiune utilizatori', 'UsersManagement', null, true, 2),
     (8, 'Gestiune zone', 'Zones', null, true, 2),
     (9, 'Gestiune regiuni', 'Regions', null, true, 2),
@@ -111,6 +111,8 @@ VALUES
     (50, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', null, true, 10),
     (51, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
     (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10);
+    -- Bakery ADMIN p2
+    (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10);
 
 
 -- screen with activity id (some are first screens)
@@ -125,7 +127,7 @@ VALUES
     (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/governance/projectTeam/teamCapacity', true, 2, true),
     (6, 'Individual Capacity', 'PeopleAltOutlined', '/governance/projectTeam/individualCapacity/:id', true, 2, false),
     (7, 'My Time-Off', 'TimerOffOutlined', '/governance/projectTeam/myTimeOff', true, 6, true),
-    -- Bakery ADMIN
+    -- Bakery ADMIN p1
     (8 , 'Gestiune utilizatori', 'UsersManagement', '/bakery/admin/usersManagement', true, 7, true),
     (9 , 'Gestiune zone', 'Zones', '/bakery/admin/zones', true, 8, true),
     (10, 'Gestiune regiuni', 'Regions', '/bakery/admin/regions', true, 9, true),
@@ -196,7 +198,8 @@ VALUES
     (68, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report-print', true, 51, false),
     (69, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 52, true),
     (70, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 52, false);
-
+    -- Bakery ADMIN p2
+    (71, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 53, true);
 
 -- UI Schema with activity id and screen id
 INSERT INTO
@@ -304,7 +307,7 @@ VALUES
     (4, 2), (4, 4), (4, 6),
     -- Bakery
     -- GG_RO_HQ_IT_DEX_BAKERY_ADMIN
-    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16),
+    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16), (5, 53)
     -- GG_RO_HQ_IT_DEX_BAKERY_STORE
     (6, 27), (6, 28), (6, 29), (6, 30), (6, 31),
     -- GG_RO_HQ_IT_DEX_BAKERY_REGION
