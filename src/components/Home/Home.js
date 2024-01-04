@@ -2,7 +2,7 @@ import { Salutation, WeatherWidget } from '@fullscreendigital/carrefour-dex-fe'
 import { Chip, CircularProgress, Grid } from '@mui/material'
 import { Icon_v2 } from 'components/core-ui/Icon_v2'
 import { useGetLocation } from 'hooks'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getUserFirstName } from '../../utils/authService'
 import s from '../ServiceDomain/ServiceDomain.scss'
@@ -42,7 +42,7 @@ const Home = ({ modules, setSubdomainId }) => {
           <Grid item style={{ marginTop: '16px' }}>
             <Grid container direction="row" spacing={2}>
               {modules.map((module, index) => (
-                <Grid item key={index}>
+                <Grid item key={module.id}>
                   <Chip
                     color={selectedModule?.id === module.id ? 'primary' : 'default'}
                     key={index}
@@ -56,7 +56,7 @@ const Home = ({ modules, setSubdomainId }) => {
           <Grid item style={{ marginTop: '16px' }}>
             <Grid container direction="row" spacing={4}>
               {selectedModule?.submodules.map(app => (
-                <Grid item key={app.screenId}>
+                <Grid item key={app.routeURL}>
                   <Grid
                     container
                     direction="column"
