@@ -1,4 +1,4 @@
-import { Divider, Grid, Input } from '@mui/material'
+import { Divider, Grid } from '@mui/material'
 import s from '../../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
@@ -11,10 +11,9 @@ import { useQuery } from 'react-query'
 import { toTableRowItems } from './serializers'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { columns, scheduleProductValues } from './helpers'
+import { columns } from './helpers'
 import { toAsyncSelectOptions } from 'components/bakery/commonSerializers'
 import { FamilyItem } from 'components/bakery/StoreManagerRole/interfaces'
-import { StaticAutocomplete } from 'components/core-ui/StaticAutocomplete'
 import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
@@ -26,9 +25,7 @@ const ProductManagementRegion = () => {
   const { showNotification } = useNotification()
 
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null);
-  // const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-  // const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-  // const [scheduleProductFilterValue, setScheduleProductFilterValue] = useState<ValueLabelInterface>(null)
+  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const { data: stores } = useQuery(
     ['store'],
@@ -47,8 +44,6 @@ const ProductManagementRegion = () => {
       },
     }
   )
-
-  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const familiesQuery = useQuery(
     ['families', storeFilterValue?.value],
@@ -117,24 +112,6 @@ const ProductManagementRegion = () => {
     }
   )
 
-  // const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
-  //   setFamiliesFilterValue(value)
-  //   if (familiesFilterValue === null) return
-  //   setShouldRefreshData(true)
-  // }
-
-  // const handleSubfamiliesChange = (value: ValueLabelInterface[]): void => {
-  //   setSubfamiliesFilterValue(value)
-  //   if (subfamiliesFilterValue === null) return
-  //   setShouldRefreshData(true)
-  // }
-
-  // const handleScheduleProductChange = (value: ValueLabelInterface): void => {
-  //   setScheduleProductFilterValue(value)
-  //   if (scheduleProductFilterValue === null) return
-  //   setShouldRefreshData(true)
-  // }
-
   const handleStoreFilterChange = (value: ValueLabelInterface): void => {
       setStoreFilterValue(value)
       if (storeFilterValue === null) return
@@ -145,18 +122,10 @@ const ProductManagementRegion = () => {
     setIsLoading(true)
 
     try {
-      // const filters = [
-      //   { name: 'store', value: storeFilterValue?.value },
-      //   { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-      //   { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) },
-      //   { name: 'scheduleProduct', value: scheduleProductFilterValue?.value }
-      // ].filter(
-      //   f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-      // )
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/store/products',
-          // filters: filters,
+          filters: [{ name: 'store', value: storeFilterValue?.value }],
           searchText,
           searchFields: ["name","metiCode","pluCode","familyName"],
           tableFilters,
@@ -178,21 +147,6 @@ const ProductManagementRegion = () => {
   }
 
   const drawerFilters = [
-    // {
-    //   name: 'date',
-    //   value: dayjs().format('YYYY-MM-DD'),
-    //   filter: (
-    //     <DatePicker
-    //       label="Planificare pentru"
-    //       variant="outlined"
-    //       value={dayjs().format('YYYY-MM-DD')}
-    //       onChange={() => {}}
-    //       required
-    //     />
-    //   ),
-    //   type: 'date',
-    //   label: 'Planificare pentru'
-    // },
     {
       name: 'family',
       value: undefined,
@@ -224,20 +178,20 @@ const ProductManagementRegion = () => {
     },
     {
       name: 'scheduleProduct',
-      value: undefined,
+      value: '',
       filter: (
-        <StaticAutocomplete
+        <Autocomplete
           variant="outlined"
-          name="scheduleProduct"
           label="Produs cadentier"
-          // value={scheduleProductFilterValue}
-          options={scheduleProductValues}
-          // onChange={handleScheduleProductChange}
+          options={[
+            { value: 'true', label: 'Da' },
+            { value: 'false', label: 'Nu' }
+          ]}
         />
       ),
       type: 'autocomplete',
       label: 'Produs cadentier'
-    }
+    },
   ]
 
   return (
@@ -254,38 +208,6 @@ const ProductManagementRegion = () => {
               onChange={handleStoreFilterChange}
             />
           </Grid>
-          {/* <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="family"
-              label="Familie"
-              value={familiesFilterValue}
-              options={familiesQuery.data || []}
-              onChange={handleFamiliesChange}
-              multiple
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="subfamilies"
-              label="Subfamilie"
-              value={subfamiliesFilterValue}
-              options={subfamiliesOptions || []}
-              onChange={handleSubfamiliesChange}
-              multiple
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <StaticAutocomplete
-              variant="outlined"
-              name="scheduleProduct"
-              label="Produs cadentier"
-              value={scheduleProductFilterValue}
-              options={scheduleProductValues}
-              onChange={handleScheduleProductChange}
-            />
-          </Grid> */}
         </Grid>
 
         <Grid xs={12} item paddingTop={2}>
