@@ -121,56 +121,38 @@ export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string
   return `&searchBy=${searchBy}&searchValue=${encodeURIComponent(searchText)}`
 }
 
-// const getFilterUrlValues = (filters: Filter[]) =>
-//   filters.reduce(
-//     (acc, filter) => {
-//       const valuesArray = filter.value
-//       const encodedValue = Array.isArray(valuesArray) ? `[${valuesArray.join(';')}]` : valuesArray
-//       acc = [
-//         acc[0] ? `${acc[0]}${encodeURIComponent('|')}${filter.name}` : filter.name,
-//         acc[1]
-//           ? `${acc[1]}${encodeURIComponent(`|${encodedValue}`)}`
-//           : `${encodeURIComponent(encodedValue)}`
-//       ]
-//       return acc
-//     },
-//     ['', '']
-//   )
-
 const getFilterUrlValues = (filters: Filter[]) => {
   return filters.reduce(
     (acc, filter) => {
-      let encodedValue: string;
+      let encodedValue: string
 
       if (Array.isArray(filter.value)) {
         // Array of string or Array of AutoCompleteValue
-        encodedValue = `[${
-          filter.value
-            .map(val => typeof val === 'string' ? val : val.value) // Extract string or value from AutoCompleteValue
-            .join(';')
-        }]`; // Join with semi-colon
+        encodedValue = `[${filter.value
+          .map(val => (typeof val === 'string' ? val : val.value)) // Extract string or value from AutoCompleteValue
+          .join(';')}]` // Join with semi-colon
       } else if (filter.value && typeof filter.value === 'object') {
         // Single AutoCompleteValue
-        encodedValue = filter.value.value;
+        encodedValue = filter.value.value
       } else if (typeof filter.value === 'string') {
         // Single string
-        encodedValue = filter.value;
+        encodedValue = filter.value
       } else {
         // Null or other types
-        encodedValue = '';
+        encodedValue = ''
       }
 
       // URL encode the value
-      encodedValue = encodeURIComponent(encodedValue);
+      encodedValue = encodeURIComponent(encodedValue)
 
       acc = [
         acc[0] ? `${acc[0]}${encodeURIComponent('|')}${filter.name}` : filter.name,
         acc[1] ? `${acc[1]}${encodeURIComponent('|')}${encodedValue}` : encodedValue
-      ];
-      return acc;
+      ]
+      return acc
     },
     ['', '']
-  );
+  )
 }
 
 export const getFiltersGetUrl = (filters: Filter[]) => {
@@ -198,31 +180,25 @@ export const getCustomFiltersGetUrl = (filters: Filter[]) => {
 }
 
 export const getAllFilters = (filters: Filter[]) => {
-  console.log("filters: ", filters)
-  return filters.filter(
-    filter => {
-
-      // Check if value is undefined or null
-      if (filter.value === undefined || filter.value === null || filter.value === '') {
-        return false;
-      }
-
-      // Check if value is an empty string or a AutoCompleteValue with an empty 'value'
-      if (typeof filter.value === 'object' && 'value' in filter.value && filter.value.value === '') {
-        return false;
-      }
-
-      // If value is an array, ensure it's non-empty and does not contain empty strings or AutoCompleteValues
-      if (Array.isArray(filter.value) && filter.value.length === 0) {
-          return false; // Exclude empty arrays
-      }
-
-      return true;
+  return filters.filter(filter => {
+    // Check if value is undefined or null
+    if (filter.value === undefined || filter.value === null || filter.value === '') {
+      return false
     }
 
-  )
-}
+    // Check if value is an empty string or a AutoCompleteValue with an empty 'value'
+    if (typeof filter.value === 'object' && 'value' in filter.value && filter.value.value === '') {
+      return false
+    }
 
+    // If value is an array, ensure it's non-empty and does not contain empty strings or AutoCompleteValues
+    if (Array.isArray(filter.value) && filter.value.length === 0) {
+      return false // Exclude empty arrays
+    }
+
+    return true
+  })
+}
 
 export const getTableQueryUrl = params =>
   Object.keys(params).reduce(

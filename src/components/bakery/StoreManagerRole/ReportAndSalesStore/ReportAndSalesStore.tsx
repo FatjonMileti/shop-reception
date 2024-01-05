@@ -13,12 +13,11 @@ import dayjs from 'dayjs'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { DownloadOutlined } from '@mui/icons-material'
 import { columns } from './helpers'
-import { formatAndDownloadResponse } from 'utils/helpers'
+import { formatAndDownloadResponse, getCurrentDate } from 'utils/helpers'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 
 const ReportAndSalesStore = () => {
-
   const [tableItems, setTableItems] = useState<TableItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -160,15 +159,17 @@ const ReportAndSalesStore = () => {
     }
   }
 
+  const currentDate = getCurrentDate()
+
   const drawerFilters = [
     {
       name: 'date',
-      value: dayjs().format('YYYY-MM-DD'),
+      value: currentDate,
       filter: (
         <DatePicker
           label="Planificare pentru"
           variant="outlined"
-          value={dayjs().format('YYYY-MM-DD')}
+          value={currentDate}
           onChange={() => {}}
           required
         />

@@ -30,9 +30,7 @@ const ProductGrowthIndex = () => {
   const familiesQuery = useQuery(
     ['families'],
     async () => {
-      const result = await makeCoreGetRequest(
-        '/bakery/store/families',
-      )
+      const result = await makeCoreGetRequest('/bakery/store/families')
 
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
@@ -52,7 +50,6 @@ const ProductGrowthIndex = () => {
     }
   )
 
-
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
     try {
@@ -65,7 +62,7 @@ const ProductGrowthIndex = () => {
           order,
           orderBy,
           searchText,
-          searchFields: [ 'productName' ]
+          searchFields: ['productName']
         })
       )
 
@@ -92,29 +89,27 @@ const ProductGrowthIndex = () => {
     }
   }
 
-   const drawerFilters = [
-     {
-       name: 'family',
-       value: undefined,
-       filter: (
-         <Autocomplete
-           variant="outlined"
-           label="Familie"
-           disableClearable
-           options={familiesQuery.data || []}
-           multiple
-         />
-       ),
-       type: 'autocomplete',
-       label: 'Familie',
-     },
-   ]
+  const drawerFilters = [
+    {
+      name: 'family',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Familie"
+          options={familiesQuery.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Familie'
+    }
+  ]
 
   return (
     <div className={s.mainContainer}>
       <Grid container>
-
-        <EditProductGrowthIndex 
+        <EditProductGrowthIndex
           isModalOpen={isEditModalOpen}
           closeModal={closeEditModal}
           editProductGrowthIndexId={selectedRowId}

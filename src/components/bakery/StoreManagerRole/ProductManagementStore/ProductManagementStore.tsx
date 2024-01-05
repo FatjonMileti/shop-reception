@@ -78,11 +78,10 @@ const ProductManagementStore = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store',
-      liveTableFilters.find(filter => filter.name === 'family')?.value
-    ],
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')?.value || []) as AutoCompleteValue[];
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+        ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
@@ -132,7 +131,7 @@ const ProductManagementStore = () => {
       label: 'Familie',
       clearFiltersOnChange: ['subfamily']
     },
-     {
+    {
       name: 'subfamily',
       value: undefined,
       filter: (
@@ -145,7 +144,7 @@ const ProductManagementStore = () => {
         />
       ),
       type: 'autocomplete',
-      label: 'Subfamilie',
+      label: 'Subfamilie'
     },
     {
       name: 'scheduleProduct',
@@ -163,18 +162,15 @@ const ProductManagementStore = () => {
       ),
       type: 'autocomplete',
       label: 'Produs cadentier'
-    },
+    }
   ]
 
   return (
     <div className={s.mainContainer}>
       <Box>
-        {/*{subfamilies.isFetching || families.isFetching && (*/}
-        {/*  <div style={{ display: 'flex' }}>*/}
-        {/*    <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />*/}
-        {/*  </div>*/}
-        {/*)}*/}
-        <Grid xs={12} item paddingTop={2}><Divider /></Grid>
+        <Grid xs={12} item paddingTop={2}>
+          <Divider />
+        </Grid>
         <EditProduct
           isModalOpen={isEditModalOpen}
           closeModal={closeEditModal}

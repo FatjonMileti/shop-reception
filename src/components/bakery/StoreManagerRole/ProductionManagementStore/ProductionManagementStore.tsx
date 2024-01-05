@@ -12,7 +12,7 @@ import { Autocomplete, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
-import { formatAndDownloadResponse } from 'utils/helpers'
+import { formatAndDownloadResponse, getCurrentDate } from 'utils/helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { SubfamilyItem, TableItem, TableState } from './interfaces'
 import { FamilyItem } from '../interfaces'
@@ -100,11 +100,9 @@ const ProductionManagementStore = () => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
     try {
-
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/store/cadentier',
-          // filters: filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -187,15 +185,17 @@ const ProductionManagementStore = () => {
     openEditModal()
   }
 
+  const currentDate = getCurrentDate()
+
   const drawerFilters = [
     {
       name: 'date',
-      value: dayjs().format('YYYY-MM-DD'),
+      value: currentDate,
       filter: (
         <DatePicker
           label="Planificare pentru"
           variant="outlined"
-          value={dayjs().format('YYYY-MM-DD')}
+          value={currentDate}
           onChange={() => {}}
           required
         />
@@ -239,71 +239,63 @@ const ProductionManagementStore = () => {
   return (
     <div className={s.mainContainer}>
       <Grid container>
-        {familiesQuery.isLoading ||
-          subfamiliesQuery.isLoading ||
-          (reportFileQuery.isLoading && (
-            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-          ))}
-        <>
-          <Grid xs={12} item paddingTop={2}>
-            <Divider />
-          </Grid>
-          <EditProduction
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            editProductionId={selectedRowId}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <GroupTable
-            hideCheckbox
-            columns={columns}
-            items={tableItems}
-            fetchData={fetchData}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            stickyRatio={0.2}
-            groupCount={3}
-            frequency="day"
-            hasStickyHeader
-            maxHeight={'600px'}
-            hasSearchInput
-            toolbarActions={[
-              {
-                label: 'Descarca',
-                icon: <DownloadOutlined />,
-                onClick: () => reportFileQuery.refetch()
-              },
-              {
-                label: 'Printeaza',
-                icon: <PrintOutlined />
-              }
-            ]}
-            showAbbrev
-            hasPrintAction
-            printUrl={URLS.AUTH_PRODUCTION_MANAGEMENT_STORE_PRINT}
-            order={tableState.order}
-            orderBy={tableState.orderBy}
-            tableFilters={tableState.tableFilters}
-            rowActions={[
-              {
-                label: 'Edit',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#16a085',
-                onClick: (e, rowId) => selectRow(rowId),
-                desktopIcon: <EditActionIcon />
-              }
-            ]}
-            rowActionsWidth="130px"
-            filters={drawerFilters}
-            handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
-            rowsPerPage={25}
-            rowsPerPageOptions={[25, 50, 100]}
-          />
-        </>
-        )
+        <Grid xs={12} item paddingTop={2}>
+          <Divider />
+        </Grid>
+        <EditProduction
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
+          editProductionId={selectedRowId}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <GroupTable
+          hideCheckbox
+          columns={columns}
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          stickyRatio={0.2}
+          groupCount={3}
+          frequency="day"
+          hasStickyHeader
+          maxHeight={'600px'}
+          hasSearchInput
+          toolbarActions={[
+            {
+              label: 'Descarca',
+              icon: <DownloadOutlined />,
+              onClick: () => reportFileQuery.refetch()
+            },
+            {
+              label: 'Printeaza',
+              icon: <PrintOutlined />
+            }
+          ]}
+          showAbbrev
+          hasPrintAction
+          printUrl={URLS.AUTH_PRODUCTION_MANAGEMENT_STORE_PRINT}
+          order={tableState.order}
+          orderBy={tableState.orderBy}
+          tableFilters={tableState.tableFilters}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              onClick: (e, rowId) => selectRow(rowId),
+              desktopIcon: <EditActionIcon />
+            }
+          ]}
+          rowActionsWidth="130px"
+          filters={drawerFilters}
+          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
+        />
       </Grid>
     </div>
   )
