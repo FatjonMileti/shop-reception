@@ -237,6 +237,8 @@ const ProductManagementRegion = () => {
           maxHeight="600px"
           stickyRatio={0.3}
           setShouldRefreshData={setShouldRefreshData}
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />}
       </Grid>
     </div>

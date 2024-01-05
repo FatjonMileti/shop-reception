@@ -14,6 +14,7 @@ import { CreateEditTask } from './CreateEditTask'
 import { VOLUMETRY_TASKS_URL } from './constants'
 import { buildTableFilterFields } from './utils'
 import { getCategoriesOptions, getDepartmentsOptions, getFrequencyOptions } from '../api'
+import { useNotification } from 'hooks'
 
 export const columns = [
   {
@@ -101,9 +102,11 @@ const TaskManagement = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRowId, setSelectedRowId] = useState<string | number>(null)
 
-  const { data: categoryOptions } = getCategoriesOptions()
-  const { data: departmentOptions } = getDepartmentsOptions()
-  const { data: frequencyOptions } = getFrequencyOptions()
+  const { showNotification } = useNotification()
+
+  const { data: categoryOptions } = getCategoriesOptions(showNotification)
+  const { data: departmentOptions } = getDepartmentsOptions(showNotification)
+  const { data: frequencyOptions } = getFrequencyOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -123,7 +126,7 @@ const TaskManagement = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      handleQueryError(error, 'Error while fetching table data')
+      handleQueryError(error, 'Error while fetching table data', showNotification)
     }
   }
 

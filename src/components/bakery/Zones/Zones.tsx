@@ -107,6 +107,8 @@ const Zones = () => {
               onClick: openAddModal
             }
           ]}
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </Box>
     </div>

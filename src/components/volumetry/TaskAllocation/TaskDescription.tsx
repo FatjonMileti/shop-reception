@@ -12,11 +12,12 @@ interface TaskDescriptionProps {
   item: any // TODO: To add type when db schema is defined
   shouldRefreshData: boolean
   setShouldRefreshData: Function
+  setShouldRefreshTaskData: Function
   employees?: any[] // TODO: To add type when db schema is defined
 }
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
-  const { item, employees, setShouldRefreshData } = props
+  const { item, employees, setShouldRefreshData, setShouldRefreshTaskData } = props
 
   const { taskName, department } = item.item || item
   const [employeesItems, setEmployeesItems] = useState([])
@@ -107,6 +108,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         taskName={taskName}
         department={department.name}
         prodStandardUM={item.prodStandardUM}
+        setShouldRefreshData={setShouldRefreshTaskData}
       />
       <EditAllocationModal
         isModalOpen={modal === 'edit'}
