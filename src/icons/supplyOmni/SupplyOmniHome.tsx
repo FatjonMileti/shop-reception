@@ -16,8 +16,8 @@ const SupplyOmniHome: React.FC = () => (
         y2="66.9615"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#E5A100" />
-        <stop offset="1" stop-color="#F14B12" />
+        <stop stopColor="#E5A100" />
+        <stop offset="1" stopColor="#F14B12" />
       </linearGradient>
     </defs>
   </svg>

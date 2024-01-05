@@ -36,8 +36,8 @@ const ProjectTeamGovernanceHome: React.FC = () => (
         y2="70"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#07888D" />
-        <stop offset="1" stop-color="#006064" />
+        <stop stopColor="#07888D" />
+        <stop offset="1" stopColor="#006064" />
       </linearGradient>
     </defs>
   </svg>

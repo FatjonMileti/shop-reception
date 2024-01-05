@@ -12,6 +12,7 @@ import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { handleQueryError } from 'components/volumetry/utils'
 import { AsyncAutocompleteOption } from 'components/core-ui/AsyncAutocomplete/AsyncAutocompleteDefinitions'
 import { useMemo } from 'react'
+import { toCollaboratorPayload } from 'components/volumetry/EmployeeManagement/CollaboratorsTab/CreateEditCollaborator/serializers'
 
 interface CreateEditCollaboratorProps {
   isModalOpen: boolean
@@ -69,7 +70,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: EmployeeManagementItem, { resetForm }) => {
-      mutate(values)
+      mutate(toCollaboratorPayload(values))
       resetForm()
     }
   })
@@ -95,30 +96,37 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             onChange={event => formik.setFieldValue('fullName', event.currentTarget.value)}
             error={!!formik.errors.fullName}
             helperText={formik.errors.fullName as string}
+            required
           />
         </Grid>
 
         <Grid xs={12} item>
           <AsyncAutocomplete
             variant="outlined"
-            name="department.name"
+            name="department"
             label="Selecteaza magazin"
             disableClearable
-            value={{ value: formik.values.department, label: formik.values.department }}
+            value={formik.values.department}
             options={departmentsOptions || []}
-            onChange={event => formik.setFieldValue('department', event.value)}
+            onChange={value => formik.setFieldValue('department', value)}
+            required
+            error={!!formik.errors.department}
+            helperText={formik.errors.department as string}
           />
         </Grid>
 
         <Grid xs={12} item>
           <AsyncAutocomplete
             variant="outlined"
-            name="position.name"
+            name="jobTitle"
             label="Selecteaza functia"
             disableClearable
-            value={{ value: formik.values.jobTitle, label: formik.values.jobTitle }}
+            value={formik.values.jobTitle}
             options={jobTitlesOptions || []}
-            onChange={event => formik.setFieldValue('jobTitle', event.value)}
+            onChange={value => formik.setFieldValue('jobTitle', value)}
+            required
+            error={!!formik.errors.jobTitle}
+            helperText={formik.errors.jobTitle as string}
           />
         </Grid>
 
@@ -133,6 +141,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             onChange={event => formik.setFieldValue('employer', event.currentTarget.value)}
             error={!!formik.errors.employer}
             helperText={formik.errors.employer as string}
+            required
           />
         </Grid>
 
