@@ -107,7 +107,7 @@ const EvaluationReports = () => {
         />
       )}
       <Grid container direction="row" justifyContent="flex-end" alignItems="center" padding={1}>
-        <Grid item xs={1} spacing={1} style={{ maxWidth: '50%' }}>
+        <Grid item xs={1} style={{ maxWidth: '50%' }}>
           <Box sx={{ display: 'flex', direction: 'row', justifyContent: 'space-between' }}>
             <Typography style={{ textWrap: 'nowrap' }}>
               Total nr. zilnic task-uri executate:

@@ -4,7 +4,7 @@ import { Modal } from 'components/core-ui/Modal'
 import s from './TaskAllocation.modules.scss'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { Input } from 'components/core-ui/Input'
-import { ChangeEvent, useMemo } from 'react'
+import { ChangeEvent } from 'react'
 import { useFormik } from 'formik'
 import { makeCorePostRequest } from 'utils/api'
 import { useMutation } from 'react-query'
@@ -32,8 +32,10 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     props
   const { showNotification } = useNotification()
 
-  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } =
-    getEmployeesOptions(showNotification, isModalOpen)
+  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } = getEmployeesOptions(
+    showNotification,
+    isModalOpen
+  )
 
   const assignEmployee = async values => {
     await makeCorePostRequest('/volumetry/taskAllocation/assignEmployee', values)
@@ -58,7 +60,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     validateOnChange: false,
     initialValues: {
       selectEmployee: null,
-      volume: null
+      volume: ''
     },
     onSubmit: async (values, { resetForm }) => {
       const payload = { volume: values.volume, selectEmployee: values.selectEmployee.value }
