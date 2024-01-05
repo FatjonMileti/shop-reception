@@ -3,14 +3,13 @@ import { PrintOutlined } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { ValueLabelInterface } from 'components/governance/interfaces'
 import { columns } from 'components/volumetry/EmployeeManagement/EvaluationReports/helpers'
 import { useNotification } from 'hooks'
 import { useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import s from './EvaluationReports.modules.scss'
 import { toTableRowItems } from 'components/volumetry/EmployeeManagement/EvaluationReports/serializers'
-import { EvaluationReportSummary } from 'components/volumetry/interfaces'
+import { EvaluationReportSummary, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { getDepartmentsOptions } from 'components/volumetry/api'
 
 const EvaluationReports = () => {
@@ -23,8 +22,10 @@ const EvaluationReports = () => {
 
   const { showNotification } = useNotification()
 
-  const { data: departments, isLoading: isDepartmentsLoading } =
-    getDepartmentsOptions(showNotification)
+  const { data: departments, isLoading: isDepartmentsLoading } = getDepartmentsOptions(
+    showNotification,
+    setDepartmentFilterValue
+  )
 
   const handleDepartmentFilterChange = value => {
     setDepartmentFilterValue(value)
@@ -78,7 +79,7 @@ const EvaluationReports = () => {
           <Grid xs={4} md={3} item style={{ padding: 0 }}>
             <FilterDataSelect
               name="department"
-              defaultSelectedData={departmentFilterValue}
+              defaultSelectedData={departmentFilterValue || departments[0]}
               label=""
               showCounter={true}
               showSearch={true}

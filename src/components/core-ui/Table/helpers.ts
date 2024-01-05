@@ -121,17 +121,16 @@ export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string
   return `&searchBy=${searchBy}&searchValue=${encodeURIComponent(searchText)}`
 }
 
-export const getFilterUrlValues = (filters: Filter[]) => {
+const getFilterUrlValues = (filters: Filter[]) => {
   return filters.reduce(
     (acc, filter) => {
       let encodedValue: string
+
       if (Array.isArray(filter.value)) {
         // Array of string or Array of AutoCompleteValue
-        encodedValue = `[${
-          filter.value
-            .map(val => typeof val === 'string' ? val : val.value) // Extract string or value from AutoCompleteValue
-            .join(',')
-        }]` // Join with semi-colon
+        encodedValue = `[${filter.value
+            .map(val => (typeof val === 'string' ? val : val.value)) // Extract string or value from AutoCompleteValue
+            .join(',')}]` // Join with semi-colon
       } else if (filter.value && typeof filter.value === 'object') {
         // Single AutoCompleteValue
         encodedValue = filter.value.value
@@ -179,23 +178,24 @@ export const getCustomFiltersGetUrl = (filters: Filter[]) => {
 }
 
 export const getAllFilters = (filters: Filter[]) => {
-  return filters.filter(
-    filter => {
-      // Check if value is undefined or null
-      if (filter.value === undefined || filter.value === null || filter.value === '') {
-        return false
-      }
-      // Check if value is an empty string or a AutoCompleteValue with an empty 'value'
-      if (typeof filter.value === 'object' && 'value' in filter.value && filter.value.value === '') {
-        return false
-      }
-      // If value is an array, ensure it's non-empty and does not contain empty strings or AutoCompleteValues
-      if (Array.isArray(filter.value) && filter.value.length === 0) {
-          return false // Exclude empty arrays
-      }
-      return true
+  return filters.filter(filter => {
+    // Check if value is undefined or null
+    if (filter.value === undefined || filter.value === null || filter.value === '') {
+      return false
     }
-  )
+
+    // Check if value is an empty string or a AutoCompleteValue with an empty 'value'
+    if (typeof filter.value === 'object' && 'value' in filter.value && filter.value.value === '') {
+      return false
+    }
+
+    // If value is an array, ensure it's non-empty and does not contain empty strings or AutoCompleteValues
+    if (Array.isArray(filter.value) && filter.value.length === 0) {
+      return false // Exclude empty arrays
+    }
+
+    return true
+  })
 }
 
 export const getTableQueryUrl = params =>
