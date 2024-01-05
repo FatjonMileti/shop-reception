@@ -7,7 +7,7 @@ const ManagementTasksMenu: React.FC = () => (
       height="32"
       rx="6.64935"
       fill="url(#paint0_linear_1037_33439)"
-      fill-opacity="0.1"
+      fillOpacity="0.1"
     />
     <path
       d="M19.1563 23.5001C17.7196 23.5001 16.2828 23.5001 14.8461 23.5001C14.3073 23.5001 13.8284 23.1409 13.7086 22.662C13.529 21.9436 14.0678 21.2551 14.7862 21.2551C16.0733 21.2551 17.3604 21.2551 18.6475 21.2551C20.2638 21.2551 21.9101 21.2551 23.5265 21.2551C24.0353 21.2551 24.5142 21.6442 24.604 22.1232C24.7238 22.632 24.4843 23.1708 24.0054 23.3803C23.8258 23.4701 23.6163 23.5001 23.4367 23.5001C22.0598 23.5001 20.5931 23.5001 19.1563 23.5001Z"
@@ -42,8 +42,8 @@ const ManagementTasksMenu: React.FC = () => (
         y2="32"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0062FF" />
-        <stop offset="1" stop-color="#004BC2" />
+        <stop stopColor="#0062FF" />
+        <stop offset="1" stopColor="#004BC2" />
       </linearGradient>
     </defs>
   </svg>

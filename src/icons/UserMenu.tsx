@@ -8,9 +8,9 @@ const UserMenu: React.FC = () => (
       height="32"
       rx="6.64935"
       fill="url(#paint0_linear_103_17181)"
-      fill-opacity="0.1"
+      fillOpacity="0.1"
     />
-    <g clip-path="url(#clip0_103_17181)">
+    <g clipPath="url(#clip0_103_17181)">
       <path
         d="M16 16.5C18.2091 16.5 20 14.7091 20 12.5C20 10.2909 18.2091 8.5 16 8.5C13.7909 8.5 12 10.2909 12 12.5C12 14.7091 13.7909 16.5 16 16.5Z"
         fill="#052351"
@@ -29,8 +29,8 @@ const UserMenu: React.FC = () => (
         y2="32.5"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0062FF" />
-        <stop offset="1" stop-color="#004BC2" />
+        <stop stopColor="#0062FF" />
+        <stop offset="1" stopColor="#004BC2" />
       </linearGradient>
       <clipPath id="clip0_103_17181">
         <rect width="16" height="16" fill="white" transform="translate(8 8.5)" />

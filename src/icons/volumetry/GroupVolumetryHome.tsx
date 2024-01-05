@@ -28,8 +28,8 @@ const GroupVolumetryHome: React.FC = () => (
         y2="70"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0062FF" />
-        <stop offset="1" stop-color="#004BC2" />
+        <stop stopColor="#0062FF" />
+        <stop offset="1" stopColor="#004BC2" />
       </linearGradient>
     </defs>
   </svg>
