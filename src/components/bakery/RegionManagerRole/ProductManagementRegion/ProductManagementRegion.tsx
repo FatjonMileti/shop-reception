@@ -10,12 +10,11 @@ import { formatErrorMessage } from 'utils/formatting'
 import { useQuery } from 'react-query'
 import { toTableRowItems } from './serializers'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { columns } from './helpers'
 import { toAsyncSelectOptions } from 'components/bakery/commonSerializers'
 import { FamilyItem } from 'components/bakery/StoreManagerRole/interfaces'
 import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
-import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const ProductManagementRegion = () => {
   const [tableItems, setTableItems] = useState<ProductManagementItem[]>([])
@@ -199,18 +198,17 @@ const ProductManagementRegion = () => {
       <Grid container>
         <Grid xs={12} md={12} container spacing={5}>
           <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
+            <FilterDataSelect
               name="store"
+              defaultSelectedData={storeFilterValue}
               label="Magazin"
-              value={storeFilterValue}
               options={stores}
-              onChange={handleStoreFilterChange}
+              onSelect={handleStoreFilterChange}
             />
           </Grid>
         </Grid>
 
-        <Grid xs={12} item paddingTop={2}>
+        <Grid xs={12} item py={2}>
           <Divider />
         </Grid>
         

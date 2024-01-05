@@ -3,11 +3,6 @@ import { IconCell } from 'components/core-ui/IconCell'
 import { ImageCell } from 'components/core-ui/ImageCell'
 import { TableItem } from './interfaces'
 
-export const scheduleProductValues = [
-  { label: 'Da', value: true },
-  { label: 'Nu', value: false }
-]
-
 export const columns = [
   {
     title: 'Produs',

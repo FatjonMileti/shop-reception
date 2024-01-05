@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Paper } from '@mui/material'
+import { Box, Divider, Grid } from '@mui/material'
 import s from '../../commonStyles.modules.scss'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
@@ -7,9 +7,8 @@ import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { columns } from './helpers'
-import { DatePicker, Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { DatePicker, Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { useQuery } from 'react-query'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { formatAndDownloadResponse, getPreviousDay } from 'utils/helpers'
 import { DownloadOutlined } from '@mui/icons-material'
 import { GroupTable } from 'components/core-ui/GroupTable'
@@ -244,22 +243,19 @@ const CadentierSalesRegion = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
         <Grid container spacing={2}>
           <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
+            <FilterDataSelect
               name="store"
+              defaultSelectedData={storeFilterValue}
               label="Magazin"
-              value={storeFilterValue}
               options={stores}
-              onChange={handleStoreFilterChange}
+              onSelect={handleStoreFilterChange}
             />
           </Grid>
         </Grid>
-      </Paper>
 
-      <Grid xs={12} item paddingTop={2}>
+      <Grid xs={12} item py={2}>
         <Divider />
       </Grid>
 

@@ -1,4 +1,4 @@
-import { Box, Divider, Grid } from '@mui/material'
+import { Box } from '@mui/material'
 import s from '../../../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
@@ -21,7 +21,6 @@ const GrowthIndexProductsView = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const { showNotification } = useNotification()
   
@@ -117,7 +116,6 @@ const GrowthIndexProductsView = () => {
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
           filters={drawerFilters}
-          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         />
       </Box>
     </div>
