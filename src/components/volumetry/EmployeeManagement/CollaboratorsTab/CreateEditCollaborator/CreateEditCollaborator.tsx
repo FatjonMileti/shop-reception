@@ -68,8 +68,9 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: EmployeeManagementItem) => {
+    onSubmit: async (values: EmployeeManagementItem, { resetForm }) => {
       mutate(values)
+      resetForm()
     }
   })
 
