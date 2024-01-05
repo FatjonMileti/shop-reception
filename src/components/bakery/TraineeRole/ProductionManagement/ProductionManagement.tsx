@@ -191,7 +191,8 @@ const ProductionManagement = () => {
     async () => {
       const url = toTableGETUrl({
         url: '/bakery/report/download/cadentier',
-        tableFilters: tableState.tableFilters
+        tableFilters: tableState.tableFilters,
+        filters:[{ name: 'store', value: storeFilterValue?.value }]
       })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'

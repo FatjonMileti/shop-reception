@@ -176,7 +176,8 @@ const CadentierSalesRegion = () => {
     async () => {
       const url = toTableGETUrl({
         url: '/bakery/report/download/sale',
-        tableFilters: tableState.tableFilters
+        tableFilters: tableState.tableFilters,
+        filters:[{ name: 'store', value: storeFilterValue?.value }]
       })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
