@@ -183,6 +183,8 @@ const UsageReportRegion = () => {
               onClick: () => handleDownload()
             }
           ]}
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </Grid>
     </div>

@@ -308,6 +308,8 @@ const ProductManagementRegion = () => {
           setShouldRefreshData={setShouldRefreshData}
           filters={drawerFilters}
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />}
       </Grid>
     </div>

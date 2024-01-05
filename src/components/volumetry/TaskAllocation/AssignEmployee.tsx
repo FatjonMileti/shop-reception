@@ -4,10 +4,10 @@ import { Modal } from 'components/core-ui/Modal'
 import s from './TaskAllocation.modules.scss'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { Input } from 'components/core-ui/Input'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useMemo } from 'react'
 import { useFormik } from 'formik'
 import { makeCorePostRequest } from 'utils/api'
-import { useMutation} from 'react-query'
+import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
@@ -24,13 +24,16 @@ interface AssignEmployeeProps {
   taskName: string
   department: string
   prodStandardUM: ProdStandardUM
+  setShouldRefreshData: Function
 }
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
-  const { isModalOpen, closeModal, taskName, department, prodStandardUM } = props
+  const { isModalOpen, closeModal, taskName, department, prodStandardUM, setShouldRefreshData } =
+    props
   const { showNotification } = useNotification()
 
-  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } = getEmployeesOptions()
+  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } =
+    getEmployeesOptions(showNotification, isModalOpen)
 
   const assignEmployee = async values => {
     await makeCorePostRequest('/volumetry/taskAllocation/assignEmployee', values)
@@ -43,19 +46,19 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
         message: `Employee assigned successfully!`,
         type: 'success'
       })
+
+      setShouldRefreshData(true)
     },
-    onError: error => handleQueryError(error, 'A aparut o eroare la asignarea angajatului.')
+    onError: error =>
+      handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      selectEmployee: {
-        value: '',
-        label: ''
-      },
-      volume: ''
+      selectEmployee: null,
+      volume: null
     },
     onSubmit: async (values, { resetForm }) => {
       const payload = { volume: values.volume, selectEmployee: values.selectEmployee.value }
@@ -98,7 +101,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <Input
             type="text"
             name="volume"
-            label={`Volum ${prodStandardUM.name}/${prodStandardUM.unit}`}
+            label="Volum"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue('volume', event.target.value)

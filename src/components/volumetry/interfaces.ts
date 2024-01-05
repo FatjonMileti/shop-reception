@@ -29,7 +29,7 @@ export interface TaskManagementItem {
   standardProductivityValue: number
   measurementUnit: string | AsyncAutocompleteOption
   workVolumeSource: string | AsyncAutocompleteOption
-  priority: string
+  priority: string | AsyncAutocompleteOption
   isActive: boolean
   volumetryLocationCategory: string | AsyncAutocompleteOption
   raion?: string | AsyncAutocompleteOption

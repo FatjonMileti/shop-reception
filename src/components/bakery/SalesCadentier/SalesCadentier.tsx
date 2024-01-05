@@ -172,7 +172,7 @@ const SalesCadentier = () => {
           ...window.history.state,
           tableState: {
             page,
-            rowsPerPage: 25,
+            rowsPerPage,
             order,
             orderBy,
             filters
@@ -291,6 +291,8 @@ const SalesCadentier = () => {
             orderBy={tableState.orderBy}
             tableFilters={tableState.tableFilters}
             filters={tableState.tableFilters}
+            rowsPerPage={25}
+            rowsPerPageOptions={[25, 50, 100]}
           />
         </Box>
       )}
