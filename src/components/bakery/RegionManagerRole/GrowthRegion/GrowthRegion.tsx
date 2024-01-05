@@ -134,7 +134,8 @@ const GrowthRegion = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/cadentier',
-          filters: [{ name: 'store', value: storeFilterValue?.value }],          page,
+          filters: [{ name: 'store', value: storeFilterValue?.value }],          
+          page,
           rowsPerPage,
           order,
           orderBy,
