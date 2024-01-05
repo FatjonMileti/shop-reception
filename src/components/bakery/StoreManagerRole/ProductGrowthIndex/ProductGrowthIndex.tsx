@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import s from '../../commonStyles.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
@@ -13,7 +13,7 @@ import { toTableRowItems } from './serializers'
 import { EditProductGrowthIndex } from './EditProductGrowthIndex'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { useQuery } from 'react-query'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
 const ProductGrowthIndex = () => {
   const { showNotification } = useNotification()
@@ -23,7 +23,6 @@ const ProductGrowthIndex = () => {
   const [totalCount, setTotalCount] = useState<number>(0)
   const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
 
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
@@ -31,9 +30,7 @@ const ProductGrowthIndex = () => {
   const familiesQuery = useQuery(
     ['families'],
     async () => {
-      const result = await makeCoreGetRequest(
-        '/bakery/store/families',
-      )
+      const result = await makeCoreGetRequest('/bakery/store/families')
 
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
@@ -52,31 +49,20 @@ const ProductGrowthIndex = () => {
       }
     }
   )
-  
-  const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
-    setFamiliesFilterValue(value)
-    if (familiesFilterValue === null) return
-    setShouldRefreshData(true)
-  }
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, searchText }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
     try {
-      const filters = [
-        { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-      ].filter(
-        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-      )
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/store/product/growth',
-          filters: filters,
+          tableFilters,
           page,
           rowsPerPage,
           order,
           orderBy,
           searchText,
-          searchFields: [ 'productName' ]
+          searchFields: ['productName']
         })
       )
 
@@ -103,24 +89,27 @@ const ProductGrowthIndex = () => {
     }
   }
 
+  const drawerFilters = [
+    {
+      name: 'family',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Familie"
+          options={familiesQuery.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Familie'
+    }
+  ]
+
   return (
     <div className={s.mainContainer}>
       <Grid container>
-        <Grid xs={12} md={12} container spacing={5}>
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="family"
-              label="Familie"
-              value={familiesFilterValue}
-              options={familiesQuery.data || []}
-              onChange={handleFamiliesChange}
-              multiple
-            />
-          </Grid>
-        </Grid>
-        
-        <EditProductGrowthIndex 
+        <EditProductGrowthIndex
           isModalOpen={isEditModalOpen}
           closeModal={closeEditModal}
           editProductGrowthIndexId={selectedRowId}
@@ -151,6 +140,7 @@ const ProductGrowthIndex = () => {
             }
           ]}
           rowActionsWidth="130px"
+          filters={drawerFilters}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
         />

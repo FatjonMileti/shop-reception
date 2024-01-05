@@ -12,7 +12,7 @@ export const buildTableFilterFields = (
     name: 'teamMemberName',
     label: 'Person',
     type: 'text',
-    filter: <Input type="text" name="teamMemberName" label="Person" variant="standard" value="" />
+    filter: <Input type="text" name="teamMemberName" label="Person" variant="outlined" value="" />
   },
   {
     name: 'baseRole',
@@ -24,7 +24,7 @@ export const buildTableFilterFields = (
         type="text"
         name="baseRole"
         label="Base Role"
-        variant="standard"
+        variant="outlined"
         onChange={value => setTableFilter({ ...tableFilter, baseRole: value })}
         value={tableFilter.baseRole}
       />
@@ -42,7 +42,7 @@ export const buildTableFilterFields = (
         value={tableFilter.startDate}
         onChange={value => setTableFilter({ ...tableFilter, startDate: value })}
         label="Start date"
-        variant="standard"
+        variant="outlined"
       />
     )
   },
@@ -58,7 +58,7 @@ export const buildTableFilterFields = (
         value={tableFilter.endDate}
         onChange={value => setTableFilter({ ...tableFilter, endDate: value })}
         label="End date"
-        variant="standard"
+        variant="outlined"
       />
     )
   }
