@@ -63,7 +63,7 @@ const List = props => {
                 field: 'actions',
                 render: row => (
                   <ListActions
-                    itemId={row.id}
+                    item={row}
                     deleteAction={tableRowActions.deleteAction}
                     additionalAction={() => handleRemoteData()}
                   />

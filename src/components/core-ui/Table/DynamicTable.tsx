@@ -4,6 +4,7 @@ import { RootState } from 'configureStore'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ro'
 import Table from './Table'
+import { formatPayloadDate } from "../../../utils/helpers";
 
 const DynamicTable = props => {
   const { columns, frequency, extraUrlParams, ...rest } = props
@@ -38,6 +39,8 @@ const DynamicTable = props => {
                 collapsible: true,
                 title: `${col.title} ${formattedDate}`,
                 field: `applicationReportDynamicDtos.[${datesArray.length}].${col.field}`,
+                originalField: col.field,
+                find: { date: formatPayloadDate(currentDate) },
                 disableSorting: true,
               }
               datesArray.push(newColumn)

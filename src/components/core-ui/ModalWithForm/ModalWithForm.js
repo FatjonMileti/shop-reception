@@ -151,7 +151,36 @@ const ModalWithForm = ({
 
   const saveFormData = async () => {
     const formData = toFormDataPayload(editItem)
-    await saveData(formData)
+    setIsLoading(true)
+    try {
+      const errors = getFormErrors(formItems, formData)
+      if (isEmpty(errors)) {
+        let result
+        if (formAction.type === 'POST') {
+          const url = formData.has('fileObject') ? formAction.url : formAction.updateWithoutImageUrl
+          result = await makeCorePostRequest(`${url}`, formData)
+          showNotification({
+            message: 'Item created successfully',
+            type: 'success'
+          })
+        }
+
+        additionalAction && additionalAction()
+        closeModalAndResetForm()
+
+        if (href && result.id) {
+          navigate(`${href}/${result.id}`)
+        }
+      } else {
+        setErrors(errors)
+      }
+    } catch (error) {
+      showNotification({
+        message: `Error while saving item. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+    setIsLoading(false)
   }
 
   const saveJSONData = async () => {

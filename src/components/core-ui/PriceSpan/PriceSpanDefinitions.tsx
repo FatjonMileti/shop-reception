@@ -1,6 +1,8 @@
 export interface PriceSpanProps {
   value: string | number
   currency: string
-  initialValue?: string | number
+  totalPrice?: string | number
   color?: string
+  discountLabel?: string
+  totalPriceWithoutDiscount?: string | number
 }

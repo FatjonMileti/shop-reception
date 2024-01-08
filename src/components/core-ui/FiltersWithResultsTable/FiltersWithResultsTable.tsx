@@ -134,6 +134,7 @@ function FiltersWithResultsTable(props) {
                         setValueForFilter(name, { value: arg }, type, isCustomField)
                         break
                       case 'autocomplete':
+                      case 'static':
                         setValueForFilter(name, arg, type, isCustomField)
                         break
                       case 'checkbox':

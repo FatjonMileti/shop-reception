@@ -296,7 +296,7 @@ function UserModal(props) {
                       removeAddStructure={onTraineeRemove}
                       isTrainee={true}
                       traineeOptions={traineeOptions}
-                      defaultChecked={traineeOptions.find(userRole =>
+                      defaultChecked={traineeOptions?.find(userRole =>
                         editItem.structureRoles?.some(option => option.roleId === userRole.name)
                       )}
                       onChange={onTraineeChange}

@@ -100,7 +100,7 @@ const Table = props => {
   useEffect(() => {
     if (isTableLoaded) {
       handleRemoteData(
-        tableState.page,
+        0,
         tableState.rowsPerPage,
         tableState.order,
         tableState.orderBy,

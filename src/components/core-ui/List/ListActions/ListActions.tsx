@@ -1,7 +1,7 @@
 import { ButtonWithConfirmDeleteModal } from '../../ButtonWithConfirmDeleteModal'
 import { Delete } from '@mui/icons-material'
 
-const ListActions = ({ itemId, deleteAction, additionalAction }) => {
+const ListActions = ({ item, deleteAction, additionalAction }) => {
   return (
     <div>
       {deleteAction && (
@@ -10,9 +10,10 @@ const ListActions = ({ itemId, deleteAction, additionalAction }) => {
           modalTitle="Delete"
           modalMessage={deleteAction.confirmText}
           formButtons={deleteAction.formButtons}
-          deletedItemId={itemId}
+          deletedItemId={item.id}
           deleteActionUrl={deleteAction.url}
           additionalAction={additionalAction}
+          deleteActionQueryParams={`${deleteAction.queryParam}=${item[deleteAction.variable]}`}
         />
       )}
     </div>
