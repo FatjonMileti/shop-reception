@@ -3,7 +3,7 @@ import { CircularProgress, Grid } from '@mui/material'
 import { Modal } from 'components/core-ui/Modal'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { useFormik } from 'formik'
-import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { EditBatchItem } from '../../interfaces'
@@ -27,7 +27,7 @@ const EditBatch: React.FC<EditBatchProps> = props => {
         ['product', editProductId],
         async () => {
           if (editProductId) {
-            const result = await makeCoreGetRequest(`/bakery/product/management/${editProductId}`) ///TODO
+            const result = await makeCoreGetRequest(`/bakery/product/ingredients/${editProductId}`) ///TODO
             return result || null
           }
           return null
@@ -47,7 +47,7 @@ const EditBatch: React.FC<EditBatchProps> = props => {
     const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
 
     const submitTask = async (values: any) => {
-      await makeCorePostRequest(`/bakery/product/management/${editProductId}`, values)
+      await makeCorePutRequest(`/bakery/product/ingredients/${editProductId}`, values)
     }
 
     const { isLoading, mutate } = useMutation(submitTask, {
@@ -92,7 +92,7 @@ const EditBatch: React.FC<EditBatchProps> = props => {
                 <FormInfoItems
                   items={[
                     { label: 'Produs:', name: (editItem as EditBatchItem)?.name },
-                    { label: 'Cluster:', name: (editItem as EditBatchItem)?.cluster },
+                    { label: 'Cluster:', name: (editItem as EditBatchItem)?.clusterName },
                     { label: 'Cod METI:', name: (editItem as EditBatchItem)?.metiCode as string },
                   ]}
                 />

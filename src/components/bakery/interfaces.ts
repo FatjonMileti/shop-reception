@@ -233,6 +233,8 @@ export interface EditBatchItem {
   metiCode: string | number
   familyModuleName: string
   imageUrl: string
-  cluster: string
+  clusterName: string
   batch: boolean
+  minStock: string | number
+  scheduleProduct: boolean
 }

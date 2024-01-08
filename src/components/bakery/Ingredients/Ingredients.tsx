@@ -30,7 +30,7 @@ const Ingredients = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/product/management', //TODO
+          url: '/bakery/product/management/ingredients',
           filters: [],
           searchFields: ["name","metiCode","pluCode"],
           searchText,

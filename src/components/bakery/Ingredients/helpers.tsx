@@ -41,11 +41,8 @@ export const columns = [
   ]
 
 export const getInitialValues = editItem => ({
-    id: editItem?.id ?? '',
-    name: editItem?.name ?? '',
-    metiCode: editItem?.metiCode ?? '',
-    familyModuleName: editItem?.familyModuleName ?? '',
-    cluster: editItem?.cluster ?? '',
-    batch: editItem?.batch ? 'Da' : 'Nu'
+    batch: editItem?.batch ? 'Da' : 'Nu',
+    minStock: editItem?.minStock ?? '',
+    scheduleProduct: editItem?.scheduleProduct
 })
 
