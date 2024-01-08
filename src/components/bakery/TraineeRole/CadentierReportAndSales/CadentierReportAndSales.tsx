@@ -9,11 +9,11 @@ import { TableItem } from './interfaces'
 import { DownloadOutlined } from '@mui/icons-material'
 import { useQuery } from 'react-query'
 import { toStoreFilterItems } from 'components/bakery/commonSerializers'
-import { Autocomplete, DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { TableState, ValueLabelInterface } from 'components/bakery/interfaces'
 import { formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
 import { getPreviousDay } from 'utils/helpers'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { toTableRowItems } from './serializers'
 import { FamilyItem, SubfamilyItem } from '../ProductionManagement/interfaces'
@@ -195,52 +195,6 @@ const CadentierReportAndSales = () => {
     }
   )
 
-  const drawerFilters = [
-    {
-      name: 'date',
-      value: prevDay,
-      filter: (
-        <DatePicker
-          label="Planificare pentru"
-          variant="outlined"
-          value={prevDay}
-          onChange={() => {}}
-          required
-        />
-      ),
-      type: 'date',
-      label: 'Planificare pentru'
-    },
-    {
-      name: 'family',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Familie"
-          options={familiesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
-    },
-    {
-      name: 'subfamily',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Subfamilie"
-          options={subfamiliesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Subfamilie'
-    },
-  ]
   return (
     <div className={s.mainContainer}>
       <Grid container>
@@ -282,7 +236,7 @@ const CadentierReportAndSales = () => {
                 onClick: () => downloadFileQuery.refetch()
               }
             ]}
-            filters={drawerFilters}
+            filters={drawerFilters(prevDay, familiesQuery, subfamiliesQuery)}
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}

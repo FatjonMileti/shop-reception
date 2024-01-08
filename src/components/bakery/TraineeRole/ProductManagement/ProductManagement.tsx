@@ -7,14 +7,14 @@ import { useNotification } from 'hooks'
 import { Divider, Grid } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import Table from 'components/core-ui/Table/Table'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { TableItem } from './interfaces'
 import { ValueLabelInterface } from 'components/governance/interfaces'
 import { toTableRowItems } from './serializers'
 import { toStoreFilterItems } from 'components/bakery/commonSerializers'
 import { FamilyItem, SubfamilyItem } from '../ProductionManagement/interfaces'
 import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
-import { Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const ProductManagement = () => {
   const { showNotification } = useNotification()
@@ -143,54 +143,6 @@ const ProductManagement = () => {
     }
   }
 
-  const drawerFilters = [
-    {
-      name: 'family',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Familie"
-          options={familiesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
-    },
-    {
-      name: 'subfamily',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Subfamilie"
-          options={subfamiliesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Subfamilie'
-    },
-    {
-      name: 'scheduleProduct',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Produs cadentier"
-          options={[
-            { value: 'true', label: 'Da' },
-            { value: 'false', label: 'Nu' }
-          ]}
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Produs cadentier'
-    },
-  ]
-
   return (
     <div className={s.mainContainer}>
       <Grid container>
@@ -226,7 +178,7 @@ const ProductManagement = () => {
             hasSearchInput
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
-            filters={drawerFilters}
+            filters={drawerFilters(familiesQuery, subfamiliesQuery)}
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           />
         )}

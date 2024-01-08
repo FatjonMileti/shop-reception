@@ -6,9 +6,9 @@ import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { Divider, Grid } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { IdNameInterface, ValueLabelInterface } from 'components/bakery/interfaces'
-import { DatePicker, Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
@@ -210,53 +210,6 @@ const GrowthRegion = () => {
     }
   )
 
-  const drawerFilters = [
-    {
-      name: 'date',
-      value: currentDate,
-      filter: (
-        <DatePicker
-          label="Planificare pentru"
-          variant="outlined"
-          value={currentDate}
-          onChange={() => {}}
-          required
-        />
-      ),
-      type: 'date',
-      label: 'Planificare pentru'
-    },
-    {
-      name: 'family',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Familie"
-          options={familiesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
-    },
-    {
-      name: 'subfamily',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Subfamilie"
-          options={subfamiliesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Subfamilie'
-    },
-  ]
-
   return (
     <div className={s.mainContainer}>
       <Grid container>
@@ -307,7 +260,7 @@ const GrowthRegion = () => {
             order={tableState.order}
             orderBy={tableState.orderBy}
             tableFilters={tableState.tableFilters}
-            filters={drawerFilters}
+            filters={drawerFilters(currentDate, familiesQuery, subfamiliesQuery)}
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}

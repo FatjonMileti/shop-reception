@@ -5,14 +5,14 @@ import { makeCoreGetRequest } from 'utils/api'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { toTableRowItems } from './serializers'
 import { TableItem } from './interfaces'
 import { useQuery } from 'react-query'
 import { toStoreFilterItems } from 'components/bakery/commonSerializers'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { GroupTable } from 'components/core-ui/GroupTable'
-import { Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const ProductsGrowthCoefficient = () => {
   const { showNotification } = useNotification()
@@ -99,24 +99,6 @@ const ProductsGrowthCoefficient = () => {
     setShouldRefreshData(true)
   }
 
-  const drawerFilters = [
-    {
-      name: 'family',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Familie"
-          options={familiesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
-    },
-  ]
-
   return (
     <div className={s.mainContainer}>
       <Grid container>
@@ -148,7 +130,7 @@ const ProductsGrowthCoefficient = () => {
             setShouldRefreshData={setShouldRefreshData}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
-            filters={drawerFilters}
+            filters={drawerFilters(familiesQuery)}
           />
         )}
       </Grid>

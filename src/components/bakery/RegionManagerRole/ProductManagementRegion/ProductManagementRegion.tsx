@@ -10,11 +10,11 @@ import { formatErrorMessage } from 'utils/formatting'
 import { useQuery } from 'react-query'
 import { toTableRowItems } from './serializers'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { toAsyncSelectOptions } from 'components/bakery/commonSerializers'
 import { FamilyItem } from 'components/bakery/StoreManagerRole/interfaces'
 import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
-import { Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const ProductManagementRegion = () => {
   const [tableItems, setTableItems] = useState<ProductManagementItem[]>([])
@@ -145,54 +145,6 @@ const ProductManagementRegion = () => {
     }
   }
 
-  const drawerFilters = [
-    {
-      name: 'family',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Familie"
-          options={familiesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
-    },
-    {
-      name: 'subfamily',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Subfamilie"
-          options={subfamiliesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Subfamilie'
-    },
-    {
-      name: 'scheduleProduct',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Produs cadentier"
-          options={[
-            { value: 'true', label: 'Da' },
-            { value: 'false', label: 'Nu' }
-          ]}
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Produs cadentier'
-    },
-  ]
-
   return (
     <div className={s.mainContainer}>
       <Grid container>
@@ -226,7 +178,7 @@ const ProductManagementRegion = () => {
           maxHeight="600px"
           stickyRatio={0.3}
           setShouldRefreshData={setShouldRefreshData}
-          filters={drawerFilters}
+          filters={drawerFilters(familiesQuery, subfamiliesQuery)}
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
