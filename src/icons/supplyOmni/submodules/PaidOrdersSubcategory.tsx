@@ -16,8 +16,8 @@ const PaidOrdersSubcategory: React.FC = () => (
         y2="70"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#49912D" />
-        <stop offset="1" stop-color="#33691E" />
+        <stop stopColor="#49912D" />
+        <stop offset="1" stopColor="#33691E" />
       </linearGradient>
     </defs>
   </svg>

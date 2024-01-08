@@ -3,7 +3,7 @@ import React from 'react'
 const ReportsVolumetryHome: React.FC = () => (
   <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="70" height="70" rx="14.5455" fill="url(#paint0_linear_555_29630)" />
-    <g clip-path="url(#clip0_555_29630)">
+    <g clipPath="url(#clip0_555_29630)">
       <path
         d="M35.4003 32.5705C35.5386 32.8807 35.7004 33.1798 35.8843 33.4652L50.367 30.5839C49.7766 28.5095 48.7717 26.5764 47.413 24.9015C46.0543 23.2265 44.37 21.8446 42.462 20.8391C40.5539 19.8337 38.4618 19.2257 36.3121 19.0519C34.1624 18.8781 31.9997 19.142 29.955 19.8279L35.4003 32.5705Z"
         fill="white"
@@ -26,8 +26,8 @@ const ReportsVolumetryHome: React.FC = () => (
         y2="70"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#6E2EBD" />
-        <stop offset="1" stop-color="#4A148C" />
+        <stop stopColor="#6E2EBD" />
+        <stop offset="1" stopColor="#4A148C" />
       </linearGradient>
       <clipPath id="clip0_555_29630">
         <rect width="32" height="32" fill="white" transform="translate(19 19)" />
