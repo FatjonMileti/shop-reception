@@ -62,6 +62,7 @@ const EmployeesTab = () => {
           label="Nume"
           disableClearable
           options={employeeNamesOptions}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
         />
       )
     },
@@ -76,6 +77,7 @@ const EmployeesTab = () => {
           label="Departament"
           disableClearable
           options={departmentsOptions}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
         />
       )
     },
@@ -90,6 +92,7 @@ const EmployeesTab = () => {
           label="Position"
           disableClearable
           options={jobTitlesOptions}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
         />
       )
     }

@@ -22,7 +22,10 @@ export const getEmployeeNamesOptions = (showNotification: Function) => {
   )
 }
 
-export const getDepartmentsOptions = (showNotification: Function) => {
+export const getDepartmentsOptions = (
+  showNotification: Function,
+  setDefaultOptionCallback?: (defaultValue: ValueLabelInterface) => void
+) => {
   return useQuery(
     ['departments'],
     async () => {
@@ -31,6 +34,11 @@ export const getDepartmentsOptions = (showNotification: Function) => {
       const resultOptions = result.map(
         (item): ValueLabelInterface => ({ label: item.name, value: item.name })
       )
+
+      if (resultOptions?.length && !!setDefaultOptionCallback) {
+        setDefaultOptionCallback(resultOptions[0])
+      }
+
       return resultOptions || []
     },
     {
@@ -268,7 +276,7 @@ export const getRaionsOptions = (
   )
 }
 
-export const getEmployeesOptions = (showNotification: Function) => {
+export const getEmployeesOptions = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(
     ['employees-options'],
     async () => {
@@ -292,7 +300,9 @@ export const getEmployeesOptions = (showNotification: Function) => {
     },
     {
       onError: error =>
-        handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification)
+        handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification),
+        
+        enabled: validateQuery
     }
   )
 }

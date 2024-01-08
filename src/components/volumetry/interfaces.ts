@@ -11,10 +11,10 @@ export interface AutocompleteOption {
 }
 
 export interface EmployeeManagementItem {
-  id: string | number
-  department: string
+  id?: string | number
+  department: string | AutocompleteOption
   fullName: string
-  jobTitle: string
+  jobTitle: string | AutocompleteOption
   employer: string
   location?: string
 }

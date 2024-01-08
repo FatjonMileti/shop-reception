@@ -92,7 +92,7 @@ const Employee: React.FC<EmployeeProps> = props => {
             valueColor={customCapsuleColors.value}
           />
           <Capsule
-            label={employee.endTime.isEnded ? 'Ora de final' : 'Ora estimata de final'}
+            label={employee.endTime.isEnded ? 'Ora de final' : 'Ora recomandata de final'}
             value={employee.endTime.time}
             labelColor={customCapsuleColors.label}
             valueColor={customCapsuleColors.value}
@@ -148,12 +148,15 @@ const Employee: React.FC<EmployeeProps> = props => {
                 height: '30px',
                 width: isMobile ? '100%' : 'auto'
               }}
-              onClick={() => {
+              onClick={e => {
                 if (taskCurrentState.showStartButton) {
+                  e.preventDefault()
+                  e.stopPropagation()
                   handleStartTask()
                 }
-
                 if (!taskCurrentState.showStartButton) {
+                  e.preventDefault()
+                  e.stopPropagation()
                   openStopTaskModal()
                 }
               }}

@@ -154,7 +154,7 @@ const ProductionManagement = () => {
           url: '/bakery/region/cadentier',
           filters,
           page,
-          rowsPerPage: 25,
+          rowsPerPage,
           order,
           orderBy,
           searchText,
@@ -185,7 +185,7 @@ const ProductionManagement = () => {
           ...window.history.state,
           tableState: {
             page,
-            rowsPerPage: 25,
+            rowsPerPage,
             order,
             orderBy,
             searchText,
@@ -321,6 +321,8 @@ const ProductionManagement = () => {
             order={tableState.order}
             orderBy={tableState.orderBy}
             tableFilters={tableState.tableFilters}
+            rowsPerPage={25}
+            rowsPerPageOptions={[25, 50, 100]}
           />
         )}
       </Grid>
