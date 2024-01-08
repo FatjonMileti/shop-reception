@@ -7,7 +7,7 @@ const FamilyMenu: React.FC = () => (
       height="32"
       rx="6.64935"
       fill="url(#paint0_linear_1037_33882)"
-      fill-opacity="0.1"
+      fillOpacity="0.1"
     />
     <path
       d="M22.7002 16.6354H21.2273C21.3717 17.0397 21.4583 17.5018 21.4583 17.935V23.4513C21.4583 23.6245 21.4295 23.8267 21.3717 24H23.7688C24.6641 24 25.3861 23.278 25.3861 22.3827V19.3502C25.415 17.8484 24.202 16.6354 22.7002 16.6354Z"
@@ -42,8 +42,8 @@ const FamilyMenu: React.FC = () => (
         y2="32"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0062FF" />
-        <stop offset="1" stop-color="#004BC2" />
+        <stop stopColor="#0062FF" />
+        <stop offset="1" stopColor="#004BC2" />
       </linearGradient>
     </defs>
   </svg>

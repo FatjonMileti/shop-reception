@@ -167,7 +167,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
         toTableGETUrl({
           url: urlResource,
           tableFilters,
-          filters: [{ name: 'myOrders', value: String(withMyOrders) }],
+          extraCustomUrlParams: [{ name: 'myOrders', value: String(withMyOrders) }],
           page,
           rowsPerPage,
           order,

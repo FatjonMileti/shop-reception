@@ -14,9 +14,9 @@ export const buildTableFilterInputs = (
         type="text"
         name="project.name"
         label="Project name"
-        variant="standard"
-        onChange={(value: string) => setTableFilter({ ...tableFilter, "project.name": value })}
-        value={tableFilter["project.name"]}
+        variant="outlined"
+        onChange={(value: string) => setTableFilter({ ...tableFilter, 'project.name': value })}
+        value={tableFilter['project.name']}
       />
     )
   },
@@ -29,7 +29,7 @@ export const buildTableFilterInputs = (
         type="text"
         name="stage"
         label="Stage"
-        variant="standard"
+        variant="outlined"
         onChange={(value: string) => setTableFilter({ ...tableFilter, stage: value })}
         value={tableFilter.stage}
       />
@@ -44,9 +44,9 @@ export const buildTableFilterInputs = (
         type="text"
         name="project.iibKey"
         label="IIB Key"
-        variant="standard"
-        onChange={(value: string) => setTableFilter({ ...tableFilter, "project.iibKey": value })}
-        value={tableFilter["project.iibKey"]}
+        variant="outlined"
+        onChange={(value: string) => setTableFilter({ ...tableFilter, 'project.iibKey': value })}
+        value={tableFilter['project.iibKey']}
       />
     )
   },
@@ -59,9 +59,9 @@ export const buildTableFilterInputs = (
         type="text"
         name="project.ipbKey"
         label="IPB Key"
-        variant="standard"
-        onChange={value => setTableFilter({ ...tableFilter, "project.ipbKey": value })}
-        value={tableFilter["project.ipbKey"]}
+        variant="outlined"
+        onChange={value => setTableFilter({ ...tableFilter, 'project.ipbKey': value })}
+        value={tableFilter['project.ipbKey']}
       />
     )
   }

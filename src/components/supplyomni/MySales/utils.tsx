@@ -15,7 +15,7 @@ export const buildTableFilterInputs = (
     filter: (
       <DatePicker
         label="Data inceput"
-        variant="standard"
+        variant="outlined"
         onChange={(value: Date) => setTableFilter({ ...tableFilter, startDate: value })}
         value={tableFilter.startDate}
       />
@@ -30,7 +30,7 @@ export const buildTableFilterInputs = (
     filter: (
       <DatePicker
         label="Data sfarsit"
-        variant="standard"
+        variant="outlined"
         onChange={(value: Date) => setTableFilter({ ...tableFilter, endDate: value })}
         value={tableFilter.endDate}
       />
