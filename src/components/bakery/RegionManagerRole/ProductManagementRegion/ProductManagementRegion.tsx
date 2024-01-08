@@ -145,7 +145,7 @@ const ProductManagementRegion = () => {
         { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) },
         { name: 'scheduleProduct', value: scheduleProductFilterValue?.value }
       ].filter(
-        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value !== undefined && f.value !== null)
       )
       const response = await makeCoreGetRequest(
         toTableGETUrl({

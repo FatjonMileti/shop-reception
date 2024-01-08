@@ -14,7 +14,7 @@ import dayjs from 'dayjs'
 import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
-import { formatBakeryPayloadDate } from 'utils/helpers'
+import {formatBakeryPayloadDate, getPreviousDay} from 'utils/helpers'
 import { columns } from './helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { toTableRowItems } from './serializers'
@@ -28,7 +28,7 @@ const CadentierReportAndSales = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
-  const [planningDateFilterValue, setPlanningDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
+  const [planningDateFilterValue, setPlanningDateFilterValue] = useState(getPreviousDay())
   const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
   const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
 
