@@ -170,7 +170,7 @@ const SalesCadentier = () => {
     const url = toTableGETUrl({
       url: '/bakery/report/download/sale',
       filters: [
-        { name: 'store', value: storeFilterValue.value },
+        { name: 'date', value: formatPayloadDate(dateFilterValue) },
         { name: 'store', value: storeFilterValue?.value },
         { name: 'family', value: familiesFilterValue?.map(val => val.value) },
         { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
