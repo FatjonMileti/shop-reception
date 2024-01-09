@@ -941,7 +941,7 @@
       "responses": [
         {
           "uuid": "8cc70d6b-007a-4993-b2c3-fdedeffe3885",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int' max=99999}},\n      \"name\": \"Task\",\n      \"rayonsOrDepartment\": \"Raion 1\",\n      \"recommendedStartHour\": \"08:00\",\n      \"recommendedEndHour\": \"10:00\",\n      \"frequency\": \"Zilnic\",\n      \"standardProductivityValue\": {{faker 'number.int' max=99999}},\n      \"measurementUnit\": \"ora\",\n      \"priority\": \"{{oneOf (array '1 - Ridicat')}}\",\n      \"workVolumeSource\": \"120\",\n      \"volumetryLocationCategory\": \"Categorie\",\n      \"isActive\": {{faker 'datatype.boolean'}}\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int' max=99999}},\n    \"totalCount\": {{faker 'number.int' max=99999}},\n    \"pageCount\": {{faker 'number.int' max=99999}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int' max=99999}},\n      \"name\": \"Task\",\n      \"rayonsOrDepartment\": \"Back-End\",\n      \"recommendedStartHour\": \"08:00\",\n      \"recommendedEndHour\": \"10:00\",\n      \"frequency\": \"Zilnic\",\n      \"standardProductivityValue\": {{faker 'number.int' max=99999}},\n      \"measurementUnit\": \"ora\",\n      \"priority\": \"{{oneOf (array '1 - Ridicat')}}\",\n      \"workVolumeSource\": \"120\",\n      \"volumetryLocationCategory\": \"Category 1\",\n      \"isActive\": {{faker 'datatype.boolean'}}\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int' max=99999}},\n    \"totalCount\": {{faker 'number.int' max=99999}},\n    \"pageCount\": {{faker 'number.int' max=99999}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted task templates list",
@@ -2943,7 +2943,7 @@
       "responses": [
         {
           "uuid": "bf4b24eb-d5ad-4969-b107-aa20cd05d9b7",
-          "body": "",
+          "body": "{\n  \"customText\": \"Task completed\",\n  \"isStopped\": true,\n  \"volume\": \"20\"\n}",
           "latency": 0,
           "statusCode": 204,
           "label": "Successfully changed state of the timer",
@@ -5465,7 +5465,7 @@
       "responses": [
         {
           "uuid": "b2baeb98-9c89-4dda-b42b-d9929d3d330d",
-          "body": "",
+          "body": "{\n  \"isStarted\": true\n}",
           "latency": 0,
           "statusCode": 204,
           "label": "Successfully updated task",
@@ -5585,6 +5585,314 @@
         },
         {
           "uuid": "4ecbc544-d653-4844-bf72-6fa61d0c5118",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "An unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "64d9d0a0-9039-4459-b82d-986324557e04",
+      "type": "http",
+      "documentation": "Get eval reports",
+      "method": "get",
+      "endpoint": "evaluationReports",
+      "responses": [
+        {
+          "uuid": "9ebbc2a3-4ee6-4af2-a6c0-1bf588833732",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted employee list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "5970899e-8f98-4e6f-987a-b0f8b902f60b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "930f31c8-c6aa-436b-aaf7-6cfe1e90c639",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "bf904453-088a-417d-b4f5-f9fe9973d11a",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e7889025-c5f3-44a4-bc28-38fa26bc2404",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "460f0ec8-bc05-46b5-8d5b-f003579989a9",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "An unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "78870f14-5c61-41c4-9d09-bc19cc21e887",
+      "type": "http",
+      "documentation": "Update task details",
+      "method": "put",
+      "endpoint": "task/:id",
+      "responses": [
+        {
+          "uuid": "49f4de2b-d09d-4656-be40-77c2e52a2686",
+          "body": "{\n  \"id\": 1,\n  \"volume\": {\n    \"total\": 400\n  }\n}",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Successfully updated task",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e2625767-b6cd-4c31-ae49-dad2bb194ee8",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "87edb01b-e40e-4f48-8fb1-fd338f107027",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "f117a93f-ea45-4ba9-b65b-651101a6bc7d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "190a4e2c-ac5f-4b0c-91d1-a268ed1b60f8",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "8792e0a8-d43b-4f36-b150-4fab1f05d047",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -5763,6 +6071,14 @@
     {
       "type": "route",
       "uuid": "bf272827-bd98-48ff-989e-ea849d5ef64b"
+    },
+    {
+      "type": "route",
+      "uuid": "64d9d0a0-9039-4459-b82d-986324557e04"
+    },
+    {
+      "type": "route",
+      "uuid": "78870f14-5c61-41c4-9d09-bc19cc21e887"
     }
   ],
   "proxyMode": false,

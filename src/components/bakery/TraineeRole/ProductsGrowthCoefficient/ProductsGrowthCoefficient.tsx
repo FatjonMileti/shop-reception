@@ -1,18 +1,18 @@
 import s from '../../commonStyles.modules.scss'
 import { useNotification } from 'hooks'
-import { CircularProgress, Grid } from '@mui/material'
+import { Divider, Grid } from '@mui/material'
 import { makeCoreGetRequest } from 'utils/api'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { toTableRowItems } from './serializers'
 import { TableItem } from './interfaces'
 import { useQuery } from 'react-query'
 import { toStoreFilterItems } from 'components/bakery/commonSerializers'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { GroupTable } from 'components/core-ui/GroupTable'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const ProductsGrowthCoefficient = () => {
   const { showNotification } = useNotification()
@@ -21,7 +21,6 @@ const ProductsGrowthCoefficient = () => {
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
-  const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
 
   const { data: stores } = useQuery(
     ['store'],
@@ -41,7 +40,7 @@ const ProductsGrowthCoefficient = () => {
   )
 
   const familiesQuery = useQuery(
-    ['families'],
+    ['families', storeFilterValue?.value],
     async () => {
       const result = await makeCoreGetRequest(
         '/bakery/store/families',
@@ -67,17 +66,12 @@ const ProductsGrowthCoefficient = () => {
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
-    const filters = [
-      { name: 'store', value: storeFilterValue?.value },
-      { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-    ].filter(
-      f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-    )
+
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/product/trainee/growth',
-          filters: filters,
+          filters: [{ name: 'store', value: storeFilterValue?.value }],
           tableFilters,
           page,
           rowsPerPage,
@@ -105,37 +99,23 @@ const ProductsGrowthCoefficient = () => {
     setShouldRefreshData(true)
   }
 
-  const handleFamiliesFilterChange = (value: ValueLabelInterface[]): void => {
-    setFamiliesFilterValue(value)
-    if (familiesFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
   return (
     <div className={s.mainContainer}>
       <Grid container>
         <Grid xs={12} md={12} spacing={2} container marginBottom={2}>
           <Grid xs={12} md={4} item>
-              <AsyncAutocomplete
-                variant="outlined"
-                name="store"
-                label="Magazin"
-                value={storeFilterValue}
-                options={stores}
-                onChange={handleStoreFilterChange}
-              />
+            <FilterDataSelect
+              name="store"
+              defaultSelectedData={storeFilterValue}
+              label="Magazin"
+              options={stores}
+              onSelect={handleStoreFilterChange}
+            />
           </Grid>
-          <Grid xs={12} md={4} item>
-              <AsyncAutocomplete
-                variant="outlined"
-                name="family"
-                label="Familie"
-                value={familiesFilterValue}
-                options={familiesQuery.data || []}
-                onChange={handleFamiliesFilterChange}
-                multiple
-              />
-          </Grid>
+        </Grid>
+
+        <Grid xs={12} item py={2}>
+          <Divider />
         </Grid>
 
         {storeFilterValue && (
@@ -150,6 +130,7 @@ const ProductsGrowthCoefficient = () => {
             setShouldRefreshData={setShouldRefreshData}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
+            filters={drawerFilters(familiesQuery)}
           />
         )}
       </Grid>
