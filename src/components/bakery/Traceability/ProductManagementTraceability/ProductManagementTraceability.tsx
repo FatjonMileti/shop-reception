@@ -1,6 +1,12 @@
-import React, {  useState } from 'react'
-import { AccordionTable, AccordionTableProps, BodyItem } from './AccordionTable'
-import { CircularProgress, Divider, Grid } from '@mui/material'
+import React from 'react'
+import {
+  AccordionDetailsWrapper,
+  AccordionSummaryWrapper,
+  BodyItem,
+  Column,
+  HeaderItem
+} from './AccordionTable'
+import { Grid, Typography } from '@mui/material'
 import { FamilyItem, ProductManagementItem, SubfamilyItem } from '../../StoreManagerRole/interfaces'
 import { makeCoreGetRequest } from '../../../../utils/api'
 import { toTableGETUrl } from '../../../core-ui/Table/serializers'
@@ -10,13 +16,18 @@ import { useNotification } from '../../../../hooks'
 import { ValueLabelInterface } from '../../interfaces'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 import { DescriptionText } from '../../../core-ui/DescriptionText'
-import { Pagination } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import { useQuery } from 'react-query'
-import { AsyncAutocomplete } from '../../../core-ui/AsyncAutocomplete'
-import { StaticAutocomplete } from '../../../core-ui/StaticAutocomplete'
 import s from '../../commonStyles.modules.scss'
+import {
+  RowActionType,
+  TableFiltersType
+} from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
+import { EditActionIcon } from '../../../../icons'
+import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
+import AddActionIcon from '../../../../icons/AddActionIcon'
 
-const columns: AccordionTableProps['columns'] = [
+const columns: Column[] = [
   {
     title: 'Cod EAN',
     field: 'eanCodes'
@@ -108,7 +119,7 @@ const columns: AccordionTableProps['columns'] = [
   }
 ]
 
-const headerItems: AccordionTableProps['headerItems'] = [
+const headerItems: Column[] = [
   {
     title: 'Cod METI',
     field: 'metiCode'
@@ -120,63 +131,31 @@ const headerItems: AccordionTableProps['headerItems'] = [
   {
     title: 'Subfamilie',
     field: 'subfamily'
-  },
+  }
 ]
 
 export const ProductManagementTraceability = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const [totalCount, setTotalCount] = React.useState<number>(0)
   const [tableItems, setTableItems] = React.useState<ProductManagementItem[]>([])
-  const [pageCount, setPageCount] = React.useState(0)
-  const [page, setPage] = React.useState(0)
-
-  const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-  const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-  const [productFilterValue, setProductFilterValue] = useState<ValueLabelInterface>()
-
+  const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
   const { showNotification } = useNotification()
 
-  React.useEffect(() => {
-    fetchData({
-      page: page,
-      rowsPerPage: 10,
-      order: undefined,
-      orderBy: undefined,
-      tableFilters: [],
-      searchText: ''
-    })
-  }, [page, familiesFilterValue, subfamiliesFilterValue, productFilterValue])
-
-  const filters = React.useMemo(() => {
-    return [
-      { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-      { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) },
-      { name: 'scheduleProduct', value: productFilterValue?.value }
-    ].filter(
-      f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-    )
-  }, [familiesFilterValue, subfamiliesFilterValue, productFilterValue])
-
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
+  const fetchData = async (page, rowsPerPage, tableFilters) => {
     setIsLoading(true)
 
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/product',
-          filters: filters,
-          searchText,
-          searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
+          // searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
           tableFilters,
           page,
-          rowsPerPage,
-          order,
-          orderBy
+          rowsPerPage
         })
       )
       setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
-      setPageCount(response.page.pageCount)
       setIsLoading(false)
     } catch (error) {
       showNotification({
@@ -184,10 +163,6 @@ export const ProductManagementTraceability = () => {
         type: 'error'
       })
     }
-  }
-
-  const onPageChange = (e, p) => {
-    setPage(p - 1)
   }
 
   const families = useQuery(
@@ -213,11 +188,13 @@ export const ProductManagementTraceability = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', familiesFilterValue.map(({ value }) => value)],
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'family')?.value],
     async () => {
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+        ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
-          family: familiesFilterValue.map(({ value }) => value)
+          family: familyLiveFilterValue.map(({ value }) => value)
         },
         paramsSerializer: { indexes: null }
       })
@@ -239,89 +216,129 @@ export const ProductManagementTraceability = () => {
     }
   )
 
-  const handleSubfamiliesChange = (value: ValueLabelInterface[]): void => {
-    setSubfamiliesFilterValue(value)
-  }
+  const drawerFilters: TableFiltersType[] = [
+    {
+      name: 'family',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Familie"
+          disableClearable
+          options={families.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Familie',
+      clearFiltersOnChange: ['subfamily']
+    },
+    {
+      name: 'subfamily',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Subfamilie"
+          disableClearable
+          options={subfamilies.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Subfamilie'
+    },
+    {
+      name: 'scheduleProduct',
+      value: '',
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Produs cadentier"
+          disableClearable
+          options={[
+            { value: 'true', label: 'Da' },
+            { value: 'false', label: 'Nu' }
+          ]}
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Produs cadentier'
+    }
+  ]
 
-  const handleProductChange = (value: ValueLabelInterface): void => {
-    setProductFilterValue(value)
-  }
-
-  const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
-    setFamiliesFilterValue(value)
-    setSubfamiliesFilterValue([])
-  }
+  const rowActions: RowActionType[] = [
+    {
+      label: 'Editeaza',
+      labelColor: 'white',
+      typographyVariant: 'medium',
+      backgroundColor: '#16a085',
+      onClick: (e, rowId) => alert(`Edit item: ${rowId}`),
+      desktopIcon: <EditActionIcon />
+    },
+    {
+      label: 'Sterge',
+      labelColor: 'white',
+      typographyVariant: 'medium',
+      backgroundColor: '#d9534f',
+      onClick: (e, rowId) => alert(`Delete item: ${rowId}`),
+      desktopIcon: <EditActionIcon />
+    }
+  ]
 
   return (
     <div className={s.mainContainer}>
-      {isLoading || subfamilies.isFetching || families.isFetching ? (
-        <div style={{ display: 'flex' }}>
-          <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
-        </div>
-      ) : (
-        <>
-          <Grid xs={12} md={12} container gap={2}>
-            <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
-                variant='outlined'
-                name='family'
-                label='Familie'
-                value={familiesFilterValue}
-                options={families.data || []}
-                onChange={handleFamiliesChange}
-                multiple
-              />
-            </Grid>
-            <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
-                variant='outlined'
-                name='subfamily'
-                label='Subfamilie'
-                value={subfamiliesFilterValue}
-                options={subfamilies.data || []}
-                onChange={handleSubfamiliesChange}
-                multiple
-              />
-            </Grid>
-            <Grid xs={12} md={3} item>
-              <StaticAutocomplete
-                variant='outlined'
-                name='scheduleProduct'
-                label='Produs cadentier'
-                value={productFilterValue}
-                options={[
-                  { value: true, label: 'Da' },
-                  { value: false, label: 'Nu' }
-                ]}
-                onChange={handleProductChange}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid xs={12} item paddingTop={2}>
-            <Divider />
-          </Grid>
-
-          <div style={{ display: 'grid', rowGap: '24px' }}>
-            <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
-              <AccordionTable
-                headerItems={headerItems}
-                columns={columns}
-                tableItems={tableItems}
-              />
-            </div>
-
-            <Pagination
-              count={pageCount}
-              onChange={onPageChange}
-              shape='rounded'
-              variant='outlined'
-              showFirstButton
-              showLastButton
-            />
-          </div>
-        </>
-      )}
+      <ListTable
+        totalCount={totalCount}
+        isLoading={isLoading}
+        filters={drawerFilters}
+        rowActions={rowActions}
+        rows={tableItems.map(item => ({
+          id: item.id,
+          summary: (
+            <AccordionSummaryWrapper>
+              <img src={'images/default-product-image.svg'} />
+              <div className="title-and-content-wrapper">
+                <Typography variant="medium" className="title">
+                  Paine 7 seminte
+                </Typography>
+                <div className="content-wrapper">
+                  {headerItems.map((hc, cIndex) => (
+                    <React.Fragment key={cIndex}>
+                      {hc.render ? (
+                        hc.render(item)
+                      ) : (
+                        <HeaderItem name={hc.title} value={item[hc.field]} />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+            </AccordionSummaryWrapper>
+          ),
+          details: (
+            <AccordionDetailsWrapper>
+              <Grid container spacing={2} columns={12}>
+                {columns.map((c, cIndex) => (
+                  <React.Fragment key={cIndex}>
+                    {c.render ? c.render(item) : <BodyItem name={c.title} value={item[c.field]} />}
+                  </React.Fragment>
+                ))}
+              </Grid>
+            </AccordionDetailsWrapper>
+          ),
+          borderLeftColor: '#0970E6'
+        }))}
+        handleRemoteData={fetchData}
+        rowActionsWidth="200px"
+        toolbarActions={[
+          {
+            icon: <AddActionIcon />,
+            label: 'Add',
+            onClick: function noRefCheck() {}
+          },
+        ]}
+      />
     </div>
   )
 }
