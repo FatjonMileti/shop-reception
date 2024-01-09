@@ -1,7 +1,6 @@
 import { Box } from '@mui/material'
 import { IconCell } from 'components/core-ui/IconCell'
 import { TableFilters } from './interfaces'
-import dayjs from 'dayjs'
 
 export const RESOURCE_URI = '/supply-omni/order'
 
@@ -40,13 +39,13 @@ export const tableColumns = [
   },
   {
     title: 'Activ',
-    field: 'paid',
+    field: 'active',
     align: 'left',
     disableSorting: true,
     collapsible: true,
     render: row => (
       <Box>
-        <IconCell value={row.paid ? 'inactive' : 'active'} />
+        <IconCell value={row.active ? 'active' : 'inactive'} />
       </Box>
     )
   }
