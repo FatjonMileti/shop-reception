@@ -30,8 +30,8 @@ const TeamCapacitySubcategory: React.FC = () => (
         y2="70"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#6E2EBD" />
-        <stop offset="1" stop-color="#4A148C" />
+        <stop stopColor="#6E2EBD" />
+        <stop offset="1" stopColor="#4A148C" />
       </linearGradient>
     </defs>
   </svg>

@@ -4,19 +4,19 @@ import { useQuery } from 'react-query'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
-import { CircularProgress, Divider, Grid } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { Divider, Grid } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { IdNameInterface, ValueLabelInterface } from 'components/bakery/interfaces'
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
-import { formatAndDownloadResponse, formatPayloadDate } from 'utils/helpers'
+import { formatAndDownloadResponse, getCurrentDate } from 'utils/helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { SubfamilyItem, TableItem, TableState } from '../interfaces'
 import { FamilyItem } from 'components/bakery/StoreManagerRole/interfaces'
+import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
 dayjs.extend(customParseFormat)
 
 const GrowthRegion = () => {
@@ -26,15 +26,13 @@ const GrowthRegion = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<TableItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
-  const [planningDate, setPlanningDate] = useState(dayjs())
-  const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-  const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-
+  const currentDate = getCurrentDate()
   const [tableState, setTableState] = useState<TableState>({
     order: null,
     orderBy: null,
     tableFilters: null
   })
+  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const { data: filterOptions } = useQuery(
     ['store'],
@@ -55,11 +53,20 @@ const GrowthRegion = () => {
     }
   )
 
-  const { data: subfamiliesOptions } = useQuery(
-    ['subfamilies'],
+  const subfamiliesQuery = useQuery(
+    ['subfamilies', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'family')?.value],
     async () => {
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+        ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(
-        `/bakery/region/subfamilies?store=${storeFilterValue?.value}`
+        `/bakery/store/cadentier/families/subfamilies`,
+        {
+          params: {
+            store: storeFilterValue?.value,
+            family: familyLiveFilterValue.map(({ value }) => value)
+          },
+          paramsSerializer: { indexes: null }
+        }
       )
 
       const resultOptions = result.map(
@@ -119,43 +126,20 @@ const GrowthRegion = () => {
     setShouldRefreshData(true)
   }
 
-  const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
-    setFamiliesFilterValue(value)
-    if (familiesFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
-  const handlePlanningDateFilterChange = (value: Date): void => {
-    setPlanningDate(dayjs(value))
-    setShouldRefreshData(true)
-  }
-
-  const handleSubfamiliesChange = (value: ValueLabelInterface[]): void => {
-    setSubfamiliesFilterValue(value)
-    if (subfamiliesFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
-  const fetchData = async ({ page, order, orderBy, rowsPerPage, searchText }) => {
+  const fetchData = async ({ tableFilters, page, order, orderBy, rowsPerPage, searchText }) => {
     setIsLoading(true)
     try {
-      const filters = [
-        { name: 'date', value: formatPayloadDate(planningDate) },
-        { name: 'store', value: storeFilterValue?.value },
-        { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-        { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) },
-      ].filter(
-        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-      )
+     
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/cadentier',
-          filters: filters,
+          filters: [{ name: 'store', value: storeFilterValue?.value }],          
           page,
           rowsPerPage,
           order,
           orderBy,
           searchText,
+          tableFilters,
           searchFields: [
             'productName',
             'productMetiCode',
@@ -175,7 +159,7 @@ const GrowthRegion = () => {
       setTableState({
         order,
         orderBy,
-        tableFilters: filters
+        tableFilters
       })
 
       window.history.replaceState(
@@ -187,7 +171,7 @@ const GrowthRegion = () => {
             order,
             orderBy,
             searchText,
-            filters
+            tableFilters
           }
         },
         document.title
@@ -202,10 +186,15 @@ const GrowthRegion = () => {
     }
   }
 
-  const { refetch: refetchDownloadFile } = useQuery(
+  const downloadFileQuery = useQuery(
     ['download'],
     async () => {
-      const response = await makeCoreGetFileRequest(`/bakery/report/download/cadentier`, {
+      const url = toTableGETUrl({
+        url: '/bakery/report/download/cadentier',
+        tableFilters: tableState.tableFilters,
+        filters:[{ name: 'store', value: storeFilterValue?.value }]
+      })
+      const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
       return formatAndDownloadResponse(response)
@@ -226,49 +215,17 @@ const GrowthRegion = () => {
       <Grid container>
         <Grid xs={12} md={12} container spacing={5}>
           <Grid xs={12} md={3} item>
-            <DatePicker
-              label="Planificare pentru"
-              value={planningDate}
-              variant="outlined"
-              required
-              onChange={handlePlanningDateFilterChange}
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="store.id"
+            <FilterDataSelect
+              name="store"
+              defaultSelectedData={storeFilterValue}
               label="Magazin"
-              value={storeFilterValue}
               options={filterOptions}
-              onChange={handleStoreFilterChange}
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="family"
-              label="Familie"
-              value={familiesFilterValue}
-              options={familiesQuery.data || []}
-              onChange={handleFamiliesChange}
-              multiple
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="subfamilies"
-              label="Subfamilie"
-              value={subfamiliesFilterValue}
-              options={subfamiliesOptions || []}
-              onChange={handleSubfamiliesChange}
-              multiple
+              onSelect={handleStoreFilterChange}
             />
           </Grid>
         </Grid>
 
-        <Grid xs={12} item paddingTop={2}>
+        <Grid xs={12} item py={2}>
           <Divider />
         </Grid>
 
@@ -290,7 +247,7 @@ const GrowthRegion = () => {
               {
                 label: 'Descarca',
                 icon: <DownloadOutlined />,
-                onClick: () => refetchDownloadFile()
+                onClick: () => downloadFileQuery.refetch()
               },
               {
                 label: 'Printeaza',
@@ -303,6 +260,8 @@ const GrowthRegion = () => {
             order={tableState.order}
             orderBy={tableState.orderBy}
             tableFilters={tableState.tableFilters}
+            filters={drawerFilters(currentDate, familiesQuery, subfamiliesQuery)}
+            handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
           />

@@ -1,11 +1,7 @@
 import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { DescriptionText } from 'components/core-ui/DescriptionText'
 import { ImageCell } from 'components/core-ui/ImageCell'
-
-export const scheduleProductValues = [
-  { label: 'Da', value: true },
-  { label: 'Nu', value: false }
-]
+import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
 export const columns = [
     {
@@ -120,3 +116,50 @@ export const columns = [
     }, 
 ]
 
+export const drawerFilters = (familiesQuery, subfamiliesQuery) => [
+  {
+    name: 'family',
+    value: undefined,
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Familie"
+        options={familiesQuery.data || []}
+        multiple
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Familie',
+    clearFiltersOnChange: ['subfamily']
+  },
+  {
+    name: 'subfamily',
+    value: undefined,
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Subfamilie"
+        options={subfamiliesQuery.data || []}
+        multiple
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Subfamilie'
+  },
+  {
+    name: 'scheduleProduct',
+    value: '',
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Produs cadentier"
+        options={[
+          { value: 'true', label: 'Da' },
+          { value: 'false', label: 'Nu' }
+        ]}
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Produs cadentier'
+  },
+]

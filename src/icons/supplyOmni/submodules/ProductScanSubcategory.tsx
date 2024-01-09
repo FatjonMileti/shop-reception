@@ -16,8 +16,8 @@ const ProductScanSubcategory: React.FC = () => (
         y2="70"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#EA1225" />
-        <stop offset="1" stop-color="#BA0B1B" />
+        <stop stopColor="#EA1225" />
+        <stop offset="1" stopColor="#BA0B1B" />
       </linearGradient>
     </defs>
   </svg>
