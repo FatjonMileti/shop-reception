@@ -3,6 +3,7 @@ import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
 import { fromTaskPayload, handleQueryError } from './utils'
 import { toEmployeeFilterItems } from './TaskAllocation/serializers'
+import { toDepartmentsOptions } from './serializers'
 
 export const getEmployeeNamesOptions = (showNotification: Function) => {
   return useQuery(
@@ -29,11 +30,9 @@ export const getDepartmentsOptions = (
   return useQuery(
     ['departments'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/locations/departments')
+      const result = await makeCoreGetRequest('/volumetry/locations/generic-departments')
 
-      const resultOptions = result.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
-      )
+      const resultOptions = toDepartmentsOptions(result)
 
       if (resultOptions?.length && !!setDefaultOptionCallback) {
         setDefaultOptionCallback(resultOptions[0])

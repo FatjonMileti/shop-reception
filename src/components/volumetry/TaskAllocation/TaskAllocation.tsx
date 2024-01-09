@@ -83,11 +83,12 @@ const TaskAllocation = () => {
   const fetchData = async (page, rowsPerPage, tableFilters) => {
     setIsLoading(true)
     setTableState({ page, rowsPerPage, tableFilters })
+
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/volumetry/task-allocation',
-          filters: [{ name: 'department', value: departmentFilterValue.value }],
+          url: '/volumetry/tasks/aggregation/summary',
+          filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }],
           tableFilters,
           page,
           rowsPerPage
