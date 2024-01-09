@@ -27,7 +27,7 @@ const EditBatch: React.FC<EditBatchProps> = props => {
         ['product', editProductId],
         async () => {
           if (editProductId) {
-            const result = await makeCoreGetRequest(`/bakery/product/ingredients/${editProductId}`) ///TODO
+            const result = await makeCoreGetRequest(`/bakery/product/ingredients/${editProductId}`)
             return result || null
           }
           return null
