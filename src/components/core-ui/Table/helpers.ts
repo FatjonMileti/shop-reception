@@ -130,7 +130,7 @@ const getFilterUrlValues = (filters: Filter[]) => {
         // Array of string or Array of AutoCompleteValue
         encodedValue = `[${filter.value
             .map(val => (typeof val === 'string' ? val : val.value)) // Extract string or value from AutoCompleteValue
-            .join(',')}]` // Join with semi-colon
+            .join(';')}]` // Join with semi-colon
       } else if (filter.value && typeof filter.value === 'object') {
         // Single AutoCompleteValue
         encodedValue = filter.value.value
