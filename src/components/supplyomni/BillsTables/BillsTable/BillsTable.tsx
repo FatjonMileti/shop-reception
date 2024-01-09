@@ -152,13 +152,10 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
     try {
       let filters: Filter[] = []
       if (selectedDeliveryOption) {
-        const deliveryOptions = selectedDeliveryOption.map(option => option.value)
-
         filters = [
-          ...filters,
           {
             name: 'deliveryType',
-            value: deliveryOptions.join('|')
+            value: selectedDeliveryOption.value
           }
         ]
       }
@@ -168,10 +165,11 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           url: urlResource,
           tableFilters,
           extraCustomUrlParams: [{ name: 'myOrders', value: String(withMyOrders) }],
+          filters,
           page,
           rowsPerPage,
           order,
-          orderBy,
+          orderBy
         })
       )) as BillsResponseModel
       setTableItems(toTableRowItems(response.list))
@@ -196,7 +194,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           setShouldRefreshData={setShouldRefreshData}
         />
         {deliveryTypeOptions && (
-          <Grid sx={isXs ? {} : { position: 'absolute', width: '50%', zIndex: 3 }} container>
+          <Grid sx={isXs ? {} : { position: 'absolute', width: '55%', zIndex: 3 }} container>
             <Grid xs={12} sm={6} md={6} lg={6} item>
               <FormControlLabel
                 name="my_orders"
@@ -212,15 +210,15 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
             </Grid>
             <Grid xs={12} sm={6} md={6} lg={6} item>
               <FilterDataSelect
-                multiSelect={true}
-                name={'deliveryTypes'}
-                allTypesLabel="Toate tipurile"
-                placeholderButton={'Tip livrare'}
-                defaultSelectedData={selectedDeliveryOption}
-                showSearch={true}
-                showCounter={true}
+                name="deliveryTypes"
+                label="Tip livrare"
+                showCounter
+                showSearch
+                counterLabel="Selecteaza tip livrare"
+                noDataFoundLabel="Nici un rezultat"
                 options={deliveryTypeOptions}
                 onSelect={handleDeliveryOptionFilterChange}
+                clearable
               />
             </Grid>
           </Grid>
