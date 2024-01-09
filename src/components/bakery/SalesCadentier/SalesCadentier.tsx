@@ -279,7 +279,6 @@ const SalesCadentier = () => {
             order={tableState.order}
             orderBy={tableState.orderBy}
             tableFilters={tableState.tableFilters}
-            // filters={tableState.tableFilters}
             filters={tableFilterFields}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
