@@ -1,4 +1,4 @@
-import { Box, Divider, Grid } from '@mui/material'
+import { Box } from '@mui/material'
 import s from '../../../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
@@ -8,20 +8,18 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { toTableRowItems } from './serializers'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import {useSearchParams } from 'react-router-dom'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { FamilyItem } from 'components/bakery/StoreManagerRole/interfaces'
 import { useQuery } from 'react-query'
-import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
-import { Filter } from 'components/core-ui/Table/TableDefinitions'
+
 
 const GrowthIndexProductsView = () => {
   const [tableItems, setTableItems] = useState<GrowthIndexProductViewItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const { showNotification } = useNotification()
   
@@ -84,23 +82,7 @@ const GrowthIndexProductsView = () => {
     }
   }
 
-  const drawerFilters = [
-    {
-      name: 'family',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Familie"
-          options={familiesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
-    }
-  ]
+  
 
   return (
     <div className={s.mainContainer}>
@@ -116,8 +98,7 @@ const GrowthIndexProductsView = () => {
           setShouldRefreshData={setShouldRefreshData}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
-          filters={drawerFilters}
-          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
+          filters={drawerFilters(familiesQuery)}
         />
       </Box>
     </div>
