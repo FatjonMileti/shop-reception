@@ -28,8 +28,8 @@ const EmployeeManagementSubcategory: React.FC = () => (
         y2="70.5386"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#7000FF" />
-        <stop offset="1" stop-color="#45009C" />
+        <stop stopColor="#7000FF" />
+        <stop offset="1" stopColor="#45009C" />
       </linearGradient>
     </defs>
   </svg>

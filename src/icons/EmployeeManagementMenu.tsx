@@ -7,7 +7,7 @@ const EmployeeManagementMenu: React.FC = () => (
       height="32"
       rx="6.64935"
       fill="url(#paint0_linear_1037_33454)"
-      fill-opacity="0.1"
+      fillOpacity="0.1"
     />
     <path
       d="M12.8677 23.5C11.0458 23.5 9.25192 23.5 7.43 23.5C6.56108 23.5 6.25276 23.1076 6.39291 22.2947C6.92547 19.2675 9.53221 16.9971 12.5594 16.885C15.7548 16.7729 18.5857 18.8751 19.3145 21.8743C19.6228 23.1076 19.3145 23.5 18.0532 23.5C16.3154 23.5 14.6056 23.5 12.8677 23.5Z"
@@ -34,8 +34,8 @@ const EmployeeManagementMenu: React.FC = () => (
         y2="32"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0062FF" />
-        <stop offset="1" stop-color="#004BC2" />
+        <stop stopColor="#0062FF" />
+        <stop offset="1" stopColor="#004BC2" />
       </linearGradient>
     </defs>
   </svg>

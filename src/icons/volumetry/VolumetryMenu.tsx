@@ -8,9 +8,9 @@ const VolumetryMenu: React.FC = () => (
       height="32"
       rx="6.64935"
       fill="url(#paint0_linear_103_17197)"
-      fill-opacity="0.1"
+      fillOpacity="0.1"
     />
-    <g clip-path="url(#clip0_103_17197)">
+    <g clipPath="url(#clip0_103_17197)">
       <path
         d="M16.2001 15.2853C16.2693 15.4403 16.3502 15.5899 16.4421 15.7326L23.6835 14.2919C23.3883 13.2547 22.8859 12.2882 22.2065 11.4507C21.5272 10.6133 20.685 9.92228 19.731 9.41957C18.777 8.91685 17.7309 8.61285 16.656 8.52594C15.5812 8.43903 14.4999 8.57102 13.4775 8.91393L16.2001 15.2853Z"
         fill="#052351"
@@ -33,8 +33,8 @@ const VolumetryMenu: React.FC = () => (
         y2="32.5"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0062FF" />
-        <stop offset="1" stop-color="#004BC2" />
+        <stop stopColor="#0062FF" />
+        <stop offset="1" stopColor="#004BC2" />
       </linearGradient>
       <clipPath id="clip0_103_17197">
         <rect width="16" height="16" fill="white" transform="translate(8 8.5)" />

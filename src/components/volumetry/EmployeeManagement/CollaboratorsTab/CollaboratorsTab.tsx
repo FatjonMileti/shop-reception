@@ -76,21 +76,42 @@ const CollaboratorsTab = () => {
       label: 'Nume',
       type: 'autocomplete',
       value: '',
-      filter: <Autocomplete variant="outlined" label="Nume" options={contractorsNamesOptions} />
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Nume"
+          options={contractorsNamesOptions}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
+        />
+      )
     },
     {
       name: 'department',
       label: 'Departament',
       type: 'autocomplete',
       value: '',
-      filter: <Autocomplete variant="outlined" label="Departament" options={departmentsOptions} />
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Departament"
+          options={departmentsOptions}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
+        />
+      )
     },
     {
       name: 'position',
       label: 'Position',
       type: 'autocomplete',
       value: '',
-      filter: <Autocomplete variant="outlined" label="Position" options={jobTitlesOptions} />
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Position"
+          options={jobTitlesOptions}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
+        />
+      )
     }
   ]
 

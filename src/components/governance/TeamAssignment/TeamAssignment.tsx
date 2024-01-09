@@ -148,7 +148,7 @@ const TeamAssignment: React.FC = props => {
       label: 'Person',
       type: 'text',
       filter: (
-        <Input type="text" name="teamMember.name" label="Person" variant="standard" value="" />
+        <Input type="text" name="teamMember.name" label="Person" variant="outlined" value="" />
       )
     },
     {
@@ -161,7 +161,7 @@ const TeamAssignment: React.FC = props => {
           type="text"
           name="assignedProject"
           label="Assigned Project"
-          variant="standard"
+          variant="outlined"
           onChange={value => setTableFilter({ ...tableFilter, assignedProject: value })}
           value={tableFilter.assignedProject}
         />
@@ -177,7 +177,7 @@ const TeamAssignment: React.FC = props => {
           type="text"
           name="iibKey"
           label="IIB Key"
-          variant="standard"
+          variant="outlined"
           onChange={value => setTableFilter({ ...tableFilter, iibKey: value })}
           value={tableFilter.iibKey}
         />
@@ -193,7 +193,7 @@ const TeamAssignment: React.FC = props => {
           type="text"
           name="ipbKey"
           label="IPB Key"
-          variant="standard"
+          variant="outlined"
           onChange={value => setTableFilter({ ...tableFilter, ipbKey: value })}
           value={tableFilter.ipbKey}
         />

@@ -24,8 +24,8 @@ const DailyPresenceSubcategory: React.FC = () => (
         y2="43.7386"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#6600E8" />
-        <stop offset="1" stop-color="#BD0044" />
+        <stop stopColor="#6600E8" />
+        <stop offset="1" stopColor="#BD0044" />
       </linearGradient>
     </defs>
   </svg>

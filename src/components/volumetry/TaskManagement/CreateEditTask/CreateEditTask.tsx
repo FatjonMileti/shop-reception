@@ -185,7 +185,6 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             />
           </Grid>
         )}
-
         <Grid xs={12} md={6} item>
           <TimePicker
             label="Ora recomandata de inceput"

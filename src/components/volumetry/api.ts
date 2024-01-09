@@ -32,7 +32,7 @@ export const getDepartmentsOptions = (
       const result = await makeCoreGetRequest('/volumetry/locations/departments')
 
       const resultOptions = result.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.name })
+        (item): ValueLabelInterface => ({ label: item.name, value: item.id })
       )
 
       if (resultOptions?.length && !!setDefaultOptionCallback) {
@@ -60,7 +60,7 @@ export const getJobTitlesOptions = (showNotification: Function) => {
       const resultOptions = result.list.map(
         (item: { id: number; jobTitle: string }): ValueLabelInterface => ({
           label: item.jobTitle,
-          value: item.jobTitle
+          value: item.id
         })
       )
 
@@ -79,7 +79,7 @@ export const getContractorsNamesOptions = (showNotification: Function) => {
       const result = await makeCoreGetRequest('/volumetry/workers/contractors')
 
       const resultOptions = result.list.map(
-        (item): ValueLabelInterface => ({ label: item.fullName, value: item.fullName })
+        (item): ValueLabelInterface => ({ label: item.fullName, value: item.id })
       )
 
       return resultOptions || []
