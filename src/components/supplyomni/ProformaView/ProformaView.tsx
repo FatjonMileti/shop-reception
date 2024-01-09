@@ -1,15 +1,14 @@
-import { useParams, useNavigate } from 'react-router-dom'
-import { Box, Paper, CircularProgress, Grid, useMediaQuery } from '@mui/material'
+import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
+import { Box, CircularProgress, Grid, Paper, useMediaQuery } from '@mui/material'
+import { Icon } from 'components/core-ui/Icon'
 import { PdfViewer } from 'components/core-ui/PdfViewer'
-import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
-import { useSearchParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { makeCoreGetRequest } from 'utils/api'
+import { formatErrorMessage } from 'utils/formatting'
 import { ShoppingCartStepper } from '../../core-ui/ShoppingCartStepper'
 import { ShoppingCartSummary } from '../ShoppingCart'
-import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
-import { Icon } from 'components/core-ui/Icon'
 
 const ProformaView = () => {
   const isXs = useMediaQuery('(max-width:624px)')
@@ -60,8 +59,8 @@ const ProformaView = () => {
 
   return (
     <Box sx={!isXs ? { margin: '24px' } : { margin: '12px' }}>
-      <Grid sx={{ mt: 1, justifyContent: proform?.paid ? 'center' : '' }} container spacing={2}>
-        {!proform?.paid && (
+      <Grid sx={{ mt: 1, justifyContent: proform?.active ? 'center' : '' }} container spacing={2}>
+        {!proform?.active && (
           <Grid item xs={12}>
             <ShoppingCartStepper activeStep={3} />
           </Grid>
@@ -96,7 +95,7 @@ const ProformaView = () => {
             </Box>
           </Paper>
         </Grid>
-        {!proform?.paid && (
+        {!proform?.active && (
           <Grid item xs={12} md={4}>
             {isLoadingGetProform || isClientLoading ? (
               <div style={{ display: 'flex' }}>
