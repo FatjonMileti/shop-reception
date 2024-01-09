@@ -135,7 +135,7 @@ export const getPrioritiesOptions = (showNotification: Function) => {
   return useQuery(
     ['priority'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/task-templatess/priorities')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/priorities')
 
       const resultOptions = result.map(priority => ({
         value: priority.value,
@@ -155,7 +155,7 @@ export const getFrequencyOptions = (showNotification: Function) => {
   return useQuery(
     ['frequency'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/task-templatess/frequencies')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/frequencies')
 
       const resultOptions = result.map(frequency => ({
         value: frequency,
@@ -175,7 +175,7 @@ export const getMeasurementUnitsOptions = (showNotification: Function) => {
   return useQuery(
     ['measurement-units'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/task-templatess/measurement-units')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/measurement-units')
 
       const resultOptions = result.map(unit => ({
         value: unit.name,

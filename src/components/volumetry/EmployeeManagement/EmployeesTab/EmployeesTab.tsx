@@ -37,8 +37,8 @@ const EmployeesTab = () => {
           tableFilters,
           page,
           rowsPerPage,
-          order,
-          orderBy
+          order: null,
+          orderBy: null
         })
       )
 
