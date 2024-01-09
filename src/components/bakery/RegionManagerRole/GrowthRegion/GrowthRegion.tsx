@@ -5,15 +5,14 @@ import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { Divider, Grid } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { IdNameInterface, ValueLabelInterface } from 'components/bakery/interfaces'
-import { DatePicker, Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
-import { formatAndDownloadResponse, formatPayloadDate, getCurrentDate } from 'utils/helpers'
+import { formatAndDownloadResponse, getCurrentDate } from 'utils/helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { SubfamilyItem, TableItem, TableState } from '../interfaces'
 import { FamilyItem } from 'components/bakery/StoreManagerRole/interfaces'
@@ -192,7 +191,8 @@ const GrowthRegion = () => {
     async () => {
       const url = toTableGETUrl({
         url: '/bakery/report/download/cadentier',
-        tableFilters: tableState.tableFilters
+        tableFilters: tableState.tableFilters,
+        filters:[{ name: 'store', value: storeFilterValue?.value }]
       })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
@@ -210,70 +210,22 @@ const GrowthRegion = () => {
     }
   )
 
-  const drawerFilters = [
-    {
-      name: 'date',
-      value: currentDate,
-      filter: (
-        <DatePicker
-          label="Planificare pentru"
-          variant="outlined"
-          value={currentDate}
-          onChange={() => {}}
-          required
-        />
-      ),
-      type: 'date',
-      label: 'Planificare pentru'
-    },
-    {
-      name: 'family',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Familie"
-          options={familiesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
-    },
-    {
-      name: 'subfamily',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Subfamilie"
-          options={subfamiliesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Subfamilie'
-    },
-  ]
-
   return (
     <div className={s.mainContainer}>
       <Grid container>
         <Grid xs={12} md={12} container spacing={5}>
           <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="store.id"
+            <FilterDataSelect
+              name="store"
+              defaultSelectedData={storeFilterValue}
               label="Magazin"
-              value={storeFilterValue}
               options={filterOptions}
-              onChange={handleStoreFilterChange}
+              onSelect={handleStoreFilterChange}
             />
           </Grid>
         </Grid>
 
-        <Grid xs={12} item paddingTop={2}>
+        <Grid xs={12} item py={2}>
           <Divider />
         </Grid>
 
@@ -308,7 +260,7 @@ const GrowthRegion = () => {
             order={tableState.order}
             orderBy={tableState.orderBy}
             tableFilters={tableState.tableFilters}
-            filters={drawerFilters}
+            filters={drawerFilters(currentDate, familiesQuery, subfamiliesQuery)}
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
