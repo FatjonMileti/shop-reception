@@ -22,6 +22,7 @@ export interface TableRowModel {
   clientName: string
   products: string
   paid: boolean
+  active: boolean
   clientId: string | number
 }
 
@@ -33,6 +34,7 @@ export interface ProformaModel {
   clientName: string
   products: ProductModel[]
   paid: boolean
+  active: boolean
   clientId: string | number
 }
 

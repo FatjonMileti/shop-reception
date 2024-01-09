@@ -3,7 +3,7 @@ import React from 'react'
 const ShoppingCartSubcategory: React.FC = () => (
   <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="70" height="70" rx="14.5455" fill="url(#paint0_linear_704_38384)" />
-    <g clip-path="url(#clip0_704_38384)">
+    <g clipPath="url(#clip0_704_38384)">
       <path
         d="M50 23.75H25.3025L25.25 23.3112C25.1426 22.3993 24.7042 21.5584 24.0181 20.9481C23.332 20.3378 22.4458 20.0004 21.5275 20H20V22.5H21.5275C21.8337 22.5 22.1292 22.6124 22.358 22.8159C22.5868 23.0193 22.7329 23.2997 22.7687 23.6037L24.75 40.4387C24.8574 41.3507 25.2958 42.1916 25.9819 42.8019C26.668 43.4122 27.5542 43.7496 28.4725 43.75H45V41.25H28.4725C28.1661 41.2499 27.8705 41.1373 27.6417 40.9336C27.4128 40.7299 27.2668 40.4493 27.2312 40.145L27.0675 38.75H47.295L50 23.75Z"
         fill="white"
@@ -26,8 +26,8 @@ const ShoppingCartSubcategory: React.FC = () => (
         y2="70"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FF005C" />
-        <stop offset="1" stop-color="#BD0044" />
+        <stop stopColor="#FF005C" />
+        <stop offset="1" stopColor="#BD0044" />
       </linearGradient>
       <clipPath id="clip0_704_38384">
         <rect width="30" height="30" fill="white" transform="translate(20 20)" />

@@ -6,12 +6,12 @@ import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { Input } from 'components/core-ui/Input'
 import { ChangeEvent } from 'react'
 import { useFormik } from 'formik'
-import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
-import { useMutation, useQuery } from 'react-query'
+import { makeCorePostRequest } from 'utils/api'
+import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { toEmployeeFilterItems } from './serializers'
+import { getEmployeesOptions } from '../api'
+import { handleQueryError } from '../utils'
 
 interface ProdStandardUM {
   id: number
@@ -24,28 +24,19 @@ interface AssignEmployeeProps {
   taskName: string
   department: string
   prodStandardUM: ProdStandardUM
+  setShouldRefreshData: Function
 }
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
-  const { isModalOpen, closeModal, taskName, department, prodStandardUM } = props
+  const { isModalOpen, closeModal, taskName, department, prodStandardUM, setShouldRefreshData } =
+    props
   const { showNotification } = useNotification()
 
-  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } = useQuery(
-    ['employees'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/employee')
-
-      return toEmployeeFilterItems(result.list) || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
+  const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } = getEmployeesOptions(
+    showNotification,
+    isModalOpen
   )
+
   const assignEmployee = async values => {
     await makeCorePostRequest('/volumetry/taskAllocation/assignEmployee', values)
   }
@@ -57,23 +48,18 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
         message: `Employee assigned successfully!`,
         type: 'success'
       })
+
+      setShouldRefreshData(true)
     },
-    onError: res => {
-      showNotification({
-        message: `Error while assigning employee, ${formatErrorMessage(res)}`,
-        type: 'error'
-      })
-    }
+    onError: error =>
+      handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      selectEmployee: {
-        value: '',
-        label: ''
-      },
+      selectEmployee: null,
       volume: ''
     },
     onSubmit: async (values, { resetForm }) => {
@@ -117,7 +103,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <Input
             type="text"
             name="volume"
-            label={`Volum ${prodStandardUM.name}/${prodStandardUM.unit}`}
+            label="Volum"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue('volume', event.target.value)

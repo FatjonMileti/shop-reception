@@ -81,6 +81,8 @@ const GrowthIndexStore = () => {
               desktopIcon: <EditActionIcon />
             }
           ]}
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </Box>
       <EditGrowthIndex

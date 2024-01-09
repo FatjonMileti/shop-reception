@@ -33,9 +33,9 @@ INSERT INTO
 VALUES
     -- Governance
     (1, 'Project Team', 'ProjectTeamGovernance', '/projectTeam', true, 1),
-    -- Bakery
+    -- Bakery p1
     (2, 'Admin', 'Admin', '/admin', true, 2),
-    (3, 'Formator', 'Formator', '/formator', true, 2),
+    (3, 'Formator/ RQ Regional', 'Formator', '/formator', true, 2),
     (4, 'Manager magazin/raion', 'StoreManager', '/storeManager', true, 2),
     (5, 'Manager regiune', 'RegionManager', '/regionManager', true, 2),
     -- Supply OMNI
@@ -44,7 +44,9 @@ VALUES
     (7, 'Administrare Angajati', 'EmployeeManagement', '/employeeManagement', true, 4),
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
     -- Shop Reception
-    (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5);
+    (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5),
+    -- Bakery p2
+    (10, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2);
 
 
 -- activity with submodule id
@@ -58,7 +60,7 @@ VALUES
     (4, 'Effort Matrix', 'EffortMatrix', null, true, 1),
     (5, 'Team Day-Off Management', 'TeamDayOffManagement', null , true, 1),
     (6, 'My Time-Off', 'TeamDayOffManagement', null, true, 1),
-    -- Bakery ADMIN
+    -- Bakery ADMIN p1
     (7, 'Gestiune utilizatori', 'UsersManagement', null, true, 2),
     (8, 'Gestiune zone', 'Zones', null, true, 2),
     (9, 'Gestiune regiuni', 'Regions', null, true, 2),
@@ -99,8 +101,18 @@ VALUES
     (42, 'Management Angajati', 'EmployeeManagement', null, true, 7),
     (43, 'Management task template-uri', 'ManagementTasks', null, true, 8),
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
+    (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 7),
     -- Shop Reception
-    (45, 'Admin magazin', 'UsersManagement', null, true, 9);
+    (46, 'Admin magazin', 'UsersManagement', null, true, 9),
+    -- Bakery TRACEABILITY OP
+    (47, 'Management produse', 'ProductManagementTO', null, true, 10),
+    (48, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
+    (49, 'Trasabilitate congelate', 'FrozenTraceabilityTO', null, true, 10),
+    (50, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', null, true, 10),
+    (51, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
+    (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10);
+    -- Bakery ADMIN p2
+    (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10);
 
 
 -- screen with activity id (some are first screens)
@@ -115,7 +127,7 @@ VALUES
     (5, 'Team Capacity Overview', 'PeopleAltOutlined', '/governance/projectTeam/teamCapacity', true, 2, true),
     (6, 'Individual Capacity', 'PeopleAltOutlined', '/governance/projectTeam/individualCapacity/:id', true, 2, false),
     (7, 'My Time-Off', 'TimerOffOutlined', '/governance/projectTeam/myTimeOff', true, 6, true),
-    -- Bakery ADMIN
+    -- Bakery ADMIN p1
     (8 , 'Gestiune utilizatori', 'UsersManagement', '/bakery/admin/usersManagement', true, 7, true),
     (9 , 'Gestiune zone', 'Zones', '/bakery/admin/zones', true, 8, true),
     (10, 'Gestiune regiuni', 'Regions', '/bakery/admin/regions', true, 9, true),
@@ -174,9 +186,20 @@ VALUES
     (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true),
     (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
+    (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
     -- Shop Reception
-    (61, 'Screen 1', '', '/url', true, 45, true);
-
+    (62, 'Screen 1', '', '/url', true, 46, true),
+    -- Bakery TRACEABILITY-OPERATOR
+    (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
+    (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
+    (65, 'Trasabilitate congelate', 'FrozenTraceabilityTO', '/bakery/traceabilityOperator/frozen-traceability', true, 49, true),
+    (66, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', '/bakery/traceabilityOperator/own-production-traceability', true, 50, true),
+    (67, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report', true, 51, true),
+    (68, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report-print', true, 51, false),
+    (69, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 52, true),
+    (70, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 52, false);
+    -- Bakery ADMIN p2
+    (71, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 53, true);
 
 -- UI Schema with activity id and screen id
 INSERT INTO
@@ -263,6 +286,8 @@ values
   (8, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE'),
   (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
   (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER'),
+  (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
+--   TODO
   -- Supply OMNI
   (11, 'GG_RO_HQ_IT-C4ASSIST');
 
@@ -282,7 +307,7 @@ VALUES
     (4, 2), (4, 4), (4, 6),
     -- Bakery
     -- GG_RO_HQ_IT_DEX_BAKERY_ADMIN
-    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16),
+    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16), (5, 53)
     -- GG_RO_HQ_IT_DEX_BAKERY_STORE
     (6, 27), (6, 28), (6, 29), (6, 30), (6, 31),
     -- GG_RO_HQ_IT_DEX_BAKERY_REGION
@@ -293,6 +318,8 @@ VALUES
     (9, 17), (9, 18), (9, 19), (9, 20), (9, 21), (9, 22), (9, 23),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER
     (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23),
+    -- GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY
+    (12, 47), (12, 48), (12, 49), (12, 50), (12, 51), (12, 52),
     -- Supply OMNI
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
@@ -300,10 +327,11 @@ VALUES
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     (1, 42),
     (1, 43),
-    (1, 44);
+    (1, 44),
+    (1, 45);
     -- Shop Reception
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
-    -- (1, 45);
+    -- (1, 46);
 
 
 -- reset sequences

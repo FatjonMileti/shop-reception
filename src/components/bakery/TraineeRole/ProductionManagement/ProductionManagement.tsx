@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import s from '../../commonStyles.modules.scss'
 import { useQuery } from 'react-query'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
-import { CircularProgress, Divider, Grid } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { Divider, Grid } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { IdNameInterface, ValueLabelInterface } from 'components/bakery/interfaces'
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
-import { formatAndDownloadResponse, formatPayloadDate } from 'utils/helpers'
+import { formatAndDownloadResponse, getCurrentDate } from 'utils/helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { FamilyItem, SubfamilyItem, TableItem, TableState } from './interfaces'
+import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
 dayjs.extend(customParseFormat)
 
 const ProductionManagement = () => {
@@ -26,15 +26,14 @@ const ProductionManagement = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<TableItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
-  const [planningDate, setPlanningDate] = useState(dayjs())
-  const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-  const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
+  const currentDate = getCurrentDate()
 
   const [tableState, setTableState] = useState<TableState>({
     order: null,
     orderBy: null,
     tableFilters: null
   })
+  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const { data: filterOptions } = useQuery(
     ['store'],
@@ -86,15 +85,17 @@ const ProductionManagement = () => {
     }
   )
 
-  const { data: subfamiliesOptions } = useQuery(
-    ['cadentier-subfamilies', storeFilterValue?.value, familiesFilterValue.map(({ value }) => value)],
+  const subfamiliesQuery = useQuery(
+    ['cadentier-subfamilies', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'family')?.value],
     async () => {
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+        ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(
         '/bakery/store/cadentier/families/subfamilies',
         {
           params: {
             store: storeFilterValue?.value,
-            family: familiesFilterValue.map(({ value }) => value)
+            family: familyLiveFilterValue.map(({ value }) => value)
           },
           paramsSerializer: { indexes: null }
         }
@@ -126,35 +127,16 @@ const ProductionManagement = () => {
     setShouldRefreshData(true)
   }
 
-  const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
-    setFamiliesFilterValue(value)
-    if (familiesFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
-  const handleSubfamiliesChange = (value: ValueLabelInterface[]): void => {
-    setSubfamiliesFilterValue(value)
-    if (subfamiliesFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
     try {
-      const filters = [
-        { name: 'date', value: formatPayloadDate(planningDate) },
-        { name: 'store', value: storeFilterValue?.value },
-        { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-        { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
-      ].filter(
-        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-      )
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/cadentier',
-          filters,
+          filters: [{ name: 'store', value: storeFilterValue?.value }],
           page,
-          rowsPerPage: 25,
+          tableFilters,
+          rowsPerPage,
           order,
           orderBy,
           searchText,
@@ -177,7 +159,7 @@ const ProductionManagement = () => {
       setTableState({
         order,
         orderBy,
-        tableFilters: filters
+        tableFilters
       })
 
       window.history.replaceState(
@@ -185,11 +167,11 @@ const ProductionManagement = () => {
           ...window.history.state,
           tableState: {
             page,
-            rowsPerPage: 25,
+            rowsPerPage,
             order,
             orderBy,
             searchText,
-            filters
+            tableFilters
           }
         },
         document.title
@@ -204,22 +186,14 @@ const ProductionManagement = () => {
     }
   }
 
-  const { refetch: refetchDownloadFile } = useQuery(
+  const downloadFileQuery = useQuery(
     ['download'],
     async () => {
       const url = toTableGETUrl({
         url: '/bakery/report/download/cadentier',
-        filters: [
-          { name: 'date', value: formatPayloadDate(planningDate) },
-          { name: 'store', value: storeFilterValue?.value },
-          { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-          { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
-        ].filter(
-          f =>
-            (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-        )
+        tableFilters: tableState.tableFilters,
+        filters:[{ name: 'store', value: storeFilterValue?.value }]
       })
-
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
@@ -241,52 +215,17 @@ const ProductionManagement = () => {
       <Grid container>
         <Grid xs={12} md={12} container spacing={5}>
           <Grid xs={12} md={3} item>
-            <DatePicker
-              label="Planificare pentru"
-              value={planningDate}
-              variant="outlined"
-              required
-              onChange={value => {
-                setPlanningDate(dayjs(value))
-                setShouldRefreshData(true)
-              }}
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="store.id"
+            <FilterDataSelect
+              name="store"
+              defaultSelectedData={storeFilterValue}
               label="Magazin"
-              value={storeFilterValue}
               options={filterOptions}
-              onChange={handleStoreFilterChange}
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="family"
-              label="Familie"
-              value={familiesFilterValue}
-              options={familiesQuery.data || []}
-              onChange={handleFamiliesChange}
-              multiple
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="subfamilies"
-              label="Subfamilie"
-              value={subfamiliesFilterValue}
-              options={subfamiliesOptions || []}
-              onChange={handleSubfamiliesChange}
-              multiple
+              onSelect={handleStoreFilterChange}
             />
           </Grid>
         </Grid>
 
-        <Grid xs={12} item paddingTop={2}>
+        <Grid xs={12} item py={2}>
           <Divider />
         </Grid>
 
@@ -308,7 +247,7 @@ const ProductionManagement = () => {
               {
                 label: 'Descarca',
                 icon: <DownloadOutlined />,
-                onClick: () => refetchDownloadFile()
+                onClick: () => downloadFileQuery.refetch()
               },
               {
                 label: 'Printeaza',
@@ -321,6 +260,10 @@ const ProductionManagement = () => {
             order={tableState.order}
             orderBy={tableState.orderBy}
             tableFilters={tableState.tableFilters}
+            filters={drawerFilters(currentDate, familiesQuery, subfamiliesQuery)}
+            handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
+            rowsPerPage={25}
+            rowsPerPageOptions={[25, 50, 100]}
           />
         )}
       </Grid>

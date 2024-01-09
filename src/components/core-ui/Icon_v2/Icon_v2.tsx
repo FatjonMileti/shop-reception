@@ -67,7 +67,13 @@ import {
   CadentierStoreSubcategory,
   GrowthIndexStoreSubcategory,
   ProductGrowthIndexSubcategory,
-  CadentierSalesStoreSubcategory
+  CadentierSalesStoreSubcategory,
+  FrozenTraceabilityReportTOSubcategory,
+  FrozenTraceabilityTOSubcategory,
+  OwnProductionTraceabilityReportTOSubcategory,
+  OwnProductionTraceabilityTOSubcategory,
+  ProductManagementTOSubcategory,
+  ReceivedProductsTOSubcategory
 } from 'icons/bakery'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { createElement } from 'react'
@@ -111,7 +117,6 @@ const IconComponents = {
   TasksVolumetryHome,
   EmployeeManagementHome,
   ManagementTasksHome,
-  // Bakery
   // Menu
   BakeryMenu,
   HomeMenu,
@@ -123,6 +128,7 @@ const IconComponents = {
   VolumetryMenu,
   EmployeeManagementMenu,
   ManagementTasksMenu,
+  // Bakery
   //home
   AdminHome,
   FormatorHome,
@@ -167,6 +173,13 @@ const IconComponents = {
   GrowthIndexStoreSubcategory,
   ProductGrowthIndexSubcategory,
   CadentierSalesStoreSubcategory,
+  //traceabilityOp
+  FrozenTraceabilityReportTOSubcategory,
+  FrozenTraceabilityTOSubcategory,
+  OwnProductionTraceabilityReportTOSubcategory,
+  OwnProductionTraceabilityTOSubcategory,
+  ProductManagementTOSubcategory,
+  ReceivedProductsTOSubcategory
 }
 
 export type IconType = 'Menu' | 'Home' | 'Subcategory' | 'Icon'

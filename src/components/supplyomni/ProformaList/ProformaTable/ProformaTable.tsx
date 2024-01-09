@@ -88,7 +88,7 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
         toTableGETUrl({
           url: `/supply-omni/order${proformaType === 'active' ? '/active' : ''}`,
           tableFilters,
-          filters: [{ name: 'myProformas', value: String(withMyProforma) }],
+          extraCustomUrlParams: [{ name: 'myProformas', value: String(withMyProforma) }],
           page,
           rowsPerPage,
           order,

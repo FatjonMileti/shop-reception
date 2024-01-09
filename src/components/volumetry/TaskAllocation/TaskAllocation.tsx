@@ -1,19 +1,20 @@
-import { useEffect, useState } from 'react'
-import s from './TaskAllocation.modules.scss'
-import { ValueLabelInterface } from '../interfaces'
-import { useQuery } from 'react-query'
-import { makeCoreGetRequest } from 'utils/api'
-import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
-import { toDepartmentOptions, toListTableRows } from './serializers'
-import { CircularProgress, Grid, debounce } from '@mui/material'
 import { FilterDataSelect, ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import { CircularProgress, Grid, debounce } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import TaskDescription from './TaskDescription'
 import { EditActionIcon } from 'icons'
+import { useEffect, useState } from 'react'
+import { makeCoreGetRequest } from 'utils/api'
+import { getDepartmentsOptions } from '../api'
+import { ValueLabelInterface } from '../interfaces'
+import { handleQueryError } from '../utils'
 import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
+import s from './TaskAllocation.modules.scss'
+import TaskDescription from './TaskDescription'
+import { toListTableRows } from './serializers'
+import { useNotification } from 'hooks'
 
 const TaskAllocation = () => {
+  const { showNotification } = useNotification()
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
   const [rows, setRows] = useState([]) // TODO: To add interface when db schema is defined
   const [tableItems, setTableItems] = useState([]) // TODO: To add interface when db schema is defined
@@ -31,8 +32,6 @@ const TaskAllocation = () => {
     }
   )
   const [selectedRowId, setSelectedRowId] = useState('')
-
-  const { showNotification } = useNotification()
 
   useEffect(() => {
     ;(async () => {
@@ -56,36 +55,17 @@ const TaskAllocation = () => {
     })()
   }, [shouldRefreshAllocationsData])
 
-  const { data: departments, isLoading: isDepartmentsLoading } = useQuery(
-    ['departments'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/department')
-      const departmentOptions = toDepartmentOptions(result.list)
+  const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
+    getDepartmentsOptions(showNotification, setDepartmentFilterValue)
 
-      setDepartmentFilterValue(departmentOptions[0])
-
-      return departmentOptions
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A aparut o eroare la preluarea datelor de optiuni pentru departamente. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const handleDepartmentFilterChange = value => {
+  const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
     setShouldRefreshTaskData(true)
   }
 
   const handleRemoteDetails = async (rowId: string) => {
     setSelectedRowId(rowId)
-    const response = await makeCoreGetRequest(`/volumetry/taskAllocation/details/${rowId}`)
+    const response = await makeCoreGetRequest(`/volumetry/task-allocation/details/${rowId}`)
     const data = await response
     const item = tableItems.find(tableItem => tableItem.id === rowId)
 
@@ -95,6 +75,7 @@ const TaskAllocation = () => {
         employees={data.list}
         shouldRefreshData={shouldRefreshAllocationsData}
         setShouldRefreshData={setShouldRefreshAllocationsData}
+        setShouldRefreshTaskData={setShouldRefreshTaskData}
       />
     )
   }
@@ -105,7 +86,7 @@ const TaskAllocation = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/volumetry/taskAllocation',
+          url: '/volumetry/task-allocation',
           filters: [{ name: 'department', value: departmentFilterValue.value }],
           tableFilters,
           page,
@@ -117,22 +98,24 @@ const TaskAllocation = () => {
         toListTableRows(
           response.list,
           shouldRefreshAllocationsData,
-          setShouldRefreshAllocationsData
+          setShouldRefreshAllocationsData,
+          setShouldRefreshTaskData
         )
       )
       setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      showNotification({
-        message: `Error while fetching list data. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea datelor pentru tabel.',
+          showNotification
+        )
     }
   }
 
   const openEditTaskModal = (): void => setIsEditTaskModalOpen(true)
-
   const closeEditTaskModal = (): void => setIsEditTaskModalOpen(false)
 
   const selectRow = row => {
@@ -143,7 +126,7 @@ const TaskAllocation = () => {
   return (
     <div className={s.mainContainer}>
       <Grid container spacing={4}>
-        {isDepartmentsLoading ? (
+        {isDepartmentsOptionsLoading ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
@@ -157,8 +140,8 @@ const TaskAllocation = () => {
               showSearch={true}
               counterLabel="Select department"
               noDataFoundLabel="No results!"
-              options={departments}
-              onSelect={handleDepartmentFilterChange}
+              options={departmentsOptions}
+              onSelect={handleDepartmentOptionChange}
             />
           </Grid>
         )}

@@ -1,6 +1,6 @@
 {
   "uuid": "26650887-dc81-4416-97d5-c87d87b56f48",
-  "lastMigration": 29,
+  "lastMigration": 32,
   "name": "DEX Designer Bakery REST API",
   "endpointPrefix": "8080/rest/api/v1",
   "latency": 0,
@@ -17,7 +17,7 @@
       "responses": [
         {
           "uuid": "15603b0a-8e77-4bd6-8668-52cbddd2b2bd",
-          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"EventSeatOutlined\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"OMS\",\n    \"icon\": \"DonutLargeTwoTone\",\n    \"routeURL\": \"/oms1\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"OMS\",\n        \"icon\": \"DonutLargeTwoTone\",\n        \"routeURL\": \"/oms\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"2\",\n          \"name\": \"OMS\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/oms1\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"22\",\n    \"name\": \"Bakery\",\n    \"icon\": \"Bakery\",\n    \"routeURL\": \"/bakery\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"22\",\n        \"name\": \"Admin\",\n        \"icon\": \"Admin\",\n        \"routeURL\": \"/admin\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"33\",\n        \"name\": \"Formator\",\n        \"icon\": \"Formator\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"44\",\n        \"name\": \"Manager magazin/raion\",\n        \"icon\": \"StoreManager\",\n        \"routeURL\": \"/storeManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"55\",\n        \"name\": \"Manager regiune\",\n        \"icon\": \"RegionManager\",\n        \"routeURL\": \"/regionManager\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
+          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"EventSeatOutlined\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"OMS\",\n    \"icon\": \"DonutLargeTwoTone\",\n    \"routeURL\": \"/oms1\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"OMS\",\n        \"icon\": \"DonutLargeTwoTone\",\n        \"routeURL\": \"/oms\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"2\",\n          \"name\": \"OMS\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/oms1\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"22\",\n    \"name\": \"Bakery\",\n    \"icon\": \"Bakery\",\n    \"routeURL\": \"/bakery\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"22\",\n        \"name\": \"Admin\",\n        \"icon\": \"Admin\",\n        \"routeURL\": \"/admin\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"33\",\n        \"name\": \"Formator/ RQ Regional\",\n        \"icon\": \"Formator\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"44\",\n        \"name\": \"Manager magazin/raion\",\n        \"icon\": \"StoreManager\",\n        \"routeURL\": \"/storeManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"55\",\n        \"name\": \"Manager regiune\",\n        \"icon\": \"RegionManager\",\n        \"routeURL\": \"/regionManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"66\",\n        \"name\": \"Operator trasabilitate\",\n        \"icon\": \"TraceabilityOperator\",\n        \"routeURL\": \"/traceabilityOperator\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the application modules list",
@@ -36,7 +36,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6dcee7bd-6565-44c6-8a1f-4d9681c04a63",
@@ -59,7 +60,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fbb3109f-02d8-4707-b8c0-600c6523d1cd",
@@ -90,7 +92,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "dace7ac7-73df-4caa-b566-8ee99b9d03ae",
@@ -113,7 +116,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "caa87a51-24ca-4a01-85a4-37af225cb574",
@@ -136,7 +140,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3f4e1800-de69-4d30-b0fc-5409ff757ab8",
@@ -159,10 +164,10 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -201,7 +206,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "aa334d2e-b9ef-4ca1-b404-4c4214552886",
@@ -224,7 +230,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "658f9bf6-0688-43de-a0c6-a43d3a1bfee1",
@@ -247,7 +254,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8b9a52cc-9a0b-43cc-bc44-9468c0342044",
@@ -270,7 +278,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d9271c76-0946-48ea-bf73-0f62ee56ad91",
@@ -293,7 +302,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fc876716-9a2f-4609-98cf-80a6c35f011c",
@@ -316,11 +326,12 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "42945c68-5cba-43fe-ad93-30aecb33a38e",
-          "body": "[\n  {\n    \"id\": \"55\",\n    \"name\": \"Gestiune utilizatori\",\n    \"icon\": \"UsersManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"55\" },\n    \"screens\": [\n      {\n        \"id\": \"55\",\n        \"routeURL\": \"/bakery/admin/usersManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"77\",\n    \"name\": \"Gestiune zone\",\n    \"icon\": \"Zones\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"77\" },\n    \"screens\": [\n      {\n        \"id\": \"77\",\n        \"routeURL\": \"/bakery/admin/zones\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n    {\n    \"id\": \"66\",\n    \"name\": \"Gestiune regiuni\",\n    \"icon\": \"Regions\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"66\" },\n    \"screens\": [\n      {\n        \"id\": \"66\",\n        \"routeURL\": \"/bakery/admin/regions\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"88\",\n    \"name\": \"Gestiune magazine\",\n    \"icon\": \"Stores\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"88\" },\n    \"screens\": [\n      {\n        \"id\": \"88\",\n        \"routeURL\": \"/bakery/admin/stores\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n    {\n    \"id\": \"133\",\n    \"name\": \"Gestiune familii in scopul modulului\",\n    \"icon\": \"Families\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"133\" },\n    \"screens\": [\n      {\n        \"id\": \"133\",\n        \"routeURL\": \"/bakery/admin/families\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"134\",\n        \"routeURL\": \"/bakery/admin/family-products\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"99\",\n    \"name\": \"Gestiune clustere\",\n    \"icon\": \"Clusters\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"99\" },\n    \"screens\": [\n      {\n        \"id\": \"99\",\n        \"routeURL\": \"/bakery/admin/clusters\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"111\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"Growth\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"111\" },\n    \"screens\": [\n      {\n        \"id\": \"111\",\n        \"routeURL\": \"/bakery/admin/growth\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"122\",\n    \"name\": \"Gestiune produse imagine\",\n    \"icon\": \"Products\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"122\" },\n    \"screens\": [\n      {\n        \"id\": \"122\",\n        \"routeURL\": \"/bakery/admin/products\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"155\",\n    \"name\": \"Raport de utilizare aplicatie\",\n    \"icon\": \"UsageReport\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"155\" },\n    \"screens\": [\n      {\n        \"id\": \"155\",\n        \"routeURL\": \"/bakery/admin/usage-report\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"166\",\n    \"name\": \"Raport cadentier + vanzari\",\n    \"icon\": \"SalesCadentier\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"166\" },\n    \"screens\": [\n      {\n        \"id\": \"166\",\n        \"routeURL\": \"/bakery/admin/sales-cadentier\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"167\",\n        \"routeURL\": \"/cadentier-admin-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"177\",\n    \"name\": \"Management produse\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"166\" },\n    \"screens\": [\n      {\n        \"id\": \"177\",\n        \"routeURL\": \"/bakery/admin/product-management\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
+          "body": "[\n  {\n    \"id\": \"55\",\n    \"name\": \"Gestiune utilizatori\",\n    \"icon\": \"UsersManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"55\" },\n    \"screens\": [\n      {\n        \"id\": \"55\",\n        \"routeURL\": \"/bakery/admin/usersManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"77\",\n    \"name\": \"Gestiune zone\",\n    \"icon\": \"Zones\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"77\" },\n    \"screens\": [\n      {\n        \"id\": \"77\",\n        \"routeURL\": \"/bakery/admin/zones\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n    {\n    \"id\": \"66\",\n    \"name\": \"Gestiune regiuni\",\n    \"icon\": \"Regions\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"66\" },\n    \"screens\": [\n      {\n        \"id\": \"66\",\n        \"routeURL\": \"/bakery/admin/regions\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"88\",\n    \"name\": \"Gestiune magazine\",\n    \"icon\": \"Stores\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"88\" },\n    \"screens\": [\n      {\n        \"id\": \"88\",\n        \"routeURL\": \"/bakery/admin/stores\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n    {\n    \"id\": \"133\",\n    \"name\": \"Gestiune familii in scopul modulului\",\n    \"icon\": \"Families\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"133\" },\n    \"screens\": [\n      {\n        \"id\": \"133\",\n        \"routeURL\": \"/bakery/admin/families\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"134\",\n        \"routeURL\": \"/bakery/admin/family-products\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"99\",\n    \"name\": \"Gestiune clustere\",\n    \"icon\": \"Clusters\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"99\" },\n    \"screens\": [\n      {\n        \"id\": \"99\",\n        \"routeURL\": \"/bakery/admin/clusters\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"111\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"Growth\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"111\" },\n    \"screens\": [\n      {\n        \"id\": \"111\",\n        \"routeURL\": \"/bakery/admin/growth\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"122\",\n    \"name\": \"Gestiune produse imagine\",\n    \"icon\": \"Products\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"122\" },\n    \"screens\": [\n      {\n        \"id\": \"122\",\n        \"routeURL\": \"/bakery/admin/products\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"155\",\n    \"name\": \"Raport de utilizare aplicatie\",\n    \"icon\": \"UsageReport\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"155\" },\n    \"screens\": [\n      {\n        \"id\": \"155\",\n        \"routeURL\": \"/bakery/admin/usage-report\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"166\",\n    \"name\": \"Raport cadentier + vanzari\",\n    \"icon\": \"SalesCadentier\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"166\" },\n    \"screens\": [\n      {\n        \"id\": \"166\",\n        \"routeURL\": \"/bakery/admin/sales-cadentier\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"167\",\n        \"routeURL\": \"/cadentier-admin-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"177\",\n    \"name\": \"Management produse\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"166\" },\n    \"screens\": [\n      {\n        \"id\": \"177\",\n        \"routeURL\": \"/bakery/admin/product-management\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"199\",\n    \"name\": \"Gestiune ingrediente\",\n    \"icon\": \"Ingredients\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"199\" },\n    \"screens\": [\n      {\n        \"id\": \"199\",\n        \"routeURL\": \"/bakery/admin/ingredients\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
           "latency": 0,
           "statusCode": 200,
           "label": "Bakery",
@@ -347,7 +358,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6aab1294-9514-418a-8819-d1c294b3ab9c",
@@ -378,7 +390,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "78fcbb3d-742b-44fe-b004-84b40d9f97bf",
@@ -409,7 +422,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "07ca2667-1adc-4b78-887a-3501074fea18",
@@ -440,7 +454,32 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0d176b54-9438-4134-9a8e-1bda3231d490",
+          "body": "[\n  {\n    \"id\": \"999\",\n    \"name\": \"Management produse\",\n    \"icon\": \"ProductManagementTO\",\n    \"submodule\": {\n      \"id\": \"66\",\n      \"name\": \"TraceabilityOperator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/traceabilityOperator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"999\" },\n    \"screens\": [\n      {\n        \"id\": \"999\",\n        \"routeURL\": \"/bakery/traceabilityOperator/product-management\",\n        \"routePathExact\": true\n      },\n    ]\n  },\n  {\n    \"id\": \"998\",\n    \"name\": \"Produse receptionate in raion\",\n    \"icon\": \"ReceivedProductsTO\",\n    \"submodule\": {\n      \"id\": \"66\",\n      \"name\": \"TraceabilityOperator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/traceabilityOperator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"998\" },\n    \"screens\": [\n      {\n        \"id\": \"998\",\n        \"routeURL\": \"/bakery/traceabilityOperator/received-products\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"997\",\n    \"name\": \"Trasabilitate congelate\",\n    \"icon\": \"FrozenTraceabilityTO\",\n    \"submodule\": {\n      \"id\": \"66\",\n      \"name\": \"TraceabilityOperator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/traceabilityOperator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"997\" },\n    \"screens\": [\n      {\n        \"id\": \"997\",\n        \"routeURL\": \"/bakery/traceabilityOperator/frozen-traceability\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"996\",\n    \"name\": \"Trasabilitate productie proprie\",\n    \"icon\": \"OwnProductionTraceabilityTO\",\n    \"submodule\": {\n      \"id\": \"66\",\n      \"name\": \"TraceabilityOperator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/traceabilityOperator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"996\" },\n    \"screens\": [\n      {\n        \"id\": \"996\",\n        \"routeURL\": \"/bakery/traceabilityOperator/own-production-traceability\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"995\",\n    \"name\": \"Raport trasabilitate congelate\",\n    \"icon\": \"FrozenTraceabilityReportTO\",\n    \"submodule\": {\n      \"id\": \"66\",\n      \"name\": \"TraceabilityOperator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/traceabilityOperator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"995\" },\n    \"screens\": [\n      {\n        \"id\": \"995\",\n        \"routeURL\": \"/bakery/traceabilityOperator/frozen-traceability-report\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"9955\",\n        \"routeURL\": \"/bakery/traceabilityOperator/frozen-traceability-report-print\",\n        \"routePathExact\": true\n      },\n    ]\n  },\n  {\n    \"id\": \"994\",\n    \"name\": \"Raport trasabilitate productie proprie\",\n    \"icon\": \"OwnProductionTraceabilityReportTO\",\n    \"submodule\": {\n      \"id\": \"66\",\n      \"name\": \"TraceabilityOperator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/traceabilityOperator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"994\" },\n    \"screens\": [\n      {\n        \"id\": \"994\",\n        \"routeURL\": \"/bakery/traceabilityOperator/own-production-traceability-report\",\n        \"routePathExact\": true\n      },\n       {\n        \"id\": \"9944\",\n        \"routeURL\": \"/bakery/traceabilityOperator/own-production-traceability-report-print\",\n        \"routePathExact\": true\n      },\n    ]\n  },\n]\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Bakery tracebility operator",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b8bb760b-999c-4ff1-bf4e-667c249b6b41",
@@ -471,10 +510,10 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -505,7 +544,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "71bdb05d-c07c-4a4a-b1f2-94ae4846304a",
@@ -528,7 +568,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6fb6daa9-aef2-4bd9-ab90-a329c4e5496e",
@@ -551,7 +592,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8a253099-3b8f-41b1-8a6e-af3c5996bf9c",
@@ -574,7 +616,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9ed29448-80de-4c00-8ef0-3aa581cb558e",
@@ -597,7 +640,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e9df599c-84e1-476f-9bf9-b1799b9fd0a7",
@@ -620,7 +664,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0d102796-6ac5-4e27-8c93-1639d888a239",
@@ -653,7 +698,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "96c9af96-2663-4d29-b9ad-74f212670aba",
@@ -686,7 +732,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "77fafa55-a574-4606-83f5-20a9d4bb97c8",
@@ -719,7 +766,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "30e30dc7-eba6-4920-8303-f9fe3ab731d1",
@@ -752,7 +800,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4b6fc07d-a874-4eb8-8c44-cc0a3addb7b3",
@@ -790,7 +839,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "daead8b1-c15f-44b8-b052-0bbcaaef1d1e",
@@ -823,7 +873,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b5dd245a-ca80-438f-83ae-2bbb5426ca8b",
@@ -856,7 +907,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1906660e-bb8c-4b8b-9e37-31dbf0a17ffb",
@@ -894,7 +946,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e805e66e-56ee-44ae-a63d-c3f3fe68639d",
@@ -932,7 +985,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2c3d6f53-49cf-4a47-9823-e93c7c9bbdf8",
@@ -970,7 +1024,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d0effaa5-b7d2-4d88-a514-1e28db9c06a2",
@@ -1003,7 +1058,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fbb002d6-2309-473e-ab38-df97f6408d9d",
@@ -1036,7 +1092,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "82ddf231-23dd-435a-9d59-cfe8ba71b750",
@@ -1074,7 +1131,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "914b9df5-dab7-407c-ba80-059bd0c49a66",
@@ -1107,7 +1165,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2caaf467-c07f-4854-97a1-4cdf80e7c035",
@@ -1145,7 +1204,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bbc0dc17-b6e2-42f1-a317-87a32ced8dbe",
@@ -1183,7 +1243,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bf033993-2584-43d0-a3c8-c521a414f4c6",
@@ -1221,7 +1282,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "17ce6ac6-8de5-497e-9156-13011ab187f8",
@@ -1259,7 +1321,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "85f90b51-39cc-47b1-ada3-1a5e775f9487",
@@ -1297,7 +1360,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4c503d57-5bb5-4fbc-bd2d-228e505414e4",
@@ -1335,7 +1399,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "94ce73f7-d0c6-4048-8ec9-1ba0b9eef380",
@@ -1373,7 +1438,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0b795bae-d96a-4d9b-b135-f5eeaf0c8f87",
@@ -1411,7 +1477,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b98b231a-71b9-4888-854e-f7e516dd0dc8",
@@ -1449,7 +1516,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5ba07e91-f49b-4c42-83d8-573c8655e805",
@@ -1487,7 +1555,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "59617f34-297c-4f67-8710-3b6fd468e0b0",
@@ -1520,7 +1589,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d8926ec9-6c32-4dd5-91d7-a981d6ad5c76",
@@ -1553,7 +1623,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "53c23648-2869-4ba9-bbf0-e746b1fb7544",
@@ -1586,7 +1657,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "23023715-6733-4360-bd30-94ef1740b88c",
@@ -1619,7 +1691,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "23b0b8a3-6dd9-4236-b155-a47893c8c52b",
@@ -1657,7 +1730,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5cdd7a67-a43e-4f39-981d-68375e384e0f",
@@ -1695,7 +1769,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4c5ff3b1-58d6-4966-ad4c-0ca13e69ce43",
@@ -1733,7 +1808,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8b14325a-9802-45c3-ac89-aa2baaf55353",
@@ -1766,7 +1842,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4e70bcac-5a48-401b-a019-7a3c8d97daf9",
@@ -1799,7 +1876,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5287c5fc-b563-4310-a5c8-cf1b3100b88d",
@@ -1832,7 +1910,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4ff05af5-d559-4a04-b54d-e3235df8b3db",
@@ -1865,7 +1944,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8c93a580-6a6a-464f-8520-9be5bea75e8c",
@@ -1898,7 +1978,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "db59d048-8c7b-433c-b8eb-4f393d1f8ecd",
@@ -1936,7 +2017,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ac323960-3884-403e-aaa7-99b846248715",
@@ -1974,7 +2056,8 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "f47b63f6-313e-4073-b3fe-32f38c5bc580",
@@ -2012,10 +2095,10 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     }
   ],
@@ -2080,5 +2163,6 @@
       "value": ""
     }
   ],
-  "data": []
+  "data": [],
+  "callbacks": []
 }

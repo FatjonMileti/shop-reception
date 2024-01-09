@@ -3,19 +3,14 @@ import { PrintOutlined } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { ValueLabelInterface } from 'components/governance/interfaces'
 import { columns } from 'components/volumetry/EmployeeManagement/EvaluationReports/helpers'
 import { useNotification } from 'hooks'
 import { useState } from 'react'
-import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
-import { formatErrorMessage } from 'utils/formatting'
 import s from './EvaluationReports.modules.scss'
-import {
-  toDepartmentOptions,
-  toTableRowItems
-} from 'components/volumetry/EmployeeManagement/EvaluationReports/serializers'
-import { EvaluationReportSummary } from 'components/volumetry/interfaces'
+import { toTableRowItems } from 'components/volumetry/EmployeeManagement/EvaluationReports/serializers'
+import { EvaluationReportSummary, ValueLabelInterface } from 'components/volumetry/interfaces'
+import { getDepartmentsOptions } from 'components/volumetry/api'
 
 const EvaluationReports = () => {
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
@@ -27,26 +22,9 @@ const EvaluationReports = () => {
 
   const { showNotification } = useNotification()
 
-  const { data: departments, isLoading: isDepartmentsLoading } = useQuery(
-    ['departments'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/department')
-      const departmentOptions = toDepartmentOptions(result.list)
-
-      setDepartmentFilterValue(departmentOptions[0])
-
-      return departmentOptions
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A aparut o eroare la preluarea datelor de optiuni pentru departamente. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      }
-    }
+  const { data: departments, isLoading: isDepartmentsLoading } = getDepartmentsOptions(
+    showNotification,
+    setDepartmentFilterValue
   )
 
   const handleDepartmentFilterChange = value => {
@@ -54,7 +32,7 @@ const EvaluationReports = () => {
     setShouldRefreshData(true)
   }
 
-  const fetchData = async (order, orderBy) => {
+  const fetchData = async ({ order, orderBy }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
@@ -101,7 +79,7 @@ const EvaluationReports = () => {
           <Grid xs={4} md={3} item style={{ padding: 0 }}>
             <FilterDataSelect
               name="department"
-              defaultSelectedData={departmentFilterValue}
+              defaultSelectedData={departmentFilterValue || departments[0]}
               label=""
               showCounter={true}
               showSearch={true}
@@ -130,7 +108,7 @@ const EvaluationReports = () => {
         />
       )}
       <Grid container direction="row" justifyContent="flex-end" alignItems="center" padding={1}>
-        <Grid item xs={1} spacing={1} style={{ maxWidth: '50%' }}>
+        <Grid item xs={1} style={{ maxWidth: '50%' }}>
           <Box sx={{ display: 'flex', direction: 'row', justifyContent: 'space-between' }}>
             <Typography style={{ textWrap: 'nowrap' }}>
               Total nr. zilnic task-uri executate:

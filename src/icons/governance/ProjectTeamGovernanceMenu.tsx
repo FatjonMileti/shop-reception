@@ -7,7 +7,7 @@ const ProjectTeamGovernanceMenu: React.FC = () => (
       height="32"
       rx="6.64935"
       fill="url(#paint0_linear_1037_34102)"
-      fill-opacity="0.1"
+      fillOpacity="0.1"
     />
     <path
       d="M22.0923 11.7654C23.3576 11.7654 24.378 12.7654 24.3576 14.0103C24.3576 15.2348 23.2964 16.2756 22.0719 16.2756C20.8475 16.2756 19.8066 15.2348 19.8066 14.0103C19.827 12.7246 20.8066 11.7654 22.0923 11.7654Z"
@@ -42,8 +42,8 @@ const ProjectTeamGovernanceMenu: React.FC = () => (
         y2="32"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0062FF" />
-        <stop offset="1" stop-color="#004BC2" />
+        <stop stopColor="#0062FF" />
+        <stop offset="1" stopColor="#004BC2" />
       </linearGradient>
     </defs>
   </svg>

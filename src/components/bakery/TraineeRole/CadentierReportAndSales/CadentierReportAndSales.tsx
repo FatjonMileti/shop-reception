@@ -1,6 +1,6 @@
 import s from '../../commonStyles.modules.scss'
 import { useNotification } from 'hooks'
-import { Box, CircularProgress, Divider, Grid, Paper } from '@mui/material'
+import { Box, Divider, Grid } from '@mui/material'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -9,16 +9,15 @@ import { TableItem } from './interfaces'
 import { DownloadOutlined } from '@mui/icons-material'
 import { useQuery } from 'react-query'
 import { toStoreFilterItems } from 'components/bakery/commonSerializers'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import dayjs from 'dayjs'
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
-import { ValueLabelInterface } from 'components/bakery/interfaces'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { TableState, ValueLabelInterface } from 'components/bakery/interfaces'
 import { formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
-import { formatBakeryPayloadDate } from 'utils/helpers'
-import { columns } from './helpers'
+import { getPreviousDay } from 'utils/helpers'
+import { columns, drawerFilters } from './helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { toTableRowItems } from './serializers'
 import { FamilyItem, SubfamilyItem } from '../ProductionManagement/interfaces'
+import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
 
 const CadentierReportAndSales = () => {
   const { showNotification } = useNotification()
@@ -26,11 +25,14 @@ const CadentierReportAndSales = () => {
   const [tableItems, setTableItems] = useState<TableItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-
+  const prevDay = getPreviousDay()
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
-  const [planningDateFilterValue, setPlanningDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
-  const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-  const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
+  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
+  const [tableState, setTableState] = useState<TableState>({
+    order: null,
+    orderBy: null,
+    tableFilters: null
+  })
 
   const { data: storesFilterOptions } = useQuery(
     ['store'],
@@ -80,15 +82,17 @@ const CadentierReportAndSales = () => {
     }
   )
 
-  const { data: subfamiliesOptions } = useQuery(
-    ['subfamilies', storeFilterValue?.value, familiesFilterValue.map(({ value }) => value)],
+  const subfamiliesQuery = useQuery(
+    ['subfamilies', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'family')?.value],
     async () => {
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+      ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(
         '/bakery/store/families/subfamilies',
         {
           params: {
             store: storeFilterValue?.value,
-            family: familiesFilterValue.map(({ value }) => value)
+            family: familyLiveFilterValue.map(({ value }) => value)
           },
           paramsSerializer: { indexes: null }
         }
@@ -120,38 +124,13 @@ const CadentierReportAndSales = () => {
     setShouldRefreshData(true)
   }
 
-  const handlePlanningDateFilterChange = (value: string): void => {
-    setPlanningDateFilterValue(dayjs(value))
-    setShouldRefreshData(true)
-  }
-
-  const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
-    setFamiliesFilterValue(value)
-    if (familiesFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
-  const handleSubfamiliesChange = (value: ValueLabelInterface[]): void => {
-    setSubfamiliesFilterValue(value)
-    if (subfamiliesFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
-      const filters = [
-        { name: 'date', value: formatBakeryPayloadDate(planningDateFilterValue) },
-        { name: 'store', value: storeFilterValue.value },
-        { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-        { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
-      ].filter(
-        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-      )
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/report/product/sale/cadentier',
-          filters: filters,
+          filters: [{ name: 'store', value: storeFilterValue.value }],
           tableFilters,
           page,
           rowsPerPage,
@@ -162,7 +141,25 @@ const CadentierReportAndSales = () => {
       setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
+      setTableState({
+        order,
+        orderBy,
+        tableFilters
+      })
 
+      window.history.replaceState(
+        {
+          ...window.history.state,
+          tableState: {
+            page,
+            rowsPerPage,
+            order,
+            orderBy,
+            tableFilters
+          }
+        },
+        document.title
+      )
       return response
     } catch (error) {
       showNotification({
@@ -172,105 +169,80 @@ const CadentierReportAndSales = () => {
     }
   }
 
-  const handleDownload = async () => {
-    const url = toTableGETUrl({
-      url: '/bakery/report/download/sale',
-      filters: [
-        { name: 'store', value: storeFilterValue?.value },
-        { name: 'startDate', value: formatBakeryPayloadDate(planningDateFilterValue) }
-      ]
-    })
-    try {
+  const downloadFileQuery = useQuery(
+    ['download'],
+    async () => {
+      const url = toTableGETUrl({
+        url: '/bakery/report/download/sale',
+        tableFilters: tableState.tableFilters,
+        filters: [
+          { name: 'store', value: storeFilterValue?.value },
+        ]
+      })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
-      formatAndDownloadResponse(response)
-    } catch (error) {
-      showNotification({
-        message: `Error while downloading file. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      return formatAndDownloadResponse(response)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
     }
-  }
+  )
 
   return (
     <div className={s.mainContainer}>
-        <Paper className={s.filtersContainer}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={3} item>
-              <DatePicker
-                label="Planificare pentru"
-                value={planningDateFilterValue}
-                variant="outlined"
-                required
-                onChange={handlePlanningDateFilterChange}
-              />
-            </Grid>
-            <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
-                variant="outlined"
-                name="store.id"
-                label="Magazin"
-                value={storeFilterValue}
-                options={storesFilterOptions}
-                onChange={handleStoreFilterChange}
-              />
-            </Grid>
-            <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
-                variant="outlined"
-                name="family"
-                label="Familie"
-                value={familiesFilterValue}
-                options={familiesQuery.data || []}
-                onChange={handleFamiliesChange}
-                multiple
-              />
-            </Grid>
-            <Grid xs={12} md={3} item>
-              <AsyncAutocomplete
-                variant="outlined"
-                name="subfamilies"
-                label="Subfamilie"
-                value={subfamiliesFilterValue}
-                options={subfamiliesOptions || []}
-                onChange={handleSubfamiliesChange}
-                multiple
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-
-        <Grid xs={12} item>
-          <Divider />
+      <Grid container>
+        <Grid xs={12} md={3} item>
+          <FilterDataSelect
+            name="store"
+            defaultSelectedData={storeFilterValue}
+            label="Magazin"
+            options={storesFilterOptions}
+            onSelect={handleStoreFilterChange}
+          />
         </Grid>
+      </Grid>
 
-        {storeFilterValue && (
-          <Box>
-            <GroupTable
-              hideCheckbox
-              columns={columns}
-              items={tableItems}
-              fetchData={fetchData}
-              isLoading={isLoading}
-              totalCount={totalCount}
-              shouldRefreshData={shouldRefreshData}
-              setShouldRefreshData={setShouldRefreshData}
-              stickyRatio={0.3}
-              groupCount={2}
-              hasStickyHeader
-              frequency="day"
-              maxHeight={'600px'}
-              toolbarActions={[
-                {
-                  label: 'Descarca',
-                  icon: <DownloadOutlined />,
-                  onClick: () => handleDownload()
-                }
-              ]}
-            />
-          </Box>
-        )}
+      <Grid xs={12} item py={2}>
+        <Divider />
+      </Grid>
+
+      {storeFilterValue && (
+        <Box>
+          <GroupTable
+            hideCheckbox
+            columns={columns}
+            items={tableItems}
+            fetchData={fetchData}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            stickyRatio={0.3}
+            groupCount={2}
+            hasStickyHeader
+            frequency="day"
+            maxHeight={'600px'}
+            toolbarActions={[
+              {
+                label: 'Descarca',
+                icon: <DownloadOutlined />,
+                onClick: () => downloadFileQuery.refetch()
+              }
+            ]}
+            filters={drawerFilters(prevDay, familiesQuery, subfamiliesQuery)}
+            handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
+            rowsPerPage={25}
+            rowsPerPageOptions={[25, 50, 100]}
+          />
+        </Box>
+      )}
     </div>
   )
 }

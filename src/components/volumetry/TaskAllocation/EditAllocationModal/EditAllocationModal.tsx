@@ -4,13 +4,13 @@ import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { useNotification } from 'hooks'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, MouseEvent } from 'react'
 import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
-import { formatErrorMessage } from 'utils/formatting'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { getFormInitialValues } from './helpers'
+import { handleQueryError } from 'components/volumetry/utils'
 
 interface EditAllocationModalProps {
   isModalOpen: boolean
@@ -48,14 +48,12 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
         type: 'success'
       })
     },
-    onError: res => {
-      showNotification({
-        message: `A aparut o eroare la ${
-          editItem ? 'editarea alocarii' : 'oprirea taskului'
-        }. ${formatErrorMessage(res)}`,
-        type: 'error'
-      })
-    }
+    onError: error =>
+      handleQueryError(
+        error,
+        `A aparut o eroare la ${editItem ? 'editarea alocarii' : 'oprirea taskului'}.`,
+        showNotification
+      )
   })
 
   const formik = useFormik({
@@ -69,10 +67,22 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     }
   })
 
+  const cancel = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    closeModal()
+  }
+
+  const submit = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    formik.handleSubmit()
+  }
+
   return (
     <Modal
       isModalOpen={isModalOpen}
-      closeModal={closeModal}
+      closeModal={cancel}
       modalTitle={editItem ? 'Editeaza alocare' : 'Opreste task'}
       modalWidth="50%"
     >
@@ -125,8 +135,8 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           <Grid container spacing={2}>
             <Grid md={6} xs={12} item></Grid>
             <Grid md={6} xs={12} item className={s.modalButtons}>
-              <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
-              <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
+              <Button variant="outlined" label="Anuleaza" onClick={event => cancel(event)} />
+              <Button variant="contained" label="Salveaza" onClick={event => submit(event)} />
             </Grid>
           </Grid>
         </Grid>

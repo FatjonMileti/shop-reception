@@ -1,36 +1,111 @@
-import { Box } from '@mui/material'
-
-import { Table } from 'components/core-ui/Table'
-import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import {
-  VOLUMETRY_CATEGORIES_URL,
-  VOLUMETRY_DEPARTMENTS_URL,
-  VOLUMETRY_FREQUENCIES_URL,
-  VOLUMETRY_TASKS_URL,
-  columns
-} from 'components/volumetry/TaskManagement/constants'
-import { useNotification } from 'hooks'
-import { AddActionIcon, EditActionIcon } from 'icons'
 import { useState } from 'react'
-import { useQuery } from 'react-query'
-import { makeCoreGetRequest } from 'utils/api'
-import { formatErrorMessage } from 'utils/formatting'
-import { TaskManagementItem } from '../interfaces'
-import { NewTask } from './NewTask'
+import { Box } from '@mui/material'
+import { Table } from 'components/core-ui/Table'
 import s from './TaskManagement.modules.scss'
+import { CRUDAction, TaskManagementItem } from '../interfaces'
+import { makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableItems } from './serializers'
-import { buildTableFilterFields, mapToValueLabel } from './utils'
+import { AddActionIcon, EditActionIcon } from 'icons'
+import { IconCell } from 'components/core-ui/IconCell'
+import { DescriptionText } from 'components/core-ui/DescriptionText'
+import { handleQueryError } from '../utils'
+import { CreateEditTask } from './CreateEditTask'
+import { VOLUMETRY_TASKS_URL } from './constants'
+import { buildTableFilterFields } from './utils'
+import { getCategoriesOptions, getDepartmentsOptions } from '../api'
+import { useNotification } from 'hooks'
+
+export const columns = [
+  {
+    title: 'Departament / Raioane',
+    field: 'rayonsOrDepartment',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Nume task',
+    field: 'name',
+    align: 'left',
+    type: 'string',
+    width: '250px'
+  },
+  {
+    title: 'Ora recomandata de inceput',
+    field: 'recommendedStartHour',
+    align: 'left',
+    type: 'string',
+    collapsible: true
+  },
+  {
+    title: 'Ora recomandata de final',
+    field: 'recommendedEndHour',
+    align: 'left',
+    type: 'string',
+    collapsible: true
+  },
+  {
+    title: 'Frecventa',
+    field: 'frequency',
+    align: 'left',
+    type: 'string',
+    collapsible: true
+  },
+  {
+    title: 'Productivitate',
+    field: 'standardProductivityValue',
+    align: 'left',
+    type: 'string',
+    collapsible: true
+  },
+  {
+    title: 'Sursa volum de lucru',
+    field: 'workVolumeSource',
+    align: 'left',
+    type: 'string',
+    collapsible: true,
+    minWidth: '200px',
+    render: row => <DescriptionText value={row.workVolumeSource} />
+  },
+  {
+    title: 'Prioritate',
+    field: 'priority',
+    align: 'left',
+    type: 'number',
+    collapsible: true
+  },
+  {
+    title: 'Categorie',
+    field: 'volumetryLocationCategory',
+    align: 'left',
+    type: 'string',
+    collapsible: true
+  },
+  {
+    title: 'Activ',
+    field: 'isActive',
+    align: 'left',
+    type: 'string',
+    collapsible: true,
+    render: row => (
+      <Box>
+        <IconCell value={row.isActive ? 'active' : 'inactive'} />
+      </Box>
+    )
+  }
+]
 
 const TaskManagement = () => {
   const [tableItems, setTableItems] = useState<TaskManagementItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
+  const [selectedRowId, setSelectedRowId] = useState<string | number>(null)
 
   const { showNotification } = useNotification()
+
+  const { data: categoryOptions } = getCategoriesOptions(showNotification)
+  const { data: departmentOptions } = getDepartmentsOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -50,92 +125,30 @@ const TaskManagement = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      handleQueryError(error, 'Error while fetching table data', showNotification)
     }
   }
 
-  const { data: departmentFilterOptions, isLoading: isDepartmentOptionsLoading } = useQuery(
-    ['departmentOptions'],
-    async () => {
-      const result = await makeCoreGetRequest(VOLUMETRY_DEPARTMENTS_URL)
-      const options = mapToValueLabel(result.list) || []
-      return options
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Eroare la primire optiuni filtre pentru departamente. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const { data: frequencyFilterOptions, isLoading: isFrequencyOptionsLoading } = useQuery(
-    ['frequencyOptions'],
-    async () => {
-      const result = await makeCoreGetRequest(VOLUMETRY_FREQUENCIES_URL)
-      const options = mapToValueLabel(result) || []
-      return options
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Eroare la primire optiuni filtre pentru frecventa. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const { data: categoryFilterOptions, isLoading: isCategoryOptionsLoading } = useQuery(
-    ['categoryOptions'],
-    async () => {
-      const result = await makeCoreGetRequest(VOLUMETRY_CATEGORIES_URL)
-      const options = mapToValueLabel(result.list) || []
-      return options
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Eroare la primire optiuni filtre pentru categorie. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const openNewModal = (): void => setIsNewModalOpen(true)
-  const closeNewModal = (): void => setIsNewModalOpen(false)
-
-  const openEditModal = (): void => setIsEditModalOpen(true)
-  const closeEditModal = (): void => setIsEditModalOpen(false)
+  const [modal, setModal] = useState<CRUDAction>(null)
+  const openModal = (action: CRUDAction) => setModal(action)
+  const closeModal = () => setModal(null)
 
   const selectRow = (rowId: number) => {
     setSelectedRowId(rowId)
-    openEditModal()
+    openModal('edit')
   }
 
   return (
     <div className={s.mainContainer}>
       <Box>
-        <NewTask
-          isModalOpen={isNewModalOpen}
-          closeModal={closeNewModal}
+        <CreateEditTask
+          isModalOpen={modal === 'create'}
+          closeModal={closeModal}
           setShouldRefreshData={setShouldRefreshData}
         />
-        <NewTask
-          isModalOpen={isEditModalOpen}
-          closeModal={closeEditModal}
+        <CreateEditTask
+          isModalOpen={modal === 'edit'}
+          closeModal={closeModal}
           editItemId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
           isEdit
@@ -151,11 +164,7 @@ const TaskManagement = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          filters={buildTableFilterFields(
-            departmentFilterOptions || [],
-            frequencyFilterOptions || [],
-            categoryFilterOptions || []
-          )}
+          filters={buildTableFilterFields(departmentOptions || [], categoryOptions || [])}
           rowActions={[
             {
               label: 'Edit',
@@ -163,7 +172,7 @@ const TaskManagement = () => {
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
               desktopIcon: <EditActionIcon />,
-              onClick: (e, rowId) => selectRow(rowId)
+              onClick: (_e, rowId: number) => selectRow(rowId)
             }
           ]}
           rowActionsWidth="130px"
@@ -171,7 +180,7 @@ const TaskManagement = () => {
             {
               label: 'Adauga',
               icon: <AddActionIcon />,
-              onClick: openNewModal
+              onClick: () => openModal('create')
             }
           ]}
         />
