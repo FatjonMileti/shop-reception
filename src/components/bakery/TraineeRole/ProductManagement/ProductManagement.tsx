@@ -24,7 +24,7 @@ const ProductManagement = () => {
   const [totalCount, setTotalCount] = useState<number>(0)
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
- 
+
   const { data: filterOptions } = useQuery(
     ['store'],
     async () => {

@@ -3,6 +3,7 @@ export const toTableRowItems = items => items.map(item => ({
     productName: item.productName || '',
     imageUrl: item.imageUrl || '',
     metiCode: item.metiCode || '',
+    familyName: item.familyName || '',
     familyCode: item.familyCode || '',
     generalGrowth: item.generalGrowth || '',
     username: item.username || '',

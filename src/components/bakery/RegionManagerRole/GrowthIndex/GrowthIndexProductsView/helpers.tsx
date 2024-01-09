@@ -18,6 +18,12 @@ export const columns = [
       width: '150px'
     },
     {
+      title: 'Familie',
+      field: 'familyName',
+      align: 'left',
+      width: '140px'
+    },
+    {
       title: 'Cod familie',
       field: 'familyCode',
       align: 'left',
