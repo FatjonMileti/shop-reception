@@ -137,7 +137,7 @@ export interface ProductItem {
   pluCode: string | number
   metiCode: string | number
   familyModuleName: string
-  imageUrl: string,
+  imageUrl: string
   cluster?: ClustersItem
 }
 
@@ -213,4 +213,28 @@ export interface TableState {
 export interface Filter {
   name: string
   value: string | number | string[]
+}
+
+export interface IngredientItem {
+  id: string
+  name: string
+  pluCode: string | number
+  metiCode: string | number
+  familyModuleName: string
+  imageUrl: string
+  cluster: string
+  batch: boolean
+}
+
+export interface EditBatchItem {
+  id: string
+  name: string
+  pluCode: string | number
+  metiCode: string | number
+  familyModuleName: string
+  imageUrl: string
+  clusterName: string
+  batch: boolean
+  minStock: string | number
+  scheduleProduct: boolean
 }
