@@ -301,8 +301,8 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
     {
       onError: error =>
         handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification),
-        
-        enabled: validateQuery
+
+      enabled: validateQuery
     }
   )
 }
