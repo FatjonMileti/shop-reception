@@ -86,20 +86,14 @@ const Employee: React.FC<EmployeeProps> = props => {
 
         <Grid item xs={12} md={5.4} className={s.capsules}>
           <Capsule
-            label={employee.startTime.isStarted ? 'Ora de inceput' : 'Ora recomandata de inceput'}
-            value={employee.startTime.time}
-            labelColor={customCapsuleColors.label}
-            valueColor={customCapsuleColors.value}
-          />
-          <Capsule
-            label={employee.endTime.isEnded ? 'Ora de final' : 'Ora recomandata de final'}
-            value={employee.endTime.time}
+            label={'Interval orar'}
+            value={`${employee.startTime.time} - ${employee.endTime.time}`}
             labelColor={customCapsuleColors.label}
             valueColor={customCapsuleColors.value}
           />
           <Capsule
             label={'Volum'}
-            value={`${employee.volume.value}${employee.volume.measureUnit}`}
+            value={`${employee.volume.value}`}
             labelColor={customCapsuleColors.label}
             valueColor={customCapsuleColors.value}
           />
