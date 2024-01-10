@@ -172,7 +172,7 @@ const CollaboratorsTab = () => {
             {
               label: 'Add',
               icon: <AddActionIcon />,
-              onClick: () => (canCreate ? setModal('create') : null) // TODO: To verify permissions with the BE
+              onClick: () => setModal('create') // TODO: To verify permissions with the BE
             }
           ]}
         />
