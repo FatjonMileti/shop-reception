@@ -287,9 +287,10 @@ values
   (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
   (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER'),
   (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
---   TODO
   -- Supply OMNI
-  (11, 'GG_RO_HQ_IT-C4ASSIST');
+  (11, 'GG_RO_HQ_IT-C4ASSIST'),
+  -- Volumetry
+  (13, 'GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR');
 
 
 -- roles_activities
@@ -324,11 +325,11 @@ VALUES
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
     -- Volumetry
-    -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
-    (1, 42),
-    (1, 43),
-    (1, 44),
-    (1, 45);
+    -- GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR
+    (13, 42),
+    (13, 43),
+    (13, 44),
+    (13, 45);
     -- Shop Reception
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     -- (1, 46);
