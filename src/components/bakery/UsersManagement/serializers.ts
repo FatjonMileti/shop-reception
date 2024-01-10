@@ -26,16 +26,16 @@ export const getStructureRoles = (props) => {
   const {
     isRegionManagerChecked,
     isStoreManagerChecked,
-    isTraceabilityOpChecked,
+    // isTraceabilityOpChecked,
     isTraineeChecked,
     isAdmin,
     regionId,
     storeId,
     adminId,
-    traceabilityId,
+    // traceabilityId,
     regionMgValue,
     storeMgValue,
-    traceabilityOpValue,
+    // traceabilityOpValue,
     traineeValue
   } = props;
   return [
@@ -51,12 +51,12 @@ export const getStructureRoles = (props) => {
         "structureId": storeMgValue.value,
         "structureType": "STORE"
       }] : []),
-    ...(isTraceabilityOpChecked ? 
-      [{
-        "roleId": traceabilityId,
-        "structureId": traceabilityOpValue.value,
-        "structureType": "STORE"
-      }] : []),
+    // ...(isTraceabilityOpChecked ? 
+    //   [{
+    //     "roleId": traceabilityId,
+    //     "structureId": traceabilityOpValue.value,
+    //     "structureType": "STORE"
+    //   }] : []),
     ...(isTraineeChecked ? 
       [{
         "roleId": traineeValue.value,
