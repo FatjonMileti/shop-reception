@@ -108,7 +108,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         taskName={taskName}
         department={department.name}
         prodStandardUM={item.prodStandardUM}
-        setShouldRefreshData={setShouldRefreshTaskData}
+        setShouldRefreshData={setShouldRefreshData}
       />
       <EditAllocationModal
         isModalOpen={modal === 'edit'}

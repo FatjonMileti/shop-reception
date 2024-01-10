@@ -280,29 +280,15 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   return useQuery(
     ['employees-options'],
     async () => {
-      const employees = await makeCoreGetRequest('/volumetry/workers/employees')
-      const shifts = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
+      const employees = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
 
-      const employeesWithShifts = employees.list.map(employee => {
-        const matchingShift = shifts.find(shift => shift.fullName === employee.fullName)
-
-        if (matchingShift) {
-          return {
-            ...employee,
-            shiftCategory: matchingShift.shiftCategory
-          }
-        }
-
-        return employee
-      })
-
-      return toEmployeeFilterItems(employeesWithShifts) || []
+      return toEmployeeFilterItems(employees) || []
     },
     {
       onError: error =>
         handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification),
-        
-        enabled: validateQuery
+
+      enabled: validateQuery
     }
   )
 }
