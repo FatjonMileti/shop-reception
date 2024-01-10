@@ -1,25 +1,19 @@
 export const columns = [
   {
     title: 'Tip timer',
-    field: 'hub',
+    field: 'timerType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Valoare timer',
-    field: 'store',
+    field: 'timerValue',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Descrirere timer',
-    field: 'driverCode',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: '',
-    field: 'hub',
+    field: 'timerDescription',
     align: 'left',
     type: 'string'
   }

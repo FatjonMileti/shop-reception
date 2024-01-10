@@ -11,10 +11,6 @@ import Toolbar from '@mui/material/Toolbar'
 const Home = () => {
   const navigate = useNavigate()
 
-  const getTitle = () => {
-    return 'Nu'
-  }
-
   return (
     <Paper className={s.paper}>
       <Toolbar className={s.toolbar}>

@@ -1,21 +1,26 @@
 import {Grid } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import TitleHeader from '../TitleHeader/TitleHeader'
-import { AdminStoreForm } from '../AdminStore/AdminStoreForm'
+import { TitleHeader } from '../TitleHeader'
 import { AdminRegionForm } from './AdminRegionForm'
 
 const AdminRegions = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<AdminRegion[]>([])
+  const [tableItems, setTableItems] = useState<AdminRegion[]>([
+    {
+      id: 1,
+      regionCode: "1",
+      name: "Regiune Sorin Panescu",
+      regionManager: "sorin_panescu",
+      active: true
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
@@ -39,18 +44,6 @@ const AdminRegions = () => {
       setSelectedRow(row)
     }
   }
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        regionCode: "1",
-        name: "Regiune Sorin Panescu",
-        regionManager: "sorin_panescu",
-        active: true
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -103,7 +96,7 @@ const AdminRegions = () => {
           order='asc'
           columns={columns}
           items={tableItems}
-          fetchData={() => null}
+          fetchData={null}
           isLoading={isLoading}
           totalCount={totalCount}
           newButton={{

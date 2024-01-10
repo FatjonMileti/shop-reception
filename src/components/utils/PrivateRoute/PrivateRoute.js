@@ -4,13 +4,16 @@ import { NotFound } from 'components/core-ui'
 
 const PrivateRoute = ({ component: RouteComponent, ...props }) => {
   const location = useLocation()
-  const { id } = useParams();
+  const { id } = useParams()
 
   const matchRoute = (appPages, currentPath) => {
     const currentPathWithReplaceId = currentPath.replace(id, ':id')
     const currentPathWithoutId = currentPath.replace(/\/\d+$/, '/:id')
 
-    return appPages.map(app => app.route.url).includes(currentPathWithReplaceId) || appPages.map(app => app.route.url).includes(currentPathWithoutId)
+    return (
+      appPages.map(app => app.route.url).includes(currentPathWithReplaceId) ||
+      appPages.map(app => app.route.url).includes(currentPathWithoutId)
+    )
   }
 
   const isAuthorized = useMemo(() => {

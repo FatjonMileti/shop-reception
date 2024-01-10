@@ -1,50 +1,45 @@
 import { Paper, Grid } from '@mui/material'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../CommonStyles.modules.scss'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Download as DownloadIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import TitleHeader from '../TitleHeader/TitleHeader'
+import { TitleHeader } from '../TitleHeader'
 
 const ReturnedPackaging = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<ReturnedPackaging[]>([
+    {
+      id: 1,
+      store: 'CRAIOVA (3054)',
+      warehouse: 'DEPOZIT BRAZI NON FOOD',
+      hub: '',
+      society: '',
+      packageCodeLoaded: 'PH01DEP',
+      packTypeLoaded: 'DEPOZITBRA',
+      quantityLoaded: '3095940',
+      downloadedAmount: '',
+      shopNoticeNumber: '256822',
+      seal: '',
+      shopShipmentDate: '',
+      noticeHub: '',
+      route: '',
+      registrationNumber: '',
+      returnPacking: '',
+      verificationDate: '25-10-2023',
+      checkOperator: '',
+      status: 'Înregistrat'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -71,10 +66,6 @@ const ReturnedPackaging = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (
@@ -245,7 +236,7 @@ const ReturnedPackaging = () => {
           order='asc'
           columns={columns}
           items={tableItems}
-          fetchData={() => null}
+          fetchData={null}
           isLoading={isLoading}
           totalCount={totalCount}
           newButton={null}

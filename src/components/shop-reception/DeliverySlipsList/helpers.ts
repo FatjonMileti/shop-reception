@@ -54,7 +54,7 @@ export const columns = [
     type: 'string'
   },
   {
-    title: 'Datã inregistrare',
+    title: 'Datǎ inregistrare',
     field: 'registrationDate',
     align: 'left',
     type: 'string'

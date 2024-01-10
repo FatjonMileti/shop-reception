@@ -1,43 +1,43 @@
 export const columns = [
   {
     title: 'Depozit',
-    field: 'store',
+    field: 'warehouse',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Magazin',
-    field: 'hub',
+    field: 'store',
     align: 'left',
     type: 'string'
   },
   {
     title: 'HUB',
-    field: 'warehouseName',
+    field: 'hub',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Societate',
-    field: 'truckLocation',
+    field: 'society',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip suport așteptat',
-    field: 'registrationNumber',
+    field: 'expectedSupportType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip suport confirmat',
-    field: 'registrationNumber',
+    field: 'confirmedSupportType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Locație camion',
-    field: 'registrationNumber',
+    field: 'truckLocation',
     align: 'left',
     type: 'string'
   },
@@ -49,50 +49,50 @@ export const columns = [
   },
   {
     title: 'Cod suport',
-    field: 'driverCode',
+    field: 'supportCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Bon livrare',
-    field: 'seals',
+    field: 'deliverySlip',
     align: 'left',
     collapsible: true,
     type: 'string'
   },
   {
     title: 'Numǎr aviz',
-    field: 'raceCode',
+    field: 'noticeNumber',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Intrare',
-    field: 'raceCode',
+    field: 'entry',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Leșire',
-    field: 'deliveryReceipts',
+    field: 'lesire',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Stoc final dupa inventar',
-    field: 'raceCode',
+    field: 'finalStockAfterInventory',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Dată',
-    field: 'registrationDate',
+    field: 'date',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Descarcǎ imagine',
-    field: 'registrationOperator',
+    field: 'image',
     align: 'left',
     type: 'string'
   }

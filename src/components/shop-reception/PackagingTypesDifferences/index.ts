@@ -1,1 +1,1 @@
-export { default as RollingPackages } from './PackagingTypesDifferences'
+export { default as PackagingTypesDifferences } from './PackagingTypesDifferences'

@@ -1,0 +1,1 @@
+export { default as AddTruckStep2 } from "./AddTruckStep2"

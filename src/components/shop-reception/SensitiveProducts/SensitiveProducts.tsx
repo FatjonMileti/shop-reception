@@ -2,21 +2,35 @@ import { Grid, Paper } from '@mui/material'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import TitleHeader from '../TitleHeader/TitleHeader'
+import { TitleHeader } from '../TitleHeader'
 import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { SensitiveProductForm } from './SensitiveProductForm'
+import { ImportProductsForm } from './ImportProductsForm'
 
 const SensitiveProducts = () => {
-  const [tableItems, setTableItems] = useState<SensitiveProduct[]>([])
+  const [tableItems, setTableItems] = useState<SensitiveProduct[]>([
+    {
+      id: 1,
+      storeType: 'B1',
+      storeCode: 'CRAIOVA (3054)',
+      storeName: 'CRAIOVA (3054)',
+      district: 'DEPOZIT BRAZI NON FOOD',
+      family: 'PH01DEP',
+      subfamily: 'DEPOZITBRA',
+      UbCode: '3095940',
+      productCode: '256822'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isImportProductsModalOpen, setIsImportProductsModalOpen] = useState<boolean>(false)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<SensitiveProduct>()
@@ -26,34 +40,21 @@ const SensitiveProducts = () => {
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
 
-  const openEditModal = (rowId: number|string): void => {
+  const openImportProductsModal = (): void => setIsImportProductsModalOpen(true)
+  const closeImportProductsModal = (): void => setIsImportProductsModalOpen(false)
+
+  const openEditModal = (rowId: number | string): void => {
     selectRow(rowId)
     setIsEditModalOpen(true)
   }
   const closeEditModal = (): void => setIsEditModalOpen(false)
 
-  const selectRow = (rowId: number|string) => {
+  const selectRow = (rowId: number | string) => {
     const row = tableItems.find(item => item.id === rowId)
     if (row) {
       setSelectedRow(row)
     }
   }
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        storeType: 'B1',
-        storeCode: 'CRAIOVA (3054)',
-        storeName: 'CRAIOVA (3054)',
-        district: 'DEPOZIT BRAZI NON FOOD',
-        family: 'PH01DEP',
-        subfamily: 'DEPOZITBRA',
-        UbCode: '3095940',
-        productCode: '256822'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -80,10 +81,6 @@ const SensitiveProducts = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (
@@ -192,6 +189,11 @@ const SensitiveProducts = () => {
           closeModal={closeNewModal}
           setShouldRefreshData={setShouldRefreshData}
         />
+        <ImportProductsForm
+          isModalOpen={isImportProductsModalOpen}
+          closeModal={closeImportProductsModal}
+          setShouldRefreshData={setShouldRefreshData}
+        />
         <SensitiveProductForm
           isModalOpen={isEditModalOpen}
           closeModal={closeEditModal}
@@ -205,7 +207,7 @@ const SensitiveProducts = () => {
           order='asc'
           columns={columns}
           items={tableItems}
-          fetchData={() => null}
+          fetchData={null}
           isLoading={isLoading}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
@@ -224,7 +226,7 @@ const SensitiveProducts = () => {
             {
               label: 'Importǎ produse sensibile',
               icon: <AddIcon />,
-              onClick: null
+              onClick: openImportProductsModal
             },
             {
               label: 'Produse sensibile',

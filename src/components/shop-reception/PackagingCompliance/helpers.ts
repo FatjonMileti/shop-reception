@@ -1,49 +1,49 @@
 export const columns = [
   {
     title: 'Magazin',
-    field: 'hub',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Depozit',
     field: 'store',
     align: 'left',
     type: 'string'
   },
   {
+    title: 'Depozit',
+    field: 'warehouse',
+    align: 'left',
+    type: 'string'
+  },
+  {
     title: 'Bon livrare',
-    field: 'hub',
+    field: 'deliverySlip',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip suport',
-    field: 'warehouseName',
+    field: 'supportType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cod suport',
-    field: 'registrationNumber',
+    field: 'supportCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Conformitate suport',
-    field: 'registrationNumber',
+    field: 'supportCompliance',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ receptie',
-    field: 'registrationNumber',
+    field: 'receptionDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Descarca imagini',
-    field: 'driverCode',
+    field: 'downloadImages',
     align: 'left',
     type: 'string'
   }

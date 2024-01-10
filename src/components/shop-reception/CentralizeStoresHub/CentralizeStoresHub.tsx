@@ -2,13 +2,13 @@ import { Grid, Paper } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import TitleHeader from '../TitleHeader/TitleHeader'
+import { TitleHeader } from '../TitleHeader'
 import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { AdminStoreForm } from '../AdminStore/AdminStoreForm'
@@ -16,7 +16,14 @@ import { EditForm } from './EditForm'
 
 const CentralizeStoresHub = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<CentralizeStoresHub[]>([])
+  const [tableItems, setTableItems] = useState<CentralizeStoresHub[]>([
+    {
+      id: 1,
+      store: 'BANEASA (7)',
+      deposit: 'DEPOZIT BRAZI NON FOOD, DEPOZIT CEFIN AMBIENT, DEPOZIT CEFIN APLS, DEPOZIT CEFIN LEGUME - FRUCTE, DEPOZIT CONGELATE, DEPOZIT PESTE\t',
+      hubs: '',
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
@@ -35,17 +42,6 @@ const CentralizeStoresHub = () => {
       setSelectedRow(row)
     }
   }
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        store: 'BANEASA (7)',
-        deposit: 'DEPOZIT BRAZI NON FOOD, DEPOZIT CEFIN AMBIENT, DEPOZIT CEFIN APLS, DEPOZIT CEFIN LEGUME - FRUCTE, DEPOZIT CONGELATE, DEPOZIT PESTE\t',
-        hubs: '',
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -72,10 +68,6 @@ const CentralizeStoresHub = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (
@@ -150,7 +142,7 @@ const CentralizeStoresHub = () => {
           order='asc'
           columns={columns}
           items={tableItems}
-          fetchData={() => null}
+          fetchData={null}
           isLoading={isLoading}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}

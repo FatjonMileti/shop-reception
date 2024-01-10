@@ -1,49 +1,34 @@
 import { Grid, Paper } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import TitleHeader from '../TitleHeader/TitleHeader'
+import { TitleHeader } from '../TitleHeader'
 import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 
 const ReceptionFiles = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<ReceptionFile[]>([
+    {
+      id: 1,
+      deliverySlip: 'PH01DEP',
+      warehouse: 'DEPOZIT BRAZI NON FOOD',
+      store: 'CRAIOVA (3054)',
+      date: '25-10-2023',
+      success: 'DEPOZITBRA',
+      failureReason: '3095940',
+      fileDownloaded: '256822',
+      reProcessing: 'Inexistent'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -70,10 +55,6 @@ const ReceptionFiles = () => {
         type: 'error'
       })
     }
-  }
-
-  const getTitle = () => {
-    return 'Nu'
   }
 
   return (
@@ -176,7 +157,7 @@ const ReceptionFiles = () => {
           order='asc'
           columns={columns}
           items={tableItems}
-          fetchData={() => null}
+          fetchData={null}
           isLoading={isLoading}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}

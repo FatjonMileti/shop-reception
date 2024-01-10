@@ -1,1 +1,1 @@
-export { default as RollingPackages } from './PackagingCompliance'
+export { default as PackagingCompliance } from './PackagingCompliance'

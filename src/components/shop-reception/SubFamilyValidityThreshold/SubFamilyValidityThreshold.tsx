@@ -1,20 +1,31 @@
 import { Grid, Paper } from '@mui/material'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import TitleHeader from '../TitleHeader/TitleHeader'
+import { TitleHeader } from '../TitleHeader'
 import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { EditForm } from '../CentralizeStoresHub/EditForm'
 import { SubFamilyValidityThresholdForm } from './SubFamilyValidityThresholdForm'
 
 const SubFamilyValidityThreshold = () => {
-  const [tableItems, setTableItems] = useState<SubFamilyValidityThreshold[]>([])
+  const [tableItems, setTableItems] = useState<SubFamilyValidityThreshold[]>([
+    {
+      id: 1,
+      subfamilyCode: 'CRAIOVA (3054)',
+      familyCode: 'CRAIOVA (3054)',
+      subfamily: 'DEPOZIT BRAZI NON FOOD',
+      family: 'PH01DEP',
+      districtCode: 'DEPOZITBRA',
+      district: 'DEPOZITBRA',
+      validityThreshold: '3095940'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
@@ -22,32 +33,17 @@ const SubFamilyValidityThreshold = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
 
-  const openEditForm = (rowId: number|string) => {
+  const openEditForm = (rowId: number | string) => {
     selectRow(rowId)
     setIsOpenEditModal(true)
   }
   const closeEditForm = () => setIsOpenEditModal(false)
-  const selectRow = (rowId: number|string) => {
+  const selectRow = (rowId: number | string) => {
     const row = tableItems.find(item => item.id === rowId)
     if (row) {
       setSelectedRow(row)
     }
   }
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        subfamilyCode: 'CRAIOVA (3054)',
-        familyCode: 'CRAIOVA (3054)',
-        subfamily: 'DEPOZIT BRAZI NON FOOD',
-        family: 'PH01DEP',
-        districtCode: 'DEPOZITBRA',
-        district: 'DEPOZITBRA',
-        validityThreshold: '3095940'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -148,7 +144,7 @@ const SubFamilyValidityThreshold = () => {
           order='asc'
           columns={columns}
           items={tableItems}
-          fetchData={() => null}
+          fetchData={null}
           isLoading={isLoading}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}

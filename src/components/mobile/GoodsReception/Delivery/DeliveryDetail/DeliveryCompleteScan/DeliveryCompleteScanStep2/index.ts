@@ -1,0 +1,1 @@
+export { default as DeliveryCompleteScanStep2 } from './DeliveryCompleteScanStep2'
