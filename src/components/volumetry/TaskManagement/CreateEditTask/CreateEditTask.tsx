@@ -226,6 +226,20 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
         </Grid>
 
         <Grid xs={12} md={6} item>
+          <AsyncAutocomplete
+            variant="outlined"
+            name="workVolumeSource"
+            label="Sursa volum de lucru"
+            value={formik.values.workVolumeSource}
+            options={workVolumeSourceOptions}
+            onChange={value => formik.setFieldValue('workVolumeSource', value)}
+            error={!!formik.errors.workVolumeSource}
+            helperText={formik.errors.workVolumeSource as string}
+            required
+          />
+        </Grid>
+
+        <Grid xs={12} md={6} item>
           <Input
             type="number"
             name="standardProductivityValue"
@@ -255,20 +269,6 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             onChange={value => formik.setFieldValue('measurementUnit', value)}
             error={!!formik.errors.measurementUnit}
             helperText={formik.errors.measurementUnit as string}
-            required
-          />
-        </Grid>
-
-        <Grid xs={12} md={6} item>
-          <AsyncAutocomplete
-            variant="outlined"
-            name="workVolumeSource"
-            label="Sursa volum de lucru"
-            value={formik.values.workVolumeSource}
-            options={workVolumeSourceOptions}
-            onChange={value => formik.setFieldValue('workVolumeSource', value)}
-            error={!!formik.errors.workVolumeSource}
-            helperText={formik.errors.workVolumeSource as string}
             required
           />
         </Grid>
