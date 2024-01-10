@@ -22,8 +22,8 @@ const DynamicTable = props => {
             return columns
           }
 
-          const startValue = startDate ? dayjs(startDate) : dayjs(new Date())
-          const endValue = endDate ? dayjs(endDate) : dayjs(new Date())
+          const startValue = startDate ? dayjs(startDate) : dayjs(new Date());
+          const endValue = endDate ? dayjs(endDate) : dayjs(new Date());
 
           if (endValue.isAfter(startValue, 'day') || endValue.isSame(startValue, 'day')) {
             const datesArray = []
