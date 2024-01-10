@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Divider, Grid, Paper } from '@mui/material'
+import { Box, Divider, Grid, Paper } from '@mui/material'
 import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
@@ -15,6 +15,7 @@ import { toTableRowItems } from './serializers'
 import dayjs from 'dayjs'
 import { FileDownloadOutlined } from '@mui/icons-material'
 import { toAsyncSelectOptions } from '../commonSerializers'
+import { getPreviousDay } from 'utils/helpers'
 
 const UsageReport = () => {
   const [tableItems, setTableItems] = useState<UsageReportItem[]>([])
@@ -24,15 +25,15 @@ const UsageReport = () => {
   const { showNotification } = useNotification()
   
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([]);
-  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
-  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
+  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(getPreviousDay())
+  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(getPreviousDay())
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
 
     const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'startDate', value: dayjs(startDateFilterValue).format('YYYY-MM-DD') },
+      { name: 'endDate', value: dayjs(endDateFilterValue).format('YYYY-MM-DD') },
       ...(storeFilterValue && storeFilterValue.length > 0
         ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
         : []),
@@ -99,8 +100,8 @@ const UsageReport = () => {
 
   const handleDownload = async () => {
     const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'startDate', value: dayjs(startDateFilterValue).format('YYYY-MM-DD') },
+      { name: 'endDate', value: dayjs(endDateFilterValue).format('YYYY-MM-DD') },
       { name: 'store', value: storeFilterValue[0]?.value },
     ].filter(
       f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)

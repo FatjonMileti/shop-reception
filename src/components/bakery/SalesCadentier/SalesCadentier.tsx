@@ -249,6 +249,7 @@ const SalesCadentier = () => {
             label="Magazin"
             options={stores}
             onSelect={val => handleStoreFilterChange(val)}
+            showSearch
           />
         </Grid>
       </Grid>
