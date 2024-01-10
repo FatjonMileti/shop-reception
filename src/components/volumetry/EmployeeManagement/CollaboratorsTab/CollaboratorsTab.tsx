@@ -11,7 +11,7 @@ import { columns, roles } from './helpers'
 import { DeleteCollaborator } from './DeleteCollaborator'
 import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
-import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, Input } from '@fullscreendigital/carrefour-dex-fe'
 import {
   getDepartmentsOptions,
   getContractorsNamesOptions,
@@ -74,16 +74,9 @@ const CollaboratorsTab = () => {
     {
       name: 'fullName',
       label: 'Nume',
-      type: 'autocomplete',
+      type: 'text',
       value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Nume"
-          options={contractorsNamesOptions}
-          isOptionEqualToValue={(option, value) => option.value === value.value}
-        />
-      )
+      filter: <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
     },
     {
       name: 'department',
@@ -101,13 +94,13 @@ const CollaboratorsTab = () => {
     },
     {
       name: 'position',
-      label: 'Position',
+      label: 'Functie',
       type: 'autocomplete',
       value: '',
       filter: (
         <Autocomplete
           variant="outlined"
-          label="Position"
+          label="Functie"
           options={jobTitlesOptions}
           isOptionEqualToValue={(option, value) => option.value === value.value}
         />
