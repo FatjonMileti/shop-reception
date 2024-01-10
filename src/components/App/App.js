@@ -25,8 +25,8 @@ import { useVolumetryRoutes } from 'components/volumetry/routes'
 import { useBakeryRoutes } from 'components/bakery/routes'
 import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
 import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
-import { useMerchandiseRoutes } from '../mobile/routes'
-import { useShopReceptionRoutes } from '../shop-reception/routes'
+import { useMerchandiseRoutes } from '../shop-reception/mobile/routes'
+import { useShopReceptionRoutes } from '../shop-reception/admin/routes'
 import { getFBToken } from 'utils/firebase'
 import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
 
@@ -159,16 +159,16 @@ const App = () => {
   return (
     <AuthProvider {...oidcConfig}>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme="light">
+        <ThemeProvider theme='light'>
           {((isLoadingAppModules || !hasLoadedAppModules) && (
             <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+              <CircularProgress color='primary' style={{ margin: '40px auto' }} disableShrink />
             </div>
           )) || (
             <Layout modules={modules} setSubdomainId={setSubdomainId}>
               <BackButtonTitle applicationPages={applicationPages}></BackButtonTitle>
               <Routes>
-                {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
+                {!applicationPages.length && <Route path='*' element={<LoginOIDC />} />}
 
                 {/* private routes */}
                 <Route
@@ -204,7 +204,7 @@ const App = () => {
 
                 <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
                 <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
-                {applicationPages.length && <Route path="*" element={<NotFound />} />}
+                {applicationPages.length && <Route path='*' element={<NotFound />} />}
               </Routes>
             </Layout>
           )}

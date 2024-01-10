@@ -1,0 +1,46 @@
+export const URLS = {
+  // reception dashboard
+  AUTH_HOME: '/admin/web/',
+  AUTH_ADMIN_DASHBOARD: '/admin/web/admin/dashboard',
+  AUTH_RECEPTION_DASHBOARD: '/admin/web/reception/dashboard',
+  AUTH_PACKAGE_DASHBOARD: '/admin/web/package/dashboard',
+  AUTH_TRUCK_LIST: '/admin/web/truck/list',
+  AUTH_TRUCK_DETAIL: '/admin/web/truck/:id',
+  AUTH_DELIVERY_SLIPS_LIST: '/admin/web/delivery/slips',
+  AUTH_DELIVERY_SLIP: '/admin/web/delivery/slip/:id',
+  AUTH_SUPPORT_WRONG_DESTINATION: '/admin/web/support/wrong-destination',
+  AUTH_SUPPORT_WRONG_DESTINATION_DETAIL: '/admin/web/support/wrong-destination/from/:id',
+  AUTH_UNORDERED_PRODUCTS: '/admin/web/products/unordered',
+  AUTH_METI_FILES: '/admin/web/files/meti',
+  AUTH_METI_FILE_DETAIL: '/admin/web/files/meti/:id',
+  AUTH_DIFFERENCES_PRODUCTS: '/admin/web/products/differences',
+  AUTH_SUPPORT_TRADABILITY: '/admin/web/support/tradability',
+  AUTH_SGR_PRODUCTS: '/admin/web/products/sgr',
+
+  // admin dashboard
+  AUTH_ADMIN_DEPOSIT: '/admin/web/admin/deposit',
+  AUTH_ADMIN_HUB: '/admin/web/admin/hub',
+  AUTH_ADMIN_STORE: '/admin/web/admin/store',
+  AUTH_ADMIN_REGIONS: '/admin/web/admin/regions',
+  AUTH_CENTRALIZATION_STORES_HUB: '/admin/web/stores-hubs',
+  AUTH_MANAGE_SCAN_TYPES: '/admin/web/manage/scan-types',
+  AUTH_SUBFAMILY_VALIDITY_THRESHOLD: '/admin/web/subfamily-validity_threshold',
+  AUTH_METI_PRODUCTS: '/admin/web/products/meti',
+  AUTH_ADMIN_SENSITIVE_PRODUCTS: '/admin/web/products/sensitive',
+  AUTH_ADMIN_PACKING_TYPES: '/admin/web/admin/packing-types',
+  AUTH_MANAGE_DLC_PRODUCTS: '/admin/web/products/dlc',
+  AUTH_RECEPTION_FILES_INFO: '/admin/web/reception-files',
+
+  // package dashboard
+  AUTH_RETURN_TRUCK_LIST: '/admin/web/truck/list/return',
+  AUTH_ROLLING_PACKAGES: '/admin/web/packages/rolling',
+  AUTH_BALANCE_PACKAGING: '/admin/web/packages/balance',
+  AUTH_BALANCE_PACKAGING_FORM: '/admin/web/packages/balance/form/:id',
+  AUTH_BALANCE_PACKAGING_HISTORY: '/admin/web/packages/balance/history/:id',
+  AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS: '/admin/web/packaging-disputes/store-returns',
+  AUTH_PACKAGING_TYPES_DIFFERENCES: '/admin/web/packaging/types/differences',
+  AUTH_RETURNED_PACKAGING: '/admin/web/packaging/returned',
+  AUTH_PACKAGING_COMPLIANCE: '/admin/web/packaging/compliance',
+  AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION: '/admin/web/packaging-disputes/timer',
+  AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL: '/admin/web/packaging-disputes/timer/:id'
+}

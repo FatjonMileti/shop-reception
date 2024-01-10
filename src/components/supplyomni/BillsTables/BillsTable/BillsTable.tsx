@@ -218,7 +218,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
                 noDataFoundLabel="Nici un rezultat"
                 options={deliveryTypeOptions}
                 onSelect={handleDeliveryOptionFilterChange}
-                clearable
+                // clearable
               />
             </Grid>
           </Grid>
