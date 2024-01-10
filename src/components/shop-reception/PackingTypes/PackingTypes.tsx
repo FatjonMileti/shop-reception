@@ -2,7 +2,7 @@ import { Grid, Paper } from '@mui/material'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon, CloudDownload as CloudDownloadIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -14,7 +14,19 @@ import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { PackingTypeForm } from './PackingTypeForm'
 
 const PackingTypes = () => {
-  const [tableItems, setTableItems] = useState<PackingType[]>([])
+  const [tableItems, setTableItems] = useState<PackingType[]>([
+    {
+      id: 1,
+      packagingCode: 'CRAIOVA (3054)',
+      additionalCodes: 'DEPOZIT BRAZI NON FOOD',
+      name: 'PH01DEP',
+      main: 'DEPOZITBRA',
+      combination: false,
+      active: true,
+      return: true,
+      generatedBarcode: 'Înregistrat'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
@@ -38,23 +50,6 @@ const PackingTypes = () => {
       setSelectedRow(row)
     }
   }
-
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        packagingCode: 'CRAIOVA (3054)',
-        additionalCodes: 'DEPOZIT BRAZI NON FOOD',
-        name: 'PH01DEP',
-        main: 'DEPOZITBRA',
-        combination: false,
-        active: true,
-        return: true,
-        generatedBarcode: 'Înregistrat'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

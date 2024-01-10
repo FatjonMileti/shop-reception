@@ -2,7 +2,7 @@ import { Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -13,22 +13,18 @@ import { URLS } from '../constants'
 
 const PackagingDisputesTimer = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<PackagingDisputeTimer[]>([])
+  const [tableItems, setTableItems] = useState<PackagingDisputeTimer[]>([
+    {
+      id: 1,
+      timerType: 'CRAIOVA (3054)',
+      timerValue: '3095940',
+      timerDescription: 'Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        timerType: 'CRAIOVA (3054)',
-        timerValue: '3095940',
-        timerDescription: 'Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent Inexistent'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

@@ -1,7 +1,7 @@
 import { Grid, Paper } from '@mui/material'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -12,27 +12,23 @@ import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 
 const ReceptionFiles = () => {
-  const [tableItems, setTableItems] = useState<ReceptionFile[]>([])
+  const [tableItems, setTableItems] = useState<ReceptionFile[]>([
+    {
+      id: 1,
+      deliverySlip: 'PH01DEP',
+      warehouse: 'DEPOZIT BRAZI NON FOOD',
+      store: 'CRAIOVA (3054)',
+      date: '25-10-2023',
+      success: 'DEPOZITBRA',
+      failureReason: '3095940',
+      fileDownloaded: '256822',
+      reProcessing: 'Inexistent'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        deliverySlip: 'PH01DEP',
-        warehouse: 'DEPOZIT BRAZI NON FOOD',
-        store: 'CRAIOVA (3054)',
-        date: '25-10-2023',
-        success: 'DEPOZITBRA',
-        failureReason: '3095940',
-        fileDownloaded: '256822',
-        reProcessing: 'Inexistent'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

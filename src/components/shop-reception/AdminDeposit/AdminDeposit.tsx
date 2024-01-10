@@ -2,7 +2,7 @@ import { Grid } from '@mui/material'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -12,7 +12,28 @@ import { TitleHeader } from '../TitleHeader'
 import { AdminDepositForm } from './AdminDepositForm'
 
 const AdminDeposit = () => {
-  const [tableItems, setTableItems] = useState<AdminDeposit[]>([])
+  const [tableItems, setTableItems] = useState<AdminDeposit[]>([
+    {
+      id: 1,
+      depositCode: 'BDU',
+      name: 'DEPOZIT CONGELATE',
+      depositType: 'FROZEN',
+      address: '',
+      validityPercentage: '75',
+      emails: '',
+      active: true
+    },
+    {
+      id: 2,
+      depositCode: 'BDU',
+      name: 'DEPOZIT CONGELATE',
+      depositType: 'FROZEN',
+      address: '',
+      validityPercentage: '75',
+      emails: '',
+      active: false
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
@@ -36,31 +57,6 @@ const AdminDeposit = () => {
       setSelectedRow(row)
     }
   }
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        depositCode: 'BDU',
-        name: 'DEPOZIT CONGELATE',
-        depositType: 'FROZEN',
-        address: '',
-        validityPercentage: '75',
-        emails: '',
-        active: true
-      },
-      {
-        id: 2,
-        depositCode: 'BDU',
-        name: 'DEPOZIT CONGELATE',
-        depositType: 'FROZEN',
-        address: '',
-        validityPercentage: '75',
-        emails: '',
-        active: false
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

@@ -3,7 +3,7 @@ import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../CommonStyles.modules.scss'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -14,30 +14,26 @@ import { useNavigate } from 'react-router-dom'
 import { URLS } from '../constants'
 
 const DeliverySlipsList = () => {
-  const [tableItems, setTableItems] = useState<DeliverySlip[]>([])
+  const [tableItems, setTableItems] = useState<DeliverySlip[]>([
+    {
+      id: 2341,
+      store: 'ORHIDEEA (3)',
+      warehouseName: 'DEPOZIT BACAU',
+      deliverySlip: '675381',
+      status: 'În procesare',
+      raceCode: '11111111',
+      seal: '23675467',
+      registrationNumber: 'ABO2PEK AALTATESCU',
+      expectedSupports: '1',
+      destinationReachedSupports: '1',
+      registrationDate: '24-11-2023 / 14:59'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 2341,
-        store: 'ORHIDEEA (3)',
-        warehouseName: 'DEPOZIT BACAU',
-        deliverySlip: '675381',
-        status: 'În procesare',
-        raceCode: '11111111',
-        seal: '23675467',
-        registrationNumber: 'ABO2PEK AALTATESCU',
-        expectedSupports: '1',
-        destinationReachedSupports: '1',
-        registrationDate: '24-11-2023 / 14:59'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -153,7 +149,7 @@ const DeliverySlipsList = () => {
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
               onClick: (e, rowId) => {
-                navigate(URLS.AUTH_DELIVERY_SLIP.replace(":id", rowId))
+                navigate(URLS.AUTH_DELIVERY_SLIP.replace(':id', rowId))
               }
             }
           ]}

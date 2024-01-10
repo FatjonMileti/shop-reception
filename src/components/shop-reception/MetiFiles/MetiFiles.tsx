@@ -4,7 +4,7 @@ import s from '../CommonStyles.modules.scss'
 import { URLS } from '../constants'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -14,34 +14,30 @@ import { TitleHeader } from '../TitleHeader'
 import { useNavigate } from 'react-router-dom'
 
 const MetiFiles = () => {
-  const [tableItems, setTableItems] = useState<MetiFile[]>([])
+  const [tableItems, setTableItems] = useState<MetiFile[]>([
+    {
+      id: 1,
+      deliverySlip: 'DEPOZIT BACAU',
+      store: 'ORHIDEEA (3)',
+      warehouse: '675381',
+      integrationOperator: '11111111',
+      status: 'În procesare',
+      sentFile: '23675467',
+      receivedFile: 'ABO2PEK AALTATESCU',
+      sentToMeti: '1',
+      receivedFromMeti: '1',
+      productsDifferences: '1',
+      metiProductDifferences: '1',
+      exportNonIntegratedProducts: '1',
+      error: false,
+      forgot: false,
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        deliverySlip: 'DEPOZIT BACAU',
-        store: 'ORHIDEEA (3)',
-        warehouse: '675381',
-        integrationOperator: '11111111',
-        status: 'În procesare',
-        sentFile: '23675467',
-        receivedFile: 'ABO2PEK AALTATESCU',
-        sentToMeti: '1',
-        receivedFromMeti: '1',
-        productsDifferences: '1',
-        metiProductDifferences: '1',
-        exportNonIntegratedProducts: '1',
-        error: false,
-        forgot: false,
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

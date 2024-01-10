@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -15,7 +15,23 @@ import { AdminStoreForm } from './AdminStoreForm'
 
 const AdminStore = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<AdminStore[]>([])
+  const [tableItems, setTableItems] = useState<AdminStore[]>([
+    {
+      id: 1,
+      storeCode: "10",
+      name: "CLUJ",
+      storeType: "HYPER",
+      METIVersion: "V9",
+      adCode: "9",
+      grams: 100,
+      region: "",
+      ip: "10.191.47.22",
+      way: "/default/",
+      quantities: "Nu",
+      active: false,
+      hourlyIntervals: 43,
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
@@ -39,26 +55,6 @@ const AdminStore = () => {
       setSelectedRow(row)
     }
   }
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        storeCode: "10",
-        name: "CLUJ",
-        storeType: "HYPER",
-        METIVersion: "V9",
-        adCode: "9",
-        grams: 100,
-        region: "",
-        ip: "10.191.47.22",
-        way: "/default/",
-        quantities: "Nu",
-        active: false,
-        hourlyIntervals: 43,
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

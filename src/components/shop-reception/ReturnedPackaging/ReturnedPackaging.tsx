@@ -4,7 +4,7 @@ import s from '../CommonStyles.modules.scss'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Download as DownloadIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -13,37 +13,33 @@ import { useNotification } from '../../../hooks'
 import { TitleHeader } from '../TitleHeader'
 
 const ReturnedPackaging = () => {
-  const [tableItems, setTableItems] = useState<ReturnedPackaging[]>([])
+  const [tableItems, setTableItems] = useState<ReturnedPackaging[]>([
+    {
+      id: 1,
+      store: 'CRAIOVA (3054)',
+      warehouse: 'DEPOZIT BRAZI NON FOOD',
+      hub: '',
+      society: '',
+      packageCodeLoaded: 'PH01DEP',
+      packTypeLoaded: 'DEPOZITBRA',
+      quantityLoaded: '3095940',
+      downloadedAmount: '',
+      shopNoticeNumber: '256822',
+      seal: '',
+      shopShipmentDate: '',
+      noticeHub: '',
+      route: '',
+      registrationNumber: '',
+      returnPacking: '',
+      verificationDate: '25-10-2023',
+      checkOperator: '',
+      status: 'Înregistrat'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        store: 'CRAIOVA (3054)',
-        warehouse: 'DEPOZIT BRAZI NON FOOD',
-        hub: '',
-        society: '',
-        packageCodeLoaded: 'PH01DEP',
-        packTypeLoaded: 'DEPOZITBRA',
-        quantityLoaded: '3095940',
-        downloadedAmount: '',
-        shopNoticeNumber: '256822',
-        seal: '',
-        shopShipmentDate: '',
-        noticeHub: '',
-        route: '',
-        registrationNumber: '',
-        returnPacking: '',
-        verificationDate: '25-10-2023',
-        checkOperator: '',
-        status: 'Înregistrat'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

@@ -3,7 +3,7 @@ import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../CommonStyles.modules.scss'
 import { Table } from '../../../core-ui/Table'
 import { detailsColumns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNotification } from '../../../../hooks'
 import { TitleHeader } from '../../TitleHeader'
 import { useParams } from 'react-router-dom'
@@ -11,29 +11,25 @@ import { Download as DownloadIcon } from '@mui/icons-material'
 
 const Tab1 = () => {
   const { id } = useParams()
-  const [tableItems, setTableItems] = useState<DeliverySlip[]>([])
+  const [tableItems, setTableItems] = useState<DeliverySlip[]>([
+    {
+      id: 1,
+      store: 'ORHIDEEA (3)',
+      warehouseName: 'DEPOZIT BACAU',
+      deliverySlip: '675381',
+      status: 'În procesare',
+      raceCode: '11111111',
+      seal: '23675467',
+      registrationNumber: 'ABO2PEK AALTATESCU',
+      expectedSupports: '1',
+      destinationReachedSupports: '1',
+      registrationDate: '24-11-2023 / 14:59'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        store: 'ORHIDEEA (3)',
-        warehouseName: 'DEPOZIT BACAU',
-        deliverySlip: '675381',
-        status: 'În procesare',
-        raceCode: '11111111',
-        seal: '23675467',
-        registrationNumber: 'ABO2PEK AALTATESCU',
-        expectedSupports: '1',
-        destinationReachedSupports: '1',
-        registrationDate: '24-11-2023 / 14:59'
-      }
-    ])
-  }, [])
 
   return (
     <Grid container spacing={2}>

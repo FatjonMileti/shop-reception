@@ -4,7 +4,7 @@ import s from '../CommonStyles.modules.scss'
 import { URLS } from '../constants'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -13,35 +13,31 @@ import { useNotification } from '../../../hooks'
 import { TitleHeader } from '../TitleHeader'
 
 const DifferencesProducts = () => {
-  const [tableItems, setTableItems] = useState<DifferencesProduct[]>([])
+  const [tableItems, setTableItems] = useState<DifferencesProduct[]>([
+    {
+      id: 1,
+      deliverySlip: '675381',
+      store: 'ORHIDEEA (3)',
+      warehouse: 'DEPOZIT BACAU',
+      productName: 'În procesare',
+      homeOrder: '11111111',
+      metiOrder: '23675467',
+      unitOfMeasure: '1',
+      expectedQuantity: '1',
+      qualitativeReceivedQuantity: '1',
+      defectiveReceivedQuantity: '1',
+      grams: 'ABO2PEK AALTATESCU',
+      inStockQuantity: 2,
+      difference: '1',
+      raceCode: '1',
+      sentToMeti: '1',
+      integrationOperator: '1'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        deliverySlip: '675381',
-        store: 'ORHIDEEA (3)',
-        warehouse: 'DEPOZIT BACAU',
-        productName: 'În procesare',
-        homeOrder: '11111111',
-        metiOrder: '23675467',
-        unitOfMeasure: '1',
-        expectedQuantity: '1',
-        qualitativeReceivedQuantity: '1',
-        defectiveReceivedQuantity: '1',
-        grams: 'ABO2PEK AALTATESCU',
-        inStockQuantity: 2,
-        difference: '1',
-        raceCode: '1',
-        sentToMeti: '1',
-        integrationOperator: '1',
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

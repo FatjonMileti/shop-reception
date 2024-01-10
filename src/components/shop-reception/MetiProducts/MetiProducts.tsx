@@ -1,8 +1,7 @@
 import { Grid, Paper } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -13,28 +12,23 @@ import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 
 const MetiProducts = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<MetiProduct[]>([])
+  const [tableItems, setTableItems] = useState<MetiProduct[]>([
+    {
+      id: 1,
+      productCode: 'CRAIOVA (3054)',
+      productName: 'DEPOZIT BRAZI NON FOOD',
+      measurementUnit: 'PH01DEP',
+      validDays: 'DEPOZITBRA',
+      district: '3095940',
+      family: '256822',
+      subfamily: 'Înregistrat',
+      subfamilyValidityThreshold: 'Inexistent'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        productCode: 'CRAIOVA (3054)',
-        productName: 'DEPOZIT BRAZI NON FOOD',
-        measurementUnit: 'PH01DEP',
-        validDays: 'DEPOZITBRA',
-        district: '3095940',
-        family: '256822',
-        subfamily: 'Înregistrat',
-        subfamilyValidityThreshold: 'Inexistent'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

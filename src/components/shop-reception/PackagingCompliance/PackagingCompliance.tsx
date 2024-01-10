@@ -1,11 +1,10 @@
 import { Paper, Grid } from '@mui/material'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../CommonStyles.modules.scss'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Download as DownloadIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -14,28 +13,23 @@ import { useNotification } from '../../../hooks'
 import { TitleHeader } from '../TitleHeader'
 
 const PackagingCompliance = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<PackagingCompliance[]>([])
+  const [tableItems, setTableItems] = useState<PackagingCompliance[]>([
+    {
+      id: 1,
+      store: 'CRAIOVA (3054)',
+      warehouse: 'DEPOZIT BRAZI NON FOOD',
+      deliverySlip: 'PH01DEP',
+      supportType: 'DEPOZITBRA',
+      supportCode: '3095940',
+      supportCompliance: '256822',
+      receptionDate: '25-10-2023',
+      downloadImages: 'Inexistent'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        store: 'CRAIOVA (3054)',
-        warehouse: 'DEPOZIT BRAZI NON FOOD',
-        deliverySlip: 'PH01DEP',
-        supportType: 'DEPOZITBRA',
-        supportCode: '3095940',
-        supportCompliance: '256822',
-        receptionDate: '25-10-2023',
-        downloadImages: 'Inexistent'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

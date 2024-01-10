@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Download as DownloadIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -15,30 +15,26 @@ import { TitleHeader } from '../TitleHeader'
 
 const PackagingTypesDifferences = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<PackagingTypesDifference[]>([])
+  const [tableItems, setTableItems] = useState<PackagingTypesDifference[]>([
+    {
+      id: 1,
+      warehouse: 'DEPOZIT BRAZI NON FOOD',
+      store: 'CRAIOVA (3054)',
+      hub: '',
+      society: 'PH01DEP',
+      supportCode: 'DEPOZITBRA',
+      deliverySlip: '3095940',
+      expectedSupportType: '256822',
+      supportTypeConfirmed: 'DEPOZITBRA',
+      registrationNumber: '3095940',
+      date: '25-10-2023',
+      downloadImages: 'Inexistent'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        warehouse: 'DEPOZIT BRAZI NON FOOD',
-        store: 'CRAIOVA (3054)',
-        hub: '',
-        society: 'PH01DEP',
-        supportCode: 'DEPOZITBRA',
-        deliverySlip: '3095940',
-        expectedSupportType: '256822',
-        supportTypeConfirmed: 'DEPOZITBRA',
-        registrationNumber: '3095940',
-        date: '25-10-2023',
-        downloadImages: 'Inexistent'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

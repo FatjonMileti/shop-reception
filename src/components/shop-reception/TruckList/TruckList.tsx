@@ -3,7 +3,7 @@ import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../CommonStyles.modules.scss'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -14,37 +14,33 @@ import { URLS } from '../constants'
 import { useNavigate } from 'react-router-dom'
 
 const TruckList = () => {
-  const [tableItems, setTableItems] = useState<TruckItem[]>([])
+  const [tableItems, setTableItems] = useState<TruckItem[]>([
+    {
+      id: 2341,
+      store: 'CRAIOVA (3054)',
+      hub: '',
+      warehouseName: 'DEPOZIT BRAZI NON FOOD',
+      truckLocation: '',
+      registrationNumber: 'PH01DEP',
+      driverCode: 'DEPOZITBRA',
+      raceCode: '3095940',
+      seals: '',
+      deliveryReceipts: '256822',
+      complianceDocuments: '',
+      thermodiagramConformity: '',
+      receptionWithinHours: '',
+      sealCompliance: '',
+      status: 'Înregistrat',
+      registrationDate: '25-10-2023',
+      registrationOperator: '',
+      eTransportStatus: 'Inexistent'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 2341,
-        store: 'CRAIOVA (3054)',
-        hub: '',
-        warehouseName: 'DEPOZIT BRAZI NON FOOD',
-        truckLocation: '',
-        registrationNumber: 'PH01DEP',
-        driverCode: 'DEPOZITBRA',
-        raceCode: '3095940',
-        seals: '',
-        deliveryReceipts: '256822',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: 'Înregistrat',
-        registrationDate: '25-10-2023',
-        registrationOperator: '',
-        eTransportStatus: 'Inexistent'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -266,7 +262,7 @@ const TruckList = () => {
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
               onClick: (e, rowId) => {
-                navigate(URLS.AUTH_TRUCK_DETAIL.replace(":id", rowId))
+                navigate(URLS.AUTH_TRUCK_DETAIL.replace(':id', rowId))
               }
             }
           ]}

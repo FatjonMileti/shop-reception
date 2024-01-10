@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Download as DownloadIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -15,37 +15,33 @@ import { TitleHeader } from '../TitleHeader'
 
 const ReturnTruckList = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<ReturnTruck[]>([])
+  const [tableItems, setTableItems] = useState<ReturnTruck[]>([
+    {
+      id: 1,
+      store: 'CRAIOVA (3054)',
+      viaHub: 'DEPOZIT BRAZI NON FOOD',
+      warehouseSupplier: 'DEPOZIT BRAZI NON FOOD',
+      society: '',
+      route: 'PH01DEP',
+      registrationNumber: 'DEPOZITBRA',
+      driveNumber: '3095940',
+      returnPackaging: '',
+      seals: '',
+      shopNotices: '',
+      hubNotices: '',
+      complianceDocuments: '',
+      thermodiagramConformity: '',
+      receptionWithinHours: '',
+      sealCompliance: '',
+      status: '',
+      registrationDate: '25-10-2023',
+      shippingDate: '25-10-2023'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        store: 'CRAIOVA (3054)',
-        viaHub: 'DEPOZIT BRAZI NON FOOD',
-        warehouseSupplier: 'DEPOZIT BRAZI NON FOOD',
-        society: '',
-        route: 'PH01DEP',
-        registrationNumber: 'DEPOZITBRA',
-        driveNumber: '3095940',
-        returnPackaging: '',
-        seals: '',
-        shopNotices: '',
-        hubNotices: '',
-        complianceDocuments: '',
-        thermodiagramConformity: '',
-        receptionWithinHours: '',
-        sealCompliance: '',
-        status: '',
-        registrationDate: '25-10-2023',
-        shippingDate: '25-10-2023'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

@@ -2,7 +2,7 @@ import { Grid, Paper } from '@mui/material'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -15,7 +15,19 @@ import { DLCProductsForm } from './DLCProductsForm'
 import { ImportProductsForm } from './ImportProductsForm'
 
 const DLCProducts = () => {
-  const [tableItems, setTableItems] = useState<DLCProducts[]>([])
+  const [tableItems, setTableItems] = useState<DLCProducts[]>([
+    {
+      id: 1,
+      storeType: 'CRAIOVA (3054)',
+      storeCode: '',
+      storeName: 'DEPOZIT BRAZI NON FOOD',
+      district: 'PH01DEP',
+      family: 'DEPOZITBRA',
+      subfamily: '3095940',
+      UbCode: '256822',
+      productCode: 'Inexistent'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
@@ -43,22 +55,6 @@ const DLCProducts = () => {
       setSelectedRow(row)
     }
   }
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        storeType: 'CRAIOVA (3054)',
-        storeCode: '',
-        storeName: 'DEPOZIT BRAZI NON FOOD',
-        district: 'PH01DEP',
-        family: 'DEPOZITBRA',
-        subfamily: '3095940',
-        UbCode: '256822',
-        productCode: 'Inexistent'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

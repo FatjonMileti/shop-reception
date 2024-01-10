@@ -3,8 +3,7 @@ import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../CommonStyles.modules.scss'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { Add as AddIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -13,34 +12,30 @@ import { useNotification } from '../../../hooks'
 import { TitleHeader } from '../TitleHeader'
 
 const UnorderedProducts = () => {
-  const [tableItems, setTableItems] = useState<UnorderedProducts[]>([])
+  const [tableItems, setTableItems] = useState<UnorderedProducts[]>([
+    {
+      id: 1,
+      warehouse: 'DEPOZIT BACAU',
+      store: 'ORHIDEEA (3)',
+      deliverySlip: '675381',
+      productCode: '675381',
+      productName: '',
+      productEan: '',
+      qualitativeQuantity: '',
+      defectiveQuantity: '',
+      failureReason: '',
+      supportCode: '',
+      receptionDate: '',
+      receptionOperator: '',
+      resolved: 'În procesare',
+      resolvedDate: '24-11-2023 / 14:59',
+      resolvedOperator: ''
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        warehouse: 'DEPOZIT BACAU',
-        store: 'ORHIDEEA (3)',
-        deliverySlip: '675381',
-        productCode: '675381',
-        productName: '',
-        productEan: '',
-        qualitativeQuantity: '',
-        defectiveQuantity: '',
-        failureReason: '',
-        supportCode: '',
-        receptionDate: '',
-        receptionOperator: '',
-        resolved: 'În procesare',
-        resolvedDate: '24-11-2023 / 14:59',
-        resolvedOperator: ''
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

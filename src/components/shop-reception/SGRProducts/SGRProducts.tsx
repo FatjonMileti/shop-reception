@@ -2,7 +2,7 @@ import { Grid, Paper, Typography } from '@mui/material'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { TitleHeader } from '../TitleHeader'
 import s from '../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
@@ -11,7 +11,19 @@ import { ImportProductsForm } from './ImportProductsForm'
 import DeleteConfirmationModal from '../../core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 
 const SGRProducts = () => {
-  const [tableItems, setTableItems] = useState<SGRProducts[]>([])
+  const [tableItems, setTableItems] = useState<SGRProducts[]>([
+    {
+      id: 1,
+      storeType: 'CRAIOVA (3054)',
+      storeCode: '',
+      storeName: 'DEPOZIT BRAZI NON FOOD',
+      district: 'PH01DEP',
+      family: 'DEPOZITBRA',
+      subfamily: '3095940',
+      UbCode: '256822',
+      productCode: 'Inexistent'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
@@ -45,22 +57,6 @@ const SGRProducts = () => {
       setSelectedRow(row)
     }
   }
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        storeType: 'CRAIOVA (3054)',
-        storeCode: '',
-        storeName: 'DEPOZIT BRAZI NON FOOD',
-        district: 'PH01DEP',
-        family: 'DEPOZITBRA',
-        subfamily: '3095940',
-        UbCode: '256822',
-        productCode: 'Inexistent'
-      }
-    ])
-  }, [])
 
   return (
     <Grid container spacing={2}>

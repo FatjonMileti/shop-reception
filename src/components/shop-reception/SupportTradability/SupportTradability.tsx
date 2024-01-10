@@ -3,7 +3,7 @@ import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../CommonStyles.modules.scss'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -12,32 +12,28 @@ import { useNotification } from '../../../hooks'
 import { TitleHeader } from '../TitleHeader'
 
 const SupportTradability = () => {
-  const [tableItems, setTableItems] = useState<SupportTradability[]>([])
+  const [tableItems, setTableItems] = useState<SupportTradability[]>([
+    {
+      id: 1,
+      raceCode: 'ORHIDEEA (3)',
+      raceType: '675381',
+      loadingPlace: 'În procesare',
+      uploadDate: '24-11-2023 / 14:59',
+      warehouseName: 'DEPOZIT BACAU',
+      driverName: 'DEPOZIT BACAU',
+      driverPhone: '23675467',
+      hubName: 'ABO2PEK AALTATESCU',
+      storeName: 'ABO2PEK AALTATESCU',
+      society: 'ABO2PEK AALTATESCU',
+      goodsCategory: '1',
+      numberOfPallets: 10,
+      carNumber: ''
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        raceCode: 'ORHIDEEA (3)',
-        raceType: '675381',
-        loadingPlace: 'În procesare',
-        uploadDate: '24-11-2023 / 14:59',
-        warehouseName: 'DEPOZIT BACAU',
-        driverName: 'DEPOZIT BACAU',
-        driverPhone: '23675467',
-        hubName: 'ABO2PEK AALTATESCU',
-        storeName: 'ABO2PEK AALTATESCU',
-        society: 'ABO2PEK AALTATESCU',
-        goodsCategory: '1',
-        numberOfPallets: 10,
-        carNumber: ''
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

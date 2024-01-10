@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Download as DownloadIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -15,30 +15,26 @@ import { TitleHeader } from '../TitleHeader'
 
 const PackagingDisputes = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<PackagingDispute[]>([])
+  const [tableItems, setTableItems] = useState<PackagingDispute[]>([
+    {
+      id: 1,
+      warehouse: 'DEPOZIT BRAZI NON FOOD',
+      storeType: 'CRAIOVA',
+      store: 'CRAIOVA (3054)',
+      via: 'PH01DEP',
+      society: 'DEPOZITBRA',
+      shopTaskDate: '25-10-2023',
+      shopNoticeDate: '25-10-2023',
+      storeTaskSolutionDate: '25-10-2023',
+      notificationsSent: '256822',
+      shopNoticeNumber: '256822',
+      status: 'Înregistrat'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        warehouse: 'DEPOZIT BRAZI NON FOOD',
-        storeType: 'CRAIOVA',
-        store: 'CRAIOVA (3054)',
-        via: 'PH01DEP',
-        society: 'DEPOZITBRA',
-        shopTaskDate: '25-10-2023',
-        shopNoticeDate: '25-10-2023',
-        storeTaskSolutionDate: '25-10-2023',
-        notificationsSent: '256822',
-        shopNoticeNumber: '256822',
-        status: 'Înregistrat'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

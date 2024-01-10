@@ -2,7 +2,7 @@ import { Grid, Paper } from '@mui/material'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -15,7 +15,19 @@ import { SensitiveProductForm } from './SensitiveProductForm'
 import { ImportProductsForm } from './ImportProductsForm'
 
 const SensitiveProducts = () => {
-  const [tableItems, setTableItems] = useState<SensitiveProduct[]>([])
+  const [tableItems, setTableItems] = useState<SensitiveProduct[]>([
+    {
+      id: 1,
+      storeType: 'B1',
+      storeCode: 'CRAIOVA (3054)',
+      storeName: 'CRAIOVA (3054)',
+      district: 'DEPOZIT BRAZI NON FOOD',
+      family: 'PH01DEP',
+      subfamily: 'DEPOZITBRA',
+      UbCode: '3095940',
+      productCode: '256822'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isImportProductsModalOpen, setIsImportProductsModalOpen] = useState<boolean>(false)
@@ -31,34 +43,18 @@ const SensitiveProducts = () => {
   const openImportProductsModal = (): void => setIsImportProductsModalOpen(true)
   const closeImportProductsModal = (): void => setIsImportProductsModalOpen(false)
 
-  const openEditModal = (rowId: number|string): void => {
+  const openEditModal = (rowId: number | string): void => {
     selectRow(rowId)
     setIsEditModalOpen(true)
   }
   const closeEditModal = (): void => setIsEditModalOpen(false)
 
-  const selectRow = (rowId: number|string) => {
+  const selectRow = (rowId: number | string) => {
     const row = tableItems.find(item => item.id === rowId)
     if (row) {
       setSelectedRow(row)
     }
   }
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        storeType: 'B1',
-        storeCode: 'CRAIOVA (3054)',
-        storeName: 'CRAIOVA (3054)',
-        district: 'DEPOZIT BRAZI NON FOOD',
-        family: 'PH01DEP',
-        subfamily: 'DEPOZITBRA',
-        UbCode: '3095940',
-        productCode: '256822'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)

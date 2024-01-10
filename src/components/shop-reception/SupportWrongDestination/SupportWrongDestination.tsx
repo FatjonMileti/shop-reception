@@ -3,7 +3,7 @@ import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../CommonStyles.modules.scss'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
@@ -14,34 +14,30 @@ import { URLS } from '../constants'
 import { useNavigate } from 'react-router-dom'
 
 const SupportWrongDestination = () => {
-  const [tableItems, setTableItems] = useState<SupportWrongDestination[]>([])
+  const [tableItems, setTableItems] = useState<SupportWrongDestination[]>([
+    {
+      id: 1,
+      supportCode: 'ORHIDEEA (3)',
+      warehouseName: 'DEPOZIT BACAU',
+      deliverySlip: '675381',
+      orderedDelivered: 'În procesare',
+      orderedIssued: '11111111',
+      desiredDestination: '23675467',
+      realDestination: 'ABO2PEK AALTATESCU',
+      operator: '1',
+      scanDate: '1',
+      resolved: '1',
+      resolvedDate: '24-11-2023 / 14:59',
+      resolveOperator: '1',
+      comment: '',
+      unload: ''
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        supportCode: 'ORHIDEEA (3)',
-        warehouseName: 'DEPOZIT BACAU',
-        deliverySlip: '675381',
-        orderedDelivered: 'În procesare',
-        orderedIssued: '11111111',
-        desiredDestination: '23675467',
-        realDestination: 'ABO2PEK AALTATESCU',
-        operator: '1',
-        scanDate: '1',
-        resolved: '1',
-        resolvedDate: '24-11-2023 / 14:59',
-        resolveOperator: '1',
-        comment: '',
-        unload: ''
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
