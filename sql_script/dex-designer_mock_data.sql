@@ -47,6 +47,8 @@ VALUES
     (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5),
     -- Bakery p2
     (10, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2);
+    -- Shop Reception
+    (11, 'Mobile', 'Reception', '/mobile', true, 5),
 
 
 -- activity with submodule id
@@ -113,7 +115,8 @@ VALUES
     (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10),
     -- Bakery ADMIN p2
     (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10);
-
+    -- Shop Reception
+    (54, 'Mobile', 'UsersManagement', null, true, 11),
 
 -- screen with activity id (some are first screens)
 INSERT INTO
@@ -188,7 +191,7 @@ VALUES
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
     -- Shop Reception
-    (62, 'Screen 1', '', '/url', true, 46, true),
+    (62, 'Admin', '', '/shop-reception', true, 46, true),
     -- Bakery TRACEABILITY-OPERATOR
     (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
     (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
@@ -287,9 +290,12 @@ values
   (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
   (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER'),
   (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
---   TODO
   -- Supply OMNI
-  (11, 'GG_RO_HQ_IT-C4ASSIST');
+  (11, 'GG_RO_HQ_IT-C4ASSIST'),
+  -- Volumetry
+  (13, 'GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR');
+  -- Shop Reception
+  (14, 'GG_RO_HQ_IT_DEX_SHOP_RECEPTION');
 
 
 -- roles_activities
@@ -324,12 +330,15 @@ VALUES
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
     -- Volumetry
-    -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
-    (1, 42),
-    (1, 43),
-    (1, 44),
-    (1, 45);
+    -- GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR
+    (13, 42),
+    (13, 43),
+    (13, 44),
+    (13, 45),
     -- Shop Reception
+    (14, 9),
+    (14, 11);
+
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     -- (1, 46);
 
