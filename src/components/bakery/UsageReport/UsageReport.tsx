@@ -15,7 +15,7 @@ import { toTableRowItems } from './serializers'
 import dayjs from 'dayjs'
 import { FileDownloadOutlined } from '@mui/icons-material'
 import { toAsyncSelectOptions } from '../commonSerializers'
-import { getPreviousDay } from 'utils/helpers'
+import { formatPayloadDate, getPreviousDay } from 'utils/helpers'
 
 const UsageReport = () => {
   const [tableItems, setTableItems] = useState<UsageReportItem[]>([])
@@ -32,8 +32,8 @@ const UsageReport = () => {
     setIsLoading(true)
 
     const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('YYYY-MM-DD') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('YYYY-MM-DD') },
+      { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+      { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
       ...(storeFilterValue && storeFilterValue.length > 0
         ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
         : []),
@@ -100,8 +100,8 @@ const UsageReport = () => {
 
   const handleDownload = async () => {
     const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('YYYY-MM-DD') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('YYYY-MM-DD') },
+      { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+      { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
       { name: 'store', value: storeFilterValue[0]?.value },
     ].filter(
       f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)

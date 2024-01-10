@@ -15,7 +15,7 @@ import dayjs from 'dayjs'
 import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { ColumnsComponent, formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
-import { getPreviousDay } from 'utils/helpers'
+import { formatPayloadDate, getPreviousDay } from 'utils/helpers'
 
 const ApplicationUsageReport = () => {
   const { showNotification } = useNotification()
@@ -49,8 +49,8 @@ const ApplicationUsageReport = () => {
     setIsLoading(true)
 
     const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('YYYY-MM-DD') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('YYYY-MM-DD') },
+      { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+      { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
       ...(storeFilterValue && storeFilterValue.length > 0
         ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
         : []),
@@ -102,8 +102,8 @@ const ApplicationUsageReport = () => {
 
   const handleDownload = async () => {
     const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('YYYY-MM-DD') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('YYYY-MM-DD') },
+      { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+      { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
       { name: 'store', value: storeFilterValue[0]?.value },
     ].filter(
       f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
