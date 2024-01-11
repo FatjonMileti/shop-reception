@@ -2,7 +2,8 @@ import { Capsule } from 'components/core-ui/Capsule'
 import s from './TaskAllocation.modules.scss'
 import { Grid, Typography } from '@mui/material'
 
-const TaskSummary = item => { // TODO: To add type when db schema is defined
+const TaskSummary = item => {
+  // TODO: To add type when db schema is defined
   const {
     department,
     taskName,
@@ -34,7 +35,12 @@ const TaskSummary = item => { // TODO: To add type when db schema is defined
 
       <Grid container>
         <Grid item mt={1} mr={1}>
-          <Capsule label="Prioritate" value={priority} />
+          <Capsule
+            label="Prioritate"
+            value={priority}
+            valueColor={priority === 1 && '#D30D1F'}
+            labelColor={priority === 1 && 'rgba(211, 13, 31, 0.15)'}
+          />
         </Grid>
 
         <Grid item mt={1} mr={1}>

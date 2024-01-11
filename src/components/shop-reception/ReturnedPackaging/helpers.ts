@@ -1,13 +1,13 @@
 export const columns = [
   {
     title: 'Magazin',
-    field: 'hub',
+    field: 'store',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Depozit',
-    field: 'store',
+    field: 'warehouse',
     align: 'left',
     type: 'string'
   },
@@ -19,91 +19,91 @@ export const columns = [
   },
   {
     title: 'Societate',
-    field: 'truckLocation',
+    field: 'society',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cod ambalaj încǎrcat',
-    field: 'warehouseName',
+    field: 'packageCodeLoaded',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip ambalaj încǎrcat',
-    field: 'warehouseName',
+    field: 'packTypeLoaded',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Cantitate încărcatã',
-    field: 'registrationNumber',
+    title: 'Cantitate încărcatǎ',
+    field: 'quantityLoaded',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cantitate descarcată',
-    field: 'registrationNumber',
+    field: 'downloadedAmount',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Numǎr aviz magazin',
-    field: 'registrationNumber',
+    field: 'shopNoticeNumber',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Sigili',
-    field: 'registrationNumber',
+    field: 'seal',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ expeditie magazi',
-    field: 'registrationNumber',
+    field: 'shopShipmentDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Aviz HUB',
-    field: 'registrationNumber',
+    field: 'noticeHub',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Traseu',
-    field: 'driverCode',
+    field: 'route',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Numǎr înmatriculare',
-    field: 'driverCode',
+    field: 'registrationNumber',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Retur ambalaje',
-    field: 'driverCode',
+    field: 'returnPacking',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ verificare',
-    field: 'driverCode',
+    field: 'verificationDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Operator verificare',
-    field: 'driverCode',
+    field: 'checkOperator',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Status',
-    field: 'driverCode',
+    field: 'status',
     align: 'left',
     type: 'string'
   }

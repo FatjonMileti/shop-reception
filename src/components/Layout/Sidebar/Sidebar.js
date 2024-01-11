@@ -142,14 +142,12 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
               onItemClick={handleItemClick}
             />
           </nav>
-
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography style={{ margin: '24px 8px 24px 24px', fontSize: '20px', fontWeight: 700 }}>
               My apps
             </Typography>
             <Icon_v2 iconName="Folder" iconType="Icon" />
           </Box>
-
           <nav className={s.section}>
             <List
               subheader={{
@@ -161,7 +159,6 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
               onItemClick={handleItemClick}
             />
           </nav>
-
           <br />
           <nav className={s.section}>
             <List

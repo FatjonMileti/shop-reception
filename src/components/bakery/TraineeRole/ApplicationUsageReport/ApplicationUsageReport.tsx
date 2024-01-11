@@ -1,6 +1,6 @@
 import s from '../../commonStyles.modules.scss'
 import { useNotification } from 'hooks'
-import { Box, CircularProgress, Divider, Grid, Paper } from '@mui/material'
+import { Box, Divider, Grid } from '@mui/material'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -11,9 +11,8 @@ import { TableItem } from './interfaces'
 import { DownloadOutlined } from '@mui/icons-material'
 import { useQuery } from 'react-query'
 import { toStoreFilterItems } from 'components/bakery/commonSerializers'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import dayjs from 'dayjs'
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { ColumnsComponent, formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
 
@@ -128,7 +127,6 @@ const ApplicationUsageReport = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Paper className={s.filtersContainer}>
         <Grid container spacing={4}>
           <Grid xs={12} md={3} item>
             <DatePicker
@@ -149,21 +147,20 @@ const ApplicationUsageReport = () => {
               onChange={val => handleFilterChange('endDate', val)}
             />
           </Grid>
+
           <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="store.id"
+            <FilterDataSelect
+              name="store"
+              defaultSelectedData={storeFilterValue}
               label="Magazin"
-              value={storeFilterValue}
               options={storesFilterOptions}
-              onChange={val => handleFilterChange('store', val)}
-              multiple={true}
+              onSelect={val => handleFilterChange('store', val)}
+              multiSelect={true}
             />
           </Grid>
         </Grid>
-      </Paper>
 
-      <Grid xs={12} item>
+      <Grid xs={12} item py={2}>
         <Divider />
       </Grid>
 

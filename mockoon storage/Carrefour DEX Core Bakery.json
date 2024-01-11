@@ -6015,6 +6015,622 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "3c10f235-46a0-4172-a408-a759c7fa95f7",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "region/sale/cadentier",
+      "responses": [
+        {
+          "uuid": "e7609818-25f3-436f-aa94-55249713a730",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"productName\": \"MANUSI UNICA FOLOS R23 100BUC \",\r\n            \"productMetiCode\": 23000714,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23000714.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=a433e76dbb3f016cbef4ff943cf906c9809a03229fd1f9a10948e35c9b9da29893100467e1e3c0481c27cfa5f720f57c06c3d3e78edf90bef63ca89f104d091dfb7b61dcb41fcd92e16734b3537196d0d60a9269307a6d98a65452ba530c803cd0f7a8965cb2f93b39fd6a743e6aa424f348997b1b1f6a3dfdfe1cb081063701114d3c3a2d16770d1ff016d28cb55f7f752748c523e1d9a91604497ada1051e1edd8a4c80f90a617d8b9c7e4c26b36bdaabd89f385cd8d51680c25012caf9efd4e2804cbc81d061c9c46abdc054cabbd2d80e20297dbfce5a3919b5dae73434fb8aa7ecca01877f7b8f96b2af081d8d16ba6cd1255a71c707c80f6f9b524aedf\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"CASEROLA PLASTIC DP221B(2PRAJ)\",\r\n            \"productMetiCode\": 23002041,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23002041.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=9389159db9052d17878118c1a41daa25d65613cfcb3aa094953a8830225398295c94ff6d602ea890a646774dfcb1a9a7165162a2441514161caf4dac4a9c9a49c7abbc2a56e8350205e6a3c31412cad41277fb2ca944af854ceb8c5a7812bc2e1db428000436eac91c7fa3356789511bac89359040406d20aa5d2f2d9d5019d93b91b79f8cc930361ce7f3418506c1a9b1c473eb9713f8d5a6f78af9add84c2d82232b2bf0ac14c9290b8f7fbd4597e306e6b9904da186954dede8e6be1e58ebc853ba11113a2e4a5eec3266c62be5353e2af289b66ff6996a7b02659a2296f87b02d7dfc944cdcc4e8ff4ce4775a7fac3dd0059f82b371c0b536e2e2b49cc26\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"CUTIE TORT  25X25             \",\r\n            \"productMetiCode\": 23500890,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23500890.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=62b565e4cd26a0c85ef44d2d36976d6bd29916dc293f671c8a6833c4d0bb17c2bf5e499f6a26294ee99bf9b71cb91833340e5af9ad5c72a5c20c79fd10f2c2af3909e5f41491124bcd7b9a26dca95cf5907fe0a64ad5fb7823ade27316abc2dfe7f949cdaf206be715f3b2dd9aa6ecc5daae9bdba1b61ed748b7c7e8ec23ee500f32864feb4e528fe5fb51b83ed8cbb17f47e6c00d54e5a1b5d13b1b13ad7b67e40d8f9b1b58e057c642ea1b67eda6584f9f9b2b5d1da16160d9b3e135fc7c6ec97110cd099150f23375b83698de918dde9db4de3103f8f8aca33b5ffac47ac8c81c0ce1cbf359c192faf7b48dd9e5a26a3ddd99d62ce4b5be3bd2aa3b012e8a\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"CUTIE  MARE  PRAJITURI SM     \",\r\n            \"productMetiCode\": 23504009,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23504009.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=583d32a8e118fe2126c4e22c46c87edc34a18046b2a1acfaa01aef6f196064a4cc9d9d81ccf1a9046425a742cf3f7dda1d7d5ec71a3c6fea75c1d9dc45658e79f8e31ccf70b3d52c75556258ce476e240e212d0eee493fdb69a18e833670e64ce9f14738bf5218e1fe045d01744de8a91441a6683e83c59288679933685befb14e123dfaaa5f843c24704da2560d90ee6fc95d3bbf71777c599468d388d928765e7a7fe2c7abdcc912d1ea90850a5e74ba4c09f5144ccad85fa5ea0346b2ad73a3402d2d6352d4a23df94ea209be9f525c7859f691a090c9286c5d07c0230fe7d63ba1b9bebe9e074cfed5dde244fc7255a7c4c6f4baa7d2b3c89e42375f2560\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"AMB. SAVARINA X2(X10H100P)    \",\r\n            \"productMetiCode\": 23507298,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23507298.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=70c44ab259d5215c4549bea3c1e2c86465103f7d427ecd79812a60d2a28271b673023503635e15922cbcbd54ad39a6d5d92325eb1a88f16827d4dec0c19640d532c0821b7afd24b557c082d6f59a261ca097d86d152559bc5f65c5368a6a705c1a2dd4c55e4b04d78c665c9cf11c76d260d7b49004a5031f89a0dcf8437161228ef59ce427b87836c96e35f2160a983e2cd8b5f08331bd91836fb483e7ced86c42ac163f512c319d862729eb8bc8b3d145fd286b9b3f8b6204dbea3a4a85ccffd7f131877af7cb147188bba192153d6112120f02f2baa22fe028c0c3c345180df4c98e32c28bdac3fe47ac376007e5160c4b98db4b3c9c6b84bb0a81cb7362c7\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"PUNGA ORG UPG 12X23           \",\r\n            \"productMetiCode\": 23507457,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23507457.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=1c282bb1a4252fd85ff33390e920be256eeb1bb161fabda0a5ee7a8850175c72e1f9b343d84a86b6cd4eceead40269b9d476aaa032b88aa13332d72a6bc57a2f3f6727b95a82f6c741619ef56c44d2f4ab906a631b0c9dcdfe5af899bf75a87a062d4487c56727ed2bd657381a2f14848e96c8468acea72e088de1ef615e85bfa2395f0b75c17058d25b7f7fbc1109ad8381ac3d87062d0310436f77c5ffe29476c4470d7efc105c53040f3b215e721a5458342971d05dc74a6f3aeb07e271c072c794d8ebe0d516db3308de754f6eb27c18531d61b49d523010244f6738707aceb6b838ec1f883b94ab361b06518ee48ebde1819cae4bf191f683b3e2c30d37\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"PUNGA ORG UPG 17X35           \",\r\n            \"productMetiCode\": 23507459,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23507459.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=14c5936d73a0f655f4be174be5a14487c8926af04e0eba242e6a7025446eb53259e3ed2d87ccfd21b2558a2931966484771faf05a1cf747eacd3ee327550d2367f13aad5fe526fa598e12dea502626e50567872e721a9d034ca6c2de2db2a6f9db81270e45b6c11a2873e566066de0755efd1ca67c23675e9efd57891a7d974e11fa54cf74f6a5bc44730feadc16863669a1ee0e11422c68e73121b32d67aa4bf30e933d0d5696c229af04650b44c9fdc1439dc134320b36114f17ab49bf8625b871c5db32663116fa16c10a6717bf0069b16d2a5e6ee0d8d9044d6b5f9e288154ec52aaa31b8aa1a640d5e32daa28afec9cee50f64ec51955efcd7a0955f3eb\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"PUNGA ORG UPG 24X35           \",\r\n            \"productMetiCode\": 23507460,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23507460.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=4a0fb1261828d5bde82a543d6a966c6ac00ef12ecc1a4598957f2943bb9a144fb44e12cc6d1b6e2016c799eeada8e1958fbd091dab411ad15738002e75f9cf71dbfd1389fc8888b5ccfc92a3f0861f779c1cc642d8a93f1222047bcccf053d74947caef6703d388e5de9e0f4538538886f6d8a61172e36c400378bbf857591983cf4d19571dcc5b5c10ae233657ad712bab07a64e6b7271479cd0ee586fa96f8c04d502d392dac20f7deebafcb6bc75313a7d3e5ac677830cbc4b662698d929e0727ad13b12898b2bd243aeed338d5a612e0afb2362e8bc9a6b513c0b00435b2f76bf0578680e594451ef041d2646d543f09197943a7aa8a8d108f8e5958d2df\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"PUNGA ORG UPG 12X65           \",\r\n            \"productMetiCode\": 23507464,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23507464.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=2ba2b8f074cf3610179cfb8b5d318651b866dbb1074b8cd546e3d8b0c06c46a1ae972a9f99c39441e9e9f096561f43b051ba33f768b7b86306a18c1b8f7d230a76309d22fb4676e8dbf59063a62f38d39a5cd3437dde95371bf349d4e40fe226470650bacd13b433391e859251691bfd46e39a04347b9e42c15eecc7415baec78d5be8f427a3e7947f07110dc12ba1715bf77419d509271aea91c8a1879ee0a4c7d5410da4174f97a04d6f899df9b9daf06bdccb35825fd4b16ed255afc4ab5d42ce0d932bacf3e66743925f8ed6bad11e01b7fea34cabe7d0f661bdbb3c6f8c1a6c0b753d05f3025fdac74901645efd0036d6f9af3cc054e45b957c09c83fbe\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"HARTIE NEAGRA 47X100 BAX630BUC\",\r\n            \"productMetiCode\": 23508681,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23508681.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=064ca408a874f375af0979fda7f976eceebe2dacddedeed92e1a12e21fd5ee2f2bdaf5203dff1243093b95f9ebc18bfece90194f7ff74ff04064a44cec2a599aab5685d9d5d2a1b768ebbb6c4a0a0e6168c0461181a914765fff5c1fc7b7a3ae9b983416c5f2e269d5e16d18a866552fd38f1471ce1fc37974872f31d198b31855f712ac7e7e9b9f1f9c6dad1735b996e30e2f8994eba9612fca626256302390182f3f1f33a3c9e5a2f165572a876164eaa761bfcb42bc35511e08192d6415941a544012c305e2fa2ece1db188543591dd79a44701205b9041522628e0446584b8b658176ddd339209a55c1ccaa01069e570a5b1e1ee6de31162260fef4264ec\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"CASOLETA PET 1GOG 250 ML      \",\r\n            \"productMetiCode\": 23509450,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/23509450.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=34f4f17acf7e49213514533b1ad2eebb6297773fe3c1f4af1d66a27cc0b02dadd3552b520968107662bb8eda2c4a85b37e5b9d4a197948976a0324816869ceb5603a9351dd9c8cd8abd08e3f74a7d82daefa1b25e0ea12d293be6f7a4e39e5c31857725e807d4a00cbfacc53488af8711be3374140cb1f157093cdf40adabe2c5ebc1ca31f0b72db88f6d69f36753bfdc92107ba6e71a8f5f1df3959d7fc7099b0c045bbddf359d1c8f019fc26fa539905efe0ad317e1e90da983580f5eb8b8d82c9dee88228c52b112ce71c2ba4c9cc51cf9f0442a19a93ec0ab2664b3617e054da5d555bfc349e590137afb371254a6537f223bb0518c065ce10c383764f3a\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"HARTIE COACERE PP4060         \",\r\n            \"productMetiCode\": 28000139,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/28000139.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=53f4e4542b64fff7364b3bae98fd0ba44a7a731d50cbaa12e2c51c18dd0ba85a00c3d4d7640aba32365384c78631b51e5545fd932f0e35c1cc10a8c3a7553c160edd16b401e9201ae47b6a8e04cd0ef1399d53ef2d9bf14ada6e042fe1aadb2abf9b83172ae4f215af38fcf6590e7a7cbe1e5f7d703f3bb9af457d8eaf270739e036593345a3a5141eeb41d7fc29afaedbcdd5c8a47e07d936287a5d57169b4a166cf7db2609cfbbab8305287c7c5daf28ac7d5e68a5118d3588b50a131c80fe63a16e0d835d3719d751c486de643a2e03d2fb003522a6792f3f15a56255f094ab382f3798524ad8549ae4603b400be9ddff521ca5bc3a6c9ea2472a63a89d77\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"CUT.PLAST.4PRAJ.(R403)(DP204) \",\r\n            \"productMetiCode\": 28000586,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/28000586.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=722f7c545a88137fe471eff9ac2a8c686d629f8444d2f8f38c30f40a2dd568b9182ee996534a1a20ae73e1fde600d6003641911acf248080d0c235a2f7f56b1f42398bf42e788e99620180860ec293d8bd010506169e0dd633827e663607a6ec6d9b88642b331ffcbf156e4c7978172adea54f2d818d70749045e2171d255eade4efe5aa6a86feb3c6b494c4e00a42fc9ea49368aa64515ae366e7b1ad3ad8663b7d5a645038159aa88cd39f886373092c741d2f1c63ee3b48f38c93062d00389effe22f831bb3d8c23adf1d2d6679fbcda0c7a5bb007e860f0e4b06aa4ee5db9cf6a30d43b8eecc816f3c6233c42f80e0c99af4ca5ad39b4ba1ceebeb19377f\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"TAVITA CARTON 13.5X19.5 T6    \",\r\n            \"productMetiCode\": 28000589,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/28000589.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=918a63c7dbd007cdf55c27601e905f7ae219edd4ef5dafd1682f6401931d1f10ec18f784a6c4dba3d2c735d6d336f66bdf5ea780069f0ed4b8b4fe9e00120de1caaf481572a7534e56f79802ab11156e85432c29801a8de92bbedab5567809de14e3ef823689a1bba34b3e1970ba10c2480d88253c447d1c5937c30cfa6b85ef020a8c9b26222cf0841896de6a843edada4ea290c21aee02f014eef3bd8b4a2f9aa1c69989e36686c4a8f7ce487a84b4a2f86a9233650f468e13cb55180c0aa0101badea71ba368d0e56acc2117b51477f2274ae9df8c16e9feb607607876931cd4d02ea5a54ee3a105ec451a740226fa0a09619e389c6f92067641c2c344a3a\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"CUTIE PLASTIC 137X110X70 R183 \",\r\n            \"productMetiCode\": 28000601,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/28000601.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=23b1d402775cbeb874e0cef7c32a41dc969a72a50d29c29c10b9074c5afb081e9634c6e3a272ec22f59e2b1eb3e5581e4ba9d99edb960a87c7c8abea18a902a346bbc7baa81eb39566d6107ea6087ff58ed6caf2437060476d49ec71e24f06d5cffd3d5652fed06845d74541173c1e0dcfbe740f1c3b7c4d5a486c5ec63fd25f14c032ef41ca1783d8371085fc56eb41418f15a9059ea7de518730badb098b77a5c0c2d589938f55774f5aef0f84a9e4b1610dc3bd656ec85a05c9661cffec1545cd59d435f5e680b18133cfad420b557d4aff844675a4d0e32925250df35040b83ab5394c6d9d3e23389b2ddc98c4420bbd462e6a4012a00bd94781c4f337df\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"TAVITE CARTON 23 X 24.5 T11   \",\r\n            \"productMetiCode\": 28000609,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/234/28000609.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=94732d0562950505eb89dd88407044809be5691f946a49c0100d280dcf7b5ddc627e0093a3df826f3c8cb510424298f4da85d4d3d2e89a8479ab4e7026da568770ca5a11732b7dd1e301833bee2ae7560ab534d0ba0ec872f5924e9b83cbf67e0df807af090f6c1e467a73fe3de64437f95a79fac9925e0a9eeca68ac919090c008dc9760f4f91a9a01985722f889c1c6c72fbda60b0b2714a6f0a9a77f003a30c80e778d0d3e350aa1a625008443622a8367f2316916e7b4de2400db242e8c6680a357a0477730edc1f1b6eed0469e0d537b35f16457ef15ed5f503dc5869b5303637139a02deff51a8328e5a810392909472d3cc601d9b777cd5df961e3890\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"AMBALAJE\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"PAINE ECOLOGICA 500G CRF      \",\r\n            \"productMetiCode\": 23508785,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/237/23508785.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=9449399c8b3f42e353efcc353b53af141250c1673640bb97e34df691536775de918363bac733f4e9b4ddc0abd8cf5c909ac50520107e3aceb0ab6d75020423ef603ba9b2669b8cd8b2e4512524b4abfa435dab0cab49d9149bb75ff296a01c35952eabcb8e69b1ad495ac0fc4f213ba950cf9c10c616c41d4719db64faf3a5b488518be25871e47dd99888d35d1c1f5f916639815ff52965bd9ecac1f8baed8873afe4f711f622dfd664b7e35e25e5ecd9d11ac00d5fed3dee47795c0b125efc02df63b65509b899db3301d9cc5f4c42a2b7423cd50195d292557b763d70e3da4f4852cfc0b6bedf1c3bfcb0510ae10616f1ffa20268f0ca2a72b0701d1d742f\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"BIO\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"AMANDINA X2 200G TRANDAFIRUL  \",\r\n            \"productMetiCode\": 23506508,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23506508.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=3449ff38594f5f52244e095d05c4660d6962aa302a7aadda7cdd64f8f6396e3137c98bd00ff37a8d8def4f2abc71ef037d01fc6ebe925ad2247f86a00c8c2cc2c0e7e1d4810b501e75e7eb5dc4591ffb600a840e29e8cc984fc1b9638a3545a4e46c6658722a5950bd7a3dcc8200b45f644d67c58fe0801ee743bb95efa5bb9001eb2721d18ee14493fd87ae0b5f67dc1b8b6810829d2f66e82ad80b885a37ef700a0291df675440214d67c6a67daaa771a2e9ec7f6811f8f8fc7c22234957c116b3434031801e3f66596d0571b4729d8c3162e46a5a50c4d9c7c6ce006aa47404cf635925d44f09e9dd0c1b83398a7b2402e7779e1f7c2b2acc35fcb36549c2\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"COFETARIE PROASPATA\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"SAVARINA X2 400G TRANDAFIRUL  \",\r\n            \"productMetiCode\": 23506511,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23506511.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=900d3daa79927bc834ca32d5b27251ef21ec6b6c9a5ba7ccad2002ba2fb3b5584def3ccfb2cdab8c035d726ae0d39090ab583251e78f9efa8fd27a14924653441f7b9d867809fe919cf485f0b77b1736b73403fa6005820a8215888fc5bbde45c909d2a14455038586179e9ccb244c5d1f0bfa428a16d0c40656abe2c128a822be555bbad41b92f790b6058c76482f969b269a723c3607f378d7557b2bb627f394685a4ab7acb5d98e7458d9c11c7100b9fadafea75402925afb30e607aefa8ccc39154ed90fda0e60e942ec3827a0714ce52c10f2c539a6acc5b3351ee28d3899c0f9c858148deda234c1983469dca7d078b6bd048f03b78f2b6c6661ad54e2\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"COFETARIE PROASPATA\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"DOBOS X2 200G TRANDAFIRUL     \",\r\n            \"productMetiCode\": 23506514,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23506514.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=68b2429ddc8e1ffcfa8c34c258b7fbd7d10910ca2430d0924bf332dbf985c10447af93fb810ec1cefa401f9196c3213c0d912652434f33c2d1bef212c0664d4c2fcacbc5856925787c33924806cd2a2d9549597f5def861e6385341d773b2bc85779d230b36ec917cd49e12a824d69ed93e0496aeb96c4833782446a7d55e6d66a34f9fb752801a4f66e14060e355291c475a0a71503d176bba4039e9d88777be732157f4bcda94bfef0138d8753cc8f1fee2a9d03132a8ae55476083892979efbafcee529330f3f49734d8691e096edc64e66c58fd425355ea3387b1dfb0fc60d0d2cb13a2694c5f2a17bdc559de901364e3936c7962f7f872f2c40b6d60ed7\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"COFETARIE PROASPATA\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"PRAJITURA DE CASA ASOR 500G TR\",\r\n            \"productMetiCode\": 23506521,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23506521.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=32eee347e868ba1a1ae3db7fe095b161e5230ef65ef074fb6bfb4aaac3e89a84c86baf703a71dbb8a810a65611d05f130c4ba56dd32dbad77fcbf6caf368bdeff1ebe14b3491bcc6df2687535fec075b17b96f993269d5bb08efa6d139e78e3dc28916e60247fc9f61236f6236f9cbe368258e1d87430ca7a65d3f081662ced61ed63dbf3391ab8d1b10c008faeb3f254b46c44d68b6adce3420b2ba4fc1c445f33c5f3892610945ee3fd706a986bc76444dbac50da338138651211a60cd786f8b20ff4f8f0233fe2a3ae87aecf08d39307d6d63ee4cee5eec8f29442beace98b6cd1262594b14449b52fdc3a6c3711e83554f4a1f330dfc6ef3c9c30ac2b48e\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"COFETARIE PROASPATA\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"GRILIAS 500G TRANDAFIRUL      \",\r\n            \"productMetiCode\": 23506522,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23506522.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=2b1d75d0b444c96e3a576bdd9abc19b2a4de3f7a5cc7defdcb2f17d7ccdd3e81ddf17a4269236bb193b267af9861a1af6f2691dbbbac64016751a68bb12cbaea4dd4cc2c21e532a7cc6b7aac83d390ad060e684bf1ed6aea4894d0a674b005ad63091873980d540258acdbfcc74e1f8cac8f1dc36396f3660c9892940c89874f6ddc93d43a2293d6a51f056df8331790775a722e4c54f54f28e476b75a3b51c30be0dbef46d2300e8b1d20bef9190e462255091b38f4c101f7fa0a3babce4fa5aaaf5cb5633915288b7a0f5e317424d3dfeb429b77e6b2d89b2be793df29f0e07571c276de9e04184248e294c0cb01950b00e9b284bc1ba2d306217597b78935\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"COFETARIE PROASPATA\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"BALLS CIOCOLATA 500G TRANDAF  \",\r\n            \"productMetiCode\": 23506524,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23506524.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=695d2220e05a80e1187e7d9032c17b42d00c9db5274a9dd31501e03dc306152782fd834d6def40ceaf6f10458bc35dc343de7e62eb24e4c36a382130ffe1b93c809a0e7ef679640fe0410f9ca0b00f75ebe490475d7c9dd89bfe69bdf9068f8b570197fd228a8375d68d2ea746b277619ea0eeb6fc6bbcf03baca749ca4e10420a9e6858648840f511d418c21c5245aba7b96ad7a5f8dbef7027a01e594bf338ab0b14a217ee685912feea9f3fdaa6f86d65c86a94114895fc3a171474b672ddeaeb4d288cfb48123912925a8ff4c7e24bbba6e3d4d0258637e9767cc4718dab817fe75f73670e50f968054c6693401d7fc68964415cc9c068be4fe47056b47a\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"COFETARIE PROASPATA\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"ROL BISCUITI 500G TRANDAFIRUL \",\r\n            \"productMetiCode\": 23506531,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23506531.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=58dc26700dfccebad8077ccdd7dfe12ff73f5f7e25fa4f177333668addc994063e965f41b01b936ac52b35767e455eb889c040682aa03565cb9c43a7ecc9982326568bc3d21a626c6ab927b21f09b2b534a62285211964a8c8f529ed1a4da735714b7464c891f00ee4b9201f770395bd91b3c3b3cb54c2725a4b65ba44bddcde4afbadd5aa10354b952e68ac27b4996e87c7ec000bed26140528ed5e819cfa0e85aa27db79ac9533f8b126579626ec2d1404e4140e6167aa86b644e77b9b2a604515bf22995f98821dc160af5258afd71b4b59e337c15fa5930658af7951ef2addf29e8afb837d1b6088bab2a126e9cdc37419f71ede6ee7d1b0d4d8862cf6a6\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"COFETARIE PROASPATA\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"productName\": \"BACLAVA NUCA 200G XND         \",\r\n            \"productMetiCode\": 23507505,\r\n            \"productImageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/232/23507505.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240105%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240105T101042Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=3df5ceec1f1a1c84934a0f2852510aac65f84e9f82a58947cf6df36f1b044bc95153bff83781a4eab45df817f3e6820f6a06c9a5a95e3dbdbc70a4fea934a4c9b7ea6cbebb6545fb10b85e273d252fc63bdd8d5035a10edf2f5c3a654ac6d021b41e1a5ef6532521252861b5e3f4661a6cded64fb44114a70519171dee9ee2e2d8c72f88083dbed41425d0cfabbdbf3591149d172392459a301731c5ec1790fc311bbaa401aa1a049d6768c9a89a1d4cb5fc9d03893ad0222e9a821e70bf484a43f668a2b879ef1c7956864a86a264050ae511bcef4c5cc1be6ac6e6de95f66894710128e7c321420ebf34b50a492e654b745e95edad5252025504935a1733ef\",\r\n            \"inPromotion\": false,\r\n            \"clusterMandatory\": true,\r\n            \"newProduct\": false,\r\n            \"username\": null,\r\n            \"average\": 0,\r\n            \"calculation\": 0,\r\n            \"quantityToProduce\": 0,\r\n            \"realSales\": 0,\r\n            \"clearanceSales\": 0,\r\n            \"familyName\": \"COFETARIE PROASPATA\",\r\n            \"list\": [\r\n                {\r\n                    \"start\": \"06:00:00\",\r\n                    \"end\": \"10:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval1\"\r\n                },\r\n                {\r\n                    \"start\": \"10:00:00\",\r\n                    \"end\": \"14:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval2\"\r\n                },\r\n                {\r\n                    \"start\": \"14:00:00\",\r\n                    \"end\": \"18:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval3\"\r\n                },\r\n                {\r\n                    \"start\": \"18:00:00\",\r\n                    \"end\": \"22:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval4\"\r\n                },\r\n                {\r\n                    \"start\": \"22:00:00\",\r\n                    \"end\": \"06:00:00\",\r\n                    \"average\": 0,\r\n                    \"calculation\": 0,\r\n                    \"quantityToProduce\": 0,\r\n                    \"realSales\": 0,\r\n                    \"clearanceSales\": 0,\r\n                    \"name\": \"interval5\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 79,\r\n        \"pageCount\": 4\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "aa8e4d2c-2267-4d86-bd1a-6d8296409898",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "229670b6-cf45-4188-aa88-11b1cfe0f199",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "444adf48-d87a-48b7-9dfa-c2320a901feb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0e1187d6-37ce-4c3e-9ac9-5c5ae256d4b6",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "7ed1650d-912a-4696-bd5d-3be93da5c47f",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "9cbe4141-f47f-474a-8077-14e6582ca1ca",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "product/management/ingredients",
+      "responses": [
+        {
+          "uuid": "ef72fbcb-4d3f-4f0f-9c19-982311340b60",
+          "body": "{\n  \"list\": [\n  {\n    \"id\": \"6d8fec9b-b02f-4795-8965-c71d082f11a1\",\n    \"name\": \"xyz\",\n    \"metiCode\": 0,\n    \"eanCodes\": [\n      0\n    ],\n    \"appelCodes\": [\n      0\n    ],\n    \"pluCode\": \"123\",\n    \"familyName\": \"asd\",\n    \"familyModuleName\": \"bsd\",\n    \"subfamily\": \"qwe\",\n    \"unitBusiness\": \"x\",\n    \"newProduct\": false,\n    \"fabricationMethod\": \"xxx\",\n    \"minStock\": 0,\n    \"scheduleProduct\": false,\n    \"imageUrl\": \"\",\n    \"clusterName\": \"tre\",\n    \"clusterMandatory\": false,\n    \"enable\": false,\n    \"status\": \"true\",\n    \"batch\": false\n  }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cf95fe13-2e08-46fb-af70-971f747bbaa0",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "6d75bdf4-f8d0-46d1-b55f-a8ec0bfd0fd9",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1ec68563-396c-4928-a3b3-1bb06a1d1e22",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "9348b4db-d65f-4d53-810d-4fecde22c6c7",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e473ad99-87a2-4509-b903-517dc11dd9b5",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "dd90718a-1ec5-4d11-ba2f-9cb98a19dbc9",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "get",
+      "endpoint": "product/ingredients/:id",
+      "responses": [
+        {
+          "uuid": "ccef5bd3-5258-473d-822f-b7dd086dec47",
+          "body": "{\n    \"id\": \"6d8fec9b-b02f-4795-8965-c71d082f11a1\",\n    \"name\": \"xyz\",\n    \"metiCode\": 0,\n    \"eanCodes\": [\n      0\n    ],\n    \"appelCodes\": [\n      0\n    ],\n    \"pluCode\": \"123\",\n    \"familyName\": \"asd\",\n    \"familyModuleName\": \"bsd\",\n    \"subfamily\": \"qwe\",\n    \"unitBusiness\": \"x\",\n    \"newProduct\": false,\n    \"fabricationMethod\": \"xxx\",\n    \"minStock\": 0,\n    \"scheduleProduct\": false,\n    \"imageUrl\": \"\",\n    \"clusterName\": \"tre\",\n    \"clusterMandatory\": false,\n    \"enable\": false,\n    \"status\": \"true\",\n    \"batch\": false\n  }",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3ce1e2f1-a7e0-4202-a559-f6dc940260dc",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3f90f21d-f98e-4e90-84de-53b074fbfd18",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "dc03e1a9-477f-4785-938b-4473140c40ac",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "90422f2f-a479-4739-8f4d-66bcdf39f03a",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "b083e34f-e71e-4331-85d3-2ada9e9a0a54",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "7d371a03-ea20-45f7-8334-b80f996433eb",
+      "type": "http",
+      "documentation": "Get store list",
+      "method": "put",
+      "endpoint": "product/ingredients/:id",
+      "responses": [
+        {
+          "uuid": "6b23acb3-7fc8-4015-9040-1bd350dac0f7",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "bd7171e2-c223-49c5-a4e5-b74f6b0990e1",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "71768744-eddc-4656-be9f-369c711a2437",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "b0a93557-87b9-4174-8477-7ba9b16a4caf",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3e91753d-714f-41c6-818d-16887979921d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "430b30ba-e8b3-4b7e-bec2-07fa96f68f88",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6245,6 +6861,22 @@
     {
       "type": "route",
       "uuid": "bfba9e04-7641-4188-97ac-e09a617ffe0c"
+    },
+    {
+      "type": "route",
+      "uuid": "3c10f235-46a0-4172-a408-a759c7fa95f7"
+    },
+    {
+      "type": "route",
+      "uuid": "9cbe4141-f47f-474a-8077-14e6582ca1ca"
+    },
+    {
+      "type": "route",
+      "uuid": "dd90718a-1ec5-4d11-ba2f-9cb98a19dbc9"
+    },
+    {
+      "type": "route",
+      "uuid": "7d371a03-ea20-45f7-8334-b80f996433eb"
     }
   ],
   "proxyMode": false,

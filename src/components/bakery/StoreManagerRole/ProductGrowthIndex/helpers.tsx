@@ -72,35 +72,35 @@ export const getInitialValues = editItem => ({
   lastChange: editItem?.lastChange ?? '',
   map: editItem?.map ?? {
     interval1: {
-      timeSlotId: editItem?.map?.interval1?.timeSlowId ?? '',
+      timeSlotId: editItem?.map?.interval1?.timeSlotId ?? '',
       start: editItem?.map?.interval1?.start ?? '',
       end: editItem?.map?.interval1?.end ?? '',
       name: editItem?.map?.interval1?.name ?? '',
       growth: editItem?.map?.interval1?.growth ?? 0
     },
     interval2: {
-      timeSlotId: editItem?.map?.interval2?.timeSlowId ?? '',
+      timeSlotId: editItem?.map?.interval2?.timeSlotId ?? '',
       start: editItem?.map?.interval2?.start ?? '',
       end: editItem?.map?.interval2?.end ?? '',
       name: editItem?.map?.interval2?.name ?? '',
       growth: editItem?.map?.interval2?.growth ?? 0
     },
     interval3: {
-      timeSlotId: editItem?.map?.interval3?.timeSlowId ?? '',
+      timeSlotId: editItem?.map?.interval3?.timeSlotId ?? '',
       start: editItem?.map?.interval3?.start ?? '',
       end: editItem?.map?.interval3?.end ?? '',
       name: editItem?.map?.interval3?.name ?? '',
       growth: editItem?.map?.interval3?.growth ?? 0
     },
     interval4: {
-      timeSlotId: editItem?.map?.interval4?.timeSlowId ?? '',
+      timeSlotId: editItem?.map?.interval4?.timeSlotId ?? '',
       start: editItem?.map?.interval4?.start ?? '',
       end: editItem?.map?.interval4?.end ?? '',
       name: editItem?.map?.interval4?.name ?? '',
       growth: editItem?.map?.interval4?.growth ?? 0
     },
     interval5: {
-      timeSlotId: editItem?.map?.interval5?.timeSlowId ?? '',
+      timeSlotId: editItem?.map?.interval5?.timeSlotId ?? '',
       start: editItem?.map?.interval5?.start ?? '',
       end: editItem?.map?.interval5?.end ?? '',
       name: editItem?.map?.interval5?.name ?? '',

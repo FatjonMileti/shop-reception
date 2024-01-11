@@ -5,16 +5,16 @@ import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { Divider, Grid } from '@mui/material'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import Table from 'components/core-ui/Table/Table'
-import { columns, scheduleProductValues } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { TableItem } from './interfaces'
 import { ValueLabelInterface } from 'components/governance/interfaces'
 import { toTableRowItems } from './serializers'
 import { toStoreFilterItems } from 'components/bakery/commonSerializers'
 import { FamilyItem, SubfamilyItem } from '../ProductionManagement/interfaces'
-import { StaticAutocomplete } from 'components/core-ui/StaticAutocomplete'
+import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const ProductManagement = () => {
   const { showNotification } = useNotification()
@@ -23,10 +23,8 @@ const ProductManagement = () => {
   const [tableItems, setTableItems] = useState<TableItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
-  const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-  const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-  const [scheduleProductFilterValue, setScheduleProductFilterValue] = useState<ValueLabelInterface>(null)
-  
+  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
+
   const { data: filterOptions } = useQuery(
     ['store'],
     async () => {
@@ -75,15 +73,17 @@ const ProductManagement = () => {
     }
   )
 
-  const { data: subfamiliesOptions } = useQuery(
-    ['subfamilies', storeFilterValue?.value, familiesFilterValue.map(({ value }) => value)],
+  const subfamiliesQuery = useQuery(
+    ['subfamilies', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'family')?.value],
     async () => {
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+        ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(
         '/bakery/store/families/subfamilies',
         {
           params: {
             store: storeFilterValue?.value,
-            family: familiesFilterValue.map(({ value }) => value)
+            family: familyLiveFilterValue.map(({ value }) => value)
           },
           paramsSerializer: { indexes: null }
         }
@@ -115,40 +115,14 @@ const ProductManagement = () => {
     setShouldRefreshData(true)
   }
 
-  const handleFamiliesChange = (value: ValueLabelInterface[]): void => {
-    setFamiliesFilterValue(value)
-    if (familiesFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
-  const handleSubfamiliesChange = (value: ValueLabelInterface[]): void => {
-    setSubfamiliesFilterValue(value)
-    if (subfamiliesFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
-  const handleScheduleProductChange = (value: ValueLabelInterface): void => {
-    setScheduleProductFilterValue(value)
-    if (scheduleProductFilterValue === null) return
-    setShouldRefreshData(true)
-  }
-
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     
     try {
-      const filters = [
-        { name: 'store', value: storeFilterValue?.value },
-        { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-        { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) },
-        { name: 'scheduleProduct', value: scheduleProductFilterValue?.value }
-      ].filter(
-        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-      )
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/store/products',
-          filters: filters,
+          filters: [{ name: 'store', value: storeFilterValue?.value }],
           tableFilters,
           page,
           rowsPerPage,
@@ -174,50 +148,17 @@ const ProductManagement = () => {
       <Grid container>
         <Grid xs={12} md={12} container spacing={5}>
           <Grid xs={12} md={3} item>     
-            <AsyncAutocomplete
-              variant="outlined"
+            <FilterDataSelect
               name="store"
+              defaultSelectedData={storeFilterValue}
               label="Magazin"
-              value={storeFilterValue}
               options={filterOptions}
-              onChange={handleStoreFilterChange}
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="family"
-              label="Familie"
-              value={familiesFilterValue}
-              options={familiesQuery.data || []}
-              onChange={handleFamiliesChange}
-              multiple
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="subfamilies"
-              label="Subfamilie"
-              value={subfamiliesFilterValue}
-              options={subfamiliesOptions || []}
-              onChange={handleSubfamiliesChange}
-              multiple
-            />
-          </Grid>
-          <Grid xs={12} md={3} item>
-            <StaticAutocomplete
-              variant="outlined"
-              name="scheduleProduct"
-              label="Produs cadentier"
-              value={scheduleProductFilterValue}
-              options={scheduleProductValues}
-              onChange={handleScheduleProductChange}
+              onSelect={handleStoreFilterChange}
             />
           </Grid>
         </Grid>
 
-        <Grid xs={12} item paddingTop={2}>
+        <Grid xs={12} item py={2}>
           <Divider />
         </Grid>
 
@@ -237,6 +178,8 @@ const ProductManagement = () => {
             hasSearchInput
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
+            filters={drawerFilters(familiesQuery, subfamiliesQuery)}
+            handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           />
         )}
       </Grid>

@@ -51,10 +51,6 @@ const getList = (navigate) => {
 const ReceptionDashboard = () => {
   const navigate = useNavigate()
 
-  const getTitle = () => {
-    return 'Nu'
-  }
-
   return (
     <Paper className={s.paper}>
       <Typography component='h2' variant='regular'

@@ -5,7 +5,6 @@ import { AutocompleteOption } from '../interfaces'
 
 export const buildTableFilterFields = (
   departmentOptions: AutocompleteOption[],
-  frequencyOptions: AutocompleteOption[],
   categoryOptions: AutocompleteOption[]
 ) => [
   {
@@ -33,20 +32,6 @@ export const buildTableFilterFields = (
     type: 'autocomplete',
     value: '',
     filter: <Autocomplete label="Stare" variant="outlined" options={STATE_OPTIONS} />
-  },
-  {
-    name: 'frequency',
-    label: 'Frecventa',
-    type: 'autocomplete',
-    value: '',
-    filter: (
-      <Autocomplete
-        label="Frecventa"
-        variant="outlined"
-        multiple={true}
-        options={frequencyOptions}
-      />
-    )
   },
   {
     name: 'volumetryLocationCategory',

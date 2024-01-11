@@ -7,7 +7,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { EmployeeManagementItem } from 'components/volumetry/interfaces'
 import { columns } from './helpers'
-import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, Input } from '@fullscreendigital/carrefour-dex-fe'
 import {
   getDepartmentsOptions,
   getEmployeeNamesOptions,
@@ -54,15 +54,10 @@ const EmployeesTab = () => {
     {
       name: 'fullName',
       label: 'Nume',
-      type: 'autocomplete',
+      type: 'text',
       value: '',
       filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Nume"
-          disableClearable
-          options={employeeNamesOptions}
-        />
+        <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
       )
     },
     {
@@ -76,20 +71,22 @@ const EmployeesTab = () => {
           label="Departament"
           disableClearable
           options={departmentsOptions}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
         />
       )
     },
     {
       name: 'position',
-      label: 'Position',
+      label: 'Functie',
       type: 'autocomplete',
       value: '',
       filter: (
         <Autocomplete
           variant="outlined"
-          label="Position"
+          label="Functie"
           disableClearable
           options={jobTitlesOptions}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
         />
       )
     }

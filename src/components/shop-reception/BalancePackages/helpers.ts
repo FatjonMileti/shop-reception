@@ -1,7 +1,7 @@
 export const columns = [
   {
     title: 'Magazin',
-    field: 'warehouseName',
+    field: 'store',
     align: 'left',
     type: 'string'
   },
@@ -13,68 +13,68 @@ export const columns = [
   },
   {
     title: 'Societate',
-    field: 'truckLocation',
+    field: 'society',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip suport',
-    field: 'registrationNumber',
+    field: 'supportType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Calitativ Inventar',
-    field: 'registrationNumber',
+    field: 'qualitativeInventory',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Stoc teoretic',
-    field: 'registrationNumber',
+    field: 'theoreticalStock',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Defect Inventar',
-    field: 'registrationNumber',
+    field: 'inventoryDefect',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Diferenta',
-    field: 'driverCode',
+    field: 'difference',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Stoc final dupa inventar',
-    field: 'seals',
+    field: 'finalStockAfterInventory',
     align: 'left',
     collapsible: true,
     type: 'string'
   },
   {
     title: 'Responsabil inventar',
-    field: 'raceCode',
+    field: 'inventoryManager',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ inventar',
-    field: 'raceCode',
+    field: 'inventoryDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Actualizare inventar',
-    field: 'deliveryReceipts',
+    field: 'inventoryUpdate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Istoric inventar',
-    field: 'raceCode',
+    field: 'inventoryHistory',
     align: 'left',
     type: 'string'
   }

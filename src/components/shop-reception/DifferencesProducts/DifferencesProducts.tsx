@@ -1,47 +1,43 @@
-import { Paper, Box, Grid } from '@mui/material'
-import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './DifferencesProducts.modules.scss'
+import { Paper, Grid } from '@mui/material'
+import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import s from '../CommonStyles.modules.scss'
 import { URLS } from '../constants'
-import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
-import { Add as AddIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import { FormInfoItems } from '../../core-ui/FormInfoItems'
-import { EffortMatrix } from '../../governance/interfaces'
-import { AsyncAutocomplete } from '../../core-ui/AsyncAutocomplete'
-import TitleHeader from '../TitleHeader/TitleHeader'
+import { TitleHeader } from '../TitleHeader'
 
 const DifferencesProducts = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<DeliverySlip[]>([])
+  const [tableItems, setTableItems] = useState<DifferencesProduct[]>([
+    {
+      id: 1,
+      deliverySlip: '675381',
+      store: 'ORHIDEEA (3)',
+      warehouse: 'DEPOZIT BACAU',
+      productName: 'În procesare',
+      homeOrder: '11111111',
+      metiOrder: '23675467',
+      unitOfMeasure: '1',
+      expectedQuantity: '1',
+      qualitativeReceivedQuantity: '1',
+      defectiveReceivedQuantity: '1',
+      grams: 'ABO2PEK AALTATESCU',
+      inStockQuantity: 2,
+      difference: '1',
+      raceCode: '1',
+      sentToMeti: '1',
+      integrationOperator: '1'
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        store: 'ORHIDEEA (3)',
-        warehouseName: 'DEPOZIT BACAU',
-        deliverySlip: '675381',
-        status: 'În procesare',
-        raceCode: '11111111',
-        seal: '23675467',
-        registrationNumber: 'ABO2PEK AALTATESCU',
-        expectedSupports: '1',
-        destinationReachedSupports: '1',
-        registrationDate: '24-11-2023 / 14:59'
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -70,14 +66,10 @@ const DifferencesProducts = () => {
     }
   }
 
-  const getTitle = () => {
-    return 'Nu'
-  }
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Paper className={s.paper}>
+        <Paper className={s.filterPaper}>
           <TitleHeader title='Produse cu diferenţe' />
           <Grid container spacing={4}>
             <Grid xs={12} md={4} item>
@@ -177,7 +169,7 @@ const DifferencesProducts = () => {
                 type='text'
                 onChange={event => null
                 }
-                label='Selecteazã datâ'
+                label='Selecteazǎ datâ'
                 variant='outlined'
                 style={{ width: '100%' }}
               />
@@ -209,7 +201,7 @@ const DifferencesProducts = () => {
           order='asc'
           columns={columns}
           items={tableItems}
-          fetchData={() => null}
+          fetchData={null}
           isLoading={isLoading}
           totalCount={totalCount}
           newButton={null}

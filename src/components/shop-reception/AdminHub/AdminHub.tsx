@@ -3,19 +3,28 @@ import { useNavigate } from 'react-router-dom'
 import { Table } from '../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../utils/api'
 import { toTableGETUrl } from '../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../utils/formatting'
 import { useNotification } from '../../../hooks'
-import TitleHeader from '../TitleHeader/TitleHeader'
-import { AdminDepositForm } from '../AdminDeposit/AdminDepositForm'
+import { TitleHeader } from '../TitleHeader'
 import { AdminHubForm } from './AdminHubForm'
 
 const AdminHub = () => {
   const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<AdminHub[]>([])
+  const [tableItems, setTableItems] = useState<AdminHub[]>([
+    {
+      id: 1,
+      hubCode: '100001',
+      name: 'PAXD CEFIN',
+      hubType: 'PAXD',
+      address: 'ION CAMPINEANU |Nr. 1|Arad|Arad',
+      active: true,
+      hourlyIntervals: 75,
+    }
+  ])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
@@ -39,20 +48,6 @@ const AdminHub = () => {
       setSelectedRow(row)
     }
   }
-
-  useEffect(() => {
-    setTableItems([
-      {
-        id: 1,
-        hubCode: '100001',
-        name: 'PAXD CEFIN',
-        hubType: 'PAXD',
-        address: 'ION CAMPINEANU |Nr. 1|Arad|Arad',
-        active: true,
-        hourlyIntervals: 75,
-      }
-    ])
-  }, [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -81,10 +76,6 @@ const AdminHub = () => {
     }
   }
 
-  const getTitle = () => {
-    return 'Nu'
-  }
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -109,7 +100,7 @@ const AdminHub = () => {
           order='asc'
           columns={columns}
           items={tableItems}
-          fetchData={() => null}
+          fetchData={null}
           isLoading={isLoading}
           totalCount={totalCount}
           newButton={{

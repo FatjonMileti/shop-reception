@@ -139,7 +139,7 @@ const EffortMatrix = () => {
           rowActionsWidth="130px"
           toolbarActions={[
             {
-              label: 'Adauga',
+              label: 'Add',
               icon: <AddActionIcon />,
               onClick: openNewModal
             }

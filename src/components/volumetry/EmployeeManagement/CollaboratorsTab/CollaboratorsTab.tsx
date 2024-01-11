@@ -11,7 +11,7 @@ import { columns, roles } from './helpers'
 import { DeleteCollaborator } from './DeleteCollaborator'
 import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
-import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, Input } from '@fullscreendigital/carrefour-dex-fe'
 import {
   getDepartmentsOptions,
   getContractorsNamesOptions,
@@ -74,23 +74,37 @@ const CollaboratorsTab = () => {
     {
       name: 'fullName',
       label: 'Nume',
-      type: 'autocomplete',
+      type: 'text',
       value: '',
-      filter: <Autocomplete variant="outlined" label="Nume" options={contractorsNamesOptions} />
+      filter: <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
     },
     {
       name: 'department',
       label: 'Departament',
       type: 'autocomplete',
       value: '',
-      filter: <Autocomplete variant="outlined" label="Departament" options={departmentsOptions} />
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Departament"
+          options={departmentsOptions}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
+        />
+      )
     },
     {
       name: 'position',
-      label: 'Position',
+      label: 'Functie',
       type: 'autocomplete',
       value: '',
-      filter: <Autocomplete variant="outlined" label="Position" options={jobTitlesOptions} />
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Functie"
+          options={jobTitlesOptions}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
+        />
+      )
     }
   ]
 
@@ -158,7 +172,7 @@ const CollaboratorsTab = () => {
             {
               label: 'Add',
               icon: <AddActionIcon />,
-              onClick: () => (canCreate ? setModal('create') : null) // TODO: To verify permissions with the BE
+              onClick: () => setModal('create') // TODO: To verify permissions with the BE
             }
           ]}
         />

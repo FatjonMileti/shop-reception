@@ -1,49 +1,49 @@
 export const columns = [
   {
     title: 'Cod produs',
-    field: 'raceCode',
+    field: 'productCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Nume produs',
-    field: 'raceCode',
+    field: 'productName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Unitate de mǎsurǎ',
-    field: 'warehouseName',
+    field: 'measurementUnit',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Valabilitate (zile)',
-    field: 'warehouseName',
+    field: 'validDays',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Raion',
-    field: 'store',
+    field: 'district',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Familie',
-    field: 'warehouseName',
+    field: 'family',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Subfamilie',
-    field: 'warehouseName',
+    field: 'subfamily',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Prag valabilitate subfamilie',
-    field: 'store',
+    field: 'subfamilyValidityThreshold',
     align: 'left',
     type: 'string'
   }

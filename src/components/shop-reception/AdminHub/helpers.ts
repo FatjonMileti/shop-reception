@@ -18,7 +18,7 @@ export const columns = [
     type: 'string'
   },
   {
-    title: 'Adresã',
+    title: 'Adresǎ',
     field: 'address',
     align: 'left',
     type: 'string'
