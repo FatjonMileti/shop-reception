@@ -331,13 +331,13 @@ export const ProductManagementTraceability = () => {
         }))}
         handleRemoteData={fetchData}
         rowActionsWidth="200px"
-        toolbarActions={[
-          {
-            icon: <AddActionIcon />,
-            label: 'Add',
-            onClick: function noRefCheck() {}
-          },
-        ]}
+        // toolbarActions={[
+        //   {
+        //     icon: <AddActionIcon />,
+        //     label: 'Add',
+        //     onClick: function noRefCheck() {}
+        //   },
+        // ]}
       />
     </div>
   )
