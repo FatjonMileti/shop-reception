@@ -125,12 +125,14 @@ const getFilterUrlValues = (filters: Filter[]) => {
   return filters.reduce(
     (acc, filter) => {
       const value = Array.isArray(filter.value)
-        ? `[${filter.value.map(val => (typeof val === 'string' ? val : val.value)).join(',')}]`
+        ? `[${filter.value.map(val => (typeof val === 'string' ? val : val.value)).join(';')}]`
         : filter.value && typeof filter.value === 'object'
         ? filter.value.value
         : filter.value
 
-      const encodedValue = encodeURIComponent(value as string)
+      const encodedValue = encodeURIComponent(
+        value === undefined || value === null ? '' : (value as string)
+      )
 
       acc = [
         acc[0] ? `${acc[0]}${encodeURIComponent('|')}${filter.name}` : filter.name,

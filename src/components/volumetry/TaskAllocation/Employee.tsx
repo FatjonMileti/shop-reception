@@ -80,69 +80,68 @@ const Employee: React.FC<EmployeeProps> = props => {
 
   return (
     <Box>
-      <Grid container className={s.employeeInfo}>
-        <Grid item xs={12} md={2} sx={{ display: 'flex' }}>
-          <EmployeeIcon />
-          <p className={s.employeeName}>{employee.workerFullName}</p>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={2}>
+          <Box className={s.employeeInfo}>
+            <EmployeeIcon />
+            <p className={s.employeeName}>{employee.workerFullName}</p>
+          </Box>
         </Grid>
 
-        <Grid item xs={12} md={5.4} className={s.capsules}>
-          <Capsule
-            label={taskCurrentState.isTaskStarted ? 'Ora de inceput' : 'Ora recomandata de inceput'}
-            value={employee.timeInterval.split('-')[0]}
-            labelColor={customCapsuleColors.label}
-            valueColor={customCapsuleColors.value}
-          />
-          <Capsule
-            label={taskCurrentState.isTaskStarted ? 'Ora de final' : 'Ora recomandata de final'}
-            value={employee.timeInterval.split('-')[1]}
-            labelColor={customCapsuleColors.label}
-            valueColor={customCapsuleColors.value}
-          />
-          <Capsule
-            label={'Volum'}
-            value={`${employee.workload}`}
-            labelColor={customCapsuleColors.label}
-            valueColor={customCapsuleColors.value}
-          />
+        <Grid item xs={12} md={3}>
+          <Box className={s.capsules}>
+            <Capsule
+              label={'Interval orar'}
+              value={employee.timeInterval}
+              labelColor={customCapsuleColors.label}
+              valueColor={customCapsuleColors.value}
+            />
+            <Capsule
+              label={'Volum'}
+              value={`${employee.workload}`}
+              labelColor={customCapsuleColors.label}
+              valueColor={customCapsuleColors.value}
+            />
+          </Box>
         </Grid>
 
-        <Grid item xs={12} md={2} sx={{ display: 'flex' }}>
+        <Grid item xs={12} md={6}>
           {employee.comments ? (
-            <Grid container>
-              <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
-                <ChatIcon />
-              </Grid>
-
-              <Grid item xs={11} className={s.customText}>
-                {employee.comments}
-              </Grid>
-            </Grid>
+            <Box className={s.message}>
+              <ChatIcon />
+              <Box className={s.customText}>{employee.comments}</Box>
+            </Box>
           ) : !taskCurrentState.isTaskStarted && !taskCurrentState.isTaskEnded ? (
             <></>
           ) : (
-            <Grid container>
-              <Grid item xs={9} mr={1} sx={{ alignSelf: 'center' }}>
-                <LinearProgress
-                  variant="determinate"
-                  value={employee.progressProportion}
-                  color={customCapsuleColors.progress as 'error' | 'success'}
-                />
+            <Box className={s.progressBarContainer}>
+              <Grid container>
+                <Grid item xs={9} sx={{ alignSelf: 'center' }}>
+                  <Box mr={1}>
+                    <LinearProgress
+                      variant="determinate"
+                      value={employee.progress}
+                      color={customCapsuleColors.progress as 'error' | 'success'}
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={2}>
+                  <Box sx={{ alignSelf: 'center' }}>
+                    <span
+                      className={s.employeeProgress}
+                      style={{ background: customCapsuleColors.value }}
+                    >
+                      {employee.progressProportion}%
+                    </span>
+                  </Box>
+                </Grid>
               </Grid>
-              <Grid item xs={2} sx={{ alignSelf: 'center' }}>
-                <span
-                  className={s.employeeProgress}
-                  style={{ background: customCapsuleColors.value }}
-                >
-                  {employee.progressProportion}%
-                </span>
-              </Grid>
-            </Grid>
+            </Box>
           )}
         </Grid>
 
-        {(taskCurrentState.showStartButton || taskCurrentState.showStopButton) && (
-          <Grid item xs={12} md={2} className={s.actionButtonContainer}>
+        <Grid item xs={12} md={1}>
+          {(taskCurrentState.showStartButton || taskCurrentState.showStopButton) && (
             <Button
               variant="contained"
               label={taskCurrentState.showStartButton ? 'Start' : 'Stop'}
@@ -163,8 +162,8 @@ const Employee: React.FC<EmployeeProps> = props => {
                 }
               }}
             />
-          </Grid>
-        )}
+          )}
+        </Grid>
       </Grid>
       <EditAllocationModal
         isModalOpen={isOpenStopTaskModal}

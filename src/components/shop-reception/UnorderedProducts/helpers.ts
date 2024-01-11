@@ -1,55 +1,55 @@
 export const columns = [
   {
     title: 'Depozit',
-    field: 'store',
+    field: 'warehouse',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Magazin',
-    field: 'warehouseName',
+    field: 'store',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cod produs',
-    field: 'deliverySlip',
+    field: 'productCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Denumire produs',
-    field: 'deliverySlip',
+    field: 'productName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'EAN produs',
-    field: 'deliverySlip',
+    field: 'productEan',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cantitate calitativă',
-    field: 'deliverySlip',
+    field: 'qualitativeQuantity',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cantitate defectǎ',
-    field: 'deliverySlip',
+    field: 'defectiveQuantity',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Motiv defectiune',
-    field: 'deliverySlip',
+    field: 'failureReason',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cod support',
-    field: 'deliverySlip',
+    field: 'supportCode',
     align: 'left',
     type: 'string'
   },
@@ -60,32 +60,32 @@ export const columns = [
     type: 'string'
   },
   {
-    title: 'Datã recepție',
-    field: 'deliverySlip',
+    title: 'Datǎ recepție',
+    field: 'receptionDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Operator recepție',
-    field: 'deliverySlip',
+    field: 'receptionOperator',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Rezolvat',
-    field: 'deliverySlip',
+    field: 'resolved',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datâ rezolvare',
-    field: 'deliverySlip',
+    field: 'resolvedDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Operator rezolvare',
-    field: 'deliverySlip',
+    field: 'resolvedOperator',
     align: 'left',
     type: 'string'
   }

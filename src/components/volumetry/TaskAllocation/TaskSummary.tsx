@@ -33,7 +33,12 @@ const TaskSummary = item => {
 
       <Grid container>
         <Grid item mt={1} mr={1}>
-          <Capsule label="Prioritate" value={priority} />
+          <Capsule
+            label="Prioritate"
+            value={priority}
+            valueColor={priority === 1 && '#D30D1F'}
+            labelColor={priority === 1 && 'rgba(211, 13, 31, 0.15)'}
+          />
         </Grid>
 
         <Grid item mt={1} mr={1}>

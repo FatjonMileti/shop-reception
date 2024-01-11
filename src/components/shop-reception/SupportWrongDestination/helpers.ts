@@ -1,7 +1,7 @@
 export const columns = [
   {
     title: 'Cod suport',
-    field: 'store',
+    field: 'supportCode',
     align: 'left',
     type: 'string'
   },
@@ -19,67 +19,67 @@ export const columns = [
   },
   {
     title: 'Comanda livratà',
-    field: 'deliverySlip',
+    field: 'orderedDelivered',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Comandã emis(Meti)',
-    field: 'deliverySlip',
+    title: 'Comandǎ emis(Meti)',
+    field: 'orderedIssued',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Destinatie dorită',
-    field: 'deliverySlip',
+    field: 'desiredDestination',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Destinatie reala',
-    field: 'deliverySlip',
+    field: 'realDestination',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Operator',
-    field: 'deliverySlip',
+    field: 'operator',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Dată scanare',
-    field: 'deliverySlip',
+    field: 'scanDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Rezolvat',
-    field: 'deliverySlip',
+    field: 'resolved',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Datã rezolvare',
-    field: 'deliverySlip',
+    title: 'Datǎ rezolvare',
+    field: 'resolvedDate',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Operator rezolvare',
-    field: 'deliverySlip',
+    field: 'resolveOperator',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Comentariu',
-    field: 'deliverySlip',
+    field: 'comment',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Descarca',
-    field: 'deliverySlip',
+    field: 'unload',
     align: 'left',
     type: 'string'
   },

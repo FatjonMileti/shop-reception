@@ -1,4 +1,5 @@
 import { ImageCell } from "components/core-ui/ImageCell"
+import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
 export const columns = [
     {
@@ -15,6 +16,12 @@ export const columns = [
       field: 'metiCode',
       align: 'left',
       width: '150px'
+    },
+    {
+      title: 'Familie',
+      field: 'familyName',
+      align: 'left',
+      width: '140px'
     },
     {
       title: 'Cod familie',
@@ -43,4 +50,21 @@ export const columns = [
     }
 ]
 
+export const drawerFilters = (familiesQuery) => [
+  {
+    name: 'family',
+    value: undefined,
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Familie"
+        options={familiesQuery.data || []}
+        multiple
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Familie',
+    clearFiltersOnChange: ['subfamily']
+  }
+]
 

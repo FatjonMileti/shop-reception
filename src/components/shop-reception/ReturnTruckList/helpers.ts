@@ -7,25 +7,25 @@ export const columns = [
   },
   {
     title: 'Via HUB',
-    field: 'hub',
+    field: 'viaHub',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Depozit/Furnizor',
-    field: 'warehouseName',
+    field: 'warehouseSupplier',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Societate',
-    field: 'truckLocation',
+    field: 'society',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Traseu',
-    field: 'registrationNumber',
+    field: 'route',
     align: 'left',
     type: 'string'
   },
@@ -37,13 +37,13 @@ export const columns = [
   },
   {
     title: 'Număr șofer',
-    field: 'registrationNumber',
+    field: 'driveNumber',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Retur ambalaje',
-    field: 'driverCode',
+    field: 'returnPackaging',
     align: 'left',
     type: 'string'
   },
@@ -56,19 +56,13 @@ export const columns = [
   },
   {
     title: 'Avize magazin',
-    field: 'raceCode',
+    field: 'shopNotices',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Avize hub',
-    field: 'raceCode',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Datâ inregistrare',
-    field: 'deliveryReceipts',
+    field: 'hubNotices',
     align: 'left',
     type: 'string'
   },
@@ -110,13 +104,7 @@ export const columns = [
   },
   {
     title: 'Dată expeditie',
-    field: 'registrationDate',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'status',
-    field: 'registrationOperator',
+    field: 'shippingDate',
     align: 'left',
     type: 'string'
   }

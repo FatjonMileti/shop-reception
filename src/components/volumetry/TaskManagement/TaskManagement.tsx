@@ -13,7 +13,7 @@ import { handleQueryError } from '../utils'
 import { CreateEditTask } from './CreateEditTask'
 import { VOLUMETRY_TASKS_URL } from './constants'
 import { buildTableFilterFields } from './utils'
-import { getCategoriesOptions, getDepartmentsOptions, getFrequencyOptions } from '../api'
+import { getCategoriesOptions, getDepartmentsOptions } from '../api'
 import { useNotification } from 'hooks'
 
 export const columns = [
@@ -106,7 +106,6 @@ const TaskManagement = () => {
 
   const { data: categoryOptions } = getCategoriesOptions(showNotification)
   const { data: departmentOptions } = getDepartmentsOptions(showNotification)
-  const { data: frequencyOptions } = getFrequencyOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -165,11 +164,7 @@ const TaskManagement = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          filters={buildTableFilterFields(
-            departmentOptions || [],
-            frequencyOptions || [],
-            categoryOptions || []
-          )}
+          filters={buildTableFilterFields(departmentOptions || [], categoryOptions || [])}
           rowActions={[
             {
               label: 'Edit',

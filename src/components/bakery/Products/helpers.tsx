@@ -23,7 +23,6 @@ export const columns = [
 			title: "Familie",
 			field: 'familyModuleName',
 			align: 'left',
-			
     }
   ]
 

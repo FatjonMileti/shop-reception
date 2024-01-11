@@ -31,7 +31,6 @@ export const getDepartmentsOptions = (
     ['departments'],
     async () => {
       const result = await makeCoreGetRequest('/volumetry/locations/generic-departments')
-
       const resultOptions = toDepartmentsOptions(result)
 
       if (resultOptions?.length && !!setDefaultOptionCallback) {
@@ -59,7 +58,7 @@ export const getJobTitlesOptions = (showNotification: Function) => {
       const resultOptions = result.list.map(
         (item: { id: number; jobTitle: string }): ValueLabelInterface => ({
           label: item.jobTitle,
-          value: item.jobTitle
+          value: item.id
         })
       )
 
@@ -78,7 +77,7 @@ export const getContractorsNamesOptions = (showNotification: Function) => {
       const result = await makeCoreGetRequest('/volumetry/workers/contractors')
 
       const resultOptions = result.list.map(
-        (item): ValueLabelInterface => ({ label: item.fullName, value: item.fullName })
+        (item): ValueLabelInterface => ({ label: item.fullName, value: item.id })
       )
 
       return resultOptions || []
@@ -279,29 +278,14 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   return useQuery(
     ['employees-options'],
     async () => {
-      const employees = await makeCoreGetRequest('/volumetry/workers/employees?page=0&size=10')
-      const shifts = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
-
-      const employeesWithShifts = employees.list.map(employee => {
-        const matchingShift = shifts.find(shift => shift.fullName === employee.fullName)
-
-        if (matchingShift) {
-          return {
-            ...employee,
-            shiftCategory: matchingShift.shiftCategory
-          }
-        }
-
-        return employee
-      })
-
-      return toEmployeeFilterItems(employeesWithShifts) || []
+      const employees = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
+      return toEmployeeFilterItems(employees) || []
     },
     {
       onError: error =>
         handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification),
-        
-        enabled: validateQuery
+
+      enabled: validateQuery
     }
   )
 }

@@ -108,7 +108,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         taskName={taskName}
         rayonsOrDepartment={rayonsOrDepartment}
         standardProductivity={item.standardProductivity}
-        setShouldRefreshData={setShouldRefreshTaskData}
+        setShouldRefreshData={setShouldRefreshData}
         taskTemplateId={item.taskTemplateId}
       />
       <EditAllocationModal

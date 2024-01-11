@@ -1,6 +1,6 @@
 import s from '../../commonStyles.modules.scss'
 import { useNotification } from 'hooks'
-import { CircularProgress, Divider, Grid } from '@mui/material'
+import { Divider, Grid } from '@mui/material'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -11,9 +11,8 @@ import { UsageReportTableItem } from '../interfaces'
 import { DownloadOutlined } from '@mui/icons-material'
 import { useQuery } from 'react-query'
 import { toStoreFilterItems } from 'components/bakery/commonSerializers'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import dayjs from 'dayjs'
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { ColumnsComponent, formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
 
@@ -147,19 +146,17 @@ const UsageReportRegion = () => {
             />
           </Grid>
           <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="store.id"
-              label="Selecteaza magazin"
-              value={storeFilterValue}
+            <FilterDataSelect
+              name="store"
+              defaultSelectedData={storeFilterValue}
+              label="Magazin"
               options={storesFilterOptions}
-              onChange={val => handleFilterChange('store', val)}
-              multiple={true}
+              onSelect={val => handleFilterChange('store', val)}
             />
           </Grid>
         </Grid>
 
-        <Grid xs={12} item paddingTop={2}>
+        <Grid xs={12} item py={2}>
           <Divider />
         </Grid>
 

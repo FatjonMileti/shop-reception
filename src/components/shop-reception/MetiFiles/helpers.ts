@@ -7,79 +7,79 @@ export const columns = [
   },
   {
     title: 'Magazin',
-    field: 'deliverySlip',
+    field: 'store',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Depozit',
-    field: 'deliverySlip',
+    field: 'warehouse',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Operator integrare',
-    field: 'deliverySlip',
+    field: 'integrationOperator',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Status',
-    field: 'deliverySlip',
+    field: 'status',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Fișier trimis',
-    field: 'deliverySlip',
+    field: 'sentFile',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Fișier primit',
-    field: 'deliverySlip',
+    field: 'receivedFile',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ trimitere către Meti',
-    field: 'store',
+    field: 'sentToMeti',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Datǎ primire de la Meti',
-    field: 'store',
+    field: 'receivedFromMeti',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Produse cu diferențe',
-    field: 'warehouseName',
+    field: 'productsDifferences',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Produse cu diferente Meti',
-    field: 'warehouseName',
+    field: 'metiProductDifferences',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Export produse neintegrate',
-    field: 'warehouseName',
+    field: 'exportNonIntegratedProducts',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Erori',
-    field: 'warehouseName',
+    field: 'error',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Retrimitere',
-    field: 'warehouseName',
+    field: 'forgot',
     align: 'left',
     type: 'string'
   },

@@ -10,6 +10,7 @@ import { DeliverySlipsList } from './DeliverySlipsList'
 import { SupportWrongDestination } from './SupportWrongDestination'
 import { UnorderedProducts } from './UnorderedProducts'
 import { MetiFiles } from './MetiFiles'
+import { MetiFileDetail } from './MetiFiles/MetiFileDetail'
 import { DifferencesProducts } from './DifferencesProducts'
 import { SupportTradability } from './SupportTradability'
 import { AdminDeposit } from './AdminDeposit'
@@ -17,7 +18,7 @@ import { AdminHub } from './AdminHub'
 import { AdminStore } from './AdminStore'
 import { AdminRegions } from './AdminRegions'
 import { ManageScanTypes } from './ManageScanTypes'
-import SubFamilyValidityThreshold from './SubFamilyValidityThreshold/SubFamilyValidityThreshold'
+import { SubFamilyValidityThreshold } from './SubFamilyValidityThreshold'
 import { MetiProducts } from './MetiProducts'
 import { SensitiveProducts } from './SensitiveProducts'
 import { PackingTypes } from './PackingTypes'
@@ -26,12 +27,19 @@ import { ReceptionFiles } from './ReceptionFiles'
 import { CentralizeStoresHub } from './CentralizeStoresHub'
 import { ReturnTruckList } from './ReturnTruckList'
 import { RollingPackages } from './RollingPackages'
-import BalancePackages from './BalancePackages/BalancePackages'
-import PackagingDisputes from './PackagingDisputes/PackagingDisputes'
-import PackagingTypesDifferences from './PackagingTypesDifferences/PackagingTypesDifferences'
-import ReturnedPackaging from './ReturnedPackaging/ReturnedPackaging'
-import PackagingCompliance from './PackagingCompliance/PackagingCompliance'
-import PackagingDisputesTimer from './PackagingDisputesTimer/PackagingDisputesTimer'
+import { BalancePackages } from './BalancePackages'
+import { PackagingDisputes } from './PackagingDisputes'
+import { PackagingTypesDifferences } from './PackagingTypesDifferences'
+import { ReturnedPackaging } from './ReturnedPackaging'
+import { PackagingCompliance } from './PackagingCompliance'
+import { PackagingDisputesTimer } from './PackagingDisputesTimer'
+import { ShowDeliverySlip } from './DeliverySlipsList/ShowDeliverySlip'
+import { TruckDetail } from './TruckList/TruckDetail'
+import { SupportWrongDestinationDetail } from './SupportWrongDestination/SupportWrongDestinationDetail'
+import { PackagingDisputesTimerDetail } from './PackagingDisputesTimer/PackagingDisputesTimerDetail'
+import { BalancePackageHistory } from './BalancePackages/BalancePackageHistory'
+import { BalancePackageForm } from './BalancePackages/BalancePackageForm'
+import { SGRProducts } from './SGRProducts'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -159,6 +167,38 @@ export const useShopReceptionRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION}
         element={<PackagingDisputesTimer />}
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_SLIP}
+        element={<ShowDeliverySlip />}
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_DETAIL}
+        element={<TruckDetail />}
+      />
+      <Route
+        path={URLS.AUTH_SUPPORT_WRONG_DESTINATION_DETAIL}
+        element={<SupportWrongDestinationDetail />}
+      />
+      <Route
+        path={URLS.AUTH_METI_FILE_DETAIL}
+        element={<MetiFileDetail />}
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL}
+        element={<PackagingDisputesTimerDetail />}
+      />
+      <Route
+        path={URLS.AUTH_BALANCE_PACKAGING_FORM}
+        element={<BalancePackageForm />}
+      />
+      <Route
+        path={URLS.AUTH_BALANCE_PACKAGING_HISTORY}
+        element={<BalancePackageHistory />}
+      />
+      <Route
+        path={URLS.AUTH_SGR_PRODUCTS}
+        element={<SGRProducts />}
       />
     </>
   )

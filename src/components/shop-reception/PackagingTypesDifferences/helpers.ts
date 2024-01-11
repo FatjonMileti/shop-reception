@@ -1,13 +1,13 @@
 export const columns = [
   {
     title: 'Depozit',
-    field: 'store',
+    field: 'warehouse',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Magazin',
-    field: 'hub',
+    field: 'store',
     align: 'left',
     type: 'string'
   },
@@ -19,31 +19,31 @@ export const columns = [
   },
   {
     title: 'Societate',
-    field: 'truckLocation',
+    field: 'society',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Cod suport',
-    field: 'warehouseName',
+    field: 'supportCode',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Bon livrare',
-    field: 'registrationNumber',
+    field: 'deliverySlip',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip suport așteptat',
-    field: 'registrationNumber',
+    field: 'expectedSupportType',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Tip suport confirmat',
-    field: 'registrationNumber',
+    field: 'supportTypeConfirmed',
     align: 'left',
     type: 'string'
   },
@@ -55,13 +55,13 @@ export const columns = [
   },
   {
     title: 'Datǎ',
-    field: 'registrationNumber',
+    field: 'date',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Descarca imagini',
-    field: 'driverCode',
+    field: 'downloadImages',
     align: 'left',
     type: 'string'
   }

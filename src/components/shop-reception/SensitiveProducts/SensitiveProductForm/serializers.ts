@@ -1,4 +1,4 @@
-export const toAdminDepositPayload = (item: SensitiveProduct) => ({
+export const toPayload = (item: SensitiveProduct) => ({
   id: item.id,
   storeType: item.storeType,
   storeCode: item.storeCode,
