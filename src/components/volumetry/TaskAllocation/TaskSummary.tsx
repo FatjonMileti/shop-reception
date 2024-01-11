@@ -9,7 +9,8 @@ const TaskSummary = item => {
     taskName,
     recommendedInterval,
     standardProductivity,
-    priority,
+    priorityId,
+    priorityValue,
     frequency,
     allocatedWorkers,
     totalWorkload,
@@ -35,9 +36,9 @@ const TaskSummary = item => {
         <Grid item mt={1} mr={1}>
           <Capsule
             label="Prioritate"
-            value={priority}
-            valueColor={priority === 1 && '#D30D1F'}
-            labelColor={priority === 1 && 'rgba(211, 13, 31, 0.15)'}
+            value={priorityValue}
+            valueColor={priorityId === 1 && '#D30D1F'}
+            labelColor={priorityId === 1 && 'rgba(211, 13, 31, 0.15)'}
           />
         </Grid>
 

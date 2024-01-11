@@ -47,7 +47,7 @@ const Employee: React.FC<EmployeeProps> = props => {
   const customCapsuleColors = getCapsuleColor(
     taskCurrentState.isTaskStarted,
     taskCurrentState.isTaskEnded,
-    false
+    employee.progressProportion > 100
   )
 
   const [isOpenStopTaskModal, setIsOpenStopTaskModal] = useState<boolean>(false)
@@ -120,12 +120,12 @@ const Employee: React.FC<EmployeeProps> = props => {
                   <Box mr={1}>
                     <LinearProgress
                       variant="determinate"
-                      value={employee.progress}
+                      value={employee.progressProportion > 100 ? 100 : employee.progressProportion}
                       color={customCapsuleColors.progress as 'error' | 'success'}
                     />
                   </Box>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                   <Box sx={{ alignSelf: 'center' }}>
                     <span
                       className={s.employeeProgress}

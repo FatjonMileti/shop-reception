@@ -26,11 +26,14 @@ export const toListTableRows = (
   }))
 
 export const toEmployeeFilterItems = items =>
-  items.map(item => ({
-    label: item.fullName || '',
-    value: item.workerId || '',
-    groupBy: getEmployeeGroupName(item.shiftCategory)
-  }))
+  items
+    .map(item => ({
+      label: item.fullName || '',
+      value: item.workerId || '',
+      groupBy: getEmployeeGroupName(item.shiftCategory),
+      shiftCategory: item.shiftCategory
+    }))
+    .sort((a, b) => b.shiftCategory.localeCompare(a.shiftCategory))
 
 export const toEmployeesItems = (item, employees, setShouldRefreshData, setShouldRefreshTaskData) =>
   employees.map(employee => ({
