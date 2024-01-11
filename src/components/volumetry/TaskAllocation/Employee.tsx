@@ -15,10 +15,11 @@ interface EmployeeProps {
   employee: any // TODO: To add type when db schema is defined
   task: any // TODO: To add type when db schema is defined
   setShouldRefreshData: Function
+  setShouldRefreshTaskData: Function
 }
 
 const Employee: React.FC<EmployeeProps> = props => {
-  const { employee, task, setShouldRefreshData } = props
+  const { employee, task, setShouldRefreshData, setShouldRefreshTaskData } = props
   const { showNotification } = useNotification()
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 900)
 
@@ -34,19 +35,19 @@ const Employee: React.FC<EmployeeProps> = props => {
   }, [])
 
   const taskCurrentState = useMemo(() => {
-    const isTaskStarted = employee.startTime.isStarted
-    const isTaskEnded = employee.endTime.isEnded
+    const isTaskStarted = employee.timerStatus === 'IN_PROGRESS'
+    const isTaskEnded = employee.timerStatus === 'FINISHED'
 
     const showStartButton = !isTaskStarted && !isTaskEnded
     const showStopButton = isTaskStarted && !isTaskEnded
 
     return { isTaskStarted, isTaskEnded, showStartButton, showStopButton }
-  }, [employee.startTime.isStarted, employee.endTime.isEnded])
+  }, [employee.timerStatus])
 
   const customCapsuleColors = getCapsuleColor(
     taskCurrentState.isTaskStarted,
     taskCurrentState.isTaskEnded,
-    employee.isOverdue
+    false
   )
 
   const [isOpenStopTaskModal, setIsOpenStopTaskModal] = useState<boolean>(false)
@@ -60,9 +61,10 @@ const Employee: React.FC<EmployeeProps> = props => {
   }
 
   const submitStartTask = async () => {
-    await makeCorePutRequest(`/volumetry/taskAllocation/start/${task.id}`, {
-      isStarted: true
+    await makeCorePutRequest(`/volumetry/tasks/${employee.id}`, {
+      action: 'START'
     })
+    setShouldRefreshTaskData(true)
   }
 
   const { isLoading, mutate: handleStartTask } = useMutation(submitStartTask, {
@@ -81,39 +83,39 @@ const Employee: React.FC<EmployeeProps> = props => {
       <Grid container className={s.employeeInfo}>
         <Grid item xs={12} md={2} sx={{ display: 'flex' }}>
           <EmployeeIcon />
-          <p className={s.employeeName}>{employee.employee.name}</p>
+          <p className={s.employeeName}>{employee.workerFullName}</p>
         </Grid>
 
         <Grid item xs={12} md={5.4} className={s.capsules}>
           <Capsule
-            label={employee.startTime.isStarted ? 'Ora de inceput' : 'Ora recomandata de inceput'}
-            value={employee.startTime.time}
+            label={taskCurrentState.isTaskStarted ? 'Ora de inceput' : 'Ora recomandata de inceput'}
+            value={employee.timeInterval.split('-')[0]}
             labelColor={customCapsuleColors.label}
             valueColor={customCapsuleColors.value}
           />
           <Capsule
-            label={employee.endTime.isEnded ? 'Ora de final' : 'Ora recomandata de final'}
-            value={employee.endTime.time}
+            label={taskCurrentState.isTaskStarted ? 'Ora de final' : 'Ora recomandata de final'}
+            value={employee.timeInterval.split('-')[1]}
             labelColor={customCapsuleColors.label}
             valueColor={customCapsuleColors.value}
           />
           <Capsule
             label={'Volum'}
-            value={`${employee.volume.value}${employee.volume.measureUnit}`}
+            value={`${employee.workload}`}
             labelColor={customCapsuleColors.label}
             valueColor={customCapsuleColors.value}
           />
         </Grid>
 
         <Grid item xs={12} md={2} sx={{ display: 'flex' }}>
-          {employee.customText ? (
+          {employee.comments ? (
             <Grid container>
               <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
                 <ChatIcon />
               </Grid>
 
               <Grid item xs={11} className={s.customText}>
-                {employee.customText}
+                {employee.comments}
               </Grid>
             </Grid>
           ) : !taskCurrentState.isTaskStarted && !taskCurrentState.isTaskEnded ? (
@@ -123,7 +125,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               <Grid item xs={9} mr={1} sx={{ alignSelf: 'center' }}>
                 <LinearProgress
                   variant="determinate"
-                  value={employee.progress}
+                  value={employee.progressProportion}
                   color={customCapsuleColors.progress as 'error' | 'success'}
                 />
               </Grid>
@@ -132,7 +134,7 @@ const Employee: React.FC<EmployeeProps> = props => {
                   className={s.employeeProgress}
                   style={{ background: customCapsuleColors.value }}
                 >
-                  {employee.progress}%
+                  {employee.progressProportion}%
                 </span>
               </Grid>
             </Grid>

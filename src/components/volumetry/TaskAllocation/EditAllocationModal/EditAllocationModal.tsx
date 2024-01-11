@@ -22,20 +22,19 @@ interface EditAllocationModalProps {
 }
 
 const validationSchema = yup.object({
-  id: yup.string().nonNullable(),
-  volume: yup.string().nonNullable(),
+  // id: yup.string().nonNullable(),
+  workload: yup.string().nonNullable(),
   message: yup.string()
 })
 
 const EditAllocationModal = (props: EditAllocationModalProps) => {
   const { isModalOpen, closeModal, editItem, employee, setShouldRefreshData, task } = props
-
   const { showNotification } = useNotification()
 
   const editCurrentAllocation = async values => {
     await makeCorePutRequest(
-      `/volumetry/taskAllocation/details/${editItem ? editItem?.id : employee.employee.id}`,
-      values
+      `/volumetry/tasks/${editItem ? editItem?.id : employee.id}`,
+      {...values, action: 'FINISHED'}
     )
   }
 
@@ -49,11 +48,13 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
       })
     },
     onError: error =>
-      handleQueryError(
-        error,
-        `A aparut o eroare la ${editItem ? 'editarea alocarii' : 'oprirea taskului'}.`,
-        showNotification
-      )
+      {
+        handleQueryError(
+          error,
+          `A aparut o eroare la ${editItem ? 'editarea alocarii' : 'oprirea taskului'}.`,
+          showNotification
+        )
+      }
   })
 
   const formik = useFormik({
@@ -94,7 +95,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
               { label: 'Departament/Raion:', name: task?.department?.name },
               {
                 label: 'Angajat:',
-                name: editItem ? editItem?.employee?.name : employee?.employee?.name
+                name: editItem ? editItem?.employee?.name : employee?.workerFullName
               }
             ]}
           />
@@ -104,12 +105,12 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           <Input
             type="text"
             variant="outlined"
-            name="volume"
+            name="workload"
             label="Volum"
-            value={formik.values.volume}
+            value={formik.values.workload}
             width="100%"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('volume', (event.target as HTMLInputElement).value)
+              formik.setFieldValue('workload', (event.target as HTMLInputElement).value)
             }
             required
           />
@@ -121,13 +122,13 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
             variant="outlined"
             name="message"
             label="Mesaj"
-            value={formik.values.customText}
+            value={formik.values.message}
             width="100%"
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('customText', (event.target as HTMLInputElement).value)
+            onChange={(event: ChangeEvent<HTMLInputElement>) => 
+              formik.setFieldValue('message', (event.target as HTMLInputElement).value)
             }
             rows={7}
-            required={!!employee}
+            // required={!!employee}
           />
         </Grid>
 

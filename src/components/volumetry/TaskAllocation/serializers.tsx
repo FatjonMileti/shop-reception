@@ -5,9 +5,14 @@ import { getEmployeeGroupName } from './helpers'
 
 export const toDepartmentOptions = data => data.map(item => ({ label: item.name, value: item.id }))
 
-export const toListTableRows = (items, shouldRefreshData, setShouldRefreshData, setShouldRefreshTaskData) =>
+export const toListTableRows = (
+  items,
+  shouldRefreshData,
+  setShouldRefreshData,
+  setShouldRefreshTaskData
+) =>
   items.map(item => ({
-    id: item.id,
+    id: item.taskTemplateId,
     summary: <TaskSummary item={item} />,
     details: (
       <TaskDescription
@@ -27,10 +32,15 @@ export const toEmployeeFilterItems = items =>
     groupBy: getEmployeeGroupName(item.shiftCategory)
   }))
 
-export const toEmployeesItems = (item, employees, setShouldRefreshData) =>
+export const toEmployeesItems = (item, employees, setShouldRefreshData, setShouldRefreshTaskData) =>
   employees.map(employee => ({
     id: employee.id,
     content: (
-      <Employee employee={employee} task={item} setShouldRefreshData={setShouldRefreshData} />
+      <Employee
+        employee={employee}
+        task={item}
+        setShouldRefreshData={setShouldRefreshData}
+        setShouldRefreshTaskData={setShouldRefreshTaskData}
+      />
     )
   }))

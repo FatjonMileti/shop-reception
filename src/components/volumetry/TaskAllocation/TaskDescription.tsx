@@ -18,13 +18,14 @@ interface TaskDescriptionProps {
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const { item, employees, setShouldRefreshData, setShouldRefreshTaskData } = props
-
-  const { taskName, department } = item.item || item
+  const { taskName, rayonsOrDepartment } = item.item || item
   const [employeesItems, setEmployeesItems] = useState([])
   const [selectedRow, setSelectedRow] = useState(null) // TODO: To add interface when db schema is defined
 
   useEffect(() => {
-    setEmployeesItems(toEmployeesItems(item, employees, setShouldRefreshData))
+    setEmployeesItems(
+      toEmployeesItems(item, employees, setShouldRefreshData, setShouldRefreshTaskData)
+    )
   }, [employees])
 
   const [modal, setModal] = useState<CRUDAction>(null)
@@ -101,14 +102,14 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
           style={{ textTransform: 'none', width: isMobile ? '100%' : 'auto' }}
         />
       </Grid>
-
       <AssignEmployee
         isModalOpen={modal === 'read'}
         closeModal={closeModal}
         taskName={taskName}
-        department={department.name}
-        prodStandardUM={item.prodStandardUM}
+        rayonsOrDepartment={rayonsOrDepartment}
+        standardProductivity={item.standardProductivity}
         setShouldRefreshData={setShouldRefreshTaskData}
+        taskTemplateId={item.taskTemplateId}
       />
       <EditAllocationModal
         isModalOpen={modal === 'edit'}
@@ -120,10 +121,10 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
       <DeleteConfirmationModal
         isModalOpen={modal === 'delete'}
         closeModal={closeModal}
-        actionUrl="/volumetry/taskAllocation/details/:id"
+        actionUrl="/volumetry/tasks/:id"
         itemId={`${selectedRow?.id}`}
         content={<Typography>Sunteti sigur ca vreti sa stergeti aceasta alocare?</Typography>}
-        setShouldRefreshData={setShouldRefreshData}
+        setShouldRefreshData={setShouldRefreshTaskData}
         title="Sterge alocare"
       />
     </Grid>

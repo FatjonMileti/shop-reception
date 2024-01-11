@@ -199,7 +199,7 @@ export const getWorkVolumesOptions = (showNotification: Function) => {
   return useQuery(
     ['work-volumes'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/reports/work-volumes')
+      const result = await makeCoreGetRequest('/volumetry/work-volumes')
 
       const resultOptions = result.list.map(workVolume => ({
         value: workVolume.measurementUnit,
@@ -279,7 +279,7 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   return useQuery(
     ['employees-options'],
     async () => {
-      const employees = await makeCoreGetRequest('/volumetry/workers/employees')
+      const employees = await makeCoreGetRequest('/volumetry/workers/employees?page=0&size=10')
       const shifts = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
 
       const employeesWithShifts = employees.list.map(employee => {

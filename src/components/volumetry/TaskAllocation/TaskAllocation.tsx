@@ -12,6 +12,8 @@ import s from './TaskAllocation.modules.scss'
 import TaskDescription from './TaskDescription'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
+import { useQuery } from 'react-query'
+import { formatErrorMessage } from 'utils/formatting'
 
 const TaskAllocation = () => {
   const { showNotification } = useNotification()
@@ -64,15 +66,16 @@ const TaskAllocation = () => {
   }
 
   const handleRemoteDetails = async (rowId: string) => {
+
     setSelectedRowId(rowId)
-    const response = await makeCoreGetRequest(`/volumetry/task-allocation/details/${rowId}`)
+    const response = await makeCoreGetRequest(`/volumetry/tasks?filterBy=taskTemplateId&filterValue=${rowId}`)
     const data = await response
-    const item = tableItems.find(tableItem => tableItem.id === rowId)
+    const item = tableItems.find(tableItem => tableItem.taskTemplateId === rowId)
 
     return (
       <TaskDescription
         item={item}
-        employees={data.list}
+        employees={data}
         shouldRefreshData={shouldRefreshAllocationsData}
         setShouldRefreshData={setShouldRefreshAllocationsData}
         setShouldRefreshTaskData={setShouldRefreshTaskData}

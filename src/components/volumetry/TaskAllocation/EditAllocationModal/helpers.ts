@@ -1,8 +1,7 @@
 export const getFormInitialValues = editItem =>
   editItem
     ? {
-        id: editItem?.id || 0,
-        volume: editItem?.volume?.value || '',
-        customText: editItem?.customText || ''
+        workload: editItem?.workload || '',
+        // message: editItem?.message || ''
       }
-    : { customText: '', volume: '', isStopped: true }
+    : { workload: '' }
