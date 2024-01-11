@@ -115,7 +115,7 @@ const MyTimeOff = () => {
         <DeleteConfirmationModal
           isModalOpen={isDeleteModalOpen}
           closeModal={closeDeleteModal}
-          actionUrl="/governance/teamTimeOff/:id"
+          actionUrl="/governance/myTimeOff/:id"
           itemId={`${selectedRow?.id}`}
           content={<Typography>Are you sure you want to delete this entry?</Typography>}
           setShouldRefreshData={setShouldRefreshData}
