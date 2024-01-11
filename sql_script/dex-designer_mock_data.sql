@@ -46,7 +46,7 @@ VALUES
     -- Shop Reception
     (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5),
     -- Bakery p2
-    (10, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2);
+    -- (10, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2);
 
 
 -- activity with submodule id
@@ -105,12 +105,12 @@ VALUES
     -- Shop Reception
     (46, 'Admin magazin', 'UsersManagement', null, true, 9),
     -- Bakery TRACEABILITY OP
-    (47, 'Management produse', 'ProductManagementTO', null, true, 10),
-    (48, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
-    (49, 'Trasabilitate congelate', 'FrozenTraceabilityTO', null, true, 10),
-    (50, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', null, true, 10),
-    (51, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
-    (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10),
+    -- (47, 'Management produse', 'ProductManagementTO', null, true, 10),
+    -- (48, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
+    -- (49, 'Trasabilitate congelate', 'FrozenTraceabilityTO', null, true, 10),
+    -- (50, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', null, true, 10),
+    -- (51, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
+    -- (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10);
     -- Bakery ADMIN p2
     (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10);
 
@@ -190,14 +190,14 @@ VALUES
     -- Shop Reception
     (62, 'Screen 1', '', '/url', true, 46, true),
     -- Bakery TRACEABILITY-OPERATOR
-    (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
-    (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
-    (65, 'Trasabilitate congelate', 'FrozenTraceabilityTO', '/bakery/traceabilityOperator/frozen-traceability', true, 49, true),
-    (66, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', '/bakery/traceabilityOperator/own-production-traceability', true, 50, true),
-    (67, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report', true, 51, true),
-    (68, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report-print', true, 51, false),
-    (69, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 52, true),
-    (70, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 52, false),
+    -- (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
+    -- (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
+    -- (65, 'Trasabilitate congelate', 'FrozenTraceabilityTO', '/bakery/traceabilityOperator/frozen-traceability', true, 49, true),
+    -- (66, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', '/bakery/traceabilityOperator/own-production-traceability', true, 50, true),
+    -- (67, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report', true, 51, true),
+    -- (68, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report-print', true, 51, false),
+    -- (69, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 52, true),
+    -- (70, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 52, false);
     -- Bakery ADMIN p2
     (71, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 53, true);
 
@@ -286,8 +286,8 @@ values
   (8, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE'),
   (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
   (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER'),
-  (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
-  -- Supply OMNI
+--   (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
+-- Supply OMNI
   (11, 'GG_RO_HQ_IT-C4ASSIST'),
   -- Volumetry
   (13, 'GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR');
@@ -320,7 +320,7 @@ VALUES
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER
     (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY
-    (12, 47), (12, 48), (12, 49), (12, 50), (12, 51), (12, 52),
+    -- (12, 47), (12, 48), (12, 49), (12, 50), (12, 51), (12, 52),
     -- Supply OMNI
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),

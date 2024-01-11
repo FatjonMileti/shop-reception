@@ -221,6 +221,7 @@ const ProductionManagement = () => {
               label="Magazin"
               options={filterOptions}
               onSelect={handleStoreFilterChange}
+              showSearch
             />
           </Grid>
         </Grid>
