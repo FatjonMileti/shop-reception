@@ -28,7 +28,7 @@ export const toListTableRows = (
 export const toEmployeeFilterItems = items =>
   items.map(item => ({
     label: item.fullName || '',
-    value: item.id || '',
+    value: item.workerId || '',
     groupBy: getEmployeeGroupName(item.shiftCategory)
   }))
 
