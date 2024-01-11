@@ -30,7 +30,13 @@ export const columns =  [
     type: 'string',
     defaultPrintSelected: true
   },
-
+  {
+    title: 'Familie',
+    field: 'familyName',
+    align: 'left',
+    type: 'string',
+    defaultPrintSelected: false
+  },
   {
     title: 'Subfamilie',
     field: 'subfamily',

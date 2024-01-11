@@ -28,6 +28,7 @@ export interface TableItem {
   productMetiCode: number
   productName: string
   quantityToProduce: number
+  familyName: string
   subfamily: string
   username: string
 }
