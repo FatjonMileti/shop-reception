@@ -143,8 +143,7 @@ export const columns = [
   }
 ]
 
-export 
-const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
+export const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
   {
     name: 'date',
     value: currentDate,
