@@ -25,8 +25,8 @@ const ApplicationUsageReport = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([])
-  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(getPreviousDay())
-  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(getPreviousDay())
+  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
+  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
 
   const { data: storesFilterOptions } = useQuery(
     ['store'],
