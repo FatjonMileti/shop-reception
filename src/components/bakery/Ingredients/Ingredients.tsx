@@ -104,7 +104,7 @@ const Ingredients = () => {
     },
     {
       name: 'batch',
-      value: 'false',
+      value: undefined,
       filter: (
         <Autocomplete
           variant="outlined"
