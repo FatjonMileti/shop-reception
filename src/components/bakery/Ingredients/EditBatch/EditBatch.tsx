@@ -73,7 +73,6 @@ const EditBatch: React.FC<EditBatchProps> = props => {
         initialValues: initialValues,
         onSubmit: async (values: any, { resetForm }) => {
             const payload = {
-                ...values,
                 batch: values.batch === 'Da'
             }
             mutate(payload)
@@ -92,7 +91,6 @@ const EditBatch: React.FC<EditBatchProps> = props => {
                 <FormInfoItems
                   items={[
                     { label: 'Produs:', name: (editItem as EditBatchItem)?.name },
-                    { label: 'Cluster:', name: (editItem as EditBatchItem)?.clusterName },
                     { label: 'Cod METI:', name: (editItem as EditBatchItem)?.metiCode as string },
                   ]}
                 />
