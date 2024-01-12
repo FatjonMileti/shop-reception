@@ -154,6 +154,7 @@ const ProductManagement = () => {
               label="Magazin"
               options={filterOptions}
               onSelect={handleStoreFilterChange}
+              placeholderButton='Selecteaza'
               showSearch
             />
           </Grid>
@@ -181,7 +182,12 @@ const ProductManagement = () => {
             rowsPerPageOptions={[25, 50, 100]}
             filters={drawerFilters(familiesQuery, subfamiliesQuery)}
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
-          />
+            filtersLabel='Filtreaza'
+            filtersButtonLabel="Filtreaza"
+            appliedFiltersLabel="Filtre"
+            cancelFiltersButtonLabel="Anuleaza"
+            applyFiltersButtonLabel='Aplica'
+            />
         )}
       </Grid>
     </div>

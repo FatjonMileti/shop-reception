@@ -81,7 +81,7 @@ const Stores = () => {
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[
             {
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',

@@ -91,7 +91,7 @@ const Zones = () => {
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[
             {
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
@@ -102,7 +102,7 @@ const Zones = () => {
           rowActionsWidth="130px"
           toolbarActions={[
             {
-              label: 'Adauga Zona',
+              label: 'Adauga',
               icon: <Add />,
               onClick: openAddModal
             }

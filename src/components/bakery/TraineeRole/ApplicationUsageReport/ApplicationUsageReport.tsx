@@ -157,6 +157,7 @@ const ApplicationUsageReport = () => {
               options={storesFilterOptions}
               onSelect={val => handleFilterChange('store', val)}
               multiSelect={true}
+              placeholderButton='Selecteaza'
               showSearch
             />
           </Grid>

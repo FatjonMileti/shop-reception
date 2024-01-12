@@ -6631,6 +6631,40 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "d1bed4ae-f2dd-4d00-baa8-cd84cdc53747",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "region/application",
+      "responses": [
+        {
+          "uuid": "326cacc3-8d52-49cb-a95c-b7bc8f81a3f7",
+          "body": "{\r\n    \"list\": [],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 0,\r\n        \"pageCount\": 1\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6877,6 +6911,10 @@
     {
       "type": "route",
       "uuid": "7d371a03-ea20-45f7-8334-b80f996433eb"
+    },
+    {
+      "type": "route",
+      "uuid": "d1bed4ae-f2dd-4d00-baa8-cd84cdc53747"
     }
   ],
   "proxyMode": false,

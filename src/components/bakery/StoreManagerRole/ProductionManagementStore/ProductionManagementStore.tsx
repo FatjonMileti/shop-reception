@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
-import { CircularProgress, Divider, Grid } from '@mui/material'
+import { Divider, Grid } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { columns } from './helpers'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
@@ -282,7 +282,7 @@ const ProductionManagementStore = () => {
           tableFilters={tableState.tableFilters}
           rowActions={[
             {
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
@@ -295,6 +295,11 @@ const ProductionManagementStore = () => {
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
+          filtersLabel='Filtreaza'
+          filtersButtonLabel="Filtreaza"
+          appliedFiltersLabel="Filtre"
+          cancelFiltersButtonLabel="Anuleaza"
+          applyFiltersButtonLabel='Aplica'
         />
       </Grid>
     </div>

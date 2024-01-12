@@ -153,6 +153,7 @@ const UsageReportRegion = () => {
               label="Magazin"
               options={storesFilterOptions}
               onSelect={val => handleFilterChange('store', val)}
+              placeholderButton="Selecteaza"
               showSearch
             />
           </Grid>
