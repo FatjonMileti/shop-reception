@@ -37,9 +37,9 @@ export const getJobTitlesOptions = (showNotification: Function) => {
     ['job-titles'],
     async () => {
       const result = await makeCoreGetRequest('/volumetry/workers/job-titles')
-      const resultOptions = result.list.map(
-        (item: { id: number; jobTitle: string }): ValueLabelInterface => ({
-          label: item.jobTitle,
+      const resultOptions = result.map(
+        (item: { id: number; title: string }): ValueLabelInterface => ({
+          label: item.title,
           value: item.id
         })
       )
