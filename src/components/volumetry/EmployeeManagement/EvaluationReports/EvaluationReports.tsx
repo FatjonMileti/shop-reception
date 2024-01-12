@@ -40,7 +40,7 @@ const EvaluationReports = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/evaluationReports',
-          filters: [{ name: 'department', value: departmentFilterValue?.value }],
+          filters: [{ name: 'department', value: departmentFilterValue.value }],
           order,
           orderBy
         })
@@ -63,7 +63,7 @@ const EvaluationReports = () => {
     const url = toTableGETUrl({
       url: '/volumetry/employee/evaluationReports/export/csv',
       tableFilters: filters,
-      filters: [{ name: 'department', value: departmentFilterValue?.value }],
+      filters: [{ name: 'department', value: departmentFilterValue.value }],
       order,
       orderBy
     })
