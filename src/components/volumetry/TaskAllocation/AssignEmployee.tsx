@@ -48,7 +48,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     onSuccess: res => {
       closeModal()
       showNotification({
-        message: `Employee assigned successfully!`,
+        message: 'Anagajatul a fost asignat cu succes',
         type: 'success'
       })
 
@@ -78,7 +78,12 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     }
   })
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle="Selecteaza angajat">
+    <Modal
+      isModalOpen={isModalOpen}
+      closeModal={closeModal}
+      modalTitle="Selecteaza angajat"
+      modalWidth="50%"
+    >
       <Grid container spacing={4}>
         <Grid xs={12} item>
           <FormInfoItems

@@ -49,9 +49,20 @@ const TaskAllocation = () => {
     ;(async () => {
       // TODO check when BE is done that the data is refreshed when changing allocations
       if (shouldRefreshAllocationsData) {
-        const details = await handleRemoteDetails(selectedRowId)
-        const newRows = rows.map(row => (row.id === selectedRowId ? { ...row, details } : row))
-        setRows(newRows)
+        const response = await makeCoreGetRequest(
+          toTableGETUrl({
+            url: '/volumetry/tasks/aggregation/summary',
+            filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }]
+          })
+        )
+        setRows(
+          toListTableRows(
+            response.list,
+            shouldRefreshAllocationsData,
+            setShouldRefreshAllocationsData
+          )
+        )
+        setTableItems(response.list)
         setShouldRefreshAllocationsData(false)
       }
     })()
@@ -66,9 +77,10 @@ const TaskAllocation = () => {
   }
 
   const handleRemoteDetails = async (rowId: string) => {
-
     setSelectedRowId(rowId)
-    const response = await makeCoreGetRequest(`/volumetry/tasks?filterBy=taskTemplateId&filterValue=${rowId}`)
+    const response = await makeCoreGetRequest(
+      `/volumetry/tasks?filterBy=taskTemplateId&filterValue=${rowId}`
+    )
     const data = await response
     const item = tableItems.find(tableItem => tableItem.taskTemplateId === rowId)
 
@@ -78,7 +90,6 @@ const TaskAllocation = () => {
         employees={data}
         shouldRefreshData={shouldRefreshAllocationsData}
         setShouldRefreshData={setShouldRefreshAllocationsData}
-        setShouldRefreshTaskData={setShouldRefreshTaskData}
       />
     )
   }
@@ -102,8 +113,7 @@ const TaskAllocation = () => {
         toListTableRows(
           response.list,
           shouldRefreshAllocationsData,
-          setShouldRefreshAllocationsData,
-          setShouldRefreshTaskData
+          setShouldRefreshAllocationsData
         )
       )
       setTableItems(response.list)
@@ -165,10 +175,13 @@ const TaskAllocation = () => {
                 typographyVariant: 'medium',
                 backgroundColor: '#0970E6',
                 desktopIcon: <EditActionIcon />,
-                onClick: (e, rowId) => selectRow(tableItems.find(item => item.taskTemplateId === rowId))
+                onClick: (e, rowId) =>
+                  selectRow(tableItems.find(item => item.taskTemplateId === rowId))
               }
             ]}
             rowActionsWidth="90px"
+            selectedRowId={selectedRowId}
+            shouldRefreshedSelectedRowDetails={shouldRefreshAllocationsData}
           />
           <EditCurrentTaskTemplate
             isModalOpen={isEditTaskModalOpen}

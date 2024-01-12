@@ -15,11 +15,10 @@ interface EmployeeProps {
   employee: any // TODO: To add type when db schema is defined
   task: any // TODO: To add type when db schema is defined
   setShouldRefreshData: Function
-  setShouldRefreshTaskData: Function
 }
 
 const Employee: React.FC<EmployeeProps> = props => {
-  const { employee, task, setShouldRefreshData, setShouldRefreshTaskData } = props
+  const { employee, task, setShouldRefreshData } = props
   const { showNotification } = useNotification()
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 900)
 
@@ -64,7 +63,7 @@ const Employee: React.FC<EmployeeProps> = props => {
     await makeCorePutRequest(`/volumetry/tasks/${employee.id}`, {
       action: 'START'
     })
-    setShouldRefreshTaskData(true)
+    setShouldRefreshData(true)
   }
 
   const { isLoading, mutate: handleStartTask } = useMutation(submitStartTask, {

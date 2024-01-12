@@ -5,12 +5,7 @@ import { getEmployeeGroupName } from './helpers'
 
 export const toDepartmentOptions = data => data.map(item => ({ label: item.name, value: item.id }))
 
-export const toListTableRows = (
-  items,
-  shouldRefreshData,
-  setShouldRefreshData,
-  setShouldRefreshTaskData
-) =>
+export const toListTableRows = (items, shouldRefreshData, setShouldRefreshData) =>
   items.map(item => ({
     id: item.taskTemplateId,
     summary: <TaskSummary item={item} />,
@@ -19,7 +14,6 @@ export const toListTableRows = (
         item={item}
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
-        setShouldRefreshTaskData={setShouldRefreshTaskData}
       />
     ),
     borderLeftColor: '#0970E6'
@@ -35,15 +29,10 @@ export const toEmployeeFilterItems = items =>
     }))
     .sort((a, b) => b.shiftCategory.localeCompare(a.shiftCategory))
 
-export const toEmployeesItems = (item, employees, setShouldRefreshData, setShouldRefreshTaskData) =>
+export const toEmployeesItems = (item, employees, setShouldRefreshData) =>
   employees.map(employee => ({
     id: employee.id,
     content: (
-      <Employee
-        employee={employee}
-        task={item}
-        setShouldRefreshData={setShouldRefreshData}
-        setShouldRefreshTaskData={setShouldRefreshTaskData}
-      />
+      <Employee employee={employee} task={item} setShouldRefreshData={setShouldRefreshData} />
     )
   }))
