@@ -32,10 +32,10 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const { showNotification } = useNotification()
 
   const editCurrentAllocation = async values => {
-    await makeCorePutRequest(
-      `/volumetry/tasks/${editItem ? editItem?.id : employee.id}`,
-      {...values, action: 'STOP'}
-    )
+    await makeCorePutRequest(`/volumetry/tasks/${editItem ? editItem?.id : employee.id}`, {
+      ...values,
+      ...(editItem ? { action: 'STOP' } : {})
+    })
   }
 
   const { isLoading, mutate } = useMutation(editCurrentAllocation, {
@@ -47,20 +47,19 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
         type: 'success'
       })
     },
-    onError: error =>
-      {
-        handleQueryError(
-          error,
-          `A aparut o eroare la ${editItem ? 'editarea alocarii' : 'oprirea taskului'}.`,
-          showNotification
-        )
-      }
+    onError: error => {
+      handleQueryError(
+        error,
+        `A aparut o eroare la ${editItem ? 'editarea alocarii' : 'oprirea taskului'}.`,
+        showNotification
+      )
+    }
   })
 
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    initialValues: editItem ? getFormInitialValues(editItem) : getFormInitialValues(employee),
+    initialValues: getFormInitialValues(editItem || employee),
     validationSchema: validationSchema,
     onSubmit: async (values: any, { resetForm }) => {
       mutate(values)
@@ -124,7 +123,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
             label="Mesaj"
             value={formik.values.message}
             width="100%"
-            onChange={(event: ChangeEvent<HTMLInputElement>) => 
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue('message', (event.target as HTMLInputElement).value)
             }
             rows={7}
