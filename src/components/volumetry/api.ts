@@ -5,24 +5,6 @@ import { fromTaskPayload, handleQueryError } from './utils'
 import { toEmployeeFilterItems } from './TaskAllocation/serializers'
 import { toDepartmentsOptions } from './serializers'
 
-export const getEmployeeNamesOptions = (showNotification: Function) => {
-  return useQuery(
-    ['employees-name'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/workers/employees')
-
-      const resultOptions = result.list.map(
-        (item): ValueLabelInterface => ({ label: item.fullName, value: item.fullName })
-      )
-
-      return resultOptions || []
-    },
-    {
-      onError: error => handleQueryError(error, 'Error while fetching employees ', showNotification)
-    }
-  )
-}
-
 export const getDepartmentsOptions = (
   showNotification: Function,
   setDefaultOptionCallback?: (defaultValue: ValueLabelInterface) => void
@@ -54,7 +36,7 @@ export const getJobTitlesOptions = (showNotification: Function) => {
   return useQuery(
     ['job-titles'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/workers/jobTitles')
+      const result = await makeCoreGetRequest('/volumetry/workers/job-titles')
       const resultOptions = result.list.map(
         (item: { id: number; jobTitle: string }): ValueLabelInterface => ({
           label: item.jobTitle,

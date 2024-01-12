@@ -22,9 +22,8 @@ interface EditAllocationModalProps {
 }
 
 const validationSchema = yup.object({
-  // id: yup.string().nonNullable(),
   workload: yup.number().required('Acest camp este obligatoriu.'),
-  message: yup.string()
+  comment: yup.string()
 })
 
 const EditAllocationModal = (props: EditAllocationModalProps) => {
@@ -34,7 +33,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const editCurrentAllocation = async values => {
     await makeCorePutRequest(`/volumetry/tasks/${editItem ? editItem?.id : employee.id}`, {
       ...values,
-      ...(editItem ? { action: 'STOP' } : {})
+      ...(employee ? { action: 'STOP' } : {})
     })
   }
 
@@ -121,12 +120,12 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           <Input
             type="textarea"
             variant="outlined"
-            name="message"
+            name="comment"
             label="Mesaj"
-            value={formik.values.message}
+            value={formik.values.comment}
             width="100%"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('message', (event.target as HTMLInputElement).value)
+              formik.setFieldValue('comment', (event.target as HTMLInputElement).value)
             }
             rows={7}
           />

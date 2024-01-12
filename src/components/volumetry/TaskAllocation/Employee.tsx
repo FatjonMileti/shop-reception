@@ -105,14 +105,12 @@ const Employee: React.FC<EmployeeProps> = props => {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          {employee.comments ? (
+          {taskCurrentState.isTaskEnded ? (
             <Box className={s.message}>
-              <ChatIcon />
-              <Box className={s.customText}>{employee.comments}</Box>
+              {employee.comments && <ChatIcon />}
+              <Box className={s.customText}>{employee.comments || 'Finalizat'}</Box>
             </Box>
-          ) : !taskCurrentState.isTaskStarted && !taskCurrentState.isTaskEnded ? (
-            <></>
-          ) : (
+          ) : taskCurrentState.isTaskStarted ? (
             <Box className={s.progressBarContainer}>
               <Grid container>
                 <Grid item xs={9} sx={{ alignSelf: 'center' }}>
@@ -136,6 +134,8 @@ const Employee: React.FC<EmployeeProps> = props => {
                 </Grid>
               </Grid>
             </Box>
+          ) : (
+            <></>
           )}
         </Grid>
 

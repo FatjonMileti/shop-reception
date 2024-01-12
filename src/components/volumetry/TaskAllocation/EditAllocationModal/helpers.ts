@@ -1,7 +1,4 @@
-export const getFormInitialValues = editItem =>
-  editItem
-    ? {
-        workload: editItem?.workload || '',
-        // message: editItem?.message || ''
-      }
-    : { workload: '' }
+export const getFormInitialValues = editItem => ({
+  workload: editItem?.workload || '',
+  comment: editItem?.comments || ''
+})

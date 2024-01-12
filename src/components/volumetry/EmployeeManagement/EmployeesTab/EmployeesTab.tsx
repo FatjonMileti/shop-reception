@@ -8,11 +8,7 @@ import { toTableRowItems } from './serializers'
 import { EmployeeManagementItem } from 'components/volumetry/interfaces'
 import { columns } from './helpers'
 import { Autocomplete, Input } from '@fullscreendigital/carrefour-dex-fe'
-import {
-  getDepartmentsOptions,
-  getEmployeeNamesOptions,
-  getJobTitlesOptions
-} from 'components/volumetry/api'
+import { getDepartmentsOptions, getJobTitlesOptions } from 'components/volumetry/api'
 import { handleQueryError } from 'components/volumetry/utils'
 import { useNotification } from 'hooks'
 
@@ -25,7 +21,6 @@ const EmployeesTab = () => {
   const { showNotification } = useNotification()
 
   const { data: departmentsOptions } = getDepartmentsOptions(showNotification)
-  const { data: employeeNamesOptions } = getEmployeeNamesOptions(showNotification)
   const { data: jobTitlesOptions } = getJobTitlesOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -56,9 +51,7 @@ const EmployeesTab = () => {
       label: 'Nume',
       type: 'text',
       value: '',
-      filter: (
-        <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
-      )
+      filter: <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
     },
     {
       name: 'department',
