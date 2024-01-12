@@ -19,13 +19,8 @@ import { DescriptionText } from '../../../core-ui/DescriptionText'
 import { Autocomplete, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import { useQuery } from 'react-query'
 import s from '../../commonStyles.modules.scss'
-import {
-  RowActionType,
-  TableFiltersType
-} from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
-import { EditActionIcon } from '../../../../icons'
+import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
-import AddActionIcon from '../../../../icons/AddActionIcon'
 
 const columns: Column[] = [
   {
@@ -54,12 +49,29 @@ const columns: Column[] = [
   },
   {
     title: 'Furnizor',
-    field: 'provider'
+    field: 'suppliers'
+  },
+  {
+    title: 'Lot',
+    field: 'batch',
+    render: row => (
+      <BodyItem
+        name="Metoda fabricatie"
+        value={
+          <BooleanIcon value={row.batch} icon="Flag" onFailure="#FFFFFF" onSuccess="#33691E" />
+        }
+      />
+    )
   },
   {
     title: 'Metoda fabricatie',
     field: 'fabricationMethod',
-    render: row => <DescriptionText value={row.fabricationMethod} />
+    render: row => (
+      <BodyItem
+        name="Metoda fabricatie"
+        value={<DescriptionText value={row.fabricationMethod} />}
+      />
+    )
   },
   {
     field: 'clusterName',
@@ -267,32 +279,12 @@ export const ProductManagementTraceability = () => {
     }
   ]
 
-  const rowActions: RowActionType[] = [
-    {
-      label: 'Editeaza',
-      labelColor: 'white',
-      typographyVariant: 'medium',
-      backgroundColor: '#16a085',
-      onClick: (e, rowId) => alert(`Edit item: ${rowId}`),
-      desktopIcon: <EditActionIcon />
-    },
-    {
-      label: 'Sterge',
-      labelColor: 'white',
-      typographyVariant: 'medium',
-      backgroundColor: '#d9534f',
-      onClick: (e, rowId) => alert(`Delete item: ${rowId}`),
-      desktopIcon: <EditActionIcon />
-    }
-  ]
-
   return (
     <div className={s.mainContainer}>
       <ListTable
         totalCount={totalCount}
         isLoading={isLoading}
         filters={drawerFilters}
-        rowActions={rowActions}
         rows={tableItems.map(item => ({
           id: item.id,
           summary: (
@@ -331,13 +323,6 @@ export const ProductManagementTraceability = () => {
         }))}
         handleRemoteData={fetchData}
         rowActionsWidth="200px"
-        // toolbarActions={[
-        //   {
-        //     icon: <AddActionIcon />,
-        //     label: 'Add',
-        //     onClick: function noRefCheck() {}
-        //   },
-        // ]}
       />
     </div>
   )

@@ -66,8 +66,16 @@ export const columns = [
   },
   {
     title: 'Furnizor',
-    field: 'provider',
-    align: 'left'
+    field: 'suppliers',
+    align: 'left',
+  },
+  {
+    title: 'Lot',
+    field: 'batch',
+    align: 'left',
+    render: row => (
+      <BooleanIcon value={row.batch} icon="Flag" onFailure='#FFFFFF' onSuccess='#33691E' />
+    )
   },
   {
     title: 'Metoda fabricatie',
