@@ -44,7 +44,7 @@ VALUES
     (7, 'Administrare Angajati', 'EmployeeManagement', '/employeeManagement', true, 4),
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
     -- Shop Reception
-    (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5),
+    (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5);
     -- Bakery p2
     -- (10, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2);
 
@@ -103,7 +103,7 @@ VALUES
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
     (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 7),
     -- Shop Reception
-    (46, 'Admin magazin', 'UsersManagement', null, true, 9),
+    (46, 'Admin magazin', 'UsersManagement', null, true, 9);
     -- Bakery TRACEABILITY OP
     -- (47, 'Management produse', 'ProductManagementTO', null, true, 10),
     -- (48, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
@@ -112,7 +112,7 @@ VALUES
     -- (51, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
     -- (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10);
     -- Bakery ADMIN p2
-    (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10);
+    -- (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10);
 
 
 -- screen with activity id (some are first screens)
@@ -188,7 +188,7 @@ VALUES
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
     -- Shop Reception
-    (62, 'Screen 1', '', '/url', true, 46, true),
+    (62, 'Screen 1', '', '/url', true, 46, true);
     -- Bakery TRACEABILITY-OPERATOR
     -- (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
     -- (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
@@ -199,7 +199,7 @@ VALUES
     -- (69, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 52, true),
     -- (70, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 52, false);
     -- Bakery ADMIN p2
-    (71, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 53, true);
+    -- (71, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 53, true);
 
 -- UI Schema with activity id and screen id
 INSERT INTO
@@ -308,7 +308,7 @@ VALUES
     (4, 2), (4, 4), (4, 6),
     -- Bakery
     -- GG_RO_HQ_IT_DEX_BAKERY_ADMIN
-    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16), (5, 53),
+    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16),
     -- GG_RO_HQ_IT_DEX_BAKERY_STORE
     (6, 27), (6, 28), (6, 29), (6, 30), (6, 31),
     -- GG_RO_HQ_IT_DEX_BAKERY_REGION
