@@ -303,7 +303,7 @@ VALUES
     -- GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL
     (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6),
     -- GG_RO_HQ_IT_DEX_GOV_IT_PM
-    (3, 1), (3, 2), (3, 3), (3, 4), (3, 6),
+    (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (3, 6),
     -- GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
     (4, 2), (4, 4), (4, 6),
     -- Bakery
