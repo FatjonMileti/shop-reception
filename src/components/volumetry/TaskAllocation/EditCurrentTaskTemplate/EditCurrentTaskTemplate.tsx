@@ -21,7 +21,9 @@ interface EditCurrentTaskTemplateProps {
 
 const validationSchema = yup.object({
   id: yup.string().nonNullable(),
-  volume: yup.string().nonNullable()
+  workload: yup.string().nonNullable(),
+  allocatedWorkersNumber: yup.number()
+
 })
 
 const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
@@ -30,7 +32,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
   const { showNotification } = useNotification()
 
   const editCurrentTemplate = async values => {
-    await makeCorePutRequest(`/volumetry/task/${editItem?.taskTemplateId}`, values)
+    await makeCorePutRequest(`/volumetry/work-volumes/${editItem?.taskTemplateId}`, values)
   }
 
   const { isLoading, mutate } = useMutation(editCurrentTemplate, {
@@ -45,13 +47,14 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
     onError: error =>
       handleQueryError(error, 'A aparut o eroare la editarea volumului.', showNotification)
   })
-
+console.log('debug', editItem)
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
       id: editItem?.id || 0,
-      totalVolume: editItem?.totalWorkload
+      workload: editItem?.totalWorkload,
+      allocatedWorkersNumber: editItem?.allocatedWorkers
     },
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
@@ -73,13 +76,28 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
         <Grid xs={12} item>
           <Input
             type="text"
-            name="totalVolume"
+            name="workload"
             label="Volum"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('totalVolume', event.target.value)
+              formik.setFieldValue('workload', event.target.value)
             }
-            value={formik.values.totalVolume}
+            value={formik.values.workload}
+            style={{ width: '100%' }}
+          />
+        </Grid>
+
+
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            name="allocatedWorkersNumber"
+            label="Angajati repartizati"
+            variant="outlined"
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue('allocatedWorkersNumber', event.target.value)
+            }
+            value={formik.values.allocatedWorkersNumber}
             style={{ width: '100%' }}
           />
         </Grid>
