@@ -184,11 +184,11 @@ const ProductManagementRegion = () => {
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
-          filtersLabel='Filtreaza'
+          filtersLabel="Filtreaza"
           filtersButtonLabel="Filtreaza"
           appliedFiltersLabel="Filtre"
           cancelFiltersButtonLabel="Anuleaza"
-          applyFiltersButtonLabel='Aplica'
+          applyFiltersButtonLabel="Aplica"
         />}
       </Grid>
     </div>

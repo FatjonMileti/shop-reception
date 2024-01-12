@@ -3,6 +3,7 @@ import { IconCell } from 'components/core-ui/IconCell'
 import dayjs from 'dayjs'
 import { useMemo } from 'react';
 import { formatMonthsToRO } from 'utils/helpers';
+import 'dayjs/locale/ro'; // Import the Romanian locale
 
 export const ColumnsComponent = ( startDate: dayjs.Dayjs, endDate: dayjs.Dayjs ) => {
   const memoizedColumns = useMemo(() => columns(startDate, endDate), [startDate, endDate]);

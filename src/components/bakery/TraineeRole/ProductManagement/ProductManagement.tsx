@@ -182,11 +182,11 @@ const ProductManagement = () => {
             rowsPerPageOptions={[25, 50, 100]}
             filters={drawerFilters(familiesQuery, subfamiliesQuery)}
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
-            filtersLabel='Filtreaza'
+            filtersLabel="Filtreaza"
             filtersButtonLabel="Filtreaza"
             appliedFiltersLabel="Filtre"
             cancelFiltersButtonLabel="Anuleaza"
-            applyFiltersButtonLabel='Aplica'
+            applyFiltersButtonLabel="Aplica"
             />
         )}
       </Grid>
