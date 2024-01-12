@@ -92,7 +92,7 @@ console.log('debug', editItem)
           <Input
             type="text"
             name="allocatedWorkersNumber"
-            label="Angajati repartizati"
+            label="Estimare alocare numar angajati"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue('allocatedWorkersNumber', event.target.value)

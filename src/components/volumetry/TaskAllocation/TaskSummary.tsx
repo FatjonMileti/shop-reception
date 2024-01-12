@@ -71,7 +71,7 @@ const TaskSummary = item => {
           <Capsule label="UM" value={standardProductivity} />
         </Grid>
         <Grid item mt={1} mr={1}>
-          <Capsule label="Angajari repartizati" value={allocatedWorkers} />
+          <Capsule label="Angajati repartizati" value={allocatedWorkers} />
         </Grid>
       </Grid>
     </Grid>
