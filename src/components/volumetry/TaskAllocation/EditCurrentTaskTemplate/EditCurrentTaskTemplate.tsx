@@ -51,7 +51,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
     validateOnChange: false,
     initialValues: {
       id: editItem?.id || 0,
-      totalVolume: editItem?.volume?.total || ''
+      totalVolume: editItem?.totalWorkload
     },
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
@@ -67,7 +67,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
         )}
 
         <Grid xs={12} item>
-          <FormInfoItems items={[{ label: 'Nume:', name: editItem['taskName'] }]} />
+          <FormInfoItems items={[{ label: 'Nume:', name: editItem.taskName }]} />
         </Grid>
 
         <Grid xs={12} item>

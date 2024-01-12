@@ -165,7 +165,7 @@ const TaskAllocation = () => {
                 typographyVariant: 'medium',
                 backgroundColor: '#0970E6',
                 desktopIcon: <EditActionIcon />,
-                onClick: (e, rowId) => selectRow(tableItems.find(item => item.id === rowId))
+                onClick: (e, rowId) => selectRow(tableItems.find(item => item.taskTemplateId === rowId))
               }
             ]}
             rowActionsWidth="90px"
