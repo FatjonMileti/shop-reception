@@ -22,9 +22,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const [selectedRow, setSelectedRow] = useState(null) // TODO: To add interface when db schema is defined
 
   useEffect(() => {
-    setEmployeesItems(
-      toEmployeesItems(item, employees, setShouldRefreshData)
-    )
+    setEmployeesItems(toEmployeesItems(item, employees, setShouldRefreshData))
   }, [employees])
 
   const [modal, setModal] = useState<CRUDAction>(null)
@@ -116,6 +114,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         editItem={selectedRow}
         task={item}
         setShouldRefreshData={setShouldRefreshData}
+        employee={employees.find(item => item.id === selectedRow?.id)}
       />
       <DeleteConfirmationModal
         isModalOpen={modal === 'delete'}

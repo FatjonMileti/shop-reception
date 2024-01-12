@@ -12,6 +12,7 @@ import { useNotification } from 'hooks'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
 import { handleQueryError } from '../utils'
+import * as yup from 'yup'
 
 interface AssignEmployeeProps {
   isModalOpen: boolean
@@ -58,9 +59,16 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
       handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
+  const validationSchema = yup.object({
+    workerId: yup.number().required('Acest camp este obligatoriu.'),
+    taskTemplateId: yup.number().required('Acest camp este obligatoriu.'),
+    workload: yup.number().required('Acest camp este obligatoriu.')
+  })
+
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
+    validationSchema: validationSchema,
     initialValues: {
       workerId: null,
       taskTemplateId: taskTemplateId,
@@ -104,6 +112,9 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
               options={employeeOptions}
               onChange={(employee: any) => formik.setFieldValue('workerId', employee?.value)}
               groupBy={option => option.groupBy}
+              error={!!formik.errors.workerId}
+              helperText={formik.errors.workerId as string}
+              required
             />
           )}
         </Grid>
@@ -119,6 +130,9 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
             }
             value={formik.values.workload}
             style={{ width: '100%' }}
+            error={!!formik.errors.workload}
+            helperText={formik.errors.workload as string}
+            required
           />
         </Grid>
 

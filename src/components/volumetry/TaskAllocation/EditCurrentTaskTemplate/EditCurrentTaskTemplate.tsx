@@ -21,7 +21,7 @@ interface EditCurrentTaskTemplateProps {
 
 const validationSchema = yup.object({
   id: yup.string().nonNullable(),
-  workload: yup.string().nonNullable(),
+  workload: yup.number().required('Acest camp este obligatoriu.'),
   allocatedWorkersNumber: yup.number()
 
 })
@@ -47,7 +47,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
     onError: error =>
       handleQueryError(error, 'A aparut o eroare la editarea volumului.', showNotification)
   })
-console.log('debug', editItem)
+
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
@@ -75,7 +75,7 @@ console.log('debug', editItem)
 
         <Grid xs={12} item>
           <Input
-            type="text"
+            type="number"
             name="workload"
             label="Volum"
             variant="outlined"
@@ -84,6 +84,9 @@ console.log('debug', editItem)
             }
             value={formik.values.workload}
             style={{ width: '100%' }}
+            error={!!formik.errors.workload}
+            helperText={formik.errors.workload as string}
+            required
           />
         </Grid>
 
