@@ -34,7 +34,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const editCurrentAllocation = async values => {
     await makeCorePutRequest(`/volumetry/tasks/${editItem ? editItem?.id : employee.id}`, {
       ...values,
-      action: 'STOP'
+      ...(editItem ? { action: 'STOP' } : {})
     })
   }
 
@@ -59,7 +59,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    initialValues: editItem ? getFormInitialValues(editItem) : getFormInitialValues(employee),
+    initialValues: getFormInitialValues(editItem || employee),
     validationSchema: validationSchema,
     onSubmit: async (values: any, { resetForm }) => {
       mutate(values)
