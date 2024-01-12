@@ -95,7 +95,7 @@ const TeamDayOffManagement = () => {
   const closePublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(false)
 
   const rowActions = useMemo(() => {
-    let actions
+    let actions = []
 
     const selectRow = (rowId, action) => {
       const item = tableItems.find(item => item.id === rowId)
@@ -103,8 +103,9 @@ const TeamDayOffManagement = () => {
       action === 'edit' ? openEditModal() : openDeleteModal()
     }
 
-    if (canEdit || canDelete) {
+    if (canEdit) {
       actions = [
+        ...actions,
         {
           label: 'Edit',
           labelColor: 'white',
@@ -112,17 +113,23 @@ const TeamDayOffManagement = () => {
           desktopIcon: <EditActionIcon />,
           backgroundColor: '#0970E6',
           onClick: (e, rowId) => selectRow(rowId, 'edit')
-        },
-        {
-          label: 'Delete',
-          labelColor: 'white',
-          typographyVariant: 'medium',
-          backgroundColor: '#CC4010',
-          desktopIcon: <DeleteActionIcon />,
-          onClick: (e, rowId) => selectRow(rowId, 'delete')
         }
       ]
     }
+    if (canDelete) {
+      actions = [
+        ...actions,
+        {
+          label: 'Edit',
+          labelColor: 'white',
+          typographyVariant: 'medium',
+          desktopIcon: <EditActionIcon />,
+          backgroundColor: '#0970E6',
+          onClick: (e, rowId) => selectRow(rowId, 'edit')
+        }
+      ]
+    }
+
     return actions
   }, [columns, canEdit, canDelete, teamMembers, tableItems])
 
