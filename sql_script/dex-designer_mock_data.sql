@@ -333,6 +333,7 @@ VALUES
     -- VOLUMETRY_TASK_ALLOCATOR
     (100, 42),
     (100, 44),
+    (100, 43),  -- temporary let this role access the task templates activity
     (100, 45),
     -- VOLUMETRY_WORKER
     (101, 44),
