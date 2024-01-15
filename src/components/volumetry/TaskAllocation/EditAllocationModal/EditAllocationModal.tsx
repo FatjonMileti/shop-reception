@@ -42,7 +42,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const editCurrentAllocation = async values => {
     await makeCorePutRequest(`/volumetry/tasks/${editItem ? editItem?.id : employee.id}`, {
       ...values,
-      ...(employee ? { action: 'STOP' } : {})
+      ...(editItem ? {} : { action: 'STOP' })
     })
   }
 
