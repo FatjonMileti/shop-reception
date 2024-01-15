@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import s from '../../commonStyles.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
@@ -131,7 +131,7 @@ const ProductGrowthIndex = () => {
           dynamicColumn="growth"
           rowActions={[
             {
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
@@ -143,6 +143,11 @@ const ProductGrowthIndex = () => {
           filters={drawerFilters}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
+          filtersLabel="Filtreaza"
+          filtersButtonLabel="Filtreaza"
+          appliedFiltersLabel="Filtre"
+          cancelFiltersButtonLabel="Anuleaza"
+          applyFiltersButtonLabel="Aplica"
         />
       </Grid>
     </div>

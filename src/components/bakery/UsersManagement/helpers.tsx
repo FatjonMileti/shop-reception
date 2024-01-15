@@ -44,21 +44,21 @@ export const columns = [
     collapsible: 'true',
     render: row => (
       <Box>
-        <IconCell value={row.enable ? 'active' : 'inactive'} />
+        <IconCell value={row.enable ? 'activ' : 'inactiv'} />
       </Box>
     )
   }
 ]
 
 export const statuses = [
-    { label: "Active", value: "Active" },
-    { label: "Inactive", value: "Inactive" }
+    { label: "Activ", value: "Activ" },
+    { label: "Inactiv", value: "Inactiv" }
 ]
 
 export const getInitialValues = editItem => ({
     id: editItem?.id ?? '',
     oidcId: editItem?.oidcId ?? '',
-    enable: editItem?.enable ? 'Active' : 'Inactive',
+    enable: editItem?.enable ? 'Activ' : 'Inactiv',
     email: editItem?.email ?? '',
     firstName: editItem?.firstName ?? '',
     lastName: editItem?.lastName ?? '',

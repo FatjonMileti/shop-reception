@@ -153,8 +153,9 @@ const UsageReport = () => {
               label="Magazin"
               options={stores}
               onSelect={val => handleFilterChange('store', val)}
+              placeholderButton="Selecteaza"
+              multiSelect={true}
               showSearch
-              multiSelect
             />
           </Grid>          
         </Grid>
@@ -180,6 +181,7 @@ const UsageReport = () => {
           frequency="day"
           toolbarActions={[
             {
+              label: 'Descarca',
               icon: <FileDownloadOutlined />,
               onClick: () => handleDownload()
             }

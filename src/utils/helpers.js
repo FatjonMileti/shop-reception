@@ -146,3 +146,22 @@ export const getFormErrors = (formItems, data) =>
     }
     return acc
   }, {})
+
+  export const formatMonthsToRO = (month) => {
+    switch (month) {
+      case 'January': return 'Ianuarie'
+      case 'February': return 'Februarie'
+      case 'March': return 'Martie'
+      case 'April': return 'Aprilie'
+      case 'May': return 'Mai'
+      case 'June': return 'Iunie'
+      case 'July': return 'Iulie'
+      case 'August': return 'August'
+      case 'September': return 'Septembrie'
+      case 'October': return 'Octombrie'
+      case 'November': return 'Noiembrie'
+      case 'December': return 'Decembrie'
+      default:
+        return
+    } 
+  }

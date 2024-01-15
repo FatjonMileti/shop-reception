@@ -101,7 +101,7 @@ export const columns = [
     align: 'left',
     render: (row: TableItem) => (
       <Box>
-        <IconCell value={row.scheduleProduct ? 'active' : 'inactive'} />
+        <IconCell value={row.scheduleProduct ? 'activ' : 'inactiv'} />
       </Box>
     )
   },
@@ -116,7 +116,7 @@ export const columns = [
     align: 'left',
     render: (row: TableItem) => (
       <Box>
-        <IconCell value={row.newProduct ? 'active' : 'inactive'} />
+        <IconCell value={row.newProduct ? 'activ' : 'inactiv'} />
       </Box>
     )
   }
