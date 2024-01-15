@@ -13,7 +13,13 @@ import { handleQueryError } from '../utils'
 import { CreateEditTask } from './CreateEditTask'
 import { VOLUMETRY_TASKS_URL } from './constants'
 import { buildTableFilterFields } from './utils'
-import { getCategoriesOptions, getDepartmentsOptions } from '../api'
+import {
+  getCategoriesOptions,
+  getDepartmentsOptions,
+  getFrequencyOptions,
+  getPrioritiesOptions,
+  getWorkVolumesOptions
+} from '../api'
 import { useNotification } from 'hooks'
 
 export const columns = [
@@ -35,28 +41,32 @@ export const columns = [
     field: 'recommendedStartHour',
     align: 'left',
     type: 'string',
-    collapsible: true
+    collapsible: true,
+    disableSorting: true
   },
   {
     title: 'Ora recomandata de final',
     field: 'recommendedEndHour',
     align: 'left',
     type: 'string',
-    collapsible: true
+    collapsible: true,
+    disableSorting: true
   },
   {
     title: 'Frecventa',
     field: 'frequency',
     align: 'left',
     type: 'string',
-    collapsible: true
+    collapsible: true,
+    disableSorting: true
   },
   {
     title: 'Productivitate',
     field: 'standardProductivityValue',
     align: 'left',
     type: 'string',
-    collapsible: true
+    collapsible: true,
+    disableSorting: true
   },
   {
     title: 'Sursa volum de lucru',
@@ -106,6 +116,9 @@ const TaskManagement = () => {
 
   const { data: categoryOptions } = getCategoriesOptions(showNotification)
   const { data: departmentOptions } = getDepartmentsOptions(showNotification)
+  const { data: priorityOprions } = getPrioritiesOptions(showNotification)
+  const { data: frequencyOptions } = getFrequencyOptions(showNotification)
+  const { data: workVolumeOptions } = getWorkVolumesOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -155,7 +168,7 @@ const TaskManagement = () => {
         />
         <Table
           hideCheckbox
-          orderBy="department.name"
+          orderBy="name"
           order="desc"
           columns={columns}
           items={tableItems}
@@ -164,7 +177,13 @@ const TaskManagement = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          filters={buildTableFilterFields(departmentOptions || [], categoryOptions || [])}
+          filters={buildTableFilterFields(
+            departmentOptions || [],
+            categoryOptions || [],
+            priorityOprions || [],
+            frequencyOptions || [],
+            workVolumeOptions || []
+          )}
           rowActions={[
             {
               label: 'Edit',

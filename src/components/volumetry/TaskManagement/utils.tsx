@@ -5,15 +5,11 @@ import { AutocompleteOption } from '../interfaces'
 
 export const buildTableFilterFields = (
   departmentOptions: AutocompleteOption[],
-  categoryOptions: AutocompleteOption[]
+  categoryOptions: AutocompleteOption[],
+  priorityOptions: AutocompleteOption[],
+  frequencyOptions: AutocompleteOption[],
+  workVolumeOptions: AutocompleteOption[]
 ) => [
-  {
-    name: 'rayonsOrDepartment',
-    label: 'Dapartament',
-    type: 'autocomplete',
-    value: '',
-    filter: <Autocomplete label="Departament" variant="outlined" options={departmentOptions} />
-  },
   {
     name: 'name',
     label: 'Nume Task',
@@ -21,24 +17,50 @@ export const buildTableFilterFields = (
     filter: <Input type="text" name="name" label="Nume" variant="outlined" />
   },
   {
-    name: 'priority',
-    label: 'Prioritate',
-    type: 'number',
-    filter: <Input type="number" name="priority" label="Prioritate" variant="outlined" />
-  },
-  {
-    name: 'state',
-    label: 'Stare',
+    name: 'genericDepartmentId',
+    label: 'Dapartament',
     type: 'autocomplete',
     value: '',
-    filter: <Autocomplete label="Stare" variant="outlined" options={STATE_OPTIONS} />
+    filter: <Autocomplete label="Departament" variant="outlined" options={departmentOptions} />
   },
   {
-    name: 'volumetryLocationCategory',
+    name: 'frequency',
+    label: 'Frecventa',
+    type: 'autocomplete',
+    value: '',
+    filter: <Autocomplete label="Frecventa" variant="outlined" options={frequencyOptions} />
+  },
+  {
+    name: 'priorityId',
+    label: 'Prioritate',
+    type: 'autocomplete',
+    value: '',
+    filter: <Autocomplete label="Prioritate" variant="outlined" options={priorityOptions} />
+  },
+  {
+    name: 'workVolumeSourceId',
+    label: 'Sursa volum de lucru',
+    type: 'autocomplete',
+    value: '',
+    filter: (
+      <Autocomplete label="Sursa volum de lucru" variant="outlined" options={workVolumeOptions} />
+    )
+  },
+
+  {
+    name: 'volumetryLocationCategoryId',
     label: 'Categorie',
     type: 'autocomplete',
     value: '',
     filter: <Autocomplete label="Categorie" variant="outlined" options={categoryOptions} />
+  },
+
+  {
+    name: 'isActive',
+    label: 'Stare',
+    type: 'autocomplete',
+    value: '',
+    filter: <Autocomplete label="Stare" variant="outlined" options={STATE_OPTIONS} />
   }
 ]
 
