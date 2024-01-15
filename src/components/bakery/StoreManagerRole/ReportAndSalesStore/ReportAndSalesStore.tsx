@@ -9,11 +9,10 @@ import { useNotification } from 'hooks'
 import { SubfamilyItem, TableItem, TableState } from '../ProductionManagementStore/interfaces'
 import React, { useState } from 'react'
 import { Autocomplete, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
-import dayjs from 'dayjs'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { DownloadOutlined } from '@mui/icons-material'
 import { columns } from './helpers'
-import { formatAndDownloadResponse, getCurrentDate } from 'utils/helpers'
+import { formatAndDownloadResponse, getPreviousDay } from 'utils/helpers'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 
@@ -159,17 +158,17 @@ const ReportAndSalesStore = () => {
     }
   }
 
-  const currentDate = getCurrentDate()
+  const prevDay = getPreviousDay()
 
   const drawerFilters = [
     {
       name: 'date',
-      value: currentDate,
+      value: prevDay,
       filter: (
         <DatePicker
           label="Planificare pentru"
           variant="outlined"
-          value={currentDate}
+          value={prevDay}
           onChange={() => {}}
           required
         />

@@ -205,6 +205,7 @@ const CadentierReportAndSales = () => {
             label="Magazin"
             options={storesFilterOptions}
             onSelect={handleStoreFilterChange}
+            showSearch
           />
         </Grid>
       </Grid>

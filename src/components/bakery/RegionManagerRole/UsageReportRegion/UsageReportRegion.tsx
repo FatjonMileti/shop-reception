@@ -15,6 +15,7 @@ import dayjs from 'dayjs'
 import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { ColumnsComponent, formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
+import { formatPayloadDate, getPreviousDay } from 'utils/helpers'
 
 const UsageReportRegion = () => {
   const { showNotification } = useNotification()
@@ -24,8 +25,8 @@ const UsageReportRegion = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([])
-  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
-  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
+  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
+  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
 
   const { data: storesFilterOptions } = useQuery(
     ['store'],
@@ -48,8 +49,8 @@ const UsageReportRegion = () => {
     setIsLoading(true)
     try {
       const filters = [
-        { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-        { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+        { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+        { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
         { name: 'store', value: storeFilterValue?.map(val => val.value) },
       ].filter(
         f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
@@ -99,8 +100,8 @@ const UsageReportRegion = () => {
 
   const handleDownload = async () => {
     const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+      { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
       { name: 'store', value: storeFilterValue?.map(val => val.value) },
     ].filter(
       f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
@@ -152,6 +153,7 @@ const UsageReportRegion = () => {
               label="Magazin"
               options={storesFilterOptions}
               onSelect={val => handleFilterChange('store', val)}
+              showSearch
             />
           </Grid>
         </Grid>

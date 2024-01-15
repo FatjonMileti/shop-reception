@@ -3,6 +3,7 @@ import { IconCell } from 'components/core-ui/IconCell'
 import { ImageCell } from 'components/core-ui/ImageCell'
 import { TableItem } from './interfaces'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { DescriptionText } from 'components/core-ui/DescriptionText'
 
 export const columns = [
   {
@@ -73,7 +74,12 @@ export const columns = [
   {
     title: 'Metoda fabricatie',
     field: 'fabricationMethod',
-    align: 'left'
+    align: 'left',
+    render: row => (
+      <Box>
+        <DescriptionText value={row.fabricationMethod} />      
+      </Box>
+    )
   },
   {
     title: 'Cluster',

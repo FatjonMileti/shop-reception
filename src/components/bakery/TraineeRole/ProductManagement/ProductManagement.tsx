@@ -154,6 +154,7 @@ const ProductManagement = () => {
               label="Magazin"
               options={filterOptions}
               onSelect={handleStoreFilterChange}
+              showSearch
             />
           </Grid>
         </Grid>

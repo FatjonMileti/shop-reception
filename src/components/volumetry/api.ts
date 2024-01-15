@@ -72,6 +72,38 @@ export const getJobTitlesOptions = (showNotification: Function) => {
   )
 }
 
+export const getLocationsOptions = (
+  showNotification: Function,
+  setLocationsFilterValue: Function,
+  canUseCustomFilter: boolean
+) => {
+  return useQuery(
+    ['locations'],
+    async () => {
+      if (canUseCustomFilter) {
+        const result = await makeCoreGetRequest('/volumetry/locations/summary')
+        const resultOptions = result.map(
+          (item: { id: number; name: string }): ValueLabelInterface => ({
+            label: item.name,
+            value: item.id
+          })
+        )
+        if (resultOptions) {
+          setLocationsFilterValue(resultOptions[0])
+        }
+
+        return resultOptions || []
+      }
+
+      return []
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea listei magazinelor.', showNotification)
+    }
+  )
+}
+
 export const getContractorsNamesOptions = (showNotification: Function) => {
   return useQuery(
     ['contractors-names'],

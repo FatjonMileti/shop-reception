@@ -5924,18 +5924,18 @@
       "responseMode": null
     },
     {
-      "uuid": "171194ac-9ac8-4bec-97bc-d0bab4a5fd84",
+      "uuid": "c6e0bdf5-60f6-4a82-81ff-1870ec8d0115",
       "type": "http",
-      "documentation": "Get eval reports",
+      "documentation": "Get list of locations",
       "method": "get",
-      "endpoint": "employee/evaluationReports/export/csv",
+      "endpoint": "locations/summary",
       "responses": [
         {
-          "uuid": "167f2829-363c-458f-8da7-e04ef62d7b36",
-          "body": "{}",
+          "uuid": "22af58c1-8264-46fe-9fa9-d89ac9a047c2",
+          "body": "[\n  {\n    \"id\": \"1234\",\n    \"name\": \"Bistrita\"\n  },\n  {\n    \"id\": \"3456\",\n    \"name\": \"Cluj - Vivo\"\n  },\n  {\n    \"id\": \"5678\",\n    \"name\": \"Suceava - Iulius\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained the report",
+          "label": "Successfully obtained list of locations",
           "headers": [
             {
               "key": "Content-Type",
@@ -5955,7 +5955,7 @@
           "callbacks": []
         },
         {
-          "uuid": "f3803748-7c30-410e-83ad-9d425aa420a7",
+          "uuid": "0fcbf176-a692-45dd-b264-6552a34c0f14",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 400,
@@ -5979,7 +5979,7 @@
           "callbacks": []
         },
         {
-          "uuid": "3019a999-7671-4aae-87be-93c55efd5240",
+          "uuid": "85a0816f-bfa0-4862-8d36-e6203e92575a",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 401,
@@ -6003,7 +6003,7 @@
           "callbacks": []
         },
         {
-          "uuid": "1f27b09e-4682-4a0e-bac9-de4f412cbcbd",
+          "uuid": "793c4b82-e3f2-484d-91bb-2cda66bccc13",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 403,
@@ -6027,7 +6027,7 @@
           "callbacks": []
         },
         {
-          "uuid": "b08fe2d8-af68-405a-8df7-0d8174347662",
+          "uuid": "2aa4b966-f37c-4ca9-930c-75a8e14e493b",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 404,
@@ -6051,7 +6051,7 @@
           "callbacks": []
         },
         {
-          "uuid": "5657d90f-7995-431a-872e-ab886a24c0ca",
+          "uuid": "25d1fc87-d824-445b-9690-e35aad8a43e1",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -6241,7 +6241,7 @@
     },
     {
       "type": "route",
-      "uuid": "171194ac-9ac8-4bec-97bc-d0bab4a5fd84"
+      "uuid": "c6e0bdf5-60f6-4a82-81ff-1870ec8d0115"
     }
   ],
   "proxyMode": false,

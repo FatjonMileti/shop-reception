@@ -59,7 +59,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    initialValues: getFormInitialValues(editItem),
+    initialValues: editItem ? getFormInitialValues(editItem) : getFormInitialValues(employee),
     validationSchema: validationSchema,
     onSubmit: async (values: any, { resetForm }) => {
       mutate(values)
