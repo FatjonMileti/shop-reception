@@ -84,7 +84,7 @@ const GrowthIndex = () => {
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[
             {
-              label: 'View',
+              label: 'Vizualizeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#000000',
@@ -92,7 +92,7 @@ const GrowthIndex = () => {
               onClick: (e, rowId) => selectRow(rowId, 'view')
             },
             {
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#000000',

@@ -9,8 +9,8 @@ export const divisionTypes = [
 ]
 
 export const statuses = [
-    { label: "Active", value: "Active" },
-    { label: "Inactive", value: "Inactive" }
+    { label: "Activ", value: "Activ" },
+    { label: "Inactiv", value: "Inactiv" }
 ]
 
 export const columns = [
@@ -48,7 +48,7 @@ export const columns = [
       collapsible: 'true',
       render: row => (
         <Box>
-          <IconCell value={row.enable ? 'active' : 'inactive'} />
+          <IconCell value={row.enable ? 'activ' : 'inactiv'} />
         </Box>
       )
     }
@@ -63,7 +63,7 @@ export const getInitialValues = editItem => ({
     ...(editItem?.id ? { id: editItem?.id } : {}),
     name: editItem?.name ?? '',
     responsible: editItem?.responsible ?? '',
-    enable: editItem?.enable ? 'Active' : 'Inactive',
+    enable: editItem?.enable ? 'Activ' : 'Inactiv',
     divisionType: editItem?.divisionType ?? '',
     stores: editItem?.stores ?? []
 })

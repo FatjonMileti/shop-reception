@@ -96,7 +96,7 @@ const EditProduct: React.FC<EditProductProps> = props => {
     })
     
     return (
-        <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'} modalWidth="50%">
+        <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Editeaza'} modalWidth="50%">
           <Grid container spacing={2}>
             {(isLoading || isLoadingEditItem) ? (
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -124,8 +124,8 @@ const EditProduct: React.FC<EditProductProps> = props => {
               </Grid>
         
               <Grid xs={12} item className={s.modalButtons}>
-                <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-                <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+                <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+                <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
               </Grid>
             </>)}
           </Grid>

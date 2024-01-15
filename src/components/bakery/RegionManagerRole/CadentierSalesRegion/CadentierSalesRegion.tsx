@@ -205,6 +205,7 @@ const CadentierSalesRegion = () => {
               label="Magazin"
               options={stores}
               onSelect={handleStoreFilterChange}
+              placeholderButton="Selecteaza"
               showSearch
             />
           </Grid>
@@ -245,7 +246,11 @@ const CadentierSalesRegion = () => {
               handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
               rowsPerPage={25}
               rowsPerPageOptions={[25, 50, 100]}
-              
+              filtersLabel="Filtreaza"
+              filtersButtonLabel="Filtreaza"
+              appliedFiltersLabel="Filtre"
+              cancelFiltersButtonLabel="Anuleaza"
+              applyFiltersButtonLabel="Aplica"
           />
         </Box>
       )}

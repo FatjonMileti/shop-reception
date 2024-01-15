@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Divider, Grid } from '@mui/material'
+import { Box, Divider, Grid } from '@mui/material'
 import s from '../../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import React, { useState } from 'react'
@@ -192,7 +192,7 @@ const ProductManagementStore = () => {
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[
             {
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
@@ -205,6 +205,11 @@ const ProductManagementStore = () => {
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
+          filtersLabel="Filtreaza"
+          filtersButtonLabel="Filtreaza"
+          appliedFiltersLabel="Filtre"
+          cancelFiltersButtonLabel="Anuleaza"
+          applyFiltersButtonLabel="Aplica"
         />
       </Box>
     </div>

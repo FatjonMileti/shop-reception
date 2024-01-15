@@ -2,6 +2,7 @@ import { Box } from '@mui/material'
 import { IconCell } from 'components/core-ui/IconCell'
 import dayjs from 'dayjs'
 import { useMemo } from 'react';
+import { formatMonthsToRO } from 'utils/helpers';
 import { getPreviousDay } from 'utils/helpers';
 
 export const ColumnsComponent = ( startDate: dayjs.Dayjs, endDate: dayjs.Dayjs ) => {
@@ -47,8 +48,8 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
 
   while (currentDate.isBefore(endDate) || currentDate.isSame(endDate, 'day')) {
     const day = dayjs(currentDate).format('D')
-    const month = dayjs(currentDate).format('MMMM')
-    
+    const month = formatMonthsToRO(dayjs(currentDate).format('MMMM'))
+
     printCandentierColumns.push({
       title: `Descarcare Cadantier ${day} ${month}`,
       field: 'printCadentier',
