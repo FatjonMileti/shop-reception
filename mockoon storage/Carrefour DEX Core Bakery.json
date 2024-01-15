@@ -2755,11 +2755,11 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "report/application",
+      "endpoint": "report/application/x",
       "responses": [
         {
           "uuid": "789ddc76-8396-4954-b6d8-d3f58b5c11b5",
-          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"storeName\": \"PLOIESTI DEMOCRATIEI\",\r\n            \"username\": \"silvia_sulea\",\r\n            \"lastAccess\": \"2023-12-15\",\r\n            \"lastChange\": \"2023-09-26\",\r\n            \"applicationReportDynamicDtos\": [\r\n                {\r\n                    \"date\": \"2023-12-15\",\r\n                    \"printCadentier\": false,\r\n                    \"modifyCadentier\": false,\r\n                    \"modifyStoreGrowth\": false,\r\n                    \"modifyProductGrowth\": false,\r\n                    \"login\": true\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 1,\r\n        \"pageCount\": 1\r\n    }\r\n}",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"storeName\": \"PLOIESTI DEMOCRATIEI\",\r\n            \"username\": \"silvia_sulea\",\r\n            \"lastAccess\": \"2023-12-15\",\r\n            \"lastChange\": \"2023-09-26\",\r\n            \"applicationReportDynamicDtos\": [\r\n                {\r\n                    \"date\": \"2023-12-15\",\r\n                    \"printCadentier\": true,\r\n                    \"modifyCadentier\": false,\r\n                    \"modifyStoreGrowth\": false,\r\n                    \"modifyProductGrowth\": false,\r\n                    \"login\": true\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 1,\r\n        \"pageCount\": 1\r\n    }\r\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -5837,7 +5837,7 @@
       "responses": [
         {
           "uuid": "b31bd51f-3881-4d29-b848-116eb31d7a7d",
-          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"storeName\": \"601 BISTRITA\",\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastAccess\": \"2023-12-15\",\r\n            \"lastChange\": \"2023-12-12\",\r\n            \"applicationReportDynamicDtos\": [\r\n                {\r\n                    \"date\": \"2023-12-15\",\r\n                    \"printCadentier\": false,\r\n                    \"modifyCadentier\": false,\r\n                    \"modifyStoreGrowth\": false,\r\n                    \"modifyProductGrowth\": false,\r\n                    \"login\": true\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"storeName\": \"PLOIESTI DEMOCRATIEI\",\r\n            \"username\": \"silvia_sulea\",\r\n            \"lastAccess\": \"2023-12-15\",\r\n            \"lastChange\": \"2023-09-26\",\r\n            \"applicationReportDynamicDtos\": [\r\n                {\r\n                    \"date\": \"2023-12-15\",\r\n                    \"printCadentier\": false,\r\n                    \"modifyCadentier\": false,\r\n                    \"modifyStoreGrowth\": false,\r\n                    \"modifyProductGrowth\": false,\r\n                    \"login\": true\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 2,\r\n        \"pageCount\": 1\r\n    }\r\n}",
+          "body": "{\r\n    \"list\": [\r\n        {\r\n            \"storeName\": \"601 BISTRITA\",\r\n            \"username\": \"test_dex_bakery\",\r\n            \"lastAccess\": \"2024-01-10\",\r\n            \"lastChange\": \"2024-01-10\",\r\n            \"applicationReportDynamicDtos\": [\r\n                {\r\n                    \"date\": \"2024-01-14\",\r\n                    \"printCadentier\": true,\r\n                    \"modifyCadentier\": true,\r\n                    \"modifyStoreGrowth\": true,\r\n                    \"modifyProductGrowth\": true,\r\n                    \"login\": true\r\n                },\r\n                {\r\n                    \"date\": \"2024-01-04\",\r\n                    \"printCadentier\": false,\r\n                    \"modifyCadentier\": false,\r\n                    \"modifyStoreGrowth\": false,\r\n                    \"modifyProductGrowth\": false,\r\n                    \"login\": true\r\n                },\r\n                {\r\n                    \"date\": \"2024-01-05\",\r\n                    \"printCadentier\": false,\r\n                    \"modifyCadentier\": false,\r\n                    \"modifyStoreGrowth\": false,\r\n                    \"modifyProductGrowth\": false,\r\n                    \"login\": true\r\n                },\r\n                {\r\n                    \"date\": \"2024-01-08\",\r\n                    \"printCadentier\": false,\r\n                    \"modifyCadentier\": false,\r\n                    \"modifyStoreGrowth\": false,\r\n                    \"modifyProductGrowth\": false,\r\n                    \"login\": true\r\n                },\r\n                {\r\n                    \"date\": \"2024-01-09\",\r\n                    \"printCadentier\": false,\r\n                    \"modifyCadentier\": false,\r\n                    \"modifyStoreGrowth\": false,\r\n                    \"modifyProductGrowth\": false,\r\n                    \"login\": true\r\n                },\r\n                {\r\n                    \"date\": \"2024-01-10\",\r\n                    \"printCadentier\": false,\r\n                    \"modifyCadentier\": false,\r\n                    \"modifyStoreGrowth\": false,\r\n                    \"modifyProductGrowth\": true,\r\n                    \"login\": true\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"storeName\": \"CORBEANCA\",\r\n            \"username\": \"robert_portase\",\r\n            \"lastAccess\": \"2024-01-08\",\r\n            \"lastChange\": null,\r\n            \"applicationReportDynamicDtos\": [\r\n                {\r\n                    \"date\": \"2024-01-14\",\r\n                    \"printCadentier\": false,\r\n                    \"modifyCadentier\": false,\r\n                    \"modifyStoreGrowth\": false,\r\n                    \"modifyProductGrowth\": false,\r\n                    \"login\": true\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 5,\r\n        \"pageCount\": 1\r\n    }\r\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted stores list",
@@ -6631,6 +6631,40 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "d1bed4ae-f2dd-4d00-baa8-cd84cdc53747",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "region/application",
+      "responses": [
+        {
+          "uuid": "326cacc3-8d52-49cb-a95c-b7bc8f81a3f7",
+          "body": "{\r\n    \"list\": [],\r\n    \"page\": {\r\n        \"pageSize\": 25,\r\n        \"page\": 0,\r\n        \"totalCount\": 0,\r\n        \"pageCount\": 1\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6877,6 +6911,10 @@
     {
       "type": "route",
       "uuid": "7d371a03-ea20-45f7-8334-b80f996433eb"
+    },
+    {
+      "type": "route",
+      "uuid": "d1bed4ae-f2dd-4d00-baa8-cd84cdc53747"
     }
   ],
   "proxyMode": false,

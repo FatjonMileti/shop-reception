@@ -8,9 +8,8 @@ import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { ColumnsComponent, formatAndDownloadResponse } from './helpers'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useQuery } from 'react-query'
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableRowItems } from './serializers'
 import dayjs from 'dayjs'
 import { FileDownloadOutlined } from '@mui/icons-material'
@@ -148,14 +147,14 @@ const UsageReport = () => {
             />
           </Grid>
           <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
+            <FilterDataSelect
               name="store"
+              defaultSelectedData={storeFilterValue}
               label="Magazin"
-              value={storeFilterValue}
               options={stores}
-              onChange={(val) => handleFilterChange('store', val)}
-              multiple={true}
+              onSelect={val => handleFilterChange('store', val)}
+              showSearch
+              multiSelect
             />
           </Grid>          
         </Grid>
