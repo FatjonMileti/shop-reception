@@ -15,7 +15,7 @@ import dayjs from 'dayjs'
 import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { ColumnsComponent, formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
-import { formatPayloadDate, getPreviousDay } from 'utils/helpers'
+import { formatPayloadDate, getCurrentDate, getPreviousDay } from 'utils/helpers'
 
 const ApplicationUsageReport = () => {
   const { showNotification } = useNotification()
@@ -26,7 +26,7 @@ const ApplicationUsageReport = () => {
 
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([])
   const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
-  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
+  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getCurrentDate()))
 
   const { data: storesFilterOptions } = useQuery(
     ['store'],
