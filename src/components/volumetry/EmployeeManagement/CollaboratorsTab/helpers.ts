@@ -44,5 +44,6 @@ export const roles = {
     PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
     PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL,
     PermissionRoles.GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-  ]
+  ],
+  filterRoles: [PermissionRoles.GG_RO_HQ_IT_DEX_GOV_REGION_ADMIN]
 }

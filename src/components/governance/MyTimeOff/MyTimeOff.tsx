@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { useNotification } from 'hooks'
+import { useNotification, usePermissions } from 'hooks'
 import { useMemo, useState } from 'react'
 import { BasePageResponseModel } from 'shared/interfaces'
 import { makeCoreGetRequest } from 'utils/api'
@@ -14,8 +14,11 @@ import { TableRowModel, TimeOffModel } from './interfaces'
 import { toTableRowItems } from './serializers'
 import { AddActionIcon, CalendarActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { PublicHolidays } from '../PublicHolidays'
+import { roles } from './helpers'
 
 const MyTimeOff = () => {
+  const { canCreate, canEdit, canDelete } = usePermissions(roles)
+
   const [tableItems, setTableItems] = useState<TableRowModel[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -42,29 +45,41 @@ const MyTimeOff = () => {
   const closePublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(false)
 
   const rowActions = useMemo(() => {
+    let actions = []
+    
     const selectRow = (rowId: number, action: string) => {
       const item = tableItems.find(item => item.id === rowId)
       setSelectedRow(item)
       action === 'edit' ? openEditModal() : openDeleteModal()
     }
-    let actions = [
-      {
-        label: 'Edit',
-        labelColor: 'white',
-        typographyVariant: 'medium',
-        backgroundColor: '#0970E6',
-        desktopIcon: <EditActionIcon />,
-        onClick: (e, rowId) => selectRow(rowId, 'edit')
-      },
-      {
-        label: 'Delete',
-        labelColor: 'white',
-        typographyVariant: 'medium',
-        backgroundColor: '#CC4010',
-        desktopIcon: <DeleteActionIcon />,
-        onClick: (e, rowId) => selectRow(rowId, 'delete')
-      }
-    ]
+
+    if (canEdit) {
+      actions = [
+        ...actions,
+        {
+          label: 'Edit',
+          labelColor: 'white',
+          typographyVariant: 'medium',
+          backgroundColor: '#0970E6',
+          desktopIcon: <EditActionIcon />,
+          onClick: (e, rowId) => selectRow(rowId, 'edit')
+        }
+      ]
+    }
+
+    if (canDelete) {
+      actions = [
+        ...actions,
+        {
+          label: 'Delete',
+          labelColor: 'white',
+          typographyVariant: 'medium',
+          backgroundColor: '#CC4010',
+          desktopIcon: <DeleteActionIcon />,
+          onClick: (e, rowId) => selectRow(rowId, 'delete')
+        }
+      ]
+    }
 
     return actions
   }, [columns, tableItems])
@@ -140,7 +155,7 @@ const MyTimeOff = () => {
               icon: <CalendarActionIcon />,
               onClick: () => openPublicHolidaysModal()
             },
-            {
+            canCreate && {
               label: 'Adauga',
               icon: <AddActionIcon />,
               onClick: openNewModal

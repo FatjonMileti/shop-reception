@@ -44,7 +44,7 @@ VALUES
     (7, 'Administrare Angajati', 'EmployeeManagement', '/employeeManagement', true, 4),
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
     -- Shop Reception
-    (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5),
+    (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5);
     -- Bakery p2
     -- (10, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2);
 
@@ -103,7 +103,7 @@ VALUES
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
     (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 7),
     -- Shop Reception
-    (46, 'Admin magazin', 'UsersManagement', null, true, 9),
+    (46, 'Admin magazin', 'UsersManagement', null, true, 9);
     -- Bakery TRACEABILITY OP
     -- (47, 'Management produse', 'ProductManagementTO', null, true, 10),
     -- (48, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
@@ -112,7 +112,7 @@ VALUES
     -- (51, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
     -- (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10);
     -- Bakery ADMIN p2
-    (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10);
+    -- (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10);
 
 
 -- screen with activity id (some are first screens)
@@ -188,7 +188,7 @@ VALUES
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
     -- Shop Reception
-    (62, 'Screen 1', '', '/url', true, 46, true),
+    (62, 'Screen 1', '', '/url', true, 46, true);
     -- Bakery TRACEABILITY-OPERATOR
     -- (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
     -- (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
@@ -199,7 +199,8 @@ VALUES
     -- (69, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 52, true),
     -- (70, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 52, false);
     -- Bakery ADMIN p2
-    (71, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 53, true);
+    -- (71, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 53, true);
+
 
 -- UI Schema with activity id and screen id
 INSERT INTO
@@ -271,26 +272,30 @@ VALUES
 
 
 -- roles
-insert into
+INSERT INTO
 	"dex-designer".roles (id, role_name)
-values
-  -- Governance
-	(1, 'GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN'),
-	(2, 'GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL'),
-	(3, 'GG_RO_HQ_IT_DEX_GOV_IT_PM'),
-	(4, 'GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER'),
-	-- Bakery
-  (5, 'GG_RO_HQ_IT_DEX_BAKERY_ADMIN'),
-  (6, 'GG_RO_HQ_IT_DEX_BAKERY_STORE'),
-  (7, 'GG_RO_HQ_IT_DEX_BAKERY_REGION'),
-  (8, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE'),
-  (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
-  (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER'),
---   (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
--- Supply OMNI
-  (11, 'GG_RO_HQ_IT-C4ASSIST'),
-  -- Volumetry
-  (13, 'GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR');
+VALUES
+    -- Governance
+    (1, 'GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN'),
+    (2, 'GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL'),
+    (3, 'GG_RO_HQ_IT_DEX_GOV_IT_PM'),
+    (4, 'GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER'),
+	  -- Bakery
+    (5, 'GG_RO_HQ_IT_DEX_BAKERY_ADMIN'),
+    (6, 'GG_RO_HQ_IT_DEX_BAKERY_STORE'),
+    (7, 'GG_RO_HQ_IT_DEX_BAKERY_REGION'),
+    (8, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE'),
+    (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
+    (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER'),
+    -- (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
+    -- Supply OMNI
+    (11, 'GG_RO_HQ_IT-C4ASSIST'),
+    -- Volumetry
+    (100, 'VOLUMETRY_TASK_ALLOCATOR'),
+    (101, 'VOLUMETRY_WORKER'),
+    (102, 'VOLUMETRY_REGION_ADMIN'),
+    (103, 'VOLUMETRY_STORE_ADMIN'),
+    (104, 'VOLUMETRY_TEMPLATE_ADMIN');
 
 
 -- roles_activities
@@ -308,7 +313,7 @@ VALUES
     (4, 2), (4, 4), (4, 6),
     -- Bakery
     -- GG_RO_HQ_IT_DEX_BAKERY_ADMIN
-    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16), (5, 53),
+    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16),
     -- GG_RO_HQ_IT_DEX_BAKERY_STORE
     (6, 27), (6, 28), (6, 29), (6, 30), (6, 31),
     -- GG_RO_HQ_IT_DEX_BAKERY_REGION
@@ -325,18 +330,30 @@ VALUES
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
     -- Volumetry
-    -- GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR
-    (13, 42),
-    (13, 43),
-    (13, 44),
-    (13, 45);
+    -- VOLUMETRY_TASK_ALLOCATOR
+    (100, 42),
+    (100, 44),
+    (100, 43),  -- temporary let this role access the task templates activity
+    (100, 45),
+    -- VOLUMETRY_WORKER
+    (101, 44),
+    -- VOLUMETRY_REGION_ADMIN
+    (102, 42),
+    (102, 44),
+    (102, 45),
+    -- VOLUMETRY_STORE_ADMIN
+    (103, 42),
+    (103, 44),
+    (103, 45),
+    -- VOLUMETRY_TEMPLATE_ADMIN
+    (104, 43);
     -- Shop Reception
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     -- (1, 46);
 
 
 -- reset sequences
-SELECT setval('"dex-designer".seq_id_roles', 100, true);
+SELECT setval('"dex-designer".seq_id_roles', 200, true);
 SELECT setval('"dex-designer".seq_id_ui_schema', 100, true);
 SELECT setval('"dex-designer".seq_id_screen', 100, true);
 SELECT setval('"dex-designer".seq_id_activity', 100, true);

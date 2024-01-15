@@ -34,19 +34,19 @@ const Employee: React.FC<EmployeeProps> = props => {
   }, [])
 
   const taskCurrentState = useMemo(() => {
-    const isTaskStarted = employee.startTime.isStarted
-    const isTaskEnded = employee.endTime.isEnded
+    const isTaskStarted = employee.timerStatus === 'IN_PROGRESS'
+    const isTaskEnded = employee.timerStatus === 'FINISHED'
 
     const showStartButton = !isTaskStarted && !isTaskEnded
     const showStopButton = isTaskStarted && !isTaskEnded
 
     return { isTaskStarted, isTaskEnded, showStartButton, showStopButton }
-  }, [employee.startTime.isStarted, employee.endTime.isEnded])
+  }, [employee.timerStatus])
 
   const customCapsuleColors = getCapsuleColor(
     taskCurrentState.isTaskStarted,
     taskCurrentState.isTaskEnded,
-    employee.isOverdue
+    employee.progressProportion > 100
   )
 
   const [isOpenStopTaskModal, setIsOpenStopTaskModal] = useState<boolean>(false)
@@ -60,9 +60,10 @@ const Employee: React.FC<EmployeeProps> = props => {
   }
 
   const submitStartTask = async () => {
-    await makeCorePutRequest(`/volumetry/taskAllocation/start/${task.id}`, {
-      isStarted: true
+    await makeCorePutRequest(`/volumetry/tasks/${employee.id}`, {
+      action: 'START'
     })
+    setShouldRefreshData(true)
   }
 
   const { isLoading, mutate: handleStartTask } = useMutation(submitStartTask, {
@@ -82,7 +83,7 @@ const Employee: React.FC<EmployeeProps> = props => {
         <Grid item xs={12} md={2}>
           <Box className={s.employeeInfo}>
             <EmployeeIcon />
-            <p className={s.employeeName}>{employee.employee.name}</p>
+            <p className={s.employeeName}>{employee.workerFullName}</p>
           </Box>
         </Grid>
 
@@ -90,13 +91,13 @@ const Employee: React.FC<EmployeeProps> = props => {
           <Box className={s.capsules}>
             <Capsule
               label={'Interval orar'}
-              value={`${employee.startTime.time} - ${employee.endTime.time}`}
+              value={employee.timeInterval}
               labelColor={customCapsuleColors.label}
               valueColor={customCapsuleColors.value}
             />
             <Capsule
               label={'Volum'}
-              value={`${employee.volume.value}`}
+              value={`${employee.workload}`}
               labelColor={customCapsuleColors.label}
               valueColor={customCapsuleColors.value}
             />
@@ -104,37 +105,37 @@ const Employee: React.FC<EmployeeProps> = props => {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          {employee.customText ? (
+          {taskCurrentState.isTaskEnded ? (
             <Box className={s.message}>
-              <ChatIcon />
-              <Box className={s.customText}>{employee.customText}</Box>
+              {employee.comments && <ChatIcon />}
+              <Box className={s.customText}>{employee.comments || 'Finalizat'}</Box>
             </Box>
-          ) : !taskCurrentState.isTaskStarted && !taskCurrentState.isTaskEnded ? (
-            <></>
-          ) : (
+          ) : taskCurrentState.isTaskStarted ? (
             <Box className={s.progressBarContainer}>
               <Grid container>
                 <Grid item xs={9} sx={{ alignSelf: 'center' }}>
                   <Box mr={1}>
                     <LinearProgress
                       variant="determinate"
-                      value={employee.progress}
+                      value={employee.progressProportion > 100 ? 100 : employee.progressProportion}
                       color={customCapsuleColors.progress as 'error' | 'success'}
                     />
                   </Box>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                   <Box sx={{ alignSelf: 'center' }}>
                     <span
                       className={s.employeeProgress}
                       style={{ background: customCapsuleColors.value }}
                     >
-                      {employee.progress}%
+                      {employee.progressProportion}%
                     </span>
                   </Box>
                 </Grid>
               </Grid>
             </Box>
+          ) : (
+            <></>
           )}
         </Grid>
 

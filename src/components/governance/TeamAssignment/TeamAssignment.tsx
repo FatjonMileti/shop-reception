@@ -16,6 +16,7 @@ import { EditTeamAssignment } from './EditTeamAssignment'
 import { toTableRowItems } from './serializers'
 import { EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { roles } from '../helpers'
 
 const columns = [
   {
@@ -63,6 +64,7 @@ const columns = [
 const TeamAssignment: React.FC = props => {
   const { dispatchFetchDomains } = useGovernanceDomains()
   const storedGovernanceDomains = useSelector((state: RootState) => state.governanceDomains.domains)
+  const { canEdit } = usePermissions(roles)
 
   const [domainFilterValue, setDomainFilterValue] = useState<ValueLabelInterface>(null)
   const [domainFilterOptions, setDomainFilterOptions] = useState<ValueLabelInterface[]>(null)
@@ -83,13 +85,6 @@ const TeamAssignment: React.FC = props => {
   })
 
   const { showNotification } = useNotification()
-
-  const { canEdit } = usePermissions({
-    editRoles: [
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN,
-      PermissionRoles.GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL
-    ]
-  })
 
   useEffect(() => {
     ;(async () => {

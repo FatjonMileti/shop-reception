@@ -12,14 +12,12 @@ interface TaskDescriptionProps {
   item: any // TODO: To add type when db schema is defined
   shouldRefreshData: boolean
   setShouldRefreshData: Function
-  setShouldRefreshTaskData: Function
   employees?: any[] // TODO: To add type when db schema is defined
 }
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
-  const { item, employees, setShouldRefreshData, setShouldRefreshTaskData } = props
-
-  const { taskName, department } = item.item || item
+  const { item, employees, setShouldRefreshData } = props
+  const { taskName, rayonsOrDepartment } = item.item || item
   const [employeesItems, setEmployeesItems] = useState([])
   const [selectedRow, setSelectedRow] = useState(null) // TODO: To add interface when db schema is defined
 
@@ -101,14 +99,14 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
           style={{ textTransform: 'none', width: isMobile ? '100%' : 'auto' }}
         />
       </Grid>
-
       <AssignEmployee
         isModalOpen={modal === 'read'}
         closeModal={closeModal}
         taskName={taskName}
-        department={department.name}
-        prodStandardUM={item.prodStandardUM}
+        rayonsOrDepartment={rayonsOrDepartment}
+        standardProductivity={item.standardProductivity}
         setShouldRefreshData={setShouldRefreshData}
+        taskTemplateId={item.taskTemplateId}
       />
       <EditAllocationModal
         isModalOpen={modal === 'edit'}
@@ -116,11 +114,12 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         editItem={selectedRow}
         task={item}
         setShouldRefreshData={setShouldRefreshData}
+        employee={employees.find(item => item.id === selectedRow?.id)}
       />
       <DeleteConfirmationModal
         isModalOpen={modal === 'delete'}
         closeModal={closeModal}
-        actionUrl="/volumetry/taskAllocation/details/:id"
+        actionUrl="/volumetry/tasks/:id"
         itemId={`${selectedRow?.id}`}
         content={<Typography>Sunteti sigur ca vreti sa stergeti aceasta alocare?</Typography>}
         setShouldRefreshData={setShouldRefreshData}
