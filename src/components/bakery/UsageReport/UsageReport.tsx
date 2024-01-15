@@ -14,7 +14,7 @@ import { toTableRowItems } from './serializers'
 import dayjs from 'dayjs'
 import { FileDownloadOutlined } from '@mui/icons-material'
 import { toAsyncSelectOptions } from '../commonSerializers'
-import { formatPayloadDate, getPreviousDay } from 'utils/helpers'
+import { formatPayloadDate, getCurrentDate, getPreviousDay } from 'utils/helpers'
 
 const UsageReport = () => {
   const [tableItems, setTableItems] = useState<UsageReportItem[]>([])
@@ -25,7 +25,7 @@ const UsageReport = () => {
   
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([]);
   const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
-  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
+  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getCurrentDate()))
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
