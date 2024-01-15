@@ -133,13 +133,17 @@ const EffortMatrix = () => {
             }
           ]}
           rowActionsWidth="130px"
-          toolbarActions={[
-            {
-              label: 'Add',
-              icon: <AddActionIcon />,
-              onClick: openNewModal
-            }
-          ]}
+          toolbarActions={
+            canCreate
+              ? [
+                  {
+                    label: 'Add',
+                    icon: <AddActionIcon />,
+                    onClick: openNewModal
+                  }
+                ]
+              : []
+          }
           rowsPerPageOptions={[20, 50, 100]}
           rowsPerPage={50}
         />
