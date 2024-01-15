@@ -19,7 +19,7 @@ const sx = {
 }
 
 const Modal = props => {
-  const { isModalOpen, closeModal, modalTitle, children, modalWidth = null } = props
+  const { isModalOpen, closeModal, modalTitle, children, modalWidth = null, onClick } = props
 
   const isXs = useMediaQuery('(max-width:624px)')
   const isMd = useMediaQuery('(max-width:936px)')
@@ -30,6 +30,7 @@ const Modal = props => {
       aria-describedby="modal-modal-description"
       open={isModalOpen}
       onClose={closeModal}
+      onClick={onClick}
     >
       <Box
         sx={{

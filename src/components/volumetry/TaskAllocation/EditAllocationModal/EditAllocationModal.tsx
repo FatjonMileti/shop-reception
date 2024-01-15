@@ -76,15 +76,11 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     }
   })
 
-  const cancel = (e: MouseEvent<HTMLElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const cancel = () => {
     closeModal()
   }
 
-  const submit = (e: MouseEvent<HTMLElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const submit = () => {
     formik.handleSubmit()
   }
 
@@ -94,6 +90,10 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
       closeModal={cancel}
       modalTitle={editItem ? 'Editeaza alocare' : 'Opreste task'}
       modalWidth="50%"
+      onClick={(e: MouseEvent<HTMLElement>) => {
+        e.preventDefault()
+        e.stopPropagation()
+      }}
     >
       <Grid container spacing={2}>
         <Grid xs={12} item>
@@ -145,8 +145,8 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           <Grid container spacing={2}>
             <Grid md={6} xs={12} item></Grid>
             <Grid md={6} xs={12} item className={s.modalButtons}>
-              <Button variant="outlined" label="Anuleaza" onClick={event => cancel(event)} />
-              <Button variant="contained" label="Salveaza" onClick={event => submit(event)} />
+              <Button variant="outlined" label="Anuleaza" onClick={cancel} />
+              <Button variant="contained" label="Salveaza" onClick={() => submit()} />
             </Grid>
           </Grid>
         </Grid>
