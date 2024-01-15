@@ -212,11 +212,11 @@ export const getWorkVolumesOptions = (showNotification: Function) => {
   return useQuery(
     ['work-volumes'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/work-volumes')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/work-volume-sources')
 
-      const resultOptions = result.list.map(workVolume => ({
-        value: workVolume.measurementUnit,
-        label: workVolume.measurementUnit
+      const resultOptions = result.map(workVolume => ({
+        value: workVolume.id,
+        label: workVolume.shortDescription
       }))
 
       return resultOptions || []

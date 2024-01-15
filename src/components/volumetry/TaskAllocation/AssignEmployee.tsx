@@ -19,7 +19,7 @@ interface AssignEmployeeProps {
   closeModal: Function
   taskName: string
   rayonsOrDepartment: string
-  standardProductivity: string
+  workloadMeasurementUnit: string
   setShouldRefreshData: Function
   taskTemplateId: string
 }
@@ -30,7 +30,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     closeModal,
     taskName,
     rayonsOrDepartment,
-    standardProductivity,
+    workloadMeasurementUnit,
     setShouldRefreshData,
     taskTemplateId
   } = props
@@ -98,7 +98,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
             items={[
               { label: 'Task:', name: taskName },
               { label: 'Departament/Raion:', name: rayonsOrDepartment },
-              { label: 'UM:', name: standardProductivity }
+              { label: 'UM:', name: workloadMeasurementUnit }
             ]}
           />
         </Grid>

@@ -107,8 +107,8 @@ const Employee: React.FC<EmployeeProps> = props => {
         <Grid item xs={12} md={6}>
           {taskCurrentState.isTaskEnded ? (
             <Box className={s.message}>
-              {employee.comments && <ChatIcon />}
-              <Box className={s.customText}>{employee.comments || 'Finalizat'}</Box>
+              {employee.comment && <ChatIcon />}
+              <Box className={s.customText}>{employee.comment || 'Finalizat'}</Box>
             </Box>
           ) : taskCurrentState.isTaskStarted ? (
             <Box className={s.progressBarContainer}>

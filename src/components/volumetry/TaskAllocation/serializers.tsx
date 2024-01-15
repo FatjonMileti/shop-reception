@@ -22,7 +22,7 @@ export const toListTableRows = (items, shouldRefreshData, setShouldRefreshData) 
 export const toEmployeeFilterItems = items =>
   items
     .map(item => ({
-      label: item.fullName || '',
+      label: `${item.fullName} (${item.genericDepartment})` || '',
       value: item.workerId || '',
       groupBy: getEmployeeGroupName(item.shiftCategory),
       shiftCategory: item.shiftCategory

@@ -104,7 +104,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         closeModal={closeModal}
         taskName={taskName}
         rayonsOrDepartment={rayonsOrDepartment}
-        standardProductivity={item.standardProductivity}
+        workloadMeasurementUnit={item.workloadMeasurementUnit}
         setShouldRefreshData={setShouldRefreshData}
         taskTemplateId={item.taskTemplateId}
       />
