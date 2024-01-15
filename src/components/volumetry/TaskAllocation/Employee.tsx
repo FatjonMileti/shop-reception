@@ -83,14 +83,14 @@ const Employee: React.FC<EmployeeProps> = props => {
   return (
     <Box>
       <Grid container spacing={4}>
-        <Grid item xs={12} md={2}>
+        <Grid item sm={12} md={2}>
           <Box className={s.employeeInfo}>
             <EmployeeIcon />
             <p className={s.employeeName}>{employee.workerFullName}</p>
           </Box>
         </Grid>
 
-        <Grid item xs={12} md={3}>
+        <Grid item sm={12} md={3}>
           <Box className={s.capsules}>
             <Capsule
               label={'Interval orar'}
@@ -107,7 +107,7 @@ const Employee: React.FC<EmployeeProps> = props => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid item sm={12} md={5}>
           {taskCurrentState.isTaskEnded ? (
             <Box className={s.message}>
               {employee.comment && <ChatIcon />}
@@ -115,56 +115,52 @@ const Employee: React.FC<EmployeeProps> = props => {
             </Box>
           ) : taskCurrentState.isTaskStarted ? (
             <Box className={s.progressBarContainer}>
-              <Grid container>
-                <Grid item xs={9} sx={{ alignSelf: 'center' }}>
-                  <Box mr={1}>
-                    <LinearProgress
-                      variant="determinate"
-                      value={employee.progressProportion > 100 ? 100 : employee.progressProportion}
-                      color={customCapsuleColors.progress as 'error' | 'success'}
-                    />
-                  </Box>
-                </Grid>
-                <Grid item xs={3}>
-                  <Box sx={{ alignSelf: 'center' }}>
-                    <span
-                      className={s.employeeProgress}
-                      style={{ background: customCapsuleColors.value }}
-                    >
-                      {employee.progressProportion}%
-                    </span>
-                  </Box>
-                </Grid>
-              </Grid>
+              <Box mr={1} style={{ width: '100%' }}>
+                <LinearProgress
+                  variant="determinate"
+                  value={employee.progressProportion > 100 ? 100 : employee.progressProportion}
+                  color={customCapsuleColors.progress as 'error' | 'success'}
+                />
+              </Box>
+              <Box sx={{ alignSelf: 'center' }}>
+                <span
+                  className={s.employeeProgress}
+                  style={{ background: customCapsuleColors.value }}
+                >
+                  {employee.progressProportion}%
+                </span>
+              </Box>
             </Box>
           ) : (
             <></>
           )}
         </Grid>
 
-        <Grid item xs={12} md={1}>
-          {(taskCurrentState.showStartButton || taskCurrentState.showStopButton) && (
-            <Button
-              variant="contained"
-              label={taskCurrentState.showStartButton ? 'Start' : 'Stop'}
-              style={{
-                height: '30px',
-                width: isMobile ? '100%' : 'auto'
-              }}
-              onClick={e => {
-                if (taskCurrentState.showStartButton) {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleStartTask()
-                }
-                if (!taskCurrentState.showStartButton) {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  openStopTaskModal()
-                }
-              }}
-            />
-          )}
+        <Grid item sm={12} md={2}>
+          <Box style={{ textAlign: 'right' }}>
+            {(taskCurrentState.showStartButton || taskCurrentState.showStopButton) && (
+              <Button
+                variant="contained"
+                label={taskCurrentState.showStartButton ? 'Start' : 'Stop'}
+                style={{
+                  height: '30px',
+                  width: isMobile ? '100%' : 'auto'
+                }}
+                onClick={e => {
+                  if (taskCurrentState.showStartButton) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleStartTask()
+                  }
+                  if (!taskCurrentState.showStartButton) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    openStopTaskModal()
+                  }
+                }}
+              />
+            )}
+          </Box>
         </Grid>
       </Grid>
       <EditAllocationModal
