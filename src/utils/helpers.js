@@ -8,7 +8,7 @@ dayjs.extend(customParseFormat)
 
 export const getCurrentDate = () => dayjs().format('YYYY-MM-DD')
 
-export const getPreviousDay = () => dayjs().subtract(1, 'day').format('YYYY-MM-DD')
+export const getPreviousDay = (date) => (date ? dayjs(date).subtract(1, 'day').format('YYYY-MM-DD') : dayjs().subtract(1, 'day').format('YYYY-MM-DD'))
 
 export const formatPayloadDate = date => (date ? dayjs(date).format('YYYY-MM-DD') : '')
 

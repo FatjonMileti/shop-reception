@@ -8,14 +8,13 @@ import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { ColumnsComponent, formatAndDownloadResponse } from './helpers'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useQuery } from 'react-query'
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableRowItems } from './serializers'
 import dayjs from 'dayjs'
 import { FileDownloadOutlined } from '@mui/icons-material'
 import { toAsyncSelectOptions } from '../commonSerializers'
-import { formatPayloadDate, getPreviousDay } from 'utils/helpers'
+import { formatPayloadDate, getCurrentDate, getPreviousDay } from 'utils/helpers'
 
 const UsageReport = () => {
   const [tableItems, setTableItems] = useState<UsageReportItem[]>([])
@@ -26,7 +25,7 @@ const UsageReport = () => {
   
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([]);
   const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
-  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
+  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getCurrentDate()))
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -148,14 +147,14 @@ const UsageReport = () => {
             />
           </Grid>
           <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
+            <FilterDataSelect
               name="store"
+              defaultSelectedData={storeFilterValue}
               label="Magazin"
-              value={storeFilterValue}
               options={stores}
-              onChange={(val) => handleFilterChange('store', val)}
-              multiple={true}
+              onSelect={val => handleFilterChange('store', val)}
+              showSearch
+              multiSelect
             />
           </Grid>          
         </Grid>
