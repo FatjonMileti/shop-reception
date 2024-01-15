@@ -12,24 +12,28 @@ import { useNotification } from 'hooks'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
 import { handleQueryError } from '../utils'
+import * as yup from 'yup'
 
-interface ProdStandardUM {
-  id: number
-  name: string
-  unit: string
-}
 interface AssignEmployeeProps {
   isModalOpen: boolean
   closeModal: Function
   taskName: string
-  department: string
-  prodStandardUM: ProdStandardUM
+  rayonsOrDepartment: string
+  standardProductivity: string
   setShouldRefreshData: Function
+  taskTemplateId: string
 }
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
-  const { isModalOpen, closeModal, taskName, department, prodStandardUM, setShouldRefreshData } =
-    props
+  const {
+    isModalOpen,
+    closeModal,
+    taskName,
+    rayonsOrDepartment,
+    standardProductivity,
+    setShouldRefreshData,
+    taskTemplateId
+  } = props
   const { showNotification } = useNotification()
 
   const { data: employeeOptions, isLoading: isEmployeeOptionsLoading } = getEmployeesOptions(
@@ -38,14 +42,14 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
   )
 
   const assignEmployee = async values => {
-    await makeCorePostRequest('/volumetry/taskAllocation/assignEmployee', values)
+    await makeCorePostRequest(`/volumetry/tasks`, values)
   }
 
   const { isLoading, mutate } = useMutation(assignEmployee, {
     onSuccess: res => {
       closeModal()
       showNotification({
-        message: `Employee assigned successfully!`,
+        message: 'Anagajatul a fost asignat cu succes',
         type: 'success'
       })
 
@@ -55,30 +59,46 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
       handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
+  const validationSchema = yup.object({
+    workerId: yup.number().required('Acest camp este obligatoriu.'),
+    taskTemplateId: yup.number().required('Acest camp este obligatoriu.'),
+    workload: yup.number().required('Acest camp este obligatoriu.')
+  })
+
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
+    validationSchema: validationSchema,
     initialValues: {
-      selectEmployee: null,
-      volume: ''
+      workerId: null,
+      taskTemplateId: taskTemplateId,
+      workload: 0
     },
     onSubmit: async (values, { resetForm }) => {
-      const payload = { volume: values.volume, selectEmployee: values.selectEmployee.value }
+      const payload = {
+        workload: values.workload,
+        workerId: values.workerId,
+        taskTemplateId: values.taskTemplateId
+      }
       mutate(payload)
       resetForm()
       closeModal()
     }
   })
-
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle="Selecteaza angajat">
+    <Modal
+      isModalOpen={isModalOpen}
+      closeModal={closeModal}
+      modalTitle="Selecteaza angajat"
+      modalWidth="50%"
+    >
       <Grid container spacing={4}>
         <Grid xs={12} item>
           <FormInfoItems
             items={[
               { label: 'Task:', name: taskName },
-              { label: 'Departament/Raion:', name: department },
-              { label: 'UM:', name: `${prodStandardUM.name}/${prodStandardUM.unit}` }
+              { label: 'Departament/Raion:', name: rayonsOrDepartment },
+              { label: 'UM:', name: standardProductivity }
             ]}
           />
         </Grid>
@@ -87,14 +107,14 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           {!isEmployeeOptionsLoading && (
             <AsyncAutocomplete
               variant="outlined"
-              name="selectEmployee"
+              name="workerId"
               label="Selecteaza angajat"
-              value={formik.values.selectEmployee}
               options={employeeOptions}
-              onChange={(value: ChangeEvent<HTMLInputElement>) =>
-                formik.setFieldValue('selectEmployee', value)
-              }
+              onChange={(employee: any) => formik.setFieldValue('workerId', employee?.value)}
               groupBy={option => option.groupBy}
+              error={!!formik.errors.workerId}
+              helperText={formik.errors.workerId as string}
+              required
             />
           )}
         </Grid>
@@ -106,10 +126,13 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
             label="Volum"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('volume', event.target.value)
+              formik.setFieldValue('workload', event.target.value)
             }
-            value={formik.values.volume}
+            value={formik.values.workload}
             style={{ width: '100%' }}
+            error={!!formik.errors.workload}
+            helperText={formik.errors.workload as string}
+            required
           />
         </Grid>
 

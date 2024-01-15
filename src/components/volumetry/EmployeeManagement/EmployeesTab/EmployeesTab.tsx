@@ -2,7 +2,7 @@ import { Box, CircularProgress, Grid } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './EmployeesTab.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
@@ -10,13 +10,11 @@ import { columns, roles } from './helpers'
 import { Autocomplete, FilterDataSelect, Input } from '@fullscreendigital/carrefour-dex-fe'
 import {
   getDepartmentsOptions,
-  getEmployeeNamesOptions,
   getJobTitlesOptions,
   getLocationsOptions
 } from 'components/volumetry/api'
 import { handleQueryError } from 'components/volumetry/utils'
 import { useNotification, usePermissions } from 'hooks'
-import { PermissionRoles } from 'utils/enums'
 
 const EmployeesTab = () => {
   const [locationsFilterValue, setLocationsFilterValue] = useState<ValueLabelInterface>(null)
@@ -29,7 +27,6 @@ const EmployeesTab = () => {
   const { canUseCustomFilter } = usePermissions(roles)
 
   const { data: departmentsOptions } = getDepartmentsOptions(showNotification)
-  const { data: employeeNamesOptions } = getEmployeeNamesOptions(showNotification)
   const { data: jobTitlesOptions } = getJobTitlesOptions(showNotification)
   const { data: locationsOptions, isLoading: isLocationsLoading } = getLocationsOptions(
     showNotification,
@@ -54,8 +51,8 @@ const EmployeesTab = () => {
           tableFilters,
           page,
           rowsPerPage,
-          order,
-          orderBy
+          order: null,
+          orderBy: null
         })
       )
 
@@ -73,9 +70,7 @@ const EmployeesTab = () => {
       label: 'Nume',
       type: 'text',
       value: '',
-      filter: (
-        <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
-      )
+      filter: <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
     },
     {
       name: 'department',

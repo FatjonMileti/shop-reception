@@ -37,7 +37,7 @@ export interface TaskManagementItem {
 
 export interface Department {
   id: number
-  name: string
+  departmentName: string
   description: string
 }
 

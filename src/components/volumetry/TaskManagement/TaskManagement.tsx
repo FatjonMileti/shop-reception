@@ -116,8 +116,8 @@ const TaskManagement = () => {
           tableFilters,
           page,
           rowsPerPage,
-          order,
-          orderBy
+          // order,
+          // orderBy
         })
       )
 

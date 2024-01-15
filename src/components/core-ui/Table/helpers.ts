@@ -124,25 +124,16 @@ export const getSearchFieldsGetUrl = (searchFields: string[], searchText: string
 const getFilterUrlValues = (filters: Filter[]) => {
   return filters.reduce(
     (acc, filter) => {
-      let encodedValue: string
+      const value = Array.isArray(filter.value)
+        ? `[${filter.value.map(val => (typeof val === 'string' ? val : val.value)).join(';')}]`
+        : filter.value && typeof filter.value === 'object'
+        ? filter.value.value
+        : filter.value
 
-      if (Array.isArray(filter.value)) {
-        // Array of string or Array of AutoCompleteValue
-        encodedValue = `[${filter.value
-            .map(val => (typeof val === 'string' ? val : val.value)) // Extract string or value from AutoCompleteValue
-            .join(';')}]` // Join with semi-colon
-      } else if (filter.value && typeof filter.value === 'object') {
-        // Single AutoCompleteValue
-        encodedValue = filter.value.value
-      } else if (typeof filter.value === 'string') {
-        // Single string
-        encodedValue = filter.value
-      } else {
-        // Null or other types
-        encodedValue = ''
-      }
-      // URL encode the value
-      encodedValue = encodeURIComponent(encodedValue)
+      const encodedValue = encodeURIComponent(
+        value === undefined || value === null ? '' : (value as string)
+      )
+
       acc = [
         acc[0] ? `${acc[0]}${encodeURIComponent('|')}${filter.name}` : filter.name,
         acc[1] ? `${acc[1]}${encodeURIComponent('|')}${encodedValue}` : encodedValue

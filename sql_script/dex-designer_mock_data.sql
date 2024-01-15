@@ -201,6 +201,7 @@ VALUES
     -- Bakery ADMIN p2
     -- (71, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 53, true);
 
+
 -- UI Schema with activity id and screen id
 INSERT INTO
     "dex-designer".ui_schema (id, activity_id, role_id, screen_id, json_schema)
@@ -271,26 +272,30 @@ VALUES
 
 
 -- roles
-insert into
+INSERT INTO
 	"dex-designer".roles (id, role_name)
-values
-  -- Governance
-	(1, 'GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN'),
-	(2, 'GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL'),
-	(3, 'GG_RO_HQ_IT_DEX_GOV_IT_PM'),
-	(4, 'GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER'),
-	-- Bakery
-  (5, 'GG_RO_HQ_IT_DEX_BAKERY_ADMIN'),
-  (6, 'GG_RO_HQ_IT_DEX_BAKERY_STORE'),
-  (7, 'GG_RO_HQ_IT_DEX_BAKERY_REGION'),
-  (8, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE'),
-  (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
-  (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER'),
---   (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
--- Supply OMNI
-  (11, 'GG_RO_HQ_IT-C4ASSIST'),
-  -- Volumetry
-  (13, 'GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR');
+VALUES
+    -- Governance
+    (1, 'GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN'),
+    (2, 'GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL'),
+    (3, 'GG_RO_HQ_IT_DEX_GOV_IT_PM'),
+    (4, 'GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER'),
+	  -- Bakery
+    (5, 'GG_RO_HQ_IT_DEX_BAKERY_ADMIN'),
+    (6, 'GG_RO_HQ_IT_DEX_BAKERY_STORE'),
+    (7, 'GG_RO_HQ_IT_DEX_BAKERY_REGION'),
+    (8, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE'),
+    (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
+    (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER'),
+    -- (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
+    -- Supply OMNI
+    (11, 'GG_RO_HQ_IT-C4ASSIST'),
+    -- Volumetry
+    (100, 'VOLUMETRY_TASK_ALLOCATOR'),
+    (101, 'VOLUMETRY_WORKER'),
+    (102, 'VOLUMETRY_REGION_ADMIN'),
+    (103, 'VOLUMETRY_STORE_ADMIN'),
+    (104, 'VOLUMETRY_TEMPLATE_ADMIN');
 
 
 -- roles_activities
@@ -325,18 +330,30 @@ VALUES
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
     -- Volumetry
-    -- GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR
-    (13, 42),
-    (13, 43),
-    (13, 44),
-    (13, 45);
+    -- VOLUMETRY_TASK_ALLOCATOR
+    (100, 42),
+    (100, 44),
+    (100, 43),  -- temporary let this role access the task templates activity
+    (100, 45),
+    -- VOLUMETRY_WORKER
+    (101, 44),
+    -- VOLUMETRY_REGION_ADMIN
+    (102, 42),
+    (102, 44),
+    (102, 45),
+    -- VOLUMETRY_STORE_ADMIN
+    (103, 42),
+    (103, 44),
+    (103, 45),
+    -- VOLUMETRY_TEMPLATE_ADMIN
+    (104, 43);
     -- Shop Reception
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     -- (1, 46);
 
 
 -- reset sequences
-SELECT setval('"dex-designer".seq_id_roles', 100, true);
+SELECT setval('"dex-designer".seq_id_roles', 200, true);
 SELECT setval('"dex-designer".seq_id_ui_schema', 100, true);
 SELECT setval('"dex-designer".seq_id_screen', 100, true);
 SELECT setval('"dex-designer".seq_id_activity', 100, true);

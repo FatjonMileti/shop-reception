@@ -3,24 +3,7 @@ import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
 import { fromTaskPayload, handleQueryError } from './utils'
 import { toEmployeeFilterItems } from './TaskAllocation/serializers'
-
-export const getEmployeeNamesOptions = (showNotification: Function) => {
-  return useQuery(
-    ['employees-name'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/workers/employees')
-
-      const resultOptions = result.list.map(
-        (item): ValueLabelInterface => ({ label: item.fullName, value: item.fullName })
-      )
-
-      return resultOptions || []
-    },
-    {
-      onError: error => handleQueryError(error, 'Error while fetching employees ', showNotification)
-    }
-  )
-}
+import { toDepartmentsOptions } from './serializers'
 
 export const getDepartmentsOptions = (
   showNotification: Function,
@@ -29,11 +12,8 @@ export const getDepartmentsOptions = (
   return useQuery(
     ['departments'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/locations/departments')
-
-      const resultOptions = result.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.id })
-      )
+      const result = await makeCoreGetRequest('/volumetry/locations/generic-departments')
+      const resultOptions = toDepartmentsOptions(result)
 
       if (resultOptions?.length && !!setDefaultOptionCallback) {
         setDefaultOptionCallback(resultOptions[0])
@@ -56,10 +36,10 @@ export const getJobTitlesOptions = (showNotification: Function) => {
   return useQuery(
     ['job-titles'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/workers/jobTitles')
-      const resultOptions = result.list.map(
-        (item: { id: number; jobTitle: string }): ValueLabelInterface => ({
-          label: item.jobTitle,
+      const result = await makeCoreGetRequest('/volumetry/workers/job-titles')
+      const resultOptions = result.map(
+        (item: { id: number; title: string }): ValueLabelInterface => ({
+          label: item.title,
           value: item.id
         })
       )
@@ -168,7 +148,7 @@ export const getPrioritiesOptions = (showNotification: Function) => {
   return useQuery(
     ['priority'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/task-templatess/priorities')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/priorities')
 
       const resultOptions = result.map(priority => ({
         value: priority.value,
@@ -188,7 +168,7 @@ export const getFrequencyOptions = (showNotification: Function) => {
   return useQuery(
     ['frequency'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/task-templatess/frequencies')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/frequencies')
 
       const resultOptions = result.map(frequency => ({
         value: frequency,
@@ -208,7 +188,7 @@ export const getMeasurementUnitsOptions = (showNotification: Function) => {
   return useQuery(
     ['measurement-units'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/task-templatess/measurement-units')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/measurement-units')
 
       const resultOptions = result.map(unit => ({
         value: unit.name,
@@ -232,7 +212,7 @@ export const getWorkVolumesOptions = (showNotification: Function) => {
   return useQuery(
     ['work-volumes'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/reports/work-volumes')
+      const result = await makeCoreGetRequest('/volumetry/work-volumes')
 
       const resultOptions = result.list.map(workVolume => ({
         value: workVolume.measurementUnit,
@@ -313,7 +293,6 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
     ['employees-options'],
     async () => {
       const employees = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
-
       return toEmployeeFilterItems(employees) || []
     },
     {
