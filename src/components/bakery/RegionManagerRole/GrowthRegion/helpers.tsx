@@ -28,7 +28,13 @@ export const columns = [
     type: 'string',
     defaultPrintSelected: true
   },
-
+  {
+    title: 'Familie',
+    field: 'familyName',
+    align: 'left',
+    type: 'string',
+    defaultPrintSelected: false
+  },
   {
     title: 'Subfamilie',
     field: 'subfamily',
@@ -143,8 +149,7 @@ export const columns = [
   }
 ]
 
-export 
-const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
+export const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
   {
     name: 'date',
     value: currentDate,

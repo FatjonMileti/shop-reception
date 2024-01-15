@@ -14,7 +14,12 @@ export const columns = [
     align: 'left',
     type: 'string'
   },
-
+  {
+    title: 'Familie',
+    field: 'familyName',
+    align: 'left',
+    type: 'string'
+  },
   {
     title: 'Subfamilie',
     field: 'subfamily',
