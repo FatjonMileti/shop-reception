@@ -1,4 +1,4 @@
-import { FilterDataSelect, ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect, ListTable, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { CircularProgress, Grid, debounce } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { EditActionIcon } from 'icons'
@@ -18,7 +18,7 @@ const TaskAllocation = () => {
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
   const [rows, setRows] = useState([]) // TODO: To add interface when db schema is defined
   const [tableItems, setTableItems] = useState([]) // TODO: To add interface when db schema is defined
-  const [totalCount, setTotalCount] = useState<number>(0)
+  const [totalCount, setTotalCount] = useState<number>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState(0) // TODO: To add interface when db schema is defined
@@ -163,27 +163,33 @@ const TaskAllocation = () => {
       </Grid>
       {departmentFilterValue && (
         <>
-          <ListTable
-            rows={rows}
-            handleRemoteData={debounce(fetchData, 500)}
-            handleRemoteDetails={handleRemoteDetails}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            rowActions={[
-              {
-                label: 'Editeaza',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#0970E6',
-                desktopIcon: <EditActionIcon />,
-                onClick: (e, rowId) =>
-                  selectRow(tableItems.find(item => item.taskTemplateId === rowId))
-              }
-            ]}
-            rowActionsWidth="90px"
-            selectedRowId={selectedRowId}
-            shouldRefreshedSelectedRowDetails={shouldRefreshAllocationsData}
-          />
+          {totalCount === 0 ? (
+            <Grid item sx={{ padding: '1rem 1.5rem' }}>
+              <Typography variant="regular">Nu exista date disponibile.</Typography>
+            </Grid>
+          ) : (
+            <ListTable
+              rows={rows}
+              handleRemoteData={debounce(fetchData, 500)}
+              handleRemoteDetails={handleRemoteDetails}
+              isLoading={isLoading}
+              totalCount={totalCount}
+              rowActions={[
+                {
+                  label: 'Editeaza',
+                  labelColor: 'white',
+                  typographyVariant: 'medium',
+                  backgroundColor: '#0970E6',
+                  desktopIcon: <EditActionIcon />,
+                  onClick: (e, rowId) =>
+                    selectRow(tableItems.find(item => item.taskTemplateId === rowId))
+                }
+              ]}
+              rowActionsWidth="90px"
+              selectedRowId={selectedRowId}
+              shouldRefreshedSelectedRowDetails={shouldRefreshAllocationsData}
+            />
+          )}
           <EditCurrentTaskTemplate
             isModalOpen={isEditTaskModalOpen}
             closeModal={closeEditTaskModal}
