@@ -12,8 +12,6 @@ import s from './TaskAllocation.modules.scss'
 import TaskDescription from './TaskDescription'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
-import { useQuery } from 'react-query'
-import { formatErrorMessage } from 'utils/formatting'
 
 const TaskAllocation = () => {
   const { showNotification } = useNotification()
@@ -59,7 +57,8 @@ const TaskAllocation = () => {
           toListTableRows(
             response.list,
             shouldRefreshAllocationsData,
-            setShouldRefreshAllocationsData
+            setShouldRefreshAllocationsData,
+            setSelectedRowId
           )
         )
         setTableItems(response.list)
@@ -90,6 +89,7 @@ const TaskAllocation = () => {
         employees={data}
         shouldRefreshData={shouldRefreshAllocationsData}
         setShouldRefreshData={setShouldRefreshAllocationsData}
+        setSelectedRowId={setSelectedRowId}
       />
     )
   }
@@ -113,7 +113,8 @@ const TaskAllocation = () => {
         toListTableRows(
           response.list,
           shouldRefreshAllocationsData,
-          setShouldRefreshAllocationsData
+          setShouldRefreshAllocationsData,
+          setSelectedRowId
         )
       )
       setTableItems(response.list)

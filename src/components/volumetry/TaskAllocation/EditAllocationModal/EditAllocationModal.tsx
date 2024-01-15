@@ -17,6 +17,7 @@ interface EditAllocationModalProps {
   closeModal: Function
   task: any // TODO: To add interface when db schema is defined
   setShouldRefreshData: Function
+  setSelectedRowId: Function
   editItem?: any // TODO: To add interface when db schema is defined
   employee?: any // TODO: To add type when db schema is defined
 }
@@ -27,7 +28,15 @@ const validationSchema = yup.object({
 })
 
 const EditAllocationModal = (props: EditAllocationModalProps) => {
-  const { isModalOpen, closeModal, editItem, employee, setShouldRefreshData, task } = props
+  const {
+    isModalOpen,
+    closeModal,
+    editItem,
+    employee,
+    setShouldRefreshData,
+    setSelectedRowId,
+    task
+  } = props
   const { showNotification } = useNotification()
 
   const editCurrentAllocation = async values => {
@@ -39,6 +48,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
 
   const { isLoading, mutate } = useMutation(editCurrentAllocation, {
     onSuccess: res => {
+      setSelectedRowId(task.taskTemplateId)
       setShouldRefreshData(true)
       closeModal()
       showNotification({

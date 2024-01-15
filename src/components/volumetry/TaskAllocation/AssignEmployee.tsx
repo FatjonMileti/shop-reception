@@ -22,6 +22,7 @@ interface AssignEmployeeProps {
   workloadMeasurementUnit: string
   setShouldRefreshData: Function
   taskTemplateId: string
+  setSelectedRowId: Function
 }
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
@@ -32,7 +33,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     rayonsOrDepartment,
     workloadMeasurementUnit,
     setShouldRefreshData,
-    taskTemplateId
+    taskTemplateId,
+    setSelectedRowId
   } = props
   const { showNotification } = useNotification()
 
@@ -53,6 +55,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
         type: 'success'
       })
 
+      setSelectedRowId(taskTemplateId)
       setShouldRefreshData(true)
     },
     onError: error =>

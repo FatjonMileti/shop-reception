@@ -12,17 +12,18 @@ interface TaskDescriptionProps {
   item: any // TODO: To add type when db schema is defined
   shouldRefreshData: boolean
   setShouldRefreshData: Function
+  setSelectedRowId: Function
   employees?: any[] // TODO: To add type when db schema is defined
 }
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
-  const { item, employees, setShouldRefreshData } = props
+  const { item, employees, setShouldRefreshData, setSelectedRowId } = props
   const { taskName, rayonsOrDepartment } = item.item || item
   const [employeesItems, setEmployeesItems] = useState([])
   const [selectedRow, setSelectedRow] = useState(null) // TODO: To add interface when db schema is defined
 
   useEffect(() => {
-    setEmployeesItems(toEmployeesItems(item, employees, setShouldRefreshData))
+    setEmployeesItems(toEmployeesItems(item, employees, setShouldRefreshData, setSelectedRowId))
   }, [employees])
 
   const [modal, setModal] = useState<CRUDAction>(null)
@@ -46,6 +47,10 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const selectRow = (row, action) => {
     setSelectedRow(row)
     openModal(action)
+  }
+
+  const selectSelectedParentRow = () => {
+    setSelectedRowId(item.taskTemplateId)
   }
 
   return (
@@ -107,6 +112,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         workloadMeasurementUnit={item.workloadMeasurementUnit}
         setShouldRefreshData={setShouldRefreshData}
         taskTemplateId={item.taskTemplateId}
+        setSelectedRowId={setSelectedRowId}
       />
       <EditAllocationModal
         isModalOpen={modal === 'edit'}
@@ -114,6 +120,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         editItem={selectedRow}
         task={item}
         setShouldRefreshData={setShouldRefreshData}
+        setSelectedRowId={setSelectedRowId}
         employee={employees.find(item => item.id === selectedRow?.id)}
       />
       <DeleteConfirmationModal
@@ -123,6 +130,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         itemId={`${selectedRow?.id}`}
         content={<Typography>Sunteti sigur ca vreti sa stergeti aceasta alocare?</Typography>}
         setShouldRefreshData={setShouldRefreshData}
+        additionalAction={selectSelectedParentRow}
         title="Sterge alocare"
       />
     </Grid>
