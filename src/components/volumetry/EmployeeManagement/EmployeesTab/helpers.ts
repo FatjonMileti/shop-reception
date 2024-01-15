@@ -18,7 +18,8 @@ export const columns = [
     field: 'jobTitle',
     align: 'left',
     collapsible: true,
-    type: 'string'
+    type: 'string',
+    disableSorting: true
   }
 ]
 

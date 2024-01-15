@@ -88,7 +88,7 @@ const EmployeesTab = () => {
       )
     },
     {
-      name: 'position',
+      name: 'jobTitle',
       label: 'Functie',
       type: 'autocomplete',
       value: '',
@@ -135,7 +135,7 @@ const EmployeesTab = () => {
           locationsFilterValue && (
             <Table
               hideCheckbox
-              orderBy="department.name"
+              orderBy="department"
               order="desc"
               columns={columns}
               items={tableItems}
@@ -150,7 +150,7 @@ const EmployeesTab = () => {
         ) : (
           <Table
             hideCheckbox
-            orderBy="department.name"
+            orderBy="department"
             order="desc"
             columns={columns}
             items={tableItems}
