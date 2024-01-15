@@ -132,6 +132,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         setShouldRefreshData={setShouldRefreshData}
         additionalAction={selectSelectedParentRow}
         title="Sterge alocare"
+        deleteLabel="Sterge"
       />
     </Grid>
   )
