@@ -41,6 +41,7 @@ import { Ingredients } from './Ingredients'
 import {
   ProductManagementTraceability
 } from './Traceability/ProductManagementTraceability/ProductManagementTraceability'
+import { ReceivedProducts } from './Traceability/ReceivedProducts/ReceivedProducts'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -359,6 +360,13 @@ export const useBakeryRoutes = applicationPages => {
         path={URLS.AUTH_PRODUCT_MANAGEMENT_TRACEABILITY}
         element={
           <PrivateRoute component={ProductManagementTraceability} applicationPages={applicationPages} checkIsAuthorized />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_RECEIVED_PRODUCTS_TRACEABILITY}
+        element={
+          <PrivateRoute component={ReceivedProducts} applicationPages={applicationPages} checkIsAuthorized />
         }
       />
     </>

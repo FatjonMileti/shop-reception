@@ -43,5 +43,6 @@ export const URLS = {
 
   /* Region manager role */
   AUTH_PRODUCT_MANAGEMENT_TRACEABILITY : 'bakery/traceabilityOperator/product-management',
+  AUTH_RECEIVED_PRODUCTS_TRACEABILITY : 'bakery/traceabilityOperator/received-products',
 
 }
