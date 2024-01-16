@@ -58,7 +58,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
 
   const { data: categoryOptions } = getCategoriesOptions(showNotification)
   const { data: priorityOptions } = getPrioritiesOptions(showNotification)
-  const { data: departmentOptions, isLoading: isDepartmentsOptionsLoading } =
+  const { data: departmentOptions } =
     getCategoryDepartmentsOptions(categoryId, shouldFetchDepartments, showNotification)
 
   const { data: raionOptions, isLoading: isRaionOptionsLoading } = getRaionsOptions(
@@ -138,24 +138,22 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
           />
         </Grid>
 
-        {!isDepartmentsOptionsLoading && (
-          <Grid xs={12} md={6} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="rayonsOrDepartment"
-              label="Raion/Departament"
-              value={formik.values.rayonsOrDepartment}
-              disabled={formik.values.volumetryLocationCategory === null}
-              options={departmentOptions || []}
-              onChange={value => {
-                formik.setFieldValue('rayonsOrDepartment', value)
-              }}
-              error={!!formik.errors.rayonsOrDepartment}
-              helperText={formik.errors.rayonsOrDepartment as string}
-              required
-            />
-          </Grid>
-        )}
+        <Grid xs={12} md={6} item>
+          <AsyncAutocomplete
+            variant="outlined"
+            name="rayonsOrDepartment"
+            label="Raion/Departament"
+            value={formik.values.rayonsOrDepartment}
+            disabled={formik.values.volumetryLocationCategory === null}
+            options={departmentOptions || []}
+            onChange={value => {
+              formik.setFieldValue('rayonsOrDepartment', value)
+            }}
+            error={!!formik.errors.rayonsOrDepartment}
+            helperText={formik.errors.rayonsOrDepartment as string}
+            required
+          />
+        </Grid>
 
         {formik.values.rayonsOrDepartment !== null && !isRaionOptionsLoading && (
           <Grid xs={12} md={12} item>
