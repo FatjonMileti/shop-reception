@@ -19,7 +19,7 @@ export { default as ClustersMenu } from './ClustersMenu'
 export { default as BreadMenu } from './BreadMenu'
 export { default as IngredientsMenu } from './IngredientsMenu'
 export { default as ListVolumetryHome } from './ListVolumetryHome'
-export { default as ReportsVolumetryHome } from './ReportsVolumetryHome'
+export { default as ReportsVolumetryHome } from './volumetry/ReportsVolumetryHome'
 
 export { default as DailyPresenceSubcategory } from './DailyPresenceSubcategory'
 
