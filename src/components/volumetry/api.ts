@@ -195,7 +195,7 @@ export const getMeasurementUnitsOptions = (showNotification: Function) => {
       const result = await makeCoreGetRequest('/volumetry/task-templates/measurement-units')
 
       const resultOptions = result.map(unit => ({
-        value: unit.name,
+        value: unit.id,
         label: unit.name
       }))
 

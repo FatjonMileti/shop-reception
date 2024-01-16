@@ -8,7 +8,7 @@ export const toTaskPayload = (values: TaskManagementItem) => ({
   frequency: [values.frequency.value],
   genericRayons: values.rayons.map(rayon => rayon.value),
   locationCategoryId: values.volumetryLocationCategory.value,
-  standardProductivityValue: values.standardProductivityValue,
+  standardProductivityValue: +values.standardProductivityValue,
   workVolumeSourceId: values.workVolumeSource.value,
   measurementUnitId: values.measurementUnit.value,
   priorityId: values.priority.value,
