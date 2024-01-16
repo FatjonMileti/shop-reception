@@ -5,6 +5,7 @@ import { EmployeeManagement } from './EmployeeManagement'
 import { TaskManagement } from './TaskManagement'
 import { TaskAllocation } from './TaskAllocation'
 import EvaluationReports from 'components/volumetry/EmployeeManagement/EvaluationReports/EvaluationReports'
+import { ReportsVolumetry } from './ReportsVolumetry'
 
 export const useVolumetryRoutes = applicationPages => {
   return (
@@ -44,6 +45,16 @@ export const useVolumetryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={TaskAllocation}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_NORMS_REPORTS}
+        element={
+          <PrivateRoute
+            component={ReportsVolumetry}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
