@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './TaskManagement.modules.scss'
-import { CRUDAction, TaskManagementItem } from '../interfaces'
+import { CRUDAction, TaskManagementTableItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { AddActionIcon, EditActionIcon } from 'icons'
@@ -21,7 +21,7 @@ import {
 import { useNotification } from 'hooks'
 
 const TaskManagement = () => {
-  const [tableItems, setTableItems] = useState<TaskManagementItem[]>([])
+  const [tableItems, setTableItems] = useState<TaskManagementTableItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)

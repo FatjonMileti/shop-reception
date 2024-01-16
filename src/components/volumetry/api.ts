@@ -79,7 +79,11 @@ export const getLocationsOptions = (
     },
     {
       onError: error =>
-        handleQueryError(error, 'A aparut o eroare la obtinerea listei magazinelor.', showNotification)
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea listei magazinelor.',
+          showNotification
+        )
     }
   )
 }
@@ -240,11 +244,13 @@ export const getCategoryDepartmentsOptions = (
   return useQuery(
     ['category-departments', categoryId],
     async () => {
-      const result = await makeCoreGetRequest(`/volumetry/locations/departments/${categoryId}`)
+      const result = await makeCoreGetRequest(
+        `/volumetry/locations/generic-departments?filterBy=categoryId&filterValue=${categoryId}`
+      )
 
       const resultOptions = result.map(department => ({
         value: department.id,
-        label: department.name
+        label: department.departmentName
       }))
 
       return resultOptions || []
@@ -270,11 +276,13 @@ export const getRaionsOptions = (
   return useQuery(
     ['raions', departmentId],
     async () => {
-      const result = await makeCoreGetRequest(`/volumetry/locations/raions/${departmentId}`)
+      const result = await makeCoreGetRequest(
+        `/volumetry/locations/generic-rayons?filterBy=genericDepartmentId&filterValue=${departmentId}`
+      )
 
       const resultOptions = result.map(raion => ({
         value: raion.id,
-        label: raion.name
+        label: raion.rayonName
       }))
 
       callback(resultOptions)

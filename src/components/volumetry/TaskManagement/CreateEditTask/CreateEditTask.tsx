@@ -64,7 +64,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
   const { data: raionOptions, isLoading: isRaionOptionsLoading } = getRaionsOptions(
     departmentId,
     shouldFetchRaions,
-    value => formik.setFieldValue('raion', value),
+    value => formik.setFieldValue('rayons', value),
     showNotification
   )
 
@@ -73,20 +73,10 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
   const { data: workVolumeSourceOptions } = getWorkVolumesOptions(showNotification)
 
   const submitTask = async values => {
-    const payload = {
-      ...values,
-      volumetryLocationCategory: values.volumetryLocationCategory.value,
-      rayonsOrDepartment: values.rayonsOrDepartment.value,
-      raion: values.raion.value,
-      frequency: values.frequency.value,
-      measurementUnit: values.measurementUnit.value,
-      workVolumeSource: values.workVolumeSource.value,
-      priority: values.priority.value
-    }
     if (editItem) {
-      await makeCorePutRequest(`/volumetry/task-templates/${editItemId}`, payload)
+      await makeCorePutRequest(`/volumetry/task-templates/${editItemId}`, values)
     } else {
-      await makeCorePostRequest('/volumetry/task-templates/', payload)
+      await makeCorePostRequest('/volumetry/task-templates/', values)
     }
   }
 
@@ -171,15 +161,15 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
           <Grid xs={12} md={12} item>
             <AsyncAutocomplete
               variant="outlined"
-              name="raion"
+              name="rayons"
               label="Raion"
-              value={formik.values.raion || []}
+              value={formik.values.rayons || []}
               options={raionOptions}
               onChange={value => {
-                formik.setFieldValue('raion', value)
+                formik.setFieldValue('rayons', value)
               }}
-              error={!!formik.errors.raion}
-              helperText={formik.errors.raion as string}
+              error={!!formik.errors.rayons}
+              helperText={formik.errors.rayons as string}
               required
               multiple
             />

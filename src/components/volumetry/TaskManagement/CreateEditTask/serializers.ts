@@ -2,17 +2,15 @@ import { TaskManagementItem } from 'components/volumetry/interfaces'
 import dayjs from 'dayjs'
 
 export const toTaskPayload = (values: TaskManagementItem) => ({
-  id: values.id,
   name: values.name,
-  volumetryLocationCategory: values.volumetryLocationCategory,
-  rayonsOrDepartment: values.rayonsOrDepartment,
-  raion: values.raion,
-  recommendedStartHour: dayjs(values.recommendedStartHour).format('HH:mm'),
-  recommendedEndHour: dayjs(values.recommendedEndHour).format('HH:mm'),
-  frequency: values.frequency,
+  estimatedStartHour: dayjs(values.recommendedStartHour).format('HH:mm'),
+  estimatedEndHour: dayjs(values.recommendedEndHour).format('HH:mm'),
+  frequency: [values.frequency.value],
+  genericRayons: values.rayons.map(rayon => rayon.value),
+  locationCategoryId: values.volumetryLocationCategory.value,
   standardProductivityValue: values.standardProductivityValue,
-  measurementUnit: values.measurementUnit,
-  workVolumeSource: values.workVolumeSource,
-  priority: values.priority,
+  workVolumeSourceId: values.workVolumeSource.value,
+  measurementUnitId: values.measurementUnit.value,
+  priorityId: values.priority.value,
   isActive: values.isActive
 })
