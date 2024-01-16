@@ -2,6 +2,9 @@ import { Input } from 'components/core-ui/Input'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { STATE_OPTIONS } from './constants'
 import { AutocompleteOption } from '../interfaces'
+import { IconCell } from 'components/core-ui/IconCell'
+import { DescriptionText } from 'components/core-ui/DescriptionText'
+import { Box } from '@mui/material'
 
 export const buildTableFilterFields = (
   departmentOptions: AutocompleteOption[],
@@ -67,3 +70,78 @@ export const buildTableFilterFields = (
 export const mapToValueLabel = (list): AutocompleteOption[] => {
   return list.map(item => ({ label: item.name, value: item.name }))
 }
+
+export const columns = [
+  {
+    title: 'Departament / Raioane',
+    field: 'rayonsOrDepartment',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Nume task',
+    field: 'name',
+    align: 'left',
+    type: 'string',
+    width: '250px'
+  },
+  {
+    title: 'Interval orar recomandat',
+    field: 'recommendedTimeInterval',
+    align: 'left',
+    type: 'string',
+    collapsible: true,
+    disableSorting: true
+  },
+  {
+    title: 'Frecventa',
+    field: 'frequency',
+    align: 'left',
+    type: 'string',
+    collapsible: true,
+    disableSorting: true
+  },
+  {
+    title: 'Productivitate standard',
+    field: 'standardProductivity',
+    align: 'left',
+    type: 'string',
+    collapsible: true,
+    disableSorting: true
+  },
+  {
+    title: 'Sursa volum de lucru',
+    field: 'workVolumeSource',
+    align: 'left',
+    type: 'string',
+    collapsible: true,
+    minWidth: '200px',
+    render: row => <DescriptionText value={row.workVolumeSource} />
+  },
+  {
+    title: 'Prioritate',
+    field: 'priority',
+    align: 'left',
+    type: 'number',
+    collapsible: true
+  },
+  {
+    title: 'Categorie',
+    field: 'volumetryLocationCategory',
+    align: 'left',
+    type: 'string',
+    collapsible: true
+  },
+  {
+    title: 'Activ',
+    field: 'isActive',
+    align: 'left',
+    type: 'string',
+    collapsible: true,
+    render: row => (
+      <Box>
+        <IconCell value={row.isActive ? 'active' : 'inactive'} />
+      </Box>
+    )
+  }
+]

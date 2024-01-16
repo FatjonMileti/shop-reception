@@ -5,14 +5,12 @@ import s from './TaskManagement.modules.scss'
 import { CRUDAction, TaskManagementItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { toTableItems } from './serializers'
 import { AddActionIcon, EditActionIcon } from 'icons'
-import { IconCell } from 'components/core-ui/IconCell'
-import { DescriptionText } from 'components/core-ui/DescriptionText'
+
 import { handleQueryError } from '../utils'
 import { CreateEditTask } from './CreateEditTask'
 import { VOLUMETRY_TASKS_URL } from './constants'
-import { buildTableFilterFields } from './utils'
+import { buildTableFilterFields, columns } from './helpers'
 import {
   getCategoriesOptions,
   getDepartmentsOptions,
@@ -21,89 +19,6 @@ import {
   getWorkVolumesOptions
 } from '../api'
 import { useNotification } from 'hooks'
-
-export const columns = [
-  {
-    title: 'Departament / Raioane',
-    field: 'rayonsOrDepartment',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Nume task',
-    field: 'name',
-    align: 'left',
-    type: 'string',
-    width: '250px'
-  },
-  {
-    title: 'Ora recomandata de inceput',
-    field: 'recommendedStartHour',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    disableSorting: true
-  },
-  {
-    title: 'Ora recomandata de final',
-    field: 'recommendedEndHour',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    disableSorting: true
-  },
-  {
-    title: 'Frecventa',
-    field: 'frequency',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    disableSorting: true
-  },
-  {
-    title: 'Productivitate',
-    field: 'standardProductivityValue',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    disableSorting: true
-  },
-  {
-    title: 'Sursa volum de lucru',
-    field: 'workVolumeSource',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    minWidth: '200px',
-    render: row => <DescriptionText value={row.workVolumeSource} />
-  },
-  {
-    title: 'Prioritate',
-    field: 'priority',
-    align: 'left',
-    type: 'number',
-    collapsible: true
-  },
-  {
-    title: 'Categorie',
-    field: 'volumetryLocationCategory',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Activ',
-    field: 'isActive',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    render: row => (
-      <Box>
-        <IconCell value={row.isActive ? 'active' : 'inactive'} />
-      </Box>
-    )
-  }
-]
 
 const TaskManagement = () => {
   const [tableItems, setTableItems] = useState<TaskManagementItem[]>([])
@@ -134,7 +49,7 @@ const TaskManagement = () => {
         })
       )
 
-      setTableItems(toTableItems(response.list))
+      setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
