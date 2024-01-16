@@ -9,7 +9,6 @@ import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { toCurrentTaskPayload } from './serializers'
 import { handleQueryError } from 'components/volumetry/utils'
 
 interface EditCurrentTaskTemplateProps {
@@ -52,13 +51,12 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      id: editItem?.id || 0,
-      workload: editItem?.totalWorkload,
-      allocatedWorkersNumber: editItem?.allocatedWorkers
+      workload: editItem.totalWorkload,
+      allocatedWorkersNumber: editItem.allocatedWorkers
     },
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      mutate(toCurrentTaskPayload(values))
+      mutate(values)
     }
   })
 

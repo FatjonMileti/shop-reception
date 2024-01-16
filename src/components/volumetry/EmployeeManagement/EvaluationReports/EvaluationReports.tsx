@@ -1,16 +1,18 @@
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
-import { PrintOutlined } from '@mui/icons-material'
 import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { columns } from 'components/volumetry/EmployeeManagement/EvaluationReports/helpers'
 import { useNotification } from 'hooks'
 import { useState } from 'react'
-import { makeCoreGetRequest } from 'utils/api'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import s from './EvaluationReports.modules.scss'
 import { toTableRowItems } from 'components/volumetry/EmployeeManagement/EvaluationReports/serializers'
 import { EvaluationReportSummary, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { getDepartmentsOptions } from 'components/volumetry/api'
+import { DownloadIcon } from 'icons'
+import { formatAndDownloadResponse } from 'utils/helpers'
+import { formatErrorMessage } from 'utils/formatting'
 
 const EvaluationReports = () => {
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
@@ -56,16 +58,35 @@ const EvaluationReports = () => {
     }
   }
 
-  const print = () => {
-    // todo call print api}
+  const handleDownload = async (tableState, e) => {
+    const { filters, order, orderBy } = tableState
+    const url = toTableGETUrl({
+      url: '/volumetry/employee/evaluationReports/export/csv',
+      tableFilters: filters,
+      filters: [{ name: 'department', value: departmentFilterValue.value }],
+      order,
+      orderBy
+    })
+
+    try {
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `Error while download file. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
   }
 
   const toolbarActions = [
     {
-      label: 'Printeaza',
-      icon: <PrintOutlined />,
-      onClick: () => print()
-    }
+      label: 'Exporta',
+      icon: <DownloadIcon />,
+      onClick: handleDownload
+    },
   ]
 
   return (
@@ -79,7 +100,7 @@ const EvaluationReports = () => {
           <Grid xs={4} md={3} item style={{ padding: 0 }}>
             <FilterDataSelect
               name="department"
-              defaultSelectedData={departmentFilterValue || departments[0]}
+              defaultSelectedData={departmentFilterValue}
               label=""
               showCounter={true}
               showSearch={true}

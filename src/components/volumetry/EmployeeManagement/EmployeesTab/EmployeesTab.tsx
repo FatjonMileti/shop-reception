@@ -81,14 +81,13 @@ const EmployeesTab = () => {
         <Autocomplete
           variant="outlined"
           label="Departament"
-          disableClearable
           options={departmentsOptions}
           isOptionEqualToValue={(option, value) => option.value === value.value}
         />
       )
     },
     {
-      name: 'position',
+      name: 'jobTitleId',
       label: 'Functie',
       type: 'autocomplete',
       value: '',
@@ -96,7 +95,6 @@ const EmployeesTab = () => {
         <Autocomplete
           variant="outlined"
           label="Functie"
-          disableClearable
           options={jobTitlesOptions}
           isOptionEqualToValue={(option, value) => option.value === value.value}
         />
@@ -135,7 +133,7 @@ const EmployeesTab = () => {
           locationsFilterValue && (
             <Table
               hideCheckbox
-              orderBy="department.name"
+              orderBy="department"
               order="desc"
               columns={columns}
               items={tableItems}
@@ -150,7 +148,7 @@ const EmployeesTab = () => {
         ) : (
           <Table
             hideCheckbox
-            orderBy="department.name"
+            orderBy="department"
             order="desc"
             columns={columns}
             items={tableItems}

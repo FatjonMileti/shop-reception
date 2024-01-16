@@ -59,8 +59,8 @@ const ProformaView = () => {
 
   return (
     <Box sx={!isXs ? { margin: '24px' } : { margin: '12px' }}>
-      <Grid sx={{ mt: 1, justifyContent: proform?.active ? 'center' : '' }} container spacing={2}>
-        {!proform?.active && (
+      <Grid sx={{ mt: 1, justifyContent: !proform?.active ? 'center' : '' }} container spacing={2}>
+        {proform?.active && (
           <Grid item xs={12}>
             <ShoppingCartStepper activeStep={3} />
           </Grid>
@@ -95,7 +95,7 @@ const ProformaView = () => {
             </Box>
           </Paper>
         </Grid>
-        {!proform?.active && (
+        {proform?.active && (
           <Grid item xs={12} md={4}>
             {isLoadingGetProform || isClientLoading ? (
               <div style={{ display: 'flex' }}>

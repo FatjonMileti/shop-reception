@@ -10,16 +10,12 @@ export const VOLUMETRY_CATEGORIES_URL = '/volumetry/category?&size=-1'
 
 export const STATE_OPTIONS = [
   {
-    label: 'Toate',
-    value: 'all'
-  },
-  {
-    label: 'Active',
-    value: 'active'
+    label: 'Activ',
+    value: 'true'
   },
   {
     label: 'Inactiv',
-    value: 'inactive'
+    value: 'false'
   }
 ]
 

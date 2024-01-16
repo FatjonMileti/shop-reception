@@ -16,7 +16,8 @@ const TaskSummary = item => {
     totalWorkload,
     completedWorkload,
     inProgressWorkload,
-    remainingWorkload
+    remainingWorkload,
+    workloadMeasurementUnit
   } = item.item
 
   return (
@@ -68,7 +69,7 @@ const TaskSummary = item => {
         </Grid>
 
         <Grid item mt={1} mr={1}>
-          <Capsule label="UM" value={standardProductivity} />
+          <Capsule label="UM" value={workloadMeasurementUnit} />
         </Grid>
         <Grid item mt={1} mr={1}>
           <Capsule label="Angajati repartizati" value={allocatedWorkers} />

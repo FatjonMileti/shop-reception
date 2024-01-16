@@ -1,5 +1,5 @@
 import { FilterDataSelect, ListTable, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { CircularProgress, Grid, debounce } from '@mui/material'
+import { Box, CircularProgress, Grid, debounce } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { EditActionIcon } from 'icons'
 import { useEffect, useState } from 'react'
@@ -12,6 +12,7 @@ import s from './TaskAllocation.modules.scss'
 import TaskDescription from './TaskDescription'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
+import cn from 'classnames'
 
 const TaskAllocation = () => {
   const { showNotification } = useNotification()
@@ -45,7 +46,6 @@ const TaskAllocation = () => {
 
   useEffect(() => {
     ;(async () => {
-      // TODO check when BE is done that the data is refreshed when changing allocations
       if (shouldRefreshAllocationsData) {
         const response = await makeCoreGetRequest(
           toTableGETUrl({
@@ -163,11 +163,12 @@ const TaskAllocation = () => {
       </Grid>
       {departmentFilterValue && (
         <>
-          {totalCount === 0 ? (
+          {totalCount === 0 && (
             <Grid item sx={{ padding: '1rem 1.5rem' }}>
               <Typography variant="regular">Nu exista date disponibile.</Typography>
             </Grid>
-          ) : (
+          )}
+          <Box className={cn({ [s.hidden]: totalCount === 0 })}>
             <ListTable
               rows={rows}
               handleRemoteData={debounce(fetchData, 500)}
@@ -189,7 +190,7 @@ const TaskAllocation = () => {
               selectedRowId={selectedRowId}
               shouldRefreshedSelectedRowDetails={shouldRefreshAllocationsData}
             />
-          )}
+          </Box>
           <EditCurrentTaskTemplate
             isModalOpen={isEditTaskModalOpen}
             closeModal={closeEditTaskModal}
