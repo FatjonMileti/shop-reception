@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Paper, CircularProgress } from '@mui/material'
+import { Paper, CircularProgress, useMediaQuery, Box } from '@mui/material'
 import { useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
@@ -20,6 +20,8 @@ export interface ProductBarcodeScannerProps {
 
 const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action, onProductChange } = props
+
+  const isXs = useMediaQuery('(max-width:624px)')
 
   const { showNotification } = useNotification()
 
@@ -116,20 +118,23 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           />
         </div>
         <div className={s.buttonContainer}>
-          {isUsingScandit && (
+          {/* {isUsingScandit && (
             <IconButton
               onClick={scanCode}
               label="Scaneaza"
               variant="outlined"
               startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
             />
-          )}
-          <IconButton
-            onClick={searchProduct}
-            label="Cauta Produs"
-            variant="contained"
-            startIcon={<Icon iconName="SearchOutlined" tiny={true} fill="white" />}
-          />
+          )} */}
+          <Box style={{ width: '100%' }}>
+            <IconButton
+              onClick={searchProduct}
+              sx={{ width: '100%' }}
+              label="Cauta Produs"
+              variant="contained"
+              startIcon={<Icon iconName="SearchOutlined" tiny={true} fill="white" />}
+            />
+          </Box>
         </div>
       </div>
       {isLoading && (
