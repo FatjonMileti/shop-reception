@@ -81,14 +81,13 @@ const EmployeesTab = () => {
         <Autocomplete
           variant="outlined"
           label="Departament"
-          disableClearable
           options={departmentsOptions}
           isOptionEqualToValue={(option, value) => option.value === value.value}
         />
       )
     },
     {
-      name: 'jobTitle',
+      name: 'jobTitleId',
       label: 'Functie',
       type: 'autocomplete',
       value: '',
@@ -96,7 +95,6 @@ const EmployeesTab = () => {
         <Autocomplete
           variant="outlined"
           label="Functie"
-          disableClearable
           options={jobTitlesOptions}
           isOptionEqualToValue={(option, value) => option.value === value.value}
         />
