@@ -130,8 +130,8 @@ const EditStore: React.FC<EditStoreProps> = props => {
             const payload = {
                 ...values,
                 enable: values.enable === 'Activ',
-                region: values.region === '' ? null : values.region,
-                zone: values.zone === '' ? null : values.zone
+                region: regionValue.value === '' ? null : regionValue.value,
+                zone: zoneValue.value === '' ? null : zoneValue.value
             }
             mutate(payload)
             resetForm()
