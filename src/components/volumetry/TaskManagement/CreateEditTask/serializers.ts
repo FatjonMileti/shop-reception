@@ -11,6 +11,6 @@ export const toTaskPayload = (values: TaskManagementItem) => ({
   standardProductivityValue: +values.standardProductivityValue,
   workVolumeSourceId: values.workVolumeSource.value,
   measurementUnitId: values.measurementUnit.value,
-  priorityId: values.priority.value,
+  priorityId: +values.priority.value,
   isActive: values.isActive
 })

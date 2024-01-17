@@ -175,8 +175,8 @@ export const getFrequencyOptions = (showNotification: Function) => {
       const result = await makeCoreGetRequest('/volumetry/task-templates/frequencies')
 
       const resultOptions = result.map(frequency => ({
-        value: frequency,
-        label: frequency
+        value: frequency.key,
+        label: frequency.value
       }))
 
       return resultOptions || []

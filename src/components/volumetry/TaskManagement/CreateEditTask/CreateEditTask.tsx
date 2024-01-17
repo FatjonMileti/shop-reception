@@ -76,7 +76,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
     if (editItem) {
       await makeCorePutRequest(`/volumetry/task-templates/${editItemId}`, values)
     } else {
-      await makeCorePostRequest('/volumetry/task-templates/', values)
+      await makeCorePostRequest('/volumetry/task-templates', values)
     }
   }
 
