@@ -130,8 +130,8 @@ const EditStore: React.FC<EditStoreProps> = props => {
             const payload = {
                 ...values,
                 enable: values.enable === 'Activ',
-                region: regionValue.label === '' ? null : regionValue.label,
-                zone: zoneValue.label === '' ? null : zoneValue.label
+                region: regionValue?.label === '' ? null : regionValue?.label,
+                zone: zoneValue?.label === '' ? null : zoneValue?.label
             }
             mutate(payload)
             resetForm()
@@ -174,41 +174,29 @@ const EditStore: React.FC<EditStoreProps> = props => {
                 />
               </Grid>
 
-              {isZonesLoading ? (
-                <div style={{ display: 'flex' }}>
-                  <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-                </div>
-              ) : (
-                <Grid xs={12} item>
-                    <AsyncAutocomplete
-                      variant="outlined"
-                      name="zone"
-                      label="Zona"
-                      value={zoneValue}
-                      options={zones}
-                      onChange={handleZoneChange}
-                      style={{ minWidth: '100%'}}
-                    />
-                </Grid>
-              )}
-
-              {isRegionsLoading ? (
-                <div style={{ display: 'flex' }}>
-                  <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-                </div>
-              ) : (
-                <Grid xs={12} item>
+              <Grid xs={12} item>
                   <AsyncAutocomplete
                     variant="outlined"
-                    name="region"
-                    label="Regiune"
-                    value={regionValue}
-                    style={{ width: '100%'}}
-                    options={regions}
-                    onChange={handleRegionChange}
+                    name="zone"
+                    label="Zona"
+                    value={zoneValue}
+                    options={zones}
+                    onChange={handleZoneChange}
+                    style={{ minWidth: '100%'}}
                   />
-                </Grid>
-              )}
+              </Grid>
+          
+              <Grid xs={12} item>
+                <AsyncAutocomplete
+                  variant="outlined"
+                  name="region"
+                  label="Regiune"
+                  value={regionValue}
+                  style={{ width: '100%'}}
+                  options={regions}
+                  onChange={handleRegionChange}
+                />
+              </Grid>
                 
               <Grid xs={12} item>
                 <Input
