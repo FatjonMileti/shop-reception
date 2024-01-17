@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { Grid } from '@mui/material'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { Modal } from 'components/core-ui/Modal'
@@ -6,8 +7,8 @@ import React, { useEffect, useState } from 'react'
 import { columns, toTableRowItems } from './helpers'
 import { PublicHolidayItem } from '../interfaces'
 import { DatePicker, Divider, Table } from '@fullscreendigital/carrefour-dex-fe'
-import { formatErrorMessage } from '../../../utils/formatting'
-import { Grid } from '@mui/material'
+import { formatErrorMessage } from 'utils/formatting'
+import { PUBLIC_HOLIDAYS_SELECTION_MAX_DATE, PUBLIC_HOLIDAYS_SELECTION_MIN_DATE } from "utils/constants";
 
 interface PublicHolidaysProps {
   isModalOpen: boolean
@@ -18,9 +19,6 @@ const PublicHolidays: React.FC<PublicHolidaysProps> = props => {
   const { isModalOpen, closeModal } = props
 
   const { showNotification } = useNotification()
-
-  const minDate = dayjs('2023-01-01')
-  const maxDate = dayjs('2030-12-31')
 
   const [dateToLoad, setDateToLoad] = useState<dayjs.Dayjs>(dayjs())
   const [tableItems, setTableItems] = useState<PublicHolidayItem[]>([])
@@ -67,8 +65,8 @@ const PublicHolidays: React.FC<PublicHolidaysProps> = props => {
         format={'YYYY'}
         variant="outlined"
         style={{ width: '100%' }}
-        minDate={minDate}
-        maxDate={maxDate}
+        minDate={PUBLIC_HOLIDAYS_SELECTION_MIN_DATE}
+        maxDate={PUBLIC_HOLIDAYS_SELECTION_MAX_DATE}
         required
       />
       <Grid xs={12} item paddingTop={2}>
