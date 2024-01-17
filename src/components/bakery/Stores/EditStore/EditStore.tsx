@@ -129,7 +129,9 @@ const EditStore: React.FC<EditStoreProps> = props => {
         onSubmit: async (values: EditStoreItem, { resetForm }) => {
             const payload = {
                 ...values,
-                enable: values.enable === 'Activ'
+                enable: values.enable === 'Activ',
+                region: values.region === '' ? null : values.region,
+                zone: values.zone === '' ? null : values.zone
             }
             mutate(payload)
             resetForm()
