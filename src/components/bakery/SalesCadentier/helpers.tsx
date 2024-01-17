@@ -83,6 +83,12 @@ export const columns = [
     )
   },
   {
+    title: 'Familie',
+    field: 'familyName',
+    align: 'left',
+    width: '140px'
+  },
+  {
     title: 'Oferta in ziua respectiva',
     field: 'inPromotion',
     align: 'left',

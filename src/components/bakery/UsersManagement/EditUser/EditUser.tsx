@@ -40,6 +40,10 @@ const EditUser: React.FC<EditUserProps> = props => {
     const [isTraineeChecked, setIsTraineeChecked] = useState(false)
     const [traineeValue, setTraineeValue] = useState<ValueLabelInterface>(null)
    
+    useEffect(() => {
+      if(isModalOpen) refetchEditItem
+    }, [isModalOpen])
+
     const { data: roles } = useQuery(
       ['role'],
       async () => {
@@ -61,7 +65,7 @@ const EditUser: React.FC<EditUserProps> = props => {
       },
     )
     
-    const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
+    const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
       ['user', editUserId],
       async () => {
         if (editUserId) {
