@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Grid } from '@mui/material'
-import s from './ReportsVolumetry.modules.scss'
+import s from './NormsReport.modules.scss'
 import { useState } from 'react'
 import { ValueLabelInterface } from '../interfaces'
 import { getDepartmentsOptions } from '../api'
@@ -14,7 +14,7 @@ import { Table } from 'components/core-ui/Table'
 import { toTableRowItems } from './serializers'
 import { formatPayloadDate } from 'utils/helpers'
 
-const ReportsVolumetry = () => {
+const NormsReport = () => {
   const { showNotification } = useNotification()
   const [tableItems, setTableItems] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -119,4 +119,4 @@ const ReportsVolumetry = () => {
   )
 }
 
-export default ReportsVolumetry
+export default NormsReport

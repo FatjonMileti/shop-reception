@@ -3,7 +3,8 @@ export const columns = [
     title: 'Nume task',
     field: 'taskTemplateName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '250px'
   },
   {
     title: 'Volum de lucru',

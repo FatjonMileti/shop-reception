@@ -4,8 +4,8 @@ import { URLS } from './constants'
 import { EmployeeManagement } from './EmployeeManagement'
 import { TaskManagement } from './TaskManagement'
 import { TaskAllocation } from './TaskAllocation'
+import { NormsReport } from './NormsReport'
 import EvaluationReports from 'components/volumetry/EmployeeManagement/EvaluationReports/EvaluationReports'
-import { ReportsVolumetry } from './ReportsVolumetry'
 
 export const useVolumetryRoutes = applicationPages => {
   return (
@@ -54,7 +54,7 @@ export const useVolumetryRoutes = applicationPages => {
         path={URLS.AUTH_NORMS_REPORTS}
         element={
           <PrivateRoute
-            component={ReportsVolumetry}
+            component={NormsReport}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
