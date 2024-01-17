@@ -3,18 +3,19 @@
   "name": "Carrefour DEX modules",
   "icons": [
     {
-      "src": "../images/favicon.gif",
-      "sizes": "64x64",
-      "type": "image/gif"
+      "src": "../images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
     },
     {
-      "src": "../images/football-logo.png",
+      "src": "../images/logo.png",
       "type": "image/png",
-      "sizes": "256x256"
+      "sizes": "512x512"
     }
   ],
   "start_url": "../",
   "display": "standalone",
   "theme_color": "#27ae60",
-  "background_color": "#fff"
+  "background_color": "#fff",
+  "prefer_related_applications": false
 }

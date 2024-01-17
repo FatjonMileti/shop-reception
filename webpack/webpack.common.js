@@ -35,6 +35,7 @@ module.exports = {
   plugins: [
     // new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
+      title: 'DEX PWA',
       template: commonPaths.templatePath,
       inject: 'body'
     }),
