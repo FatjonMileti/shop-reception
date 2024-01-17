@@ -8,7 +8,7 @@ import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-f
 import { columns } from './helpers'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { VOLUMETRY_TASKS_URL } from '../TaskManagement/constants'
+import { VOLUMETRY_DAILY_NORMS_REPORT } from '../TaskManagement/constants'
 import { handleQueryError } from '../utils'
 import { Table } from 'components/core-ui/Table'
 import { toTableRowItems } from './serializers'
@@ -31,7 +31,7 @@ const ReportsVolumetry = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: VOLUMETRY_TASKS_URL,
+          url: VOLUMETRY_DAILY_NORMS_REPORT,
           filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }],
           tableFilters,
           page,
@@ -41,7 +41,7 @@ const ReportsVolumetry = () => {
         })
       )
 
-      setTableItems(toTableRowItems(response.list))
+      setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -56,7 +56,7 @@ const ReportsVolumetry = () => {
 
   const tableFilterFields = [
     {
-      name: 'date',
+      name: 'queryDate',
       label: 'Date curenta',
       type: 'date',
       value: formatPayloadDate(new Date()),

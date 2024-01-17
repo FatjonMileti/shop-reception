@@ -189,7 +189,7 @@ VALUES
     (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
-    (62, 'Raport norme', '', '/volumetry/reports/', true, 46, true),
+    (62, 'Raport norme', '', '/volumetry/reports/dailyNorms', true, 46, true),
     -- Shop Reception
     (63, 'Screen 1', '', '/url', true, 47, true);
     -- Bakery TRACEABILITY-OPERATOR

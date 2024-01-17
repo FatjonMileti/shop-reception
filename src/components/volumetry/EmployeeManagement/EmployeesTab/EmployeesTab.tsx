@@ -73,7 +73,7 @@ const EmployeesTab = () => {
       filter: <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
     },
     {
-      name: 'department',
+      name: 'genericDepartmentId',
       label: 'Departament',
       type: 'autocomplete',
       value: '',
