@@ -19,6 +19,9 @@ const PublicHolidays: React.FC<PublicHolidaysProps> = props => {
 
   const { showNotification } = useNotification()
 
+  const minDate = dayjs('2023-01-01')
+  const maxDate = dayjs('2030-12-31')
+
   const [dateToLoad, setDateToLoad] = useState<dayjs.Dayjs>(dayjs())
   const [tableItems, setTableItems] = useState<PublicHolidayItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -57,11 +60,15 @@ const PublicHolidays: React.FC<PublicHolidaysProps> = props => {
           setTableItems([])
         }}
         label="Year"
+        modalLabel="Select year"
+        closeButtonLabel="Cancel"
         views={['year']}
         openTo={'year'}
         format={'YYYY'}
         variant="outlined"
         style={{ width: '100%' }}
+        minDate={minDate}
+        maxDate={maxDate}
         required
       />
       <Grid xs={12} item paddingTop={2}>

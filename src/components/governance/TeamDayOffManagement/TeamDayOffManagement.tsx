@@ -136,7 +136,7 @@ const TeamDayOffManagement = () => {
   const toolbarActions = useMemo(() => {
     let actions = [
       {
-        label: 'Holidays',
+        label: 'Public Holidays',
         icon: <CalendarActionIcon />,
         onClick: () => openPublicHolidaysModal()
       }
