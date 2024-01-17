@@ -28,7 +28,7 @@ const TaskAllocation = () => {
   const [tableState, setTableState] = useState(
     window.history.state.tableState || {
       page: 0,
-      rowsPerPage: 10,
+      rowsPerPage: 5,
       tableFilters: []
     }
   )
@@ -47,10 +47,14 @@ const TaskAllocation = () => {
   useEffect(() => {
     ;(async () => {
       if (shouldRefreshAllocationsData) {
+        const { page, rowsPerPage, tableFilters } = tableState
         const response = await makeCoreGetRequest(
           toTableGETUrl({
             url: '/volumetry/tasks/aggregation/summary',
-            filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }]
+            filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }],
+            tableFilters,
+            page,
+            rowsPerPage
           })
         )
         setRows(
