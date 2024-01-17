@@ -157,62 +157,62 @@ const App = () => {
   const shopReceptionRoutes = useShopReceptionRoutes(applicationPages)
 
   return (
-    <AuthProvider {...oidcConfig}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme="light">
-          {((isLoadingAppModules || !hasLoadedAppModules) && (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          )) || (
-            <Layout modules={modules} setSubdomainId={setSubdomainId}>
-              <BackButtonTitle applicationPages={applicationPages}></BackButtonTitle>
-              <Routes>
-                {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
+    // <AuthProvider {...oidcConfig}>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme="light">
+        {((isLoadingAppModules || !hasLoadedAppModules) && (
+          <div style={{ display: 'flex' }}>
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+          </div>
+        )) || (
+          <Layout modules={modules} setSubdomainId={setSubdomainId}>
+            <BackButtonTitle applicationPages={applicationPages}></BackButtonTitle>
+            <Routes>
+              {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
-                {/* private routes */}
-                <Route
-                  path={URLS.AUTH_HOME}
-                  element={
-                    <PrivateRoute
-                      component={Home}
-                      modules={modules}
-                      setSubdomainId={setSubdomainId}
-                    />
-                  }
-                />
-                {governanceRoutes}
-                {bakeryRoutes}
-                {volumetryRoutes}
-                {supplyOmniRoutes}
-                {merchandiseRoutes}
-                {shopReceptionRoutes}
-                {applicationModulesPages.map(page =>
-                  createRoute(
-                    {
-                      ...page,
-                      subdomainId,
-                      modules,
-                      applicationPages,
-                      hasLoadedActivities,
-                      isLoadingActivities
-                    },
-                    ServiceDomain
-                  )
-                )}
-                {/* end of private routes */}
+              {/* private routes */}
+              <Route
+                path={URLS.AUTH_HOME}
+                element={
+                  <PrivateRoute
+                    component={Home}
+                    modules={modules}
+                    setSubdomainId={setSubdomainId}
+                  />
+                }
+              />
+              {governanceRoutes}
+              {bakeryRoutes}
+              {volumetryRoutes}
+              {supplyOmniRoutes}
+              {merchandiseRoutes}
+              {shopReceptionRoutes}
+              {applicationModulesPages.map(page =>
+                createRoute(
+                  {
+                    ...page,
+                    subdomainId,
+                    modules,
+                    applicationPages,
+                    hasLoadedActivities,
+                    isLoadingActivities
+                  },
+                  ServiceDomain
+                )
+              )}
+              {/* end of private routes */}
 
-                <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
-                <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
-                {applicationPages.length && <Route path="*" element={<NotFound />} />}
-              </Routes>
-            </Layout>
-          )}
-        </ThemeProvider>
+              <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
+              <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
+              {applicationPages.length && <Route path="*" element={<NotFound />} />}
+            </Routes>
+          </Layout>
+        )}
+      </ThemeProvider>
 
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </AuthProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+    // </AuthProvider>
   )
 }
 
