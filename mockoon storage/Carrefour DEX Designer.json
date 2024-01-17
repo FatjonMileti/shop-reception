@@ -454,7 +454,7 @@
         },
         {
           "uuid": "910f54db-f12f-4666-91d7-10e68c34b45c",
-          "body": "[\n  {\n    \"id\": \"125\",\n    \"name\": \"Raport norme\",\n    \"icon\": \"ReportsVolumetry\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"205\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"205\",\n        \"routeURL\": \"/volumetry/reports/norms\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
+          "body": "[\n  {\n    \"id\": \"125\",\n    \"name\": \"Raport norme\",\n    \"icon\": \"ReportsVolumetry\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"205\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"205\",\n        \"routeURL\": \"/volumetry/reports/dailyNorms\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of activities - Volumetry Reports",

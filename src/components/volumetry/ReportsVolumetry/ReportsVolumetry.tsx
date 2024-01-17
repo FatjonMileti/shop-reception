@@ -41,7 +41,7 @@ const ReportsVolumetry = () => {
         })
       )
 
-      setTableItems(response.list)
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -57,7 +57,7 @@ const ReportsVolumetry = () => {
   const tableFilterFields = [
     {
       name: 'queryDate',
-      label: 'Date curenta',
+      label: 'Data curenta',
       type: 'date',
       value: formatPayloadDate(new Date()),
       required: true,
