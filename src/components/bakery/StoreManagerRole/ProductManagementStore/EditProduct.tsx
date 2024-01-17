@@ -78,7 +78,11 @@ export const EditProduct: React.FC<EditProductProps> = props => {
     initialValues: initialValues,
     validationSchema: editStoreValidationSchema,
     onSubmit: async (values: any, { resetForm }) => {
-      editProductMutation.mutate(values)
+      const payload = {
+        ...values,
+        scheduleProduct: values.scheduleProduct === 'Da'
+    }
+      editProductMutation.mutate(payload)
       resetForm()
     }
   })
