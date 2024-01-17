@@ -123,8 +123,8 @@ export const EditProduct: React.FC<EditProductProps> = props => {
                   width="100%"
                   value={formik.values.scheduleProduct}
                   values={[
-                    { value: 'true', label: 'Da' },
-                    { value: 'false', label: 'Nu' }
+                    { value: 'Da', label: 'Da' },
+                    { value: 'Nu', label: 'Nu' }
                   ]}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     formik.setFieldValue(
