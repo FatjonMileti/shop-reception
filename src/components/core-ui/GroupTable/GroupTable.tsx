@@ -87,6 +87,7 @@ const GroupTable = props => {
       })) || [],
     [filters]
   )
+
   const toolbarActions = !props.hasPrintAction
     ? props.toolbarActions
     : props.toolbarActions.map(action =>

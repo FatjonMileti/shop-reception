@@ -129,7 +129,7 @@ export const drawerFilters = (prevDay, familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'family',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
@@ -144,7 +144,7 @@ export const drawerFilters = (prevDay, familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'subfamily',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"

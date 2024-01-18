@@ -205,7 +205,7 @@ const ProductionManagementStore = () => {
     },
     {
       name: 'family',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"
@@ -221,7 +221,7 @@ const ProductionManagementStore = () => {
     },
     {
       name: 'subfamily',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"
