@@ -5529,6 +5529,160 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "d8d5879f-7522-4805-82c3-5fbdcd175240",
+      "type": "http",
+      "documentation": "Get team members list",
+      "method": "get",
+      "endpoint": "governance/publicHolidays/:year",
+      "responses": [
+        {
+          "uuid": "aae62948-c4b6-49fb-8200-bd1a223a58d9",
+          "body": "[\n  {\n    \"id\": 1,\n    \"date\": \"{{urlParam 'year'}}-01-01\",\n    \"description\": \"Anul Nou\"\n  },\n  {\n    \"id\": 2,\n    \"date\": \"{{urlParam 'year'}}-01-02\",\n    \"description\": \"Anul Nou\"\n  },\n  {\n    \"id\": 3,\n    \"date\": \"{{urlParam 'year'}}-01-02\",\n    \"description\": \"Ziua Unirii Principatelor Române\"\n  },\n  {\n    \"id\": 4,\n    \"date\": \"{{urlParam 'year'}}-04-14\",\n    \"description\": \"Vinerea Mare\"\n  },\n  {\n    \"id\": 5,\n    \"date\": \"{{urlParam 'year'}}-04-16\",\n    \"description\": \"Paște ortodox\"\n  },\n  {\n    \"id\": 6,\n    \"date\": \"{{urlParam 'year'}}-04-17\",\n    \"description\": \"Paște ortodox\"\n  },\n  {\n    \"id\": 7,\n    \"date\": \"{{urlParam 'year'}}-12-25\",\n    \"description\": \"Crăciunul\"\n  },\n  {\n    \"id\": 8,\n    \"date\": \"{{urlParam 'year'}}-12-26\",\n    \"description\": \"Crăciunul\"\n  }\n]",
+          "latency": 150,
+          "statusCode": 200,
+          "label": "Successfully obtained the public holidays for param year",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0dca18b4-6c67-4e10-b294-82bf1a2d4d15",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "249d54a7-0fc1-4dbb-a1cf-b075f7e321f3",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c2e59f8b-9e38-4539-981c-fc189e3bb38d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "d352af74-9470-4bf9-8fe5-f55bb02cee9f",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1232b411-8339-4c18-a5af-c986b0ecb8c4",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5763,6 +5917,10 @@
     {
       "type": "route",
       "uuid": "8aca656d-df76-47ae-b8db-fa4cca0c55bf"
+    },
+    {
+      "type": "route",
+      "uuid": "d8d5879f-7522-4805-82c3-5fbdcd175240"
     }
   ],
   "proxyMode": false,
