@@ -44,7 +44,7 @@ const GroupTable = props => {
         setShouldRefreshData(false)
       }
     })()
-  }, [shouldRefreshData, window.history.state.tableState])
+  }, [shouldRefreshData])
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
