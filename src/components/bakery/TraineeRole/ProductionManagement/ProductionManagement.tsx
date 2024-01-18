@@ -209,7 +209,7 @@ const ProductionManagement = () => {
       enabled: false
     }
   )
-    console.log('xxxxxxxxxxxxxxxxxx',tableState.tableFilters)
+
   return (
     <div className={s.mainContainer}>
       <Grid container>
