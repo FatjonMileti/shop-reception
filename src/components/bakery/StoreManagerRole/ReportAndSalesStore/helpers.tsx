@@ -117,6 +117,12 @@ export const columns = [
     )
   },
   {
+    title: 'Familie',
+    field: 'familyName',
+    align: 'left',
+    width: '140px'
+  },
+  {
     title: 'Ultima persoana care a modificat fisierul',
     field: 'changedBy',
     align: 'left',
