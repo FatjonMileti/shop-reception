@@ -58,7 +58,7 @@ const ProductionManagement = () => {
     ['cadentier-families-store', storeFilterValue?.value],
     async () => {
       const result = await makeCoreGetRequest(
-        '/bakery/store/cadentier/families/x',
+        '/bakery/store/cadentier/families',
         {
           params: {
             store: storeFilterValue?.value,
