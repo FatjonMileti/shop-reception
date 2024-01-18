@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { EditProductionForm, TableItem } from './interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { editStoreValidationSchema, getInitialValues } from './helpers'
-import { ChangeEvent, useMemo } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 
@@ -24,6 +24,10 @@ export const EditProduction: React.FC<EditProductionProps> = props => {
   const { isModalOpen, closeModal, setShouldRefreshData, editProductionId } = props
   const { showNotification } = useNotification()
 
+  useEffect(() => {
+    if(isModalOpen) productionQuery.refetch()
+  }, [isModalOpen])
+  
   const productionQuery = useQuery(
     ['production-store', editProductionId],
     async () => {

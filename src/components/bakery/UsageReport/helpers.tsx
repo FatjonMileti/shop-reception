@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { IconCell } from 'components/core-ui/IconCell'
 import dayjs from 'dayjs'
 import { useMemo } from 'react';
-import { formatMonthsToRO } from 'utils/helpers';
+import { formatMonthsToRO, formatPayloadDate } from 'utils/helpers';
 import { getPreviousDay } from 'utils/helpers';
 
 export const ColumnsComponent = ( startDate: dayjs.Dayjs, endDate: dayjs.Dayjs ) => {
@@ -18,7 +18,7 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
   let modifyStoreGrowthColumns = []
   let modifyProductGrowthColumns = []
   let loginColumns = []
-
+  
   const stickyColumns = [
     {
       title: 'Magazin',
@@ -46,7 +46,8 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
     },
   ]
 
-  while (currentDate.isBefore(endDate) || currentDate.isSame(endDate, 'day')) {
+  while (dayjs(currentDate).isBefore(endDate) || dayjs(currentDate).isSame(endDate, 'day')) {
+    const dayIndex = currentDate.clone()
     const day = dayjs(currentDate).format('D')
     const month = formatMonthsToRO(dayjs(currentDate).format('MMMM'))
 
@@ -62,10 +63,12 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       isDynamic: true,
       render: row => (
         <Box>
-          <IconCell key={`descarcareCadentier${day}${month}`} value={row.applicationReportDynamicDtos.find(dto => dto.date === getPreviousDay(currentDate))?.printCadentier ? 'active' : 'inactive'} />
+          <IconCell 
+            key={`descarcareCadentier${day}${month}`} 
+            value={row.applicationReportDynamicDtos.find(dto => dto.date === formatPayloadDate(dayIndex))?.printCadentier ? 'active' : 'inactive'} />
         </Box>
       )
-    });
+    })
     modifyCadentierColumns.push({
       title: `Modificare cadantier ${day} ${month}`,
       field: 'modifyCadentier',
@@ -78,7 +81,7 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       isDynamic: true,
       render: row => (
           <Box>
-            <IconCell key={`modificareCadentier${day}${month}`} value={row.applicationReportDynamicDtos.find(dto => dto.date === getPreviousDay(currentDate))?.modifyCadentier ? 'active' : 'inactive'} />
+            <IconCell key={`modificareCadentier${day}${month}`} value={row.applicationReportDynamicDtos.find(dto => dto.date === formatPayloadDate(dayIndex))?.modifyCadentier ? 'active' : 'inactive'} />
           </Box>
       )
     })
@@ -94,7 +97,7 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       isDynamic: true,
       render: row => (
           <Box>
-            <IconCell key={`coeficientCrestereMagazin${day}${month}`} value={row.applicationReportDynamicDtos.find(dto => dto.date === getPreviousDay(currentDate))?.modifyStoreGrowth ? 'active' : 'inactive'} />
+            <IconCell key={`coeficientCrestereMagazin${day}${month}`} value={row.applicationReportDynamicDtos.find(dto => dto.date === formatPayloadDate(dayIndex))?.modifyStoreGrowth ? 'active' : 'inactive'} />
           </Box>
       )
     })
@@ -110,10 +113,10 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       isDynamic: true,
       render: row => (
           <Box>
-            <IconCell key={`coeficientCrestereProduse${day}${month}`} value={row.applicationReportDynamicDtos.find(dto => dto.date === getPreviousDay(currentDate))?.modifyProductGrowth ? 'active' : 'inactive'} />
+            <IconCell key={`coeficientCrestereProduse${day}${month}`} value={row.applicationReportDynamicDtos.find(dto => dto.date === formatPayloadDate(dayIndex))?.modifyProductGrowth ? 'active' : 'inactive'} />
           </Box>
-      )}
-    )
+      )
+    })
     loginColumns.push({
       title: `Accesare applicatie ${day} ${month}`,
       field: 'login',
@@ -126,12 +129,12 @@ export const columns = (startDate: dayjs.Dayjs, endDate: dayjs.Dayjs) => {
       isDynamic: true,
       render: row => (
           <Box>
-            <IconCell key={`login${day}${month}`} value={row.applicationReportDynamicDtos.find(dto => dto.date === getPreviousDay(currentDate))?.login ? 'active' : 'inactive'} />
+            <IconCell key={`login${day}${month}`} value={row.applicationReportDynamicDtos.find(dto => dto.date === formatPayloadDate(dayIndex))?.login ? 'active' : 'inactive'} />
           </Box>
       )
     })
 
-    currentDate = currentDate.add(1, 'day');
+    currentDate = dayjs(currentDate).add(1, 'day')
   }
   return [...stickyColumns, ...printCandentierColumns, ...modifyCadentierColumns, ...modifyStoreGrowthColumns, ...modifyProductGrowthColumns, ...loginColumns];
 };
