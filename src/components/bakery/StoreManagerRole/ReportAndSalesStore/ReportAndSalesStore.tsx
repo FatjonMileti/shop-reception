@@ -178,7 +178,7 @@ const ReportAndSalesStore = () => {
     },
     {
       name: 'family',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"
@@ -194,7 +194,7 @@ const ReportAndSalesStore = () => {
     },
     {
       name: 'subfamily',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"

@@ -58,7 +58,7 @@ const ProductionManagement = () => {
     ['cadentier-families-store', storeFilterValue?.value],
     async () => {
       const result = await makeCoreGetRequest(
-        '/bakery/store/cadentier/families',
+        '/bakery/store/cadentier/families/x',
         {
           params: {
             store: storeFilterValue?.value,
@@ -209,7 +209,7 @@ const ProductionManagement = () => {
       enabled: false
     }
   )
-
+    console.log('xxxxxxxxxxxxxxxxxx',tableState.tableFilters)
   return (
     <div className={s.mainContainer}>
       <Grid container>
