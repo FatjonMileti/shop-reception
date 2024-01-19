@@ -142,7 +142,7 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
                   <AsyncAutocomplete
                     variant="outlined"
                     name="moduleName"
-                    label="Zona"
+                    label="Modul"
                     value={moduleValue}
                     options={modules}
                     onChange={handleModuleChange}
