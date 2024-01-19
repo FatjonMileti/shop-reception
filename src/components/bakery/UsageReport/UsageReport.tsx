@@ -41,7 +41,7 @@ const UsageReport = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/report/application/x',
+          url: '/bakery/report/application',
           filters: filters,
           tableFilters,
           page,
