@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { EditClusterItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { getInitialValues, gamaProdus } from '../helpers'
-import { ChangeEvent, useMemo } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
 interface EditClusterProps {
@@ -23,7 +23,11 @@ const EditCluster: React.FC<EditClusterProps> = props => {
     const { isModalOpen, closeModal, setShouldRefreshData, editClusterId } = props
     const { showNotification } = useNotification()
 
-    const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
+    useEffect(() => {
+      if(isModalOpen) refetchEditItem()
+    }, [isModalOpen])
+  
+    const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
         ['cluster', editClusterId],
         async () => {
           if (editClusterId) {

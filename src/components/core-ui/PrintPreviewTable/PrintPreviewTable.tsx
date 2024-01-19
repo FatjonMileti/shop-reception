@@ -101,7 +101,7 @@ const PrintPreviewTable = props => {
       if (action.type === 'GET') {
         const encodedFilterBy = encodeURIComponent(filterBy)
         const encodedFilterValue = encodeURIComponent(filterValue)
-
+      
         response = await makeCoreGetRequest(
           order && orderBy
             ? `${url}?page=0&size=1000&order=${order}&orderBy=${orderBy}&filterBy=${encodedFilterBy}&filterValue=${encodedFilterValue}`

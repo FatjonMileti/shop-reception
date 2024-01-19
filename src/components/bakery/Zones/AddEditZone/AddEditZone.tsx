@@ -44,7 +44,7 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
         }
     )
 
-    const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+    const initialValues = useMemo(() => getInitialValues(editItem, isEdit), [editItem])
     const validationSchema = useMemo(() => getValidationSchema(), [editItem])
 
     const submitTask = async (values: AddEditZoneItem) => {

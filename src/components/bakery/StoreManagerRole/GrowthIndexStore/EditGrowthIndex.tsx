@@ -7,7 +7,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { GrowthIndex } from './interfaces'
 import { useFormik } from 'formik'
-import { ChangeEvent, useMemo } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { editGrowthIndexValidationSchema, getInitialValues } from './helpers'
@@ -27,6 +27,10 @@ export const EditGrowthIndex = ({
 }: EditGrowthIndexProps) => {
   const { showNotification } = useNotification()
 
+  useEffect(() => {
+    if(isModalOpen) growthIndexQuery.refetch()
+  }, [isModalOpen])
+  
   const growthIndexQuery = useQuery(
     ['growth-index-store', editGrowthIndexId],
     async () => {

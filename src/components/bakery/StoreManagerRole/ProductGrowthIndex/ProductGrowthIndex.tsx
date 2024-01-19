@@ -92,7 +92,7 @@ const ProductGrowthIndex = () => {
   const drawerFilters = [
     {
       name: 'family',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"

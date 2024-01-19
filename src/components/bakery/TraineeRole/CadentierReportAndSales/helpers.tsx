@@ -118,6 +118,12 @@ export const columns = [
     )
   },
   {
+    title: 'Familie',
+    field: 'familyName',
+    align: 'left',
+    width: '140px'
+  },
+  {
     title: 'Ultima persoana care a modificat fisierul',
     field: 'changedBy',
     align: 'left',
@@ -144,7 +150,7 @@ export const drawerFilters = (prevDay, familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'family',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
@@ -159,7 +165,7 @@ export const drawerFilters = (prevDay, familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'subfamily',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
