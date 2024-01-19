@@ -110,7 +110,7 @@ const UsageReportRegion = () => {
         )
 
       const url = toTableGETUrl({
-        url: '/bakery/report/download/application',
+        url: '/bakery/region/download/application',
         filters: filters
       })
       const response = await makeCoreGetFileRequest(url, {
