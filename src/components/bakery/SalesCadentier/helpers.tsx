@@ -1,6 +1,8 @@
 import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { BooleanText } from 'components/core-ui/BooleanText'
 import { ImageCell } from 'components/core-ui/ImageCell'
+import { formatPayloadDate } from 'utils/helpers'
+import { Autocomplete, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 
 export const columns = [
   {
@@ -113,5 +115,48 @@ export const columns = [
   }
 ]
 
-
-
+export const drawerFilters = (dateFilterValue, familiesQuery, subfamiliesQuery) => [
+  {
+    name: 'date',
+    label: 'Planificare pentru',
+    type: 'date',
+    value: formatPayloadDate(dateFilterValue),
+    filter: (
+      <DatePicker
+        value={formatPayloadDate(dateFilterValue)}
+        onChange={() => {}}
+        label="Planificare pentru"
+        variant="outlined"
+        required
+      />
+    )
+  },
+  {
+    name: 'family',
+    label: 'Familie',
+    type: 'autocomplete',
+    value: '',
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Familie"
+        options={familiesQuery.data || []}
+        multiple
+      />
+    )
+  },
+  {
+    name: 'subfamily',
+    label: 'Subfamilie',
+    type: 'autocomplete',
+    value: '',
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Subfamilie"
+        options={subfamiliesQuery.data || []}
+        multiple
+      />
+    )
+  }
+]
