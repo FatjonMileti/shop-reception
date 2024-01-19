@@ -76,7 +76,6 @@ export const drawerFilters = (familiesQuery) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Familie',
-    clearFiltersOnChange: ['subfamily']
+    label: 'Familie'
   },
 ]
