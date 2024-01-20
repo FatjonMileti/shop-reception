@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { Icon } from '../../../core-ui/Icon'
 import { IconBox } from '../IconBox'
 import DownloadIcon from '@mui/icons-material/Download'
-import Toolbar from '@mui/material/Toolbar'
+import { Toolbar } from '@mui/material'
 
 const Home = () => {
   const navigate = useNavigate()

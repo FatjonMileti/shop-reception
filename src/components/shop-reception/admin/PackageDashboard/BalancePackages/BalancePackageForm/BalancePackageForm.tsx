@@ -8,7 +8,7 @@ const BalancePackageForm = () => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Paper className={s.filterPaper}>
-          <TitleHeader title=' Actualizare inventar' />
+          <TitleHeader title='Actualizare inventar' />
           <Grid container spacing={4}>
             <Grid xs={12} md={6} item>
               <Input

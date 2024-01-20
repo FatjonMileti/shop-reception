@@ -5,7 +5,7 @@ import { URLS } from '../constants'
 import { useNavigate } from 'react-router-dom'
 import { Icon } from '../../../core-ui/Icon'
 import { IconBox } from '../IconBox'
-import Toolbar from '@mui/material/Toolbar'
+import { Toolbar } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 const getList = (navigate) => {

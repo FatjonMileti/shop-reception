@@ -11,7 +11,6 @@ import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../TitleHeader'
 import s from '../../CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import { AdminStoreForm } from '../AdminStore/AdminStoreForm'
 import { EditForm } from './EditForm'
 
 const CentralizeStoresHub = () => {

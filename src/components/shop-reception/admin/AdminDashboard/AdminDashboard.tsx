@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { Icon } from '../../../core-ui/Icon'
 import { IconBox } from '../IconBox'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import Toolbar from '@mui/material/Toolbar'
+import { Toolbar } from '@mui/material'
 
 const getLink = (navigate) => {
   return [
