@@ -126,7 +126,7 @@ const ReportAndSalesStore = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/store/cadentier',
+          url: '/bakery/store/sale/cadentier',
           tableFilters,
           page,
           rowsPerPage,
