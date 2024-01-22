@@ -94,45 +94,6 @@ const TeamDayOffManagement = () => {
   const openPublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(true)
   const closePublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(false)
 
-  const rowActions = useMemo(() => {
-    let actions = []
-
-    const selectRow = (rowId, action) => {
-      const item = tableItems.find(item => item.id === rowId)
-      setSelectedRow(item)
-      action === 'edit' ? openEditModal() : openDeleteModal()
-    }
-
-    if (canEdit) {
-      actions = [
-        ...actions,
-        {
-          label: 'Edit',
-          labelColor: 'white',
-          typographyVariant: 'medium',
-          desktopIcon: <EditActionIcon />,
-          backgroundColor: '#0970E6',
-          onClick: (e, rowId) => selectRow(rowId, 'edit')
-        }
-      ]
-    }
-    if (canDelete) {
-      actions = [
-        ...actions,
-        {
-          label: 'Edit',
-          labelColor: 'white',
-          typographyVariant: 'medium',
-          desktopIcon: <EditActionIcon />,
-          backgroundColor: '#0970E6',
-          onClick: (e, rowId) => selectRow(rowId, 'edit')
-        }
-      ]
-    }
-
-    return actions
-  }, [columns, canEdit, canDelete, teamMembers, tableItems])
-
   const toolbarActions = useMemo(() => {
     let actions = [
       {
@@ -155,6 +116,12 @@ const TeamDayOffManagement = () => {
 
     return actions
   }, [canCreate])
+
+  const selectRow = (rowId, action) => {
+    const item = tableItems.find(item => item.id === rowId)
+    setSelectedRow(item)
+    action === 'edit' ? openEditModal() : openDeleteModal()
+  }
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
@@ -266,7 +233,25 @@ const TeamDayOffManagement = () => {
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
-            rowActions={rowActions}
+            rowActions={[
+              canEdit && {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                desktopIcon: <EditActionIcon />,
+  
+                onClick: (_e, rowId) => selectRow(rowId, 'edit')
+              },
+              canDelete && {
+                label: 'Delete',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#d9534f',
+                desktopIcon: <DeleteActionIcon />,
+                onClick: (_e, rowId) => selectRow(rowId, 'delete')
+              }
+            ]}
             rowActionsWidth="130px"
             toolbarActions={toolbarActions}
             filtersLabel="Filters"

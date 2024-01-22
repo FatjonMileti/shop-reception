@@ -128,7 +128,6 @@ const EffortMatrix = () => {
               typographyVariant: 'medium',
               backgroundColor: '#d9534f',
               desktopIcon: <DeleteActionIcon />,
-
               onClick: (_e, rowId) => selectRow(rowId, 'delete')
             }
           ]}
