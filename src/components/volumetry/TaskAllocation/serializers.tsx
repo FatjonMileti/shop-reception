@@ -30,7 +30,13 @@ export const toEmployeeFilterItems = items =>
     }))
     .sort((a, b) => b.shiftCategory.localeCompare(a.shiftCategory))
 
-export const toEmployeesItems = (item, employees, setShouldRefreshData, setSelectedRowId) =>
+export const toEmployeesItems = (
+  item,
+  employees,
+  setShouldRefreshData,
+  setSelectedRowId,
+  hideDetails
+) =>
   employees.map(employee => ({
     id: employee.id,
     content: (
@@ -39,6 +45,7 @@ export const toEmployeesItems = (item, employees, setShouldRefreshData, setSelec
         task={item}
         setShouldRefreshData={setShouldRefreshData}
         setSelectedRowId={setSelectedRowId}
+        hideDetails={hideDetails}
       />
     )
   }))

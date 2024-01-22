@@ -2,7 +2,7 @@ import { Capsule } from 'components/core-ui/Capsule'
 import s from './TaskAllocation.modules.scss'
 import { Grid, Typography } from '@mui/material'
 
-const TaskSummary = item => {
+const TaskSummary = ({ item, hideDetails = false }) => {
   // TODO: To add type when db schema is defined
   const {
     rayonsOrDepartment,
@@ -18,7 +18,7 @@ const TaskSummary = item => {
     inProgressWorkload,
     remainingWorkload,
     workloadMeasurementUnit
-  } = item.item
+  } = item
 
   return (
     <Grid container flexDirection="column">

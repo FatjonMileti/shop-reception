@@ -20,12 +20,25 @@ interface EditAllocationModalProps {
   setSelectedRowId: Function
   editItem?: any // TODO: To add interface when db schema is defined
   employee?: any // TODO: To add type when db schema is defined
+  hideWorkload?: boolean
 }
+
+// TODO use when from formik
 
 const validationSchema = yup.object({
   workload: yup.number().required('Acest camp este obligatoriu.'),
   comment: yup.string()
 })
+
+const hideWorkloadValidationSchema = yup.object({
+  comment: yup.string()
+})
+
+// const validationSchema = param =>
+//   yup.object().shape({
+//     workload: yup.string().when(param, ([param], schema) => (param ? schema : schema.required())),
+//     comment: yup.string()
+//   })
 
 const EditAllocationModal = (props: EditAllocationModalProps) => {
   const {
@@ -35,7 +48,8 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     employee,
     setShouldRefreshData,
     setSelectedRowId,
-    task
+    task,
+    hideWorkload
   } = props
   const { showNotification } = useNotification()
 
@@ -68,8 +82,8 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    initialValues: getFormInitialValues(editItem || employee),
-    validationSchema: validationSchema,
+    initialValues: getFormInitialValues(editItem || employee, hideWorkload),
+    validationSchema: hideWorkload ? hideWorkloadValidationSchema : validationSchema,
     onSubmit: async (values: any, { resetForm }) => {
       mutate(values)
       resetForm()
@@ -109,22 +123,24 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           />
         </Grid>
 
-        <Grid xs={12} item>
-          <Input
-            type="number"
-            variant="outlined"
-            name="workload"
-            label="Volum"
-            value={formik.values.workload}
-            width="100%"
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('workload', (event.target as HTMLInputElement).value)
-            }
-            error={!!formik.errors.workload}
-            helperText={formik.errors.workload as string}
-            required
-          />
-        </Grid>
+        {!hideWorkload && (
+          <Grid xs={12} item>
+            <Input
+              type="number"
+              variant="outlined"
+              name="workload"
+              label="Volum"
+              value={formik.values.workload}
+              width="100%"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                formik.setFieldValue('workload', (event.target as HTMLInputElement).value)
+              }
+              error={!!formik.errors.workload}
+              helperText={formik.errors.workload as string}
+              required
+            />
+          </Grid>
+        )}
 
         <Grid xs={12} item>
           <Input
