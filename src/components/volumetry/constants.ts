@@ -4,5 +4,6 @@ export const URLS = {
   AUTH_TASK_MANAGEMENT: 'volumetry/tasksManagement/taskManagement',
   AUTH_TASK_ALLOCATION: 'volumetry/tasksManagement/taskAllocation',
   AUTH_NORMS_REPORTS: 'volumetry/reports/dailyNorms',
-  AUTH_ASSIGNED_TASKS: 'volumetry/tasksManagement/assignedTasks'
+  AUTH_ASSIGNED_TASKS: 'volumetry/tasksManagement/assignedTasks',
+  AUTH_ALLOCATED_EMPLOYEES_STATUS: 'volumetry/employee/allocatedEmployeesStatus',
 }
