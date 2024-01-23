@@ -11,6 +11,7 @@ import { useNotification } from 'hooks'
 import TaskDescription from '../TaskAllocation/TaskDescription'
 
 const AssignedTasks = () => {
+  const hideDetails = true
   const [totalCount, setTotalCount] = useState<number>(null)
   const [rows, setRows] = useState([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -42,7 +43,8 @@ const AssignedTasks = () => {
             response.list,
             shouldRefreshAllocationsData,
             setShouldRefreshAllocationsData,
-            setSelectedRowId
+            setSelectedRowId,
+            hideDetails
           )
         )
         setTableItems(response.list)
@@ -137,7 +139,8 @@ const AssignedTasks = () => {
           response.list,
           shouldRefreshAllocationsData,
           setShouldRefreshAllocationsData,
-          setSelectedRowId
+          setSelectedRowId,
+          hideDetails
         )
       )
       setTableItems(response.list)

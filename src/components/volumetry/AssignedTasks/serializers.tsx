@@ -5,7 +5,8 @@ export const toListTableRows = (
   items,
   shouldRefreshData,
   setShouldRefreshData,
-  setSelectedRowId
+  setSelectedRowId,
+  hideDetails
 ) => {
   const groupedItems = items.reduce((acc, item) => {
     const alreadyExistingItemIndex = acc.findIndex(i => i.id === item.taskTemplateId)
@@ -22,7 +23,7 @@ export const toListTableRows = (
 
   return groupedItems.map(item => ({
     id: item.taskTemplateId,
-    summary: <TaskSummary item={item} />,
+    summary: <TaskSummary item={item} hideDetails={hideDetails} />,
     details: (
       <TaskDescription
         item={item}
@@ -30,7 +31,7 @@ export const toListTableRows = (
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
         setSelectedRowId={setSelectedRowId}
-        hideDetails
+        hideDetails={hideDetails}
       />
     ),
     borderLeftColor: '#0970E6'

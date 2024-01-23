@@ -106,7 +106,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
             items={[
               { label: 'Task:', name: task?.taskName },
               { label: 'Departament/Raion:', name: task?.rayonsOrDepartment },
-              {
+              !hideWorkload && {
                 label: 'Angajat:',
                 name: employee?.workerFullName
               }
