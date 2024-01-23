@@ -4,7 +4,7 @@ import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { useNotification } from 'hooks'
-import { ChangeEvent, MouseEvent } from 'react'
+import { ChangeEvent, MouseEvent, useMemo } from 'react'
 import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
 import * as yup from 'yup'
@@ -13,22 +13,13 @@ import { getFormInitialValues } from './helpers'
 import { handleQueryError } from 'components/volumetry/utils'
 import { EditAllocationModalProps } from '../TaskAllocationDefinitions'
 
-// TODO use when from formik
-
-const validationSchema = yup.object({
-  workload: yup.number().required('Acest camp este obligatoriu.'),
-  comment: yup.string()
-})
-
-const hideWorkloadValidationSchema = yup.object({
-  comment: yup.string()
-})
-
-// const validationSchema = param =>
-//   yup.object().shape({
-//     workload: yup.string().when(param, ([param], schema) => (param ? schema : schema.required())),
-//     comment: yup.string()
-//   })
+const validationSchema = hideWorkload =>
+  yup.object({
+    workload: hideWorkload
+      ? yup.string().nullable()
+      : yup.number().required('Acest camp este obligatoriu.'),
+    comment: yup.string()
+  })
 
 const EditAllocationModal = (props: EditAllocationModalProps) => {
   const {
@@ -73,7 +64,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: getFormInitialValues(editItem || employee, hideWorkload),
-    validationSchema: hideWorkload ? hideWorkloadValidationSchema : validationSchema,
+    validationSchema: validationSchema(hideWorkload),
     onSubmit: async (values: any, { resetForm }) => {
       mutate(values)
       resetForm()
@@ -105,7 +96,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
             items={[
               { label: 'Task:', name: task?.taskName },
               { label: 'Departament/Raion:', name: task?.rayonsOrDepartment },
-              {
+              !hideWorkload && {
                 label: 'Angajat:',
                 name: employee?.workerFullName
               }

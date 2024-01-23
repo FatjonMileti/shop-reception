@@ -17,7 +17,7 @@
       "responses": [
         {
           "uuid": "4d188e2a-9b20-46cc-bbcb-a9f8352f4a6e",
-          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"Chair\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"ProjectTeamGovernance\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"Supply Omni\",\n    \"icon\": \"SupplyOmni\",\n    \"routeURL\": \"/oms1\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"Supply Omni\",\n        \"icon\": \"SupplyOmni\",\n        \"routeURL\": \"/oms\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"2\",\n          \"name\": \"OMS\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/oms1\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"3\",\n    \"name\": \"Volumetrie\",\n    \"icon\": \"Volumetry\",\n    \"routeURL\": \"/volumetry\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"3\",\n        \"name\": \"Administrare angajati\",\n        \"icon\": \"EmployeeManagement\",\n        \"routeURL\": \"/volumetry/employees\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"3\",\n          \"name\": \"Volumetrie\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/volumetry\",\n          \"routePathExact\": true\n        }\n      },\n      {\n        \"id\": \"4\",\n        \"name\": \"Administrare task-uri\",\n        \"icon\": \"ManagementTasks\",\n        \"routeURL\": \"/volumetry/tasksManagement\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"3\",\n          \"name\": \"Volumetrie\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/volumetry\",\n          \"routePathExact\": true\n        }\n      },\n      {\n        \"id\": \"515\",\n        \"name\": \"Rapoarte\",\n        \"icon\": \"ReportsVolumetry\",\n        \"routeURL\": \"/volumetry/reports\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"515\",\n          \"name\": \"Volumetrie\",\n          \"icon\": \"ReportsVolumetry\",\n          \"routeURL\": \"/volumetry\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"22\",\n    \"name\": \"Bakery\",\n    \"icon\": \"Bakery\",\n    \"routeURL\": \"/bakery\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"22\",\n        \"name\": \"Admin\",\n        \"icon\": \"Admin\",\n        \"routeURL\": \"/admin\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"33\",\n        \"name\": \"Formator/ RQ Regional\",\n        \"icon\": \"Formator\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"44\",\n        \"name\": \"Manager magazin\",\n        \"icon\": \"StoreManager\",\n        \"routeURL\": \"/storeManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"55\",\n        \"name\": \"Manager regiune\",\n        \"icon\": \"RegionManager\",\n        \"routeURL\": \"/regionManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"66\",\n        \"name\": \"Manager zone\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/zoneManager\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
+          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"Chair\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"ProjectTeamGovernance\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"Supply Omni\",\n    \"icon\": \"SupplyOmni\",\n    \"routeURL\": \"/oms1\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"Supply Omni\",\n        \"icon\": \"SupplyOmni\",\n        \"routeURL\": \"/oms\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"2\",\n          \"name\": \"OMS\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/oms1\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"3\",\n    \"name\": \"Volumetrie\",\n    \"icon\": \"Volumetry\",\n    \"routeURL\": \"/volumetry\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"3\",\n        \"name\": \"Administrare angajati\",\n        \"icon\": \"EmployeeManagement\",\n        \"routeURL\": \"/volumetry/employees\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"3\",\n          \"name\": \"Volumetrie\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/volumetry\",\n          \"routePathExact\": true\n        }\n      },\n      {\n        \"id\": \"4\",\n        \"name\": \"Administrare task-uri\",\n        \"icon\": \"ManagementTasks\",\n        \"routeURL\": \"/volumetry/tasksManagement\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"3\",\n          \"name\": \"Volumetrie\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/volumetry\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"22\",\n    \"name\": \"Bakery\",\n    \"icon\": \"Bakery\",\n    \"routeURL\": \"/bakery\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"22\",\n        \"name\": \"Admin\",\n        \"icon\": \"Admin\",\n        \"routeURL\": \"/admin\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"33\",\n        \"name\": \"Formator/ RQ Regional\",\n        \"icon\": \"Formator\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"44\",\n        \"name\": \"Manager magazin\",\n        \"icon\": \"StoreManager\",\n        \"routeURL\": \"/storeManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"55\",\n        \"name\": \"Manager regiune\",\n        \"icon\": \"RegionManager\",\n        \"routeURL\": \"/regionManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"66\",\n        \"name\": \"Manager zone\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/zoneManager\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the application modules list",
@@ -422,7 +422,7 @@
         },
         {
           "uuid": "7fd6f51c-58b2-4f58-bdd1-d94ec055f9a0",
-          "body": "[\n  {\n    \"id\": \"122\",\n    \"name\": \"Management task template-uri\",\n    \"icon\": \"ManagementTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"123\",\n    \"name\": \"Alocare task-uri\",\n    \"icon\": \"AssignTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskAllocation\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
+          "body": "[\n  {\n    \"id\": \"122\",\n    \"name\": \"Management task template-uri\",\n    \"icon\": \"ManagementTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"123\",\n    \"name\": \"Alocare task-uri\",\n    \"icon\": \"AssignTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/taskAllocation\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"124\",\n    \"name\": \"Task-uri alocate\",\n    \"icon\": \"AssignedTasks\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/volumetry/tasksManagement/assignedTasks\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of activities - Volumetry Tasks management",
@@ -441,38 +441,6 @@
               "target": "query",
               "modifier": "submoduleId",
               "value": "4",
-              "invert": false,
-              "operator": "equals"
-            }
-          ],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "910f54db-f12f-4666-91d7-10e68c34b45c",
-          "body": "[\n  {\n    \"id\": \"125\",\n    \"name\": \"Raport norme\",\n    \"icon\": \"ReportsVolumetry\",\n    \"submodule\": {},\n    \"firstScreen\": {\n      \"id\": \"205\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"205\",\n        \"routeURL\": \"/volumetry/reports/dailyNorms\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Successfully obtained the list of activities - Volumetry Reports",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [
-            {
-              "target": "query",
-              "modifier": "submoduleId",
-              "value": "515",
               "invert": false,
               "operator": "equals"
             }

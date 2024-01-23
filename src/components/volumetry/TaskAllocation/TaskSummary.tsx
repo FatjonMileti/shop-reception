@@ -51,29 +51,33 @@ const TaskSummary = ({ item, hideDetails = false }) => {
           <Capsule label="Interval recomandat" value={recommendedInterval} />
         </Grid>
 
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Productivitate standard" value={standardProductivity} />
-        </Grid>
+        {!hideDetails && (
+          <>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Productivitate standard" value={standardProductivity} />
+            </Grid>
 
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Volum total" value={totalWorkload} />
-        </Grid>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Volum efectuat" value={completedWorkload} />
-        </Grid>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Volum in lucru" value={inProgressWorkload} />
-        </Grid>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Volum ramas" value={remainingWorkload} />
-        </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Volum total" value={totalWorkload} />
+            </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Volum efectuat" value={completedWorkload} />
+            </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Volum in lucru" value={inProgressWorkload} />
+            </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Volum ramas" value={remainingWorkload} />
+            </Grid>
 
-        <Grid item mt={1} mr={1}>
-          <Capsule label="UM" value={workloadMeasurementUnit} />
-        </Grid>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Angajati repartizati" value={allocatedWorkers} />
-        </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="UM" value={workloadMeasurementUnit} />
+            </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Angajati repartizati" value={allocatedWorkers} />
+            </Grid>
+          </>
+        )}
       </Grid>
     </Grid>
   )
