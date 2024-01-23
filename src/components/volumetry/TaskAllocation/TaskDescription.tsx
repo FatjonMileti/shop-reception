@@ -1,5 +1,5 @@
 import { Button, ListTableActionsItems } from '@fullscreendigital/carrefour-dex-fe'
-import { Box, Grid, Typography, useMediaQuery } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import AssignEmployee from './AssignEmployee'
 import { toEmployeesItems } from './serializers'
@@ -7,15 +7,7 @@ import { DeleteActionIcon, EditActionIcon } from 'icons'
 import { EditAllocationModal } from './EditAllocationModal'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { CRUDAction } from '../interfaces'
-
-interface TaskDescriptionProps {
-  item: any // TODO: To add type when db schema is defined
-  shouldRefreshData: boolean
-  setShouldRefreshData: Function
-  setSelectedRowId: Function
-  employees?: any[] // TODO: To add type when db schema is defined
-  hideDetails?: boolean
-}
+import { TaskDescriptionProps } from './TaskAllocationDefinitions'
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const { item, employees, setShouldRefreshData, setSelectedRowId, hideDetails } = props

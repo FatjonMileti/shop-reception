@@ -11,17 +11,7 @@ import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { getFormInitialValues } from './helpers'
 import { handleQueryError } from 'components/volumetry/utils'
-
-interface EditAllocationModalProps {
-  isModalOpen: boolean
-  closeModal: Function
-  task: any // TODO: To add interface when db schema is defined
-  setShouldRefreshData: Function
-  setSelectedRowId: Function
-  editItem?: any // TODO: To add interface when db schema is defined
-  employee?: any // TODO: To add type when db schema is defined
-  hideWorkload?: boolean
-}
+import { EditAllocationModalProps } from '../TaskAllocationDefinitions'
 
 // TODO use when from formik
 

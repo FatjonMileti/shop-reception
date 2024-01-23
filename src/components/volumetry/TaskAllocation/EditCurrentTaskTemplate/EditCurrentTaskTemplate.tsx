@@ -10,19 +10,12 @@ import { makeCorePutRequest } from 'utils/api'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { handleQueryError } from 'components/volumetry/utils'
-
-interface EditCurrentTaskTemplateProps {
-  isModalOpen: boolean
-  closeModal: Function
-  editItem: any // TODO: To add interface when db schema is defined
-  setShouldRefreshData: Function
-}
+import { EditCurrentTaskTemplateProps } from '../TaskAllocationDefinitions'
 
 const validationSchema = yup.object({
   id: yup.string().nonNullable(),
   workload: yup.number().required('Acest camp este obligatoriu.'),
   allocatedWorkersNumber: yup.number()
-
 })
 
 const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
@@ -87,7 +80,6 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
             required
           />
         </Grid>
-
 
         <Grid xs={12} item>
           <Input

@@ -1,4 +1,4 @@
-import Employee from './Employee'
+import { Employee } from './Employee'
 import TaskDescription from './TaskDescription'
 import TaskSummary from './TaskSummary'
 import { getEmployeeGroupName } from './helpers'
