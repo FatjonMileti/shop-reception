@@ -1,8 +1,7 @@
 import React from 'react'
 import { Modal } from 'components/core-ui/Modal'
-import { EditActionIcon } from '../../../../../icons'
-import { Product, SelectOrScanProduct } from './SelectProduct'
-import { SelectSupplier, Supplier } from './SelectSupplier'
+import { SelectOrScanProduct } from './SelectProduct'
+import { SelectSupplier } from './SelectSupplier'
 import { ProductDetails } from './ProductDetails'
 import { useMutation } from 'react-query'
 import { formatErrorMessage } from '../../../../../utils/formatting'
@@ -10,21 +9,26 @@ import { useNotification } from '../../../../../hooks'
 import { makeCorePostRequest } from '../../../../../utils/api'
 import { formatPayloadDate } from '../../../../../utils/helpers'
 import { CircularProgress, Grid } from '@mui/material'
+import { Supplier, Product } from '../interfaces'
 
 interface ReceivedProductRequestData {
   productId: string
   supplierId: string
-  // storeId: string
   entryDate: string
-  expireDate: string
-  // batchName: string
+  batchName: string
   hasExpireDate: boolean
+  expireDate: string
   hasSecondaryDlc: boolean
-  // imageUrl: 'string'
+  dlcDays: number
   batchQuantity: number
+
+  // imageUrl: 'string'
+
+  // storeId: string
+
   // batchStatus: 'string'
   // closeReason: 'OUT_OF_STOCK'
-  dlcDays: number
+
   // verifiedBy: 'string'
   // verifiedDate: '2024-01-18T11:43:36.604Z'
   // verified: true
@@ -67,11 +71,12 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal }: AddReceivedProdu
         expireDate: formatPayloadDate(productDetails.expirationDate),
         hasSecondaryDlc: productDetails.hasSecondaryDLC,
         dlcDays: parseInt(productDetails.secondaryDLC),
-        batchQuantity: parseInt(productDetails.amount)
+        batchQuantity: parseInt(productDetails.amount),
+        batchName: productDetails.lot
       }
 
-      formData.append('data', JSON.stringify(data))
-      formData.append('image', productDetails.picture)
+      formData.append('dto', JSON.stringify(data))
+      formData.append('fileObject', productDetails.picture)
 
       await makeCorePostRequest('/bakery/batch', formData)
     },
@@ -92,17 +97,11 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal }: AddReceivedProdu
     }
   )
 
-
   return (
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={
-        <span style={{ display: 'flex', columnGap: '16px', alignItems: 'center' }}>
-          Adauga lot nou receptionat
-          <EditActionIcon />
-        </span>
-      }
+      modalTitle="Adauga lot nou receptionat"
       modalWidth="50%"
     >
       <Grid container>
@@ -130,7 +129,6 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal }: AddReceivedProdu
                   selectedProduct={selectedProduct}
                   selectedSupplier={selectedSupplier}
                   onContinue={(productDetails: ProductDetails) => {
-                    console.log('continue')
                     productMutation.mutate({
                       productDetails,
                       selectedProduct,
@@ -144,7 +142,6 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal }: AddReceivedProdu
           </>
         )}
       </Grid>
-
     </Modal>
   )
 }

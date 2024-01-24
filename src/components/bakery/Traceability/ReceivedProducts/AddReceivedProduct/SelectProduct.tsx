@@ -4,12 +4,9 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from '../../../../../utils/api'
 import { isScannerDevice } from '../../../../../utils/helpers'
+import { ScanProduct } from './ScanProduct'
+import { Product } from '../interfaces'
 
-export interface Product {
-  id: string
-  name: string
-  metiCode: number
-}
 interface SelectProductProps {
   setSelectedProduct: (product: Product) => void
   selectedProduct: Product
@@ -92,11 +89,11 @@ export const SelectOrScanProduct = ({
   const [selectedTab, setSelectedTab] = React.useState(0)
   const [scannerDevice, setScannerDevice] = React.useState(true)
 
-  React.useEffect(() => {
-    isScannerDevice(() => {
-      setScannerDevice(false)
-    })
-  }, [])
+  // React.useEffect(() => {
+  //   isScannerDevice(() => {
+  //     setScannerDevice(false)
+  //   })
+  // }, [])
 
   return (
     <Grid container rowSpacing={3.5}>
@@ -109,7 +106,12 @@ export const SelectOrScanProduct = ({
             }}
             tabs={[
               {
-                content: 'Item Two',
+                content: (
+                  <ScanProduct
+                    setSelectedProduct={setSelectedProduct}
+                    selectedProduct={selectedProduct}
+                  />
+                ),
                 label: 'Scaneaza',
                 tabIndex: 0
               },
