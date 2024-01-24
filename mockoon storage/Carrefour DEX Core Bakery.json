@@ -6631,6 +6631,776 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "b94a9a2f-09e9-4f84-bd8e-17e1bc88f22a",
+      "type": "http",
+      "documentation": "Get frozen traceability",
+      "method": "get",
+      "endpoint": "traceability/frozen",
+      "responses": [
+        {
+          "uuid": "2c3f6be7-0d8d-4f0f-aba5-4237b3206de6",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"3ebdfa15-05cf-431e-82a2-c55b815fa1c9\",\n      \"product\": {\n        \"id\": \"cc6cdbbe-5d9d-4b80-88e3-af684ac8f3de\",\n        \"name\": \"PAINE FAINA PORUMB FELIATA800G\",\n        \"metiCode\": 23002261,\n        \"pluCode\": \"1234\",\n        \"familyName\": \"BRUTARIE\",\n        \"subfamily\": \"PÂINE ALBA                    \",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/null/23002261.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240118%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240118T131829Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=74f2ac8a7d598829ccf9f364af963ff8404af6cd1b3469b63feb44d853c58485decceef1b1a84996403c1190ef43b5463bf85d04c37db5724aa1be23425ec4fdb111d7d6dce908d3c1b131f2d467e85f0e4611f215aceb3c011cf0b945d2489cdc7e8cd093b897a735c18fe47ea4d52bdb2e4a8bc4a99cb8ce497fd5bdf63c627bebce7864ccc8496be0dfdd0f9a6c0eb70ec9ba57c47c3a9d00f01c46d6e260dffc24a7b04faf97bd3b84505115e2edb5b2fff003a08fb815a8838e89b3cdbee5be1bce11ce002ca44e5aa6d500bdb4d963ae8217e04a07ea343473ac55806b31e21054f7f649ea2f5032595c00be09e7559f3b78a3bad13b68a05bd5ed3eb1\"\n      },\n      \"store\": {\n        \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n        \"metiCode\": 6,\n        \"storeType\": \"HYPERMARKET\"\n      },\n      \"productionDate\": \"2014-09-26T15:53:16.45\",\n      \"chargeNumber\": \"test_7cc0ef39f3d7\",\n      \"productionOperator\": \"test_98359d7e7de3\",\n      \"quantity\": 59.29,\n      \"thermalCondition\": \"BAKED\",\n      \"conform\": true,\n      \"dlc\": \"2029-03-27T15:53:16.45\",\n      \"nonComplianceReason\": \"test_ccbecc882552\",\n      \"productDestination\": \"test_c70bdc745d30\",\n      \"frozen\": true,\n      \"verified\": false\n    },\n    {\n      \"id\": \"09f63684-eaba-418f-8b6d-ae5bf6035f44\",\n      \"product\": {\n        \"id\": \"cc6cdbbe-5d9d-4b80-88e3-af684ac8f3de\",\n        \"name\": \"PAINE FAINA PORUMB FELIATA800G\",\n        \"metiCode\": 23002261,\n        \"pluCode\": \"1234\",\n        \"familyName\": \"BRUTARIE\",\n        \"subfamily\": \"PÂINE ALBA                    \",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/null/23002261.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240118%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240118T131829Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=74f2ac8a7d598829ccf9f364af963ff8404af6cd1b3469b63feb44d853c58485decceef1b1a84996403c1190ef43b5463bf85d04c37db5724aa1be23425ec4fdb111d7d6dce908d3c1b131f2d467e85f0e4611f215aceb3c011cf0b945d2489cdc7e8cd093b897a735c18fe47ea4d52bdb2e4a8bc4a99cb8ce497fd5bdf63c627bebce7864ccc8496be0dfdd0f9a6c0eb70ec9ba57c47c3a9d00f01c46d6e260dffc24a7b04faf97bd3b84505115e2edb5b2fff003a08fb815a8838e89b3cdbee5be1bce11ce002ca44e5aa6d500bdb4d963ae8217e04a07ea343473ac55806b31e21054f7f649ea2f5032595c00be09e7559f3b78a3bad13b68a05bd5ed3eb1\"\n      },\n      \"store\": {\n        \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n        \"metiCode\": 6,\n        \"storeType\": \"HYPERMARKET\"\n      },\n      \"productionDate\": \"2014-09-26T15:53:16.45\",\n      \"chargeNumber\": \"test_7cc0ef39f3d7\",\n      \"productionOperator\": \"test_98359d7e7de3\",\n      \"quantity\": 59.29,\n      \"thermalCondition\": \"BAKED\",\n      \"conform\": true,\n      \"dlc\": \"2029-03-27T15:53:16.45\",\n      \"nonComplianceReason\": \"test_ccbecc882552\",\n      \"productDestination\": \"test_c70bdc745d30\",\n      \"frozen\": true,\n      \"verified\": false\n    },\n    {\n      \"id\": \"a78077cb-0a38-4e1f-ad3a-ceee06fe3935\",\n      \"product\": {\n        \"id\": \"cc6cdbbe-5d9d-4b80-88e3-af684ac8f3de\",\n        \"name\": \"PAINE FAINA PORUMB FELIATA800G\",\n        \"metiCode\": 23002261,\n        \"pluCode\": \"1234\",\n        \"familyName\": \"BRUTARIE\",\n        \"subfamily\": \"PÂINE ALBA                    \",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/null/23002261.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240118%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240118T131829Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=74f2ac8a7d598829ccf9f364af963ff8404af6cd1b3469b63feb44d853c58485decceef1b1a84996403c1190ef43b5463bf85d04c37db5724aa1be23425ec4fdb111d7d6dce908d3c1b131f2d467e85f0e4611f215aceb3c011cf0b945d2489cdc7e8cd093b897a735c18fe47ea4d52bdb2e4a8bc4a99cb8ce497fd5bdf63c627bebce7864ccc8496be0dfdd0f9a6c0eb70ec9ba57c47c3a9d00f01c46d6e260dffc24a7b04faf97bd3b84505115e2edb5b2fff003a08fb815a8838e89b3cdbee5be1bce11ce002ca44e5aa6d500bdb4d963ae8217e04a07ea343473ac55806b31e21054f7f649ea2f5032595c00be09e7559f3b78a3bad13b68a05bd5ed3eb1\"\n      },\n      \"store\": {\n        \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n        \"metiCode\": 6,\n        \"storeType\": \"HYPERMARKET\"\n      },\n      \"productionDate\": \"2014-09-26T15:53:16.45\",\n      \"chargeNumber\": \"test_7cc0ef39f3d7\",\n      \"productionOperator\": \"test_98359d7e7de3\",\n      \"quantity\": 59.29,\n      \"thermalCondition\": \"BAKED\",\n      \"conform\": true,\n      \"dlc\": \"2029-03-27T15:53:16.45\",\n      \"nonComplianceReason\": \"test_ccbecc882552\",\n      \"productDestination\": \"test_c70bdc745d30\",\n      \"frozen\": true,\n      \"verified\": false\n    },\n    {\n      \"id\": \"edf99ce7-ba34-4fb4-bb1d-0c2b45e06c25\",\n      \"product\": {\n        \"id\": \"cc6cdbbe-5d9d-4b80-88e3-af684ac8f3de\",\n        \"name\": \"PAINE FAINA PORUMB FELIATA800G\",\n        \"metiCode\": 23002261,\n        \"pluCode\": \"1234\",\n        \"familyName\": \"BRUTARIE\",\n        \"subfamily\": \"PÂINE ALBA                    \",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/null/23002261.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240118%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240118T131829Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=74f2ac8a7d598829ccf9f364af963ff8404af6cd1b3469b63feb44d853c58485decceef1b1a84996403c1190ef43b5463bf85d04c37db5724aa1be23425ec4fdb111d7d6dce908d3c1b131f2d467e85f0e4611f215aceb3c011cf0b945d2489cdc7e8cd093b897a735c18fe47ea4d52bdb2e4a8bc4a99cb8ce497fd5bdf63c627bebce7864ccc8496be0dfdd0f9a6c0eb70ec9ba57c47c3a9d00f01c46d6e260dffc24a7b04faf97bd3b84505115e2edb5b2fff003a08fb815a8838e89b3cdbee5be1bce11ce002ca44e5aa6d500bdb4d963ae8217e04a07ea343473ac55806b31e21054f7f649ea2f5032595c00be09e7559f3b78a3bad13b68a05bd5ed3eb1\"\n      },\n      \"store\": {\n        \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n        \"metiCode\": 6,\n        \"storeType\": \"HYPERMARKET\"\n      },\n      \"productionDate\": \"2014-09-26T15:53:16.45\",\n      \"chargeNumber\": \"test_7cc0ef39f3d7\",\n      \"productionOperator\": \"test_98359d7e7de3\",\n      \"quantity\": 59.29,\n      \"thermalCondition\": \"BAKED\",\n      \"conform\": true,\n      \"dlc\": \"2029-03-27T15:53:16.45\",\n      \"nonComplianceReason\": \"test_ccbecc882552\",\n      \"productDestination\": \"test_c70bdc745d30\",\n      \"frozen\": true,\n      \"verified\": false\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 4,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "8df419a5-e569-4944-be99-72f6889225d0",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "6f78da30-a0ab-40c8-b268-d1c3abbd3519",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "7c8db11b-f170-4473-9a50-49e330e3d872",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "abc16510-9b74-4ab2-9d44-cff31d6746d0",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "7a6eb9ff-6fa5-4b9d-8fc1-266f8d21b64a",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "71c839d7-7af1-415f-87b9-43e1157da964",
+      "type": "http",
+      "documentation": "Get frozen traceability",
+      "method": "get",
+      "endpoint": "traceability/frozen/:id",
+      "responses": [
+        {
+          "uuid": "c9bc9690-c5d3-4b39-a50b-c17e57e1f27d",
+          "body": "{\n  \"id\": \"3ebdfa15-05cf-431e-82a2-c55b815fa1c9\",\n  \"product\": {\n    \"id\": \"cc6cdbbe-5d9d-4b80-88e3-af684ac8f3de\",\n    \"name\": \"PAINE FAINA PORUMB FELIATA800G\",\n    \"metiCode\": 23002261,\n    \"pluCode\": \"1234\",\n    \"familyName\": \"BRUTARIE\",\n    \"familyCode\": 230,\n    \"subfamily\": \"PÂINE ALBA                    \",\n    \"unitBusiness\": \"SPECIALITATI                  \",\n    \"metricUnit\": \"K\",\n    \"dlcDays\": 0,\n    \"enable\": true,\n    \"batch\": true,\n    \"divisiontype\": \"HYPER\",\n    \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/230/23002261.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240118%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240118T134932Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=2a3832d8ce22e5e44b82fcc65160e596f37d66099ea5846808228098e7b2328e41aeabc005ca90c5ccfeb45a36d0d7827aefc1c210df6c4b45b769734e366e5ba90f79d9fcc19db43aaa295a8c7dd70d7a25b749bc61e8eec35c4a05b22bc6a71a286cefe651b4ba256c72f6f0bbdefa99f303007da56396b310e772029cebb5e12b6c1254c28d34ae3c4ac314851b2516b61666de259ba36ee89934876d8ff6b7f566a16e7f10e747b2b26da609dc3f966ec368db2b8063f22b2faed5855de3b6a6e24a421b600d5dbbafd4cae6731810cc773847e8af85ad7b21ef25e837bd29c031b1100037cc08dc4dede4e6bc81523e2cd56a69e268c2fbfab541c63323\"\n  },\n  \"productionDate\": \"2014-09-26T15:53:16.45\",\n  \"chargeNumber\": \"test_7cc0ef39f3d7\",\n  \"productionOperator\": \"test_98359d7e7de3\",\n  \"quantity\": 59.29,\n  \"thermalCondition\": \"BAKED\",\n  \"conform\": true,\n  \"dlc\": \"2029-03-27T15:53:16.45\",\n  \"nonComplianceReason\": \"test_ccbecc882552\",\n  \"productDestination\": \"test_c70bdc745d30\",\n  \"verifiedBy\": \"test_96f641ddf0a9\",\n  \"verifiedDate\": \"2015-07-24T15:53:16.45\",\n  \"modifiedDate\": \"2024-01-03T22:05:20.990+00:00\",\n  \"traceabilityFrozenList\": [\n    {\n      \"id\": \"e5d77c4a-58d9-4d9a-ae17-eb318225ca82\",\n      \"batch\": {\n        \"id\": \"0949d32b-364d-4146-b904-d2b86fd53370\",\n        \"product\": {\n          \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f1\",\n          \"name\": \"SAVARINE 2X140G ENGELMI       \",\n          \"metiCode\": 23002898,\n          \"familyName\": \"COFETARIE PROASPATA\",\n          \"familyCode\": 232,\n          \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n          \"unitBusiness\": \"PRAJITURI                     \",\n          \"metricUnit\": \"K\",\n          \"dlcDays\": 0,\n          \"enable\": true,\n          \"batch\": true,\n          \"divisiontype\": \"HYPER\",\n          \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240118%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240118T134932Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=3fa00b9556ae802fc860b829ae572455646153f6571af2c3a5a37af166bc851c4fac4f3676d1a17592f91d7135db961929accf1247e0282291320e3991369754277648b048fc5c04a42e6077caa93e624abfdaa633a67e84b6c5aff25ecdc674b12ca2fab351955beaf7158b5117e93541b44735863cd420419e1ddb8c48fca5270170d550b467b7ff4927bed7797a802a2345e0fced89da402be6329cc70bf0ac185fc436b70aee427f254232587c479f9cf3b3e1f7ce65c14c13f8a9bc822737bf649ac6cf7383667dbec091d624e49c8e2aee2451b08f5e2f52d2f46b58335244f65e44af5ea778189027c542866893cf768e07b57c3d28092e8d183a29d0\"\n        },\n        \"supplier\": {\n          \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n          \"productCode\": 23002898,\n          \"supplierCode\": 38190,\n          \"supplierName\": \"PATISGAL SRL                  \",\n          \"enable\": true\n        },\n        \"entryDate\": \"2023-12-12T15:53:16.45\",\n        \"expireDate\": \"2023-12-12T15:53:16.45\",\n        \"batchName\": \"test\",\n        \"hasExpireDate\": false,\n        \"hasSecondaryDlc\": false,\n        \"batchQuantity\": 20.3,\n        \"batchStatus\": \"\",\n        \"closeReason\": \"OUT_OF_STOCK\",\n        \"dlcDays\": 5,\n        \"verifiedBy\": \"\",\n        \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n        \"consumedAmount\": 381,\n        \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n        \"verified\": false,\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240118%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240118T134932Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=745d06c058fbbe2ce0fb3e6b6c6c270f669c15290b7444553b8822cff9f40b63503affebb45fc61b85b59c33fd89b96e5a5603b8e7cd958e88a04ed312a216825c2c7d4b38c0c02bb5980575ea6a62cc558000a745f3789e9a014a139b22c23d1bf190e4143f92ebf24bb39b4b3b4cd26bcf23f6e096dee238ae0adfea12648c20bfc485bacf9ff0bccffe6bce0d8daa7c01aabc120e08cfb54c82bb5209fad6298d46576a08b751fc8b2ce5e002306508e8fbbf2e53d9588913949d1f3cdfa831f1218267fb58c7e903c562a140fa8b40bec1e871f152435652557152ec6e5335a270cddd89eef6df3ca4fc10ff670beaa17dd7729432f4017a561df2792b2b\"\n      },\n      \"quantity\": 72.18,\n      \"openingDate\": \"2019-11-09T15:53:16.45\",\n      \"dlc\": \"2032-06-28T15:53:16.45\"\n    },\n    {\n      \"id\": \"532f8f4b-91a9-4bdf-ba4d-52b3b43381b5\",\n      \"batch\": {\n        \"id\": \"9cf761c0-75f1-4737-84eb-4a467934ecca\",\n        \"product\": {\n          \"id\": \"c58bdafa-abe3-4872-a3aa-10a7e2ef0dd5\",\n          \"name\": \"PAINE SLAVA 300G              \",\n          \"metiCode\": 23505796,\n          \"pluCode\": \"4661\",\n          \"familyName\": \"BRUTARIE\",\n          \"familyCode\": 230,\n          \"subfamily\": \"SPECIALITATI                  \",\n          \"unitBusiness\": \"CLEAN LABEL                   \",\n          \"metricUnit\": \"K\",\n          \"dlcDays\": 0,\n          \"enable\": true,\n          \"batch\": true,\n          \"divisiontype\": \"HYPER\",\n          \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/230/23505796.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240118%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240118T134932Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=95a6497e88fdb7aefe1af43e46bb30014ff90dacd74027542e9545d5119416894638a97295cb9b9e8228bc39dc4780ddc15284bb65a57f69acb6ef5f93cf45e1052585897cc3edef6fac9c88b1627014c408879611bb7a2e39f9185bd21eb726577f0dff85d0348eb24227f471bc345574919f4f1f5ca2d6d62dfea3e93bbe05980baeee2f204d2ac9d67fa78515b07e2aeac54a59ca8f513de44631c63d4063b3a920d00eee33dae17bff40e22e9cab9efc114e7307f33b110fc9c98fa7b63898aee851e144d3ed0e8fc5ed9a9e29b99fcd0c8d0463010b590385d35823c80f2b6a95823cf0c3e6532baa2cc2ec4afdca1c47126152f966a1e89729f47136f9\"\n        },\n        \"supplier\": {\n          \"id\": \"38582517-8c6a-4a13-b6c4-fa7901f61876\",\n          \"productCode\": 23000694,\n          \"supplierCode\": 30328,\n          \"supplierName\": \"CARREFOUR                     \",\n          \"enable\": true\n        },\n        \"entryDate\": \"2023-12-12T15:53:16.45\",\n        \"expireDate\": \"2023-12-12T15:53:16.45\",\n        \"batchName\": \"test\",\n        \"hasExpireDate\": false,\n        \"hasSecondaryDlc\": false,\n        \"batchQuantity\": 80.55,\n        \"batchStatus\": \"\",\n        \"closeReason\": \"OUT_OF_STOCK\",\n        \"dlcDays\": 5,\n        \"verifiedBy\": \"\",\n        \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n        \"consumedAmount\": 189.68,\n        \"modifiedDate\": \"2024-01-03T08:07:26.297+00:00\",\n        \"verified\": false,\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//9cf761c0-75f1-4737-84eb-4a467934ecca.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240118%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240118T134932Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=440f5f6e4c6c5786c7d5e856e1e0937a424361c2c1237d26bf81dbcd5d7ac2f588cd6a0cf5a018f5e2c71f5615593d39dd6dfe051013bc18f11685e4ba6c3c3a8e4e31293a7f26738ed234522aaa4347eb4638c66cf54da8d23e160049eacc3c4dd20713e612935f3f1af3866e91d8286b282b3da9218cd155b8b9d704c30417eef77fcaa805974715ea46722e896bcdc7d31827ff6176db0297745a3557ec5a9b6714247182d039d9231dee96463e8839e950a025a356d8fe78eb55ba6fc318620f4d0747d8ee3f2fc86e2cc245143428425c72c97e17379bbd6cadd000dabcc3e766d741594a2ff4545c42349d1131687c3612aab12b8501a1e39e1a2ece16\"\n      },\n      \"quantity\": 24.35,\n      \"openingDate\": \"2019-11-09T15:53:16.45\",\n      \"dlc\": \"2032-06-28T15:53:16.45\"\n    }\n  ],\n  \"frozen\": true,\n  \"verified\": false\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "dbbfc578-faf7-4bf7-b795-badbed3fc883",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "747cbc5b-6760-44df-a943-56f25bfb3eee",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e06d9d7f-fcf3-469f-b6be-f82be0d7c497",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "d7f52624-4038-4e82-ae4f-e01a05fb1e55",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3e56e4c6-8996-443e-9dd8-5af940718fb6",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "7d467c73-a33e-47f3-9fc4-f64a964f0cb4",
+      "type": "http",
+      "documentation": "Get name or code or ean",
+      "method": "get",
+      "endpoint": "product/traceability/nameOrCodeOrEan/:id",
+      "responses": [
+        {
+          "uuid": "5e6e5c8f-27ec-4aa3-83b7-c28f42dedff9",
+          "body": "[\n    {\n        \"id\": \"31c8c1c8-1856-4446-8f88-1aee5b5a94c6\",\n        \"name\": \"COZONAC RAHAT 500G VALYBIA PAN\",\n        \"metiCode\": 23001280,\n        \"eanCodes\": \"6423166000297\",\n        \"suppliers\": \"VALYBIA PAN 2004 SRL\",\n        \"pluCode\": \"1621\",\n        \"familyName\": \"VIENOISERIE\",\n        \"familyCode\": 231,\n        \"subfamily\": \"COZONAC                       \",\n        \"unitBusiness\": \"COZONAC FABRICATIE            \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/231/23001280.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240115%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240115T161507Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=309b80e923e9710e550adff4e98aeaf995182fdefa171b2dd500d651f3b7a5d5b1db8f9eb65366b54c9aed1186d8adf5e36a0a0153b64c3f01a4315affaf420a3e6f7a3b55914ed7db1a2032d31ddad9ffc517fd6a809afc6a4a884241533be2d7d3904e10409270ae9440f1c4bece031806ec2e43809b1cd9ee6e63dee0b3c55e5842b97baf1550067b2171defb0842eacbf54e2a3771da209ec968ef95879c5879598e6609738d35ea955ce39f8978a6c92e156639d67b8a76ed0163ac68b068e673ebc8aec0d50a14746e798d7e4bda44379d772acaf9e9e5aa9c28468ff80c0ab1223ddd3922d9cf91180ee0ce344bd539c537669b1c1c6fb9c9a1182be1\"\n    },\n    {\n        \"id\": \"54ed9fa9-ccf3-4028-92dd-ac0ad4811701\",\n        \"name\": \"COZONAC NUCA CACAO500G VALYBIA\",\n        \"metiCode\": 23001281,\n        \"eanCodes\": \"6423166000280\",\n        \"suppliers\": \"VALYBIA PAN 2004 SRL\",\n        \"pluCode\": \"1622\",\n        \"familyName\": \"VIENOISERIE\",\n        \"familyCode\": 231,\n        \"subfamily\": \"COZONAC                       \",\n        \"unitBusiness\": \"COZONAC FABRICATIE            \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/231/23001281.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240115%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240115T161507Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=22f3fb4150dc07a649490578ff0e0b3ad23257d405beceb826862d3b40e817d3c51572779b17473bce7b2a9c0d9c6239e2982e421bc2e514e9ea692bc45a00a3bfb8f7efdf669902ace68aa6135bb2b8efcac9ccc31bed8a0fe02c21eb438dbc4f0c803fa75d9dbecdd37dc299d124027b600caacfbc25771c2c33b1baa6fa270cb3fd6dae77405d9f8915e592b2be999778a22789116da5a232e51b93a126e9dee7a928b87619e62efd07358669e18efe0e6c1450afa71cfd39adcc14776d3d0d24771f704a1f9656306b4c71b3644785285795a6ad0b0e4f0f0c73630eee330f32dac9045fbacad2d1be05d2eae1cff3dfe9698c4495ccf20178ba850302a0\"\n    },\n    {\n        \"id\": \"70293fc6-afe3-4d1e-b9b6-f18c29be6572\",\n        \"name\": \"CHEC 300GR VALYBIA PAN        \",\n        \"metiCode\": 23001282,\n        \"eanCodes\": \"6423166000624\",\n        \"suppliers\": \"VALYBIA PAN 2004 SRL\",\n        \"pluCode\": \"1623\",\n        \"familyName\": \"VIENOISERIE\",\n        \"familyCode\": 231,\n        \"subfamily\": \"COZONAC                       \",\n        \"unitBusiness\": \"ALTELE                        \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/231/23001282.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240115%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240115T161507Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=4acf8159098e90ac9f74424650994bd7438c892a62cd229db4de2d8b294c0c1d07c93cee1fd61497f598a58f593d129697eadac303fdf4759b48e6da55194a7e9d2704e04bdeff4bd5e63f3f47cde5a3995e3af23bc59c95172f81a5883616feffd65df8f241c8284d69f4f3a74e4aae19854c71dabeca6089eb8b7787bc129cc68fdae95747d094ed25d5f02618004f7f30ee49b632290c11eff0d70cb0ca4a0776bc87b6f1846d82f25815e2dfde018eb10e5d86cd3f49d481cd8ec3eb5dbd62fb0bf09668d6274793ababd8eaab2fd3dd617d090f19304cf835bc435833cc894a3bcc679a8610cae455e09e87c4e548126ad96e0bdfa0062da142b29ea5fb\"\n    },\n    {\n        \"id\": \"840d9a02-7779-47fa-a160-090e38c3aa3d\",\n        \"name\": \"PAINICA SAND2X100G VALYBIA PAN\",\n        \"metiCode\": 23001283,\n        \"eanCodes\": \"6423166000242, 6423166000648, 5941696000569\",\n        \"suppliers\": \"VALYBIA PAN 2004 SRL\",\n        \"pluCode\": \"1625\",\n        \"familyName\": \"BRUTARIE\",\n        \"familyCode\": 230,\n        \"subfamily\": \"PÂINE ALBA                    \",\n        \"unitBusiness\": \"CHIFLE/SANDWICH               \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/230/23001283.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240115%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240115T161507Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=7578d92b39025f0c23ea9f143426f75cee26212cb915c13415bd1f121846b6b2af6d1be193894f64fdc09c0f0d601bad1cb36ab23fb6724215e927e70091ed5cf256df9ee5361f9f779afac63c7e664868012d50dac9e9476e3af505515f9b6ee6f9e19451a12af631bb8c7030824863059916ffae293574e8401f42189f1d4a6345e7bcfb11a5b54d6193d59cb660134d826455e63fe8093ff89c3ab0e1e671efbffee69bb5d189a643a4b0f347333ab7a30ebaacf69d244d00db5bee60c0a294157359cd71a293b237afb709d16fc93d8a0a77dd2356b8b4f8ee7325d41bb2a51ab7d8251364ff4e490ffd6393f65bcfce379e2b571c75749214677df2f24b\"\n    },\n    {\n        \"id\": \"74932bbd-d015-4af5-a2d9-3d60e18d55c3\",\n        \"name\": \"PAINICA SANDWICH 2X100G TEOCRI\",\n        \"metiCode\": 23001285,\n        \"eanCodes\": \"5941744000206\",\n        \"suppliers\": \"TEOCRIS SRL\",\n        \"pluCode\": \"1676\",\n        \"familyName\": \"BRUTARIE\",\n        \"familyCode\": 230,\n        \"subfamily\": \"PÂINE ALBA                    \",\n        \"unitBusiness\": \"CHIFLE/SANDWICH               \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/230/23001285.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240115%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240115T161507Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=048bc86f9739f2248604162222d38cb1a530f0f16e98fde12301c3b1ee9f2f116b03b576e718a240f4bf4d6b0468e6b55eae042cfb10f501bd06da312241d5c15691f2263fff1afcd5001d82054ba238f1f3286a7e35b9cd252a9b48ea5e878642996c3b28ba9f5ffb4ceb521068840c16d7da8841b359f688aff1692f47149b3d0df676e1deba6058787ab91864e323aaa5d9b4d6c926f6439d0c56f990baee33166facd553b7595799f4df527152e01a75ccbe60aba31837888e9e1b0926e3802bf8a0fb4bf893595e984661fab0dd2fe2821573082acbfc9fc878f2c49a459986befa29ca9d250606a941a083217b1d957d90bf1d0ddb94ee2dbd7df1b9c8\"\n    },\n    {\n        \"id\": \"a6d06122-23d1-4ca3-a9b5-f1325cf8d897\",\n        \"name\": \"FRANZELA 400GR SOMPAN         \",\n        \"metiCode\": 23001287,\n        \"eanCodes\": \"5941696000538\",\n        \"suppliers\": \"SOMPAN SA\",\n        \"pluCode\": \"1626\",\n        \"familyName\": \"BRUTARIE\",\n        \"familyCode\": 230,\n        \"subfamily\": \"PÂINE ALBA                    \",\n        \"unitBusiness\": \"FRANZELA                      \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/230/23001287.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240115%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240115T161507Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=8d9efeeb765183b6b4b5810c5ed0a06f648ff4cb054f2a0634f35b4673eba120aa6376f059c03e17f8d50d0b25a690729d816801e8fc92f525cdaf529fefe5403f8d762973a258e4e356b1335892c085d394a9053990291e7005c363e6011778f8a31c767d07cabe2c19ef25dc273f41a26517b8485bb9d170beee6adb994d56532fcb5fe8e92f4cba99abb43ada0a67491f52b4bd0e535e65bb5847a553a93c1d498711d515c10c7820dcd8daa446c8cb7d3959a7cd0d2e1d679c53067a58761e36474d23f2b503d399cfca39aa7c3618da4a5313c8ca157cb9a817b5f06aaa2d24384dd3cb8c0a5f007f7f116ba88b865df40add030fcc1a5c8fe270793845\"\n    },\n    {\n        \"id\": \"8e5d98fb-a36a-4e0a-9366-365c69f9dfc5\",\n        \"name\": \"FRANZELA 700GR SOMPAN         \",\n        \"metiCode\": 23001288,\n        \"eanCodes\": \"5941696000545\",\n        \"suppliers\": \"SOMPAN SA\",\n        \"pluCode\": \"1718\",\n        \"familyName\": \"BRUTARIE\",\n        \"familyCode\": 230,\n        \"subfamily\": \"PÂINE ALBA                    \",\n        \"unitBusiness\": \"FRANZELA                      \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/230/23001288.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240115%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240115T161507Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=a9fc8f1ac292674043ba5b637b45354d728f162c3e010a142febfe76bdc2209b14d92c9ba7376fac5e2b529a97db91c70f43ffef955bc9979971a7b2be4dad2c809f242422678fb3103ed0db0d4608906891c6a33b23be56404dbcf757dffe2b643f470fd2a53f22b9e85d5a6e33f5f466ced721a0d472914c3a5526b847d7450ff234afefc3ca3ed12acc69c6f729e5ed78bcd59d66334c02eada355d54a5166b526f8728fcdf0cfc5d6a15a9e0dc6082c8fa2113f541fcc6a07a2711153089d513827c17e6739802c48342c55106bdc86e8e4005f08239e8042a47a79deda201b6b756713ed4b0005af610f594cdc6fe03c910e03d24474cb20608117ebba1\"\n    },\n    {\n        \"id\": \"58e2d612-9f7b-4350-91d9-b45965468396\",\n        \"name\": \"PAINE ROTUNDA 500GR SOMPAN    \",\n        \"metiCode\": 23001289,\n        \"eanCodes\": \"5941696000408\",\n        \"suppliers\": \"SOMPAN SA\",\n        \"pluCode\": \"1719\",\n        \"familyName\": \"BRUTARIE\",\n        \"familyCode\": 230,\n        \"subfamily\": \"PÂINE ALBA                    \",\n        \"unitBusiness\": \"PAINE ROTUNDA                 \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/230/23001289.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240115%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240115T161507Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=7dfddb116f8f978dd516bfaf5fd2cc890f979192ef40d7084674c42de79d1968831e01efaab11cca06df30a401c7337c50a96e3cfc66cfce30aae03398be215ac9617b8c3ae52f631d3471f9c5aac69c911a113467cefcd88945593ccd0c60f70094aa2f9bf75615a8acd8e114d05c35b053e35887eff5ad711f96c3ea85d3cf3ed67f1f797eca8edf07965b28776e46e2a88a3cca4f4574a46c40494c1b6a1c56db4c28e4cc7f57247277f78c0f370d3301a1b9b0b57be7f8ed9f9923f88102e2305c9770caddbac5263207138f320e36e2a61632629b89d626f3bfb7d6833a78ff581d87ca14f2b0c920236d2ea38e88d800c0b17f08479a980b130d4c43b6\"\n    }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "36b7b659-cc99-4358-9268-19fe4c1d9da1",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "31aca05f-494c-41a8-85f0-c53f859141fd",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e19e8c5b-36ae-4535-a7cd-c8c7cd5bf707",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "83e0649d-6dcc-4e8c-b8bc-90d4f8ac97e0",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "4c6d68e0-a5e1-4133-8992-119741efcc57",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "42e0d234-f815-4493-8639-4f87e795f447",
+      "type": "http",
+      "documentation": "Post frozen traceability",
+      "method": "post",
+      "endpoint": "traceability/frozen",
+      "responses": [
+        {
+          "uuid": "7441ed90-a5e1-4e06-8822-0cdfe7c42429",
+          "body": "{\n  \"productId\": \"cc6cdbbe-5d9d-4b80-88e3-af684ac8f3de\",\n  \"storeId\": \"fa630330-4543-4413-a144-491160d505e4\",\n  \"productionDate\": \"2014-09-26T15:53:16.45\",\n  \"chargeNumber\": \"test_7cc0ef39f3d7\",\n  \"productionOperator\": \"test_98359d7e7de3\",\n  \"quantity\": 59.29,\n  \"thermalCondition\": \"BAKED\",\n  \"conform\": true,\n  \"nonComplianceReason\": \"test_ccbecc882552\",\n  \"productDestination\": \"test_c70bdc745d30\",\n  \"isVerified\": false,\n  \"verifiedBy\": \"test_96f641ddf0a9\",\n  \"verifiedDate\": \"2015-07-24T15:53:16.45\",\n  \"dlc\": \"2029-03-27T15:53:16.45\",\n  \"isFrozen\": true,\n  \"traceabilityFrozenList\": [\n    {\n      \"batchId\": \"0949d32b-364d-4146-b904-d2b86fd53370\",\n      \"quantity\": 72.18,\n      \"openingDate\": \"2019-11-09T15:53:16.45\",\n      \"dlc\": \"2032-06-28T15:53:16.45\"\n    },\n    {\n      \"batchId\": \"9cf761c0-75f1-4737-84eb-4a467934ecca\",\n      \"quantity\": 24.35,\n      \"openingDate\": \"2019-11-09T15:53:16.45\",\n      \"dlc\": \"2032-06-28T15:53:16.45\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c353ee36-b80f-432a-8698-7838ada4c551",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "7ff4d2c7-784d-4c4c-8721-7c294e7c5396",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "4f6d9675-f7aa-4f90-8917-9900a101d766",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "85a38039-e328-44a6-b755-17e6f34648b6",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "fa8df32b-8103-4172-b894-5475cc1ae608",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "b63c6e85-ce46-487a-9f92-e7a03ac842c9",
+      "type": "http",
+      "documentation": "Get frozen traceability",
+      "method": "get",
+      "endpoint": "batch",
+      "responses": [
+        {
+          "uuid": "a76165a8-2c62-43db-b308-916121921cd2",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"0949d32b-364d-4146-b904-d2b86fd53370\",\n      \"product\": {\n        \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f1\",\n        \"name\": \"SAVARINE 2X140G ENGELMI       \",\n        \"metiCode\": 23002898,\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"unitBusiness\": \"PRAJITURI                     \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=822fa0ba9ad91d719b4c3d4f24e2b7764a7c1d933b30c0c0478c54efb0b3db43c35c7561837010815a5dd28872e71e7cdf4aa6ef1dcfd7c08f9b87d17b0e5443837632a4218734f92782145bb6c9cc3a963036a0389dcf61725359b38488f22df71b6bbd2e49cc4881d05b724779f58270fc070fed783b8a25bc6dce7089efb23b85d5e87f9ad365763abd938f467ca2c07449c92eecdde211355315b29f23551da54c866aa8102647cdc0647b32586a7785b27be6f2aa97047d0e201ee2d85ff3a9dc5c21430970335ce7718d6cdba2c985390bf34d6bb4406f1ca5d4826943cc9aa22df4d924d0b66b5e1549044e3f21b6b4eeb6e4af80392f4b2ab682c9e6\"\n      },\n      \"supplier\": {\n        \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n        \"productCode\": 23002898,\n        \"supplierCode\": 38190,\n        \"supplierName\": \"PATISGAL SRL                  \",\n        \"enable\": true\n      },\n      \"entryDate\": \"2023-12-12T15:53:16.45\",\n      \"expireDate\": \"2023-12-12T15:53:16.45\",\n      \"batchName\": \"test\",\n      \"hasExpireDate\": false,\n      \"hasSecondaryDlc\": false,\n      \"batchQuantity\": 20.3,\n      \"batchStatus\": \"\",\n      \"closeReason\": \"OUT_OF_STOCK\",\n      \"dlcDays\": 5,\n      \"verifiedBy\": \"\",\n      \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n      \"consumedAmount\": 427.14,\n      \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5b15e0eae7934c8175f555165fbc15f0d36a52c93ed5dd95cf842d117cad7b748146bac006789f5fbba8cf7b8c16d03d06b3199fbe4718b1c644fccb76b5cdfd84c02cb8aa395d377111ca521447b9d1fa10a6a6f131bfe94883bf588c173977fd4b30da38ade38850f8c8ea2c755dc150293afeb9f2bb283476e09590f7dd37a33f4b26c569adf67c33b594a737f1521ca765f129ac0fe53cf9e62a600b20d85c15772c4043526ec502b57d020df25cac781359bc92eebd9826eb2889acc18abc05a2fba83d031513dcc35d2db58461bb8c1493ac832613e1899ba294669f2e2f80d3fa0542dfa8d01bfbf0a77fee19862281e604775706e5ef5acdc0a0ef64\",\n      \"verified\": false\n    },{\n      \"id\": \"0949d32b-364d-4146-b904-d2b86fd53372\",\n      \"product\": {\n        \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f2\",\n        \"name\": \"SAVARINE 2X140G ENGELMI       \",\n        \"metiCode\": 23002899,\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"unitBusiness\": \"PRAJITURI                     \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=822fa0ba9ad91d719b4c3d4f24e2b7764a7c1d933b30c0c0478c54efb0b3db43c35c7561837010815a5dd28872e71e7cdf4aa6ef1dcfd7c08f9b87d17b0e5443837632a4218734f92782145bb6c9cc3a963036a0389dcf61725359b38488f22df71b6bbd2e49cc4881d05b724779f58270fc070fed783b8a25bc6dce7089efb23b85d5e87f9ad365763abd938f467ca2c07449c92eecdde211355315b29f23551da54c866aa8102647cdc0647b32586a7785b27be6f2aa97047d0e201ee2d85ff3a9dc5c21430970335ce7718d6cdba2c985390bf34d6bb4406f1ca5d4826943cc9aa22df4d924d0b66b5e1549044e3f21b6b4eeb6e4af80392f4b2ab682c9e6\"\n      },\n      \"supplier\": {\n        \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n        \"productCode\": 23002898,\n        \"supplierCode\": 38190,\n        \"supplierName\": \"PATISGAL SRL                  \",\n        \"enable\": true\n      },\n      \"entryDate\": \"2023-12-12T15:53:16.45\",\n      \"expireDate\": \"2023-12-12T15:53:16.45\",\n      \"batchName\": \"test\",\n      \"hasExpireDate\": false,\n      \"hasSecondaryDlc\": false,\n      \"batchQuantity\": 3,\n      \"batchStatus\": \"\",\n      \"closeReason\": \"OUT_OF_STOCK\",\n      \"dlcDays\": 5,\n      \"verifiedBy\": \"\",\n      \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n      \"consumedAmount\": 427.14,\n      \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5b15e0eae7934c8175f555165fbc15f0d36a52c93ed5dd95cf842d117cad7b748146bac006789f5fbba8cf7b8c16d03d06b3199fbe4718b1c644fccb76b5cdfd84c02cb8aa395d377111ca521447b9d1fa10a6a6f131bfe94883bf588c173977fd4b30da38ade38850f8c8ea2c755dc150293afeb9f2bb283476e09590f7dd37a33f4b26c569adf67c33b594a737f1521ca765f129ac0fe53cf9e62a600b20d85c15772c4043526ec502b57d020df25cac781359bc92eebd9826eb2889acc18abc05a2fba83d031513dcc35d2db58461bb8c1493ac832613e1899ba294669f2e2f80d3fa0542dfa8d01bfbf0a77fee19862281e604775706e5ef5acdc0a0ef64\",\n      \"verified\": false\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 1,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "47bdfb1a-3263-468c-a6a4-9ae59b5ab88a",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "44f71db8-b57c-4425-8868-4af16e3b421b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "14605203-534f-41e1-a247-4359d09e98aa",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0f407b3d-3c9d-4205-a4e5-40995e594fc5",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "db56afeb-e226-4162-a9c3-58783cd08ecb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6877,6 +7647,26 @@
     {
       "type": "route",
       "uuid": "7d371a03-ea20-45f7-8334-b80f996433eb"
+    },
+    {
+      "type": "route",
+      "uuid": "b94a9a2f-09e9-4f84-bd8e-17e1bc88f22a"
+    },
+    {
+      "type": "route",
+      "uuid": "71c839d7-7af1-415f-87b9-43e1157da964"
+    },
+    {
+      "type": "route",
+      "uuid": "7d467c73-a33e-47f3-9fc4-f64a964f0cb4"
+    },
+    {
+      "type": "route",
+      "uuid": "42e0d234-f815-4493-8639-4f87e795f447"
+    },
+    {
+      "type": "route",
+      "uuid": "b63c6e85-ce46-487a-9f92-e7a03ac842c9"
     }
   ],
   "proxyMode": false,
