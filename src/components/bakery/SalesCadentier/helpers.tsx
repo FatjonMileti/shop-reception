@@ -79,7 +79,6 @@ export const columns = [
     field: 'clusterMandatory',
     align: 'left',
     minWidth: '140px',
-    isGroup: true,
     render: row => (
       <BooleanText onSuccess='O' onFailure='F' value={row.clusterMandatory} />
     )

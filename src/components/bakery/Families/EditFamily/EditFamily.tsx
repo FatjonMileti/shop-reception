@@ -26,7 +26,7 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
     const { showNotification } = useNotification()
 
     useEffect(() => {
-      if(isModalOpen) refetchEditItem
+      if(isModalOpen) refetchEditItem()
     }, [isModalOpen])
     
     const { data: modules, isLoading: isModulesLoading, refetch: refetchModules } = useQuery(
