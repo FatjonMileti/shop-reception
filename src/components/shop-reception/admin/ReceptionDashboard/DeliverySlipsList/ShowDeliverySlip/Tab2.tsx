@@ -1,6 +1,6 @@
 import { Paper, Grid } from '@mui/material'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../CommonStyles.modules.scss'
+import s from '../../../Common/CommonStyles.modules.scss'
 import { Table } from '../../../../../core-ui/Table'
 import { modifyColumns } from './helpers'
 import { useState } from 'react'

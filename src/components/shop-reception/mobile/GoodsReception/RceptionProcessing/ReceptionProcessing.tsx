@@ -3,7 +3,7 @@ import cs from '../../Common.modules.scss'
 import { TitleHeader } from '../../TitleHeader'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
-import { TruckCard } from '../../../admin/TruckCard'
+import { TruckCard } from '../../../admin/Common/TruckCard'
 
 const ReceptionProcessing = () => {
   const navigate = useNavigate()

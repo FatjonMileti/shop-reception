@@ -1,12 +1,9 @@
-import { Paper, Box } from '@mui/material'
-import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './PackageDashboard.modules.scss'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { URLS } from '../constants'
 import { useNavigate } from 'react-router-dom'
 import { Icon } from '../../../core-ui/Icon'
-import { IconBox } from '../IconBox'
-import { Toolbar } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { MainLayout } from '../Common/MainLayout'
 
 const getLinks = (navigate) => {
   return [
@@ -57,11 +54,10 @@ const PackageDashboard = () => {
   const navigate = useNavigate()
 
   return (
-    <Paper className={s.paper}>
-      <Typography component='h2' variant='regular'
-                  style={{ textAlign: 'center', textTransform: 'uppercase' }}>Ambalaje</Typography>
-
-      <Toolbar className={s.toolbar}>
+    <MainLayout
+      title='Ambalaje'
+      links={getLinks(navigate)}
+      toolbarButtons={[
         <Button
           label='Back'
           size='small'
@@ -70,18 +66,8 @@ const PackageDashboard = () => {
         >
           <ArrowBackIcon />
         </Button>
-      </Toolbar>
-
-      <Box className={s.container}>
-        {getLinks(navigate).map((link, index) => (
-          <IconBox
-            icon={link.icon}
-            onClick={link.onClick}
-            title={link.title}
-          />
-        ))}
-      </Box>
-    </Paper>
+      ]}
+    />
   )
 }
 

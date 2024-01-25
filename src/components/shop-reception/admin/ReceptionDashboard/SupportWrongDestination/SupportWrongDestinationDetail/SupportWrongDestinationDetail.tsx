@@ -1,9 +1,9 @@
 import { Grid, Paper } from '@mui/material'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../CommonStyles.modules.scss'
+import s from '../../../Common/CommonStyles.modules.scss'
 import { FileUpload } from '../../../../../core-ui/FileUpload'
 import { ChangeEvent, useState } from 'react'
-import { TitleHeader } from '../../../TitleHeader'
+import { TitleHeader } from '../../../Common/TitleHeader'
 
 const SupportWrongDestinationDetail = () => {
   const [uploadedFile, setUploadedFile] = useState(null)

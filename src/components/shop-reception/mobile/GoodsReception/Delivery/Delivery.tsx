@@ -3,7 +3,7 @@ import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../Common.modules.scss'
 import { TitleHeader } from '../../TitleHeader'
 import { useNavigate } from 'react-router-dom'
-import { TruckCard } from '../../../admin/TruckCard'
+import { TruckCard } from '../../../admin/Common/TruckCard'
 import { URLS } from '../../constants'
 
 const truckList: Truck[] = [

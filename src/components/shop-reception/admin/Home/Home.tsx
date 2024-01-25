@@ -1,57 +1,51 @@
-import { Paper, Box } from '@mui/material'
-import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './Home.modules.scss'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { URLS } from '../constants'
 import { useNavigate } from 'react-router-dom'
 import { Icon } from '../../../core-ui/Icon'
-import { IconBox } from '../IconBox'
 import DownloadIcon from '@mui/icons-material/Download'
-import { Toolbar } from '@mui/material'
+import { MainLayout } from '../Common/MainLayout'
+
+const getLinks = (navigate) => {
+  return [
+    {
+      icon: <Icon iconName='Admin' fill='white' />,
+      title: 'Administrare',
+      onClick: () => navigate(URLS.AUTH_ADMIN_DASHBOARD)
+    },
+    {
+      icon: <Icon iconName='StoreManager' fill='white' />,
+      title: 'Recepţie marfă',
+      onClick: () => navigate(URLS.AUTH_RECEPTION_DASHBOARD)
+    },
+    {
+      icon: <Icon iconName='ClustersManagement' fill='white' />,
+      title: 'Ambalaje',
+      onClick: () => navigate(URLS.AUTH_PACKAGE_DASHBOARD)
+    },
+  ]
+}
 
 const Home = () => {
   const navigate = useNavigate()
 
   return (
-    <Paper className={s.paper}>
-      <Toolbar className={s.toolbar}>
+    <MainLayout
+      links={getLinks(navigate)}
+      toolbarButtons={[
         <Button label='Manual utilizare aplicaţie mobil' size='small' variant='outlined'>
           <DownloadIcon />
-        </Button>
+        </Button>,
         <Button label='Manual utilizare aplicaţie administrare' size='small' variant='outlined'>
           <DownloadIcon />
-        </Button>
+        </Button>,
         <Button label='APK Receptie Marfa V0.7.4' size='small' variant='outlined'>
           <DownloadIcon />
-        </Button>
+        </Button>,
         <Button label='APK Receptie Marfa V0.7.5' size='small' variant='outlined'>
           <DownloadIcon />
         </Button>
-      </Toolbar>
-
-      <Box className={s.container}>
-        <IconBox
-          icon={<Icon iconName='Admin' fill='white' />}
-          onClick={() => {
-            navigate(URLS.AUTH_ADMIN_DASHBOARD)
-          }}
-          title='Administrare'
-        />
-        <IconBox
-          icon={<Icon iconName='StoreManager' fill='white' />}
-          onClick={() => {
-            navigate(URLS.AUTH_RECEPTION_DASHBOARD)
-          }}
-          title='Recepţie marfă'
-        />
-        <IconBox
-          icon={<Icon iconName='ClustersManagement' fill='white' />}
-          onClick={() => {
-            navigate(URLS.AUTH_PACKAGE_DASHBOARD)
-          }}
-          title='Ambalaje'
-        />
-      </Box>
-    </Paper>
+      ]}
+    />
   )
 }
 

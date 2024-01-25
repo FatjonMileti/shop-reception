@@ -1,14 +1,11 @@
-import { Paper, Box } from '@mui/material'
-import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './AdminDashboard.modules.scss'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { URLS } from '../constants'
-import { useNavigate } from 'react-router-dom'
 import { Icon } from '../../../core-ui/Icon'
-import { IconBox } from '../IconBox'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import { Toolbar } from '@mui/material'
+import { MainLayout } from '../Common/MainLayout'
+import { useNavigate } from 'react-router-dom'
 
-const getLink = (navigate) => {
+const getLinks = (navigate) => {
   return [
     {
       icon: <Icon iconName='Storage' fill='white' />,
@@ -82,11 +79,10 @@ const AdminDashboard = () => {
   const navigate = useNavigate()
 
   return (
-    <Paper className={s.paper}>
-      <Typography component='h2' variant='regular'
-                  style={{ textAlign: 'center', textTransform: 'uppercase' }}>Administrare</Typography>
-
-      <Toolbar className={s.toolbar}>
+    <MainLayout
+      title="Administrare"
+      links={getLinks(navigate)}
+      toolbarButtons={[
         <Button
           label='Back'
           size='small'
@@ -95,18 +91,8 @@ const AdminDashboard = () => {
         >
           <ArrowBackIcon />
         </Button>
-      </Toolbar>
-
-      <Box className={s.container}>
-        {getLink(navigate).map((link, index) => (
-          <IconBox
-            icon={link.icon ?? <Icon iconName='Admin' fill='white' />}
-            onClick={link.onClick ?? null}
-            title={link.title}
-          />
-        ))}
-      </Box>
-    </Paper>
+      ]}
+    />
   )
 }
 

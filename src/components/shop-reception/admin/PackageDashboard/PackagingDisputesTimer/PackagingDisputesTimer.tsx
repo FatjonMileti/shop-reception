@@ -8,7 +8,7 @@ import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../TitleHeader'
+import { TitleHeader } from '../../Common/TitleHeader'
 import { URLS } from '../../constants'
 
 const PackagingDisputesTimer = () => {

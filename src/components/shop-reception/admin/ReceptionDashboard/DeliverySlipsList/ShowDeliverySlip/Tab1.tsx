@@ -1,11 +1,11 @@
 import { Paper, Grid, Typography } from '@mui/material'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../CommonStyles.modules.scss'
+import s from '../../../Common/CommonStyles.modules.scss'
 import { Table } from '../../../../../core-ui/Table'
 import { detailsColumns } from './helpers'
 import { useState } from 'react'
 import { useNotification } from '../../../../../../hooks'
-import { TitleHeader } from '../../../TitleHeader'
+import { TitleHeader } from '../../../Common/TitleHeader'
 import { useParams } from 'react-router-dom'
 import { Download as DownloadIcon } from '@mui/icons-material'
 

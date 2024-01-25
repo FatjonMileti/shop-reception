@@ -4,11 +4,12 @@
   align-items: center;
   gap: 10px;
 }
-.container{
+
+.container {
   margin: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
 }
 
 .paper {

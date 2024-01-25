@@ -4,7 +4,7 @@ import cs from '../../Common.modules.scss'
 import { TitleHeader } from '../../TitleHeader'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
-import { TruckCard } from '../../../admin/TruckCard'
+import { TruckCard } from '../../../admin/Common/TruckCard'
 
 const trucks: Truck[] = [
   { id: 1, name: 'FD', description: '12-12-2023 14:01' },

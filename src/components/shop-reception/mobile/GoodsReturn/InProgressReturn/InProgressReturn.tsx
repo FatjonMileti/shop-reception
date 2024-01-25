@@ -2,7 +2,7 @@ import { Grid, Container, Paper, Box } from '@mui/material'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import cs from '../../Common.modules.scss'
 import { TitleHeader } from '../../TitleHeader'
-import { TruckCard } from '../../../admin/TruckCard'
+import { TruckCard } from '../../../admin/Common/TruckCard'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
 

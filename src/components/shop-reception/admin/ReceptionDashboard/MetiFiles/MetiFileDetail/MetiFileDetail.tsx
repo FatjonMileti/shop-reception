@@ -1,6 +1,6 @@
 import { Grid, Paper, Typography } from '@mui/material'
-import s from '../../../CommonStyles.modules.scss'
-import { TitleHeader } from '../../../TitleHeader'
+import s from '../../../Common/CommonStyles.modules.scss'
+import { TitleHeader } from '../../../Common/TitleHeader'
 import React, { useState } from 'react'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { columns } from './helpers'

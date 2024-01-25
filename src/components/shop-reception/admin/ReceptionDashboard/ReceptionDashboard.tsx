@@ -1,12 +1,9 @@
-import { Paper, Box } from '@mui/material'
-import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import s from './ReceptionDashboard.modules.scss'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { URLS } from '../constants'
 import { useNavigate } from 'react-router-dom'
 import { Icon } from '../../../core-ui/Icon'
-import { IconBox } from '../IconBox'
-import { Toolbar } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { MainLayout } from '../Common/MainLayout'
 
 const getList = (navigate) => {
   return [
@@ -52,11 +49,10 @@ const ReceptionDashboard = () => {
   const navigate = useNavigate()
 
   return (
-    <Paper className={s.paper}>
-      <Typography component='h2' variant='regular'
-                  style={{ textAlign: 'center', textTransform: 'uppercase' }}>Recepţie marfă</Typography>
-
-      <Toolbar className={s.toolbar}>
+    <MainLayout
+      title='Recepţie marfă'
+      links={getList(navigate)}
+      toolbarButtons={[
         <Button
           label='Back'
           size='small'
@@ -65,18 +61,8 @@ const ReceptionDashboard = () => {
         >
           <ArrowBackIcon />
         </Button>
-      </Toolbar>
-
-      <Box className={s.container}>
-        {getList(navigate).map((link, index) => (
-          <IconBox
-            icon={link.icon}
-            onClick={link.onClick}
-            title={link.title}
-          />
-        ))}
-      </Box>
-    </Paper>
+      ]}
+    />
   )
 }
 

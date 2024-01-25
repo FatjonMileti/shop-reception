@@ -1,7 +1,7 @@
 import { Grid, Paper } from '@mui/material'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../CommonStyles.modules.scss'
-import { TitleHeader } from '../../../TitleHeader'
+import s from '../../../Common/CommonStyles.modules.scss'
+import { TitleHeader } from '../../../Common/TitleHeader'
 
 const BalancePackageForm = () => {
   return (

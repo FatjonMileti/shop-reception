@@ -5,7 +5,7 @@ import { URLS } from '../../constants'
 import useRoles from '../../useRoles'
 import { useNavigate } from 'react-router-dom'
 import { TitleHeader } from '../../TitleHeader'
-import { TruckCard } from '../../../admin/TruckCard'
+import { TruckCard } from '../../../admin/Common/TruckCard'
 
 const ListTrucks = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()

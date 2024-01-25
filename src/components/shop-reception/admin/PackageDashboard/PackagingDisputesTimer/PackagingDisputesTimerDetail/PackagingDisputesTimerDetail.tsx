@@ -1,7 +1,7 @@
 import { Grid, Paper, Typography } from '@mui/material'
-import { TitleHeader } from '../../../TitleHeader'
+import { TitleHeader } from '../../../Common/TitleHeader'
 import { useParams } from 'react-router-dom'
-import s from '../../../CommonStyles.modules.scss'
+import s from '../../../Common/CommonStyles.modules.scss'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import React from 'react'
 

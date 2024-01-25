@@ -1,6 +1,6 @@
 import { Paper, Grid } from '@mui/material'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../CommonStyles.modules.scss'
+import s from '../../Common/CommonStyles.modules.scss'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { useState } from 'react'
@@ -9,7 +9,7 @@ import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../TitleHeader'
+import { TitleHeader } from '../../Common/TitleHeader'
 
 const DifferencesProducts = () => {
   const [tableItems, setTableItems] = useState<DifferencesProduct[]>([
