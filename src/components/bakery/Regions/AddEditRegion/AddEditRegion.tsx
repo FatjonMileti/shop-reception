@@ -51,7 +51,7 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
         }
     )
 
-    const initialValues = useMemo(() => getInitialValues(editItem, isEdit), [editItem, isModalOpen])
+    const initialValues = useMemo(() => getInitialValues(editItem), [editItem, isModalOpen])
     const validationSchema = useMemo(() => getValidationSchema(), [editItem, isModalOpen])
 
     const submitTask = async (values: AddEditRegionItem) => {

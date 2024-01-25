@@ -8,7 +8,7 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '170px',
-    render: (row: any) => <ImageCell imageUrl={row.imageUrl} value={row.name} />
+    render: (row: any) => <ImageCell imageUrl={row.imageUrl} value={row.productName} />
   },
   {
     title: 'Cod METI',

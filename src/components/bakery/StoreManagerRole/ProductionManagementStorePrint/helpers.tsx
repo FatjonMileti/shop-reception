@@ -6,13 +6,15 @@ export const columns = [
     title: 'Produs',
     field: 'productName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '200px'
   },
   {
     title: 'Cod METI',
     field: 'productMetiCode',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Familie',
@@ -30,21 +32,21 @@ export const columns = [
     title: 'MV',
     field: 'average',
     align: 'left',
-    minWidth: '140px',
+    minWidth: '70px',
     type: 'string'
   },
   {
     title: 'CP',
     field: 'calculation',
     align: 'left',
-    minWidth: '140px',
+    minWidth: '70px',
     type: 'string'
   },
   {
     title: 'CM',
     field: 'quantityToProduce',
     align: 'left',
-    minWidth: '140px',
+    minWidth: '70px',
     type: 'string'
   },
 
@@ -53,21 +55,24 @@ export const columns = [
     field: 'average',
     align: 'left',
     isGroup: true,
-    type: 'string'
+    type: 'string',
+    minWidth: '70px'
   },
   {
     title: 'CP',
     field: 'calculation',
     align: 'left',
     isGroup: true,
-    type: 'string'
+    type: 'string',
+    minWidth: '70px'
   },
   {
     title: 'CM',
     field: 'quantityToProduce',
     align: 'left',
     isGroup: true,
-    type: 'string'
+    type: 'string',
+    minWidth: '70px'
   },
 
   {
@@ -91,6 +96,7 @@ export const columns = [
     field: 'inPromotion',
     align: 'left',
     type: 'boolean',
+    minWidth: '100px',
     render: (row: any) => (
       <Box>
         <BooleanIcon
@@ -117,6 +123,7 @@ export const columns = [
     title: 'Ultima persoana care a modificat fisierul',
     field: 'username',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    minWidth: '200px'
   }
 ]

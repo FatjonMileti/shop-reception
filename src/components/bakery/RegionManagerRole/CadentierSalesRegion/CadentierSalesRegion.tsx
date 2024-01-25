@@ -38,7 +38,7 @@ const CadentierSalesRegion = () => {
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/region/all')
-      const resultOptions = toAsyncSelectOptions(result, 'id', 'name')
+      const resultOptions = toAsyncSelectOptions(result, 'id', 'name')     
       return resultOptions || []
     },
     {

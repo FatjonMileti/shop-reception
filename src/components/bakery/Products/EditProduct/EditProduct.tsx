@@ -28,7 +28,7 @@ const EditProduct: React.FC<EditProductProps> = props => {
     const [uploadedFile, setUploadedFile] = useState(null);
     
     useEffect(() => {
-      if(isModalOpen) refetchEditItem
+      if(isModalOpen) refetchEditItem()
     }, [isModalOpen])
     
     const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
