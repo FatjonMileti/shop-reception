@@ -6,7 +6,6 @@ import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { useGovernanceDomains, useNotification, usePermissions } from 'hooks'
 import { useEffect, useMemo, useState } from 'react'
-import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { roles } from './helpers'
@@ -56,31 +55,6 @@ const TeamDayOffManagement = () => {
       }
     })()
   }, [storedGovernanceDomains])
-
-  const { data: teamMembers, isLoading: isTeamMembersLoading } = useQuery(
-    ['teamMembers', domainFilterValue],
-    async () => {
-      if (domainFilterValue === null) {
-        return null
-      }
-
-      const result = await makeCoreGetRequest(
-        `/governance/teamMembers?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
-          domainFilterValue?.value
-        )}`
-      )
-      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
-      return resultOptions || null
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
 
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
@@ -174,7 +148,7 @@ const TeamDayOffManagement = () => {
   return (
     <div className={s.mainContainer}>
       <Grid sx={{ width: '100%', display: 'block' }} container>
-        {!storedGovernanceDomains || isTeamMembersLoading ? (
+        {!storedGovernanceDomains ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
@@ -200,27 +174,33 @@ const TeamDayOffManagement = () => {
             isModalOpen={isPublicHolidaysModalOpen}
             closeModal={closePublicHolidaysModal}
           />
-          <NewTimeOff
-            teamMembers={teamMembers}
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <NewTimeOff
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            editItem={selectedRow}
-            setShouldRefreshData={setShouldRefreshData}
-            isEdit
-          />
-          <DeleteConfirmationModal
-            isModalOpen={isDeleteModalOpen}
-            closeModal={closeDeleteModal}
-            actionUrl="/governance/teamTimeOff/:id"
-            itemId={`${selectedRow?.id}`}
-            content={<Typography>Are you sure you want to delete this entry?</Typography>}
-            setShouldRefreshData={setShouldRefreshData}
-          />
+          {canCreate && (
+            <NewTimeOff
+              isModalOpen={isNewModalOpen}
+              closeModal={closeNewModal}
+              setShouldRefreshData={setShouldRefreshData}
+              domainFilterValue={domainFilterValue}
+            />
+          )}
+          {canEdit && (
+            <NewTimeOff
+              isModalOpen={isEditModalOpen}
+              closeModal={closeEditModal}
+              editItem={selectedRow}
+              setShouldRefreshData={setShouldRefreshData}
+              isEdit
+            />
+          )}
+          {canDelete && (
+            <DeleteConfirmationModal
+              isModalOpen={isDeleteModalOpen}
+              closeModal={closeDeleteModal}
+              actionUrl="/governance/teamTimeOff/:id"
+              itemId={`${selectedRow?.id}`}
+              content={<Typography>Are you sure you want to delete this entry?</Typography>}
+              setShouldRefreshData={setShouldRefreshData}
+            />
+          )}
           <Table
             hideCheckbox
             orderBy="teamMember.name"
@@ -240,7 +220,7 @@ const TeamDayOffManagement = () => {
                 typographyVariant: 'medium',
                 backgroundColor: '#16a085',
                 desktopIcon: <EditActionIcon />,
-  
+
                 onClick: (_e, rowId) => selectRow(rowId, 'edit')
               },
               canDelete && {
