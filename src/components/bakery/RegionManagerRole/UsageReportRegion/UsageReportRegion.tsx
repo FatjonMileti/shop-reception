@@ -1,6 +1,6 @@
 import s from '../../commonStyles.modules.scss'
 import { useNotification } from 'hooks'
-import { Box, Divider, Grid } from '@mui/material'
+import { Divider, Grid } from '@mui/material'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'

@@ -39,6 +39,7 @@ const PrintPreviewTable = props => {
   const order = search.get('order')
   const orderBy = search.get('orderBy')
   const filterValue = search.get('filterValue')
+
   const [isLoading, setIsLoading] = useState(true)
   const [dynamicColumns, setDynamicColumns] = useState([])
   const [dynamicItems, setDynamicItems] = useState([])
@@ -100,15 +101,11 @@ const PrintPreviewTable = props => {
       if (action.type === 'GET') {
         const encodedFilterBy = encodeURIComponent(filterBy)
         const encodedFilterValue = encodeURIComponent(filterValue)
-        const builtUrl = `
-          ${url}?page=0&size=1000
-          ${order ? '&order=${order}':''}
-          ${orderBy ? '&orderBy=${orderBy}':''}
-          &filterBy=${encodedFilterBy}&filterValue=${encodedFilterValue}`
-        response = await makeCoreGetRequest(builtUrl
-          // order && orderBy
-          //   ? `${url}?page=0&size=1000&order=${order}&orderBy=${orderBy}&filterBy=${encodedFilterBy}&filterValue=${encodedFilterValue}`
-          //   : `${url}?page=0&size=1000&filterBy=${encodedFilterBy}&filterValue=${encodedFilterValue}`
+      
+        response = await makeCoreGetRequest(
+          order && orderBy
+            ? `${url}?page=0&size=1000&order=${order}&orderBy=${orderBy}&filterBy=${encodedFilterBy}&filterValue=${encodedFilterValue}`
+            : `${url}?page=0&size=1000&filterBy=${encodedFilterBy}&filterValue=${encodedFilterValue}`
         )
       }
 

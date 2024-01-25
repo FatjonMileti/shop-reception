@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { BooleanText } from 'components/core-ui/BooleanText'
 import { ImageCell } from 'components/core-ui/ImageCell'
-import { DatePicker, Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { DatePicker, Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
 export const columns = [
   {

@@ -90,7 +90,7 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
                 enable: values.enable === 'Activ'
             }
             mutate(payload)
-            if(isEdit) resetForm()
+            resetForm()
         }
     })
 
