@@ -321,7 +321,7 @@ export const CorrectReceivedProduct = ({
                   onChange={form.handleChange}
                   value={form.values.amount}
                   name="amount"
-                  // suffix={selectedProduct.metricUnit}
+                  suffix={form.values?.selectedProduct?.metricUnit}
                   error={!!form.errors.amount}
                   helperText={form.errors.amount as string}
                 />
@@ -363,6 +363,7 @@ export const CorrectReceivedProduct = ({
                   style={{ display: 'none' }}
                   type="file"
                   accept="image/*"
+                  capture="environment"
                   onChange={e => {
                     if (e.target.files) {
                       form.setFieldValue('picture', e.currentTarget.files[0])

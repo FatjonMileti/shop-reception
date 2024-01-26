@@ -248,6 +248,7 @@ export const ProductDetails = ({
             style={{ display: 'none' }}
             type="file"
             accept="image/*"
+            capture="environment"
             onChange={e => {
               if (e.target.files) {
                 form.setFieldValue('picture', e.currentTarget.files[0])
