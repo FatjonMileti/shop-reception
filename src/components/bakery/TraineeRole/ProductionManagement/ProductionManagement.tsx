@@ -164,7 +164,7 @@ const ProductionManagement = () => {
       setTableState({
         order,
         orderBy,
-        tableFilters
+        tableFilters: [...tableFilters, { name: 'store', value: storeFilterValue?.value }]
       })
 
       window.history.replaceState(
@@ -176,7 +176,7 @@ const ProductionManagement = () => {
             order,
             orderBy,
             searchText,
-            tableFilters
+            tableFilters: [...tableFilters, { name: 'store', value: storeFilterValue?.value }]
           }
         },
         document.title
