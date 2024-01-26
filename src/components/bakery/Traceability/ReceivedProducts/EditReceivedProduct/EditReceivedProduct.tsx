@@ -72,29 +72,31 @@ export const EditReceivedProduct = ({ isModalOpen, closeModal }: EditReceivedPro
             />
           </Grid>
 
-          <Grid item xl={3} lg={4} sm={6} xs={12}>
-            <RadioButtonGroup
-              label="Data expirare"
-              dotStyle
-              name="hasExpirationDate"
-              onChange={e => {
-                const value = e.target.value === 'true'
-                form.setFieldValue('verified', value)
-              }}
-              value={form.values.verified ? 'true' : 'false'}
-              row
-              options={[
-                {
-                  label: 'DA',
-                  value: 'true'
-                },
-                {
-                  label: 'NU',
-                  value: 'false'
-                }
-              ]}
-            />
-          </Grid>
+
+        </Grid>
+
+        <Grid item  xs={12}>
+          <RadioButtonGroup
+            label="Bifa Verificare de catre validator Trasabilitate"
+            dotStyle
+            name="hasExpirationDate"
+            onChange={e => {
+              const value = e.target.value === 'true'
+              form.setFieldValue('verified', value)
+            }}
+            value={form.values.verified ? 'true' : 'false'}
+            row
+            options={[
+              {
+                label: 'DA',
+                value: 'true'
+              },
+              {
+                label: 'NU',
+                value: 'false'
+              }
+            ]}
+          />
         </Grid>
 
         <Grid item xs={12} container justifyContent="space-between">

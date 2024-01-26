@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'components/core-ui/Modal'
-import { SelectOrScanProduct } from './SelectProduct'
+import { SelectOrScanProduct } from './SelectOrScanProduct'
 import { SelectSupplier } from './SelectSupplier'
 import { ProductDetails } from './ProductDetails'
 import { useMutation } from 'react-query'
@@ -100,7 +100,7 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal }: AddReceivedProdu
   return (
     <Modal
       isModalOpen={isModalOpen}
-      closeModal={closeModal}
+      closeModal={cancel}
       modalTitle="Adauga lot nou receptionat"
       modalWidth="50%"
     >
