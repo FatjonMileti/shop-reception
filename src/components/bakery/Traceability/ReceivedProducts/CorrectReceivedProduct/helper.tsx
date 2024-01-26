@@ -50,7 +50,8 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
 
     lot: Yup.string().required('lot is required').max(30),
 
-    picture: Yup.mixed<File>().test('required', 'The picture must be a file', (value: File) => {
-      return !!value
-    })
+    picture: Yup.mixed<File>()
+    //   .test('required', 'The picture must be a file', (value: File) => {
+    //   return !!value
+    // })
   })

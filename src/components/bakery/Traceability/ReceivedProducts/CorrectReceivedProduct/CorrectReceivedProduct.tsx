@@ -13,14 +13,13 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import ImageIcon from '@mui/icons-material/Image'
 import React from 'react'
 import { useFormik } from 'formik'
-import { ProductDetails } from '../AddReceivedProduct/ProductDetails'
 import { correctReceivedProductSchema, getInitialValues } from './helper'
 import { SelectSupplier } from './SelectSupplier'
 import { Product, ReceivedProduct, Supplier } from '../interfaces'
 import { SelectProduct } from './SelectProduct'
 import { useMutation, useQuery } from 'react-query'
 import { formatPayloadDate } from '../../../../../utils/helpers'
-import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../utils/api'
+import { makeCoreGetRequest, makeCorePutRequest } from '../../../../../utils/api'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 
@@ -36,20 +35,25 @@ interface CorrectReceivedProductRequestData {
   batchQuantity: number
 
   // imageUrl: 'string'
-
   // storeId: string
-
   // batchStatus: 'string'
   // closeReason: 'OUT_OF_STOCK'
-
   // verifiedBy: 'string'
   // verifiedDate: '2024-01-18T11:43:36.604Z'
   // verified: true
 }
 
-export interface ReceivedProductToCorrect extends ProductDetails {
+export interface ReceivedProductToCorrect {
   selectedProduct: Product
   selectedSupplier: Supplier
+  entryDate: dayjs.Dayjs
+  hasExpirationDate: boolean
+  expirationDate?: dayjs.Dayjs
+  hasSecondaryDLC: boolean
+  secondaryDLC?: string
+  amount?: string
+  lot?: string
+  picture?: File
 }
 
 interface CorrectReceivedProductProps {
@@ -64,7 +68,6 @@ export const CorrectReceivedProduct = ({
 }: CorrectReceivedProductProps) => {
   const inputFileRef = React.useRef<HTMLInputElement>()
   const { showNotification } = useNotification()
-  console.log('productId: ', batchId)
 
   const receivedProductQuery = useQuery<ReceivedProduct>(
     ['received-product', batchId],
@@ -84,23 +87,20 @@ export const CorrectReceivedProduct = ({
     }
   )
 
-  console.log('receivedProductQuery: ', receivedProductQuery.data)
-
   const initialValues = React.useMemo(
     () => getInitialValues(receivedProductQuery.data),
     [receivedProductQuery.data]
   )
-  console.log('initialValues: ', initialValues)
 
   const form = useFormik<ReceivedProductToCorrect>({
     enableReinitialize: true,
     validationSchema: correctReceivedProductSchema,
     validateOnChange: false,
     initialValues: initialValues,
-    onSubmit: async (values, { resetForm }) => {}
+    onSubmit: () => {
+      productCorrectionMutation.mutate()
+    }
   })
-
-  console.log('form.values: ', form.values)
 
   const productCorrectionMutation = useMutation(
     async () => {
@@ -121,7 +121,7 @@ export const CorrectReceivedProduct = ({
       formData.append('dto', JSON.stringify(data))
       formData.append('fileObject', form.values.picture)
 
-      await makeCorePostRequest('/bakery/batch', formData)
+      await makeCorePutRequest(`/bakery/batch/correction/${batchId}`, formData)
     },
     {
       onSuccess: () => {
@@ -143,7 +143,7 @@ export const CorrectReceivedProduct = ({
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle="Corectie" modalWidth="50%">
       <Grid container rowSpacing={3.5}>
-        {(productCorrectionMutation.isLoading || receivedProductQuery.isFetching ) && receivedProductQuery.data? (
+        {productCorrectionMutation.isLoading || receivedProductQuery.isFetching ? (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         ) : (
           <>
@@ -382,14 +382,7 @@ export const CorrectReceivedProduct = ({
                   size="large"
                   variant="contained"
                   label="Continua"
-                  onClick={async () => {
-                    const errors = await form.validateForm()
-                    if (!Object.keys(errors).length) {
-                      productCorrectionMutation.mutate()
-                    } else {
-                      console.log('continue errors')
-                    }
-                  }}
+                  onClick={() => form.submitForm()}
                 />
               </Grid>
             </Grid>

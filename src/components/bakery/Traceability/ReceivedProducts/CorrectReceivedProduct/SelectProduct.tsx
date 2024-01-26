@@ -59,7 +59,7 @@ export const SelectProduct = ({ setSelectedProduct, selectedProduct, error, help
       onChange={(event, value) => {
         setSelectedProduct(value ? productQuery.data.find(({ id }) => id === value.value) : null)
       }}
-      value={selectedProduct ? { label: selectedProduct.name, value: selectedProduct.id }: undefined}
+      value={selectedProduct ? { label: selectedProduct.name, value: selectedProduct.id }: null}
       autoComplete={false}
       filterOptions={x => x}
       error={error}

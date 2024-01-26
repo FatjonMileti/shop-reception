@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
-import { ReceivedProductToEdit } from './EditReceivedProduct'
+import { EditReceivedProductRequestData } from './EditReceivedProduct'
 
-export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToEdit> = Yup.object()
+export const correctReceivedProductSchema: Yup.ObjectSchema<EditReceivedProductRequestData> = Yup.object()
   .shape({
     batchStatus: Yup.string(),
     closeReason: Yup.string(),

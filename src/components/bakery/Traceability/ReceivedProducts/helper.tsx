@@ -47,7 +47,8 @@ export const toTableRowItem = (item: Partial<ReceivedProduct>): ReceivedProduct 
   modifiedBy: item.modifiedBy || '',
   verified: item.verified || false,
   imageUrl: item.imageUrl || '',
-  createdBy: item.createdBy || ''
+  createdBy: item.createdBy || '',
+  createdUser: item.createdUser || false
 })
 
 export const columns: Column[] = [

@@ -59,7 +59,9 @@ export const ProductDetails = ({
     validationSchema: productDetailsSchema,
     validateOnChange: false,
     initialValues: initialValues,
-    onSubmit: async (values, { resetForm }) => {}
+    onSubmit: (values) => {
+      onContinue(values)
+    }
   })
 
 
@@ -264,14 +266,7 @@ export const ProductDetails = ({
             size="large"
             variant="contained"
             label="Salveaza"
-            onClick={async () => {
-              const errors = await form.validateForm()
-              if (!Object.keys(errors).length) {
-                onContinue(form.values)
-              } else {
-                console.log('continue errors')
-              }
-            }}
+            onClick={() => form.submitForm()}
           />
         </Grid>
       </Grid>

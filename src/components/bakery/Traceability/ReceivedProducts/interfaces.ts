@@ -43,7 +43,8 @@ export interface ReceivedProduct {
   modifiedBy: string;
   verified: boolean;
   imageUrl: string;
-  createdBy: string
+  createdBy: string;
+  createdUser: boolean;
 }
 
 export interface SubfamilyItem {

@@ -48,7 +48,6 @@ export const ReceivedProducts = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/product',
-          // searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
           tableFilters,
           page,
           rowsPerPage
@@ -172,12 +171,19 @@ export const ReceivedProducts = () => {
       <AddReceivedProduct isModalOpen={isAddModalOpen} closeModal={() => setAddModalOpen(false)} />
       <CorrectReceivedProduct
         isModalOpen={isCorrectModalOpen}
-        closeModal={() => setCorrectModalOpen(false)}
+        closeModal={() => {
+          setCorrectModalOpen(false)
+          setSelectedRowId(0)
+        }}
         batchId={selectedRowId}
       />
       <EditReceivedProduct
         isModalOpen={isEditModalOpen}
-        closeModal={() => setEditModalOpen(false)}
+        closeModal={() => {
+          setEditModalOpen(false)
+          setSelectedRowId(0)
+        }}
+        batchId={selectedRowId}
       />
       <ListTable
         totalCount={totalCount}

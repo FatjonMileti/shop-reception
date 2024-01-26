@@ -46,7 +46,7 @@ export const SelectSupplier = ({
       value={
         selectedSupplier
           ? { label: selectedSupplier.supplierName, value: selectedSupplier.id }
-          : undefined
+          : null
       }
       error={error}
       helperText={helperText}
