@@ -14,13 +14,13 @@ import ImageIcon from '@mui/icons-material/Image'
 import React from 'react'
 import { useFormik } from 'formik'
 import { ProductDetails } from '../AddReceivedProduct/ProductDetails'
-import { correctReceivedProductSchema } from './helper'
+import { correctReceivedProductSchema, getInitialValues } from './helper'
 import { SelectSupplier } from './SelectSupplier'
-import { Product, Supplier } from '../interfaces'
+import { Product, ReceivedProduct, Supplier } from '../interfaces'
 import { SelectProduct } from './SelectProduct'
-import { useMutation } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import { formatPayloadDate } from '../../../../../utils/helpers'
-import { makeCorePostRequest } from '../../../../../utils/api'
+import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../utils/api'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 
@@ -52,38 +52,55 @@ export interface ReceivedProductToCorrect extends ProductDetails {
   selectedSupplier: Supplier
 }
 
-const initialValues: ReceivedProductToCorrect = {
-  selectedProduct: undefined,
-  selectedSupplier: undefined,
-
-  entryDate: dayjs(),
-  hasExpirationDate: true,
-  expirationDate: null,
-  hasSecondaryDLC: true,
-  secondaryDLC: '',
-  amount: '',
-  lot: '',
-  picture: undefined
-}
-
 interface CorrectReceivedProductProps {
   isModalOpen: boolean
   closeModal: () => void
+  batchId?: string | number
 }
 export const CorrectReceivedProduct = ({
   isModalOpen,
-  closeModal
+  closeModal,
+  batchId
 }: CorrectReceivedProductProps) => {
   const inputFileRef = React.useRef<HTMLInputElement>()
   const { showNotification } = useNotification()
+  console.log('productId: ', batchId)
+
+  const receivedProductQuery = useQuery<ReceivedProduct>(
+    ['received-product', batchId],
+    async () => {
+      return await makeCoreGetRequest(`/bakery/batch/${batchId}`)
+    },
+    {
+      enabled: !!batchId,
+      onError: error => {
+        showNotification({
+          message: `An error occurred while getting the product details. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  console.log('receivedProductQuery: ', receivedProductQuery.data)
+
+  const initialValues = React.useMemo(
+    () => getInitialValues(receivedProductQuery.data),
+    [receivedProductQuery.data]
+  )
+  console.log('initialValues: ', initialValues)
 
   const form = useFormik<ReceivedProductToCorrect>({
-    enableReinitialize: false,
+    enableReinitialize: true,
     validationSchema: correctReceivedProductSchema,
     validateOnChange: false,
     initialValues: initialValues,
     onSubmit: async (values, { resetForm }) => {}
   })
+
+  console.log('form.values: ', form.values)
 
   const productCorrectionMutation = useMutation(
     async () => {
@@ -126,10 +143,9 @@ export const CorrectReceivedProduct = ({
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle="Corectie" modalWidth="50%">
       <Grid container rowSpacing={3.5}>
-        {productCorrectionMutation.isLoading && (
+        {(productCorrectionMutation.isLoading || receivedProductQuery.isFetching ) && receivedProductQuery.data? (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-        )}
-        {!productCorrectionMutation.isLoading && (
+        ) : (
           <>
             <Grid item xs={12} container spacing={2} alignItems="flex-end">
               <Grid item container xs={12} spacing={2}>
@@ -369,8 +385,6 @@ export const CorrectReceivedProduct = ({
                   onClick={async () => {
                     const errors = await form.validateForm()
                     if (!Object.keys(errors).length) {
-                      // onContinue(form.values)
-
                       productCorrectionMutation.mutate()
                     } else {
                       console.log('continue errors')

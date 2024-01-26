@@ -1,7 +1,23 @@
 import * as Yup from 'yup'
 import dayjs from 'dayjs'
 import { ReceivedProductToCorrect } from './CorrectReceivedProduct'
-import { Product, Supplier } from '../interfaces'
+import { Product, ReceivedProduct, Supplier } from '../interfaces'
+
+export const getInitialValues = (receivedProduct?: ReceivedProduct ): ReceivedProductToCorrect => {
+  return {
+    selectedProduct: receivedProduct?.product,
+    selectedSupplier: receivedProduct?.supplier,
+
+    entryDate: receivedProduct?.entryDate ? dayjs(receivedProduct?.entryDate) : dayjs(),
+    hasExpirationDate: receivedProduct?.hasExpireDate || true,
+    expirationDate: receivedProduct?.expireDate ? dayjs(receivedProduct?.expireDate) : null,
+    hasSecondaryDLC: receivedProduct?.hasSecondaryDlc,
+    secondaryDLC: receivedProduct?.dlcDays?.toString() || '',
+    amount: receivedProduct?.batchQuantity?.toString() || '',
+    lot: receivedProduct?.batchName || '',
+    picture: undefined
+  }
+}
 
 export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCorrect> =
   Yup.object().shape({

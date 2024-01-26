@@ -18,12 +18,11 @@ export const SelectSupplier = ({
   error,
   helperText
 }: SelectSupplierProps) => {
+
   const supplierQuery = useQuery(
-    ['supplier'],
+    ['supplier', selectedProduct?.metiCode],
     async () => {
-      try {
-        return await makeCoreGetRequest(`/bakery/supplier/byProduct/${selectedProduct.metiCode}`)
-      } catch (err) {}
+      return await makeCoreGetRequest(`/bakery/supplier/byProduct/${selectedProduct.metiCode}`)
     },
 
     {
@@ -45,7 +44,9 @@ export const SelectSupplier = ({
         setSelectedSupplier(value ? supplierQuery.data.find(({ id }) => id === value.value) : null)
       }}
       value={
-        selectedSupplier ? { label: selectedSupplier.supplierName, value: selectedSupplier.id } : undefined
+        selectedSupplier
+          ? { label: selectedSupplier.supplierName, value: selectedSupplier.id }
+          : undefined
       }
       error={error}
       helperText={helperText}

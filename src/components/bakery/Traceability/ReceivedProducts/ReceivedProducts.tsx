@@ -1,6 +1,6 @@
 import s from '../../commonStyles.modules.scss'
 import { Autocomplete, ListTable } from '@fullscreendigital/carrefour-dex-fe'
-import React from 'react'
+import React, { useState } from 'react'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from '../../../../utils/api'
@@ -36,6 +36,8 @@ export const ReceivedProducts = () => {
   const [isAddModalOpen, setAddModalOpen] = React.useState<boolean>(false)
   const [isCorrectModalOpen, setCorrectModalOpen] = React.useState<boolean>(false)
   const [isEditModalOpen, setEditModalOpen] = React.useState<boolean>(false)
+
+  const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
 
   const { showNotification } = useNotification()
 
@@ -171,6 +173,7 @@ export const ReceivedProducts = () => {
       <CorrectReceivedProduct
         isModalOpen={isCorrectModalOpen}
         closeModal={() => setCorrectModalOpen(false)}
+        batchId={selectedRowId}
       />
       <EditReceivedProduct
         isModalOpen={isEditModalOpen}
@@ -238,6 +241,7 @@ export const ReceivedProducts = () => {
             typographyVariant: 'medium',
             backgroundColor: '#CC4010',
             onClick: (e, rowId) => {
+              setSelectedRowId(rowId)
               setCorrectModalOpen(true)
             },
             desktopIcon: <EditActionIcon />
@@ -248,6 +252,7 @@ export const ReceivedProducts = () => {
             typographyVariant: 'medium',
             backgroundColor: '#0970E6',
             onClick: (e, rowId) => {
+              setSelectedRowId(rowId)
               setEditModalOpen(true)
             },
             desktopIcon: <EditActionIcon />
