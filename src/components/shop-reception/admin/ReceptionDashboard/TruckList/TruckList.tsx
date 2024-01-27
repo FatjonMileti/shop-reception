@@ -1,6 +1,5 @@
-import { Paper, Grid } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../Common/CommonStyles.modules.scss'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { useState } from 'react'
@@ -70,179 +69,156 @@ const TruckList = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <TitleHeader title='Listă camioane marfă' />
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează magazin'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează magazin',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează hub'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează hub',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează depozit'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează depozit',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează status'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează status',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează locaţie camion'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează locaţie camion',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează documente conforme'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează documente conforme',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează conformitate termodiagrama'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează conformitate termodiagrama',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează recepţie în interval orar'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează recepţie în interval orar',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează conformitate sigilii'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează conformitate sigilii',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
+    <Grid
+      items={[
+        <TitleHeader title='Listă camioane marfă' />,
+        <Grid
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează magazin',
+                  value: 'none'
                 }
-                label='Cod cursă'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează hub'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează hub',
+                  value: 'none'
                 }
-                label='Număr înmatriculare'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează depozit'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează depozit',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează status'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează status',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează locaţie camion'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează locaţie camion',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează documente conforme'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează documente conforme',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează conformitate termodiagrama'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează conformitate termodiagrama',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează recepţie în interval orar'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează recepţie în interval orar',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează conformitate sigilii'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează conformitate sigilii',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Cod cursă'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Număr înmatriculare'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />
+          ]}
+          itemsPerRow={4}
+        />,
         <Table
           hideCheckbox
           orderBy='role'
@@ -268,8 +244,9 @@ const TruckList = () => {
           ]}
           rowActionsWidth='130px'
         />
-      </Grid>
-    </Grid>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

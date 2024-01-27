@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { useNavigate } from 'react-router-dom'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
@@ -83,59 +83,61 @@ const AdminStore = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <TitleHeader title='Administrare magazine' />
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
-        <AdminStoreForm
-          isModalOpen={isNewModalOpen}
-          closeModal={closeNewModal}
-          setShouldRefreshData={setShouldRefreshData}
-        />
-        <AdminStoreForm
-          isModalOpen={isEditModalOpen}
-          closeModal={closeEditModal}
-          setShouldRefreshData={setShouldRefreshData}
-          editItem={selectedRow}
-          isEdit
-        />
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          newButton={{
-            onClick: (): void => {
-              openNewModal()
-            }
-          }}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActions={[
-            {
-              label: 'Edit',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              onClick: (e, rowId) => openEditModal(rowId)
-            }
-          ]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            {
-              label: 'Magazin',
-              icon: <AddIcon />,
-              onClick: openNewModal
-            }
-          ]}
-        />
-      </Grid>
-    </Grid>
+    <Grid
+      items={[
+        <TitleHeader title='Administrare magazine' />,
+        <>
+          <AdminStoreForm
+            isModalOpen={isNewModalOpen}
+            closeModal={closeNewModal}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+          <AdminStoreForm
+            isModalOpen={isEditModalOpen}
+            closeModal={closeEditModal}
+            setShouldRefreshData={setShouldRefreshData}
+            editItem={selectedRow}
+            isEdit
+          />
+          <Table
+            hideCheckbox
+            orderBy='role'
+            order='asc'
+            columns={columns}
+            items={tableItems}
+            fetchData={() => {
+            }}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            newButton={{
+              onClick: (): void => {
+                openNewModal()
+              }
+            }}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            rowActions={[
+              {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                onClick: (e, rowId) => openEditModal(rowId)
+              }
+            ]}
+            rowActionsWidth='130px'
+            toolbarActions={[
+              {
+                label: 'Magazin',
+                icon: <AddIcon />,
+                onClick: openNewModal
+              }
+            ]}
+          />
+        </>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

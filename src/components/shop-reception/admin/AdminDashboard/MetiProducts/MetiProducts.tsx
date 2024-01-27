@@ -1,11 +1,10 @@
-import { Grid, Paper } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { columns } from './helpers'
 import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../../../utils/api'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { TitleHeader } from '../../Common/TitleHeader'
-import s from '../../Common/CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { useNotification } from '../../../../../hooks'
 import { formatErrorMessage } from '../../../../../utils/formatting'
@@ -58,106 +57,93 @@ const MetiProducts = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <TitleHeader title='Lista produse METI' />
-      </Grid>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null}
-                label='Cod produs'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null}
-                label='Nume produs'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Raion'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează raion',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Familie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează familie',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Subfamilie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează Subfamilie',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Cu prag de valabilitate'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează cu prag de valabilitate',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
+    <Grid
+      items={[
+        <TitleHeader title='Lista produse METI' />,
+        <Grid
+          hasPaper={true}
+          items={[
+            <Input
+              type='text'
+              onChange={event => null}
+              label='Cod produs'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null}
+              label='Nume produs'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Raion'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează raion',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Familie'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează familie',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Subfamilie'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează Subfamilie',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Cu prag de valabilitate'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează cu prag de valabilitate',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />
+          ]}
+          itemsPerRow={4}
+        />,
         <Table
           hideCheckbox
           orderBy='role'
           order='asc'
           columns={columns}
           items={tableItems}
-          fetchData={() => {}}
+          fetchData={() => {
+          }}
           isLoading={isLoading}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
@@ -165,8 +151,9 @@ const MetiProducts = () => {
           rowActions={[]}
           rowActionsWidth='130px'
         />
-      </Grid>
-    </Grid>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

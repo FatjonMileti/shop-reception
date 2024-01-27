@@ -1,4 +1,4 @@
-import { Grid, Paper } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { useState } from 'react'
@@ -8,7 +8,6 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../Common/TitleHeader'
-import s from '../../Common/CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { SubFamilyValidityThresholdForm } from './SubFamilyValidityThresholdForm'
 
@@ -72,95 +71,90 @@ const SubFamilyValidityThreshold = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <TitleHeader title='Prag valabilitate subfamilii' />
-      </Grid>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Subfamilie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează subfamilie',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Familie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează familie',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Raion'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează raion',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
-        <SubFamilyValidityThresholdForm
-          isModalOpen={isOpenEditModal}
-          closeModal={closeEditForm}
-          setShouldRefreshData={setShouldRefreshData}
-          editItem={selectedRow}
-        />
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActions={[
-            {
-              label: 'Edit',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              onClick: (e, rowId) => openEditForm(rowId)
-            }
+    <Grid
+      items={[
+        <TitleHeader title='Prag valabilitate subfamilii' />,
+        <Grid
+          hasPaper={true}
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Subfamilie'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează subfamilie',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Familie'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează familie',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Raion'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează raion',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />
           ]}
-          rowActionsWidth='130px'
-        />
-      </Grid>
-    </Grid>
+          itemsPerRow={4}
+        />,
+        <>
+          <SubFamilyValidityThresholdForm
+            isModalOpen={isOpenEditModal}
+            closeModal={closeEditForm}
+            setShouldRefreshData={setShouldRefreshData}
+            editItem={selectedRow}
+          />
+          <Table
+            hideCheckbox
+            orderBy='role'
+            order='asc'
+            columns={columns}
+            items={tableItems}
+            fetchData={() => {}}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            rowActions={[
+              {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                onClick: (e, rowId) => openEditForm(rowId)
+              }
+            ]}
+            rowActionsWidth='130px'
+          />
+        </>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

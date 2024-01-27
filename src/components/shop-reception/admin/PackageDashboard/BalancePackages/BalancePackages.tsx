@@ -1,6 +1,5 @@
-import { Paper, Grid } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../Common/CommonStyles.modules.scss'
 import { useNavigate } from 'react-router-dom'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
@@ -67,81 +66,71 @@ const BalancePackages = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid xs={12} item>
-        <TitleHeader title='Sold ambalaje' />
-      </Grid>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Magazin'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează magazin',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Hub'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează hub',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Societatea'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează tip suport',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Societatea'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează societatea',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
+    <Grid
+      items={[
+        <TitleHeader title='Sold ambalaje' />,
+        <Grid
+          hasPaper={true}
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează magazin',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Hub'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează hub',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Societatea'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează tip suport',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Societatea'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează societatea',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />
+          ]}
+          itemsPerRow={4}
+        />,
         <Table
           hideCheckbox
           orderBy='role'
@@ -182,8 +171,9 @@ const BalancePackages = () => {
             }
           ]}
         />
-      </Grid>
-    </Grid>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

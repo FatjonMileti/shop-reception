@@ -1,6 +1,5 @@
-import { Paper, Grid } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../Common/CommonStyles.modules.scss'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { useState } from 'react'
@@ -63,165 +62,141 @@ const SupportTradability = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <TitleHeader title='Transabilitate suport' />
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Magazin'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează magazin',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Depozit'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează depozit',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Hub'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează HUB',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
+    <Grid
+      items={[
+        <TitleHeader title='Transabilitate suport' />,
+        <Grid
+          hasPaper={true}
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează magazin',
+                  value: 'none'
                 }
-                label='Cod cursǎ'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Societatea'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează societatea',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Depozit'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează depozit',
+                  value: 'none'
                 }
-                label='Numǎr masina_DEPOZIT'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Hub'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează HUB',
+                  value: 'none'
                 }
-                label='Numǎr masina_HUB'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Încârcare'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează loc de încârcare',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Cod cursǎ'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Societatea'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează societatea',
+                  value: 'none'
                 }
-                label='Selectează datǎ încǎrcare de la'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Numǎr masina_DEPOZIT'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Numǎr masina_HUB'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Încârcare'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează loc de încârcare',
+                  value: 'none'
                 }
-                label='Selectează datǎ pânǎ la'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
-                }
-                label='Data descaǎrcare HUB'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
-                }
-                label='Data descaǎrcare Magazin'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Selectează datǎ încǎrcare de la'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Selectează datǎ pânǎ la'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Data descaǎrcare HUB'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Data descaǎrcare Magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />
+          ]}
+          itemsPerRow={4}
+        />,
         <Table
           hideCheckbox
           orderBy='role'
@@ -244,8 +219,9 @@ const SupportTradability = () => {
             // }
           ]}
         />
-      </Grid>
-    </Grid>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

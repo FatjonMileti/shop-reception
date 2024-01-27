@@ -1,5 +1,4 @@
-import { Grid, Paper } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { Grid } from '../../Common/Grid'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { useState } from 'react'
@@ -9,18 +8,16 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../Common/TitleHeader'
-import s from '../../Common/CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { EditForm } from './EditForm'
 
 const CentralizeStoresHub = () => {
-  const navigate = useNavigate()
   const [tableItems, setTableItems] = useState<CentralizeStoresHub[]>([
     {
       id: 1,
       store: 'BANEASA (7)',
       deposit: 'DEPOZIT BRAZI NON FOOD, DEPOZIT CEFIN AMBIENT, DEPOZIT CEFIN APLS, DEPOZIT CEFIN LEGUME - FRUCTE, DEPOZIT CONGELATE, DEPOZIT PESTE\t',
-      hubs: '',
+      hubs: ''
     }
   ])
   const [totalCount, setTotalCount] = useState<number>(0)
@@ -30,12 +27,12 @@ const CentralizeStoresHub = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
 
-  const openEditForm = (rowId: number|string) => {
+  const openEditForm = (rowId: number | string) => {
     selectRow(rowId)
     setIsOpenEditModal(true)
   }
   const closeEditForm = () => setIsOpenEditModal(false)
-  const selectRow = (rowId: number|string) => {
+  const selectRow = (rowId: number | string) => {
     const row = tableItems.find(item => item.id === rowId)
     if (row) {
       setSelectedRow(row)
@@ -70,95 +67,91 @@ const CentralizeStoresHub = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <TitleHeader title='Centralizare magazine și huburi' />
-      </Grid>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Magazin'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează magazin',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Depozit'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează depozit',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='HUB'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează HUB',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
-        <EditForm
-          isModalOpen={isOpenEditModal}
-          closeModal={closeEditForm}
-          setShouldRefreshData={setShouldRefreshData}
-          editItem={selectedRow}
-        />
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActions={[
-            {
-              label: 'Edit',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              onClick: (e, rowId) => openEditForm(rowId)
-            }
+    <Grid
+      items={[
+        <TitleHeader title='Centralizare magazine și huburi' />,
+        <Grid
+          hasPaper={true}
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează magazin',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Depozit'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează depozit',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='HUB'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează HUB',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />
           ]}
-          rowActionsWidth='130px'
-        />
-      </Grid>
-    </Grid>
+          itemsPerRow={4}
+        />,
+        <>
+          <EditForm
+            isModalOpen={isOpenEditModal}
+            closeModal={closeEditForm}
+            setShouldRefreshData={setShouldRefreshData}
+            editItem={selectedRow}
+          />
+          <Table
+            hideCheckbox
+            orderBy='role'
+            order='asc'
+            columns={columns}
+            items={tableItems}
+            fetchData={() => {
+            }}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            rowActions={[
+              {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                onClick: (e, rowId) => openEditForm(rowId)
+              }
+            ]}
+            rowActionsWidth='130px'
+          />
+        </>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

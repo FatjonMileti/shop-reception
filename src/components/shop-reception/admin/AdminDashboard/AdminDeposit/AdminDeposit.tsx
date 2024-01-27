@@ -1,4 +1,3 @@
-import { Grid } from '@mui/material'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
@@ -10,6 +9,7 @@ import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../Common/TitleHeader'
 import { AdminDepositForm } from './AdminDepositForm'
+import { Grid } from '../../Common/Grid'
 
 const AdminDeposit = () => {
   const [tableItems, setTableItems] = useState<AdminDeposit[]>([
@@ -45,13 +45,13 @@ const AdminDeposit = () => {
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
 
-  const openEditModal = (rowId: number|string): void => {
+  const openEditModal = (rowId: number | string): void => {
     selectRow(rowId)
     setIsEditModalOpen(true)
   }
   const closeEditModal = (): void => setIsEditModalOpen(false)
 
-  const selectRow = (rowId: number|string) => {
+  const selectRow = (rowId: number | string) => {
     const row = tableItems.find(item => item.id === rowId)
     if (row) {
       setSelectedRow(row)
@@ -86,60 +86,61 @@ const AdminDeposit = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <TitleHeader title='Administrare depozite' />
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
-        <AdminDepositForm
-          isModalOpen={isNewModalOpen}
-          closeModal={closeNewModal}
-          setShouldRefreshData={setShouldRefreshData}
-        />
-        <AdminDepositForm
-          isModalOpen={isEditModalOpen}
-          closeModal={closeEditModal}
-          setShouldRefreshData={setShouldRefreshData}
-          editItem={selectedRow}
-          isEdit
-        />
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          newButton={{
-            onClick: (): void => {
-              openNewModal()
-            }
-          }}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            {
-              label: 'Depozit',
-              icon: <AddIcon />,
-              onClick: () =>
+    <Grid
+      items={[
+        <TitleHeader title='Administrare depozite' />,
+        <>
+          <AdminDepositForm
+            isModalOpen={isNewModalOpen}
+            closeModal={closeNewModal}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+          <AdminDepositForm
+            isModalOpen={isEditModalOpen}
+            closeModal={closeEditModal}
+            setShouldRefreshData={setShouldRefreshData}
+            editItem={selectedRow}
+            isEdit
+          />
+          <Table
+            hideCheckbox
+            orderBy='role'
+            order='asc'
+            columns={columns}
+            items={tableItems}
+            fetchData={() => {}}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            newButton={{
+              onClick: (): void => {
                 openNewModal()
-            }
-          ]}
-          rowActions={[
-            {
-              label: 'Edit',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              onClick: (e, rowId) => openEditModal(rowId)
-            }
-          ]}
-        />
-      </Grid>
-    </Grid>
+              }
+            }}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            rowActionsWidth='130px'
+            toolbarActions={[
+              {
+                label: 'Depozit',
+                icon: <AddIcon />,
+                onClick: () =>
+                  openNewModal()
+              }
+            ]}
+            rowActions={[
+              {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                onClick: (e, rowId) => openEditModal(rowId)
+              }
+            ]}
+          />
+        </>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

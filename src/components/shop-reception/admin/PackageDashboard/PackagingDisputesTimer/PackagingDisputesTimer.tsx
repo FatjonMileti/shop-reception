@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { useNavigate } from 'react-router-dom'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
@@ -54,11 +54,9 @@ const PackagingDisputesTimer = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid xs={12} item>
-        <TitleHeader title='Litigii ambalaje - Administrare timer' />
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
+    <Grid
+      items={[
+        <TitleHeader title='Litigii ambalaje - Administrare timer' />,
         <Table
           hideCheckbox
           orderBy='role'
@@ -84,8 +82,9 @@ const PackagingDisputesTimer = () => {
           ]}
           rowActionsWidth='130px'
         />
-      </Grid>
-    </Grid>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

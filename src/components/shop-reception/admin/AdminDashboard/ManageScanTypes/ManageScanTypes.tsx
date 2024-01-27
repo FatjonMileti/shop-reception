@@ -1,4 +1,4 @@
-import { Grid, Paper } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
@@ -9,7 +9,6 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../Common/TitleHeader'
-import s from '../../Common/CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { ScanTypeForm } from './ScanTypeForm'
 
@@ -79,129 +78,123 @@ const ManageScanTypes = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <TitleHeader title='Administrare tipuri de scanare' />
-      </Grid>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Magazin'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează magazin',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Regiune'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează regiune',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Tip scanare'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează tip scanare',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Activ/inactiv'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Activ/inactiv',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
-        <ScanTypeForm
-          isModalOpen={isNewModalOpen}
-          closeModal={closeNewModal}
-          setShouldRefreshData={setShouldRefreshData}
-        />
-        <ScanTypeForm
-          isModalOpen={isEditModalOpen}
-          closeModal={closeEditModal}
-          setShouldRefreshData={setShouldRefreshData}
-          editItem={selectedRow}
-          isEdit
-        />
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          newButton={{
-            onClick: (): void => {
-              openNewModal()
-            }
-          }}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActions={[
-            {
-              label: 'Edit',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              onClick: (e, rowId) => openEditModal(rowId)
-            }
+    <Grid
+      items={[
+        <TitleHeader title='Administrare tipuri de scanare' />,
+        <Grid
+          hasPaper={true}
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează magazin',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Regiune'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează regiune',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Tip scanare'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează tip scanare',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Activ/inactiv'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Activ/inactiv',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />
           ]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            {
-              label: 'Regula scanare',
-              icon: <AddIcon />,
-              onClick: openNewModal
-            }
-          ]}
-        />
-      </Grid>
-    </Grid>
+          itemsPerRow={4}
+        />,
+        <>
+          <ScanTypeForm
+            isModalOpen={isNewModalOpen}
+            closeModal={closeNewModal}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+          <ScanTypeForm
+            isModalOpen={isEditModalOpen}
+            closeModal={closeEditModal}
+            setShouldRefreshData={setShouldRefreshData}
+            editItem={selectedRow}
+            isEdit
+          />
+          <Table
+            hideCheckbox
+            orderBy='role'
+            order='asc'
+            columns={columns}
+            items={tableItems}
+            fetchData={() => {
+            }}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            newButton={{
+              onClick: (): void => {
+                openNewModal()
+              }
+            }}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            rowActions={[
+              {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                onClick: (e, rowId) => openEditModal(rowId)
+              }
+            ]}
+            rowActionsWidth='130px'
+            toolbarActions={[
+              {
+                label: 'Regula scanare',
+                icon: <AddIcon />,
+                onClick: openNewModal
+              }
+            ]}
+          />
+        </>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

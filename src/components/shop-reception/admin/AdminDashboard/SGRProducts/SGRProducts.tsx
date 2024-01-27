@@ -1,14 +1,13 @@
-import { Grid, Paper, Typography } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
 import { useState } from 'react'
 import { TitleHeader } from '../../Common/TitleHeader'
-import s from '../../Common/CommonStyles.modules.scss'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { SGRProductsForm } from './SGRProductsForm'
 import { ImportProductsForm } from './ImportProductsForm'
-import DeleteConfirmationModal from '../../../../core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
+import { DeleteConfirmationModal } from '../../../../core-ui/DeleteConfirmationModal'
 
 const SGRProducts = () => {
   const [tableItems, setTableItems] = useState<SGRProducts[]>([
@@ -59,176 +58,165 @@ const SGRProducts = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <TitleHeader title='Administrare produse SGR' />
-      </Grid>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Magazin'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează magazin',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Raion'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează raion',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Familie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează familie',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Subfamilie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează Subfamilie',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Cod UB'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează cod UB',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null}
-                label='Cod produs'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
-        <SGRProductsForm
-          isModalOpen={isNewModalOpen}
-          closeModal={closeNewModal}
-          setShouldRefreshData={setShouldRefreshData}
-        />
-        <ImportProductsForm
-          isModalOpen={isImportProductsModalOpen}
-          closeModal={closeImportProductsModal}
-          setShouldRefreshData={setShouldRefreshData}
-        />
-        <SGRProductsForm
-          isModalOpen={isEditModalOpen}
-          closeModal={closeEditModal}
-          setShouldRefreshData={setShouldRefreshData}
-          editItem={selectedRow}
-          isEdit
-        />
-        <DeleteConfirmationModal
-          isModalOpen={isDeleteModalOpen}
-          closeModal={closeDeleteModal}
-          actionUrl='/shop-reception/products/sgr/:id'
-          itemId={`${selectedRow?.id}`}
-          cancelLabel='Nu'
-          deleteLabel='Da'
-          content={<Typography>Eşti sigur că doreşti să ştergi această regulă?</Typography>}
-          setShouldRefreshData={setShouldRefreshData}
-        />
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActions={[
-            {
-              label: 'Edit',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              onClick: (e, rowId) => openEditModal(rowId)
-            },
-            {
-              label: 'Delete',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#e15656',
-              onClick: (e, rowId) => openDeleteModal(rowId)
-            }
+    <Grid
+      items={[
+        <TitleHeader title='Administrare produse SGR' />,
+        <Grid
+          hasPaper={true}
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează magazin',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Raion'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează raion',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Familie'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează familie',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Subfamilie'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează Subfamilie',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Cod UB'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează cod UB',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='text'
+              onChange={event => null}
+              label='Cod produs'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />
           ]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            {
-              label: 'Importǎ produse SGR',
-              icon: <AddIcon />,
-              onClick: openImportProductsModal
-            },
-            {
-              label: 'Produse SGR',
-              icon: <AddIcon />,
-              onClick: openNewModal
-            }
-          ]}
-        />
-      </Grid>
-    </Grid>
+          itemsPerRow={4}
+        />,
+        <>
+          <SGRProductsForm
+            isModalOpen={isNewModalOpen}
+            closeModal={closeNewModal}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+          <ImportProductsForm
+            isModalOpen={isImportProductsModalOpen}
+            closeModal={closeImportProductsModal}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+          <SGRProductsForm
+            isModalOpen={isEditModalOpen}
+            closeModal={closeEditModal}
+            setShouldRefreshData={setShouldRefreshData}
+            editItem={selectedRow}
+            isEdit
+          />
+          <DeleteConfirmationModal
+            isModalOpen={isDeleteModalOpen}
+            closeModal={closeDeleteModal}
+            actionUrl='/shop-reception/products/sgr/:id'
+            itemId={`${selectedRow?.id}`}
+            cancelLabel='Nu'
+            deleteLabel='Da'
+            content={<Typography variant='regular'>Eşti sigur că doreşti să ştergi această regulă?</Typography>}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+          <Table
+            hideCheckbox
+            orderBy='role'
+            order='asc'
+            columns={columns}
+            items={tableItems}
+            fetchData={() => {}}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            rowActions={[
+              {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                onClick: (e, rowId) => openEditModal(rowId)
+              },
+              {
+                label: 'Delete',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#e15656',
+                onClick: (e, rowId) => openDeleteModal(rowId)
+              }
+            ]}
+            rowActionsWidth='130px'
+            toolbarActions={[
+              {
+                label: 'Importǎ produse SGR',
+                icon: <AddIcon />,
+                onClick: openImportProductsModal
+              },
+              {
+                label: 'Produse SGR',
+                icon: <AddIcon />,
+                onClick: openNewModal
+              }
+            ]}
+          />
+        </>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

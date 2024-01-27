@@ -1,4 +1,4 @@
-import { Paper, Grid } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../Common/CommonStyles.modules.scss'
 import { Table } from '../../../../core-ui/Table'
@@ -66,134 +66,114 @@ const DifferencesProducts = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <TitleHeader title='Produse cu diferenţe' />
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
+    <Grid
+      items={[
+        <TitleHeader title='Produse cu diferenţe' />,
+        <Grid
+          hasPaper={true}
+          items={[
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Bon livrare'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează magazin',
+                  value: 'none'
                 }
-                label='Bon livrare'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Magazin'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează magazin',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Depozit'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează depozit',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Depozit'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează depozit',
+                  value: 'none'
                 }
-                label='Cod produs'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Cod produs'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Nume produs'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Comandă de origine'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Comandă Meti'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Cod cursâ'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='text'
+              onChange={event => null
+              }
+              label='Selecteazǎ datâ'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
+            <Input
+              type='select'
+              onChange={event => null
+              }
+              label='Cu poze'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selecteazâ cu poze',
+                  value: 'none'
                 }
-                label='Nume produs'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
-                }
-                label='Comandă de origine'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
-                }
-                label='Comandă Meti'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
-                }
-                label='Cod cursâ'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null
-                }
-                label='Selecteazǎ datâ'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null
-                }
-                label='Cu poze'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selecteazâ cu poze',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
+              ]}
+              value={'none'}
+            />
+          ]}
+          itemsPerRow={4}
+        />,
         <Table
           hideCheckbox
           orderBy='role'
@@ -216,8 +196,9 @@ const DifferencesProducts = () => {
             // }
           ]}
         />
-      </Grid>
-    </Grid>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

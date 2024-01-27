@@ -1,4 +1,4 @@
-import { Grid, Paper } from '@mui/material'
+import { Grid } from '../../Common/Grid'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
@@ -9,7 +9,6 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../Common/TitleHeader'
-import s from '../../Common/CommonStyles.modules.scss'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { DLCProductsForm } from './DLCProductsForm'
 import { ImportProductsForm } from './ImportProductsForm'
@@ -84,159 +83,148 @@ const DLCProducts = () => {
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <TitleHeader title='Administrare produse cu DLC scurt' />
-      </Grid>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Magazin'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează magazin',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Raion'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează raion',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Familie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează familie',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Subfamilie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează Subfamilie',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Cod UB'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează cod UB',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='text'
-                onChange={event => null}
-                label='Cod produs'
-                variant='outlined'
-                style={{ width: '100%' }}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
-        <DLCProductsForm
-          isModalOpen={isNewModalOpen}
-          closeModal={closeNewModal}
-          setShouldRefreshData={setShouldRefreshData}
-        />
-        <ImportProductsForm
-          isModalOpen={isImportProductsModalOpen}
-          closeModal={closeImportProductsModal}
-          setShouldRefreshData={setShouldRefreshData}
-        />
-        <DLCProductsForm
-          isModalOpen={isEditModalOpen}
-          closeModal={closeEditModal}
-          setShouldRefreshData={setShouldRefreshData}
-          editItem={selectedRow}
-          isEdit
-        />
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActions={[
-            {
-              label: 'Edit',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              onClick: (e, rowId) => openEditModal(rowId)
-            }
+    <Grid
+      items={[
+        <TitleHeader title='Administrare produse cu DLC scurt' />,
+        <Grid
+          hasPaper={true}
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează magazin',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Raion'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează raion',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Familie'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează familie',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Subfamilie'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează Subfamilie',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Cod UB'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează cod UB',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='text'
+              onChange={event => null}
+              label='Cod produs'
+              variant='outlined'
+              style={{ width: '100%' }}
+            />,
           ]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            {
-              label: 'Importǎ produse DLC scurt',
-              icon: <AddIcon />,
-              onClick: openImportProductsModal
-            },
-            {
-              label: 'Produse DLC scurt',
-              icon: <AddIcon />,
-              onClick: openNewModal
-            }
-          ]}
-        />
-      </Grid>
-    </Grid>
+          itemsPerRow={4}
+        />,
+        <>
+          <DLCProductsForm
+            isModalOpen={isNewModalOpen}
+            closeModal={closeNewModal}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+          <ImportProductsForm
+            isModalOpen={isImportProductsModalOpen}
+            closeModal={closeImportProductsModal}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+          <DLCProductsForm
+            isModalOpen={isEditModalOpen}
+            closeModal={closeEditModal}
+            setShouldRefreshData={setShouldRefreshData}
+            editItem={selectedRow}
+            isEdit
+          />
+          <Table
+            hideCheckbox
+            orderBy='role'
+            order='asc'
+            columns={columns}
+            items={tableItems}
+            fetchData={() => {}}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            rowActions={[
+              {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                onClick: (e, rowId) => openEditModal(rowId)
+              }
+            ]}
+            rowActionsWidth='130px'
+            toolbarActions={[
+              {
+                label: 'Importǎ produse DLC scurt',
+                icon: <AddIcon />,
+                onClick: openImportProductsModal
+              },
+              {
+                label: 'Produse DLC scurt',
+                icon: <AddIcon />,
+                onClick: openNewModal
+              }
+            ]}
+          />
+        </>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 
