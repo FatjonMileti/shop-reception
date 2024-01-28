@@ -1,47 +1,37 @@
-import { Grid, Paper, Typography } from '@mui/material'
+import { Grid } from '../../../Common/Grid'
 import { TitleHeader } from '../../../Common/TitleHeader'
 import { useParams } from 'react-router-dom'
-import s from '../../../Common/CommonStyles.modules.scss'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import React from 'react'
+import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 
 const PackagingDisputesTimerDetail = () => {
   const { id } = useParams()
   return (
-    <Grid container spacing={2}>
-      <Grid xs={12} item>
-        <TitleHeader title={`Editează timer FIRST_TYPE (${id})`} />
-      </Grid>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <Grid container spacing={4}>
-            <Grid xs={12} item>
-              <Typography variant='h6'>
-                Tip timer
-              </Typography>
-              <Typography variant='body1'>
-                A doua notificare
-                Descrirere timer the second final notification in which the store is notified that the litigation task
-                in the system has been automatically closed and that it will be charged the difference.
-              </Typography>
-            </Grid>
-            <Grid xs={12} item>
-              <Input
-                type='number'
-                onChange={event => null}
-                label='Valoare timer'
-                variant='outlined'
-                style={{ width: '100%' }}
-                value='2'
-              />
-            </Grid>
-            <Grid xs={12} item>
-              <Button variant='contained' label='Salvează' onClick={null} />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-    </Grid>
+    <Grid
+      hasPaper={true}
+      items={[
+        <TitleHeader title={`Editează timer FIRST_TYPE (${id})`} />,
+        <>
+          <Typography variant='mono'>
+            Tip timer
+          </Typography>
+          <Typography variant='light'>
+            A doua notificare
+            Descrirere timer the second final notification in which the store is notified that the litigation task
+            in the system has been automatically closed and that it will be charged the difference.
+          </Typography>
+        </>,
+        <Input
+          type='number'
+          onChange={event => null}
+          label='Valoare timer'
+          variant='outlined'
+          style={{ width: '100%' }}
+          value='2'
+        />,
+        <Button variant='contained' label='Salvează' onClick={null} />
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

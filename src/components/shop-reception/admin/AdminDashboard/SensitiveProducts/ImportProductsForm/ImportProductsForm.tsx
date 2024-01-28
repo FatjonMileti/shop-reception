@@ -1,8 +1,7 @@
 import { ChangeEvent, useMemo, useState } from 'react'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '@mui/material'
+import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Grid } from '../../../Common/Grid'
 import { Modal } from 'components/core-ui/Modal'
-import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
@@ -10,6 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { toPayload } from './serializers'
 import { FileUpload } from '../../../../../core-ui/FileUpload'
 import { toFormDataPayload } from '../../../../../../utils/serializers'
+import { ModalFormActionButtons } from '../../../Common/ModalFormActionButtons'
 
 interface NewAdminDepositProps {
   isModalOpen: boolean
@@ -68,45 +68,40 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
       modalTitle={' Importă produse sensibile'}
       modalWidth='50%'
     >
-      <Grid container spacing={4} justifyContent='flex-end'>
-        <Grid xs={12} item>
-          <Input
-            type='select'
-            value={formik.values.store?.value}
-            onChange={event =>
-              formik.setFieldValue('store', (event.target as HTMLInputElement).value)
+      <Grid
+      gridContainerStyle={{ margin: 0 }}
+      items={[
+        <Input
+          type='select'
+          value={formik.values.store?.value}
+          onChange={event =>
+            formik.setFieldValue('store', (event.target as HTMLInputElement).value)
+          }
+          label='Magazin'
+          variant='outlined'
+          style={{ width: '100%' }}
+          error={!!formik.errors.store}
+          helperText={formik.errors.store as string}
+          values={[
+            {
+              value: 'AMBIENT',
+              label: 'AMBIENT'
             }
-            label='Magazin'
-            variant='outlined'
-            style={{ width: '100%' }}
-            error={!!formik.errors.store}
-            helperText={formik.errors.store as string}
-            values={[
-              {
-                value: 'AMBIENT',
-                label: 'AMBIENT'
-              }
-            ]}
-            required
-          />
-        </Grid>
-        <Grid xs={12} item>
-          <FileUpload
-            value={formik.values.file}
-            fileInputProps={{ displayImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt094LI3kTxh-hGY85ko1D6Z5DT9sEbkeqGWX-dbiEQg&s'}}
-            onChange={onFileUpload}
-          />
-        </Grid>
-        <Grid xs={12} item className={s.modalButtons}>
-          <Button variant='outlined' label='Cancel' onClick={() => closeModal()} />
-          <Button
-            variant='contained'
-            type='submit'
-            label='Submit'
-            onClick={() => formik.handleSubmit()}
-          />
-        </Grid>
-      </Grid>
+          ]}
+          required
+        />,
+        <FileUpload
+          value={formik.values.file}
+          fileInputProps={{ displayImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt094LI3kTxh-hGY85ko1D6Z5DT9sEbkeqGWX-dbiEQg&s'}}
+          onChange={onFileUpload}
+        />,
+        <ModalFormActionButtons
+          onCancel={() => closeModal()}
+          onSubmit={() => formik.handleSubmit()}
+        />
+      ]}
+      itemsPerRow={1}
+    />
     </Modal>
   )
 }

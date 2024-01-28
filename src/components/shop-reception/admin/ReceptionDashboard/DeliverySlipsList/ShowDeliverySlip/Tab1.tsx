@@ -1,10 +1,9 @@
-import { Paper, Grid, Typography } from '@mui/material'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../Common/CommonStyles.modules.scss'
+import { Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Table } from '../../../../../core-ui/Table'
 import { detailsColumns } from './helpers'
 import { useState } from 'react'
 import { useNotification } from '../../../../../../hooks'
+import { Grid } from '../../../Common/Grid'
 import { TitleHeader } from '../../../Common/TitleHeader'
 import { useParams } from 'react-router-dom'
 import { Download as DownloadIcon } from '@mui/icons-material'
@@ -32,273 +31,251 @@ const Tab1 = () => {
   const { showNotification } = useNotification()
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <TitleHeader title={`Bonuri de livrare ${id}`} />
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+    <Grid
+      items={[
+        <TitleHeader title={`Bonuri de livrare ${id}`} />,
+        <Grid
+          items={[
+            <>
+              <Typography variant='mono'>
                 Depozit sursǎ:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 DEPOZIT CONGELATE
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Datǎ estimatǎ de livrare:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 15/11/2023
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Cod cursǎ:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 00053548
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Numǎrul de suporți așteptați:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 33
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Numǎrul de suporți ajunși la
                 destinațic:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 0
               </Typography>
-            </Grid>
-          </Grid>
-        </Paper>
-        <Paper className={s.filterPaper}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează magazin'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează magazin',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează cod suport'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează cod suport',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează comandǎ'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează comandǎ',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează comandǎ originalǎ'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează comanda originala',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează produs'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează produs',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează sensibil'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează sensibil',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează produs lipsǎ'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează produs lipsǎ',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează produs verificat'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează produs verificat',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează DLC scurt'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează DLC scurt',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează prioritar vǎnzare'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează prioritar vǎnzare',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează procentul de valabilitate'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează procentul de valabilitate',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează SGR'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează SGR',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={detailsColumns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          toolbarActions={[
-            {
-              label: 'Export',
-              icon: <DownloadIcon />,
-              onClick: null
-            }
+            </>
           ]}
+          itemsPerRow={1}
+        />,
+        <Grid
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează magazin',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează cod suport'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează cod suport',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează comandǎ'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează comandǎ',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează comandǎ originalǎ'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează comanda originala',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează produs'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează produs',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează sensibil'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează sensibil',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează produs lipsǎ'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează produs lipsǎ',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează produs verificat'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează produs verificat',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează DLC scurt'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează DLC scurt',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează prioritar vǎnzare'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează prioritar vǎnzare',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează procentul de valabilitate'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează procentul de valabilitate',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează SGR'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează SGR',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Table
+              hideCheckbox
+              orderBy='role'
+              order='asc'
+              columns={detailsColumns}
+              items={tableItems}
+              fetchData={() => {
+              }}
+              isLoading={isLoading}
+              totalCount={totalCount}
+              shouldRefreshData={shouldRefreshData}
+              setShouldRefreshData={setShouldRefreshData}
+              toolbarActions={[
+                {
+                  label: 'Export',
+                  icon: <DownloadIcon />,
+                  onClick: null
+                }
+              ]}
+            />
+          ]}
+          itemsPerRow={4}
         />
-      </Grid>
-    </Grid>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

@@ -1,9 +1,8 @@
-import { Paper, Grid, Typography } from '@mui/material'
-import s from '../../../Common/CommonStyles.modules.scss'
+import { Grid } from '../../../Common/Grid'
 import React, { useState } from 'react'
 import { TitleHeader } from '../../../Common/TitleHeader'
 import { useParams } from 'react-router-dom'
-import { Tabs } from '@fullscreendigital/carrefour-dex-fe'
+import { Tabs, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Tab1, Tab2, Tab3, Tab4, Tab5 } from './Tabs'
 
 const TruckDetail = () => {
@@ -11,87 +10,86 @@ const TruckDetail = () => {
   const [tab, setTab] = useState<number>(0)
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <TitleHeader title={`Detalii transport recepţie marfa`} />
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+    <Grid
+      items={[
+        <Grid
+          items={[
+            <TitleHeader title={`Detalii transport recepţie marfa`} />,
+            <>
+              <Typography variant='mono'>
                 Locaţie camion:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 Ieşire Depozit
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Număr înmatriculare:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 IF90AYN
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Cod şofer:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 CIORNACORN
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Cod cursă:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 00053548
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Status transport:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 Înregistrat
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Sigiliu/sigilii:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 ...
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Depozit:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 DEPOZIT CONGELATE
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 Magazin:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 ORADEA2 (25) ,ZALAU (46) ,CLUJ (10) ,ORADEA1 (22)
               </Typography>
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Typography variant='h6' display='inline'>
+            </>,
+            <>
+              <Typography variant='mono'>
                 HUB:
               </Typography>
-              <Typography variant='body1' display='inline'>
+              <Typography variant='medium'>
                 ORADEA2
               </Typography>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
+            </>
+          ]}
+          itemsPerRow={1}
+        />,
         <Tabs
           containerStyle={{
             width: '100%',
@@ -137,8 +135,9 @@ const TruckDetail = () => {
           }}
           value={tab}
         />
-      </Grid>
-    </Grid>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

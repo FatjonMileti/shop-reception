@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import { Grid } from '../../../Common/Grid'
 import { TitleHeader } from '../../../Common/TitleHeader'
 import { Table } from '../../../../../core-ui/Table'
 import { columns } from './helpers'
@@ -28,11 +28,9 @@ const BalancePackageHistory = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   return (
-    <Grid container spacing={2}>
-      <Grid xs={12} item>
-        <TitleHeader title='Istoric inventar' />
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
+    <Grid
+      items={[
+        <TitleHeader title='Istoric inventar' />,
         <Table
           hideCheckbox
           orderBy='role'
@@ -45,8 +43,9 @@ const BalancePackageHistory = () => {
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
         />
-      </Grid>
-    </Grid>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

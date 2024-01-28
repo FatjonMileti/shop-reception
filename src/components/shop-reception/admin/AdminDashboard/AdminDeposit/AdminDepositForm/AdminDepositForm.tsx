@@ -8,6 +8,7 @@ import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toPayload } from './serializers'
+import { ModalFormActionButtons } from '../../../Common/ModalFormActionButtons'
 
 interface NewAdminDepositProps {
   isModalOpen: boolean
@@ -57,19 +58,22 @@ const AdminDepositForm: React.FC<NewAdminDepositProps> = props => {
       modalWidth='50%'
     >
       <>
-        {isEdit ? (<Grid
-          items={[
-            <FormInfoItems
-              items={[
-                {
-                  label: 'Nume:',
-                  name: (editItem as AdminDeposit)?.name
-                }
-              ]}
-            />
-          ]}
-          itemsPerRow={1}
-        />) : null}
+        {isEdit ? (
+          <Grid
+            gridContainerStyle={{ margin: 0 }}
+            items={[
+              <FormInfoItems
+                items={[
+                  {
+                    label: 'Nume:',
+                    name: (editItem as AdminDeposit)?.name
+                  }
+                ]}
+              />
+            ]}
+            itemsPerRow={1}
+          />
+        ) : null}
         <Grid
           gridContainerStyle={{ margin: 0 }}
           items={[
@@ -165,30 +169,13 @@ const AdminDepositForm: React.FC<NewAdminDepositProps> = props => {
               }
               label='Activ'
               color={!!formik.errors.active ? 'primary' : 'secondary'}
-            />,
-          ]}
-          itemsPerRow={2}
-        />
-        <Grid
-          gridContainerStyle={{ margin: 0, marginTop: '20px' }}
-          items={[
-            <Button
-              variant='outlined'
-              label='Cancel'
-              onClick={() => closeModal()}
-              size='large'
-              style={{width: '100%'}}
-            />,
-            <Button
-              variant='contained'
-              type='submit'
-              label='Submit'
-              onClick={() => formik.handleSubmit()}
-              size='large'
-              style={{width: '100%'}}
             />
           ]}
           itemsPerRow={2}
+        />
+        <ModalFormActionButtons
+          onCancel={() => closeModal()}
+          onSubmit={() => formik.handleSubmit()}
         />
       </>
     </Modal>

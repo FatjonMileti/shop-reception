@@ -1,6 +1,5 @@
-import { Paper, Grid } from '@mui/material'
+import { Grid } from '../../../Common/Grid'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../../Common/CommonStyles.modules.scss'
 import { Table } from '../../../../../core-ui/Table'
 import { modifyColumns } from './helpers'
 import { useState } from 'react'
@@ -30,60 +29,57 @@ const Tab1 = () => {
   const { showNotification } = useNotification()
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Paper className={s.filterPaper}>
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează cod suport'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează cod suport',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-            <Grid xs={12} md={4} item>
-              <Input
-                type='select'
-                onChange={event => null}
-                label='Selectează produs'
-                variant='outlined'
-                style={{ width: '100%' }}
-                values={[
-                  {
-                    label: 'Selectează produs',
-                    value: 'none'
-                  }
-                ]}
-                value={'none'}
-              />
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} style={{ margin: '8px' }}>
+    <Grid
+      items={[
+        <Grid
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează cod suport'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează cod suport',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează produs'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează produs',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />
+          ]}
+          itemsPerRow={2}
+        />,
         <Table
           hideCheckbox
           orderBy='role'
           order='asc'
           columns={modifyColumns}
           items={tableItems}
-          fetchData={() => {}}
+          fetchData={() => {
+          }}
           isLoading={isLoading}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
         />
-      </Grid>
-    </Grid>
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

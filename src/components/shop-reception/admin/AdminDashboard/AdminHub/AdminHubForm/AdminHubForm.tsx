@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Button, Input, Checkbox } from '@fullscreendigital/carrefour-dex-fe'
+import { Input, Checkbox } from '@fullscreendigital/carrefour-dex-fe'
 import { Grid } from '../../../Common/Grid'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
@@ -8,6 +8,7 @@ import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toPayload } from './serializers'
+import { ModalFormActionButtons } from '../../../Common/ModalFormActionButtons'
 
 interface NewAdminDepositProps {
   isModalOpen: boolean
@@ -59,6 +60,7 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
       <>
         {isEdit ? (
           <Grid
+            gridContainerStyle={{ margin: 0 }}
             items={[
               <FormInfoItems
                 items={[
@@ -159,26 +161,9 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
           ]}
           itemsPerRow={2}
         />
-        <Grid
-          gridContainerStyle={{ margin: 0, marginTop: '35px' }}
-          items={[
-            <Button
-              variant='outlined'
-              label='Cancel'
-              onClick={() => closeModal()}
-              size='large'
-              style={{ width: '100%' }}
-            />,
-            <Button
-              variant='contained'
-              type='submit'
-              label='Submit'
-              onClick={() => formik.handleSubmit()}
-              size='large'
-              style={{ width: '100%' }}
-            />
-          ]}
-          itemsPerRow={2}
+        <ModalFormActionButtons
+          onCancel={() => closeModal()}
+          onSubmit={() => formik.handleSubmit()}
         />
       </>
     </Modal>
