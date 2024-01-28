@@ -69,6 +69,7 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
       modalWidth='50%'
     >
       <Grid
+        gridContainerStyle={{ margin: 0 }}
         items={[
           <Input
             type='select'
