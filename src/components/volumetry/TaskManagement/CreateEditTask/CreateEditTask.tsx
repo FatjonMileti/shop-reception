@@ -58,8 +58,11 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
 
   const { data: categoryOptions } = getCategoriesOptions(showNotification)
   const { data: priorityOptions } = getPrioritiesOptions(showNotification)
-  const { data: departmentOptions } =
-    getCategoryDepartmentsOptions(categoryId, shouldFetchDepartments, showNotification)
+  const { data: departmentOptions } = getCategoryDepartmentsOptions(
+    categoryId,
+    shouldFetchDepartments,
+    showNotification
+  )
 
   const { data: raionOptions, isLoading: isRaionOptionsLoading } = getRaionsOptions(
     departmentId,
@@ -155,24 +158,26 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
           />
         </Grid>
 
-        {formik.values.rayonsOrDepartment !== null && !isRaionOptionsLoading && (
-          <Grid xs={12} md={12} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="rayons"
-              label="Raion"
-              value={formik.values.rayons || []}
-              options={raionOptions}
-              onChange={value => {
-                formik.setFieldValue('rayons', value)
-              }}
-              error={!!formik.errors.rayons}
-              helperText={formik.errors.rayons as string}
-              required
-              multiple
-            />
-          </Grid>
-        )}
+        {formik.values.rayonsOrDepartment !== null &&
+          !isRaionOptionsLoading &&
+          formik.values.rayonsOrDepartment.locationType !== 'SUPER' && (
+            <Grid xs={12} md={12} item>
+              <AsyncAutocomplete
+                variant="outlined"
+                name="rayons"
+                label="Raion"
+                value={formik.values.rayons || []}
+                options={raionOptions}
+                onChange={value => {
+                  formik.setFieldValue('rayons', value)
+                }}
+                error={!!formik.errors.rayons}
+                helperText={formik.errors.rayons as string}
+                required
+                multiple
+              />
+            </Grid>
+          )}
         <Grid xs={12} md={6} item>
           <TimePicker
             label="Ora recomandata de inceput"

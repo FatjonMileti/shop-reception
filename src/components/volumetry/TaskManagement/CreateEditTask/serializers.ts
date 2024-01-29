@@ -6,11 +6,12 @@ export const toTaskPayload = (values: TaskManagementItem) => ({
   estimatedStartHour: dayjs(values.recommendedStartHour).format('HH:mm'),
   estimatedEndHour: dayjs(values.recommendedEndHour).format('HH:mm'),
   frequency: [values.frequency.value],
-  genericRayons: values.rayons.map(rayon => rayon.value),
+  ...(!!values.rayons.length && { genericRayons: values.rayons.map(rayon => rayon.value) }),
   locationCategoryId: values.volumetryLocationCategory.value,
   standardProductivityValue: +values.standardProductivityValue,
   workVolumeSourceId: values.workVolumeSource.value,
   measurementUnitId: values.measurementUnit.value,
   priorityId: +values.priority.value,
-  isActive: values.isActive
+  isActive: values.isActive,
+  ...(!values.rayons.length && { rayonsOrDepartment: values.rayonsOrDepartment.value })
 })

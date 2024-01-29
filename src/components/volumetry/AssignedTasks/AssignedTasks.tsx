@@ -33,7 +33,7 @@ const AssignedTasks = () => {
         const { page, rowsPerPage, tableFilters } = tableState
         const response = await makeCoreGetRequest(
           toTableGETUrl({
-            url: '/volumetry/tasks/aggregation/summary',
+            url: '/volumetry/tasks/aggregation/worker',
             page,
             rowsPerPage
           })
@@ -58,81 +58,13 @@ const AssignedTasks = () => {
     setTableState({ page, rowsPerPage })
 
     try {
-      // const response = await makeCoreGetRequest(
-      //   toTableGETUrl({
-      //     url: '/volumetry/tasks/aggregation/summary',
-      //     page,
-      //     rowsPerPage
-      //   })
-      // )
-
-      const response = {
-        list: [
-          {
-            taskContributionId: 557,
-            taskTemplateId: 12,
-            rayonsOrDepartment: 'BLS',
-            taskName: 'Realimentare magazin BLS (stoc cascheta)',
-            recommendedInterval: '06:00 - 09:00',
-            priorityId: 1,
-            priorityValue: '1 - Ridicat',
-            workload: '2 paleti',
-            timerStatus: 'IN_PROGRESS',
-            progressPercentage: 60,
-            comment: 'Aparatul a fost reparat.',
-            createdAt: '2022-01-15',
-            frequency: 'zilnic'
-          },
-          {
-            taskContributionId: 558,
-            taskTemplateId: 12,
-            rayonsOrDepartment: 'BLS',
-            taskName: 'Realimentare magazin BLS (stoc cascheta)',
-            recommendedInterval: '06:00 - 09:00',
-            priorityId: 1,
-            priorityValue: '1 - Ridicat',
-            workload: '3 paleti',
-            timerStatus: 'FINISHED',
-            progressPercentage: 60,
-            comment: 'Aparatul a fost reparat.',
-            createdAt: '2022-01-15',
-            frequency: 'zilnic'
-          },
-          {
-            taskContributionId: 559,
-            taskTemplateId: 13,
-            rayonsOrDepartment: 'BLS',
-            taskName: 'Realimentare magazin BLS (stoc cascheta)123456',
-            recommendedInterval: '06:00 - 09:00',
-            priorityId: 1,
-            priorityValue: '1 - Ridicat',
-            workload: '2 paleti',
-            timerStatus: 'IN_PROGRESS',
-            progressPercentage: 60,
-            comment: 'Aparatul a fost reparat.',
-            createdAt: '2022-01-15',
-            frequency: 'zilnic'
-          },
-          {
-            taskContributionId: 560,
-            taskTemplateId: 14,
-            rayonsOrDepartment: 'BLS',
-            taskName: 'Realimentare magazin BLS (stoc cascheta)00000123456',
-            recommendedInterval: '06:00 - 09:00',
-            priorityId: 1,
-            priorityValue: '1 - Ridicat',
-            workload: '2 paleti',
-            timerStatus: 'NOT_STARTED',
-            progressPercentage: 60,
-            comment: 'Aparatul a fost reparat.',
-            createdAt: '2022-01-15',
-            frequency: 'zilnic'
-          }
-        ],
-        page: {
-          totalCount: 3
-        }
-      }
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: '/volumetry/tasks/aggregation/worker',
+          page,
+          rowsPerPage
+        })
+      )
 
       setRows(
         toListTableRows(
@@ -156,25 +88,6 @@ const AssignedTasks = () => {
     }
   }
 
-  // const handleRemoteDetails = async (rowId: string) => {
-  //   setSelectedRowId(rowId)
-  //   const response = await makeCoreGetRequest(
-  //     `/volumetry/tasks?filterBy=taskTemplateId&filterValue=${rowId}`
-  //   )
-  //   const data = await response
-  //   const item = tableItems.find(tableItem => tableItem.taskTemplateId === rowId)
-
-  //   return (
-  //     <TaskDescription
-  //       item={item}
-  //       employees={data}
-  //       shouldRefreshData={shouldRefreshAllocationsData}
-  //       setShouldRefreshData={setShouldRefreshAllocationsData}
-  //       setSelectedRowId={setSelectedRowId}
-  //     />
-  //   )
-  // }
-
   return (
     <div className={s.mainContainer}>
       {totalCount === 0 && <Typography variant="regular">Nu exista date disponibile.</Typography>}
@@ -182,7 +95,6 @@ const AssignedTasks = () => {
         <ListTable
           rows={rows}
           handleRemoteData={debounce(fetchData, 500)}
-          // handleRemoteDetails={handleRemoteDetails}
           isLoading={isLoading}
           totalCount={totalCount}
           rowActionsWidth="90px"

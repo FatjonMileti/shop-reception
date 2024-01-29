@@ -56,5 +56,6 @@ export const toItemEmployee = item => ({
   timerStatus: item.timerStatus,
   progressProportion: item.progressPercentage,
   comment: item.comment,
-  createdAt: item.createdAt
+  createdAt: item.createdAt,
+  timeInterval: item.taskContributionInterval
 })
