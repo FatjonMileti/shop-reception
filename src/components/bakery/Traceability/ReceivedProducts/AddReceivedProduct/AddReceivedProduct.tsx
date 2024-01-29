@@ -75,7 +75,9 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal }: AddReceivedProdu
         batchName: productDetails.lot
       }
 
-      formData.append('dto', JSON.stringify(data))
+      formData.append('dto',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      )
       formData.append('fileObject', productDetails.picture)
 
       await makeCorePostRequest('/bakery/batch', formData)
