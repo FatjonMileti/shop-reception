@@ -83,12 +83,6 @@ const App = () => {
   }, [fbToken])
 
   useEffect(() => {
-    ;(async () => {
-      await getFBToken(setFbToken)
-    })()
-  }, [])
-
-  useEffect(() => {
     // console.log("[App] 1st effect called | hasLoadedAppModules: ", hasLoadedAppModules)
     ;(async () => {
       if (!hasLoadedAppModules && !isLoadingAppModules) {
