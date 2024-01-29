@@ -4,7 +4,6 @@ import { Grid, styled } from '@mui/material'
 export const AccordionDetailsWrapper = styled('div')({
   padding: '8px',
   borderRadius: '8px',
-  marginRight: '16px',
   background: 'rgba(5, 35, 81, 0.06)',
   boxSizing: 'border-box'
 })
@@ -37,7 +36,7 @@ export interface Column {
 }
 
 interface ItemProps extends HTMLAttributes<HTMLDivElement> {
-  value: React.JSX.Element
+  value: React.JSX.Element | string
   name: string
 }
 
@@ -55,10 +54,9 @@ export const BodyItem = styled(({ className, name, value }: ItemProps) => {
     background: '#FFF',
     padding: '8px',
     borderRadius: '4px',
-    display: 'grid',
-    gridTemplateColumns: '152px auto',
+    display: 'flex',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    columnGap: '8px',
     height: '100%',
     '.item-name': {
       fontFamily: 'Ubuntu',
