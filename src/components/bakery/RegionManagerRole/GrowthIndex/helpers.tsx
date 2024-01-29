@@ -23,7 +23,7 @@ export const columns = [
 
 export const getInitialValues = editItem => ({
   divisionType: editItem?.divisionType ?? '',
-  growth: editItem?.growth ?? '',
+  growth: editItem?.growth ?? 0,
   id: editItem?.id ?? '',
   lastChange: editItem?.lastChange ?? '',
   name: editItem?.name ?? '',
