@@ -23,12 +23,12 @@ export const URLS = {
   AUTH_CADENTIER_REPORT_AND_SALES: 'bakery/formator/sales-cadentier-formator',
 
   /* Store manager role */
-  AUTH_PRODUCT_MANAGEMENT_STORE : 'bakery/storeManager/product-management',
+  AUTH_PRODUCT_MANAGEMENT_STORE: 'bakery/storeManager/product-management',
   AUTH_PRODUCT_GROWTH_INDEX: 'bakery/storeManager/product-growth-index',
-  AUTH_PRODUCTION_MANAGEMENT_STORE : 'bakery/storeManager/cadentier-store',
+  AUTH_PRODUCTION_MANAGEMENT_STORE: 'bakery/storeManager/cadentier-store',
   AUTH_PRODUCTION_MANAGEMENT_STORE_PRINT: 'bakery/storeManager/cadentier-store-print',
 
-  AUTH_GROWTH_INDEX_STORE : 'bakery/storeManager/growth-index',
+  AUTH_GROWTH_INDEX_STORE: 'bakery/storeManager/growth-index',
   AUTH_REPORT_AND_SALES_STORE: 'bakery/storeManager/cadentier-sales-store',
 
   /* Region manager role */
@@ -42,7 +42,7 @@ export const URLS = {
   AUTH_GROWTH_REGION_PRINT: 'bakery/regionManager/cadentier-region-print',
 
   /* Region manager role */
-  AUTH_PRODUCT_MANAGEMENT_TRACEABILITY : 'bakery/traceabilityOperator/product-management',
-  AUTH_RECEIVED_PRODUCTS_TRACEABILITY : 'bakery/traceabilityOperator/received-products',
-
+  AUTH_PRODUCT_MANAGEMENT_TRACEABILITY: 'bakery/traceabilityOperator/product-management',
+  AUTH_RECEIVED_PRODUCTS_TRACEABILITY: 'bakery/traceabilityOperator/received-products',
+  AUTH_FROZEN_TRACEABILITY: 'bakery/traceabilityOperator/frozen-traceability'
 }
