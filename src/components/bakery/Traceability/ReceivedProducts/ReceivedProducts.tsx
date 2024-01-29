@@ -47,7 +47,7 @@ export const ReceivedProducts = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/product',
+          url: '/bakery/batcht',
           tableFilters,
           page,
           rowsPerPage
