@@ -14,8 +14,7 @@ import ImageIcon from '@mui/icons-material/Image'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import InfoIcon from '@mui/icons-material/Info'
 import { FormInfoItems } from '../../../../core-ui/FormInfoItems'
-import { Product } from './SelectProduct'
-import { Supplier } from './SelectSupplier'
+import { Supplier, Product } from '../interfaces'
 import { productDetailsSchema } from '../helper'
 
 interface ProductDetailsProps {
@@ -60,10 +59,11 @@ export const ProductDetails = ({
     validationSchema: productDetailsSchema,
     validateOnChange: false,
     initialValues: initialValues,
-    onSubmit: async (values, { resetForm }) => {}
+    onSubmit: (values) => {
+      onContinue(values)
+    }
   })
 
-  // console.log('form.values: ', form.values)
 
   return (
     <Grid container rowSpacing={3.5}>
@@ -72,11 +72,11 @@ export const ProductDetails = ({
           items={[
             {
               label: 'Furnizor:',
-              name: selectedSupplier.name
+              name: selectedSupplier.supplierName
             },
             {
               label: 'Furnizor cod Meti:',
-              name: selectedSupplier.metiCode.toString()
+              name: selectedSupplier.supplierCode.toString()
             },
 
             {
@@ -104,7 +104,6 @@ export const ProductDetails = ({
           />
         </Grid>
         <Grid item xl={3} lg={4} sm={6} xs={12}>
-          {/*<FormLabel>Data expirare</FormLabel>*/}
           <RadioButtonGroup
             label='Data expirare'
             dotStyle
@@ -144,8 +143,8 @@ export const ProductDetails = ({
           />
         </Grid>
         <Grid item xl={3} lg={4} sm={6} xs={12}>
-          <FormLabel>DLC Secundar</FormLabel>
           <RadioButtonGroup
+            label='DLC Secundar'
             dotStyle
             name="hasSecondaryDLC"
             onChange={e => {
@@ -207,7 +206,7 @@ export const ProductDetails = ({
             onChange={form.handleChange}
             value={form.values.amount}
             name="amount"
-            suffix="kg"
+            suffix={selectedProduct.metricUnit}
             error={!!form.errors.amount}
             helperText={form.errors.amount as string}
           />
@@ -249,6 +248,7 @@ export const ProductDetails = ({
             style={{ display: 'none' }}
             type="file"
             accept="image/*"
+            capture="environment"
             onChange={e => {
               if (e.target.files) {
                 form.setFieldValue('picture', e.currentTarget.files[0])
@@ -267,17 +267,7 @@ export const ProductDetails = ({
             size="large"
             variant="contained"
             label="Salveaza"
-            onClick={async () => {
-              const errors = await form.validateForm()
-
-              console.log('formicValidation: ', errors)
-
-              if (!Object.keys(errors).length) {
-                onContinue(form.values)
-              } else {
-                console.log('continue errors')
-              }
-            }}
+            onClick={() => form.submitForm()}
           />
         </Grid>
       </Grid>

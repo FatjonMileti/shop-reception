@@ -1,16 +1,15 @@
 import s from '../../commonStyles.modules.scss'
 import { Autocomplete, ListTable } from '@fullscreendigital/carrefour-dex-fe'
-import React from 'react'
+import React, { useState } from 'react'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from '../../../../utils/api'
-import { FamilyItem, ProductManagementItem, SubfamilyItem } from '../../StoreManagerRole/interfaces'
 import { ValueLabelInterface } from '../../interfaces'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { useNotification } from '../../../../hooks'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 import { toTableGETUrl } from '../../../core-ui/Table/serializers'
-import { toTableRowItems } from './helper'
+import { toTableRowItem } from './helper'
 import {
   AccordionDetailsWrapper,
   AccordionSummaryWrapper,
@@ -21,16 +20,25 @@ import { Grid, Typography } from '@mui/material'
 import AddActionIcon from '../../../../icons/AddActionIcon'
 import { AddReceivedProduct } from './AddReceivedProduct/AddReceivedProduct'
 
-import {columns, headerItems} from './helper'
-
+import { columns, headerItems } from './helper'
+import { EditActionIcon } from '../../../../icons'
+import { CorrectReceivedProduct } from './CorrectReceivedProduct/CorrectReceivedProduct'
+import { ReceivedProduct, FamilyItem, SubfamilyItem } from './interfaces'
+import { get } from 'lodash'
+import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
 
 export const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const [totalCount, setTotalCount] = React.useState<number>(0)
-  const [tableItems, setTableItems] = React.useState<ProductManagementItem[]>([])
+  const [tableItems, setTableItems] = React.useState<ReceivedProduct[]>([])
   const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
 
   const [isAddModalOpen, setAddModalOpen] = React.useState<boolean>(false)
+  const [isCorrectModalOpen, setCorrectModalOpen] = React.useState<boolean>(false)
+  const [isEditModalOpen, setEditModalOpen] = React.useState<boolean>(false)
+
+  const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
+
   const { showNotification } = useNotification()
 
   const fetchData = async (page, rowsPerPage, tableFilters) => {
@@ -40,13 +48,12 @@ export const ReceivedProducts = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/product',
-          // searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
           tableFilters,
           page,
           rowsPerPage
         })
       )
-      setTableItems(toTableRowItems(response.list))
+      setTableItems(response.list.map(toTableRowItem))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -161,9 +168,22 @@ export const ReceivedProducts = () => {
 
   return (
     <div className={s.mainContainer}>
-      <AddReceivedProduct
-        isModalOpen={isAddModalOpen}
-        closeModal={() => setAddModalOpen(false)}
+      <AddReceivedProduct isModalOpen={isAddModalOpen} closeModal={() => setAddModalOpen(false)} />
+      <CorrectReceivedProduct
+        isModalOpen={isCorrectModalOpen}
+        closeModal={() => {
+          setCorrectModalOpen(false)
+          setSelectedRowId(0)
+        }}
+        batchId={selectedRowId}
+      />
+      <EditReceivedProduct
+        isModalOpen={isEditModalOpen}
+        closeModal={() => {
+          setEditModalOpen(false)
+          setSelectedRowId(0)
+        }}
+        batchId={selectedRowId}
       />
       <ListTable
         totalCount={totalCount}
@@ -178,7 +198,7 @@ export const ReceivedProducts = () => {
               <img src={'images/default-product-image.svg'} />
               <div className="title-and-content-wrapper">
                 <Typography variant="medium" className="title">
-                  Paine 7 seminte
+                  {item.product.name}
                 </Typography>
                 <div className="content-wrapper">
                   {headerItems.map((hc, cIndex) => (
@@ -186,7 +206,7 @@ export const ReceivedProducts = () => {
                       {hc.render ? (
                         hc.render(item)
                       ) : (
-                        <HeaderItem name={hc.title} value={item[hc.field]} />
+                        <HeaderItem name={hc.title} value={get(item, hc.field)} />
                       )}
                     </React.Fragment>
                   ))}
@@ -199,7 +219,11 @@ export const ReceivedProducts = () => {
               <Grid container spacing={2} columns={12}>
                 {columns.map((c, cIndex) => (
                   <React.Fragment key={cIndex}>
-                    {c.render ? c.render(item) : <BodyItem name={c.title} value={item[c.field]} />}
+                    {c.render ? (
+                      c.render(item)
+                    ) : (
+                      <BodyItem name={c.title} value={get(item, c.field)} />
+                    )}
                   </React.Fragment>
                 ))}
               </Grid>
@@ -216,7 +240,30 @@ export const ReceivedProducts = () => {
             icon: <AddActionIcon />
           }
         ]}
-
+        rowActions={[
+          {
+            label: 'Corectie',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#CC4010',
+            onClick: (e, rowId) => {
+              setSelectedRowId(rowId)
+              setCorrectModalOpen(true)
+            },
+            desktopIcon: <EditActionIcon />
+          },
+          {
+            label: 'Editeaza',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#0970E6',
+            onClick: (e, rowId) => {
+              setSelectedRowId(rowId)
+              setEditModalOpen(true)
+            },
+            desktopIcon: <EditActionIcon />
+          }
+        ]}
         rowActionsWidth="200px"
       />
     </div>

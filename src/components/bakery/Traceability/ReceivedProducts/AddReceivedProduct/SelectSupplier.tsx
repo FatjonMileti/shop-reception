@@ -3,13 +3,8 @@ import { Autocomplete, Button, Input } from '@fullscreendigital/carrefour-dex-fe
 import React from 'react'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from '../../../../../utils/api'
-import { Product } from './SelectProduct'
+import {Supplier, Product} from '../interfaces'
 
-export interface Supplier {
-  id: string
-  name: string
-  metiCode: number
-}
 interface SelectSupplierProps {
   setSelectedSupplier: (supplier: Supplier) => void
   selectedSupplier?: Supplier
@@ -24,7 +19,7 @@ export const SelectSupplier = ({
   onCancel,
   onContinue
 }: SelectSupplierProps) => {
-  const supplierQuery = useQuery(
+  const supplierQuery = useQuery<Supplier[]>(
     ['supplier'],
     async () => {
       try {
@@ -62,14 +57,14 @@ export const SelectSupplier = ({
         <Grid item xs={6}>
           <Autocomplete
             variant="outlined"
-            options={supplierQuery.data.map(({ id, name }) => ({ value: id, label: name }))}
+            options={supplierQuery.data.map(({ id, supplierName }) => ({ value: id, label: supplierName }))}
             label="Cauta dupa Cod Furnizor / Furnizor"
             onChange={(event, value) => {
               setSelectedSupplier(
                 value ? supplierQuery.data.find(({ id }) => id === value.value) : null
               )
             }}
-            value={selectedSupplier && { label: selectedSupplier.name, value: selectedSupplier.id }}
+            value={selectedSupplier && { label: selectedSupplier.supplierName, value: selectedSupplier.id }}
           />
         </Grid>
       </Grid>
