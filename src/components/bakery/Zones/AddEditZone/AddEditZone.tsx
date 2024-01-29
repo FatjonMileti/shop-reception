@@ -70,6 +70,7 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
             message: `Zone ${isEdit ? 'edited' : 'added'} successfully'`,
             type: 'success'
           })
+          formik.resetForm();
         },
         onError: res => {
           showNotification({
@@ -90,7 +91,6 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
                 enable: values.enable === 'Activ'
             }
             mutate(payload)
-            resetForm()
         }
     })
 

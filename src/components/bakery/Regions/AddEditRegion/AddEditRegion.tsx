@@ -70,6 +70,7 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
             message: `Region ${isEdit ? 'edited' : 'added'} successfully'`,
             type: 'success'
           })
+          formik.resetForm();
         },
         onError: res => {
           showNotification({
@@ -90,7 +91,6 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
                 enable: values.enable === 'Activ'
             }
             mutate(payload)
-            resetForm()
         }
     })
 

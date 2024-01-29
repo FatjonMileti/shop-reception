@@ -7515,7 +7515,7 @@
           "uuid": "a2806cf8-220e-49f4-a45d-11b6bb2ebc6b",
           "body": "{}",
           "latency": 0,
-          "statusCode": 200,
+          "statusCode": 202,
           "label": "Successfully obtained the paginated, filtered and sorted zones list",
           "headers": [
             {
