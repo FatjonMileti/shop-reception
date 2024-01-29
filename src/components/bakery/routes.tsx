@@ -37,11 +37,9 @@ import { GrowthIndexStore } from './StoreManagerRole/GrowthIndexStore'
 import ReportAndSalesStore from './StoreManagerRole/ReportAndSalesStore/ReportAndSalesStore'
 import { Ingredients } from './Ingredients'
 
-
-import {
-  ProductManagementTraceability
-} from './Traceability/ProductManagementTraceability/ProductManagementTraceability'
+import { ProductManagementTraceability } from './Traceability/ProductManagementTraceability/ProductManagementTraceability'
 import { ReceivedProducts } from './Traceability/ReceivedProducts/ReceivedProducts'
+import { FrozenTraceability } from './Traceability/FrozenTraceability/FrozenTraceability'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -314,59 +312,105 @@ export const useBakeryRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_GROWTH_REGION}
         element={
-          <PrivateRoute component={GrowthRegion} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={GrowthRegion}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_GROWTH_REGION_PRINT}
         element={
-          <PrivateRoute component={GrowthRegionPrint} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={GrowthRegionPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_GROWTH_INDEX}
         element={
-          <PrivateRoute component={GrowthIndex} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={GrowthIndex}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_GROWTH_INDEX_VIEW}
         element={
-          <PrivateRoute component={GrowthIndexView} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={GrowthIndexView}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_GROWTH_INDEX_PRODUCTS_VIEW}
         element={
-          <PrivateRoute component={GrowthIndexProductsView} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={GrowthIndexProductsView}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_USAGE_REPORT_REGION}
         element={
-          <PrivateRoute component={UsageReportRegion} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={UsageReportRegion}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_CADENTIER_SALES_REGION}
         element={
-          <PrivateRoute component={CadentierSalesRegion} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={CadentierSalesRegion}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
-
 
       {/* traceability operator role */}
       <Route
         path={URLS.AUTH_PRODUCT_MANAGEMENT_TRACEABILITY}
         element={
-          <PrivateRoute component={ProductManagementTraceability} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={ProductManagementTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
 
       <Route
         path={URLS.AUTH_RECEIVED_PRODUCTS_TRACEABILITY}
         element={
-          <PrivateRoute component={ReceivedProducts} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={ReceivedProducts}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_FROZEN_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={FrozenTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
     </>
