@@ -10,10 +10,8 @@ import { ProductDetails } from './ProductDetails'
 import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
 import { getInitialValues } from './helpers'
-import {
-  Product,
-  SelectOrScanProduct
-} from '../../ReceivedProducts/AddReceivedProduct/SelectProduct'
+import { SelectOrScanProduct } from '../../ReceivedProducts/AddReceivedProduct/SelectOrScanProduct'
+import { Product } from '../../ReceivedProducts/interfaces'
 
 interface FrozenTraceabilityModalProps {
   isModalOpen: boolean
