@@ -1,4 +1,4 @@
-import { Grid } from '../../Common/Grid'
+import { Grid } from '../../../Common/Grid'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { useState } from 'react'

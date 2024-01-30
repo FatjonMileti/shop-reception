@@ -1,4 +1,4 @@
-import { Grid } from '../../Common/Grid'
+import { Grid } from '../../../Common/Grid'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../Common/CommonStyles.modules.scss'
 import { Table } from '../../../../core-ui/Table'

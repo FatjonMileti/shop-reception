@@ -1,4 +1,4 @@
-import { Grid } from '../../../Common/Grid'
+import { Grid } from '../../../../Common/Grid'
 import { TitleHeader } from '../../../Common/TitleHeader'
 import { Table } from '../../../../../core-ui/Table'
 import { columns } from './helpers'

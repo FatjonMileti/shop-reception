@@ -1,4 +1,4 @@
-import { Grid } from '../../../Common/Grid'
+import { Grid } from '../../../../Common/Grid'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from '../../../Common/TitleHeader'
 

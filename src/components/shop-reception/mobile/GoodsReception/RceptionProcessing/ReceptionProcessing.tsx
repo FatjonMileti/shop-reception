@@ -1,5 +1,4 @@
-import { Grid, Container } from '@mui/material'
-import cs from '../../Common.modules.scss'
+import { Grid } from '../../../Common/Grid'
 import { TitleHeader } from '../../TitleHeader'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
@@ -14,24 +13,23 @@ const ReceptionProcessing = () => {
   ]
 
   return (
-    <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader title='Procesarea Recepției' />
-      <form>
-        <Grid container spacing={2} className={cs.wrapper}>
-          <Grid item xs={12}>
-            {trucks.map((item: Truck, index) => (
-              <TruckCard
-                key={item.id}
-                onClick={() => {
-                  navigate(URLS.AUTH_SUPPORT_CODE)
-                }}
-                truck={item}
-              />
-            ))}
-          </Grid>
-        </Grid>
-      </form>
-    </Container>
+    <Grid
+      gridContainerStyle={{ marginTop: '20px' }}
+      maxWidth='xs'
+      items={[
+        <TitleHeader title='Procesarea Recepției' />,
+        ...trucks.map((item: Truck, index) => (
+          <TruckCard
+            key={item.id}
+            onClick={() => {
+              navigate(URLS.AUTH_SUPPORT_CODE)
+            }}
+            truck={item}
+          />
+        ))
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

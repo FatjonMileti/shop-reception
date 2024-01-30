@@ -1,7 +1,5 @@
-import { Grid, Container, Paper } from '@mui/material'
+import { Grid  } from '../../Common/Grid'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import s from './GoodsReturn.modules.scss'
-import cs from '../Common.modules.scss'
 import { URLS } from '../constants'
 import useRoles from '../useRoles'
 import { useNavigate } from 'react-router-dom'
@@ -11,86 +9,89 @@ const GoodsReturn = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
   const navigate = useNavigate()
 
+  let items = [
+    <TitleHeader title='Returneaza Marfa' />,
+  ]
+
+  if(isShopUser){
+    items = [
+      ...items,
+        <Button
+          type='button'
+          variant='contained'
+          label='COMANDǍ CAMION RETUR'
+          style={{ width: '100%' }}
+          onClick={() => {
+            navigate(URLS.AUTH_ORDER_RETURN_TRUCK)
+          }}
+        />,
+        <Button
+          type='button'
+          variant='contained'
+          label='CAMIOANE RETUR CONFIRMATE'
+          style={{ width: '100%' }}
+          onClick={() => {
+            navigate(URLS.AUTH_CONFIRM_RETURN_TRUCKS)
+          }}
+        />
+    ]
+  }
+
+  if(isHubUser){
+    items = [
+      ...items,
+      <Button
+        type='button'
+        variant='contained'
+        label='RETURURI AȘTEPTATE'
+        style={{ width: '100%' }}
+        onClick={() => {
+          navigate(URLS.AUTH_EXPECTED_RETURNS)
+        }}
+      />,
+      <Button
+        type='button'
+        variant='contained'
+        label='RETUR ÎN CURS DE RECEPȚIE'
+        style={{ width: '100%' }}
+        onClick={() => {
+          navigate(URLS.AUTH_IN_PROGRESS_RETURN)
+        }}
+      />,
+      <Button
+        type='button'
+        variant='contained'
+        label='ÎNREGISTRARE RETUR'
+        style={{ width: '100%' }}
+        onClick={() => {
+          navigate(URLS.AUTH_RECORD_RETURN)
+        }}
+      />
+    ]
+  }
+
+  if(isShopUser || isHubUser){
+    items = [
+      ...items,
+      <Button
+        type='button'
+        variant='contained'
+        label='CONTINUARE RETUR'
+        style={{ width: '100%' }}
+        onClick={() => {
+          navigate(URLS.AUTH_CONTINUE_RETURN)
+        }}
+      />
+    ]
+  }
+
   return (
-    <Paper className={s.paper}>
-      <Container component='main' maxWidth='xs' className={cs.container}>
-        <TitleHeader title='Returneaza Marfa' />
-        <form>
-          <Grid container spacing={2} className={cs.wrapper}>
-            {isShopUser && <>
-              <Grid item xs={12}>
-                <Button
-                  type='button'
-                  variant='contained'
-                  label='COMANDǍ CAMION RETUR'
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    navigate(URLS.AUTH_ORDER_RETURN_TRUCK)
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  type='button'
-                  variant='contained'
-                  label='CAMIOANE RETUR CONFIRMATE'
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    navigate(URLS.AUTH_CONFIRM_RETURN_TRUCKS)
-                  }}
-                />
-              </Grid>
-            </>}
-            {isHubUser && <>
-              <Grid item xs={12}>
-                <Button
-                  type='button'
-                  variant='contained'
-                  label='RETURURI AȘTEPTATE'
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    navigate(URLS.AUTH_EXPECTED_RETURNS)
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  type='button'
-                  variant='contained'
-                  label='RETUR ÎN CURS DE RECEPȚIE'
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    navigate(URLS.AUTH_IN_PROGRESS_RETURN)
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  type='button'
-                  variant='contained'
-                  label='ÎNREGISTRARE RETUR'
-                  style={{ width: '100%' }}
-                  onClick={() => {
-                    navigate(URLS.AUTH_RECORD_RETURN)
-                  }}
-                />
-              </Grid>
-            </>}
-            {(isShopUser || isHubUser) && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='CONTINUARE RETUR'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_CONTINUE_RETURN)
-                }}
-              />
-            </Grid>}
-          </Grid>
-        </form>
-      </Container>
-    </Paper>
+    <Grid
+      gridContainerStyle={{marginTop: '20px'}}
+      maxWidth='xs'
+      items={items}
+      itemsPerRow={1}
+    />
   )
 }
 

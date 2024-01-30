@@ -1,4 +1,4 @@
-import { Grid } from '../../../Common/Grid'
+import { Grid } from '../../../../Common/Grid'
 import { TitleHeader } from '../../../Common/TitleHeader'
 import React, { useState } from 'react'
 import { Input, Typography } from '@fullscreendigital/carrefour-dex-fe'

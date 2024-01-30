@@ -1,10 +1,9 @@
-import cs from '../../../../../Common.modules.scss'
 import { TitleHeader } from '../../../../../TitleHeader'
 import { Button, Divider, IconButton, Input, Table, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { Container, Grid, Paper, Box } from '@mui/material'
+import { Grid } from '../../../../../../Common/Grid'
 import { URLS } from '../../../../../constants'
 import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { getValidationSchema, initialValues, columns } from './helpers'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
@@ -23,69 +22,59 @@ const DeliverySensitiveProductsConfirm = () => {
   })
 
   return (
-    <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader title='PRODUSE SENSIBILE VALIDARE LIVRARE' />
-      <form>
-        <Grid container spacing={2} className={cs.wrapper}>
-          <Grid item xs={12}>
-            <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
-              <Typography variant='medium' component='p'>PRODUSE SENSIBILE</Typography>
-              <Typography variant='medium' component='p'>Etichetă suport: 45745865416</Typography>
-              <Typography variant='medium' component='p'>Număr suport: 545465</Typography>
-              <Typography variant='medium' component='p'>Produse verificați: 0</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={10}>
-            <Input
-              type='text'
-              label='Cod Produse'
-              variant='standard'
-              width='100%'
-              value={formik.values.productCode}
-              onChange={event => formik.setFieldValue('productCode', (event.target as HTMLInputElement).value)}
-              error={!!formik.errors.productCode}
-              helperText={formik.errors.productCode as string}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <IconButton>
-              <ManageSearchIcon />
-            </IconButton>
-          </Grid>
-          <Grid item xs={12}>
-            <Divider>SAU</Divider>
-          </Grid>
-          <Grid item xs={12} style={{ marginTop: '20px' }}>
-            <Grid container alignItems='center' justifyContent='center'>
-              <Button
-                type='button'
-                variant='contained'
-                label='SCANEAZǍ PPRODUSE'
-                onClick={null}
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <Table
-              columns={columns}
-              isLoading={false}
-              rows={[]}
-              disablePagination={true}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Box className={cs.buttonWrapper}>
-              <Button
-                type='button'
-                variant='contained'
-                label='CONFIRMĂ CANTITĂȚI'
-                onClick={() => formik.submitForm()}
-              />
-            </Box>
-          </Grid>
-        </Grid>
-      </form>
-    </Container>
+    <Grid
+      gridContainerStyle={{ marginTop: '20px' }}
+      maxWidth='xs'
+      items={[
+        <TitleHeader title='PRODUSE SENSIBILE VALIDARE LIVRARE' />,
+        <Grid
+          spacing={1}
+          hasPaper={true}
+          items={[
+            <Typography variant='medium' component='p'>PRODUSE SENSIBILE</Typography>,
+            <Typography variant='medium' component='p'>Etichetă suport: 45745865416</Typography>,
+            <Typography variant='medium' component='p'>Număr suport: 545465</Typography>,
+            <Typography variant='medium' component='p'>Produse verificați: 0</Typography>
+          ]}
+          itemsPerRow={1}
+        />,
+        <>
+          <Input
+            type='text'
+            label='Cod Produse'
+            variant='standard'
+            width='100%'
+            value={formik.values.productCode}
+            onChange={event => formik.setFieldValue('productCode', (event.target as HTMLInputElement).value)}
+            error={!!formik.errors.productCode}
+            helperText={formik.errors.productCode as string}
+          />
+          <IconButton>
+            <ManageSearchIcon />
+          </IconButton>
+        </>,
+        <Divider>SAU</Divider>,
+        <Button
+          type='button'
+          variant='contained'
+          label='SCANEAZǍ PPRODUSE'
+          onClick={null}
+        />,
+        <Table
+          columns={columns}
+          isLoading={false}
+          rows={[]}
+          disablePagination={true}
+        />,
+        <Button
+          type='button'
+          variant='contained'
+          label='CONFIRMĂ CANTITĂȚI'
+          onClick={() => formik.submitForm()}
+        />
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 export default DeliverySensitiveProductsConfirm

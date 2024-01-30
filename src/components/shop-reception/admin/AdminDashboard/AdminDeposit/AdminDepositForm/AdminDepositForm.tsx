@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Button, Input, Checkbox } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '../../../Common/Grid'
+import { Grid } from '../../../../Common/Grid'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'

@@ -9,7 +9,7 @@ import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../Common/TitleHeader'
 import { AdminDepositForm } from './AdminDepositForm'
-import { Grid } from '../../Common/Grid'
+import { Grid } from '../../../Common/Grid'
 
 const AdminDeposit = () => {
   const [tableItems, setTableItems] = useState<AdminDeposit[]>([

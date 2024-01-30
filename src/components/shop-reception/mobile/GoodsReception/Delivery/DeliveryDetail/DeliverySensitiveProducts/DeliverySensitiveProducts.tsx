@@ -1,5 +1,4 @@
-import { Box, Container, Grid, Paper } from '@mui/material'
-import cs from '../../../../Common.modules.scss'
+import { Grid } from '../../../../../Common/Grid'
 import { TitleHeader } from '../../../../TitleHeader'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { URLS } from '../../../../constants'
@@ -23,34 +22,40 @@ const sensitiveProducts: SensitiveProduct[] = [
 
 const DeliverySensitiveProducts = () => {
   const navigate = useNavigate()
+
+  let items = [
+    <TitleHeader title='PRODUSE SENSIBILE VALIDARE LIVRARE' />,
+    <Grid
+      hasPaper={true}
+      spacing={1}
+      items={[
+        <Typography variant='medium' component='h5'>PRODUSE SENSIBILE</Typography>,
+        <Typography variant='medium' component='p'>Număr înmatriculare: BL75876</Typography>,
+        <Typography variant='medium' component='p'>Suporți verificați: 0 / 1</Typography>
+      ]}
+      itemsPerRow={1}
+    />,
+    ...sensitiveProducts.map((item: SensitiveProduct, index) => (
+      <SensitiveProduct onClick={() => {
+        navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM)
+      }} item={item} />
+    ))
+  ]
+
+  if (sensitiveProducts.length === 0) {
+    items.push(
+      <Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>nu
+        existǎ camioane de validat</Typography>
+    )
+  }
+
   return (
-    <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader title='PRODUSE SENSIBILE VALIDARE LIVRARE' />
-      <form>
-        <Grid container spacing={2} className={cs.wrapper}>
-          <Grid item xs={12}>
-            <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
-              <Typography variant='medium' component='h5'>PRODUSE SENSIBILE</Typography>
-              <Typography variant='medium' component='p'>Număr înmatriculare: BL75876</Typography>
-              <Typography variant='medium' component='p'>Suporți verificați: 0 / 1</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12}>
-            {sensitiveProducts.map((item: SensitiveProduct, index) => (
-              <SensitiveProduct onClick={() => {
-                navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM)
-              }} item={item} />
-            ))}
-          </Grid>
-          {sensitiveProducts.length === 0 && <Grid item xs={12}>
-            <Box style={{ margin: '10px', padding: '20px' }}>
-              <Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>nu
-                existǎ camioane de validat</Typography>
-            </Box>
-          </Grid>}
-        </Grid>
-      </form>
-    </Container>
+    <Grid
+      gridContainerStyle={{ marginTop: '20px' }}
+      maxWidth='xs'
+      items={items}
+      itemsPerRow={1}
+    />
   )
 }
 

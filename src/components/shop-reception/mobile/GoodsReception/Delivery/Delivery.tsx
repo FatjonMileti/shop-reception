@@ -1,6 +1,5 @@
-import { Grid, Container, Box } from '@mui/material'
+import { Grid  } from '../../../Common/Grid'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
-import cs from '../../Common.modules.scss'
 import { TitleHeader } from '../../TitleHeader'
 import { useNavigate } from 'react-router-dom'
 import { TruckCard } from '../../../admin/Common/TruckCard'
@@ -12,31 +11,32 @@ const truckList: Truck[] = [
 
 const Delivery = () => {
   const navigate = useNavigate()
+
+  let items = [
+    <TitleHeader title='VALIDARE LIVRARE' />,
+    ...truckList.map((truck: Truck, index) => (
+      <TruckCard
+        key={truck.id}
+        onClick={() => {
+          navigate(URLS.AUTH_DELIVERY_DETAIL)
+        }}
+        truck={truck}
+      />
+    )),
+  ]
+
+  if(truckList.length === 0){
+    items.push(<Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>nu
+      existǎ camioane de validat</Typography>)
+  }
+
   return (
-    <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader title='VALIDARE LIVRARE' />
-      <form>
-        <Grid container spacing={2} className={cs.wrapper}>
-          <Grid item xs={12}>
-            {truckList.map((truck: Truck, index) => (
-              <TruckCard
-                key={truck.id}
-                onClick={() => {
-                  navigate(URLS.AUTH_DELIVERY_DETAIL)
-                }}
-                truck={truck}
-              />
-            ))}
-          </Grid>
-          {truckList.length === 0 && <Grid item xs={12}>
-            <Box style={{ margin: '10px', padding: '20px' }}>
-              <Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>nu
-                existǎ camioane de validat</Typography>
-            </Box>
-          </Grid>}
-        </Grid>
-      </form>
-    </Container>
+    <Grid
+      gridContainerStyle={{ marginTop: '20px' }}
+      maxWidth='xs'
+      items={items}
+      itemsPerRow={1}
+    />
   )
 }
 

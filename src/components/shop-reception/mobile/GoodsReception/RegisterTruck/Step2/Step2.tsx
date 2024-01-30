@@ -1,52 +1,41 @@
-import { Grid, Container, Paper, Box } from '@mui/material'
+import { Grid } from '../../../../Common/Grid'
 import { Button, Table, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import cs from '../../../Common.modules.scss'
 import { TitleHeader } from '../../../TitleHeader'
 import { columns } from './helpers'
 
 const rows = [
   {
-    'packagingType': "POLITA ROLLS FLORI (POL)",
+    'packagingType': 'POLITA ROLLS FLORI (POL)',
     'amount': 1
   }
 ]
 
 const Step1 = () => {
-
   return (
-    <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader title='ÎNREGISTREAZǍ CAMION' />
-      <Grid container spacing={2} className={cs.wrapper}>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
-                <Typography variant='medium' component='p'>Numǎr camion: ASDS23</Typography>
-                <Typography variant='medium' component='p'>Destinație: Hub Deva Abient</Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Table
-                columns={columns}
-                isLoading={false}
-                rows={rows}
-                disablePagination={true}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={cs.buttonWrapper}>
-                <Button
-                  type='button'
-                  variant='contained'
-                  label='CONFIRMǍ AMBALAJE'
-                  onClick={null}
-                />
-              </Box>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Container>
+    <Grid
+      gridContainerStyle={{ marginTop: '20px' }}
+      maxWidth='xs'
+      items={[
+        <TitleHeader title='ÎNREGISTREAZǍ CAMION' />,
+        <>
+          <Typography variant='medium' component='p'>Numǎr camion: ASDS23</Typography>
+          <Typography variant='medium' component='p'>Destinație: Hub Deva Abient</Typography>
+        </>,
+        <Table
+          columns={columns}
+          isLoading={false}
+          rows={rows}
+          disablePagination={true}
+        />,
+        <Button
+          type='button'
+          variant='contained'
+          label='CONFIRMǍ AMBALAJE'
+          onClick={null}
+        />
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 
