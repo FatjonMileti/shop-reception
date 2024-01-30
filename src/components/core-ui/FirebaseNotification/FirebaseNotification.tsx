@@ -1,5 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'configureStore'
 import { Box } from '@mui/material'
 import { useSnackbar } from 'notistack'
 import { useEffect, useState } from 'react'
