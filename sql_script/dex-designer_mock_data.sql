@@ -278,7 +278,7 @@ VALUES
     (101, 47),
     -- VOLUMETRY_REGION_ADMIN
     (102, 42),
-    (102, 44),
+    (102, 46),
     -- (102, 45),
     -- VOLUMETRY_STORE_ADMIN
     (103, 42),
