@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { AddEditZoneItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { divisionTypes, getInitialValues, getValidationSchema, statuses } from '../helpers'
-import { ChangeEvent, useMemo } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 
 interface AddEditZoneProps {
   isModalOpen: boolean
@@ -23,7 +23,14 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
     const { isModalOpen, closeModal, setShouldRefreshData, isEdit, editZoneId } = props
     const { showNotification } = useNotification()
 
-    const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
+    useEffect(() => {
+      if(isModalOpen && isEdit) { 
+        refetchEditItem()
+        setShouldRefreshData(true)
+      }
+    }, [isModalOpen])
+    
+    const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
         ['zone', editZoneId],
         async () => {
           if (editZoneId) {
@@ -44,8 +51,8 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
         }
     )
 
-    const initialValues = useMemo(() => getInitialValues(editItem, isEdit), [editItem])
-    const validationSchema = useMemo(() => getValidationSchema(), [editItem])
+    const initialValues = useMemo(() => getInitialValues(editItem), [editItem, isModalOpen])
+    const validationSchema = useMemo(() => getValidationSchema(), [editItem, isModalOpen])
 
     const submitTask = async (values: AddEditZoneItem) => {
         if (isEdit) {
@@ -63,6 +70,7 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
             message: `Zone ${isEdit ? 'edited' : 'added'} successfully'`,
             type: 'success'
           })
+          formik.resetForm();
         },
         onError: res => {
           showNotification({
@@ -83,7 +91,6 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
                 enable: values.enable === 'Activ'
             }
             mutate(payload)
-            resetForm()
         }
     })
 

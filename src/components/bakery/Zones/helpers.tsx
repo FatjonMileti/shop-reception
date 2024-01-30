@@ -59,21 +59,14 @@ export const getValidationSchema = () => Yup.object({
     responsible: Yup.string().nonNullable(),
 })
 
-export const getInitialValues = (editItem, isEdit) => {
-  if(isEdit) return {
+export const getInitialValues = (editItem) => {
+  return {
     ...(editItem?.id ? { id: editItem?.id } : {}),
     name: editItem?.name ?? '',
     responsible: editItem?.responsible ?? '',
     enable: editItem?.enable ? 'Activ' : 'Inactiv',
     divisionType: editItem?.divisionType ?? '',
     stores: editItem?.stores ?? []
-  }
-  return {  
-    name: '',
-    responsible: '',
-    enable: 'Activ',
-    divisionType: '',
-    stores: []
   }
 }
 

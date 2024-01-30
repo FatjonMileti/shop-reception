@@ -178,7 +178,6 @@ export const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
     ),
     type: 'autocomplete',
     label: 'Familie',
-    clearFiltersOnChange: ['subfamily']
   },
   {
     name: 'subfamily',

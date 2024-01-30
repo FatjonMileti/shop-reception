@@ -24,7 +24,7 @@ const EditProductGrowthIndex: React.FC<EditProductGrowthIndexProps> = props => {
     const { showNotification } = useNotification()
 
     useEffect(() => {
-      if(isModalOpen) refetchEditItem
+      if(isModalOpen) refetchEditItem()
     }, [isModalOpen])
 
     const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(

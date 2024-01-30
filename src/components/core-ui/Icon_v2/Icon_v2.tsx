@@ -194,7 +194,6 @@ interface IconProps {
 }
 
 const Icon_v2: React.FC<IconProps> = ({ iconName, iconType }) => {
-  console.log( iconName, iconType)
   const iconComponent = IconComponents[`${iconName}${iconType}`]
   return iconComponent ? createElement(iconComponent) : <CheckBoxOutlineBlankIcon />
 }

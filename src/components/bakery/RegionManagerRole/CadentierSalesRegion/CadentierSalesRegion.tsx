@@ -38,7 +38,7 @@ const CadentierSalesRegion = () => {
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/region/all')
-      const resultOptions = toAsyncSelectOptions(result, 'id', 'name')
+      const resultOptions = toAsyncSelectOptions(result, 'id', 'name')     
       return resultOptions || []
     },
     {
@@ -52,13 +52,16 @@ const CadentierSalesRegion = () => {
   )
 
   const familiesQuery = useQuery(
-    ['families', storeFilterValue?.value],
+    ['families', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+        ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(
         '/bakery/store/families',
         {
           params: {
             store: storeFilterValue?.value,
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
           },
           paramsSerializer: { indexes: null }
         }

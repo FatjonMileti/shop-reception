@@ -93,6 +93,7 @@ const GroupTable = props => {
     : props.toolbarActions.map(action =>
         action.label === 'Printeaza' ? { ...action, onClick: () => openPrintModal() } : action
       )
+
   return (
     <>
       {showAbbrev && (
