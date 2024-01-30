@@ -12,7 +12,8 @@ import {useSearchParams } from 'react-router-dom'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { FamilyItem } from 'components/bakery/StoreManagerRole/interfaces'
 import { useQuery } from 'react-query'
-import { GroupTable } from 'components/core-ui/GroupTable'
+// import { GroupTable } from 'components/core-ui/GroupTable'
+import { Table } from 'components/core-ui/Table'
 
 const GrowthIndexProductsView = () => {
   const [tableItems, setTableItems] = useState<GrowthIndexProductViewItem[]>([])
@@ -84,7 +85,8 @@ const GrowthIndexProductsView = () => {
   return (
     <div className={s.mainContainer}>
       <Box>
-        <GroupTable
+        {/* <GroupTable */}
+        <Table
           hideCheckbox
           columns={columns}
           items={tableItems}
