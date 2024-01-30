@@ -1,5 +1,3 @@
-import { PermissionRoles } from "utils/enums"
-
 export const columns = [
   {
     title: 'Departament',
@@ -21,7 +19,3 @@ export const columns = [
     type: 'string'
   }
 ]
-
-export const roles = {
-  filterRoles: [PermissionRoles.GG_RO_HQ_IT_DEX_GOV_REGION_ADMIN]
-}

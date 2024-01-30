@@ -4,28 +4,22 @@ import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { useNotification } from 'hooks'
-import { ChangeEvent, MouseEvent } from 'react'
+import { ChangeEvent, MouseEvent, useMemo } from 'react'
 import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { getFormInitialValues } from './helpers'
 import { handleQueryError } from 'components/volumetry/utils'
+import { EditAllocationModalProps } from '../TaskAllocationDefinitions'
 
-interface EditAllocationModalProps {
-  isModalOpen: boolean
-  closeModal: Function
-  task: any // TODO: To add interface when db schema is defined
-  setShouldRefreshData: Function
-  setSelectedRowId: Function
-  editItem?: any // TODO: To add interface when db schema is defined
-  employee?: any // TODO: To add type when db schema is defined
-}
-
-const validationSchema = yup.object({
-  workload: yup.number().required('Acest camp este obligatoriu.'),
-  comment: yup.string()
-})
+const validationSchema = hideWorkload =>
+  yup.object({
+    workload: hideWorkload
+      ? yup.string().nullable()
+      : yup.number().required('Acest camp este obligatoriu.'),
+    comment: yup.string()
+  })
 
 const EditAllocationModal = (props: EditAllocationModalProps) => {
   const {
@@ -35,7 +29,8 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     employee,
     setShouldRefreshData,
     setSelectedRowId,
-    task
+    task,
+    hideWorkload
   } = props
   const { showNotification } = useNotification()
 
@@ -68,8 +63,8 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    initialValues: getFormInitialValues(editItem || employee),
-    validationSchema: validationSchema,
+    initialValues: getFormInitialValues(editItem || employee, hideWorkload),
+    validationSchema: validationSchema(hideWorkload),
     onSubmit: async (values: any, { resetForm }) => {
       mutate(values)
       resetForm()
@@ -101,7 +96,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
             items={[
               { label: 'Task:', name: task?.taskName },
               { label: 'Departament/Raion:', name: task?.rayonsOrDepartment },
-              {
+              !hideWorkload && {
                 label: 'Angajat:',
                 name: employee?.workerFullName
               }
@@ -109,22 +104,24 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           />
         </Grid>
 
-        <Grid xs={12} item>
-          <Input
-            type="number"
-            variant="outlined"
-            name="workload"
-            label="Volum"
-            value={formik.values.workload}
-            width="100%"
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('workload', (event.target as HTMLInputElement).value)
-            }
-            error={!!formik.errors.workload}
-            helperText={formik.errors.workload as string}
-            required
-          />
-        </Grid>
+        {!hideWorkload && (
+          <Grid xs={12} item>
+            <Input
+              type="number"
+              variant="outlined"
+              name="workload"
+              label="Volum"
+              value={formik.values.workload}
+              width="100%"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                formik.setFieldValue('workload', (event.target as HTMLInputElement).value)
+              }
+              error={!!formik.errors.workload}
+              helperText={formik.errors.workload as string}
+              required
+            />
+          </Grid>
+        )}
 
         <Grid xs={12} item>
           <Input

@@ -32,6 +32,7 @@ export const getFBToken = async setToken => {
   })
     .then(currentToken => {
       if (currentToken) {
+        console.log('Firebase token: ', currentToken)
         setToken(currentToken)
         // Track the token -> client mapping, by sending to backend server
         // show on the UI that permission is secured
