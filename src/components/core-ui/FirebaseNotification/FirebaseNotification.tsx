@@ -19,9 +19,9 @@ const FirebaseNotification = () => {
     .then((payload: any) => {
       if (payload) {
         showFirebaseNotification({
-          title: 'payload.data?.title',
-          message: 'payload.data?.body',
-          link: 'payload.data?.route'
+          title: payload.data?.title,
+          message: payload.data?.body,
+          link: payload.data?.route
         })
       }
     })
