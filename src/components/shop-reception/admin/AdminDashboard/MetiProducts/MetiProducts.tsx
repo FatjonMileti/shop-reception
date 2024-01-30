@@ -1,4 +1,4 @@
-import { Grid } from '../../Common/Grid'
+import { Grid } from '../../../Common/Grid'
 import { columns } from './helpers'
 import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../../../utils/api'

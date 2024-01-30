@@ -1,6 +1,5 @@
-import { Grid, Container, Paper } from '@mui/material'
-import { Button, Divider, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import cs from '../../Common.modules.scss'
+import { Grid } from '../../../Common/Grid'
+import { Button, Divider } from '@fullscreendigital/carrefour-dex-fe'
 import { URLS } from '../../constants'
 import useRoles from '../../useRoles'
 import { useNavigate } from 'react-router-dom'
@@ -17,39 +16,44 @@ const ListTrucks = () => {
     { id: 3, name: 'Camion 3', description: 'Descriere camion 3' }
   ]
 
+  let items = [
+    <TitleHeader title='Selecteazǎ Camion' />,
+    <Grid
+      spacing={1}
+      items={trucks.map((truck: Truck, index) => (
+        <TruckCard
+          key={truck.id}
+          onClick={() => {
+            navigate(URLS.AUTH_TRUCK_DETAIL.replace(':id', truck.id.toString()))
+          }}
+          truck={truck}
+        />
+      ))}
+    itemsPerRow={1}
+    />,
+    <Divider>SAU</Divider>
+  ]
+
+  if (isShopUser || isHubUser) {
+    items.push(
+      <Button
+        type='button'
+        variant='contained'
+        label='ADAUGǍ CAMION'
+        style={{ width: '100%' }}
+        onClick={() => {
+          navigate(URLS.AUTH_ADD_TRUCK)
+        }}
+      />)
+  }
+
   return (
-    <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader title='Selecteazǎ Camion' />
-      <form>
-        <Grid container spacing={2} className={cs.wrapper}>
-          <Grid item xs={12}>
-            {trucks.map((truck: Truck, index) => (
-              <TruckCard
-                key={truck.id}
-                onClick={() => {
-                  navigate(URLS.AUTH_TRUCK_DETAIL.replace(':id', truck.id.toString()))
-                }}
-                truck={truck}
-              />
-            ))}
-          </Grid>
-          <Grid item xs={12}>
-            <Divider>SAU</Divider>
-          </Grid>
-          {(isShopUser || isHubUser) && <Grid item xs={12}>
-            <Button
-              type='button'
-              variant='contained'
-              label='ADAUGǍ CAMION'
-              style={{ width: '100%' }}
-              onClick={() => {
-                navigate(URLS.AUTH_ADD_TRUCK)
-              }}
-            />
-          </Grid>}
-        </Grid>
-      </form>
-    </Container>
+    <Grid
+      gridContainerStyle={{ marginTop: '20px' }}
+      maxWidth='xs'
+      items={items}
+      itemsPerRow={1}
+    />
   )
 }
 

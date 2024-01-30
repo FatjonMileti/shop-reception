@@ -1,4 +1,4 @@
-import { Grid } from '../../../Common/Grid'
+import { Grid } from '../../../../Common/Grid'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { FileUpload } from '../../../../../core-ui/FileUpload'
 import { ChangeEvent, useState } from 'react'

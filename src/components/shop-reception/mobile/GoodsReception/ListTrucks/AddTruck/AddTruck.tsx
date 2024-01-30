@@ -1,6 +1,5 @@
-import { Grid, Container } from '@mui/material'
+import { Grid } from '../../../../Common/Grid'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import cs from '../../../Common.modules.scss'
 import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
@@ -36,70 +35,58 @@ const AddTruck = () => {
     }
   })
 
-  return (
-    <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader title="ADAUGǍ CAMION" />
-      <Grid container spacing={2} className={cs.wrapper}>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Input
-                type='text'
-                label='Numǎr înmatriculare'
-                variant='standard'
-                width='100%'
-                value={formik.values.registrationNumber}
-                onChange={event => formik.setFieldValue('registrationNumber', (event.target as HTMLInputElement).value)}
-                error={!!formik.errors.registrationNumber}
-                helperText={formik.errors.registrationNumber as string}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Input
-                type='text'
-                label='Șofer'
-                variant='standard'
-                width='100%'
-                value={formik.values.driver}
-                onChange={event => formik.setFieldValue('driver', (event.target as HTMLInputElement).value)}
-                error={!!formik.errors.driver}
-                helperText={formik.errors.driver as string}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Input
-                type='text'
-                label='Numǎr Sigiliu'
-                variant='standard'
-                width='100%'
-                value={formik.values.sealNumber}
-                onChange={event => formik.setFieldValue('sealNumber', (event.target as HTMLInputElement).value)}
-                error={!!formik.errors.sealNumber}
-                helperText={formik.errors.sealNumber as string}
-              />
-            </Grid>
-            <Grid item xs={12} style={{ textAlign: 'right' }}>
-              <Button
-                type='button'
-                variant='outlined'
-                label='+ ADAUGǍ ALT SIGILIU'
-              />
-            </Grid>
+  let items = [
+    <TitleHeader title='ADAUGǍ CAMION' />,
+    <Input
+      type='text'
+      label='Numǎr înmatriculare'
+      variant='standard'
+      width='100%'
+      value={formik.values.registrationNumber}
+      onChange={event => formik.setFieldValue('registrationNumber', (event.target as HTMLInputElement).value)}
+      error={!!formik.errors.registrationNumber}
+      helperText={formik.errors.registrationNumber as string}
+    />,
+    <Input
+      type='text'
+      label='Șofer'
+      variant='standard'
+      width='100%'
+      value={formik.values.driver}
+      onChange={event => formik.setFieldValue('driver', (event.target as HTMLInputElement).value)}
+      error={!!formik.errors.driver}
+      helperText={formik.errors.driver as string}
+    />,
+    <Input
+      type='text'
+      label='Numǎr Sigiliu'
+      variant='standard'
+      width='100%'
+      value={formik.values.sealNumber}
+      onChange={event => formik.setFieldValue('sealNumber', (event.target as HTMLInputElement).value)}
+      error={!!formik.errors.sealNumber}
+      helperText={formik.errors.sealNumber as string}
+    />,
+    <Button
+      type='button'
+      variant='outlined'
+      label='+ ADAUGǍ ALT SIGILIU'
+    />,
+    <Button
+      type='button'
+      variant='contained'
+      label='PASUL URMǍTOR'
+      onClick={() => formik.handleSubmit()}
+    />
+  ]
 
-            <Grid container style={{ marginTop: '20px' }} spacing={2}>
-              <Grid item xs={12} style={{ textAlign: 'center' }}>
-                <Button
-                  type='button'
-                  variant='contained'
-                  label='PASUL URMǍTOR'
-                  onClick={() => formik.handleSubmit()}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Container>
+  return (
+    <Grid
+      gridContainerStyle={{ marginTop: '20px' }}
+      maxWidth='xs'
+      items={items}
+      itemsPerRow={1}
+    />
   )
 }
 

@@ -1,6 +1,5 @@
-import { Grid, Container, Box } from '@mui/material'
-import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import cs from '../Common.modules.scss'
+import { Grid } from '../../Common/Grid'
+import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
@@ -32,61 +31,50 @@ const PackagingInventoryUpdate = () => {
   })
 
   return (
-    <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader title='ACTUALIZARE INVENTAR AMBALAJE' />
-      <Grid container spacing={2} className={cs.wrapper}>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Input
-                type='select'
-                label='Tip suport'
-                variant='standard'
-                width='100%'
-                value={formik.values.supportType}
-                onChange={event => formik.setFieldValue('supportType', (event.target as HTMLInputElement).value)}
-                error={!!formik.errors.supportType}
-                helperText={formik.errors.supportType as string}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Input
-                type='number'
-                label='Calitativi'
-                variant='standard'
-                width='100%'
-                value={formik.values.quality}
-                onChange={event => formik.setFieldValue('quality', (event.target as HTMLInputElement).value)}
-                error={!!formik.errors.quality}
-                helperText={formik.errors.quality as string}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Input
-                type='number'
-                label='Defecți'
-                variant='standard'
-                width='100%'
-                value={formik.values.defective}
-                onChange={event => formik.setFieldValue('defective', (event.target as HTMLInputElement).value)}
-                error={!!formik.errors.defective}
-                helperText={formik.errors.defective as string}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={cs.buttonWrapper}>
-                <Button
-                  type='button'
-                  variant='contained'
-                  label='CONFIRMǍ'
-                  onClick={() => formik.handleSubmit()}
-                />
-              </Box>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Container>
+    <Grid
+      gridContainerStyle={{ marginTop: '20px' }}
+      maxWidth='xs'
+      items={[
+        <TitleHeader title='ACTUALIZARE INVENTAR AMBALAJE' />,
+        <Input
+          type='select'
+          label='Tip suport'
+          variant='standard'
+          width='100%'
+          value={formik.values.supportType}
+          onChange={event => formik.setFieldValue('supportType', (event.target as HTMLInputElement).value)}
+          error={!!formik.errors.supportType}
+          helperText={formik.errors.supportType as string}
+        />,
+        <Input
+          type='number'
+          label='Calitativi'
+          variant='standard'
+          width='100%'
+          value={formik.values.quality}
+          onChange={event => formik.setFieldValue('quality', (event.target as HTMLInputElement).value)}
+          error={!!formik.errors.quality}
+          helperText={formik.errors.quality as string}
+        />,
+        <Input
+          type='number'
+          label='Defecți'
+          variant='standard'
+          width='100%'
+          value={formik.values.defective}
+          onChange={event => formik.setFieldValue('defective', (event.target as HTMLInputElement).value)}
+          error={!!formik.errors.defective}
+          helperText={formik.errors.defective as string}
+        />,
+        <Button
+          type='button'
+          variant='contained'
+          label='CONFIRMǍ'
+          onClick={() => formik.handleSubmit()}
+        />
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 

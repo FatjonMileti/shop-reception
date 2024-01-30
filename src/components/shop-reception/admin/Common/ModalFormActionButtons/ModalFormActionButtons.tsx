@@ -1,4 +1,4 @@
-import { Grid } from '../Grid'
+import { Grid } from '../../../Common/Grid'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import React from 'react'
 

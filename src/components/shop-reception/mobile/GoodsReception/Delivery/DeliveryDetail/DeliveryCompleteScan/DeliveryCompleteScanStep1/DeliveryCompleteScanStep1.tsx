@@ -1,7 +1,6 @@
-import cs from '../../../../../Common.modules.scss'
 import { TitleHeader } from '../../../../../TitleHeader'
 import { Button, Divider, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { Container, Grid, Paper } from '@mui/material'
+import { Grid } from '../../../../../../Common/Grid'
 import { URLS } from '../../../../../constants'
 import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
 import { useMemo } from 'react'
@@ -23,71 +22,59 @@ const DeliveryCompleteScanStep1 = () => {
   })
 
   return (
-    <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader title='VALIDARE LIVRARE SCANARE INTEGRALǍ' />
-      <form>
-        <Grid container spacing={2} className={cs.wrapper}>
-          <Grid item xs={12}>
-            <Paper elevation={3} style={{ margin: '10px', padding: '20px' }}>
-              <Typography variant='medium' component='p'>SCANARE INTEGRALǍ</Typography>
-              <Typography variant='medium' component='p'>Număr înmatriculare: BA32489</Typography>
-              <Typography variant='medium' component='p'>BL: 545465</Typography>
-              <Typography variant='medium' component='p'>Suporți verificați: 0 / 4</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={10}>
-            <Input
-              type='text'
-              label='Cod Suport'
-              variant='standard'
-              width='100%'
-              value={formik.values.supportCode}
-              onChange={event => formik.setFieldValue('supportCode', (event.target as HTMLInputElement).value)}
-              error={!!formik.errors.supportCode}
-              helperText={formik.errors.supportCode as string}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <IconButton>
-              <ManageSearchIcon />
-            </IconButton>
-          </Grid>
-          <Grid item xs={12}>
-            <Divider>SAU</Divider>
-          </Grid>
-          <Grid item xs={12} style={{ marginTop: '20px' }}>
-            <Grid container alignItems='center' justifyContent='center'>
-              <Button
-                type='button'
-                variant='contained'
-                label='SCANEAZǍ SUPORT'
-                onClick={null}
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container alignItems='center' justifyContent='center'>
-              <Button
-                type='button'
-                variant='contained'
-                label='FINALIZEAZĂ'
-                onClick={null}
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container alignItems='center' justifyContent='center'>
-              <Button
-                type='button'
-                variant='contained'
-                label='SUMAR BL'
-                onClick={() => formik.handleSubmit()}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      </form>
-    </Container>
+    <Grid
+      gridContainerStyle={{ marginTop: '20px' }}
+      maxWidth='xs'
+      items={[
+        <TitleHeader title='VALIDARE LIVRARE SCANARE INTEGRALǍ' />,
+        <Grid
+          hasPaper={true}
+          spacing={1}
+          items={[
+            <Typography variant='medium' component='p'>SCANARE INTEGRALǍ</Typography>,
+            <Typography variant='medium' component='p'>Număr înmatriculare: BA32489</Typography>,
+            <Typography variant='medium' component='p'>BL: 545465</Typography>,
+            <Typography variant='medium' component='p'>Suporți verificați: 0 / 4</Typography>
+          ]}
+          itemsPerRow={1}
+        />,
+        <>
+          <Input
+            type='text'
+            label='Cod Suport'
+            variant='standard'
+            width='100%'
+            value={formik.values.supportCode}
+            onChange={event => formik.setFieldValue('supportCode', (event.target as HTMLInputElement).value)}
+            error={!!formik.errors.supportCode}
+            helperText={formik.errors.supportCode as string}
+          />
+          <IconButton>
+            <ManageSearchIcon />
+          </IconButton>
+        </>,
+        <Divider>SAU</Divider>,
+        <Button
+          type='button'
+          variant='contained'
+          label='SCANEAZǍ SUPORT'
+          onClick={null}
+        />,
+        <Button
+          type='button'
+          variant='contained'
+          label='FINALIZEAZĂ'
+          onClick={null}
+        />,
+        <Button
+          type='button'
+          variant='contained'
+          label='SUMAR BL'
+          onClick={() => formik.handleSubmit()}
+        />
+      ]}
+      itemsPerRow={1}
+    />
   )
 }
 export default DeliveryCompleteScanStep1

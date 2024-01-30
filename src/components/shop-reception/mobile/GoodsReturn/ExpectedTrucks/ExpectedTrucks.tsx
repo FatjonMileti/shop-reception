@@ -1,6 +1,5 @@
-import { Grid, Container } from '@mui/material'
-import { Button, Divider, Input } from '@fullscreendigital/carrefour-dex-fe'
-import cs from '../../Common.modules.scss'
+import { Grid } from '../../../Common/Grid'
+import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import useRoles from '../../useRoles'
 import { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
@@ -34,53 +33,50 @@ const ExpectedTrucks = () => {
     }
   })
 
+  let items = [
+    <TitleHeader title='CAMIOANE AȘTEPTATE' />,
+    <Input
+      type='select'
+      label='SELECTEAZǍ CAMION'
+      variant='standard'
+      width='100%'
+      value={formik.values.truck}
+      onChange={event => formik.setFieldValue('truck', (event.target as HTMLInputElement).value)}
+      error={!!formik.errors.truck}
+      helperText={formik.errors.truck as string}
+    />,
+    <Button
+      type='button'
+      variant='contained'
+      label='CONFIRMĂ CAMION'
+      style={{ width: '100%' }}
+      onClick={() => {
+        formik.handleSubmit()
+      }}
+    />
+  ]
+
+  if (isShopUser || isHubUser) {
+    items.push(
+      <Button
+        type='button'
+        variant='contained'
+        label='ADAUGǍ CAMION'
+        style={{ width: '100%' }}
+        onClick={() => {
+          navigate(URLS.AUTH_ADD_TRUCK)
+        }}
+      />
+    )
+  }
+
   return (
-    <Container component='main' maxWidth='xs' className={cs.container}>
-      <TitleHeader title='CAMIOANE AȘTEPTATE' />
-      <Grid container spacing={2} className={cs.wrapper}>
-        <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Input
-                type='select'
-                label='SELECTEAZǍ CAMION'
-                variant='standard'
-                width='100%'
-                value={formik.values.truck}
-                onChange={event => formik.setFieldValue('truck', (event.target as HTMLInputElement).value)}
-                error={!!formik.errors.truck}
-                helperText={formik.errors.truck as string}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='CONFIRMĂ CAMION'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  formik.handleSubmit()
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Divider>SAU</Divider>
-            </Grid>
-            {(isShopUser || isHubUser) && <Grid item xs={12}>
-              <Button
-                type='button'
-                variant='contained'
-                label='ADAUGǍ CAMION'
-                style={{ width: '100%' }}
-                onClick={() => {
-                  navigate(URLS.AUTH_ADD_TRUCK)
-                }}
-              />
-            </Grid>}
-          </Grid>
-        </Grid>
-      </Grid>
-    </Container>
+    <Grid
+      gridContainerStyle={{ marginTop: '20px' }}
+      maxWidth='xs'
+      items={items}
+      itemsPerRow={1}
+    />
   )
 }
 

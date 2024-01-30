@@ -1,6 +1,6 @@
 import { ChangeEvent, useMemo, useState } from 'react'
 import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '../../../Common/Grid'
+import { Grid } from '../../../../Common/Grid'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'

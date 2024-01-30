@@ -1,4 +1,4 @@
-import { Grid } from '../../Common/Grid'
+import { Grid } from '../../../Common/Grid'
 import { useNavigate } from 'react-router-dom'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
