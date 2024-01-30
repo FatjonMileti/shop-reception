@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
-import { columns, roles } from './helpers'
+import { columns } from './helpers'
 import { Autocomplete, FilterDataSelect, Input } from '@fullscreendigital/carrefour-dex-fe'
 import {
   getDepartmentsOptions,
@@ -15,6 +15,7 @@ import {
 } from 'components/volumetry/api'
 import { handleQueryError } from 'components/volumetry/utils'
 import { useNotification, usePermissions } from 'hooks'
+import { roles } from '../helpers'
 
 const EmployeesTab = () => {
   const [locationsFilterValue, setLocationsFilterValue] = useState<ValueLabelInterface>(null)
