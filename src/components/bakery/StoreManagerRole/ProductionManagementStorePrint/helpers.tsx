@@ -7,46 +7,48 @@ export const columns = [
     field: 'productName',
     align: 'left',
     type: 'string',
-    width: '200px'
+    width: '60px',
   },
   {
     title: 'Cod METI',
     field: 'productMetiCode',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '30px'
   },
   {
     title: 'Familie',
     field: 'familyName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '60px'
   },
   {
     title: 'Subfamilie',
     field: 'subfamily',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '18px'
   },
   {
     title: 'MV',
     field: 'average',
     align: 'left',
-    minWidth: '70px',
+    width: '18px',
     type: 'string'
   },
   {
     title: 'CP',
     field: 'calculation',
     align: 'left',
-    minWidth: '70px',
+    width: '18px',
     type: 'string'
   },
   {
     title: 'CM',
     field: 'quantityToProduce',
     align: 'left',
-    minWidth: '70px',
+    width: '18px',
     type: 'string'
   },
 
@@ -56,7 +58,7 @@ export const columns = [
     align: 'left',
     isGroup: true,
     type: 'string',
-    minWidth: '70px'
+    width: '18px',
   },
   {
     title: 'CP',
@@ -64,7 +66,7 @@ export const columns = [
     align: 'left',
     isGroup: true,
     type: 'string',
-    minWidth: '70px'
+    width: '18px',
   },
   {
     title: 'CM',
@@ -72,14 +74,14 @@ export const columns = [
     align: 'left',
     isGroup: true,
     type: 'string',
-    minWidth: '70px'
+    width: '18px',
   },
-
   {
     title: 'Gama produs',
     field: 'clusterMandatory',
     align: 'left',
     type: 'string',
+    width: '18px',
     render: (row: any) => (
       <Box>
         <BooleanIcon
@@ -96,7 +98,7 @@ export const columns = [
     field: 'inPromotion',
     align: 'left',
     type: 'boolean',
-    minWidth: '100px',
+    width: '18px',
     render: (row: any) => (
       <Box>
         <BooleanIcon
@@ -113,6 +115,7 @@ export const columns = [
     field: 'newProduct',
     align: 'left',
     type: 'boolean',
+    width: '18px',
     render: (row: any) => (
       <Box>
         <BooleanIcon value={row.newProduct} icon={'Flag'} onSuccess="#33691E" onFailure="#E5E5E5" />
@@ -124,6 +127,6 @@ export const columns = [
     field: 'username',
     align: 'left',
     type: 'string',
-    minWidth: '200px'
+    minWidth: '40px'
   }
 ]

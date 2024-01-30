@@ -155,6 +155,7 @@ const PrintPreviewTable = props => {
       <Box className={s.tableContainer}>
         <GeneralTable
           {...rest}
+          classes={{ headerClass: s.printPreviewHeader, rowClass: s.printPreviewRow}}
           columns={dynamicColumns}
           rows={dynamicItems}
           isLoading={isLoading}
