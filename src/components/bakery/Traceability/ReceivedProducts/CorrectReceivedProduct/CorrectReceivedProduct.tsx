@@ -121,7 +121,7 @@ export const CorrectReceivedProduct = ({
       formData.append('dto',
         new Blob([JSON.stringify(data)], { type: 'application/json' })
       )
-      formData.append('fileObject', form.values.picture)
+      formData.append('fileObject', form.values.picture || null)
 
       await makeCorePutRequest(`/bakery/batch/correction/${batchId}`, formData)
     },
