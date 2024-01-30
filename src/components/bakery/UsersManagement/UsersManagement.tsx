@@ -1,14 +1,12 @@
 import { Box } from '@mui/material'
 import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useNotification } from 'hooks'
 import { UsersManagementItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { IconCell } from 'components/core-ui/IconCell'
-import { MultivalueCell } from 'components/core-ui/MultivalueCell'
 import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { EditUser } from './EditUser'
@@ -85,7 +83,7 @@ const UsersManagement = () => {
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[
             { 
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',

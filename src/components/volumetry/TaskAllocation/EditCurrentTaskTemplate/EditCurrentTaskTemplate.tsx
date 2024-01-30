@@ -9,19 +9,13 @@ import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { toCurrentTaskPayload } from './serializers'
 import { handleQueryError } from 'components/volumetry/utils'
-
-interface EditCurrentTaskTemplateProps {
-  isModalOpen: boolean
-  closeModal: Function
-  editItem: any // TODO: To add interface when db schema is defined
-  setShouldRefreshData: Function
-}
+import { EditCurrentTaskTemplateProps } from '../TaskAllocationDefinitions'
 
 const validationSchema = yup.object({
   id: yup.string().nonNullable(),
-  volume: yup.string().nonNullable()
+  workload: yup.number().required('Acest camp este obligatoriu.'),
+  allocatedWorkersNumber: yup.number()
 })
 
 const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
@@ -30,7 +24,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
   const { showNotification } = useNotification()
 
   const editCurrentTemplate = async values => {
-    await makeCorePutRequest(`/volumetry/task/${editItem?.id}`, values)
+    await makeCorePutRequest(`/volumetry/work-volumes/${editItem?.taskTemplateId}`, values)
   }
 
   const { isLoading, mutate } = useMutation(editCurrentTemplate, {
@@ -50,12 +44,12 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      id: editItem?.id || 0,
-      totalVolume: editItem?.volume?.total || ''
+      workload: editItem.totalWorkload,
+      allocatedWorkersNumber: editItem.allocatedWorkers
     },
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      mutate(toCurrentTaskPayload(values))
+      mutate(values)
     }
   })
 
@@ -67,19 +61,36 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
         )}
 
         <Grid xs={12} item>
-          <FormInfoItems items={[{ label: 'Nume:', name: editItem['taskName'] }]} />
+          <FormInfoItems items={[{ label: 'Nume:', name: editItem.taskName }]} />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Input
+            type="number"
+            name="workload"
+            label="Volum"
+            variant="outlined"
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue('workload', event.target.value)
+            }
+            value={formik.values.workload}
+            style={{ width: '100%' }}
+            error={!!formik.errors.workload}
+            helperText={formik.errors.workload as string}
+            required
+          />
         </Grid>
 
         <Grid xs={12} item>
           <Input
             type="text"
-            name="totalVolume"
-            label="Volum"
+            name="allocatedWorkersNumber"
+            label="Estimare alocare numar angajati"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('totalVolume', event.target.value)
+              formik.setFieldValue('allocatedWorkersNumber', event.target.value)
             }
-            value={formik.values.totalVolume}
+            value={formik.values.allocatedWorkersNumber}
             style={{ width: '100%' }}
           />
         </Grid>

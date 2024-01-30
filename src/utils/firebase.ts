@@ -24,14 +24,15 @@ const messaging = (async () => {
     console.log(err)
     return null
   }
-})()
+})
 
 export const getFBToken = async setToken => {
-  return getToken(await messaging, {
+  return getToken(await messaging(), {
     vapidKey: process.env.FIREBASE_VAPID_KEY
   })
     .then(currentToken => {
       if (currentToken) {
+        console.log('Firebase token: ', currentToken)
         setToken(currentToken)
         // Track the token -> client mapping, by sending to backend server
         // show on the UI that permission is secured
@@ -55,7 +56,7 @@ export const onMessageListener = async () => {
     const isSupportedBrowser = await isSupported()
     if (isSupportedBrowser) {
       return new Promise(async resolve => {
-        onMessage(await messaging, payload => {
+        onMessage(await messaging(), payload => {
           console.log('payload', payload)
           return resolve(payload)
         })

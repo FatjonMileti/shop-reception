@@ -43,12 +43,13 @@ VALUES
     -- Volumetry
     (7, 'Administrare Angajati', 'EmployeeManagement', '/employeeManagement', true, 4),
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
+    (9, 'Rapoarte', 'ReportsVolumetry', 'reports', true, 4),
     -- Shop Reception
-    (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5),
+    (10, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5),
     -- Bakery p2
-    (10, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
+    (11, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
     -- Shop Reception
-    (11, 'Mobile', 'Reception', '/mobile', true, 5);
+    (12, 'Mobile', 'Reception', '/mobile', true, 5);
 
 
 -- activity with submodule id
@@ -103,16 +104,19 @@ VALUES
     (42, 'Management Angajati', 'EmployeeManagement', null, true, 7),
     (43, 'Management task template-uri', 'ManagementTasks', null, true, 8),
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
-    (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 7),
+    (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 9),
+    (46, 'Raport norme', 'ReportsVolumetry', null, true, 9),
+    (47, 'Task-uri alocate', 'AssignTasks', null, true, 8),
+    (48, 'Status Angajati', 'EmployeeManagement', null, true, 8),
     -- Shop Reception
-    (46, 'Admin magazin', 'UsersManagement', null, true, 9),
+    (49, 'Admin magazin', 'UsersManagement', null, true, 10);
     -- Bakery TRACEABILITY OP
-    (47, 'Management produse', 'ProductManagementTO', null, true, 10),
-    (48, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
-    (49, 'Trasabilitate congelate', 'FrozenTraceabilityTO', null, true, 10),
-    (50, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', null, true, 10),
-    (51, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
-    (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10),
+    -- (47, 'Management produse', 'ProductManagementTO', null, true, 10),
+    -- (48, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
+    -- (49, 'Trasabilitate congelate', 'FrozenTraceabilityTO', null, true, 10),
+    -- (50, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', null, true, 10),
+    -- (51, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
+    -- (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10);
     -- Bakery ADMIN p2
     (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10),
     -- Shop Reception
@@ -190,23 +194,26 @@ VALUES
     (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
+    (62, 'Raport norme', '', '/volumetry/reports/dailyNorms', true, 46, true),
+    (63, 'Task-uri alocate', '', '/volumetry/tasksManagement/assignedTasks', true, 47, true),
+    (64, 'Status angajati', '', '/volumetry/employee/allocatedEmployeesStatus', true, 48, true),
     -- Shop Reception
-    (62, 'Admin', '', '/shop-reception', true, 46, true),
+    (65, 'Screen 1', '', '/url', true, 49, true);
     -- Bakery TRACEABILITY-OPERATOR
-    (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
-    (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
-    (65, 'Trasabilitate congelate', 'FrozenTraceabilityTO', '/bakery/traceabilityOperator/frozen-traceability', true, 49, true),
-    (66, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', '/bakery/traceabilityOperator/own-production-traceability', true, 50, true),
-    (67, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report', true, 51, true),
-    (68, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report-print', true, 51, false),
-    (69, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 52, true),
-    (70, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 52, false),
+    -- (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
+    -- (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
+    -- (65, 'Trasabilitate congelate', 'FrozenTraceabilityTO', '/bakery/traceabilityOperator/frozen-traceability', true, 49, true),
+    -- (66, 'Trasabilitate productie proprie', 'OwnProductionTraceabilityTO', '/bakery/traceabilityOperator/own-production-traceability', true, 50, true),
+    -- (67, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report', true, 51, true),
+    -- (68, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report-print', true, 51, false),
+    -- (69, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 52, true),
+    -- (70, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 52, false);
     -- Bakery ADMIN p2
-    (71, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 53, true);
+    -- (71, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 53, true);
 
--- UI Schema with activity id and screen id
+-- roles
 INSERT INTO
-    "dex-designer".ui_schema (id, activity_id, role_id, screen_id, json_schema)
+	"dex-designer".roles (id, role_name)
 VALUES
     -- Governance
     (1, 5, null, 1, '{ "UIComponent": "Box", "className": "", "children": [ { "UIComponent": "FiltersWithResultsTable", "id": "the-filters-wrt", "filters": [ { "UIComponent": "AsyncAutocomplete", "type": "autocomplete", "disableClearable": true, "action": { "url": "/governance/domains", "type": "GET", "valueKey": "domain", "labelKey": "domain" }, "variant": "standard", "name": "teamMember.domain", "label": "Domain", "payloadKey": "teamMember.domain", "hasDefaultFirstValue": true } ], "table": { "UIComponent": "Table", "action": { "url": "/governance/teamTimeOff", "type": "GET" }, "hideCheckbox": true, "orderBy": "teamMember.name", "order": "asc", "columns": [ { "title": "Person", "field": "teamMember.name", "align": "left", "type": "string" }, { "title": "Day-Off Type", "field": "dayOffType", "align": "left", "type": "string" }, { "title": "Start Date", "field": "startDate", "align": "left", "collapsible": true, "type": "date" }, { "title": "End Date", "field": "endDate", "align": "left", "collapsible": true, "type": "date" }, { "title": "Hours", "field": "numberOfHours", "align": "left", "collapsible": true, "type": "number" } ], "tableActions": { "newAction": { "allowedRoles": [ "GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN", "GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL", "GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER" ], "modalTitle": "New Time Off", "formItems": [ { "UIComponent": "AsyncAutocomplete", "type": "autocomplete", "action": { "url": "/governance/teamMembers", "type": "GET", "valueKey": "id", "labelKey": "name", "filterQueryKey": "domain", "localQueryKey": "teamMember.domain" }, "variant": "standard", "name": "teamMember.name", "width": "100%", "label": "Person name", "payloadKey": "teamMember.id", "required": true }, { "UIComponent": "Input", "type": "select", "values": [ { "value": "Public Holiday", "label": "Public Holiday" }, { "value": "Day-Off", "label": "Day-Off" }, { "value": "Team Event", "label": "Team Event" } ], "name": "dayOffType", "variant": "standard", "width": "100%", "label": "Type of day-off", "required": true }, { "UIComponent": "DatePicker", "type": "date", "name": "startDate", "style": { "width": "100%" }, "label": "Start Date", "variant": "standard", "defaultValue": "#CURRENT_DATE", "required": true }, { "UIComponent": "DatePicker", "type": "date", "name": "endDate", "style": { "width": "100%" }, "label": "End Date", "variant": "standard", "defaultValue": "#CURRENT_DATE", "required": true }, { "UIComponent": "Input", "type": "number", "variant": "standard", "name": "numberOfHours", "width": "100%", "label": "Number of hours", "id": "hours", "dependencies": { "conditions": { "operator": "equal", "value": true, "params": "startDate|endDate" }, "UIAttributes": { "onSuccess": { "inputProps": { "hidden": false } }, "onFailure": { "inputProps": { "hidden": true } } } } } ], "formItemsPerRow": 1, "formButtons": [ { "UIComponent": "Button", "label": "Cancel", "variant": "outlined", "isCancelButton": true }, { "UIComponent": "Button", "label": "Save", "variant": "contained", "isSaveButton": true } ], "formAction": { "type": "POST", "url": "/governance/teamTimeOff" } }, "filters": [ { "UIComponent": "Input", "type": "text", "name": "teamMember.name", "label": "Team Member", "variant": "standard" } ] }, "tableRowActions": { "editAction": { "updateUrl": "/governance/teamTimeOff/:id", "updateUrlType": "PUT", "getUrl": "/governance/teamTimeOff", "getUrlType": "GET", "allowedRoles": [ "GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN", "GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL", "GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER" ], "formInfoItems": [ { "name": "teamMember.name", "label": "Person name" } ], "formItems": [ { "UIComponent": "Input", "type": "select", "values": [ { "value": "Public Holiday", "label": "Public Holiday" }, { "value": "Day-Off", "label": "Day-Off" }, { "value": "Team Event", "label": "Team Event" } ], "name": "dayOffType", "variant": "standard", "width": "100%", "label": "Type of day-off", "required": true }, { "UIComponent": "DatePicker", "type": "date", "name": "startDate", "style": { "width": "100%" }, "label": "Start Date", "variant": "standard", "required": true }, { "UIComponent": "DatePicker", "type": "date", "name": "endDate", "style": { "width": "100%" }, "label": "End Date", "variant": "standard", "required": true }, { "UIComponent": "Input", "type": "number", "variant": "standard", "name": "numberOfHours", "width": "100%", "label": "Number of hours", "id": "hours", "dependencies": { "conditions": { "operator": "equal", "value": true, "params": "startDate|endDate" }, "UIAttributes": { "onSuccess": { "inputProps": { "hidden": false } }, "onFailure": { "inputProps": { "hidden": true } } } } } ], "formItemsPerRow": 1, "formButtons": [ { "UIComponent": "Button", "label": "Cancel", "variant": "outlined", "isCancelButton": true }, { "UIComponent": "Button", "label": "Save", "variant": "contained", "isSaveButton": true } ] }, "deleteAction": { "url": "/governance/teamTimeOff", "allowedRoles": [ "GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN", "GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL", "GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER" ], "confirmText": "Are you sure you want to delete this entry?", "formButtons": [ { "UIComponent": "Button", "label": "Cancel", "variant": "outlined", "isCancelButton": true }, { "UIComponent": "Button", "label": "Delete", "variant": "contained", "isDeleteButton": true } ] } } } } ] }'),
@@ -290,12 +297,13 @@ values
   (9, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER'),
   (10, 'GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER'),
   (12, 'GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY'),
-  -- Supply OMNI
-  (11, 'GG_RO_HQ_IT-C4ASSIST'),
   -- Volumetry
   (13, 'GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR'),
   -- Shop Reception
   (14, 'GG_RO_HQ_IT_DEX_SHOP_RECEPTION');
+--   TODO
+  -- Supply OMNI
+  (11, 'GG_RO_HQ_IT-C4ASSIST');
 
 
 -- roles_activities
@@ -308,12 +316,12 @@ VALUES
     -- GG_RO_HQ_IT_DEX_GOV_DOMAIN_TL
     (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6),
     -- GG_RO_HQ_IT_DEX_GOV_IT_PM
-    (3, 1), (3, 2), (3, 3), (3, 4), (3, 6),
+    (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (3, 6),
     -- GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-    (4, 2), (4, 4), (4, 6),
+    (4, 1), (4, 2), (4,3), (4, 4), (4, 6),
     -- Bakery
     -- GG_RO_HQ_IT_DEX_BAKERY_ADMIN
-    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16), (5, 53),
+    (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16),
     -- GG_RO_HQ_IT_DEX_BAKERY_STORE
     (6, 27), (6, 28), (6, 29), (6, 30), (6, 31),
     -- GG_RO_HQ_IT_DEX_BAKERY_REGION
@@ -325,25 +333,39 @@ VALUES
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER
     (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY
-    (12, 47), (12, 48), (12, 49), (12, 50), (12, 51), (12, 52),
+    -- (12, 47), (12, 48), (12, 49), (12, 50), (12, 51), (12, 52),
     -- Supply OMNI
     -- GG_RO_HQ_IT-C4ASSIST
     (11, 37), (11, 38), (11, 39), (11, 40), (11, 41),
     -- Volumetry
-    -- GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR
-    (13, 42),
-    (13, 43),
-    (13, 44),
-    (13, 45),
+    -- VOLUMETRY_TASK_ALLOCATOR
+    (100, 42),
+    (100, 44),
+    (100, 43),  -- temporary let this role access the task templates activity
+    -- (100, 45),
+    (100, 46),
+    (100, 48),
+    -- VOLUMETRY_WORKER
+    (101, 47),
+    -- VOLUMETRY_REGION_ADMIN
+    (102, 42),
+    (102, 44),
+    -- (102, 45),
+    -- VOLUMETRY_STORE_ADMIN
+    (103, 42),
+    (103, 44),
+    -- (103, 45),
+    -- VOLUMETRY_TEMPLATE_ADMIN
+    (104, 43);
     -- Shop Reception
     (14, 46);
 
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
-    -- (1, 46);
+    -- (1, 47);
 
 
 -- reset sequences
-SELECT setval('"dex-designer".seq_id_roles', 100, true);
+SELECT setval('"dex-designer".seq_id_roles', 200, true);
 SELECT setval('"dex-designer".seq_id_ui_schema', 100, true);
 SELECT setval('"dex-designer".seq_id_screen', 100, true);
 SELECT setval('"dex-designer".seq_id_activity', 100, true);

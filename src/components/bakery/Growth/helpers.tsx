@@ -30,7 +30,7 @@ export const getValidationSchema = () => Yup.object({
 export const getInitialValues = editItem => ({
     id: editItem?.id ?? '',
     type: editItem?.type ?? '',
-    growth: editItem?.growth ?? '',
+    growth: editItem?.growth ?? 0,
     username: editItem?.username ?? '',
     lastChange: editItem?.lastChange ?? ''
 })

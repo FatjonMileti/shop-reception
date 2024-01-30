@@ -9,8 +9,8 @@ export const divisionTypes = [
 ]
 
 export const statuses = [
-    { label: "Active", value: "Active" },
-    { label: "Inactive", value: "Inactive" }
+    { label: "Activ", value: "Activ" },
+    { label: "Inactiv", value: "Inactiv" }
 ]
 
 export const columns = [
@@ -47,7 +47,7 @@ export const columns = [
     type: 'string',
     render: row => (
       <Box>
-        <IconCell value={row.enable ? 'active' : 'inactive'} />
+        <IconCell value={row.enable ? 'activ' : 'inactiv'} />
       </Box>
       ),
     collapsible: true
@@ -59,11 +59,13 @@ export const getValidationSchema = () => Yup.object({
     responsible: Yup.string().nonNullable(),
 })
 
-export const getInitialValues = editItem => ({
+export const getInitialValues = (editItem) => {
+  return {
     ...(editItem?.id ? { id: editItem?.id } : {}),
     name: editItem?.name ?? '',
     responsible: editItem?.responsible ?? '',
-    enable: editItem?.enable ? 'Active' : 'Inactive',
+    enable: editItem?.enable ? 'Activ' : 'Inactiv',
     divisionType: editItem?.divisionType ?? '',
-})
+} 
+}
 

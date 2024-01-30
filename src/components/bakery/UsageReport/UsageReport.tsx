@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Divider, Grid, Paper } from '@mui/material'
+import { Box, Divider, Grid, Paper } from '@mui/material'
 import s from '../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
@@ -8,13 +8,13 @@ import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { ColumnsComponent, formatAndDownloadResponse } from './helpers'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useQuery } from 'react-query'
-import { DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableRowItems } from './serializers'
 import dayjs from 'dayjs'
 import { FileDownloadOutlined } from '@mui/icons-material'
 import { toAsyncSelectOptions } from '../commonSerializers'
+import { formatPayloadDate, getCurrentDate, getPreviousDay } from 'utils/helpers'
 
 const UsageReport = () => {
   const [tableItems, setTableItems] = useState<UsageReportItem[]>([])
@@ -24,15 +24,15 @@ const UsageReport = () => {
   const { showNotification } = useNotification()
   
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([]);
-  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
-  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
+  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
+  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getCurrentDate()))
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
 
     const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+      { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
       ...(storeFilterValue && storeFilterValue.length > 0
         ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
         : []),
@@ -97,31 +97,36 @@ const UsageReport = () => {
     }
   }
 
-  const handleDownload = async () => {
-    const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
-      { name: 'store', value: storeFilterValue[0]?.value },
-    ].filter(
-      f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-    )
+  const downloadFileQuery = useQuery(
+    ['download'],
+    async () => {
+      const filters = [
+        { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+        { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
+        { name: 'store', value: storeFilterValue[0]?.value },
+      ].filter(
+        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+        )
 
-    const url = toTableGETUrl({
-      url: '/bakery/report/download/application',
-      filters: filters
-    })
-    try {
+      const url = toTableGETUrl({
+        url: '/bakery/report/download/application',
+        filters: filters
+      })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
-      formatAndDownloadResponse(response)
-    } catch (error) {
-      showNotification({
-        message: `Error while download file. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      return formatAndDownloadResponse(response)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
     }
-  }
+  )
 
   return (
     <div className={s.mainContainer}>
@@ -147,14 +152,15 @@ const UsageReport = () => {
             />
           </Grid>
           <Grid xs={12} md={3} item>
-            <AsyncAutocomplete
-              variant="outlined"
+            <FilterDataSelect
               name="store"
+              defaultSelectedData={storeFilterValue}
               label="Magazin"
-              value={storeFilterValue}
               options={stores}
-              onChange={(val) => handleFilterChange('store', val)}
-              multiple={true}
+              onSelect={val => handleFilterChange('store', val)}
+              placeholderButton="Selecteaza"
+              multiSelect={true}
+              showSearch
             />
           </Grid>          
         </Grid>
@@ -180,8 +186,9 @@ const UsageReport = () => {
           frequency="day"
           toolbarActions={[
             {
+              label: 'Descarca',
               icon: <FileDownloadOutlined />,
-              onClick: () => handleDownload()
+              onClick: () => downloadFileQuery.refetch()
             }
           ]}
           rowsPerPage={25}

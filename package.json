@@ -7,6 +7,7 @@
     "start": "webpack serve --node-env=development --env environment=development",
     "start:local": "webpack serve --node-env=development --env environment=local --port 3000",
     "start:dev": "webpack serve --node-env=development --env environment=development",
+    "start:https": "webpack serve --https --node-env=development --env environment=development",
     "build:dev": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=dev",
     "build:prod": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=production",
     "build:uat": "NODE_OPTIONS=--max_old_space_size=4096 webpack --node-env=production --env environment=uat",

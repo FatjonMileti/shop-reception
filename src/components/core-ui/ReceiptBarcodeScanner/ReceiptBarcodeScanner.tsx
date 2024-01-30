@@ -123,7 +123,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             direction={{ xs: 'column', sm: 'row' }}
             spacing={{ xs: 1, sm: 1, md: 1 }}
           >
-            {isUsingScandit && (
+            {/* {isUsingScandit && (
               <Box sx={!isXs ? {} : { width: '100%' }}>
                 <IconButton
                   sx={!isXs ? {} : { width: '100%' }}
@@ -133,10 +133,10 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
                   startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
                 />
               </Box>
-            )}
-            <Box sx={!isXs ? {} : { width: '100%' }}>
+            )} */}
+            <Box sx={isXs ? { width: '100%' } : { width: '50%' }}>
               <IconButton
-                sx={!isXs ? {} : { width: '100%' }}
+                sx={isXs ? { width: '100%' } : { width: '50%' }}
                 onClick={sendReceipt}
                 label="Continua"
                 variant="contained"

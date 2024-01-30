@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { ProductItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { editStoreValidationSchema, getInitialValues } from './helpers'
-import { ChangeEvent, useMemo } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
 interface EditProductProps {
@@ -22,6 +22,10 @@ interface EditProductProps {
 export const EditProduct: React.FC<EditProductProps> = props => {
   const { isModalOpen, closeModal, setShouldRefreshData, editProductId } = props
   const { showNotification } = useNotification()
+
+  useEffect(() => {
+    if(isModalOpen) productQuery.refetch()
+  }, [isModalOpen])
 
   const productQuery = useQuery(
     ['product-store', editProductId],
@@ -74,13 +78,17 @@ export const EditProduct: React.FC<EditProductProps> = props => {
     initialValues: initialValues,
     validationSchema: editStoreValidationSchema,
     onSubmit: async (values: any, { resetForm }) => {
-      editProductMutation.mutate(values)
+      const payload = {
+        ...values,
+        scheduleProduct: values.scheduleProduct === 'Da'
+    }
+      editProductMutation.mutate(payload)
       resetForm()
     }
   })
 
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'} modalWidth="50%">
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Editeaza'} modalWidth="50%">
       <Grid container rowSpacing={3.5}>
         {editProductMutation.isLoading || productQuery.isFetching ? (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -95,7 +103,7 @@ export const EditProduct: React.FC<EditProductProps> = props => {
                   },
                   {
                     label: 'Cluster:',
-                    name: (productQuery.data as ProductItem)?.cluster?.name
+                    name: (productQuery.data as ProductItem)?.clusterName
                   },
                   {
                     label: 'Cod METI:',
@@ -115,8 +123,8 @@ export const EditProduct: React.FC<EditProductProps> = props => {
                   width="100%"
                   value={formik.values.scheduleProduct}
                   values={[
-                    { value: 'true', label: 'Da' },
-                    { value: 'false', label: 'Nu' }
+                    { value: 'Da', label: 'Da' },
+                    { value: 'Nu', label: 'Nu' }
                   ]}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     formik.setFieldValue(
@@ -147,8 +155,8 @@ export const EditProduct: React.FC<EditProductProps> = props => {
             </Grid>
 
             <Grid xs={12} item className={s.modalButtons}>
-              <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-              <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+              <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+              <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
             </Grid>
           </>
         )}

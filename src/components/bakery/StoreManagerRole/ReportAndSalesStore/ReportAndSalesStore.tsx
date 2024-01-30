@@ -9,11 +9,10 @@ import { useNotification } from 'hooks'
 import { SubfamilyItem, TableItem, TableState } from '../ProductionManagementStore/interfaces'
 import React, { useState } from 'react'
 import { Autocomplete, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
-import dayjs from 'dayjs'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { DownloadOutlined } from '@mui/icons-material'
 import { columns } from './helpers'
-import { formatAndDownloadResponse, getCurrentDate } from 'utils/helpers'
+import { formatAndDownloadResponse, getPreviousDay } from 'utils/helpers'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 
@@ -34,9 +33,20 @@ const ReportAndSalesStore = () => {
   const { showNotification } = useNotification()
 
   const familiesQuery = useQuery(
-    ['cadentier-families-store'],
+    ['cadentier-families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
-      const result = await makeCoreGetRequest(`/bakery/store/families`)
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+      ?.value || []) as AutoCompleteValue[]
+
+      const result = await makeCoreGetRequest(
+        `/bakery/store/families`,
+        {
+          params: {
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+          },
+          paramsSerializer: { indexes: null }
+        }
+        )
 
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
@@ -116,7 +126,7 @@ const ReportAndSalesStore = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/store/cadentier',
+          url: '/bakery/store/sale/cadentier',
           tableFilters,
           page,
           rowsPerPage,
@@ -159,17 +169,17 @@ const ReportAndSalesStore = () => {
     }
   }
 
-  const currentDate = getCurrentDate()
+  const prevDay = getPreviousDay()
 
   const drawerFilters = [
     {
       name: 'date',
-      value: currentDate,
+      value: prevDay,
       filter: (
         <DatePicker
           label="Planificare pentru"
           variant="outlined"
-          value={currentDate}
+          value={prevDay}
           onChange={() => {}}
           required
         />
@@ -179,7 +189,7 @@ const ReportAndSalesStore = () => {
     },
     {
       name: 'family',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"
@@ -190,12 +200,11 @@ const ReportAndSalesStore = () => {
         />
       ),
       type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
+      label: 'Familie'
     },
     {
       name: 'subfamily',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"
@@ -248,6 +257,11 @@ const ReportAndSalesStore = () => {
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
+          filtersLabel="Filtreaza"
+          filtersButtonLabel="Filtreaza"
+          appliedFiltersLabel="Filtre"
+          cancelFiltersButtonLabel="Anuleaza"
+          applyFiltersButtonLabel="Aplica"
         />
       </Grid>
     </div>

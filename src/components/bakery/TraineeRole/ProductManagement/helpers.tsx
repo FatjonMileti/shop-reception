@@ -3,6 +3,7 @@ import { IconCell } from 'components/core-ui/IconCell'
 import { ImageCell } from 'components/core-ui/ImageCell'
 import { TableItem } from './interfaces'
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { DescriptionText } from 'components/core-ui/DescriptionText'
 
 export const columns = [
   {
@@ -73,7 +74,12 @@ export const columns = [
   {
     title: 'Metoda fabricatie',
     field: 'fabricationMethod',
-    align: 'left'
+    align: 'left',
+    render: row => (
+      <Box>
+        <DescriptionText value={row.fabricationMethod} />      
+      </Box>
+    )
   },
   {
     title: 'Cluster',
@@ -95,7 +101,7 @@ export const columns = [
     align: 'left',
     render: (row: TableItem) => (
       <Box>
-        <IconCell value={row.scheduleProduct ? 'active' : 'inactive'} />
+        <IconCell value={row.scheduleProduct ? 'activ' : 'inactiv'} />
       </Box>
     )
   },
@@ -110,7 +116,7 @@ export const columns = [
     align: 'left',
     render: (row: TableItem) => (
       <Box>
-        <IconCell value={row.newProduct ? 'active' : 'inactive'} />
+        <IconCell value={row.newProduct ? 'activ' : 'inactiv'} />
       </Box>
     )
   }
@@ -119,7 +125,7 @@ export const columns = [
 export const drawerFilters = (familiesQuery, subfamiliesQuery) => [
   {
     name: 'family',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
@@ -129,12 +135,11 @@ export const drawerFilters = (familiesQuery, subfamiliesQuery) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Familie',
-    clearFiltersOnChange: ['subfamily']
+    label: 'Familie'
   },
   {
     name: 'subfamily',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"

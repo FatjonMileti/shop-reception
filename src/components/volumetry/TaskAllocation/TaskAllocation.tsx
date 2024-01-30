@@ -1,5 +1,5 @@
-import { FilterDataSelect, ListTable } from '@fullscreendigital/carrefour-dex-fe'
-import { CircularProgress, Grid, debounce } from '@mui/material'
+import { FilterDataSelect, ListTable, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Box, CircularProgress, Grid, debounce } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { EditActionIcon } from 'icons'
 import { useEffect, useState } from 'react'
@@ -12,13 +12,14 @@ import s from './TaskAllocation.modules.scss'
 import TaskDescription from './TaskDescription'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
+import cn from 'classnames'
 
 const TaskAllocation = () => {
   const { showNotification } = useNotification()
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
   const [rows, setRows] = useState([]) // TODO: To add interface when db schema is defined
   const [tableItems, setTableItems] = useState([]) // TODO: To add interface when db schema is defined
-  const [totalCount, setTotalCount] = useState<number>(0)
+  const [totalCount, setTotalCount] = useState<number>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState(0) // TODO: To add interface when db schema is defined
@@ -27,7 +28,7 @@ const TaskAllocation = () => {
   const [tableState, setTableState] = useState(
     window.history.state.tableState || {
       page: 0,
-      rowsPerPage: 10,
+      rowsPerPage: 5,
       tableFilters: []
     }
   )
@@ -45,11 +46,26 @@ const TaskAllocation = () => {
 
   useEffect(() => {
     ;(async () => {
-      // TODO check when BE is done that the data is refreshed when changing allocations
       if (shouldRefreshAllocationsData) {
-        const details = await handleRemoteDetails(selectedRowId)
-        const newRows = rows.map(row => (row.id === selectedRowId ? { ...row, details } : row))
-        setRows(newRows)
+        const { page, rowsPerPage, tableFilters } = tableState
+        const response = await makeCoreGetRequest(
+          toTableGETUrl({
+            url: '/volumetry/tasks/aggregation/summary',
+            filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }],
+            tableFilters,
+            page,
+            rowsPerPage
+          })
+        )
+        setRows(
+          toListTableRows(
+            response.list,
+            shouldRefreshAllocationsData,
+            setShouldRefreshAllocationsData,
+            setSelectedRowId
+          )
+        )
+        setTableItems(response.list)
         setShouldRefreshAllocationsData(false)
       }
     })()
@@ -65,17 +81,19 @@ const TaskAllocation = () => {
 
   const handleRemoteDetails = async (rowId: string) => {
     setSelectedRowId(rowId)
-    const response = await makeCoreGetRequest(`/volumetry/task-allocation/details/${rowId}`)
+    const response = await makeCoreGetRequest(
+      `/volumetry/tasks?filterBy=taskTemplateId&filterValue=${rowId}`
+    )
     const data = await response
-    const item = tableItems.find(tableItem => tableItem.id === rowId)
+    const item = tableItems.find(tableItem => tableItem.taskTemplateId === rowId)
 
     return (
       <TaskDescription
         item={item}
-        employees={data.list}
+        employees={data}
         shouldRefreshData={shouldRefreshAllocationsData}
         setShouldRefreshData={setShouldRefreshAllocationsData}
-        setShouldRefreshTaskData={setShouldRefreshTaskData}
+        setSelectedRowId={setSelectedRowId}
       />
     )
   }
@@ -83,11 +101,12 @@ const TaskAllocation = () => {
   const fetchData = async (page, rowsPerPage, tableFilters) => {
     setIsLoading(true)
     setTableState({ page, rowsPerPage, tableFilters })
+
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/volumetry/task-allocation',
-          filters: [{ name: 'department', value: departmentFilterValue.value }],
+          url: '/volumetry/tasks/aggregation/summary',
+          filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }],
           tableFilters,
           page,
           rowsPerPage
@@ -99,7 +118,7 @@ const TaskAllocation = () => {
           response.list,
           shouldRefreshAllocationsData,
           setShouldRefreshAllocationsData,
-          setShouldRefreshTaskData
+          setSelectedRowId
         )
       )
       setTableItems(response.list)
@@ -148,24 +167,34 @@ const TaskAllocation = () => {
       </Grid>
       {departmentFilterValue && (
         <>
-          <ListTable
-            rows={rows}
-            handleRemoteData={debounce(fetchData, 500)}
-            handleRemoteDetails={handleRemoteDetails}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            rowActions={[
-              {
-                label: 'Editeaza',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#0970E6',
-                desktopIcon: <EditActionIcon />,
-                onClick: (e, rowId) => selectRow(tableItems.find(item => item.id === rowId))
-              }
-            ]}
-            rowActionsWidth="90px"
-          />
+          {totalCount === 0 && (
+            <Grid item sx={{ padding: '1rem 1.5rem' }}>
+              <Typography variant="regular">Nu exista date disponibile.</Typography>
+            </Grid>
+          )}
+          <Box className={cn({ [s.hidden]: totalCount === 0 })}>
+            <ListTable
+              rows={rows}
+              handleRemoteData={debounce(fetchData, 500)}
+              handleRemoteDetails={handleRemoteDetails}
+              isLoading={isLoading}
+              totalCount={totalCount}
+              rowActions={[
+                {
+                  label: 'Editeaza',
+                  labelColor: 'white',
+                  typographyVariant: 'medium',
+                  backgroundColor: '#0970E6',
+                  desktopIcon: <EditActionIcon />,
+                  onClick: (e, rowId) =>
+                    selectRow(tableItems.find(item => item.taskTemplateId === rowId))
+                }
+              ]}
+              rowActionsWidth="90px"
+              selectedRowId={selectedRowId}
+              shouldRefreshedSelectedRowDetails={shouldRefreshAllocationsData}
+            />
+          </Box>
           <EditCurrentTaskTemplate
             isModalOpen={isEditTaskModalOpen}
             closeModal={closeEditTaskModal}

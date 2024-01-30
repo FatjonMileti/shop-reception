@@ -110,6 +110,8 @@ const ProductsGrowthCoefficient = () => {
               label="Magazin"
               options={stores}
               onSelect={handleStoreFilterChange}
+              placeholderButton='Selecteaza'
+              showSearch
             />
           </Grid>
         </Grid>
@@ -131,7 +133,12 @@ const ProductsGrowthCoefficient = () => {
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
             filters={drawerFilters(familiesQuery)}
-          />
+            filtersLabel="Filtreaza"
+            filtersButtonLabel="Filtreaza"
+            appliedFiltersLabel="Filtre"
+            cancelFiltersButtonLabel="Anuleaza"
+            applyFiltersButtonLabel="Aplica"
+            />
         )}
       </Grid>
     </div>

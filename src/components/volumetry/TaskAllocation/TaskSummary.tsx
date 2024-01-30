@@ -2,29 +2,29 @@ import { Capsule } from 'components/core-ui/Capsule'
 import s from './TaskAllocation.modules.scss'
 import { Grid, Typography } from '@mui/material'
 
-const TaskSummary = item => {
+const TaskSummary = ({ item, hideDetails = false }) => {
   // TODO: To add type when db schema is defined
   const {
-    department,
+    rayonsOrDepartment,
     taskName,
-    estimateStartTime,
-    estimateEndTime,
-    prodStandardValue,
-    prodStandardUM,
-    priority,
+    recommendedInterval,
+    standardProductivity,
+    priorityId,
+    priorityValue,
     frequency,
-    volume,
-    assignedEmployee
-  } = item.item
-
-  const estimateTime = `${estimateStartTime} - ${estimateEndTime}`
-  const prodStandard = `${prodStandardValue} ${prodStandardUM.name}/${prodStandardUM.unit}`
+    allocatedWorkers,
+    totalWorkload,
+    completedWorkload,
+    inProgressWorkload,
+    remainingWorkload,
+    workloadMeasurementUnit
+  } = item
 
   return (
     <Grid container flexDirection="column">
       <Grid item>
         <Typography className={s.departmentName} fontWeight={700}>
-          {department.name}
+          {rayonsOrDepartment}
         </Typography>
       </Grid>
       <Grid item>
@@ -37,43 +37,47 @@ const TaskSummary = item => {
         <Grid item mt={1} mr={1}>
           <Capsule
             label="Prioritate"
-            value={priority}
-            valueColor={priority === 1 && '#D30D1F'}
-            labelColor={priority === 1 && 'rgba(211, 13, 31, 0.15)'}
+            value={priorityValue}
+            valueColor={priorityId === 1 && '#D30D1F'}
+            labelColor={priorityId === 1 && 'rgba(211, 13, 31, 0.15)'}
           />
         </Grid>
 
         <Grid item mt={1} mr={1}>
-          <Capsule label="Frecventa" value={frequency.name} />
+          <Capsule label="Frecventa" value={frequency} />
         </Grid>
 
         <Grid item mt={1} mr={1}>
-          <Capsule label="Interval recomandat" value={estimateTime} />
+          <Capsule label="Interval recomandat" value={recommendedInterval} />
         </Grid>
 
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Productivitate standard" value={prodStandard} />
-        </Grid>
+        {!hideDetails && (
+          <>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Productivitate standard" value={standardProductivity} />
+            </Grid>
 
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Volum total" value={volume.total} />
-        </Grid>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Volum efectuat" value={volume.performed} />
-        </Grid>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Volum in lucru" value={volume.inProgress} />
-        </Grid>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Volum ramas" value={volume.remaining} />
-        </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Volum total" value={totalWorkload} />
+            </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Volum efectuat" value={completedWorkload} />
+            </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Volum in lucru" value={inProgressWorkload} />
+            </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Volum ramas" value={remainingWorkload} />
+            </Grid>
 
-        <Grid item mt={1} mr={1}>
-          <Capsule label="UM" value={prodStandardUM.name} />
-        </Grid>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Angajari repartizati" value={assignedEmployee} />
-        </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="UM" value={workloadMeasurementUnit} />
+            </Grid>
+            <Grid item mt={1} mr={1}>
+              <Capsule label="Angajati repartizati" value={allocatedWorkers} />
+            </Grid>
+          </>
+        )}
       </Grid>
     </Grid>
   )
