@@ -44,21 +44,21 @@ const EmployeesStatus = () => {
           {
             fullName: 'Razvan Ionescu',
             currentStatus: 'Fara task',
-            todoTasks: 1,
+            todoTasks: true,
             inProgressTasks: 0,
             doneTasks: 1
           },
           {
             fullName: 'Ana Miu',
             currentStatus: 'Task in desfasurare',
-            todoTasks: 5,
+            todoTasks: true,
             inProgressTasks: 2,
             doneTasks: 2
           },
           {
             fullName: 'Adrian Ion Vasilescu',
             currentStatus: 'Task neinceput',
-            todoTasks: 1,
+            todoTasks: false,
             inProgressTasks: 0,
             doneTasks: 0
           }

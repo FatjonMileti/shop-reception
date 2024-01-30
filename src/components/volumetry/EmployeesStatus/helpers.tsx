@@ -1,3 +1,6 @@
+import { Box } from "@mui/material";
+import { IconCell } from "components/core-ui/IconCell";
+
 export const columns = [
   {
     title: 'Nume complet',
@@ -5,17 +8,17 @@ export const columns = [
     align: 'left'
   },
   {
-    title: 'Status curent',
-    field: 'currentStatus',
-    align: 'left'
+    title: 'Task in desfasurare',
+    field: 'todoTasks',
+    align: 'left',
+    render: row => (
+      <Box>
+        <IconCell value={row.todoTasks ? 'active' : 'inactive'} />
+      </Box>
+    )
   },
   {
     title: 'Nr. task-uri neincepute',
-    field: 'todoTasks',
-    align: 'left'
-  },
-  {
-    title: 'Nr. task-uri in desfasurare',
     field: 'inProgressTasks',
     align: 'left'
   },
