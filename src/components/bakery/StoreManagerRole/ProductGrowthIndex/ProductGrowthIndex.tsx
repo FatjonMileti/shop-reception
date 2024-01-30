@@ -5,7 +5,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { Grid } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { FamilyItem, ProductGrowthIndexItem } from '../interfaces'
 import { EditActionIcon } from 'icons'
@@ -13,7 +13,6 @@ import { toTableRowItems } from './serializers'
 import { EditProductGrowthIndex } from './EditProductGrowthIndex'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { useQuery } from 'react-query'
-import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
 const ProductGrowthIndex = () => {
   const { showNotification } = useNotification()
@@ -86,23 +85,6 @@ const ProductGrowthIndex = () => {
     }
   }
 
-  const drawerFilters = [
-    {
-      name: 'family',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Familie"
-          options={familiesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Familie'
-    }
-  ]
-
   return (
     <div className={s.mainContainer}>
       <Grid container>
@@ -137,7 +119,7 @@ const ProductGrowthIndex = () => {
             }
           ]}
           rowActionsWidth="130px"
-          filters={drawerFilters}
+          filters={drawerFilters(familiesQuery)}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
           filtersLabel="Filtreaza"
