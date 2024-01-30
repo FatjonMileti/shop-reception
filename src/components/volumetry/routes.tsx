@@ -5,7 +5,7 @@ import { EmployeeManagement } from './EmployeeManagement'
 import { TaskManagement } from './TaskManagement'
 import { TaskAllocation } from './TaskAllocation'
 import { NormsReport } from './NormsReport'
-import EvaluationReports from 'components/volumetry/EmployeeManagement/EvaluationReports/EvaluationReports'
+import { EvaluationReports } from './EvaluationReports'
 import { AssignedTasks } from './AssignedTasks'
 import { EmployeesStatus } from './EmployeesStatus'
 
