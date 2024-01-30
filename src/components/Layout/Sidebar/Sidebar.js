@@ -52,7 +52,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
 
   const navigate = useNavigate()
 
-  const auth = useAuth()
+  // const auth = useAuth()
 
   useEffect(() => {
     const handleOutsideClick = event => {

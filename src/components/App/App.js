@@ -29,6 +29,7 @@ import { useMerchandiseRoutes } from '../mobile/routes'
 import { useShopReceptionRoutes } from '../shop-reception/routes'
 import { getFBToken } from 'utils/firebase'
 import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -157,7 +158,15 @@ const App = () => {
   const shopReceptionRoutes = useShopReceptionRoutes(applicationPages)
 
   return (
-    <AuthProvider {...oidcConfig}>
+    // <AuthProvider {...oidcConfig}>
+    <SnackbarProvider
+      maxSnack={10}
+      persist
+      anchorOrigin={{
+        horizontal: 'right',
+        vertical: 'top'
+      }}
+    >
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme="light">
           {((isLoadingAppModules || !hasLoadedAppModules) && (
@@ -212,7 +221,8 @@ const App = () => {
 
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
-    </AuthProvider>
+    </SnackbarProvider>
+    // </AuthProvider>
   )
 }
 
