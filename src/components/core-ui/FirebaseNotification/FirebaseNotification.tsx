@@ -2,18 +2,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'configureStore'
 import { Box } from '@mui/material'
 import { useSnackbar } from 'notistack'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { CloseMenu } from 'icons'
 import { onMessageListener } from 'utils/firebase'
-import {
-  FirebaseNotificationActions,
-  FirebaseNotificationState
-} from 'reducers/firebaseNotificationSlice'
+import { FirebaseNotificationState } from 'reducers/firebaseNotificationSlice'
 
 const FirebaseNotification = () => {
-  const dispatch = useDispatch()
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+  const [newNotification, setNewNotification] = useState<any>()
+
+  const showFirebaseNotification = (notification: FirebaseNotificationState) => {
+    let notifications = JSON.parse(localStorage.getItem('notifications') || '[]')
+
+    notifications.push(notification)
+    localStorage.setItem('notifications', JSON.stringify(notifications))
+
+    setNewNotification(notification)
+  }
 
   onMessageListener()
     .then((payload: any) => {
@@ -21,32 +27,33 @@ const FirebaseNotification = () => {
         showFirebaseNotification({
           title: 'payload.data?.title',
           message: 'payload.data?.body',
-          link: 'payload.data?.route'
+          link: 'http://localhost:8081/test',
+          open: true,
+          type: 'info'
         })
       }
     })
     .catch(err => console.log('failed: ', err))
 
-  const showFirebaseNotification = (notification: FirebaseNotificationState) => {
+  const onClickNotification = (title: string) => {
     let notifications = JSON.parse(localStorage.getItem('notifications') || '[]')
-    notifications.push(notification)
-    localStorage.setItem('notifications', JSON.stringify(notifications))
 
-    dispatch(FirebaseNotificationActions.addNotification(notification))
-  }
+    const notification = notifications.find(
+      (item: FirebaseNotificationState) => item.title === title
+    )
 
-  const notification = useSelector((state: RootState) => state.firebaseNotification)
-
-  const clickNotification = () => {
     if (notification.link) {
       window.location.replace(notification.link)
     }
   }
 
-  const handleClose = (e, snackbarId, title) => {
-    e.stopPropagation()
+  const onCloseNotification = (e: any, snackbarId: string, title: string) => {
     let notifications = JSON.parse(localStorage.getItem('notifications') || '[]')
-    const index = notifications.findIndex(notification => notification.title === title)
+    e.stopPropagation()
+
+    const index = notifications.findIndex(
+      (notification: FirebaseNotificationState) => notification.title === title
+    )
 
     if (index !== -1) {
       notifications.splice(index, 1)
@@ -56,9 +63,9 @@ const FirebaseNotification = () => {
     closeSnackbar(snackbarId)
   }
 
-  const action = (snackbarId, title) => (
+  const action = (snackbarId: any, title: string) => (
     <div
-      onClick={clickNotification}
+      onClick={() => onClickNotification(title)}
       style={{
         height: '100%',
         left: 0,
@@ -72,7 +79,7 @@ const FirebaseNotification = () => {
       }}
     >
       <IconButton
-        onClick={e => handleClose(e, snackbarId, title)}
+        onClick={e => onCloseNotification(e, snackbarId, title)}
         style={{
           right: 0,
           position: 'absolute'
@@ -83,31 +90,34 @@ const FirebaseNotification = () => {
     </div>
   )
 
-  useEffect(() => {
-    const storedNotifications = JSON.parse(localStorage.getItem('notifications') || '[]')
+  const notificationContent = (title: string, message: string) => {
+    return (
+      <Box style={{ cursor: 'pointer' }}>
+        <Box>{title}</Box>
+        <Box>{message}</Box>
+      </Box>
+    )
+  }
 
-    storedNotifications.forEach(notification => {
-      enqueueSnackbar(
-        <Box style={{ cursor: 'pointer' }}>
-          <Box>{notification.title}</Box>
-          <Box>{notification.message}</Box>
-        </Box>,
-        { variant: 'info', action: key => action(key, notification.title) }
-      )
+  useEffect(() => {
+    let notifications = JSON.parse(localStorage.getItem('notifications') || '[]')
+
+    notifications.forEach((notification: FirebaseNotificationState) => {
+      enqueueSnackbar(notificationContent(notification.title, notification.message), {
+        variant: 'info',
+        action: key => action(key, notification.title)
+      })
     })
   }, [])
 
   useEffect(() => {
-    if (notification.open) {
-      enqueueSnackbar(
-        <Box style={{ cursor: 'pointer' }}>
-          <Box>{notification.title}</Box>
-          <Box>{notification.message}</Box>
-        </Box>,
-        { variant: notification.type, action: key => action(key, notification.title) }
-      )
+    if (newNotification?.open) {
+      enqueueSnackbar(notificationContent(newNotification.title, newNotification.message), {
+        variant: newNotification.type,
+        action: key => action(key, newNotification.title)
+      })
     }
-  }, [notification, enqueueSnackbar])
+  }, [newNotification, enqueueSnackbar])
 
   return <></>
 }
