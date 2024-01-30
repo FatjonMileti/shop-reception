@@ -46,9 +46,9 @@ VALUES
     -- Shop Reception
     (9, 'Admin', 'UsersManagement', '/shop-reception/admin/dashboard', true, 5),
     -- Bakery p2
-    (10, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2);
+    (10, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
     -- Shop Reception
-    (11, 'Mobile', 'Reception', '/mobile', true, 5),
+    (11, 'Mobile', 'Reception', '/mobile', true, 5);
 
 
 -- activity with submodule id
@@ -114,9 +114,9 @@ VALUES
     (51, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 10),
     (52, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 10),
     -- Bakery ADMIN p2
-    (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10);
+    (53, 'Gestiune ingrediente', 'Ingredients', null, true, 10),
     -- Shop Reception
-    (54, 'Mobile', 'UsersManagement', null, true, 11),
+    (54, 'Mobile', 'UsersManagement', null, true, 11);
 
 -- screen with activity id (some are first screens)
 INSERT INTO
@@ -293,7 +293,7 @@ values
   -- Supply OMNI
   (11, 'GG_RO_HQ_IT-C4ASSIST'),
   -- Volumetry
-  (13, 'GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR');
+  (13, 'GG_RO_HQ_IT_DEX_VOL_TASK_ALLOCATOR'),
   -- Shop Reception
   (14, 'GG_RO_HQ_IT_DEX_SHOP_RECEPTION');
 
@@ -336,8 +336,7 @@ VALUES
     (13, 44),
     (13, 45),
     -- Shop Reception
-    (14, 9),
-    (14, 11);
+    (14, 46);
 
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     -- (1, 46);
