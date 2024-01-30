@@ -40,6 +40,7 @@ import { Ingredients } from './Ingredients'
 import { ProductManagementTraceability } from './Traceability/ProductManagementTraceability/ProductManagementTraceability'
 import { ReceivedProducts } from './Traceability/ReceivedProducts/ReceivedProducts'
 import { FrozenTraceability } from './Traceability/FrozenTraceability/FrozenTraceability'
+import { ReportFrozenTraceability } from './Traceability/ReportFrozenTraceability/ReportFrozenTraceability'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -413,6 +414,18 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
+
+      <Route
+        path={URLS.AUTH_REPORT_FROZEN_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={ReportFrozenTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
     </>
   )
 }
