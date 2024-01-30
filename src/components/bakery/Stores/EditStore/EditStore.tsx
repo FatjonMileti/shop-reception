@@ -37,7 +37,7 @@ const EditStore: React.FC<EditStoreProps> = props => {
         const result = await makeCoreGetRequest('/bakery/zone/all')
         const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
 
-        setZoneValue(editItem?.zone)
+        setZoneValue({value: editItem?.zone, label: editItem?.zone})
         return resultOptions || []
       },
       {
@@ -57,7 +57,7 @@ const EditStore: React.FC<EditStoreProps> = props => {
         const result = await makeCoreGetRequest('/bakery/region/all')
         const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
 
-        setRegionValue(editItem?.region)
+        setRegionValue({value: editItem?.region, label: editItem?.region})
         return resultOptions || []
       },
       {
@@ -97,8 +97,6 @@ const EditStore: React.FC<EditStoreProps> = props => {
       if(editItem) {
         refetchZones()
         refetchRegions()
-        setRegionValue({value: editItem.region, label: editItem.region})
-        setZoneValue({value: editItem.zone, label: editItem.zone})
       }
     }, [editItem])
 
