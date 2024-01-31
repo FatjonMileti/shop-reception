@@ -9,22 +9,22 @@ export const columns = [
   },
   {
     title: 'Task in desfasurare',
-    field: 'todoTasks',
+    field: 'hasInProgressTasks',
     align: 'left',
     render: row => (
       <Box>
-        <IconCell value={row.todoTasks ? 'active' : 'inactive'} />
+        <IconCell value={row.hasInProgressTasks ? 'active' : 'inactive'} />
       </Box>
     )
   },
   {
     title: 'Nr. task-uri neincepute',
-    field: 'inProgressTasks',
+    field: 'notStartedTasksNumber',
     align: 'left'
   },
   {
     title: 'Nr. task-uri finalizate',
-    field: 'doneTasks',
+    field: 'finishedTasksNumber',
     align: 'left'
   }
 ]
