@@ -97,25 +97,26 @@ const NormsReport = () => {
   return (
     <div className={s.mainContainer}>
       <Grid container spacing={4}>
-        {canUseCustomFilter && isLocationsLoading ? (
-          <div style={{ display: 'flex' }}>
-            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-          </div>
-        ) : (
-          <Grid xs={12} md={4} item style={{ padding: 0 }} className={s.filterContainer}>
-            <FilterDataSelect
-              name="location"
-              defaultSelectedData={locationsFilterValue}
-              label="Magazin:"
-              showCounter={true}
-              showSearch={true}
-              counterLabel="Selecteaza magazin"
-              noDataFoundLabel="Nu s-au gasit rezultate."
-              options={locationsOptions}
-              onSelect={handleLocationOptionChange}
-            />
-          </Grid>
-        )}
+        {canUseCustomFilter &&
+          (isLocationsLoading ? (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+            </div>
+          ) : (
+            <Grid xs={12} md={4} item style={{ padding: 0 }} className={s.filterContainer}>
+              <FilterDataSelect
+                name="location"
+                defaultSelectedData={locationsFilterValue}
+                label="Magazin:"
+                showCounter={true}
+                showSearch={true}
+                counterLabel="Selecteaza magazin"
+                noDataFoundLabel="Nu s-au gasit rezultate."
+                options={locationsOptions}
+                onSelect={handleLocationOptionChange}
+              />
+            </Grid>
+          ))}
         {isDepartmentsOptionsLoading ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
