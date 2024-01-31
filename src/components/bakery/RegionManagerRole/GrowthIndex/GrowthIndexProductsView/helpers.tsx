@@ -48,15 +48,15 @@ export const columns = [
       align: 'left',
       width: '140px'
     },
-    // { TODO show growth for each hour in list/ check storeMg -> productGrowthIndex
-    //   title: 'Coeficient',
-    //   field: 'growth',
-    //   align: 'left',
-    //   disableSorting: true,
-    //   minWidth: '140px',
-    //   isGroup: true,
-    //   width: '200px',
-    // },
+    {
+      title: 'Coeficient',
+      field: 'growth',
+      align: 'left',
+      disableSorting: true,
+      minWidth: '140px',
+      isGroup: true,
+      width: '200px',
+    },
 ]
 
 export const drawerFilters = (familiesQuery) => [
