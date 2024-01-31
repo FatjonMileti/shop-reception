@@ -1,31 +1,33 @@
-import { ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import s from './FrozenTraceability.modules.scss'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { handleQueryError } from 'components/volumetry/utils'
 import { useNotification } from 'hooks'
 import { debounce } from '@mui/material'
-import { AddActionIcon, EditActionIcon } from 'icons'
+import {  EditActionIcon } from 'icons'
 import FrozenTraceabilityDescription from './FrozenTraceabilityDescription'
-import { FrozenTraceabilityModal } from './FrozenTraceabilityModal/FrozenTraceabilityModal'
+import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
+import { useQuery } from 'react-query'
+import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
+import { ValueLabelInterface } from '../../interfaces'
+import { formatErrorMessage } from '../../../../utils/formatting'
+import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 
 export const ReportFrozenTraceability = () => {
   const { showNotification } = useNotification()
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [rows, setRows] = useState([])
-  const [editItem, setEditItem] = useState<any>(null)
-  const [isEdit, setIsEdit] = useState<boolean>(false)
+
+  const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
 
   const handleRemoteDetails = async (rowId: string | number) => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
     const data = await response
-    setEditItem(data)
-
     return <FrozenTraceabilityDescription item={data} />
   }
 
@@ -53,46 +55,130 @@ export const ReportFrozenTraceability = () => {
     }
   }
 
+
+  const families = useQuery(
+    ['families-store'],
+    async () => {
+      const result = await makeCoreGetRequest(`/bakery/store/families`)
+      const resultOptions = result.map(
+        (item: FamilyItem): ValueLabelInterface => ({
+          label: item.name,
+          value: item.id
+        })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const subfamilies = useQuery(
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'family')?.value],
+    async () => {
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+        ?.value || []) as AutoCompleteValue[]
+      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+        params: {
+          family: familyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
+      const resultOptions = result.map(
+        (item: SubfamilyItem): ValueLabelInterface => ({
+          label: item.subFamily,
+          value: item.subFamily
+        })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const drawerFilters: TableFiltersType[] = [
+    {
+      name: 'family',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Familie"
+          disableClearable
+          options={families.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Familie',
+      clearFiltersOnChange: ['subfamily']
+    },
+    {
+      name: 'subfamily',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Subfamilie"
+          disableClearable
+          options={subfamilies.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Subfamilie'
+    },
+    {
+      name: 'scheduleProduct',
+      value: '',
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Produs cadentier"
+          disableClearable
+          options={[
+            { value: 'true', label: 'Da' },
+            { value: 'false', label: 'Nu' }
+          ]}
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Produs cadentier'
+    }
+  ]
+
   return (
     <div className={s.mainContainer}>
       <>
-        <FrozenTraceabilityModal
-          isModalOpen={isModalOpen}
-          closeModal={() => setIsModalOpen(false)}
-          editItem={editItem}
-          setEditItem={setEditItem}
-          isEdit={isEdit}
-        />
         <ListTable
           rows={rows}
           handleRemoteData={debounce(fetchData, 500)}
           handleRemoteDetails={handleRemoteDetails}
           isLoading={isLoading}
           totalCount={totalCount}
-          filters={[]} // Empty string must be provided in order to show toolbarActions. This line can be removed after fixing this in the UI Library
+          filters={drawerFilters}
           toolbarActions={[
-            {
-              label: 'Add',
-              onClick: () => {
-                setIsModalOpen(true)
-                setIsEdit(false)
-              },
-              icon: <AddActionIcon />
-            }
+            // {
+            //   label: 'Add',
+            //   onClick: () => {
+            //     setIsModalOpen(true)
+            //     setIsEdit(false)
+            //   },
+            //   icon: <AddActionIcon />
+            // }
           ]}
           rowActions={[
-            {
-              label: 'Corectie',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#CC4010',
-              onClick: async (e, rowId) => {
-                setIsModalOpen(true)
-                await handleRemoteDetails(rowId)
-                setIsEdit(true)
-              },
-              desktopIcon: <EditActionIcon />
-            },
             {
               label: 'Editeaza',
               labelColor: 'white',
