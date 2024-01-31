@@ -90,7 +90,6 @@ const GrowthIndexProductsView = () => {
           columns={columns}
           items={tableItems}
           fetchData={fetchData}
-          // dynamicColumn="growth"
           isLoading={isLoading}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
