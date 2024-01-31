@@ -12,8 +12,7 @@ import {useSearchParams } from 'react-router-dom'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { FamilyItem } from 'components/bakery/StoreManagerRole/interfaces'
 import { useQuery } from 'react-query'
-// import { GroupTable } from 'components/core-ui/GroupTable'
-import { Table } from 'components/core-ui/Table'
+import { GroupTable } from 'components/core-ui/GroupTable'
 
 const GrowthIndexProductsView = () => {
   const [tableItems, setTableItems] = useState<GrowthIndexProductViewItem[]>([])
@@ -74,6 +73,7 @@ const GrowthIndexProductsView = () => {
       setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
+      return response
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -85,12 +85,12 @@ const GrowthIndexProductsView = () => {
   return (
     <div className={s.mainContainer}>
       <Box>
-        {/* <GroupTable */}
-        <Table
+        <GroupTable
           hideCheckbox
           columns={columns}
           items={tableItems}
           fetchData={fetchData}
+          // dynamicColumn="growth"
           isLoading={isLoading}
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
