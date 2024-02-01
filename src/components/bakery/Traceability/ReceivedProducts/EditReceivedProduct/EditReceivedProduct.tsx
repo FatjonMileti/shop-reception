@@ -36,7 +36,10 @@ interface EditReceivedProductProps {
   batchId?: string | number
 }
 
-const batchStatusOptions = [{ value: 'CLOSED', label: 'Inchis' }]
+const batchStatusOptions = [
+  { value: 'CLOSED', label: 'Inchis' },
+  { value: 'AVAILABLE', label: 'Disponibil' },
+]
 
 const closeReasonOptions = [
   { value: 'OUT_OF_STOCK', label: 'Epuizat' },
@@ -127,7 +130,7 @@ export const EditReceivedProduct = ({
                   variant="outlined"
                   label="Status lot"
                   options={batchStatusOptions}
-                  value={batchStatusOptions.find(({ value }) => value === form.values.batchStatus)}
+                  value={batchStatusOptions.find(({ value }) => value === form.values.batchStatus) || null}
                   onChange={(_, value) => {
                     form.setFieldValue('batchStatus', value?.value)
                   }}
