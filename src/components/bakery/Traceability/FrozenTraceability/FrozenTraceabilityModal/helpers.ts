@@ -1,32 +1,56 @@
+import * as Yup from 'yup'
 import { formatBakeryPayloadDate } from 'utils/helpers'
 
-export const getInitialValues = (selectedProduct, selectedRows, editItem) => ({
-  productId: editItem?.product?.id || selectedProduct?.id || '',
-  storeId: editItem?.store?.id || null,
-  productionDate: formatBakeryPayloadDate(editItem?.productionDate) || null,
-  chargeNumber: editItem?.chargeNumber || null,
-  productionOperator: editItem?.productionOperator || null,
-  quantity: editItem?.quantity || null,
-  thermalCondition: 'UNBAKED',
-  conform: editItem?.conform || null,
-  nonComplianceReason: editItem?.nonComplianceReason || null,
-  productDestination: editItem?.productDestination || null,
-  isVerified: editItem?.verified || null,
-  verifiedBy: null,
-  verifiedDate: null,
-  dlc: editItem?.dlc || null,
-  isFrozen: editItem?.frozen || null,
-  traceabilityFrozenList: editItem?.traceabilityFrozenList || selectedRows,
-  metiCode: editItem?.product?.metiCode || null,
-  productName: editItem?.product?.name || null
-})
+export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
+  return {
+    productId: editItem?.product?.id || selectedProduct?.id || '',
+    storeId: editItem?.store?.id || null,
+    productionDate: editItem?.productionDate || null,
+    chargeNumber: editItem?.chargeNumber || null,
+    productionOperator: editItem?.productionOperator || null,
+    quantity: editItem?.quantity || null,
+    thermalCondition: editItem?.thermalCondition || 'UNBAKED',
+    conform: editItem?.conform || true,
+    nonComplianceReason: editItem?.nonComplianceReason || null,
+    productDestination: editItem?.productDestination || null,
+    isVerified: editItem?.verified || null,
+    verifiedBy: editItem?.verifiedBy || null,
+    verifiedDate: editItem?.verifiedDate || null,
+    dlc: editItem?.dlc || null,
+    isFrozen: editItem?.frozen || null,
+    metiCode: editItem?.product?.metiCode || selectedProduct?.metiCode,
+    productName: editItem?.product?.name || selectedProduct?.name,
+    traceabilityFrozenList: editItem
+      ? toBatchFormat(editItem?.traceabilityFrozenList, true)
+      : selectedRows
+  }
+}
 
-export const toBatchFormat = batches => {
-  return batches.map(batch => ({
-    batchId: batch.id,
-    quantity: batch.batchQuantity,
-    openingDate: batch.entryDate,
-    dlc: batch.dlcDays
+export const getValidationSchema = () =>
+  Yup.object().shape({
+    productionDate: Yup.date().required('Campul data productie trebuie completat'),
+    chargeNumber: Yup.string().required('Campul sarja trebuie completat.'),
+    productionOperator: Yup.string().required('Campul operator productie trebuie completat.'),
+    quantity: Yup.string().required('Campul cantitate trebuie completat'),
+    thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
+    conform: Yup.boolean(),
+
+    traceabilityFrozenList: Yup.array().of(
+      Yup.object().shape({
+        batchId: Yup.string(),
+        quantity: Yup.number(),
+        openingDate: Yup.date(),
+        dlc: Yup.string()
+      })
+    )
+  })
+
+export const toBatchFormat = (batches, isEdit = false) => {
+  return batches.map(item => ({
+    batchId: isEdit ? item.batch.id : item.id,
+    quantity: isEdit ? item.batch.batchQuantity : item.batchQuantity,
+    openingDate: isEdit ? formatBakeryPayloadDate(item.openingDate) : item.entryDate,
+    dlc: isEdit ? item.batch.dlcDays : item.dlcDays
   }))
 }
 
