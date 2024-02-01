@@ -11,7 +11,7 @@ import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { getFormInitialValues } from './helpers'
 import { handleQueryError } from 'components/volumetry/utils'
-import { EditAllocationModalProps } from '../TaskAllocationDefinitions'
+import { EditAllocationModalProps } from '../TaskAllocationsDefinitions'
 
 const validationSchema = hideWorkload =>
   yup.object({

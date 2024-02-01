@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { EmployeeActionsProps } from '../../TaskAllocationDefinitions'
+import { EmployeeActionsProps } from '../../TaskAllocationsDefinitions'
 
 const EmployeeActions = (props: EmployeeActionsProps) => {
   const { taskCurrentState, handleStartTask, openStopTaskModal } = props

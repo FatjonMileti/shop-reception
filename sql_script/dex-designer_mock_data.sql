@@ -189,13 +189,14 @@ VALUES
     -- Volumetry
     (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true),
     (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
-    (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
+    (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocations', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
     (62, 'Raport norme', '', '/volumetry/reports/dailyNorms', true, 46, true),
     (63, 'Task-uri alocate', '', '/volumetry/tasksManagement/assignedTasks', true, 47, true),
     (64, 'Status angajati', '', '/volumetry/employee/allocatedEmployeesStatus', true, 48, true),
+    (65, 'Detalii task', '', '/volumetry/tasksManagement/taskAllocation', true, 44, false),
     -- Shop Reception
-    (65, 'Screen 1', '', '/url', true, 49, true);
+    (66, 'Screen 1', '', '/url', true, 49, true);
     -- Bakery TRACEABILITY-OPERATOR
     -- (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
     -- (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
