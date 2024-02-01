@@ -6,7 +6,7 @@ import { AccordionDetailsWrapper, BodyItem } from '../ProductManagementTraceabil
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import { Fragment } from 'react'
 
-const FrozenTraceabilityDescription = item => {
+const FrozenTraceabilityDescription = (item, chargeItem) => {
   const { traceabilityFrozenList, product } = item.item
 
   const bodyItemValue = (batchItem, frozenItem, columnField) => {
@@ -56,36 +56,36 @@ const FrozenTraceabilityDescription = item => {
                 </Grid>
 
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Data intrare MP" value={'-'} />
+                  <Capsule label="Data intrare MP" value={formatBakeryPayloadDate(frozenItem.batch.entryDate)} />
                 </Grid>
                 <Grid item my={0.5} mr={1}>
                   <Capsule label="Furnizor MP" value={frozenItem.batch.supplier.supplierName} />
                 </Grid>
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Cant. fab./lot" value={frozenItem.batch.batchQuantity} />
+                  <Capsule label="Cant. fab./lot" value={frozenItem.quantity} />
                 </Grid>
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="DLC sec. MP" value={'-'} />
+                  <Capsule label="DLC sec. MP" value={formatBakeryPayloadDate(frozenItem.openingDate)} />
                 </Grid>
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="DLC MP" value={formatBakeryPayloadDate(frozenItem.dlc)} />
+                  <Capsule label="DLC MP" value={formatBakeryPayloadDate(frozenItem.batch.expireDate)} />
                 </Grid>
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Operator trasab." value={'-'} />
+                  <Capsule label="Operator trasab." value={chargeItem.createdBy} />
                 </Grid>
                 <Grid item my={0.5} mr={1}>
                   <Capsule
                     label="Data introducere"
-                    value={formatBakeryPayloadDate(frozenItem.openingDate)}
+                    value={formatBakeryPayloadDate(chargeItem.createdDate)}
                   />
                 </Grid>
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Ultima modificare" value={'-'} />
+                  <Capsule label="Ultima modificare" value={chargeItem.modifiedBy} />
                 </Grid>
                 <Grid item my={0.5} mr={1}>
                   <Capsule
                     label="Data ultimei modificari"
-                    value={formatBakeryPayloadDate(frozenItem.batch.modifiedDate)}
+                    value={formatBakeryPayloadDate(chargeItem.modifiedDate)}
                   />
                 </Grid>
               </Grid>
@@ -98,7 +98,7 @@ const FrozenTraceabilityDescription = item => {
                     return (
                       <Fragment key={index}>
                         {column.render ? (
-                          column.render(frozenItem)
+                          column.render(frozenItem, chargeItem)
                         ) : (
                           <BodyItem
                             name={column.title}
