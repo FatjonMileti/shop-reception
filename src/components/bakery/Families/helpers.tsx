@@ -1,3 +1,5 @@
+import { Box } from '@mui/material'
+import { IconCell } from 'components/core-ui/IconCell'
 import { ImageCell } from 'components/core-ui/ImageCell'
 import { Link } from 'components/core-ui/Link'
 
@@ -7,10 +9,10 @@ export const divisionTypes = [
     { label: 'Hyper&Super', value: 'HYPER_AND_SUPER'}
 ]
 
-  export const famInBakeryScopes = [
-      { label: "Da", value: "Da" },
-      { label: "Nu", value: "Nu" }
-  ]
+export const famInBakeryScopes = [
+    { label: "Da", value: "Da" },
+    { label: "Nu", value: "Nu" }
+]
 
 export const columns = [
   {
@@ -42,6 +44,17 @@ export const columns = [
     field: 'moduleName',
     align: 'left',
     collapsible: true
+  },
+  {
+    title: 'Familie in scopul aplicatiei de brutarie',
+    field: 'enable',
+    align: 'left',
+    collapsible: 'true',
+    render: row => (
+      <Box>
+        <IconCell value={row.enable ? 'activ' : 'inactiv'} />
+      </Box>
+    )
   }
 ]
 

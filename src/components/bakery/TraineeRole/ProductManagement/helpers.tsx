@@ -125,7 +125,7 @@ export const columns = [
 export const drawerFilters = (familiesQuery, subfamiliesQuery) => [
   {
     name: 'family',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
@@ -135,12 +135,11 @@ export const drawerFilters = (familiesQuery, subfamiliesQuery) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Familie',
-    clearFiltersOnChange: ['subfamily']
+    label: 'Familie'
   },
   {
     name: 'subfamily',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"

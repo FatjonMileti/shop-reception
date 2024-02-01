@@ -8,12 +8,14 @@ import { useFormik } from 'formik'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { areSameDayDates, formatPayloadDate } from 'utils/helpers'
 import { getInitialValues, getValidationSchema } from './helpers'
-import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { TeamDayOffManagementItem, TeamMember } from '../../interfaces'
+import { TeamDayOffManagementItem, TeamMember, ValueLabelInterface } from '../../interfaces'
 import { dayOfTypes } from 'components/governance/helpers'
 import { usePublicHolidaysForDatePicker } from '../../PublicHolidays/hooks/usePublicHolidaysForDatePicker'
+import { useQuery } from 'react-query'
+import { toAsyncSelectOptions } from 'components/core-ui/AsyncAutocomplete/serializers'
 
 interface NewTimeOffProps {
   teamMembers?: TeamMember[]
@@ -22,10 +24,12 @@ interface NewTimeOffProps {
   setShouldRefreshData: Function
   isEdit?: boolean
   editItem?: TeamDayOffManagementItem | number
+  domainFilterValue?: ValueLabelInterface
 }
 
 const NewTimeOff: React.FC<NewTimeOffProps> = props => {
-  const { teamMembers, isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData } = props
+  const { isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData, domainFilterValue } =
+    props
 
   const { showNotification } = useNotification()
 
@@ -34,6 +38,31 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
 
   const { arePublicHolidaysLoading, datePickerShouldDisablePublicHolidaysDates } =
     usePublicHolidaysForDatePicker()
+
+  const { data: teamMembers, isLoading: isTeamMembersLoading } = useQuery(
+    ['teamMembers', domainFilterValue],
+    async () => {
+      if (domainFilterValue === null || domainFilterValue === undefined) {
+        return null
+      }
+
+      const result = await makeCoreGetRequest(
+        `/governance/teamMembers?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
+          domainFilterValue?.value
+        )}`
+      )
+      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
+      return resultOptions || null
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
 
   const formik = useFormik({
     enableReinitialize: true,

@@ -56,9 +56,20 @@ const ProductManagementStore = () => {
   }
 
   const families = useQuery(
-    ['families-store'],
+    ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
-      const result = await makeCoreGetRequest(`/bakery/store/families`)
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+      ?.value || []) as AutoCompleteValue[]
+
+      const result = await makeCoreGetRequest(
+        `/bakery/store/families`,
+        {
+          params: {
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+          },
+          paramsSerializer: { indexes: null }
+        }
+        )
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
           label: item.name,
@@ -117,7 +128,7 @@ const ProductManagementStore = () => {
   const drawerFilters = [
     {
       name: 'family',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"
@@ -128,12 +139,11 @@ const ProductManagementStore = () => {
         />
       ),
       type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
+      label: 'Familie'
     },
     {
       name: 'subfamily',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"

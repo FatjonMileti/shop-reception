@@ -63,6 +63,11 @@ module.exports = {
           info: { minimized: true }
         }
       ]
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: './src/static', to: 'static/firebase/[name][ext]', info: { minimized: true } }
+      ]
     })
   ],
   target: 'web'

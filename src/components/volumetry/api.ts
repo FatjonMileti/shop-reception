@@ -250,7 +250,8 @@ export const getCategoryDepartmentsOptions = (
 
       const resultOptions = result.map(department => ({
         value: department.id,
-        label: department.departmentName
+        label: department.departmentName,
+        locationType: department.locationType
       }))
 
       return resultOptions || []

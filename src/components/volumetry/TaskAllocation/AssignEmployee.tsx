@@ -13,17 +13,7 @@ import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
 import { handleQueryError } from '../utils'
 import * as yup from 'yup'
-
-interface AssignEmployeeProps {
-  isModalOpen: boolean
-  closeModal: Function
-  taskName: string
-  rayonsOrDepartment: string
-  workloadMeasurementUnit: string
-  setShouldRefreshData: Function
-  taskTemplateId: string
-  setSelectedRowId: Function
-}
+import { AssignEmployeeProps } from './TaskAllocationDefinitions'
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
   const {

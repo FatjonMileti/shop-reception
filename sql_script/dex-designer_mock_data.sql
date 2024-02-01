@@ -104,8 +104,10 @@ VALUES
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
     (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 9),
     (46, 'Raport norme', 'ReportsVolumetry', null, true, 9),
+    (47, 'Task-uri alocate', 'AssignTasks', null, true, 8),
+    (48, 'Status Angajati', 'EmployeeManagement', null, true, 8),
     -- Shop Reception
-    (47, 'Admin magazin', 'UsersManagement', null, true, 10);
+    (49, 'Admin magazin', 'UsersManagement', null, true, 10);
     -- Bakery TRACEABILITY OP
     -- (47, 'Management produse', 'ProductManagementTO', null, true, 10),
     -- (48, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 10),
@@ -190,8 +192,10 @@ VALUES
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
     (62, 'Raport norme', '', '/volumetry/reports/dailyNorms', true, 46, true),
+    (63, 'Task-uri alocate', '', '/volumetry/tasksManagement/assignedTasks', true, 47, true),
+    (64, 'Status angajati', '', '/volumetry/employee/allocatedEmployeesStatus', true, 48, true),
     -- Shop Reception
-    (63, 'Screen 1', '', '/url', true, 47, true);
+    (65, 'Screen 1', '', '/url', true, 49, true);
     -- Bakery TRACEABILITY-OPERATOR
     -- (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
     -- (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
@@ -243,7 +247,7 @@ VALUES
     -- GG_RO_HQ_IT_DEX_GOV_IT_PM
     (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (3, 6),
     -- GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-    (4, 2), (4, 4), (4, 6),
+    (4, 1), (4, 2), (4,3), (4, 4), (4, 6),
     -- Bakery
     -- GG_RO_HQ_IT_DEX_BAKERY_ADMIN
     (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16),
@@ -269,8 +273,9 @@ VALUES
     (100, 43),  -- temporary let this role access the task templates activity
     -- (100, 45),
     (100, 46),
+    (100, 48),
     -- VOLUMETRY_WORKER
-    (101, 44),
+    (101, 47),
     -- VOLUMETRY_REGION_ADMIN
     (102, 42),
     (102, 44),

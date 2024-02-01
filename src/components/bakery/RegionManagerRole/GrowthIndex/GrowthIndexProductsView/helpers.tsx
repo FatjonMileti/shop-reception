@@ -30,7 +30,7 @@ export const columns = [
       width: '140px'
     },
     {
-      title: 'Coeficient',
+      title: 'Coeficient general',
       field: 'generalGrowth',
       align: 'left',
       width: '140px',
@@ -47,13 +47,22 @@ export const columns = [
       field: 'lastChange',
       align: 'left',
       width: '140px'
-    }
+    },
+    {
+      title: 'Coeficient',
+      field: 'growth',
+      align: 'left',
+      disableSorting: true,
+      minWidth: '140px',
+      isGroup: true,
+      width: '200px',
+    },
 ]
 
 export const drawerFilters = (familiesQuery) => [
   {
     name: 'family',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
@@ -63,8 +72,7 @@ export const drawerFilters = (familiesQuery) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Familie',
-    clearFiltersOnChange: ['subfamily']
+    label: 'Familie'
   }
 ]
 

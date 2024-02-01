@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { EditProductItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { getInitialValues } from '../helpers'
-import { ChangeEvent, useMemo, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { FileUpload } from 'components/core-ui/FileUpload'
 import { toFormDataPayload } from 'utils/serializers'
@@ -27,7 +27,11 @@ const EditProduct: React.FC<EditProductProps> = props => {
     const [isFileUploaded, setIsFileUploaded] = useState(false);
     const [uploadedFile, setUploadedFile] = useState(null);
     
-    const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
+    useEffect(() => {
+      if(isModalOpen) refetchEditItem()
+    }, [isModalOpen])
+    
+    const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
         ['product', editProductId],
         async () => {
           if (editProductId) {

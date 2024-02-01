@@ -74,7 +74,7 @@ export const columns = [
     },
     {
       title: 'Gama produs',
-      field: 'productRange',
+      field: 'clusterMandatory',
       align: 'left',
       render: row => (
         <BooleanText onSuccess='O' onFailure='F' value={row.productRange} />
@@ -96,6 +96,12 @@ export const columns = [
         render: row => (
           <BooleanIcon value={row.newProduct} icon="Flag" onFailure='#E5E5E5' onSuccess='#33691E' />
         ) 
+    },
+    {
+      title: 'Familie',
+      field: 'familyName',
+      align: 'left',
+      width: '140px'
     },
     {
         title: 'Ultima pers care a modificat fisierul',
@@ -123,7 +129,7 @@ export const drawerFilters = (prevDay, familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'family',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
@@ -134,11 +140,10 @@ export const drawerFilters = (prevDay, familiesQuery, subfamiliesQuery) => [
     ),
     type: 'autocomplete',
     label: 'Familie',
-    clearFiltersOnChange: ['subfamily']
   },
   {
     name: 'subfamily',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"

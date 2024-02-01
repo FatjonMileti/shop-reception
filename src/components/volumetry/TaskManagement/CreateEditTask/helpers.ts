@@ -5,7 +5,11 @@ export const getInitialValues = item => {
     ...(item?.id ? { id: item?.id } : {}),
     name: item?.name ?? '',
     rayonsOrDepartment: item?.rayonsOrDepartment
-      ? { label: item.rayonsOrDepartment, value: item.rayonsOrDepartment }
+      ? {
+          label: item.rayonsOrDepartment,
+          value: item.rayonsOrDepartment,
+          locationType: item.locationType
+        }
       : null,
     volumetryLocationCategory: item?.volumetryLocationCategory
       ? { label: item.volumetryLocationCategory, value: item.volumetryLocationCategory }

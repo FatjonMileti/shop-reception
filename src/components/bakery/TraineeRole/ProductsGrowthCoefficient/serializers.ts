@@ -4,8 +4,8 @@ export const toTableRowItems = items =>
     metiCode: item.metiCode || '',
     familyName: item.familyName || '',
     familyCode: item.familyCode || '',
-    generalGrowth: item.generalGrowth || '',
+    generalGrowth: item.generalGrowth || 0,
     username: item.username || '',
     lastChange: item.lastChange || '',
-    growth: item.growth || ''
+    growth: item.growth || 0
   }))

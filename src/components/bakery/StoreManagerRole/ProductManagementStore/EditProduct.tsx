@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { ProductItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { editStoreValidationSchema, getInitialValues } from './helpers'
-import { ChangeEvent, useMemo } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
 interface EditProductProps {
@@ -22,6 +22,10 @@ interface EditProductProps {
 export const EditProduct: React.FC<EditProductProps> = props => {
   const { isModalOpen, closeModal, setShouldRefreshData, editProductId } = props
   const { showNotification } = useNotification()
+
+  useEffect(() => {
+    if(isModalOpen) productQuery.refetch()
+  }, [isModalOpen])
 
   const productQuery = useQuery(
     ['product-store', editProductId],
@@ -74,7 +78,11 @@ export const EditProduct: React.FC<EditProductProps> = props => {
     initialValues: initialValues,
     validationSchema: editStoreValidationSchema,
     onSubmit: async (values: any, { resetForm }) => {
-      editProductMutation.mutate(values)
+      const payload = {
+        ...values,
+        scheduleProduct: values.scheduleProduct === 'Da'
+    }
+      editProductMutation.mutate(payload)
       resetForm()
     }
   })
@@ -95,7 +103,7 @@ export const EditProduct: React.FC<EditProductProps> = props => {
                   },
                   {
                     label: 'Cluster:',
-                    name: (productQuery.data as ProductItem)?.cluster?.name
+                    name: (productQuery.data as ProductItem)?.clusterName
                   },
                   {
                     label: 'Cod METI:',
@@ -115,8 +123,8 @@ export const EditProduct: React.FC<EditProductProps> = props => {
                   width="100%"
                   value={formik.values.scheduleProduct}
                   values={[
-                    { value: 'true', label: 'Da' },
-                    { value: 'false', label: 'Nu' }
+                    { value: 'Da', label: 'Da' },
+                    { value: 'Nu', label: 'Nu' }
                   ]}
                   onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     formik.setFieldValue(
