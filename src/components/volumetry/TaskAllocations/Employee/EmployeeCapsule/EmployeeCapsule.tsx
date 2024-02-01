@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { Capsule } from 'components/core-ui/Capsule'
-import s from '../../TaskAllocation.modules.scss'
-import { EmployeeCapsuleProps } from '../../TaskAllocationDefinitions'
+import s from '../../TaskAllocations.modules.scss'
+import { EmployeeCapsuleProps } from '../../TaskAllocationsDefinitions'
 
 const EmployeeCapsule = (props: EmployeeCapsuleProps) => {
   const { employee, customCapsuleColors } = props
