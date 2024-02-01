@@ -1,12 +1,11 @@
-import TaskDescription from '../TaskAllocation/TaskDescription'
-import TaskSummary from '../TaskAllocation/TaskSummary'
+import TaskDescription from '../TaskAllocations/TaskDescription'
+import TaskSummary from '../TaskAllocations/TaskSummary'
 
 export const toListTableRows = (
   items,
   shouldRefreshData,
   setShouldRefreshData,
-  setSelectedRowId,
-  hideDetails
+  setSelectedRowId
 ) => {
   const groupedItems = items.reduce((acc, item) => {
     const alreadyExistingItemIndex = acc.findIndex(i => i.id === item.taskTemplateId)
@@ -23,7 +22,7 @@ export const toListTableRows = (
 
   return groupedItems.map(item => ({
     id: item.taskTemplateId,
-    summary: <TaskSummary item={item} hideDetails={hideDetails} />,
+    summary: <TaskSummary item={item} hideDetails />,
     details: (
       <TaskDescription
         item={item}
@@ -31,7 +30,7 @@ export const toListTableRows = (
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
         setSelectedRowId={setSelectedRowId}
-        hideDetails={hideDetails}
+        hideDetails
       />
     ),
     borderLeftColor: '#0970E6',

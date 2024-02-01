@@ -15,7 +15,7 @@ import {
 } from 'components/volumetry/api'
 import { handleQueryError } from 'components/volumetry/utils'
 import { useNotification, usePermissions } from 'hooks'
-import { roles } from '../helpers'
+import { roles } from '../../helpers'
 
 const EmployeesTab = () => {
   const [locationsFilterValue, setLocationsFilterValue] = useState<ValueLabelInterface>(null)
@@ -47,7 +47,7 @@ const EmployeesTab = () => {
         toTableGETUrl({
           url: '/volumetry/workers/employees',
           filters: canUseCustomFilter
-            ? [{ name: 'location', value: locationsFilterValue.value }]
+            ? [{ name: 'locationId', value: locationsFilterValue.value }]
             : [],
           tableFilters,
           page,

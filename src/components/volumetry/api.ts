@@ -2,7 +2,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
 import { fromTaskPayload, handleQueryError } from './utils'
-import { toEmployeeFilterItems } from './TaskAllocation/serializers'
+import { toEmployeeFilterItems } from './TaskAllocations/serializers'
 import { toDepartmentsOptions } from './serializers'
 
 export const getDepartmentsOptions = (

@@ -1,7 +1,7 @@
 import { Box, LinearProgress } from '@mui/material'
-import s from '../../TaskAllocation.modules.scss'
+import s from '../../TaskAllocations.modules.scss'
 import { ChatIcon } from 'icons'
-import { EmployeeProgressProps } from '../../TaskAllocationDefinitions'
+import { EmployeeProgressProps } from '../../TaskAllocationsDefinitions'
 
 const EmployeeProgress = (props: EmployeeProgressProps) => {
   const { taskCurrentState, employee, customCapsuleColors } = props

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Box, Grid } from '@mui/material'
-import s from '../TaskAllocation.modules.scss'
+import s from '../TaskAllocations.modules.scss'
 import { getCapsuleColor } from '../helpers'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
@@ -10,7 +10,7 @@ import { handleQueryError } from '../../utils'
 import { EmployeeCapsule } from './EmployeeCapsule'
 import { EmployeeProgress } from './EmployeeProgress'
 import { EmployeeActions } from './EmployeeActions'
-import { EmployeeProps } from '../TaskAllocationDefinitions'
+import { EmployeeProps } from '../TaskAllocationsDefinitions'
 import { EmployeeIcon } from 'icons'
 
 const Employee: React.FC<EmployeeProps> = props => {

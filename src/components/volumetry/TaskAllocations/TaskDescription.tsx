@@ -7,7 +7,7 @@ import { DeleteActionIcon, EditActionIcon } from 'icons'
 import { EditAllocationModal } from './EditAllocationModal'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { CRUDAction } from '../interfaces'
-import { TaskDescriptionProps } from './TaskAllocationDefinitions'
+import { TaskDescriptionProps } from './TaskAllocationsDefinitions'
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const { item, employees, setShouldRefreshData, setSelectedRowId, hideDetails } = props
