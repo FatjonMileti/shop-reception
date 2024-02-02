@@ -56,7 +56,7 @@ const SalesCadentier = () => {
     async () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
         ?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest('/bakery/store/families', {
+      const result = await makeCoreGetRequest('/bakery/store/cadentier/families', {
         params: {
           store: storeFilterValue?.value,
           subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
@@ -87,7 +87,7 @@ const SalesCadentier = () => {
     async () => {
       const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
         ?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest('/bakery/store/families/subfamilies', {
+      const result = await makeCoreGetRequest('/bakery/store/cadentier/families/subfamilies', {
         params: {
           store: storeFilterValue?.value,
           family: familyLiveFilterValue.map(({ value }) => value)
@@ -168,29 +168,33 @@ const SalesCadentier = () => {
     }
   }
 
-  const handleDownload = async () => {
-    const url = toTableGETUrl({
-      url: '/bakery/report/download/sale',
-      tableFilters: tableState.tableFilters,
-      filters: [
-        { name: 'date', value: formatPayloadDate(dateFilterValue) },
-        { name: 'store', value: storeFilterValue?.value },
-      ].filter(
-        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-      )
-    })
-    try {
+  const downloadQuery = useQuery(
+    ['sales-cadentier-download'],
+    async () => {
+      const url = toTableGETUrl({
+        url: '/bakery/report/download/sale',
+        tableFilters: tableState.tableFilters,
+        filters: [
+          { name: 'store', value: storeFilterValue?.value },
+        ].filter(
+          f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+        )
+      })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
-      formatAndDownloadResponse(response)
-    } catch (error) {
-      showNotification({
-        message: `Error while download file. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      return formatAndDownloadResponse(response)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
     }
-  }
+  )
 
   return (
     <div className={s.mainContainer}>
@@ -228,7 +232,7 @@ const SalesCadentier = () => {
               {
                 label: 'Descarca',
                 icon: <DownloadOutlined />,
-                onClick: () => handleDownload()
+                onClick: () => downloadQuery.refetch()
               }
             ]}
             order={tableState.order}

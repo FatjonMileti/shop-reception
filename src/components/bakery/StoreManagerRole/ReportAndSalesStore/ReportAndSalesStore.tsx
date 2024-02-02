@@ -39,7 +39,7 @@ const ReportAndSalesStore = () => {
       ?.value || []) as AutoCompleteValue[]
 
       const result = await makeCoreGetRequest(
-        `/bakery/store/families`,
+        `/bakery/store/cadentier/families`,
         {
           params: {
             subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
@@ -71,7 +71,7 @@ const ReportAndSalesStore = () => {
     async () => {
       const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
         ?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest('/bakery/store/families/subfamilies', {
+      const result = await makeCoreGetRequest('/bakery/store/cadentier/families/subfamilies', {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
         },
