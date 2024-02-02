@@ -1,4 +1,4 @@
-import { Autocomplete, ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, DatePicker, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import s from './FrozenTraceability.modules.scss'
 import React, { useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
@@ -7,7 +7,7 @@ import { toListTableRows } from './serializers'
 import { handleQueryError } from 'components/volumetry/utils'
 import { useNotification } from 'hooks'
 import { debounce } from '@mui/material'
-import {  EditActionIcon } from 'icons'
+import { EditActionIcon } from 'icons'
 import FrozenTraceabilityDescription from './FrozenTraceabilityDescription'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
@@ -15,6 +15,7 @@ import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
 import { ValueLabelInterface } from '../../interfaces'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
+import { getCurrentDate } from '../../../../utils/helpers'
 
 export const ReportFrozenTraceability = () => {
   const { showNotification } = useNotification()
@@ -31,7 +32,7 @@ export const ReportFrozenTraceability = () => {
     return <FrozenTraceabilityDescription item={data} />
   }
 
-  const fetchData = async (page, rowsPerPage, tableFilters) => {
+  const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
@@ -39,7 +40,11 @@ export const ReportFrozenTraceability = () => {
           url: '/bakery/traceability/frozen',
           tableFilters,
           page,
-          rowsPerPage
+          rowsPerPage,
+          searchText,
+          searchFields: [
+            'productName',
+          ]
         })
       )
 
@@ -107,21 +112,66 @@ export const ReportFrozenTraceability = () => {
     }
   )
 
+  const currentDate = getCurrentDate()
+
   const drawerFilters: TableFiltersType[] = [
+    {
+      name: 'product',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Produs"
+          disableClearable
+          options={[]}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Produs'
+    },
+    {
+      name: 'dateFrom',
+      value: currentDate,
+      filter: (
+        <DatePicker
+          label="Data inceput productie"
+          variant="outlined"
+          value={currentDate}
+          onChange={() => {}}
+        />
+      ),
+      type: 'date',
+      label: 'Data inceput productie'
+    },
+    {
+      name: 'dateTo',
+      value: currentDate,
+      filter: (
+        <DatePicker
+          label="Data sfarsit productie"
+          variant="outlined"
+          value={currentDate}
+          onChange={() => {}}
+        />
+      ),
+      type: 'date',
+      label: 'Data sfarsit productie'
+    },
     {
       name: 'family',
       value: undefined,
       filter: (
         <Autocomplete
           variant="outlined"
-          label="Familie"
+          label="Familie produse"
           disableClearable
           options={families.data || []}
           multiple
         />
       ),
       type: 'autocomplete',
-      label: 'Familie',
+      label: 'Familie produse',
       clearFiltersOnChange: ['subfamily']
     },
     {
@@ -130,31 +180,14 @@ export const ReportFrozenTraceability = () => {
       filter: (
         <Autocomplete
           variant="outlined"
-          label="Subfamilie"
+          label="Subfamilie produse"
           disableClearable
           options={subfamilies.data || []}
           multiple
         />
       ),
       type: 'autocomplete',
-      label: 'Subfamilie'
-    },
-    {
-      name: 'scheduleProduct',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Produs cadentier"
-          disableClearable
-          options={[
-            { value: 'true', label: 'Da' },
-            { value: 'false', label: 'Nu' }
-          ]}
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Produs cadentier'
+      label: 'Subfamilie produse'
     }
   ]
 
@@ -168,16 +201,19 @@ export const ReportFrozenTraceability = () => {
           isLoading={isLoading}
           totalCount={totalCount}
           filters={drawerFilters}
-          toolbarActions={[
-            // {
-            //   label: 'Add',
-            //   onClick: () => {
-            //     setIsModalOpen(true)
-            //     setIsEdit(false)
-            //   },
-            //   icon: <AddActionIcon />
-            // }
-          ]}
+          hasSearchInput
+          toolbarActions={
+            [
+              // {
+              //   label: 'Add',
+              //   onClick: () => {
+              //     setIsModalOpen(true)
+              //     setIsEdit(false)
+              //   },
+              //   icon: <AddActionIcon />
+              // }
+            ]
+          }
           rowActions={[
             {
               label: 'Editeaza',
