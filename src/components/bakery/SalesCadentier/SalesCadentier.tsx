@@ -56,7 +56,7 @@ const SalesCadentier = () => {
     async () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
         ?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest('/bakery/store/families', {
+      const result = await makeCoreGetRequest('/bakery/store/cadentier/families', {
         params: {
           store: storeFilterValue?.value,
           subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
@@ -87,7 +87,7 @@ const SalesCadentier = () => {
     async () => {
       const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
         ?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest('/bakery/store/families/subfamilies', {
+      const result = await makeCoreGetRequest('/bakery/store/cadentier/families/subfamilies', {
         params: {
           store: storeFilterValue?.value,
           family: familyLiveFilterValue.map(({ value }) => value)
