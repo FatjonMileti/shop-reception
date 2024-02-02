@@ -90,13 +90,18 @@ const GrowthRegion = () => {
   )
 
   const familiesQuery = useQuery(
-    ['families', storeFilterValue?.value],
+    ['families', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+        ?.value || []) as AutoCompleteValue[]
+
       const result = await makeCoreGetRequest(
         '/bakery/store/cadentier/families',
         {
           params: {
             store: storeFilterValue?.value,
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+
           },
           paramsSerializer: { indexes: null }
         }
@@ -116,7 +121,8 @@ const GrowthRegion = () => {
           message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
-      }
+      },
+      enabled: storeFilterValue !== null
     }
   )
 
@@ -159,7 +165,7 @@ const GrowthRegion = () => {
       setTableState({
         order,
         orderBy,
-        tableFilters
+        tableFilters: [...tableFilters, { name: 'store', value: storeFilterValue?.value }]
       })
 
       window.history.replaceState(
@@ -171,7 +177,7 @@ const GrowthRegion = () => {
             order,
             orderBy,
             searchText,
-            tableFilters
+            tableFilters: [...tableFilters, { name: 'store', value: storeFilterValue?.value }]
           }
         },
         document.title

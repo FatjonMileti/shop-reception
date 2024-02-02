@@ -189,13 +189,14 @@ VALUES
     -- Volumetry
     (58, 'Management angajati', '', '/volumetry/employee/employeeManagement', true, 42, true),
     (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
-    (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocation', true, 44, true),
+    (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocations', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
     (62, 'Raport norme', '', '/volumetry/reports/dailyNorms', true, 46, true),
     (63, 'Task-uri alocate', '', '/volumetry/tasksManagement/assignedTasks', true, 47, true),
     (64, 'Status angajati', '', '/volumetry/employee/allocatedEmployeesStatus', true, 48, true),
+    (65, 'Detalii task', '', '/volumetry/tasksManagement/taskAllocation', true, 44, false),
     -- Shop Reception
-    (65, 'Screen 1', '', '/url', true, 49, true);
+    (66, 'Screen 1', '', '/url', true, 49, true);
     -- Bakery TRACEABILITY-OPERATOR
     -- (63, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 47, true),
     -- (64, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 48, true),
@@ -247,7 +248,7 @@ VALUES
     -- GG_RO_HQ_IT_DEX_GOV_IT_PM
     (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (3, 6),
     -- GG_RO_HQ_IT_DEX_GOV_IT_DOMAIN_MEMBER
-    (4, 2), (4, 4), (4, 6),
+    (4, 1), (4, 2), (4,3), (4, 4), (4, 6),
     -- Bakery
     -- GG_RO_HQ_IT_DEX_BAKERY_ADMIN
     (5, 7), (5, 8), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16),
@@ -278,7 +279,7 @@ VALUES
     (101, 47),
     -- VOLUMETRY_REGION_ADMIN
     (102, 42),
-    (102, 44),
+    (102, 46),
     -- (102, 45),
     -- VOLUMETRY_STORE_ADMIN
     (103, 42),

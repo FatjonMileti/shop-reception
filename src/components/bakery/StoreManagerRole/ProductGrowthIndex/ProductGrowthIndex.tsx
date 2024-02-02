@@ -67,11 +67,8 @@ const ProductGrowthIndex = () => {
       )
 
       setTableItems(toTableRowItems(response.list))
-
       setTotalCount(response.page.totalCount)
-
       setIsLoading(false)
-
       return response
     } catch (error) {
       showNotification({

@@ -1,8 +1,7 @@
 export const toTableRowItems = items =>
   items.map(item => ({
     fullName: item.fullName || '',
-    currentStatus: item.currentStatus || '',
-    todoTasks: item.todoTasks || 0,
-    inProgressTasks: item.inProgressTasks || 0,
-    doneTasks: item.doneTasks || 0
+    hasInProgressTasks: item.hasInProgressTasks || false,
+    notStartedTasksNumber: item.notStartedTasksNumber || 0,
+    finishedTasksNumber: item.finishedTasksNumber || 0,
   }))

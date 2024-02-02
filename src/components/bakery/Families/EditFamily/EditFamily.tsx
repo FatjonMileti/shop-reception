@@ -26,7 +26,7 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
     const { showNotification } = useNotification()
 
     useEffect(() => {
-      if(isModalOpen) refetchEditItem
+      if(isModalOpen) refetchEditItem()
     }, [isModalOpen])
     
     const { data: modules, isLoading: isModulesLoading, refetch: refetchModules } = useQuery(
@@ -142,7 +142,7 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
                   <AsyncAutocomplete
                     variant="outlined"
                     name="moduleName"
-                    label="Zona"
+                    label="Modul"
                     value={moduleValue}
                     options={modules}
                     onChange={handleModuleChange}

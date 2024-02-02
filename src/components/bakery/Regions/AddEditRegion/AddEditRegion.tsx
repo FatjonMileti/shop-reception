@@ -24,7 +24,10 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
     const { showNotification } = useNotification()
 
     useEffect(() => {
-      if(isModalOpen && isEdit) refetchEditItem
+      if(isModalOpen && isEdit) {
+        refetchEditItem() 
+        setShouldRefreshData(true)
+      }
     }, [isModalOpen])
     
     const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
@@ -48,8 +51,8 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
         }
     )
 
-    const initialValues = useMemo(() => getInitialValues(editItem, isEdit), [editItem])
-    const validationSchema = useMemo(() => getValidationSchema(), [editItem])
+    const initialValues = useMemo(() => getInitialValues(editItem), [editItem, isModalOpen])
+    const validationSchema = useMemo(() => getValidationSchema(), [editItem, isModalOpen])
 
     const submitTask = async (values: AddEditRegionItem) => {
         if (isEdit) {
@@ -67,6 +70,7 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
             message: `Region ${isEdit ? 'edited' : 'added'} successfully'`,
             type: 'success'
           })
+          formik.resetForm();
         },
         onError: res => {
           showNotification({
@@ -87,7 +91,6 @@ const AddEditRegion: React.FC<AddEditRegionProps> = props => {
                 enable: values.enable === 'Activ'
             }
             mutate(payload)
-            resetForm()
         }
     })
 

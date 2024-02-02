@@ -39,10 +39,6 @@ const IndividualCapacity = () => {
 
   const fetchData = async ({ tableFilters, rowsPerPage, order, orderBy }) => {
     setIsLoading(true)
-    setSearchParams({
-      startDate: tableFilters[0].value,
-      endDate: tableFilters[1].value
-    })
     try {
       const getTableFilters = tableFilters.map((filter, index) => {
         if (!filter.value && !!searchParams.get(filter.name)) {

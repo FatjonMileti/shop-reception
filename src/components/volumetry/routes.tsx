@@ -3,11 +3,12 @@ import { Route } from 'react-router-dom'
 import { URLS } from './constants'
 import { EmployeeManagement } from './EmployeeManagement'
 import { TaskManagement } from './TaskManagement'
-import { TaskAllocation } from './TaskAllocation'
+import { TaskAllocations } from './TaskAllocations'
 import { NormsReport } from './NormsReport'
-import EvaluationReports from 'components/volumetry/EmployeeManagement/EvaluationReports/EvaluationReports'
+import { EvaluationReports } from './EvaluationReports'
 import { AssignedTasks } from './AssignedTasks'
 import { EmployeesStatus } from './EmployeesStatus'
+import { TaskAllocation } from './TaskAllocation'
 
 export const useVolumetryRoutes = applicationPages => {
   return (
@@ -43,10 +44,10 @@ export const useVolumetryRoutes = applicationPages => {
         }
       />
       <Route
-        path={URLS.AUTH_TASK_ALLOCATION}
+        path={URLS.AUTH_TASK_ALLOCATIONS}
         element={
           <PrivateRoute
-            component={TaskAllocation}
+            component={TaskAllocations}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -77,6 +78,16 @@ export const useVolumetryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={EmployeesStatus}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+       <Route
+        path={URLS.AUTH_TASK_ALLOCATION}
+        element={
+          <PrivateRoute
+            component={TaskAllocation}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

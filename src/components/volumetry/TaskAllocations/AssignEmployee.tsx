@@ -1,7 +1,7 @@
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Grid } from '@mui/material'
 import { Modal } from 'components/core-ui/Modal'
-import s from './TaskAllocation.modules.scss'
+import s from './TaskAllocations.modules.scss'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { Input } from 'components/core-ui/Input'
 import { ChangeEvent } from 'react'
@@ -13,7 +13,7 @@ import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
 import { handleQueryError } from '../utils'
 import * as yup from 'yup'
-import { AssignEmployeeProps } from './TaskAllocationDefinitions'
+import { AssignEmployeeProps } from './TaskAllocationsDefinitions'
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
   const {

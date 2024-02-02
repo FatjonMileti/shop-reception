@@ -30,6 +30,8 @@ import { useShopReceptionRoutes } from '../shop-reception/routes'
 import { getFBToken } from 'utils/firebase'
 import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
 import { SnackbarProvider, VariantType, useSnackbar } from 'notistack'
+import 'file-loader?name=firebase-app-compat.js!./firebase-app-compat.js'
+import 'file-loader?name=firebase-messaging-compat.js!./firebase-messaging-compat.js'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -82,12 +84,6 @@ const App = () => {
       }
     })()
   }, [fbToken])
-
-  useEffect(() => {
-    ;(async () => {
-      await getFBToken(setFbToken)
-    })()
-  }, [])
 
   useEffect(() => {
     // console.log("[App] 1st effect called | hasLoadedAppModules: ", hasLoadedAppModules)

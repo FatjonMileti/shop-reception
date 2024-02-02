@@ -28,10 +28,10 @@ const EditStore: React.FC<EditStoreProps> = props => {
     const [regionValue, setRegionValue] = useState<ValueLabelInterface>(null)
 
     useEffect(() => {
-      if(isModalOpen) refetchEditItem
+      if(isModalOpen) refetchEditItem()
     }, [isModalOpen])
 
-    const { data: zones, isLoading: isZonesLoading, refetch: refetchZones } = useQuery(
+    const { data: zones, refetch: refetchZones } = useQuery(
       ['zones'],
       async () => {
         const result = await makeCoreGetRequest('/bakery/zone/all')
@@ -51,7 +51,7 @@ const EditStore: React.FC<EditStoreProps> = props => {
       }
     )
 
-    const { data: regions, isLoading: isRegionsLoading, refetch: refetchRegions } = useQuery(
+    const { data: regions, refetch: refetchRegions } = useQuery(
       ['regions'],
       async () => {
         const result = await makeCoreGetRequest('/bakery/region/all')
@@ -97,6 +97,8 @@ const EditStore: React.FC<EditStoreProps> = props => {
       if(editItem) {
         refetchZones()
         refetchRegions()
+        setRegionValue({value: editItem.region, label: editItem.region})
+        setZoneValue({value: editItem.zone, label: editItem.zone})
       }
     }, [editItem])
 
@@ -130,8 +132,8 @@ const EditStore: React.FC<EditStoreProps> = props => {
             const payload = {
                 ...values,
                 enable: values.enable === 'Activ',
-                region: regionValue?.label === '' ? null : regionValue?.label,
-                zone: zoneValue?.label === '' ? null : zoneValue?.label
+                region: regionValue?.label === '' || regionValue === null ? null : regionValue?.label,
+                zone: zoneValue?.label === '' || zoneValue === null ? null : zoneValue?.label
             }
             mutate(payload)
             resetForm()

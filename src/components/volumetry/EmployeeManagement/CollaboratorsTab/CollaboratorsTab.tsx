@@ -11,23 +11,22 @@ import {
   EmployeeManagementItem,
   ValueLabelInterface
 } from 'components/volumetry/interfaces'
-import { columns, roles } from './helpers'
+import { columns } from './helpers'
 import { DeleteCollaborator } from './DeleteCollaborator'
 import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { Autocomplete, FilterDataSelect, Input } from '@fullscreendigital/carrefour-dex-fe'
 import {
   getDepartmentsOptions,
-  getContractorsNamesOptions,
   getJobTitlesOptions,
   getLocationsOptions
 } from 'components/volumetry/api'
 import { handleQueryError } from 'components/volumetry/utils'
-import { PermissionRoles } from 'utils/enums'
+import { roles } from '../../helpers'
 
 const CollaboratorsTab = () => {
   // TODO: De actualizat cand primim update cu drepturile fiecarui rol
-  const { canCreate, canEdit, canDelete, canUseCustomFilter } = usePermissions(roles)
+  const { canUseCustomFilter } = usePermissions(roles)
 
   const [locationsFilterValue, setLocationsFilterValue] = useState<ValueLabelInterface>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -50,7 +49,6 @@ const CollaboratorsTab = () => {
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification)
-  const { data: contractorsNamesOptions } = getContractorsNamesOptions(showNotification)
   const { data: jobTitlesOptions, isLoading: isjobTitlesOptionsLoading } =
     getJobTitlesOptions(showNotification)
   const { data: locationsOptions, isLoading: isLocationsLoading } = getLocationsOptions(
@@ -72,7 +70,7 @@ const CollaboratorsTab = () => {
         toTableGETUrl({
           url: '/volumetry/workers/contractors',
           filters: canUseCustomFilter
-            ? [{ name: 'location', value: locationsFilterValue.value }]
+            ? [{ name: 'locationId', value: locationsFilterValue.value }]
             : [],
           tableFilters,
           page,

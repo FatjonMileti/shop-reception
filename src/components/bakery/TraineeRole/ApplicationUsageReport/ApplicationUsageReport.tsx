@@ -100,31 +100,36 @@ const ApplicationUsageReport = () => {
     }
   }
 
-  const handleDownload = async () => {
-    const filters = [
-      { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
-      { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
-      { name: 'store', value: storeFilterValue[0]?.value },
-    ].filter(
-      f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-    )
+  const downloadFileQuery = useQuery(
+    ['download'],
+    async () => {
+      const filters = [
+        { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+        { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
+        { name: 'store', value: storeFilterValue[0]?.value },
+      ].filter(
+        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+        )
 
-    const url = toTableGETUrl({
-      url: '/bakery/report/download/application',
-      filters: filters
-    })
-    try {
+      const url = toTableGETUrl({
+        url: '/bakery/report/download/application',
+        filters: filters
+      })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
-      formatAndDownloadResponse(response)
-    } catch (error) {
-      showNotification({
-        message: `Error while downloading file. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      return formatAndDownloadResponse(response)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
     }
-  }
+  )
 
   return (
     <div className={s.mainContainer}>
@@ -185,7 +190,7 @@ const ApplicationUsageReport = () => {
             {
               label: 'Descarca',
               icon: <DownloadOutlined />,
-              onClick: () => handleDownload()
+              onClick: () => downloadFileQuery.refetch()
             }
           ]}
           rowsPerPage={25}
