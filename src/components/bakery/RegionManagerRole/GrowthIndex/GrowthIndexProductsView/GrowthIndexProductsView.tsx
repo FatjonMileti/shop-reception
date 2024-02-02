@@ -29,7 +29,7 @@ const GrowthIndexProductsView = () => {
     ['families', id],
     async () => {
       const result = await makeCoreGetRequest(
-        '/bakery/store/families',
+        '/bakery/store/cadentier/families',
         {
           params: {
             store: id,

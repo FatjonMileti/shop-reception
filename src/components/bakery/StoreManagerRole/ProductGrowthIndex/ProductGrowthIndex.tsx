@@ -29,7 +29,7 @@ const ProductGrowthIndex = () => {
   const familiesQuery = useQuery(
     ['families'],
     async () => {
-      const result = await makeCoreGetRequest('/bakery/store/families')
+      const result = await makeCoreGetRequest('/bakery/store/cadentier/families')
 
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
