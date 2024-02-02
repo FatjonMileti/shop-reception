@@ -22,7 +22,7 @@ export const SelectBatch = (props: SelectBatchProps) => {
 
   useEffect(() => {
     const loadData = async () => {
-      setIsLoading(true)
+      setIsLoading(true) 
 
       try {
         const response = await makeCoreGetRequest(`/bakery/batch`)

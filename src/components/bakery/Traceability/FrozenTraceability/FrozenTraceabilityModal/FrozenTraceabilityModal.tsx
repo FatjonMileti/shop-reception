@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
 import { useMutation } from 'react-query'
 import { CircularProgress, Grid } from '@mui/material'
@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails'
 import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
-import { getInitialValues } from './helpers'
+import { getInitialValues, getValidationSchema } from './helpers'
 import { SelectOrScanProduct } from '../../ReceivedProducts/AddReceivedProduct/SelectOrScanProduct'
 import { Product } from '../../ReceivedProducts/interfaces'
 
@@ -17,7 +17,7 @@ interface FrozenTraceabilityModalProps {
   isModalOpen: boolean
   closeModal: () => void
   editItem?: any
-  setEditItem: any
+  setEditItem: Function
   isEdit: boolean
 }
 export const FrozenTraceabilityModal = ({
@@ -28,17 +28,17 @@ export const FrozenTraceabilityModal = ({
   isEdit
 }: FrozenTraceabilityModalProps) => {
   const { showNotification } = useNotification()
-  const [step, setStep] = React.useState(0)
-  const [selectedProduct, setSelectedProduct] = React.useState<Product | undefined>(undefined)
-  const [selectedSupplier, setSelectedSupplier] = React.useState<any | undefined>(undefined)
+  const [step, setStep] = useState<number>(0)
+  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(null)
   const [selectedRows, setSelectedRows] = useState([])
+  const [showAddBatch, setShowAddBatch] = useState<boolean>(false)
 
   const submitTask = async values => {
     await makeCorePostRequest(`/bakery/traceability/frozen`, values)
   }
 
   const { isLoading, mutate } = useMutation(submitTask, {
-    onSuccess: res => {
+    onSuccess: () => {
       closeModal()
       showNotification({
         message: `Data added successfully`,
@@ -58,30 +58,39 @@ export const FrozenTraceabilityModal = ({
     [selectedProduct?.id, selectedRows, editItem?.id, isEdit]
   )
 
+  const validationSchema = useMemo(() => getValidationSchema(), []);
+
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: isEdit ? true : false,
-    // TODO: Add validation schema
+    validationSchema: validationSchema,
     initialValues: initialValues,
     onSubmit: async (values: any, { resetForm }) => {
       const payload = {
         ...values,
-        // productId: selectedProduct.id,
-        productionDate: formatBakeryPayloadDate(values.productionDate)
+        productId: values.productId || selectedProduct.id,
+        productionDate: formatBakeryPayloadDate(values.productionDate),
+        metiCode: values?.metiCode || selectedProduct?.metiCode,
+        productName: values?.productName || selectedProduct?.name
       }
       mutate(payload)
       resetForm()
       setSelectedRows([])
+      setStep(0)
+      setSelectedProduct(undefined)
+      setEditItem(null)
     }
   })
+
   const cancel = () => {
     closeModal()
     setSelectedProduct(undefined)
-    setSelectedSupplier(undefined)
     setEditItem(null)
     setStep(0)
+    formik.resetForm()
+    formik.setFieldValue('traceabilityFrozenList', [])
   }
-
+  
   return (
     <Modal
       isModalOpen={isModalOpen}
@@ -108,19 +117,33 @@ export const FrozenTraceabilityModal = ({
                   onCancel={cancel}
                 />,
                 <ProductDetails
-                  selectedProduct={editItem ? { name: '-', metiCode: '-' } : selectedProduct}
-                  onSelectBatch={() => setStep(2)}
+                  selectedProduct={
+                    editItem
+                      ? {
+                          id: formik.values.productId,
+                          name: formik.values.productName || '',
+                          metiCode: formik.values.metiCode || ''
+                        }
+                      : selectedProduct
+                  }
+                  onSelectBatch={() => {
+                    setShowAddBatch(true)
+                    setStep(2)
+                  }}
                   onCancel={cancel}
                   selectedRows={selectedRows}
                   formik={formik}
                   isEdit={isEdit}
                 />,
                 <SelectBatch
-                  onContinue={() => setStep(1)}
+                  onContinue={() => {
+                    setShowAddBatch(false)
+                    setStep(1)
+                  }}
                   onCancel={cancel}
                   setSelectedRows={setSelectedRows}
                 />
-              ][isEdit ? 1 : step]
+              ][showAddBatch ? 2 : isEdit ? 1 : step]
             }
           </>
         )}
