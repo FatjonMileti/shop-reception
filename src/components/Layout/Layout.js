@@ -16,18 +16,18 @@ const Layout = ({ children, modules, setSubdomainId }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [drawerWidth, setDrawerWidth] = useState(DRAWER_WIDTH)
 
-  // const auth = useAuth()
+  const auth = useAuth()
 
   useEffect(() => {
     setDrawerWidth(isMenuOpen ? DRAWER_WIDTH : 0)
   }, [isMenuOpen])
 
-  // useEffect(() => {
-  //   if (auth?.userData) {
-  //     setToken(auth.userData.id_token)
-  //     console.log('new token set!!!!!!!!!!!!')
-  //   }
-  // }, [auth.userData])
+  useEffect(() => {
+    if (auth?.userData) {
+      setToken(auth.userData.id_token)
+      console.log('new token set!!!!!!!!!!!!')
+    }
+  }, [auth.userData])
 
   const handleOpenMenu = () => {
     setIsMenuOpen(true)
