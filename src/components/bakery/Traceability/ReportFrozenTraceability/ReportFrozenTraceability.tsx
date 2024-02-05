@@ -16,6 +16,8 @@ import { ValueLabelInterface } from '../../interfaces'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 import { getCurrentDate } from '../../../../utils/helpers'
+import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
+import { useProductsFilter } from './useProductsFilter'
 
 export const ReportFrozenTraceability = () => {
   const { showNotification } = useNotification()
@@ -25,6 +27,9 @@ export const ReportFrozenTraceability = () => {
   const [rows, setRows] = useState([])
 
   const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
+
+  const productsFilter = useProductsFilter()
+
 
   const handleRemoteDetails = async (rowId: string | number) => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
@@ -42,9 +47,7 @@ export const ReportFrozenTraceability = () => {
           page,
           rowsPerPage,
           searchText,
-          searchFields: [
-            'productName',
-          ]
+          searchFields: ['productName']
         })
       )
 
@@ -59,7 +62,6 @@ export const ReportFrozenTraceability = () => {
       )
     }
   }
-
 
   const families = useQuery(
     ['families-store'],
@@ -120,11 +122,13 @@ export const ReportFrozenTraceability = () => {
       value: undefined,
       filter: (
         <Autocomplete
+          {...productsFilter}
           variant="outlined"
           label="Produs"
           disableClearable
-          options={[]}
-          multiple
+          multiple={true}
+          autoComplete={false}
+          filterOptions={x => x}
         />
       ),
       type: 'autocomplete',
@@ -202,18 +206,20 @@ export const ReportFrozenTraceability = () => {
           totalCount={totalCount}
           filters={drawerFilters}
           hasSearchInput
-          toolbarActions={
-            [
-              // {
-              //   label: 'Add',
-              //   onClick: () => {
-              //     setIsModalOpen(true)
-              //     setIsEdit(false)
-              //   },
-              //   icon: <AddActionIcon />
-              // }
-            ]
-          }
+          toolbarActions={[
+            {
+              label: 'Descarca',
+              icon: <DownloadOutlined />,
+              onClick: () => {
+                //downloadFileQuery.refetch()
+              }
+            },
+            {
+              label: 'Printeaza',
+              icon: <PrintOutlined />,
+              onClick: () => {}
+            }
+          ]}
           rowActions={[
             {
               label: 'Editeaza',
