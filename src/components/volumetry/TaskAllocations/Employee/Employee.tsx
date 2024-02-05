@@ -12,21 +12,14 @@ import { EmployeeProgress } from './EmployeeProgress'
 import { EmployeeActions } from './EmployeeActions'
 import { EmployeeProps } from '../TaskAllocationsDefinitions'
 import { EmployeeIcon } from 'icons'
+import { getTaskCurrentState } from './helpers'
 
 const Employee: React.FC<EmployeeProps> = props => {
   const { employee, task, setShouldRefreshData, setSelectedRowId, hideDetails } = props
 
   const { showNotification } = useNotification()
 
-  const taskCurrentState = useMemo(() => {
-    const isTaskStarted = employee.timerStatus === 'IN_PROGRESS'
-    const isTaskEnded = employee.timerStatus === 'FINISHED'
-
-    const showStartButton = !isTaskStarted && !isTaskEnded
-    const showStopButton = isTaskStarted && !isTaskEnded
-
-    return { isTaskStarted, isTaskEnded, showStartButton, showStopButton }
-  }, [employee.timerStatus])
+  const taskCurrentState = useMemo(() => getTaskCurrentState(employee), [employee.timerStatus])
 
   const customCapsuleColors = getCapsuleColor(
     taskCurrentState.isTaskStarted,
@@ -44,23 +37,27 @@ const Employee: React.FC<EmployeeProps> = props => {
     setIsOpenStopTaskModal(false)
   }
 
-  const submitStartTask = async () => {
+  const submitStartTask = async status => {
     await makeCorePutRequest(`/volumetry/tasks/${employee.id}`, {
-      action: 'START'
+      action: status
     })
     setSelectedRowId(task.taskTemplateId)
     setShouldRefreshData(true)
   }
 
-  const { isLoading, mutate: handleStartTask } = useMutation(submitStartTask, {
+  const { isLoading, mutate: updateTaskStatus } = useMutation(submitStartTask, {
     onSuccess: res => {
       showNotification({
-        message: `Taskul a fost inceput cu succes!`,
+        message: `Statusul task-ului a fost salvat cu succes.`,
         type: 'success'
       })
     },
     onError: error =>
-      handleQueryError(error, 'A aparut o eroare la inceperea taskului.', showNotification)
+      handleQueryError(
+        error,
+        'A aparut o eroare la schimbarea statusului taskului.',
+        showNotification
+      )
   })
 
   return (
@@ -83,7 +80,7 @@ const Employee: React.FC<EmployeeProps> = props => {
             <Grid item sm={12} md={2}>
               <EmployeeActions
                 taskCurrentState={taskCurrentState}
-                handleStartTask={handleStartTask}
+                updateTaskStatus={updateTaskStatus}
                 openStopTaskModal={openStopTaskModal}
               />
             </Grid>
@@ -123,7 +120,7 @@ const Employee: React.FC<EmployeeProps> = props => {
             <Grid item sm={12} md={2}>
               <EmployeeActions
                 taskCurrentState={taskCurrentState}
-                handleStartTask={handleStartTask}
+                updateTaskStatus={updateTaskStatus}
                 openStopTaskModal={openStopTaskModal}
               />
             </Grid>
