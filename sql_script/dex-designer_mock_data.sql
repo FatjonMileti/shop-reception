@@ -231,9 +231,7 @@ VALUES
     -- Volumetry
     (100, 'VOLUMETRY_TASK_ALLOCATOR'),
     (101, 'VOLUMETRY_WORKER'),
-    (102, 'VOLUMETRY_REGION_ADMIN'),
-    (103, 'VOLUMETRY_STORE_ADMIN'),
-    (104, 'VOLUMETRY_TEMPLATE_ADMIN');
+    (102, 'VOLUMETRY_TEMPLATE_ADMIN');
 
 
 -- roles_activities
@@ -271,22 +269,12 @@ VALUES
     -- VOLUMETRY_TASK_ALLOCATOR
     (100, 42),
     (100, 44),
-    (100, 43),  -- temporary let this role access the task templates activity
-    -- (100, 45),
     (100, 46),
     (100, 48),
     -- VOLUMETRY_WORKER
     (101, 47),
-    -- VOLUMETRY_REGION_ADMIN
-    (102, 42),
-    (102, 46),
-    -- (102, 45),
-    -- VOLUMETRY_STORE_ADMIN
-    (103, 42),
-    (103, 44),
-    -- (103, 45),
     -- VOLUMETRY_TEMPLATE_ADMIN
-    (104, 43);
+    (102, 43);
     -- Shop Reception
     -- GG_RO_HQ_IT_DEX_GOV_SRV_ADMIN
     -- (1, 47);
