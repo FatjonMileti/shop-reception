@@ -165,7 +165,7 @@ const SGRProducts = () => {
           <DeleteConfirmationModal
             isModalOpen={isDeleteModalOpen}
             closeModal={closeDeleteModal}
-            actionUrl='/shop-reception/products/sgr/:id'
+            actionUrl='/shop-reception/admin/sgrProducts/:id'
             itemId={`${selectedRow?.id}`}
             cancelLabel='Nu'
             deleteLabel='Da'

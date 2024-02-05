@@ -8,7 +8,6 @@ import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toPayload } from './serializers'
-import item from '../../../../../core-ui/ModalWithForm/ModalForm/FormItem/Item/Item'
 import { ModalFormActionButtons } from '../../../Common/ModalFormActionButtons'
 
 interface NewAdminDepositProps {

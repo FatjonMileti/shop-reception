@@ -7,7 +7,7 @@ import { TruckCard } from '../../../admin/Common/TruckCard'
 const ReceptionProcessing = () => {
   const navigate = useNavigate()
 
-  const trucks: Truck[] = [
+  const trucks: any[] = [
     { id: 1, name: 'Camion 2', description: 'Descriere camion 2' },
     { id: 2, name: 'Camion 3', description: 'Descriere camion 3' }
   ]
@@ -18,7 +18,7 @@ const ReceptionProcessing = () => {
       maxWidth='xs'
       items={[
         <TitleHeader title='Procesarea Recepției' />,
-        ...trucks.map((item: Truck, index) => (
+        ...trucks.map((item: any, index) => (
           <TruckCard
             key={item.id}
             onClick={() => {

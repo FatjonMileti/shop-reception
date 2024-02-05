@@ -10,7 +10,7 @@ const ListTrucks = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
   const navigate = useNavigate()
 
-  const trucks: Truck[] = [
+  const trucks: any[] = [
     { id: 1, name: 'Camion 1', description: 'Descriere camion 1' },
     { id: 2, name: 'Camion 2', description: 'Descriere camion 2' },
     { id: 3, name: 'Camion 3', description: 'Descriere camion 3' }
@@ -20,7 +20,7 @@ const ListTrucks = () => {
     <TitleHeader title='Selecteazǎ Camion' />,
     <Grid
       spacing={1}
-      items={trucks.map((truck: Truck, index) => (
+      items={trucks.map((truck: any, index) => (
         <TruckCard
           key={truck.id}
           onClick={() => {

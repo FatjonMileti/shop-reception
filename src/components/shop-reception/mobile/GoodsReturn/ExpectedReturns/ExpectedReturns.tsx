@@ -5,14 +5,14 @@ import { TruckCard } from '../../../admin/Common/TruckCard'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
 
-const trucks: Truck[] = [
+const trucks: any[] = [
   { id: 1, name: 'Camion 2', description: 'Descriere camion 2' }
 ]
 const ExpectedReturns = () => {
   const navigate = useNavigate()
   let items = [
     <TitleHeader title='RETURURI AȘTEPTATE' />,
-    trucks.map((item: Truck, index) => (
+    trucks.map((item: any, index) => (
       <TruckCard
         key={index}
         onClick={() => {

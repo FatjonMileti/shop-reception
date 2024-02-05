@@ -1,10 +1,6 @@
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { Route } from 'react-router-dom'
 import { URLS } from './constants'
-import { Home } from './Home'
-import { AdminDashboard } from './AdminDashboard'
-import { ReceptionDashboard } from './ReceptionDashboard'
-import { PackageDashboard } from './PackageDashboard'
 import { TruckList } from './ReceptionDashboard/TruckList'
 import { DeliverySlipsList } from './ReceptionDashboard/DeliverySlipsList'
 import { SupportWrongDestination } from './ReceptionDashboard/SupportWrongDestination'
@@ -44,161 +40,369 @@ import { SGRProducts } from './AdminDashboard/SGRProducts'
 export const useShopReceptionRoutes = applicationPages => {
   return (
     <>
+      {/* Admin */}
       <Route
-        path={URLS.AUTH_HOME}
-        element={<Home />}
+        path={URLS.AUTH_ADMIN_DEPOSITS}
+        element={
+          <PrivateRoute
+            component={AdminDeposit}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
       <Route
-        path={URLS.AUTH_ADMIN_DASHBOARD}
-        element={<AdminDashboard />}
+        path={URLS.AUTH_ADMIN_HUBS}
+        element={
+          <PrivateRoute
+            component={AdminHub}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
       <Route
-        path={URLS.AUTH_RECEPTION_DASHBOARD}
-        element={<ReceptionDashboard />}
-      />
-      <Route
-        path={URLS.AUTH_PACKAGE_DASHBOARD}
-        element={<PackageDashboard />}
-      />
-      <Route
-        path={URLS.AUTH_TRUCK_LIST}
-        element={<TruckList />}
-      />
-      <Route
-        path={URLS.AUTH_DELIVERY_SLIPS_LIST}
-        element={<DeliverySlipsList />}
-      />
-      <Route
-        path={URLS.AUTH_SUPPORT_WRONG_DESTINATION}
-        element={<SupportWrongDestination />}
-      />
-      <Route
-        path={URLS.AUTH_UNORDERED_PRODUCTS}
-        element={<UnorderedProducts />}
-      />
-      <Route
-        path={URLS.AUTH_METI_FILES}
-        element={<MetiFiles />}
-      />
-      <Route
-        path={URLS.AUTH_DIFFERENCES_PRODUCTS}
-        element={<DifferencesProducts />}
-      />
-      <Route
-        path={URLS.AUTH_SUPPORT_TRADABILITY}
-        element={<SupportTradability />}
-      />
-      <Route
-        path={URLS.AUTH_ADMIN_DEPOSIT}
-        element={<AdminDeposit />}
-      />
-      <Route
-        path={URLS.AUTH_ADMIN_HUB}
-        element={<AdminHub />}
-      />
-      <Route
-        path={URLS.AUTH_ADMIN_STORE}
-        element={<AdminStore />}
+        path={URLS.AUTH_ADMIN_STORES}
+        element={
+          <PrivateRoute
+            component={AdminStore}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
       <Route
         path={URLS.AUTH_ADMIN_REGIONS}
-        element={<AdminRegions />}
-      />
-      <Route
-        path={URLS.AUTH_MANAGE_SCAN_TYPES}
-        element={<ManageScanTypes />}
-      />
-      <Route
-        path={URLS.AUTH_SUBFAMILY_VALIDITY_THRESHOLD}
-        element={<SubFamilyValidityThreshold />}
-      />
-      <Route
-        path={URLS.AUTH_METI_PRODUCTS}
-        element={<MetiProducts />}
-      />
-      <Route
-        path={URLS.AUTH_ADMIN_SENSITIVE_PRODUCTS}
-        element={<SensitiveProducts />}
-      />
-      <Route
-        path={URLS.AUTH_ADMIN_PACKING_TYPES}
-        element={<PackingTypes />}
-      />
-      <Route
-        path={URLS.AUTH_MANAGE_DLC_PRODUCTS}
-        element={<DLCProducts />}
-      />
-      <Route
-        path={URLS.AUTH_RECEPTION_FILES_INFO}
-        element={<ReceptionFiles />}
+        element={
+          <PrivateRoute
+            component={AdminRegions}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
       <Route
         path={URLS.AUTH_CENTRALIZATION_STORES_HUB}
-        element={<CentralizeStoresHub />}
+        element={
+          <PrivateRoute
+            component={CentralizeStoresHub}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
+
       <Route
-        path={URLS.AUTH_RETURN_TRUCK_LIST}
-        element={<ReturnTruckList />}
+        path={URLS.AUTH_MANAGE_SCAN_TYPES}
+        element={
+          <PrivateRoute
+            component={ManageScanTypes}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
+
       <Route
-        path={URLS.AUTH_ROLLING_PACKAGES}
-        element={<RollingPackages />}
+        path={URLS.AUTH_SUBFAMILY_VALIDITY_THRESHOLD}
+        element={
+          <PrivateRoute
+            component={SubFamilyValidityThreshold}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
+
       <Route
-        path={URLS.AUTH_BALANCE_PACKAGING}
-        element={<BalancePackages />}
+        path={URLS.AUTH_METI_PRODUCTS}
+        element={
+          <PrivateRoute
+            component={MetiProducts}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
+
       <Route
-        path={URLS.AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS}
-        element={<PackagingDisputes />}
+        path={URLS.AUTH_ADMIN_SENSITIVE_PRODUCTS}
+        element={
+          <PrivateRoute
+            component={SensitiveProducts}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
+
       <Route
-        path={URLS.AUTH_PACKAGING_TYPES_DIFFERENCES}
-        element={<PackagingTypesDifferences />}
+        path={URLS.AUTH_ADMIN_PACKING_TYPES}
+        element={
+          <PrivateRoute
+            component={PackingTypes}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
+
       <Route
-        path={URLS.AUTH_RETURNED_PACKAGING}
-        element={<ReturnedPackaging />}
+        path={URLS.AUTH_MANAGE_DLC_PRODUCTS}
+        element={
+          <PrivateRoute
+            component={DLCProducts}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
+
       <Route
-        path={URLS.AUTH_PACKAGING_COMPLIANCE}
-        element={<PackagingCompliance />}
-      />
-      <Route
-        path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION}
-        element={<PackagingDisputesTimer />}
-      />
-      <Route
-        path={URLS.AUTH_DELIVERY_SLIP}
-        element={<ShowDeliverySlip />}
-      />
-      <Route
-        path={URLS.AUTH_TRUCK_DETAIL}
-        element={<TruckDetail />}
-      />
-      <Route
-        path={URLS.AUTH_SUPPORT_WRONG_DESTINATION_DETAIL}
-        element={<SupportWrongDestinationDetail />}
-      />
-      <Route
-        path={URLS.AUTH_METI_FILE_DETAIL}
-        element={<MetiFileDetail />}
-      />
-      <Route
-        path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL}
-        element={<PackagingDisputesTimerDetail />}
-      />
-      <Route
-        path={URLS.AUTH_BALANCE_PACKAGING_FORM}
-        element={<BalancePackageForm />}
-      />
-      <Route
-        path={URLS.AUTH_BALANCE_PACKAGING_HISTORY}
-        element={<BalancePackageHistory />}
+        path={URLS.AUTH_RECEPTION_FILES_INFO}
+        element={
+          <PrivateRoute
+            component={ReceptionFiles}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
       <Route
         path={URLS.AUTH_SGR_PRODUCTS}
-        element={<SGRProducts />}
+        element={
+          <PrivateRoute
+            component={SGRProducts}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      {/* Reception */}
+
+      <Route
+        path={URLS.AUTH_DELIVERY_SLIPS_LIST}
+        element={
+          <PrivateRoute
+            component={DeliverySlipsList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_SLIP}
+        element={
+          <PrivateRoute
+            component={ShowDeliverySlip}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_LIST}
+        element={
+          <PrivateRoute
+            component={TruckList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_SUPPORT_WRONG_DESTINATION}
+        element={
+          <PrivateRoute
+            component={SupportWrongDestination}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_UNORDERED_PRODUCTS}
+        element={
+          <PrivateRoute
+            component={UnorderedProducts}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_METI_FILES}
+        element={
+          <PrivateRoute
+            component={MetiFiles}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_METI_FILE_DETAIL}
+        element={
+          <PrivateRoute
+            component={MetiFileDetail}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_DIFFERENCES_PRODUCTS}
+        element={
+          <PrivateRoute
+            component={DifferencesProducts}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_SUPPORT_TRADABILITY}
+        element={
+          <PrivateRoute
+            component={SupportTradability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      {/* Package */}
+      <Route
+        path={URLS.AUTH_RETURN_TRUCK_LIST}
+        element={
+          <PrivateRoute
+            component={ReturnTruckList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_ROLLING_PACKAGES}
+        element={
+          <PrivateRoute
+            component={RollingPackages}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_BALANCE_PACKAGING}
+        element={
+          <PrivateRoute
+            component={BalancePackages}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS}
+        element={
+          <PrivateRoute
+            component={PackagingDisputes}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_TYPES_DIFFERENCES}
+        element={
+          <PrivateRoute
+            component={PackagingTypesDifferences}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_RETURNED_PACKAGING}
+        element={
+          <PrivateRoute
+            component={ReturnedPackaging}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_COMPLIANCE}
+        element={
+          <PrivateRoute
+            component={PackagingCompliance}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION}
+        element={
+          <PrivateRoute
+            component={PackagingDisputesTimer}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_TRUCK_DETAIL}
+        element={
+          <PrivateRoute
+            component={TruckDetail}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_SUPPORT_WRONG_DESTINATION_DETAIL}
+        element={
+          <PrivateRoute
+            component={SupportWrongDestinationDetail}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL}
+        element={
+          <PrivateRoute
+            component={PackagingDisputesTimerDetail}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_BALANCE_PACKAGING_FORM}
+        element={
+          <PrivateRoute
+            component={BalancePackageForm}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_BALANCE_PACKAGING_HISTORY}
+        element={
+          <PrivateRoute
+            component={BalancePackageHistory}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
       />
     </>
   )

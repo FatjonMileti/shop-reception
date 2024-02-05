@@ -5,7 +5,7 @@ import { TruckCard } from '../../../admin/Common/TruckCard'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
 
-const trucks: Truck[] = [
+const trucks: any[] = [
   { id: 1, name: 'Camion 1', description: 'Descriere camion 1' }
 ]
 
@@ -14,7 +14,7 @@ const ContinueReturn = () => {
 
   let items = [
     <TitleHeader title='CONTINUARE RETUR' />,
-    ...trucks.map((truck: Truck, index) => (
+    ...trucks.map((truck: any, index) => (
       <TruckCard
         key={truck.id}
         onClick={() => {

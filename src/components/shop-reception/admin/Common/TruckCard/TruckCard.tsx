@@ -3,7 +3,7 @@ import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import React from 'react'
 
 interface TruckCardProp {
-  truck: Truck
+  truck: any
   onClick: () => void
 }
 
