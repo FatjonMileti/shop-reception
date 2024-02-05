@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { EmployeeActionsProps } from '../../TaskAllocationsDefinitions'
+import { PlayArrow, Pause, Stop } from '@mui/icons-material'
+import { TASK_STATUS_ACTIONS } from '../constants'
 
 const EmployeeActions = (props: EmployeeActionsProps) => {
   const { taskCurrentState, updateTaskStatus, openStopTaskModal } = props
@@ -22,52 +24,55 @@ const EmployeeActions = (props: EmployeeActionsProps) => {
   return (
     <Box style={{ textAlign: 'right' }}>
       {taskCurrentState.showStartButton && (
-        <Button
+        <IconButton
           variant="contained"
           label="Start"
           style={{
             height: '30px',
             width: isMobile ? '100%' : 'auto'
           }}
+          startIcon={<PlayArrow />}
           onClick={e => {
             e.preventDefault()
             e.stopPropagation()
-            updateTaskStatus('START')
+            updateTaskStatus(TASK_STATUS_ACTIONS.START)
           }}
         />
       )}
       {taskCurrentState.showPauseButton && (
-        <Button
+        <IconButton
           variant="contained"
-          label="Pause"
+          label="Pauza"
           style={{
             height: '30px',
             width: isMobile ? '100%' : 'auto'
           }}
+          startIcon={<Pause />}
           onClick={e => {
             e.preventDefault()
             e.stopPropagation()
-            updateTaskStatus('PAUSE')
+            updateTaskStatus(TASK_STATUS_ACTIONS.PAUSE)
           }}
         />
       )}
       {taskCurrentState.showResumeButton && (
-        <Button
+        <IconButton
           variant="contained"
-          label="Resume"
+          label="Continua"
           style={{
             height: '30px',
             width: isMobile ? '100%' : 'auto'
           }}
+          startIcon={<PlayArrow />}
           onClick={e => {
             e.preventDefault()
             e.stopPropagation()
-            updateTaskStatus('RESUME')
+            updateTaskStatus(TASK_STATUS_ACTIONS.RESUME)
           }}
         />
       )}
       {taskCurrentState.showStopButton && (
-        <Button
+        <IconButton
           variant="contained"
           label="Stop"
           style={{
@@ -75,6 +80,7 @@ const EmployeeActions = (props: EmployeeActionsProps) => {
             width: isMobile ? '100%' : 'auto',
             marginLeft: '12px'
           }}
+          startIcon={<Stop />}
           onClick={e => {
             e.preventDefault()
             e.stopPropagation()
