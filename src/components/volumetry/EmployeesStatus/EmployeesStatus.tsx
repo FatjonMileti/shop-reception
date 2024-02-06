@@ -11,6 +11,7 @@ import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
+import { WebcamCapture } from 'components/core-ui/WebcamCapture'
 
 const EmployeesStatus = () => {
   const { showNotification } = useNotification()
