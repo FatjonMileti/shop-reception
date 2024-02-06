@@ -1,6 +1,6 @@
 {
   "uuid": "db2fc4c5-607e-416b-89bf-7bfd972c8da1",
-  "lastMigration": 27,
+  "lastMigration": 32,
   "name": "DEX CORE REST API",
   "endpointPrefix": "8081/core/rest/api/v1",
   "latency": 0,
@@ -35,7 +35,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fd51d5ef-e5c4-4a73-9334-6658718ab8df",
@@ -57,7 +59,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "19114a0e-708d-4e73-81c5-d7ef8490b099",
@@ -79,7 +83,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "51993814-bcde-4b08-9aea-47aa682fdbb7",
@@ -101,7 +107,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ec6d1d98-9b5a-483a-9d8d-879634134774",
@@ -123,7 +131,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "06c49df8-b26b-4748-85b2-1ffc17319e96",
@@ -145,10 +155,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -178,7 +189,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bd4de8a2-b0c4-4d77-b52f-b537d90ae1f1",
@@ -200,7 +213,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "afe54860-02e2-4f50-92f0-123021439818",
@@ -222,7 +237,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "751dd51e-d06b-4803-94f6-470bee45355d",
@@ -244,7 +261,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d3ff492a-f63d-45fc-9d5e-6fbcfbbbbb25",
@@ -266,7 +285,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e2b64545-4543-4b29-a3da-a2b6e1462523",
@@ -288,10 +309,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -321,7 +343,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6721244f-4772-4351-b905-d025e6bf4128",
@@ -343,7 +367,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "110becb9-95ee-4fff-a0a6-eebf27fd8df6",
@@ -365,7 +391,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "53d419d4-f994-4866-894c-6370e21c6b98",
@@ -387,7 +415,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "00f394b3-6c21-4c7c-ae8f-c43145f0db7c",
@@ -409,7 +439,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6fcb3619-de02-4e00-b49b-8435cef7f7cf",
@@ -431,10 +463,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -464,7 +497,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e0c415e8-a70a-4373-b6cd-6b438261a02a",
@@ -486,7 +521,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6d1d6f5d-0f6a-479b-8d1c-aee29e7d258a",
@@ -508,7 +545,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3dde2e25-3e65-455a-af61-a8623b028dad",
@@ -530,7 +569,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "44a2fc66-a60a-408c-b6e9-f398b114ba5e",
@@ -552,7 +593,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2c6f3ead-1e28-4d3f-be7a-3aaff823ef74",
@@ -574,10 +617,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -607,7 +651,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "89239a83-e46c-4396-b236-5f5c314998fc",
@@ -629,7 +675,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4dd15512-8c83-453a-b723-2989dae2dd8f",
@@ -651,7 +699,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "23e9c568-fd1a-4900-8642-fd85809a6182",
@@ -673,7 +723,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8a11a804-9566-470b-9275-84b463debddd",
@@ -695,7 +747,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0278ae1c-24e7-4764-8550-5b15f31767b3",
@@ -717,10 +771,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -750,7 +805,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "468060b8-b5cf-4b1b-865d-4a54f50f62f7",
@@ -772,7 +829,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "df319138-6539-4d81-9466-0e318b020a9d",
@@ -794,7 +853,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8c5109fd-4f85-4d29-bc40-67f750edf16a",
@@ -816,7 +877,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ce432e94-c549-411a-9297-98c25c29c0e1",
@@ -838,7 +901,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6b2b8957-b82a-4694-9abf-08f7e085044c",
@@ -860,10 +925,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -893,7 +959,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "dfa18841-9362-494f-b81a-e00c5a6a332c",
@@ -915,7 +983,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1f76c76c-bb76-4c5c-889d-eaa8c7680714",
@@ -937,7 +1007,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1974e7b3-6613-48e2-a116-f8d662f63b11",
@@ -959,7 +1031,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "20fad1b5-abc4-4676-bbdf-4065fe9e7793",
@@ -981,7 +1055,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ecaf5b37-78e9-41fc-9324-1be7cfb714da",
@@ -1003,10 +1079,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1036,7 +1113,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "cc835f04-de90-4761-96df-429a316956bb",
@@ -1058,7 +1137,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "712467cb-93cb-4f31-a6ae-1f023c639485",
@@ -1080,7 +1161,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e6c66b92-5968-45e9-badf-e206f4ad8182",
@@ -1102,7 +1185,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6b01a0d7-1786-4293-be9b-5496c95a8228",
@@ -1124,7 +1209,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5c135a28-0e2a-4403-94ed-87b88e1984a8",
@@ -1146,10 +1233,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1179,7 +1267,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1bfd69f7-392f-4c1f-b7f1-231c035003e2",
@@ -1201,7 +1291,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "39f9902d-bb67-485d-9cb7-324223845cd4",
@@ -1223,7 +1315,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "96f56076-f928-4551-95c5-787ec942b951",
@@ -1245,7 +1339,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "a5ec77b0-2b74-43ad-b7ce-85b2b03a593e",
@@ -1267,7 +1363,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "a49edf31-be26-477b-b2f8-baff06c29647",
@@ -1289,10 +1387,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1322,7 +1421,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4a42dc21-f935-4284-92fe-e4048c26a08e",
@@ -1344,7 +1445,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9ec7eafa-ddad-4d14-8046-bace59c792ab",
@@ -1366,7 +1469,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e3a4fb50-25dd-40f9-a687-bcbcbba1a568",
@@ -1388,7 +1493,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "a21a184a-c034-4c3b-acec-4ed576fa964a",
@@ -1410,7 +1517,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0bc0223a-90fe-40a9-8488-7de5f532ff3e",
@@ -1432,10 +1541,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1465,7 +1575,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "540c7f2d-0f5b-4c7d-a063-c9c54aa89b9d",
@@ -1487,7 +1599,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "28158776-bb9c-4fc4-9d51-a7bbc94e6f86",
@@ -1509,7 +1623,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "70a67c95-b511-44a7-b0a3-e9dd82d9a924",
@@ -1531,7 +1647,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3a130680-b76d-43c7-b944-27c5d60545df",
@@ -1553,7 +1671,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "a651e2d5-fbfe-4235-8a86-05b8367ddd73",
@@ -1575,10 +1695,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1608,7 +1729,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e19edc9c-273c-4c49-b7df-90957759cb07",
@@ -1630,7 +1753,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "da39891d-2885-4f4e-a479-bdd48459106d",
@@ -1652,7 +1777,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "511cffc1-61d2-4393-a598-3e44dbbb3f67",
@@ -1674,7 +1801,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "06e2b06f-3511-4fac-97e5-f4f2ec3c6212",
@@ -1696,7 +1825,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b4dc3c3c-550c-4ce9-9329-09c090cdc4d9",
@@ -1718,10 +1849,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1751,7 +1883,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e59f4a78-8942-432c-a1b2-d220ff079ead",
@@ -1773,7 +1907,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d3421574-4d80-426f-8e2f-45e83a725297",
@@ -1795,7 +1931,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "a76f3e66-a591-4311-b68d-010c33f254d6",
@@ -1817,7 +1955,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9cabc595-6e8f-41cc-b27e-828d3ee114be",
@@ -1839,7 +1979,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2446505c-723f-420e-9c09-2eefa7cf6acf",
@@ -1861,10 +2003,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1894,7 +2037,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e6580d75-1a0d-49c9-9bc2-5b0f5397df8e",
@@ -1916,7 +2061,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0461fb8a-cd0e-47a8-b945-1ea6ba1086b0",
@@ -1938,7 +2085,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "709cae23-6d5d-41fa-9499-7d779cdd1ab1",
@@ -1960,7 +2109,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2db82ec1-870a-42e6-84ec-9e0dc4c401d6",
@@ -1982,7 +2133,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d9073587-56d1-41c2-83d2-e7e5e18429c4",
@@ -2004,10 +2157,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2037,7 +2191,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "321d0ba8-fd60-4ab2-ad50-03b5787725d6",
@@ -2059,7 +2215,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1a458ef6-54cd-4e6d-9702-929ff1dc0bca",
@@ -2081,7 +2239,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "96b8e9fb-b258-4409-89a2-47ca29ce7870",
@@ -2103,7 +2263,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0b96ce92-1a70-4e6e-86bb-77b07ce3f53c",
@@ -2125,7 +2287,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e6472fe7-c5c9-4a6a-a691-9b84081f750c",
@@ -2147,10 +2311,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2180,7 +2345,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "abcff711-2a2c-44f7-914a-6e204f798c5f",
@@ -2202,7 +2369,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e4bdf66e-2b95-470a-bbaf-3def3c54e187",
@@ -2224,7 +2393,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5980c552-d5a4-4658-be77-7f710dc5f41a",
@@ -2246,7 +2417,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0bed00c2-831a-4d44-9ef2-f17306eab1ef",
@@ -2268,7 +2441,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "faed14fa-f878-4dbb-8716-68dabcd2f069",
@@ -2290,10 +2465,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2323,7 +2499,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1e0c8199-69dd-45a2-8154-fc87a0ace90d",
@@ -2345,7 +2523,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "c797c41c-6a1a-41eb-beed-f2e8a3a90c17",
@@ -2367,7 +2547,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6d64a1eb-1527-47ba-8bdd-536efd631774",
@@ -2389,7 +2571,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "468015b3-3294-4951-864c-62ca1a2a27e8",
@@ -2411,7 +2595,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "cccc8eb3-b837-4d2a-86fc-42d238365a0b",
@@ -2433,10 +2619,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2466,7 +2653,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "24aed833-d2df-4f85-b1e3-5a232e13e2e1",
@@ -2488,7 +2677,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "89eda000-5a30-402c-b803-3e4bacdcf79a",
@@ -2510,7 +2701,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1d2147a6-39c2-4bfd-9a9c-d1e212699e49",
@@ -2532,7 +2725,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ad2f5b0b-60b6-4958-a86a-68349df77451",
@@ -2554,7 +2749,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e5cb86a6-ed45-41e1-9320-ed62f26a0b80",
@@ -2576,10 +2773,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2609,7 +2807,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "56efa46e-a08a-49fe-bd31-ca54911d5248",
@@ -2631,7 +2831,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "24a015c2-eff3-42c2-ad26-4aa35f5ee0e5",
@@ -2653,7 +2855,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "64f384f4-78da-486c-a4a6-2bf0a44c2479",
@@ -2675,7 +2879,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "dc691fd9-3372-44a0-83b2-fcd960824685",
@@ -2697,7 +2903,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "504a3682-ab73-4b2c-b760-ba0df157fca5",
@@ -2719,10 +2927,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2752,7 +2961,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b38c1ca8-92fa-4beb-a852-1084da07ed77",
@@ -2774,7 +2985,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e3f8962a-b920-4c87-b8cf-cc291c1fe1c1",
@@ -2796,7 +3009,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3016b28a-21a4-48f2-95e6-7b57f60524a8",
@@ -2818,7 +3033,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0c1675fb-efa2-428f-8818-30486ea6ee63",
@@ -2840,7 +3057,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8ee846a5-2571-49ca-8ff1-c41b5dfc908d",
@@ -2862,10 +3081,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2877,7 +3097,7 @@
       "responses": [
         {
           "uuid": "3b2a8961-33c0-4f7c-8b0f-39fdbeff0e8f",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"stage\": \"Design\",\n      \"project\": {\n        \"id\": 1,\n        \"iibKey\": \"IIB-xxx\",\n        \"ipbKey\": \"IPB-xxx\",\n        \"name\": \"DEX\",\n        \"tshirtSize\": \"L\"\n      },\n      \"startDate\": \"2023-02-01\",\n      \"endDate\": \"2023-02-01\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\r\n  \"list\": [\r\n    {\r\n      \"id\": 1,\r\n      \"stage\": \"Evaluation\",\r\n      \"project\": {\r\n        \"id\": 1,\r\n        \"iibKey\": \"IIB-97\",\r\n        \"ipbKey\": \"IPB-9933\",\r\n        \"name\": \"Operational data source\",\r\n        \"tshirtSize\": \"L\"\r\n      },\r\n      \"startDate\": \"2022-10-01\",\r\n      \"endDate\": \"2023-02-11\"\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"stage\": \"Evaluation\",\r\n      \"project\": {\r\n        \"id\": 2,\r\n        \"iibKey\": \"IIB-609\",\r\n        \"ipbKey\": \"\",\r\n        \"name\": \"App challange 2023\",\r\n        \"tshirtSize\": \"L\"\r\n      },\r\n      \"startDate\": \"2022-12-24\",\r\n      \"endDate\": \"2023-05-01\"\r\n    },\r\n    {\r\n      \"id\": 3,\r\n      \"stage\": \"Analysis\",\r\n      \"project\": {\r\n        \"id\": 3,\r\n        \"iibKey\": \"IIB-609\",\r\n        \"ipbKey\": \"IPB-2342\",\r\n        \"name\": \"App challange 2023 Analysis\",\r\n        \"tshirtSize\": \"L\"\r\n      },\r\n      \"startDate\": \"2022-02-01\",\r\n      \"endDate\": \"2023-06-01\"\r\n    },\r\n    {\r\n      \"id\": 4,\r\n      \"stage\": \"Design\",\r\n      \"project\": {\r\n        \"id\": 4,\r\n        \"iibKey\": \"IIB-123\",\r\n        \"ipbKey\": \"IPB-5435\",\r\n        \"name\": \"App challange 2023\",\r\n        \"tshirtSize\": \"L\"\r\n      },\r\n      \"startDate\": \"2022-01-01\",\r\n      \"endDate\": \"2023-02-10\"\r\n    },\r\n     {\r\n      \"id\": 5,\r\n      \"stage\": \"Development\",\r\n      \"project\": {\r\n        \"id\": 5,\r\n        \"iibKey\": \"IIB-453\",\r\n        \"ipbKey\": \"\",\r\n        \"name\": \"App challange 2023\",\r\n        \"tshirtSize\": \"L\"\r\n      },\r\n      \"startDate\": \"2022-01-01\",\r\n      \"endDate\": \"2023-02-10\"\r\n    }\r\n  ],\r\n  \"page\": {\r\n    \"pageSize\": 10,\r\n    \"page\": {{faker 'datatype.number'}},\r\n    \"totalCount\": {{faker 'datatype.number'}},\r\n    \"pageCount\": {{faker 'datatype.number'}}\r\n  }\r\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted project milestones list",
@@ -2895,7 +3115,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bd5b55eb-ed56-43ec-ad61-1cc38f2c99c4",
@@ -2917,7 +3139,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "85d85e8c-2ce1-41ae-a225-0d705dbfb8c7",
@@ -2939,7 +3163,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "91a532d8-7012-416a-a440-2023ae9d23a7",
@@ -2961,7 +3187,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b45c730f-ee1a-4002-aca7-a24ac6ce582f",
@@ -2983,7 +3211,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "65c7e178-0e77-4072-91db-9e6512362e6c",
@@ -3005,10 +3235,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3038,7 +3269,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "40ec56ad-4430-4397-a8d1-a4a536687946",
@@ -3060,7 +3293,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "50d2023f-1a88-40cf-8e57-620c60849e16",
@@ -3082,7 +3317,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "abf6a809-93e7-4bdc-8399-6273a3920d2c",
@@ -3104,7 +3341,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9ef0579b-a8fa-43f5-9aef-d5c9bdea8003",
@@ -3126,7 +3365,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5d5f8a49-b64f-47af-b3b5-3bbe78f44964",
@@ -3148,10 +3389,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3181,7 +3423,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "01db45cb-ad90-42a7-b9c7-94acd218dc22",
@@ -3203,7 +3447,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "19c21a8a-6818-48cb-b04e-d4130613dec0",
@@ -3225,7 +3471,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "96ebcbe1-946d-4921-9ca2-a8e3d32dd931",
@@ -3247,7 +3495,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b37ac7bb-398e-4f21-a7fd-3f907d382d01",
@@ -3269,7 +3519,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0b1f999a-77ed-4779-baab-1a4d975f2db9",
@@ -3291,10 +3543,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3324,7 +3577,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1ebdad61-8643-4221-928b-48e902f52ade",
@@ -3346,7 +3601,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "383d23b9-f28a-46b9-8cfe-9c9fdb0fbad9",
@@ -3368,7 +3625,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e3c0221a-e027-45b6-91b7-cb821bb3106f",
@@ -3390,7 +3649,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d14501c8-998e-4356-96f4-65c45fc13d5b",
@@ -3412,7 +3673,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "908e479d-428d-4c98-bdb1-8db37346bbca",
@@ -3434,10 +3697,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3467,7 +3731,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4f4eb610-5cac-45b4-a59b-c21f3d5ae9e2",
@@ -3489,7 +3755,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "cf024df4-9289-45b9-a847-86bbd2bf9643",
@@ -3511,7 +3779,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "192245d7-1e65-4f82-b717-73f87eae0905",
@@ -3533,7 +3803,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "a86bb6a0-eea3-464f-a454-ac85a112d5eb",
@@ -3555,7 +3827,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4e97267a-41f9-4799-b947-1e103fa91cf6",
@@ -3577,10 +3851,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3610,7 +3885,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5db14835-a822-48e2-8a51-9075f5e58872",
@@ -3632,7 +3909,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0c839f60-c7b6-4bee-9fec-a01dd29f4875",
@@ -3654,7 +3933,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b52b137b-a8fb-4827-aabe-3f174f708caa",
@@ -3676,7 +3957,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1240e49f-7af1-4b4d-ac78-7c12d15a022e",
@@ -3698,7 +3981,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "64c0aded-2b07-4d4a-a9b3-4efa0640a565",
@@ -3720,10 +4005,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3753,7 +4039,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0c36ee97-fd9b-4cb7-8156-a3ba67ee7966",
@@ -3775,7 +4063,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1705102c-2462-4b30-806a-9cb07d300ec2",
@@ -3797,7 +4087,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0a598ef7-5389-46e0-b934-a92ebff67b2b",
@@ -3819,7 +4111,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8b6da2db-a6ea-4e72-acc0-62f6effc4692",
@@ -3841,7 +4135,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bd8e9c99-a172-4de9-b328-4be328df63e5",
@@ -3863,10 +4159,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3896,7 +4193,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "70606faf-e4c0-40f1-b3a5-b2b0b9b09f9a",
@@ -3918,7 +4217,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0b48d850-37c5-4be3-9d7f-f81ea0981def",
@@ -3940,7 +4241,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "78ad2053-d431-41ba-864a-94a3b430778a",
@@ -3962,7 +4265,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6fe1d17f-cd65-4da1-9427-cae0e11829b4",
@@ -3984,7 +4289,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3885a4ee-279e-44a3-b87b-d8dd0b457a70",
@@ -4006,10 +4313,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4034,10 +4342,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4067,10 +4376,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4082,7 +4392,7 @@
       "responses": [
         {
           "uuid": "e0d42fac-76d1-49fb-9bdc-732148a75b6a",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Carrefour Baneasa\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Carrefour Colosseum\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Carrefour Orhideea\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Carrefour Militari\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Carrefour Park Lake\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Carrefour Veranda\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Carrefour Baneasa\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Carrefour Colosseum\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Carrefour Orhideea\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Carrefour Militari\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Carrefour Park Lake\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Carrefour Veranda\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4100,10 +4410,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4115,7 +4426,7 @@
       "responses": [
         {
           "uuid": "38485b8f-4ccd-43ca-9257-46c941bf18b6",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 1,\n        \"name\": \"BLS\"\n      },\n      \"name\": \"Mircea Dumitru\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Ioana Alexandra Stamate\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Avram Mihai\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Florin Ion\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Diana Vasilescu\",\n      \"position\": {\n        \"id\": 9,\n        \"name\": \"Lucrator universal\"\n      }\n    },\n    {\n      \"id\": 6,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Florin Gusa\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 1,\n        \"name\": \"BLS\"\n      },\n      \"name\": \"Mircea Dumitru\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      },\n      \"work_group\": \"ON_SHIFT\"\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Ioana Alexandra Stamate\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      },\n      \"work_group\": \"ON_SHIFT\"\n    },\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Avram Mihai\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      },\n      \"work_group\": \"ON_SHIFT\"\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Florin Ion\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      },\n      \"work_group\": \"OFF_SHIFT\"\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Diana Vasilescu\",\n      \"position\": {\n        \"id\": 9,\n        \"name\": \"Lucrator universal\"\n      },\n      \"work_group\": \"MERCHENDISER\"\n    },\n    {\n      \"id\": 6,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Florin Gusa\",\n      \"position\": {\n        \"id\": 7,\n        \"name\": \"Sef echipa\"\n      },\n      \"work_group\": \"MERCHENDISER\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4133,10 +4444,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4148,7 +4460,7 @@
       "responses": [
         {
           "uuid": "db72bf61-671e-4ba2-b4e7-0b8be10b5fde",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Cristi Marculescu\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Pintilie Ionut\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Irina Ioana Vasile\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Tudor Petcu\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Maria Dragan\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\n        \"id\": 2,\n        \"name\": \"EPCS\"\n      },\n      \"name\": \"Cristi Marculescu\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 2,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Pintilie Ionut\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 3,\n      \"department\": {\n        \"id\": 5,\n        \"name\": \"PGC\"\n      },\n      \"name\": \"Irina Ioana Vasile\",\n      \"position\": {\n        \"id\": 8,\n        \"name\": \"Casier\"\n      }\n    },\n    {\n      \"id\": 4,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Tudor Petcu\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    },\n    {\n      \"id\": 5,\n      \"department\": {\n        \"id\": 3,\n        \"name\": \"TEXTILE\"\n      },\n      \"name\": \"Maria Dragan\",\n      \"position\": {\n        \"id\": 10,\n        \"name\": \"Asistent vanzari\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4166,10 +4478,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4181,7 +4494,7 @@
       "responses": [
         {
           "uuid": "e0176e67-ef4e-4bc2-8b0c-9f1454acd56b",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"BLS\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"EPCS\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"TEXTILE\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"APLS\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"PCG\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"BO\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"E-COM/BRINGO\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"BLS\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"EPCS\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"TEXTILE\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"APLS\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"PCG\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"BO\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"E-COM/BRINGO\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4199,10 +4512,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4214,7 +4528,7 @@
       "responses": [
         {
           "uuid": "fc5570b6-4c7d-4fb4-b77d-103899c60059",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 7,\n      \"name\": \"Sef echipa\"\n    },\n    {\n      \"id\": 8,\n      \"name\": \"Caiser\"\n    },\n    {\n      \"id\": 9,\n      \"name\": \"Lucrator universal\"\n    },\n    {\n      \"id\": 10,\n      \"name\": \"Asistent vanzari\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 7,\n      \"name\": \"Sef echipa\"\n    },\n    {\n      \"id\": 8,\n      \"name\": \"Caiser\"\n    },\n    {\n      \"id\": 9,\n      \"name\": \"Lucrator universal\"\n    },\n    {\n      \"id\": 10,\n      \"name\": \"Asistent vanzari\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -4232,10 +4546,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4260,10 +4575,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4293,10 +4609,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4321,10 +4638,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4349,10 +4667,1021 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "1bc0e3eb-eaf5-4657-94ce-058eec4f2aac",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/task",
+      "responses": [
+        {
+          "uuid": "992f860e-3d73-44d3-bc80-e0976b8d2897",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    },\n    {\n      \"id\": 2,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"112233Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"2.0\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"tur/ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ac8f76e5-3647-4b9b-922a-5f8753ce7425",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/frequency",
+      "responses": [
+        {
+          "uuid": "0b321483-7d64-4168-96b8-364472323d72",
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"zilnic\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"ocazional\"\n  },\n  {\n    \"id\": 3,\n    \"name\": \"saptamanal\"\n  },\n  {\n    \"id\": 4,\n    \"name\": \"L,Ma,Mi,J,V\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "22254d8f-208f-4fe3-8cae-8317ab4488cf",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/productivityStandardUM",
+      "responses": [
+        {
+          "uuid": "ba6e71de-f36a-47f9-ab44-4e3e08a247ea",
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"SN/ora\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"articol/ora\"\n  },\n  {\n    \"id\": 3,\n    \"name\": \"palet/ora\"\n  },\n  {\n    \"id\": 4,\n    \"name\": \"unitati/ora\"\n  },\n  {\n    \"id\": 5,\n    \"name\": \"element/ora\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "08931dc4-c02f-40a9-b0c0-ca7b270203f0",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/workVolumeSource",
+      "responses": [
+        {
+          "uuid": "7f7c4418-af51-4760-a939-1911cdc17724",
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ce2e08d5-537e-46c6-808e-ff0541e30358",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/task/:id",
+      "responses": [
+        {
+          "uuid": "a407087e-cd9b-4b3f-a944-2098b06f378e",
+          "body": "{\n  \"id\": 1,\n  \"department\": {\n    \"id\": 1,\n    \"name\": \"BLS\"\n  },\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Category 1\"\n  },\n  \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n  \"estimateStartTime\": \"06:30\",\n  \"estimateEndTime\": \"08:30\",\n  \"frequency\": {\n    \"id\": 1,\n    \"name\": \"zilnic\"\n  },\n  \"prodStandardValue\": \"2.0\",\n  \"prodStandardUM\": {\n    \"id\": 1,\n    \"name\": \"tur/ora\"\n  },\n  \"workVolumeSource\": {\n    \"id\": 1,\n    \"name\": \"Meti\"\n  },\n  \"priority\": 1,\n  \"status\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "eb7142d7-4669-4dbe-b223-2eb11fbe3934",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "volumetry/task/:id",
+      "responses": [
+        {
+          "uuid": "0d3f3620-c4a8-4192-a737-c35ebcdf3bce",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "dc02a546-b450-439e-bf1d-3bffc7f926cb",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "volumetry/task",
+      "responses": [
+        {
+          "uuid": "1fec295e-b87e-402f-b265-58e374971cae",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "cbc28fa3-ee8e-42bf-9d89-e860525de038",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "volumetry/task/:id",
+      "responses": [
+        {
+          "uuid": "1b061358-9924-4d1a-8fe7-c4b9f4b615da",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "3ad38cf2-eb48-430c-b6b7-a463ada8ec22",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/taskAllocation",
+      "responses": [
+        {
+          "uuid": "556eb651-5b3c-4cbb-8370-b14a17045d57",
+          "body": "{\n    \"list\": [\n    {\n      \"id\": 1,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"30\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"etichete\", \"unit\": \"ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true,\n      \"volume\": {\n        \"total\": 400,\n        \"performed\": 150,\n        \"inProgress\": 150,\n        \"remaining\": 150\n        \n      },\n      \"assignedEmployee\": 3\n      \n    },\n    {\n      \"id\": 2,\n      \"department\": {\"id\": 1, \"name\": \"BLS\"},\n      \"taskName\": \"112233Tur de departament/magazin deschidere magazin\",\n      \"estimateStartTime\": \"06:30\",\n      \"estimateEndTime\": \"8:30\",\n      \"frequency\": {\"id\": 1, \"name\": \"zilnic\"},\n      \"prodStandardValue\": \"30\",\n      \"prodStandardUM\": {\"id\": 1, \"name\": \"etichete\", \"unit\": \"ora\"},\n      \"workVolumeSource\": {\"id\": 1, \"name\": \"Meti\"},\n      \"priority\": 1,\n      \"status\": true,\n      \"volume\": {\n        \"total\": 400,\n        \"performed\": 150,\n        \"inProgress\": 150,\n        \"remaining\": 150\n        \n      },\n      \"assignedEmployee\": 3\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "d062937f-4849-4ed5-809e-16cd598a5e16",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "volumetry/taskAllocation/assignEmployee",
+      "responses": [
+        {
+          "uuid": "75f762e8-77fa-405b-9a1f-5705dab4a7c5",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "3e00012b-3320-48c5-94de-35ba1a002e50",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/taskAllocation/details/:id",
+      "responses": [
+        {
+          "uuid": "ec8ef1a0-f23f-4a51-8237-803d5c646b39",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"employee\": {\n        \"name\": \"Florin Avramescu\",\n        \"id\": 0\n      },\n      \"startTime\": {\n        \"isStarted\": false,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"10:30\"\n      },\n      \"volume\": {\n        \"value\": 4,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 0\n    },\n    {\n      \"id\": 2,\n      \"employee\": {\n        \"name\": \"Ioana Alexandra Stamate\",\n        \"id\": 1\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 40\n    },\n    {\n      \"id\": 3,\n      \"employee\": {\n        \"name\": \"Florina Toma\",\n        \"id\": 2\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": true,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"customText\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \"\n    },\n    {\n      \"id\": 4,\n      \"employee\": {\n        \"name\": \"Diana Vasilescu\",\n        \"id\": 3\n      },\n      \"startTime\": {\n        \"isStarted\": true,\n        \"time\": \"06:30\"\n      },\n      \"endTime\": {\n        \"isEnded\": false,\n        \"time\": \"08:30\"\n      },\n      \"volume\": {\n        \"value\": 2,\n        \"measureUnit\": \"h\"\n      },\n      \"progress\": 100,\n      \"isOverdue\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "71a861d9-cdb9-4ade-a034-566466c8cf1c",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "volumetry/taskAllocation/details/:id",
+      "responses": [
+        {
+          "uuid": "283c9bf3-d70f-4de1-9290-5d7ce019c3db",
+          "body": "{\n\n  \"customText\": \"Custom text here\",\n  \"volum\": 123\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful operation",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a8d34e19-624a-47cd-8bea-57dbea523110",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "620b115b-1472-4142-8462-0426ee7b58bb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a6b985b7-9260-41c3-ad1f-344f7c17fd83",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "9118fd3e-c661-424d-8470-8a2c710a0ecb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "bb29b6bf-68a9-4edb-92a8-4e28c5b59de7",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "85e44311-fab6-42fe-a1f7-de3e2c774aaa",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/category",
+      "responses": [
+        {
+          "uuid": "c186c029-0c03-4f01-846a-1e4d1c76697f",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Category 1\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Category 2\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Category 3\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Category 4\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Category 5\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Category 6\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"Category 7\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "6bc13870-c31c-41d3-ac3e-185580d69c57",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/department/:id",
+      "responses": [
+        {
+          "uuid": "7c8241e9-eacc-47f4-b186-650fd4aeb8b8",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"ABC\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"BCD\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"CDE\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"DEF\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"EFG\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"FGH\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"GHI\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "b22143cc-fa60-4f5c-963f-e4e889eb0676",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/raion/:id",
+      "responses": [
+        {
+          "uuid": "f63ac177-f4c9-4531-b710-e134130fe4ec",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Raion 1\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Raion 2\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Raion 3\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Raion 4\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Raion 5\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Raion 6\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"Raion 7\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "33edd441-4c55-40ff-bb89-d9d650d3f240",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/priority",
+      "responses": [
+        {
+          "uuid": "d8298498-ef42-408c-8d95-195a801da4aa",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"name\": \"Prioritate 1\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Prioritate 2\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Prioritate 3\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Prioritate 4\"\n    },\n    {\n      \"id\": 5,\n      \"name\": \"Prioritate 5\"\n    },\n    {\n      \"id\": 6,\n      \"name\": \"Prioritate 6\"\n    },\n    {\n      \"id\": 7,\n      \"name\": \"Prioritate 7\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "cbba3735-1240-434d-b05f-c61233c3b0bb",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "volumetry/taskAllocation/start/:id",
+      "responses": [
+        {
+          "uuid": "a5013e88-eb74-45a5-a039-51594608a769",
+          "body": "{\n  \"isStarted\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful operation",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "fe5762e4-02de-4b2f-8daa-7a43fbca7156",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cf06631a-0475-4f03-8438-f7130e20ba7b",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c00399ad-fb29-48ac-954e-6e8633393188",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "d5018124-a0fd-4e52-bfad-6d3caacdfee3",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "bb6a2ff9-d118-44d4-bcae-5875064d527f",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ba1c2449-2c1b-4973-adcc-56ec68ef0517",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "volumetry/taskAllocation/details/:id",
+      "responses": [
+        {
+          "uuid": "1846346f-22a6-4e67-8845-c985b0faac44",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "8aca656d-df76-47ae-b8db-fa4cca0c55bf",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "volumetry/evaluationReports",
+      "responses": [
+        {
+          "uuid": "2e93e9ea-daa2-48a5-8d5b-f9754f938bad",
+          "body": "{\r\n  \"list\": [\r\n    {\r\n        \"id\": \"1\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 10,\r\n        \"totalExcutedTasks\": 8,\r\n        \"appliedVolumetryProcessPercentage\": 75,\r\n        \"utilizedVsStandardHours\": -1.25,\r\n        \"utilizedVsStandardFTE\": -0.8\r\n    },\r\n    {\r\n        \"id\": \"2\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 15,\r\n        \"totalExcutedTasks\": 12,\r\n        \"appliedVolumetryProcessPercentage\": 80,\r\n        \"utilizedVsStandardHours\": -0.75,\r\n        \"utilizedVsStandardFTE\": -0.5\r\n    },\r\n    {\r\n        \"id\": \"3\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 20,\r\n        \"totalExcutedTasks\": 18,\r\n        \"appliedVolumetryProcessPercentage\": 90,\r\n        \"utilizedVsStandardHours\": 1.5,\r\n        \"utilizedVsStandardFTE\": 1.2\r\n    },\r\n    {\r\n        \"id\": \"4\",\r\n        \"department\": \"PGC\",\r\n        \"dayNumber\": 1,\r\n        \"totalDailyTasks\": 12,\r\n        \"totalExcutedTasks\": 10,\r\n        \"appliedVolumetryProcessPercentage\": 83.33,\r\n        \"utilizedVsStandardHours\": -2.5,\r\n        \"utilizedVsStandardFTE\": -1.6\r\n    }\r\n  ],\r\n  \"page\": {\r\n    \"pageSize\": 10,\r\n    \"page\": {{faker 'number.int'}},\r\n    \"totalCount\": {{faker 'number.int'}},\r\n    \"pageCount\": {{faker 'number.int'}}\r\n  },\r\n  \"summary\": {\r\n    \"departmentTotalExcutedTasks\": {{faker 'number.int' min=0 max=10}},\r\n    \"departmentAppliedVolumetryProcessPercentage\": {{faker 'number.int' min=0 max=100}},\r\n    \"departmentUtilizedVsStandardHours\": {{faker 'number.float' min=-999 max=999 precision=2}},\r\n    \"departmentUtilizedVsStandardFTE\": {{faker 'number.float' min=-100 max=100 precision=2}}\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "d8d5879f-7522-4805-82c3-5fbdcd175240",
+      "type": "http",
+      "documentation": "Get team members list",
+      "method": "get",
+      "endpoint": "governance/publicHolidays/:year",
+      "responses": [
+        {
+          "uuid": "aae62948-c4b6-49fb-8200-bd1a223a58d9",
+          "body": "[\n  {\n    \"id\": 1,\n    \"date\": \"{{urlParam 'year'}}-01-01\",\n    \"description\": \"Anul Nou\"\n  },\n  {\n    \"id\": 2,\n    \"date\": \"{{urlParam 'year'}}-01-02\",\n    \"description\": \"Anul Nou\"\n  },\n  {\n    \"id\": 3,\n    \"date\": \"{{urlParam 'year'}}-01-02\",\n    \"description\": \"Ziua Unirii Principatelor Române\"\n  },\n  {\n    \"id\": 4,\n    \"date\": \"{{urlParam 'year'}}-04-14\",\n    \"description\": \"Vinerea Mare\"\n  },\n  {\n    \"id\": 5,\n    \"date\": \"{{urlParam 'year'}}-04-16\",\n    \"description\": \"Paște ortodox\"\n  },\n  {\n    \"id\": 6,\n    \"date\": \"{{urlParam 'year'}}-04-17\",\n    \"description\": \"Paște ortodox\"\n  },\n  {\n    \"id\": 7,\n    \"date\": \"{{urlParam 'year'}}-12-25\",\n    \"description\": \"Crăciunul\"\n  },\n  {\n    \"id\": 8,\n    \"date\": \"{{urlParam 'year'}}-12-26\",\n    \"description\": \"Crăciunul\"\n  }\n]",
+          "latency": 150,
+          "statusCode": 200,
+          "label": "Successfully obtained the public holidays for param year",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0dca18b4-6c67-4e10-b294-82bf1a2d4d15",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "249d54a7-0fc1-4dbb-a1cf-b075f7e321f3",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c2e59f8b-9e38-4539-981c-fc189e3bb38d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "d352af74-9470-4bf9-8fe5-f55bb02cee9f",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1232b411-8339-4c18-a5af-c986b0ecb8c4",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
       "responseMode": null
     }
   ],
@@ -4512,6 +5841,86 @@
     {
       "type": "route",
       "uuid": "1abd0193-5b4a-4363-8b99-50b07bf6eb0e"
+    },
+    {
+      "type": "route",
+      "uuid": "1bc0e3eb-eaf5-4657-94ce-058eec4f2aac"
+    },
+    {
+      "type": "route",
+      "uuid": "ac8f76e5-3647-4b9b-922a-5f8753ce7425"
+    },
+    {
+      "type": "route",
+      "uuid": "22254d8f-208f-4fe3-8cae-8317ab4488cf"
+    },
+    {
+      "type": "route",
+      "uuid": "08931dc4-c02f-40a9-b0c0-ca7b270203f0"
+    },
+    {
+      "type": "route",
+      "uuid": "ce2e08d5-537e-46c6-808e-ff0541e30358"
+    },
+    {
+      "type": "route",
+      "uuid": "eb7142d7-4669-4dbe-b223-2eb11fbe3934"
+    },
+    {
+      "type": "route",
+      "uuid": "dc02a546-b450-439e-bf1d-3bffc7f926cb"
+    },
+    {
+      "type": "route",
+      "uuid": "cbc28fa3-ee8e-42bf-9d89-e860525de038"
+    },
+    {
+      "type": "route",
+      "uuid": "3ad38cf2-eb48-430c-b6b7-a463ada8ec22"
+    },
+    {
+      "type": "route",
+      "uuid": "d062937f-4849-4ed5-809e-16cd598a5e16"
+    },
+    {
+      "type": "route",
+      "uuid": "3e00012b-3320-48c5-94de-35ba1a002e50"
+    },
+    {
+      "type": "route",
+      "uuid": "71a861d9-cdb9-4ade-a034-566466c8cf1c"
+    },
+    {
+      "type": "route",
+      "uuid": "85e44311-fab6-42fe-a1f7-de3e2c774aaa"
+    },
+    {
+      "type": "route",
+      "uuid": "6bc13870-c31c-41d3-ac3e-185580d69c57"
+    },
+    {
+      "type": "route",
+      "uuid": "b22143cc-fa60-4f5c-963f-e4e889eb0676"
+    },
+    {
+      "type": "route",
+      "uuid": "33edd441-4c55-40ff-bb89-d9d650d3f240"
+    },
+    {
+      "type": "route",
+      "uuid": "cbba3735-1240-434d-b05f-c61233c3b0bb"
+    },
+    {
+      "type": "route",
+      "uuid": "ba1c2449-2c1b-4973-adcc-56ec68ef0517"
+    },
+    {
+      "type": "route",
+      "uuid": "8aca656d-df76-47ae-b8db-fa4cca0c55bf"
+    },
+    {
+      "type": "route",
+      "uuid": "d8d5879f-7522-4805-82c3-5fbdcd175240"
     }
   ],
   "proxyMode": false,
@@ -4553,5 +5962,6 @@
       "value": ""
     }
   ],
-  "data": []
+  "data": [],
+  "callbacks": []
 }

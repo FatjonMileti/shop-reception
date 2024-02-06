@@ -8,7 +8,18 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 
 const CountyCitySelect = (props: CountyCitySelectProps) => {
-  const { county, city, value, onChange, hidden, disabled, error, helperText, required } = props
+  const {
+    county,
+    city,
+    value,
+    onChange,
+    hidden,
+    disabled,
+    error,
+    helperText,
+    required,
+    variant = 'standard'
+  } = props
 
   const [counties, setCounties] = useState([])
   const [cities, setCities] = useState([])
@@ -65,6 +76,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
       <Grid item xs={12} md={6}>
         <Autocomplete
           {...county}
+          style={{ padding: 0, '& .MuiOutlinedInput-root': { padding: 0 } }}
           disablePortal
           id={county.id || 'county-async'}
           options={counties}
@@ -81,6 +93,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           onChange={(_, newValue) => onChange(newValue, 'county')}
           disabled={disabled}
           error={error && !value?.county?.value}
+          variant="outlined"
           helperText={
             error && !value?.county?.value && helperText.includes('required')
               ? 'Judet is required'
@@ -96,6 +109,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           id={city.id || 'city-async'}
           options={cities}
           open={citiesOpen}
+          style={{ padding: 0, '& .MuiOutlinedInput-root': { padding: 0 } }}
           onOpen={() => {
             setCitiesOpen(true)
           }}
@@ -108,6 +122,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           onChange={(_, newValue) => onChange(newValue, 'city')}
           disabled={disabled}
           error={error && !value?.city?.value}
+          variant="outlined"
           helperText={
             error && !value?.city?.value && helperText.includes('required')
               ? 'Oras is required'

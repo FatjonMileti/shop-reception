@@ -1,6 +1,6 @@
 {
   "uuid": "26650887-dc81-4416-97d5-c87d87b56f48",
-  "lastMigration": 27,
+  "lastMigration": 32,
   "name": "DEX Designer Bakery REST API",
   "endpointPrefix": "8080/rest/api/v1",
   "latency": 0,
@@ -17,7 +17,7 @@
       "responses": [
         {
           "uuid": "15603b0a-8e77-4bd6-8668-52cbddd2b2bd",
-          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"EventSeatOutlined\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"OMS\",\n    \"icon\": \"DonutLargeTwoTone\",\n    \"routeURL\": \"/oms1\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"OMS\",\n        \"icon\": \"DonutLargeTwoTone\",\n        \"routeURL\": \"/oms\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"2\",\n          \"name\": \"OMS\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/oms1\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"22\",\n    \"name\": \"Bakery\",\n    \"icon\": \"AssuredWorkload\",\n    \"routeURL\": \"/bakery\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"22\",\n        \"name\": \"Admin\",\n        \"icon\": \"Admin\",\n        \"routeURL\": \"/admin\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"33\",\n        \"name\": \"Formator\",\n        \"icon\": \"Formator\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"44\",\n        \"name\": \"Manager magazin/raion\",\n        \"icon\": \"StoreManager\",\n        \"routeURL\": \"/storeManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"55\",\n        \"name\": \"Manager regiune\",\n        \"icon\": \"RegionManager\",\n        \"routeURL\": \"/regionManager\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
+          "body": "[\n  {\n    \"id\": \"1\",\n    \"name\": \"Governance\",\n    \"icon\": \"EventSeatOutlined\",\n    \"routeURL\": \"/governance\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"1\",\n        \"name\": \"Project Team\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/projectTeam\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"1\",\n          \"name\": \"Governance\",\n          \"icon\": \"BarChart\",\n          \"routeURL\": \"/governance\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"2\",\n    \"name\": \"OMS\",\n    \"icon\": \"DonutLargeTwoTone\",\n    \"routeURL\": \"/oms1\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"2\",\n        \"name\": \"OMS\",\n        \"icon\": \"DonutLargeTwoTone\",\n        \"routeURL\": \"/oms\",\n        \"routePathExact\": true,\n        \"module\": {\n          \"id\": \"2\",\n          \"name\": \"OMS\",\n          \"icon\": \"DonutLargeTwoTone\",\n          \"routeURL\": \"/oms1\",\n          \"routePathExact\": true\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"22\",\n    \"name\": \"Bakery\",\n    \"icon\": \"Bakery\",\n    \"routeURL\": \"/bakery\",\n    \"routePathExact\": true,\n    \"submodules\": [\n      {\n        \"id\": \"22\",\n        \"name\": \"Admin\",\n        \"icon\": \"Admin\",\n        \"routeURL\": \"/admin\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"33\",\n        \"name\": \"Formator/ RQ Regional\",\n        \"icon\": \"Formator\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"44\",\n        \"name\": \"Manager magazin/raion\",\n        \"icon\": \"StoreManager\",\n        \"routeURL\": \"/storeManager\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"55\",\n        \"name\": \"Manager regiune\",\n        \"icon\": \"RegionManager\",\n        \"routeURL\": \"/regionManager\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the application modules list",
@@ -35,7 +35,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6dcee7bd-6565-44c6-8a1f-4d9681c04a63",
@@ -57,7 +59,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fbb3109f-02d8-4707-b8c0-600c6523d1cd",
@@ -87,7 +91,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "dace7ac7-73df-4caa-b566-8ee99b9d03ae",
@@ -109,7 +115,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "caa87a51-24ca-4a01-85a4-37af225cb574",
@@ -131,7 +139,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3f4e1800-de69-4d30-b0fc-5409ff757ab8",
@@ -153,10 +163,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -168,7 +179,7 @@
       "responses": [
         {
           "uuid": "f7ca5744-65cd-4bdf-b1fc-be99b451971f",
-          "body": "[{\n\t\t\"id\": \"1\",\n\t\t\"name\": \"Team Day-Off Management\",\n\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamDayOffManagement\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Team Day-Off Management\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamDayOffManagement\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Team Day-Off Management\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"628\",\n\t\t\"name\": \"My Time-Off\",\n\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"628\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/myTimeOff\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"628\",\n\t\t\t\t\"name\": \"My Time-Off\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"628\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/myTimeOff\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"628\",\n\t\t\t\t\"name\": \"My Time-Off\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"2\",\n\t\t\"name\": \"Team Assignment\",\n\t\t\"icon\": \"HowToRegOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"2\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamAssignment\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"2\",\n\t\t\t\t\"name\": \"Team Assignment\",\n\t\t\t\t\"icon\": \"HowToRegOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"2\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamAssignment\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"2\",\n\t\t\t\t\"name\": \"Team Assignment\",\n\t\t\t\t\"icon\": \"HowToRegOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"3\",\n\t\t\"name\": \"Effort Matrix\",\n\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"3\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/effortMatrix\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"3\",\n\t\t\t\t\"name\": \"Effort Matrixt\",\n\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"3\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/effortMatrix\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"3\",\n\t\t\t\t\"name\": \"Effort Matrix\",\n\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"4\",\n\t\t\"name\": \"Team Capacity Overview\",\n\t\t\"icon\": \"PeopleAltOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"4\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamCapacity\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"4\",\n\t\t\t\t\"name\": \"Team Capacity Overview\",\n\t\t\t\t\"icon\": \"PeopleAltOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\t\"id\": \"4\",\n\t\t\t\t\"name\": \"Screen 1\",\n\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\"routeURL\": \"/teamCapacity\",\n\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\"activity\": {\n\t\t\t\t\t\"id\": \"4\",\n\t\t\t\t\t\"name\": \"Team Capacity Overview\",\n\t\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\t\"submodule\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"5\",\n\t\t\t\t\"name\": \"Screen 2\",\n\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\"routeURL\": \"/individualCapacity\",\n\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\"activity\": {\n\t\t\t\t\t\"id\": \"4\",\n\t\t\t\t\t\"name\": \"Team Capacity Overview\",\n\t\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\t\"submodule\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t},\n\t{\n\t\t\"id\": \"5\",\n\t\t\"name\": \"Project Milestones\",\n\t\t\"icon\": \"AssignmentOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"5\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"5\",\n\t\t\t\"routeURL\": \"/projectMilestones\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}\n]",
+          "body": "[{\n\t\t\"id\": \"1\",\n\t\t\"name\": \"Team Day-Off Management\",\n\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamDayOffManagement\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Team Day-Off Management\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamDayOffManagement\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Team Day-Off Management\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"628\",\n\t\t\"name\": \"My Time-Off\",\n\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"628\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/myTimeOff\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"628\",\n\t\t\t\t\"name\": \"My Time-Off\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"628\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/myTimeOff\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"628\",\n\t\t\t\t\"name\": \"My Time-Off\",\n\t\t\t\t\"icon\": \"TimerOffOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"2\",\n\t\t\"name\": \"Team Assignment\",\n\t\t\"icon\": \"HowToRegOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"2\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamAssignment\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"2\",\n\t\t\t\t\"name\": \"Team Assignment\",\n\t\t\t\t\"icon\": \"HowToRegOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"2\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamAssignment\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"2\",\n\t\t\t\t\"name\": \"Team Assignment\",\n\t\t\t\t\"icon\": \"HowToRegOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"3\",\n\t\t\"name\": \"Effort Matrix\",\n\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"3\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/governance/projectTeam/effortMatrix\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"3\",\n\t\t\t\t\"name\": \"Effort Matrixt\",\n\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"3\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/governance/projectTeam/effortMatrix\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"3\",\n\t\t\t\t\"name\": \"Effort Matrix\",\n\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"4\",\n\t\t\"name\": \"Team Capacity Overview\",\n\t\t\"icon\": \"PeopleAltOutlined\",\n\t\t\"submodule\": {\n\t\t\t\"id\": \"1\",\n\t\t\t\"name\": \"Project Team\",\n\t\t\t\"icon\": \"Groups\",\n\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"module\": {\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\"routePathExact\": true\n\t\t\t}\n\t\t},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"4\",\n\t\t\t\"name\": \"Screen 1\",\n\t\t\t\"icon\": \"BarChart\",\n\t\t\t\"routeURL\": \"/teamCapacity\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"activity\": {\n\t\t\t\t\"id\": \"4\",\n\t\t\t\t\"name\": \"Team Capacity Overview\",\n\t\t\t\t\"icon\": \"PeopleAltOutlined\",\n\t\t\t\t\"submodule\": {\n\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\t\"id\": \"4\",\n\t\t\t\t\"name\": \"Screen 1\",\n\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\"routeURL\": \"/teamCapacity\",\n\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\"activity\": {\n\t\t\t\t\t\"id\": \"4\",\n\t\t\t\t\t\"name\": \"Team Capacity Overview\",\n\t\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\t\"submodule\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"5\",\n\t\t\t\t\"name\": \"Screen 2\",\n\t\t\t\t\"icon\": \"BarChart\",\n\t\t\t\t\"routeURL\": \"/individualCapacity\",\n\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\"activity\": {\n\t\t\t\t\t\"id\": \"4\",\n\t\t\t\t\t\"name\": \"Team Capacity Overview\",\n\t\t\t\t\t\"icon\": \"DonutSmallOutlined\",\n\t\t\t\t\t\"submodule\": {\n\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\"name\": \"Project Team\",\n\t\t\t\t\t\t\"icon\": \"Groups\",\n\t\t\t\t\t\t\"routeURL\": \"/projectTeam\",\n\t\t\t\t\t\t\"routePathExact\": true,\n\t\t\t\t\t\t\"module\": {\n\t\t\t\t\t\t\t\"id\": \"1\",\n\t\t\t\t\t\t\t\"name\": \"Governance\",\n\t\t\t\t\t\t\t\"icon\": \"EventSeatOutlined\",\n\t\t\t\t\t\t\t\"routeURL\": \"/governance\",\n\t\t\t\t\t\t\t\"routePathExact\": true\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t},\n\t{\n\t\t\"id\": \"5\",\n\t\t\"name\": \"Project Milestones\",\n\t\t\"icon\": \"AssignmentOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"5\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"5\",\n\t\t\t\"routeURL\": \"/projectMilestones\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of activities - Governance",
@@ -194,7 +205,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "aa334d2e-b9ef-4ca1-b404-4c4214552886",
@@ -216,7 +229,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "658f9bf6-0688-43de-a0c6-a43d3a1bfee1",
@@ -238,7 +253,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8b9a52cc-9a0b-43cc-bc44-9468c0342044",
@@ -260,7 +277,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d9271c76-0946-48ea-bf73-0f62ee56ad91",
@@ -282,7 +301,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fc876716-9a2f-4609-98cf-80a6c35f011c",
@@ -304,15 +325,22 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "42945c68-5cba-43fe-ad93-30aecb33a38e",
-          "body": "[\n  {\n    \"id\": \"55\",\n    \"name\": \"Gestiune utilizatori\",\n    \"icon\": \"UsersManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"55\" },\n    \"screens\": [\n      {\n        \"id\": \"55\",\n        \"routeURL\": \"/usersManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"77\",\n    \"name\": \"Gestiune zone\",\n    \"icon\": \"ZonesManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"77\" },\n    \"screens\": [\n      {\n        \"id\": \"77\",\n        \"routeURL\": \"/zones\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n    {\n    \"id\": \"66\",\n    \"name\": \"Gestiune regiuni\",\n    \"icon\": \"ZonesManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"66\" },\n    \"screens\": [\n      {\n        \"id\": \"66\",\n        \"routeURL\": \"/regions\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"88\",\n    \"name\": \"Gestiune magazine\",\n    \"icon\": \"StoresManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"88\" },\n    \"screens\": [\n      {\n        \"id\": \"88\",\n        \"routeURL\": \"/stores\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n    {\n    \"id\": \"133\",\n    \"name\": \"Gestiune familii in scopul modulului\",\n    \"icon\": \"FamilyManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"133\" },\n    \"screens\": [\n      {\n        \"id\": \"133\",\n        \"routeURL\": \"/families\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"134\",\n        \"routeURL\": \"/family-products\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"99\",\n    \"name\": \"Gestiune clustere\",\n    \"icon\": \"ClustersManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"99\" },\n    \"screens\": [\n      {\n        \"id\": \"99\",\n        \"routeURL\": \"/clusters\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"111\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"GrowthManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"111\" },\n    \"screens\": [\n      {\n        \"id\": \"111\",\n        \"routeURL\": \"/growth\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"122\",\n    \"name\": \"Gestiune produse imagine\",\n    \"icon\": \"ProductsManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"122\" },\n    \"screens\": [\n      {\n        \"id\": \"122\",\n        \"routeURL\": \"/products\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"155\",\n    \"name\": \"Raport de utilizare aplicatie\",\n    \"icon\": \"AppUsageManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"155\" },\n    \"screens\": [\n      {\n        \"id\": \"155\",\n        \"routeURL\": \"/usage-report\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"166\",\n    \"name\": \"Raport cadentier + vanzari\",\n    \"icon\": \"CadentierSales\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"166\" },\n    \"screens\": [\n      {\n        \"id\": \"166\",\n        \"routeURL\": \"/sales-cadentier\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"167\",\n        \"routeURL\": \"/cadentier-admin-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"177\",\n    \"name\": \"Management produse\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"166\" },\n    \"screens\": [\n      {\n        \"id\": \"177\",\n        \"routeURL\": \"/product-management\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
+          "body": "[\n  {\n    \"id\": \"55\",\n    \"name\": \"Gestiune utilizatori\",\n    \"icon\": \"UsersManagement\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"55\" },\n    \"screens\": [\n      {\n        \"id\": \"55\",\n        \"routeURL\": \"/bakery/admin/usersManagement\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"77\",\n    \"name\": \"Gestiune zone\",\n    \"icon\": \"Zones\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"77\" },\n    \"screens\": [\n      {\n        \"id\": \"77\",\n        \"routeURL\": \"/bakery/admin/zones\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n    {\n    \"id\": \"66\",\n    \"name\": \"Gestiune regiuni\",\n    \"icon\": \"Regions\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"66\" },\n    \"screens\": [\n      {\n        \"id\": \"66\",\n        \"routeURL\": \"/bakery/admin/regions\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"88\",\n    \"name\": \"Gestiune magazine\",\n    \"icon\": \"Stores\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"88\" },\n    \"screens\": [\n      {\n        \"id\": \"88\",\n        \"routeURL\": \"/bakery/admin/stores\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n    {\n    \"id\": \"133\",\n    \"name\": \"Gestiune familii in scopul modulului\",\n    \"icon\": \"Families\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"133\" },\n    \"screens\": [\n      {\n        \"id\": \"133\",\n        \"routeURL\": \"/bakery/admin/families\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"134\",\n        \"routeURL\": \"/bakery/admin/family-products\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"99\",\n    \"name\": \"Gestiune clustere\",\n    \"icon\": \"Clusters\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"99\" },\n    \"screens\": [\n      {\n        \"id\": \"99\",\n        \"routeURL\": \"/bakery/admin/clusters\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"111\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"Growth\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"111\" },\n    \"screens\": [\n      {\n        \"id\": \"111\",\n        \"routeURL\": \"/bakery/admin/growth\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"122\",\n    \"name\": \"Gestiune produse imagine\",\n    \"icon\": \"Products\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"122\" },\n    \"screens\": [\n      {\n        \"id\": \"122\",\n        \"routeURL\": \"/bakery/admin/products\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"155\",\n    \"name\": \"Raport de utilizare aplicatie\",\n    \"icon\": \"UsageReport\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"155\" },\n    \"screens\": [\n      {\n        \"id\": \"155\",\n        \"routeURL\": \"/bakery/admin/usage-report\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"166\",\n    \"name\": \"Raport cadentier + vanzari\",\n    \"icon\": \"SalesCadentier\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"166\" },\n    \"screens\": [\n      {\n        \"id\": \"166\",\n        \"routeURL\": \"/bakery/admin/sales-cadentier\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"167\",\n        \"routeURL\": \"/cadentier-admin-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"177\",\n    \"name\": \"Management produse\",\n    \"icon\": \"AccountTreeOutlined\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"166\" },\n    \"screens\": [\n      {\n        \"id\": \"177\",\n        \"routeURL\": \"/bakery/admin/product-management\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"199\",\n    \"name\": \"Gestiune ingrediente\",\n    \"icon\": \"Ingredients\",\n    \"submodule\": {\n      \"id\": \"22\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/admin\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"199\" },\n    \"screens\": [\n      {\n        \"id\": \"199\",\n        \"routeURL\": \"/bakery/admin/ingredients\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
           "latency": 0,
           "statusCode": 200,
           "label": "Bakery",
-          "headers": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -329,15 +357,22 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6aab1294-9514-418a-8819-d1c294b3ab9c",
-          "body": "[\n  {\n    \"id\": \"355\",\n    \"name\": \"Management produse\",\n    \"icon\": \"ProductsManagement\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"355\" },\n    \"screens\": [\n      {\n        \"id\": \"355\",\n        \"routeURL\": \"/product-management-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"356\",\n        \"routeURL\": \"/product-detail-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"288\",\n    \"name\": \"Management productie(cadentier)\",\n    \"icon\": \"ProductionManagement\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"288\" },\n    \"screens\": [\n      {\n        \"id\": \"288\",\n        \"routeURL\": \"/cadentier-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"289\",\n        \"routeURL\": \"/cadentier-details-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"290\",\n        \"routeURL\": \"/cadentier-formator-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"299\",\n    \"name\": \"Coeficient crestere magazin\",\n    \"icon\": \"StoresManagement\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"299\" },\n    \"screens\": [\n      {\n        \"id\": \"299\",\n        \"routeURL\": \"/product-growth-index-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"311\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"GrowthIndex\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"311\" },\n    \"screens\": [\n      {\n        \"id\": \"311\",\n        \"routeURL\": \"/growth-index-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"322\",\n    \"name\": \"Coeficient crestere regiune\",\n    \"icon\": \"ZonesManagement\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"322\" },\n    \"screens\": [\n      {\n        \"id\": \"322\",\n        \"routeURL\": \"/growth-region-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"323\",\n        \"routeURL\": \"/growthIndexView/:id\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"324\",\n        \"routeURL\": \"/growthIndexProdcutsView/:id\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"333\",\n    \"name\": \"Raport de utilizare aplicatie\",\n    \"icon\": \"AppUsageManagement\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"333\" },\n    \"screens\": [\n      {\n        \"id\": \"333\",\n        \"routeURL\": \"/usage-report-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"344\",\n    \"name\": \"Raport cadentier + vanzari\",\n    \"icon\": \"CadentierSales\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"344\" },\n    \"screens\": [\n      {\n        \"id\": \"344\",\n        \"routeURL\": \"/sales-cadentier-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
+          "body": "[\n  {\n    \"id\": \"355\",\n    \"name\": \"Management produse\",\n    \"icon\": \"ProductManagementFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"355\" },\n    \"screens\": [\n      {\n        \"id\": \"355\",\n        \"routeURL\": \"/bakery/formator/product-management-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"356\",\n        \"routeURL\": \"/product-detail-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"288\",\n    \"name\": \"Management productie (cadentier)\",\n    \"icon\": \"CadentierFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"288\" },\n    \"screens\": [\n      {\n        \"id\": \"288\",\n        \"routeURL\": \"/bakery/formator/cadentier-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"289\",\n        \"routeURL\": \"/bakery/formator/cadentier-details-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"290\",\n        \"routeURL\": \"/bakery/formator/cadentier-formator-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"299\",\n    \"name\": \"Coeficient crestere magazin\",\n    \"icon\": \"ProductGrowthIndexFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"299\" },\n    \"screens\": [\n      {\n        \"id\": \"299\",\n        \"routeURL\": \"/bakery/formator/product-growth-index-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"311\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"GrowthIndexFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"311\" },\n    \"screens\": [\n      {\n        \"id\": \"311\",\n        \"routeURL\": \"/bakery/formator/growth-index-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"322\",\n    \"name\": \"Coeficient crestere regiune\",\n    \"icon\": \"GrowthRegionFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"322\" },\n    \"screens\": [\n      {\n        \"id\": \"322\",\n        \"routeURL\": \"/bakery/formator/growth-region-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"323\",\n        \"routeURL\": \"/bakery/formator/growthIndexView/:id\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"324\",\n        \"routeURL\": \"/bakery/formator/growthIndexProdcutsView/:id\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"333\",\n    \"name\": \"Raport de utilizare aplicatie\",\n    \"icon\": \"UsageReportFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"333\" },\n    \"screens\": [\n      {\n        \"id\": \"333\",\n        \"routeURL\": \"/bakery/formator/usage-report-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"344\",\n    \"name\": \"Raport cadentier + vanzari\",\n    \"icon\": \"SalesCadentierFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"344\" },\n    \"screens\": [\n      {\n        \"id\": \"344\",\n        \"routeURL\": \"/bakery/formator/sales-cadentier-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
           "latency": 0,
           "statusCode": 200,
           "label": "Bakery formator",
-          "headers": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -354,15 +389,22 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "78fcbb3d-742b-44fe-b004-84b40d9f97bf",
-          "body": "[\n  {\n    \"id\": \"177\",\n    \"name\": \"Management produse\",\n    \"icon\": \"ProductsManagement\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin/raion\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"177\" },\n    \"screens\": [\n      {\n        \"id\": \"177\",\n        \"routeURL\": \"/product-management\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n    {\n    \"id\": \"212\",\n    \"name\": \"Management productie(cadentier)\",\n    \"icon\": \"ProductionManagement\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"212\" },\n    \"screens\": [\n      {\n        \"id\": \"212\",\n        \"routeURL\": \"/cadentier-store\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"213\",\n        \"routeURL\": \"/cadentier-details\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"214\",\n        \"routeURL\": \"/cadentier-store-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"188\",\n    \"name\": \"Coeficient crestere magazin\",\n    \"icon\": \"StoresManagement\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"188\" },\n    \"screens\": [\n      {\n        \"id\": \"188\",\n        \"routeURL\": \"/growth-index\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"199\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"GrowthIndex\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"199\" },\n    \"screens\": [\n      {\n        \"id\": \"199\",\n        \"routeURL\": \"/product-growth-index\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"211\",\n    \"name\": \"Raport vanzari + cadentier\",\n    \"icon\": \"CadentierSales\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"211\" },\n    \"screens\": [\n      {\n        \"id\": \"211\",\n        \"routeURL\": \"/cadentier-sales-store\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
+          "body": "[\n  {\n    \"id\": \"177\",\n    \"name\": \"Management produse\",\n    \"icon\": \"ProductManagement\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin/raion\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"177\" },\n    \"screens\": [\n      {\n        \"id\": \"177\",\n        \"routeURL\": \"/bakery/storeManager/product-management\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"212\",\n    \"name\": \"Management productie (cadentier)\",\n    \"icon\": \"CadentierStore\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"212\" },\n    \"screens\": [\n      {\n        \"id\": \"212\",\n        \"routeURL\": \"/bakery/storeManager/cadentier-store\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"213\",\n        \"routeURL\": \"/bakery/storeManager/cadentier-details\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"214\",\n        \"routeURL\": \"/bakery/storeManager/cadentier-store-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"188\",\n    \"name\": \"Coeficient crestere magazin\",\n    \"icon\": \"GrowthIndexStore\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"188\" },\n    \"screens\": [\n      {\n        \"id\": \"188\",\n        \"routeURL\": \"/bakery/storeManager/growth-index\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"199\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"ProductGrowthIndex\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"199\" },\n    \"screens\": [\n      {\n        \"id\": \"199\",\n        \"routeURL\": \"/bakery/storeManager/product-growth-index\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"211\",\n    \"name\": \"Raport vanzari + cadentier\",\n    \"icon\": \"CadentierSalesStore\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Manager magazin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/storeManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"211\" },\n    \"screens\": [\n      {\n        \"id\": \"211\",\n        \"routeURL\": \"/bakery/storeManager/cadentier-sales-store\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
           "latency": 0,
           "statusCode": 200,
           "label": "Bakery store manager",
-          "headers": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -379,15 +421,22 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "07ca2667-1adc-4b78-887a-3501074fea18",
-          "body": "[\n  {\n    \"id\": \"222\",\n    \"name\": \"Management produse\",\n    \"icon\": \"ProductsManagement\",\n    \"submodule\": {\n      \"id\": \"55\",\n      \"name\": \"Manager regiune\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/regionManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"222\" },\n    \"screens\": [\n      {\n        \"id\": \"222\",\n        \"routeURL\": \"/product-management-region\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n    {\n    \"id\": \"266\",\n    \"name\": \"Management productie(cadentier)\",\n    \"icon\": \"ProductionManagement\",\n    \"submodule\": {\n      \"id\": \"55\",\n      \"name\": \"Manager regiune\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/regionManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"266\" },\n    \"screens\": [\n      {\n        \"id\": \"266\",\n        \"routeURL\": \"/growth-region\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"267\",\n        \"routeURL\": \"/cadentier-region-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"233\",\n    \"name\": \"Coeficient crestere regiune\",\n    \"icon\": \"ZonesManagement\",\n    \"submodule\": {\n      \"id\": \"55\",\n      \"name\": \"Manager regiune\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/regionManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"233\" },\n    \"screens\": [\n      {\n        \"id\": \"233\",\n        \"routeURL\": \"/growth-region\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"234\",\n        \"routeURL\": \"/growthIndexView/:id\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"235\",\n        \"routeURL\": \"/growthIndexProdcutsView\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"255\",\n    \"name\": \"Raport vanzari + cadentier\",\n    \"icon\": \"CadentierSales\",\n    \"submodule\": {\n      \"id\": \"55\",\n      \"name\": \"Manager regiune\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/regionManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"255\" },\n    \"screens\": [\n      {\n        \"id\": \"255\",\n        \"routeURL\": \"/cadentier-sales-region\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"277\",\n    \"name\": \"Raport utilizare aplicatie\",\n    \"icon\": \"CadentierSales\",\n    \"submodule\": {\n      \"id\": \"55\",\n      \"name\": \"Manager regiune\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/regionManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"277\" },\n    \"screens\": [\n      {\n        \"id\": \"277\",\n        \"routeURL\": \"/usage-report-region\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
+          "body": "[\n  {\n    \"id\": \"222\",\n    \"name\": \"Management produse\",\n    \"icon\": \"ProductManagementRegion\",\n    \"submodule\": {\n      \"id\": \"55\",\n      \"name\": \"Manager regiune\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/regionManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"222\" },\n    \"screens\": [\n      {\n        \"id\": \"222\",\n        \"routeURL\": \"/bakery/regionManager/product-management-region\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"266\",\n    \"name\": \"Management productie (cadentier)\",\n    \"icon\": \"GrowthRegion\",\n    \"submodule\": {\n      \"id\": \"55\",\n      \"name\": \"Manager regiune\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/regionManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"266\" },\n    \"screens\": [\n      {\n        \"id\": \"266\",\n        \"routeURL\": \"/bakery/regionManager/growth-region\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"267\",\n        \"routeURL\": \"/bakery/regionManager/cadentier-region-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"233\",\n    \"name\": \"Coeficient crestere regiune\",\n    \"icon\": \"GrowthIndex\",\n    \"submodule\": {\n      \"id\": \"55\",\n      \"name\": \"Manager regiune\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/regionManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"233\" },\n    \"screens\": [\n      {\n        \"id\": \"233\",\n        \"routeURL\": \"/bakery/regionManager/growth-index\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"234\",\n        \"routeURL\": \"/bakery/regionManager/growthIndexView\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"235\",\n        \"routeURL\": \"/bakery/regionManager/growthIndexProductsView\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"255\",\n    \"name\": \"Raport vanzari + cadentier\",\n    \"icon\": \"CadentierSalesRegion\",\n    \"submodule\": {\n      \"id\": \"55\",\n      \"name\": \"Manager regiune\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/regionManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"255\" },\n    \"screens\": [\n      {\n        \"id\": \"255\",\n        \"routeURL\": \"/bakery/regionManager/cadentier-sales-region\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"277\",\n    \"name\": \"Raport utilizare aplicatie\",\n    \"icon\": \"UsageReportRegion\",\n    \"submodule\": {\n      \"id\": \"55\",\n      \"name\": \"Manager regiune\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/regionManager\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"277\" },\n    \"screens\": [\n      {\n        \"id\": \"277\",\n        \"routeURL\": \"/bakery/regionManager/usage-report-region\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
           "latency": 0,
           "statusCode": 200,
           "label": "Bakery region manager",
-          "headers": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -404,7 +453,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b8bb760b-999c-4ff1-bf4e-667c249b6b41",
@@ -434,10 +485,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -467,7 +519,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "71bdb05d-c07c-4a4a-b1f2-94ae4846304a",
@@ -489,7 +543,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6fb6daa9-aef2-4bd9-ab90-a329c4e5496e",
@@ -511,7 +567,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8a253099-3b8f-41b1-8a6e-af3c5996bf9c",
@@ -533,7 +591,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9ed29448-80de-4c00-8ef0-3aa581cb558e",
@@ -555,7 +615,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e9df599c-84e1-476f-9bf9-b1799b9fd0a7",
@@ -577,7 +639,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0d102796-6ac5-4e27-8c93-1639d888a239",
@@ -609,7 +673,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "96c9af96-2663-4d29-b9ad-74f212670aba",
@@ -641,7 +707,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "77fafa55-a574-4606-83f5-20a9d4bb97c8",
@@ -673,7 +741,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "30e30dc7-eba6-4920-8303-f9fe3ab731d1",
@@ -705,7 +775,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4b6fc07d-a874-4eb8-8c44-cc0a3addb7b3",
@@ -742,7 +814,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "daead8b1-c15f-44b8-b052-0bbcaaef1d1e",
@@ -774,7 +848,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b5dd245a-ca80-438f-83ae-2bbb5426ca8b",
@@ -806,7 +882,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1906660e-bb8c-4b8b-9e37-31dbf0a17ffb",
@@ -843,7 +921,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e805e66e-56ee-44ae-a63d-c3f3fe68639d",
@@ -880,7 +960,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2c3d6f53-49cf-4a47-9823-e93c7c9bbdf8",
@@ -917,7 +999,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d0effaa5-b7d2-4d88-a514-1e28db9c06a2",
@@ -949,7 +1033,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fbb002d6-2309-473e-ab38-df97f6408d9d",
@@ -981,7 +1067,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "82ddf231-23dd-435a-9d59-cfe8ba71b750",
@@ -1018,7 +1106,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "914b9df5-dab7-407c-ba80-059bd0c49a66",
@@ -1050,7 +1140,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2caaf467-c07f-4854-97a1-4cdf80e7c035",
@@ -1087,7 +1179,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bbc0dc17-b6e2-42f1-a317-87a32ced8dbe",
@@ -1124,7 +1218,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bf033993-2584-43d0-a3c8-c521a414f4c6",
@@ -1161,7 +1257,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "17ce6ac6-8de5-497e-9156-13011ab187f8",
@@ -1198,11 +1296,13 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "85f90b51-39cc-47b1-ada3-1a5e775f9487",
-          "body": "{\n  \"id\": \"288\",\n  \"activity\": {\n    \"id\": \"288\",\n    \"name\": \"Management productie\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    }\n  },\n  \"screen\": {\n    \"id\": \"288\",\n    \"name\": \"Management productie\",\n    \"icon\": \"DonutSmallOutlined\",\n    \"routeURL\": \"/cadentier-formator\",\n    \"routePathExact\": true,\n    \"activity\": {\n      \"id\": \"288\",\n      \"name\": \"Management productie\",\n      \"icon\": \"BarChart\",\n      \"submodule\": {\n        \"id\": \"33\",\n        \"name\": \"Formator\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      }\n    }\n  },\n  \"jsonSchema\": {\n    \"UIComponent\": \"Box\",\n    \"id\": \"the-box\",\n    \"className\": \"\",\n    \"children\": [\n      {\n        \"UIComponent\": \"FiltersWithResultsTable\",\n        \"id\": \"the-filters-wrt\",\n        \"filters\": [\n          {\n            \"UIComponent\": \"DatePicker\",\n            \"type\": \"date\",\n            \"name\": \"date\",\n            \"label\": \"Planificare pentru\",\n            \"defaultValue\": \"#CURRENT_DATE\",\n            \"variant\": \"standard\",\n            \"required\": true\n          },\n          {\n            \"UIComponent\": \"AsyncAutocomplete\",\n            \"type\": \"autocomplete\",\n            \"action\": {\n              \"url\": \"/bakery/store/trainee/all\",\n              \"type\": \"GET\",\n              \"valueKey\": \"id\",\n              \"labelKey\": \"name\"\n            },\n            \"variant\": \"standard\",\n            \"name\": \"store\",\n            \"label\": \"Magazin\",\n            \"payloadKey\": \"store.id\"\n          }\n        ],\n        \"table\": {\n          \"UIComponent\": \"GroupTable\",\n          \"stickyRatio\": 0.2,\n          \"groupCount\": 3,\n          \"frequency\": \"day\",\n          \"id\": \"the-table\",\n          \"hasStickyHeader\": true,\n          \"maxHeight\": 600,\n          \"width\": \"100%\",\n          \"action\": {\n            \"url\": \"/bakery/region/cadentier\",\n            \"type\": \"GET\"\n          },\n          \"hideCheckbox\": true,\n          \"rowsPerPage\": 25,\n          \"rowsPerPageOptions\": [\n            25,\n            50,\n            100\n          ],\n          \"columns\": [\n            {\n              \"title\": \"Produs\",\n              \"field\": \"productName\",\n              \"align\": \"left\",\n              \"sticky\": true,\n              \"type\": \"string\",\n              \"render\": {\n                \"UIComponent\": \"ImageCell\",\n                \"onSuccess\": \"#33691E\",\n                \"onFailure\": \"#E5E5E5\"\n              },\n              \"defaultPrintSelected\": true\n            },\n            {\n              \"title\": \"Cod METI\",\n              \"field\": \"productMetiCode\",\n              \"align\": \"left\",\n              \"sticky\": true,\n              \"type\": \"string\",\n              \"render\": {\n                \"UIComponent\": \"Link\",\n                \"href\": \"/cadentier-details-formator\",\n                \"idKeyName\": \"id\"\n              },\n              \"defaultPrintSelected\": true\n            },\n            {\n              \"title\": \"Medie vanzari\",\n              \"minWidth\": \"200px\",\n              \"field\": \"average\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"disableSorting\": true\n            },\n            {\n              \"title\": \"Cantitati propuse\",\n              \"minWidth\": \"200px\",\n              \"field\": \"calculation\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"disableSorting\": true,\n              \"defaultPrintSelected\": true\n            },\n            {\n              \"title\": \"Cantitati modificate\",\n              \"minWidth\": \"200px\",\n              \"field\": \"quantityToProduce\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"disableSorting\": true\n            },\n            {\n              \"title\": \"Medie vanzari\",\n              \"minWidth\": \"200px\",\n              \"field\": \"average\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"isGroup\": true\n            },\n            {\n              \"title\": \"Cantitati propuse\",\n              \"minWidth\": \"200px\",\n              \"field\": \"calculation\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"isGroup\": true,\n              \"defaultPrintSelected\": true\n            },\n            {\n              \"title\": \"Cantitati modificate\",\n              \"minWidth\": \"200px\",\n              \"field\": \"quantityToProduce\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"isGroup\": true\n            },\n            {\n              \"title\": \"Gama produs\",\n              \"field\": \"clusterMandatory\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"render\": {\n                \"UIComponent\": \"BooleanText\",\n                \"onSuccess\": \"O\",\n                \"onFailure\": \"F\"\n              }\n            },\n            {\n              \"title\": \"Oferta in ziua respectiva\",\n              \"minWidth\": \"200px\",\n              \"field\": \"inPromotion\",\n              \"align\": \"left\",\n              \"type\": \"boolean\",\n              \"render\": {\n                \"UIComponent\": \"BooleanIcon\",\n                \"icon\": \"Flag\",\n                \"onSuccess\": \"#33691E\",\n                \"onFailure\": \"#E5E5E5\"\n              }\n            },\n            {\n              \"title\": \"Produs nou\",\n              \"field\": \"newProduct\",\n              \"align\": \"left\",\n              \"type\": \"boolean\",\n              \"render\": {\n                \"UIComponent\": \"BooleanIcon\",\n                \"icon\": \"Flag\",\n                \"onSuccess\": \"#33691E\",\n                \"onFailure\": \"#E5E5E5\"\n              }\n            },\n            {\n              \"title\": \"Ultima pers care a modificat fisierul\",\n              \"minWidth\": \"200px\",\n              \"field\": \"username\",\n              \"align\": \"left\",\n              \"type\": \"string\"\n            }\n          ],\n          \"tableActions\": {\n            \"searchAction\": {\n              \"searchFields\": [\n                \"productName\",\n                \"productMetiCode\",\n                \"average\",\n                \"calculation\",\n                \"quantityToProduce\"\n              ]\n            },\n            \"downloadAction\": {\n              \"action\": {\n                \"type\": \"GET\",\n                \"url\": \"/bakery/report/download/cadentier\"\n              }\n            },\n            \"printAction\": {\n              \"selectColumns\": true,\n              \"action\": {\n                \"url\": \"/cadentier-formator-print\"\n              },\n              \"allowedRoles\": [\n                \"all\"\n              ],\n              \"modalTitle\": \"Ce coloane doriti sa printati?\",\n              \"formItemsPerRow\": 1,\n              \"formButtons\": [\n                {\n                  \"UIComponent\": \"Button\",\n                  \"label\": \"Anuleaza\",\n                  \"variant\": \"outlined\",\n                  \"isCancelButton\": true\n                },\n                {\n                  \"UIComponent\": \"Button\",\n                  \"label\": \"Previzualizare\",\n                  \"variant\": \"contained\",\n                  \"isSaveButton\": true\n                }\n              ]\n            }\n          }\n        }\n      }\n    ]\n  }\n}",
+          "body": "{\n  \"id\": \"288\",\n  \"activity\": {\n    \"id\": \"288\",\n    \"name\": \"Management productie\",\n    \"icon\": \"TimerOffOutlined\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    }\n  },\n  \"screen\": {\n    \"id\": \"288\",\n    \"name\": \"Management productie\",\n    \"icon\": \"DonutSmallOutlined\",\n    \"routeURL\": \"/bakery/formator/cadentier-formator\",\n    \"routePathExact\": true,\n    \"activity\": {\n      \"id\": \"288\",\n      \"name\": \"Management productie\",\n      \"icon\": \"BarChart\",\n      \"submodule\": {\n        \"id\": \"33\",\n        \"name\": \"Formator\",\n        \"icon\": \"Groups\",\n        \"routeURL\": \"/formator\",\n        \"routePathExact\": true\n      }\n    }\n  },\n  \"jsonSchema\": {\n    \"UIComponent\": \"Box\",\n    \"id\": \"the-box\",\n    \"className\": \"\",\n    \"children\": [\n      {\n        \"UIComponent\": \"FiltersWithResultsTable\",\n        \"id\": \"the-filters-wrt\",\n        \"filters\": [\n          {\n            \"UIComponent\": \"DatePicker\",\n            \"type\": \"date\",\n            \"name\": \"date\",\n            \"label\": \"Planificare pentru\",\n            \"defaultValue\": \"#CURRENT_DATE\",\n            \"variant\": \"standard\",\n            \"required\": true\n          },\n          {\n            \"UIComponent\": \"AsyncAutocomplete\",\n            \"type\": \"autocomplete\",\n            \"action\": {\n              \"url\": \"/bakery/store/trainee/all\",\n              \"type\": \"GET\",\n              \"valueKey\": \"id\",\n              \"labelKey\": \"name\"\n            },\n            \"variant\": \"standard\",\n            \"name\": \"store\",\n            \"label\": \"Magazin\",\n            \"payloadKey\": \"store.id\"\n          }\n        ],\n        \"table\": {\n          \"UIComponent\": \"GroupTable\",\n          \"stickyRatio\": 0.2,\n          \"groupCount\": 3,\n          \"frequency\": \"day\",\n          \"id\": \"the-table\",\n          \"hasStickyHeader\": true,\n          \"maxHeight\": 600,\n          \"width\": \"100%\",\n          \"action\": {\n            \"url\": \"/bakery/region/cadentier\",\n            \"type\": \"GET\"\n          },\n          \"hideCheckbox\": true,\n          \"rowsPerPage\": 25,\n          \"rowsPerPageOptions\": [\n            25,\n            50,\n            100\n          ],\n          \"columns\": [\n            {\n              \"title\": \"Produs\",\n              \"field\": \"productName\",\n              \"align\": \"left\",\n              \"sticky\": true,\n              \"type\": \"string\",\n              \"render\": {\n                \"UIComponent\": \"ImageCell\",\n                \"onSuccess\": \"#33691E\",\n                \"onFailure\": \"#E5E5E5\"\n              },\n              \"defaultPrintSelected\": true\n            },\n            {\n              \"title\": \"Cod METI\",\n              \"field\": \"productMetiCode\",\n              \"align\": \"left\",\n              \"sticky\": true,\n              \"type\": \"string\",\n              \"render\": {\n                \"UIComponent\": \"Link\",\n                \"href\": \"/cadentier-details-formator\",\n                \"idKeyName\": \"id\"\n              },\n              \"defaultPrintSelected\": true\n            },\n            {\n              \"title\": \"Medie vanzari\",\n              \"minWidth\": \"200px\",\n              \"field\": \"average\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"disableSorting\": true\n            },\n            {\n              \"title\": \"Cantitati propuse\",\n              \"minWidth\": \"200px\",\n              \"field\": \"calculation\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"disableSorting\": true,\n              \"defaultPrintSelected\": true\n            },\n            {\n              \"title\": \"Cantitati modificate\",\n              \"minWidth\": \"200px\",\n              \"field\": \"quantityToProduce\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"disableSorting\": true\n            },\n            {\n              \"title\": \"Medie vanzari\",\n              \"minWidth\": \"200px\",\n              \"field\": \"average\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"isGroup\": true\n            },\n            {\n              \"title\": \"Cantitati propuse\",\n              \"minWidth\": \"200px\",\n              \"field\": \"calculation\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"isGroup\": true,\n              \"defaultPrintSelected\": true\n            },\n            {\n              \"title\": \"Cantitati modificate\",\n              \"minWidth\": \"200px\",\n              \"field\": \"quantityToProduce\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"isGroup\": true\n            },\n            {\n              \"title\": \"Gama produs\",\n              \"field\": \"clusterMandatory\",\n              \"align\": \"left\",\n              \"type\": \"string\",\n              \"render\": {\n                \"UIComponent\": \"BooleanText\",\n                \"onSuccess\": \"O\",\n                \"onFailure\": \"F\"\n              }\n            },\n            {\n              \"title\": \"Oferta in ziua respectiva\",\n              \"minWidth\": \"200px\",\n              \"field\": \"inPromotion\",\n              \"align\": \"left\",\n              \"type\": \"boolean\",\n              \"render\": {\n                \"UIComponent\": \"BooleanIcon\",\n                \"icon\": \"Flag\",\n                \"onSuccess\": \"#33691E\",\n                \"onFailure\": \"#E5E5E5\"\n              }\n            },\n            {\n              \"title\": \"Produs nou\",\n              \"field\": \"newProduct\",\n              \"align\": \"left\",\n              \"type\": \"boolean\",\n              \"render\": {\n                \"UIComponent\": \"BooleanIcon\",\n                \"icon\": \"Flag\",\n                \"onSuccess\": \"#33691E\",\n                \"onFailure\": \"#E5E5E5\"\n              }\n            },\n            {\n              \"title\": \"Ultima pers care a modificat fisierul\",\n              \"minWidth\": \"200px\",\n              \"field\": \"username\",\n              \"align\": \"left\",\n              \"type\": \"string\"\n            }\n          ],\n          \"tableActions\": {\n            \"searchAction\": {\n              \"searchFields\": [\n                \"productName\",\n                \"productMetiCode\",\n                \"average\",\n                \"calculation\",\n                \"quantityToProduce\"\n              ]\n            },\n            \"downloadAction\": {\n              \"action\": {\n                \"type\": \"GET\",\n                \"url\": \"/bakery/report/download/cadentier\"\n              }\n            },\n            \"printAction\": {\n              \"selectColumns\": true,\n              \"action\": {\n                \"url\": \"/cadentier-formator-print\"\n              },\n              \"allowedRoles\": [\n                \"all\"\n              ],\n              \"modalTitle\": \"Ce coloane doriti sa printati?\",\n              \"formItemsPerRow\": 1,\n              \"formButtons\": [\n                {\n                  \"UIComponent\": \"Button\",\n                  \"label\": \"Anuleaza\",\n                  \"variant\": \"outlined\",\n                  \"isCancelButton\": true\n                },\n                {\n                  \"UIComponent\": \"Button\",\n                  \"label\": \"Previzualizare\",\n                  \"variant\": \"contained\",\n                  \"isSaveButton\": true\n                }\n              ]\n            }\n          }\n        }\n      }\n    ]\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "cadentier-formator",
@@ -1235,7 +1335,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4c503d57-5bb5-4fbc-bd2d-228e505414e4",
@@ -1272,7 +1374,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "94ce73f7-d0c6-4048-8ec9-1ba0b9eef380",
@@ -1309,7 +1413,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0b795bae-d96a-4d9b-b135-f5eeaf0c8f87",
@@ -1346,7 +1452,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b98b231a-71b9-4888-854e-f7e516dd0dc8",
@@ -1383,7 +1491,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5ba07e91-f49b-4c42-83d8-573c8655e805",
@@ -1420,7 +1530,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "59617f34-297c-4f67-8710-3b6fd468e0b0",
@@ -1452,7 +1564,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d8926ec9-6c32-4dd5-91d7-a981d6ad5c76",
@@ -1484,7 +1598,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "53c23648-2869-4ba9-bbf0-e746b1fb7544",
@@ -1516,7 +1632,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "23023715-6733-4360-bd30-94ef1740b88c",
@@ -1548,7 +1666,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "23b0b8a3-6dd9-4236-b155-a47893c8c52b",
@@ -1585,7 +1705,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5cdd7a67-a43e-4f39-981d-68375e384e0f",
@@ -1622,7 +1744,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4c5ff3b1-58d6-4966-ad4c-0ca13e69ce43",
@@ -1659,7 +1783,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8b14325a-9802-45c3-ac89-aa2baaf55353",
@@ -1691,7 +1817,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4e70bcac-5a48-401b-a019-7a3c8d97daf9",
@@ -1723,7 +1851,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5287c5fc-b563-4310-a5c8-cf1b3100b88d",
@@ -1755,7 +1885,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4ff05af5-d559-4a04-b54d-e3235df8b3db",
@@ -1787,7 +1919,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8c93a580-6a6a-464f-8520-9be5bea75e8c",
@@ -1819,7 +1953,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "db59d048-8c7b-433c-b8eb-4f393d1f8ecd",
@@ -1856,7 +1992,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ac323960-3884-403e-aaa7-99b846248715",
@@ -1893,7 +2031,9 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "f47b63f6-313e-4073-b3fe-32f38c5bc580",
@@ -1930,10 +2070,11 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     }
   ],
@@ -1998,5 +2139,6 @@
       "value": ""
     }
   ],
-  "data": []
+  "data": [],
+  "callbacks": []
 }

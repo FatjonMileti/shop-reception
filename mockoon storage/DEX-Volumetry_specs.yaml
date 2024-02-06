@@ -1,0 +1,1619 @@
+openapi: 3.1.0
+info:
+  description: This API describes the DEX endpoints used for Volumetry project
+  version: 1.0.0
+  title: DEX VOLUMETRY REST API
+  license:
+    name: proprietary
+servers:
+  - url: http://localhost:8080/core/rest/api/v1/volumetry
+    description: Local server
+tags:
+  - name: Employees
+    description: Employees API
+  - name: Contractors
+    description: Contractors API
+  - name: Task templates
+    description: Task templates API
+  - name: Tasks
+    description: Tasks API
+  - name: Work volumes
+    description: Work volumes API
+  - name: Reports
+    description: Reports API
+  - name: Locations
+    description: Locations API
+paths:
+  /workers/employees:
+    get:
+      tags:
+        - Employees
+      summary: Get list of employees (permanent workers)
+      description: Returns a list of employees with pagination, sorting and filtering
+      operationId: getEmployeeList
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - in: query
+          name: size
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: order
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: orderBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterValue
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchValue
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: >-
+            Successfully obtained the paginated, filtered and sorted employee
+            list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkerList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /workers/employees/shifts:
+    get:
+      tags:
+        - Employees
+      summary: Get list of employee shifts
+      description: >-
+        Returns a list of workers, indicating those currently on
+        shift and those off shift, plus the collaborators assigned to the respective department. Pagination and sorting are not required here.
+      operationId: getEmployeeShiftList
+      parameters:
+        - in: query
+          name: order
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: orderBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterValue
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchValue
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: >-
+            Successfully obtained the list of workers depending on the department and shift.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmployeeShiftList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /workers/contractors:
+    get:
+      tags:
+        - Contractors
+      summary: Get list of contractors (temporary workers)
+      description: Returns a list of contractors with pagination, sorting and filtering
+      operationId: getContractorList
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - in: query
+          name: size
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: order
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: orderBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterValue
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchValue
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: >-
+            Successfully obtained the paginated, filtered and sorted contractor
+            list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkerList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+    post:
+      tags:
+        - Contractors
+      summary: Add new contractor
+      description: Add a new contractor based on provided details
+      operationId: addContractor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddContractor"
+      responses:
+        "204":
+          description: Successfully added contractor
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /workers/contractors/{id}:
+    put:
+      tags:
+        - Contractors
+      summary: Update contractor
+      description: Update contractor with provided details
+      operationId: updateContractor
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateContractor"
+      responses:
+        "200":
+          description: Successfully updated contractor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Worker"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+    delete:
+      tags:
+        - Contractors
+      summary: Delete contractor by id
+      description: Delete contractor identified by given id
+      operationId: deleteContractor
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        "204":
+          description: Successfully deleted contractor
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /task-templates:
+    get:
+      tags:
+        - Task templates
+      summary: Get list of task templates
+      description: Returns a list of task templates with pagination, sorting and filtering
+      operationId: getTaskTemplateList
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - in: query
+          name: size
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: order
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: orderBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterValue
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchValue
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: >-
+            Successfully obtained the paginated, filtered and sorted task
+            templates list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskTemplateList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+    post:
+      tags:
+        - Task templates
+      summary: Add new task template
+      description: Add a new task template based on provided details
+      operationId: addTaskTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddTaskTemplate"
+      responses:
+        "204":
+          description: Successfully added task template
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /task-templates/{id}:
+    get:
+      tags:
+        - Task templates
+      summary: Get task template by id
+      description: Get task template identified by given id
+      operationId: getTaskTemplateById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        "200":
+          description: Successfully obtained task template for given id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskTemplate"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+    put:
+      tags:
+        - Task templates
+      summary: Update task template
+      description: Update task template with provided details
+      operationId: updateTaskTemplate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTaskTemplate"
+      responses:
+        "200":
+          description: Successfully updated task template
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskTemplate"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+    delete:
+      tags:
+        - Task templates
+      summary: Delete task template by id
+      description: Delete task template identified by given id
+      operationId: deleteTaskTemplate
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        "204":
+          description: Successfully deleted task template
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /task-templates/frequencies:
+    get:
+      tags:
+        - Task templates
+      summary: Get list of possible frequencies
+      description: Get list of possible frequencies for task template
+      operationId: getFrequencyList
+      responses:
+        "200":
+          description: Successfully obtained list of frequencies
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FrequencyList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /task-templates/measurement-units:
+    get:
+      tags:
+        - Task templates
+      summary: Get list of possible measurement units
+      description: Get list of possible measurement units for task template
+      operationId: getMeasurementUnitList
+      responses:
+        "200":
+          description: Successfully obtained list of measurement units
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeasurementUnitList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /task-templates/priorities:
+    get:
+      tags:
+        - Task templates
+      summary: Get list of possible priorities
+      description: Get list of possible priorities for task template
+      operationId: getPriorityList
+      responses:
+        "200":
+          description: Successfully obtained list of priorities
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriorityList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /tasks:
+    get:
+      tags:
+        - Tasks
+      summary: Get list of tasks
+      description: Returns a filtered list of task contributions by location, task template and date, with no pagination. Sorting will have a default value by task contribution status and start hour.
+      operationId: getTaskList
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - in: query
+          name: size
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: order
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: orderBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterValue
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchValue
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: Successfully obtained the filtered and sorted task list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+    post:
+      tags:
+        - Tasks
+      summary: Add new task
+      description: Add a new task based on provided details
+      operationId: addTask
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddTask"
+      responses:
+        "204":
+          description: Successfully added task
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /tasks/{id}:
+    put:
+      tags:
+        - Tasks
+      summary: Update task
+      description: Update task with provided details
+      operationId: updateTask
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTask"
+      responses:
+        "204":
+          description: Successfully updated task
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - Tasks
+      summary: Get task by id
+      description: Get task identified by given id
+      operationId: getTaskById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        "200":
+          description: Successfully obtained the task for given id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+    delete:
+      tags:
+        - Tasks
+      summary: Delete task by id
+      description: Delete task identified by given id
+      operationId: deleteTask
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        "204":
+          description: Successfully deleted task
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /tasks/{id}/timer:
+    post:
+      tags:
+        - Tasks
+      summary: Start/Pause/Resume/Stop timer
+      description: Change state of timer based on provided action
+      operationId: updateTimer
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTimer"
+      responses:
+        "204":
+          description: Successfully changed state of the timer
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /tasks/aggregation/summary:
+    get:
+      tags:
+        - Tasks
+      summary: Get a list of aggregated tasks summary
+      description: >-
+        Returns a list of summaries for all tasks grouped by template Id with
+        pagination, sorting and filtering
+      operationId: getAggregatedTasksSummaryList
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - in: query
+          name: size
+          schema:
+            type: integer
+            default: 10
+          required: false
+        - in: query
+          name: order
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: orderBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: filterValue
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchBy
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: searchValue
+          schema:
+            type: string
+          required: false
+      responses:
+        "200":
+          description: >-
+            Successfully obtained the paginated, filtered and sorted list of
+            summaries for all tasks grouped by task template
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AggregatedTasksSummaryList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /work-volumes:
+    post:
+      tags:
+        - Work volumes
+      summary: Add work volume
+      description: Add a new work volume for provided details
+      operationId: addWorkVolume
+      responses:
+        "200":
+          description: Successfully added new work volume
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddWorkVolume"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /work-volumes/{id}:
+    put:
+      tags:
+        - Work volumes
+      summary: Update work volume
+      description: Update work volume for provided details
+      operationId: updateWorkVolume
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        "200":
+          description: Successfully updated work volume
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateWorkVolume"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /reports/work-volumes:
+    get:
+      tags:
+        - Reports
+      summary: Get work volume reports in json/xlsx format
+      description: >-
+        Get work volumes reports in json or xlsx format based on given content
+        type
+      operationId: getWorkVolumeReportList
+      responses:
+        "200":
+          description: Successfully obtained work volume reports
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkVolumeReportList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /reports/task-completion:
+    get:
+      tags:
+        - Reports
+      summary: Get task completion reports in json/xlsx format
+      description: >-
+        Get task completion reports in json or xlsx format based on given
+        content type
+      operationId: getTaskCompletionReportList
+      responses:
+        "200":
+          description: Successfully obtained task completion reports
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskCompletionReportList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /locations:
+    get:
+      tags:
+        - Locations
+      summary: Get list of locations
+      description: Get list of all locations
+      operationId: getLocationList
+      responses:
+        "200":
+          description: Successfully obtained list of locations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /locations/departments:
+    get:
+      tags:
+        - Locations
+      summary: Get list of departments
+      description: Get list of all departments
+      operationId: getDepartmentList
+      responses:
+        "200":
+          description: Successfully obtained list of departments
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DepartmentList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+  /locations/categories:
+    get:
+      tags:
+        - Locations
+      summary: Get list of location categories
+      description: Get list of all location categories for volumetry
+      operationId: getLocationCategoryList
+      responses:
+        "200":
+          description: Successfully obtained list of location categories
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationCategoryList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security:
+        - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    ErrorDTO:
+      type: object
+      description: An error object disclosing details about the error cause.
+      properties:
+        code:
+          type: string
+          maxLength: 50
+        message:
+          type: string
+          maxLength: 100
+    WorkerList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/Worker"
+        page:
+          $ref: "#/components/schemas/PagingMetadata"
+    Worker:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          examples:
+            - 257
+        fullName:
+          type: string
+          examples:
+            - Razvan Ionescu
+        jobTitle:
+          type: string
+          examples:
+            - Sef echipa
+        department:
+          type: string
+          description: The generic department of a worker
+          examples:
+            - PGC
+        location:
+          type: string
+          description: The store name where the worker is assigned
+          examples:
+            - Hypermarche Alba Iulia
+    EmployeeShift:
+      type: object
+      properties:
+        workerId:
+          type: integer
+          format: int64
+          examples:
+            - 7290
+        fullName:
+          type: string
+          examples:
+            - Andrei Popescu
+        shiftCategory:
+          type: string
+          description: The category of the worker depending on its working schedule.
+          enum:
+            - ON_SHIFT
+            - OFF_SHIFT
+            - COLLABORATOR
+    EmployeeShiftList:
+      type: array
+      items:
+        $ref: "#/components/schemas/EmployeeShift"
+    AddContractor:
+      type: object
+      properties:
+        firstName:
+          type: string
+          examples:
+            - Andrei
+        lastName:
+          type: string
+          examples:
+            - Popescu
+        middleName:
+          type: string
+          examples:
+            - Marian
+        employer:
+          type: string
+          examples:
+            - Pepsico
+    UpdateContractor:
+      type: object
+      properties:
+        firstName:
+          type: string
+          examples:
+            - Andrei
+        lastName:
+          type: string
+          examples:
+            - Popescu
+        middleName:
+          type: string
+          examples:
+            - Marian
+        employer:
+          type: string
+          examples:
+            - Pepsico
+    TaskTemplate:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          examples:
+            - 2704
+        name:
+          type: string
+          examples:
+            - "Realimentare magazin PGC (stoc cascheta)"
+        rayonsOrDepartment:
+          type: string
+          examples:
+            - PGC
+            - APLS
+        recommendedStartHour:
+          type: string
+          format: time
+          examples:
+            - "06:00"
+        recommendedEndHour:
+          type: string
+          format: time
+          examples:
+            - "08:30"
+        frequency:
+          type: string
+          examples:
+            - zilnic
+            - ocazional
+            - Lu
+        standardProductivityValue:
+          type: number
+          examples:
+            - 5.0
+        measurementUnit:
+          type: string
+          examples:
+            - "elemente/ora"
+        priority:
+          type: string
+          enum:
+            - "1 - Ridicat"
+        workVolumeSource:
+          type: string
+          examples:
+            - "Infolog marfa APLS"
+            - "Manual"
+        volumetryLocationCategory:
+          type: string
+          examples:
+            - "Hyper - Maxi v1"
+        isActive:
+          type: boolean
+    TaskTemplateList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/TaskTemplate"
+        page:
+          $ref: "#/components/schemas/PagingMetadata"
+    AddTaskTemplate:
+      type: object
+      properties:
+        name:
+          type: string
+        estimatedStartHour:
+          type: string
+        estimatedEndHour:
+          type: string
+        frequency:
+          type: string
+        standardProductivityValue:
+          type: number
+        measurementUnitId:
+          type: integer
+        priorityId:
+          type: integer
+    UpdateTaskTemplate:
+      type: object
+      properties:
+        name:
+          type: string
+        estimatedStartHour:
+          type: string
+        estimatedEndHour:
+          type: string
+        frequency:
+          type: string
+        standardProductivityValue:
+          type: number
+        measurementUnitId:
+          type: integer
+        priorityId:
+          type: integer
+        isActive:
+          type: boolean
+        comments:
+          type: string
+    FrequencyList:
+      type: array
+      items:
+        type: string
+    MeasurementUnitList:
+      type: array
+      items:
+        $ref: "#/components/schemas/MeasurementUnit"
+    MeasurementUnit:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+    PriorityList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Priority"
+    Priority:
+      type: object
+      properties:
+        id:
+          type: integer
+        value:
+          type: string
+        description:
+          type: string
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          examples:
+            - 3964
+        workerFullName:
+          type: string
+          examples:
+            - Razvan Ionescu
+        timeInterval:
+          type: string
+          examples:
+            - "15:35 - 18:10"
+            - "-"
+        workload:
+          type: string
+          examples:
+            - "40"
+        timerStatus:
+          type: string
+          enum:
+            - NOT_STARTED
+            - IN_PROGRESS
+            - FINISHED
+        progressProportion:
+          type: number
+          description: The progress done on a task contribution, expressed as a ratio between elapsed time from starting the task and the estimated completion time. If the task contribution status is NOT_STARTED, return 0. If the status is IN_PROGRESS or FINISHED compute the ratio.
+          examples:
+            - 0.6
+            - 0.0
+            - 1.2
+        comments:
+          type: string
+          examples:
+            - "Aparatul a fost reparat."
+    TaskList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Task"
+    AddTask:
+      type: object
+      properties:
+        workerId:
+          type: integer
+          format: int64
+        taskTemplateId:
+          type: integer
+          format: int64
+        workload:
+          type: number
+    UpdateTask:
+      type: object
+      properties:
+        workload:
+          type: number
+    UpdateTimer:
+      type: object
+      properties:
+        action:
+          type: string
+    AggregatedTasksSummaryList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/AggregatedTasksSummary"
+        page:
+          $ref: "#/components/schemas/PagingMetadata"
+    AggregatedTasksSummary:
+      type: object
+      properties:
+        taskTemplateId:
+          type: number
+          format: int64
+          description: "Needed by the FE for the React library"
+          examples:
+            - 12
+        rayonsOrDepartment:
+          type: string
+          examples:
+            - PGC
+            - APLS
+            - Peste, Macelarie
+        taskName:
+          type: string
+          description: The task template name
+          examples:
+            - Realimentare magazin PGC (stoc cascheta)
+        recommendedInterval:
+          type: string
+          description: "The task templateâ€™s recommended start and end hours"
+          examples:
+            - "06:00 - 09:00"
+        allocatedWorkers:
+          type: integer
+          format: int32
+          description: The number of workers that, in a specific day and location, were allocated to the task template and their task contribution status is NOT_STARTED or IN_PROGRESS
+          examples:
+            - 3
+        priority:
+          type: string
+          description: The task template priority
+          enum:
+            - "1 - Ridicat"
+            - "2 - Mediu"
+            - "3 - Scazut"
+        totalWorkload:
+          type: number
+          description: The total work volume for a specific day, location and task template
+          examples:
+            - 400
+        completedWorkload:
+          type: number
+          description: The sum of the workload of the task contributions corresponding to the task template that have the status FINISHED
+          examples:
+            - 100
+        inProgressWorkload:
+          type: number
+          description: The sum of the workload of the task contributions corresponding to the task template that have the status IN_PROGRESS
+          examples:
+            - 180
+        remainingWorkload:
+          type: number
+          description: The remaining workload
+          examples:
+            - 120
+        workloadMeasurementUnit:
+          type: string
+          examples:
+            - elemente
+        frequency:
+          type: string
+          description: The recommended task template frequency
+          examples:
+            - zilnic
+        standardProductivity:
+          type: string
+          description: The reference for the speed a task should be performed with
+          examples:
+            - "100 elemente/ora"
+    AddWorkVolume:
+      type: object
+      properties:
+        taskTemplateId:
+          type: integer
+          format: int64
+        workload:
+          type: number
+    UpdateWorkVolume:
+      type: object
+      properties:
+        workload:
+          type: number
+    WorkVolumeReportList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkVolumeReport"
+        page:
+          $ref: "#/components/schemas/PagingMetadata"
+    WorkVolumeReport:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        measurementUnit:
+          type: string
+        totalWorkload:
+          type: number
+        averageWorkload:
+          type: number
+    TaskCompletionReportList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/TaskCompletionReport"
+        page:
+          $ref: "#/components/schemas/PagingMetadata"
+    TaskCompletionReport:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        dayNumber:
+          type: integer
+        totalNumberOfTasks:
+          type: integer
+        finishedNumberOfTasks:
+          type: integer
+    LocationList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Location"
+    Location:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    DepartmentList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Department"
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+    LocationCategoryList:
+      type: array
+      items:
+        $ref: "#/components/schemas/LocationCategory"
+    LocationCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+        category:
+          type: string
+        description:
+          type: string
+    PagingMetadata:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          default: 10
+          description: Size of the page
+        page:
+          type: integer
+          default: 0
+          description: The page number we are on
+        totalCount:
+          type: integer
+          format: int64
+          description: The total number of records
+        pageCount:
+          type: integer
+          description: The total number of pages
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/ErrorDTO"
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/ErrorDTO"
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/ErrorDTO"
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/ErrorDTO"
+    InternalServerError:
+      description: An unexpected error happened
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/ErrorDTO"

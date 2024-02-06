@@ -39,12 +39,11 @@ const PrintModal = ({
   ...rest
 }) => {
   const columnOptions = useMemo(() => {
-    return dynamicColumns
-      .map(col => ({
-        label: col.title,
-        value: col.field,
-        defaultPrintSelected: col.defaultPrintSelected
-      }))
+    return dynamicColumns.map(col => ({
+      label: col.title,
+      value: col.field,
+      defaultPrintSelected: col.defaultPrintSelected
+    }))
   }, [dynamicColumns])
 
   const [value, setValue] = useState([])
@@ -62,8 +61,7 @@ const PrintModal = ({
       url,
       searchText: '',
       searchFields: [],
-      filters: rest.filters,
-      tableFilters: tableFilters,
+      filters: tableFilters,
       page: 0,
       rowsPerPage: 0,
       order: rest.order,
@@ -106,7 +104,7 @@ const PrintModal = ({
         <Grid container spacing={4}>
           {modalTitle && modalTitle.length > 0 && (
             <Grid item xs={12}>
-              <Typography component="h2" variant="medium">
+              <Typography component="h2" variant="h4">
                 <span className={s.modalTitle}>{modalTitle}</span>
               </Typography>
             </Grid>

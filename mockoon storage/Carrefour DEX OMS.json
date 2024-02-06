@@ -1,6 +1,6 @@
 {
   "uuid": "f0e873aa-d080-44ab-b0df-4da411e68ca2",
-  "lastMigration": 27,
+  "lastMigration": 32,
   "name": "DEX SUPPLY OMNI REST API",
   "endpointPrefix": "8081/core/rest/api/v1/supply-omni",
   "latency": 0,
@@ -17,7 +17,7 @@
       "responses": [
         {
           "uuid": "eac85fb2-0b4b-473e-b857-9c9b44d6298b",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Bugeac\",\n      \"county\": {\n        \"id\": {{faker 'datatype.number'}},\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int'}},\n      \"name\": \"Bugeac\",\n      \"county\": {\n        \"id\": {{faker 'number.int'}},\n        \"name\": \"Constanta\",\n        \"code\": \"CT\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of cities",
@@ -35,7 +35,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b805bdcf-4ed5-49da-b251-eee1ee5eedb3",
@@ -57,7 +59,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "96c238b5-bd5c-4d42-91fb-65e020b43f6c",
@@ -79,7 +83,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b566bcce-0d9a-4955-84cb-7b6f3ba0e8b7",
@@ -101,7 +107,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b7d54c57-e8b7-4203-b5f4-e3f2fa74814f",
@@ -123,7 +131,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5a026fce-b120-466d-95e8-de37d129b042",
@@ -145,10 +155,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -160,7 +171,7 @@
       "responses": [
         {
           "uuid": "58df29a4-9618-4c65-a4ed-fba7b8eae770",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int'}},\n      \"name\": \"Constanta\",\n      \"code\": \"CT\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of districts",
@@ -178,7 +189,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9af226ad-a2fb-4b2c-9d52-321dc6f73d77",
@@ -200,7 +213,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ba007faf-f071-4266-8fb2-62e080417fb7",
@@ -222,7 +237,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "cbcb1a97-ed14-4afc-a364-3cecbe1dcd7d",
@@ -244,7 +261,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "30b377b4-e340-448b-a1a7-c73b0f047ac9",
@@ -266,7 +285,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d19e634e-da97-4deb-a123-80b6ca83df43",
@@ -288,10 +309,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -303,7 +325,7 @@
       "responses": [
         {
           "uuid": "f98b3608-7c96-47fb-8c03-ac071a353e0e",
-          "body": "{\n  \"id\": \"44501286\",\n  \"ean\": \"3614613092689\",\n  \"internalCode\": \"44501286\",\n  \"familyCode\": {{faker 'datatype.number'}},\n  \"subfamilyCode\": {{faker 'datatype.number'}},\n  \"familyName\": \"\",\n  \"subfamilyName\": \"\",\n  \"name\": \"Frigider ARCTIC Eco-X7\",\n  \"brand\": \"ARCTIC\",\n  \"vat\": {{faker 'datatype.number'}},\n  \"price\": 969.99,\n  \"storeStock\": {\n    \"initialQuantity\": 7,\n    \"soldQuantity\": 3,\n    \"reservedQuantity\": 0,\n    \"availableQuantity\": 4,\n    \"buybackOptions\": [\n          { \"value\": \"NORMAL_PRICE\", \"label\": \"Pret lista\" },\n          { \"value\": \"INTERNAL_BUYBACK\", \"label\": \"Buyback intern (-120 RON)\" },\n          { \"value\": \"BUYBACK_AFM\", \"label\": \"Buyback AFM\" }\n        ]\n  },\n  \"warehouseStock\": {\n    \"initialQuantity\": 20,\n    \"soldQuantity\": 11,\n    \"reservedQuantity\": 2,\n    \"availableQuantity\": 7,\n    \"buybackOptions\": [\n          { \"value\": \"NORMAL_PRICE\", \"label\": \"Pret lista\" },\n          { \"value\": \"INTERNAL_BUYBACK\", \"label\": \"Buyback intern (-120 RON)\" },\n          { \"value\": \"BUYBACK_AFM\", \"label\": \"Buyback AFM\" }\n        ]\n  },\n  \"neighboursStock\": [\n    {\n      \"storeName\": \"Suceava\",\n      \"initialQuantity\": 11,\n      \"soldQuantity\": 0,\n      \"reservedQuantity\": 0,\n      \"availableQuantity\": 11\n    },\n    {\n      \"storeName\": \"Pitesti\",\n      \"initialQuantity\": 7,\n      \"soldQuantity\": 2,\n      \"reservedQuantity\": 0,\n      \"availableQuantity\": 5\n    }\n  ]\n}",
+          "body": "{\n  \"id\": \"40501251\",\n  \"ean\": \"8059019005980\",\n  \"internalCode\": \"40501251\",\n  \"name\": \"MS.SP+USC. C ACSWS4852 CANDY\",\n  \"brand\": \"CANDY     \",\n  \"vat\": 19,\n  \"price\": 2149.99,\n  \"storeStock\": {\n    \"initialQuantity\": 4,\n    \"soldQuantity\": 0,\n    \"reservedQuantity\": 0,\n    \"availableQuantity\": 4,\n    \"purchaseOptions\": [\n      {\n        \"value\": \"NORMAL_PRICE\",\n        \"label\": \"Pret lista\"\n      },\n      {\n        \"value\": \"INTERNAL_BUYBACK\",\n        \"label\": \"Buyback intern\"\n      },\n      {\n        \"value\": \"BUYBACK_AFM\",\n        \"label\": \"Buyback AFM\"\n      }\n    ]\n  },\n  \"warehouseStock\": {\n    \"initialQuantity\": 82,\n    \"soldQuantity\": 0,\n    \"reservedQuantity\": 0,\n    \"availableQuantity\": 82,\n    \"purchaseOptions\": [\n      {\n        \"value\": \"NORMAL_PRICE\",\n        \"label\": \"Pret lista\"\n      },\n      {\n        \"value\": \"INTERNAL_BUYBACK\",\n        \"label\": \"Buyback intern\"\n      },\n      {\n        \"value\": \"BUYBACK_AFM\",\n        \"label\": \"Buyback AFM\"\n      }\n    ]\n  },\n  \"neighboursStock\": [\n    {\n      \"storeName\": \"Carrefour Chiajna (Militari)\",\n      \"availableQuantity\": 8\n    },\n    {\n      \"storeName\": \"Carrefour Colentina\",\n      \"availableQuantity\": 82\n    },\n    {\n      \"storeName\": \"Carrefour Colosseum\",\n      \"availableQuantity\": 33\n    },\n    {\n      \"storeName\": \"Carrefour Megamall\",\n      \"availableQuantity\": 42\n    }\n  ]\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the product for the given EAN",
@@ -321,7 +343,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0edd7fc1-82a6-4022-aea7-e02d8a4d7a41",
@@ -343,7 +367,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1c96d302-4540-4d1a-8d47-6870200d1e62",
@@ -365,7 +391,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ee22be55-8885-4083-b959-7b81c90133ab",
@@ -387,7 +415,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "553f4804-010b-4927-9698-5ea8644fe253",
@@ -409,7 +439,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9bff46c5-3fc9-4e3b-994d-4c89fb5cff27",
@@ -431,10 +463,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -464,7 +497,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "64ed74c5-ae1c-40cd-aa04-0121c3cf357c",
@@ -486,7 +521,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b7844b88-6610-4a9e-a75e-f2cb1a4d556d",
@@ -508,7 +545,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fd8782f5-b180-4e91-8d66-8e8d38965f73",
@@ -530,7 +569,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ecdb3487-a3e4-43f5-8592-f8d1abfb205a",
@@ -552,7 +593,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "dca352e6-0865-47f0-8b51-269f9c118577",
@@ -574,10 +617,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -591,7 +635,7 @@
           "uuid": "4ce2ca08-ae3d-434d-998d-f1bd28722a6b",
           "body": "",
           "latency": 0,
-          "statusCode": 204,
+          "statusCode": 200,
           "label": "Successfully updated the quantity of the product",
           "headers": [
             {
@@ -607,7 +651,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "7f496981-d3b5-44a7-b291-624584dd5db0",
@@ -629,7 +675,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8e73a7b9-33df-4464-b153-61e4537fa71e",
@@ -651,7 +699,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "f5eab381-a08a-4932-9244-9682955b0de5",
@@ -673,7 +723,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5da69058-4aec-4755-af46-33ceec8e54d0",
@@ -695,7 +747,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ba011c69-418a-434b-b44f-70ebd522cfd9",
@@ -717,10 +771,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -732,7 +787,7 @@
       "responses": [
         {
           "uuid": "70735733-b763-4894-b7b8-65512d6fb38b",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"44501286\",\n      \"ean\": \"3614613092689\",\n      \"internalCode\": \"44501286\",\n      \"name\": \"Frigider ARCTIC Eco-X7\",\n      \"brand\": \"ARCTIC\",\n      \"price\": 2909.97,\n      \"quantity\": 3,\n      \"vat\": {{faker 'datatype.number'}}\n    },{\n      \"id\": \"44501287\",\n      \"ean\": \"3614613092689\",\n      \"code\": \"44501286\",\n      \"name\": \"Frigider ARCTIC Eco-X7\",\n      \"brand\": \"ARCTIC\",\n      \"initialPrice\": 1939.98,\n      \"price\": 1699.98,\n      \"quantity\": 2,\n      \"vat\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"Discount achizitie pt Buyback intern:  -240 LEI\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"totalItems\": 4,\n    \"totalPrice\": 3879.96\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"40501251\",\n      \"ean\": \"8059019005980\",\n      \"internalCode\": \"40501251\",\n      \"name\": \"MS.SP+USC. C ACSWS4852 CANDY\",\n      \"brand\": \"CANDY     \",\n      \"price\": 2149.99,\n      \"quantity\": 1,\n      \"vat\": 19,\n      \"totalPrice\": 2149.99,\n      \"totalPriceWithoutDiscount\": 2149.99,\n      \"discountLabel\": \"\",\n      \"purchaseOption\": \"NORMAL_PRICE\"\n    },\n    {\n      \"id\": \"40501251\",\n      \"ean\": \"8059019005980\",\n      \"internalCode\": \"40501251\",\n      \"name\": \"MS.SP+USC. C ACSWS4852 CANDY\",\n      \"brand\": \"CANDY     \",\n      \"price\": 2149.99,\n      \"quantity\": 1,\n      \"vat\": 19,\n      \"totalPrice\": 2029.99,\n      \"totalPriceWithoutDiscount\": 2149.99,\n      \"discountLabel\": \"Discount 120.0 lei\",\n      \"purchaseOption\": \"INTERNAL_BUYBACK\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 2,\n    \"pageCount\": 1\n  },\n  \"summary\": {\n    \"totalItems\": 2,\n    \"totalPrice\": 4179.98\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of products from shopping cart with pagination, sorting and filtering",
@@ -750,7 +805,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b0074c04-0e42-437a-8b69-d60720cb3962",
@@ -772,7 +829,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4c1f53ad-9179-4209-83c8-25dfb9de18d4",
@@ -794,7 +853,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "cd699869-6960-4685-a16c-5c71c5d6239d",
@@ -816,7 +877,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "388a51ce-6405-4f30-8d54-265e280a23c6",
@@ -838,7 +901,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b3987799-546f-4d54-98fd-a18c2f411597",
@@ -860,10 +925,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -893,7 +959,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "c86f98d0-898b-4de1-9357-d49160ce1a84",
@@ -915,7 +983,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "30457627-61c0-40a5-b1a9-e02f46f41239",
@@ -937,7 +1007,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9f0e7ffe-6041-4455-affe-6e1640ca8283",
@@ -959,7 +1031,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4c8d444c-0b2d-428e-969c-8067bad32a0b",
@@ -981,7 +1055,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "da2f56ce-9b30-4957-be25-d0f51abb8c4c",
@@ -1003,10 +1079,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1036,7 +1113,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "c3979c27-d613-43b5-83e8-f40d58fb1fb3",
@@ -1058,7 +1137,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "008486a9-0e13-4fa3-a1b7-02afaf865d8d",
@@ -1080,7 +1161,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3290e5a8-3c75-4ee3-8611-e9f92f5e7118",
@@ -1102,7 +1185,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "163ae033-e3b3-4a64-ba41-ff010081f34e",
@@ -1124,7 +1209,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b7311cd4-7b3a-423b-a576-c32c408e7f50",
@@ -1146,10 +1233,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1179,7 +1267,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "a710f5eb-3fc4-410e-b93c-5889742c6aeb",
@@ -1201,7 +1291,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2c7619c0-79b9-493a-b044-e0b94c8a4576",
@@ -1223,7 +1315,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "90694cd3-5237-47e3-b610-0c52a94ba47d",
@@ -1245,7 +1339,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ff6f5245-1eb4-4222-a831-6df2ff635b70",
@@ -1267,7 +1363,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1ffdefe9-19d7-402e-ab41-b5d7b87c03a3",
@@ -1289,10 +1387,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1322,7 +1421,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "72370967-d5fa-4173-92d7-9ce210511085",
@@ -1344,7 +1445,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d2ff7641-912d-41fe-a5ab-d6330dc79964",
@@ -1366,7 +1469,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "a2659993-dac8-4873-a08d-9795e3c38495",
@@ -1388,7 +1493,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9a8d9908-d843-4264-8145-36d7a8c27506",
@@ -1410,7 +1517,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "c606430c-b63d-4ff8-b39d-657dfbc55334",
@@ -1432,10 +1541,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1447,7 +1557,7 @@
       "responses": [
         {
           "uuid": "acd7323d-ded5-453d-99c3-04a4284b6a31",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 667788,\n      \"email\": \"paula.dan@test.com\",\n      \"phone\": \"1234567\",\n      \"address\": {\n        \"city\": \"Bugeac\",\n        \"county\": \"Constanta\",\n        \"countyCode\": \"CT\",\n        \"address\": \"Agnita street\",\n        \"fullAddress\": \"Agnita street, Bugeac, Constanta\"\n      },\n      \"name\": \"Paula Dan\",\n      \"cif\": \"667788\",\n      \"tradeRegister\": \"\",\n      \"bank\": \"\",\n      \"bankAccount\": \"\",\n      \"type\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 667788,\n      \"email\": \"paula.dan@test.com\",\n      \"phone\": \"1234567\",\n      \"address\": {\n        \"city\": \"Bugeac\",\n        \"county\": \"Constanta\",\n        \"countyCode\": \"CT\",\n        \"address\": \"Agnita street\",\n        \"fullAddress\": \"Agnita street, Bugeac, Constanta\"\n      },\n      \"name\": \"Paula Dan\",\n      \"cif\": \"667788\",\n      \"tradeRegister\": \"\",\n      \"bank\": \"\",\n      \"bankAccount\": \"\",\n      \"type\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained a list of clients with pagination, sorting and filtering",
@@ -1465,7 +1575,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ad282b65-4877-4a41-9853-563d41ef7eaa",
@@ -1487,7 +1599,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "05da786d-7bb3-4061-a422-917e4a23e129",
@@ -1509,7 +1623,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e52d0d32-bcc1-4952-b6d5-d421b6d5e7ae",
@@ -1531,7 +1647,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "78f388d2-00f0-440e-aa3c-98aa89c7e8b2",
@@ -1553,7 +1671,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "71f6b025-9a25-4752-a34b-816aa714ec56",
@@ -1575,10 +1695,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1608,7 +1729,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "37a026d6-766e-4898-8264-415cedbf8697",
@@ -1630,7 +1753,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fd206c3f-162f-41f8-82fb-8b14c27318d2",
@@ -1652,7 +1777,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "40186c8c-9cfb-4202-885c-82669225851f",
@@ -1674,7 +1801,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "aca268e4-43b7-46d0-8fd4-aca092d09e14",
@@ -1696,7 +1825,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "73a7fc73-e293-4a45-9d85-073359582405",
@@ -1718,10 +1849,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1733,7 +1865,7 @@
       "responses": [
         {
           "uuid": "3b8ff26d-eed2-4b02-9f25-a433e8289edb",
-          "body": "{\n  \"id\": {{faker 'datatype.number'}}\n}",
+          "body": "{\n  \"id\": {{faker 'number.int'}}\n}",
           "latency": 0,
           "statusCode": 201,
           "label": "Successfully obtained details about newly created order",
@@ -1751,7 +1883,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "45e657ee-934d-4689-aee0-a7b2560c7821",
@@ -1773,7 +1907,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "f49f7884-3247-4a41-b134-665ead011c3e",
@@ -1795,7 +1931,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3bf54fb5-cae0-4808-b153-51f35f260927",
@@ -1817,7 +1955,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ef72e517-1b07-4415-bb8f-b66a92cd51d3",
@@ -1839,7 +1979,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "137b7efa-b0ee-467e-8b63-63595ba24ee1",
@@ -1861,10 +2003,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -1876,7 +2019,7 @@
       "responses": [
         {
           "uuid": "829f0d1d-bd5d-4539-b3f9-720ea3eb48fa",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"Livrare din magazin\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\",\n      \"prepared\": false\n    },\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"Livrare din depozit\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'number.float'}},\n            \"quantity\": {{faker 'number.int'}},\n            \"vat\": {{faker 'number.int'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'number.float'}},\n            \"quantity\": {{faker 'number.int'}},\n            \"vat\": {{faker 'number.int'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'number.float'}},\n            \"quantity\": {{faker 'number.int'}},\n            \"vat\": {{faker 'number.int'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"active\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'number.float'}},\n      \"deliveryType\": \"Livrare din magazin\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\",\n      \"prepared\": false\n    },\n    {\n      \"id\": {{faker 'number.int'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'number.float'}},\n            \"quantity\": {{faker 'number.int'}},\n            \"vat\": {{faker 'number.int'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'number.float'}},\n            \"quantity\": {{faker 'number.int'}},\n            \"vat\": {{faker 'number.int'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'number.float'}},\n            \"quantity\": {{faker 'number.int'}},\n            \"vat\": {{faker 'number.int'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"active\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'number.float'}},\n      \"deliveryType\": \"Livrare din depozit\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of all proformas",
@@ -1894,7 +2037,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "7d471eeb-e5cd-4735-9d72-5d0061a694a6",
@@ -1916,7 +2061,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "29814c18-2338-4595-811d-90043ae5ef3c",
@@ -1938,7 +2085,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "c1a2fdff-f0d1-448e-8e0d-11de8e570d57",
@@ -1960,7 +2109,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "59e3b477-1d36-4924-8678-89bf19e16060",
@@ -1982,7 +2133,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8cfd5d22-ef58-46fd-943c-901ac3c773aa",
@@ -2004,10 +2157,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2037,7 +2191,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "c446bc5a-11ee-4cbd-9587-78fe6b811d4e",
@@ -2059,7 +2215,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b30a099f-3684-436f-8979-dd616eeca440",
@@ -2081,7 +2239,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "10489d75-e097-4dbf-a41c-948e802b5ed7",
@@ -2103,7 +2263,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ad737fbc-4a78-4487-a3dd-9606cba0ac8a",
@@ -2125,7 +2287,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2cb1d9d2-1586-401b-8496-3f69e840293c",
@@ -2147,10 +2311,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2180,7 +2345,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "46dd5611-c5a7-4718-a974-c91aac92c77f",
@@ -2202,7 +2369,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "08483d36-4eea-4c05-991a-097b5f2c772b",
@@ -2224,7 +2393,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "c541583a-5766-4d36-bd06-d3c2aa73837e",
@@ -2246,7 +2417,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b5dfbb1f-3bde-4f5b-9a95-9edeefd57a8f",
@@ -2268,7 +2441,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6d7d2c1c-0619-4172-992b-6873e5722f3b",
@@ -2290,10 +2465,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2323,7 +2499,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b4e14e2c-f79b-4682-8066-8873d42de111",
@@ -2345,7 +2523,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "931f350f-1f54-468e-9b1f-e034e48a91e4",
@@ -2367,7 +2547,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1708fefd-ce6d-4270-81e1-a2c91bae7f0a",
@@ -2389,7 +2571,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e81422f4-daa0-4b05-ad30-7ce3d1dc0d39",
@@ -2411,7 +2595,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9a37f5b1-50b1-46f0-bfb1-43462721ff3e",
@@ -2433,10 +2619,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2448,7 +2635,7 @@
       "responses": [
         {
           "uuid": "30f949ed-3d3e-4580-82af-0c1ba8b14338",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'number.int'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"321321\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'number.float'}},\n            \"quantity\": {{faker 'number.int'}},\n            \"vat\": {{faker 'number.int'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'number.float'}},\n            \"quantity\": {{faker 'number.int'}},\n            \"vat\": {{faker 'number.int'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'number.float'}},\n            \"quantity\": {{faker 'number.int'}},\n            \"vat\": {{faker 'number.int'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"active\": true,\n      \"totalAmount\": {{faker 'number.float'}},\n      \"deliveryType\": \"\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of active proformas",
@@ -2466,7 +2653,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "52f99ffd-459d-4eaf-83e1-cf579601e7d3",
@@ -2488,7 +2677,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "fa8dd09a-fbc5-4f8b-92b9-9f3fbae0b457",
@@ -2510,7 +2701,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5b9188dc-261c-484e-bece-9f7c72ea8573",
@@ -2532,7 +2725,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4fa5cce0-6efe-44d9-84c5-69740bd368c8",
@@ -2554,7 +2749,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "cda84ed7-c1f0-4591-89f7-13e4c74f32d5",
@@ -2576,10 +2773,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2591,7 +2789,7 @@
       "responses": [
         {
           "uuid": "2b2c977c-33fd-4e08-91b9-2670adbc3073",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": {{faker 'datatype.number'}},\n      \"clientId\": \"\",\n      \"clientName\": \"\",\n      \"agentName\": \"\",\n      \"products\": [\n        {\n          \"id\": \"\",\n          \"ean\": \"\",\n          \"internalCode\": \"\",\n          \"name\": \"\",\n          \"brand\": \"\",\n          \"price\": {{faker 'datatype.float'}},\n          \"quantity\": {{faker 'datatype.number'}},\n          \"vat\": {{faker 'datatype.number'}},\n          \"buybackDiscount\": \"\"\n        }\n      ],\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"paymentMethod\": \"\",\n      \"deliveryType\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"creationDate\": \"\",\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n   \"list\": [\n        {\n            \"id\": 1549,\n            \"proformaId\": null,\n            \"clientId\": \"1\",\n            \"clientName\": \"Paula Dan\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"42507924\",\n                    \"name\": \"Suport TV1\",\n                    \"brand\": null,\n                    \"price\": 699.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 699.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 699.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": true,\n            \"creationDate\": \"2023-11-09T14:06:12.237786+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda pregatita pentru livrare\"\n        },\n        {\n            \"id\": 1542,\n            \"proformaId\": null,\n            \"clientId\": \"2\",\n            \"clientName\": \"sc ghiocel srl\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"80001824\",\n                    \"name\": \"HOTA TEL.1MOT.CTB6407X BEKO\",\n                    \"brand\": null,\n                    \"price\": 499.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 499.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 499.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-07T12:21:29.852013+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda refuzata de client\"\n        },\n        {\n            \"id\": 1541,\n            \"proformaId\": null,\n            \"clientId\": \"1\",\n            \"clientName\": \"Paula Dan\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"40501900\",\n                    \"name\": \"MS. SP. B B3WFU59425W BEKO\",\n                    \"brand\": null,\n                    \"price\": 2999.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 2999.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 2999.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din depozit\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-07T12:12:06.148619+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda refuzata de client\"\n        },\n        {\n            \"id\": 1539,\n            \"proformaId\": null,\n            \"clientId\": \"1\",\n            \"clientName\": \"Paula Dan\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"40501251\",\n                    \"name\": \"MS.SP+USC. C ACSWS4852 CANDY\",\n                    \"brand\": null,\n                    \"price\": 2149.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 2149.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 2149.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din depozit\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-07T09:57:01.177794+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda achitata\"\n        },\n        {\n            \"id\": 1538,\n            \"proformaId\": null,\n            \"clientId\": \"1\",\n            \"clientName\": \"Paula Dan\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"40501409\",\n                    \"name\": \"MS.SP. C F4WV308N3E LG\",\n                    \"brand\": null,\n                    \"price\": 2349.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 2349.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 2349.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": false,\n            \"creationDate\": \"2023-11-07T09:00:50.557738+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda achitata\"\n        },\n        {\n            \"id\": 1521,\n            \"proformaId\": null,\n            \"clientId\": \"2\",\n            \"clientName\": \"sc ghiocel srl\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"40501251\",\n                    \"name\": \"MS.SP+USC. C ACSWS4852 CANDY\",\n                    \"brand\": null,\n                    \"price\": 2149.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 2149.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 2149.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-02T11:19:51.415796+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda finalizata\"\n        },\n        {\n            \"id\": 1516,\n            \"proformaId\": null,\n            \"clientId\": \"2\",\n            \"clientName\": \"sc ghiocel srl\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"80001824\",\n                    \"name\": \"HOTA TEL.1MOT.CTB6407X BEKO\",\n                    \"brand\": null,\n                    \"price\": 499.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 499.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 499.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Ridicare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-01T11:20:09.223650+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda finalizata\"\n        },\n        {\n            \"id\": 1515,\n            \"proformaId\": null,\n            \"clientId\": \"3\",\n            \"clientName\": \"Ionut Popescu\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"68501501\",\n                    \"name\": \"TOPPER MEM 140X190 ALB I515694\",\n                    \"brand\": null,\n                    \"price\": 349.99,\n                    \"quantity\": 2,\n                    \"vat\": null,\n                    \"totalPrice\": 699.98,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                },\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"80001824\",\n                    \"name\": \"HOTA TEL.1MOT.CTB6407X BEKO\",\n                    \"brand\": null,\n                    \"price\": 499.99,\n                    \"quantity\": 2,\n                    \"vat\": null,\n                    \"totalPrice\": 999.98,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 1699.96,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din depozit\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-01T11:18:12.524575+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda finalizata\"\n        },\n        {\n            \"id\": 1511,\n            \"proformaId\": null,\n            \"clientId\": \"3\",\n            \"clientName\": \"Ionut Popescu\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"68501501\",\n                    \"name\": \"TOPPER MEM 140X190 ALB I515694\",\n                    \"brand\": null,\n                    \"price\": 349.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 349.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 349.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-01T10:33:24.435482+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda refuzata de client\"\n        },\n        {\n            \"id\": 1509,\n            \"proformaId\": null,\n            \"clientId\": \"3\",\n            \"clientName\": \"Ionut Popescu\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"80001824\",\n                    \"name\": \"HOTA TEL.1MOT.CTB6407X BEKO\",\n                    \"brand\": null,\n                    \"price\": 499.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 499.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 499.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din depozit\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-01T10:20:14.425061+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda predata curierului\"\n        }\n    ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained a list of of paid orders",
@@ -2609,7 +2807,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "50a1a2fe-7f8d-42ca-8136-046858c8e79e",
@@ -2631,7 +2831,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "1bf232df-787a-4b01-bf94-a67acfb74c8b",
@@ -2653,7 +2855,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "7d4e8d0e-4b0f-4d6d-8a1e-2c26d5f844f1",
@@ -2675,7 +2879,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "7c51bc77-0771-442d-92d1-3e69e0fe91d8",
@@ -2697,7 +2903,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b7dbbf73-2da3-42f8-8ee8-903f2084f0ab",
@@ -2719,10 +2927,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2734,7 +2943,7 @@
       "responses": [
         {
           "uuid": "0faa97eb-bbea-4d2d-9a3b-55aa2402ae5e",
-          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"proformaId\": {{faker 'datatype.number'}},\n  \"clientId\": \"667788\",\n  \"clientName\": \"\",\n  \"agentName\": \"\",\n  \"products\": [\n    {\n      \"id\": \"\",\n      \"ean\": \"\",\n      \"internalCode\": \"\",\n      \"name\": \"\",\n      \"brand\": \"\",\n      \"price\": {{faker 'datatype.float'}},\n      \"quantity\": {{faker 'datatype.number'}},\n      \"vat\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"\"\n    }\n  ],\n  \"totalAmount\": {{faker 'datatype.float'}},\n  \"paymentMethod\": \"\",\n  \"deliveryType\": \"\",\n  \"paid\": false,\n  \"hasInvoice\": {{faker 'datatype.boolean'}},\n  \"creationDate\": \"\",\n  \"lastModifiedDate\": \"\"\n}",
+          "body": "{\n  \"id\": {{faker 'number.int'}},\n  \"proformaId\": {{faker 'number.int'}},\n  \"clientId\": \"667788\",\n  \"clientName\": \"\",\n  \"agentName\": \"\",\n  \"products\": [\n    {\n      \"id\": \"\",\n      \"ean\": \"\",\n      \"internalCode\": \"\",\n      \"name\": \"\",\n      \"brand\": \"\",\n      \"price\": 200,\n      \"quantity\": {{faker 'number.int'}},\n      \"vat\": {{faker 'number.int'}},\n      \"buybackDiscount\": \"\"\n    }\n  ],\n  \"totalAmount\": 202,\n  \"paymentMethod\": \"\",\n  \"deliveryType\": \"\",\n  \"paid\": false,\n  \"active\": false,\n  \"hasInvoice\": {{faker 'datatype.boolean'}},\n  \"creationDate\": \"\",\n  \"lastModifiedDate\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the proforma identified by orderId",
@@ -2752,7 +2961,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "f6bab774-071c-4550-b72b-661d3e833cc5",
@@ -2774,7 +2985,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b143c1bc-3887-4258-bbf0-1e203d21a905",
@@ -2796,7 +3009,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0490e962-13af-4e64-bb85-3fd846e8ecc7",
@@ -2818,7 +3033,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "f7540a49-9fd1-422a-920a-645c082bc9a4",
@@ -2840,7 +3057,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "c46917e6-0fee-4ff7-bece-bce36144c886",
@@ -2862,10 +3081,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -2895,7 +3115,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e4d47405-8c0c-472f-9a53-134ac37f90f4",
@@ -2917,7 +3139,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8c5d68f1-f2a8-4cff-b692-3bd56a9b7c2c",
@@ -2939,7 +3163,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "15043153-a51a-4460-9b35-fd11da5d2220",
@@ -2961,7 +3187,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "f592e36d-e9ec-4d51-b909-1c1dfeb571e1",
@@ -2983,7 +3211,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "c36ff035-15a8-4cb0-8811-af6be6609260",
@@ -3005,10 +3235,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3038,7 +3269,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "f61ab27a-8567-4e38-a45d-5c0578da9fb9",
@@ -3060,7 +3293,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "cab7331b-c920-4917-acba-a3f73973e562",
@@ -3082,7 +3317,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "131fe0a7-418e-41fb-8a6d-9aa055bd72ab",
@@ -3104,7 +3341,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3b861329-6abf-46b5-9cc9-506c3602ebba",
@@ -3126,7 +3365,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "52ab80fd-19fc-4927-a7f2-2c1323d150ad",
@@ -3148,10 +3389,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3181,7 +3423,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8c9c6f34-1754-49d9-a97d-3cbd37b3f10b",
@@ -3203,7 +3447,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "7caa84f3-1510-4c46-b09a-80ec5f781266",
@@ -3225,7 +3471,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "e6636e7c-e0fe-4e09-8b7e-38ed187e23db",
@@ -3247,7 +3495,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d00e2f34-b606-4312-979b-2d8103669812",
@@ -3269,7 +3519,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4f28bdad-491f-498b-8bb9-7c70679ba2fb",
@@ -3291,10 +3543,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3324,7 +3577,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "84c4c592-9c0c-4f30-a962-665ff1f1f4ff",
@@ -3346,7 +3601,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "95fca7f0-2129-4869-a81d-fbe7df5f4a31",
@@ -3368,7 +3625,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6dfdf8ed-c4b6-4593-b6bd-3edf08c0ac0f",
@@ -3390,7 +3649,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "83123b4a-ed3b-44c0-a0fb-fa8a92d3bcac",
@@ -3412,7 +3673,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bf875588-a278-4fb2-ac70-7e0d9ef01a2a",
@@ -3434,10 +3697,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3467,7 +3731,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "31625500-80bf-4cab-8c76-06cb24147974",
@@ -3489,7 +3755,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "caae7e85-5ff1-4eba-9de2-db6d53dfbe95",
@@ -3511,7 +3779,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "9f2b28e3-9d61-4f3e-8be5-86f83e3d1b84",
@@ -3533,7 +3803,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4e70aeea-afca-472a-8fdf-371ee841f983",
@@ -3555,7 +3827,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "4d8bae5d-e592-45f7-b1f6-1b5985bd8222",
@@ -3577,10 +3851,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3592,7 +3867,7 @@
       "responses": [
         {
           "uuid": "13cf840f-5ca6-4bbd-8171-444643a3faab",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": 1,\n      \"orderCreationDate\": \"{{faker 'date.recent' 365}}\",\n      \"productEan\": \"\",\n      \"productName\": \"SUP TV MOB 10\\\"-26\\\" BWMT61TS\",\n      \"productPrice\": {{faker 'datatype.float'}},\n      \"username\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  },\n  \"summary\": {\n    \"totalItems\": {{faker 'datatype.number'}},\n    \"totalPrice\": {{faker 'datatype.float'}}\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"495\",\n            \"orderCreationDate\": \"2023-11-09T14:06:17.372387+02:00\",\n            \"productEan\": \"8806094843569\",\n            \"productName\": \"Suport TV1\",\n            \"productQuantity\": 1,\n            \"productPrice\": 699.99,\n            \"username\": \"paula_dan\",\n            \"totalPrice\": 699.99,\n            \"proformaId\": 398\n        },\n        {\n            \"id\": \"489\",\n            \"orderCreationDate\": \"2023-11-07T12:21:34.194749+02:00\",\n            \"productEan\": \"8690842066238\",\n            \"productName\": \"HOTA TEL.1MOT.CTB6407X BEKO\",\n            \"productQuantity\": 1,\n            \"productPrice\": 499.99,\n            \"username\": \"paula_dan\",\n            \"totalPrice\": 499.99,\n            \"proformaId\": 392\n        },\n        {\n            \"id\": \"488\",\n            \"orderCreationDate\": \"2023-11-07T12:12:11.579289+02:00\",\n            \"productEan\": \"8690842590337\",\n            \"productName\": \"MS. SP. B B3WFU59425W BEKO\",\n            \"productQuantity\": 1,\n            \"productPrice\": 2999.99,\n            \"username\": \"paula_dan\",\n            \"totalPrice\": 2999.99,\n            \"proformaId\": 391\n        }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  },\n  \"summary\": {\n    \"totalItems\": {{faker 'number.int'}},\n    \"totalPrice\": {{faker 'number.float'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the list of reports, with optional filtering if desired",
@@ -3610,7 +3885,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b4324fbd-6879-4afe-8da9-ffa508ddcb8a",
@@ -3632,7 +3909,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "0ea9cd75-f28b-43d1-adbe-4c6484f8f242",
@@ -3654,7 +3933,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "7c10095d-5e71-4784-a191-7fcc6c67b5af",
@@ -3676,7 +3957,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "88bf2b9c-b4b2-4690-b2c5-5aa82f3169b6",
@@ -3698,7 +3981,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "85a3804a-201a-4070-aed4-32265ab2d3bd",
@@ -3720,10 +4005,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3743,17 +4029,23 @@
             {
               "key": "Content-Type",
               "value": "text/csv"
+            },
+            {
+              "key": "Content-Disposition",
+              "value": "attachment;filename=\"test.cvs\""
             }
           ],
-          "bodyType": "INLINE",
-          "filePath": "",
+          "bodyType": "FILE",
+          "filePath": "D:\\Workspace\\Carrefour\\dex-front-end\\mockoon storage\\report-2023-06-01-2023-06-22-.csv",
           "databucketID": "",
-          "sendFileAsBody": false,
+          "sendFileAsBody": true,
           "rules": [],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "d8586816-9130-432f-837d-19ac4fd47728",
@@ -3775,7 +4067,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "3cb044fb-5b77-4b9c-8b85-a8d88f94245e",
@@ -3797,7 +4091,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "28bab027-53b9-4c3d-bc9b-14eaa93b5626",
@@ -3819,7 +4115,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ac4e89ae-607b-420d-b53f-ace78c7fbe56",
@@ -3841,7 +4139,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ff37b749-f656-40d2-a77a-9844c69b659b",
@@ -3863,10 +4163,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -3896,7 +4197,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "aaa93261-46bc-4c89-b7d0-68e1da48a982",
@@ -3918,7 +4221,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "025b3c30-08d7-45b3-9672-3f309c0f2ceb",
@@ -3940,7 +4245,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8288d703-9437-47ed-bb59-ecaacaba8c75",
@@ -3962,7 +4269,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bfa152ea-1d97-4f14-ac90-d843ba88fe5a",
@@ -3984,7 +4293,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "ac28b3f2-6a1f-42a1-af94-93deedfa390f",
@@ -4006,10 +4317,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4039,7 +4351,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "01a8bf05-45d4-4721-a77d-aede75e1a77e",
@@ -4061,7 +4375,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "406aa2bf-ab3f-45f2-b55d-70ba2d0271eb",
@@ -4083,7 +4399,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "27ce0cf8-be61-4da0-baa2-3618fdc1b708",
@@ -4105,7 +4423,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "f9911756-3773-4b81-a593-fabae57dbaf5",
@@ -4127,7 +4447,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "122daf4d-c167-489a-87ca-0584c0118291",
@@ -4149,10 +4471,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4160,11 +4483,11 @@
       "type": "http",
       "documentation": "Get active orders",
       "method": "get",
-      "endpoint": "order/with-invoice",
+      "endpoint": "order/paid/with-invoice",
       "responses": [
         {
           "uuid": "f21b5d8d-1048-4b3c-8a3d-4a74d8409627",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"Livrare din magazin\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\",\n      \"prepared\": false\n    },\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"Livrare din depozit\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n \"list\": [\n        {\n            \"id\": 1409,\n            \"proformaId\": null,\n            \"clientId\": \"1\",\n            \"clientName\": \"Paula Dan\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"42507924\",\n                    \"name\": \"Suport TV1\",\n                    \"brand\": null,\n                    \"price\": 999.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 999.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 999.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": true,\n            \"prepared\": false,\n            \"creationDate\": \"2023-10-12T14:09:47.229719+03:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda achitata\"\n        }\n    ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of active proformas",
@@ -4182,7 +4505,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "51111d2f-5492-4698-8330-0d0c76f0ca24",
@@ -4204,7 +4529,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8e8cca37-362e-44c4-af10-d6f34a6074b6",
@@ -4226,7 +4553,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bf4a9783-b76d-4053-b898-0bace247a556",
@@ -4248,7 +4577,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b34e68bd-89b9-4005-83a8-8c97d12826b3",
@@ -4270,7 +4601,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bb8b35bb-ddfe-4bcd-935a-2c782cd4374d",
@@ -4292,10 +4625,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4303,11 +4637,11 @@
       "type": "http",
       "documentation": "Get not-so-active orders",
       "method": "get",
-      "endpoint": "order/without-invoice",
+      "endpoint": "order/paid/without-invoice",
       "responses": [
         {
           "uuid": "4acd4d27-daf2-49c8-9496-13f7ebc4a101",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"proformaId\": \"1234\",\n      \"clientId\": \"773\",\n      \"clientName\": \"Paula Dan\",\n      \"agentName\": \"Andrei Ionescu\",\n      \"products\": [\n        {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Masina de spalat vase independenta Beko, Clasa energetica F\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Ventilator 3in1 cu picior Klindo KCSF1723, Alb\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          },\n          {\n            \"id\": \"\",\n            \"ean\": \"\",\n            \"internalCode\": \"\",\n            \"name\": \"Hota decorativa Studio Casa New Milano\",\n            \"brand\": \"\",\n            \"price\": {{faker 'datatype.float'}},\n            \"quantity\": {{faker 'datatype.number'}},\n            \"vat\": {{faker 'datatype.number'}},\n            \"buybackDiscount\": \"\"\n          }\n        ],\n\n      \"creationDate\": \"{{faker 'date.recent' 365}}\",\n      \"paymentMethod\": \"\",\n      \"paid\": {{faker 'datatype.boolean'}},\n      \"totalAmount\": {{faker 'datatype.float'}},\n      \"deliveryType\": \"Livrare din depozit\",\n      \"hasInvoice\": {{faker 'datatype.boolean'}},\n      \"lastModifiedDate\": \"\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'datatype.number'}},\n    \"totalCount\": {{faker 'datatype.number'}},\n    \"pageCount\": {{faker 'datatype.number'}}\n  }\n}",
+          "body": "{\n \"list\": [\n        {\n            \"id\": 1549,\n            \"proformaId\": null,\n            \"clientId\": \"1\",\n            \"clientName\": \"Paula Dan\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"42507924\",\n                    \"name\": \"Suport TV1\",\n                    \"brand\": null,\n                    \"price\": 699.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 699.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 699.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": true,\n            \"creationDate\": \"2023-11-09T14:06:12.237786+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda pregatita pentru livrare\"\n        },\n        {\n            \"id\": 1542,\n            \"proformaId\": null,\n            \"clientId\": \"2\",\n            \"clientName\": \"sc ghiocel srl\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"80001824\",\n                    \"name\": \"HOTA TEL.1MOT.CTB6407X BEKO\",\n                    \"brand\": null,\n                    \"price\": 499.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 499.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 499.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-07T12:21:29.852013+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda refuzata de client\"\n        },\n        {\n            \"id\": 1541,\n            \"proformaId\": null,\n            \"clientId\": \"1\",\n            \"clientName\": \"Paula Dan\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"40501900\",\n                    \"name\": \"MS. SP. B B3WFU59425W BEKO\",\n                    \"brand\": null,\n                    \"price\": 2999.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 2999.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 2999.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din depozit\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-07T12:12:06.148619+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda refuzata de client\"\n        },\n        {\n            \"id\": 1539,\n            \"proformaId\": null,\n            \"clientId\": \"1\",\n            \"clientName\": \"Paula Dan\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"40501251\",\n                    \"name\": \"MS.SP+USC. C ACSWS4852 CANDY\",\n                    \"brand\": null,\n                    \"price\": 2149.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 2149.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 2149.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din depozit\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-07T09:57:01.177794+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda achitata\"\n        },\n        {\n            \"id\": 1538,\n            \"proformaId\": null,\n            \"clientId\": \"1\",\n            \"clientName\": \"Paula Dan\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"40501409\",\n                    \"name\": \"MS.SP. C F4WV308N3E LG\",\n                    \"brand\": null,\n                    \"price\": 2349.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 2349.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 2349.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": false,\n            \"creationDate\": \"2023-11-07T09:00:50.557738+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda achitata\"\n        },\n        {\n            \"id\": 1521,\n            \"proformaId\": null,\n            \"clientId\": \"2\",\n            \"clientName\": \"sc ghiocel srl\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"40501251\",\n                    \"name\": \"MS.SP+USC. C ACSWS4852 CANDY\",\n                    \"brand\": null,\n                    \"price\": 2149.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 2149.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 2149.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-02T11:19:51.415796+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda finalizata\"\n        },\n        {\n            \"id\": 1516,\n            \"proformaId\": null,\n            \"clientId\": \"2\",\n            \"clientName\": \"sc ghiocel srl\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"80001824\",\n                    \"name\": \"HOTA TEL.1MOT.CTB6407X BEKO\",\n                    \"brand\": null,\n                    \"price\": 499.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 499.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 499.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Ridicare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-01T11:20:09.223650+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda finalizata\"\n        },\n        {\n            \"id\": 1515,\n            \"proformaId\": null,\n            \"clientId\": \"3\",\n            \"clientName\": \"Ionut Popescu\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"68501501\",\n                    \"name\": \"TOPPER MEM 140X190 ALB I515694\",\n                    \"brand\": null,\n                    \"price\": 349.99,\n                    \"quantity\": 2,\n                    \"vat\": null,\n                    \"totalPrice\": 699.98,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                },\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"80001824\",\n                    \"name\": \"HOTA TEL.1MOT.CTB6407X BEKO\",\n                    \"brand\": null,\n                    \"price\": 499.99,\n                    \"quantity\": 2,\n                    \"vat\": null,\n                    \"totalPrice\": 999.98,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 1699.96,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din depozit\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-01T11:18:12.524575+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda finalizata\"\n        },\n        {\n            \"id\": 1511,\n            \"proformaId\": null,\n            \"clientId\": \"3\",\n            \"clientName\": \"Ionut Popescu\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"68501501\",\n                    \"name\": \"TOPPER MEM 140X190 ALB I515694\",\n                    \"brand\": null,\n                    \"price\": 349.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 349.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 349.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din magazin\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-01T10:33:24.435482+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda refuzata de client\"\n        },\n        {\n            \"id\": 1509,\n            \"proformaId\": null,\n            \"clientId\": \"3\",\n            \"clientName\": \"Ionut Popescu\",\n            \"agentName\": \"Paula Dan\",\n            \"products\": [\n                {\n                    \"id\": null,\n                    \"ean\": null,\n                    \"internalCode\": \"80001824\",\n                    \"name\": \"HOTA TEL.1MOT.CTB6407X BEKO\",\n                    \"brand\": null,\n                    \"price\": 499.99,\n                    \"quantity\": 1,\n                    \"vat\": null,\n                    \"totalPrice\": 499.99,\n                    \"totalPriceWithoutDiscount\": null,\n                    \"discountLabel\": null,\n                    \"purchaseOption\": null\n                }\n            ],\n            \"totalAmount\": 499.99,\n            \"paymentMethod\": null,\n            \"deliveryType\": \"Livrare din depozit\",\n            \"paid\": null,\n            \"hasInvoice\": false,\n            \"prepared\": null,\n            \"creationDate\": \"2023-11-01T10:20:14.425061+02:00\",\n            \"lastModifiedDate\": null,\n            \"status\": \"Comanda predata curierului\"\n        }\n    ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": {{faker 'number.int'}},\n    \"totalCount\": {{faker 'number.int'}},\n    \"pageCount\": {{faker 'number.int'}}\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained list of active proformas",
@@ -4325,7 +4659,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "2094851f-7215-4cbe-b4f7-e1fbeac22cb2",
@@ -4347,7 +4683,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8aa9af81-8df8-4d2d-aa3f-5a7025abc85d",
@@ -4369,7 +4707,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "bd6707dc-cd8b-4f89-a9a1-1eb571a0b085",
@@ -4391,7 +4731,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "8f86a62a-91ca-4971-b442-b7afa955f367",
@@ -4413,7 +4755,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b1a316ec-ac13-4798-9446-e36e63eb6539",
@@ -4435,10 +4779,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4450,7 +4795,7 @@
       "responses": [
         {
           "uuid": "11af26c6-6b26-4fc5-b8b5-7e20d0d8c7f4",
-          "body": "{\n  \"id\": {{faker 'datatype.number'}},\n  \"proformaId\": {{faker 'datatype.number'}},\n  \"clientId\": \"667788\",\n  \"clientName\": \"\",\n  \"agentName\": \"\",\n  \"products\": [\n    {\n      \"id\": \"\",\n      \"ean\": \"\",\n      \"internalCode\": \"\",\n      \"name\": \"\",\n      \"brand\": \"\",\n      \"price\": {{faker 'datatype.float'}},\n      \"quantity\": {{faker 'datatype.number'}},\n      \"vat\": {{faker 'datatype.number'}},\n      \"buybackDiscount\": \"\"\n    }\n  ],\n  \"totalAmount\": {{faker 'datatype.float'}},\n  \"paymentMethod\": \"\",\n  \"deliveryType\": \"\",\n  \"paid\": true,\n  \"hasInvoice\": {{faker 'datatype.boolean'}},\n  \"creationDate\": \"\",\n  \"lastModifiedDate\": \"\"\n}",
+          "body": "{\n  \"id\": {{faker 'number.int'}},\n  \"proformaId\": {{faker 'number.int'}},\n  \"clientId\": \"667788\",\n  \"clientName\": \"\",\n  \"agentName\": \"\",\n  \"products\": [\n    {\n      \"id\": \"\",\n      \"ean\": \"\",\n      \"internalCode\": \"\",\n      \"name\": \"\",\n      \"brand\": \"\",\n      \"price\": {{faker 'number.float'}},\n      \"quantity\": {{faker 'number.int'}},\n      \"vat\": {{faker 'number.int'}},\n      \"buybackDiscount\": \"\"\n    }\n  ],\n  \"totalAmount\": {{faker 'number.float'}},\n  \"paymentMethod\": \"\",\n  \"deliveryType\": \"\",\n  \"paid\": true,\n  \"hasInvoice\": {{faker 'datatype.boolean'}},\n  \"creationDate\": \"\",\n  \"lastModifiedDate\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the proforma identified by orderId",
@@ -4468,7 +4813,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "5d4371b0-17b3-4d77-b69b-f33b806b94c2",
@@ -4490,7 +4837,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "67d170c0-2116-44c2-a9f6-11fc38c485e7",
@@ -4512,7 +4861,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "33416c6f-e22f-4259-8a97-e30715432b89",
@@ -4534,7 +4885,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6fbcb166-0783-458b-95f2-86181e1bae02",
@@ -4556,7 +4909,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "b30cde39-44c9-484e-86d6-fbc27753e7e0",
@@ -4578,10 +4933,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4606,10 +4962,11 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
@@ -4639,10 +4996,103 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "351e51c6-c3be-429c-8e77-e132a040d017",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "sales",
+      "responses": [
+        {
+          "uuid": "86571849-5021-4e42-a9c1-9a89d96a3022",
+          "body": "{\r\n\t\"list\": [\r\n\t\t{\r\n\t\t\t\"id\": \"476\",\r\n\t\t\t\"orderCreationDate\": \"2023-11-02T10:08:16.614611+02:00\",\r\n\t\t\t\"productEan\": \"8059019005980\",\r\n\t\t\t\"productName\": \"MS.SP+USC. C ACSWS4852 CANDY\",\r\n\t\t\t\"productQuantity\": 1,\r\n\t\t\t\"productPrice\": 2149.99,\r\n\t\t\t\"username\": \"user01\",\r\n\t\t\t\"totalPrice\": 2149.99,\r\n\t\t\t\"proformaId\": 381\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"id\": \"432\",\r\n\t\t\t\"orderCreationDate\": \"2023-04-02T11:30:16.614611+02:00\",\r\n\t\t\t\"productEan\": \"25345353543343\",\r\n\t\t\t\"productName\": \"Aspire 5 A515-58M\",\r\n\t\t\t\"productQuantity\": 2,\r\n\t\t\t\"productPrice\": 3499.99,\r\n\t\t\t\"username\": \"user21\",\r\n\t\t\t\"totalPrice\": 6999.98,\r\n\t\t\t\"proformaId\": 234\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"id\": \"123\",\r\n\t\t\t\"orderCreationDate\": \"2023-10-08T10:38:22.614611+02:00\",\r\n\t\t\t\"productEan\": \"253453535345\",\r\n\t\t\t\"productName\": \"Infinissima KP173B10\",\r\n\t\t\t\"productQuantity\": 1,\r\n\t\t\t\"productPrice\": 249.99,\r\n\t\t\t\"username\": \"user01\",\r\n\t\t\t\"totalPrice\": 249.99,\r\n\t\t\t\"proformaId\": 23424\r\n\t\t}\r\n\t],\r\n  \"page\": {\r\n    \"pageSize\": 10,\r\n    \"page\": {{faker 'number.int'}},\r\n    \"totalCount\": {{faker 'number.int'}},\r\n    \"pageCount\": {{faker 'number.int'}}\r\n  },\r\n\t\"summary\": {\r\n\t\t\"totalItems\": 4,\r\n\t\t\"totalPrice\": 9399.96\r\n\t}\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "da3e4f79-088a-4c4b-8585-bc559693c1ee",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "order/:id",
+      "responses": [
+        {
+          "uuid": "af414b98-30bb-4266-b130-63bc8777580c",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "6a58dfdf-d9e1-4b45-a807-cf504810e5ac",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "order/preparation/:id",
+      "responses": [
+        {
+          "uuid": "f944dc9b-f72d-42dc-b745-4ad7d68e65aa",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
       "responseMode": null
     }
   ],
@@ -4782,6 +5232,18 @@
     {
       "type": "route",
       "uuid": "e761fbac-002a-4f5e-a318-aefd91001c02"
+    },
+    {
+      "type": "route",
+      "uuid": "351e51c6-c3be-429c-8e77-e132a040d017"
+    },
+    {
+      "type": "route",
+      "uuid": "da3e4f79-088a-4c4b-8585-bc559693c1ee"
+    },
+    {
+      "type": "route",
+      "uuid": "6a58dfdf-d9e1-4b45-a807-cf504810e5ac"
     }
   ],
   "proxyMode": false,
@@ -4809,6 +5271,10 @@
     {
       "key": "Access-Control-Allow-Headers",
       "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    },
+    {
+      "key": "Access-Control-Expose-Headers",
+      "value": "*"
     }
   ],
   "proxyReqHeaders": [
@@ -4823,5 +5289,6 @@
       "value": ""
     }
   ],
-  "data": []
+  "data": [],
+  "callbacks": []
 }

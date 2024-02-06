@@ -1,10 +1,11 @@
-import { useNavigate } from 'react-router-dom'
-import { Box, CircularProgress, Paper } from '@mui/material'
+import { Divider, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Box, CircularProgress, Grid, Paper } from '@mui/material'
+import BackButton from 'components/core-ui/BackButtonTitle/BackButton/BackButton'
 import { Icon } from 'components/core-ui/Icon'
-import s from './ServiceDomain.scss'
-import { Divider, IconButton, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { Icon_v2 } from 'components/core-ui/Icon_v2'
 import { useMemo } from 'react'
-import { ArrowBackIosNewOutlined } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
+import s from './ServiceDomain.scss'
 
 const ServiceDomain = ({
   subdomainId,
@@ -18,7 +19,7 @@ const ServiceDomain = ({
     navigate('/')
   }
 
-  const { module, submodule } = useMemo(() => {
+  const { submodule } = useMemo(() => {
     var mod, sub
     modules.forEach(m =>
       m.submodules.forEach(s => {
@@ -37,47 +38,40 @@ const ServiceDomain = ({
         <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
       </div>
     )) || (
-      <Box>
-        <Box className={s.moduleHeader}>
-          <div className={s.backHolder}>
-            <IconButton className={s.back} onClick={goBack}>
-              <ArrowBackIosNewOutlined />
-            </IconButton>
-
-            <Typography variant="medium">
-              <span className={s.backTitle}>{module?.name || ''}</span>
-            </Typography>
-          </div>
-        </Box>
-
-        <Paper className={s.modulePaper}>
-          <Box className={s.submoduleHeader}>
-            <Typography variant="medium">
-              <span className={s.moduleSummary}>
-                <Icon iconName={submodule?.icon || 'EmojiNature'} tiny={true} />
-                {submodule?.name || ''}
-              </span>
-            </Typography>
-          </Box>
-          <Divider component="hr" variant="middle" />
-          <Box className={s.applicationsWrapper}>
-            {applicationPages
-              .filter(app => app.isFirstScreen)
-              .map(app => (
-                <div
-                  key={app.screenId}
-                  onClick={() => navigate(app.route.url)}
-                  className={s.applicationContainer}
-                >
-                  <div className={s.iconContainer}>
-                    <Icon iconName={app.icon} fill="white" />
-                  </div>
-                  <span className={s.applicationName}>{app.name}</span>
-                </div>
-              ))}
-          </Box>
-        </Paper>
-      </Box>
+      <div className={s.modulePaper}>
+        <Grid container direction="column">
+          <Grid item>
+            <div className={s.backHolder}>
+              <BackButton text={submodule?.name} onNavBack={goBack}></BackButton>
+            </div>
+          </Grid>
+          <Grid item style={{ marginTop: '16px' }}>
+            <Grid container direction="row" spacing={4}>
+              {applicationPages
+                .filter(app => app.isFirstScreen)
+                .map(app => (
+                  <Grid item key={app.screenId}>
+                    <Grid
+                      container
+                      direction="column"
+                      justifyContent="center"
+                      alignItems="center"
+                      onClick={() => navigate(app.route.url)}
+                      className={s.applicationContainer}
+                    >
+                      <Grid item>
+                        <Icon_v2 iconName={app.icon} iconType="Subcategory" />
+                      </Grid>
+                      <Grid item className={s.applicationName}>
+                        <span>{app.name}</span>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                ))}
+            </Grid>
+          </Grid>
+        </Grid>
+      </div>
     )
   )
 }

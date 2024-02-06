@@ -1,8 +1,14 @@
 import { JSXElementConstructor, ReactElement } from 'react'
 export interface Filter {
   name: string
-  value: string | number
+  value: string | number | string[] | AutoCompleteValue | AutoCompleteValue[] | null
 }
+
+export interface AutoCompleteValue {
+  label: string
+  value: string
+}
+
 enum FilterType {
   Date = 'date',
   Text = 'text'

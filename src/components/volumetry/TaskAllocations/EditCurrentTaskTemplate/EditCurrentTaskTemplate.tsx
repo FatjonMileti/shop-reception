@@ -1,0 +1,107 @@
+import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { CircularProgress, Grid } from '@mui/material'
+import { FormInfoItems } from 'components/core-ui/FormInfoItems'
+import { Modal } from 'components/core-ui/Modal'
+import { useFormik } from 'formik'
+import { useNotification } from 'hooks'
+import { ChangeEvent } from 'react'
+import { useMutation } from 'react-query'
+import { makeCorePutRequest } from 'utils/api'
+import * as yup from 'yup'
+import s from 'components/core-ui/Modal/Modal.modules.scss'
+import { handleQueryError } from 'components/volumetry/utils'
+import { EditCurrentTaskTemplateProps } from '../TaskAllocationsDefinitions'
+
+const validationSchema = yup.object({
+  id: yup.string().nonNullable(),
+  workload: yup.number().required('Acest camp este obligatoriu.'),
+  allocatedWorkersNumber: yup.number()
+})
+
+const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
+  const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
+
+  const { showNotification } = useNotification()
+
+  const editCurrentTemplate = async values => {
+    await makeCorePutRequest(`/volumetry/work-volumes/${editItem?.taskTemplateId}`, values)
+  }
+
+  const { isLoading, mutate } = useMutation(editCurrentTemplate, {
+    onSuccess: res => {
+      setShouldRefreshData(true)
+      closeModal()
+      showNotification({
+        message: 'Volumul a fost editat cu succes',
+        type: 'success'
+      })
+    },
+    onError: error =>
+      handleQueryError(error, 'A aparut o eroare la editarea volumului.', showNotification)
+  })
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    validateOnChange: false,
+    initialValues: {
+      workload: editItem.totalWorkload,
+      allocatedWorkersNumber: editItem.allocatedWorkers
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values: any) => {
+      mutate(values)
+    }
+  })
+
+  return (
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'}>
+      <Grid container spacing={4}>
+        {isLoading && (
+          <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+        )}
+
+        <Grid xs={12} item>
+          <FormInfoItems items={[{ label: 'Nume:', name: editItem.taskName }]} />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Input
+            type="number"
+            name="workload"
+            label="Volum"
+            variant="outlined"
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue('workload', event.target.value)
+            }
+            value={formik.values.workload}
+            style={{ width: '100%' }}
+            error={!!formik.errors.workload}
+            helperText={formik.errors.workload as string}
+            required
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            name="allocatedWorkersNumber"
+            label="Estimare alocare numar angajati"
+            variant="outlined"
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue('allocatedWorkersNumber', event.target.value)
+            }
+            value={formik.values.allocatedWorkersNumber}
+            style={{ width: '100%' }}
+          />
+        </Grid>
+
+        <Grid xs={12} item className={s.modalButtons}>
+          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+          <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+        </Grid>
+      </Grid>
+    </Modal>
+  )
+}
+
+export default EditCurrentTaskTemplate

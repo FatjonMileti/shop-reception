@@ -1,0 +1,16 @@
+export const toTableRowItems = (items: BalancePackage[]) => items.map((item: BalancePackage) => ({
+  id: item.id,
+  store: item.store,
+  hub: item.hub,
+  society: item.society,
+  supportType: item.supportType,
+  qualitativeInventory: item.qualitativeInventory,
+  theoreticalStock: item.theoreticalStock,
+  inventoryDefect: item.inventoryDefect,
+  difference: item.difference,
+  finalStockAfterInventory: item.finalStockAfterInventory,
+  inventoryManager: item.inventoryManager,
+  inventoryDate: item.inventoryDate,
+  inventoryUpdate: item.inventoryUpdate,
+  inventoryHistory: item.inventoryHistory,
+}))

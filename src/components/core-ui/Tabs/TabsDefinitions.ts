@@ -7,9 +7,6 @@ export interface Tab {
 }
 
 export interface TabsProps {
-  value: number
-  id: string
-  tabs: Tab[]
-  labels?: string[]
-  handleChange?: (event: React.SyntheticEvent, value: number) => void
+  tabs: Tab[],
+  tabsContainerStyle?: any
 }

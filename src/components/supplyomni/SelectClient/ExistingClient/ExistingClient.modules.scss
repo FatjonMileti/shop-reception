@@ -1,0 +1,16 @@
+.mainContainer {
+  margin: 24px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+}
+
+.searchPaper {
+  padding: 16px;
+}
+
+.searchContainer {
+  display: grid;
+  grid-template-columns: 1fr 173px;
+}

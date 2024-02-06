@@ -1,0 +1,17 @@
+export const toTableRowItems = (items: MetiFile[]) => items.map((item: MetiFile) => ({
+  id: item.id,
+  deliverySlip: item.deliverySlip,
+  store: item.store,
+  warehouse: item.warehouse,
+  integrationOperator: item.integrationOperator,
+  status: item.status,
+  sentFile: item.sentFile,
+  receivedFile: item.receivedFile,
+  sentToMeti: item.sentToMeti,
+  receivedFromMeti: item.receivedFromMeti,
+  productsDifferences: item.productsDifferences,
+  metiProductDifferences: item.metiProductDifferences,
+  exportNonIntegratedProducts: item.exportNonIntegratedProducts,
+  error: item.error,
+  forgot: item.forgot,
+}))

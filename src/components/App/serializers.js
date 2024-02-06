@@ -10,6 +10,7 @@ export const toApplicationPages = applications =>
             exact: screen.routePathExact
           },
           activityId: app.id,
+          screenName: screen.name,
           screenId: screen.id,
           isFirstScreen: screen.id === app.firstScreen.id
         }))

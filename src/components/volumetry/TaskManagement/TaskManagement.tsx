@@ -1,0 +1,126 @@
+import { useState } from 'react'
+import { Box } from '@mui/material'
+import { Table } from 'components/core-ui/Table'
+import s from './TaskManagement.modules.scss'
+import { CRUDAction, TaskManagementTableItem } from '../interfaces'
+import { makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { AddActionIcon, EditActionIcon } from 'icons'
+
+import { handleQueryError } from '../utils'
+import { CreateEditTask } from './CreateEditTask'
+import { VOLUMETRY_TASKS_URL } from './constants'
+import { buildTableFilterFields, columns } from './helpers'
+import {
+  getCategoriesOptions,
+  getDepartmentsOptions,
+  getFrequencyOptions,
+  getPrioritiesOptions,
+  getWorkVolumesOptions
+} from '../api'
+import { useNotification } from 'hooks'
+
+const TaskManagement = () => {
+  const [tableItems, setTableItems] = useState<TaskManagementTableItem[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [selectedRowId, setSelectedRowId] = useState<string | number>(null)
+
+  const { showNotification } = useNotification()
+
+  const { data: categoryOptions } = getCategoriesOptions(showNotification)
+  const { data: departmentOptions } = getDepartmentsOptions(showNotification)
+  const { data: priorityOprions } = getPrioritiesOptions(showNotification)
+  const { data: frequencyOptions } = getFrequencyOptions(showNotification)
+  const { data: workVolumeOptions } = getWorkVolumesOptions(showNotification)
+
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+    setIsLoading(true)
+    try {
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: VOLUMETRY_TASKS_URL,
+          tableFilters,
+          page,
+          rowsPerPage,
+          order,
+          orderBy
+        })
+      )
+
+      setTableItems(response.list)
+      setTotalCount(response.page.totalCount)
+      setIsLoading(false)
+    } catch (error) {
+      handleQueryError(error, 'Error while fetching table data', showNotification)
+    }
+  }
+
+  const [modal, setModal] = useState<CRUDAction>(null)
+  const openModal = (action: CRUDAction) => setModal(action)
+  const closeModal = () => setModal(null)
+
+  const selectRow = (rowId: number) => {
+    setSelectedRowId(rowId)
+    openModal('edit')
+  }
+
+  return (
+    <div className={s.mainContainer}>
+      <Box>
+        <CreateEditTask
+          isModalOpen={modal === 'create'}
+          closeModal={closeModal}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+        <CreateEditTask
+          isModalOpen={modal === 'edit'}
+          closeModal={closeModal}
+          editItemId={selectedRowId}
+          setShouldRefreshData={setShouldRefreshData}
+          isEdit
+        />
+        <Table
+          hideCheckbox
+          orderBy="name"
+          order="desc"
+          columns={columns}
+          items={tableItems}
+          fetchData={fetchData}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+          filters={buildTableFilterFields(
+            departmentOptions || [],
+            categoryOptions || [],
+            priorityOprions || [],
+            frequencyOptions || [],
+            workVolumeOptions || []
+          )}
+          rowActions={[
+            {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              desktopIcon: <EditActionIcon />,
+              onClick: (_e, rowId: number) => selectRow(rowId)
+            }
+          ]}
+          rowActionsWidth="130px"
+          toolbarActions={[
+            {
+              label: 'Adauga',
+              icon: <AddActionIcon />,
+              onClick: () => openModal('create')
+            }
+          ]}
+        />
+      </Box>
+    </div>
+  )
+}
+
+export default TaskManagement
