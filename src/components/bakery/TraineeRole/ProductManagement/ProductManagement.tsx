@@ -43,17 +43,13 @@ const ProductManagement = () => {
   )
 
   const familiesQuery = useQuery(
-    ['families', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
+    ['families', storeFilterValue?.value],
     async () => {
-      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
-        ?.value || []) as AutoCompleteValue[]
-
       const result = await makeCoreGetRequest(
-        '/bakery/store/cadentier/families',
+        '/bakery/store/families',
         {
           params: {
             store: storeFilterValue?.value,
-            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
           },
           paramsSerializer: { indexes: null }
         }
@@ -119,7 +115,7 @@ const ProductManagement = () => {
     setShouldRefreshData(true)
   }
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
     
     try {
@@ -127,6 +123,8 @@ const ProductManagement = () => {
         toTableGETUrl({
           url: '/bakery/region/store/products',
           filters: [{ name: 'store', value: storeFilterValue?.value }],
+          searchText,
+          searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
           tableFilters,
           page,
           rowsPerPage,
@@ -158,8 +156,6 @@ const ProductManagement = () => {
               label="Magazin"
               options={filterOptions}
               onSelect={handleStoreFilterChange}
-              placeholderButton='Selecteaza'
-              showSearch
             />
           </Grid>
         </Grid>
@@ -186,12 +182,7 @@ const ProductManagement = () => {
             rowsPerPageOptions={[25, 50, 100]}
             filters={drawerFilters(familiesQuery, subfamiliesQuery)}
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
-            filtersLabel="Filtreaza"
-            filtersButtonLabel="Filtreaza"
-            appliedFiltersLabel="Filtre"
-            cancelFiltersButtonLabel="Anuleaza"
-            applyFiltersButtonLabel="Aplica"
-            />
+          />
         )}
       </Grid>
     </div>
