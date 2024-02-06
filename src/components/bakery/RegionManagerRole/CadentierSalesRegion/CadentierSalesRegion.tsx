@@ -57,7 +57,7 @@ const CadentierSalesRegion = () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
         ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(
-        '/bakery/store/families',
+        '/bakery/store/cadentier/families',
         {
           params: {
             store: storeFilterValue?.value,
@@ -91,7 +91,7 @@ const CadentierSalesRegion = () => {
       const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
         ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(
-        '/bakery/store/families/subfamilies',
+        '/bakery/store/cadentier/families/subfamilies',
         {
           params: {
             store: storeFilterValue?.value,

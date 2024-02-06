@@ -1,5 +1,5 @@
 import { Capsule } from 'components/core-ui/Capsule'
-import s from './TaskAllocation.modules.scss'
+import s from './TaskAllocations.modules.scss'
 import { Grid, Typography } from '@mui/material'
 
 const TaskSummary = ({ item, hideDetails = false }) => {

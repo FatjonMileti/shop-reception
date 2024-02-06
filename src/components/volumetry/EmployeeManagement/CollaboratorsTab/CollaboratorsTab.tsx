@@ -18,12 +18,11 @@ import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { Autocomplete, FilterDataSelect, Input } from '@fullscreendigital/carrefour-dex-fe'
 import {
   getDepartmentsOptions,
-  getContractorsNamesOptions,
   getJobTitlesOptions,
   getLocationsOptions
 } from 'components/volumetry/api'
 import { handleQueryError } from 'components/volumetry/utils'
-import { roles } from '../helpers'
+import { roles } from '../../helpers'
 
 const CollaboratorsTab = () => {
   // TODO: De actualizat cand primim update cu drepturile fiecarui rol
@@ -50,7 +49,6 @@ const CollaboratorsTab = () => {
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification)
-  const { data: contractorsNamesOptions } = getContractorsNamesOptions(showNotification)
   const { data: jobTitlesOptions, isLoading: isjobTitlesOptionsLoading } =
     getJobTitlesOptions(showNotification)
   const { data: locationsOptions, isLoading: isLocationsLoading } = getLocationsOptions(
@@ -72,7 +70,7 @@ const CollaboratorsTab = () => {
         toTableGETUrl({
           url: '/volumetry/workers/contractors',
           filters: canUseCustomFilter
-            ? [{ name: 'location', value: locationsFilterValue.value }]
+            ? [{ name: 'locationId', value: locationsFilterValue.value }]
             : [],
           tableFilters,
           page,

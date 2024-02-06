@@ -10,7 +10,7 @@ import { makeCorePutRequest } from 'utils/api'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { handleQueryError } from 'components/volumetry/utils'
-import { EditCurrentTaskTemplateProps } from '../TaskAllocationDefinitions'
+import { EditCurrentTaskTemplateProps } from '../TaskAllocationsDefinitions'
 
 const validationSchema = yup.object({
   id: yup.string().nonNullable(),
