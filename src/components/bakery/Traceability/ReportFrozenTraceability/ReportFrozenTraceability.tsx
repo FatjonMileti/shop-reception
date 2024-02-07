@@ -18,6 +18,11 @@ import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitio
 import { getCurrentDate } from '../../../../utils/helpers'
 import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
 import { useProductsFilter } from './useProductsFilter'
+import { PrintModal } from '../../../core-ui/PrintModal'
+import { URLS } from '../../constants'
+import { TableState } from '../../StoreManagerRole/ProductionManagementStore/interfaces'
+import { useImmer } from 'use-immer'
+import { batchPrintColumns, productPrintColumns } from '../ReportFrozenTraceabilityPrint/helpers'
 
 export const ReportFrozenTraceability = () => {
   const { showNotification } = useNotification()
@@ -30,6 +35,18 @@ export const ReportFrozenTraceability = () => {
 
   const productsFilter = useProductsFilter()
 
+  const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
+
+  const [tableState, setTableState] = useImmer(
+    window.history.state.tableState || {
+      page: 0,
+      rowsPerPage: 25,
+      order:  '',
+      orderBy:  '',
+      searchText: '',
+      filters: []
+    }
+  )
 
   const handleRemoteDetails = async (rowId: string | number) => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
@@ -54,6 +71,11 @@ export const ReportFrozenTraceability = () => {
       setRows(toListTableRows(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
+
+      setTableState(tableState => ({
+        ...tableState,
+        tableFilters
+      }))
     } catch (error) {
       handleQueryError(
         error,
@@ -198,6 +220,15 @@ export const ReportFrozenTraceability = () => {
   return (
     <div className={s.mainContainer}>
       <>
+        <PrintModal
+          {...tableState}
+          tableFilters={tableState.tableFilters}
+          url={URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT}
+          dynamicColumns={[...productPrintColumns, ...batchPrintColumns]}
+          isModalOpen={isPrintModalOpen}
+          closeModal={() => setIsPrintModalOpen(false)}
+          toolbarActions={[]}
+        />
         <ListTable
           rows={rows}
           handleRemoteData={debounce(fetchData, 500)}
@@ -206,6 +237,7 @@ export const ReportFrozenTraceability = () => {
           totalCount={totalCount}
           filters={drawerFilters}
           hasSearchInput
+          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           toolbarActions={[
             {
               label: 'Descarca',
@@ -217,7 +249,9 @@ export const ReportFrozenTraceability = () => {
             {
               label: 'Printeaza',
               icon: <PrintOutlined />,
-              onClick: () => {}
+              onClick: () => {
+                setIsPrintModalOpen(true)
+              }
             }
           ]}
           rowActions={[

@@ -41,6 +41,7 @@ import { ProductManagementTraceability } from './Traceability/ProductManagementT
 import { ReceivedProducts } from './Traceability/ReceivedProducts/ReceivedProducts'
 import { FrozenTraceability } from './Traceability/FrozenTraceability/FrozenTraceability'
 import { ReportFrozenTraceability } from './Traceability/ReportFrozenTraceability/ReportFrozenTraceability'
+import { ReportFrozenTraceabilityPrint } from './Traceability/ReportFrozenTraceabilityPrint/ReportFrozenTraceabilityPrint'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -420,6 +421,17 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ReportFrozenTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT}
+        element={
+          <PrivateRoute
+            component={ReportFrozenTraceabilityPrint}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

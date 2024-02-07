@@ -27,7 +27,7 @@ const FrozenTraceabilityDescription = item => {
   return (
     <Grid container flexDirection="column">
       <Grid item my={1} mr={1}>
-        {traceabilityFrozenList.map((frozenItem) => (
+        {traceabilityFrozenList?.map((frozenItem) => (
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}

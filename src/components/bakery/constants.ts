@@ -45,5 +45,6 @@ export const URLS = {
   AUTH_PRODUCT_MANAGEMENT_TRACEABILITY: 'bakery/traceabilityOperator/product-management',
   AUTH_RECEIVED_PRODUCTS_TRACEABILITY: 'bakery/traceabilityOperator/received-products',
   AUTH_FROZEN_TRACEABILITY: 'bakery/traceabilityOperator/frozen-traceability',
-  AUTH_REPORT_FROZEN_TRACEABILITY: 'bakery/traceabilityOperator/frozen-traceability-report'
+  AUTH_REPORT_FROZEN_TRACEABILITY: 'bakery/traceabilityOperator/frozen-traceability-report',
+  AUTH_REPORT_FROZEN_TRACEABILITY_PRINT: 'bakery/traceabilityOperator/frozen-traceability-report-print'
 }
