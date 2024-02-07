@@ -3,7 +3,7 @@ import { Modal } from 'components/core-ui/Modal'
 import { useMutation } from 'react-query'
 import { CircularProgress, Grid } from '@mui/material'
 import { useNotification } from 'hooks'
-import { formatBakeryPayloadDate } from 'utils/helpers'
+import { formatPayloadDate } from 'utils/helpers'
 import { makeCorePostRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails'
@@ -69,7 +69,7 @@ export const FrozenTraceabilityModal = ({
       const payload = {
         ...values,
         productId: values.productId || selectedProduct.id,
-        productionDate: formatBakeryPayloadDate(values.productionDate),
+        productionDate: formatPayloadDate(values.productionDate),
         metiCode: values?.metiCode || selectedProduct?.metiCode,
         productName: values?.productName || selectedProduct?.name
       }
