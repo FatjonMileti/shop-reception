@@ -11,7 +11,7 @@ export const toTableRowItems = items =>
     id: item.id || '',
     imageUrl: item.imageUrl || '',
     metiCode: item.metiCode || '',
-    minStock: item.minStock || '',
+    minStock: item.minStock || 0,
     newProduct: item.newProduct || '',
     pluCode: item.pluCode || '',
     productName: item.productName || '',
