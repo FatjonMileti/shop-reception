@@ -107,7 +107,7 @@ VALUES
     (47, 'Task-uri alocate', 'AssignTasks', null, true, 8),
     (48, 'Status Angajati', 'EmployeeManagement', null, true, 8),
     -- Shop Reception
-    (49, 'Admin magazin', 'UsersManagement', null, true, 10);
+    (49, 'Admin magazin', 'UsersManagement', null, true, 10),
     -- Bakery TRACEABILITY OP
     (50, 'Management produse', 'ProductManagementTO', null, true, 11),
     (51, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 11),
