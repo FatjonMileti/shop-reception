@@ -1,6 +1,7 @@
 import { useLocation, useSearchParams } from 'react-router-dom'
-import s from './ReportFrozenTraceabilityPrint.modules.scss'
-import { BasicTable, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import styles from './ReportFrozenTraceabilityPrint.modules.scss'
+import s from '../../commonStyles.modules.scss'
+import { BasicTable } from '@fullscreendigital/carrefour-dex-fe'
 import React from 'react'
 import { makeCoreGetRequest } from '../../../../utils/api'
 import { toTableGETUrl } from '../../../core-ui/Table/serializers'
@@ -9,6 +10,8 @@ import { useQuery } from 'react-query'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { useNotification } from '../../../../hooks'
 import { TracedProduct } from './interfaces'
+import { Grid, Typography } from '@mui/material'
+
 
 export const ReportFrozenTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
@@ -60,30 +63,35 @@ export const ReportFrozenTraceabilityPrint = () => {
 
   return (
     <div className={s.mainContainer}>
+      <Grid container rowSpacing={3}>
+        {reportDataQuery?.data?.list.map((tp, tpIndex) => {
+          return (
+            <Grid item xs={12} container rowSpacing={2}>
+              {/*<Grid item xs={12}>*/}
+              {/*  <p className={styles.productName}>{tp.product.name}</p>*/}
+              {/*  <BasicTable*/}
+              {/*    columns={selectedColumnsProduct}*/}
+              {/*    rows={[tp] || []}*/}
+              {/*    containerProps={{*/}
+              {/*      className: styles.productTableContainer*/}
+              {/*    }}*/}
+              {/*  />*/}
+              {/*</Grid>*/}
 
-      {reportDataQuery?.data?.list.map((tp, tpIndex) => {
-        return (
-          <>
-            <Typography variant="medium">{tp.product.name}</Typography>
-            <BasicTable
-              columns={selectedColumnsProduct}
-              rows={[tp] || []}
-              containerProps={{
-                className: s.productTableContainer
-              }}
-            />
-            <h1>Batch</h1>
-            <BasicTable
-              columns={selectedColumnsBatch}
-              rows={tp?.traceabilityFrozenList || []}
-              containerProps={{
-                className: s.batchTableContainer
-              }}
-            />
-            <hr />
-          </>
-        )
-      })}
+              {/*<Grid item xs={12}>*/}
+              {/*  <BasicTable*/}
+              {/*    columns={selectedColumnsBatch}*/}
+              {/*    rows={tp?.traceabilityFrozenList || []}*/}
+              {/*    containerProps={{*/}
+              {/*      className: styles.batchTableContainer*/}
+              {/*    }}*/}
+              {/*  />*/}
+              {/*</Grid>*/}
+              {/*<hr />*/}
+            </Grid>
+          )
+        })}
+      </Grid>
     </div>
   )
 }

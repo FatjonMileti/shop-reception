@@ -8,6 +8,11 @@ export const productPrintColumns = [
     render: row => formatBakeryPayloadDate(row.productionDate)
   },
   {
+    title: 'Sarja',
+    field: 'chargeNumber',
+    defaultPrintSelected: true,
+  },
+  {
     field: 'product.familyName',
     title: 'Familie',
     render: row => row.product.familyName
