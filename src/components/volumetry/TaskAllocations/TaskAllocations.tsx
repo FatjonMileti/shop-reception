@@ -1,4 +1,9 @@
-import { FilterDataSelect, ListTable, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import {
+  Button,
+  FilterDataSelect,
+  ListTable,
+  Typography
+} from '@fullscreendigital/carrefour-dex-fe'
 import { Box, CircularProgress, Grid, debounce } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { EditActionIcon } from 'icons'
@@ -13,6 +18,7 @@ import TaskDescription from './TaskDescription'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
 import cn from 'classnames'
+import { AttendanceModal } from '../AttendanceModal'
 
 const TaskAllocations = () => {
   const { showNotification } = useNotification()
@@ -33,6 +39,7 @@ const TaskAllocations = () => {
     }
   )
   const [selectedRowId, setSelectedRowId] = useState('')
+  const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -136,6 +143,9 @@ const TaskAllocations = () => {
   const openEditTaskModal = (): void => setIsEditTaskModalOpen(true)
   const closeEditTaskModal = (): void => setIsEditTaskModalOpen(false)
 
+  const openAttendanceModal = (): void => setIsAttendanceModalOpen(true)
+  const closeAteendanceModal = (): void => setIsAttendanceModalOpen(false)
+
   const selectRow = row => {
     setSelectedRow(row)
     openEditTaskModal()
@@ -172,6 +182,11 @@ const TaskAllocations = () => {
             </Grid>
           )}
           <Box className={cn({ [s.hidden]: totalCount === 0 })}>
+            <Button
+              variant="contained"
+              label="Aloca automat task-urile"
+              onClick={openAttendanceModal}
+            />
             <ListTable
               rows={rows}
               handleRemoteData={debounce(fetchData, 500)}
@@ -201,6 +216,7 @@ const TaskAllocations = () => {
             editItem={selectedRow}
             setShouldRefreshData={setShouldRefreshTaskData}
           />
+          <AttendanceModal isModalOpen={isAttendanceModalOpen} closeModal={closeAteendanceModal} />
         </>
       )}
     </div>

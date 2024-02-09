@@ -2,7 +2,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
 import { fromTaskPayload, handleQueryError } from './utils'
-import { toEmployeeFilterItems } from './TaskAllocations/serializers'
+import { toEmployeeFilterItems, toEmployeesAttendance } from './TaskAllocations/serializers'
 import { toDepartmentsOptions } from './serializers'
 
 export const getDepartmentsOptions = (
@@ -303,6 +303,22 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
     async () => {
       const employees = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
       return toEmployeeFilterItems(employees) || []
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification),
+
+      enabled: validateQuery
+    }
+  )
+}
+
+export const getEmployeesAttendance = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['employees-attendance'],
+    async () => {
+      const employees = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
+      return toEmployeesAttendance(employees) || []
     },
     {
       onError: error =>

@@ -30,6 +30,16 @@ export const toEmployeeFilterItems = items =>
     }))
     .sort((a, b) => b.shiftCategory.localeCompare(a.shiftCategory))
 
+export const toEmployeesAttendance = items =>
+  items
+    .map(item => ({
+      ...item,
+      isPresent: item.shiftCategory === 'ON_SHIFT',
+      startTime: '10:00',
+      endTime: '13:00'
+    }))
+    .sort((a, b) => b.shiftCategory.localeCompare(a.shiftCategory))
+
 export const toEmployeesItems = (
   item,
   employees,
@@ -49,3 +59,12 @@ export const toEmployeesItems = (
       />
     )
   }))
+
+export const toAllocateEmployeesPayload = employees =>
+  employees
+    .filter(employee => employee.isPresent)
+    .map(employee => ({
+      workerId: employee.workerId,
+      startTime: employee.startTime,
+      endTime: employee.endTime
+    }))
