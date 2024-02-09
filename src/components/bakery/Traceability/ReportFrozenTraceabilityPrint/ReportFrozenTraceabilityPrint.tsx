@@ -67,27 +67,27 @@ export const ReportFrozenTraceabilityPrint = () => {
         {reportDataQuery?.data?.list.map((tp, tpIndex) => {
           return (
             <Grid item xs={12} container rowSpacing={2}>
-              {/*<Grid item xs={12}>*/}
-              {/*  <p className={styles.productName}>{tp.product.name}</p>*/}
-              {/*  <BasicTable*/}
-              {/*    columns={selectedColumnsProduct}*/}
-              {/*    rows={[tp] || []}*/}
-              {/*    containerProps={{*/}
-              {/*      className: styles.productTableContainer*/}
-              {/*    }}*/}
-              {/*  />*/}
-              {/*</Grid>*/}
+              <Grid item xs={12}>
+                <p className={styles.productName}>{tp.product.name}</p>
+                <BasicTable
+                  columns={selectedColumnsProduct}
+                  rows={[tp] || []}
+                  containerProps={{
+                    className: styles.productTableContainer
+                  }}
+                />
+              </Grid>
 
-              {/*<Grid item xs={12}>*/}
-              {/*  <BasicTable*/}
-              {/*    columns={selectedColumnsBatch}*/}
-              {/*    rows={tp?.traceabilityFrozenList || []}*/}
-              {/*    containerProps={{*/}
-              {/*      className: styles.batchTableContainer*/}
-              {/*    }}*/}
-              {/*  />*/}
-              {/*</Grid>*/}
-              {/*<hr />*/}
+              <Grid item xs={12}>
+                <BasicTable
+                  columns={selectedColumnsBatch}
+                  rows={tp?.traceabilityFrozenList || []}
+                  containerProps={{
+                    className: styles.batchTableContainer
+                  }}
+                />
+              </Grid>
+              <hr />
             </Grid>
           )
         })}
