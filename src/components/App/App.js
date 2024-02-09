@@ -9,7 +9,7 @@ import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
 import { ThemeProvider } from '@fullscreendigital/carrefour-dex-fe'
 import { createRoute } from './helpers'
-import { makeDesignerGetRequest, makeNotificationsPutRequest } from 'utils/api'
+import { makeDesignerGetRequest, makeCorePutRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
@@ -74,7 +74,7 @@ const App = () => {
       const localToken = getFirebaseToken()
       if (fbToken && fbToken !== localToken) {
         try {
-          await makeNotificationsPutRequest('/association', {
+          await makeCorePutRequest('/message-dispatcher/external/association', {
             deviceToken: fbToken
           })
           setFirebaseToken(fbToken)
