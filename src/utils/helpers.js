@@ -19,6 +19,8 @@ export const formatUIDate = date => (date ? dayjs(date).format('DD/MM/YYYY') : '
 
 export const getDatePickerDate = date => (date ? dayjs(date, 'DD/MM/YYYY') : '')
 
+export const formatBakeryPayloadDate = date => (date ? dayjs(date).format('DD-MM-YYYY') : '')
+
 export const areSameDayDates = (startDate, endDate) =>
   startDate && endDate && dayjs(startDate).isSame(dayjs(endDate), 'day')
 
