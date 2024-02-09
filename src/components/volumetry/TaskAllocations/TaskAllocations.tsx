@@ -192,6 +192,7 @@ const TaskAllocations = () => {
               rowActionsWidth="90px"
               selectedRowId={selectedRowId}
               shouldRefreshedSelectedRowDetails={shouldRefreshAllocationsData}
+              hasExpandCollapseAll
             />
           </Box>
           <EditCurrentTaskTemplate

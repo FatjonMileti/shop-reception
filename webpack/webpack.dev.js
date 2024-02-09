@@ -2,6 +2,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const commonPaths = require('./paths')
 const path = require('path')
 const Dotenv = require('dotenv-webpack')
+const fs = require('fs')
 
 // eslint-disable-next-line no-undef
 module.exports = env => ({
@@ -76,7 +77,19 @@ module.exports = env => ({
     compress: true,
     hot: true,
     historyApiFallback: true,
-    allowedHosts: 'all'
+    allowedHosts: 'all',
+    server: {
+      type: 'https',
+      options: {
+        key: fs.readFileSync(
+          '/Users/pauladan/fullscreen/carrefour/dex-front-end/local.dex.fe+1-key.pem'
+        ),
+        cert: fs.readFileSync(
+          '/Users/pauladan/fullscreen/carrefour/dex-front-end/local.dex.fe+1.pem'
+        ),
+        ca: fs.readFileSync('/Users/pauladan/Library/Application Support/mkcert/rootCA.pem')
+      }
+    }
   },
   plugins: [
     new ReactRefreshWebpackPlugin(),

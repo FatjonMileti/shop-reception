@@ -23,6 +23,9 @@ export interface TaskCurrentState {
   isTaskEnded: boolean
   showStartButton: boolean
   showStopButton: boolean
+  isTaskPaused: boolean
+  showPauseButton: boolean
+  showResumeButton: boolean
 }
 
 export interface EmployeeProps {
@@ -53,7 +56,7 @@ export interface EmployeeCapsuleProps {
 
 export interface EmployeeActionsProps {
   taskCurrentState: TaskCurrentState
-  handleStartTask: Function
+  updateTaskStatus: Function
   openStopTaskModal: Function
 }
 
