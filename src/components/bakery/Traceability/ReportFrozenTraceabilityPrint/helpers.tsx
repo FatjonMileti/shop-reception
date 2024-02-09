@@ -7,10 +7,32 @@ export const productPrintColumns = [
     defaultPrintSelected: true,
     render: row => formatBakeryPayloadDate(row.productionDate)
   },
+    {
+    title: 'Produs Trasabilitate',
+    field: 'product.name',
+    defaultPrintSelected: true,
+    render: row => row.product.name
+  },
+  {
+    title: 'Denumire Produs fabricat',
+    field: 'product.name',
+    defaultPrintSelected: true,
+    render: row => row.product.name
+  },
   {
     title: 'Sarja',
     field: 'chargeNumber',
-    defaultPrintSelected: true,
+    defaultPrintSelected: true
+  },
+  {
+    title: 'Cant. Fab.',
+    field: 'quantity',
+    defaultPrintSelected: true
+  },
+  {
+    title: 'DLC prod. Fab.',
+    field: 'productionDate',
+    defaultPrintSelected: true
   },
   {
     field: 'product.familyName',
