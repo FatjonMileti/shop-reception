@@ -1,20 +1,18 @@
-import { useMemo } from 'react'
-import { Button, Input, Checkbox } from '@fullscreendigital/carrefour-dex-fe'
+import { useMemo, useState } from 'react'
+import { Input, Checkbox, Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { Grid } from '../../../../Common/Grid'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
 import { toPayload } from './serializers'
 import { ModalFormActionButtons } from '../../../Common/ModalFormActionButtons'
 import { getDepositTypesOptions } from 'components/shop-reception/admin/api'
-import { deepOrange } from '@mui/material/colors'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { handleQueryError } from 'utils/helpers'
 import { useMutation } from 'react-query'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { createFilterOptions } from '@mui/material'
 
 interface NewAdminDepositProps {
   isModalOpen: boolean
@@ -24,8 +22,19 @@ interface NewAdminDepositProps {
   editItem?: AdminDeposit
 }
 
+//TODO fetch the data from BE
+const initialUsersOptions = [
+  { value: 'paula', label: 'paula' },
+  { value: 'adrian', label: 'adrian' }
+]
+
+const filter = createFilterOptions()
+
 const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
   const { isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData } = props
+
+  const [usersOptions, setUsersOptions] = useState(initialUsersOptions)
+
   const { showNotification } = useNotification()
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
@@ -49,7 +58,11 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
       })
     },
     onError: error =>
-      handleQueryError(error, 'A aparut o eroare la editarea volumului.', showNotification)
+      handleQueryError(
+        error,
+        `A aparut o eroare la ${isEdit ? 'editarea' : 'crearea'} depozitului.`,
+        showNotification
+      )
   })
 
   const formik = useFormik({
@@ -59,22 +72,6 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       mutate(toPayload(values))
-      // try {
-      //   const payload = toPayload(formik.values)
-
-      //   if (isEdit) {
-      //   } else {
-      //   }
-
-      //   setShouldRefreshData(true)
-      //   closeModal()
-      //   formik.resetForm()
-      // } catch (error) {
-      //   showNotification({
-      //     message: `A aparut o eroare la salvarea depozitului. ${formatErrorMessage(error)}`,
-      //     type: 'error'
-      //   })
-      // }
     }
   })
 
@@ -170,6 +167,37 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
               formik.setFieldValue('active', (event.target as HTMLInputElement).value)
             }
             label="Activ"
+          />,
+          <Autocomplete
+            value={formik.values.depositUsers}
+            multiple
+            options={usersOptions}
+            freeSolo
+            variant="outlined"
+            label="Utilizatori asignati pe depozit"
+            onChange={(event, value) => {
+              const result = value.map(val => ({
+                value: val.value || val.inputValue,
+                label: val.inputValue || val.label
+              }))
+              formik.setFieldValue('depositUsers', result)
+            }}
+            error={!!formik.errors.depositUsers}
+            helperText={formik.errors.depositUsers as string}
+            required
+            filterOptions={(options, params) => {
+              const filtered = filter(options, params)
+
+              // Suggest the creation of a new value
+              if (params.inputValue !== '') {
+                filtered.push({
+                  inputValue: params.inputValue,
+                  label: `Add "${params.inputValue}"`
+                })
+              }
+
+              return filtered
+            }}
           />
         ]}
         itemsPerRow={2}

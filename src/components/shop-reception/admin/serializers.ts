@@ -1,5 +1,5 @@
 export const toDepositTypesOptions = types =>
-  types.map(type => ({
-    value: type.id,
-    label: type.name
+  Object.keys(types).map(key => ({
+    value: key,
+    label: types[key]
   }))

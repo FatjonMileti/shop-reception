@@ -6,5 +6,6 @@ export const toTableRowItems = (items) => items.map((item) => ({
   address: item.address,
   validityPercentage: item.validityPercentage ?? '',
   emails: item.emails ?? '',
-  active: item.active
+  active: item.active,
+  depositUsers: item.depositUsers ?? ''
 }))
