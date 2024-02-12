@@ -1,10 +1,10 @@
-export const toTableRowItems = (items: AdminDeposit[]) => items.map((item: AdminDeposit) => ({
+export const toTableRowItems = (items) => items.map((item) => ({
   id: item.id,
-  depositCode: item.depositCode,
-  name: item.name,
-  depositType: item.depositType,
+  code: item.code ?? '',
+  name: item.name ?? '',
+  type: item.type ?? '',
   address: item.address,
-  validityPercentage: item.validityPercentage,
-  emails: item.emails,
+  validityPercentage: item.validityPercentage ?? '',
+  emails: item.emails ?? '',
   active: item.active
 }))

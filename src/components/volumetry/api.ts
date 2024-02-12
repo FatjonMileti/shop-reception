@@ -1,9 +1,10 @@
 import { makeCoreGetRequest } from 'utils/api'
 import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
-import { fromTaskPayload, handleQueryError } from './utils'
+import { fromTaskPayload } from './utils'
 import { toEmployeeFilterItems } from './TaskAllocations/serializers'
 import { toDepartmentsOptions } from './serializers'
+import { handleQueryError } from 'utils/helpers'
 
 export const getDepartmentsOptions = (
   showNotification: Function,

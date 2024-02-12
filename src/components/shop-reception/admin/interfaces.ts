@@ -35,13 +35,13 @@ interface DeliverySlip {
 
 interface AdminDeposit {
   id: number
-  depositCode: string
+  code: string
   name: string
-  depositType: string
-  address: string
-  validityPercentage: string
-  emails: string
+  type: string
   active: boolean
+  validityPercentage?: string | number
+  address?: string
+  emails?: string
 }
 
 interface AdminHub {
