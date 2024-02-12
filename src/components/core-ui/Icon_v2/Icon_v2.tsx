@@ -8,6 +8,7 @@ import {
   TeamDayOffManagementSubcategory
 } from 'icons/governance'
 import { FolderIcon } from 'icons/shared'
+import { DateIcon } from 'icons/shared'
 import {
   SupplyOmniHome,
   MySalesSubcategory,
@@ -94,6 +95,7 @@ import {
 const IconComponents = {
   // Shared
   FolderIcon,
+  DateIcon,
   // Governance
   ProjectTeamGovernanceHome,
   ProjectTeamGovernanceMenu,

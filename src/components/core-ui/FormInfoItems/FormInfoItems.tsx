@@ -10,13 +10,14 @@ interface FormItem {
 
 interface FormInfoItemsProps {
   items: FormItem[]
+  style?: React.CSSProperties
 }
 
 const FormInfoItems: React.FC<FormInfoItemsProps> = props => {
-  const { items } = props
+  const { items, style } = props
 
   return (
-    <Box className={s.list}>
+    <Box className={s.list} style={style}>
       {items.map((item: FormItem) => (
         <Box key={item.name} className={s.item}>
           <Box className={s.label}>{item.label}</Box>

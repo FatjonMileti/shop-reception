@@ -1,0 +1,24 @@
+.mainContainer {
+  margin: 24px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+
+  &>div {
+    margin: 0;
+  }
+}
+
+.productName {
+  color: #0970e6;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 16px;
+}
+
+.date {
+  color: #666666;
+  font-size: 14px;
+  
+}
