@@ -5,5 +5,6 @@ export const toPayload = (values) => ({
   validityPercentage: values.validityPercentage,
   active: values.active,
   emails: values.emails.split(';'),
-  address: values.address
+  address: values.address,
+  depositUsers: values.depositUsers.map(user => user.value)
 })

@@ -53,21 +53,23 @@ const AdminDeposit = () => {
             id: 1,
             code: 'BDU',
             name: 'DEPOZIT CONGELATE',
-            type: 'FROZEN',
+            type: 'Frozen',
             validityPercentage: 75,
             active: true,
             address: 'strada florilor',
-            emails: ['abc', 'cdf']
+            emails: ['abc', 'cdf'],
+            depositUsers: ['user01']
           },
           {
             id: 2,
             code: 'BDU',
             name: 'DEPOZIT CONGELATE',
-            type: 'AMBIENT',
+            type: 'Ambient',
             validityPercentage: null,
             active: false,
             address: 'strada agnita',
-            emails: ['abc', 'cdf']
+            emails: ['abc', 'cdf'],
+            depositUsers: ['paula']
           }
         ],
         page: { totalCount: 2 }
