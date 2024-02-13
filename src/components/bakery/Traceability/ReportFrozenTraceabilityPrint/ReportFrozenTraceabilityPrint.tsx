@@ -104,9 +104,7 @@ export const ReportFrozenTraceabilityPrint = () => {
             }
           }}
           size="small"
-          onClick={e => {
-            handlePrint()
-          }}
+          onClick={handlePrint}
         >
           <Box sx={{ display: { xs: 'none', sm: 'inherit' } }}>
             <Typography

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import { getDepartmentsOptions } from '../api'
 import { ValueLabelInterface } from '../interfaces'
-import { handleQueryError } from '../utils'
+import { handleQueryError } from 'utils/helpers'
 import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
 import s from './TaskAllocations.modules.scss'
 import TaskDescription from './TaskDescription'
@@ -192,6 +192,7 @@ const TaskAllocations = () => {
               rowActionsWidth="90px"
               selectedRowId={selectedRowId}
               shouldRefreshedSelectedRowDetails={shouldRefreshAllocationsData}
+              hasExpandCollapseAll
             />
           </Box>
           <EditCurrentTaskTemplate

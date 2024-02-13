@@ -2,6 +2,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const commonPaths = require('./paths')
 const path = require('path')
 const Dotenv = require('dotenv-webpack')
+const fs = require('fs')
 
 // eslint-disable-next-line no-undef
 module.exports = env => ({

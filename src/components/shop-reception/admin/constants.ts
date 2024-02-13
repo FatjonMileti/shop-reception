@@ -1,0 +1,42 @@
+export const URLS = {
+  // admin
+  AUTH_ADMIN_DEPOSITS: '/shop-reception/admin/deposits',
+  AUTH_ADMIN_HUBS: '/shop-reception/admin/hubs',
+  AUTH_ADMIN_STORES: '/shop-reception/admin/stores',
+  AUTH_ADMIN_REGIONS: '/shop-reception/admin/regions',
+  AUTH_CENTRALIZATION_STORES_HUB: '/shop-reception/admin/centralization',
+  AUTH_MANAGE_SCAN_TYPES: '/shop-reception/admin/scanTypes',
+  AUTH_SUBFAMILY_VALIDITY_THRESHOLD: '/shop-reception/admin/subfamilyValidityTreshold',
+  AUTH_METI_PRODUCTS: '/shop-reception/admin/metiProducts',
+  AUTH_ADMIN_SENSITIVE_PRODUCTS: '/shop-reception/admin/sensitiveProducts',
+  AUTH_ADMIN_PACKING_TYPES: '/shop-reception/admin/packingTypes',
+  AUTH_MANAGE_DLC_PRODUCTS: '/shop-reception/admin/shortDlcProducts',
+  AUTH_RECEPTION_FILES_INFO: '/shop-reception/admin/receptionFiles',
+  AUTH_SGR_PRODUCTS: '/shop-reception/admin/sgrProducts',
+
+  // reception dashboard
+  AUTH_DELIVERY_SLIPS_LIST: '/shop-reception/reception/deliverySlips',
+  AUTH_DELIVERY_SLIP: '/shop-reception/reception/deliverySlips/:id',
+  AUTH_TRUCK_LIST: '/shop-reception/reception/truckList',
+  AUTH_TRUCK_DETAIL: '/shop-reception/reception/truckList/:id',
+  AUTH_SUPPORT_WRONG_DESTINATION: '/shop-reception/reception/wrongDestinationSupport',
+  AUTH_SUPPORT_WRONG_DESTINATION_DETAIL: '/shop-reception/reception/wrongDestinationSupport/:id',
+  AUTH_UNORDERED_PRODUCTS: '/shop-reception/reception/nonRecommendedProducts',
+  AUTH_METI_FILES: '/shop-reception/reception/metiFiles',
+  AUTH_METI_FILE_DETAIL: '/shop-reception/reception/metiFiles/:id',
+  AUTH_DIFFERENCES_PRODUCTS: '/shop-reception/reception/productsDifferences',
+  AUTH_SUPPORT_TRADABILITY: '/shop-reception/reception/trasabilitySupport',
+
+  // package
+  AUTH_RETURN_TRUCK_LIST: '/shop-reception/package/trucksReturnList',
+  AUTH_ROLLING_PACKAGES: '/shop-reception/package/rolling',
+  AUTH_BALANCE_PACKAGING: '/shop-reception/package/balance',
+  AUTH_BALANCE_PACKAGING_FORM: '/shop-reception/package/balance/:id',
+  AUTH_BALANCE_PACKAGING_HISTORY: '/shop-reception/package/balance/history/:id',
+  AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS: '/shop-reception/package/storeReturnsDisputes',
+  AUTH_PACKAGING_TYPES_DIFFERENCES: '/shop-reception/package/typesDifferences',
+  AUTH_RETURNED_PACKAGING: '/shop-reception/package/returned',
+  AUTH_PACKAGING_COMPLIANCE: '/shop-reception/package/compliance',
+  AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION: '/shop-reception/package/timerDisputes',
+  AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL: '/shop-reception/package/timerDisputes/:id'
+}

@@ -6,3 +6,4 @@ built
 .DS_Store
 .npmrc
 .idea/
+*.pem

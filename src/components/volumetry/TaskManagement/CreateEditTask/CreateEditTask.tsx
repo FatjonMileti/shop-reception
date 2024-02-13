@@ -21,7 +21,7 @@ import {
   getTask,
   getWorkVolumesOptions
 } from 'components/volumetry/api'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 
 interface CreateEditTaskProps {
   isModalOpen: boolean

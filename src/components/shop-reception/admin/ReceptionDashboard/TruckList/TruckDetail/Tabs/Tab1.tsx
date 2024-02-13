@@ -1,0 +1,31 @@
+import { useParams } from 'react-router-dom'
+import { tab1Columns } from '../helpers'
+import { Table } from '../../../../../../core-ui/Table'
+import { useState } from 'react'
+
+const Tab1 = () => {
+  const { id } = useParams()
+  const [tableItems, setTableItems] = useState([])
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+
+  return (
+    <Table
+      hideCheckbox
+      orderBy='role'
+      order='asc'
+      columns={tab1Columns}
+      items={tableItems}
+      fetchData={() => {}}
+      isLoading={isLoading}
+      totalCount={totalCount}
+      newButton={null}
+      shouldRefreshData={shouldRefreshData}
+      setShouldRefreshData={setShouldRefreshData}
+      rowActionsWidth='130px'
+    />
+  )
+}
+
+export default Tab1
