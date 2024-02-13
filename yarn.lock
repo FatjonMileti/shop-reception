@@ -1630,9 +1630,9 @@
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
 "@fullscreendigital/carrefour-dex-fe@^2.0.0":
-  version "2.0.62"
-  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-2.0.62.tgz#a5b3f81968fc8dc4f808b42d73c338034d21f38e"
-  integrity sha512-w5bBM6k0oOLlNb6ckiSc3B3B5dYJIfUkNu9SoZrSXDWGoeZn54tv+SunLjps463aTAhC+pF07fjPkq20i4yAhA==
+  version "2.0.63"
+  resolved "https://registry.yarnpkg.com/@fullscreendigital/carrefour-dex-fe/-/carrefour-dex-fe-2.0.63.tgz#a6a930c504621c79df97e21008c033713e2d9b15"
+  integrity sha512-ZmtybD90pG2BPJBnm0Fl0KT6Tza3Slk+iOK7TZ1l6SdH4ZBz4SeHN14Q3HulN2GaPKHgMskHIdsryX2kMh7jHQ==
   dependencies:
     "@babel/plugin-proposal-export-namespace-from" "^7.18.9"
     "@emotion/react" "^11.9.3"
@@ -2752,14 +2752,15 @@ bytes@3.1.2:
   integrity sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==
 
 call-bind@^1.0.2, call-bind@^1.0.5, call-bind@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/call-bind/-/call-bind-1.0.6.tgz#6c46675fc7a5e9de82d75a233d586c8b7ac0d931"
-  integrity sha512-Mj50FLHtlsoVfRfnHaZvyrooHcrlceNZdL/QBvJJVd9Ta55qCQK0gs4ss2oZDeV9zFCs6ewzYgVE5yfVmfFpVg==
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/call-bind/-/call-bind-1.0.7.tgz#06016599c40c56498c18769d2730be242b6fa3b9"
+  integrity sha512-GHTSNSYICQ7scH7sZ+M2rFopRoLh8t2bLSW6BbgrtLsahOIB5iyAVJf9GjWK3cYTDaMj4XdBpM1cA6pIS0Kv2w==
   dependencies:
+    es-define-property "^1.0.0"
     es-errors "^1.3.0"
     function-bind "^1.1.2"
-    get-intrinsic "^1.2.3"
-    set-function-length "^1.2.0"
+    get-intrinsic "^1.2.4"
+    set-function-length "^1.2.1"
 
 callsites@^3.0.0:
   version "3.1.0"
@@ -6274,7 +6275,7 @@ serve-static@1.15.0:
     parseurl "~1.3.3"
     send "0.18.0"
 
-set-function-length@^1.2.0:
+set-function-length@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/set-function-length/-/set-function-length-1.2.1.tgz#47cc5945f2c771e2cf261c6737cf9684a2a5e425"
   integrity sha512-j4t6ccc+VsKwYHso+kElc5neZpjtq9EnRICFZtWyBsLojhmeF/ZBd/elqm22WJh/BziDe/SBiOeAt0m2mfLD0g==

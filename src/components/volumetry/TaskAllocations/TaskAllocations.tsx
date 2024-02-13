@@ -18,7 +18,7 @@ import TaskDescription from './TaskDescription'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
 import cn from 'classnames'
-import { AttendanceModal } from '../AttendanceModal'
+import { AttendanceModal } from './AttendanceModal'
 
 const TaskAllocations = () => {
   const { showNotification } = useNotification()
@@ -40,6 +40,7 @@ const TaskAllocations = () => {
   )
   const [selectedRowId, setSelectedRowId] = useState('')
   const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(false)
+  const [allExpanded, setAllExpanded] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -159,19 +160,33 @@ const TaskAllocations = () => {
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
-          <Grid xs={4} md={3} item style={{ padding: 0 }}>
-            <FilterDataSelect
-              name="teamMember.domain"
-              defaultSelectedData={departmentFilterValue}
-              label="Department"
-              showCounter={true}
-              showSearch={true}
-              counterLabel="Select department"
-              noDataFoundLabel="No results!"
-              options={departmentsOptions}
-              onSelect={handleDepartmentOptionChange}
-            />
-          </Grid>
+          <>
+            <Grid xs={12} md={6} item style={{ padding: 0 }}>
+              <FilterDataSelect
+                name="teamMember.domain"
+                defaultSelectedData={departmentFilterValue}
+                label="Department"
+                showCounter={true}
+                showSearch={true}
+                counterLabel="Select department"
+                noDataFoundLabel="No results!"
+                options={departmentsOptions}
+                onSelect={handleDepartmentOptionChange}
+              />
+            </Grid>
+            <Grid
+              xs={12}
+              md={6}
+              item
+              style={{ padding: 0, paddingRight: '40px', textAlign: 'right' }}
+            >
+              <Button
+                variant="contained"
+                label="Incepe alocarea automata"
+                onClick={openAttendanceModal}
+              />
+            </Grid>
+          </>
         )}
       </Grid>
       {departmentFilterValue && (
@@ -182,11 +197,6 @@ const TaskAllocations = () => {
             </Grid>
           )}
           <Box className={cn({ [s.hidden]: totalCount === 0 })}>
-            <Button
-              variant="contained"
-              label="Aloca automat task-urile"
-              onClick={openAttendanceModal}
-            />
             <ListTable
               rows={rows}
               handleRemoteData={debounce(fetchData, 500)}
@@ -208,6 +218,7 @@ const TaskAllocations = () => {
               selectedRowId={selectedRowId}
               shouldRefreshedSelectedRowDetails={shouldRefreshAllocationsData}
               hasExpandCollapseAll
+              allExpanded={allExpanded}
             />
           </Box>
           <EditCurrentTaskTemplate
@@ -216,7 +227,12 @@ const TaskAllocations = () => {
             editItem={selectedRow}
             setShouldRefreshData={setShouldRefreshTaskData}
           />
-          <AttendanceModal isModalOpen={isAttendanceModalOpen} closeModal={closeAteendanceModal} />
+          <AttendanceModal
+            isModalOpen={isAttendanceModalOpen}
+            closeModal={closeAteendanceModal}
+            departmentId={departmentFilterValue.value}
+            setAllExpanded={setAllExpanded}
+          />
         </>
       )}
     </div>

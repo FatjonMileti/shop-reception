@@ -5,6 +5,7 @@ import { toEmployeeFilterItems, toEmployeesAttendance } from './TaskAllocations/
 import { fromTaskPayload } from './utils'
 import { toDepartmentsOptions } from './serializers'
 import { handleQueryError } from 'utils/helpers'
+import dayjs from 'dayjs'
 
 export const getDepartmentsOptions = (
   showNotification: Function,
@@ -302,7 +303,7 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   return useQuery(
     ['employees-options'],
     async () => {
-      const employees = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
+      const employees = await makeCoreGetRequest('/volumetry/workers/shifts')
       return toEmployeeFilterItems(employees) || []
     },
     {
@@ -314,11 +315,19 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   )
 }
 
-export const getEmployeesAttendance = (showNotification: Function, validateQuery: boolean = true) => {
+export const getEmployeesAttendance = (
+  departmentId: number,
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
   return useQuery(
-    ['employees-attendance'],
+    ['employees-attendance', departmentId],
     async () => {
-      const employees = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
+      // const a = dayjs('2024-02-12T20:13:00').format('HH')
+
+      const employees = await makeCoreGetRequest(
+        `/volumetry/workers/shifts?filterBy=genericDepartmentId&filterValue=${departmentId}`
+      )
       return toEmployeesAttendance(employees) || []
     },
     {

@@ -1,5 +1,4 @@
 import dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { areSameDayDates, getDatePickerDate } from 'utils/helpers'
 import * as Yup from 'yup'
 
