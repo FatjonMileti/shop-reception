@@ -2,25 +2,8 @@ import { makeCoreGetRequest } from 'utils/api'
 import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
 import { fromTaskPayload, handleQueryError } from './utils'
-import { toEmployeeFilterItems } from './TaskAllocation/serializers'
-
-export const getEmployeeNamesOptions = (showNotification: Function) => {
-  return useQuery(
-    ['employees-name'],
-    async () => {
-      const result = await makeCoreGetRequest('/volumetry/workers/employees')
-
-      const resultOptions = result.list.map(
-        (item): ValueLabelInterface => ({ label: item.fullName, value: item.fullName })
-      )
-
-      return resultOptions || []
-    },
-    {
-      onError: error => handleQueryError(error, 'Error while fetching employees ', showNotification)
-    }
-  )
-}
+import { toEmployeeFilterItems } from './TaskAllocations/serializers'
+import { toDepartmentsOptions } from './serializers'
 
 export const getDepartmentsOptions = (
   showNotification: Function,
@@ -29,11 +12,8 @@ export const getDepartmentsOptions = (
   return useQuery(
     ['departments'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/locations/departments')
-
-      const resultOptions = result.map(
-        (item): ValueLabelInterface => ({ label: item.name, value: item.id })
-      )
+      const result = await makeCoreGetRequest('/volumetry/locations/generic-departments')
+      const resultOptions = toDepartmentsOptions(result)
 
       if (resultOptions?.length && !!setDefaultOptionCallback) {
         setDefaultOptionCallback(resultOptions[0])
@@ -56,10 +36,10 @@ export const getJobTitlesOptions = (showNotification: Function) => {
   return useQuery(
     ['job-titles'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/workers/jobTitles')
-      const resultOptions = result.list.map(
-        (item: { id: number; jobTitle: string }): ValueLabelInterface => ({
-          label: item.jobTitle,
+      const result = await makeCoreGetRequest('/volumetry/workers/job-titles')
+      const resultOptions = result.map(
+        (item: { id: number; title: string }): ValueLabelInterface => ({
+          label: item.title,
           value: item.id
         })
       )
@@ -68,6 +48,42 @@ export const getJobTitlesOptions = (showNotification: Function) => {
     },
     {
       onError: error => handleQueryError(error, 'Error while fetching job titles', showNotification)
+    }
+  )
+}
+
+export const getLocationsOptions = (
+  showNotification: Function,
+  setLocationsFilterValue: Function,
+  canUseCustomFilter: boolean
+) => {
+  return useQuery(
+    ['locations'],
+    async () => {
+      if (canUseCustomFilter) {
+        const result = await makeCoreGetRequest('/volumetry/locations/summary')
+        const resultOptions = result.map(
+          (item: { id: number; name: string }): ValueLabelInterface => ({
+            label: item.name,
+            value: item.id
+          })
+        )
+        if (resultOptions) {
+          setLocationsFilterValue(resultOptions[0])
+        }
+
+        return resultOptions || []
+      }
+
+      return []
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea listei magazinelor.',
+          showNotification
+        )
     }
   )
 }
@@ -136,7 +152,7 @@ export const getPrioritiesOptions = (showNotification: Function) => {
   return useQuery(
     ['priority'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/task-templatess/priorities')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/priorities')
 
       const resultOptions = result.map(priority => ({
         value: priority.value,
@@ -156,11 +172,11 @@ export const getFrequencyOptions = (showNotification: Function) => {
   return useQuery(
     ['frequency'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/task-templatess/frequencies')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/frequencies')
 
       const resultOptions = result.map(frequency => ({
-        value: frequency,
-        label: frequency
+        value: frequency.key,
+        label: frequency.value
       }))
 
       return resultOptions || []
@@ -176,10 +192,10 @@ export const getMeasurementUnitsOptions = (showNotification: Function) => {
   return useQuery(
     ['measurement-units'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/task-templatess/measurement-units')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/measurement-units')
 
       const resultOptions = result.map(unit => ({
-        value: unit.name,
+        value: unit.id,
         label: unit.name
       }))
 
@@ -200,11 +216,11 @@ export const getWorkVolumesOptions = (showNotification: Function) => {
   return useQuery(
     ['work-volumes'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/reports/work-volumes')
+      const result = await makeCoreGetRequest('/volumetry/task-templates/work-volume-sources')
 
-      const resultOptions = result.list.map(workVolume => ({
-        value: workVolume.measurementUnit,
-        label: workVolume.measurementUnit
+      const resultOptions = result.map(workVolume => ({
+        value: workVolume.id,
+        label: workVolume.shortDescription
       }))
 
       return resultOptions || []
@@ -228,11 +244,14 @@ export const getCategoryDepartmentsOptions = (
   return useQuery(
     ['category-departments', categoryId],
     async () => {
-      const result = await makeCoreGetRequest(`/volumetry/locations/departments/${categoryId}`)
+      const result = await makeCoreGetRequest(
+        `/volumetry/locations/generic-departments?filterBy=categoryId&filterValue=${categoryId}`
+      )
 
       const resultOptions = result.map(department => ({
         value: department.id,
-        label: department.name
+        label: department.departmentName,
+        locationType: department.locationType
       }))
 
       return resultOptions || []
@@ -258,11 +277,13 @@ export const getRaionsOptions = (
   return useQuery(
     ['raions', departmentId],
     async () => {
-      const result = await makeCoreGetRequest(`/volumetry/locations/raions/${departmentId}`)
+      const result = await makeCoreGetRequest(
+        `/volumetry/locations/generic-rayons?filterBy=genericDepartmentId&filterValue=${departmentId}`
+      )
 
       const resultOptions = result.map(raion => ({
         value: raion.id,
-        label: raion.name
+        label: raion.rayonName
       }))
 
       callback(resultOptions)
@@ -281,7 +302,6 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
     ['employees-options'],
     async () => {
       const employees = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
-
       return toEmployeeFilterItems(employees) || []
     },
     {

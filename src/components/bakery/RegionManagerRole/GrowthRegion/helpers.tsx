@@ -28,7 +28,13 @@ export const columns = [
     type: 'string',
     defaultPrintSelected: true
   },
-
+  {
+    title: 'Familie',
+    field: 'familyName',
+    align: 'left',
+    type: 'string',
+    defaultPrintSelected: false
+  },
   {
     title: 'Subfamilie',
     field: 'subfamily',
@@ -143,8 +149,7 @@ export const columns = [
   }
 ]
 
-export 
-const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
+export const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
   {
     name: 'date',
     value: currentDate,
@@ -162,7 +167,7 @@ const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'family',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
@@ -172,12 +177,11 @@ const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Familie',
-    clearFiltersOnChange: ['subfamily']
+    label: 'Familie'
   },
   {
     name: 'subfamily',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"

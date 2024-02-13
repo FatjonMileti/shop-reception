@@ -104,7 +104,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
           <AsyncAutocomplete
             variant="outlined"
             name="department"
-            label="Selecteaza magazin"
+            label="Selecteaza departament"
             disableClearable
             value={formik.values.department}
             options={departmentsOptions || []}

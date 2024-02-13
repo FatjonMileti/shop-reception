@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { EditStoreItem, ValueLabelInterface } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { getInitialValues, statuses } from '../helpers'
-import { ChangeEvent, useMemo, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { toAsyncSelectOptions } from 'components/bakery/commonSerializers'
@@ -27,13 +27,20 @@ const EditStore: React.FC<EditStoreProps> = props => {
     const [zoneValue, setZoneValue] = useState<ValueLabelInterface>(null)
     const [regionValue, setRegionValue] = useState<ValueLabelInterface>(null)
 
-    const { data: zones, isLoading: isZonesLoading, refetch: refetchZones } = useQuery(
+    useEffect(() => {
+      if(isModalOpen) refetchEditItem()
+    }, [isModalOpen])
+
+    const { data: zones, refetch: refetchZones } = useQuery(
       ['zones'],
       async () => {
         const result = await makeCoreGetRequest('/bakery/zone/all')
         const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
 
-        setZoneValue(resultOptions[0])
+        if(editItem?.zone) {
+          setZoneValue({value: editItem?.zone, label: editItem?.zone})
+        }
+
         return resultOptions || []
       },
       {
@@ -47,13 +54,16 @@ const EditStore: React.FC<EditStoreProps> = props => {
       }
     )
 
-    const { data: regions, isLoading: isRegionsLoading, refetch: refetchRegions } = useQuery(
+    const { data: regions, refetch: refetchRegions } = useQuery(
       ['regions'],
       async () => {
         const result = await makeCoreGetRequest('/bakery/region/all')
         const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
 
-        setRegionValue(resultOptions[0])
+        if (editItem?.region) {
+          setRegionValue({value: editItem?.region, label: editItem?.region})
+        }
+
         return resultOptions || []
       },
       {
@@ -67,13 +77,12 @@ const EditStore: React.FC<EditStoreProps> = props => {
       }
     )
 
-    const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
+    const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
         ['store', editStoreId],
         async () => {
           if (editStoreId) {
             const result = await makeCoreGetRequest(`/bakery/store/${editStoreId}`)
-            refetchZones()
-            refetchRegions()
+           
             return result || null
           }
           return null
@@ -90,8 +99,14 @@ const EditStore: React.FC<EditStoreProps> = props => {
         }
     )
 
-    const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+    useEffect(() => {
+      if(editItem) {
+        refetchZones()
+        refetchRegions()
+      }
+    }, [editItem])
 
+    const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
     const submitTask = async (values: EditStoreItem) => {
         await makeCorePutRequest(`/bakery/store/${editStoreId}`, values)
     }
@@ -120,7 +135,9 @@ const EditStore: React.FC<EditStoreProps> = props => {
         onSubmit: async (values: EditStoreItem, { resetForm }) => {
             const payload = {
                 ...values,
-                enable: values.enable === 'Active'
+                enable: values.enable === 'Activ',
+                region: regionValue?.label === '' || regionValue === null ? null : regionValue?.label,
+                zone: zoneValue?.label === '' || zoneValue === null ? null : zoneValue?.label
             }
             mutate(payload)
             resetForm()
@@ -137,7 +154,7 @@ const EditStore: React.FC<EditStoreProps> = props => {
     }
 
     return (
-        <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'} modalWidth="50%">
+        <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Editeaza'} modalWidth="50%">
           <Grid container spacing={2}>
             {(isLoading || isLoadingEditItem) ? (
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -163,41 +180,29 @@ const EditStore: React.FC<EditStoreProps> = props => {
                 />
               </Grid>
 
-              {isZonesLoading ? (
-                <div style={{ display: 'flex' }}>
-                  <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-                </div>
-              ) : (
-                <Grid xs={12} item>
-                    <AsyncAutocomplete
-                      variant="outlined"
-                      name="zone"
-                      label="Zona"
-                      value={zoneValue}
-                      options={zones}
-                      onChange={handleZoneChange}
-                      style={{ minWidth: '100%'}}
-                    />
-                </Grid>
-              )}
-
-              {isRegionsLoading ? (
-                <div style={{ display: 'flex' }}>
-                  <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-                </div>
-              ) : (
-                <Grid xs={12} item>
+              <Grid xs={12} item>
                   <AsyncAutocomplete
                     variant="outlined"
-                    name="region"
-                    label="Regiune"
-                    value={regionValue}
-                    style={{ width: '100%'}}
-                    options={regions}
-                    onChange={handleRegionChange}
+                    name="zone"
+                    label="Zona"
+                    value={zoneValue}
+                    options={zones}
+                    onChange={handleZoneChange}
+                    style={{ minWidth: '100%'}}
                   />
-                </Grid>
-              )}
+              </Grid>
+          
+              <Grid xs={12} item>
+                <AsyncAutocomplete
+                  variant="outlined"
+                  name="region"
+                  label="Regiune"
+                  value={regionValue}
+                  style={{ width: '100%'}}
+                  options={regions}
+                  onChange={handleRegionChange}
+                />
+              </Grid>
                 
               <Grid xs={12} item>
                 <Input
@@ -213,8 +218,8 @@ const EditStore: React.FC<EditStoreProps> = props => {
               </Grid>
         
               <Grid xs={12} item className={s.modalButtons}>
-                <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-                <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+                <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+                <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
               </Grid>
             </>)}
           </Grid>

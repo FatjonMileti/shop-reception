@@ -139,7 +139,7 @@ export const columns = [
 ]
 
 export const getInitialValues = editItem => ({
-  scheduleProduct: editItem?.scheduleProduct ?? '',
+  scheduleProduct: editItem?.scheduleProduct ? 'Da' : 'Nu',
   minStock: editItem?.minStock ?? ''
 })
 

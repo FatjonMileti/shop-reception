@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import s from '../../commonStyles.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { Grid } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { FamilyItem, ProductGrowthIndexItem } from '../interfaces'
 import { EditActionIcon } from 'icons'
@@ -13,7 +13,6 @@ import { toTableRowItems } from './serializers'
 import { EditProductGrowthIndex } from './EditProductGrowthIndex'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { useQuery } from 'react-query'
-import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
 const ProductGrowthIndex = () => {
   const { showNotification } = useNotification()
@@ -30,7 +29,7 @@ const ProductGrowthIndex = () => {
   const familiesQuery = useQuery(
     ['families'],
     async () => {
-      const result = await makeCoreGetRequest('/bakery/store/families')
+      const result = await makeCoreGetRequest('/bakery/store/cadentier/families')
 
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
@@ -67,11 +66,8 @@ const ProductGrowthIndex = () => {
       )
 
       setTableItems(toTableRowItems(response.list))
-
       setTotalCount(response.page.totalCount)
-
       setIsLoading(false)
-
       return response
     } catch (error) {
       showNotification({
@@ -88,23 +84,6 @@ const ProductGrowthIndex = () => {
       openEditModal()
     }
   }
-
-  const drawerFilters = [
-    {
-      name: 'family',
-      value: undefined,
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Familie"
-          options={familiesQuery.data || []}
-          multiple
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Familie'
-    }
-  ]
 
   return (
     <div className={s.mainContainer}>
@@ -131,7 +110,7 @@ const ProductGrowthIndex = () => {
           dynamicColumn="growth"
           rowActions={[
             {
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
@@ -140,9 +119,14 @@ const ProductGrowthIndex = () => {
             }
           ]}
           rowActionsWidth="130px"
-          filters={drawerFilters}
+          filters={drawerFilters(familiesQuery)}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
+          filtersLabel="Filtreaza"
+          filtersButtonLabel="Filtreaza"
+          appliedFiltersLabel="Filtre"
+          cancelFiltersButtonLabel="Anuleaza"
+          applyFiltersButtonLabel="Aplica"
         />
       </Grid>
     </div>

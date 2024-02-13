@@ -1,9 +1,9 @@
 import s from './ProductScan.modules.scss'
-import { ProductBarcodeScanner } from './ProductBarcodeScanner'
 import { useState } from 'react'
 import { ProductTabs } from './ProductTabs'
 import ProductGeneralInfo from './ProductGeneralInfo/ProductGeneralInfo'
 import { ProductStockResponse } from './interfaces'
+import { ProductBarcodeScanner } from 'components/core-ui/ProductBarcodeScanner'
 
 const ProductScan = () => {
   const [product, setProduct] = useState<ProductStockResponse>(null)

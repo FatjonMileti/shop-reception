@@ -6,8 +6,8 @@ import { StoreItem, ValueLabelInterface } from '../interfaces'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { columns } from './helpers'
-import { Autocomplete, DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { columns, drawerFilters } from './helpers'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { useQuery } from 'react-query'
 import { formatAndDownloadResponse, formatPayloadDate, getPreviousDay } from 'utils/helpers'
 import { DownloadOutlined } from '@mui/icons-material'
@@ -15,6 +15,7 @@ import { GroupTable } from 'components/core-ui/GroupTable'
 import { TableState } from '../interfaces'
 import { toAsyncSelectOptions } from '../commonSerializers'
 import { FamilyItem, SubfamilyItem } from '../StoreManagerRole/interfaces'
+import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
 
 const SalesCadentier = () => {
   const [tableItems, setTableItems] = useState<StoreItem[]>([])
@@ -25,8 +26,7 @@ const SalesCadentier = () => {
 
   const [dateFilterValue, setDateFilterValue] = useState(getPreviousDay())
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
-  const [familiesFilterValue, setFamiliesFilterValue] = useState<ValueLabelInterface[]>([])
-  const [subfamiliesFilterValue, setSubfamiliesFilterValue] = useState<ValueLabelInterface[]>([])
+  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const [tableState, setTableState] = useState<TableState>({
     order: null,
@@ -51,10 +51,18 @@ const SalesCadentier = () => {
     }
   )
 
-  const { data: familyOptions } = useQuery(
-    ['families', storeFilterValue?.value],
+  const familiesQuery = useQuery(
+    ['families', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
-      const result = await makeCoreGetRequest('/bakery/store/families')
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+        ?.value || []) as AutoCompleteValue[]
+      const result = await makeCoreGetRequest('/bakery/store/cadentier/families', {
+        params: {
+          store: storeFilterValue?.value,
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
 
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
@@ -74,13 +82,15 @@ const SalesCadentier = () => {
     }
   )
 
-  const { data: subfamiliesOptions } = useQuery(
-    ['subfamilies', storeFilterValue?.value, familiesFilterValue.map(({ value }) => value)],
+  const subfamiliesQuery = useQuery(
+    ['subfamilies', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'family')?.value],
     async () => {
-      const result = await makeCoreGetRequest('/bakery/store/families/subfamilies', {
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+        ?.value || []) as AutoCompleteValue[]
+      const result = await makeCoreGetRequest('/bakery/store/cadentier/families/subfamilies', {
         params: {
           store: storeFilterValue?.value,
-          family: familiesFilterValue.map(({ value }) => value)
+          family: familyLiveFilterValue.map(({ value }) => value)
         },
         paramsSerializer: { indexes: null }
       })
@@ -115,18 +125,10 @@ const SalesCadentier = () => {
     setIsLoading(true)
 
     try {
-      const filters = [
-        { name: 'store', value: storeFilterValue?.value },
-        { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-        { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
-      ].filter(
-        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-      )
-
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/report/product/sale/cadentier',
-          filters: filters,
+          filters: [{ name: 'store', value: storeFilterValue?.value }],
           tableFilters,
           page,
           rowsPerPage,
@@ -140,7 +142,7 @@ const SalesCadentier = () => {
       setTableState({
         order,
         orderBy,
-        tableFilters: filters
+        tableFilters
       })
 
       window.history.replaceState(
@@ -151,7 +153,7 @@ const SalesCadentier = () => {
             rowsPerPage,
             order,
             orderBy,
-            filters
+            tableFilters
           }
         },
         document.title
@@ -166,78 +168,33 @@ const SalesCadentier = () => {
     }
   }
 
-  const handleDownload = async () => {
-    const url = toTableGETUrl({
-      url: '/bakery/report/download/sale',
-      filters: [
-        { name: 'date', value: formatPayloadDate(dateFilterValue) },
-        { name: 'store', value: storeFilterValue?.value },
-        { name: 'family', value: familiesFilterValue?.map(val => val.value) },
-        { name: 'subfamily', value: subfamiliesFilterValue?.map(val => val.value) }
-      ].filter(
-        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-      )
-    })
-    try {
+  const downloadQuery = useQuery(
+    ['sales-cadentier-download'],
+    async () => {
+      const url = toTableGETUrl({
+        url: '/bakery/report/download/sale',
+        tableFilters: tableState.tableFilters,
+        filters: [
+          { name: 'store', value: storeFilterValue?.value },
+        ].filter(
+          f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+        )
+      })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
-      formatAndDownloadResponse(response)
-    } catch (error) {
-      showNotification({
-        message: `Error while download file. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
-    }
-  }
-
-  const tableFilterFields = [
-    {
-      name: 'date',
-      label: 'Planificare pentru',
-      type: 'date',
-      value: formatPayloadDate(dateFilterValue),
-      filter: (
-        <DatePicker
-          value={formatPayloadDate(dateFilterValue)}
-          onChange={() => {}}
-          label="Planificare pentru"
-          variant="outlined"
-          required
-        />
-      )
+      return formatAndDownloadResponse(response)
     },
     {
-      name: 'family',
-      label: 'Familie',
-      type: 'autocomplete',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Familie"
-          value={familiesFilterValue}
-          options={familyOptions || []}
-          multiple
-        />
-      )
-    },
-    {
-      name: 'subfamily',
-      label: 'Subfamilie',
-      type: 'autocomplete',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Subfamilie"
-          value={subfamiliesFilterValue}
-          options={subfamiliesOptions || []}
-          multiple
-        />
-      )
+      onError: error => {
+        showNotification({
+          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
     }
-  ]
+  )
 
   return (
     <div className={s.mainContainer}>
@@ -249,6 +206,8 @@ const SalesCadentier = () => {
             label="Magazin"
             options={stores}
             onSelect={val => handleStoreFilterChange(val)}
+            placeholderButton='Selecteaza'
+            showSearch
           />
         </Grid>
       </Grid>
@@ -273,15 +232,21 @@ const SalesCadentier = () => {
               {
                 label: 'Descarca',
                 icon: <DownloadOutlined />,
-                onClick: () => handleDownload()
+                onClick: () => downloadQuery.refetch()
               }
             ]}
             order={tableState.order}
             orderBy={tableState.orderBy}
             tableFilters={tableState.tableFilters}
-            filters={tableFilterFields}
+            filters={drawerFilters(dateFilterValue ,familiesQuery, subfamiliesQuery)}
+            handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
+            filtersLabel="Filtreaza"
+            filtersButtonLabel="Filtreaza"
+            appliedFiltersLabel="Filtre"
+            cancelFiltersButtonLabel="Anuleaza"
+            applyFiltersButtonLabel="Aplica"
           />
         </Box>
       )}

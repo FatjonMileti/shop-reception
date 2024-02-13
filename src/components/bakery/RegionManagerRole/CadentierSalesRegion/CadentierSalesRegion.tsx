@@ -38,7 +38,7 @@ const CadentierSalesRegion = () => {
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/region/all')
-      const resultOptions = toAsyncSelectOptions(result, 'id', 'name')
+      const resultOptions = toAsyncSelectOptions(result, 'id', 'name')     
       return resultOptions || []
     },
     {
@@ -52,13 +52,16 @@ const CadentierSalesRegion = () => {
   )
 
   const familiesQuery = useQuery(
-    ['families', storeFilterValue?.value],
+    ['families', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+        ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(
-        '/bakery/store/families',
+        '/bakery/store/cadentier/families',
         {
           params: {
             store: storeFilterValue?.value,
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
           },
           paramsSerializer: { indexes: null }
         }
@@ -88,7 +91,7 @@ const CadentierSalesRegion = () => {
       const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
         ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(
-        '/bakery/store/families/subfamilies',
+        '/bakery/store/cadentier/families/subfamilies',
         {
           params: {
             store: storeFilterValue?.value,
@@ -205,6 +208,8 @@ const CadentierSalesRegion = () => {
               label="Magazin"
               options={stores}
               onSelect={handleStoreFilterChange}
+              placeholderButton="Selecteaza"
+              showSearch
             />
           </Grid>
         </Grid>
@@ -244,7 +249,11 @@ const CadentierSalesRegion = () => {
               handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
               rowsPerPage={25}
               rowsPerPageOptions={[25, 50, 100]}
-              
+              filtersLabel="Filtreaza"
+              filtersButtonLabel="Filtreaza"
+              appliedFiltersLabel="Filtre"
+              cancelFiltersButtonLabel="Anuleaza"
+              applyFiltersButtonLabel="Aplica"
           />
         </Box>
       )}

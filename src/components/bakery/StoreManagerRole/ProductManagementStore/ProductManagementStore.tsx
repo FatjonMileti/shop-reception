@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Divider, Grid } from '@mui/material'
+import { Box, Divider, Grid } from '@mui/material'
 import s from '../../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import React, { useState } from 'react'
@@ -56,9 +56,20 @@ const ProductManagementStore = () => {
   }
 
   const families = useQuery(
-    ['families-store'],
+    ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
-      const result = await makeCoreGetRequest(`/bakery/store/families`)
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+      ?.value || []) as AutoCompleteValue[]
+
+      const result = await makeCoreGetRequest(
+        `/bakery/store/families`,
+        {
+          params: {
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+          },
+          paramsSerializer: { indexes: null }
+        }
+        )
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
           label: item.name,
@@ -117,7 +128,7 @@ const ProductManagementStore = () => {
   const drawerFilters = [
     {
       name: 'family',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"
@@ -128,12 +139,11 @@ const ProductManagementStore = () => {
         />
       ),
       type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
+      label: 'Familie'
     },
     {
       name: 'subfamily',
-      value: undefined,
+      value: '',
       filter: (
         <Autocomplete
           variant="outlined"
@@ -192,7 +202,7 @@ const ProductManagementStore = () => {
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[
             {
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
@@ -205,6 +215,11 @@ const ProductManagementStore = () => {
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
+          filtersLabel="Filtreaza"
+          filtersButtonLabel="Filtreaza"
+          appliedFiltersLabel="Filtre"
+          cancelFiltersButtonLabel="Anuleaza"
+          applyFiltersButtonLabel="Aplica"
         />
       </Box>
     </div>

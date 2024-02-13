@@ -40,9 +40,6 @@ const NewTimeOff: React.FC<NewTimeOffProps> = props => {
     onSubmit: async (values: any) => {
       try {
         const payload = {
-          teamMember: {
-            id: isEdit ? (editItem as TableRowModel).teamMemberId : null
-          },
           dayOffType: values.dayOffType,
           startDate: formatPayloadDate(values.startDate),
           endDate: formatPayloadDate(values.endDate),

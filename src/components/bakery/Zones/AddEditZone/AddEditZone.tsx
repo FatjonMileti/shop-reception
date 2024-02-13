@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { AddEditZoneItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { divisionTypes, getInitialValues, getValidationSchema, statuses } from '../helpers'
-import { ChangeEvent, useMemo } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 
 interface AddEditZoneProps {
   isModalOpen: boolean
@@ -23,7 +23,14 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
     const { isModalOpen, closeModal, setShouldRefreshData, isEdit, editZoneId } = props
     const { showNotification } = useNotification()
 
-    const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
+    useEffect(() => {
+      if(isModalOpen && isEdit) { 
+        refetchEditItem()
+        setShouldRefreshData(true)
+      }
+    }, [isModalOpen])
+    
+    const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
         ['zone', editZoneId],
         async () => {
           if (editZoneId) {
@@ -44,8 +51,8 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
         }
     )
 
-    const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
-    const validationSchema = useMemo(() => getValidationSchema(), [editItem])
+    const initialValues = useMemo(() => getInitialValues(editItem), [editItem, isModalOpen])
+    const validationSchema = useMemo(() => getValidationSchema(), [editItem, isModalOpen])
 
     const submitTask = async (values: AddEditZoneItem) => {
         if (isEdit) {
@@ -63,6 +70,7 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
             message: `Zone ${isEdit ? 'edited' : 'added'} successfully'`,
             type: 'success'
           })
+          formik.resetForm();
         },
         onError: res => {
           showNotification({
@@ -80,15 +88,14 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
         onSubmit: async (values: AddEditZoneItem, { resetForm }) => {
             const payload = {
                 ...values,
-                enable: values.enable === 'Active'
+                enable: values.enable === 'Activ'
             }
             mutate(payload)
-            resetForm()
         }
     })
 
     return (
-        <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={isEdit ? 'Edit' : 'Adauga Zona'} modalWidth="50%">
+        <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={isEdit ? 'Editeaza' : 'Adauga'} modalWidth="50%">
           <Grid container spacing={2}>
             {(isLoading || isLoadingEditItem) ? (
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -152,8 +159,8 @@ const AddEditZone: React.FC<AddEditZoneProps> = props => {
                 </Grid>
         
                 <Grid xs={12} item className={s.modalButtons}>
-                <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-                <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+                <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+                <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
                 </Grid>
             </>)}
           </Grid>

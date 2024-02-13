@@ -142,7 +142,7 @@ const Ingredients = () => {
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[
             {
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',

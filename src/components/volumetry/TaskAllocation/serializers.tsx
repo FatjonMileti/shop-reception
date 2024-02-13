@@ -1,36 +1,26 @@
-import Employee from './Employee'
-import TaskDescription from './TaskDescription'
-import TaskSummary from './TaskSummary'
-import { getEmployeeGroupName } from './helpers'
+import TaskDescription from '../TaskAllocations/TaskDescription'
+import TaskSummary from '../TaskAllocations/TaskSummary'
 
-export const toDepartmentOptions = data => data.map(item => ({ label: item.name, value: item.id }))
-
-export const toListTableRows = (items, shouldRefreshData, setShouldRefreshData, setShouldRefreshTaskData) =>
-  items.map(item => ({
-    id: item.id,
+export const toListTableRows = (
+  items,
+  employees,
+  shouldRefreshData,
+  setShouldRefreshData,
+  setSelectedRowId
+) => {
+  return items.map(item => ({
+    id: item.taskTemplateId,
     summary: <TaskSummary item={item} />,
     details: (
       <TaskDescription
         item={item}
+        employees={employees}
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
-        setShouldRefreshTaskData={setShouldRefreshTaskData}
+        setSelectedRowId={setSelectedRowId}
       />
     ),
-    borderLeftColor: '#0970E6'
+    borderLeftColor: '#0970E6',
+    defaultExpanded: true
   }))
-
-export const toEmployeeFilterItems = items =>
-  items.map(item => ({
-    label: item.fullName || '',
-    value: item.id || '',
-    groupBy: getEmployeeGroupName(item.shiftCategory)
-  }))
-
-export const toEmployeesItems = (item, employees, setShouldRefreshData) =>
-  employees.map(employee => ({
-    id: employee.id,
-    content: (
-      <Employee employee={employee} task={item} setShouldRefreshData={setShouldRefreshData} />
-    )
-  }))
+}

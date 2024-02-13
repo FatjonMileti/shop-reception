@@ -1,0 +1,17 @@
+.mainContainer {
+  margin: 24px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+
+  &>div {
+    margin: 0;
+  }
+}
+
+.filterContainer {
+  @media (max-width: 624px) {
+    margin-top: 12px !important;
+  }
+}

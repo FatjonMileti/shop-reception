@@ -12,11 +12,12 @@ interface DeleteConfirmationProps {
   closeModal: Function
   actionUrl: string
   itemId: string | number
-  title?: string
   content: ReactNode
+  title?: string
   deleteLabel?: string
   cancelLabel?: string
   setShouldRefreshData?: Function
+  additionalAction?: Function
 }
 
 const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
@@ -29,18 +30,17 @@ const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
     content,
     deleteLabel,
     cancelLabel,
-    setShouldRefreshData
+    setShouldRefreshData,
+    additionalAction
   } = props
   const { showNotification } = useNotification()
 
   const onDelete = async () => {
     try {
       await makeCoreDeleteRequest(actionUrl.replace(':id', `${itemId}`))
-
+      additionalAction && additionalAction()
+      setShouldRefreshData && setShouldRefreshData(true)
       closeModal()
-      if (setShouldRefreshData) {
-        setShouldRefreshData(true)
-      }
     } catch (error) {
       showNotification({
         message: `Error while deleting data. ${formatErrorMessage(error)}`,
@@ -50,7 +50,7 @@ const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
   }
 
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={title || "Delete"}>
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={title || 'Delete'}>
       <Grid container spacing={4}>
         <Grid xs={12} item>
           {content}
