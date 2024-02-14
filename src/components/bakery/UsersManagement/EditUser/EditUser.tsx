@@ -27,6 +27,7 @@ const EditUser: React.FC<EditUserProps> = props => {
 
     const [regionId, setRegionId]=useState('')
     const [storeId, setStoreId]=useState('')
+    const [traceabilityId, setTraceabilityId]=useState('')
     const [adminId, setAdminId]=useState('')
     const [isAdmin, setIsAdmin]=useState(false)
     const [traineeTypes, setTraineeTypes] = useState<ValueLabelInterface[]>(null)
@@ -39,6 +40,9 @@ const EditUser: React.FC<EditUserProps> = props => {
 
     const [isTraineeChecked, setIsTraineeChecked] = useState(false)
     const [traineeValue, setTraineeValue] = useState<ValueLabelInterface>(null)
+
+    const [isTraceabilityOpChecked, setIsTraceabilityOpChecked] = useState(false)
+    const [traceabilityOpValue, setTraceabilityOpValue] = useState<ValueLabelInterface>(null)
    
     useEffect(() => {
       if(isModalOpen) refetchEditItem()
@@ -51,6 +55,7 @@ const EditUser: React.FC<EditUserProps> = props => {
         if(result) {
           setRegionId(result.find(el => el.name === 'REGION_MANAGER')?.id)
           setStoreId(result.find(el => el.name === 'STORE_MANAGER')?.id)
+          setTraceabilityId(result.find(el => el.name === 'TRACEABILITY_OPERATOR')?.id)
           setAdminId(result.find(el => el.name === 'ADMIN')?.id)
         }
         return result || []
@@ -72,6 +77,7 @@ const EditUser: React.FC<EditUserProps> = props => {
           const result = await makeCoreGetRequest(`/bakery/user/${editUserId}`)
           refetchStructRegion()
           refetchStructStore()
+          refetchStructTraceabilityOp()
           return result || null
         }
         return null
@@ -126,6 +132,25 @@ const EditUser: React.FC<EditUserProps> = props => {
       }
     )
 
+  const { data: structTraceabilityOp, refetch: refetchStructTraceabilityOp } = useQuery(
+    ['traceabilityOp', traceabilityId],
+    async () => {
+      const result = await makeCoreGetRequest(`/bakery/structure/role/${traceabilityId}`)
+      const resultOptions = toAsyncSelectOptions(result, 'id', 'name')
+
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching traceability operator dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
+    }
+  )
+
     const submitTask = async (values: EditUserItem) => {
         await makeCorePutRequest(`/bakery/user/${editUserId}`, values)
     }
@@ -149,6 +174,9 @@ const EditUser: React.FC<EditUserProps> = props => {
 
     const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
     const getStructureRolesProps = {
+      isTraceabilityOpChecked,
+      traceabilityId,
+      traceabilityOpValue,
       isRegionManagerChecked,
       isStoreManagerChecked,
       isTraineeChecked,
@@ -185,6 +213,9 @@ const EditUser: React.FC<EditUserProps> = props => {
         case 'storeMg': 
           setStoreMgValue(value)
           break
+        case 'traceabilityOp':
+          setTraceabilityOpValue(value)
+          break
         default:
           setTraineeValue(value)
           break
@@ -192,11 +223,12 @@ const EditUser: React.FC<EditUserProps> = props => {
     }
     
     useEffect(() => {
-      if(editItem?.structureRoles?.length && editItem && roles && structRegion && structStore) {
+      if(editItem?.structureRoles?.length && editItem && roles && structRegion && structStore && structTraceabilityOp) {
         editItem?.structureRoles?.forEach(strRole => {
           const role = roles?.find(role => role.id === strRole.roleId)
           if(role?.name === 'REGION_MANAGER') updateStateWithExistingValues(strRole, structRegion, setIsRegionManagerChecked, setRegionMgValue)
           if(role?.name === 'STORE_MANAGER') updateStateWithExistingValues(strRole, structStore, setIsStoreManagerChecked, setStoreMgValue)
+          if(role?.name === 'TRACEABILITY_OPERATOR') updateStateWithExistingValues(strRole, structTraceabilityOp, setIsTraceabilityOpChecked, setTraceabilityOpValue)
           if(role?.name.includes('TRAINEE')) updateStateWithExistingValues(strRole, roles, setIsTraineeChecked, setTraineeValue, true)
           if(role?.name === 'ADMIN') {
             setIsAdmin(true)
@@ -204,7 +236,7 @@ const EditUser: React.FC<EditUserProps> = props => {
         })
       }
 
-    },[roles, editItem, structRegion, structStore])
+    },[roles, editItem, structRegion, structStore, structTraceabilityOp])
 
     useEffect(() => {
       if (roles?.length) {
@@ -288,6 +320,30 @@ const EditUser: React.FC<EditUserProps> = props => {
                     required={isStoreManagerChecked}
                     error={isStoreManagerChecked && !storeMgValue?.value}
                     helperText={isStoreManagerChecked && !storeMgValue?.value && 'Store manager is required'}
+                    />
+                </Grid>
+              }
+
+              <Grid xs={12} item>
+                <Checkbox
+                  checked={isTraceabilityOpChecked}
+                  label={'TRACEABILITY_OPERATOR'}
+                  onChange={() => setIsTraceabilityOpChecked(!isTraceabilityOpChecked)}
+                />
+              </Grid>
+              {isTraceabilityOpChecked &&
+                <Grid xs={12} item>
+                  <AsyncAutocomplete
+                    disableClearable
+                    variant="outlined"
+                    name="traceability_operator"
+                    label="Structura asociata"
+                    value={traceabilityOpValue}
+                    options={structTraceabilityOp}
+                    onChange={(val) => handleChange('traceabilityOp', val)}
+                    required={isTraceabilityOpChecked}
+                    error={isTraceabilityOpChecked && !traceabilityOpValue?.value}
+                    helperText={isTraceabilityOpChecked && !traceabilityOpValue?.value && 'Traceability operator is required'}
                     />
                 </Grid>
               }

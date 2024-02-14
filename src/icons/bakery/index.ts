@@ -56,3 +56,4 @@ export { default as OwnProductionTraceabilityReportTOSubcategory } from './submo
 export { default as OwnProductionTraceabilityTOSubcategory } from './submodules/traceabilityOperator/OwnProductionTraceabilityTOSubcategory'
 export { default as ProductManagementTOSubcategory } from './submodules/traceabilityOperator/ProductManagementTOSubcategory'
 export { default as ReceivedProductsTOSubcategory } from './submodules/traceabilityOperator/ReceivedProductsTOSubcategory'
+export { default as CarrefourLogoBlackIcon } from './submodules/traceabilityOperator/CarrefourLogoBlackIcon'
