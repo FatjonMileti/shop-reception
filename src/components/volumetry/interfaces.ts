@@ -64,3 +64,29 @@ export interface EvaluationReportSummary {
   departmentUtilizedVsStandardHours: number
   departmentUtilizedVsStandardFTE: number
 }
+
+export interface AttendanceModalProps {
+  isModalOpen: boolean
+  closeModal: Function
+  departmentId: number | string
+}
+
+export interface EmployeeAttendanceProps {
+  isEmployeesLoading: boolean
+  employees: any[]
+  toggleEmployee: Function
+  updateEmplpyeeTime: Function
+  closeModal: Function
+  handleSubmit: Function
+  increaseStep: Function
+  isXs: boolean
+}
+
+export interface AllocationListProps {
+  employees: any[]
+  toggleEmployee: Function
+  closeModal: Function
+  allocateEmployees: Function
+  allocateEmployeesAllSelected: boolean
+  setAllocateEmployeesAllSelected: Function
+}

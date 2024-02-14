@@ -1,10 +1,18 @@
 import { Checkbox, Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Box, Grid } from '@mui/material'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
+import { AllocationListProps } from 'components/volumetry/interfaces'
 import { formatTime } from 'utils/helpers'
 
-const AllocationList = props => {
-  const { employees, toggleEmployee, closeModal, allocateEmployees } = props
+const AllocationList = (props: AllocationListProps) => {
+  const {
+    employees,
+    toggleEmployee,
+    closeModal,
+    allocateEmployees,
+    allocateEmployeesAllSelected,
+    setAllocateEmployeesAllSelected
+  } = props
 
   const submitStep = () => {
     allocateEmployees()
@@ -12,6 +20,11 @@ const AllocationList = props => {
 
   return (
     <Box>
+      <Button
+        variant="contained"
+        label={allocateEmployeesAllSelected ? 'Debifeaza toti angajatii' : 'Bifeaza toti angajatii'}
+        onClick={() => setAllocateEmployeesAllSelected(!allocateEmployeesAllSelected)}
+      />
       {employees
         .filter(employee => employee.isPresent)
         .map(employee => (

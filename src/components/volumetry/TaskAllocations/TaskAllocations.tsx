@@ -40,7 +40,6 @@ const TaskAllocations = () => {
   )
   const [selectedRowId, setSelectedRowId] = useState('')
   const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(false)
-  const [allExpanded, setAllExpanded] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -217,8 +216,6 @@ const TaskAllocations = () => {
               rowActionsWidth="90px"
               selectedRowId={selectedRowId}
               shouldRefreshedSelectedRowDetails={shouldRefreshAllocationsData}
-              hasExpandCollapseAll
-              allExpanded={allExpanded}
             />
           </Box>
           <EditCurrentTaskTemplate
@@ -231,7 +228,6 @@ const TaskAllocations = () => {
             isModalOpen={isAttendanceModalOpen}
             closeModal={closeAteendanceModal}
             departmentId={departmentFilterValue.value}
-            setAllExpanded={setAllExpanded}
           />
         </>
       )}

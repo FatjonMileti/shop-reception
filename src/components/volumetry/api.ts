@@ -316,7 +316,7 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
 }
 
 export const getEmployeesAttendance = (
-  departmentId: number,
+  departmentId: number | string,
   showNotification: Function,
   validateQuery: boolean = true
 ) => {

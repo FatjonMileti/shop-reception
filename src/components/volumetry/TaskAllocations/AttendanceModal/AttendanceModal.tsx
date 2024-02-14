@@ -10,12 +10,14 @@ import { toEmployeesAllocationPayload, toEmployeesAttendancePayload } from '../s
 import { EmployeeAttendance } from './EmployeeAttendance'
 import { useMediaQuery } from '@mui/material'
 import { AllocationList } from './AllocationList'
+import { AttendanceModalProps } from 'components/volumetry/interfaces'
 
-const AttendanceModal = props => {
-  const { isModalOpen, closeModal, departmentId, setAllExpanded } = props
+const AttendanceModal = (props: AttendanceModalProps) => {
+  const { isModalOpen, closeModal, departmentId } = props
 
   const [employees, setEmployees] = useState([])
   const [activeStep, setActiveStep] = useState(0)
+  const [allocateEmployeesAllSelected, setAllocateEmployeesAllSelected] = useState(true)
 
   const { showNotification } = useNotification()
 
@@ -33,12 +35,20 @@ const AttendanceModal = props => {
     }
   }, [employeesShifts])
 
+  useEffect(() => {
+    const newEmployees = employees.map(emp => ({
+      ...emp,
+      shouldAllocate: allocateEmployeesAllSelected
+    }))
+    setEmployees(newEmployees)
+  }, [allocateEmployeesAllSelected])
+
   const updateEmployeesAttendance = async values => {
     await makeCorePutRequest('/volumetry/workers-schedule', values)
   }
 
   const { mutate: mutateEmployeesAttendance } = useMutation(updateEmployeesAttendance, {
-    onSuccess: res => {},
+    onSuccess: () => {},
     onError: error =>
       handleQueryError(error, 'A aparut o eroare la alocarea automata.', showNotification)
   })
@@ -51,9 +61,8 @@ const AttendanceModal = props => {
   }
 
   const { mutate: allocateEmployees } = useMutation(autoAllocateEmployees, {
-    onSuccess: res => {
-      closeModal()
-      setAllExpanded(true)
+    onSuccess: () => {
+      resetModal()
       showNotification({
         message: 'Alocarea automata a rulat cu succes',
         type: 'success'
@@ -97,11 +106,10 @@ const AttendanceModal = props => {
   }
 
   const resetModal = () => {
+    closeModal()
     setActiveStep(0)
     formik.resetForm()
   }
-
-  console.log(employees)
 
   return (
     <Modal
@@ -130,10 +138,10 @@ const AttendanceModal = props => {
         <AllocationList
           employees={employees}
           toggleEmployee={toggleAllocateEmployee}
-          isXs={isXs}
           closeModal={closeModal}
           allocateEmployees={allocateEmployees}
-          resetModal={resetModal}
+          allocateEmployeesAllSelected={allocateEmployeesAllSelected}
+          setAllocateEmployeesAllSelected={setAllocateEmployeesAllSelected}
         />
       )}
     </Modal>

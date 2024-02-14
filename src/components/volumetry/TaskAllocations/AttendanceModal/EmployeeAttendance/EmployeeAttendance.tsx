@@ -1,9 +1,9 @@
-import { ChangeEvent } from 'react'
 import { Box, CircularProgress, Grid } from '@mui/material'
-import { Button, Checkbox, Input, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
+import { EmployeeAttendanceProps } from 'components/volumetry/interfaces'
 
-const EmployeeAttendance = props => {
+const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
   const {
     isEmployeesLoading,
     employees,
