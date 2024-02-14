@@ -4,13 +4,13 @@ import { useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
-import { handleQueryError } from 'components/volumetry/utils'
 import { useNotification } from 'hooks'
 import { debounce } from '@mui/material'
 import { AddActionIcon, EditActionIcon } from 'icons'
 import OwnProductionTraceabilityDescription from './OwnProductionTraceabilityDescription'
 import { OwnProductionTraceabilityModal } from './OwnProductionTraceabilityModal/OwnProductionTraceabilityModal'
 import { EditOwnProductionTraceabilityModal } from './EditOwnProductionTraceabilityModal/EditOwnProductionTraceabilityModal'
+import { handleQueryError } from 'utils/helpers'
 
 export const OwnProductionTraceability = () => {
   const { showNotification } = useNotification()
