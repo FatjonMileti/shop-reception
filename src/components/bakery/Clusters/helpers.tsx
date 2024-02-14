@@ -21,7 +21,7 @@ export const columns = [
       collapsible: 'true',
       render: row => (
         <Box>
-          <IconCell value={row.mandatory ? 'active' : 'inactive'} />
+          <IconCell value={row.mandatory ? 'activ' : 'inactiv'} />
         </Box>
       )
     }
@@ -31,6 +31,6 @@ export const getInitialValues = editItem => ({
     id: editItem?.id ?? '',
     name: editItem?.name ?? '',
     mandatory: editItem?.mandatory ? gamaProdus[0].value : gamaProdus[1].value,
-    enable: editItem?.enable ? 'Active' : 'Inactive',
+    enable: editItem?.enable ? 'Activ' : 'Inactiv',
 })
 

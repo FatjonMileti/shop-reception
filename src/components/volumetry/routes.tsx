@@ -3,8 +3,12 @@ import { Route } from 'react-router-dom'
 import { URLS } from './constants'
 import { EmployeeManagement } from './EmployeeManagement'
 import { TaskManagement } from './TaskManagement'
+import { TaskAllocations } from './TaskAllocations'
+import { NormsReport } from './NormsReport'
+import { EvaluationReports } from './EvaluationReports'
+import { AssignedTasks } from './AssignedTasks'
+import { EmployeesStatus } from './EmployeesStatus'
 import { TaskAllocation } from './TaskAllocation'
-import EvaluationReports from 'components/volumetry/EmployeeManagement/EvaluationReports/EvaluationReports'
 
 export const useVolumetryRoutes = applicationPages => {
   return (
@@ -40,6 +44,46 @@ export const useVolumetryRoutes = applicationPages => {
         }
       />
       <Route
+        path={URLS.AUTH_TASK_ALLOCATIONS}
+        element={
+          <PrivateRoute
+            component={TaskAllocations}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_NORMS_REPORTS}
+        element={
+          <PrivateRoute
+            component={NormsReport}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_ASSIGNED_TASKS}
+        element={
+          <PrivateRoute
+            component={AssignedTasks}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_ALLOCATED_EMPLOYEES_STATUS}
+        element={
+          <PrivateRoute
+            component={EmployeesStatus}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+       <Route
         path={URLS.AUTH_TASK_ALLOCATION}
         element={
           <PrivateRoute

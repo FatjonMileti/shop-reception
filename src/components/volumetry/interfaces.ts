@@ -19,25 +19,40 @@ export interface EmployeeManagementItem {
   location?: string
 }
 
+export interface TaskManagementTableItem {
+  id?: string | number
+  name: string
+  rayonsOrDepartment: string
+  recommendedStartHour: string
+  recommendedEndHour: string
+  frequency: string
+  standardProductivityValue: number
+  measurementUnit: string
+  workVolumeSource: string
+  priority: string
+  isActive: boolean
+  volumetryLocationCategory: string
+}
+
 export interface TaskManagementItem {
   id?: string | number
   name: string
-  rayonsOrDepartment: string | AsyncAutocompleteOption
+  rayonsOrDepartment?: AsyncAutocompleteOption
   recommendedStartHour: string
   recommendedEndHour: string
-  frequency: string | AsyncAutocompleteOption
+  frequency: AsyncAutocompleteOption
   standardProductivityValue: number
-  measurementUnit: string | AsyncAutocompleteOption
-  workVolumeSource: string | AsyncAutocompleteOption
-  priority: string | AsyncAutocompleteOption
+  measurementUnit: AsyncAutocompleteOption
+  workVolumeSource: AsyncAutocompleteOption
+  priority: AsyncAutocompleteOption
   isActive: boolean
-  volumetryLocationCategory: string | AsyncAutocompleteOption
-  raion?: string | AsyncAutocompleteOption
+  volumetryLocationCategory: AsyncAutocompleteOption
+  rayons: AsyncAutocompleteOption[]
 }
 
 export interface Department {
   id: number
-  name: string
+  departmentName: string
   description: string
 }
 

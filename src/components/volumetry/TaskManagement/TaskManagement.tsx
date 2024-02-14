@@ -2,101 +2,26 @@ import { useState } from 'react'
 import { Box } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './TaskManagement.modules.scss'
-import { CRUDAction, TaskManagementItem } from '../interfaces'
+import { CRUDAction, TaskManagementTableItem } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
-import { toTableItems } from './serializers'
 import { AddActionIcon, EditActionIcon } from 'icons'
-import { IconCell } from 'components/core-ui/IconCell'
-import { DescriptionText } from 'components/core-ui/DescriptionText'
-import { handleQueryError } from '../utils'
+
+import { handleQueryError } from 'utils/helpers'
 import { CreateEditTask } from './CreateEditTask'
 import { VOLUMETRY_TASKS_URL } from './constants'
-import { buildTableFilterFields } from './utils'
-import { getCategoriesOptions, getDepartmentsOptions } from '../api'
+import { buildTableFilterFields, columns } from './helpers'
+import {
+  getCategoriesOptions,
+  getDepartmentsOptions,
+  getFrequencyOptions,
+  getPrioritiesOptions,
+  getWorkVolumesOptions
+} from '../api'
 import { useNotification } from 'hooks'
 
-export const columns = [
-  {
-    title: 'Departament / Raioane',
-    field: 'rayonsOrDepartment',
-    align: 'left',
-    type: 'string'
-  },
-  {
-    title: 'Nume task',
-    field: 'name',
-    align: 'left',
-    type: 'string',
-    width: '250px'
-  },
-  {
-    title: 'Ora recomandata de inceput',
-    field: 'recommendedStartHour',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Ora recomandata de final',
-    field: 'recommendedEndHour',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Frecventa',
-    field: 'frequency',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Productivitate',
-    field: 'standardProductivityValue',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Sursa volum de lucru',
-    field: 'workVolumeSource',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    minWidth: '200px',
-    render: row => <DescriptionText value={row.workVolumeSource} />
-  },
-  {
-    title: 'Prioritate',
-    field: 'priority',
-    align: 'left',
-    type: 'number',
-    collapsible: true
-  },
-  {
-    title: 'Categorie',
-    field: 'volumetryLocationCategory',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Activ',
-    field: 'isActive',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    render: row => (
-      <Box>
-        <IconCell value={row.isActive ? 'active' : 'inactive'} />
-      </Box>
-    )
-  }
-]
-
 const TaskManagement = () => {
-  const [tableItems, setTableItems] = useState<TaskManagementItem[]>([])
+  const [tableItems, setTableItems] = useState<TaskManagementTableItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -106,6 +31,9 @@ const TaskManagement = () => {
 
   const { data: categoryOptions } = getCategoriesOptions(showNotification)
   const { data: departmentOptions } = getDepartmentsOptions(showNotification)
+  const { data: priorityOprions } = getPrioritiesOptions(showNotification)
+  const { data: frequencyOptions } = getFrequencyOptions(showNotification)
+  const { data: workVolumeOptions } = getWorkVolumesOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -121,7 +49,7 @@ const TaskManagement = () => {
         })
       )
 
-      setTableItems(toTableItems(response.list))
+      setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -155,7 +83,7 @@ const TaskManagement = () => {
         />
         <Table
           hideCheckbox
-          orderBy="department.name"
+          orderBy="name"
           order="desc"
           columns={columns}
           items={tableItems}
@@ -164,7 +92,13 @@ const TaskManagement = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
-          filters={buildTableFilterFields(departmentOptions || [], categoryOptions || [])}
+          filters={buildTableFilterFields(
+            departmentOptions || [],
+            categoryOptions || [],
+            priorityOprions || [],
+            frequencyOptions || [],
+            workVolumeOptions || []
+          )}
           rowActions={[
             {
               label: 'Edit',

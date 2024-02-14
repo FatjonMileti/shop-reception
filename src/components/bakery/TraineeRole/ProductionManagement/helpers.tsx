@@ -28,7 +28,13 @@ export const columns = [
     type: 'string',
     defaultPrintSelected: true
   },
-
+  {
+    title: 'Familie',
+    field: 'familyName',
+    align: 'left',
+    type: 'string',
+    defaultPrintSelected: false
+  },
   {
     title: 'Subfamilie',
     field: 'subfamily',
@@ -102,7 +108,7 @@ export const columns = [
     type: 'string',
     render: (row: any) => (
       <Box>
-        <BooleanText value={row.inPromotion} onSuccess="O" onFailure="F" />
+        <BooleanText value={row.clusterMandatory} onSuccess="O" onFailure="F" />
       </Box>
     )
   },
@@ -161,7 +167,7 @@ export const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'family',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
@@ -172,11 +178,10 @@ export const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
     ),
     type: 'autocomplete',
     label: 'Familie',
-    clearFiltersOnChange: ['subfamily']
   },
   {
     name: 'subfamily',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"

@@ -21,7 +21,7 @@ import {
   getTask,
   getWorkVolumesOptions
 } from 'components/volumetry/api'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 
 interface CreateEditTaskProps {
   isModalOpen: boolean
@@ -58,13 +58,16 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
 
   const { data: categoryOptions } = getCategoriesOptions(showNotification)
   const { data: priorityOptions } = getPrioritiesOptions(showNotification)
-  const { data: departmentOptions, isLoading: isDepartmentsOptionsLoading } =
-    getCategoryDepartmentsOptions(categoryId, shouldFetchDepartments, showNotification)
+  const { data: departmentOptions } = getCategoryDepartmentsOptions(
+    categoryId,
+    shouldFetchDepartments,
+    showNotification
+  )
 
   const { data: raionOptions, isLoading: isRaionOptionsLoading } = getRaionsOptions(
     departmentId,
     shouldFetchRaions,
-    value => formik.setFieldValue('raion', value),
+    value => formik.setFieldValue('rayons', value),
     showNotification
   )
 
@@ -73,20 +76,10 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
   const { data: workVolumeSourceOptions } = getWorkVolumesOptions(showNotification)
 
   const submitTask = async values => {
-    const payload = {
-      ...values,
-      volumetryLocationCategory: values.volumetryLocationCategory.value,
-      rayonsOrDepartment: values.rayonsOrDepartment.value,
-      raion: values.raion.value,
-      frequency: values.frequency.value,
-      measurementUnit: values.measurementUnit.value,
-      workVolumeSource: values.workVolumeSource.value,
-      priority: values.priority.value
-    }
     if (editItem) {
-      await makeCorePutRequest(`/volumetry/task-templates/${editItemId}`, payload)
+      await makeCorePutRequest(`/volumetry/task-templates/${editItemId}`, values)
     } else {
-      await makeCorePostRequest('/volumetry/task-templates/', payload)
+      await makeCorePostRequest('/volumetry/task-templates', values)
     }
   }
 
@@ -148,43 +141,43 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
           />
         </Grid>
 
-        {!isDepartmentsOptionsLoading && (
-          <Grid xs={12} md={6} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="rayonsOrDepartment"
-              label="Raion/Departament"
-              value={formik.values.rayonsOrDepartment}
-              disabled={formik.values.volumetryLocationCategory === null}
-              options={departmentOptions || []}
-              onChange={value => {
-                formik.setFieldValue('rayonsOrDepartment', value)
-              }}
-              error={!!formik.errors.rayonsOrDepartment}
-              helperText={formik.errors.rayonsOrDepartment as string}
-              required
-            />
-          </Grid>
-        )}
+        <Grid xs={12} md={6} item>
+          <AsyncAutocomplete
+            variant="outlined"
+            name="rayonsOrDepartment"
+            label="Raion/Departament"
+            value={formik.values.rayonsOrDepartment}
+            disabled={formik.values.volumetryLocationCategory === null}
+            options={departmentOptions || []}
+            onChange={value => {
+              formik.setFieldValue('rayonsOrDepartment', value)
+            }}
+            error={!!formik.errors.rayonsOrDepartment}
+            helperText={formik.errors.rayonsOrDepartment as string}
+            required
+          />
+        </Grid>
 
-        {formik.values.rayonsOrDepartment !== null && !isRaionOptionsLoading && (
-          <Grid xs={12} md={12} item>
-            <AsyncAutocomplete
-              variant="outlined"
-              name="raion"
-              label="Raion"
-              value={formik.values.raion || []}
-              options={raionOptions}
-              onChange={value => {
-                formik.setFieldValue('raion', value)
-              }}
-              error={!!formik.errors.raion}
-              helperText={formik.errors.raion as string}
-              required
-              multiple
-            />
-          </Grid>
-        )}
+        {formik.values.rayonsOrDepartment !== null &&
+          !isRaionOptionsLoading &&
+          formik.values.rayonsOrDepartment.locationType !== 'SUPER' && (
+            <Grid xs={12} md={12} item>
+              <AsyncAutocomplete
+                variant="outlined"
+                name="rayons"
+                label="Raion"
+                value={formik.values.rayons || []}
+                options={raionOptions}
+                onChange={value => {
+                  formik.setFieldValue('rayons', value)
+                }}
+                error={!!formik.errors.rayons}
+                helperText={formik.errors.rayons as string}
+                required
+                multiple
+              />
+            </Grid>
+          )}
         <Grid xs={12} md={6} item>
           <TimePicker
             label="Ora recomandata de inceput"

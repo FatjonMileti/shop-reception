@@ -45,13 +45,17 @@ const ProductManagementRegion = () => {
   )
 
   const familiesQuery = useQuery(
-    ['families', storeFilterValue?.value],
+    ['families', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+        ?.value || []) as AutoCompleteValue[]
+
       const result = await makeCoreGetRequest(
         '/bakery/store/families',
         {
           params: {
             store: storeFilterValue?.value,
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
           },
           paramsSerializer: { indexes: null }
         }
@@ -156,6 +160,8 @@ const ProductManagementRegion = () => {
               label="Magazin"
               options={stores}
               onSelect={handleStoreFilterChange}
+              placeholderButton="Selecteaza"
+              showSearch
             />
           </Grid>
         </Grid>
@@ -182,6 +188,11 @@ const ProductManagementRegion = () => {
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
+          filtersLabel="Filtreaza"
+          filtersButtonLabel="Filtreaza"
+          appliedFiltersLabel="Filtre"
+          cancelFiltersButtonLabel="Anuleaza"
+          applyFiltersButtonLabel="Aplica"
         />}
       </Grid>
     </div>

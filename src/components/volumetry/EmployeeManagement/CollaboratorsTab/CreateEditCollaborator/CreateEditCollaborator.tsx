@@ -9,7 +9,7 @@ import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { EmployeeManagementItem } from 'components/volumetry/interfaces'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 import { AsyncAutocompleteOption } from 'components/core-ui/AsyncAutocomplete/AsyncAutocompleteDefinitions'
 import { useMemo } from 'react'
 import { toCollaboratorPayload } from 'components/volumetry/EmployeeManagement/CollaboratorsTab/CreateEditCollaborator/serializers'
@@ -104,7 +104,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
           <AsyncAutocomplete
             variant="outlined"
             name="department"
-            label="Selecteaza magazin"
+            label="Selecteaza departament"
             disableClearable
             value={formik.values.department}
             options={departmentsOptions || []}

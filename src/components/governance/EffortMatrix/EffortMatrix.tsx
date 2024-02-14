@@ -113,37 +113,36 @@ const EffortMatrix = () => {
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[
-            canEdit
-              ? {
-                  label: 'Edit',
-                  labelColor: 'white',
-                  typographyVariant: 'medium',
-                  backgroundColor: '#16a085',
-                  desktopIcon: <EditActionIcon />,
+            canEdit && {
+              label: 'Edit',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#16a085',
+              desktopIcon: <EditActionIcon />,
 
-                  onClick: (e, rowId) => selectRow(rowId, 'edit')
-                }
-              : {},
-            canDelete
-              ? {
-                  label: 'Delete',
-                  labelColor: 'white',
-                  typographyVariant: 'medium',
-                  backgroundColor: '#d9534f',
-                  desktopIcon: <DeleteActionIcon />,
-
-                  onClick: (e, rowId) => selectRow(rowId, 'delete')
-                }
-              : {}
-          ]}
-          rowActionsWidth="130px"
-          toolbarActions={[
-            {
-              label: 'Add',
-              icon: <AddActionIcon />,
-              onClick: openNewModal
+              onClick: (_e, rowId) => selectRow(rowId, 'edit')
+            },
+            canDelete && {
+              label: 'Delete',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#d9534f',
+              desktopIcon: <DeleteActionIcon />,
+              onClick: (_e, rowId) => selectRow(rowId, 'delete')
             }
           ]}
+          rowActionsWidth="130px"
+          toolbarActions={
+            canCreate
+              ? [
+                  {
+                    label: 'Add',
+                    icon: <AddActionIcon />,
+                    onClick: openNewModal
+                  }
+                ]
+              : []
+          }
           rowsPerPageOptions={[20, 50, 100]}
           rowsPerPage={50}
         />

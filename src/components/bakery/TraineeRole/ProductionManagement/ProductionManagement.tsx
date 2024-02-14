@@ -55,13 +55,18 @@ const ProductionManagement = () => {
   )
 
   const familiesQuery = useQuery(
-    ['cadentier-families-store', storeFilterValue?.value],
+    ['cadentier-families-store', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+      ?.value || []) as AutoCompleteValue[]
+
+
       const result = await makeCoreGetRequest(
         '/bakery/store/cadentier/families',
         {
           params: {
             store: storeFilterValue?.value,
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
           },
           paramsSerializer: { indexes: null }
         }
@@ -159,7 +164,7 @@ const ProductionManagement = () => {
       setTableState({
         order,
         orderBy,
-        tableFilters
+        tableFilters: [...tableFilters, { name: 'store', value: storeFilterValue?.value }]
       })
 
       window.history.replaceState(
@@ -171,7 +176,7 @@ const ProductionManagement = () => {
             order,
             orderBy,
             searchText,
-            tableFilters
+            tableFilters: [...tableFilters, { name: 'store', value: storeFilterValue?.value }]
           }
         },
         document.title
@@ -221,6 +226,8 @@ const ProductionManagement = () => {
               label="Magazin"
               options={filterOptions}
               onSelect={handleStoreFilterChange}
+              placeholderButton='Selecteaza'
+              showSearch
             />
           </Grid>
         </Grid>
@@ -264,7 +271,12 @@ const ProductionManagement = () => {
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
-          />
+            filtersLabel="Filtreaza"
+            filtersButtonLabel="Filtreaza"
+            appliedFiltersLabel="Filtre"
+            cancelFiltersButtonLabel="Anuleaza"
+            applyFiltersButtonLabel="Aplica"
+            />
         )}
       </Grid>
     </div>

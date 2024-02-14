@@ -40,9 +40,13 @@ const EditUser: React.FC<EditUserProps> = props => {
 
     const [isTraineeChecked, setIsTraineeChecked] = useState(false)
     const [traineeValue, setTraineeValue] = useState<ValueLabelInterface>(null)
-    
+
     const [isTraceabilityOpChecked, setIsTraceabilityOpChecked] = useState(false)
     const [traceabilityOpValue, setTraceabilityOpValue] = useState<ValueLabelInterface>(null)
+   
+    useEffect(() => {
+      if(isModalOpen) refetchEditItem()
+    }, [isModalOpen])
 
     const { data: roles } = useQuery(
       ['role'],
@@ -66,7 +70,7 @@ const EditUser: React.FC<EditUserProps> = props => {
       },
     )
     
-    const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
+    const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
       ['user', editUserId],
       async () => {
         if (editUserId) {
@@ -128,24 +132,24 @@ const EditUser: React.FC<EditUserProps> = props => {
       }
     )
 
-    const { data: structTraceabilityOp, refetch: refetchStructTraceabilityOp } = useQuery(
-      ['traceabilityOp', traceabilityId],
-      async () => {
-        const result = await makeCoreGetRequest(`/bakery/structure/role/${traceabilityId}`)
-        const resultOptions = toAsyncSelectOptions(result, 'id', 'name')
+  const { data: structTraceabilityOp, refetch: refetchStructTraceabilityOp } = useQuery(
+    ['traceabilityOp', traceabilityId],
+    async () => {
+      const result = await makeCoreGetRequest(`/bakery/structure/role/${traceabilityId}`)
+      const resultOptions = toAsyncSelectOptions(result, 'id', 'name')
 
-        return resultOptions || []
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching traceability operator dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
       },
-      {
-        onError: error => {
-          showNotification({
-            message: `Error while fetching traceability operator dropdown data. ${formatErrorMessage(error)}`,
-            type: 'error'
-          })
-        },
-        enabled: false
-      }
-    )
+      enabled: false
+    }
+  )
 
     const submitTask = async (values: EditUserItem) => {
         await makeCorePutRequest(`/bakery/user/${editUserId}`, values)
@@ -170,18 +174,18 @@ const EditUser: React.FC<EditUserProps> = props => {
 
     const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
     const getStructureRolesProps = {
+      isTraceabilityOpChecked,
+      traceabilityId,
+      traceabilityOpValue,
       isRegionManagerChecked,
       isStoreManagerChecked,
-      isTraceabilityOpChecked,
       isTraineeChecked,
       isAdmin,
       regionId,
       storeId,
       adminId,
-      traceabilityId,
       regionMgValue,
       storeMgValue,
-      traceabilityOpValue,
       traineeValue
     }
 
@@ -193,7 +197,7 @@ const EditUser: React.FC<EditUserProps> = props => {
         onSubmit: async (values: any, { resetForm }) => {
             const payload = {
                 ...values,
-                enable: values.enable === 'Active',
+                enable: values.enable === 'Activ',
                 structureRoles: getStructureRoles(getStructureRolesProps)
             }
             mutate(payload)
@@ -209,7 +213,7 @@ const EditUser: React.FC<EditUserProps> = props => {
         case 'storeMg': 
           setStoreMgValue(value)
           break
-        case 'traceabilityOp': 
+        case 'traceabilityOp':
           setTraceabilityOpValue(value)
           break
         default:
@@ -248,7 +252,7 @@ const EditUser: React.FC<EditUserProps> = props => {
     },[roles])
 
     return (
-        <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'} modalWidth="50%">
+        <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Editeaza'} modalWidth="50%">
           <Grid container spacing={2}>
             {(isLoading || isLoadingEditItem) ? (
               <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -382,8 +386,8 @@ const EditUser: React.FC<EditUserProps> = props => {
               </Grid>
     
               <Grid xs={12} item className={s.modalButtons}>
-                <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-                <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+                <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+                <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
               </Grid>
             </>)}
           </Grid>

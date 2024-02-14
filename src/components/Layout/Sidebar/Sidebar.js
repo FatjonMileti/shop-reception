@@ -20,7 +20,7 @@ const staticItems = [
     primaryText: 'Prima pagina',
     type: 'icon',
     href: '/'
-  },
+  }
 
   // {
   //   disablePadding: true,
@@ -46,7 +46,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
 
   const [items, setItems] = useState([])
   const [selectedItem, setSelectedItem] = useState(0)
-  const sidebarRef = useRef(null);
+  const sidebarRef = useRef(null)
 
   const { showNotification } = useNotification()
 
@@ -55,18 +55,18 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
   const auth = useAuth()
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
+    const handleOutsideClick = event => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-        handleCloseMenu();
+        handleCloseMenu()
       }
-    };
+    }
 
-    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick)
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, [handleCloseMenu]);
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [handleCloseMenu])
 
   useEffect(() => {
     ;(async () => {
@@ -120,66 +120,69 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
       headerClass={s.drawerHeader}
       paperClassName={s.itemsListContainer}
     >
-        <div
-          ref={sidebarRef}
-          className={cn(
-            s.itemsList,
-            { [s.padding90]: storeName || regionName },
-            { [s.padding130]: storeName && regionName }
-          )}
-        >
-          <nav className={s.section}>
-            <List
-              subheader={{
-                component: 'div',
-                content: '',
-                style: { fontSize: '70%' }
-              }}
-              items={staticItems.map(item => ({
-                ...item,
-                selected: selectedItem === item.index
-              }))}
-              onItemClick={handleItemClick}
-            />
-          </nav>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Typography style={{ margin: '24px 8px 24px 24px', fontSize: '20px', fontWeight: 700 }}>
-              My apps
-            </Typography>
-            <Icon_v2 iconName="Folder" iconType="Icon" />
-          </Box>
-          <nav className={s.section}>
-            <List
-              subheader={{
-                component: 'div',
-                content: '',
-                style: { fontSize: '70%' }
-              }}
-              items={toSelectedMenuItems(items, selectedItem)}
-              onItemClick={handleItemClick}
-            />
-          </nav>
-          <br />
-          <nav className={s.section}>
-            <List
-              subheader={{
-                component: 'div',
-                content: '',
-                style: { fontSize: '70%' }
-              }}
-              items={[
-                {
-                  disablePadding: true,
-                  icon: <Icon_v2 iconName="Logout" iconType="Menu" />,
-                  index: 2,
-                  primaryText: 'Sign Out',
-                  type: 'icon'
-                }
-              ]}
-              onItemClick={handleLogout}
-            />
-          </nav>
-        </div>
+      <div
+        ref={sidebarRef}
+        className={cn(
+          s.itemsList,
+          { [s.padding90]: storeName || regionName },
+          { [s.padding130]: storeName && regionName }
+        )}
+      >
+        <nav className={s.section}>
+          <List
+            subheader={{
+              component: 'div',
+              content: '',
+              style: { fontSize: '70%' }
+            }}
+            items={staticItems.map(item => ({
+              ...item,
+              selected: selectedItem === item.index
+            }))}
+            onItemClick={handleItemClick}
+          />
+        </nav>
+
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography style={{ margin: '24px 8px 24px 24px', fontSize: '20px', fontWeight: 700 }}>
+            My apps
+          </Typography>
+          <Icon_v2 iconName="Folder" iconType="Icon" />
+        </Box>
+
+        <nav className={s.section}>
+          <List
+            subheader={{
+              component: 'div',
+              content: '',
+              style: { fontSize: '70%' }
+            }}
+            items={toSelectedMenuItems(items, selectedItem)}
+            onItemClick={handleItemClick}
+          />
+        </nav>
+
+        <br />
+        <nav className={s.section}>
+          <List
+            subheader={{
+              component: 'div',
+              content: '',
+              style: { fontSize: '70%' }
+            }}
+            items={[
+              {
+                disablePadding: true,
+                icon: <Icon_v2 iconName="Logout" iconType="Menu" />,
+                index: 2,
+                primaryText: 'Sign Out',
+                type: 'icon'
+              }
+            ]}
+            onItemClick={handleLogout}
+          />
+        </nav>
+      </div>
     </Drawer>
   )
 }

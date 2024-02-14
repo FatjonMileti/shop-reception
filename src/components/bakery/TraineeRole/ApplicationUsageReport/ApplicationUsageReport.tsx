@@ -15,6 +15,7 @@ import dayjs from 'dayjs'
 import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { ColumnsComponent, formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
+import { formatPayloadDate, getCurrentDate, getPreviousDay } from 'utils/helpers'
 
 const ApplicationUsageReport = () => {
   const { showNotification } = useNotification()
@@ -24,8 +25,8 @@ const ApplicationUsageReport = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([])
-  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
-  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs())
+  const [startDateFilterValue, setStartDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getPreviousDay()))
+  const [endDateFilterValue, setEndDateFilterValue] = useState<dayjs.Dayjs>(dayjs(getCurrentDate()))
 
   const { data: storesFilterOptions } = useQuery(
     ['store'],
@@ -48,8 +49,8 @@ const ApplicationUsageReport = () => {
     setIsLoading(true)
 
     const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
+      { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+      { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
       ...(storeFilterValue && storeFilterValue.length > 0
         ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
         : []),
@@ -99,31 +100,36 @@ const ApplicationUsageReport = () => {
     }
   }
 
-  const handleDownload = async () => {
-    const filters = [
-      { name: 'startDate', value: dayjs(startDateFilterValue).format('DD-MM-YYYY') },
-      { name: 'endDate', value: dayjs(endDateFilterValue).format('DD-MM-YYYY') },
-      { name: 'store', value: storeFilterValue[0]?.value },
-    ].filter(
-      f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-    )
+  const downloadFileQuery = useQuery(
+    ['download'],
+    async () => {
+      const filters = [
+        { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+        { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
+        { name: 'store', value: storeFilterValue[0]?.value },
+      ].filter(
+        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+        )
 
-    const url = toTableGETUrl({
-      url: '/bakery/report/download/application',
-      filters: filters
-    })
-    try {
+      const url = toTableGETUrl({
+        url: '/bakery/report/download/application',
+        filters: filters
+      })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
-      formatAndDownloadResponse(response)
-    } catch (error) {
-      showNotification({
-        message: `Error while downloading file. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      return formatAndDownloadResponse(response)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
     }
-  }
+  )
 
   return (
     <div className={s.mainContainer}>
@@ -156,6 +162,8 @@ const ApplicationUsageReport = () => {
               options={storesFilterOptions}
               onSelect={val => handleFilterChange('store', val)}
               multiSelect={true}
+              placeholderButton='Selecteaza'
+              showSearch
             />
           </Grid>
         </Grid>
@@ -182,7 +190,7 @@ const ApplicationUsageReport = () => {
             {
               label: 'Descarca',
               icon: <DownloadOutlined />,
-              onClick: () => handleDownload()
+              onClick: () => downloadFileQuery.refetch()
             }
           ]}
           rowsPerPage={25}

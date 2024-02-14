@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, CircularProgress, Grid } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './CollaboratorsTab.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -6,23 +6,29 @@ import { useNotification, usePermissions } from 'hooks'
 import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { CRUDAction, EmployeeManagementItem } from 'components/volumetry/interfaces'
-import { columns, roles } from './helpers'
+import {
+  CRUDAction,
+  EmployeeManagementItem,
+  ValueLabelInterface
+} from 'components/volumetry/interfaces'
+import { columns } from './helpers'
 import { DeleteCollaborator } from './DeleteCollaborator'
 import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
-import { Autocomplete, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, FilterDataSelect, Input } from '@fullscreendigital/carrefour-dex-fe'
 import {
   getDepartmentsOptions,
-  getContractorsNamesOptions,
-  getJobTitlesOptions
+  getJobTitlesOptions,
+  getLocationsOptions
 } from 'components/volumetry/api'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
+import { roles } from '../../helpers'
 
 const CollaboratorsTab = () => {
   // TODO: De actualizat cand primim update cu drepturile fiecarui rol
-  const { canCreate, canEdit, canDelete } = usePermissions(roles)
+  const { canUseCustomFilter } = usePermissions(roles)
 
+  const [locationsFilterValue, setLocationsFilterValue] = useState<ValueLabelInterface>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
@@ -43,9 +49,18 @@ const CollaboratorsTab = () => {
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification)
-  const { data: contractorsNamesOptions } = getContractorsNamesOptions(showNotification)
   const { data: jobTitlesOptions, isLoading: isjobTitlesOptionsLoading } =
     getJobTitlesOptions(showNotification)
+  const { data: locationsOptions, isLoading: isLocationsLoading } = getLocationsOptions(
+    showNotification,
+    setLocationsFilterValue,
+    canUseCustomFilter
+  )
+
+  const handleFilterChange = value => {
+    setLocationsFilterValue(value)
+    setShouldRefreshData(true)
+  }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -54,6 +69,9 @@ const CollaboratorsTab = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/workers/contractors',
+          filters: canUseCustomFilter
+            ? [{ name: 'locationId', value: locationsFilterValue.value }]
+            : [],
           tableFilters,
           page,
           rowsPerPage,
@@ -66,7 +84,7 @@ const CollaboratorsTab = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      handleQueryError(error, 'Error while fetching table data.', showNotification)
+      handleQueryError(error, 'A aparut o eroare la obtinerea colaboratorilor.', showNotification)
     }
   }
 
@@ -110,6 +128,29 @@ const CollaboratorsTab = () => {
 
   return (
     <div className={s.mainContainer}>
+      {canUseCustomFilter && (
+        <Grid sx={{ width: '100%', display: 'block' }} container>
+          {isLocationsLoading ? (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+            </div>
+          ) : (
+            <Grid item style={{ display: 'block', padding: 0 }}>
+              <FilterDataSelect
+                name="location"
+                defaultSelectedData={locationsFilterValue}
+                label="Magazin:"
+                showCounter={true}
+                showSearch={true}
+                counterLabel="Selecteaza magazin"
+                noDataFoundLabel="Nu s-au gasit rezultate."
+                options={locationsOptions}
+                onSelect={handleFilterChange}
+              />
+            </Grid>
+          )}
+        </Grid>
+      )}
       <Box>
         <CreateEditCollaborator
           isModalOpen={modal === 'create'}
@@ -137,45 +178,89 @@ const CollaboratorsTab = () => {
           isjobTitlesOptionsLoading={isjobTitlesOptionsLoading}
         />
 
-        <Table
-          hideCheckbox
-          orderBy="department.name"
-          order="desc"
-          columns={columns}
-          items={tableItems}
-          fetchData={fetchData}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          filters={tableFilterFields}
-          rowActions={[
-            {
-              label: 'Edit',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              desktopIcon: <EditActionIcon />,
-              onClick: (_e, rowId: number) => selectRowId(rowId, 'edit')
-            },
-            {
-              label: 'Delete',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#d9534f',
-              desktopIcon: <DeleteActionIcon />,
-              onClick: (_e, rowId: number) => selectRowId(rowId, 'delete')
-            }
-          ]}
-          rowActionsWidth="130px"
-          toolbarActions={[
-            {
-              label: 'Add',
-              icon: <AddActionIcon />,
-              onClick: () => setModal('create') // TODO: To verify permissions with the BE
-            }
-          ]}
-        />
+        {canUseCustomFilter ? (
+          locationsFilterValue && (
+            <Table
+              hideCheckbox
+              orderBy="department"
+              order="desc"
+              columns={columns}
+              items={tableItems}
+              fetchData={fetchData}
+              isLoading={isLoading}
+              totalCount={totalCount}
+              shouldRefreshData={shouldRefreshData}
+              setShouldRefreshData={setShouldRefreshData}
+              filters={tableFilterFields}
+              rowActions={[
+                {
+                  label: 'Edit',
+                  labelColor: 'white',
+                  typographyVariant: 'medium',
+                  backgroundColor: '#16a085',
+                  desktopIcon: <EditActionIcon />,
+                  onClick: (_e, rowId: number) => selectRowId(rowId, 'edit')
+                },
+                {
+                  label: 'Delete',
+                  labelColor: 'white',
+                  typographyVariant: 'medium',
+                  backgroundColor: '#d9534f',
+                  desktopIcon: <DeleteActionIcon />,
+                  onClick: (_e, rowId: number) => selectRowId(rowId, 'delete')
+                }
+              ]}
+              rowActionsWidth="130px"
+              toolbarActions={[
+                {
+                  label: 'Add',
+                  icon: <AddActionIcon />,
+                  onClick: () => setModal('create') // TODO: To verify permissions with the BE
+                }
+              ]}
+            />
+          )
+        ) : (
+          <Table
+            hideCheckbox
+            orderBy="department"
+            order="desc"
+            columns={columns}
+            items={tableItems}
+            fetchData={fetchData}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            filters={tableFilterFields}
+            rowActions={[
+              {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                desktopIcon: <EditActionIcon />,
+                onClick: (_e, rowId: number) => selectRowId(rowId, 'edit')
+              },
+              {
+                label: 'Delete',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#d9534f',
+                desktopIcon: <DeleteActionIcon />,
+                onClick: (_e, rowId: number) => selectRowId(rowId, 'delete')
+              }
+            ]}
+            rowActionsWidth="130px"
+            toolbarActions={[
+              {
+                label: 'Add',
+                icon: <AddActionIcon />,
+                onClick: () => setModal('create') // TODO: To verify permissions with the BE
+              }
+            ]}
+          />
+        )}
       </Box>
     </div>
   )

@@ -31,6 +31,7 @@ const AsyncAutocomplete = (props: AsyncAutocompleteProps) => {
           {option.label}
         </li>
       )}
+      groupBy={props.groupBy}
     />
   )
 }

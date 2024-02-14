@@ -139,6 +139,7 @@ export interface ProductItem {
   familyModuleName: string
   imageUrl: string
   cluster?: ClustersItem
+  clusterName?: string
 }
 
 export interface SalesCadentierListItem {

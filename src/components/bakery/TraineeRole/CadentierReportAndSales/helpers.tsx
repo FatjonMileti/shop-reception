@@ -2,6 +2,7 @@ import { Box } from '@mui/material'
 import { BooleanIcon } from 'components/core-ui/BooleanIcon'
 import { ImageCell } from 'components/core-ui/ImageCell'
 import { Autocomplete, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { BooleanText } from '../../../core-ui/BooleanText'
 
 export const columns = [
   {
@@ -89,9 +90,14 @@ export const columns = [
   },
   {
     title: 'Gama produs',
-    field: 'productRange',
+    field: 'clusterMandatory',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    render: (row: any) => (
+      <Box>
+        <BooleanText value={row.clusterMandatory} onSuccess="O" onFailure="F" />
+      </Box>
+    )
   },
   {
     title: 'Oferta in ziua respectiva',
@@ -116,6 +122,12 @@ export const columns = [
         <BooleanIcon value={row.newProduct} icon={'Flag'} onSuccess="#33691E" onFailure="#E5E5E5" />
       </Box>
     )
+  },
+  {
+    title: 'Familie',
+    field: 'familyName',
+    align: 'left',
+    width: '140px'
   },
   {
     title: 'Ultima persoana care a modificat fisierul',
@@ -144,7 +156,7 @@ export const drawerFilters = (prevDay, familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'family',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
@@ -154,12 +166,11 @@ export const drawerFilters = (prevDay, familiesQuery, subfamiliesQuery) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Familie',
-    clearFiltersOnChange: ['subfamily']
+    label: 'Familie'
   },
   {
     name: 'subfamily',
-    value: undefined,
+    value: '',
     filter: (
       <Autocomplete
         variant="outlined"
