@@ -17,8 +17,8 @@ interface ProductDetailsBatchesProps {
 export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
   const { showNotification } = useNotification()
   const { formik, productMetiCode, onSelectBatch, onDeleteBatch } = props
-
-  if (typeof productMetiCode === 'undefined' || typeof formik.values.metiCode === 'undefined') {
+  const metiCode = productMetiCode || formik.values.metiCode;
+  if (typeof metiCode === 'undefined' ) {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
