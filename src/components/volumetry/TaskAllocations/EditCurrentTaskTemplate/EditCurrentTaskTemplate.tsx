@@ -50,6 +50,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       mutate(values)
+      formik.resetForm()
     }
   })
 
