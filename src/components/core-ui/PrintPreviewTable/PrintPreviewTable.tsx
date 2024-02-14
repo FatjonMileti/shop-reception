@@ -126,10 +126,6 @@ const PrintPreviewTable = props => {
 
   const debouncedHandleRemoteData = debounce(handleRemoteData, 500)
 
-  const handleDownload = () => {
-    handlePrint()
-  }
-
   return (
     <Box ref={componentRef}>
       {filterDate && (
@@ -168,7 +164,7 @@ const PrintPreviewTable = props => {
             {
               label: 'Printeaza',
               icon: <PrintOutlined />,
-              onClick: handleDownload
+              onClick: handlePrint
             }
           ]}
         />

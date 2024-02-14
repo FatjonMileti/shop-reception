@@ -1,4 +1,4 @@
-export const toTableRowItems = (items: DeliverySlip[]) => items.map((item: DeliverySlip) => ({
+export const toTableRowItems = (items: any[]) => items.map((item: any) => ({
   id: item.id,
   store: item.store,
   warehouseName: item.warehouseName,

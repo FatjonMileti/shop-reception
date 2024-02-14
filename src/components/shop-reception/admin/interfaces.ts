@@ -21,16 +21,24 @@ interface TruckItem {
 
 interface DeliverySlip {
   id: number
-  store: string
-  warehouseName: string
-  deliverySlip: string
+  externalTicketId?: string
+  externalShopCode?: string
+  shopCode: string
+  deliveryType: string
+  created: string
+  deliveryHour?: string
+  expectedDeliveryDate?: Date
+  transporterCode?: string
+  transportCode: string
+  sealCode: string
+  truckNumber: string
   status: string
-  seal: string
-  raceCode: string
-  registrationNumber: string
-  expectedSupports: string
-  destinationReachedSupports: string
-  registrationDate: string
+  validatedShopCodes?: string
+  sentShopCodes?: string
+  receptionFile?: string
+  depositName: string
+  numberOfSupports: number
+  validatedSupports: number
 }
 
 interface AdminDeposit {

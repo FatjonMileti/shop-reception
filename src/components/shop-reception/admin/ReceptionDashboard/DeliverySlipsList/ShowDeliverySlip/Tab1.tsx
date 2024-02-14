@@ -10,7 +10,7 @@ import { Download as DownloadIcon } from '@mui/icons-material'
 
 const Tab1 = () => {
   const { id } = useParams()
-  const [tableItems, setTableItems] = useState<DeliverySlip[]>([
+  const [tableItems, setTableItems] = useState<any[]>([
     {
       id: 1,
       store: 'ORHIDEEA (3)',

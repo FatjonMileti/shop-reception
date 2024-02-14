@@ -1,13 +1,14 @@
 export const toTableRowItems = (items: DeliverySlip[]) => items.map((item: DeliverySlip) => ({
   id: item.id,
-  store: item.store,
-  warehouseName: item.warehouseName,
-  deliverySlip: item.deliverySlip,
+  shopCode: item.shopCode,
+  depositName: item.depositName,
+  deliveryType: item.deliveryType,
   status: item.status,
-  seal: item.seal,
-  raceCode: item.raceCode,
-  registrationNumber: item.registrationNumber,
-  expectedSupports: item.expectedSupports,
-  destinationReachedSupports: item.destinationReachedSupports,
-  registrationDate: item.registrationDate,
+  transportCode: item.transportCode,
+  sealCode: item.sealCode,
+  truckNumber: item.truckNumber,  
+  numberOfSupports: item.numberOfSupports,
+  validatedSupports: item.validatedSupports,
+  created: item.created,
 }))
+
