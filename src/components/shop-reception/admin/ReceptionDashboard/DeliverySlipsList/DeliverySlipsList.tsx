@@ -1,14 +1,14 @@
-import { Table } from '../../../../core-ui/Table'
 import { columns, drawerFilters } from './helpers'
 import { useState } from 'react'
-import { makeCoreGetRequest } from '../../../../../utils/api'
-import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { formatErrorMessage } from '../../../../../utils/formatting'
-import { useNotification } from '../../../../../hooks'
 import { useNavigate } from 'react-router-dom'
 import { URLS } from '../../constants'
 import s from '../../../commonStyles.modules.scss'
+import { makeCoreGetRequest } from 'utils/api'
+import { Table } from 'components/core-ui/Table'
+import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 
 const DeliverySlipsList = () => {
   const navigate = useNavigate()
