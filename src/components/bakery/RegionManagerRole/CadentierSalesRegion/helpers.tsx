@@ -77,7 +77,7 @@ export const columns = [
       field: 'clusterMandatory',
       align: 'left',
       render: row => (
-        <BooleanText onSuccess='O' onFailure='F' value={row.productRange} />
+        <BooleanText onSuccess='O' onFailure='F' value={row.clusterMandatory} />
       )
     },
     {
