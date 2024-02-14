@@ -11,7 +11,7 @@ import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
-import { handleQueryError } from '../utils'
+import { handleQueryError } from 'utils/helpers'
 import * as yup from 'yup'
 import { AssignEmployeeProps } from './TaskAllocationsDefinitions'
 

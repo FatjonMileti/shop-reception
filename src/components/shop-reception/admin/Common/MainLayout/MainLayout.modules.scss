@@ -1,0 +1,19 @@
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.container {
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+}
+
+.paper {
+  margin-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}

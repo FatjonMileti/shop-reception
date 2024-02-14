@@ -3,6 +3,7 @@ import { get } from 'lodash'
 import { getUserInfo } from './authService'
 import { getCoreBaseUrl } from './api'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { formatErrorMessage } from 'utils/formatting'
 
 dayjs.extend(customParseFormat)
 
@@ -181,4 +182,11 @@ export const formatMonthsToRO = month => {
     default:
       return
   }
+}
+
+export const handleQueryError = (error, message, showNotification) => {
+  showNotification({
+    message: `${message} ${formatErrorMessage(error)}`,
+    type: 'error'
+  })
 }
