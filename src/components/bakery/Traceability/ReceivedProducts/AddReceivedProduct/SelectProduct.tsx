@@ -39,7 +39,6 @@ export const SelectProduct = ({
       keepPreviousData: true
     }
   )
-
   return (
     <Grid container rowSpacing={3.5}>
       <Grid item xs={hideActions ? 8 : 12}>
