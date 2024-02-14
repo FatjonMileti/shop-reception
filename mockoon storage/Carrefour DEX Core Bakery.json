@@ -7257,7 +7257,7 @@
       "responses": [
         {
           "uuid": "a76165a8-2c62-43db-b308-916121921cd2",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"0949d32b-364d-4146-b904-d2b86fd53370\",\n      \"product\": {\n        \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f1\",\n        \"name\": \"SAVARINE 2X140G ENGELMI       \",\n        \"metiCode\": 23002898,\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"unitBusiness\": \"PRAJITURI                     \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=822fa0ba9ad91d719b4c3d4f24e2b7764a7c1d933b30c0c0478c54efb0b3db43c35c7561837010815a5dd28872e71e7cdf4aa6ef1dcfd7c08f9b87d17b0e5443837632a4218734f92782145bb6c9cc3a963036a0389dcf61725359b38488f22df71b6bbd2e49cc4881d05b724779f58270fc070fed783b8a25bc6dce7089efb23b85d5e87f9ad365763abd938f467ca2c07449c92eecdde211355315b29f23551da54c866aa8102647cdc0647b32586a7785b27be6f2aa97047d0e201ee2d85ff3a9dc5c21430970335ce7718d6cdba2c985390bf34d6bb4406f1ca5d4826943cc9aa22df4d924d0b66b5e1549044e3f21b6b4eeb6e4af80392f4b2ab682c9e6\"\n      },\n      \"supplier\": {\n        \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n        \"productCode\": 23002898,\n        \"supplierCode\": 38190,\n        \"supplierName\": \"PATISGAL SRL                  \",\n        \"enable\": true\n      },\n      \"entryDate\": \"2023-12-12T15:53:16.45\",\n      \"expireDate\": \"2023-12-12T15:53:16.45\",\n      \"batchName\": \"test\",\n      \"hasExpireDate\": false,\n      \"hasSecondaryDlc\": false,\n      \"batchQuantity\": 20.3,\n      \"batchStatus\": \"\",\n      \"closeReason\": \"OUT_OF_STOCK\",\n      \"dlcDays\": 5,\n      \"verifiedBy\": \"\",\n      \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n      \"consumedAmount\": 427.14,\n      \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5b15e0eae7934c8175f555165fbc15f0d36a52c93ed5dd95cf842d117cad7b748146bac006789f5fbba8cf7b8c16d03d06b3199fbe4718b1c644fccb76b5cdfd84c02cb8aa395d377111ca521447b9d1fa10a6a6f131bfe94883bf588c173977fd4b30da38ade38850f8c8ea2c755dc150293afeb9f2bb283476e09590f7dd37a33f4b26c569adf67c33b594a737f1521ca765f129ac0fe53cf9e62a600b20d85c15772c4043526ec502b57d020df25cac781359bc92eebd9826eb2889acc18abc05a2fba83d031513dcc35d2db58461bb8c1493ac832613e1899ba294669f2e2f80d3fa0542dfa8d01bfbf0a77fee19862281e604775706e5ef5acdc0a0ef64\",\n      \"verified\": false\n    },{\n      \"id\": \"0949d32b-364d-4146-b904-d2b86fd53372\",\n      \"product\": {\n        \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f2\",\n        \"name\": \"SAVARINE 2X140G ENGELMI       \",\n        \"metiCode\": 23002899,\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"unitBusiness\": \"PRAJITURI                     \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=822fa0ba9ad91d719b4c3d4f24e2b7764a7c1d933b30c0c0478c54efb0b3db43c35c7561837010815a5dd28872e71e7cdf4aa6ef1dcfd7c08f9b87d17b0e5443837632a4218734f92782145bb6c9cc3a963036a0389dcf61725359b38488f22df71b6bbd2e49cc4881d05b724779f58270fc070fed783b8a25bc6dce7089efb23b85d5e87f9ad365763abd938f467ca2c07449c92eecdde211355315b29f23551da54c866aa8102647cdc0647b32586a7785b27be6f2aa97047d0e201ee2d85ff3a9dc5c21430970335ce7718d6cdba2c985390bf34d6bb4406f1ca5d4826943cc9aa22df4d924d0b66b5e1549044e3f21b6b4eeb6e4af80392f4b2ab682c9e6\"\n      },\n      \"supplier\": {\n        \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n        \"productCode\": 23002898,\n        \"supplierCode\": 38190,\n        \"supplierName\": \"PATISGAL SRL                  \",\n        \"enable\": true\n      },\n      \"entryDate\": \"2023-12-12T15:53:16.45\",\n      \"expireDate\": \"2023-12-12T15:53:16.45\",\n      \"batchName\": \"test\",\n      \"hasExpireDate\": false,\n      \"hasSecondaryDlc\": false,\n      \"batchQuantity\": 3,\n      \"batchStatus\": \"\",\n      \"closeReason\": \"OUT_OF_STOCK\",\n      \"dlcDays\": 5,\n      \"verifiedBy\": \"\",\n      \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n      \"consumedAmount\": 427.14,\n      \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5b15e0eae7934c8175f555165fbc15f0d36a52c93ed5dd95cf842d117cad7b748146bac006789f5fbba8cf7b8c16d03d06b3199fbe4718b1c644fccb76b5cdfd84c02cb8aa395d377111ca521447b9d1fa10a6a6f131bfe94883bf588c173977fd4b30da38ade38850f8c8ea2c755dc150293afeb9f2bb283476e09590f7dd37a33f4b26c569adf67c33b594a737f1521ca765f129ac0fe53cf9e62a600b20d85c15772c4043526ec502b57d020df25cac781359bc92eebd9826eb2889acc18abc05a2fba83d031513dcc35d2db58461bb8c1493ac832613e1899ba294669f2e2f80d3fa0542dfa8d01bfbf0a77fee19862281e604775706e5ef5acdc0a0ef64\",\n      \"verified\": false\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 1,\n    \"pageCount\": 1\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"0949d32b-364d-4146-b904-d2b86fd53370\",\n      \"product\": {\n        \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f1\",\n        \"name\": \"SAVARINE 2X140G ENGELMI       \",\n        \"metiCode\": 23001430,\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"unitBusiness\": \"PRAJITURI                     \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=822fa0ba9ad91d719b4c3d4f24e2b7764a7c1d933b30c0c0478c54efb0b3db43c35c7561837010815a5dd28872e71e7cdf4aa6ef1dcfd7c08f9b87d17b0e5443837632a4218734f92782145bb6c9cc3a963036a0389dcf61725359b38488f22df71b6bbd2e49cc4881d05b724779f58270fc070fed783b8a25bc6dce7089efb23b85d5e87f9ad365763abd938f467ca2c07449c92eecdde211355315b29f23551da54c866aa8102647cdc0647b32586a7785b27be6f2aa97047d0e201ee2d85ff3a9dc5c21430970335ce7718d6cdba2c985390bf34d6bb4406f1ca5d4826943cc9aa22df4d924d0b66b5e1549044e3f21b6b4eeb6e4af80392f4b2ab682c9e6\"\n      },\n      \"supplier\": {\n        \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n        \"productCode\": 23002898,\n        \"supplierCode\": 38190,\n        \"supplierName\": \"PATISGAL SRL                  \",\n        \"enable\": true\n      },\n      \"entryDate\": \"2023-12-12T15:53:16.45\",\n      \"expireDate\": \"2023-12-12T15:53:16.45\",\n      \"batchName\": \"test\",\n      \"hasExpireDate\": false,\n      \"hasSecondaryDlc\": false,\n      \"batchQuantity\": 20.3,\n      \"batchStatus\": \"\",\n      \"closeReason\": \"OUT_OF_STOCK\",\n      \"dlcDays\": 5,\n      \"verifiedBy\": \"\",\n      \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n      \"consumedAmount\": 427.14,\n      \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5b15e0eae7934c8175f555165fbc15f0d36a52c93ed5dd95cf842d117cad7b748146bac006789f5fbba8cf7b8c16d03d06b3199fbe4718b1c644fccb76b5cdfd84c02cb8aa395d377111ca521447b9d1fa10a6a6f131bfe94883bf588c173977fd4b30da38ade38850f8c8ea2c755dc150293afeb9f2bb283476e09590f7dd37a33f4b26c569adf67c33b594a737f1521ca765f129ac0fe53cf9e62a600b20d85c15772c4043526ec502b57d020df25cac781359bc92eebd9826eb2889acc18abc05a2fba83d031513dcc35d2db58461bb8c1493ac832613e1899ba294669f2e2f80d3fa0542dfa8d01bfbf0a77fee19862281e604775706e5ef5acdc0a0ef64\",\n      \"verified\": false\n    },{\n      \"id\": \"0949d32b-364d-4146-b904-d2b86fd53372\",\n      \"product\": {\n        \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f2\",\n        \"name\": \"SAVARINE 2X140G ENGELMI       \",\n        \"metiCode\": 29000843,\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"unitBusiness\": \"PRAJITURI                     \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=822fa0ba9ad91d719b4c3d4f24e2b7764a7c1d933b30c0c0478c54efb0b3db43c35c7561837010815a5dd28872e71e7cdf4aa6ef1dcfd7c08f9b87d17b0e5443837632a4218734f92782145bb6c9cc3a963036a0389dcf61725359b38488f22df71b6bbd2e49cc4881d05b724779f58270fc070fed783b8a25bc6dce7089efb23b85d5e87f9ad365763abd938f467ca2c07449c92eecdde211355315b29f23551da54c866aa8102647cdc0647b32586a7785b27be6f2aa97047d0e201ee2d85ff3a9dc5c21430970335ce7718d6cdba2c985390bf34d6bb4406f1ca5d4826943cc9aa22df4d924d0b66b5e1549044e3f21b6b4eeb6e4af80392f4b2ab682c9e6\"\n      },\n      \"supplier\": {\n        \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n        \"productCode\": 23002898,\n        \"supplierCode\": 38190,\n        \"supplierName\": \"PATISGAL SRL                  \",\n        \"enable\": true\n      },\n      \"entryDate\": \"2023-12-12T15:53:16.45\",\n      \"expireDate\": \"2023-12-12T15:53:16.45\",\n      \"batchName\": \"test\",\n      \"hasExpireDate\": false,\n      \"hasSecondaryDlc\": false,\n      \"batchQuantity\": 3,\n      \"batchStatus\": \"\",\n      \"closeReason\": \"OUT_OF_STOCK\",\n      \"dlcDays\": 5,\n      \"verifiedBy\": \"\",\n      \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n      \"consumedAmount\": 427.14,\n      \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5b15e0eae7934c8175f555165fbc15f0d36a52c93ed5dd95cf842d117cad7b748146bac006789f5fbba8cf7b8c16d03d06b3199fbe4718b1c644fccb76b5cdfd84c02cb8aa395d377111ca521447b9d1fa10a6a6f131bfe94883bf588c173977fd4b30da38ade38850f8c8ea2c755dc150293afeb9f2bb283476e09590f7dd37a33f4b26c569adf67c33b594a737f1521ca765f129ac0fe53cf9e62a600b20d85c15772c4043526ec502b57d020df25cac781359bc92eebd9826eb2889acc18abc05a2fba83d031513dcc35d2db58461bb8c1493ac832613e1899ba294669f2e2f80d3fa0542dfa8d01bfbf0a77fee19862281e604775706e5ef5acdc0a0ef64\",\n      \"verified\": false\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 1,\n    \"pageCount\": 1\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted stores list",
@@ -7377,6 +7377,622 @@
         },
         {
           "uuid": "db56afeb-e226-4162-a9c3-58783cd08ecb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "392d06bb-b4a2-4d1d-88c0-90f9027fc1cb",
+      "type": "http",
+      "documentation": "Get own production traceability list",
+      "method": "get",
+      "endpoint": "traceability/production",
+      "responses": [
+        {
+          "uuid": "5301d45e-a8ec-492e-bde6-3f151cabdef0",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"a1592877-d6a7-45d2-993f-0b94c718075b\",\n      \"product\": {\n        \"id\": \"a48c768a-6b62-4598-8053-f90e546aba8a\",\n        \"name\": \"PAINEA SPORTIVILOR 300 G      \",\n        \"metiCode\": 29000227,\n        \"pluCode\": \"1106\",\n        \"familyName\": \"BRUTARIE\",\n        \"familyCode\": 230,\n        \"subfamily\": \"CLEAN LABEL                   \",\n        \"unitBusiness\": \"CLEAN LABEL FABRICATIE        \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/230/23003001.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T102233Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=0aa9ee96aecfda188224eb8a1f15c6b0efc9d31c0b443514c43fae0ee0d970db32723b9d315f99f59333e51560c3cfadbb821d39c185c6a4b9d8b7cd818fd635ceb13bdd19a56de00627e885b11e75b22c85a026324cf68c16904a18a9017342cb0f5fd206b29014486d4ed9d176dbda73b65ada59908ac10fe0e2f53486e7f2992783bbf9944db333cea163409ef12c0ba515d81a9cc594eace027b6bc76b3882b1ce3bbf7927ed43400d5476f0aea398a58206582ae5092ecaed2a2eaaa89a1d9586ed099fe43ef2c28e4b524f254e036780aede792e0d50f9d735f584495f283dcfec980c793a29377ad8efd8191a340092c5ae93e1a5cd3ee7a6c2e8d723\"\n      },\n      \"store\": {\n        \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n        \"metiCode\": 6,\n        \"name\": \"PLOIESTI\",\n        \"storeType\": \"HYPERMARKET\"\n      },\n      \"productionDate\": \"2014-09-26\",\n      \"chargeNumber\": \"PaineaSportivilor\",\n      \"productionOperator\": \"test_98359d7e7de3\",\n      \"quantity\": 59.29,\n      \"thermalCondition\": \"BAKED\",\n      \"conform\": true,\n      \"dlc\": \"2029-03-27\",\n      \"modifiedBy\": \"liviu_grigorescu\",\n      \"modifiedDate\": \"2024-02-01T14:39:58.949+00:00\",\n      \"createdBy\": \"liviu_grigorescu\",\n      \"createdDate\": \"2024-02-01T14:39:58.949+00:00\",\n      \"frozen\": false,\n      \"verified\": false,\n      \"createdUser\": false\n    },\n    {\n      \"id\": \"c87ec868-0584-4c7b-8f61-c9e0df18c1f6\",\n      \"product\": {\n        \"id\": \"cb9b0177-a19e-44be-8bb9-f0bd046962a3\",\n        \"name\": \"ALUAT MIX SEMINTE             \",\n        \"metiCode\": 29000227,\n        \"familyName\": \"BAZE  BRUTARIE/COFETARIE\",\n        \"familyCode\": 235,\n        \"subfamily\": \"BAZE  BRUTARIE/COFETARIE      \",\n        \"unitBusiness\": \"BAZE  BRUTARIE/COFETARIE      \",\n        \"metricUnit\": \"K\",\n        \"enable\": true,\n        \"batch\": true,\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/235/23002999.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T102233Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=9879b958f188b7b38bcf8a68a4070503d67ca51998c62cb20f88e5a037eca4fc878feb98e5bc3db251f39a66c08cfb1f4e7acf5c6ef0409990108a77d816edce909eb03b6e0299818eb696f0da5a32c93d67b6f27413f8e6eabe68e59f478abb989a98197d9b36847ce91b1925cfd53ab22cdc53a9ffaf6c53b7e08ba58d703f9a296ad2696d833bef72be5b05c3be3678d81ce8306615dcc9ff5c59a764ad110fe976d04b748630fd4b1e8aa5950b46611ba8773883823cad1b90034cff5550293dc8cb4c226a55626dac21f5d8d6b8952c595ef141b27d26543dafcc172ef29b5173fe3acdcdbfda85bca98d5bbcd5ea4d9cb570acbf6c5dfcf377bd021015\"\n      },\n      \"store\": {\n        \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n        \"metiCode\": 6,\n        \"name\": \"PLOIESTI\",\n        \"storeType\": \"HYPERMARKET\"\n      },\n      \"productionDate\": \"2014-09-07\",\n      \"chargeNumber\": \"AluatMixSeminte\",\n      \"productionOperator\": \"test_98359d7e7de3\",\n      \"quantity\": 59.29,\n      \"thermalCondition\": \"BAKED\",\n      \"conform\": true,\n      \"dlc\": \"2029-03-27\",\n      \"modifiedBy\": \"liviu_grigorescu\",\n      \"modifiedDate\": \"2024-02-01T14:27:37.684+00:00\",\n      \"createdBy\": \"liviu_grigorescu\",\n      \"createdDate\": \"2024-02-01T14:27:37.684+00:00\",\n      \"frozen\": false,\n      \"verified\": false,\n      \"createdUser\": false\n    },\n    {\n      \"id\": \"8a80384f-9650-492e-8700-70db9ab63550\",\n      \"product\": {\n        \"id\": \"bb265913-fce8-4dab-b523-f4603f1a3c10\",\n        \"name\": \"ALUAT PAINA SPORTIVIOR        \",\n        \"metiCode\": 29000221,\n        \"familyName\": \"BAZE  BRUTARIE/COFETARIE\",\n        \"familyCode\": 235,\n        \"subfamily\": \"BAZE  BRUTARIE/COFETARIE      \",\n        \"unitBusiness\": \"BAZE  BRUTARIE/COFETARIE      \",\n        \"metricUnit\": \"K\",\n        \"enable\": true,\n        \"batch\": true,\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/235/23003000.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T102233Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=647d8f0a7ce0e5e81027cec8afce8843aea5fc8e35581ff76480db7c112f57a77ca8bc41d1701c75c51eca32b893c3fbf44d103fd086fb0648f20a5a6f878483d1ca48539852bf740a0cf6e15dfd8e21367da90c92785ccb3f1324f791bd0194e5bb2cb63c256f66782657e63d1e59d0d0c9834053ca8f0462b839046bf654cae6da520e7ca054742e1fe446fbe8a5c6f9a632710a9f3d21e7bdbdce3007b177b4fc0ff0b658dbe29dd53d27f7fe9f28b40d225302fb516c012c9f58b85977329d90ad2fba3d39274c9df4386e6d70f3349a54484dc1a70ea51b63d9877c523af78d1fda8faff414ba3913bebcd1bdc59e99728ae21dcc2a6a1ccc749d664fbd\"\n      },\n      \"store\": {\n        \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n        \"metiCode\": 6,\n        \"name\": \"PLOIESTI\",\n        \"storeType\": \"HYPERMARKET\"\n      },\n      \"productionDate\": \"2014-09-13\",\n      \"chargeNumber\": \"AluatPaineaSportivilor\",\n      \"productionOperator\": \"test_98359d7e7de3\",\n      \"quantity\": 59.29,\n      \"thermalCondition\": \"BAKED\",\n      \"conform\": true,\n      \"dlc\": \"2029-03-27\",\n      \"nonComplianceReason\": \"test_ccbecc882552\",\n      \"productDestination\": \"test_c70bdc745d30\",\n      \"modifiedBy\": \"liviu_grigorescu\",\n      \"modifiedDate\": \"2024-02-01T14:35:29.479+00:00\",\n      \"createdBy\": \"liviu_grigorescu\",\n      \"createdDate\": \"2024-02-01T14:35:29.479+00:00\",\n      \"frozen\": false,\n      \"verified\": false,\n      \"createdUser\": false\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 3,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0064ac78-af23-4492-bdaa-ffc1ca142f69",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c9d37660-6791-4958-b5d8-6b38c95cf8b2",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "24187621-2653-42a6-a256-6cacd9259fe4",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "35c734e0-7495-4015-8ef0-465871c77307",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e8a2ac1f-44a2-4239-9d04-ab2fe173bd75",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "cd4482ea-fd11-4cd1-a1c3-122ccf3b5ab9",
+      "type": "http",
+      "documentation": "Get own production traceability",
+      "method": "get",
+      "endpoint": "traceability/production/:id",
+      "responses": [
+        {
+          "uuid": "70171c44-273f-4666-b9f6-625933841b09",
+          "body": "{\n  \"id\": \"a1592877-d6a7-45d2-993f-0b94c718075b\",\n  \"product\": {\n    \"id\": \"a48c768a-6b62-4598-8053-f90e546aba8a\",\n    \"name\": \"PAINEA SPORTIVILOR 300 G      \",\n    \"metiCode\": 23003001,\n    \"pluCode\": \"1106\",\n    \"familyName\": \"BRUTARIE\",\n    \"familyCode\": 230,\n    \"subfamily\": \"CLEAN LABEL                   \",\n    \"unitBusiness\": \"CLEAN LABEL FABRICATIE        \",\n    \"metricUnit\": \"K\",\n    \"dlcDays\": 0,\n    \"enable\": true,\n    \"batch\": true,\n    \"divisiontype\": \"HYPER\",\n    \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/230/23003001.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=893eccbbb831047a45fc2a5ffd4717fd7288e17e2469369baa7f5f7db230eb1ec7af797573628f3a4c361ee8ba1547b7e7070d666376fe1a2bf9fd812716aca50e30208f8acec999b0b213eed193c2a8245343998c898cb0be6b6e6ef2f6a33ee855491c9ad1826f5c5a62b905e18b6fa711d14788ee4947893bbdb82ea467b621e5c7b7a9dfe69a3b197f2345e2117c9fba855a2b9750da8b9a695774b3af7cba596244f65aaccfd2770d18c41d67390958011253ab413c53634c5d44146ead828b5c9224260e0e6db1d3e3559b96e9878593a4f7db86b0385dd29bde73ff22c6d00504ea17f1769cf77e3bdc84c53a640f92038b5f80e9d24fdd5e2133059d\"\n  },\n  \"store\": {\n    \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n    \"metiCode\": 6,\n    \"name\": \"PLOIESTI\",\n    \"storeType\": \"HYPERMARKET\"\n  },\n  \"productionDate\": \"2014-09-26\",\n  \"chargeNumber\": \"PaineaSportivilor\",\n  \"productionOperator\": \"test_98359d7e7de3\",\n  \"quantity\": 59.29,\n  \"thermalCondition\": \"BAKED\",\n  \"conform\": true,\n  \"dlc\": \"2029-03-27\",\n  \"modifiedBy\": \"liviu_grigorescu\",\n  \"modifiedDate\": \"2024-02-01T14:39:58.949+00:00\",\n  \"createdBy\": \"liviu_grigorescu\",\n  \"createdDate\": \"2024-02-01T14:39:58.949+00:00\",\n  \"traceabilityProductionList\": [\n    {\n      \"id\": \"642b7ac5-ad46-4873-b50c-797de39fb898\",\n      \"batch\": {\n        \"id\": \"be79ad9a-79b7-442b-8d88-48ba0ef872d4\",\n        \"product\": {\n          \"id\": \"5e117056-8e5f-4570-b6d1-47529e3a6335\",\n          \"name\": \"PUNGA PLASTIC LOGO250X350 BOPP\",\n          \"metiCode\": 23001430,\n          \"familyName\": \"AMBALAJE\",\n          \"familyCode\": 234,\n          \"subfamily\": \"AMBALAJE                      \",\n          \"unitBusiness\": \"AMBALAJE                      \",\n          \"metricUnit\": \"A\",\n          \"enable\": true,\n          \"batch\": true,\n          \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/234/23002043.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=3a706cbd4a4bc9403776872e643d328d0d3499ff06a45eb4db676a9fd7f1543ed2a8f4ea480e0da0d8d13c5dd5aa41c73609141e5fd1bf1da5e485f1ff56a036c852538cc09c3b7dc1b6678b6f4af8b4d95065b6fec815ba009fa3af5593fe62de629550708b167ba9a089af65867434defbf62e60513f1381d02a0ad33537619f6cb329daa60e81f1c565e53f4307323a94f043f4b65c8c3aaaa10cefb73276858872f573eee4de907c363d7a979ce8eec4f7eb54007f3732636161d64bbfcae87a94e90cb1e31271b361be9968f281ffb8d8ddb360feb3f767d981401a09c0b81e8f33a882f6af3530746b403f7a402ea270f142ac45d9c3db5b90dd69bb34\"\n        },\n        \"supplier\": {\n          \"id\": \"66937927-fbff-4784-8a03-7a479b5f65bc\",\n          \"productCode\": 23000682,\n          \"supplierCode\": 31170,\n          \"supplierName\": \"A A EXPRODCOM SRL             \",\n          \"enable\": true\n        },\n        \"store\": {\n          \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n          \"metiCode\": 6,\n          \"name\": \"PLOIESTI\",\n          \"storeType\": \"HYPERMARKET\"\n        },\n        \"entryDate\": \"2023-12-12\",\n        \"expireDate\": \"2024-12-12\",\n        \"batchName\": \"PungaPlastic\",\n        \"hasExpireDate\": true,\n        \"hasSecondaryDlc\": false,\n        \"batchQuantity\": 20.3,\n        \"batchStatus\": \"AVAILABLE\",\n        \"dlcDays\": 5,\n        \"isVerified\": false,\n        \"consumedAmount\": 210.8,\n        \"createdBy\": \"liviu_grigorescu\",\n        \"createdDate\": \"2024-02-01T14:15:52.929+00:00\",\n        \"modifiedBy\": \"liviu_grigorescu\",\n        \"modifiedDate\": \"2024-02-01T14:15:52.929+00:00\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//be79ad9a-79b7-442b-8d88-48ba0ef872d4.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=ae4ed9b3759fd149f31f8f24b03bbf3b9fff31979d63417e096547811472df186ee2c8c1df9329af6e7aaf27a953579a23d441a1cb34eacfea3e0591193971487415dd4cb8343f6b14b8d06daeb70940321ec0590b8f536d89692ed67c07df869f574ac5180e4222ecf8b8a81f7e91f9ad55871cd245b89568763c301d2e0674e5d6a2a01bdd549bd8045550de6e60c00292c1fb026687355674bf44e566772f2f2f41fbbca625773f7179db763347c0597e46196b5f131c7c25743cf92a5df4754ba0840647d30cdf81750301cad3e82ee1852825a8a5b280106661aaac5018e7cac0b08d0c2c0bdb14d80f3df460402b474537ef86e0a22ed0e67cef944daa\"\n      },\n      \"componentCode\": 23001430,\n      \"componentName\": \"PUNGA PLASTIC LOGO250X350 BOPP\",\n      \"componentQuantity\": 50.58,\n      \"componentUnit\": \"A\",\n      \"quantity\": 46.14,\n      \"openingDate\": \"2023-09-24\",\n      \"dlc\": \"2017-08-20\"\n    },\n    {\n      \"id\": \"92014492-3f7b-4843-8c31-0d96416b735c\",\n      \"batch\": {\n        \"id\": \"492cf265-420f-4366-ac16-966684fc8148\",\n        \"product\": {\n          \"id\": \"48325750-ae0a-4e7f-9bd2-36fde9732ee7\",\n          \"name\": \"SEMINTE FLOAREA SOARELUI      \",\n          \"metiCode\": 28000292,\n          \"familyName\": \"MATERII PRIME\",\n          \"familyCode\": 233,\n          \"subfamily\": \"MATERII PRIME                 \",\n          \"unitBusiness\": \"MATERII PRIME                 \",\n          \"metricUnit\": \"K\",\n          \"enable\": true,\n          \"batch\": true,\n          \"divisiontype\": \"INGREDIENTS\",\n          \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/233/28000292.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=2dab421f0326949685dd0ec48b89a04fdaf68a9438efdadee67d0d48f10a31c051cc877f7521a99428c7d6a73a015fde8fa21372f5174289b68793d8a992273808860bb4785c76b1309c4473189ef020c150c040e41a96fc7e56d8f9e97821327edf47056a20d0108703e86a1f00fb6253f7520c7ad22a2109ca848b94fa6bfb09518eab881ae67aabd1222e8eb2f670d6fb4a840371d944fb222ea85d0fb4bddb73d9c9089d2d90bcb241b6dd822016874ce42dfe9f137cbe89fbb820b28eee5b46cc7d92def0ea04f58246c73aeff728a6820c4ac976aea7a12b064882b0231fc644b3dd8c9de3b0f9548cc3ec67485d636c9337941fa06deec4970a404ea0\"\n        },\n        \"supplier\": {\n          \"id\": \"66937927-fbff-4784-8a03-7a479b5f65bc\",\n          \"productCode\": 23000682,\n          \"supplierCode\": 31170,\n          \"supplierName\": \"A A EXPRODCOM SRL             \",\n          \"enable\": true\n        },\n        \"store\": {\n          \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n          \"metiCode\": 6,\n          \"name\": \"PLOIESTI\",\n          \"storeType\": \"HYPERMARKET\"\n        },\n        \"entryDate\": \"2023-12-12\",\n        \"expireDate\": \"2024-12-12\",\n        \"batchName\": \"SeminteFloareaSoarelui\",\n        \"hasExpireDate\": true,\n        \"hasSecondaryDlc\": false,\n        \"batchQuantity\": 20.3,\n        \"batchStatus\": \"AVAILABLE\",\n        \"dlcDays\": 5,\n        \"isVerified\": false,\n        \"consumedAmount\": 46.14,\n        \"createdBy\": \"liviu_grigorescu\",\n        \"createdDate\": \"2024-02-01T14:18:50.742+00:00\",\n        \"modifiedBy\": \"liviu_grigorescu\",\n        \"modifiedDate\": \"2024-02-01T14:18:50.742+00:00\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//492cf265-420f-4366-ac16-966684fc8148.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=94a10ded462b8f31cb1c958524d09e4d5015f1d4409c50d08a2c3ac53658e457236b5d23a91e9da58028aa6c1ad8ce8fa6c472c3c4b05483d2906335ba53bf7cea51a0f3e0b48e1025182a5bcace0fd7db27759e00aaeb6de4aa977f60c66eb491410aacb6d2adfc360fe7c607a52670b92218a2af01f85e09fe8004d3ead70fea0ca506f8a0966b4dcd61dfb5ae514cd6b16636a577c2dd662a8cade5908b5c891a92ebb10e4c131edd45cd1708081be6e5f0190b7dad8c44b3a4c4b6c6fa284600b261ea9bff29d3049d6a9099e62d785873c799205c1fa59f9ed120821f4e831812caab85ab13fb08887cf853e7950a158e69105b836d5a0fe5615f9779c4\"\n      },\n      \"componentCode\": 28000292,\n      \"componentName\": \"SEMINTE FLOAREA SOARELUI      \",\n      \"componentQuantity\": 50.58,\n      \"componentUnit\": \"K\",\n      \"quantity\": 46.14,\n      \"openingDate\": \"2023-09-24\",\n      \"dlc\": \"2017-08-20\"\n    },\n    {\n      \"id\": \"3c54969c-5f00-4a6e-a9e0-abf9382e7b48\",\n      \"childTraceability\": {\n        \"id\": \"8a80384f-9650-492e-8700-70db9ab63550\",\n        \"product\": {\n          \"id\": \"bb265913-fce8-4dab-b523-f4603f1a3c10\",\n          \"name\": \"ALUAT PAINA SPORTIVIOR        \",\n          \"metiCode\": 23003000,\n          \"familyName\": \"BAZE  BRUTARIE/COFETARIE\",\n          \"familyCode\": 235,\n          \"subfamily\": \"BAZE  BRUTARIE/COFETARIE      \",\n          \"unitBusiness\": \"BAZE  BRUTARIE/COFETARIE      \",\n          \"metricUnit\": \"K\",\n          \"enable\": true,\n          \"batch\": true,\n          \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/235/23003000.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=7846ee2fd67e5a9d6fb3622dc61d49cf7127498244003a155736f553bb89057f8cedfba880734926e67e580f451e1b1e14a4baabc0f80e6e9be61fb5e2ae01fb1560a5f5630dd4d3eea9196e029958df9ceeee3a8dbe2f6495e8d191e1fb702ad72731c44a23d8412cd38abac8071693e1aed7ba006ad12f28a0b03c17eaee8c779913bbc3b732ab019ab00317b0ee95aa5e8c85b1bef4f555cea9fe6c8e135f221932f874f86ce37672a8879d55f754e50c1c85f9b779338621da5856bdae128e8f02f263ef9aff73624dbe39e6d623bf8cba20771d8edfe6845f08fc49a155eedb838d6fbbd6b9e1333910dd6635ac2e05df82939c0d0e278fecbb3527b8a9\"\n        },\n        \"store\": {\n          \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n          \"metiCode\": 6,\n          \"name\": \"PLOIESTI\",\n          \"storeType\": \"HYPERMARKET\"\n        },\n        \"productionDate\": \"2014-09-13\",\n        \"chargeNumber\": \"AluatPaineaSportivilor\",\n        \"productionOperator\": \"test_98359d7e7de3\",\n        \"quantity\": 59.29,\n        \"thermalCondition\": \"BAKED\",\n        \"conform\": true,\n        \"dlc\": \"2029-03-27\",\n        \"nonComplianceReason\": \"test_ccbecc882552\",\n        \"productDestination\": \"test_c70bdc745d30\",\n        \"modifiedBy\": \"liviu_grigorescu\",\n        \"modifiedDate\": \"2024-02-01T14:35:29.479+00:00\",\n        \"createdBy\": \"liviu_grigorescu\",\n        \"createdDate\": \"2024-02-01T14:35:29.479+00:00\",\n        \"traceabilityProductionList\": [\n          {\n            \"id\": \"c970e48d-a9b7-473b-92b0-9c711f35c62a\",\n            \"batch\": {\n              \"id\": \"364f771a-d15f-47d8-bc33-5a6a9b70bc49\",\n              \"product\": {\n                \"id\": \"c9804c29-5db2-4ea8-bc0d-cf8e6a031278\",\n                \"name\": \"DROJDIE                       \",\n                \"metiCode\": 23001430,\n                \"familyName\": \"MATERII PRIME\",\n                \"familyCode\": 233,\n                \"subfamily\": \"MATERII PRIME                 \",\n                \"unitBusiness\": \"MATERII PRIME                 \",\n                \"metricUnit\": \"K\",\n                \"enable\": true,\n                \"batch\": true,\n                \"divisiontype\": \"INGREDIENTS\",\n                \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/233/28000116.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=0a08ce366e79cb6c1d029e86487549896cb7edc23bc029f61f43dcc6a7073b8020d07895afdba1d837ab2dbe6392ea466153a397b1641ac49d130b4d0a28c878b8d9675365cbe9300f39b48154c902e628e11a642d13b5db14094f8365654cf8225f1f1dc1c648e6a5b5a884c8d91ebb65e7fe96f3f4b7eaf01661a50258e464f373c8602cf9983a6b6caae198701a74ba383126056430f2bd44417eeba8e26369abf565d4987782961996ff28d51f2518a6c7f4c7ce871e725711008ccf9e477a9616293672efcd27af29b82381551ddc58dfcb08315750e74411b0edf43b331769bb9931cf85093e741e9caf505be9fd425f8b44ecded43c7f62eaa45b20f4\"\n              },\n              \"supplier\": {\n                \"id\": \"66937927-fbff-4784-8a03-7a479b5f65bc\",\n                \"productCode\": 23000682,\n                \"supplierCode\": 31170,\n                \"supplierName\": \"A A EXPRODCOM SRL             \",\n                \"enable\": true\n              },\n              \"store\": {\n                \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n                \"metiCode\": 6,\n                \"name\": \"PLOIESTI\",\n                \"storeType\": \"HYPERMARKET\"\n              },\n              \"entryDate\": \"2023-12-12\",\n              \"expireDate\": \"2024-12-12\",\n              \"batchName\": \"Drojdie\",\n              \"hasExpireDate\": true,\n              \"hasSecondaryDlc\": false,\n              \"batchQuantity\": 20.3,\n              \"batchStatus\": \"AVAILABLE\",\n              \"dlcDays\": 5,\n              \"isVerified\": false,\n              \"consumedAmount\": 70.49,\n              \"createdBy\": \"liviu_grigorescu\",\n              \"createdDate\": \"2024-02-01T14:18:10.120+00:00\",\n              \"modifiedBy\": \"liviu_grigorescu\",\n              \"modifiedDate\": \"2024-02-01T14:18:10.120+00:00\",\n              \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//364f771a-d15f-47d8-bc33-5a6a9b70bc49.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=366ea3ab3cffe79d1ff73fe51d91211d0e31cb3b34176d52cc3fe3e5c7a7b6130f08389859fbdab66dcc7b19005967e23ea08a2b02d4c52142f9247c07960cb2b9291ae01c11afcd44f8d37b0d88afeef4a4f8943f1a831615a40f808c03e6fcb06bcf25098f273be5300f0616d8b2ba1d87d6dc5002830b742dc0a0e6d200e49d044749459f8c66095e32a626bd653283945bf212871be53993bf6bfce2fd9c3ce5c6192596a40ef21981fda5ea67d489f333df49a566e7d2dffe87931f17151258fba7061f36756f424c862eb84f08b391378160d2e93515047b0e73f6c9b269685ff689b052a82216080b537ec435b5995de0fa882f5d8065fd26950e0584\"\n            },\n            \"componentCode\": 28000116,\n            \"componentName\": \"DROJDIE                       \",\n            \"componentQuantity\": 50.58,\n            \"componentUnit\": \"K\",\n            \"quantity\": 46.14,\n            \"openingDate\": \"2023-09-24\",\n            \"dlc\": \"2017-08-20\"\n          },\n          {\n            \"id\": \"59d1e3af-9ed0-4a71-9b11-f5b38f74b980\",\n            \"batch\": {\n              \"id\": \"b0361a14-4c87-45dd-a4ba-cfb5f99e429c\",\n              \"product\": {\n                \"id\": \"caed599d-a6b8-45ce-acac-eaf12febf04f\",\n                \"name\": \"FAINA SECARA INTEGRALA M      \",\n                \"metiCode\": 23001430,\n                \"pluCode\": \"9829\",\n                \"familyName\": \"MATERII PRIME\",\n                \"familyCode\": 233,\n                \"subfamily\": \"MATERII PRIME                 \",\n                \"unitBusiness\": \"MATERII PRIME                 \",\n                \"metricUnit\": \"K\",\n                \"enable\": true,\n                \"batch\": true,\n                \"divisiontype\": \"INGREDIENTS\",\n                \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/233/23503627.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=73e660ec943758cdcc94bbfa5e3455420e113b78ac71bab58d12a2fbffc9302fe7e7590daa411e6f748977eada12deca79b696fd4c76928b6683a2c04057549d6088fe1ba31a29b490d5c3c359c100de05a2297b74fb18beb7ddaab6c5e67f88975a3de47ef74e60c42cc029d6503bc5912d5f492309b3fe4a988107ab22baa829b315a9ae44934ac252c7873d887e117bd7103fb8f1bcd7b1c2522ce9290a7aa5d9d70b3bb6bc983e7c923251b40407daf9b9269c84bc716bb1c573f8280f2ab29607af34cfff7ea278ba5b917774b3ebb143376e2421c3000a3ed95487b881057869964e1902ee1175c207fb15fdc56ed8150b18e0f3148fc5d15885df8bf7\"\n              },\n              \"supplier\": {\n                \"id\": \"66937927-fbff-4784-8a03-7a479b5f65bc\",\n                \"productCode\": 23000682,\n                \"supplierCode\": 31170,\n                \"supplierName\": \"A A EXPRODCOM SRL             \",\n                \"enable\": true\n              },\n              \"store\": {\n                \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n                \"metiCode\": 6,\n                \"name\": \"PLOIESTI\",\n                \"storeType\": \"HYPERMARKET\"\n              },\n              \"entryDate\": \"2023-12-12\",\n              \"expireDate\": \"2024-12-12\",\n              \"batchName\": \"FainaSecaraInt\",\n              \"hasExpireDate\": true,\n              \"hasSecondaryDlc\": false,\n              \"batchQuantity\": 20.3,\n              \"batchStatus\": \"AVAILABLE\",\n              \"dlcDays\": 5,\n              \"isVerified\": false,\n              \"consumedAmount\": 46.14,\n              \"createdBy\": \"liviu_grigorescu\",\n              \"createdDate\": \"2024-02-01T14:22:22.469+00:00\",\n              \"modifiedBy\": \"liviu_grigorescu\",\n              \"modifiedDate\": \"2024-02-01T14:22:22.469+00:00\",\n              \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//b0361a14-4c87-45dd-a4ba-cfb5f99e429c.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=46ad3cef011917c94c6c7f56ea1a1d849dce20468c06b8d3593d15396425fa9778f6a677fba3ab39b7ee5aaef2fb07ec1a16d1d7195c70756cee7ea6c1486269fafef49a43d265745e0164da0befca7f1ef1fa9ebcb9f513543234a782f43723428c1ea3c4c1286dd2ff729c693872971116bc26f541cecfe05e29865e0154c8a404bc515b26e58f6c080741213d61db2c60bed195e07a67d09b048a5d81cf8b1e13e911e065dcc3e4325d781cbff29fd2cb6b833ba71ca6a41122241e8ebe99d681ae1b8ddd985245d70847ae5a0ef04af20ba77e638a22d7a5dc9ca7c76969fd6ee14342c45bde25760fcb99daf0bbde0a8850c0b01e48255892a1971f023c\"\n            },\n            \"componentCode\": 23503627,\n            \"componentName\": \"FAINA SECARA INTEGRALA M      \",\n            \"componentQuantity\": 50.58,\n            \"componentUnit\": \"K\",\n            \"quantity\": 46.14,\n            \"openingDate\": \"2023-09-24\",\n            \"dlc\": \"2017-08-20\"\n          },\n          {\n            \"id\": \"c970e48d-a9b7-473b-92b0-9c711f35c62b\",\n            \"componentCode\": 28000204,\n            \"componentName\": \"APA\",\n            \"componentQuantity\": 10,\n            \"componentUnit\": \"L\",\n            \"quantity\": 7,\n            \"openingDate\": \"2023-09-24\",\n            \"dlc\": \"2017-08-20\"\n          },\n          {\n            \"id\": \"89e8640c-9946-42d3-b901-003bb21b92ee\",\n            \"childTraceability\": {\n              \"id\": \"c87ec868-0584-4c7b-8f61-c9e0df18c1f6\",\n              \"product\": {\n                \"id\": \"cb9b0177-a19e-44be-8bb9-f0bd046962a3\",\n                \"name\": \"ALUAT MIX SEMINTE             \",\n                \"metiCode\": 29000227,\n                \"familyName\": \"BAZE  BRUTARIE/COFETARIE\",\n                \"familyCode\": 235,\n                \"subfamily\": \"BAZE  BRUTARIE/COFETARIE      \",\n                \"unitBusiness\": \"BAZE  BRUTARIE/COFETARIE      \",\n                \"metricUnit\": \"K\",\n                \"enable\": true,\n                \"batch\": true,\n                \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/235/23002999.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=b0dfa7d9b5780d23ab376921c2e18a7f02d1ceec583f4a5f84e35dcd9fa7988ea430f9b8bf0e47f77a076aae6aaf0e7f82948d7b8e7223d001de9e1a58b5659cae634965bc2ef51bd457da5b66662c95fcb5a00165ae3cd290263854334653fafde82ededad448edc862076d78e4f293c038a0a09390d7bbf6a71d140506bd407f71e4fc212cb544fb3b9a47dbd2b1ab4fc678a02a68d3b9077283276bfed3ddb7ffd7223e2dec725d8d88576aaa6994b907a119ca4e62ecfa77fcf6b52fa3d9d99d44423f000d0d801824a775ab535e38243a96089de2a68c68829ccc0f9a73d6c55e9efc1917a4b2cd5fbdb13a624f1bbcad004c169175e9d1227f273296bf\"\n              },\n              \"store\": {\n                \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n                \"metiCode\": 6,\n                \"name\": \"PLOIESTI\",\n                \"storeType\": \"HYPERMARKET\"\n              },\n              \"productionDate\": \"2014-09-07\",\n              \"chargeNumber\": \"AluatMixSeminte\",\n              \"productionOperator\": \"test_98359d7e7de3\",\n              \"quantity\": 59.29,\n              \"thermalCondition\": \"BAKED\",\n              \"conform\": true,\n              \"dlc\": \"2029-03-27\",\n              \"modifiedBy\": \"liviu_grigorescu\",\n              \"modifiedDate\": \"2024-02-01T14:27:37.684+00:00\",\n              \"createdBy\": \"liviu_grigorescu\",\n              \"createdDate\": \"2024-02-01T14:27:37.684+00:00\",\n              \"traceabilityProductionList\": [\n                {\n                  \"id\": \"8a75b847-7b8d-47ed-96ff-7c68d5ab7db1\",\n                  \"batch\": {\n                    \"id\": \"844c9ac4-0fb9-449d-802c-db75b83dc7e9\",\n                    \"product\": {\n                      \"id\": \"bdd1a352-c150-4280-a417-383d97c45cd3\",\n                      \"name\": \"SROT DE SOIA                  \",\n                      \"metiCode\": 23002997,\n                      \"familyName\": \"MATERII PRIME\",\n                      \"familyCode\": 233,\n                      \"subfamily\": \"MATERII PRIME                 \",\n                      \"unitBusiness\": \"MATERII PRIME                 \",\n                      \"metricUnit\": \"K\",\n                      \"enable\": true,\n                      \"batch\": true,\n                      \"divisiontype\": \"INGREDIENTS\",\n                      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/233/23002997.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=0e035afe3d64b142e4911359671ae2ccce0598978323e9b45ea2c05ae52d49c215d2e85934f201e05d13ef05178b3b9a803b7030e348f8404dddb241fcdd23d3f909349da393275fa63068677a77641754d71b6cb6690a33fa2a2daacd79221e573a172a3db34799aab6293c8d4056705c5b488d896e7e3c072df69634cc2666db099fa304390efd6a643b41e095504699c0ff26b9f50069144f9e42fbe79693f4f4bd3885e0dee520ee4469588772e4aab53794097238d94c7d7e3972030b3bc70b79174e8c83c139c6b65349ee40beeec01732894d16ae01a372a3cca857e3c4d17f3014f6945da3faf28493b284c297812ffc416ed532483f1cc2698b0e3d\"\n                    },\n                    \"supplier\": {\n                      \"id\": \"66937927-fbff-4784-8a03-7a479b5f65bc\",\n                      \"productCode\": 23000682,\n                      \"supplierCode\": 31170,\n                      \"supplierName\": \"A A EXPRODCOM SRL             \",\n                      \"enable\": true\n                    },\n                    \"store\": {\n                      \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n                      \"metiCode\": 6,\n                      \"name\": \"PLOIESTI\",\n                      \"storeType\": \"HYPERMARKET\"\n                    },\n                    \"entryDate\": \"2023-12-12\",\n                    \"expireDate\": \"2024-12-12\",\n                    \"batchName\": \"SrotSoia\",\n                    \"hasExpireDate\": true,\n                    \"hasSecondaryDlc\": false,\n                    \"batchQuantity\": 20.3,\n                    \"batchStatus\": \"AVAILABLE\",\n                    \"dlcDays\": 5,\n                    \"isVerified\": false,\n                    \"consumedAmount\": 46.14,\n                    \"createdBy\": \"liviu_grigorescu\",\n                    \"createdDate\": \"2024-02-01T14:17:27.829+00:00\",\n                    \"modifiedBy\": \"liviu_grigorescu\",\n                    \"modifiedDate\": \"2024-02-01T14:17:27.829+00:00\",\n                    \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//844c9ac4-0fb9-449d-802c-db75b83dc7e9.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=64852d4359749694b040649a17c4e42c16f8a388f665853647fe25450b5b4154c1eadbbff620d57d699944491b26d0b16fc9848e55e8404b71e7084d9fdf67b2bbbf6ebd20aa014aad74206e09bf90b1d03254b28a63a3efdb83ebce185c510c0dcb4f92c64fb54adbcf2e4a11ce734cba08b252e59c150ab847babd9d8cb02bd0eaa280d47fb44fb8dd0647a4a5c4be651e746cc4cc79b60c83d17dd41664ea99a46f8e39378a1c28bc36f2c6e5d55aeb50427e00c7512123faabb86709b4a457987ab459496ec76058082332d6fcdcda8c780b764849a1f04b011a2613c2cf58b3ffe102458e237723f63041b8f5db513200322d0f7562af3092fff0d72fbd\"\n                  },\n                  \"componentCode\": 23002997,\n                  \"componentName\": \"SROT DE SOIA                  \",\n                  \"componentQuantity\": 50.58,\n                  \"componentUnit\": \"K\",\n                  \"quantity\": 46.14,\n                  \"openingDate\": \"2023-09-24\",\n                  \"dlc\": \"2017-08-20\"\n                },\n                {\n                  \"id\": \"cb06348d-f8f4-4dfe-89bb-d6a3a7b81ee3\",\n                  \"batch\": {\n                    \"id\": \"0c57b22e-f631-40c5-8b55-23331272c499\",\n                    \"product\": {\n                      \"id\": \"b4fead1d-2a39-45cb-8b56-f3c929608ec8\",\n                      \"name\": \"SEMINTE IN                    \",\n                      \"metiCode\": 23002844,\n                      \"familyName\": \"MATERII PRIME\",\n                      \"familyCode\": 233,\n                      \"subfamily\": \"MATERII PRIME                 \",\n                      \"unitBusiness\": \"MATERII PRIME                 \",\n                      \"metricUnit\": \"K\",\n                      \"enable\": true,\n                      \"batch\": true,\n                      \"divisiontype\": \"INGREDIENTS\",\n                      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/233/23002844.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=63fb6b2997b2db678c016c82bac9cd3deef25b09b9e02e4ace8482b1502c661fba8e53610875d2875468f9407fe4d8976d2bbe15d2573b74d634d82395f883172d14e3918c80538cb063af57cd4d9582e2669fe4673256dc24df52971afcc43fd84e77444ebf3de66887e5157d3d6b4b9f8d45c64b8f51782270623c0d2f616989c05546ac10e68dd5d820ecbb6311433e2cee9efad7fe4d9b1091faea28d6257c23db57bd4fb3028ba017149bb4e105e3f4a2b3428b51d992f83ed8c6df62143e9796636d5735193c248213ede91f55da6916b0178c8f490de2ff415ff2d74c99332c0275a6bf4d4543fa88461903b7c202806b2011a9db49480997f8515e1a\"\n                    },\n                    \"supplier\": {\n                      \"id\": \"66937927-fbff-4784-8a03-7a479b5f65bc\",\n                      \"productCode\": 23000682,\n                      \"supplierCode\": 31170,\n                      \"supplierName\": \"A A EXPRODCOM SRL             \",\n                      \"enable\": true\n                    },\n                    \"store\": {\n                      \"id\": \"46067582-dd5c-42d5-8132-902fdb5ffc58\",\n                      \"metiCode\": 6,\n                      \"name\": \"PLOIESTI\",\n                      \"storeType\": \"HYPERMARKET\"\n                    },\n                    \"entryDate\": \"2023-12-12\",\n                    \"expireDate\": \"2024-12-12\",\n                    \"batchName\": \"SeminteIn\",\n                    \"hasExpireDate\": true,\n                    \"hasSecondaryDlc\": false,\n                    \"batchQuantity\": 20.3,\n                    \"batchStatus\": \"AVAILABLE\",\n                    \"dlcDays\": 5,\n                    \"isVerified\": false,\n                    \"consumedAmount\": 46.14,\n                    \"createdBy\": \"liviu_grigorescu\",\n                    \"createdDate\": \"2024-02-01T14:19:47.728+00:00\",\n                    \"modifiedBy\": \"liviu_grigorescu\",\n                    \"modifiedDate\": \"2024-02-01T14:19:47.728+00:00\",\n                    \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0c57b22e-f631-40c5-8b55-23331272c499.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240206%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240206T115924Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=4349b63c3b01f5f930bea7755b80d4bbcdb4369b94d858966e5d11f5b6a3e0886f128bc9fefaed49dd9936cb80c8a7a2ddf3ed4caa9bea86e8f4fd5aa8af65e1cf697569ed78749ae6de5aa767fc8e72c38a9177f7f89b335fc37a591f702c32144531ea6a7bba16512738fa356bd77bf88433958e7e97add685297c464a9714b7431cc2e6a2b7bbdd85ce53d95a465ae638d6a1e00ec7304a5fa8249e92117efec3591c2ca6b759b603051dcc2095ca8c162498a8ed2c9f34ee9452a3dab98431b20133ce7491f8fde47d1c341ac79a50d002016ff9d459dc5aab46b38efff23a270e766e9796ab433eb4de25a88fc23250ddead82e37f4f65de20bd44915c6\"\n                  },\n                  \"componentCode\": 23002844,\n                  \"componentName\": \"SEMINTE IN                    \",\n                  \"componentQuantity\": 50.58,\n                  \"componentUnit\": \"K\",\n                  \"quantity\": 46.14,\n                  \"openingDate\": \"2023-09-24\",\n                  \"dlc\": \"2023-08-20\"\n                }\n              ],\n              \"frozen\": false,\n              \"verified\": false,\n              \"createdUser\": false\n            },\n            \"componentCode\": 23002999,\n            \"componentName\": \"ALUAT MIX SEMINTE             \",\n            \"componentQuantity\": 50.58,\n            \"componentUnit\": \"K\",\n            \"quantity\": 25.4,\n            \"openingDate\": \"2023-09-24\",\n            \"dlc\": \"2017-08-20\"\n          }\n        ],\n        \"frozen\": false,\n        \"verified\": false,\n        \"createdUser\": false\n      },\n      \"componentCode\": 23003000,\n      \"componentName\": \"ALUAT PAINA SPORTIVIOR        \",\n      \"componentQuantity\": 50.58,\n      \"componentUnit\": \"K\",\n      \"quantity\": 25.4,\n      \"openingDate\": \"2023-09-24\",\n      \"dlc\": \"2017-08-20\"\n    }\n  ],\n  \"frozen\": false,\n  \"verified\": false,\n  \"createdUser\": false\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "b26d883b-3ca9-4690-866f-634829138429",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "f7b27093-1060-4de9-a4ac-86db18ea914d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "18615543-0be4-4763-8977-7d45bd6ba661",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "52e02b27-f541-4086-9438-d9fc072c3a18",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1cdeda0b-4d76-4400-bccc-7a3e44c00be9",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "0644c586-412e-4d18-8031-630208f83240",
+      "type": "http",
+      "documentation": "Post production traceability",
+      "method": "post",
+      "endpoint": "traceability/production",
+      "responses": [
+        {
+          "uuid": "92580041-119c-4f9c-a2a8-056c80fc412c",
+          "body": "{\n  \"productId\": \"a48c768a-6b62-4598-8053-f90e546aba8a\",\n  \"productionDate\": \"2014-09-26\",\n  \"chargeNumber\": \"12345\",\n  \"productionOperator\": \"operator1\",\n  \"quantity\": 59.29,\n  \"thermalCondition\": \"BAKED\",\n  \"conform\": true,\n  \"nonComplianceReason\": \"\",\n  \"productDestination\": \"\",\n  \"dlc\": \"2029-03-27\",\n  \"traceabilityProductionList\": [\n    {\n      \"batchId\": \"492cf265-420f-4366-ac16-966684fc8148\",\n      \"componentCode\": 23002836,\n      \"componentQuantity\": 50.58,\n      \"quantity\": 46.14,\n      \"openingDate\": \"2023-09-24\",\n      \"dlc\": \"2017-08-20\"\n    },\n    {\n      \"childTraceabilityId\": \"8a80384f-9650-492e-8700-70db9ab63550\",\n      \"componentCode\": 23003001,\n      \"componentQuantity\": 50.58,\n      \"quantity\": 25.4,\n      \"openingDate\": \"2023-09-24\",\n      \"dlc\": \"2017-08-20\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "6e786267-888f-43ce-8af0-90b5af128817",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "28024349-8013-41db-9eb0-91c7ee68e70c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "8df3979d-d807-48a6-87c9-6198a945ec81",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "433e868c-0427-4537-917c-66c9e1535f60",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "24794c3b-ca5e-4595-9c67-04be582b39e8",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "2077ddc2-4bec-4b24-8c71-d5f58333078f",
+      "type": "http",
+      "documentation": "Get charges",
+      "method": "get",
+      "endpoint": "recipe/:id",
+      "responses": [
+        {
+          "uuid": "10702951-1de1-4e09-a662-34f5297b36ac",
+          "body": "[\n  {\n    \"productId\": \"47bcc97e-c477-4f44-9bdb-0a6ed546291e\",\n    \"productName\": \"TORT FELII                    \",\n    \"recipeCode\": 23001603,\n    \"recipeDate\": \"2009-06-25T00:00:00\",\n    \"recipeUnit\": \"K\",\n    \"recipeQuantity\": 1,\n    \"enable\": true,\n    \"componentList\": [\n      {\n        \"id\": \"b3d70d72-f664-464f-8b75-d4ae9849baef\",\n        \"componentCode\": 23001430,\n        \"componentName\": \"CUTIE TORT MIC INCLINATA DP271\",\n        \"componentUnit\": \"A\",\n        \"componentQuantity\": 1,\n        \"dlcDays\": 3,\n        \"componentProductId\": \"171acc2e-a126-4989-9f0d-8403791f3e9b\",\n        \"enable\": true,\n        \"withBatch\": true,\n        \"withRecipe\": false\n      },\n      {\n        \"id\": \"52c5eddb-b847-4f80-a0f9-bda37ecb2242\",\n        \"componentCode\": 29000843,\n        \"componentName\": \"TORT CARAMELINO               \",\n        \"componentUnit\": \"K\",\n        \"componentQuantity\": 0.25,\n        \"dlcDays\": 3,\n        \"componentProductId\": \"4e6216bb-264d-4dc9-ace5-d71a45197231\",\n        \"enable\": true,\n        \"withBatch\": true,\n        \"withRecipe\": true\n      },\n      {\n        \"id\": \"8a1c9998-49e1-4231-a6d9-2edb47737018\",\n        \"componentCode\": 29000227,\n        \"componentName\": \"TORT PADUREA NEAGRA           \",\n        \"componentUnit\": \"K\",\n        \"componentQuantity\": 0.375,\n        \"dlcDays\": 3,\n        \"componentProductId\": \"81d7fa3f-feba-4773-a26e-f2ad1345d43b\",\n        \"enable\": true,\n        \"withBatch\": true,\n        \"withRecipe\": true\n      },\n      {\n        \"id\": \"812f793e-f7df-4f1d-a2b9-e9d027964bfe\",\n        \"componentCode\": 29000221,\n        \"componentName\": \"TORT CIOCOLATA TRUFFIER       \",\n        \"componentUnit\": \"K\",\n        \"componentQuantity\": 0.45,\n        \"dlcDays\": 3,\n        \"componentProductId\": \"16678d3a-6596-4060-be3e-39ef49b95599\",\n        \"enable\": true,\n        \"withBatch\": true,\n        \"withRecipe\": true\n      },\n      {\n        \"id\": \"30fc0083-d835-44b1-b5e8-7f42b3025125\",\n        \"componentCode\": 28000226,\n        \"componentName\": \"ETICHETA BIZERBA              \",\n        \"componentUnit\": \"A\",\n        \"componentQuantity\": 1,\n        \"dlcDays\": 3,\n        \"componentProductId\": \"29114cba-8e6f-476c-929c-029a77230120\",\n        \"enable\": true,\n        \"withBatch\": true,\n        \"withRecipe\": false\n      },\n      {\n        \"id\": \"e33f5592-789e-4a27-beca-67cdddbb2d85\",\n        \"componentCode\": 23002073,\n        \"componentName\": \"DISCURI AURII 24CM            \",\n        \"componentUnit\": \"A\",\n        \"componentQuantity\": 1,\n        \"dlcDays\": 3,\n        \"componentProductId\": \"17ee802f-46d6-4d51-9c8d-0d2729a707f0\",\n        \"enable\": true,\n        \"withBatch\": true,\n        \"withRecipe\": false\n      }\n    ]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "79582bbe-8650-48a7-a5ef-e1580ecd035c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0424344c-c08f-44d6-88d6-cc291645bbf1",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3177e05c-7f01-41a4-813a-9da2ef804d11",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "86dbb6d8-afa5-4355-83d3-72e0933782bf",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a330d8e7-c8b4-4e47-bc63-a75d84c62ce2",
           "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 500,
@@ -7667,6 +8283,22 @@
     {
       "type": "route",
       "uuid": "b63c6e85-ce46-487a-9f92-e7a03ac842c9"
+    },
+    {
+      "type": "route",
+      "uuid": "392d06bb-b4a2-4d1d-88c0-90f9027fc1cb"
+    },
+    {
+      "type": "route",
+      "uuid": "cd4482ea-fd11-4cd1-a1c3-122ccf3b5ab9"
+    },
+    {
+      "type": "route",
+      "uuid": "0644c586-412e-4d18-8031-630208f83240"
+    },
+    {
+      "type": "route",
+      "uuid": "2077ddc2-4bec-4b24-8c71-d5f58333078f"
     }
   ],
   "proxyMode": false,
