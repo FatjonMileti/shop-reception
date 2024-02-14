@@ -24,6 +24,7 @@ export const toAsyncSelectOptions = (data, valueKey, labelKey) =>
 
 export const getStructureRoles = (props) => {
   const {
+    isTraceabilityOpChecked,
     isRegionManagerChecked,
     isStoreManagerChecked,
     isTraineeChecked,
@@ -31,9 +32,11 @@ export const getStructureRoles = (props) => {
     regionId,
     storeId,
     adminId,
+    traceabilityId,
     regionMgValue,
     storeMgValue,
-    traineeValue
+    traineeValue,
+    traceabilityOpValue,
   } = props;
   return [
     ...(isRegionManagerChecked ? 
@@ -59,6 +62,12 @@ export const getStructureRoles = (props) => {
         "roleId": adminId,
         "structureId": null,
         "structureType": null
-      }] : []),             
+      }] : []),
+    ...(isTraceabilityOpChecked ?
+      [{
+        "roleId": traceabilityId,
+        "structureId": traceabilityOpValue.value,
+        "structureType": "STORE"
+      }] : []),
   ]
 }

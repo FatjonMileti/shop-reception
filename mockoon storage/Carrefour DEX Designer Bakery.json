@@ -458,6 +458,70 @@
           "callbacks": []
         },
         {
+          "uuid": "6aab1294-9514-418a-8819-d1c294b3ab9c",
+          "body": "[\n  {\n    \"id\": \"355\",\n    \"name\": \"Management produse\",\n    \"icon\": \"ProductManagementFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"355\" },\n    \"screens\": [\n      {\n        \"id\": \"355\",\n        \"routeURL\": \"/bakery/formator/product-management-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"356\",\n        \"routeURL\": \"/product-detail-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"288\",\n    \"name\": \"Management productie (cadentier)\",\n    \"icon\": \"CadentierFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"288\" },\n    \"screens\": [\n      {\n        \"id\": \"288\",\n        \"routeURL\": \"/bakery/formator/cadentier-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"289\",\n        \"routeURL\": \"/bakery/formator/cadentier-details-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"290\",\n        \"routeURL\": \"/bakery/formator/cadentier-formator-print\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"299\",\n    \"name\": \"Coeficient crestere magazin\",\n    \"icon\": \"ProductGrowthIndexFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"299\" },\n    \"screens\": [\n      {\n        \"id\": \"299\",\n        \"routeURL\": \"/bakery/formator/product-growth-index-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"311\",\n    \"name\": \"Setari coeficient de crestere\",\n    \"icon\": \"GrowthIndexFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"311\" },\n    \"screens\": [\n      {\n        \"id\": \"311\",\n        \"routeURL\": \"/bakery/formator/growth-index-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"322\",\n    \"name\": \"Coeficient crestere regiune\",\n    \"icon\": \"GrowthRegionFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"322\" },\n    \"screens\": [\n      {\n        \"id\": \"322\",\n        \"routeURL\": \"/bakery/formator/growth-region-formator\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"323\",\n        \"routeURL\": \"/bakery/formator/growthIndexView/:id\",\n        \"routePathExact\": true\n      },\n      {\n        \"id\": \"324\",\n        \"routeURL\": \"/bakery/formator/growthIndexProdcutsView/:id\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"333\",\n    \"name\": \"Raport de utilizare aplicatie\",\n    \"icon\": \"UsageReportFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Formator\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"333\" },\n    \"screens\": [\n      {\n        \"id\": \"333\",\n        \"routeURL\": \"/bakery/formator/usage-report-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"344\",\n    \"name\": \"Raport cadentier + vanzari\",\n    \"icon\": \"SalesCadentierFormator\",\n    \"submodule\": {\n      \"id\": \"33\",\n      \"name\": \"Admin\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/formator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": { \"id\": \"344\" },\n    \"screens\": [\n      {\n        \"id\": \"344\",\n        \"routeURL\": \"/bakery/formator/sales-cadentier-formator\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Bakery formator",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "submoduleId",
+              "value": "33",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0d176b54-9438-4134-9a8e-1bda3231d490",
+          "body": "[\n  {\n    \"id\": \"177\",\n    \"name\": \"Management produse\",\n    \"icon\": \"ProductsManagement\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Operator trasabilitate\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/traceabilityOperator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": {\n      \"id\": \"177\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"177\",\n        \"routeURL\": \"/bakery/traceabilityOperator/product-management\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"188\",\n    \"name\": \"Produse receptionate\",\n    \"icon\": \"ProductsManagement\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Operator trasabilitate\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/traceabilityOperator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": {\n      \"id\": \"188\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"188\",\n        \"routeURL\": \"/bakery/traceabilityOperator/received-products\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"199\",\n    \"name\": \"Trasabilitate congelate\",\n    \"icon\": \"ProductsManagement\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Operator trasabilitate\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/traceabilityOperator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": {\n      \"id\": \"199\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"199\",\n        \"routeURL\": \"/bakery/traceabilityOperator/frozen-traceability\",\n        \"routePathExact\": true\n      }\n    ]\n  },\n  {\n    \"id\": \"200\",\n    \"name\": \"Trasabilitate productie proprie\",\n    \"icon\": \"ProductsManagement\",\n    \"submodule\": {\n      \"id\": \"44\",\n      \"name\": \"Operator trasabilitate\",\n      \"icon\": \"Groups\",\n      \"routeURL\": \"/traceabilityOperator\",\n      \"routePathExact\": true\n    },\n    \"firstScreen\": {\n      \"id\": \"200\"\n    },\n    \"screens\": [\n      {\n        \"id\": \"200\",\n        \"routeURL\": \"/bakery/traceabilityOperator/own-production-traceability\",\n        \"routePathExact\": true\n      }\n    ]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Bakery tracebility operator",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "submoduleId",
+              "value": "66",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
           "uuid": "b8bb760b-999c-4ff1-bf4e-667c249b6b41",
           "body": "[{\n\t\t\"id\": \"6\",\n\t\t\"name\": \"Scanare Produs\",\n\t\t\"icon\": \"QrCodeScannerOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"6\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"6\",\n\t\t\t\"routeURL\": \"/productScan\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/storesStock\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}, {\n\t\t\"id\": \"414\",\n\t\t\"name\": \"Listare proforme\",\n\t\t\"icon\": \"ReceiptLongRounded\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"414\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"414\",\n\t\t\t\"routeURL\": \"/proformaList\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"415\",\n\t\t\t\"routeURL\": \"/proformaView/:id\",\n\t\t\t\"routePathExact\": true\n\t\t},{\n\t\t\t\"id\": \"416\",\n\t\t\t\"routeURL\": \"/scanReceipt/:id\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"417\",\n\t\t\t\"routeURL\": \"/receiptSelectClient\",\n\t\t\t\"routePathExact\": true\n\t\t}, {\n\t\t\t\"id\": \"418\",\n\t\t\t\"routeURL\": \"/receiptClientDetails/:id\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}, {\n\t\t\"id\": \"7\",\n\t\t\"name\": \"Cos de cumparaturi\",\n\t\t\"icon\": \"ShoppingBasketOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"8\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"8\",\n\t\t\t\"routeURL\": \"/shoppingCart\",\n\t\t\t\"routePathExact\": true\n\t\t},\n\t\t{\n\t\t  \"id\": \"10\",\n\t\t\t\"routeURL\": \"/shoppingCartSelectClient\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"name\": \"Selecteaza client\"\n\t\t},\n\t\t{\n\t\t  \"id\": \"11\",\n\t\t\t\"routeURL\": \"/shoppingCartClientDetails/:id\",\n\t\t\t\"routePathExact\": true,\n\t\t\t\"name\": \"Date client\"\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"8\",\n\t\t\"name\": \"Vanzarile mele\",\n\t\t\"icon\": \"StackedBarChartOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"9\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"9\",\n\t\t\t\"routeURL\": \"/sales\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t},\n\t{\n\t\t\"id\": \"413\",\n\t\t\"name\": \"Lista produse de livrat\",\n\t\t\"icon\": \"ShoppingCartCheckoutOutlined\",\n\t\t\"submodule\": {},\n\t\t\"firstScreen\": {\n\t\t\t\"id\": \"413\"\n\t\t},\n\t\t\"screens\": [{\n\t\t\t\"id\": \"413\",\n\t\t\t\"routeURL\": \"/productsToDeliver\",\n\t\t\t\"routePathExact\": true\n\t\t}]\n\t}\n]",
           "latency": 0,

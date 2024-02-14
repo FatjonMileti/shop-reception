@@ -46,7 +46,6 @@ export const getValidationSchema = () =>
   })
 
 export const toBatchFormat = (batches, isEdit = false) => {
-  console.log('debug item', batches)
   return batches.map(item => ({
     batchId: isEdit ? item.batch.batchName : item.batchName,
     quantity: isEdit ? item.batch.batchQuantity : item.batchQuantity,
