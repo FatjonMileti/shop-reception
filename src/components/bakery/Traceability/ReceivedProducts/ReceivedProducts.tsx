@@ -146,23 +146,6 @@ export const ReceivedProducts = () => {
       ),
       type: 'autocomplete',
       label: 'Subfamilie'
-    },
-    {
-      name: 'scheduleProduct',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Produs cadentier"
-          disableClearable
-          options={[
-            { value: 'true', label: 'Da' },
-            { value: 'false', label: 'Nu' }
-          ]}
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Produs cadentier'
     }
   ]
 
