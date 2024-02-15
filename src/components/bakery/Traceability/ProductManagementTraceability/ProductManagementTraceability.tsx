@@ -21,6 +21,7 @@ import { useQuery } from 'react-query'
 import s from '../../commonStyles.modules.scss'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
+import { ImageCell } from '../../../core-ui/ImageCell'
 
 const columns: Column[] = [
   {
@@ -298,7 +299,7 @@ export const ProductManagementTraceability = () => {
           id: item.id,
           summary: (
             <AccordionSummaryWrapper>
-              <img src={'images/default-product-image.svg'} />
+              <ImageCell value={''} imageUrl={item.imageUrl} />
               <div className="title-and-content-wrapper">
                 <Typography variant="medium" className="title">
                   {item.productName}
