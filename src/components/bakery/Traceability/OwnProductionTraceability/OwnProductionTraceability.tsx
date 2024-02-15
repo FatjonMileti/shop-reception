@@ -117,6 +117,7 @@ export const OwnProductionTraceability = () => {
             }
           ]}
           rowActionsWidth="90px"
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </>
     </div>

@@ -332,6 +332,7 @@ export const ProductManagementTraceability = () => {
         }))}
         handleRemoteData={ debounce(fetchData, 500) }
         rowActionsWidth="200px"
+        rowsPerPageOptions={[25, 50, 100]}
       />
     </div>
   )
