@@ -56,7 +56,7 @@ const columns: Column[] = [
     field: 'batch',
     render: row => (
       <BodyItem
-        name="Metoda fabricatie"
+        name="Lot"
         value={
           <BooleanIcon value={row.batch} icon="Flag" onFailure="#FFFFFF" onSuccess="#33691E" />
         }
@@ -299,7 +299,7 @@ export const ProductManagementTraceability = () => {
               <img src={'images/default-product-image.svg'} />
               <div className="title-and-content-wrapper">
                 <Typography variant="medium" className="title">
-                  Paine 7 seminte
+                  {item.productName}
                 </Typography>
                 <div className="content-wrapper">
                   {headerItems.map((hc, cIndex) => (
