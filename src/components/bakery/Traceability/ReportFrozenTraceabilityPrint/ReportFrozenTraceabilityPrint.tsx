@@ -34,7 +34,7 @@ export const ReportFrozenTraceabilityPrint = () => {
   })
 
   const tableFilters = React.useMemo(() => {
-    return filterBy.split('|').map((name, i) => ({ name, value: filterValue.split('|')[i] }))
+    return filterBy?.split('|').map((name, i) => ({ name, value: filterValue.split('|')[i] })) || []
   }, [])
 
   const reportDataQuery = useQuery<{ list: TracedProduct[] }>(
@@ -82,7 +82,15 @@ export const ReportFrozenTraceabilityPrint = () => {
             <Icon_v2 iconName={'CarrefourLogoBlack'} iconType="Icon" />
           </Grid>
 
-          <Grid item xs={4} justifyContent="center" container rowGap="8px" textAlign="center" className={styles.middleColumn}>
+          <Grid
+            item
+            xs={4}
+            justifyContent="center"
+            container
+            rowGap="8px"
+            textAlign="center"
+            className={styles.middleColumn}
+          >
             <p className={styles.title}>
               <b>Raport TRASABILITATE CONGELATE</b>
             </p>
