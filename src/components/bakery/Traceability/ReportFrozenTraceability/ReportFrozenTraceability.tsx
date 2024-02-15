@@ -168,7 +168,7 @@ export const ReportFrozenTraceability = () => {
       label: 'Produs'
     },
     {
-      name: 'dateFrom',
+      name: 'startDate',
       value: currentDate,
       filter: (
         <DatePicker
@@ -182,7 +182,7 @@ export const ReportFrozenTraceability = () => {
       label: 'Data inceput productie'
     },
     {
-      name: 'dateTo',
+      name: 'endDate',
       value: currentDate,
       filter: (
         <DatePicker
