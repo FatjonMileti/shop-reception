@@ -65,9 +65,20 @@ export const FrozenTraceability = () => {
   }
 
   const families = useQuery(
-    ['families-store'],
+    ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
-      const result = await makeCoreGetRequest(`/bakery/store/families`)
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+        ?.value || []) as AutoCompleteValue[]
+
+      const result = await makeCoreGetRequest(
+        `/bakery/store/families`,
+        {
+          params: {
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+          },
+          paramsSerializer: { indexes: null }
+        }
+      )
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
           label: item.name,
@@ -130,7 +141,6 @@ export const FrozenTraceability = () => {
       ),
       type: 'autocomplete',
       label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
     },
     {
       name: 'subfamily',
