@@ -27,6 +27,7 @@ import { ReceivedProduct, FamilyItem, SubfamilyItem } from './interfaces'
 import { get } from 'lodash'
 import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
 import { ImageCell } from '../../../core-ui/ImageCell'
+import { TableState } from '../../StoreManagerRole/ProductionManagementStore/interfaces'
 
 export const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -39,6 +40,14 @@ export const ReceivedProducts = () => {
   const [isEditModalOpen, setEditModalOpen] = React.useState<boolean>(false)
 
   const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
+
+  const [tableState, setTableState] = useState<{
+    tableFilters: Filter[]
+    rowsPerPage: number
+  }>({
+    tableFilters: null,
+    rowsPerPage: null
+  })
 
   const { showNotification } = useNotification()
 
@@ -57,6 +66,11 @@ export const ReceivedProducts = () => {
       setTableItems(response.list.map(toTableRowItem))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
+
+      setTableState({
+        tableFilters,
+        rowsPerPage
+      })
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -71,15 +85,12 @@ export const ReceivedProducts = () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
         ?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(
-        `/bakery/store/families`,
-        {
-          params: {
-            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
-          },
-          paramsSerializer: { indexes: null }
-        }
-      )
+      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+        params: {
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
           label: item.name,
@@ -141,7 +152,7 @@ export const ReceivedProducts = () => {
         />
       ),
       type: 'autocomplete',
-      label: 'Familie',
+      label: 'Familie'
     },
     {
       name: 'subfamily',
@@ -162,7 +173,13 @@ export const ReceivedProducts = () => {
 
   return (
     <div className={s.mainContainer}>
-      <AddReceivedProduct isModalOpen={isAddModalOpen} closeModal={() => setAddModalOpen(false)} />
+      <AddReceivedProduct
+        isModalOpen={isAddModalOpen}
+        closeModal={() => setAddModalOpen(false)}
+        onSuccess={() => {
+          fetchData(0, tableState.rowsPerPage, tableState.tableFilters)
+        }}
+      />
       <CorrectReceivedProduct
         isModalOpen={isCorrectModalOpen}
         closeModal={() => {
@@ -259,6 +276,7 @@ export const ReceivedProducts = () => {
           }
         ]}
         rowActionsWidth="200px"
+        rowsPerPage={25}
         rowsPerPageOptions={[25, 50, 100]}
       />
     </div>
