@@ -303,6 +303,7 @@ VALUES
     (215, 'Produs aleatoriu', '', '/shop-reception/mobile/randomProduct', true, 188, false),
     (216, 'Comanda camion retur', '', '/shop-reception/mobile/truckReturnOrder', true, 189, true),
     (217, 'Camioane retur confirmate', '', '/shop-reception/mobile/truckReturnConfirm', true, 190, true),
+    (218, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips/:id', true, 163, false),
     -- Bakery TRACEABILITY-OPERATOR
     (67, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 50, true),
     (68, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 51, true),
