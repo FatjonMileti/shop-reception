@@ -6,7 +6,7 @@ import {
   Column,
   HeaderItem
 } from './AccordionTable'
-import { Grid, Typography } from '@mui/material'
+import { debounce, Grid, Typography } from '@mui/material'
 import { FamilyItem, ProductManagementItem, SubfamilyItem } from '../../StoreManagerRole/interfaces'
 import { makeCoreGetRequest } from '../../../../utils/api'
 import { toTableGETUrl } from '../../../core-ui/Table/serializers'
@@ -21,6 +21,7 @@ import { useQuery } from 'react-query'
 import s from '../../commonStyles.modules.scss'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
+import { ImageCell } from '../../../core-ui/ImageCell'
 
 const columns: Column[] = [
   {
@@ -56,7 +57,7 @@ const columns: Column[] = [
     field: 'batch',
     render: row => (
       <BodyItem
-        name="Metoda fabricatie"
+        name="Lot"
         value={
           <BooleanIcon value={row.batch} icon="Flag" onFailure="#FFFFFF" onSuccess="#33691E" />
         }
@@ -153,17 +154,18 @@ export const ProductManagementTraceability = () => {
   const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
   const { showNotification } = useNotification()
 
-  const fetchData = async (page, rowsPerPage, tableFilters) => {
+  const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
 
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/product',
-          // searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
+          searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
           tableFilters,
           page,
-          rowsPerPage
+          rowsPerPage,
+          searchText
         })
       )
       setTableItems(toTableRowItems(response.list))
@@ -291,15 +293,16 @@ export const ProductManagementTraceability = () => {
         totalCount={totalCount}
         isLoading={isLoading}
         filters={drawerFilters}
+        hasSearchInput
         handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         rows={tableItems.map(item => ({
           id: item.id,
           summary: (
             <AccordionSummaryWrapper>
-              <img src={'images/default-product-image.svg'} />
+              <ImageCell value={''} imageUrl={item.imageUrl} />
               <div className="title-and-content-wrapper">
                 <Typography variant="medium" className="title">
-                  Paine 7 seminte
+                  {item.productName}
                 </Typography>
                 <div className="content-wrapper">
                   {headerItems.map((hc, cIndex) => (
@@ -328,8 +331,9 @@ export const ProductManagementTraceability = () => {
           ),
           borderLeftColor: '#0970E6'
         }))}
-        handleRemoteData={fetchData}
+        handleRemoteData={ debounce(fetchData, 500) }
         rowActionsWidth="200px"
+        rowsPerPageOptions={[25, 50, 100]}
       />
     </div>
   )

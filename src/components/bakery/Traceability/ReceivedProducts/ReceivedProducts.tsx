@@ -26,6 +26,7 @@ import { CorrectReceivedProduct } from './CorrectReceivedProduct/CorrectReceived
 import { ReceivedProduct, FamilyItem, SubfamilyItem } from './interfaces'
 import { get } from 'lodash'
 import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
+import { ImageCell } from '../../../core-ui/ImageCell'
 
 export const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -188,7 +189,7 @@ export const ReceivedProducts = () => {
           id: item.id,
           summary: (
             <AccordionSummaryWrapper>
-              <img src={'images/default-product-image.svg'} />
+              <ImageCell value={''} imageUrl={item.imageUrl} />
               <div className="title-and-content-wrapper">
                 <Typography variant="medium" className="title">
                   {item.product.name}
@@ -258,6 +259,7 @@ export const ReceivedProducts = () => {
           }
         ]}
         rowActionsWidth="200px"
+        rowsPerPageOptions={[25, 50, 100]}
       />
     </div>
   )
