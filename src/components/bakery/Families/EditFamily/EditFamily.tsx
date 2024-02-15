@@ -34,8 +34,6 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
       async () => {
         const result = await makeCoreGetRequest('/bakery/module')
         const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
-
-        setModuleValue(resultOptions[0])
         return resultOptions || []
       },
       {
@@ -101,7 +99,10 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
         onSubmit: async (values: EditFamilyItem, { resetForm }) => {
             const payload = {
                 ...values,
-                enable: values.enable === 'Da'
+                enable: values.enable === 'Da',
+            }
+            if(moduleValue.value) {
+              payload.moduleId = moduleValue.value
             }
             mutate(payload)
             resetForm()
@@ -110,7 +111,6 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
 
     const handleModuleChange = value => {
       setModuleValue(value)
-      setShouldRefreshData(true)
     }
     
     return (
