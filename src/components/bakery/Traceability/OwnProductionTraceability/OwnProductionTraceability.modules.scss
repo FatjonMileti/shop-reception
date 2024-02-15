@@ -1,0 +1,33 @@
+.mainContainer {
+  margin: 24px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+
+  & > div {
+    margin: 0;
+  }
+}
+
+.summary {
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.batch {
+  padding: 8px;
+  border-radius: 8px;
+  gap: 8px;
+  background-color: #F0F2F5;
+
+}

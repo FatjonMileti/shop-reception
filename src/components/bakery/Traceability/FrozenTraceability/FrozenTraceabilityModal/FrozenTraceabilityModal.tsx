@@ -58,7 +58,7 @@ export const FrozenTraceabilityModal = ({
     [selectedProduct?.id, selectedRows, editItem?.id, isEdit]
   )
 
-  const validationSchema = useMemo(() => getValidationSchema(), []);
+  const validationSchema = useMemo(() => getValidationSchema(), [])
 
   const formik = useFormik({
     validateOnChange: false,
@@ -90,7 +90,7 @@ export const FrozenTraceabilityModal = ({
     formik.resetForm()
     formik.setFieldValue('traceabilityFrozenList', [])
   }
-  
+
   return (
     <Modal
       isModalOpen={isModalOpen}
