@@ -19,27 +19,6 @@ interface TruckItem {
   eTransportStatus: string
 }
 
-interface DeliverySlip {
-  id: number
-  externalTicketId?: string
-  externalShopCode?: string
-  shopCode: string
-  deliveryType: string
-  created: string
-  deliveryHour?: string
-  expectedDeliveryDate?: Date
-  transporterCode?: string
-  transportCode: string
-  sealCode: string
-  truckNumber: string
-  status: string
-  validatedShopCodes?: string
-  sentShopCodes?: string
-  receptionFile?: string
-  depositName: string
-  numberOfSupports: number
-  validatedSupports: number
-}
 
 interface AdminDeposit {
   id: number

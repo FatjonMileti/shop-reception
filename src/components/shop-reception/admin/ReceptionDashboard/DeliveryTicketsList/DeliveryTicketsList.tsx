@@ -9,11 +9,13 @@ import { Table } from 'components/core-ui/Table'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { ViewActionIcon } from 'icons'
+import { DeliveryTicket } from './interfaces'
 
-const DeliverySlipsList = () => {
+const DeliveryTicketsList = () => {
   const navigate = useNavigate()
   const { showNotification } = useNotification()
-  const [tableItems, setTableItems] = useState<DeliverySlip[]>([])
+  const [tableItems, setTableItems] = useState<DeliveryTicket[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
@@ -62,7 +64,8 @@ const DeliverySlipsList = () => {
             labelColor: 'white',
             typographyVariant: 'medium',
             backgroundColor: '#16a085',
-            onClick: (e, rowId) => {
+            desktopIcon: <ViewActionIcon />,
+            onClick: (_e, rowId) => {
               navigate(URLS.AUTH_DELIVERY_SLIP.replace(':id', rowId))
             }
           }
@@ -74,4 +77,4 @@ const DeliverySlipsList = () => {
   )
 }
 
-export default DeliverySlipsList
+export default DeliveryTicketsList

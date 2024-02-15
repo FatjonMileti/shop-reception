@@ -2,7 +2,7 @@ import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { Route } from 'react-router-dom'
 import { URLS } from './constants'
 import { TruckList } from './ReceptionDashboard/TruckList'
-import { DeliverySlipsList } from './ReceptionDashboard/DeliverySlipsList'
+import { DeliveryTicketsList, DeliveryTicketsDetails } from './ReceptionDashboard/DeliveryTicketsList'
 import { SupportWrongDestination } from './ReceptionDashboard/SupportWrongDestination'
 import { UnorderedProducts } from './ReceptionDashboard/UnorderedProducts'
 import { MetiFiles } from './ReceptionDashboard/MetiFiles'
@@ -29,7 +29,6 @@ import { PackagingTypesDifferences } from './PackageDashboard/PackagingTypesDiff
 import { ReturnedPackaging } from './PackageDashboard/ReturnedPackaging'
 import { PackagingCompliance } from './PackageDashboard/PackagingCompliance'
 import { PackagingDisputesTimer } from './PackageDashboard/PackagingDisputesTimer'
-import { ShowDeliverySlip } from './ReceptionDashboard/DeliverySlipsList/ShowDeliverySlip'
 import { TruckDetail } from './ReceptionDashboard/TruckList/TruckDetail'
 import { SupportWrongDestinationDetail } from './ReceptionDashboard/SupportWrongDestination/SupportWrongDestinationDetail'
 import { PackagingDisputesTimerDetail } from './PackageDashboard/PackagingDisputesTimer/PackagingDisputesTimerDetail'
@@ -185,7 +184,7 @@ export const useShopReceptionRoutes = applicationPages => {
         path={URLS.AUTH_DELIVERY_SLIPS_LIST}
         element={
           <PrivateRoute
-            component={DeliverySlipsList}
+            component={DeliveryTicketsList}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -195,7 +194,7 @@ export const useShopReceptionRoutes = applicationPages => {
         path={URLS.AUTH_DELIVERY_SLIP}
         element={
           <PrivateRoute
-            component={ShowDeliverySlip}
+            component={DeliveryTicketsDetails}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

@@ -85,16 +85,16 @@ export const drawerFilters = [
         options={[
           {
             value: '1',
-            label: '1'
+            label: 'Magazin 1'
           },
 
           {
             value: '2',
-            label: '2'
+            label: 'Magazin 2'
           },
           {
             value: '3',
-            label: '3'
+            label: 'Magazin 3'
           }
         ]}
       />
@@ -113,17 +113,17 @@ export const drawerFilters = [
         disableClearable
         options={[
           {
-            value: 'a',
-            label: 'a'
+            value: '1',
+            label: 'Depozit 1'
           },
 
           {
-            value: 'b',
-            label: 'b'
+            value: '2',
+            label: 'Depozit 2'
           },
           {
-            value: 'c',
-            label: 'c'
+            value: '3',
+            label: 'Depozit 3'
           }
         ]}
       />
@@ -142,17 +142,13 @@ export const drawerFilters = [
         disableClearable
         options={[
           {
-            value: 'a1',
-            label: 'a1'
+            value: 'todo',
+            label: 'Todo'
           },
 
           {
-            value: 'b1',
-            label: 'b1'
-          },
-          {
-            value: 'c1',
-            label: 'c1'
+            value: 'done',
+            label: 'Done'
           }
         ]}
       />
