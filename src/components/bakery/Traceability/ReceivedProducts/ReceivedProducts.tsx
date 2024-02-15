@@ -259,6 +259,7 @@ export const ReceivedProducts = () => {
           }
         ]}
         rowActionsWidth="200px"
+        rowsPerPage={25}
         rowsPerPageOptions={[25, 50, 100]}
       />
     </div>

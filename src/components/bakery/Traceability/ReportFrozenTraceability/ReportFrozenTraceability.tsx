@@ -275,6 +275,7 @@ export const ReportFrozenTraceability = () => {
             }
           ]}
           rowActionsWidth="90px"
+          rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}
         />
       </>

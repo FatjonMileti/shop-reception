@@ -14,138 +14,13 @@ import { toTableRowItems } from '../../StoreManagerRole/ProductManagementStore/s
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { useNotification } from '../../../../hooks'
 import { ValueLabelInterface } from '../../interfaces'
-import { BooleanIcon } from '../../../core-ui/BooleanIcon'
-import { DescriptionText } from '../../../core-ui/DescriptionText'
 import { Autocomplete, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import { useQuery } from 'react-query'
 import s from '../../commonStyles.modules.scss'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 import { ImageCell } from '../../../core-ui/ImageCell'
-
-const columns: Column[] = [
-  {
-    title: 'Cod EAN',
-    field: 'eanCodes'
-  },
-  {
-    title: 'Cod PLU',
-    field: 'pluCode'
-  },
-  {
-    title: 'Cod APPEL PRIX',
-    field: 'appelCodes'
-  },
-  {
-    title: 'Raion',
-    field: 'familyModuleName'
-  },
-  {
-    title: 'UB',
-    field: 'unitBusiness'
-  },
-  {
-    title: 'Status',
-    field: 'status'
-  },
-  {
-    title: 'Furnizor',
-    field: 'suppliers'
-  },
-  {
-    title: 'Lot',
-    field: 'batch',
-    render: row => (
-      <BodyItem
-        name="Lot"
-        value={
-          <BooleanIcon value={row.batch} icon="Flag" onFailure="#FFFFFF" onSuccess="#33691E" />
-        }
-      />
-    )
-  },
-  {
-    title: 'Metoda fabricatie',
-    field: 'fabricationMethod',
-    render: row => (
-      <BodyItem
-        name="Metoda fabricatie"
-        value={<DescriptionText value={row.fabricationMethod} />}
-      />
-    )
-  },
-  {
-    field: 'clusterName',
-    render: data => <BodyItem name="Cluster" value={data.clusterName} />
-  },
-  {
-    field: 'clusterMandatory',
-    render: data => (
-      <BodyItem
-        name="Obligatoriu"
-        value={
-          <BooleanIcon
-            value={data.clusterMandatory}
-            icon="CheckCircleOutline"
-            onFailure="#E5E5E5"
-            onSuccess="#33691E"
-          />
-        }
-      />
-    )
-  },
-  {
-    field: 'scheduleProduct',
-    render: data => (
-      <BodyItem
-        name="Produs cadentier"
-        value={
-          <BooleanIcon
-            value={data.scheduleProduct}
-            icon="CheckCircleOutline"
-            onFailure="#E5E5E5"
-            onSuccess="#33691E"
-          />
-        }
-      />
-    )
-  },
-  {
-    field: 'minStock',
-    title: 'Stoc minim prezentare'
-  },
-  {
-    render: data => (
-      <BodyItem
-        name="Produs nou"
-        value={
-          <BooleanIcon
-            value={data.newProduct}
-            icon="CheckCircleOutline"
-            onFailure="#E5E5E5"
-            onSuccess="#33691E"
-          />
-        }
-      />
-    ),
-    field: 'newProduct'
-  }
-]
-
-const headerItems: Column[] = [
-  {
-    title: 'Cod METI',
-    field: 'metiCode'
-  },
-  {
-    title: 'Familie',
-    field: 'familyName'
-  },
-  {
-    title: 'Subfamilie',
-    field: 'subfamily'
-  }
-]
+import {columns, headerItems} from './helpers'
 
 export const ProductManagementTraceability = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -333,6 +208,7 @@ export const ProductManagementTraceability = () => {
         }))}
         handleRemoteData={ debounce(fetchData, 500) }
         rowActionsWidth="200px"
+        rowsPerPage={25}
         rowsPerPageOptions={[25, 50, 100]}
       />
     </div>
