@@ -6,6 +6,7 @@ import { ProductDetails } from './AddReceivedProduct/ProductDetails'
 import dayjs from 'dayjs'
 import { ReceivedProduct } from './interfaces'
 import { formatPayloadDate } from '../../../../utils/helpers'
+import { ImageCell } from '../../../core-ui/ImageCell'
 
 export const toTableRowItem = (item: Partial<ReceivedProduct>): ReceivedProduct => ({
   id: item.id || '',
@@ -136,7 +137,9 @@ export const columns: Column[] = [
     render: row => (
       <BodyItem
         name="Poza eticheta"
-        value={<img src={row.imageUrl} style={{ width: '40px', height: '40px' }} />}
+        value={
+          <ImageCell value={''} imageUrl={row.imageUrl} />
+        }
       />
     )
   },
