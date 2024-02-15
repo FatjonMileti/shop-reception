@@ -15,7 +15,7 @@ import { EditTeamAssignment } from './EditTeamAssignment'
 import { toTableRowItems } from './serializers'
 import { EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
-import { roles } from '../helpers'
+import { roles } from './helpers'
 
 const columns = [
   {
