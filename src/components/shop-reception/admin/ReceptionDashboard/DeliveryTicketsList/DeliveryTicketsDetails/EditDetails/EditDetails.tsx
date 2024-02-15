@@ -6,9 +6,7 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { columns, drawerFilters } from './helpers'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { toTableRowItems } from './serializers'
-import { DownloadIcon } from 'icons'
 
 const EditDetails = () => {
   const { showNotification } = useNotification()
@@ -17,7 +15,6 @@ const EditDetails = () => {
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [infoData, setInfoData] = useState(null)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -32,7 +29,6 @@ const EditDetails = () => {
           orderBy
         })
       )
-      setInfoData(response)
 
       setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page)
@@ -47,7 +43,6 @@ const EditDetails = () => {
 
   return (
     <>
-
       <Table
         hideCheckbox
         orderBy="shopCode"
