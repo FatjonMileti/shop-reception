@@ -10,8 +10,6 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { handleQueryError } from 'utils/helpers'
 import { toTableLocations } from './serializers'
 import { EditLocation } from './EditLocation'
-// import { CreateEditRegion } from './CreateEditRegion'
-// import { DeleteRegion } from './DeleteRegion'
 
 const LocationManagement = () => {
   const [tableItems, setTableItems] = useState<LocationManagementTableItem[]>([])
@@ -92,13 +90,6 @@ const LocationManagement = () => {
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
         rowActionsWidth="130px"
-        // toolbarActions={[
-        //   {
-        //     label: 'Adauga',
-        //     icon: <AddActionIcon />,
-        //     onClick: () => openModal('create')
-        //   }
-        // ]}
         rowActions={[
           {
             label: 'Editeaza',

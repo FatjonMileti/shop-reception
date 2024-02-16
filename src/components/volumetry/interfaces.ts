@@ -128,3 +128,18 @@ export interface Region {
   id: number | string
   name: string
 }
+
+export interface CreateEditLocationCategoryProps {
+  isModalOpen: boolean
+  closeModal: Function
+  setShouldRefreshData: Function
+  isEdit?: boolean
+  editItem?: any //TODO add interface
+}
+
+export interface DeleteLocationCategoryProps {
+  itemId: string | number
+  isModalOpen: boolean
+  closeModal: Function
+  setShouldRefreshData: Function
+}
