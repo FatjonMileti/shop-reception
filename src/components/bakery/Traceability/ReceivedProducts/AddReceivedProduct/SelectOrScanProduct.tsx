@@ -4,6 +4,7 @@ import { Grid } from '@mui/material'
 import { Tabs } from '@fullscreendigital/carrefour-dex-fe'
 import { ScanProduct } from './ScanProduct'
 import { SelectProduct } from './SelectProduct'
+import { isScannerDevice } from 'utils/helpers'
 
 interface SelectOrScanProductProps {
   setSelectedProduct: (product: Product) => void
@@ -20,11 +21,11 @@ export const SelectOrScanProduct = ({
   const [selectedTab, setSelectedTab] = React.useState(0)
   const [scannerDevice, setScannerDevice] = React.useState(true)
 
-  // React.useEffect(() => {
-  //   isScannerDevice(() => {
-  //     setScannerDevice(false)
-  //   })
-  // }, [])
+  React.useEffect(() => {
+    isScannerDevice(() => {
+      setScannerDevice(false)
+    })
+  }, [])
 
   return (
     <Grid container rowSpacing={3.5}>
