@@ -130,7 +130,11 @@ export const FrozenTraceabilityModal = ({
                     setShowAddBatch(true)
                     setStep(2)
                   }}
-                  onCancel={cancel}
+                  onCancel={() =>  {
+                    setStep(0)
+                    formik.resetForm()
+                    formik.setFieldValue('traceabilityFrozenList', [])
+                  }}
                   selectedRows={selectedRows}
                   formik={formik}
                   isEdit={isEdit}
