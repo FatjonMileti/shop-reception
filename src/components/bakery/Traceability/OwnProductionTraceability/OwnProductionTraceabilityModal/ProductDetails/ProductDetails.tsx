@@ -149,8 +149,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
               { value: 'UNBAKED', label: 'NECOPT' }
             ]}
             defaultValue={{
-              value: formik.values.thermalCondition,
-              label: formik.values.thermalCondition == 'UNBAKED' ? 'NECOPT' : 'COPT'
+              value: formik.values.thermalCondition || '',
+              label: formik.values.thermalCondition || ''
             }}
             onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
             required

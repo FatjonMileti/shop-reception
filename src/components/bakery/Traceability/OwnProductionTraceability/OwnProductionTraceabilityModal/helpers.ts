@@ -24,7 +24,7 @@ export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
     chargeNumber: editItem?.chargeNumber || null,
     productionOperator: editItem?.productionOperator || null,
     quantity: editItem?.quantity || null,
-    thermalCondition: editItem?.thermalCondition || 'UNBAKED',
+    thermalCondition: editItem?.thermalCondition || null,
     dlc: editItem?.dlc || null,
 
     conform: editItem?.conform || true,
