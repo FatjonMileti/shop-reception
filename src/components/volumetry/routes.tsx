@@ -9,6 +9,7 @@ import { EvaluationReports } from './EvaluationReports'
 import { AssignedTasks } from './AssignedTasks'
 import { EmployeesStatus } from './EmployeesStatus'
 import { TaskAllocation } from './TaskAllocation'
+import { LocationManagement } from './LocationManagement'
 
 export const useVolumetryRoutes = applicationPages => {
   return (
@@ -83,11 +84,21 @@ export const useVolumetryRoutes = applicationPages => {
           />
         }
       />
-       <Route
+      <Route
         path={URLS.AUTH_TASK_ALLOCATION}
         element={
           <PrivateRoute
             component={TaskAllocation}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_LOCATION_MANAGEMENT}
+        element={
+          <PrivateRoute
+            component={LocationManagement}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

@@ -6,5 +6,6 @@ export const URLS = {
   AUTH_NORMS_REPORTS: 'volumetry/reports/dailyNorms',
   AUTH_ASSIGNED_TASKS: 'volumetry/tasksManagement/assignedTasks',
   AUTH_ALLOCATED_EMPLOYEES_STATUS: 'volumetry/employee/allocatedEmployeesStatus',
-  AUTH_TASK_ALLOCATION: 'volumetry/tasksManagement/taskAllocation'
+  AUTH_TASK_ALLOCATION: 'volumetry/tasksManagement/taskAllocation',
+  AUTH_LOCATION_MANAGEMENT: 'volumetry/tasksManagement/locationManagement'
 }

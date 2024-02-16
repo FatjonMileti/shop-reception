@@ -3,9 +3,8 @@ import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
 import { toEmployeeFilterItems, toEmployeesAttendance } from './TaskAllocations/serializers'
 import { fromTaskPayload } from './utils'
-import { toDepartmentsOptions } from './serializers'
+import { toDepartmentsOptions, toRegionsOptions } from './serializers'
 import { handleQueryError } from 'utils/helpers'
-import dayjs from 'dayjs'
 
 export const getDepartmentsOptions = (
   showNotification: Function,
@@ -323,8 +322,6 @@ export const getEmployeesAttendance = (
   return useQuery(
     ['employees-attendance', departmentId],
     async () => {
-      // const a = dayjs('2024-02-12T20:13:00').format('HH')
-
       const employees = await makeCoreGetRequest(
         `/volumetry/workers/shifts?filterBy=genericDepartmentId&filterValue=${departmentId}`
       )
@@ -335,6 +332,61 @@ export const getEmployeesAttendance = (
         handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification),
 
       enabled: validateQuery
+    }
+  )
+}
+
+export const getLocationDetails = (
+  locationId: number | string,
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['location-details', locationId],
+    async () => {
+      // const locationDetails = await makeCoreGetRequest(`/volumetry/location/${locationId}`)
+      const locationDetails = {
+        id: 1,
+        name: 'Orhideea',
+        categoryId: 1,
+        categoryName: 'Hyper Maxi',
+        regionId: 1,
+        regionName: 'Bucuresti'
+      }
+      return locationDetails
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea detaliilor locatiei.',
+          showNotification
+        ),
+
+      enabled: validateQuery
+    }
+  )
+}
+
+export const getRegionsOptions = (showNotification: Function) => {
+  return useQuery(
+    ['regions'],
+    async () => {
+      // const result = await makeCoreGetRequest('/volumetry/regions')
+      const result = [
+        { id: 1, name: 'Bucuresti' },
+        { id: 2, name: 'Cluj' }
+      ]
+      const resultOptions = toRegionsOptions(result)
+      return resultOptions || []
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la preluarea datelor de optiuni pentru regiuni.',
+          showNotification
+        )
     }
   )
 }

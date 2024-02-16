@@ -90,3 +90,41 @@ export interface AllocationListProps {
   allocateEmployeesAllSelected: boolean
   setAllocateEmployeesAllSelected: Function
 }
+
+export interface LocationManagementTableItem {
+  id: string | number
+  name: string
+  region: string
+  category: string
+}
+
+export interface LocationItem {
+  id: string | number
+  name: string
+  regionId: string | number
+  regionName: string
+  categoryId: string | number
+  categoryName: string
+}
+
+export interface LocationItemForm {
+  region: AsyncAutocompleteOption
+  category: AsyncAutocompleteOption
+}
+
+export interface LocationItemPayload {
+  regionId: string | number
+  categoryId: string | number
+}
+
+export interface EditLocationProps {
+  isModalOpen: boolean
+  closeModal: Function
+  setShouldRefreshData: Function
+  editItemId: string | number
+}
+
+export interface Region {
+  id: number | string
+  name: string
+}
