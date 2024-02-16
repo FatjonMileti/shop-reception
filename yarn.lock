@@ -6152,10 +6152,10 @@ sass@^1.54.5:
     immutable "^4.0.0"
     source-map-js ">=0.6.2 <2.0.0"
 
-scandit-sdk@^5.13.1:
-  version "5.13.5"
-  resolved "https://registry.yarnpkg.com/scandit-sdk/-/scandit-sdk-5.13.5.tgz#38c851fb1c88e0251ee13ee88225f742008dc0a4"
-  integrity sha512-ApzD78Tx8hD+l9PXPMxrwPrIigNveZlY72tXWT3NYmvpTdaYVN8I7jhzLOFw8TCm+Kt4iz9R96yiJqXZc2o4PQ==
+scandit-sdk@5.13.1:
+  version "5.13.1"
+  resolved "https://registry.yarnpkg.com/scandit-sdk/-/scandit-sdk-5.13.1.tgz#e850e72c3d3199864bf147f22ba3d3d7c64782e3"
+  integrity sha512-6f7CtmosEaJT27L3qXnrQHDcRz3J0f96Kbh5cSBbRkCNiLuzgyVhTUHoN2eaUp33qWMEgfCpV5qmEVixkkTcNg==
   dependencies:
     "@babel/runtime-corejs2" "^7.20.13"
     "@juggle/resize-observer" "^3.4.0"

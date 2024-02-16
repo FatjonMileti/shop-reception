@@ -142,7 +142,12 @@ export const OwnProductionTraceabilityModal = ({
 
                     setStep(step ? step : 2)
                   }}
-                  onCancel={cancel}
+                  onCancel={() => {
+                    setStep(0)
+                    formik.resetForm()
+                    formik.setFieldValue('traceabilityProductionList', [])
+                    setSelectedRows([])
+                  }}
                   selectedRows={selectedRows}
                   formik={formik}
                   isEdit={isEdit}
