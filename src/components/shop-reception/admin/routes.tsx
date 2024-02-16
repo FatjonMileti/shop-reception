@@ -9,6 +9,7 @@ import { MetiFiles } from './ReceptionDashboard/MetiFiles'
 import { MetiFileDetail } from './ReceptionDashboard/MetiFiles/MetiFileDetail'
 import { DifferencesProducts } from './ReceptionDashboard/DifferencesProducts'
 import { SupportTradability } from './ReceptionDashboard/SupportTradability'
+import { GoodsDeliveryReport } from './ReceptionDashboard/GoodsDeliveryReport'
 import { AdminDeposit } from './AdminDashboard/AdminDeposit'
 import { AdminHub } from './AdminDashboard/AdminHub'
 import { AdminStore } from './AdminDashboard/AdminStore'
@@ -265,6 +266,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={SupportTradability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_GOODS_DELIVERY_REPORT}
+        element={
+          <PrivateRoute
+            component={GoodsDeliveryReport}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

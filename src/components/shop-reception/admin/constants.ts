@@ -26,6 +26,7 @@ export const URLS = {
   AUTH_METI_FILE_DETAIL: '/shop-reception/reception/metiFiles/:id',
   AUTH_DIFFERENCES_PRODUCTS: '/shop-reception/reception/productsDifferences',
   AUTH_SUPPORT_TRADABILITY: '/shop-reception/reception/trasabilitySupport',
+  AUTH_GOODS_DELIVERY_REPORT: '/shop-reception/reception/goodsDeliveryReport',
 
   // package
   AUTH_RETURN_TRUCK_LIST: '/shop-reception/package/trucksReturnList',

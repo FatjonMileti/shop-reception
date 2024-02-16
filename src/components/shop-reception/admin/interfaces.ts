@@ -352,6 +352,30 @@ interface SupportTradability {
   numberOfPallets: number
 }
 
+interface GoodsDeliveryReport {
+  id: number
+  finalStores: string
+  warehouses: string
+  cargoCategory: string
+  departureHub: string
+  arrivalHub: string
+  raceCode: string
+  truckNumber: string
+  driverName: string
+  deliveryStatus: string
+  location: string
+  estimatedDeliveryDate: string
+  arrivalStoreName: string
+  arrivalStoreCode: string
+  thermodiagramCompliance: string
+  sealCompliance: string
+  arrivalCompliance: string
+  registrationDate: string
+  deliverySlips: string
+  arrivalDate: string
+  supportNumber: string
+}
+
 interface SupportWrongDestination {
   id: number
   supportCode: string
