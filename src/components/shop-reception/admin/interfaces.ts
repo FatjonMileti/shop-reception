@@ -19,19 +19,6 @@ interface TruckItem {
   eTransportStatus: string
 }
 
-interface DeliverySlip {
-  id: number
-  store: string
-  warehouseName: string
-  deliverySlip: string
-  status: string
-  seal: string
-  raceCode: string
-  registrationNumber: string
-  expectedSupports: string
-  destinationReachedSupports: string
-  registrationDate: string
-}
 
 interface AdminDeposit {
   id: number

@@ -5531,24 +5531,19 @@
       "responseMode": null
     },
     {
-      "uuid": "d8d5879f-7522-4805-82c3-5fbdcd175240",
+      "uuid": "600049ac-78c2-494c-9dc1-7f3e11ee0bff",
       "type": "http",
-      "documentation": "Get team members list",
+      "documentation": "",
       "method": "get",
-      "endpoint": "governance/publicHolidays/:year",
+      "endpoint": "deliveryTicket",
       "responses": [
         {
-          "uuid": "aae62948-c4b6-49fb-8200-bd1a223a58d9",
-          "body": "[\n  {\n    \"id\": 1,\n    \"date\": \"{{urlParam 'year'}}-01-01\",\n    \"description\": \"Anul Nou\"\n  },\n  {\n    \"id\": 2,\n    \"date\": \"{{urlParam 'year'}}-01-02\",\n    \"description\": \"Anul Nou\"\n  },\n  {\n    \"id\": 3,\n    \"date\": \"{{urlParam 'year'}}-01-02\",\n    \"description\": \"Ziua Unirii Principatelor Române\"\n  },\n  {\n    \"id\": 4,\n    \"date\": \"{{urlParam 'year'}}-04-14\",\n    \"description\": \"Vinerea Mare\"\n  },\n  {\n    \"id\": 5,\n    \"date\": \"{{urlParam 'year'}}-04-16\",\n    \"description\": \"Paște ortodox\"\n  },\n  {\n    \"id\": 6,\n    \"date\": \"{{urlParam 'year'}}-04-17\",\n    \"description\": \"Paște ortodox\"\n  },\n  {\n    \"id\": 7,\n    \"date\": \"{{urlParam 'year'}}-12-25\",\n    \"description\": \"Crăciunul\"\n  },\n  {\n    \"id\": 8,\n    \"date\": \"{{urlParam 'year'}}-12-26\",\n    \"description\": \"Crăciunul\"\n  }\n]",
-          "latency": 150,
+          "uuid": "33d4bd33-1718-4981-9ce3-b1001cc8ab2a",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"externalTicketId\": \"519783\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-11-16T15:48:28.524\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3128120\",\n      \"sealCode\": \"D091918\",\n      \"truckNumber\": \"BH37CIC\",\n      \"status\": \"PROCESSED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA AMBIENT\",\n      \"numberOfSupports\": 16,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": 1,\n      \"externalTicketId\": \"59069\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-11-16T15:08:56.105\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3123415\",\n      \"sealCode\": \"D091512\",\n      \"truckNumber\": \"AB90CDE\",\n      \"status\": \"PROCESSED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA APLS\",\n      \"numberOfSupports\": 5,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": 2,\n      \"externalTicketId\": \"267383\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-11-16T15:08:48.104\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3123415\",\n      \"sealCode\": \"D091512\",\n      \"truckNumber\": \"AB90CDE\",\n      \"status\": \"PROCESSED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA LEGUME - FRUCTE\",\n      \"numberOfSupports\": 3,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": 5,\n      \"externalTicketId\": \"720610\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"CLUJ(10);SIBIU(19);ORADEA1(22);ORADEA2(25);DROBETA(26);TARGUJIU(35);TIMISOARA6(37);SUPER RESITA_NERA(55);SUPER LUGOJ(57);SUPER SEVERIN(61);SUPER ARAD(63);SUPER DROBETA2(153);EXPR Sibiu Piata Rahova(169);SUPER TIMISOARA5(173);SUPER TIMISOARA7(176);EXPR Cluj Diana(190);EXPR Cluj Aurel Vlaicu(212);EXPR Cluj Dunarii(234);EXPR Arad Piata Avram Iancu(235);EXPR Baile Felix Primaverii(280);SUPER TIMISOARA14(322);EXPR Cluj Opera(342);EXPR Cluj Scortarilor(378);EXPR TG MURES CUTEZANTEI(382);608 Baia Mare Hoffer(820);205 ORSOVA(871);SUPECO CLUJ(4031)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-12T08:19:54.249\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3075952\",\n      \"sealCode\": \"A0237717\",\n      \"truckNumber\": \"B769ANS\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT CEFIN  AMBIENT\",\n      \"numberOfSupports\": 31,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": 6,\n      \"externalTicketId\": \"265720\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-12T08:19:45.290\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3075217\",\n      \"sealCode\": \"\",\n      \"truckNumber\": \"BH16NRD\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA LEGUME - FRUCTE\",\n      \"numberOfSupports\": 6,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": null,\n      \"externalTicketId\": \"51844\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"CLUJ(10);ORADEA1(22);ORADEA2(25);ZALAU(46);TGMURES4(3047)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-05T18:33:48.007\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"00051844\",\n      \"sealCode\": \"\",\n      \"truckNumber\": \"BH23LDC\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT CONGELATE\",\n      \"numberOfSupports\": 37,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": null,\n      \"externalTicketId\": \"51620\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA1(22);ORADEA2(25);BAIAMARE3(44);ZALAU(46);SUPER ZALAU(65);SUPER SIGHET(67);SUPER DEJ(68);EXPR Cluj Minerva(189);EXPR Cluj Diana(190);EXPR Cluj Nicolae Titulescu(207);EXPR Cluj Dunarii(234);SUPER MARGHITA(237);SUPER SANMARTIN(244);SUPER NOJORID(247);EXPR Cluj Floresti Stejarilor(262);EXPR Cluj Florilor/Cetatii(274);EXPR Floresti Avram Iancu(285);SUPER ORADEA4(289);EXPR Oradea Xenopol(290);EXPR Cluj Albini(309);EXPR Oradea6 Republicii(325);EXPR CLUJ21 STEINHARDT(335);EXPR Cluj Opera(342);607 Baia Mare 1(819);608 Baia Mare Hoffer(820);514 Oradea Plaza(838);TGMURES4(3047);SUPECO BAIAMARE(4021);SUPECO SATUMARE(4033);SUPECO ORADEA(4059)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-05T14:54:33.915\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"00051620\",\n      \"sealCode\": \"\",\n      \"truckNumber\": \"BH85LDC\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT CONGELATE\",\n      \"numberOfSupports\": 49,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": null,\n      \"externalTicketId\": \"265455\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-05T14:51:29.236\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3066285\",\n      \"sealCode\": \"\",\n      \"truckNumber\": \"B151FRS\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA LEGUME - FRUCTE\",\n      \"numberOfSupports\": 3,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": null,\n      \"externalTicketId\": \"512724\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-05T14:51:06.929\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3066288\",\n      \"sealCode\": \"D0086869\",\n      \"truckNumber\": \"BH37CIC\",\n      \"status\": \"IN_PROGRESS\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA AMBIENT\",\n      \"numberOfSupports\": 10,\n      \"validatedSupports\": 1\n    },\n    {\n      \"id\": null,\n      \"externalTicketId\": \"19224\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-05T14:50:55.769\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"00019224\",\n      \"sealCode\": \"\",\n      \"truckNumber\": \"\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT PESTE\",\n      \"numberOfSupports\": 1,\n      \"validatedSupports\": 0\n    }\n  ],\n  \"page\": null\n}",
+          "latency": 0,
           "statusCode": 200,
-          "label": "Successfully obtained the public holidays for param year",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
+          "label": "",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -5560,19 +5555,24 @@
           "default": true,
           "crudKey": "id",
           "callbacks": []
-        },
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "1397f6a2-853c-4cc6-99b0-f17176610422",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "deliveryTicket/:id/:tab",
+      "responses": [
         {
-          "uuid": "0dca18b4-6c67-4e10-b294-82bf1a2d4d15",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "uuid": "01686d31-79f8-4b52-baf1-9bd539cb2cda",
+          "body": "{\n  \"id\": 257,\n  \"externalTicketId\": \"519783\",\n  \"depositName\": \"DEPOZIT DEVA AMBIENT\",\n  \"expectedDeliveryDate\": \"16/11/2023\",\n  \"transportCode\": \"3128120\",\n  \"truckLicenceNumber\": \"AG10ABC\",\n  \"driverName\": \"Marius Lacatus\",\n  \"numberOfSupports\": 16,\n  \"validatedSupports\": 10,\n  \"shopCodes\": [\n    [\n      25,\n      1\n    ]\n  ],\n  \"showMetiFilesButton\": true,\n  \"shopsThatCanBeSentToMeti\": [\n    {\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"receivedSupportNumber\": 0,\n      \"totalSupportNumber\": 0\n    }\n  ],\n  \"list\": [\n    {\n      \"id\": 0,\n      \"externalOrderId\": \"24150534\",\n      \"originalOrderId\": \"90241725\",\n      \"supportCode\": \"31170484000\",\n      \"heterogeneousCode\": \"759400000011529600\",\n      \"expectedSupportType\": \"PALET EURO\",\n      \"receivedSupportType\": null,\n      \"secondarySupportType\": \"POLITA ROLLS FLORI\",\n      \"supportStatus\": \"In asteptare\",\n      \"eanCode\": \"5948990130237\",\n      \"eanReceived\": \"5948990130237\",\n      \"productCode\": \"11002279\",\n      \"productName\": \"ULEI UNISOL 1L\",\n      \"priorityForSale\": true,\n      \"measureUnit\": \"articol\",\n      \"deliveredQuantity\": \"2\",\n      \"totalDeliveredQuantity\": \"10.55\",\n      \"qualitativeQuantity\": \"10\",\n      \"defectQuantity\": \"15\",\n      \"missingQuantity\": \"5\",\n      \"defect\": true,\n      \"defectReason\": \"PROVIDER\",\n      \"recommendedScanType\": \"INTEGRAL\",\n      \"scanType\": \"SENSIBLE_PRODUCTS\",\n      \"secondarySupportNumber\": \"2415\",\n      \"shortDlc\": true,\n      \"dlcDate\": \"04/05/2023\",\n      \"dlcDateExcel\": \"2024/10/12\",\n      \"confirmedDlc\": \"2023-04-23\",\n      \"batch\": \"26102024CA\",\n      \"sensitive\": true,\n      \"verified\": true,\n      \"missing\": true,\n      \"shopName\": \"ORADEA2\",\n      \"receptionDate\": \"2023-04-23\",\n      \"validityPercentage\": \"10\",\n      \"lifetimePercent\": \"99\",\n      \"sgr\": true,\n      \"canBeSentToMeti\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
           "latency": 0,
-          "statusCode": 400,
-          "label": "Bad request",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -5581,103 +5581,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "249d54a7-0fc1-4dbb-a1cf-b075f7e321f3",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "c2e59f8b-9e38-4539-981c-fc189e3bb38d",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 403,
-          "label": "Forbidden",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "d352af74-9470-4bf9-8fe5-f55bb02cee9f",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 404,
-          "label": "The specified resource was not found",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "1232b411-8339-4c18-a5af-c986b0ecb8c4",
-          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 500,
-          "label": "Un unexpected error happened",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         }
@@ -5920,7 +5824,11 @@
     },
     {
       "type": "route",
-      "uuid": "d8d5879f-7522-4805-82c3-5fbdcd175240"
+      "uuid": "600049ac-78c2-494c-9dc1-7f3e11ee0bff"
+    },
+    {
+      "type": "route",
+      "uuid": "1397f6a2-853c-4cc6-99b0-f17176610422"
     }
   ],
   "proxyMode": false,

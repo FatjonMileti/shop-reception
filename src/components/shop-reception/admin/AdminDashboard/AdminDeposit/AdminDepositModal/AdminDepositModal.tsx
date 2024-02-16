@@ -176,10 +176,14 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
             variant="outlined"
             label="Utilizatori asignati pe depozit"
             onChange={(event, value) => {
-              const result = value.map(val => ({
-                value: val.value || val.inputValue,
-                label: val.inputValue || val.label
-              }))
+              const result = value.map(val => {
+                return val.inputValue
+                  ? {
+                    value: val.inputValue,
+                    label: val.inputValue
+                  }
+                  : val
+              })
               formik.setFieldValue('depositUsers', result)
             }}
             error={!!formik.errors.depositUsers}
