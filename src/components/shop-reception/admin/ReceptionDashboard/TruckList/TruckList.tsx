@@ -1,5 +1,5 @@
 import { Grid } from '../../../Common/Grid'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Input, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { useState } from 'react'
@@ -11,6 +11,7 @@ import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../Common/TitleHeader'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
+import dayjs from 'dayjs'
 
 const TruckList = () => {
   const [tableItems, setTableItems] = useState<TruckItem[]>([
@@ -215,6 +216,16 @@ const TruckList = () => {
               label='Număr înmatriculare'
               variant='outlined'
               style={{ width: '100%' }}
+            />,
+            <DatePicker
+              label="Selecteaza dată început"
+              variant="outlined" value={dayjs()}
+              onChange={() => {}}
+            />,
+            <DatePicker
+              label="Selecteaza dată sfărşit"
+              variant="outlined" value={dayjs()}
+              onChange={() => {}}
             />
           ]}
           itemsPerRow={4}
