@@ -17,7 +17,6 @@ const PrivateRoute = ({ component: RouteComponent, ...props }) => {
   }
 
   const isAuthorized = useMemo(() => {
-    return true
     if (props.checkIsAuthorized) {
       const isMatch = matchRoute(props.applicationPages, location.pathname)
 

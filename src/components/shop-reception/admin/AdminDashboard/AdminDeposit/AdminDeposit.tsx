@@ -2,7 +2,7 @@ import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
 import { useState } from 'react'
-import { makeRmGetRequest } from '../../../../../utils/api'
+import { makeCoreGetRequest } from '../../../../../utils/api'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
@@ -38,21 +38,47 @@ const AdminDeposit = () => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy }) => {
     setIsLoading(true)
     try {
-      const response = await makeRmGetRequest(
-        toTableGETUrl({
-          url: '/deposits',
-          page,
-          rowsPerPage,
-          order
-          // orderBy
-        })
-      )
+      // const response = await makeCoreGetRequest(
+      //   toTableGETUrl({
+      //     url: '/shop-reception/deposits',
+      //     page,
+      //     rowsPerPage,
+      //     order,
+      //     orderBy
+      //   })
+      // )
+      const response = {
+        list: [
+          {
+            id: 1,
+            code: 'BDU',
+            name: 'DEPOZIT CONGELATE',
+            type: 'Frozen',
+            validityPercentage: 75,
+            active: true,
+            address: 'strada florilor',
+            emails: ['abc', 'cdf'],
+            depositUsers: ['user01']
+          },
+          {
+            id: 2,
+            code: 'BDU',
+            name: 'DEPOZIT CONGELATE',
+            type: 'Ambient',
+            validityPercentage: null,
+            active: false,
+            address: 'strada agnita',
+            emails: ['abc', 'cdf'],
+            depositUsers: ['paula']
+          }
+        ],
+        page: { totalCount: 2 }
+      }
 
       setTableItems(toTableRowItems(response.list))
-      setTotalCount(response.count)
+      setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      console.error(error)
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'

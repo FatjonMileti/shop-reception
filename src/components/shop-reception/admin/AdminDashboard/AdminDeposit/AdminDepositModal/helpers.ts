@@ -22,23 +22,20 @@ export const getValidationSchema = (editItem: AdminDeposit) =>
   })
 
 export const getInitialValues = editItem => {
-  let data = {
-    id: editItem?.id ?? '',
+  return {
+    id: editItem?.id ?? null,
     code: editItem?.code ?? '',
-    name: editItem?.name ?? '',
+    name: editItem?.name ?? null,
     type: editItem
       ? {
-          value: Object.keys(DEPOSIT_TYPES).find(key => key === editItem.type),
+          value: Object.keys(DEPOSIT_TYPES).find(key => DEPOSIT_TYPES[key] === editItem.type),
           label: editItem.type
         }
       : null,
-    address: "Address",
-    validityPercentage: editItem?.validityPercentage ?? '',
-    emails: "test@example.com",
+    address: editItem?.address ?? null,
+    validityPercentage: editItem?.validityPercentage ?? null,
+    emails: editItem?.emails?.join(';') || null,
     active: editItem?.active ?? false,
-    depositUsers: editItem?.depositUsers ? editItem.depositUsers.map(user => ({ value: user, label: user })) : []
+    depositUsers: editItem ? editItem.depositUsers.map(user => ({ value: user, label: user })) : []
   }
-  console.log(data);
-  
-  return data
 }
