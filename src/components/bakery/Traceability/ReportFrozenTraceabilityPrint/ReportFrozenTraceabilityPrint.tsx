@@ -35,7 +35,7 @@ export const ReportFrozenTraceabilityPrint = () => {
 
   const tableFilters = React.useMemo(() => {
     return filterBy?.split('|').map((name, i) => ({ name, value: filterValue.split('|')[i] })) || []
-  }, [])
+  }, [filterBy])
 
   const reportDataQuery = useQuery<{ list: TracedProduct[] }>(
     ['report-traceability-frozen'],
@@ -91,12 +91,16 @@ export const ReportFrozenTraceabilityPrint = () => {
             textAlign="center"
             className={styles.middleColumn}
           >
-            <p className={styles.title}>
-              <b>Raport TRASABILITATE CONGELATE</b>
-            </p>
-            <p className={styles.subtitle}>
-              <b>Brutarie Patiserie Produse elaborate COD: RP-05_32.01 </b>
-            </p>
+            <Grid item xs={12}>
+              <p className={styles.title}>
+                <b>RAPORT DE PRODUCTIE</b>
+              </p>
+            </Grid>
+            <Grid item xs={12}>
+              <p className={styles.subtitle}>
+                <b>Brutarie - Patiserie Produse congelate COD: RP-05_23.2 </b>
+              </p>
+            </Grid>
           </Grid>
 
           <Grid
@@ -108,8 +112,7 @@ export const ReportFrozenTraceabilityPrint = () => {
             className={styles.rightColumn}
           >
             <p>
-              <b>PRP 05:</b> Prelucrare tehnologica, control productie si comercializare de produse
-              alimentare
+              <b>PRP 05:</b> Prelucrare tehnologica, control productie si comercializare de produse alimentare
             </p>
           </Grid>
 
