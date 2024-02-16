@@ -164,6 +164,20 @@ const AdminStore = () => {
               ]}
               value={'none'}
             />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează societatea'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează societatea',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
           ]}
           itemsPerRow={4}
         />,
