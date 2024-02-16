@@ -11,7 +11,7 @@ import { getDepositTypesOptions } from 'components/shop-reception/admin/api'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { handleQueryError } from 'utils/helpers'
 import { useMutation } from 'react-query'
-import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { makeRmPostRequest, makeRmPatchRequest } from 'utils/api'
 import { createFilterOptions } from '@mui/material'
 
 interface NewAdminDepositProps {
@@ -45,8 +45,8 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
 
   const editDeposit = async values =>
     isEdit
-      ? await makeCorePutRequest(`/shop-reception/deposits/${editItem?.id}`, values)
-      : await makeCorePostRequest('/shop-reception/deposits', values)
+      ? await makeRmPatchRequest(`/deposits/${editItem?.id}`, values)
+      : await makeRmPostRequest('/deposits', values)
 
   const { isLoading, mutate } = useMutation(editDeposit, {
     onSuccess: res => {
@@ -162,10 +162,7 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
           />,
           <Checkbox
             checked={formik.values.active}
-            defaultChecked={formik.values.active}
-            onChange={event =>
-              formik.setFieldValue('active', (event.target as HTMLInputElement).value)
-            }
+            onChange={event => formik.setFieldValue('active', !formik.values.active)}
             label="Activ"
           />,
           <Autocomplete

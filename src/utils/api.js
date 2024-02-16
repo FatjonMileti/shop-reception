@@ -4,6 +4,9 @@ import { delay } from './helpers'
 
 axios.interceptors.request.use(
   async config => {
+    config.headers['Content-Type'] = 'application/json'
+    config.headers['Accept'] = 'application/json'
+
     let token = getToken()
 
     if (!token) {
@@ -29,6 +32,8 @@ axios.interceptors.request.use(
   error => Promise.reject(error)
 )
 
+export const getRmBaseUrl = url => `${process.env.RM_URL}${url}`
+
 export const getCoreBaseUrl = url => `${process.env.CORE_URL}${url}`
 
 export const getDesignerBaseUrl = url => `${process.env.DESIGNER_URL}${url}`
@@ -47,6 +52,21 @@ export const makeCoreDeleteRequest = (url, params) =>
 
 export const makeCorePatchRequest = (url, params) =>
   axios.patch(getCoreBaseUrl(url), params).then(response => response.data)
+
+  export const makeRmGetRequest = (url, params) =>
+    axios.get(getRmBaseUrl(url), params).then(response => response.data)
+  
+  export const makeRmPostRequest = (url, params, config = {}) =>
+    axios.post(getRmBaseUrl(url), params, config).then(response => response.data)
+  
+  export const makeRmPutRequest = (url, params) =>
+    axios.put(getRmBaseUrl(url), params).then(response => response.data)
+  
+  export const makeRmDeleteRequest = (url, params) =>
+    axios.delete(getRmBaseUrl(url), params).then(response => response.data)
+  
+  export const makeRmPatchRequest = (url, params) =>
+    axios.patch(getRmBaseUrl(url), params).then(response => response.data)
 
 export const makeDesignerGetRequest = (url, params) =>
   axios.get(getDesignerBaseUrl(url), params).then(response => response.data)
