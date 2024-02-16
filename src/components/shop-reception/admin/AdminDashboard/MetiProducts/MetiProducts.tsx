@@ -80,6 +80,20 @@ const MetiProducts = () => {
             <Input
               type='select'
               onChange={event => null}
+              label='Unitate de masură'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează unitate de masură',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
               label='Raion'
               variant='outlined'
               style={{ width: '100%' }}

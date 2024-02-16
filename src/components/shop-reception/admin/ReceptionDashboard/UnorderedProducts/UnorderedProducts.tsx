@@ -1,5 +1,5 @@
 import { Grid } from '../../../Common/Grid'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Input, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { useState } from 'react'
@@ -9,6 +9,7 @@ import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../Common/TitleHeader'
+import dayjs from "dayjs";
 
 const UnorderedProducts = () => {
   const [tableItems, setTableItems] = useState<UnorderedProducts[]>([
@@ -134,7 +135,12 @@ const UnorderedProducts = () => {
               label='Bon livrare'
               variant='outlined'
               style={{ width: '100%' }}
-            />
+            />,
+            <DatePicker
+              label="Selecteaza dată recepție"
+              variant="outlined" value={dayjs()}
+              onChange={() => {}}
+            />,
           ]}
           itemsPerRow={4}
         />,
