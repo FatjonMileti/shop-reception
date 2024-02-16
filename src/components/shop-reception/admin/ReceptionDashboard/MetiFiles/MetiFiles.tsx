@@ -1,5 +1,5 @@
 import { Grid } from '../../../Common/Grid'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Input, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { URLS } from '../../constants'
 import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
@@ -11,6 +11,7 @@ import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../Common/TitleHeader'
 import { useNavigate } from 'react-router-dom'
+import dayjs from 'dayjs'
 
 const MetiFiles = () => {
   const [tableItems, setTableItems] = useState<MetiFile[]>([
@@ -135,6 +136,16 @@ const MetiFiles = () => {
                 }
               ]}
               value={'none'}
+            />,
+            <DatePicker
+              label="Selecteaza dată trimitere către Meti"
+              variant="outlined" value={dayjs()}
+              onChange={() => {}}
+            />,
+            <DatePicker
+              label="Selecteaza dată primire de le Meti"
+              variant="outlined" value={dayjs()}
+              onChange={() => {}}
             />
           ]}
           itemsPerRow={4}
