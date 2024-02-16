@@ -124,15 +124,19 @@ const PackingTypes = () => {
               style={{ width: '100%' }}
               values={[
                 {
-                  label: 'Da',
-                  value: 'yes'
+                  label: '1',
+                  value: '1'
                 },
                 {
-                  label: 'Nu',
-                  value: 'no'
+                  label: '2',
+                  value: '2'
+                },
+                {
+                  label: '3',
+                  value: '3'
                 }
               ]}
-              value={'yes'}
+              value={'1'}
             />,
             <Input
               type='select'
@@ -151,6 +155,24 @@ const PackingTypes = () => {
                 }
               ]}
               value={'active'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Returnabil/nereturnabil'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Returnabil',
+                  value: 'returnabil'
+                },
+                {
+                  label: 'Nereturnabil',
+                  value: 'nereturnabil'
+                }
+              ]}
+              value={'returnabil'}
             />
           ]}
           itemsPerRow={4}
