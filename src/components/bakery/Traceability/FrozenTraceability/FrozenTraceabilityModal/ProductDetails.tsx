@@ -147,8 +147,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
               { value: 'UNBAKED', label: 'NECOPT' }
             ]}
             defaultValue={{
-              value: formik.values.thermalCondition,
-              label: formik.values.thermalCondition == 'UNBAKED' ? 'NECOPT' : 'COPT'
+              value: formik.values.thermalCondition || '',
+              label: formik.values.thermalCondition || ''
             }}
             onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
             required
@@ -221,8 +221,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                   updatedList[index].batchId = e.target.value
                   formik.setFieldValue('traceabilityFrozenList', updatedList)
                 }}
-                value={item?.batchId}
-                name="batchId"
+                value={item?.batchName}
+                name="batchName"
               />
             </Grid>
             <Grid item xs={3}>
