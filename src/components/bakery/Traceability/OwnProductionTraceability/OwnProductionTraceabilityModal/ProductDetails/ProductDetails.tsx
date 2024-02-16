@@ -118,7 +118,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             onChange={e => formik.setFieldValue('quantity', e.currentTarget.value)}
             value={formik.values.quantity}
             name="quantity"
-            infoIcon={'kg'}
+            infoIcon={selectedProduct.metricUnit}
             required
             error={!!formik.errors.quantity}
             helperText={formik.errors.quantity as string}
