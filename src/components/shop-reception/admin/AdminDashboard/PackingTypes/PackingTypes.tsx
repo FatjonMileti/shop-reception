@@ -85,81 +85,72 @@ const PackingTypes = () => {
           hasPaper={true}
           items={[
             <Input
-              type='select'
+              type='text'
               onChange={event => null}
-              label='Magazin'
+              label='Cod ambalaj'
               variant='outlined'
               style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează magazin',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Raion'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează raion',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Familie'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează familie',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Subfamilie'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează Subfamilie',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Cod UB'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează cod UB',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
             />,
             <Input
               type='text'
               onChange={event => null}
-              label='Cod produs'
+              label='Denumire'
               variant='outlined'
               style={{ width: '100%' }}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Principal/secundar'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Principal',
+                  value: 'principle'
+                },
+                {
+                  label: 'Secundar',
+                  value: 'secondary'
+                }
+              ]}
+              value={'principle'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează combinaţie'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Da',
+                  value: 'yes'
+                },
+                {
+                  label: 'Nu',
+                  value: 'no'
+                }
+              ]}
+              value={'yes'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Activ/inactiv'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Activ',
+                  value: 'active'
+                },
+                {
+                  label: 'Inactiv',
+                  value: 'inactive'
+                }
+              ]}
+              value={'active'}
             />
           ]}
           itemsPerRow={4}
