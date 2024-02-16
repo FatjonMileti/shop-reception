@@ -11,6 +11,7 @@ import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { TitleHeader } from '../../Common/TitleHeader'
 import { AdminStoreForm } from './AdminStoreForm'
+import { Input } from '@fullscreendigital/carrefour-dex-fe'
 
 const AdminStore = () => {
   const navigate = useNavigate()
@@ -86,6 +87,86 @@ const AdminStore = () => {
     <Grid
       items={[
         <TitleHeader title='Administrare magazine' />,
+        <Grid
+          hasPaper={true}
+          items={[
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează magazin',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează versiune'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează versiune',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează regiune'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează regiune',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Activ/inactiv'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Activ',
+                  value: 'active'
+                },
+                {
+                  label: 'Inactiv',
+                  value: 'inactive'
+                }
+              ]}
+              value={'active'}
+            />,
+            <Input
+              type='select'
+              onChange={event => null}
+              label='Selectează tip magazin'
+              variant='outlined'
+              style={{ width: '100%' }}
+              values={[
+                {
+                  label: 'Selectează tip magazin',
+                  value: 'none'
+                }
+              ]}
+              value={'none'}
+            />,
+          ]}
+          itemsPerRow={4}
+        />,
         <>
           <AdminStoreForm
             isModalOpen={isNewModalOpen}
