@@ -12,6 +12,9 @@ import { OwnProductionTraceabilityModal } from './OwnProductionTraceabilityModal
 import { EditOwnProductionTraceabilityModal } from './EditOwnProductionTraceabilityModal/EditOwnProductionTraceabilityModal'
 import { handleQueryError } from 'utils/helpers'
 
+const orderBy = 'createdDate'
+const order = 'desc'
+
 export const OwnProductionTraceability = () => {
   const { showNotification } = useNotification()
 
@@ -35,7 +38,9 @@ export const OwnProductionTraceability = () => {
           searchFields: ['productName'],
           tableFilters,
           page,
-          rowsPerPage
+          rowsPerPage,
+          orderBy,
+          order
         })
       )
       setRows(toListTableRows(response.list))

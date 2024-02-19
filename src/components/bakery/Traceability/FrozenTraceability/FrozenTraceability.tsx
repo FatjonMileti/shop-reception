@@ -18,6 +18,9 @@ import { ValueLabelInterface } from '../../interfaces'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 
+const orderBy = 'createdDate'
+const order = 'desc'
+
 export const FrozenTraceability = () => {
   const { showNotification } = useNotification()
 
@@ -40,7 +43,9 @@ export const FrozenTraceability = () => {
           url: '/bakery/traceability/frozen',
           tableFilters,
           page,
-          rowsPerPage
+          rowsPerPage,
+          orderBy,
+          order
         })
       )
       setRows(toListTableRows(response.list))
