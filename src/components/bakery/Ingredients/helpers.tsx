@@ -27,7 +27,7 @@ export const columns = [
     },
     {
       title: "Familie",
-      field: 'familyModuleName',
+      field: 'familyName',
       align: 'left',
     },
     {
