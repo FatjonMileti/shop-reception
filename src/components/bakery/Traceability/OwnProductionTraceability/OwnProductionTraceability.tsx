@@ -1,4 +1,4 @@
-import { ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import s from './OwnProductionTraceability.modules.scss'
 import { useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
@@ -11,6 +11,11 @@ import OwnProductionTraceabilityDescription from './OwnProductionTraceabilityDes
 import { OwnProductionTraceabilityModal } from './OwnProductionTraceabilityModal/OwnProductionTraceabilityModal'
 import { EditOwnProductionTraceabilityModal } from './EditOwnProductionTraceabilityModal/EditOwnProductionTraceabilityModal'
 import { handleQueryError } from 'utils/helpers'
+import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
+import { useQuery } from 'react-query'
+import { Filter, ValueLabelInterface } from 'components/bakery/interfaces'
+import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
+import { formatErrorMessage } from 'utils/formatting'
 
 const orderBy = 'createdDate'
 const order = 'desc'
@@ -27,6 +32,7 @@ export const OwnProductionTraceability = () => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [verifyItem, setVerifyItem] = useState(null)
+  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
@@ -63,6 +69,98 @@ export const OwnProductionTraceability = () => {
     return <OwnProductionTraceabilityDescription item={data} chargeItem={tableData} />
   }
 
+  const families = useQuery(
+    ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
+    async () => {
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+        ?.value || []) as any
+
+      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+        params: {
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
+      const resultOptions = result.map(
+        (item: FamilyItem): ValueLabelInterface => ({
+          label: item.name,
+          value: item.id
+        })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const subfamilies = useQuery(
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'family')?.value],
+    async () => {
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+        ?.value || []) as any
+      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+        params: {
+          family: familyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
+      const resultOptions = result.map(
+        (item: SubfamilyItem): ValueLabelInterface => ({
+          label: item.subFamily,
+          value: item.subFamily
+        })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const drawerFilters: TableFiltersType[] = [
+    {
+      name: 'family',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Familie"
+          disableClearable
+          options={families.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Familie'
+    },
+    {
+      name: 'subfamily',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Subfamilie"
+          disableClearable
+          options={subfamilies.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Subfamilie'
+    }
+  ]
+
   return (
     <div className={s.mainContainer}>
       <>
@@ -85,7 +183,7 @@ export const OwnProductionTraceability = () => {
           isLoading={isLoading}
           totalCount={totalCount}
           hasSearchInput
-          filters={[]} // Empty string must be provided in order to show toolbarActions. This line can be removed after fixing this in the UI Library
+          filters={drawerFilters}
           toolbarActions={[
             {
               label: 'Adauga',
