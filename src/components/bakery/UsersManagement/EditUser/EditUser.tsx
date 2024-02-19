@@ -224,6 +224,14 @@ const EditUser: React.FC<EditUserProps> = props => {
     
     useEffect(() => {
       if(editItem?.structureRoles?.length && editItem && roles && structRegion && structStore && structTraceabilityOp) {
+        setIsRegionManagerChecked(false)
+        setRegionMgValue(null)
+        setIsStoreManagerChecked(false)
+        setStoreMgValue(null)
+        setIsTraceabilityOpChecked(false)
+        setTraceabilityOpValue(null)
+        setIsTraineeChecked(false)
+        setTraineeValue(null)
         editItem?.structureRoles?.forEach(strRole => {
           const role = roles?.find(role => role.id === strRole.roleId)
           if(role?.name === 'REGION_MANAGER') updateStateWithExistingValues(strRole, structRegion, setIsRegionManagerChecked, setRegionMgValue)
