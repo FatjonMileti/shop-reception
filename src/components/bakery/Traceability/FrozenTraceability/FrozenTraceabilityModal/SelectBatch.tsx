@@ -1,10 +1,11 @@
-import { Grid, Box } from '@mui/material'
+import { Grid, Box, debounce } from '@mui/material'
 import { Button, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
-import { Dispatch, useEffect, useState } from 'react'
+import { Dispatch, useState } from 'react'
 import { columns, toBatchFormat } from './helpers'
+import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 
 interface SelectBatchProps {
   onContinue: () => void
@@ -20,26 +21,27 @@ export const SelectBatch = (props: SelectBatchProps) => {
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  useEffect(() => {
-    const loadData = async () => {
-      setIsLoading(true) 
-
-      try {
-        const response = await makeCoreGetRequest(`/bakery/batch`)
-        setTableItems(response.list)
-        setTotalCount(response.page.totalCount)
-        setIsLoading(false)
-      } catch (error) {
-        showNotification({
-          message: `Error while fetching data: ${formatErrorMessage(error)}`,
-          type: 'error'
+  const fetchData = async (page, rowsPerPage) => {
+    try {
+      setIsLoading(true)
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: '/bakery/batch',
+          page,
+          rowsPerPage
         })
-        setIsLoading(false)
-      }
+      )
+      setTableItems(response.list)
+      setTotalCount(response.page.totalCount)
+      setIsLoading(false)
+    } catch(error) {
+      showNotification({
+        message: `Error while fetching data: ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+      setIsLoading(false)
     }
-
-    loadData()
-  }, [])
+  }
 
   return (
     <Grid container rowSpacing={3.5}>
@@ -49,10 +51,14 @@ export const SelectBatch = (props: SelectBatchProps) => {
             orderBy="entryDate"
             order="asc"
             rows={tableItems}
+            handleRemoteData={debounce(fetchData, 500)}
+            isRemote
             isLoading={isLoading}
             columns={columns}
             totalCount={totalCount}
             selectRows={rows => setSelectedRows(toBatchFormat(rows))}
+            rowsPerPage={25}
+            rowsPerPageOptions={[25, 50, 100]}
           />
         </Box>
       </Grid>
