@@ -1,10 +1,10 @@
 import { Autocomplete, DatePicker, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import s from './OwnProductionTraceability.modules.scss'
 import React, { useState } from 'react'
-import { makeCoreGetRequest } from 'utils/api'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
-import { handleQueryError } from 'utils/helpers'
+import { formatAndDownloadResponse, handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
 import { debounce } from '@mui/material'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
@@ -57,6 +57,7 @@ export const ReportOwnProductionTraceability = () => {
 
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
+    console.log('debug table filters', tableFilters)
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
@@ -87,7 +88,30 @@ export const ReportOwnProductionTraceability = () => {
     }
   }
 
-
+  const downloadFileQuery = useQuery(
+    ['download'],
+    async () => {
+      const url = toTableGETUrl({
+        url: '/bakery/traceability/production/download',
+        filters: tableState.tableFilters
+      })
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      return formatAndDownloadResponse(response)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
+    }
+  )
+  
+  
   const families = useQuery(
     ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
@@ -256,7 +280,7 @@ export const ReportOwnProductionTraceability = () => {
               label: 'Descarca',
               icon: <DownloadOutlined />,
               onClick: () => {
-                //downloadFileQuery.refetch()
+                downloadFileQuery.refetch()
               }
             },
             {
