@@ -46,5 +46,7 @@ export const URLS = {
   AUTH_FROZEN_TRACEABILITY: 'bakery/traceabilityOperator/frozen-traceability',
   AUTH_REPORT_FROZEN_TRACEABILITY: 'bakery/traceabilityOperator/frozen-traceability-report',
   AUTH_REPORT_FROZEN_TRACEABILITY_PRINT: 'bakery/traceabilityOperator/frozen-traceability-report-print',
-  AUTH_OWN_PRODUCTION_TRACEABILITY: 'bakery/traceabilityOperator/own-production-traceability'
+  AUTH_OWN_PRODUCTION_TRACEABILITY: 'bakery/traceabilityOperator/own-production-traceability',
+  AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY: 'bakery/traceabilityOperator/own-production-traceability-report',
+  AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT: 'bakery/traceabilityOperator/own-production-traceability-report-print',
 }

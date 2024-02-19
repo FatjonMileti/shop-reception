@@ -43,6 +43,8 @@ import { FrozenTraceability } from './Traceability/FrozenTraceability/FrozenTrac
 import { ReportFrozenTraceability } from './Traceability/ReportFrozenTraceability/ReportFrozenTraceability'
 import { ReportFrozenTraceabilityPrint } from './Traceability/ReportFrozenTraceabilityPrint/ReportFrozenTraceabilityPrint'
 import { OwnProductionTraceability } from './Traceability/OwnProductionTraceability/OwnProductionTraceability'
+import { ReportOwnProductionTraceability } from './Traceability/ReportOwnProductionTraceability/ReportOwnProductionTraceability'
+import { ReportOwnProductionTraceabilityPrint } from './Traceability/ReportOwnProductionTraceabilityPrint/ReportOwnProductionTraceabilityPrint'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -443,6 +445,28 @@ export const useBakeryRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={OwnProductionTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceabilityPrint}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
