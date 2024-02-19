@@ -12,7 +12,7 @@ export const columns = [
       field: 'name',
       align: 'left',
         render: (row: any) => (
-          <ImageCell imageUrl={row.imageUrl} value={row.productName} />
+          <ImageCell imageUrl={row.imageUrl} value={row.name} />
         )
     },
     {
@@ -27,7 +27,7 @@ export const columns = [
     },
     {
       title: "Familie",
-      field: 'familyName',
+      field: 'familyModuleName',
       align: 'left',
     },
     {
