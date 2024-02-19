@@ -78,6 +78,21 @@ const CreateEditLocationCategory: React.FC<CreateEditLocationCategoryProps> = pr
             required
           />
         </Grid>
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            name="description"
+            label="Descriere"
+            fullWidth
+            variant="outlined"
+            value={formik.values.description}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue('description', event.currentTarget.value)
+            }
+            error={!!formik.errors.description}
+            helperText={formik.errors.description as string}
+          />
+        </Grid>
         <Grid xs={12} item className={s.modalButtons}>
           <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
           <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />

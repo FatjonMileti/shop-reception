@@ -129,11 +129,18 @@ export const getTask = (itemId: string | number, showNotification: Function) => 
   )
 }
 
-export const getCategoriesOptions = (showNotification: Function) => {
+export const getCategoriesOptions = (
+  showNotification: Function,
+  locationFilterId?: number | string
+) => {
   return useQuery(
-    ['categories'],
+    ['categories', locationFilterId],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/locations/categories')
+      let url = '/volumetry/locations/categories'
+      if (locationFilterId) {
+        url = `${url}?filterBy=locationId&filterValue=${locationFilterId}`
+      }
+      const result = await makeCoreGetRequest(url)
 
       const resultOptions = result.map(category => ({
         value: category.id,
@@ -368,11 +375,18 @@ export const getLocationDetails = (
   )
 }
 
-export const getRegionsOptions = (showNotification: Function) => {
+export const getRegionsOptions = (
+  showNotification: Function,
+  locationFilterId?: number | string
+) => {
   return useQuery(
-    ['regions'],
+    ['regions', locationFilterId],
     async () => {
-      // const result = await makeCoreGetRequest('/volumetry/regions')
+      let url = '/volumetry/regions'
+      if (locationFilterId) {
+        url = `${url}?filterBy=locationId&filterValue=${locationFilterId}`
+      }
+      // const result = await makeCoreGetRequest(url)
       const result = [
         { id: 1, name: 'Bucuresti' },
         { id: 2, name: 'Cluj' }

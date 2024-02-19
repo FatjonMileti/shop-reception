@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Table } from 'components/core-ui/Table'
 import s from './LocationManagement.modules.scss'
-import { columns } from './helpers'
+import { columns, getFilters } from './helpers'
 import { CRUDAction, LocationManagementTableItem } from '../interfaces'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { useNotification } from 'hooks'
@@ -10,6 +10,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { handleQueryError } from 'utils/helpers'
 import { toTableLocations } from './serializers'
 import { EditLocation } from './EditLocation'
+import { getCategoriesOptions, getRegionsOptions } from '../api'
 
 const LocationManagement = () => {
   const [tableItems, setTableItems] = useState<LocationManagementTableItem[]>([])
@@ -21,12 +22,24 @@ const LocationManagement = () => {
 
   const { showNotification } = useNotification()
 
+  const { data: regionsOptions } = getRegionsOptions(showNotification)
+  const { data: categoryOptions } = getCategoriesOptions(showNotification)
+  const locationTypeOptions = [
+    { value: 'HYPER', label: 'Hyper' },
+    { value: 'SUPER', label: 'Super' }
+  ]
+
+  const filters = useMemo(
+    () => getFilters(regionsOptions || [], categoryOptions || [], locationTypeOptions || []),
+    [regionsOptions, categoryOptions, locationTypeOptions]
+  )
+
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       // const response = await makeCoreGetRequest(
       //   toTableGETUrl({
-      //     url: '/volumetry/regions',
+      //     url: '/volumetry/locations',
       //     tableFilters,
       //     page,
       //     rowsPerPage,
@@ -40,13 +53,15 @@ const LocationManagement = () => {
             id: 1,
             name: 'Orhideea',
             region: 'Bucuresti',
-            category: 'HYPER MAXI'
+            category: 'HYPER MAXI',
+            locationType: 'HYPER'
           },
           {
             id: 2,
             name: 'Iulius',
             region: 'Cluj',
-            category: 'HYPER'
+            category: 'HYPER',
+            locationType: 'HYPER'
           }
         ],
         page: {
@@ -89,6 +104,7 @@ const LocationManagement = () => {
         totalCount={totalCount}
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
+        filters={filters}
         rowActionsWidth="130px"
         rowActions={[
           {

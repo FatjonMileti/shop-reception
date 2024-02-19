@@ -96,6 +96,7 @@ export interface LocationManagementTableItem {
   name: string
   region: string
   category: string
+  locationType: string
 }
 
 export interface LocationItem {
@@ -129,12 +130,18 @@ export interface Region {
   name: string
 }
 
+export interface LocationCategoryManagementTableItem {
+  id: string | number
+  name: string
+  description: string
+}
+
 export interface CreateEditLocationCategoryProps {
   isModalOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
   isEdit?: boolean
-  editItem?: any //TODO add interface
+  editItem?: LocationCategoryManagementTableItem
 }
 
 export interface DeleteLocationCategoryProps {

@@ -1,12 +1,13 @@
+import { LocationCategoryManagementTableItem } from 'components/volumetry/interfaces'
 import * as Yup from 'yup'
 
-// TODO add interface
-export const getInitialValues = editItem => ({
-  name: editItem?.name ?? ''
+export const getInitialValues = (editItem: LocationCategoryManagementTableItem) => ({
+  name: editItem?.name ?? '',
+  description: editItem?.description ?? ''
 })
 
-// TODO add interface
-export const getValidationSchema = item =>
+export const getValidationSchema = (item: LocationCategoryManagementTableItem) =>
   Yup.object().shape({
-    name: Yup.string().required('Acest camp este obligatoriu.')
+    name: Yup.string().required('Acest camp este obligatoriu.'),
+    description: Yup.string()
   })

@@ -5,5 +5,6 @@ export const toTableLocations = (locations: LocationManagementTableItem[]) =>
     id: location.id,
     name: location.name ?? '',
     region: location.region ?? '',
-    category: location.category ?? ''
+    category: location.category ?? '',
+    locationType: location.locationType ?? ''
   }))

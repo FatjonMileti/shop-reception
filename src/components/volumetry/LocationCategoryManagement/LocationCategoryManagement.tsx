@@ -2,7 +2,11 @@ import { useState } from 'react'
 import { Table } from 'components/core-ui/Table'
 import s from './LocationCategoryManagement.modules.scss'
 import { columns } from './helpers'
-import { CRUDAction, LocationManagementTableItem } from '../interfaces'
+import {
+  CRUDAction,
+  LocationCategoryManagementTableItem,
+  LocationManagementTableItem
+} from '../interfaces'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { useNotification } from 'hooks'
 import { makeCoreGetRequest } from 'utils/api'
@@ -13,11 +17,11 @@ import { CreateEditLocationCategory } from './CreateEditLocationCategory'
 import { DeleteLocationCategory } from './DeleteLocationCategory'
 
 const LocationCategoryManagement = () => {
-  const [tableItems, setTableItems] = useState<LocationManagementTableItem[]>([])
+  const [tableItems, setTableItems] = useState<LocationCategoryManagementTableItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState(null) //TODO add interface
+  const [selectedRow, setSelectedRow] = useState<LocationCategoryManagementTableItem>(null)
   const [modal, setModal] = useState<CRUDAction>(null)
 
   const { showNotification } = useNotification()
@@ -39,11 +43,13 @@ const LocationCategoryManagement = () => {
         list: [
           {
             id: 1,
-            name: 'HYPER MAXI'
+            name: 'HYPER MAXI',
+            description: 'Lorem ipsum 1'
           },
           {
             id: 2,
-            name: 'HYPER'
+            name: 'HYPER',
+            description: 'Lorem ipsum 2'
           }
         ],
         page: {

@@ -67,9 +67,9 @@ const EditLocation: React.FC<EditLocationProps> = props => {
     }
   })
 
-  const { data: regionsOptions } = getRegionsOptions(showNotification)
+  const { data: regionsOptions } = getRegionsOptions(showNotification, editItemId)
 
-  const { data: categoriesOptions } = getCategoriesOptions(showNotification)
+  const { data: categoriesOptions } = getCategoriesOptions(showNotification, editItemId)
 
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle="Editeaza locatie">
@@ -86,7 +86,7 @@ const EditLocation: React.FC<EditLocationProps> = props => {
             name="region"
             label="Regiune"
             value={formik.values.region}
-            options={regionsOptions}
+            options={regionsOptions || []}
             onChange={value => formik.setFieldValue('region', value)}
             error={!!formik.errors.region}
             helperText={formik.errors.region as string}
@@ -97,9 +97,9 @@ const EditLocation: React.FC<EditLocationProps> = props => {
           <AsyncAutocomplete
             variant="outlined"
             name="category"
-            label="Categorie"
+            label="Categorie volumetrie"
             value={formik.values.category}
-            options={categoriesOptions}
+            options={categoriesOptions || []}
             onChange={value => formik.setFieldValue('category', value)}
             error={!!formik.errors.category}
             helperText={formik.errors.category as string}
