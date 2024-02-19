@@ -17,6 +17,9 @@ import { Filter, ValueLabelInterface } from 'components/bakery/interfaces'
 import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
 import { formatErrorMessage } from 'utils/formatting'
 
+const orderBy = 'createdDate'
+const order = 'desc'
+
 export const OwnProductionTraceability = () => {
   const { showNotification } = useNotification()
 
@@ -41,7 +44,9 @@ export const OwnProductionTraceability = () => {
           searchFields: ['productName'],
           tableFilters,
           page,
-          rowsPerPage
+          rowsPerPage,
+          orderBy,
+          order
         })
       )
       setRows(toListTableRows(response.list))

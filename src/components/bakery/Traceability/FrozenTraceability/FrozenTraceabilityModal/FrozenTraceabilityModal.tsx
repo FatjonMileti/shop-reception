@@ -140,7 +140,11 @@ export const FrozenTraceabilityModal = ({
                     setShowAddBatch(false)
                     setStep(1)
                   }}
-                  onCancel={cancel}
+                  onCancel={() => {
+                    setShowAddBatch(false)
+                    setSelectedRows([])
+                    setStep(1)
+                  }}
                   setSelectedRows={setSelectedRows}
                 />
               ][showAddBatch ? 2 : isEdit ? 1 : step]

@@ -2,53 +2,23 @@ import { Grid, Divider, CircularProgress } from '@mui/material'
 import { Button, DatePicker, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { AddActionIcon, DeleteActionIcon } from 'icons'
 import dayjs from 'dayjs'
-import { useQuery } from 'react-query'
-import { makeCoreGetRequest } from 'utils/api'
-import { formatErrorMessage } from 'utils/formatting'
-import { useNotification } from 'hooks'
 
 interface ProductDetailsBatchesProps {
   onSelectBatch: Function
   productMetiCode: any
   formik: any
-  onDeleteBatch: Function
+  onDeleteBatch: Function,
+  receip: any
 }
 
 export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
-  const { showNotification } = useNotification()
-  const { formik, productMetiCode, onSelectBatch, onDeleteBatch } = props
+  const { formik, productMetiCode, onSelectBatch, onDeleteBatch, receip } = props
+
   const metiCode = productMetiCode || formik.values.metiCode;
+
   if (typeof metiCode === 'undefined' ) {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
-
-  const { data: receip, isLoading: isReceipLoading } = useQuery(
-    ['receip'],
-    async () => {
-      const result = await makeCoreGetRequest(
-        `/bakery/recipe/${productMetiCode || formik.values.metiCode}`
-      )
-      let charges = []
-      let batches = []
-
-      if (result) {
-        result[0].componentList.forEach(item => {
-          if (item.withBatch) batches.push(item)
-          if (item.withRecipe) charges.push(item)
-        })
-      }
-
-      return { charges, batches }
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
 
   return (
     <>

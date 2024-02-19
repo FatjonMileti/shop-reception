@@ -10,7 +10,7 @@ import { ProductDetails } from './ProductDetails/ProductDetails'
 import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
-import { SelectOrScanProduct } from '../../ReceivedProducts/AddReceivedProduct/SelectOrScanProduct'
+import { SelectOrScanProduct } from './SelectOrScanProduct'
 import { Product } from '../../ReceivedProducts/interfaces'
 import { SelectCharge } from './SelectCharge'
 
@@ -152,7 +152,11 @@ export const OwnProductionTraceabilityModal = ({
                     setShowAddBatch(false)
                     setStep(1)
                   }}
-                  onCancel={cancel}
+                  onCancel={() => {
+                    setStep(1)
+                    setShowAddBatch(false)
+                    setSelectedRows([])
+                  }}
                   selectedRows={selectedRows}
                   setSelectedRows={setSelectedRows}
                   metiCode={formik.values?.metiCode || selectedProduct?.metiCode}

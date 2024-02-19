@@ -27,7 +27,9 @@ import { ReceivedProduct, FamilyItem, SubfamilyItem } from './interfaces'
 import { get } from 'lodash'
 import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
 import { ImageCell } from '../../../core-ui/ImageCell'
-import { TableState } from '../../StoreManagerRole/ProductionManagementStore/interfaces'
+
+const orderBy = 'createdDate'
+const order = 'desc'
 
 export const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -44,9 +46,13 @@ export const ReceivedProducts = () => {
   const [tableState, setTableState] = useState<{
     tableFilters: Filter[]
     rowsPerPage: number
+    orderBy: string
+    order: string
   }>({
     tableFilters: null,
-    rowsPerPage: null
+    rowsPerPage: null,
+    orderBy,
+    order
   })
 
   const { showNotification } = useNotification()
@@ -60,17 +66,20 @@ export const ReceivedProducts = () => {
           url: '/bakery/batch',
           tableFilters,
           page,
-          rowsPerPage
+          rowsPerPage,
+          orderBy,
+          order
         })
       )
       setTableItems(response.list.map(toTableRowItem))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
 
-      setTableState({
+      setTableState(tableState => ({
+        ...tableState,
         tableFilters,
         rowsPerPage
-      })
+      }))
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,

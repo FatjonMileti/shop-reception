@@ -11,6 +11,10 @@ import dayjs from 'dayjs'
 import { SelectProduct } from '../../../ReceivedProducts/AddReceivedProduct/SelectProduct'
 import { ProductDetailsBatches } from './ProductDetailsBatches'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest } from '../../../../../../utils/api'
+import { formatErrorMessage } from '../../../../../../utils/formatting'
+import { useNotification } from '../../../../../../hooks'
 
 interface ProductDetailsProps {
   onCancel: () => void
@@ -24,6 +28,8 @@ interface ProductDetailsProps {
 export const ProductDetails = (props: ProductDetailsProps) => {
   const { formik, onCancel, onSelectBatch, selectedProduct, selectedRows, isEdit } = props
 
+  const { showNotification } = useNotification()
+
   useEffect(() => {
     formik.setFieldValue('traceabilityProductionList', selectedRows)
   }, [selectedRows])
@@ -34,6 +40,34 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     )
     formik.setFieldValue('traceabilityProductionList', newBatches)
   }
+
+  const { data: receip, isLoading: isReceipLoading } = useQuery(
+    ['receip'],
+    async () => {
+      const result = await makeCoreGetRequest(
+        `/bakery/recipe/${selectedProduct?.metiCode || formik.values.metiCode}`
+      )
+      let charges = []
+      let batches = []
+
+      if (result) {
+        result[0].componentList.forEach(item => {
+          if (item.withBatch) batches.push(item)
+          if (item.withRecipe) charges.push(item)
+        })
+      }
+
+      return { charges, batches, details: result[0] }
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
 
   return (
     <Grid container rowSpacing={3.5}>
@@ -49,7 +83,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 label: 'Produs cod Meti:',
                 name: selectedProduct?.metiCode
               },
-              { label: 'Info:', name: 'Greutate neta articol conform reteta: 0.4KG' }
+              { label: 'Info:', name: `Greutate neta articol conform reteta: ${receip?.details?.recipeQuantity || ''}${receip?.details?.recipeUnit || ''}` }
             ]}
           />
         </Grid>
@@ -118,7 +152,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             onChange={e => formik.setFieldValue('quantity', e.currentTarget.value)}
             value={formik.values.quantity}
             name="quantity"
-            infoIcon={'kg'}
+            infoIcon={selectedProduct.metricUnit}
             required
             error={!!formik.errors.quantity}
             helperText={formik.errors.quantity as string}
@@ -216,6 +250,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
           productMetiCode={selectedProduct?.metiCode}
           onSelectBatch={onSelectBatch}
           onDeleteBatch={onDeleteBatch}
+          receip={receip}
         />
 
         <Grid item xs={12} container justifyContent="space-between">
