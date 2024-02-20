@@ -52,12 +52,12 @@ export const ReceivedProducts = () => {
     tableFilters: null,
     rowsPerPage: null,
     orderBy,
-    order
+    order,
   })
 
   const { showNotification } = useNotification()
 
-  const fetchData = async (page, rowsPerPage, tableFilters) => {
+  const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
 
     try {
@@ -68,7 +68,14 @@ export const ReceivedProducts = () => {
           page,
           rowsPerPage,
           orderBy,
-          order
+          order,
+          searchText,
+          searchFields: [
+            'product.metiCode',
+            'supplier.supplierCode',
+            'supplier.supplierName',
+            'product.name',
+          ]
         })
       )
       setTableItems(response.list.map(toTableRowItem))
@@ -186,7 +193,7 @@ export const ReceivedProducts = () => {
         isModalOpen={isAddModalOpen}
         closeModal={() => setAddModalOpen(false)}
         onSuccess={() => {
-          fetchData(0, tableState.rowsPerPage, tableState.tableFilters)
+          fetchData(0, tableState.rowsPerPage, tableState.tableFilters, '')
         }}
       />
       <CorrectReceivedProduct
@@ -211,6 +218,7 @@ export const ReceivedProducts = () => {
         filters={drawerFilters}
         handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         handleRemoteData={fetchData}
+        hasSearchInput
         rows={tableItems.map(item => ({
           id: item.id,
           summary: (

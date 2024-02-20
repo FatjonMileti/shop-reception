@@ -57,7 +57,7 @@ const Ingredients = () => {
         toTableGETUrl({
           url: '/bakery/product/management/ingredients',
           filters: [],
-          searchFields: ["productName","metiCode","pluCode"],
+          searchFields: ['productName', 'metiCode', 'pluCode'],
           searchText,
           tableFilters,
           page,
