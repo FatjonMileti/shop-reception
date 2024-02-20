@@ -35,7 +35,7 @@ export const ProductManagementTraceability = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/product',
+          url: '/bakery/product/traceability',
           searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
           tableFilters,
           page,
