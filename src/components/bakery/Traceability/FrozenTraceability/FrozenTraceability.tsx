@@ -70,9 +70,9 @@ export const FrozenTraceability = () => {
   }
 
   const families = useQuery(
-    ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
+    ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
     async () => {
-      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.subfamily')
         ?.value || []) as AutoCompleteValue[]
 
       const result = await makeCoreGetRequest(
@@ -103,9 +103,9 @@ export const FrozenTraceability = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'family')?.value],
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.family')
         ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
@@ -133,7 +133,7 @@ export const FrozenTraceability = () => {
 
   const drawerFilters: TableFiltersType[] = [
     {
-      name: 'family',
+      name: 'product.family',
       value: undefined,
       filter: (
         <Autocomplete
@@ -148,7 +148,7 @@ export const FrozenTraceability = () => {
       label: 'Familie',
     },
     {
-      name: 'subfamily',
+      name: 'product.subfamily',
       value: undefined,
       filter: (
         <Autocomplete
