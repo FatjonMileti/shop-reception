@@ -288,16 +288,6 @@ export const ReportFrozenTraceability = () => {
               }
             }
           ]}
-          rowActions={[
-            {
-              label: 'Editeaza',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#0970E6',
-              onClick: async (e, rowId) => {},
-              desktopIcon: <EditActionIcon />
-            }
-          ]}
           rowActionsWidth="90px"
           rowsPerPage={25}
           rowsPerPageOptions={[25, 50, 100]}

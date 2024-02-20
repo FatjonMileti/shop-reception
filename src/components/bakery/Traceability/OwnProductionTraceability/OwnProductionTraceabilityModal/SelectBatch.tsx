@@ -6,6 +6,7 @@ import { useNotification } from 'hooks'
 import { Dispatch, useState } from 'react'
 import { columns, toBatchFormat } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
+import { Product } from '../../ReceivedProducts/interfaces'
 
 interface SelectBatchProps {
   onContinue: () => void
@@ -13,6 +14,7 @@ interface SelectBatchProps {
   setSelectedRows: Dispatch<any>
   selectedRows: any
   metiCode: any
+  selectedProduct: Product
 }
 
 export const SelectBatch = (props: SelectBatchProps) => {
@@ -33,7 +35,7 @@ export const SelectBatch = (props: SelectBatchProps) => {
           rowsPerPage,
           filters: [{
             name: 'product.metiCode',
-            value: metiCode
+            value: props.selectedProduct?.metiCode
           }],
         })
       )

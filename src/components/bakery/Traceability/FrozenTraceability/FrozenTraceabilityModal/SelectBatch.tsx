@@ -6,11 +6,13 @@ import { useNotification } from 'hooks'
 import { Dispatch, useState } from 'react'
 import { columns, toBatchFormat } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
+import { Product } from '../../ReceivedProducts/interfaces'
 
 interface SelectBatchProps {
   onContinue: () => void
   onCancel: () => void
   setSelectedRows: Dispatch<any>
+  selectedProduct: Product
 }
 
 export const SelectBatch = (props: SelectBatchProps) => {
@@ -28,7 +30,11 @@ export const SelectBatch = (props: SelectBatchProps) => {
         toTableGETUrl({
           url: '/bakery/batch',
           page,
-          rowsPerPage
+          rowsPerPage,
+          filters: [{
+            name: 'product.metiCode',
+            value: props.selectedProduct?.metiCode
+          }]
         })
       )
       setTableItems(response.list)
