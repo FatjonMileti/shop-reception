@@ -21,6 +21,13 @@ export const URLS = {
   AUTH_REGION_GROWTH_COEFFICIENT: 'bakery/formator/growth-region-formator',
   AUTH_APPLICATION_USAGE_REPORT: 'bakery/formator/usage-report-formator',
   AUTH_CADENTIER_REPORT_AND_SALES: 'bakery/formator/sales-cadentier-formator',
+  AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_FORMATOR:
+    'bakery/formator/own-production-traceability-report',
+  AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT_FORMATOR:
+    'bakery/formator/own-production-traceability-report-print',
+  AUTH_REPORT_FROZEN_TRACEABILITY_FORMATOR: 'bakery/formator/frozen-traceability-report',
+  AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR:
+    'bakery/formator/frozen-traceability-report-print',
 
   /* Store manager role */
   AUTH_PRODUCT_MANAGEMENT_STORE: 'bakery/storeManager/product-management',
@@ -45,8 +52,11 @@ export const URLS = {
   AUTH_RECEIVED_PRODUCTS_TRACEABILITY: 'bakery/traceabilityOperator/received-products',
   AUTH_FROZEN_TRACEABILITY: 'bakery/traceabilityOperator/frozen-traceability',
   AUTH_REPORT_FROZEN_TRACEABILITY: 'bakery/traceabilityOperator/frozen-traceability-report',
-  AUTH_REPORT_FROZEN_TRACEABILITY_PRINT: 'bakery/traceabilityOperator/frozen-traceability-report-print',
+  AUTH_REPORT_FROZEN_TRACEABILITY_PRINT:
+    'bakery/traceabilityOperator/frozen-traceability-report-print',
   AUTH_OWN_PRODUCTION_TRACEABILITY: 'bakery/traceabilityOperator/own-production-traceability',
-  AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY: 'bakery/traceabilityOperator/own-production-traceability-report',
-  AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT: 'bakery/traceabilityOperator/own-production-traceability-report-print',
+  AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY:
+    'bakery/traceabilityOperator/own-production-traceability-report',
+  AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT:
+    'bakery/traceabilityOperator/own-production-traceability-report-print'
 }
