@@ -102,6 +102,14 @@ export const columns = [
     disableSorting: true
   },
   {
+    title: 'Volum estimat',
+    field: 'defaultWorkload',
+    align: 'left',
+    type: 'string',
+    collapsible: true,
+    disableSorting: true
+  },
+  {
     title: 'Productivitate standard',
     field: 'standardProductivity',
     align: 'left',
@@ -145,3 +153,18 @@ export const columns = [
     )
   }
 ]
+
+export const toTableRowItems = items =>
+  items.map(item => ({
+    id: item.id || '',
+    rayonsOrDepartment: item.rayonsOrDepartment || '',
+    name: item.name || '',
+    recommendedTimeInterval: item.recommendedTimeInterval || '',
+    frequency: item.frequency || '',
+    defaultWorkload: item.defaultWorkload || '',
+    standardProductivity: item.standardProductivity || '',
+    workVolumeSource: item.workVolumeSource || '',
+    priority: item.priority || '',
+    volumetryLocationCategory: item.volumetryLocationCategory || '',
+    isActive: item.isActive || ''
+  }))

@@ -219,6 +219,27 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
         </Grid>
 
         <Grid xs={12} md={6} item>
+          <Input
+            type="number"
+            name="defaultWorkload"
+            label="Volum estimat"
+            fullWidth
+            required
+            variant="outlined"
+            value={formik.values.defaultWorkload}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue(
+                'defaultWorkload',
+                event.currentTarget.value.replace(/[.,]/g, '')
+              )
+            }
+            error={!!formik.errors.defaultWorkload}
+            helperText={formik.errors.defaultWorkload as string}
+            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+          />
+        </Grid>
+
+        <Grid xs={12} md={6} item>
           <AsyncAutocomplete
             variant="outlined"
             name="workVolumeSource"
