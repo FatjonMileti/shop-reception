@@ -40,7 +40,7 @@ const ReceiptInvoiceFinalized: React.FC = () => {
                 <br />
                 <Button
                   variant="contained"
-                  label="Factură fiscală"
+                  label="Factura fiscala"
                   onClick={() =>
                     navigate(`/supplyOmni/receiptClientDetails/${clientId}?orderId=${orderId}`)
                   }
