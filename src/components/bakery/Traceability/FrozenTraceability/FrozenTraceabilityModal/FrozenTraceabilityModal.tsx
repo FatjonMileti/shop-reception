@@ -84,6 +84,7 @@ export const FrozenTraceabilityModal = ({
 
   const cancel = () => {
     closeModal()
+    setShowAddBatch(false)
     setSelectedProduct(undefined)
     setEditItem(null)
     setStep(0)
@@ -136,6 +137,7 @@ export const FrozenTraceabilityModal = ({
                   isEdit={isEdit}
                 />,
                 <SelectBatch
+                  selectedProduct={selectedProduct}
                   onContinue={() => {
                     setShowAddBatch(false)
                     setStep(1)

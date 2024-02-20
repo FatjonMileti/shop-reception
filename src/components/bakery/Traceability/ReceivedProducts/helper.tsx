@@ -138,7 +138,7 @@ export const columns: Column[] = [
       <BodyItem
         name="Poza eticheta"
         value={
-          <ImageCell value={''} imageUrl={row.product?.imageUrl} />
+          <ImageCell value={''} imageUrl={row?.imageUrl} />
         }
       />
     )

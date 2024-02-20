@@ -86,6 +86,7 @@ export const OwnProductionTraceabilityModal = ({
 
   const cancel = () => {
     closeModal()
+    setShowAddBatch(false)
     setSelectedProduct(undefined)
     setEditItem(null)
     setStep(0)
@@ -160,6 +161,7 @@ export const OwnProductionTraceabilityModal = ({
                   selectedRows={selectedRows}
                   setSelectedRows={setSelectedRows}
                   metiCode={formik.values?.metiCode || selectedProduct?.metiCode}
+                  selectedProduct={selectedProduct}
                 />,
 
                 <SelectCharge
@@ -171,6 +173,7 @@ export const OwnProductionTraceabilityModal = ({
                   setSelectedRows={setSelectedRows}
                   selectedRows={selectedRows}
                   metiCode={formik.values?.metiCode || selectedProduct?.metiCode}
+                  selectedProduct={selectedProduct}
                 />
               ][showAddBatch ? 2 : showAddCharge ? 3 : isEdit ? 1 : step]
             }
