@@ -168,6 +168,15 @@ interface DLCProducts {
   productCode: string
 }
 
+interface SeriesNumber {
+  id: number
+  series: string
+  startInterval: number
+  currentNumber: number
+  year: number
+  society: string
+}
+
 interface SGRProducts {
   id: number
   storeType: string

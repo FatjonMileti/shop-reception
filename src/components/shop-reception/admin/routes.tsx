@@ -35,6 +35,7 @@ import { SupportWrongDestinationDetail } from './ReceptionDashboard/SupportWrong
 import { PackagingDisputesTimerDetail } from './PackageDashboard/PackagingDisputesTimer/PackagingDisputesTimerDetail'
 import { BalancePackageHistory } from './PackageDashboard/BalancePackages/BalancePackageHistory'
 import { BalancePackageForm } from './PackageDashboard/BalancePackages/BalancePackageForm'
+import { SeriesNumber } from './AdminDashboard/SeriesNumber'
 import { SGRProducts } from './AdminDashboard/SGRProducts'
 
 export const useShopReceptionRoutes = applicationPages => {
@@ -163,6 +164,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ReceptionFiles}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_SERIES_NUMBER}
+        element={
+          <PrivateRoute
+            component={SeriesNumber}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
