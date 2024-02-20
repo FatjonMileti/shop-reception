@@ -215,7 +215,7 @@ export const ReceivedProducts = () => {
           id: item.id,
           summary: (
             <AccordionSummaryWrapper>
-              <ImageCell value={''} imageUrl={item.imageUrl} />
+              <ImageCell value={''} imageUrl={item.product?.imageUrl} />
               <div className="title-and-content-wrapper">
                 <Typography variant="medium" className="title">
                   {item.product.name}
