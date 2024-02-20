@@ -6,6 +6,7 @@ import { useNotification } from 'hooks'
 import { Dispatch, useState } from 'react'
 import { chargeColumns, toChargeFormat } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
+import { Product } from '../../ReceivedProducts/interfaces'
 
 interface SelectChargeProps {
   onContinue: () => void
@@ -13,6 +14,7 @@ interface SelectChargeProps {
   setSelectedRows: Dispatch<any>
   selectedRows: any
   metiCode: any
+  selectedProduct: Product
 }
 
 export const SelectCharge = (props: SelectChargeProps) => {
@@ -33,7 +35,7 @@ export const SelectCharge = (props: SelectChargeProps) => {
           rowsPerPage,
           filters: [{
             name: 'product.metiCode',
-            value: metiCode
+            value: props.selectedProduct?.metiCode
           }],
         })
       )
