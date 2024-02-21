@@ -95,7 +95,7 @@ export const ReportOwnProductionTraceability = () => {
           tableFilters,
           page,
           searchText,
-          searchFields: ['productName'],
+          searchFields: ['product.name'],
           rowsPerPage
         })
       )
@@ -141,9 +141,9 @@ export const ReportOwnProductionTraceability = () => {
   )
 
   const families = useQuery(
-    ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
+    ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
     async () => {
-      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.subfamily')
         ?.value || []) as AutoCompleteValue[]
 
       const result = await makeCoreGetRequest(`/bakery/store/families`, {
@@ -171,9 +171,9 @@ export const ReportOwnProductionTraceability = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'family')?.value],
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.family')
         ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
@@ -203,7 +203,7 @@ export const ReportOwnProductionTraceability = () => {
 
   const drawerFilters: TableFiltersType[] = [
     {
-      name: 'product',
+      name: 'product.id',
       value: undefined,
       filter: (
         <Autocomplete
@@ -248,7 +248,7 @@ export const ReportOwnProductionTraceability = () => {
       label: 'Data sfarsit productie'
     },
     {
-      name: 'family',
+      name: 'product.family',
       value: undefined,
       filter: (
         <Autocomplete
@@ -263,7 +263,7 @@ export const ReportOwnProductionTraceability = () => {
       label: 'Familie produse'
     },
     {
-      name: 'subfamily',
+      name: 'product.subfamily',
       value: undefined,
       filter: (
         <Autocomplete

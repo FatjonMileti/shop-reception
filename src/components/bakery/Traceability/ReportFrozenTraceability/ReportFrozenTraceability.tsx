@@ -202,7 +202,7 @@ export const ReportFrozenTraceability = () => {
 
   const drawerFilters: TableFiltersType[] = [
     {
-      name: 'product',
+      name: 'product.id',
       value: undefined,
       filter: (
         <Autocomplete
