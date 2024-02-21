@@ -66,7 +66,7 @@ export const columns = [
 export const drawerFilters = (familiesQuery) => [
   {
     name: 'family',
-    value: '',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
