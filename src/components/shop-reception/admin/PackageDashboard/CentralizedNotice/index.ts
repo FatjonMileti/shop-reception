@@ -1,0 +1,1 @@
+export { default as CentralizedNotice } from './CentralizedNotice'

@@ -40,5 +40,9 @@ export const URLS = {
   AUTH_RETURNED_PACKAGING: '/shop-reception/package/returned',
   AUTH_PACKAGING_COMPLIANCE: '/shop-reception/package/compliance',
   AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION: '/shop-reception/package/timerDisputes',
-  AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL: '/shop-reception/package/timerDisputes/:id'
+  AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL: '/shop-reception/package/timerDisputes/:id',
+  AUTH_PACKING_INVENTORY: '/shop-reception/package/packingInventory',
+  AUTH_PACKING_INVENTORY_HISTORY: '/shop-reception/package/packingInventoryHistory/:id',
+  AUTH_CENTRALIZED_NOTICE: '/shop-reception/package/centralizedNotice',
+  AUTH_TRANSPORT_RESPONSIBLE: '/shop-reception/package/transportResponsible',
 }

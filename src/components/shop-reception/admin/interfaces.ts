@@ -253,6 +253,36 @@ interface PackagingDisputeTimer {
   timerDescription: string
 }
 
+interface PackagingInventory {
+  id: number
+  store: string
+  hub: string
+  society: string
+  supportType: string
+  inventoryQualitative: string
+  theoreticalBalanceQualitative: string
+  defectiveInventory: string
+  difference: string
+  finalStockAfterInventory: string
+  inventoryManager: string
+  inventoryDate: string
+}
+
+interface PackagingInventoryHistory {
+  id: number
+  store: string
+  supportType: string
+  qualitative: string
+  defective: string
+  inventoryManager: string
+  inventoryDate: string
+}
+
+interface CentralizedNotice {
+  id: number
+  inventoryDate: string
+}
+
 interface PackagingTypesDifference {
   id: number
   warehouse: string
