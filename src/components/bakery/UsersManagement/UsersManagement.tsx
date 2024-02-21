@@ -54,12 +54,9 @@ const UsersManagement = () => {
     }
   }
 
-  const selectRow = (rowId: number, action: string) => {
+  const selectRow = (rowId: number) => {
     setSelectedRowId(rowId)
-
-    if (action === 'edit') {
-      openEditModal()
-    }
+    openEditModal()
   }
 
   return (
@@ -67,7 +64,10 @@ const UsersManagement = () => {
       <Box>
         <EditUser 
           isModalOpen={isEditModalOpen}
-          closeModal={closeEditModal}
+          closeModal={() => {
+            setSelectedRowId(0)
+            closeEditModal()
+          }}
           setShouldRefreshData={setShouldRefreshData}
           editUserId={selectedRowId}
         />
@@ -88,7 +88,7 @@ const UsersManagement = () => {
               typographyVariant: 'medium',
               backgroundColor: '#16a085',
               desktopIcon: <EditActionIcon />,
-              onClick: (e, rowId) => selectRow(rowId, 'edit')
+              onClick: (e, rowId) => selectRow(rowId)
             }
           ]}
           rowActionsWidth="130px"

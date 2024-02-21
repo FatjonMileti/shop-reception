@@ -1,10 +1,12 @@
-import { Grid, Box } from '@mui/material'
+import { Grid, Box, debounce } from '@mui/material'
 import { Button, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
-import { Dispatch, useEffect, useState } from 'react'
+import { Dispatch, useState } from 'react'
 import { columns, toBatchFormat } from './helpers'
+import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
+import { Product } from '../../ReceivedProducts/interfaces'
 
 interface SelectBatchProps {
   onContinue: () => void
@@ -12,6 +14,7 @@ interface SelectBatchProps {
   setSelectedRows: Dispatch<any>
   selectedRows: any
   metiCode: any
+  selectedProduct: Product
 }
 
 export const SelectBatch = (props: SelectBatchProps) => {
@@ -22,26 +25,31 @@ export const SelectBatch = (props: SelectBatchProps) => {
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  useEffect(() => {
-    const loadData = async () => {
+  const fetchData = async (page, rowsPerPage) => {
+    try {
       setIsLoading(true)
-
-      try {
-        const response = await makeCoreGetRequest(`/bakery/batch?filterBy=product.metiCode&filterValue=${metiCode}`)
-        setTableItems(response.list)
-        setTotalCount(response.page.totalCount)
-        setIsLoading(false)
-      } catch (error) {
-        showNotification({
-          message: `Error while fetching data: ${formatErrorMessage(error)}`,
-          type: 'error'
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: '/bakery/batch',
+          page,
+          rowsPerPage,
+          filters: [{
+            name: 'product.metiCode',
+            value: props.selectedProduct?.metiCode
+          }],
         })
-        setIsLoading(false)
-      }
+      )
+      setTableItems(response.list)
+      setTotalCount(response.page.totalCount)
+      setIsLoading(false)
+    } catch(error) {
+      showNotification({
+        message: `Error while fetching data: ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+      setIsLoading(false)
     }
-
-    loadData()
-  }, [])
+  }
 
   const onSelectRows = rows => {
     const newItems = rows.filter(row => !selectedRows.some(item => item.batchId === row.id))
@@ -58,9 +66,13 @@ export const SelectBatch = (props: SelectBatchProps) => {
             order="asc"
             rows={tableItems}
             isLoading={isLoading}
+            handleRemoteData={debounce(fetchData, 500)}
+            isRemote
             columns={columns}
             totalCount={totalCount}
             selectRows={onSelectRows}
+            rowsPerPage={25}
+            rowsPerPageOptions={[25, 50, 100]}
           />
         </Box>
       </Grid>

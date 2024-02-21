@@ -36,9 +36,14 @@ interface EditReceivedProductProps {
   batchId?: string | number
 }
 
+export const BATCH_STATUS = {
+  CLOSED: 'CLOSED',
+  AVAILABLE: 'AVAILABLE'
+}
+
 const batchStatusOptions = [
-  { value: 'CLOSED', label: 'Inchis' },
-  { value: 'AVAILABLE', label: 'Disponibil' },
+  { value: BATCH_STATUS.CLOSED, label: 'Inchis' },
+  { value: BATCH_STATUS.AVAILABLE, label: 'Disponibil' },
 ]
 
 const closeReasonOptions = [

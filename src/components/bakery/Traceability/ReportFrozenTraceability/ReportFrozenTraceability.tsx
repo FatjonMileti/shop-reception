@@ -1,10 +1,10 @@
 import { Autocomplete, DatePicker, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import s from './FrozenTraceability.modules.scss'
 import React, { useState } from 'react'
-import { makeCoreGetRequest } from 'utils/api'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
-import { handleQueryError } from 'utils/helpers'
+import { formatAndDownloadResponse, handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
 import { debounce } from '@mui/material'
 import { EditActionIcon } from 'icons'
@@ -85,6 +85,30 @@ export const ReportFrozenTraceability = () => {
     }
   }
 
+
+  const downloadFileQuery = useQuery(
+    ['download'],
+    async () => {
+      const url = toTableGETUrl({
+        url: '/bakery/traceability/frozen/download',
+        filters: tableState.tableFilters
+      })
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      return formatAndDownloadResponse(response)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
+    }
+  )
+  
   const families = useQuery(
     ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
@@ -168,7 +192,7 @@ export const ReportFrozenTraceability = () => {
       label: 'Produs'
     },
     {
-      name: 'dateFrom',
+      name: 'startDate',
       value: currentDate,
       filter: (
         <DatePicker
@@ -182,7 +206,7 @@ export const ReportFrozenTraceability = () => {
       label: 'Data inceput productie'
     },
     {
-      name: 'dateTo',
+      name: 'endDate',
       value: currentDate,
       filter: (
         <DatePicker
@@ -253,7 +277,7 @@ export const ReportFrozenTraceability = () => {
               label: 'Descarca',
               icon: <DownloadOutlined />,
               onClick: () => {
-                //downloadFileQuery.refetch()
+                downloadFileQuery.refetch()
               }
             },
             {
@@ -264,17 +288,9 @@ export const ReportFrozenTraceability = () => {
               }
             }
           ]}
-          rowActions={[
-            {
-              label: 'Editeaza',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#0970E6',
-              onClick: async (e, rowId) => {},
-              desktopIcon: <EditActionIcon />
-            }
-          ]}
           rowActionsWidth="90px"
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </>
     </div>

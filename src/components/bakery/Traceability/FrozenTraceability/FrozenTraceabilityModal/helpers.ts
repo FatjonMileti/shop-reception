@@ -4,22 +4,22 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
   return {
     productId: editItem?.product?.id || selectedProduct?.id || '',
-    storeId: editItem?.store?.id || null,
+    // storeId: editItem?.store?.id || null,
     productionDate: editItem?.productionDate || null,
     chargeNumber: editItem?.chargeNumber || null,
     productionOperator: editItem?.productionOperator || null,
     quantity: editItem?.quantity || null,
-    thermalCondition: editItem?.thermalCondition || 'UNBAKED',
+    thermalCondition: editItem?.thermalCondition || null,
     conform: editItem?.conform || true,
     nonComplianceReason: editItem?.nonComplianceReason || null,
     productDestination: editItem?.productDestination || null,
-    isVerified: editItem?.verified || null,
-    verifiedBy: editItem?.verifiedBy || null,
-    verifiedDate: editItem?.verifiedDate || null,
+    // isVerified: editItem?.verified || null,
+    // verifiedBy: editItem?.verifiedBy || null,
+    // verifiedDate: editItem?.verifiedDate || null,
     dlc: editItem?.dlc || null,
-    isFrozen: editItem?.frozen || null,
+    // isFrozen: editItem?.frozen || null,
     metiCode: editItem?.product?.metiCode || selectedProduct?.metiCode,
-    productName: editItem?.product?.name || selectedProduct?.name,
+    // productName: editItem?.product?.name || selectedProduct?.name,
     traceabilityFrozenList: editItem
       ? toBatchFormat(editItem?.traceabilityFrozenList, true)
       : selectedRows
@@ -47,7 +47,8 @@ export const getValidationSchema = () =>
 
 export const toBatchFormat = (batches, isEdit = false) => {
   return batches.map(item => ({
-    batchId: isEdit ? item.batch.batchName : item.batchName,
+    batchName: isEdit ? item.batch.batchName : item.batchName,
+    batchId: isEdit ? item.batch.id : item.id,
     quantity: isEdit ? item.batch.batchQuantity : item.batchQuantity,
     openingDate: isEdit ? formatBakeryPayloadDate(item.openingDate) : item.entryDate,
     dlc: isEdit ? item.batch.dlcDays : item.dlcDays
