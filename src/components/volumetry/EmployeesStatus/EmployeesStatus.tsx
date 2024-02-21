@@ -5,9 +5,9 @@ import s from './EmployeesStatus.modules.scss'
 import { getDepartmentsOptions } from '../api'
 import { useNotification } from 'hooks'
 import { toTableRowItems } from './serializers'
-import { columns } from './helpers'
+import { collaboratorsOptions, columns } from './helpers'
 import { ValueLabelInterface } from '../interfaces'
-import { Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
@@ -23,7 +23,7 @@ const EmployeesStatus = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
-  const [collaboratorFilterValue, setCollaboratorFilterValue] = useState<ValueLabelInterface>(null)
+  const [collaboratorFilterValue, setCollaboratorFilterValue] = useState<ValueLabelInterface>(collaboratorsOptions[0])
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification, setDepartmentFilterValue)
@@ -66,12 +66,6 @@ const EmployeesStatus = () => {
     }
   }
 
-  const collaboratorsOptions = [
-    { label: 'Angajati pe tura', value: 'ON_SHIFT' },
-    { label: 'Angajati care nu sunt pe tura', value: 'OFF_SHIFT' },
-    { label: 'Colaboratori', value: 'COLLABORATOR' }
-  ]
-
   const handleCollaboratorsOptionChange = value => {
     setCollaboratorFilterValue(value)
     setShouldRefreshData(true)
@@ -79,18 +73,18 @@ const EmployeesStatus = () => {
 
   return (
     <div className={s.mainContainer}>
-      <Grid container spacing={4}>
+      <Grid container spacing={4} style={{ marginBottom: '40px' }}>
         {isDepartmentsOptionsLoading ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
           <>
-            <Grid xs={4} md={3} mb={2} item style={{ padding: 0 }}>
+            <Grid xs={12} md={3} item style={{ padding: 0 }}>
               <FilterDataSelect
                 name="department"
                 defaultSelectedData={departmentFilterValue}
-                label=""
+                label="Departament"
                 showCounter={true}
                 showSearch={true}
                 counterLabel="Select department"
@@ -99,11 +93,11 @@ const EmployeesStatus = () => {
                 onSelect={handleDepartmentOptionChange}
               />
             </Grid>
-            <Grid xs={4} md={3} mb={2} item style={{ padding: 0 }}>
+            <Grid xs={12} md={3} item style={{ padding: 0, marginLeft: '60px' }}>
               <FilterDataSelect
                 name="collaborators"
                 defaultSelectedData={collaboratorFilterValue}
-                label=""
+                label="Ture/colaboratori"
                 showCounter={true}
                 showSearch={true}
                 counterLabel="Ture/colaboratori"
@@ -129,17 +123,6 @@ const EmployeesStatus = () => {
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
           rowActionsWidth="130px"
-          // filters={[
-          //   {
-          //     name: 'collaborators',
-          //     label: 'Ture/colaboratori',
-          //     type: 'autocomplete',
-          //     value: '',
-          //     filter: (
-          //       <Autocomplete label="Ture/colaboratori" variant="outlined" options={employeeOptions} />
-          //     )
-          //   }
-          // ]}
         />
       )}
     </div>

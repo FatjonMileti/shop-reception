@@ -28,3 +28,9 @@ export const columns = [
     align: 'left'
   }
 ]
+
+export const collaboratorsOptions = [
+  { label: 'Angajati pe tura', value: 'ON_SHIFT' },
+  { label: 'Angajati care nu sunt pe tura', value: 'OFF_SHIFT' },
+  { label: 'Colaboratori', value: 'COLLABORATOR' }
+]
