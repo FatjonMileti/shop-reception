@@ -7,7 +7,7 @@ import { useNotification } from 'hooks'
 import { toTableRowItems } from './serializers'
 import { columns } from './helpers'
 import { ValueLabelInterface } from '../interfaces'
-import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
@@ -23,6 +23,7 @@ const EmployeesStatus = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
+  const [collaboratorFilterValue, setCollaboratorFilterValue] = useState<ValueLabelInterface>(null)
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification, setDepartmentFilterValue)
@@ -35,11 +36,18 @@ const EmployeesStatus = () => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
 
+    const filters = [
+      { name: 'department', value: departmentFilterValue?.value },
+      ...(typeof collaboratorFilterValue?.value !== 'undefined' && [
+        { name: 'collaborator', value: collaboratorFilterValue?.value }
+      ])
+    ]
+
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/tasks/overview',
-          filters: [{ name: 'department', value: departmentFilterValue.value }],
+          filters: filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -58,6 +66,17 @@ const EmployeesStatus = () => {
     }
   }
 
+  const collaboratorsOptions = [
+    { label: 'Angajati pe tura', value: 'ON_SHIFT' },
+    { label: 'Angajati care nu sunt pe tura', value: 'OFF_SHIFT' },
+    { label: 'Colaboratori', value: 'COLLABORATOR' }
+  ]
+
+  const handleCollaboratorsOptionChange = value => {
+    setCollaboratorFilterValue(value)
+    setShouldRefreshData(true)
+  }
+
   return (
     <div className={s.mainContainer}>
       <Grid container spacing={4}>
@@ -66,19 +85,34 @@ const EmployeesStatus = () => {
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
-          <Grid xs={4} md={3} mb={2} item style={{ padding: 0 }}>
-            <FilterDataSelect
-              name="department"
-              defaultSelectedData={departmentFilterValue}
-              label=""
-              showCounter={true}
-              showSearch={true}
-              counterLabel="Select department"
-              noDataFoundLabel="No results!"
-              options={departmentsOptions}
-              onSelect={handleDepartmentOptionChange}
-            />
-          </Grid>
+          <>
+            <Grid xs={4} md={3} mb={2} item style={{ padding: 0 }}>
+              <FilterDataSelect
+                name="department"
+                defaultSelectedData={departmentFilterValue}
+                label=""
+                showCounter={true}
+                showSearch={true}
+                counterLabel="Select department"
+                noDataFoundLabel="No results!"
+                options={departmentsOptions}
+                onSelect={handleDepartmentOptionChange}
+              />
+            </Grid>
+            <Grid xs={4} md={3} mb={2} item style={{ padding: 0 }}>
+              <FilterDataSelect
+                name="collaborators"
+                defaultSelectedData={collaboratorFilterValue}
+                label=""
+                showCounter={true}
+                showSearch={true}
+                counterLabel="Ture/colaboratori"
+                noDataFoundLabel="No results!"
+                options={collaboratorsOptions}
+                onSelect={handleCollaboratorsOptionChange}
+              />
+            </Grid>
+          </>
         )}
       </Grid>
 
@@ -95,6 +129,17 @@ const EmployeesStatus = () => {
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
           rowActionsWidth="130px"
+          // filters={[
+          //   {
+          //     name: 'collaborators',
+          //     label: 'Ture/colaboratori',
+          //     type: 'autocomplete',
+          //     value: '',
+          //     filter: (
+          //       <Autocomplete label="Ture/colaboratori" variant="outlined" options={employeeOptions} />
+          //     )
+          //   }
+          // ]}
         />
       )}
     </div>
