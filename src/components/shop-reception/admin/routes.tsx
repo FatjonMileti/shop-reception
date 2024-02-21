@@ -33,6 +33,7 @@ import { PackagingDisputesTimer } from './PackageDashboard/PackagingDisputesTime
 import { PackagingInventory } from './PackageDashboard/PackagingInventory'
 import { PackagingInventoryHistory } from './PackageDashboard/PackagingInventory/PackagingInventoryHistory'
 import { CentralizedNotice } from './PackageDashboard/CentralizedNotice'
+import { TransportResponsible } from './PackageDashboard/TransportResponsible'
 import { TruckDetail } from './ReceptionDashboard/TruckList/TruckDetail'
 import { SupportWrongDestinationDetail } from './ReceptionDashboard/SupportWrongDestination/SupportWrongDestinationDetail'
 import { PackagingDisputesTimerDetail } from './PackageDashboard/PackagingDisputesTimer/PackagingDisputesTimerDetail'
@@ -402,6 +403,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={CentralizedNotice}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_TRANSPORT_RESPONSIBLE}
+        element={
+          <PrivateRoute
+            component={TransportResponsible}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

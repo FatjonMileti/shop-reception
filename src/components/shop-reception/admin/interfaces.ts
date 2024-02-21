@@ -283,6 +283,13 @@ interface CentralizedNotice {
   inventoryDate: string
 }
 
+interface TransportResponsible {
+  id: number
+  firstName: string
+  name: string
+  emails: string
+}
+
 interface PackagingTypesDifference {
   id: number
   warehouse: string

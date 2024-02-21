@@ -23,4 +23,10 @@ export const columns = [
     align: 'left',
     type: 'string'
   },
+  {
+    title: 'Aviz magazin',
+    field: 'storeCode',
+    align: 'left',
+    type: 'string'
+  }
 ]
