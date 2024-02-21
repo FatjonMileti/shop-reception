@@ -19,7 +19,6 @@ interface TruckItem {
   eTransportStatus: string
 }
 
-
 interface AdminDeposit {
   id: number
   code: string
@@ -388,19 +387,20 @@ interface GoodsDeliveryReport {
 interface SupportWrongDestination {
   id: number
   supportCode: string
-  warehouseName: string
-  deliverySlip: string
-  orderedDelivered: string
-  orderedIssued: string
-  desiredDestination: string
-  realDestination: string
-  operator: string
-  scanDate: string
+  depositName: string
+  externalTicketId: string
+  externalOrderId: string
+  originalOrderId: string
+  shopName: string
+  destinationShopName: string
+  lastUpdateBy: string
+  lastUpdate: string
   resolved: string
-  resolvedDate: string
-  resolveOperator: string
-  comment: string
+  resolvingDate: string
+  resolvedBy: string
+  resolvingComment: string
   unload: string
+  hasAttachment: boolean
 }
 
 interface UnorderedProducts {

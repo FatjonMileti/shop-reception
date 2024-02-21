@@ -266,6 +266,7 @@ VALUES
     (179, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips', true, 163, true),
     (180, 'Lista camioane marfa', '', '/shop-reception/reception/truckList', true, 164, true),
     (181, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/wrongDestinationSupport', true, 165, true),
+    (219, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/wrongDestinationSupport/:id', true, 165, false),
     (182, 'Produse necomandate', '', '/shop-reception/reception/nonRecommendedProducts', true, 166, true),
     (183, 'Fisiere meti', '', '/shop-reception/reception/metiFiles', true, 167, true),
     (184, 'Produse cu diferente', '', '/shop-reception/reception/productsDifferences', true, 168, true),

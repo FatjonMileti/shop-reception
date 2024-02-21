@@ -5587,6 +5587,64 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "11f05956-cf67-4d5c-a745-249c6d2e35f7",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "wrongDestination",
+      "responses": [
+        {
+          "uuid": "3450fde3-96dc-40d1-8d45-3631331ccd0b",
+          "body": "{\n  \"deliverySupportList\": [\n    {\n      \"id\": 0,\n      \"supportCode\": \"43208089000\",\n      \"depositName\": \"DEPOZIT CEFIN AMBIENT\",\n      \"externalTicketId\": \"717345\",\n      \"externalOrderId\": \"37967797, 37967798\",\n      \"originalOrderId\": \"1780650, 1780667, 80255918, 80255973\",\n      \"shopName\": \"ORADEA2(25)\",\n      \"destinationShopName\": \"ORADEA1(11)\",\n      \"lastUpdateBy\": \"oradea_rec\",\n      \"lastUpdate\": \"03/10/2023 12:32\",\n      \"resolved\": false,\n      \"resolvingDate\": \"string\",\n      \"resolvedBy\": \"string\",\n      \"resolvingComment\": \"string\",\n      \"hasAttachment\": true,\n      \"supportId\": 0,\n      \"wrongDestinationResultId\": 0,\n      \"canResolve\": true\n    },\n    {\n      \"id\": 0,\n      \"supportCode\": \"43208089000\",\n      \"depositName\": \"DEPOZIT CEFIN AMBIENT\",\n      \"externalTicketId\": \"717345\",\n      \"externalOrderId\": \"37967797, 37967798\",\n      \"originalOrderId\": \"1780650, 1780667, 80255918, 80255973\",\n      \"shopName\": \"ORADEA2(25)\",\n      \"destinationShopName\": \"ORADEA1(11)\",\n      \"lastUpdateBy\": \"oradea_rec\",\n      \"lastUpdate\": \"03/10/2023 12:32\",\n      \"resolved\": true,\n      \"resolvingDate\": \"string\",\n      \"resolvedBy\": \"string\",\n      \"resolvingComment\": \"string\",\n      \"hasAttachment\": true,\n      \"supportId\": 0,\n      \"wrongDestinationResultId\": 0,\n      \"canResolve\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "9b3cd59b-ecf9-4ea0-8b59-f41337141870",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "wrongDestination/form/:id",
+      "responses": [
+        {
+          "uuid": "04888c1e-55ef-4b0e-8efa-382067f440bb",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5829,6 +5887,14 @@
     {
       "type": "route",
       "uuid": "1397f6a2-853c-4cc6-99b0-f17176610422"
+    },
+    {
+      "type": "route",
+      "uuid": "11f05956-cf67-4d5c-a745-249c6d2e35f7"
+    },
+    {
+      "type": "route",
+      "uuid": "9b3cd59b-ecf9-4ea0-8b59-f41337141870"
     }
   ],
   "proxyMode": false,

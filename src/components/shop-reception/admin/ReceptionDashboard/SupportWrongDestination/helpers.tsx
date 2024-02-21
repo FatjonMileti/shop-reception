@@ -1,0 +1,247 @@
+import { Autocomplete, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { DownloadIcon, ViewActionIcon } from 'icons'
+import { URLS } from '../../constants'
+
+export const columns = (navigate, downloadFile) => [
+  {
+    title: 'Cod suport',
+    field: 'supportCode',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Nume depozit',
+    field: 'depositName',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Bon Livrare',
+    field: 'externalTicketId',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Comanda livratà',
+    field: 'externalOrderId',
+    align: 'left',
+    type: 'string',
+    disableSorting: true
+  },
+  {
+    title: 'Comandǎ emis(Meti)',
+    field: 'originalOrderId',
+    align: 'left',
+    type: 'string',
+    disableSorting: true
+  },
+  {
+    title: 'Destinatie dorită',
+    field: 'shopName',
+    align: 'left',
+    type: 'string',
+    disableSorting: true
+  },
+  {
+    title: 'Destinatie reala',
+    field: 'destinationShopName',
+    align: 'left',
+    type: 'string',
+    disableSorting: true
+  },
+  {
+    title: 'Operator',
+    field: 'lastUpdateBy',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Dată scanare',
+    field: 'lastUpdate',
+    align: 'left',
+    type: 'string'
+  },
+  {
+    title: 'Rezolvat',
+    field: 'resolved',
+    align: 'left',
+    type: 'string',
+    render: row =>
+      row.resolved ? (
+        'Da'
+      ) : (
+        <span
+          onClick={() =>
+            navigate(URLS.AUTH_SUPPORT_WRONG_DESTINATION_DETAIL.replace(':id', row.id))
+          }
+          style={{ cursor: 'pointer' }}
+        >
+          <ViewActionIcon />
+        </span>
+      ),
+    disableSorting: true
+  },
+  {
+    title: 'Datǎ rezolvare',
+    field: 'resolvingDate',
+    align: 'left',
+    type: 'string',
+    disableSorting: true
+  },
+  {
+    title: 'Operator rezolvare',
+    field: 'resolvedBy',
+    align: 'left',
+    type: 'string',
+    disableSorting: true
+  },
+  {
+    title: 'Comentariu',
+    field: 'resolvingComment',
+    align: 'left',
+    type: 'string',
+    disableSorting: true
+  },
+  {
+    title: 'Descarca',
+    field: 'unload',
+    align: 'left',
+    type: 'string',
+    disableSorting: true,
+    render: row => {
+      return row.hasAttachment ? (
+        <span onClick={() => downloadFile(row.id)} style={{ cursor: 'pointer' }}>
+          <DownloadIcon />
+        </span>
+      ) : (
+        ''
+      )
+    }
+  }
+]
+export const drawerFilters = [
+  {
+    name: 'depositName',
+    value: '',
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Depozit"
+        disableClearable
+        options={[
+          {
+            value: '1',
+            label: 'Depozit 1'
+          },
+
+          {
+            value: '2',
+            label: 'Depozit 2'
+          },
+          {
+            value: '3',
+            label: 'Depozit 3'
+          }
+        ]}
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Depozit'
+  },
+
+  {
+    name: 'shopName',
+    value: '',
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Destinatie dorita"
+        disableClearable
+        options={[
+          {
+            value: '1',
+            label: 'Destinatie 1'
+          },
+
+          {
+            value: '2',
+            label: 'Destinatie 2'
+          },
+          {
+            value: '3',
+            label: 'Destinatie 3'
+          }
+        ]}
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Destinatie dorita'
+  },
+
+  {
+    name: 'destinationShopName',
+    value: '',
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Destinatie reala"
+        disableClearable
+        options={[
+          {
+            value: '1',
+            label: 'Destinatie 1'
+          },
+
+          {
+            value: '2',
+            label: 'Destinatie 2'
+          },
+          {
+            value: '3',
+            label: 'Destinatie 3'
+          }
+        ]}
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Destinatie reala'
+  },
+
+  {
+    name: 'resolved',
+    value: '',
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Rezolvat"
+        disableClearable
+        options={[
+          {
+            value: 'true',
+            label: 'Da'
+          },
+
+          {
+            value: 'false',
+            label: 'Nu'
+          }
+        ]}
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Rezolvat'
+  },
+
+  {
+    name: 'supportCode',
+    filter: <Input variant="outlined" label="Cod suport" type="text" />,
+    type: 'text',
+    label: 'Cod suport'
+  },
+  {
+    name: 'ticketNumber',
+    filter: <Input variant="outlined" label="Bon livrare" type="text" />,
+    type: 'text',
+    label: 'Bon livrare'
+  }
+]
