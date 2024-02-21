@@ -97,7 +97,7 @@ const EditLocation: React.FC<EditLocationProps> = props => {
           <AsyncAutocomplete
             variant="outlined"
             name="category"
-            label="Categorie volumetrie"
+            label="Categorie task template"
             value={formik.values.category}
             options={categoriesOptions || []}
             onChange={value => formik.setFieldValue('category', value)}
