@@ -1,4 +1,9 @@
-import { Autocomplete, DatePicker, ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import {
+  Autocomplete,
+  DatePicker,
+  FilterDataSelect,
+  ListTable
+} from '@fullscreendigital/carrefour-dex-fe'
 import s from './FrozenTraceability.modules.scss'
 import React, { useState } from 'react'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
@@ -6,13 +11,13 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { formatAndDownloadResponse, handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
-import { debounce } from '@mui/material'
+import { Divider, Grid, debounce } from '@mui/material'
 import { EditActionIcon } from 'icons'
 import FrozenTraceabilityDescription from './FrozenTraceabilityDescription'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
 import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
-import { ValueLabelInterface } from '../../interfaces'
+import { IdNameInterface, ValueLabelInterface } from '../../interfaces'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 import { getCurrentDate } from '../../../../utils/helpers'
@@ -20,33 +25,58 @@ import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
 import { useProductsFilter } from './useProductsFilter'
 import { PrintModal } from '../../../core-ui/PrintModal'
 import { URLS } from '../../constants'
-import { TableState } from '../../StoreManagerRole/ProductionManagementStore/interfaces'
 import { useImmer } from 'use-immer'
 import { batchPrintColumns, productPrintColumns } from '../ReportFrozenTraceabilityPrint/helpers'
+import { useLocation } from 'react-router'
 
 export const ReportFrozenTraceability = () => {
   const { showNotification } = useNotification()
+  const { pathname } = useLocation()
+
+  const isFormator = pathname.includes('/formator')
 
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [rows, setRows] = useState([])
-
-  const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
+  const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
+  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
+  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
 
   const productsFilter = useProductsFilter()
-
-  const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
 
   const [tableState, setTableState] = useImmer(
     window.history.state.tableState || {
       page: 0,
       rowsPerPage: 25,
-      order:  '',
-      orderBy:  '',
+      order: '',
+      orderBy: '',
       searchText: '',
       filters: []
     }
   )
+
+  const { data: filterOptions } = useQuery(
+    ['store'],
+    async () => {
+      const result = await makeCoreGetRequest('/bakery/store/trainee/all')
+      const resultOptions = result.map(
+        (item: IdNameInterface): ValueLabelInterface => ({ label: item.name, value: item.id })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const handleStoreFilterChange = (value: ValueLabelInterface): void => {
+    setStoreFilterValue(value)
+  }
 
   const handleRemoteDetails = async (rowId: string | number) => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
@@ -60,6 +90,7 @@ export const ReportFrozenTraceability = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/traceability/frozen',
+          filters: [{ name: 'store', value: storeFilterValue?.value }],
           tableFilters,
           page,
           rowsPerPage,
@@ -74,7 +105,7 @@ export const ReportFrozenTraceability = () => {
 
       setTableState(tableState => ({
         ...tableState,
-        tableFilters
+        tableFilters: [...tableFilters, { name: 'store', value: storeFilterValue?.value }]
       }))
     } catch (error) {
       handleQueryError(
@@ -84,7 +115,6 @@ export const ReportFrozenTraceability = () => {
       )
     }
   }
-
 
   const downloadFileQuery = useQuery(
     ['download'],
@@ -108,22 +138,19 @@ export const ReportFrozenTraceability = () => {
       enabled: false
     }
   )
-  
+
   const families = useQuery(
     ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
         ?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(
-        `/bakery/store/families`,
-        {
-          params: {
-            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
-          },
-          paramsSerializer: { indexes: null }
-        }
-      )
+      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+        params: {
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
           label: item.name,
@@ -232,7 +259,7 @@ export const ReportFrozenTraceability = () => {
         />
       ),
       type: 'autocomplete',
-      label: 'Familie produse',
+      label: 'Familie produse'
     },
     {
       name: 'subfamily',
@@ -253,46 +280,82 @@ export const ReportFrozenTraceability = () => {
 
   return (
     <div className={s.mainContainer}>
-      <>
-        <PrintModal
-          {...tableState}
-          tableFilters={tableState.tableFilters}
-          url={URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT}
-          dynamicColumns={[...productPrintColumns, ...batchPrintColumns]}
-          isModalOpen={isPrintModalOpen}
-          closeModal={() => setIsPrintModalOpen(false)}
-          toolbarActions={[]}
-        />
-        <ListTable
-          rows={rows}
-          handleRemoteData={debounce(fetchData, 500)}
-          handleRemoteDetails={handleRemoteDetails}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          filters={drawerFilters}
-          hasSearchInput
-          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
-          toolbarActions={[
-            {
-              label: 'Descarca',
-              icon: <DownloadOutlined />,
-              onClick: () => {
-                downloadFileQuery.refetch()
+      <Grid container>
+        {isFormator && (
+          <>
+            <Grid xs={12} md={12} container spacing={5}>
+              <Grid xs={12} md={3} item>
+                <FilterDataSelect
+                  name="store"
+                  defaultSelectedData={storeFilterValue}
+                  label="Magazin"
+                  options={filterOptions}
+                  onSelect={handleStoreFilterChange}
+                  placeholderButton="Selecteaza"
+                  showSearch
+                />
+              </Grid>
+            </Grid>
+
+            <Grid xs={12} item py={2}>
+              <Divider />
+            </Grid>
+          </>
+        )}
+      </Grid>
+
+      {((isFormator && storeFilterValue) || !isFormator) && (
+        <>
+          <PrintModal
+            {...tableState}
+            tableFilters={tableState.tableFilters}
+            url={isFormator ? URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR : URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT}
+            dynamicColumns={[...productPrintColumns, ...batchPrintColumns]}
+            isModalOpen={isPrintModalOpen}
+            closeModal={() => setIsPrintModalOpen(false)}
+            toolbarActions={[]}
+          />
+          <ListTable
+            rows={rows}
+            handleRemoteData={debounce(fetchData, 500)}
+            handleRemoteDetails={handleRemoteDetails}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            filters={drawerFilters}
+            hasSearchInput
+            handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
+            toolbarActions={[
+              {
+                label: 'Descarca',
+                icon: <DownloadOutlined />,
+                onClick: () => {
+                  downloadFileQuery.refetch()
+                }
+              },
+              {
+                label: 'Printeaza',
+                icon: <PrintOutlined />,
+                onClick: () => {
+                  setIsPrintModalOpen(true)
+                }
               }
-            },
-            {
-              label: 'Printeaza',
-              icon: <PrintOutlined />,
-              onClick: () => {
-                setIsPrintModalOpen(true)
+            ]}
+            rowActions={[
+              {
+                label: 'Editeaza',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#0970E6',
+                onClick: async (e, rowId) => {},
+                desktopIcon: <EditActionIcon />
               }
-            }
-          ]}
-          rowActionsWidth="90px"
-          rowsPerPage={25}
-          rowsPerPageOptions={[25, 50, 100]}
-        />
-      </>
+            ]}
+            rowActionsWidth="90px"
+            rowsPerPage={25}
+            rowsPerPageOptions={[25, 50, 100]}
+          />
+        </>
+      )}
     </div>
   )
 }

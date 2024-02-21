@@ -440,6 +440,29 @@ export const useBakeryRoutes = applicationPages => {
           />
         }
       />
+
+      <Route
+        path={URLS.AUTH_REPORT_FROZEN_TRACEABILITY_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportFrozenTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportFrozenTraceabilityPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
       <Route
         path={URLS.AUTH_OWN_PRODUCTION_TRACEABILITY}
         element={
@@ -464,6 +487,28 @@ export const useBakeryRoutes = applicationPages => {
 
       <Route
         path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceabilityPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT_FORMATOR}
         element={
           <PrivateRoute
             component={ReportOwnProductionTraceabilityPrint}

@@ -94,18 +94,18 @@ export const batchPrintColumns = [
   {
     field: 'batch.batchName',
     title: 'Lot MP/amb.',
-    render: row => row.batch.batchName,
+    render: row => row.batch?.batchName,
     defaultPrintSelected: true
   },
   {
     field: 'batch.entryDate',
     title: 'Data intrare MP',
-    render: row => formatBakeryPayloadDate(row.batch.entryDate)
+    render: row => formatBakeryPayloadDate(row.batch?.entryDate)
   },
   {
     field: 'batch.supplier.supplierName',
     title: 'Furnizor MP',
-    render: row => row.batch.supplier.supplierName,
+    render: row => row.batch?.supplier?.supplierName,
     defaultPrintSelected: true
   },
   {
@@ -122,7 +122,7 @@ export const batchPrintColumns = [
   {
     field: 'dlc.batch',
     title: 'DLC MP',
-    render: row => row.dlc.batch,
+    render: row => formatBakeryPayloadDate(row.batch?.expireDate),
     defaultPrintSelected: true
   },
   {
