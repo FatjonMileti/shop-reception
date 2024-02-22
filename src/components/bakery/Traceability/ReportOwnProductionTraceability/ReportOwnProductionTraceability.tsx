@@ -5,7 +5,7 @@ import {
   ListTable
 } from '@fullscreendigital/carrefour-dex-fe'
 import s from './OwnProductionTraceability.modules.scss'
-import React, { useState } from 'react'
+import React, { startTransition, useState } from 'react'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
@@ -40,9 +40,11 @@ export const ReportOwnProductionTraceability = () => {
   const [tableData, setTableData] = useState(null)
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
-  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
+  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([])
 
   const productsFilter = useProductsFilter()
+
+  const currentDate = getCurrentDate()
 
   const [tableState, setTableState] = useImmer(
     window.history.state.tableState || {
@@ -51,9 +53,25 @@ export const ReportOwnProductionTraceability = () => {
       order: '',
       orderBy: '',
       searchText: '',
-      filters: []
+      filters: [],
+      tableFilters: [
+        {
+          name: 'startDate',
+          value: currentDate
+        },
+        {
+          name: 'endDate',
+          value: currentDate
+        },
+      ]
     }
   )
+
+  React.useEffect(() => {
+    if (storeFilterValue?.length > 0) {
+      debouncedFetchData(0, tableState.rowsPerPage, tableState.tableFilters, tableState.searchText)
+    }
+  }, [storeFilterValue])
 
   const { data: filterOptions } = useQuery(
     ['store'],
@@ -74,24 +92,17 @@ export const ReportOwnProductionTraceability = () => {
     }
   )
 
-  const handleStoreFilterChange = (value: ValueLabelInterface): void => {
-    setStoreFilterValue(value)
-  }
-
-  const handleRemoteDetails = async (rowId: string | number) => {
-    const response = await makeCoreGetRequest(`/bakery/traceability/production/${rowId}`)
-    const data = await response
-
-    return <OwnProductionTraceabilityDescription item={data} chargeItem={tableData} />
-  }
-
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/traceability/production',
-          filters: [{ name: 'store', value: storeFilterValue?.value }],
+          filters: [
+            ...(storeFilterValue && storeFilterValue.length > 0
+              ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
+              : [])
+          ],
           tableFilters,
           page,
           searchText,
@@ -106,8 +117,11 @@ export const ReportOwnProductionTraceability = () => {
 
       setTableState(tableState => ({
         ...tableState,
-        tableFilters: [...tableFilters, { name: 'store', value: storeFilterValue?.value }]
+        tableFilters,
+        rowsPerPage,
+        searchText
       }))
+
     } catch (error) {
       handleQueryError(
         error,
@@ -117,12 +131,32 @@ export const ReportOwnProductionTraceability = () => {
     }
   }
 
+  const debouncedFetchData = debounce(fetchData, 500)
+
+  const handleStoreFilterChange = (value: ValueLabelInterface[]): void => {
+    startTransition(() => {
+      setStoreFilterValue(value)
+    });
+  }
+
+  const handleRemoteDetails = async (rowId: string | number) => {
+    const response = await makeCoreGetRequest(`/bakery/traceability/production/${rowId}`)
+    const data = await response
+
+    return <OwnProductionTraceabilityDescription item={data} chargeItem={tableData} />
+  }
+
   const downloadFileQuery = useQuery(
     ['download'],
     async () => {
       const url = toTableGETUrl({
         url: '/bakery/traceability/production/download',
-        filters: tableState.tableFilters
+        filters: [
+          ...(storeFilterValue && storeFilterValue.length > 0
+            ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
+            : [])
+        ],
+        tableFilters: tableState.tableFilters
       })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
@@ -198,8 +232,6 @@ export const ReportOwnProductionTraceability = () => {
       }
     }
   )
-
-  const currentDate = getCurrentDate()
 
   const drawerFilters: TableFiltersType[] = [
     {
@@ -294,6 +326,7 @@ export const ReportOwnProductionTraceability = () => {
                   onSelect={handleStoreFilterChange}
                   placeholderButton="Selecteaza"
                   showSearch
+                  multiSelect={true}
                 />
               </Grid>
             </Grid>
@@ -305,7 +338,7 @@ export const ReportOwnProductionTraceability = () => {
         )}
       </Grid>
 
-        {((isFormator && storeFilterValue) || !isFormator) && (
+        {((isFormator && storeFilterValue.length > 0) || !isFormator) && (
           <>
             <PrintModal
               {...tableState}
@@ -318,7 +351,7 @@ export const ReportOwnProductionTraceability = () => {
             />
             <ListTable
               rows={rows}
-              handleRemoteData={debounce(fetchData, 500)}
+              handleRemoteData={debouncedFetchData}
               handleRemoteDetails={handleRemoteDetails}
               isLoading={isLoading}
               totalCount={totalCount}

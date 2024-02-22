@@ -86,6 +86,9 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddRe
     {
       onSuccess: () => {
         closeModal()
+        setSelectedProduct(undefined)
+        setSelectedSupplier(undefined)
+        setStep(0)
         if(onSuccess) {
           onSuccess()
         }
