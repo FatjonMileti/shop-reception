@@ -128,7 +128,7 @@ const ProductManagementStore = () => {
   const drawerFilters = [
     {
       name: 'family',
-      value: '',
+      value: undefined,
       filter: (
         <Autocomplete
           variant="outlined"
@@ -143,7 +143,7 @@ const ProductManagementStore = () => {
     },
     {
       name: 'subfamily',
-      value: '',
+      value: undefined,
       filter: (
         <Autocomplete
           variant="outlined"
