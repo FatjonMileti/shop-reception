@@ -11,7 +11,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { formatAndDownloadResponse, handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
-import { Divider, Grid, debounce } from '@mui/material'
+import { Divider, Grid } from '@mui/material'
 import { EditActionIcon } from 'icons'
 import FrozenTraceabilityDescription from './FrozenTraceabilityDescription'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
@@ -28,6 +28,8 @@ import { URLS } from '../../constants'
 import { useImmer } from 'use-immer'
 import { batchPrintColumns, productPrintColumns } from '../ReportFrozenTraceabilityPrint/helpers'
 import { useLocation } from 'react-router'
+import { startTransition } from 'react';
+import {debounce} from 'lodash'
 
 export const ReportFrozenTraceability = () => {
   const { showNotification } = useNotification()
@@ -40,9 +42,11 @@ export const ReportFrozenTraceability = () => {
   const [rows, setRows] = useState([])
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
-  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface>(null)
+  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([])
 
   const productsFilter = useProductsFilter()
+
+  const currentDate = getCurrentDate()
 
   const [tableState, setTableState] = useImmer(
     window.history.state.tableState || {
@@ -51,7 +55,17 @@ export const ReportFrozenTraceability = () => {
       order: '',
       orderBy: '',
       searchText: '',
-      filters: []
+      filters: [],
+      tableFilters: [
+        {
+          name: 'startDate',
+          value: currentDate
+        },
+        {
+          name: 'endDate',
+          value: currentDate
+        },
+      ]
     }
   )
 
@@ -74,9 +88,12 @@ export const ReportFrozenTraceability = () => {
     }
   )
 
-  const handleStoreFilterChange = (value: ValueLabelInterface): void => {
-    setStoreFilterValue(value)
-  }
+
+  React.useEffect(() => {
+    if (storeFilterValue?.length > 0) {
+      debouncedFetchData(0, tableState.rowsPerPage, tableState.tableFilters, tableState.searchText)
+    }
+  }, [storeFilterValue])
 
   const handleRemoteDetails = async (rowId: string | number) => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
@@ -84,13 +101,19 @@ export const ReportFrozenTraceability = () => {
     return <FrozenTraceabilityDescription item={data} />
   }
 
+
+
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/traceability/frozen',
-          filters: [{ name: 'store', value: storeFilterValue?.value }],
+          filters: [
+            ...(storeFilterValue && storeFilterValue.length > 0
+              ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
+              : [])
+          ],
           tableFilters,
           page,
           rowsPerPage,
@@ -105,8 +128,11 @@ export const ReportFrozenTraceability = () => {
 
       setTableState(tableState => ({
         ...tableState,
-        tableFilters: [...tableFilters, { name: 'store', value: storeFilterValue?.value }]
+        tableFilters,
+        rowsPerPage,
+        searchText
       }))
+
     } catch (error) {
       handleQueryError(
         error,
@@ -116,12 +142,25 @@ export const ReportFrozenTraceability = () => {
     }
   }
 
+  const debouncedFetchData = debounce(fetchData, 500)
+
+  const handleStoreFilterChange = (value: ValueLabelInterface[]): void => {
+    startTransition(() => {
+      setStoreFilterValue(value)
+    });
+  }
+
   const downloadFileQuery = useQuery(
     ['download'],
     async () => {
       const url = toTableGETUrl({
         url: '/bakery/traceability/frozen/download',
-        filters: tableState.tableFilters
+        filters: [
+          ...(storeFilterValue && storeFilterValue.length > 0
+            ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
+            : [])
+        ],
+        tableFilters: tableState.tableFilters
       })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
@@ -142,8 +181,9 @@ export const ReportFrozenTraceability = () => {
   const families = useQuery(
     ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
     async () => {
-      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.subfamily')
-        ?.value || []) as AutoCompleteValue[]
+      const subfamilyLiveFilterValue = (liveTableFilters.find(
+        filter => filter.name === 'product.subfamily'
+      )?.value || []) as AutoCompleteValue[]
 
       const result = await makeCoreGetRequest(`/bakery/store/families`, {
         params: {
@@ -172,8 +212,9 @@ export const ReportFrozenTraceability = () => {
   const subfamilies = useQuery(
     ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.family')
-        ?.value || []) as AutoCompleteValue[]
+      const familyLiveFilterValue = (liveTableFilters.find(
+        filter => filter.name === 'product.family'
+      )?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
@@ -197,8 +238,6 @@ export const ReportFrozenTraceability = () => {
       }
     }
   )
-
-  const currentDate = getCurrentDate()
 
   const drawerFilters: TableFiltersType[] = [
     {
@@ -293,6 +332,7 @@ export const ReportFrozenTraceability = () => {
                   onSelect={handleStoreFilterChange}
                   placeholderButton="Selecteaza"
                   showSearch
+                  multiSelect={true}
                 />
               </Grid>
             </Grid>
@@ -304,12 +344,16 @@ export const ReportFrozenTraceability = () => {
         )}
       </Grid>
 
-      {((isFormator && storeFilterValue) || !isFormator) && (
+      {((isFormator && storeFilterValue.length > 0) || !isFormator) && (
         <>
           <PrintModal
             {...tableState}
             tableFilters={tableState.tableFilters}
-            url={isFormator ? URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR : URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT}
+            url={
+              isFormator
+                ? URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR
+                : URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT
+            }
             dynamicColumns={[...productPrintColumns, ...batchPrintColumns]}
             isModalOpen={isPrintModalOpen}
             closeModal={() => setIsPrintModalOpen(false)}
@@ -317,7 +361,7 @@ export const ReportFrozenTraceability = () => {
           />
           <ListTable
             rows={rows}
-            handleRemoteData={debounce(fetchData, 500)}
+            handleRemoteData={debouncedFetchData}
             handleRemoteDetails={handleRemoteDetails}
             isLoading={isLoading}
             totalCount={totalCount}
