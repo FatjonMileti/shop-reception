@@ -1,15 +1,15 @@
 export const toTableRowItems = (items: AdminStore[]) => items.map((item: AdminStore) => ({
   id: item.id,
-  storeCode: item.storeCode,
-  name: item.name,
-  storeType: item.storeType,
-  METIVersion: item.METIVersion,
+  metiCode: item.metiCode,
+  metiName: item.metiName,
+  metiType: item.metiType,
+  metiVersion: item.metiVersion,
   adCode: item.adCode,
-  grams: item.grams,
-  region: item.region,
-  ip: item.ip,
-  way: item.way,
-  quantities: item.quantities,
+  receptionDeviation: item.receptionDeviation,
+  regionName: item.regionName,
+  sftpIp: item.sftpIp,
+  sftpPath: item.sftpPath,
+  canEditQuantities: item.canEditQuantities,
   active: item.active,
-  hourlyIntervals: item.hourlyIntervals
+  hourlyIntervals: item.hourlyIntervals || 0
 }))

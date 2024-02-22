@@ -5645,6 +5645,180 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "fae4c352-06d7-4b8b-a09e-d4ee4bc0201c",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops",
+      "responses": [
+        {
+          "uuid": "1042913d-f7c8-432e-be50-d7f184e64090",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"active\": true,\n      \"sftpPath\": \"string\",\n      \"sftpIp\": \"string\",\n      \"adCode\": \"string\",\n      \"metiVersion\": \"V7\",\n      \"metiCode\": \"string\",\n      \"metiName\": \"string\",\n      \"metiType\": \"SUPER\",\n      \"regionName\": \"string\",\n      \"receptionDeviation\": 0,\n      \"canEditQuantities\": true,\n      \"canCallReturnTruck\": true,\n      \"parentSociety\": \"Carrefour\",\n      \"address\": \"string\",\n      \"town\": \"string\",\n      \"city\": \"string\",\n      \"regNumber\": \"string\",\n      \"CIF\": \"string\",\n      \"office\": \"string\",\n      \"bankName\": \"string\",\n      \"bankAccount\": \"string\",\n      \"capital\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "e9f3f28e-f381-4b78-8d70-5346a890bc1c",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops/meti",
+      "responses": [
+        {
+          "uuid": "4d09ef29-2ee1-4f43-bece-37419d71f916",
+          "body": "[\n  {\n    \"code\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \n  {\n    \"code\": \"string 2\",\n    \"displayName\": \"string 2\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ca8c894a-dcb1-4df6-976c-2e65ba3a0613",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops/meti-version",
+      "responses": [
+        {
+          "uuid": "c457bbfe-da44-4487-869a-b991737e9005",
+          "body": "[\"V7\", \"V8\"]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "66d571c1-bae0-4f87-aee5-a512430cc33d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops/types",
+      "responses": [
+        {
+          "uuid": "e0fd84ba-6ccc-4e27-8d6d-fa0033614a4c",
+          "body": "[\"SUPER\", \"HYPER\"]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ad0eb149-cb31-4aa6-bf25-bbb2d2a5a623",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops/parent-society",
+      "responses": [
+        {
+          "uuid": "cb05b3d4-e6e0-445c-9184-d969a6af8f2a",
+          "body": "[\"Carrefour\"]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "09775267-147b-4655-badd-6c2b3af76844",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops/codes",
+      "responses": [
+        {
+          "uuid": "310adc28-17d6-48ae-a48e-288bd0162cd8",
+          "body": "[\n  {\n    \"code\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \n  {\n    \"code\": \"string 2\",\n    \"displayName\": \"string 2\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5895,6 +6069,30 @@
     {
       "type": "route",
       "uuid": "9b3cd59b-ecf9-4ea0-8b59-f41337141870"
+    },
+    {
+      "type": "route",
+      "uuid": "fae4c352-06d7-4b8b-a09e-d4ee4bc0201c"
+    },
+    {
+      "type": "route",
+      "uuid": "e9f3f28e-f381-4b78-8d70-5346a890bc1c"
+    },
+    {
+      "type": "route",
+      "uuid": "ca8c894a-dcb1-4df6-976c-2e65ba3a0613"
+    },
+    {
+      "type": "route",
+      "uuid": "66d571c1-bae0-4f87-aee5-a512430cc33d"
+    },
+    {
+      "type": "route",
+      "uuid": "ad0eb149-cb31-4aa6-bf25-bbb2d2a5a623"
+    },
+    {
+      "type": "route",
+      "uuid": "09775267-147b-4655-badd-6c2b3af76844"
     }
   ],
   "proxyMode": false,

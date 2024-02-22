@@ -42,16 +42,16 @@ interface AdminHub {
 
 interface AdminStore {
   id: number
-  storeCode: string
-  name: string
-  storeType: string
-  METIVersion: string
+  metiCode: string
+  metiName: string
+  metiType: string
+  metiVersion: string
   adCode: string
-  grams: number
-  region: string
-  ip: string
-  way: string
-  quantities: string
+  receptionDeviation: number
+  regionName: string
+  sftpIp: string
+  sftpPath: string
+  canEditQuantities: string
   active: boolean
   hourlyIntervals: number
 }
