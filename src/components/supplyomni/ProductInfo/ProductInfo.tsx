@@ -98,9 +98,9 @@ const ProductInfo: React.FC<ProductInfoProps> = props => {
                   bottom: 0,
                   width: '150px',
                   right: 0,
-                  color: '#cecece'
+                  color: 'grey'
                 }}
-                startIcon={<Delete sx={{ color: '#cecece' }} />}
+                startIcon={<Delete sx={{ color: 'grey' }} />}
               >
                 {' '}
                 Sterge produs
