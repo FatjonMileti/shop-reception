@@ -23,10 +23,11 @@ interface ProductDetailsProps {
   selectedRows: any
   formik: any
   isEdit: boolean
+  setRecipeMetiCode: Function
 }
 
 export const ProductDetails = (props: ProductDetailsProps) => {
-  const { formik, onCancel, onSelectBatch, selectedProduct, selectedRows, isEdit } = props
+  const { formik, onCancel, onSelectBatch, selectedProduct, selectedRows, isEdit, setRecipeMetiCode } = props
 
   const { showNotification } = useNotification()
 
@@ -251,6 +252,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
           onSelectBatch={onSelectBatch}
           onDeleteBatch={onDeleteBatch}
           receip={receip}
+          setRecipeMetiCode={setRecipeMetiCode}
         />
 
         <Grid item xs={12} container justifyContent="space-between">

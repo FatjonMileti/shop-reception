@@ -15,10 +15,11 @@ interface SelectBatchProps {
   selectedRows: any
   metiCode: any
   selectedProduct: Product
+  recipeMetiCode: string
 }
 
 export const SelectBatch = (props: SelectBatchProps) => {
-  const { onContinue, onCancel, setSelectedRows, selectedRows, metiCode } = props
+  const { onContinue, onCancel, setSelectedRows, selectedRows, recipeMetiCode } = props
   const { showNotification } = useNotification()
 
   const [tableItems, setTableItems] = useState<any[]>([])
@@ -35,7 +36,7 @@ export const SelectBatch = (props: SelectBatchProps) => {
           rowsPerPage,
           filters: [{
             name: 'product.metiCode',
-            value: props.selectedProduct?.metiCode
+            value: recipeMetiCode
           }],
         })
       )

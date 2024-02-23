@@ -6,8 +6,8 @@ export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
   const batchItems = []
   const childItems = []
 
-  if (editItem) {
-    editItem.traceabilityProductionList.forEach(item => {
+  if (editItem?.traceabilityProductionList) {
+    editItem.traceabilityProductionList?.forEach(item => {
       if (item.batch) {
         batchItems.push(item.batch)
       } else if (item.childTraceability) {
@@ -69,7 +69,7 @@ export const toBatchFormat = (batches, isEdit = false) => {
         openingDate: dayjs(),
         dlc: 5
       }
-    : batches.map(item => ({
+    : batches?.map(item => ({
         batchId: isEdit ? item.batch?.id : item?.id,
         componentCode: isEdit ? item?.componentCode : item.product.metiCode,
         componentQuantity: isEdit ? item.batch?.componentQuantity : item.batchQuantity,
@@ -91,7 +91,7 @@ export const toChargeFormat = (charges, isEdit = false) => {
         openingDate: dayjs(),
         dlc: 5
       }
-    : charges.map(item => ({
+    : charges?.map(item => ({
         childTraceabilityId: isEdit ? item.childTraceabilityId.id : item.id,
         componentCode: isEdit ? item.componentCode : item.product.metiCode,
         componentQuantity: isEdit ? item.batch.componentQuantity : item.quantity,
