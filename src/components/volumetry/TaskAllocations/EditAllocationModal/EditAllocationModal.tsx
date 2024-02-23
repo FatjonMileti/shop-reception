@@ -10,8 +10,9 @@ import { makeCorePutRequest } from 'utils/api'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { getFormInitialValues } from './helpers'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 import { EditAllocationModalProps } from '../TaskAllocationsDefinitions'
+import { TASK_STATUS_ACTIONS } from '../Employee/constants'
 
 const validationSchema = hideWorkload =>
   yup.object({
@@ -37,7 +38,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const editCurrentAllocation = async values => {
     await makeCorePutRequest(`/volumetry/tasks/${editItem ? editItem?.id : employee.id}`, {
       ...values,
-      ...(editItem ? {} : { action: 'STOP' })
+      ...(editItem ? {} : { action: TASK_STATUS_ACTIONS.STOP })
     })
   }
 

@@ -21,7 +21,7 @@ import {
   getJobTitlesOptions,
   getLocationsOptions
 } from 'components/volumetry/api'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 import { roles } from '../../helpers'
 
 const CollaboratorsTab = () => {

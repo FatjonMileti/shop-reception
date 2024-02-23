@@ -1,4 +1,9 @@
-import { FilterDataSelect, ListTable, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import {
+  Button,
+  FilterDataSelect,
+  ListTable,
+  Typography
+} from '@fullscreendigital/carrefour-dex-fe'
 import { Box, CircularProgress, Grid, debounce } from '@mui/material'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { EditActionIcon } from 'icons'
@@ -6,13 +11,14 @@ import { useEffect, useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import { getDepartmentsOptions } from '../api'
 import { ValueLabelInterface } from '../interfaces'
-import { handleQueryError } from '../utils'
+import { handleQueryError } from 'utils/helpers'
 import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
 import s from './TaskAllocations.modules.scss'
 import TaskDescription from './TaskDescription'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
 import cn from 'classnames'
+import { AttendanceModal } from './AttendanceModal'
 
 const TaskAllocations = () => {
   const { showNotification } = useNotification()
@@ -33,6 +39,7 @@ const TaskAllocations = () => {
     }
   )
   const [selectedRowId, setSelectedRowId] = useState('')
+  const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -136,6 +143,9 @@ const TaskAllocations = () => {
   const openEditTaskModal = (): void => setIsEditTaskModalOpen(true)
   const closeEditTaskModal = (): void => setIsEditTaskModalOpen(false)
 
+  const openAttendanceModal = (): void => setIsAttendanceModalOpen(true)
+  const closeAteendanceModal = (): void => setIsAttendanceModalOpen(false)
+
   const selectRow = row => {
     setSelectedRow(row)
     openEditTaskModal()
@@ -149,19 +159,33 @@ const TaskAllocations = () => {
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
         ) : (
-          <Grid xs={4} md={3} item style={{ padding: 0 }}>
-            <FilterDataSelect
-              name="teamMember.domain"
-              defaultSelectedData={departmentFilterValue}
-              label="Department"
-              showCounter={true}
-              showSearch={true}
-              counterLabel="Select department"
-              noDataFoundLabel="No results!"
-              options={departmentsOptions}
-              onSelect={handleDepartmentOptionChange}
-            />
-          </Grid>
+          <>
+            <Grid xs={12} md={6} item style={{ padding: 0 }}>
+              <FilterDataSelect
+                name="teamMember.domain"
+                defaultSelectedData={departmentFilterValue}
+                label="Department"
+                showCounter={true}
+                showSearch={true}
+                counterLabel="Select department"
+                noDataFoundLabel="No results!"
+                options={departmentsOptions}
+                onSelect={handleDepartmentOptionChange}
+              />
+            </Grid>
+            <Grid
+              xs={12}
+              md={6}
+              item
+              style={{ padding: 0, paddingRight: '40px', textAlign: 'right' }}
+            >
+              <Button
+                variant="contained"
+                label="Incepe alocarea automata"
+                onClick={openAttendanceModal}
+              />
+            </Grid>
+          </>
         )}
       </Grid>
       {departmentFilterValue && (
@@ -199,6 +223,11 @@ const TaskAllocations = () => {
             closeModal={closeEditTaskModal}
             editItem={selectedRow}
             setShouldRefreshData={setShouldRefreshTaskData}
+          />
+          <AttendanceModal
+            isModalOpen={isAttendanceModalOpen}
+            closeModal={closeAteendanceModal}
+            departmentId={departmentFilterValue.value}
           />
         </>
       )}

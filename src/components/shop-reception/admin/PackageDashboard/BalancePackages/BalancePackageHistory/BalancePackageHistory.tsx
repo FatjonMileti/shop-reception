@@ -1,0 +1,52 @@
+import { Grid } from '../../../../Common/Grid'
+import { TitleHeader } from '../../../Common/TitleHeader'
+import { Table } from '../../../../../core-ui/Table'
+import { columns } from './helpers'
+import { useState } from 'react'
+
+const BalancePackageHistory = () => {
+  const [tableItems, setTableItems] = useState<BalancePackage[]>([
+    {
+      id: 1,
+      store: 'CRAIOVA (3054)',
+      hub: '',
+      society: 'DEPOZIT BRAZI NON FOOD',
+      supportType: '',
+      qualitativeInventory: 'PH01DEP',
+      theoreticalStock: 'DEPOZITBRA',
+      inventoryDefect: '3095940',
+      difference: '',
+      finalStockAfterInventory: '256822',
+      inventoryManager: '',
+      inventoryDate: '25-10-2023',
+      inventoryUpdate: 'Inexistent',
+      inventoryHistory: ''
+    }
+  ])
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+
+  return (
+    <Grid
+      items={[
+        <TitleHeader title='Istoric inventar' />,
+        <Table
+          hideCheckbox
+          orderBy='role'
+          order='asc'
+          columns={columns}
+          items={tableItems}
+          fetchData={() => {}}
+          isLoading={isLoading}
+          totalCount={totalCount}
+          shouldRefreshData={shouldRefreshData}
+          setShouldRefreshData={setShouldRefreshData}
+        />
+      ]}
+      itemsPerRow={1}
+    />
+  )
+}
+
+export default BalancePackageHistory

@@ -4,8 +4,9 @@ export const toTableRowItems = items => items.map(item => ({
     name: item.name || '',
     metiCode: item.metiCode || 0,
     pluCode: item.pluCode || '',
-    familyModuleName: item.familyModuleName || '',
+    familyName: item.familyName || '',
     imageUrl: item.imageUrl || '',
     cluster: item.cluster || '',
-    batch: item.batch || true
+    batch: item.batch || false,
+    productName: item.productName || '',
   }))

@@ -9,7 +9,7 @@ import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 import { EditCurrentTaskTemplateProps } from '../TaskAllocationsDefinitions'
 
 const validationSchema = yup.object({
@@ -50,6 +50,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       mutate(values)
+      formik.resetForm()
     }
   })
 

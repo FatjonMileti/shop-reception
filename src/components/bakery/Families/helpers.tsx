@@ -6,7 +6,8 @@ import { Link } from 'components/core-ui/Link'
 export const divisionTypes = [
     { label: 'Super', value: 'SUPER' }, 
     { label: 'Hyper', value: 'HYPER' },
-    { label: 'Hyper&Super', value: 'HYPER_AND_SUPER'}
+    { label: 'Hyper&Super', value: 'HYPER_AND_SUPER'},
+    { label: 'Ingrediente', value: 'INGREDIENTS'}
 ]
 
 export const famInBakeryScopes = [

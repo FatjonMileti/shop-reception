@@ -7,7 +7,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { AddActionIcon, EditActionIcon } from 'icons'
 
-import { handleQueryError } from '../utils'
+import { handleQueryError } from 'utils/helpers'
 import { CreateEditTask } from './CreateEditTask'
 import { VOLUMETRY_TASKS_URL } from './constants'
 import { buildTableFilterFields, columns } from './helpers'
