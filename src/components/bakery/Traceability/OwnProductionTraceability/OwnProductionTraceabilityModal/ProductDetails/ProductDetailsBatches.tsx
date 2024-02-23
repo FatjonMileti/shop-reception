@@ -9,10 +9,11 @@ interface ProductDetailsBatchesProps {
   formik: any
   onDeleteBatch: Function,
   receip: any
+  setRecipeMetiCode: Function
 }
 
 export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
-  const { formik, productMetiCode, onSelectBatch, onDeleteBatch, receip } = props
+  const { formik, productMetiCode, onSelectBatch, onDeleteBatch, receip, setRecipeMetiCode } = props
 
   const metiCode = productMetiCode || formik.values.metiCode;
 
@@ -52,7 +53,10 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                 size="large"
                 variant="outlined"
                 label="Adauga lot"
-                onClick={() => onSelectBatch()}
+                onClick={() => {
+                  onSelectBatch()
+                  setRecipeMetiCode(batch.componentCode)
+                }}
                 style={{ height: '40px', fontSize: '10px' }}
               />
             </Grid>
