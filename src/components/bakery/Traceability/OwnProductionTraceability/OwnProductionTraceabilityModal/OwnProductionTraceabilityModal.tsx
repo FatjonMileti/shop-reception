@@ -37,7 +37,7 @@ export const OwnProductionTraceabilityModal = ({
   const submitTask = async values => {
     await makeCorePostRequest(`/bakery/traceability/production`, values)
   }
-  const [recipeMetiCode, setRecipeMetiCode] = useState();
+  const [recipeMetiCode, setRecipeMetiCode] = useState()
 
   const { isLoading, mutate } = useMutation(submitTask, {
     onSuccess: () => {
@@ -74,6 +74,15 @@ export const OwnProductionTraceabilityModal = ({
         productionDate: formatPayloadDate(values.productionDate),
         metiCode: values?.metiCode || selectedProduct?.metiCode,
         productName: selectedProduct?.name || values.productName
+      }
+
+      if (values.traceabilityProductionList.length === 0) {
+        showNotification({
+          message: `Cannot save without batch and charge.`,
+          type: 'error'
+        })
+
+        return
       }
 
       mutate(payload)
