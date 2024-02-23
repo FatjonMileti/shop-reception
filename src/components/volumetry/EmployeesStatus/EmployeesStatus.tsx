@@ -7,7 +7,7 @@ import { useNotification } from 'hooks'
 import { toTableRowItems } from './serializers'
 import { collaboratorsOptions, columns } from './helpers'
 import { ValueLabelInterface } from '../interfaces'
-import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
@@ -23,7 +23,7 @@ const EmployeesStatus = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
-  const [collaboratorFilterValue, setCollaboratorFilterValue] = useState<ValueLabelInterface>(collaboratorsOptions[0])
+  const [shiftCategoryFilterValue, setShiftCategoryFilterValue] = useState<ValueLabelInterface>(null)
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification, setDepartmentFilterValue)
@@ -38,8 +38,8 @@ const EmployeesStatus = () => {
 
     const filters = [
       { name: 'department', value: departmentFilterValue?.value },
-      ...(typeof collaboratorFilterValue?.value !== 'undefined' && [
-        { name: 'collaborator', value: collaboratorFilterValue?.value }
+      ...(typeof shiftCategoryFilterValue?.value !== 'undefined' && [
+        { name: 'shiftCategory', value: shiftCategoryFilterValue?.value }
       ])
     ]
 
@@ -66,8 +66,14 @@ const EmployeesStatus = () => {
     }
   }
 
-  const handleCollaboratorsOptionChange = value => {
-    setCollaboratorFilterValue(value)
+  const shiftCategoryOptions = [
+    { label: 'Angajati pe tura', value: 'ON_SHIFT' },
+    { label: 'Angajati care nu sunt pe tura', value: 'OFF_SHIFT' },
+    { label: 'Colaboratori', value: 'COLLABORATOR' }
+  ]
+
+  const handleShiftCategoryOptionChange = value => {
+    setShiftCategoryFilterValue(value)
     setShouldRefreshData(true)
   }
 
@@ -80,11 +86,11 @@ const EmployeesStatus = () => {
           </div>
         ) : (
           <>
-            <Grid xs={12} md={3} item style={{ padding: 0 }}>
+            <Grid xs={4} md={3} mb={2} item style={{ padding: 0 }}>
               <FilterDataSelect
                 name="department"
                 defaultSelectedData={departmentFilterValue}
-                label="Departament"
+                label=""
                 showCounter={true}
                 showSearch={true}
                 counterLabel="Select department"
@@ -93,17 +99,17 @@ const EmployeesStatus = () => {
                 onSelect={handleDepartmentOptionChange}
               />
             </Grid>
-            <Grid xs={12} md={3} item style={{ padding: 0, marginLeft: '60px' }}>
+            <Grid xs={4} md={3} mb={2} item style={{ padding: 0 }}>
               <FilterDataSelect
-                name="collaborators"
-                defaultSelectedData={collaboratorFilterValue}
-                label="Ture/colaboratori"
+                name="shiftCategory"
+                defaultSelectedData={shiftCategoryFilterValue}
+                label=""
                 showCounter={true}
                 showSearch={true}
                 counterLabel="Ture/colaboratori"
                 noDataFoundLabel="No results!"
-                options={collaboratorsOptions}
-                onSelect={handleCollaboratorsOptionChange}
+                options={shiftCategoryOptions}
+                onSelect={handleShiftCategoryOptionChange}
               />
             </Grid>
           </>

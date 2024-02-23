@@ -19,7 +19,7 @@ export const columns = [
   },
   {
     title: 'Nume task in desfasurare',
-    field: 'notStartedTasksNumber',
+    field: 'taskName',
     align: 'left'
   },
   {

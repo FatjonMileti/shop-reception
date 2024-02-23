@@ -10,7 +10,7 @@ import { AddActionIcon, EditActionIcon } from 'icons'
 import { handleQueryError } from 'utils/helpers'
 import { CreateEditTask } from './CreateEditTask'
 import { VOLUMETRY_TASKS_URL } from './constants'
-import { buildTableFilterFields, columns } from './helpers'
+import { buildTableFilterFields, columns, toTableRowItems } from './helpers'
 import {
   getCategoriesOptions,
   getDepartmentsOptions,
@@ -49,7 +49,7 @@ const TaskManagement = () => {
         })
       )
 
-      setTableItems(response.list)
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {

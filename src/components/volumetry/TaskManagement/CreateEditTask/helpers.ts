@@ -18,6 +18,7 @@ export const getInitialValues = item => {
     recommendedStartHour: item?.recommendedStartHour ?? null,
     recommendedEndHour: item?.recommendedEndHour ?? null,
     frequency: item?.frequency ? { label: item.frequency, value: item.frequency } : null,
+    defaultWorkload: item?.defaultWorkload ?? '',
     standardProductivityValue: item?.standardProductivityValue ?? '',
     measurementUnit: item?.measurementUnit
       ? { label: item.measurementUnit, value: item.measurementUnit }
@@ -62,6 +63,7 @@ export const getValidationSchema = item =>
         value: Yup.string().required()
       })
       .required('Acest camp este obligatoriu.'),
+    defaultWorkload: Yup.string().required('Acest camp este obligatoriu.'),
     standardProductivityValue: Yup.string().required('Acest camp este obligatoriu.'),
     measurementUnit: Yup.object()
       .shape({

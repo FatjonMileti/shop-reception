@@ -15,8 +15,14 @@ const EmployeeCapsule = (props: EmployeeCapsuleProps) => {
         valueColor={customCapsuleColors.value}
       />
       <Capsule
-        label={'Volum'}
-        value={`${employee.workload}`}
+        label={'Volum alocat'}
+        value={`${employee.allocatedWorkload}`}
+        labelColor={customCapsuleColors.label}
+        valueColor={customCapsuleColors.value}
+      />
+      <Capsule
+        label={'Volum efectuat'}
+        value={`${employee.performedWorkload}`}
         labelColor={customCapsuleColors.label}
         valueColor={customCapsuleColors.value}
       />
