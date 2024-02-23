@@ -5,13 +5,12 @@ import s from './EmployeesStatus.modules.scss'
 import { getDepartmentsOptions } from '../api'
 import { useNotification } from 'hooks'
 import { toTableRowItems } from './serializers'
-import { collaboratorsOptions, columns } from './helpers'
+import { shiftCategoryOptions, columns } from './helpers'
 import { ValueLabelInterface } from '../interfaces'
-import { Autocomplete, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { WebcamCapture } from 'components/core-ui/WebcamCapture'
 
 const EmployeesStatus = () => {
   const { showNotification } = useNotification()
@@ -23,7 +22,7 @@ const EmployeesStatus = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
-  const [shiftCategoryFilterValue, setShiftCategoryFilterValue] = useState<ValueLabelInterface>(null)
+  const [shiftCategoryFilterValue, setShiftCategoryFilterValue] = useState<ValueLabelInterface>(shiftCategoryOptions[0])
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification, setDepartmentFilterValue)
@@ -66,12 +65,6 @@ const EmployeesStatus = () => {
     }
   }
 
-  const shiftCategoryOptions = [
-    { label: 'Angajati pe tura', value: 'ON_SHIFT' },
-    { label: 'Angajati care nu sunt pe tura', value: 'OFF_SHIFT' },
-    { label: 'Colaboratori', value: 'COLLABORATOR' }
-  ]
-
   const handleShiftCategoryOptionChange = value => {
     setShiftCategoryFilterValue(value)
     setShouldRefreshData(true)
@@ -90,7 +83,7 @@ const EmployeesStatus = () => {
               <FilterDataSelect
                 name="department"
                 defaultSelectedData={departmentFilterValue}
-                label=""
+                label="Departament"
                 showCounter={true}
                 showSearch={true}
                 counterLabel="Select department"
@@ -99,11 +92,11 @@ const EmployeesStatus = () => {
                 onSelect={handleDepartmentOptionChange}
               />
             </Grid>
-            <Grid xs={4} md={3} mb={2} item style={{ padding: 0 }}>
+            <Grid xs={12} md={3} item style={{ padding: 0, marginLeft: '60px' }}>
               <FilterDataSelect
                 name="shiftCategory"
                 defaultSelectedData={shiftCategoryFilterValue}
-                label=""
+                label="Ture/colaboratori"
                 showCounter={true}
                 showSearch={true}
                 counterLabel="Ture/colaboratori"

@@ -20,16 +20,18 @@ export const columns = [
   {
     title: 'Nume task in desfasurare',
     field: 'taskName',
-    align: 'left'
+    align: 'left',
+    collapsible: true
   },
   {
     title: 'Nr. task-uri finalizate',
     field: 'finishedTasksNumber',
-    align: 'left'
+    align: 'left',
+    collapsible: true
   }
 ]
 
-export const collaboratorsOptions = [
+export const shiftCategoryOptions = [
   { label: 'Angajati pe tura', value: 'ON_SHIFT' },
   { label: 'Angajati care nu sunt pe tura', value: 'OFF_SHIFT' },
   { label: 'Colaboratori', value: 'COLLABORATOR' }
