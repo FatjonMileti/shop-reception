@@ -1,13 +1,13 @@
 import { Capsule } from 'components/core-ui/Capsule'
 import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { columns } from './helpers'
+import { columns, mainItemBodyColumns } from './helpers'
 import { AccordionDetailsWrapper, BodyItem } from '../ProductManagementTraceability/AccordionTable'
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import { Fragment } from 'react'
 
-const FrozenTraceabilityDescription = (item, chargeItem) => {
-  const { traceabilityFrozenList, product } = item.item
+const FrozenTraceabilityDescription = ({item, chargeItem}) => {
+  const { traceabilityFrozenList, product } = item
 
   const bodyItemValue = (batchItem, frozenItem, columnField) => {
     const isBoolean =
@@ -26,6 +26,24 @@ const FrozenTraceabilityDescription = (item, chargeItem) => {
 
   return (
     <Grid container flexDirection="column">
+      <AccordionDetailsWrapper>
+        <Grid container spacing={2} columns={12}>
+          {mainItemBodyColumns.map((column, index) => {
+            return (
+              <Fragment key={index}>
+                {column.render ? (
+                  column.render(chargeItem)
+                ) : (
+                  <BodyItem
+                    name={column.title}
+                    value={chargeItem[column?.field]}
+                  />
+                )}
+              </Fragment>
+            )
+          })}
+        </Grid>
+      </AccordionDetailsWrapper>
       <Grid item my={1} mr={1}>
         {traceabilityFrozenList.map((frozenItem) => (
           <Accordion>
@@ -49,45 +67,68 @@ const FrozenTraceabilityDescription = (item, chargeItem) => {
                 </Typography>
 
                 <Grid item my={0.5} mx={1}>
-                  <Capsule label="Cant. fab." value={frozenItem.quantity} />
-                </Grid>
-                <Grid item my={0.5} mr={1}>
-                  <Capsule label="UM" value={product.metricUnit} />
+                  <Capsule label="Cod METI" value={frozenItem?.batch?.product?.metiCode} />
                 </Grid>
 
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Data intrare MP" value={formatBakeryPayloadDate(frozenItem.batch.entryDate)} />
+                  <Capsule label="Furnizor" value={frozenItem.batch.supplier.supplierName} />
                 </Grid>
+
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Furnizor MP" value={frozenItem.batch.supplier.supplierName} />
+                  <Capsule label="Furnizor (Cod Meti)" value={frozenItem?.batch?.supplier?.supplierCode} />
                 </Grid>
+
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Cant. fab./lot" value={frozenItem.quantity} />
+                  <Capsule label="Familie" value={frozenItem?.batch?.product?.familyName} />
                 </Grid>
+
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="DLC sec. MP" value={formatBakeryPayloadDate(frozenItem.openingDate)} />
+                  <Capsule label="Subfamilie" value={frozenItem?.batch?.product?.subfamily} />
                 </Grid>
-                <Grid item my={0.5} mr={1}>
-                  <Capsule label="DLC MP" value={formatBakeryPayloadDate(frozenItem.batch.expireDate)} />
-                </Grid>
-                <Grid item my={0.5} mr={1}>
-                  <Capsule label="Operator trasab." value={chargeItem.createdBy} />
-                </Grid>
-                <Grid item my={0.5} mr={1}>
-                  <Capsule
-                    label="Data introducere"
-                    value={formatBakeryPayloadDate(chargeItem.createdDate)}
-                  />
-                </Grid>
-                <Grid item my={0.5} mr={1}>
-                  <Capsule label="Ultima modificare" value={chargeItem.modifiedBy} />
-                </Grid>
-                <Grid item my={0.5} mr={1}>
-                  <Capsule
-                    label="Data ultimei modificari"
-                    value={formatBakeryPayloadDate(chargeItem.modifiedDate)}
-                  />
-                </Grid>
+
+                {/**/}
+
+                {/*<Grid item my={0.5} mx={1}>*/}
+                {/*  <Capsule label="Cant. fab." value={frozenItem.quantity} />*/}
+                {/*</Grid>*/}
+
+                {/*<Grid item my={0.5} mr={1}>*/}
+                {/*  <Capsule label="UM" value={product.metricUnit} />*/}
+                {/*</Grid>*/}
+
+                {/*<Grid item my={0.5} mr={1}>*/}
+                {/*  <Capsule label="Data intrare MP" value={formatBakeryPayloadDate(frozenItem.batch.entryDate)} />*/}
+                {/*</Grid>*/}
+                {/*<Grid item my={0.5} mr={1}>*/}
+                {/*  <Capsule label="Furnizor MP" value={frozenItem.batch.supplier.supplierName} />*/}
+                {/*</Grid>*/}
+                {/*<Grid item my={0.5} mr={1}>*/}
+                {/*  <Capsule label="Cant. fab./lot" value={frozenItem.quantity} />*/}
+                {/*</Grid>*/}
+                {/*<Grid item my={0.5} mr={1}>*/}
+                {/*  <Capsule label="DLC sec. MP" value={formatBakeryPayloadDate(frozenItem.openingDate)} />*/}
+                {/*</Grid>*/}
+                {/*<Grid item my={0.5} mr={1}>*/}
+                {/*  <Capsule label="DLC MP" value={formatBakeryPayloadDate(frozenItem.batch.expireDate)} />*/}
+                {/*</Grid>*/}
+                {/*<Grid item my={0.5} mr={1}>*/}
+                {/*  <Capsule label="Operator trasab." value={chargeItem.createdBy} />*/}
+                {/*</Grid>*/}
+                {/*<Grid item my={0.5} mr={1}>*/}
+                {/*  <Capsule*/}
+                {/*    label="Data introducere"*/}
+                {/*    value={formatBakeryPayloadDate(chargeItem.createdDate)}*/}
+                {/*  />*/}
+                {/*</Grid>*/}
+                {/*<Grid item my={0.5} mr={1}>*/}
+                {/*  <Capsule label="Ultima modificare" value={chargeItem.modifiedBy} />*/}
+                {/*</Grid>*/}
+                {/*<Grid item my={0.5} mr={1}>*/}
+                {/*  <Capsule*/}
+                {/*    label="Data ultimei modificari"*/}
+                {/*    value={formatBakeryPayloadDate(chargeItem.modifiedDate)}*/}
+                {/*  />*/}
+                {/*</Grid>*/}
               </Grid>
             </AccordionSummary>
 
@@ -102,7 +143,7 @@ const FrozenTraceabilityDescription = (item, chargeItem) => {
                         ) : (
                           <BodyItem
                             name={column.title}
-                            value={bodyItemValue(frozenItem.batch, item.item, column.field)}
+                            value={chargeItem[column?.field]}
                           />
                         )}
                       </Fragment>
