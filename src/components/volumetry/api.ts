@@ -321,10 +321,11 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   )
 }
 
-export const getEmployeesAttendance = (
+export const setEmployeesAttendance = (
   departmentId: number | string,
   showNotification: Function,
-  validateQuery: boolean = true
+  validateQuery: boolean = true,
+  setEmployees: Function
 ) => {
   return useQuery(
     ['employees-attendance', departmentId],
@@ -332,7 +333,8 @@ export const getEmployeesAttendance = (
       const employees = await makeCoreGetRequest(
         `/volumetry/workers/shifts?filterBy=genericDepartmentId&filterValue=${departmentId}`
       )
-      return toEmployeesAttendance(employees) || []
+      const employeesAttendance = toEmployeesAttendance(employees) || []
+      setEmployees(employeesAttendance)
     },
     {
       onError: error =>

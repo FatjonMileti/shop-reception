@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { useNotification } from 'hooks'
-import { getEmployeesAttendance } from '../../api'
+import { setEmployeesAttendance } from '../../api'
 import { useMutation } from 'react-query'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { handleQueryError } from 'utils/helpers'
@@ -21,19 +21,14 @@ const AttendanceModal = (props: AttendanceModalProps) => {
 
   const { showNotification } = useNotification()
 
-  const { data: employeesShifts, isLoading: isEmployeesLoading } = getEmployeesAttendance(
+  const { data: employeesShifts, isLoading: isEmployeesLoading } = setEmployeesAttendance(
     departmentId,
     showNotification,
-    isModalOpen
+    isModalOpen,
+    setEmployees
   )
 
   const isXs = useMediaQuery('(max-width:624px)')
-
-  useEffect(() => {
-    if (employeesShifts) {
-      setEmployees(employeesShifts)
-    }
-  }, [employeesShifts])
 
   useEffect(() => {
     const newEmployees = employees.map(emp => ({
@@ -128,7 +123,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
           employees={employees}
           toggleEmployee={toggleEmployee}
           updateEmplpyeeTime={updateEmplpyeeTime}
-          closeModal={closeModal}
+          closeModal={resetModal}
           handleSubmit={formik.handleSubmit}
           increaseStep={() => setActiveStep(1)}
           isXs={isXs}
@@ -138,7 +133,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
         <AllocationList
           employees={employees}
           toggleEmployee={toggleAllocateEmployee}
-          closeModal={closeModal}
+          closeModal={resetModal}
           allocateEmployees={allocateEmployees}
           allocateEmployeesAllSelected={allocateEmployeesAllSelected}
           setAllocateEmployeesAllSelected={setAllocateEmployeesAllSelected}
