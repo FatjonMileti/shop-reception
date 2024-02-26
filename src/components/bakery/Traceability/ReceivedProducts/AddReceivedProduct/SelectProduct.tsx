@@ -36,7 +36,6 @@ export const SelectProduct = ({
     {
       initialData: [],
       enabled: debouncedTerm.length > 0,
-      keepPreviousData: true
     }
   )
   return (
@@ -77,6 +76,7 @@ export const SelectProduct = ({
           }
           autoComplete={false}
           filterOptions={x => x}
+          freeSolo
         />
       </Grid>
       {!hideActions && (
