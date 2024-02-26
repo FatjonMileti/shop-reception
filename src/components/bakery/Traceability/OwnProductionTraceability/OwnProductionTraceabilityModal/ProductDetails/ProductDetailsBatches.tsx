@@ -7,7 +7,7 @@ interface ProductDetailsBatchesProps {
   onSelectBatch: Function
   productMetiCode: any
   formik: any
-  onDeleteBatch: Function,
+  onDeleteBatch: Function
   receip: any
   setRecipeMetiCode: Function
 }
@@ -15,9 +15,9 @@ interface ProductDetailsBatchesProps {
 export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
   const { formik, productMetiCode, onSelectBatch, onDeleteBatch, receip, setRecipeMetiCode } = props
 
-  const metiCode = productMetiCode || formik.values.metiCode;
+  const metiCode = productMetiCode || formik.values.metiCode
 
-  if (typeof metiCode === 'undefined' ) {
+  if (typeof metiCode === 'undefined') {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
@@ -48,19 +48,20 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
             </Grid>
 
             <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
-              <IconButton
-                startIcon={<AddActionIcon />}
-                size="large"
-                variant="outlined"
-                label="Adauga lot"
-                onClick={() => {
-                  onSelectBatch()
-                  setRecipeMetiCode(batch.componentCode)
-                }}
-                style={{ height: '40px', fontSize: '10px' }}
-              />
+              {batch.withBatch && (
+                <IconButton
+                  startIcon={<AddActionIcon />}
+                  size="large"
+                  variant="outlined"
+                  label="Adauga lot"
+                  onClick={() => {
+                    onSelectBatch()
+                    setRecipeMetiCode(batch.componentCode)
+                  }}
+                  style={{ height: '40px', fontSize: '10px' }}
+                />
+              )}
             </Grid>
-
             <Grid item xs={3}></Grid>
           </>
           <>
