@@ -147,7 +147,7 @@ export const FrozenTraceabilityModal = ({
                   isEdit={isEdit}
                 />,
                 <SelectBatch
-                  selectedProduct={selectedProduct}
+                  selectedProduct={selectedProduct || {metiCode: formik.values.metiCode}}
                   onContinue={() => {
                     setShowAddBatch(false)
                     setStep(1)
