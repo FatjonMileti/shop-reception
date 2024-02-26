@@ -76,7 +76,6 @@ export const SelectProduct = ({
           }
           autoComplete={false}
           filterOptions={x => x}
-          freeSolo
         />
       </Grid>
       {!hideActions && (
