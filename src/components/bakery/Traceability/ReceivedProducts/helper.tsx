@@ -93,8 +93,8 @@ export const columns: Column[] = [
         value={
           <BooleanIcon
             value={row.hasExpireDate}
-            icon="Flag"
-            onFailure="#FFFFFF"
+            icon="CheckCircleOutline"
+            onFailure="#E5E5E5"
             onSuccess="#33691E"
           />
         }
@@ -115,8 +115,8 @@ export const columns: Column[] = [
         value={
           <BooleanIcon
             value={row.hasSecondaryDlc}
-            icon="Flag"
-            onFailure="#FFFFFF"
+            icon="CheckCircleOutline"
+            onFailure="#E5E5E5"
             onSuccess="#33691E"
           />
         }
@@ -138,7 +138,7 @@ export const columns: Column[] = [
       <BodyItem
         name="Poza eticheta"
         value={
-          <ImageCell value={''} imageUrl={row.product?.imageUrl} />
+          <ImageCell value={''} imageUrl={row?.imageUrl} />
         }
       />
     )

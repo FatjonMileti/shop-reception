@@ -35,7 +35,7 @@ export const FrozenTraceability = () => {
   const [verifyItem, setVerifyItem] = useState(null)
   const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
 
-  const fetchData = async (page, rowsPerPage, tableFilters) => {
+  const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
@@ -45,7 +45,12 @@ export const FrozenTraceability = () => {
           page,
           rowsPerPage,
           orderBy,
-          order
+          order,
+          searchText,
+          searchFields: [
+            'product.metiCode',
+            'product.name',
+          ]
         })
       )
       setRows(toListTableRows(response.list))
@@ -64,9 +69,8 @@ export const FrozenTraceability = () => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
     const data = await response
     setEditItem(data)
-    
 
-    return <FrozenTraceabilityDescription chargeItem={tableData} item={data} />
+    return <FrozenTraceabilityDescription chargeItem={tableData?.find(d => d.id === rowId)} item={data} />
   }
 
   const families = useQuery(
@@ -184,6 +188,7 @@ export const FrozenTraceability = () => {
           rows={rows}
           handleRemoteData={debounce(fetchData, 500)}
           handleRemoteDetails={handleRemoteDetails}
+          hasSearchInput
           isLoading={isLoading}
           totalCount={totalCount}
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}

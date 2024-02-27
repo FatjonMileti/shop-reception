@@ -37,6 +37,7 @@ export const OwnProductionTraceabilityModal = ({
   const submitTask = async values => {
     await makeCorePostRequest(`/bakery/traceability/production`, values)
   }
+  const [recipeMetiCode, setRecipeMetiCode] = useState()
 
   const { isLoading, mutate } = useMutation(submitTask, {
     onSuccess: () => {
@@ -75,6 +76,15 @@ export const OwnProductionTraceabilityModal = ({
         productName: selectedProduct?.name || values.productName
       }
 
+      if (values.traceabilityProductionList.length === 0) {
+        showNotification({
+          message: `Cannot save without batch and charge.`,
+          type: 'error'
+        })
+
+        return
+      }
+
       mutate(payload)
       resetForm()
       setSelectedRows([])
@@ -86,6 +96,7 @@ export const OwnProductionTraceabilityModal = ({
 
   const cancel = () => {
     closeModal()
+    setShowAddBatch(false)
     setSelectedProduct(undefined)
     setEditItem(null)
     setStep(0)
@@ -146,6 +157,7 @@ export const OwnProductionTraceabilityModal = ({
                   selectedRows={selectedRows}
                   formik={formik}
                   isEdit={isEdit}
+                  setRecipeMetiCode={setRecipeMetiCode}
                 />,
                 <SelectBatch
                   onContinue={() => {
@@ -161,6 +173,7 @@ export const OwnProductionTraceabilityModal = ({
                   setSelectedRows={setSelectedRows}
                   metiCode={formik.values?.metiCode || selectedProduct?.metiCode}
                   selectedProduct={selectedProduct}
+                  recipeMetiCode={recipeMetiCode}
                 />,
 
                 <SelectCharge

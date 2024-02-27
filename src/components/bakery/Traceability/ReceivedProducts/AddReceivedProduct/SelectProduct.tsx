@@ -36,7 +36,6 @@ export const SelectProduct = ({
     {
       initialData: [],
       enabled: debouncedTerm.length > 0,
-      keepPreviousData: true
     }
   )
   return (

@@ -1,19 +1,23 @@
-import { Autocomplete, DatePicker, ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import {
+  Autocomplete,
+  DatePicker,
+  FilterDataSelect,
+  ListTable
+} from '@fullscreendigital/carrefour-dex-fe'
 import s from './OwnProductionTraceability.modules.scss'
-import React, { useState } from 'react'
+import React, { startTransition, useState } from 'react'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
-import { formatAndDownloadResponse, handleQueryError } from 'utils/helpers'
+import { formatAndDownloadResponse, getPreviousDay, handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
-import { debounce } from '@mui/material'
+import { Divider, Grid, debounce } from '@mui/material'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
 import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
-import { ValueLabelInterface } from '../../interfaces'
+import { IdNameInterface, ValueLabelInterface } from '../../interfaces'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
-import { getCurrentDate } from '../../../../utils/helpers'
 import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
 import { useProductsFilter } from './useProductsFilter'
 import { PrintModal } from '../../../core-ui/PrintModal'
@@ -21,52 +25,87 @@ import { URLS } from '../../constants'
 import { useImmer } from 'use-immer'
 import OwnProductionTraceabilityDescription from '../OwnProductionTraceability/OwnProductionTraceabilityDescription'
 import { batchPrintColumns, productPrintColumns, chargePrintColumns } from './helpers'
+import { useLocation } from 'react-router'
 
 export const ReportOwnProductionTraceability = () => {
   const { showNotification } = useNotification()
+  const { pathname } = useLocation()
+
+  const isFormator = pathname.includes('/formator')
 
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [rows, setRows] = useState([])
   const [tableData, setTableData] = useState(null)
-
-  const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
+  const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
+  const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
+  const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([])
 
   const productsFilter = useProductsFilter()
 
-  const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
+  const previousDay = getPreviousDay()
 
   const [tableState, setTableState] = useImmer(
     window.history.state.tableState || {
       page: 0,
       rowsPerPage: 25,
-      order:  '',
-      orderBy:  '',
+      order: '',
+      orderBy: '',
       searchText: '',
-      filters: []
+      filters: [],
+      tableFilters: [
+        {
+          name: 'startDate',
+          value: previousDay
+        },
+        {
+          name: 'endDate',
+          value: previousDay
+        },
+      ]
     }
   )
 
+  React.useEffect(() => {
+    if (storeFilterValue?.length > 0) {
+      debouncedFetchData(0, tableState.rowsPerPage, tableState.tableFilters, tableState.searchText)
+    }
+  }, [storeFilterValue])
 
-  const handleRemoteDetails = async (rowId: string | number) => {
-    const response = await makeCoreGetRequest(`/bakery/traceability/production/${rowId}`)
-    const data = await response
-
-    return <OwnProductionTraceabilityDescription item={data} chargeItem={tableData} />
-  }
-
+  const { data: filterOptions } = useQuery(
+    ['store'],
+    async () => {
+      const result = await makeCoreGetRequest('/bakery/store/trainee/all')
+      const resultOptions = result.map(
+        (item: IdNameInterface): ValueLabelInterface => ({ label: item.name, value: item.id })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
-    console.log('debug table filters', tableFilters)
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/traceability/production',
+          filters: [
+            ...(storeFilterValue && storeFilterValue.length > 0
+              ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
+              : [])
+          ],
           tableFilters,
           page,
           searchText,
-          searchFields: ['productName'],
+          searchFields: ['product.name'],
           rowsPerPage
         })
       )
@@ -77,8 +116,11 @@ export const ReportOwnProductionTraceability = () => {
 
       setTableState(tableState => ({
         ...tableState,
-        tableFilters
+        tableFilters,
+        rowsPerPage,
+        searchText
       }))
+
     } catch (error) {
       handleQueryError(
         error,
@@ -88,12 +130,32 @@ export const ReportOwnProductionTraceability = () => {
     }
   }
 
+  const debouncedFetchData = debounce(fetchData, 500)
+
+  const handleStoreFilterChange = (value: ValueLabelInterface[]): void => {
+    startTransition(() => {
+      setStoreFilterValue(value)
+    });
+  }
+
+  const handleRemoteDetails = async (rowId: string | number) => {
+    const response = await makeCoreGetRequest(`/bakery/traceability/production/${rowId}`)
+    const data = await response
+
+    return <OwnProductionTraceabilityDescription item={data} chargeItem={tableData} />
+  }
+
   const downloadFileQuery = useQuery(
     ['download'],
     async () => {
       const url = toTableGETUrl({
         url: '/bakery/traceability/production/download',
-        filters: tableState.tableFilters
+        filters: [
+          ...(storeFilterValue && storeFilterValue.length > 0
+            ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
+            : [])
+        ],
+        tableFilters: tableState.tableFilters
       })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
@@ -110,23 +172,19 @@ export const ReportOwnProductionTraceability = () => {
       enabled: false
     }
   )
-  
-  
+
   const families = useQuery(
-    ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
+    ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
     async () => {
-      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.subfamily')
         ?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(
-        `/bakery/store/families`,
-        {
-          params: {
-            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
-          },
-          paramsSerializer: { indexes: null }
-        }
-      )
+      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+        params: {
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
           label: item.name,
@@ -146,9 +204,9 @@ export const ReportOwnProductionTraceability = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'family')?.value],
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.family')
         ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
@@ -174,11 +232,9 @@ export const ReportOwnProductionTraceability = () => {
     }
   )
 
-  const currentDate = getCurrentDate()
-
   const drawerFilters: TableFiltersType[] = [
     {
-      name: 'product',
+      name: 'product.id',
       value: undefined,
       filter: (
         <Autocomplete
@@ -196,12 +252,12 @@ export const ReportOwnProductionTraceability = () => {
     },
     {
       name: 'startDate',
-      value: currentDate,
+      value: previousDay,
       filter: (
         <DatePicker
           label="Data inceput productie"
           variant="outlined"
-          value={currentDate}
+          value={previousDay}
           onChange={() => {}}
         />
       ),
@@ -210,12 +266,12 @@ export const ReportOwnProductionTraceability = () => {
     },
     {
       name: 'endDate',
-      value: currentDate,
+      value: previousDay,
       filter: (
         <DatePicker
           label="Data sfarsit productie"
           variant="outlined"
-          value={currentDate}
+          value={previousDay}
           onChange={() => {}}
         />
       ),
@@ -223,7 +279,7 @@ export const ReportOwnProductionTraceability = () => {
       label: 'Data sfarsit productie'
     },
     {
-      name: 'family',
+      name: 'product.family',
       value: undefined,
       filter: (
         <Autocomplete
@@ -235,10 +291,10 @@ export const ReportOwnProductionTraceability = () => {
         />
       ),
       type: 'autocomplete',
-      label: 'Familie produse',
+      label: 'Familie produse'
     },
     {
-      name: 'subfamily',
+      name: 'product.subfamily',
       value: undefined,
       filter: (
         <Autocomplete
@@ -253,49 +309,76 @@ export const ReportOwnProductionTraceability = () => {
       label: 'Subfamilie produse'
     }
   ]
- 
+
   return (
     <div className={s.mainContainer}>
-      <>
-        <PrintModal
-          {...tableState}
-          tableFilters={tableState.tableFilters}
-          url={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT}
-          dynamicColumns={[...productPrintColumns, ...batchPrintColumns, ...chargePrintColumns]}
-          isModalOpen={isPrintModalOpen}
-          closeModal={() => setIsPrintModalOpen(false)}
-          toolbarActions={[]}
-        />
-        <ListTable
-          rows={rows}
-          handleRemoteData={debounce(fetchData, 500)}
-          handleRemoteDetails={handleRemoteDetails}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          filters={drawerFilters}
-          hasSearchInput
-          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
-          toolbarActions={[
-            {
-              label: 'Descarca',
-              icon: <DownloadOutlined />,
-              onClick: () => {
-                downloadFileQuery.refetch()
-              }
-            },
-            {
-              label: 'Printeaza',
-              icon: <PrintOutlined />,
-              onClick: () => {
-                setIsPrintModalOpen(true)
-              }
-            }
-          ]}
-          rowActionsWidth="90px"
-          rowsPerPage={25}
-          rowsPerPageOptions={[25, 50, 100]}
-        />
-      </>
+      <Grid container>
+        {isFormator && (
+          <>
+            <Grid xs={12} md={12} container spacing={5}>
+              <Grid xs={12} md={3} item>
+                <FilterDataSelect
+                  name="store"
+                  defaultSelectedData={storeFilterValue}
+                  label="Magazin"
+                  options={filterOptions}
+                  onSelect={handleStoreFilterChange}
+                  placeholderButton="Selecteaza"
+                  showSearch
+                  multiSelect={true}
+                />
+              </Grid>
+            </Grid>
+
+            <Grid xs={12} item py={2}>
+              <Divider />
+            </Grid>
+          </>
+        )}
+      </Grid>
+
+        {((isFormator && storeFilterValue.length > 0) || !isFormator) && (
+          <>
+            <PrintModal
+              {...tableState}
+              tableFilters={tableState.tableFilters}
+              url={isFormator ? URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT_FORMATOR : URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT}
+              dynamicColumns={[...productPrintColumns, ...batchPrintColumns, ...chargePrintColumns]}
+              isModalOpen={isPrintModalOpen}
+              closeModal={() => setIsPrintModalOpen(false)}
+              toolbarActions={[]}
+            />
+            <ListTable
+              rows={rows}
+              handleRemoteData={debouncedFetchData}
+              handleRemoteDetails={handleRemoteDetails}
+              isLoading={isLoading}
+              totalCount={totalCount}
+              filters={drawerFilters}
+              hasSearchInput
+              handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
+              toolbarActions={[
+                {
+                  label: 'Descarca',
+                  icon: <DownloadOutlined />,
+                  onClick: () => {
+                    downloadFileQuery.refetch()
+                  }
+                },
+                {
+                  label: 'Printeaza',
+                  icon: <PrintOutlined />,
+                  onClick: () => {
+                    setIsPrintModalOpen(true)
+                  }
+                }
+              ]}
+              rowActionsWidth="90px"
+              rowsPerPage={25}
+              rowsPerPageOptions={[25, 50, 100]}
+            />
+          </>
+        )}
     </div>
   )
 }

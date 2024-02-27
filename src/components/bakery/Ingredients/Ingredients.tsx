@@ -57,7 +57,7 @@ const Ingredients = () => {
         toTableGETUrl({
           url: '/bakery/product/management/ingredients',
           filters: [],
-          searchFields: ["productName","metiCode","pluCode"],
+          searchFields: ['name', 'metiCode', 'pluCode'],
           searchText,
           tableFilters,
           page,
@@ -152,6 +152,8 @@ const Ingredients = () => {
           ]}
           filters={drawerFilters}
           rowActionsWidth="130px"
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </Box>
     </div>

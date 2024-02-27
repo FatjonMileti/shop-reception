@@ -73,6 +73,16 @@ export const FrozenTraceabilityModal = ({
         metiCode: values?.metiCode || selectedProduct?.metiCode,
         productName: values?.productName || selectedProduct?.name
       }
+
+      if (values.traceabilityFrozenList.length === 0) {
+        showNotification({
+          message: `Cannot save without batch.`,
+          type: 'error'
+        })
+
+        return
+      }
+
       mutate(payload)
       resetForm()
       setSelectedRows([])
@@ -84,6 +94,7 @@ export const FrozenTraceabilityModal = ({
 
   const cancel = () => {
     closeModal()
+    setShowAddBatch(false)
     setSelectedProduct(undefined)
     setEditItem(null)
     setStep(0)

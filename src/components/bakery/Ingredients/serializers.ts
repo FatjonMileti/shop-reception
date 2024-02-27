@@ -7,6 +7,6 @@ export const toTableRowItems = items => items.map(item => ({
     familyName: item.familyName || '',
     imageUrl: item.imageUrl || '',
     cluster: item.cluster || '',
-    batch: item.batch || true,
+    batch: item.batch || false,
     productName: item.productName || '',
   }))

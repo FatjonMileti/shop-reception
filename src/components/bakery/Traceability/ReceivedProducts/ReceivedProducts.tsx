@@ -52,12 +52,12 @@ export const ReceivedProducts = () => {
     tableFilters: null,
     rowsPerPage: null,
     orderBy,
-    order
+    order,
   })
 
   const { showNotification } = useNotification()
 
-  const fetchData = async (page, rowsPerPage, tableFilters) => {
+  const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
 
     try {
@@ -68,7 +68,14 @@ export const ReceivedProducts = () => {
           page,
           rowsPerPage,
           orderBy,
-          order
+          order,
+          searchText,
+          searchFields: [
+            'product.metiCode',
+            'supplier.supplierCode',
+            'supplier.supplierName',
+            'product.name',
+          ]
         })
       )
       setTableItems(response.list.map(toTableRowItem))
@@ -89,9 +96,9 @@ export const ReceivedProducts = () => {
   }
 
   const families = useQuery(
-    ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
+    ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
     async () => {
-      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.subfamily')
         ?.value || []) as AutoCompleteValue[]
 
       const result = await makeCoreGetRequest(`/bakery/store/families`, {
@@ -119,9 +126,9 @@ export const ReceivedProducts = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'family')?.value],
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.family')
         ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
@@ -149,7 +156,7 @@ export const ReceivedProducts = () => {
 
   const drawerFilters: TableFiltersType[] = [
     {
-      name: 'family',
+      name: 'product.family',
       value: undefined,
       filter: (
         <Autocomplete
@@ -164,7 +171,7 @@ export const ReceivedProducts = () => {
       label: 'Familie'
     },
     {
-      name: 'subfamily',
+      name: 'product.subfamily',
       value: undefined,
       filter: (
         <Autocomplete
@@ -186,7 +193,7 @@ export const ReceivedProducts = () => {
         isModalOpen={isAddModalOpen}
         closeModal={() => setAddModalOpen(false)}
         onSuccess={() => {
-          fetchData(0, tableState.rowsPerPage, tableState.tableFilters)
+          fetchData(0, tableState.rowsPerPage, tableState.tableFilters, '')
         }}
       />
       <CorrectReceivedProduct
@@ -211,11 +218,12 @@ export const ReceivedProducts = () => {
         filters={drawerFilters}
         handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         handleRemoteData={fetchData}
+        hasSearchInput
         rows={tableItems.map(item => ({
           id: item.id,
           summary: (
             <AccordionSummaryWrapper>
-              <ImageCell value={''} imageUrl={item.imageUrl} />
+              <ImageCell value={''} imageUrl={item.product?.imageUrl} />
               <div className="title-and-content-wrapper">
                 <Typography variant="medium" className="title">
                   {item.product.name}

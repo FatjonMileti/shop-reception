@@ -41,7 +41,7 @@ export const OwnProductionTraceability = () => {
         toTableGETUrl({
           url: '/bakery/traceability/production',
           searchText,
-          searchFields: ['productName'],
+          searchFields: ['product.name'],
           tableFilters,
           page,
           rowsPerPage,
@@ -70,10 +70,11 @@ export const OwnProductionTraceability = () => {
   }
 
   const families = useQuery(
-    ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
+    ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
     async () => {
-      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
-        ?.value || []) as any
+      const subfamilyLiveFilterValue = (liveTableFilters.find(
+        filter => filter.name === 'product.subfamily'
+      )?.value || []) as any
 
       const result = await makeCoreGetRequest(`/bakery/store/families`, {
         params: {
@@ -100,10 +101,11 @@ export const OwnProductionTraceability = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'family')?.value],
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
-        ?.value || []) as any
+      const familyLiveFilterValue = (liveTableFilters.find(
+        filter => filter.name === 'product.family'
+      )?.value || []) as any
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
@@ -130,7 +132,7 @@ export const OwnProductionTraceability = () => {
 
   const drawerFilters: TableFiltersType[] = [
     {
-      name: 'family',
+      name: 'product.family',
       value: undefined,
       filter: (
         <Autocomplete
@@ -145,7 +147,7 @@ export const OwnProductionTraceability = () => {
       label: 'Familie'
     },
     {
-      name: 'subfamily',
+      name: 'product.subfamily',
       value: undefined,
       filter: (
         <Autocomplete

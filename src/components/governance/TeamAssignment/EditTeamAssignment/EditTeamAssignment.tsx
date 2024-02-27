@@ -42,7 +42,7 @@ const EditTeamAssignment: React.FC<EditTeamAssignmentProps> = props => {
     },
     onError: res => {
       showNotification({
-        message: `Error while fetching dropdown data. ${formatErrorMessage(res)}`,
+        message: `Error while saving assignment. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }

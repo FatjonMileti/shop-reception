@@ -1,5 +1,5 @@
 import { Filter } from 'components/core-ui/Table/TableDefinitions'
-import { get, set } from 'lodash'
+import { get, set, find } from 'lodash'
 
 export const toItemPayload = (item: { [key: string]: string }) => {
   let payload = {}
@@ -39,6 +39,10 @@ export const toTableRowItems = (items, columns) => {
   columns.map(column => {
     items.map((item, index) => {
       let value
+      if(column.isDynamic) {
+        value = find(item['applicationReportDynamicDtos'], column.find)
+        items[index][column.field] = value?.[column.originalField]
+      }
       if (column.field.includes('.')) {
         value = get(item, column.field)
       } else {

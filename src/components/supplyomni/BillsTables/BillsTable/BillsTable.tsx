@@ -77,7 +77,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           align: 'left',
           render: row => (
             <Box key={row.id}>
-              {row.deliveryType === STORE_DELIVERY_TYPE && (
+              {row.prepared !== null && (
                 <Switch
                   key={row.id}
                   checked={row.prepared}
