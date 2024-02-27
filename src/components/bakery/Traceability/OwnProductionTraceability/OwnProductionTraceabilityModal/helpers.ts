@@ -16,7 +16,7 @@ export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
     })
   }
 
-  const formattedProductionList = [...toBatchFormat(batchItems), ...toChargeFormat(childItems)]
+  const formattedProductionList = [...toBatchFormatEdit(batchItems), ...toChargeFormatEdit(childItems)]
 
   return {
     productId: editItem?.product?.id || selectedProduct?.id || '',
@@ -41,7 +41,7 @@ export const getValidationSchema = () =>
   Yup.object().shape({
     productionDate: Yup.date().required('Campul data productie trebuie completat'),
     chargeNumber: Yup.string().required('Campul sarja trebuie completat.'),
-    productionOperator: Yup.string().required('Campul operator productie trebuie completat.'),
+    productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
     quantity: Yup.string().required('Campul cantitate trebuie completat'),
     thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
     conform: Yup.boolean(),
@@ -59,7 +59,7 @@ export const getValidationSchema = () =>
     )
   })
 
-export const toBatchFormat = (batches, isEdit = false) => {
+export const toBatchFormat = (batches, quantity) => {
   return typeof batches === 'undefined'
     ? {
         batchId: '',
@@ -70,18 +70,39 @@ export const toBatchFormat = (batches, isEdit = false) => {
         dlc: 5
       }
     : batches?.map(item => ({
-        batchId: isEdit ? item.batch?.id : item?.id,
-        componentCode: isEdit ? item?.componentCode : item.product.metiCode,
-        componentQuantity: isEdit ? item.batch?.componentQuantity : item.batchQuantity,
-        componentName: isEdit ? item.batch?.componentName : item.batchName,
+        batchId: item?.id,
+        componentCode: item.product.metiCode,
+        componentQuantity: quantity, // item.batchQuantity,
+        componentName: item.batchName,
 
-        quantity: isEdit ? item.batch?.batchQuantity : item.batchQuantity,
-        openingDate: isEdit ? formatBakeryPayloadDate(item.openingDate) : item.entryDate,
-        dlc: isEdit ? item?.batch?.dlcDays : item?.dlcDays
+        quantity: quantity, //item.batchQuantity,
+        openingDate: item.entryDate,
+        dlc: item?.dlcDays
       }))
 }
 
-export const toChargeFormat = (charges, isEdit = false) => {
+export const toBatchFormatEdit = (batches, isEdit = false) => {
+  return typeof batches === 'undefined'
+    ? {
+        batchId: '',
+        componentCode: '',
+        componentQuantity: '',
+        quantity: 0,
+        openingDate: dayjs(),
+        dlc: 5
+      }
+    : batches?.map(item => ({
+        batchId: item.batch?.id,
+        componentCode: item?.componentCode,
+        componentQuantity: item.batch?.componentQuantity,
+        componentName: item.batch?.componentName,
+        quantity: item.batch?.batchQuantity,
+        openingDate: formatBakeryPayloadDate(item.openingDate),
+        dlc: item?.batch?.dlcDays
+      }))
+}
+
+export const toChargeFormat = (charges, quantity) => {
   return typeof charges === 'undefined'
     ? {
         childTraceabilityId: '',
@@ -92,15 +113,27 @@ export const toChargeFormat = (charges, isEdit = false) => {
         dlc: 5
       }
     : charges?.map(item => ({
-        childTraceabilityId: isEdit ? item.childTraceabilityId.id : item.id,
-        componentCode: isEdit ? item.componentCode : item.product.metiCode,
-        componentQuantity: isEdit ? item.batch.componentQuantity : item.quantity,
-        componentName: isEdit ? item.batch.componentName : item.chargeNumber,
-
-        quantity: isEdit ? item.batch.batchQuantity : item.quantity,
-        openingDate: isEdit ? formatBakeryPayloadDate(item.openingDate) : dayjs(),
-        dlc: isEdit ? item?.batch?.dlcDays : item.dlc
+        childTraceabilityId: item.id,
+        componentCode: item.product.metiCode,
+        componentQuantity: item.quantity,
+        componentName: item.chargeNumber,
+        quantity: quantity, //item.quantity,
+        openingDate: dayjs(),
+        dlc: item.dlc
       }))
+}
+
+export const toChargeFormatEdit = charges => {
+  return charges?.map(item => ({
+    childTraceabilityId: item.childTraceabilityId.id,
+    componentCode: item.componentCode,
+    componentQuantity: item.batch.componentQuantity,
+    componentName: item.batch.componentName,
+
+    quantity: item.batch.batchQuantity,
+    openingDate: formatBakeryPayloadDate(item.openingDate),
+    dlc: item?.batch?.dlcDays
+  }))
 }
 
 export const columns: any[] = [

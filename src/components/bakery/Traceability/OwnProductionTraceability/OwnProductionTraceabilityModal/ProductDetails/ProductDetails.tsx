@@ -164,7 +164,13 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             type="text"
             variant="outlined"
             label="Cantitate sarja"
-            onChange={e => formik.setFieldValue('quantity', e.currentTarget.value)}
+            onChange={({currentTarget: {value}}) => {
+              formik.setFieldValue('quantity', value)
+              formik.setFieldValue('traceabilityProductionList', formik.values.traceabilityProductionList.map(tf => ({
+                ...tf,
+                componentQuantity: value
+              })))
+            }}
             value={formik.values.quantity}
             name="quantity"
             infoIcon={selectedProduct?.metricUnit || ''}
@@ -183,7 +189,6 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             onChange={e => formik.setFieldValue('productionOperator', e.currentTarget.value)}
             value={formik.values.productionOperator}
             name="productionOperator"
-            required
             error={!!formik.errors.productionOperator}
             helperText={formik.errors.productionOperator as string}
           />
