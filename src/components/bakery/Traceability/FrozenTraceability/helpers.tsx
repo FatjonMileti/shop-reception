@@ -70,8 +70,8 @@ export const columns: any[] = [
         value={
           <BooleanIcon
             value={row?.batch?.hasExpireDate}
-            icon="Flag"
-            onFailure="#FFFFFF"
+            icon="CheckCircleOutline"
+            onFailure="#E5E5E5"
             onSuccess="#33691E"
           />
         }
@@ -92,8 +92,8 @@ export const columns: any[] = [
         value={
           <BooleanIcon
             value={row?.batch?.hasSecondaryDlc}
-            icon="Flag"
-            onFailure="#FFFFFF"
+            icon="CheckCircleOutline"
+            onFailure="#E5E5E5"
             onSuccess="#33691E"
           />
         }

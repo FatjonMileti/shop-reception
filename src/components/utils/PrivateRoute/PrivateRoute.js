@@ -10,10 +10,7 @@ const PrivateRoute = ({ component: RouteComponent, ...props }) => {
     const currentPathWithReplaceId = currentPath.replace(id, ':id')
     const currentPathWithoutId = currentPath.replace(/\/\d+$/, '/:id')
 
-    return (
-      appPages.map(app => app.route.url).includes(currentPathWithReplaceId) ||
-      appPages.map(app => app.route.url).includes(currentPathWithoutId)
-    )
+    return appPages.includes(currentPathWithReplaceId) || appPages.includes(currentPathWithoutId)
   }
 
   const isAuthorized = useMemo(() => {

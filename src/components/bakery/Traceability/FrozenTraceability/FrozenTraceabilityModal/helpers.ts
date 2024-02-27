@@ -1,11 +1,11 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate, getCurrentDate } from 'utils/helpers'
 
 export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
   return {
     productId: editItem?.product?.id || selectedProduct?.id || '',
     // storeId: editItem?.store?.id || null,
-    productionDate: editItem?.productionDate || null,
+    productionDate: editItem?.productionDate || getCurrentDate(),
     chargeNumber: editItem?.chargeNumber || null,
     productionOperator: editItem?.productionOperator || null,
     quantity: editItem?.quantity || null,

@@ -9,7 +9,7 @@ import React, { startTransition, useState } from 'react'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
-import { formatAndDownloadResponse, handleQueryError } from 'utils/helpers'
+import { formatAndDownloadResponse, getPreviousDay, handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
 import { Divider, Grid, debounce } from '@mui/material'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
@@ -18,7 +18,6 @@ import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
 import { IdNameInterface, ValueLabelInterface } from '../../interfaces'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
-import { getCurrentDate } from '../../../../utils/helpers'
 import { DownloadOutlined, PrintOutlined } from '@mui/icons-material'
 import { useProductsFilter } from './useProductsFilter'
 import { PrintModal } from '../../../core-ui/PrintModal'
@@ -44,7 +43,7 @@ export const ReportOwnProductionTraceability = () => {
 
   const productsFilter = useProductsFilter()
 
-  const currentDate = getCurrentDate()
+  const previousDay = getPreviousDay()
 
   const [tableState, setTableState] = useImmer(
     window.history.state.tableState || {
@@ -57,11 +56,11 @@ export const ReportOwnProductionTraceability = () => {
       tableFilters: [
         {
           name: 'startDate',
-          value: currentDate
+          value: previousDay
         },
         {
           name: 'endDate',
-          value: currentDate
+          value: previousDay
         },
       ]
     }
@@ -253,12 +252,12 @@ export const ReportOwnProductionTraceability = () => {
     },
     {
       name: 'startDate',
-      value: currentDate,
+      value: previousDay,
       filter: (
         <DatePicker
           label="Data inceput productie"
           variant="outlined"
-          value={currentDate}
+          value={previousDay}
           onChange={() => {}}
         />
       ),
@@ -267,12 +266,12 @@ export const ReportOwnProductionTraceability = () => {
     },
     {
       name: 'endDate',
-      value: currentDate,
+      value: previousDay,
       filter: (
         <DatePicker
           label="Data sfarsit productie"
           variant="outlined"
-          value={currentDate}
+          value={previousDay}
           onChange={() => {}}
         />
       ),
