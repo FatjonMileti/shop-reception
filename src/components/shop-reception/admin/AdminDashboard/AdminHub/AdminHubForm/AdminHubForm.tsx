@@ -114,7 +114,6 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
     },
     {
       onError: error => {
-        console.log('debug err', error)
         showNotification({
           message: `Error while fetching assigned users data. ${formatErrorMessage(error)}`,
           type: 'error'
