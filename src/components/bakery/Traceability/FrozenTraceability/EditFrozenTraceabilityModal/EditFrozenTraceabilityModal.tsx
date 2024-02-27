@@ -6,6 +6,7 @@ import { useFormik } from 'formik'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
+import { toBoolean } from 'utils/helpers'
 
 interface EditFrozenTraceabilityModalProps {
   isModalOpen: boolean
@@ -67,7 +68,7 @@ export const EditFrozenTraceabilityModal = ({
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', option)
+              formik.setFieldValue('conform', toBoolean(option))
               formik.setFieldValue('nonComplianceReason', null)
               formik.setFieldValue('productDestination', null)
             }}
@@ -77,11 +78,11 @@ export const EditFrozenTraceabilityModal = ({
             options={[
               {
                 label: 'DA',
-                value: 'true' // TODO: make this boolean after adding support in UI Library
+                value: 'true'
               },
               {
                 label: 'NU',
-                value: 'false' // TODO: make this boolean after adding support in UI Library
+                value: 'false'
               }
             ]}
           />
