@@ -99,7 +99,8 @@ export const columns: any[] = [
     field: 'consumedAmount',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    render: (row: any) => row.consumedAmount || ''
   },
   {
     title: 'Nr. zile DLC',
