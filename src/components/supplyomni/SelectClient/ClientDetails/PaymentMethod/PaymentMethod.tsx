@@ -85,7 +85,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   })
 
   const initialValues = useMemo(
-    () => getInitialValues(clientId, deliveryOptions?.[0].value),
+    () => getInitialValues(clientId, deliveryOptions?.[0]?.value),
     [clientId, deliveryOptions]
   )
 
