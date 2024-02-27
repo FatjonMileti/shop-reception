@@ -180,6 +180,7 @@ export const OwnProductionTraceabilityModal = ({
                   metiCode={formik.values?.metiCode || selectedProduct?.metiCode}
                   selectedProduct={selectedProduct}
                   recipeMetiCode={recipeMetiCode}
+                  formik={formik}
                 />,
 
                 <SelectCharge
@@ -192,6 +193,7 @@ export const OwnProductionTraceabilityModal = ({
                   selectedRows={selectedRows}
                   metiCode={formik.values?.metiCode || selectedProduct?.metiCode}
                   selectedProduct={selectedProduct}
+                  formik={formik}
                 />
               ][showAddBatch ? 2 : showAddCharge ? 3 : isEdit ? 1 : step]
             }
