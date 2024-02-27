@@ -252,6 +252,7 @@ VALUES
     -- Shop Reception (Admin)
     (166, 'Administrare depozite', '', '/shop-reception/admin/deposits', true, 149, true),
     (167, 'Administrare huburi', '', '/shop-reception/admin/hubs', true, 151, true),
+    (220, 'Administrare huburi', '', '/shop-reception/admin/hubs/deliveryInterval/:id', true, 151, false),
     (168, 'Administrare magazine', '', '/shop-reception/admin/stores', true, 152, true),
     (169, 'Administrare regiuni', '', '/shop-reception/admin/regions', true, 153, true),
     (170, 'Centralizare magazine si huburi', '', '/shop-reception/admin/centralization', true, 154, true),

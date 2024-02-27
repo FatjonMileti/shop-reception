@@ -2,6 +2,7 @@ export const URLS = {
   // admin
   AUTH_ADMIN_DEPOSITS: '/shop-reception/admin/deposits',
   AUTH_ADMIN_HUBS: '/shop-reception/admin/hubs',
+  AUTH_ADMIN_HUBS_DELIVERY_INTERVAL: '/shop-reception/admin/hubs/deliveryInterval/:id',
   AUTH_ADMIN_STORES: '/shop-reception/admin/stores',
   AUTH_ADMIN_REGIONS: '/shop-reception/admin/regions',
   AUTH_CENTRALIZATION_STORES_HUB: '/shop-reception/admin/centralization',

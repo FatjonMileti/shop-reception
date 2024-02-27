@@ -41,6 +41,7 @@ import { BalancePackageHistory } from './PackageDashboard/BalancePackages/Balanc
 import { BalancePackageForm } from './PackageDashboard/BalancePackages/BalancePackageForm'
 import { SeriesNumber } from './AdminDashboard/SeriesNumber'
 import { SGRProducts } from './AdminDashboard/SGRProducts'
+import DeliveryInterval from './AdminDashboard/AdminHub/DeliveryInterval/DeliveryInterval'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -61,6 +62,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={AdminHub}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_ADMIN_HUBS_DELIVERY_INTERVAL}
+        element={
+          <PrivateRoute
+            component={DeliveryInterval}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

@@ -32,12 +32,29 @@ interface AdminDeposit {
 
 interface AdminHub {
   id: number
-  hubCode: string
+  code: string
   name: string
-  hubType: string
+  type: string
   address: string
-  hourlyIntervals: number
   active: boolean
+  users?: string[]
+  packagingResponsibleEmails?: string[]
+}
+
+interface AdminHubDeliveryInterval {
+  receiveFromDeposit: boolean
+  depositId: number
+  depositName: string
+  depositCode: string
+  monday: boolean
+  tuesday: boolean
+  wednesday: boolean
+  thursday: boolean
+  friday: boolean
+  saturday: boolean
+  sunday: boolean
+  startInterval: string
+  endInterval: string
 }
 
 interface AdminStore {
