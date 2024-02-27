@@ -1,4 +1,4 @@
-import { BodyItem, Column } from '../ProductManagementTraceability/AccordionTable'
+import { BodyItem, HeaderItem, Column } from '../ProductManagementTraceability/AccordionTable'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 import React from 'react'
 import * as Yup from 'yup'
@@ -55,7 +55,10 @@ export const toTableRowItem = (item: Partial<ReceivedProduct>): ReceivedProduct 
 export const columns: Column[] = [
   {
     title: 'Data intrare in raion',
-    field: 'entryDate'
+    field: 'entryDate',
+    render: row => (
+      <BodyItem name="Data intrare in raion" value={formatPayloadDate(row.entryDate)} />
+    )
   },
   {
     title: 'Cod Meti',
@@ -93,8 +96,8 @@ export const columns: Column[] = [
         value={
           <BooleanIcon
             value={row.hasExpireDate}
-            icon="Flag"
-            onFailure="#FFFFFF"
+            icon="CheckCircleOutline"
+            onFailure="#E5E5E5"
             onSuccess="#33691E"
           />
         }
@@ -104,7 +107,7 @@ export const columns: Column[] = [
   {
     field: 'expireDate',
     render: row => (
-      <BodyItem name="Data expirare" value={<>{formatPayloadDate(row.expireDate)}</>} />
+      <BodyItem name="Data expirare" value={formatPayloadDate(row.expireDate)} />
     )
   },
   {
@@ -115,8 +118,8 @@ export const columns: Column[] = [
         value={
           <BooleanIcon
             value={row.hasSecondaryDlc}
-            icon="Flag"
-            onFailure="#FFFFFF"
+            icon="CheckCircleOutline"
+            onFailure="#E5E5E5"
             onSuccess="#33691E"
           />
         }
@@ -214,6 +217,13 @@ export const columns: Column[] = [
 ]
 
 export const headerItems: Column[] = [
+  {
+    title: 'Data intrare in raion',
+    field: 'entryDate',
+    render: row => (
+      <HeaderItem name="Data intrare in raion" value={formatPayloadDate(row.entryDate)} />
+    )
+  },
   {
     title: 'Cod METI',
     field: 'product.metiCode'

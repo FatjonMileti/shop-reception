@@ -69,9 +69,8 @@ export const FrozenTraceability = () => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
     const data = await response
     setEditItem(data)
-    
 
-    return <FrozenTraceabilityDescription chargeItem={tableData} item={data} />
+    return <FrozenTraceabilityDescription chargeItem={tableData?.find(d => d.id === rowId)} item={data} />
   }
 
   const families = useQuery(

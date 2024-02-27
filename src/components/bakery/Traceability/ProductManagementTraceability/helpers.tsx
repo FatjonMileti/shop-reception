@@ -5,6 +5,18 @@ import React from 'react'
 
 export const columns: Column[] = [
   {
+    title: 'Cod METI',
+    field: 'metiCode'
+  },
+  {
+    title: 'Familie',
+    field: 'familyName'
+  },
+  {
+    title: 'Subfamilie',
+    field: 'subfamily'
+  },
+  {
     title: 'Cod EAN',
     field: 'eanCodes'
   },
@@ -39,7 +51,12 @@ export const columns: Column[] = [
       <BodyItem
         name="Lot"
         value={
-          <BooleanIcon value={row.batch} icon="Flag" onFailure="#FFFFFF" onSuccess="#33691E" />
+          <BooleanIcon
+            value={row.batch}
+            icon="CheckCircleOutline"
+            onFailure="#E5E5E5"
+            onSuccess="#33691E"
+          />
         }
       />
     )

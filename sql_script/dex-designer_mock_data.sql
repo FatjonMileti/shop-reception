@@ -46,7 +46,7 @@ VALUES
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
     (9, 'Rapoarte', 'ReportsVolumetry', 'reports', true, 4),
     -- Bakery p2
-    (11, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
+    (11, 'Operator/ validator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
     -- Shop Reception (Admin)
     (12, 'Administrare', 'ProjectTeamGovernance', '/admin', true, 5),
     (13, 'Receptie marfa', 'ProjectTeamGovernance', '/reception', true, 5),
