@@ -5,6 +5,18 @@ import React from 'react'
 
 export const columns: Column[] = [
   {
+    title: 'Cod METI',
+    field: 'metiCode'
+  },
+  {
+    title: 'Familie',
+    field: 'familyName'
+  },
+  {
+    title: 'Subfamilie',
+    field: 'subfamily'
+  },
+  {
     title: 'Cod EAN',
     field: 'eanCodes'
   },

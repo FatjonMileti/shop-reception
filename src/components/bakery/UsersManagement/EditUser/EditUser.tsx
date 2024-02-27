@@ -223,7 +223,7 @@ const EditUser: React.FC<EditUserProps> = props => {
     }
     
     useEffect(() => {
-      if(editItem?.structureRoles?.length && editItem && roles && structRegion && structStore && structTraceabilityOp) {
+      if(editItem && roles && structRegion && structStore && structTraceabilityOp) {
         setIsRegionManagerChecked(false)
         setRegionMgValue(null)
         setIsStoreManagerChecked(false)

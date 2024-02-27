@@ -46,7 +46,7 @@ VALUES
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
     (9, 'Rapoarte', 'ReportsVolumetry', 'reports', true, 4),
     -- Bakery p2
-    (11, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
+    (11, 'Operator/ validator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
     -- Shop Reception (Admin)
     (12, 'Administrare', 'ProjectTeamGovernance', '/admin', true, 5),
     (13, 'Receptie marfa', 'ProjectTeamGovernance', '/reception', true, 5),
@@ -363,11 +363,11 @@ VALUES
     -- GG_RO_HQ_IT_DEX_BAKERY_REGION
     (7, 32), (7, 33), (7, 34), (7, 35), (7, 36),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE
-    (8, 17), (8, 18), (8, 19), (8, 20), (8, 21), (8, 22), (8, 23), (8, 54), (8, 55), (8, 191), (8, 192),
+    (8, 17), (8, 18), (8, 19), (8, 20), (8, 21), (8, 22), (8, 23), (8, 191), (8, 192),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER
-    (9, 17), (9, 18), (9, 19), (9, 20), (9, 21), (9, 22), (9, 23), (9, 54), (9, 55), (9, 191), (9, 192),
+    (9, 17), (9, 18), (9, 19), (9, 20), (9, 21), (9, 22), (9, 23),  (9, 191), (9, 192),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER
-    (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23), (10, 54), (10, 55), (10, 191), (10, 192),
+    (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23),  (10, 191), (10, 192),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY
     (12, 50), (12, 51), (12, 52), (12, 53), (12, 54), (12, 55),
     -- Supply OMNI

@@ -12,7 +12,7 @@ interface SelectBatchProps {
   onContinue: () => void
   onCancel: () => void
   setSelectedRows: Dispatch<any>
-  selectedProduct: Product
+  selectedProduct: Product | { metiCode: string }
 }
 
 export const SelectBatch = (props: SelectBatchProps) => {
@@ -31,16 +31,18 @@ export const SelectBatch = (props: SelectBatchProps) => {
           url: '/bakery/batch',
           page,
           rowsPerPage,
-          filters: [{
-            name: 'product.metiCode',
-            value: props.selectedProduct?.metiCode
-          }]
+          filters: [
+            {
+              name: 'product.metiCode',
+              value: props.selectedProduct?.metiCode
+            }
+          ]
         })
       )
       setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
-    } catch(error) {
+    } catch (error) {
       showNotification({
         message: `Error while fetching data: ${formatErrorMessage(error)}`,
         type: 'error'

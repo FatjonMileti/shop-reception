@@ -19,7 +19,7 @@ export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
     dlc: editItem?.dlc || null,
     // isFrozen: editItem?.frozen || null,
     metiCode: editItem?.product?.metiCode || selectedProduct?.metiCode,
-    // productName: editItem?.product?.name || selectedProduct?.name,
+    productName: editItem?.product?.name || selectedProduct?.name,
     traceabilityFrozenList: editItem
       ? toBatchFormat(editItem?.traceabilityFrozenList, true)
       : selectedRows

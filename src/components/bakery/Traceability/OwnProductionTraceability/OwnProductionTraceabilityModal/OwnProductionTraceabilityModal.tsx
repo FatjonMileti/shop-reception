@@ -4,7 +4,7 @@ import { useMutation } from 'react-query'
 import { CircularProgress, Grid } from '@mui/material'
 import { useNotification } from 'hooks'
 import { formatPayloadDate } from 'utils/helpers'
-import { makeCorePostRequest } from 'utils/api'
+import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails/ProductDetails'
 import { SelectBatch } from './SelectBatch'
@@ -34,8 +34,14 @@ export const OwnProductionTraceabilityModal = ({
   const [selectedRows, setSelectedRows] = useState([])
   const [showAddBatch, setShowAddBatch] = useState<boolean>(false)
   const [showAddCharge, setShowAddCharge] = useState<boolean>(false)
+
   const submitTask = async values => {
-    await makeCorePostRequest(`/bakery/traceability/production`, values)
+    isEdit
+      ? await makeCorePutRequest(
+          `/bakery/traceability/production/correction/${editItem.id}`,
+          values
+        )
+      : await makeCorePostRequest(`/bakery/traceability/production`, values)
   }
   const [recipeMetiCode, setRecipeMetiCode] = useState()
 

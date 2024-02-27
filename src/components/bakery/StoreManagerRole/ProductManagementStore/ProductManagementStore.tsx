@@ -36,7 +36,7 @@ const ProductManagementStore = () => {
         toTableGETUrl({
           url: '/bakery/product',
           searchText,
-          searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
+          searchFields: [],
           tableFilters,
           page,
           rowsPerPage,
