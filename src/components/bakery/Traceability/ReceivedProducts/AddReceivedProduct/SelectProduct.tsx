@@ -13,6 +13,7 @@ interface SelectProductProps {
   onCancel: () => void
   hideActions?: boolean
   customLabel?: string
+  isEdit?: boolean
 }
 export const SelectProduct = ({
   setSelectedProduct,
@@ -20,7 +21,8 @@ export const SelectProduct = ({
   onContinue,
   onCancel,
   hideActions = false,
-  customLabel
+  customLabel,
+  isEdit
 }: SelectProductProps) => {
   const [searchText, setSearchText] = React.useState(selectedProduct?.name || null)
   const [debouncedTerm, setDebouncedTerm] = React.useState('')
@@ -39,6 +41,14 @@ export const SelectProduct = ({
       keepPreviousData: true
     }
   )
+
+  const productName =
+    searchText !== null && searchText?.length > 0 ? searchText : selectedProduct?.name
+
+  if (isEdit && typeof productName === 'undefined') {
+    return <></>
+  }
+
   return (
     <Grid container rowSpacing={3.5}>
       <Grid item xs={hideActions ? 8 : 12}>
@@ -71,8 +81,8 @@ export const SelectProduct = ({
           }}
           value={
             selectedProduct && {
-              label: searchText || selectedProduct.name,
-              value: selectedProduct.id
+              label: productName,
+              value: selectedProduct?.id
             }
           }
           autoComplete={false}
@@ -82,7 +92,15 @@ export const SelectProduct = ({
       {!hideActions && (
         <Grid item xs={12} container justifyContent="space-between">
           <Grid>
-            <Button size="large" variant="outlined" label="Anuleaza" onClick={onCancel} />
+            <Button
+              size="large"
+              variant="outlined"
+              label="Anuleaza"
+              onClick={() => {
+                onCancel()
+                setSearchText(null)
+              }}
+            />
           </Grid>
           <Grid>
             <Button

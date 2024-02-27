@@ -33,6 +33,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     const newBatches = formik.values.traceabilityFrozenList.filter(batch => batch.batchId !== id)
     formik.setFieldValue('traceabilityFrozenList', newBatches)
   }
+
   return (
     <Grid container rowSpacing={3.5}>
       {!isEdit && (
@@ -77,6 +78,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 onCancel={() => {}}
                 customLabel={'Produs'}
                 hideActions
+                isEdit={isEdit}
               />
             </Grid>
           </>
@@ -103,7 +105,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             onChange={e => formik.setFieldValue('quantity', e.currentTarget.value)}
             value={formik.values.quantity}
             name="quantity"
-            infoIcon={selectedProduct?.metricUnit}
+            infoIcon={selectedProduct?.metricUnit || ''}
             required
             error={!!formik.errors.quantity}
             helperText={formik.errors.quantity as string}
