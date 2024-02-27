@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid, Paper, useMediaQuery } from '@mui/material'
+import { Box, CircularProgress, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
 import s from './ClientDetails.modules.scss'
 import { useParams } from 'react-router-dom'
 import { PaymentMethod } from './PaymentMethod'
@@ -61,7 +61,9 @@ const ClientDetails: React.FC = props => {
         >
           <Paper sx={{ pt: 0, pb: 2, minHeight: '400px' }}>
             <Box sx={{ pl: 3, pr: 3, pt: 0 }}>
-              {!isClientLoading ? (
+              {!isLoadingGetProducts && products.list.length === 0 ? (
+                <Typography>Adaugati produse in cos pentru a finaliza comanda.</Typography>
+              ) : !isClientLoading ? (
                 <PaymentMethod clientId={client?.id || undefined} />
               ) : (
                 <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />

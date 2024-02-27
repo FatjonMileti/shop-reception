@@ -112,7 +112,7 @@ const ApplicationUsageReport = () => {
         )
 
       const url = toTableGETUrl({
-        url: '/bakery/report/download/application',
+        url: '/bakery/report/download/trainee/application',
         filters: filters
       })
       const response = await makeCoreGetFileRequest(url, {
