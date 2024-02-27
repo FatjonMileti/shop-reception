@@ -13,6 +13,7 @@ interface SelectBatchProps {
   onCancel: () => void
   setSelectedRows: Dispatch<any>
   selectedProduct: Product | { metiCode: string }
+  formik: any
 }
 
 export const SelectBatch = (props: SelectBatchProps) => {
@@ -64,7 +65,7 @@ export const SelectBatch = (props: SelectBatchProps) => {
             isLoading={isLoading}
             columns={columns}
             totalCount={totalCount}
-            selectRows={rows => setSelectedRows(toBatchFormat(rows))}
+            selectRows={rows => setSelectedRows(toBatchFormat({batches: rows, quantity: props.formik.values?.quantity}))}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
           />

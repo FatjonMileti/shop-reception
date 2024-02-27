@@ -161,6 +161,7 @@ export const FrozenTraceabilityModal = ({
                     setStep(1)
                   }}
                   setSelectedRows={setSelectedRows}
+                  formik={formik}
                 />
               ][showAddBatch ? 2 : isEdit ? 1 : step]
             }
