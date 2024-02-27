@@ -147,7 +147,8 @@ export const columns: any[] = [
     field: 'consumedAmount',
     align: 'left',
     type: 'string',
-    width: '80px'
+    width: '80px',
+    render: (row: any) => row.consumedAmount || ''
   },
   {
     title: 'Data deschidere',
