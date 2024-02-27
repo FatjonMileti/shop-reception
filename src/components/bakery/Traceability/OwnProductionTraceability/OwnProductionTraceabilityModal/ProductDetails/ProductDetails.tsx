@@ -27,7 +27,15 @@ interface ProductDetailsProps {
 }
 
 export const ProductDetails = (props: ProductDetailsProps) => {
-  const { formik, onCancel, onSelectBatch, selectedProduct, selectedRows, isEdit, setRecipeMetiCode } = props
+  const {
+    formik,
+    onCancel,
+    onSelectBatch,
+    selectedProduct,
+    selectedRows,
+    isEdit,
+    setRecipeMetiCode
+  } = props
 
   const { showNotification } = useNotification()
 
@@ -84,7 +92,12 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 label: 'Produs cod Meti:',
                 name: selectedProduct?.metiCode
               },
-              { label: 'Info:', name: `Greutate neta articol conform reteta: ${receip?.details?.recipeQuantity || ''}${receip?.details?.recipeUnit || ''}` }
+              {
+                label: 'Info:',
+                name: `Greutate neta articol conform reteta: ${
+                  receip?.details?.recipeQuantity || ''
+                }${receip?.details?.recipeUnit || ''}`
+              }
             ]}
           />
         </Grid>
@@ -115,6 +128,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 onCancel={() => {}}
                 customLabel={'Produs'}
                 hideActions
+                isEdit={isEdit}
               />
             </Grid>
           </>
@@ -153,7 +167,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             onChange={e => formik.setFieldValue('quantity', e.currentTarget.value)}
             value={formik.values.quantity}
             name="quantity"
-            infoIcon={selectedProduct.metricUnit}
+            infoIcon={selectedProduct?.metricUnit || ''}
             required
             error={!!formik.errors.quantity}
             helperText={formik.errors.quantity as string}
