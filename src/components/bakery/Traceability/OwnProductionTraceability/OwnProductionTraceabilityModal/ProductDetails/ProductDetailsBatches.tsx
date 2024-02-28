@@ -66,7 +66,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
           </>
           <>
             {formik.values.traceabilityProductionList.map((item, idx) => {
-              if (item.componentCode === batch.componentCode || item.batchId) {
+              if (item.componentCode === batch.componentCode && item.batchId) {
                 return (
                   <Grid item container xs={12} spacing={2}>
                     <Grid item xs={3}>

@@ -6,6 +6,7 @@ import { useFormik } from 'formik'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
+import { toBoolean } from 'utils/helpers'
 
 interface EditOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -67,7 +68,7 @@ export const EditOwnProductionTraceabilityModal = ({
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', option)
+              formik.setFieldValue('conform', toBoolean(option))
               formik.setFieldValue('nonComplianceReason', null)
               formik.setFieldValue('productDestination', null)
             }}
@@ -77,11 +78,11 @@ export const EditOwnProductionTraceabilityModal = ({
             options={[
               {
                 label: 'DA',
-                value: 'true' // TODO: make this boolean after adding support in UI Library
+                value: 'true'
               },
               {
                 label: 'NU',
-                value: 'false' // TODO: make this boolean after adding support in UI Library
+                value: 'false' 
               }
             ]}
           />
@@ -107,7 +108,7 @@ export const EditOwnProductionTraceabilityModal = ({
               dotStyle
               name="isVerified"
               onChange={(e, option) => {
-                formik.setFieldValue('isVerified', option)
+                formik.setFieldValue('isVerified', toBoolean(option))
               }}
               value={formik.values.isVerified}
               defaultValue={formik.initialValues.isVerified ? 'DA' : 'NU'}
@@ -115,11 +116,11 @@ export const EditOwnProductionTraceabilityModal = ({
               options={[
                 {
                   label: 'DA',
-                  value: 'true' // TODO: make this boolean after adding support in UI Library
+                  value: 'true' 
                 },
                 {
                   label: 'NU',
-                  value: 'false' // TODO: make this boolean after adding support in UI Library
+                  value: 'false' 
                 }
               ]}
             />

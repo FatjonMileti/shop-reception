@@ -12,6 +12,7 @@ import { AddActionIcon, DeleteActionIcon } from 'icons'
 import { FormInfoItems } from '../../../../core-ui/FormInfoItems'
 import dayjs from 'dayjs'
 import { SelectProduct } from '../../ReceivedProducts/AddReceivedProduct/SelectProduct'
+import { toBoolean } from 'utils/helpers'
 
 interface ProductDetailsProps {
   onCancel: () => void
@@ -168,7 +169,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', option)
+              formik.setFieldValue('conform', toBoolean(option))
               formik.setFieldValue('nonComplianceReason', null)
               formik.setFieldValue('productDestination', null)
             }}
@@ -178,11 +179,11 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             options={[
               {
                 label: 'DA',
-                value: 'true' // TODO: make this boolean after adding support in UI Library
+                value: 'true'
               },
               {
                 label: 'NU',
-                value: 'false' // TODO: make this boolean after adding support in UI Library
+                value: 'false'
               }
             ]}
           />

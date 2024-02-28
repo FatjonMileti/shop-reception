@@ -125,12 +125,12 @@ export const toChargeFormat = (charges, quantity) => {
 
 export const toChargeFormatEdit = charges => {
   return charges?.map(item => ({
-    childTraceabilityId: item.childTraceabilityId.id,
+    childTraceabilityId: item.childTraceabilityId?.id,
     componentCode: item.componentCode,
-    componentQuantity: item.batch.componentQuantity,
-    componentName: item.batch.componentName,
+    componentQuantity: item.batch?.componentQuantity,
+    componentName: item.batch?.componentName,
 
-    quantity: item.batch.batchQuantity,
+    quantity: item.batch?.batchQuantity,
     openingDate: formatBakeryPayloadDate(item.openingDate),
     dlc: item?.batch?.dlcDays
   }))
