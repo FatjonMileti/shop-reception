@@ -21,14 +21,16 @@ export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
     metiCode: editItem?.product?.metiCode || selectedProduct?.metiCode,
     productName: editItem?.product?.name || selectedProduct?.name,
     traceabilityFrozenList: editItem
-      ? toBatchFormatEdit(editItem?.traceabilityFrozenList)
+      ? editItem?.traceabilityFrozenList ? toBatchFormatEdit(editItem?.traceabilityFrozenList) : []
       : selectedRows
   }
 }
 
 export const getValidationSchema = () =>
   Yup.object().shape({
-    productionDate: Yup.date().required('Campul data productie trebuie completat'),
+    productionDate: Yup.date()
+    .max(new Date(), 'Data de productie nu poate fi in viitor.')
+    .required('Campul data productie trebuie completat.'),
     chargeNumber: Yup.string().required('Campul sarja trebuie completat.'),
     productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
     quantity: Yup.string().required('Campul cantitate trebuie completat'),

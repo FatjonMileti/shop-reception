@@ -141,13 +141,14 @@ export const EditReceivedProduct = ({
                   }}
                   error={!!form.errors.batchStatus}
                   helperText={form.errors.batchStatus as string}
+                  required
                 />
               </Grid>
 
               <Grid item sm={6} xs={12}>
                 <Autocomplete
                   variant="outlined"
-                  label="Motiv"
+                  label="Motiv inchidere lot"
                   value={
                     closeReasonOptions.find(({ value }) => value === form.values.closeReason) ||
                     null
@@ -158,6 +159,7 @@ export const EditReceivedProduct = ({
                   options={closeReasonOptions}
                   error={!!form.errors.closeReason}
                   helperText={form.errors.closeReason as string}
+                  required={form.values.batchStatus === 'CLOSED'}
                 />
               </Grid>
             </Grid>

@@ -16,7 +16,10 @@ export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
     })
   }
 
-  const formattedProductionList = [...toBatchFormatEdit(batchItems), ...toChargeFormatEdit(childItems)]
+  const formattedProductionList = [
+    ...toBatchFormatEdit(batchItems),
+    ...toChargeFormatEdit(childItems)
+  ]
 
   return {
     productId: editItem?.product?.id || selectedProduct?.id || '',
@@ -39,7 +42,10 @@ export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
 
 export const getValidationSchema = () =>
   Yup.object().shape({
-    productionDate: Yup.date().required('Campul data productie trebuie completat'),
+    productionDate: Yup.date()
+      .max(new Date(), 'Data de productie nu poate fi in viitor.')
+      .required('Campul data productie trebuie completat.'),
+
     chargeNumber: Yup.string().required('Campul sarja trebuie completat.'),
     productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
     quantity: Yup.string().required('Campul cantitate trebuie completat'),
