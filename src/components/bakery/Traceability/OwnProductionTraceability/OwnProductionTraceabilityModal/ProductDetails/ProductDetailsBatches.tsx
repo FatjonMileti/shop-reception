@@ -66,9 +66,9 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
           </>
           <>
             {formik.values.traceabilityProductionList.map((item, idx) => {
-              if (item.componentCode === batch.componentCode && item.batchId) {
+              if (item.componentCode === batch.componentCode || item.batchId) {
                 return (
-                  <>
+                  <Grid item container xs={12} spacing={2}>
                     <Grid item xs={3}>
                       <Input
                         type="text"
@@ -95,19 +95,19 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                         infoIcon={'kg'}
                       />
                     </Grid>
-                    <Grid item xs={3}>
-                      <DatePicker
-                        label="Data deschidere"
-                        onChange={(date: any) =>
-                          formik.setFieldValue(
-                            `traceabilityProductionList[${idx}].openingDate`,
-                            date
-                          )
-                        }
-                        value={dayjs(item.openingDate)}
-                        variant="outlined"
-                      />
-                    </Grid>
+                    {/*<Grid item xs={3}>*/}
+                    {/*  <DatePicker*/}
+                    {/*    label="Data deschidere"*/}
+                    {/*    onChange={(date: any) =>*/}
+                    {/*      formik.setFieldValue(*/}
+                    {/*        `traceabilityProductionList[${idx}].openingDate`,*/}
+                    {/*        date*/}
+                    {/*      )*/}
+                    {/*    }*/}
+                    {/*    value={dayjs(item.openingDate)}*/}
+                    {/*    variant="outlined"*/}
+                    {/*  />*/}
+                    {/*</Grid>*/}
                     <Grid
                       item
                       xs={3}
@@ -125,7 +125,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                         <DeleteActionIcon />{' '}
                       </Button>
                     </Grid>
-                  </>
+                  </Grid>
                 )
               }
             })}
@@ -178,7 +178,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
           {formik.values.traceabilityProductionList.map((charge, idx) => {
             if (charge.componentCode === item.componentCode && charge.childTraceabilityId) {
               return (
-                <>
+                <Grid item container xs={12} spacing={2}>
                   <Grid item xs={3}>
                     <Input
                       type="text"
@@ -205,16 +205,16 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                       infoIcon={'kg'}
                     />
                   </Grid>
-                  <Grid item xs={3}>
-                    <DatePicker
-                      label="Data deschidere"
-                      onChange={(date: any) =>
-                        formik.setFieldValue(`traceabilityProductionList[${idx}].openingDate`, date)
-                      }
-                      value={dayjs(charge.openingDate)}
-                      variant="outlined"
-                    />
-                  </Grid>
+                  {/*<Grid item xs={3}>*/}
+                  {/*  <DatePicker*/}
+                  {/*    label="Data deschidere"*/}
+                  {/*    onChange={(date: any) =>*/}
+                  {/*      formik.setFieldValue(`traceabilityProductionList[${idx}].openingDate`, date)*/}
+                  {/*    }*/}
+                  {/*    value={dayjs(charge.openingDate)}*/}
+                  {/*    variant="outlined"*/}
+                  {/*  />*/}
+                  {/*</Grid>*/}
                   <Grid
                     item
                     xs={3}
@@ -232,7 +232,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                       <DeleteActionIcon />{' '}
                     </Button>
                   </Grid>
-                </>
+                </Grid>
               )
             }
           })}

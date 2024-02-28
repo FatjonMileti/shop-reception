@@ -16,6 +16,7 @@ interface SelectBatchProps {
   metiCode: any
   selectedProduct: Product
   recipeMetiCode: string
+  formik: any
 }
 
 export const SelectBatch = (props: SelectBatchProps) => {
@@ -54,7 +55,7 @@ export const SelectBatch = (props: SelectBatchProps) => {
 
   const onSelectRows = rows => {
     const newItems = rows.filter(row => !selectedRows.some(item => item.batchId === row.id))
-    const newRows = [...selectedRows, ...toBatchFormat(newItems)]
+    const newRows = [...selectedRows, ...toBatchFormat(newItems, props.formik.values?.quantity)]
     setSelectedRows(newRows)
   }
 

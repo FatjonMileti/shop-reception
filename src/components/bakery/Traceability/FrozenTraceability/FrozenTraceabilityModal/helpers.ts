@@ -21,7 +21,7 @@ export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
     metiCode: editItem?.product?.metiCode || selectedProduct?.metiCode,
     productName: editItem?.product?.name || selectedProduct?.name,
     traceabilityFrozenList: editItem
-      ? toBatchFormat(editItem?.traceabilityFrozenList, true)
+      ? toBatchFormatEdit(editItem?.traceabilityFrozenList)
       : selectedRows
   }
 }
@@ -30,7 +30,7 @@ export const getValidationSchema = () =>
   Yup.object().shape({
     productionDate: Yup.date().required('Campul data productie trebuie completat'),
     chargeNumber: Yup.string().required('Campul sarja trebuie completat.'),
-    productionOperator: Yup.string().required('Campul operator productie trebuie completat.'),
+    productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
     quantity: Yup.string().required('Campul cantitate trebuie completat'),
     thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
     conform: Yup.boolean(),
@@ -39,19 +39,29 @@ export const getValidationSchema = () =>
       Yup.object().shape({
         batchId: Yup.string(),
         quantity: Yup.number(),
-        openingDate: Yup.date(),
+        // openingDate: Yup.date(),
         dlc: Yup.string()
       })
     )
   })
 
-export const toBatchFormat = (batches, isEdit = false) => {
+export const toBatchFormat = ({ batches, quantity }) => {
   return batches.map(item => ({
-    batchName: isEdit ? item.batch.batchName : item.batchName,
-    batchId: isEdit ? item.batch.id : item.id,
-    quantity: isEdit ? item.batch.batchQuantity : item.batchQuantity,
-    openingDate: isEdit ? formatBakeryPayloadDate(item.openingDate) : item.entryDate,
-    dlc: isEdit ? item.batch.dlcDays : item.dlcDays
+    batchName: item.batchName,
+    batchId: item.id,
+    quantity: quantity, // item.batchQuantity,
+    openingDate: item.entryDate,
+    dlc: item.dlcDays
+  }))
+}
+
+export const toBatchFormatEdit = batches => {
+  return batches.map(item => ({
+    batchName: item.batch.batchName,
+    batchId: item.batch.id,
+    quantity: item.batch.batchQuantity,
+    openingDate: formatBakeryPayloadDate(item.openingDate),
+    dlc: item.batch.dlcDays
   }))
 }
 
@@ -99,7 +109,8 @@ export const columns: any[] = [
     field: 'consumedAmount',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    render: (row: any) => row.consumedAmount || ''
   },
   {
     title: 'Nr. zile DLC',
