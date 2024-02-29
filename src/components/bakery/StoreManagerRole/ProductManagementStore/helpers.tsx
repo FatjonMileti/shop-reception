@@ -73,6 +73,7 @@ export const columns = [
     title: 'Lot',
     field: 'batch',
     align: 'left',
+    disableSorting: true,
     render: row => (
       <BooleanIcon value={row.batch} icon="Flag" onFailure='#FFFFFF' onSuccess='#33691E' />
     )
