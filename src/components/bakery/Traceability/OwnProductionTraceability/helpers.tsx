@@ -65,7 +65,7 @@ export const columns: any[] = [
   }
 ]
 
-export const toTableRowItems = (items: any[], parent: any) => {
+export const toTableRowItems = (items: any[]) => {
   return items.map(item => ({
     id: item?.id,
     componentCode: item.componentCode || '',
@@ -76,7 +76,7 @@ export const toTableRowItems = (items: any[], parent: any) => {
     batchQuantity: item.batch?.batchQuantity || '',
     productionDate: formatBakeryPayloadDate(item.batch?.entryDate) || '',
 
-    storeName: parent.store.name || '',
+    storeName: item?.batch?.supplier?.supplierName || '',
     dlc: formatBakeryPayloadDate(item.dlc) || '',
     dlcSec: formatBakeryPayloadDate(item.dlc) || '',
     openingDate: formatBakeryPayloadDate(item.openingDate) || ''

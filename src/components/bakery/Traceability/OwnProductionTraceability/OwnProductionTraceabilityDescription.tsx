@@ -6,8 +6,8 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 import { Fragment } from 'react'
 import { Table } from '@fullscreendigital/carrefour-dex-fe'
 
-const OwnProductionTraceabilityDescription = (item, chargeItem) => {
-  const { traceabilityProductionList } = item.item
+const OwnProductionTraceabilityDescription = ({ item, chargeItem = null }) => {
+  const { traceabilityProductionList } = item
   const bodyItemValue = (productionItem, frozenItem, columnField) => {
     const isBoolean =
       typeof frozenItem[columnField] === 'boolean'
@@ -32,7 +32,7 @@ const OwnProductionTraceabilityDescription = (item, chargeItem) => {
               hideCheckbox={true}
               isLoading={false}
               columns={columns}
-              rows={toTableRowItems(traceabilityProductionList, item.item)}
+              rows={toTableRowItems(traceabilityProductionList)}
               disablePagination
             />
             <Grid container spacing={2} columns={12} mt={1}>
@@ -40,11 +40,11 @@ const OwnProductionTraceabilityDescription = (item, chargeItem) => {
                 return (
                   <Fragment key={index}>
                     {column.render ? (
-                      column.render(item.item, chargeItem)
+                      column.render(item)
                     ) : (
                       <BodyItem
                         name={column.title}
-                        value={bodyItemValue(item.item, item.item, column.field) || ''}
+                        value={bodyItemValue(item, item, column.field) || ''}
                       />
                     )}
                   </Fragment>
@@ -56,9 +56,9 @@ const OwnProductionTraceabilityDescription = (item, chargeItem) => {
       </AccordionDetailsWrapper>
 
       <Grid item my={1}>
-        {traceabilityProductionList.map(productionItem => {
-          return productionItem.childTraceability ? (
-            <>
+        {traceabilityProductionList.map((productionItem, pIndex) => (
+          <Fragment key={pIndex}>
+            {productionItem.childTraceability ? (
               <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -84,11 +84,9 @@ const OwnProductionTraceabilityDescription = (item, chargeItem) => {
                   <OwnProductionTraceabilityDescription item={productionItem.childTraceability} />
                 </AccordionDetails>
               </Accordion>
-            </>
-          ) : (
-            <></>
-          )
-        })}
+            ) : null}
+          </Fragment>
+        ))}
       </Grid>
     </Grid>
   )

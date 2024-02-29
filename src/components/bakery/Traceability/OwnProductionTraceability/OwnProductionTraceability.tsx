@@ -26,7 +26,7 @@ export const OwnProductionTraceability = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [tableData, setTableData] = useState(null)
+  const [tableData, setTableData] = useState([])
   const [rows, setRows] = useState([])
   const [editItem, setEditItem] = useState(null)
   const [isEdit, setIsEdit] = useState<boolean>(false)
@@ -66,7 +66,7 @@ export const OwnProductionTraceability = () => {
     const data = await response
     setEditItem(data)
 
-    return <OwnProductionTraceabilityDescription item={data} chargeItem={tableData} />
+    return <OwnProductionTraceabilityDescription item={data} chargeItem={tableData?.find(td => td.id === rowId)} />
   }
 
   const families = useQuery(
@@ -216,7 +216,7 @@ export const OwnProductionTraceability = () => {
               backgroundColor: '#0970E6',
               onClick: async (e, rowId) => {
                 setIsEditModalOpen(true)
-                setVerifyItem(tableData.find(data => data.id === rowId))
+                setVerifyItem(tableData?.find(data => data.id === rowId))
               },
               desktopIcon: <EditActionIcon />
             }
