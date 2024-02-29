@@ -2,12 +2,13 @@ import { Grid, Divider, CircularProgress } from '@mui/material'
 import { Button, DatePicker, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { AddActionIcon, DeleteActionIcon } from 'icons'
 import dayjs from 'dayjs'
+import { quantityCalculation } from '../helpers'
 
 interface ProductDetailsBatchesProps {
   onSelectBatch: Function
   productMetiCode: any
   formik: any
-  onDeleteBatch: Function,
+  onDeleteBatch: Function
   receip: any
   setRecipeMetiCode: Function
 }
@@ -15,9 +16,9 @@ interface ProductDetailsBatchesProps {
 export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
   const { formik, productMetiCode, onSelectBatch, onDeleteBatch, receip, setRecipeMetiCode } = props
 
-  const metiCode = productMetiCode || formik.values.metiCode;
+  const metiCode = productMetiCode || formik.values.metiCode
 
-  if (typeof metiCode === 'undefined' ) {
+  if (typeof metiCode === 'undefined') {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
@@ -41,33 +42,38 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                 type="text"
                 variant="outlined"
                 label={`Cantitatea`}
-                value={batch.componentQuantity}
+                value={`${quantityCalculation(
+                  formik.values.quantity,
+                  batch.componentQuantity,
+                  receip.details.recipeQuantity
+                )}`}
                 name="batchId"
                 disabled
               />
             </Grid>
 
             <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
-              <IconButton
-                startIcon={<AddActionIcon />}
-                size="large"
-                variant="outlined"
-                label="Adauga lot"
-                onClick={() => {
-                  onSelectBatch()
-                  setRecipeMetiCode(batch.componentCode)
-                }}
-                style={{ height: '40px', fontSize: '10px' }}
-              />
+              {batch.withBatch && (
+                <IconButton
+                  startIcon={<AddActionIcon />}
+                  size="large"
+                  variant="outlined"
+                  label="Adauga lot"
+                  onClick={() => {
+                    onSelectBatch()
+                    setRecipeMetiCode(batch.componentCode)
+                  }}
+                  style={{ height: '40px', fontSize: '10px' }}
+                />
+              )}
             </Grid>
-
             <Grid item xs={3}></Grid>
           </>
           <>
             {formik.values.traceabilityProductionList.map((item, idx) => {
               if (item.componentCode === batch.componentCode && item.batchId) {
                 return (
-                  <>
+                  <Grid item container xs={12} spacing={2}>
                     <Grid item xs={3}>
                       <Input
                         type="text"
@@ -94,19 +100,19 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                         infoIcon={'kg'}
                       />
                     </Grid>
-                    <Grid item xs={3}>
-                      <DatePicker
-                        label="Data deschidere"
-                        onChange={(date: any) =>
-                          formik.setFieldValue(
-                            `traceabilityProductionList[${idx}].openingDate`,
-                            date
-                          )
-                        }
-                        value={dayjs(item.openingDate)}
-                        variant="outlined"
-                      />
-                    </Grid>
+                    {/*<Grid item xs={3}>*/}
+                    {/*  <DatePicker*/}
+                    {/*    label="Data deschidere"*/}
+                    {/*    onChange={(date: any) =>*/}
+                    {/*      formik.setFieldValue(*/}
+                    {/*        `traceabilityProductionList[${idx}].openingDate`,*/}
+                    {/*        date*/}
+                    {/*      )*/}
+                    {/*    }*/}
+                    {/*    value={dayjs(item.openingDate)}*/}
+                    {/*    variant="outlined"*/}
+                    {/*  />*/}
+                    {/*</Grid>*/}
                     <Grid
                       item
                       xs={3}
@@ -124,7 +130,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                         <DeleteActionIcon />{' '}
                       </Button>
                     </Grid>
-                  </>
+                  </Grid>
                 )
               }
             })}
@@ -177,7 +183,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
           {formik.values.traceabilityProductionList.map((charge, idx) => {
             if (charge.componentCode === item.componentCode && charge.childTraceabilityId) {
               return (
-                <>
+                <Grid item container xs={12} spacing={2}>
                   <Grid item xs={3}>
                     <Input
                       type="text"
@@ -204,16 +210,16 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                       infoIcon={'kg'}
                     />
                   </Grid>
-                  <Grid item xs={3}>
-                    <DatePicker
-                      label="Data deschidere"
-                      onChange={(date: any) =>
-                        formik.setFieldValue(`traceabilityProductionList[${idx}].openingDate`, date)
-                      }
-                      value={dayjs(charge.openingDate)}
-                      variant="outlined"
-                    />
-                  </Grid>
+                  {/*<Grid item xs={3}>*/}
+                  {/*  <DatePicker*/}
+                  {/*    label="Data deschidere"*/}
+                  {/*    onChange={(date: any) =>*/}
+                  {/*      formik.setFieldValue(`traceabilityProductionList[${idx}].openingDate`, date)*/}
+                  {/*    }*/}
+                  {/*    value={dayjs(charge.openingDate)}*/}
+                  {/*    variant="outlined"*/}
+                  {/*  />*/}
+                  {/*</Grid>*/}
                   <Grid
                     item
                     xs={3}
@@ -231,7 +237,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                       <DeleteActionIcon />{' '}
                     </Button>
                   </Grid>
-                </>
+                </Grid>
               )
             }
           })}

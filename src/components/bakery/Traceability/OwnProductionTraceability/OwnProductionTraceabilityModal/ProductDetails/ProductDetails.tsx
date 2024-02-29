@@ -15,6 +15,7 @@ import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from '../../../../../../utils/api'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../hooks'
+import { toBoolean } from 'utils/helpers'
 
 interface ProductDetailsProps {
   onCancel: () => void
@@ -27,7 +28,15 @@ interface ProductDetailsProps {
 }
 
 export const ProductDetails = (props: ProductDetailsProps) => {
-  const { formik, onCancel, onSelectBatch, selectedProduct, selectedRows, isEdit, setRecipeMetiCode } = props
+  const {
+    formik,
+    onCancel,
+    onSelectBatch,
+    selectedProduct,
+    selectedRows,
+    isEdit,
+    setRecipeMetiCode
+  } = props
 
   const { showNotification } = useNotification()
 
@@ -84,7 +93,12 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 label: 'Produs cod Meti:',
                 name: selectedProduct?.metiCode
               },
-              { label: 'Info:', name: `Greutate neta articol conform reteta: ${receip?.details?.recipeQuantity || ''}${receip?.details?.recipeUnit || ''}` }
+              {
+                label: 'Info:',
+                name: `Greutate neta articol conform reteta: ${
+                  receip?.details?.recipeQuantity || ''
+                }${receip?.details?.recipeUnit || ''}`
+              }
             ]}
           />
         </Grid>
@@ -115,6 +129,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 onCancel={() => {}}
                 customLabel={'Produs'}
                 hideActions
+                isEdit={isEdit}
               />
             </Grid>
           </>
@@ -150,10 +165,16 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             type="text"
             variant="outlined"
             label="Cantitate sarja"
-            onChange={e => formik.setFieldValue('quantity', e.currentTarget.value)}
+            onChange={({currentTarget: {value}}) => {
+              formik.setFieldValue('quantity', value)
+              formik.setFieldValue('traceabilityProductionList', formik.values.traceabilityProductionList.map(tf => ({
+                ...tf,
+                componentQuantity: value
+              })))
+            }}
             value={formik.values.quantity}
             name="quantity"
-            infoIcon={selectedProduct.metricUnit}
+            infoIcon={selectedProduct?.metricUnit || ''}
             required
             error={!!formik.errors.quantity}
             helperText={formik.errors.quantity as string}
@@ -169,7 +190,6 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             onChange={e => formik.setFieldValue('productionOperator', e.currentTarget.value)}
             value={formik.values.productionOperator}
             name="productionOperator"
-            required
             error={!!formik.errors.productionOperator}
             helperText={formik.errors.productionOperator as string}
           />
@@ -199,7 +219,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', option)
+              formik.setFieldValue('conform', toBoolean(option))
               formik.setFieldValue('nonComplianceReason', null)
               formik.setFieldValue('productDestination', null)
             }}
@@ -209,11 +229,11 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             options={[
               {
                 label: 'DA',
-                value: 'true' // TODO: make this boolean after adding support in UI Library
+                value: 'true' 
               },
               {
                 label: 'NU',
-                value: 'false' // TODO: make this boolean after adding support in UI Library
+                value: 'false' 
               }
             ]}
           />

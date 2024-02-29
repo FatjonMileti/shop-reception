@@ -12,7 +12,8 @@ interface SelectBatchProps {
   onContinue: () => void
   onCancel: () => void
   setSelectedRows: Dispatch<any>
-  selectedProduct: Product
+  selectedProduct: Product | { metiCode: string }
+  formik: any
 }
 
 export const SelectBatch = (props: SelectBatchProps) => {
@@ -31,16 +32,18 @@ export const SelectBatch = (props: SelectBatchProps) => {
           url: '/bakery/batch',
           page,
           rowsPerPage,
-          filters: [{
-            name: 'product.metiCode',
-            value: props.selectedProduct?.metiCode
-          }]
+          filters: [
+            {
+              name: 'product.metiCode',
+              value: props.selectedProduct?.metiCode
+            }
+          ]
         })
       )
       setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
-    } catch(error) {
+    } catch (error) {
       showNotification({
         message: `Error while fetching data: ${formatErrorMessage(error)}`,
         type: 'error'
@@ -62,7 +65,7 @@ export const SelectBatch = (props: SelectBatchProps) => {
             isLoading={isLoading}
             columns={columns}
             totalCount={totalCount}
-            selectRows={rows => setSelectedRows(toBatchFormat(rows))}
+            selectRows={rows => setSelectedRows(toBatchFormat({batches: rows, quantity: props.formik.values?.quantity}))}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
           />

@@ -43,13 +43,13 @@ export const BATCH_STATUS = {
 
 const batchStatusOptions = [
   { value: BATCH_STATUS.CLOSED, label: 'Inchis' },
-  { value: BATCH_STATUS.AVAILABLE, label: 'Disponibil' },
+  { value: BATCH_STATUS.AVAILABLE, label: 'Disponibil' }
 ]
 
 const closeReasonOptions = [
   { value: 'OUT_OF_STOCK', label: 'Epuizat' },
   { value: 'NON_CONFORM', label: 'Neconform' },
-  { value: 'WITHDRAWN', label: 'Retragere Lot)' },
+  { value: 'WITHDRAWN', label: 'Retragere Lot' },
   { value: 'EXPIRED', label: 'Expirat' },
   { value: 'OTHER', label: 'Alte deficiente' }
 ]
@@ -81,7 +81,11 @@ export const EditReceivedProduct = ({
 
   const initialValues = {
     batchStatus: receivedProductQuery?.data?.batchStatus || '',
-    closeReason: receivedProductQuery?.data?.closeReason || '',
+    closeReason:
+      receivedProductQuery?.data?.closeReason ||
+      receivedProductQuery?.data?.batchStatus === 'CLOSED'
+        ? 'OUT_OF_STOCK'
+        : '',
     verified: receivedProductQuery?.data?.verified || false
   }
 
@@ -135,22 +139,32 @@ export const EditReceivedProduct = ({
                   variant="outlined"
                   label="Status lot"
                   options={batchStatusOptions}
-                  value={batchStatusOptions.find(({ value }) => value === form.values.batchStatus) || null}
+                  value={
+                    batchStatusOptions.find(({ value }) => value === form.values.batchStatus) ||
+                    null
+                  }
                   onChange={(_, value) => {
                     form.setFieldValue('batchStatus', value?.value)
+                    form.setFieldValue(
+                      'closeReason',
+                      value?.value === 'CLOSED' ? 'OUT_OF_STOCK' : ''
+                    )
                   }}
                   error={!!form.errors.batchStatus}
                   helperText={form.errors.batchStatus as string}
+                  required
                 />
               </Grid>
 
               <Grid item sm={6} xs={12}>
                 <Autocomplete
                   variant="outlined"
-                  label="Motiv"
+                  label="Motiv inchidere lot"
                   value={
                     closeReasonOptions.find(({ value }) => value === form.values.closeReason) ||
-                    null
+                    form.values.batchStatus === 'CLOSED'
+                      ? { value: 'OUT_OF_STOCK', label: 'Epuizat' }
+                      : null
                   }
                   onChange={(_, value) => {
                     form.setFieldValue('closeReason', value?.value)
@@ -158,11 +172,12 @@ export const EditReceivedProduct = ({
                   options={closeReasonOptions}
                   error={!!form.errors.closeReason}
                   helperText={form.errors.closeReason as string}
+                  required={form.values.batchStatus === 'CLOSED'}
                 />
               </Grid>
             </Grid>
 
-            {(receivedProductQuery?.data?.createdUser === false) && (
+            {receivedProductQuery?.data?.createdUser === false && (
               <Grid item xs={12} style={{ display: 'grid' }}>
                 <RadioButtonGroup
                   label="Bifa Verificare de catre validator Trasabilitate"

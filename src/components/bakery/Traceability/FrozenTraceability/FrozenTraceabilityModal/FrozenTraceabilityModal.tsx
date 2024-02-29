@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
-import { useMutation } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import { CircularProgress, Grid } from '@mui/material'
 import { useNotification } from 'hooks'
 import { formatPayloadDate } from 'utils/helpers'
-import { makeCorePostRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails'
 import { SelectBatch } from './SelectBatch'
@@ -34,7 +34,9 @@ export const FrozenTraceabilityModal = ({
   const [showAddBatch, setShowAddBatch] = useState<boolean>(false)
 
   const submitTask = async values => {
-    await makeCorePostRequest(`/bakery/traceability/frozen`, values)
+    isEdit
+      ? await makeCorePutRequest(`/bakery/traceability/frozen/correction/${editItem.id}`, values)
+      : await makeCorePostRequest(`/bakery/traceability/frozen`, values)
   }
 
   const { isLoading, mutate } = useMutation(submitTask, {
@@ -127,6 +129,7 @@ export const FrozenTraceabilityModal = ({
                   onContinue={() => setStep(1)}
                   onCancel={cancel}
                 />,
+
                 <ProductDetails
                   selectedProduct={
                     editItem
@@ -147,7 +150,7 @@ export const FrozenTraceabilityModal = ({
                   isEdit={isEdit}
                 />,
                 <SelectBatch
-                  selectedProduct={selectedProduct}
+                  selectedProduct={selectedProduct || { metiCode: formik.values.metiCode }}
                   onContinue={() => {
                     setShowAddBatch(false)
                     setStep(1)
@@ -158,6 +161,7 @@ export const FrozenTraceabilityModal = ({
                     setStep(1)
                   }}
                   setSelectedRows={setSelectedRows}
+                  formik={formik}
                 />
               ][showAddBatch ? 2 : isEdit ? 1 : step]
             }

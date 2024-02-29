@@ -67,7 +67,7 @@ export const columns: any[] = [
 
 export const toTableRowItems = (items: any[], parent: any) => {
   return items.map(item => ({
-    id: item.id,
+    id: item?.id,
     componentCode: item.componentCode || '',
     componentName: item.componentName || '',
     componentQuantity: item.componentQuantity || '',

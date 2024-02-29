@@ -3,7 +3,7 @@ import { BodyItem } from '../ProductManagementTraceability/AccordionTable'
 import { IconCell } from '../../../core-ui/IconCell'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 import { ImageCell } from '../../../core-ui/ImageCell'
-import React from 'react'
+import { ThermalCondition } from 'components/bakery/interfaces'
 
 export const columns: any[] = [
   {
@@ -16,30 +16,22 @@ export const columns: any[] = [
   {
     title: 'Cod Meti',
     field: 'batch.product.metiCode',
-    render: row => (
-      <BodyItem name="Cod Meti" value={row?.batch?.product?.metiCode} />
-    )
+    render: row => <BodyItem name="Cod Meti" value={row?.batch?.product?.metiCode} />
   },
   {
     title: 'Produs',
     field: 'batch.product.name',
-    render: row => (
-      <BodyItem name="Produs" value={row?.batch?.product?.name} />
-    )
+    render: row => <BodyItem name="Produs" value={row?.batch?.product?.name} />
   },
   {
     title: 'Familie produs',
     field: 'batch.product.familyName',
-    render: row => (
-      <BodyItem name="Familie produs" value={row?.batch?.product?.familyName} />
-    )
+    render: row => <BodyItem name="Familie produs" value={row?.batch?.product?.familyName} />
   },
   {
     title: 'Subfamilie',
     field: 'batch.product.subfamily',
-    render: row => (
-      <BodyItem name="Subfamilie" value={row?.batch?.product?.subfamily} />
-    )
+    render: row => <BodyItem name="Subfamilie" value={row?.batch?.product?.subfamily} />
   },
   {
     title: 'Furnizor (Cod Meti)',
@@ -51,16 +43,12 @@ export const columns: any[] = [
   {
     title: 'Furnizor',
     field: 'batch.supplier.supplierName',
-    render: row => (
-      <BodyItem name="Furnizor" value={row?.batch?.supplier?.supplierName} />
-    )
+    render: row => <BodyItem name="Furnizor" value={row?.batch?.supplier?.supplierName} />
   },
   {
     title: 'Lot',
     field: 'batch.batchQuantity',
-    render: row => (
-      <BodyItem name="Lot" value={row?.batch?.batchQuantity} />
-    )
+    render: row => <BodyItem name="Lot" value={row?.batch?.batchQuantity} />
   },
   {
     field: 'batch.hasExpireDate',
@@ -103,27 +91,18 @@ export const columns: any[] = [
   {
     title: 'Cantitate intrata',
     field: 'batch.consumedAmount',
-    render: row => (
-      <BodyItem name="Cantitate intrata" value={row?.batch?.consumedAmount} />
-    )
+    render: row => <BodyItem name="Cantitate intrata" value={row?.batch?.consumedAmount} />
   },
   {
     title: 'UM (Meti)',
     field: 'product.metricUnit',
-    render: row => (
-      <BodyItem name="UM (Meti)" value={row?.batch?.product?.metricUnit} />
-    )
+    render: row => <BodyItem name="UM (Meti)" value={row?.batch?.product?.metricUnit} />
   },
   {
     title: 'Poza eticheta',
     field: 'imageUrl',
     render: row => (
-      <BodyItem
-        name="Poza eticheta"
-        value={
-          <ImageCell value={''} imageUrl={row?.imageUrl} />
-        }
-      />
+      <BodyItem name="Poza eticheta" value={<ImageCell value={''} imageUrl={row?.imageUrl} />} />
     )
   },
   {
@@ -133,29 +112,35 @@ export const columns: any[] = [
   {
     field: 'batch.createdDate',
     render: row => (
-      <BodyItem name="Data creare linie receptie" value={formatPayloadDate(row?.batch?.createdDate)} />
+      <BodyItem
+        name="Data creare linie receptie"
+        value={formatPayloadDate(row?.batch?.createdDate)}
+      />
     )
   },
   {
     title: 'Cantitate consumata',
     field: 'batch.consumedAmount',
-    render: row => (
-      <BodyItem name="Cantitate consumata" value={row?.batch?.consumedAmount} />
-    )
+    render: row => <BodyItem name="Cantitate consumata" value={row?.batch?.consumedAmount} />
   },
   {
     title: 'Nr. zile valabilitate DLC secundar',
     field: 'batch.dlcDays',
     render: row => (
-      <BodyItem name="Nr. zile valabilitate DLC secundar" value={row?.batch?.dlcDays} />
+      <BodyItem
+        name="Nr. zile valabilitate DLC secundar"
+        value={
+          row?.batch?.dlcDays === 0 || typeof row?.batch?.dlcDays === 'undefined'
+            ? ''
+            : row?.batch?.dlcDays
+        }
+      />
     )
   },
   {
     title: 'Status lot',
     field: 'batchStatus',
-    render: row => (
-      <BodyItem name="Status lot" value={row?.batch?.batchStatus} />
-    )
+    render: row => <BodyItem name="Status lot" value={row?.batch?.batchStatus} />
   },
   // TODO check this field
   // {
@@ -183,9 +168,7 @@ export const columns: any[] = [
   {
     title: 'Validator trasabilitate',
     field: 'batch.verifiedBy',
-    render: row => (
-      <BodyItem name="Validator trasabilitate" value={row?.batch?.verifiedBy} />
-    )
+    render: row => <BodyItem name="Validator trasabilitate" value={row?.batch?.verifiedBy} />
   },
   // TODO check this field
   // {
@@ -201,20 +184,19 @@ export const columns: any[] = [
   {
     title: 'Ultima modificare',
     field: 'batch.modifiedBy',
-    render: row => (
-      <BodyItem name="Ultima modificare" value={row?.batch?.modifiedBy} />
-    )
+    render: row => <BodyItem name="Ultima modificare" value={row?.batch?.modifiedBy} />
   },
   {
     title: 'Data ultimei modificari',
     field: 'batch.modifiedDate',
     render: row => (
-      <BodyItem name="Data ultimei modificari" value={formatPayloadDate(row?.batch?.modifiedDate)} />
+      <BodyItem
+        name="Data ultimei modificari"
+        value={formatPayloadDate(row?.batch?.modifiedDate)}
+      />
     )
-  },
+  }
   // ------------------------
-
-
 
   // {
   //   title: 'Data intrare lot',
@@ -302,15 +284,15 @@ export const columns: any[] = [
   // }
 ]
 
-
 export const mainItemBodyColumns = [
   {
     title: 'Operator productie',
-    field: 'createdBy'
+    field: 'productionOperator'
   },
   {
     title: 'Stare termica',
-    field: 'thermalCondition'
+    field: 'thermalCondition',
+    render: row => <BodyItem name="Stare termica" value={ThermalCondition[row.thermalCondition]} />
   },
   {
     title: 'Conform',
@@ -365,6 +347,8 @@ export const mainItemBodyColumns = [
     title: 'Sarja',
     field: 'chargeNumber'
   },
+  { title: 'Cantitate sarja', field: 'quantity' },
+  { title: 'Cod PLU', field: '-' },
   {
     title: 'Data productiei',
     field: 'productionDate'

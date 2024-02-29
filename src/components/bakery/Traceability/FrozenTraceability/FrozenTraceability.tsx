@@ -65,6 +65,7 @@ export const FrozenTraceability = () => {
       )
     }
   }
+  
   const handleRemoteDetails = async (rowId: string | number) => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
     const data = await response

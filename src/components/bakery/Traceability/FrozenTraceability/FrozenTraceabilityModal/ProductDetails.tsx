@@ -10,9 +10,9 @@ import {
 } from '@fullscreendigital/carrefour-dex-fe'
 import { AddActionIcon, DeleteActionIcon } from 'icons'
 import { FormInfoItems } from '../../../../core-ui/FormInfoItems'
-import { formatBakeryPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 import { SelectProduct } from '../../ReceivedProducts/AddReceivedProduct/SelectProduct'
+import { toBoolean } from 'utils/helpers'
 
 interface ProductDetailsProps {
   onCancel: () => void
@@ -34,6 +34,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     const newBatches = formik.values.traceabilityFrozenList.filter(batch => batch.batchId !== id)
     formik.setFieldValue('traceabilityFrozenList', newBatches)
   }
+
   return (
     <Grid container rowSpacing={3.5}>
       {!isEdit && (
@@ -78,6 +79,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 onCancel={() => {}}
                 customLabel={'Produs'}
                 hideActions
+                isEdit={isEdit}
               />
             </Grid>
           </>
@@ -88,10 +90,10 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             type="text"
             variant="outlined"
             label="Sarja"
+            required
             onChange={e => formik.setFieldValue('chargeNumber', e.currentTarget.value)}
             value={formik.values.chargeNumber}
             name="chargeNumber"
-            required
             error={!!formik.errors.chargeNumber}
             helperText={formik.errors.chargeNumber as string}
           />
@@ -101,10 +103,16 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             type="text"
             variant="outlined"
             label="Cantitate sarja"
-            onChange={e => formik.setFieldValue('quantity', e.currentTarget.value)}
+            onChange={({currentTarget: {value}}) => {
+              formik.setFieldValue('quantity', value)
+              formik.setFieldValue('traceabilityFrozenList', formik.values.traceabilityFrozenList.map(tf => ({
+                ...tf,
+                quantity: value
+              })))
+            }}
             value={formik.values.quantity}
             name="quantity"
-            infoIcon={selectedProduct.metricUnit}
+            infoIcon={selectedProduct?.metricUnit || ''}
             required
             error={!!formik.errors.quantity}
             helperText={formik.errors.quantity as string}
@@ -132,7 +140,6 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             onChange={e => formik.setFieldValue('productionOperator', e.currentTarget.value)}
             value={formik.values.productionOperator}
             name="productionOperator"
-            required
             error={!!formik.errors.productionOperator}
             helperText={formik.errors.productionOperator as string}
           />
@@ -162,7 +169,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', option)
+              formik.setFieldValue('conform', toBoolean(option))
               formik.setFieldValue('nonComplianceReason', null)
               formik.setFieldValue('productDestination', null)
             }}
@@ -172,11 +179,11 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             options={[
               {
                 label: 'DA',
-                value: 'true' // TODO: make this boolean after adding support in UI Library
+                value: 'true'
               },
               {
                 label: 'NU',
-                value: 'false' // TODO: make this boolean after adding support in UI Library
+                value: 'false'
               }
             ]}
           />
@@ -210,7 +217,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
         </Grid>
 
         {formik.values.traceabilityFrozenList.map((item, index) => (
-          <>
+          <Grid item container xs={12} spacing={2}>
             <Grid item xs={3}>
               <Input
                 type="text"
@@ -240,19 +247,19 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 infoIcon={'kg'}
               />
             </Grid>
-            <Grid item xs={3}>
-              <DatePicker
-                label="Data deschidere"
-                onChange={(date: any) => {
-                  const updatedList = [...formik.values.traceabilityFrozenList]
-                  updatedList[index].openingDate = date
+            {/*<Grid item xs={3}>*/}
+            {/*  <DatePicker*/}
+            {/*    label="Data deschidere"*/}
+            {/*    onChange={(date: any) => {*/}
+            {/*      const updatedList = [...formik.values.traceabilityFrozenList]*/}
+            {/*      updatedList[index].openingDate = date*/}
 
-                  formik.setFieldValue('traceabilityFrozenList', updatedList)
-                }}
-                value={dayjs(item.openingDate)}
-                variant="outlined"
-              />
-            </Grid>
+            {/*      formik.setFieldValue('traceabilityFrozenList', updatedList)*/}
+            {/*    }}*/}
+            {/*    value={dayjs(item.openingDate)}*/}
+            {/*    variant="outlined"*/}
+            {/*  />*/}
+            {/*</Grid>*/}
             <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
               <Button
                 onClick={() => onDeleteBatch(item.batchId)}
@@ -264,7 +271,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 <DeleteActionIcon />{' '}
               </Button>
             </Grid>
-          </>
+          </Grid>
         ))}
         {formik.values.traceabilityFrozenList.length > 0 && (
           <Grid item xs={12}>
@@ -279,6 +286,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
               size="large"
               variant="outlined"
               label="Adauga lot"
+              disabled={!formik.values?.quantity}
               onClick={onSelectBatch}
             />
           </Grid>
@@ -298,7 +306,9 @@ export const ProductDetails = (props: ProductDetailsProps) => {
               size="large"
               variant="contained"
               label="Salveaza"
-              onClick={() => formik.handleSubmit()}
+              onClick={() => {
+                formik.handleSubmit()
+              }}
               disabled={false}
             />
           </Grid>

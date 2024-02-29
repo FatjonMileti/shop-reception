@@ -14,7 +14,8 @@ interface SelectChargeProps {
   setSelectedRows: Dispatch<any>
   selectedRows: any
   metiCode: any
-  selectedProduct: Product
+  selectedProduct: Product,
+  formik: any
 }
 
 export const SelectCharge = (props: SelectChargeProps) => {
@@ -54,7 +55,7 @@ export const SelectCharge = (props: SelectChargeProps) => {
  
   const onSelectRows = rows => {
     const newItems = rows.filter(row => !selectedRows.some(item => item.childTraceabilityId === row.id))
-    const newRows = [...selectedRows, ...toChargeFormat(newItems)]
+    const newRows = [...selectedRows, ...toChargeFormat(newItems, props.formik.values?.quantity)]
     setSelectedRows(newRows)
   }
   return (
