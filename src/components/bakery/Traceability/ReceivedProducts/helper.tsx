@@ -1,10 +1,9 @@
 import { BodyItem, HeaderItem, Column } from '../ProductManagementTraceability/AccordionTable'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
-import React from 'react'
 import * as Yup from 'yup'
 import { ProductDetails } from './AddReceivedProduct/ProductDetails'
 import dayjs from 'dayjs'
-import { ReceivedProduct } from './interfaces'
+import { BatchStatus, CloseReason, ReceivedProduct } from './interfaces'
 import { formatPayloadDate } from '../../../../utils/helpers'
 import { ImageCell } from '../../../core-ui/ImageCell'
 
@@ -86,7 +85,7 @@ export const columns: Column[] = [
   },
   {
     title: 'Lot',
-    field: 'batchQuantity'
+    field: 'batchName'
   },
   {
     field: 'hasExpireDate',
@@ -106,9 +105,7 @@ export const columns: Column[] = [
   },
   {
     field: 'expireDate',
-    render: row => (
-      <BodyItem name="Data expirare" value={formatPayloadDate(row.expireDate)} />
-    )
+    render: row => <BodyItem name="Data expirare" value={formatPayloadDate(row.expireDate)} />
   },
   {
     field: 'hasSecondaryDlc',
@@ -128,7 +125,7 @@ export const columns: Column[] = [
   },
   {
     title: 'Cantitate intrata',
-    field: 'consumedAmount'
+    field: 'batchQuantity'
   },
   {
     title: 'UM (Meti)',
@@ -138,12 +135,7 @@ export const columns: Column[] = [
     title: 'Poza eticheta',
     field: 'imageUrl',
     render: row => (
-      <BodyItem
-        name="Poza eticheta"
-        value={
-          <ImageCell value={''} imageUrl={row?.imageUrl} />
-        }
-      />
+      <BodyItem name="Poza eticheta" value={<ImageCell value={''} imageUrl={row?.imageUrl} />} />
     )
   },
   {
@@ -167,11 +159,13 @@ export const columns: Column[] = [
   },
   {
     title: 'Status lot',
-    field: 'batchStatus'
+    field: 'batchStatus',
+    render: row => <BodyItem name="Status lot" value={BatchStatus[row.batchStatus]} />
   },
   {
     title: 'Motiv inchidere lot',
-    field: 'closeReason'
+    field: 'closeReason',
+    render: row => <BodyItem name="Motiv inchidere lot" value={CloseReason[row.closeReason]} />
   },
   {
     render: data => (
@@ -251,13 +245,13 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
   entryDate: Yup.mixed<dayjs.Dayjs>().required('Entry date is required'),
 
   hasExpirationDate: Yup.boolean().required('This field is required'),
-
-  expirationDate: Yup.mixed<dayjs.Dayjs>().when(
-    'hasExpirationDate',
-    ([hasExpirationDate], schema) => {
-      return hasExpirationDate ? schema.required('Expiration date is required') : schema.nullable()
-    }
-  ),
+  expirationDate: Yup.mixed().when('hasExpirationDate', (hasExpirationDate, schema) => {
+    return hasExpirationDate
+      ? Yup.date()
+          .min(new Date(), 'Data de expirare nu poate fi în trecut.')
+          .required('Câmpul data expirare trebuie completat.')
+      : schema.nullable()
+  }),
 
   hasSecondaryDLC: Yup.boolean().required('This field is required'),
 
