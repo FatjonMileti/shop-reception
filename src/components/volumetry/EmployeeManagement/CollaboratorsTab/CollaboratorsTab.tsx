@@ -192,9 +192,15 @@ const CollaboratorsTab = () => {
               shouldRefreshData={shouldRefreshData}
               setShouldRefreshData={setShouldRefreshData}
               filters={tableFilterFields}
+              filtersLabel="Filtreaza"
+              appliedFiltersLabel="Filtre"
+              applyFiltersButtonLabel="Aplica filtre"
+              cancelFiltersButtonLabel="Renunta"
+              filtersButtonLabel="Filtreaza"
+              labelRowsPerPage="Randuri pe pagina:"
               rowActions={[
                 {
-                  label: 'Edit',
+                  label: 'Editeaza',
                   labelColor: 'white',
                   typographyVariant: 'medium',
                   backgroundColor: '#16a085',
@@ -202,7 +208,7 @@ const CollaboratorsTab = () => {
                   onClick: (_e, rowId: number) => selectRowId(rowId, 'edit')
                 },
                 {
-                  label: 'Delete',
+                  label: 'Sterge',
                   labelColor: 'white',
                   typographyVariant: 'medium',
                   backgroundColor: '#d9534f',
@@ -213,7 +219,7 @@ const CollaboratorsTab = () => {
               rowActionsWidth="130px"
               toolbarActions={[
                 {
-                  label: 'Add',
+                  label: 'Adauga',
                   icon: <AddActionIcon />,
                   onClick: () => setModal('create') // TODO: To verify permissions with the BE
                 }
@@ -233,9 +239,15 @@ const CollaboratorsTab = () => {
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
+            filtersLabel="Filtreaza"
+            appliedFiltersLabel="Filtre"
+            applyFiltersButtonLabel="Aplica filtre"
+            cancelFiltersButtonLabel="Renunta"
+            filtersButtonLabel="Filtreaza"
+            labelRowsPerPage="Randuri pe pagina:"
             rowActions={[
               {
-                label: 'Edit',
+                label: 'Editeaza',
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#16a085',
@@ -243,7 +255,7 @@ const CollaboratorsTab = () => {
                 onClick: (_e, rowId: number) => selectRowId(rowId, 'edit')
               },
               {
-                label: 'Delete',
+                label: 'Sterge',
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#d9534f',
@@ -254,7 +266,7 @@ const CollaboratorsTab = () => {
             rowActionsWidth="130px"
             toolbarActions={[
               {
-                label: 'Add',
+                label: 'Adauga',
                 icon: <AddActionIcon />,
                 onClick: () => setModal('create') // TODO: To verify permissions with the BE
               }
