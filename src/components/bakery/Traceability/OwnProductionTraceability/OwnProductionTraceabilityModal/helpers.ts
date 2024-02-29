@@ -131,13 +131,13 @@ export const toChargeFormat = (charges, quantity) => {
 
 export const toChargeFormatEdit = charges => {
   return charges?.map(item => ({
-    childTraceabilityId: item.childTraceabilityId.id,
-    componentCode: item.componentCode,
-    componentQuantity: item.batch.componentQuantity,
-    componentName: item.batch.componentName,
+    childTraceabilityId: item.childTraceabilityId?.id,
+    componentCode: item?.componentCode,
+    componentQuantity: item.batch?.componentQuantity,
+    componentName: item.batch?.componentName,
 
-    quantity: item.batch.batchQuantity,
-    openingDate: formatBakeryPayloadDate(item.openingDate),
+    quantity: item.batch?.batchQuantity,
+    openingDate: formatBakeryPayloadDate(item?.openingDate),
     dlc: item?.batch?.dlcDays
   }))
 }
@@ -247,3 +247,7 @@ export const chargeColumns: any[] = [
     width: '110px'
   }
 ]
+
+export const quantityCalculation = (chargeQuantity, composedArticleQuantity, recipeQuantity) => {
+  return (chargeQuantity * composedArticleQuantity) / recipeQuantity
+}
