@@ -27,7 +27,7 @@ interface ProductDetailsProps {
 export interface ProductDetails {
   entryDate: dayjs.Dayjs
   hasExpirationDate: boolean
-  expirationDate?: dayjs.Dayjs
+  expirationDate?: any
   hasSecondaryDLC: boolean
   secondaryDLC?: string
   amount?: string

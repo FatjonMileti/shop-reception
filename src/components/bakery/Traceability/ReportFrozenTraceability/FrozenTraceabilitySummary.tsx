@@ -2,6 +2,8 @@ import { Capsule } from 'components/core-ui/Capsule'
 import s from './FrozenTraceability.modules.scss'
 import { Grid, Typography } from '@mui/material'
 import { formatBakeryPayloadDate } from 'utils/helpers'
+import { ImageCell } from '../../../core-ui/ImageCell'
+import React from 'react'
 
 const FrozenTraceabilitySummary = item => {
   const {
@@ -23,28 +25,29 @@ const FrozenTraceabilitySummary = item => {
   const summaryCapsules = [
     { label: 'Data productie', value: formatBakeryPayloadDate(productionDate) },
     { label: 'Cod METI', value: product.metiCode },
-    { label: 'Cod Plu', value: product.pluCode },
     { label: 'Familie produs', value: product.familyName },
     { label: 'Subfamilie produs', value: product.subfamily },
     { label: 'Sarja', value: chargeNumber },
-    { label: 'Cant. sarja', value: quantity },
-    { label: 'DLC Prod. Fab.', value: formatBakeryPayloadDate(dlc) },
     { label: 'UM', value: product.metricUnit },
-    { label: 'Stare termica', value: thermalCondition },
-    { label: 'Conform', value: conform ? 'Da' : 'Nu' },
-    { label: 'Motiv neconformitate', value: nonComplianceReason },
-    { label: 'Destinatia produsului neconform', value: productDestination },
-    { label: 'Operator productie', value: productionOperator },
-    { label: 'Verificare de catre validator trasabilitate', value: verified ? 'Da' : 'Nu' },
-    { label: 'Validator trasabilitate', value: verifiedBy },
-    { label: 'Data verificare trasabilitate', value: formatBakeryPayloadDate(verifiedDate) }
+    { label: 'DLC Prod. Fab.', value: formatBakeryPayloadDate(dlc) },
+
+
+    // { label: 'Cod Plu', value: product.pluCode },
+    // { label: 'Cant. sarja', value: quantity },
+    // { label: 'Stare termica', value: thermalCondition },
+    // { label: 'Conform', value: conform ? 'Da' : 'Nu' },
+    // { label: 'Motiv neconformitate', value: nonComplianceReason },
+    // { label: 'Destinatia produsului neconform', value: productDestination },
+    // { label: 'Operator productie', value: productionOperator },
+    // { label: 'Verificare de catre validator trasabilitate', value: verified ? 'Da' : 'Nu' },
+    // { label: 'Validator trasabilitate', value: verifiedBy },
+    // { label: 'Data verificare trasabilitate', value: formatBakeryPayloadDate(verifiedDate) }
   ]
 
   return (
     <Grid container flexDirection="column">
       <Grid item className={s.summary}>
-        {/* TODO: Replace src string with product.imageUrl */}
-        <img src={'images/default-product-image.svg'} />
+        <ImageCell value={''} imageUrl={item.product?.imageUrl} />
         <div className={s.title}>
           <Typography variant="medium" className="title">
             {product.name}

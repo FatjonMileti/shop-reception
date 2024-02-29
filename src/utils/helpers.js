@@ -196,3 +196,8 @@ export const handleQueryError = (error, message, showNotification) => {
     type: 'error'
   })
 }
+
+export const toBoolean = input => {
+  if (input === 'true') return true
+  if (input === 'false') return false
+}

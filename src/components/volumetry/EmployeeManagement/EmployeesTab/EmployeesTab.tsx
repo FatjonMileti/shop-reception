@@ -144,6 +144,12 @@ const EmployeesTab = () => {
               shouldRefreshData={shouldRefreshData}
               setShouldRefreshData={setShouldRefreshData}
               filters={tableFilterFields}
+              filtersLabel="Filtreaza"
+              appliedFiltersLabel="Filtre"
+              applyFiltersButtonLabel="Aplica filtre"
+              filtersButtonLabel="Filtreaza"
+              cancelFiltersButtonLabel="Renunta"
+              labelRowsPerPage="Randuri pe pagina:"
             />
           )
         ) : (
@@ -159,6 +165,12 @@ const EmployeesTab = () => {
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
+            filtersLabel="Filtreaza"
+            appliedFiltersLabel="Filtre"
+            applyFiltersButtonLabel="Aplica filtre"
+            filtersButtonLabel="Filtreaza"
+            cancelFiltersButtonLabel="Renunta"
+            labelRowsPerPage="Randuri pe pagina:"
           />
         )}
       </Box>

@@ -16,7 +16,10 @@ export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
     })
   }
 
-  const formattedProductionList = [...toBatchFormatEdit(batchItems), ...toChargeFormatEdit(childItems)]
+  const formattedProductionList = [
+    ...toBatchFormatEdit(batchItems),
+    ...toChargeFormatEdit(childItems)
+  ]
 
   return {
     productId: editItem?.product?.id || selectedProduct?.id || '',
@@ -39,7 +42,10 @@ export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
 
 export const getValidationSchema = () =>
   Yup.object().shape({
-    productionDate: Yup.date().required('Campul data productie trebuie completat'),
+    productionDate: Yup.date()
+      .max(new Date(), 'Data de productie nu poate fi in viitor.')
+      .required('Campul data productie trebuie completat.'),
+
     chargeNumber: Yup.string().required('Campul sarja trebuie completat.'),
     productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
     quantity: Yup.string().required('Campul cantitate trebuie completat'),
@@ -125,13 +131,13 @@ export const toChargeFormat = (charges, quantity) => {
 
 export const toChargeFormatEdit = charges => {
   return charges?.map(item => ({
-    childTraceabilityId: item.childTraceabilityId.id,
-    componentCode: item.componentCode,
-    componentQuantity: item.batch.componentQuantity,
-    componentName: item.batch.componentName,
+    childTraceabilityId: item.childTraceabilityId?.id,
+    componentCode: item?.componentCode,
+    componentQuantity: item.batch?.componentQuantity,
+    componentName: item.batch?.componentName,
 
-    quantity: item.batch.batchQuantity,
-    openingDate: formatBakeryPayloadDate(item.openingDate),
+    quantity: item.batch?.batchQuantity,
+    openingDate: formatBakeryPayloadDate(item?.openingDate),
     dlc: item?.batch?.dlcDays
   }))
 }
@@ -241,3 +247,7 @@ export const chargeColumns: any[] = [
     width: '110px'
   }
 ]
+
+export const quantityCalculation = (chargeQuantity, composedArticleQuantity, recipeQuantity) => {
+  return (chargeQuantity * composedArticleQuantity) / recipeQuantity
+}

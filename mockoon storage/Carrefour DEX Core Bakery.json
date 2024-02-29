@@ -7667,7 +7667,7 @@
       "responses": [
         {
           "uuid": "a76165a8-2c62-43db-b308-916121921cd2",
-          "body": "{\n  \"list\": [\n    {\n      \"id\": \"0949d32b-364d-4146-b904-d2b86fd53370\",\n      \"product\": {\n        \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f1\",\n        \"name\": \"SAVARINE 2X140G ENGELMI       \",\n        \"metiCode\": 23001430,\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"unitBusiness\": \"PRAJITURI                     \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=822fa0ba9ad91d719b4c3d4f24e2b7764a7c1d933b30c0c0478c54efb0b3db43c35c7561837010815a5dd28872e71e7cdf4aa6ef1dcfd7c08f9b87d17b0e5443837632a4218734f92782145bb6c9cc3a963036a0389dcf61725359b38488f22df71b6bbd2e49cc4881d05b724779f58270fc070fed783b8a25bc6dce7089efb23b85d5e87f9ad365763abd938f467ca2c07449c92eecdde211355315b29f23551da54c866aa8102647cdc0647b32586a7785b27be6f2aa97047d0e201ee2d85ff3a9dc5c21430970335ce7718d6cdba2c985390bf34d6bb4406f1ca5d4826943cc9aa22df4d924d0b66b5e1549044e3f21b6b4eeb6e4af80392f4b2ab682c9e6\"\n      },\n      \"supplier\": {\n        \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n        \"productCode\": 23002898,\n        \"supplierCode\": 38190,\n        \"supplierName\": \"PATISGAL SRL                  \",\n        \"enable\": true\n      },\n      \"entryDate\": \"2023-12-12T15:53:16.45\",\n      \"expireDate\": \"2023-12-12T15:53:16.45\",\n      \"batchName\": \"test\",\n      \"hasExpireDate\": false,\n      \"hasSecondaryDlc\": false,\n      \"batchQuantity\": 20.3,\n      \"batchStatus\": \"\",\n      \"closeReason\": \"OUT_OF_STOCK\",\n      \"dlcDays\": 5,\n      \"verifiedBy\": \"\",\n      \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n      \"consumedAmount\": 427.14,\n      \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5b15e0eae7934c8175f555165fbc15f0d36a52c93ed5dd95cf842d117cad7b748146bac006789f5fbba8cf7b8c16d03d06b3199fbe4718b1c644fccb76b5cdfd84c02cb8aa395d377111ca521447b9d1fa10a6a6f131bfe94883bf588c173977fd4b30da38ade38850f8c8ea2c755dc150293afeb9f2bb283476e09590f7dd37a33f4b26c569adf67c33b594a737f1521ca765f129ac0fe53cf9e62a600b20d85c15772c4043526ec502b57d020df25cac781359bc92eebd9826eb2889acc18abc05a2fba83d031513dcc35d2db58461bb8c1493ac832613e1899ba294669f2e2f80d3fa0542dfa8d01bfbf0a77fee19862281e604775706e5ef5acdc0a0ef64\",\n      \"verified\": false\n    },{\n      \"id\": \"0949d32b-364d-4146-b904-d2b86fd53372\",\n      \"product\": {\n        \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f2\",\n        \"name\": \"SAVARINE 2X140G ENGELMI       \",\n        \"metiCode\": 29000843,\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"unitBusiness\": \"PRAJITURI                     \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=822fa0ba9ad91d719b4c3d4f24e2b7764a7c1d933b30c0c0478c54efb0b3db43c35c7561837010815a5dd28872e71e7cdf4aa6ef1dcfd7c08f9b87d17b0e5443837632a4218734f92782145bb6c9cc3a963036a0389dcf61725359b38488f22df71b6bbd2e49cc4881d05b724779f58270fc070fed783b8a25bc6dce7089efb23b85d5e87f9ad365763abd938f467ca2c07449c92eecdde211355315b29f23551da54c866aa8102647cdc0647b32586a7785b27be6f2aa97047d0e201ee2d85ff3a9dc5c21430970335ce7718d6cdba2c985390bf34d6bb4406f1ca5d4826943cc9aa22df4d924d0b66b5e1549044e3f21b6b4eeb6e4af80392f4b2ab682c9e6\"\n      },\n      \"supplier\": {\n        \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n        \"productCode\": 23002898,\n        \"supplierCode\": 38190,\n        \"supplierName\": \"PATISGAL SRL                  \",\n        \"enable\": true\n      },\n      \"entryDate\": \"2023-12-12T15:53:16.45\",\n      \"expireDate\": \"2023-12-12T15:53:16.45\",\n      \"batchName\": \"test\",\n      \"hasExpireDate\": false,\n      \"hasSecondaryDlc\": false,\n      \"batchQuantity\": 3,\n      \"batchStatus\": \"\",\n      \"closeReason\": \"OUT_OF_STOCK\",\n      \"dlcDays\": 5,\n      \"verifiedBy\": \"\",\n      \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n      \"consumedAmount\": 427.14,\n      \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5b15e0eae7934c8175f555165fbc15f0d36a52c93ed5dd95cf842d117cad7b748146bac006789f5fbba8cf7b8c16d03d06b3199fbe4718b1c644fccb76b5cdfd84c02cb8aa395d377111ca521447b9d1fa10a6a6f131bfe94883bf588c173977fd4b30da38ade38850f8c8ea2c755dc150293afeb9f2bb283476e09590f7dd37a33f4b26c569adf67c33b594a737f1521ca765f129ac0fe53cf9e62a600b20d85c15772c4043526ec502b57d020df25cac781359bc92eebd9826eb2889acc18abc05a2fba83d031513dcc35d2db58461bb8c1493ac832613e1899ba294669f2e2f80d3fa0542dfa8d01bfbf0a77fee19862281e604775706e5ef5acdc0a0ef64\",\n      \"verified\": false\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 1,\n    \"pageCount\": 1\n  }\n}",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"0949d32b-364d-4146-b904-d2b86fd53370\",\n      \"product\": {\n        \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f1\",\n        \"name\": \"SAVARINE 2X140G ENGELMI       \",\n        \"metiCode\": 23001430,\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"unitBusiness\": \"PRAJITURI                     \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=822fa0ba9ad91d719b4c3d4f24e2b7764a7c1d933b30c0c0478c54efb0b3db43c35c7561837010815a5dd28872e71e7cdf4aa6ef1dcfd7c08f9b87d17b0e5443837632a4218734f92782145bb6c9cc3a963036a0389dcf61725359b38488f22df71b6bbd2e49cc4881d05b724779f58270fc070fed783b8a25bc6dce7089efb23b85d5e87f9ad365763abd938f467ca2c07449c92eecdde211355315b29f23551da54c866aa8102647cdc0647b32586a7785b27be6f2aa97047d0e201ee2d85ff3a9dc5c21430970335ce7718d6cdba2c985390bf34d6bb4406f1ca5d4826943cc9aa22df4d924d0b66b5e1549044e3f21b6b4eeb6e4af80392f4b2ab682c9e6\"\n      },\n      \"supplier\": {\n        \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n        \"productCode\": 23002898,\n        \"supplierCode\": 38190,\n        \"supplierName\": \"PATISGAL SRL                  \",\n        \"enable\": true\n      },\n      \"entryDate\": \"2023-12-12T15:53:16.45\",\n      \"expireDate\": \"2023-12-12T15:53:16.45\",\n      \"batchName\": \"test\",\n      \"hasExpireDate\": false,\n      \"hasSecondaryDlc\": false,\n      \"batchQuantity\": 20.3,\n      \"batchStatus\": \"AVAILABLE\",\n      \"closeReason\": \"OUT_OF_STOCK\",\n      \"dlcDays\": 5,\n      \"verifiedBy\": \"\",\n      \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n      \"consumedAmount\": 427.14,\n      \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5b15e0eae7934c8175f555165fbc15f0d36a52c93ed5dd95cf842d117cad7b748146bac006789f5fbba8cf7b8c16d03d06b3199fbe4718b1c644fccb76b5cdfd84c02cb8aa395d377111ca521447b9d1fa10a6a6f131bfe94883bf588c173977fd4b30da38ade38850f8c8ea2c755dc150293afeb9f2bb283476e09590f7dd37a33f4b26c569adf67c33b594a737f1521ca765f129ac0fe53cf9e62a600b20d85c15772c4043526ec502b57d020df25cac781359bc92eebd9826eb2889acc18abc05a2fba83d031513dcc35d2db58461bb8c1493ac832613e1899ba294669f2e2f80d3fa0542dfa8d01bfbf0a77fee19862281e604775706e5ef5acdc0a0ef64\",\n      \"verified\": false\n    },{\n      \"id\": \"0949d32b-364d-4146-b904-d2b86fd53372\",\n      \"product\": {\n        \"id\": \"02c13b6a-fa4c-4491-bb01-5c33c96de0f2\",\n        \"name\": \"SAVARINE 2X140G ENGELMI       \",\n        \"metiCode\": 29000843,\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"unitBusiness\": \"PRAJITURI                     \",\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 0,\n        \"enable\": true,\n        \"batch\": true,\n        \"divisiontype\": \"HYPER\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002898.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=822fa0ba9ad91d719b4c3d4f24e2b7764a7c1d933b30c0c0478c54efb0b3db43c35c7561837010815a5dd28872e71e7cdf4aa6ef1dcfd7c08f9b87d17b0e5443837632a4218734f92782145bb6c9cc3a963036a0389dcf61725359b38488f22df71b6bbd2e49cc4881d05b724779f58270fc070fed783b8a25bc6dce7089efb23b85d5e87f9ad365763abd938f467ca2c07449c92eecdde211355315b29f23551da54c866aa8102647cdc0647b32586a7785b27be6f2aa97047d0e201ee2d85ff3a9dc5c21430970335ce7718d6cdba2c985390bf34d6bb4406f1ca5d4826943cc9aa22df4d924d0b66b5e1549044e3f21b6b4eeb6e4af80392f4b2ab682c9e6\"\n      },\n      \"supplier\": {\n        \"id\": \"4bb38e03-1dcb-48b4-9745-b9fdf23163c9\",\n        \"productCode\": 23002898,\n        \"supplierCode\": 38190,\n        \"supplierName\": \"PATISGAL SRL                  \",\n        \"enable\": true\n      },\n      \"entryDate\": \"2023-12-12T15:53:16.45\",\n      \"expireDate\": \"2023-12-12T15:53:16.45\",\n      \"batchName\": \"test\",\n      \"hasExpireDate\": false,\n      \"hasSecondaryDlc\": false,\n      \"batchQuantity\": 3,\n      \"batchStatus\": \"CLOSED\",\n      \"closeReason\": \"OUT_OF_STOCK\",\n      \"dlcDays\": 5,\n      \"verifiedBy\": \"\",\n      \"verifiedDate\": \"2023-12-12T15:53:16.45\",\n      \"consumedAmount\": 427.14,\n      \"modifiedDate\": \"2023-12-30T13:45:25.785+00:00\",\n      \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//0949d32b-364d-4146-b904-d2b86fd53370.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240122%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240122T090413Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=5b15e0eae7934c8175f555165fbc15f0d36a52c93ed5dd95cf842d117cad7b748146bac006789f5fbba8cf7b8c16d03d06b3199fbe4718b1c644fccb76b5cdfd84c02cb8aa395d377111ca521447b9d1fa10a6a6f131bfe94883bf588c173977fd4b30da38ade38850f8c8ea2c755dc150293afeb9f2bb283476e09590f7dd37a33f4b26c569adf67c33b594a737f1521ca765f129ac0fe53cf9e62a600b20d85c15772c4043526ec502b57d020df25cac781359bc92eebd9826eb2889acc18abc05a2fba83d031513dcc35d2db58461bb8c1493ac832613e1899ba294669f2e2f80d3fa0542dfa8d01bfbf0a77fee19862281e604775706e5ef5acdc0a0ef64\",\n      \"verified\": false\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 1,\n    \"pageCount\": 1\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Successfully obtained the paginated, filtered and sorted stores list",
@@ -9197,6 +9197,314 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "33dfba9a-1953-4abc-85c4-52367787db2c",
+      "type": "http",
+      "documentation": "Get frozen traceability",
+      "method": "get",
+      "endpoint": "supplier/byProduct/:id",
+      "responses": [
+        {
+          "uuid": "01f2be06-2263-40c4-9756-38eeb1afd5a2",
+          "body": "[\n  {\n    \"id\": \"5f5ede1e-4759-4c04-8e2f-4652a85b5502\",\n    \"productCode\": 23505723,\n    \"supplierCode\": 30328,\n    \"supplierName\": \"CARREFOUR                     \"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cefaf177-11d9-466e-9947-e9cc2b2e4172",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1435a2b9-0647-4c00-ab4a-eec61825b7ad",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "20eac886-815a-4edb-99d6-4b8f7cfade1c",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "5e4a873d-6361-4462-b5cd-7202133b32a6",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e541998c-fca6-41af-bd4b-d40ac797017d",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "04bf2bb8-a50a-4446-8432-f9702f86b816",
+      "type": "http",
+      "documentation": "Get frozen traceability",
+      "method": "get",
+      "endpoint": "batch/:id",
+      "responses": [
+        {
+          "uuid": "e03e238f-5f32-47d9-a9d9-8d6df01d6f44",
+          "body": "{\n    \"id\": \"9daeede2-725d-4152-8fa3-a218bebca733\",\n    \"product\": {\n        \"id\": \"ffaab32c-a251-471a-9f88-998651407311\",\n        \"name\": \"FAINA PT  PAINE TIP 650/5 KG  \",\n        \"metiCode\": 23002836,\n        \"metricUnit\": \"K\",\n        \"familyName\": \"COFETARIE PROASPATA\",\n        \"familyCode\": 232,\n        \"subfamily\": \"COFETARIE AUTOSERVIRE         \",\n        \"pluCode\": \"7298\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/product/232/23002836.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240228%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240228T100722Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=2a639d700f7015e21f5529d03266048a6e7f1012aed76efef8c6a22a044d8fb4809169374ff7077efbc802b1d2a5a461c385931499154f237c808a1686b6b14979e29a3fe63bcd68c6d81acaacc6c93da69bce4f418f0754d21807ae8614ea662ad9f364316d36d58e8bfc7aa604870fa06d19e86aa1fcf49d8120d142ca937dd4d0200d2494cd43c61ea36d5bcef0e3310d683db7343aa29b2483b48194d37ca47ff9a99649c716fb3214ef0a60b672459a54e84ebe917e937e5157cbef55e8a43f50c913d07381f6cdc5db54caec7e194a2f289621da70a409a8b294c766a264737383e62a1aaed3b062b46b0e611545c20861fc999153dc31e57f8ac7ebff\"\n    },\n    \"supplier\": {\n        \"id\": \"a2849809-d11a-4048-aa13-94f907f9ec32\",\n        \"productCode\": 23002836,\n        \"supplierCode\": 31379,\n        \"supplierName\": \"SAPTE SPICE SA                \"\n    },\n    \"entryDate\": \"2024-02-27\",\n    \"batchName\": \"123\",\n    \"hasExpireDate\": false,\n    \"hasSecondaryDlc\": false,\n    \"batchQuantity\": 12,\n    \"batchStatus\": \"AVAILABLE\",\n    \"isVerified\": false,\n    \"createdBy\": \"test_dex_bakery\",\n    \"createdDate\": \"2024-02-27T11:41:58.962+00:00\",\n    \"modifiedBy\": \"test_dex_bakery\",\n    \"modifiedDate\": \"2024-02-27T11:41:58.962+00:00\",\n    \"imageUrl\": \"https://storage.googleapis.com/c4bakery-dev/bakery-images/batch//9daeede2-725d-4152-8fa3-a218bebca733.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-dev%40gcp-ro-retail-dev.iam.gserviceaccount.com%2F20240228%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240228T100722Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=0761bc1fef6beb847c68ebbd823279c433758b6c10cf3a011dcf3aea53a9d15948551fc05aff0114b49f99d1b89832f505adc62711f58c7a1fda4f9525fbd56b9a34ba1fcfb842d472a6c56334c9c2b9cee18ca875d0ca0de33b5ce7d231756c7936475a4c024f64244fb47ce3ae00e9874a5b7d4bde1043fc0366ca5d1e9d506ec6072e0ec61dacb5abadb58deb6392e13bee1f9c739732196c95cfb2c0a4eb9914eb68cb8453a3d013a116505f358e6b444a5d49c5145eda8c7f7518ad3fc6d6d128c28acf7d0e9e98768a350049fb12d0ec9b273d2d10be9576eb65b7a9b72e06fb6c4c28a561096261ba2f83d6f250a20b9b055f2c59eeb2ea0de35691fe\",\n    \"isCreatedUser\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ed6f3530-34cd-4183-9feb-6c27680439c7",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "15d704d0-3de7-41ba-ba64-ec493c2825e6",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "58f1d34e-33ef-4e27-bc00-70439cee86fb",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e57f4b69-6f10-4580-89b0-dcd8947988b1",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "16b10570-005f-4283-8b4f-82c33fbe4f99",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -9519,6 +9827,14 @@
     {
       "type": "route",
       "uuid": "24f5ec62-e32d-41e5-a31f-3197020cd3f6"
+    },
+    {
+      "type": "route",
+      "uuid": "33dfba9a-1953-4abc-85c4-52367787db2c"
+    },
+    {
+      "type": "route",
+      "uuid": "04bf2bb8-a50a-4446-8432-f9702f86b816"
     }
   ],
   "proxyMode": false,

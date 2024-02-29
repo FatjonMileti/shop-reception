@@ -2,6 +2,7 @@ import { Grid, Divider, CircularProgress } from '@mui/material'
 import { Button, DatePicker, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { AddActionIcon, DeleteActionIcon } from 'icons'
 import dayjs from 'dayjs'
+import { quantityCalculation } from '../helpers'
 
 interface ProductDetailsBatchesProps {
   onSelectBatch: Function
@@ -41,7 +42,11 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                 type="text"
                 variant="outlined"
                 label={`Cantitatea`}
-                value={batch.componentQuantity}
+                value={`${quantityCalculation(
+                  formik.values.quantity,
+                  batch.componentQuantity,
+                  receip.details.recipeQuantity
+                )}`}
                 name="batchId"
                 disabled
               />
@@ -66,7 +71,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
           </>
           <>
             {formik.values.traceabilityProductionList.map((item, idx) => {
-              if (item.componentCode === batch.componentCode || item.batchId) {
+              if (item.componentCode === batch.componentCode && item.batchId) {
                 return (
                   <Grid item container xs={12} spacing={2}>
                     <Grid item xs={3}>
