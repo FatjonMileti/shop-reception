@@ -25,7 +25,8 @@ export const columns = [
     field: 'employer',
     align: 'left',
     collapsible: true,
-    type: 'string'
+    type: 'string',
+    disableSorting: true
   }
 ]
 
