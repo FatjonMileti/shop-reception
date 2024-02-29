@@ -164,11 +164,11 @@ const TaskAllocations = () => {
               <FilterDataSelect
                 name="teamMember.domain"
                 defaultSelectedData={departmentFilterValue}
-                label="Department"
+                label="Departament"
                 showCounter={true}
                 showSearch={true}
-                counterLabel="Select department"
-                noDataFoundLabel="No results!"
+                counterLabel="Selecteaza departament"
+                noDataFoundLabel="Nu s-au gasit rezultate."
                 options={departmentsOptions}
                 onSelect={handleDepartmentOptionChange}
               />
