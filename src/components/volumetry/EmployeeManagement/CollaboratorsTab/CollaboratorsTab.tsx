@@ -3,7 +3,7 @@ import { Table } from 'components/core-ui/Table'
 import s from './CollaboratorsTab.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification, usePermissions } from 'hooks'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import {
@@ -11,11 +11,11 @@ import {
   EmployeeManagementItem,
   ValueLabelInterface
 } from 'components/volumetry/interfaces'
-import { columns } from './helpers'
+import { columns, getTableFilterFields } from './helpers'
 import { DeleteCollaborator } from './DeleteCollaborator'
 import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
-import { Autocomplete, FilterDataSelect, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import {
   getDepartmentsOptions,
   getJobTitlesOptions,
@@ -62,6 +62,11 @@ const CollaboratorsTab = () => {
     setShouldRefreshData(true)
   }
 
+  const tableFilters = useMemo(
+    () => getTableFilterFields(departmentsOptions, jobTitlesOptions),
+    [departmentsOptions, jobTitlesOptions]
+  )
+
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
 
@@ -87,44 +92,6 @@ const CollaboratorsTab = () => {
       handleQueryError(error, 'A aparut o eroare la obtinerea colaboratorilor.', showNotification)
     }
   }
-
-  const tableFilterFields = [
-    {
-      name: 'fullName',
-      label: 'Nume',
-      type: 'text',
-      value: '',
-      filter: <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
-    },
-    {
-      name: 'department',
-      label: 'Departament',
-      type: 'autocomplete',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Departament"
-          options={departmentsOptions}
-          isOptionEqualToValue={(option, value) => option.value === value.value}
-        />
-      )
-    },
-    {
-      name: 'position',
-      label: 'Functie',
-      type: 'autocomplete',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Functie"
-          options={jobTitlesOptions}
-          isOptionEqualToValue={(option, value) => option.value === value.value}
-        />
-      )
-    }
-  ]
 
   return (
     <div className={s.mainContainer}>
@@ -191,7 +158,7 @@ const CollaboratorsTab = () => {
               totalCount={totalCount}
               shouldRefreshData={shouldRefreshData}
               setShouldRefreshData={setShouldRefreshData}
-              filters={tableFilterFields}
+              filters={tableFilters}
               filtersLabel="Filtreaza"
               appliedFiltersLabel="Filtre"
               applyFiltersButtonLabel="Aplica filtre"
@@ -238,7 +205,7 @@ const CollaboratorsTab = () => {
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
-            filters={tableFilterFields}
+            filters={tableFilters}
             filtersLabel="Filtreaza"
             appliedFiltersLabel="Filtre"
             applyFiltersButtonLabel="Aplica filtre"
