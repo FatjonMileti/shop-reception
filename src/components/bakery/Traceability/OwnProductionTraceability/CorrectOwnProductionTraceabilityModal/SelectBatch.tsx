@@ -6,6 +6,8 @@ import { useNotification } from 'hooks'
 import { Dispatch, useState } from 'react'
 import { columns, toBatchFormat } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
+import { UseQueryResult } from 'react-query'
+import { quantityCalculation } from '../OwnProductionTraceabilityModal/helpers'
 
 interface SelectBatchProps {
   onContinue: () => void
@@ -13,12 +15,20 @@ interface SelectBatchProps {
   setSelectedRows: Dispatch<any>
   selectedRows: any
   metiCode: any
-  recipeMetiCode: string
+  componentMetiCode: string
   formik: any
+  recipeQuery: UseQueryResult<any>
 }
 
-export const SelectBatch = (props: SelectBatchProps) => {
-  const { onContinue, onCancel, setSelectedRows, selectedRows, recipeMetiCode } = props
+export const SelectBatch = ({
+  onContinue,
+  onCancel,
+  setSelectedRows,
+  selectedRows,
+  componentMetiCode,
+  recipeQuery,
+  formik
+}: SelectBatchProps) => {
   const { showNotification } = useNotification()
 
   const [tableItems, setTableItems] = useState<any[]>([])
@@ -33,16 +43,18 @@ export const SelectBatch = (props: SelectBatchProps) => {
           url: '/bakery/batch',
           page,
           rowsPerPage,
-          filters: [{
-            name: 'product.metiCode',
-            value: recipeMetiCode
-          }],
+          filters: [
+            {
+              name: 'product.metiCode',
+              value: componentMetiCode
+            }
+          ]
         })
       )
       setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
-    } catch(error) {
+    } catch (error) {
       showNotification({
         message: `Error while fetching data: ${formatErrorMessage(error)}`,
         type: 'error'
@@ -52,14 +64,22 @@ export const SelectBatch = (props: SelectBatchProps) => {
   }
 
   const onSelectRows = rows => {
+    const batchItem = recipeQuery?.data?.batches?.find(bi => bi.componentCode === componentMetiCode)
+
+    const quantity = quantityCalculation(
+      formik.values.quantity,
+      batchItem?.componentQuantity,
+      recipeQuery?.data?.details?.recipeQuantity
+    )
+
     const newItems = rows.filter(row => !selectedRows.some(item => item.batchId === row.id))
-    const newRows = [...selectedRows, ...toBatchFormat(newItems, props.formik.values?.quantity)]
+    const newRows = [...selectedRows, ...toBatchFormat(newItems, quantity)]
     setSelectedRows(newRows)
   }
 
   return (
     <Grid container rowSpacing={3.5}>
-      <Grid item xs={12} spacing={2}> 
+      <Grid item xs={12} spacing={2}>
         <Box>
           <Table
             orderBy="entryDate"

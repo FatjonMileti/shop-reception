@@ -8,13 +8,9 @@ import {
   RadioButtonGroup
 } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
-import { SelectProduct } from '../../../ReceivedProducts/AddReceivedProduct/SelectProduct'
 import { ProductDetailsBatches } from './ProductDetailsBatches'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
-import { useQuery } from 'react-query'
-import { makeCoreGetRequest } from '../../../../../../utils/api'
-import { formatErrorMessage } from '../../../../../../utils/formatting'
-import { useNotification } from '../../../../../../hooks'
+import { UseQueryResult } from 'react-query'
 import { toBoolean } from 'utils/helpers'
 
 interface ProductDetailsProps {
@@ -23,7 +19,8 @@ interface ProductDetailsProps {
   selectedProduct: any
   selectedRows: any
   formik: any
-  setRecipeMetiCode: Function
+  setComponentMetiCode: Function
+  recipeQuery: UseQueryResult<any>
 }
 
 export const ProductDetails = (props: ProductDetailsProps) => {
@@ -33,10 +30,9 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     onSelectBatch,
     selectedProduct,
     selectedRows,
-    setRecipeMetiCode
+    setComponentMetiCode,
+    recipeQuery
   } = props
-
-  const { showNotification } = useNotification()
 
   useEffect(() => {
     formik.setFieldValue('traceabilityProductionList', selectedRows)
@@ -48,44 +44,6 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     )
     formik.setFieldValue('traceabilityProductionList', newBatches)
   }
-
-  const { data: receip, isLoading: isReceipLoading } = useQuery(
-    ['receip'],
-    async () => {
-      const result = await makeCoreGetRequest(
-        `/bakery/recipe/${selectedProduct?.metiCode || formik.values.metiCode}`
-      )
-      let charges = []
-      let batches = []
-      let others = []
-
-      if (result) {
-        result[0].componentList.forEach(item => {
-
-          if(item.withBatch && item.withRecipe)  {
-            charges.push(item)
-          } else if(item.withBatch) {
-            batches.push(item)
-          } else if (item.withRecipe) {
-            charges.push(item)
-          } else {
-            others.push(item)
-          }
-
-        })
-      }
-
-      return { charges, batches, others, details: result[0] }
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
 
   return (
     <Grid container rowSpacing={3.5}>
@@ -103,8 +61,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             {
               label: 'Info:',
               name: `Greutate neta articol conform reteta: ${
-                receip?.details?.recipeQuantity || ''
-              }${receip?.details?.recipeUnit || ''}`
+                recipeQuery?.data?.details?.recipeQuantity || ''
+              }${recipeQuery?.data?.details?.recipeUnit || ''}`
             }
           ]}
         />
@@ -243,8 +201,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
           productMetiCode={selectedProduct?.metiCode}
           onSelectBatch={onSelectBatch}
           onDeleteBatch={onDeleteBatch}
-          receip={receip}
-          setRecipeMetiCode={setRecipeMetiCode}
+          receip={recipeQuery.data}
+          setComponentMetiCode={setComponentMetiCode}
         />
 
         <Grid item xs={12} container justifyContent="space-between">

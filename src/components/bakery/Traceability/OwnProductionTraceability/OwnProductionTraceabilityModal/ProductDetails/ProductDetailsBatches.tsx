@@ -11,11 +11,11 @@ interface ProductDetailsBatchesProps {
   formik: any
   onDeleteBatch: Function
   receip: any
-  setRecipeMetiCode: Function
+  setComponentMetiCode: Function
 }
 
 export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
-  const { formik, productMetiCode, onSelectBatch, onDeleteBatch, receip, setRecipeMetiCode } = props
+  const { formik, productMetiCode, onSelectBatch, onDeleteBatch, receip, setComponentMetiCode } = props
 
   const metiCode = productMetiCode || formik.values.metiCode
 
@@ -24,7 +24,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
   }
 
   return (
-    <>
+    <Grid container item spacing={2}>
       {receip?.batches.map((batch, index) => (
         <Fragment key={index}>
           <Grid item xs={3}>
@@ -39,7 +39,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
           </Grid>
           <Grid item xs={3}>
             <Input
-              type="text"
+              type="number"
               variant="outlined"
               label={`Cantitatea`}
               value={`${quantityCalculation(
@@ -61,13 +61,14 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                 label="Adauga lot"
                 onClick={() => {
                   onSelectBatch()
-                  setRecipeMetiCode(batch.componentCode)
+                  setComponentMetiCode(batch.componentCode)
                 }}
                 style={{ height: '40px', fontSize: '10px' }}
                 disabled={!formik.values?.quantity}
               />
             )}
           </Grid>
+
           <Grid item xs={3}></Grid>
 
           {formik.values.traceabilityProductionList.map((item, idx) => (
@@ -86,7 +87,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                   </Grid>
                   <Grid item xs={3}>
                     <Input
-                      type="text"
+                      type="number"
                       variant="outlined"
                       label={`Cantitatea lot 1`}
                       onChange={(e: any) =>
@@ -143,10 +144,14 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
             </Grid>
             <Grid item xs={3}>
               <Input
-                type="text"
+                type="number"
                 variant="outlined"
                 label={`Cantitatea`}
-                value={item.componentQuantity}
+                value={`${quantityCalculation(
+                  formik.values.quantity,
+                  item.componentQuantity,
+                  receip.details.recipeQuantity
+                )}`}
                 name="componentQuantity"
                 disabled
               />
@@ -158,7 +163,10 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                 size="large"
                 variant="outlined"
                 label="Adauga sarja"
-                onClick={() => onSelectBatch(3)}
+                onClick={() => {
+                  setComponentMetiCode(item.componentCode)
+                  onSelectBatch(3)
+                }}
                 style={{ height: '40px', fontSize: '10px' }}
                 disabled={!formik.values?.quantity}
               />
@@ -183,7 +191,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                   </Grid>
                   <Grid item xs={3}>
                     <Input
-                      type="text"
+                      type="number"
                       variant="outlined"
                       label={`Cantitatea`}
                       onChange={(e: any) => {
@@ -260,6 +268,6 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
           <Divider />
         </Grid>
       )}
-    </>
+    </Grid>
   )
 }

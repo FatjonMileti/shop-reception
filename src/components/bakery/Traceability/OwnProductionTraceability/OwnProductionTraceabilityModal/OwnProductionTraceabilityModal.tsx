@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
-import { useMutation } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import { CircularProgress, Grid } from '@mui/material'
 import { useNotification } from 'hooks'
 import { formatPayloadDate } from 'utils/helpers'
-import { makeCorePostRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails/ProductDetails'
 import { SelectBatch } from './SelectBatch'
@@ -32,7 +32,7 @@ export const OwnProductionTraceabilityModal = ({
   const submitTask = async values => {
     await makeCorePostRequest(`/bakery/traceability/production`, values)
   }
-  const [recipeMetiCode, setRecipeMetiCode] = useState()
+  const [componentMetiCode, setComponentMetiCode] = useState()
 
   const { isLoading, mutate } = useMutation(submitTask, {
     onSuccess: () => {
@@ -90,12 +90,48 @@ export const OwnProductionTraceabilityModal = ({
   const cancel = () => {
     closeModal()
     setShowAddBatch(false)
+    setShowAddCharge(false)
     setSelectedProduct(undefined)
     setStep(0)
     formik.resetForm()
     formik.setFieldValue('traceabilityProductionList', [])
     setSelectedRows([])
   }
+
+  const recipeQuery= useQuery(
+    ['recipe', selectedProduct?.metiCode],
+    async () => {
+      const result = await makeCoreGetRequest(
+        `/bakery/recipe/${selectedProduct?.metiCode}`
+      )
+      let charges = []
+      let batches = []
+      let others = []
+      if (result) {
+        result[0].componentList.forEach(item => {
+          if(item.withBatch && item.withRecipe)  {
+            charges.push(item)
+          } else if(item.withBatch) {
+            batches.push(item)
+          } else if (item.withRecipe) {
+            charges.push(item)
+          } else {
+            others.push(item)
+          }
+        })
+      }
+      return { charges, batches, others, details: result[0] }
+    },
+    {
+      enabled: !!selectedProduct?.metiCode,
+      onError: error => {
+        showNotification({
+          message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
 
   return (
     <Modal
@@ -130,13 +166,13 @@ export const OwnProductionTraceabilityModal = ({
                     if (typeof step === 'undefined') {
                       setShowAddBatch(true)
                     }
-
                     setStep(step ? step : 2)
                   }}
                   onCancel={cancel}
                   selectedRows={selectedRows}
                   formik={formik}
-                  setRecipeMetiCode={setRecipeMetiCode}
+                  setComponentMetiCode={setComponentMetiCode}
+                  recipeQuery={recipeQuery}
                 />,
                 <SelectBatch
                   onContinue={() => {
@@ -152,8 +188,9 @@ export const OwnProductionTraceabilityModal = ({
                   setSelectedRows={setSelectedRows}
                   metiCode={selectedProduct?.metiCode}
                   selectedProduct={selectedProduct}
-                  recipeMetiCode={recipeMetiCode}
+                  componentMetiCode={componentMetiCode}
                   formik={formik}
+                  recipeQuery={recipeQuery}
                 />,
                 <SelectCharge
                   onContinue={() => {
@@ -163,9 +200,10 @@ export const OwnProductionTraceabilityModal = ({
                   onCancel={cancel}
                   setSelectedRows={setSelectedRows}
                   selectedRows={selectedRows}
-                  metiCode={formik.values?.metiCode || selectedProduct?.metiCode}
                   selectedProduct={selectedProduct}
                   formik={formik}
+                  componentMetiCode={componentMetiCode}
+                  recipeQuery={recipeQuery}
                 />
               ][showAddBatch ? 2 : showAddCharge ? 3 : step]
             }

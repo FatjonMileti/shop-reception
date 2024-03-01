@@ -6,19 +6,28 @@ import { useNotification } from 'hooks'
 import { Dispatch, useState } from 'react'
 import { chargeColumns, toChargeFormat } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
-import { Product } from '../../ReceivedProducts/interfaces'
+import { UseQueryResult } from 'react-query'
+import { quantityCalculation } from '../OwnProductionTraceabilityModal/helpers'
 
 interface SelectChargeProps {
   onContinue: () => void
   onCancel: () => void
   setSelectedRows: Dispatch<any>
   selectedRows: any
-  metiCode: any
   formik: any
+  componentMetiCode: string
+  recipeQuery: UseQueryResult<any>
 }
 
-export const SelectCharge = (props: SelectChargeProps) => {
-  const { onContinue, onCancel, setSelectedRows, selectedRows, metiCode } = props
+export const SelectCharge = ({
+  onContinue,
+  onCancel,
+  setSelectedRows,
+  selectedRows,
+  componentMetiCode,
+  recipeQuery,
+  formik
+}: SelectChargeProps) => {
   const { showNotification } = useNotification()
 
   const [tableItems, setTableItems] = useState<any[]>([])
@@ -33,16 +42,18 @@ export const SelectCharge = (props: SelectChargeProps) => {
           url: '/bakery/traceability/production',
           page,
           rowsPerPage,
-          filters: [{
-            name: 'product.metiCode',
-            value: props?.metiCode
-          }],
+          filters: [
+            {
+              name: 'product.metiCode',
+              value: componentMetiCode
+            }
+          ]
         })
       )
       setTableItems(response.list)
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
-    } catch(error) {
+    } catch (error) {
       showNotification({
         message: `Error while fetching data: ${formatErrorMessage(error)}`,
         type: 'error'
@@ -51,10 +62,21 @@ export const SelectCharge = (props: SelectChargeProps) => {
     }
   }
 
- 
   const onSelectRows = rows => {
-    const newItems = rows.filter(row => !selectedRows.some(item => item.childTraceabilityId === row.id))
-    const newRows = [...selectedRows, ...toChargeFormat(newItems, props.formik.values?.quantity)]
+    const batchItem = recipeQuery?.data?.charges?.find(
+      charge => charge.componentCode === componentMetiCode
+    )
+
+    const quantity = quantityCalculation(
+      formik.values.quantity,
+      batchItem?.componentQuantity,
+      recipeQuery?.data?.details?.recipeQuantity
+    )
+
+    const newItems = rows.filter(
+      row => !selectedRows.some(item => item.childTraceabilityId === row.id)
+    )
+    const newRows = [...selectedRows, ...toChargeFormat(newItems, quantity)]
     setSelectedRows(newRows)
   }
   return (
