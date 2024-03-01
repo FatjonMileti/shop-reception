@@ -160,6 +160,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                 label="Adauga sarja"
                 onClick={() => onSelectBatch(3)}
                 style={{ height: '40px', fontSize: '10px' }}
+                disabled={!formik.values?.quantity}
               />
             </Grid>
 
@@ -219,6 +220,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
           })}
         </>
       ))}
+
       <Grid item xs={12}>
         <Divider />
       </Grid>

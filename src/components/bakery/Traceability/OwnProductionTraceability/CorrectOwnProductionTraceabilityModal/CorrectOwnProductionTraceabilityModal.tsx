@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails/ProductDetails'
 import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
-import { getInitialValues, getValidationSchema } from './helpers'
+import { getInitialValues, validationSchema } from './helpers'
 import { SelectCharge } from './SelectCharge'
 
 interface CorrectOwnProductionTraceabilityModalProps {
@@ -54,8 +54,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
     () => getInitialValues(selectedRows, editItem),
     [selectedRows, editItem?.id]
   )
-
-  const validationSchema = useMemo(() => getValidationSchema(), [])
 
   const formik = useFormik({
     validateOnChange: false,
