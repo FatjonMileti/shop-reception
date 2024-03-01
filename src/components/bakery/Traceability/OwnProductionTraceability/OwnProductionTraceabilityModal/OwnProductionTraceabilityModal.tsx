@@ -4,7 +4,7 @@ import { useMutation } from 'react-query'
 import { CircularProgress, Grid } from '@mui/material'
 import { useNotification } from 'hooks'
 import { formatPayloadDate } from 'utils/helpers'
-import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { makeCorePostRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails/ProductDetails'
 import { SelectBatch } from './SelectBatch'
@@ -17,16 +17,10 @@ import { SelectCharge } from './SelectCharge'
 interface OwnProductionTraceabilityModalProps {
   isModalOpen: boolean
   closeModal: () => void
-  editItem?: any
-  setEditItem: Function
-  isEdit: boolean
 }
 export const OwnProductionTraceabilityModal = ({
   isModalOpen,
   closeModal,
-  editItem,
-  setEditItem,
-  isEdit
 }: OwnProductionTraceabilityModalProps) => {
   const { showNotification } = useNotification()
   const [step, setStep] = useState<number>(0)
@@ -36,12 +30,7 @@ export const OwnProductionTraceabilityModal = ({
   const [showAddCharge, setShowAddCharge] = useState<boolean>(false)
 
   const submitTask = async values => {
-    isEdit
-      ? await makeCorePutRequest(
-          `/bakery/traceability/production/correction/${editItem.id}`,
-          values
-        )
-      : await makeCorePostRequest(`/bakery/traceability/production`, values)
+    await makeCorePostRequest(`/bakery/traceability/production`, values)
   }
   const [recipeMetiCode, setRecipeMetiCode] = useState()
 
@@ -62,15 +51,15 @@ export const OwnProductionTraceabilityModal = ({
   })
 
   const initialValues = useMemo(
-    () => getInitialValues(selectedProduct, selectedRows, editItem),
-    [selectedProduct?.id, selectedRows, editItem?.id, isEdit]
+    () => getInitialValues(selectedProduct, selectedRows),
+    [selectedProduct?.id, selectedRows]
   )
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
 
   const formik = useFormik({
     validateOnChange: false,
-    enableReinitialize: isEdit ? true : false,
+    enableReinitialize: false,
     validationSchema: validationSchema,
     initialValues: initialValues,
     onSubmit: async (values: any, { resetForm }) => {
@@ -96,7 +85,6 @@ export const OwnProductionTraceabilityModal = ({
       setSelectedRows([])
       setStep(0)
       setSelectedProduct(undefined)
-      setEditItem(null)
     }
   })
 
@@ -104,7 +92,6 @@ export const OwnProductionTraceabilityModal = ({
     closeModal()
     setShowAddBatch(false)
     setSelectedProduct(undefined)
-    setEditItem(null)
     setStep(0)
     formik.resetForm()
     formik.setFieldValue('traceabilityProductionList', [])
@@ -115,11 +102,7 @@ export const OwnProductionTraceabilityModal = ({
     <Modal
       isModalOpen={isModalOpen}
       closeModal={cancel}
-      modalTitle={`${
-        isEdit
-          ? 'Corectie trasabilitate productie proprie'
-          : 'Adauga trasabilitate productie proprie'
-      }`}
+      modalTitle={'Adauga trasabilitate productie proprie'}
       modalWidth="50%"
     >
       <Grid container>
@@ -137,16 +120,8 @@ export const OwnProductionTraceabilityModal = ({
                   onCancel={cancel}
                 />,
                 <ProductDetails
-                  selectedProduct={
-                    editItem
-                      ? {
-                          id: formik.values.productId,
-                          name: formik.values.productName || '',
-                          metiCode: formik.values.metiCode || ''
-                        }
-                      : selectedProduct
-                  }
-                  onSelectBatch={(step?: number, metiCode?: any) => {
+                  selectedProduct={selectedProduct}
+                  onSelectBatch={(step?: number) => {
                     if (step === 2) {
                       setShowAddBatch(true)
                     }
@@ -162,7 +137,6 @@ export const OwnProductionTraceabilityModal = ({
                   onCancel={cancel}
                   selectedRows={selectedRows}
                   formik={formik}
-                  isEdit={isEdit}
                   setRecipeMetiCode={setRecipeMetiCode}
                 />,
                 <SelectBatch
@@ -177,12 +151,11 @@ export const OwnProductionTraceabilityModal = ({
                   }}
                   selectedRows={selectedRows}
                   setSelectedRows={setSelectedRows}
-                  metiCode={formik.values?.metiCode || selectedProduct?.metiCode}
+                  metiCode={selectedProduct?.metiCode}
                   selectedProduct={selectedProduct}
                   recipeMetiCode={recipeMetiCode}
                   formik={formik}
                 />,
-
                 <SelectCharge
                   onContinue={() => {
                     setShowAddCharge(false)
@@ -195,7 +168,7 @@ export const OwnProductionTraceabilityModal = ({
                   selectedProduct={selectedProduct}
                   formik={formik}
                 />
-              ][showAddBatch ? 2 : showAddCharge ? 3 : isEdit ? 1 : step]
+              ][showAddBatch ? 2 : showAddCharge ? 3 : step]
             }
           </>
         )}

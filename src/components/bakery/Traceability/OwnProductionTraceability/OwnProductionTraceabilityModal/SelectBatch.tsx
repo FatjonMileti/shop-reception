@@ -55,7 +55,7 @@ export const SelectBatch = (props: SelectBatchProps) => {
 
   const onSelectRows = rows => {
     const newItems = rows.filter(row => !selectedRows.some(item => item.batchId === row.id))
-    const newRows = [...selectedRows, ...toBatchFormat(newItems, props.formik.values?.quantity)]
+    const newRows = [...selectedRows, ...toBatchFormat(newItems)]
     setSelectedRows(newRows)
   }
 
