@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails/ProductDetails'
 import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
-import { getInitialValues, getValidationSchema } from './helpers'
+import { getInitialValues, validationSchema } from './helpers'
 import { SelectOrScanProduct } from './SelectOrScanProduct'
 import { Product } from '../../ReceivedProducts/interfaces'
 import { SelectCharge } from './SelectCharge'
@@ -55,20 +55,19 @@ export const OwnProductionTraceabilityModal = ({
     [selectedProduct?.id, selectedRows]
   )
 
-  const validationSchema = useMemo(() => getValidationSchema(), [])
-
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: false,
     validationSchema: validationSchema,
     initialValues: initialValues,
     onSubmit: async (values: any, { resetForm }) => {
+
       const payload = {
         ...values,
-        productId: selectedProduct?.id || values.productId,
+        productId: selectedProduct?.id,
         productionDate: formatPayloadDate(values.productionDate),
-        metiCode: values?.metiCode || selectedProduct?.metiCode,
-        productName: selectedProduct?.name || values.productName
+        metiCode: selectedProduct?.metiCode,
+        productName: selectedProduct?.name
       }
 
       if (values.traceabilityProductionList.length === 0) {

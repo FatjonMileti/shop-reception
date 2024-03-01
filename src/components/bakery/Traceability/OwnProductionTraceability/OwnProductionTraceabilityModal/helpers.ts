@@ -22,30 +22,29 @@ export const getInitialValues = (selectedProduct, selectedRows) => {
   }
 }
 
-export const getValidationSchema = () =>
-  Yup.object().shape({
-    productionDate: Yup.date()
-      .max(new Date(), 'Data de productie nu poate fi in viitor.')
-      .required('Campul data productie trebuie completat.'),
+export const validationSchema = Yup.object().shape({
+  productionDate: Yup.date()
+    .max(new Date(), 'Data de productie nu poate fi in viitor.')
+    .required('Campul data productie trebuie completat.'),
 
-    chargeNumber: Yup.string().required('Campul sarja trebuie completat.'),
-    productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
-    quantity: Yup.string().required('Campul cantitate trebuie completat'),
-    thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
-    conform: Yup.boolean(),
+  chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
+  productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
+  quantity: Yup.string().required('Campul cantitate trebuie completat'),
+  thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
+  conform: Yup.boolean(),
 
-    traceabilityProductionList: Yup.array().of(
-      Yup.object().shape({
-        batchId: Yup.string(),
-        childTraceabilityId: Yup.string(),
-        componentCode: Yup.number(),
-        componentQuantity: Yup.number(),
-        quantity: Yup.number(),
-        openingDate: Yup.date(),
-        dlc: Yup.string()
-      })
-    )
-  })
+  traceabilityProductionList: Yup.array().of(
+    Yup.object().shape({
+      batchId: Yup.string(),
+      childTraceabilityId: Yup.string(),
+      componentCode: Yup.number(),
+      componentQuantity: Yup.number(),
+      quantity: Yup.number(),
+      openingDate: Yup.date(),
+      dlc: Yup.string()
+    })
+  )
+})
 
 export const toBatchFormat = (batches = []) => {
   return batches?.map(item => ({

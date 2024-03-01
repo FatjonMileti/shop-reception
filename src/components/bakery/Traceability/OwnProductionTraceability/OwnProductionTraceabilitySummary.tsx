@@ -2,6 +2,8 @@ import { Capsule } from 'components/core-ui/Capsule'
 import s from './OwnProductionTraceability.modules.scss'
 import { Grid, Typography } from '@mui/material'
 import { formatBakeryPayloadDate } from 'utils/helpers'
+import { ImageCell } from '../../../core-ui/ImageCell'
+import React from 'react'
 
 const OwnProductionTraceabilitySummary = item => {
   const {
@@ -24,8 +26,7 @@ const OwnProductionTraceabilitySummary = item => {
   return (
     <Grid container flexDirection="column">
       <Grid item className={s.summary}>
-        {/* TODO: Replace src string with product.imageUrl */}
-        <img src={'images/default-product-image.svg'} />
+        <ImageCell value={''} imageUrl={item.product?.imageUrl} />
         <div className={s.title}>
           <Typography variant="medium" className="title">
             {product.name}
