@@ -23,7 +23,6 @@ interface ProductDetailsProps {
   selectedProduct: any
   selectedRows: any
   formik: any
-  isEdit: boolean
   setRecipeMetiCode: Function
 }
 
@@ -34,7 +33,6 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     onSelectBatch,
     selectedProduct,
     selectedRows,
-    isEdit,
     setRecipeMetiCode
   } = props
 
@@ -59,15 +57,17 @@ export const ProductDetails = (props: ProductDetailsProps) => {
       )
       let charges = []
       let batches = []
+      let others = []
 
       if (result) {
         result[0].componentList.forEach(item => {
           if (item.withBatch) batches.push(item)
           if (item.withRecipe) charges.push(item)
+          if (!item.withRecipe && item.withBatch) others.push(item)
         })
       }
 
-      return { charges, batches, details: result[0] }
+      return { charges, batches, others, details: result[0] }
     },
     {
       onError: error => {
@@ -81,60 +81,28 @@ export const ProductDetails = (props: ProductDetailsProps) => {
 
   return (
     <Grid container rowSpacing={3.5}>
-      {!isEdit && (
-        <Grid item xs={12} spacing={2}>
-          <FormInfoItems
-            items={[
-              {
-                label: 'Produs:',
-                name: selectedProduct?.name
-              },
-              {
-                label: 'Produs cod Meti:',
-                name: selectedProduct?.metiCode
-              },
-              {
-                label: 'Info:',
-                name: `Greutate neta articol conform reteta: ${
-                  receip?.details?.recipeQuantity || ''
-                }${receip?.details?.recipeUnit || ''}`
-              }
-            ]}
-          />
-        </Grid>
-      )}
+      <Grid item xs={12} spacing={2}>
+        <FormInfoItems
+          items={[
+            {
+              label: 'Produs:',
+              name: selectedProduct?.name
+            },
+            {
+              label: 'Produs cod Meti:',
+              name: selectedProduct?.metiCode
+            },
+            {
+              label: 'Info:',
+              name: `Greutate neta articol conform reteta: ${
+                receip?.details?.recipeQuantity || ''
+              }${receip?.details?.recipeUnit || ''}`
+            }
+          ]}
+        />
+      </Grid>
 
       <Grid container spacing={2} mt={2}>
-        {isEdit && (
-          <>
-            <Grid item xs={3}>
-              <Input
-                type="text"
-                variant="outlined"
-                label="Cod METI"
-                onChange={e => formik.setFieldValue('metiCode', e.currentTarget.value)}
-                value={formik.values.metiCode}
-                name="metiCode"
-                disabled
-              />
-            </Grid>
-            <Grid item xs={9}>
-              <SelectProduct
-                setSelectedProduct={product => {
-                  formik.setFieldValue('productName', product?.name)
-                  formik.setFieldValue('metiCode', product?.metiCode)
-                }}
-                selectedProduct={selectedProduct}
-                onContinue={() => {}}
-                onCancel={() => {}}
-                customLabel={'Produs'}
-                hideActions
-                isEdit={isEdit}
-              />
-            </Grid>
-          </>
-        )}
-
         <Grid item xs={3}>
           <DatePicker
             label="Data productie"
@@ -165,12 +133,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             type="text"
             variant="outlined"
             label="Cantitate sarja"
-            onChange={({currentTarget: {value}}) => {
+            onChange={({ currentTarget: { value } }) => {
               formik.setFieldValue('quantity', value)
-              formik.setFieldValue('traceabilityProductionList', formik.values.traceabilityProductionList.map(tf => ({
-                ...tf,
-                componentQuantity: value
-              })))
             }}
             value={formik.values.quantity}
             name="quantity"
@@ -229,11 +193,11 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             options={[
               {
                 label: 'DA',
-                value: 'true' 
+                value: 'true'
               },
               {
                 label: 'NU',
-                value: 'false' 
+                value: 'false'
               }
             ]}
           />
