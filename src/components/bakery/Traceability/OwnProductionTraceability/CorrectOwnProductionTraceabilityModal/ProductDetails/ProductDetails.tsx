@@ -81,6 +81,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
   return (
     <Grid container rowSpacing={3.5}>
       <Grid container spacing={2} mt={2}>
+
         <Grid item xs={3}>
           <Input
             type="text"
@@ -93,48 +94,65 @@ export const ProductDetails = (props: ProductDetailsProps) => {
           />
         </Grid>
 
-        <Grid item xs={3}>
-          <DatePicker
-            label="Data productie"
-            onChange={value => formik.setFieldValue('productionDate', value)}
-            variant="outlined"
-            required
-            helperText={formik.errors.productionDate as string}
-            error={!!formik.errors.productionDate}
-            value={dayjs(formik.values.productionDate)}
-            maxDate={dayjs()}
-          />
-        </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={9}>
           <Input
             type="text"
             variant="outlined"
-            label="Sarja"
-            onChange={e => formik.setFieldValue('chargeNumber', e.currentTarget.value)}
-            value={formik.values.chargeNumber}
-            name="chargeNumber"
+            label="Produs"
+            // onChange={e => formik.setFieldValue('metiCode', e.currentTarget.value)}
+            value={formik.values.productName}
+            name="productName"
             required
-            error={!!formik.errors.chargeNumber}
-            helperText={formik.errors.chargeNumber as string}
+            disabled
           />
         </Grid>
-        <Grid item xs={3}>
-          <Input
-            type="text"
-            variant="outlined"
-            label="Cantitate sarja"
-            onChange={({ currentTarget: { value } }) => {
-              formik.setFieldValue('quantity', value)
-            }}
-            value={formik.values.quantity}
-            name="quantity"
-            infoIcon={editItem?.product?.metricUnit || ''}
-            required
-            error={!!formik.errors.quantity}
-            helperText={formik.errors.quantity as string}
-          />
+
+        <Grid item xs={12} container spacing={2}>
+          <Grid item xs={3}>
+            <DatePicker
+              label="Data productie"
+              onChange={value => formik.setFieldValue('productionDate', value)}
+              variant="outlined"
+              required
+              helperText={formik.errors.productionDate as string}
+              error={!!formik.errors.productionDate}
+              value={dayjs(formik.values.productionDate)}
+              maxDate={dayjs()}
+            />
+          </Grid>
+
+          <Grid item xs={3}>
+            <Input
+              type="number"
+              variant="outlined"
+              label="Sarja"
+              onChange={e => formik.setFieldValue('chargeNumber', e.currentTarget.value)}
+              value={formik.values.chargeNumber}
+              name="chargeNumber"
+              required
+              error={!!formik.errors.chargeNumber}
+              helperText={formik.errors.chargeNumber as string}
+            />
+          </Grid>
+
+          <Grid item xs={3}>
+            <Input
+              type="text"
+              variant="outlined"
+              label="Cantitate sarja"
+              onChange={({ currentTarget: { value } }) => {
+                formik.setFieldValue('quantity', value)
+              }}
+              value={formik.values.quantity}
+              name="quantity"
+              infoIcon={editItem?.product?.metricUnit || ''}
+              required
+              error={!!formik.errors.quantity}
+              helperText={formik.errors.quantity as string}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={3}></Grid>
+
 
         <Grid item xs={3}>
           <Input

@@ -61,9 +61,17 @@ export const ProductDetails = (props: ProductDetailsProps) => {
 
       if (result) {
         result[0].componentList.forEach(item => {
-          if (item.withBatch) batches.push(item)
-          if (item.withRecipe) charges.push(item)
-          if (!item.withRecipe && item.withBatch) others.push(item)
+
+          if(item.withBatch && item.withRecipe)  {
+            charges.push(item)
+          } else if(item.withBatch) {
+            batches.push(item)
+          } else if (item.withRecipe) {
+            charges.push(item)
+          } else {
+            others.push(item)
+          }
+
         })
       }
 
@@ -117,7 +125,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
         </Grid>
         <Grid item xs={3}>
           <Input
-            type="text"
+            type="number"
             variant="outlined"
             label="Sarja"
             onChange={e => formik.setFieldValue('chargeNumber', e.currentTarget.value)}
