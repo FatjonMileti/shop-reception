@@ -123,6 +123,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
       return { charges, batches, others, details: result[0] }
     },
     {
+      enabled: !!editItem?.product?.metiCode,
       onError: error => {
         showNotification({
           message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
