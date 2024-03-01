@@ -1,6 +1,7 @@
 import { Capsule } from 'components/core-ui/Capsule'
 import s from './TaskAllocations.modules.scss'
 import { Grid, Typography } from '@mui/material'
+import { PriorityColors } from './helpers'
 
 const TaskSummary = ({ item, hideDetails = false }) => {
   // TODO: To add type when db schema is defined
@@ -20,6 +21,7 @@ const TaskSummary = ({ item, hideDetails = false }) => {
     workloadMeasurementUnit
   } = item
 
+  console.log('debug', PriorityColors[priorityId].value)
   return (
     <Grid container flexDirection="column">
       <Grid item>
@@ -38,8 +40,8 @@ const TaskSummary = ({ item, hideDetails = false }) => {
           <Capsule
             label="Prioritate"
             value={priorityValue}
-            valueColor={priorityId === 1 && '#D30D1F'}
-            labelColor={priorityId === 1 && 'rgba(211, 13, 31, 0.15)'}
+            valueColor={PriorityColors[priorityId - 1].value}
+            labelColor={PriorityColors[priorityId - 1].label}
           />
         </Grid>
 
@@ -58,7 +60,12 @@ const TaskSummary = ({ item, hideDetails = false }) => {
             </Grid>
 
             <Grid item mt={1} mr={1}>
-              <Capsule label="Volum total" value={totalWorkload} />
+              <Capsule
+                label="Volum total"
+                value={totalWorkload}
+                valueColor={'#004f9b'}
+                labelColor={'#d9e5f0'}
+              />
             </Grid>
             <Grid item mt={1} mr={1}>
               <Capsule label="Volum efectuat" value={completedWorkload} />
