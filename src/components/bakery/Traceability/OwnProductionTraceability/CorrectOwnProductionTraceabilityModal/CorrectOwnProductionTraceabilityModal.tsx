@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
-import { useMutation, UseQueryResult } from 'react-query'
+import { useMutation, useQuery, UseQueryResult } from 'react-query'
 import { CircularProgress, Grid } from '@mui/material'
 import { useNotification } from 'hooks'
 import { formatPayloadDate } from 'utils/helpers'
-import { makeCorePutRequest } from 'utils/api'
+import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails/ProductDetails'
 import { SelectBatch } from './SelectBatch'
@@ -22,6 +22,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
   closeModal,
   correctItemQuery
 }: CorrectOwnProductionTraceabilityModalProps) => {
+
   const { showNotification } = useNotification()
   const [selectedRows, setSelectedRows] = useState([])
   const [showAddBatch, setShowAddBatch] = useState<boolean>(false)
@@ -33,6 +34,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
     await makeCorePutRequest(`/bakery/traceability/production/correction/${editItem.id}`, values)
   }
   const [recipeMetiCode, setRecipeMetiCode] = useState()
+  const [componentMetiCode, setComponentMetiCode] = useState()
 
   const { isLoading, mutate } = useMutation(submitTask, {
     onSuccess: () => {
@@ -92,6 +94,44 @@ export const CorrectOwnProductionTraceabilityModal = ({
     setSelectedRows([])
   }
 
+  const recipeQuery = useQuery(
+    ['receip', editItem?.product?.metiCode],
+    async () => {
+      const result = await makeCoreGetRequest(
+        `/bakery/recipe/${editItem?.product?.metiCode}`
+      )
+      let charges = []
+      let batches = []
+      let others = []
+
+      if (result) {
+        result[0].componentList.forEach(item => {
+
+          if(item.withBatch && item.withRecipe)  {
+            charges.push(item)
+          } else if(item.withBatch) {
+            batches.push(item)
+          } else if (item.withRecipe) {
+            charges.push(item)
+          } else {
+            others.push(item)
+          }
+
+        })
+      }
+
+      return { charges, batches, others, details: result[0] }
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
   return (
     <Modal
       isModalOpen={isModalOpen}
@@ -119,8 +159,9 @@ export const CorrectOwnProductionTraceabilityModal = ({
                   onCancel={cancel}
                   selectedRows={selectedRows}
                   formik={formik}
-                  setRecipeMetiCode={setRecipeMetiCode}
+                  setComponentMetiCode={setComponentMetiCode}
                   editItem={editItem}
+                  recipeQuery={recipeQuery}
                 />,
                 <SelectBatch
                   onContinue={() => {
@@ -133,8 +174,9 @@ export const CorrectOwnProductionTraceabilityModal = ({
                   selectedRows={selectedRows}
                   setSelectedRows={setSelectedRows}
                   metiCode={formik.values?.metiCode}
-                  recipeMetiCode={recipeMetiCode}
+                  componentMetiCode={componentMetiCode}
                   formik={formik}
+                  recipeQuery={recipeQuery}
                 />,
                 <SelectCharge
                   onContinue={() => {
@@ -143,8 +185,9 @@ export const CorrectOwnProductionTraceabilityModal = ({
                   onCancel={cancel}
                   setSelectedRows={setSelectedRows}
                   selectedRows={selectedRows}
-                  metiCode={formik.values?.metiCode}
                   formik={formik}
+                  componentMetiCode={componentMetiCode}
+                  recipeQuery={recipeQuery}
                 />
               ][showAddBatch ? 1 : showAddCharge ? 2 : 0]
             }

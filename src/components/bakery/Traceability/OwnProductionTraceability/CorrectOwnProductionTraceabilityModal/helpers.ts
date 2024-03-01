@@ -71,7 +71,7 @@ export const toBatchFormat = (batches = [], quantity) => {
     componentQuantity: quantity, // item.batchQuantity,
     componentName: item.batchName,
 
-    quantity: quantity, //item.batchQuantity,
+    quantity: item.batchQuantity,
     openingDate: item.entryDate,
     dlc: item?.dlcDays
   }))
@@ -99,24 +99,15 @@ export const toBatchFormatEdit = (batches, isEdit = false) => {
 }
 
 export const toChargeFormat = (charges, quantity) => {
-  return typeof charges === 'undefined'
-    ? {
-        childTraceabilityId: '',
-        componentCode: '',
-        componentQuantity: '',
-        quantity: 0,
-        openingDate: dayjs(),
-        dlc: 5
-      }
-    : charges?.map(item => ({
-        childTraceabilityId: item.id,
-        componentCode: item.product.metiCode,
-        componentQuantity: item.quantity,
-        componentName: item.chargeNumber,
-        quantity: quantity, //item.quantity,
-        openingDate: dayjs(),
-        dlc: item.dlc
-      }))
+  return charges?.map(item => ({
+    childTraceabilityId: item.id,
+    componentCode: item.product.metiCode,
+    componentQuantity: quantity,
+    componentName: item.chargeNumber,
+    quantity: item.quantity,
+    openingDate: dayjs(),
+    dlc: item.dlc
+  }))
 }
 
 export const toChargeFormatEdit = charges => {

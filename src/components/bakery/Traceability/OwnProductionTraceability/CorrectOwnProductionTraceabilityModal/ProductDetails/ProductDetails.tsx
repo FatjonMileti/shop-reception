@@ -8,13 +8,8 @@ import {
   RadioButtonGroup
 } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
-import { SelectProduct } from '../../../ReceivedProducts/AddReceivedProduct/SelectProduct'
 import { ProductDetailsBatches } from './ProductDetailsBatches'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
-import { useQuery } from 'react-query'
-import { makeCoreGetRequest } from '../../../../../../utils/api'
-import { formatErrorMessage } from '../../../../../../utils/formatting'
-import { useNotification } from '../../../../../../hooks'
+import { UseQueryResult } from 'react-query'
 import { toBoolean } from 'utils/helpers'
 
 interface ProductDetailsProps {
@@ -22,8 +17,9 @@ interface ProductDetailsProps {
   onSelectBatch: (step?: number, metiCode?: any) => void
   selectedRows: any
   formik: any
-  setRecipeMetiCode: Function
+  setComponentMetiCode: Function
   editItem: any
+  recipeQuery: UseQueryResult<any>
 }
 
 export const ProductDetails = (props: ProductDetailsProps) => {
@@ -32,11 +28,10 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     onCancel,
     onSelectBatch,
     selectedRows,
-    setRecipeMetiCode,
-    editItem
+    setComponentMetiCode,
+    editItem,
+    recipeQuery
   } = props
-
-  const { showNotification } = useNotification()
 
   useEffect(() => {
     formik.setFieldValue('traceabilityProductionList', selectedRows)
@@ -48,35 +43,6 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     )
     formik.setFieldValue('traceabilityProductionList', newBatches)
   }
-
-
-  const { data: receip, isLoading: isReceipLoading } = useQuery(
-    ['receip', editItem?.product?.metiCode],
-    async () => {
-      const result = await makeCoreGetRequest(
-        `/bakery/recipe/${editItem?.product?.metiCode}`
-      )
-      let charges = []
-      let batches = []
-
-      if (result) {
-        result[0].componentList.forEach(item => {
-          if (item.withBatch) batches.push(item)
-          if (item.withRecipe) charges.push(item)
-        })
-      }
-
-      return { charges, batches, details: result[0] }
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
 
   return (
     <Grid container rowSpacing={3.5}>
@@ -243,8 +209,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
           productMetiCode={formik.values?.metiCode}
           onSelectBatch={onSelectBatch}
           onDeleteBatch={onDeleteBatch}
-          receip={receip}
-          setRecipeMetiCode={setRecipeMetiCode}
+          receip={recipeQuery?.data}
+          setComponentMetiCode={setComponentMetiCode}
         />
 
         <Grid item xs={12} container justifyContent="space-between">

@@ -46,11 +46,11 @@ export const validationSchema = Yup.object().shape({
   )
 })
 
-export const toBatchFormat = (batches = []) => {
+export const toBatchFormat = (batches = [], quantity) => {
   return batches?.map(item => ({
     batchId: item?.id,
     componentCode: item.product.metiCode,
-    componentQuantity: item.batchQuantity,
+    componentQuantity: quantity, //item.batchQuantity,
     componentName: item.batchName,
     quantity: item.batchQuantity,
     openingDate: item.entryDate,
@@ -59,24 +59,15 @@ export const toBatchFormat = (batches = []) => {
 }
 
 export const toChargeFormat = (charges, quantity) => {
-  return typeof charges === 'undefined'
-    ? {
-        childTraceabilityId: '',
-        componentCode: '',
-        componentQuantity: '',
-        quantity: 0,
-        openingDate: dayjs(),
-        dlc: 5
-      }
-    : charges?.map(item => ({
-        childTraceabilityId: item.id,
-        componentCode: item.product.metiCode,
-        componentQuantity: item.quantity,
-        componentName: item.chargeNumber,
-        quantity: quantity, //item.quantity,
-        openingDate: dayjs(),
-        dlc: item.dlc
-      }))
+  return charges?.map(item => ({
+    childTraceabilityId: item.id,
+    componentCode: item.product.metiCode,
+    componentQuantity: quantity, //item.quantity,
+    componentName: item.chargeNumber,
+    quantity: item.quantity,
+    openingDate: dayjs(),
+    dlc: item.dlc
+  }))
 }
 
 export const columns: any[] = [
