@@ -8,13 +8,9 @@ import {
   RadioButtonGroup
 } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
-import { SelectProduct } from '../../../ReceivedProducts/AddReceivedProduct/SelectProduct'
 import { ProductDetailsBatches } from './ProductDetailsBatches'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
-import { useQuery } from 'react-query'
-import { makeCoreGetRequest } from '../../../../../../utils/api'
-import { formatErrorMessage } from '../../../../../../utils/formatting'
-import { useNotification } from '../../../../../../hooks'
+import { UseQueryResult } from 'react-query'
 import { toBoolean } from 'utils/helpers'
 
 interface ProductDetailsProps {
@@ -23,8 +19,8 @@ interface ProductDetailsProps {
   selectedProduct: any
   selectedRows: any
   formik: any
-  isEdit: boolean
-  setRecipeMetiCode: Function
+  setComponentMetiCode: Function
+  recipeQuery: UseQueryResult<any>
 }
 
 export const ProductDetails = (props: ProductDetailsProps) => {
@@ -34,11 +30,9 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     onSelectBatch,
     selectedProduct,
     selectedRows,
-    isEdit,
-    setRecipeMetiCode
+    setComponentMetiCode,
+    recipeQuery
   } = props
-
-  const { showNotification } = useNotification()
 
   useEffect(() => {
     formik.setFieldValue('traceabilityProductionList', selectedRows)
@@ -51,90 +45,30 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     formik.setFieldValue('traceabilityProductionList', newBatches)
   }
 
-  const { data: receip, isLoading: isReceipLoading } = useQuery(
-    ['receip'],
-    async () => {
-      const result = await makeCoreGetRequest(
-        `/bakery/recipe/${selectedProduct?.metiCode || formik.values.metiCode}`
-      )
-      let charges = []
-      let batches = []
-
-      if (result) {
-        result[0].componentList.forEach(item => {
-          if (item.withBatch) batches.push(item)
-          if (item.withRecipe) charges.push(item)
-        })
-      }
-
-      return { charges, batches, details: result[0] }
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
   return (
     <Grid container rowSpacing={3.5}>
-      {!isEdit && (
-        <Grid item xs={12} spacing={2}>
-          <FormInfoItems
-            items={[
-              {
-                label: 'Produs:',
-                name: selectedProduct?.name
-              },
-              {
-                label: 'Produs cod Meti:',
-                name: selectedProduct?.metiCode
-              },
-              {
-                label: 'Info:',
-                name: `Greutate neta articol conform reteta: ${
-                  receip?.details?.recipeQuantity || ''
-                }${receip?.details?.recipeUnit || ''}`
-              }
-            ]}
-          />
-        </Grid>
-      )}
+      <Grid item xs={12} spacing={2}>
+        <FormInfoItems
+          items={[
+            {
+              label: 'Produs:',
+              name: selectedProduct?.name
+            },
+            {
+              label: 'Produs cod Meti:',
+              name: selectedProduct?.metiCode
+            },
+            {
+              label: 'Info:',
+              name: `Greutate neta articol conform reteta: ${
+                recipeQuery?.data?.details?.recipeQuantity || ''
+              }${recipeQuery?.data?.details?.recipeUnit || ''}`
+            }
+          ]}
+        />
+      </Grid>
 
       <Grid container spacing={2} mt={2}>
-        {isEdit && (
-          <>
-            <Grid item xs={3}>
-              <Input
-                type="text"
-                variant="outlined"
-                label="Cod METI"
-                onChange={e => formik.setFieldValue('metiCode', e.currentTarget.value)}
-                value={formik.values.metiCode}
-                name="metiCode"
-                disabled
-              />
-            </Grid>
-            <Grid item xs={9}>
-              <SelectProduct
-                setSelectedProduct={product => {
-                  formik.setFieldValue('productName', product?.name)
-                  formik.setFieldValue('metiCode', product?.metiCode)
-                }}
-                selectedProduct={selectedProduct}
-                onContinue={() => {}}
-                onCancel={() => {}}
-                customLabel={'Produs'}
-                hideActions
-                isEdit={isEdit}
-              />
-            </Grid>
-          </>
-        )}
-
         <Grid item xs={3}>
           <DatePicker
             label="Data productie"
@@ -149,7 +83,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
         </Grid>
         <Grid item xs={3}>
           <Input
-            type="text"
+            type="number"
             variant="outlined"
             label="Sarja"
             onChange={e => formik.setFieldValue('chargeNumber', e.currentTarget.value)}
@@ -165,12 +99,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             type="text"
             variant="outlined"
             label="Cantitate sarja"
-            onChange={({currentTarget: {value}}) => {
+            onChange={({ currentTarget: { value } }) => {
               formik.setFieldValue('quantity', value)
-              formik.setFieldValue('traceabilityProductionList', formik.values.traceabilityProductionList.map(tf => ({
-                ...tf,
-                componentQuantity: value
-              })))
             }}
             value={formik.values.quantity}
             name="quantity"
@@ -229,11 +159,11 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             options={[
               {
                 label: 'DA',
-                value: 'true' 
+                value: 'true'
               },
               {
                 label: 'NU',
-                value: 'false' 
+                value: 'false'
               }
             ]}
           />
@@ -271,8 +201,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
           productMetiCode={selectedProduct?.metiCode}
           onSelectBatch={onSelectBatch}
           onDeleteBatch={onDeleteBatch}
-          receip={receip}
-          setRecipeMetiCode={setRecipeMetiCode}
+          receip={recipeQuery.data}
+          setComponentMetiCode={setComponentMetiCode}
         />
 
         <Grid item xs={12} container justifyContent="space-between">

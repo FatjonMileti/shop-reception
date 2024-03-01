@@ -2,143 +2,71 @@ import * as Yup from 'yup'
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
-export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
-  const batchItems = []
-  const childItems = []
-
-  if (editItem?.traceabilityProductionList) {
-    editItem.traceabilityProductionList?.forEach(item => {
-      if (item.batch) {
-        batchItems.push(item.batch)
-      } else if (item.childTraceability) {
-        childItems.push(item.childTraceability)
-      }
-    })
-  }
-
-  const formattedProductionList = [
-    ...toBatchFormatEdit(batchItems),
-    ...toChargeFormatEdit(childItems)
-  ]
-
+export const getInitialValues = (selectedProduct, selectedRows) => {
   return {
-    productId: editItem?.product?.id || selectedProduct?.id || '',
-    productionDate: editItem?.productionDate || dayjs(),
-    chargeNumber: editItem?.chargeNumber || null,
-    productionOperator: editItem?.productionOperator || null,
-    quantity: editItem?.quantity || null,
-    thermalCondition: editItem?.thermalCondition || null,
-    dlc: editItem?.dlc || null,
+    productId: '',
+    productionDate: dayjs(),
+    chargeNumber: null,
+    productionOperator: null,
+    quantity: null,
+    thermalCondition: null,
+    dlc: null,
 
-    conform: editItem?.conform || true,
-    nonComplianceReason: editItem?.nonComplianceReason || null,
-    productDestination: editItem?.productDestination || null,
+    conform: true,
+    nonComplianceReason: null,
+    productDestination: null,
 
-    metiCode: editItem?.product?.metiCode || selectedProduct?.metiCode,
-    productName: editItem?.product?.name || selectedProduct?.name,
-    traceabilityProductionList: editItem ? formattedProductionList : selectedRows
+    metiCode: selectedProduct?.metiCode,
+    productName: selectedProduct?.name,
+    traceabilityProductionList: selectedRows
   }
 }
 
-export const getValidationSchema = () =>
-  Yup.object().shape({
-    productionDate: Yup.date()
-      .max(new Date(), 'Data de productie nu poate fi in viitor.')
-      .required('Campul data productie trebuie completat.'),
+export const validationSchema = Yup.object().shape({
+  productionDate: Yup.date()
+    .max(new Date(), 'Data de productie nu poate fi in viitor.')
+    .required('Campul data productie trebuie completat.'),
 
-    chargeNumber: Yup.string().required('Campul sarja trebuie completat.'),
-    productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
-    quantity: Yup.string().required('Campul cantitate trebuie completat'),
-    thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
-    conform: Yup.boolean(),
+  chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
+  productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
+  quantity: Yup.string().required('Campul cantitate trebuie completat'),
+  thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
+  conform: Yup.boolean(),
 
-    traceabilityProductionList: Yup.array().of(
-      Yup.object().shape({
-        batchId: Yup.string(),
-        childTraceabilityId: Yup.string(),
-        componentCode: Yup.number(),
-        componentQuantity: Yup.number(),
-        quantity: Yup.number(),
-        openingDate: Yup.date(),
-        dlc: Yup.string()
-      })
-    )
-  })
+  traceabilityProductionList: Yup.array().of(
+    Yup.object().shape({
+      batchId: Yup.string(),
+      childTraceabilityId: Yup.string(),
+      componentCode: Yup.number(),
+      componentQuantity: Yup.number(),
+      quantity: Yup.number(),
+      openingDate: Yup.date(),
+      dlc: Yup.string()
+    })
+  )
+})
 
-export const toBatchFormat = (batches, quantity) => {
-  return typeof batches === 'undefined'
-    ? {
-        batchId: '',
-        componentCode: '',
-        componentQuantity: '',
-        quantity: 0,
-        openingDate: dayjs(),
-        dlc: 5
-      }
-    : batches?.map(item => ({
-        batchId: item?.id,
-        componentCode: item.product.metiCode,
-        componentQuantity: quantity, // item.batchQuantity,
-        componentName: item.batchName,
-
-        quantity: quantity, //item.batchQuantity,
-        openingDate: item.entryDate,
-        dlc: item?.dlcDays
-      }))
-}
-
-export const toBatchFormatEdit = (batches, isEdit = false) => {
-  return typeof batches === 'undefined'
-    ? {
-        batchId: '',
-        componentCode: '',
-        componentQuantity: '',
-        quantity: 0,
-        openingDate: dayjs(),
-        dlc: 5
-      }
-    : batches?.map(item => ({
-        batchId: item.batch?.id,
-        componentCode: item?.componentCode,
-        componentQuantity: item.batch?.componentQuantity,
-        componentName: item.batch?.componentName,
-        quantity: item.batch?.batchQuantity,
-        openingDate: formatBakeryPayloadDate(item.openingDate),
-        dlc: item?.batch?.dlcDays
-      }))
+export const toBatchFormat = (batches = [], quantity) => {
+  return batches?.map(item => ({
+    batchId: item?.id,
+    componentCode: item.product.metiCode,
+    componentQuantity: quantity, //item.batchQuantity,
+    componentName: item.batchName,
+    quantity: item.batchQuantity,
+    openingDate: item.entryDate,
+    dlc: item?.dlcDays
+  }))
 }
 
 export const toChargeFormat = (charges, quantity) => {
-  return typeof charges === 'undefined'
-    ? {
-        childTraceabilityId: '',
-        componentCode: '',
-        componentQuantity: '',
-        quantity: 0,
-        openingDate: dayjs(),
-        dlc: 5
-      }
-    : charges?.map(item => ({
-        childTraceabilityId: item.id,
-        componentCode: item.product.metiCode,
-        componentQuantity: item.quantity,
-        componentName: item.chargeNumber,
-        quantity: quantity, //item.quantity,
-        openingDate: dayjs(),
-        dlc: item.dlc
-      }))
-}
-
-export const toChargeFormatEdit = charges => {
   return charges?.map(item => ({
-    childTraceabilityId: item.childTraceabilityId?.id,
-    componentCode: item?.componentCode,
-    componentQuantity: item.batch?.componentQuantity,
-    componentName: item.batch?.componentName,
-
-    quantity: item.batch?.batchQuantity,
-    openingDate: formatBakeryPayloadDate(item?.openingDate),
-    dlc: item?.batch?.dlcDays
+    childTraceabilityId: item.id,
+    componentCode: item.product.metiCode,
+    componentQuantity: quantity, //item.quantity,
+    componentName: item.chargeNumber,
+    quantity: item.quantity,
+    openingDate: dayjs(),
+    dlc: item.dlc
   }))
 }
 

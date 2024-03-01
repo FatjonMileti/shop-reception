@@ -16,6 +16,7 @@ import { useQuery } from 'react-query'
 import { Filter, ValueLabelInterface } from 'components/bakery/interfaces'
 import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
 import { formatErrorMessage } from 'utils/formatting'
+import { CorrectOwnProductionTraceabilityModal } from './CorrectOwnProductionTraceabilityModal/CorrectOwnProductionTraceabilityModal'
 
 const orderBy = 'createdDate'
 const order = 'desc'
@@ -23,16 +24,18 @@ const order = 'desc'
 export const OwnProductionTraceability = () => {
   const { showNotification } = useNotification()
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [tableData, setTableData] = useState(null)
+  const [tableData, setTableData] = useState([])
   const [rows, setRows] = useState([])
-  const [editItem, setEditItem] = useState(null)
-  const [isEdit, setIsEdit] = useState<boolean>(false)
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+
   const [verifyItem, setVerifyItem] = useState(null)
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [itemIdToCorrect, setItemIdToCorrect] = useState(null)
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
@@ -62,12 +65,28 @@ export const OwnProductionTraceability = () => {
     }
   }
   const handleRemoteDetails = async (rowId: string | number) => {
-    const response = await makeCoreGetRequest(`/bakery/traceability/production/${rowId}`)
-    const data = await response
-    setEditItem(data)
-
-    return <OwnProductionTraceabilityDescription item={data} chargeItem={tableData} />
+    const data = await fetchProductionItem(rowId)
+    return (
+      <OwnProductionTraceabilityDescription
+        item={data}
+        chargeItem={tableData?.find(td => td.id === rowId)}
+      />
+    )
   }
+
+  const fetchProductionItem = async (rowId: string | number) => {
+    return await makeCoreGetRequest(`/bakery/traceability/production/${rowId}`)
+  }
+
+  const correctItemQuery = useQuery(
+    ['own-production-traceability-item', itemIdToCorrect],
+    async () => {
+      return await fetchProductionItem(itemIdToCorrect)
+    },
+    {
+      enabled: !!itemIdToCorrect
+    }
+  )
 
   const families = useQuery(
     ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
@@ -169,9 +188,13 @@ export const OwnProductionTraceability = () => {
         <OwnProductionTraceabilityModal
           isModalOpen={isModalOpen}
           closeModal={() => setIsModalOpen(false)}
-          editItem={editItem}
-          setEditItem={setEditItem}
-          isEdit={isEdit}
+        />
+        <CorrectOwnProductionTraceabilityModal
+          isModalOpen={!!itemIdToCorrect}
+          closeModal={() => {
+            setItemIdToCorrect(null)
+          }}
+          correctItemQuery={correctItemQuery}
         />
         <EditOwnProductionTraceabilityModal
           isModalOpen={isEditModalOpen}
@@ -190,7 +213,6 @@ export const OwnProductionTraceability = () => {
             {
               label: 'Adauga',
               onClick: () => {
-                setIsEdit(false)
                 setIsModalOpen(true)
               },
               icon: <AddActionIcon />
@@ -203,9 +225,7 @@ export const OwnProductionTraceability = () => {
               typographyVariant: 'medium',
               backgroundColor: '#CC4010',
               onClick: async (e, rowId) => {
-                setIsEdit(true)
-                setIsModalOpen(true)
-                await handleRemoteDetails(rowId)
+                setItemIdToCorrect(rowId)
               },
               desktopIcon: <EditActionIcon />
             },
@@ -216,7 +236,7 @@ export const OwnProductionTraceability = () => {
               backgroundColor: '#0970E6',
               onClick: async (e, rowId) => {
                 setIsEditModalOpen(true)
-                setVerifyItem(tableData.find(data => data.id === rowId))
+                setVerifyItem(tableData?.find(data => data.id === rowId))
               },
               desktopIcon: <EditActionIcon />
             }
