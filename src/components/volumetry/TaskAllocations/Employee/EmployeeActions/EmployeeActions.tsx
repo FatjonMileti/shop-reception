@@ -8,11 +8,11 @@ import { TASK_STATUS_ACTIONS } from '../constants'
 const EmployeeActions = (props: EmployeeActionsProps) => {
   const { taskCurrentState, updateTaskStatus, openStopTaskModal } = props
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1145)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 900)
+      setIsMobile(window.innerWidth < 1145)
     }
     window.addEventListener('resize', handleResize)
 
@@ -78,7 +78,8 @@ const EmployeeActions = (props: EmployeeActionsProps) => {
           style={{
             height: '30px',
             width: isMobile ? '100%' : 'auto',
-            marginLeft: '12px'
+            marginLeft: isMobile ? 0 : '12px',
+            marginTop: isMobile ? '12px' : 0
           }}
           startIcon={<Stop />}
           onClick={e => {
