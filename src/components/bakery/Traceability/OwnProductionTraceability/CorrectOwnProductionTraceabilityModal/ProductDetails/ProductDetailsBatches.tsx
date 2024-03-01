@@ -148,10 +148,14 @@ export const ProductDetailsBatches = ({
             </Grid>
             <Grid item xs={3}>
               <Input
-                type="text"
+                type="number"
                 variant="outlined"
                 label={`Cantitatea`}
-                value={item.componentQuantity}
+                value={`${quantityCalculation(
+                  formik.values.quantity,
+                  item.componentQuantity,
+                  receip.details.recipeQuantity
+                )}`}
                 name="componentQuantity"
                 disabled
               />
