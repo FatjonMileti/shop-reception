@@ -16,8 +16,13 @@ interface SelectBatchProps {
   formik: any
 }
 
-export const SelectBatch = (props: SelectBatchProps) => {
-  const { onContinue, onCancel, setSelectedRows } = props
+export const SelectBatch = ({
+  formik,
+  onContinue,
+  onCancel,
+  setSelectedRows,
+  selectedProduct
+}: SelectBatchProps) => {
   const { showNotification } = useNotification()
 
   const [tableItems, setTableItems] = useState<any[]>([])
@@ -35,7 +40,7 @@ export const SelectBatch = (props: SelectBatchProps) => {
           filters: [
             {
               name: 'product.metiCode',
-              value: props.selectedProduct?.metiCode
+              value: selectedProduct?.metiCode
             }
           ]
         })
@@ -65,7 +70,9 @@ export const SelectBatch = (props: SelectBatchProps) => {
             isLoading={isLoading}
             columns={columns}
             totalCount={totalCount}
-            selectRows={rows => setSelectedRows(toBatchFormat({batches: rows, quantity: props.formik.values?.quantity}))}
+            selectRows={rows =>
+              setSelectedRows(toBatchFormat({ batches: rows, quantity: formik.values?.quantity }))
+            }
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
           />
