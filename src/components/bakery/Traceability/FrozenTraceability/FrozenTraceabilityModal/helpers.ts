@@ -51,7 +51,7 @@ export const toBatchFormat = ({ batches, quantity }) => {
   return batches.map(item => ({
     batchName: item.batchName,
     batchId: item.id,
-    quantity: item.batchQuantity,
+    quantity: quantity, //item.batchQuantity,
     openingDate: item.entryDate,
     dlc: item.dlcDays
   }))
