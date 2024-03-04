@@ -31,7 +31,7 @@ export const getValidationSchema = () =>
     productionDate: Yup.date()
     .max(new Date(), 'Data de productie nu poate fi in viitor.')
     .required('Campul data productie trebuie completat.'),
-    chargeNumber: Yup.string().required('Campul sarja trebuie completat.'),
+    chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
     productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
     quantity: Yup.string().required('Campul cantitate trebuie completat'),
     thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),

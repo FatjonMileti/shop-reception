@@ -87,7 +87,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
 
         <Grid item xs={3}>
           <Input
-            type="text"
+            type="number"
             variant="outlined"
             label="Sarja"
             required
