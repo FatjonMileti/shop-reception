@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { ImageCell } from 'components/core-ui/ImageCell'
+import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import * as Yup from 'yup'
 
 export const columns = [
@@ -59,6 +60,23 @@ export const columns = [
     minWidth: '140px',
     isGroup: true,
   },
+]
+
+export const drawerFilters = (familiesQuery) => [
+  {
+    name: 'family',
+    value: undefined,
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Familie"
+        options={familiesQuery.data || []}
+        multiple
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Familie'
+  }
 ]
 
 export const getInitialValues = editItem => ({

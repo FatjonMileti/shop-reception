@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { EditGrowthIndexItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { getInitialValues } from '../helpers'
-import { ChangeEvent, useMemo } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
 interface EditGrowthIndexProps {
@@ -23,7 +23,11 @@ const EditGrowthIndex: React.FC<EditGrowthIndexProps> = props => {
     const { isModalOpen, closeModal, setShouldRefreshData, editGrowthIndexId } = props
     const { showNotification } = useNotification()
 
-    const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
+    useEffect(() => {
+      if(isModalOpen) refetchEditItem()
+    }, [isModalOpen])
+    
+    const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
         ['growth-index', editGrowthIndexId],
         async () => {
           if (editGrowthIndexId) {

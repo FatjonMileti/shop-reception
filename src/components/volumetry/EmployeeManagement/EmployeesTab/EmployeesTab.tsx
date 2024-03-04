@@ -6,15 +6,16 @@ import { useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { EmployeeManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
-import { columns, roles } from './helpers'
+import { columns } from './helpers'
 import { Autocomplete, FilterDataSelect, Input } from '@fullscreendigital/carrefour-dex-fe'
 import {
   getDepartmentsOptions,
   getJobTitlesOptions,
   getLocationsOptions
 } from 'components/volumetry/api'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 import { useNotification, usePermissions } from 'hooks'
+import { roles } from '../../helpers'
 
 const EmployeesTab = () => {
   const [locationsFilterValue, setLocationsFilterValue] = useState<ValueLabelInterface>(null)
@@ -46,7 +47,7 @@ const EmployeesTab = () => {
         toTableGETUrl({
           url: '/volumetry/workers/employees',
           filters: canUseCustomFilter
-            ? [{ name: 'location', value: locationsFilterValue.value }]
+            ? [{ name: 'locationId', value: locationsFilterValue.value }]
             : [],
           tableFilters,
           page,
@@ -73,7 +74,7 @@ const EmployeesTab = () => {
       filter: <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
     },
     {
-      name: 'department',
+      name: 'genericDepartmentId',
       label: 'Departament',
       type: 'autocomplete',
       value: '',
@@ -143,6 +144,12 @@ const EmployeesTab = () => {
               shouldRefreshData={shouldRefreshData}
               setShouldRefreshData={setShouldRefreshData}
               filters={tableFilterFields}
+              filtersLabel="Filtreaza"
+              appliedFiltersLabel="Filtre"
+              applyFiltersButtonLabel="Aplica filtre"
+              filtersButtonLabel="Filtreaza"
+              cancelFiltersButtonLabel="Renunta"
+              labelRowsPerPage="Randuri pe pagina:"
             />
           )
         ) : (
@@ -158,6 +165,12 @@ const EmployeesTab = () => {
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
+            filtersLabel="Filtreaza"
+            appliedFiltersLabel="Filtre"
+            applyFiltersButtonLabel="Aplica filtre"
+            filtersButtonLabel="Filtreaza"
+            cancelFiltersButtonLabel="Renunta"
+            labelRowsPerPage="Randuri pe pagina:"
           />
         )}
       </Box>

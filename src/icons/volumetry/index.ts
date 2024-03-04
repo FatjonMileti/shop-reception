@@ -7,3 +7,4 @@ export { default as ManagementTasksHome } from './submodules/ManagementTasksHome
 export { default as AssignmentVolumetryHome } from './AssignmentVolumetryHome'
 export { default as GroupVolumetryHome } from './GroupVolumetryHome'
 export { default as TasksVolumetryHome } from './TasksVolumetryHome'
+export { default as ReportsVolumetrySubcategory } from './submodules/ReportsVolumetrySubcategory'

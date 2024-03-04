@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { EditFamilyItem, ValueLabelInterface } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { getInitialValues, famInBakeryScopes, divisionTypes } from '../helpers'
-import { ChangeEvent, useMemo, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { toAsyncSelectOptions } from 'components/bakery/commonSerializers'
 
@@ -25,13 +25,15 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
     const [moduleValue, setModuleValue] = useState<ValueLabelInterface>(null)
     const { showNotification } = useNotification()
 
+    useEffect(() => {
+      if(isModalOpen) refetchEditItem()
+    }, [isModalOpen])
+    
     const { data: modules, isLoading: isModulesLoading, refetch: refetchModules } = useQuery(
       ['modules'],
       async () => {
         const result = await makeCoreGetRequest('/bakery/module')
         const resultOptions = toAsyncSelectOptions(result, 'id', 'name') || []
-
-        setModuleValue(resultOptions[0])
         return resultOptions || []
       },
       {
@@ -45,7 +47,7 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
       }
     )
 
-    const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
+    const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
         ['family', editFamilyId],
         async () => {
           if (editFamilyId) {
@@ -97,7 +99,10 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
         onSubmit: async (values: EditFamilyItem, { resetForm }) => {
             const payload = {
                 ...values,
-                enable: values.enable === 'Da'
+                enable: values.enable === 'Da',
+            }
+            if(moduleValue.value) {
+              payload.moduleId = moduleValue.value
             }
             mutate(payload)
             resetForm()
@@ -106,7 +111,6 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
 
     const handleModuleChange = value => {
       setModuleValue(value)
-      setShouldRefreshData(true)
     }
     
     return (
@@ -138,7 +142,7 @@ const EditFamily: React.FC<EditFamilyProps> = props => {
                   <AsyncAutocomplete
                     variant="outlined"
                     name="moduleName"
-                    label="Zona"
+                    label="Modul"
                     value={moduleValue}
                     options={modules}
                     onChange={handleModuleChange}

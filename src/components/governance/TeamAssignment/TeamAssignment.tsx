@@ -8,7 +8,6 @@ import { useGovernanceDomains, useNotification, usePermissions } from 'hooks'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { makeCoreGetRequest } from 'utils/api'
-import { PermissionRoles } from 'utils/enums'
 import { formatErrorMessage } from 'utils/formatting'
 import s from '../TeamDayOffManagement/TeamDayOffManagement.modules.scss'
 import { TeamAssignmentItem, TeamAssignmentTableFilter, ValueLabelInterface } from '../interfaces'
@@ -16,7 +15,7 @@ import { EditTeamAssignment } from './EditTeamAssignment'
 import { toTableRowItems } from './serializers'
 import { EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
-import { roles } from '../helpers'
+import { roles } from './helpers'
 
 const columns = [
   {

@@ -3,7 +3,7 @@ import { Grid, Typography } from '@mui/material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { makeCoreDeleteRequest } from 'utils/api'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
 
 interface DeleteCollaboratorProps {

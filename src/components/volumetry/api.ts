@@ -1,9 +1,11 @@
 import { makeCoreGetRequest } from 'utils/api'
 import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
-import { fromTaskPayload, handleQueryError } from './utils'
-import { toEmployeeFilterItems } from './TaskAllocation/serializers'
+import { toEmployeeFilterItems, toEmployeesAttendance } from './TaskAllocations/serializers'
+import { fromTaskPayload } from './utils'
 import { toDepartmentsOptions } from './serializers'
+import { handleQueryError } from 'utils/helpers'
+import dayjs from 'dayjs'
 
 export const getDepartmentsOptions = (
   showNotification: Function,
@@ -79,7 +81,11 @@ export const getLocationsOptions = (
     },
     {
       onError: error =>
-        handleQueryError(error, 'A aparut o eroare la obtinerea listei magazinelor.', showNotification)
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea listei magazinelor.',
+          showNotification
+        )
     }
   )
 }
@@ -171,8 +177,8 @@ export const getFrequencyOptions = (showNotification: Function) => {
       const result = await makeCoreGetRequest('/volumetry/task-templates/frequencies')
 
       const resultOptions = result.map(frequency => ({
-        value: frequency,
-        label: frequency
+        value: frequency.key,
+        label: frequency.value
       }))
 
       return resultOptions || []
@@ -191,7 +197,7 @@ export const getMeasurementUnitsOptions = (showNotification: Function) => {
       const result = await makeCoreGetRequest('/volumetry/task-templates/measurement-units')
 
       const resultOptions = result.map(unit => ({
-        value: unit.name,
+        value: unit.id,
         label: unit.name
       }))
 
@@ -240,11 +246,14 @@ export const getCategoryDepartmentsOptions = (
   return useQuery(
     ['category-departments', categoryId],
     async () => {
-      const result = await makeCoreGetRequest(`/volumetry/locations/departments/${categoryId}`)
+      const result = await makeCoreGetRequest(
+        `/volumetry/locations/generic-departments?filterBy=categoryId&filterValue=${categoryId}`
+      )
 
       const resultOptions = result.map(department => ({
         value: department.id,
-        label: department.name
+        label: department.departmentName,
+        locationType: department.locationType
       }))
 
       return resultOptions || []
@@ -270,11 +279,13 @@ export const getRaionsOptions = (
   return useQuery(
     ['raions', departmentId],
     async () => {
-      const result = await makeCoreGetRequest(`/volumetry/locations/raions/${departmentId}`)
+      const result = await makeCoreGetRequest(
+        `/volumetry/locations/generic-rayons?filterBy=genericDepartmentId&filterValue=${departmentId}`
+      )
 
       const resultOptions = result.map(raion => ({
         value: raion.id,
-        label: raion.name
+        label: raion.rayonName
       }))
 
       callback(resultOptions)
@@ -292,8 +303,32 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   return useQuery(
     ['employees-options'],
     async () => {
-      const employees = await makeCoreGetRequest('/volumetry/workers/employees/shifts')
+      const employees = await makeCoreGetRequest('/volumetry/workers/shifts')
       return toEmployeeFilterItems(employees) || []
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification),
+
+      enabled: validateQuery
+    }
+  )
+}
+
+export const getEmployeesAttendance = (
+  departmentId: number | string,
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['employees-attendance', departmentId],
+    async () => {
+      // const a = dayjs('2024-02-12T20:13:00').format('HH')
+
+      const employees = await makeCoreGetRequest(
+        `/volumetry/workers/shifts?filterBy=genericDepartmentId&filterValue=${departmentId}`
+      )
+      return toEmployeesAttendance(employees) || []
     },
     {
       onError: error =>

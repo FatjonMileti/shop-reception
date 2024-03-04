@@ -108,7 +108,7 @@ export const columns = [
     type: 'string',
     render: (row: any) => (
       <Box>
-        <BooleanText value={row.inPromotion} onSuccess="O" onFailure="F" />
+        <BooleanText value={row.clusterMandatory} onSuccess="O" onFailure="F" />
       </Box>
     )
   },
@@ -178,7 +178,6 @@ export const drawerFilters = (currentDate, familiesQuery, subfamiliesQuery) => [
     ),
     type: 'autocomplete',
     label: 'Familie',
-    clearFiltersOnChange: ['subfamily']
   },
   {
     name: 'subfamily',

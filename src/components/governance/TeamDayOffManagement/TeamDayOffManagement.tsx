@@ -6,7 +6,6 @@ import { Table } from 'components/core-ui/Table'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { useGovernanceDomains, useNotification, usePermissions } from 'hooks'
 import { useEffect, useMemo, useState } from 'react'
-import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { roles } from './helpers'
@@ -57,31 +56,6 @@ const TeamDayOffManagement = () => {
     })()
   }, [storedGovernanceDomains])
 
-  const { data: teamMembers, isLoading: isTeamMembersLoading } = useQuery(
-    ['teamMembers', domainFilterValue],
-    async () => {
-      if (domainFilterValue === null) {
-        return null
-      }
-
-      const result = await makeCoreGetRequest(
-        `/governance/teamMembers?page=-1&filterBy=domain&filterValue=${encodeURIComponent(
-          domainFilterValue?.value
-        )}`
-      )
-      const resultOptions = toAsyncSelectOptions(result.list, 'id', 'name') || []
-      return resultOptions || null
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
 
@@ -94,49 +68,10 @@ const TeamDayOffManagement = () => {
   const openPublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(true)
   const closePublicHolidaysModal = (): void => setIsPublicHolidaysModalOpen(false)
 
-  const rowActions = useMemo(() => {
-    let actions = []
-
-    const selectRow = (rowId, action) => {
-      const item = tableItems.find(item => item.id === rowId)
-      setSelectedRow(item)
-      action === 'edit' ? openEditModal() : openDeleteModal()
-    }
-
-    if (canEdit) {
-      actions = [
-        ...actions,
-        {
-          label: 'Edit',
-          labelColor: 'white',
-          typographyVariant: 'medium',
-          desktopIcon: <EditActionIcon />,
-          backgroundColor: '#0970E6',
-          onClick: (e, rowId) => selectRow(rowId, 'edit')
-        }
-      ]
-    }
-    if (canDelete) {
-      actions = [
-        ...actions,
-        {
-          label: 'Edit',
-          labelColor: 'white',
-          typographyVariant: 'medium',
-          desktopIcon: <EditActionIcon />,
-          backgroundColor: '#0970E6',
-          onClick: (e, rowId) => selectRow(rowId, 'edit')
-        }
-      ]
-    }
-
-    return actions
-  }, [columns, canEdit, canDelete, teamMembers, tableItems])
-
   const toolbarActions = useMemo(() => {
     let actions = [
       {
-        label: 'Holidays',
+        label: 'Public Holidays',
         icon: <CalendarActionIcon />,
         onClick: () => openPublicHolidaysModal()
       }
@@ -155,6 +90,12 @@ const TeamDayOffManagement = () => {
 
     return actions
   }, [canCreate])
+
+  const selectRow = (rowId, action) => {
+    const item = tableItems.find(item => item.id === rowId)
+    setSelectedRow(item)
+    action === 'edit' ? openEditModal() : openDeleteModal()
+  }
 
   const handleFilterChange = value => {
     setDomainFilterValue(value)
@@ -207,7 +148,7 @@ const TeamDayOffManagement = () => {
   return (
     <div className={s.mainContainer}>
       <Grid sx={{ width: '100%', display: 'block' }} container>
-        {!storedGovernanceDomains || isTeamMembersLoading ? (
+        {!storedGovernanceDomains ? (
           <div style={{ display: 'flex' }}>
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           </div>
@@ -233,27 +174,33 @@ const TeamDayOffManagement = () => {
             isModalOpen={isPublicHolidaysModalOpen}
             closeModal={closePublicHolidaysModal}
           />
-          <NewTimeOff
-            teamMembers={teamMembers}
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <NewTimeOff
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            editItem={selectedRow}
-            setShouldRefreshData={setShouldRefreshData}
-            isEdit
-          />
-          <DeleteConfirmationModal
-            isModalOpen={isDeleteModalOpen}
-            closeModal={closeDeleteModal}
-            actionUrl="/governance/teamTimeOff/:id"
-            itemId={`${selectedRow?.id}`}
-            content={<Typography>Are you sure you want to delete this entry?</Typography>}
-            setShouldRefreshData={setShouldRefreshData}
-          />
+          {canCreate && (
+            <NewTimeOff
+              isModalOpen={isNewModalOpen}
+              closeModal={closeNewModal}
+              setShouldRefreshData={setShouldRefreshData}
+              domainFilterValue={domainFilterValue}
+            />
+          )}
+          {canEdit && (
+            <NewTimeOff
+              isModalOpen={isEditModalOpen}
+              closeModal={closeEditModal}
+              editItem={selectedRow}
+              setShouldRefreshData={setShouldRefreshData}
+              isEdit
+            />
+          )}
+          {canDelete && (
+            <DeleteConfirmationModal
+              isModalOpen={isDeleteModalOpen}
+              closeModal={closeDeleteModal}
+              actionUrl="/governance/teamTimeOff/:id"
+              itemId={`${selectedRow?.id}`}
+              content={<Typography>Are you sure you want to delete this entry?</Typography>}
+              setShouldRefreshData={setShouldRefreshData}
+            />
+          )}
           <Table
             hideCheckbox
             orderBy="teamMember.name"
@@ -266,7 +213,25 @@ const TeamDayOffManagement = () => {
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
             filters={tableFilterFields}
-            rowActions={rowActions}
+            rowActions={[
+              canEdit && {
+                label: 'Edit',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                desktopIcon: <EditActionIcon />,
+
+                onClick: (_e, rowId) => selectRow(rowId, 'edit')
+              },
+              canDelete && {
+                label: 'Delete',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#d9534f',
+                desktopIcon: <DeleteActionIcon />,
+                onClick: (_e, rowId) => selectRow(rowId, 'delete')
+              }
+            ]}
             rowActionsWidth="130px"
             toolbarActions={toolbarActions}
             filtersLabel="Filters"

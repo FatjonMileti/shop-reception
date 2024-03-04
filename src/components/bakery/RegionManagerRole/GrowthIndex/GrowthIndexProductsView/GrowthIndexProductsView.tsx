@@ -1,6 +1,5 @@
 import { Box } from '@mui/material'
 import s from '../../../commonStyles.modules.scss'
-import { Table } from 'components/core-ui/Table'
 import { useState } from 'react'
 import { useNotification } from 'hooks'
 import { GrowthIndexProductViewItem } from '../../interfaces'
@@ -13,7 +12,7 @@ import {useSearchParams } from 'react-router-dom'
 import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { FamilyItem } from 'components/bakery/StoreManagerRole/interfaces'
 import { useQuery } from 'react-query'
-
+import { GroupTable } from 'components/core-ui/GroupTable'
 
 const GrowthIndexProductsView = () => {
   const [tableItems, setTableItems] = useState<GrowthIndexProductViewItem[]>([])
@@ -30,7 +29,7 @@ const GrowthIndexProductsView = () => {
     ['families', id],
     async () => {
       const result = await makeCoreGetRequest(
-        '/bakery/store/families',
+        '/bakery/store/cadentier/families',
         {
           params: {
             store: id,
@@ -74,6 +73,7 @@ const GrowthIndexProductsView = () => {
       setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
+      return response
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -82,12 +82,10 @@ const GrowthIndexProductsView = () => {
     }
   }
 
-  
-
   return (
     <div className={s.mainContainer}>
       <Box>
-        <Table
+        <GroupTable
           hideCheckbox
           columns={columns}
           items={tableItems}

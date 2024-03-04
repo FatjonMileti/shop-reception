@@ -151,7 +151,7 @@ const MyTimeOff = () => {
           rowActionsWidth="130px"
           toolbarActions={[
             {
-              label: 'Holidays',
+              label: 'Public Holidays',
               icon: <CalendarActionIcon />,
               onClick: () => openPublicHolidaysModal()
             },

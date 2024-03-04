@@ -139,6 +139,7 @@ export interface ProductItem {
   familyModuleName: string
   imageUrl: string
   cluster?: ClustersItem
+  clusterName?: string
 }
 
 export interface SalesCadentierListItem {
@@ -237,4 +238,9 @@ export interface EditBatchItem {
   batch: boolean
   minStock: string | number
   scheduleProduct: boolean
+}
+
+export enum ThermalCondition {
+  BAKED = 'COPT',
+  UNBAKED = 'NECOPT'
 }

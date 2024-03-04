@@ -41,9 +41,20 @@ const ProductionManagementStore = () => {
   const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
 
   const familiesQuery = useQuery(
-    ['cadentier-families-store'],
+    ['cadentier-families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
-      const result = await makeCoreGetRequest(`/bakery/store/cadentier/families`)
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+        ?.value || []) as AutoCompleteValue[]
+
+      const result = await makeCoreGetRequest(
+        `/bakery/store/cadentier/families`,
+        {
+          params: {
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+          },
+          paramsSerializer: { indexes: null }
+        }
+        )
 
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
@@ -216,8 +227,7 @@ const ProductionManagementStore = () => {
         />
       ),
       type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
+      label: 'Familie'
     },
     {
       name: 'subfamily',

@@ -52,6 +52,16 @@ module.exports = {
           info: { minimized: true }
         }
       ]
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: './src/static/firebase', to: 'static/firebase/[name][ext]', info: { minimized: true } }
+      ]
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: './src/static/pdfWorker', to: 'static/pdfWorker/[name][ext]', info: { minimized: true } }
+      ]
     })
   ],
   target: 'web'

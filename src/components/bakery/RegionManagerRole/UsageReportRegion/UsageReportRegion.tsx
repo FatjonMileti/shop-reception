@@ -10,10 +10,9 @@ import { toTableRowItems } from './serializers'
 import { UsageReportTableItem } from '../interfaces'
 import { DownloadOutlined } from '@mui/icons-material'
 import { useQuery } from 'react-query'
-import { toStoreFilterItems } from 'components/bakery/commonSerializers'
 import dayjs from 'dayjs'
 import { DatePicker, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
-import { ValueLabelInterface } from 'components/bakery/interfaces'
+import { IdNameInterface, ValueLabelInterface } from 'components/bakery/interfaces'
 import { ColumnsComponent, formatAndDownloadResponse } from 'components/bakery/UsageReport/helpers'
 import { formatPayloadDate, getCurrentDate, getPreviousDay } from 'utils/helpers'
 
@@ -32,8 +31,10 @@ const UsageReportRegion = () => {
     ['store'],
     async () => {
       const result = await makeCoreGetRequest('/bakery/store/region/all')
-
-      return toStoreFilterItems(result) || []
+      const resultOptions = result.map(
+        (item: IdNameInterface): ValueLabelInterface => ({ label: item.name, value: item.id })
+      )
+      return resultOptions || []
     },
     {
       onError: error => {
@@ -51,10 +52,11 @@ const UsageReportRegion = () => {
       const filters = [
         { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
         { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
-        { name: 'store', value: storeFilterValue?.map(val => val.value) },
-      ].filter(
-        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-      )
+        ...(storeFilterValue && storeFilterValue.length > 0
+          ? [{ name: 'store', value: storeFilterValue.map(val => val.value) }]
+          : []),
+      ];
+
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/application',
@@ -98,32 +100,37 @@ const UsageReportRegion = () => {
     }
   }
 
-  const handleDownload = async () => {
-    const filters = [
-      { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
-      { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
-      { name: 'store', value: storeFilterValue?.map(val => val.value) },
-    ].filter(
-      f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
-    )
+  const downloadFileQuery = useQuery(
+    ['download'],
+    async () => {
+      const filters = [
+        { name: 'startDate', value: formatPayloadDate(startDateFilterValue) },
+        { name: 'endDate', value: formatPayloadDate(endDateFilterValue) },
+        { name: 'store', value: storeFilterValue[0]?.value },
+      ].filter(
+        f => (Array.isArray(f.value) && f.value.length) > 0 || (!Array.isArray(f.value) && f.value)
+        )
 
-    const url = toTableGETUrl({
-      url: '/bakery/region/download/application',
-      filters: filters
-    })
-    try {
+      const url = toTableGETUrl({
+        url: '/bakery/region/download/application',
+        filters: filters
+      })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
-      formatAndDownloadResponse(response)
-    } catch (error) {
-      showNotification({
-        message: `Error while downloading file. ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      return formatAndDownloadResponse(response)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
     }
-  }
-
+  )
+  
   return (
     <div className={s.mainContainer}>
       <Grid container>
@@ -154,6 +161,7 @@ const UsageReportRegion = () => {
               options={storesFilterOptions}
               onSelect={val => handleFilterChange('store', val)}
               placeholderButton="Selecteaza"
+              multiSelect={true}
               showSearch
             />
           </Grid>
@@ -163,29 +171,32 @@ const UsageReportRegion = () => {
           <Divider />
         </Grid>
 
-        <Table
-          hideCheckbox
-          columns={ColumnsComponent(startDateFilterValue, endDateFilterValue)}
-          items={tableItems}
-          fetchData={fetchData}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          stickyRatio={0.45}
-          hasStickyHeader
-          maxHeight={'600px'}
-          frequency="day"
-          toolbarActions={[
-            {
-              label: 'Descarca',
-              icon: <DownloadOutlined />,
-              onClick: () => handleDownload()
-            }
-          ]}
-          rowsPerPage={25}
-          rowsPerPageOptions={[25, 50, 100]}
-        />
+        {storeFilterValue && (
+            <Table
+              hideCheckbox
+              columns={ColumnsComponent(startDateFilterValue, endDateFilterValue)}
+              items={tableItems}
+              fetchData={fetchData}
+              isLoading={isLoading}
+              totalCount={totalCount}
+              shouldRefreshData={shouldRefreshData}
+              setShouldRefreshData={setShouldRefreshData}
+              stickyRatio={0.45}
+              hasStickyHeader
+              maxHeight={'600px'}
+              frequency="day"
+              toolbarActions={[
+                {
+                  label: 'Descarca',
+                  icon: <DownloadOutlined />,
+                  onClick: () => downloadFileQuery.refetch()
+                }
+              ]}
+              rowsPerPage={25}
+              rowsPerPageOptions={[25, 50, 100]}
+            />
+          )
+        }
       </Grid>
     </div>
   )

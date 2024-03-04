@@ -3,9 +3,9 @@ export const toTableRowItems = items =>
     id: item.id || '',
     assignedRoles: item.assignedRoles || '',
     baseRole: item.baseRole || '',
-    numberOfProjects: item.numberOfProjects || '',
-    remaining: item.remaining || '',
+    numberOfProjects: item.numberOfProjects ?? '',
+    remaining: item.remaining ?? '',
     teamMemberName: item.teamMemberName || '',
-    totalAvailable: item.totalAvailable || '',
-    totalEffort: item.totalEffort || ''
+    totalAvailable: item.totalAvailable ?? '',
+    totalEffort: item.totalEffort ?? ''
   }))

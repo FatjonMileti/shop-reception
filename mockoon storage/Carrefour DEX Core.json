@@ -5529,6 +5529,499 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "600049ac-78c2-494c-9dc1-7f3e11ee0bff",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "deliveryTicket",
+      "responses": [
+        {
+          "uuid": "33d4bd33-1718-4981-9ce3-b1001cc8ab2a",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"externalTicketId\": \"519783\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-11-16T15:48:28.524\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3128120\",\n      \"sealCode\": \"D091918\",\n      \"truckNumber\": \"BH37CIC\",\n      \"status\": \"PROCESSED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA AMBIENT\",\n      \"numberOfSupports\": 16,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": 1,\n      \"externalTicketId\": \"59069\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-11-16T15:08:56.105\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3123415\",\n      \"sealCode\": \"D091512\",\n      \"truckNumber\": \"AB90CDE\",\n      \"status\": \"PROCESSED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA APLS\",\n      \"numberOfSupports\": 5,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": 2,\n      \"externalTicketId\": \"267383\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-11-16T15:08:48.104\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3123415\",\n      \"sealCode\": \"D091512\",\n      \"truckNumber\": \"AB90CDE\",\n      \"status\": \"PROCESSED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA LEGUME - FRUCTE\",\n      \"numberOfSupports\": 3,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": 5,\n      \"externalTicketId\": \"720610\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"CLUJ(10);SIBIU(19);ORADEA1(22);ORADEA2(25);DROBETA(26);TARGUJIU(35);TIMISOARA6(37);SUPER RESITA_NERA(55);SUPER LUGOJ(57);SUPER SEVERIN(61);SUPER ARAD(63);SUPER DROBETA2(153);EXPR Sibiu Piata Rahova(169);SUPER TIMISOARA5(173);SUPER TIMISOARA7(176);EXPR Cluj Diana(190);EXPR Cluj Aurel Vlaicu(212);EXPR Cluj Dunarii(234);EXPR Arad Piata Avram Iancu(235);EXPR Baile Felix Primaverii(280);SUPER TIMISOARA14(322);EXPR Cluj Opera(342);EXPR Cluj Scortarilor(378);EXPR TG MURES CUTEZANTEI(382);608 Baia Mare Hoffer(820);205 ORSOVA(871);SUPECO CLUJ(4031)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-12T08:19:54.249\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3075952\",\n      \"sealCode\": \"A0237717\",\n      \"truckNumber\": \"B769ANS\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT CEFIN  AMBIENT\",\n      \"numberOfSupports\": 31,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": 6,\n      \"externalTicketId\": \"265720\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-12T08:19:45.290\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3075217\",\n      \"sealCode\": \"\",\n      \"truckNumber\": \"BH16NRD\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA LEGUME - FRUCTE\",\n      \"numberOfSupports\": 6,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": null,\n      \"externalTicketId\": \"51844\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"CLUJ(10);ORADEA1(22);ORADEA2(25);ZALAU(46);TGMURES4(3047)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-05T18:33:48.007\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"00051844\",\n      \"sealCode\": \"\",\n      \"truckNumber\": \"BH23LDC\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT CONGELATE\",\n      \"numberOfSupports\": 37,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": null,\n      \"externalTicketId\": \"51620\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA1(22);ORADEA2(25);BAIAMARE3(44);ZALAU(46);SUPER ZALAU(65);SUPER SIGHET(67);SUPER DEJ(68);EXPR Cluj Minerva(189);EXPR Cluj Diana(190);EXPR Cluj Nicolae Titulescu(207);EXPR Cluj Dunarii(234);SUPER MARGHITA(237);SUPER SANMARTIN(244);SUPER NOJORID(247);EXPR Cluj Floresti Stejarilor(262);EXPR Cluj Florilor/Cetatii(274);EXPR Floresti Avram Iancu(285);SUPER ORADEA4(289);EXPR Oradea Xenopol(290);EXPR Cluj Albini(309);EXPR Oradea6 Republicii(325);EXPR CLUJ21 STEINHARDT(335);EXPR Cluj Opera(342);607 Baia Mare 1(819);608 Baia Mare Hoffer(820);514 Oradea Plaza(838);TGMURES4(3047);SUPECO BAIAMARE(4021);SUPECO SATUMARE(4033);SUPECO ORADEA(4059)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-05T14:54:33.915\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"00051620\",\n      \"sealCode\": \"\",\n      \"truckNumber\": \"BH85LDC\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT CONGELATE\",\n      \"numberOfSupports\": 49,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": null,\n      \"externalTicketId\": \"265455\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-05T14:51:29.236\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3066285\",\n      \"sealCode\": \"\",\n      \"truckNumber\": \"B151FRS\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA LEGUME - FRUCTE\",\n      \"numberOfSupports\": 3,\n      \"validatedSupports\": 0\n    },\n    {\n      \"id\": null,\n      \"externalTicketId\": \"512724\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-05T14:51:06.929\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"3066288\",\n      \"sealCode\": \"D0086869\",\n      \"truckNumber\": \"BH37CIC\",\n      \"status\": \"IN_PROGRESS\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT DEVA AMBIENT\",\n      \"numberOfSupports\": 10,\n      \"validatedSupports\": 1\n    },\n    {\n      \"id\": null,\n      \"externalTicketId\": \"19224\",\n      \"externalShopCode\": null,\n      \"shopCode\": \"ORADEA2(25)\",\n      \"deliveryType\": null,\n      \"created\": \"2023-10-05T14:50:55.769\",\n      \"deliveryHour\": null,\n      \"expectedDeliveryDate\": null,\n      \"transporterCode\": null,\n      \"transportCode\": \"00019224\",\n      \"sealCode\": \"\",\n      \"truckNumber\": \"\",\n      \"status\": \"REGISTERED\",\n      \"validatedShopCodes\": null,\n      \"sentShopCodes\": null,\n      \"receptionFile\": null,\n      \"depositName\": \"DEPOZIT PESTE\",\n      \"numberOfSupports\": 1,\n      \"validatedSupports\": 0\n    }\n  ],\n  \"page\": null\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "1397f6a2-853c-4cc6-99b0-f17176610422",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "deliveryTicket/:id/:tab",
+      "responses": [
+        {
+          "uuid": "01686d31-79f8-4b52-baf1-9bd539cb2cda",
+          "body": "{\n  \"id\": 257,\n  \"externalTicketId\": \"519783\",\n  \"depositName\": \"DEPOZIT DEVA AMBIENT\",\n  \"expectedDeliveryDate\": \"16/11/2023\",\n  \"transportCode\": \"3128120\",\n  \"truckLicenceNumber\": \"AG10ABC\",\n  \"driverName\": \"Marius Lacatus\",\n  \"numberOfSupports\": 16,\n  \"validatedSupports\": 10,\n  \"shopCodes\": [\n    [\n      25,\n      1\n    ]\n  ],\n  \"showMetiFilesButton\": true,\n  \"shopsThatCanBeSentToMeti\": [\n    {\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"receivedSupportNumber\": 0,\n      \"totalSupportNumber\": 0\n    }\n  ],\n  \"list\": [\n    {\n      \"id\": 0,\n      \"externalOrderId\": \"24150534\",\n      \"originalOrderId\": \"90241725\",\n      \"supportCode\": \"31170484000\",\n      \"heterogeneousCode\": \"759400000011529600\",\n      \"expectedSupportType\": \"PALET EURO\",\n      \"receivedSupportType\": null,\n      \"secondarySupportType\": \"POLITA ROLLS FLORI\",\n      \"supportStatus\": \"In asteptare\",\n      \"eanCode\": \"5948990130237\",\n      \"eanReceived\": \"5948990130237\",\n      \"productCode\": \"11002279\",\n      \"productName\": \"ULEI UNISOL 1L\",\n      \"priorityForSale\": true,\n      \"measureUnit\": \"articol\",\n      \"deliveredQuantity\": \"2\",\n      \"totalDeliveredQuantity\": \"10.55\",\n      \"qualitativeQuantity\": \"10\",\n      \"defectQuantity\": \"15\",\n      \"missingQuantity\": \"5\",\n      \"defect\": true,\n      \"defectReason\": \"PROVIDER\",\n      \"recommendedScanType\": \"INTEGRAL\",\n      \"scanType\": \"SENSIBLE_PRODUCTS\",\n      \"secondarySupportNumber\": \"2415\",\n      \"shortDlc\": true,\n      \"dlcDate\": \"04/05/2023\",\n      \"dlcDateExcel\": \"2024/10/12\",\n      \"confirmedDlc\": \"2023-04-23\",\n      \"batch\": \"26102024CA\",\n      \"sensitive\": true,\n      \"verified\": true,\n      \"missing\": true,\n      \"shopName\": \"ORADEA2\",\n      \"receptionDate\": \"2023-04-23\",\n      \"validityPercentage\": \"10\",\n      \"lifetimePercent\": \"99\",\n      \"sgr\": true,\n      \"canBeSentToMeti\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "11f05956-cf67-4d5c-a745-249c6d2e35f7",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "wrongDestination",
+      "responses": [
+        {
+          "uuid": "3450fde3-96dc-40d1-8d45-3631331ccd0b",
+          "body": "{\n  \"deliverySupportList\": [\n    {\n      \"id\": 0,\n      \"supportCode\": \"43208089000\",\n      \"depositName\": \"DEPOZIT CEFIN AMBIENT\",\n      \"externalTicketId\": \"717345\",\n      \"externalOrderId\": \"37967797, 37967798\",\n      \"originalOrderId\": \"1780650, 1780667, 80255918, 80255973\",\n      \"shopName\": \"ORADEA2(25)\",\n      \"destinationShopName\": \"ORADEA1(11)\",\n      \"lastUpdateBy\": \"oradea_rec\",\n      \"lastUpdate\": \"03/10/2023 12:32\",\n      \"resolved\": false,\n      \"resolvingDate\": \"string\",\n      \"resolvedBy\": \"string\",\n      \"resolvingComment\": \"string\",\n      \"hasAttachment\": true,\n      \"supportId\": 0,\n      \"wrongDestinationResultId\": 0,\n      \"canResolve\": true\n    },\n    {\n      \"id\": 0,\n      \"supportCode\": \"43208089000\",\n      \"depositName\": \"DEPOZIT CEFIN AMBIENT\",\n      \"externalTicketId\": \"717345\",\n      \"externalOrderId\": \"37967797, 37967798\",\n      \"originalOrderId\": \"1780650, 1780667, 80255918, 80255973\",\n      \"shopName\": \"ORADEA2(25)\",\n      \"destinationShopName\": \"ORADEA1(11)\",\n      \"lastUpdateBy\": \"oradea_rec\",\n      \"lastUpdate\": \"03/10/2023 12:32\",\n      \"resolved\": true,\n      \"resolvingDate\": \"string\",\n      \"resolvedBy\": \"string\",\n      \"resolvingComment\": \"string\",\n      \"hasAttachment\": true,\n      \"supportId\": 0,\n      \"wrongDestinationResultId\": 0,\n      \"canResolve\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "9b3cd59b-ecf9-4ea0-8b59-f41337141870",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "wrongDestination/form/:id",
+      "responses": [
+        {
+          "uuid": "04888c1e-55ef-4b0e-8efa-382067f440bb",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "fae4c352-06d7-4b8b-a09e-d4ee4bc0201c",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops",
+      "responses": [
+        {
+          "uuid": "1042913d-f7c8-432e-be50-d7f184e64090",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"active\": true,\n      \"sftpPath\": \"string\",\n      \"sftpIp\": \"string\",\n      \"adCode\": \"string\",\n      \"metiVersion\": \"V7\",\n      \"metiCode\": \"string\",\n      \"metiName\": \"string\",\n      \"metiType\": \"SUPER\",\n      \"regionName\": \"string\",\n      \"receptionDeviation\": 0,\n      \"canEditQuantities\": true,\n      \"canCallReturnTruck\": true,\n      \"parentSociety\": \"Carrefour\",\n      \"address\": \"string\",\n      \"town\": \"string\",\n      \"city\": \"string\",\n      \"regNumber\": \"string\",\n      \"CIF\": \"string\",\n      \"office\": \"string\",\n      \"bankName\": \"string\",\n      \"bankAccount\": \"string\",\n      \"capital\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "e9f3f28e-f381-4b78-8d70-5346a890bc1c",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops/meti",
+      "responses": [
+        {
+          "uuid": "4d09ef29-2ee1-4f43-bece-37419d71f916",
+          "body": "[\n  {\n    \"code\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \n  {\n    \"code\": \"string 2\",\n    \"displayName\": \"string 2\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ca8c894a-dcb1-4df6-976c-2e65ba3a0613",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops/meti-version",
+      "responses": [
+        {
+          "uuid": "c457bbfe-da44-4487-869a-b991737e9005",
+          "body": "[\"V7\", \"V8\"]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "66d571c1-bae0-4f87-aee5-a512430cc33d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops/types",
+      "responses": [
+        {
+          "uuid": "e0fd84ba-6ccc-4e27-8d6d-fa0033614a4c",
+          "body": "[\"SUPER\", \"HYPER\"]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ad0eb149-cb31-4aa6-bf25-bbb2d2a5a623",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops/parent-society",
+      "responses": [
+        {
+          "uuid": "cb05b3d4-e6e0-445c-9184-d969a6af8f2a",
+          "body": "[\"Carrefour\"]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "09775267-147b-4655-badd-6c2b3af76844",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shops/codes",
+      "responses": [
+        {
+          "uuid": "310adc28-17d6-48ae-a48e-288bd0162cd8",
+          "body": "[\n  {\n    \"code\": \"string\",\n    \"displayName\": \"string\"\n  },\n  \n  {\n    \"code\": \"string 2\",\n    \"displayName\": \"string 2\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "e67d4329-d8fc-4617-9017-7f63e3760734",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "hubs",
+      "responses": [
+        {
+          "uuid": "7a638954-2a3e-43b4-b144-a563199346f6",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"HUB\",\n      \"address\": \"string\",\n      \"active\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "6d5b30a1-597a-40c6-b32a-8ad7305f1d70",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "hubs",
+      "responses": [
+        {
+          "uuid": "f9edec92-1836-4f52-9239-6efc7b0745cf",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "4d4a32be-d408-49af-86f9-62353de18136",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "hubs/:id",
+      "responses": [
+        {
+          "uuid": "73f50bb6-aca8-45bb-ad7c-9c3b2d9eeb67",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "917b4938-4d96-4708-bdbb-07e38e3b2fc9",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "hubs/types",
+      "responses": [
+        {
+          "uuid": "9dc240f0-a746-4461-9c25-db1ff49f9891",
+          "body": "[\n  \"HUB\", \"HUB2\"\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "4ef150b5-07b0-476a-abe9-7a3a468b105d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "hubs/:id/users",
+      "responses": [
+        {
+          "uuid": "5bbe8d44-9807-4146-87f8-abb1ae3e78bc",
+          "body": "[\n  \"string\", \"string2\"\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "e998775f-b48c-4614-8c00-0f608a8757c3",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "hubs/delivery-interval/:id",
+      "responses": [
+        {
+          "uuid": "b556b194-15a1-47ca-b9b2-cb400abfd1b6",
+          "body": "[\n  {\n    \"receiveFromDeposit\": true,\n    \"depositId\": 0,\n    \"depositName\": \"string\",\n    \"depositCode\": \"string\",\n    \"monday\": true,\n    \"tuesday\": true,\n    \"wednesday\": true,\n    \"thursday\": true,\n    \"friday\": true,\n    \"saturday\": true,\n    \"sunday\": true,\n    \"startInterval\": \"string\",\n    \"endInterval\": \"string\"\n  },\n  \n  {\n    \"receiveFromDeposit\": false,\n    \"depositId\": 1,\n    \"depositName\": \"string\",\n    \"depositCode\": \"string\",\n    \"monday\": false,\n    \"tuesday\": true,\n    \"wednesday\": true,\n    \"thursday\": true,\n    \"friday\": true,\n    \"saturday\": true,\n    \"sunday\": true,\n    \"startInterval\": \"string\",\n    \"endInterval\": \"string\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "2146dee1-f09f-4a52-bbf8-2af0d0bf2e9b",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "hubs/delivery-interval/:id",
+      "responses": [
+        {
+          "uuid": "b45e99a7-7ed3-4d7a-b94b-513f55f9e473",
+          "body": "[\n  {\n    \"receiveFromDeposit\": true,\n    \"depositId\": 0,\n    \"depositName\": \"string\",\n    \"depositCode\": \"string\",\n    \"monday\": true,\n    \"tuesday\": true,\n    \"wednesday\": true,\n    \"thursday\": true,\n    \"friday\": true,\n    \"saturday\": true,\n    \"sunday\": true,\n    \"startInterval\": \"string\",\n    \"endInterval\": \"string\"\n  },\n  \n  {\n    \"receiveFromDeposit\": false,\n    \"depositId\": 1,\n    \"depositName\": \"string\",\n    \"depositCode\": \"string\",\n    \"monday\": false,\n    \"tuesday\": true,\n    \"wednesday\": true,\n    \"thursday\": true,\n    \"friday\": true,\n    \"saturday\": true,\n    \"sunday\": true,\n    \"startInterval\": \"string\",\n    \"endInterval\": \"string\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -5763,6 +6256,74 @@
     {
       "type": "route",
       "uuid": "8aca656d-df76-47ae-b8db-fa4cca0c55bf"
+    },
+    {
+      "type": "route",
+      "uuid": "600049ac-78c2-494c-9dc1-7f3e11ee0bff"
+    },
+    {
+      "type": "route",
+      "uuid": "1397f6a2-853c-4cc6-99b0-f17176610422"
+    },
+    {
+      "type": "route",
+      "uuid": "11f05956-cf67-4d5c-a745-249c6d2e35f7"
+    },
+    {
+      "type": "route",
+      "uuid": "9b3cd59b-ecf9-4ea0-8b59-f41337141870"
+    },
+    {
+      "type": "route",
+      "uuid": "fae4c352-06d7-4b8b-a09e-d4ee4bc0201c"
+    },
+    {
+      "type": "route",
+      "uuid": "e9f3f28e-f381-4b78-8d70-5346a890bc1c"
+    },
+    {
+      "type": "route",
+      "uuid": "ca8c894a-dcb1-4df6-976c-2e65ba3a0613"
+    },
+    {
+      "type": "route",
+      "uuid": "66d571c1-bae0-4f87-aee5-a512430cc33d"
+    },
+    {
+      "type": "route",
+      "uuid": "ad0eb149-cb31-4aa6-bf25-bbb2d2a5a623"
+    },
+    {
+      "type": "route",
+      "uuid": "09775267-147b-4655-badd-6c2b3af76844"
+    },
+    {
+      "type": "route",
+      "uuid": "e67d4329-d8fc-4617-9017-7f63e3760734"
+    },
+    {
+      "type": "route",
+      "uuid": "6d5b30a1-597a-40c6-b32a-8ad7305f1d70"
+    },
+    {
+      "type": "route",
+      "uuid": "4d4a32be-d408-49af-86f9-62353de18136"
+    },
+    {
+      "type": "route",
+      "uuid": "917b4938-4d96-4708-bdbb-07e38e3b2fc9"
+    },
+    {
+      "type": "route",
+      "uuid": "4ef150b5-07b0-476a-abe9-7a3a468b105d"
+    },
+    {
+      "type": "route",
+      "uuid": "e998775f-b48c-4614-8c00-0f608a8757c3"
+    },
+    {
+      "type": "route",
+      "uuid": "2146dee1-f09f-4a52-bbf8-2af0d0bf2e9b"
     }
   ],
   "proxyMode": false,

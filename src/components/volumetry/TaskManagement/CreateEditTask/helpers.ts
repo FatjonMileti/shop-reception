@@ -5,12 +5,16 @@ export const getInitialValues = item => {
     ...(item?.id ? { id: item?.id } : {}),
     name: item?.name ?? '',
     rayonsOrDepartment: item?.rayonsOrDepartment
-      ? { label: item.rayonsOrDepartment, value: item.rayonsOrDepartment }
+      ? {
+          label: item.rayonsOrDepartment,
+          value: item.rayonsOrDepartment,
+          locationType: item.locationType
+        }
       : null,
     volumetryLocationCategory: item?.volumetryLocationCategory
       ? { label: item.volumetryLocationCategory, value: item.volumetryLocationCategory }
       : null,
-    raion: item?.raion ? { label: item.raion, value: item.raion } : null,
+    rayons: item?.rayons ? [{ label: item.rayons, value: item.rayons }] : null,
     recommendedStartHour: item?.recommendedStartHour ?? null,
     recommendedEndHour: item?.recommendedEndHour ?? null,
     frequency: item?.frequency ? { label: item.frequency, value: item.frequency } : null,
@@ -42,7 +46,7 @@ export const getValidationSchema = item =>
         value: Yup.string().required()
       })
       .required('Acest camp este obligatoriu.'),
-    raion: Yup.array()
+    rayons: Yup.array()
       .of(
         Yup.object({
           label: Yup.string().required(),

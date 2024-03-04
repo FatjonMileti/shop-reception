@@ -33,8 +33,6 @@ export const getCoreBaseUrl = url => `${process.env.CORE_URL}${url}`
 
 export const getDesignerBaseUrl = url => `${process.env.DESIGNER_URL}${url}`
 
-export const getNotificationsBaseUrl = url => `${process.env.NOTIFICATIONS_URL}${url}`
-
 export const makeCoreGetRequest = (url, params) =>
   axios.get(getCoreBaseUrl(url), params).then(response => response.data)
 
@@ -67,6 +65,3 @@ export const makeDesignerPatchRequest = (url, params) =>
 
 export const makeCoreGetFileRequest = (url, params) =>
   axios.get(getCoreBaseUrl(url), params).then(response => response)
-
-export const makeNotificationsPutRequest = (url, params) =>
-  axios.put(getNotificationsBaseUrl(url), params).then(response => response.data)

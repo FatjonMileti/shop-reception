@@ -66,8 +66,17 @@ export const columns = [
   },
   {
     title: 'Furnizor',
-    field: 'provider',
-    align: 'left'
+    field: 'suppliers',
+    align: 'left',
+  },
+  {
+    title: 'Lot',
+    field: 'batch',
+    align: 'left',
+    disableSorting: true,
+    render: row => (
+      <BooleanIcon value={row.batch} icon="Flag" onFailure='#FFFFFF' onSuccess='#33691E' />
+    )
   },
   {
     title: 'Metoda fabricatie',
@@ -131,7 +140,7 @@ export const columns = [
 ]
 
 export const getInitialValues = editItem => ({
-  scheduleProduct: editItem?.scheduleProduct ?? '',
+  scheduleProduct: editItem?.scheduleProduct ? 'Da' : 'Nu',
   minStock: editItem?.minStock ?? ''
 })
 

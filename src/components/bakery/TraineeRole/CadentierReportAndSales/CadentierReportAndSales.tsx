@@ -52,13 +52,17 @@ const CadentierReportAndSales = () => {
   )
 
   const familiesQuery = useQuery(
-    ['families', storeFilterValue?.value],
+    ['families', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+        ?.value || []) as AutoCompleteValue[]
+
       const result = await makeCoreGetRequest(
-        '/bakery/store/families',
+        '/bakery/store/cadentier/families',
         {
           params: {
             store: storeFilterValue?.value,
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
           },
           paramsSerializer: { indexes: null }
         }
@@ -88,7 +92,7 @@ const CadentierReportAndSales = () => {
       const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
       ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(
-        '/bakery/store/families/subfamilies',
+        '/bakery/store/cadentier/families/subfamilies',
         {
           params: {
             store: storeFilterValue?.value,

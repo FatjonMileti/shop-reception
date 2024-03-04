@@ -22,7 +22,10 @@ const Families = () => {
   const { showNotification } = useNotification()
 
   const openEditModal = (): void => setIsEditModalOpen(true)
-  const closeEditModal = (): void => setIsEditModalOpen(false)
+  const closeEditModal = (): void => {
+    setIsEditModalOpen(false)
+    setSelectedRowId(0)
+  }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)

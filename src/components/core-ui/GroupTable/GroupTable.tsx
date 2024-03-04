@@ -44,7 +44,7 @@ const GroupTable = props => {
         setShouldRefreshData(false)
       }
     })()
-  }, [shouldRefreshData, window.history.state.tableState])
+  }, [shouldRefreshData])
 
   const handleRemoteData = async (page, rowsPerPage, order, orderBy, searchText, filters) => {
     setTableState({
@@ -83,15 +83,17 @@ const GroupTable = props => {
     () =>
       Object.keys(filters).map(key => ({
         name: filters[key].name,
-        value: filters[key]?.value ?? filters
+        value: filters[key]?.value //?? filters
       })) || [],
     [filters]
   )
+
   const toolbarActions = !props.hasPrintAction
     ? props.toolbarActions
     : props.toolbarActions.map(action =>
         action.label === 'Printeaza' ? { ...action, onClick: () => openPrintModal() } : action
       )
+
   return (
     <>
       {showAbbrev && (

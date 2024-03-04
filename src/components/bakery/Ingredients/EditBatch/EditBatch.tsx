@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { EditBatchItem } from '../../interfaces'
 import { useMutation, useQuery } from 'react-query'
 import { batchValues, getInitialValues } from '../helpers'
-import { ChangeEvent, useMemo } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
 interface EditBatchProps {
@@ -23,7 +23,11 @@ const EditBatch: React.FC<EditBatchProps> = props => {
     const { isModalOpen, closeModal, setShouldRefreshData, editProductId } = props
     const { showNotification } = useNotification()
     
-    const { data: editItem, isLoading: isLoadingEditItem } = useQuery(
+    useEffect(() => {
+      if(isModalOpen) refetchEditItem()
+    }, [isModalOpen])
+    
+    const { data: editItem, isLoading: isLoadingEditItem, refetch: refetchEditItem } = useQuery(
         ['product', editProductId],
         async () => {
           if (editProductId) {
@@ -73,7 +77,6 @@ const EditBatch: React.FC<EditBatchProps> = props => {
         initialValues: initialValues,
         onSubmit: async (values: any, { resetForm }) => {
             const payload = {
-                ...values,
                 batch: values.batch === 'Da'
             }
             mutate(payload)
@@ -92,7 +95,6 @@ const EditBatch: React.FC<EditBatchProps> = props => {
                 <FormInfoItems
                   items={[
                     { label: 'Produs:', name: (editItem as EditBatchItem)?.name },
-                    { label: 'Cluster:', name: (editItem as EditBatchItem)?.clusterName },
                     { label: 'Cod METI:', name: (editItem as EditBatchItem)?.metiCode as string },
                   ]}
                 />

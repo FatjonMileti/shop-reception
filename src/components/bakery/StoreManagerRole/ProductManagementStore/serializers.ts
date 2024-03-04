@@ -19,5 +19,7 @@ export const toTableRowItems = items =>
     scheduleProduct: item.scheduleProduct,
     minStock: item.minStock || 0,
     newProduct: item.newProduct || '',
-    imageUrl: item.imageUrl || ''
+    imageUrl: item.imageUrl || '',
+    suppliers: item.suppliers || '',
+    batch: item.batch || false
   }))
