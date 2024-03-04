@@ -26,6 +26,10 @@ import { CorrectReceivedProduct } from './CorrectReceivedProduct/CorrectReceived
 import { ReceivedProduct, FamilyItem, SubfamilyItem } from './interfaces'
 import { get } from 'lodash'
 import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
+import { ImageCell } from '../../../core-ui/ImageCell'
+
+const orderBy = 'createdDate'
+const order = 'desc'
 
 export const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -39,9 +43,21 @@ export const ReceivedProducts = () => {
 
   const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
 
+  const [tableState, setTableState] = useState<{
+    tableFilters: Filter[]
+    rowsPerPage: number
+    orderBy: string
+    order: string
+  }>({
+    tableFilters: null,
+    rowsPerPage: null,
+    orderBy,
+    order,
+  })
+
   const { showNotification } = useNotification()
 
-  const fetchData = async (page, rowsPerPage, tableFilters) => {
+  const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
 
     try {
@@ -50,12 +66,27 @@ export const ReceivedProducts = () => {
           url: '/bakery/batch',
           tableFilters,
           page,
-          rowsPerPage
+          rowsPerPage,
+          orderBy,
+          order,
+          searchText,
+          searchFields: [
+            'product.metiCode',
+            'supplier.supplierCode',
+            'supplier.supplierName',
+            'product.name',
+          ]
         })
       )
       setTableItems(response.list.map(toTableRowItem))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
+
+      setTableState(tableState => ({
+        ...tableState,
+        tableFilters,
+        rowsPerPage
+      }))
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -65,9 +96,17 @@ export const ReceivedProducts = () => {
   }
 
   const families = useQuery(
-    ['families-store'],
+    ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
     async () => {
-      const result = await makeCoreGetRequest(`/bakery/store/families`)
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.subfamily')
+        ?.value || []) as AutoCompleteValue[]
+
+      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+        params: {
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
           label: item.name,
@@ -87,9 +126,9 @@ export const ReceivedProducts = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'family')?.value],
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.family')
         ?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
@@ -117,7 +156,7 @@ export const ReceivedProducts = () => {
 
   const drawerFilters: TableFiltersType[] = [
     {
-      name: 'family',
+      name: 'product.family',
       value: undefined,
       filter: (
         <Autocomplete
@@ -129,11 +168,10 @@ export const ReceivedProducts = () => {
         />
       ),
       type: 'autocomplete',
-      label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
+      label: 'Familie'
     },
     {
-      name: 'subfamily',
+      name: 'product.subfamily',
       value: undefined,
       filter: (
         <Autocomplete
@@ -146,29 +184,18 @@ export const ReceivedProducts = () => {
       ),
       type: 'autocomplete',
       label: 'Subfamilie'
-    },
-    {
-      name: 'scheduleProduct',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Produs cadentier"
-          disableClearable
-          options={[
-            { value: 'true', label: 'Da' },
-            { value: 'false', label: 'Nu' }
-          ]}
-        />
-      ),
-      type: 'autocomplete',
-      label: 'Produs cadentier'
     }
   ]
 
   return (
     <div className={s.mainContainer}>
-      <AddReceivedProduct isModalOpen={isAddModalOpen} closeModal={() => setAddModalOpen(false)} />
+      <AddReceivedProduct
+        isModalOpen={isAddModalOpen}
+        closeModal={() => setAddModalOpen(false)}
+        onSuccess={() => {
+          fetchData(0, tableState.rowsPerPage, tableState.tableFilters, '')
+        }}
+      />
       <CorrectReceivedProduct
         isModalOpen={isCorrectModalOpen}
         closeModal={() => {
@@ -191,11 +218,12 @@ export const ReceivedProducts = () => {
         filters={drawerFilters}
         handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         handleRemoteData={fetchData}
+        hasSearchInput
         rows={tableItems.map(item => ({
           id: item.id,
           summary: (
             <AccordionSummaryWrapper>
-              <img src={'images/default-product-image.svg'} />
+              <ImageCell value={''} imageUrl={item.product?.imageUrl} />
               <div className="title-and-content-wrapper">
                 <Typography variant="medium" className="title">
                   {item.product.name}
@@ -265,6 +293,8 @@ export const ReceivedProducts = () => {
           }
         ]}
         rowActionsWidth="200px"
+        rowsPerPage={25}
+        rowsPerPageOptions={[25, 50, 100]}
       />
     </div>
   )

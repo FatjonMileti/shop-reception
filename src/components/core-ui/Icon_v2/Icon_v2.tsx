@@ -75,7 +75,8 @@ import {
   OwnProductionTraceabilityReportTOSubcategory,
   OwnProductionTraceabilityTOSubcategory,
   ProductManagementTOSubcategory,
-  ReceivedProductsTOSubcategory
+  ReceivedProductsTOSubcategory,
+  CarrefourLogoBlackIcon
 } from 'icons/bakery'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { createElement } from 'react'
@@ -185,7 +186,8 @@ const IconComponents = {
   OwnProductionTraceabilityReportTOSubcategory,
   OwnProductionTraceabilityTOSubcategory,
   ProductManagementTOSubcategory,
-  ReceivedProductsTOSubcategory
+  ReceivedProductsTOSubcategory,
+  CarrefourLogoBlackIcon
 }
 
 export type IconType = 'Menu' | 'Home' | 'Subcategory' | 'Icon'

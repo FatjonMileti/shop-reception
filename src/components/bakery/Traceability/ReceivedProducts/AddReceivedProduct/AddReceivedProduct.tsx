@@ -37,8 +37,9 @@ interface ReceivedProductRequestData {
 interface AddReceivedProductProps {
   isModalOpen: boolean
   closeModal: () => void
+  onSuccess?: () => void
 }
-export const AddReceivedProduct = ({ isModalOpen, closeModal }: AddReceivedProductProps) => {
+export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddReceivedProductProps) => {
   const [step, setStep] = React.useState(0)
   const [selectedProduct, setSelectedProduct] = React.useState<Product | undefined>(undefined)
   const [selectedSupplier, setSelectedSupplier] = React.useState<Supplier | undefined>(undefined)
@@ -85,6 +86,12 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal }: AddReceivedProdu
     {
       onSuccess: () => {
         closeModal()
+        setSelectedProduct(undefined)
+        setSelectedSupplier(undefined)
+        setStep(0)
+        if(onSuccess) {
+          onSuccess()
+        }
         showNotification({
           message: `Product added successfully`,
           type: 'success'

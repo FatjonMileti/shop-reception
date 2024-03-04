@@ -48,7 +48,7 @@ export interface ReceivedProductToCorrect {
   selectedSupplier: Supplier
   entryDate: dayjs.Dayjs
   hasExpirationDate: boolean
-  expirationDate?: dayjs.Dayjs
+  expirationDate?: any
   hasSecondaryDLC: boolean
   secondaryDLC?: string
   amount?: string

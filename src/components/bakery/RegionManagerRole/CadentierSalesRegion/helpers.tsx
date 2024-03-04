@@ -77,7 +77,7 @@ export const columns = [
       field: 'clusterMandatory',
       align: 'left',
       render: row => (
-        <BooleanText onSuccess='O' onFailure='F' value={row.productRange} />
+        <BooleanText onSuccess='O' onFailure='F' value={row.clusterMandatory} />
       )
     },
     {
@@ -129,7 +129,7 @@ export const drawerFilters = (prevDay, familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'family',
-    value: '',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
@@ -143,7 +143,7 @@ export const drawerFilters = (prevDay, familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'subfamily',
-    value: '',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"

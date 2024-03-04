@@ -1,6 +1,5 @@
 import dayjs from 'dayjs'
-import { areSameDayDates, formatUIDate, getDatePickerDate } from 'utils/helpers'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { areSameDayDates, getDatePickerDate } from 'utils/helpers'
 import * as Yup from 'yup'
 
 export const getValidationSchema = editItem =>

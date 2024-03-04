@@ -42,6 +42,9 @@ import { ReceivedProducts } from './Traceability/ReceivedProducts/ReceivedProduc
 import { FrozenTraceability } from './Traceability/FrozenTraceability/FrozenTraceability'
 import { ReportFrozenTraceability } from './Traceability/ReportFrozenTraceability/ReportFrozenTraceability'
 import { ReportFrozenTraceabilityPrint } from './Traceability/ReportFrozenTraceabilityPrint/ReportFrozenTraceabilityPrint'
+import { OwnProductionTraceability } from './Traceability/OwnProductionTraceability/OwnProductionTraceability'
+import { ReportOwnProductionTraceability } from './Traceability/ReportOwnProductionTraceability/ReportOwnProductionTraceability'
+import { ReportOwnProductionTraceabilityPrint } from './Traceability/ReportOwnProductionTraceabilityPrint/ReportOwnProductionTraceabilityPrint'
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -438,6 +441,82 @@ export const useBakeryRoutes = applicationPages => {
         }
       />
 
+      <Route
+        path={URLS.AUTH_REPORT_FROZEN_TRACEABILITY_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportFrozenTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportFrozenTraceabilityPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_OWN_PRODUCTION_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={OwnProductionTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceabilityPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceabilityPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
     </>
   )
 }

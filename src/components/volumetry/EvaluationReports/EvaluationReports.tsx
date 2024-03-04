@@ -101,11 +101,11 @@ const EvaluationReports = () => {
             <FilterDataSelect
               name="department"
               defaultSelectedData={departmentFilterValue}
-              label=""
+              label="Departament"
               showCounter={true}
               showSearch={true}
-              counterLabel="Select department"
-              noDataFoundLabel="No results!"
+              counterLabel="Selecteaza departament"
+              noDataFoundLabel="Nu s-au gasit rezultate."
               options={departments}
               onSelect={handleDepartmentFilterChange}
             />

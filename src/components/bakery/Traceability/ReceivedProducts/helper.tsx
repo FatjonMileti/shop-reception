@@ -1,11 +1,11 @@
-import { BodyItem, Column } from '../ProductManagementTraceability/AccordionTable'
+import { BodyItem, HeaderItem, Column } from '../ProductManagementTraceability/AccordionTable'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
-import React from 'react'
 import * as Yup from 'yup'
 import { ProductDetails } from './AddReceivedProduct/ProductDetails'
 import dayjs from 'dayjs'
-import { ReceivedProduct } from './interfaces'
+import { BatchStatus, CloseReason, ReceivedProduct } from './interfaces'
 import { formatPayloadDate } from '../../../../utils/helpers'
+import { ImageCell } from '../../../core-ui/ImageCell'
 
 export const toTableRowItem = (item: Partial<ReceivedProduct>): ReceivedProduct => ({
   id: item.id || '',
@@ -54,7 +54,10 @@ export const toTableRowItem = (item: Partial<ReceivedProduct>): ReceivedProduct 
 export const columns: Column[] = [
   {
     title: 'Data intrare in raion',
-    field: 'entryDate'
+    field: 'entryDate',
+    render: row => (
+      <BodyItem name="Data intrare in raion" value={formatPayloadDate(row.entryDate)} />
+    )
   },
   {
     title: 'Cod Meti',
@@ -82,7 +85,7 @@ export const columns: Column[] = [
   },
   {
     title: 'Lot',
-    field: 'batchQuantity'
+    field: 'batchName'
   },
   {
     field: 'hasExpireDate',
@@ -92,8 +95,8 @@ export const columns: Column[] = [
         value={
           <BooleanIcon
             value={row.hasExpireDate}
-            icon="Flag"
-            onFailure="#FFFFFF"
+            icon="CheckCircleOutline"
+            onFailure="#E5E5E5"
             onSuccess="#33691E"
           />
         }
@@ -102,9 +105,7 @@ export const columns: Column[] = [
   },
   {
     field: 'expireDate',
-    render: row => (
-      <BodyItem name="Data expirare" value={<>{formatPayloadDate(row.expireDate)}</>} />
-    )
+    render: row => <BodyItem name="Data expirare" value={formatPayloadDate(row.expireDate)} />
   },
   {
     field: 'hasSecondaryDlc',
@@ -114,8 +115,8 @@ export const columns: Column[] = [
         value={
           <BooleanIcon
             value={row.hasSecondaryDlc}
-            icon="Flag"
-            onFailure="#FFFFFF"
+            icon="CheckCircleOutline"
+            onFailure="#E5E5E5"
             onSuccess="#33691E"
           />
         }
@@ -124,7 +125,7 @@ export const columns: Column[] = [
   },
   {
     title: 'Cantitate intrata',
-    field: 'consumedAmount'
+    field: 'batchQuantity'
   },
   {
     title: 'UM (Meti)',
@@ -134,10 +135,7 @@ export const columns: Column[] = [
     title: 'Poza eticheta',
     field: 'imageUrl',
     render: row => (
-      <BodyItem
-        name="Poza eticheta"
-        value={<img src={row.imageUrl} style={{ width: '40px', height: '40px' }} />}
-      />
+      <BodyItem name="Poza eticheta" value={<ImageCell value={''} imageUrl={row?.imageUrl} />} />
     )
   },
   {
@@ -161,11 +159,13 @@ export const columns: Column[] = [
   },
   {
     title: 'Status lot',
-    field: 'batchStatus'
+    field: 'batchStatus',
+    render: row => <BodyItem name="Status lot" value={BatchStatus[row.batchStatus]} />
   },
   {
     title: 'Motiv inchidere lot',
-    field: 'closeReason'
+    field: 'closeReason',
+    render: row => <BodyItem name="Motiv inchidere lot" value={CloseReason[row.closeReason]} />
   },
   {
     render: data => (
@@ -212,6 +212,13 @@ export const columns: Column[] = [
 
 export const headerItems: Column[] = [
   {
+    title: 'Data intrare in raion',
+    field: 'entryDate',
+    render: row => (
+      <HeaderItem name="Data intrare in raion" value={formatPayloadDate(row.entryDate)} />
+    )
+  },
+  {
     title: 'Cod METI',
     field: 'product.metiCode'
   },
@@ -238,13 +245,13 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
   entryDate: Yup.mixed<dayjs.Dayjs>().required('Entry date is required'),
 
   hasExpirationDate: Yup.boolean().required('This field is required'),
-
-  expirationDate: Yup.mixed<dayjs.Dayjs>().when(
-    'hasExpirationDate',
-    ([hasExpirationDate], schema) => {
-      return hasExpirationDate ? schema.required('Expiration date is required') : schema.nullable()
-    }
-  ),
+  expirationDate: Yup.mixed().when('hasExpirationDate', (hasExpirationDate, schema) => {
+    return hasExpirationDate
+      ? Yup.date()
+          .min(new Date(), 'Data de expirare nu poate fi în trecut.')
+          .required('Câmpul data expirare trebuie completat.')
+      : schema.nullable()
+  }),
 
   hasSecondaryDLC: Yup.boolean().required('This field is required'),
 

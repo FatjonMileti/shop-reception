@@ -22,6 +22,12 @@ export const getDatePickerDate = date => (date ? dayjs(date, 'DD/MM/YYYY') : '')
 
 export const formatBakeryPayloadDate = date => (date ? dayjs(date).format('DD-MM-YYYY') : '')
 
+export const formatPayloadTimeDate = date => (date ? dayjs(date).format('YYYY-MM-DDTHH:mm') : '')
+
+export const formatTime = date => (date ? dayjs(date).format('HH:mm') : '')
+
+export const formatCustomDate = date => (date ? dayjs(date) : '')
+
 export const areSameDayDates = (startDate, endDate) =>
   startDate && endDate && dayjs(startDate).isSame(dayjs(endDate), 'day')
 
@@ -189,4 +195,9 @@ export const handleQueryError = (error, message, showNotification) => {
     message: `${message} ${formatErrorMessage(error)}`,
     type: 'error'
   })
+}
+
+export const toBoolean = input => {
+  if (input === 'true') return true
+  if (input === 'false') return false
 }

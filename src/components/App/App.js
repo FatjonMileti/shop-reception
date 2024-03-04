@@ -54,11 +54,13 @@ const App = () => {
   const [applicationPages, setApplicationPages] = useState([])
   const [applicationModulesPages, setApplicationModulesPages] = useState([])
   const [subdomainId, setSubdomainId] = useState(localStorage.getItem('selectedSubdomainId'))
+  const [allScreensRoutes, setAllScreensRoutes] = useState([])
 
   const [isLoadingAppModules, setIsLoadingAppModules] = useState(false)
   const [hasLoadedAppModules, setHasLoadedAppModules] = useState(false)
   const [isLoadingActivities, setIsLoadingActivities] = useState(false)
   const [hasLoadedActivities, setHasLoadedActivities] = useState(-1) // [~] holds the subdomainId for which the activities were loaded
+  const [isLoadingRoutes, setIsLoadingRoutes] = useState(true)
 
   const [fbToken, setFbToken] = useState(null)
 
@@ -147,13 +149,28 @@ const App = () => {
     isLoadingActivities
   ])
 
-  const governanceRoutes = useGovernanceRoutes(applicationPages)
-  const volumetryRoutes = useVolumetryRoutes(applicationPages)
-  const bakeryRoutes = useBakeryRoutes(applicationPages)
-  const supplyOmniRoutes = useSupplyOmniRoutes(applicationPages)
-  const merchandiseRoutes = useMerchandiseRoutes(applicationPages)
-  const shopReceptionRoutes = useShopReceptionRoutes(applicationPages)
-  const lostSalesOpportunitiesRoutes = useLostSalesOpportunitiesRoutes(applicationPages)
+  useEffect(() => {
+    ;(async () => {
+      try {
+        const result = await makeDesignerGetRequest('/screens/route-urls')
+        setAllScreensRoutes(result)
+        setIsLoadingRoutes(false)
+      } catch (error) {
+        showNotification({
+          message: `Error while fetching application pages. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    })()
+  }, [])
+
+  const governanceRoutes = useGovernanceRoutes(allScreensRoutes)
+  const volumetryRoutes = useVolumetryRoutes(allScreensRoutes)
+  const bakeryRoutes = useBakeryRoutes(allScreensRoutes)
+  const supplyOmniRoutes = useSupplyOmniRoutes(allScreensRoutes)
+  const merchandiseRoutes = useMerchandiseRoutes(allScreensRoutes)
+  const shopReceptionRoutes = useShopReceptionRoutes(allScreensRoutes)
+  const lostSalesOpportunitiesRoutes = useLostSalesOpportunitiesRoutes(allScreensRoutes)
 
   return (
     <AuthProvider {...oidcConfig}>
@@ -167,7 +184,7 @@ const App = () => {
       >
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme="light">
-            {((isLoadingAppModules || !hasLoadedAppModules) && (
+            {((isLoadingAppModules || !hasLoadedAppModules || isLoadingRoutes) && (
               <div style={{ display: 'flex' }}>
                 <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
               </div>

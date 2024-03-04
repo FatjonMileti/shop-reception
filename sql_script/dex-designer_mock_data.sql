@@ -46,7 +46,7 @@ VALUES
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
     (9, 'Rapoarte', 'ReportsVolumetry', 'reports', true, 4),
     -- Bakery p2
-    (11, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
+    (11, 'Operator/ validator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
     -- Shop Reception (Admin)
     (12, 'Administrare', 'ProjectTeamGovernance', '/admin', true, 5),
     (13, 'Receptie marfa', 'ProjectTeamGovernance', '/reception', true, 5),
@@ -86,6 +86,8 @@ VALUES
     (21, 'Coeficient crestere regiune', 'GrowthRegionFormator', null, true, 3),
     (22, 'Raport de utilizare aplicatie', 'UsageReportFormator', null, true, 3),
     (23, 'Raport cadentier + vanzari', 'SalesCadentierFormator', null, true, 3),
+    (191, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 3),
+    (192, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 3),
     -- Bakery STORE_MANAGER
     (27, 'Management produse', 'ProductManagement', null, true, 4),
     (28, 'Management productie (cadentier)', 'CadentierStore', null, true, 4),
@@ -163,7 +165,7 @@ VALUES
     (54, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 11),
     (55, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 11),
     -- Bakery ADMIN p2
-    (56, 'Gestiune ingrediente', 'Ingredients', null, true, 11);
+    (56, 'Gestiune ingrediente', 'Ingredients', null, true, 2);
 
 
 -- screen with activity id (some are first screens)
@@ -202,6 +204,11 @@ VALUES
     (27, 'Setari coeficient de crestere', 'GrowthManagement', '/bakery/formator/growthIndexProductsView/:id', true, 21, false),
     (28, 'Raport de utilizare aplicatie', 'UsageReportFormator', '/bakery/formator/usage-report-formator', true, 22, true),
     (29, 'Raport cadentier + vanzari', 'SalesCadentierFormator', '/bakery/formator/sales-cadentier-formator', true, 23, true),
+    (75, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/formator/frozen-traceability-report', true, 191, true),
+    (76, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/formator/frozen-traceability-report-print', true, 191, false),
+    (77, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/formator/own-production-traceability-report', true, 192, true),
+    (78, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/formator/own-production-traceability-report-print', true, 192, false),
+    
     -- Bakery STORE_MANAGER
     (30, 'Management produse', 'ProductManagement', '/bakery/storeManager/product-management', true , 27, true),
     (31, 'Management productie', 'CandetierStore', '/bakery/storeManager/cadentier-store', true , 28, true),
@@ -296,6 +303,7 @@ VALUES
     (215, 'Produs aleatoriu', '', '/shop-reception/mobile/randomProduct', true, 188, false),
     (216, 'Comanda camion retur', '', '/shop-reception/mobile/truckReturnOrder', true, 189, true),
     (217, 'Camioane retur confirmate', '', '/shop-reception/mobile/truckReturnConfirm', true, 190, true),
+    (218, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips/:id', true, 163, false),
     -- Bakery TRACEABILITY-OPERATOR
     (67, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 50, true),
     (68, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 51, true),
@@ -306,7 +314,7 @@ VALUES
     (73, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 55, true),
     (74, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 55, false),
     -- Bakery ADMIN p2
-    (75, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 56, true);
+    (80, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 56, true);
 
 -- roles
 INSERT INTO
@@ -355,11 +363,11 @@ VALUES
     -- GG_RO_HQ_IT_DEX_BAKERY_REGION
     (7, 32), (7, 33), (7, 34), (7, 35), (7, 36),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE
-    (8, 17), (8, 18), (8, 19), (8, 20), (8, 21), (8, 22), (8, 23), (8, 54), (8, 55),
+    (8, 17), (8, 18), (8, 19), (8, 20), (8, 21), (8, 22), (8, 23), (8, 191), (8, 192),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_HYPER
-    (9, 17), (9, 18), (9, 19), (9, 20), (9, 21), (9, 22), (9, 23), (9, 54), (9, 55),
+    (9, 17), (9, 18), (9, 19), (9, 20), (9, 21), (9, 22), (9, 23),  (9, 191), (9, 192),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRAINEE_SUPER
-    (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23), (10, 54), (10, 55),
+    (10, 17), (10, 18), (10, 19), (10, 20), (10, 21), (10, 22), (10, 23),  (10, 191), (10, 192),
     -- GG_RO_HQ_IT_DEX_BAKERY_TRACEABILITY
     (12, 50), (12, 51), (12, 52), (12, 53), (12, 54), (12, 55),
     -- Supply OMNI
