@@ -77,19 +77,7 @@ module.exports = env => ({
     compress: true,
     hot: true,
     historyApiFallback: true,
-    allowedHosts: 'all',
-    // server: {
-    //   type: 'https',
-    //   options: {
-    //     key: fs.readFileSync(
-    //       '/Users/pauladan/fullscreen/carrefour/dex-front-end/local.dex.fe+1-key.pem'
-    //     ),
-    //     cert: fs.readFileSync(
-    //       '/Users/pauladan/fullscreen/carrefour/dex-front-end/local.dex.fe+1.pem'
-    //     ),
-    //     ca: fs.readFileSync('/Users/pauladan/Library/Application Support/mkcert/rootCA.pem')
-    //   }
-    // }
+    allowedHosts: 'all'
   },
   plugins: [
     new ReactRefreshWebpackPlugin(),

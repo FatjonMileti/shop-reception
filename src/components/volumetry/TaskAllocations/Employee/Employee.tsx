@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, useMediaQuery } from '@mui/material'
 import s from '../TaskAllocations.modules.scss'
 import { getCapsuleColor } from '../helpers'
 import { makeCorePutRequest } from 'utils/api'
@@ -59,6 +59,7 @@ const Employee: React.FC<EmployeeProps> = props => {
         showNotification
       )
   })
+  const shouldWrapActions = useMediaQuery('(min-width:1145px)')
 
   return (
     <Box>
@@ -77,7 +78,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               />
             </Grid>
 
-            <Grid item sm={12} md={2}>
+            <Grid item sm={12} md={shouldWrapActions ? 12 : 2}>
               <EmployeeActions
                 taskCurrentState={taskCurrentState}
                 updateTaskStatus={updateTaskStatus}
@@ -117,7 +118,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               />
             </Grid>
 
-            <Grid item sm={12} md={3}>
+            <Grid item sm={12} md={shouldWrapActions ? 3 : 12}>
               <EmployeeActions
                 taskCurrentState={taskCurrentState}
                 updateTaskStatus={updateTaskStatus}

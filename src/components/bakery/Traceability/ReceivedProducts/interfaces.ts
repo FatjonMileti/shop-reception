@@ -56,3 +56,16 @@ export interface FamilyItem {
   id: string
   name: string
 }
+
+export enum BatchStatus {
+  AVAILABLE = 'Disponibil',
+  CLOSED = 'Inchis'
+}
+
+export enum CloseReason {
+  OUT_OF_STOCK = 'In afara stocului',
+  NON_CONFORM = 'Neconform',
+  WITHDRAWN = 'Retras',
+  EXPIRED = 'Expirat',
+  OTHER = 'Altul'
+}

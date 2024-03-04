@@ -1,36 +1,38 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate, formatPayloadDate, getCurrentDate } from 'utils/helpers'
 
 export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
   return {
     productId: editItem?.product?.id || selectedProduct?.id || '',
-    storeId: editItem?.store?.id || null,
-    productionDate: editItem?.productionDate || null,
+    // storeId: editItem?.store?.id || null,
+    productionDate: editItem?.productionDate || getCurrentDate(),
     chargeNumber: editItem?.chargeNumber || null,
     productionOperator: editItem?.productionOperator || null,
     quantity: editItem?.quantity || null,
-    thermalCondition: editItem?.thermalCondition || 'UNBAKED',
+    thermalCondition: editItem?.thermalCondition || null,
     conform: editItem?.conform || true,
     nonComplianceReason: editItem?.nonComplianceReason || null,
     productDestination: editItem?.productDestination || null,
-    isVerified: editItem?.verified || null,
-    verifiedBy: editItem?.verifiedBy || null,
-    verifiedDate: editItem?.verifiedDate || null,
+    // isVerified: editItem?.verified || null,
+    // verifiedBy: editItem?.verifiedBy || null,
+    // verifiedDate: editItem?.verifiedDate || null,
     dlc: editItem?.dlc || null,
-    isFrozen: editItem?.frozen || null,
+    // isFrozen: editItem?.frozen || null,
     metiCode: editItem?.product?.metiCode || selectedProduct?.metiCode,
     productName: editItem?.product?.name || selectedProduct?.name,
     traceabilityFrozenList: editItem
-      ? toBatchFormat(editItem?.traceabilityFrozenList, true)
+      ? editItem?.traceabilityFrozenList ? toBatchFormatEdit(editItem?.traceabilityFrozenList) : []
       : selectedRows
   }
 }
 
 export const getValidationSchema = () =>
   Yup.object().shape({
-    productionDate: Yup.date().required('Campul data productie trebuie completat'),
-    chargeNumber: Yup.string().required('Campul sarja trebuie completat.'),
-    productionOperator: Yup.string().required('Campul operator productie trebuie completat.'),
+    productionDate: Yup.date()
+    .max(new Date(), 'Data de productie nu poate fi in viitor.')
+    .required('Campul data productie trebuie completat.'),
+    chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
+    productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
     quantity: Yup.string().required('Campul cantitate trebuie completat'),
     thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
     conform: Yup.boolean(),
@@ -39,19 +41,29 @@ export const getValidationSchema = () =>
       Yup.object().shape({
         batchId: Yup.string(),
         quantity: Yup.number(),
-        openingDate: Yup.date(),
+        // openingDate: Yup.date(),
         dlc: Yup.string()
       })
     )
   })
 
-export const toBatchFormat = (batches, isEdit = false) => {
-  console.log('debug item', batches)
+export const toBatchFormat = ({ batches, quantity }) => {
   return batches.map(item => ({
-    batchId: isEdit ? item.batch.batchName : item.batchName,
-    quantity: isEdit ? item.batch.batchQuantity : item.batchQuantity,
-    openingDate: isEdit ? formatBakeryPayloadDate(item.openingDate) : item.entryDate,
-    dlc: isEdit ? item.batch.dlcDays : item.dlcDays
+    batchName: item.batchName,
+    batchId: item.id,
+    quantity: quantity, //item.batchQuantity,
+    openingDate: item.entryDate,
+    dlc: item.dlcDays
+  }))
+}
+
+export const toBatchFormatEdit = batches => {
+  return batches.map(item => ({
+    batchName: item.batch.batchName,
+    batchId: item.batch.id,
+    quantity: item.batch.batchQuantity,
+    openingDate: formatPayloadDate(item.openingDate),
+    dlc: item.batch.dlcDays
   }))
 }
 
@@ -99,7 +111,8 @@ export const columns: any[] = [
     field: 'consumedAmount',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    render: (row: any) => row.consumedAmount || ''
   },
   {
     title: 'Nr. zile DLC',

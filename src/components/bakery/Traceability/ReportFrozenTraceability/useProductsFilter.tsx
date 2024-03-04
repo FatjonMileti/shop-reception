@@ -25,13 +25,12 @@ export const useProductsFilter = () => {
     }
   )
 
-  const options = productQuery.data.map(({ id, name }) => ({ value: id, label: name })) || []
+  const options = productQuery.data.map(({ id, name, metiCode }) => ({ value: id, label: `${name} (${metiCode})` })) || []
 
   const onInputChange = (e, value) => {
 
     setSearchText(value)
     if (e?.type === 'change') {
-      console.log('e:', e.target.value)
       if (timeOutId) {
         setTimeoutId(null)
         clearTimeout(timeOutId)

@@ -46,7 +46,7 @@ VALUES
     (8, 'Administrare Task-uri', 'ManagementTasks', '/tasksManagement', true, 4),
     (9, 'Rapoarte', 'ReportsVolumetry', 'reports', true, 4),
     -- Bakery p2
-    (11, 'Operator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
+    (11, 'Operator/ validator trasabilitate', 'TraceabilityOperator', '/traceabilityOperator', true, 2),
     -- Shop Reception (Admin)
     (12, 'Administrare', 'ProjectTeamGovernance', '/admin', true, 5),
     (13, 'Receptie marfa', 'ProjectTeamGovernance', '/reception', true, 5),
@@ -204,10 +204,10 @@ VALUES
     (27, 'Setari coeficient de crestere', 'GrowthManagement', '/bakery/formator/growthIndexProductsView/:id', true, 21, false),
     (28, 'Raport de utilizare aplicatie', 'UsageReportFormator', '/bakery/formator/usage-report-formator', true, 22, true),
     (29, 'Raport cadentier + vanzari', 'SalesCadentierFormator', '/bakery/formator/sales-cadentier-formator', true, 23, true),
-    (75, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report', true, 191, true),
-    (76, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/traceabilityOperator/frozen-traceability-report-print', true, 191, false),
-    (77, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 192, true),
-    (78, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 192, false),
+    (75, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/formator/frozen-traceability-report', true, 191, true),
+    (76, 'Print raport trasabilitate congelate', 'FrozenTraceabilityReportTO', '/bakery/formator/frozen-traceability-report-print', true, 191, false),
+    (77, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/formator/own-production-traceability-report', true, 192, true),
+    (78, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/formator/own-production-traceability-report-print', true, 192, false),
     
     -- Bakery STORE_MANAGER
     (30, 'Management produse', 'ProductManagement', '/bakery/storeManager/product-management', true , 27, true),

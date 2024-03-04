@@ -6,7 +6,7 @@ import {
   Column,
   HeaderItem
 } from './AccordionTable'
-import { Grid, Typography } from '@mui/material'
+import { debounce, Grid, Typography } from '@mui/material'
 import { FamilyItem, ProductManagementItem, SubfamilyItem } from '../../StoreManagerRole/interfaces'
 import { makeCoreGetRequest } from '../../../../utils/api'
 import { toTableGETUrl } from '../../../core-ui/Table/serializers'
@@ -14,137 +14,13 @@ import { toTableRowItems } from '../../StoreManagerRole/ProductManagementStore/s
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { useNotification } from '../../../../hooks'
 import { ValueLabelInterface } from '../../interfaces'
-import { BooleanIcon } from '../../../core-ui/BooleanIcon'
-import { DescriptionText } from '../../../core-ui/DescriptionText'
 import { Autocomplete, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import { useQuery } from 'react-query'
 import s from '../../commonStyles.modules.scss'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
-
-const columns: Column[] = [
-  {
-    title: 'Cod EAN',
-    field: 'eanCodes'
-  },
-  {
-    title: 'Cod PLU',
-    field: 'pluCode'
-  },
-  {
-    title: 'Cod APPEL PRIX',
-    field: 'appelCodes'
-  },
-  {
-    title: 'Raion',
-    field: 'familyModuleName'
-  },
-  {
-    title: 'UB',
-    field: 'unitBusiness'
-  },
-  {
-    title: 'Status',
-    field: 'status'
-  },
-  {
-    title: 'Furnizor',
-    field: 'suppliers'
-  },
-  {
-    title: 'Lot',
-    field: 'batch',
-    render: row => (
-      <BodyItem
-        name="Metoda fabricatie"
-        value={
-          <BooleanIcon value={row.batch} icon="Flag" onFailure="#FFFFFF" onSuccess="#33691E" />
-        }
-      />
-    )
-  },
-  {
-    title: 'Metoda fabricatie',
-    field: 'fabricationMethod',
-    render: row => (
-      <BodyItem
-        name="Metoda fabricatie"
-        value={<DescriptionText value={row.fabricationMethod} />}
-      />
-    )
-  },
-  {
-    field: 'clusterName',
-    render: data => <BodyItem name="Cluster" value={data.clusterName} />
-  },
-  {
-    field: 'clusterMandatory',
-    render: data => (
-      <BodyItem
-        name="Obligatoriu"
-        value={
-          <BooleanIcon
-            value={data.clusterMandatory}
-            icon="CheckCircleOutline"
-            onFailure="#E5E5E5"
-            onSuccess="#33691E"
-          />
-        }
-      />
-    )
-  },
-  {
-    field: 'scheduleProduct',
-    render: data => (
-      <BodyItem
-        name="Produs cadentier"
-        value={
-          <BooleanIcon
-            value={data.scheduleProduct}
-            icon="CheckCircleOutline"
-            onFailure="#E5E5E5"
-            onSuccess="#33691E"
-          />
-        }
-      />
-    )
-  },
-  {
-    field: 'minStock',
-    title: 'Stoc minim prezentare'
-  },
-  {
-    render: data => (
-      <BodyItem
-        name="Produs nou"
-        value={
-          <BooleanIcon
-            value={data.newProduct}
-            icon="CheckCircleOutline"
-            onFailure="#E5E5E5"
-            onSuccess="#33691E"
-          />
-        }
-      />
-    ),
-    field: 'newProduct'
-  }
-]
-
-const headerItems: Column[] = [
-  {
-    title: 'Cod METI',
-    field: 'metiCode'
-  },
-  {
-    title: 'Familie',
-    field: 'familyName'
-  },
-  {
-    title: 'Subfamilie',
-    field: 'subfamily'
-  }
-]
+import { ImageCell } from '../../../core-ui/ImageCell'
+import {columns, headerItems} from './helpers'
 
 export const ProductManagementTraceability = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -153,17 +29,18 @@ export const ProductManagementTraceability = () => {
   const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
   const { showNotification } = useNotification()
 
-  const fetchData = async (page, rowsPerPage, tableFilters) => {
+  const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
 
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/product',
-          // searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
+          url: '/bakery/product/traceability',
+          searchFields: [],
           tableFilters,
           page,
-          rowsPerPage
+          rowsPerPage,
+          searchText
         })
       )
       setTableItems(toTableRowItems(response.list))
@@ -178,9 +55,16 @@ export const ProductManagementTraceability = () => {
   }
 
   const families = useQuery(
-    ['families-store'],
+    ['families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
     async () => {
-      const result = await makeCoreGetRequest(`/bakery/store/families`)
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
+        ?.value || []) as AutoCompleteValue[]
+      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+        params: {
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
           label: item.name,
@@ -243,7 +127,6 @@ export const ProductManagementTraceability = () => {
       ),
       type: 'autocomplete',
       label: 'Familie',
-      clearFiltersOnChange: ['subfamily']
     },
     {
       name: 'subfamily',
@@ -285,14 +168,16 @@ export const ProductManagementTraceability = () => {
         totalCount={totalCount}
         isLoading={isLoading}
         filters={drawerFilters}
+        hasSearchInput
+        handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         rows={tableItems.map(item => ({
           id: item.id,
           summary: (
             <AccordionSummaryWrapper>
-              <img src={'images/default-product-image.svg'} />
+              <ImageCell value={''} imageUrl={item.imageUrl} />
               <div className="title-and-content-wrapper">
                 <Typography variant="medium" className="title">
-                  Paine 7 seminte
+                  {item.productName}
                 </Typography>
                 <div className="content-wrapper">
                   {headerItems.map((hc, cIndex) => (
@@ -321,8 +206,10 @@ export const ProductManagementTraceability = () => {
           ),
           borderLeftColor: '#0970E6'
         }))}
-        handleRemoteData={fetchData}
+        handleRemoteData={ debounce(fetchData, 500) }
         rowActionsWidth="200px"
+        rowsPerPage={25}
+        rowsPerPageOptions={[25, 50, 100]}
       />
     </div>
   )

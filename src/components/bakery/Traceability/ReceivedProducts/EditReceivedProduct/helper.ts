@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import { EditReceivedProductRequestData } from './EditReceivedProduct'
+import { BATCH_STATUS,  EditReceivedProductRequestData } from './EditReceivedProduct'
 
 export const correctReceivedProductSchema: Yup.ObjectSchema<EditReceivedProductRequestData> = Yup.object()
   .shape({
@@ -10,7 +10,10 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<EditReceivedProductR
   .test({
     test:  (value, context) =>  {
       const { batchStatus, closeReason } = value
-      if ((batchStatus && !closeReason) || (!batchStatus && closeReason)) {
+      if (
+        ((batchStatus && batchStatus !== BATCH_STATUS.AVAILABLE) && !closeReason) ||
+        (!batchStatus && closeReason)
+      ) {
         return context.createError({
           path: batchStatus ? 'closeReason' : 'batchStatus',
           message: batchStatus ? 'reason is required' : 'batch status is required'

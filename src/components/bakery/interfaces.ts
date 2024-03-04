@@ -239,3 +239,8 @@ export interface EditBatchItem {
   minStock: string | number
   scheduleProduct: boolean
 }
+
+export enum ThermalCondition {
+  BAKED = 'COPT',
+  UNBAKED = 'NECOPT'
+}

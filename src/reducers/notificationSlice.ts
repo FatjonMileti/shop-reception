@@ -12,7 +12,7 @@ export const notificationInitialState: NotificationState = {
   open: false,
   type: 'info',
   message: '',
-  timeout: null
+  timeout: 10
 }
 
 export const NotificationSlice = createSlice({

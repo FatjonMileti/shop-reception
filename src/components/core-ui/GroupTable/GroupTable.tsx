@@ -83,7 +83,7 @@ const GroupTable = props => {
     () =>
       Object.keys(filters).map(key => ({
         name: filters[key].name,
-        value: filters[key]?.value ?? filters
+        value: filters[key]?.value //?? filters
       })) || [],
     [filters]
   )

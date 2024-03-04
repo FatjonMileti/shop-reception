@@ -234,7 +234,6 @@ const CadentierSalesRegion = () => {
               frequency='day'
               hasStickyHeader
               maxHeight={'600px'}
-              hasSearchInput
               toolbarActions={[
                   {
                       label: 'Descarca',

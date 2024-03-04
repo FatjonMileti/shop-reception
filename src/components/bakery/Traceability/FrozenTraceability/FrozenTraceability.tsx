@@ -1,6 +1,6 @@
-import { ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, ListTable } from '@fullscreendigital/carrefour-dex-fe'
 import s from './FrozenTraceability.modules.scss'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
@@ -11,6 +11,15 @@ import { AddActionIcon, EditActionIcon } from 'icons'
 import FrozenTraceabilityDescription from './FrozenTraceabilityDescription'
 import { FrozenTraceabilityModal } from './FrozenTraceabilityModal/FrozenTraceabilityModal'
 import { EditFrozenTraceabilityModal } from './EditFrozenTraceabilityModal/EditFrozenTraceabilityModal'
+import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
+import { useQuery } from 'react-query'
+import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
+import { ValueLabelInterface } from '../../interfaces'
+import { formatErrorMessage } from '../../../../utils/formatting'
+import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
+
+const orderBy = 'createdDate'
+const order = 'desc'
 
 export const FrozenTraceability = () => {
   const { showNotification } = useNotification()
@@ -24,8 +33,9 @@ export const FrozenTraceability = () => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [verifyItem, setVerifyItem] = useState(null)
+  const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
 
-  const fetchData = async (page, rowsPerPage, tableFilters) => {
+  const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
@@ -33,7 +43,14 @@ export const FrozenTraceability = () => {
           url: '/bakery/traceability/frozen',
           tableFilters,
           page,
-          rowsPerPage
+          rowsPerPage,
+          orderBy,
+          order,
+          searchText,
+          searchFields: [
+            'product.metiCode',
+            'product.name',
+          ]
         })
       )
       setRows(toListTableRows(response.list))
@@ -48,14 +65,110 @@ export const FrozenTraceability = () => {
       )
     }
   }
+  
   const handleRemoteDetails = async (rowId: string | number) => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
     const data = await response
     setEditItem(data)
-    
 
-    return <FrozenTraceabilityDescription chargeItem={tableData} item={data} />
+    return <FrozenTraceabilityDescription chargeItem={tableData?.find(d => d.id === rowId)} item={data} />
   }
+
+  const families = useQuery(
+    ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
+    async () => {
+      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.subfamily')
+        ?.value || []) as AutoCompleteValue[]
+
+      const result = await makeCoreGetRequest(
+        `/bakery/store/families`,
+        {
+          params: {
+            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+          },
+          paramsSerializer: { indexes: null }
+        }
+      )
+      const resultOptions = result.map(
+        (item: FamilyItem): ValueLabelInterface => ({
+          label: item.name,
+          value: item.id
+        })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const subfamilies = useQuery(
+    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
+    async () => {
+      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.family')
+        ?.value || []) as AutoCompleteValue[]
+      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+        params: {
+          family: familyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
+      const resultOptions = result.map(
+        (item: SubfamilyItem): ValueLabelInterface => ({
+          label: item.subFamily,
+          value: item.subFamily
+        })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const drawerFilters: TableFiltersType[] = [
+    {
+      name: 'product.family',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Familie"
+          disableClearable
+          options={families.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Familie',
+    },
+    {
+      name: 'product.subfamily',
+      value: undefined,
+      filter: (
+        <Autocomplete
+          variant="outlined"
+          label="Subfamilie"
+          disableClearable
+          options={subfamilies.data || []}
+          multiple
+        />
+      ),
+      type: 'autocomplete',
+      label: 'Subfamilie'
+    }
+  ]
+
 
   return (
     <div className={s.mainContainer}>
@@ -76,9 +189,11 @@ export const FrozenTraceability = () => {
           rows={rows}
           handleRemoteData={debounce(fetchData, 500)}
           handleRemoteDetails={handleRemoteDetails}
+          hasSearchInput
           isLoading={isLoading}
           totalCount={totalCount}
-          filters={[]} // Empty string must be provided in order to show toolbarActions. This line can be removed after fixing this in the UI Library
+          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
+          filters={drawerFilters}
           toolbarActions={[
             {
               label: 'Add',
@@ -115,6 +230,8 @@ export const FrozenTraceability = () => {
             }
           ]}
           rowActionsWidth="90px"
+          rowsPerPage={25}
+          rowsPerPageOptions={[25, 50, 100]}
         />
       </>
     </div>

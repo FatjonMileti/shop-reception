@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { ReceivedProductToCorrect } from './CorrectReceivedProduct'
 import { Product, ReceivedProduct, Supplier } from '../interfaces'
 
-export const getInitialValues = (receivedProduct?: ReceivedProduct ): ReceivedProductToCorrect => {
+export const getInitialValues = (receivedProduct?: ReceivedProduct): ReceivedProductToCorrect => {
   return {
     selectedProduct: receivedProduct?.product,
     selectedSupplier: receivedProduct?.supplier,
@@ -21,7 +21,6 @@ export const getInitialValues = (receivedProduct?: ReceivedProduct ): ReceivedPr
 
 export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCorrect> =
   Yup.object().shape({
-
     selectedProduct: Yup.mixed<Product>().required('Selected product is required'),
     selectedSupplier: Yup.mixed<Supplier>().required('Selected supplier is required'),
 
@@ -29,14 +28,36 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
 
     hasExpirationDate: Yup.boolean().required('This field is required'),
 
-    expirationDate: Yup.mixed<dayjs.Dayjs>().when(
+    expirationDate: Yup.mixed().when(
       'hasExpirationDate',
-      ([hasExpirationDate], schema) => {
+      (hasExpirationDate, schema) => {
         return hasExpirationDate
-          ? schema.required('Expiration date is required')
-          : schema.nullable()
+          ? Yup.date()
+              .min(new Date(), 'Data de expirare nu poate fi în trecut.')
+              .required('Câmpul data expirare trebuie completat.')
+          : schema.nullable();
       }
     ),
+
+    // expirationDate: Yup.mixed<dayjs.Dayjs>().when(
+    //   'hasExpirationDate',
+    //   ([hasExpirationDate], schema) => {
+    //     return hasExpirationDate
+    //       ? Yup.date()
+    //           .min(new Date(), 'Data de expirare nu poate fi in trecut.')
+    //           .required('Campul data expirare trebuie completat.')
+    //       : schema.nullable()
+    //   }
+    // ),
+
+    // expirationDate: Yup.mixed().when('hasExpirationDate', (hasExpirationDate, schema) => {
+    //   return hasExpirationDate
+    //     ? schema
+    //         .nullable()
+    //         .required('Expiration date is required')
+    //         .min(dayjs(), 'Expiration date must be today or later')
+    //     : schema.nullable();
+    // }),
 
     hasSecondaryDLC: Yup.boolean().required('This field is required'),
 
