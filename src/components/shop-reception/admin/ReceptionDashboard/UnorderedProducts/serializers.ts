@@ -1,18 +1,20 @@
-export const toTableRowItems = (items: UnorderedProducts[]) => items.map((item: UnorderedProducts) => ({
-  id: item.id,
-  warehouse: item.warehouse,
-  store: item.store,
-  productCode: item.productCode,
-  productName: item.productName,
-  productEan: item.productEan,
-  qualitativeQuantity: item.qualitativeQuantity,
-  defectiveQuantity: item.defectiveQuantity,
-  failureReason: item.failureReason,
-  supportCode: item.supportCode,
-  deliverySlip: item.deliverySlip,
-  receptionDate: item.receptionDate,
-  receptionOperator: item.receptionOperator,
-  resolved: item.resolved,
-  resolvedDate: item.resolvedDate,
-  resolvedOperator: item.resolvedOperator
-}))
+export const toTableRowItems = (items: UnorderedProducts[]) =>
+  items.map((item: UnorderedProducts) => ({
+    id: item.id,
+    depositName: item.depositName,
+    shopName: item.shopName,
+    shopCode: item.shopCode,
+    productCode: item.productCode,
+    productName: item.productName,
+    productEan: item.productEan,
+    validatedQuantity: item.validatedQuantity,
+    brokenQuantity: item.brokenQuantity,
+    defectReason: item.defectReason,
+    externalSupportCode: item.externalSupportCode,
+    deliveryTicketExternalId: item.deliveryTicketExternalId,
+    created: item.created,
+    createdBy: item.createdBy,
+    resolved: item.resolved,
+    updated: item.updated,
+    lastUpdateBy: item.lastUpdateBy
+  }))

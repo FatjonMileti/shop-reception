@@ -459,19 +459,20 @@ interface SupportWrongDestination {
 
 interface UnorderedProducts {
   id: number
-  warehouse: string
-  store: string
+  depositName: string
+  shopName: string
+  shopCode: string
   productCode: string
   productName: string
   productEan: string
-  qualitativeQuantity: string
-  defectiveQuantity: string
-  failureReason: string
-  supportCode: string
-  deliverySlip: string
-  receptionDate: string
-  receptionOperator: string
-  resolved: string
-  resolvedDate: string
-  resolvedOperator: string
+  validatedQuantity: number
+  brokenQuantity: number
+  defectReason: string
+  externalSupportCode: string
+  deliveryTicketExternalId: string
+  created: string
+  createdBy: string
+  resolved: boolean
+  updated: string
+  lastUpdateBy: string
 }
