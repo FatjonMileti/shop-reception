@@ -6022,6 +6022,64 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "47283e28-315b-4d50-bd8e-31ed3f922dbd",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "unexpectedReceptionProduct",
+      "responses": [
+        {
+          "uuid": "bdc060ec-3bd3-4eba-9122-876d07e683d0",
+          "body": "{\n  \"unexpectedReceptionList\": [\n    {\n      \"id\": 0,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": true,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    },\n    {\n      \"id\": 1,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": false,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    },\n    {\n      \"id\": 2,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": false,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "56cdb5e9-a53d-4383-bf64-83abee595210",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "unexpectedReceptionProduct/export",
+      "responses": [
+        {
+          "uuid": "6878a7d2-6497-4093-983c-f0e466f1263c",
+          "body": "{\n  \"unexpectedReceptionList\": [\n    {\n      \"id\": 0,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": true,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    },\n    {\n      \"id\": 1,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": false,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    },\n    {\n      \"id\": 2,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": false,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6324,6 +6382,14 @@
     {
       "type": "route",
       "uuid": "2146dee1-f09f-4a52-bbf8-2af0d0bf2e9b"
+    },
+    {
+      "type": "route",
+      "uuid": "47283e28-315b-4d50-bd8e-31ed3f922dbd"
+    },
+    {
+      "type": "route",
+      "uuid": "56cdb5e9-a53d-4383-bf64-83abee595210"
     }
   ],
   "proxyMode": false,
