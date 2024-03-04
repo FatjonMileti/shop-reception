@@ -53,7 +53,7 @@ const TaskManagement = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      handleQueryError(error, 'Error while fetching table data', showNotification)
+      handleQueryError(error, 'A aparut o eroare la obtinerea datelor pentru tabel.', showNotification)
     }
   }
 
@@ -99,9 +99,15 @@ const TaskManagement = () => {
             frequencyOptions || [],
             workVolumeOptions || []
           )}
+          filtersLabel="Filtreaza"
+          appliedFiltersLabel="Filtre"
+          applyFiltersButtonLabel="Aplica filtre"
+          filtersButtonLabel="Filtreaza"
+          cancelFiltersButtonLabel="Renunta"
+          labelRowsPerPage="Randuri pe pagina:"
           rowActions={[
             {
-              label: 'Edit',
+              label: 'Editeaza',
               labelColor: 'white',
               typographyVariant: 'medium',
               backgroundColor: '#16a085',

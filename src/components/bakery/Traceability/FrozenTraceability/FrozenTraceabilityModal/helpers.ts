@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate, getCurrentDate } from 'utils/helpers'
+import { formatBakeryPayloadDate, formatPayloadDate, getCurrentDate } from 'utils/helpers'
 
 export const getInitialValues = (selectedProduct, selectedRows, editItem) => {
   return {
@@ -62,7 +62,7 @@ export const toBatchFormatEdit = batches => {
     batchName: item.batch.batchName,
     batchId: item.batch.id,
     quantity: item.batch.batchQuantity,
-    openingDate: formatBakeryPayloadDate(item.openingDate),
+    openingDate: formatPayloadDate(item.openingDate),
     dlc: item.batch.dlcDays
   }))
 }

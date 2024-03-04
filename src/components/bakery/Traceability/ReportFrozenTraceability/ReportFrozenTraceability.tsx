@@ -39,6 +39,7 @@ export const ReportFrozenTraceability = () => {
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [rows, setRows] = useState([])
+  const [tableData, setTableData] = useState([])
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([])
@@ -97,7 +98,7 @@ export const ReportFrozenTraceability = () => {
   const handleRemoteDetails = async (rowId: string | number) => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
     const data = await response
-    return <FrozenTraceabilityDescription item={data} />
+    return <FrozenTraceabilityDescription item={data} chargeItem={tableData?.find(d => d.id === rowId)}/>
   }
 
 
@@ -123,6 +124,7 @@ export const ReportFrozenTraceability = () => {
 
       setRows(toListTableRows(response.list))
       setTotalCount(response.page.totalCount)
+      setTableData(response.list)
       setIsLoading(false)
 
       setTableState(tableState => ({
@@ -381,16 +383,6 @@ export const ReportFrozenTraceability = () => {
                 onClick: () => {
                   setIsPrintModalOpen(true)
                 }
-              }
-            ]}
-            rowActions={[
-              {
-                label: 'Editeaza',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#0970E6',
-                onClick: async (e, rowId) => {},
-                desktopIcon: <EditActionIcon />
               }
             ]}
             rowActionsWidth="90px"

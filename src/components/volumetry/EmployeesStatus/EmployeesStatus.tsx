@@ -22,7 +22,9 @@ const EmployeesStatus = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
-  const [shiftCategoryFilterValue, setShiftCategoryFilterValue] = useState<ValueLabelInterface>(shiftCategoryOptions[0])
+  const [shiftCategoryFilterValue, setShiftCategoryFilterValue] = useState<ValueLabelInterface>(
+    shiftCategoryOptions[0]
+  )
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification, setDepartmentFilterValue)
@@ -86,8 +88,8 @@ const EmployeesStatus = () => {
                 label="Departament"
                 showCounter={true}
                 showSearch={true}
-                counterLabel="Select department"
-                noDataFoundLabel="No results!"
+                counterLabel="Selecteaza departament"
+                noDataFoundLabel="Nu s-au gasit rezultate."
                 options={departmentsOptions}
                 onSelect={handleDepartmentOptionChange}
               />
@@ -100,7 +102,7 @@ const EmployeesStatus = () => {
                 showCounter={true}
                 showSearch={true}
                 counterLabel="Ture/colaboratori"
-                noDataFoundLabel="No results!"
+                noDataFoundLabel="Nu s-au gasit rezultate."
                 options={shiftCategoryOptions}
                 onSelect={handleShiftCategoryOptionChange}
               />

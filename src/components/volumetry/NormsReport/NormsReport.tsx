@@ -61,7 +61,7 @@ const NormsReport = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      handleQueryError(error, 'Error while fetching table data', showNotification)
+      handleQueryError(error, 'A aparut o eroare la obtinerea datelor pentru tabel.', showNotification)
     }
   }
 
@@ -126,11 +126,11 @@ const NormsReport = () => {
             <FilterDataSelect
               name="name"
               defaultSelectedData={departmentFilterValue}
-              label="Department"
+              label="Departament"
               showCounter={true}
               showSearch={true}
-              counterLabel="Select department"
-              noDataFoundLabel="No results!"
+              counterLabel="Selecteaza departament"
+              noDataFoundLabel="Nu s-au gasit rezultate."
               options={departmentsOptions}
               onSelect={handleDepartmentOptionChange}
             />
@@ -153,7 +153,12 @@ const NormsReport = () => {
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
           filters={tableFilterFields}
-          rowActionsWidth="130px"
+          filtersLabel="Filtreaza"
+          appliedFiltersLabel="Filtre"
+          applyFiltersButtonLabel="Aplica filtre"
+          filtersButtonLabel="Filtreaza"
+          cancelFiltersButtonLabel="Renunta"
+          labelRowsPerPage="Randuri pe pagina:"
         />
       )}
     </div>
