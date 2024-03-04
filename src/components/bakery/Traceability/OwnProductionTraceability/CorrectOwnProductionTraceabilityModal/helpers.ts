@@ -2,7 +2,7 @@ import * as Yup from 'yup'
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
-export const getInitialValues = (selectedRows, editItem) => {
+export const getInitialValues = (editItem) => {
   const batchItems = []
   const childItems = []
 
@@ -36,7 +36,8 @@ export const getInitialValues = (selectedRows, editItem) => {
 
     metiCode: editItem?.product?.metiCode,
     productName: editItem?.product?.name,
-    traceabilityProductionList: editItem ? formattedProductionList : selectedRows
+    traceabilityProductionList: formattedProductionList ,
+    product: editItem?.product
   }
 }
 
@@ -50,6 +51,7 @@ export const validationSchema = Yup.object().shape({
   quantity: Yup.string().required('Campul cantitate trebuie completat'),
   thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
   conform: Yup.boolean(),
+  product: Yup.object().required(),
 
   traceabilityProductionList: Yup.array().of(
     Yup.object().shape({

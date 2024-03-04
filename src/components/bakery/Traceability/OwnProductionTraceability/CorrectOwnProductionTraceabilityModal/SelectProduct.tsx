@@ -11,7 +11,6 @@ interface SelectProductProps {
   selectedProduct: Product
   onContinue: () => void
   onCancel: () => void
-  hideActions?: boolean
   customLabel?: string
 }
 export const SelectProduct = ({
@@ -19,7 +18,6 @@ export const SelectProduct = ({
   selectedProduct,
   onContinue,
   onCancel,
-  hideActions = false,
   customLabel
 }: SelectProductProps) => {
   const [searchText, setSearchText] = React.useState(selectedProduct?.name || null)
@@ -41,7 +39,7 @@ export const SelectProduct = ({
   )
   return (
     <Grid container rowSpacing={3.5}>
-      <Grid item xs={hideActions ? 8 : 12}>
+      <Grid item xs={12}>
         <Autocomplete
           variant="outlined"
           options={productQuery.data.map(({ id, name }) => ({ value: id, label: name }))}
@@ -79,22 +77,21 @@ export const SelectProduct = ({
           filterOptions={x => x}
         />
       </Grid>
-      {!hideActions && (
-        <Grid item xs={12} container justifyContent="space-between">
-          <Grid>
-            <Button size="large" variant="outlined" label="Anuleaza" onClick={onCancel} />
-          </Grid>
-          <Grid>
-            <Button
-              size="large"
-              variant="contained"
-              label="Continua"
-              onClick={onContinue}
-              disabled={!selectedProduct}
-            />
-          </Grid>
+
+      <Grid item xs={12} container justifyContent="space-between">
+        <Grid>
+          <Button size="large" variant="outlined" label="Anuleaza" onClick={onCancel} />
         </Grid>
-      )}
+        <Grid>
+          <Button
+            size="large"
+            variant="contained"
+            label="Continua"
+            onClick={onContinue}
+            disabled={!selectedProduct}
+          />
+        </Grid>
+      </Grid>
     </Grid>
   )
 }

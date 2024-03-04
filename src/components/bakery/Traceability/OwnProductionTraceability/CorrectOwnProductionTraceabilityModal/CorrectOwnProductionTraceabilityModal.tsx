@@ -22,7 +22,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
   closeModal,
   correctItemQuery
 }: CorrectOwnProductionTraceabilityModalProps) => {
-
   const { showNotification } = useNotification()
   const [selectedRows, setSelectedRows] = useState([])
   const [showAddBatch, setShowAddBatch] = useState<boolean>(false)
@@ -30,11 +29,11 @@ export const CorrectOwnProductionTraceabilityModal = ({
 
   const editItem = correctItemQuery?.data
 
+  const [componentMetiCode, setComponentMetiCode] = useState()
+
   const submitTask = async values => {
     await makeCorePutRequest(`/bakery/traceability/production/correction/${editItem.id}`, values)
   }
-  const [recipeMetiCode, setRecipeMetiCode] = useState()
-  const [componentMetiCode, setComponentMetiCode] = useState()
 
   const { isLoading, mutate } = useMutation(submitTask, {
     onSuccess: () => {
@@ -52,10 +51,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
     }
   })
 
-  const initialValues = useMemo(
-    () => getInitialValues(selectedRows, editItem),
-    [selectedRows, editItem?.id]
-  )
+  const initialValues = useMemo(() => getInitialValues(editItem), [editItem?.id])
 
   const formik = useFormik({
     validateOnChange: false,
@@ -64,11 +60,19 @@ export const CorrectOwnProductionTraceabilityModal = ({
     initialValues: initialValues,
     onSubmit: async (values: any, { resetForm }) => {
       const payload = {
-        ...values,
-        productId: values.productId,
+        productId: values?.product?.productId,
         productionDate: formatPayloadDate(values.productionDate),
-        metiCode: values?.metiCode,
-        productName: values.productName
+        chargeNumber: values?.chargeNumber,
+        productionOperator: values?.productionOperator,
+        quantity: values?.quantity,
+        thermalCondition: values?.thermalCondition,
+        dlc: values?.dlc,
+        conform: values?.conform,
+        nonComplianceReason: values?.nonComplianceReason,
+        productDestination: values?.productDestination,
+        metiCode: values?.product?.metiCode,
+        productName: values.product?.name,
+        traceabilityProductionList: values?.traceabilityProductionList
       }
 
       if (values.traceabilityProductionList.length === 0) {
@@ -97,26 +101,22 @@ export const CorrectOwnProductionTraceabilityModal = ({
   const recipeQuery = useQuery(
     ['receip', editItem?.product?.metiCode],
     async () => {
-      const result = await makeCoreGetRequest(
-        `/bakery/recipe/${editItem?.product?.metiCode}`
-      )
+      const result = await makeCoreGetRequest(`/bakery/recipe/${editItem?.product?.metiCode}`)
       let charges = []
       let batches = []
       let others = []
 
       if (result) {
         result[0].componentList.forEach(item => {
-
-          if(item.withBatch && item.withRecipe)  {
+          if (item.withBatch && item.withRecipe) {
             charges.push(item)
-          } else if(item.withBatch) {
+          } else if (item.withBatch) {
             batches.push(item)
           } else if (item.withRecipe) {
             charges.push(item)
           } else {
             others.push(item)
           }
-
         })
       }
 
@@ -144,7 +144,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
         {(isLoading || correctItemQuery.isFetching) && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         )}
-        {(!isLoading && correctItemQuery?.data) && (
+        {!isLoading && correctItemQuery?.data && (
           <>
             {
               [
