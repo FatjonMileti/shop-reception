@@ -19,7 +19,7 @@ interface ProductDetailsProps {
   onSelectBatch: () => void
   selectedProduct: any
   selectedRows: any
-  formik
+  formik: any
   isEdit: boolean
 }
 
@@ -169,9 +169,12 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', toBoolean(option))
-              formik.setFieldValue('nonComplianceReason', null)
-              formik.setFieldValue('productDestination', null)
+              const value = toBoolean(option)
+              formik.setFieldValue('conform', value)
+              if (value) {
+                formik.setFieldValue('nonComplianceReason', '')
+                formik.setFieldValue('productDestination', '')
+              }
             }}
             value={formik.values.conform}
             defaultValue={formik.initialValues.conform ? 'DA' : 'NU'}
