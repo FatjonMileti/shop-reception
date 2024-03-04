@@ -21,7 +21,6 @@ const TaskSummary = ({ item, hideDetails = false }) => {
     workloadMeasurementUnit
   } = item
 
-  console.log('debug', PriorityColors[priorityId].value)
   return (
     <Grid container flexDirection="column">
       <Grid item>
