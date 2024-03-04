@@ -247,22 +247,9 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 }}
                 value={item.quantity}
                 name="quantity"
-                infoIcon={'kg'}
+                infoIcon={selectedProduct?.metricUnit || ''}
               />
             </Grid>
-            {/*<Grid item xs={3}>*/}
-            {/*  <DatePicker*/}
-            {/*    label="Data deschidere"*/}
-            {/*    onChange={(date: any) => {*/}
-            {/*      const updatedList = [...formik.values.traceabilityFrozenList]*/}
-            {/*      updatedList[index].openingDate = date*/}
-
-            {/*      formik.setFieldValue('traceabilityFrozenList', updatedList)*/}
-            {/*    }}*/}
-            {/*    value={dayjs(item.openingDate)}*/}
-            {/*    variant="outlined"*/}
-            {/*  />*/}
-            {/*</Grid>*/}
             <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
               <Button
                 onClick={() => onDeleteBatch(item.batchId)}
