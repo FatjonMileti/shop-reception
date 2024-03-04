@@ -126,8 +126,6 @@ export const EditReceivedProduct = ({
     }
   )
 
-  console.log('form.values: ', form.values)
-
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle="Editare" modalWidth="50%">
       <Grid container rowSpacing={3.5}>

@@ -29,10 +29,6 @@ export const SelectBatch = ({
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  console.log('formik.values: ', formik.values)
-
-  console.log("selectedProduct: ", selectedProduct)
-
   const fetchData = async (page, rowsPerPage) => {
     try {
       setIsLoading(true)
