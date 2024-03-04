@@ -24,7 +24,7 @@ const ShoppingCart = () => {
   const { data: products, isLoading: isLoadingGetProducts } = useQuery(
     ['cart-products'],
     async () => {
-      const response = await makeCoreGetRequest(`/supply-omni/cart/product`)
+      const response = await makeCoreGetRequest('/supply-omni/cart/product')
 
       return response
     },
@@ -39,10 +39,11 @@ const ShoppingCart = () => {
   )
 
   const updateCartItemQuantity = async values => {
-    await makeCorePutRequest(`/supply-omni/cart/product`, {
+    await makeCorePutRequest('/supply-omni/cart/product', {
       quantity: values.quantity,
       id: values.id,
-      purchaseOption: values.purchaseOption
+      purchaseOption: values.purchaseOption,
+      locationId: values.locationId
     })
   }
 
