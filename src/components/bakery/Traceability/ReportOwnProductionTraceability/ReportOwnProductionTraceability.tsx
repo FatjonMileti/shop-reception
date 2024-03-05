@@ -11,7 +11,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { formatAndDownloadResponse, getPreviousDay, handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
-import { Divider, Grid, debounce } from '@mui/material'
+import { Divider, Grid, debounce, useMediaQuery } from '@mui/material'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
 import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
@@ -26,6 +26,7 @@ import { useImmer } from 'use-immer'
 import OwnProductionTraceabilityDescription from '../OwnProductionTraceability/OwnProductionTraceabilityDescription'
 import { batchPrintColumns, productPrintColumns, chargePrintColumns } from './helpers'
 import { useLocation } from 'react-router'
+import dayjs from 'dayjs'
 
 export const ReportOwnProductionTraceability = () => {
   const { showNotification } = useNotification()
@@ -61,7 +62,7 @@ export const ReportOwnProductionTraceability = () => {
         {
           name: 'endDate',
           value: previousDay
-        },
+        }
       ]
     }
   )
@@ -120,7 +121,6 @@ export const ReportOwnProductionTraceability = () => {
         rowsPerPage,
         searchText
       }))
-
     } catch (error) {
       handleQueryError(
         error,
@@ -135,7 +135,7 @@ export const ReportOwnProductionTraceability = () => {
   const handleStoreFilterChange = (value: ValueLabelInterface[]): void => {
     startTransition(() => {
       setStoreFilterValue(value)
-    });
+    })
   }
 
   const handleRemoteDetails = async (rowId: string | number) => {
@@ -176,8 +176,9 @@ export const ReportOwnProductionTraceability = () => {
   const families = useQuery(
     ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
     async () => {
-      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.subfamily')
-        ?.value || []) as AutoCompleteValue[]
+      const subfamilyLiveFilterValue = (liveTableFilters.find(
+        filter => filter.name === 'product.subfamily'
+      )?.value || []) as AutoCompleteValue[]
 
       const result = await makeCoreGetRequest(`/bakery/store/families`, {
         params: {
@@ -206,8 +207,9 @@ export const ReportOwnProductionTraceability = () => {
   const subfamilies = useQuery(
     ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.family')
-        ?.value || []) as AutoCompleteValue[]
+      const familyLiveFilterValue = (liveTableFilters.find(
+        filter => filter.name === 'product.family'
+      )?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
@@ -259,6 +261,7 @@ export const ReportOwnProductionTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
+          minDate={dayjs().subtract(6, 'months')}
         />
       ),
       type: 'date',
@@ -273,6 +276,7 @@ export const ReportOwnProductionTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
+          minDate={dayjs().subtract(6, 'months')}
         />
       ),
       type: 'date',
@@ -310,6 +314,8 @@ export const ReportOwnProductionTraceability = () => {
     }
   ]
 
+  const isXs = useMediaQuery('(max-width:624px)')
+
   return (
     <div className={s.mainContainer}>
       <Grid container>
@@ -337,48 +343,52 @@ export const ReportOwnProductionTraceability = () => {
         )}
       </Grid>
 
-        {((isFormator && storeFilterValue.length > 0) || !isFormator) && (
-          <>
-            <PrintModal
-              {...tableState}
-              tableFilters={tableState.tableFilters}
-              url={isFormator ? URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT_FORMATOR : URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT}
-              dynamicColumns={[...productPrintColumns, ...batchPrintColumns, ...chargePrintColumns]}
-              isModalOpen={isPrintModalOpen}
-              closeModal={() => setIsPrintModalOpen(false)}
-              toolbarActions={[]}
-            />
-            <ListTable
-              rows={rows}
-              handleRemoteData={debouncedFetchData}
-              handleRemoteDetails={handleRemoteDetails}
-              isLoading={isLoading}
-              totalCount={totalCount}
-              filters={drawerFilters}
-              hasSearchInput
-              handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
-              toolbarActions={[
-                {
-                  label: 'Descarca',
-                  icon: <DownloadOutlined />,
-                  onClick: () => {
-                    downloadFileQuery.refetch()
-                  }
-                },
-                {
-                  label: 'Printeaza',
-                  icon: <PrintOutlined />,
-                  onClick: () => {
-                    setIsPrintModalOpen(true)
-                  }
+      {((isFormator && storeFilterValue.length > 0) || !isFormator) && (
+        <>
+          <PrintModal
+            {...tableState}
+            tableFilters={tableState.tableFilters}
+            url={
+              isFormator
+                ? URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT_FORMATOR
+                : URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT
+            }
+            dynamicColumns={[...productPrintColumns, ...batchPrintColumns, ...chargePrintColumns]}
+            isModalOpen={isPrintModalOpen}
+            closeModal={() => setIsPrintModalOpen(false)}
+            toolbarActions={[]}
+          />
+          <ListTable
+            rows={rows}
+            handleRemoteData={debouncedFetchData}
+            handleRemoteDetails={handleRemoteDetails}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            filters={drawerFilters}
+            hasSearchInput
+            handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
+            toolbarActions={[
+              {
+                label: 'Descarca',
+                icon: <DownloadOutlined />,
+                onClick: () => {
+                  downloadFileQuery.refetch()
                 }
-              ]}
-              rowActionsWidth="90px"
-              rowsPerPage={25}
-              rowsPerPageOptions={[25, 50, 100]}
-            />
-          </>
-        )}
+              },
+              {
+                label: 'Printeaza',
+                icon: <PrintOutlined />,
+                onClick: () => {
+                  setIsPrintModalOpen(true)
+                }
+              }
+            ]}
+            rowActionsWidth="90px"
+            rowsPerPage={isXs ? 5 : 25}
+            rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
+          />
+        </>
+      )}
     </div>
   )
 }

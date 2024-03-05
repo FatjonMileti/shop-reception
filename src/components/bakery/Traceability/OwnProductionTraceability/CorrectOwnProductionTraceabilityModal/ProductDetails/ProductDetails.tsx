@@ -11,6 +11,7 @@ import dayjs from 'dayjs'
 import { ProductDetailsBatches } from './ProductDetailsBatches'
 import { UseQueryResult } from 'react-query'
 import { toBoolean } from 'utils/helpers'
+import { useSelectProductSearch } from '../../useSelectProductSearch'
 
 interface ProductDetailsProps {
   onCancel: () => void
@@ -33,6 +34,10 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     recipeQuery
   } = props
 
+  const selectProductSearch = useSelectProductSearch({
+    optionsMap: ({ id, name, metiCode }) => ({ value: id, label: name, metiCode, id, name })
+  })
+
   useEffect(() => {
     formik.setFieldValue('traceabilityProductionList', selectedRows)
   }, [selectedRows])
@@ -47,29 +52,46 @@ export const ProductDetails = (props: ProductDetailsProps) => {
   return (
     <Grid container rowSpacing={3.5}>
       <Grid container spacing={2} mt={2}>
-
         <Grid item xs={3}>
           <Input
             type="text"
             variant="outlined"
             label="Cod METI"
-            onChange={e => formik.setFieldValue('metiCode', e.currentTarget.value)}
-            value={formik.values.metiCode}
+            value={formik.values?.product?.metiCode || ''}
             name="metiCode"
             disabled
           />
         </Grid>
 
         <Grid item xs={9}>
-          <Input
-            type="text"
+          <Autocomplete
+            {...selectProductSearch}
             variant="outlined"
             label="Produs"
-            // onChange={e => formik.setFieldValue('metiCode', e.currentTarget.value)}
-            value={formik.values.productName}
-            name="productName"
+            autoComplete={false}
             required
-            disabled
+            filterOptions={x => x}
+            onChange={(event, value) => {
+              if (value) {
+                formik.setFieldValue('product', {
+                  name: value.name,
+                  metiCode: value.metiCode,
+                  id: value.id
+                })
+              } else {
+                formik.setFieldValue('product', null)
+              }
+            }}
+            value={
+              formik.values?.product
+                ? {
+                    label: formik.values?.product.name,
+                    value: formik.values?.product?.id
+                  }
+                : null
+            }
+            error={!!formik.errors.product}
+            helperText={formik.errors.product as string}
           />
         </Grid>
 
@@ -118,7 +140,6 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             />
           </Grid>
         </Grid>
-
 
         <Grid item xs={3}>
           <Input
@@ -206,7 +227,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
 
         <ProductDetailsBatches
           formik={formik}
-          productMetiCode={formik.values?.metiCode}
+          productMetiCode={formik.values?.product?.metiCode}
           onSelectBatch={onSelectBatch}
           onDeleteBatch={onDeleteBatch}
           receip={recipeQuery?.data}

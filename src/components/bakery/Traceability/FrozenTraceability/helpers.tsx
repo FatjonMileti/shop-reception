@@ -90,8 +90,8 @@ export const columns: any[] = [
   },
   {
     title: 'Cantitate intrata',
-    field: 'batch.consumedAmount',
-    render: row => <BodyItem name="Cantitate intrata" value={row?.batch?.consumedAmount} />
+    field: 'batch.batchQuantity',
+    render: row => <BodyItem name="Cantitate intrata" value={row?.batch?.batchQuantity} />
   },
   {
     title: 'UM (Meti)',

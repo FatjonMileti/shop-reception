@@ -232,6 +232,7 @@ const EditUser: React.FC<EditUserProps> = props => {
         setTraceabilityOpValue(null)
         setIsTraineeChecked(false)
         setTraineeValue(null)
+        setIsAdmin(false)
         editItem?.structureRoles?.forEach(strRole => {
           const role = roles?.find(role => role.id === strRole.roleId)
           if(role?.name === 'REGION_MANAGER') updateStateWithExistingValues(strRole, structRegion, setIsRegionManagerChecked, setRegionMgValue)
