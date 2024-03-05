@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
-import { Product } from '../ReceivedProducts/interfaces'
+import { Product } from './ReceivedProducts/interfaces'
 
 interface UseSelectProductSearchProps {
   optionsMap: (product: Product) => any

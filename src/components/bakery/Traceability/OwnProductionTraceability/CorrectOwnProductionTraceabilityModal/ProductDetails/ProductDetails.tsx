@@ -11,7 +11,7 @@ import dayjs from 'dayjs'
 import { ProductDetailsBatches } from './ProductDetailsBatches'
 import { UseQueryResult } from 'react-query'
 import { toBoolean } from 'utils/helpers'
-import { useSelectProductSearch } from '../../useSelectProductSearch'
+import { useSelectProductSearch } from '../../../useSelectProductSearch'
 
 interface ProductDetailsProps {
   onCancel: () => void
