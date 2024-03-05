@@ -31,7 +31,6 @@ export const useProductsFilter = () => {
 
     setSearchText(value)
     if (e?.type === 'change') {
-      console.log('e:', e.target.value)
       if (timeOutId) {
         setTimeoutId(null)
         clearTimeout(timeOutId)

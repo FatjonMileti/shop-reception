@@ -19,7 +19,7 @@ interface ProductDetailsProps {
   onSelectBatch: () => void
   selectedProduct: any
   selectedRows: any
-  formik
+  formik: any
   isEdit: boolean
 }
 
@@ -87,7 +87,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
 
         <Grid item xs={3}>
           <Input
-            type="text"
+            type="number"
             variant="outlined"
             label="Sarja"
             required
@@ -169,9 +169,12 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', toBoolean(option))
-              formik.setFieldValue('nonComplianceReason', null)
-              formik.setFieldValue('productDestination', null)
+              const value = toBoolean(option)
+              formik.setFieldValue('conform', value)
+              if (value) {
+                formik.setFieldValue('nonComplianceReason', '')
+                formik.setFieldValue('productDestination', '')
+              }
             }}
             value={formik.values.conform}
             defaultValue={formik.initialValues.conform ? 'DA' : 'NU'}
@@ -244,22 +247,9 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 }}
                 value={item.quantity}
                 name="quantity"
-                infoIcon={'kg'}
+                infoIcon={selectedProduct?.metricUnit || ''}
               />
             </Grid>
-            {/*<Grid item xs={3}>*/}
-            {/*  <DatePicker*/}
-            {/*    label="Data deschidere"*/}
-            {/*    onChange={(date: any) => {*/}
-            {/*      const updatedList = [...formik.values.traceabilityFrozenList]*/}
-            {/*      updatedList[index].openingDate = date*/}
-
-            {/*      formik.setFieldValue('traceabilityFrozenList', updatedList)*/}
-            {/*    }}*/}
-            {/*    value={dayjs(item.openingDate)}*/}
-            {/*    variant="outlined"*/}
-            {/*  />*/}
-            {/*</Grid>*/}
             <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
               <Button
                 onClick={() => onDeleteBatch(item.batchId)}

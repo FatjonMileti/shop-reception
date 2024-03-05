@@ -6,8 +6,8 @@ import { useFormik } from 'formik'
 import { correctReceivedProductSchema } from './helper'
 import { useMutation, useQuery } from 'react-query'
 import { ReceivedProduct } from '../interfaces'
-import { makeCoreGetRequest, makeCorePutRequest } from '../../../../../utils/api'
-import { formatErrorMessage } from '../../../../../utils/formatting'
+import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
+import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from '../../../../../hooks'
 
 export interface EditReceivedProductRequestData {
@@ -145,10 +145,11 @@ export const EditReceivedProduct = ({
                   }
                   onChange={(_, value) => {
                     form.setFieldValue('batchStatus', value?.value)
-                    form.setFieldValue(
-                      'closeReason',
-                      value?.value === 'CLOSED' ? 'OUT_OF_STOCK' : ''
-                    )
+                    if (value?.value === BATCH_STATUS.AVAILABLE) {
+                      form.setFieldValue('closeReason', undefined)
+                    } else if (value?.value === BATCH_STATUS.AVAILABLE) {
+                      form.setFieldValue('closeReason', 'OUT_OF_STOCK')
+                    }
                   }}
                   error={!!form.errors.batchStatus}
                   helperText={form.errors.batchStatus as string}
@@ -160,11 +161,10 @@ export const EditReceivedProduct = ({
                 <Autocomplete
                   variant="outlined"
                   label="Motiv inchidere lot"
+                  disabled={form.values.batchStatus === BATCH_STATUS.AVAILABLE}
                   value={
                     closeReasonOptions.find(({ value }) => value === form.values.closeReason) ||
-                    form.values.batchStatus === 'CLOSED'
-                      ? { value: 'OUT_OF_STOCK', label: 'Epuizat' }
-                      : null
+                    null
                   }
                   onChange={(_, value) => {
                     form.setFieldValue('closeReason', value?.value)

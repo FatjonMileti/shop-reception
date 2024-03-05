@@ -26,6 +26,7 @@ import { useImmer } from 'use-immer'
 import OwnProductionTraceabilityDescription from '../OwnProductionTraceability/OwnProductionTraceabilityDescription'
 import { batchPrintColumns, productPrintColumns, chargePrintColumns } from './helpers'
 import { useLocation } from 'react-router'
+import dayjs from 'dayjs'
 
 export const ReportOwnProductionTraceability = () => {
   const { showNotification } = useNotification()
@@ -260,6 +261,7 @@ export const ReportOwnProductionTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
+          minDate={dayjs().subtract(6, 'months')}
         />
       ),
       type: 'date',
@@ -274,6 +276,7 @@ export const ReportOwnProductionTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
+          minDate={dayjs().subtract(6, 'months')}
         />
       ),
       type: 'date',

@@ -73,7 +73,9 @@ export const FrozenTraceabilityModal = ({
         productId: values.productId || selectedProduct.id,
         productionDate: formatPayloadDate(values.productionDate),
         metiCode: values?.metiCode || selectedProduct?.metiCode,
-        productName: values?.productName || selectedProduct?.name
+        productName: values?.productName || selectedProduct?.name,
+        nonComplianceReason: values?.nonComplianceReason || null,
+        productDestination: values?.productDestination || null,
       }
 
       if (values.traceabilityFrozenList.length === 0) {
