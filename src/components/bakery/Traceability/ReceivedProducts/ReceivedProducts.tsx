@@ -16,7 +16,7 @@ import {
   BodyItem,
   HeaderItem
 } from '../ProductManagementTraceability/AccordionTable'
-import { Grid, Typography } from '@mui/material'
+import { Grid, Typography, useMediaQuery } from '@mui/material'
 import AddActionIcon from '../../../../icons/AddActionIcon'
 import { AddReceivedProduct } from './AddReceivedProduct/AddReceivedProduct'
 
@@ -52,7 +52,7 @@ export const ReceivedProducts = () => {
     tableFilters: null,
     rowsPerPage: null,
     orderBy,
-    order,
+    order
   })
 
   const { showNotification } = useNotification()
@@ -74,7 +74,7 @@ export const ReceivedProducts = () => {
             'product.metiCode',
             'supplier.supplierCode',
             'supplier.supplierName',
-            'product.name',
+            'product.name'
           ]
         })
       )
@@ -98,8 +98,9 @@ export const ReceivedProducts = () => {
   const families = useQuery(
     ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
     async () => {
-      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.subfamily')
-        ?.value || []) as AutoCompleteValue[]
+      const subfamilyLiveFilterValue = (liveTableFilters.find(
+        filter => filter.name === 'product.subfamily'
+      )?.value || []) as AutoCompleteValue[]
 
       const result = await makeCoreGetRequest(`/bakery/store/families`, {
         params: {
@@ -128,8 +129,9 @@ export const ReceivedProducts = () => {
   const subfamilies = useQuery(
     ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.family')
-        ?.value || []) as AutoCompleteValue[]
+      const familyLiveFilterValue = (liveTableFilters.find(
+        filter => filter.name === 'product.family'
+      )?.value || []) as AutoCompleteValue[]
       const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
@@ -186,6 +188,8 @@ export const ReceivedProducts = () => {
       label: 'Subfamilie'
     }
   ]
+
+  const isXs = useMediaQuery('(max-width:624px)')
 
   return (
     <div className={s.mainContainer}>
@@ -293,8 +297,8 @@ export const ReceivedProducts = () => {
           }
         ]}
         rowActionsWidth="200px"
-        rowsPerPage={25}
-        rowsPerPageOptions={[25, 50, 100]}
+        rowsPerPage={isXs ? 5 : 25}
+        rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
       />
     </div>
   )

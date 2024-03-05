@@ -5,7 +5,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
-import { debounce } from '@mui/material'
+import { debounce, useMediaQuery } from '@mui/material'
 import { AddActionIcon, EditActionIcon } from 'icons'
 import OwnProductionTraceabilityDescription from './OwnProductionTraceabilityDescription'
 import { OwnProductionTraceabilityModal } from './OwnProductionTraceabilityModal/OwnProductionTraceabilityModal'
@@ -163,6 +163,8 @@ export const OwnProductionTraceability = () => {
     }
   ]
 
+  const isXs = useMediaQuery('(max-width:624px)')
+
   return (
     <div className={s.mainContainer}>
       <>
@@ -222,8 +224,8 @@ export const OwnProductionTraceability = () => {
             }
           ]}
           rowActionsWidth="90px"
-          rowsPerPage={25}
-          rowsPerPageOptions={[25, 50, 100]}
+          rowsPerPage={isXs ? 5 : 25}
+          rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
         />
       </>
     </div>
