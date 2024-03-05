@@ -30,7 +30,10 @@ const TaskManagement = () => {
   const { showNotification } = useNotification()
 
   const { data: categoryOptions } = getCategoriesOptions(showNotification)
-  const { data: departmentOptions } = getDepartmentsOptions(showNotification)
+  const { data: departmentOptions } = getDepartmentsOptions(showNotification, null, {
+    filterBy: 'all',
+    filterValue: true
+  })
   const { data: priorityOprions } = getPrioritiesOptions(showNotification)
   const { data: frequencyOptions } = getFrequencyOptions(showNotification)
   const { data: workVolumeOptions } = getWorkVolumesOptions(showNotification)
@@ -53,7 +56,11 @@ const TaskManagement = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      handleQueryError(error, 'A aparut o eroare la obtinerea datelor pentru tabel.', showNotification)
+      handleQueryError(
+        error,
+        'A aparut o eroare la obtinerea datelor pentru tabel.',
+        showNotification
+      )
     }
   }
 
