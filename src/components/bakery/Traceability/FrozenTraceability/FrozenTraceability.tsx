@@ -6,7 +6,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
-import { debounce } from '@mui/material'
+import { debounce, useMediaQuery } from '@mui/material'
 import { AddActionIcon, EditActionIcon } from 'icons'
 import FrozenTraceabilityDescription from './FrozenTraceabilityDescription'
 import { FrozenTraceabilityModal } from './FrozenTraceabilityModal/FrozenTraceabilityModal'
@@ -169,6 +169,7 @@ export const FrozenTraceability = () => {
     }
   ]
 
+  const isXs = useMediaQuery('(max-width:624px)')
 
   return (
     <div className={s.mainContainer}>
@@ -230,8 +231,8 @@ export const FrozenTraceability = () => {
             }
           ]}
           rowActionsWidth="90px"
-          rowsPerPage={25}
-          rowsPerPageOptions={[25, 50, 100]}
+          rowsPerPage={isXs ? 5 : 25}
+          rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
         />
       </>
     </div>
