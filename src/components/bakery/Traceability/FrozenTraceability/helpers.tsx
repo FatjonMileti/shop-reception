@@ -4,6 +4,7 @@ import { IconCell } from '../../../core-ui/IconCell'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import { ThermalCondition } from 'components/bakery/interfaces'
+import { BatchStatus } from '../interfaces'
 
 export const columns: any[] = [
   {
@@ -140,7 +141,7 @@ export const columns: any[] = [
   {
     title: 'Status lot',
     field: 'batchStatus',
-    render: row => <BodyItem name="Status lot" value={row?.batch?.batchStatus} />
+    render: row => <BodyItem name="Status lot" value={BatchStatus[row?.batch?.batchStatus] || ''} />
   },
   // TODO check this field
   // {
@@ -352,13 +353,8 @@ export const mainItemBodyColumns = [
   {
     title: 'Data productiei',
     field: 'productionDate'
-  },
-  {
-    title: 'DLC Prod. Fab.',
-    field: 'dlc'
   }
 ]
-
 
 export const selectBatchColumns: any[] = [
   {
