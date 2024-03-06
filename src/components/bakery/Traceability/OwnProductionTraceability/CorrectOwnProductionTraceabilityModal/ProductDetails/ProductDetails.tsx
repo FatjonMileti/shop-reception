@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Grid, Divider } from '@mui/material'
 import {
   Autocomplete,
@@ -11,15 +10,13 @@ import dayjs from 'dayjs'
 import { ProductDetailsBatches } from './ProductDetailsBatches'
 import { UseQueryResult } from 'react-query'
 import { toBoolean } from 'utils/helpers'
-import { useSelectProductSearch } from '../../useSelectProductSearch'
+import { useSelectProductSearch } from '../../../useSelectProductSearch'
 
 interface ProductDetailsProps {
+  onAddCharge: (componentMetiCode: string | number) => void
+  onAddBatch: (componentMetiCode: string | number) => void
   onCancel: () => void
-  onSelectBatch: (step?: number, metiCode?: any) => void
-  selectedRows: any
   formik: any
-  setComponentMetiCode: Function
-  editItem: any
   recipeQuery: UseQueryResult<any>
 }
 
@@ -27,20 +24,14 @@ export const ProductDetails = (props: ProductDetailsProps) => {
   const {
     formik,
     onCancel,
-    onSelectBatch,
-    selectedRows,
-    setComponentMetiCode,
-    editItem,
-    recipeQuery
+    recipeQuery,
+    onAddBatch,
+    onAddCharge
   } = props
 
   const selectProductSearch = useSelectProductSearch({
     optionsMap: ({ id, name, metiCode }) => ({ value: id, label: name, metiCode, id, name })
   })
-
-  useEffect(() => {
-    formik.setFieldValue('traceabilityProductionList', selectedRows)
-  }, [selectedRows])
 
   const onDeleteBatch = id => {
     let newBatches = formik.values.traceabilityProductionList.filter(batch =>
@@ -133,7 +124,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
               }}
               value={formik.values.quantity}
               name="quantity"
-              infoIcon={editItem?.product?.metricUnit || ''}
+              infoIcon={formik.values?.product?.metricUnit || ''}
               required
               error={!!formik.errors.quantity}
               helperText={formik.errors.quantity as string}
@@ -227,11 +218,10 @@ export const ProductDetails = (props: ProductDetailsProps) => {
 
         <ProductDetailsBatches
           formik={formik}
-          productMetiCode={formik.values?.product?.metiCode}
-          onSelectBatch={onSelectBatch}
           onDeleteBatch={onDeleteBatch}
+          onAddBatch={onAddBatch}
+          onAddCharge={onAddCharge}
           receip={recipeQuery?.data}
-          setComponentMetiCode={setComponentMetiCode}
         />
 
         <Grid item xs={12} container justifyContent="space-between">

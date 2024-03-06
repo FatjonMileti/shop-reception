@@ -44,6 +44,7 @@ export const SelectProduct = ({
   const productName =
     searchText !== null && searchText?.length > 0 ? searchText : selectedProduct?.name
 
+
   if (isEdit && typeof productName === 'undefined') {
     return <></>
   }

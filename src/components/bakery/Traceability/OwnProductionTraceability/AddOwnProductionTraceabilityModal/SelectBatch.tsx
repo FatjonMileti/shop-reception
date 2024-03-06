@@ -3,31 +3,27 @@ import { Button, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
-import { Dispatch, useState } from 'react'
-import { columns, toBatchFormat } from './helpers'
+import { useState } from 'react'
+import { columns } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
-import { Product } from '../../ReceivedProducts/interfaces'
-
 interface SelectBatchProps {
-  onContinue: () => void
+  onContinue: (batches: any[]) => void
   onCancel: () => void
-  setSelectedRows: Dispatch<any>
-  selectedProduct: Product | { metiCode: string }
-  formik: any
+  componentMetiCode: string | number
 }
 
 export const SelectBatch = ({
-  formik,
   onContinue,
   onCancel,
-  setSelectedRows,
-  selectedProduct
+  componentMetiCode,
 }: SelectBatchProps) => {
   const { showNotification } = useNotification()
 
   const [tableItems, setTableItems] = useState<any[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+
+  const [selectedRows, setSelectedRows] = useState<any[]>([])
 
   const fetchData = async (page, rowsPerPage) => {
     try {
@@ -40,7 +36,7 @@ export const SelectBatch = ({
           filters: [
             {
               name: 'product.metiCode',
-              value: selectedProduct?.metiCode
+              value: componentMetiCode
             }
           ]
         })
@@ -65,14 +61,12 @@ export const SelectBatch = ({
             orderBy="entryDate"
             order="asc"
             rows={tableItems}
+            isLoading={isLoading}
             handleRemoteData={debounce(fetchData, 500)}
             isRemote
-            isLoading={isLoading}
             columns={columns}
             totalCount={totalCount}
-            selectRows={rows =>
-              setSelectedRows(toBatchFormat({ batches: rows, quantity: formik.values?.quantity }))
-            }
+            selectRows={setSelectedRows}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
           />
@@ -89,7 +83,7 @@ export const SelectBatch = ({
             size="large"
             variant="contained"
             label="Continua"
-            onClick={onContinue}
+            onClick={() => onContinue(selectedRows)}
             disabled={false}
           />
         </Grid>

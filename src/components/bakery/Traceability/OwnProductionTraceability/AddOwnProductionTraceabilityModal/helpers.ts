@@ -2,23 +2,18 @@ import * as Yup from 'yup'
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
-export const getInitialValues = (selectedProduct, selectedRows) => {
+export const getInitialValues = (selectedProduct) => {
   return {
-    productId: '',
     productionDate: dayjs(),
     chargeNumber: null,
     productionOperator: null,
     quantity: null,
     thermalCondition: null,
     dlc: null,
-
     conform: true,
     nonComplianceReason: null,
     productDestination: null,
-
-    metiCode: selectedProduct?.metiCode,
-    productName: selectedProduct?.name,
-    traceabilityProductionList: selectedRows
+    traceabilityProductionList: []
   }
 }
 
@@ -46,29 +41,25 @@ export const validationSchema = Yup.object().shape({
   )
 })
 
-export const toBatchFormat = (batches = [], quantity) => {
-  return batches?.map(item => ({
-    batchId: item?.id,
-    componentCode: item.product.metiCode,
-    componentQuantity: quantity, //item.batchQuantity,
-    componentName: item.batchName,
-    quantity: item.batchQuantity,
-    openingDate: item.entryDate,
-    dlc: item?.dlcDays
-  }))
-}
+export const toBatchFormat = (item, quantity) => ({
+  batchId: item?.id,
+  componentCode: item.product.metiCode,
+  componentQuantity: quantity, //item.batchQuantity,
+  componentName: item.batchName,
+  quantity: item.batchQuantity,
+  openingDate: item.entryDate,
+  dlc: item?.dlcDays
+})
 
-export const toChargeFormat = (charges, quantity) => {
-  return charges?.map(item => ({
-    childTraceabilityId: item.id,
-    componentCode: item.product.metiCode,
-    componentQuantity: quantity, //item.quantity,
-    componentName: item.chargeNumber,
-    quantity: item.quantity,
-    openingDate: dayjs(),
-    dlc: item.dlc
-  }))
-}
+export const toChargeFormat = (item, quantity) => ({
+  childTraceabilityId: item.id,
+  componentCode: item.product.metiCode,
+  componentQuantity: quantity, //item.quantity,
+  componentName: item.chargeNumber,
+  quantity: item.quantity,
+  openingDate: dayjs(),
+  dlc: item.dlc
+})
 
 export const columns: any[] = [
   {
@@ -130,11 +121,12 @@ export const columns: any[] = [
     field: 'dlcDays',
     align: 'left',
     type: 'string',
-    width: '50px'
+    width: '50px',
+    render: (row: any) => row?.dlcDays || ''
   },
   {
     title: 'DLC Secundar',
-    field: 'dlcDays',
+    field: 'secondaryDlc',
     align: 'left',
     type: 'string',
     width: '80px',
@@ -172,7 +164,8 @@ export const chargeColumns: any[] = [
     field: 'dlc',
     align: 'left',
     type: 'string',
-    width: '110px'
+    width: '110px',
+    render: (row: any) => row.dlc || ''
   }
 ]
 
