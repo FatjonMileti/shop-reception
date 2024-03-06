@@ -31,7 +31,7 @@ export const validationSchema = Yup.object().shape({
       batchId: Yup.string(),
       quantity: Yup.number(),
       // openingDate: Yup.date(),
-      dlc: Yup.string()
+      dlc: Yup.string().nullable()
     })
   )
 })
@@ -53,59 +53,3 @@ export const toBatchFormatEdit = batches => {
     dlc: item.batch.dlcDays
   }))
 }
-
-export const columns: any[] = [
-  {
-    title: 'Data intrare',
-    field: 'entryDate',
-    align: 'left',
-    type: 'string',
-    width: '100px',
-    render: (row: any) => formatBakeryPayloadDate(row.entryDate)
-  },
-  {
-    title: 'Nr. lot',
-    field: 'batchName',
-    align: 'left',
-    type: 'string',
-    width: '100px'
-  },
-  {
-    title: 'Furnizor',
-    field: 'supplier.supplierName',
-    align: 'left',
-    render: (row: any) => row.supplier.supplierName,
-    type: 'string',
-    width: '250px'
-  },
-  {
-    title: 'Data expirare',
-    field: 'expireDate',
-    align: 'left',
-    type: 'string',
-    width: '100px',
-    render: (row: any) => formatBakeryPayloadDate(row.expireDate)
-  },
-  {
-    title: 'Cantitate intrata',
-    field: 'batchQuantity',
-    align: 'left',
-    type: 'string',
-    width: '100px'
-  },
-  {
-    title: 'Cantitate consumata',
-    field: 'consumedAmount',
-    align: 'left',
-    type: 'string',
-    width: '100px',
-    render: (row: any) => row.consumedAmount || ''
-  },
-  {
-    title: 'Nr. zile DLC',
-    field: 'dlcDays',
-    align: 'left',
-    type: 'string',
-    width: '110px'
-  }
-]

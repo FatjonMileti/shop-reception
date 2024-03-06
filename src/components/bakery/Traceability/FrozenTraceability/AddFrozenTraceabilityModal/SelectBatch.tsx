@@ -4,19 +4,17 @@ import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
 import { useState } from 'react'
-import { columns } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { Product } from '../../ReceivedProducts/interfaces'
+import { selectBatchColumns } from '../helpers'
 
 interface SelectBatchProps {
   onContinue: (frozenItems: any[]) => void
   onCancel: () => void
   selectedProduct: Product
-  formik: any
 }
 
 export const SelectBatch = ({
-  formik,
   onContinue,
   onCancel,
   selectedProduct
@@ -68,7 +66,7 @@ export const SelectBatch = ({
             handleRemoteData={debounce(fetchData, 500)}
             isRemote
             isLoading={isLoading}
-            columns={columns}
+            columns={selectBatchColumns}
             totalCount={totalCount}
             selectRows={setSelectedRows}
             rowsPerPage={25}

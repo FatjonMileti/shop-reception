@@ -133,7 +133,6 @@ export const AddFrozenTraceabilityModal = ({
                   onCancel={() => {
                     setStep(1)
                   }}
-                  formik={formik}
                 />
               ][step]
             }

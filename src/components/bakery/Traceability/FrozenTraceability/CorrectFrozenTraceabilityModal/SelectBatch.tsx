@@ -3,9 +3,9 @@ import { Button, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
-import { Dispatch, useState } from 'react'
-import { columns } from './helpers'
+import { useState } from 'react'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
+import { selectBatchColumns } from '../helpers'
 
 interface SelectBatchProps {
   onContinue: (frozenItems: any[]) => void
@@ -60,7 +60,7 @@ export const SelectBatch = ({ formik, onContinue, onCancel }: SelectBatchProps) 
             handleRemoteData={debounce(fetchData, 500)}
             isRemote
             isLoading={isLoading}
-            columns={columns}
+            columns={selectBatchColumns}
             totalCount={totalCount}
             selectRows={setSelectedRows}
             rowsPerPage={25}
