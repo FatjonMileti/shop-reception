@@ -6,7 +6,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SensitiveProduct } from '../../../SensitiveProduct'
 
-const sensitiveProducts: SensitiveProduct[] = [
+const sensitiveProducts: any[] = [
   {
     id: 1,
     storeType: 'B1',
@@ -35,7 +35,7 @@ const DeliverySensitiveProducts = () => {
       ]}
       itemsPerRow={1}
     />,
-    ...sensitiveProducts.map((item: SensitiveProduct, index) => (
+    ...sensitiveProducts.map((item: any, index) => (
       <SensitiveProduct onClick={() => {
         navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM)
       }} item={item} />

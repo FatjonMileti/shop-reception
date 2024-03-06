@@ -102,14 +102,17 @@ interface ScanType {
 
 interface SensitiveProduct {
   id: number
-  storeType: string
-  storeCode: string
-  storeName: string
-  district: string
-  family: string
-  subfamily: string
-  UbCode: string
-  productCode: string
+  shopCode: string
+  shopName: string
+  prodName: string
+  ubName: string
+  sfaName: string
+  famName: string
+  rayName: string
+  shopType: {
+    key: string
+    value: string
+  }
 }
 
 interface SubFamilyValidityThreshold {

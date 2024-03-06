@@ -1,4 +1,4 @@
-export const toPayload = (item: SensitiveProduct) => ({
+export const toPayload = (item: any) => ({
   id: item.id,
   storeType: item.storeType,
   storeCode: item.storeCode,
