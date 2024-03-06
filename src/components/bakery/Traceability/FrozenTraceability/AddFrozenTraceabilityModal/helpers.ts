@@ -31,7 +31,7 @@ export const validationSchema = Yup.object().shape({
       batchId: Yup.string(),
       quantity: Yup.number(),
       // openingDate: Yup.date(),
-      dlc: Yup.string()
+      dlc: Yup.string().nullable()
     })
   )
 })

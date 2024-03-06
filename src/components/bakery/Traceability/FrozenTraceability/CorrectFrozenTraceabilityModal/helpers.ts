@@ -49,7 +49,7 @@ export const toBatchFormat = (item, quantity) => ({
 export const toBatchFormatEdit = item => ({
   batchName: item.batch?.batchName,
   batchId: item.batch?.id,
-  quantity: item.batch?.batchQuantity,
+  quantity: item.quantity,
   openingDate: formatPayloadDate(item.openingDate),
   dlc: item.batch?.dlcDays
 })
