@@ -3,44 +3,34 @@ import { Button, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
-import { Dispatch, useState } from 'react'
-import { chargeColumns, quantityCalculation, toChargeFormat } from './helpers'
+import { useState } from 'react'
+import { columns } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
-import { Product } from '../../ReceivedProducts/interfaces'
-import { UseQueryResult } from 'react-query'
-
-interface SelectChargeProps {
-  onContinue: () => void
+interface SelectBatchProps {
+  onContinue: (batches: any[]) => void
   onCancel: () => void
-  setSelectedRows: Dispatch<any>
-  selectedRows: any
-  selectedProduct: Product
-  formik: any
-  componentMetiCode: string
-  recipeQuery: UseQueryResult<any>
+  componentMetiCode: string | number
 }
 
-export const SelectCharge = ({
+export const SelectBatch = ({
   onContinue,
   onCancel,
-  setSelectedRows,
-  selectedRows,
   componentMetiCode,
-  recipeQuery,
-  formik
-}: SelectChargeProps) => {
+}: SelectBatchProps) => {
   const { showNotification } = useNotification()
 
   const [tableItems, setTableItems] = useState<any[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  const [selectedRows, setSelectedRows] = useState<any[]>([])
+
   const fetchData = async (page, rowsPerPage) => {
     try {
       setIsLoading(true)
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/traceability/production',
+          url: '/bakery/batch',
           page,
           rowsPerPage,
           filters: [
@@ -63,21 +53,6 @@ export const SelectCharge = ({
     }
   }
 
-  const onSelectRows = rows => {
-    const batchItem = recipeQuery?.data?.charges?.find(charge => charge.componentCode === componentMetiCode)
-
-    const quantity = quantityCalculation(
-      formik.values.quantity,
-      batchItem?.componentQuantity,
-      recipeQuery?.data?.details?.recipeQuantity
-    )
-
-    const newItems = rows.filter(
-      row => !selectedRows.some(item => item.childTraceabilityId === row.id)
-    )
-    const newRows = [...selectedRows, ...toChargeFormat(newItems, quantity)]
-    setSelectedRows(newRows)
-  }
   return (
     <Grid container rowSpacing={3.5}>
       <Grid item xs={12} spacing={2}>
@@ -86,12 +61,12 @@ export const SelectCharge = ({
             orderBy="entryDate"
             order="asc"
             rows={tableItems}
-            handleRemoteData={debounce(fetchData, 500)}
             isLoading={isLoading}
+            handleRemoteData={debounce(fetchData, 500)}
             isRemote
-            columns={chargeColumns}
+            columns={columns}
             totalCount={totalCount}
-            selectRows={onSelectRows}
+            selectRows={setSelectedRows}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
           />
@@ -108,7 +83,7 @@ export const SelectCharge = ({
             size="large"
             variant="contained"
             label="Continua"
-            onClick={onContinue}
+            onClick={() => onContinue(selectedRows)}
             disabled={false}
           />
         </Grid>
