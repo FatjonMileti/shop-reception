@@ -173,10 +173,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
     ])
   }
 
-  console.log("formik.values: ", formik.values)
-  console.log("formik.errors: ", formik.errors)
-
-
   return (
     <Modal
       isModalOpen={isModalOpen}
