@@ -34,7 +34,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
   const { isModalOpen, closeModal, isEdit, editItemId, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
-  const { data: editItem } = getTask(editItemId, showNotification)
+  const { data: editItem } = getTask(editItemId, isModalOpen, showNotification)
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItemId, editItem])
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItemId])

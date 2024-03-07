@@ -141,11 +141,11 @@ export const getContractorsNamesOptions = (showNotification: Function) => {
   )
 }
 
-export const getTask = (itemId: string | number, showNotification: Function) => {
+export const getTask = (itemId: string | number, isModalOpen: boolean, showNotification: Function) => {
   return useQuery(
     ['task', itemId],
     async () => {
-      if (itemId) {
+      if (itemId && isModalOpen) {
         const result = await makeCoreGetRequest(`/volumetry/task-templates/${itemId}`)
 
         return fromTaskPayload(result) || null
