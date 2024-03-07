@@ -43,7 +43,6 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
           rows={employees}
           isLoading={false}
           disablePagination
-          rowsPerPage={1000}
         />
         {/* {employees.map(employee => (
           <Grid container>
