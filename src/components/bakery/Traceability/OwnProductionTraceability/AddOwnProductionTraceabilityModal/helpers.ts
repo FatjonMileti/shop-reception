@@ -24,7 +24,7 @@ export const validationSchema = Yup.object().shape({
 
   chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
   productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
-  quantity: Yup.string().required('Campul cantitate trebuie completat'),
+  quantity: Yup.number().required('Campul cantitate trebuie completat'),
   thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
   conform: Yup.boolean(),
 
