@@ -3,7 +3,8 @@ import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 import * as Yup from 'yup'
 import { ProductDetails } from './AddReceivedProduct/ProductDetails'
 import dayjs from 'dayjs'
-import { BatchStatus, CloseReason, ReceivedProduct } from './interfaces'
+import { CloseReason, ReceivedProduct } from './interfaces'
+import { BatchStatus } from '../interfaces'
 import { formatPayloadDate } from '../../../../utils/helpers'
 import { ImageCell } from '../../../core-ui/ImageCell'
 
@@ -245,12 +246,8 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
   entryDate: Yup.mixed<dayjs.Dayjs>().required('Entry date is required'),
 
   hasExpirationDate: Yup.boolean().required('This field is required'),
-  expirationDate: Yup.mixed().when('hasExpirationDate', (hasExpirationDate, schema) => {
-    return hasExpirationDate
-      ? Yup.date()
-          .min(new Date(), 'Data de expirare nu poate fi în trecut.')
-          .required('Câmpul data expirare trebuie completat.')
-      : schema.nullable()
+  expirationDate: Yup.mixed().when('hasExpirationDate', ([hasExpirationDate], schema) => {
+    return hasExpirationDate ? schema.required('Câmpul data expirare trebuie completat.') : schema.nullable()
   }),
 
   hasSecondaryDLC: Yup.boolean().required('This field is required'),

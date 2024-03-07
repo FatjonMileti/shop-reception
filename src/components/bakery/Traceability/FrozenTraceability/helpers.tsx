@@ -4,6 +4,7 @@ import { IconCell } from '../../../core-ui/IconCell'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import { ThermalCondition } from 'components/bakery/interfaces'
+import { BatchStatus } from '../interfaces'
 
 export const columns: any[] = [
   {
@@ -140,7 +141,7 @@ export const columns: any[] = [
   {
     title: 'Status lot',
     field: 'batchStatus',
-    render: row => <BodyItem name="Status lot" value={row?.batch?.batchStatus} />
+    render: row => <BodyItem name="Status lot" value={BatchStatus[row?.batch?.batchStatus] || ''} />
   },
   // TODO check this field
   // {
@@ -352,9 +353,62 @@ export const mainItemBodyColumns = [
   {
     title: 'Data productiei',
     field: 'productionDate'
+  }
+]
+
+export const selectBatchColumns: any[] = [
+  {
+    title: 'Data intrare',
+    field: 'entryDate',
+    align: 'left',
+    type: 'string',
+    width: '100px',
+    render: (row: any) => formatBakeryPayloadDate(row.entryDate)
   },
   {
-    title: 'DLC Prod. Fab.',
-    field: 'dlc'
+    title: 'Nr. lot',
+    field: 'batchName',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'Furnizor',
+    field: 'supplier.supplierName',
+    align: 'left',
+    render: (row: any) => row.supplier.supplierName,
+    type: 'string',
+    width: '250px'
+  },
+  {
+    title: 'Data expirare',
+    field: 'expireDate',
+    align: 'left',
+    type: 'string',
+    width: '100px',
+    render: (row: any) => formatBakeryPayloadDate(row.expireDate)
+  },
+  {
+    title: 'Cantitate intrata',
+    field: 'batchQuantity',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'Cantitate consumata',
+    field: 'consumedAmount',
+    align: 'left',
+    type: 'string',
+    width: '100px',
+    render: (row: any) => row.consumedAmount || ''
+  },
+  {
+    title: 'Nr. zile DLC',
+    field: 'dlcDays',
+    align: 'left',
+    type: 'string',
+    width: '110px',
+    render: (row: any) => row.dlcDays || ''
   }
 ]

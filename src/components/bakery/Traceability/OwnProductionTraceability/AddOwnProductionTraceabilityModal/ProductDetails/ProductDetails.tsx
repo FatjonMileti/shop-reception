@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Grid, Divider } from '@mui/material'
 import {
   Autocomplete,
@@ -15,11 +14,10 @@ import { toBoolean } from 'utils/helpers'
 
 interface ProductDetailsProps {
   onCancel: () => void
-  onSelectBatch: (step?: number, metiCode?: any) => void
+  onAddCharge: (componentMetiCode: string | number) => void
+  onAddBatch: (componentMetiCode: string | number) => void
   selectedProduct: any
-  selectedRows: any
   formik: any
-  setComponentMetiCode: Function
   recipeQuery: UseQueryResult<any>
 }
 
@@ -27,16 +25,11 @@ export const ProductDetails = (props: ProductDetailsProps) => {
   const {
     formik,
     onCancel,
-    onSelectBatch,
     selectedProduct,
-    selectedRows,
-    setComponentMetiCode,
-    recipeQuery
+    recipeQuery,
+    onAddBatch,
+    onAddCharge
   } = props
-
-  useEffect(() => {
-    formik.setFieldValue('traceabilityProductionList', selectedRows)
-  }, [selectedRows])
 
   const onDeleteBatch = id => {
     let newBatches = formik.values.traceabilityProductionList.filter(batch =>
@@ -199,10 +192,10 @@ export const ProductDetails = (props: ProductDetailsProps) => {
         <ProductDetailsBatches
           formik={formik}
           productMetiCode={selectedProduct?.metiCode}
-          onSelectBatch={onSelectBatch}
           onDeleteBatch={onDeleteBatch}
+          onAddBatch={onAddBatch}
+          onAddCharge={onAddCharge}
           receip={recipeQuery.data}
-          setComponentMetiCode={setComponentMetiCode}
         />
 
         <Grid item xs={12} container justifyContent="space-between">
