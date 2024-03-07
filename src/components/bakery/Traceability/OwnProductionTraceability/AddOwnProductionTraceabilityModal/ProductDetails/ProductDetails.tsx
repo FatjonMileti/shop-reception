@@ -89,7 +89,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
         </Grid>
         <Grid item xs={3}>
           <Input
-            type="text"
+            type="number"
             variant="outlined"
             label="Cantitate sarja"
             onChange={({ currentTarget: { value } }) => {
