@@ -100,7 +100,7 @@ export const AddOwnProductionTraceabilityModal = ({
 
       if (!batchesValues || !chargesHaveValues) {
         showNotification({
-          message: `Cannot save without batch and charge.`,
+          message: `Cannot save without one item per batch and charge.`,
           type: 'error'
         })
 
@@ -110,6 +110,9 @@ export const AddOwnProductionTraceabilityModal = ({
       ownTraceabilityMutation.mutate(payload)
     }
   })
+
+  console.log("addFormik.values: ", formik.values)
+  console.log("addCorrectFormik.errors: ", formik.errors)
 
   const cancel = () => {
     closeModal()
