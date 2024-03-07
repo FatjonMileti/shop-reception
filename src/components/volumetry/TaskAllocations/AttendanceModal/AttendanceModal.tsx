@@ -14,28 +14,38 @@ import { AttendanceModalProps } from 'components/volumetry/interfaces'
 
 const AttendanceModal = (props: AttendanceModalProps) => {
   const { isModalOpen, closeModal, departmentId } = props
+  const { showNotification } = useNotification()
 
-  const [employees, setEmployees] = useState([])
+  const isXs = useMediaQuery('(max-width:624px)')
+
   const [activeStep, setActiveStep] = useState(0)
   const [allocateEmployeesAllSelected, setAllocateEmployeesAllSelected] = useState(true)
 
-  const { showNotification } = useNotification()
+  const formik = useFormik({
+    enableReinitialize: true,
+    validateOnChange: false,
+    initialValues: {
+      employees: []
+    },
+    // validationSchema: validationSchema,
+    onSubmit: async (values: any) => {
+      mutateEmployeesAttendance(toEmployeesAttendancePayload(values.employees))
+    }
+  })
 
   const { data: employeesShifts, isLoading: isEmployeesLoading } = setEmployeesAttendance(
     departmentId,
     showNotification,
     isModalOpen,
-    setEmployees
+    values => formik.setFieldValue('employees', values)
   )
 
-  const isXs = useMediaQuery('(max-width:624px)')
-
   useEffect(() => {
-    const newEmployees = employees.map(emp => ({
+    const newEmployees = formik.values.employees.map(emp => ({
       ...emp,
       shouldAllocate: allocateEmployeesAllSelected
     }))
-    setEmployees(newEmployees)
+    formik.setFieldValue('employees', newEmployees)
   }, [allocateEmployeesAllSelected])
 
   const updateEmployeesAttendance = async values => {
@@ -51,7 +61,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
   const autoAllocateEmployees = async () => {
     await makeCorePostRequest(
       '/volumetry/tasks/automatic-allocation',
-      toEmployeesAllocationPayload(employees)
+      toEmployeesAllocationPayload(formik.values.employees)
     )
   }
 
@@ -67,37 +77,27 @@ const AttendanceModal = (props: AttendanceModalProps) => {
       handleQueryError(error, 'A aparut o eroare la alocarea automata.', showNotification)
   })
 
-  const formik = useFormik({
-    enableReinitialize: true,
-    validateOnChange: false,
-    initialValues: {},
-    // validationSchema: validationSchema,
-    onSubmit: async (values: any) => {
-      mutateEmployeesAttendance(toEmployeesAttendancePayload(employees))
-    }
-  })
-
   const toggleEmployee = employee => {
-    const newEmployees = employees.map(emp =>
+    const newEmployees = formik.values.employees.map(emp =>
       emp.workerId === employee.workerId
         ? { ...emp, isPresent: !emp.isPresent, shouldAllocate: !emp.isPresent }
         : emp
     )
-    setEmployees(newEmployees)
+    formik.setFieldValue('employees', newEmployees)
   }
 
   const toggleAllocateEmployee = employee => {
-    const newEmployees = employees.map(emp =>
+    const newEmployees = formik.values.employees.map(emp =>
       emp.workerId === employee.workerId ? { ...emp, shouldAllocate: !emp.shouldAllocate } : emp
     )
-    setEmployees(newEmployees)
+    formik.setFieldValue('employees', newEmployees)
   }
 
   const updateEmplpyeeTime = (employee, value, field) => {
-    const newEmployees = employees.map(emp =>
+    const newEmployees = formik.values.employees.map(emp =>
       emp.workerId === employee.workerId ? { ...emp, [field]: value } : emp
     )
-    setEmployees(newEmployees)
+    formik.setFieldValue('employees', newEmployees)
   }
 
   const resetModal = () => {
@@ -106,6 +106,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
     formik.resetForm()
   }
 
+  console.log('debug formik.values', formik.values)
   return (
     <Modal
       isModalOpen={isModalOpen}
@@ -117,28 +118,28 @@ const AttendanceModal = (props: AttendanceModalProps) => {
       }
       modalWidth="80%"
     >
-      {activeStep === 0 && (
-        <EmployeeAttendance
-          isEmployeesLoading={isEmployeesLoading}
-          employees={employees}
-          toggleEmployee={toggleEmployee}
-          updateEmplpyeeTime={updateEmplpyeeTime}
-          closeModal={resetModal}
-          handleSubmit={formik.handleSubmit}
-          increaseStep={() => setActiveStep(1)}
-          isXs={isXs}
-        />
-      )}
-      {activeStep === 1 && (
-        <AllocationList
-          employees={employees}
-          toggleEmployee={toggleAllocateEmployee}
-          closeModal={resetModal}
-          allocateEmployees={allocateEmployees}
-          allocateEmployeesAllSelected={allocateEmployeesAllSelected}
-          setAllocateEmployeesAllSelected={setAllocateEmployeesAllSelected}
-        />
-      )}
+      {
+        [
+          <EmployeeAttendance
+            isEmployeesLoading={isEmployeesLoading}
+            employees={formik.values.employees}
+            toggleEmployee={toggleEmployee}
+            updateEmplpyeeTime={updateEmplpyeeTime}
+            closeModal={resetModal}
+            handleSubmit={formik.handleSubmit}
+            increaseStep={() => setActiveStep(1)}
+            isXs={isXs}
+          />,
+          <AllocationList
+            employees={formik.values.employees}
+            toggleEmployee={toggleAllocateEmployee}
+            closeModal={resetModal}
+            allocateEmployees={allocateEmployees}
+            allocateEmployeesAllSelected={allocateEmployeesAllSelected}
+            setAllocateEmployeesAllSelected={setAllocateEmployeesAllSelected}
+          />
+        ][activeStep]
+      }
     </Modal>
   )
 }

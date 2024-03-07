@@ -39,7 +39,8 @@ export const buildColumns = ({
         style={{ width: '100%' }}
         forceDesktop
       />
-    )
+    ),
+    width: '200px'
   },
   {
     title: 'Ora final de tura',
@@ -55,6 +56,7 @@ export const buildColumns = ({
         style={{ width: '100%' }}
         forceDesktop
       />
-    )
+    ),
+    width: '200px'
   }
 ]
