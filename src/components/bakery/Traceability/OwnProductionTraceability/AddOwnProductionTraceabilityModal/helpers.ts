@@ -19,7 +19,7 @@ export const getInitialValues = (selectedProduct) => {
 
 export const validationSchema = Yup.object().shape({
   productionDate: Yup.date()
-    .max(new Date(), 'Data de productie nu poate fi in viitor.')
+    .max(dayjs().endOf('day'), 'Data de productie nu poate fi in viitor.')
     .required('Campul data productie trebuie completat.'),
 
   chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
@@ -36,7 +36,7 @@ export const validationSchema = Yup.object().shape({
       componentQuantity: Yup.number(),
       quantity: Yup.number(),
       openingDate: Yup.date(),
-      dlc: Yup.string()
+      dlc: Yup.string().nullable()
     })
   )
 })

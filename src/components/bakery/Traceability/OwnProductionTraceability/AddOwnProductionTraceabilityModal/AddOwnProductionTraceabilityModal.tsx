@@ -86,10 +86,33 @@ export const AddOwnProductionTraceabilityModal = ({
         return
       }
 
+      const batchesValues = recipeQuery.data.batches.find(batch =>
+        values.traceabilityProductionList.some(
+          item => item.componentCode === batch.componentCode && item.batchId
+        )
+      )
+
+      const chargesHaveValues = recipeQuery.data.charges.find(charge =>
+        values.traceabilityProductionList.some(
+          item => item.componentCode === charge.componentCode && item.childTraceabilityId
+        )
+      )
+
+      if (!batchesValues || !chargesHaveValues) {
+        showNotification({
+          message: `Cannot save without batch and charge.`,
+          type: 'error'
+        })
+
+        return
+      }
+
       ownTraceabilityMutation.mutate(payload)
     }
   })
 
+  console.log("values: ", formik.values)
+  console.log("errors: ", formik.errors)
 
   const cancel = () => {
     closeModal()
@@ -159,8 +182,8 @@ export const AddOwnProductionTraceabilityModal = ({
   const addNewCharges = (chargesToAdd: any[]) => {
     if (chargesToAdd.length === 0) return
 
-    const mewCharges = chargesToAdd.filter(ch =>
-      !formik.values.traceabilityProductionList.some(c => c.childTraceabilityId === ch.id)
+    const mewCharges = chargesToAdd.filter(
+      ch => !formik.values.traceabilityProductionList.some(c => c.childTraceabilityId === ch.id)
     )
 
     if (mewCharges.length === 0) return
