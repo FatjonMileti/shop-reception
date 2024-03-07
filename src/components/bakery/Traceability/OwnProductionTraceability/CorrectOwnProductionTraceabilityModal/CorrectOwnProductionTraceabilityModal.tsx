@@ -11,7 +11,11 @@ import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
 import { getInitialValues, validationSchema } from './helpers'
 import { SelectCharge } from './SelectCharge'
-import { quantityCalculation, toBatchFormat, toChargeFormat } from '../AddOwnProductionTraceabilityModal/helpers'
+import {
+  quantityCalculation,
+  toBatchFormat,
+  toChargeFormat
+} from '../AddOwnProductionTraceabilityModal/helpers'
 
 interface CorrectOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -27,25 +31,34 @@ export const CorrectOwnProductionTraceabilityModal = ({
   const [step, setStep] = useState<number>(0)
   const [componentMetiCode, setComponentMetiCode] = useState<string | number | undefined>()
 
-  const correctItemMutation = useMutation(async (values: any) => {
-    await makeCorePutRequest(`/bakery/traceability/production/correction/${correctItemQuery?.data?.id}`, values)
-  }, {
-    onSuccess: () => {
-      showNotification({
-        message: `Data added successfully`,
-        type: 'success'
-      })
-      cancel()
+  const correctItemMutation = useMutation(
+    async (values: any) => {
+      await makeCorePutRequest(
+        `/bakery/traceability/production/correction/${correctItemQuery?.data?.id}`,
+        values
+      )
     },
-    onError: res => {
-      showNotification({
-        message: `Error while trying to add data, ${formatErrorMessage(res)}`,
-        type: 'error'
-      })
+    {
+      onSuccess: () => {
+        showNotification({
+          message: `Data added successfully`,
+          type: 'success'
+        })
+        cancel()
+      },
+      onError: res => {
+        showNotification({
+          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          type: 'error'
+        })
+      }
     }
-  })
+  )
 
-  const initialValues = useMemo(() => getInitialValues(correctItemQuery?.data), [correctItemQuery?.data?.id])
+  const initialValues = useMemo(
+    () => getInitialValues(correctItemQuery?.data),
+    [correctItemQuery?.data?.id]
+  )
 
   const formik = useFormik({
     validateOnChange: false,
@@ -78,19 +91,25 @@ export const CorrectOwnProductionTraceabilityModal = ({
         return
       }
 
-      const batchesValues = recipeQuery.data.batches.find(batch =>
-        values.traceabilityProductionList.some(
-          item => item.componentCode === batch.componentCode && item.batchId
+      const emptyBatches =
+        recipeQuery.data.batches.length > 0 &&
+        recipeQuery.data.batches.find(
+          batch =>
+            !values.traceabilityProductionList.some(
+              item => item.componentCode === batch.componentCode && item.batchId
+            )
         )
-      )
 
-      const chargesHaveValues = recipeQuery.data.charges.find(charge =>
-        values.traceabilityProductionList.some(
-          item => item.componentCode === charge.componentCode && item.childTraceabilityId
+      const emptyCharges =
+        recipeQuery.data.charges.length > 0 &&
+        recipeQuery.data.charges.find(
+          charge =>
+            !values.traceabilityProductionList.some(
+              item => item.componentCode === charge.componentCode && item.childTraceabilityId
+            )
         )
-      )
 
-      if (!batchesValues || !chargesHaveValues) {
+      if (emptyBatches || emptyCharges) {
         showNotification({
           message: `Cannot save without one item per batch and charge.`,
           type: 'error'
@@ -102,9 +121,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
       correctItemMutation.mutate(payload)
     }
   })
-
-  console.log("correctFormik.values: ", formik.values)
-  console.log("correctFormik.errors: ", formik.errors)
 
   const cancel = () => {
     closeModal()
@@ -174,8 +190,8 @@ export const CorrectOwnProductionTraceabilityModal = ({
   const addNewCharges = (chargesToAdd: any[]) => {
     if (chargesToAdd.length === 0) return
 
-    const mewCharges = chargesToAdd.filter(ch =>
-      !formik.values.traceabilityProductionList.some(c => c.childTraceabilityId === ch.id)
+    const mewCharges = chargesToAdd.filter(
+      ch => !formik.values.traceabilityProductionList.some(c => c.childTraceabilityId === ch.id)
     )
 
     if (mewCharges.length === 0) return
