@@ -13,7 +13,7 @@ import { VOLUMETRY_TASKS_URL } from './constants'
 import { buildTableFilterFields, columns, toTableRowItems } from './helpers'
 import {
   getCategoriesOptions,
-  getDepartmentsOptions,
+  getDepartmentAliasesOptions,
   getFrequencyOptions,
   getPrioritiesOptions,
   getWorkVolumesOptions
@@ -30,7 +30,7 @@ const TaskManagement = () => {
   const { showNotification } = useNotification()
 
   const { data: categoryOptions } = getCategoriesOptions(showNotification)
-  const { data: departmentOptions } = getDepartmentsOptions(showNotification, null, {
+  const { data: departmentOptions } = getDepartmentAliasesOptions(showNotification, null, {
     filterBy: 'all',
     filterValue: true
   })

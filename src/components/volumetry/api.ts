@@ -3,10 +3,37 @@ import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
 import { toEmployeeFilterItems, toEmployeesAttendance } from './TaskAllocations/serializers'
 import { fromTaskPayload } from './utils'
-import { toDepartmentsOptions, toRegionsOptions } from './serializers'
+import { toDepartmentAliasesOptions, toDepartmentsOptions, toRegionsOptions } from './serializers'
 import { handleQueryError } from 'utils/helpers'
 
 export const getDepartmentsOptions = (
+  showNotification: Function,
+  setDefaultOptionCallback?: (defaultValue: ValueLabelInterface) => void
+) => {
+  return useQuery(
+    ['departments'],
+    async () => {
+      const result = await makeCoreGetRequest('/volumetry/locations/generic-departments')
+      const resultOptions = toDepartmentsOptions(result)
+
+      if (resultOptions?.length && !!setDefaultOptionCallback) {
+        setDefaultOptionCallback(resultOptions[0])
+      }
+
+      return resultOptions || []
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la preluarea datelor de optiuni pentru departamente.',
+          showNotification
+        )
+    }
+  )
+}
+
+export const getDepartmentAliasesOptions = (
   showNotification: Function,
   setDefaultOptionCallback?: (defaultValue: ValueLabelInterface) => void,
   filter?: { filterBy: string; filterValue: string | boolean | number }
@@ -14,14 +41,14 @@ export const getDepartmentsOptions = (
   return useQuery(
     ['departments'],
     async () => {
-      let url = '/volumetry/locations/generic-departments'
+      let url = '/volumetry/locations/department-aliases'
 
       if (filter) {
         url = `${url}?filterBy=${filter.filterBy}&filterValue=${filter.filterValue}`
       }
 
       const result = await makeCoreGetRequest(url)
-      const resultOptions = toDepartmentsOptions(result)
+      const resultOptions = toDepartmentAliasesOptions(result)
 
       if (resultOptions?.length && !!setDefaultOptionCallback) {
         setDefaultOptionCallback(resultOptions[0])
@@ -260,13 +287,12 @@ export const getCategoryDepartmentsOptions = (
     ['category-departments', categoryId],
     async () => {
       const result = await makeCoreGetRequest(
-        `/volumetry/locations/generic-departments?filterBy=categoryId&filterValue=${categoryId}`
+        `/volumetry/locations/department-aliases?filterBy=categoryId&filterValue=${categoryId}`
       )
 
       const resultOptions = result.map(department => ({
         value: department.id,
-        label: department.departmentName,
-        locationType: department.locationType
+        label: department.alias
       }))
 
       return resultOptions || []
