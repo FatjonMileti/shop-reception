@@ -78,10 +78,33 @@ export const CorrectOwnProductionTraceabilityModal = ({
         return
       }
 
+      const batchesValues = recipeQuery.data.batches.find(batch =>
+        values.traceabilityProductionList.some(
+          item => item.componentCode === batch.componentCode && item.batchId
+        )
+      )
+
+      const chargesHaveValues = recipeQuery.data.charges.find(charge =>
+        values.traceabilityProductionList.some(
+          item => item.componentCode === charge.componentCode && item.childTraceabilityId
+        )
+      )
+
+      if (!batchesValues || !chargesHaveValues) {
+        showNotification({
+          message: `Cannot save without one item per batch and charge.`,
+          type: 'error'
+        })
+
+        return
+      }
+
       correctItemMutation.mutate(payload)
     }
   })
 
+  console.log("correctFormik.values: ", formik.values)
+  console.log("correctFormik.errors: ", formik.errors)
 
   const cancel = () => {
     closeModal()
