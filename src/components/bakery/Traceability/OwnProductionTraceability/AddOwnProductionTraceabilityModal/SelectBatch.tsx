@@ -33,10 +33,16 @@ export const SelectBatch = ({
           url: '/bakery/batch',
           page,
           rowsPerPage,
+          order: 'asc',
+          orderBy: 'expireDate',
           filters: [
             {
               name: 'product.metiCode',
               value: componentMetiCode
+            },
+            {
+              name: 'batchStatus',
+              value: 'AVAILABLE'
             }
           ]
         })
