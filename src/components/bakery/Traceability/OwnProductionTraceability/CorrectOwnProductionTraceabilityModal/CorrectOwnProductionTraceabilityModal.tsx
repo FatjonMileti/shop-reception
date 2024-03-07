@@ -90,9 +90,9 @@ export const CorrectOwnProductionTraceabilityModal = ({
   }
 
   const recipeQuery = useQuery(
-    ['receip', correctItemQuery?.data?.product?.metiCode],
+    ['receip', formik.values?.product?.metiCode],
     async () => {
-      const result = await makeCoreGetRequest(`/bakery/recipe/${correctItemQuery?.data?.product?.metiCode}`)
+      const result = await makeCoreGetRequest(`/bakery/recipe/${formik.values?.product?.metiCode}`)
       let charges = []
       let batches = []
       let others = []
@@ -114,7 +114,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
       return { charges, batches, others, details: result[0] }
     },
     {
-      enabled: !!correctItemQuery?.data?.product?.metiCode,
+      enabled: !!formik.values?.product?.metiCode,
       onError: error => {
         showNotification({
           message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
@@ -123,7 +123,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
       }
     }
   )
-
   const addNewBatches = (batchesToAdd: any[]) => {
     if (batchesToAdd.length === 0) return
 
@@ -173,6 +172,10 @@ export const CorrectOwnProductionTraceabilityModal = ({
       ...mewCharges.map(b => toChargeFormat(b, calculatedQuantity))
     ])
   }
+
+  console.log("formik.values: ", formik.values)
+  console.log("formik.errors: ", formik.errors)
+
 
   return (
     <Modal

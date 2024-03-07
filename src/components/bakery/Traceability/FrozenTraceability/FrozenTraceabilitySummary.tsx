@@ -6,8 +6,6 @@ import { ImageCell } from '../../../core-ui/ImageCell'
 import React from 'react'
 
 const FrozenTraceabilitySummary = ({item}) => {
-  console.log("item: ", item)
-
 
   const {
     chargeNumber,
@@ -28,7 +26,7 @@ const FrozenTraceabilitySummary = ({item}) => {
   return (
     <Grid container flexDirection="column">
       <Grid item className={s.summary}>
-        <ImageCell value={''} imageUrl={item.product?.imageUrl} />
+        <ImageCell value={''} imageUrl={product?.imageUrl} />
 
         <div className={s.title}>
           <Typography variant="medium" className="title">
