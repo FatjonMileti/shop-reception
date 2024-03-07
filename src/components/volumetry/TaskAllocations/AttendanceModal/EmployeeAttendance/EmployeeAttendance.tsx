@@ -1,7 +1,10 @@
 import { Box, CircularProgress, Grid } from '@mui/material'
-import { Button, Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Checkbox, TimePicker, Table } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { EmployeeAttendanceProps } from 'components/volumetry/interfaces'
+import { useMemo } from 'react'
+import { buildColumns } from './helpers'
+import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table'
 
 const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
   const {
@@ -20,6 +23,11 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     increaseStep()
   }
 
+  const tableColumns = useMemo(
+    () => buildColumns({ toggleEmployee, updateEmplpyeeTime }) as TableHeaderType[],
+    [employees]
+  )
+
   return isEmployeesLoading ? (
     <div style={{ display: 'flex' }}>
       <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -27,7 +35,29 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
   ) : (
     <Box>
       <Box style={{ height: '60vh', overflowY: 'scroll' }}>
-        {employees.map(employee => (
+        <Table
+          hideCheckbox
+          orderBy="name"
+          order="desc"
+          columns={tableColumns}
+          rows={employees}
+          isLoading={false}
+          disablePagination
+          rowsPerPage={1000}
+          // fetchData={fetchData}
+          // isLoading={isLoading}
+          // totalCount={totalCount}
+          // shouldRefreshData={shouldRefreshData}
+          // setShouldRefreshData={setShouldRefreshData}
+          // filters={tableFilterFields}
+          // filtersLabel="Filtreaza"
+          // appliedFiltersLabel="Filtre"
+          // applyFiltersButtonLabel="Aplica filtre"
+          // filtersButtonLabel="Filtreaza"
+          // cancelFiltersButtonLabel="Renunta"
+          // labelRowsPerPage="Randuri pe pagina:"
+        />
+        {/* {employees.map(employee => (
           <Grid container>
             <Grid item xs={12} md={4}>
               <Checkbox
@@ -66,7 +96,7 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
               />
             </Grid>
           </Grid>
-        ))}
+        ))} */}
       </Box>
       <Box className={s.modalButtons} style={{ width: '50%', float: 'right', marginTop: '20px' }}>
         <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
