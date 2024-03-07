@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
 export const getInitialValues = editItem => {
@@ -32,7 +32,7 @@ export const getInitialValues = editItem => {
 
 export const validationSchema = Yup.object().shape({
   productionDate: Yup.date()
-    .max(new Date(), 'Data de productie nu poate fi in viitor.')
+    .max(dayjs().endOf('day'), 'Data de productie nu poate fi in viitor.')
     .required('Campul data productie trebuie completat.'),
 
   chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
@@ -62,7 +62,7 @@ export const toBatchFormatEdit = item => ({
   componentQuantity: item?.componentQuantity,
   componentName: item?.componentName,
   quantity: item.batch?.batchQuantity,
-  openingDate: formatBakeryPayloadDate(item.openingDate),
+  openingDate: formatPayloadDate(item.openingDate),
   dlc: item?.batch?.dlcDays
 })
 
@@ -73,7 +73,7 @@ export const toChargeFormatEdit = item => ({
   componentName: item.batch?.componentName,
 
   quantity: item.batch?.batchQuantity,
-  openingDate: formatBakeryPayloadDate(item?.openingDate),
+  openingDate: formatPayloadDate(item?.openingDate),
   dlc: item?.batch?.dlcDays
 })
 
