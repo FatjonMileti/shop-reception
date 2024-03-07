@@ -44,18 +44,6 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
           isLoading={false}
           disablePagination
           rowsPerPage={1000}
-          // fetchData={fetchData}
-          // isLoading={isLoading}
-          // totalCount={totalCount}
-          // shouldRefreshData={shouldRefreshData}
-          // setShouldRefreshData={setShouldRefreshData}
-          // filters={tableFilterFields}
-          // filtersLabel="Filtreaza"
-          // appliedFiltersLabel="Filtre"
-          // applyFiltersButtonLabel="Aplica filtre"
-          // filtersButtonLabel="Filtreaza"
-          // cancelFiltersButtonLabel="Renunta"
-          // labelRowsPerPage="Randuri pe pagina:"
         />
         {/* {employees.map(employee => (
           <Grid container>
