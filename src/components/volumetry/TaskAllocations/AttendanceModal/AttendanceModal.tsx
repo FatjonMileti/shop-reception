@@ -106,7 +106,6 @@ const AttendanceModal = (props: AttendanceModalProps) => {
     formik.resetForm()
   }
 
-  console.log('debug formik.values', formik.values)
   return (
     <Modal
       isModalOpen={isModalOpen}
