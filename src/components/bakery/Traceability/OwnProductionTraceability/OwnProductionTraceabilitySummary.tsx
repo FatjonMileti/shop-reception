@@ -5,13 +5,8 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import React from 'react'
 
-const OwnProductionTraceabilitySummary = item => {
-  const {
-    chargeNumber,
-    dlc,
-    product,
-    productionDate,
-  } = item.item
+const OwnProductionTraceabilitySummary = ({ item }) => {
+  const { chargeNumber, dlc, product, productionDate } = item
 
   const summaryCapsules = [
     { label: 'Data productie', value: formatBakeryPayloadDate(productionDate) },
@@ -20,13 +15,13 @@ const OwnProductionTraceabilitySummary = item => {
     { label: 'Subfamilie', value: product.subfamily },
     { label: 'Sarja', value: chargeNumber },
     { label: 'UM', value: product.metricUnit },
-    { label: 'DLC Prod. Fab.', value: formatBakeryPayloadDate(dlc) },
+    { label: 'DLC Prod. Fab.', value: formatBakeryPayloadDate(dlc) }
   ]
 
   return (
     <Grid container flexDirection="column">
       <Grid item className={s.summary}>
-        <ImageCell value={''} imageUrl={item.product?.imageUrl} />
+        <ImageCell value={''} imageUrl={product?.imageUrl} />
         <div className={s.title}>
           <Typography variant="medium" className="title">
             {product.name}
