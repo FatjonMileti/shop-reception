@@ -70,7 +70,7 @@ export const ProductDetailsBatches = ({
 
           {formik.values.traceabilityProductionList.map((item, idx) => (
             <Fragment key={idx}>
-              {item.componentCode === batch.componentCode && item.batchId ? (
+              {item.componentCode === batch.componentCode || item.batchId ? (
                 <Grid item container xs={12} spacing={2}>
                   <Grid item xs={3}>
                     <Input

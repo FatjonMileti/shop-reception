@@ -72,6 +72,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
               } else {
                 formik.setFieldValue('product', null)
               }
+              formik.setFieldValue('traceabilityProductionList', [])
             }}
             value={
               formik.values?.product
