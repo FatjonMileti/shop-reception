@@ -8,12 +8,19 @@ import { handleQueryError } from 'utils/helpers'
 
 export const getDepartmentsOptions = (
   showNotification: Function,
-  setDefaultOptionCallback?: (defaultValue: ValueLabelInterface) => void
+  setDefaultOptionCallback?: (defaultValue: ValueLabelInterface) => void,
+  filter?: { filterBy: string; filterValue: string | boolean | number }
 ) => {
   return useQuery(
     ['departments'],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/locations/generic-departments')
+      let url = '/volumetry/locations/generic-departments'
+
+      if (filter) {
+        url = `${url}?filterBy=${filter.filterBy}&filterValue=${filter.filterValue}`
+      }
+
+      const result = await makeCoreGetRequest(url)
       const resultOptions = toDepartmentsOptions(result)
 
       if (resultOptions?.length && !!setDefaultOptionCallback) {
