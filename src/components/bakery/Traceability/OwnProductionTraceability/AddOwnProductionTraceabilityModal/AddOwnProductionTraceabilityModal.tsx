@@ -86,21 +86,27 @@ export const AddOwnProductionTraceabilityModal = ({
         return
       }
 
-      const batchesValues = recipeQuery.data.batches.find(batch =>
-        values.traceabilityProductionList.some(
-          item => item.componentCode === batch.componentCode && item.batchId
+      const emptyBatches =
+        recipeQuery.data.batches.length > 0 &&
+        recipeQuery.data.batches.find(
+          batch =>
+            !values.traceabilityProductionList.some(
+              item => item.componentCode === batch.componentCode && item.batchId
+            )
         )
-      )
 
-      const chargesHaveValues = recipeQuery.data.charges.find(charge =>
-        values.traceabilityProductionList.some(
-          item => item.componentCode === charge.componentCode && item.childTraceabilityId
+      const emptyCharges =
+        recipeQuery.data.charges.length > 0 &&
+        recipeQuery.data.charges.find(
+          charge =>
+            !values.traceabilityProductionList.some(
+              item => item.componentCode === charge.componentCode && item.childTraceabilityId
+            )
         )
-      )
 
-      if (!batchesValues || !chargesHaveValues) {
+      if (emptyBatches || emptyCharges) {
         showNotification({
-          message: `Cannot save without batch and charge.`,
+          message: `Cannot save without one item per batch and charge.`,
           type: 'error'
         })
 

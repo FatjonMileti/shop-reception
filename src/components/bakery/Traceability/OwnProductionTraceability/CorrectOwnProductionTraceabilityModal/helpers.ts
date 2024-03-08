@@ -67,7 +67,7 @@ export const toBatchFormatEdit = item => ({
 })
 
 export const toChargeFormatEdit = item => ({
-  childTraceabilityId: item.childTraceabilityId?.id,
+  childTraceabilityId: item.childTraceability?.id,
   componentCode: item?.componentCode,
   componentQuantity: item.componentQuantity,
   componentName: item.batch?.componentName,
