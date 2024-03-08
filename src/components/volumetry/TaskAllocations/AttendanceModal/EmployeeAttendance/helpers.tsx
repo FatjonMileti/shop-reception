@@ -12,6 +12,7 @@ export const buildColumns = ({
     field: 'fullName',
     align: 'left',
     type: 'string',
+    disableSorting: true,
     render: (row: any) => (
       <Checkbox
         edge="start"
@@ -30,14 +31,17 @@ export const buildColumns = ({
     field: 'shiftStart',
     align: 'left',
     type: 'string',
+    disableSorting: true,
     render: (row: any) => (
       <TimePicker
         label=""
         value={row.shiftStart}
-        onChange={newValue => updateEmplpyeeTime(row, newValue, 'shiftStart')}
+        onAccept={newValue => updateEmplpyeeTime(row, newValue, 'shiftStart')}
+        onChange={() => {}}
         variant="outlined"
         style={{ width: '100%' }}
         forceDesktop
+        ampm={false}
       />
     ),
     width: '200px'
@@ -47,14 +51,17 @@ export const buildColumns = ({
     field: 'shiftEnd',
     align: 'left',
     type: 'string',
+    disableSorting: true,
     render: (row: any) => (
       <TimePicker
         label=""
         value={row.shiftEnd}
-        onChange={newValue => updateEmplpyeeTime(row, newValue, 'shiftEnd')}
+        onAccept={newValue => updateEmplpyeeTime(row, newValue, 'shiftEnd')}
+        onChange={() => {}}
         variant="outlined"
         style={{ width: '100%' }}
         forceDesktop
+        ampm={false}
       />
     ),
     width: '200px'

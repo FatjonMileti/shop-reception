@@ -115,7 +115,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
           ? 'Confirma angajatii prezenti'
           : 'Confirma angajatii pe care vrei sa ii aloci'
       }
-      modalWidth="80%"
+      modalWidth="60%"
     >
       {
         [
@@ -130,7 +130,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
             isXs={isXs}
           />,
           <AllocationList
-            employees={formik.values.employees}
+            employees={formik.values.employees.filter(employee => employee.isPresent)}
             toggleEmployee={toggleAllocateEmployee}
             closeModal={resetModal}
             allocateEmployees={allocateEmployees}
