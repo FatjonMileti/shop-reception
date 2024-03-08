@@ -243,7 +243,7 @@ export const OwnProductionTraceability = () => {
               desktopIcon: <EditActionIcon />
             }
           ]}
-          rowActionsWidth="90px"
+          rowActionsWidth="200px"
           rowsPerPage={isXs ? 5 : 25}
           rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
         />
