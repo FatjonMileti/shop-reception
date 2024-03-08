@@ -239,14 +239,25 @@ export const ProductDetails = ({
                   required
                   helperText={formik.errors?.traceabilityFrozenList?.[index]?.openingDate as string}
                   error={!!formik.errors?.traceabilityFrozenList?.[index]?.openingDate}
-                  value={formik.values?.traceabilityFrozenList?.[index]?.openingDate}
+                  value={
+                    formik.values?.traceabilityFrozenList?.[index]?.openingDate
+                      ? dayjs(formik.values?.traceabilityFrozenList?.[index]?.openingDate)
+                      : undefined
+                  }
                   // maxDate={dayjs()}
                   style={{ display: 'flex' }}
                 />
               </Grid>
             )}
 
-            <Grid item xs={3} display={'flex'} alignSelf={'flex-start'} justifyContent={'flex-end'} sx={{marginTop:"17px"}}>
+            <Grid
+              item
+              xs={3}
+              display={'flex'}
+              alignSelf={'flex-start'}
+              justifyContent={'flex-end'}
+              sx={{ marginTop: '17px' }}
+            >
               <Button
                 onClick={() => onDeleteBatch(item.batchId)}
                 variant="outlined"

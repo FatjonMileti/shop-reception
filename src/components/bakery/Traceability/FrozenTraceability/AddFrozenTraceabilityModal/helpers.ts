@@ -27,31 +27,31 @@ export const validationSchema = Yup.object().shape({
   conform: Yup.boolean(),
 
   traceabilityFrozenList: Yup.array().of(
-    Yup.object().shape({
-      batchId: Yup.string(),
-      quantity: Yup.number(),
-      openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
-        if(hasSecondaryDlc) {
-          return schema.required('Data obligatorie')
-        } else {
-          return schema.nullable()
-        }
-
+    Yup.object()
+      .shape({
+        batchId: Yup.string(),
+        quantity: Yup.number(),
+        openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
+          if (hasSecondaryDlc) {
+            return schema.required('Data obligatorie')
+          } else {
+            return schema.nullable()
+          }
+        }),
+        // dlc: Yup.string().nullable(),
+        hasSecondaryDlc: Yup.boolean()
       })
-        ,
-      dlc: Yup.string().nullable(),
-      hasSecondaryDlc: Yup.boolean()
-    }).required()
+      .required()
   )
 })
 
 export const toBatchFormat = (item, quantity) => ({
   batchName: item.batchName,
   batchId: item.id,
-  quantity: quantity, //item.batchQuantity,
-  openingDate: undefined,
-  dlc: item.dlcDays,
-  hasSecondaryDlc: item?.hasSecondaryDlc
+  quantity: quantity,
+  hasSecondaryDlc: item?.hasSecondaryDlc,
+  openingDate: formatPayloadDate(item.entryDate),
+  dlcDays: item.dlcDays
 })
 
 export const toBatchFormatEdit = batches => {

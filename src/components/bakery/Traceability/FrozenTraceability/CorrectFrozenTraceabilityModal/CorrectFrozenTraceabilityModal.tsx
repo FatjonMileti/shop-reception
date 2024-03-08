@@ -10,6 +10,7 @@ import { ProductDetails } from './ProductDetails'
 import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
 import { getInitialValues, toBatchFormat, validationSchema } from './helpers'
+import dayjs from 'dayjs'
 
 interface CorrectFrozenTraceabilityModalProps {
   isModalOpen: boolean
@@ -57,8 +58,8 @@ export const CorrectFrozenTraceabilityModal = ({
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: true,
-    validationSchema: validationSchema,
-    initialValues: initialValues,
+    validationSchema,
+    initialValues,
     onSubmit: async (values: any) => {
       const payload = {
         productId: values.product.id,
@@ -73,7 +74,14 @@ export const CorrectFrozenTraceabilityModal = ({
         nonComplianceReason: values?.nonComplianceReason || null,
         productDestination: values?.productDestination || null,
         dlc: values.dlc,
-        traceabilityFrozenList: values.traceabilityFrozenList
+        traceabilityFrozenList: values.traceabilityFrozenList.map(item =>
+          item.hasSecondaryDlc
+            ? {
+                ...item,
+                dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
+              }
+            : item
+        )
       }
 
       if (values.traceabilityFrozenList.length === 0) {

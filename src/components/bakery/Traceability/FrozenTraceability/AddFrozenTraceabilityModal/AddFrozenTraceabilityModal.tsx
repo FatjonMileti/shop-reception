@@ -12,6 +12,7 @@ import { useFormik } from 'formik'
 import { getInitialValues, validationSchema, toBatchFormat } from './helpers'
 import { SelectOrScanProduct } from '../../ReceivedProducts/AddReceivedProduct/SelectOrScanProduct'
 import { Product } from '../../ReceivedProducts/interfaces'
+import dayjs from 'dayjs'
 
 interface AddFrozenTraceabilityModalProps {
   isModalOpen: boolean
@@ -70,6 +71,14 @@ export const AddFrozenTraceabilityModal = ({
         productDestination: values?.productDestination || null,
         dlc: values.dlc || null,
         traceabilityFrozenList: values.traceabilityFrozenList
+          .map(item =>
+            item.hasSecondaryDlc
+              ? {
+                ...item,
+                dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
+              }
+              : item
+          )
       }
 
       if (values.traceabilityFrozenList.length === 0) {

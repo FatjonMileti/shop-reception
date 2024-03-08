@@ -32,24 +32,34 @@ export const validationSchema = Yup.object().shape({
     Yup.object().shape({
       batchId: Yup.string(),
       quantity: Yup.number(),
-      // openingDate: Yup.date(),
-      dlc: Yup.string()
-    })
+      openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
+        if (hasSecondaryDlc) {
+          return schema.required('Data obligatorie')
+        } else {
+          return schema.nullable()
+        }
+      }),
+      // dlc: Yup.string(),
+      hasSecondaryDlc: Yup.boolean()
+    }) .required()
   )
 })
 
 export const toBatchFormat = (item, quantity) => ({
   batchName: item.batchName,
   batchId: item.id,
-  quantity: quantity, //item.batchQuantity,
-  openingDate: item.entryDate,
-  dlc: item.dlcDays
+  quantity: quantity,
+  hasSecondaryDlc: item.hasSecondaryDlc,
+  openingDate: formatPayloadDate(item.entryDate),
+  dlcDays: item.dlcDays
 })
 
 export const toBatchFormatEdit = item => ({
   batchName: item.batch?.batchName,
   batchId: item.batch?.id,
   quantity: item.quantity,
+  hasSecondaryDlc: item.batch.hasSecondaryDlc,
   openingDate: formatPayloadDate(item.openingDate),
-  dlc: item.batch?.dlcDays
+  dlc: item.dlc,
+  dlcDays: item.dlcDays
 })
