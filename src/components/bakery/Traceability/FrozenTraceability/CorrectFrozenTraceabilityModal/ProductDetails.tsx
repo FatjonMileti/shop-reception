@@ -9,8 +9,9 @@ import {
 } from '@fullscreendigital/carrefour-dex-fe'
 import { AddActionIcon, DeleteActionIcon } from 'icons'
 import dayjs from 'dayjs'
-import { toBoolean } from 'utils/helpers'
+import { formatPayloadDate, toBoolean } from 'utils/helpers'
 import { useSelectProductSearch } from '../../useSelectProductSearch'
+import { thermalContiotionOptions } from '../../interfaces'
 
 interface ProductDetailsProps {
   onCancel: () => void
@@ -82,7 +83,6 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             error={!!formik.errors.product}
             helperText={formik.errors.product as string}
           />
-
         </Grid>
 
         <Grid item xs={3}>
@@ -152,14 +152,10 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             variant="outlined"
             label="Stare termica"
             disableClearable
-            options={[
-              { value: 'BAKED', label: 'COPT' },
-              { value: 'UNBAKED', label: 'NECOPT' }
-            ]}
-            defaultValue={{
-              value: formik.values.thermalCondition || '',
-              label: formik.values.thermalCondition || ''
-            }}
+            options={thermalContiotionOptions}
+            value={
+              thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) || null
+            }
             onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
             required
             error={!!formik.errors.thermalCondition}
@@ -253,7 +249,39 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
                 infoIcon={formik.values?.product?.metricUnit || ''}
               />
             </Grid>
-            <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
+
+            {item.hasSecondaryDlc && (
+              <Grid item xs={3}>
+                <DatePicker
+                  label="Data deschidere"
+                  onChange={value =>
+                    formik.setFieldValue(
+                      `traceabilityFrozenList[${index}].openingDate`,
+                      formatPayloadDate(value)
+                    )
+                  }
+                  variant="outlined"
+                  required
+                  helperText={formik.errors?.traceabilityFrozenList?.[index]?.openingDate as string}
+                  error={!!formik.errors?.traceabilityFrozenList?.[index]?.openingDate}
+                  value={
+                    formik.values?.traceabilityFrozenList?.[index]?.openingDate
+                      ? dayjs(formik.values?.traceabilityFrozenList?.[index]?.openingDate)
+                      : undefined
+                  }
+                  // maxDate={dayjs()}
+                  style={{ display: 'flex' }}
+                />
+              </Grid>
+            )}
+            <Grid
+              item
+              xs={3}
+              display={'flex'}
+              alignSelf={'flex-start'}
+              justifyContent={'flex-end'}
+              sx={{ marginTop: '17px' }}
+            >
               <Button
                 onClick={() => onDeleteBatch(item.batchId)}
                 variant="outlined"
