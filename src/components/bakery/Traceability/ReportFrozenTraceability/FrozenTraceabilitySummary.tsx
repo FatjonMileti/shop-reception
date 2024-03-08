@@ -42,7 +42,7 @@ const FrozenTraceabilitySummary = ({ item }) => {
           <Grid container>
             {summaryCapsules.map(capsule => (
               <Grid item mt={1} mr={1}>
-                <Capsule label={capsule.label} value={capsule.value} />
+                <Capsule label={capsule.label} value={capsule.value} valueColor={'#004f9b'} />
               </Grid>
             ))}
           </Grid>

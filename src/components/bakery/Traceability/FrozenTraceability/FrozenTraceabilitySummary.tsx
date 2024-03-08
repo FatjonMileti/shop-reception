@@ -5,14 +5,8 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import React from 'react'
 
-const FrozenTraceabilitySummary = ({item}) => {
-
-  const {
-    chargeNumber,
-    dlc,
-    product,
-    productionDate,
-  } = item
+const FrozenTraceabilitySummary = ({ item }) => {
+  const { chargeNumber, dlc, product, productionDate } = item
 
   const summaryCapsules = [
     { label: 'Data productie', value: formatBakeryPayloadDate(productionDate) },
@@ -20,7 +14,7 @@ const FrozenTraceabilitySummary = ({item}) => {
     { label: 'Familie', value: product.familyName },
     { label: 'Subfamilie', value: product.subfamily },
     { label: 'Sarja', value: chargeNumber },
-    { label: 'UM', value: product.metricUnit },
+    { label: 'UM', value: product.metricUnit }
   ]
 
   return (
@@ -36,7 +30,7 @@ const FrozenTraceabilitySummary = ({item}) => {
           <Grid container>
             {summaryCapsules.map((capsule, index) => (
               <Grid item mt={1} mr={1} key={index}>
-                <Capsule label={capsule.label} value={capsule.value} />
+                <Capsule label={capsule.label} value={capsule.value} valueColor={'#004f9b'} />
               </Grid>
             ))}
           </Grid>
