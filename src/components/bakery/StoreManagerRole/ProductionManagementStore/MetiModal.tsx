@@ -26,10 +26,6 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
   const [isStockLoading, setIsStockLoading] = useState<boolean>(false)
   const [stockTableItems, setStockTableItems] = useState<any[]>([])
 
-  useEffect(() => {
-    if (isModalOpen && metiProduct.id) fetchProductRecipe()
-  }, [isModalOpen])
-
   const {
     data: productRecipe,
     isLoading: isProductRecipeLoading,
@@ -37,7 +33,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
   } = useQuery(
     ['product-recipe'],
     async () => {
-      const result = await makeCoreGetRequest(`/bakery/product/recipe/${metiProduct?.id}`)
+      const result = await makeCoreGetRequest(`/bakery/product/recipe/${metiProduct.id}`)
       return result || null
     },
     {
@@ -51,6 +47,10 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
       }
     }
   )
+
+  useEffect(() => {
+    if (isModalOpen && metiProduct.id) fetchProductRecipe()
+  }, [isModalOpen, metiProduct])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -118,6 +118,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
       })
     }
   }
+
   return (
     <Modal
       isModalOpen={isModalOpen}
@@ -125,7 +126,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
       modalTitle={metiProduct?.productName || ''}
       modalWidth="50%"
     >
-      {!metiProduct || isProductRecipeLoading ? (
+      {isProductRecipeLoading ? (
         <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
       ) : (
         <Grid container rowSpacing={3.5}>
