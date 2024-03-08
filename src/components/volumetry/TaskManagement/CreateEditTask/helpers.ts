@@ -4,27 +4,29 @@ export const getInitialValues = item => {
   return {
     ...(item?.id ? { id: item?.id } : {}),
     name: item?.name ?? '',
-    departmentAlias: item?.departmentAlias
+    departmentAlias: item
       ? {
-          label: item.departmentAlias,
-          value: item.departmentAlias
+          label: item.departmentAliasValue,
+          value: item.departmentAliasId
         }
       : null,
-    volumetryLocationCategory: item?.volumetryLocationCategory
-      ? { label: item.volumetryLocationCategory, value: item.volumetryLocationCategory }
+    volumetryLocationCategory: item
+      ? { label: item.locationCategoryValue, value: item.locationCategoryId }
       : null,
     recommendedStartHour: item?.recommendedStartHour ?? null,
     recommendedEndHour: item?.recommendedEndHour ?? null,
-    frequency: item?.frequency ? { label: item.frequency, value: item.frequency } : null,
-    defaultWorkload: item?.defaultWorkload ?? '',
-    standardProductivityValue: item?.standardProductivityValue ?? '',
-    measurementUnit: item?.measurementUnit
-      ? { label: item.measurementUnit, value: item.measurementUnit }
+    frequency: item?.frequency
+      ? { label: item.frequency[0].value, value: item.frequency[0].key }
       : null,
-    workVolumeSource: item?.workVolumeSource
-      ? { label: item.workVolumeSource, value: item.workVolumeSource }
+    // defaultWorkload: item?.defaultWorkload ?? '',
+    standardProductivityValue: item?.standardProductivity ?? '',
+    measurementUnit: item
+      ? { label: item.measurementUnitValue, value: item.measurementUnitId }
       : null,
-    priority: item?.priority ? { label: item.priority, value: item.priority } : null
+    workVolumeSource: item
+      ? { label: item.workVolumeSourceValue, value: item.workVolumeSourceId }
+      : null,
+    priority: item ? { label: item.priorityValue, value: item.priorityId } : null
   }
 }
 

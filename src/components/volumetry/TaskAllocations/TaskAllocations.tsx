@@ -9,7 +9,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { EditActionIcon } from 'icons'
 import { useEffect, useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
-import { getDepartmentsOptions } from '../api'
+import { getDepartmentAliasesOptions } from '../api'
 import { ValueLabelInterface } from '../interfaces'
 import { handleQueryError } from 'utils/helpers'
 import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
@@ -79,7 +79,7 @@ const TaskAllocations = () => {
   }, [shouldRefreshAllocationsData])
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
-    getDepartmentsOptions(showNotification, setDepartmentFilterValue)
+    getDepartmentAliasesOptions(showNotification, setDepartmentFilterValue)
 
   const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
