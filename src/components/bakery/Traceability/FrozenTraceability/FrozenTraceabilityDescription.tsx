@@ -6,7 +6,7 @@ import { AccordionDetailsWrapper, BodyItem } from '../ProductManagementTraceabil
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import { Fragment } from 'react'
 
-const FrozenTraceabilityDescription = ({item, chargeItem}) => {
+const FrozenTraceabilityDescription = ({ item, chargeItem }) => {
   const { traceabilityFrozenList, product } = item
 
   const bodyItemValue = (batchItem, frozenItem, columnField) => {
@@ -34,10 +34,7 @@ const FrozenTraceabilityDescription = ({item, chargeItem}) => {
                 {column.render ? (
                   column.render(chargeItem)
                 ) : (
-                  <BodyItem
-                    name={column.title}
-                    value={chargeItem[column?.field]}
-                  />
+                  <BodyItem name={column.title} value={chargeItem[column?.field]} />
                 )}
               </Fragment>
             )
@@ -45,7 +42,7 @@ const FrozenTraceabilityDescription = ({item, chargeItem}) => {
         </Grid>
       </AccordionDetailsWrapper>
       <Grid item my={1} mr={1}>
-        {traceabilityFrozenList.map((frozenItem) => (
+        {traceabilityFrozenList.map(frozenItem => (
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -67,25 +64,44 @@ const FrozenTraceabilityDescription = ({item, chargeItem}) => {
                 </Typography>
 
                 <Grid item my={0.5} mx={1}>
-                  <Capsule label="Cod METI" value={frozenItem?.batch?.product?.metiCode} />
+                  <Capsule
+                    label="Cod METI"
+                    value={frozenItem?.batch?.product?.metiCode}
+                    valueColor={'#004f9b'}
+                  />
                 </Grid>
 
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Furnizor" value={frozenItem.batch.supplier.supplierName} />
+                  <Capsule
+                    label="Furnizor"
+                    value={frozenItem.batch.supplier.supplierName}
+                    valueColor={'#004f9b'}
+                  />
                 </Grid>
 
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Furnizor (Cod Meti)" value={frozenItem?.batch?.supplier?.supplierCode} />
+                  <Capsule
+                    label="Furnizor (Cod Meti)"
+                    value={frozenItem?.batch?.supplier?.supplierCode}
+                    valueColor={'#004f9b'}
+                  />
                 </Grid>
 
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Familie" value={frozenItem?.batch?.product?.familyName} />
+                  <Capsule
+                    label="Familie"
+                    value={frozenItem?.batch?.product?.familyName}
+                    valueColor={'#004f9b'}
+                  />
                 </Grid>
 
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Subfamilie" value={frozenItem?.batch?.product?.subfamily} />
+                  <Capsule
+                    label="Subfamilie"
+                    value={frozenItem?.batch?.product?.subfamily}
+                    valueColor={'#004f9b'}
+                  />
                 </Grid>
-
               </Grid>
             </AccordionSummary>
 
@@ -98,10 +114,7 @@ const FrozenTraceabilityDescription = ({item, chargeItem}) => {
                         {column.render ? (
                           column.render(frozenItem, chargeItem)
                         ) : (
-                          <BodyItem
-                            name={column.title}
-                            value={chargeItem[column?.field]}
-                          />
+                          <BodyItem name={column.title} value={chargeItem[column?.field]} />
                         )}
                       </Fragment>
                     )
