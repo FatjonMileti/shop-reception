@@ -101,7 +101,7 @@ export const EditFrozenTraceabilityModal = ({
           />
         </Grid>
 
-        {!item?.createdUser && (
+        {!item?.isCreatedUser && (
           <Grid item xs={6} display="flex" alignItems={'center'}>
             <RadioButtonGroup
               label="Bifa verificare de catre validator Trasabilitate"
@@ -126,7 +126,7 @@ export const EditFrozenTraceabilityModal = ({
             />
           </Grid>
         )}
-        <Grid item xs={!item?.createdUser ? 6 : 12}>
+        <Grid item xs={!item?.isCreatedUser ? 6 : 12}>
           <Input
             type="text"
             variant="outlined"
@@ -135,7 +135,7 @@ export const EditFrozenTraceabilityModal = ({
             value={formik.values.productDestination}
             name="productDestination"
             required
-            fullWidth={item?.createdUser}
+            fullWidth={item?.isCreatedUser}
             error={!!formik.errors.productDestination}
             helperText={formik.errors.productDestination as string}
           />
