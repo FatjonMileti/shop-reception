@@ -1,19 +1,20 @@
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import { BodyItem } from '../ProductManagementTraceability/AccordionTable'
 import { IconCell } from 'components/core-ui/IconCell'
+import { thermalContiotionOptions } from '../interfaces'
 
 export const columns: any[] = [
   {
     title: 'Articol compozant din reteta',
     field: 'componentCode',
     // width: '100px',
-    align: 'left',
+    align: 'left'
   },
   {
     title: 'MP/ baze/ ambalaje',
     field: 'componentName',
     // width: '120px',
-    align: 'left',
+    align: 'left'
   },
   {
     title: 'Cant. articol compozant din reteta',
@@ -24,45 +25,45 @@ export const columns: any[] = [
   },
   {
     title: 'Lot MP/ baze/ ambalaje',
-    field: 'batchName',
+    field: '',
+    render: row => row?.childTraceability?.chargeNumber || row?.batchName || '',
     // width: '100px',
-    align: 'left',
+    align: 'left'
   },
   {
     title: 'Cant. MP/ baze/ ambalaje',
-    field: 'batchQuantity',
+    field: 'quantity',
     // width: '100px',
-    align: 'left',
+    align: 'left'
   },
   {
     title: 'Data intrare lot/Data productie sarja',
     field: 'productionDate',
+    render: row =>
+      (row?.childTraceability?.productionDate &&
+        formatBakeryPayloadDate(row?.childTraceability?.productionDate)) ||
+      (row?.productionDate && formatBakeryPayloadDate(row?.productionDate)) ||
+      '',
     // width: '100px',
-    align: 'left',
+    align: 'left'
   },
   {
     title: 'Furnizor',
     field: 'storeName',
     // width: '100px',
-    align: 'left',
+    align: 'left'
   },
   {
     title: 'DLC MP / baze',
     field: 'dlc',
     // width: '100px',
-    align: 'left',
-  },
-  {
-    title: 'DLC sec MP / baze',
-    field: 'dlcSec',
-    // width: '100px',
-    align: 'left',
+    align: 'left'
   },
   {
     title: 'Data deschidere lot',
     field: 'openingDate',
     // width: '100px',
-    align: 'left',
+    align: 'left'
   }
 ]
 
@@ -75,23 +76,33 @@ export const toTableRowItems = (items: any[]) => {
 
     batchName: item.batch?.batchName || '',
     batchQuantity: item.batch?.batchQuantity || '',
+    quantity: item.quantity || '',
     productionDate: formatBakeryPayloadDate(item.batch?.entryDate) || '',
 
     storeName: item?.batch?.supplier?.supplierName || '',
     dlc: formatBakeryPayloadDate(item.dlc) || '',
-    dlcSec: formatBakeryPayloadDate(item.dlc) || '',
-    openingDate: formatBakeryPayloadDate(item.openingDate) || ''
+    openingDate: formatBakeryPayloadDate(item.openingDate) || '',
+
+    childTraceability: item.childTraceability
   }))
 }
 
 export const infoColumns: any[] = [
   {
     title: 'Operator productie',
-    field: 'createdBy'
+    field: 'productionOperator'
   },
   {
     title: 'Stare termica',
-    field: 'thermalCondition'
+    field: 'thermalCondition',
+    render: row => (
+      <BodyItem
+        name="Stare termica"
+        value={
+          thermalContiotionOptions.find(thC => thC.value === row.thermalCondition)?.label || ''
+        }
+      />
+    )
   },
   {
     title: 'Conform',
@@ -114,7 +125,8 @@ export const infoColumns: any[] = [
   },
   {
     title: 'Data introducere',
-    field: 'createdDate'
+    field: 'createdDate',
+    render: row => <BodyItem name="Data introducere" value={formatBakeryPayloadDate(row.createdDate)} />
   },
   {
     title: 'Verificare de catre validator trasabilitate',
@@ -142,10 +154,12 @@ export const infoColumns: any[] = [
   },
   {
     title: 'Data productiei',
-    field: 'productionDate'
+    field: 'productionDate',
+    render: row => <BodyItem name="Data productiei" value={formatBakeryPayloadDate(row.productionDate)} />
   },
   {
     title: 'DLC Prod. Fab.',
-    field: 'dlc'
+    field: 'dlc',
+    render: row => <BodyItem name="DLC Prod. Fab." value={formatBakeryPayloadDate(row.dlc)} />
   }
 ]

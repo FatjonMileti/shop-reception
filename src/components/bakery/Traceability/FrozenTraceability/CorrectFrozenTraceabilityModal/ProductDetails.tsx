@@ -11,17 +11,13 @@ import { AddActionIcon, DeleteActionIcon } from 'icons'
 import dayjs from 'dayjs'
 import { formatPayloadDate, toBoolean } from 'utils/helpers'
 import { useSelectProductSearch } from '../../useSelectProductSearch'
+import { thermalContiotionOptions } from '../../interfaces'
 
 interface ProductDetailsProps {
   onCancel: () => void
   onSelectBatch: () => void
   formik: any
 }
-
-const thermalContiotionOptions = [
-  { value: 'BAKED', label: 'COPT' },
-  { value: 'UNBAKED', label: 'NECOPT' }
-]
 
 export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetailsProps) => {
   const selectProductSearch = useSelectProductSearch({
