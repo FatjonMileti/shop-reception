@@ -9,14 +9,14 @@ const EmployeeCapsule = (props: EmployeeCapsuleProps) => {
   return (
     <Box className={s.capsules}>
       <Capsule
-        label={'Interval orar'}
+        label="Interval orar"
         value={employee.timeInterval}
         labelColor={customCapsuleColors.label}
         valueColor={customCapsuleColors.value}
       />
       <Capsule
-        label={'Volum'}
-        value={`${employee.workload}`}
+        label="Volum"
+        value={employee.workload}
         labelColor={customCapsuleColors.label}
         valueColor={customCapsuleColors.value}
       />

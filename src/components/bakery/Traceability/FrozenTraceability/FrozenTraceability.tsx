@@ -35,6 +35,7 @@ export const FrozenTraceability = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [itemIdToCorrect, setItemIdToCorrect] = useState(null)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
@@ -191,6 +192,7 @@ export const FrozenTraceability = () => {
         <AddFrozenTraceabilityModal
           isModalOpen={isModalOpen}
           closeModal={() => setIsModalOpen(false)}
+          setShouldRefreshData={setShouldRefreshData}
         />
         <CorrectFrozenTraceabilityModal
           isModalOpen={!!itemIdToCorrect}
@@ -248,6 +250,8 @@ export const FrozenTraceability = () => {
           rowActionsWidth="200px"
           rowsPerPage={isXs ? 5 : 25}
           rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
+          setShouldRefreshData={setShouldRefreshData}
+          shouldRefreshData={shouldRefreshData}
         />
       </>
     </div>
