@@ -30,9 +30,18 @@ export const validationSchema = Yup.object().shape({
     Yup.object().shape({
       batchId: Yup.string(),
       quantity: Yup.number(),
-      // openingDate: Yup.date(),
-      dlc: Yup.string().nullable()
-    })
+      openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
+        if(hasSecondaryDlc) {
+          return schema.required('Data obligatorie')
+        } else {
+          return schema.nullable()
+        }
+
+      })
+        ,
+      dlc: Yup.string().nullable(),
+      hasSecondaryDlc: Yup.boolean()
+    }).required()
   )
 })
 
@@ -40,8 +49,9 @@ export const toBatchFormat = (item, quantity) => ({
   batchName: item.batchName,
   batchId: item.id,
   quantity: quantity, //item.batchQuantity,
-  openingDate: item.entryDate,
-  dlc: item.dlcDays
+  openingDate: undefined,
+  dlc: item.dlcDays,
+  hasSecondaryDlc: item?.hasSecondaryDlc
 })
 
 export const toBatchFormatEdit = batches => {
