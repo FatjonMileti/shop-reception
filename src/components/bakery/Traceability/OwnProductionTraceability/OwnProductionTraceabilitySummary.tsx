@@ -4,11 +4,23 @@ import { Grid, Typography } from '@mui/material'
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import React from 'react'
+import { useLocation } from 'react-router'
 
 const OwnProductionTraceabilitySummary = ({ item }) => {
   const { chargeNumber, dlc, product, productionDate } = item
 
+  const { pathname } = useLocation()
+  const isFormator = pathname.includes('/formator')
+
   const summaryCapsules = [
+    ...(isFormator
+      ? [
+          {
+            label: 'Nume magazin',
+            value: item?.store?.name || ''
+          }
+        ]
+      : []),
     { label: 'Data productie', value: formatBakeryPayloadDate(productionDate) },
     { label: 'Cod METI', value: product.metiCode },
     { label: 'Familie', value: product.familyName },
