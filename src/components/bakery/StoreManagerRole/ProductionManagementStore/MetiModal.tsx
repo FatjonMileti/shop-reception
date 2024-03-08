@@ -59,7 +59,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/sales/history',
-          filters: [],
+          filters: [{name: 'id', value: metiProduct.id}],
           tableFilters,
           page,
           rowsPerPage,
@@ -98,7 +98,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/store/stock/presentation',
-          filters: [],
+          filters: [{name: 'id', value: metiProduct.id}],
           tableFilters,
           page,
           rowsPerPage,
