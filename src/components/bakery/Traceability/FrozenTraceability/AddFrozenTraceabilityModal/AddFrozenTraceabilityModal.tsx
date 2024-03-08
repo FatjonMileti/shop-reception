@@ -16,10 +16,12 @@ import { Product } from '../../ReceivedProducts/interfaces'
 interface AddFrozenTraceabilityModalProps {
   isModalOpen: boolean
   closeModal: () => void
+  setShouldRefreshData: Function
 }
 export const AddFrozenTraceabilityModal = ({
   isModalOpen,
-  closeModal
+  closeModal,
+  setShouldRefreshData
 }: AddFrozenTraceabilityModalProps) => {
   const { showNotification } = useNotification()
   const [step, setStep] = useState<number>(0)
@@ -80,6 +82,7 @@ export const AddFrozenTraceabilityModal = ({
       }
 
       frozenTraceabilityMutation.mutate(payload)
+      setShouldRefreshData(true)
     }
   })
 
@@ -91,7 +94,6 @@ export const AddFrozenTraceabilityModal = ({
   }
 
   const addNewFrozenItems = (itemsToAdd: any[]) => {
-
     if (itemsToAdd.length === 0) return
 
     const newItems = itemsToAdd.filter(

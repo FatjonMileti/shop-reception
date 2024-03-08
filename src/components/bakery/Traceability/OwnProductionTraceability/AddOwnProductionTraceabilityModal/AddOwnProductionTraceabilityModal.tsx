@@ -23,10 +23,12 @@ import { SelectCharge } from './SelectCharge'
 interface AddOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
   closeModal: () => void
+  setShouldRefreshData: Function
 }
 export const AddOwnProductionTraceabilityModal = ({
   isModalOpen,
-  closeModal
+  closeModal,
+  setShouldRefreshData
 }: AddOwnProductionTraceabilityModalProps) => {
   const { showNotification } = useNotification()
   const [step, setStep] = useState<number>(0)
@@ -83,6 +85,7 @@ export const AddOwnProductionTraceabilityModal = ({
           message: `Cannot save without batch and charge.`,
           type: 'error'
         })
+
         return
       }
 
@@ -114,6 +117,7 @@ export const AddOwnProductionTraceabilityModal = ({
       }
 
       ownTraceabilityMutation.mutate(payload)
+      setShouldRefreshData(true)
     }
   })
 
