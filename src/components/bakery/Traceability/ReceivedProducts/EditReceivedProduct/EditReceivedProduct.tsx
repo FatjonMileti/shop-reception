@@ -177,7 +177,7 @@ export const EditReceivedProduct = ({
               </Grid>
             </Grid>
 
-            {receivedProductQuery?.data?.createdUser === false && (
+            {receivedProductQuery?.data?.isCreatedUser === false && (
               <Grid item xs={12} style={{ display: 'grid' }}>
                 <RadioButtonGroup
                   label="Bifa Verificare de catre validator Trasabilitate"

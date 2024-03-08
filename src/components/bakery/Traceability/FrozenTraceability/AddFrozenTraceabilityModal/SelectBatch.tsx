@@ -32,7 +32,7 @@ export const SelectBatch = ({
       setIsLoading(true)
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/batch',
+          url: '/bakery/batch/assign',
           page,
           rowsPerPage,
           filters: [

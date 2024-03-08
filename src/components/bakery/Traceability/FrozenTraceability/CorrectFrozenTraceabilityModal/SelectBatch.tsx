@@ -26,7 +26,7 @@ export const SelectBatch = ({ formik, onContinue, onCancel }: SelectBatchProps) 
       setIsLoading(true)
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/batch',
+          url: '/bakery/batch/assign',
           page,
           rowsPerPage,
           filters: [

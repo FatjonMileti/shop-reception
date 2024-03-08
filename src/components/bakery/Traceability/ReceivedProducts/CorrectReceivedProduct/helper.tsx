@@ -33,31 +33,11 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
       (hasExpirationDate, schema) => {
         return hasExpirationDate
           ? Yup.date()
-              .min(new Date(), 'Data de expirare nu poate fi în trecut.')
+              .min(dayjs().startOf('day'), 'Data de expirare nu poate fi în trecut.')
               .required('Câmpul data expirare trebuie completat.')
           : schema.nullable();
       }
     ),
-
-    // expirationDate: Yup.mixed<dayjs.Dayjs>().when(
-    //   'hasExpirationDate',
-    //   ([hasExpirationDate], schema) => {
-    //     return hasExpirationDate
-    //       ? Yup.date()
-    //           .min(new Date(), 'Data de expirare nu poate fi in trecut.')
-    //           .required('Campul data expirare trebuie completat.')
-    //       : schema.nullable()
-    //   }
-    // ),
-
-    // expirationDate: Yup.mixed().when('hasExpirationDate', (hasExpirationDate, schema) => {
-    //   return hasExpirationDate
-    //     ? schema
-    //         .nullable()
-    //         .required('Expiration date is required')
-    //         .min(dayjs(), 'Expiration date must be today or later')
-    //     : schema.nullable();
-    // }),
 
     hasSecondaryDLC: Yup.boolean().required('This field is required'),
 
