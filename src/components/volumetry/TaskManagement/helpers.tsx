@@ -20,8 +20,8 @@ export const buildTableFilterFields = (
     filter: <Input type="text" name="name" label="Nume" variant="outlined" />
   },
   {
-    name: 'genericDepartmentId',
-    label: 'Dapartament',
+    name: 'departmentAliasId',
+    label: 'Departament',
     type: 'autocomplete',
     value: '',
     filter: <Autocomplete label="Departament" variant="outlined" options={departmentOptions} />
@@ -56,14 +56,6 @@ export const buildTableFilterFields = (
     type: 'autocomplete',
     value: '',
     filter: <Autocomplete label="Categorie" variant="outlined" options={categoryOptions} />
-  },
-
-  {
-    name: 'isActive',
-    label: 'Stare',
-    type: 'autocomplete',
-    value: '',
-    filter: <Autocomplete label="Stare" variant="outlined" options={STATE_OPTIONS} />
   }
 ]
 

@@ -102,7 +102,7 @@ const TaskManagement = () => {
         <Table
           hideCheckbox
           orderBy="name"
-          order="desc"
+          order="asc"
           columns={columns}
           items={tableItems}
           fetchData={fetchData}

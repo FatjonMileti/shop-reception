@@ -158,6 +158,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             variant="outlined"
             style={{ width: '100%' }}
             forceDesktop
+            ampm={false}
           />
         </Grid>
 
@@ -172,6 +173,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             variant="outlined"
             style={{ width: '100%' }}
             forceDesktop
+            ampm={false}
           />
         </Grid>
 
@@ -249,7 +251,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
           <AsyncAutocomplete
             variant="outlined"
             name="measurementUnit"
-            label="UM standard productivitate"
+            label="Unitate de masura"
             value={formik.values.measurementUnit}
             options={measurementUnitsOptions}
             onChange={value => formik.setFieldValue('measurementUnit', value)}

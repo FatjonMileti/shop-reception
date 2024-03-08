@@ -364,7 +364,7 @@ export const setEmployeesAttendance = (
     ['employees-attendance', departmentId],
     async () => {
       const employees = await makeCoreGetRequest(
-        `/volumetry/workers/shifts?filterBy=genericDepartmentId&filterValue=${departmentId}`
+        `/volumetry/workers/shifts?filterBy=departmentAliasId&filterValue=${departmentId}`
       )
       const employeesAttendance = toEmployeesAttendance(employees) || []
       setEmployees(employeesAttendance)
