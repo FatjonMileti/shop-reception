@@ -251,7 +251,7 @@ export const CorrectReceivedProduct = ({
                   required
                   value={form.values.expirationDate}
                   variant="outlined"
-                  minDate={form.values.entryDate}
+                  minDate={dayjs()}
                   disabled={!form.values.hasExpirationDate}
                 />
               </Grid>

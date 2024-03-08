@@ -49,7 +49,7 @@ export const toTableRowItem = (item: Partial<ReceivedProduct>): ReceivedProduct 
   verified: item.verified || false,
   imageUrl: item.imageUrl || '',
   createdBy: item.createdBy || '',
-  createdUser: item.createdUser || false
+  isCreatedUser: item.isCreatedUser || false
 })
 
 export const columns: Column[] = [
