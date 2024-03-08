@@ -59,7 +59,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/sales/history',
-          filters: [],
+          filters: [{name: 'id', value: metiProduct.id}],
           tableFilters,
           page,
           rowsPerPage,
@@ -98,7 +98,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/store/stock/presentation',
-          filters: [],
+          filters: [{name: 'id', value: metiProduct.id}],
           tableFilters,
           page,
           rowsPerPage,
@@ -124,7 +124,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
       isModalOpen={isModalOpen}
       closeModal={closeModal}
       modalTitle={metiProduct?.productName || ''}
-      modalWidth="50%"
+      modalWidth="80%"
     >
       {isProductRecipeLoading ? (
         <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
