@@ -58,7 +58,7 @@ const TaskAllocations = () => {
         const response = await makeCoreGetRequest(
           toTableGETUrl({
             url: '/volumetry/tasks/aggregation/summary',
-            filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }],
+            filters: [{ name: 'departmentAliasId', value: departmentFilterValue.value }],
             tableFilters,
             page,
             rowsPerPage
@@ -112,7 +112,7 @@ const TaskAllocations = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/tasks/aggregation/summary',
-          filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }],
+          filters: [{ name: 'departmentAliasId', value: departmentFilterValue.value }],
           tableFilters,
           page,
           rowsPerPage
