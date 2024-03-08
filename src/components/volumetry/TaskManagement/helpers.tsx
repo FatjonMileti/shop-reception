@@ -74,7 +74,7 @@ export const mapToValueLabel = (list): AutocompleteOption[] => {
 export const columns = [
   {
     title: 'Departament / Raioane',
-    field: 'rayonsOrDepartment',
+    field: 'departmentAlias',
     align: 'left',
     type: 'string'
   },
@@ -101,14 +101,14 @@ export const columns = [
     collapsible: true,
     disableSorting: true
   },
-  {
-    title: 'Volum estimat',
-    field: 'defaultWorkload',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    disableSorting: true
-  },
+  // {
+  //   title: 'Volum estimat',
+  //   field: 'defaultWorkload',
+  //   align: 'left',
+  //   type: 'string',
+  //   collapsible: true,
+  //   disableSorting: true
+  // },
   {
     title: 'Productivitate standard',
     field: 'standardProductivity',
@@ -139,25 +139,13 @@ export const columns = [
     align: 'left',
     type: 'string',
     collapsible: true
-  },
-  {
-    title: 'Activ',
-    field: 'isActive',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    render: row => (
-      <Box>
-        <IconCell value={row.isActive ? 'active' : 'inactive'} />
-      </Box>
-    )
   }
 ]
 
 export const toTableRowItems = items =>
   items.map(item => ({
     id: item.id || '',
-    rayonsOrDepartment: item.rayonsOrDepartment || '',
+    departmentAlias: item.departmentAlias || '',
     name: item.name || '',
     recommendedTimeInterval: item.recommendedTimeInterval || '',
     frequency: item.frequency || '',

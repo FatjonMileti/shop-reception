@@ -6,7 +6,7 @@ import { PriorityColors } from './helpers'
 const TaskSummary = ({ item, hideDetails = false }) => {
   // TODO: To add type when db schema is defined
   const {
-    rayonsOrDepartment,
+    departmentAlias,
     taskName,
     recommendedInterval,
     standardProductivity,
@@ -25,7 +25,7 @@ const TaskSummary = ({ item, hideDetails = false }) => {
     <Grid container flexDirection="column">
       <Grid item>
         <Typography className={s.departmentName} fontWeight={700}>
-          {rayonsOrDepartment}
+          {departmentAlias}
         </Typography>
       </Grid>
       <Grid item>

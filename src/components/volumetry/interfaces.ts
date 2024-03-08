@@ -37,24 +37,27 @@ export interface TaskManagementTableItem {
 export interface TaskManagementItem {
   id?: string | number
   name: string
-  rayonsOrDepartment?: AsyncAutocompleteOption
   recommendedStartHour: string
   recommendedEndHour: string
-  frequency: AsyncAutocompleteOption
-  defaultWorkload: number
+  frequency: AsyncAutocompleteOption[]
+  // defaultWorkload: number
   standardProductivityValue: number
   measurementUnit: AsyncAutocompleteOption
   workVolumeSource: AsyncAutocompleteOption
   priority: AsyncAutocompleteOption
-  isActive: boolean
   volumetryLocationCategory: AsyncAutocompleteOption
-  rayons: AsyncAutocompleteOption[]
+  departmentAlias: AsyncAutocompleteOption
 }
 
 export interface Department {
   id: number
   departmentName: string
   description: string
+}
+
+export interface DepartmentAlias {
+  id: number
+  alias: string
 }
 
 export type CRUDAction = 'create' | 'read' | 'edit' | 'delete'
