@@ -20,6 +20,7 @@ export const columns: any[] = [
     field: 'componentQuantity',
     // width: '100px',
     align: 'left',
+    render: row => row.componentQuantity?.toFixed(2)
   },
   {
     title: 'Lot MP/ baze/ ambalaje',
