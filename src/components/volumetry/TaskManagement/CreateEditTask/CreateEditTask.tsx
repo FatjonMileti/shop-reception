@@ -186,6 +186,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             error={!!formik.errors.frequency}
             helperText={formik.errors.frequency as string}
             required
+            multiple
           />
         </Grid>
 

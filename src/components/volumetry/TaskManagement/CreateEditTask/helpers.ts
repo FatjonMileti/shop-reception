@@ -1,5 +1,7 @@
 import * as Yup from 'yup'
 
+const getFrequencyValue = frequency => frequency.map(f => ({ label: f.value, value: f.key }))
+
 export const getInitialValues = item => {
   return {
     ...(item?.id ? { id: item?.id } : {}),
@@ -15,9 +17,7 @@ export const getInitialValues = item => {
       : null,
     recommendedStartHour: item?.recommendedStartHour ?? null,
     recommendedEndHour: item?.recommendedEndHour ?? null,
-    frequency: item?.frequency
-      ? { label: item.frequency[0].value, value: item.frequency[0].key }
-      : null,
+    frequency: item?.frequency ? getFrequencyValue(item.frequency) : [],
     // defaultWorkload: item?.defaultWorkload ?? '',
     standardProductivityValue: item?.standardProductivity ?? '',
     measurementUnit: item
@@ -48,11 +48,13 @@ export const getValidationSchema = item =>
       .required('Acest camp este obligatoriu.'),
     recommendedStartHour: Yup.date().required('Acest camp este obligatoriu.'),
     recommendedEndHour: Yup.date().required('Acest camp este obligatoriu.'),
-    frequency: Yup.object()
-      .shape({
-        label: Yup.string().required(),
-        value: Yup.string().required()
-      })
+    frequency: Yup.array()
+      .of(
+        Yup.object().shape({
+          label: Yup.string().required(),
+          value: Yup.string().required()
+        })
+      )
       .required('Acest camp este obligatoriu.'),
     // defaultWorkload: Yup.string().required('Acest camp este obligatoriu.'),
     standardProductivityValue: Yup.string().required('Acest camp este obligatoriu.'),

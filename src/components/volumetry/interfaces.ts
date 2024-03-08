@@ -39,7 +39,7 @@ export interface TaskManagementItem {
   name: string
   recommendedStartHour: string
   recommendedEndHour: string
-  frequency: AsyncAutocompleteOption
+  frequency: AsyncAutocompleteOption[]
   // defaultWorkload: number
   standardProductivityValue: number
   measurementUnit: AsyncAutocompleteOption

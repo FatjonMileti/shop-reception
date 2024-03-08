@@ -6,7 +6,7 @@ export const toTaskPayload = (values: TaskManagementItem) => ({
   departmentAliasId: values.departmentAlias.value,
   recommendedStartHour: dayjs(values.recommendedStartHour).format('HH:mm'),
   recommendedEndHour: dayjs(values.recommendedEndHour).format('HH:mm'),
-  frequency: [values.frequency.value],
+  frequency: values.frequency.map(f => f.value),
   locationCategoryId: values.volumetryLocationCategory.value,
   standardProductivity: +values.standardProductivityValue,
   workVolumeSourceId: values.workVolumeSource.value,
