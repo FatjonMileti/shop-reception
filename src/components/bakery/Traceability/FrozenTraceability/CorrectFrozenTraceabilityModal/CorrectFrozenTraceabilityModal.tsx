@@ -95,6 +95,24 @@ export const CorrectFrozenTraceabilityModal = ({
     closeModal()
   }
 
+  const addNewFrozenItems = (itemsToAdd: any[]) => {
+    if (itemsToAdd.length === 0) return
+
+    const newItems = itemsToAdd.filter(
+      itemToAdd =>
+        !formik.values?.traceabilityFrozenList.some(
+          existingItem => existingItem.batchId === itemToAdd.id
+        )
+    )
+
+    if (newItems.length === 0) return
+
+    formik.setFieldValue('traceabilityFrozenList', [
+      ...formik.values?.traceabilityFrozenList,
+      ...newItems.map(sr => toBatchFormat(sr, formik.values?.quantity))
+    ])
+  }
+
   return (
     <Modal
       isModalOpen={isModalOpen}
@@ -119,12 +137,7 @@ export const CorrectFrozenTraceabilityModal = ({
                 />,
                 <SelectBatch
                   onContinue={frozenItems => {
-                    if (frozenItems.length > 0) {
-                      formik.setFieldValue('traceabilityFrozenList', [
-                        ...formik.values?.traceabilityFrozenList,
-                        ...frozenItems.map(sr => toBatchFormat(sr, formik.values?.quantity))
-                      ])
-                    }
+                    addNewFrozenItems(frozenItems)
                     setStep(0)
                   }}
                   onCancel={() => {

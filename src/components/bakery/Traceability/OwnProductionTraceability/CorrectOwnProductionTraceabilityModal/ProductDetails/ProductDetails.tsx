@@ -72,6 +72,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
               } else {
                 formik.setFieldValue('product', null)
               }
+              formik.setFieldValue('traceabilityProductionList', [])
             }}
             value={
               formik.values?.product
@@ -116,7 +117,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
 
           <Grid item xs={3}>
             <Input
-              type="text"
+              type="number"
               variant="outlined"
               label="Cantitate sarja"
               onChange={({ currentTarget: { value } }) => {
