@@ -19,6 +19,7 @@ import {
 import { SelectOrScanProduct } from './SelectOrScanProduct'
 import { Product } from '../../ReceivedProducts/interfaces'
 import { SelectCharge } from './SelectCharge'
+import dayjs from 'dayjs'
 
 interface AddOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -56,12 +57,12 @@ export const AddOwnProductionTraceabilityModal = ({
     }
   )
 
-  const initialValues = useMemo(() => getInitialValues(selectedProduct), [selectedProduct?.id])
+  const initialValues = useMemo(() => getInitialValues(), [])
 
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: false,
-    validationSchema: validationSchema,
+    validationSchema,
     initialValues: initialValues,
     onSubmit: async (values: any) => {
       const payload = {
@@ -77,7 +78,14 @@ export const AddOwnProductionTraceabilityModal = ({
         conform: values.conform,
         nonComplianceReason: values.nonComplianceReason,
         productDestination: values.productDestination,
-        traceabilityProductionList: values.traceabilityProductionList
+        traceabilityProductionList: values.traceabilityProductionList.map(item =>
+          item.hasSecondaryDlc
+            ? {
+              ...item,
+              dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
+            }
+            : item
+        )
       }
 
       if (values.traceabilityProductionList.length === 0) {
