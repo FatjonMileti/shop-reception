@@ -61,5 +61,5 @@ export const toBatchFormatEdit = item => ({
   hasSecondaryDlc: item.batch.hasSecondaryDlc,
   openingDate: formatPayloadDate(item.openingDate),
   dlc: item.dlc,
-  dlcDays: item.dlcDays
+  dlcDays: item.batch?.dlcDays
 })
