@@ -249,7 +249,7 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
   expirationDate: Yup.mixed().when('hasExpirationDate', (hasExpirationDate, schema) => {
     return hasExpirationDate
       ? Yup.date()
-          .min(new Date(), 'Data de expirare nu poate fi în trecut.')
+          .min(dayjs().startOf('day'), 'Data de expirare nu poate fi în trecut.')
           .required('Câmpul data expirare trebuie completat.')
       : schema.nullable()
   }),
