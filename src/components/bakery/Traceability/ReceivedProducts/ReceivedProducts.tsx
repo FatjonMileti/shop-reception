@@ -74,7 +74,8 @@ export const ReceivedProducts = () => {
             'product.metiCode',
             'supplier.supplierCode',
             'supplier.supplierName',
-            'product.name'
+            'product.name',
+            'batchName'
           ]
         })
       )
