@@ -89,7 +89,7 @@ import {
   VolumetryMenu,
   EmployeeManagementMenu,
   ManagementTasksMenu,
-  ReportsVolumetryHome,
+  ReportsVolumetryHome
 } from 'icons'
 
 const IconComponents = {
