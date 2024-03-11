@@ -11,7 +11,7 @@ import { TaskDescriptionProps } from './TaskAllocationsDefinitions'
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const { item, employees, setShouldRefreshData, setSelectedRowId, hideDetails } = props
-  const { taskName, rayonsOrDepartment } = item.item || item
+  const { taskName, departmentAlias } = item.item || item
   const [employeesItems, setEmployeesItems] = useState([])
   const [selectedRow, setSelectedRow] = useState(null) // TODO: To add interface when db schema is defined
 
@@ -111,7 +111,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             isModalOpen={modal === 'read'}
             closeModal={closeModal}
             taskName={taskName}
-            rayonsOrDepartment={rayonsOrDepartment}
+            departmentAlias={departmentAlias}
             workloadMeasurementUnit={item.workloadMeasurementUnit}
             setShouldRefreshData={setShouldRefreshData}
             taskTemplateId={item.taskTemplateId}
