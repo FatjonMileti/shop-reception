@@ -13,10 +13,11 @@ import { EditOwnProductionTraceabilityModal } from './EditOwnProductionTraceabil
 import { handleQueryError } from 'utils/helpers'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
-import { Filter, ValueLabelInterface } from 'components/bakery/interfaces'
+import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
 import { formatErrorMessage } from 'utils/formatting'
 import { CorrectOwnProductionTraceabilityModal } from './CorrectOwnProductionTraceabilityModal/CorrectOwnProductionTraceabilityModal'
+import { Filter } from '../../../core-ui/Table/TableDefinitions'
 
 const orderBy = 'createdDate'
 const order = 'desc'
@@ -210,6 +211,7 @@ export const OwnProductionTraceability = () => {
           rows={rows}
           handleRemoteData={debounce(fetchData, 500)}
           handleRemoteDetails={handleRemoteDetails}
+          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           isLoading={isLoading}
           totalCount={totalCount}
           hasSearchInput
