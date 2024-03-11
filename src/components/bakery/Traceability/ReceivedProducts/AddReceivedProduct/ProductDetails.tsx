@@ -30,7 +30,7 @@ export interface ProductDetails {
   expirationDate?: any
   hasSecondaryDLC: boolean
   secondaryDLC?: string
-  amount?: string
+  amount?: number
   lot?: string
   picture: File
 }
@@ -41,7 +41,7 @@ const initialValues: ProductDetails = {
   expirationDate: null,
   hasSecondaryDLC: true,
   secondaryDLC: '',
-  amount: '',
+  amount: undefined,
   lot: '',
   picture: undefined
 }
@@ -204,7 +204,7 @@ export const ProductDetails = ({
             variant="outlined"
             label="Cantitatea intrata"
             onChange={form.handleChange}
-            value={form.values.amount}
+            value={form.values.amount?.toString()}
             name="amount"
             suffix={selectedProduct.metricUnit}
             error={!!form.errors.amount}

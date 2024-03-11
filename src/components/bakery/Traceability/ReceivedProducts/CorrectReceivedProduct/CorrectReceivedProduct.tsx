@@ -51,7 +51,7 @@ export interface ReceivedProductToCorrect {
   expirationDate?: any
   hasSecondaryDLC: boolean
   secondaryDLC?: string
-  amount?: string
+  amount?: number
   lot?: string
   picture?: File
 }
@@ -114,7 +114,7 @@ export const CorrectReceivedProduct = ({
         expireDate: formatPayloadDate(form.values.expirationDate),
         hasSecondaryDlc: form.values.hasSecondaryDLC,
         dlcDays: parseInt(form.values.secondaryDLC),
-        batchQuantity: parseInt(form.values.amount),
+        batchQuantity: form.values?.amount,
         batchName: form.values.lot
       }
 
@@ -321,7 +321,7 @@ export const CorrectReceivedProduct = ({
                   variant="outlined"
                   label="Cantitatea intrata"
                   onChange={form.handleChange}
-                  value={form.values.amount}
+                  value={form.values.amount?.toString()}
                   name="amount"
                   suffix={form.values?.selectedProduct?.metricUnit}
                   error={!!form.errors.amount}

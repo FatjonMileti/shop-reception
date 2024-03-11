@@ -262,7 +262,7 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
     )
     .nullable(),
 
-  amount: Yup.string().required('amount is required'),
+  amount: Yup.number().positive().required('amount is required'),
 
   lot: Yup.string().required('lot is required').max(30),
 
