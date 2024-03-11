@@ -30,7 +30,7 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
 
     expirationDate: Yup.mixed().when(
       'hasExpirationDate',
-      (hasExpirationDate, schema) => {
+      ([hasExpirationDate], schema) => {
         return hasExpirationDate
           ? Yup.date()
               .min(dayjs().startOf('day'), 'Data de expirare nu poate fi în trecut.')
