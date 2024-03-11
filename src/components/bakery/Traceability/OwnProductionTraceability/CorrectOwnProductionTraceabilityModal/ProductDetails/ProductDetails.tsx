@@ -11,6 +11,7 @@ import { ProductDetailsBatches } from './ProductDetailsBatches'
 import { UseQueryResult } from 'react-query'
 import { toBoolean } from 'utils/helpers'
 import { useSelectProductSearch } from '../../../useSelectProductSearch'
+import { thermalContiotionOptions } from '../../../interfaces'
 
 interface ProductDetailsProps {
   onAddCharge: (componentMetiCode: string | number) => void
@@ -150,14 +151,10 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             variant="outlined"
             label="Stare termica"
             disableClearable
-            options={[
-              { value: 'BAKED', label: 'COPT' },
-              { value: 'UNBAKED', label: 'NECOPT' }
-            ]}
-            defaultValue={{
-              value: formik.values.thermalCondition || '',
-              label: formik.values.thermalCondition || ''
-            }}
+            options={thermalContiotionOptions}
+            value={
+              thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) || null
+            }
             onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
             required
             error={!!formik.errors.thermalCondition}

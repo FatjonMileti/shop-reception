@@ -21,27 +21,31 @@ export const validationSchema = Yup.object().shape({
   productionDate: Yup.date()
     .max(new Date(), 'Data de productie nu poate fi in viitor.')
     .required('Campul data productie trebuie completat.'),
-  chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
+  chargeNumber: Yup.number()
+    .test('length', 'must be at most 30 digits', value => value?.toString()?.length <= 30)
+    .required('Campul sarja trebuie completat.'),
   productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
   quantity: Yup.string().required('Campul cantitate trebuie completat'),
-  thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
+  thermalCondition: Yup.string().required('Campul stare termica trebuie selectat.'),
   conform: Yup.boolean(),
   product: Yup.object().required(),
 
   traceabilityFrozenList: Yup.array().of(
-    Yup.object().shape({
-      batchId: Yup.string(),
-      quantity: Yup.number(),
-      openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
-        if (hasSecondaryDlc) {
-          return schema.required('Data obligatorie')
-        } else {
-          return schema.nullable()
-        }
-      }),
-      // dlc: Yup.string(),
-      hasSecondaryDlc: Yup.boolean()
-    }) .required()
+    Yup.object()
+      .shape({
+        batchId: Yup.string(),
+        quantity: Yup.number(),
+        openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
+          if (hasSecondaryDlc) {
+            return schema.required('Data obligatorie')
+          } else {
+            return schema.nullable()
+          }
+        }),
+        // dlc: Yup.string(),
+        hasSecondaryDlc: Yup.boolean()
+      })
+      .required()
   )
 })
 
