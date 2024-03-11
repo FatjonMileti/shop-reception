@@ -1,7 +1,10 @@
+import { Box } from '@mui/material'
+import { IconCell } from 'components/core-ui/IconCell'
+
 export const columns = [
   {
     title: 'Cod Regiune',
-    field: 'regionCode',
+    field: 'code',
     align: 'left',
     type: 'string'
   },
@@ -13,7 +16,7 @@ export const columns = [
   },
   {
     title: 'Responsabil regiune',
-    field: 'regionManager',
+    field: 'responsible',
     align: 'left',
     type: 'string'
   },
@@ -21,6 +24,11 @@ export const columns = [
     title: 'Activ',
     field: 'active',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    render: row => (
+      <Box>
+        <IconCell value={row.active ? 'active' : 'inactive'} />
+      </Box>
+    )
   }
 ]

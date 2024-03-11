@@ -75,10 +75,11 @@ interface AdminStore {
 
 interface AdminRegion {
   id: number
-  regionCode: string
+  code: string
   name: string
-  regionManager: string
+  responsible: string
   active: boolean
+  shopIds?: []
 }
 
 interface CentralizeStoresHub {
