@@ -97,7 +97,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: task?.taskName },
-              { label: 'Departament/Raion:', name: task?.rayonsOrDepartment },
+              { label: 'Departament/Raion:', name: task?.departmentAlias },
               !hideWorkload && {
                 label: 'Angajat:',
                 name: employee?.workerFullName

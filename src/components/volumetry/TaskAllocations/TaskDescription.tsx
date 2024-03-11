@@ -49,9 +49,9 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   }
 
   return (
-    <Grid container flexDirection="column">
+    <Grid container>
       {employees && (
-        <Grid container flexDirection="column" pr={2}>
+        <Grid item xs={12} pr={2}>
           <Box
             sx={{
               width: isMobile ? '100% !important' : 'auto'

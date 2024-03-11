@@ -22,7 +22,7 @@ export interface EmployeeManagementItem {
 export interface TaskManagementTableItem {
   id?: string | number
   name: string
-  rayonsOrDepartment: string
+  departmentAlias: string
   recommendedStartHour: string
   recommendedEndHour: string
   frequency: string
