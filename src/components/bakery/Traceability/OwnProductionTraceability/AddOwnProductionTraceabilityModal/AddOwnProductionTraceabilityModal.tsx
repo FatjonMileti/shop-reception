@@ -19,14 +19,17 @@ import {
 import { SelectOrScanProduct } from './SelectOrScanProduct'
 import { Product } from '../../ReceivedProducts/interfaces'
 import { SelectCharge } from './SelectCharge'
+import dayjs from 'dayjs'
 
 interface AddOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
   closeModal: () => void
+  setShouldRefreshData: Function
 }
 export const AddOwnProductionTraceabilityModal = ({
   isModalOpen,
-  closeModal
+  closeModal,
+  setShouldRefreshData
 }: AddOwnProductionTraceabilityModalProps) => {
   const { showNotification } = useNotification()
   const [step, setStep] = useState<number>(0)
@@ -54,12 +57,12 @@ export const AddOwnProductionTraceabilityModal = ({
     }
   )
 
-  const initialValues = useMemo(() => getInitialValues(selectedProduct), [selectedProduct?.id])
+  const initialValues = useMemo(() => getInitialValues(), [])
 
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: false,
-    validationSchema: validationSchema,
+    validationSchema,
     initialValues: initialValues,
     onSubmit: async (values: any) => {
       const payload = {
@@ -75,7 +78,14 @@ export const AddOwnProductionTraceabilityModal = ({
         conform: values.conform,
         nonComplianceReason: values.nonComplianceReason,
         productDestination: values.productDestination,
-        traceabilityProductionList: values.traceabilityProductionList
+        traceabilityProductionList: values.traceabilityProductionList.map(item =>
+          item.hasSecondaryDlc
+            ? {
+              ...item,
+              dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
+            }
+            : item
+        )
       }
 
       if (values.traceabilityProductionList.length === 0) {
@@ -83,6 +93,7 @@ export const AddOwnProductionTraceabilityModal = ({
           message: `Cannot save without batch and charge.`,
           type: 'error'
         })
+
         return
       }
 
@@ -114,6 +125,7 @@ export const AddOwnProductionTraceabilityModal = ({
       }
 
       ownTraceabilityMutation.mutate(payload)
+      setShouldRefreshData(true)
     }
   })
 

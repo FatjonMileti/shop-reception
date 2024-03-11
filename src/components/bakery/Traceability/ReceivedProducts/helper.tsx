@@ -49,7 +49,7 @@ export const toTableRowItem = (item: Partial<ReceivedProduct>): ReceivedProduct 
   verified: item.verified || false,
   imageUrl: item.imageUrl || '',
   createdBy: item.createdBy || '',
-  createdUser: item.createdUser || false
+  isCreatedUser: item.isCreatedUser || false
 })
 
 export const columns: Column[] = [
@@ -246,8 +246,12 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
   entryDate: Yup.mixed<dayjs.Dayjs>().required('Entry date is required'),
 
   hasExpirationDate: Yup.boolean().required('This field is required'),
-  expirationDate: Yup.mixed().when('hasExpirationDate', ([hasExpirationDate], schema) => {
-    return hasExpirationDate ? schema.required('Câmpul data expirare trebuie completat.') : schema.nullable()
+  expirationDate: Yup.mixed().when('hasExpirationDate', (hasExpirationDate, schema) => {
+    return hasExpirationDate
+      ? Yup.date()
+          .min(dayjs().startOf('day'), 'Data de expirare nu poate fi în trecut.')
+          .required('Câmpul data expirare trebuie completat.')
+      : schema.nullable()
   }),
 
   hasSecondaryDLC: Yup.boolean().required('This field is required'),

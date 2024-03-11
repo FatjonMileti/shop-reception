@@ -114,6 +114,8 @@ VALUES
     (46, 'Raport norme', 'ReportsVolumetry', null, true, 9),
     (47, 'Task-uri alocate', 'AssignTasks', null, true, 8),
     (48, 'Status Angajati', 'EmployeeManagement', null, true, 8),
+    (249, 'Management magazine', 'ManagementTasks', null, true, 8),
+    (250, 'Management categorii template-uri', 'ManagementTasks', null, true, 8),
     -- Shop Reception (Admin)
     (149, 'Administrare depozite', 'UsersManagement', null, true, 12),
     (151, 'Administrare huburi', 'UsersManagement', null, true, 12),
@@ -249,6 +251,8 @@ VALUES
     (63, 'Task-uri alocate', '', '/volumetry/tasksManagement/assignedTasks', true, 47, true),
     (64, 'Status angajati', '', '/volumetry/employee/allocatedEmployeesStatus', true, 48, true),
     (65, 'Detalii task', '', '/volumetry/tasksManagement/taskAllocation', true, 44, false),
+    (266, 'Management magazine', '', '/volumetry/tasksManagement/locationManagement', true, 249, true),
+    (267, 'Management categorii template-uri', '', '/volumetry/tasksManagement/locationCategoryManagement', true, 250, true),
     -- Shop Reception (Admin)
     (166, 'Administrare depozite', '', '/shop-reception/admin/deposits', true, 149, true),
     (167, 'Administrare huburi', '', '/shop-reception/admin/hubs', true, 151, true),
@@ -383,6 +387,8 @@ VALUES
     (101, 47),
     -- VOLUMETRY_TEMPLATE_ADMIN
     (102, 43),
+    (102, 249),
+    (102, 250),
     -- Shop Reception Admin
     -- SHOP_RECEPTION_DUMMY_ROLE
     (200, 149), (200, 151), (200, 152), (200, 153), (200, 154), (200, 155), (200, 156),

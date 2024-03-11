@@ -10,7 +10,7 @@ import {
 import { AddActionIcon, DeleteActionIcon } from 'icons'
 import { FormInfoItems } from '../../../../core-ui/FormInfoItems'
 import dayjs from 'dayjs'
-import { toBoolean } from 'utils/helpers'
+import { formatPayloadDate, toBoolean } from 'utils/helpers'
 
 interface ProductDetailsProps {
   onCancel: () => void
@@ -48,7 +48,6 @@ export const ProductDetails = ({
       </Grid>
 
       <Grid container spacing={2} mt={2}>
-
         <Grid item xs={12} container spacing={2}>
           <Grid item lg={3} xs={6}>
             <Input
@@ -96,12 +95,10 @@ export const ProductDetails = ({
               error={!!formik.errors.productionDate}
               value={dayjs(formik.values.productionDate)}
               maxDate={dayjs()}
-              style={{display: 'flex'}}
+              style={{ display: 'flex' }}
             />
           </Grid>
         </Grid>
-
-
 
         <Grid item xs={12} container spacing={2}>
           <Grid item lg={3} xs={6}>
@@ -137,7 +134,7 @@ export const ProductDetails = ({
             />
           </Grid>
 
-          <Grid item lg={3} xs={12} sx={{marginTop: '17px'}}>
+          <Grid item lg={3} xs={12} sx={{ marginTop: '17px' }}>
             <RadioButtonGroup
               label="Conform"
               dotStyle
@@ -167,7 +164,7 @@ export const ProductDetails = ({
           </Grid>
         </Grid>
 
-        <Grid item  lg={6} xs={12} >
+        <Grid item lg={6} xs={12}>
           <Input
             type="text"
             variant="outlined"
@@ -176,11 +173,11 @@ export const ProductDetails = ({
             value={formik.values.nonComplianceReason}
             disabled={formik.values.conform == null || formik.values.conform == true}
             name="nonComplianceReason"
-            style={{display: 'flex'}}
+            style={{ display: 'flex' }}
           />
         </Grid>
 
-        <Grid item lg={6} xs={12} >
+        <Grid item lg={6} xs={12}>
           <Input
             type="text"
             variant="outlined"
@@ -189,7 +186,7 @@ export const ProductDetails = ({
             value={formik.values.productDestination}
             disabled={formik.values.conform == null || formik.values.conform == true}
             name="productDestination"
-            style={{display: 'flex'}}
+            style={{ display: 'flex' }}
           />
         </Grid>
 
@@ -228,7 +225,39 @@ export const ProductDetails = ({
                 infoIcon={selectedProduct?.metricUnit || ''}
               />
             </Grid>
-            <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
+            {item.hasSecondaryDlc && (
+              <Grid item xs={3}>
+                <DatePicker
+                  label="Data deschidere"
+                  onChange={value =>
+                    formik.setFieldValue(
+                      `traceabilityFrozenList[${index}].openingDate`,
+                      formatPayloadDate(value)
+                    )
+                  }
+                  variant="outlined"
+                  required
+                  helperText={formik.errors?.traceabilityFrozenList?.[index]?.openingDate as string}
+                  error={!!formik.errors?.traceabilityFrozenList?.[index]?.openingDate}
+                  value={
+                    formik.values?.traceabilityFrozenList?.[index]?.openingDate
+                      ? dayjs(formik.values?.traceabilityFrozenList?.[index]?.openingDate)
+                      : undefined
+                  }
+                  // maxDate={dayjs()}
+                  style={{ display: 'flex' }}
+                />
+              </Grid>
+            )}
+
+            <Grid
+              item
+              xs={3}
+              display={'flex'}
+              alignSelf={'flex-start'}
+              justifyContent={'flex-end'}
+              sx={{ marginTop: '17px' }}
+            >
               <Button
                 onClick={() => onDeleteBatch(item.batchId)}
                 variant="outlined"

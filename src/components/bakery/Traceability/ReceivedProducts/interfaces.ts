@@ -44,7 +44,7 @@ export interface ReceivedProduct {
   verified: boolean;
   imageUrl: string;
   createdBy: string;
-  createdUser: boolean;
+  isCreatedUser: boolean;
 }
 
 export interface SubfamilyItem {

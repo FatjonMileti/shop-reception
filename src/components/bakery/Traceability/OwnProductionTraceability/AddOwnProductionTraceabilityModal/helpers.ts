@@ -1,8 +1,8 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
-export const getInitialValues = (selectedProduct) => {
+export const getInitialValues = () => {
   return {
     productionDate: dayjs(),
     chargeNumber: null,
@@ -35,8 +35,14 @@ export const validationSchema = Yup.object().shape({
       componentCode: Yup.number(),
       componentQuantity: Yup.number(),
       quantity: Yup.number(),
-      openingDate: Yup.date(),
-      dlc: Yup.string().nullable()
+      openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
+        if (hasSecondaryDlc) {
+          return schema.required('Data obligatorie')
+        } else {
+          return schema.nullable()
+        }
+      }),
+      hasSecondaryDlc: Yup.boolean(),
     })
   )
 })
@@ -44,11 +50,12 @@ export const validationSchema = Yup.object().shape({
 export const toBatchFormat = (item, quantity) => ({
   batchId: item?.id,
   componentCode: item.product.metiCode,
-  componentQuantity: quantity, //item.batchQuantity,
+  componentQuantity: quantity,
   componentName: item.batchName,
   quantity: item.batchQuantity,
-  openingDate: item.entryDate,
-  dlc: item?.dlcDays
+  hasSecondaryDlc: item.hasSecondaryDlc,
+  openingDate: formatPayloadDate(item.entryDate),
+  dlcDays: item.dlcDays
 })
 
 export const toChargeFormat = (item, quantity) => ({

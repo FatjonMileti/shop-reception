@@ -130,7 +130,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             isModalOpen={modal === 'delete'}
             closeModal={closeModal}
             actionUrl="/volumetry/tasks/:id"
-            itemId={`${selectedRow?.id}`}
+            itemId={selectedRow?.id}
             content={<Typography>Sunteti sigur ca vreti sa stergeti aceasta alocare?</Typography>}
             setShouldRefreshData={setShouldRefreshData}
             additionalAction={selectSelectedParentRow}

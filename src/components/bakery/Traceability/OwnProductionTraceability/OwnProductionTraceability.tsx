@@ -37,6 +37,8 @@ export const OwnProductionTraceability = () => {
   const [itemIdToCorrect, setItemIdToCorrect] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
 
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
     try {
@@ -190,6 +192,7 @@ export const OwnProductionTraceability = () => {
         <AddOwnProductionTraceabilityModal
           isModalOpen={isModalOpen}
           closeModal={() => setIsModalOpen(false)}
+          setShouldRefreshData={setShouldRefreshData}
         />
         <CorrectOwnProductionTraceabilityModal
           isModalOpen={!!itemIdToCorrect}
@@ -243,9 +246,11 @@ export const OwnProductionTraceability = () => {
               desktopIcon: <EditActionIcon />
             }
           ]}
-          rowActionsWidth="90px"
+          rowActionsWidth="200px"
           rowsPerPage={isXs ? 5 : 25}
           rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
+          setShouldRefreshData={setShouldRefreshData}
+          shouldRefreshData={shouldRefreshData}
         />
       </>
     </div>

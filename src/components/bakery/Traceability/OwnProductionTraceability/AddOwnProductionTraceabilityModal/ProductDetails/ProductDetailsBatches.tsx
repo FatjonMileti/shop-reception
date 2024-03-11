@@ -1,8 +1,10 @@
 import { Grid, Divider, CircularProgress } from '@mui/material'
-import { Button, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, DatePicker, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { AddActionIcon, DeleteActionIcon } from 'icons'
 import { quantityCalculation } from '../helpers'
 import { Fragment } from 'react'
+import { formatPayloadDate } from '../../../../../../utils/helpers'
+import dayjs from 'dayjs'
 
 interface ProductDetailsBatchesProps {
   productMetiCode: any
@@ -103,12 +105,39 @@ export const ProductDetailsBatches = ({
                       infoIcon={'kg'}
                     />
                   </Grid>
+
+                  {item.hasSecondaryDlc && (
+                    <Grid item xs={3}>
+                      <DatePicker
+                        label="Data deschidere"
+                        onChange={value =>
+                          formik.setFieldValue(
+                            `traceabilityProductionList[${index}].openingDate`,
+                            formatPayloadDate(value)
+                          )
+                        }
+                        variant="outlined"
+                        required
+                        helperText={formik.errors?.traceabilityProductionList?.[index]?.openingDate as string}
+                        error={!!formik.errors?.traceabilityProductionList?.[index]?.openingDate}
+                        value={
+                          formik.values?.traceabilityProductionList?.[index]?.openingDate
+                            ? dayjs(formik.values?.traceabilityProductionList?.[index]?.openingDate)
+                            : undefined
+                        }
+                        // maxDate={dayjs()}
+                        style={{ display: 'flex' }}
+                      />
+                    </Grid>
+                  )}
+
                   <Grid
                     item
                     xs={3}
                     display={'flex'}
-                    alignSelf={'flex-end'}
+                    alignSelf={'flex-start'}
                     justifyContent={'flex-end'}
+                    sx={{ marginTop: '17px' }}
                   >
                     <Button
                       onClick={() => onDeleteBatch(item.batchId)}

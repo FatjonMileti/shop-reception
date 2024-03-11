@@ -16,6 +16,7 @@ import {
   toBatchFormat,
   toChargeFormat
 } from '../AddOwnProductionTraceabilityModal/helpers'
+import dayjs from 'dayjs'
 
 interface CorrectOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -63,8 +64,8 @@ export const CorrectOwnProductionTraceabilityModal = ({
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: true,
-    validationSchema: validationSchema,
-    initialValues: initialValues,
+    validationSchema,
+    initialValues,
     onSubmit: async (values: any) => {
       const payload = {
         productId: values?.product?.productId,
@@ -79,7 +80,14 @@ export const CorrectOwnProductionTraceabilityModal = ({
         productDestination: values?.productDestination,
         metiCode: values?.product?.metiCode,
         productName: values.product?.name,
-        traceabilityProductionList: values?.traceabilityProductionList
+        traceabilityProductionList: values?.traceabilityProductionList.map(item =>
+          item.hasSecondaryDlc
+            ? {
+              ...item,
+              dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
+            }
+            : item
+        )
       }
 
       if (values.traceabilityProductionList.length === 0) {

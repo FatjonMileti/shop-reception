@@ -48,8 +48,8 @@ export const columns: any[] = [
   },
   {
     title: 'Lot',
-    field: 'batch.batchQuantity',
-    render: row => <BodyItem name="Lot" value={row?.batch?.batchQuantity} />
+    field: 'batch.batchName',
+    render: row => <BodyItem name="Lot" value={row?.batch?.batchName} />
   },
   {
     field: 'batch.hasExpireDate',
@@ -128,14 +128,7 @@ export const columns: any[] = [
     title: 'Nr. zile valabilitate DLC secundar',
     field: 'batch.dlcDays',
     render: row => (
-      <BodyItem
-        name="Nr. zile valabilitate DLC secundar"
-        value={
-          row?.batch?.dlcDays === 0 || typeof row?.batch?.dlcDays === 'undefined'
-            ? ''
-            : row?.batch?.dlcDays
-        }
-      />
+      <BodyItem name="Nr. zile valabilitate DLC secundar" value={row?.batch?.dlcDays || ''} />
     )
   },
   {
@@ -196,6 +189,11 @@ export const columns: any[] = [
         value={formatPayloadDate(row?.batch?.modifiedDate)}
       />
     )
+  },
+  {
+    title: 'Data deschiderii',
+    field: 'batch.openingDate',
+    render: row => <BodyItem name="Data deschiderii" value={formatPayloadDate(row?.openingDate)} />
   }
   // ------------------------
 

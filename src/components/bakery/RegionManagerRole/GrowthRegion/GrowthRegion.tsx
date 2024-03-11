@@ -17,6 +17,7 @@ import { GroupTable } from 'components/core-ui/GroupTable'
 import { SubfamilyItem, TableItem, TableState } from '../interfaces'
 import { FamilyItem } from 'components/bakery/StoreManagerRole/interfaces'
 import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
+import { MetiModal } from 'components/bakery/StoreManagerRole/ProductionManagementStore/MetiModal'
 dayjs.extend(customParseFormat)
 
 const GrowthRegion = () => {
@@ -33,6 +34,15 @@ const GrowthRegion = () => {
     tableFilters: null
   })
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
+
+  const [isMetiModalOpen, setIsMetiModalOpen] = useState<boolean>(false)
+  const [metiProduct, setMetiProduct] = useState(null)
+
+  const openMetiModal = (product): void => {
+    setIsMetiModalOpen(true)
+    setMetiProduct(product)
+  }
+  const closeMetiModal = (): void => setIsMetiModalOpen(false)
 
   const { data: filterOptions } = useQuery(
     ['store'],
@@ -54,20 +64,21 @@ const GrowthRegion = () => {
   )
 
   const subfamiliesQuery = useQuery(
-    ['subfamilies', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'family')?.value],
+    [
+      'subfamilies',
+      storeFilterValue?.value,
+      liveTableFilters.find(filter => filter.name === 'family')?.value
+    ],
     async () => {
       const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
         ?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest(
-        `/bakery/store/cadentier/families/subfamilies`,
-        {
-          params: {
-            store: storeFilterValue?.value,
-            family: familyLiveFilterValue.map(({ value }) => value)
-          },
-          paramsSerializer: { indexes: null }
-        }
-      )
+      const result = await makeCoreGetRequest(`/bakery/store/cadentier/families/subfamilies`, {
+        params: {
+          store: storeFilterValue?.value,
+          family: familyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
 
       const resultOptions = result.map(
         (item: SubfamilyItem): ValueLabelInterface => ({
@@ -90,22 +101,22 @@ const GrowthRegion = () => {
   )
 
   const familiesQuery = useQuery(
-    ['families', storeFilterValue?.value, liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
+    [
+      'families',
+      storeFilterValue?.value,
+      liveTableFilters.find(filter => filter.name === 'subfamily')?.value
+    ],
     async () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
         ?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(
-        '/bakery/store/cadentier/families',
-        {
-          params: {
-            store: storeFilterValue?.value,
-            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
-
-          },
-          paramsSerializer: { indexes: null }
-        }
-      )
+      const result = await makeCoreGetRequest('/bakery/store/cadentier/families', {
+        params: {
+          store: storeFilterValue?.value,
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
 
       const resultOptions = result.map(
         (item: FamilyItem): ValueLabelInterface => ({
@@ -135,11 +146,10 @@ const GrowthRegion = () => {
   const fetchData = async ({ tableFilters, page, order, orderBy, rowsPerPage, searchText }) => {
     setIsLoading(true)
     try {
-     
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/cadentier',
-          filters: [{ name: 'store', value: storeFilterValue?.value }],          
+          filters: [{ name: 'store', value: storeFilterValue?.value }],
           page,
           rowsPerPage,
           order,
@@ -198,7 +208,7 @@ const GrowthRegion = () => {
       const url = toTableGETUrl({
         url: '/bakery/report/download/cadentier',
         tableFilters: tableState.tableFilters,
-        filters:[{ name: 'store', value: storeFilterValue?.value }]
+        filters: [{ name: 'store', value: storeFilterValue?.value }]
       })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
@@ -227,7 +237,7 @@ const GrowthRegion = () => {
               label="Magazin"
               options={filterOptions}
               onSelect={handleStoreFilterChange}
-              placeholderButton='Selecteaza'
+              placeholderButton="Selecteaza"
               showSearch
             />
           </Grid>
@@ -237,10 +247,16 @@ const GrowthRegion = () => {
           <Divider />
         </Grid>
 
+        <MetiModal
+          isModalOpen={isMetiModalOpen}
+          closeModal={closeMetiModal}
+          metiProduct={metiProduct}
+        />
+
         {storeFilterValue && (
           <GroupTable
             hideCheckbox
-            columns={columns}
+            columns={columns(openMetiModal)}
             items={tableItems}
             fetchData={fetchData}
             isLoading={isLoading}
