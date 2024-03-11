@@ -70,20 +70,19 @@ export const AddFrozenTraceabilityModal = ({
         nonComplianceReason: values?.nonComplianceReason || null,
         productDestination: values?.productDestination || null,
         dlc: values.dlc || null,
-        traceabilityFrozenList: values.traceabilityFrozenList
-          .map(item =>
-            item.hasSecondaryDlc
-              ? {
+        traceabilityFrozenList: values.traceabilityFrozenList.map(item =>
+          item.hasSecondaryDlc
+            ? {
                 ...item,
                 dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
               }
-              : item
-          )
+            : item
+        )
       }
 
       if (values.traceabilityFrozenList.length === 0) {
         showNotification({
-          message: `Cannot save without batch.`,
+          message: 'Nu se poate salva fara lot.',
           type: 'error'
         })
 
