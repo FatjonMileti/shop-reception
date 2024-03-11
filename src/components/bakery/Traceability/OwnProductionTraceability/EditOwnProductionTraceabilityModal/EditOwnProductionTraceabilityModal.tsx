@@ -7,6 +7,7 @@ import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
 import { toBoolean } from 'utils/helpers'
+import { validationSchema } from './helpers'
 
 interface EditOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -42,6 +43,7 @@ export const EditOwnProductionTraceabilityModal = ({
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: true,
+    validationSchema,
     initialValues: {
       conform: item?.conform || false,
       nonComplianceReason: item?.nonComplianceReason || '',
@@ -68,9 +70,13 @@ export const EditOwnProductionTraceabilityModal = ({
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', toBoolean(option))
-              formik.setFieldValue('nonComplianceReason', null)
-              formik.setFieldValue('productDestination', null)
+              const conform = toBoolean(option)
+              formik.setFieldValue('conform', conform)
+
+              if (conform) {
+                formik.setFieldValue('nonComplianceReason', null)
+                formik.setFieldValue('productDestination', null)
+              }
             }}
             value={formik.values.conform}
             defaultValue={formik.initialValues.conform ? 'DA' : 'NU'}
@@ -82,7 +88,7 @@ export const EditOwnProductionTraceabilityModal = ({
               },
               {
                 label: 'NU',
-                value: 'false' 
+                value: 'false'
               }
             ]}
           />
@@ -93,9 +99,10 @@ export const EditOwnProductionTraceabilityModal = ({
             variant="outlined"
             label="Motiv neconformitate"
             onChange={e => formik.setFieldValue('nonComplianceReason', e.currentTarget.value)}
-            value={formik.values.nonComplianceReason}
+            value={formik.values.nonComplianceReason ?? ''}
             name="nonComplianceReason"
-            required
+            required={!formik.values.conform}
+            disabled={formik.values.conform}
             error={!!formik.errors.nonComplianceReason}
             helperText={formik.errors.nonComplianceReason as string}
           />
@@ -116,11 +123,11 @@ export const EditOwnProductionTraceabilityModal = ({
               options={[
                 {
                   label: 'DA',
-                  value: 'true' 
+                  value: 'true'
                 },
                 {
                   label: 'NU',
-                  value: 'false' 
+                  value: 'false'
                 }
               ]}
             />
@@ -132,9 +139,10 @@ export const EditOwnProductionTraceabilityModal = ({
             variant="outlined"
             label="Destinatia produsului neconform"
             onChange={e => formik.setFieldValue('productDestination', e.currentTarget.value)}
-            value={formik.values.productDestination}
+            value={formik.values.productDestination ?? ''}
             name="productDestination"
-            required
+            required={!formik.values.conform}
+            disabled={formik.values.conform}
             fullWidth={item?.createdUser}
             error={!!formik.errors.productDestination}
             helperText={formik.errors.productDestination as string}
