@@ -1,132 +1,154 @@
 import { Grid, Divider, CircularProgress } from '@mui/material'
-import { Button, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, DatePicker, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { AddActionIcon, DeleteActionIcon } from 'icons'
 import { quantityCalculation } from '../helpers'
+import { Fragment } from 'react'
+import { formatPayloadDate } from '../../../../../../utils/helpers'
+import dayjs from 'dayjs'
 
 interface ProductDetailsBatchesProps {
-  onSelectBatch: Function
-  productMetiCode: any
   formik: any
   onDeleteBatch: Function
   receip: any
-  setComponentMetiCode: Function
+  onAddCharge: (componentMetiCode: string | number) => void
+  onAddBatch: (componentMetiCode: string | number) => void
 }
 
 export const ProductDetailsBatches = ({
   formik,
-  productMetiCode,
-  onSelectBatch,
   onDeleteBatch,
   receip,
-  setComponentMetiCode
+  onAddCharge,
+  onAddBatch
 }: ProductDetailsBatchesProps) => {
-  const metiCode = productMetiCode || formik.values.metiCode
-
-  if (typeof metiCode === 'undefined') {
+  if (typeof formik.values.metiCode === 'undefined') {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   return (
     <>
       {receip?.batches.map((batch, index) => (
-        <>
-          <>
-            <Grid item xs={3}>
-              <Input
-                type="text"
-                variant="outlined"
-                label={`Articol compozant ${index + 1}`}
-                value={batch.componentName}
-                name="componentName"
-                disabled
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <Input
-                type="text"
-                variant="outlined"
-                label={`Cantitatea`}
-                value={`${quantityCalculation(
-                  formik.values.quantity,
-                  batch.componentQuantity,
-                  receip.details.recipeQuantity
-                )}`}
-                name="batchId"
-                disabled
-              />
-            </Grid>
+        <Fragment key={index}>
+          <Grid item xs={3}>
+            <Input
+              type="text"
+              variant="outlined"
+              label={`Articol compozant ${index + 1}`}
+              value={batch.componentName}
+              name="componentName"
+              disabled
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <Input
+              type="text"
+              variant="outlined"
+              label={`Cantitatea`}
+              value={`${quantityCalculation(
+                formik.values.quantity,
+                batch.componentQuantity,
+                receip.details.recipeQuantity
+              )}`}
+              name="batchId"
+              disabled
+            />
+          </Grid>
 
-            <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
-              {batch.withBatch && (
-                <IconButton
-                  startIcon={<AddActionIcon />}
-                  size="large"
-                  variant="outlined"
-                  label="Adauga lot"
-                  onClick={() => {
-                    setComponentMetiCode(batch.componentCode)
-                    onSelectBatch()
-                  }}
-                  style={{ height: '40px', fontSize: '10px' }}
-                />
-              )}
-            </Grid>
-            <Grid item xs={3}></Grid>
-          </>
-          <>
-            {formik.values.traceabilityProductionList.map((item, idx) => {
-              if (item.componentCode === batch.componentCode && item.batchId) {
-                return (
-                  <Grid item container xs={12} spacing={2}>
+          <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
+            {batch.withBatch && (
+              <IconButton
+                startIcon={<AddActionIcon />}
+                size="large"
+                variant="outlined"
+                label="Adauga lot"
+                onClick={() => {
+                  onAddBatch(batch.componentCode)
+                }}
+                style={{ height: '40px', fontSize: '10px' }}
+              />
+            )}
+          </Grid>
+          <Grid item xs={3}></Grid>
+
+          {formik.values.traceabilityProductionList.map((item, idx) => (
+            <Fragment key={idx}>
+              {item.componentCode === batch.componentCode && item.batchId ? (
+                <Grid item container xs={12} spacing={2}>
+                  <Grid item xs={3}>
+                    <Input
+                      type="text"
+                      variant="outlined"
+                      label={`Lot ${idx + 1}`}
+                      value={item.componentName}
+                      name="componentName"
+                      disabled
+                    />
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Input
+                      type="number"
+                      variant="outlined"
+                      label={`Cantitatea lot 1`}
+                      onChange={(e: any) =>
+                        formik.setFieldValue(
+                          `traceabilityProductionList[${idx}].componentQuantity`,
+                          e.target.value
+                        )
+                      }
+                      value={item.componentQuantity || ''}
+                      name="componentQuantity"
+                      infoIcon={'kg'}
+                    />
+                  </Grid>
+
+                  {item.hasSecondaryDlc && (
                     <Grid item xs={3}>
-                      <Input
-                        type="text"
-                        variant="outlined"
-                        label={`Lot ${idx + 1}`}
-                        value={item.componentName}
-                        name="componentName"
-                        disabled
-                      />
-                    </Grid>
-                    <Grid item xs={3}>
-                      <Input
-                        type="number"
-                        variant="outlined"
-                        label={`Cantitatea lot 1`}
-                        onChange={(e: any) =>
+                      <DatePicker
+                        label="Data deschidere"
+                        onChange={value =>
                           formik.setFieldValue(
-                            `traceabilityProductionList[${idx}].componentQuantity`,
-                            e.target.value
+                            `traceabilityProductionList[${index}].openingDate`,
+                            formatPayloadDate(value)
                           )
                         }
-                        value={item.componentQuantity}
-                        name="componentQuantity"
-                        infoIcon={'kg'}
+                        variant="outlined"
+                        required
+                        helperText={formik.errors?.traceabilityProductionList?.[index]?.openingDate as string}
+                        error={!!formik.errors?.traceabilityProductionList?.[index]?.openingDate}
+                        value={
+                          formik.values?.traceabilityProductionList?.[index]?.openingDate
+                            ? dayjs(formik.values?.traceabilityProductionList?.[index]?.openingDate)
+                            : undefined
+                        }
+                        // maxDate={dayjs()}
+                        style={{ display: 'flex' }}
                       />
                     </Grid>
-                    <Grid
-                      item
-                      xs={3}
-                      display={'flex'}
-                      alignSelf={'flex-end'}
-                      justifyContent={'flex-end'}
+                  )}
+
+                  <Grid
+                    item
+                    xs={3}
+                    display={'flex'}
+                    alignSelf={'flex-start'}
+                    justifyContent={'flex-end'}
+                    sx={{ marginTop: '17px' }}
+                  >
+                    <Button
+                      onClick={() => onDeleteBatch(item.batchId)}
+                      variant="outlined"
+                      size="large"
+                      style={{ width: '40px', height: '40px' }}
+                      label=""
                     >
-                      <Button
-                        onClick={() => onDeleteBatch(item.batchId)}
-                        variant="outlined"
-                        size="large"
-                        style={{ width: '40px', height: '40px' }}
-                        label=""
-                      >
-                        <DeleteActionIcon />{' '}
-                      </Button>
-                    </Grid>
+                      <DeleteActionIcon />{' '}
+                    </Button>
                   </Grid>
-                )
-              }
-            })}
-          </>
-        </>
+                </Grid>
+              ) : null}
+            </Fragment>
+          ))}
+        </Fragment>
       ))}
 
       <Grid item xs={12}>
@@ -134,7 +156,7 @@ export const ProductDetailsBatches = ({
       </Grid>
 
       {receip?.charges.map((item, index) => (
-        <>
+        <Fragment key={index}>
           <>
             <Grid item xs={3}>
               <Input
@@ -168,8 +190,7 @@ export const ProductDetailsBatches = ({
                 variant="outlined"
                 label="Adauga sarja"
                 onClick={() => {
-                  setComponentMetiCode(item.componentCode)
-                  onSelectBatch(2)
+                  onAddCharge(item.componentCode)
                 }}
                 style={{ height: '40px', fontSize: '10px' }}
               />
@@ -178,9 +199,9 @@ export const ProductDetailsBatches = ({
             <Grid item xs={3}></Grid>
           </>
 
-          {formik.values.traceabilityProductionList.map((charge, idx) => {
-            if (charge.componentCode === item.componentCode && charge.childTraceabilityId) {
-              return (
+          {formik.values.traceabilityProductionList.map((charge, idx) => (
+            <Fragment key={idx}>
+              {charge.componentCode === item.componentCode && charge.childTraceabilityId ? (
                 <Grid item container xs={12} spacing={2}>
                   <Grid item xs={3}>
                     <Input
@@ -226,10 +247,10 @@ export const ProductDetailsBatches = ({
                     </Button>
                   </Grid>
                 </Grid>
-              )
-            }
-          })}
-        </>
+              ) : null}
+            </Fragment>
+          ))}
+        </Fragment>
       ))}
       {formik.values.traceabilityProductionList.length > 0 && (
         <Grid item xs={12}>

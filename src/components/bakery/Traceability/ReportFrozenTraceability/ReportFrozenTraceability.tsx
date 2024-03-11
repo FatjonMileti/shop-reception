@@ -11,8 +11,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { formatAndDownloadResponse, getPreviousDay, handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
-import { Divider, Grid } from '@mui/material'
-import { EditActionIcon } from 'icons'
+import { Divider, Grid, useMediaQuery } from '@mui/material'
 import FrozenTraceabilityDescription from './FrozenTraceabilityDescription'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
@@ -29,6 +28,7 @@ import { batchPrintColumns, productPrintColumns } from '../ReportFrozenTraceabil
 import { useLocation } from 'react-router'
 import { startTransition } from 'react';
 import {debounce} from 'lodash'
+import dayjs from 'dayjs'
 
 export const ReportFrozenTraceability = () => {
   const { showNotification } = useNotification()
@@ -64,7 +64,7 @@ export const ReportFrozenTraceability = () => {
         {
           name: 'endDate',
           value: previousDay
-        },
+        }
       ]
     }
   )
@@ -88,7 +88,6 @@ export const ReportFrozenTraceability = () => {
     }
   )
 
-
   React.useEffect(() => {
     if (storeFilterValue?.length > 0) {
       debouncedFetchData(0, tableState.rowsPerPage, tableState.tableFilters, tableState.searchText)
@@ -100,8 +99,6 @@ export const ReportFrozenTraceability = () => {
     const data = await response
     return <FrozenTraceabilityDescription item={data} chargeItem={tableData?.find(d => d.id === rowId)}/>
   }
-
-
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
@@ -133,7 +130,6 @@ export const ReportFrozenTraceability = () => {
         rowsPerPage,
         searchText
       }))
-
     } catch (error) {
       handleQueryError(
         error,
@@ -148,7 +144,7 @@ export const ReportFrozenTraceability = () => {
   const handleStoreFilterChange = (value: ValueLabelInterface[]): void => {
     startTransition(() => {
       setStoreFilterValue(value)
-    });
+    })
   }
 
   const downloadFileQuery = useQuery(
@@ -267,6 +263,7 @@ export const ReportFrozenTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
+          minDate={dayjs().subtract(6, 'months')}
         />
       ),
       type: 'date',
@@ -281,6 +278,7 @@ export const ReportFrozenTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
+          minDate={dayjs().subtract(6, 'months')}
         />
       ),
       type: 'date',
@@ -317,6 +315,8 @@ export const ReportFrozenTraceability = () => {
       label: 'Subfamilie produse'
     }
   ]
+
+  const isXs = useMediaQuery('(max-width:624px)')
 
   return (
     <div className={s.mainContainer}>
@@ -386,8 +386,8 @@ export const ReportFrozenTraceability = () => {
               }
             ]}
             rowActionsWidth="90px"
-            rowsPerPage={25}
-            rowsPerPageOptions={[25, 50, 100]}
+            rowsPerPage={isXs ? 5 : 25}
+            rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
           />
         </>
       )}

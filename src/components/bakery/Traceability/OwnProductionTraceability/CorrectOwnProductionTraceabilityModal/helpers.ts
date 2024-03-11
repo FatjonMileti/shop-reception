@@ -1,25 +1,14 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
-export const getInitialValues = (selectedRows, editItem) => {
-  const batchItems = []
-  const childItems = []
+export const getInitialValues = editItem => {
 
-  if (editItem?.traceabilityProductionList) {
-    editItem.traceabilityProductionList?.forEach(item => {
-      if (item.batch) {
-        batchItems.push(item.batch)
-      } else if (item.childTraceability) {
-        childItems.push(item.childTraceability)
-      }
-    })
-  }
-
-  const formattedProductionList = [
-    ...toBatchFormatEdit(batchItems),
-    ...toChargeFormatEdit(childItems)
-  ]
+  const traceabilityProductionList = editItem?.traceabilityProductionList?.reduce((acc, item) => {
+    if (item.batch) acc.push(toBatchFormatEdit(item))
+    else if (item.childTraceability) acc.push(toChargeFormatEdit(item))
+    return acc
+  }, []) || []
 
   return {
     productId: editItem?.product?.id || '',
@@ -36,20 +25,22 @@ export const getInitialValues = (selectedRows, editItem) => {
 
     metiCode: editItem?.product?.metiCode,
     productName: editItem?.product?.name,
-    traceabilityProductionList: editItem ? formattedProductionList : selectedRows
+    traceabilityProductionList,
+    product: editItem?.product
   }
 }
 
 export const validationSchema = Yup.object().shape({
   productionDate: Yup.date()
-    .max(new Date(), 'Data de productie nu poate fi in viitor.')
+    .max(dayjs().endOf('day'), 'Data de productie nu poate fi in viitor.')
     .required('Campul data productie trebuie completat.'),
 
   chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
   productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
-  quantity: Yup.string().required('Campul cantitate trebuie completat'),
+  quantity: Yup.number().required('Campul cantitate trebuie completat'),
   thermalCondition: Yup.string().required('Campul stare termica trebuie completat.'),
   conform: Yup.boolean(),
+  product: Yup.object().required(),
 
   traceabilityProductionList: Yup.array().of(
     Yup.object().shape({
@@ -58,70 +49,40 @@ export const validationSchema = Yup.object().shape({
       componentCode: Yup.number(),
       componentQuantity: Yup.number(),
       quantity: Yup.number(),
-      openingDate: Yup.date(),
-      dlc: Yup.string()
+      openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
+        if (hasSecondaryDlc) {
+          return schema.required('Data obligatorie')
+        } else {
+          return schema.nullable()
+        }
+      }),
+      hasSecondaryDlc: Yup.boolean(),
     })
   )
 })
 
-export const toBatchFormat = (batches = [], quantity) => {
-  return batches?.map(item => ({
-    batchId: item?.id,
-    componentCode: item.product.metiCode,
-    componentQuantity: quantity, // item.batchQuantity,
-    componentName: item.batchName,
 
-    quantity: item.batchQuantity,
-    openingDate: item.entryDate,
-    dlc: item?.dlcDays
-  }))
-}
+export const toBatchFormatEdit = item => ({
+  batchId: item.batch?.id,
+  componentCode: item?.componentCode,
+  componentQuantity: item?.componentQuantity,
+  componentName: item?.componentName,
+  quantity: item.batch?.batchQuantity,
+  hasSecondaryDlc: item.batch?.hasSecondaryDlc,
+  openingDate: formatPayloadDate(item.openingDate),
+  dlcDays: item.batch?.dlcDays,
+})
 
-export const toBatchFormatEdit = (batches, isEdit = false) => {
-  return typeof batches === 'undefined'
-    ? {
-        batchId: '',
-        componentCode: '',
-        componentQuantity: '',
-        quantity: 0,
-        openingDate: dayjs(),
-        dlc: 5
-      }
-    : batches?.map(item => ({
-        batchId: item.batch?.id,
-        componentCode: item?.componentCode,
-        componentQuantity: item.batch?.componentQuantity,
-        componentName: item.batch?.componentName,
-        quantity: item.batch?.batchQuantity,
-        openingDate: formatBakeryPayloadDate(item.openingDate),
-        dlc: item?.batch?.dlcDays
-      }))
-}
+export const toChargeFormatEdit = item => ({
+  childTraceabilityId: item.childTraceability?.id,
+  componentCode: item?.componentCode,
+  componentQuantity: item.componentQuantity,
+  componentName: item.batch?.componentName,
 
-export const toChargeFormat = (charges, quantity) => {
-  return charges?.map(item => ({
-    childTraceabilityId: item.id,
-    componentCode: item.product.metiCode,
-    componentQuantity: quantity,
-    componentName: item.chargeNumber,
-    quantity: item.quantity,
-    openingDate: dayjs(),
-    dlc: item.dlc
-  }))
-}
-
-export const toChargeFormatEdit = charges => {
-  return charges?.map(item => ({
-    childTraceabilityId: item.childTraceabilityId?.id,
-    componentCode: item?.componentCode,
-    componentQuantity: item.batch?.componentQuantity,
-    componentName: item.batch?.componentName,
-
-    quantity: item.batch?.batchQuantity,
-    openingDate: formatBakeryPayloadDate(item?.openingDate),
-    dlc: item?.batch?.dlcDays
-  }))
-}
+  quantity: item.batch?.batchQuantity,
+  openingDate: formatPayloadDate(item?.openingDate),
+  dlc: item?.batch?.dlcDays
+})
 
 export const columns: any[] = [
   {

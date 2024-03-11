@@ -44,7 +44,7 @@ const TaskAllocation = () => {
             url: '/volumetry/tasks/aggregation/summary',
             filters: [
               { name: 'taskTemplateId', value: taskTemplateId },
-              { name: 'genericDepartmentId', value: 1 } //TODO remove this when BE is implemented
+              { name: 'departmentAliasId', value: 1 } //TODO remove this when BE is implemented
             ],
             page,
             rowsPerPage
@@ -78,7 +78,7 @@ const TaskAllocation = () => {
           url: '/volumetry/tasks/aggregation/summary',
           filters: [
             { name: 'taskTemplateId', value: taskTemplateId },
-            { name: 'genericDepartmentId', value: 1 } //TODO remove this when BE is implemented
+            { name: 'departmentAliasId', value: 1 } //TODO remove this when BE is implemented
           ],
           page,
           rowsPerPage

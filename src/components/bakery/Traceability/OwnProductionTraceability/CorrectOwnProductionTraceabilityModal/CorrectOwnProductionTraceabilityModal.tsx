@@ -11,6 +11,12 @@ import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
 import { getInitialValues, validationSchema } from './helpers'
 import { SelectCharge } from './SelectCharge'
+import {
+  quantityCalculation,
+  toBatchFormat,
+  toChargeFormat
+} from '../AddOwnProductionTraceabilityModal/helpers'
+import dayjs from 'dayjs'
 
 interface CorrectOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -22,53 +28,66 @@ export const CorrectOwnProductionTraceabilityModal = ({
   closeModal,
   correctItemQuery
 }: CorrectOwnProductionTraceabilityModalProps) => {
-
   const { showNotification } = useNotification()
-  const [selectedRows, setSelectedRows] = useState([])
-  const [showAddBatch, setShowAddBatch] = useState<boolean>(false)
-  const [showAddCharge, setShowAddCharge] = useState<boolean>(false)
+  const [step, setStep] = useState<number>(0)
+  const [componentMetiCode, setComponentMetiCode] = useState<string | number | undefined>()
 
-  const editItem = correctItemQuery?.data
-
-  const submitTask = async values => {
-    await makeCorePutRequest(`/bakery/traceability/production/correction/${editItem.id}`, values)
-  }
-  const [recipeMetiCode, setRecipeMetiCode] = useState()
-  const [componentMetiCode, setComponentMetiCode] = useState()
-
-  const { isLoading, mutate } = useMutation(submitTask, {
-    onSuccess: () => {
-      closeModal()
-      showNotification({
-        message: `Data added successfully`,
-        type: 'success'
-      })
+  const correctItemMutation = useMutation(
+    async (values: any) => {
+      await makeCorePutRequest(
+        `/bakery/traceability/production/correction/${correctItemQuery?.data?.id}`,
+        values
+      )
     },
-    onError: res => {
-      showNotification({
-        message: `Error while trying to add data, ${formatErrorMessage(res)}`,
-        type: 'error'
-      })
+    {
+      onSuccess: () => {
+        showNotification({
+          message: `Data added successfully`,
+          type: 'success'
+        })
+        cancel()
+      },
+      onError: res => {
+        showNotification({
+          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          type: 'error'
+        })
+      }
     }
-  })
+  )
 
   const initialValues = useMemo(
-    () => getInitialValues(selectedRows, editItem),
-    [selectedRows, editItem?.id]
+    () => getInitialValues(correctItemQuery?.data),
+    [correctItemQuery?.data?.id]
   )
 
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: true,
-    validationSchema: validationSchema,
-    initialValues: initialValues,
-    onSubmit: async (values: any, { resetForm }) => {
+    validationSchema,
+    initialValues,
+    onSubmit: async (values: any) => {
       const payload = {
-        ...values,
-        productId: values.productId,
+        productId: values?.product?.productId,
         productionDate: formatPayloadDate(values.productionDate),
-        metiCode: values?.metiCode,
-        productName: values.productName
+        chargeNumber: values?.chargeNumber,
+        productionOperator: values?.productionOperator,
+        quantity: values?.quantity,
+        thermalCondition: values?.thermalCondition,
+        dlc: values?.dlc,
+        conform: values?.conform,
+        nonComplianceReason: values?.nonComplianceReason,
+        productDestination: values?.productDestination,
+        metiCode: values?.product?.metiCode,
+        productName: values.product?.name,
+        traceabilityProductionList: values?.traceabilityProductionList.map(item =>
+          item.hasSecondaryDlc
+            ? {
+              ...item,
+              dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
+            }
+            : item
+        )
       }
 
       if (values.traceabilityProductionList.length === 0) {
@@ -80,50 +99,69 @@ export const CorrectOwnProductionTraceabilityModal = ({
         return
       }
 
-      mutate(payload)
-      resetForm()
-      setSelectedRows([])
+      const emptyBatches =
+        recipeQuery.data.batches.length > 0 &&
+        recipeQuery.data.batches.find(
+          batch =>
+            !values.traceabilityProductionList.some(
+              item => item.componentCode === batch.componentCode && item.batchId
+            )
+        )
+
+      const emptyCharges =
+        recipeQuery.data.charges.length > 0 &&
+        recipeQuery.data.charges.find(
+          charge =>
+            !values.traceabilityProductionList.some(
+              item => item.componentCode === charge.componentCode && item.childTraceabilityId
+            )
+        )
+
+      if (emptyBatches || emptyCharges) {
+        showNotification({
+          message: `Cannot save without one item per batch and charge.`,
+          type: 'error'
+        })
+
+        return
+      }
+
+      correctItemMutation.mutate(payload)
     }
   })
 
   const cancel = () => {
     closeModal()
-    setShowAddBatch(false)
+    setStep(0)
     formik.resetForm()
-    formik.setFieldValue('traceabilityProductionList', [])
-    setSelectedRows([])
   }
 
   const recipeQuery = useQuery(
-    ['receip', editItem?.product?.metiCode],
+    ['receip', formik.values?.product?.metiCode],
     async () => {
-      const result = await makeCoreGetRequest(
-        `/bakery/recipe/${editItem?.product?.metiCode}`
-      )
+      const result = await makeCoreGetRequest(`/bakery/recipe/${formik.values?.product?.metiCode}`)
       let charges = []
       let batches = []
       let others = []
 
       if (result) {
         result[0].componentList.forEach(item => {
-
-          if(item.withBatch && item.withRecipe)  {
+          if (item.withBatch && item.withRecipe) {
             charges.push(item)
-          } else if(item.withBatch) {
+          } else if (item.withBatch) {
             batches.push(item)
           } else if (item.withRecipe) {
             charges.push(item)
           } else {
             others.push(item)
           }
-
         })
       }
 
       return { charges, batches, others, details: result[0] }
     },
     {
-      enabled: !!editItem?.product?.metiCode,
+      enabled: !!formik.values?.product?.metiCode,
       onError: error => {
         showNotification({
           message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
@@ -132,6 +170,55 @@ export const CorrectOwnProductionTraceabilityModal = ({
       }
     }
   )
+  const addNewBatches = (batchesToAdd: any[]) => {
+    if (batchesToAdd.length === 0) return
+
+    const mewBatches = batchesToAdd.filter(
+      b => !formik.values.traceabilityProductionList.some(c => c.batchId === b.id)
+    )
+
+    if (mewBatches.length === 0) return
+
+    const componentQuantity = recipeQuery?.data?.batches?.find(
+      b => b.componentCode === componentMetiCode
+    )?.componentQuantity
+
+    const calculatedQuantity = quantityCalculation(
+      formik.values.quantity,
+      componentQuantity,
+      recipeQuery?.data?.details?.recipeQuantity
+    )
+
+    formik.setFieldValue('traceabilityProductionList', [
+      ...formik.values.traceabilityProductionList,
+      ...mewBatches.map(b => toBatchFormat(b, calculatedQuantity))
+    ])
+  }
+
+  const addNewCharges = (chargesToAdd: any[]) => {
+    if (chargesToAdd.length === 0) return
+
+    const mewCharges = chargesToAdd.filter(
+      ch => !formik.values.traceabilityProductionList.some(c => c.childTraceabilityId === ch.id)
+    )
+
+    if (mewCharges.length === 0) return
+
+    const componentQuantity = recipeQuery?.data?.charges?.find(
+      b => b.componentCode === componentMetiCode
+    )?.componentQuantity
+
+    const calculatedQuantity = quantityCalculation(
+      formik.values.quantity,
+      componentQuantity,
+      recipeQuery?.data?.details?.recipeQuantity
+    )
+
+    formik.setFieldValue('traceabilityProductionList', [
+      ...formik.values.traceabilityProductionList,
+      ...mewCharges.map(b => toChargeFormat(b, calculatedQuantity))
+    ])
+  }
 
   return (
     <Modal
@@ -141,56 +228,48 @@ export const CorrectOwnProductionTraceabilityModal = ({
       modalWidth="50%"
     >
       <Grid container>
-        {(isLoading || correctItemQuery.isFetching) && (
+        {(correctItemMutation.isLoading || correctItemQuery.isFetching) && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         )}
-        {(!isLoading && correctItemQuery?.data) && (
+        {!correctItemMutation.isLoading && correctItemQuery?.data && (
           <>
             {
               [
                 <ProductDetails
-                  onSelectBatch={(step?: number) => {
-                    if (step === 2) {
-                      setShowAddCharge(true)
-                    }
-                    if (typeof step === 'undefined') {
-                      setShowAddBatch(true)
-                    }
+                  onAddBatch={componentMetiCode => {
+                    setComponentMetiCode(componentMetiCode)
+                    setStep(1)
+                  }}
+                  onAddCharge={componentMetiCode => {
+                    setComponentMetiCode(componentMetiCode)
+                    setStep(2)
                   }}
                   onCancel={cancel}
-                  selectedRows={selectedRows}
                   formik={formik}
-                  setComponentMetiCode={setComponentMetiCode}
-                  editItem={editItem}
                   recipeQuery={recipeQuery}
                 />,
                 <SelectBatch
-                  onContinue={() => {
-                    setShowAddBatch(false)
+                  onContinue={batches => {
+                    addNewBatches(batches)
+                    setStep(0)
                   }}
                   onCancel={() => {
-                    setShowAddBatch(false)
-                    setSelectedRows([])
+                    setStep(0)
                   }}
-                  selectedRows={selectedRows}
-                  setSelectedRows={setSelectedRows}
                   metiCode={formik.values?.metiCode}
                   componentMetiCode={componentMetiCode}
-                  formik={formik}
-                  recipeQuery={recipeQuery}
                 />,
                 <SelectCharge
-                  onContinue={() => {
-                    setShowAddCharge(false)
+                  onContinue={charges => {
+                    addNewCharges(charges)
+                    setStep(0)
                   }}
-                  onCancel={cancel}
-                  setSelectedRows={setSelectedRows}
-                  selectedRows={selectedRows}
-                  formik={formik}
+                  onCancel={() => {
+                    setStep(0)
+                  }}
                   componentMetiCode={componentMetiCode}
-                  recipeQuery={recipeQuery}
                 />
-              ][showAddBatch ? 1 : showAddCharge ? 2 : 0]
+              ][step]
             }
           </>
         )}

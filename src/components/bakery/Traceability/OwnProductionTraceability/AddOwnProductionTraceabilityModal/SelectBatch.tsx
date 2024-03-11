@@ -3,39 +3,46 @@ import { Button, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
-import { Dispatch, useState } from 'react'
-import { columns, toBatchFormat } from './helpers'
+import { useState } from 'react'
+import { columns } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
-import { Product } from '../../ReceivedProducts/interfaces'
-
 interface SelectBatchProps {
-  onContinue: () => void
+  onContinue: (batches: any[]) => void
   onCancel: () => void
-  setSelectedRows: Dispatch<any>
-  selectedProduct: Product | { metiCode: string }
-  formik: any
+  componentMetiCode: string | number
 }
 
-export const SelectBatch = (props: SelectBatchProps) => {
-  const { onContinue, onCancel, setSelectedRows } = props
+export const SelectBatch = ({
+  onContinue,
+  onCancel,
+  componentMetiCode,
+}: SelectBatchProps) => {
   const { showNotification } = useNotification()
 
   const [tableItems, setTableItems] = useState<any[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  const [selectedRows, setSelectedRows] = useState<any[]>([])
+
   const fetchData = async (page, rowsPerPage) => {
     try {
       setIsLoading(true)
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/batch',
+          url: '/bakery/batch/assign',
           page,
           rowsPerPage,
+          order: 'asc',
+          orderBy: 'expireDate',
           filters: [
             {
               name: 'product.metiCode',
-              value: props.selectedProduct?.metiCode
+              value: componentMetiCode
+            },
+            {
+              name: 'batchStatus',
+              value: 'AVAILABLE'
             }
           ]
         })
@@ -60,12 +67,12 @@ export const SelectBatch = (props: SelectBatchProps) => {
             orderBy="entryDate"
             order="asc"
             rows={tableItems}
+            isLoading={isLoading}
             handleRemoteData={debounce(fetchData, 500)}
             isRemote
-            isLoading={isLoading}
             columns={columns}
             totalCount={totalCount}
-            selectRows={rows => setSelectedRows(toBatchFormat({batches: rows, quantity: props.formik.values?.quantity}))}
+            selectRows={setSelectedRows}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
           />
@@ -82,7 +89,7 @@ export const SelectBatch = (props: SelectBatchProps) => {
             size="large"
             variant="contained"
             label="Continua"
-            onClick={onContinue}
+            onClick={() => onContinue(selectedRows)}
             disabled={false}
           />
         </Grid>

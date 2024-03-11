@@ -1,25 +1,30 @@
 import { Grid, Divider, CircularProgress } from '@mui/material'
 import { Button, DatePicker, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { AddActionIcon, DeleteActionIcon } from 'icons'
-import dayjs from 'dayjs'
 import { quantityCalculation } from '../helpers'
 import { Fragment } from 'react'
+import { formatPayloadDate } from '../../../../../../utils/helpers'
+import dayjs from 'dayjs'
 
 interface ProductDetailsBatchesProps {
-  onSelectBatch: Function
   productMetiCode: any
   formik: any
   onDeleteBatch: Function
   receip: any
-  setComponentMetiCode: Function
+  onAddCharge: (componentMetiCode: string | number) => void
+  onAddBatch: (componentMetiCode: string | number) => void
 }
 
-export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
-  const { formik, productMetiCode, onSelectBatch, onDeleteBatch, receip, setComponentMetiCode } = props
+export const ProductDetailsBatches = ({
+  formik,
+  productMetiCode,
+  onDeleteBatch,
+  receip,
+  onAddBatch,
+  onAddCharge
+}: ProductDetailsBatchesProps) => {
 
-  const metiCode = productMetiCode || formik.values.metiCode
-
-  if (typeof metiCode === 'undefined') {
+  if (typeof productMetiCode === 'undefined') {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
@@ -60,8 +65,7 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                 variant="outlined"
                 label="Adauga lot"
                 onClick={() => {
-                  onSelectBatch()
-                  setComponentMetiCode(batch.componentCode)
+                  onAddBatch(batch.componentCode)
                 }}
                 style={{ height: '40px', fontSize: '10px' }}
                 disabled={!formik.values?.quantity}
@@ -101,12 +105,39 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                       infoIcon={'kg'}
                     />
                   </Grid>
+
+                  {item.hasSecondaryDlc && (
+                    <Grid item xs={3}>
+                      <DatePicker
+                        label="Data deschidere"
+                        onChange={value =>
+                          formik.setFieldValue(
+                            `traceabilityProductionList[${index}].openingDate`,
+                            formatPayloadDate(value)
+                          )
+                        }
+                        variant="outlined"
+                        required
+                        helperText={formik.errors?.traceabilityProductionList?.[index]?.openingDate as string}
+                        error={!!formik.errors?.traceabilityProductionList?.[index]?.openingDate}
+                        value={
+                          formik.values?.traceabilityProductionList?.[index]?.openingDate
+                            ? dayjs(formik.values?.traceabilityProductionList?.[index]?.openingDate)
+                            : undefined
+                        }
+                        // maxDate={dayjs()}
+                        style={{ display: 'flex' }}
+                      />
+                    </Grid>
+                  )}
+
                   <Grid
                     item
                     xs={3}
                     display={'flex'}
-                    alignSelf={'flex-end'}
+                    alignSelf={'flex-start'}
                     justifyContent={'flex-end'}
+                    sx={{ marginTop: '17px' }}
                   >
                     <Button
                       onClick={() => onDeleteBatch(item.batchId)}
@@ -130,54 +161,49 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
       </Grid>
 
       {receip?.charges.map((item, index) => (
-        <>
-          <>
-            <Grid item xs={3}>
-              <Input
-                type="text"
-                variant="outlined"
-                label={`Articol compozant ${index + 1}`}
-                value={item.componentName}
-                name="componentName"
-                disabled
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <Input
-                type="number"
-                variant="outlined"
-                label={`Cantitatea`}
-                value={`${quantityCalculation(
-                  formik.values.quantity,
-                  item.componentQuantity,
-                  receip.details.recipeQuantity
-                )}`}
-                name="componentQuantity"
-                disabled
-              />
-            </Grid>
+        <Fragment key={index}>
+          <Grid item xs={3}>
+            <Input
+              type="text"
+              variant="outlined"
+              label={`Articol compozant ${index + 1}`}
+              value={item.componentName}
+              name="componentName"
+              disabled
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <Input
+              type="number"
+              variant="outlined"
+              label={`Cantitatea`}
+              value={`${quantityCalculation(
+                formik.values.quantity,
+                item.componentQuantity,
+                receip.details.recipeQuantity
+              )}`}
+              name="componentQuantity"
+              disabled
+            />
+          </Grid>
+          <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
+            <IconButton
+              startIcon={<AddActionIcon />}
+              size="large"
+              variant="outlined"
+              label="Adauga sarja"
+              onClick={() => {
+                onAddCharge(item.componentCode)
+              }}
+              style={{ height: '40px', fontSize: '10px' }}
+              disabled={!formik.values?.quantity}
+            />
+          </Grid>
+          <Grid item xs={3}></Grid>
 
-            <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
-              <IconButton
-                startIcon={<AddActionIcon />}
-                size="large"
-                variant="outlined"
-                label="Adauga sarja"
-                onClick={() => {
-                  setComponentMetiCode(item.componentCode)
-                  onSelectBatch(3)
-                }}
-                style={{ height: '40px', fontSize: '10px' }}
-                disabled={!formik.values?.quantity}
-              />
-            </Grid>
-
-            <Grid item xs={3}></Grid>
-          </>
-
-          {formik.values.traceabilityProductionList.map((charge, idx) => {
-            if (charge.componentCode === item.componentCode && charge.childTraceabilityId) {
-              return (
+          {formik.values.traceabilityProductionList.map((charge, idx) => (
+            <Fragment key={idx}>
+              {charge.componentCode === item.componentCode && charge.childTraceabilityId ? (
                 <Grid item container xs={12} spacing={2}>
                   <Grid item xs={3}>
                     <Input
@@ -223,10 +249,10 @@ export const ProductDetailsBatches = (props: ProductDetailsBatchesProps) => {
                     </Button>
                   </Grid>
                 </Grid>
-              )
-            }
-          })}
-        </>
+              ) : null}
+            </Fragment>
+          ))}
+        </Fragment>
       ))}
 
       <Grid item xs={12}>

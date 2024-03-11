@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Grid, Divider } from '@mui/material'
 import {
   Autocomplete,
@@ -9,26 +8,28 @@ import {
   RadioButtonGroup
 } from '@fullscreendigital/carrefour-dex-fe'
 import { AddActionIcon, DeleteActionIcon } from 'icons'
-import { FormInfoItems } from '../../../../core-ui/FormInfoItems'
 import dayjs from 'dayjs'
-import { SelectProduct } from '../../ReceivedProducts/AddReceivedProduct/SelectProduct'
-import { toBoolean } from 'utils/helpers'
+import { formatPayloadDate, toBoolean } from 'utils/helpers'
+import { useSelectProductSearch } from '../../useSelectProductSearch'
+import { thermalContiotionOptions } from '../../interfaces'
 
 interface ProductDetailsProps {
   onCancel: () => void
   onSelectBatch: () => void
-  selectedProduct: any
-  selectedRows: any
-  formik
-  isEdit: boolean
+  formik: any
 }
 
-export const ProductDetails = (props: ProductDetailsProps) => {
-  const { formik, onCancel, onSelectBatch, selectedProduct, selectedRows, isEdit } = props
-
-  useEffect(() => {
-    formik.setFieldValue('traceabilityFrozenList', selectedRows)
-  }, [selectedRows])
+export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetailsProps) => {
+  const selectProductSearch = useSelectProductSearch({
+    optionsMap: ({ id, name, metiCode, metricUnit }) => ({
+      value: id,
+      label: name,
+      metiCode,
+      id,
+      name,
+      metricUnit
+    })
+  })
 
   const onDeleteBatch = id => {
     const newBatches = formik.values.traceabilityFrozenList.filter(batch => batch.batchId !== id)
@@ -37,57 +38,56 @@ export const ProductDetails = (props: ProductDetailsProps) => {
 
   return (
     <Grid container rowSpacing={3.5}>
-      {!isEdit && (
-        <Grid item xs={12} spacing={2}>
-          <FormInfoItems
-            items={[
-              {
-                label: 'Produs:',
-                name: selectedProduct?.name
-              },
-              {
-                label: 'Produs cod Meti:',
-                name: selectedProduct?.metiCode
-              }
-            ]}
-          />
-        </Grid>
-      )}
-
       <Grid container spacing={2} mt={2}>
-        {isEdit && (
-          <>
-            <Grid item xs={3}>
-              <Input
-                type="text"
-                variant="outlined"
-                label="Cod METI"
-                onChange={e => formik.setFieldValue('metiCode', e.currentTarget.value)}
-                value={formik.values.metiCode}
-                name="metiCode"
-                disabled
-              />
-            </Grid>
-            <Grid item xs={9}>
-              <SelectProduct
-                setSelectedProduct={product => {
-                  formik.setFieldValue('productName', product?.name)
-                  formik.setFieldValue('metiCode', product?.metiCode)
-                }}
-                selectedProduct={selectedProduct}
-                onContinue={() => {}}
-                onCancel={() => {}}
-                customLabel={'Produs'}
-                hideActions
-                isEdit={isEdit}
-              />
-            </Grid>
-          </>
-        )}
-
         <Grid item xs={3}>
           <Input
             type="text"
+            variant="outlined"
+            label="Cod METI"
+            onChange={() => {}}
+            value={formik.values.product?.metiCode || ''}
+            name="metiCode"
+            disabled
+          />
+        </Grid>
+        <Grid item xs={9}>
+          <Autocomplete
+            {...selectProductSearch}
+            variant="outlined"
+            label="Produs"
+            autoComplete={false}
+            required
+            filterOptions={x => x}
+            onChange={(event, value) => {
+              if (value) {
+                formik.setFieldValue('product', {
+                  name: value.name,
+                  metiCode: value.metiCode,
+                  id: value.id,
+                  metricUnit: value.metricUnit
+                })
+              } else {
+                formik.setFieldValue('product', null)
+              }
+
+              formik.setFieldValue('traceabilityFrozenList', [])
+            }}
+            value={
+              formik.values?.product
+                ? {
+                    label: formik.values?.product.name,
+                    value: formik.values?.product?.id
+                  }
+                : null
+            }
+            error={!!formik.errors.product}
+            helperText={formik.errors.product as string}
+          />
+        </Grid>
+
+        <Grid item xs={3}>
+          <Input
+            type="number"
             variant="outlined"
             label="Sarja"
             required
@@ -103,16 +103,19 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             type="text"
             variant="outlined"
             label="Cantitate sarja"
-            onChange={({currentTarget: {value}}) => {
+            onChange={({ currentTarget: { value } }) => {
               formik.setFieldValue('quantity', value)
-              formik.setFieldValue('traceabilityFrozenList', formik.values.traceabilityFrozenList.map(tf => ({
-                ...tf,
-                quantity: value
-              })))
+              formik.setFieldValue(
+                'traceabilityFrozenList',
+                formik.values.traceabilityFrozenList.map(tf => ({
+                  ...tf,
+                  quantity: value
+                }))
+              )
             }}
             value={formik.values.quantity}
             name="quantity"
-            infoIcon={selectedProduct?.metricUnit || ''}
+            infoIcon={formik.values?.product?.metricUnit || ''}
             required
             error={!!formik.errors.quantity}
             helperText={formik.errors.quantity as string}
@@ -149,14 +152,10 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             variant="outlined"
             label="Stare termica"
             disableClearable
-            options={[
-              { value: 'BAKED', label: 'COPT' },
-              { value: 'UNBAKED', label: 'NECOPT' }
-            ]}
-            defaultValue={{
-              value: formik.values.thermalCondition || '',
-              label: formik.values.thermalCondition || ''
-            }}
+            options={thermalContiotionOptions}
+            value={
+              thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) || null
+            }
             onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
             required
             error={!!formik.errors.thermalCondition}
@@ -169,9 +168,12 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', toBoolean(option))
-              formik.setFieldValue('nonComplianceReason', null)
-              formik.setFieldValue('productDestination', null)
+              const value = toBoolean(option)
+              formik.setFieldValue('conform', value)
+              if (value) {
+                formik.setFieldValue('nonComplianceReason', '')
+                formik.setFieldValue('productDestination', '')
+              }
             }}
             value={formik.values.conform}
             defaultValue={formik.initialValues.conform ? 'DA' : 'NU'}
@@ -217,7 +219,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
         </Grid>
 
         {formik.values.traceabilityFrozenList.map((item, index) => (
-          <Grid item container xs={12} spacing={2}>
+          <Grid item container xs={12} spacing={2} key={index}>
             <Grid item xs={3}>
               <Input
                 type="text"
@@ -244,23 +246,42 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 }}
                 value={item.quantity}
                 name="quantity"
-                infoIcon={'kg'}
+                infoIcon={formik.values?.product?.metricUnit || ''}
               />
             </Grid>
-            {/*<Grid item xs={3}>*/}
-            {/*  <DatePicker*/}
-            {/*    label="Data deschidere"*/}
-            {/*    onChange={(date: any) => {*/}
-            {/*      const updatedList = [...formik.values.traceabilityFrozenList]*/}
-            {/*      updatedList[index].openingDate = date*/}
 
-            {/*      formik.setFieldValue('traceabilityFrozenList', updatedList)*/}
-            {/*    }}*/}
-            {/*    value={dayjs(item.openingDate)}*/}
-            {/*    variant="outlined"*/}
-            {/*  />*/}
-            {/*</Grid>*/}
-            <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
+            {item.hasSecondaryDlc && (
+              <Grid item xs={3}>
+                <DatePicker
+                  label="Data deschidere"
+                  onChange={value =>
+                    formik.setFieldValue(
+                      `traceabilityFrozenList[${index}].openingDate`,
+                      formatPayloadDate(value)
+                    )
+                  }
+                  variant="outlined"
+                  required
+                  helperText={formik.errors?.traceabilityFrozenList?.[index]?.openingDate as string}
+                  error={!!formik.errors?.traceabilityFrozenList?.[index]?.openingDate}
+                  value={
+                    formik.values?.traceabilityFrozenList?.[index]?.openingDate
+                      ? dayjs(formik.values?.traceabilityFrozenList?.[index]?.openingDate)
+                      : undefined
+                  }
+                  // maxDate={dayjs()}
+                  style={{ display: 'flex' }}
+                />
+              </Grid>
+            )}
+            <Grid
+              item
+              xs={3}
+              display={'flex'}
+              alignSelf={'flex-start'}
+              justifyContent={'flex-end'}
+              sx={{ marginTop: '17px' }}
+            >
               <Button
                 onClick={() => onDeleteBatch(item.batchId)}
                 variant="outlined"

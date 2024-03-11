@@ -6,7 +6,7 @@ import { AccordionDetailsWrapper, BodyItem } from '../ProductManagementTraceabil
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import { Fragment } from 'react'
 
-const FrozenTraceabilityDescription = ({item, chargeItem}) => {
+const FrozenTraceabilityDescription = ({ item, chargeItem }) => {
   const { traceabilityFrozenList, product } = item
 
   const bodyItemValue = (batchItem, frozenItem, columnField) => {
@@ -34,10 +34,7 @@ const FrozenTraceabilityDescription = ({item, chargeItem}) => {
                 {column.render ? (
                   column.render(chargeItem)
                 ) : (
-                  <BodyItem
-                    name={column.title}
-                    value={chargeItem[column?.field]}
-                  />
+                  <BodyItem name={column.title} value={chargeItem[column?.field]} />
                 )}
               </Fragment>
             )
@@ -45,7 +42,7 @@ const FrozenTraceabilityDescription = ({item, chargeItem}) => {
         </Grid>
       </AccordionDetailsWrapper>
       <Grid item my={1} mr={1}>
-        {traceabilityFrozenList.map((frozenItem) => (
+        {traceabilityFrozenList.map(frozenItem => (
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -67,68 +64,44 @@ const FrozenTraceabilityDescription = ({item, chargeItem}) => {
                 </Typography>
 
                 <Grid item my={0.5} mx={1}>
-                  <Capsule label="Cod METI" value={frozenItem?.batch?.product?.metiCode} />
+                  <Capsule
+                    label="Cod METI"
+                    value={frozenItem?.batch?.product?.metiCode}
+                    valueColor={'#004f9b'}
+                  />
                 </Grid>
 
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Furnizor" value={frozenItem.batch.supplier.supplierName} />
+                  <Capsule
+                    label="Furnizor"
+                    value={frozenItem.batch.supplier.supplierName}
+                    valueColor={'#004f9b'}
+                  />
                 </Grid>
 
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Furnizor (Cod Meti)" value={frozenItem?.batch?.supplier?.supplierCode} />
+                  <Capsule
+                    label="Furnizor (Cod Meti)"
+                    value={frozenItem?.batch?.supplier?.supplierCode}
+                    valueColor={'#004f9b'}
+                  />
                 </Grid>
 
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Familie" value={frozenItem?.batch?.product?.familyName} />
+                  <Capsule
+                    label="Familie"
+                    value={frozenItem?.batch?.product?.familyName}
+                    valueColor={'#004f9b'}
+                  />
                 </Grid>
 
                 <Grid item my={0.5} mr={1}>
-                  <Capsule label="Subfamilie" value={frozenItem?.batch?.product?.subfamily} />
+                  <Capsule
+                    label="Subfamilie"
+                    value={frozenItem?.batch?.product?.subfamily}
+                    valueColor={'#004f9b'}
+                  />
                 </Grid>
-
-                {/**/}
-
-                {/*<Grid item my={0.5} mx={1}>*/}
-                {/*  <Capsule label="Cant. fab." value={frozenItem.quantity} />*/}
-                {/*</Grid>*/}
-
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="UM" value={product.metricUnit} />*/}
-                {/*</Grid>*/}
-
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="Data intrare MP" value={formatBakeryPayloadDate(frozenItem.batch.entryDate)} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="Furnizor MP" value={frozenItem.batch.supplier.supplierName} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="Cant. fab./lot" value={frozenItem.quantity} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="DLC sec. MP" value={formatBakeryPayloadDate(frozenItem.openingDate)} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="DLC MP" value={formatBakeryPayloadDate(frozenItem.batch.expireDate)} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="Operator trasab." value={chargeItem.createdBy} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule*/}
-                {/*    label="Data introducere"*/}
-                {/*    value={formatBakeryPayloadDate(chargeItem.createdDate)}*/}
-                {/*  />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="Ultima modificare" value={chargeItem.modifiedBy} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule*/}
-                {/*    label="Data ultimei modificari"*/}
-                {/*    value={formatBakeryPayloadDate(chargeItem.modifiedDate)}*/}
-                {/*  />*/}
-                {/*</Grid>*/}
               </Grid>
             </AccordionSummary>
 
@@ -141,10 +114,7 @@ const FrozenTraceabilityDescription = ({item, chargeItem}) => {
                         {column.render ? (
                           column.render(frozenItem, chargeItem)
                         ) : (
-                          <BodyItem
-                            name={column.title}
-                            value={chargeItem[column?.field]}
-                          />
+                          <BodyItem name={column.title} value={chargeItem[column?.field]} />
                         )}
                       </Fragment>
                     )

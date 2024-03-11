@@ -5,10 +5,10 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
-import { debounce } from '@mui/material'
+import { debounce, useMediaQuery } from '@mui/material'
 import { AddActionIcon, EditActionIcon } from 'icons'
 import OwnProductionTraceabilityDescription from './OwnProductionTraceabilityDescription'
-import { OwnProductionTraceabilityModal } from './OwnProductionTraceabilityModal/OwnProductionTraceabilityModal'
+import { AddOwnProductionTraceabilityModal } from './AddOwnProductionTraceabilityModal/AddOwnProductionTraceabilityModal'
 import { EditOwnProductionTraceabilityModal } from './EditOwnProductionTraceabilityModal/EditOwnProductionTraceabilityModal'
 import { handleQueryError } from 'utils/helpers'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
@@ -36,6 +36,8 @@ export const OwnProductionTraceability = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [itemIdToCorrect, setItemIdToCorrect] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
@@ -182,12 +184,15 @@ export const OwnProductionTraceability = () => {
     }
   ]
 
+  const isXs = useMediaQuery('(max-width:624px)')
+
   return (
     <div className={s.mainContainer}>
       <>
-        <OwnProductionTraceabilityModal
+        <AddOwnProductionTraceabilityModal
           isModalOpen={isModalOpen}
           closeModal={() => setIsModalOpen(false)}
+          setShouldRefreshData={setShouldRefreshData}
         />
         <CorrectOwnProductionTraceabilityModal
           isModalOpen={!!itemIdToCorrect}
@@ -241,9 +246,11 @@ export const OwnProductionTraceability = () => {
               desktopIcon: <EditActionIcon />
             }
           ]}
-          rowActionsWidth="90px"
-          rowsPerPage={25}
-          rowsPerPageOptions={[25, 50, 100]}
+          rowActionsWidth="200px"
+          rowsPerPage={isXs ? 5 : 25}
+          rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
+          setShouldRefreshData={setShouldRefreshData}
+          shouldRefreshData={shouldRefreshData}
         />
       </>
     </div>

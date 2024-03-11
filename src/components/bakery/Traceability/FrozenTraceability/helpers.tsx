@@ -4,6 +4,7 @@ import { IconCell } from '../../../core-ui/IconCell'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import { ThermalCondition } from 'components/bakery/interfaces'
+import { BatchStatus } from '../interfaces'
 
 export const columns: any[] = [
   {
@@ -47,8 +48,8 @@ export const columns: any[] = [
   },
   {
     title: 'Lot',
-    field: 'batch.batchQuantity',
-    render: row => <BodyItem name="Lot" value={row?.batch?.batchQuantity} />
+    field: 'batch.batchName',
+    render: row => <BodyItem name="Lot" value={row?.batch?.batchName} />
   },
   {
     field: 'batch.hasExpireDate',
@@ -127,20 +128,13 @@ export const columns: any[] = [
     title: 'Nr. zile valabilitate DLC secundar',
     field: 'batch.dlcDays',
     render: row => (
-      <BodyItem
-        name="Nr. zile valabilitate DLC secundar"
-        value={
-          row?.batch?.dlcDays === 0 || typeof row?.batch?.dlcDays === 'undefined'
-            ? ''
-            : row?.batch?.dlcDays
-        }
-      />
+      <BodyItem name="Nr. zile valabilitate DLC secundar" value={row?.batch?.dlcDays || ''} />
     )
   },
   {
     title: 'Status lot',
     field: 'batchStatus',
-    render: row => <BodyItem name="Status lot" value={row?.batch?.batchStatus} />
+    render: row => <BodyItem name="Status lot" value={BatchStatus[row?.batch?.batchStatus] || ''} />
   },
   // TODO check this field
   // {
@@ -195,6 +189,11 @@ export const columns: any[] = [
         value={formatPayloadDate(row?.batch?.modifiedDate)}
       />
     )
+  },
+  {
+    title: 'Data deschiderii',
+    field: 'batch.openingDate',
+    render: row => <BodyItem name="Data deschiderii" value={formatPayloadDate(row?.openingDate)} />
   }
   // ------------------------
 
@@ -352,9 +351,62 @@ export const mainItemBodyColumns = [
   {
     title: 'Data productiei',
     field: 'productionDate'
+  }
+]
+
+export const selectBatchColumns: any[] = [
+  {
+    title: 'Data intrare',
+    field: 'entryDate',
+    align: 'left',
+    type: 'string',
+    width: '100px',
+    render: (row: any) => formatBakeryPayloadDate(row.entryDate)
   },
   {
-    title: 'DLC Prod. Fab.',
-    field: 'dlc'
+    title: 'Nr. lot',
+    field: 'batchName',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'Furnizor',
+    field: 'supplier.supplierName',
+    align: 'left',
+    render: (row: any) => row.supplier.supplierName,
+    type: 'string',
+    width: '250px'
+  },
+  {
+    title: 'Data expirare',
+    field: 'expireDate',
+    align: 'left',
+    type: 'string',
+    width: '100px',
+    render: (row: any) => formatBakeryPayloadDate(row.expireDate)
+  },
+  {
+    title: 'Cantitate intrata',
+    field: 'batchQuantity',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'Cantitate consumata',
+    field: 'consumedAmount',
+    align: 'left',
+    type: 'string',
+    width: '100px',
+    render: (row: any) => row.consumedAmount || ''
+  },
+  {
+    title: 'Nr. zile DLC',
+    field: 'dlcDays',
+    align: 'left',
+    type: 'string',
+    width: '110px',
+    render: (row: any) => row.dlcDays || ''
   }
 ]

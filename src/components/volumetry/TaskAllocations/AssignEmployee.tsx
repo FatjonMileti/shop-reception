@@ -55,7 +55,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
   const validationSchema = yup.object({
     workerId: yup.number().required('Acest camp este obligatoriu.'),
     taskTemplateId: yup.number().required('Acest camp este obligatoriu.'),
-    workload: yup.number().required('Acest camp este obligatoriu.')
+    allocatedWorkload: yup.number().required('Acest camp este obligatoriu.')
   })
 
   const formik = useFormik({
@@ -65,11 +65,11 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     initialValues: {
       workerId: null,
       taskTemplateId: taskTemplateId,
-      workload: 0
+      allocatedWorkload: 0
     },
     onSubmit: async (values, { resetForm }) => {
       const payload = {
-        workload: values.workload,
+        allocatedWorkload: values.allocatedWorkload,
         workerId: values.workerId,
         taskTemplateId: values.taskTemplateId
       }
@@ -115,16 +115,16 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
         <Grid xs={12} item>
           <Input
             type="text"
-            name="volume"
-            label="Volum"
+            name="allocatedWorkload"
+            label="Volum alocat"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('workload', event.target.value)
+              formik.setFieldValue('allocatedWorkload', event.target.value)
             }
-            value={formik.values.workload}
+            value={formik.values.allocatedWorkload}
             style={{ width: '100%' }}
-            error={!!formik.errors.workload}
-            helperText={formik.errors.workload as string}
+            error={!!formik.errors.allocatedWorkload}
+            helperText={formik.errors.allocatedWorkload as string}
             required
           />
         </Grid>

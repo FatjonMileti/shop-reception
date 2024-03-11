@@ -3,10 +3,9 @@ import {
   AccordionDetailsWrapper,
   AccordionSummaryWrapper,
   BodyItem,
-  Column,
   HeaderItem
 } from './AccordionTable'
-import { debounce, Grid, Typography } from '@mui/material'
+import { Grid, Typography, useMediaQuery, debounce } from '@mui/material'
 import { FamilyItem, ProductManagementItem, SubfamilyItem } from '../../StoreManagerRole/interfaces'
 import { makeCoreGetRequest } from '../../../../utils/api'
 import { toTableGETUrl } from '../../../core-ui/Table/serializers'
@@ -20,7 +19,7 @@ import s from '../../commonStyles.modules.scss'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 import { ImageCell } from '../../../core-ui/ImageCell'
-import {columns, headerItems} from './helpers'
+import { columns, headerItems } from './helpers'
 
 export const ProductManagementTraceability = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -126,7 +125,7 @@ export const ProductManagementTraceability = () => {
         />
       ),
       type: 'autocomplete',
-      label: 'Familie',
+      label: 'Familie'
     },
     {
       name: 'subfamily',
@@ -161,6 +160,8 @@ export const ProductManagementTraceability = () => {
       label: 'Produs cadentier'
     }
   ]
+
+  const isXs = useMediaQuery('(max-width:624px)')
 
   return (
     <div className={s.mainContainer}>
@@ -206,10 +207,10 @@ export const ProductManagementTraceability = () => {
           ),
           borderLeftColor: '#0970E6'
         }))}
-        handleRemoteData={ debounce(fetchData, 500) }
+        handleRemoteData={debounce(fetchData, 500)}
         rowActionsWidth="200px"
-        rowsPerPage={25}
-        rowsPerPageOptions={[25, 50, 100]}
+        rowsPerPage={isXs ? 5 : 25}
+        rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
       />
     </div>
   )

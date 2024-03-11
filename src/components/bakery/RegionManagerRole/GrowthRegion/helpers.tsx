@@ -4,7 +4,7 @@ import { BooleanText } from 'components/core-ui/BooleanText'
 import { ImageCell } from 'components/core-ui/ImageCell'
 import { DatePicker, Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
-export const columns = [
+export const columns = (openMetiModal) => [
   {
     title: 'Produs',
     field: 'productName',
@@ -26,7 +26,12 @@ export const columns = [
     width: '100px',
     sticky: true,
     type: 'string',
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    render: row => (
+      <span style={{ cursor: 'pointer', color: '#2781E8' }} onClick={() => openMetiModal(row)}>
+        {row.productMetiCode}
+      </span>
+    )
   },
   {
     title: 'Familie',
