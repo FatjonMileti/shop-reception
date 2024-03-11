@@ -7,6 +7,7 @@ import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { formatErrorMessage } from 'utils/formatting'
 import { toBoolean } from 'utils/helpers'
+import { validationSchema } from './helpers'
 
 interface EditFrozenTraceabilityModalProps {
   isModalOpen: boolean
@@ -19,38 +20,41 @@ export const EditFrozenTraceabilityModal = ({
   item
 }: EditFrozenTraceabilityModalProps) => {
   const { showNotification } = useNotification()
-  const submitTask = async values => {
-    await makeCorePutRequest(`/bakery/traceability/frozen/verification/${item.id}`, values)
-  }
 
-  const { isLoading, mutate } = useMutation(submitTask, {
-    onSuccess: () => {
-      closeModal()
-      showNotification({
-        message: `Data added successfully`,
-        type: 'success'
-      })
+  const editFrozenTraceAbilityMutation = useMutation(
+    async (values: any) => {
+      await makeCorePutRequest(`/bakery/traceability/frozen/verification/${item.id}`, values)
     },
-    onError: res => {
-      showNotification({
-        message: `Error while trying to add data, ${formatErrorMessage(res)}`,
-        type: 'error'
-      })
+    {
+      onSuccess: () => {
+        formik.resetForm()
+        closeModal()
+        showNotification({
+          message: `Data added successfully`,
+          type: 'success'
+        })
+      },
+      onError: res => {
+        showNotification({
+          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          type: 'error'
+        })
+      }
     }
-  })
+  )
 
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: true,
+    validationSchema,
     initialValues: {
       conform: item?.conform || false,
       nonComplianceReason: item?.nonComplianceReason || '',
       productDestination: item?.productDestination || '',
       isVerified: item?.verified || false
     },
-    onSubmit: async (values: any, { resetForm }) => {
-      mutate(values)
-      resetForm()
+    onSubmit: async (values: any) => {
+      editFrozenTraceAbilityMutation.mutate(values)
     }
   })
 
@@ -58,7 +62,7 @@ export const EditFrozenTraceabilityModal = ({
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={`${'Editare trasabilitate congelate'}`}
+      modalTitle="Editare trasabilitate congelate"
       modalWidth="50%"
     >
       <Grid container spacing={2}>
@@ -68,9 +72,13 @@ export const EditFrozenTraceabilityModal = ({
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', toBoolean(option))
-              formik.setFieldValue('nonComplianceReason', null)
-              formik.setFieldValue('productDestination', null)
+              const conform = toBoolean(option)
+              formik.setFieldValue('conform', conform)
+
+              if (conform) {
+                formik.setFieldValue('nonComplianceReason', null)
+                formik.setFieldValue('productDestination', null)
+              }
             }}
             value={formik.values.conform}
             defaultValue={formik.initialValues.conform ? 'DA' : 'NU'}
@@ -93,9 +101,10 @@ export const EditFrozenTraceabilityModal = ({
             variant="outlined"
             label="Motiv neconformitate"
             onChange={e => formik.setFieldValue('nonComplianceReason', e.currentTarget.value)}
-            value={formik.values.nonComplianceReason}
+            value={formik.values.nonComplianceReason ?? ''}
             name="nonComplianceReason"
-            required
+            required={!formik.values.conform}
+            disabled={formik.values.conform}
             error={!!formik.errors.nonComplianceReason}
             helperText={formik.errors.nonComplianceReason as string}
           />
@@ -132,9 +141,10 @@ export const EditFrozenTraceabilityModal = ({
             variant="outlined"
             label="Destinatia produsului neconform"
             onChange={e => formik.setFieldValue('productDestination', e.currentTarget.value)}
-            value={formik.values.productDestination}
+            value={formik.values.productDestination ?? ''}
             name="productDestination"
-            required
+            required={!formik.values.conform}
+            disabled={formik.values.conform}
             fullWidth={item?.createdUser}
             error={!!formik.errors.productDestination}
             helperText={formik.errors.productDestination as string}

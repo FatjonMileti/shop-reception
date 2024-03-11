@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { Tuple, configureStore } from '@reduxjs/toolkit'
 import { createReduxHistoryContext } from 'redux-first-history'
 
 import { createBrowserHistory } from 'history'
@@ -21,7 +21,7 @@ const loadingLockMiddleware = () => next => action => {
   next(action)
 }
 
-const middleware = [loadingLockMiddleware, routerMiddleware]
+const middleware = new Tuple(loadingLockMiddleware, routerMiddleware)
 
 if (process.env.ENV !== 'production') {
   const logger = require('redux-logger').default
@@ -33,7 +33,9 @@ export const store = configureStore({
     ...reducers,
     router: routerReducer
   },
-  middleware
+  middleware: () => {
+    return middleware
+  }
 })
 
 export const history = createReduxHistory(store)

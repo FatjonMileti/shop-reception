@@ -40,7 +40,7 @@ export const toListTableRows = (
 
 export const toAssignedTasksItem = item => ({
   id: item.taskTemplateId,
-  rayonsOrDepartment: item.rayonsOrDepartment,
+  departmentAlias: item.departmentAlias,
   taskName: item.taskName,
   recommendedInterval: item.recommendedInterval,
   priorityId: item.priorityId,

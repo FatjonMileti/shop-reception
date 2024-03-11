@@ -11,6 +11,7 @@ import { AddActionIcon, DeleteActionIcon } from 'icons'
 import { FormInfoItems } from '../../../../core-ui/FormInfoItems'
 import dayjs from 'dayjs'
 import { formatPayloadDate, toBoolean } from 'utils/helpers'
+import { thermalContiotionOptions } from '../../interfaces'
 
 interface ProductDetailsProps {
   onCancel: () => void
@@ -119,14 +120,10 @@ export const ProductDetails = ({
               variant="outlined"
               label="Stare termica"
               disableClearable
-              options={[
-                { value: 'BAKED', label: 'COPT' },
-                { value: 'UNBAKED', label: 'NECOPT' }
-              ]}
-              defaultValue={{
-                value: formik.values.thermalCondition || '',
-                label: formik.values.thermalCondition || ''
-              }}
+              options={thermalContiotionOptions}
+              value={
+                thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) || null
+              }
               onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
               required
               error={!!formik.errors.thermalCondition}
