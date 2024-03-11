@@ -90,7 +90,7 @@ export const AddOwnProductionTraceabilityModal = ({
 
       if (values.traceabilityProductionList.length === 0) {
         showNotification({
-          message: `Cannot save without batch and charge.`,
+          message: 'Nu se poate salva fara lot sau sarja.',
           type: 'error'
         })
 
@@ -117,7 +117,7 @@ export const AddOwnProductionTraceabilityModal = ({
 
       if (emptyBatches || emptyCharges) {
         showNotification({
-          message: `Cannot save without one item per batch and charge.`,
+          message: 'Nu se poate salva fara lot sau sarja.',
           type: 'error'
         })
 
