@@ -20,25 +20,28 @@ export const EditFrozenTraceabilityModal = ({
   item
 }: EditFrozenTraceabilityModalProps) => {
   const { showNotification } = useNotification()
-  const submitTask = async values => {
-    await makeCorePutRequest(`/bakery/traceability/frozen/verification/${item.id}`, values)
-  }
 
-  const { isLoading, mutate } = useMutation(submitTask, {
-    onSuccess: () => {
-      closeModal()
-      showNotification({
-        message: `Data added successfully`,
-        type: 'success'
-      })
+  const editFrozenTraceAbilityMutation = useMutation(
+    async (values: any) => {
+      await makeCorePutRequest(`/bakery/traceability/frozen/verification/${item.id}`, values)
     },
-    onError: res => {
-      showNotification({
-        message: `Error while trying to add data, ${formatErrorMessage(res)}`,
-        type: 'error'
-      })
+    {
+      onSuccess: () => {
+        formik.resetForm()
+        closeModal()
+        showNotification({
+          message: `Data added successfully`,
+          type: 'success'
+        })
+      },
+      onError: res => {
+        showNotification({
+          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          type: 'error'
+        })
+      }
     }
-  })
+  )
 
   const formik = useFormik({
     validateOnChange: false,
@@ -50,9 +53,8 @@ export const EditFrozenTraceabilityModal = ({
       productDestination: item?.productDestination || '',
       isVerified: item?.verified || false
     },
-    onSubmit: async (values: any, { resetForm }) => {
-      mutate(values)
-      resetForm()
+    onSubmit: async (values: any) => {
+      editFrozenTraceAbilityMutation.mutate(values)
     }
   })
 
@@ -73,7 +75,7 @@ export const EditFrozenTraceabilityModal = ({
               const conform = toBoolean(option)
               formik.setFieldValue('conform', conform)
 
-              if (!conform) {
+              if (conform) {
                 formik.setFieldValue('nonComplianceReason', null)
                 formik.setFieldValue('productDestination', null)
               }
