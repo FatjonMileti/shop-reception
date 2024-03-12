@@ -9,7 +9,7 @@ export const getInitialValues = (receivedProduct?: ReceivedProduct): ReceivedPro
     selectedSupplier: receivedProduct?.supplier,
 
     entryDate: receivedProduct?.entryDate ? dayjs(receivedProduct?.entryDate) : dayjs(),
-    hasExpirationDate: receivedProduct?.hasExpireDate || true,
+    hasExpirationDate: receivedProduct?.hasExpireDate ?? false,
     expirationDate: receivedProduct?.expireDate ? dayjs(receivedProduct?.expireDate) : null,
     hasSecondaryDLC: receivedProduct?.hasSecondaryDlc,
     secondaryDLC: receivedProduct?.dlcDays?.toString() || '',
