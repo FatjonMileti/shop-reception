@@ -31,13 +31,11 @@ export const OwnProductionTraceability = () => {
   const [tableData, setTableData] = useState([])
   const [rows, setRows] = useState([])
 
-  const [verifyItem, setVerifyItem] = useState(null)
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [itemIdToCorrect, setItemIdToCorrect] = useState(null)
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-
+  const [itemIdToEdit, setItemIdToEdit] = useState<number | undefined>(undefined)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
@@ -203,9 +201,9 @@ export const OwnProductionTraceability = () => {
           correctItemQuery={correctItemQuery}
         />
         <EditOwnProductionTraceabilityModal
-          isModalOpen={isEditModalOpen}
-          closeModal={() => setIsEditModalOpen(false)}
-          item={verifyItem}
+          closeModal={() => setItemIdToEdit(undefined)}
+          itemIdToEdit={itemIdToEdit}
+          setShouldRefreshData={setShouldRefreshData}
         />
         <ListTable
           rows={rows}
@@ -242,8 +240,7 @@ export const OwnProductionTraceability = () => {
               typographyVariant: 'medium',
               backgroundColor: '#0970E6',
               onClick: async (e, rowId) => {
-                setIsEditModalOpen(true)
-                setVerifyItem(tableData?.find(data => data.id === rowId))
+                setItemIdToEdit(rowId as number)
               },
               desktopIcon: <EditActionIcon />
             }

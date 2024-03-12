@@ -29,13 +29,13 @@ export const FrozenTraceability = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [tableData, setTableData] = useState(null)
   const [rows, setRows] = useState([])
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [verifyItem, setVerifyItem] = useState(null)
   const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [itemIdToCorrect, setItemIdToCorrect] = useState(null)
+  const [itemIdToEdit, setItemIdToEdit] = useState<number | undefined>(undefined)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
@@ -202,9 +202,9 @@ export const FrozenTraceability = () => {
           itemToCorrectQuery={itemToCorrectQuery}
         />
         <EditFrozenTraceabilityModal
-          isModalOpen={isEditModalOpen}
-          closeModal={() => setIsEditModalOpen(false)}
-          item={verifyItem}
+          closeModal={() => setItemIdToEdit(undefined)}
+          itemIdToEdit={itemIdToEdit}
+          setShouldRefreshData={setShouldRefreshData}
         />
         <ListTable
           rows={rows}
@@ -241,8 +241,7 @@ export const FrozenTraceability = () => {
               typographyVariant: 'medium',
               backgroundColor: '#0970E6',
               onClick: async (e, rowId) => {
-                setIsEditModalOpen(true)
-                setVerifyItem(tableData.find(data => data.id === rowId))
+                setItemIdToEdit(rowId as number)
               },
               desktopIcon: <EditActionIcon />
             }
