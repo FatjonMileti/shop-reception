@@ -19,9 +19,6 @@ import { formatErrorMessage } from 'utils/formatting'
 import { CorrectOwnProductionTraceabilityModal } from './CorrectOwnProductionTraceabilityModal/CorrectOwnProductionTraceabilityModal'
 import { Filter } from '../../../core-ui/Table/TableDefinitions'
 
-const orderBy = 'createdDate'
-const order = 'desc'
-
 export const OwnProductionTraceability = () => {
   const { showNotification } = useNotification()
 
@@ -48,9 +45,7 @@ export const OwnProductionTraceability = () => {
           searchFields: ['product.name'],
           tableFilters,
           page,
-          rowsPerPage,
-          orderBy,
-          order
+          rowsPerPage
         })
       )
       setRows(toListTableRows(response.list))
