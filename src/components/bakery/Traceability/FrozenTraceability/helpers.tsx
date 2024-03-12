@@ -5,6 +5,7 @@ import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import { ThermalCondition } from 'components/bakery/interfaces'
 import { BatchStatus } from '../interfaces'
+import dayjs from 'dayjs'
 
 export const columns: any[] = [
   {
@@ -351,6 +352,13 @@ export const mainItemBodyColumns = [
   {
     title: 'Data productiei',
     field: 'productionDate'
+  },
+  {
+    title: 'DLC',
+    render: row =>   <BodyItem name="DLC" value={
+      formatBakeryPayloadDate(dayjs(row.productionDate).add(row?.product?.dlcDays, 'days'))
+    } />
+
   }
 ]
 
