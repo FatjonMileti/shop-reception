@@ -14,6 +14,7 @@ const FrozenTraceabilitySummary = ({ item }) => {
     { label: 'Familie', value: product.familyName },
     { label: 'Subfamilie', value: product.subfamily },
     { label: 'Sarja', value: chargeNumber },
+    { label: 'Cantitate sarja', value: item?.quantity },
     { label: 'UM', value: product.metricUnit }
   ]
 

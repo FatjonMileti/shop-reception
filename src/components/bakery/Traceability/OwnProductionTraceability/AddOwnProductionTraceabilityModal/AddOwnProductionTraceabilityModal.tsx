@@ -78,14 +78,16 @@ export const AddOwnProductionTraceabilityModal = ({
         conform: values.conform,
         nonComplianceReason: values.nonComplianceReason,
         productDestination: values.productDestination,
-        traceabilityProductionList: values.traceabilityProductionList.map(item =>
-          item.hasSecondaryDlc
-            ? {
-              ...item,
-              dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
-            }
-            : item
-        )
+        traceabilityProductionList: values.traceabilityProductionList.map(item => {
+          if (!item.hasSecondaryDlc) return item
+
+          return {
+            ...item,
+            dlc: formatPayloadDate(
+              dayjs(item.batchId ? item.openingDate : item.productionDate).add(item.dlcDays, 'days')
+            )
+          }
+        })
       }
 
       if (values.traceabilityProductionList.length === 0) {
@@ -128,6 +130,8 @@ export const AddOwnProductionTraceabilityModal = ({
       setShouldRefreshData(true)
     }
   })
+
+
 
   const cancel = () => {
     closeModal()
