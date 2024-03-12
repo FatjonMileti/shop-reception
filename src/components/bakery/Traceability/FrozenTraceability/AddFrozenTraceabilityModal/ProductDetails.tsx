@@ -65,7 +65,7 @@ export const ProductDetails = ({
           </Grid>
           <Grid item lg={3} xs={6}>
             <Input
-              type="text"
+              type="number"
               variant="outlined"
               label="Cantitate sarja"
               onChange={({ currentTarget: { value } }) => {
@@ -209,7 +209,7 @@ export const ProductDetails = ({
             </Grid>
             <Grid item xs={3}>
               <Input
-                type="text"
+                type="number"
                 variant="outlined"
                 label={`Cantitatea lot ${index + 1}`}
                 onChange={(e: any) => {
