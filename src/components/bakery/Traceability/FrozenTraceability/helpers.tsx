@@ -12,7 +12,7 @@ export const columns: any[] = [
     title: 'Data intrare in raion',
     field: 'batch.entryDate',
     render: row => (
-      <BodyItem name="Data intrare in raion" value={formatPayloadDate(row?.batch?.entryDate)} />
+      <BodyItem name="Data intrare in raion" value={formatBakeryPayloadDate(row?.batch?.entryDate)} />
     )
   },
   {
@@ -71,7 +71,7 @@ export const columns: any[] = [
   {
     field: 'batch.expireDate',
     render: row => (
-      <BodyItem name="Data expirare" value={formatPayloadDate(row?.batch?.expireDate)} />
+      <BodyItem name="Data expirare" value={formatBakeryPayloadDate(row?.batch?.expireDate)} />
     )
   },
   {
@@ -116,7 +116,7 @@ export const columns: any[] = [
     render: row => (
       <BodyItem
         name="Data creare linie receptie"
-        value={formatPayloadDate(row?.batch?.createdDate)}
+        value={formatBakeryPayloadDate(row?.batch?.createdDate)}
       />
     )
   },
@@ -286,10 +286,15 @@ export const mainItemBodyColumns = [
     field: 'chargeNumber'
   },
   { title: 'Cantitate sarja', field: 'quantity' },
-  { title: 'Cod PLU', field: '-' },
+  {
+    title: 'Cod PLU',
+    render: row => <BodyItem name="Cod PLU" value={row.product?.pluCode || ''} />
+  },
   {
     title: 'Data productiei',
-    field: 'productionDate'
+    render: row => (
+      <BodyItem name="Data productiei" value={formatBakeryPayloadDate(row.productionDate)} />
+    )
   },
   {
     title: 'DLC',
