@@ -142,7 +142,7 @@ export const ReportOwnProductionTraceability = () => {
     const response = await makeCoreGetRequest(`/bakery/traceability/production/${rowId}`)
     const data = await response
 
-    return <OwnProductionTraceabilityDescription item={data} chargeItem={tableData} />
+    return <OwnProductionTraceabilityDescription item={data} />
   }
 
   const downloadFileQuery = useQuery(

@@ -2,26 +2,11 @@ import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { columns, infoColumns, toTableRowItems } from './helpers'
 import { AccordionDetailsWrapper, BodyItem } from '../ProductManagementTraceability/AccordionTable'
-import { formatBakeryPayloadDate } from 'utils/helpers'
 import { Fragment } from 'react'
 import { Table } from '@fullscreendigital/carrefour-dex-fe'
 
-const OwnProductionTraceabilityDescription = ({ item, chargeItem = null }) => {
+const OwnProductionTraceabilityDescription = ({ item }) => {
   const { traceabilityProductionList } = item
-  const bodyItemValue = (productionItem, frozenItem, columnField) => {
-    const isBoolean =
-      typeof frozenItem[columnField] === 'boolean'
-        ? frozenItem[columnField] === true
-          ? 'Da'
-          : 'Nu'
-        : frozenItem[columnField]
-    const isDateField = ['entryDate', 'modifiedDate', 'verifiedDate']
-
-    let value = isDateField.includes(columnField)
-      ? formatBakeryPayloadDate(productionItem[columnField])
-      : productionItem[columnField] || isBoolean
-    return value
-  }
 
   return (
     <Grid container flexDirection="column">
@@ -42,10 +27,7 @@ const OwnProductionTraceabilityDescription = ({ item, chargeItem = null }) => {
                     {column.render ? (
                       column.render(item)
                     ) : (
-                      <BodyItem
-                        name={column.title}
-                        value={bodyItemValue(item, item, column.field) || ''}
-                      />
+                      <BodyItem name={column.title} value={item?.[column.field] || ''} />
                     )}
                   </Fragment>
                 )
