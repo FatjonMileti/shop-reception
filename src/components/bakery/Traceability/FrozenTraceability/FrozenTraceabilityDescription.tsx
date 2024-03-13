@@ -90,20 +90,6 @@ const FrozenTraceabilityDescription = ({ item, chargeItem }) => {
 
                 <Grid item my={0.5} mr={1}>
                   <Capsule
-                    label="DLC secundar"
-                    value={
-                      frozenItem.batch?.hasSecondaryDlc
-                        ? formatBakeryPayloadDate(
-                            dayjs(frozenItem.openingDate).add(frozenItem.batch?.dlcDays, 'days')
-                          )
-                        : ''
-                    }
-                    valueColor={'#004f9b'}
-                  />
-                </Grid>
-
-                <Grid item my={0.5} mr={1}>
-                  <Capsule
                     label="Cant.fab.lot"
                     value={frozenItem?.quantity}
                     valueColor={'#004f9b'}

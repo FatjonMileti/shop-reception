@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography, Grid, useMediaQuery, Paper } from '@mui/material'
+import { Box, CircularProgress, Typography, Grid, useMediaQuery } from '@mui/material'
 import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
 import { useNotification } from 'hooks'
