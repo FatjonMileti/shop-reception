@@ -224,7 +224,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
       </Grid>
 
       <Grid item xs={12} textAlign={'right'}>
-        <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+        <Button variant="contained" label="Salvare" onClick={() => formik.handleSubmit()} />
       </Grid>
     </Grid>
   )
