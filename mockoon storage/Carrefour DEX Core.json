@@ -6341,6 +6341,180 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "eadade02-a96b-4338-b15a-ba310ff79440",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "short-dlc",
+      "responses": [
+        {
+          "uuid": "2b0a8324-b7bc-4c82-bdad-c9cf14c8b869",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"shopCode\": \"string\",\n      \"shopName\": \"string\",\n      \"prodName\": \"string\",\n      \"ubName\": \"string\",\n      \"sfaName\": \"string\",\n      \"famName\": \"string\",\n      \"rayName\": \"string\",\n      \"shopType\": {\n        \"key\": \"ALL\",\n        \"value\": \"string\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "3fd94845-37d1-4e36-9352-10236f36bb9e",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "short-dlc/types",
+      "responses": [
+        {
+          "uuid": "daf4a8af-273b-4013-8db3-67907d4c273b",
+          "body": "[\n  {\n    \"key\": \"ALL\",\n    \"value\": \"string\"\n  },\n  {\n    \"key\": \"NONE\",\n    \"value\": \"string 2\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "46da73ba-bf91-4142-ac6c-0f63699fe1c9",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "short-dlc/meti-rayons",
+      "responses": [
+        {
+          "uuid": "14f57f5b-ed87-4601-b73f-e476ce985cc3",
+          "body": "[\n  {\n    \"code\": \"raion\",\n    \"displayValue\": \"raion 1\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "7fc56f6e-9018-4fad-8dfb-6b8e7dd0329d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "short-dlc/meti-families",
+      "responses": [
+        {
+          "uuid": "a07c7e83-5572-49a9-a29e-a493eb54075e",
+          "body": "[\n  {\n    \"code\": \"fam\",\n    \"displayValue\": \"fam 1\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "858c0768-4980-4611-b1b7-d5271b3be07b",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "short-dlc/meti-sub-families",
+      "responses": [
+        {
+          "uuid": "186cb79b-0674-404c-b1d5-ede6576300ce",
+          "body": "[\n  {\n    \"code\": \"sfam\",\n    \"displayValue\": \"sfam 1\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "6bed228a-6a3a-4721-aa1a-cada41ec2052",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "short-dlc/meti-ubs",
+      "responses": [
+        {
+          "uuid": "e5f8e1c5-4123-4915-8d5a-5acfb48c97d8",
+          "body": "[\n  {\n    \"code\": \"ub\",\n    \"displayValue\": \"ub 1\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6687,6 +6861,30 @@
     {
       "type": "route",
       "uuid": "ea5ffeff-193e-48df-87b7-8b4c01149d1e"
+    },
+    {
+      "type": "route",
+      "uuid": "eadade02-a96b-4338-b15a-ba310ff79440"
+    },
+    {
+      "type": "route",
+      "uuid": "3fd94845-37d1-4e36-9352-10236f36bb9e"
+    },
+    {
+      "type": "route",
+      "uuid": "46da73ba-bf91-4142-ac6c-0f63699fe1c9"
+    },
+    {
+      "type": "route",
+      "uuid": "7fc56f6e-9018-4fad-8dfb-6b8e7dd0329d"
+    },
+    {
+      "type": "route",
+      "uuid": "858c0768-4980-4611-b1b7-d5271b3be07b"
+    },
+    {
+      "type": "route",
+      "uuid": "6bed228a-6a3a-4721-aa1a-cada41ec2052"
     }
   ],
   "proxyMode": false,

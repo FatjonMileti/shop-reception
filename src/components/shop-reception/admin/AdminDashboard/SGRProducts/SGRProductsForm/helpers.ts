@@ -8,17 +8,18 @@ export const getValidationSchema = (editItem: DLCProducts) =>
     family: Yup.string().required(),
     subfamily: Yup.string().required(),
     UbCode: Yup.string().required(),
-    productCode: Yup.string().required(),
+    productCode: Yup.string().required()
   })
 
-export const getInitialValues = (editItem: DLCProducts) => {
+export const getInitialValues = (editItem: any) => {
   return {
     id: editItem?.id || null,
-    storeName: editItem?.storeName || null,
-    district: editItem?.district || null,
-    family: editItem?.family || null,
-    subfamily: editItem?.subfamily || null,
-    UbCode: editItem?.UbCode || null,
-    productCode: editItem?.productCode || null,
+    shopCode: editItem?.shopCode || null,
+    shopName: editItem?.shopName || null,
+    prodName: editItem?.prodName || null,
+    ubName: editItem?.ubName || null,
+    sfaName: editItem?.sfaName || null,
+    famName: editItem?.famName || null,
+    rayName: editItem?.rayName || null
   }
 }

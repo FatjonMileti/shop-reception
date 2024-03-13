@@ -2,23 +2,21 @@ import * as Yup from 'yup'
 
 export const getValidationSchema = (editItem: DLCProducts) =>
   Yup.object().shape({
-    id: Yup.number().required(),
-    storeName: Yup.string().required(),
-    district: Yup.string().required(),
-    family: Yup.string().required(),
-    subfamily: Yup.string().required(),
-    UbCode: Yup.string().required(),
-    productCode: Yup.string().required(),
+    shopCode: Yup.string().required(),
+    rayCode: Yup.string().required(),
+    famCode: Yup.string().required(),
+    sfaCode: Yup.string().required(),
+    ubCode: Yup.string().required(),
+    prodCode: Yup.string().required()
   })
 
 export const getInitialValues = (editItem: DLCProducts) => {
   return {
-    id: editItem?.id || null,
-    storeName: editItem?.storeName || null,
-    district: editItem?.district || null,
-    family: editItem?.family || null,
-    subfamily: editItem?.subfamily || null,
-    UbCode: editItem?.UbCode || null,
-    productCode: editItem?.productCode || null,
+    shopCode: editItem?.shopCode || null,
+    rayCode: editItem?.rayName || null,
+    famCode: editItem?.famName || null,
+    sfaCode: editItem?.sfaName || null,
+    ubCode: editItem?.ubName || null,
+    prodCode: editItem?.prodName || null
   }
 }

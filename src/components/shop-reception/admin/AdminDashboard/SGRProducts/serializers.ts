@@ -1,4 +1,4 @@
-export const toTableRowItems = (items: DLCProducts[]) => items.map((item: DLCProducts) => ({
+export const toTableRowItems = (items: any[]) => items.map((item: any) => ({
   id: item.id,
   storeType: item.storeType,
   storeCode: item.storeCode,

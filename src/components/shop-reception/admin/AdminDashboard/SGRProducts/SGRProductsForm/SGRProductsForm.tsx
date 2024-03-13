@@ -14,7 +14,7 @@ interface SGRProductsProps {
   isModalOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
-  editItem?: SGRProducts
+  editItem?: any
   isEdit?: boolean
 }
 
