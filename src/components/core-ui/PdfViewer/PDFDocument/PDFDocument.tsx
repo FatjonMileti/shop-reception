@@ -44,7 +44,7 @@ const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
     }
 
     showNotification({
-      message: `A aparut o eroare la afisarea fisierului. ${formatErrorMessage(error)}`,
+      message: `A aparut o eroare la afisarea fisierului. ${error.message}`,
       type: 'error'
     })
   }

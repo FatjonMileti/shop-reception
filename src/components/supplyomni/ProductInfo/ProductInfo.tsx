@@ -23,6 +23,7 @@ interface CartProduct {
   totalPrice: number
   totalPriceWithoutDiscount: number
   vat: number
+  locationId: number
 }
 
 interface ProductInfoProps {
@@ -77,6 +78,7 @@ const ProductInfo: React.FC<ProductInfoProps> = props => {
                 quantity={product.quantity}
                 id={product.id}
                 purchaseOption={product.purchaseOption}
+                locationId={product.locationId}
               />
             </Box>
           </Grid>
