@@ -42,8 +42,8 @@ const FrozenTraceabilityDescription = ({ item, chargeItem }) => {
         </Grid>
       </AccordionDetailsWrapper>
       <Grid item my={1} mr={1}>
-        {traceabilityFrozenList.map(frozenItem => (
-          <Accordion>
+        {traceabilityFrozenList.map((frozenItem, fi) => (
+          <Accordion key={fi}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel2-content"

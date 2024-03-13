@@ -35,13 +35,23 @@ export const validationSchema = Yup.object().shape({
       componentCode: Yup.number(),
       componentQuantity: Yup.number(),
       quantity: Yup.number(),
-      openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
-        if (hasSecondaryDlc) {
+
+      openingDate: Yup.date().when(['hasSecondaryDlc', 'batchId'], ([hasSecondaryDlc, batchId], schema) => {
+        if (hasSecondaryDlc && batchId) {
           return schema.required('Data obligatorie')
         } else {
           return schema.nullable()
         }
       }),
+
+      productionDate: Yup.date().when(['hasSecondaryDlc', 'childTraceabilityId'], ([hasSecondaryDlc, childTraceabilityId], schema) => {
+        if (hasSecondaryDlc && childTraceabilityId) {
+          return schema.required('Data obligatorie')
+        } else {
+          return schema.nullable()
+        }
+      }),
+
       hasSecondaryDlc: Yup.boolean(),
     })
   )
@@ -54,18 +64,20 @@ export const toBatchFormat = (item, quantity) => ({
   componentName: item.batchName,
   quantity: item.batchQuantity,
   hasSecondaryDlc: item.hasSecondaryDlc,
-  openingDate: formatPayloadDate(item.entryDate),
+  openingDate: null,
   dlcDays: item.dlcDays
 })
 
 export const toChargeFormat = (item, quantity) => ({
   childTraceabilityId: item.id,
   componentCode: item.product.metiCode,
-  componentQuantity: quantity, //item.quantity,
+  componentQuantity: quantity,
   componentName: item.chargeNumber,
   quantity: item.quantity,
-  openingDate: dayjs(),
-  dlc: item.dlc
+
+  hasSecondaryDlc: !!item?.product?.dlcDays,
+  productionDate: item.productionDate,
+  dlcDays: item?.product?.dlcDays
 })
 
 export const columns: any[] = [
