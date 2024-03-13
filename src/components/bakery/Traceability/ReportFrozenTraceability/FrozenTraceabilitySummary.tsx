@@ -5,6 +5,7 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import React from 'react'
 import { useLocation } from 'react-router'
+import dayjs from 'dayjs'
 
 const FrozenTraceabilitySummary = ({ item }) => {
   const { chargeNumber, dlc, product, productionDate } = item
@@ -26,8 +27,14 @@ const FrozenTraceabilitySummary = ({ item }) => {
     { label: 'Familie produs', value: product.familyName },
     { label: 'Subfamilie produs', value: product.subfamily },
     { label: 'Sarja', value: chargeNumber },
+    { label: 'Cantitate sarja', value: item?.quantity },
     { label: 'UM', value: product.metricUnit },
-    { label: 'DLC Prod. Fab.', value: formatBakeryPayloadDate(dlc) }
+    {
+      label: 'DLC',
+      value: product?.dlcDays
+        ? formatBakeryPayloadDate(dayjs(item.productionDate).add(product?.dlcDays, 'days'))
+        : ''
+    }
   ]
 
   return (

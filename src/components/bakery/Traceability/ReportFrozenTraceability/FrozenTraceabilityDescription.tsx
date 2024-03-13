@@ -91,60 +91,12 @@ const FrozenTraceabilityDescription = ({ item, chargeItem }) => {
 
                 <Grid item my={0.5} mr={1}>
                   <Capsule
-                    label="Familie"
-                    value={frozenItem?.batch?.product?.familyName}
+                    label="Cant.fab.lot"
+                    value={frozenItem?.quantity}
                     valueColor={'#004f9b'}
                   />
                 </Grid>
 
-                <Grid item my={0.5} mr={1}>
-                  <Capsule
-                    label="Subfamilie"
-                    value={frozenItem?.batch?.product?.subfamily}
-                    valueColor={'#004f9b'}
-                  />
-                </Grid>
-
-                {/*<Grid item my={0.5} mx={1}>*/}
-                {/*  <Capsule label="Cant. fab." value={frozenItem.quantity} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="UM" value={product.metricUnit} />*/}
-                {/*</Grid>*/}
-
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="Data intrare MP" value={'-'} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="Furnizor MP" value={frozenItem.batch.supplier.supplierName} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="Cant. fab./lot" value={frozenItem.batch.batchQuantity} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="DLC sec. MP" value={'-'} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="DLC MP" value={formatBakeryPayloadDate(frozenItem.dlc)} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="Operator trasab." value={'-'} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule*/}
-                {/*    label="Data introducere"*/}
-                {/*    value={formatBakeryPayloadDate(frozenItem.openingDate)}*/}
-                {/*  />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule label="Ultima modificare" value={'-'} />*/}
-                {/*</Grid>*/}
-                {/*<Grid item my={0.5} mr={1}>*/}
-                {/*  <Capsule*/}
-                {/*    label="Data ultimei modificari"*/}
-                {/*    value={formatBakeryPayloadDate(frozenItem.batch.modifiedDate)}*/}
-                {/*  />*/}
-                {/*</Grid>*/}
               </Grid>
             </AccordionSummary>
 
