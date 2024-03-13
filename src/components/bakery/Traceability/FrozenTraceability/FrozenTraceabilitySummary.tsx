@@ -19,7 +19,9 @@ const FrozenTraceabilitySummary = ({ item }) => {
     { label: 'UM', value: product.metricUnit },
     {
       label: 'DLC',
-      value: formatBakeryPayloadDate(dayjs(item.productionDate).add(product?.dlcDays, 'days'))
+      value: product?.dlcDays
+        ? formatBakeryPayloadDate(dayjs(item.productionDate).add(product?.dlcDays, 'days'))
+        : ''
     }
   ]
 

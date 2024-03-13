@@ -187,101 +187,39 @@ export const columns: any[] = [
     render: row => (
       <BodyItem
         name="Data ultimei modificari"
-        value={formatPayloadDate(row?.batch?.modifiedDate)}
+        value={formatBakeryPayloadDate(row?.batch?.modifiedDate)}
       />
     )
   },
   {
     title: 'Data deschiderii',
     field: 'batch.openingDate',
-    render: row => <BodyItem name="Data deschiderii" value={formatPayloadDate(row?.openingDate)} />
+    render: row => (
+      <BodyItem
+        name="Data deschiderii"
+        value={row.batch?.hasSecondaryDlc ? formatBakeryPayloadDate(row?.openingDate) : ''}
+      />
+    )
+  },
+  {
+    title: 'DLC secundar',
+    render: row => (
+      <BodyItem
+        name="DLC secundar"
+        value={
+          row.batch?.hasSecondaryDlc
+            ? formatBakeryPayloadDate(dayjs(row.openingDate).add(row.batch?.dlcDays, 'days'))
+            : ''
+        }
+      />
+    )
+  },
+  {
+    title: 'Cant.fab.lot',
+    render: row => <BodyItem name="Cant.fab.lot" value={row?.quantity} />
   }
-  // ------------------------
 
-  // {
-  //   title: 'Data intrare lot',
-  //   field: 'entryDate',
-  // },
-  // {
-  //   title: 'Operator trasabilitate',
-  //   field: 'createdBy',
-  //   render: (row, charge) => <BodyItem name="Operator trasabilitate" value={charge.createdBy} />
-  // },
-  // {
-  //   title: 'Ultima modificare',
-  //   field: 'modifiedBy',
-  //   render: (row, charge) => <BodyItem name="Ultima modificare" value={charge.modifiedBy} />
-  // },
-  // {
-  //   title: 'Furnizor',
-  //   field: 'supplierName',
-  //   render: row => <BodyItem name="Furnizor" value={row.batch.supplier.supplierName} />
-  // },
-  // {
-  //   title: 'Stare termica',
-  //   field: 'thermalCondition'
-  // },
-  // {
-  //   title: 'Data introducere',
-  //   field: 'createdDate',
-  //   render: (row, charge) => (
-  //     <BodyItem name="Data introducere" value={formatBakeryPayloadDate(charge.createdDate)} />
-  //   )
-  // },
-  // {
-  //   title: 'Data ultimei modificari',
-  //   field: 'modifiedDate',
-  //   render: (row, charge) => (
-  //     <BodyItem
-  //       name="Data ultimei modificari"
-  //       value={formatBakeryPayloadDate(charge.modifiedDate)}
-  //     />
-  //   )
-  // },
-  // {
-  //   title: 'DLC sec. lot',
-  //   field: 'openingDate',
-  //   render: row => <BodyItem name="DLC sec. lot" value={row.batch.openingDate} />
-  // },
-  // {
-  //   title: 'Conform',
-  //   field: 'conform'
-  // },
-  // {
-  //   title: 'Verificare de catre validator trasabilitate',
-  //   field: 'verified'
-  // },
-  // {
-  //   title: 'DLC MP',
-  //   field: 'dlc',
-  //   render: row => <BodyItem name="DLC MP" value={formatBakeryPayloadDate(row.batch.expireDate)} />
-  // },
-  // {
-  //   title: 'Motiv neconformitate',
-  //   field: 'nonComplianceReason',
-  //   render: (row, charge) => (
-  //     <BodyItem name="Motiv neconformitate" value={charge.nonComplianceReason} />
-  //   )
-  // },
-  // {
-  //   title: 'Validator trasabilitate',
-  //   field: 'verifiedBy',
-  //   render: (row, charge) => <BodyItem name="Validator trasabilitate" value={charge.verifiedBy} />
-  // },
-  // {
-  //   title: 'Destinatia prod. neconform',
-  //   field: 'productDestination',
-  //   render: (row, charge) => (
-  //     <BodyItem name="Validator trasabilitate" value={charge.productDestination} />
-  //   )
-  // },
-  // {
-  //   title: 'Data verificare trasabilitate',
-  //   field: 'verifiedDate',
-  //   render: (row, charge) => (
-  //     <BodyItem name="Data verificare trasabilitate" value={charge.verifiedDate} />
-  //   )
-  // }
+  // ------------------------
 ]
 
 export const mainItemBodyColumns = [
@@ -355,10 +293,16 @@ export const mainItemBodyColumns = [
   },
   {
     title: 'DLC',
-    render: row =>   <BodyItem name="DLC" value={
-      formatBakeryPayloadDate(dayjs(row.productionDate).add(row?.product?.dlcDays, 'days'))
-    } />
-
+    render: row => (
+      <BodyItem
+        name="DLC"
+        value={
+          row?.product?.dlcDays
+            ? formatBakeryPayloadDate(dayjs(row.productionDate).add(row?.product?.dlcDays, 'days'))
+            : ''
+        }
+      />
+    )
   }
 ]
 
