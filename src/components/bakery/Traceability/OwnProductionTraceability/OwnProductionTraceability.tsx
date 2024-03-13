@@ -65,7 +65,6 @@ export const OwnProductionTraceability = () => {
     return (
       <OwnProductionTraceabilityDescription
         item={data}
-        chargeItem={tableData?.find(td => td.id === rowId)}
       />
     )
   }
