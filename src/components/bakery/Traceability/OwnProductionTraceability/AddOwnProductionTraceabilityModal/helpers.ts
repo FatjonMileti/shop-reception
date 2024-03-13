@@ -57,23 +57,23 @@ export const validationSchema = Yup.object().shape({
   )
 })
 
-export const toBatchFormat = (item, quantity) => ({
+export const toBatchFormat = (item, calculatedQuantity) => ({
   batchId: item?.id,
   componentCode: item.product.metiCode,
-  componentQuantity: quantity,
+  componentQuantity: calculatedQuantity,
   componentName: item.batchName,
-  quantity: item.batchQuantity,
+  quantity: calculatedQuantity,
   hasSecondaryDlc: item.hasSecondaryDlc,
   openingDate: null,
   dlcDays: item.dlcDays
 })
 
-export const toChargeFormat = (item, quantity) => ({
+export const toChargeFormat = (item, calculatedQuantity) => ({
   childTraceabilityId: item.id,
   componentCode: item.product.metiCode,
-  componentQuantity: quantity,
+  componentQuantity: calculatedQuantity,
   componentName: item.chargeNumber,
-  quantity: item.quantity,
+  quantity: calculatedQuantity,
 
   hasSecondaryDlc: !!item?.product?.dlcDays,
   productionDate: item.productionDate,

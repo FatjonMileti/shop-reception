@@ -96,12 +96,12 @@ export const ProductDetailsBatches = ({
                       label={`Cantitatea lot 1`}
                       onChange={(e: any) =>
                         formik.setFieldValue(
-                          `traceabilityProductionList[${idx}].componentQuantity`,
+                          `traceabilityProductionList[${idx}].quantity`,
                           e.target.value
                         )
                       }
-                      value={item.componentQuantity}
-                      name="componentQuantity"
+                      value={item.quantity}
+                      name="quantity"
                       infoIcon={'kg'}
                     />
                   </Grid>
@@ -222,12 +222,12 @@ export const ProductDetailsBatches = ({
                       label={`Cantitatea`}
                       onChange={(e: any) => {
                         formik.setFieldValue(
-                          `traceabilityProductionList[${idx}].componentQuantity`,
+                          `traceabilityProductionList[${idx}].quantity`,
                           e.target.value
                         )
                       }}
-                      value={charge.componentQuantity}
-                      name="componentQuantity"
+                      value={charge.quantity}
+                      name="quantity"
                       infoIcon={'kg'}
                     />
                   </Grid>
