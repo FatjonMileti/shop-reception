@@ -246,7 +246,7 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
   entryDate: Yup.mixed<dayjs.Dayjs>().required('Entry date is required'),
 
   hasExpirationDate: Yup.boolean().required('This field is required'),
-  expirationDate: Yup.mixed().when('hasExpirationDate', (hasExpirationDate, schema) => {
+  expirationDate: Yup.mixed().when('hasExpirationDate', ([hasExpirationDate], schema) => {
     return hasExpirationDate
       ? Yup.date()
           .min(dayjs().startOf('day'), 'Data de expirare nu poate fi în trecut.')
@@ -262,7 +262,7 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
     )
     .nullable(),
 
-  amount: Yup.string().required('amount is required'),
+  amount: Yup.number().positive().required('amount is required'),
 
   lot: Yup.string().required('lot is required').max(30),
 
