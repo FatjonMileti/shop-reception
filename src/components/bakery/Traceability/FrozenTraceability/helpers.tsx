@@ -101,13 +101,6 @@ export const columns: any[] = [
     render: row => <BodyItem name="UM (Meti)" value={row?.batch?.product?.metricUnit} />
   },
   {
-    title: 'Poza eticheta',
-    field: 'imageUrl',
-    render: row => (
-      <BodyItem name="Poza eticheta" value={<ImageCell value={''} imageUrl={row?.imageUrl} />} />
-    )
-  },
-  {
     title: 'User creare linie receptie',
     field: 'createdBy'
   },
