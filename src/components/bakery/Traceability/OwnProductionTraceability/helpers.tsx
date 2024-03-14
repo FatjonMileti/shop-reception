@@ -2,6 +2,7 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 import { BodyItem } from '../ProductManagementTraceability/AccordionTable'
 import { IconCell } from 'components/core-ui/IconCell'
 import { thermalContiotionOptions } from '../interfaces'
+import dayjs from 'dayjs'
 
 export const columns: any[] = [
   {
@@ -40,10 +41,10 @@ export const columns: any[] = [
     title: 'Data intrare lot/Data productie sarja',
     field: 'productionDate',
     render: row =>
-      (row?.childTraceability?.productionDate &&
-        formatBakeryPayloadDate(row?.childTraceability?.productionDate)) ||
-      (row?.productionDate && formatBakeryPayloadDate(row?.productionDate)) ||
+      (row?.childTraceability && formatBakeryPayloadDate(row?.childTraceability?.productionDate)) ||
+      (row?.openingDate && formatBakeryPayloadDate(row?.openingDate)) ||
       '',
+
     // width: '100px',
     align: 'left'
   },
@@ -55,15 +56,30 @@ export const columns: any[] = [
   },
   {
     title: 'DLC MP / baze',
-    field: 'dlc',
-    // width: '100px',
-    align: 'left'
+    align: 'left',
+    render: row => (row.batch?.hasExpireDate ? formatBakeryPayloadDate(row.batch?.expireDate) : '')
   },
+  {
+    title: 'DLC sec MP/ baze',
+    align: 'left',
+    render: row =>
+      formatBakeryPayloadDate(
+        (row?.childTraceability?.productionDate &&
+          row.childTraceability?.product?.dlcDays &&
+          dayjs(row.childTraceability?.productionDate).add(
+            row.childTraceability?.product?.dlcDays,
+            'days'
+          )) ||
+          (row.batch?.hasSecondaryDlc && dayjs(row.openingDate).add(row.batch?.dlcDays, 'days'))
+      ) || ''
+  },
+
   {
     title: 'Data deschidere lot',
     field: 'openingDate',
     // width: '100px',
-    align: 'left'
+    align: 'left',
+    render: row => (row?.openingDate && formatBakeryPayloadDate(row?.openingDate)) || ''
   }
 ]
 
@@ -78,6 +94,8 @@ export const toTableRowItems = (items: any[]) => {
     batchQuantity: item.batch?.batchQuantity || '',
     quantity: item.quantity || '',
     productionDate: formatBakeryPayloadDate(item.batch?.entryDate) || '',
+
+    batch: item.batch || {},
 
     storeName: item?.batch?.supplier?.supplierName || '',
     dlc: formatBakeryPayloadDate(item.dlc) || '',
@@ -99,7 +117,7 @@ export const infoColumns: any[] = [
       <BodyItem
         name="Stare termica"
         value={
-          thermalContiotionOptions.find(thC => thC.value === row.thermalCondition)?.label || ''
+          thermalContiotionOptions.find(thC => thC.value === row?.thermalCondition)?.label || ''
         }
       />
     )
@@ -126,7 +144,9 @@ export const infoColumns: any[] = [
   {
     title: 'Data introducere',
     field: 'createdDate',
-    render: row => <BodyItem name="Data introducere" value={formatBakeryPayloadDate(row.createdDate)} />
+    render: row => (
+      <BodyItem name="Data introducere" value={formatBakeryPayloadDate(row.createdDate)} />
+    )
   },
   {
     title: 'Verificare de catre validator trasabilitate',
@@ -146,7 +166,10 @@ export const infoColumns: any[] = [
   },
   {
     title: 'Data ultimei modificari',
-    field: 'modifiedDate'
+    field: 'modifiedDate',
+    render: row => (
+      <BodyItem name="Data ultimei modificari" value={formatBakeryPayloadDate(row.modifiedDate)} />
+    )
   },
   {
     title: 'Sarja',
@@ -155,11 +178,25 @@ export const infoColumns: any[] = [
   {
     title: 'Data productiei',
     field: 'productionDate',
-    render: row => <BodyItem name="Data productiei" value={formatBakeryPayloadDate(row.productionDate)} />
+    render: row => (
+      <BodyItem name="Data productiei" value={formatBakeryPayloadDate(row.productionDate)} />
+    )
   },
   {
     title: 'DLC Prod. Fab.',
     field: 'dlc',
-    render: row => <BodyItem name="DLC Prod. Fab." value={formatBakeryPayloadDate(row.dlc)} />
-  }
+    render: row => (
+      <BodyItem
+        name="DLC Prod. Fab."
+        value={
+          row.product?.dlcDays
+            ? formatBakeryPayloadDate(dayjs(row.productionDate).add(row.product?.dlcDays, 'days'))
+            : ''
+        }
+      />
+    )
+  },
+  { title: 'Cant.fab',
+    field: 'quantity'
+  },
 ]
