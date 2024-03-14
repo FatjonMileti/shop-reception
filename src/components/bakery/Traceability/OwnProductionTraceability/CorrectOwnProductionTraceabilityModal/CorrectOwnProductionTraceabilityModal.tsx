@@ -80,19 +80,21 @@ export const CorrectOwnProductionTraceabilityModal = ({
         productDestination: values?.productDestination,
         metiCode: values?.product?.metiCode,
         productName: values.product?.name,
-        traceabilityProductionList: values?.traceabilityProductionList.map(item =>
-          item.hasSecondaryDlc
-            ? {
-              ...item,
-              dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
-            }
-            : item
-        )
+        traceabilityProductionList: values?.traceabilityProductionList.map(item => {
+          if (!item.hasSecondaryDlc) return item
+
+          return {
+            ...item,
+            dlc: formatPayloadDate(
+              dayjs(item.batchId ? item.openingDate : item.productionDate).add(item.dlcDays, 'days')
+            )
+          }
+        })
       }
 
       if (values.traceabilityProductionList.length === 0) {
         showNotification({
-          message: `Cannot save without batch and charge.`,
+          message: 'Nu se poate salva fara lot sau sarja.',
           type: 'error'
         })
 
@@ -119,7 +121,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
 
       if (emptyBatches || emptyCharges) {
         showNotification({
-          message: `Cannot save without one item per batch and charge.`,
+          message: 'Nu se poate salva fara lot sau sarja.',
           type: 'error'
         })
 

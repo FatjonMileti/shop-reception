@@ -100,7 +100,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
         </Grid>
         <Grid item xs={3}>
           <Input
-            type="text"
+            type="number"
             variant="outlined"
             label="Cantitate sarja"
             onChange={({ currentTarget: { value } }) => {
@@ -236,7 +236,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             </Grid>
             <Grid item xs={3}>
               <Input
-                type="text"
+                type="number"
                 variant="outlined"
                 label={`Cantitatea lot ${index + 1}`}
                 onChange={(e: any) => {

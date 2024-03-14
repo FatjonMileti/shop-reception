@@ -9,11 +9,11 @@ export const getInitialValues = (receivedProduct?: ReceivedProduct): ReceivedPro
     selectedSupplier: receivedProduct?.supplier,
 
     entryDate: receivedProduct?.entryDate ? dayjs(receivedProduct?.entryDate) : dayjs(),
-    hasExpirationDate: receivedProduct?.hasExpireDate || true,
+    hasExpirationDate: receivedProduct?.hasExpireDate ?? false,
     expirationDate: receivedProduct?.expireDate ? dayjs(receivedProduct?.expireDate) : null,
     hasSecondaryDLC: receivedProduct?.hasSecondaryDlc,
     secondaryDLC: receivedProduct?.dlcDays?.toString() || '',
-    amount: receivedProduct?.batchQuantity?.toString() || '',
+    amount: receivedProduct?.batchQuantity ?? undefined,
     lot: receivedProduct?.batchName || '',
     picture: undefined
   }
@@ -30,7 +30,7 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
 
     expirationDate: Yup.mixed().when(
       'hasExpirationDate',
-      (hasExpirationDate, schema) => {
+      ([hasExpirationDate], schema) => {
         return hasExpirationDate
           ? Yup.date()
               .min(dayjs().startOf('day'), 'Data de expirare nu poate fi în trecut.')
@@ -47,7 +47,7 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
       )
       .nullable(),
 
-    amount: Yup.string().required('amount is required'),
+    amount: Yup.number().positive().required('amount is required'),
 
     lot: Yup.string().required('lot is required').max(30),
 

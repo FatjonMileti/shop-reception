@@ -86,7 +86,7 @@ export const CorrectFrozenTraceabilityModal = ({
 
       if (values.traceabilityFrozenList.length === 0) {
         showNotification({
-          message: `Cannot save without batch.`,
+          message: 'Nu se poate salva fara lot.',
           type: 'error'
         })
 

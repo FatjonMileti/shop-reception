@@ -95,6 +95,11 @@ export const MySales = () => {
         isLoading={isLoading}
         totalCount={totalCount}
         filters={tableFilterInputs}
+        filtersLabel={'Filtre'}
+        appliedFiltersLabel={'Filtre aplicate'}
+        filtersButtonLabel={'Filtrare'}
+        cancelFiltersButtonLabel={'Anulare'}
+        applyFiltersButtonLabel={'Confirma'}
         toolbarActions={[
           {
             label: 'Download',

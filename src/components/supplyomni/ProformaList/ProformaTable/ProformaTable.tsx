@@ -60,7 +60,7 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
     const actions = [
       proformaType === 'active'
         ? {
-            label: 'Anuleaza',
+            label: 'Anulare',
             labelColor: 'white',
             typographyVariant: 'medium',
             backgroundColor: '#CC4010',
@@ -145,6 +145,11 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
           rowActions={rowActions}
           rowActionsWidth="200px"
           filters={tableFilterInputs}
+          filtersLabel={"Filtre"}
+          appliedFiltersLabel={"Filtre aplicate"}
+          filtersButtonLabel={"Filtrare"}
+          cancelFiltersButtonLabel={"Anulare"}
+          applyFiltersButtonLabel={"Confirma"}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
         />

@@ -4,6 +4,7 @@ import { Grid, Typography } from '@mui/material'
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import React from 'react'
+import dayjs from 'dayjs'
 
 const FrozenTraceabilitySummary = ({ item }) => {
   const { chargeNumber, dlc, product, productionDate } = item
@@ -14,7 +15,14 @@ const FrozenTraceabilitySummary = ({ item }) => {
     { label: 'Familie', value: product.familyName },
     { label: 'Subfamilie', value: product.subfamily },
     { label: 'Sarja', value: chargeNumber },
-    { label: 'UM', value: product.metricUnit }
+    { label: 'Cantitate sarja', value: item?.quantity },
+    { label: 'UM', value: product.metricUnit },
+    {
+      label: 'DLC',
+      value: product?.dlcDays
+        ? formatBakeryPayloadDate(dayjs(item.productionDate).add(product?.dlcDays, 'days'))
+        : ''
+    }
   ]
 
   return (

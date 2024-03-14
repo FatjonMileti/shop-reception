@@ -13,13 +13,11 @@ import { EditOwnProductionTraceabilityModal } from './EditOwnProductionTraceabil
 import { handleQueryError } from 'utils/helpers'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
-import { Filter, ValueLabelInterface } from 'components/bakery/interfaces'
+import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
 import { formatErrorMessage } from 'utils/formatting'
 import { CorrectOwnProductionTraceabilityModal } from './CorrectOwnProductionTraceabilityModal/CorrectOwnProductionTraceabilityModal'
-
-const orderBy = 'createdDate'
-const order = 'desc'
+import { Filter } from '../../../core-ui/Table/TableDefinitions'
 
 export const OwnProductionTraceability = () => {
   const { showNotification } = useNotification()
@@ -30,13 +28,11 @@ export const OwnProductionTraceability = () => {
   const [tableData, setTableData] = useState([])
   const [rows, setRows] = useState([])
 
-  const [verifyItem, setVerifyItem] = useState(null)
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [itemIdToCorrect, setItemIdToCorrect] = useState(null)
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-
+  const [itemIdToEdit, setItemIdToEdit] = useState<number | undefined>(undefined)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
@@ -49,9 +45,7 @@ export const OwnProductionTraceability = () => {
           searchFields: ['product.name'],
           tableFilters,
           page,
-          rowsPerPage,
-          orderBy,
-          order
+          rowsPerPage
         })
       )
       setRows(toListTableRows(response.list))
@@ -71,7 +65,6 @@ export const OwnProductionTraceability = () => {
     return (
       <OwnProductionTraceabilityDescription
         item={data}
-        chargeItem={tableData?.find(td => td.id === rowId)}
       />
     )
   }
@@ -202,14 +195,15 @@ export const OwnProductionTraceability = () => {
           correctItemQuery={correctItemQuery}
         />
         <EditOwnProductionTraceabilityModal
-          isModalOpen={isEditModalOpen}
-          closeModal={() => setIsEditModalOpen(false)}
-          item={verifyItem}
+          closeModal={() => setItemIdToEdit(undefined)}
+          itemIdToEdit={itemIdToEdit}
+          setShouldRefreshData={setShouldRefreshData}
         />
         <ListTable
           rows={rows}
           handleRemoteData={debounce(fetchData, 500)}
           handleRemoteDetails={handleRemoteDetails}
+          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           isLoading={isLoading}
           totalCount={totalCount}
           hasSearchInput
@@ -240,8 +234,7 @@ export const OwnProductionTraceability = () => {
               typographyVariant: 'medium',
               backgroundColor: '#0970E6',
               onClick: async (e, rowId) => {
-                setIsEditModalOpen(true)
-                setVerifyItem(tableData?.find(data => data.id === rowId))
+                setItemIdToEdit(rowId as number)
               },
               desktopIcon: <EditActionIcon />
             }

@@ -11,6 +11,7 @@ import { AddActionIcon, DeleteActionIcon } from 'icons'
 import { FormInfoItems } from '../../../../core-ui/FormInfoItems'
 import dayjs from 'dayjs'
 import { formatPayloadDate, toBoolean } from 'utils/helpers'
+import { thermalContiotionOptions } from '../../interfaces'
 
 interface ProductDetailsProps {
   onCancel: () => void
@@ -64,7 +65,7 @@ export const ProductDetails = ({
           </Grid>
           <Grid item lg={3} xs={6}>
             <Input
-              type="text"
+              type="number"
               variant="outlined"
               label="Cantitate sarja"
               onChange={({ currentTarget: { value } }) => {
@@ -119,14 +120,10 @@ export const ProductDetails = ({
               variant="outlined"
               label="Stare termica"
               disableClearable
-              options={[
-                { value: 'BAKED', label: 'COPT' },
-                { value: 'UNBAKED', label: 'NECOPT' }
-              ]}
-              defaultValue={{
-                value: formik.values.thermalCondition || '',
-                label: formik.values.thermalCondition || ''
-              }}
+              options={thermalContiotionOptions}
+              value={
+                thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) || null
+              }
               onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
               required
               error={!!formik.errors.thermalCondition}
@@ -212,7 +209,7 @@ export const ProductDetails = ({
             </Grid>
             <Grid item xs={3}>
               <Input
-                type="text"
+                type="number"
                 variant="outlined"
                 label={`Cantitatea lot ${index + 1}`}
                 onChange={(e: any) => {

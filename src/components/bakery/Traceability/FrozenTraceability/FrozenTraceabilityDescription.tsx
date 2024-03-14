@@ -5,6 +5,7 @@ import { columns, mainItemBodyColumns } from './helpers'
 import { AccordionDetailsWrapper, BodyItem } from '../ProductManagementTraceability/AccordionTable'
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import { Fragment } from 'react'
+import dayjs from 'dayjs'
 
 const FrozenTraceabilityDescription = ({ item, chargeItem }) => {
   const { traceabilityFrozenList, product } = item
@@ -42,8 +43,8 @@ const FrozenTraceabilityDescription = ({ item, chargeItem }) => {
         </Grid>
       </AccordionDetailsWrapper>
       <Grid item my={1} mr={1}>
-        {traceabilityFrozenList.map(frozenItem => (
-          <Accordion>
+        {traceabilityFrozenList.map((frozenItem, fi) => (
+          <Accordion key={fi}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel2-content"
@@ -89,19 +90,12 @@ const FrozenTraceabilityDescription = ({ item, chargeItem }) => {
 
                 <Grid item my={0.5} mr={1}>
                   <Capsule
-                    label="Familie"
-                    value={frozenItem?.batch?.product?.familyName}
+                    label="Cant.fab.lot"
+                    value={frozenItem?.quantity}
                     valueColor={'#004f9b'}
                   />
                 </Grid>
 
-                <Grid item my={0.5} mr={1}>
-                  <Capsule
-                    label="Subfamilie"
-                    value={frozenItem?.batch?.product?.subfamily}
-                    valueColor={'#004f9b'}
-                  />
-                </Grid>
               </Grid>
             </AccordionSummary>
 

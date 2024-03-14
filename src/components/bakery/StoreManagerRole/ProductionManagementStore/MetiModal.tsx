@@ -33,7 +33,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
   } = useQuery(
     ['product-recipe'],
     async () => {
-      const result = await makeCoreGetRequest(`/bakery/product/recipe/${metiProduct.id}`)
+      const result = await makeCoreGetRequest(`/bakery/product/recipe/${metiProduct?.id}`)
       return result || null
     },
     {
@@ -72,11 +72,11 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
         items.map(item => ({
           id: item?.id || '',
           date: item.date || '',
-          interval1: item.list[0].quantity || 0,
-          interval2: item.list[1].quantity || 0,
-          interval3: item.list[2].quantity || 0,
-          interval4: item.list[3].quantity || 0,
-          interval5: item.list[4].quantity || 0
+          interval1: item.list[0]?.quantity || 0,
+          interval2: item.list[1]?.quantity || 0,
+          interval3: item.list[2]?.quantity || 0,
+          interval4: item.list[3]?.quantity || 0,
+          interval5: item.list[4]?.quantity || 0
         }))
 
       setTableItems(toTableRowItems(response.list))

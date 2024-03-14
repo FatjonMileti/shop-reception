@@ -216,6 +216,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
                 showSearch
                 counterLabel="Selecteaza tip livrare"
                 noDataFoundLabel="Nici un rezultat"
+                placeholderButton="Selecteaza"
                 options={deliveryTypeOptions}
                 onSelect={handleDeliveryOptionFilterChange}
                 clearable
@@ -237,6 +238,11 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           rowActions={rowActions}
           rowActionsWidth="130px"
           filters={tableFilterInputs}
+          filtersLabel={'Filtre'}
+          appliedFiltersLabel={'Filtre aplicate'}
+          filtersButtonLabel={'Filtrare'}
+          cancelFiltersButtonLabel={'Anulare'}
+          applyFiltersButtonLabel={'Confirma'}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
         />

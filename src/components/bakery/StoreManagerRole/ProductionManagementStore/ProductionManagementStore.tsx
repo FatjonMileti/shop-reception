@@ -59,7 +59,7 @@ const ProductionManagementStore = () => {
         paramsSerializer: { indexes: null }
       })
 
-      const resultOptions = result.map(
+      const resultOptions = result?.map(
         (item: FamilyItem): ValueLabelInterface => ({
           label: item.name,
           value: item.id
