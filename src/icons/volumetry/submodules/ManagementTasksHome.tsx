@@ -2,7 +2,7 @@ import React from 'react'
 
 const ManagementTasksSubcategory: React.FC = () => (
   <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="70" height="70" rx="14.5455" fill="url(#paint0_linear_700_36961)" />
+    <rect width="70" height="70" rx="14.5455" fill="url(#paint0_linear_555_29396)" />
     <path
       d="M40.8046 48.7927C38.1624 48.7927 35.5202 48.7927 32.878 48.7927C31.8871 48.7927 31.0064 48.1322 30.7862 47.2515C30.4559 45.9304 31.4468 44.6643 32.7679 44.6643C35.1348 44.6643 37.5018 44.6643 39.8688 44.6643C42.8413 44.6643 45.8688 44.6643 48.8413 44.6643C49.777 44.6643 50.6578 45.3799 50.8229 46.2606C51.0431 47.1964 50.6027 48.1872 49.722 48.5726C49.3917 48.7377 49.0064 48.7927 48.6761 48.7927C46.144 48.7927 43.4468 48.7927 40.8046 48.7927Z"
       fill="white"
@@ -29,15 +29,15 @@ const ManagementTasksSubcategory: React.FC = () => (
     />
     <defs>
       <linearGradient
-        id="paint0_linear_700_36961"
+        id="paint0_linear_555_29396"
         x1="34.5455"
         y1="2.70945e-07"
         x2="34.5455"
         y2="70"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#7000FF" />
-        <stop offset="1" stopColor="#45009C" />
+        <stop stop-color="#EA1225" />
+        <stop offset="1" stop-color="#BA0B1B" />
       </linearGradient>
     </defs>
   </svg>
