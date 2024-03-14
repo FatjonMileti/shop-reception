@@ -99,7 +99,7 @@ export const toTableRowItems = (items: any[]) => {
 
     storeName: item?.batch?.supplier?.supplierName || '',
     dlc: formatBakeryPayloadDate(item.dlc) || '',
-    openingDate: formatBakeryPayloadDate(item.openingDate) || '',
+    openingDate: item.openingDate || '',
 
     childTraceability: item.childTraceability
   }))
@@ -196,7 +196,5 @@ export const infoColumns: any[] = [
       />
     )
   },
-  { title: 'Cant.fab',
-    field: 'quantity'
-  },
+  { title: 'Cant.fab', field: 'quantity' }
 ]
