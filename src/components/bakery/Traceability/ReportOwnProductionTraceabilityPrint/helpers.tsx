@@ -1,4 +1,4 @@
-import { formatBakeryPayloadDate } from '../../../../utils/helpers'
+import { formatBakeryPayloadDate } from "utils/helpers"
 
 export const productPrintColumns = [
   {
@@ -51,7 +51,8 @@ export const batchPrintColumns = [
   {
     field: 'product.metiCode',
     title: 'Cod Meti reteta',
-    render: row => row.product.metiCode
+    render: row => row.product.metiCode,
+    width: '250px !important'
   },
   {
     field: 'product.name',

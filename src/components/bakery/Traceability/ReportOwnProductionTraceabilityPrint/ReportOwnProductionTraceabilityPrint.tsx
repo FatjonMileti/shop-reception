@@ -3,18 +3,17 @@ import styles from './ReportOwnProductionTraceabilityPrint.modules.scss'
 import s from '../../commonStyles.modules.scss'
 import { BasicTable } from '@fullscreendigital/carrefour-dex-fe'
 import React, { useRef } from 'react'
-import { makeCoreGetRequest } from '../../../../utils/api'
-import { toTableGETUrl } from '../../../core-ui/Table/serializers'
 import { batchPrintColumns, chargePrintColumns, productPrintColumns } from './helpers'
 import { useQuery } from 'react-query'
-import { formatErrorMessage } from '../../../../utils/formatting'
-import { useNotification } from '../../../../hooks'
 import { CircularProgress, Grid, IconButton, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { PrintOutlined } from '@mui/icons-material'
 import { useReactToPrint } from 'react-to-print'
-import { Icon_v2 } from '../../../core-ui/Icon_v2'
-import { formatBakeryPayloadDate } from 'utils/helpers'
+import { useNotification } from 'hooks'
+import { makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { formatErrorMessage } from 'utils/formatting'
+import { Icon_v2 } from 'components/core-ui/Icon_v2'
 
 export const ReportOwnProductionTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
@@ -129,10 +128,6 @@ export const ReportOwnProductionTraceabilityPrint = () => {
 
         <Grid container rowSpacing={3}>
           <Grid item xs={12}>
-            <p className={styles.productName}>{reportDataQuery?.data?.list[0].product.name}</p>
-          </Grid>
-
-          <Grid item xs={12}>
             <BasicTable
               columns={selectedColumnsProduct}
               rows={[reportDataQuery?.data?.list[0]] || []}
@@ -145,6 +140,10 @@ export const ReportOwnProductionTraceabilityPrint = () => {
           {reportDataQuery?.data?.list.map((product, tpIndex) => {
             return (
               <Grid item xs={12} container rowSpacing={'20px'} className={styles.itemWrapper}>
+                <Grid item xs={12}>
+                  <p className={styles.productName}>{product.product.name}</p>
+                </Grid>
+
                 <Grid item xs={12}>
                   <BasicTable
                     columns={selectedColumnsBatch}
