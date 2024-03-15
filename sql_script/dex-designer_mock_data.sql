@@ -113,9 +113,9 @@ VALUES
     (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 9),
     (46, 'Raport norme', 'ReportsVolumetry', null, true, 9),
     (47, 'Task-uri alocate', 'AssignTasks', null, true, 8),
-    (48, 'Status Angajati', 'EmployeeManagement', null, true, 8),
-    (249, 'Management magazine', 'ManagementTasks', null, true, 8),
-    (250, 'Management categorii template-uri', 'ManagementTasks', null, true, 8),
+    (48, 'Status Angajati', 'EmployeeStatus', null, true, 8),
+    (249, 'Management magazine', 'StoreManagement', null, true, 8),
+    (250, 'Management categorii template-uri', 'CategoryTemplateManagement', null, true, 8),
     -- Shop Reception (Admin)
     (149, 'Administrare depozite', 'UsersManagement', null, true, 12),
     (151, 'Administrare huburi', 'UsersManagement', null, true, 12),
