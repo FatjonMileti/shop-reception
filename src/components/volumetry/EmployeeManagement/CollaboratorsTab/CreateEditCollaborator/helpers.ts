@@ -3,7 +3,7 @@ import * as yup from 'yup'
 export const getValidationSchema = () =>
   yup.object({
     fullName: yup.string().nonNullable().required('Acest camp este obligatoriu.'),
-    department: yup
+    genericDepartment: yup
       .object()
       .shape({
         label: yup.string().required('Acest camp este obligatoriu.'),
@@ -23,8 +23,8 @@ export const getValidationSchema = () =>
 export const getInitialValues = editItem => {
   return {
     fullName: editItem?.fullName || '',
-    department: editItem?.department
-      ? { label: editItem.department, value: editItem.department }
+    genericDepartment: editItem?.genericDepartment
+      ? { label: editItem.genericDepartment, value: editItem.genericDepartment }
       : null,
     jobTitle: editItem?.jobTitle ? { label: editItem.jobTitle, value: editItem.jobTitle } : null,
     employer: editItem?.employer || ''
