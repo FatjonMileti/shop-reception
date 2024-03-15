@@ -44,7 +44,8 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
           )}`,
           type: 'error'
         })
-      }
+      },
+      enabled: typeof metiProduct?.id !== 'undefined'
     }
   )
 
@@ -62,7 +63,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
           filters: [{ name: 'id', value: metiProduct.id }],
           tableFilters,
           page,
-          rowsPerPage,
+          rowsPerPage: 30,
           order,
           orderBy
         })
@@ -101,7 +102,7 @@ export const MetiModal: React.FC<MetiModalProps> = props => {
           filters: [{ name: 'id', value: metiProduct.id }],
           tableFilters,
           page,
-          rowsPerPage,
+          rowsPerPage: 30,
           order,
           orderBy
         })

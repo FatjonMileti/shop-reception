@@ -1,15 +1,16 @@
 .reportHeader {
   padding: 24px 36px 16px 36px;
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
 
   p {
     font-family: Ubuntu, serif;
     color: #121212;
-    margin: 0 !Important;
+    margin: 0 !important;
     font-style: normal;
   }
 
-  .rightColumn, .dateColumn {
+  .rightColumn,
+  .dateColumn {
     font-weight: 400;
     line-height: 20px;
     b {
@@ -27,25 +28,30 @@
       font-weight: 700;
     }
   }
-
-
 }
 
-
 .itemWrapper {
-  border-bottom: 1px solid #D1D1D1;
+  border-bottom: 1px solid #d1d1d1;
   padding: 24px 0 36px 0;
 }
 
-.productTableContainer {
+.productTableContainer,
+.batchTableContainer,
+.chargeTableContainer {
   width: 100% !important;
   border-radius: 8px !important;
+
   table {
     thead {
+      border-bottom: 1px solid #313131 !important;
+
       tr {
         th {
-          background-color: black !important;
-          color: white;
+          background-color: white !important;
+          color: black !important;
+          padding: 7px 10px;
+          width: '150px' !important;
+
           &:not(:last-child) {
             border-right: 1px solid #313131;
           }
@@ -54,67 +60,11 @@
     }
     tbody {
       tr {
-        td:not(:last-child) {
-          border-right: 1px solid #c8c8c8;
-        }
-      }
-    }
-  }
-}
-.batchTableContainer {
-  width: 100% !important;
-  border-radius: 8px !important;
-  table {
-    border-radius: 8px;
-
-    thead {
-      border-radius: 8px 8px 0 0;
-      tr  {
-        th {
-          background-color: #9C9A9A !important;
+        td {
+          padding: 7px 10px;
           &:not(:last-child) {
             border-right: 1px solid #c8c8c8;
           }
-        }
-      }
-    }
-
-    tbody {
-      border-radius: 0px 0px 8px 8px;
-      tr {
-        border-bottom: 1px solid #e3e3e3;
-        td:not(:last-child) {
-          border-right: 1px solid #c8c8c8;
-        }
-      }
-    }
-  }
-}
-.chargeTableContainer {
-  width: 100% !important;
-  border-radius: 8px !important;
-  table {
-    border-radius: 8px;
-
-    thead {
-      border-radius: 8px 8px 0 0;
-      tr  {
-        th {
-          background-color: #d9d9d9 !important;
-          color: black !important;
-          &:not(:last-child) {
-            border-right: 1px solid #c8c8c8;
-          }
-        }
-      }
-    }
-
-    tbody {
-      border-radius: 0px 0px 8px 8px;
-      tr {
-        border-bottom: 1px solid #e3e3e3;
-        td:not(:last-child) {
-          border-right: 1px solid #c8c8c8;
         }
       }
     }

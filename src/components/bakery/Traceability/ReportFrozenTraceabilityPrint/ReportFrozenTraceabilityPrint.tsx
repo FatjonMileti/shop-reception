@@ -3,18 +3,18 @@ import styles from './ReportFrozenTraceabilityPrint.modules.scss'
 import s from '../../commonStyles.modules.scss'
 import { BasicTable } from '@fullscreendigital/carrefour-dex-fe'
 import React, { useRef } from 'react'
-import { makeCoreGetRequest } from '../../../../utils/api'
-import { toTableGETUrl } from '../../../core-ui/Table/serializers'
 import { batchPrintColumns, productPrintColumns } from './helpers'
 import { useQuery } from 'react-query'
-import { formatErrorMessage } from '../../../../utils/formatting'
-import { useNotification } from '../../../../hooks'
 import { TracedProduct } from './interfaces'
 import { Grid, IconButton, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { PrintOutlined } from '@mui/icons-material'
 import { useReactToPrint } from 'react-to-print'
-import { Icon_v2 } from '../../../core-ui/Icon_v2'
+import { useNotification } from 'hooks'
+import { makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { formatErrorMessage } from 'utils/formatting'
+import { Icon_v2 } from 'components/core-ui/Icon_v2'
 
 export const ReportFrozenTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
@@ -112,7 +112,8 @@ export const ReportFrozenTraceabilityPrint = () => {
             className={styles.rightColumn}
           >
             <p>
-              <b>PRP 05:</b> Prelucrare tehnologica, control productie si comercializare de produse alimentare
+              <b>PRP 05:</b> Prelucrare tehnologica, control productie si comercializare de produse
+              alimentare
             </p>
           </Grid>
 
