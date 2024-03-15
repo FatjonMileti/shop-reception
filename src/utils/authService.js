@@ -113,7 +113,7 @@ export const getUserFirstName = () => {
 export const getUserPreferredName = () => {
   const userInfo = getUserInfo()
 
-  return userInfo.preferred_username
+  return userInfo?.preferred_username
 }
 
 export const getUserAvatarString = () => {
