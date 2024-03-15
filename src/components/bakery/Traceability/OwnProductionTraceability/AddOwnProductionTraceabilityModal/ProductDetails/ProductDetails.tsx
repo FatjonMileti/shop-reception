@@ -88,7 +88,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             helperText={formik.errors.chargeNumber as string}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <Input
             type="number"
             variant="outlined"
@@ -104,7 +104,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             helperText={formik.errors.quantity as string}
           />
         </Grid>
-        <Grid item xs={3}></Grid>
+        {/* <Grid item xs={3}></Grid> */}
 
         <Grid item xs={3}>
           <Input

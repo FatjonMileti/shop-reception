@@ -136,7 +136,7 @@ export const ReportFrozenTraceabilityPrint = () => {
                   <p className={styles.productName}>{tp.product.name}</p>
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
                   <BasicTable
                     columns={selectedColumnsProduct}
                     rows={[tp] || []}
@@ -149,7 +149,7 @@ export const ReportFrozenTraceabilityPrint = () => {
                   />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
                   <BasicTable
                     columns={selectedColumnsBatch}
                     rows={tp?.traceabilityFrozenList || []}
