@@ -103,15 +103,15 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
         <Grid xs={12} item>
           <AsyncAutocomplete
             variant="outlined"
-            name="department"
+            name="genericDepartment"
             label="Selecteaza departament"
             disableClearable
-            value={formik.values.department}
+            value={formik.values.genericDepartment}
             options={departmentsOptions || []}
             onChange={value => formik.setFieldValue('department', value)}
             required
-            error={!!formik.errors.department}
-            helperText={formik.errors.department as string}
+            error={!!formik.errors.genericDepartment}
+            helperText={formik.errors.genericDepartment as string}
           />
         </Grid>
 

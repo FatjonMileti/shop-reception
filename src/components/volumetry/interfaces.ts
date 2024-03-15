@@ -12,7 +12,7 @@ export interface AutocompleteOption {
 
 export interface EmployeeManagementItem {
   id?: string | number
-  department: string | AutocompleteOption
+  genericDepartment: string | AutocompleteOption
   fullName: string
   jobTitle: string | AutocompleteOption
   employer: string
