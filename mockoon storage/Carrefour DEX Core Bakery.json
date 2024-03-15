@@ -7971,7 +7971,7 @@
       "type": "http",
       "documentation": "Get own production traceability",
       "method": "get",
-      "endpoint": "traceability/production/:id",
+      "endpoint": "traceability/productionn/:id",
       "responses": [
         {
           "uuid": "70171c44-273f-4666-b9f6-625933841b09",
@@ -9049,7 +9049,7 @@
       "type": "http",
       "documentation": "Get frozen traceability",
       "method": "get",
-      "endpoint": "traceability/frozen/:id",
+      "endpoint": "traceability/frozenn/:id",
       "responses": [
         {
           "uuid": "0f3d0429-223c-43c5-aed6-09b70457d86b",
@@ -9813,6 +9813,160 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "3c84131d-5e09-4b3c-b78e-9b8623e6716f",
+      "type": "http",
+      "documentation": "Get frozen traceability",
+      "method": "get",
+      "endpoint": "traceability/frozen/report",
+      "responses": [
+        {
+          "uuid": "7f815e36-67e0-4475-ad5f-f894b4a01f5a",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": \"be49206e-7c3a-4d7b-9779-7ba8d4e874e0\",\n      \"product\": {\n        \"id\": \"d26cfa7e-751c-4e15-ba56-71ceccd21a2a\",\n        \"name\": \"CHIFLA KAISER SUSAN 50G LLR   \",\n        \"metiCode\": 23000985,\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 1,\n        \"familyName\": \"PRODUSE CONGELATE\",\n        \"familyCode\": 238,\n        \"subfamily\": \"PAINE/ CONGELATE              \",\n        \"pluCode\": \"816\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23000985.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240315%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240315T071258Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=9264a8ffbd3179606e2672f6943c50c2e0b27ab574c6765723ba01f318fd4d1b23782399a913af8247f2590b11cf5bac8053ef71c1045d344401bb54b6a949ed60aa6bbc913f625b297959a0821bdc8366fcffc41f0e3fa167e170236952434d8bc29bc23db6fa72a823a6f1752eed80d92cff3fcc439abad97286b7bdcff8806a273246e7d5cb680ff55f9be8e46098c07430aa4ade92b84760648495d8ad9e1eddb88e300d2f19af110f45dcd927a5156c303589d3b675791c5fcd0a258e071aa47e7af2463cb3bbafd38b0762c083d5d3b50dd31dce0505bd18cf7114f67fa076820cd36a1b107bf42a0c4bf7de6f5ce6b0f0f98bbaac00ff5027cbf84e41\"\n      },\n      \"store\": {\n        \"id\": \"ddc67b1f-d2b0-49d1-beac-44cc8a4050a1\",\n        \"metiCode\": 36,\n        \"name\": \"MEGAMALL\",\n        \"storeType\": \"HYPERMARKET\"\n      },\n      \"productionDate\": \"2024-03-14\",\n      \"chargeNumber\": \"1\",\n      \"quantity\": 12.5,\n      \"thermalCondition\": \"BAKED\",\n      \"conform\": true,\n      \"modifiedBy\": \"silvia_sulea\",\n      \"modifiedDate\": \"2024-03-14T10:42:57.502+00:00\",\n      \"createdBy\": \"silvia_sulea\",\n      \"createdDate\": \"2024-03-14T10:42:57.502+00:00\",\n      \"traceabilityFrozenList\": [\n        {\n          \"id\": \"ee6a4a69-99be-41de-a13a-f616ddab5344\",\n          \"batch\": {\n            \"id\": \"de5e7690-71fc-4e91-8ee0-6e2cd81bc5fb\",\n            \"product\": {\n              \"id\": \"d26cfa7e-751c-4e15-ba56-71ceccd21a2a\",\n              \"name\": \"CHIFLA KAISER SUSAN 50G LLR   \",\n              \"metiCode\": 23000985,\n              \"metricUnit\": \"K\",\n              \"dlcDays\": 1,\n              \"familyName\": \"PRODUSE CONGELATE\",\n              \"familyCode\": 238,\n              \"subfamily\": \"PAINE/ CONGELATE              \",\n              \"pluCode\": \"816\"\n            },\n            \"supplier\": {\n              \"id\": \"6a646c28-cf52-45e8-8e50-6cd7b2b892ed\",\n              \"productCode\": 23000985,\n              \"supplierCode\": 46091,\n              \"supplierName\": \"LALORRAINE SRL                \"\n            },\n            \"entryDate\": \"2024-03-14\",\n            \"expireDate\": \"2024-03-30\",\n            \"batchName\": \"Loooo1\",\n            \"hasExpireDate\": true,\n            \"hasSecondaryDlc\": false,\n            \"batchQuantity\": 10,\n            \"batchStatus\": \"AVAILABLE\",\n            \"isVerified\": false,\n            \"consumedAmount\": 15.5,\n            \"createdBy\": \"silvia_sulea\",\n            \"createdDate\": \"2024-03-14T10:39:52.262+00:00\",\n            \"modifiedBy\": \"silvia_sulea\",\n            \"modifiedDate\": \"2024-03-14T10:39:52.262+00:00\"\n          },\n          \"quantity\": 12.5,\n          \"createdBy\": \"silvia_sulea\",\n          \"createdDate\": \"2024-03-14T10:42:57.511+00:00\",\n          \"modifiedBy\": \"silvia_sulea\",\n          \"modifiedDate\": \"2024-03-14T10:42:57.511+00:00\"\n        }\n      ],\n      \"verified\": false,\n      \"createdUser\": false\n    },\n    {\n      \"id\": \"e953301a-27ab-49d2-add4-4f3db0186b52\",\n      \"product\": {\n        \"id\": \"d26cfa7e-751c-4e15-ba56-71ceccd21a2a\",\n        \"name\": \"CHIFLA KAISER SUSAN 50G LLR   \",\n        \"metiCode\": 23000985,\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 1,\n        \"familyName\": \"PRODUSE CONGELATE\",\n        \"familyCode\": 238,\n        \"subfamily\": \"PAINE/ CONGELATE              \",\n        \"pluCode\": \"816\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23000985.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240315%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240315T071258Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=9264a8ffbd3179606e2672f6943c50c2e0b27ab574c6765723ba01f318fd4d1b23782399a913af8247f2590b11cf5bac8053ef71c1045d344401bb54b6a949ed60aa6bbc913f625b297959a0821bdc8366fcffc41f0e3fa167e170236952434d8bc29bc23db6fa72a823a6f1752eed80d92cff3fcc439abad97286b7bdcff8806a273246e7d5cb680ff55f9be8e46098c07430aa4ade92b84760648495d8ad9e1eddb88e300d2f19af110f45dcd927a5156c303589d3b675791c5fcd0a258e071aa47e7af2463cb3bbafd38b0762c083d5d3b50dd31dce0505bd18cf7114f67fa076820cd36a1b107bf42a0c4bf7de6f5ce6b0f0f98bbaac00ff5027cbf84e41\"\n      },\n      \"store\": {\n        \"id\": \"ddc67b1f-d2b0-49d1-beac-44cc8a4050a1\",\n        \"metiCode\": 36,\n        \"name\": \"MEGAMALL\",\n        \"storeType\": \"HYPERMARKET\"\n      },\n      \"productionDate\": \"2024-03-14\",\n      \"chargeNumber\": \"2\",\n      \"quantity\": 11.6,\n      \"thermalCondition\": \"BAKED\",\n      \"conform\": true,\n      \"nonComplianceReason\": \"\",\n      \"productDestination\": \"\",\n      \"verifiedBy\": \"test_dex_bakery\",\n      \"verifiedDate\": \"2024-03-14\",\n      \"modifiedBy\": \"test_dex_bakery\",\n      \"modifiedDate\": \"2024-03-14T11:02:56.553+00:00\",\n      \"createdBy\": \"silvia_sulea\",\n      \"createdDate\": \"2024-03-14T11:02:48.450+00:00\",\n      \"traceabilityFrozenList\": [\n        {\n          \"id\": \"f4f7a71f-db9d-4bd2-9620-a37b8a866d8f\",\n          \"batch\": {\n            \"id\": \"d7788eb5-d8da-4261-9f8d-a45ffd6844db\",\n            \"product\": {\n              \"id\": \"d26cfa7e-751c-4e15-ba56-71ceccd21a2a\",\n              \"name\": \"CHIFLA KAISER SUSAN 50G LLR   \",\n              \"metiCode\": 23000985,\n              \"metricUnit\": \"K\",\n              \"dlcDays\": 1,\n              \"familyName\": \"PRODUSE CONGELATE\",\n              \"familyCode\": 238,\n              \"subfamily\": \"PAINE/ CONGELATE              \",\n              \"pluCode\": \"816\"\n            },\n            \"supplier\": {\n              \"id\": \"8defd359-a495-4915-8d21-0a4f00f053c4\",\n              \"productCode\": 23000985,\n              \"supplierCode\": 30000,\n              \"supplierName\": \"MACROMEX SRL                  \"\n            },\n            \"entryDate\": \"2024-03-14\",\n            \"expireDate\": \"2024-04-27\",\n            \"batchName\": \"Poo\",\n            \"hasExpireDate\": true,\n            \"hasSecondaryDlc\": false,\n            \"batchQuantity\": 23,\n            \"batchStatus\": \"AVAILABLE\",\n            \"isVerified\": true,\n            \"verifiedBy\": \"test_dex_bakery\",\n            \"verifiedDate\": \"2024-03-14\",\n            \"consumedAmount\": 12.6,\n            \"createdBy\": \"silvia_sulea\",\n            \"createdDate\": \"2024-03-14T10:40:46.830+00:00\",\n            \"modifiedBy\": \"test_dex_bakery\",\n            \"modifiedDate\": \"2024-03-14T11:03:50.093+00:00\"\n          },\n          \"quantity\": 11.6,\n          \"createdBy\": \"silvia_sulea\",\n          \"createdDate\": \"2024-03-14T11:02:48.459+00:00\",\n          \"modifiedBy\": \"silvia_sulea\",\n          \"modifiedDate\": \"2024-03-14T11:02:48.459+00:00\"\n        }\n      ],\n      \"verified\": true,\n      \"createdUser\": false\n    },\n    {\n      \"id\": \"8570e0b2-3098-4ecc-b260-8cef64d97127\",\n      \"product\": {\n        \"id\": \"d26cfa7e-751c-4e15-ba56-71ceccd21a2a\",\n        \"name\": \"CHIFLA KAISER SUSAN 50G LLR   \",\n        \"metiCode\": 23000985,\n        \"metricUnit\": \"K\",\n        \"dlcDays\": 1,\n        \"familyName\": \"PRODUSE CONGELATE\",\n        \"familyCode\": 238,\n        \"subfamily\": \"PAINE/ CONGELATE              \",\n        \"pluCode\": \"816\",\n        \"imageUrl\": \"https://storage.googleapis.com/c4bakery-uat/bakery-images/product/238/23000985.jpg?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-ro-bakery-uat%40gcp-ro-retail-uat.iam.gserviceaccount.com%2F20240315%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240315T071258Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=9264a8ffbd3179606e2672f6943c50c2e0b27ab574c6765723ba01f318fd4d1b23782399a913af8247f2590b11cf5bac8053ef71c1045d344401bb54b6a949ed60aa6bbc913f625b297959a0821bdc8366fcffc41f0e3fa167e170236952434d8bc29bc23db6fa72a823a6f1752eed80d92cff3fcc439abad97286b7bdcff8806a273246e7d5cb680ff55f9be8e46098c07430aa4ade92b84760648495d8ad9e1eddb88e300d2f19af110f45dcd927a5156c303589d3b675791c5fcd0a258e071aa47e7af2463cb3bbafd38b0762c083d5d3b50dd31dce0505bd18cf7114f67fa076820cd36a1b107bf42a0c4bf7de6f5ce6b0f0f98bbaac00ff5027cbf84e41\"\n      },\n      \"store\": {\n        \"id\": \"ddc67b1f-d2b0-49d1-beac-44cc8a4050a1\",\n        \"metiCode\": 36,\n        \"name\": \"MEGAMALL\",\n        \"storeType\": \"HYPERMARKET\"\n      },\n      \"productionDate\": \"2024-03-14\",\n      \"chargeNumber\": \"3\",\n      \"quantity\": 11,\n      \"thermalCondition\": \"BAKED\",\n      \"conform\": true,\n      \"verifiedBy\": \"test_dex_bakery\",\n      \"verifiedDate\": \"2024-03-14\",\n      \"modifiedBy\": \"test_dex_bakery\",\n      \"modifiedDate\": \"2024-03-14T11:07:34.441+00:00\",\n      \"createdBy\": \"silvia_sulea\",\n      \"createdDate\": \"2024-03-14T11:05:47.847+00:00\",\n      \"traceabilityFrozenList\": [\n        {\n          \"id\": \"23556a76-cd07-4666-b0ec-e1e54b94ad4e\",\n          \"batch\": {\n            \"id\": \"de5e7690-71fc-4e91-8ee0-6e2cd81bc5fb\",\n            \"product\": {\n              \"id\": \"d26cfa7e-751c-4e15-ba56-71ceccd21a2a\",\n              \"name\": \"CHIFLA KAISER SUSAN 50G LLR   \",\n              \"metiCode\": 23000985,\n              \"metricUnit\": \"K\",\n              \"dlcDays\": 1,\n              \"familyName\": \"PRODUSE CONGELATE\",\n              \"familyCode\": 238,\n              \"subfamily\": \"PAINE/ CONGELATE              \",\n              \"pluCode\": \"816\"\n            },\n            \"supplier\": {\n              \"id\": \"6a646c28-cf52-45e8-8e50-6cd7b2b892ed\",\n              \"productCode\": 23000985,\n              \"supplierCode\": 46091,\n              \"supplierName\": \"LALORRAINE SRL                \"\n            },\n            \"entryDate\": \"2024-03-14\",\n            \"expireDate\": \"2024-03-30\",\n            \"batchName\": \"Loooo1\",\n            \"hasExpireDate\": true,\n            \"hasSecondaryDlc\": false,\n            \"batchQuantity\": 10,\n            \"batchStatus\": \"AVAILABLE\",\n            \"isVerified\": false,\n            \"consumedAmount\": 15.5,\n            \"createdBy\": \"silvia_sulea\",\n            \"createdDate\": \"2024-03-14T10:39:52.262+00:00\",\n            \"modifiedBy\": \"silvia_sulea\",\n            \"modifiedDate\": \"2024-03-14T10:39:52.262+00:00\"\n          },\n          \"quantity\": 3,\n          \"createdBy\": \"silvia_sulea\",\n          \"createdDate\": \"2024-03-14T11:05:47.857+00:00\",\n          \"modifiedBy\": \"silvia_sulea\",\n          \"modifiedDate\": \"2024-03-14T11:05:47.857+00:00\"\n        },\n        {\n          \"id\": \"6ab5ee3e-651d-4edf-8210-a579f8a042af\",\n          \"batch\": {\n            \"id\": \"d7788eb5-d8da-4261-9f8d-a45ffd6844db\",\n            \"product\": {\n              \"id\": \"d26cfa7e-751c-4e15-ba56-71ceccd21a2a\",\n              \"name\": \"CHIFLA KAISER SUSAN 50G LLR   \",\n              \"metiCode\": 23000985,\n              \"metricUnit\": \"K\",\n              \"dlcDays\": 1,\n              \"familyName\": \"PRODUSE CONGELATE\",\n              \"familyCode\": 238,\n              \"subfamily\": \"PAINE/ CONGELATE              \",\n              \"pluCode\": \"816\"\n            },\n            \"supplier\": {\n              \"id\": \"8defd359-a495-4915-8d21-0a4f00f053c4\",\n              \"productCode\": 23000985,\n              \"supplierCode\": 30000,\n              \"supplierName\": \"MACROMEX SRL                  \"\n            },\n            \"entryDate\": \"2024-03-14\",\n            \"expireDate\": \"2024-04-27\",\n            \"batchName\": \"Poo\",\n            \"hasExpireDate\": true,\n            \"hasSecondaryDlc\": false,\n            \"batchQuantity\": 23,\n            \"batchStatus\": \"AVAILABLE\",\n            \"isVerified\": true,\n            \"verifiedBy\": \"test_dex_bakery\",\n            \"verifiedDate\": \"2024-03-14\",\n            \"consumedAmount\": 12.6,\n            \"createdBy\": \"silvia_sulea\",\n            \"createdDate\": \"2024-03-14T10:40:46.830+00:00\",\n            \"modifiedBy\": \"test_dex_bakery\",\n            \"modifiedDate\": \"2024-03-14T11:03:50.093+00:00\"\n          },\n          \"quantity\": 1,\n          \"createdBy\": \"silvia_sulea\",\n          \"createdDate\": \"2024-03-14T11:05:47.857+00:00\",\n          \"modifiedBy\": \"silvia_sulea\",\n          \"modifiedDate\": \"2024-03-14T11:05:47.857+00:00\"\n        }\n      ],\n      \"verified\": true,\n      \"createdUser\": false\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 3,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully obtained the paginated, filtered and sorted stores list",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "22e8a0c9-1951-4fd4-9c0e-bbdefc9cebbd",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "2bc83c48-d252-45b9-9d55-d5fb2075a49e",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "b3cacdf5-86ad-48e3-97e2-bf0d738a4b52",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ce9b6ab3-92de-4655-9d40-6d66bc7cd14e",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "The specified resource was not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "9dd7a5ff-2341-444e-8a52-e721b10362f6",
+          "body": "[\n  {\n    \"code\": \"\",\n    \"message\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Un unexpected error happened",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -10151,6 +10305,10 @@
     {
       "type": "route",
       "uuid": "bdf75a9b-6204-43da-90bf-a194b6cf9cbb"
+    },
+    {
+      "type": "route",
+      "uuid": "3c84131d-5e09-4b3c-b78e-9b8623e6716f"
     }
   ],
   "proxyMode": false,
