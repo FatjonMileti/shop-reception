@@ -8,7 +8,7 @@ export const firebaseConfig = {
   projectId: process.env.FIREBASE_PROCESS_ID,
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIRE_BASE_APP_ID
+  appId: process.env.FIREBASE_APP_ID
 }
 
 const firebaseApp = initializeApp(firebaseConfig)

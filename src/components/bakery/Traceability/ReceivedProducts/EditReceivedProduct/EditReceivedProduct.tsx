@@ -103,7 +103,7 @@ export const EditReceivedProduct = ({
     async () => {
       const data: EditReceivedProductRequestData = {
         batchStatus: form.values.batchStatus,
-        closeReason: form.values.closeReason,
+        closeReason: form.values.closeReason.length === 0 ? null : form.values.closeReason,
         verified: form.values.verified
       }
 

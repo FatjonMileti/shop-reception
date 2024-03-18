@@ -1,4 +1,4 @@
-import { Grid, Divider } from '@mui/material'
+import { Grid, Divider, useMediaQuery } from '@mui/material'
 import {
   Autocomplete,
   Button,
@@ -40,6 +40,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     )
     formik.setFieldValue('traceabilityProductionList', newBatches)
   }
+  const isXs = useMediaQuery('(max-width:624px)')
 
   return (
     <Grid container rowSpacing={3.5}>
@@ -116,7 +117,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             />
           </Grid>
 
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Input
               type="number"
               variant="outlined"

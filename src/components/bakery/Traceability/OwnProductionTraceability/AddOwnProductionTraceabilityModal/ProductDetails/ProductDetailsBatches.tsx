@@ -42,7 +42,7 @@ export const ProductDetailsBatches = ({
               disabled
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Input
               type="number"
               variant="outlined"
@@ -73,7 +73,7 @@ export const ProductDetailsBatches = ({
             )}
           </Grid>
 
-          <Grid item xs={3}></Grid>
+          {/* <Grid item xs={3}></Grid> */}
 
           {formik.values.traceabilityProductionList.map((item, idx) => (
             <Fragment key={idx}>
@@ -89,7 +89,7 @@ export const ProductDetailsBatches = ({
                       disabled
                     />
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Input
                       type="number"
                       variant="outlined"
@@ -172,7 +172,7 @@ export const ProductDetailsBatches = ({
               disabled
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Input
               type="number"
               variant="outlined"
@@ -199,7 +199,7 @@ export const ProductDetailsBatches = ({
               disabled={!formik.values?.quantity}
             />
           </Grid>
-          <Grid item xs={3}></Grid>
+          {/* <Grid item xs={3}></Grid> */}
 
           {formik.values.traceabilityProductionList.map((charge, idx) => (
             <Fragment key={idx}>
@@ -215,7 +215,7 @@ export const ProductDetailsBatches = ({
                       disabled
                     />
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Input
                       type="number"
                       variant="outlined"
@@ -298,7 +298,7 @@ export const ProductDetailsBatches = ({
               disabled
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Input
               type="text"
               variant="outlined"
@@ -312,7 +312,7 @@ export const ProductDetailsBatches = ({
               disabled
             />
           </Grid>
-          <Grid item xs={3}></Grid>
+          {/* <Grid item xs={3}></Grid> */}
         </Fragment>
       ))}
 
