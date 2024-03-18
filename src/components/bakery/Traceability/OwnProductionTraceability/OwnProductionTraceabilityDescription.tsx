@@ -10,9 +10,9 @@ const OwnProductionTraceabilityDescription = ({ item }) => {
 
   return (
     <Grid container flexDirection="column">
-      <AccordionDetailsWrapper>
-        <Grid container spacing={2} columns={12}>
-          <Grid item my={1}>
+      <AccordionDetailsWrapper sx={{maxWidth: '99%'}}>
+        <Grid container spacing={2} columns={12} >
+          <Grid item my={1} sx={{ overflowX: 'visible'}}>
             <Table
               hideCheckbox={true}
               isLoading={false}
@@ -20,7 +20,7 @@ const OwnProductionTraceabilityDescription = ({ item }) => {
               rows={toTableRowItems(traceabilityProductionList)}
               disablePagination
             />
-            <Grid container spacing={2} columns={12} mt={1}>
+            <Grid container spacing={2} columns={12} mt={1} >
               {infoColumns.map((column, index) => {
                 return (
                   <Fragment key={index}>
