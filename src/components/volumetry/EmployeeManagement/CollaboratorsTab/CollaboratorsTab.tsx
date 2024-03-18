@@ -149,7 +149,7 @@ const CollaboratorsTab = () => {
           locationsFilterValue && (
             <Table
               hideCheckbox
-              orderBy="department"
+              orderBy="genericDepartment"
               order="desc"
               columns={columns}
               items={tableItems}

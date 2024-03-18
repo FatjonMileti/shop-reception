@@ -56,7 +56,7 @@ const CreateEditLocationCategory: React.FC<CreateEditLocationCategoryProps> = pr
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={isEdit ? 'Editeaza categorie' : 'Creeaza categorie'}
+      modalTitle={isEdit ? 'Editeaza business unit' : 'Creeaza business unit'}
     >
       <Grid container spacing={4}>
         {isLoading && (
@@ -66,7 +66,7 @@ const CreateEditLocationCategory: React.FC<CreateEditLocationCategoryProps> = pr
           <Input
             type="text"
             name="name"
-            label="Nume categorie"
+            label="Nume business unit"
             fullWidth
             variant="outlined"
             value={formik.values.name}
