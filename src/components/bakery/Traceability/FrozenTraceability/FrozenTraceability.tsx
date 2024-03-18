@@ -19,9 +19,6 @@ import { formatErrorMessage } from '../../../../utils/formatting'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 import { CorrectFrozenTraceabilityModal } from './CorrectFrozenTraceabilityModal/CorrectFrozenTraceabilityModal'
 
-const orderBy = 'createdDate'
-const order = 'desc'
-
 export const FrozenTraceability = () => {
   const { showNotification } = useNotification()
 
@@ -46,8 +43,6 @@ export const FrozenTraceability = () => {
           tableFilters,
           page,
           rowsPerPage,
-          orderBy,
-          order,
           searchText,
           searchFields: ['product.metiCode', 'product.name']
         })
