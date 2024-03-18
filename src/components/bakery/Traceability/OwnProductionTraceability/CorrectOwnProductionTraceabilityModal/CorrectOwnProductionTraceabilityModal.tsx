@@ -67,6 +67,25 @@ export const CorrectOwnProductionTraceabilityModal = ({
     validationSchema,
     initialValues,
     onSubmit: async (values: any) => {
+      const otherComponents = recipeQuery?.data?.others.map(
+        ({ componentCode, componentName, componentQuantity }) => ({
+          componentCode,
+          componentName,
+          componentQuantity
+        })
+      )
+
+      const addDlcToComponent = item => {
+        if (!item.hasSecondaryDlc) return item
+
+        return {
+          ...item,
+          dlc: formatPayloadDate(
+            dayjs(item.batchId ? item.openingDate : item.productionDate).add(item.dlcDays, 'days')
+          )
+        }
+      }
+
       const payload = {
         productId: values?.product?.productId,
         productionDate: formatPayloadDate(values.productionDate),
@@ -80,16 +99,10 @@ export const CorrectOwnProductionTraceabilityModal = ({
         productDestination: values?.productDestination,
         metiCode: values?.product?.metiCode,
         productName: values.product?.name,
-        traceabilityProductionList: values?.traceabilityProductionList.map(item => {
-          if (!item.hasSecondaryDlc) return item
-
-          return {
-            ...item,
-            dlc: formatPayloadDate(
-              dayjs(item.batchId ? item.openingDate : item.productionDate).add(item.dlcDays, 'days')
-            )
-          }
-        })
+        traceabilityProductionList: [
+          ...values?.traceabilityProductionList.map(addDlcToComponent),
+          ...otherComponents
+        ]
       }
 
       if (values.traceabilityProductionList.length === 0) {

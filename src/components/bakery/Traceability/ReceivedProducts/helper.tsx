@@ -129,6 +129,10 @@ export const columns: Column[] = [
     field: 'batchQuantity'
   },
   {
+    title: 'Cantitate consumata',
+    field: 'consumedAmount'
+  },
+  {
     title: 'UM (Meti)',
     field: 'product.metricUnit'
   },
@@ -149,10 +153,7 @@ export const columns: Column[] = [
       <BodyItem name="Data creare linie receptie" value={<>{formatPayloadDate(row.entryDate)}</>} />
     )
   },
-  {
-    title: 'Cantitate consumata',
-    field: 'consumedAmount'
-  },
+
 
   {
     title: 'Nr. zile valabilitate DLC secundar',
