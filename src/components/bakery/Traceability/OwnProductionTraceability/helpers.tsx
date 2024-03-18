@@ -8,34 +8,32 @@ export const columns: any[] = [
   {
     title: 'Articol compozant din reteta',
     field: 'componentCode',
-    // width: '100px',
     align: 'left'
   },
   {
     title: 'MP/ baze/ ambalaje',
     field: 'componentName',
-    // width: '120px',
     align: 'left'
   },
   {
     title: 'Cant. articol compozant din reteta',
     field: 'componentQuantity',
-    // width: '100px',
     align: 'left',
-    render: row => row.componentQuantity?.toFixed(2)
+    render: row => row.componentQuantity?.toFixed(2),
+    collapsible: 'true'
   },
   {
     title: 'Lot MP/ baze/ ambalaje',
     field: '',
     render: row => row?.childTraceability?.chargeNumber || row?.batchName || '',
-    // width: '100px',
-    align: 'left'
+    align: 'left',
+    collapsible: 'true'
   },
   {
     title: 'Cant. MP/ baze/ ambalaje',
     field: 'quantity',
-    // width: '100px',
-    align: 'left'
+    align: 'left',
+    collapsible: 'true'
   },
   {
     title: 'Data intrare lot/Data productie sarja',
@@ -44,20 +42,20 @@ export const columns: any[] = [
       (row?.childTraceability && formatBakeryPayloadDate(row?.childTraceability?.productionDate)) ||
       (row?.openingDate && formatBakeryPayloadDate(row?.openingDate)) ||
       '',
-
-    // width: '100px',
-    align: 'left'
+    align: 'left',
+    collapsible: 'true'
   },
   {
     title: 'Furnizor',
     field: 'storeName',
-    // width: '100px',
-    align: 'left'
+    align: 'left',
+    collapsible: 'true'
   },
   {
     title: 'DLC MP / baze',
     align: 'left',
-    render: row => (row.batch?.hasExpireDate ? formatBakeryPayloadDate(row.batch?.expireDate) : '')
+    render: row => (row.batch?.hasExpireDate ? formatBakeryPayloadDate(row.batch?.expireDate) : ''),
+    collapsible: 'true'
   },
   {
     title: 'DLC sec MP/ baze',
@@ -71,15 +69,16 @@ export const columns: any[] = [
             'days'
           )) ||
           (row.batch?.hasSecondaryDlc && dayjs(row.openingDate).add(row.batch?.dlcDays, 'days'))
-      ) || ''
+      ) || '',
+    collapsible: 'true'
   },
 
   {
     title: 'Data deschidere lot',
     field: 'openingDate',
-    // width: '100px',
     align: 'left',
-    render: row => (row?.openingDate && formatBakeryPayloadDate(row?.openingDate)) || ''
+    render: row => (row?.openingDate && formatBakeryPayloadDate(row?.openingDate)) || '',
+    collapsible: 'true'
   }
 ]
 
