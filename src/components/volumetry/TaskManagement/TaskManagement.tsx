@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { Box, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './TaskManagement.modules.scss'
-import { CRUDAction, TaskManagementTableItem } from '../interfaces'
+import { CRUDAction, TaskManagementTableItem, ValueLabelInterface } from '../interfaces'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
@@ -20,8 +20,10 @@ import {
 } from '../api'
 import { useNotification } from 'hooks'
 import { DeleteConfirmationModal } from 'components/core-ui/DeleteConfirmationModal'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 
 const TaskManagement = () => {
+  const [categoryFilterValue, setCategoryFilterValue] = useState<ValueLabelInterface>(null)
   const [tableItems, setTableItems] = useState<TaskManagementTableItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
@@ -30,7 +32,8 @@ const TaskManagement = () => {
 
   const { showNotification } = useNotification()
 
-  const { data: categoryOptions } = getCategoriesOptions(showNotification)
+  const { data: categoryOptions, isLoading: isCategoryOptionsLoading } =
+    getCategoriesOptions(showNotification)
   const { data: departmentOptions } = getDepartmentAliasesOptions(showNotification, null, {
     filterBy: 'all',
     filterValue: true
@@ -39,12 +42,19 @@ const TaskManagement = () => {
   const { data: frequencyOptions } = getFrequencyOptions(showNotification)
   const { data: workVolumeOptions } = getWorkVolumesOptions(showNotification)
 
+  useEffect(() => {
+    if (!categoryFilterValue && categoryOptions?.length) {
+      setCategoryFilterValue(categoryOptions[0])
+    }
+  }, [categoryOptions])
+
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: VOLUMETRY_TASKS_URL,
+          filters: [{ name: 'volumetryLocationCategoryId', value: categoryFilterValue.value }],
           tableFilters,
           page,
           rowsPerPage,
@@ -74,8 +84,34 @@ const TaskManagement = () => {
     openModal(action)
   }
 
+  const handleFilterChange = value => {
+    setCategoryFilterValue(value)
+    setShouldRefreshData(true)
+  }
+
   return (
     <div className={s.mainContainer}>
+      <Grid sx={{ width: '100%', display: 'block' }} container>
+        {isCategoryOptionsLoading ? (
+          <div style={{ display: 'flex' }}>
+            <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+          </div>
+        ) : (
+          <Grid item style={{ display: 'block', padding: 0 }}>
+            <FilterDataSelect
+              name="location"
+              defaultSelectedData={categoryFilterValue}
+              label="Business unit:"
+              showCounter={true}
+              showSearch={true}
+              counterLabel="Selecteaza business unit"
+              noDataFoundLabel="Nu s-au gasit rezultate."
+              options={categoryOptions}
+              onSelect={handleFilterChange}
+            />
+          </Grid>
+        )}
+      </Grid>
       <Box>
         <CreateEditTask
           isModalOpen={modal === 'create'}
@@ -99,57 +135,58 @@ const TaskManagement = () => {
           title="Sterge template"
           deleteLabel="Sterge"
         />
-        <Table
-          hideCheckbox
-          orderBy="name"
-          order="asc"
-          columns={columns}
-          items={tableItems}
-          fetchData={fetchData}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          filters={buildTableFilterFields(
-            departmentOptions || [],
-            categoryOptions || [],
-            priorityOprions || [],
-            frequencyOptions || [],
-            workVolumeOptions || []
-          )}
-          filtersLabel="Filtreaza"
-          appliedFiltersLabel="Filtre"
-          applyFiltersButtonLabel="Aplica filtre"
-          filtersButtonLabel="Filtreaza"
-          cancelFiltersButtonLabel="Renunta"
-          labelRowsPerPage="Randuri pe pagina:"
-          rowActions={[
-            {
-              label: 'Editeaza',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              desktopIcon: <EditActionIcon />,
-              onClick: (_e, rowId: number) => selectRow(rowId, 'edit')
-            },
-            {
-              label: 'Sterge',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#d9534f',
-              desktopIcon: <DeleteActionIcon />,
-              onClick: (_e, rowId: number) => selectRow(rowId, 'delete')
-            }
-          ]}
-          rowActionsWidth="130px"
-          toolbarActions={[
-            {
-              label: 'Adauga',
-              icon: <AddActionIcon />,
-              onClick: () => openModal('create')
-            }
-          ]}
-        />
+        {categoryFilterValue && (
+          <Table
+            hideCheckbox
+            orderBy="name"
+            order="asc"
+            columns={columns}
+            items={tableItems}
+            fetchData={fetchData}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            filters={buildTableFilterFields(
+              departmentOptions || [],
+              priorityOprions || [],
+              frequencyOptions || [],
+              workVolumeOptions || []
+            )}
+            filtersLabel="Filtreaza"
+            appliedFiltersLabel="Filtre"
+            applyFiltersButtonLabel="Aplica filtre"
+            filtersButtonLabel="Filtreaza"
+            cancelFiltersButtonLabel="Renunta"
+            labelRowsPerPage="Randuri pe pagina:"
+            rowActions={[
+              {
+                label: 'Editeaza',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#16a085',
+                desktopIcon: <EditActionIcon />,
+                onClick: (_e, rowId: number) => selectRow(rowId, 'edit')
+              },
+              {
+                label: 'Sterge',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#d9534f',
+                desktopIcon: <DeleteActionIcon />,
+                onClick: (_e, rowId: number) => selectRow(rowId, 'delete')
+              }
+            ]}
+            rowActionsWidth="130px"
+            toolbarActions={[
+              {
+                label: 'Adauga',
+                icon: <AddActionIcon />,
+                onClick: () => openModal('create')
+              }
+            ]}
+          />
+        )}
       </Box>
     </div>
   )

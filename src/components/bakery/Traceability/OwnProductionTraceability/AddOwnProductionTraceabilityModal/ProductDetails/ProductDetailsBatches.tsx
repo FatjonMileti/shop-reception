@@ -13,6 +13,7 @@ interface ProductDetailsBatchesProps {
   receip: any
   onAddCharge: (componentMetiCode: string | number) => void
   onAddBatch: (componentMetiCode: string | number) => void
+  productMetricUnit: string
 }
 
 export const ProductDetailsBatches = ({
@@ -21,7 +22,8 @@ export const ProductDetailsBatches = ({
   onDeleteBatch,
   receip,
   onAddBatch,
-  onAddCharge
+  onAddCharge,
+  productMetricUnit
 }: ProductDetailsBatchesProps) => {
 
   if (typeof productMetiCode === 'undefined') {
@@ -102,7 +104,7 @@ export const ProductDetailsBatches = ({
                       }
                       value={item.quantity}
                       name="quantity"
-                      infoIcon={'kg'}
+                      infoIcon={productMetricUnit}
                     />
                   </Grid>
 

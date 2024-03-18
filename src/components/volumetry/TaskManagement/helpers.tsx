@@ -8,7 +8,6 @@ import { Box } from '@mui/material'
 
 export const buildTableFilterFields = (
   departmentOptions: AutocompleteOption[],
-  categoryOptions: AutocompleteOption[],
   priorityOptions: AutocompleteOption[],
   frequencyOptions: AutocompleteOption[],
   workVolumeOptions: AutocompleteOption[]
@@ -48,14 +47,6 @@ export const buildTableFilterFields = (
     filter: (
       <Autocomplete label="Sursa volum de lucru" variant="outlined" options={workVolumeOptions} />
     )
-  },
-
-  {
-    name: 'volumetryLocationCategoryId',
-    label: 'Categorie',
-    type: 'autocomplete',
-    value: '',
-    filter: <Autocomplete label="Categorie" variant="outlined" options={categoryOptions} />
   }
 ]
 
@@ -123,13 +114,6 @@ export const columns = [
     field: 'priority',
     align: 'left',
     type: 'number',
-    collapsible: true
-  },
-  {
-    title: 'Categorie',
-    field: 'volumetryLocationCategory',
-    align: 'left',
-    type: 'string',
     collapsible: true
   }
 ]
