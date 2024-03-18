@@ -58,7 +58,7 @@ export const ProductManagementTraceability = () => {
     async () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
         ?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families`, {
         params: {
           subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
         },
@@ -87,7 +87,7 @@ export const ProductManagementTraceability = () => {
     async () => {
       const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'family')
         ?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families/subfamilies`, {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
         },

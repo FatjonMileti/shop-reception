@@ -26,8 +26,8 @@ import { URLS } from '../../constants'
 import { useImmer } from 'use-immer'
 import { batchPrintColumns, productPrintColumns } from '../ReportFrozenTraceabilityPrint/helpers'
 import { useLocation } from 'react-router'
-import { startTransition } from 'react';
-import {debounce} from 'lodash'
+import { startTransition } from 'react'
+import { debounce } from 'lodash'
 import dayjs from 'dayjs'
 
 export const ReportFrozenTraceability = () => {
@@ -97,7 +97,12 @@ export const ReportFrozenTraceability = () => {
   const handleRemoteDetails = async (rowId: string | number) => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
     const data = await response
-    return <FrozenTraceabilityDescription item={data} chargeItem={tableData?.find(d => d.id === rowId)}/>
+    return (
+      <FrozenTraceabilityDescription
+        item={data}
+        chargeItem={tableData?.find(d => d.id === rowId)}
+      />
+    )
   }
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
@@ -176,15 +181,20 @@ export const ReportFrozenTraceability = () => {
   )
 
   const families = useQuery(
-    ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
+    [
+      'families-store',
+      liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value,
+      storeFilterValue
+    ],
     async () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(
         filter => filter.name === 'product.subfamily'
       )?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families`, {
         params: {
-          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value),
+          ...(isFormator ? { store: storeFilterValue.map(({ value }) => value) } : {})
         },
         paramsSerializer: { indexes: null }
       })
@@ -207,14 +217,19 @@ export const ReportFrozenTraceability = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
+    [
+      'subfamilies-store',
+      liveTableFilters.find(filter => filter.name === 'product.family')?.value,
+      storeFilterValue
+    ],
     async () => {
       const familyLiveFilterValue = (liveTableFilters.find(
         filter => filter.name === 'product.family'
       )?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families/subfamilies`, {
         params: {
-          family: familyLiveFilterValue.map(({ value }) => value)
+          family: familyLiveFilterValue.map(({ value }) => value),
+          ...(isFormator ? { store: storeFilterValue.map(({ value }) => value) } : {})
         },
         paramsSerializer: { indexes: null }
       })
