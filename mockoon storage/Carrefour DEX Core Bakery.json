@@ -9049,7 +9049,7 @@
       "type": "http",
       "documentation": "Get frozen traceability",
       "method": "get",
-      "endpoint": "traceability/frozenn/:id",
+      "endpoint": "traceability/frozen/:id",
       "responses": [
         {
           "uuid": "0f3d0429-223c-43c5-aed6-09b70457d86b",
