@@ -5,45 +5,53 @@ export const productPrintColumns = [
     field: 'productionDate',
     title: 'Data productiei',
     render: row => formatBakeryPayloadDate(row.productionDate),
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '100px'
   },
   {
     title: 'Produs trasabilitate',
     field: 'product.metiCode',
     render: row => row?.product?.metiCode || '',
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '100px'
   },
   {
     title: 'Familie',
     field: 'product.familyName',
-    render: row => row?.product?.familyName
+    render: row => row?.product?.familyName,
+    width: '100px'
   },
   {
     title: 'Subfamilie',
     field: 'subfamily',
-    render: row => row?.product?.subfamily
+    render: row => row?.product?.subfamily,
+    width: '100px'
   },
   {
     title: 'Sarja',
     field: 'chargeNumber',
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '100px'
   },
   {
     title: 'Cant. fabricata',
     field: 'quantity',
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '50px'
   },
   {
     title: 'UM',
     field: 'product.metricUnit',
     render: row => row?.product?.metricUnit,
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '100px'
   },
   {
     title: 'DLC prod. fab.',
     field: 'dlc',
     render: row => formatBakeryPayloadDate(row.dlc),
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '100px'
   }
 ]
 
@@ -52,73 +60,86 @@ export const batchPrintColumns = [
     field: 'product.metiCode',
     title: 'Cod Meti reteta',
     render: row => row.product.metiCode,
-    width: '250px !important'
+    width: '100px'
   },
   {
     field: 'product.name',
     title: 'Denimire produs cu reteta',
-    render: row => row.product.name
+    render: row => row.product.name,
+    width: '150px'
   },
   {
     field: 'productionOperator',
     title: 'Operator productie',
-    render: row => row.productionOperator
+    render: row => row.productionOperator,
+    width: '100px'
   },
   {
     field: 'thermalCondition',
     title: 'Stare termica',
-    render: row => row.thermalCondition
+    render: row => row.thermalCondition,
+    width: '50px'
   },
   {
     field: 'conform',
     title: 'Conform',
-    render: row => (row.conform ? 'Da' : 'Nu')
+    render: row => (row.conform ? 'Da' : 'Nu'),
+    width: '50px'
   },
   {
     field: 'nonComplianceReason',
     title: 'Motiv neconformitate',
-    render: row => row.nonComplianceReason
+    render: row => row.nonComplianceReason,
+    width: '100px'
   },
   {
     field: 'productDestination',
     title: 'Destinatia prod. neconform',
-    render: row => row.productDestination
+    render: row => row.productDestination,
+    width: '100px'
   },
   {
     field: 'createdBy',
     title: 'Operator trasabilitate',
     render: row => row.createdBy,
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '100px'
   },
   {
     field: 'createdDate',
     title: 'Data introducere',
-    render: row => formatBakeryPayloadDate(row.createdDate)
+    render: row => formatBakeryPayloadDate(row.createdDate),
+    width: '100px'
   },
   {
     field: 'verified',
     title: 'Verificare de catre validator trasabilitate',
-    render: row => (row.verified ? 'Da' : 'Nu')
+    render: row => (row.verified ? 'Da' : 'Nu'),
+    width: '100px'
   },
   {
     field: 'verifiedBy',
     title: 'Validator trasabilitate',
-    render: row => row.verifiedBy
+    render: row => row.verifiedBy,
+    width: '100px'
   },
   {
     field: 'verifiedDate',
     title: 'Data verificare trasabilitate',
-    render: row => formatBakeryPayloadDate(row.verifiedDate)
+    render: row => formatBakeryPayloadDate(row.verifiedDate),
+    width: '100px'
   },
   {
     field: 'modifiedBy',
     title: 'Ultima modificare',
-    render: row => row.modifiedBy
+    render: row => row.modifiedBy,
+    width: '100px'
   },
   {
     field: 'modifiedDate',
     title: 'Data ultimei verificari',
-    render: row => formatBakeryPayloadDate(row.modifiedDate)
+    render: row => formatBakeryPayloadDate(row.modifiedDate),
+    width: '100px'
   }
 ]
 
@@ -127,17 +148,20 @@ export const chargePrintColumns = [
     field: 'componentCode',
     title: 'Articol compozant din reteta',
     render: row => row.componentCode,
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '100px'
   },
   {
     field: 'componentName',
     title: 'MP/baze/ambalaje',
-    render: row => row.componentName
+    render: row => row.componentName,
+    width: '100px'
   },
   {
     field: 'componentQuantity',
     title: 'Cant. articol compozant din reteta',
-    render: row => row.componentQuantity
+    render: row => row.componentQuantity,
+    width: '50px'
   },
   {
     field: 'chargeNumber',
@@ -148,12 +172,14 @@ export const chargePrintColumns = [
         : row.childTraceability
         ? row.childTraceability.chargeNumber
         : '',
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '100px'
   },
   {
     field: 'quantity',
     title: 'Cant. MP /baze /ambalaje',
-    render: row => row.quantity
+    render: row => row.quantity,
+    width: '50px'
   },
   {
     field: 'entryDate',
@@ -165,13 +191,15 @@ export const chargePrintColumns = [
           : row.childTraceability
           ? row.childTraceability.productionDate
           : ''
-      )
+      ),
+      width: '100px'
   },
   {
     field: 'batch.supplier.supplierName',
     title: 'Furnizor',
     render: row => row?.batch?.supplier?.supplierName || '',
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '100px'
   },
   {
     field: 'expireDate',
@@ -180,17 +208,20 @@ export const chargePrintColumns = [
       formatBakeryPayloadDate(
         row.batch ? row.batch.expireDate : row.childTraceability ? row.childTraceability.dlc : ''
       ),
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '80px'
   },
   {
     field: 'dlc',
     title: 'DLC sec MP / baze',
     render: row => formatBakeryPayloadDate(row.dlc),
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '80px'
   },
   {
     field: 'openingDate',
     title: 'Data deschidere lot',
-    render: row => formatBakeryPayloadDate(row.openingDate)
+    render: row => formatBakeryPayloadDate(row.openingDate),
+    width: '80px'
   }
 ]
