@@ -19,9 +19,6 @@ import { formatErrorMessage } from '../../../../utils/formatting'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 import { CorrectFrozenTraceabilityModal } from './CorrectFrozenTraceabilityModal/CorrectFrozenTraceabilityModal'
 
-const orderBy = 'createdDate'
-const order = 'desc'
-
 export const FrozenTraceability = () => {
   const { showNotification } = useNotification()
 
@@ -46,8 +43,6 @@ export const FrozenTraceability = () => {
           tableFilters,
           page,
           rowsPerPage,
-          orderBy,
-          order,
           searchText,
           searchFields: ['product.metiCode', 'product.name']
         })
@@ -97,7 +92,7 @@ export const FrozenTraceability = () => {
         filter => filter.name === 'product.subfamily'
       )?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families`, {
         params: {
           subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
         },
@@ -127,7 +122,7 @@ export const FrozenTraceability = () => {
       const familyLiveFilterValue = (liveTableFilters.find(
         filter => filter.name === 'product.family'
       )?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families/subfamilies`, {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
         },

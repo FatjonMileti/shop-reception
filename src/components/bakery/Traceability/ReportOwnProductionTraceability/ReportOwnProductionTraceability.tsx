@@ -174,15 +174,20 @@ export const ReportOwnProductionTraceability = () => {
   )
 
   const families = useQuery(
-    ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
+    [
+      'families-store',
+      liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value,
+      storeFilterValue
+    ],
     async () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(
         filter => filter.name === 'product.subfamily'
       )?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families`, {
         params: {
-          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value),
+          ...(isFormator ? { store: storeFilterValue.map(({ value }) => value) } : {})
         },
         paramsSerializer: { indexes: null }
       })
@@ -205,14 +210,19 @@ export const ReportOwnProductionTraceability = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
+    [
+      'subfamilies-store',
+      liveTableFilters.find(filter => filter.name === 'product.family')?.value,
+      storeFilterValue
+    ],
     async () => {
       const familyLiveFilterValue = (liveTableFilters.find(
         filter => filter.name === 'product.family'
       )?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families/subfamilies`, {
         params: {
-          family: familyLiveFilterValue.map(({ value }) => value)
+          family: familyLiveFilterValue.map(({ value }) => value),
+          ...(isFormator ? { store: storeFilterValue.map(({ value }) => value) } : {})
         },
         paramsSerializer: { indexes: null }
       })

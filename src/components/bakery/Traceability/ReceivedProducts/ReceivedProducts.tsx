@@ -28,9 +28,6 @@ import { get } from 'lodash'
 import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
 import { ImageCell } from '../../../core-ui/ImageCell'
 
-const orderBy = 'createdDate'
-const order = 'desc'
-
 export const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const [totalCount, setTotalCount] = React.useState<number>(0)
@@ -46,13 +43,9 @@ export const ReceivedProducts = () => {
   const [tableState, setTableState] = useState<{
     tableFilters: Filter[]
     rowsPerPage: number
-    orderBy: string
-    order: string
   }>({
     tableFilters: null,
-    rowsPerPage: null,
-    orderBy,
-    order
+    rowsPerPage: null
   })
 
   const { showNotification } = useNotification()
@@ -67,8 +60,6 @@ export const ReceivedProducts = () => {
           tableFilters,
           page,
           rowsPerPage,
-          orderBy,
-          order,
           searchText,
           searchFields: [
             'product.metiCode',
@@ -103,7 +94,7 @@ export const ReceivedProducts = () => {
         filter => filter.name === 'product.subfamily'
       )?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families`, {
         params: {
           subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
         },
@@ -133,7 +124,7 @@ export const ReceivedProducts = () => {
       const familyLiveFilterValue = (liveTableFilters.find(
         filter => filter.name === 'product.family'
       )?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families/subfamilies`, {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
         },

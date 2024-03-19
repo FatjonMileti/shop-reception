@@ -91,9 +91,48 @@ export const columns: any[] = [
     )
   },
   {
+    title: 'DLC secundar',
+    render: row => (
+      <BodyItem
+        name="DLC secundar"
+        value={
+          row.batch?.hasSecondaryDlc
+            ? formatBakeryPayloadDate(dayjs(row.openingDate).add(row.batch?.dlcDays, 'days'))
+            : ''
+        }
+      />
+    )
+  },
+  {
+    title: 'Nr. zile valabilitate DLC secundar',
+    field: 'batch.dlcDays',
+    render: row => (
+      <BodyItem name="Nr. zile valabilitate DLC secundar" value={row?.batch?.dlcDays || ''} />
+    )
+  },
+  {
+    title: 'Data deschiderii',
+    field: 'batch.openingDate',
+    render: row => (
+      <BodyItem
+        name="Data deschiderii"
+        value={row.batch?.hasSecondaryDlc ? formatBakeryPayloadDate(row?.openingDate) : ''}
+      />
+    )
+  },
+  {
     title: 'Cantitate intrata',
     field: 'batch.batchQuantity',
     render: row => <BodyItem name="Cantitate intrata" value={row?.batch?.batchQuantity} />
+  },
+  {
+    title: 'Cantitate consumata',
+    field: 'batch.consumedAmount',
+    render: row => <BodyItem name="Cantitate consumata" value={row?.batch?.consumedAmount} />
+  },
+  {
+    title: 'Cant.fab.lot',
+    render: row => <BodyItem name="Cant.fab.lot" value={row?.quantity} />
   },
   {
     title: 'UM (Meti)',
@@ -111,18 +150,6 @@ export const columns: any[] = [
         name="Data creare linie receptie"
         value={formatBakeryPayloadDate(row?.batch?.createdDate)}
       />
-    )
-  },
-  {
-    title: 'Cantitate consumata',
-    field: 'batch.consumedAmount',
-    render: row => <BodyItem name="Cantitate consumata" value={row?.batch?.consumedAmount} />
-  },
-  {
-    title: 'Nr. zile valabilitate DLC secundar',
-    field: 'batch.dlcDays',
-    render: row => (
-      <BodyItem name="Nr. zile valabilitate DLC secundar" value={row?.batch?.dlcDays || ''} />
     )
   },
   {
@@ -184,41 +211,35 @@ export const columns: any[] = [
       />
     )
   },
-  {
-    title: 'Data deschiderii',
-    field: 'batch.openingDate',
-    render: row => (
-      <BodyItem
-        name="Data deschiderii"
-        value={row.batch?.hasSecondaryDlc ? formatBakeryPayloadDate(row?.openingDate) : ''}
-      />
-    )
-  },
-  {
-    title: 'DLC secundar',
-    render: row => (
-      <BodyItem
-        name="DLC secundar"
-        value={
-          row.batch?.hasSecondaryDlc
-            ? formatBakeryPayloadDate(dayjs(row.openingDate).add(row.batch?.dlcDays, 'days'))
-            : ''
-        }
-      />
-    )
-  },
-  {
-    title: 'Cant.fab.lot',
-    render: row => <BodyItem name="Cant.fab.lot" value={row?.quantity} />
-  }
-
-  // ------------------------
 ]
 
 export const mainItemBodyColumns = [
   {
     title: 'Operator productie',
     field: 'productionOperator'
+  },
+  {
+    title: 'Data productiei',
+    render: row => (
+      <BodyItem name="Data productiei" value={formatBakeryPayloadDate(row.productionDate)} />
+    )
+  },
+  {
+    title: 'DLC',
+    render: row => (
+      <BodyItem
+        name="DLC"
+        value={
+          row?.product?.dlcDays
+            ? formatBakeryPayloadDate(dayjs(row.productionDate).add(row?.product?.dlcDays, 'days'))
+            : ''
+        }
+      />
+    )
+  },
+  {
+    title: 'Cod PLU',
+    render: row => <BodyItem name="Cod PLU" value={row.product?.pluCode || ''} />
   },
   {
     title: 'Stare termica',
@@ -279,29 +300,7 @@ export const mainItemBodyColumns = [
     field: 'chargeNumber'
   },
   { title: 'Cantitate sarja', field: 'quantity' },
-  {
-    title: 'Cod PLU',
-    render: row => <BodyItem name="Cod PLU" value={row.product?.pluCode || ''} />
-  },
-  {
-    title: 'Data productiei',
-    render: row => (
-      <BodyItem name="Data productiei" value={formatBakeryPayloadDate(row.productionDate)} />
-    )
-  },
-  {
-    title: 'DLC',
-    render: row => (
-      <BodyItem
-        name="DLC"
-        value={
-          row?.product?.dlcDays
-            ? formatBakeryPayloadDate(dayjs(row.productionDate).add(row?.product?.dlcDays, 'days'))
-            : ''
-        }
-      />
-    )
-  }
+
 ]
 
 export const selectBatchColumns: any[] = [
