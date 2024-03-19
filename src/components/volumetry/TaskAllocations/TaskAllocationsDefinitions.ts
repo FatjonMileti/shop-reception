@@ -11,7 +11,7 @@ export interface AssignEmployeeProps {
   isModalOpen: boolean
   closeModal: Function
   taskName: string
-  rayonsOrDepartment: string
+  departmentAlias: string
   workloadMeasurementUnit: string
   setShouldRefreshData: Function
   taskTemplateId: string

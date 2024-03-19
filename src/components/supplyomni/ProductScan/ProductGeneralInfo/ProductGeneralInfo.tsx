@@ -11,12 +11,14 @@ import { useQuery, useMutation } from 'react-query'
 import { ProductNearbyStockInfo } from '../ProductNearbyStockInfo'
 import { NeighboursStock, Product } from '../interfaces'
 import { useNavigate } from 'react-router-dom'
+import { toAddToCartPayload } from './serializers'
 
 interface CartItem {
   id: string
   quantity: number
   isWarehouse: boolean
   purchaseOption: string
+  locationId: number
 }
 
 interface ProductGeneralInfoProps {
@@ -30,7 +32,7 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
   const isXs = useMediaQuery('(max-width:430px)')
 
   const [selectedBuybackOption, setSelectedBuybackOption] = useState(
-    product.purchaseOptions[0].value || ''
+    product.purchaseOptions[0]?.value || ''
   )
 
   const { data: productStock, isLoading: isLoadingProductStock } = useQuery(
@@ -55,7 +57,7 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
 
   const addItemToCart = async (values: CartItem) => {
     if (displayAddToCartBtn) {
-      await makeCorePostRequest(`/supply-omni/cart/product`, values)
+      await makeCorePostRequest('/supply-omni/cart/product', values)
     }
   }
 
@@ -75,14 +77,7 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
     }
   })
 
-  const onSubmitAddToCart = async () => {
-    mutate({
-      id: product.id,
-      quantity: 1,
-      isWarehouse: product.isWarehouse,
-      purchaseOption: selectedBuybackOption
-    })
-  }
+  const onSubmitAddToCart = async () => mutate(toAddToCartPayload(product, selectedBuybackOption))
 
   return (
     <div>

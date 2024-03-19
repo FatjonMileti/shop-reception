@@ -12,7 +12,7 @@ export interface AutocompleteOption {
 
 export interface EmployeeManagementItem {
   id?: string | number
-  department: string | AutocompleteOption
+  genericDepartment: string | AutocompleteOption
   fullName: string
   jobTitle: string | AutocompleteOption
   employer: string
@@ -22,7 +22,7 @@ export interface EmployeeManagementItem {
 export interface TaskManagementTableItem {
   id?: string | number
   name: string
-  rayonsOrDepartment: string
+  departmentAlias: string
   recommendedStartHour: string
   recommendedEndHour: string
   frequency: string

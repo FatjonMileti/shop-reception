@@ -342,7 +342,7 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   return useQuery(
     ['employees-options'],
     async () => {
-      const employees = await makeCoreGetRequest('/volumetry/workers/shifts')
+      const employees = await makeCoreGetRequest('/volumetry/workers-schedule')
       return toEmployeeFilterItems(employees) || []
     },
     {
@@ -364,7 +364,7 @@ export const setEmployeesAttendance = (
     ['employees-attendance', departmentId],
     async () => {
       const employees = await makeCoreGetRequest(
-        `/volumetry/workers/shifts?filterBy=departmentAliasId&filterValue=${departmentId}`
+        `/volumetry/workers-schedule?filterBy=departmentAliasId&filterValue=${departmentId}`
       )
       const employeesAttendance = toEmployeesAttendance(employees) || []
       setEmployees(employeesAttendance)

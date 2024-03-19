@@ -11,7 +11,7 @@ import { TaskDescriptionProps } from './TaskAllocationsDefinitions'
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const { item, employees, setShouldRefreshData, setSelectedRowId, hideDetails } = props
-  const { taskName, rayonsOrDepartment } = item.item || item
+  const { taskName, departmentAlias } = item.item || item
   const [employeesItems, setEmployeesItems] = useState([])
   const [selectedRow, setSelectedRow] = useState(null) // TODO: To add interface when db schema is defined
 
@@ -49,9 +49,9 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   }
 
   return (
-    <Grid container flexDirection="column">
+    <Grid container>
       {employees && (
-        <Grid container flexDirection="column" pr={2}>
+        <Grid item xs={12} pr={2}>
           <Box
             sx={{
               width: isMobile ? '100% !important' : 'auto'
@@ -111,7 +111,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             isModalOpen={modal === 'read'}
             closeModal={closeModal}
             taskName={taskName}
-            rayonsOrDepartment={rayonsOrDepartment}
+            departmentAlias={departmentAlias}
             workloadMeasurementUnit={item.workloadMeasurementUnit}
             setShouldRefreshData={setShouldRefreshData}
             taskTemplateId={item.taskTemplateId}

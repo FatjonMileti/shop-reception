@@ -160,7 +160,7 @@ const TaskAllocations = () => {
           </div>
         ) : (
           <>
-            <Grid xs={12} md={6} item style={{ padding: 0 }}>
+            <Grid xs={12} md={6} item className={s.departmentFilterContainer}>
               <FilterDataSelect
                 name="teamMember.domain"
                 defaultSelectedData={departmentFilterValue}
@@ -173,12 +173,7 @@ const TaskAllocations = () => {
                 onSelect={handleDepartmentOptionChange}
               />
             </Grid>
-            <Grid
-              xs={12}
-              md={6}
-              item
-              style={{ padding: 0, paddingRight: '40px', textAlign: 'right' }}
-            >
+            <Grid xs={12} md={6} item className={s.autoAllocateButtonContainer}>
               <Button
                 variant="contained"
                 label="Incepe alocarea automata"

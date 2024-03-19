@@ -1,6 +1,6 @@
 export const columns = [
   {
-    title: 'Nume categorie',
+    title: 'Business unit',
     field: 'name',
     align: 'left',
     type: 'string'

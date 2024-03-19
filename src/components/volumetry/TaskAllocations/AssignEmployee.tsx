@@ -20,7 +20,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     isModalOpen,
     closeModal,
     taskName,
-    rayonsOrDepartment,
+    departmentAlias,
     workloadMeasurementUnit,
     setShouldRefreshData,
     taskTemplateId,
@@ -90,7 +90,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: taskName },
-              { label: 'Departament/Raion:', name: rayonsOrDepartment },
+              { label: 'Departament/Raion:', name: departmentAlias },
               { label: 'UM:', name: workloadMeasurementUnit }
             ]}
           />

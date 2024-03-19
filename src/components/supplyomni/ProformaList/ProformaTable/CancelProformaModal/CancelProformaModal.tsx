@@ -34,7 +34,7 @@ const CancelProformaModal = (props: CancelProformaModalProps) => {
   }
 
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle="Anuleaza proforma">
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle="Anulare proforma">
       <Grid container spacing={4}>
         <Grid xs={12} item>
           Sunteti sigur ca vreti sa anulati aceasta proforma?

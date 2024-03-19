@@ -38,7 +38,7 @@ const EmployeesStatus = () => {
     setIsLoading(true)
 
     const filters = [
-      { name: 'department', value: departmentFilterValue?.value },
+      { name: 'genericDepartmentId', value: departmentFilterValue?.value },
       ...(typeof shiftCategoryFilterValue?.value !== 'undefined' && [
         { name: 'shiftCategory', value: shiftCategoryFilterValue?.value }
       ])
@@ -48,7 +48,7 @@ const EmployeesStatus = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/tasks/overview',
-          filters: filters,
+          filters,
           tableFilters,
           page,
           rowsPerPage,
@@ -114,7 +114,7 @@ const EmployeesStatus = () => {
       {departmentFilterValue && (
         <Table
           hideCheckbox
-          orderBy="name"
+          orderBy="fullName"
           order="desc"
           columns={columns}
           items={tableItems}
