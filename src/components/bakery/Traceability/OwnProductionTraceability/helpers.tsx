@@ -19,7 +19,7 @@ export const columns: any[] = [
     title: 'Cant. articol compozant din reteta',
     field: 'componentQuantity',
     align: 'left',
-    render: row => row.componentQuantity?.toFixed(2),
+    render: row => row.componentQuantity?.toFixed(3),
     collapsible: 'true'
   },
   {
@@ -33,6 +33,7 @@ export const columns: any[] = [
     title: 'Cant. MP/ baze/ ambalaje',
     field: 'quantity',
     align: 'left',
+    render: row => row.quantity?.toFixed(3),
     collapsible: 'true'
   },
   {
@@ -40,7 +41,7 @@ export const columns: any[] = [
     field: 'productionDate',
     render: row =>
       (row?.childTraceability && formatBakeryPayloadDate(row?.childTraceability?.productionDate)) ||
-      (row?.openingDate && formatBakeryPayloadDate(row?.openingDate)) ||
+      (row?.entryDate && formatBakeryPayloadDate(row?.entryDate)) ||
       '',
     align: 'left',
     collapsible: 'true'
@@ -110,6 +111,14 @@ export const infoColumns: any[] = [
     field: 'productionOperator'
   },
   {
+    title: 'Data productiei',
+    field: 'productionDate',
+    render: row => (
+      <BodyItem name="Data productiei" value={formatBakeryPayloadDate(row.productionDate)} />
+    )
+  },
+  { title: 'Cant.fab', field: 'quantity' },
+  {
     title: 'Stare termica',
     field: 'thermalCondition',
     render: row => (
@@ -175,13 +184,6 @@ export const infoColumns: any[] = [
     field: 'chargeNumber'
   },
   {
-    title: 'Data productiei',
-    field: 'productionDate',
-    render: row => (
-      <BodyItem name="Data productiei" value={formatBakeryPayloadDate(row.productionDate)} />
-    )
-  },
-  {
     title: 'DLC Prod. Fab.',
     field: 'dlc',
     render: row => (
@@ -195,5 +197,4 @@ export const infoColumns: any[] = [
       />
     )
   },
-  { title: 'Cant.fab', field: 'quantity' }
 ]
