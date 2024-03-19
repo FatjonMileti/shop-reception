@@ -5,12 +5,13 @@ export const productPrintColumns = [
     field: 'productionDate',
     title: 'Data productiei',
     render: row => formatBakeryPayloadDate(row.productionDate),
-    defaultPrintSelected: true,
+    defaultPrintSelected: true
   },
   {
     title: 'Cod METI',
     field: 'product.metiCode',
-    render: row => row.product.metiCode
+    render: row => row.product.metiCode,
+    width: '600px'
   },
   {
     title: 'Cod PLU',
@@ -21,7 +22,7 @@ export const productPrintColumns = [
     title: 'Denumire Produs finit & Ambalaje',
     field: 'product.name',
     render: row => row.product.name,
-    defaultPrintSelected: true,
+    defaultPrintSelected: true
   },
   {
     field: 'product.familyName',
@@ -36,7 +37,8 @@ export const productPrintColumns = [
   {
     title: 'Sarja',
     field: 'chargeNumber',
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '150px'
   },
   {
     title: 'Cant. Sarja',
@@ -53,35 +55,36 @@ export const productPrintColumns = [
     title: 'UM',
     field: 'product.metricUnit',
     render: row => row.product.metricUnit,
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '150px'
   },
   {
     title: 'Stare termica',
-    field: 'thermalCondition',
+    field: 'thermalCondition'
   },
   {
     title: 'Conform',
-    field: 'conform',
+    field: 'conform'
   },
   {
     title: 'Motiv neconformitate',
-    field: 'nonComplianceReason',
+    field: 'nonComplianceReason'
   },
   {
     title: 'Destinatia produsului neconform',
-    field: 'productDestination',
+    field: 'productDestination'
   },
   {
     title: 'Operator productie',
-    field: 'productionOperator',
+    field: 'productionOperator'
   },
   {
     title: 'Verificare de catre validator trasabilitate',
-    field: 'isVerified',
+    field: 'isVerified'
   },
   {
     title: 'Validator trasabilitate',
-    field: 'verifiedBy',
+    field: 'verifiedBy'
   },
   {
     title: 'Data verificare trasabilitate',
@@ -100,7 +103,8 @@ export const batchPrintColumns = [
   {
     field: 'batch.entryDate',
     title: 'Data intrare MP',
-    render: row => formatBakeryPayloadDate(row.batch?.entryDate)
+    render: row => formatBakeryPayloadDate(row.batch?.entryDate),
+    width: '100px'
   },
   {
     field: 'batch.supplier.supplierName',
@@ -134,7 +138,8 @@ export const batchPrintColumns = [
   {
     field: 'reatedDate',
     title: 'Data introducere Trasabilitate',
-    render: row => formatBakeryPayloadDate(row.reatedDate)
+    render: row => formatBakeryPayloadDate(row.reatedDate),
+    width: '100px'
   },
   {
     field: 'modifiedBy',
@@ -144,6 +149,7 @@ export const batchPrintColumns = [
   {
     field: 'modifiedDate',
     title: 'Data ultimei modificari',
-    render: row => formatBakeryPayloadDate(row.modifiedDate)
+    render: row => formatBakeryPayloadDate(row.modifiedDate),
+    width: '100px'
   }
 ]
