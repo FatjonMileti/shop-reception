@@ -107,17 +107,17 @@ export const ProductDetailsBatches = ({
                         label="Data deschidere"
                         onChange={value =>
                           formik.setFieldValue(
-                            `traceabilityProductionList[${index}].openingDate`,
+                            `traceabilityProductionList[${idx}].openingDate`,
                             formatPayloadDate(value)
                           )
                         }
                         variant="outlined"
                         required
-                        helperText={formik.errors?.traceabilityProductionList?.[index]?.openingDate as string}
-                        error={!!formik.errors?.traceabilityProductionList?.[index]?.openingDate}
+                        helperText={formik.errors?.traceabilityProductionList?.[idx]?.openingDate as string}
+                        error={!!formik.errors?.traceabilityProductionList?.[idx]?.openingDate}
                         value={
-                          formik.values?.traceabilityProductionList?.[index]?.openingDate
-                            ? dayjs(formik.values?.traceabilityProductionList?.[index]?.openingDate)
+                          formik.values?.traceabilityProductionList?.[idx]?.openingDate
+                            ? dayjs(formik.values?.traceabilityProductionList?.[idx]?.openingDate)
                             : undefined
                         }
                         // maxDate={dayjs()}

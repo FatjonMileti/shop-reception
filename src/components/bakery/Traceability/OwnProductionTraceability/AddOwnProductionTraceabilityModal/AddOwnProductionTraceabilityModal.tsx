@@ -92,7 +92,9 @@ export const AddOwnProductionTraceabilityModal = ({
         productionOperator: values.productionOperator,
         quantity: values.quantity,
         thermalCondition: values.thermalCondition,
-        dlc: values.dlc, //dayjs(values.productionDate).add(recipeQuery.data?.details?.dlcDays, 'days'),
+        dlc: selectedProduct.dlcDays
+          ? dayjs(values.productionDate).add(selectedProduct.dlcDays, 'days')
+          : null,
         conform: values.conform,
         nonComplianceReason: values.nonComplianceReason,
         productDestination: values.productDestination,
