@@ -65,6 +65,24 @@ export const AddOwnProductionTraceabilityModal = ({
     validationSchema,
     initialValues: initialValues,
     onSubmit: async (values: any) => {
+      const otherComponents = recipeQuery?.data?.others.map(
+        ({ componentCode, componentName, componentQuantity }) => ({
+          componentCode,
+          componentName,
+          componentQuantity
+        })
+      )
+
+      const addDlcToComponent = item => {
+        if (!item.hasSecondaryDlc) return item
+        return {
+          ...item,
+          dlc: formatPayloadDate(
+            dayjs(item.batchId ? item.openingDate : item.productionDate).add(item.dlcDays, 'days')
+          )
+        }
+      }
+
       const payload = {
         productId: selectedProduct?.id,
         metiCode: selectedProduct?.metiCode,
@@ -74,20 +92,16 @@ export const AddOwnProductionTraceabilityModal = ({
         productionOperator: values.productionOperator,
         quantity: values.quantity,
         thermalCondition: values.thermalCondition,
-        dlc: values.dlc,
+        dlc: selectedProduct.dlcDays
+          ? formatPayloadDate(dayjs(values.productionDate).add(selectedProduct.dlcDays, 'days'))
+          : null,
         conform: values.conform,
         nonComplianceReason: values.nonComplianceReason,
         productDestination: values.productDestination,
-        traceabilityProductionList: values.traceabilityProductionList.map(item => {
-          if (!item.hasSecondaryDlc) return item
-
-          return {
-            ...item,
-            dlc: formatPayloadDate(
-              dayjs(item.batchId ? item.openingDate : item.productionDate).add(item.dlcDays, 'days')
-            )
-          }
-        })
+        traceabilityProductionList: [
+          ...values.traceabilityProductionList.map(addDlcToComponent),
+          ...otherComponents
+        ]
       }
 
       if (values.traceabilityProductionList.length === 0) {
@@ -130,8 +144,6 @@ export const AddOwnProductionTraceabilityModal = ({
       setShouldRefreshData(true)
     }
   })
-
-
 
   const cancel = () => {
     closeModal()

@@ -125,13 +125,13 @@ export const chargePrintColumns = [
   {
     field: 'componentCode',
     title: 'Articol compozant din reteta',
-    render: row => row.componentCode,
-    defaultPrintSelected: true
+    render: row => row.componentCode
   },
   {
     field: 'componentName',
     title: 'MP/baze/ambalaje',
-    render: row => row.componentName
+    render: row => row.componentName,
+    defaultPrintSelected: true
   },
   {
     field: 'componentQuantity',
