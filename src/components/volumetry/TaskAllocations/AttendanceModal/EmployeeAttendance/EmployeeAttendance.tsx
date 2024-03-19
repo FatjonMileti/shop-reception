@@ -24,7 +24,7 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
   }
 
   const tableColumns = useMemo(
-    () => buildColumns({ toggleEmployee, updateEmplpyeeTime }) as TableHeaderType[],
+    () => buildColumns({ toggleEmployee, updateEmplpyeeTime, isXs }) as TableHeaderType[],
     [employees]
   )
 

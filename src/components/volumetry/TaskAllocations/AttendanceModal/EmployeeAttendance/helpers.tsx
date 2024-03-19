@@ -2,10 +2,12 @@ import { Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
 
 export const buildColumns = ({
   toggleEmployee,
-  updateEmplpyeeTime
+  updateEmplpyeeTime,
+  isXs
 }: {
   toggleEmployee: Function
   updateEmplpyeeTime: Function
+  isXs: boolean
 }) => [
   {
     title: 'Angajat',
@@ -39,12 +41,12 @@ export const buildColumns = ({
         onAccept={newValue => updateEmplpyeeTime(row, newValue, 'shiftStart')}
         onChange={() => {}}
         variant="outlined"
-        style={{ width: '100%' }}
+        style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
         forceDesktop
         ampm={false}
       />
     ),
-    width: '200px'
+    collapsible: true
   },
   {
     title: 'Ora final de tura',
@@ -59,11 +61,11 @@ export const buildColumns = ({
         onAccept={newValue => updateEmplpyeeTime(row, newValue, 'shiftEnd')}
         onChange={() => {}}
         variant="outlined"
-        style={{ width: '100%' }}
+        style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
         forceDesktop
         ampm={false}
       />
     ),
-    width: '200px'
+    collapsible: true
   }
 ]

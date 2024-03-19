@@ -9,6 +9,7 @@ export const columns = [
     title: 'Descriere',
     field: 'description',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    collapsible: true
   }
 ]
