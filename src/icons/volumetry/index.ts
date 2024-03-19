@@ -3,6 +3,9 @@ export { default as ManagementTasksSubcategory } from './submodules/ManagementTa
 export { default as AssignTasksSubcategory } from './submodules/AssignTasksSubcategory'
 export { default as EmployeeManagementHome } from './submodules/EmployeeManagementHome'
 export { default as ManagementTasksHome } from './submodules/ManagementTasksHome'
+export { default as EmployeeStatusSubcategory } from './submodules/EmployeeStatusSubcategory'
+export { default as StoreManagementSubcategory } from './submodules/StoreManagementSubcategory'
+export { default as CategoryTemplateManagementSubcategory } from './submodules/CategoryTemplateManagementSubcategory'
 
 export { default as AssignmentVolumetryHome } from './AssignmentVolumetryHome'
 export { default as GroupVolumetryHome } from './GroupVolumetryHome'

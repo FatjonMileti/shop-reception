@@ -118,7 +118,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
           <AsyncAutocomplete
             variant="outlined"
             name="volumetryLocationCategory"
-            label="Categorie"
+            label="Business unit"
             value={formik.values.volumetryLocationCategory}
             options={categoryOptions}
             onChange={value => {

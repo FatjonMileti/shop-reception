@@ -15,7 +15,7 @@ export const columns = [
     type: 'string'
   },
   {
-    title: 'Categorie volumetrie',
+    title: 'Business unit',
     field: 'category',
     align: 'left',
     type: 'string',
@@ -54,7 +54,7 @@ export const getFilters = (
     type: 'autocomplete',
     value: '',
     filter: (
-      <Autocomplete label="Categorie volumetrie" variant="outlined" options={categoryOptions} />
+      <Autocomplete label="Business unit" variant="outlined" options={categoryOptions} />
     )
   },
   {

@@ -18,14 +18,14 @@ const DeleteLocationCategory: React.FC<DeleteLocationCategoryProps> = props => {
       closeModal()
       setShouldRefreshData(true)
     } catch (error) {
-      handleQueryError(error, 'A aparut o eroare la stergerea categoriei', showNotification)
+      handleQueryError(error, 'A aparut o eroare la stergerea business unit-ului', showNotification)
     }
   }
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Sterge'}>
       <Grid container spacing={4}>
         <Grid xs={12} item>
-          <Typography>Sunteti sigur ca vreti sa stergeti aceasta categorie?</Typography>
+          <Typography>Sunteti sigur ca vreti sa stergeti acest business unit?</Typography>
         </Grid>
         <Grid xs={12} item className={s.modalButtons}>
           <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
