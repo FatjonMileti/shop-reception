@@ -177,14 +177,13 @@ export const chargeColumns: any[] = [
     type: 'string',
     width: '100px'
   },
-
   {
     title: 'Nr. zile DLC',
-    field: 'dlc',
+    field: 'dlcDays',
     align: 'left',
     type: 'string',
     width: '110px',
-    render: (row: any) => row.dlc || ''
+    render: (row: any) => row.dlcDays || ''
   }
 ]
 
