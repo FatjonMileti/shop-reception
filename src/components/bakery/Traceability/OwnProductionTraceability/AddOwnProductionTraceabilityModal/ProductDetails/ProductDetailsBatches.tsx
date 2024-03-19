@@ -75,8 +75,6 @@ export const ProductDetailsBatches = ({
             )}
           </Grid>
 
-          {/* <Grid item xs={3}></Grid> */}
-
           {formik.values.traceabilityProductionList.map((item, idx) => (
             <Fragment key={idx}>
               {item.componentCode === batch.componentCode && item.batchId ? (
@@ -114,17 +112,17 @@ export const ProductDetailsBatches = ({
                         label="Data deschidere"
                         onChange={value =>
                           formik.setFieldValue(
-                            `traceabilityProductionList[${index}].openingDate`,
+                            `traceabilityProductionList[${idx}].openingDate`,
                             formatPayloadDate(value)
                           )
                         }
                         variant="outlined"
                         required
-                        helperText={formik.errors?.traceabilityProductionList?.[index]?.openingDate as string}
-                        error={!!formik.errors?.traceabilityProductionList?.[index]?.openingDate}
+                        helperText={formik.errors?.traceabilityProductionList?.[idx]?.openingDate as string}
+                        error={!!formik.errors?.traceabilityProductionList?.[idx]?.openingDate}
                         value={
-                          formik.values?.traceabilityProductionList?.[index]?.openingDate
-                            ? dayjs(formik.values?.traceabilityProductionList?.[index]?.openingDate)
+                          formik.values?.traceabilityProductionList?.[idx]?.openingDate
+                            ? dayjs(formik.values?.traceabilityProductionList?.[idx]?.openingDate)
                             : undefined
                         }
                         // maxDate={dayjs()}
@@ -233,31 +231,6 @@ export const ProductDetailsBatches = ({
                       infoIcon={'kg'}
                     />
                   </Grid>
-
-                  {charge.hasSecondaryDlc && (
-                    <Grid item xs={3}>
-                      <DatePicker
-                        label="Data productie"
-                        onChange={value =>
-                          formik.setFieldValue(
-                            `traceabilityProductionList[${index}].productionDate`,
-                            formatPayloadDate(value)
-                          )
-                        }
-                        variant="outlined"
-                        required
-                        helperText={formik.errors?.traceabilityProductionList?.[index]?.productionDate as string}
-                        error={!!formik.errors?.traceabilityProductionList?.[index]?.productionDate}
-                        value={
-                          formik.values?.traceabilityProductionList?.[index]?.productionDate
-                            ? dayjs(formik.values?.traceabilityProductionList?.[index]?.productionDate)
-                            : undefined
-                        }
-                        // maxDate={dayjs()}
-                        style={{ display: 'flex' }}
-                      />
-                    </Grid>
-                  )}
 
                   <Grid
                     item

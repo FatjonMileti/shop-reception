@@ -92,7 +92,9 @@ export const AddOwnProductionTraceabilityModal = ({
         productionOperator: values.productionOperator,
         quantity: values.quantity,
         thermalCondition: values.thermalCondition,
-        dlc: values.dlc,
+        dlc: selectedProduct.dlcDays
+          ? formatPayloadDate(dayjs(values.productionDate).add(selectedProduct.dlcDays, 'days'))
+          : null,
         conform: values.conform,
         nonComplianceReason: values.nonComplianceReason,
         productDestination: values.productDestination,

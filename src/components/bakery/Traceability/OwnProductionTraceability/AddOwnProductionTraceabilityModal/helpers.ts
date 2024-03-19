@@ -44,8 +44,8 @@ export const validationSchema = Yup.object().shape({
         }
       }),
 
-      productionDate: Yup.date().when(['hasSecondaryDlc', 'childTraceabilityId'], ([hasSecondaryDlc, childTraceabilityId], schema) => {
-        if (hasSecondaryDlc && childTraceabilityId) {
+      productionDate: Yup.date().when(['hasSecondaryDlc'], ([hasSecondaryDlc], schema) => {
+        if (hasSecondaryDlc) {
           return schema.required('Data obligatorie')
         } else {
           return schema.nullable()
@@ -76,7 +76,6 @@ export const toChargeFormat = (item, calculatedQuantity) => ({
   quantity: calculatedQuantity,
 
   hasSecondaryDlc: !!item?.product?.dlcDays,
-  productionDate: item.productionDate,
   dlcDays: item?.product?.dlcDays
 })
 
@@ -177,14 +176,13 @@ export const chargeColumns: any[] = [
     type: 'string',
     width: '100px'
   },
-
   {
     title: 'Nr. zile DLC',
-    field: 'dlc',
+    field: 'dlcDays',
     align: 'left',
     type: 'string',
     width: '110px',
-    render: (row: any) => row.dlc || ''
+    render: (row: any) => row.dlcDays || ''
   }
 ]
 
