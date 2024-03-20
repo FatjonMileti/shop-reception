@@ -63,7 +63,7 @@ export const AddOwnProductionTraceabilityModal = ({
     validateOnChange: false,
     enableReinitialize: false,
     validationSchema,
-    initialValues: initialValues,
+    initialValues,
     onSubmit: async (values: any) => {
       const otherComponents = recipeQuery?.data?.others.map(
         ({ componentCode, componentName, componentQuantity }) => ({
@@ -144,6 +144,9 @@ export const AddOwnProductionTraceabilityModal = ({
       setShouldRefreshData(true)
     }
   })
+
+  console.log("formik.values: ", formik.values)
+  console.log("formik.errors: ", formik.errors)
 
   const cancel = () => {
     closeModal()

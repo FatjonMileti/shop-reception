@@ -44,14 +44,6 @@ export const validationSchema = Yup.object().shape({
         }
       }),
 
-      productionDate: Yup.date().when(['hasSecondaryDlc'], ([hasSecondaryDlc], schema) => {
-        if (hasSecondaryDlc) {
-          return schema.required('Data obligatorie')
-        } else {
-          return schema.nullable()
-        }
-      }),
-
       hasSecondaryDlc: Yup.boolean(),
     })
   )
@@ -74,6 +66,7 @@ export const toChargeFormat = (item, calculatedQuantity) => ({
   componentQuantity: calculatedQuantity,
   componentName: item.chargeNumber,
   quantity: calculatedQuantity,
+  productionDate: item.productionDate,
 
   hasSecondaryDlc: !!item?.product?.dlcDays,
   dlcDays: item?.product?.dlcDays
