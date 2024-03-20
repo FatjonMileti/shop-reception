@@ -237,7 +237,7 @@ export const salesColumns = [
   },
 
   {
-    title: '18:00 - 21:00',
+    title: '18:00 - 22:00',
     field: 'interval4',
     align: 'left',
     minWidth: '200px',
@@ -245,7 +245,7 @@ export const salesColumns = [
   },
 
   {
-    title: '21:00 - 03:00',
+    title: '22:00 - 06:00',
     field: 'interval5',
     align: 'left',
     minWidth: '200px',

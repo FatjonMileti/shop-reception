@@ -41,7 +41,7 @@ export const columns: any[] = [
     field: 'productionDate',
     render: row =>
       (row?.childTraceability && formatBakeryPayloadDate(row?.childTraceability?.productionDate)) ||
-      (row?.entryDate && formatBakeryPayloadDate(row?.entryDate)) ||
+      (row?.batch?.entryDate && formatBakeryPayloadDate(row?.batch?.entryDate)) ||
       '',
     align: 'left',
     collapsible: 'true'
