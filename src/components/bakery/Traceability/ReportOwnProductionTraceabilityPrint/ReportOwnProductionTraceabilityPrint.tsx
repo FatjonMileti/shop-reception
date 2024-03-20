@@ -42,7 +42,8 @@ export const ReportOwnProductionTraceabilityPrint = () => {
       return await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/traceability/production/report',
-          tableFilters
+          tableFilters,
+          page: -1
         })
       )
     },
