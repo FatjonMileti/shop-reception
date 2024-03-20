@@ -97,7 +97,7 @@ export const ProductDetailsBatches = ({
                       }
                       value={item.quantity || ''}
                       name="quantity"
-                      infoIcon={'kg'}
+                      infoIcon={formik.values?.product?.metricUnit}
                     />
                   </Grid>
 
@@ -195,8 +195,6 @@ export const ProductDetailsBatches = ({
                 style={{ height: '40px', fontSize: '10px' }}
               />
             </Grid>
-
-            {/* <Grid item xs={3}></Grid> */}
           </>
 
           {formik.values.traceabilityProductionList.map((charge, idx) => (
@@ -226,7 +224,7 @@ export const ProductDetailsBatches = ({
                       }}
                       value={charge.quantity}
                       name="quantity"
-                      infoIcon={'kg'}
+                      infoIcon={formik.values?.product?.metricUnit}
                     />
                   </Grid>
                   <Grid

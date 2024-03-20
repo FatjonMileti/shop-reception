@@ -63,7 +63,7 @@ export const AddOwnProductionTraceabilityModal = ({
     validateOnChange: false,
     enableReinitialize: false,
     validationSchema,
-    initialValues: initialValues,
+    initialValues,
     onSubmit: async (values: any) => {
       const otherComponents = recipeQuery?.data?.others.map(
         ({ componentCode, componentName, componentQuantity }) => ({

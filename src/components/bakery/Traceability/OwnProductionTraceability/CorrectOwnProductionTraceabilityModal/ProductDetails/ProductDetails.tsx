@@ -31,7 +31,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
   } = props
 
   const selectProductSearch = useSelectProductSearch({
-    optionsMap: ({ id, name, metiCode }) => ({ value: id, label: name, metiCode, id, name })
+    optionsMap: ({ id, name, metiCode, metricUnit }) => ({ value: id, label: name, metiCode, id, name, metricUnit })
   })
 
   const onDeleteBatch = id => {
@@ -69,7 +69,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 formik.setFieldValue('product', {
                   name: value.name,
                   metiCode: value.metiCode,
-                  id: value.id
+                  id: value.id,
+                  metricUnit: value.metricUnit
                 })
               } else {
                 formik.setFieldValue('product', null)

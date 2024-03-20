@@ -49,8 +49,8 @@ export const validationSchema = Yup.object().shape({
       componentCode: Yup.number(),
       componentQuantity: Yup.number(),
       quantity: Yup.number(),
-      openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
-        if (hasSecondaryDlc) {
+      openingDate: Yup.date().when(['hasSecondaryDlc', 'batchId'], ([hasSecondaryDlc, batchId], schema) => {
+        if (hasSecondaryDlc && batchId) {
           return schema.required('Data obligatorie')
         } else {
           return schema.nullable()
@@ -78,10 +78,9 @@ export const toChargeFormatEdit = item => ({
   childTraceabilityId: item.childTraceability?.id,
   componentCode: item?.componentCode,
   componentQuantity: item.componentQuantity,
-  componentName: item.batch?.componentName,
-
+  componentName: item?.componentName,
   quantity: item.quantity,
-  openingDate: formatPayloadDate(item?.openingDate),
+  productionDate: formatPayloadDate(item?.childTraceability?.productionDate),
   dlc: item?.batch?.dlcDays
 })
 

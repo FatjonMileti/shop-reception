@@ -199,7 +199,6 @@ export const ProductDetailsBatches = ({
               disabled={!formik.values?.quantity}
             />
           </Grid>
-          {/* <Grid item xs={3}></Grid> */}
 
           {formik.values.traceabilityProductionList.map((charge, idx) => (
             <Fragment key={idx}>
@@ -228,7 +227,7 @@ export const ProductDetailsBatches = ({
                       }}
                       value={charge.quantity}
                       name="quantity"
-                      infoIcon={'kg'}
+                      infoIcon={productMetricUnit}
                     />
                   </Grid>
 
