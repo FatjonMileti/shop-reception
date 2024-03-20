@@ -145,9 +145,6 @@ export const AddOwnProductionTraceabilityModal = ({
     }
   })
 
-  console.log("formik.values: ", formik.values)
-  console.log("formik.errors: ", formik.errors)
-
   const cancel = () => {
     closeModal()
     setSelectedProduct(undefined)
