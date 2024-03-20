@@ -81,7 +81,7 @@ export const toChargeFormatEdit = item => ({
   componentName: item?.componentName,
   quantity: item.quantity,
   productionDate: formatPayloadDate(item?.childTraceability?.productionDate),
-  dlc: item?.batch?.dlcDays
+  dlcDays: item?.childTraceability?.product?.dlcDays
 })
 
 export const columns: any[] = [

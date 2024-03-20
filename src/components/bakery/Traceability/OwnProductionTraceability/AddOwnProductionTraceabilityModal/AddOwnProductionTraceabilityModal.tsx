@@ -83,6 +83,8 @@ export const AddOwnProductionTraceabilityModal = ({
         }
       }
 
+      const removeProductionDate = ({ productionDate, ...item }) => item
+
       const payload = {
         productId: selectedProduct?.id,
         metiCode: selectedProduct?.metiCode,
@@ -99,7 +101,7 @@ export const AddOwnProductionTraceabilityModal = ({
         nonComplianceReason: values.nonComplianceReason,
         productDestination: values.productDestination,
         traceabilityProductionList: [
-          ...values.traceabilityProductionList.map(addDlcToComponent),
+          ...values.traceabilityProductionList.map(addDlcToComponent).map(removeProductionDate),
           ...otherComponents
         ]
       }

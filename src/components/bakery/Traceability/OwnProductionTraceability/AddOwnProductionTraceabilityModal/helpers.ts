@@ -67,7 +67,6 @@ export const toChargeFormat = (item, calculatedQuantity) => ({
   componentName: item.chargeNumber,
   quantity: calculatedQuantity,
   productionDate: item.productionDate,
-
   hasSecondaryDlc: !!item?.product?.dlcDays,
   dlcDays: item?.product?.dlcDays
 })
