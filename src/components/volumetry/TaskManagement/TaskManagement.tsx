@@ -117,12 +117,14 @@ const TaskManagement = () => {
           isModalOpen={modal === 'create'}
           closeModal={closeModal}
           setShouldRefreshData={setShouldRefreshData}
+          categoryFilterValue={categoryFilterValue}
         />
         <CreateEditTask
           isModalOpen={modal === 'edit'}
           closeModal={closeModal}
           editItemId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
+          categoryFilterValue={categoryFilterValue}
           isEdit
         />
         <DeleteConfirmationModal

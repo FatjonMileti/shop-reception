@@ -1,4 +1,4 @@
-import { TaskManagementItem } from 'components/volumetry/interfaces'
+import { TaskManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { useNotification } from 'hooks'
 import { ChangeEvent, useMemo } from 'react'
 import { getInitialValues, getValidationSchema } from './helpers'
@@ -26,17 +26,22 @@ interface CreateEditTaskProps {
   isModalOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
+  categoryFilterValue: ValueLabelInterface | null
   isEdit?: boolean
   editItemId?: string | number
 }
 
 const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
-  const { isModalOpen, closeModal, isEdit, editItemId, setShouldRefreshData } = props
+  const { isModalOpen, closeModal, isEdit, editItemId, setShouldRefreshData, categoryFilterValue } =
+    props
   const { showNotification } = useNotification()
 
   const { data: editItem } = getTask(editItemId, isModalOpen, showNotification)
 
-  const initialValues = useMemo(() => getInitialValues(editItem), [editItemId, editItem])
+  const initialValues = useMemo(
+    () => getInitialValues(editItem, categoryFilterValue),
+    [editItemId, editItem, categoryFilterValue]
+  )
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItemId])
 
   const formik = useFormik({

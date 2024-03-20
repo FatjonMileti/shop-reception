@@ -52,12 +52,7 @@ const Employee: React.FC<EmployeeProps> = props => {
         type: 'success'
       })
     },
-    onError: error =>
-      handleQueryError(
-        error,
-        'A aparut o eroare la schimbarea statusului taskului.',
-        showNotification
-      )
+    onError: error => handleQueryError(error, '', showNotification)
   })
   const shouldWrapActions = useMediaQuery('(min-width:1145px)')
 
