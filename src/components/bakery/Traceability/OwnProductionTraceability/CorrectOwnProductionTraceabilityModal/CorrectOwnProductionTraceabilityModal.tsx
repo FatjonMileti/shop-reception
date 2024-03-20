@@ -77,7 +77,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
 
       const addDlcToComponent = item => {
         if (!item.hasSecondaryDlc) return item
-
         return {
           ...item,
           dlc: formatPayloadDate(
@@ -85,6 +84,8 @@ export const CorrectOwnProductionTraceabilityModal = ({
           )
         }
       }
+
+      const removeProductionDate = ({ productionDate, ...item }) => item
 
       const payload = {
         productId: values?.product?.productId,
@@ -100,7 +101,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
         metiCode: values?.product?.metiCode,
         productName: values.product?.name,
         traceabilityProductionList: [
-          ...values?.traceabilityProductionList.map(addDlcToComponent),
+          ...values?.traceabilityProductionList.map(addDlcToComponent).map(removeProductionDate),
           ...otherComponents
         ]
       }
