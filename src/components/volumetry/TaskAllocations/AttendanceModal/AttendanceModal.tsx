@@ -109,13 +109,14 @@ const AttendanceModal = (props: AttendanceModalProps) => {
   return (
     <Modal
       isModalOpen={isModalOpen}
-      closeModal={closeModal}
+      closeModal={resetModal}
       modalTitle={
         activeStep === 0
           ? 'Confirma angajatii prezenti'
           : 'Confirma angajatii pe care vrei sa ii aloci'
       }
       modalWidth="60%"
+      backAction={activeStep === 0 ? null : () => setActiveStep(0)}
     >
       {
         [

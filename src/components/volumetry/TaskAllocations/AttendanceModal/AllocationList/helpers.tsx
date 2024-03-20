@@ -14,7 +14,7 @@ export const buildColumns = ({ toggleEmployee }: { toggleEmployee: Function }) =
         checked={row.shouldAllocate}
         onChange={() => toggleEmployee(row)}
         inputProps={{ 'aria-labelledby': `employee-${row.value}` }}
-        label={`${row.fullName} (${row.genericDepartment})`}
+        label={row.fullName}
         style={{ display: 'inline-block', lineHeight: '45px' }}
       />
     )
@@ -30,7 +30,7 @@ export const buildColumns = ({ toggleEmployee }: { toggleEmployee: Function }) =
         {formatTime(row.shiftStart)}
       </span>
     ),
-    width: '200px'
+    collapsible: true
   },
   {
     title: 'Ora final de tura',
@@ -39,6 +39,6 @@ export const buildColumns = ({ toggleEmployee }: { toggleEmployee: Function }) =
     type: 'string',
     disableSorting: true,
     render: (row: any) => <span>{formatTime(row.shiftEnd)}</span>,
-    width: '200px'
+    collapsible: true
   }
 ]
