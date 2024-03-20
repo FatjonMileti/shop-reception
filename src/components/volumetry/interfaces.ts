@@ -136,8 +136,9 @@ export interface Region {
 
 export interface LocationCategoryManagementTableItem {
   id: string | number
-  name: string
+  category: string
   description: string
+  locationType: string
 }
 
 export interface CreateEditLocationCategoryProps {

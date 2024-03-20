@@ -170,7 +170,7 @@ export const getCategoriesOptions = (
   return useQuery(
     ['categories', locationFilterId],
     async () => {
-      let url = '/volumetry/locations/categories'
+      let url = '/volumetry/locations/categories/summary'
       if (locationFilterId) {
         url = `${url}?filterBy=locationId&filterValue=${locationFilterId}`
       }

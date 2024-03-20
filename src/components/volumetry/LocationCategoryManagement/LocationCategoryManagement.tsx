@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Table } from 'components/core-ui/Table'
 import s from './LocationCategoryManagement.modules.scss'
-import { columns } from './helpers'
+import { columns, getFilters } from './helpers'
 import {
   CRUDAction,
   LocationCategoryManagementTableItem,
@@ -26,36 +26,21 @@ const LocationCategoryManagement = () => {
 
   const { showNotification } = useNotification()
 
+  const filters = useMemo(() => getFilters(), [])
+
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
-      // const response = await makeCoreGetRequest(
-      //   toTableGETUrl({
-      //     url: '/volumetry/regions',
-      //     tableFilters,
-      //     page,
-      //     rowsPerPage,
-      //     order,
-      //     orderBy
-      //   })
-      // )
-      const response = {
-        list: [
-          {
-            id: 1,
-            name: 'HYPER MAXI',
-            description: 'Lorem ipsum 1'
-          },
-          {
-            id: 2,
-            name: 'HYPER',
-            description: 'Lorem ipsum 2'
-          }
-        ],
-        page: {
-          totalCount: 2
-        }
-      }
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: '/volumetry/locations/categories',
+          tableFilters,
+          page,
+          rowsPerPage,
+          order,
+          orderBy
+        })
+      )
       setTableItems(toTableLocations(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
@@ -96,8 +81,8 @@ const LocationCategoryManagement = () => {
       />
       <Table
         hideCheckbox
-        orderBy="name"
-        order="desc"
+        orderBy="category"
+        order="asc"
         columns={columns}
         items={tableItems}
         fetchData={fetchData}
@@ -106,6 +91,7 @@ const LocationCategoryManagement = () => {
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
         rowActionsWidth="130px"
+        filters={filters}
         toolbarActions={[
           {
             label: 'Adauga',
