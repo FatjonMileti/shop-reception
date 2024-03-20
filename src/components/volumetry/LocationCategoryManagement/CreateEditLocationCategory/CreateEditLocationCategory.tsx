@@ -1,15 +1,17 @@
 import { useNotification } from 'hooks'
 import { ChangeEvent, useMemo } from 'react'
-import { getInitialValues, getValidationSchema } from './helpers'
+import { getInitialValues, getValidationSchema, toLocationCategoryPayload } from './helpers'
 import { useFormik } from 'formik'
 import { Modal } from 'components/core-ui/Modal'
 import { CircularProgress, Grid } from '@mui/material'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Autocomplete, Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { useMutation } from 'react-query'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { handleQueryError } from 'utils/helpers'
 import { CreateEditLocationCategoryProps } from 'components/volumetry/interfaces'
+import { locationTypeOptions } from '../helpers'
+import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 
 const CreateEditLocationCategory: React.FC<CreateEditLocationCategoryProps> = props => {
   const { isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData } = props
@@ -47,7 +49,7 @@ const CreateEditLocationCategory: React.FC<CreateEditLocationCategoryProps> = pr
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      mutate(values)
+      mutate(toLocationCategoryPayload(values))
       resetForm()
     }
   })
@@ -69,21 +71,22 @@ const CreateEditLocationCategory: React.FC<CreateEditLocationCategoryProps> = pr
             label="Nume business unit"
             fullWidth
             variant="outlined"
-            value={formik.values.name}
+            value={formik.values.category}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue('name', event.currentTarget.value)
             }
-            error={!!formik.errors.name}
-            helperText={formik.errors.name as string}
+            error={!!formik.errors.category}
+            helperText={formik.errors.category as string}
             required
           />
         </Grid>
         <Grid xs={12} item>
           <Input
-            type="text"
+            type="textarea"
             name="description"
             label="Descriere"
-            fullWidth
+            style={{ width: '100%' }}
+            rows={4}
             variant="outlined"
             value={formik.values.description}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
@@ -91,6 +94,20 @@ const CreateEditLocationCategory: React.FC<CreateEditLocationCategoryProps> = pr
             }
             error={!!formik.errors.description}
             helperText={formik.errors.description as string}
+            required
+          />
+        </Grid>
+        <Grid xs={12} item>
+          <AsyncAutocomplete
+            variant="outlined"
+            name="locationType"
+            label="Tip magazin"
+            value={formik.values.locationType}
+            options={locationTypeOptions}
+            onChange={value => formik.setFieldValue('locationType', value)}
+            error={!!formik.errors.locationType}
+            helperText={formik.errors.locationType as string}
+            required
           />
         </Grid>
         <Grid xs={12} item className={s.modalButtons}>

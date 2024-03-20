@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CircularProgress, Grid } from '@mui/material'
+import { CircularProgress, Grid, useMediaQuery } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './EmployeesStatus.modules.scss'
 import { getDepartmentsOptions } from '../api'
@@ -28,6 +28,8 @@ const EmployeesStatus = () => {
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification, setDepartmentFilterValue)
+
+  const isXs = useMediaQuery('(max-width:624px)')
 
   const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
@@ -81,7 +83,12 @@ const EmployeesStatus = () => {
           </div>
         ) : (
           <>
-            <Grid xs={4} md={3} mb={2} item style={{ padding: 0 }}>
+            <Grid
+              xs={12}
+              md={6}
+              item
+              style={isXs ? { padding: 0, paddingRight: '24px' } : { padding: 0 }}
+            >
               <FilterDataSelect
                 name="department"
                 defaultSelectedData={departmentFilterValue}
@@ -94,7 +101,14 @@ const EmployeesStatus = () => {
                 onSelect={handleDepartmentOptionChange}
               />
             </Grid>
-            <Grid xs={12} md={3} item style={{ padding: 0, marginLeft: '60px' }}>
+            <Grid
+              xs={12}
+              md={6}
+              item
+              style={
+                isXs ? { padding: 0, paddingRight: '24px', marginTop: '24px' } : { padding: 0 }
+              }
+            >
               <FilterDataSelect
                 name="shiftCategory"
                 defaultSelectedData={shiftCategoryFilterValue}
