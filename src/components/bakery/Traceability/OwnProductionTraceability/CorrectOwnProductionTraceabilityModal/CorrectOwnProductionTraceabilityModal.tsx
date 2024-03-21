@@ -67,15 +67,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
     validationSchema,
     initialValues,
     onSubmit: async (values: any) => {
-      const otherComponents = recipeQuery?.data?.others.map(
-        ({ componentCode, componentName, componentQuantity }) => ({
-          componentCode,
-          componentName,
-          componentQuantity,
-          quantity: componentQuantity,
-        })
-      )
-
       const addDlcToComponent = item => {
         if (!item.hasSecondaryDlc) return item
         return {
@@ -101,10 +92,9 @@ export const CorrectOwnProductionTraceabilityModal = ({
         productDestination: values?.productDestination,
         metiCode: values?.product?.metiCode,
         productName: values.product?.name,
-        traceabilityProductionList: [
-          ...values?.traceabilityProductionList.map(addDlcToComponent).map(removeProductionDate),
-          ...otherComponents
-        ]
+        traceabilityProductionList: values?.traceabilityProductionList
+          .map(addDlcToComponent)
+          .map(removeProductionDate)
       }
 
       if (values.traceabilityProductionList.length === 0) {

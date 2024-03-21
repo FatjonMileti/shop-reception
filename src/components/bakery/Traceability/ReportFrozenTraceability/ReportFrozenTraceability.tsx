@@ -5,7 +5,7 @@ import {
   ListTable
 } from '@fullscreendigital/carrefour-dex-fe'
 import s from './FrozenTraceability.modules.scss'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
@@ -251,6 +251,40 @@ export const ReportFrozenTraceability = () => {
     }
   )
 
+  const liveFiltersObject: { [key: string]: string } = useMemo(() => {
+    return liveTableFilters.reduce((acc, item) => {
+      acc[item.name] = item.value
+      return acc
+    }, {})
+  }, [liveTableFilters])
+
+  const minMaxDate = useMemo(() => {
+    const today = dayjs()
+    const minDate = dayjs().subtract(6, 'month')
+    const { startDate, endDate } = liveFiltersObject
+
+    return {
+      startDate: {
+        min: endDate
+          ? dayjs(endDate).subtract(1, 'month').isBefore(minDate)
+            ? minDate
+            : dayjs(endDate).subtract(1, 'month')
+          : minDate,
+
+        max: endDate ? dayjs(endDate) : today
+      },
+      endDate: {
+        min: startDate ? dayjs(startDate) : minDate,
+        max: startDate
+          ? dayjs(startDate).isBefore(today.subtract(1, 'month'))
+            ? dayjs(startDate).add(1, 'month')
+            : today
+          : today
+      }
+    }
+  }, [liveFiltersObject.startDate, liveFiltersObject.endDate])
+
+
   const drawerFilters: TableFiltersType[] = [
     {
       name: 'product.id',
@@ -278,7 +312,8 @@ export const ReportFrozenTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
-          minDate={dayjs().subtract(6, 'months')}
+          minDate={minMaxDate.startDate.min}
+          maxDate={minMaxDate.startDate.max}
         />
       ),
       type: 'date',
@@ -293,7 +328,8 @@ export const ReportFrozenTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
-          minDate={dayjs().subtract(6, 'months')}
+          minDate={minMaxDate.endDate.min}
+          maxDate={minMaxDate.endDate.max}
         />
       ),
       type: 'date',
