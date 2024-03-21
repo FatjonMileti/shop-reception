@@ -2,12 +2,12 @@ importScripts('static/firebase/firebase-app-compat.js')
 importScripts('static/firebase/firebase-messaging-compat.js')
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDK0c5EfHOLcO8Pmg6UGhrWfoE2a4tj7n4',
-  authDomain: 'communicationgatewayapi.firebaseapp.com',
-  projectId: 'communicationgatewayapi',
-  storageBucket: 'communicationgatewayapi.appspot.com',
-  messagingSenderId: '337960741708',
-  appId: '1:337960741708:web:8318e4584800d55880fde9'
+  apiKey: 'AIzaSyB5PBVo214x21PfiRFHd_YCR5wlfiSMMcc',
+  authDomain: 'gcp-ro-online-dex-uat.firebaseapp.com',
+  projectId: 'gcp-ro-online-dex-uat',
+  storageBucket: 'gcp-ro-online-dex-uat.appspot.com',
+  messagingSenderId: '100593929116',
+  appId: '1:100593929116:web:e94423a28068178ea3d659'
 }
 
 // Initialize Firebase

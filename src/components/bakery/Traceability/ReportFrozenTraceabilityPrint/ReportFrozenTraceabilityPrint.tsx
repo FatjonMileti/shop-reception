@@ -43,8 +43,8 @@ export const ReportFrozenTraceabilityPrint = () => {
       return await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/traceability/frozen/report',
+          page: -1,
           // tableFilters,
-          // page,
           // rowsPerPage,
           // searchText,
           tableFilters
