@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Paper, CircularProgress, useMediaQuery, Box } from '@mui/material'
+import { Paper, CircularProgress, useMediaQuery, Box, InputAdornment } from '@mui/material'
 import { useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
@@ -12,6 +12,7 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { useQuery } from 'react-query'
 import { Action } from 'components/utils/definitions/Definitions'
+import { CloseMenu } from 'icons'
 
 export interface ProductBarcodeScannerProps {
   action: Action
@@ -28,7 +29,6 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const [productCode, setProductCode] = useState<string>('')
   const [isUsingScandit, setIsUsingScandit] = useState<boolean>(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
-  const [isZerothButtonPressed, setIsZerothButtonPressed] = useState<boolean>(false)
 
   const onScan = scanResult => {
     setProductCode(scanResult.barcodes[0].data)
@@ -60,10 +60,6 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   )
 
   const searchProduct = async (event = null): Promise<void> => {
-    if (event) {
-      event.target.blur() // [~] otherwise, the side button will trigger this click event...
-    }
-
     if (productCode && action.type === 'GET') {
       refetch()
     }
@@ -79,6 +75,11 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
       }
     })
   }, [])
+
+  const clearCode = () => {
+    setProductCode('')
+    document.getElementById('product-scan-input').focus()
+  }
 
   return (
     <Paper className={s.scanContainer}>
@@ -97,24 +98,20 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
                 document.getElementById('product-scan-input').focus()
               }
             }}
-            onKeyDown={event => {
-              if (event.which == 0) {
-                setIsZerothButtonPressed(true)
-              }
-            }}
             onKeyUp={event => {
               if (event.which == 0) {
-                setIsZerothButtonPressed(false)
                 if (productCode) searchProduct(event)
-              }
-            }}
-            onBeforeInput={event => {
-              if (isZerothButtonPressed) {
-                ;(document.getElementById('product-scan-input') as HTMLInputElement).value = ''
               }
             }}
             id="product-scan-input"
             required
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end" className={s.clearIconAdornment} onClick={clearCode}>
+                  <CloseMenu fill={'rgba(0, 0, 0, 0.87)'} />
+                </InputAdornment>
+              )
+            }}
           />
         </div>
         <div className={s.buttonContainer}>
