@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { DatePicker, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Paper, Grid, Stack, Box, useMediaQuery } from '@mui/material'
+import { Paper, Grid, Stack, Box, useMediaQuery, InputAdornment } from '@mui/material'
 import { useNotification, useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
@@ -11,6 +11,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { formatPayloadDate, isScannerDevice } from 'utils/helpers'
 import { formatErrorMessage } from 'utils/formatting'
 import dayjs from 'dayjs'
+import { CloseMenu } from 'icons'
 
 const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
@@ -82,6 +83,11 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     document.getElementById('receipt-scan-input').focus()
   }, [])
 
+  const clearReceipt = () => {
+    setCode('')
+    document.getElementById('receipt-scan-input').focus()
+  }
+
   return (
     <div>
       <Grid container>
@@ -96,6 +102,13 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
               onChange={event => setCode(event.currentTarget.value)}
               id="receipt-scan-input"
               required
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end" className={s.clearIconAdornment} onClick={clearReceipt}>
+                    <CloseMenu fill={'rgba(0, 0, 0, 0.87)'} />
+                  </InputAdornment>
+                )
+              }}
             />
           </div>
         </Grid>
