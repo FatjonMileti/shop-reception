@@ -3,12 +3,13 @@ import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
 export const getInitialValues = editItem => {
-
-  const traceabilityProductionList = editItem?.traceabilityProductionList?.reduce((acc, item) => {
-    if (item.batch) acc.push(toBatchFormatEdit(item))
-    else if (item.childTraceability) acc.push(toChargeFormatEdit(item))
-    return acc
-  }, []) || []
+  const traceabilityProductionList =
+    editItem?.traceabilityProductionList?.reduce((acc, item) => {
+      if (item.batch) acc.push(toBatchFormatEdit(item))
+      else if (item.childTraceability) acc.push(toChargeFormatEdit(item))
+      else acc.push(toOtherFormatEdit(item))
+      return acc
+    }, []) || []
 
   return {
     productId: editItem?.product?.id || '',
@@ -49,18 +50,20 @@ export const validationSchema = Yup.object().shape({
       componentCode: Yup.number(),
       componentQuantity: Yup.number(),
       quantity: Yup.number(),
-      openingDate: Yup.date().when(['hasSecondaryDlc', 'batchId'], ([hasSecondaryDlc, batchId], schema) => {
-        if (hasSecondaryDlc && batchId) {
-          return schema.required('Data obligatorie')
-        } else {
-          return schema.nullable()
+      openingDate: Yup.date().when(
+        ['hasSecondaryDlc', 'batchId'],
+        ([hasSecondaryDlc, batchId], schema) => {
+          if (hasSecondaryDlc && batchId) {
+            return schema.required('Data obligatorie')
+          } else {
+            return schema.nullable()
+          }
         }
-      }),
-      hasSecondaryDlc: Yup.boolean(),
+      ),
+      hasSecondaryDlc: Yup.boolean()
     })
   )
 })
-
 
 export const toBatchFormatEdit = item => ({
   batchId: item.batch?.id,
@@ -71,7 +74,7 @@ export const toBatchFormatEdit = item => ({
   quantity: item.quantity,
   hasSecondaryDlc: item.batch?.hasSecondaryDlc,
   openingDate: formatPayloadDate(item.openingDate),
-  dlcDays: item.batch?.dlcDays,
+  dlcDays: item.batch?.dlcDays
 })
 
 export const toChargeFormatEdit = item => ({
@@ -82,6 +85,18 @@ export const toChargeFormatEdit = item => ({
   quantity: item.quantity,
   productionDate: formatPayloadDate(item?.childTraceability?.productionDate),
   dlcDays: item?.childTraceability?.product?.dlcDays
+})
+
+export const toOtherFormatEdit = ({
+  componentCode,
+  componentName,
+  componentQuantity,
+  quantity
+}) => ({
+  componentCode,
+  componentName,
+  componentQuantity,
+  quantity
 })
 
 export const columns: any[] = [

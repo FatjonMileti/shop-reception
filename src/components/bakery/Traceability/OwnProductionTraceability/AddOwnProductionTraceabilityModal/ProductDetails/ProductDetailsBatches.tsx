@@ -286,7 +286,30 @@ export const ProductDetailsBatches = ({
               disabled
             />
           </Grid>
-          {/* <Grid item xs={3}></Grid> */}
+
+          {formik.values.traceabilityProductionList.map((item, idx) => (
+            <Fragment key={idx}>
+              {other.componentCode === item.componentCode && (
+                <Grid item xs={4}>
+                  <Input
+                    type="number"
+                    variant="outlined"
+                    label={`Cantitatea`}
+                    onChange={(e: any) => {
+                      formik.setFieldValue(
+                        `traceabilityProductionList[${idx}].quantity`,
+                        e.target.value
+                      )
+                    }}
+                    value={item.quantity}
+                    name="quantity"
+                    infoIcon={productMetricUnit}
+                  />
+                </Grid>
+              ) || null}
+            </Fragment>
+          ))}
+
         </Fragment>
       ))}
 
