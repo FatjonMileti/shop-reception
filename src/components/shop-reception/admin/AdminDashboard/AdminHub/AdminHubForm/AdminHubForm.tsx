@@ -80,7 +80,7 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
   const { data: hubTypes, isLoading: isHubTypesLoading } = useQuery(
     ['hub-types'],
     async () => {
-      const result = await makeCoreGetRequest('/hubs/types')
+      const result = await makeCoreGetRequest('/products/types')
       const resultOptions = result.map(
         (item: string): AutocompleteOption => ({
           label: item,

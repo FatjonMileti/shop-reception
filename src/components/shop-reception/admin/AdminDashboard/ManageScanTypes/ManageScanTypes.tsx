@@ -1,61 +1,46 @@
-import { Grid } from '../../../Common/Grid'
-import { Table } from '../../../../core-ui/Table'
-import { columns } from './helpers'
-import { Add as AddIcon } from '@mui/icons-material'
+import { columns, drawerFilters } from './helpers'
 import { useState } from 'react'
-import { makeCoreGetRequest } from '../../../../../utils/api'
-import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { formatErrorMessage } from '../../../../../utils/formatting'
-import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../Common/TitleHeader'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { ScanTypeForm } from './ScanTypeForm'
+import { useQuery } from 'react-query'
+import s from '../../../commonStyles.modules.scss'
+import { useNotification } from 'hooks'
+import { Table } from 'components/core-ui/Table'
+import { makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { formatErrorMessage } from 'utils/formatting'
+import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
+import { DeleteConfirmationModal } from 'components/core-ui/DeleteConfirmationModal'
+import { Typography } from '@mui/material'
 
 const ManageScanTypes = () => {
-  const [tableItems, setTableItems] = useState<ScanType[]>([
-    {
-      id: 1,
-      storeType: 'CRAIOVA (3054)',
-      region: '',
-      storeCode: 'DEP',
-      storeName: 'DEPOZIT BRAZI NON FOOD',
-      scanType: 'PH01DEP',
-      startDate: '25-10-2023',
-      lastDate: '25-10-2023',
-      active: true
-    }
-  ])
-  const [totalCount, setTotalCount] = useState<number>(0)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<ScanType>()
-  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
 
-  const openNewModal = (): void => setIsNewModalOpen(true)
-  const closeNewModal = (): void => setIsNewModalOpen(false)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [tableItems, setTableItems] = useState<ScanType[]>([])
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const openEditModal = (rowId: number | string): void => {
-    selectRow(rowId)
-    setIsEditModalOpen(true)
-  }
-  const closeEditModal = (): void => setIsEditModalOpen(false)
-
+  const [selectedRow, setSelectedRow] = useState<ScanType>()
   const selectRow = (rowId: number | string) => {
     const row = tableItems.find(item => item.id === rowId)
-    if (row) {
-      setSelectedRow(row)
-    }
+    row && setSelectedRow(row)
   }
+  const [createUpdateModal, setCreateUpdateModal] = useState<string>(null)
+  const openCreateModal = (): void => setCreateUpdateModal('create')
+  const openUpdateModal = (): void => setCreateUpdateModal('update')
+  const closeCreateUpdateModal = (): void => setCreateUpdateModal(null)
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const openDeleteModal = (): void => setIsDeleteModalOpen(true)
+  const closeDeleteModal = (): void => setIsDeleteModalOpen(false)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/reception-mobile-api/rm-api/truck/list',
+          url: '/scan-types',
           tableFilters,
           page,
           rowsPerPage,
@@ -77,124 +62,139 @@ const ManageScanTypes = () => {
     }
   }
 
+  const { data: shopTypes } = useQuery(
+    ['shop-types'],
+    async () => {
+      const data = await makeCoreGetRequest(`/products/types`)
+      return data.map(item => ({
+        label: item,
+        value: item
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea tipurilor de magazine. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: ruleTypes } = useQuery(
+    ['rule-types'],
+    async () => {
+      const data = await makeCoreGetRequest(`/scan-types/rule-organisation-types`)
+      return data.map(item => ({
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea regiunilor. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: scanTypes } = useQuery(
+    ['scan-types'],
+    async () => {
+      const data = await makeCoreGetRequest(`/scan-types/types`)
+      return data.map(item => ({
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea tipurilor de scanare. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
   return (
-    <Grid
-      items={[
-        <TitleHeader title='Administrare tipuri de scanare' />,
-        <Grid
-          hasPaper={true}
-          items={[
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Magazin'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează magazin',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Regiune'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează regiune',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Tip scanare'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează tip scanare',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Activ/inactiv'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Activ/inactiv',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />
-          ]}
-          itemsPerRow={4}
-        />,
-        <>
-          <ScanTypeForm
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <ScanTypeForm
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            setShouldRefreshData={setShouldRefreshData}
-            editItem={selectedRow}
-            isEdit
-          />
-          <Table
-            hideCheckbox
-            orderBy='role'
-            order='asc'
-            columns={columns}
-            items={tableItems}
-            fetchData={() => {
-            }}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            newButton={{
-              onClick: (): void => {
-                openNewModal()
-              }
-            }}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            rowActions={[
-              {
-                label: 'Edit',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#16a085',
-                onClick: (e, rowId) => openEditModal(rowId)
-              }
-            ]}
-            rowActionsWidth='130px'
-            toolbarActions={[
-              {
-                label: 'Regula scanare',
-                icon: <AddIcon />,
-                onClick: openNewModal
-              }
-            ]}
-          />
-        </>
-      ]}
-      itemsPerRow={1}
-    />
+    <div className={s.mainContainer}>
+      <ScanTypeForm
+        isModalOpen={createUpdateModal === 'create'}
+        closeModal={closeCreateUpdateModal}
+        setShouldRefreshData={setShouldRefreshData}
+        ruleTypes={ruleTypes}
+        scanTypes={scanTypes}
+      />
+      <ScanTypeForm
+        isModalOpen={createUpdateModal === 'update'}
+        closeModal={closeCreateUpdateModal}
+        setShouldRefreshData={setShouldRefreshData}
+        editItem={selectedRow}
+        isEdit
+        ruleTypes={ruleTypes}
+        scanTypes={scanTypes}
+      />
+      <DeleteConfirmationModal
+        isModalOpen={isDeleteModalOpen}
+        closeModal={closeDeleteModal}
+        actionUrl="/scan-types/:id"
+        itemId={`${selectedRow?.id}`}
+        content={<Typography>Esti sigur va vrei sa stergi acest produs?</Typography>}
+        setShouldRefreshData={setShouldRefreshData}
+      />
+      <Table
+        hideCheckbox
+        orderBy="role"
+        order="asc"
+        columns={columns}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        filters={drawerFilters(shopTypes, [], scanTypes)}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+        rowActions={[
+          {
+            label: 'Edit',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#16a085',
+            desktopIcon: <EditActionIcon />,
+            onClick: (e, rowId) => {
+              selectRow(rowId)
+              openUpdateModal()
+            }
+          },
+          {
+            label: 'Delete',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#16a085',
+            desktopIcon: <DeleteActionIcon />,
+            onClick: (e, rowId) => {
+              selectRow(rowId)
+              openDeleteModal()
+            }
+          }
+        ]}
+        rowActionsWidth="130px"
+        toolbarActions={[
+          {
+            label: 'Produse sensibile',
+            icon: <AddActionIcon />,
+            onClick: openCreateModal
+          }
+        ]}
+      />
+    </div>
   )
 }
 

@@ -90,15 +90,21 @@ interface CentralizeStoresHub {
 }
 
 interface ScanType {
-  id: number
-  storeType: string
-  region: string
-  storeCode: string
-  storeName: string
-  scanType: string
-  startDate: string
-  lastDate: string
-  active: boolean
+  id: number;
+  active: boolean;
+  start: string;
+  end: string;
+  shopType: {
+      key: string;
+      value: string;
+  };
+  regionName: string;
+  shopCode: string;
+  shopName: string;
+  type: {
+      key: string;
+      value: string;
+  };
 }
 
 interface SensitiveProduct {

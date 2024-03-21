@@ -5738,7 +5738,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "shops/types",
+      "endpoint": "products/types",
       "responses": [
         {
           "uuid": "e0fd84ba-6ccc-4e27-8d6d-fa0033614a4c",
@@ -5888,35 +5888,6 @@
         {
           "uuid": "73f50bb6-aca8-45bb-ad7c-9c3b2d9eeb67",
           "body": "",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null
-    },
-    {
-      "uuid": "917b4938-4d96-4708-bdbb-07e38e3b2fc9",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "hubs/types",
-      "responses": [
-        {
-          "uuid": "9dc240f0-a746-4461-9c25-db1ff49f9891",
-          "body": "[\n  \"HUB\", \"HUB2\"\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -6111,40 +6082,11 @@
       "responseMode": null
     },
     {
-      "uuid": "0ebe48fc-1989-475a-9b48-cb9f5bc60fe0",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "sensitives/types",
-      "responses": [
-        {
-          "uuid": "b0b1fe50-c2b7-4ddd-99fd-a8bf35211a68",
-          "body": "[\n  {\n    \"key\": \"ALL\",\n    \"value\": \"string\"\n  },\n  {\n    \"key\": \"NONE\",\n    \"value\": \"string 2\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null
-    },
-    {
       "uuid": "383cf6a2-9fb6-43bf-8f6a-be7bded414fc",
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "sensitives/meti-rayons",
+      "endpoint": "products/meti-rayons",
       "responses": [
         {
           "uuid": "0ef12f51-adb6-4b1f-89ad-591964d67fc2",
@@ -6173,7 +6115,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "sensitives/meti-families",
+      "endpoint": "products/meti-families",
       "responses": [
         {
           "uuid": "997b8abc-76ec-46f2-acf3-c4d7da57dccf",
@@ -6202,7 +6144,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "sensitives/meti-sub-families",
+      "endpoint": "products/meti-sub-families",
       "responses": [
         {
           "uuid": "8a08f665-153e-4a98-bdc0-082f86b33e5a",
@@ -6231,7 +6173,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "sensitives/meti-ubs",
+      "endpoint": "products/meti-ubs",
       "responses": [
         {
           "uuid": "9853c9dd-d262-42e1-b4d5-f36952351b75",
@@ -6372,15 +6314,15 @@
       "responseMode": null
     },
     {
-      "uuid": "3fd94845-37d1-4e36-9352-10236f36bb9e",
+      "uuid": "68506c41-5991-44c1-8458-9523906a1c75",
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "short-dlc/types",
+      "endpoint": "scan-types",
       "responses": [
         {
-          "uuid": "daf4a8af-273b-4013-8db3-67907d4c273b",
-          "body": "[\n  {\n    \"key\": \"ALL\",\n    \"value\": \"string\"\n  },\n  {\n    \"key\": \"NONE\",\n    \"value\": \"string 2\"\n  }\n]",
+          "uuid": "d0d8b62f-2eef-4f40-ad7c-306fe317b60e",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"active\": true,\n      \"start\": \"2024-03-21\",\n      \"end\": \"2024-03-21\",\n      \"shopType\": {\n        \"key\": \"ALL\",\n        \"value\": \"string\"\n      },\n      \"regionName\": \"string\",\n      \"shopCode\": \"string\",\n      \"shopName\": \"string\",\n      \"type\": {\n        \"key\": \"SENSIBLE_PRODUCTS\",\n        \"value\": \"string\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -6401,15 +6343,15 @@
       "responseMode": null
     },
     {
-      "uuid": "46da73ba-bf91-4142-ac6c-0f63699fe1c9",
+      "uuid": "9a297d02-2633-48c5-ad09-9c14664a387d",
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "short-dlc/meti-rayons",
+      "endpoint": "scan-types/types",
       "responses": [
         {
-          "uuid": "14f57f5b-ed87-4601-b73f-e476ce985cc3",
-          "body": "[\n  {\n    \"code\": \"raion\",\n    \"displayValue\": \"raion 1\"\n  }\n]",
+          "uuid": "b98bd0ce-256f-4ba0-ae69-ecdd7b6554e0",
+          "body": "[\n  {\n    \"key\": \"SENSIBLE_PRODUCTS\",\n    \"value\": \"string\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -6430,73 +6372,15 @@
       "responseMode": null
     },
     {
-      "uuid": "7fc56f6e-9018-4fad-8dfb-6b8e7dd0329d",
+      "uuid": "a6a275dc-ff71-44ad-8325-babd8e627d7f",
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "short-dlc/meti-families",
+      "endpoint": "scan-types/rule-organisation-types",
       "responses": [
         {
-          "uuid": "a07c7e83-5572-49a9-a29e-a493eb54075e",
-          "body": "[\n  {\n    \"code\": \"fam\",\n    \"displayValue\": \"fam 1\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null
-    },
-    {
-      "uuid": "858c0768-4980-4611-b1b7-d5271b3be07b",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "short-dlc/meti-sub-families",
-      "responses": [
-        {
-          "uuid": "186cb79b-0674-404c-b1d5-ede6576300ce",
-          "body": "[\n  {\n    \"code\": \"sfam\",\n    \"displayValue\": \"sfam 1\"\n  }\n]",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null
-    },
-    {
-      "uuid": "6bed228a-6a3a-4721-aa1a-cada41ec2052",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "short-dlc/meti-ubs",
-      "responses": [
-        {
-          "uuid": "e5f8e1c5-4123-4915-8d5a-5acfb48c97d8",
-          "body": "[\n  {\n    \"code\": \"ub\",\n    \"displayValue\": \"ub 1\"\n  }\n]",
+          "uuid": "04732389-54a6-45cb-bc08-b9316727fcb3",
+          "body": "[\n  {\n    \"key\": \"ALL\",\n    \"value\": \"string\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -6804,10 +6688,6 @@
     },
     {
       "type": "route",
-      "uuid": "917b4938-4d96-4708-bdbb-07e38e3b2fc9"
-    },
-    {
-      "type": "route",
       "uuid": "4ef150b5-07b0-476a-abe9-7a3a468b105d"
     },
     {
@@ -6829,10 +6709,6 @@
     {
       "type": "route",
       "uuid": "123dc19d-67e4-4ea7-96ba-3eeb679c02f5"
-    },
-    {
-      "type": "route",
-      "uuid": "0ebe48fc-1989-475a-9b48-cb9f5bc60fe0"
     },
     {
       "type": "route",
@@ -6868,23 +6744,15 @@
     },
     {
       "type": "route",
-      "uuid": "3fd94845-37d1-4e36-9352-10236f36bb9e"
+      "uuid": "68506c41-5991-44c1-8458-9523906a1c75"
     },
     {
       "type": "route",
-      "uuid": "46da73ba-bf91-4142-ac6c-0f63699fe1c9"
+      "uuid": "9a297d02-2633-48c5-ad09-9c14664a387d"
     },
     {
       "type": "route",
-      "uuid": "7fc56f6e-9018-4fad-8dfb-6b8e7dd0329d"
-    },
-    {
-      "type": "route",
-      "uuid": "858c0768-4980-4611-b1b7-d5271b3be07b"
-    },
-    {
-      "type": "route",
-      "uuid": "6bed228a-6a3a-4721-aa1a-cada41ec2052"
+      "uuid": "a6a275dc-ff71-44ad-8325-babd8e627d7f"
     }
   ],
   "proxyMode": false,

@@ -129,7 +129,7 @@ const AdminStore = () => {
   const { data: shopTypes } = useQuery(
     ['meti-types'],
     async () => {
-      const result = await makeCoreGetRequest('/shops/types')
+      const result = await makeCoreGetRequest('/products/types')
       const resultOptions = result.map(
         (item: string): AutocompleteOption => ({
           label: item,
