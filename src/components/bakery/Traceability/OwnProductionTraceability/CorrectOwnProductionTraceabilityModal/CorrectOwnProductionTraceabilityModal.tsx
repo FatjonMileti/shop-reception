@@ -71,7 +71,8 @@ export const CorrectOwnProductionTraceabilityModal = ({
         ({ componentCode, componentName, componentQuantity }) => ({
           componentCode,
           componentName,
-          componentQuantity
+          componentQuantity,
+          quantity: componentQuantity,
         })
       )
 
