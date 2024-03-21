@@ -69,7 +69,8 @@ export const AddOwnProductionTraceabilityModal = ({
         ({ componentCode, componentName, componentQuantity }) => ({
           componentCode,
           componentName,
-          componentQuantity
+          componentQuantity,
+          quantity: componentQuantity,
         })
       )
 
