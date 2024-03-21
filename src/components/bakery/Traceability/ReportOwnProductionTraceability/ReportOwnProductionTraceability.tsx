@@ -5,7 +5,7 @@ import {
   ListTable
 } from '@fullscreendigital/carrefour-dex-fe'
 import s from './OwnProductionTraceability.modules.scss'
-import React, { startTransition, useState } from 'react'
+import React, { startTransition, useMemo, useState } from 'react'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
@@ -37,7 +37,6 @@ export const ReportOwnProductionTraceability = () => {
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [rows, setRows] = useState([])
-  const [tableData, setTableData] = useState(null)
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false)
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
   const [storeFilterValue, setStoreFilterValue] = useState<ValueLabelInterface[]>([])
@@ -112,7 +111,6 @@ export const ReportOwnProductionTraceability = () => {
       )
       setRows(toListTableRows(response.list))
       setTotalCount(response.page.totalCount)
-      setTableData(response.list)
       setIsLoading(false)
 
       setTableState(tableState => ({
@@ -244,6 +242,39 @@ export const ReportOwnProductionTraceability = () => {
     }
   )
 
+  const liveFiltersObject: { [key: string]: string } = useMemo(() => {
+    return liveTableFilters.reduce((acc, item) => {
+      acc[item.name] = item.value
+      return acc
+    }, {})
+  }, [liveTableFilters])
+
+  const minMaxDate = useMemo(() => {
+    const today = dayjs()
+    const minDate = dayjs().subtract(6, 'month')
+    const { startDate, endDate } = liveFiltersObject
+
+    return {
+      startDate: {
+        min: endDate
+          ? dayjs(endDate).subtract(1, 'month').isBefore(minDate)
+            ? minDate
+            : dayjs(endDate).subtract(1, 'month')
+          : minDate,
+
+        max: endDate ? dayjs(endDate) : today
+      },
+      endDate: {
+        min: startDate ? dayjs(startDate) : minDate,
+        max: startDate
+          ? dayjs(startDate).isBefore(today.subtract(1, 'month'))
+            ? dayjs(startDate).add(1, 'month')
+            : today
+          : today
+      }
+    }
+  }, [liveFiltersObject.startDate, liveFiltersObject.endDate])
+
   const drawerFilters: TableFiltersType[] = [
     {
       name: 'product.id',
@@ -271,7 +302,8 @@ export const ReportOwnProductionTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
-          minDate={dayjs().subtract(6, 'months')}
+          minDate={minMaxDate.startDate.min}
+          maxDate={minMaxDate.startDate.max}
         />
       ),
       type: 'date',
@@ -286,7 +318,8 @@ export const ReportOwnProductionTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
-          minDate={dayjs().subtract(6, 'months')}
+          minDate={minMaxDate.endDate.min}
+          maxDate={minMaxDate.endDate.max}
         />
       ),
       type: 'date',

@@ -2,7 +2,7 @@ import * as Yup from 'yup'
 import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
-export const getInitialValues = () => {
+export const getInitialValues = recipeQuery => {
   return {
     productionDate: dayjs(),
     chargeNumber: null,
@@ -13,7 +13,13 @@ export const getInitialValues = () => {
     conform: true,
     nonComplianceReason: null,
     productDestination: null,
-    traceabilityProductionList: []
+    traceabilityProductionList:
+      recipeQuery?.data?.others?.map(({ componentCode, componentName, componentQuantity }) => ({
+        componentCode,
+        componentName,
+        componentQuantity,
+        quantity: componentQuantity
+      })) || []
   }
 }
 
@@ -36,15 +42,18 @@ export const validationSchema = Yup.object().shape({
       componentQuantity: Yup.number(),
       quantity: Yup.number(),
 
-      openingDate: Yup.date().when(['hasSecondaryDlc', 'batchId'], ([hasSecondaryDlc, batchId], schema) => {
-        if (hasSecondaryDlc && batchId) {
-          return schema.required('Data obligatorie')
-        } else {
-          return schema.nullable()
+      openingDate: Yup.date().when(
+        ['hasSecondaryDlc', 'batchId'],
+        ([hasSecondaryDlc, batchId], schema) => {
+          if (hasSecondaryDlc && batchId) {
+            return schema.required('Data obligatorie')
+          } else {
+            return schema.nullable()
+          }
         }
-      }),
+      ),
 
-      hasSecondaryDlc: Yup.boolean(),
+      hasSecondaryDlc: Yup.boolean()
     })
   )
 })

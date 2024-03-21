@@ -113,7 +113,9 @@ export const ProductDetailsBatches = ({
                         }
                         variant="outlined"
                         required
-                        helperText={formik.errors?.traceabilityProductionList?.[idx]?.openingDate as string}
+                        helperText={
+                          formik.errors?.traceabilityProductionList?.[idx]?.openingDate as string
+                        }
                         error={!!formik.errors?.traceabilityProductionList?.[idx]?.openingDate}
                         value={
                           formik.values?.traceabilityProductionList?.[idx]?.openingDate
@@ -250,6 +252,64 @@ export const ProductDetailsBatches = ({
           ))}
         </Fragment>
       ))}
+
+      <Grid item xs={12}>
+        <Divider />
+      </Grid>
+
+      {receip?.others.map((other, index) => (
+        <Fragment key={index}>
+          <Grid item xs={3}>
+            <Input
+              type="text"
+              variant="outlined"
+              label={`Articol compozant ${index + 1}`}
+              value={other.componentName}
+              name="componentName"
+              disabled
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Input
+              type="text"
+              variant="outlined"
+              label={`Cantitatea`}
+              value={`${quantityCalculation(
+                formik.values.quantity,
+                other.componentQuantity,
+                receip.details.recipeQuantity
+              )}`}
+              name="batchId"
+              disabled
+            />
+          </Grid>
+
+          {formik.values.traceabilityProductionList.map((item, idx) => (
+            <Fragment key={idx}>
+              {other.componentCode === item.componentCode && (
+                <Grid item xs={4}>
+                  <Input
+                    type="number"
+                    variant="outlined"
+                    label={`Cantitatea`}
+                    onChange={(e: any) => {
+                      formik.setFieldValue(
+                        `traceabilityProductionList[${idx}].quantity`,
+                        e.target.value
+                      )
+                    }}
+                    value={item.quantity}
+                    name="quantity"
+                    infoIcon={formik.values?.product?.metricUnit}
+                  />
+                </Grid>
+              ) || null}
+            </Fragment>
+          ))}
+
+        </Fragment>
+      ))}
+
       {formik.values.traceabilityProductionList.length > 0 && (
         <Grid item xs={12}>
           <Divider />

@@ -57,22 +57,47 @@ export const AddOwnProductionTraceabilityModal = ({
     }
   )
 
-  const initialValues = useMemo(() => getInitialValues(), [])
+  const recipeQuery = useQuery(
+    ['recipe', selectedProduct?.metiCode],
+    async () => {
+      const result = await makeCoreGetRequest(`/bakery/recipe/${selectedProduct?.metiCode}`)
+      let charges = []
+      let batches = []
+      let others = []
+      if (result) {
+        result[0].componentList.forEach(item => {
+          if (item.withBatch && item.withRecipe) {
+            charges.push(item)
+          } else if (item.withBatch) {
+            batches.push(item)
+          } else if (item.withRecipe) {
+            charges.push(item)
+          } else {
+            others.push(item)
+          }
+        })
+      }
+      return { charges, batches, others, details: result[0] }
+    },
+    {
+      enabled: !!selectedProduct?.metiCode,
+      onError: error => {
+        showNotification({
+          message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const initialValues = useMemo(() => getInitialValues(recipeQuery), [recipeQuery.data])
 
   const formik = useFormik({
     validateOnChange: false,
-    enableReinitialize: false,
+    enableReinitialize: true,
     validationSchema,
     initialValues,
     onSubmit: async (values: any) => {
-      const otherComponents = recipeQuery?.data?.others.map(
-        ({ componentCode, componentName, componentQuantity }) => ({
-          componentCode,
-          componentName,
-          componentQuantity,
-          quantity: componentQuantity,
-        })
-      )
 
       const addDlcToComponent = item => {
         if (!item.hasSecondaryDlc) return item
@@ -101,10 +126,9 @@ export const AddOwnProductionTraceabilityModal = ({
         conform: values.conform,
         nonComplianceReason: values.nonComplianceReason,
         productDestination: values.productDestination,
-        traceabilityProductionList: [
-          ...values.traceabilityProductionList.map(addDlcToComponent).map(removeProductionDate),
-          ...otherComponents
-        ]
+        traceabilityProductionList: values.traceabilityProductionList
+          .map(addDlcToComponent)
+          .map(removeProductionDate)
       }
 
       if (values.traceabilityProductionList.length === 0) {
@@ -154,39 +178,6 @@ export const AddOwnProductionTraceabilityModal = ({
     setStep(0)
     formik.resetForm()
   }
-
-  const recipeQuery = useQuery(
-    ['recipe', selectedProduct?.metiCode],
-    async () => {
-      const result = await makeCoreGetRequest(`/bakery/recipe/${selectedProduct?.metiCode}`)
-      let charges = []
-      let batches = []
-      let others = []
-      if (result) {
-        result[0].componentList.forEach(item => {
-          if (item.withBatch && item.withRecipe) {
-            charges.push(item)
-          } else if (item.withBatch) {
-            batches.push(item)
-          } else if (item.withRecipe) {
-            charges.push(item)
-          } else {
-            others.push(item)
-          }
-        })
-      }
-      return { charges, batches, others, details: result[0] }
-    },
-    {
-      enabled: !!selectedProduct?.metiCode,
-      onError: error => {
-        showNotification({
-          message: `Error while fetching recipe data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
 
   const addNewBatches = (batchesToAdd: any[]) => {
     if (batchesToAdd.length === 0) return
