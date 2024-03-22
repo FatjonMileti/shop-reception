@@ -58,19 +58,10 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      console.log('debug', formik.values)
-
-      try {
-        mutate(values)
-        formik.resetForm()
-        setShouldRefreshData(true)
-        closeModal()
-      } catch (error) {
-        showNotification({
-          message: `Error while data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
+      mutate(values)
+      formik.resetForm()
+      setShouldRefreshData(true)
+      closeModal()
     }
   })
 

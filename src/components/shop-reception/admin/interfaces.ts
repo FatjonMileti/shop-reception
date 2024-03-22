@@ -90,21 +90,21 @@ interface CentralizeStoresHub {
 }
 
 interface ScanType {
-  id: number;
-  active: boolean;
-  start: string;
-  end: string;
+  id: number
+  active: boolean
+  start: string
+  end: string
   shopType: {
-      key: string;
-      value: string;
-  };
-  regionName: string;
-  shopCode: string;
-  shopName: string;
+    key: string
+    value: string
+  }
+  regionName: string
+  shopCode: string
+  shopName: string
   type: {
-      key: string;
-      value: string;
-  };
+    key: string
+    value: string
+  }
 }
 
 interface SensitiveProduct {
@@ -123,14 +123,14 @@ interface SensitiveProduct {
 }
 
 interface SubFamilyValidityThreshold {
-  id: number
-  familyCode: string
-  subfamilyCode: string
-  subfamily: string
-  family: string
-  districtCode: string
-  district: string
-  validityThreshold: string
+  id: string
+  sfaCode: string
+  sfaName: string
+  famCode: string
+  famName: string
+  rayCode: string
+  rayName: string
+  validityLimit: number
 }
 
 interface PackingType {

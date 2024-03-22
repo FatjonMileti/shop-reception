@@ -6399,6 +6399,35 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "3ea20e9d-3e97-4c4d-b462-2ce5ba9cf669",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "validity-limit",
+      "responses": [
+        {
+          "uuid": "e698d930-0ddd-47ae-9fb1-6396f9d46cb0",
+          "body": "{\n  \"list\": [\n    {\n      \"sfaCode\": \"string\",\n      \"sfaName\": \"string\",\n      \"famCode\": \"string\",\n      \"famName\": \"string\",\n      \"rayCode\": \"string\",\n      \"rayName\": \"string\",\n      \"validityLimit\": 0\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6753,6 +6782,10 @@
     {
       "type": "route",
       "uuid": "a6a275dc-ff71-44ad-8325-babd8e627d7f"
+    },
+    {
+      "type": "route",
+      "uuid": "3ea20e9d-3e97-4c4d-b462-2ce5ba9cf669"
     }
   ],
   "proxyMode": false,
