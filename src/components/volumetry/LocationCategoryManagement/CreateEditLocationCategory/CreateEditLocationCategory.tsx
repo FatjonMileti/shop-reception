@@ -4,7 +4,7 @@ import { getInitialValues, getValidationSchema, toLocationCategoryPayload } from
 import { useFormik } from 'formik'
 import { Modal } from 'components/core-ui/Modal'
 import { CircularProgress, Grid } from '@mui/material'
-import { Autocomplete, Button, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { useMutation } from 'react-query'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
@@ -24,9 +24,9 @@ const CreateEditLocationCategory: React.FC<CreateEditLocationCategoryProps> = pr
 
   const submitCategory = async values => {
     if (editItem) {
-      await makeCorePutRequest(`/volumetry/categories/${editItem.id}`, values)
+      await makeCorePutRequest(`/volumetry/locations/categories/${editItem.id}`, values)
     } else {
-      await makeCorePostRequest('/volumetry/categories', values)
+      await makeCorePostRequest('/volumetry/locations/categories', values)
     }
   }
 
@@ -71,12 +71,12 @@ const CreateEditLocationCategory: React.FC<CreateEditLocationCategoryProps> = pr
             label="Nume business unit"
             fullWidth
             variant="outlined"
-            value={formik.values.category}
+            value={formik.values.categoryName}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('name', event.currentTarget.value)
+              formik.setFieldValue('categoryName', event.currentTarget.value)
             }
-            error={!!formik.errors.category}
-            helperText={formik.errors.category as string}
+            error={!!formik.errors.categoryName}
+            helperText={formik.errors.categoryName as string}
             required
           />
         </Grid>

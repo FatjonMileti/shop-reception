@@ -14,13 +14,14 @@ const DeleteLocationCategory: React.FC<DeleteLocationCategoryProps> = props => {
 
   const onDelete = async () => {
     try {
-      await makeCoreDeleteRequest(`/volumetry/location-categories/${itemId}`)
+      await makeCoreDeleteRequest(`/volumetry/locations/categories/${itemId}`)
       closeModal()
       setShouldRefreshData(true)
     } catch (error) {
       handleQueryError(error, 'A aparut o eroare la stergerea business unit-ului', showNotification)
     }
   }
+
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Sterge'}>
       <Grid container spacing={4}>
