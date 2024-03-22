@@ -129,12 +129,12 @@ export const ReportOwnProductionTraceabilityPrint = () => {
 
         <Grid container rowSpacing={3}>
           <Grid item xs={12}>
-            <p className={styles.productName}>{reportDataQuery?.data?.list[0].product.name}</p>
+            <p className={styles.mainProductName}>{reportDataQuery?.data?.list[0].product.name}</p>
           </Grid>
-                <Grid item xs={12} sx={{padding: '0px 0px 20px !important'}}>
+          <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
             <BasicTable
               columns={selectedColumnsProduct}
-              rows={[reportDataQuery?.data?.list[0]] || []}
+              rows={reportDataQuery?.data?.list || []}
               containerProps={{
                 className: styles.productTableContainer
               }}
@@ -148,7 +148,7 @@ export const ReportOwnProductionTraceabilityPrint = () => {
                   <p className={styles.productName}>{product.product.name}</p>
                 </Grid>
 
-                <Grid item xs={12} sx={{padding: '0px 0px 20px !important'}}>
+                <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
                   <BasicTable
                     columns={selectedColumnsBatch}
                     rows={[product] || []}
@@ -157,7 +157,7 @@ export const ReportOwnProductionTraceabilityPrint = () => {
                     }}
                   />
                 </Grid>
-                <Grid item xs={12} sx={{padding: '0px 0px 20px !important'}}>
+                <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
                   <BasicTable
                     columns={selectedColumnsCharge}
                     rows={product.traceabilityProductionList || []}
