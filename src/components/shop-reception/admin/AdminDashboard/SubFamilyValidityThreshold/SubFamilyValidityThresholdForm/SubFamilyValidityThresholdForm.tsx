@@ -1,20 +1,19 @@
 import { useMemo } from 'react'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '../../../../Common/Grid'
+import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toPayload } from './serializers'
-import { ModalFormActionButtons } from '../../../Common/ModalFormActionButtons'
+import { Grid } from '@mui/material'
+import { useMutation } from 'react-query'
+import { makeCorePutRequest } from 'utils/api'
 
 interface NewAdminDepositProps {
   isModalOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
-  editItem?: SubFamilyValidityThreshold
+  editItem: SubFamilyValidityThreshold
 }
 
 const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => {
@@ -22,8 +21,26 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
   const { showNotification } = useNotification()
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
-
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
+
+  const updateSubfamilyValidity = async (values: any) => {
+    await makeCorePutRequest(`/validity-limit/${editItem?.sfaCode}`, values)
+  }
+
+  const { isLoading, mutate } = useMutation(updateSubfamilyValidity, {
+    onSuccess: res => {
+      showNotification({
+        message: `Data updated successfully`,
+        type: 'success'
+      })
+    },
+    onError: res => {
+      showNotification({
+        message: `Error while trying to update data, ${formatErrorMessage(res)}`,
+        type: 'error'
+      })
+    }
+  })
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -31,142 +48,130 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      try {
-        const payload = toPayload(formik.values)
-
-        setShouldRefreshData(true)
-        closeModal()
-        formik.resetForm()
-      } catch (error) {
-        showNotification({
-          message: `Error while data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
+      mutate(values)
+      setShouldRefreshData(true)
+      closeModal()
+      formik.resetForm()
     }
   })
+
+  console.log('debug', editItem)
   return (
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
       modalTitle={'Editare prag valabilitate'}
-      modalWidth='50%'
+      modalWidth="50%"
     >
-      <Grid
-        gridContainerStyle={{ margin: 0 }}
-        items={[
-          <FormInfoItems
-            items={[
-              {
-                label: 'Cod familie:',
-                name: editItem?.familyCode
-              }
-            ]}
-          />,
-          <Grid
-            gridContainerStyle={{ margin: 0 }}
-            items={[
-              <Input
-                type='text'
-                value={formik.values.subfamilyCode}
-                onChange={event =>
-                  formik.setFieldValue('subfamilyCode', (event.target as HTMLInputElement).value)
-                }
-                label='Cod sub familie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                error={!!formik.errors.subfamilyCode}
-                helperText={formik.errors.subfamilyCode as string}
-                required
-              />,
-              <Input
-                type='text'
-                value={formik.values.subfamily}
-                onChange={event =>
-                  formik.setFieldValue('subfamily', (event.target as HTMLInputElement).value)
-                }
-                label='Sub familie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                error={!!formik.errors.subfamily}
-                helperText={formik.errors.subfamily as string}
-                required
-              />,
-              <Input
-                type='text'
-                value={formik.values.familyCode}
-                onChange={event =>
-                  formik.setFieldValue('familyCode', (event.target as HTMLInputElement).value)
-                }
-                label='Cod familie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                error={!!formik.errors.familyCode}
-                helperText={formik.errors.familyCode as string}
-                required
-              />,
-              <Input
-                type='text'
-                value={formik.values.family}
-                onChange={event =>
-                  formik.setFieldValue('family', (event.target as HTMLInputElement).value)
-                }
-                label='Familie'
-                variant='outlined'
-                style={{ width: '100%' }}
-                error={!!formik.errors.family}
-                helperText={formik.errors.family as string}
-                required
-              />,
-              <Input
-                type='text'
-                value={formik.values.districtCode}
-                onChange={event =>
-                  formik.setFieldValue('districtCode', (event.target as HTMLInputElement).value)
-                }
-                label='Cod raion'
-                variant='outlined'
-                style={{ width: '100%' }}
-                error={!!formik.errors.districtCode}
-                helperText={formik.errors.districtCode as string}
-                required
-              />,
-              <Input
-                type='text'
-                value={formik.values.district}
-                onChange={event =>
-                  formik.setFieldValue('district', (event.target as HTMLInputElement).value)
-                }
-                label='Raion'
-                variant='outlined'
-                style={{ width: '100%' }}
-                error={!!formik.errors.district}
-                helperText={formik.errors.district as string}
-                required
-              />,
-              <Input
-                type='number'
-                value={formik.values.validityThreshold}
-                onChange={event =>
-                  formik.setFieldValue('validityThreshold', (event.target as HTMLInputElement).value)
-                }
-                label='Prag valabilitate'
-                variant='outlined'
-                style={{ width: '100%' }}
-                error={!!formik.errors.validityThreshold}
-                helperText={formik.errors.validityThreshold as string}
-                required
-              />
-            ]}
-            itemsPerRow={2}
-          />,
-          <ModalFormActionButtons
-            onCancel={() => closeModal()}
-            onSubmit={() => formik.handleSubmit()}
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Input
+            type="text"
+            value={editItem?.sfaCode}
+            label="Cod subfamilie"
+            variant="outlined"
+            style={{ width: '100%' }}
+            required
+            disabled
           />
-        ]}
-        itemsPerRow={1}
-      />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Input
+            type="text"
+            value={editItem?.sfaName}
+            label="Subfamilie"
+            variant="outlined"
+            style={{ width: '100%' }}
+            required
+            disabled
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Input
+            type="text"
+            value={editItem?.famCode}
+            label="Cod familie"
+            variant="outlined"
+            style={{ width: '100%' }}
+            required
+            disabled
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Input
+            type="text"
+            value={editItem?.famName}
+            label="Familie"
+            variant="outlined"
+            style={{ width: '100%' }}
+            required
+            disabled
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Input
+            type="text"
+            value={editItem?.rayCode}
+            label="Cod raion"
+            variant="outlined"
+            style={{ width: '100%' }}
+            required
+            disabled
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Input
+            type="text"
+            value={editItem?.rayName}
+            label="Raion"
+            variant="outlined"
+            style={{ width: '100%' }}
+            required
+            disabled
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Input
+            type="number"
+            value={formik.values.validityLimit}
+            onChange={event =>
+              formik.setFieldValue('validityLimit', (event.target as HTMLInputElement).value)
+            }
+            label="Prag valabilitate"
+            variant="outlined"
+            style={{ width: '100%' }}
+            error={!!formik.errors.validityLimit}
+            helperText={formik.errors.validityLimit as string}
+            required
+          />
+
+          <Grid item xs={12} mt={2} container justifyContent="space-between">
+            <Grid>
+              <Button
+                size="large"
+                variant="outlined"
+                label="Anuleaza"
+                onClick={() => closeModal()}
+              />
+            </Grid>
+
+            <Grid>
+              <Button
+                size="large"
+                variant="contained"
+                label="Salveaza"
+                onClick={() => formik.handleSubmit()}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </Modal>
   )
 }
