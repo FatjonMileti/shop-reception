@@ -20,6 +20,7 @@ const EmployeesStatus = () => {
   const [tableItems, setTableItems] = useState([])
 
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
 
   const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
   const [shiftCategoryFilterValue, setShiftCategoryFilterValue] = useState<ValueLabelInterface>(
@@ -34,6 +35,7 @@ const EmployeesStatus = () => {
   const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -72,6 +74,7 @@ const EmployeesStatus = () => {
   const handleShiftCategoryOptionChange = value => {
     setShiftCategoryFilterValue(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   return (
@@ -137,6 +140,8 @@ const EmployeesStatus = () => {
           totalCount={totalCount}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
+          shouldResetPage={shouldResetPage}
+          setShouldResetPage={setShouldResetPage}
           rowActionsWidth="130px"
         />
       )}
