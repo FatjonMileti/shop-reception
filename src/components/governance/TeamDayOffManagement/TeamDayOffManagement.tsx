@@ -36,6 +36,7 @@ const TeamDayOffManagement = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [isPublicHolidaysModalOpen, setIsPublicHolidaysModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<TeamDayOffManagementItem>()
 
   const { showNotification } = useNotification()
@@ -100,6 +101,7 @@ const TeamDayOffManagement = () => {
   const handleFilterChange = value => {
     setDomainFilterValue(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -212,6 +214,8 @@ const TeamDayOffManagement = () => {
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
+            shouldResetPage={shouldResetPage}
+            setShouldResetPage={setShouldResetPage}
             filters={tableFilterFields}
             rowActions={[
               canEdit && {

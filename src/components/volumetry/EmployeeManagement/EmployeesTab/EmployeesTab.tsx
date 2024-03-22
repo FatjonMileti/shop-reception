@@ -20,6 +20,7 @@ import { roles } from '../../helpers'
 const EmployeesTab = () => {
   const [locationsFilterValue, setLocationsFilterValue] = useState<ValueLabelInterface>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
@@ -38,6 +39,7 @@ const EmployeesTab = () => {
   const handleFilterChange = value => {
     setLocationsFilterValue(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -143,6 +145,8 @@ const EmployeesTab = () => {
               totalCount={totalCount}
               shouldRefreshData={shouldRefreshData}
               setShouldRefreshData={setShouldRefreshData}
+              shouldResetPage={shouldResetPage}
+              setShouldResetPage={setShouldResetPage}
               filters={tableFilterFields}
               filtersLabel="Filtreaza"
               appliedFiltersLabel="Filtre"

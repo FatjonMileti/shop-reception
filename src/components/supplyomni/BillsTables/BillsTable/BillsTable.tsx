@@ -42,6 +42,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
   const [tableFilters, setTableFilters] = useState<TableFilters>(defaultTableFilters)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
 
   const [isPrepareOrderModalOpen, setIsPrepareOrderModalOpen] = useState<boolean>(false)
 
@@ -56,11 +57,13 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
   const handleDeliveryOptionFilterChange = (value): void => {
     setSelectedDeliveryOption(value || null)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const handleWithMyOrdersFilterChange = (value): void => {
     setWithMyOrders(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const columnsWithActions = useMemo(() => {
@@ -245,6 +248,8 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           applyFiltersButtonLabel={'Confirma'}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
+          shouldResetPage={shouldResetPage}
+          setShouldResetPage={setShouldResetPage}
         />
       </Box>
     </div>

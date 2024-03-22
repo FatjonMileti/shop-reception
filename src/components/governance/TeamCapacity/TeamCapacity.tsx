@@ -34,6 +34,7 @@ const TeamCapacity = () => {
   })
 
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
 
   const { showNotification } = useNotification()
 
@@ -62,6 +63,7 @@ const TeamCapacity = () => {
   const handleFilterChange = value => {
     setDomainFilterValue(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -130,6 +132,8 @@ const TeamCapacity = () => {
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
+            shouldResetPage={shouldResetPage}
+            setShouldResetPage={setShouldResetPage}
             filters={tableFilterFields}
           />
         </Box>

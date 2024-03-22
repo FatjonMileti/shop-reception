@@ -74,6 +74,7 @@ const TeamAssignment: React.FC = props => {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<TeamAssignmentItem | number>(0)
 
   const [tableFilter, setTableFilter] = useState<TeamAssignmentTableFilter>({
@@ -109,6 +110,7 @@ const TeamAssignment: React.FC = props => {
   const handleFilterChange = value => {
     setDomainFilterValue(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -236,6 +238,8 @@ const TeamAssignment: React.FC = props => {
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
+            shouldResetPage={shouldResetPage}
+            setShouldResetPage={setShouldResetPage}
             filters={tableFilterFields}
             rowActions={[
               canEdit && {
