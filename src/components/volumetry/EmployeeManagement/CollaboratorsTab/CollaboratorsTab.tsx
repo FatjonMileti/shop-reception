@@ -30,6 +30,7 @@ const CollaboratorsTab = () => {
 
   const [locationsFilterValue, setLocationsFilterValue] = useState<ValueLabelInterface>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
@@ -60,6 +61,7 @@ const CollaboratorsTab = () => {
   const handleFilterChange = value => {
     setLocationsFilterValue(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const tableFilters = useMemo(
@@ -154,6 +156,8 @@ const CollaboratorsTab = () => {
               totalCount={totalCount}
               shouldRefreshData={shouldRefreshData}
               setShouldRefreshData={setShouldRefreshData}
+              shouldResetPage={shouldResetPage}
+              setShouldResetPage={setShouldResetPage}
               filters={tableFilters}
               filtersLabel="Filtreaza"
               appliedFiltersLabel="Filtre"
