@@ -147,27 +147,11 @@ export const columns: any[] = [
     render: (row: any) => row.consumedAmount || ''
   },
   {
-    title: 'Data deschidere',
-    field: 'consumedAmount',
-    align: 'left',
-    type: 'string',
-    width: '90px',
-    render: (row: any) => formatBakeryPayloadDate(row.verifiedDate)
-  },
-  {
     title: 'Nr. zile DLC',
     field: 'dlcDays',
     align: 'left',
     type: 'string',
     width: '50px'
-  },
-  {
-    title: 'DLC Secundar',
-    field: 'dlcDays',
-    align: 'left',
-    type: 'string',
-    width: '80px',
-    render: (row: any) => formatBakeryPayloadDate(row.secondaryDlc)
   }
 ]
 

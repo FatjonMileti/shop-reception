@@ -128,28 +128,12 @@ export const columns: any[] = [
     render: (row: any) => row.consumedAmount || ''
   },
   {
-    title: 'Data deschidere',
-    field: 'consumedAmount',
-    align: 'left',
-    type: 'string',
-    width: '90px',
-    render: (row: any) => formatBakeryPayloadDate(row.verifiedDate)
-  },
-  {
     title: 'Nr. zile DLC',
     field: 'dlcDays',
     align: 'left',
     type: 'string',
     width: '50px',
     render: (row: any) => row?.dlcDays || ''
-  },
-  {
-    title: 'DLC Secundar',
-    field: 'secondaryDlc',
-    align: 'left',
-    type: 'string',
-    width: '80px',
-    render: (row: any) => formatBakeryPayloadDate(row.secondaryDlc)
   }
 ]
 
