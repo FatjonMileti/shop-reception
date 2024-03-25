@@ -39,7 +39,7 @@ export const validationSchema = Yup.object().shape({
   chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
   productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
   quantity: Yup.number().required('Campul cantitate trebuie completat'),
-  thermalCondition: Yup.string().required('Campul stare termica trebuie selectat.'),
+  thermalCondition: Yup.string().nullable(), //.required('Campul stare termica trebuie selectat.'),
   conform: Yup.boolean(),
   product: Yup.object().required(),
 
@@ -147,27 +147,11 @@ export const columns: any[] = [
     render: (row: any) => row.consumedAmount || ''
   },
   {
-    title: 'Data deschidere',
-    field: 'consumedAmount',
-    align: 'left',
-    type: 'string',
-    width: '90px',
-    render: (row: any) => formatBakeryPayloadDate(row.verifiedDate)
-  },
-  {
     title: 'Nr. zile DLC',
     field: 'dlcDays',
     align: 'left',
     type: 'string',
     width: '50px'
-  },
-  {
-    title: 'DLC Secundar',
-    field: 'dlcDays',
-    align: 'left',
-    type: 'string',
-    width: '80px',
-    render: (row: any) => formatBakeryPayloadDate(row.secondaryDlc)
   }
 ]
 

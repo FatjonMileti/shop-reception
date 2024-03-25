@@ -68,7 +68,6 @@ export const ProductDetailsBatches = ({
               />
             )}
           </Grid>
-          {/* <Grid item xs={3}></Grid> */}
 
           {formik.values.traceabilityProductionList.map((item, idx) => (
             <Fragment key={idx}>
@@ -122,7 +121,6 @@ export const ProductDetailsBatches = ({
                             ? dayjs(formik.values?.traceabilityProductionList?.[idx]?.openingDate)
                             : undefined
                         }
-                        // maxDate={dayjs()}
                         style={{ display: 'flex' }}
                       />
                     </Grid>
@@ -130,7 +128,7 @@ export const ProductDetailsBatches = ({
 
                   <Grid
                     item
-                    xs={3}
+                    xs={2}
                     display={'flex'}
                     alignSelf={'flex-start'}
                     justifyContent={'flex-end'}
@@ -231,7 +229,7 @@ export const ProductDetailsBatches = ({
                   </Grid>
                   <Grid
                     item
-                    xs={3}
+                    xs={2}
                     display={'flex'}
                     alignSelf={'flex-end'}
                     justifyContent={'flex-end'}
