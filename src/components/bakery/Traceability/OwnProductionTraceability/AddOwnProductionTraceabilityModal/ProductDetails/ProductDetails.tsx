@@ -10,8 +10,9 @@ import dayjs from 'dayjs'
 import { ProductDetailsBatches } from './ProductDetailsBatches'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { UseQueryResult } from 'react-query'
-import { toBoolean } from 'utils/helpers'
+import { formatPayloadDate, toBoolean } from 'utils/helpers'
 import { thermalContiotionOptions } from '../../../interfaces'
+import { quantityCalculation } from '../helpers'
 
 interface ProductDetailsProps {
   onCancel: () => void
@@ -23,20 +24,32 @@ interface ProductDetailsProps {
 }
 
 export const ProductDetails = (props: ProductDetailsProps) => {
-  const {
-    formik,
-    onCancel,
-    selectedProduct,
-    recipeQuery,
-    onAddBatch,
-    onAddCharge
-  } = props
+  const { formik, onCancel, selectedProduct, recipeQuery, onAddBatch, onAddCharge } = props
 
   const onDeleteBatch = id => {
     let newBatches = formik.values.traceabilityProductionList.filter(batch =>
       batch.batchId ? batch.batchId !== id : batch.childTraceabilityId !== id
     )
     formik.setFieldValue('traceabilityProductionList', newBatches)
+  }
+
+  const updateComponentQuantities = mainProductQuantity => {
+    formik.values.traceabilityProductionList.forEach((component, cIndex) => {
+      const componentQuantity = recipeQuery?.data?.[
+        (component.batchId && 'batches') || (component.childTraceabilityId && 'charges') || 'others'
+      ]?.find(c => c.componentCode === component.componentCode)?.componentQuantity
+
+      const calculatedQuantity = quantityCalculation(
+        mainProductQuantity,
+        componentQuantity,
+        recipeQuery?.data?.details?.recipeQuantity
+      )
+
+      formik.setFieldValue(
+        `traceabilityProductionList[${cIndex}].componentQuantity`,
+        calculatedQuantity
+      )
+    })
   }
 
   return (
@@ -95,6 +108,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             label="Cantitate sarja"
             onChange={({ currentTarget: { value } }) => {
               formik.setFieldValue('quantity', value)
+
+              updateComponentQuantities(value)
             }}
             value={formik.values.quantity}
             name="quantity"
@@ -125,7 +140,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             disableClearable
             options={thermalContiotionOptions}
             value={
-              thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) || null
+              thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) ||
+              null
             }
             onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
             required
