@@ -14,6 +14,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { Icon_v2 } from 'components/core-ui/Icon_v2'
+import { OwnProductionTraceabilityChildren } from './OwnProductionTraceabilityChildren'
 
 export const ReportOwnProductionTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
@@ -128,24 +129,21 @@ export const ReportOwnProductionTraceabilityPrint = () => {
         </Grid>
 
         <Grid container rowSpacing={3}>
-          <Grid item xs={12}>
-            <p className={styles.mainProductName}>{reportDataQuery?.data?.list[0].product.name}</p>
-          </Grid>
-          <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
-            <BasicTable
-              columns={selectedColumnsProduct}
-              rows={reportDataQuery?.data?.list || []}
-              containerProps={{
-                className: styles.productTableContainer
-              }}
-            />
-          </Grid>
-
           {reportDataQuery?.data?.list.map((product, tpIndex) => {
             return (
               <Grid item xs={12} container rowSpacing={'20px'} className={styles.itemWrapper}>
                 <Grid item xs={12}>
-                  <p className={styles.productName}>{product.product.name}</p>
+                  <p className={styles.mainProductName}>{product.product?.name}</p>
+                </Grid>
+
+                <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
+                  <BasicTable
+                    columns={selectedColumnsProduct}
+                    rows={[reportDataQuery?.data?.list[tpIndex]]}
+                    containerProps={{
+                      className: styles.productTableContainer
+                    }}
+                  />
                 </Grid>
 
                 <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
@@ -166,6 +164,17 @@ export const ReportOwnProductionTraceabilityPrint = () => {
                     }}
                   />
                 </Grid>
+
+                {product.traceabilityProductionList.map(
+                  (child, index) =>
+                    child.childTraceability && (
+                      <OwnProductionTraceabilityChildren
+                        child={child}
+                        selectedColumnsBatch={selectedColumnsBatch}
+                        selectedColumnsCharge={selectedColumnsCharge}
+                      />
+                    )
+                )}
               </Grid>
             )
           })}
