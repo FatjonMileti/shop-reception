@@ -5,7 +5,6 @@ import { columns, getFilters } from './helpers'
 import {
   CRUDAction,
   LocationCategoryManagementTableItem,
-  LocationManagementTableItem
 } from '../interfaces'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { useNotification } from 'hooks'

@@ -2,14 +2,14 @@ import { LocationCategoryManagementTableItem } from 'components/volumetry/interf
 import * as Yup from 'yup'
 
 export const getInitialValues = (editItem: LocationCategoryManagementTableItem) => ({
-  category: editItem?.category ?? '',
+  categoryName: editItem?.category ?? '',
   description: editItem?.description ?? '',
   locationType: editItem ? { value: editItem.locationType, label: editItem.locationType } : null
 })
 
 export const getValidationSchema = (item: LocationCategoryManagementTableItem) =>
   Yup.object().shape({
-    category: Yup.string().required('Acest camp este obligatoriu.'),
+    categoryName: Yup.string().required('Acest camp este obligatoriu.'),
     description: Yup.string().required('Acest camp este obligatoriu.'),
     locationType: Yup.object()
     .shape({

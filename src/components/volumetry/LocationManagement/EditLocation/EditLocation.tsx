@@ -13,7 +13,7 @@ import { CircularProgress, Grid } from '@mui/material'
 import { Button, Checkbox, Input, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useMutation } from 'react-query'
-import { makeCorePutRequest } from 'utils/api'
+import { makeCorePatchRequest, makeCorePutRequest } from 'utils/api'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import {
   getCategoriesOptions,
@@ -40,7 +40,7 @@ const EditLocation: React.FC<EditLocationProps> = props => {
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
   const submitLocation = async (values: LocationItemPayload) => {
-    await makeCorePutRequest(`/volumetry/location/${editItemId}`, values)
+    await makeCorePatchRequest(`/locations/${editItemId}/volumetry-category`, values)
   }
 
   const { isLoading, mutate } = useMutation(submitLocation, {

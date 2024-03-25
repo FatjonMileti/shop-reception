@@ -119,7 +119,7 @@ export interface LocationItemForm {
 
 export interface LocationItemPayload {
   regionId: string | number
-  categoryId: string | number
+  volumetryLocationCategoryId: string | number
 }
 
 export interface EditLocationProps {
