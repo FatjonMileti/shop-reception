@@ -12,6 +12,7 @@ import { UseQueryResult } from 'react-query'
 import { toBoolean } from 'utils/helpers'
 import { useSelectProductSearch } from '../../../useSelectProductSearch'
 import { thermalContiotionOptions } from '../../../interfaces'
+import { quantityCalculation } from '../../AddOwnProductionTraceabilityModal/helpers'
 
 interface ProductDetailsProps {
   onAddCharge: (componentMetiCode: string | number) => void
@@ -41,6 +42,25 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     formik.setFieldValue('traceabilityProductionList', newBatches)
   }
   const isXs = useMediaQuery('(max-width:624px)')
+
+  const updateComponentQuantities = mainProductQuantity => {
+    formik.values.traceabilityProductionList.forEach((component, cIndex) => {
+      const componentQuantity = recipeQuery?.data?.[
+      (component.batchId && 'batches') || (component.childTraceabilityId && 'charges') || 'others'
+        ]?.find(c => c.componentCode === component.componentCode)?.componentQuantity
+
+      const calculatedQuantity = quantityCalculation(
+        mainProductQuantity,
+        componentQuantity,
+        recipeQuery?.data?.details?.recipeQuantity
+      )
+
+      formik.setFieldValue(
+        `traceabilityProductionList[${cIndex}].componentQuantity`,
+        calculatedQuantity
+      )
+    })
+  }
 
   return (
     <Grid container rowSpacing={3.5}>
@@ -125,6 +145,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
               label="Cantitate sarja"
               onChange={({ currentTarget: { value } }) => {
                 formik.setFieldValue('quantity', value)
+
+                updateComponentQuantities(value)
               }}
               value={formik.values.quantity}
               name="quantity"
