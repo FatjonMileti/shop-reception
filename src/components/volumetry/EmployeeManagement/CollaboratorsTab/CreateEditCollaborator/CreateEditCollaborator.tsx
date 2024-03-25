@@ -67,7 +67,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any, { resetForm }) => {
-      mutate(toCollaboratorPayload(values))
+      mutate(toCollaboratorPayload(values, editItem, departmentsOptions))
       resetForm()
     }
   })
@@ -80,7 +80,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
       isModalOpen={isModalOpen}
       closeModal={closeModal}
       modalTitle={editItem ? 'Editeaza colaborator' : 'Adauga colaborator'}
-      modalWidth="50%"
+      modalWidth="30%"
     >
       <Grid container spacing={4}>
         {(isLoading || isDepartmentsOptionsLoading || isContractorsTypesOptions) && (

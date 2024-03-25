@@ -19,7 +19,6 @@ export const getDepartmentsOptions = (
       if (resultOptions?.length && !!setDefaultOptionCallback) {
         setDefaultOptionCallback(resultOptions[0])
       }
-
       return resultOptions || []
     },
     {
@@ -92,7 +91,7 @@ export const getCollaboratorsTypesOptions = (showNotification: Function) => {
   return useQuery(
     ['contractors-types'],
     async () => {
-      const result = await makeCoreGetRequest('/workers/contractors/types')
+      const result = await makeCoreGetRequest('/volumetry/workers/contractors/types')
       const resultOptions = result.map(
         (item: { id: number; description: string }): ValueLabelInterface => ({
           label: item.description,
