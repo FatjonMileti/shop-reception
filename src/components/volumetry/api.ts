@@ -87,6 +87,27 @@ export const getJobTitlesOptions = (showNotification: Function) => {
   )
 }
 
+
+export const getCollaboratorsTypesOptions = (showNotification: Function) => {
+  return useQuery(
+    ['contractors-types'],
+    async () => {
+      const result = await makeCoreGetRequest('/workers/contractors/types')
+      const resultOptions = result.map(
+        (item: { id: number; description: string }): ValueLabelInterface => ({
+          label: item.description,
+          value: item.id
+        })
+      )
+
+      return resultOptions || []
+    },
+    {
+      onError: error => handleQueryError(error, 'Error while fetching contractors types', showNotification)
+    }
+  )
+}
+
 export const getLocationsOptions = (
   showNotification: Function,
   setLocationsFilterValue: Function,

@@ -125,8 +125,6 @@ const CollaboratorsTab = () => {
           setShouldRefreshData={setShouldRefreshData}
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
-          jobTitlesOptions={jobTitlesOptions}
-          isjobTitlesOptionsLoading={isjobTitlesOptionsLoading}
         />
         <DeleteCollaborator
           isModalOpen={modal === 'delete'}
@@ -141,8 +139,6 @@ const CollaboratorsTab = () => {
           setShouldRefreshData={setShouldRefreshData}
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
-          jobTitlesOptions={jobTitlesOptions}
-          isjobTitlesOptionsLoading={isjobTitlesOptionsLoading}
         />
 
         {canUseCustomFilter ? (
