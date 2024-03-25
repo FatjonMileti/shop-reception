@@ -1,8 +1,9 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
 export const getInitialValues = recipeQuery => {
+
   return {
     productionDate: dayjs(),
     chargeNumber: null,
@@ -18,7 +19,7 @@ export const getInitialValues = recipeQuery => {
         componentCode,
         componentName,
         componentQuantity,
-        quantity: componentQuantity
+        quantity: undefined
       })) || []
   }
 }
