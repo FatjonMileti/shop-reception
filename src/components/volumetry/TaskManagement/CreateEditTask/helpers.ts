@@ -2,7 +2,7 @@ import * as Yup from 'yup'
 
 const getFrequencyValue = frequency => frequency.map(f => ({ label: f.value, value: f.key }))
 
-export const getInitialValues = item => {
+export const getInitialValues = (item, categoryFilterValue) => {
   return {
     ...(item?.id ? { id: item?.id } : {}),
     name: item?.name ?? '',
@@ -14,7 +14,7 @@ export const getInitialValues = item => {
       : null,
     volumetryLocationCategory: item
       ? { label: item.locationCategoryValue, value: item.locationCategoryId }
-      : null,
+      : categoryFilterValue,
     recommendedStartHour: item?.recommendedStartHour ?? null,
     recommendedEndHour: item?.recommendedEndHour ?? null,
     frequency: item?.frequency ? getFrequencyValue(item.frequency) : [],

@@ -19,7 +19,6 @@ export const getDepartmentsOptions = (
       if (resultOptions?.length && !!setDefaultOptionCallback) {
         setDefaultOptionCallback(resultOptions[0])
       }
-
       return resultOptions || []
     },
     {
@@ -83,6 +82,27 @@ export const getJobTitlesOptions = (showNotification: Function) => {
     },
     {
       onError: error => handleQueryError(error, 'Error while fetching job titles', showNotification)
+    }
+  )
+}
+
+
+export const getCollaboratorsTypesOptions = (showNotification: Function) => {
+  return useQuery(
+    ['contractors-types'],
+    async () => {
+      const result = await makeCoreGetRequest('/volumetry/workers/contractors/types')
+      const resultOptions = result.map(
+        (item: { id: number; description: string }): ValueLabelInterface => ({
+          label: item.description,
+          value: item.id
+        })
+      )
+
+      return resultOptions || []
+    },
+    {
+      onError: error => handleQueryError(error, 'Error while fetching contractors types', showNotification)
     }
   )
 }

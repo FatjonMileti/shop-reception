@@ -28,6 +28,7 @@ const TaskManagement = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
   const [selectedRowId, setSelectedRowId] = useState<string | number>(null)
 
   const { showNotification } = useNotification()
@@ -87,6 +88,7 @@ const TaskManagement = () => {
   const handleFilterChange = value => {
     setCategoryFilterValue(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   return (
@@ -117,12 +119,14 @@ const TaskManagement = () => {
           isModalOpen={modal === 'create'}
           closeModal={closeModal}
           setShouldRefreshData={setShouldRefreshData}
+          categoryFilterValue={categoryFilterValue}
         />
         <CreateEditTask
           isModalOpen={modal === 'edit'}
           closeModal={closeModal}
           editItemId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
+          categoryFilterValue={categoryFilterValue}
           isEdit
         />
         <DeleteConfirmationModal
@@ -147,6 +151,8 @@ const TaskManagement = () => {
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
+            shouldResetPage={shouldResetPage}
+            setShouldResetPage={setShouldResetPage}
             filters={buildTableFilterFields(
               departmentOptions || [],
               priorityOprions || [],

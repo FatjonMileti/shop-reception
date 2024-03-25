@@ -12,6 +12,8 @@ const Table = props => {
     totalCount,
     shouldRefreshData,
     setShouldRefreshData,
+    shouldResetPage,
+    setShouldResetPage,
     rowsPerPage,
     rowsPerPageOptions,
     ...rest
@@ -32,8 +34,12 @@ const Table = props => {
     ;(async () => {
       if (shouldRefreshData) {
         const { page, rowsPerPage, order, orderBy, searchText, filters } = tableState
-        await handleRemoteData(page, rowsPerPage, order, orderBy, searchText, filters)
+        if (!setShouldResetPage || (shouldResetPage && page === 0)) {
+          await handleRemoteData(page, rowsPerPage, order, orderBy, searchText, filters)
+        }
+
         setShouldRefreshData(false)
+        setShouldResetPage && setShouldResetPage(false)
       }
     })()
   }, [shouldRefreshData])
@@ -78,6 +84,7 @@ const Table = props => {
       rowsPerPage={props.rowsPerPage || 10}
       rowsPerPageOptions={props.rowsPerPageOptions}
       hasCustomPagination
+      resetPage={shouldResetPage}
     />
   )
 }
