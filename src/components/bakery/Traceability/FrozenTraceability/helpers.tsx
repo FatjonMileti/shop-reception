@@ -299,7 +299,10 @@ export const mainItemBodyColumns = [
     title: 'Sarja',
     field: 'chargeNumber'
   },
-  { title: 'Cantitate sarja', field: 'quantity' },
+  {
+    title: 'Cantitate sarja',
+    field: 'quantity'
+  },
 
 ]
 
@@ -348,7 +351,7 @@ export const selectBatchColumns: any[] = [
     align: 'left',
     type: 'string',
     width: '100px',
-    render: (row: any) => row.consumedAmount || ''
+    render: (row: any) => row.consumedAmount?.toFixed(3) || ''
   },
   {
     title: 'Nr. zile DLC',

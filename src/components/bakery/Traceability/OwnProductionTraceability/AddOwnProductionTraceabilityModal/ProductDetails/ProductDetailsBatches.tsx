@@ -53,7 +53,7 @@ export const ProductDetailsBatches = ({
                 formik.values.quantity,
                 batch.componentQuantity,
                 receip.details.recipeQuantity
-              )}`}
+              )?.toFixed(3)}`}
               name="batchId"
               disabled
             />
@@ -181,7 +181,7 @@ export const ProductDetailsBatches = ({
                 formik.values.quantity,
                 item.componentQuantity,
                 receip.details.recipeQuantity
-              )}`}
+              )?.toFixed(3)}`}
               name="componentQuantity"
               disabled
             />
@@ -281,7 +281,7 @@ export const ProductDetailsBatches = ({
                 formik.values.quantity,
                 other.componentQuantity,
                 receip.details.recipeQuantity
-              )}`}
+              )?.toFixed(3)}`}
               name="batchId"
               disabled
             />
