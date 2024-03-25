@@ -133,7 +133,7 @@ export const ProductDetailsBatches = ({
 
                   <Grid
                     item
-                    xs={3}
+                    xs={2}
                     display={'flex'}
                     alignSelf={'flex-start'}
                     justifyContent={'flex-end'}
@@ -233,7 +233,7 @@ export const ProductDetailsBatches = ({
 
                   <Grid
                     item
-                    xs={3}
+                    xs={2}
                     display={'flex'}
                     alignSelf={'flex-start'}
                     justifyContent={'flex-end'}
