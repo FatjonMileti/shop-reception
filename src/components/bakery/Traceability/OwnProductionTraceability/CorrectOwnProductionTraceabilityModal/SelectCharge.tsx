@@ -6,16 +6,19 @@ import { useNotification } from 'hooks'
 import { useState } from 'react'
 import { chargeColumns } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
+import { formatPayloadDate } from '../../../../../utils/helpers'
 interface SelectChargeProps {
   onContinue: (charges: any[]) => void
   onCancel: () => void
   componentMetiCode: string | number
+  productionDate: string
 }
 
 export const SelectCharge = ({
   onContinue,
   onCancel,
   componentMetiCode,
+  productionDate
 }: SelectChargeProps) => {
   const { showNotification } = useNotification()
 
@@ -30,13 +33,19 @@ export const SelectCharge = ({
       setIsLoading(true)
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/traceability/production',
+          url: '/bakery/traceability/production/assign',
           page,
           rowsPerPage,
           filters: [
             {
               name: 'product.metiCode',
               value: componentMetiCode
+            }
+          ],
+          extraCustomUrlParams: [
+            {
+              name: 'productionDate',
+              value: formatPayloadDate(productionDate)
             }
           ]
         })

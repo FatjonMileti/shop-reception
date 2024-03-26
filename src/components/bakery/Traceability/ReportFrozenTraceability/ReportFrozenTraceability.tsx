@@ -317,7 +317,8 @@ export const ReportFrozenTraceability = () => {
         />
       ),
       type: 'date',
-      label: 'Data inceput productie'
+      label: 'Data inceput productie',
+      required: true
     },
     {
       name: 'endDate',
@@ -333,7 +334,8 @@ export const ReportFrozenTraceability = () => {
         />
       ),
       type: 'date',
-      label: 'Data sfarsit productie'
+      label: 'Data sfarsit productie',
+      required: true
     },
     {
       name: 'product.family',

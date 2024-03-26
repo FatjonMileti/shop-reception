@@ -39,14 +39,8 @@ export const ReceivedProducts = () => {
   const [isEditModalOpen, setEditModalOpen] = React.useState<boolean>(false)
 
   const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
-  const [tableState, setTableState] = useState<{
-    tableFilters: Filter[]
-    rowsPerPage: number
-  }>({
-    tableFilters: null,
-    rowsPerPage: null
-  })
 
   const { showNotification } = useNotification()
 
@@ -74,11 +68,6 @@ export const ReceivedProducts = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
 
-      setTableState(tableState => ({
-        ...tableState,
-        tableFilters,
-        rowsPerPage
-      }))
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -189,7 +178,7 @@ export const ReceivedProducts = () => {
         isModalOpen={isAddModalOpen}
         closeModal={() => setAddModalOpen(false)}
         onSuccess={() => {
-          fetchData(0, tableState.rowsPerPage, tableState.tableFilters, '')
+          setShouldRefreshData(true)
         }}
       />
       <CorrectReceivedProduct
@@ -199,6 +188,7 @@ export const ReceivedProducts = () => {
           setSelectedRowId(0)
         }}
         batchId={selectedRowId}
+        setShouldRefreshData={setShouldRefreshData}
       />
       <EditReceivedProduct
         isModalOpen={isEditModalOpen}
@@ -207,6 +197,7 @@ export const ReceivedProducts = () => {
           setSelectedRowId(0)
         }}
         batchId={selectedRowId}
+        setShouldRefreshData={setShouldRefreshData}
       />
       <ListTable
         totalCount={totalCount}
@@ -291,6 +282,8 @@ export const ReceivedProducts = () => {
         rowActionsWidth="200px"
         rowsPerPage={isXs ? 5 : 25}
         rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
+        setShouldRefreshData={setShouldRefreshData}
+        shouldRefreshData={shouldRefreshData}
       />
     </div>
   )

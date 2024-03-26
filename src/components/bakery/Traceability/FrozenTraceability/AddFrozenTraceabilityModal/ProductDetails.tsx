@@ -220,6 +220,8 @@ export const ProductDetails = ({
                 value={item.quantity}
                 name="quantity"
                 infoIcon={selectedProduct?.metricUnit || ''}
+                helperText={formik.errors?.traceabilityFrozenList?.[index]?.quantity as string}
+                error={!!formik.errors?.traceabilityFrozenList?.[index]?.quantity}
               />
             </Grid>
             {item.hasSecondaryDlc && (

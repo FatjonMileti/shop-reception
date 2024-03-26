@@ -144,7 +144,6 @@ export const ProductDetails = (props: ProductDetailsProps) => {
               null
             }
             onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
-            required
             error={!!formik.errors.thermalCondition}
             helperText={formik.errors.thermalCondition as string}
           />

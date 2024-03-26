@@ -55,7 +55,7 @@ export const AddFrozenTraceabilityModal = ({
     validateOnChange: false,
     enableReinitialize: false,
     validationSchema,
-    initialValues: initialValues,
+    initialValues,
     onSubmit: async (values: any) => {
       const payload = {
         productId: selectedProduct.id,
