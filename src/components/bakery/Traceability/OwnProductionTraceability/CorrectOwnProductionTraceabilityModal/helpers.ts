@@ -49,7 +49,7 @@ export const validationSchema = Yup.object().shape({
       childTraceabilityId: Yup.string(),
       componentCode: Yup.number(),
       componentQuantity: Yup.number(),
-      quantity: Yup.number(),
+      quantity: Yup.number().required('Cantitate obligatorie'),
       openingDate: Yup.date().when(
         ['hasSecondaryDlc', 'batchId'],
         ([hasSecondaryDlc, batchId], schema) => {

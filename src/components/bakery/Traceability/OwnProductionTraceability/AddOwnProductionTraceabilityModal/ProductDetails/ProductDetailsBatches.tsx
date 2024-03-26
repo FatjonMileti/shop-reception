@@ -103,6 +103,8 @@ export const ProductDetailsBatches = ({
                       value={item.quantity}
                       name="quantity"
                       infoIcon={productMetricUnit}
+                      helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
+                      error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                     />
                   </Grid>
 
@@ -228,6 +230,8 @@ export const ProductDetailsBatches = ({
                       value={charge.quantity}
                       name="quantity"
                       infoIcon={productMetricUnit}
+                      helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
+                      error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                     />
                   </Grid>
 
@@ -304,6 +308,8 @@ export const ProductDetailsBatches = ({
                     value={item.quantity}
                     name="quantity"
                     infoIcon={productMetricUnit}
+                    helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
+                    error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                   />
                 </Grid>
               ) || null}

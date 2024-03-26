@@ -247,6 +247,8 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
                 value={item.quantity}
                 name="quantity"
                 infoIcon={formik.values?.product?.metricUnit || ''}
+                helperText={formik.errors?.traceabilityFrozenList?.[index]?.quantity as string}
+                error={!!formik.errors?.traceabilityFrozenList?.[index]?.quantity}
               />
             </Grid>
 

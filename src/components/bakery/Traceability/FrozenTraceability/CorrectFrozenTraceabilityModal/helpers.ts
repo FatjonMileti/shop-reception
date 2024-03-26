@@ -34,7 +34,7 @@ export const validationSchema = Yup.object().shape({
     Yup.object()
       .shape({
         batchId: Yup.string(),
-        quantity: Yup.number().positive(),
+        quantity: Yup.number().required('Cantitate obligatorie').positive('Cantitatea trebuie sa fie pozitiva'),
         openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
           if (hasSecondaryDlc) {
             return schema.required('Data obligatorie')
