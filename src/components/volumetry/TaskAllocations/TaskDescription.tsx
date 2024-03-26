@@ -1,9 +1,9 @@
-import { Button, ListTableActionsItems } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, IconButton, ListTableActionsItems } from '@fullscreendigital/carrefour-dex-fe'
 import { Box, Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import AssignEmployee from './AssignEmployee'
 import { toEmployeesItems } from './serializers'
-import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { DeleteActionIcon, EditActionIcon, RefreshIcon } from 'icons'
 import { EditAllocationModal } from './EditAllocationModal'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { CRUDAction } from '../interfaces'
@@ -102,6 +102,13 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             label="Selecteaza angajat"
             onClick={() => openModal('read')}
             style={{ textTransform: 'none', width: isMobile ? '100%' : 'auto' }}
+          />
+          <IconButton
+            onClick={() => setShouldRefreshData(true)}
+            label="Reincarca datele"
+            variant="outlined"
+            startIcon={<RefreshIcon />}
+            style={isMobile ? { width: '100%', marginTop: '12px' } : { float: 'right' }}
           />
         </Grid>
       )}
