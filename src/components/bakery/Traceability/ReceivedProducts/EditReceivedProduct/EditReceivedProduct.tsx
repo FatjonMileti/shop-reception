@@ -34,6 +34,7 @@ interface EditReceivedProductProps {
   isModalOpen: boolean
   closeModal: () => void
   batchId?: string | number
+  setShouldRefreshData: (should: boolean) => void
 }
 
 export const BATCH_STATUS = {
@@ -57,7 +58,8 @@ const closeReasonOptions = [
 export const EditReceivedProduct = ({
   isModalOpen,
   closeModal,
-  batchId
+  batchId,
+  setShouldRefreshData
 }: EditReceivedProductProps) => {
   const { showNotification } = useNotification()
 
@@ -116,6 +118,7 @@ export const EditReceivedProduct = ({
           message: `Product added successfully`,
           type: 'success'
         })
+        setShouldRefreshData(true)
       },
       onError: res => {
         showNotification({

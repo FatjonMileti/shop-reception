@@ -158,7 +158,13 @@ export const infoColumns: any[] = [
   },
   {
     title: 'Verificare de catre validator trasabilitate',
-    field: 'verified'
+    field: 'isVerified',
+    render: row => (
+      <BodyItem
+        name="Verificare de catre validator trasabilitat"
+        value={<IconCell value={row.isVerified ? 'active' : 'inactive'} />}
+      />
+    )
   },
   {
     title: 'Validator trasabilitate',
@@ -196,5 +202,5 @@ export const infoColumns: any[] = [
         }
       />
     )
-  },
+  }
 ]
