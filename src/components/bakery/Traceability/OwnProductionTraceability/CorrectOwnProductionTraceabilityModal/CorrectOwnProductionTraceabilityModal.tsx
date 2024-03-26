@@ -275,6 +275,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
                     setStep(0)
                   }}
                   componentMetiCode={componentMetiCode}
+                  productionDate={formik.values.productionDate}
                 />
               ][step]
             }
