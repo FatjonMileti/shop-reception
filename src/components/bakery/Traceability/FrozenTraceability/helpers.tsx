@@ -12,7 +12,10 @@ export const columns: any[] = [
     title: 'Data intrare in raion',
     field: 'batch.entryDate',
     render: row => (
-      <BodyItem name="Data intrare in raion" value={formatBakeryPayloadDate(row?.batch?.entryDate)} />
+      <BodyItem
+        name="Data intrare in raion"
+        value={formatBakeryPayloadDate(row?.batch?.entryDate)}
+      />
     )
   },
   {
@@ -210,7 +213,7 @@ export const columns: any[] = [
         value={formatBakeryPayloadDate(row?.batch?.modifiedDate)}
       />
     )
-  },
+  }
 ]
 
 export const mainItemBodyColumns = [
@@ -274,7 +277,13 @@ export const mainItemBodyColumns = [
   },
   {
     title: 'Verificare de catre validator trasabilitate',
-    field: 'verified'
+    field: 'isVerified',
+    render: row => (
+      <BodyItem
+        name="Verificare de catre validator trasabilitate"
+        value={<IconCell value={row.isVerified ? 'active' : 'inactive'} />}
+      />
+    )
   },
   {
     title: 'Validator trasabilitate',
@@ -302,8 +311,7 @@ export const mainItemBodyColumns = [
   {
     title: 'Cantitate sarja',
     field: 'quantity'
-  },
-
+  }
 ]
 
 export const selectBatchColumns: any[] = [

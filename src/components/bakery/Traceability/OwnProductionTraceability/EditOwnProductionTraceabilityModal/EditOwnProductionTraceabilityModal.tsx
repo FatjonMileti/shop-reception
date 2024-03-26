@@ -65,7 +65,7 @@ export const EditOwnProductionTraceabilityModal = ({
       conform: item?.conform || false,
       nonComplianceReason: item?.nonComplianceReason || '',
       productDestination: item?.productDestination || '',
-      isVerified: item?.verified || false
+      isVerified: item?.isVerified || false
     },
     onSubmit: async (values: any) => {
       itemToEditMutation.mutate(values)
