@@ -11,7 +11,6 @@ export const productPrintColumns = [
     title: 'Cod METI',
     field: 'product.metiCode',
     render: row => row.product.metiCode,
-    width: '600px'
   },
   {
     title: 'Cod PLU',
@@ -56,7 +55,6 @@ export const productPrintColumns = [
     field: 'product.metricUnit',
     render: row => row.product.metricUnit,
     defaultPrintSelected: true,
-    width: '150px'
   },
   {
     title: 'Stare termica',
