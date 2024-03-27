@@ -6428,6 +6428,64 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "9bbdde57-ce99-4914-90f0-59556ef142e6",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "meti-products",
+      "responses": [
+        {
+          "uuid": "92e5bfd6-aea3-4594-a3aa-0d9b5d8677d9",
+          "body": "{\n  \"list\": [\n    {\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"lifetimeDays\": 0,\n      \"rayon\": \"string\",\n      \"family\": \"string\",\n      \"subFamily\": \"string\",\n      \"validityLimit\": 0\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ce8f2b92-c79b-4655-afdc-f70f3fe054cb",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "products/measurement-units",
+      "responses": [
+        {
+          "uuid": "e5bb5f7c-83e0-4e24-86cb-30c312891d7d",
+          "body": "[\n  {\n    \"key\": \"string\",\n    \"value\": \"string\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6786,6 +6844,14 @@
     {
       "type": "route",
       "uuid": "3ea20e9d-3e97-4c4d-b462-2ce5ba9cf669"
+    },
+    {
+      "type": "route",
+      "uuid": "9bbdde57-ce99-4914-90f0-59556ef142e6"
+    },
+    {
+      "type": "route",
+      "uuid": "ce8f2b92-c79b-4655-afdc-f70f3fe054cb"
     }
   ],
   "proxyMode": false,

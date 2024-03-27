@@ -238,14 +238,14 @@ interface MetiFile {
 
 interface MetiProduct {
   id: number
-  productCode: string
-  productName: string
-  measurementUnit: string
-  validDays: string
-  district: string
+  code: string
+  name: string
+  unit: string
+  lifetimeDays: number
+  rayon: string
   family: string
-  subfamily: string
-  subfamilyValidityThreshold: string
+  subFamily: string
+  validityLimit: number
 }
 
 interface PackagingCompliance {
