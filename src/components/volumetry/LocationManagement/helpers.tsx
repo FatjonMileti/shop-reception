@@ -9,12 +9,6 @@ export const columns = [
     type: 'string'
   },
   {
-    title: 'Regiune',
-    field: 'region',
-    align: 'left',
-    type: 'string'
-  },
-  {
     title: 'Business unit',
     field: 'category',
     align: 'left',
