@@ -196,7 +196,7 @@ export const AddOwnProductionTraceabilityModal = ({
       formik.values.quantity,
       componentQuantity,
       recipeQuery?.data?.details?.recipeQuantity
-    )
+    ).toFixed(3)
 
     formik.setFieldValue('traceabilityProductionList', [
       ...formik.values.traceabilityProductionList,
@@ -221,7 +221,7 @@ export const AddOwnProductionTraceabilityModal = ({
       formik.values.quantity,
       componentQuantity,
       recipeQuery?.data?.details?.recipeQuantity
-    )
+    ).toFixed(3)
 
     formik.setFieldValue('traceabilityProductionList', [
       ...formik.values.traceabilityProductionList,
