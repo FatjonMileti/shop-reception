@@ -4,13 +4,13 @@ import { AutocompleteOption } from '../interfaces'
 export const columns = [
   {
     title: 'Nume locatie',
-    field: 'name',
+    field: 'locationName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Business unit',
-    field: 'category',
+    field: 'locationCategory',
     align: 'left',
     type: 'string',
     collapsible: true
@@ -30,26 +30,17 @@ export const getFilters = (
   locationTypeOptions: AutocompleteOption[]
 ) => [
   {
-    name: 'name',
+    name: 'locationName',
     label: 'Nume Locatie',
     type: 'text',
     filter: <Input type="text" name="name" label="Nume" variant="outlined" />
   },
   {
-    name: 'regionId',
-    label: 'Regiune',
-    type: 'autocomplete',
-    value: '',
-    filter: <Autocomplete label="Regiune" variant="outlined" options={regionOptions} />
-  },
-  {
-    name: 'categoryId',
+    name: 'locationCategoryId',
     label: 'Category',
     type: 'autocomplete',
     value: '',
-    filter: (
-      <Autocomplete label="Business unit" variant="outlined" options={categoryOptions} />
-    )
+    filter: <Autocomplete label="Business unit" variant="outlined" options={categoryOptions} />
   },
   {
     name: 'locationType',

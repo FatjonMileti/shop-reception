@@ -97,9 +97,8 @@ export interface AllocationListProps {
 
 export interface LocationManagementTableItem {
   id: string | number
-  name: string
-  region: string
-  category: string
+  locationName: string
+  locationCategory: string
   locationType: string
 }
 
