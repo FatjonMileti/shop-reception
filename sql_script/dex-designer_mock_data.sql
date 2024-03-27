@@ -111,7 +111,7 @@ VALUES
     (43, 'Management task template-uri', 'ManagementTasks', null, true, 8),
     (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
     (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 9),
-    -- (46, 'Raport norme', 'ReportsVolumetry', null, true, 9),
+    (46, 'Link-uri rapoarte', 'ReportsVolumetry', null, true, 9),
     (47, 'Task-uri alocate', 'AssignTasks', null, true, 8),
     (48, 'Status Angajati', 'EmployeeStatus', null, true, 8),
     (249, 'Management magazine', 'StoreManagement', null, true, 8),
@@ -247,7 +247,7 @@ VALUES
     (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocations', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
-    -- (62, 'Raport norme', '', '/volumetry/reports/dailyNorms', true, 46, true),
+    (62, 'Link-uri rapoarte', '', '/volumetry/reports/reportsLinks', true, 46, true),
     (63, 'Task-uri alocate', '', '/volumetry/tasksManagement/assignedTasks', true, 47, true),
     (64, 'Status angajati', '', '/volumetry/employee/allocatedEmployeesStatus', true, 48, true),
     (65, 'Detalii task', '', '/volumetry/tasksManagement/taskAllocation', true, 44, false),
@@ -381,7 +381,7 @@ VALUES
     -- VOLUMETRY_TASK_ALLOCATOR
     (100, 42),
     (100, 44),
-    -- (100, 46),
+    (100, 46),
     (100, 48),
     -- VOLUMETRY_WORKER
     (101, 47),
