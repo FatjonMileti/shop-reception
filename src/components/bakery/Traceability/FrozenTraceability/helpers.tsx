@@ -12,7 +12,10 @@ export const columns: any[] = [
     title: 'Data intrare in raion',
     field: 'batch.entryDate',
     render: row => (
-      <BodyItem name="Data intrare in raion" value={formatBakeryPayloadDate(row?.batch?.entryDate)} />
+      <BodyItem
+        name="Data intrare in raion"
+        value={formatBakeryPayloadDate(row?.batch?.entryDate)}
+      />
     )
   },
   {
@@ -210,7 +213,7 @@ export const columns: any[] = [
         value={formatBakeryPayloadDate(row?.batch?.modifiedDate)}
       />
     )
-  },
+  }
 ]
 
 export const mainItemBodyColumns = [
@@ -274,7 +277,13 @@ export const mainItemBodyColumns = [
   },
   {
     title: 'Verificare de catre validator trasabilitate',
-    field: 'verified'
+    field: 'isVerified',
+    render: row => (
+      <BodyItem
+        name="Verificare de catre validator trasabilitate"
+        value={<IconCell value={row.isVerified ? 'active' : 'inactive'} />}
+      />
+    )
   },
   {
     title: 'Validator trasabilitate',
@@ -299,8 +308,10 @@ export const mainItemBodyColumns = [
     title: 'Sarja',
     field: 'chargeNumber'
   },
-  { title: 'Cantitate sarja', field: 'quantity' },
-
+  {
+    title: 'Cantitate sarja',
+    field: 'quantity'
+  }
 ]
 
 export const selectBatchColumns: any[] = [
@@ -348,7 +359,7 @@ export const selectBatchColumns: any[] = [
     align: 'left',
     type: 'string',
     width: '100px',
-    render: (row: any) => row.consumedAmount || ''
+    render: (row: any) => row.consumedAmount?.toFixed(3) || ''
   },
   {
     title: 'Nr. zile DLC',

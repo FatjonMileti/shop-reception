@@ -60,11 +60,13 @@ interface CorrectReceivedProductProps {
   isModalOpen: boolean
   closeModal: () => void
   batchId?: string | number
+  setShouldRefreshData: (should: boolean) => void
 }
 export const CorrectReceivedProduct = ({
   isModalOpen,
   closeModal,
-  batchId
+  batchId,
+  setShouldRefreshData
 }: CorrectReceivedProductProps) => {
   const inputFileRef = React.useRef<HTMLInputElement>()
   const { showNotification } = useNotification()
@@ -118,9 +120,7 @@ export const CorrectReceivedProduct = ({
         batchName: form.values.lot
       }
 
-      formData.append('dto',
-        new Blob([JSON.stringify(data)], { type: 'application/json' })
-      )
+      formData.append('dto', new Blob([JSON.stringify(data)], { type: 'application/json' }))
       formData.append('fileObject', form.values.picture || null)
 
       await makeCorePutRequest(`/bakery/batch/correction/${batchId}`, formData)
@@ -131,7 +131,8 @@ export const CorrectReceivedProduct = ({
         showNotification({
           message: `Product added successfully`,
           type: 'success'
-        })
+        });
+        setShouldRefreshData(true)
       },
       onError: res => {
         showNotification({

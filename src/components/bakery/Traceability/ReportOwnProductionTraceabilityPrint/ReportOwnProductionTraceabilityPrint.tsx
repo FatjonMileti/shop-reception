@@ -165,7 +165,7 @@ export const ReportOwnProductionTraceabilityPrint = () => {
                   />
                 </Grid>
 
-                {product.traceabilityProductionList.map(
+                {product.traceabilityProductionList?.map(
                   (child, index) =>
                     child.childTraceability && (
                       <OwnProductionTraceabilityChildren
