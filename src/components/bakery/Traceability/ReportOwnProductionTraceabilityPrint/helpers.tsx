@@ -1,4 +1,5 @@
 import { formatBakeryPayloadDate } from "utils/helpers"
+import { ThermalCondition } from '../interfaces'
 
 export const productPrintColumns = [
   {
@@ -77,7 +78,7 @@ export const batchPrintColumns = [
   {
     field: 'thermalCondition',
     title: 'Stare termica',
-    render: row => row.thermalCondition,
+    render: row => ThermalCondition[row.thermalCondition] ?? '',
     width: '50px'
   },
   {
