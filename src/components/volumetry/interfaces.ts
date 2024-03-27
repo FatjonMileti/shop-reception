@@ -112,12 +112,10 @@ export interface LocationItem {
 }
 
 export interface LocationItemForm {
-  region: AsyncAutocompleteOption
   category: AsyncAutocompleteOption
 }
 
 export interface LocationItemPayload {
-  regionId: string | number
   volumetryLocationCategoryId: string | number
 }
 
