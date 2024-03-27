@@ -154,7 +154,6 @@ export const columns: Column[] = [
     )
   },
 
-
   {
     title: 'Nr. zile valabilitate DLC secundar',
     field: 'dlcDays'
@@ -244,7 +243,11 @@ export const headerItems: Column[] = [
 ]
 
 export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object().shape({
-  entryDate: Yup.mixed<dayjs.Dayjs>().required('Entry date is required'),
+  entryDate: Yup.mixed<dayjs.Dayjs>()
+    .required('Entry date is required')
+    .test('future', 'Data intrare nu poate fi in viitor', value => {
+      return value?.isBefore(dayjs())
+    }),
 
   hasExpirationDate: Yup.boolean().required('This field is required'),
   expirationDate: Yup.mixed().when('hasExpirationDate', ([hasExpirationDate], schema) => {

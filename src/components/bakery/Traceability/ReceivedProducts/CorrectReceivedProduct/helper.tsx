@@ -24,7 +24,11 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
     selectedProduct: Yup.mixed<Product>().required('Selected product is required'),
     selectedSupplier: Yup.mixed<Supplier>().required('Selected supplier is required'),
 
-    entryDate: Yup.mixed<dayjs.Dayjs>().required('Entry date is required'),
+    entryDate: Yup.mixed<dayjs.Dayjs>()
+      .required('Entry date is required')
+      .test('future', 'Data intrare nu poate fi in viitor', value => {
+        return value?.isBefore(dayjs())
+      }),
 
     hasExpirationDate: Yup.boolean().required('This field is required'),
 
