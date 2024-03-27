@@ -28,16 +28,13 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
 
     hasExpirationDate: Yup.boolean().required('This field is required'),
 
-    expirationDate: Yup.mixed().when(
-      'hasExpirationDate',
-      ([hasExpirationDate], schema) => {
-        return hasExpirationDate
-          ? Yup.date()
-              .min(dayjs().startOf('day'), 'Data de expirare nu poate fi în trecut.')
-              .required('Câmpul data expirare trebuie completat.')
-          : schema.nullable();
-      }
-    ),
+    expirationDate: Yup.mixed().when('hasExpirationDate', ([hasExpirationDate], schema) => {
+      return hasExpirationDate
+        ? Yup.date()
+            .min(dayjs().startOf('day'), 'Data de expirare nu poate fi în trecut.')
+            .required('Câmpul data expirare trebuie completat.')
+        : schema.nullable()
+    }),
 
     hasSecondaryDLC: Yup.boolean().required('This field is required'),
 
@@ -49,7 +46,7 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
 
     amount: Yup.number().positive().required('amount is required'),
 
-    lot: Yup.string().required('lot is required').max(30),
+    lot: Yup.string().required('Campul lot trebuie completat').max(30),
 
     picture: Yup.mixed<File>()
     //   .test('required', 'The picture must be a file', (value: File) => {

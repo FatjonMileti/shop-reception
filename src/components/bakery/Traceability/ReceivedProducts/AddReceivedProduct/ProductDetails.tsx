@@ -58,7 +58,7 @@ export const ProductDetails = ({
     enableReinitialize: false,
     validationSchema: productDetailsSchema,
     validateOnChange: false,
-    initialValues: initialValues,
+    initialValues,
     onSubmit: (values) => {
       onContinue(values)
     }
