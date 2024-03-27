@@ -134,9 +134,9 @@ export const batchPrintColumns = [
     defaultPrintSelected: true
   },
   {
-    field: 'reatedDate',
+    field: 'createdDate',
     title: 'Data introducere Trasabilitate',
-    render: row => formatBakeryPayloadDate(row.reatedDate),
+    render: row => formatBakeryPayloadDate(row.createdDate),
     width: '100px'
   },
   {
