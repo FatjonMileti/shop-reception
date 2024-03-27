@@ -265,7 +265,7 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
 
   amount: Yup.number().positive().required('amount is required'),
 
-  lot: Yup.string().required('lot is required').max(30),
+  lot: Yup.string().required('Campul lot trebuie completat').max(30),
 
   picture: Yup.mixed<File>().test('required', 'The picture must be a file', (value: File) => {
     return !!value
