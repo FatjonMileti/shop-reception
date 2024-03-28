@@ -45,12 +45,12 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
     secondaryDLC: Yup.number()
       .when('hasSecondaryDLC', ([hasSecondaryDLC], schema) =>
         hasSecondaryDLC ?
-          schema.required('Secondary DLC is required').positive()
+          schema.required('Campul Numar zile DLC trebuie completat').positive()
           : schema.nullable()
       )
       .nullable(),
 
-    amount: Yup.number().positive().required('amount is required'),
+    amount: Yup.number().positive().required('Campul cantitate intrata trebuie completat'),
 
     lot: Yup.string().required('Campul lot trebuie completat').max(30),
 
