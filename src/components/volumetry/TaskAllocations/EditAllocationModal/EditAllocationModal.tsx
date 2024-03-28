@@ -14,7 +14,7 @@ import { handleQueryError } from 'utils/helpers'
 import { EditAllocationModalProps } from '../TaskAllocationsDefinitions'
 import { TASK_STATUS_ACTIONS } from '../Employee/constants'
 
-const validationSchema = (hideWorkload) =>
+const validationSchema = hideWorkload =>
   yup.object({
     allocatedWorkload: hideWorkload
       ? yup.string().nullable()
@@ -126,6 +126,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
                 helperText={formik.errors.allocatedWorkload as string}
                 required
                 inputProps={{
+                  step: '0.25',
                   min: '0'
                 }}
               />
@@ -149,6 +150,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
                   helperText={formik.errors.performedWorkload as string}
                   required
                   inputProps={{
+                    step: '0.25',
                     min: '0'
                   }}
                 />

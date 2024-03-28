@@ -80,6 +80,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
             helperText={formik.errors.workload as string}
             required
             inputProps={{
+              step: '0.25',
               min: '0'
             }}
           />
@@ -97,6 +98,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
             value={formik.values.allocatedWorkersNumber}
             style={{ width: '100%' }}
             inputProps={{
+              step: '0.25',
               min: '0'
             }}
           />
