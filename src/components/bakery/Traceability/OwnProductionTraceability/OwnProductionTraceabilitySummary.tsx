@@ -47,8 +47,8 @@ const OwnProductionTraceabilitySummary = ({ item }) => {
           </Typography>
 
           <Grid container>
-            {summaryCapsules.map(capsule => (
-              <Grid item mt={1} mr={1}>
+            {summaryCapsules.map((capsule, cIndex) => (
+              <Grid item mt={1} mr={1} key={cIndex}>
                 <Capsule label={capsule.label} value={capsule.value} valueColor={'#004f9b'} />
               </Grid>
             ))}
