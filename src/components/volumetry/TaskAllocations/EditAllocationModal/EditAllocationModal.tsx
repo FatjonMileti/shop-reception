@@ -125,6 +125,9 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
                 error={!!formik.errors.allocatedWorkload}
                 helperText={formik.errors.allocatedWorkload as string}
                 required
+                inputProps={{
+                  min: '0'
+                }}
               />
             </Grid>
             {editItem?.timerStatus !== 'FINISHED' && (
@@ -145,6 +148,9 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
                   error={!!formik.errors.performedWorkload}
                   helperText={formik.errors.performedWorkload as string}
                   required
+                  inputProps={{
+                    min: '0'
+                  }}
                 />
               </Grid>
             )}

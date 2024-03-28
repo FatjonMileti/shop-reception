@@ -79,6 +79,9 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
             error={!!formik.errors.workload}
             helperText={formik.errors.workload as string}
             required
+            inputProps={{
+              min: '0'
+            }}
           />
         </Grid>
 
@@ -93,6 +96,9 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
             }
             value={formik.values.allocatedWorkersNumber}
             style={{ width: '100%' }}
+            inputProps={{
+              min: '0'
+            }}
           />
         </Grid>
 
