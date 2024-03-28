@@ -101,7 +101,7 @@ export const ProductDetailsBatches = ({
                           e.target.value
                         )
                       }
-                      value={item.quantity?.toFixed(3) ?? ''}
+                      value={item.quantity}
                       name="quantity"
                       infoIcon={productMetricUnit}
                       helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
@@ -229,7 +229,7 @@ export const ProductDetailsBatches = ({
                           e.target.value
                         )
                       }}
-                      value={charge.quantity?.toFixed(3) ?? ''}
+                      value={charge.quantity}
                       name="quantity"
                       infoIcon={productMetricUnit}
                       helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
@@ -308,7 +308,7 @@ export const ProductDetailsBatches = ({
                         e.target.value
                       )
                     }}
-                    value={item.quantity?.toFixed(3) ?? ''}
+                    value={item.quantity}
                     name="quantity"
                     infoIcon={productMetricUnit}
                     helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
