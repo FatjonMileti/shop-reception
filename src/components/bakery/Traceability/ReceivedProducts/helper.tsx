@@ -260,9 +260,9 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
 
   hasSecondaryDLC: Yup.boolean().required('This field is required'),
 
-  secondaryDLC: Yup.string()
+  secondaryDLC: Yup.number()
     .when('hasSecondaryDLC', ([hasSecondaryDLC], schema) =>
-      hasSecondaryDLC ? schema.required('Secondary DLC is required') : schema.nullable()
+      hasSecondaryDLC ? schema.required('Secondary DLC is required').positive() : schema.nullable()
     )
     .nullable(),
 

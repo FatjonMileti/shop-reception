@@ -71,7 +71,7 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddRe
         hasExpireDate: productDetails.hasExpirationDate,
         expireDate: formatPayloadDate(productDetails.expirationDate),
         hasSecondaryDlc: productDetails.hasSecondaryDLC,
-        dlcDays: parseInt(productDetails.secondaryDLC),
+        dlcDays: productDetails.secondaryDLC,
         batchQuantity: productDetails.amount,
         batchName: productDetails.lot
       }
