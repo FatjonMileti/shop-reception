@@ -12,7 +12,7 @@ export const getInitialValues = (receivedProduct?: ReceivedProduct): ReceivedPro
     hasExpirationDate: receivedProduct?.hasExpireDate ?? false,
     expirationDate: receivedProduct?.expireDate ? dayjs(receivedProduct?.expireDate) : null,
     hasSecondaryDLC: receivedProduct?.hasSecondaryDlc,
-    secondaryDLC: receivedProduct?.dlcDays?.toString() || '',
+    secondaryDLC: receivedProduct?.dlcDays,
     amount: receivedProduct?.batchQuantity ?? undefined,
     lot: receivedProduct?.batchName || '',
     picture: undefined
@@ -42,13 +42,15 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
 
     hasSecondaryDLC: Yup.boolean().required('This field is required'),
 
-    secondaryDLC: Yup.string()
+    secondaryDLC: Yup.number()
       .when('hasSecondaryDLC', ([hasSecondaryDLC], schema) =>
-        hasSecondaryDLC ? schema.required('Secondary DLC is required') : schema.nullable()
+        hasSecondaryDLC ?
+          schema.required('Campul Numar zile DLC trebuie completat').positive()
+          : schema.nullable()
       )
       .nullable(),
 
-    amount: Yup.number().positive().required('amount is required'),
+    amount: Yup.number().positive().required('Campul cantitate intrata trebuie completat'),
 
     lot: Yup.string().required('Campul lot trebuie completat').max(30),
 
