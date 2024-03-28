@@ -6486,6 +6486,35 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "f03cafa8-b1dc-4ebc-a705-6f29b2b90053",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "productWithDifference",
+      "responses": [
+        {
+          "uuid": "96471dd5-e5a5-4be7-89d0-51bc0567a2bb",
+          "body": "{\n  \"productWithDifferenceList\": [\n    {\n      \"id\": 0,\n      \"externalTicketId\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"depositName\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"originalOrderId\": \"string\",\n      \"metiOrderId\": \"string\",\n      \"measureUnit\": \"string\",\n      \"transportCode\": \"string\",\n      \"orderedQuantity\": 0,\n      \"receivedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"receptionDeviation\": 0,\n      \"stockQuantity\": 0,\n      \"missingQuantity\": 0,\n      \"transporterCode\": \"string\",\n      \"metiSentDate\": \"string\",\n      \"integrationOperator\": \"string\",\n      \"archivePath\": \"string\"\n    }, {\n      \"id\": 1,\n      \"externalTicketId\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"depositName\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"originalOrderId\": \"string\",\n      \"metiOrderId\": \"string\",\n      \"measureUnit\": \"string\",\n      \"transportCode\": \"string\",\n      \"orderedQuantity\": 0,\n      \"receivedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"receptionDeviation\": 0,\n      \"stockQuantity\": 0,\n      \"missingQuantity\": 0,\n      \"transporterCode\": \"string\",\n      \"metiSentDate\": \"string\",\n      \"integrationOperator\": \"string\",\n      \"archivePath\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6852,6 +6881,10 @@
     {
       "type": "route",
       "uuid": "ce8f2b92-c79b-4655-afdc-f70f3fe054cb"
+    },
+    {
+      "type": "route",
+      "uuid": "f03cafa8-b1dc-4ebc-a705-6f29b2b90053"
     }
   ],
   "proxyMode": false,

@@ -164,22 +164,26 @@ interface BalancePackage {
 
 interface DifferencesProduct {
   id: number
-  deliverySlip: string
-  store: string
-  warehouse: string
+  externalTicketId: string
+  shopName: string
+  shopCode: string
+  depositName: string
+  productCode: string
   productName: string
-  homeOrder: string
-  metiOrder: string
-  unitOfMeasure: string
-  expectedQuantity: string
-  qualitativeReceivedQuantity: string
-  defectiveReceivedQuantity: string
-  grams: string
-  inStockQuantity: number
-  difference: string
-  raceCode: string
-  sentToMeti: string
+  originalOrderId: string
+  metiOrderId: string
+  measureUnit: string
+  transportCode: string
+  orderedQuantity: number
+  receivedQuantity: number
+  brokenQuantity: number
+  receptionDeviation: number
+  stockQuantity: number
+  missingQuantity: number
+  transporterCode: string
+  metiSentDate: string
   integrationOperator: string
+  archivePath: string
 }
 
 interface DLCProducts {
