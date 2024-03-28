@@ -275,7 +275,7 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
 
   lot: Yup.string().required('Campul lot trebuie completat').max(30),
 
-  picture: Yup.mixed<File>().test('required', 'The picture must be a file', (value: File) => {
+  picture: Yup.mixed<File>().test('required', 'Lipsa poza', (value: File) => {
     return !!value
   })
 })
