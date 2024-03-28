@@ -206,7 +206,6 @@ export const ProductDetails = (props: ProductDetailsProps) => {
           onAddBatch={onAddBatch}
           onAddCharge={onAddCharge}
           receip={recipeQuery.data}
-          productMetricUnit={selectedProduct.metricUnit}
         />
 
         <Grid item xs={12} container justifyContent="space-between">

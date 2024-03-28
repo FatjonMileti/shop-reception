@@ -13,7 +13,6 @@ interface ProductDetailsBatchesProps {
   receip: any
   onAddCharge: (componentMetiCode: string | number) => void
   onAddBatch: (componentMetiCode: string | number) => void
-  productMetricUnit: string
 }
 
 export const ProductDetailsBatches = ({
@@ -22,8 +21,7 @@ export const ProductDetailsBatches = ({
   onDeleteBatch,
   receip,
   onAddBatch,
-  onAddCharge,
-  productMetricUnit
+  onAddCharge
 }: ProductDetailsBatchesProps) => {
 
   if (typeof productMetiCode === 'undefined') {
@@ -56,7 +54,7 @@ export const ProductDetailsBatches = ({
               )?.toFixed(3)}`}
               name="batchId"
               disabled
-              infoIcon={productMetricUnit}
+              infoIcon={batch.componentUnit}
             />
           </Grid>
 
@@ -103,7 +101,7 @@ export const ProductDetailsBatches = ({
                       }
                       value={item.quantity}
                       name="quantity"
-                      infoIcon={productMetricUnit}
+                      infoIcon={batch.componentUnit}
                       helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
                       error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                     />
@@ -187,7 +185,7 @@ export const ProductDetailsBatches = ({
               )?.toFixed(3)}`}
               name="componentQuantity"
               disabled
-              infoIcon={productMetricUnit}
+              infoIcon={item.componentUnit}
             />
           </Grid>
           <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
@@ -231,7 +229,7 @@ export const ProductDetailsBatches = ({
                       }}
                       value={charge.quantity}
                       name="quantity"
-                      infoIcon={productMetricUnit}
+                      infoIcon={item.componentUnit}
                       helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
                       error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                     />
@@ -290,7 +288,7 @@ export const ProductDetailsBatches = ({
               )?.toFixed(3)}`}
               name="batchId"
               disabled
-              infoIcon={productMetricUnit}
+              infoIcon={other.componentUnit}
             />
           </Grid>
 
@@ -310,7 +308,7 @@ export const ProductDetailsBatches = ({
                     }}
                     value={item.quantity}
                     name="quantity"
-                    infoIcon={productMetricUnit}
+                    infoIcon={other.componentUnit}
                     helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
                     error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                   />
