@@ -65,7 +65,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               <EmployeeCapsule employee={employee} customCapsuleColors={customCapsuleColors} />
             </Grid>
 
-            <Grid item sm={12} md={6}>
+            <Grid item sm={12} md={5}>
               <EmployeeProgress
                 taskCurrentState={taskCurrentState}
                 employee={employee}
@@ -73,7 +73,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               />
             </Grid>
 
-            <Grid item sm={12} md={shouldWrapActions ? 12 : 2}>
+            <Grid item sm={12} md={shouldWrapActions ? 3 : 12}>
               <EmployeeActions
                 taskCurrentState={taskCurrentState}
                 updateTaskStatus={updateTaskStatus}

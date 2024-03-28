@@ -14,7 +14,7 @@ import { handleQueryError } from 'utils/helpers'
 import { EditAllocationModalProps } from '../TaskAllocationsDefinitions'
 import { TASK_STATUS_ACTIONS } from '../Employee/constants'
 
-const validationSchema = (hideWorkload) =>
+const validationSchema = hideWorkload =>
   yup.object({
     allocatedWorkload: hideWorkload
       ? yup.string().nullable()
@@ -107,48 +107,40 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
         </Grid>
 
         {!hideWorkload && (
-          <>
-            <Grid xs={12} item>
-              <Input
-                type="number"
-                variant="outlined"
-                name="allocatedWorkload"
-                label="Volum alocat"
-                value={formik.values.allocatedWorkload}
-                width="100%"
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  formik.setFieldValue(
-                    'allocatedWorkload',
-                    (event.target as HTMLInputElement).value
-                  )
-                }
-                error={!!formik.errors.allocatedWorkload}
-                helperText={formik.errors.allocatedWorkload as string}
-                required
-              />
-            </Grid>
-            {editItem?.timerStatus !== 'FINISHED' && (
-              <Grid xs={12} item>
-                <Input
-                  type="number"
-                  variant="outlined"
-                  name="performedWorkload"
-                  label="Volum efectuat"
-                  value={formik.values.performedWorkload}
-                  width="100%"
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    formik.setFieldValue(
-                      'performedWorkload',
-                      (event.target as HTMLInputElement).value
-                    )
-                  }
-                  error={!!formik.errors.performedWorkload}
-                  helperText={formik.errors.performedWorkload as string}
-                  required
-                />
-              </Grid>
-            )}
-          </>
+          <Grid xs={12} item>
+            <Input
+              type="number"
+              variant="outlined"
+              name="allocatedWorkload"
+              label="Volum alocat"
+              value={formik.values.allocatedWorkload}
+              width="100%"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                formik.setFieldValue('allocatedWorkload', (event.target as HTMLInputElement).value)
+              }
+              error={!!formik.errors.allocatedWorkload}
+              helperText={formik.errors.allocatedWorkload as string}
+              required
+            />
+          </Grid>
+        )}
+        {editItem?.timerStatus !== 'FINISHED' && (
+          <Grid xs={12} item>
+            <Input
+              type="number"
+              variant="outlined"
+              name="performedWorkload"
+              label="Volum efectuat"
+              value={formik.values.performedWorkload}
+              width="100%"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                formik.setFieldValue('performedWorkload', (event.target as HTMLInputElement).value)
+              }
+              error={!!formik.errors.performedWorkload}
+              helperText={formik.errors.performedWorkload as string}
+              required
+            />
+          </Grid>
         )}
 
         <Grid xs={12} item>

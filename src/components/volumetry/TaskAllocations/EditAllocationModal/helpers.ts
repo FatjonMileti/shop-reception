@@ -1,7 +1,7 @@
 export const getFormInitialValues = (editItem, hideWorkload) => ({
   ...(!hideWorkload && {
     allocatedWorkload: editItem?.allocatedWorkload || '',
-    performedWorkload: editItem?.performedWorkload || ''
+    performedWorkload: editItem?.performedWorkload || editItem?.allocatedWorkload || ''
   }),
   ...(!hideWorkload &&
     editItem?.timerStatus !== 'FINISHED' && {
