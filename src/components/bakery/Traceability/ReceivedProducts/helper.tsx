@@ -154,7 +154,6 @@ export const columns: Column[] = [
     )
   },
 
-
   {
     title: 'Nr. zile valabilitate DLC secundar',
     field: 'dlcDays'
@@ -244,7 +243,11 @@ export const headerItems: Column[] = [
 ]
 
 export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object().shape({
-  entryDate: Yup.mixed<dayjs.Dayjs>().required('Entry date is required'),
+  entryDate: Yup.mixed<dayjs.Dayjs>()
+    .required('Entry date is required')
+    .test('future', 'Data intrare nu poate fi in viitor', value => {
+      return value?.isBefore(dayjs())
+    }),
 
   hasExpirationDate: Yup.boolean().required('This field is required'),
   expirationDate: Yup.mixed().when('hasExpirationDate', ([hasExpirationDate], schema) => {
@@ -257,13 +260,13 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
 
   hasSecondaryDLC: Yup.boolean().required('This field is required'),
 
-  secondaryDLC: Yup.string()
+  secondaryDLC: Yup.number()
     .when('hasSecondaryDLC', ([hasSecondaryDLC], schema) =>
-      hasSecondaryDLC ? schema.required('Secondary DLC is required') : schema.nullable()
+      hasSecondaryDLC ? schema.required('Campul Numar zile DLC trebuie completat').positive() : schema.nullable()
     )
     .nullable(),
 
-  amount: Yup.number().positive().required('amount is required'),
+  amount: Yup.number().positive().required('Campul cantitate intrata trebuie completat'),
 
   lot: Yup.string().required('Campul lot trebuie completat').max(30),
 

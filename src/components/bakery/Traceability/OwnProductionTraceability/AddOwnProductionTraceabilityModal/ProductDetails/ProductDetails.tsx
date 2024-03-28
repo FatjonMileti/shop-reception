@@ -54,7 +54,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
 
   return (
     <Grid container rowSpacing={3.5}>
-      <Grid item xs={12} spacing={2}>
+      <Grid item xs={12}>
         <FormInfoItems
           items={[
             {

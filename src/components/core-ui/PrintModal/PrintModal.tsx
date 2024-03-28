@@ -95,7 +95,7 @@ const PrintModal = ({
         }}
       >
         <IconButton
-          style={{ position: 'absolute', top: '1rem', right: '1rem' }}
+          style={{ position: 'absolute', top: '1rem', right: '1rem', zIndex: '1' }}
           withBackground
           onClick={closeModalAndResetForm}
         >

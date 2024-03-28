@@ -50,7 +50,7 @@ export interface ReceivedProductToCorrect {
   hasExpirationDate: boolean
   expirationDate?: any
   hasSecondaryDLC: boolean
-  secondaryDLC?: string
+  secondaryDLC?: number
   amount?: number
   lot?: string
   picture?: File
@@ -104,6 +104,8 @@ export const CorrectReceivedProduct = ({
     }
   })
 
+  console.log("form.values: ", form.values)
+
   const productCorrectionMutation = useMutation(
     async () => {
       const formData = new FormData()
@@ -115,7 +117,7 @@ export const CorrectReceivedProduct = ({
         hasExpireDate: form.values.hasExpirationDate,
         expireDate: formatPayloadDate(form.values.expirationDate),
         hasSecondaryDlc: form.values.hasSecondaryDLC,
-        dlcDays: parseInt(form.values.secondaryDLC),
+        dlcDays: form.values.secondaryDLC,
         batchQuantity: form.values?.amount,
         batchName: form.values.lot
       }
@@ -263,8 +265,11 @@ export const CorrectReceivedProduct = ({
                   dotStyle
                   name="hasSecondaryDLC"
                   onChange={e => {
-                    const value = e.target.value === 'true'
-                    form.setFieldValue('hasSecondaryDLC', value)
+                    const hasSecondaryDLC = e.target.value === 'true'
+                    form.setFieldValue('hasSecondaryDLC', hasSecondaryDLC)
+                    if(!hasSecondaryDLC) {
+                      form.setFieldValue('secondaryDLC', null)
+                    }
                   }}
                   value={form.values.hasSecondaryDLC ? 'true' : 'false'}
                   row
@@ -287,7 +292,7 @@ export const CorrectReceivedProduct = ({
                   variant="outlined"
                   label="Numar zile DLC"
                   onChange={form.handleChange}
-                  value={form.values.secondaryDLC}
+                  value={form.values.secondaryDLC?.toString() ?? ''}
                   name="secondaryDLC"
                   disabled={!form.values.hasSecondaryDLC}
                   error={!!form.errors.secondaryDLC}
