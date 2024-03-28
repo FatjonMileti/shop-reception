@@ -1,4 +1,5 @@
 import { formatBakeryPayloadDate } from '../../../../utils/helpers'
+import { ThermalCondition } from '../interfaces'
 
 export const productPrintColumns = [
   {
@@ -58,7 +59,8 @@ export const productPrintColumns = [
   },
   {
     title: 'Stare termica',
-    field: 'thermalCondition'
+    field: 'thermalCondition',
+    render: row => ThermalCondition[row.thermalCondition] ?? '',
   },
   {
     title: 'Conform',
