@@ -263,7 +263,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
                       ? dayjs(formik.values?.traceabilityFrozenList?.[index]?.openingDate)
                       : undefined
                   }
-                  // maxDate={dayjs()}
+                  maxDate={dayjs(formik.values.productionDate)}
                   style={{ display: 'flex' }}
                 />
               </Grid>

@@ -61,7 +61,7 @@ export const validationSchema = Yup.object().shape({
                   'notBeforeProductionDate',
                   'Data deschiderii mai mica sau egala cu data productiei',
                   openingDate => {
-                    return !dayjs(openingDate).isBefore(productionDate, 'date')
+                    return !dayjs(openingDate).isAfter(productionDate, 'date')
                   }
                 )
             } else {

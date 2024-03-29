@@ -1,5 +1,6 @@
 import * as Yup from 'yup'
 import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
+import dayjs from 'dayjs'
 
 export const getInitialValues = editItem => {
   return {
@@ -34,14 +35,31 @@ export const validationSchema = Yup.object().shape({
     Yup.object()
       .shape({
         batchId: Yup.string(),
-        quantity: Yup.number().required('Cantitate obligatorie').positive('Cantitatea trebuie sa fie pozitiva'),
-        openingDate: Yup.date().when('hasSecondaryDlc', ([hasSecondaryDlc], schema) => {
-          if (hasSecondaryDlc) {
-            return schema.required('Data obligatorie')
-          } else {
-            return schema.nullable()
+        quantity: Yup.number()
+          .required('Cantitate obligatorie')
+          .positive('Cantitatea trebuie sa fie pozitiva'),
+        openingDate: Yup.date().when(
+          ['hasSecondaryDlc', '$productionDate'],
+          ([hasSecondaryDlc, productionDate], schema) => {
+            if (hasSecondaryDlc) {
+              if (productionDate) {
+                return schema
+                  .required('Data obligatorie')
+                  .test(
+                    'notAfterProductionDate',
+                    'Data deschiderii mai mica sau egala cu data productiei',
+                    openingDate => {
+                      return !dayjs(openingDate).isAfter(productionDate, 'date')
+                    }
+                  )
+              } else {
+                return schema.required('Data obligatorie')
+              }
+            } else {
+              return schema.nullable()
+            }
           }
-        }),
+        ),
         // dlc: Yup.string(),
         hasSecondaryDlc: Yup.boolean()
       })

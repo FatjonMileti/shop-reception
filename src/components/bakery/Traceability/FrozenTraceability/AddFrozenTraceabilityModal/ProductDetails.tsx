@@ -254,7 +254,7 @@ export const ProductDetails = ({
                       ? dayjs(formik.values?.traceabilityFrozenList?.[index]?.openingDate)
                       : undefined
                   }
-                  // maxDate={dayjs()}
+                  maxDate={dayjs(formik.values.productionDate)}
                   style={{ display: 'flex' }}
                 />
               </Grid>
