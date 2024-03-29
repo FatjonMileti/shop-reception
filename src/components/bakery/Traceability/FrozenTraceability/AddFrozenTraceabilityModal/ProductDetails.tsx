@@ -33,7 +33,16 @@ export const ProductDetails = ({
 
   return (
     <Grid container rowSpacing={3.5}>
-      <Grid item xs={12} spacing={2}>
+      <Grid
+        item
+        xs={12}
+        spacing={2}
+        sx={{
+          '& div': {
+            whiteSpace: 'unset !important'
+          }
+        }}
+      >
         <FormInfoItems
           items={[
             {
@@ -122,7 +131,9 @@ export const ProductDetails = ({
               disableClearable
               options={thermalContiotionOptions}
               value={
-                thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) || null
+                thermalContiotionOptions.find(
+                  thC => thC.value === formik.values.thermalCondition
+                ) || null
               }
               onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
               required

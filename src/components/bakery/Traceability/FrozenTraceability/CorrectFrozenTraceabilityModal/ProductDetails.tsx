@@ -39,7 +39,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
   return (
     <Grid container rowSpacing={3.5}>
       <Grid container spacing={2} mt={2}>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Input
             type="text"
             variant="outlined"
@@ -50,7 +50,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             disabled
           />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12} md={9}>
           <Autocomplete
             {...selectProductSearch}
             variant="outlined"
@@ -85,7 +85,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
           />
         </Grid>
 
-        <Grid item xs={3}>
+        <Grid item xs={6} md={3}>
           <Input
             type="number"
             variant="outlined"
@@ -98,7 +98,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             helperText={formik.errors.chargeNumber as string}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6} md={3}>
           <Input
             type="number"
             variant="outlined"
@@ -114,7 +114,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             helperText={formik.errors.quantity as string}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <DatePicker
             label="Data productie"
             onChange={value => formik.setFieldValue('productionDate', value)}
@@ -126,9 +126,9 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             maxDate={dayjs()}
           />
         </Grid>
-        <Grid item xs={3}></Grid>
 
-        <Grid item xs={3}>
+
+        <Grid item xs={6} md={3}>
           <Input
             type="text"
             variant="outlined"
@@ -140,7 +140,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             helperText={formik.errors.productionOperator as string}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6} md={3}>
           <Autocomplete
             variant="outlined"
             label="Stare termica"
@@ -155,7 +155,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             helperText={formik.errors.thermalCondition as string}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={4} sx={{ marginTop: '17px' }}>
           <RadioButtonGroup
             label="Conform"
             dotStyle
@@ -183,9 +183,8 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             ]}
           />
         </Grid>
-        <Grid item xs={3}></Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Input
             type="text"
             variant="outlined"
@@ -196,7 +195,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             name="nonComplianceReason"
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Input
             type="text"
             variant="outlined"
