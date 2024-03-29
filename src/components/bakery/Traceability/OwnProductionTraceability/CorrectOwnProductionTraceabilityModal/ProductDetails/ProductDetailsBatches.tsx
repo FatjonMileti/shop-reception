@@ -127,6 +127,7 @@ export const ProductDetailsBatches = ({
                             : undefined
                         }
                         style={{ display: 'flex' }}
+                        minDate={formik.values.productionDate}
                       />
                     </Grid>
                   )}

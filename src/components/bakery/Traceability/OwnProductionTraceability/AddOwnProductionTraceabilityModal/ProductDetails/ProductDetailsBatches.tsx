@@ -126,7 +126,7 @@ export const ProductDetailsBatches = ({
                             ? dayjs(formik.values?.traceabilityProductionList?.[idx]?.openingDate)
                             : undefined
                         }
-                        // maxDate={dayjs()}
+                        minDate={formik.values.productionDate}
                         style={{ display: 'flex' }}
                       />
                     </Grid>

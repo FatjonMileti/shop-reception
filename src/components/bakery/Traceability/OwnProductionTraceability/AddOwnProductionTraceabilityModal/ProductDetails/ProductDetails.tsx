@@ -23,9 +23,7 @@ interface ProductDetailsProps {
   recipeQuery: UseQueryResult<any>
 }
 
-export const ProductDetails = (props: ProductDetailsProps) => {
-  const { formik, onCancel, selectedProduct, recipeQuery, onAddBatch, onAddCharge } = props
-
+export const ProductDetails = ({formik, onCancel, selectedProduct, recipeQuery, onAddBatch, onAddCharge}: ProductDetailsProps) => {
   const onDeleteBatch = id => {
     let newBatches = formik.values.traceabilityProductionList.filter(batch =>
       batch.batchId ? batch.batchId !== id : batch.childTraceabilityId !== id
