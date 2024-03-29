@@ -50,10 +50,10 @@ export const validationSchema = Yup.object().shape({
               return schema
                 .required('Data obligatorie')
                 .test(
-                  'notBeforeProductionDate',
+                  'notAfterProductionDate',
                   'Data deschiderii mai mica sau egala cu data productiei',
                   openingDate => {
-                    return !dayjs(openingDate).isBefore(productionDate, 'date')
+                    return !dayjs(openingDate).isAfter(productionDate, 'date')
                   }
                 )
             } else {

@@ -45,7 +45,7 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
     secondaryDLC: Yup.number()
       .when('hasSecondaryDLC', ([hasSecondaryDLC], schema) =>
         hasSecondaryDLC ?
-          schema.required('Campul Numar zile DLC trebuie completat').positive()
+          schema.required('Campul Numar zile DLC trebuie completat').positive('Inserati valoare pozitiva')
           : schema.nullable()
       )
       .nullable(),

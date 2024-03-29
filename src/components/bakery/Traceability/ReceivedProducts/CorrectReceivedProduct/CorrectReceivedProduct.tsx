@@ -98,7 +98,7 @@ export const CorrectReceivedProduct = ({
     enableReinitialize: true,
     validationSchema: correctReceivedProductSchema,
     validateOnChange: false,
-    initialValues: initialValues,
+    initialValues,
     onSubmit: () => {
       productCorrectionMutation.mutate()
     }
@@ -152,7 +152,7 @@ export const CorrectReceivedProduct = ({
           <>
             <Grid item xs={12} container spacing={2} alignItems="flex-end">
               <Grid item container xs={12} spacing={2}>
-                <Grid item xl={3} lg={4} sm={6} xs={12}>
+                <Grid item xl={3} lg={4} md={6} xs={12}>
                   <Input
                     type="number"
                     variant="outlined"
@@ -163,7 +163,7 @@ export const CorrectReceivedProduct = ({
                   />
                 </Grid>
 
-                <Grid item xl={9} lg={8} sm={6} xs={12}>
+                <Grid item xl={9} lg={8} md={6} xs={12}>
                   <SelectProduct
                     selectedProduct={form.values.selectedProduct}
                     setSelectedProduct={sp => {
@@ -177,7 +177,7 @@ export const CorrectReceivedProduct = ({
               </Grid>
 
               <Grid item container xs={12} spacing={2}>
-                <Grid item xl={3} lg={4} sm={6} xs={12}>
+                <Grid item xl={3} lg={4} md={6} xs={12}>
                   <Input
                     type="number"
                     variant="outlined"
@@ -188,7 +188,7 @@ export const CorrectReceivedProduct = ({
                   />
                 </Grid>
 
-                <Grid item xl={9} lg={8} sm={6} xs={12}>
+                <Grid item xl={9} lg={8} md={6} xs={12}>
                   <SelectSupplier
                     selectedProduct={form.values.selectedProduct}
                     selectedSupplier={form.values.selectedSupplier}
@@ -201,7 +201,7 @@ export const CorrectReceivedProduct = ({
                 </Grid>
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12}>
                 <DatePicker
                   error={!!form.errors.entryDate}
                   helperText={form.errors.entryDate as string}
@@ -214,7 +214,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12} sx={{ marginTop: '17px' }}>
                 <RadioButtonGroup
                   label="Data expirare"
                   dotStyle
@@ -241,7 +241,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12}>
                 <DatePicker
                   error={!!form.errors.expirationDate}
                   helperText={form.errors.expirationDate as string}
@@ -257,7 +257,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12} sx={{ marginTop: '17px' }}>
                 <RadioButtonGroup
                   label="DLC Secundar"
                   dotStyle
@@ -284,7 +284,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12}>
                 <Input
                   type="number"
                   variant="outlined"
@@ -298,7 +298,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12}>
                 <Input
                   type="text"
                   variant="outlined"
@@ -319,7 +319,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12}>
                 <Input
                   type="number"
                   variant="outlined"
@@ -333,7 +333,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12} spacing={2} container alignItems="center">
+              <Grid item xl={3} lg={4} md={6} xs={12} spacing={2} container alignItems="center">
                 {form.values.picture ? (
                   <>
                     <Grid item>
