@@ -52,7 +52,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             })
 
             if (action.href) {
-              await destroy()
+              // await destroy()
               navigate(
                 `/supplyOmni/${action.href}?${action.variable}=${id}&clientId=${searchParams.get(
                   'clientId'
