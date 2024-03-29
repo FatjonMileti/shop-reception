@@ -51,10 +51,22 @@ export const validationSchema = Yup.object().shape({
       componentQuantity: Yup.number(),
       quantity: Yup.number().required('Cantitate obligatorie'),
       openingDate: Yup.date().when(
-        ['hasSecondaryDlc', 'batchId'],
-        ([hasSecondaryDlc, batchId], schema) => {
+        ['hasSecondaryDlc', 'batchId', '$productionDate'],
+        ([hasSecondaryDlc, batchId, productionDate], schema) => {
           if (hasSecondaryDlc && batchId) {
-            return schema.required('Data obligatorie')
+            if (productionDate) {
+              return schema
+                .required('Data obligatorie')
+                .test(
+                  'notBeforeProductionDate',
+                  'Data deschiderii mai mica sau egala cu data productiei',
+                  openingDate => {
+                    return !dayjs(openingDate).isBefore(productionDate, 'date')
+                  }
+                )
+            } else {
+              return schema.required('Data obligatorie')
+            }
           } else {
             return schema.nullable()
           }
