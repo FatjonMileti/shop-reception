@@ -29,6 +29,7 @@ export interface ReceivedProduct {
   supplier: Supplier;
   entryDate: string;
   expireDate: string;
+  createdDate: string;
   batchName: string;
   hasExpireDate: boolean;
   hasSecondaryDlc: boolean;

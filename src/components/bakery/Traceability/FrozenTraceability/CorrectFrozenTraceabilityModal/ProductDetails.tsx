@@ -105,13 +105,6 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             label="Cantitate sarja"
             onChange={({ currentTarget: { value } }) => {
               formik.setFieldValue('quantity', value)
-              formik.setFieldValue(
-                'traceabilityFrozenList',
-                formik.values.traceabilityFrozenList.map(tf => ({
-                  ...tf,
-                  quantity: value
-                }))
-              )
             }}
             value={formik.values.quantity}
             name="quantity"

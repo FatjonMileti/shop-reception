@@ -23,9 +23,7 @@ interface ProductDetailsProps {
   recipeQuery: UseQueryResult<any>
 }
 
-export const ProductDetails = (props: ProductDetailsProps) => {
-  const { formik, onCancel, selectedProduct, recipeQuery, onAddBatch, onAddCharge } = props
-
+export const ProductDetails = ({formik, onCancel, selectedProduct, recipeQuery, onAddBatch, onAddCharge}: ProductDetailsProps) => {
   const onDeleteBatch = id => {
     let newBatches = formik.values.traceabilityProductionList.filter(batch =>
       batch.batchId ? batch.batchId !== id : batch.childTraceabilityId !== id
@@ -76,7 +74,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
       </Grid>
 
       <Grid container spacing={2} mt={2}>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <DatePicker
             label="Data productie"
             onChange={value => formik.setFieldValue('productionDate', value)}
@@ -88,7 +86,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             maxDate={dayjs()}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Input
             type="number"
             variant="outlined"
@@ -101,7 +99,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             helperText={formik.errors.chargeNumber as string}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <Input
             type="number"
             variant="outlined"
@@ -119,9 +117,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             helperText={formik.errors.quantity as string}
           />
         </Grid>
-        {/* <Grid item xs={3}></Grid> */}
 
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Input
             type="text"
             variant="outlined"
@@ -133,7 +130,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             helperText={formik.errors.productionOperator as string}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Autocomplete
             variant="outlined"
             label="Stare termica"
@@ -148,7 +145,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             helperText={formik.errors.thermalCondition as string}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={4} sx={{'& .MuiFormControl-root': {marginTop: '16px'}}}>
           <RadioButtonGroup
             label="Conform"
             dotStyle
@@ -173,9 +170,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             ]}
           />
         </Grid>
-        <Grid item xs={3}></Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={5}>
           <Input
             type="text"
             variant="outlined"
@@ -186,7 +182,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             name="nonComplianceReason"
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={5}>
           <Input
             type="text"
             variant="outlined"
@@ -208,7 +204,6 @@ export const ProductDetails = (props: ProductDetailsProps) => {
           onAddBatch={onAddBatch}
           onAddCharge={onAddCharge}
           receip={recipeQuery.data}
-          productMetricUnit={selectedProduct.metricUnit}
         />
 
         <Grid item xs={12} container justifyContent="space-between">
