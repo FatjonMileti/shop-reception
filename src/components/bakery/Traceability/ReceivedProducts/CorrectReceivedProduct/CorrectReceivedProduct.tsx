@@ -98,7 +98,7 @@ export const CorrectReceivedProduct = ({
     enableReinitialize: true,
     validationSchema: correctReceivedProductSchema,
     validateOnChange: false,
-    initialValues: initialValues,
+    initialValues,
     onSubmit: () => {
       productCorrectionMutation.mutate()
     }

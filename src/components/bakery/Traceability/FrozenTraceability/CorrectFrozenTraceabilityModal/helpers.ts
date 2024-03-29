@@ -8,7 +8,7 @@ export const getInitialValues = editItem => {
     productionOperator: editItem?.productionOperator || null,
     quantity: editItem?.quantity || null,
     thermalCondition: editItem?.thermalCondition || null,
-    conform: editItem?.conform || true,
+    conform: editItem?.conform || false,
     nonComplianceReason: editItem?.nonComplianceReason || null,
     productDestination: editItem?.productDestination || null,
     dlc: editItem?.dlc || null,
