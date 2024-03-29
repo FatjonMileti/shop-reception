@@ -93,7 +93,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
     formik.setFieldValue('employees', newEmployees)
   }
 
-  const updateEmplpyeeTime = (employee, value, field) => {
+  const updateEmployeeTime = (employee, value, field) => {
     const newEmployees = formik.values.employees.map(emp =>
       emp.workerId === employee.workerId ? { ...emp, [field]: value } : emp
     )
@@ -124,7 +124,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
             isEmployeesLoading={isEmployeesLoading}
             employees={formik.values.employees}
             toggleEmployee={toggleEmployee}
-            updateEmplpyeeTime={updateEmplpyeeTime}
+            updateEmployeeTime={updateEmployeeTime}
             closeModal={resetModal}
             handleSubmit={formik.handleSubmit}
             increaseStep={() => setActiveStep(1)}
