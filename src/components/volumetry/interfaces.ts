@@ -84,6 +84,7 @@ export interface EmployeeAttendanceProps {
   handleSubmit: Function
   increaseStep: Function
   isXs: boolean
+  formik: any
 }
 
 export interface AllocationListProps {

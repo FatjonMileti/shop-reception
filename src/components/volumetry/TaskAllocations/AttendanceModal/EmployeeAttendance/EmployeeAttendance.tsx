@@ -15,7 +15,8 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     closeModal,
     handleSubmit,
     increaseStep,
-    isXs
+    isXs,
+    formik
   } = props
 
   const submitStep = async () => {
@@ -28,6 +29,20 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     [employees]
   )
 
+  const checkSelected = formik.values.employees.some(
+    employee => employee.isPresent || employee.shouldAllocate
+  )
+  const selectOrDeselectAll = employees => {
+    formik.setFieldValue(
+      'employees',
+      employees.map(employee => ({
+        ...employee,
+        isPresent: checkSelected ? false : true,
+        shouldAllocate: checkSelected ? false : true
+      }))
+    )
+  }
+
   return isEmployeesLoading ? (
     <div style={{ display: 'flex' }}>
       <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -36,9 +51,8 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     <Box>
       <Button
         variant="contained"
-        label="123"
-        // label={allocateEmployeesAllSelected ? 'Debifeaza toti angajatii' : 'Bifeaza toti angajatii'}
-        // onClick={() => setAllocateEmployeesAllSelected(!allocateEmployeesAllSelected)}
+        label={checkSelected ? 'Debifeaza toti angajatii' : 'Bifeaza toti angajatii'}
+        onClick={() => selectOrDeselectAll(employees)}
         style={{ marginBottom: '1em' }}
       />
       <Box style={{ height: '60vh', overflowY: 'scroll' }}>

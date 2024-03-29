@@ -129,6 +129,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
             handleSubmit={formik.handleSubmit}
             increaseStep={() => setActiveStep(1)}
             isXs={isXs}
+            formik={formik}
           />,
           <AllocationList
             employees={formik.values.employees.filter(employee => employee.isPresent)}
