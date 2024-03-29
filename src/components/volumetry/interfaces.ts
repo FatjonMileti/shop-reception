@@ -79,7 +79,7 @@ export interface EmployeeAttendanceProps {
   isEmployeesLoading: boolean
   employees: any[]
   toggleEmployee: Function
-  updateEmplpyeeTime: Function
+  updateEmployeeTime: Function
   closeModal: Function
   handleSubmit: Function
   increaseStep: Function

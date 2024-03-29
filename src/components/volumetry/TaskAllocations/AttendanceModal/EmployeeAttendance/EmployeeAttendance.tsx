@@ -11,7 +11,7 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     isEmployeesLoading,
     employees,
     toggleEmployee,
-    updateEmplpyeeTime,
+    updateEmployeeTime,
     closeModal,
     handleSubmit,
     increaseStep,
@@ -25,7 +25,7 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
   }
 
   const tableColumns = useMemo(
-    () => buildColumns({ toggleEmployee, updateEmplpyeeTime, isXs }) as TableHeaderType[],
+    () => buildColumns({ toggleEmployee, updateEmployeeTime, isXs }) as TableHeaderType[],
     [employees]
   )
 

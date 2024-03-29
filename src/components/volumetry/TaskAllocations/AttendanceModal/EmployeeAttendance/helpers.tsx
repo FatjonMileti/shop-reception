@@ -1,12 +1,13 @@
 import { Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
+import dayjs from 'dayjs'
 
 export const buildColumns = ({
   toggleEmployee,
-  updateEmplpyeeTime,
+  updateEmployeeTime,
   isXs
 }: {
   toggleEmployee: Function
-  updateEmplpyeeTime: Function
+  updateEmployeeTime: Function
   isXs: boolean
 }) => [
   {
@@ -37,8 +38,8 @@ export const buildColumns = ({
     render: (row: any) => (
       <TimePicker
         label=""
-        value={row.shiftStart}
-        onAccept={newValue => updateEmplpyeeTime(row, newValue, 'shiftStart')}
+        value={row.shiftStart || dayjs()}
+        onAccept={newValue => updateEmployeeTime(row, newValue, 'shiftStart')}
         onChange={() => {}}
         variant="outlined"
         style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
@@ -57,8 +58,8 @@ export const buildColumns = ({
     render: (row: any) => (
       <TimePicker
         label=""
-        value={row.shiftEnd}
-        onAccept={newValue => updateEmplpyeeTime(row, newValue, 'shiftEnd')}
+        value={row.shiftEnd || dayjs()}
+        onAccept={newValue => updateEmployeeTime(row, newValue, 'shiftEnd')}
         onChange={() => {}}
         variant="outlined"
         style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
