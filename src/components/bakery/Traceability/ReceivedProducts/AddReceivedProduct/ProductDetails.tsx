@@ -29,7 +29,7 @@ export interface ProductDetails {
   hasExpirationDate: boolean
   expirationDate?: any
   hasSecondaryDLC: boolean
-  secondaryDLC?: string
+  secondaryDLC?: number
   amount?: number
   lot?: string
   picture: File
@@ -40,7 +40,7 @@ const initialValues: ProductDetails = {
   hasExpirationDate: true,
   expirationDate: null,
   hasSecondaryDLC: true,
-  secondaryDLC: '',
+  secondaryDLC: null,
   amount: undefined,
   lot: '',
   picture: undefined
@@ -58,7 +58,7 @@ export const ProductDetails = ({
     enableReinitialize: false,
     validationSchema: productDetailsSchema,
     validateOnChange: false,
-    initialValues: initialValues,
+    initialValues,
     onSubmit: (values) => {
       onContinue(values)
     }
@@ -148,8 +148,11 @@ export const ProductDetails = ({
             dotStyle
             name="hasSecondaryDLC"
             onChange={e => {
-              const value = e.target.value === 'true'
-              form.setFieldValue('hasSecondaryDLC', value)
+              const hasSecondaryDLC = e.target.value === 'true'
+              form.setFieldValue('hasSecondaryDLC', hasSecondaryDLC)
+              if(!hasSecondaryDLC) {
+                form.setFieldValue('secondaryDLC', null)
+              }
             }}
             value={form.values.hasSecondaryDLC ? 'true' : 'false'}
             row
@@ -171,7 +174,7 @@ export const ProductDetails = ({
             variant="outlined"
             label="Numar zile DLC"
             onChange={form.handleChange}
-            value={form.values.secondaryDLC}
+            value={form.values.secondaryDLC?.toString() ?? ''}
             name="secondaryDLC"
             disabled={!form.values.hasSecondaryDLC}
             error={!!form.errors.secondaryDLC}

@@ -27,6 +27,7 @@ import { ReceivedProduct, FamilyItem, SubfamilyItem } from './interfaces'
 import { get } from 'lodash'
 import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
 import { ImageCell } from '../../../core-ui/ImageCell'
+import { debounce } from '@mui/material'
 
 export const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -40,7 +41,6 @@ export const ReceivedProducts = () => {
 
   const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-
 
   const { showNotification } = useNotification()
 
@@ -67,7 +67,6 @@ export const ReceivedProducts = () => {
       setTableItems(response.list.map(toTableRowItem))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
-
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -204,7 +203,7 @@ export const ReceivedProducts = () => {
         isLoading={isLoading}
         filters={drawerFilters}
         handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
-        handleRemoteData={fetchData}
+        handleRemoteData={debounce(fetchData, 500)}
         hasSearchInput
         rows={tableItems.map(item => ({
           id: item.id,

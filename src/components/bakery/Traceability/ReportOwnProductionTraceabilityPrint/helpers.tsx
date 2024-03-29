@@ -1,4 +1,6 @@
-import { formatBakeryPayloadDate } from "utils/helpers"
+import { formatBakeryPayloadDate } from 'utils/helpers'
+import { ThermalCondition } from '../interfaces'
+import dayjs from 'dayjs'
 
 export const productPrintColumns = [
   {
@@ -49,7 +51,10 @@ export const productPrintColumns = [
   {
     title: 'DLC prod. fab.',
     field: 'dlc',
-    render: row => formatBakeryPayloadDate(row.dlc),
+    render: row =>
+      (row.product.dlcDays &&
+        formatBakeryPayloadDate(dayjs(row.productionDate).add(row.product.dlcDays, 'days'))) ??
+      '',
     defaultPrintSelected: true,
     width: '100px'
   }
@@ -77,7 +82,7 @@ export const batchPrintColumns = [
   {
     field: 'thermalCondition',
     title: 'Stare termica',
-    render: row => row.thermalCondition,
+    render: row => ThermalCondition[row.thermalCondition] ?? '',
     width: '50px'
   },
   {
@@ -192,7 +197,7 @@ export const chargePrintColumns = [
           ? row.childTraceability.productionDate
           : ''
       ),
-      width: '100px'
+    width: '100px'
   },
   {
     field: 'batch.supplier.supplierName',

@@ -1,4 +1,5 @@
 import { formatBakeryPayloadDate } from '../../../../utils/helpers'
+import { ThermalCondition } from '../interfaces'
 
 export const productPrintColumns = [
   {
@@ -11,7 +12,6 @@ export const productPrintColumns = [
     title: 'Cod METI',
     field: 'product.metiCode',
     render: row => row.product.metiCode,
-    width: '600px'
   },
   {
     title: 'Cod PLU',
@@ -56,11 +56,11 @@ export const productPrintColumns = [
     field: 'product.metricUnit',
     render: row => row.product.metricUnit,
     defaultPrintSelected: true,
-    width: '150px'
   },
   {
     title: 'Stare termica',
-    field: 'thermalCondition'
+    field: 'thermalCondition',
+    render: row => ThermalCondition[row.thermalCondition] ?? '',
   },
   {
     title: 'Conform',
@@ -136,9 +136,9 @@ export const batchPrintColumns = [
     defaultPrintSelected: true
   },
   {
-    field: 'reatedDate',
+    field: 'batch.entryDate',
     title: 'Data introducere Trasabilitate',
-    render: row => formatBakeryPayloadDate(row.reatedDate),
+    render: row => (row.batch?.entryDate && formatBakeryPayloadDate(row.batch?.entryDate)) ?? '',
     width: '100px'
   },
   {

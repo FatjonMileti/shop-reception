@@ -43,7 +43,7 @@ export const ProductDetailsBatches = ({
             <Input
               type="text"
               variant="outlined"
-              label={`Cantitatea`}
+              label="Cantitatea"
               value={`${quantityCalculation(
                 formik.values.quantity,
                 batch.componentQuantity,
@@ -51,6 +51,7 @@ export const ProductDetailsBatches = ({
               )?.toFixed(3)}`}
               name="batchId"
               disabled
+              infoIcon={formik.values?.product?.metricUnit}
             />
           </Grid>
 
@@ -94,10 +95,12 @@ export const ProductDetailsBatches = ({
                           e.target.value
                         )
                       }
-                      value={item.quantity || ''}
+                      value={item.quantity}
                       name="quantity"
                       infoIcon={formik.values?.product?.metricUnit}
-                      helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
+                      helperText={
+                        formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
+                      }
                       error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                     />
                   </Grid>
@@ -174,7 +177,7 @@ export const ProductDetailsBatches = ({
               <Input
                 type="number"
                 variant="outlined"
-                label={`Cantitatea`}
+                label="Cantitatea"
                 value={`${quantityCalculation(
                   formik.values.quantity,
                   item.componentQuantity,
@@ -182,6 +185,7 @@ export const ProductDetailsBatches = ({
                 )?.toFixed(3)}`}
                 name="componentQuantity"
                 disabled
+                infoIcon={formik.values?.product?.metricUnit}
               />
             </Grid>
 
@@ -227,7 +231,9 @@ export const ProductDetailsBatches = ({
                       value={charge.quantity}
                       name="quantity"
                       infoIcon={formik.values?.product?.metricUnit}
-                      helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
+                      helperText={
+                        formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
+                      }
                       error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                     />
                   </Grid>
@@ -275,7 +281,7 @@ export const ProductDetailsBatches = ({
             <Input
               type="text"
               variant="outlined"
-              label={`Cantitatea`}
+              label="Cantitatea"
               value={`${quantityCalculation(
                 formik.values.quantity,
                 other.componentQuantity,
@@ -283,12 +289,13 @@ export const ProductDetailsBatches = ({
               )?.toFixed(3)}`}
               name="batchId"
               disabled
+              infoIcon={formik.values?.product?.metricUnit}
             />
           </Grid>
 
           {formik.values.traceabilityProductionList.map((item, idx) => (
             <Fragment key={idx}>
-              {other.componentCode === item.componentCode && (
+              {(other.componentCode === item.componentCode && (
                 <Grid item xs={4}>
                   <Input
                     type="number"
@@ -303,14 +310,16 @@ export const ProductDetailsBatches = ({
                     value={item.quantity}
                     name="quantity"
                     infoIcon={formik.values?.product?.metricUnit}
-                    helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
+                    helperText={
+                      formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
+                    }
                     error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                   />
                 </Grid>
-              ) || null}
+              )) ||
+                null}
             </Fragment>
           ))}
-
         </Fragment>
       ))}
 

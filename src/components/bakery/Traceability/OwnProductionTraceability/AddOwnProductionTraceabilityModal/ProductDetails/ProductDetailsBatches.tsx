@@ -48,7 +48,7 @@ export const ProductDetailsBatches = ({
             <Input
               type="number"
               variant="outlined"
-              label={`Cantitatea`}
+              label="Cantitatea"
               value={`${quantityCalculation(
                 formik.values.quantity,
                 batch.componentQuantity,
@@ -56,6 +56,7 @@ export const ProductDetailsBatches = ({
               )?.toFixed(3)}`}
               name="batchId"
               disabled
+              infoIcon={productMetricUnit}
             />
           </Grid>
 
@@ -178,7 +179,7 @@ export const ProductDetailsBatches = ({
             <Input
               type="number"
               variant="outlined"
-              label={`Cantitatea`}
+              label="Cantitatea"
               value={`${quantityCalculation(
                 formik.values.quantity,
                 item.componentQuantity,
@@ -186,6 +187,7 @@ export const ProductDetailsBatches = ({
               )?.toFixed(3)}`}
               name="componentQuantity"
               disabled
+              infoIcon={productMetricUnit}
             />
           </Grid>
           <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
@@ -280,7 +282,7 @@ export const ProductDetailsBatches = ({
             <Input
               type="text"
               variant="outlined"
-              label={`Cantitatea`}
+              label="Cantitatea"
               value={`${quantityCalculation(
                 formik.values.quantity,
                 other.componentQuantity,
@@ -288,6 +290,7 @@ export const ProductDetailsBatches = ({
               )?.toFixed(3)}`}
               name="batchId"
               disabled
+              infoIcon={productMetricUnit}
             />
           </Grid>
 
