@@ -2,7 +2,7 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 import { ThermalCondition } from '../interfaces'
 import dayjs from 'dayjs'
 
-export const productPrintColumns = [
+export const productPrintColumns = (isFormator=false) => [
   {
     field: 'productionDate',
     title: 'Data productiei',
@@ -10,6 +10,16 @@ export const productPrintColumns = [
     defaultPrintSelected: true,
     width: '100px'
   },
+  ...(isFormator
+    ? [
+      {
+        title: 'Nume magazin',
+        field: 'store.name',
+        render: row => row.store.name,
+        defaultPrintSelected: true
+      }
+    ]
+    : []),
   {
     title: 'Produs trasabilitate',
     field: 'product.metiCode',
