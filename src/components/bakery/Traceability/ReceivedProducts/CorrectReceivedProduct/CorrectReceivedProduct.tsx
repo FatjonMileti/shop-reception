@@ -104,8 +104,6 @@ export const CorrectReceivedProduct = ({
     }
   })
 
-  console.log("form.values: ", form.values)
-
   const productCorrectionMutation = useMutation(
     async () => {
       const formData = new FormData()
