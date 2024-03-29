@@ -3,27 +3,12 @@ import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { columns } from './helpers'
 import { AccordionDetailsWrapper, BodyItem } from '../ProductManagementTraceability/AccordionTable'
-import { formatBakeryPayloadDate } from 'utils/helpers'
 import { Fragment } from 'react'
 import { mainItemBodyColumns } from './helpers'
 
 const FrozenTraceabilityDescription = ({ item, chargeItem }) => {
   const { traceabilityFrozenList, product } = item
 
-  const bodyItemValue = (batchItem, frozenItem, columnField) => {
-    const isBoolean =
-      typeof frozenItem[columnField] === 'boolean'
-        ? frozenItem[columnField] === true
-          ? 'Da'
-          : 'Nu'
-        : frozenItem[columnField]
-    const isDateField = ['entryDate', 'modifiedDate', 'verifiedDate']
-
-    let value = isDateField.includes(columnField)
-      ? formatBakeryPayloadDate(batchItem[columnField])
-      : batchItem[columnField] || isBoolean
-    return value
-  }
 
   return (
     <Grid container flexDirection="column">

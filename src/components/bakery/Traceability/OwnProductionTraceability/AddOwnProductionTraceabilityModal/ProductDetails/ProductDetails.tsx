@@ -23,7 +23,14 @@ interface ProductDetailsProps {
   recipeQuery: UseQueryResult<any>
 }
 
-export const ProductDetails = ({formik, onCancel, selectedProduct, recipeQuery, onAddBatch, onAddCharge}: ProductDetailsProps) => {
+export const ProductDetails = ({
+  formik,
+  onCancel,
+  selectedProduct,
+  recipeQuery,
+  onAddBatch,
+  onAddCharge
+}: ProductDetailsProps) => {
   const onDeleteBatch = id => {
     let newBatches = formik.values.traceabilityProductionList.filter(batch =>
       batch.batchId ? batch.batchId !== id : batch.childTraceabilityId !== id
@@ -52,7 +59,15 @@ export const ProductDetails = ({formik, onCancel, selectedProduct, recipeQuery, 
 
   return (
     <Grid container rowSpacing={3.5}>
-      <Grid item xs={12}>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          '& div': {
+            whiteSpace: 'unset !important'
+          }
+        }}
+      >
         <FormInfoItems
           items={[
             {
@@ -145,7 +160,7 @@ export const ProductDetails = ({formik, onCancel, selectedProduct, recipeQuery, 
             helperText={formik.errors.thermalCondition as string}
           />
         </Grid>
-        <Grid item xs={12} md={4} sx={{'& .MuiFormControl-root': {marginTop: '16px'}}}>
+        <Grid item xs={12} md={4} sx={{ '& .MuiFormControl-root': { marginTop: '16px' } }}>
           <RadioButtonGroup
             label="Conform"
             dotStyle
