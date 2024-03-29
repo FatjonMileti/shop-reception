@@ -34,6 +34,13 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     </div>
   ) : (
     <Box>
+      <Button
+        variant="contained"
+        label="123"
+        // label={allocateEmployeesAllSelected ? 'Debifeaza toti angajatii' : 'Bifeaza toti angajatii'}
+        // onClick={() => setAllocateEmployeesAllSelected(!allocateEmployeesAllSelected)}
+        style={{ marginBottom: '1em' }}
+      />
       <Box style={{ height: '60vh', overflowY: 'scroll' }}>
         <Table
           hideCheckbox

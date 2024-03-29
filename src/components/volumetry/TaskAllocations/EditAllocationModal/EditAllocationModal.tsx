@@ -13,12 +13,16 @@ import { getFormInitialValues } from './helpers'
 import { handleQueryError } from 'utils/helpers'
 import { EditAllocationModalProps } from '../TaskAllocationsDefinitions'
 import { TASK_STATUS_ACTIONS } from '../Employee/constants'
+import { customValidation } from 'components/volumetry/utils'
 
 const validationSchema = hideWorkload =>
   yup.object({
     allocatedWorkload: hideWorkload
       ? yup.string().nullable()
-      : yup.number().required('Acest camp este obligatoriu.'),
+      : yup
+          .number()
+          .required('Acest camp este obligatoriu.')
+          .test('is-step-of-0.25', 'Valoarea trebuie să fie multiplu de 0.25', customValidation),
     performedWorkload: yup.string().nullable(),
     comment: yup.string()
   })

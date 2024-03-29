@@ -11,10 +11,14 @@ import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { handleQueryError } from 'utils/helpers'
 import { EditCurrentTaskTemplateProps } from '../TaskAllocationsDefinitions'
+import { customValidation } from 'components/volumetry/utils'
 
 const validationSchema = yup.object({
   id: yup.string().nonNullable(),
-  workload: yup.number().required('Acest camp este obligatoriu.'),
+  workload: yup
+    .number()
+    .required('Acest camp este obligatoriu.')
+    .test('is-step-of-0.25', 'Valoarea trebuie să fie multiplu de 0.25', customValidation),
   allocatedWorkersNumber: yup.number()
 })
 
