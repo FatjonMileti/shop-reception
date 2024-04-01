@@ -127,6 +127,7 @@ export const ProductDetailsBatches = ({
                             : undefined
                         }
                         style={{ display: 'flex' }}
+                        maxDate={dayjs(formik.values.productionDate)}
                       />
                     </Grid>
                   )}

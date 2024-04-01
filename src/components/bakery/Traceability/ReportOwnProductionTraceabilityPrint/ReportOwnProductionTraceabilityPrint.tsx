@@ -15,6 +15,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { Icon_v2 } from 'components/core-ui/Icon_v2'
 import { OwnProductionTraceabilityChildren } from './OwnProductionTraceabilityChildren'
+import { formatBakeryPayloadDate } from '../../../../utils/helpers'
 
 export const ReportOwnProductionTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
@@ -81,7 +82,7 @@ export const ReportOwnProductionTraceabilityPrint = () => {
     }
   )
 
-  const selectedColumnsProduct = productPrintColumns.filter(column =>
+  const selectedColumnsProduct = productPrintColumns(true).filter(column =>
     printColumns.includes(column.field)
   )
 
@@ -146,6 +147,17 @@ export const ReportOwnProductionTraceabilityPrint = () => {
             <p>
               <b>PRP 05:</b> Prelucrare tehnologica, control productie si comercializare de produse
               alimentare
+            </p>
+          </Grid>
+
+          <Grid item xs={12} className={styles.dateColumn}>
+            <p>
+              <b>Data:</b>
+              {` ${formatBakeryPayloadDate(
+                tableFilters.find(f => f.name === 'startDate')?.value
+              )} - ${formatBakeryPayloadDate(
+                tableFilters.find(f => f.name === 'endDate')?.value)
+              }`}
             </p>
           </Grid>
         </Grid>

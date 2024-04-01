@@ -15,6 +15,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { Icon_v2 } from 'components/core-ui/Icon_v2'
+import { formatBakeryPayloadDate } from '../../../../utils/helpers'
 
 export const ReportFrozenTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
@@ -83,7 +84,7 @@ export const ReportFrozenTraceabilityPrint = () => {
     }
   )
 
-  const selectedColumnsProduct = productPrintColumns.filter(column =>
+  const selectedColumnsProduct = productPrintColumns(true).filter(column =>
     printColumns.includes(column.field)
   )
 
@@ -150,7 +151,12 @@ export const ReportFrozenTraceabilityPrint = () => {
 
           <Grid item xs={12} className={styles.dateColumn}>
             <p>
-              <b>Data:</b> 25.12.2023 - 27.12.2023
+              <b>Data:</b>
+              {` ${formatBakeryPayloadDate(
+                tableFilters.find(f => f.name === 'startDate')?.value
+              )} - ${formatBakeryPayloadDate(
+                tableFilters.find(f => f.name === 'endDate')?.value)
+              }`}
             </p>
           </Grid>
         </Grid>

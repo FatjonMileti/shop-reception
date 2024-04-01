@@ -368,6 +368,10 @@ export const ReportFrozenTraceability = () => {
     }
   ]
 
+  const dynamicColumns = React.useMemo(() => {
+    return [...productPrintColumns(isFormator), ...batchPrintColumns]
+  }, [])
+
   const isXs = useMediaQuery('(max-width:624px)')
 
   return (
@@ -414,7 +418,7 @@ export const ReportFrozenTraceability = () => {
                 ? URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR
                 : URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT
             }
-            dynamicColumns={[...productPrintColumns, ...batchPrintColumns]}
+            dynamicColumns={dynamicColumns}
             isModalOpen={isPrintModalOpen}
             closeModal={() => setIsPrintModalOpen(false)}
             toolbarActions={[]}

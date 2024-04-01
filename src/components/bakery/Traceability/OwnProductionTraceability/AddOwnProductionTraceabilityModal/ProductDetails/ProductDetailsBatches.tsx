@@ -23,7 +23,6 @@ export const ProductDetailsBatches = ({
   onAddBatch,
   onAddCharge
 }: ProductDetailsBatchesProps) => {
-
   if (typeof productMetiCode === 'undefined') {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
@@ -102,7 +101,9 @@ export const ProductDetailsBatches = ({
                       value={item.quantity}
                       name="quantity"
                       infoIcon={batch.componentUnit}
-                      helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
+                      helperText={
+                        formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
+                      }
                       error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                     />
                   </Grid>
@@ -119,14 +120,16 @@ export const ProductDetailsBatches = ({
                         }
                         variant="outlined"
                         required
-                        helperText={formik.errors?.traceabilityProductionList?.[idx]?.openingDate as string}
+                        helperText={
+                          formik.errors?.traceabilityProductionList?.[idx]?.openingDate as string
+                        }
                         error={!!formik.errors?.traceabilityProductionList?.[idx]?.openingDate}
                         value={
                           formik.values?.traceabilityProductionList?.[idx]?.openingDate
                             ? dayjs(formik.values?.traceabilityProductionList?.[idx]?.openingDate)
                             : undefined
                         }
-                        // maxDate={dayjs()}
+                        maxDate={dayjs(formik.values.productionDate)}
                         style={{ display: 'flex' }}
                       />
                     </Grid>
@@ -230,7 +233,9 @@ export const ProductDetailsBatches = ({
                       value={charge.quantity}
                       name="quantity"
                       infoIcon={item.componentUnit}
-                      helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
+                      helperText={
+                        formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
+                      }
                       error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                     />
                   </Grid>
@@ -294,7 +299,7 @@ export const ProductDetailsBatches = ({
 
           {formik.values.traceabilityProductionList.map((item, idx) => (
             <Fragment key={idx}>
-              {other.componentCode === item.componentCode && (
+              {(other.componentCode === item.componentCode && (
                 <Grid item xs={4}>
                   <Input
                     type="number"
@@ -309,14 +314,16 @@ export const ProductDetailsBatches = ({
                     value={item.quantity}
                     name="quantity"
                     infoIcon={other.componentUnit}
-                    helperText={formik.errors?.traceabilityProductionList?.[idx]?.quantity as string}
+                    helperText={
+                      formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
+                    }
                     error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
                   />
                 </Grid>
-              ) || null}
+              )) ||
+                null}
             </Fragment>
           ))}
-
         </Fragment>
       ))}
 

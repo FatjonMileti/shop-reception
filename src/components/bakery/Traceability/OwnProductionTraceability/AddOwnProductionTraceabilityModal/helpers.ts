@@ -3,7 +3,6 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
 export const getInitialValues = recipeQuery => {
-
   return {
     productionDate: dayjs(),
     chargeNumber: null,
@@ -44,10 +43,22 @@ export const validationSchema = Yup.object().shape({
       quantity: Yup.number().required('Cantitate obligatorie'),
 
       openingDate: Yup.date().when(
-        ['hasSecondaryDlc', 'batchId'],
-        ([hasSecondaryDlc, batchId], schema) => {
+        ['hasSecondaryDlc', 'batchId', '$productionDate'],
+        ([hasSecondaryDlc, batchId, productionDate], schema) => {
           if (hasSecondaryDlc && batchId) {
-            return schema.required('Data obligatorie')
+            if (productionDate) {
+              return schema
+                .required('Data obligatorie')
+                .test(
+                  'notAfterProductionDate',
+                  'Data deschiderii mai mica sau egala cu data productiei',
+                  openingDate => {
+                    return !dayjs(openingDate).isAfter(productionDate, 'date')
+                  }
+                )
+            } else {
+              return schema.required('Data obligatorie')
+            }
           } else {
             return schema.nullable()
           }

@@ -30,6 +30,10 @@ export const columns: any[] = [
     render: row => <BodyItem name="Produs" value={row?.batch?.product?.name} />
   },
   {
+    title: 'Nume lot',
+    render: row => <BodyItem name="Nume lot" value={row?.batch?.batchName} />
+  },
+  {
     title: 'Familie produs',
     field: 'batch.product.familyName',
     render: row => <BodyItem name="Familie produs" value={row?.batch?.product?.familyName} />
@@ -227,7 +231,7 @@ export const columns: any[] = [
 export const mainItemBodyColumns = [
   {
     title: 'Operator productie',
-    field: 'createdBy'
+    field: 'productionOperator'
   },
   {
     title: 'Stare termica',
@@ -262,7 +266,10 @@ export const mainItemBodyColumns = [
   },
   {
     title: 'Verificare de catre validator trasabilitate',
-    field: 'verified'
+    field: 'isVerified',
+    render: row => (
+      <BodyItem name="Verificare de catre validator trasabilitate" value={<IconCell value={row.isVerified ? 'active' : 'inactive'} />} />
+    )
   },
   {
     title: 'Validator trasabilitate',

@@ -24,9 +24,10 @@ import { PrintModal } from '../../../core-ui/PrintModal'
 import { URLS } from '../../constants'
 import { useImmer } from 'use-immer'
 import OwnProductionTraceabilityDescription from '../OwnProductionTraceability/OwnProductionTraceabilityDescription'
-import { batchPrintColumns, productPrintColumns, chargePrintColumns } from './helpers'
+import { batchPrintColumns, chargePrintColumns } from './helpers'
 import { useLocation } from 'react-router'
 import dayjs from 'dayjs'
+import { productPrintColumns } from '../ReportOwnProductionTraceabilityPrint/helpers'
 
 export const ReportOwnProductionTraceability = () => {
   const { showNotification } = useNotification()
@@ -405,7 +406,7 @@ export const ReportOwnProductionTraceability = () => {
                 ? URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT_FORMATOR
                 : URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT
             }
-            dynamicColumns={[...productPrintColumns, ...batchPrintColumns, ...chargePrintColumns]}
+            dynamicColumns={[...productPrintColumns(isFormator), ...batchPrintColumns, ...chargePrintColumns]}
             isModalOpen={isPrintModalOpen}
             closeModal={() => setIsPrintModalOpen(false)}
             toolbarActions={[]}
