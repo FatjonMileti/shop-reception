@@ -37,6 +37,29 @@ export const ReportOwnProductionTraceabilityPrint = () => {
     return filterBy?.split('|').map((name, i) => ({ name, value: filterValue.split('|')[i] })) || []
   }, [])
 
+  const isFormator = location.pathname.includes('/formator')
+
+  const { data: stores } = useQuery(
+    ['store'],
+    async () => {
+      const result = await makeCoreGetRequest('/bakery/store/trainee/all')
+
+      const selectedStores = filterValue.split('|').pop().slice(1, -1).split(';')
+      const stores = result.filter(item => selectedStores.includes(item.id))
+
+      return stores || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: isFormator
+    }
+  )
+
   const reportDataQuery = useQuery(
     ['report-traceability-production'],
     async () => {
@@ -78,6 +101,8 @@ export const ReportOwnProductionTraceabilityPrint = () => {
     )
   }
 
+  const storesNames = stores ? stores.map(store => store.name) : []
+
   return (
     <div className={s.mainContainer} ref={componentRef}>
       <Grid container rowGap="24px">
@@ -107,6 +132,7 @@ export const ReportOwnProductionTraceabilityPrint = () => {
             <p className={styles.subtitle}>
               <b>Produse elaborate Cod: RP-05_23.1 </b>
             </p>
+            {isFormator && <p className={styles.subtitle}>{storesNames.join(', ')}</p>}
           </Grid>
 
           <Grid

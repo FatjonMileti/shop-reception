@@ -284,7 +284,6 @@ export const ReportFrozenTraceability = () => {
     }
   }, [liveFiltersObject.startDate, liveFiltersObject.endDate])
 
-
   const drawerFilters: TableFiltersType[] = [
     {
       name: 'product.id',
@@ -402,7 +401,14 @@ export const ReportFrozenTraceability = () => {
         <>
           <PrintModal
             {...tableState}
-            tableFilters={tableState.tableFilters}
+            tableFilters={
+              isFormator
+                ? [
+                    ...tableState.tableFilters,
+                    { name: 'store', value: storeFilterValue.map(store => store.value) }
+                  ]
+                : tableState.tableFilters
+            }
             url={
               isFormator
                 ? URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR
