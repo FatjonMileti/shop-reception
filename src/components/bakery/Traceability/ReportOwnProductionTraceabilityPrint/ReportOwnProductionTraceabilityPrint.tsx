@@ -131,7 +131,7 @@ export const ReportOwnProductionTraceabilityPrint = () => {
               <b>RAPORT DE PRODUCTIE</b>
             </p>
             <p className={styles.subtitle}>
-              <b>Produse elaborate Cod: RP-05_23.1 </b>
+              <b>Brutarie - Patiserie Produse elaborate Cod: RP-05_23.1 </b>
             </p>
             {isFormator && <p className={styles.subtitle}>{storesNames.join(', ')}</p>}
           </Grid>
