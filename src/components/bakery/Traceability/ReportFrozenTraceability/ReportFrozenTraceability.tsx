@@ -120,7 +120,7 @@ export const ReportFrozenTraceability = () => {
           page,
           rowsPerPage,
           searchText,
-          searchFields: ['product.name']
+          searchFields: ['product.name', 'product.metiCode']
         })
       )
 
