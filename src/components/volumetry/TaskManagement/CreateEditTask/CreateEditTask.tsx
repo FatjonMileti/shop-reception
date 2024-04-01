@@ -247,7 +247,8 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             error={!!formik.errors.standardProductivityValue}
             helperText={formik.errors.standardProductivityValue as string}
             inputProps={{
-              step: '0.1'
+              step: '0.25',
+              min: '0'
             }}
           />
         </Grid>
