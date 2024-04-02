@@ -38,6 +38,8 @@ export const SelectBatch = ({
           url: '/bakery/batch/assign',
           page,
           rowsPerPage,
+          order: 'asc',
+          orderBy: 'expireDate|entryDate',
           filters: [
             {
               name: 'product.metiCode',
