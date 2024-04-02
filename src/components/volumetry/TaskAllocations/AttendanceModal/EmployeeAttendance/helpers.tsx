@@ -1,5 +1,4 @@
 import { Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
-import dayjs from 'dayjs'
 
 export const buildColumns = ({
   toggleEmployee,
@@ -12,61 +11,46 @@ export const buildColumns = ({
 }) => [
   {
     title: 'Angajat',
-    field: 'fullName',
-    align: 'left',
-    type: 'string',
-    disableSorting: true,
-    render: (row: any) => (
+    field: 'isPresent',
+    render: row => (
       <Checkbox
         edge="start"
         checked={row.isPresent}
         onChange={() => toggleEmployee(row)}
         inputProps={{ 'aria-labelledby': `employee-${row.value}` }}
         label={row.fullName}
-        // style={
-        //   isXs ? { marginLeft: 0 } : { lineHeight: '70px', display: 'inline-block', marginLeft: 0 }
-        // }
+        style={{ fontSize: '12px !important' }}
       />
     )
   },
   {
     title: 'Ora inceput de tura',
     field: 'shiftStart',
-    align: 'left',
-    type: 'string',
-    disableSorting: true,
-    render: (row: any) => (
+    render: row => (
       <TimePicker
         label=""
-        value={row.shiftStart || dayjs()}
-        onAccept={newValue => updateEmployeeTime(row, newValue, 'shiftStart')}
-        onChange={() => {}}
+        value={row.shiftStart}
+        onChange={newValue => updateEmployeeTime(row, newValue, 'shiftStart')}
         variant="outlined"
         style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
         forceDesktop
         ampm={false}
       />
-    ),
-    collapsible: true
+    )
   },
   {
     title: 'Ora final de tura',
     field: 'shiftEnd',
-    align: 'left',
-    type: 'string',
-    disableSorting: true,
-    render: (row: any) => (
+    render: row => (
       <TimePicker
         label=""
-        value={row.shiftEnd || dayjs()}
-        onAccept={newValue => updateEmployeeTime(row, newValue, 'shiftEnd')}
-        onChange={() => {}}
+        value={row.shiftEnd}
+        onChange={newValue => updateEmployeeTime(row, newValue, 'shiftEnd')}
         variant="outlined"
         style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
         forceDesktop
         ampm={false}
       />
-    ),
-    collapsible: true
+    )
   }
 ]
