@@ -39,7 +39,7 @@ export const SelectBatch = ({
           page,
           rowsPerPage,
           order: 'asc',
-          orderBy: 'expireDate|entryDate',
+          orderBy: encodeURIComponent('expireDate|entryDate'),
           filters: [
             {
               name: 'product.metiCode',
