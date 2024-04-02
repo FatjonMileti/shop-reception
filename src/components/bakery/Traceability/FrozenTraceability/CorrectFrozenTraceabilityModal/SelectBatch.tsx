@@ -32,7 +32,7 @@ export const SelectBatch = ({ formik, onContinue, onCancel }: SelectBatchProps) 
           page,
           rowsPerPage,
           order: 'asc',
-          orderBy: 'expireDate|entryDate',
+          orderBy: encodeURIComponent('expireDate|entryDate'),
           filters: [
             {
               name: 'product.metiCode',
