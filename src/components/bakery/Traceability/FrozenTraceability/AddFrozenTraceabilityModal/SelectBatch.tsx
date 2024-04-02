@@ -14,11 +14,7 @@ interface SelectBatchProps {
   selectedProduct: Product
 }
 
-export const SelectBatch = ({
-  onContinue,
-  onCancel,
-  selectedProduct
-}: SelectBatchProps) => {
+export const SelectBatch = ({ onContinue, onCancel, selectedProduct }: SelectBatchProps) => {
   const { showNotification } = useNotification()
 
   const [tableItems, setTableItems] = useState<any[]>([])
@@ -26,7 +22,7 @@ export const SelectBatch = ({
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const [selectedRows, setSelectedRows] = useState([])
-
+  console.log('debug', selectedProduct)
   const fetchData = async (page, rowsPerPage) => {
     try {
       setIsLoading(true)
@@ -39,6 +35,10 @@ export const SelectBatch = ({
             {
               name: 'product.metiCode',
               value: selectedProduct?.metiCode
+            },
+            {
+              name: 'batchStatus',
+              value: 'AVAILABLE'
             }
           ]
         })

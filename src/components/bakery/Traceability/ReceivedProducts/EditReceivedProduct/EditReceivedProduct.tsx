@@ -87,7 +87,7 @@ export const EditReceivedProduct = ({
       receivedProductQuery?.data?.closeReason ||
       receivedProductQuery?.data?.batchStatus === 'CLOSED'
         ? 'OUT_OF_STOCK'
-        : '',
+        : null,
     verified: receivedProductQuery?.data?.verified || false
   }
 

@@ -21,6 +21,7 @@ export const SelectBatch = ({ formik, onContinue, onCancel }: SelectBatchProps) 
 
   const [selectedRows, setSelectedRows] = useState([])
 
+  console.log('debug', formik.values)
   const fetchData = async (page, rowsPerPage) => {
     try {
       setIsLoading(true)
@@ -33,6 +34,10 @@ export const SelectBatch = ({ formik, onContinue, onCancel }: SelectBatchProps) 
             {
               name: 'product.metiCode',
               value: formik.values?.product?.metiCode
+            },
+            {
+              name: 'batchStatus',
+              value: 'AVAILABLE'
             }
           ]
         })
