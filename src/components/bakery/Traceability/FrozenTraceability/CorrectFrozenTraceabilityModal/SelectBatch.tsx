@@ -6,6 +6,7 @@ import { useNotification } from 'hooks'
 import { useState } from 'react'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { selectBatchColumns } from '../helpers'
+import { formatPayloadDate } from '../../../../../utils/helpers'
 
 interface SelectBatchProps {
   onContinue: (frozenItems: any[]) => void
@@ -30,6 +31,8 @@ export const SelectBatch = ({ formik, onContinue, onCancel }: SelectBatchProps) 
           url: '/bakery/batch/assign',
           page,
           rowsPerPage,
+          order: 'asc',
+          orderBy: 'expireDate|entryDate',
           filters: [
             {
               name: 'product.metiCode',
@@ -38,6 +41,12 @@ export const SelectBatch = ({ formik, onContinue, onCancel }: SelectBatchProps) 
             {
               name: 'batchStatus',
               value: 'AVAILABLE'
+            }
+          ],
+          extraCustomUrlParams: [
+            {
+              name: 'productionDate',
+              value: formatPayloadDate(formik.values.productionDate)
             }
           ]
         })

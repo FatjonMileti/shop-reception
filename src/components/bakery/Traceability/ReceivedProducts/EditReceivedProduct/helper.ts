@@ -4,7 +4,7 @@ import { BATCH_STATUS,  EditReceivedProductRequestData } from './EditReceivedPro
 export const correctReceivedProductSchema: Yup.ObjectSchema<EditReceivedProductRequestData> = Yup.object()
   .shape({
     batchStatus: Yup.string(),
-    closeReason: Yup.string(),
+    closeReason: Yup.string().nullable(),
     verified: Yup.boolean().required('This field is required')
   })
   .test({

@@ -55,25 +55,18 @@ export const columns: any[] = [
   {
     title: 'DLC MP / baze',
     align: 'left',
-    render: row => (row.batch?.hasExpireDate ? formatBakeryPayloadDate(row.batch?.expireDate) : ''),
+    render: row =>
+      (row.batch?.hasExpireDate && formatBakeryPayloadDate(row.batch?.expireDate)) ||
+      (row?.childTraceability && formatBakeryPayloadDate(row?.dlc)) ||
+      '',
     collapsible: 'true'
   },
   {
     title: 'DLC sec MP',
     align: 'left',
-    render: row =>
-      formatBakeryPayloadDate(
-        (row?.childTraceability?.productionDate &&
-          row.childTraceability?.product?.dlcDays &&
-          dayjs(row.childTraceability?.productionDate).add(
-            row.childTraceability?.product?.dlcDays,
-            'days'
-          )) ||
-          (row.batch?.hasSecondaryDlc && dayjs(row.openingDate).add(row.batch?.dlcDays, 'days'))
-      ) || '',
+    render: row => (!row.childTraceability && row?.dlc && formatBakeryPayloadDate(row?.dlc)) || '',
     collapsible: 'true'
   },
-
   {
     title: 'Data deschidere lot',
     field: 'openingDate',

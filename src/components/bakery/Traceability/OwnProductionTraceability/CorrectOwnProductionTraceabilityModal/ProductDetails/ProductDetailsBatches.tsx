@@ -66,6 +66,7 @@ export const ProductDetailsBatches = ({
                   onAddBatch(batch.componentCode)
                 }}
                 style={{ height: '40px', fontSize: '10px' }}
+                disabled={!formik.values?.quantity || !formik.values.productionDate}
               />
             )}
           </Grid>
@@ -200,6 +201,7 @@ export const ProductDetailsBatches = ({
                   onAddCharge(item.componentCode)
                 }}
                 style={{ height: '40px', fontSize: '10px' }}
+                disabled={!formik.values?.quantity || !formik.values.productionDate}
               />
             </Grid>
           </>

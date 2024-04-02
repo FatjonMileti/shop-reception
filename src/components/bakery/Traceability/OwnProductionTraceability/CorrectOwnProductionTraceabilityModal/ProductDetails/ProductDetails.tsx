@@ -190,9 +190,12 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', toBoolean(option))
-              formik.setFieldValue('nonComplianceReason', null)
-              formik.setFieldValue('productDestination', null)
+              const conform = toBoolean(option)
+              formik.setFieldValue('conform', conform)
+              if (conform) {
+                formik.setFieldValue('nonComplianceReason', null)
+                formik.setFieldValue('productDestination', null)
+              }
             }}
             value={formik.values.conform}
             defaultValue={formik.initialValues.conform ? 'DA' : 'NU'}
@@ -216,9 +219,11 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             variant="outlined"
             label="Motiv neconformitate"
             onChange={e => formik.setFieldValue('nonComplianceReason', e.currentTarget.value)}
-            value={formik.values.nonComplianceReason}
+            value={formik.values.nonComplianceReason ?? ''}
             disabled={formik.values.conform == null || formik.values.conform == true}
             name="nonComplianceReason"
+            error={!!formik.errors.nonComplianceReason}
+            helperText={formik.errors.nonComplianceReason as string}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -227,9 +232,11 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             variant="outlined"
             label="Destinatia produsului neconform"
             onChange={e => formik.setFieldValue('productDestination', e.currentTarget.value)}
-            value={formik.values.productDestination}
+            value={formik.values.productDestination ?? ''}
             disabled={formik.values.conform == null || formik.values.conform == true}
             name="productDestination"
+            error={!!formik.errors.productDestination}
+            helperText={formik.errors.productDestination as string}
           />
         </Grid>
         <Grid item xs={12}>
