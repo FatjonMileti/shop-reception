@@ -28,11 +28,33 @@ export const ReportFrozenTraceabilityPrint = () => {
   const filterValue = search.get('filterValue')
 
   const { showNotification } = useNotification()
+  const isFormator = location.pathname.includes('/formator')
 
   const componentRef = useRef()
   const handlePrint = useReactToPrint({
     content: () => componentRef.current
   })
+
+  const { data: stores } = useQuery(
+    ['store'],
+    async () => {
+      const result = await makeCoreGetRequest('/bakery/store/trainee/all')
+
+      const selectedStores = filterValue.split('|').pop().slice(1, -1).split(';')
+      const stores = result.filter(item => selectedStores.includes(item.id))
+
+      return stores || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: isFormator
+    }
+  )
 
   const tableFilters = React.useMemo(() => {
     return filterBy?.split('|').map((name, i) => ({ name, value: filterValue.split('|')[i] })) || []
@@ -70,6 +92,10 @@ export const ReportFrozenTraceabilityPrint = () => {
     printColumns.includes(column.field)
   )
 
+
+ 
+  const storesNames = stores ? stores.map(store => store.name) : []
+
   return (
     <div className={s.mainContainer} ref={componentRef}>
       <Grid container rowGap="24px">
@@ -102,6 +128,11 @@ export const ReportFrozenTraceabilityPrint = () => {
                 <b>Brutarie - Patiserie Produse congelate COD: RP-05_23.2 </b>
               </p>
             </Grid>
+            {isFormator && (
+              <Grid item xs={12}>
+                <p className={styles.subtitle}>{storesNames.join(', ')}</p>
+              </Grid>
+            )}
           </Grid>
 
           <Grid

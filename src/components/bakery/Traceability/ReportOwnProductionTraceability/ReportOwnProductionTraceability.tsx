@@ -309,8 +309,7 @@ export const ReportOwnProductionTraceability = () => {
       ),
       type: 'date',
       label: 'Data inceput productie',
-      required: true,
-
+      required: true
     },
     {
       name: 'endDate',
@@ -394,7 +393,14 @@ export const ReportOwnProductionTraceability = () => {
         <>
           <PrintModal
             {...tableState}
-            tableFilters={tableState.tableFilters}
+            tableFilters={
+              isFormator
+                ? [
+                    ...tableState.tableFilters,
+                    { name: 'store', value: storeFilterValue.map(store => store.value) }
+                  ]
+                : tableState.tableFilters
+            }
             url={
               isFormator
                 ? URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT_FORMATOR
