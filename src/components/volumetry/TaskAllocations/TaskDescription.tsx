@@ -95,7 +95,17 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         </Grid>
       )}
 
-      {!hideDetails && (
+      {hideDetails ? (
+        <Grid item my={1} xs={12} style={{ marginRight: '15px' }}>
+          <IconButton
+            onClick={() => setShouldRefreshData(true)}
+            label="Reincarca datele"
+            variant="outlined"
+            startIcon={<RefreshIcon />}
+            style={isMobile ? { width: '100%', marginTop: '12px' } : { float: 'right' }}
+          />
+        </Grid>
+      ) : (
         <Grid item my={1} xs={12} style={{ marginRight: '15px' }}>
           <Button
             variant="contained"
@@ -112,6 +122,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
           />
         </Grid>
       )}
+
       {!hideDetails && (
         <>
           <AssignEmployee

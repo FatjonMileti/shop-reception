@@ -11,11 +11,12 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     isEmployeesLoading,
     employees,
     toggleEmployee,
-    updateEmplpyeeTime,
+    updateEmployeeTime,
     closeModal,
     handleSubmit,
     increaseStep,
-    isXs
+    isXs,
+    formik
   } = props
 
   const submitStep = async () => {
@@ -24,9 +25,23 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
   }
 
   const tableColumns = useMemo(
-    () => buildColumns({ toggleEmployee, updateEmplpyeeTime, isXs }) as TableHeaderType[],
+    () => buildColumns({ toggleEmployee, updateEmployeeTime, isXs }) as TableHeaderType[],
     [employees]
   )
+
+  const checkSelected = formik.values.employees.some(
+    employee => employee.isPresent || employee.shouldAllocate
+  )
+  const selectOrDeselectAll = employees => {
+    formik.setFieldValue(
+      'employees',
+      employees.map(employee => ({
+        ...employee,
+        isPresent: checkSelected ? false : true,
+        shouldAllocate: checkSelected ? false : true
+      }))
+    )
+  }
 
   return isEmployeesLoading ? (
     <div style={{ display: 'flex' }}>
@@ -34,6 +49,12 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     </div>
   ) : (
     <Box>
+      <Button
+        variant="contained"
+        label={checkSelected ? 'Debifeaza toti angajatii' : 'Bifeaza toti angajatii'}
+        onClick={() => selectOrDeselectAll(employees)}
+        style={{ marginBottom: '1em' }}
+      />
       <Box style={{ height: '60vh', overflowY: 'scroll' }}>
         <Table
           hideCheckbox
