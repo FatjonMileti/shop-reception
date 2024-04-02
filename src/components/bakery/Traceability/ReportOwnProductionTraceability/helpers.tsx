@@ -69,7 +69,7 @@ export const batchPrintColumns = [
   },
   {
     field: 'modifiedDate',
-    title: 'Data ultimei verificari',
+    title: 'Data ultimei modificari',
     render: row => formatBakeryPayloadDate(row.modifiedDate)
   }
 ]
@@ -136,7 +136,7 @@ export const chargePrintColumns = [
   },
   {
     field: 'dlc',
-    title: 'DLC sec MP / baze',
+    title: 'DLC sec MP',
     render: row => formatBakeryPayloadDate(row.dlc),
     defaultPrintSelected: true
   },
