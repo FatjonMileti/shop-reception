@@ -1,3 +1,4 @@
+import { customValidation } from 'components/volumetry/utils'
 import * as Yup from 'yup'
 
 const getFrequencyValue = frequency => frequency.map(f => ({ label: f.value, value: f.key }))
@@ -30,7 +31,6 @@ export const getInitialValues = (item, categoryFilterValue) => {
   }
 }
 
-// TODO: add validation messages
 export const getValidationSchema = item =>
   Yup.object().shape({
     name: Yup.string().required('Acest camp este obligatoriu.'),
@@ -57,7 +57,9 @@ export const getValidationSchema = item =>
       )
       .required('Acest camp este obligatoriu.'),
     // defaultWorkload: Yup.string().required('Acest camp este obligatoriu.'),
-    standardProductivityValue: Yup.string().required('Acest camp este obligatoriu.'),
+    standardProductivityValue: Yup.string()
+      .required('Acest camp este obligatoriu.')
+      .test('is-step-of-0.25', 'Valoarea trebuie să fie multiplu de 0.25', customValidation),
     measurementUnit: Yup.object()
       .shape({
         label: Yup.string().required(),

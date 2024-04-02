@@ -9,6 +9,8 @@ import { handleQueryError } from 'utils/helpers'
 import { toTableLocations } from './serializers'
 import { EditLocation } from './EditLocation'
 import { getCategoriesOptions, getRegionsOptions } from '../api'
+import { makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 
 const LocationManagement = () => {
   const [tableItems, setTableItems] = useState<LocationManagementTableItem[]>([])
@@ -35,37 +37,17 @@ const LocationManagement = () => {
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
-      // const response = await makeCoreGetRequest(
-      //   toTableGETUrl({
-      //     url: '/volumetry/locations',
-      //     tableFilters,
-      //     page,
-      //     rowsPerPage,
-      //     order,
-      //     orderBy
-      //   })
-      // )
-      const response = {
-        list: [
-          {
-            id: 1,
-            name: 'Orhideea',
-            region: 'Bucuresti',
-            category: 'HYPER MAXI',
-            locationType: 'HYPER'
-          },
-          {
-            id: 2,
-            name: 'Iulius',
-            region: 'Cluj',
-            category: 'HYPER',
-            locationType: 'HYPER'
-          }
-        ],
-        page: {
-          totalCount: 2
-        }
-      }
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: '/volumetry/locations',
+          tableFilters,
+          page,
+          rowsPerPage
+          // order,
+          // orderBy
+        })
+      )
+
       setTableItems(toTableLocations(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)

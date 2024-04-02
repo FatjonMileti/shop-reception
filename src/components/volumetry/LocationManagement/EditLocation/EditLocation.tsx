@@ -83,19 +83,6 @@ const EditLocation: React.FC<EditLocationProps> = props => {
         <Grid xs={12} item>
           <AsyncAutocomplete
             variant="outlined"
-            name="region"
-            label="Regiune"
-            value={formik.values.region}
-            options={regionsOptions || []}
-            onChange={value => formik.setFieldValue('region', value)}
-            error={!!formik.errors.region}
-            helperText={formik.errors.region as string}
-            required
-          />
-        </Grid>
-        <Grid xs={12} item>
-          <AsyncAutocomplete
-            variant="outlined"
             name="category"
             label="Business unit"
             value={formik.values.category}

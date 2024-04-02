@@ -79,11 +79,12 @@ export interface EmployeeAttendanceProps {
   isEmployeesLoading: boolean
   employees: any[]
   toggleEmployee: Function
-  updateEmplpyeeTime: Function
+  updateEmployeeTime: Function
   closeModal: Function
   handleSubmit: Function
   increaseStep: Function
   isXs: boolean
+  formik: any
 }
 
 export interface AllocationListProps {
@@ -97,9 +98,8 @@ export interface AllocationListProps {
 
 export interface LocationManagementTableItem {
   id: string | number
-  name: string
-  region: string
-  category: string
+  locationName: string
+  locationCategory: string
   locationType: string
 }
 
@@ -113,12 +113,10 @@ export interface LocationItem {
 }
 
 export interface LocationItemForm {
-  region: AsyncAutocompleteOption
   category: AsyncAutocompleteOption
 }
 
 export interface LocationItemPayload {
-  regionId: string | number
   volumetryLocationCategoryId: string | number
 }
 
