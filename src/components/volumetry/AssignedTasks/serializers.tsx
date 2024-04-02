@@ -33,8 +33,7 @@ export const toListTableRows = (
         hideDetails
       />
     ),
-    borderLeftColor: '#0970E6',
-    defaultExpanded: true
+    borderLeftColor: '#0970E6'
   }))
 }
 
