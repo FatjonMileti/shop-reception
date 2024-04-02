@@ -15,6 +15,7 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { Icon_v2 } from 'components/core-ui/Icon_v2'
+import { formatBakeryPayloadDate } from '../../../../utils/helpers'
 
 export const ReportFrozenTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
@@ -27,11 +28,33 @@ export const ReportFrozenTraceabilityPrint = () => {
   const filterValue = search.get('filterValue')
 
   const { showNotification } = useNotification()
+  const isFormator = location.pathname.includes('/formator')
 
   const componentRef = useRef()
   const handlePrint = useReactToPrint({
     content: () => componentRef.current
   })
+
+  const { data: stores } = useQuery(
+    ['store'],
+    async () => {
+      const result = await makeCoreGetRequest('/bakery/store/trainee/all')
+
+      const selectedStores = filterValue.split('|').pop().slice(1, -1).split(';')
+      const stores = result.filter(item => selectedStores.includes(item.id))
+
+      return stores || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: isFormator
+    }
+  )
 
   const tableFilters = React.useMemo(() => {
     return filterBy?.split('|').map((name, i) => ({ name, value: filterValue.split('|')[i] })) || []
@@ -61,13 +84,17 @@ export const ReportFrozenTraceabilityPrint = () => {
     }
   )
 
-  const selectedColumnsProduct = productPrintColumns.filter(column =>
+  const selectedColumnsProduct = productPrintColumns(true).filter(column =>
     printColumns.includes(column.field)
   )
 
   const selectedColumnsBatch = batchPrintColumns.filter(column =>
     printColumns.includes(column.field)
   )
+
+
+ 
+  const storesNames = stores ? stores.map(store => store.name) : []
 
   return (
     <div className={s.mainContainer} ref={componentRef}>
@@ -101,6 +128,11 @@ export const ReportFrozenTraceabilityPrint = () => {
                 <b>Brutarie - Patiserie Produse congelate COD: RP-05_23.2 </b>
               </p>
             </Grid>
+            {isFormator && (
+              <Grid item xs={12}>
+                <p className={styles.subtitle}>{storesNames.join(', ')}</p>
+              </Grid>
+            )}
           </Grid>
 
           <Grid
@@ -119,7 +151,12 @@ export const ReportFrozenTraceabilityPrint = () => {
 
           <Grid item xs={12} className={styles.dateColumn}>
             <p>
-              <b>Data:</b> 25.12.2023 - 27.12.2023
+              <b>Data:</b>
+              {` ${formatBakeryPayloadDate(
+                tableFilters.find(f => f.name === 'startDate')?.value
+              )} - ${formatBakeryPayloadDate(
+                tableFilters.find(f => f.name === 'endDate')?.value)
+              }`}
             </p>
           </Grid>
         </Grid>

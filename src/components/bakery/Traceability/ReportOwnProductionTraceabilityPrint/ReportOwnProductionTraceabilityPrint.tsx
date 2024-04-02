@@ -15,6 +15,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { Icon_v2 } from 'components/core-ui/Icon_v2'
 import { OwnProductionTraceabilityChildren } from './OwnProductionTraceabilityChildren'
+import { formatBakeryPayloadDate } from '../../../../utils/helpers'
 
 export const ReportOwnProductionTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
@@ -37,6 +38,29 @@ export const ReportOwnProductionTraceabilityPrint = () => {
     return filterBy?.split('|').map((name, i) => ({ name, value: filterValue.split('|')[i] })) || []
   }, [])
 
+  const isFormator = location.pathname.includes('/formator')
+
+  const { data: stores } = useQuery(
+    ['store'],
+    async () => {
+      const result = await makeCoreGetRequest('/bakery/store/trainee/all')
+
+      const selectedStores = filterValue.split('|').pop().slice(1, -1).split(';')
+      const stores = result.filter(item => selectedStores.includes(item.id))
+
+      return stores || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: isFormator
+    }
+  )
+
   const reportDataQuery = useQuery(
     ['report-traceability-production'],
     async () => {
@@ -58,7 +82,7 @@ export const ReportOwnProductionTraceabilityPrint = () => {
     }
   )
 
-  const selectedColumnsProduct = productPrintColumns.filter(column =>
+  const selectedColumnsProduct = productPrintColumns(true).filter(column =>
     printColumns.includes(column.field)
   )
 
@@ -77,6 +101,8 @@ export const ReportOwnProductionTraceabilityPrint = () => {
       </div>
     )
   }
+
+  const storesNames = stores ? stores.map(store => store.name) : []
 
   return (
     <div className={s.mainContainer} ref={componentRef}>
@@ -105,8 +131,9 @@ export const ReportOwnProductionTraceabilityPrint = () => {
               <b>RAPORT DE PRODUCTIE</b>
             </p>
             <p className={styles.subtitle}>
-              <b>Produse elaborate Cod: RP-05_23.1 </b>
+              <b>Brutarie - Patiserie Produse elaborate Cod: RP-05_23.1 </b>
             </p>
+            {isFormator && <p className={styles.subtitle}>{storesNames.join(', ')}</p>}
           </Grid>
 
           <Grid
@@ -120,6 +147,17 @@ export const ReportOwnProductionTraceabilityPrint = () => {
             <p>
               <b>PRP 05:</b> Prelucrare tehnologica, control productie si comercializare de produse
               alimentare
+            </p>
+          </Grid>
+
+          <Grid item xs={12} className={styles.dateColumn}>
+            <p>
+              <b>Data:</b>
+              {` ${formatBakeryPayloadDate(
+                tableFilters.find(f => f.name === 'startDate')?.value
+              )} - ${formatBakeryPayloadDate(
+                tableFilters.find(f => f.name === 'endDate')?.value)
+              }`}
             </p>
           </Grid>
         </Grid>

@@ -59,7 +59,7 @@ export const columns: any[] = [
     collapsible: 'true'
   },
   {
-    title: 'DLC sec MP/ baze',
+    title: 'DLC sec MP',
     align: 'left',
     render: row =>
       formatBakeryPayloadDate(

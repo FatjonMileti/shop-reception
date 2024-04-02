@@ -1,17 +1,27 @@
 import { formatBakeryPayloadDate } from '../../../../utils/helpers'
 import { ThermalCondition } from '../interfaces'
 
-export const productPrintColumns = [
+export const productPrintColumns = (isFormator=false) => [
   {
     field: 'productionDate',
     title: 'Data productiei',
     render: row => formatBakeryPayloadDate(row.productionDate),
     defaultPrintSelected: true
   },
+  ...(isFormator
+    ? [
+      {
+        title: 'Nume magazin',
+        field: 'store.name',
+        render: row => row.store.name,
+        defaultPrintSelected: true
+      }
+    ]
+    : []),
   {
     title: 'Cod METI',
     field: 'product.metiCode',
-    render: row => row.product.metiCode,
+    render: row => row.product.metiCode
   },
   {
     title: 'Cod PLU',
@@ -55,12 +65,12 @@ export const productPrintColumns = [
     title: 'UM',
     field: 'product.metricUnit',
     render: row => row.product.metricUnit,
-    defaultPrintSelected: true,
+    defaultPrintSelected: true
   },
   {
     title: 'Stare termica',
     field: 'thermalCondition',
-    render: row => ThermalCondition[row.thermalCondition] ?? '',
+    render: row => ThermalCondition[row.thermalCondition] ?? ''
   },
   {
     title: 'Conform',
@@ -138,7 +148,7 @@ export const batchPrintColumns = [
   {
     field: 'batch.entryDate',
     title: 'Data introducere Trasabilitate',
-    render: row => (row.batch?.entryDate && formatBakeryPayloadDate(row.batch?.entryDate)) ?? '',
+    render: row => formatBakeryPayloadDate(row?.createdDate),
     width: '100px'
   },
   {

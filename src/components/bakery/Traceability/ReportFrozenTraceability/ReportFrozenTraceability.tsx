@@ -120,7 +120,7 @@ export const ReportFrozenTraceability = () => {
           page,
           rowsPerPage,
           searchText,
-          searchFields: ['product.name']
+          searchFields: ['product.name', 'product.metiCode']
         })
       )
 
@@ -284,7 +284,6 @@ export const ReportFrozenTraceability = () => {
     }
   }, [liveFiltersObject.startDate, liveFiltersObject.endDate])
 
-
   const drawerFilters: TableFiltersType[] = [
     {
       name: 'product.id',
@@ -369,6 +368,10 @@ export const ReportFrozenTraceability = () => {
     }
   ]
 
+  const dynamicColumns = React.useMemo(() => {
+    return [...productPrintColumns(isFormator), ...batchPrintColumns]
+  }, [])
+
   const isXs = useMediaQuery('(max-width:624px)')
 
   return (
@@ -402,13 +405,20 @@ export const ReportFrozenTraceability = () => {
         <>
           <PrintModal
             {...tableState}
-            tableFilters={tableState.tableFilters}
+            tableFilters={
+              isFormator
+                ? [
+                    ...tableState.tableFilters,
+                    { name: 'store', value: storeFilterValue.map(store => store.value) }
+                  ]
+                : tableState.tableFilters
+            }
             url={
               isFormator
                 ? URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR
                 : URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT
             }
-            dynamicColumns={[...productPrintColumns, ...batchPrintColumns]}
+            dynamicColumns={dynamicColumns}
             isModalOpen={isPrintModalOpen}
             closeModal={() => setIsPrintModalOpen(false)}
             toolbarActions={[]}

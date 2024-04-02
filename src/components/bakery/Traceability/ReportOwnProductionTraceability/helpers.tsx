@@ -1,52 +1,5 @@
 import { formatBakeryPayloadDate } from '../../../../utils/helpers'
 
-export const productPrintColumns = [
-  {
-    field: 'productionDate',
-    title: 'Data productiei',
-    render: row => formatBakeryPayloadDate(row.productionDate),
-    defaultPrintSelected: true
-  },
-  {
-    title: 'Produs trasabilitate',
-    field: 'product.metiCode',
-    render: row => row?.product?.metiCode || '',
-    defaultPrintSelected: true
-  },
-  {
-    title: 'Familie',
-    field: 'product.familyName',
-    render: row => row?.product?.familyName
-  },
-  {
-    title: 'Subfamilie',
-    field: 'subfamily',
-    render: row => row?.product?.subfamily
-  },
-  {
-    title: 'Sarja',
-    field: 'chargeNumber',
-    defaultPrintSelected: true
-  },
-  {
-    title: 'Cant. fabricata',
-    field: 'quantity',
-    defaultPrintSelected: true
-  },
-  {
-    title: 'UM',
-    field: 'product.metricUnit',
-    render: row => row?.product?.metricUnit,
-    defaultPrintSelected: true
-  },
-  {
-    title: 'DLC prod. fab.',
-    field: 'dlc',
-    render: row => formatBakeryPayloadDate(row.dlc),
-    defaultPrintSelected: true
-  }
-]
-
 export const batchPrintColumns = [
   {
     field: 'product.metiCode',
@@ -116,7 +69,7 @@ export const batchPrintColumns = [
   },
   {
     field: 'modifiedDate',
-    title: 'Data ultimei verificari',
+    title: 'Data ultimei modificari',
     render: row => formatBakeryPayloadDate(row.modifiedDate)
   }
 ]
@@ -183,7 +136,7 @@ export const chargePrintColumns = [
   },
   {
     field: 'dlc',
-    title: 'DLC sec MP / baze',
+    title: 'DLC sec MP',
     render: row => formatBakeryPayloadDate(row.dlc),
     defaultPrintSelected: true
   },

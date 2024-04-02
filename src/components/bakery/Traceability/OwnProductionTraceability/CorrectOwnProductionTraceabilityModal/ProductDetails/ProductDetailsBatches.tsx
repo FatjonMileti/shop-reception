@@ -51,7 +51,7 @@ export const ProductDetailsBatches = ({
               )?.toFixed(3)}`}
               name="batchId"
               disabled
-              infoIcon={formik.values?.product?.metricUnit}
+              infoIcon={batch.componentUnit}
             />
           </Grid>
 
@@ -97,7 +97,7 @@ export const ProductDetailsBatches = ({
                       }
                       value={item.quantity}
                       name="quantity"
-                      infoIcon={formik.values?.product?.metricUnit}
+                      infoIcon={batch.componentUnit}
                       helperText={
                         formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
                       }
@@ -127,6 +127,7 @@ export const ProductDetailsBatches = ({
                             : undefined
                         }
                         style={{ display: 'flex' }}
+                        maxDate={dayjs(formik.values.productionDate)}
                       />
                     </Grid>
                   )}
@@ -185,7 +186,7 @@ export const ProductDetailsBatches = ({
                 )?.toFixed(3)}`}
                 name="componentQuantity"
                 disabled
-                infoIcon={formik.values?.product?.metricUnit}
+                infoIcon={item.componentUnit}
               />
             </Grid>
 
@@ -230,7 +231,7 @@ export const ProductDetailsBatches = ({
                       }}
                       value={charge.quantity}
                       name="quantity"
-                      infoIcon={formik.values?.product?.metricUnit}
+                      infoIcon={item.componentUnit}
                       helperText={
                         formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
                       }
@@ -289,7 +290,7 @@ export const ProductDetailsBatches = ({
               )?.toFixed(3)}`}
               name="batchId"
               disabled
-              infoIcon={formik.values?.product?.metricUnit}
+              infoIcon={other.componentUnit}
             />
           </Grid>
 
@@ -309,7 +310,7 @@ export const ProductDetailsBatches = ({
                     }}
                     value={item.quantity}
                     name="quantity"
-                    infoIcon={formik.values?.product?.metricUnit}
+                    infoIcon={other.componentUnit}
                     helperText={
                       formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
                     }

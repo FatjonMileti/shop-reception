@@ -49,7 +49,8 @@ export const toTableRowItem = (item: Partial<ReceivedProduct>): ReceivedProduct 
   verified: item.verified || false,
   imageUrl: item.imageUrl || '',
   createdBy: item.createdBy || '',
-  isCreatedUser: item.isCreatedUser || false
+  isCreatedUser: item.isCreatedUser || false,
+  createdDate: item.createdDate || ''
 })
 
 export const columns: Column[] = [
@@ -148,10 +149,12 @@ export const columns: Column[] = [
     field: 'createdBy'
   },
   {
-    field: 'entryDate',
-    render: row => (
-      <BodyItem name="Data creare linie receptie" value={<>{formatPayloadDate(row.entryDate)}</>} />
-    )
+    field: 'createdDate',
+    render: row => {
+      return (
+        <BodyItem name="Data creare linie receptie" value={formatPayloadDate(row.createdDate)} />
+      )
+    }
   },
 
   {
@@ -262,7 +265,9 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
 
   secondaryDLC: Yup.number()
     .when('hasSecondaryDLC', ([hasSecondaryDLC], schema) =>
-      hasSecondaryDLC ? schema.required('Campul Numar zile DLC trebuie completat').positive() : schema.nullable()
+      hasSecondaryDLC
+        ? schema.required('Campul Numar zile DLC trebuie completat').positive('Inserati valoare pozitiva')
+        : schema.nullable()
     )
     .nullable(),
 
@@ -270,7 +275,7 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
 
   lot: Yup.string().required('Campul lot trebuie completat').max(30),
 
-  picture: Yup.mixed<File>().test('required', 'The picture must be a file', (value: File) => {
+  picture: Yup.mixed<File>().test('required', 'Lipsa poza', (value: File) => {
     return !!value
   })
 })

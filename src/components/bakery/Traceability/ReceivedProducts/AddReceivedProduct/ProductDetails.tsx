@@ -59,15 +59,23 @@ export const ProductDetails = ({
     validationSchema: productDetailsSchema,
     validateOnChange: false,
     initialValues,
-    onSubmit: (values) => {
+    onSubmit: values => {
       onContinue(values)
     }
   })
 
-
   return (
     <Grid container rowSpacing={3.5}>
-      <Grid item xs={12} spacing={2}>
+      <Grid
+        item
+        xs={12}
+        spacing={2}
+        sx={{
+          '& div': {
+            whiteSpace: 'unset !important'
+          }
+        }}
+      >
         <FormInfoItems
           items={[
             {
@@ -91,7 +99,7 @@ export const ProductDetails = ({
         />
       </Grid>
       <Grid item xs={12} container spacing={2} alignItems="flex-end">
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12}>
           <DatePicker
             error={!!form.errors.entryDate}
             helperText={form.errors.entryDate as string}
@@ -103,9 +111,9 @@ export const ProductDetails = ({
             maxDate={dayjs()}
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12} sx={{ marginTop: '17px' }}>
           <RadioButtonGroup
-            label='Data expirare'
+            label="Data expirare"
             dotStyle
             name="hasExpirationDate"
             onChange={e => {
@@ -129,7 +137,7 @@ export const ProductDetails = ({
             ]}
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12}>
           <DatePicker
             error={!!form.errors.expirationDate}
             helperText={form.errors.expirationDate as string}
@@ -142,15 +150,15 @@ export const ProductDetails = ({
             disabled={!form.values.hasExpirationDate}
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12} sx={{ marginTop: '17px' }}>
           <RadioButtonGroup
-            label='DLC Secundar'
+            label="DLC Secundar"
             dotStyle
             name="hasSecondaryDLC"
             onChange={e => {
               const hasSecondaryDLC = e.target.value === 'true'
               form.setFieldValue('hasSecondaryDLC', hasSecondaryDLC)
-              if(!hasSecondaryDLC) {
+              if (!hasSecondaryDLC) {
                 form.setFieldValue('secondaryDLC', null)
               }
             }}
@@ -168,7 +176,7 @@ export const ProductDetails = ({
             ]}
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12}>
           <Input
             type="number"
             variant="outlined"
@@ -181,7 +189,7 @@ export const ProductDetails = ({
             helperText={form.errors.secondaryDLC as string}
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12}>
           <Input
             type="text"
             variant="outlined"
@@ -201,7 +209,7 @@ export const ProductDetails = ({
             }
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12}>
           <Input
             type="number"
             variant="outlined"
@@ -215,7 +223,7 @@ export const ProductDetails = ({
           />
         </Grid>
 
-        <Grid item xl={3} lg={4} sm={6} xs={12} spacing={2} container alignItems="center">
+        <Grid item xl={3} lg={4} md={6} xs={12} spacing={2} container alignItems="center">
           {form.values.picture ? (
             <>
               <Grid item>
@@ -243,6 +251,21 @@ export const ProductDetails = ({
                 variant="outlined"
                 size="large"
               />
+
+              {!!form.errors.picture && (
+                <p
+                  style={{
+                    color: '#AA0D11',
+                    fontFamily: 'Ubuntu',
+                    fontWeight: '400',
+                    fontSize: '0.75rem',
+                    lineHeight: '1.66',
+                    margin: '4px 0 0 14px'
+                  }}
+                >
+                  {form.errors.picture as string}
+                </p>
+              )}
             </Grid>
           )}
 
