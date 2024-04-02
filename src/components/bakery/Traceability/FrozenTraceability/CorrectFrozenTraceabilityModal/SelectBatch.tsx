@@ -31,6 +31,8 @@ export const SelectBatch = ({ formik, onContinue, onCancel }: SelectBatchProps) 
           url: '/bakery/batch/assign',
           page,
           rowsPerPage,
+          order: 'asc',
+          orderBy: 'expireDate|entryDate',
           filters: [
             {
               name: 'product.metiCode',
