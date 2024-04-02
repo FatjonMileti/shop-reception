@@ -192,7 +192,7 @@ export const chargeColumns: any[] = [
     align: 'left',
     type: 'string',
     width: '110px',
-    render: (row: any) => formatBakeryPayloadDate(row?.product.dlcDays)
+    render: (row: any) => row?.product?.dlcDays
   }
 ]
 
