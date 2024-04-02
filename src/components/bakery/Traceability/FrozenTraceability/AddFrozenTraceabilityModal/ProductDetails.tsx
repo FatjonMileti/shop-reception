@@ -178,10 +178,12 @@ export const ProductDetails = ({
             variant="outlined"
             label="Motiv neconformitate"
             onChange={e => formik.setFieldValue('nonComplianceReason', e.currentTarget.value)}
-            value={formik.values.nonComplianceReason}
+            value={formik.values.nonComplianceReason ?? ''}
             disabled={formik.values.conform == null || formik.values.conform == true}
             name="nonComplianceReason"
             style={{ display: 'flex' }}
+            error={!!formik.errors.nonComplianceReason}
+            helperText={formik.errors.nonComplianceReason as string}
           />
         </Grid>
 
@@ -191,10 +193,12 @@ export const ProductDetails = ({
             variant="outlined"
             label="Destinatia produsului neconform"
             onChange={e => formik.setFieldValue('productDestination', e.currentTarget.value)}
-            value={formik.values.productDestination}
+            value={formik.values.productDestination ?? ''}
             disabled={formik.values.conform == null || formik.values.conform == true}
             name="productDestination"
             style={{ display: 'flex' }}
+            error={!!formik.errors.productDestination}
+            helperText={formik.errors.productDestination as string}
           />
         </Grid>
 
