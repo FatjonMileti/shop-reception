@@ -2,7 +2,7 @@ import { formatBakeryPayloadDate } from 'utils/helpers'
 import { ThermalCondition } from '../interfaces'
 import dayjs from 'dayjs'
 
-export const productPrintColumns = (isFormator=false) => [
+export const productPrintColumns = (isFormator = false) => [
   {
     field: 'productionDate',
     title: 'Data productiei',
@@ -12,13 +12,13 @@ export const productPrintColumns = (isFormator=false) => [
   },
   ...(isFormator
     ? [
-      {
-        title: 'Nume magazin',
-        field: 'store.name',
-        render: row => row.store.name,
-        defaultPrintSelected: true
-      }
-    ]
+        {
+          title: 'Nume magazin',
+          field: 'store.name',
+          render: row => row.store.name,
+          defaultPrintSelected: true
+        }
+      ]
     : []),
   {
     title: 'Produs trasabilitate',
@@ -129,7 +129,7 @@ export const batchPrintColumns = [
   {
     field: 'verified',
     title: 'Verificare de catre validator trasabilitate',
-    render: row => (row.verified ? 'Da' : 'Nu'),
+    render: row => (row.isVerified ? 'Da' : 'Nu'),
     width: '100px'
   },
   {
@@ -220,16 +220,16 @@ export const chargePrintColumns = [
     field: 'expireDate',
     title: 'DLC MP /  baze',
     render: row =>
-      formatBakeryPayloadDate(
-        row.batch ? row.batch.expireDate : row.childTraceability ? row.childTraceability.dlc : ''
-      ),
+      (row?.batch?.expireDate && formatBakeryPayloadDate(row?.batch?.expireDate)) ||
+      (row?.childTraceability && formatBakeryPayloadDate(row?.dlc)) ||
+      '',
     defaultPrintSelected: true,
     width: '80px'
   },
   {
     field: 'dlc',
-    title: 'DLC sec MP / baze',
-    render: row => formatBakeryPayloadDate(row.dlc),
+    title: 'DLC sec MP',
+    render: row => (row.batch && row.dlc && formatBakeryPayloadDate(row.dlc)) || '',
     defaultPrintSelected: true,
     width: '80px'
   },
