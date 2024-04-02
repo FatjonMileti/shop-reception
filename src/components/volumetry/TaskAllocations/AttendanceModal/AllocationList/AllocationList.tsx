@@ -1,4 +1,4 @@
-import { Button, Table } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, FormTable, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table'
 import { Box } from '@mui/material'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
@@ -20,11 +20,11 @@ const AllocationList = (props: AllocationListProps) => {
     allocateEmployees()
   }
 
-  const tableColumns = useMemo(
+  const columns = useMemo(
     () =>
       buildColumns({
         toggleEmployee
-      }) as TableHeaderType[],
+      }),
     [employees]
   )
 
@@ -36,16 +36,8 @@ const AllocationList = (props: AllocationListProps) => {
         onClick={() => setAllocateEmployeesAllSelected(!allocateEmployeesAllSelected)}
         style={{ marginBottom: '1em' }}
       />
-      <Box style={{ height: '60vh', overflowY: 'scroll' }}>
-        <Table
-          hideCheckbox
-          orderBy="name"
-          order="desc"
-          columns={tableColumns}
-          rows={employees}
-          isLoading={false}
-          disablePagination
-        />
+      <Box style={{ height: '55vh', overflowY: 'scroll' }}>
+        <FormTable columns={columns} rows={employees} />
       </Box>
       <Box className={s.modalButtons} style={{ width: '50%', float: 'right', marginTop: '20px' }}>
         <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
