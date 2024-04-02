@@ -157,6 +157,7 @@ export const AddFrozenTraceabilityModal = ({
                   onCancel={() => {
                     setStep(1)
                   }}
+                  productionDate={formik.values.productionDate}
                 />
               ][step]
             }

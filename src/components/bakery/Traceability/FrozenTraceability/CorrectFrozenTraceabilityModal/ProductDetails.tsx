@@ -301,7 +301,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
               size="large"
               variant="outlined"
               label="Adauga lot"
-              disabled={!formik.values?.quantity}
+              disabled={!formik.values?.quantity || !formik.values?.productionDate}
               onClick={onSelectBatch}
             />
           </Grid>

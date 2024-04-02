@@ -265,6 +265,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
                   }}
                   metiCode={formik.values?.metiCode}
                   componentMetiCode={componentMetiCode}
+                  productionDate={formik.values.productionDate}
                 />,
                 <SelectCharge
                   onContinue={charges => {
