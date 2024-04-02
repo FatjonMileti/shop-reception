@@ -273,6 +273,7 @@ export const AddOwnProductionTraceabilityModal = ({
                     setStep(1)
                   }}
                   componentMetiCode={componentMetiCode}
+                  productionDate={formik.values.productionDate}
                 />,
                 <SelectCharge
                   onContinue={charges => {

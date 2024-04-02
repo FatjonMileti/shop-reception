@@ -190,9 +190,11 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             variant="outlined"
             label="Motiv neconformitate"
             onChange={e => formik.setFieldValue('nonComplianceReason', e.currentTarget.value)}
-            value={formik.values.nonComplianceReason}
+            value={formik.values.nonComplianceReason ?? ''}
             disabled={formik.values.conform == null || formik.values.conform == true}
             name="nonComplianceReason"
+            error={!!formik.errors.nonComplianceReason}
+            helperText={formik.errors.nonComplianceReason as string}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -201,9 +203,11 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             variant="outlined"
             label="Destinatia produsului neconform"
             onChange={e => formik.setFieldValue('productDestination', e.currentTarget.value)}
-            value={formik.values.productDestination}
+            value={formik.values.productDestination ?? ''}
             disabled={formik.values.conform == null || formik.values.conform == true}
             name="productDestination"
+            error={!!formik.errors.productDestination}
+            helperText={formik.errors.productDestination as string}
           />
         </Grid>
         <Grid item xs={12}>
@@ -301,7 +305,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
               size="large"
               variant="outlined"
               label="Adauga lot"
-              disabled={!formik.values?.quantity}
+              disabled={!formik.values?.quantity || !formik.values?.productionDate}
               onClick={onSelectBatch}
             />
           </Grid>

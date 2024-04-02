@@ -6,17 +6,20 @@ import { useNotification } from 'hooks'
 import { useState } from 'react'
 import { columns } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
+import { formatPayloadDate } from '../../../../../utils/helpers'
 interface SelectBatchProps {
   onContinue: (batches: any[]) => void
   onCancel: () => void
   metiCode: any
   componentMetiCode: string | number
+  productionDate: string
 }
 
 export const SelectBatch = ({
   onContinue,
   onCancel,
-  componentMetiCode
+  componentMetiCode,
+  productionDate
 }: SelectBatchProps) => {
   const { showNotification } = useNotification()
 
@@ -44,6 +47,12 @@ export const SelectBatch = ({
             {
               name: 'batchStatus',
               value: 'AVAILABLE'
+            }
+          ],
+          extraCustomUrlParams: [
+            {
+              name: 'productionDate',
+              value: formatPayloadDate(productionDate)
             }
           ]
         })

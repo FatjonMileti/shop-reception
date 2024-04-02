@@ -6,6 +6,7 @@ import { useNotification } from 'hooks'
 import { useState } from 'react'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { selectBatchColumns } from '../helpers'
+import { formatPayloadDate } from '../../../../../utils/helpers'
 
 interface SelectBatchProps {
   onContinue: (frozenItems: any[]) => void
@@ -38,6 +39,12 @@ export const SelectBatch = ({ formik, onContinue, onCancel }: SelectBatchProps) 
             {
               name: 'batchStatus',
               value: 'AVAILABLE'
+            }
+          ],
+          extraCustomUrlParams: [
+            {
+              name: 'productionDate',
+              value: formatPayloadDate(formik.values.productionDate)
             }
           ]
         })

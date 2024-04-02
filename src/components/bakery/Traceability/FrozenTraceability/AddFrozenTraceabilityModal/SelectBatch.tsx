@@ -7,14 +7,21 @@ import { useState } from 'react'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { Product } from '../../ReceivedProducts/interfaces'
 import { selectBatchColumns } from '../helpers'
+import { formatPayloadDate } from '../../../../../utils/helpers'
 
 interface SelectBatchProps {
   onContinue: (frozenItems: any[]) => void
   onCancel: () => void
   selectedProduct: Product
+  productionDate: string
 }
 
-export const SelectBatch = ({ onContinue, onCancel, selectedProduct }: SelectBatchProps) => {
+export const SelectBatch = ({
+  onContinue,
+  onCancel,
+  selectedProduct,
+  productionDate
+}: SelectBatchProps) => {
   const { showNotification } = useNotification()
 
   const [tableItems, setTableItems] = useState<any[]>([])
@@ -39,6 +46,12 @@ export const SelectBatch = ({ onContinue, onCancel, selectedProduct }: SelectBat
             {
               name: 'batchStatus',
               value: 'AVAILABLE'
+            }
+          ],
+          extraCustomUrlParams: [
+            {
+              name: 'productionDate',
+              value: formatPayloadDate(productionDate)
             }
           ]
         })
