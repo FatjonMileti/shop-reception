@@ -64,7 +64,11 @@ export const columns: any[] = [
   {
     title: 'DLC sec MP',
     align: 'left',
-    render: row => (!row.childTraceability && row?.dlc && formatBakeryPayloadDate(row?.dlc)) || '',
+    render: row =>
+      (!row.childTraceability &&
+        row?.dlc &&
+        formatBakeryPayloadDate(dayjs(row?.dlc, 'DD-MM-YYYY'))) ||
+      '',
     collapsible: 'true'
   },
   {
