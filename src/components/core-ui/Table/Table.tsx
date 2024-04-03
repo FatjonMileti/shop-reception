@@ -34,9 +34,7 @@ const Table = props => {
     ;(async () => {
       if (shouldRefreshData) {
         const { page, rowsPerPage, order, orderBy, searchText, filters } = tableState
-        if (!setShouldResetPage || (shouldResetPage && page === 0)) {
-          await handleRemoteData(page, rowsPerPage, order, orderBy, searchText, filters)
-        }
+        await handleRemoteData(page, rowsPerPage, order, orderBy, searchText, filters)
 
         setShouldRefreshData(false)
         setShouldResetPage && setShouldResetPage(false)
