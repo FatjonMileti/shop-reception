@@ -61,7 +61,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
   const autoAllocateEmployees = async () => {
     await makeCorePostRequest(
       '/volumetry/tasks/automatic-allocation',
-      toEmployeesAllocationPayload(formik.values.employees)
+      toEmployeesAllocationPayload(formik.values.employees, departmentId)
     )
   }
 
