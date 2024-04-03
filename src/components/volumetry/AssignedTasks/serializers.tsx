@@ -55,5 +55,7 @@ export const toItemEmployee = item => ({
   progressProportion: item.progressPercentage,
   comment: item.comment,
   createdAt: item.createdAt,
-  timeInterval: item.taskContributionInterval
+  timeInterval: item.taskContributionInterval,
+  allocatedWorkload: item.allocatedWorkload,
+  performedWorkload: item.performedWorkload
 })

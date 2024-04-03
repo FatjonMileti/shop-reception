@@ -98,63 +98,60 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
             items={[
               { label: 'Task:', name: task?.taskName },
               { label: 'Departament/Raion:', name: task?.departmentAlias },
-              !hideWorkload && {
-                label: 'Angajat:',
-                name: employee?.workerFullName
-              }
+              hideWorkload
+                ? {
+                    label: 'Volum alocat:',
+                    name: employee?.allocatedWorkload
+                  }
+                : {
+                    label: 'Angajat:',
+                    name: employee?.workerFullName
+                  }
             ]}
           />
         </Grid>
 
         {!hideWorkload && (
-          <>
-            <Grid xs={12} item>
-              <Input
-                type="number"
-                variant="outlined"
-                name="allocatedWorkload"
-                label="Volum alocat"
-                value={formik.values.allocatedWorkload}
-                width="100%"
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  formik.setFieldValue(
-                    'allocatedWorkload',
-                    (event.target as HTMLInputElement).value
-                  )
-                }
-                error={!!formik.errors.allocatedWorkload}
-                helperText={formik.errors.allocatedWorkload as string}
-                required
-                inputProps={{
-                  min: '0'
-                }}
-              />
-            </Grid>
-            {editItem?.timerStatus !== 'FINISHED' && (
-              <Grid xs={12} item>
-                <Input
-                  type="number"
-                  variant="outlined"
-                  name="performedWorkload"
-                  label="Volum efectuat"
-                  value={formik.values.performedWorkload}
-                  width="100%"
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    formik.setFieldValue(
-                      'performedWorkload',
-                      (event.target as HTMLInputElement).value
-                    )
-                  }
-                  error={!!formik.errors.performedWorkload}
-                  helperText={formik.errors.performedWorkload as string}
-                  required
-                  inputProps={{
-                    min: '0'
-                  }}
-                />
-              </Grid>
-            )}
-          </>
+          <Grid xs={12} item>
+            <Input
+              type="number"
+              variant="outlined"
+              name="allocatedWorkload"
+              label="Volum alocat"
+              value={formik.values.allocatedWorkload}
+              width="100%"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                formik.setFieldValue('allocatedWorkload', (event.target as HTMLInputElement).value)
+              }
+              error={!!formik.errors.allocatedWorkload}
+              helperText={formik.errors.allocatedWorkload as string}
+              required
+              inputProps={{
+                min: '0'
+              }}
+            />
+          </Grid>
+        )}
+        {editItem?.timerStatus !== 'FINISHED' && (
+          <Grid xs={12} item>
+            <Input
+              type="number"
+              variant="outlined"
+              name="performedWorkload"
+              label="Volum efectuat"
+              value={formik.values.performedWorkload}
+              width="100%"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                formik.setFieldValue('performedWorkload', (event.target as HTMLInputElement).value)
+              }
+              error={!!formik.errors.performedWorkload}
+              helperText={formik.errors.performedWorkload as string}
+              required
+              inputProps={{
+                min: '0'
+              }}
+            />
+          </Grid>
         )}
 
         <Grid xs={12} item>

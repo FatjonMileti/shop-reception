@@ -333,35 +333,6 @@ export const getCategoryDepartmentsOptions = (
   )
 }
 
-export const getRaionsOptions = (
-  departmentId: number,
-  shouldFetchRaions: boolean,
-  callback: Function,
-  showNotification: Function
-) => {
-  return useQuery(
-    ['raions', departmentId],
-    async () => {
-      const result = await makeCoreGetRequest(
-        `/volumetry/locations/generic-rayons?filterBy=genericDepartmentId&filterValue=${departmentId}`
-      )
-
-      const resultOptions = result.map(raion => ({
-        value: raion.id,
-        label: raion.rayonName
-      }))
-
-      callback(resultOptions)
-      return resultOptions || []
-    },
-    {
-      onError: error =>
-        handleQueryError(error, 'A aparut o eroare la obtinerea raioanelor.', showNotification),
-      enabled: shouldFetchRaions
-    }
-  )
-}
-
 export const getEmployeesOptions = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(
     ['employees-options'],
