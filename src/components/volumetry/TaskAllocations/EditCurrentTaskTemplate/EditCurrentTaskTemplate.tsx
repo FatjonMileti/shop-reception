@@ -11,16 +11,6 @@ import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { handleQueryError } from 'utils/helpers'
 import { EditCurrentTaskTemplateProps } from '../TaskAllocationsDefinitions'
-import { customValidation } from 'components/volumetry/utils'
-
-const validationSchema = yup.object({
-  id: yup.string().nonNullable(),
-  workload: yup
-    .number()
-    .required('Acest camp este obligatoriu.')
-    .test('is-step-of-0.25', 'Valoarea trebuie să fie multiplu de 0.25', customValidation),
-  allocatedWorkersNumber: yup.number()
-})
 
 const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
   const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
@@ -42,6 +32,26 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
     },
     onError: error =>
       handleQueryError(error, 'A aparut o eroare la editarea volumului.', showNotification)
+  })
+
+  const divisionValidation = value => {
+    if (!Number.isNaN(value) && parseFloat(value) % editItem.minDivision === 0) {
+      return true
+    }
+    return false
+  }
+
+  const validationSchema = yup.object({
+    id: yup.string().nonNullable(),
+    workload: yup
+      .number()
+      .required('Acest camp este obligatoriu.')
+      .test(
+        'is-custom-step',
+        `Valoarea trebuie să fie multiplu de ${editItem.minDivision}`,
+        divisionValidation
+      ),
+    allocatedWorkersNumber: yup.number()
   })
 
   const formik = useFormik({
@@ -84,7 +94,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
             helperText={formik.errors.workload as string}
             required
             inputProps={{
-              step: '0.25',
+              step: editItem.minDivision,
               min: '0'
             }}
           />
@@ -102,7 +112,6 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
             value={formik.values.allocatedWorkersNumber}
             style={{ width: '100%' }}
             inputProps={{
-              step: '0.25',
               min: '0'
             }}
           />
