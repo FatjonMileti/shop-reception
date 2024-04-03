@@ -78,7 +78,7 @@ const EditLocation: React.FC<EditLocationProps> = props => {
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         )}
         <Grid xs={12} item>
-          <FormInfoItems items={[{ label: 'Nume:', name: editItem?.name ?? '' }]} />
+          <FormInfoItems items={[{ label: 'Nume:', name: editItem?.categoryName ?? '' }]} />
         </Grid>
         <Grid xs={12} item>
           <AsyncAutocomplete
