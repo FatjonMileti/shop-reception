@@ -86,7 +86,6 @@ export const getJobTitlesOptions = (showNotification: Function) => {
   )
 }
 
-
 export const getCollaboratorsTypesOptions = (showNotification: Function) => {
   return useQuery(
     ['contractors-types'],
@@ -102,7 +101,8 @@ export const getCollaboratorsTypesOptions = (showNotification: Function) => {
       return resultOptions || []
     },
     {
-      onError: error => handleQueryError(error, 'Error while fetching contractors types', showNotification)
+      onError: error =>
+        handleQueryError(error, 'Error while fetching contractors types', showNotification)
     }
   )
 }
@@ -161,7 +161,11 @@ export const getContractorsNamesOptions = (showNotification: Function) => {
   )
 }
 
-export const getTask = (itemId: string | number, isModalOpen: boolean, showNotification: Function) => {
+export const getTask = (
+  itemId: string | number,
+  isModalOpen: boolean,
+  showNotification: Function
+) => {
   return useQuery(
     ['task', itemId],
     async () => {
@@ -406,15 +410,18 @@ export const getLocationDetails = (
   return useQuery(
     ['location-details', locationId],
     async () => {
-      // const locationDetails = await makeCoreGetRequest(`/volumetry/location/${locationId}`)
+      const response = await makeCoreGetRequest(`/volumetry/locations`)
+      const location = response.list.filter(location => location.id === locationId)
+
       const locationDetails = {
         id: 1,
-        name: 'Orhideea',
-        categoryId: 1,
-        categoryName: 'Hyper Maxi',
-        regionId: 1,
-        regionName: 'Bucuresti'
+        name: location[0]?.locationName || '',
+        categoryId: location[0]?.id || '',
+        categoryName: location[0]?.locationCategory || '',
+        regionId: 0,
+        regionName: '0'
       }
+
       return locationDetails
     },
     {
