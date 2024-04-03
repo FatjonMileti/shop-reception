@@ -1,9 +1,9 @@
-import { Button, ListTableActionsItems } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, IconButton, ListTableActionsItems } from '@fullscreendigital/carrefour-dex-fe'
 import { Box, Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import AssignEmployee from './AssignEmployee'
 import { toEmployeesItems } from './serializers'
-import { DeleteActionIcon, EditActionIcon } from 'icons'
+import { DeleteActionIcon, EditActionIcon, RefreshIcon } from 'icons'
 import { EditAllocationModal } from './EditAllocationModal'
 import DeleteConfirmationModal from 'components/core-ui/DeleteConfirmationModal/DeleteConfirmationModal'
 import { CRUDAction } from '../interfaces'
@@ -11,7 +11,7 @@ import { TaskDescriptionProps } from './TaskAllocationsDefinitions'
 
 const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   const { item, employees, setShouldRefreshData, setSelectedRowId, hideDetails } = props
-  const { taskName, rayonsOrDepartment } = item.item || item
+  const { taskName, departmentAlias } = item.item || item
   const [employeesItems, setEmployeesItems] = useState([])
   const [selectedRow, setSelectedRow] = useState(null) // TODO: To add interface when db schema is defined
 
@@ -49,9 +49,9 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
   }
 
   return (
-    <Grid container flexDirection="column">
+    <Grid container>
       {employees && (
-        <Grid container flexDirection="column" pr={2}>
+        <Grid item xs={12} pr={2}>
           <Box
             sx={{
               width: isMobile ? '100% !important' : 'auto'
@@ -95,7 +95,17 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
         </Grid>
       )}
 
-      {!hideDetails && (
+      {hideDetails ? (
+        <Grid item my={1} xs={12} style={{ marginRight: '15px' }}>
+          <IconButton
+            onClick={() => setShouldRefreshData(true)}
+            label="Reincarca datele"
+            variant="outlined"
+            startIcon={<RefreshIcon />}
+            style={isMobile ? { width: '100%', marginTop: '12px' } : { float: 'right' }}
+          />
+        </Grid>
+      ) : (
         <Grid item my={1} xs={12} style={{ marginRight: '15px' }}>
           <Button
             variant="contained"
@@ -103,15 +113,23 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             onClick={() => openModal('read')}
             style={{ textTransform: 'none', width: isMobile ? '100%' : 'auto' }}
           />
+          <IconButton
+            onClick={() => setShouldRefreshData(true)}
+            label="Reincarca datele"
+            variant="outlined"
+            startIcon={<RefreshIcon />}
+            style={isMobile ? { width: '100%', marginTop: '12px' } : { float: 'right' }}
+          />
         </Grid>
       )}
+
       {!hideDetails && (
         <>
           <AssignEmployee
             isModalOpen={modal === 'read'}
             closeModal={closeModal}
             taskName={taskName}
-            rayonsOrDepartment={rayonsOrDepartment}
+            departmentAlias={departmentAlias}
             workloadMeasurementUnit={item.workloadMeasurementUnit}
             setShouldRefreshData={setShouldRefreshData}
             taskTemplateId={item.taskTemplateId}
@@ -130,7 +148,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             isModalOpen={modal === 'delete'}
             closeModal={closeModal}
             actionUrl="/volumetry/tasks/:id"
-            itemId={`${selectedRow?.id}`}
+            itemId={selectedRow?.id}
             content={<Typography>Sunteti sigur ca vreti sa stergeti aceasta alocare?</Typography>}
             setShouldRefreshData={setShouldRefreshData}
             additionalAction={selectSelectedParentRow}

@@ -3,18 +3,32 @@ import { get } from 'lodash'
 import { getUserInfo } from './authService'
 import { getCoreBaseUrl } from './api'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { formatErrorMessage } from 'utils/formatting'
 
 dayjs.extend(customParseFormat)
 
 export const getCurrentDate = () => dayjs().format('YYYY-MM-DD')
 
-export const getPreviousDay = (date) => (date ? dayjs(date).subtract(1, 'day').format('YYYY-MM-DD') : dayjs().subtract(1, 'day').format('YYYY-MM-DD'))
+export const getPreviousDay = date =>
+  date
+    ? dayjs(date).subtract(1, 'day').format('YYYY-MM-DD')
+    : dayjs().subtract(1, 'day').format('YYYY-MM-DD')
 
 export const formatPayloadDate = date => (date ? dayjs(date).format('YYYY-MM-DD') : '')
 
 export const formatUIDate = date => (date ? dayjs(date).format('DD/MM/YYYY') : '')
 
 export const getDatePickerDate = date => (date ? dayjs(date, 'DD/MM/YYYY') : '')
+
+export const formatBakeryPayloadDate = date => (date ? dayjs(date).format('DD-MM-YYYY') : '')
+
+export const formatPayloadTimeDate = date => (date ? dayjs(date).format('YYYY-MM-DDTHH:mm') : '')
+
+export const formatTime = date => (date ? dayjs(date).format('HH:mm') : '')
+
+export const formatCustomDate = date => (date ? dayjs(date) : '')
+
+export const formatUIDateTime = date => (date ? dayjs(date).format('DD/MM/YYYY HH:mm') : '')
 
 export const areSameDayDates = (startDate, endDate) =>
   startDate && endDate && dayjs(startDate).isSame(dayjs(endDate), 'day')
@@ -147,21 +161,45 @@ export const getFormErrors = (formItems, data) =>
     return acc
   }, {})
 
-  export const formatMonthsToRO = (month) => {
-    switch (month) {
-      case 'January': return 'Ianuarie'
-      case 'February': return 'Februarie'
-      case 'March': return 'Martie'
-      case 'April': return 'Aprilie'
-      case 'May': return 'Mai'
-      case 'June': return 'Iunie'
-      case 'July': return 'Iulie'
-      case 'August': return 'August'
-      case 'September': return 'Septembrie'
-      case 'October': return 'Octombrie'
-      case 'November': return 'Noiembrie'
-      case 'December': return 'Decembrie'
-      default:
-        return
-    } 
+export const formatMonthsToRO = month => {
+  switch (month) {
+    case 'January':
+      return 'Ianuarie'
+    case 'February':
+      return 'Februarie'
+    case 'March':
+      return 'Martie'
+    case 'April':
+      return 'Aprilie'
+    case 'May':
+      return 'Mai'
+    case 'June':
+      return 'Iunie'
+    case 'July':
+      return 'Iulie'
+    case 'August':
+      return 'August'
+    case 'September':
+      return 'Septembrie'
+    case 'October':
+      return 'Octombrie'
+    case 'November':
+      return 'Noiembrie'
+    case 'December':
+      return 'Decembrie'
+    default:
+      return
   }
+}
+
+export const handleQueryError = (error, message, showNotification) => {
+  showNotification({
+    message: `${message} ${formatErrorMessage(error)}`,
+    type: 'error'
+  })
+}
+
+export const toBoolean = input => {
+  if (input === 'true') return true
+  if (input === 'false') return false
+}

@@ -20,6 +20,7 @@ import { EditProduction } from './EditProduction'
 import { URLS } from '../../constants'
 import { EditActionIcon } from 'icons'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
+import { MetiModal } from './MetiModal'
 dayjs.extend(customParseFormat)
 
 const ProductionManagementStore = () => {
@@ -30,7 +31,9 @@ const ProductionManagementStore = () => {
   const [totalCount, setTotalCount] = useState<number>(0)
 
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [isMetiModalOpen, setIsMetiModalOpen] = useState<boolean>(false)
   const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
+  const [metiProduct, setMetiProduct] = useState(null);
 
   const [tableState, setTableState] = useState<TableState>({
     order: null,
@@ -41,22 +44,22 @@ const ProductionManagementStore = () => {
   const [liveTableFilters, setLiveTableFilters] = React.useState<Filter[]>([])
 
   const familiesQuery = useQuery(
-    ['cadentier-families-store', liveTableFilters.find(filter => filter.name === 'subfamily')?.value],
+    [
+      'cadentier-families-store',
+      liveTableFilters.find(filter => filter.name === 'subfamily')?.value
+    ],
     async () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'subfamily')
         ?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(
-        `/bakery/store/cadentier/families`,
-        {
-          params: {
-            subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
-          },
-          paramsSerializer: { indexes: null }
-        }
-        )
+      const result = await makeCoreGetRequest(`/bakery/store/cadentier/families`, {
+        params: {
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+        },
+        paramsSerializer: { indexes: null }
+      })
 
-      const resultOptions = result.map(
+      const resultOptions = result?.map(
         (item: FamilyItem): ValueLabelInterface => ({
           label: item.name,
           value: item.id
@@ -190,6 +193,11 @@ const ProductionManagementStore = () => {
 
   const openEditModal = (): void => setIsEditModalOpen(true)
   const closeEditModal = (): void => setIsEditModalOpen(false)
+  const openMetiModal = (product): void => {
+    setIsMetiModalOpen(true)
+    setMetiProduct(product)
+  }
+  const closeMetiModal = (): void => setIsMetiModalOpen(false)
 
   const selectRow = (rowId: number) => {
     setSelectedRowId(rowId)
@@ -258,9 +266,14 @@ const ProductionManagementStore = () => {
           editProductionId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
         />
+        <MetiModal
+          isModalOpen={isMetiModalOpen}
+          closeModal={closeMetiModal}
+          metiProduct={metiProduct}
+        />
         <GroupTable
           hideCheckbox
-          columns={columns}
+          columns={columns(openMetiModal)}
           items={tableItems}
           fetchData={fetchData}
           isLoading={isLoading}

@@ -11,16 +11,17 @@ import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
-import { handleQueryError } from '../utils'
+import { handleQueryError } from 'utils/helpers'
 import * as yup from 'yup'
 import { AssignEmployeeProps } from './TaskAllocationsDefinitions'
+import { customValidation } from '../utils'
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
   const {
     isModalOpen,
     closeModal,
     taskName,
-    rayonsOrDepartment,
+    departmentAlias,
     workloadMeasurementUnit,
     setShouldRefreshData,
     taskTemplateId,
@@ -55,7 +56,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
   const validationSchema = yup.object({
     workerId: yup.number().required('Acest camp este obligatoriu.'),
     taskTemplateId: yup.number().required('Acest camp este obligatoriu.'),
-    workload: yup.number().required('Acest camp este obligatoriu.')
+    allocatedWorkload: yup.number().required('Acest camp este obligatoriu.') .test('is-step-of-0.25', 'Valoarea trebuie să fie multiplu de 0.25', customValidation),
   })
 
   const formik = useFormik({
@@ -65,11 +66,11 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     initialValues: {
       workerId: null,
       taskTemplateId: taskTemplateId,
-      workload: 0
+      allocatedWorkload: 0
     },
     onSubmit: async (values, { resetForm }) => {
       const payload = {
-        workload: values.workload,
+        allocatedWorkload: values.allocatedWorkload,
         workerId: values.workerId,
         taskTemplateId: values.taskTemplateId
       }
@@ -90,7 +91,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: taskName },
-              { label: 'Departament/Raion:', name: rayonsOrDepartment },
+              { label: 'Departament/Raion:', name: departmentAlias },
               { label: 'UM:', name: workloadMeasurementUnit }
             ]}
           />
@@ -114,18 +115,22 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
 
         <Grid xs={12} item>
           <Input
-            type="text"
-            name="volume"
-            label="Volum"
+            type="number"
+            name="allocatedWorkload"
+            label="Volum alocat"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('workload', event.target.value)
+              formik.setFieldValue('allocatedWorkload', event.target.value)
             }
-            value={formik.values.workload}
+            value={formik.values.allocatedWorkload}
             style={{ width: '100%' }}
-            error={!!formik.errors.workload}
-            helperText={formik.errors.workload as string}
-            required
+            error={!!formik.errors.allocatedWorkload}
+            helperText={formik.errors.allocatedWorkload as string}
+            required 
+            inputProps={{
+              step: '0.25',
+              min: '0'
+            }}
           />
         </Grid>
 

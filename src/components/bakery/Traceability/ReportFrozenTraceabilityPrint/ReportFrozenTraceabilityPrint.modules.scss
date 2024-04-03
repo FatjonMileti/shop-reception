@@ -1,0 +1,90 @@
+.reportHeader {
+  padding: 24px 36px 16px 36px;
+  background-color: #e5e5e5;
+
+  p {
+    font-family: Ubuntu, serif;
+    color: #121212;
+    margin: 0 !important;
+    font-style: normal;
+  }
+
+  .rightColumn,
+  .dateColumn {
+    font-weight: 400;
+    line-height: 20px;
+    b {
+      font-weight: 700;
+    }
+  }
+
+  .middleColumn {
+    .title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .subtitle {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+}
+
+.itemWrapper {
+  border-bottom: 1px solid #d1d1d1;
+  // padding: 24px 0 36px 0;
+}
+
+.productTableContainer,
+.batchTableContainer {
+  width: 100% !important;
+  border-radius: 8px !important;
+
+  table {
+    thead {
+      border-bottom: 1px solid #313131 !important;
+
+      tr {
+        th {
+          background-color: white !important;
+          color: black !important;
+          padding: 7px 10px;
+          width: '150px' !important;
+
+
+          font-size: 10px !important;
+          padding: 2px !important;
+
+          &:not(:last-child) {
+            border-right: 1px solid #313131;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          padding: 7px 10px;
+
+
+          font-size: 10px !important;
+          padding: 2px !important;
+          &:not(:last-child) {
+            border-right: 1px solid #c8c8c8;
+          }
+        }
+      }
+    }
+  }
+}
+
+.productName {
+  color: #121212;
+  font-family: Ubuntu, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  margin: 0;
+  padding: 8px 0;
+}

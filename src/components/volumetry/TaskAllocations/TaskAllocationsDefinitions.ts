@@ -11,7 +11,7 @@ export interface AssignEmployeeProps {
   isModalOpen: boolean
   closeModal: Function
   taskName: string
-  rayonsOrDepartment: string
+  departmentAlias: string
   workloadMeasurementUnit: string
   setShouldRefreshData: Function
   taskTemplateId: string
@@ -23,6 +23,9 @@ export interface TaskCurrentState {
   isTaskEnded: boolean
   showStartButton: boolean
   showStopButton: boolean
+  isTaskPaused: boolean
+  showPauseButton: boolean
+  showResumeButton: boolean
 }
 
 export interface EmployeeProps {
@@ -53,7 +56,7 @@ export interface EmployeeCapsuleProps {
 
 export interface EmployeeActionsProps {
   taskCurrentState: TaskCurrentState
-  handleStartTask: Function
+  updateTaskStatus: Function
   openStopTaskModal: Function
 }
 

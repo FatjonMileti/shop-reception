@@ -1,3 +1,4 @@
+import { formatCustomDate, formatPayloadTimeDate } from 'utils/helpers'
 import { Employee } from './Employee'
 import TaskDescription from './TaskDescription'
 import TaskSummary from './TaskSummary'
@@ -30,6 +31,19 @@ export const toEmployeeFilterItems = items =>
     }))
     .sort((a, b) => b.shiftCategory.localeCompare(a.shiftCategory))
 
+export const toEmployeesAttendance = items =>
+  items
+    .map(item => {
+      return {
+        ...item,
+        isPresent: item.shiftCategory === 'ON_SHIFT',
+        shouldAllocate: item.shiftCategory === 'ON_SHIFT',
+        shiftStart: formatCustomDate(item.shiftStart),
+        shiftEnd: formatCustomDate(item.shiftEnd)
+      }
+    })
+    .sort((a, b) => b.shiftCategory.localeCompare(a.shiftCategory))
+
 export const toEmployeesItems = (
   item,
   employees,
@@ -49,3 +63,15 @@ export const toEmployeesItems = (
       />
     )
   }))
+
+export const toEmployeesAttendancePayload = employees =>
+  employees
+    .filter(employee => employee.isPresent)
+    .map(employee => ({
+      workerId: employee.workerId,
+      shiftStart: formatPayloadTimeDate(employee.shiftStart),
+      shiftEnd: formatPayloadTimeDate(employee.shiftEnd)
+    }))
+
+export const toEmployeesAllocationPayload = employees =>
+  employees.filter(employee => employee.shouldAllocate).map(employee => employee.workerId)

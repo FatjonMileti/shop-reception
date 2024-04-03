@@ -10,14 +10,20 @@ import { makeCorePutRequest } from 'utils/api'
 import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { getFormInitialValues } from './helpers'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 import { EditAllocationModalProps } from '../TaskAllocationsDefinitions'
+import { TASK_STATUS_ACTIONS } from '../Employee/constants'
+import { customValidation } from 'components/volumetry/utils'
 
 const validationSchema = hideWorkload =>
   yup.object({
-    workload: hideWorkload
+    allocatedWorkload: hideWorkload
       ? yup.string().nullable()
-      : yup.number().required('Acest camp este obligatoriu.'),
+      : yup
+          .number()
+          .required('Acest camp este obligatoriu.')
+          .test('is-step-of-0.25', 'Valoarea trebuie să fie multiplu de 0.25', customValidation),
+    performedWorkload: yup.string().nullable(),
     comment: yup.string()
   })
 
@@ -37,7 +43,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const editCurrentAllocation = async values => {
     await makeCorePutRequest(`/volumetry/tasks/${editItem ? editItem?.id : employee.id}`, {
       ...values,
-      ...(editItem ? {} : { action: 'STOP' })
+      ...(editItem ? {} : { action: TASK_STATUS_ACTIONS.STOP })
     })
   }
 
@@ -95,7 +101,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: task?.taskName },
-              { label: 'Departament/Raion:', name: task?.rayonsOrDepartment },
+              { label: 'Departament/Raion:', name: task?.departmentAlias },
               !hideWorkload && {
                 label: 'Angajat:',
                 name: employee?.workerFullName
@@ -105,22 +111,56 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
         </Grid>
 
         {!hideWorkload && (
-          <Grid xs={12} item>
-            <Input
-              type="number"
-              variant="outlined"
-              name="workload"
-              label="Volum"
-              value={formik.values.workload}
-              width="100%"
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                formik.setFieldValue('workload', (event.target as HTMLInputElement).value)
-              }
-              error={!!formik.errors.workload}
-              helperText={formik.errors.workload as string}
-              required
-            />
-          </Grid>
+          <>
+            <Grid xs={12} item>
+              <Input
+                type="number"
+                variant="outlined"
+                name="allocatedWorkload"
+                label="Volum alocat"
+                value={formik.values.allocatedWorkload}
+                width="100%"
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  formik.setFieldValue(
+                    'allocatedWorkload',
+                    (event.target as HTMLInputElement).value
+                  )
+                }
+                error={!!formik.errors.allocatedWorkload}
+                helperText={formik.errors.allocatedWorkload as string}
+                required
+                inputProps={{
+                  step: '0.25',
+                  min: '0'
+                }}
+              />
+            </Grid>
+            {editItem?.timerStatus !== 'FINISHED' && (
+              <Grid xs={12} item>
+                <Input
+                  type="number"
+                  variant="outlined"
+                  name="performedWorkload"
+                  label="Volum efectuat"
+                  value={formik.values.performedWorkload}
+                  width="100%"
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    formik.setFieldValue(
+                      'performedWorkload',
+                      (event.target as HTMLInputElement).value
+                    )
+                  }
+                  error={!!formik.errors.performedWorkload}
+                  helperText={formik.errors.performedWorkload as string}
+                  required
+                  inputProps={{
+                    step: '0.25',
+                    min: '0'
+                  }}
+                />
+              </Grid>
+            )}
+          </>
         )}
 
         <Grid xs={12} item>

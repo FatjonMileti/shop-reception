@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { EmployeeActionsProps } from '../../TaskAllocationsDefinitions'
+import { PlayArrow, Pause, Stop } from '@mui/icons-material'
+import { TASK_STATUS_ACTIONS } from '../constants'
 
 const EmployeeActions = (props: EmployeeActionsProps) => {
-  const { taskCurrentState, handleStartTask, openStopTaskModal } = props
+  const { taskCurrentState, updateTaskStatus, openStopTaskModal } = props
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1145)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 900)
+      setIsMobile(window.innerWidth < 1145)
     }
     window.addEventListener('resize', handleResize)
 
@@ -21,25 +23,69 @@ const EmployeeActions = (props: EmployeeActionsProps) => {
 
   return (
     <Box style={{ textAlign: 'right' }}>
-      {(taskCurrentState.showStartButton || taskCurrentState.showStopButton) && (
-        <Button
+      {taskCurrentState.showStartButton && (
+        <IconButton
           variant="contained"
-          label={taskCurrentState.showStartButton ? 'Start' : 'Stop'}
+          label="Start"
           style={{
             height: '30px',
             width: isMobile ? '100%' : 'auto'
           }}
+          startIcon={<PlayArrow />}
           onClick={e => {
-            if (taskCurrentState.showStartButton) {
-              e.preventDefault()
-              e.stopPropagation()
-              handleStartTask()
-            }
-            if (!taskCurrentState.showStartButton) {
-              e.preventDefault()
-              e.stopPropagation()
-              openStopTaskModal()
-            }
+            e.preventDefault()
+            e.stopPropagation()
+            updateTaskStatus(TASK_STATUS_ACTIONS.START)
+          }}
+        />
+      )}
+      {taskCurrentState.showPauseButton && (
+        <IconButton
+          variant="contained"
+          label="Pauza"
+          style={{
+            height: '30px',
+            width: isMobile ? '100%' : 'auto'
+          }}
+          startIcon={<Pause />}
+          onClick={e => {
+            e.preventDefault()
+            e.stopPropagation()
+            updateTaskStatus(TASK_STATUS_ACTIONS.PAUSE)
+          }}
+        />
+      )}
+      {taskCurrentState.showResumeButton && (
+        <IconButton
+          variant="contained"
+          label="Continua"
+          style={{
+            height: '30px',
+            width: isMobile ? '100%' : 'auto'
+          }}
+          startIcon={<PlayArrow />}
+          onClick={e => {
+            e.preventDefault()
+            e.stopPropagation()
+            updateTaskStatus(TASK_STATUS_ACTIONS.RESUME)
+          }}
+        />
+      )}
+      {taskCurrentState.showStopButton && (
+        <IconButton
+          variant="contained"
+          label="Stop"
+          style={{
+            height: '30px',
+            width: isMobile ? '100%' : 'auto',
+            marginLeft: isMobile ? 0 : '12px',
+            marginTop: isMobile ? '12px' : 0
+          }}
+          startIcon={<Stop />}
+          onClick={e => {
+            e.preventDefault()
+            e.stopPropagation()
+            openStopTaskModal()
           }}
         />
       )}

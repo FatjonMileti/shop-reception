@@ -6,8 +6,8 @@ import cn from 'classnames'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
-import { handleQueryError } from '../utils'
 import { useNotification } from 'hooks'
+import { handleQueryError } from 'utils/helpers'
 
 const AssignedTasks = () => {
   const [totalCount, setTotalCount] = useState<number>(null)

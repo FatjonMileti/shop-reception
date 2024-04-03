@@ -1,4 +1,4 @@
-import { Grid, Paper, Box } from '@mui/material'
+import { Grid, Box } from '@mui/material'
 import s from './NewClient.modules.scss'
 import { ChangeEvent, useState } from 'react'
 import { IndividualPerson } from './IndividualPerson'

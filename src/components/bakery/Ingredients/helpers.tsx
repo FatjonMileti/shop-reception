@@ -27,7 +27,7 @@ export const columns = [
     },
     {
       title: "Familie",
-      field: 'familyModuleName',
+      field: 'familyName',
       align: 'left',
     },
     {
@@ -35,7 +35,7 @@ export const columns = [
       field: 'batch',
       align: 'left',
       render: row => (
-        <BooleanIcon value={row.batch} icon="Flag" onFailure='#FFFFFF' onSuccess='#33691E' />
+        <BooleanIcon value={row.batch} icon="Flag" onFailure='#E5E5E5' onSuccess='#33691E' />
       ) 
     }
   ]

@@ -1,11 +1,11 @@
-import { TaskManagementItem } from 'components/volumetry/interfaces'
+import { TaskManagementItem, ValueLabelInterface } from 'components/volumetry/interfaces'
 import { useNotification } from 'hooks'
 import { ChangeEvent, useMemo } from 'react'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useFormik } from 'formik'
 import { Modal } from 'components/core-ui/Modal'
 import { CircularProgress, Grid } from '@mui/material'
-import { Button, Checkbox, Input, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Input, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useMutation } from 'react-query'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
@@ -17,27 +17,31 @@ import {
   getFrequencyOptions,
   getMeasurementUnitsOptions,
   getPrioritiesOptions,
-  getRaionsOptions,
   getTask,
   getWorkVolumesOptions
 } from 'components/volumetry/api'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 
 interface CreateEditTaskProps {
   isModalOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
+  categoryFilterValue: ValueLabelInterface | null
   isEdit?: boolean
   editItemId?: string | number
 }
 
 const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
-  const { isModalOpen, closeModal, isEdit, editItemId, setShouldRefreshData } = props
+  const { isModalOpen, closeModal, isEdit, editItemId, setShouldRefreshData, categoryFilterValue } =
+    props
   const { showNotification } = useNotification()
 
-  const { data: editItem } = getTask(editItemId, showNotification)
+  const { data: editItem } = getTask(editItemId, isModalOpen, showNotification)
 
-  const initialValues = useMemo(() => getInitialValues(editItem), [editItemId, editItem])
+  const initialValues = useMemo(
+    () => getInitialValues(editItem, categoryFilterValue),
+    [editItemId, editItem, categoryFilterValue]
+  )
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItemId])
 
   const formik = useFormik({
@@ -53,21 +57,12 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
 
   const categoryId = formik.values.volumetryLocationCategory?.value
   const shouldFetchDepartments = formik.values.volumetryLocationCategory !== null
-  const departmentId = formik.values.rayonsOrDepartment?.value
-  const shouldFetchRaions = formik.values.rayonsOrDepartment !== null
 
   const { data: categoryOptions } = getCategoriesOptions(showNotification)
   const { data: priorityOptions } = getPrioritiesOptions(showNotification)
   const { data: departmentOptions } = getCategoryDepartmentsOptions(
     categoryId,
     shouldFetchDepartments,
-    showNotification
-  )
-
-  const { data: raionOptions, isLoading: isRaionOptionsLoading } = getRaionsOptions(
-    departmentId,
-    shouldFetchRaions,
-    value => formik.setFieldValue('rayons', value),
     showNotification
   )
 
@@ -128,12 +123,12 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
           <AsyncAutocomplete
             variant="outlined"
             name="volumetryLocationCategory"
-            label="Categorie"
+            label="Business unit"
             value={formik.values.volumetryLocationCategory}
             options={categoryOptions}
             onChange={value => {
               formik.setFieldValue('volumetryLocationCategory', value)
-              formik.setFieldValue('rayonsOrDepartment', null)
+              formik.setFieldValue('departmentAlias', null)
             }}
             error={!!formik.errors.volumetryLocationCategory}
             helperText={formik.errors.volumetryLocationCategory as string}
@@ -144,40 +139,19 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
             variant="outlined"
-            name="rayonsOrDepartment"
+            name="departmentAlias"
             label="Raion/Departament"
-            value={formik.values.rayonsOrDepartment}
+            value={formik.values.departmentAlias}
             disabled={formik.values.volumetryLocationCategory === null}
             options={departmentOptions || []}
             onChange={value => {
-              formik.setFieldValue('rayonsOrDepartment', value)
+              formik.setFieldValue('departmentAlias', value)
             }}
-            error={!!formik.errors.rayonsOrDepartment}
-            helperText={formik.errors.rayonsOrDepartment as string}
+            error={!!formik.errors.departmentAlias}
+            helperText={formik.errors.departmentAlias as string}
             required
           />
         </Grid>
-
-        {formik.values.rayonsOrDepartment !== null &&
-          !isRaionOptionsLoading &&
-          formik.values.rayonsOrDepartment.locationType !== 'SUPER' && (
-            <Grid xs={12} md={12} item>
-              <AsyncAutocomplete
-                variant="outlined"
-                name="rayons"
-                label="Raion"
-                value={formik.values.rayons || []}
-                options={raionOptions}
-                onChange={value => {
-                  formik.setFieldValue('rayons', value)
-                }}
-                error={!!formik.errors.rayons}
-                helperText={formik.errors.rayons as string}
-                required
-                multiple
-              />
-            </Grid>
-          )}
         <Grid xs={12} md={6} item>
           <TimePicker
             label="Ora recomandata de inceput"
@@ -188,6 +162,8 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             required
             variant="outlined"
             style={{ width: '100%' }}
+            forceDesktop
+            ampm={false}
           />
         </Grid>
 
@@ -201,6 +177,8 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             required
             variant="outlined"
             style={{ width: '100%' }}
+            forceDesktop
+            ampm={false}
           />
         </Grid>
 
@@ -215,8 +193,30 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             error={!!formik.errors.frequency}
             helperText={formik.errors.frequency as string}
             required
+            multiple
           />
         </Grid>
+
+        {/* <Grid xs={12} md={6} item>
+          <Input
+            type="number"
+            name="defaultWorkload"
+            label="Volum estimat"
+            fullWidth
+            required
+            variant="outlined"
+            value={formik.values.defaultWorkload}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue(
+                'defaultWorkload',
+                event.currentTarget.value.replace(/[.,]/g, '')
+              )
+            }
+            error={!!formik.errors.defaultWorkload}
+            helperText={formik.errors.defaultWorkload as string}
+            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+          />
+        </Grid> */}
 
         <Grid xs={12} md={6} item>
           <AsyncAutocomplete
@@ -247,7 +247,8 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             error={!!formik.errors.standardProductivityValue}
             helperText={formik.errors.standardProductivityValue as string}
             inputProps={{
-              step: '0.1'
+              step: '0.25',
+              min: '0'
             }}
           />
         </Grid>
@@ -256,7 +257,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
           <AsyncAutocomplete
             variant="outlined"
             name="measurementUnit"
-            label="UM standard productivitate"
+            label="Unitate de masura"
             value={formik.values.measurementUnit}
             options={measurementUnitsOptions}
             onChange={value => formik.setFieldValue('measurementUnit', value)}
@@ -277,14 +278,6 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             error={!!formik.errors.priority}
             helperText={formik.errors.priority as string}
             required
-          />
-        </Grid>
-
-        <Grid xs={12} md={6} item sx={{ display: 'flex' }}>
-          <Checkbox
-            checked={formik.values.isActive}
-            label="Activ"
-            onChange={event => formik.setFieldValue('isActive', event.target.checked)}
           />
         </Grid>
 

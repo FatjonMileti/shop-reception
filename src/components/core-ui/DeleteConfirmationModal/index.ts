@@ -1,1 +1,1 @@
-export { default as DeleteTimeOff } from './DeleteConfirmationModal'
+export { default as DeleteConfirmationModal } from './DeleteConfirmationModal'

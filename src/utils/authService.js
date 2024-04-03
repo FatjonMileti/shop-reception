@@ -1,4 +1,4 @@
-import { FIREBASE_TOKEN_KEY, TOKEN_KEY } from 'utils/constants'
+import { FIREBASE_TOKEN_KEY, TOKEN_KEY, FIREBASE_USER } from 'utils/constants'
 import { isTokenExpired } from './jwtHelper'
 import jwt_decode from 'jwt-decode'
 
@@ -48,17 +48,17 @@ const removeToken = () => {
   return localStorage.removeItem(TOKEN_KEY)
 }
 
-export const getFirebaseToken = () => {
-  return localStorage.getItem(FIREBASE_TOKEN_KEY)
-}
+export const getFirebaseToken = () => localStorage.getItem(FIREBASE_TOKEN_KEY)
 
-export const removeFirebaseToken = () => {
-  return localStorage.removeItem(FIREBASE_TOKEN_KEY)
-}
+export const removeFirebaseToken = () => localStorage.removeItem(FIREBASE_TOKEN_KEY)
 
-export const setFirebaseToken = token => {
-  localStorage.setItem(FIREBASE_TOKEN_KEY, token)
-}
+export const setFirebaseToken = token => localStorage.setItem(FIREBASE_TOKEN_KEY, token)
+
+export const getFirebaseUser = () => localStorage.getItem(FIREBASE_USER)
+
+export const setFirebaseUser = user => localStorage.setItem(FIREBASE_USER, user)
+
+export const removeFirebaseUser = () => localStorage.removeItem(FIREBASE_USER)
 
 export const isAuthenticated = () => {
   // Checks if there is a saved token and it's still valid
@@ -108,6 +108,12 @@ export const getUserFirstName = () => {
   const userInfo = getUserInfo()
 
   return userInfo?.given_name
+}
+
+export const getUserPreferredName = () => {
+  const userInfo = getUserInfo()
+
+  return userInfo?.preferred_username
 }
 
 export const getUserAvatarString = () => {

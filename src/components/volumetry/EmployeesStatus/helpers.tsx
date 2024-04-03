@@ -18,13 +18,21 @@ export const columns = [
     )
   },
   {
-    title: 'Nr. task-uri neincepute',
-    field: 'notStartedTasksNumber',
-    align: 'left'
+    title: 'Nume task in desfasurare',
+    field: 'taskName',
+    align: 'left',
+    collapsible: true
   },
   {
     title: 'Nr. task-uri finalizate',
     field: 'finishedTasksNumber',
-    align: 'left'
+    align: 'left',
+    collapsible: true
   }
+]
+
+export const shiftCategoryOptions = [
+  { label: 'Angajati pe tura', value: 'ON_SHIFT' },
+  { label: 'Angajati care nu sunt pe tura', value: 'OFF_SHIFT' },
+  { label: 'Colaboratori', value: 'COLLABORATOR' }
 ]

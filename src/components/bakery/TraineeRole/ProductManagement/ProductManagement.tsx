@@ -49,7 +49,7 @@ const ProductManagement = () => {
         ?.value || []) as AutoCompleteValue[]
 
       const result = await makeCoreGetRequest(
-        '/bakery/store/cadentier/families',
+        '/bakery/store/families',
         {
           params: {
             store: storeFilterValue?.value,

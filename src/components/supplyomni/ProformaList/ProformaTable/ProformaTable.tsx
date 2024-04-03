@@ -31,6 +31,7 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
   const [tableFilters, setTableFilters] = useState<TableFilters>(defaultTableFilters)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
 
   const [withMyProforma, setWithMyProforma] = useState(true)
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false)
@@ -48,6 +49,7 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
   const handleWithMyProformaFilterChange = (value): void => {
     setWithMyProforma(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const rowActions = useMemo(() => {
@@ -60,7 +62,7 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
     const actions = [
       proformaType === 'active'
         ? {
-            label: 'Anuleaza',
+            label: 'Anulare',
             labelColor: 'white',
             typographyVariant: 'medium',
             backgroundColor: '#CC4010',
@@ -115,11 +117,6 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
           orderId={`${selectedRow?.id}`}
           setShouldRefreshData={setShouldRefreshData}
         />
-        {/* <Checkbox
-          label="Proformele mele"
-          checked={withMyProforma}
-          onChange={event => handleWithMyProformaFilterChange(event.target.checked)}
-        /> */}
         <FormControlLabel
           sx={isXs ? {} : { position: 'absolute', width: '50%', zIndex: 3, color: '#052351' }}
           name="my_bills1"
@@ -145,8 +142,15 @@ const ProformaTable: React.FC<ProformaTableProps> = props => {
           rowActions={rowActions}
           rowActionsWidth="200px"
           filters={tableFilterInputs}
+          filtersLabel={"Filtre"}
+          appliedFiltersLabel={"Filtre aplicate"}
+          filtersButtonLabel={"Filtrare"}
+          cancelFiltersButtonLabel={"Anulare"}
+          applyFiltersButtonLabel={"Confirma"}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
+          shouldResetPage={shouldResetPage}
+          setShouldResetPage={setShouldResetPage}
         />
       </Box>
     </div>

@@ -26,3 +26,18 @@ export const getEmployeeGroupName = groupBy => {
       return ''
   }
 }
+
+export const PriorityColors = [
+  {
+    value: '#D30D1F',
+    label: '#f8dbdd'
+  },
+  {
+    value: '#ff9900',
+    label: '#fff4d9'
+  },
+  {
+    value: '#33691e',
+    label: '#e0e9dd'
+  }
+]

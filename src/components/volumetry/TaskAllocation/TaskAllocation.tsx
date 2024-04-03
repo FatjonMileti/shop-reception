@@ -6,7 +6,7 @@ import cn from 'classnames'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
-import { handleQueryError } from '../utils'
+import { handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Icon } from 'components/core-ui/Icon'
@@ -44,7 +44,7 @@ const TaskAllocation = () => {
             url: '/volumetry/tasks/aggregation/summary',
             filters: [
               { name: 'taskTemplateId', value: taskTemplateId },
-              { name: 'genericDepartmentId', value: 1 } //TODO remove this when BE is implemented
+              { name: 'departmentAliasId', value: 1 } //TODO remove this when BE is implemented
             ],
             page,
             rowsPerPage
@@ -78,7 +78,7 @@ const TaskAllocation = () => {
           url: '/volumetry/tasks/aggregation/summary',
           filters: [
             { name: 'taskTemplateId', value: taskTemplateId },
-            { name: 'genericDepartmentId', value: 1 } //TODO remove this when BE is implemented
+            { name: 'departmentAliasId', value: 1 } //TODO remove this when BE is implemented
           ],
           page,
           rowsPerPage
