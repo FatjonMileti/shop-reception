@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Divider, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
 import { makeCorePostRequest } from 'utils/api'
@@ -31,8 +31,11 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
   const navigate = useNavigate()
   const isXs = useMediaQuery('(max-width:430px)')
 
-  const [selectedBuybackOption, setSelectedBuybackOption] = useState(
-    product.purchaseOptions[0]?.value || ''
+  const [selectedBuybackOption, setSelectedBuybackOption] = useState('')
+
+  useEffect(
+    () => setSelectedBuybackOption(product.purchaseOptions[0]?.value),
+    [product, product.purchaseOptions]
   )
 
   const { data: productStock, isLoading: isLoadingProductStock } = useQuery(
@@ -118,7 +121,7 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
               variant="outlined"
               width={isXs ? '100%' : '320px'}
               onChange={event => setSelectedBuybackOption((event.target as any).value)}
-              disabled={product.purchaseOptions.length == 1}
+              disabled={product.purchaseOptions.length === 1}
               fullWidth
             />
           </div>
