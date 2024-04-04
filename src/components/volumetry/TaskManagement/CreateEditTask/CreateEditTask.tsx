@@ -162,8 +162,8 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             required
             variant="outlined"
             style={{ width: '100%' }}
-            forceDesktop
-            ampm={false}
+            // forceDesktop
+            // ampm={false}
           />
         </Grid>
 
@@ -177,8 +177,8 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             required
             variant="outlined"
             style={{ width: '100%' }}
-            forceDesktop
-            ampm={false}
+            // forceDesktop
+            // ampm={false}
           />
         </Grid>
 

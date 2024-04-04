@@ -33,8 +33,8 @@ export const buildColumns = ({
         onChange={newValue => updateEmployeeTime(row, newValue, 'shiftStart')}
         variant="outlined"
         style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
-        forceDesktop
-        ampm={false}
+        // forceDesktop
+        // ampm={false}
       />
     )
   },
@@ -48,8 +48,8 @@ export const buildColumns = ({
         onChange={newValue => updateEmployeeTime(row, newValue, 'shiftEnd')}
         variant="outlined"
         style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
-        forceDesktop
-        ampm={false}
+        // forceDesktop
+        // ampm={false}
       />
     )
   }
