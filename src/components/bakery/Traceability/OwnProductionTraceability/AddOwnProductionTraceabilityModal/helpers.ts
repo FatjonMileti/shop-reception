@@ -91,7 +91,8 @@ export const toBatchFormat = (item, calculatedQuantity) => ({
   quantity: calculatedQuantity,
   hasSecondaryDlc: item.hasSecondaryDlc,
   openingDate: null,
-  dlcDays: item.dlcDays
+  dlcDays: item.dlcDays,
+  expireDate: item?.expireDate
 })
 
 export const toChargeFormat = (item, calculatedQuantity) => ({
@@ -102,7 +103,7 @@ export const toChargeFormat = (item, calculatedQuantity) => ({
   quantity: calculatedQuantity,
   productionDate: item.productionDate,
   hasSecondaryDlc: !!item?.product?.dlcDays,
-  dlcDays: item?.product?.dlcDays
+  dlcDays: item?.product?.dlcDays,
 })
 
 export const columns: any[] = [

@@ -69,10 +69,25 @@ export const CorrectOwnProductionTraceabilityModal = ({
     onSubmit: async (values: any) => {
       const addDlcToComponent = item => {
         if (!item.hasSecondaryDlc) return item
+
+        // charge
+        if (!item.batchId) {
+          return {
+            ...item,
+            dlc: formatPayloadDate(dayjs(item.productionDate).add(item.dlcDays, 'days'))
+          }
+        }
+
+        // batch
+        const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
         return {
           ...item,
           dlc: formatPayloadDate(
-            dayjs(item.batchId ? item.openingDate : item.productionDate).add(item.dlcDays, 'days')
+            item?.expireDate
+              ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
+                ? dayjs(item?.expireDate)
+                : calculatedDlc
+              : calculatedDlc
           )
         }
       }

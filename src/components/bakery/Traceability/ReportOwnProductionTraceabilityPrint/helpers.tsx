@@ -49,7 +49,8 @@ export const productPrintColumns = (isFormator = false) => [
     title: 'Cant. fabricata',
     field: 'quantity',
     defaultPrintSelected: true,
-    width: '50px'
+    width: '50px',
+    render: row => row?.quantity?.toFixed(3),
   },
   {
     title: 'UM',
@@ -152,7 +153,7 @@ export const batchPrintColumns = [
   },
   {
     field: 'modifiedDate',
-    title: 'Data ultimei verificari',
+    title: 'Data ultimei modificari',
     render: row => formatBakeryPayloadDate(row.modifiedDate),
     width: '100px'
   }
@@ -175,7 +176,7 @@ export const chargePrintColumns = [
   {
     field: 'componentQuantity',
     title: 'Cant. articol compozant din reteta',
-    render: row => row.componentQuantity,
+    render: row => row.componentQuantity?.toFixed(3),
     width: '50px'
   },
   {
@@ -193,7 +194,7 @@ export const chargePrintColumns = [
   {
     field: 'quantity',
     title: 'Cant. MP /baze /ambalaje',
-    render: row => row.quantity,
+    render: row => row.quantity?.toFixed(3),
     width: '50px'
   },
   {
