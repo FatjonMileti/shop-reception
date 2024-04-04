@@ -1,14 +1,14 @@
 import { useMemo } from 'react'
-import { Checkbox, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '../../../../Common/Grid'
+import { Grid, createFilterOptions } from '@mui/material'
+import { Autocomplete, Button, Input, Checkbox } from '@fullscreendigital/carrefour-dex-fe'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toPayload } from './serializers'
-import { ModalFormActionButtons } from '../../../Common/ModalFormActionButtons'
+import Barcode from 'react-jsbarcode'
+import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { useMutation, useQuery } from 'react-query'
 
 interface NewAdminDepositProps {
   isModalOpen: boolean
@@ -18,13 +18,37 @@ interface NewAdminDepositProps {
   editItem?: PackingType
 }
 
+const filter = createFilterOptions()
+
 const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
   const { isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
-
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
+
+  const createUpdatePackage = async (values: any) => {
+    isEdit
+      ? await makeCorePutRequest(`/support-types/${editItem.id}`, values)
+      : await makeCorePostRequest(`/support-types`, values)
+  }
+
+  const { isLoading, mutate } = useMutation(createUpdatePackage, {
+    onSuccess: res => {
+      showNotification({
+        message: `Data ${isEdit ? 'updated' : 'created'} successfully`,
+        type: 'success'
+      })
+    },
+    onError: res => {
+      showNotification({
+        message: `Error while trying to ${isEdit ? 'update' : 'create'} data, ${formatErrorMessage(
+          res
+        )}`,
+        type: 'error'
+      })
+    }
+  })
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -32,130 +56,187 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      try {
-        const payload = toPayload(formik.values)
-
-        if (isEdit) {
-        } else {
-        }
-
-        setShouldRefreshData(true)
-        closeModal()
-        formik.resetForm()
-      } catch (error) {
-        showNotification({
-          message: `Error while data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
+      mutate(values)
+      formik.resetForm()
+      setShouldRefreshData(true)
+      closeModal()
     }
   })
+  // console.log('debug', formik.values)
 
-  let items = [
-    <Grid
-      gridContainerStyle={{ margin: 0 }}
-      items={[
-        <Input
-          type='text'
-          value={formik.values.packagingCode}
-          onChange={event =>
-            formik.setFieldValue('packagingCode', (event.target as HTMLInputElement).value)
-          }
-          label='Cod ambalaj'
-          variant='outlined'
-          style={{ width: '100%' }}
-          error={!!formik.errors.packagingCode}
-          helperText={formik.errors.packagingCode as string}
-          required
-        />,
-        <Input
-          type='text'
-          value={formik.values.name}
-          onChange={event =>
-            formik.setFieldValue('name', (event.target as HTMLInputElement).value)
-          }
-          label='Denumire'
-          variant='outlined'
-          style={{ width: '100%' }}
-          error={!!formik.errors.name}
-          helperText={formik.errors.name as string}
-          required
-        />,
-        <Input
-          type='select'
-          value={formik.values.main}
-          onChange={event =>
-            formik.setFieldValue('main', (event.target as HTMLInputElement).value)
-          }
-          label='Principal/secundar'
-          variant='outlined'
-          style={{ width: '100%' }}
-          error={!!formik.errors.main}
-          helperText={formik.errors.main as string}
-          values={[]}
-          required
-        />,
-        <Input
-          type='select'
-          value={formik.values.generatedBarcode}
-          onChange={event =>
-            formik.setFieldValue('generatedBarcode', (event.target as HTMLInputElement).value)
-          }
-          label='Cod de bare'
-          variant='outlined'
-          style={{ width: '100%' }}
-          error={!!formik.errors.generatedBarcode}
-          helperText={formik.errors.generatedBarcode as string}
-          values={[]}
-          required
-        />,
-        <Checkbox
-          checked={formik.values.active}
-          onChange={event => formik.setFieldValue('active', (event.target as HTMLInputElement).checked)}
-          label='Activ'
-        />,
-        <Checkbox
-          checked={formik.values.return}
-          onChange={event => formik.setFieldValue('return', (event.target as HTMLInputElement).checked)}
-          label='Returnabil'
-        />,
-        <Checkbox
-          checked={formik.values.combination}
-          onChange={event => formik.setFieldValue('combination', (event.target as HTMLInputElement).checked)}
-          label='Combinaţie'
-        />
-      ]}
-      itemsPerRow={2}
-    />,
-    <ModalFormActionButtons
-      onCancel={() => closeModal()}
-      onSubmit={() => formik.handleSubmit()}
-    />
-  ]
-
-  if (isEdit) {
-    items.unshift(<FormInfoItems
-      items={[
-        {
-          label: 'Denumire:',
-          name: editItem?.name
-        }
-      ]}
-    />)
-  }
+  const { data: uncombined, isLoading: isUncombinedLoading } = useQuery(
+    ['uncombined'],
+    async () => {
+      const result = await makeCoreGetRequest(`/support-types?filterBy=combined&filterValue=false`)
+      const options = result.list.map(item => ({ value: item.id, label: item.name }))
+      return options || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: !isEdit
+    }
+  )
 
   return (
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={isEdit ? 'Editează tip ambalaj' : 'Adaugă tip ambalaj'}
-      modalWidth='50%'
+      modalTitle={isEdit ? `Editează tip ambalaj ${editItem?.name}` : 'Adaugă tip ambalaj'}
+      modalWidth="50%"
     >
-      <Grid
-        gridContainerStyle={{ margin: 0 }}
-        items={items}
-        itemsPerRow={1}
-      />
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Input
+            variant="outlined"
+            label="Cod ambalaj"
+            type="text"
+            fullWidth
+            onChange={(e: any) => formik.setFieldValue('externalCode', e.target.value)}
+            defaultValue={formik.values.externalCode}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Autocomplete
+            value={formik.values.alternativeCodes}
+            multiple
+            options={[]}
+            freeSolo
+            variant="outlined"
+            label="Coduri suplimentare"
+            onChange={(event, value) => {
+              const result = value.map(val => {
+                return val.inputValue
+                  ? {
+                      value: val.inputValue,
+                      label: val.inputValue
+                    }
+                  : val
+              })
+              formik.setFieldValue('alternativeCodes', result)
+            }}
+            error={!!formik.errors.alternativeCodes}
+            helperText={formik.errors.alternativeCodes as string}
+            required
+            filterOptions={(options, params) => {
+              const filtered = filter(options, params)
+
+              if (params.inputValue !== '') {
+                filtered.push({
+                  inputValue: params.inputValue,
+                  label: `Add "${params.inputValue}"`
+                })
+              }
+
+              return filtered
+            }}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Input
+            variant="outlined"
+            label="Denumire"
+            type="text"
+            fullWidth
+            onChange={(e: any) => formik.setFieldValue('name', e.target.value)}
+            defaultValue={formik.values.name}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Checkbox
+            checked={formik.values.active}
+            defaultChecked={formik.values.active}
+            onChange={event => formik.setFieldValue('active', !formik.values.active)}
+            label="Activ"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Checkbox
+            checked={formik.values.returnable}
+            defaultChecked={formik.values.returnable}
+            onChange={event => formik.setFieldValue('returnable', !formik.values.returnable)}
+            label="Returnabil"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Checkbox
+            checked={formik.values.combined}
+            defaultChecked={formik.values.combined}
+            onChange={event => formik.setFieldValue('combined', !formik.values.combined)}
+            label="Combinatie"
+            disabled={isEdit ? true : false}
+          />
+        </Grid>
+
+        {formik.values.combined ? (
+          <Grid item xs={12}>
+            <Autocomplete
+              multiple={true}
+              label="Ambalaje necombinate"
+              options={uncombined}
+              onChange={(e: any) => console.log('debug', e.target)}
+              variant="outlined"
+            />
+          </Grid>
+        ) : (
+          <>
+            <Grid item xs={12}>
+              <Autocomplete
+                variant="outlined"
+                label="Principal/Secundar"
+                disableClearable
+                options={[
+                  { label: 'Principal', value: 'true' },
+                  { label: 'Secundar', value: 'false' }
+                ]}
+                onChange={(e, option) => formik.setFieldValue('main', option.value)}
+                defaultValue={
+                  editItem && {
+                    label: formik.values.main ? 'Principal' : 'Secundar',
+                    value: formik.values.main
+                  }
+                }
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Input
+                variant="outlined"
+                label="Cod de bare"
+                type="text"
+                fullWidth
+                onChange={(e: any) => formik.setFieldValue('code', e.target.value)}
+                defaultValue={formik.values.code}
+              />
+            </Grid>
+            {formik.values.code?.length > 0 && formik.values.code !== null && (
+              <Grid item xs={12}>
+                <Barcode value={formik.values.code} />
+              </Grid>
+            )}
+          </>
+        )}
+
+        <Grid item xs={12} container justifyContent="space-between">
+          <Grid>
+            <Button size="large" variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+          </Grid>
+
+          <Grid>
+            <Button
+              size="large"
+              variant="contained"
+              label="Salveaza"
+              onClick={() => formik.handleSubmit()}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
     </Modal>
   )
 }

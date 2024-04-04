@@ -6515,6 +6515,35 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "8634af3e-6b55-47ae-8050-c239119c424d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "support-types",
+      "responses": [
+        {
+          "uuid": "1ec20705-ec71-4243-94d5-9f5922ec3fc1",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"code\": \"string\",\n      \"externalCode\": \"string\",\n      \"name\": \"string\",\n      \"main\": true,\n      \"combined\": true,\n      \"missing\": true,\n      \"active\": true,\n      \"alternativeCodes\": \"string\",\n      \"returnable\": true\n    },\n     {\n      \"id\": 1,\n      \"code\": \"string2\",\n      \"externalCode\": \"string2\",\n      \"name\": \"string2\",\n      \"main\": true,\n      \"combined\": true,\n      \"missing\": true,\n      \"active\": true,\n      \"alternativeCodes\": \"string2\",\n      \"returnable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6885,6 +6914,10 @@
     {
       "type": "route",
       "uuid": "f03cafa8-b1dc-4ebc-a705-6f29b2b90053"
+    },
+    {
+      "type": "route",
+      "uuid": "8634af3e-6b55-47ae-8050-c239119c424d"
     }
   ],
   "proxyMode": false,

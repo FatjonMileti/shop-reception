@@ -1,6 +1,5 @@
-import { Grid } from '../../../Common/Grid'
 import { Table } from '../../../../core-ui/Table'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { Add as AddIcon, CloudDownload as CloudDownloadIcon } from '@mui/icons-material'
 import { useState } from 'react'
 import { makeCoreGetRequest } from '../../../../../utils/api'
@@ -8,42 +7,23 @@ import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../Common/TitleHeader'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { PackingTypeForm } from './PackingTypeForm'
+import s from '../../../commonStyles.modules.scss'
+import { EditActionIcon } from 'icons'
 
 const PackingTypes = () => {
-  const [tableItems, setTableItems] = useState<PackingType[]>([
-    {
-      id: 1,
-      packagingCode: 'CRAIOVA (3054)',
-      additionalCodes: 'DEPOZIT BRAZI NON FOOD',
-      name: 'PH01DEP',
-      main: 'DEPOZITBRA',
-      combination: false,
-      active: true,
-      return: true,
-      generatedBarcode: 'Înregistrat'
-    }
-  ])
+  const { showNotification } = useNotification()
+  const [tableItems, setTableItems] = useState<PackingType[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<PackingType>()
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const { showNotification } = useNotification()
 
-  const openNewModal = (): void => setIsNewModalOpen(true)
-  const closeNewModal = (): void => setIsNewModalOpen(false)
+  const [selectedRow, setSelectedRow] = useState<PackingType>()
+  const [modal, setModal] = useState(null)
+  const openModal = (action): void => setModal(action)
+  const closeModal = () => setModal(null)
 
-  const openEditModal = (rowId: number|string): void => {
-    selectRow(rowId)
-    setIsEditModalOpen(true)
-  }
-  const closeEditModal = (): void => setIsEditModalOpen(false)
-
-  const selectRow = (rowId: number|string) => {
+  const selectRow = (rowId: number | string) => {
     const row = tableItems.find(item => item.id === rowId)
     if (row) {
       setSelectedRow(row)
@@ -55,7 +35,7 @@ const PackingTypes = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/reception-mobile-api/rm-api/truck/list',
+          url: '/support-types',
           tableFilters,
           page,
           rowsPerPage,
@@ -64,12 +44,11 @@ const PackingTypes = () => {
         })
       )
 
-      const responseList = response.list
-
-      setTableItems(toTableRowItems(responseList))
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
+      console.log('debug ', error)
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'
@@ -78,156 +57,59 @@ const PackingTypes = () => {
   }
 
   return (
-    <Grid
-      items={[
-        <TitleHeader title='Administrare tipuri de ambalaje' />,
-        <Grid
-          hasPaper={true}
-          items={[
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Cod ambalaj'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Denumire'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Principal/secundar'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Principal',
-                  value: 'principle'
-                },
-                {
-                  label: 'Secundar',
-                  value: 'secondary'
-                }
-              ]}
-              value={'principle'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Selectează combinaţie'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: '1',
-                  value: '1'
-                },
-                {
-                  label: '2',
-                  value: '2'
-                },
-                {
-                  label: '3',
-                  value: '3'
-                }
-              ]}
-              value={'1'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Activ/inactiv'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Activ',
-                  value: 'active'
-                },
-                {
-                  label: 'Inactiv',
-                  value: 'inactive'
-                }
-              ]}
-              value={'active'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Returnabil/nereturnabil'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Returnabil',
-                  value: 'returnabil'
-                },
-                {
-                  label: 'Nereturnabil',
-                  value: 'nereturnabil'
-                }
-              ]}
-              value={'returnabil'}
-            />
-          ]}
-          itemsPerRow={4}
-        />,
-        <>
-          <PackingTypeForm
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <PackingTypeForm
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            setShouldRefreshData={setShouldRefreshData}
-            editItem={selectedRow}
-            isEdit
-          />
-          <Table
-            hideCheckbox
-            orderBy='role'
-            order='asc'
-            columns={columns}
-            items={tableItems}
-            fetchData={() => {}}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            rowActions={[
-              {
-                label: 'Edit',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#16a085',
-                onClick: (e, rowId) => openEditModal(rowId)
-              }
-            ]}
-            rowActionsWidth='130px'
-            toolbarActions={[
-              {
-                label: 'Export',
-                icon: <CloudDownloadIcon />,
-                onClick: null
-              },
-              {
-                label: 'Tip ambalaj',
-                icon: <AddIcon />,
-                onClick: openNewModal
-              }
-            ]}
-          />
-        </>
-      ]}
-      itemsPerRow={1}
-    />
+    <div className={s.mainContainer}>
+      <PackingTypeForm
+        isModalOpen={modal === 'create'}
+        closeModal={closeModal}
+        setShouldRefreshData={setShouldRefreshData}
+      />
+      <PackingTypeForm
+        isModalOpen={modal === 'update'}
+        closeModal={closeModal}
+        setShouldRefreshData={setShouldRefreshData}
+        editItem={selectedRow}
+        isEdit
+      />
+      <Table
+        hideCheckbox
+        orderBy="role"
+        order="asc"
+        columns={columns}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+        rowActions={[
+          {
+            label: 'Edit',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#16a085',
+            desktopIcon: <EditActionIcon />,
+            onClick: (_, rowId) => {
+              selectRow(rowId)
+              setModal('update')
+            }
+          }
+        ]}
+        rowActionsWidth="130px"
+        toolbarActions={[
+          {
+            label: 'Export',
+            icon: <CloudDownloadIcon />,
+            onClick: null
+          },
+          {
+            label: 'Tip ambalaj',
+            icon: <AddIcon />,
+            onClick: () => openModal('create')
+          }
+        ]}
+        filters={drawerFilters}
+      />
+    </div>
   )
 }
 

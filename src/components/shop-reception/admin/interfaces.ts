@@ -135,14 +135,16 @@ interface SubFamilyValidityThreshold {
 
 interface PackingType {
   id: number
-  packagingCode: string
-  additionalCodes: string
+  code: string
+  externalCode: string
   name: string
-  main: string
-  combination: boolean
+  main: boolean
+  combined: boolean
+  missing: boolean
   active: boolean
-  return: boolean
-  generatedBarcode: string
+  alternativeCodes: string
+  returnable: boolean
+  childrenIds?: number[]
 }
 
 interface BalancePackage {
