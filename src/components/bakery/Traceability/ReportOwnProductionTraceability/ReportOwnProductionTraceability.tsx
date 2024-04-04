@@ -83,6 +83,7 @@ export const ReportOwnProductionTraceability = () => {
       return resultOptions || []
     },
     {
+      enabled: isFormator,
       onError: error => {
         showNotification({
           message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
@@ -199,6 +200,7 @@ export const ReportOwnProductionTraceability = () => {
       return resultOptions || []
     },
     {
+      enabled: !isFormator || isFormator && !!storeFilterValue?.length,
       onError: error => {
         showNotification({
           message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
@@ -234,6 +236,7 @@ export const ReportOwnProductionTraceability = () => {
       return resultOptions || []
     },
     {
+      enabled: !isFormator || isFormator && !!storeFilterValue?.length,
       onError: error => {
         showNotification({
           message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
@@ -418,6 +421,11 @@ export const ReportOwnProductionTraceability = () => {
             isLoading={isLoading}
             totalCount={totalCount}
             filters={drawerFilters}
+            appliedFiltersLabel='Filtre'
+            applyFiltersButtonLabel='Filtrare'
+            filtersLabel='Filtrare'
+            filtersButtonLabel='Filtrare'
+            cancelFiltersButtonLabel='Anuleaza'
             hasSearchInput
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
             toolbarActions={[

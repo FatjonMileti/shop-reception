@@ -169,6 +169,11 @@ export const ProductManagementTraceability = () => {
         totalCount={totalCount}
         isLoading={isLoading}
         filters={drawerFilters}
+        appliedFiltersLabel='Filtre'
+        applyFiltersButtonLabel='Filtrare'
+        filtersLabel='Filtrare'
+        filtersButtonLabel='Filtrare'
+        cancelFiltersButtonLabel='Anuleaza'
         hasSearchInput
         handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         rows={tableItems.map(item => ({
