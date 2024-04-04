@@ -210,9 +210,14 @@ export const FrozenTraceability = () => {
           totalCount={totalCount}
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           filters={drawerFilters}
+          appliedFiltersLabel='Filtre'
+          applyFiltersButtonLabel='Filtrare'
+          filtersLabel='Filtrare'
+          filtersButtonLabel='Filtrare'
+          cancelFiltersButtonLabel='Anuleaza'
           toolbarActions={[
             {
-              label: 'Add',
+              label: 'Adauga',
               onClick: () => {
                 setIsModalOpen(true)
               },

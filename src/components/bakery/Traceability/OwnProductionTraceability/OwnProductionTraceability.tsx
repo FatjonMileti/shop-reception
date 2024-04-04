@@ -208,6 +208,11 @@ export const OwnProductionTraceability = () => {
           totalCount={totalCount}
           hasSearchInput
           filters={drawerFilters}
+          appliedFiltersLabel='Filtre'
+          applyFiltersButtonLabel='Filtrare'
+          filtersLabel='Filtrare'
+          filtersButtonLabel='Filtrare'
+          cancelFiltersButtonLabel='Anuleaza'
           toolbarActions={[
             {
               label: 'Adauga',
