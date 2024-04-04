@@ -98,13 +98,27 @@ export const AddOwnProductionTraceabilityModal = ({
     validationSchema,
     initialValues,
     onSubmit: async (values: any) => {
-
       const addDlcToComponent = item => {
         if (!item.hasSecondaryDlc) return item
+
+        // charge
+        if (!item.batchId) {
+          return {
+            ...item,
+            dlc: formatPayloadDate(dayjs(item.productionDate).add(item.dlcDays, 'days'))
+          }
+        }
+
+        // batch
+        const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
         return {
           ...item,
           dlc: formatPayloadDate(
-            dayjs(item.batchId ? item.openingDate : item.productionDate).add(item.dlcDays, 'days')
+            item?.expireDate
+              ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
+                ? dayjs(item?.expireDate)
+                : calculatedDlc
+              : calculatedDlc
           )
         }
       }
@@ -182,11 +196,11 @@ export const AddOwnProductionTraceabilityModal = ({
   const addNewBatches = (batchesToAdd: any[]) => {
     if (batchesToAdd.length === 0) return
 
-    const mewBatches = batchesToAdd.filter(
+    const newBatches = batchesToAdd.filter(
       b => !formik.values.traceabilityProductionList.some(c => c.batchId === b.id)
     )
 
-    if (mewBatches.length === 0) return
+    if (newBatches.length === 0) return
 
     const componentQuantity = recipeQuery?.data?.batches?.find(
       b => b.componentCode === componentMetiCode
@@ -200,7 +214,7 @@ export const AddOwnProductionTraceabilityModal = ({
 
     formik.setFieldValue('traceabilityProductionList', [
       ...formik.values.traceabilityProductionList,
-      ...mewBatches.map(b => toBatchFormat(b, calculatedQuantity))
+      ...newBatches.map(b => toBatchFormat(b, calculatedQuantity))
     ])
   }
 
