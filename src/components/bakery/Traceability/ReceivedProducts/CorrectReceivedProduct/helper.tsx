@@ -50,7 +50,7 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
       )
       .nullable(),
 
-    amount: Yup.number().positive().required('Campul cantitate intrata trebuie completat'),
+    amount: Yup.number().required('Campul cantitate intrata trebuie completat').positive('Inserati valoare pozitiva'),
 
     lot: Yup.string().required('Campul lot trebuie completat').max(30),
 

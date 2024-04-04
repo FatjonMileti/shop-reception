@@ -26,7 +26,7 @@ export const validationSchema = Yup.object().shape({
     .test('length', 'must be at most 30 digits', value => value?.toString()?.length <= 30)
     .required('Campul sarja trebuie completat.'),
   productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
-  quantity: Yup.number().positive().required('Campul cantitate trebuie completat'),
+  quantity: Yup.number().required('Campul cantitate trebuie completat').positive('Inserati valoare pozitiva'),
   thermalCondition: Yup.string().required('Campul stare termica trebuie selectat.'),
   conform: Yup.boolean(),
   nonComplianceReason: Yup.string().when('conform', ([conform], schema) =>
@@ -51,7 +51,7 @@ export const validationSchema = Yup.object().shape({
         batchId: Yup.string(),
         quantity: Yup.number()
           .required('Cantitate obligatorie')
-          .positive('Cantitatea trebuie sa fie pozitiva'),
+          .positive('Inserati valoare pozitiva'),
         openingDate: Yup.date().when(
           ['hasSecondaryDlc', '$productionDate'],
           ([hasSecondaryDlc, productionDate], schema) => {

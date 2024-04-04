@@ -30,7 +30,7 @@ export const validationSchema = Yup.object().shape({
 
   chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
   productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
-  quantity: Yup.number().required('Campul cantitate trebuie completat'),
+  quantity: Yup.number().required('Campul cantitate trebuie completat').positive('Inserati valoare pozitiva'),
   thermalCondition: Yup.string().nullable(), //.required('Campul stare termica trebuie selectat.'),
   conform: Yup.boolean(),
   nonComplianceReason: Yup.string().when('conform', ([conform], schema) =>
@@ -53,7 +53,7 @@ export const validationSchema = Yup.object().shape({
       childTraceabilityId: Yup.string(),
       componentCode: Yup.number(),
       componentQuantity: Yup.number(),
-      quantity: Yup.number().required('Cantitate obligatorie'),
+      quantity: Yup.number().required('Cantitate obligatorie').positive('Inserati valoare pozitiva'),
 
       openingDate: Yup.date().when(
         ['hasSecondaryDlc', 'batchId', '$productionDate'],
