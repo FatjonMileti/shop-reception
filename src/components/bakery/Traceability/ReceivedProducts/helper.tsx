@@ -271,7 +271,7 @@ export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object
     )
     .nullable(),
 
-  amount: Yup.number().positive().required('Campul cantitate intrata trebuie completat'),
+  amount: Yup.number().required('Campul cantitate intrata trebuie completat').positive('Inserati valoare pozitiva'),
 
   lot: Yup.string().required('Campul lot trebuie completat').max(30),
 
