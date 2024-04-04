@@ -10,17 +10,18 @@ const ReceiptInvoiceFinalized: React.FC = () => {
   const clientId = searchParams.get('clientId')
   const orderId = searchParams.get('orderId')
   const isXs = useMediaQuery('(max-width:624px)')
+  const isXXs = useMediaQuery('(max-width:450px)')
 
   // TODO: Move styles external
   return (
     <Box sx={!isXs ? { margin: '24px' } : { margin: '12px' }}>
       <Grid sx={{ mt: 1 }} container spacing={5}>
-        <Grid item xs={12} style={{ paddingTop: '16px', paddingBottom: '16px' }}>
+        <Grid item xs={12} style={{ paddingTop: '16px', paddingBottom: '0' }}>
           <ShoppingCartStepper activeStep={6} />
         </Grid>
         <Grid
           style={{
-            paddingTop: '16px',
+            paddingTop: '0',
             marginTop: 0,
             height: 'auto',
             paddingLeft: '60px',
@@ -30,8 +31,16 @@ const ReceiptInvoiceFinalized: React.FC = () => {
           xs={12}
         >
           <Paper sx={{ pt: 0, pb: 2, minHeight: '400px' }}>
-            <Grid container justifyContent="center" spacing={2}>
-              <Box sx={{ textAlign: 'center', mt: { xs: 5, md: 14 } }}>
+            <Box style={{ minHeight: '400px' }}>
+              <Box
+                sx={{
+                  textAlign: 'center',
+                  minHeight: '400px',
+                  marginTop: 0,
+                  padding: '40px',
+                  mt: { xs: 5, md: 14 }
+                }}
+              >
                 <CheckCircleIcon sx={{ fontSize: '100px', color: '#1976d2' }} />
                 <br />
                 <Typography sx={{ fontSize: '14px', color: '#cecece' }}>
@@ -48,7 +57,7 @@ const ReceiptInvoiceFinalized: React.FC = () => {
                   onClick={() => console.log('disabled for now')}
                 />
                 <Button
-                  style={{ marginLeft: '8px' }}
+                  style={isXXs ? { marginTop: '16px' } : { marginLeft: '8px' }}
                   variant="contained"
                   label="Vânzările mele"
                   onClick={() => {
@@ -56,7 +65,7 @@ const ReceiptInvoiceFinalized: React.FC = () => {
                   }}
                 />
               </Box>
-            </Grid>
+            </Box>
           </Paper>
         </Grid>
       </Grid>
