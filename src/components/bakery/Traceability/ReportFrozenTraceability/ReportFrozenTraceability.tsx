@@ -79,6 +79,7 @@ export const ReportFrozenTraceability = () => {
       return resultOptions || []
     },
     {
+      enabled: isFormator,
       onError: error => {
         showNotification({
           message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
@@ -207,6 +208,7 @@ export const ReportFrozenTraceability = () => {
       return resultOptions || []
     },
     {
+      enabled: !isFormator || isFormator && !!storeFilterValue?.length,
       onError: error => {
         showNotification({
           message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
@@ -242,6 +244,7 @@ export const ReportFrozenTraceability = () => {
       return resultOptions || []
     },
     {
+      enabled: !isFormator || isFormator && !!storeFilterValue?.length,
       onError: error => {
         showNotification({
           message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
