@@ -53,7 +53,8 @@ export const productPrintColumns = (isFormator=false) => [
   {
     title: 'Cant. Sarja',
     field: 'quantity',
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+     render: row => row?.quantity?.toFixed(3),
   },
   {
     title: 'DLC prod. finit',
@@ -125,7 +126,7 @@ export const batchPrintColumns = [
   {
     field: 'quantity',
     title: 'Cant. fab./lot',
-    render: row => row.quantity,
+    render: row => row.quantity?.toFixed(3),
     defaultPrintSelected: true
   },
   {

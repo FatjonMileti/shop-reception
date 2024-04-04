@@ -56,11 +56,6 @@ export const columns: any[] = [
     render: row => <BodyItem name="Furnizor" value={row?.batch?.supplier?.supplierName} />
   },
   {
-    title: 'Lot',
-    field: 'batch.batchQuantity',
-    render: row => <BodyItem name="Lot" value={row?.batch?.batchQuantity} />
-  },
-  {
     field: 'batch.hasExpireDate',
     render: row => (
       <BodyItem
