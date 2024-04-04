@@ -202,6 +202,11 @@ export const ReceivedProducts = () => {
         totalCount={totalCount}
         isLoading={isLoading}
         filters={drawerFilters}
+        appliedFiltersLabel='Filtre'
+        applyFiltersButtonLabel='Filtrare'
+        filtersLabel='Filtrare'
+        filtersButtonLabel='Filtrare'
+        cancelFiltersButtonLabel='Anuleaza'
         handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         handleRemoteData={debounce(fetchData, 500)}
         hasSearchInput
@@ -247,7 +252,7 @@ export const ReceivedProducts = () => {
         }))}
         toolbarActions={[
           {
-            label: 'Add',
+            label: 'Adauga',
             onClick: () => {
               setAddModalOpen(true)
             },

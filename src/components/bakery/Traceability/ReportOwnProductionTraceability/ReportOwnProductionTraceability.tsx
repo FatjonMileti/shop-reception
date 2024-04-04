@@ -418,6 +418,11 @@ export const ReportOwnProductionTraceability = () => {
             isLoading={isLoading}
             totalCount={totalCount}
             filters={drawerFilters}
+            appliedFiltersLabel='Filtre'
+            applyFiltersButtonLabel='Filtrare'
+            filtersLabel='Filtrare'
+            filtersButtonLabel='Filtrare'
+            cancelFiltersButtonLabel='Anuleaza'
             hasSearchInput
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
             toolbarActions={[
