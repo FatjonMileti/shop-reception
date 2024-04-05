@@ -144,6 +144,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             setShouldRefreshData={setShouldRefreshData}
             setSelectedRowId={setSelectedRowId}
             employee={employees.find(item => item.id === selectedRow?.id)}
+            minDivision={item.minDivision}
           />
           <DeleteConfirmationModal
             isModalOpen={modal === 'delete'}

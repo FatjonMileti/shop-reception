@@ -77,4 +77,5 @@ export interface EditAllocationModalProps {
   editItem?: any // TODO: To add interface when db schema is defined
   employee?: any // TODO: To add type when db schema is defined
   hideWorkload?: boolean
+  minDivision?: number
 }

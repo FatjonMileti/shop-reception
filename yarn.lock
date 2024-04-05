@@ -1853,9 +1853,9 @@
     react-is "^18.2.0"
 
 "@mui/x-date-pickers@^6.18.0":
-  version "6.19.8"
-  resolved "https://registry.yarnpkg.com/@mui/x-date-pickers/-/x-date-pickers-6.19.8.tgz#3962f08194c7b2cba1b01688179a8835a8a27eae"
-  integrity sha512-6wgc2DoRTR9/mKesku4CVCKr9yYkY3FI2Oy/wshLTs2rFkw2Z10uxXFHBR9ugEtNPNCQv0qqwldElenYI97wsA==
+  version "6.19.9"
+  resolved "https://registry.yarnpkg.com/@mui/x-date-pickers/-/x-date-pickers-6.19.9.tgz#5fb7ecbeec5b5ce1fddbb547583d0083e30a845b"
+  integrity sha512-B2m4Fv/fOme5qmV6zuE3QnWQSvj3zKtI2OvikPz5prpiCcIxqpeytkQ7VfrWH3/Aqd5yhG1Yr4IgbqG0ymIXGg==
   dependencies:
     "@babel/runtime" "^7.23.2"
     "@mui/base" "^5.0.0-beta.22"
@@ -2833,9 +2833,9 @@ camel-case@^4.1.2:
     tslib "^2.0.3"
 
 caniuse-lite@^1.0.30001587:
-  version "1.0.30001605"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001605.tgz#ca12d7330dd8bcb784557eb9aa64f0037870d9d6"
-  integrity sha512-nXwGlFWo34uliI9z3n6Qc0wZaf7zaZWA1CPZ169La5mV3I/gem7bst0vr5XQH5TJXZIMfDeZyOrZnSlVzKxxHQ==
+  version "1.0.30001606"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001606.tgz#b4d5f67ab0746a3b8b5b6d1f06e39c51beb39a9e"
+  integrity sha512-LPbwnW4vfpJId225pwjZJOgX1m9sGfbw/RKJvw/t0QhYOOaTXHvkjVGFGPpvwEzufrjvTlsULnVTxdy4/6cqkg==
 
 canvas@^2.11.2:
   version "2.11.2"
