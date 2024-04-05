@@ -3,7 +3,7 @@ import { Modal } from 'components/core-ui/Modal'
 import { useMutation } from 'react-query'
 import { CircularProgress, Grid } from '@mui/material'
 import { useNotification } from 'hooks'
-import { formatPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
 import { makeCorePostRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails'
@@ -86,7 +86,9 @@ export const AddFrozenTraceabilityModal = ({
         conform: values.conform,
         nonComplianceReason: values?.nonComplianceReason || null,
         productDestination: values?.productDestination || null,
-        dlc: values.dlc || null,
+        dlc: selectedProduct?.dlcDays
+          ? formatPayloadDate(dayjs(values.productionDate).add(selectedProduct?.dlcDays, 'days'))
+          : null,
         traceabilityFrozenList: values.traceabilityFrozenList.map(addDlcToComponent)
       }
 

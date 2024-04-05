@@ -90,7 +90,9 @@ export const CorrectFrozenTraceabilityModal = ({
         conform: values.conform,
         nonComplianceReason: values?.nonComplianceReason || null,
         productDestination: values?.productDestination || null,
-        dlc: values.dlc,
+        dlc: values.product?.dlcDays
+          ? formatPayloadDate(dayjs(values.productionDate).add(values.product?.dlcDays, 'days'))
+          : null,
         traceabilityFrozenList: values.traceabilityFrozenList.map(addDlcToComponent)
       }
 

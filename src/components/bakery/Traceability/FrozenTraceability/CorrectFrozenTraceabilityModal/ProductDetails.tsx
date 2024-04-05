@@ -21,13 +21,14 @@ interface ProductDetailsProps {
 
 export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetailsProps) => {
   const selectProductSearch = useSelectProductSearch({
-    optionsMap: ({ id, name, metiCode, metricUnit }) => ({
+    optionsMap: ({ id, name, metiCode, metricUnit, dlcDays }) => ({
       value: id,
       label: name,
       metiCode,
       id,
       name,
-      metricUnit
+      metricUnit,
+      dlcDays
     })
   })
 
@@ -64,7 +65,8 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
                   name: value.name,
                   metiCode: value.metiCode,
                   id: value.id,
-                  metricUnit: value.metricUnit
+                  metricUnit: value.metricUnit,
+                  dlcDays: value.dlcDays
                 })
               } else {
                 formik.setFieldValue('product', null)
