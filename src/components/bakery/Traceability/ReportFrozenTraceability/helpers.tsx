@@ -30,8 +30,8 @@ export const columns: any[] = [
     render: row => <BodyItem name="Produs" value={row?.batch?.product?.name} />
   },
   {
-    title: 'Nume lot',
-    render: row => <BodyItem name="Nume lot" value={row?.batch?.batchName} />
+    title: 'Lot',
+    render: row => <BodyItem name="Lot" value={row?.batch?.batchName} />
   },
   {
     title: 'Familie produs',
