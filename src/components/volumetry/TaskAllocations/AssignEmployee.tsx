@@ -24,7 +24,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     workloadMeasurementUnit,
     setShouldRefreshData,
     taskTemplateId,
-    setSelectedRowId
+    setSelectedRowId,
+    minDivision
   } = props
   const { showNotification } = useNotification()
 
@@ -52,10 +53,24 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
       handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
+  const divisionValidation = value => {
+    if (!Number.isNaN(value) && parseFloat(value) % minDivision === 0) {
+      return true
+    }
+    return false
+  }
+
   const validationSchema = yup.object({
     workerId: yup.number().required('Acest camp este obligatoriu.'),
     taskTemplateId: yup.number().required('Acest camp este obligatoriu.'),
-    allocatedWorkload: yup.number().required('Acest camp este obligatoriu.')
+    allocatedWorkload: yup
+      .number()
+      .required('Acest camp este obligatoriu.')
+      .test(
+        'is-custom-step',
+        `Valoarea trebuie să fie multiplu de ${minDivision}`,
+        divisionValidation
+      )
   })
 
   const formik = useFormik({
@@ -127,7 +142,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
             helperText={formik.errors.allocatedWorkload as string}
             required
             inputProps={{
-              min: '0'
+              min: '0',
+              step: minDivision
             }}
           />
         </Grid>
