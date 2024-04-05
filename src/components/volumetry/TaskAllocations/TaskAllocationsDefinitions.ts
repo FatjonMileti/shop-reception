@@ -16,6 +16,7 @@ export interface AssignEmployeeProps {
   setShouldRefreshData: Function
   taskTemplateId: string
   setSelectedRowId: Function
+  minDivision: number
 }
 
 export interface TaskCurrentState {

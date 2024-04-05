@@ -134,6 +134,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             setShouldRefreshData={setShouldRefreshData}
             taskTemplateId={item.taskTemplateId}
             setSelectedRowId={setSelectedRowId}
+            minDivision={item.minDivision}
           />
           <EditAllocationModal
             isModalOpen={modal === 'edit'}
