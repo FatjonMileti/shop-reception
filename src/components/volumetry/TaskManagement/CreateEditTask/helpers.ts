@@ -46,7 +46,17 @@ export const getValidationSchema = item =>
       })
       .required('Acest camp este obligatoriu.'),
     recommendedStartHour: Yup.date().required('Acest camp este obligatoriu.'),
-    recommendedEndHour: Yup.date().required('Acest camp este obligatoriu.'),
+    recommendedEndHour: Yup.date()
+      .required('Acest camp este obligatoriu.')
+      .when(
+        'recommendedStartHour',
+        (recommendedStartHour, yup) =>
+          recommendedStartHour &&
+          yup.min(
+            recommendedStartHour,
+            'Ora recomandata de sfarsit trebuie sa fie mai mare decat ora recomandata de inceput.'
+          )
+      ),
     frequency: Yup.array()
       .of(
         Yup.object().shape({

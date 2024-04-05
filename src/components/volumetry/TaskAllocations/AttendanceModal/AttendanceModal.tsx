@@ -11,6 +11,7 @@ import { EmployeeAttendance } from './EmployeeAttendance'
 import { useMediaQuery } from '@mui/material'
 import { AllocationList } from './AllocationList'
 import { AttendanceModalProps } from 'components/volumetry/interfaces'
+import { validationSchema } from './helpers'
 
 const AttendanceModal = (props: AttendanceModalProps) => {
   const { isModalOpen, closeModal, departmentId } = props
@@ -27,9 +28,10 @@ const AttendanceModal = (props: AttendanceModalProps) => {
     initialValues: {
       employees: []
     },
-    // validationSchema: validationSchema,
+    validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       mutateEmployeesAttendance(toEmployeesAttendancePayload(values.employees))
+      setActiveStep(1)
     }
   })
 
@@ -37,7 +39,11 @@ const AttendanceModal = (props: AttendanceModalProps) => {
     departmentId,
     showNotification,
     isModalOpen,
-    values => formik.setFieldValue('employees', values)
+    values =>
+      formik.setFieldValue(
+        'employees',
+        values.map((val, index) => ({ ...val, id: val.workerId, index }))
+      )
   )
 
   useEffect(() => {
@@ -127,7 +133,6 @@ const AttendanceModal = (props: AttendanceModalProps) => {
             updateEmployeeTime={updateEmployeeTime}
             closeModal={resetModal}
             handleSubmit={formik.handleSubmit}
-            increaseStep={() => setActiveStep(1)}
             isXs={isXs}
             formik={formik}
           />,

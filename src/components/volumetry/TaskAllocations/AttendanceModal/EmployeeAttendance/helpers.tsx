@@ -3,11 +3,13 @@ import { Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
 export const buildColumns = ({
   toggleEmployee,
   updateEmployeeTime,
-  isXs
+  isXs,
+  formik
 }: {
   toggleEmployee: Function
   updateEmployeeTime: Function
-  isXs: boolean
+  isXs: boolean,
+  formik: any
 }) => [
   {
     title: 'Angajat',
@@ -34,7 +36,9 @@ export const buildColumns = ({
         variant="outlined"
         style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
         // forceDesktop
-        // ampm={false}
+        ampm={false}
+        error={!!formik.errors.employees?.[row.index]?.shiftStart}
+        helperText={formik.errors.employees?.[row.index]?.shiftStart as string}
       />
     )
   },
@@ -49,7 +53,9 @@ export const buildColumns = ({
         variant="outlined"
         style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
         // forceDesktop
-        // ampm={false}
+        ampm={false}
+        error={!!formik.errors.employees?.[row.index]?.shiftEnd}
+        helperText={formik.errors.employees?.[row.index]?.shiftEnd as string}
       />
     )
   }

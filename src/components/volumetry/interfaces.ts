@@ -82,7 +82,6 @@ export interface EmployeeAttendanceProps {
   updateEmployeeTime: Function
   closeModal: Function
   handleSubmit: Function
-  increaseStep: Function
   isXs: boolean
   formik: any
 }
