@@ -51,6 +51,23 @@ export const AddFrozenTraceabilityModal = ({
 
   const initialValues = useMemo(() => getInitialValues(), [])
 
+  const addDlcToComponent = item => {
+    if (!item.hasSecondaryDlc) return item
+
+    const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
+
+    return {
+      ...item,
+      dlc: formatPayloadDate(
+        item?.expireDate
+          ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
+            ? dayjs(item?.expireDate)
+            : calculatedDlc
+          : calculatedDlc
+      )
+    }
+  }
+
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: false,
@@ -70,14 +87,7 @@ export const AddFrozenTraceabilityModal = ({
         nonComplianceReason: values?.nonComplianceReason || null,
         productDestination: values?.productDestination || null,
         dlc: values.dlc || null,
-        traceabilityFrozenList: values.traceabilityFrozenList.map(item =>
-          item.hasSecondaryDlc
-            ? {
-                ...item,
-                dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
-              }
-            : item
-        )
+        traceabilityFrozenList: values.traceabilityFrozenList.map(addDlcToComponent)
       }
 
       if (values.traceabilityFrozenList.length === 0) {
