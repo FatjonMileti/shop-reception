@@ -55,6 +55,23 @@ export const CorrectFrozenTraceabilityModal = ({
     [itemToCorrectQuery?.data]
   )
 
+  const addDlcToComponent = item => {
+    if (!item.hasSecondaryDlc) return item
+
+    const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
+
+    return {
+      ...item,
+      dlc: formatPayloadDate(
+        item?.expireDate
+          ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
+            ? dayjs(item?.expireDate)
+            : calculatedDlc
+          : calculatedDlc
+      )
+    }
+  }
+
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: true,
@@ -74,14 +91,7 @@ export const CorrectFrozenTraceabilityModal = ({
         nonComplianceReason: values?.nonComplianceReason || null,
         productDestination: values?.productDestination || null,
         dlc: values.dlc,
-        traceabilityFrozenList: values.traceabilityFrozenList.map(item =>
-          item.hasSecondaryDlc
-            ? {
-                ...item,
-                dlc: formatPayloadDate(dayjs(item.openingDate).add(item.dlcDays, 'days'))
-              }
-            : item
-        )
+        traceabilityFrozenList: values.traceabilityFrozenList.map(addDlcToComponent)
       }
 
       if (values.traceabilityFrozenList.length === 0) {
