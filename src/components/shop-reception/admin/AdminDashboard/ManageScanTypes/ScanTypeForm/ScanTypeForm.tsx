@@ -31,8 +31,8 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
 
   const createUpdateScanType = async (values: any) => {
     isEdit
-      ? await makeCorePutRequest(`/scan-types/${editItem.id}`, values)
-      : await makeCorePostRequest(`/scan-types`, values)
+      ? await makeCorePutRequest(`/shop-reception/scan-types/${editItem.id}`, values)
+      : await makeCorePostRequest(`/shop-reception/scan-types`, values)
   }
 
   const { isLoading, mutate } = useMutation(createUpdateScanType, {

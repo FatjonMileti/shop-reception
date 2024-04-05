@@ -36,7 +36,7 @@ const AdminStore = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/shops',
+          url: '/shop-reception/shops',
           tableFilters,
           page,
           rowsPerPage,
@@ -61,7 +61,7 @@ const AdminStore = () => {
   const { data: shopCodes } = useQuery(
     ['shop-codes'],
     async () => {
-      const result = await makeCoreGetRequest('/shops/codes')
+      const result = await makeCoreGetRequest('/shop-reception/shops/codes')
 
       const resultOptions = result.map(
         (item: any): AutocompleteOption => ({
@@ -84,7 +84,7 @@ const AdminStore = () => {
   const { data: metiShops } = useQuery(
     ['meti-shops'],
     async () => {
-      const result = await makeCoreGetRequest('/shops/meti')
+      const result = await makeCoreGetRequest('/shop-reception/shops/meti')
 
       const resultOptions = result.map(
         (item: any): AutocompleteOption => ({
@@ -107,7 +107,7 @@ const AdminStore = () => {
   const { data: metiVersions } = useQuery(
     ['meti-versions'],
     async () => {
-      const result = await makeCoreGetRequest('/shops/meti-version')
+      const result = await makeCoreGetRequest('/shop-reception/shops/meti-version')
       const resultOptions = result.map(
         (item: string): AutocompleteOption => ({
           label: item,
@@ -129,7 +129,7 @@ const AdminStore = () => {
   const { data: shopTypes } = useQuery(
     ['meti-types'],
     async () => {
-      const result = await makeCoreGetRequest('/products/types')
+      const result = await makeCoreGetRequest('/shop-reception/products/types')
       const resultOptions = result.map(
         (item: string): AutocompleteOption => ({
           label: item,
@@ -151,7 +151,7 @@ const AdminStore = () => {
   const { data: parentSocieties } = useQuery(
     ['parent-societies'],
     async () => {
-      const result = await makeCoreGetRequest('/shops/parent-society')
+      const result = await makeCoreGetRequest('/shop-reception/shops/parent-society')
       const resultOptions = result.map(
         (item: string): AutocompleteOption => ({
           label: item,

@@ -23,7 +23,7 @@ const SupportWrongDestinationDetail = () => {
   }
 
   const updateDetails = async (values: any) => {
-    await makeCorePostRequest(`/wrongDestination/form/${id}`, values)
+    await makeCorePostRequest(`/shop-reception/wrongDestination/form/${id}`, values)
   }
 
   const { isLoading, mutate } = useMutation(updateDetails, {

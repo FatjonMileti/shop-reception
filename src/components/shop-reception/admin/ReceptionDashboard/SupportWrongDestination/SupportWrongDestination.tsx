@@ -25,7 +25,7 @@ const SupportWrongDestination = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/wrongDestination',
+          url: '/shop-reception/wrongDestination',
           tableFilters,
           page,
           rowsPerPage,

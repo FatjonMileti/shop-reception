@@ -41,7 +41,7 @@ const AdminRegions = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/regions',
+          url: '/shop-reception/regions',
           tableFilters,
           page,
           rowsPerPage,

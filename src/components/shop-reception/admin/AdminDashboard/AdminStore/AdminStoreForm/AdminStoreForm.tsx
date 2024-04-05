@@ -24,8 +24,8 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
 
   const addShop = async values => {
     editItem
-      ? await makeCorePutRequest(`/shops/${editItem.id}`, values)
-      : await makeCorePostRequest('/shops', values)
+      ? await makeCorePutRequest(`/shop-reception/shops/${editItem.id}`, values)
+      : await makeCorePostRequest('/shop-reception/shops', values)
   }
 
   const { isLoading, mutate } = useMutation(addShop, {

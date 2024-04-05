@@ -35,7 +35,7 @@ const PackingTypes = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/support-types',
+          url: '/shop-reception/support-types',
           tableFilters,
           page,
           rowsPerPage,

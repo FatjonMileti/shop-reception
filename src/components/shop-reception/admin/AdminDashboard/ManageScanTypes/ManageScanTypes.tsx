@@ -40,7 +40,7 @@ const ManageScanTypes = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/scan-types',
+          url: '/shop-reception/scan-types',
           tableFilters,
           page,
           rowsPerPage,
@@ -63,7 +63,7 @@ const ManageScanTypes = () => {
   const { data: shopTypes } = useQuery(
     ['shop-types'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/types`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/types`)
       return data.map(item => ({
         label: item,
         value: item
@@ -84,7 +84,7 @@ const ManageScanTypes = () => {
   const { data: ruleTypes } = useQuery(
     ['rule-types'],
     async () => {
-      const data = await makeCoreGetRequest(`/scan-types/rule-organisation-types`)
+      const data = await makeCoreGetRequest(`/shop-reception/scan-types/rule-organisation-types`)
       return data.map(item => ({
         label: item.value,
         value: item.key
@@ -103,7 +103,7 @@ const ManageScanTypes = () => {
   const { data: scanTypes } = useQuery(
     ['scan-types'],
     async () => {
-      const data = await makeCoreGetRequest(`/scan-types/types`)
+      const data = await makeCoreGetRequest(`/shop-reception/scan-types/types`)
       return data.map(item => ({
         label: item.value,
         value: item.key
@@ -142,7 +142,7 @@ const ManageScanTypes = () => {
       <DeleteConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
-        actionUrl="/scan-types/:id"
+        actionUrl="/shop-reception/scan-types/:id"
         itemId={`${selectedRow?.id}`}
         content={<Typography>Esti sigur va vrei sa stergi acest produs?</Typography>}
         setShouldRefreshData={setShouldRefreshData}

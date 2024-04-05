@@ -69,7 +69,7 @@ const DLCProducts = () => {
   const { data: shopTypes } = useQuery(
     ['shop-types'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/types`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/types`)
       return data.map(item => ({
         label: item,
         value: item
@@ -90,7 +90,7 @@ const DLCProducts = () => {
   const { data: metiRayons } = useQuery(
     ['meti-rayons'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-rayons`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-rayons`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code
@@ -109,7 +109,7 @@ const DLCProducts = () => {
   const { data: metiFamilies } = useQuery(
     ['meti-families'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-families`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-families`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code
@@ -128,7 +128,7 @@ const DLCProducts = () => {
   const { data: metiSubfamilies } = useQuery(
     ['meti-subfamilies'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-sub-families`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-sub-families`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code
@@ -147,7 +147,7 @@ const DLCProducts = () => {
   const { data: metiUB } = useQuery(
     ['meti-ub'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-ubs`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-ubs`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code

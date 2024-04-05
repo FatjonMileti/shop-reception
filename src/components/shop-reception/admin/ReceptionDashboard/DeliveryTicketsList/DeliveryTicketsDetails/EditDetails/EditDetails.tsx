@@ -21,7 +21,7 @@ const EditDetails = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: `/deliveryTicket/${id}/edit`,
+          url: `/shop-reception/deliveryTicket/${id}/edit`,
           tableFilters,
           page,
           rowsPerPage,

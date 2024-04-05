@@ -27,7 +27,7 @@ const DeliveryInterval = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: `/hubs/delivery-interval/${id}`,
+          url: `/shop-reception/hubs/delivery-interval/${id}`,
           tableFilters,
           page,
           rowsPerPage,
@@ -49,7 +49,7 @@ const DeliveryInterval = () => {
   }
 
   const mutatiDeliveryInterval = async values => {
-    await makeCorePostRequest(`/hubs/delivery-interval/${id}`, values)
+    await makeCorePostRequest(`/shop-reception/hubs/delivery-interval/${id}`, values)
   }
 
   const { mutate } = useMutation(mutatiDeliveryInterval, {

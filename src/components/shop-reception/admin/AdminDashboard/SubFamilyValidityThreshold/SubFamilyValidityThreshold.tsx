@@ -37,7 +37,7 @@ const SubFamilyValidityThreshold = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/validity-limit',
+          url: '/shop-reception/validity-limit',
           tableFilters,
           page,
           rowsPerPage,
@@ -60,7 +60,7 @@ const SubFamilyValidityThreshold = () => {
   const { data: metiFamilies } = useQuery(
     ['meti-families'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-families`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-families`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code
@@ -79,7 +79,7 @@ const SubFamilyValidityThreshold = () => {
   const { data: metiSubfamilies } = useQuery(
     ['meti-subfamilies'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-sub-families`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-sub-families`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code
@@ -98,7 +98,7 @@ const SubFamilyValidityThreshold = () => {
   const { data: metiRayons } = useQuery(
     ['meti-rayons'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-rayons`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-rayons`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code

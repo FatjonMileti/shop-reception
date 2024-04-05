@@ -24,7 +24,7 @@ const DifferencesProducts = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/productWithDifference',
+          url: '/shop-reception/productWithDifference',
           tableFilters,
           page,
           rowsPerPage,
@@ -48,7 +48,7 @@ const DifferencesProducts = () => {
   const { data: shopCodes } = useQuery(
     ['shop-codes'],
     async () => {
-      const result = await makeCoreGetRequest('/shops/codes')
+      const result = await makeCoreGetRequest('/shop-reception/shops/codes')
 
       const resultOptions = result.map(item => ({
         label: item.displayName,
@@ -71,7 +71,7 @@ const DifferencesProducts = () => {
     async () => {
       setDownloadImageId(null)
       const url = toTableGETUrl({
-        url: `/productWithDifference/downloadArchive/${downloadImageId}`
+        url: `/shop-reception/productWithDifference/downloadArchive/${downloadImageId}`
       })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
@@ -92,7 +92,7 @@ const DifferencesProducts = () => {
   const handleExport = async (tableState) => {
     const { filters, order, orderBy } = tableState
     const url = toTableGETUrl({
-      url: '/productWithDifference/export',
+      url: '/shop-reception/productWithDifference/export',
       tableFilters: filters,
       order,
       orderBy
@@ -114,7 +114,7 @@ const DifferencesProducts = () => {
   const { data: metiRayons } = useQuery(
     ['meti-rayons'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-rayons`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-rayons`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code

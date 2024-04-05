@@ -24,8 +24,8 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
 
   const mutateHub = async values => {
     editItem
-      ? await makeCorePutRequest(`/regions/${editItem.id}`, values)
-      : await makeCorePostRequest('/regions', values)
+      ? await makeCorePutRequest(`/shop-reception/regions/${editItem.id}`, values)
+      : await makeCorePostRequest('/shop-reception/regions', values)
   }
 
   const { isLoading, mutate } = useMutation(mutateHub, {
@@ -72,7 +72,7 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
   const { data: shopTypes, isLoading: isShopTypesLoading } = useQuery(
     ['shop-types'],
     async () => {
-      const data = await makeCoreGetRequest(`/regions/${editItem?.id || 0}/shops`)
+      const data = await makeCoreGetRequest(`/shop-reception/regions/${editItem?.id || 0}/shops`)
       return data.map(item => ({
         label: item.metiName,
         value: item.id
@@ -93,7 +93,7 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
   const { data: responsibles, isLoading: isResponsiblesLoading } = useQuery(
     ['responsibles'],
     async () => {
-      const data = await makeCoreGetRequest(`/regions/responsible`)
+      const data = await makeCoreGetRequest(`/shop-reception/regions/responsible`)
       return data.map(item => ({
         label: item,
         value: item

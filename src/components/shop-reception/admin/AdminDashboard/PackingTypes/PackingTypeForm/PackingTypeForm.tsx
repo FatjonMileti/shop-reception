@@ -29,8 +29,8 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
 
   const createUpdatePackage = async (values: any) => {
     isEdit
-      ? await makeCorePutRequest(`/support-types/${editItem.id}`, values)
-      : await makeCorePostRequest(`/support-types`, values)
+      ? await makeCorePutRequest(`/shop-reception/support-types/${editItem.id}`, values)
+      : await makeCorePostRequest(`/shop-reception/support-types`, values)
   }
 
   const { isLoading, mutate } = useMutation(createUpdatePackage, {
@@ -56,18 +56,22 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      mutate(values)
+      const payload = {
+        ...values,
+        alternativeCodes: values.alternativeCodes.map(code => code.value),
+        childrenIds: values.childrenIds.map(child => child.value)
+      }
+      mutate(payload)
       formik.resetForm()
       setShouldRefreshData(true)
       closeModal()
     }
   })
-  // console.log('debug', formik.values)
 
   const { data: uncombined, isLoading: isUncombinedLoading } = useQuery(
     ['uncombined'],
     async () => {
-      const result = await makeCoreGetRequest(`/support-types?filterBy=combined&filterValue=false`)
+      const result = await makeCoreGetRequest(`/shop-reception/support-types?filterBy=combined&filterValue=false`)
       const options = result.list.map(item => ({ value: item.id, label: item.name }))
       return options || []
     },
@@ -180,7 +184,7 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
               multiple={true}
               label="Ambalaje necombinate"
               options={uncombined}
-              onChange={(e: any) => console.log('debug', e.target)}
+              onChange={(e: any, option: any) => formik.setFieldValue('childrenIds', option)}
               variant="outlined"
             />
           </Grid>

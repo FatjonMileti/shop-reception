@@ -38,7 +38,7 @@ const AdminHub = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/hubs',
+          url: '/shop-reception/hubs',
           tableFilters,
           page,
           rowsPerPage,

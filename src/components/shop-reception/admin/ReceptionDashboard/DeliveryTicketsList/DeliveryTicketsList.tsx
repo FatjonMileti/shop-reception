@@ -25,7 +25,7 @@ const DeliveryTicketsList = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/deliveryTicket',
+          url: '/shop-reception/deliveryTicket',
           tableFilters,
           page,
           rowsPerPage,

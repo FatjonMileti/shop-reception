@@ -29,7 +29,7 @@ const ViewDetails = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: `/deliveryTicket/${id}/info`,
+          url: `/shop-reception/deliveryTicket/${id}/info`,
           tableFilters,
           page,
           rowsPerPage,
@@ -78,7 +78,7 @@ const ViewDetails = () => {
       }
 
       const response = await makeCoreGetFileRequest(
-        `/deliveryTicket/sentToMeti/${id}/${shopCode}`,
+        `/shop-reception/deliveryTicket/sentToMeti/${id}/${shopCode}`,
         {
           responseType: 'blob'
         }
@@ -99,7 +99,7 @@ const ViewDetails = () => {
   const { refetch: exportFiles } = useQuery(
     ['exportFiles'],
     async () => {
-      const response = await makeCoreGetFileRequest(`/deliveryTicket/detailsExport/${id}`, {
+      const response = await makeCoreGetFileRequest(`/shop-reception/deliveryTicket/detailsExport/${id}`, {
         responseType: 'blob'
       })
       return formatAndDownloadResponse(response)

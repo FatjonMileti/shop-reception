@@ -32,8 +32,8 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
 
   const mutateHub = async values => {
     editItem
-      ? await makeCorePutRequest(`/hubs/${editItem.id}`, values)
-      : await makeCorePostRequest('/hubs', values)
+      ? await makeCorePutRequest(`/shop-reception/hubs/${editItem.id}`, values)
+      : await makeCorePostRequest('/shop-reception/hubs', values)
   }
 
   const { isLoading, mutate } = useMutation(mutateHub, {
@@ -80,7 +80,7 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
   const { data: hubTypes, isLoading: isHubTypesLoading } = useQuery(
     ['hub-types'],
     async () => {
-      const result = await makeCoreGetRequest('/products/types')
+      const result = await makeCoreGetRequest('/shop-reception/products/types')
       const resultOptions = result.map(
         (item: string): AutocompleteOption => ({
           label: item,
@@ -103,7 +103,7 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
   const { data: assignedUsers, isLoading: isAssignedUsersLoading } = useQuery(
     ['assigned-users'],
     async () => {
-      const result = await makeCoreGetRequest(`/hubs/${editItem.id}/users`)
+      const result = await makeCoreGetRequest(`/shop-reception/hubs/${editItem.id}/users`)
       const resultOptions = result.map(
         (item: string): AutocompleteOption => ({
           label: item,

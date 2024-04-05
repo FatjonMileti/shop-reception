@@ -24,7 +24,7 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
   const updateSubfamilyValidity = async (values: any) => {
-    await makeCorePutRequest(`/validity-limit/${editItem?.sfaCode}`, values)
+    await makeCorePutRequest(`/shop-reception/validity-limit/${editItem?.sfaCode}`, values)
   }
 
   const { isLoading, mutate } = useMutation(updateSubfamilyValidity, {

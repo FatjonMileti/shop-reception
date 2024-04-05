@@ -21,7 +21,7 @@ const MetiProducts = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/meti-products',
+          url: '/shop-reception/meti-products',
           tableFilters,
           page,
           rowsPerPage,
@@ -44,7 +44,7 @@ const MetiProducts = () => {
   const { data: measurementUnitsOptions } = useQuery(
     ['meti-rayons'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/measurement-units`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/measurement-units`)
       return data.map(item => ({
         label: item.value,
         value: item.key
@@ -63,7 +63,7 @@ const MetiProducts = () => {
   const { data: metiRayonsOptions } = useQuery(
     ['meti-rayons'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-rayons`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-rayons`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code
@@ -82,7 +82,7 @@ const MetiProducts = () => {
   const { data: metiFamiliesOptions } = useQuery(
     ['meti-families'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-families`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-families`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code
@@ -101,7 +101,7 @@ const MetiProducts = () => {
   const { data: metiSubfamiliesOptions } = useQuery(
     ['meti-subfamilies'],
     async () => {
-      const data = await makeCoreGetRequest(`/products/meti-sub-families`)
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-sub-families`)
       return data.map(item => ({
         label: item.displayValue,
         value: item.code

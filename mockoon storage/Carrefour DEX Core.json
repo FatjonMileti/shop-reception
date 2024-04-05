@@ -6544,6 +6544,35 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "42c1b8b4-4f4f-4d12-b8cd-a637d4163f00",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shop-reception/deposits",
+      "responses": [
+        {
+          "uuid": "0596408f-9e49-41fc-ac02-b90a2582a578",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"validityPercentage\": 0,\n      \"active\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -6918,6 +6947,10 @@
     {
       "type": "route",
       "uuid": "8634af3e-6b55-47ae-8050-c239119c424d"
+    },
+    {
+      "type": "route",
+      "uuid": "42c1b8b4-4f4f-4d12-b8cd-a637d4163f00"
     }
   ],
   "proxyMode": false,
