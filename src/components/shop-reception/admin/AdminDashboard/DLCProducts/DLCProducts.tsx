@@ -46,7 +46,7 @@ const DLCProducts = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/short-dlc',
+          url: '/shop-reception/short-dlc',
           tableFilters,
           page,
           rowsPerPage,
@@ -196,7 +196,7 @@ const DLCProducts = () => {
       <DeleteConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
-        actionUrl="/sensitives/:id"
+        actionUrl="/shop-reception/sensitives/:id"
         itemId={`${selectedRow?.id}`}
         content={<Typography>Esti sigur va vrei sa stergi acest produs?</Typography>}
         setShouldRefreshData={setShouldRefreshData}

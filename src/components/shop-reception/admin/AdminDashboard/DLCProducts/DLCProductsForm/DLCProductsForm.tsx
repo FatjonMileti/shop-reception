@@ -41,8 +41,8 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
 
   const mutateDlcProduct = async values => {
     editItem
-      ? await makeCorePutRequest(`/short-dlc/${editItem.id}`, values)
-      : await makeCorePostRequest('/short-dlc', values)
+      ? await makeCorePutRequest(`/shop-reception/short-dlc/${editItem.id}`, values)
+      : await makeCorePostRequest('/shop-reception/short-dlc', values)
   }
 
   const { isLoading, mutate } = useMutation(mutateDlcProduct, {

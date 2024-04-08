@@ -32,7 +32,7 @@ const ImportProducts: React.FC<ImportProductsProps> = props => {
   }
 
   const importData = async (values: any) => {
-    await makeCorePostRequest(`/sensitives/import`, values)
+    await makeCorePostRequest(`/shop-reception/sensitives/import`, values)
   }
 
   const { isLoading, mutate } = useMutation(importData, {

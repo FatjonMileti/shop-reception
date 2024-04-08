@@ -43,8 +43,8 @@ const SensitiveProduct: React.FC<SensitiveProductProps> = props => {
 
   const createUpdateProduct = async (values: any) => {
     isEdit
-      ? await makeCorePutRequest(`/sensitives/${editItem.id}`, values)
-      : await makeCorePostRequest(`/sensitives`, values)
+      ? await makeCorePutRequest(`/shop-reception/sensitives/${editItem.id}`, values)
+      : await makeCorePostRequest(`/shop-reception/sensitives`, values)
   }
 
   const { isLoading, mutate } = useMutation(createUpdateProduct, {

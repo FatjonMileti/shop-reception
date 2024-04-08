@@ -46,7 +46,7 @@ const SensitiveProducts = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/sensitives',
+          url: '/shop-reception/sensitives',
           tableFilters,
           page,
           rowsPerPage,
@@ -199,7 +199,7 @@ const SensitiveProducts = () => {
       <DeleteConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
-        actionUrl="/sensitives/:id"
+        actionUrl="/shop-reception/sensitives/:id"
         itemId={`${selectedRow?.id}`}
         content={<Typography>Esti sigur va vrei sa stergi acest produs?</Typography>}
         setShouldRefreshData={setShouldRefreshData}

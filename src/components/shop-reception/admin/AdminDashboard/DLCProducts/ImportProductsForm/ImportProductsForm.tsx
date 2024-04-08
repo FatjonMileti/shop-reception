@@ -32,7 +32,7 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
   }
 
   const importData = async (values: any) => {
-    await makeCorePostRequest(`/short-dlc/import`, values)
+    await makeCorePostRequest(`/shop-reception/short-dlc/import`, values)
   }
 
   const { isLoading, mutate } = useMutation(importData, {

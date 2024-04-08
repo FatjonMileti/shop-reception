@@ -32,7 +32,7 @@ const UnorderedProducts = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/unexpectedReceptionProduct',
+          url: '/shop-reception/unexpectedReceptionProduct',
           tableFilters,
           page,
           rowsPerPage,
@@ -60,7 +60,7 @@ const UnorderedProducts = () => {
   const { isLoading: isResolveProductLoading, refetch: resolveProduct } = useQuery(
     ['resolve-product'],
     async id => {
-      await makeCoreGetRequest(`/unexpectedReceptionProduct/${selectedRow.id}`)
+      await makeCoreGetRequest(`/shop-reception/unexpectedReceptionProduct/${selectedRow.id}`)
       setShouldRefreshData(true)
       closeModal()
 
@@ -81,7 +81,7 @@ const UnorderedProducts = () => {
     ['export-file'],
     async () => {
       const url = toTableGETUrl({
-        url: '/unexpectedReceptionProduct/export'
+        url: '/shop-reception/unexpectedReceptionProduct/export'
       })
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
