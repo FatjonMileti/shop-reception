@@ -1,13 +1,16 @@
 import { Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
+import dayjs from 'dayjs'
 
 export const buildColumns = ({
   toggleEmployee,
   updateEmployeeTime,
-  isXs
+  isXs,
+  formik
 }: {
   toggleEmployee: Function
   updateEmployeeTime: Function
-  isXs: boolean
+  isXs: boolean,
+  formik: any
 }) => [
   {
     title: 'Angajat',
@@ -29,12 +32,14 @@ export const buildColumns = ({
     render: row => (
       <TimePicker
         label=""
-        value={row.shiftStart}
+        value={dayjs(row.shiftStart)}
         onChange={newValue => updateEmployeeTime(row, newValue, 'shiftStart')}
         variant="outlined"
         style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
         // forceDesktop
-        // ampm={false}
+        ampm={false}
+        error={!!formik.errors.employees?.[row.index]?.shiftStart}
+        helperText={formik.errors.employees?.[row.index]?.shiftStart as string}
       />
     )
   },
@@ -44,12 +49,14 @@ export const buildColumns = ({
     render: row => (
       <TimePicker
         label=""
-        value={row.shiftEnd}
+        value={dayjs(row.shiftEnd)}
         onChange={newValue => updateEmployeeTime(row, newValue, 'shiftEnd')}
         variant="outlined"
         style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
         // forceDesktop
-        // ampm={false}
+        ampm={false}
+        error={!!formik.errors.employees?.[row.index]?.shiftEnd}
+        helperText={formik.errors.employees?.[row.index]?.shiftEnd as string}
       />
     )
   }

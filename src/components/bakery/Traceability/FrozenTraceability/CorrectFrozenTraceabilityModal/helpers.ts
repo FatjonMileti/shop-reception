@@ -87,7 +87,8 @@ export const toBatchFormat = (item, quantity) => ({
   quantity: quantity,
   hasSecondaryDlc: item.hasSecondaryDlc,
   openingDate: formatPayloadDate(item.entryDate),
-  dlcDays: item.dlcDays
+  dlcDays: item.dlcDays,
+  expireDate: item?.expireDate
 })
 
 export const toBatchFormatEdit = item => ({
@@ -97,5 +98,6 @@ export const toBatchFormatEdit = item => ({
   hasSecondaryDlc: item.batch.hasSecondaryDlc,
   openingDate: formatPayloadDate(item.openingDate),
   dlc: item.dlc,
-  dlcDays: item.batch?.dlcDays
+  dlcDays: item.batch?.dlcDays,
+  expireDate: item?.batch?.expireDate
 })
