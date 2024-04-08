@@ -12,7 +12,7 @@ export interface AutocompleteOption {
 
 export interface EmployeeManagementItem {
   id?: string | number
-  department: string | AutocompleteOption
+  genericDepartment: string | AutocompleteOption
   fullName: string
   jobTitle: string | AutocompleteOption
   employer: string
@@ -22,7 +22,7 @@ export interface EmployeeManagementItem {
 export interface TaskManagementTableItem {
   id?: string | number
   name: string
-  rayonsOrDepartment: string
+  departmentAlias: string
   recommendedStartHour: string
   recommendedEndHour: string
   frequency: string
@@ -37,23 +37,27 @@ export interface TaskManagementTableItem {
 export interface TaskManagementItem {
   id?: string | number
   name: string
-  rayonsOrDepartment?: AsyncAutocompleteOption
   recommendedStartHour: string
   recommendedEndHour: string
-  frequency: AsyncAutocompleteOption
+  frequency: AsyncAutocompleteOption[]
+  // defaultWorkload: number
   standardProductivityValue: number
   measurementUnit: AsyncAutocompleteOption
   workVolumeSource: AsyncAutocompleteOption
   priority: AsyncAutocompleteOption
-  isActive: boolean
   volumetryLocationCategory: AsyncAutocompleteOption
-  rayons: AsyncAutocompleteOption[]
+  departmentAlias: AsyncAutocompleteOption
 }
 
 export interface Department {
   id: number
   departmentName: string
   description: string
+}
+
+export interface DepartmentAlias {
+  id: number
+  alias: string
 }
 
 export type CRUDAction = 'create' | 'read' | 'edit' | 'delete'
@@ -75,11 +79,12 @@ export interface EmployeeAttendanceProps {
   isEmployeesLoading: boolean
   employees: any[]
   toggleEmployee: Function
-  updateEmplpyeeTime: Function
+  updateEmployeeTime: Function
   closeModal: Function
   handleSubmit: Function
   increaseStep: Function
   isXs: boolean
+  formik: any
 }
 
 export interface AllocationListProps {
@@ -89,4 +94,62 @@ export interface AllocationListProps {
   allocateEmployees: Function
   allocateEmployeesAllSelected: boolean
   setAllocateEmployeesAllSelected: Function
+}
+
+export interface LocationManagementTableItem {
+  id: string | number
+  locationName: string
+  locationCategory: string
+  locationType: string
+}
+
+export interface LocationItem {
+  id: string | number
+  name: string
+  regionId: string | number
+  regionName: string
+  categoryId: string | number
+  categoryName: string
+}
+
+export interface LocationItemForm {
+  category: AsyncAutocompleteOption
+}
+
+export interface LocationItemPayload {
+  volumetryLocationCategoryId: string | number
+}
+
+export interface EditLocationProps {
+  isModalOpen: boolean
+  closeModal: Function
+  setShouldRefreshData: Function
+  editItemId: string | number
+}
+
+export interface Region {
+  id: number | string
+  name: string
+}
+
+export interface LocationCategoryManagementTableItem {
+  id: string | number
+  category: string
+  description: string
+  locationType: string
+}
+
+export interface CreateEditLocationCategoryProps {
+  isModalOpen: boolean
+  closeModal: Function
+  setShouldRefreshData: Function
+  isEdit?: boolean
+  editItem?: LocationCategoryManagementTableItem
+}
+
+export interface DeleteLocationCategoryProps {
+  itemId: string | number
+  isModalOpen: boolean
+  closeModal: Function
+  setShouldRefreshData: Function
 }

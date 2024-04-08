@@ -52,12 +52,7 @@ const Employee: React.FC<EmployeeProps> = props => {
         type: 'success'
       })
     },
-    onError: error =>
-      handleQueryError(
-        error,
-        'A aparut o eroare la schimbarea statusului taskului.',
-        showNotification
-      )
+    onError: error => handleQueryError(error, '', showNotification)
   })
   const shouldWrapActions = useMediaQuery('(min-width:1145px)')
 
@@ -70,7 +65,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               <EmployeeCapsule employee={employee} customCapsuleColors={customCapsuleColors} />
             </Grid>
 
-            <Grid item sm={12} md={6}>
+            <Grid item sm={12} md={5}>
               <EmployeeProgress
                 taskCurrentState={taskCurrentState}
                 employee={employee}
@@ -78,7 +73,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               />
             </Grid>
 
-            <Grid item sm={12} md={shouldWrapActions ? 12 : 2}>
+            <Grid item sm={12} md={shouldWrapActions ? 3 : 12}>
               <EmployeeActions
                 taskCurrentState={taskCurrentState}
                 updateTaskStatus={updateTaskStatus}
@@ -110,7 +105,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               <EmployeeCapsule employee={employee} customCapsuleColors={customCapsuleColors} />
             </Grid>
 
-            <Grid item sm={12} md={4}>
+            <Grid item xs={12} sm={12} md={4}>
               <EmployeeProgress
                 taskCurrentState={taskCurrentState}
                 employee={employee}
@@ -118,7 +113,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               />
             </Grid>
 
-            <Grid item sm={12} md={shouldWrapActions ? 3 : 12}>
+            <Grid item xs={12} sm={12} md={shouldWrapActions ? 3 : 12}>
               <EmployeeActions
                 taskCurrentState={taskCurrentState}
                 updateTaskStatus={updateTaskStatus}

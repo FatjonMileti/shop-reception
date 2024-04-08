@@ -34,6 +34,7 @@ interface EditReceivedProductProps {
   isModalOpen: boolean
   closeModal: () => void
   batchId?: string | number
+  setShouldRefreshData: (should: boolean) => void
 }
 
 export const BATCH_STATUS = {
@@ -57,7 +58,8 @@ const closeReasonOptions = [
 export const EditReceivedProduct = ({
   isModalOpen,
   closeModal,
-  batchId
+  batchId,
+  setShouldRefreshData
 }: EditReceivedProductProps) => {
   const { showNotification } = useNotification()
 
@@ -85,7 +87,7 @@ export const EditReceivedProduct = ({
       receivedProductQuery?.data?.closeReason ||
       receivedProductQuery?.data?.batchStatus === 'CLOSED'
         ? 'OUT_OF_STOCK'
-        : '',
+        : null,
     verified: receivedProductQuery?.data?.verified || false
   }
 
@@ -103,7 +105,7 @@ export const EditReceivedProduct = ({
     async () => {
       const data: EditReceivedProductRequestData = {
         batchStatus: form.values.batchStatus,
-        closeReason: form.values.closeReason,
+        closeReason: form.values.closeReason ?? null,
         verified: form.values.verified
       }
 
@@ -116,6 +118,7 @@ export const EditReceivedProduct = ({
           message: `Product added successfully`,
           type: 'success'
         })
+        setShouldRefreshData(true)
       },
       onError: res => {
         showNotification({
@@ -177,7 +180,7 @@ export const EditReceivedProduct = ({
               </Grid>
             </Grid>
 
-            {receivedProductQuery?.data?.createdUser === false && (
+            {receivedProductQuery?.data?.isCreatedUser === false && (
               <Grid item xs={12} style={{ display: 'grid' }}>
                 <RadioButtonGroup
                   label="Bifa Verificare de catre validator Trasabilitate"

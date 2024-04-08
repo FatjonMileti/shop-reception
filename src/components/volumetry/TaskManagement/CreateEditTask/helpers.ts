@@ -1,40 +1,39 @@
 import * as Yup from 'yup'
 
-export const getInitialValues = item => {
+const getFrequencyValue = frequency => frequency.map(f => ({ label: f.value, value: f.key }))
+
+export const getInitialValues = (item, categoryFilterValue) => {
   return {
     ...(item?.id ? { id: item?.id } : {}),
     name: item?.name ?? '',
-    rayonsOrDepartment: item?.rayonsOrDepartment
+    departmentAlias: item
       ? {
-          label: item.rayonsOrDepartment,
-          value: item.rayonsOrDepartment,
-          locationType: item.locationType
+          label: item.departmentAliasValue,
+          value: item.departmentAliasId
         }
       : null,
-    volumetryLocationCategory: item?.volumetryLocationCategory
-      ? { label: item.volumetryLocationCategory, value: item.volumetryLocationCategory }
-      : null,
-    rayons: item?.rayons ? [{ label: item.rayons, value: item.rayons }] : null,
+    volumetryLocationCategory: item
+      ? { label: item.locationCategoryValue, value: item.locationCategoryId }
+      : categoryFilterValue,
     recommendedStartHour: item?.recommendedStartHour ?? null,
     recommendedEndHour: item?.recommendedEndHour ?? null,
-    frequency: item?.frequency ? { label: item.frequency, value: item.frequency } : null,
-    standardProductivityValue: item?.standardProductivityValue ?? '',
-    measurementUnit: item?.measurementUnit
-      ? { label: item.measurementUnit, value: item.measurementUnit }
+    frequency: item?.frequency ? getFrequencyValue(item.frequency) : [],
+    // defaultWorkload: item?.defaultWorkload ?? '',
+    standardProductivityValue: item?.standardProductivity ?? '',
+    measurementUnit: item
+      ? { label: item.measurementUnitValue, value: item.measurementUnitId }
       : null,
-    workVolumeSource: item?.workVolumeSource
-      ? { label: item.workVolumeSource, value: item.workVolumeSource }
+    workVolumeSource: item
+      ? { label: item.workVolumeSourceValue, value: item.workVolumeSourceId }
       : null,
-    priority: item?.priority ? { label: item.priority, value: item.priority } : null,
-    isActive: item?.isActive ?? true
+    priority: item ? { label: item.priorityValue, value: item.priorityId } : null
   }
 }
 
-// TODO: add validation messages
 export const getValidationSchema = item =>
   Yup.object().shape({
     name: Yup.string().required('Acest camp este obligatoriu.'),
-    rayonsOrDepartment: Yup.object()
+    departmentAlias: Yup.object()
       .shape({
         label: Yup.string().required(),
         value: Yup.string().required()
@@ -46,22 +45,17 @@ export const getValidationSchema = item =>
         value: Yup.string().required()
       })
       .required('Acest camp este obligatoriu.'),
-    rayons: Yup.array()
+    recommendedStartHour: Yup.date().required('Acest camp este obligatoriu.'),
+    recommendedEndHour: Yup.date().required('Acest camp este obligatoriu.'),
+    frequency: Yup.array()
       .of(
-        Yup.object({
+        Yup.object().shape({
           label: Yup.string().required(),
           value: Yup.string().required()
         })
       )
       .required('Acest camp este obligatoriu.'),
-    recommendedStartHour: Yup.date().required('Acest camp este obligatoriu.'),
-    recommendedEndHour: Yup.date().required('Acest camp este obligatoriu.'),
-    frequency: Yup.object()
-      .shape({
-        label: Yup.string().required(),
-        value: Yup.string().required()
-      })
-      .required('Acest camp este obligatoriu.'),
+    // defaultWorkload: Yup.string().required('Acest camp este obligatoriu.'),
     standardProductivityValue: Yup.string().required('Acest camp este obligatoriu.'),
     measurementUnit: Yup.object()
       .shape({
@@ -75,12 +69,10 @@ export const getValidationSchema = item =>
         value: Yup.string().required()
       })
       .required('Acest camp este obligatoriu.'),
-
     priority: Yup.object()
       .shape({
         label: Yup.string().required(),
         value: Yup.string().required()
       })
-      .required('Acest camp este obligatoriu.'),
-    status: Yup.boolean()
+      .required('Acest camp este obligatoriu.')
   })

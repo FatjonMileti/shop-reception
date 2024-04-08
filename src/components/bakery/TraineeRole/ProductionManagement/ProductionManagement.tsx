@@ -16,6 +16,7 @@ import { formatAndDownloadResponse, getCurrentDate } from 'utils/helpers'
 import { GroupTable } from 'components/core-ui/GroupTable'
 import { FamilyItem, SubfamilyItem, TableItem, TableState } from './interfaces'
 import { AutoCompleteValue, Filter } from 'components/core-ui/Table/TableDefinitions'
+import { MetiModal } from 'components/bakery/StoreManagerRole/ProductionManagementStore/MetiModal'
 dayjs.extend(customParseFormat)
 
 const ProductionManagement = () => {
@@ -34,6 +35,17 @@ const ProductionManagement = () => {
     tableFilters: null
   })
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
+
+
+  const [isMetiModalOpen, setIsMetiModalOpen] = useState<boolean>(false)
+  const [metiProduct, setMetiProduct] = useState(null);
+
+  const openMetiModal = (product): void => {
+    setIsMetiModalOpen(true)
+    setMetiProduct(product)
+  }
+  const closeMetiModal = (): void => setIsMetiModalOpen(false)
+
 
   const { data: filterOptions } = useQuery(
     ['store'],
@@ -236,10 +248,18 @@ const ProductionManagement = () => {
           <Divider />
         </Grid>
 
+
+        <MetiModal
+          isModalOpen={isMetiModalOpen}
+          closeModal={closeMetiModal}
+          metiProduct={metiProduct}
+        />
+
+
         {storeFilterValue && (
           <GroupTable
             hideCheckbox
-            columns={columns}
+            columns={columns(openMetiModal)}
             items={tableItems}
             fetchData={fetchData}
             isLoading={isLoading}

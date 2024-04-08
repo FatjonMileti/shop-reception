@@ -33,14 +33,13 @@ export const toListTableRows = (
         hideDetails
       />
     ),
-    borderLeftColor: '#0970E6',
-    defaultExpanded: true
+    borderLeftColor: '#0970E6'
   }))
 }
 
 export const toAssignedTasksItem = item => ({
   id: item.taskTemplateId,
-  rayonsOrDepartment: item.rayonsOrDepartment,
+  departmentAlias: item.departmentAlias,
   taskName: item.taskName,
   recommendedInterval: item.recommendedInterval,
   priorityId: item.priorityId,
@@ -56,5 +55,7 @@ export const toItemEmployee = item => ({
   progressProportion: item.progressPercentage,
   comment: item.comment,
   createdAt: item.createdAt,
-  timeInterval: item.taskContributionInterval
+  timeInterval: item.taskContributionInterval,
+  allocatedWorkload: item.allocatedWorkload,
+  performedWorkload: item.performedWorkload
 })

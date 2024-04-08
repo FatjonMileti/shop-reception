@@ -22,7 +22,7 @@ const Home = ({ modules, setSubdomainId }) => {
     <div className={s.modulePaper}>
       <Salutation name={username} />
       {isLocationLoading ? (
-        <> </>
+        <></>
       ) : (
         <WeatherWidget location={isErrorGettingLocation ? 'Bucuresti' : location} />
       )}

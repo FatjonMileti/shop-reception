@@ -1,0 +1,56 @@
+import { Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
+
+export const buildColumns = ({
+  toggleEmployee,
+  updateEmployeeTime,
+  isXs
+}: {
+  toggleEmployee: Function
+  updateEmployeeTime: Function
+  isXs: boolean
+}) => [
+  {
+    title: 'Angajat',
+    field: 'isPresent',
+    render: row => (
+      <Checkbox
+        edge="start"
+        checked={row.isPresent}
+        onChange={() => toggleEmployee(row)}
+        inputProps={{ 'aria-labelledby': `employee-${row.value}` }}
+        label={row.fullName}
+        style={{ fontSize: '12px !important' }}
+      />
+    )
+  },
+  {
+    title: 'Ora inceput de tura',
+    field: 'shiftStart',
+    render: row => (
+      <TimePicker
+        label=""
+        value={row.shiftStart}
+        onChange={newValue => updateEmployeeTime(row, newValue, 'shiftStart')}
+        variant="outlined"
+        style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
+        // forceDesktop
+        // ampm={false}
+      />
+    )
+  },
+  {
+    title: 'Ora final de tura',
+    field: 'shiftEnd',
+    render: row => (
+      <TimePicker
+        label=""
+        value={row.shiftEnd}
+        onChange={newValue => updateEmployeeTime(row, newValue, 'shiftEnd')}
+        variant="outlined"
+        style={isXs ? { width: '100%', minWidth: '200px' } : { width: '100%' }}
+        // forceDesktop
+        // ampm={false}
+      />
+    )
+  }
+]

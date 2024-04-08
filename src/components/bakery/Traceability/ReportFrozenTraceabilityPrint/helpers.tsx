@@ -1,12 +1,23 @@
 import { formatBakeryPayloadDate } from '../../../../utils/helpers'
+import { ThermalCondition } from '../interfaces'
 
-export const productPrintColumns = [
+export const productPrintColumns = (isFormator=false) => [
   {
     field: 'productionDate',
     title: 'Data productiei',
     render: row => formatBakeryPayloadDate(row.productionDate),
-    defaultPrintSelected: true,
+    defaultPrintSelected: true
   },
+  ...(isFormator
+    ? [
+      {
+        title: 'Nume magazin',
+        field: 'store.name',
+        render: row => row.store.name,
+        defaultPrintSelected: true
+      }
+    ]
+    : []),
   {
     title: 'Cod METI',
     field: 'product.metiCode',
@@ -21,7 +32,7 @@ export const productPrintColumns = [
     title: 'Denumire Produs finit & Ambalaje',
     field: 'product.name',
     render: row => row.product.name,
-    defaultPrintSelected: true,
+    defaultPrintSelected: true
   },
   {
     field: 'product.familyName',
@@ -36,12 +47,14 @@ export const productPrintColumns = [
   {
     title: 'Sarja',
     field: 'chargeNumber',
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+    width: '150px'
   },
   {
     title: 'Cant. Sarja',
     field: 'quantity',
-    defaultPrintSelected: true
+    defaultPrintSelected: true,
+     render: row => row?.quantity?.toFixed(3),
   },
   {
     title: 'DLC prod. finit',
@@ -58,30 +71,31 @@ export const productPrintColumns = [
   {
     title: 'Stare termica',
     field: 'thermalCondition',
+    render: row => ThermalCondition[row.thermalCondition] ?? ''
   },
   {
     title: 'Conform',
-    field: 'conform',
+    field: 'conform'
   },
   {
     title: 'Motiv neconformitate',
-    field: 'nonComplianceReason',
+    field: 'nonComplianceReason'
   },
   {
     title: 'Destinatia produsului neconform',
-    field: 'productDestination',
+    field: 'productDestination'
   },
   {
     title: 'Operator productie',
-    field: 'productionOperator',
+    field: 'productionOperator'
   },
   {
     title: 'Verificare de catre validator trasabilitate',
-    field: 'isVerified',
+    field: 'isVerified'
   },
   {
     title: 'Validator trasabilitate',
-    field: 'verifiedBy',
+    field: 'verifiedBy'
   },
   {
     title: 'Data verificare trasabilitate',
@@ -100,7 +114,8 @@ export const batchPrintColumns = [
   {
     field: 'batch.entryDate',
     title: 'Data intrare MP',
-    render: row => formatBakeryPayloadDate(row.batch?.entryDate)
+    render: row => formatBakeryPayloadDate(row.batch?.entryDate),
+    width: '100px'
   },
   {
     field: 'batch.supplier.supplierName',
@@ -111,7 +126,7 @@ export const batchPrintColumns = [
   {
     field: 'quantity',
     title: 'Cant. fab./lot',
-    render: row => row.quantity,
+    render: row => row.quantity?.toFixed(3),
     defaultPrintSelected: true
   },
   {
@@ -132,9 +147,10 @@ export const batchPrintColumns = [
     defaultPrintSelected: true
   },
   {
-    field: 'reatedDate',
+    field: 'batch.entryDate',
     title: 'Data introducere Trasabilitate',
-    render: row => formatBakeryPayloadDate(row.reatedDate)
+    render: row => formatBakeryPayloadDate(row?.createdDate),
+    width: '100px'
   },
   {
     field: 'modifiedBy',
@@ -144,6 +160,7 @@ export const batchPrintColumns = [
   {
     field: 'modifiedDate',
     title: 'Data ultimei modificari',
-    render: row => formatBakeryPayloadDate(row.modifiedDate)
+    render: row => formatBakeryPayloadDate(row.modifiedDate),
+    width: '100px'
   }
 ]

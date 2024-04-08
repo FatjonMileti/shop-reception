@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { Grid, Divider } from '@mui/material'
+import { Grid, Divider, useMediaQuery } from '@mui/material'
 import {
   Autocomplete,
   Button,
@@ -11,15 +10,15 @@ import dayjs from 'dayjs'
 import { ProductDetailsBatches } from './ProductDetailsBatches'
 import { UseQueryResult } from 'react-query'
 import { toBoolean } from 'utils/helpers'
-import { useSelectProductSearch } from '../../useSelectProductSearch'
+import { useSelectProductSearch } from '../../../useSelectProductSearch'
+import { thermalContiotionOptions } from '../../../interfaces'
+import { quantityCalculation } from '../../AddOwnProductionTraceabilityModal/helpers'
 
 interface ProductDetailsProps {
+  onAddCharge: (componentMetiCode: string | number) => void
+  onAddBatch: (componentMetiCode: string | number) => void
   onCancel: () => void
-  onSelectBatch: (step?: number, metiCode?: any) => void
-  selectedRows: any
   formik: any
-  setComponentMetiCode: Function
-  editItem: any
   recipeQuery: UseQueryResult<any>
 }
 
@@ -27,20 +26,14 @@ export const ProductDetails = (props: ProductDetailsProps) => {
   const {
     formik,
     onCancel,
-    onSelectBatch,
-    selectedRows,
-    setComponentMetiCode,
-    editItem,
-    recipeQuery
+    recipeQuery,
+    onAddBatch,
+    onAddCharge
   } = props
 
   const selectProductSearch = useSelectProductSearch({
-    optionsMap: ({ id, name, metiCode }) => ({ value: id, label: name, metiCode, id, name })
+    optionsMap: ({ id, name, metiCode, metricUnit }) => ({ value: id, label: name, metiCode, id, name, metricUnit })
   })
-
-  useEffect(() => {
-    formik.setFieldValue('traceabilityProductionList', selectedRows)
-  }, [selectedRows])
 
   const onDeleteBatch = id => {
     let newBatches = formik.values.traceabilityProductionList.filter(batch =>
@@ -48,11 +41,31 @@ export const ProductDetails = (props: ProductDetailsProps) => {
     )
     formik.setFieldValue('traceabilityProductionList', newBatches)
   }
+  const isXs = useMediaQuery('(max-width:624px)')
+
+  const updateComponentQuantities = mainProductQuantity => {
+    formik.values.traceabilityProductionList.forEach((component, cIndex) => {
+      const componentQuantity = recipeQuery?.data?.[
+      (component.batchId && 'batches') || (component.childTraceabilityId && 'charges') || 'others'
+        ]?.find(c => c.componentCode === component.componentCode)?.componentQuantity
+
+      const calculatedQuantity = quantityCalculation(
+        mainProductQuantity,
+        componentQuantity,
+        recipeQuery?.data?.details?.recipeQuantity
+      )
+
+      formik.setFieldValue(
+        `traceabilityProductionList[${cIndex}].componentQuantity`,
+        calculatedQuantity
+      )
+    })
+  }
 
   return (
     <Grid container rowSpacing={3.5}>
       <Grid container spacing={2} mt={2}>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Input
             type="text"
             variant="outlined"
@@ -63,7 +76,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
           />
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={12} md={9}>
           <Autocomplete
             {...selectProductSearch}
             variant="outlined"
@@ -76,11 +89,13 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                 formik.setFieldValue('product', {
                   name: value.name,
                   metiCode: value.metiCode,
-                  id: value.id
+                  id: value.id,
+                  metricUnit: value.metricUnit
                 })
               } else {
                 formik.setFieldValue('product', null)
               }
+              formik.setFieldValue('traceabilityProductionList', [])
             }}
             value={
               formik.values?.product
@@ -96,7 +111,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
         </Grid>
 
         <Grid item xs={12} container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <DatePicker
               label="Data productie"
               onChange={value => formik.setFieldValue('productionDate', value)}
@@ -109,7 +124,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             />
           </Grid>
 
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <Input
               type="number"
               variant="outlined"
@@ -123,17 +138,19 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             />
           </Grid>
 
-          <Grid item xs={3}>
+          <Grid item xs={12} md={4}>
             <Input
-              type="text"
+              type="number"
               variant="outlined"
               label="Cantitate sarja"
               onChange={({ currentTarget: { value } }) => {
                 formik.setFieldValue('quantity', value)
+
+                updateComponentQuantities(value)
               }}
               value={formik.values.quantity}
               name="quantity"
-              infoIcon={editItem?.product?.metricUnit || ''}
+              infoIcon={formik.values?.product?.metricUnit || ''}
               required
               error={!!formik.errors.quantity}
               helperText={formik.errors.quantity as string}
@@ -141,7 +158,7 @@ export const ProductDetails = (props: ProductDetailsProps) => {
           </Grid>
         </Grid>
 
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Input
             type="text"
             variant="outlined"
@@ -153,34 +170,32 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             helperText={formik.errors.productionOperator as string}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Autocomplete
             variant="outlined"
             label="Stare termica"
             disableClearable
-            options={[
-              { value: 'BAKED', label: 'COPT' },
-              { value: 'UNBAKED', label: 'NECOPT' }
-            ]}
-            defaultValue={{
-              value: formik.values.thermalCondition || '',
-              label: formik.values.thermalCondition || ''
-            }}
+            options={thermalContiotionOptions}
+            value={
+              thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) || null
+            }
             onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
-            required
             error={!!formik.errors.thermalCondition}
             helperText={formik.errors.thermalCondition as string}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={4} sx={{'& .MuiFormControl-root': {marginTop: '16px'}}}>
           <RadioButtonGroup
             label="Conform"
             dotStyle
             name="conform"
             onChange={(e, option) => {
-              formik.setFieldValue('conform', toBoolean(option))
-              formik.setFieldValue('nonComplianceReason', null)
-              formik.setFieldValue('productDestination', null)
+              const conform = toBoolean(option)
+              formik.setFieldValue('conform', conform)
+              if (conform) {
+                formik.setFieldValue('nonComplianceReason', null)
+                formik.setFieldValue('productDestination', null)
+              }
             }}
             value={formik.values.conform}
             defaultValue={formik.initialValues.conform ? 'DA' : 'NU'}
@@ -197,28 +212,31 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             ]}
           />
         </Grid>
-        <Grid item xs={3}></Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={5}>
           <Input
             type="text"
             variant="outlined"
             label="Motiv neconformitate"
             onChange={e => formik.setFieldValue('nonComplianceReason', e.currentTarget.value)}
-            value={formik.values.nonComplianceReason}
+            value={formik.values.nonComplianceReason ?? ''}
             disabled={formik.values.conform == null || formik.values.conform == true}
             name="nonComplianceReason"
+            error={!!formik.errors.nonComplianceReason}
+            helperText={formik.errors.nonComplianceReason as string}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={5}>
           <Input
             type="text"
             variant="outlined"
             label="Destinatia produsului neconform"
             onChange={e => formik.setFieldValue('productDestination', e.currentTarget.value)}
-            value={formik.values.productDestination}
+            value={formik.values.productDestination ?? ''}
             disabled={formik.values.conform == null || formik.values.conform == true}
             name="productDestination"
+            error={!!formik.errors.productDestination}
+            helperText={formik.errors.productDestination as string}
           />
         </Grid>
         <Grid item xs={12}>
@@ -227,11 +245,10 @@ export const ProductDetails = (props: ProductDetailsProps) => {
 
         <ProductDetailsBatches
           formik={formik}
-          productMetiCode={formik.values?.product?.metiCode}
-          onSelectBatch={onSelectBatch}
           onDeleteBatch={onDeleteBatch}
+          onAddBatch={onAddBatch}
+          onAddCharge={onAddCharge}
           receip={recipeQuery?.data}
-          setComponentMetiCode={setComponentMetiCode}
         />
 
         <Grid item xs={12} container justifyContent="space-between">

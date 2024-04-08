@@ -28,6 +28,8 @@ export const formatTime = date => (date ? dayjs(date).format('HH:mm') : '')
 
 export const formatCustomDate = date => (date ? dayjs(date) : '')
 
+export const formatUIDateTime = date => (date ? dayjs(date).format('DD/MM/YYYY HH:mm') : '')
+
 export const areSameDayDates = (startDate, endDate) =>
   startDate && endDate && dayjs(startDate).isSame(dayjs(endDate), 'day')
 

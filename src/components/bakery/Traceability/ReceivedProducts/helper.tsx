@@ -3,7 +3,8 @@ import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 import * as Yup from 'yup'
 import { ProductDetails } from './AddReceivedProduct/ProductDetails'
 import dayjs from 'dayjs'
-import { BatchStatus, CloseReason, ReceivedProduct } from './interfaces'
+import { CloseReason, ReceivedProduct } from './interfaces'
+import { BatchStatus } from '../interfaces'
 import { formatPayloadDate } from '../../../../utils/helpers'
 import { ImageCell } from '../../../core-ui/ImageCell'
 
@@ -48,7 +49,8 @@ export const toTableRowItem = (item: Partial<ReceivedProduct>): ReceivedProduct 
   verified: item.verified || false,
   imageUrl: item.imageUrl || '',
   createdBy: item.createdBy || '',
-  createdUser: item.createdUser || false
+  isCreatedUser: item.isCreatedUser || false,
+  createdDate: item.createdDate || ''
 })
 
 export const columns: Column[] = [
@@ -128,6 +130,10 @@ export const columns: Column[] = [
     field: 'batchQuantity'
   },
   {
+    title: 'Cantitate consumata',
+    field: 'consumedAmount'
+  },
+  {
     title: 'UM (Meti)',
     field: 'product.metricUnit'
   },
@@ -143,14 +149,12 @@ export const columns: Column[] = [
     field: 'createdBy'
   },
   {
-    field: 'entryDate',
-    render: row => (
-      <BodyItem name="Data creare linie receptie" value={<>{formatPayloadDate(row.entryDate)}</>} />
-    )
-  },
-  {
-    title: 'Cantitate consumata',
-    field: 'consumedAmount'
+    field: 'createdDate',
+    render: row => {
+      return (
+        <BodyItem name="Data creare linie receptie" value={formatPayloadDate(row.createdDate)} />
+      )
+    }
   },
 
   {
@@ -242,26 +246,36 @@ export const headerItems: Column[] = [
 ]
 
 export const productDetailsSchema: Yup.ObjectSchema<ProductDetails> = Yup.object().shape({
-  entryDate: Yup.mixed<dayjs.Dayjs>().required('Entry date is required'),
+  entryDate: Yup.mixed<dayjs.Dayjs>()
+    .required('Entry date is required')
+    .test('future', 'Data intrare nu poate fi in viitor', value => {
+      return value?.isBefore(dayjs())
+    }),
 
   hasExpirationDate: Yup.boolean().required('This field is required'),
   expirationDate: Yup.mixed().when('hasExpirationDate', ([hasExpirationDate], schema) => {
-    return hasExpirationDate ? schema.required('Câmpul data expirare trebuie completat.') : schema.nullable()
+    return hasExpirationDate
+      ? Yup.date()
+          .min(dayjs().startOf('day'), 'Data de expirare nu poate fi în trecut.')
+          .required('Câmpul data expirare trebuie completat.')
+      : schema.nullable()
   }),
 
   hasSecondaryDLC: Yup.boolean().required('This field is required'),
 
-  secondaryDLC: Yup.string()
+  secondaryDLC: Yup.number()
     .when('hasSecondaryDLC', ([hasSecondaryDLC], schema) =>
-      hasSecondaryDLC ? schema.required('Secondary DLC is required') : schema.nullable()
+      hasSecondaryDLC
+        ? schema.required('Campul Numar zile DLC trebuie completat').positive('Inserati valoare pozitiva')
+        : schema.nullable()
     )
     .nullable(),
 
-  amount: Yup.string().required('amount is required'),
+  amount: Yup.number().required('Campul cantitate intrata trebuie completat').positive('Inserati valoare pozitiva'),
 
-  lot: Yup.string().required('lot is required').max(30),
+  lot: Yup.string().required('Campul lot trebuie completat').max(30),
 
-  picture: Yup.mixed<File>().test('required', 'The picture must be a file', (value: File) => {
+  picture: Yup.mixed<File>().test('required', 'Lipsa poza', (value: File) => {
     return !!value
   })
 })

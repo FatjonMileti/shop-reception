@@ -29,8 +29,8 @@ export interface ProductDetails {
   hasExpirationDate: boolean
   expirationDate?: any
   hasSecondaryDLC: boolean
-  secondaryDLC?: string
-  amount?: string
+  secondaryDLC?: number
+  amount?: number
   lot?: string
   picture: File
 }
@@ -40,8 +40,8 @@ const initialValues: ProductDetails = {
   hasExpirationDate: true,
   expirationDate: null,
   hasSecondaryDLC: true,
-  secondaryDLC: '',
-  amount: '',
+  secondaryDLC: null,
+  amount: undefined,
   lot: '',
   picture: undefined
 }
@@ -58,16 +58,24 @@ export const ProductDetails = ({
     enableReinitialize: false,
     validationSchema: productDetailsSchema,
     validateOnChange: false,
-    initialValues: initialValues,
-    onSubmit: (values) => {
+    initialValues,
+    onSubmit: values => {
       onContinue(values)
     }
   })
 
-
   return (
     <Grid container rowSpacing={3.5}>
-      <Grid item xs={12} spacing={2}>
+      <Grid
+        item
+        xs={12}
+        spacing={2}
+        sx={{
+          '& div': {
+            whiteSpace: 'unset !important'
+          }
+        }}
+      >
         <FormInfoItems
           items={[
             {
@@ -91,7 +99,7 @@ export const ProductDetails = ({
         />
       </Grid>
       <Grid item xs={12} container spacing={2} alignItems="flex-end">
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12}>
           <DatePicker
             error={!!form.errors.entryDate}
             helperText={form.errors.entryDate as string}
@@ -103,9 +111,9 @@ export const ProductDetails = ({
             maxDate={dayjs()}
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12} sx={{ marginTop: '17px' }}>
           <RadioButtonGroup
-            label='Data expirare'
+            label="Data expirare"
             dotStyle
             name="hasExpirationDate"
             onChange={e => {
@@ -129,7 +137,7 @@ export const ProductDetails = ({
             ]}
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12}>
           <DatePicker
             error={!!form.errors.expirationDate}
             helperText={form.errors.expirationDate as string}
@@ -142,14 +150,17 @@ export const ProductDetails = ({
             disabled={!form.values.hasExpirationDate}
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12} sx={{ marginTop: '17px' }}>
           <RadioButtonGroup
-            label='DLC Secundar'
+            label="DLC Secundar"
             dotStyle
             name="hasSecondaryDLC"
             onChange={e => {
-              const value = e.target.value === 'true'
-              form.setFieldValue('hasSecondaryDLC', value)
+              const hasSecondaryDLC = e.target.value === 'true'
+              form.setFieldValue('hasSecondaryDLC', hasSecondaryDLC)
+              if (!hasSecondaryDLC) {
+                form.setFieldValue('secondaryDLC', null)
+              }
             }}
             value={form.values.hasSecondaryDLC ? 'true' : 'false'}
             row
@@ -165,20 +176,20 @@ export const ProductDetails = ({
             ]}
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12}>
           <Input
             type="number"
             variant="outlined"
             label="Numar zile DLC"
             onChange={form.handleChange}
-            value={form.values.secondaryDLC}
+            value={form.values.secondaryDLC?.toString() ?? ''}
             name="secondaryDLC"
             disabled={!form.values.hasSecondaryDLC}
             error={!!form.errors.secondaryDLC}
             helperText={form.errors.secondaryDLC as string}
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12}>
           <Input
             type="text"
             variant="outlined"
@@ -198,13 +209,13 @@ export const ProductDetails = ({
             }
           />
         </Grid>
-        <Grid item xl={3} lg={4} sm={6} xs={12}>
+        <Grid item xl={3} lg={4} md={6} xs={12}>
           <Input
             type="number"
             variant="outlined"
             label="Cantitatea intrata"
             onChange={form.handleChange}
-            value={form.values.amount}
+            value={form.values.amount?.toString()}
             name="amount"
             suffix={selectedProduct.metricUnit}
             error={!!form.errors.amount}
@@ -212,7 +223,7 @@ export const ProductDetails = ({
           />
         </Grid>
 
-        <Grid item xl={3} lg={4} sm={6} xs={12} spacing={2} container alignItems="center">
+        <Grid item xl={3} lg={4} md={6} xs={12} spacing={2} container alignItems="center">
           {form.values.picture ? (
             <>
               <Grid item>
@@ -240,6 +251,21 @@ export const ProductDetails = ({
                 variant="outlined"
                 size="large"
               />
+
+              {!!form.errors.picture && (
+                <p
+                  style={{
+                    color: '#AA0D11',
+                    fontFamily: 'Ubuntu',
+                    fontWeight: '400',
+                    fontSize: '0.75rem',
+                    lineHeight: '1.66',
+                    margin: '4px 0 0 14px'
+                  }}
+                >
+                  {form.errors.picture as string}
+                </p>
+              )}
             </Grid>
           )}
 

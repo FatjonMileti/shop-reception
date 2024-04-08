@@ -14,14 +14,6 @@ import { handleQueryError } from 'utils/helpers'
 import { EditAllocationModalProps } from '../TaskAllocationsDefinitions'
 import { TASK_STATUS_ACTIONS } from '../Employee/constants'
 
-const validationSchema = hideWorkload =>
-  yup.object({
-    workload: hideWorkload
-      ? yup.string().nullable()
-      : yup.number().required('Acest camp este obligatoriu.'),
-    comment: yup.string()
-  })
-
 const EditAllocationModal = (props: EditAllocationModalProps) => {
   const {
     isModalOpen,
@@ -31,7 +23,8 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     setShouldRefreshData,
     setSelectedRowId,
     task,
-    hideWorkload
+    hideWorkload,
+    minDivision
   } = props
   const { showNotification } = useNotification()
 
@@ -41,6 +34,28 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
       ...(editItem ? {} : { action: TASK_STATUS_ACTIONS.STOP })
     })
   }
+
+  const divisionValidation = value => {
+    if (!Number.isNaN(value) && parseFloat(value) % minDivision === 0) {
+      return true
+    }
+    return false
+  }
+
+  const validationSchema = hideWorkload =>
+    yup.object({
+      allocatedWorkload: hideWorkload
+        ? yup.string().nullable()
+        : yup
+            .number()
+            .required('Acest camp este obligatoriu.')
+            .test(
+              'is-custom-step',
+              `Valoarea trebuie să fie multiplu de ${minDivision}`,
+              divisionValidation
+            ),
+      comment: yup.string()
+    })
 
   const { isLoading, mutate } = useMutation(editCurrentAllocation, {
     onSuccess: res => {
@@ -96,11 +111,16 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: task?.taskName },
-              { label: 'Departament/Raion:', name: task?.rayonsOrDepartment },
-              !hideWorkload && {
-                label: 'Angajat:',
-                name: employee?.workerFullName
-              }
+              { label: 'Departament/Raion:', name: task?.departmentAlias },
+              hideWorkload
+                ? {
+                    label: 'Volum alocat:',
+                    name: employee?.allocatedWorkload
+                  }
+                : {
+                    label: 'Angajat:',
+                    name: employee?.workerFullName
+                  }
             ]}
           />
         </Grid>
@@ -110,16 +130,20 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
             <Input
               type="number"
               variant="outlined"
-              name="workload"
-              label="Volum"
-              value={formik.values.workload}
+              name="allocatedWorkload"
+              label="Volum alocat"
+              value={formik.values.allocatedWorkload}
               width="100%"
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                formik.setFieldValue('workload', (event.target as HTMLInputElement).value)
+                formik.setFieldValue('allocatedWorkload', (event.target as HTMLInputElement).value)
               }
-              error={!!formik.errors.workload}
-              helperText={formik.errors.workload as string}
+              error={!!formik.errors.allocatedWorkload}
+              helperText={formik.errors.allocatedWorkload as string}
               required
+              inputProps={{
+                min: '0',
+                step: minDivision
+              }}
             />
           </Grid>
         )}

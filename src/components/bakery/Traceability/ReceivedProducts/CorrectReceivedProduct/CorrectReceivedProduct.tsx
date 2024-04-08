@@ -50,8 +50,8 @@ export interface ReceivedProductToCorrect {
   hasExpirationDate: boolean
   expirationDate?: any
   hasSecondaryDLC: boolean
-  secondaryDLC?: string
-  amount?: string
+  secondaryDLC?: number
+  amount?: number
   lot?: string
   picture?: File
 }
@@ -60,11 +60,13 @@ interface CorrectReceivedProductProps {
   isModalOpen: boolean
   closeModal: () => void
   batchId?: string | number
+  setShouldRefreshData: (should: boolean) => void
 }
 export const CorrectReceivedProduct = ({
   isModalOpen,
   closeModal,
-  batchId
+  batchId,
+  setShouldRefreshData
 }: CorrectReceivedProductProps) => {
   const inputFileRef = React.useRef<HTMLInputElement>()
   const { showNotification } = useNotification()
@@ -96,7 +98,7 @@ export const CorrectReceivedProduct = ({
     enableReinitialize: true,
     validationSchema: correctReceivedProductSchema,
     validateOnChange: false,
-    initialValues: initialValues,
+    initialValues,
     onSubmit: () => {
       productCorrectionMutation.mutate()
     }
@@ -113,14 +115,12 @@ export const CorrectReceivedProduct = ({
         hasExpireDate: form.values.hasExpirationDate,
         expireDate: formatPayloadDate(form.values.expirationDate),
         hasSecondaryDlc: form.values.hasSecondaryDLC,
-        dlcDays: parseInt(form.values.secondaryDLC),
-        batchQuantity: parseInt(form.values.amount),
+        dlcDays: form.values.secondaryDLC,
+        batchQuantity: form.values?.amount,
         batchName: form.values.lot
       }
 
-      formData.append('dto',
-        new Blob([JSON.stringify(data)], { type: 'application/json' })
-      )
+      formData.append('dto', new Blob([JSON.stringify(data)], { type: 'application/json' }))
       formData.append('fileObject', form.values.picture || null)
 
       await makeCorePutRequest(`/bakery/batch/correction/${batchId}`, formData)
@@ -131,7 +131,8 @@ export const CorrectReceivedProduct = ({
         showNotification({
           message: `Product added successfully`,
           type: 'success'
-        })
+        });
+        setShouldRefreshData(true)
       },
       onError: res => {
         showNotification({
@@ -151,7 +152,7 @@ export const CorrectReceivedProduct = ({
           <>
             <Grid item xs={12} container spacing={2} alignItems="flex-end">
               <Grid item container xs={12} spacing={2}>
-                <Grid item xl={3} lg={4} sm={6} xs={12}>
+                <Grid item xl={3} lg={4} md={6} xs={12}>
                   <Input
                     type="number"
                     variant="outlined"
@@ -162,7 +163,7 @@ export const CorrectReceivedProduct = ({
                   />
                 </Grid>
 
-                <Grid item xl={9} lg={8} sm={6} xs={12}>
+                <Grid item xl={9} lg={8} md={6} xs={12}>
                   <SelectProduct
                     selectedProduct={form.values.selectedProduct}
                     setSelectedProduct={sp => {
@@ -176,7 +177,7 @@ export const CorrectReceivedProduct = ({
               </Grid>
 
               <Grid item container xs={12} spacing={2}>
-                <Grid item xl={3} lg={4} sm={6} xs={12}>
+                <Grid item xl={3} lg={4} md={6} xs={12}>
                   <Input
                     type="number"
                     variant="outlined"
@@ -187,7 +188,7 @@ export const CorrectReceivedProduct = ({
                   />
                 </Grid>
 
-                <Grid item xl={9} lg={8} sm={6} xs={12}>
+                <Grid item xl={9} lg={8} md={6} xs={12}>
                   <SelectSupplier
                     selectedProduct={form.values.selectedProduct}
                     selectedSupplier={form.values.selectedSupplier}
@@ -200,7 +201,7 @@ export const CorrectReceivedProduct = ({
                 </Grid>
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12}>
                 <DatePicker
                   error={!!form.errors.entryDate}
                   helperText={form.errors.entryDate as string}
@@ -213,7 +214,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12} sx={{ marginTop: '17px' }}>
                 <RadioButtonGroup
                   label="Data expirare"
                   dotStyle
@@ -240,7 +241,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12}>
                 <DatePicker
                   error={!!form.errors.expirationDate}
                   helperText={form.errors.expirationDate as string}
@@ -251,19 +252,22 @@ export const CorrectReceivedProduct = ({
                   required
                   value={form.values.expirationDate}
                   variant="outlined"
-                  minDate={form.values.entryDate}
+                  minDate={dayjs()}
                   disabled={!form.values.hasExpirationDate}
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12} sx={{ marginTop: '17px' }}>
                 <RadioButtonGroup
                   label="DLC Secundar"
                   dotStyle
                   name="hasSecondaryDLC"
                   onChange={e => {
-                    const value = e.target.value === 'true'
-                    form.setFieldValue('hasSecondaryDLC', value)
+                    const hasSecondaryDLC = e.target.value === 'true'
+                    form.setFieldValue('hasSecondaryDLC', hasSecondaryDLC)
+                    if(!hasSecondaryDLC) {
+                      form.setFieldValue('secondaryDLC', null)
+                    }
                   }}
                   value={form.values.hasSecondaryDLC ? 'true' : 'false'}
                   row
@@ -280,13 +284,13 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12}>
                 <Input
                   type="number"
                   variant="outlined"
                   label="Numar zile DLC"
                   onChange={form.handleChange}
-                  value={form.values.secondaryDLC}
+                  value={form.values.secondaryDLC?.toString() ?? ''}
                   name="secondaryDLC"
                   disabled={!form.values.hasSecondaryDLC}
                   error={!!form.errors.secondaryDLC}
@@ -294,7 +298,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12}>
                 <Input
                   type="text"
                   variant="outlined"
@@ -315,13 +319,13 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12}>
+              <Grid item xl={3} lg={4} md={6} xs={12}>
                 <Input
                   type="number"
                   variant="outlined"
                   label="Cantitatea intrata"
                   onChange={form.handleChange}
-                  value={form.values.amount}
+                  value={form.values.amount?.toString()}
                   name="amount"
                   suffix={form.values?.selectedProduct?.metricUnit}
                   error={!!form.errors.amount}
@@ -329,7 +333,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} sm={6} xs={12} spacing={2} container alignItems="center">
+              <Grid item xl={3} lg={4} md={6} xs={12} spacing={2} container alignItems="center">
                 {form.values.picture ? (
                   <>
                     <Grid item>

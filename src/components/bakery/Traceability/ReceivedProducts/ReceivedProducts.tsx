@@ -16,7 +16,7 @@ import {
   BodyItem,
   HeaderItem
 } from '../ProductManagementTraceability/AccordionTable'
-import { Grid, Typography } from '@mui/material'
+import { Grid, Typography, useMediaQuery } from '@mui/material'
 import AddActionIcon from '../../../../icons/AddActionIcon'
 import { AddReceivedProduct } from './AddReceivedProduct/AddReceivedProduct'
 
@@ -27,9 +27,7 @@ import { ReceivedProduct, FamilyItem, SubfamilyItem } from './interfaces'
 import { get } from 'lodash'
 import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
 import { ImageCell } from '../../../core-ui/ImageCell'
-
-const orderBy = 'createdDate'
-const order = 'desc'
+import { debounce } from '@mui/material'
 
 export const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -42,18 +40,7 @@ export const ReceivedProducts = () => {
   const [isEditModalOpen, setEditModalOpen] = React.useState<boolean>(false)
 
   const [selectedRowId, setSelectedRowId] = useState<string | number>(0)
-
-  const [tableState, setTableState] = useState<{
-    tableFilters: Filter[]
-    rowsPerPage: number
-    orderBy: string
-    order: string
-  }>({
-    tableFilters: null,
-    rowsPerPage: null,
-    orderBy,
-    order,
-  })
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const { showNotification } = useNotification()
 
@@ -67,26 +54,19 @@ export const ReceivedProducts = () => {
           tableFilters,
           page,
           rowsPerPage,
-          orderBy,
-          order,
           searchText,
           searchFields: [
             'product.metiCode',
             'supplier.supplierCode',
             'supplier.supplierName',
             'product.name',
+            'batchName'
           ]
         })
       )
       setTableItems(response.list.map(toTableRowItem))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
-
-      setTableState(tableState => ({
-        ...tableState,
-        tableFilters,
-        rowsPerPage
-      }))
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -98,10 +78,11 @@ export const ReceivedProducts = () => {
   const families = useQuery(
     ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
     async () => {
-      const subfamilyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.subfamily')
-        ?.value || []) as AutoCompleteValue[]
+      const subfamilyLiveFilterValue = (liveTableFilters.find(
+        filter => filter.name === 'product.subfamily'
+      )?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families`, {
         params: {
           subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
         },
@@ -128,9 +109,10 @@ export const ReceivedProducts = () => {
   const subfamilies = useQuery(
     ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
     async () => {
-      const familyLiveFilterValue = (liveTableFilters.find(filter => filter.name === 'product.family')
-        ?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+      const familyLiveFilterValue = (liveTableFilters.find(
+        filter => filter.name === 'product.family'
+      )?.value || []) as AutoCompleteValue[]
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families/subfamilies`, {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
         },
@@ -187,13 +169,15 @@ export const ReceivedProducts = () => {
     }
   ]
 
+  const isXs = useMediaQuery('(max-width:624px)')
+
   return (
     <div className={s.mainContainer}>
       <AddReceivedProduct
         isModalOpen={isAddModalOpen}
         closeModal={() => setAddModalOpen(false)}
         onSuccess={() => {
-          fetchData(0, tableState.rowsPerPage, tableState.tableFilters, '')
+          setShouldRefreshData(true)
         }}
       />
       <CorrectReceivedProduct
@@ -203,6 +187,7 @@ export const ReceivedProducts = () => {
           setSelectedRowId(0)
         }}
         batchId={selectedRowId}
+        setShouldRefreshData={setShouldRefreshData}
       />
       <EditReceivedProduct
         isModalOpen={isEditModalOpen}
@@ -211,13 +196,19 @@ export const ReceivedProducts = () => {
           setSelectedRowId(0)
         }}
         batchId={selectedRowId}
+        setShouldRefreshData={setShouldRefreshData}
       />
       <ListTable
         totalCount={totalCount}
         isLoading={isLoading}
         filters={drawerFilters}
+        appliedFiltersLabel='Filtre'
+        applyFiltersButtonLabel='Filtrare'
+        filtersLabel='Filtrare'
+        filtersButtonLabel='Filtrare'
+        cancelFiltersButtonLabel='Anuleaza'
         handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
-        handleRemoteData={fetchData}
+        handleRemoteData={debounce(fetchData, 500)}
         hasSearchInput
         rows={tableItems.map(item => ({
           id: item.id,
@@ -261,7 +252,7 @@ export const ReceivedProducts = () => {
         }))}
         toolbarActions={[
           {
-            label: 'Add',
+            label: 'Adauga',
             onClick: () => {
               setAddModalOpen(true)
             },
@@ -293,8 +284,10 @@ export const ReceivedProducts = () => {
           }
         ]}
         rowActionsWidth="200px"
-        rowsPerPage={25}
-        rowsPerPageOptions={[25, 50, 100]}
+        rowsPerPage={isXs ? 5 : 25}
+        rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
+        setShouldRefreshData={setShouldRefreshData}
+        shouldRefreshData={shouldRefreshData}
       />
     </div>
   )

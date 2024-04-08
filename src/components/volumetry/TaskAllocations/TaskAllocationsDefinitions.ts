@@ -11,11 +11,12 @@ export interface AssignEmployeeProps {
   isModalOpen: boolean
   closeModal: Function
   taskName: string
-  rayonsOrDepartment: string
+  departmentAlias: string
   workloadMeasurementUnit: string
   setShouldRefreshData: Function
   taskTemplateId: string
   setSelectedRowId: Function
+  minDivision: number
 }
 
 export interface TaskCurrentState {
@@ -76,4 +77,5 @@ export interface EditAllocationModalProps {
   editItem?: any // TODO: To add interface when db schema is defined
   employee?: any // TODO: To add type when db schema is defined
   hideWorkload?: boolean
+  minDivision?: number
 }

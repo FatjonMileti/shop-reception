@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Divider, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Icon } from 'components/core-ui/Icon'
 import { makeCorePostRequest } from 'utils/api'
@@ -11,12 +11,14 @@ import { useQuery, useMutation } from 'react-query'
 import { ProductNearbyStockInfo } from '../ProductNearbyStockInfo'
 import { NeighboursStock, Product } from '../interfaces'
 import { useNavigate } from 'react-router-dom'
+import { toAddToCartPayload } from './serializers'
 
 interface CartItem {
   id: string
   quantity: number
   isWarehouse: boolean
   purchaseOption: string
+  locationId: number
 }
 
 interface ProductGeneralInfoProps {
@@ -29,8 +31,11 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
   const navigate = useNavigate()
   const isXs = useMediaQuery('(max-width:430px)')
 
-  const [selectedBuybackOption, setSelectedBuybackOption] = useState(
-    product.purchaseOptions[0].value || ''
+  const [selectedBuybackOption, setSelectedBuybackOption] = useState('')
+
+  useEffect(
+    () => setSelectedBuybackOption(product.purchaseOptions[0]?.value),
+    [product, product.purchaseOptions]
   )
 
   const { data: productStock, isLoading: isLoadingProductStock } = useQuery(
@@ -55,7 +60,7 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
 
   const addItemToCart = async (values: CartItem) => {
     if (displayAddToCartBtn) {
-      await makeCorePostRequest(`/supply-omni/cart/product`, values)
+      await makeCorePostRequest('/supply-omni/cart/product', values)
     }
   }
 
@@ -75,14 +80,7 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
     }
   })
 
-  const onSubmitAddToCart = async () => {
-    mutate({
-      id: product.id,
-      quantity: 1,
-      isWarehouse: product.isWarehouse,
-      purchaseOption: selectedBuybackOption
-    })
-  }
+  const onSubmitAddToCart = async () => mutate(toAddToCartPayload(product, selectedBuybackOption))
 
   return (
     <div>
@@ -123,7 +121,7 @@ const ProductGeneralInfo: React.FC<ProductGeneralInfoProps> = ({ product, neighb
               variant="outlined"
               width={isXs ? '100%' : '320px'}
               onChange={event => setSelectedBuybackOption((event.target as any).value)}
-              disabled={product.purchaseOptions.length == 1}
+              disabled={product.purchaseOptions.length === 1}
               fullWidth
             />
           </div>

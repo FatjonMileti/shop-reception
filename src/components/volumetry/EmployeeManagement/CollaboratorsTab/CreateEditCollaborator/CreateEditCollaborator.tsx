@@ -13,6 +13,7 @@ import { handleQueryError } from 'utils/helpers'
 import { AsyncAutocompleteOption } from 'components/core-ui/AsyncAutocomplete/AsyncAutocompleteDefinitions'
 import { useMemo } from 'react'
 import { toCollaboratorPayload } from 'components/volumetry/EmployeeManagement/CollaboratorsTab/CreateEditCollaborator/serializers'
+import { getCollaboratorsTypesOptions, getContractorsNamesOptions } from 'components/volumetry/api'
 
 interface CreateEditCollaboratorProps {
   isModalOpen: boolean
@@ -21,8 +22,6 @@ interface CreateEditCollaboratorProps {
   setShouldRefreshData: Function
   departmentsOptions: AsyncAutocompleteOption[]
   isDepartmentsOptionsLoading: boolean
-  jobTitlesOptions: AsyncAutocompleteOption[]
-  isjobTitlesOptionsLoading: boolean
 }
 
 const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
@@ -32,13 +31,11 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
     editItem,
     setShouldRefreshData,
     departmentsOptions,
-    isDepartmentsOptionsLoading,
-    jobTitlesOptions,
-    isjobTitlesOptionsLoading
+    isDepartmentsOptionsLoading
   } = props
   const { showNotification } = useNotification()
 
-  const mutateCollaborator = async (values: EmployeeManagementItem) => {
+  const mutateCollaborator = async values => {
     editItem
       ? await makeCorePutRequest(`/volumetry/workers/contractors/${editItem?.id}`, values)
       : await makeCorePostRequest(`/volumetry/workers/contractors`, values)
@@ -69,20 +66,24 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: EmployeeManagementItem, { resetForm }) => {
-      mutate(toCollaboratorPayload(values))
+    onSubmit: async (values: any, { resetForm }) => {
+      mutate(toCollaboratorPayload(values, editItem, departmentsOptions))
       resetForm()
     }
   })
+
+  const { data: contractorsTypesOptions, isLoading: isContractorsTypesOptions } =
+    getCollaboratorsTypesOptions(showNotification)
 
   return (
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
       modalTitle={editItem ? 'Editeaza colaborator' : 'Adauga colaborator'}
+      modalWidth="30%"
     >
       <Grid container spacing={4}>
-        {(isLoading || isDepartmentsOptionsLoading || isjobTitlesOptionsLoading) && (
+        {(isLoading || isDepartmentsOptionsLoading || isContractorsTypesOptions) && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         )}
         <Grid xs={12} item>
@@ -92,41 +93,81 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             label="Nume colaborator"
             fullWidth
             variant="outlined"
-            value={formik.values.fullName}
-            onChange={event => formik.setFieldValue('fullName', event.currentTarget.value)}
-            error={!!formik.errors.fullName}
-            helperText={formik.errors.fullName as string}
+            value={formik.values.lastName}
+            onChange={event => formik.setFieldValue('lastName', event.currentTarget.value)}
+            error={!!formik.errors.lastName}
+            helperText={formik.errors.lastName as string}
             required
+          />
+        </Grid>
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            name="name"
+            label="Prenume colaborator"
+            fullWidth
+            variant="outlined"
+            value={formik.values.firstName}
+            onChange={event => formik.setFieldValue('firstName', event.currentTarget.value)}
+            error={!!formik.errors.firstName}
+            helperText={formik.errors.firstName as string}
+            required
+          />
+        </Grid>
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            name="name"
+            label="Nume mijlociu colaborator"
+            fullWidth
+            variant="outlined"
+            value={formik.values.middleName}
+            onChange={event => formik.setFieldValue('middleName', event.currentTarget.value)}
+            error={!!formik.errors.middleName}
+            helperText={formik.errors.middleName as string}
+          />
+        </Grid>
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            name="name"
+            label="Email"
+            fullWidth
+            variant="outlined"
+            value={formik.values.email}
+            onChange={event => formik.setFieldValue('email', event.currentTarget.value)}
+            error={!!formik.errors.email}
+            helperText={formik.errors.email as string}
           />
         </Grid>
 
         <Grid xs={12} item>
           <AsyncAutocomplete
             variant="outlined"
-            name="department"
+            name="genericDepartment"
             label="Selecteaza departament"
             disableClearable
-            value={formik.values.department}
+            value={formik.values.genericDepartment}
             options={departmentsOptions || []}
-            onChange={value => formik.setFieldValue('department', value)}
+            onChange={value => formik.setFieldValue('genericDepartment', value)}
             required
-            error={!!formik.errors.department}
-            helperText={formik.errors.department as string}
+            error={!!formik.errors.genericDepartment}
+            helperText={formik.errors.genericDepartment as string}
           />
         </Grid>
 
         <Grid xs={12} item>
           <AsyncAutocomplete
             variant="outlined"
-            name="jobTitle"
+            name="workerType"
             label="Selecteaza functia"
             disableClearable
-            value={formik.values.jobTitle}
-            options={jobTitlesOptions || []}
-            onChange={value => formik.setFieldValue('jobTitle', value)}
+            value={formik.values.workerType}
+            options={contractorsTypesOptions || []}
+            onChange={value => formik.setFieldValue('workerType', value)}
             required
-            error={!!formik.errors.jobTitle}
-            helperText={formik.errors.jobTitle as string}
+            error={!!formik.errors.workerType}
+            helperText={formik.errors.workerType as string}
           />
         </Grid>
 

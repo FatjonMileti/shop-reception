@@ -20,11 +20,12 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     isModalOpen,
     closeModal,
     taskName,
-    rayonsOrDepartment,
+    departmentAlias,
     workloadMeasurementUnit,
     setShouldRefreshData,
     taskTemplateId,
-    setSelectedRowId
+    setSelectedRowId,
+    minDivision
   } = props
   const { showNotification } = useNotification()
 
@@ -52,10 +53,24 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
       handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
+  const divisionValidation = value => {
+    if (!Number.isNaN(value) && parseFloat(value) % minDivision === 0) {
+      return true
+    }
+    return false
+  }
+
   const validationSchema = yup.object({
     workerId: yup.number().required('Acest camp este obligatoriu.'),
     taskTemplateId: yup.number().required('Acest camp este obligatoriu.'),
-    workload: yup.number().required('Acest camp este obligatoriu.')
+    allocatedWorkload: yup
+      .number()
+      .required('Acest camp este obligatoriu.')
+      .test(
+        'is-custom-step',
+        `Valoarea trebuie să fie multiplu de ${minDivision}`,
+        divisionValidation
+      )
   })
 
   const formik = useFormik({
@@ -65,11 +80,11 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     initialValues: {
       workerId: null,
       taskTemplateId: taskTemplateId,
-      workload: 0
+      allocatedWorkload: 0
     },
     onSubmit: async (values, { resetForm }) => {
       const payload = {
-        workload: values.workload,
+        allocatedWorkload: values.allocatedWorkload,
         workerId: values.workerId,
         taskTemplateId: values.taskTemplateId
       }
@@ -90,7 +105,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: taskName },
-              { label: 'Departament/Raion:', name: rayonsOrDepartment },
+              { label: 'Departament/Raion:', name: departmentAlias },
               { label: 'UM:', name: workloadMeasurementUnit }
             ]}
           />
@@ -114,18 +129,22 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
 
         <Grid xs={12} item>
           <Input
-            type="text"
-            name="volume"
-            label="Volum"
+            type="number"
+            name="allocatedWorkload"
+            label="Volum alocat"
             variant="outlined"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue('workload', event.target.value)
+              formik.setFieldValue('allocatedWorkload', event.target.value)
             }
-            value={formik.values.workload}
+            value={formik.values.allocatedWorkload}
             style={{ width: '100%' }}
-            error={!!formik.errors.workload}
-            helperText={formik.errors.workload as string}
+            error={!!formik.errors.allocatedWorkload}
+            helperText={formik.errors.allocatedWorkload as string}
             required
+            inputProps={{
+              min: '0',
+              step: minDivision
+            }}
           />
         </Grid>
 

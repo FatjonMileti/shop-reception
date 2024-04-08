@@ -3,9 +3,8 @@ import { ValueLabelInterface } from './interfaces'
 import { useQuery } from 'react-query'
 import { toEmployeeFilterItems, toEmployeesAttendance } from './TaskAllocations/serializers'
 import { fromTaskPayload } from './utils'
-import { toDepartmentsOptions } from './serializers'
+import { toDepartmentAliasesOptions, toDepartmentsOptions, toRegionsOptions } from './serializers'
 import { handleQueryError } from 'utils/helpers'
-import dayjs from 'dayjs'
 
 export const getDepartmentsOptions = (
   showNotification: Function,
@@ -16,6 +15,39 @@ export const getDepartmentsOptions = (
     async () => {
       const result = await makeCoreGetRequest('/volumetry/locations/generic-departments')
       const resultOptions = toDepartmentsOptions(result)
+
+      if (resultOptions?.length && !!setDefaultOptionCallback) {
+        setDefaultOptionCallback(resultOptions[0])
+      }
+      return resultOptions || []
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la preluarea datelor de optiuni pentru departamente.',
+          showNotification
+        )
+    }
+  )
+}
+
+export const getDepartmentAliasesOptions = (
+  showNotification: Function,
+  setDefaultOptionCallback?: (defaultValue: ValueLabelInterface) => void,
+  filter?: { filterBy: string; filterValue: string | boolean | number }
+) => {
+  return useQuery(
+    ['departments'],
+    async () => {
+      let url = '/volumetry/locations/department-aliases'
+
+      if (filter) {
+        url = `${url}?filterBy=${filter.filterBy}&filterValue=${filter.filterValue}`
+      }
+
+      const result = await makeCoreGetRequest(url)
+      const resultOptions = toDepartmentAliasesOptions(result)
 
       if (resultOptions?.length && !!setDefaultOptionCallback) {
         setDefaultOptionCallback(resultOptions[0])
@@ -50,6 +82,27 @@ export const getJobTitlesOptions = (showNotification: Function) => {
     },
     {
       onError: error => handleQueryError(error, 'Error while fetching job titles', showNotification)
+    }
+  )
+}
+
+export const getCollaboratorsTypesOptions = (showNotification: Function) => {
+  return useQuery(
+    ['contractors-types'],
+    async () => {
+      const result = await makeCoreGetRequest('/volumetry/workers/contractors/types')
+      const resultOptions = result.map(
+        (item: { id: number; description: string }): ValueLabelInterface => ({
+          label: item.description,
+          value: item.id
+        })
+      )
+
+      return resultOptions || []
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'Error while fetching contractors types', showNotification)
     }
   )
 }
@@ -108,11 +161,15 @@ export const getContractorsNamesOptions = (showNotification: Function) => {
   )
 }
 
-export const getTask = (itemId: string | number, showNotification: Function) => {
+export const getTask = (
+  itemId: string | number,
+  isModalOpen: boolean,
+  showNotification: Function
+) => {
   return useQuery(
     ['task', itemId],
     async () => {
-      if (itemId) {
+      if (itemId && isModalOpen) {
         const result = await makeCoreGetRequest(`/volumetry/task-templates/${itemId}`)
 
         return fromTaskPayload(result) || null
@@ -130,11 +187,18 @@ export const getTask = (itemId: string | number, showNotification: Function) => 
   )
 }
 
-export const getCategoriesOptions = (showNotification: Function) => {
+export const getCategoriesOptions = (
+  showNotification: Function,
+  locationFilterId?: number | string
+) => {
   return useQuery(
-    ['categories'],
+    ['categories', locationFilterId],
     async () => {
-      const result = await makeCoreGetRequest('/volumetry/locations/categories')
+      let url = '/volumetry/locations/categories/summary'
+      if (locationFilterId) {
+        url = `${url}?filterBy=locationId&filterValue=${locationFilterId}`
+      }
+      const result = await makeCoreGetRequest(url)
 
       const resultOptions = result.map(category => ({
         value: category.id,
@@ -247,13 +311,12 @@ export const getCategoryDepartmentsOptions = (
     ['category-departments', categoryId],
     async () => {
       const result = await makeCoreGetRequest(
-        `/volumetry/locations/generic-departments?filterBy=categoryId&filterValue=${categoryId}`
+        `/volumetry/locations/department-aliases?filterBy=categoryId&filterValue=${categoryId}`
       )
 
       const resultOptions = result.map(department => ({
         value: department.id,
-        label: department.departmentName,
-        locationType: department.locationType
+        label: department.alias
       }))
 
       return resultOptions || []
@@ -270,40 +333,11 @@ export const getCategoryDepartmentsOptions = (
   )
 }
 
-export const getRaionsOptions = (
-  departmentId: number,
-  shouldFetchRaions: boolean,
-  callback: Function,
-  showNotification: Function
-) => {
-  return useQuery(
-    ['raions', departmentId],
-    async () => {
-      const result = await makeCoreGetRequest(
-        `/volumetry/locations/generic-rayons?filterBy=genericDepartmentId&filterValue=${departmentId}`
-      )
-
-      const resultOptions = result.map(raion => ({
-        value: raion.id,
-        label: raion.rayonName
-      }))
-
-      callback(resultOptions)
-      return resultOptions || []
-    },
-    {
-      onError: error =>
-        handleQueryError(error, 'A aparut o eroare la obtinerea raioanelor.', showNotification),
-      enabled: shouldFetchRaions
-    }
-  )
-}
-
 export const getEmployeesOptions = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(
     ['employees-options'],
     async () => {
-      const employees = await makeCoreGetRequest('/volumetry/workers/shifts')
+      const employees = await makeCoreGetRequest('/volumetry/workers-schedule')
       return toEmployeeFilterItems(employees) || []
     },
     {
@@ -315,26 +349,91 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   )
 }
 
-export const getEmployeesAttendance = (
+export const setEmployeesAttendance = (
   departmentId: number | string,
   showNotification: Function,
-  validateQuery: boolean = true
+  validateQuery: boolean = true,
+  setEmployees: Function
 ) => {
   return useQuery(
     ['employees-attendance', departmentId],
     async () => {
-      // const a = dayjs('2024-02-12T20:13:00').format('HH')
-
       const employees = await makeCoreGetRequest(
-        `/volumetry/workers/shifts?filterBy=genericDepartmentId&filterValue=${departmentId}`
+        `/volumetry/workers-schedule?filterBy=departmentAliasId&filterValue=${departmentId}`
       )
-      return toEmployeesAttendance(employees) || []
+      const employeesAttendance = toEmployeesAttendance(employees) || []
+      setEmployees(employeesAttendance)
     },
     {
       onError: error =>
         handleQueryError(error, 'A aparut o eroare la obtinerea angajatilor.', showNotification),
 
       enabled: validateQuery
+    }
+  )
+}
+
+export const getLocationDetails = (
+  locationId: number | string,
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['location-details', locationId],
+    async () => {
+      const response = await makeCoreGetRequest(`/volumetry/locations`)
+      const location = response.list.filter(location => location.id === locationId)
+
+      const locationDetails = {
+        id: 1,
+        name: location[0]?.locationName || '',
+        categoryId: location[0]?.id || '',
+        categoryName: location[0]?.locationCategory || '',
+        regionId: 0,
+        regionName: '0'
+      }
+
+      return locationDetails
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea detaliilor locatiei.',
+          showNotification
+        ),
+
+      enabled: validateQuery
+    }
+  )
+}
+
+export const getRegionsOptions = (
+  showNotification: Function,
+  locationFilterId?: number | string
+) => {
+  return useQuery(
+    ['regions', locationFilterId],
+    async () => {
+      let url = '/volumetry/regions'
+      if (locationFilterId) {
+        url = `${url}?filterBy=locationId&filterValue=${locationFilterId}`
+      }
+      // const result = await makeCoreGetRequest(url)
+      const result = [
+        { id: 1, name: 'Bucuresti' },
+        { id: 2, name: 'Cluj' }
+      ]
+      const resultOptions = toRegionsOptions(result)
+      return resultOptions || []
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la preluarea datelor de optiuni pentru regiuni.',
+          showNotification
+        )
     }
   )
 }

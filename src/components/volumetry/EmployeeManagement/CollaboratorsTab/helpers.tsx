@@ -3,7 +3,7 @@ import { Autocomplete, Input } from "@fullscreendigital/carrefour-dex-fe"
 export const columns = [
   {
     title: 'Departament',
-    field: 'department',
+    field: 'genericDepartment',
     align: 'left',
     type: 'string'
   },
@@ -25,8 +25,7 @@ export const columns = [
     field: 'employer',
     align: 'left',
     collapsible: true,
-    type: 'string',
-    disableSorting: true
+    type: 'string'
   }
 ]
 

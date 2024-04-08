@@ -4,13 +4,19 @@ import { IconCell } from '../../../core-ui/IconCell'
 import React from 'react'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
 import { ImageCell } from '../../../core-ui/ImageCell'
+import { ThermalCondition } from '../../interfaces'
+import dayjs from 'dayjs'
+import { BatchStatus } from '../interfaces'
 
 export const columns: any[] = [
   {
     title: 'Data intrare in raion',
     field: 'batch.entryDate',
     render: row => (
-      <BodyItem name="Data intrare in raion" value={formatPayloadDate(row?.batch?.entryDate)} />
+      <BodyItem
+        name="Data intrare in raion"
+        value={formatBakeryPayloadDate(row?.batch?.entryDate)}
+      />
     )
   },
   {
@@ -22,6 +28,10 @@ export const columns: any[] = [
     title: 'Produs',
     field: 'batch.product.name',
     render: row => <BodyItem name="Produs" value={row?.batch?.product?.name} />
+  },
+  {
+    title: 'Lot',
+    render: row => <BodyItem name="Lot" value={row?.batch?.batchName} />
   },
   {
     title: 'Familie produs',
@@ -46,11 +56,6 @@ export const columns: any[] = [
     render: row => <BodyItem name="Furnizor" value={row?.batch?.supplier?.supplierName} />
   },
   {
-    title: 'Lot',
-    field: 'batch.batchQuantity',
-    render: row => <BodyItem name="Lot" value={row?.batch?.batchQuantity} />
-  },
-  {
     field: 'batch.hasExpireDate',
     render: row => (
       <BodyItem
@@ -69,7 +74,7 @@ export const columns: any[] = [
   {
     field: 'batch.expireDate',
     render: row => (
-      <BodyItem name="Data expirare" value={formatPayloadDate(row?.batch?.expireDate)} />
+      <BodyItem name="Data expirare" value={formatBakeryPayloadDate(row?.batch?.expireDate)} />
     )
   },
   {
@@ -90,20 +95,13 @@ export const columns: any[] = [
   },
   {
     title: 'Cantitate intrata',
-    field: 'batch.consumedAmount',
-    render: row => <BodyItem name="Cantitate intrata" value={row?.batch?.consumedAmount} />
+    field: 'batch.batchQuantity',
+    render: row => <BodyItem name="Cantitate intrata" value={row?.batch?.batchQuantity} />
   },
   {
     title: 'UM (Meti)',
     field: 'product.metricUnit',
     render: row => <BodyItem name="UM (Meti)" value={row?.batch?.product?.metricUnit} />
-  },
-  {
-    title: 'Poza eticheta',
-    field: 'imageUrl',
-    render: row => (
-      <BodyItem name="Poza eticheta" value={<ImageCell value={''} imageUrl={row?.imageUrl} />} />
-    )
   },
   {
     title: 'User creare linie receptie',
@@ -114,7 +112,7 @@ export const columns: any[] = [
     render: row => (
       <BodyItem
         name="Data creare linie receptie"
-        value={formatPayloadDate(row?.batch?.createdDate)}
+        value={formatBakeryPayloadDate(row?.batch?.createdDate)}
       />
     )
   },
@@ -140,7 +138,7 @@ export const columns: any[] = [
   {
     title: 'Status lot',
     field: 'batchStatus',
-    render: row => <BodyItem name="Status lot" value={row?.batch?.batchStatus} />
+    render: row => <BodyItem name="Status lot" value={BatchStatus[row?.batch?.batchStatus] || ''} />
   },
   // TODO check this field
   // {
@@ -192,102 +190,48 @@ export const columns: any[] = [
     render: row => (
       <BodyItem
         name="Data ultimei modificari"
-        value={formatPayloadDate(row?.batch?.modifiedDate)}
+        value={formatBakeryPayloadDate(row?.batch?.modifiedDate)}
       />
     )
   },
-
-
-
-
-
-
-  // ---------------------------------------
-  // {
-  //   title: 'Data intrare lot',
-  //   field: 'entryDate'
-  // },
-  // {
-  //   title: 'Operator productie',
-  //   field: 'productionOperator'
-  // },
-  // {
-  //   title: 'Operator trasabilitate',
-  //   field: '-'
-  // },
-  // {
-  //   title: 'Ultima modificare',
-  //   field: '-'
-  // },
-  // {
-  //   title: 'Furnizor',
-  //   field: 'supplierName',
-  //   render: row => <BodyItem name="Furnizor" value={row.batch.supplier.supplierName} />
-  // },
-  // {
-  //   title: 'Stare termica',
-  //   field: 'thermalCondition'
-  // },
-  // {
-  //   title: 'Data introducere',
-  //   field: 'openingDate',
-  //   render: row => (
-  //     <BodyItem name="Data introducere" value={formatBakeryPayloadDate(row.openingDate)} />
-  //   )
-  // },
-  // {
-  //   title: 'Data ultimei modificari',
-  //   field: 'modifiedDate',
-  //   render: row => (
-  //     <BodyItem
-  //       name="Data ultimei modificari"
-  //       value={formatBakeryPayloadDate(row.batch.modifiedDate)}
-  //     />
-  //   )
-  // },
-  // {
-  //   title: 'DLC sec. lot',
-  //   field: '-'
-  // },
-  // {
-  //   title: 'Conform',
-  //   field: 'conform'
-  // },
-  // {
-  //   title: 'Verificare de catre validator trasabilitate',
-  //   field: 'verified'
-  // },
-  // {
-  //   title: 'DLC MP',
-  //   field: 'dlc',
-  //   render: row => <BodyItem name="DLC MP" value={formatBakeryPayloadDate(row.dlc)} />
-  // },
-  // {
-  //   title: 'Motiv neconformitate',
-  //   field: 'closeReason'
-  // },
-  // {
-  //   title: 'Validator trasabilitate',
-  //   field: 'verifiedBy'
-  // },
-  // {
-  //   title: 'Destinatia prod. neconform',
-  //   field: 'productDestination'
-  // },
-  // {
-  //   title: 'Data verificare trasabilitate',
-  //   field: 'verifiedDate'
-  // }
+  {
+    title: 'Data deschiderii',
+    field: 'batch.openingDate',
+    render: row => (
+      <BodyItem
+        name="Data deschiderii"
+        value={row.batch?.hasSecondaryDlc ? formatBakeryPayloadDate(row?.openingDate) : ''}
+      />
+    )
+  },
+  {
+    title: 'DLC secundar',
+    render: row => (
+      <BodyItem
+        name="DLC secundar"
+        value={
+          row.batch?.hasSecondaryDlc
+            ? formatBakeryPayloadDate(dayjs(row.openingDate).add(row.batch?.dlcDays, 'days'))
+            : ''
+        }
+      />
+    )
+  },
+  {
+    title: 'Cant.fab.lot',
+    render: row => <BodyItem name="Cant.fab.lot" value={row?.quantity} />
+  }
 ]
 
 export const mainItemBodyColumns = [
   {
     title: 'Operator productie',
-    field: 'createdBy'
+    field: 'productionOperator'
   },
   {
     title: 'Stare termica',
-    field: 'thermalCondition'
+    field: 'thermalCondition',
+    render: row => <BodyItem name="Stare termica" value={ThermalCondition[row.thermalCondition]} />
   },
   {
     title: 'Conform',
@@ -317,7 +261,10 @@ export const mainItemBodyColumns = [
   },
   {
     title: 'Verificare de catre validator trasabilitate',
-    field: 'verified'
+    field: 'isVerified',
+    render: row => (
+      <BodyItem name="Verificare de catre validator trasabilitate" value={<IconCell value={row.isVerified ? 'active' : 'inactive'} />} />
+    )
   },
   {
     title: 'Validator trasabilitate',
@@ -342,12 +289,29 @@ export const mainItemBodyColumns = [
     title: 'Sarja',
     field: 'chargeNumber'
   },
+  { title: 'Cantitate sarja', field: 'quantity' },
   {
-    title: 'Data productiei',
-    field: 'productionDate'
+    title: 'Cod PLU',
+    render: row => <BodyItem name="Cod PLU" value={row.product?.pluCode || ''} />
   },
   {
-    title: 'DLC Prod. Fab.',
-    field: 'dlc'
+    title: 'Data productiei',
+    field: 'productionDate',
+    render: row => (
+      <BodyItem name="Data productiei" value={formatBakeryPayloadDate(row.productionDate)} />
+    )
+  },
+  {
+    title: 'DLC',
+    render: row => (
+      <BodyItem
+        name="DLC"
+        value={
+          row?.product?.dlcDays
+            ? formatBakeryPayloadDate(dayjs(row.productionDate).add(row?.product?.dlcDays, 'days'))
+            : ''
+        }
+      />
+    )
   }
 ]

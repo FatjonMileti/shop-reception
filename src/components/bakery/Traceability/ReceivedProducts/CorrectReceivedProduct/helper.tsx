@@ -9,11 +9,11 @@ export const getInitialValues = (receivedProduct?: ReceivedProduct): ReceivedPro
     selectedSupplier: receivedProduct?.supplier,
 
     entryDate: receivedProduct?.entryDate ? dayjs(receivedProduct?.entryDate) : dayjs(),
-    hasExpirationDate: receivedProduct?.hasExpireDate || true,
+    hasExpirationDate: receivedProduct?.hasExpireDate ?? false,
     expirationDate: receivedProduct?.expireDate ? dayjs(receivedProduct?.expireDate) : null,
     hasSecondaryDLC: receivedProduct?.hasSecondaryDlc,
-    secondaryDLC: receivedProduct?.dlcDays?.toString() || '',
-    amount: receivedProduct?.batchQuantity?.toString() || '',
+    secondaryDLC: receivedProduct?.dlcDays,
+    amount: receivedProduct?.batchQuantity ?? undefined,
     lot: receivedProduct?.batchName || '',
     picture: undefined
   }
@@ -24,52 +24,35 @@ export const correctReceivedProductSchema: Yup.ObjectSchema<ReceivedProductToCor
     selectedProduct: Yup.mixed<Product>().required('Selected product is required'),
     selectedSupplier: Yup.mixed<Supplier>().required('Selected supplier is required'),
 
-    entryDate: Yup.mixed<dayjs.Dayjs>().required('Entry date is required'),
+    entryDate: Yup.mixed<dayjs.Dayjs>()
+      .required('Entry date is required')
+      .test('future', 'Data intrare nu poate fi in viitor', value => {
+        return value?.isBefore(dayjs())
+      }),
 
     hasExpirationDate: Yup.boolean().required('This field is required'),
 
-    expirationDate: Yup.mixed().when(
-      'hasExpirationDate',
-      (hasExpirationDate, schema) => {
-        return hasExpirationDate
-          ? Yup.date()
-              .min(new Date(), 'Data de expirare nu poate fi în trecut.')
-              .required('Câmpul data expirare trebuie completat.')
-          : schema.nullable();
-      }
-    ),
-
-    // expirationDate: Yup.mixed<dayjs.Dayjs>().when(
-    //   'hasExpirationDate',
-    //   ([hasExpirationDate], schema) => {
-    //     return hasExpirationDate
-    //       ? Yup.date()
-    //           .min(new Date(), 'Data de expirare nu poate fi in trecut.')
-    //           .required('Campul data expirare trebuie completat.')
-    //       : schema.nullable()
-    //   }
-    // ),
-
-    // expirationDate: Yup.mixed().when('hasExpirationDate', (hasExpirationDate, schema) => {
-    //   return hasExpirationDate
-    //     ? schema
-    //         .nullable()
-    //         .required('Expiration date is required')
-    //         .min(dayjs(), 'Expiration date must be today or later')
-    //     : schema.nullable();
-    // }),
+    expirationDate: Yup.mixed().when('hasExpirationDate', ([hasExpirationDate], schema) => {
+      return hasExpirationDate
+        ? Yup.date()
+            .min(dayjs().startOf('day'), 'Data de expirare nu poate fi în trecut.')
+            .required('Câmpul data expirare trebuie completat.')
+        : schema.nullable()
+    }),
 
     hasSecondaryDLC: Yup.boolean().required('This field is required'),
 
-    secondaryDLC: Yup.string()
+    secondaryDLC: Yup.number()
       .when('hasSecondaryDLC', ([hasSecondaryDLC], schema) =>
-        hasSecondaryDLC ? schema.required('Secondary DLC is required') : schema.nullable()
+        hasSecondaryDLC ?
+          schema.required('Campul Numar zile DLC trebuie completat').positive('Inserati valoare pozitiva')
+          : schema.nullable()
       )
       .nullable(),
 
-    amount: Yup.string().required('amount is required'),
+    amount: Yup.number().required('Campul cantitate intrata trebuie completat').positive('Inserati valoare pozitiva'),
 
-    lot: Yup.string().required('lot is required').max(30),
+    lot: Yup.string().required('Campul lot trebuie completat').max(30),
 
     picture: Yup.mixed<File>()
     //   .test('required', 'The picture must be a file', (value: File) => {
