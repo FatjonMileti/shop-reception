@@ -3,7 +3,7 @@ import { Modal } from 'components/core-ui/Modal'
 import { useMutation } from 'react-query'
 import { CircularProgress, Grid } from '@mui/material'
 import { useNotification } from 'hooks'
-import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
+import { formatPayloadDate } from 'utils/helpers'
 import { makeCorePostRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails'
@@ -13,6 +13,7 @@ import { getInitialValues, validationSchema, toBatchFormat } from './helpers'
 import { SelectOrScanProduct } from '../../ReceivedProducts/AddReceivedProduct/SelectOrScanProduct'
 import { Product } from '../../ReceivedProducts/interfaces'
 import dayjs from 'dayjs'
+import { calculateComponentDlc } from '../CorrectFrozenTraceabilityModal/helpers'
 
 interface AddFrozenTraceabilityModalProps {
   isModalOpen: boolean
@@ -89,7 +90,10 @@ export const AddFrozenTraceabilityModal = ({
         dlc: selectedProduct?.dlcDays
           ? formatPayloadDate(dayjs(values.productionDate).add(selectedProduct?.dlcDays, 'days'))
           : null,
-        traceabilityFrozenList: values.traceabilityFrozenList.map(addDlcToComponent)
+        traceabilityFrozenList: values.traceabilityFrozenList.map(item => ({
+          ...item,
+          dlc: calculateComponentDlc(item)
+        }))
       }
 
       if (values.traceabilityFrozenList.length === 0) {

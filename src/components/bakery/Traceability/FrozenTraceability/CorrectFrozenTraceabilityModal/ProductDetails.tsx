@@ -35,6 +35,9 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
   const onDeleteBatch = id => {
     const newBatches = formik.values.traceabilityFrozenList.filter(batch => batch.batchId !== id)
     formik.setFieldValue('traceabilityFrozenList', newBatches)
+    setTimeout(() => {
+      formik.validateForm()
+    }, 0)
   }
 
   return (
@@ -129,7 +132,6 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
           />
         </Grid>
 
-
         <Grid item xs={6} md={3}>
           <Input
             type="text"
@@ -149,7 +151,8 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
             disableClearable
             options={thermalContiotionOptions}
             value={
-              thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) || null
+              thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) ||
+              null
             }
             onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
             required
@@ -217,80 +220,96 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
         </Grid>
 
         {formik.values.traceabilityFrozenList.map((item, index) => (
-          <Grid item container xs={12} spacing={2} key={index}>
-            <Grid item xs={3}>
-              <Input
-                type="text"
-                variant="outlined"
-                label={`Lot ${index + 1}`}
-                onChange={(e: any) => {
-                  const updatedList = [...formik.values.traceabilityFrozenList]
-                  updatedList[index].batchId = e.target.value
-                  formik.setFieldValue('traceabilityFrozenList', updatedList)
-                }}
-                value={item?.batchName}
-                name="batchName"
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <Input
-                type="number"
-                variant="outlined"
-                label={`Cantitatea lot ${index + 1}`}
-                onChange={(e: any) => {
-                  const updatedList = [...formik.values.traceabilityFrozenList]
-                  updatedList[index].quantity = e.target.value
-                  formik.setFieldValue('traceabilityFrozenList', updatedList)
-                }}
-                value={item.quantity}
-                name="quantity"
-                infoIcon={formik.values?.product?.metricUnit || ''}
-                helperText={formik.errors?.traceabilityFrozenList?.[index]?.quantity as string}
-                error={!!formik.errors?.traceabilityFrozenList?.[index]?.quantity}
-              />
-            </Grid>
-
-            {item.hasSecondaryDlc && (
+          <Grid item container xs={12} spacing={0.5} key={index}>
+            <Grid item container xs={12} spacing={2}>
               <Grid item xs={3}>
-                <DatePicker
-                  label="Data deschidere"
-                  onChange={value =>
-                    formik.setFieldValue(
-                      `traceabilityFrozenList[${index}].openingDate`,
-                      formatPayloadDate(value)
-                    )
-                  }
+                <Input
+                  type="text"
                   variant="outlined"
-                  required
-                  helperText={formik.errors?.traceabilityFrozenList?.[index]?.openingDate as string}
-                  error={!!formik.errors?.traceabilityFrozenList?.[index]?.openingDate}
-                  value={
-                    formik.values?.traceabilityFrozenList?.[index]?.openingDate
-                      ? dayjs(formik.values?.traceabilityFrozenList?.[index]?.openingDate)
-                      : undefined
-                  }
-                  maxDate={dayjs(formik.values.productionDate)}
-                  style={{ display: 'flex' }}
+                  label={`Lot ${index + 1}`}
+                  onChange={(e: any) => {
+                    const updatedList = [...formik.values.traceabilityFrozenList]
+                    updatedList[index].batchId = e.target.value
+                    formik.setFieldValue('traceabilityFrozenList', updatedList)
+                  }}
+                  value={item?.batchName}
+                  name="batchName"
+                  disabled
                 />
               </Grid>
-            )}
-            <Grid
-              item
-              xs={3}
-              display={'flex'}
-              alignSelf={'flex-start'}
-              justifyContent={'flex-end'}
-              sx={{ marginTop: '17px' }}
-            >
-              <Button
-                onClick={() => onDeleteBatch(item.batchId)}
-                variant="outlined"
-                size="large"
-                style={{ width: '40px', height: '40px' }}
-                label=""
+              <Grid item xs={3}>
+                <Input
+                  type="number"
+                  variant="outlined"
+                  label={`Cantitatea lot ${index + 1}`}
+                  onChange={(e: any) => {
+                    const updatedList = [...formik.values.traceabilityFrozenList]
+                    updatedList[index].quantity = e.target.value
+                    formik.setFieldValue('traceabilityFrozenList', updatedList)
+                  }}
+                  value={item.quantity}
+                  name="quantity"
+                  infoIcon={formik.values?.product?.metricUnit || ''}
+                  helperText={formik.errors?.traceabilityFrozenList?.[index]?.quantity as string}
+                  error={!!formik.errors?.traceabilityFrozenList?.[index]?.quantity}
+                />
+              </Grid>
+
+              {item.hasSecondaryDlc && (
+                <Grid item xs={3}>
+                  <DatePicker
+                    label="Data deschidere"
+                    onChange={value =>
+                      formik.setFieldValue(
+                        `traceabilityFrozenList[${index}].openingDate`,
+                        formatPayloadDate(value)
+                      )
+                    }
+                    variant="outlined"
+                    required
+                    helperText={
+                      formik.errors?.traceabilityFrozenList?.[index]?.openingDate as string
+                    }
+                    error={!!formik.errors?.traceabilityFrozenList?.[index]?.openingDate}
+                    value={
+                      formik.values?.traceabilityFrozenList?.[index]?.openingDate
+                        ? dayjs(formik.values?.traceabilityFrozenList?.[index]?.openingDate)
+                        : undefined
+                    }
+                    maxDate={dayjs(formik.values.productionDate)}
+                    style={{ display: 'flex' }}
+                  />
+                </Grid>
+              )}
+
+              <Grid
+                item
+                xs={3}
+                display={'flex'}
+                alignSelf={'flex-start'}
+                justifyContent={'flex-end'}
+                sx={{ marginTop: '17px' }}
               >
-                <DeleteActionIcon />{' '}
-              </Button>
+                <Button
+                  onClick={() => onDeleteBatch(item.batchId)}
+                  variant="outlined"
+                  size="large"
+                  style={{ width: '40px', height: '40px' }}
+                  label=""
+                >
+                  <DeleteActionIcon />{' '}
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid item xs={12}>
+              <p style={{
+                color: '#AA0D11',
+                fontFamily: 'Ubuntu',
+                fontWeight: '400',
+                fontSize: '0.75rem',
+                lineHeight: '1.66',
+                margin: '4px 0 0 14px'
+              }}>{formik.errors?.traceabilityFrozenList?.[index]?.expired}</p>
             </Grid>
           </Grid>
         ))}
