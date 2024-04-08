@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { useNotification } from 'hooks'
-import { setEmployeesAttendance } from '../../api'
+import { getEmployeesAttendance } from '../../api'
 import { useMutation } from 'react-query'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { handleQueryError } from 'utils/helpers'
@@ -35,7 +35,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
     }
   })
 
-  const { data: employeesShifts, isLoading: isEmployeesLoading } = setEmployeesAttendance(
+  const { data: employeesShifts, isLoading: isEmployeesLoading } = getEmployeesAttendance(
     departmentId,
     showNotification,
     isModalOpen,

@@ -349,13 +349,13 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   )
 }
 
-export const setEmployeesAttendance = (
+export const getEmployeesAttendance = (
   departmentId: number | string,
   showNotification: Function,
   validateQuery: boolean = true,
   setEmployees: Function
-) => {
-  return useQuery(
+) =>
+  useQuery(
     ['employees-attendance', departmentId],
     async () => {
       const employees = await makeCoreGetRequest(
@@ -371,7 +371,8 @@ export const setEmployeesAttendance = (
       enabled: validateQuery
     }
   )
-}
+
+export const setEmployeeAttendance = () => {}
 
 export const getLocationDetails = (
   locationId: number | string,
