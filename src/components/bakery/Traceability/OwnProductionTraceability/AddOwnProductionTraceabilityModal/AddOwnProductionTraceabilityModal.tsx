@@ -20,6 +20,7 @@ import { SelectOrScanProduct } from './SelectOrScanProduct'
 import { Product } from '../../ReceivedProducts/interfaces'
 import { SelectCharge } from './SelectCharge'
 import dayjs from 'dayjs'
+import { calculateComponentDlc } from '../CorrectOwnProductionTraceabilityModal/helpers'
 
 interface AddOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -98,30 +99,6 @@ export const AddOwnProductionTraceabilityModal = ({
     validationSchema,
     initialValues,
     onSubmit: async (values: any) => {
-      const addDlcToComponent = item => {
-        if (!item.hasSecondaryDlc) return item
-
-        // charge
-        if (!item.batchId) {
-          return {
-            ...item,
-            dlc: formatPayloadDate(dayjs(item.productionDate).add(item.dlcDays, 'days'))
-          }
-        }
-
-        // batch
-        const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
-        return {
-          ...item,
-          dlc: formatPayloadDate(
-            item?.expireDate
-              ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
-                ? dayjs(item?.expireDate)
-                : calculatedDlc
-              : calculatedDlc
-          )
-        }
-      }
 
       const removeProductionDate = ({ productionDate, ...item }) => item
 
@@ -141,7 +118,10 @@ export const AddOwnProductionTraceabilityModal = ({
         nonComplianceReason: values.nonComplianceReason,
         productDestination: values.productDestination,
         traceabilityProductionList: values.traceabilityProductionList
-          .map(addDlcToComponent)
+          .map(item => ({
+            ...item,
+            dlc: calculateComponentDlc(item)
+          }))
           .map(removeProductionDate)
       }
 

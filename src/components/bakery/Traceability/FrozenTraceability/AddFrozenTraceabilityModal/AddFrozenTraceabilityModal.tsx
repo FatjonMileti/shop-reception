@@ -13,6 +13,7 @@ import { getInitialValues, validationSchema, toBatchFormat } from './helpers'
 import { SelectOrScanProduct } from '../../ReceivedProducts/AddReceivedProduct/SelectOrScanProduct'
 import { Product } from '../../ReceivedProducts/interfaces'
 import dayjs from 'dayjs'
+import { calculateComponentDlc } from '../CorrectFrozenTraceabilityModal/helpers'
 
 interface AddFrozenTraceabilityModalProps {
   isModalOpen: boolean
@@ -86,8 +87,13 @@ export const AddFrozenTraceabilityModal = ({
         conform: values.conform,
         nonComplianceReason: values?.nonComplianceReason || null,
         productDestination: values?.productDestination || null,
-        dlc: values.dlc || null,
-        traceabilityFrozenList: values.traceabilityFrozenList.map(addDlcToComponent)
+        dlc: selectedProduct?.dlcDays
+          ? formatPayloadDate(dayjs(values.productionDate).add(selectedProduct?.dlcDays, 'days'))
+          : null,
+        traceabilityFrozenList: values.traceabilityFrozenList.map(item => ({
+          ...item,
+          dlc: calculateComponentDlc(item)
+        }))
       }
 
       if (values.traceabilityFrozenList.length === 0) {

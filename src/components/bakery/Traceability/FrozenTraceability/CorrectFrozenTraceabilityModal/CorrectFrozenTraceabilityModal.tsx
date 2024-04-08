@@ -9,7 +9,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails'
 import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
-import { getInitialValues, toBatchFormat, validationSchema } from './helpers'
+import { calculateComponentDlc, getInitialValues, toBatchFormat, validationSchema } from './helpers'
 import dayjs from 'dayjs'
 
 interface CorrectFrozenTraceabilityModalProps {
@@ -55,23 +55,6 @@ export const CorrectFrozenTraceabilityModal = ({
     [itemToCorrectQuery?.data]
   )
 
-  const addDlcToComponent = item => {
-    if (!item.hasSecondaryDlc) return item
-
-    const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
-
-    return {
-      ...item,
-      dlc: formatPayloadDate(
-        item?.expireDate
-          ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
-            ? dayjs(item?.expireDate)
-            : calculatedDlc
-          : calculatedDlc
-      )
-    }
-  }
-
   const formik = useFormik({
     validateOnChange: false,
     enableReinitialize: true,
@@ -90,8 +73,13 @@ export const CorrectFrozenTraceabilityModal = ({
         conform: values.conform,
         nonComplianceReason: values?.nonComplianceReason || null,
         productDestination: values?.productDestination || null,
-        dlc: values.dlc,
-        traceabilityFrozenList: values.traceabilityFrozenList.map(addDlcToComponent)
+        dlc: values.product?.dlcDays
+          ? formatPayloadDate(dayjs(values.productionDate).add(values.product?.dlcDays, 'days'))
+          : null,
+        traceabilityFrozenList: values.traceabilityFrozenList.map(item => ({
+          ...item,
+          dlc: calculateComponentDlc(item)
+        }))
       }
 
       if (values.traceabilityFrozenList.length === 0) {
@@ -106,6 +94,9 @@ export const CorrectFrozenTraceabilityModal = ({
       itemToCorrectMutation.mutate(payload)
     }
   })
+
+  console.log("formik.errors: ", formik.errors)
+  console.log("formik.values: ", formik.values)
 
   const cancel = () => {
     setStep(0)

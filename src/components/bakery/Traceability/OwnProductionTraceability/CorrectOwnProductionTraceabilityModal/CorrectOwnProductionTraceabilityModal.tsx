@@ -16,7 +16,7 @@ import {
   toBatchFormat,
   toChargeFormat
 } from '../AddOwnProductionTraceabilityModal/helpers'
-import dayjs from 'dayjs'
+import { calculateComponentDlc } from './helpers'
 
 interface CorrectOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -67,31 +67,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
     validationSchema,
     initialValues,
     onSubmit: async (values: any) => {
-      const addDlcToComponent = item => {
-        if (!item.hasSecondaryDlc) return item
-
-        // charge
-        if (!item.batchId) {
-          return {
-            ...item,
-            dlc: formatPayloadDate(dayjs(item.productionDate).add(item.dlcDays, 'days'))
-          }
-        }
-
-        // batch
-        const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
-        return {
-          ...item,
-          dlc: formatPayloadDate(
-            item?.expireDate
-              ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
-                ? dayjs(item?.expireDate)
-                : calculatedDlc
-              : calculatedDlc
-          )
-        }
-      }
-
       const removeProductionDate = ({ productionDate, ...item }) => item
 
       const payload = {
@@ -108,7 +83,10 @@ export const CorrectOwnProductionTraceabilityModal = ({
         metiCode: values?.product?.metiCode,
         productName: values.product?.name,
         traceabilityProductionList: values?.traceabilityProductionList
-          .map(addDlcToComponent)
+          .map(item => ({
+            ...item,
+            dlc: calculateComponentDlc(item)
+          }))
           .map(removeProductionDate)
       }
 
@@ -151,6 +129,10 @@ export const CorrectOwnProductionTraceabilityModal = ({
       correctItemMutation.mutate(payload)
     }
   })
+
+  console.log("formik.errors: ", formik.errors)
+  console.log("formik.values: ", formik.values)
+
 
   const cancel = () => {
     closeModal()
