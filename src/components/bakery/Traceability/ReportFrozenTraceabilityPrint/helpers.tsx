@@ -1,7 +1,7 @@
 import { formatBakeryPayloadDate } from '../../../../utils/helpers'
 import { ThermalCondition } from '../interfaces'
 
-export const productPrintColumns = (isFormator=false) => [
+export const productPrintColumns = (isFormator = false) => [
   {
     field: 'productionDate',
     title: 'Data productiei',
@@ -10,13 +10,13 @@ export const productPrintColumns = (isFormator=false) => [
   },
   ...(isFormator
     ? [
-      {
-        title: 'Nume magazin',
-        field: 'store.name',
-        render: row => row.store.name,
-        defaultPrintSelected: true
-      }
-    ]
+        {
+          title: 'Nume magazin',
+          field: 'store.name',
+          render: row => row.store.name,
+          defaultPrintSelected: true
+        }
+      ]
     : []),
   {
     title: 'Cod METI',
@@ -54,7 +54,7 @@ export const productPrintColumns = (isFormator=false) => [
     title: 'Cant. Sarja',
     field: 'quantity',
     defaultPrintSelected: true,
-     render: row => row?.quantity?.toFixed(3),
+    render: row => row?.quantity?.toFixed(3)
   },
   {
     title: 'DLC prod. finit',
@@ -75,7 +75,8 @@ export const productPrintColumns = (isFormator=false) => [
   },
   {
     title: 'Conform',
-    field: 'conform'
+    field: 'conform',
+    render: row => (row?.conform === true && 'Da') || (row?.conform === false && 'Nu') || ''
   },
   {
     title: 'Motiv neconformitate',
