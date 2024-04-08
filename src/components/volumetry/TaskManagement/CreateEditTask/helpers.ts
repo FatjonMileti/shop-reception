@@ -50,7 +50,7 @@ export const getValidationSchema = item =>
       .required('Acest camp este obligatoriu.')
       .when(
         'recommendedStartHour',
-        (recommendedStartHour, yup) =>
+        ([recommendedStartHour], yup) =>
           recommendedStartHour &&
           yup.min(
             recommendedStartHour,
