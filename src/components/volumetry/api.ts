@@ -372,8 +372,6 @@ export const getEmployeesAttendance = (
     }
   )
 
-export const setEmployeeAttendance = () => {}
-
 export const getLocationDetails = (
   locationId: number | string,
   showNotification: Function,
