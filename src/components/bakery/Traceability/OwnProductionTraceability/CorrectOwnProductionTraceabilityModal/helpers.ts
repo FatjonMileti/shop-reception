@@ -31,6 +31,27 @@ export const getInitialValues = editItem => {
   }
 }
 
+export const calculateComponentDlc = item => {
+  if (!item.hasSecondaryDlc) return undefined
+
+  // charge
+  if (!item.batchId) {
+    return formatPayloadDate(dayjs(item.productionDate).add(item.dlcDays, 'days'))
+  }
+
+  const secondaryDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
+
+  if (!item?.expireDate) {
+    return formatPayloadDate(secondaryDlc)
+  }
+
+  if (secondaryDlc?.isAfter(dayjs(item?.expireDate))) {
+    return formatPayloadDate(dayjs(item?.expireDate))
+  }
+
+  return formatPayloadDate(secondaryDlc)
+}
+
 export const validationSchema = Yup.object().shape({
   productionDate: Yup.date()
     .max(dayjs().endOf('day'), 'Data de productie nu poate fi in viitor.')
@@ -38,56 +59,89 @@ export const validationSchema = Yup.object().shape({
 
   chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
   productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
-  quantity: Yup.number().required('Campul cantitate trebuie completat').positive('Inserati valoare pozitiva'),
+  quantity: Yup.number()
+    .required('Campul cantitate trebuie completat')
+    .positive('Inserati valoare pozitiva'),
   thermalCondition: Yup.string().nullable(), //.required('Campul stare termica trebuie selectat.'),
   conform: Yup.boolean(),
   nonComplianceReason: Yup.string().when('conform', ([conform], schema) =>
     conform
       ? schema.nullable()
-      : schema
-        .required('Camp obligatoriu')
-        .max(250, 'must be at most 250 characters')
+      : schema.required('Camp obligatoriu').max(250, 'must be at most 250 characters')
   ),
   productDestination: Yup.string().when('conform', ([conform], schema) =>
     conform
       ? schema.nullable()
-      : schema
-        .required('Camp obligatoriu')
-        .max(250, 'must be at most 250 characters')
+      : schema.required('Camp obligatoriu').max(250, 'must be at most 250 characters')
   ),
   product: Yup.object().required(),
 
   traceabilityProductionList: Yup.array().of(
-    Yup.object().shape({
-      batchId: Yup.string(),
-      childTraceabilityId: Yup.string(),
-      componentCode: Yup.number(),
-      componentQuantity: Yup.number(),
-      quantity: Yup.number().required('Cantitate obligatorie').positive('Inserati valoare pozitiva'),
-      openingDate: Yup.date().when(
-        ['hasSecondaryDlc', 'batchId', '$productionDate'],
-        ([hasSecondaryDlc, batchId, productionDate], schema) => {
-          if (hasSecondaryDlc && batchId) {
-            if (productionDate) {
-              return schema
-                .required('Data obligatorie')
-                .test(
-                  'notBeforeProductionDate',
-                  'Data deschiderii mai mica sau egala cu data productiei',
-                  openingDate => {
-                    return !dayjs(openingDate).isAfter(productionDate, 'date')
-                  }
-                )
+    Yup.object()
+      .shape({
+        batchId: Yup.string(),
+        childTraceabilityId: Yup.string(),
+        componentCode: Yup.number(),
+        componentQuantity: Yup.number(),
+        quantity: Yup.number()
+          .required('Cantitate obligatorie')
+          .positive('Inserati valoare pozitiva'),
+        openingDate: Yup.date().when(
+          ['hasSecondaryDlc', 'batchId', '$productionDate'],
+          ([hasSecondaryDlc, batchId, productionDate], schema) => {
+            if (hasSecondaryDlc && batchId) {
+              if (productionDate) {
+                return schema
+                  .required('Data obligatorie')
+                  .test(
+                    'notBeforeProductionDate',
+                    'Data deschiderii mai mica sau egala cu data productiei',
+                    openingDate => {
+                      return !dayjs(openingDate).isAfter(productionDate, 'date')
+                    }
+                  )
+              } else {
+                return schema.required('Data obligatorie')
+              }
             } else {
-              return schema.required('Data obligatorie')
+              return schema.nullable()
             }
-          } else {
-            return schema.nullable()
           }
+        ),
+        hasSecondaryDlc: Yup.boolean()
+      })
+      .test((component: any, context) => {
+        // not batch
+        if(!component.batchId) {
+          return true
         }
-      ),
-      hasSecondaryDlc: Yup.boolean()
-    })
+
+        const productionDate = context.options.context?.productionDate
+
+        if (!productionDate) {
+          return true
+        }
+
+        if (component?.hasSecondaryDlc && !component?.openingDate) {
+          return true
+        }
+
+        if (!component?.expireDate && !component?.hasSecondaryDlc) {
+          return true
+        }
+
+        const secondaryDlc = calculateComponentDlc(component)
+        const expireDateOrDlc = dayjs(secondaryDlc || component.expireDate)
+
+        if (!expireDateOrDlc?.isAfter(dayjs(productionDate))) {
+          return context.createError({
+            path: `${context.path}.expired`,
+            message: 'Lot expirat'
+          })
+        }
+
+        return true
+      })
   )
 })
 

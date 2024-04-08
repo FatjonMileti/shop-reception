@@ -1,6 +1,7 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
+import { calculateComponentDlc } from '../CorrectOwnProductionTraceabilityModal/helpers'
 
 export const getInitialValues = recipeQuery => {
   return {
@@ -80,6 +81,38 @@ export const validationSchema = Yup.object().shape({
 
       hasSecondaryDlc: Yup.boolean()
     })
+      .test((component: any, context) => {
+        // not batch
+        if(!component.batchId) {
+          return true
+        }
+
+        const productionDate = context.options.context?.productionDate
+
+        if (!productionDate) {
+          return true
+        }
+
+        if (component?.hasSecondaryDlc && !component?.openingDate) {
+          return true
+        }
+
+        if (!component?.expireDate && !component?.hasSecondaryDlc) {
+          return true
+        }
+
+        const secondaryDlc = calculateComponentDlc(component)
+        const expireDateOrDlc = dayjs(secondaryDlc || component.expireDate)
+
+        if (!expireDateOrDlc?.isAfter(dayjs(productionDate))) {
+          return context.createError({
+            path: `${context.path}.expired`,
+            message: 'Lot expirat'
+          })
+        }
+
+        return true
+      })
   )
 })
 

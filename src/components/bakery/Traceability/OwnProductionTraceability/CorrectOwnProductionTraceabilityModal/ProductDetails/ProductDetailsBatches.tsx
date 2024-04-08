@@ -74,82 +74,95 @@ export const ProductDetailsBatches = ({
           {formik.values.traceabilityProductionList.map((item, idx) => (
             <Fragment key={idx}>
               {item.componentCode === batch.componentCode && item.batchId ? (
-                <Grid item container xs={12} spacing={2}>
-                  <Grid item xs={3}>
-                    <Input
-                      type="text"
-                      variant="outlined"
-                      label={`Lot ${idx + 1}`}
-                      value={item.componentName}
-                      name="componentName"
-                      disabled
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Input
-                      type="number"
-                      variant="outlined"
-                      label={`Cantitatea lot 1`}
-                      onChange={(e: any) =>
-                        formik.setFieldValue(
-                          `traceabilityProductionList[${idx}].quantity`,
-                          e.target.value
-                        )
-                      }
-                      value={item.quantity}
-                      name="quantity"
-                      infoIcon={batch.componentUnit}
-                      helperText={
-                        formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
-                      }
-                      error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
-                    />
-                  </Grid>
-
-                  {item.hasSecondaryDlc && (
+                <Grid item container xs={12} spacing={0.5}>
+                  <Grid item container xs={12} spacing={2}>
                     <Grid item xs={3}>
-                      <DatePicker
-                        label="Data deschidere"
-                        onChange={value =>
-                          formik.setFieldValue(
-                            `traceabilityProductionList[${idx}].openingDate`,
-                            formatPayloadDate(value)
-                          )
-                        }
+                      <Input
+                        type="text"
                         variant="outlined"
-                        required
-                        helperText={
-                          formik.errors?.traceabilityProductionList?.[idx]?.openingDate as string
-                        }
-                        error={!!formik.errors?.traceabilityProductionList?.[idx]?.openingDate}
-                        value={
-                          formik.values?.traceabilityProductionList?.[idx]?.openingDate
-                            ? dayjs(formik.values?.traceabilityProductionList?.[idx]?.openingDate)
-                            : undefined
-                        }
-                        style={{ display: 'flex' }}
-                        maxDate={dayjs(formik.values.productionDate)}
+                        label={`Lot ${idx + 1}`}
+                        value={item.componentName}
+                        name="componentName"
+                        disabled
                       />
                     </Grid>
-                  )}
 
-                  <Grid
-                    item
-                    xs={2}
-                    display={'flex'}
-                    alignSelf={'flex-start'}
-                    justifyContent={'flex-end'}
-                    sx={{ marginTop: '17px' }}
-                  >
-                    <Button
-                      onClick={() => onDeleteBatch(item.batchId)}
-                      variant="outlined"
-                      size="large"
-                      style={{ width: '40px', height: '40px' }}
-                      label=""
+                    <Grid item xs={4}>
+                      <Input
+                        type="number"
+                        variant="outlined"
+                        label={`Cantitatea lot 1`}
+                        onChange={(e: any) =>
+                          formik.setFieldValue(
+                            `traceabilityProductionList[${idx}].quantity`,
+                            e.target.value
+                          )
+                        }
+                        value={item.quantity}
+                        name="quantity"
+                        infoIcon={batch.componentUnit}
+                        helperText={
+                          formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
+                        }
+                        error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
+                      />
+                    </Grid>
+
+                    {item.hasSecondaryDlc && (
+                      <Grid item xs={3}>
+                        <DatePicker
+                          label="Data deschidere"
+                          onChange={value =>
+                            formik.setFieldValue(
+                              `traceabilityProductionList[${idx}].openingDate`,
+                              formatPayloadDate(value)
+                            )
+                          }
+                          variant="outlined"
+                          required
+                          helperText={
+                            formik.errors?.traceabilityProductionList?.[idx]?.openingDate as string
+                          }
+                          error={!!formik.errors?.traceabilityProductionList?.[idx]?.openingDate}
+                          value={
+                            formik.values?.traceabilityProductionList?.[idx]?.openingDate
+                              ? dayjs(formik.values?.traceabilityProductionList?.[idx]?.openingDate)
+                              : undefined
+                          }
+                          style={{ display: 'flex' }}
+                          maxDate={dayjs(formik.values.productionDate)}
+                        />
+                      </Grid>
+                    )}
+
+                    <Grid
+                      item
+                      xs={2}
+                      display={'flex'}
+                      alignSelf={'flex-start'}
+                      justifyContent={'flex-end'}
+                      sx={{ marginTop: '17px' }}
                     >
-                      <DeleteActionIcon />{' '}
-                    </Button>
+                      <Button
+                        onClick={() => onDeleteBatch(item.batchId)}
+                        variant="outlined"
+                        size="large"
+                        style={{ width: '40px', height: '40px' }}
+                        label=""
+                      >
+                        <DeleteActionIcon />{' '}
+                      </Button>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <p style={{
+                      color: '#AA0D11',
+                      fontFamily: 'Ubuntu',
+                      fontWeight: '400',
+                      fontSize: '0.75rem',
+                      lineHeight: '1.66',
+                      margin: '4px 0 0 14px'
+                    }}>{formik.errors?.traceabilityProductionList?.[idx]?.expired}</p>
                   </Grid>
                 </Grid>
               ) : null}

@@ -1,6 +1,7 @@
 import * as Yup from 'yup'
 import { formatBakeryPayloadDate, formatPayloadDate, getCurrentDate } from 'utils/helpers'
 import dayjs from 'dayjs'
+import { calculateComponentDlc } from '../CorrectFrozenTraceabilityModal/helpers'
 
 export const getInitialValues = () => {
   return {
@@ -25,28 +26,28 @@ export const validationSchema = Yup.object().shape({
     .test('length', 'must be at most 30 digits', value => value?.toString()?.length <= 30)
     .required('Campul sarja trebuie completat.'),
   productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
-  quantity: Yup.number().required('Campul cantitate trebuie completat').positive('Inserati valoare pozitiva'),
+  quantity: Yup.number()
+    .required('Campul cantitate trebuie completat')
+    .positive('Inserati valoare pozitiva'),
   thermalCondition: Yup.string().required('Campul stare termica trebuie selectat.'),
   conform: Yup.boolean(),
   nonComplianceReason: Yup.string().when('conform', ([conform], schema) =>
     conform
       ? schema.nullable()
-      : schema
-        .required('Camp obligatoriu')
-        .max(250, 'must be at most 250 characters')
+      : schema.required('Camp obligatoriu').max(250, 'must be at most 250 characters')
   ),
   productDestination: Yup.string().when('conform', ([conform], schema) =>
     conform
       ? schema.nullable()
-      : schema
-        .required('Camp obligatoriu')
-        .max(250, 'must be at most 250 characters')
+      : schema.required('Camp obligatoriu').max(250, 'must be at most 250 characters')
   ),
   traceabilityFrozenList: Yup.array().of(
     Yup.object()
       .shape({
         batchId: Yup.string(),
-        quantity: Yup.number().required('Cantitate obligatorie').positive('Inserati valoare pozitiva'),
+        quantity: Yup.number()
+          .required('Cantitate obligatorie')
+          .positive('Inserati valoare pozitiva'),
         openingDate: Yup.date().when(
           ['hasSecondaryDlc', '$productionDate'],
           ([hasSecondaryDlc, productionDate], schema) => {
@@ -71,6 +72,37 @@ export const validationSchema = Yup.object().shape({
         ),
         // dlc: Yup.string().nullable(),
         hasSecondaryDlc: Yup.boolean()
+      })
+      .test((component: any, context) => {
+        const productionDate = context.options.context?.productionDate
+
+        console.log('productionDate: ', formatPayloadDate(productionDate))
+
+        if(!productionDate) {
+          return true
+        }
+
+        if(component?.hasSecondaryDlc && !component?.openingDate) {
+          return true
+        }
+
+        if(!component?.expireDate && !component?.hasSecondaryDlc) {
+          return true
+        }
+
+        const secondaryDlc = calculateComponentDlc(component)
+        const expireDateOrDlc = dayjs(secondaryDlc || component.expireDate)
+
+        console.log('expireDate: ', formatPayloadDate(expireDateOrDlc))
+
+        if (!expireDateOrDlc?.isAfter(dayjs(productionDate))) {
+          return context.createError({
+            path: `${context.path}.expired`,
+            message: 'Lot expirat'
+          })
+        }
+
+        return true
       })
       .required()
   )

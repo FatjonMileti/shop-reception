@@ -57,7 +57,7 @@ export const columns: any[] = [
     align: 'left',
     render: row =>
       (row.batch?.hasExpireDate && formatBakeryPayloadDate(row.batch?.expireDate)) ||
-      (row?.childTraceability && formatBakeryPayloadDate(row?.dlc)) ||
+      (row?.childTraceability && row?.dlc && formatBakeryPayloadDate(row?.dlc)) ||
       '',
     collapsible: 'true'
   },
