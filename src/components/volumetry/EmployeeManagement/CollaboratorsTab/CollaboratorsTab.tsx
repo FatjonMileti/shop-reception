@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid } from '@mui/material'
+import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './CollaboratorsTab.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -12,7 +12,6 @@ import {
   ValueLabelInterface
 } from 'components/volumetry/interfaces'
 import { columns, getTableFilterFields } from './helpers'
-import { DeleteCollaborator } from './DeleteCollaborator'
 import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
@@ -23,6 +22,7 @@ import {
 } from 'components/volumetry/api'
 import { handleQueryError } from 'utils/helpers'
 import { roles } from '../../helpers'
+import { DeleteConfirmationModal } from 'components/core-ui/DeleteConfirmationModal'
 
 const CollaboratorsTab = () => {
   // TODO: De actualizat cand primim update cu drepturile fiecarui rol
@@ -128,11 +128,15 @@ const CollaboratorsTab = () => {
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
         />
-        <DeleteCollaborator
+        <DeleteConfirmationModal
           isModalOpen={modal === 'delete'}
           closeModal={closeModal}
+          actionUrl={`/volumetry/workers/contractors/:id`}
           itemId={selectedRow?.id}
+          content={<Typography>Sunteti sigur ca vreti sa stergeti acest template?</Typography>}
           setShouldRefreshData={setShouldRefreshData}
+          title="Sterge colaborator"
+          deleteLabel="Sterge"
         />
         <CreateEditCollaborator
           isModalOpen={modal === 'edit'}
