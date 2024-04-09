@@ -49,9 +49,8 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: TaskManagementItem, { resetForm }) => {
+    onSubmit: async (values: TaskManagementItem) => {
       mutate(toTaskPayload(values))
-      resetForm()
     }
   })
 
@@ -82,6 +81,7 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
     onSuccess: res => {
       setShouldRefreshData(true)
       closeModal()
+      formik.resetForm()
       showNotification({
         message: 'Taskul a fost salvat cu succes',
         type: 'success'
