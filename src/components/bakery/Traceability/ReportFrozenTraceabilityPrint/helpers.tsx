@@ -92,7 +92,8 @@ export const productPrintColumns = (isFormator = false) => [
   },
   {
     title: 'Verificare de catre validator trasabilitate',
-    field: 'isVerified'
+    field: 'isVerified',
+    render: row => (row?.isVerified && 'DA') || 'NU'
   },
   {
     title: 'Validator trasabilitate',
