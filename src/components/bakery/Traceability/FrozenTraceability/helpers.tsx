@@ -95,14 +95,7 @@ export const columns: any[] = [
   {
     title: 'DLC secundar',
     render: row => (
-      <BodyItem
-        name="DLC secundar"
-        value={
-          row.batch?.hasSecondaryDlc
-            ? formatBakeryPayloadDate(dayjs(row.openingDate).add(row.batch?.dlcDays, 'days'))
-            : ''
-        }
-      />
+      <BodyItem name="DLC secundar" value={row?.dlc ? formatBakeryPayloadDate(row.dlc) : ''} />
     )
   },
   {
