@@ -209,8 +209,8 @@ export const columns: any[] = [
       <BodyItem
         name="DLC secundar"
         value={
-          row.batch?.hasSecondaryDlc
-            ? formatBakeryPayloadDate(dayjs(row.openingDate).add(row.batch?.dlcDays, 'days'))
+          row?.dlc
+            ? formatBakeryPayloadDate(row?.dlc)
             : ''
         }
       />
