@@ -7,10 +7,10 @@ import { useNotification } from 'hooks'
 import { ChangeEvent } from 'react'
 import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
-import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { handleQueryError } from 'utils/helpers'
 import { EditCurrentTaskTemplateProps } from '../TaskAllocationsDefinitions'
+import { getValidationSchema } from './helpers'
 
 const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
   const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
@@ -34,26 +34,6 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
       handleQueryError(error, 'A aparut o eroare la editarea volumului.', showNotification)
   })
 
-  const divisionValidation = value => {
-    if (!Number.isNaN(value) && parseFloat(value) % editItem.minDivision === 0) {
-      return true
-    }
-    return false
-  }
-
-  const validationSchema = yup.object({
-    id: yup.string().nonNullable(),
-    workload: yup
-      .number()
-      .required('Acest camp este obligatoriu.')
-      .test(
-        'is-custom-step',
-        `Valoarea trebuie să fie multiplu de ${editItem.minDivision}`,
-        divisionValidation
-      ),
-    allocatedWorkersNumber: yup.number()
-  })
-
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
@@ -61,7 +41,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
       workload: editItem.totalWorkload,
       allocatedWorkersNumber: editItem.allocatedWorkers
     },
-    validationSchema: validationSchema,
+    validationSchema: getValidationSchema(editItem.minDivision),
     onSubmit: async (values: any) => {
       mutate(values)
       formik.resetForm()

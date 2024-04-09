@@ -1,4 +1,3 @@
-
 .modalTitle {
   font-family: 'Ubuntu';
   font-style: normal;
@@ -10,7 +9,7 @@
   color: #121212;
 }
 
-.modalMessage {
+.modalMessage, .modalMessage p {
   font-family: 'Ubuntu';
   font-style: normal;
   font-weight: 400;
@@ -18,7 +17,7 @@
   line-height: 24px;
 
   /* text-color-secondary */
-  color: #666666;
+  color: #052351;
 }
 
 .modalButtons {

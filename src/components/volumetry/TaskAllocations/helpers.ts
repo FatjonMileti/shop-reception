@@ -1,3 +1,5 @@
+import * as yup from 'yup'
+
 export const getCapsuleColor = (isTaskStarted, isTaskEnded, isOverdue) => {
   if (isOverdue) {
     return { label: 'rgba(211, 13, 31, 0.15)', value: '#D30D1F', progress: 'error' }
@@ -41,3 +43,18 @@ export const PriorityColors = [
     label: '#e0e9dd'
   }
 ]
+
+export const getValidationSchema = minDivision =>
+  yup.object({
+    workerId: yup.number().required('Acest camp este obligatoriu.'),
+    taskTemplateId: yup.number().required('Acest camp este obligatoriu.'),
+    allocatedWorkload: yup
+      .number()
+      .required('Acest camp este obligatoriu.')
+      .test(
+        'isCustomStep',
+        `Valoarea trebuie să fie multiplu de ${minDivision}`,
+        allocatedWorkload =>
+          !Number.isNaN(allocatedWorkload) && parseFloat(`${allocatedWorkload}`) % minDivision === 0
+      )
+  })

@@ -89,6 +89,8 @@ const Employee: React.FC<EmployeeProps> = props => {
             setShouldRefreshData={setShouldRefreshData}
             setSelectedRowId={setSelectedRowId}
             hideWorkload
+            isStop
+            minDivision={task.minDivision}
           />
         </>
       ) : (
@@ -128,6 +130,8 @@ const Employee: React.FC<EmployeeProps> = props => {
             task={task}
             setShouldRefreshData={setShouldRefreshData}
             setSelectedRowId={setSelectedRowId}
+            isStop
+            minDivision={task.minDivision}
           />
         </>
       )}
