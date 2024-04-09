@@ -126,7 +126,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           </Grid>
         )}
 
-        {!editItem && (
+        {isStop && (
           <Grid xs={12} item>
             <Input
               type="number"
