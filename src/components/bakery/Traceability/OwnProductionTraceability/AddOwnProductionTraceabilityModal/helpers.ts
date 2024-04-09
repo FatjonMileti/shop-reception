@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 import { calculateComponentDlc } from '../CorrectOwnProductionTraceabilityModal/helpers'
 

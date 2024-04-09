@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate, formatPayloadDate, getCurrentDate } from 'utils/helpers'
+import { formatPayloadDate, getCurrentDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 import { calculateComponentDlc } from '../CorrectFrozenTraceabilityModal/helpers'
 
