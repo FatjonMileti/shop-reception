@@ -7,9 +7,8 @@ import { useNotification } from 'hooks'
 import { ChangeEvent, MouseEvent, useMemo } from 'react'
 import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
-import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { getFormInitialValues } from './helpers'
+import { getFormInitialValues, validationSchema } from './helpers'
 import { handleQueryError } from 'utils/helpers'
 import { EditAllocationModalProps } from '../TaskAllocationsDefinitions'
 import { TASK_STATUS_ACTIONS } from '../Employee/constants'
@@ -24,7 +23,8 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     setSelectedRowId,
     task,
     hideWorkload,
-    minDivision
+    minDivision,
+    isStop
   } = props
   const { showNotification } = useNotification()
 
@@ -35,33 +35,12 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     })
   }
 
-  const divisionValidation = value => {
-    if (!Number.isNaN(value) && parseFloat(value) % minDivision === 0) {
-      return true
-    }
-    return false
-  }
-
-  const validationSchema = hideWorkload =>
-    yup.object({
-      allocatedWorkload: hideWorkload
-        ? yup.string().nullable()
-        : yup
-            .number()
-            .required('Acest camp este obligatoriu.')
-            .test(
-              'is-custom-step',
-              `Valoarea trebuie să fie multiplu de ${minDivision}`,
-              divisionValidation
-            ),
-      comment: yup.string()
-    })
-
   const { isLoading, mutate } = useMutation(editCurrentAllocation, {
     onSuccess: res => {
       setSelectedRowId(task.taskTemplateId)
       setShouldRefreshData(true)
       closeModal()
+      formik.resetForm()
       showNotification({
         message: editItem ? 'Alocarea a fost editata cu succes' : 'Taskul a fost oprit cu succes',
         type: 'success'
@@ -79,11 +58,10 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    initialValues: getFormInitialValues(editItem || employee, hideWorkload),
-    validationSchema: validationSchema(hideWorkload),
-    onSubmit: async (values: any, { resetForm }) => {
+    initialValues: getFormInitialValues(editItem || employee, hideWorkload, isStop),
+    validationSchema: validationSchema(hideWorkload, minDivision, isStop),
+    onSubmit: async (values: any) => {
       mutate(values)
-      resetForm()
     }
   })
 
@@ -139,6 +117,29 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
               }
               error={!!formik.errors.allocatedWorkload}
               helperText={formik.errors.allocatedWorkload as string}
+              required
+              inputProps={{
+                min: '0',
+                step: minDivision
+              }}
+            />
+          </Grid>
+        )}
+
+        {!editItem && (
+          <Grid xs={12} item>
+            <Input
+              type="number"
+              variant="outlined"
+              name="performedWorkload"
+              label="Volum efectuat"
+              value={formik.values.performedWorkload}
+              width="100%"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                formik.setFieldValue('performedWorkload', (event.target as HTMLInputElement).value)
+              }
+              error={!!formik.errors.performedWorkload}
+              helperText={formik.errors.performedWorkload as string}
               required
               inputProps={{
                 min: '0',
