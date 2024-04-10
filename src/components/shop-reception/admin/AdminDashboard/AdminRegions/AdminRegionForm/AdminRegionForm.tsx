@@ -4,7 +4,7 @@ import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { getInitialValues, getValidationSchema } from './helpers'
-import { useNotification } from 'hooks'
+import { useNotification, useSearchInput } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { CircularProgress, Grid } from '@mui/material'
 import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
@@ -56,7 +56,12 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
     validationSchema: validationSchema,
     onSubmit: async (values: any, { resetForm }) => {
       try {
-        mutate(values)
+        const payload = {
+          ...values,
+          shopIds: values.shopIds.map(shopId => shopId.value)
+        }
+
+        mutate(payload)
         setShouldRefreshData(true)
         closeModal()
         resetForm()
@@ -86,27 +91,15 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
           )}`,
           type: 'error'
         })
-      }
+      },
+      enabled: isModalOpen
     }
   )
 
-  const { data: responsibles, isLoading: isResponsiblesLoading } = useQuery(
-    ['responsibles'],
-    async () => {
-      const data = await makeCoreGetRequest(`/shop-reception/regions/responsible`)
-      return data.map(item => ({
-        label: item,
-        value: item
-      }))
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A apărut o eroare la obtinerea responsabililor. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
+  const selectProductSearch = useSearchInput(
+    'name',
+    'region-responsible',
+    '/shop-reception/regions/responsible'
   )
 
   return (
@@ -150,25 +143,25 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
         </Grid>
 
         <Grid xs={12} item>
-          {isResponsiblesLoading ? (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" disableShrink />
-            </div>
-          ) : (
-            <Autocomplete
-              variant="outlined"
-              label="Responsabil regiune"
-              disableClearable
-              required
-              onChange={event =>
-                formik.setFieldValue('responsible', (event.target as HTMLInputElement).textContent)
+          <Autocomplete
+            {...selectProductSearch}
+            variant="outlined"
+            label="Responsabil regiune"
+            autoComplete={false}
+            required
+            filterOptions={x => x}
+            onChange={(event, value) => {
+              console.log('debug', value)
+              if (value) {
+                formik.setFieldValue('responsible', value)
+              } else {
+                formik.setFieldValue('responsible', null)
               }
-              defaultValue={formik.values.responsible}
-              options={responsibles}
-              error={!!formik.errors.responsible}
-              helperText={formik.errors.responsible as string}
-            />
-          )}
+            }}
+            value={formik.values.responsible || null}
+            error={!!formik.errors.responsible}
+            helperText={formik.errors.responsible as string}
+          />
         </Grid>
 
         <Grid xs={12} item>
@@ -192,24 +185,29 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
               label="Magazine"
               disableClearable
               required
-              onChange={event =>
-                formik.setFieldValue('shopIds', [(event.target as HTMLInputElement).value])
-              }
+              onChange={(e: any, option: any) => formik.setFieldValue('shopIds', option)}
               defaultValue={formik.values.shopIds}
               options={shopTypes}
               error={!!formik.errors.shopIds}
               helperText={formik.errors.shopIds as string}
+              multiple
             />
           )}
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-          <Button
-            variant="contained"
-            label={isEdit ? 'Editeaza' : 'Salveaza'}
-            onClick={() => formik.handleSubmit()}
-          />
+          {isLoading ? (
+            <></>
+          ) : (
+            <>
+              <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+              <Button
+                variant="contained"
+                label={isEdit ? 'Editeaza' : 'Salveaza'}
+                onClick={() => formik.handleSubmit()}
+              />
+            </>
+          )}
         </Grid>
       </Grid>
     </Modal>

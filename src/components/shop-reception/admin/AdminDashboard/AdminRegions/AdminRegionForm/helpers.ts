@@ -15,7 +15,7 @@ export const getInitialValues = (editItem: AdminRegion) => {
     code: editItem?.code || null,
     name: editItem?.name || null,
     responsible: editItem?.responsible || null,
-    active: editItem?.active || null,
-    shopIds: editItem?.shopIds || null
+    active: editItem?.active || false,
+    shopIds: editItem?.shopIds || []
   }
 }

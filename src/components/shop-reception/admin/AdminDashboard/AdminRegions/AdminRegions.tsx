@@ -79,7 +79,7 @@ const AdminRegions = () => {
       />
       <Table
         hideCheckbox
-        orderBy="role"
+        orderBy="code"
         order="asc"
         columns={columns}
         items={tableItems}
