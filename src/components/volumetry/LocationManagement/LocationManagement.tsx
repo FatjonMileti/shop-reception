@@ -19,6 +19,7 @@ const LocationManagement = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRowId, setSelectedRowId] = useState<string | number | null>(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [editItem, setEditItem] = useState(null)
 
   const { showNotification } = useNotification()
 
@@ -43,8 +44,6 @@ const LocationManagement = () => {
           tableFilters,
           page,
           rowsPerPage
-          // order,
-          // orderBy
         })
       )
 
@@ -71,6 +70,7 @@ const LocationManagement = () => {
         isModalOpen={isEditModalOpen}
         closeModal={closeModal}
         editItemId={selectedRowId}
+        editItem={editItem}
         setShouldRefreshData={setShouldRefreshData}
       />
       <Table
@@ -93,7 +93,10 @@ const LocationManagement = () => {
             typographyVariant: 'medium',
             backgroundColor: '#16a085',
             desktopIcon: <EditActionIcon />,
-            onClick: (_e, rowId: number) => selectRowId(rowId)
+            onClick: (_e, rowId: number) => {
+              setEditItem(tableItems.find(row => row.id === rowId))
+              selectRowId(rowId)
+            }
           }
         ]}
       />
