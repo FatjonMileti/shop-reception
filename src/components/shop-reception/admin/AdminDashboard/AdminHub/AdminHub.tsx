@@ -76,7 +76,7 @@ const AdminHub = () => {
       />
       <Table
         hideCheckbox
-        orderBy="role"
+        orderBy="code"
         order="asc"
         columns={columns(navigate)}
         items={tableItems}
