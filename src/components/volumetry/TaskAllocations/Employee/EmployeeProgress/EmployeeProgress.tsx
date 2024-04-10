@@ -17,7 +17,7 @@ const EmployeeProgress = (props: EmployeeProgressProps) => {
         <LinearProgress
           variant="determinate"
           value={employee.progressProportion > 100 ? 100 : employee.progressProportion}
-          color={customCapsuleColors.progress as 'error' | 'success'}
+          color={customCapsuleColors.progress as 'error' | 'success' | 'warning'}
         />
       </Box>
       <Box sx={{ alignSelf: 'center' }}>

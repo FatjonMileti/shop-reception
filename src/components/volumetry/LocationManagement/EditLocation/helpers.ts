@@ -1,8 +1,8 @@
 import { LocationItem } from 'components/volumetry/interfaces'
 import * as Yup from 'yup'
 
-export const getInitialValues = (editItem: LocationItem) => ({
-  category: editItem ? { value: editItem.categoryId, label: editItem.categoryName } : null
+export const getInitialValues = (editItem: any) => ({
+  category: editItem ? { value: editItem.categoryId, label: editItem.locationCategory } : null
 })
 
 export const getValidationSchema = (item: LocationItem) =>
