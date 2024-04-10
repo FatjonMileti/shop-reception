@@ -44,8 +44,6 @@ const LocationManagement = () => {
           tableFilters,
           page,
           rowsPerPage
-          // order,
-          // orderBy
         })
       )
 

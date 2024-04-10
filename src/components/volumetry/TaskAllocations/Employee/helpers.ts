@@ -24,3 +24,29 @@ export const getTaskCurrentState = employee => {
     showResumeButton
   }
 }
+
+export const getCapsuleColor = (taskCurrentState, isOverdue) => {
+  const { isTaskNotStarted, isTaskStarted, isTaskEnded, isTaskPaused } = taskCurrentState
+
+  if (isOverdue) {
+    return { label: 'rgba(211, 13, 31, 0.15)', value: '#D30D1F', progress: 'error' }
+  }
+
+  if (isTaskNotStarted) {
+    return { label: 'rgba(69, 69, 69, 0.15)', value: '#454545' }
+  }
+
+  if (isTaskPaused) {
+    return { label: 'rgba(255, 179, 0, 0.15)', value: '#FF9900', progress: 'warning' }
+  }
+
+  if (isTaskStarted && !isTaskEnded) {
+    return { label: 'rgba(51, 105, 30, 0.15)', value: '#33691E', progress: 'success' }
+  }
+
+  if (isTaskEnded) {
+    return { label: 'rgba(0, 79, 155, 0.15)', value: '#004F9B' }
+  }
+
+  return { label: '', value: '' }
+}
