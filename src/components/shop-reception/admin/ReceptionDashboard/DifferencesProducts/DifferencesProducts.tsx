@@ -37,7 +37,6 @@ const DifferencesProducts = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      console.log('debug', error)
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'

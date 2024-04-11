@@ -29,7 +29,10 @@ export const getValidationSchema = (editItem: PackingType) =>
 export const getInitialValues = (editItem: PackingType) => {
   return {
     externalCode: editItem?.externalCode || null,
-    alternativeCodes: [{label: editItem?.alternativeCodes, value: editItem?.alternativeCodes}] || [],
+    alternativeCodes:
+      editItem?.alternativeCodes
+        .split(';')
+        .map(alternativeCode => ({ label: alternativeCode, value: alternativeCode })) || [],
     code: editItem?.code || null,
     name: editItem?.name || null,
     main: editItem?.main || false,

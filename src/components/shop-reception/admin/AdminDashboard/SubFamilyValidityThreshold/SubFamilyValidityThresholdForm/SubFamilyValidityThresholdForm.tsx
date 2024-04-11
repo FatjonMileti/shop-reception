@@ -55,7 +55,6 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
     }
   })
 
-  console.log('debug', editItem)
   return (
     <Modal
       isModalOpen={isModalOpen}

@@ -49,8 +49,6 @@ const DeliveryTicketsList = () => {
     <div className={s.mainContainer}>
       <Table
         hideCheckbox
-        orderBy="shopCode"
-        order="asc"
         columns={columns}
         items={tableItems}
         fetchData={fetchData}

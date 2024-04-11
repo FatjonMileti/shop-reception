@@ -71,7 +71,9 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
   const { data: uncombined, isLoading: isUncombinedLoading } = useQuery(
     ['uncombined'],
     async () => {
-      const result = await makeCoreGetRequest(`/shop-reception/support-types?filterBy=combined&filterValue=false`)
+      const result = await makeCoreGetRequest(
+        `/shop-reception/support-types?filterBy=combined&filterValue=false`
+      )
       const options = result.list.map(item => ({ value: item.id, label: item.name }))
       return options || []
     },
@@ -101,7 +103,7 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
             type="text"
             fullWidth
             onChange={(e: any) => formik.setFieldValue('externalCode', e.target.value)}
-            defaultValue={formik.values.externalCode}
+            value={formik.values.externalCode}
           />
         </Grid>
 
@@ -149,7 +151,7 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
             type="text"
             fullWidth
             onChange={(e: any) => formik.setFieldValue('name', e.target.value)}
-            defaultValue={formik.values.name}
+            value={formik.values.name}
           />
         </Grid>
         <Grid item xs={12}>
@@ -178,7 +180,7 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
           />
         </Grid>
 
-        {formik.values.combined ? (
+        {!isUncombinedLoading && formik.values.combined ? (
           <Grid item xs={12}>
             <Autocomplete
               multiple={true}
@@ -215,7 +217,7 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
                 type="text"
                 fullWidth
                 onChange={(e: any) => formik.setFieldValue('code', e.target.value)}
-                defaultValue={formik.values.code}
+                value={formik.values.code}
               />
             </Grid>
             {formik.values.code?.length > 0 && formik.values.code !== null && (

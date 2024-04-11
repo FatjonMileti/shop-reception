@@ -187,6 +187,10 @@ interface DifferencesProduct {
   integrationOperator: string
   archivePath: string
 }
+interface AutocompleteOption {
+  label: string
+  value: string | number
+}
 
 interface DLCProducts {
   id: number
@@ -212,16 +216,21 @@ interface SeriesNumber {
   society: string
 }
 
+interface ShopType { 
+  key: string
+  value: string
+}
+
 interface SGRProducts {
   id: number
-  storeType: string
-  storeCode: string
-  storeName: string
-  district: string
-  family: string
-  subfamily: string
-  UbCode: string
-  productCode: string
+  shopCode: string
+  shopName: string
+  prodName: string
+  ubName: string
+  famName: string
+  sfaName: string
+  rayName: string
+  shopType: ShopType[]
 }
 
 interface MetiFile {

@@ -1,11 +1,12 @@
-export const toTableRowItems = (items: any[]) => items.map((item: any) => ({
-  id: item.id,
-  storeType: item.storeType,
-  storeCode: item.storeCode,
-  storeName: item.storeName,
-  district: item.district,
-  family: item.family,
-  subfamily: item.subfamily,
-  UbCode: item.UbCode,
-  productCode: item.productCode,
-}))
+export const toTableRowItems = (items: SGRProducts[]) =>
+  items.map((item: SGRProducts) => ({
+    id: item.id,
+    shopCode: item.shopCode || '',
+    shopName: item.shopName || '',
+    prodName: item.prodName || '',
+    ubName: item.ubName || '',
+    sfaName: item.sfaName || '',
+    famName: item.famName || '',
+    rayName: item.rayName || '',
+    shopType: item.shopType || []
+  }))

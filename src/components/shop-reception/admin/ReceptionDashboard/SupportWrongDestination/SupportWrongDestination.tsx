@@ -65,8 +65,6 @@ const SupportWrongDestination = () => {
     <div className={s.mainContainer}>
       <Table
         hideCheckbox
-        orderBy="role"
-        order="asc"
         columns={columns(navigate, downloadFile)}
         items={tableItems}
         fetchData={fetchData}

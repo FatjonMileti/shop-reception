@@ -46,7 +46,7 @@ const SensitiveProducts = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/shop-reception/sensitives',
+          url: '/shop-reception/products/sensitives',
           tableFilters,
           page,
           rowsPerPage,
@@ -206,7 +206,7 @@ const SensitiveProducts = () => {
       />
       <Table
         hideCheckbox
-        orderBy="role"
+        orderBy="id"
         order="asc"
         columns={columns}
         items={tableItems}

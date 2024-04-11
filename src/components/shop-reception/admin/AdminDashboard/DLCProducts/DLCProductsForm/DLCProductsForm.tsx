@@ -9,7 +9,6 @@ import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { Grid } from '@mui/material'
 import {  makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
-import { AutocompleteOption } from 'components/volumetry/interfaces'
 
 interface DLCProductsFormProps {
   isOpen: boolean

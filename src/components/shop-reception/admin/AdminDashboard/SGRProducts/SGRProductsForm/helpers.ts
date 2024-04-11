@@ -1,25 +1,54 @@
 import * as Yup from 'yup'
 
-export const getValidationSchema = (editItem: DLCProducts) =>
+const validateObject = Yup.object().shape({
+  label: Yup.string().required('Label is required'),
+  value: Yup.string().required('Value is required')
+})
+
+export const getValidationSchema = () =>
   Yup.object().shape({
-    id: Yup.number().required(),
-    storeName: Yup.string().required(),
-    district: Yup.string().required(),
-    family: Yup.string().required(),
-    subfamily: Yup.string().required(),
-    UbCode: Yup.string().required(),
-    productCode: Yup.string().required()
+    shopCode: Yup.lazy(value =>
+      typeof value === 'object'
+        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
+        : Yup.string().required('Campul este obligatoriu.')
+    ),
+    shopType: Yup.lazy(value =>
+      typeof value === 'object'
+        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
+        : Yup.string().required('Campul este obligatoriu.')
+    ),
+    rayCode: Yup.lazy(value =>
+      typeof value === 'object'
+        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
+        : Yup.string().required('Campul este obligatoriu.')
+    ),
+    famCode: Yup.lazy(value =>
+      typeof value === 'object'
+        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
+        : Yup.string().required('Campul este obligatoriu.')
+    ),
+    sfaCode: Yup.lazy(value =>
+      typeof value === 'object'
+        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
+        : Yup.string().required('Campul este obligatoriu.')
+    ),
+    ubCode: Yup.lazy(value =>
+      typeof value === 'object'
+        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
+        : Yup.string().required('Campul este obligatoriu.')
+    ),
+    prodCode: Yup.string().required()
   })
 
-export const getInitialValues = (editItem: any) => {
+export const getInitialValues = (editItem: SGRProducts) => {
   return {
     id: editItem?.id || null,
-    shopCode: editItem?.shopCode || null,
-    shopName: editItem?.shopName || null,
-    prodName: editItem?.prodName || null,
-    ubName: editItem?.ubName || null,
-    sfaName: editItem?.sfaName || null,
-    famName: editItem?.famName || null,
-    rayName: editItem?.rayName || null
+    shopCode: editItem?.shopCode || [],
+    shopType: editItem?.shopType || [],
+    rayCode: editItem?.rayName || [],
+    famCode: editItem?.famName || [],
+    sfaCode: editItem?.sfaName || [],
+    ubCode: editItem?.ubName || [],
+    prodCode: editItem?.prodName || []
   }
 }

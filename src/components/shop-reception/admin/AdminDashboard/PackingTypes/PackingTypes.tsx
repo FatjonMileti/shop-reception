@@ -10,6 +10,7 @@ import { useNotification } from '../../../../../hooks'
 import { PackingTypeForm } from './PackingTypeForm'
 import s from '../../../commonStyles.modules.scss'
 import { EditActionIcon } from 'icons'
+import { useQuery } from 'react-query'
 
 const PackingTypes = () => {
   const { showNotification } = useNotification()
@@ -56,6 +57,26 @@ const PackingTypes = () => {
     }
   }
 
+  const {
+    data: file,
+    isLoading: isLoadingFile,
+    refetch: exportFile
+  } = useQuery(
+    ['export-file'],
+    async () => {
+      const result = await makeCoreGetRequest(`/shop-reception/support-types/export`)
+      return result || null
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching cluster data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
   return (
     <div className={s.mainContainer}>
       <PackingTypeForm
@@ -72,7 +93,7 @@ const PackingTypes = () => {
       />
       <Table
         hideCheckbox
-        orderBy="role"
+        orderBy="id"
         order="asc"
         columns={columns}
         items={tableItems}
@@ -99,7 +120,7 @@ const PackingTypes = () => {
           {
             label: 'Export',
             icon: <CloudDownloadIcon />,
-            onClick: null
+            onClick: () => exportFile()
           },
           {
             label: 'Tip ambalaj',

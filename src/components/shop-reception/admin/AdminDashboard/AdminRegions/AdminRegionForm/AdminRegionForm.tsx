@@ -151,7 +151,6 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
             required
             filterOptions={x => x}
             onChange={(event, value) => {
-              console.log('debug', value)
               if (value) {
                 formik.setFieldValue('responsible', value)
               } else {
