@@ -43,7 +43,7 @@ export const CorrectFrozenTraceabilityModal = ({
       },
       onError: res => {
         showNotification({
-          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
@@ -94,9 +94,6 @@ export const CorrectFrozenTraceabilityModal = ({
       itemToCorrectMutation.mutate(payload)
     }
   })
-
-  console.log("formik.errors: ", formik.errors)
-  console.log("formik.values: ", formik.values)
 
   const cancel = () => {
     setStep(0)

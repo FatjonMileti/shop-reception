@@ -136,7 +136,7 @@ export const CorrectReceivedProduct = ({
       },
       onError: res => {
         showNotification({
-          message: `Error while trying add product, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
