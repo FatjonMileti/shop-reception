@@ -49,7 +49,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
   })
 
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'}>
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Editeaza'}>
       <Grid container spacing={4}>
         {isLoading && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -98,8 +98,8 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-          <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+          <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
         </Grid>
       </Grid>
     </Modal>

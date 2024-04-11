@@ -80,13 +80,13 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
       isModalOpen={isModalOpen}
       closeModal={closeModal}
       modalTitle={editItem ? 'Editeaza colaborator' : 'Adauga colaborator'}
-      modalWidth="30%"
+      modalWidth="50%"
     >
       <Grid container spacing={4}>
         {(isLoading || isDepartmentsOptionsLoading || isContractorsTypesOptions) && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         )}
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <Input
             type="text"
             name="name"
@@ -100,7 +100,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             required
           />
         </Grid>
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <Input
             type="text"
             name="name"
@@ -114,7 +114,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             required
           />
         </Grid>
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <Input
             type="text"
             name="name"
@@ -127,7 +127,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             helperText={formik.errors.middleName as string}
           />
         </Grid>
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <Input
             type="text"
             name="name"
@@ -141,7 +141,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
           />
         </Grid>
 
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <AsyncAutocomplete
             variant="outlined"
             name="genericDepartment"
@@ -156,11 +156,11 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
           />
         </Grid>
 
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <AsyncAutocomplete
             variant="outlined"
             name="workerType"
-            label="Selecteaza functia"
+            label="Selecteaza tip colaborator"
             disableClearable
             value={formik.values.workerType}
             options={contractorsTypesOptions || []}
