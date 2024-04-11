@@ -111,7 +111,7 @@ export const columns = markAsResolved => [
   }
 ]
 
-export const drawerFilters = [
+export const drawerFilters = (shopCodes, depositOptions) => [
   {
     name: 'depositName',
     value: '',
@@ -120,49 +120,21 @@ export const drawerFilters = [
         variant="outlined"
         label="Selectează depozit"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: 'Depozit 1'
-          },
-
-          {
-            value: '2',
-            label: 'Depozit 2'
-          },
-          {
-            value: '3',
-            label: 'Depozit 3'
-          }
-        ]}
+        options={depositOptions || []}
       />
     ),
     type: 'autocomplete',
     label: 'Selectează depozit'
   },
   {
-    name: 'shopName',
+    name: 'shopCode',
     value: '',
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selectează magazin"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: 'Magazin 1'
-          },
-
-          {
-            value: '2',
-            label: 'Magazin 2'
-          },
-          {
-            value: '3',
-            label: 'Magazin 3'
-          }
-        ]}
+        options={shopCodes || []}
       />
     ),
     type: 'autocomplete',

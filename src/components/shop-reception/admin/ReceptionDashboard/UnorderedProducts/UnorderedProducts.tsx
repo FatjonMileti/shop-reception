@@ -77,25 +77,67 @@ const UnorderedProducts = () => {
     }
   )
 
-  const { refetch: exportFile } = useQuery(
-    ['export-file'],
-    async () => {
-      const url = toTableGETUrl({
-        url: '/shop-reception/unexpectedReceptionProduct/export'
-      })
+  const exportFile = async (tableState, e) => {
+    const { filters, order, orderBy } = tableState
+    const url = toTableGETUrl({
+      url: '/shop-reception/unexpectedReceptionProduct/export',
+      tableFilters: filters,
+      order,
+      orderBy
+    })
+
+    try {
       const response = await makeCoreGetFileRequest(url, {
         responseType: 'blob'
       })
-      return formatAndDownloadResponse(response)
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `Error while download file. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const { data: shopCodes, isLoading: isShopCodesLoading } = useQuery(
+    ['shop-codes'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/shops/codes`)
+      return data.list.map(item => ({
+        label: item.displayName,
+        value: item.code
+      }))
     },
     {
       onError: error => {
         showNotification({
-          message: `Error while exporting file. ${formatErrorMessage(error)}`,
+          message: `A apărut o eroare la obtinerea tipurilor de magazine. ${formatErrorMessage(
+            error
+          )}`,
           type: 'error'
         })
-      },
-      enabled: false
+      }
+    }
+  )
+
+  const { data: depositOptions, isLoading: isDepositOptionsLoading } = useQuery(
+    ['deposits'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/deposits/accessible`)
+      return data.map(item => ({
+        label: item.displayName,
+        value: item.id
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea tipurilor de depozite. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
     }
   )
 
@@ -114,8 +156,8 @@ const UnorderedProducts = () => {
       </Modal>
       <Table
         hideCheckbox
-        orderBy="depositName"
-        order="asc"
+        orderBy="id"
+        order="desc"
         columns={columns(markAsResolved)}
         items={tableItems}
         fetchData={fetchData}
@@ -132,7 +174,7 @@ const UnorderedProducts = () => {
             onClick: exportFile
           }
         ]}
-        filters={drawerFilters}
+        filters={drawerFilters(shopCodes, depositOptions)}
       />
     </div>
   )

@@ -493,8 +493,8 @@ interface UnorderedProducts {
   productCode: string
   productName: string
   productEan: string
-  validatedQuantity: number
-  brokenQuantity: number
+  validatedQuantity: number | string
+  brokenQuantity: number | string
   defectReason: string
   externalSupportCode: string
   deliveryTicketExternalId: string
