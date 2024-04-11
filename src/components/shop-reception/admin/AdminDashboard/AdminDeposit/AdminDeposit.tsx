@@ -103,8 +103,8 @@ const AdminDeposit = () => {
         />
         <Table
           hideCheckbox
-          orderBy="role"
-          order="asc"
+          orderBy="created"
+          order="desc"
           columns={columns}
           items={tableItems}
           fetchData={fetchData}
