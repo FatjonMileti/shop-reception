@@ -6,14 +6,15 @@ export const columns = downloadImage => [
     title: 'Bon livrare',
     field: 'externalTicketId',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    disableSorting: true
   },
   {
     title: 'Magazin',
-    field: 'shopName',
+    field: 'shopCode',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    render: row => row.shopName
   },
   {
     title: 'Depozit',
@@ -23,9 +24,10 @@ export const columns = downloadImage => [
   },
   {
     title: 'Nume produs',
-    field: 'productName',
+    field: 'productCode',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    render: row => row.productName
   },
   {
     title: 'Comandǎ de origine',
@@ -114,7 +116,14 @@ export const columns = downloadImage => [
     align: 'left',
     type: 'string',
     render: row =>
-      row.archivePath ? <div onClick={() => downloadImage(row.id)}>Da</div> : <div>Nu</div>
+      row.archivePath ? (
+        <div style={{ cursor: 'pointer' }} onClick={() => downloadImage(row.id)}>
+          Da
+        </div>
+      ) : (
+        <div>Nu</div>
+      ),
+    disableSorting: true
   }
 ]
 
@@ -134,7 +143,7 @@ export const drawerFilters = (shopCodes, metiRayons) => [
         variant="outlined"
         label="Selectează magazin"
         disableClearable
-        options={shopCodes}
+        options={shopCodes || []}
       />
     ),
     type: 'autocomplete',
@@ -148,7 +157,7 @@ export const drawerFilters = (shopCodes, metiRayons) => [
         variant="outlined"
         label="Selectează depozit"
         disableClearable
-        options={metiRayons}
+        options={metiRayons || []}
       />
     ),
     type: 'autocomplete',

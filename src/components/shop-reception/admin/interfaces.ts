@@ -176,12 +176,12 @@ interface DifferencesProduct {
   metiOrderId: string
   measureUnit: string
   transportCode: string
-  orderedQuantity: number
-  receivedQuantity: number
-  brokenQuantity: number
-  receptionDeviation: number
-  stockQuantity: number
-  missingQuantity: number
+  orderedQuantity: number | string
+  receivedQuantity: number | string
+  brokenQuantity: number | string
+  receptionDeviation: number | string
+  stockQuantity: number | string
+  missingQuantity: number | string
   transporterCode: string
   metiSentDate: string
   integrationOperator: string
@@ -216,7 +216,7 @@ interface SeriesNumber {
   society: string
 }
 
-interface ShopType { 
+interface ShopType {
   key: string
   value: string
 }

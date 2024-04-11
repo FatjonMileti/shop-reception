@@ -49,7 +49,7 @@ const DifferencesProducts = () => {
     async () => {
       const result = await makeCoreGetRequest('/shop-reception/shops/codes')
 
-      const resultOptions = result.map(item => ({
+      const resultOptions = result.list.map(item => ({
         label: item.displayName,
         value: item.code
       }))
@@ -133,8 +133,6 @@ const DifferencesProducts = () => {
     <div className={s.mainContainer}>
       <Table
         hideCheckbox
-        orderBy="role"
-        order="asc"
         columns={columns(setDownloadImageId)}
         items={tableItems}
         fetchData={fetchData}
