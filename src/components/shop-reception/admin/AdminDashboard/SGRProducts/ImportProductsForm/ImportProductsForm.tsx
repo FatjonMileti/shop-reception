@@ -70,8 +70,15 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
       const newValues = { ...values, shopCodes: values.shopCodes.map(shopCode => shopCode.value) }
 
       const form = new FormData()
-      form.append('shopCodes', newValues.shopCodes)
-      form.append('ruleTypes', newValues.ruleTypes.value)
+
+      form.append(
+        'shopCodes',
+        new Blob([JSON.stringify(newValues.shopCodes)], { type: 'application/json' })
+      )
+      form.append(
+        'ruleTypes',
+        new Blob([JSON.stringify(newValues.ruleTypes.value)], { type: 'application/json' })
+      )
       form.append('file', file)
 
       mutate(form)
