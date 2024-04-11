@@ -112,7 +112,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             required
             onChange={(event, option) => formik.setFieldValue('shopCode', option)}
             value={formik.values.shopCode}
-            options={shopCodes}
+            options={shopCodes || []}
             error={!!formik.errors.shopCode}
             helperText={formik.errors.shopCode as string}
           />
@@ -126,7 +126,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             required
             onChange={(event, option) => formik.setFieldValue('shopType', option)}
             value={formik.values.shopType.value}
-            options={shopTypes}
+            options={shopTypes || []}
             error={!!formik.errors.shopType}
             helperText={formik.errors.shopType as string}
           />
@@ -140,7 +140,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             required
             onChange={(event, option) => formik.setFieldValue('rayCode', option)}
             value={formik.values.rayCode}
-            options={metiRayons}
+            options={metiRayons || []}
             error={!!formik.errors.rayCode}
             helperText={formik.errors.rayCode as string}
           />
@@ -154,7 +154,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             required
             onChange={(event, option) => formik.setFieldValue('famCode', option)}
             value={formik.values.famCode}
-            options={metiFamilies}
+            options={metiFamilies || []}
             error={!!formik.errors.famCode}
             helperText={formik.errors.famCode as string}
           />
@@ -168,7 +168,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             required
             onChange={(event, option) => formik.setFieldValue('sfaCode', option)}
             value={formik.values.sfaCode}
-            options={metiSubfamilies}
+            options={metiSubfamilies || []}
             error={!!formik.errors.sfaCode}
             helperText={formik.errors.sfaCode as string}
           />
@@ -182,7 +182,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             required
             onChange={(event, option) => formik.setFieldValue('ubCode', option)}
             value={formik.values.ubCode}
-            options={metiUB}
+            options={metiUB || []}
             error={!!formik.errors.ubCode}
             helperText={formik.errors.ubCode as string}
           />

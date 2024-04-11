@@ -1,4 +1,4 @@
-import { Autocomplete, Input } from "@fullscreendigital/carrefour-dex-fe"
+import { Autocomplete, Input } from '@fullscreendigital/carrefour-dex-fe'
 
 export const columns = [
   {
@@ -58,7 +58,14 @@ export const columns = [
   }
 ]
 
-export const drawerFilters = (shopTypes, shopCodes, metiRayons, metiFamilies, metiSubfamilies, metiUB) => [
+export const drawerFilters = (
+  shopTypes,
+  shopCodes,
+  metiRayons,
+  metiFamilies,
+  metiSubfamilies,
+  metiUB
+) => [
   {
     name: 'shopCode',
     value: '',
@@ -67,14 +74,13 @@ export const drawerFilters = (shopTypes, shopCodes, metiRayons, metiFamilies, me
         variant="outlined"
         label="Selectează magazin"
         disableClearable
-        options={shopCodes}
+        options={shopCodes || []}
       />
     ),
     type: 'autocomplete',
     label: 'Selectează magazin'
-  },  
-  
-  
+  },
+
   {
     name: 'shopType',
     value: '',
@@ -83,7 +89,7 @@ export const drawerFilters = (shopTypes, shopCodes, metiRayons, metiFamilies, me
         variant="outlined"
         label="Selectează regulă"
         disableClearable
-        options={shopTypes}
+        options={shopTypes || []}
       />
     ),
     type: 'autocomplete',
@@ -98,7 +104,7 @@ export const drawerFilters = (shopTypes, shopCodes, metiRayons, metiFamilies, me
         variant="outlined"
         label="Selectează raion"
         disableClearable
-        options={metiRayons}
+        options={metiRayons || []}
       />
     ),
     type: 'autocomplete',
@@ -109,7 +115,12 @@ export const drawerFilters = (shopTypes, shopCodes, metiRayons, metiFamilies, me
     name: 'famCode',
     value: '',
     filter: (
-      <Autocomplete variant="outlined" label="Familie" disableClearable options={metiFamilies} />
+      <Autocomplete
+        variant="outlined"
+        label="Familie"
+        disableClearable
+        options={metiFamilies || []}
+      />
     ),
     type: 'autocomplete',
     label: 'Familie'
@@ -123,7 +134,7 @@ export const drawerFilters = (shopTypes, shopCodes, metiRayons, metiFamilies, me
         variant="outlined"
         label="Subfamilie"
         disableClearable
-        options={metiSubfamilies}
+        options={metiSubfamilies || []}
       />
     ),
     type: 'autocomplete',
@@ -133,7 +144,9 @@ export const drawerFilters = (shopTypes, shopCodes, metiRayons, metiFamilies, me
   {
     name: 'ubCode',
     value: '',
-    filter: <Autocomplete variant="outlined" label="Cod UB" disableClearable options={metiUB} />,
+    filter: (
+      <Autocomplete variant="outlined" label="Cod UB" disableClearable options={metiUB || []} />
+    ),
     type: 'autocomplete',
     label: 'Cod UB'
   },
