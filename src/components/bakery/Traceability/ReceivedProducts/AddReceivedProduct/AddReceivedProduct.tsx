@@ -13,6 +13,7 @@ import { Supplier, Product } from '../interfaces'
 import { useFormik } from 'formik'
 import { productDetailsSchema } from '../helper'
 import dayjs from 'dayjs'
+import { AxiosError } from 'axios'
 
 interface ReceivedProductRequestData {
   productId: string
@@ -109,7 +110,16 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddRe
           type: 'success'
         })
       },
-      onError: res => {
+      onError: (res: any) => {
+
+        if (res?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+          return
+        }
+
         showNotification({
           message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
