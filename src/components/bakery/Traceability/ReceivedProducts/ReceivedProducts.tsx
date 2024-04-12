@@ -28,6 +28,7 @@ import { get } from 'lodash'
 import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import { debounce } from '@mui/material'
+import dayjs from 'dayjs'
 
 export const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -202,11 +203,11 @@ export const ReceivedProducts = () => {
         totalCount={totalCount}
         isLoading={isLoading}
         filters={drawerFilters}
-        appliedFiltersLabel='Filtre'
-        applyFiltersButtonLabel='Filtrare'
-        filtersLabel='Filtrare'
-        filtersButtonLabel='Filtrare'
-        cancelFiltersButtonLabel='Anuleaza'
+        appliedFiltersLabel="Filtre"
+        applyFiltersButtonLabel="Filtrare"
+        filtersLabel="Filtrare"
+        filtersButtonLabel="Filtrare"
+        cancelFiltersButtonLabel="Anuleaza"
         handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         handleRemoteData={debounce(fetchData, 500)}
         hasSearchInput
@@ -266,6 +267,16 @@ export const ReceivedProducts = () => {
             typographyVariant: 'medium',
             backgroundColor: '#CC4010',
             onClick: (e, rowId) => {
+              const createdDay = dayjs(tableItems.find(row => row.id === rowId)?.createdDate)
+
+              if (createdDay.endOf('day').isBefore(dayjs().endOf('day'))) {
+                showNotification({
+                  message: 'Nu puteti edita receptii mai vechi de astazi',
+                  type: 'error'
+                })
+                return
+              }
+
               setSelectedRowId(rowId)
               setCorrectModalOpen(true)
             },
