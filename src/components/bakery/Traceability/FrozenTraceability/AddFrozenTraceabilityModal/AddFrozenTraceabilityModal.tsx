@@ -14,6 +14,7 @@ import { SelectOrScanProduct } from '../../ReceivedProducts/AddReceivedProduct/S
 import { Product } from '../../ReceivedProducts/interfaces'
 import dayjs from 'dayjs'
 import { calculateComponentDlc } from '../CorrectFrozenTraceabilityModal/helpers'
+import { AxiosError } from 'axios'
 
 interface AddFrozenTraceabilityModalProps {
   isModalOpen: boolean
@@ -41,7 +42,14 @@ export const AddFrozenTraceabilityModal = ({
           type: 'success'
         })
       },
-      onError: res => {
+      onError: (res: any) => {
+        if (res?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+          return
+        }
         showNotification({
           message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
@@ -51,23 +59,6 @@ export const AddFrozenTraceabilityModal = ({
   )
 
   const initialValues = useMemo(() => getInitialValues(), [])
-
-  const addDlcToComponent = item => {
-    if (!item.hasSecondaryDlc) return item
-
-    const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
-
-    return {
-      ...item,
-      dlc: formatPayloadDate(
-        item?.expireDate
-          ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
-            ? dayjs(item?.expireDate)
-            : calculatedDlc
-          : calculatedDlc
-      )
-    }
-  }
 
   const formik = useFormik({
     validateOnChange: false,
