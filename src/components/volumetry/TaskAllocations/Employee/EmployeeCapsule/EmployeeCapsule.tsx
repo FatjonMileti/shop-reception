@@ -8,8 +8,6 @@ import { formatUIDate, isDayInThePast } from 'utils/helpers'
 const EmployeeCapsule = (props: EmployeeCapsuleProps) => {
   const { employee, customCapsuleColors } = props
 
-  console.log(employee)
-
   return (
     <Box className={s.capsules}>
       <Capsule
