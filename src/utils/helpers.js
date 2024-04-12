@@ -33,6 +33,8 @@ export const formatUIDateTime = date => (date ? dayjs(date).format('DD/MM/YYYY H
 export const areSameDayDates = (startDate, endDate) =>
   startDate && endDate && dayjs(startDate).isSame(dayjs(endDate), 'day')
 
+export const isDayInThePast = date => dayjs().isAfter(date, 'day')
+
 export const getDefaultItemValue = value => {
   if (value.charAt(0) === '#') {
     if (value === '#CURRENT_DATE') {

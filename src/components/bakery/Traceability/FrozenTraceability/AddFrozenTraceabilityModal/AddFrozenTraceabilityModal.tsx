@@ -43,7 +43,7 @@ export const AddFrozenTraceabilityModal = ({
       },
       onError: res => {
         showNotification({
-          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
