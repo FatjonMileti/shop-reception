@@ -16,6 +16,7 @@ import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import {
+  getCollaboratorsTypesOptions,
   getDepartmentsOptions,
   getJobTitlesOptions,
   getLocationsOptions
@@ -50,8 +51,8 @@ const CollaboratorsTab = () => {
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification)
-  const { data: jobTitlesOptions, isLoading: isjobTitlesOptionsLoading } =
-    getJobTitlesOptions(showNotification)
+  const { data: collaboratorsTypesOptions, isLoading: isCollaboratorsTypesOptionsLoading } =
+    getCollaboratorsTypesOptions(showNotification)
   const { data: locationsOptions, isLoading: isLocationsLoading } = getLocationsOptions(
     showNotification,
     setLocationsFilterValue,
@@ -65,8 +66,8 @@ const CollaboratorsTab = () => {
   }
 
   const tableFilters = useMemo(
-    () => getTableFilterFields(departmentsOptions, jobTitlesOptions),
-    [departmentsOptions, jobTitlesOptions]
+    () => getTableFilterFields(departmentsOptions, collaboratorsTypesOptions),
+    [departmentsOptions, collaboratorsTypesOptions]
   )
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
