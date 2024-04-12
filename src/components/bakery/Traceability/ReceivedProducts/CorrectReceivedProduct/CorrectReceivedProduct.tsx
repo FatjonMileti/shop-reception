@@ -22,6 +22,7 @@ import { formatPayloadDate } from '../../../../../utils/helpers'
 import { makeCoreGetRequest, makeCorePutRequest } from '../../../../../utils/api'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
+import { AxiosError } from 'axios'
 
 interface CorrectReceivedProductRequestData {
   productId: string
@@ -134,12 +135,20 @@ export const CorrectReceivedProduct = ({
         });
         setShouldRefreshData(true)
       },
-      onError: res => {
+      onError: (res: any ) => {
+        if (res?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+          return
+        }
+
         showNotification({
           message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
-      }
+      },
     }
   )
 
