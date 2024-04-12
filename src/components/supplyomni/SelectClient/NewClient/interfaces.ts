@@ -16,15 +16,12 @@ export interface IndividualPerson {
     id: string | number
     name: string
   }
-  type: string
 }
 
 export interface LegalPerson {
   name: string
   cif: string
-  tradeRegister: string
-  bank: string
-  bankAccount: string
+  companyRegistrationNumber: string
   phone: string
   email: string
   address: string
@@ -35,5 +32,6 @@ export interface LegalPerson {
   city: {
     id: string | number
     name: string
-  }
+  },
+  isTaxPayer: boolean
 }
