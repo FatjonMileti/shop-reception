@@ -91,7 +91,7 @@ export const AddOwnProductionTraceabilityModal = ({
     }
   )
 
-  const initialValues = useMemo(() => getInitialValues(recipeQuery), [recipeQuery.data])
+  const initialValues = useMemo(() => getInitialValues(recipeQuery, selectedProduct), [recipeQuery.data])
 
   const formik = useFormik({
     validateOnChange: false,
