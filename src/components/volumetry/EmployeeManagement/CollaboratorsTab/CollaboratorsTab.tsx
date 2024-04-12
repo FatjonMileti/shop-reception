@@ -16,6 +16,7 @@ import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import {
+  getCollaboratorsTypesOptions,
   getDepartmentsOptions,
   getJobTitlesOptions,
   getLocationsOptions
@@ -34,15 +35,14 @@ const CollaboratorsTab = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
-  const [selectedRow, setSelectedRow] = useState<EmployeeManagementItem>(null)
+  const [selectedRowId, setSelectedRowId] = useState<number>(null)
   const [modal, setModal] = useState<CRUDAction>(null)
 
   const openModal = (action: CRUDAction) => setModal(action)
   const closeModal = () => setModal(null)
 
   const selectRowId = (rowId: number, action: CRUDAction) => {
-    const item = tableItems.find((item: EmployeeManagementItem) => item.id === rowId)
-    setSelectedRow(item)
+    setSelectedRowId(rowId)
     openModal(action)
   }
 
@@ -50,8 +50,8 @@ const CollaboratorsTab = () => {
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification)
-  const { data: jobTitlesOptions, isLoading: isjobTitlesOptionsLoading } =
-    getJobTitlesOptions(showNotification)
+  const { data: collaboratorsTypesOptions, isLoading: isCollaboratorsTypesOptionsLoading } =
+    getCollaboratorsTypesOptions(showNotification)
   const { data: locationsOptions, isLoading: isLocationsLoading } = getLocationsOptions(
     showNotification,
     setLocationsFilterValue,
@@ -65,8 +65,8 @@ const CollaboratorsTab = () => {
   }
 
   const tableFilters = useMemo(
-    () => getTableFilterFields(departmentsOptions, jobTitlesOptions),
-    [departmentsOptions, jobTitlesOptions]
+    () => getTableFilterFields(departmentsOptions, collaboratorsTypesOptions),
+    [departmentsOptions, collaboratorsTypesOptions]
   )
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -132,8 +132,8 @@ const CollaboratorsTab = () => {
           isModalOpen={modal === 'delete'}
           closeModal={closeModal}
           actionUrl={`/volumetry/workers/contractors/:id`}
-          itemId={selectedRow?.id}
-          content={<Typography>Sunteti sigur ca vreti sa stergeti acest template?</Typography>}
+          itemId={selectedRowId}
+          content={<Typography>Sunteti sigur ca vreti sa stergeti acest colaborator?</Typography>}
           setShouldRefreshData={setShouldRefreshData}
           title="Sterge colaborator"
           deleteLabel="Sterge"
@@ -141,7 +141,7 @@ const CollaboratorsTab = () => {
         <CreateEditCollaborator
           isModalOpen={modal === 'edit'}
           closeModal={closeModal}
-          editItem={selectedRow}
+          editItemId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}

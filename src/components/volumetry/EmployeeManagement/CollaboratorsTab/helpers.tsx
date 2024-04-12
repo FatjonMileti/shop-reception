@@ -52,14 +52,14 @@ export const getTableFilterFields = (departmentsOptions, jobTitlesOptions) => [
     )
   },
   {
-    name: 'jobTitleId',
-    label: 'Functie',
+    name: 'workerTypeId',
+    label: 'Tip colaborator',
     type: 'autocomplete',
     value: '',
     filter: (
       <Autocomplete
         variant="outlined"
-        label="Functie"
+        label="Tip colaborator"
         options={jobTitlesOptions}
         isOptionEqualToValue={(option, value) => option.value === value.value}
       />

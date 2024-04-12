@@ -436,3 +436,29 @@ export const getRegionsOptions = (
     }
   )
 }
+
+export const getCollaborator = (
+  itemId: string | number,
+  showNotification: Function,
+  isModalOpen: boolean,
+) => {
+  return useQuery(
+    ['collaborator', itemId],
+    async () => {
+      if (itemId && isModalOpen) {
+        const result = await makeCoreGetRequest(`/volumetry/workers/contractors/${itemId}`)
+
+        return result
+      }
+      return null
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea detaliilor colaboratorului.',
+          showNotification
+        )
+    }
+  )
+}
