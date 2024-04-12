@@ -49,7 +49,7 @@ export const CorrectOwnProductionTraceabilityModal = ({
       },
       onError: res => {
         showNotification({
-          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
@@ -129,10 +129,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
       correctItemMutation.mutate(payload)
     }
   })
-
-  console.log("formik.errors: ", formik.errors)
-  console.log("formik.values: ", formik.values)
-
 
   const cancel = () => {
     closeModal()

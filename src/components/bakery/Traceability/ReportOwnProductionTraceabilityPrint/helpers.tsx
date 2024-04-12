@@ -80,7 +80,7 @@ export const batchPrintColumns = [
   },
   {
     field: 'product.name',
-    title: 'Denimire produs cu reteta',
+    title: 'Denumire produs cu reteta',
     render: row => row.product.name,
     width: '150px'
   },
