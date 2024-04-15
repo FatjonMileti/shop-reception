@@ -163,12 +163,13 @@ const App = () => {
       try {
         const result = await makeDesignerGetRequest('/screens/route-urls')
         setAllScreensRoutes(result)
-        setIsLoadingRoutes(false)
       } catch (error) {
         showNotification({
           message: `Error while fetching application pages. ${formatErrorMessage(error)}`,
           type: 'error'
         })
+      } finally {
+        setIsLoadingRoutes(false)
       }
     })()
   }, [])
@@ -200,7 +201,7 @@ const App = () => {
               <Layout modules={modules} setSubdomainId={setSubdomainId}>
                 <BackButtonTitle applicationPages={applicationPages}></BackButtonTitle>
                 <Routes>
-                  {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
+                  {/* {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />} */}
 
                   {/* private routes */}
                   <Route
