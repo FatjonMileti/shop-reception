@@ -271,7 +271,7 @@ export const ReceivedProducts = () => {
 
               if (createdDay.endOf('day').isBefore(dayjs().endOf('day'))) {
                 showNotification({
-                  message: 'Nu puteti edita receptii mai vechi de astazi',
+                  message: 'Nu puteti corecta recepții care nu au fost introduse astazi.',
                   type: 'error'
                 })
                 return
