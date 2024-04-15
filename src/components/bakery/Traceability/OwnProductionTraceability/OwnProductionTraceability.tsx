@@ -229,7 +229,7 @@ export const OwnProductionTraceability = () => {
 
                 if (createdDay.endOf('day').isBefore(dayjs().endOf('day'))) {
                   showNotification({
-                    message: 'Nu puteti edita trasabilitati mai vechi de astazi.',
+                    message: 'Nu puteti corecta trasabilitati care nu au fost introduse astazi.',
                     type: 'error'
                   })
                   return
