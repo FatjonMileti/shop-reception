@@ -6,7 +6,7 @@ export interface CountyCityInterface {
 export interface IndividualPerson {
   name: string
   phone: string
-  email: string
+  email?: string
   address: string
   county: {
     id: string | number
@@ -26,7 +26,7 @@ export interface LegalPerson {
   bank: string
   bankAccount: string
   phone: string
-  email: string
+  email?: string
   address: string
   county: {
     id: string | number

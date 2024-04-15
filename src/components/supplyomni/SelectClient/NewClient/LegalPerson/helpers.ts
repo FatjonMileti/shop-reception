@@ -30,7 +30,7 @@ export const validationSchema = Yup.object().shape({
     .required()
     .min(10, 'Trebuie sa aiba exact 10 cifre')
     .max(10, 'Trebuie sa aiba exact 10 cifre'),
-  email: Yup.string().email().required(),
+  email: Yup.string().email('Trebuie sa fie o adresa de email valida.'),
   address: Yup.string().required(),
   county: Yup.object().shape({
     id: Yup.string().required(),

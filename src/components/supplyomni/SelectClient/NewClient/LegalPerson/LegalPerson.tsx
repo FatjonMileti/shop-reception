@@ -164,7 +164,6 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           value={formik.values.email}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('email', e.target.value)}
-          required
           error={!!formik.errors.email}
           helperText={formik.errors.email as string}
         />
