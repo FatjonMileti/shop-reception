@@ -11,6 +11,7 @@ import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
 import { calculateComponentDlc, getInitialValues, toBatchFormat, validationSchema } from './helpers'
 import dayjs from 'dayjs'
+import { AxiosError } from 'axios'
 
 interface CorrectFrozenTraceabilityModalProps {
   isModalOpen: boolean
@@ -41,7 +42,15 @@ export const CorrectFrozenTraceabilityModal = ({
           type: 'success'
         })
       },
-      onError: res => {
+      onError: (res: any) => {
+        if (res?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+          return
+        }
+
         showNotification({
           message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'

@@ -112,7 +112,7 @@ export const validationSchema = Yup.object().shape({
       })
       .test((component: any, context) => {
         // not batch
-        if(!component.batchId) {
+        if (!component.batchId) {
           return true
         }
 
@@ -133,7 +133,18 @@ export const validationSchema = Yup.object().shape({
         const secondaryDlc = calculateComponentDlc(component)
         const expireDateOrDlc = dayjs(secondaryDlc || component.expireDate)
 
-        if (!expireDateOrDlc?.isAfter(dayjs(productionDate))) {
+        const mainProductDlcDays = context.options.context?.product?.dlcDays
+
+        const mainProductProductionDatePlusDlcDays = dayjs(productionDate).add(
+          mainProductDlcDays || 0,
+          'day'
+        )
+
+        if (
+          expireDateOrDlc.endOf('day').isBefore(
+            mainProductProductionDatePlusDlcDays.endOf('day')
+          )
+        ) {
           return context.createError({
             path: `${context.path}.expired`,
             message: 'Lot expirat'

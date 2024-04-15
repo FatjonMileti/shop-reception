@@ -23,16 +23,18 @@ interface ProductDetailsProps {
 }
 
 export const ProductDetails = (props: ProductDetailsProps) => {
-  const {
-    formik,
-    onCancel,
-    recipeQuery,
-    onAddBatch,
-    onAddCharge
-  } = props
+  const { formik, onCancel, recipeQuery, onAddBatch, onAddCharge } = props
 
   const selectProductSearch = useSelectProductSearch({
-    optionsMap: ({ id, name, metiCode, metricUnit }) => ({ value: id, label: name, metiCode, id, name, metricUnit })
+    optionsMap: ({ id, name, metiCode, metricUnit, dlcDays }) => ({
+      value: id,
+      label: name,
+      metiCode,
+      id,
+      name,
+      metricUnit,
+      dlcDays
+    })
   })
 
   const onDeleteBatch = id => {
@@ -46,8 +48,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
   const updateComponentQuantities = mainProductQuantity => {
     formik.values.traceabilityProductionList.forEach((component, cIndex) => {
       const componentQuantity = recipeQuery?.data?.[
-      (component.batchId && 'batches') || (component.childTraceabilityId && 'charges') || 'others'
-        ]?.find(c => c.componentCode === component.componentCode)?.componentQuantity
+        (component.batchId && 'batches') || (component.childTraceabilityId && 'charges') || 'others'
+      ]?.find(c => c.componentCode === component.componentCode)?.componentQuantity
 
       const calculatedQuantity = quantityCalculation(
         mainProductQuantity,
@@ -90,7 +92,8 @@ export const ProductDetails = (props: ProductDetailsProps) => {
                   name: value.name,
                   metiCode: value.metiCode,
                   id: value.id,
-                  metricUnit: value.metricUnit
+                  metricUnit: value.metricUnit,
+                  dlcDays: value.dlcDays
                 })
               } else {
                 formik.setFieldValue('product', null)
@@ -177,14 +180,15 @@ export const ProductDetails = (props: ProductDetailsProps) => {
             disableClearable
             options={thermalContiotionOptions}
             value={
-              thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) || null
+              thermalContiotionOptions.find(thC => thC.value === formik.values.thermalCondition) ||
+              null
             }
             onChange={(e, option) => formik.setFieldValue('thermalCondition', option.value)}
             error={!!formik.errors.thermalCondition}
             helperText={formik.errors.thermalCondition as string}
           />
         </Grid>
-        <Grid item xs={12} md={4} sx={{'& .MuiFormControl-root': {marginTop: '16px'}}}>
+        <Grid item xs={12} md={4} sx={{ '& .MuiFormControl-root': { marginTop: '16px' } }}>
           <RadioButtonGroup
             label="Conform"
             dotStyle
