@@ -164,6 +164,9 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             style={{ width: '100%' }}
             // forceDesktop
             ampm={false}
+            title="Selecteaza ora"
+            closeButtonLabel="Anuleaza"
+            confirmButtonLabel="Confirma"
           />
         </Grid>
 
@@ -179,6 +182,9 @@ const CreateEditTask: React.FC<CreateEditTaskProps> = props => {
             style={{ width: '100%' }}
             // forceDesktop
             ampm={false}
+            title="Selecteaza ora"
+            closeButtonLabel="Anuleaza"
+            confirmButtonLabel="Confirma"
           />
         </Grid>
 
