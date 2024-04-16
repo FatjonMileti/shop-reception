@@ -17,6 +17,7 @@ import {
   toChargeFormat
 } from '../AddOwnProductionTraceabilityModal/helpers'
 import { calculateComponentDlc } from './helpers'
+import { AxiosError } from 'axios'
 
 interface CorrectOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -47,9 +48,16 @@ export const CorrectOwnProductionTraceabilityModal = ({
         })
         cancel()
       },
-      onError: res => {
+      onError: (res: any) => {
+        if (res?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+          return
+        }
         showNotification({
-          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
@@ -129,10 +137,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
       correctItemMutation.mutate(payload)
     }
   })
-
-  console.log("formik.errors: ", formik.errors)
-  console.log("formik.values: ", formik.values)
-
 
   const cancel = () => {
     closeModal()

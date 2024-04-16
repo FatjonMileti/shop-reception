@@ -1,10 +1,11 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 import { calculateComponentDlc } from '../CorrectOwnProductionTraceabilityModal/helpers'
 
-export const getInitialValues = recipeQuery => {
+export const getInitialValues = (recipeQuery, product) => {
   return {
+    product,
     productionDate: dayjs(),
     chargeNumber: null,
     productionOperator: null,
@@ -104,7 +105,16 @@ export const validationSchema = Yup.object().shape({
         const secondaryDlc = calculateComponentDlc(component)
         const expireDateOrDlc = dayjs(secondaryDlc || component.expireDate)
 
-        if (!expireDateOrDlc?.isAfter(dayjs(productionDate))) {
+        const mainProductDlcDays = context.options.context?.product?.dlcDays
+
+        const mainProductProductionDatePlusDlcDays = dayjs(productionDate).add(
+          mainProductDlcDays || 0,
+          'day'
+        )
+
+        if (
+          expireDateOrDlc.endOf('day').isBefore(mainProductProductionDatePlusDlcDays.endOf('day'))
+        ) {
           return context.createError({
             path: `${context.path}.expired`,
             message: 'Lot expirat'

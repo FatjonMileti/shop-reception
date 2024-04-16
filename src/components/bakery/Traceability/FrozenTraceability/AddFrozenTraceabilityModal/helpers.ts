@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate, formatPayloadDate, getCurrentDate } from 'utils/helpers'
+import { formatPayloadDate, getCurrentDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 import { calculateComponentDlc } from '../CorrectFrozenTraceabilityModal/helpers'
 
@@ -76,8 +76,6 @@ export const validationSchema = Yup.object().shape({
       .test((component: any, context) => {
         const productionDate = context.options.context?.productionDate
 
-        console.log('productionDate: ', formatPayloadDate(productionDate))
-
         if(!productionDate) {
           return true
         }
@@ -92,8 +90,6 @@ export const validationSchema = Yup.object().shape({
 
         const secondaryDlc = calculateComponentDlc(component)
         const expireDateOrDlc = dayjs(secondaryDlc || component.expireDate)
-
-        console.log('expireDate: ', formatPayloadDate(expireDateOrDlc))
 
         if (!expireDateOrDlc?.isAfter(dayjs(productionDate))) {
           return context.createError({

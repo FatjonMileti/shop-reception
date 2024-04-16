@@ -3,9 +3,7 @@ import * as Yup from 'yup'
 export const initialValues = {
   name: '',
   cif: '',
-  tradeRegister: '',
-  bank: '',
-  bankAccount: '',
+  companyRegistrationNumber: '',
   phone: '',
   email: '',
   address: '',
@@ -17,21 +15,19 @@ export const initialValues = {
     id: '',
     name: ''
   },
-  type: 'Company'
+  isTaxPayer: false
 }
 
 export const validationSchema = Yup.object().shape({
-  name: Yup.string().required(),
-  cif: Yup.string().required(),
-  tradeRegister: Yup.string().required(),
-  bank: Yup.string().required(),
-  bankAccount: Yup.string().required(),
+  name: Yup.string().required('Numele este obligatoriu.'),
+  cif: Yup.string().required('CIF este obligatoriu.'),
+  companyRegistrationNumber: Yup.string().required('Numarul din Registrul Comertului este obligatoriu.'),
   phone: Yup.string()
-    .required()
+    .required('Numarul de telefon este obligatoriu.')
     .min(10, 'Trebuie sa aiba exact 10 cifre')
     .max(10, 'Trebuie sa aiba exact 10 cifre'),
   email: Yup.string().email('Trebuie sa fie o adresa de email valida.'),
-  address: Yup.string().required(),
+  address: Yup.string().required('Adresa este obligatorie.'),
   county: Yup.object().shape({
     id: Yup.string().required(),
     name: Yup.string().required()
@@ -40,5 +36,5 @@ export const validationSchema = Yup.object().shape({
     id: Yup.string().required(),
     name: Yup.string().required()
   }),
-  type: Yup.string().required()
+  isTaxPayer: Yup.boolean()
 })

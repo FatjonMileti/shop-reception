@@ -7,7 +7,6 @@ import {
   RadioButtonGroup
 } from '@fullscreendigital/carrefour-dex-fe'
 import React from 'react'
-import { useFormik } from 'formik'
 import dayjs from 'dayjs'
 
 import ImageIcon from '@mui/icons-material/Image'
@@ -15,13 +14,12 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import InfoIcon from '@mui/icons-material/Info'
 import { FormInfoItems } from '../../../../core-ui/FormInfoItems'
 import { Supplier, Product } from '../interfaces'
-import { productDetailsSchema } from '../helper'
 
 interface ProductDetailsProps {
-  onContinue: (data: ProductDetails) => void
   onCancel: () => void
   selectedProduct: Product
   selectedSupplier: Supplier
+  form: any
 }
 
 export interface ProductDetails {
@@ -35,34 +33,13 @@ export interface ProductDetails {
   picture: File
 }
 
-const initialValues: ProductDetails = {
-  entryDate: dayjs(),
-  hasExpirationDate: true,
-  expirationDate: null,
-  hasSecondaryDLC: true,
-  secondaryDLC: null,
-  amount: undefined,
-  lot: '',
-  picture: undefined
-}
-
 export const ProductDetails = ({
   selectedProduct,
   selectedSupplier,
-  onContinue,
-  onCancel
+  onCancel,
+  form
 }: ProductDetailsProps) => {
   const inputFileRef = React.useRef<HTMLInputElement>()
-
-  const form = useFormik<ProductDetails>({
-    enableReinitialize: false,
-    validationSchema: productDetailsSchema,
-    validateOnChange: false,
-    initialValues,
-    onSubmit: values => {
-      onContinue(values)
-    }
-  })
 
   return (
     <Grid container rowSpacing={3.5}>

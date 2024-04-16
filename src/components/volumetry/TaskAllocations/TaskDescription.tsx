@@ -156,6 +156,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             additionalAction={selectSelectedParentRow}
             title="Sterge alocare"
             deleteLabel="Sterge"
+            cancelLabel="Anuleaza"
           />
         </>
       )}

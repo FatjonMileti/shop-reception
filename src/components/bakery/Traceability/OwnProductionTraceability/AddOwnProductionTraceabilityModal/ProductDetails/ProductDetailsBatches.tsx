@@ -31,7 +31,7 @@ export const ProductDetailsBatches = ({
     <Grid container item spacing={2}>
       {receip?.batches.map((batch, index) => (
         <Fragment key={index}>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Input
               type="text"
               variant="outlined"
@@ -57,7 +57,7 @@ export const ProductDetailsBatches = ({
             />
           </Grid>
 
-          <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
+          <Grid item xs={4} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
             {batch.withBatch && (
               <IconButton
                 startIcon={<AddActionIcon />}
@@ -88,7 +88,7 @@ export const ProductDetailsBatches = ({
                         disabled
                       />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                       <Input
                         type="number"
                         variant="outlined"
@@ -138,7 +138,7 @@ export const ProductDetailsBatches = ({
 
                     <Grid
                       item
-                      xs={2}
+                      xs={3}
                       display={'flex'}
                       alignSelf={'flex-start'}
                       justifyContent={'flex-end'}
@@ -182,7 +182,7 @@ export const ProductDetailsBatches = ({
 
       {receip?.charges.map((item, index) => (
         <Fragment key={index}>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Input
               type="text"
               variant="outlined"
@@ -207,7 +207,7 @@ export const ProductDetailsBatches = ({
               infoIcon={item.componentUnit}
             />
           </Grid>
-          <Grid item xs={3} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
+          <Grid item xs={4} display={'flex'} alignSelf={'flex-end'} justifyContent={'flex-end'}>
             <IconButton
               startIcon={<AddActionIcon />}
               size="large"
@@ -224,55 +224,57 @@ export const ProductDetailsBatches = ({
           {formik.values.traceabilityProductionList.map((charge, idx) => (
             <Fragment key={idx}>
               {charge.componentCode === item.componentCode && charge.childTraceabilityId ? (
-                <Grid item container xs={12} spacing={2}>
-                  <Grid item xs={3}>
-                    <Input
-                      type="text"
-                      variant="outlined"
-                      label={`Sarja ${idx + 1}`}
-                      value={charge.componentName}
-                      name="componentName"
-                      disabled
-                    />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Input
-                      type="number"
-                      variant="outlined"
-                      label={`Cantitatea`}
-                      onChange={(e: any) => {
-                        formik.setFieldValue(
-                          `traceabilityProductionList[${idx}].quantity`,
-                          e.target.value
-                        )
-                      }}
-                      value={charge.quantity}
-                      name="quantity"
-                      infoIcon={item.componentUnit}
-                      helperText={
-                        formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
-                      }
-                      error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
-                    />
-                  </Grid>
+                <Grid item container xs={12} spacing={0.5}>
+                  <Grid item container xs={12} spacing={2}>
+                    <Grid item xs={3}>
+                      <Input
+                        type="text"
+                        variant="outlined"
+                        label={`Sarja ${idx + 1}`}
+                        value={charge.componentName}
+                        name="componentName"
+                        disabled
+                      />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Input
+                        type="number"
+                        variant="outlined"
+                        label={`Cantitatea`}
+                        onChange={(e: any) => {
+                          formik.setFieldValue(
+                            `traceabilityProductionList[${idx}].quantity`,
+                            e.target.value
+                          )
+                        }}
+                        value={charge.quantity}
+                        name="quantity"
+                        infoIcon={item.componentUnit}
+                        helperText={
+                          formik.errors?.traceabilityProductionList?.[idx]?.quantity as string
+                        }
+                        error={!!formik.errors?.traceabilityProductionList?.[idx]?.quantity}
+                      />
+                    </Grid>
 
-                  <Grid
-                    item
-                    xs={2}
-                    display={'flex'}
-                    alignSelf={'flex-start'}
-                    justifyContent={'flex-end'}
-                    sx={{ marginTop: '17px' }}
-                  >
-                    <Button
-                      onClick={() => onDeleteBatch(charge.childTraceabilityId)}
-                      variant="outlined"
-                      size="large"
-                      style={{ width: '40px', height: '40px' }}
-                      label=""
+                    <Grid
+                      item
+                      xs={3}
+                      display={'flex'}
+                      alignSelf={'flex-start'}
+                      justifyContent={'flex-end'}
+                      sx={{ marginTop: '17px' }}
                     >
-                      <DeleteActionIcon />{' '}
-                    </Button>
+                      <Button
+                        onClick={() => onDeleteBatch(charge.childTraceabilityId)}
+                        variant="outlined"
+                        size="large"
+                        style={{ width: '40px', height: '40px' }}
+                        label=""
+                      >
+                        <DeleteActionIcon />{' '}
+                      </Button>
+                    </Grid>
                   </Grid>
                 </Grid>
               ) : null}

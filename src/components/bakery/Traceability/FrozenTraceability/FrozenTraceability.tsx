@@ -18,6 +18,7 @@ import { ValueLabelInterface } from '../../interfaces'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitions'
 import { CorrectFrozenTraceabilityModal } from './CorrectFrozenTraceabilityModal/CorrectFrozenTraceabilityModal'
+import dayjs from 'dayjs'
 
 export const FrozenTraceability = () => {
   const { showNotification } = useNotification()
@@ -32,7 +33,6 @@ export const FrozenTraceability = () => {
   const [itemIdToCorrect, setItemIdToCorrect] = useState(null)
   const [itemIdToEdit, setItemIdToEdit] = useState<number | undefined>(undefined)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
@@ -70,10 +70,9 @@ export const FrozenTraceability = () => {
       return await fetchFrozenItem(itemIdToCorrect)
     },
     {
-      enabled: !!itemIdToCorrect,
+      enabled: !!itemIdToCorrect
     }
   )
-
 
   const handleRemoteDetails = async (rowId: string | number) => {
     const data = await fetchFrozenItem(rowId)
@@ -210,11 +209,11 @@ export const FrozenTraceability = () => {
           totalCount={totalCount}
           handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           filters={drawerFilters}
-          appliedFiltersLabel='Filtre'
-          applyFiltersButtonLabel='Filtrare'
-          filtersLabel='Filtrare'
-          filtersButtonLabel='Filtrare'
-          cancelFiltersButtonLabel='Anuleaza'
+          appliedFiltersLabel="Filtre"
+          applyFiltersButtonLabel="Filtrare"
+          filtersLabel="Filtrare"
+          filtersButtonLabel="Filtrare"
+          cancelFiltersButtonLabel="Anuleaza"
           toolbarActions={[
             {
               label: 'Adauga',
@@ -231,6 +230,16 @@ export const FrozenTraceability = () => {
               typographyVariant: 'medium',
               backgroundColor: '#CC4010',
               onClick: async (e, rowId) => {
+                const createdDay = dayjs(tableData.find(row => row.id === rowId)?.createdDate)
+
+                if (createdDay.endOf('day').isBefore(dayjs().endOf('day'))) {
+                  showNotification({
+                    message: 'Nu puteti corecta trasabilitati care nu au fost introduse astazi.',
+                    type: 'error'
+                  })
+                  return
+                }
+
                 setItemIdToCorrect(rowId)
               },
               desktopIcon: <EditActionIcon />

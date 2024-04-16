@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
 import { useNotification } from 'hooks'
 import { useMutation } from 'react-query'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Checkbox, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
 import { formatErrorMessage } from 'utils/formatting'
 import { useFormik } from 'formik'
@@ -95,51 +95,20 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
       <Grid item xs={12} md={6}>
         <Input
           type="text"
-          name="tradeRegister"
+          name="companyRegistrationNumber"
           label="Registrul Comertului"
           variant="outlined"
-          value={formik.values.tradeRegister}
+          value={formik.values.companyRegistrationNumber}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onUpdateValues('tradeRegister', e.target.value)
+            onUpdateValues('companyRegistrationNumber', e.target.value)
           }
           required
-          error={!!formik.errors.tradeRegister}
-          helperText={formik.errors.tradeRegister as string}
+          error={!!formik.errors.companyRegistrationNumber}
+          helperText={formik.errors.companyRegistrationNumber as string}
         />
       </Grid>
 
-      <Grid item xs={12} md={6}>
-        <Input
-          type="text"
-          name="bank"
-          label="Banca"
-          variant="outlined"
-          value={formik.values.bank}
-          fullWidth
-          onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('bank', e.target.value)}
-          required
-          error={!!formik.errors.bank}
-          helperText={formik.errors.bank as string}
-        />
-      </Grid>
-
-      <Grid item xs={12} md={6}>
-        <Input
-          type="text"
-          name="bankAccount"
-          label="IBAN"
-          variant="outlined"
-          value={formik.values.bankAccount}
-          fullWidth
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onUpdateValues('bankAccount', e.target.value)
-          }
-          required
-          error={!!formik.errors.bankAccount}
-          helperText={formik.errors.bankAccount as string}
-        />
-      </Grid>
       <Grid item xs={12} md={6}>
         <Input
           type="number"
@@ -219,6 +188,16 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           }
           error={!!formik.errors.county || !!formik.errors.city}
           helperText="required"
+        />
+      </Grid>
+
+      <Grid item xs={12} md={6}>
+        <Checkbox
+          checked={formik.values.isTaxPayer}
+          onChange={event =>
+            formik.setFieldValue('isTaxPayer', (event.target as HTMLInputElement).checked)
+          }
+          label="Platitor de TVA"
         />
       </Grid>
 

@@ -9,7 +9,7 @@ export const buildColumns = ({
 }: {
   toggleEmployee: Function
   updateEmployeeTime: Function
-  isXs: boolean,
+  isXs: boolean
   formik: any
 }) => [
   {
@@ -40,6 +40,9 @@ export const buildColumns = ({
         ampm={false}
         error={!!formik.errors.employees?.[row.index]?.shiftStart}
         helperText={formik.errors.employees?.[row.index]?.shiftStart as string}
+        title="Selecteaza ora"
+        closeButtonLabel="Anuleaza"
+        confirmButtonLabel="Confirma"
       />
     )
   },
@@ -57,6 +60,9 @@ export const buildColumns = ({
         ampm={false}
         error={!!formik.errors.employees?.[row.index]?.shiftEnd}
         helperText={formik.errors.employees?.[row.index]?.shiftEnd as string}
+        title="Selecteaza ora"
+        closeButtonLabel="Anuleaza"
+        confirmButtonLabel="Confirma"
       />
     )
   }

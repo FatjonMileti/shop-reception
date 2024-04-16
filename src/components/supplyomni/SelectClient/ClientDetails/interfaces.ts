@@ -15,10 +15,7 @@ export interface Client {
   address: Address
   name: string
   cif: string
-  tradeRegister: string
-  bank: string
-  bankAccount: string
-  type: string
+  companyRegistrationNumber: string
 }
 
 export interface OrderFormaData {

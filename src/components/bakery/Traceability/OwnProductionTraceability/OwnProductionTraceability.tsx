@@ -18,10 +18,10 @@ import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
 import { formatErrorMessage } from 'utils/formatting'
 import { CorrectOwnProductionTraceabilityModal } from './CorrectOwnProductionTraceabilityModal/CorrectOwnProductionTraceabilityModal'
 import { Filter } from '../../../core-ui/Table/TableDefinitions'
+import dayjs from 'dayjs'
 
 export const OwnProductionTraceability = () => {
   const { showNotification } = useNotification()
-
 
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -62,11 +62,7 @@ export const OwnProductionTraceability = () => {
   }
   const handleRemoteDetails = async (rowId: string | number) => {
     const data = await fetchProductionItem(rowId)
-    return (
-      <OwnProductionTraceabilityDescription
-        item={data}
-      />
-    )
+    return <OwnProductionTraceabilityDescription item={data} />
   }
 
   const fetchProductionItem = async (rowId: string | number) => {
@@ -208,11 +204,11 @@ export const OwnProductionTraceability = () => {
           totalCount={totalCount}
           hasSearchInput
           filters={drawerFilters}
-          appliedFiltersLabel='Filtre'
-          applyFiltersButtonLabel='Filtrare'
-          filtersLabel='Filtrare'
-          filtersButtonLabel='Filtrare'
-          cancelFiltersButtonLabel='Anuleaza'
+          appliedFiltersLabel="Filtre"
+          applyFiltersButtonLabel="Filtrare"
+          filtersLabel="Filtrare"
+          filtersButtonLabel="Filtrare"
+          cancelFiltersButtonLabel="Anuleaza"
           toolbarActions={[
             {
               label: 'Adauga',
@@ -229,6 +225,16 @@ export const OwnProductionTraceability = () => {
               typographyVariant: 'medium',
               backgroundColor: '#CC4010',
               onClick: async (e, rowId) => {
+                const createdDay = dayjs(tableData.find(row => row.id === rowId)?.createdDate)
+
+                if (createdDay.endOf('day').isBefore(dayjs().endOf('day'))) {
+                  showNotification({
+                    message: 'Nu puteti corecta trasabilitati care nu au fost introduse astazi.',
+                    type: 'error'
+                  })
+                  return
+                }
+
                 setItemIdToCorrect(rowId)
               },
               desktopIcon: <EditActionIcon />

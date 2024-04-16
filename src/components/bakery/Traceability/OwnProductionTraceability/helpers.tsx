@@ -64,11 +64,7 @@ export const columns: any[] = [
   {
     title: 'DLC sec MP',
     align: 'left',
-    render: row =>
-      (!row.childTraceability &&
-        row?.dlc &&
-        formatBakeryPayloadDate(dayjs(row?.dlc, 'DD-MM-YYYY'))) ||
-      '',
+    render: row => (!row.childTraceability && row?.dlc && formatBakeryPayloadDate(row?.dlc)) || '',
     collapsible: 'true'
   },
   {
@@ -90,12 +86,10 @@ export const toTableRowItems = (items: any[]) => {
     batchName: item.batch?.batchName || '',
     batchQuantity: item.batch?.batchQuantity || '',
     quantity: item.quantity || '',
-    productionDate: formatBakeryPayloadDate(item.batch?.entryDate) || '',
-
-    batch: item.batch || {},
+    batch: item.batch,
 
     storeName: item?.batch?.supplier?.supplierName || '',
-    dlc: formatBakeryPayloadDate(item.dlc) || '',
+    dlc: item.dlc || '',
     openingDate: item.openingDate || '',
 
     childTraceability: item.childTraceability

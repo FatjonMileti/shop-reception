@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
+import { formatPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
 export const getInitialValues = editItem => {

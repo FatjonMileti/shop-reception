@@ -21,6 +21,7 @@ import { Product } from '../../ReceivedProducts/interfaces'
 import { SelectCharge } from './SelectCharge'
 import dayjs from 'dayjs'
 import { calculateComponentDlc } from '../CorrectOwnProductionTraceabilityModal/helpers'
+import { AxiosError } from 'axios'
 
 interface AddOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -49,9 +50,16 @@ export const AddOwnProductionTraceabilityModal = ({
         })
         cancel()
       },
-      onError: res => {
+      onError: (res: any) => {
+        if (res?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+          return
+        }
         showNotification({
-          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
@@ -91,7 +99,7 @@ export const AddOwnProductionTraceabilityModal = ({
     }
   )
 
-  const initialValues = useMemo(() => getInitialValues(recipeQuery), [recipeQuery.data])
+  const initialValues = useMemo(() => getInitialValues(recipeQuery, selectedProduct), [recipeQuery.data])
 
   const formik = useFormik({
     validateOnChange: false,

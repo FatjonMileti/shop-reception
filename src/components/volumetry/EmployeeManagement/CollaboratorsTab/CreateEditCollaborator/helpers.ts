@@ -34,7 +34,7 @@ export const getInitialValues = editItem => {
       ? { label: editItem.genericDepartment, value: editItem.genericDepartment }
       : null,
     workerType: editItem?.workerType
-      ? { label: editItem.workerType, value: editItem.workerType }
+      ? { label: editItem.workerType, value: editItem.workerTypeId }
       : null,
     employer: editItem?.employer || ''
   }
