@@ -141,9 +141,13 @@ export const validationSchema = Yup.object().shape({
         )
 
         if (
-          expireDateOrDlc.endOf('day').isBefore(
-            mainProductProductionDatePlusDlcDays.endOf('day')
-          )
+          expireDateOrDlc
+            .endOf('day')
+            .isBefore(mainProductProductionDatePlusDlcDays.endOf('day')) ||
+          (!!component?.expireDate &&
+            !dayjs(component?.expireDate)
+              .endOf('day')
+              .isAfter(mainProductProductionDatePlusDlcDays.endOf('day')))
         ) {
           return context.createError({
             path: `${context.path}.expired`,

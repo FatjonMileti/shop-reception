@@ -222,7 +222,8 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
         {formik.values.traceabilityFrozenList.map((item, index) => (
           <Grid item container xs={12} spacing={0.5} key={index}>
             <Grid item container xs={12} spacing={2}>
-              <Grid item xs={3}>
+              <Grid item container xs={9} spacing={2}>
+              <Grid item md={4} xs={6}>
                 <Input
                   type="text"
                   variant="outlined"
@@ -237,7 +238,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
                   disabled
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={4} xs={6}>
                 <Input
                   type="number"
                   variant="outlined"
@@ -256,7 +257,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
               </Grid>
 
               {item.hasSecondaryDlc && (
-                <Grid item xs={3}>
+                <Grid item md={4} xs={6}>
                   <DatePicker
                     label="Data deschidere"
                     onChange={value =>
@@ -281,6 +282,7 @@ export const ProductDetails = ({ formik, onCancel, onSelectBatch }: ProductDetai
                   />
                 </Grid>
               )}
+              </Grid>
 
               <Grid
                 item
