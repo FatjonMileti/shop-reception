@@ -53,6 +53,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
         message: `Product ${editItem ? 'updated' : 'created'} successfully`,
         type: 'success'
       })
+      setShouldRefreshData(true)
     },
     onError: res => {
       showNotification({
@@ -86,7 +87,6 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
         mutate(payload)
         resetForm()
         closeModal()
-        setShouldRefreshData(true)
       } catch (error) {
         showNotification({
           message: `Error while data. ${formatErrorMessage(error)}`,

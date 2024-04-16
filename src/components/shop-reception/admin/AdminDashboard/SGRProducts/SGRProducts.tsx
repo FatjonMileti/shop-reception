@@ -222,7 +222,7 @@ const SGRProducts = () => {
       <DeleteConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
-        actionUrl="/shop-reception/admin/sgrProducts/:id"
+        actionUrl="/shop-reception/products/sgr/:id"
         itemId={`${selectedRow?.id}`}
         cancelLabel="Nu"
         deleteLabel="Da"
