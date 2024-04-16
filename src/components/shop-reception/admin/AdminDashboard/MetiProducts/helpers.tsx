@@ -84,49 +84,49 @@ export const drawerFilters = (
         variant="outlined"
         label="Selectează unitate de masură"
         disableClearable
-        options={measurementUnitsOptions}
+        options={measurementUnitsOptions || []}
       />
     ),
     type: 'autocomplete',
     label: 'Selectează unitate de masură'
   },
   {
-    name: 'rayon',
+    name: 'rayCode',
     value: '',
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selectează raion"
         disableClearable
-        options={metiRayonsOptions}
+        options={metiRayonsOptions || []}
       />
     ),
     type: 'autocomplete',
     label: 'Selectează raion'
   },
   {
-    name: 'family',
+    name: 'famCode',
     value: '',
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selectează familie"
         disableClearable
-        options={metiFamiliesOptions}
+        options={metiFamiliesOptions || []}
       />
     ),
     type: 'autocomplete',
     label: 'Selectează familie'
   },
   {
-    name: 'subFamiliy',
+    name: 'sfaCode',
     value: '',
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selectează subfamilie"
         disableClearable
-        options={metiSubfamiliesOptions}
+        options={metiSubfamiliesOptions || []}
       />
     ),
     type: 'autocomplete',

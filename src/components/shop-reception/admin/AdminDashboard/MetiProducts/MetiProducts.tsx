@@ -120,9 +120,9 @@ const MetiProducts = () => {
   return (
     <div className={s.mainContainer}>
       <Table
-        hideCheckbox
-        orderBy="role"
+        orderBy="code"
         order="asc"
+        hideCheckbox
         columns={columns}
         items={tableItems}
         fetchData={fetchData}
