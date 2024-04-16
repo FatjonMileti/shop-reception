@@ -8,7 +8,7 @@ export const columns = [
     field: 'shopType',
     align: 'left',
     type: 'string',
-    render: row => row.shopType.value
+    render: row => row.shopType?.value
   },
   {
     title: 'Regiune',
@@ -30,10 +30,10 @@ export const columns = [
   },
   {
     title: 'Tip scanare',
-    field: 'type',
+    field: 'scanType',
     align: 'left',
     type: 'string',
-    render: row => row.type.value
+    render: row => row.type?.value
   },
   {
     title: 'Datǎ start',

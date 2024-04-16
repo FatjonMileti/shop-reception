@@ -46,7 +46,7 @@ const DLCProducts = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/shop-reception/short-dlc',
+          url: '/shop-reception/products/short-dlc',
           tableFilters,
           page,
           rowsPerPage,
@@ -203,8 +203,8 @@ const DLCProducts = () => {
       />
       <Table
         hideCheckbox
-        orderBy="role"
-        order="asc"
+        // orderBy="role"
+        // order="asc"
         columns={columns}
         items={tableItems}
         fetchData={fetchData}

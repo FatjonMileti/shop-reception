@@ -19,11 +19,20 @@ interface ScanTypeFormProps {
   editItem?: ScanType
   ruleTypes: AutocompleteOption[]
   scanTypes: AutocompleteOption[]
+  shopTypes: AutocompleteOption[]
 }
 
 const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
-  const { isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData, ruleTypes, scanTypes } =
-    props
+  const {
+    isModalOpen,
+    closeModal,
+    isEdit,
+    editItem,
+    setShouldRefreshData,
+    ruleTypes,
+    scanTypes,
+    shopTypes
+  } = props
   const { showNotification } = useNotification()
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
@@ -58,7 +67,23 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      mutate(values)
+      const payload = {
+        scanType: values.scanType,
+        ruleOrganisationType: values.ruleOrganisationType,
+        active: values.active,
+        start: values.start,
+        end: values.end,
+
+        ...(values.shopCode && {
+          shopCode: values.shopCode?.key || null
+        }),
+        ...(values.regionId && {
+          regionId: values.regionId?.key || null
+        }),
+        ruleShopType: null
+      }
+
+      mutate(payload)
       formik.resetForm()
       setShouldRefreshData(true)
       closeModal()
@@ -68,7 +93,10 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
   return (
     <Modal
       isModalOpen={isModalOpen}
-      closeModal={closeModal}
+      closeModal={() => {
+        closeModal()
+        formik.resetForm()
+      }}
       modalTitle={isEdit ? 'Editează regulă de scanare' : 'Adaugă regulă de scanare'}
       modalWidth="50%"
     >
@@ -79,17 +107,60 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
             label="Tip regula"
             disableClearable
             options={ruleTypes}
-            onChange={(e, option) =>
+            onChange={(e, option) => {
               formik.setFieldValue('ruleOrganisationType', {
                 value: option.label,
                 key: option.value
               })
-            }
-            defaultValue={ruleTypes?.find(
-              ruleType => ruleType.value === formik.values.ruleShopType?.value
-            )}
+
+              if (option.value !== 'SHOP') {
+                formik.setFieldValue('shopCode', null)
+              }
+
+              if (option.value !== 'REGION') {
+                formik.setFieldValue('regionId', null)
+              }
+            }}
+            value={{
+              value: formik.values.ruleOrganisationType?.key || '',
+              label: formik.values.ruleOrganisationType?.value || ''
+            }}
           />
         </Grid>
+
+        {formik.values.ruleOrganisationType?.key === 'SHOP' && (
+          <Grid item xs={12}>
+            <Autocomplete
+              variant="outlined"
+              label="Magazin"
+              disableClearable
+              options={shopTypes}
+              onChange={(e, option) =>
+                formik.setFieldValue('shopCode', {
+                  value: option.label,
+                  key: option.value
+                })
+              }
+            />
+          </Grid>
+        )}
+
+        {formik.values.ruleOrganisationType?.key === 'REGION' && (
+          <Grid item xs={12}>
+            <Autocomplete
+              variant="outlined"
+              label="Regiune"
+              disableClearable
+              options={[]}
+              onChange={(e, option) =>
+                formik.setFieldValue('regionId', {
+                  value: option.label,
+                  key: option.value
+                })
+              }
+            />
+          </Grid>
+        )}
 
         <Grid item xs={12}>
           <Autocomplete
@@ -103,9 +174,10 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
                 key: option.value
               })
             }
-            defaultValue={scanTypes?.find(
-              scanType => scanType.value === formik.values.scanType?.value
-            )}
+            value={{
+              value: formik.values.scanType?.key || '',
+              label: formik.values.scanType?.value || ''
+            }}
           />
         </Grid>
 

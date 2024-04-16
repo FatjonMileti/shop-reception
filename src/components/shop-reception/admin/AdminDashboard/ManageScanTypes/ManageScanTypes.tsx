@@ -65,8 +65,8 @@ const ManageScanTypes = () => {
     async () => {
       const data = await makeCoreGetRequest(`/shop-reception/products/types`)
       return data.map(item => ({
-        label: item,
-        value: item
+        label: item.value,
+        value: item.key
       }))
     },
     {
@@ -86,8 +86,8 @@ const ManageScanTypes = () => {
     async () => {
       const data = await makeCoreGetRequest(`/shop-reception/scan-types/rule-organisation-types`)
       return data.map(item => ({
-        label: item.value,
-        value: item.key
+        label: item?.value,
+        value: item?.key
       }))
     },
     {
@@ -105,8 +105,8 @@ const ManageScanTypes = () => {
     async () => {
       const data = await makeCoreGetRequest(`/shop-reception/scan-types/types`)
       return data.map(item => ({
-        label: item.value,
-        value: item.key
+        label: item?.value,
+        value: item?.key
       }))
     },
     {
@@ -129,6 +129,7 @@ const ManageScanTypes = () => {
         setShouldRefreshData={setShouldRefreshData}
         ruleTypes={ruleTypes}
         scanTypes={scanTypes}
+        shopTypes={shopTypes}
       />
       <ScanTypeForm
         isModalOpen={createUpdateModal === 'update'}
@@ -138,6 +139,7 @@ const ManageScanTypes = () => {
         isEdit
         ruleTypes={ruleTypes}
         scanTypes={scanTypes}
+        shopTypes={shopTypes}
       />
       <DeleteConfirmationModal
         isModalOpen={isDeleteModalOpen}
@@ -149,7 +151,7 @@ const ManageScanTypes = () => {
       />
       <Table
         hideCheckbox
-        orderBy="role"
+        orderBy="name"
         order="asc"
         columns={columns}
         items={tableItems}
@@ -186,7 +188,7 @@ const ManageScanTypes = () => {
         rowActionsWidth="130px"
         toolbarActions={[
           {
-            label: 'Produse sensibile',
+            label: 'Regula scanare',
             icon: <AddActionIcon />,
             onClick: openCreateModal
           }
