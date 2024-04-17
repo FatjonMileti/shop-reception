@@ -27,8 +27,16 @@ export const buildColumns = ({
     )
   },
   {
+    title: 'Departament',
+    field: 'genericDepartment',
+    render: row => (
+      <span style={{ display: 'inline-block', lineHeight: '45px' }}>{row.genericDepartment}</span>
+    )
+  },
+  {
     title: 'Ora inceput de tura',
     field: 'shiftStart',
+    collapsible: true,
     render: row => (
       <TimePicker
         label=""
@@ -49,6 +57,7 @@ export const buildColumns = ({
   {
     title: 'Ora final de tura',
     field: 'shiftEnd',
+    collapsible: true,
     render: row => (
       <TimePicker
         label=""
