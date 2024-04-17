@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
 import { Home } from '../Home'
@@ -199,45 +199,57 @@ const App = () => {
             )) || (
               <Layout modules={modules} setSubdomainId={setSubdomainId}>
                 <BackButtonTitle applicationPages={applicationPages}></BackButtonTitle>
-                <Routes>
-                  {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
-
-                  {/* private routes */}
-                  <Route
-                    path={URLS.AUTH_HOME}
-                    element={
-                      <PrivateRoute
-                        component={Home}
-                        modules={modules}
-                        setSubdomainId={setSubdomainId}
+                <React.Suspense
+                  fallback={
+                    <div style={{ display: 'flex' }}>
+                      <CircularProgress
+                        color="primary"
+                        style={{ margin: '40px auto' }}
+                        disableShrink
                       />
-                    }
-                  />
-                  {governanceRoutes}
-                  {bakeryRoutes}
-                  {volumetryRoutes}
-                  {supplyOmniRoutes}
-                  {merchandiseRoutes}
-                  {shopReceptionRoutes}
-                  {applicationModulesPages.map(page =>
-                    createRoute(
-                      {
-                        ...page,
-                        subdomainId,
-                        modules,
-                        applicationPages,
-                        hasLoadedActivities,
-                        isLoadingActivities
-                      },
-                      ServiceDomain
-                    )
-                  )}
-                  {/* end of private routes */}
+                    </div>
+                  }
+                >
+                  <Routes>
+                    {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
 
-                  <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
-                  <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
-                  {applicationPages.length && <Route path="*" element={<NotFound />} />}
-                </Routes>
+                    {/* private routes */}
+                    <Route
+                      path={URLS.AUTH_HOME}
+                      element={
+                        <PrivateRoute
+                          component={Home}
+                          modules={modules}
+                          setSubdomainId={setSubdomainId}
+                        />
+                      }
+                    />
+                    {governanceRoutes}
+                    {bakeryRoutes}
+                    {volumetryRoutes}
+                    {supplyOmniRoutes}
+                    {merchandiseRoutes}
+                    {shopReceptionRoutes}
+                    {applicationModulesPages.map(page =>
+                      createRoute(
+                        {
+                          ...page,
+                          subdomainId,
+                          modules,
+                          applicationPages,
+                          hasLoadedActivities,
+                          isLoadingActivities
+                        },
+                        ServiceDomain
+                      )
+                    )}
+                    {/* end of private routes */}
+
+                    <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
+                    <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
+                    {applicationPages.length && <Route path="*" element={<NotFound />} />}
+                  </Routes>
+                </React.Suspense>
               </Layout>
             )}
           </ThemeProvider>
