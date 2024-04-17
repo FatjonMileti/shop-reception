@@ -1,6 +1,6 @@
-import { Autocomplete } from "@fullscreendigital/carrefour-dex-fe";
-import { Box } from "@mui/material";
-import { IconCell } from "components/core-ui/IconCell";
+import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { Box } from '@mui/material'
+import { IconCell } from 'components/core-ui/IconCell'
 
 export const columns = [
   {
@@ -69,7 +69,7 @@ export const drawerFilters = (shopTypes, regionTypes, scanTypes) => [
         variant="outlined"
         label="Selectează magazin"
         disableClearable
-        options={shopTypes}
+        options={shopTypes || []}
       />
     ),
     type: 'autocomplete',
@@ -83,7 +83,7 @@ export const drawerFilters = (shopTypes, regionTypes, scanTypes) => [
         variant="outlined"
         label="Selectează regiune"
         disableClearable
-        options={regionTypes}
+        options={regionTypes || []}
       />
     ),
     type: 'autocomplete',
@@ -97,7 +97,7 @@ export const drawerFilters = (shopTypes, regionTypes, scanTypes) => [
         variant="outlined"
         label="Selectează tip scanare"
         disableClearable
-        options={scanTypes}
+        options={scanTypes || []}
       />
     ),
     type: 'autocomplete',
@@ -112,15 +112,12 @@ export const drawerFilters = (shopTypes, regionTypes, scanTypes) => [
         label="Activ"
         disableClearable
         options={[
-          {value: 'active', label: 'Activ'},
-          {value: 'inactive', label: 'Inactiv'},
-          
+          { value: 'active', label: 'Activ' },
+          { value: 'inactive', label: 'Inactiv' }
         ]}
       />
     ),
     type: 'autocomplete',
     label: 'Activ'
-  },
-
- 
+  }
 ]

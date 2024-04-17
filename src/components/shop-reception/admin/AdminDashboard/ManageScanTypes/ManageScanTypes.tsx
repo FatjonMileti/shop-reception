@@ -121,6 +121,28 @@ const ManageScanTypes = () => {
     }
   )
 
+
+  const { data: regionTypes } = useQuery(
+    ['region-types'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/regions/accessible`)
+      return data.map(item => ({
+        label: item?.name,
+        value: item?.code
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea regiunilor. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
   return (
     <div className={s.mainContainer}>
       <ScanTypeForm
@@ -130,6 +152,7 @@ const ManageScanTypes = () => {
         ruleTypes={ruleTypes}
         scanTypes={scanTypes}
         shopTypes={shopTypes}
+        regionTypes={regionTypes}
       />
       <ScanTypeForm
         isModalOpen={createUpdateModal === 'update'}
@@ -140,6 +163,7 @@ const ManageScanTypes = () => {
         ruleTypes={ruleTypes}
         scanTypes={scanTypes}
         shopTypes={shopTypes}
+        regionTypes={regionTypes}
       />
       <DeleteConfirmationModal
         isModalOpen={isDeleteModalOpen}
@@ -151,14 +175,12 @@ const ManageScanTypes = () => {
       />
       <Table
         hideCheckbox
-        orderBy="name"
-        order="asc"
         columns={columns}
         items={tableItems}
         fetchData={fetchData}
         isLoading={isLoading}
         totalCount={totalCount}
-        filters={drawerFilters(shopTypes, [], scanTypes)}
+        filters={drawerFilters(shopTypes, regionTypes, scanTypes)}
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
         rowActions={[

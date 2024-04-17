@@ -71,6 +71,17 @@ interface AdminStore {
   canEditQuantities: string
   active: boolean
   hourlyIntervals: number
+  address: string
+  city: string
+  town: string
+  regNumber: string
+  CIF: string
+  office: string
+  bankName: string
+  bankAccount: string
+  capital: string
+  parentSociety: string
+  canCallReturnTruck: boolean
 }
 
 interface AdminRegion {

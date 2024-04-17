@@ -7,7 +7,7 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { Grid } from '@mui/material'
 import { AutocompleteOption } from 'components/volumetry/interfaces'
-import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { makeCorePatchRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import dayjs from 'dayjs'
 
@@ -20,6 +20,7 @@ interface ScanTypeFormProps {
   ruleTypes: AutocompleteOption[]
   scanTypes: AutocompleteOption[]
   shopTypes: AutocompleteOption[]
+  regionTypes: AutocompleteOption[]
 }
 
 const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
@@ -31,7 +32,8 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
     setShouldRefreshData,
     ruleTypes,
     scanTypes,
-    shopTypes
+    shopTypes,
+    regionTypes
   } = props
   const { showNotification } = useNotification()
 
@@ -40,7 +42,7 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
 
   const createUpdateScanType = async (values: any) => {
     isEdit
-      ? await makeCorePutRequest(`/shop-reception/scan-types/${editItem.id}`, values)
+      ? await makeCorePatchRequest(`/shop-reception/scan-types/${editItem.id}`, values)
       : await makeCorePostRequest(`/shop-reception/scan-types`, values)
   }
 
@@ -50,6 +52,10 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
         message: `Data ${isEdit ? 'updated' : 'created'} successfully`,
         type: 'success'
       })
+
+      closeModal()
+      formik.resetForm()
+      setShouldRefreshData(true)
     },
     onError: res => {
       showNotification({
@@ -84,9 +90,6 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
       }
 
       mutate(payload)
-      formik.resetForm()
-      setShouldRefreshData(true)
-      closeModal()
     }
   })
 
@@ -151,7 +154,7 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
               variant="outlined"
               label="Regiune"
               disableClearable
-              options={[]}
+              options={regionTypes || []}
               onChange={(e, option) =>
                 formik.setFieldValue('regionId', {
                   value: option.label,
@@ -228,6 +231,7 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
               variant="contained"
               label="Salveaza"
               onClick={() => formik.handleSubmit()}
+              disabled={isLoading}
             />
           </Grid>
         </Grid>
