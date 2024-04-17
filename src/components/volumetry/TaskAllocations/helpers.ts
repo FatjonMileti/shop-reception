@@ -34,6 +34,7 @@ export const getValidationSchema = minDivision =>
     taskTemplateId: yup.number().required('Acest camp este obligatoriu.'),
     allocatedWorkload: yup
       .number()
+      .min(1)
       .required('Acest camp este obligatoriu.')
       .test(
         'isCustomStep',

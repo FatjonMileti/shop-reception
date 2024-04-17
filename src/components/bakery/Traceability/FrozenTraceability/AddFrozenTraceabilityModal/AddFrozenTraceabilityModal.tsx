@@ -139,22 +139,35 @@ export const AddFrozenTraceabilityModal = ({
         )}
         {!frozenTraceabilityMutation.isLoading && (
           <>
-            {
-              [
-                <SelectOrScanProduct
-                  setSelectedProduct={setSelectedProduct}
-                  selectedProduct={selectedProduct}
-                  onContinue={() => setStep(1)}
-                  onCancel={cancel}
-                />,
-                <ProductDetails
-                  selectedProduct={selectedProduct}
-                  onSelectBatch={() => {
-                    setStep(2)
-                  }}
-                  onCancel={cancel}
-                  formik={formik}
-                />,
+            {step === 0 && (
+              <SelectOrScanProduct
+                setSelectedProduct={setSelectedProduct}
+                selectedProduct={selectedProduct}
+                onContinue={() => setStep(1)}
+                onCancel={cancel}
+              />
+            )}
+
+            {step > 0 && (
+              <ProductDetails
+                selectedProduct={selectedProduct}
+                onSelectBatch={() => {
+                  setStep(2)
+                }}
+                onCancel={cancel}
+                formik={formik}
+              />
+            )}
+
+            {step === 2 && (
+              <Modal
+                isModalOpen={isModalOpen}
+                closeModal={() => {
+                  setStep(1)
+                }}
+                modalTitle="Adauga trasabilitate congelate si ambalaje"
+                modalWidth="50%"
+              >
                 <SelectBatch
                   selectedProduct={selectedProduct}
                   onContinue={frozenItems => {
@@ -166,8 +179,8 @@ export const AddFrozenTraceabilityModal = ({
                   }}
                   productionDate={formik.values.productionDate}
                 />
-              ][step]
-            }
+              </Modal>
+            )}
           </>
         )}
       </Grid>
