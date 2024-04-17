@@ -1,87 +1,179 @@
 import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
+import { Box } from '@mui/material'
+import { IconCell } from 'components/core-ui/IconCell'
+import { ViewActionIcon } from 'icons'
 
-export const columns = [
+export const columns = (setModal, selectRow) => [
   {
     title: 'Cod Magazin',
     field: 'metiCode',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Nume',
     field: 'metiName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Tip Magazin',
     field: 'metiType',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Versiune METI',
     field: 'metiVersion',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Cod AD',
     field: 'adCode',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    width: '50px'
   },
   {
     title: 'Abatere receptie produse (grame)',
     field: 'receptionDeviation',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    width: '100px'
   },
   {
     title: 'Regiune',
     field: 'regionName',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    width: '100px'
   },
   {
     title: 'IP SFTP',
     field: 'sftpIp',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    width: '100px'
   },
   {
     title: 'Cale SFTP',
     field: 'sftpPath',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    width: '100px'
   },
   {
     title: 'Permite editare cantitǎți recepționate',
     field: 'canEditQuantities',
     align: 'left',
     type: 'string',
-    render: row => (row.canEditQuantities ? 'Da' : 'Nu'),
-    disableSorting: true
+    render: row => (
+      <Box>
+        <IconCell value={row.active ? 'active' : 'inactive'} />
+      </Box>
+    ),
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Activ',
     field: 'active',
     align: 'left',
     type: 'string',
-    render: row => (row.active ? 'Da' : 'Nu')
+    render: row => (
+      <Box>
+        <IconCell value={row.active ? 'active' : 'inactive'} />
+      </Box>
+    ),
+    width: '100px'
+  },
+  {
+    title: 'Adresa',
+    field: 'address',
+    align: 'left',
+    type: 'string',
+    width: '150px'
+  },
+  {
+    title: 'Oras',
+    field: 'city',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'Judet/Sector',
+    field: 'town',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'Nr.ord.reg.com./an',
+    field: 'regNumber',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'C.I.F',
+    field: 'CIF',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'Sediul',
+    field: 'office',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'Banca',
+    field: 'bankName',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'Contul',
+    field: 'bankAccount',
+    align: 'left',
+    type: 'string',
+    width: '100px'
+  },
+  {
+    title: 'Capital social subscris varsat',
+    field: 'capital',
+    align: 'left',
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Intervale orare',
     field: 'hourlyIntervals',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px',
+    render: row => (
+      <div
+        style={{ cursor: 'pointer' }}
+        onClick={() => {
+          selectRow(row.id)
+          setModal('interval')
+        }}
+      >
+        <ViewActionIcon />
+      </div>
+    )
   }
 ]
 
@@ -94,7 +186,7 @@ export const drawerFilters = (shopCodes, metiShops, metiVersions, shopTypes, par
         variant="outlined"
         label="Selectează magazin"
         disableClearable
-        options={shopCodes}
+        options={shopCodes || []}
       />
     ),
     type: 'autocomplete',
@@ -109,7 +201,7 @@ export const drawerFilters = (shopCodes, metiShops, metiVersions, shopTypes, par
         variant="outlined"
         label="Selectează versiune"
         disableClearable
-        options={metiVersions}
+        options={metiVersions || []}
       />
     ),
     type: 'autocomplete',
@@ -124,7 +216,7 @@ export const drawerFilters = (shopCodes, metiShops, metiVersions, shopTypes, par
         variant="outlined"
         label="Selectează regiune"
         disableClearable
-        options={metiShops}
+        options={metiShops || []}
       />
     ),
     type: 'autocomplete',
@@ -141,12 +233,12 @@ export const drawerFilters = (shopCodes, metiShops, metiVersions, shopTypes, par
         disableClearable
         options={[
           {
-            value: 'active',
+            value: 'true',
             label: 'Activ'
           },
 
           {
-            value: 'inactive',
+            value: 'false',
             label: 'Inactiv'
           }
         ]}
@@ -164,7 +256,7 @@ export const drawerFilters = (shopCodes, metiShops, metiVersions, shopTypes, par
         variant="outlined"
         label="Selecteaza tip magazin"
         disableClearable
-        options={shopTypes}
+        options={shopTypes || []}
       />
     ),
     type: 'autocomplete',
@@ -179,7 +271,7 @@ export const drawerFilters = (shopCodes, metiShops, metiVersions, shopTypes, par
         variant="outlined"
         label="Selecteaza societatea"
         disableClearable
-        options={parentSocieties}
+        options={parentSocieties || []}
       />
     ),
     type: 'autocomplete',

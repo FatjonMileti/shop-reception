@@ -12,6 +12,7 @@ import { Table } from 'components/core-ui/Table'
 import { EditActionIcon } from 'icons'
 import { useQuery } from 'react-query'
 import { AutocompleteOption } from 'components/volumetry/interfaces'
+import StoreIntervalModal from './StoreIntervalModal/StoreIntervalModal'
 
 const AdminStore = () => {
   const { showNotification } = useNotification()
@@ -63,12 +64,13 @@ const AdminStore = () => {
     async () => {
       const result = await makeCoreGetRequest('/shop-reception/shops/codes')
 
-      const resultOptions = result.map(
+      const resultOptions = result.list.map(
         (item: any): AutocompleteOption => ({
           label: item.displayName,
           value: item.code
         })
       )
+
       return resultOptions || []
     },
     {
@@ -131,9 +133,9 @@ const AdminStore = () => {
     async () => {
       const result = await makeCoreGetRequest('/shop-reception/products/types')
       const resultOptions = result.map(
-        (item: string): AutocompleteOption => ({
-          label: item,
-          value: item
+        (item): AutocompleteOption => ({
+          label: item.value,
+          value: item.key
         })
       )
       return resultOptions || []
@@ -174,18 +176,35 @@ const AdminStore = () => {
 
   return (
     <div className={s.mainContainer}>
-      <AdminStoreForm isOpen={modal === 'create'} closeModal={closeModal} />
+      <AdminStoreForm
+        isOpen={modal === 'create'}
+        closeModal={closeModal}
+        shopCodes={shopCodes}
+        metiVersions={metiVersions}
+        parentSocieties={parentSocieties}
+        metiShops={metiShops}
+      />
       <AdminStoreForm
         isOpen={modal === 'update'}
         closeModal={closeModal}
         editItem={selectedRow}
         isEdit
+        shopCodes={shopCodes}
+        metiVersions={metiVersions}
+        parentSocieties={parentSocieties}
+        metiShops={metiShops}
+      />
+
+      <StoreIntervalModal
+        isOpen={modal === 'interval'}
+        closeModal={closeModal}
+        item={selectedRow}
       />
       <Table
         hideCheckbox
-        orderBy="metiCode"
+        orderBy="code"
         order="asc"
-        columns={columns}
+        columns={columns(setModal, selectRow)}
         items={tableItems}
         fetchData={fetchData}
         isLoading={isLoading}

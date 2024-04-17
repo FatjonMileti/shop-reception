@@ -2,35 +2,76 @@ import { useMemo } from 'react'
 import { Input, Checkbox, Button, Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { Grid } from '@mui/material'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
-import { useMutation } from 'react-query'
+import {
+  makeCoreGetRequest,
+  makeCorePatchRequest,
+  makeCorePostRequest,
+} from 'utils/api'
+import { useMutation, useQuery } from 'react-query'
+import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 
 interface NewAdminDepositProps {
   isOpen: boolean
   closeModal: Function
   isEdit?: boolean
   editItem?: AdminStore
+  shopCodes: AutocompleteOption[]
+  metiVersions: AutocompleteOption[]
+  parentSocieties: AutocompleteOption[]
+  metiShops: AutocompleteOption[]
 }
 
 const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
-  const { isOpen, closeModal, isEdit, editItem } = props
+  const {
+    isOpen,
+    closeModal,
+    isEdit,
+    editItem,
+    shopCodes,
+    metiVersions,
+    parentSocieties,
+    metiShops
+  } = props
   const { showNotification } = useNotification()
+
+  const { data: depositsOptions } = useQuery(
+    ['deposits'],
+    async () => {
+      const result = await makeCoreGetRequest('/shop-reception/deposits/accessible')
+
+      const resultOptions = result.map(
+        (item: any): AutocompleteOption => ({
+          label: item.displayName,
+          value: item.id
+        })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
 
   const addShop = async values => {
     editItem
-      ? await makeCorePutRequest(`/shop-reception/shops/${editItem.id}`, values)
+      ? await makeCorePatchRequest(`/shop-reception/shops/${editItem.id}`, values)
       : await makeCorePostRequest('/shop-reception/shops', values)
   }
 
   const { isLoading, mutate } = useMutation(addShop, {
     onSuccess: () => {
       closeModal()
+      formik.resetForm()
       showNotification({
         message: `Shop added successfully`,
         type: 'success'
@@ -53,9 +94,14 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any, { resetForm }) => {
-      mutate(values)
-      resetForm()
-      closeModal()
+      const payload = {
+        ...values,
+        depositIds: values.depositIds.map(item => item.value),
+        code: values.code.value,
+        metiVersion: values.metiVersion.value,
+        parentSociety: values.parentSociety.value
+      }
+      mutate(payload)
     }
   })
 
@@ -67,47 +113,21 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
       modalWidth="50%"
     >
       <Grid container spacing={2}>
-        <Grid xs={12} item>
-          {isEdit && (
-            <FormInfoItems
-              items={[
-                {
-                  label: 'Nume:',
-                  name: editItem?.metiName
-                }
-              ]}
+        {!editItem && (
+          <Grid xs={12} item>
+            <Autocomplete
+              variant="outlined"
+              label="Nume magazin"
+              disableClearable
+              required
+              onChange={(event, option) => formik.setFieldValue('code', option)}
+              value={formik.values.code}
+              options={metiShops || []}
+              error={!!formik.errors.code}
+              helperText={formik.errors.code as string}
             />
-          )}
-        </Grid>
-
-        <Grid xs={12} item>
-          <Autocomplete
-            variant="outlined"
-            label="Nume magazin"
-            disableClearable
-            required
-            onChange={event =>
-              formik.setFieldValue('name', (event.target as HTMLInputElement).value)
-            }
-            options={[
-              {
-                value: '1',
-                label: 'Magazin 1'
-              },
-
-              {
-                value: '2',
-                label: 'Magazin 2'
-              },
-              {
-                value: '3',
-                label: 'Magazin 3'
-              }
-            ]}
-            error={!!formik.errors.name}
-            helperText={formik.errors.name as string}
-          />
-        </Grid>
+          </Grid>
+        )}
 
         <Grid xs={12} item>
           <Autocomplete
@@ -115,24 +135,9 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
             label="Versiune METI"
             disableClearable
             required
-            onChange={event =>
-              formik.setFieldValue('metiVersion', (event.target as HTMLInputElement).value)
-            }
-            options={[
-              {
-                value: '1',
-                label: '001'
-              },
-
-              {
-                value: '2',
-                label: '002'
-              },
-              {
-                value: '3',
-                label: '003'
-              }
-            ]}
+            onChange={(event, option) => formik.setFieldValue('metiVersion', option)}
+            value={formik.values.metiVersion}
+            options={metiVersions || []}
             error={!!formik.errors.metiVersion}
             helperText={formik.errors.metiVersion as string}
           />
@@ -155,8 +160,22 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
         </Grid>
 
         <Grid xs={12} item>
+          <Autocomplete
+            variant="outlined"
+            label="Societate"
+            disableClearable
+            required
+            onChange={(event, option) => formik.setFieldValue('parentSociety', option)}
+            value={formik.values.parentSociety}
+            options={parentSocieties || []}
+            error={!!formik.errors.parentSociety}
+            helperText={formik.errors.parentSociety as string}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
           <Input
-            type="text"
+            type="number"
             value={formik.values.receptionDeviation}
             onChange={event =>
               formik.setFieldValue('receptionDeviation', (event.target as HTMLInputElement).value)
@@ -169,6 +188,19 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
             required
           />
         </Grid>
+
+        {editItem && (
+          <Grid xs={12} item>
+            <Input
+              type="text"
+              value={editItem.regionName}
+              label="Regiune"
+              variant="outlined"
+              style={{ width: '100%' }}
+              disabled
+            />
+          </Grid>
+        )}
 
         <Grid xs={12} item>
           <Input
@@ -203,6 +235,69 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
         </Grid>
 
         <Grid xs={12} item>
+          <AsyncAutocomplete
+            variant="outlined"
+            name="depositIds"
+            label="Returnare ambalaje"
+            value={formik.values.depositIds}
+            options={depositsOptions || []}
+            onChange={value => formik.setFieldValue('depositIds', value)}
+            error={!!formik.errors.depositIds}
+            helperText={formik.errors.depositIds as string}
+            required
+            multiple
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            value={formik.values.address}
+            onChange={event =>
+              formik.setFieldValue('address', (event.target as HTMLInputElement).value)
+            }
+            label="Adresa"
+            variant="outlined"
+            style={{ width: '100%' }}
+            error={!!formik.errors.address}
+            helperText={formik.errors.address as string}
+            required
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            value={formik.values.city}
+            onChange={event =>
+              formik.setFieldValue('city', (event.target as HTMLInputElement).value)
+            }
+            label="Oras"
+            variant="outlined"
+            style={{ width: '100%' }}
+            error={!!formik.errors.city}
+            helperText={formik.errors.city as string}
+            required
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            value={formik.values.town}
+            onChange={event =>
+              formik.setFieldValue('town', (event.target as HTMLInputElement).value)
+            }
+            label="Judet"
+            variant="outlined"
+            style={{ width: '100%' }}
+            error={!!formik.errors.town}
+            helperText={formik.errors.town as string}
+            required
+          />
+        </Grid>
+
+        <Grid xs={12} item>
           <Checkbox
             checked={formik.values.canEditQuantities}
             defaultChecked={formik.values.canEditQuantities}
@@ -210,6 +305,18 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
               formik.setFieldValue('canEditQuantities', !formik.values.canEditQuantities)
             }
             label="Permite editare cantităţi recepţionate"
+            color={!!formik.errors.active ? 'primary' : 'secondary'}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Checkbox
+            checked={formik.values.canCallReturnTruck}
+            defaultChecked={formik.values.canCallReturnTruck}
+            onChange={event =>
+              formik.setFieldValue('canCallReturnTruck', !formik.values.canCallReturnTruck)
+            }
+            label="Poate chema Camion de retur"
             color={!!formik.errors.active ? 'primary' : 'secondary'}
           />
         </Grid>
@@ -230,6 +337,7 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
             variant="contained"
             label={isEdit ? 'Editeaza' : 'Salveaza'}
             onClick={() => formik.handleSubmit()}
+            disabled={isLoading}
           />
         </Grid>
       </Grid>
