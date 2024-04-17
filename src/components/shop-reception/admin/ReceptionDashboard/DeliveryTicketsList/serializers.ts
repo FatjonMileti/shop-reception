@@ -4,7 +4,7 @@ export const toTableRowItems = (items: DeliveryTicket[]) => items.map((item: Del
   id: item.id,
   shopCode: item.shopCode || '',
   depositName: item.depositName || '',
-  deliveryType: item.deliveryType || '',
+  externalTicketId: item.externalTicketId || '',
   status: item.status || '',
   transportCode: item.transportCode || '',
   sealCode: item.sealCode || '',

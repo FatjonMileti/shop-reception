@@ -17,10 +17,9 @@ export const columns = [
   },
   {
     title: 'Bon Livrare',
-    field: 'deliveryType',
+    field: 'externalTicketId',
     align: 'left',
-    type: 'string',
-    disableSorting: true
+    type: 'string'
   },
   {
     title: 'Status',
@@ -73,7 +72,7 @@ export const columns = [
   }
 ]
 
-export const drawerFilters = [
+export const drawerFilters = (shopCodes, depositOptions, statusOptions) => [
   {
     name: 'shopCode',
     value: '',
@@ -82,21 +81,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Selectează magazin"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: 'Magazin 1'
-          },
-
-          {
-            value: '2',
-            label: 'Magazin 2'
-          },
-          {
-            value: '3',
-            label: 'Magazin 3'
-          }
-        ]}
+        options={shopCodes || []}
       />
     ),
     type: 'autocomplete',
@@ -111,21 +96,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Selectează depozit"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: 'Depozit 1'
-          },
-
-          {
-            value: '2',
-            label: 'Depozit 2'
-          },
-          {
-            value: '3',
-            label: 'Depozit 3'
-          }
-        ]}
+        options={depositOptions || []}
       />
     ),
     type: 'autocomplete',
@@ -140,17 +111,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Status"
         disableClearable
-        options={[
-          {
-            value: 'todo',
-            label: 'Todo'
-          },
-
-          {
-            value: 'done',
-            label: 'Done'
-          }
-        ]}
+        options={statusOptions || []}
       />
     ),
     type: 'autocomplete',

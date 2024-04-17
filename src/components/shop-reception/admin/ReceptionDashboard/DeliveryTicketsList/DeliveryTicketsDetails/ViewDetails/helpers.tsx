@@ -1,4 +1,6 @@
 import { Autocomplete, DatePicker, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Box } from '@mui/material'
+import { IconCell } from 'components/core-ui/IconCell'
 import dayjs from 'dayjs'
 import { formatUIDate } from 'utils/helpers'
 
@@ -8,14 +10,16 @@ export const columns = [
     field: 'externalOrderId',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Numar comanda origine',
     field: 'originalOrderId',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Cod suport',
@@ -29,56 +33,64 @@ export const columns = [
     field: 'heterogeneousCode',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Tip suport asteptat',
     field: 'expectedSupportType',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Tip ambalaj secundar asteptat',
     field: 'secondarySupportType',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Status receptie suport',
     field: 'supportStatus',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Cod EAN',
     field: 'eanCode',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'EAN receptionat',
     field: 'eanReceived',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Cod produs',
     field: 'productCode',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Nume produs',
     field: 'productName',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Prioritar vanzare',
@@ -86,76 +98,91 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '120px',
-    render: row => (row.priorityForSale ? 'Da' : 'Nu')
+    disableSorting: true,
+    render: row => (
+      <Box>
+        <IconCell value={row.priorityForSale ? 'activ' : 'inactiv'} />
+      </Box>
+    )
   },
   {
     title: 'Unitate de masura',
     field: 'measureUnit',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    disableSorting: true
   },
   {
     title: 'Cantitate asteptata pe suport',
     field: 'deliveredQuantity',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Cantitate asteptata in comanda',
     field: 'totalDeliveredQuantity',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Cantitate receptionata calitativa',
     field: 'qualitativeQuantity',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Cantitate receptionata deteriorata',
     field: 'defectQuantity',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Diferenta',
     field: 'missingQuantity',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Motiv defectiune',
     field: 'defectReason',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Tip scanare recomandat',
     field: 'recommendedScanType',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Tip scanare suport',
     field: 'scanType',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Numar colete asteptate',
     field: 'secondarySupportNumber',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Produs cu DLC scurt',
@@ -163,7 +190,12 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '120px',
-    render: row => (row.shortDlc ? 'Da' : 'Nu')
+    render: row => (
+      <Box>
+        <IconCell value={row.shortDlc ? 'activ' : 'inactiv'} />
+      </Box>
+    ),
+    disableSorting: true
   },
   {
     title: 'Data limita de consum asteptata',
@@ -171,7 +203,8 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '120px',
-    render: row => formatUIDate(row.dlcDate)
+    render: row => formatUIDate(row.dlcDate),
+    disableSorting: true
   },
   {
     title: 'Data limita de consum receptionata',
@@ -179,14 +212,16 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '120px',
-    render: row => formatUIDate(row.dlcDateExcel)
+    render: row => formatUIDate(row.dlcDateExcel),
+    disableSorting: true
   },
   {
     title: 'Lot',
     field: 'batch',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Produs sensibil',
@@ -194,7 +229,12 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '120px',
-    render: row => (row.sensitive ? 'Da' : 'Nu')
+    disableSorting: true,
+    render: row => (
+      <Box>
+        <IconCell value={row.sensitive ? 'activ' : 'inactiv'} />
+      </Box>
+    )
   },
   {
     title: 'Produs verificat',
@@ -202,7 +242,12 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '120px',
-    render: row => (row.verified ? 'Da' : 'Nu')
+    disableSorting: true,
+    render: row => (
+      <Box>
+        <IconCell value={row.verified ? 'activ' : 'inactiv'} />
+      </Box>
+    )
   },
   {
     title: 'Produs lipsa',
@@ -210,14 +255,20 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '120px',
-    render: row => (row.missing ? 'Da' : 'Nu')
+    disableSorting: true,
+    render: row => (
+      <Box>
+        <IconCell value={row.missing ? 'activ' : 'inactiv'} />
+      </Box>
+    )
   },
   {
     title: 'Magazin',
     field: 'shopName',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Data receptie',
@@ -225,14 +276,16 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '120px',
-    render: row => formatUIDate(row.receptionDate)
+    render: row => formatUIDate(row.receptionDate),
+    disableSorting: true
   },
   {
     title: 'Procent valabilitate',
     field: 'validityPercentage',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    disableSorting: true
   },
   {
     title: 'Produs cu SGR',
@@ -240,11 +293,16 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '120px',
-    render: row => (row.sgr ? 'Da' : 'Nu')
+    disableSorting: true,
+    render: row => (
+      <Box>
+        <IconCell value={row.sgr ? 'activ' : 'inactiv'} />
+      </Box>
+    )
   }
 ]
 
-export const drawerFilters = [
+export const drawerFilters = (shopCodes, filters) => [
   {
     name: 'shopCode',
     value: '',
@@ -253,21 +311,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Selectează magazin"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
-        ]}
+        options={shopCodes || []}
       />
     ),
     type: 'autocomplete',
@@ -282,21 +326,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Selecteaza cod suport"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
-        ]}
+        options={filters.supportCode || []}
       />
     ),
     type: 'autocomplete',
@@ -311,21 +341,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Selecteaza comanda"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
-        ]}
+        options={filters.externalOrderId || []}
       />
     ),
     type: 'autocomplete',
@@ -340,21 +356,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Selecteaza comanda originala"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
-        ]}
+        options={filters.originalOrderId || []}
       />
     ),
     type: 'autocomplete',
@@ -368,21 +370,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Selecteaza produs"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
-        ]}
+        options={filters.productCode || []}
       />
     ),
     type: 'autocomplete',
@@ -397,19 +385,8 @@ export const drawerFilters = [
         label="Selecteaza sensibil"
         disableClearable
         options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
+          { value: 'true', label: 'Da' },
+          { value: 'false', label: 'Nu' }
         ]}
       />
     ),
@@ -425,19 +402,8 @@ export const drawerFilters = [
         label="Selecteaza produs lipsa"
         disableClearable
         options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
+          { value: 'true', label: 'Da' },
+          { value: 'false', label: 'Nu' }
         ]}
       />
     ),
@@ -453,19 +419,8 @@ export const drawerFilters = [
         label="Selecteaza produs verificat"
         disableClearable
         options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
+          { value: 'true', label: 'Da' },
+          { value: 'false', label: 'Nu' }
         ]}
       />
     ),
@@ -481,19 +436,8 @@ export const drawerFilters = [
         label="Selecteaza DLC scurt"
         disableClearable
         options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
+          { value: 'true', label: 'Da' },
+          { value: 'false', label: 'Nu' }
         ]}
       />
     ),
@@ -509,19 +453,8 @@ export const drawerFilters = [
         label="Selecteaza prioritar vanzare"
         disableClearable
         options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
+          { value: 'true', label: 'Da' },
+          { value: 'false', label: 'Nu' }
         ]}
       />
     ),
@@ -537,19 +470,8 @@ export const drawerFilters = [
         label="Selecteaza procentul de valabilitate"
         disableClearable
         options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
+          { value: 'true', label: 'Da' },
+          { value: 'false', label: 'Nu' }
         ]}
       />
     ),
@@ -565,19 +487,8 @@ export const drawerFilters = [
         label="Selecteaza SGR"
         disableClearable
         options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
+          { value: 'true', label: 'Da' },
+          { value: 'false', label: 'Nu' }
         ]}
       />
     ),

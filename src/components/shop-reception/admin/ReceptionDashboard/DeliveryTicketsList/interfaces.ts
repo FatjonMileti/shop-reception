@@ -1,9 +1,8 @@
 export interface DeliveryTicket {
-  id: number
+  id: number | string
   externalTicketId?: string
   externalShopCode?: string
   shopCode: string
-  deliveryType: string
   created: string
   deliveryHour?: string
   expectedDeliveryDate?: Date

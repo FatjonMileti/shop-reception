@@ -21,7 +21,7 @@ const EditDetails = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: `/shop-reception/deliveryTicket/${id}/edit`,
+          url: `/shop-reception/deliveryTicket/details/${id}/edit`,
           tableFilters,
           page,
           rowsPerPage,
@@ -45,8 +45,6 @@ const EditDetails = () => {
     <>
       <Table
         hideCheckbox
-        orderBy="shopCode"
-        order="asc"
         columns={columns}
         items={tableItems}
         fetchData={fetchData}

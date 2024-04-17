@@ -23,13 +23,15 @@ const ViewDetails = () => {
   const [infoData, setInfoData] = useState(null)
   const [shopCode, setShopCode] = useState<string>(null)
 
+  const [filters, setFilters] = useState([])
+
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setShopCode(tableFilters[0].value.value)
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: `/shop-reception/deliveryTicket/${id}/info`,
+          url: `/shop-reception/deliveryTicket/details/${id}/info`,
           tableFilters,
           page,
           rowsPerPage,
@@ -57,6 +59,47 @@ const ViewDetails = () => {
       setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page)
       setIsLoading(false)
+
+      const filters = response.list.reduce(
+        (acc, current) => {
+          return {
+            supportCode: [
+              ...acc.supportCode.filter(
+                obj => obj.value !== current.supportCode || obj.label !== current.supportCode
+              ),
+              { value: current.supportCode, label: current.supportCode }
+            ],
+            externalOrderId: [
+              ...acc.externalOrderId.filter(
+                obj =>
+                  obj.value !== current.externalOrderId || obj.label !== current.externalOrderId
+              ),
+              { value: current.externalOrderId, label: current.externalOrderId }
+            ],
+            originalOrderId: [
+              ...acc.originalOrderId.filter(
+                obj =>
+                  obj.value !== current.originalOrderId || obj.label !== current.originalOrderId
+              ),
+              { value: current.originalOrderId, label: current.originalOrderId }
+            ],
+            productCode: [
+              ...acc.productCode.filter(
+                obj => obj.value !== current.productCode || obj.label !== current.productCode
+              ),
+              { value: current.productCode, label: current.productCode }
+            ]
+          }
+        },
+        {
+          supportCode: [],
+          externalOrderId: [],
+          originalOrderId: [],
+          productCode: []
+        }
+      )
+
+      setFilters(filters)
     } catch (error) {
       showNotification({
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
@@ -99,9 +142,12 @@ const ViewDetails = () => {
   const { refetch: exportFiles } = useQuery(
     ['exportFiles'],
     async () => {
-      const response = await makeCoreGetFileRequest(`/shop-reception/deliveryTicket/detailsExport/${id}`, {
-        responseType: 'blob'
-      })
+      const response = await makeCoreGetFileRequest(
+        `/shop-reception/deliveryTicket/detailsExport/${id}`,
+        {
+          responseType: 'blob'
+        }
+      )
       return formatAndDownloadResponse(response)
     },
     {
@@ -112,6 +158,27 @@ const ViewDetails = () => {
         })
       },
       enabled: false
+    }
+  )
+
+  const { data: shopCodes, isLoading: isShopCodesLoading } = useQuery(
+    ['shop-codes'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/shops/codes`)
+      return data.list.map(item => ({
+        label: item.displayName,
+        value: item.code
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea tipurilor de magazine. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
     }
   )
 
@@ -128,8 +195,6 @@ const ViewDetails = () => {
       />
       <Table
         hideCheckbox
-        orderBy="shopCode"
-        order="asc"
         columns={columns}
         items={tableItems}
         fetchData={fetchData}
@@ -137,7 +202,7 @@ const ViewDetails = () => {
         totalCount={totalCount}
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
-        filters={drawerFilters}
+        filters={drawerFilters(shopCodes, filters)}
         disableSorting
         disablePagination
         toolbarActions={[
