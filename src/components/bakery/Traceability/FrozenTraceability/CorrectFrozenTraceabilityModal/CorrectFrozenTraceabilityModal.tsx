@@ -141,15 +141,23 @@ export const CorrectFrozenTraceabilityModal = ({
         )}
         {!itemToCorrectMutation.isLoading && itemToCorrectQuery?.data && (
           <>
-            {
-              [
-                <ProductDetails
-                  onSelectBatch={() => {
-                    setStep(1)
-                  }}
-                  onCancel={cancel}
-                  formik={formik}
-                />,
+            <ProductDetails
+              onSelectBatch={() => {
+                setStep(1)
+              }}
+              onCancel={cancel}
+              formik={formik}
+            />
+
+            {step === 1 && (
+              <Modal
+                isModalOpen={isModalOpen}
+                closeModal={() => {
+                  setStep(0)
+                }}
+                modalTitle="Corectie trasabilitate congelate si ambalaje"
+                modalWidth="50%"
+              >
                 <SelectBatch
                   onContinue={frozenItems => {
                     addNewFrozenItems(frozenItems)
@@ -160,8 +168,8 @@ export const CorrectFrozenTraceabilityModal = ({
                   }}
                   formik={formik}
                 />
-              ][step]
-            }
+              </Modal>
+            )}
           </>
         )}
       </Grid>

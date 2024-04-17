@@ -99,7 +99,10 @@ export const AddOwnProductionTraceabilityModal = ({
     }
   )
 
-  const initialValues = useMemo(() => getInitialValues(recipeQuery, selectedProduct), [recipeQuery.data])
+  const initialValues = useMemo(
+    () => getInitialValues(recipeQuery, selectedProduct),
+    [recipeQuery.data]
+  )
 
   const formik = useFormik({
     validateOnChange: false,
@@ -107,7 +110,6 @@ export const AddOwnProductionTraceabilityModal = ({
     validationSchema,
     initialValues,
     onSubmit: async (values: any) => {
-
       const removeProductionDate = ({ productionDate, ...item }) => item
 
       const payload = {
@@ -244,52 +246,73 @@ export const AddOwnProductionTraceabilityModal = ({
         )}
         {!ownTraceabilityMutation.isLoading && (
           <>
-            {
-              [
-                <SelectOrScanProduct
-                  setSelectedProduct={setSelectedProduct}
-                  selectedProduct={selectedProduct}
-                  onContinue={() => setStep(1)}
-                  onCancel={cancel}
-                />,
-                <ProductDetails
-                  selectedProduct={selectedProduct}
-                  onAddBatch={componentMetiCode => {
-                    setComponentMetiCode(componentMetiCode)
-                    setStep(2)
-                  }}
-                  onAddCharge={componentMetiCode => {
-                    setComponentMetiCode(componentMetiCode)
-                    setStep(3)
-                  }}
-                  onCancel={cancel}
-                  formik={formik}
-                  recipeQuery={recipeQuery}
-                />,
-                <SelectBatch
-                  onContinue={batches => {
-                    addNewBatches(batches)
-                    setStep(1)
-                  }}
-                  onCancel={() => {
-                    setStep(1)
-                  }}
-                  componentMetiCode={componentMetiCode}
-                  productionDate={formik.values.productionDate}
-                />,
-                <SelectCharge
-                  onContinue={charges => {
-                    addNewCharges(charges)
-                    setStep(1)
-                  }}
-                  onCancel={() => {
-                    setStep(1)
-                  }}
-                  componentMetiCode={componentMetiCode}
-                  productionDate={formik.values.productionDate}
-                />
-              ][step]
-            }
+            {step === 0 && (
+              <SelectOrScanProduct
+                setSelectedProduct={setSelectedProduct}
+                selectedProduct={selectedProduct}
+                onContinue={() => setStep(1)}
+                onCancel={cancel}
+              />
+            )}
+
+            {step > 0 && (
+              <ProductDetails
+                selectedProduct={selectedProduct}
+                onAddBatch={componentMetiCode => {
+                  setComponentMetiCode(componentMetiCode)
+                  setStep(2)
+                }}
+                onAddCharge={componentMetiCode => {
+                  setComponentMetiCode(componentMetiCode)
+                  setStep(3)
+                }}
+                onCancel={cancel}
+                formik={formik}
+                recipeQuery={recipeQuery}
+              />
+            )}
+
+            <Modal
+              isModalOpen={step === 2}
+              closeModal={() => {
+                setStep(1)
+              }}
+              modalTitle="Adauga trasabilitate productie proprie"
+              modalWidth="50%"
+            >
+              <SelectBatch
+                onContinue={batches => {
+                  addNewBatches(batches)
+                  setStep(1)
+                }}
+                onCancel={() => {
+                  setStep(1)
+                }}
+                componentMetiCode={componentMetiCode}
+                productionDate={formik.values.productionDate}
+              />
+            </Modal>
+
+            <Modal
+              isModalOpen={step === 3}
+              closeModal={() => {
+                setStep(1)
+              }}
+              modalTitle="Adauga trasabilitate productie proprie"
+              modalWidth="50%"
+            >
+              <SelectCharge
+                onContinue={charges => {
+                  addNewCharges(charges)
+                  setStep(1)
+                }}
+                onCancel={() => {
+                  setStep(1)
+                }}
+                componentMetiCode={componentMetiCode}
+                productionDate={formik.values.productionDate}
+              />
+            </Modal>
           </>
         )}
       </Grid>
