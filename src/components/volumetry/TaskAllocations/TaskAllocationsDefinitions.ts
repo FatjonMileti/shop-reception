@@ -16,6 +16,7 @@ export interface AssignEmployeeProps {
   setShouldRefreshData: Function
   taskTemplateId: string
   setSelectedRowId: Function
+  minDivision: number
 }
 
 export interface TaskCurrentState {
@@ -73,7 +74,9 @@ export interface EditAllocationModalProps {
   task: any // TODO: To add interface when db schema is defined
   setShouldRefreshData: Function
   setSelectedRowId: Function
+  minDivision: number
   editItem?: any // TODO: To add interface when db schema is defined
   employee?: any // TODO: To add type when db schema is defined
   hideWorkload?: boolean
+  isStop?: boolean
 }

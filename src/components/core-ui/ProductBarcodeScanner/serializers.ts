@@ -34,7 +34,8 @@ export const toProduct = product => {
       purchaseOptions: warehouseStock[0].purchaseOptions,
       isWarehouse: true,
       state: warehouseStock[0].productState,
-      locationId: warehouseStock[0].locationId
+      locationId: warehouseStock[0].locationId,
+      locationName: warehouseStock[0].locationName
     },
     neighboursStock:
       neighboursStock?.map(stock => ({

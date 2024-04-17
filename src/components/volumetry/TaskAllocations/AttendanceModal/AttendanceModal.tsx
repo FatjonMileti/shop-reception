@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { useNotification } from 'hooks'
-import { setEmployeesAttendance } from '../../api'
+import { getEmployeesAttendance } from '../../api'
 import { useMutation } from 'react-query'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { handleQueryError } from 'utils/helpers'
@@ -11,6 +11,7 @@ import { EmployeeAttendance } from './EmployeeAttendance'
 import { useMediaQuery } from '@mui/material'
 import { AllocationList } from './AllocationList'
 import { AttendanceModalProps } from 'components/volumetry/interfaces'
+import { validationSchema } from './helpers'
 
 const AttendanceModal = (props: AttendanceModalProps) => {
   const { isModalOpen, closeModal, departmentId } = props
@@ -27,17 +28,22 @@ const AttendanceModal = (props: AttendanceModalProps) => {
     initialValues: {
       employees: []
     },
-    // validationSchema: validationSchema,
+    validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       mutateEmployeesAttendance(toEmployeesAttendancePayload(values.employees))
+      setActiveStep(1)
     }
   })
 
-  const { data: employeesShifts, isLoading: isEmployeesLoading } = setEmployeesAttendance(
+  const { data: employeesShifts, isLoading: isEmployeesLoading } = getEmployeesAttendance(
     departmentId,
     showNotification,
     isModalOpen,
-    values => formik.setFieldValue('employees', values)
+    values =>
+      formik.setFieldValue(
+        'employees',
+        values.map((val, index) => ({ ...val, id: val.workerId, index }))
+      )
   )
 
   useEffect(() => {
@@ -61,7 +67,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
   const autoAllocateEmployees = async () => {
     await makeCorePostRequest(
       '/volumetry/tasks/automatic-allocation',
-      toEmployeesAllocationPayload(formik.values.employees)
+      toEmployeesAllocationPayload(formik.values.employees, departmentId)
     )
   }
 
@@ -115,7 +121,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
           ? 'Confirma angajatii prezenti'
           : 'Confirma angajatii pe care vrei sa ii aloci'
       }
-      modalWidth="60%"
+      modalWidth="80%"
       backAction={activeStep === 0 ? null : () => setActiveStep(0)}
     >
       {
@@ -127,7 +133,6 @@ const AttendanceModal = (props: AttendanceModalProps) => {
             updateEmployeeTime={updateEmployeeTime}
             closeModal={resetModal}
             handleSubmit={formik.handleSubmit}
-            increaseStep={() => setActiveStep(1)}
             isXs={isXs}
             formik={formik}
           />,

@@ -134,6 +134,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             setShouldRefreshData={setShouldRefreshData}
             taskTemplateId={item.taskTemplateId}
             setSelectedRowId={setSelectedRowId}
+            minDivision={item.minDivision}
           />
           <EditAllocationModal
             isModalOpen={modal === 'edit'}
@@ -143,6 +144,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             setShouldRefreshData={setShouldRefreshData}
             setSelectedRowId={setSelectedRowId}
             employee={employees.find(item => item.id === selectedRow?.id)}
+            minDivision={item.minDivision}
           />
           <DeleteConfirmationModal
             isModalOpen={modal === 'delete'}
@@ -154,6 +156,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = props => {
             additionalAction={selectSelectedParentRow}
             title="Sterge alocare"
             deleteLabel="Sterge"
+            cancelLabel="Anuleaza"
           />
         </>
       )}

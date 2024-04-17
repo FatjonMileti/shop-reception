@@ -7,18 +7,17 @@ import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
-import { EmployeeManagementItem } from 'components/volumetry/interfaces'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { handleQueryError } from 'utils/helpers'
 import { AsyncAutocompleteOption } from 'components/core-ui/AsyncAutocomplete/AsyncAutocompleteDefinitions'
 import { useMemo } from 'react'
 import { toCollaboratorPayload } from 'components/volumetry/EmployeeManagement/CollaboratorsTab/CreateEditCollaborator/serializers'
-import { getCollaboratorsTypesOptions, getContractorsNamesOptions } from 'components/volumetry/api'
+import { getCollaborator, getCollaboratorsTypesOptions, getContractorsNamesOptions } from 'components/volumetry/api'
 
 interface CreateEditCollaboratorProps {
   isModalOpen: boolean
   closeModal: Function
-  editItem?: EmployeeManagementItem
+  editItemId?: number
   setShouldRefreshData: Function
   departmentsOptions: AsyncAutocompleteOption[]
   isDepartmentsOptionsLoading: boolean
@@ -28,16 +27,22 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
   const {
     isModalOpen,
     closeModal,
-    editItem,
+    editItemId,
     setShouldRefreshData,
     departmentsOptions,
     isDepartmentsOptionsLoading
   } = props
   const { showNotification } = useNotification()
 
+  const { data: editItem, isLoading: isLocationLoading } = getCollaborator(
+    editItemId,
+    showNotification,
+    isModalOpen
+  )
+
   const mutateCollaborator = async values => {
-    editItem
-      ? await makeCorePutRequest(`/volumetry/workers/contractors/${editItem?.id}`, values)
+    editItemId
+      ? await makeCorePutRequest(`/volumetry/workers/contractors/${editItemId}`, values)
       : await makeCorePostRequest(`/volumetry/workers/contractors`, values)
   }
 
@@ -45,15 +50,16 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
     onSuccess: res => {
       setShouldRefreshData(true)
       closeModal()
+      formik.resetForm()
       showNotification({
-        message: `Colaboratorul a fost ${editItem ? 'editat' : 'adaugat'} cu succes!`,
+        message: `Colaboratorul a fost ${editItemId ? 'editat' : 'adaugat'} cu succes!`,
         type: 'success'
       })
     },
     onError: error =>
       handleQueryError(
         error,
-        `Eroare la ${editItem ? 'editarea' : 'adaugarea colaboratorului.'}`,
+        `Eroare la ${editItemId ? 'editarea' : 'adaugarea colaboratorului.'}`,
         showNotification
       )
   })
@@ -66,9 +72,8 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any, { resetForm }) => {
+    onSubmit: async (values: any) => {
       mutate(toCollaboratorPayload(values, editItem, departmentsOptions))
-      resetForm()
     }
   })
 
@@ -80,13 +85,13 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
       isModalOpen={isModalOpen}
       closeModal={closeModal}
       modalTitle={editItem ? 'Editeaza colaborator' : 'Adauga colaborator'}
-      modalWidth="30%"
+      modalWidth="50%"
     >
       <Grid container spacing={4}>
         {(isLoading || isDepartmentsOptionsLoading || isContractorsTypesOptions) && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         )}
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <Input
             type="text"
             name="name"
@@ -100,7 +105,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             required
           />
         </Grid>
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <Input
             type="text"
             name="name"
@@ -114,7 +119,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             required
           />
         </Grid>
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <Input
             type="text"
             name="name"
@@ -127,7 +132,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
             helperText={formik.errors.middleName as string}
           />
         </Grid>
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <Input
             type="text"
             name="name"
@@ -141,7 +146,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
           />
         </Grid>
 
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <AsyncAutocomplete
             variant="outlined"
             name="genericDepartment"
@@ -156,11 +161,11 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
           />
         </Grid>
 
-        <Grid xs={12} item>
+        <Grid xs={6} item>
           <AsyncAutocomplete
             variant="outlined"
             name="workerType"
-            label="Selecteaza functia"
+            label="Selecteaza tip colaborator"
             disableClearable
             value={formik.values.workerType}
             options={contractorsTypesOptions || []}

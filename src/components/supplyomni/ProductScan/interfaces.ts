@@ -23,6 +23,7 @@ export interface Product {
   purchaseOptions: PurchaseOptions[]
   locationId: number
   state?: 'ACTIVE' | 'INACTIVE'
+  locationName?: string
 }
 
 export interface ProductStockResponse {

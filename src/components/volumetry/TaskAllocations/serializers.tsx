@@ -73,5 +73,9 @@ export const toEmployeesAttendancePayload = employees =>
       shiftEnd: formatPayloadTimeDate(employee.shiftEnd)
     }))
 
-export const toEmployeesAllocationPayload = employees =>
-  employees.filter(employee => employee.shouldAllocate).map(employee => employee.workerId)
+export const toEmployeesAllocationPayload = (employees, departmentId) => ({
+  departmentAliasId: departmentId,
+  workerIdList: employees
+    .filter(employee => employee.shouldAllocate)
+    .map(employee => employee.workerId)
+})

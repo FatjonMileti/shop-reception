@@ -122,7 +122,6 @@ const TaskAllocation = () => {
       <Box className={cn({ [s.hidden]: totalCount === 0 || !taskTemplateId })}>
         <IconButton
           onClick={navigateToAllocations}
-          // sx={{ width: '100%' }}
           label="Vezi toate alocarile"
           variant="contained"
           startIcon={<Icon iconName="AssignTasks" tiny={true} fill="white" />}

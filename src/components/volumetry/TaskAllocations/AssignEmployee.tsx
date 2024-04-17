@@ -12,9 +12,8 @@ import { useNotification } from 'hooks'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
 import { handleQueryError } from 'utils/helpers'
-import * as yup from 'yup'
 import { AssignEmployeeProps } from './TaskAllocationsDefinitions'
-import { customValidation } from '../utils'
+import { getValidationSchema } from './helpers'
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
   const {
@@ -25,7 +24,8 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     workloadMeasurementUnit,
     setShouldRefreshData,
     taskTemplateId,
-    setSelectedRowId
+    setSelectedRowId,
+    minDivision
   } = props
   const { showNotification } = useNotification()
 
@@ -53,20 +53,14 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
       handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
-  const validationSchema = yup.object({
-    workerId: yup.number().required('Acest camp este obligatoriu.'),
-    taskTemplateId: yup.number().required('Acest camp este obligatoriu.'),
-    allocatedWorkload: yup.number().required('Acest camp este obligatoriu.') .test('is-step-of-0.25', 'Valoarea trebuie să fie multiplu de 0.25', customValidation),
-  })
-
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    validationSchema: validationSchema,
+    validationSchema: getValidationSchema(minDivision),
     initialValues: {
       workerId: null,
       taskTemplateId: taskTemplateId,
-      allocatedWorkload: 0
+      allocatedWorkload: 1
     },
     onSubmit: async (values, { resetForm }) => {
       const payload = {
@@ -126,10 +120,10 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
             style={{ width: '100%' }}
             error={!!formik.errors.allocatedWorkload}
             helperText={formik.errors.allocatedWorkload as string}
-            required 
+            required
             inputProps={{
-              step: '0.25',
-              min: '0'
+              min: '0',
+              step: minDivision
             }}
           />
         </Grid>

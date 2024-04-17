@@ -1,10 +1,9 @@
+import { useMemo } from 'react'
 import { Box, CircularProgress } from '@mui/material'
-import { Button, Table } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, FormTable } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { EmployeeAttendanceProps } from 'components/volumetry/interfaces'
-import { useMemo } from 'react'
 import { buildColumns } from './helpers'
-import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table'
 
 const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
   const {
@@ -14,19 +13,17 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     updateEmployeeTime,
     closeModal,
     handleSubmit,
-    increaseStep,
     isXs,
     formik
   } = props
 
   const submitStep = async () => {
     await handleSubmit()
-    increaseStep()
   }
 
-  const tableColumns = useMemo(
-    () => buildColumns({ toggleEmployee, updateEmployeeTime, isXs }) as TableHeaderType[],
-    [employees]
+  const columns = useMemo(
+    () => buildColumns({ toggleEmployee, updateEmployeeTime, isXs, formik }),
+    [employees, formik.errors]
   )
 
   const checkSelected = formik.values.employees.some(
@@ -55,16 +52,8 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
         onClick={() => selectOrDeselectAll(employees)}
         style={{ marginBottom: '1em' }}
       />
-      <Box style={{ height: '60vh', overflowY: 'scroll' }}>
-        <Table
-          hideCheckbox
-          orderBy="name"
-          order="desc"
-          columns={tableColumns}
-          rows={employees}
-          isLoading={false}
-          disablePagination
-        />
+      <Box style={{ height: '55vh', overflowY: 'scroll' }}>
+        <FormTable columns={columns} rows={employees} />
       </Box>
       <Box className={s.modalButtons} style={{ width: '50%', float: 'right', marginTop: '20px' }}>
         <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />

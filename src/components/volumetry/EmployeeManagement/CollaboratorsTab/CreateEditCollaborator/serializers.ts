@@ -7,7 +7,6 @@ export const toCollaboratorPayload = (
 ) => {
   return {
     id: values.id,
-
     firstName: values.firstName,
     lastName: values.lastName,
     middleName: values.middleName,

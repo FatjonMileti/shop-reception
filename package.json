@@ -109,6 +109,9 @@
     "webpack-dev-server": "^4.9.2",
     "webpack-merge": "^5.7.3"
   },
+  "resolutions": {
+    "@types/mime": "3.0.4"
+  },
   "description": "Start project:",
   "repository": {
     "type": "git",

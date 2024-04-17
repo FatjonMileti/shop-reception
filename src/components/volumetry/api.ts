@@ -86,7 +86,6 @@ export const getJobTitlesOptions = (showNotification: Function) => {
   )
 }
 
-
 export const getCollaboratorsTypesOptions = (showNotification: Function) => {
   return useQuery(
     ['contractors-types'],
@@ -102,7 +101,8 @@ export const getCollaboratorsTypesOptions = (showNotification: Function) => {
       return resultOptions || []
     },
     {
-      onError: error => handleQueryError(error, 'Error while fetching contractors types', showNotification)
+      onError: error =>
+        handleQueryError(error, 'Error while fetching contractors types', showNotification)
     }
   )
 }
@@ -161,7 +161,11 @@ export const getContractorsNamesOptions = (showNotification: Function) => {
   )
 }
 
-export const getTask = (itemId: string | number, isModalOpen: boolean, showNotification: Function) => {
+export const getTask = (
+  itemId: string | number,
+  isModalOpen: boolean,
+  showNotification: Function
+) => {
   return useQuery(
     ['task', itemId],
     async () => {
@@ -329,35 +333,6 @@ export const getCategoryDepartmentsOptions = (
   )
 }
 
-export const getRaionsOptions = (
-  departmentId: number,
-  shouldFetchRaions: boolean,
-  callback: Function,
-  showNotification: Function
-) => {
-  return useQuery(
-    ['raions', departmentId],
-    async () => {
-      const result = await makeCoreGetRequest(
-        `/volumetry/locations/generic-rayons?filterBy=genericDepartmentId&filterValue=${departmentId}`
-      )
-
-      const resultOptions = result.map(raion => ({
-        value: raion.id,
-        label: raion.rayonName
-      }))
-
-      callback(resultOptions)
-      return resultOptions || []
-    },
-    {
-      onError: error =>
-        handleQueryError(error, 'A aparut o eroare la obtinerea raioanelor.', showNotification),
-      enabled: shouldFetchRaions
-    }
-  )
-}
-
 export const getEmployeesOptions = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(
     ['employees-options'],
@@ -374,13 +349,13 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
   )
 }
 
-export const setEmployeesAttendance = (
+export const getEmployeesAttendance = (
   departmentId: number | string,
   showNotification: Function,
   validateQuery: boolean = true,
   setEmployees: Function
-) => {
-  return useQuery(
+) =>
+  useQuery(
     ['employees-attendance', departmentId],
     async () => {
       const employees = await makeCoreGetRequest(
@@ -396,7 +371,6 @@ export const setEmployeesAttendance = (
       enabled: validateQuery
     }
   )
-}
 
 export const getLocationDetails = (
   locationId: number | string,
@@ -406,15 +380,18 @@ export const getLocationDetails = (
   return useQuery(
     ['location-details', locationId],
     async () => {
-      // const locationDetails = await makeCoreGetRequest(`/volumetry/location/${locationId}`)
+      const response = await makeCoreGetRequest(`/volumetry/locations`)
+      const location = response.list.filter(location => location.id === locationId)
+
       const locationDetails = {
         id: 1,
-        name: 'Orhideea',
-        categoryId: 1,
-        categoryName: 'Hyper Maxi',
-        regionId: 1,
-        regionName: 'Bucuresti'
+        name: location[0]?.locationName || '',
+        categoryId: location[0]?.id || '',
+        categoryName: location[0]?.locationCategory || '',
+        regionId: 0,
+        regionName: '0'
       }
+
       return locationDetails
     },
     {
@@ -454,6 +431,32 @@ export const getRegionsOptions = (
         handleQueryError(
           error,
           'A aparut o eroare la preluarea datelor de optiuni pentru regiuni.',
+          showNotification
+        )
+    }
+  )
+}
+
+export const getCollaborator = (
+  itemId: string | number,
+  showNotification: Function,
+  isModalOpen: boolean,
+) => {
+  return useQuery(
+    ['collaborator', itemId],
+    async () => {
+      if (itemId && isModalOpen) {
+        const result = await makeCoreGetRequest(`/volumetry/workers/contractors/${itemId}`)
+
+        return result
+      }
+      return null
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea detaliilor colaboratorului.',
           showNotification
         )
     }
