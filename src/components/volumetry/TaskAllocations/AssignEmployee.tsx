@@ -60,7 +60,7 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
     initialValues: {
       workerId: null,
       taskTemplateId: taskTemplateId,
-      allocatedWorkload: 0
+      allocatedWorkload: 1
     },
     onSubmit: async (values, { resetForm }) => {
       const payload = {
