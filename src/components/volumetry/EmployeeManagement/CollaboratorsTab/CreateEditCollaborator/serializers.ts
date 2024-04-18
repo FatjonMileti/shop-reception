@@ -11,13 +11,16 @@ export const toCollaboratorPayload = (
     firstName: values.firstName,
     lastName: values.lastName,
     middleName: values.middleName,
-    jobTitle: editItem
+
+    genericDepartmentId: editItem
       ? departmentsOptions.find(department => department.label === values.genericDepartment.label)
           .value
       : (values.genericDepartment as AutocompleteOption)?.value,
-    genericDepartmentId: editItem
+
+    jobTitle: editItem
       ? jobTitlesOptions.find(jobTitle => jobTitle.label === values.jobTitle.label).value
       : (values.jobTitle as AutocompleteOption)?.value,
+
     workerTypeId: (values.workerType as AutocompleteOption)?.value,
     employer: values.employer
   }
