@@ -20,7 +20,7 @@ import { CorrectOwnProductionTraceabilityModal } from './CorrectOwnProductionTra
 import { Filter } from '../../../core-ui/Table/TableDefinitions'
 import dayjs from 'dayjs'
 
-export const OwnProductionTraceability = () => {
+const OwnProductionTraceability = () => {
   const { showNotification } = useNotification()
 
   const [totalCount, setTotalCount] = useState<number>(0)
@@ -260,3 +260,5 @@ export const OwnProductionTraceability = () => {
     </div>
   )
 }
+
+export default OwnProductionTraceability

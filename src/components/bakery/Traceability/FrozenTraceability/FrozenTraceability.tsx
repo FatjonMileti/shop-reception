@@ -20,7 +20,7 @@ import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitio
 import { CorrectFrozenTraceabilityModal } from './CorrectFrozenTraceabilityModal/CorrectFrozenTraceabilityModal'
 import dayjs from 'dayjs'
 
-export const FrozenTraceability = () => {
+const FrozenTraceability = () => {
   const { showNotification } = useNotification()
 
   const [totalCount, setTotalCount] = useState<number>(0)
@@ -265,3 +265,5 @@ export const FrozenTraceability = () => {
     </div>
   )
 }
+
+export default FrozenTraceability

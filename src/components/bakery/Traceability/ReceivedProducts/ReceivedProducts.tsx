@@ -30,7 +30,7 @@ import { ImageCell } from '../../../core-ui/ImageCell'
 import { debounce } from '@mui/material'
 import dayjs from 'dayjs'
 
-export const ReceivedProducts = () => {
+const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const [totalCount, setTotalCount] = React.useState<number>(0)
   const [tableItems, setTableItems] = React.useState<ReceivedProduct[]>([])
@@ -303,3 +303,6 @@ export const ReceivedProducts = () => {
     </div>
   )
 }
+
+
+export default ReceivedProducts
