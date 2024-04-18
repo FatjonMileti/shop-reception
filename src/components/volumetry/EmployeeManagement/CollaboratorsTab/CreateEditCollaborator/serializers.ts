@@ -17,9 +17,12 @@ export const toCollaboratorPayload = (
           .value
       : (values.genericDepartment as AutocompleteOption)?.value,
 
-    jobTitle: editItem
-      ? jobTitlesOptions.find(jobTitle => jobTitle.label === values.jobTitle.label).value
-      : (values.jobTitle as AutocompleteOption)?.value,
+    ...(editItem
+      ? {
+          jobTitleId: jobTitlesOptions.find(jobTitle => jobTitle.label === values.jobTitle.label)
+            ?.value
+        }
+      : { jobTitle: (values.jobTitle as AutocompleteOption)?.value }),
 
     workerTypeId: (values.workerType as AutocompleteOption)?.value,
     employer: values.employer
