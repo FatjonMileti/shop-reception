@@ -48,7 +48,6 @@ const FileUpload = props => {
     onChange(null)
     setSelectedFile(null)
   }
-
   return (
     <div className={s.container}>
       {selectedFile ? (
@@ -57,7 +56,7 @@ const FileUpload = props => {
             <FileViewDetails
               selectedFile={selectedFile}
               selectedFileUrl={selectedFileUrl}
-              displayImage={displayImage}
+              displayImage={fileInputProps?.displayImage.type !== 'text/csv'}
             />
             <div className={s.clearButton} onClick={handleClearFile}>
               <DeleteOutlineIcon style={{ marginRight: '9px' }} />
