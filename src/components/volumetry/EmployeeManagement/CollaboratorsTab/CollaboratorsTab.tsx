@@ -129,6 +129,7 @@ const CollaboratorsTab = () => {
           setShouldRefreshData={setShouldRefreshData}
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
+          jobTitlesOptions={jobTitlesOptions}
         />
         <DeleteConfirmationModal
           isModalOpen={modal === 'delete'}
@@ -147,6 +148,7 @@ const CollaboratorsTab = () => {
           setShouldRefreshData={setShouldRefreshData}
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
+          jobTitlesOptions={jobTitlesOptions}
         />
 
         {canUseCustomFilter ? (
