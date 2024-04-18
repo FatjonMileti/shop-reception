@@ -24,10 +24,19 @@ interface AdminDeposit {
   code: string
   name: string
   type: string
+  address: string
+  validityPercentage: number
+  emails: string[]
+  packagingResponsibleEmail: string
+  cif: string
+  office: string
+  bankAccount: string
+  bankName: string
+  workingPoint: string
+  capital: string
   active: boolean
-  validityPercentage?: string | number
-  address?: string
-  emails?: string
+  acceptReturn: boolean
+  depositUsers: string[]
 }
 
 interface AdminHub {
