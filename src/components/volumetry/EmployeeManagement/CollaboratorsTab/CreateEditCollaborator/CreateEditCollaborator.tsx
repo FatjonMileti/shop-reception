@@ -12,7 +12,12 @@ import { handleQueryError } from 'utils/helpers'
 import { AsyncAutocompleteOption } from 'components/core-ui/AsyncAutocomplete/AsyncAutocompleteDefinitions'
 import { useMemo } from 'react'
 import { toCollaboratorPayload } from 'components/volumetry/EmployeeManagement/CollaboratorsTab/CreateEditCollaborator/serializers'
-import { getCollaborator, getCollaboratorsTypesOptions, getContractorsNamesOptions } from 'components/volumetry/api'
+import {
+  getCollaborator,
+  getCollaboratorsTypesOptions,
+  getContractorsNamesOptions
+} from 'components/volumetry/api'
+import { AutocompleteOption } from 'components/volumetry/interfaces'
 
 interface CreateEditCollaboratorProps {
   isModalOpen: boolean
@@ -21,6 +26,7 @@ interface CreateEditCollaboratorProps {
   setShouldRefreshData: Function
   departmentsOptions: AsyncAutocompleteOption[]
   isDepartmentsOptionsLoading: boolean
+  jobTitlesOptions: AutocompleteOption[]
 }
 
 const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
@@ -30,7 +36,8 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
     editItemId,
     setShouldRefreshData,
     departmentsOptions,
-    isDepartmentsOptionsLoading
+    isDepartmentsOptionsLoading,
+    jobTitlesOptions
   } = props
   const { showNotification } = useNotification()
 
@@ -73,7 +80,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      mutate(toCollaboratorPayload(values, editItem, departmentsOptions))
+      mutate(toCollaboratorPayload(values, editItem, departmentsOptions, jobTitlesOptions))
     }
   })
 
@@ -133,16 +140,17 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
           />
         </Grid>
         <Grid xs={6} item>
-          <Input
-            type="text"
-            name="name"
-            label="Email"
-            fullWidth
+          <AsyncAutocomplete
             variant="outlined"
-            value={formik.values.email}
-            onChange={event => formik.setFieldValue('email', event.currentTarget.value)}
-            error={!!formik.errors.email}
-            helperText={formik.errors.email as string}
+            name="jobTitle"
+            label="Selecteaza functie"
+            disableClearable
+            value={formik.values.jobTitle}
+            options={jobTitlesOptions || []}
+            onChange={value => formik.setFieldValue('jobTitle', value)}
+            required
+            error={!!formik.errors.jobTitle}
+            helperText={formik.errors.jobTitle as string}
           />
         </Grid>
 

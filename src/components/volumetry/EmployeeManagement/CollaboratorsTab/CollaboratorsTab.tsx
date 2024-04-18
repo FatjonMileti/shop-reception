@@ -57,6 +57,8 @@ const CollaboratorsTab = () => {
     setLocationsFilterValue,
     canUseCustomFilter
   )
+  const { data: jobTitlesOptions, isLoading: isJobTitlesLoading } =
+    getJobTitlesOptions(showNotification)
 
   const handleFilterChange = value => {
     setLocationsFilterValue(value)
@@ -65,8 +67,8 @@ const CollaboratorsTab = () => {
   }
 
   const tableFilters = useMemo(
-    () => getTableFilterFields(departmentsOptions, collaboratorsTypesOptions),
-    [departmentsOptions, collaboratorsTypesOptions]
+    () => getTableFilterFields(departmentsOptions, collaboratorsTypesOptions, jobTitlesOptions),
+    [departmentsOptions, collaboratorsTypesOptions, jobTitlesOptions]
   )
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -127,6 +129,7 @@ const CollaboratorsTab = () => {
           setShouldRefreshData={setShouldRefreshData}
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
+          jobTitlesOptions={jobTitlesOptions}
         />
         <DeleteConfirmationModal
           isModalOpen={modal === 'delete'}
@@ -145,6 +148,7 @@ const CollaboratorsTab = () => {
           setShouldRefreshData={setShouldRefreshData}
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
+          jobTitlesOptions={jobTitlesOptions}
         />
 
         {canUseCustomFilter ? (
