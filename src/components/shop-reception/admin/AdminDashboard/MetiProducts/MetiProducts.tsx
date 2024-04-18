@@ -42,7 +42,7 @@ const MetiProducts = () => {
   }
 
   const { data: measurementUnitsOptions } = useQuery(
-    ['meti-rayons'],
+    ['measurement-units'],
     async () => {
       const data = await makeCoreGetRequest(`/shop-reception/products/measurement-units`)
       return data.map(item => ({
