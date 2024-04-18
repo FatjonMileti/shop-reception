@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
-import { Typography, ListTable } from '@fullscreendigital/carrefour-dex-fe'
+import { Typography, ListTable, Button, IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import s from './AssignedTasks.modules.scss'
-import { Box, debounce } from '@mui/material'
+import { Box, Grid, debounce } from '@mui/material'
 import cn from 'classnames'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
 import { handleQueryError } from 'utils/helpers'
+import { RefreshIcon } from 'icons'
 
 const AssignedTasks = () => {
   const [totalCount, setTotalCount] = useState<number>(null)
@@ -88,6 +89,17 @@ const AssignedTasks = () => {
     <div className={s.mainContainer}>
       {totalCount === 0 && <Typography variant="regular">Nu exista date disponibile.</Typography>}
       <Box className={cn({ [s.hidden]: totalCount === 0 })}>
+        <Grid container spacing={4}>
+          <Grid xs={12} md={6} item />
+          <Grid xs={12} md={6} item className={s.refreshDataBtn}>
+            <IconButton
+              onClick={() => setShouldRefreshAllocationsData(true)}
+              label="Reincarca datele"
+              variant="outlined"
+              startIcon={<RefreshIcon />}
+            />
+          </Grid>
+        </Grid>
         <ListTable
           rows={rows}
           handleRemoteData={debounce(fetchData, 500)}

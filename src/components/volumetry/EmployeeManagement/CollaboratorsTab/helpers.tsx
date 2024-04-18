@@ -14,6 +14,12 @@ export const columns = [
     type: 'string'
   },
   {
+    title: 'Tip colaborator',
+    field: 'workerType',
+    align: 'left',
+    type: 'string'
+  },
+  {
     title: 'Functie',
     field: 'jobTitle',
     align: 'left',
@@ -29,7 +35,7 @@ export const columns = [
   }
 ]
 
-export const getTableFilterFields = (departmentsOptions, jobTitlesOptions) => [
+export const getTableFilterFields = (departmentsOptions, collaboratorsTypesOptions, jobTitlesOptions) => [
   {
     name: 'fullName',
     label: 'Nume',
@@ -60,6 +66,20 @@ export const getTableFilterFields = (departmentsOptions, jobTitlesOptions) => [
       <Autocomplete
         variant="outlined"
         label="Tip colaborator"
+        options={collaboratorsTypesOptions}
+        isOptionEqualToValue={(option, value) => option.value === value.value}
+      />
+    )
+  },
+  {
+    name: 'jobTitleId',
+    label: 'Functie',
+    type: 'autocomplete',
+    value: '',
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Functie"
         options={jobTitlesOptions}
         isOptionEqualToValue={(option, value) => option.value === value.value}
       />

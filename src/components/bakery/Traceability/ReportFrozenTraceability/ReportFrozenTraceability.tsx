@@ -30,7 +30,7 @@ import { startTransition } from 'react'
 import { debounce } from 'lodash'
 import dayjs from 'dayjs'
 
-export const ReportFrozenTraceability = () => {
+const ReportFrozenTraceability = () => {
   const { showNotification } = useNotification()
   const { pathname } = useLocation()
 
@@ -465,3 +465,5 @@ export const ReportFrozenTraceability = () => {
     </div>
   )
 }
+
+export default ReportFrozenTraceability

@@ -17,7 +17,7 @@ import { Icon_v2 } from 'components/core-ui/Icon_v2'
 import { OwnProductionTraceabilityChildren } from './OwnProductionTraceabilityChildren'
 import { formatBakeryPayloadDate } from '../../../../utils/helpers'
 
-export const ReportOwnProductionTraceabilityPrint = () => {
+const ReportOwnProductionTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
   const location = useLocation()
   const search = new URLSearchParams(location.search)
@@ -263,3 +263,5 @@ const PrintButton = ({ onClick }) => {
     </Box>
   )
 }
+
+export default ReportOwnProductionTraceabilityPrint

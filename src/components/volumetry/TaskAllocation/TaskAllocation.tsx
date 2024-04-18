@@ -11,6 +11,8 @@ import { useNotification } from 'hooks'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Icon } from 'components/core-ui/Icon'
 import { URLS } from '../constants'
+import { EditActionIcon } from 'icons'
+import { EditCurrentTaskTemplate } from '../TaskAllocations/EditCurrentTaskTemplate'
 
 const TaskAllocation = () => {
   const [totalCount, setTotalCount] = useState<number>(null)
@@ -23,9 +25,10 @@ const TaskAllocation = () => {
     }
   )
   const [tableItems, setTableItems] = useState([])
-
   const [shouldRefreshAllocationsData, setShouldRefreshAllocationsData] = useState<boolean>(false)
   const [selectedRowId, setSelectedRowId] = useState('')
+  const [selectedRow, setSelectedRow] = useState(0)
+  const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState<boolean>(false)
 
   const { showNotification } = useNotification()
 
@@ -42,10 +45,7 @@ const TaskAllocation = () => {
         const response = await makeCoreGetRequest(
           toTableGETUrl({
             url: '/volumetry/tasks/aggregation/summary',
-            filters: [
-              { name: 'taskTemplateId', value: taskTemplateId },
-              { name: 'departmentAliasId', value: 1 } //TODO remove this when BE is implemented
-            ],
+            filters: [{ name: 'taskTemplateId', value: taskTemplateId }],
             page,
             rowsPerPage
           })
@@ -55,7 +55,7 @@ const TaskAllocation = () => {
         )
         setRows(
           toListTableRows(
-            [response.list[0]], //TODO change this when BE is implemented
+            [response.list[0]],
             detailsResponse,
             shouldRefreshAllocationsData,
             setShouldRefreshAllocationsData,
@@ -76,10 +76,7 @@ const TaskAllocation = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/tasks/aggregation/summary',
-          filters: [
-            { name: 'taskTemplateId', value: taskTemplateId },
-            { name: 'departmentAliasId', value: 1 } //TODO remove this when BE is implemented
-          ],
+          filters: [{ name: 'taskTemplateId', value: taskTemplateId }],
           page,
           rowsPerPage
         })
@@ -90,7 +87,7 @@ const TaskAllocation = () => {
 
       setRows(
         toListTableRows(
-          [response.list[0]], //TODO change this when BE is implemented
+          [response.list[0]],
           detailsResponse,
           shouldRefreshAllocationsData,
           setShouldRefreshAllocationsData,
@@ -114,6 +111,14 @@ const TaskAllocation = () => {
     navigate(`/${URLS.AUTH_TASK_ALLOCATIONS}`)
   }
 
+  const openEditTaskModal = (): void => setIsEditTaskModalOpen(true)
+  const closeEditTaskModal = (): void => setIsEditTaskModalOpen(false)
+
+  const selectRow = row => {
+    setSelectedRow(row)
+    openEditTaskModal()
+  }
+
   return (
     <div className={s.mainContainer}>
       {(!taskTemplateId || totalCount === 0) && (
@@ -131,9 +136,26 @@ const TaskAllocation = () => {
           handleRemoteData={debounce(fetchData, 500)}
           isLoading={isLoading}
           totalCount={totalCount}
+          rowActions={[
+            {
+              label: 'Editeaza',
+              labelColor: 'white',
+              typographyVariant: 'medium',
+              backgroundColor: '#0970E6',
+              desktopIcon: <EditActionIcon />,
+              onClick: (e, rowId) =>
+                selectRow(tableItems.find(item => item.taskTemplateId === rowId))
+            }
+          ]}
           rowActionsWidth="90px"
           selectedRowId={selectedRowId}
           shouldRefreshedSelectedRowDetails={shouldRefreshAllocationsData}
+        />
+        <EditCurrentTaskTemplate
+          isModalOpen={isEditTaskModalOpen}
+          closeModal={closeEditTaskModal}
+          editItem={selectedRow}
+          setShouldRefreshData={setShouldRefreshAllocationsData}
         />
       </Box>
     </div>
