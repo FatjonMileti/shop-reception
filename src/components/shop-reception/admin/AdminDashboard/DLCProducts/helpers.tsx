@@ -67,7 +67,7 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
         variant="outlined"
         label="Selectează magazin"
         disableClearable
-        options={shopTypes}
+        options={shopTypes || []}
       />
     ),
     type: 'autocomplete',
@@ -82,7 +82,7 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
         variant="outlined"
         label="Selectează raion"
         disableClearable
-        options={metiRayons}
+        options={metiRayons || []}
       />
     ),
     type: 'autocomplete',
@@ -93,7 +93,7 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
     name: 'famName',
     value: '',
     filter: (
-      <Autocomplete variant="outlined" label="Familie" disableClearable options={metiFamilies} />
+      <Autocomplete variant="outlined" label="Familie" disableClearable options={metiFamilies || []} />
     ),
     type: 'autocomplete',
     label: 'Familie'
@@ -107,7 +107,7 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
         variant="outlined"
         label="Subfamilie"
         disableClearable
-        options={metiSubfamilies}
+        options={metiSubfamilies || []}
       />
     ),
     type: 'autocomplete',

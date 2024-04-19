@@ -103,10 +103,10 @@ interface AdminRegion {
 }
 
 interface CentralizeStoresHub {
-  id: number
-  store: string
-  deposit: string
-  hubs: string
+  destinationId: number
+  destinationName: string
+  depositNames: string
+  hubNames: string
 }
 
 interface ScanType {
