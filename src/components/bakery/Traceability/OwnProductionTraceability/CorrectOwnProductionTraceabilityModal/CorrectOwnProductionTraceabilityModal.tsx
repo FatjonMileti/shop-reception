@@ -241,21 +241,28 @@ export const CorrectOwnProductionTraceabilityModal = ({
         )}
         {!correctItemMutation.isLoading && correctItemQuery?.data && (
           <>
-            {
-              [
-                <ProductDetails
-                  onAddBatch={componentMetiCode => {
-                    setComponentMetiCode(componentMetiCode)
-                    setStep(1)
-                  }}
-                  onAddCharge={componentMetiCode => {
-                    setComponentMetiCode(componentMetiCode)
-                    setStep(2)
-                  }}
-                  onCancel={cancel}
-                  formik={formik}
-                  recipeQuery={recipeQuery}
-                />,
+            <ProductDetails
+              onAddBatch={componentMetiCode => {
+                setComponentMetiCode(componentMetiCode)
+                setStep(1)
+              }}
+              onAddCharge={componentMetiCode => {
+                setComponentMetiCode(componentMetiCode)
+                setStep(2)
+              }}
+              onCancel={cancel}
+              formik={formik}
+              recipeQuery={recipeQuery}
+            />
+            {step === 1 && (
+              <Modal
+                isModalOpen={isModalOpen}
+                closeModal={() => {
+                  setStep(0)
+                }}
+                modalTitle="Corectie trasabilitate productie proprie"
+                modalWidth="50%"
+              >
                 <SelectBatch
                   onContinue={batches => {
                     addNewBatches(batches)
@@ -267,7 +274,19 @@ export const CorrectOwnProductionTraceabilityModal = ({
                   metiCode={formik.values?.metiCode}
                   componentMetiCode={componentMetiCode}
                   productionDate={formik.values.productionDate}
-                />,
+                />
+              </Modal>
+            )}
+
+            {step === 2 && (
+              <Modal
+                isModalOpen={isModalOpen}
+                closeModal={() => {
+                  setStep(0)
+                }}
+                modalTitle="Corectie trasabilitate productie proprie"
+                modalWidth="50%"
+              >
                 <SelectCharge
                   onContinue={charges => {
                     addNewCharges(charges)
@@ -279,8 +298,8 @@ export const CorrectOwnProductionTraceabilityModal = ({
                   componentMetiCode={componentMetiCode}
                   productionDate={formik.values.productionDate}
                 />
-              ][step]
-            }
+              </Modal>
+            )}
           </>
         )}
       </Grid>

@@ -121,7 +121,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
           ? 'Confirma angajatii prezenti'
           : 'Confirma angajatii pe care vrei sa ii aloci'
       }
-      modalWidth="60%"
+      modalWidth="80%"
       backAction={activeStep === 0 ? null : () => setActiveStep(0)}
     >
       {
