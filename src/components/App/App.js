@@ -83,7 +83,9 @@ const App = () => {
       const localToken = getFirebaseToken()
       const firebaseUser = getFirebaseUser()
       const loggedUser = getUserPreferredName()
-      if (fbToken && (fbToken !== localToken || firebaseUser !== loggedUser)) {
+      console.log('debug', localToken, firebaseUser)
+      // if (fbToken && (fbToken !== localToken || firebaseUser !== loggedUser)) {
+      if (fbToken) {
         try {
           await makeCorePutRequest('/message-dispatcher/external/association', {
             deviceToken: fbToken
