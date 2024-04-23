@@ -2,19 +2,25 @@ import * as Yup from 'yup'
 
 export const getValidationSchema = (editItem: AdminStore) =>
   Yup.object().shape({
-    code: Yup.object().shape({
-      label: Yup.string(),
-      value: Yup.string()
-    }),
-    metiVersion: Yup.object().shape({
-      label: Yup.string().required('Campul este obligatoriu.'),
-      value: Yup.string().required('Campul este obligatoriu.')
-    }),
-    adCode: Yup.string().required(),
-    parentSociety: Yup.object().shape({
-      label: Yup.string().required('Campul este obligatoriu.'),
-      value: Yup.string().required('Campul este obligatoriu.')
-    }),
+    code: Yup.object()
+      .shape({
+        label: Yup.string(),
+        value: Yup.string()
+      })
+      .required('Campul este obligatoriu.'),
+    metiVersion: Yup.object()
+      .shape({
+        label: Yup.string().required('Campul este obligatoriu.'),
+        value: Yup.string().required('Campul este obligatoriu.')
+      })
+      .required('Campul este obligatoriu.'),
+    adCode: Yup.string().required('Campul este obligatoriu.'),
+    parentSociety: Yup.object()
+      .shape({
+        label: Yup.string().required('Campul este obligatoriu.'),
+        value: Yup.string().required('Campul este obligatoriu.')
+      })
+      .required('Campul este obligatoriu.'),
     receptionDeviation: Yup.number().required('Campul este obligatoriu.'),
     sftpIp: Yup.string().required('Campul este obligatoriu.'),
     sftpPath: Yup.string().required('Campul este obligatoriu.'),
@@ -38,10 +44,12 @@ export const getValidationSchema = (editItem: AdminStore) =>
 export const getInitialValues = (editItem: AdminStore) => {
   return {
     id: editItem?.id || null,
-    code: { label: editItem?.metiCode, value: editItem?.metiCode } || '',
-    metiVersion: { label: editItem?.metiVersion, value: editItem?.metiVersion } || '',
+    code: editItem ? { label: editItem?.metiCode, value: editItem?.metiCode } : null,
+    metiVersion: editItem ? { label: editItem?.metiVersion, value: editItem?.metiVersion } : null,
     adCode: editItem?.adCode || '',
-    parentSociety: { label: editItem?.parentSociety, value: editItem?.parentSociety } || '',
+    parentSociety: editItem
+      ? { label: editItem?.parentSociety, value: editItem?.parentSociety }
+      : null,
     receptionDeviation: editItem?.receptionDeviation || '',
     sftpIp: editItem?.sftpIp || '',
     sftpPath: editItem?.sftpPath || '',

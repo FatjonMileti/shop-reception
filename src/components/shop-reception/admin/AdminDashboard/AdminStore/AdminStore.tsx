@@ -233,6 +233,12 @@ const AdminStore = () => {
           }
         ]}
         filters={drawerFilters(shopCodes, metiShops, metiVersions, shopTypes, parentSocieties)}
+        filtersButtonLabel="Filtre"
+        filtersLabel="Filtre"
+        appliedFiltersLabel="Filtre aplicate"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
+
       />
     </div>
   )

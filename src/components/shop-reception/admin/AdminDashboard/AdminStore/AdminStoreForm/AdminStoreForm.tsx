@@ -7,11 +7,7 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { Grid } from '@mui/material'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import {
-  makeCoreGetRequest,
-  makeCorePatchRequest,
-  makeCorePostRequest,
-} from 'utils/api'
+import { makeCoreGetRequest, makeCorePatchRequest, makeCorePostRequest } from 'utils/api'
 import { useMutation, useQuery } from 'react-query'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 
@@ -70,16 +66,18 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
 
   const { isLoading, mutate } = useMutation(addShop, {
     onSuccess: () => {
-      closeModal()
-      formik.resetForm()
       showNotification({
-        message: `Shop added successfully`,
+        message: `Shop ${isEdit ? 'updated' : 'added'} successfully`,
         type: 'success'
       })
+      closeModal()
+      formik.resetForm()
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to add shop, ${formatErrorMessage(res)}`,
+        message: `Error while trying to ${isEdit ? 'edit' : 'add'} shop, ${formatErrorMessage(
+          res
+        )}`,
         type: 'error'
       })
     }
@@ -93,7 +91,7 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any, { resetForm }) => {
+    onSubmit: async (values: any) => {
       const payload = {
         ...values,
         depositIds: values.depositIds.map(item => item.value),
@@ -332,7 +330,7 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
           <Button
             variant="contained"
             label={isEdit ? 'Editeaza' : 'Salveaza'}
