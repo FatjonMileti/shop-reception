@@ -5,11 +5,9 @@ import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toPayload } from './serializers'
 import { Grid } from '@mui/material'
 import { FileUpload } from 'components/core-ui/FileUpload'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { toFormDataPayload } from 'utils/serializers'
 import { makeCorePostRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 
@@ -49,6 +47,10 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
         message: `Data imported successfully`,
         type: 'success'
       })
+
+      formik.resetForm()
+      setShouldRefreshData(true)
+      closeModal()
     },
     onError: res => {
       showNotification({
@@ -82,9 +84,6 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
       form.append('file', file)
 
       mutate(form)
-      formik.resetForm()
-      setShouldRefreshData(true)
-      closeModal()
     }
   })
 
@@ -134,7 +133,12 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
 
         <Grid xs={12} item className={s.modalButtons}>
           <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-          <Button variant="contained" label={'Salveaza'} onClick={() => formik.handleSubmit()} />
+          <Button
+            variant="contained"
+            label={'Salveaza'}
+            onClick={() => formik.handleSubmit()}
+            disabled={isLoading}
+          />
         </Grid>
       </Grid>
     </Modal>

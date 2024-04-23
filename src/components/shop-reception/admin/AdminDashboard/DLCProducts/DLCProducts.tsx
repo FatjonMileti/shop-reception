@@ -71,8 +71,29 @@ const DLCProducts = () => {
     async () => {
       const data = await makeCoreGetRequest(`/shop-reception/products/types`)
       return data.map(item => ({
-        label: item,
-        value: item
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea tipurilor de magazine. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: shopCodes, isLoading: isShopCodesLoading } = useQuery(
+    ['shop-codes'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/shops/codes`)
+      return data.list.map(item => ({
+        label: item.displayName,
+        value: item.code
       }))
     },
     {
@@ -170,6 +191,7 @@ const DLCProducts = () => {
         closeModal={closeImportProductsModal}
         setShouldRefreshData={setShouldRefreshData}
         shopTypes={shopTypes}
+        shopCodes={shopCodes}
       />
       <DLCProductsForm
         isOpen={createUpdateModal === 'create'}
@@ -196,15 +218,13 @@ const DLCProducts = () => {
       <DeleteConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
-        actionUrl="/shop-reception/sensitives/:id"
+        actionUrl="/shop-reception/products/short-dlc/:id"
         itemId={`${selectedRow?.id}`}
         content={<Typography>Esti sigur va vrei sa stergi acest produs?</Typography>}
         setShouldRefreshData={setShouldRefreshData}
       />
       <Table
         hideCheckbox
-        // orderBy="role"
-        // order="asc"
         columns={columns}
         items={tableItems}
         fetchData={fetchData}

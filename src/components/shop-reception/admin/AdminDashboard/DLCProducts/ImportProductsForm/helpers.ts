@@ -2,20 +2,23 @@ import * as Yup from 'yup'
 
 export const getValidationSchema = () =>
   Yup.object().shape({
-    shopCodes: Yup.array()
-      .of(
-        Yup.object().shape({
-          label: Yup.string(),
-          value: Yup.string()
-        })
-      )
-      .required(),
-    file: Yup.mixed().required()
+    shopCodes: Yup.array().of(
+      Yup.object().shape({
+        label: Yup.string(),
+        value: Yup.string()
+      })
+    ),
+    file: Yup.mixed().required(),
+    ruleTypes: Yup.object().shape({
+      label: Yup.string(),
+      value: Yup.string()
+    })
   })
 
 export const getInitialValues = () => {
   return {
-    shopCodes: [],
-    file: null
+    shopCodes: null,
+    file: null,
+    ruleTypes: null
   }
 }

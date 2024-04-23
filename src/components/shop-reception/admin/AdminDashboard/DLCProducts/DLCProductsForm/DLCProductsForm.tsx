@@ -7,7 +7,7 @@ import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { Grid } from '@mui/material'
-import {  makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 
 interface DLCProductsFormProps {
@@ -40,8 +40,8 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
 
   const mutateDlcProduct = async values => {
     editItem
-      ? await makeCorePutRequest(`/shop-reception/short-dlc/${editItem.id}`, values)
-      : await makeCorePostRequest('/shop-reception/short-dlc', values)
+      ? await makeCorePutRequest(`/shop-reception/products/short-dlc/${editItem.id}`, values)
+      : await makeCorePostRequest('/shop-reception/products/short-dlc', values)
   }
 
   const { isLoading, mutate } = useMutation(mutateDlcProduct, {
@@ -51,6 +51,10 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
         message: `Product ${editItem ? 'updated' : 'created'} successfully`,
         type: 'success'
       })
+
+      setShouldRefreshData(true)
+      formik.resetForm()
+      closeModal()
     },
     onError: res => {
       showNotification({
@@ -63,25 +67,24 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
   })
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
-  const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
+  const validationSchema = useMemo(() => getValidationSchema(), [editItem])
 
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any, { resetForm }) => {
-      try {
-        mutate(values)
-        setShouldRefreshData(true)
-        resetForm()
-        closeModal()
-      } catch (error) {
-        showNotification({
-          message: `Error while data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
+    onSubmit: async (values: any) => {
+      const payload = {
+        ...values,
+        famCode: values.famCode.value || values.famCode,
+        rayCode: values.rayCode.value || values.rayCode,
+        sfaCode: values.sfaCode.value || values.sfaCode,
+        shopCode: values.shopCode.value || values.shopCode,
+        ubCode: values.ubCode.value || values.ubCode
       }
+
+      mutate(payload)
     }
   })
 
@@ -99,10 +102,8 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             label="Magazin"
             disableClearable
             required
-            onChange={event =>
-              formik.setFieldValue('shopCode', (event.target as HTMLInputElement).value)
-            }
-            defaultValue={formik.values.shopCode}
+            onChange={(event, option) => formik.setFieldValue('shopCode', option)}
+            value={formik.values.shopCode}
             options={shopTypes}
             error={!!formik.errors.shopCode}
             helperText={formik.errors.shopCode as string}
@@ -115,10 +116,8 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             label="Raion"
             disableClearable
             required
-            onChange={event =>
-              formik.setFieldValue('rayCode', (event.target as HTMLInputElement).value)
-            }
-            defaultValue={formik.values.rayCode}
+            onChange={(event, option) => formik.setFieldValue('rayCode', option)}
+            value={formik.values.rayCode}
             options={metiRayons}
             error={!!formik.errors.rayCode}
             helperText={formik.errors.rayCode as string}
@@ -131,10 +130,8 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             label="Familie"
             disableClearable
             required
-            onChange={event =>
-              formik.setFieldValue('famCode', (event.target as HTMLInputElement).value)
-            }
-            defaultValue={formik.values.famCode}
+            onChange={(event, option) => formik.setFieldValue('famCode', option)}
+            value={formik.values.famCode}
             options={metiFamilies}
             error={!!formik.errors.famCode}
             helperText={formik.errors.famCode as string}
@@ -147,10 +144,8 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             label="Subfamilie"
             disableClearable
             required
-            onChange={event =>
-              formik.setFieldValue('sfaCode', (event.target as HTMLInputElement).value)
-            }
-            defaultValue={formik.values.sfaCode}
+            onChange={(event, option) => formik.setFieldValue('sfaCode', option)}
+            value={formik.values.sfaCode}
             options={metiSubfamilies}
             error={!!formik.errors.sfaCode}
             helperText={formik.errors.sfaCode as string}
@@ -163,10 +158,8 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             label="Cod UB"
             disableClearable
             required
-            onChange={event =>
-              formik.setFieldValue('ubCode', (event.target as HTMLInputElement).value)
-            }
-            defaultValue={formik.values.ubCode}
+            onChange={(event, option) => formik.setFieldValue('ubCode', option)}
+            value={formik.values.ubCode}
             options={metiUB}
             error={!!formik.errors.ubCode}
             helperText={formik.errors.ubCode as string}
@@ -195,6 +188,7 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             variant="contained"
             label={isEdit ? 'Editeaza' : 'Salveaza'}
             onClick={() => formik.handleSubmit()}
+            disabled={isLoading}
           />
         </Grid>
       </Grid>

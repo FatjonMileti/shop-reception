@@ -54,6 +54,8 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
         type: 'success'
       })
       setShouldRefreshData(true)
+      formik.resetForm()
+      closeModal()
     },
     onError: res => {
       showNotification({
@@ -73,7 +75,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any, { resetForm }) => {
+    onSubmit: async (values: any) => {
       try {
         const payload = {
           ...values,
@@ -82,11 +84,9 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
           sfaCode: values.sfaCode.value,
           shopCode: values.shopCode.value,
           shopType: values.shopType.value,
-          ubCode: values.ubCode.value,
+          ubCode: values.ubCode.value
         }
         mutate(payload)
-        resetForm()
-        closeModal()
       } catch (error) {
         showNotification({
           message: `Error while data. ${formatErrorMessage(error)}`,
@@ -100,7 +100,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
     <Modal
       isModalOpen={isOpen}
       closeModal={closeModal}
-      modalTitle={`${isEdit ? 'Editeaza' : 'Adauga'} regula produse cu DLC scurt`}
+      modalTitle={`${isEdit ? 'Editeaza' : 'Adauga'} regula produse SGR`}
       modalWidth="50%"
     >
       <Grid container spacing={2}>

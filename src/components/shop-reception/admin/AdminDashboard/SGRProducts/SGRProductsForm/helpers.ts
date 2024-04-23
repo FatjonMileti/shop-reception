@@ -1,10 +1,5 @@
 import * as Yup from 'yup'
 
-const validateObject = Yup.object().shape({
-  label: Yup.string().required('Label is required'),
-  value: Yup.string().required('Value is required')
-})
-
 export const getValidationSchema = () =>
   Yup.object().shape({
     shopCode: Yup.lazy(value =>

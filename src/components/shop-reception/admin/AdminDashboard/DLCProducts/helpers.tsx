@@ -6,7 +6,7 @@ export const columns = [
     field: 'shopType',
     align: 'left',
     type: 'string',
-    render: row => row.shopType.value
+    render: row => row.shopType?.value
   },
   {
     title: 'Cod magazin',
@@ -75,7 +75,7 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
   },
 
   {
-    name: 'rayName',
+    name: 'rayCode',
     value: '',
     filter: (
       <Autocomplete
@@ -90,17 +90,22 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
   },
 
   {
-    name: 'famName',
+    name: 'famCode',
     value: '',
     filter: (
-      <Autocomplete variant="outlined" label="Familie" disableClearable options={metiFamilies || []} />
+      <Autocomplete
+        variant="outlined"
+        label="Familie"
+        disableClearable
+        options={metiFamilies || []}
+      />
     ),
     type: 'autocomplete',
     label: 'Familie'
   },
 
   {
-    name: 'sfaName',
+    name: 'sfaCode',
     value: '',
     filter: (
       <Autocomplete
@@ -115,37 +120,20 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
   },
 
   {
-    name: 'ubName',
+    name: 'ubCode',
     value: '',
     filter: (
-      <Autocomplete
-        variant="outlined"
-        label="Cod UB"
-        disableClearable
-        options={[
-          {
-            value: 'ubCode',
-            label: 'ubcode1'
-          },
-
-          {
-            value: 'ubCode',
-            label: 'ubCode2'
-          }
-        ]}
-      />
+      <Autocomplete variant="outlined" label="Cod UB" disableClearable options={metiUB || []} />
     ),
     type: 'autocomplete',
     label: 'Cod UB'
   },
 
   {
-    name: 'prodName',
+    name: 'prodCode',
     value: '',
-    filter: (
-      <Autocomplete variant="outlined" label="Cod produs" disableClearable options={metiUB} />
-    ),
-    type: 'autocomplete',
+    filter: <Input variant="outlined" label="Cod produs" type="text" />,
+    type: 'text',
     label: 'Cod produs'
   }
 ]
