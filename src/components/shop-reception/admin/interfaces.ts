@@ -371,14 +371,13 @@ interface PackagingTypesDifference {
 
 interface ReceptionFile {
   id: number
-  deliverySlip: string
-  warehouse: string
-  store: string
-  date: string
+  externalTicketId: string
+  depositName: string
+  shopNames: string
+  createdDate: string
   success: string
-  failureReason: string
-  fileDownloaded: string
-  reProcessing: string
+  reason: string
+  reimportAllowed: string
 }
 
 interface ReturnedPackaging {
