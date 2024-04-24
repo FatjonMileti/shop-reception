@@ -1,5 +1,5 @@
-import { ChangeEvent, useMemo } from 'react'
-import { Button, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { ChangeEvent, useMemo, useState } from 'react'
+import { Autocomplete, Button, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
@@ -9,7 +9,7 @@ import { Grid } from '@mui/material'
 import { AutocompleteOption } from 'components/volumetry/interfaces'
 import { makeCorePostRequest } from 'utils/api'
 import { useMutation } from 'react-query'
-import { toFormDataPayload } from 'utils/serializers'
+import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { FileUpload } from 'components/core-ui/FileUpload'
 
 interface ImportProductsProps {
@@ -17,22 +17,29 @@ interface ImportProductsProps {
   closeModal: Function
   setShouldRefreshData: Function
   shopTypes: AutocompleteOption[]
+  shopCodes: AutocompleteOption[]
 }
 
 const ImportProducts: React.FC<ImportProductsProps> = props => {
-  const { isModalOpen, closeModal, setShouldRefreshData, shopTypes } = props
+  const { isModalOpen, closeModal, setShouldRefreshData, shopTypes, shopCodes } = props
   const { showNotification } = useNotification()
 
-  const initialValues = useMemo(() => getInitialValues(), [])
-  const validationSchema = useMemo(() => getValidationSchema(), [])
+  const [file, setFile] = useState<File | null>(null)
 
   const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files[0]
-    formik.setFieldValue('file', file)
+    const uploadedFile = event?.target.files && event?.target.files[0]
+    if (uploadedFile) {
+      setFile(uploadedFile)
+      formik.setFieldValue('file', uploadedFile)
+    }
   }
 
   const importData = async (values: any) => {
-    await makeCorePostRequest(`/shop-reception/sensitives/import`, values)
+    await makeCorePostRequest(`/shop-reception/products/sensitives/import`, values, {
+      headers: {
+        'Content-Type': 'multipart/form-data' // Ensure correct content type
+      }
+    })
   }
 
   const { isLoading, mutate } = useMutation(importData, {
@@ -41,6 +48,10 @@ const ImportProducts: React.FC<ImportProductsProps> = props => {
         message: `Datele au fost importate cu succes.`,
         type: 'success'
       })
+
+      formik.resetForm()
+      setShouldRefreshData(true)
+      closeModal()
     },
     onError: res => {
       showNotification({
@@ -50,6 +61,9 @@ const ImportProducts: React.FC<ImportProductsProps> = props => {
     }
   })
 
+  const initialValues = useMemo(() => getInitialValues(), [])
+  const validationSchema = useMemo(() => getValidationSchema(), [])
+
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
@@ -57,11 +71,24 @@ const ImportProducts: React.FC<ImportProductsProps> = props => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       const newValues = { ...values, shopCodes: values.shopCodes.map(shopCode => shopCode.value) }
-      const payload = toFormDataPayload(newValues)
-      mutate(payload)
-      formik.resetForm()
-      setShouldRefreshData(true)
-      closeModal()
+
+      const form = new FormData()
+
+      form.append(
+        'shopCodes',
+        new Blob([JSON.stringify(newValues.shopCodes)], { type: 'application/json' })
+      )
+      form.append(
+        'ruleTypes',
+        new Blob([JSON.stringify(newValues.ruleTypes.value)], { type: 'application/json' })
+      )
+
+      // form.append('shopCodes', JSON.stringify(newValues.shopCodes));
+      // form.append('ruleTypes', JSON.stringify(newValues.ruleTypes.value));
+
+      form.append('file', file)
+
+      mutate(form)
     }
   })
 
@@ -73,11 +100,11 @@ const ImportProducts: React.FC<ImportProductsProps> = props => {
       modalWidth="50%"
     >
       <Grid container spacing={1}>
-        <Grid item xs={12}>
+        <Grid xs={12} item>
           <FilterDataSelect
             name="shopCodes"
             label="Magazin"
-            options={shopTypes}
+            options={shopCodes}
             onSelect={shops => formik.setFieldValue('shopCodes', shops)}
             placeholderButton="Selecteaza"
             multiSelect={true}
@@ -85,30 +112,38 @@ const ImportProducts: React.FC<ImportProductsProps> = props => {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid xs={12} item>
+          <Autocomplete
+            variant="outlined"
+            label="Regula"
+            disableClearable
+            required
+            onChange={(event, option) => formik.setFieldValue('ruleTypes', option)}
+            value={formik.values.shopType}
+            options={shopTypes}
+            error={!!formik.errors.shopType}
+            helperText={formik.errors.shopType as string}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
           <FileUpload
-            value={null}
+            value={formik.values.file}
             fileInputProps={{
-              displayImage: ''
+              displayImage: file
             }}
             onChange={onFileUpload}
           />
         </Grid>
 
-        <Grid item xs={12} container justifyContent="space-between">
-          <Grid>
-            <Button size="large" variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
-          </Grid>
-
-          <Grid>
-            <Button
-              size="large"
-              variant="contained"
-              label="Salveaza"
-              onClick={() => formik.handleSubmit()}
-              disabled={false}
-            />
-          </Grid>
+        <Grid xs={12} item className={s.modalButtons}>
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+          <Button
+            variant="contained"
+            label={'Salveaza'}
+            onClick={() => formik.handleSubmit()}
+            disabled={isLoading}
+          />
         </Grid>
       </Grid>
     </Modal>

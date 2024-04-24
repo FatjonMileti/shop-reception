@@ -17,16 +17,11 @@ import SensitiveProduct from './SensitiveProduct/SensitiveProduct'
 const SensitiveProducts = () => {
   const { showNotification } = useNotification()
 
-  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [tableItems, setTableItems] = useState<SensitiveProduct[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [selectedRow, setSelectedRow] = useState<SensitiveProduct>()
-  const selectRow = (rowId: number | string) => {
-    const row = tableItems.find(item => item.id === rowId)
-    row && setSelectedRow(row)
-  }
 
   const [createUpdateModal, setCreateUpdateModal] = useState<string>(null)
   const openCreateModal = (): void => setCreateUpdateModal('create')
@@ -40,6 +35,11 @@ const SensitiveProducts = () => {
   const [isImportProductsModalOpen, setIsImportProductsModalOpen] = useState<boolean>(false)
   const openImportProductsModal = (): void => setIsImportProductsModalOpen(true)
   const closeImportProductsModal = (): void => setIsImportProductsModalOpen(false)
+
+  const selectRow = (rowId: number | string) => {
+    const row = tableItems.find(item => item.id === rowId)
+    row && setSelectedRow(row)
+  }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -73,8 +73,29 @@ const SensitiveProducts = () => {
     async () => {
       const data = await makeCoreGetRequest(`/shop-reception/products/types`)
       return data.map(item => ({
-        label: item,
-        value: item
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea tipurilor de magazine. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: shopCodes, isLoading: isShopCodesLoading } = useQuery(
+    ['shop-codes'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/shops/codes`)
+      return data.list.map(item => ({
+        label: item.displayName,
+        value: item.code
       }))
     },
     {
@@ -167,6 +188,13 @@ const SensitiveProducts = () => {
 
   return (
     <div className={s.mainContainer}>
+      <ImportProducts
+        isModalOpen={isImportProductsModalOpen}
+        closeModal={closeImportProductsModal}
+        setShouldRefreshData={setShouldRefreshData}
+        shopTypes={shopTypes}
+        shopCodes={shopCodes}
+      />
       <SensitiveProduct
         isModalOpen={createUpdateModal === 'create'}
         closeModal={closeCreateUpdateModal}
@@ -181,33 +209,25 @@ const SensitiveProducts = () => {
         isModalOpen={createUpdateModal === 'update'}
         closeModal={closeCreateUpdateModal}
         setShouldRefreshData={setShouldRefreshData}
-        editItem={selectedRow}
-        isEdit
         shopTypes={shopTypes}
         metiRayons={metiRayons}
         metiFamilies={metiFamilies}
         metiSubfamilies={metiSubfamilies}
         metiUB={metiUB}
+        editItem={selectedRow}
+        isEdit
       />
 
-      <ImportProducts
-        isModalOpen={isImportProductsModalOpen}
-        closeModal={closeImportProductsModal}
-        setShouldRefreshData={setShouldRefreshData}
-        shopTypes={shopTypes}
-      />
       <DeleteConfirmationModal
         isModalOpen={isDeleteModalOpen}
         closeModal={closeDeleteModal}
-        actionUrl="/shop-reception/sensitives/:id"
+        actionUrl="/shop-reception/products/sensitives/:id"
         itemId={`${selectedRow?.id}`}
         content={<Typography>Esti sigur va vrei sa stergi acest produs?</Typography>}
         setShouldRefreshData={setShouldRefreshData}
       />
       <Table
         hideCheckbox
-        orderBy="id"
-        order="asc"
         columns={columns}
         items={tableItems}
         fetchData={fetchData}
@@ -217,7 +237,7 @@ const SensitiveProducts = () => {
         setShouldRefreshData={setShouldRefreshData}
         rowActions={[
           {
-            label: 'Edit',
+            label: 'Editeaza',
             labelColor: 'white',
             typographyVariant: 'medium',
             backgroundColor: '#16a085',
@@ -229,7 +249,7 @@ const SensitiveProducts = () => {
           },
 
           {
-            label: 'Delete',
+            label: 'Sterge',
             labelColor: 'white',
             typographyVariant: 'medium',
             backgroundColor: '#16a085',

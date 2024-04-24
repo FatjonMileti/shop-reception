@@ -1,18 +1,21 @@
 import * as Yup from 'yup'
 
-export const getValidationSchema = (editItem: any) =>
+export const getValidationSchema = () =>
   Yup.object().shape({
-    shopCode: Yup.string().required(),
-    rayCode: Yup.string().required(),
-    famCode: Yup.string().required(),
-    sfaCode: Yup.string().required(),
-    ubCode: Yup.string().required(),
-    prodCode: Yup.string().required()
+    // shopCode: Yup.lazy(value => (typeof value === 'object' ? Yup.object().nullable() : Yup.string().nullable())),
+    rayCode: Yup.lazy(value =>
+      typeof value === 'object'
+        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
+        : Yup.string().required('Campul este obligatoriu.')
+    ),
+    // famCode: Yup.lazy(value => (typeof value === 'object' ? Yup.object().nullable() : Yup.string().nullable())),
+    // sfaCode: Yup.lazy(value => (typeof value === 'object' ? Yup.object().nullable() : Yup.string().nullable())),
+    // ubCode: Yup.lazy(value => (typeof value === 'object' ? Yup.object().nullable() : Yup.string().nullable())),
+    // prodCode: Yup.string().nullable()
   })
 
-export const getInitialValues = (editItem: any) => {
+export const getInitialValues = (editItem: SensitiveProduct) => {
   return {
-    id: editItem?.id,
     shopCode: editItem?.shopCode || null,
     rayCode: editItem?.rayName || null,
     famCode: editItem?.famName || null,

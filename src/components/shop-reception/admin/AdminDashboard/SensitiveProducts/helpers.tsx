@@ -3,10 +3,10 @@ import { Autocomplete, Input } from '@fullscreendigital/carrefour-dex-fe'
 export const columns = [
   {
     title: 'Tip magazin',
-    field: 'shopType.value',
+    field: 'shopType',
     align: 'left',
     type: 'string',
-    render: row => row.shopType.value
+    render: row => row.shopType?.value
   },
   {
     title: 'Cod magazin',
@@ -67,22 +67,21 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
         variant="outlined"
         label="Selectează magazin"
         disableClearable
-        options={shopTypes}
+        options={shopTypes || []}
       />
     ),
     type: 'autocomplete',
     label: 'Selectează magazin'
   },
-
   {
-    name: 'rayName',
+    name: 'rayCode',
     value: '',
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selectează raion"
         disableClearable
-        options={metiRayons}
+        options={metiRayons || []}
       />
     ),
     type: 'autocomplete',
@@ -90,24 +89,29 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
   },
 
   {
-    name: 'famName',
+    name: 'famCode',
     value: '',
     filter: (
-      <Autocomplete variant="outlined" label="Familie" disableClearable options={metiFamilies} />
+      <Autocomplete
+        variant="outlined"
+        label="Familie"
+        disableClearable
+        options={metiFamilies || []}
+      />
     ),
     type: 'autocomplete',
     label: 'Familie'
   },
 
   {
-    name: 'sfaName',
+    name: 'sfaCode',
     value: '',
     filter: (
       <Autocomplete
         variant="outlined"
         label="Subfamilie"
         disableClearable
-        options={metiSubfamilies}
+        options={metiSubfamilies || []}
       />
     ),
     type: 'autocomplete',
@@ -115,15 +119,17 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
   },
 
   {
-    name: 'ubName',
+    name: 'ubCode',
     value: '',
-    filter: <Autocomplete variant="outlined" label="Cod UB" disableClearable options={metiUB} />,
+    filter: (
+      <Autocomplete variant="outlined" label="Cod UB" disableClearable options={metiUB || []} />
+    ),
     type: 'autocomplete',
     label: 'Cod UB'
   },
 
   {
-    name: 'prodName',
+    name: 'prodCode',
     filter: <Input variant="outlined" label="Cod produs" type="text" />,
     type: 'text',
     label: 'Cod produs'
