@@ -51,7 +51,7 @@ const ReceptionFiles = () => {
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -171,6 +171,11 @@ const ReceptionFiles = () => {
         setShouldRefreshData={setShouldRefreshData}
         rowActionsWidth="130px"
         filters={drawerFilters(shopCodes, depositOptions, reasonsOptions)}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
 
       <Modal

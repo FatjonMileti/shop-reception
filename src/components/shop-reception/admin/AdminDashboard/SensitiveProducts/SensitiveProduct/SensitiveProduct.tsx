@@ -50,13 +50,13 @@ const SensitiveProduct: React.FC<SensitiveProductProps> = props => {
   const { isLoading, mutate } = useMutation(createUpdateProduct, {
     onSuccess: res => {
       showNotification({
-        message: `Data ${isEdit ? 'updated' : 'created'} successfully`,
+        message: `Datele au fost ${isEdit ? 'modificarea' : 'create'} cu succes.`,
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to ${isEdit ? 'update' : 'create'} data, ${formatErrorMessage(
+        message: `A aparut o eroare la ${isEdit ? 'modificarea' : 'crearea'} datelor. ${formatErrorMessage(
           res
         )}`,
         type: 'error'

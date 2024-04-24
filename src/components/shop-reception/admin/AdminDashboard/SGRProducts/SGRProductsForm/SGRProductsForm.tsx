@@ -50,7 +50,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
     onSuccess: () => {
       closeModal()
       showNotification({
-        message: `Product ${editItem ? 'updated' : 'created'} successfully`,
+        message: `Produsul a fost ${editItem ? 'modificat' : 'creat'} cu succes.`,
         type: 'success'
       })
       setShouldRefreshData(true)
@@ -59,9 +59,9 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to ${
-          editItem ? 'update' : 'create'
-        } product, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la ${
+          editItem ? 'modificarea' : 'crearea'
+        } produsului. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }

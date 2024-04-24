@@ -36,13 +36,13 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
   const { isLoading, mutate } = useMutation(createUpdatePackage, {
     onSuccess: res => {
       showNotification({
-        message: `Data ${isEdit ? 'updated' : 'created'} successfully`,
+        message: `Datele au fost ${isEdit ? 'actualizate' : 'create'} cu succes.`,
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to ${isEdit ? 'update' : 'create'} data, ${formatErrorMessage(
+        message: `A aparut o eroare la ${isEdit ? 'actualizarea' : 'crearea'} datelor. ${formatErrorMessage(
           res
         )}`,
         type: 'error'
@@ -80,7 +80,7 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },

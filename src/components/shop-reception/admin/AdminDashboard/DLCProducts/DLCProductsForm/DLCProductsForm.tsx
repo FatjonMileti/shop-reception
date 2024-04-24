@@ -48,7 +48,7 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
     onSuccess: () => {
       closeModal()
       showNotification({
-        message: `Product ${editItem ? 'updated' : 'created'} successfully`,
+        message: `Produsul a fost ${editItem ? 'actualizat' : 'creat'} cu succes.`,
         type: 'success'
       })
 
@@ -58,9 +58,9 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to ${
-          editItem ? 'update' : 'create'
-        } product, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la ${
+          editItem ? 'actualizarea' : 'crearea'
+        } produsului. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }

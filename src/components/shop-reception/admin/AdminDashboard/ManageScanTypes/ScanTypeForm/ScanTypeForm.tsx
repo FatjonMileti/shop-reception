@@ -49,7 +49,7 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
   const { isLoading, mutate } = useMutation(createUpdateScanType, {
     onSuccess: res => {
       showNotification({
-        message: `Data ${isEdit ? 'updated' : 'created'} successfully`,
+        message: `Datele au fost ${isEdit ? 'actualizate' : 'create'} cu succes.`,
         type: 'success'
       })
 
@@ -59,7 +59,7 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to ${isEdit ? 'update' : 'create'} data, ${formatErrorMessage(
+        message: `A aparut o eroare la ${isEdit ? 'actualizarea' : 'crearea'} datelor. ${formatErrorMessage(
           res
         )}`,
         type: 'error'

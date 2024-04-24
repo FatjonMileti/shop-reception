@@ -62,7 +62,7 @@ const SensitiveProducts = () => {
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -254,6 +254,11 @@ const SensitiveProducts = () => {
           }
         ]}
         filters={drawerFilters(shopTypes, metiRayons, metiFamilies, metiSubfamilies, metiUB)}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </div>
   )

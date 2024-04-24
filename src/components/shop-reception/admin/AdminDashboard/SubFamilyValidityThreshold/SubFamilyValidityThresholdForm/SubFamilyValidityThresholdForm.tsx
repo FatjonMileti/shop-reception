@@ -30,13 +30,13 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
   const { isLoading, mutate } = useMutation(updateSubfamilyValidity, {
     onSuccess: res => {
       showNotification({
-        message: `Data updated successfully`,
+        message: `Datele au fost modificate cu succes.`,
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to update data, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la modificarea datelor. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }

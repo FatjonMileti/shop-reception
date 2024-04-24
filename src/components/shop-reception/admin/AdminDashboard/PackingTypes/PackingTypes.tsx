@@ -51,7 +51,7 @@ const PackingTypes = () => {
     } catch (error) {
       console.log('debug ', error)
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -70,7 +70,7 @@ const PackingTypes = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching cluster data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea fisierului. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -129,6 +129,11 @@ const PackingTypes = () => {
           }
         ]}
         filters={drawerFilters}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </div>
   )

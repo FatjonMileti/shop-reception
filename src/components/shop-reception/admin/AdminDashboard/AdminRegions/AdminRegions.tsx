@@ -57,7 +57,7 @@ const AdminRegions = () => {
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -106,6 +106,11 @@ const AdminRegions = () => {
             onClick: openNewModal
           }
         ]}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </div>
   )

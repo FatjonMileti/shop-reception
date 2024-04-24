@@ -45,7 +45,7 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
   const { isLoading, mutate } = useMutation(importData, {
     onSuccess: res => {
       showNotification({
-        message: `Data imported successfully`,
+        message: `Datele au fost importate cu succes.`,
         type: 'success'
       })
 
@@ -55,7 +55,7 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to import data, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }

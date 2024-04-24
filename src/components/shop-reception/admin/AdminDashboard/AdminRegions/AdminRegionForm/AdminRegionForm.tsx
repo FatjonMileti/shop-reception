@@ -32,15 +32,15 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
     onSuccess: () => {
       closeModal()
       showNotification({
-        message: `Region ${editItem ? 'updated' : 'created'} successfully`,
+        message: `Regiunea a fost ${editItem ? 'modificata' : 'creata'} cu succes.`,
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to ${
-          editItem ? 'update' : 'create'
-        } shop, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la ${
+          editItem ? 'modificarea' : 'crearea'
+        } regiunii. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
@@ -67,7 +67,7 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
         resetForm()
       } catch (error) {
         showNotification({
-          message: `Error while data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la modificarea datelor.. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }

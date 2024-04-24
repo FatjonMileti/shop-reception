@@ -38,13 +38,13 @@ const ImportProducts: React.FC<ImportProductsProps> = props => {
   const { isLoading, mutate } = useMutation(importData, {
     onSuccess: res => {
       showNotification({
-        message: `Data imported successfully`,
+        message: `Datele au fost importate cu succes.`,
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to import data, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la importul datelor. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
