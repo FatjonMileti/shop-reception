@@ -3,17 +3,20 @@ import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/co
 
 export const getValidationSchema = () =>
   Yup.object().shape({
-    registrationNumber: Yup.string().required('Numărul de înmatriculare este un câmp necesar'),
-    driver: Yup.string().required('Șoferul este un câmp necesar'),
-    sealNumber: Yup.string().required('Număr sigiliu este un câmp necesar')
+    blList: Yup.array().of(
+        Yup.object().shape({
+          id: Yup.string(),
+          externalTicketId: Yup.string(),
+          depositName: Yup.string(),
+          transportCode: Yup.string(),
+          date: Yup.string()
+        })
+    )
   })
 
 export const initialValues = {
-  registrationNumber: '',
-  driver: '',
-  sealNumber: ''
+  blList: [{ id: '', externalTicketId: '', depositName: '', transportCode: '', date: '' }]
 }
-
 
 export const columns: Array<TableHeaderType> = [
   {

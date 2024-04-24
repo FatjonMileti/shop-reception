@@ -12,11 +12,11 @@ import s from './TruckDetail.modules.scss'
 import { WebcamCapture } from 'components/core-ui/WebcamCapture'
 import {makeCoreGetRequest, makeCorePostRequest} from "../../../../../../utils/api";
 import {useParams} from "react-router-dom";
+import {useQuery} from "react-query";
 
 const TruckDetail = () => {
   const [showSealCamera, setShowSealCamera] = useState(false)
   const [sealImage, setSealImage] = useState('')
-  const [truck, setTruck] = useState(null);
   const { showNotification } = useNotification()
   let { id } = useParams();
 
@@ -28,45 +28,40 @@ const TruckDetail = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      console.log('approving')
-      // try {
-      //   const payload = formik.values
-      //   await approveTruck(payload);
-      // } catch (error) {
-      //   showNotification({
-      //     message: `Error while submitting. ${formatErrorMessage(error)}`,
-      //     type: 'error'
-      //   })
-      // }
+      try {
+        await makeCorePostRequest('/rm-api/truck/approve', values);
+      } catch (error) {
+        showNotification({
+          message: `Error while submitting. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
     }
   })
 
   const onSealImageCapture = imageSrc => {
-    console.log(imageSrc)
     setSealImage(imageSrc)
     setShowSealCamera(false)
   }
 
-  const getTruckById = (): any => {
-    return makeCoreGetRequest('/rm-api/truck/' + id, null)
-  }
-
-  const approveTruck = (params): any => {
-    return makeCorePostRequest('/rm-api/truck/approve', params)
-  }
-
-  useEffect(() => {
-    getTruckById()
-        .then(truck => {
-          setTruck(truck);
-        })
-        .catch(error => {
+  const { data: truck, isLoading} = useQuery(
+      'truck',
+      async () => {
+        return await makeCoreGetRequest('/rm-api/truck/' + id, null)
+      },
+      {
+        onError: error => {
           showNotification({
-            message: `Error while fetching data. ${formatErrorMessage(error)}`,
+            message: `Error while fetching truck. ${formatErrorMessage(error)}`,
             type: 'error'
           })
-        });
-  }, [])
+        }
+      }
+  )
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Container>
@@ -99,8 +94,12 @@ const TruckDetail = () => {
               value={formik.values.seal}
               values={[
                 {
-                  value: 'none',
+                  value: 'true',
                   label: 'DA'
+                },
+                {
+                  value: 'false',
+                  label: 'NU'
                 }
               ]}
               onChange={event =>
@@ -130,8 +129,16 @@ const TruckDetail = () => {
               value={formik.values.notice}
               values={[
                 {
-                  value: 'none',
+                  value: 'true',
                   label: 'DA'
+                },
+                {
+                  value: 'false',
+                  label: 'NU'
+                },
+                {
+                  value: 'none',
+                  label: 'NU E CAZUL'
                 }
               ]}
               onChange={event =>
@@ -150,8 +157,16 @@ const TruckDetail = () => {
               value={formik.values.transportNote}
               values={[
                 {
-                  value: 'none',
+                  value: 'true',
                   label: 'DA'
+                },
+                {
+                  value: 'false',
+                  label: 'NU'
+                },
+                {
+                  value: 'none',
+                  label: 'NU E CAZUL'
                 }
               ]}
               onChange={event =>
@@ -170,8 +185,16 @@ const TruckDetail = () => {
               value={formik.values.thermodiagram}
               values={[
                 {
-                  value: 'none',
+                  value: 'true',
                   label: 'DA'
+                },
+                {
+                  value: 'false',
+                  label: 'NU'
+                },
+                {
+                  value: 'none',
+                  label: 'NU E CAZUL'
                 }
               ]}
               onChange={event =>
