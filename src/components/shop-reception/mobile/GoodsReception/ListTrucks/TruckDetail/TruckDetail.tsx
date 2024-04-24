@@ -1,6 +1,6 @@
-// import { Grid } from '../../../../Common/Grid'
+import React from 'react';
 import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { useMemo, useState } from 'react'
+import {useEffect, useMemo, useState} from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
@@ -10,11 +10,15 @@ import { CameraAlt as CameraIcon } from '@mui/icons-material'
 import { Container, Grid } from '@mui/material'
 import s from './TruckDetail.modules.scss'
 import { WebcamCapture } from 'components/core-ui/WebcamCapture'
+import {makeCoreGetRequest, makeCorePostRequest} from "../../../../../../utils/api";
+import {useParams} from "react-router-dom";
 
 const TruckDetail = () => {
   const [showSealCamera, setShowSealCamera] = useState(false)
-  const [sealImage, setSealImage] = useState(null)
+  const [sealImage, setSealImage] = useState('')
+  const [truck, setTruck] = useState(null);
   const { showNotification } = useNotification()
+  let { id } = useParams();
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
 
@@ -24,14 +28,16 @@ const TruckDetail = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      try {
-        const payload = formik.values
-      } catch (error) {
-        showNotification({
-          message: `Error while submitting. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
+      console.log('approving')
+      // try {
+      //   const payload = formik.values
+      //   await approveTruck(payload);
+      // } catch (error) {
+      //   showNotification({
+      //     message: `Error while submitting. ${formatErrorMessage(error)}`,
+      //     type: 'error'
+      //   })
+      // }
     }
   })
 
@@ -41,8 +47,29 @@ const TruckDetail = () => {
     setShowSealCamera(false)
   }
 
+  const getTruckById = (): any => {
+    return makeCoreGetRequest('/rm-api/truck/' + id, null)
+  }
+
+  const approveTruck = (params): any => {
+    return makeCorePostRequest('/rm-api/truck/approve', params)
+  }
+
+  useEffect(() => {
+    getTruckById()
+        .then(truck => {
+          setTruck(truck);
+        })
+        .catch(error => {
+          showNotification({
+            message: `Error while fetching data. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        });
+  }, [])
+
   return (
-    <Container className={s.mainContainer}>
+    <Container>
       {!showSealCamera && (
         <Grid container spacing={4}>
           <Grid item xs={12}>
@@ -50,11 +77,18 @@ const TruckDetail = () => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="medium" component="p">
-              Numǎr înmatriculare: IF32KTL
+              Numǎr înmatriculare: {truck?.truckNumber}
             </Typography>
-            <Typography variant="medium" component="p">
-              Bon livrare: 61207
-            </Typography>
+            { truck?.ticketCodeList.length > 0 &&
+              <Typography variant="medium" component="p">
+                Bon livrare: {truck?.ticketCodeList.map((ticket, idx) => (
+                  <React.Fragment key={idx}>
+                    {idx > 0 && <span>/</span>}
+                    {ticket}
+                  </React.Fragment>
+              ))}
+              </Typography>
+            }
           </Grid>
           <Grid item xs={12}>
             <Input
@@ -62,7 +96,7 @@ const TruckDetail = () => {
               label="Confirm Sigiliu"
               variant="standard"
               width="100%"
-              value={formik.values.registrationNumber}
+              value={formik.values.seal}
               values={[
                 {
                   value: 'none',
@@ -70,21 +104,21 @@ const TruckDetail = () => {
                 }
               ]}
               onChange={event =>
-                formik.setFieldValue('registrationNumber', (event.target as HTMLInputElement).value)
+                formik.setFieldValue('seal', (event.target as HTMLInputElement).value)
               }
-              error={!!formik.errors.registrationNumber}
-              helperText={formik.errors.registrationNumber as string}
+              error={!!formik.errors.seal}
+              helperText={formik.errors.seal as string}
             />
             <IconButton onClick={() => setShowSealCamera(true)}>
               <CameraIcon />
             </IconButton>
             {sealImage && (
-              <img src={sealImage} />
+              <img src={sealImage}  alt='seal image'/>
             )}
           </Grid>
           <Grid item xs={12}>
             <Typography variant="medium" component="p">
-              Confirm documentele pentru depozit DEPOZIT DEVA APLS
+              Confirm documentele pentru depozit {truck?.depositName}
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -93,7 +127,7 @@ const TruckDetail = () => {
               label="Aviz/BL"
               variant="standard"
               width="100%"
-              value={formik.values.registrationNumber}
+              value={formik.values.notice}
               values={[
                 {
                   value: 'none',
@@ -101,10 +135,10 @@ const TruckDetail = () => {
                 }
               ]}
               onChange={event =>
-                formik.setFieldValue('registrationNumber', (event.target as HTMLInputElement).value)
+                formik.setFieldValue('notice', (event.target as HTMLInputElement).value)
               }
-              error={!!formik.errors.registrationNumber}
-              helperText={formik.errors.registrationNumber as string}
+              error={!!formik.errors.notice}
+              helperText={formik.errors.notice as string}
             />
           </Grid>
           <Grid item xs={12}>
@@ -113,7 +147,7 @@ const TruckDetail = () => {
               label="Scrisoare de transport/CMR"
               variant="standard"
               width="100%"
-              value={formik.values.registrationNumber}
+              value={formik.values.transportNote}
               values={[
                 {
                   value: 'none',
@@ -121,10 +155,10 @@ const TruckDetail = () => {
                 }
               ]}
               onChange={event =>
-                formik.setFieldValue('registrationNumber', (event.target as HTMLInputElement).value)
+                formik.setFieldValue('transportNote', (event.target as HTMLInputElement).value)
               }
-              error={!!formik.errors.registrationNumber}
-              helperText={formik.errors.registrationNumber as string}
+              error={!!formik.errors.transportNote}
+              helperText={formik.errors.transportNote as string}
             />
           </Grid>
           <Grid item xs={12}>
@@ -133,7 +167,7 @@ const TruckDetail = () => {
               label="Conformitate termodiagrama"
               variant="standard"
               width="100%"
-              value={formik.values.registrationNumber}
+              value={formik.values.thermodiagram}
               values={[
                 {
                   value: 'none',
@@ -141,10 +175,10 @@ const TruckDetail = () => {
                 }
               ]}
               onChange={event =>
-                formik.setFieldValue('registrationNumber', (event.target as HTMLInputElement).value)
+                formik.setFieldValue('thermodiagram', (event.target as HTMLInputElement).value)
               }
-              error={!!formik.errors.registrationNumber}
-              helperText={formik.errors.registrationNumber as string}
+              error={!!formik.errors.thermodiagram}
+              helperText={formik.errors.thermodiagram as string}
             />
             <IconButton>
               <CameraIcon />
@@ -152,7 +186,7 @@ const TruckDetail = () => {
           </Grid>
           <Grid item xs={12}>
             <Button
-              type="button"
+              type="submit"
               variant="contained"
               label="APROBǍ CAMION"
               onClick={() => formik.handleSubmit()}
@@ -162,12 +196,12 @@ const TruckDetail = () => {
       )}
       {showSealCamera && (
         <WebcamCapture
-          onImageCapture={onSealImageCapture}
-          videoConstraints={{
-            width: 400,
-            height: 225,
-            facingMode: 'user'
-          }}
+          // onImageCapture={onSealImageCapture}
+          // videoConstraints={{
+          //   width: 400,
+          //   height: 225,
+          //   facingMode: 'user'
+          // }}
         />
       )}
     </Container>
