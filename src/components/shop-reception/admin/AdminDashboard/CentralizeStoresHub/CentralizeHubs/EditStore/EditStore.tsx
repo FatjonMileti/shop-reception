@@ -65,13 +65,13 @@ const EditStore: React.FC<EditStoreProps> = props => {
       formik.resetForm()
       closeModal()
       showNotification({
-        message: `Store updated successfully`,
+        message: `Datele au fost modificate cu succes.`,
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to update store. ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la modificarea datelor. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }

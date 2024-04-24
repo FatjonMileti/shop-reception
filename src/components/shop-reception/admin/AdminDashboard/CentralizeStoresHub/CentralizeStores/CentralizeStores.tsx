@@ -46,7 +46,7 @@ const CentralizeStores = () => {
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -146,6 +146,11 @@ const CentralizeStores = () => {
         ]}
         rowActionsWidth="130px"
         filters={drawerFilters(shopCodes, depositOptions, hubsOptions)}
+        filtersButtonLabel="Filtre"
+        filtersLabel="Filtre"
+        appliedFiltersLabel="Filtre aplicate"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </>
   )
