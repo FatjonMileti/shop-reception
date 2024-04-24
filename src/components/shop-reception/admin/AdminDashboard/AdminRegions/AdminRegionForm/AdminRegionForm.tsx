@@ -30,11 +30,14 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
 
   const { isLoading, mutate } = useMutation(mutateHub, {
     onSuccess: () => {
-      closeModal()
       showNotification({
         message: `Regiunea a fost ${editItem ? 'modificata' : 'creata'} cu succes.`,
         type: 'success'
       })
+
+      setShouldRefreshData(true)
+      closeModal()
+      formik.resetForm()
     },
     onError: res => {
       showNotification({
@@ -62,12 +65,9 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
         }
 
         mutate(payload)
-        setShouldRefreshData(true)
-        closeModal()
-        resetForm()
       } catch (error) {
         showNotification({
-          message: `A aparut o eroare la modificarea datelor.. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la modificarea datelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -183,7 +183,6 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
               variant="outlined"
               label="Magazine"
               disableClearable
-              required
               onChange={(e: any, option: any) => formik.setFieldValue('shopIds', option)}
               defaultValue={formik.values.shopIds}
               options={shopTypes}
@@ -199,7 +198,7 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
             <></>
           ) : (
             <>
-              <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+              <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
               <Button
                 variant="contained"
                 label={isEdit ? 'Editeaza' : 'Salveaza'}

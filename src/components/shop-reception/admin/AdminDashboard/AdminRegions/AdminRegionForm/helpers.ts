@@ -2,10 +2,10 @@ import * as Yup from 'yup'
 
 export const getValidationSchema = (editItem: AdminRegion) =>
   Yup.object().shape({
-    code: Yup.string().required(),
-    name: Yup.string().required(),
-    responsible: Yup.string().required(),
-    active: Yup.boolean().required(),
+    code: Yup.string().required('Campul este obligatoriu.'),
+    name: Yup.string().required('Campul este obligatoriu.'),
+    responsible: Yup.string().required('Campul este obligatoriu.'),
+    active: Yup.boolean().required('Campul este obligatoriu.'),
     shopIds: Yup.array().optional()
   })
 
