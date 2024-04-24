@@ -5,39 +5,35 @@ import useRoles from '../../useRoles'
 import { useNavigate } from 'react-router-dom'
 import { TitleHeader } from '../../TitleHeader'
 import { TruckCard } from '../../../admin/Common/TruckCard'
-import {useEffect, useState} from "react";
 import {makeCoreGetRequest} from "../../../../../utils/api";
 import {formatErrorMessage} from "../../../../../utils/formatting";
 import {useNotification} from "../../../../../hooks";
+import {useQuery} from "react-query";
+import React from "react";
 
 const ListTrucks = () => {
   const { isShopUser, isHubUser, isWareHouseUser } = useRoles()
   const navigate = useNavigate()
   const { showNotification } = useNotification()
-  const [truckList, setTruckList] = useState([]);
 
-  // const trucks: any[] = [
-  //   { id: 1, name: 'Camion 1', description: 'Descriere camion 1' },
-  //   { id: 2, name: 'Camion 2', description: 'Descriere camion 2' },
-  //   { id: 3, name: 'Camion 3', description: 'Descriere camion 3' }
-  // ]
+  const { data: truckList, isLoading} = useQuery(
+      'truckList',
+    async () => {
+        return await makeCoreGetRequest('/rm-api/truck/list', null)
+    },
+    {
+        onError: error => {
+            showNotification({
+                message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
+                type: 'error'
+            })
+        }
+    }
+  )
 
-  const getTrucks = (): any => {
-    return makeCoreGetRequest('/rm-api/truck/list', null)
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-
-  useEffect(() => {
-      getTrucks()
-          .then(trucks => {
-              setTruckList(trucks);
-          })
-          .catch(error => {
-              showNotification({
-                  message: `Error while fetching data. ${formatErrorMessage(error)}`,
-                  type: 'error'
-              })
-          });
-  }, [])
 
   let items = [
     <TitleHeader title='Selecteazǎ Camion' />,

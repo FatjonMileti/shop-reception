@@ -1,15 +1,20 @@
 import { Grid } from '../../../../Common/Grid'
 import { Button, Input, Table, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../hooks'
 import { TitleHeader } from '../../../TitleHeader'
 import { columns } from './helpers'
+import {useQuery} from "react-query";
+import {makeCoreGetRequest} from "../../../../../../utils/api";
+import {useLocation} from "react-router-dom";
 
 const AddTruckStep2 = () => {
   const { showNotification } = useNotification()
+  const location = useLocation();
+  const truckId = location.state?.response.id;
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -19,9 +24,7 @@ const AddTruckStep2 = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-
-        const payload = formik.values
-
+          //TODO handle for submission
       } catch (error) {
         showNotification({
           message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -31,6 +34,27 @@ const AddTruckStep2 = () => {
     }
   })
 
+  //TODO Go back to previous page, send truckId
+
+  const { data: truck, isLoading} = useQuery(
+    'truckWithBls',
+    async () => {
+        return await makeCoreGetRequest('/rm-api/truck/getTruckCreationDTOWithBls/' + truckId, null)
+    },
+    {
+        onError: error => {
+            showNotification({
+                message: `Error while fetching truck. ${formatErrorMessage(error)}`,
+                type: 'error'
+            })
+        }
+    }
+  )
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
@@ -39,8 +63,8 @@ const AddTruckStep2 = () => {
         <TitleHeader title='ADAUGǍ CAMION' />,
         <>
           <Typography variant='medium' component='p'>Magazin HYPER ORADEA2</Typography>
-          <Typography variant='medium' component='p'>ER / EW</Typography>
-          <Typography variant='medium' component='p'>Sigilii ewr</Typography>
+          <Typography variant='medium' component='p'>{truck.truckNumber} / {truck.driverName}</Typography>
+          <Typography variant='medium' component='p'>Sigilii {truck.concatenatedSeals}</Typography>
         </>,
         <Input
           type='select'

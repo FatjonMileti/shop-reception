@@ -1,6 +1,6 @@
 import { Grid } from '../../../../Common/Grid'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { useMemo } from 'react'
+import React, {useMemo, useState} from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
@@ -8,11 +8,13 @@ import { useNotification } from '../../../../../../hooks'
 import { TitleHeader } from '../../../TitleHeader'
 import { useNavigate } from 'react-router-dom'
 import { URLS } from '../../../constants'
-import { toPayload } from './serializers'
+import {makeCoreGetRequest, makeCorePostRequest} from "../../../../../../utils/api";
+import {useQuery} from "react-query";
 
 const AddTruck = () => {
   const navigate = useNavigate()
   const { showNotification } = useNotification()
+  const [numFields, setNumFields] = useState(1)
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -22,10 +24,8 @@ const AddTruck = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const payload = toPayload(formik.values)
-
-        navigate(URLS.AUTH_ADD_TRUCK_STEP_2)
-
+        const response = await makeCorePostRequest('/rm-api/truck/createTruck', values);
+        navigate(URLS.AUTH_ADD_TRUCK_STEP_2, { state: { response } })
       } catch (error) {
         showNotification({
           message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -34,6 +34,37 @@ const AddTruck = () => {
       }
     }
   })
+
+  //TODO get truckId from step 2 and search for truck, fill the fields with response
+  const { data: truck, isLoading} = useQuery(
+      'truck',
+      async () => {
+        return await makeCoreGetRequest('/rm-api/truck/getTruckCreationDTO/' + 'truckId', null)
+      },
+      {
+        onError: error => {
+          showNotification({
+            message: `Error while fetching truck. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        },
+        enabled: false
+      }
+  )
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const addSealNumberField = () => {
+    if (numFields < 3) {
+      setNumFields(numFields + 1);
+      formik.setFieldValue('sealNumbers', [
+        ...formik.values.sealNumbers,
+        { id: numFields + 1, value: '' },
+      ]);
+    }
+  };
 
   let items = [
     <TitleHeader title='ADAUGǍ CAMION' />,
@@ -57,21 +88,31 @@ const AddTruck = () => {
       error={!!formik.errors.driver}
       helperText={formik.errors.driver as string}
     />,
-    <Input
-      type='text'
-      label='Numǎr Sigiliu'
-      variant='standard'
-      width='100%'
-      value={formik.values.sealNumber}
-      onChange={event => formik.setFieldValue('sealNumber', (event.target as HTMLInputElement).value)}
-      error={!!formik.errors.sealNumber}
-      helperText={formik.errors.sealNumber as string}
-    />,
-    <Button
-      type='button'
-      variant='outlined'
-      label='+ ADAUGǍ ALT SIGILIU'
-    />,
+    ...formik.values.sealNumbers.map((field, index) => (
+        <Input
+            key={field.id}
+            type='text'
+            label={`Număr Sigiliu ${index + 1}`}
+            variant='standard'
+            width='100%'
+            value={field.value}
+            onChange={(event) => {
+              const newValues = [...formik.values.sealNumbers];
+              newValues[index].value = (event.target as HTMLInputElement).value;
+              formik.setFieldValue('sealNumbers', newValues);
+            }}
+            error={!!formik.errors.sealNumbers?.[index]?.value}
+            helperText={formik.errors.sealNumbers?.[index]?.value}
+        />
+    )),
+    numFields < 3 && (
+        <Button
+            type='button'
+            variant='outlined'
+            label='+ ADAUGĂ ALT SIGILIU'
+            onClick={addSealNumberField}
+        />
+    ),
     <Button
       type='button'
       variant='contained'
