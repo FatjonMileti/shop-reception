@@ -18,6 +18,7 @@ interface DeleteConfirmationProps {
   cancelLabel?: string
   setShouldRefreshData?: Function
   additionalAction?: Function
+  succesMessage?: string
 }
 
 const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
@@ -31,7 +32,8 @@ const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
     deleteLabel,
     cancelLabel,
     setShouldRefreshData,
-    additionalAction
+    additionalAction,
+    succesMessage
   } = props
   const { showNotification } = useNotification()
 
@@ -41,6 +43,10 @@ const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
       additionalAction && additionalAction()
       setShouldRefreshData && setShouldRefreshData(true)
       closeModal()
+      showNotification({
+        message: succesMessage,
+        type: 'success'
+      })
     } catch (error) {
       showNotification({
         message: `Error while deleting data. ${formatErrorMessage(error)}`,

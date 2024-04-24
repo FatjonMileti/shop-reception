@@ -230,6 +230,7 @@ const SGRProducts = () => {
           <Typography variant="regular">Esti sigur va vrei sa stergi acest produs?</Typography>
         }
         setShouldRefreshData={setShouldRefreshData}
+        succesMessage="Produsul SGR a fost sters cu succes."
       />
       <Table
         hideCheckbox

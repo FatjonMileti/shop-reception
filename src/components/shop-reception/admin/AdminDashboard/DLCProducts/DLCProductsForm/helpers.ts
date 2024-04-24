@@ -2,41 +2,25 @@ import * as Yup from 'yup'
 
 export const getValidationSchema = () =>
   Yup.object().shape({
-    shopCode: Yup.lazy(value =>
-      typeof value === 'object'
-        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
-        : Yup.string().required('Campul este obligatoriu.')
-    ),
+    // shopCode: Yup.lazy(value => (typeof value === 'object' ? Yup.object().nullable() : Yup.string().nullable())),
     rayCode: Yup.lazy(value =>
       typeof value === 'object'
         ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
         : Yup.string().required('Campul este obligatoriu.')
-    ),
-    famCode: Yup.lazy(value =>
-      typeof value === 'object'
-        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
-        : Yup.string().required('Campul este obligatoriu.')
-    ),
-    sfaCode: Yup.lazy(value =>
-      typeof value === 'object'
-        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
-        : Yup.string().required('Campul este obligatoriu.')
-    ),
-    ubCode: Yup.lazy(value =>
-      typeof value === 'object'
-        ? Yup.object().required('Campul este obligatoriu.').typeError('Campul este obligatoriu.')
-        : Yup.string().required('Campul este obligatoriu.')
-    ),
-    prodCode: Yup.string().required()
+    )
+    // famCode: Yup.lazy(value => (typeof value === 'object' ? Yup.object().nullable() : Yup.string().nullable())),
+    // sfaCode: Yup.lazy(value => (typeof value === 'object' ? Yup.object().nullable() : Yup.string().nullable())),
+    // ubCode: Yup.lazy(value => (typeof value === 'object' ? Yup.object().nullable() : Yup.string().nullable())),
+    // prodCode: Yup.string().nullable()
   })
 
 export const getInitialValues = (editItem: DLCProducts) => {
   return {
-    shopCode: editItem?.shopCode || [],
-    rayCode: editItem?.rayName || [],
-    famCode: editItem?.famName || [],
-    sfaCode: editItem?.sfaName || [],
-    ubCode: editItem?.ubName || [],
-    prodCode: editItem?.prodName || []
+    shopCode: editItem?.shopCode || null,
+    rayCode: editItem?.rayName || null,
+    famCode: editItem?.famName || null,
+    sfaCode: editItem?.sfaName || null,
+    ubCode: editItem?.ubName || null,
+    prodCode: editItem?.prodName || null
   }
 }

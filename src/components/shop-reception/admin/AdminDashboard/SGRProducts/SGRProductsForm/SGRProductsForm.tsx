@@ -76,23 +76,17 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      try {
-        const payload = {
-          ...values,
-          famCode: values.famCode.value,
-          rayCode: values.rayCode.value,
-          sfaCode: values.sfaCode.value,
-          shopCode: values.shopCode.value,
-          shopType: values.shopType.value,
-          ubCode: values.ubCode.value
-        }
-        mutate(payload)
-      } catch (error) {
-        showNotification({
-          message: `Error while data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
+      const payload = {
+        ...values,
+        famCode: values.famCode?.value || values.famCode || null,
+        rayCode: values.rayCode?.value || values.rayCode || null,
+        sfaCode: values.sfaCode?.value || values.sfaCode || null,
+        shopCode: values.shopCode?.value || values.shopCode || null,
+        shopType: values.shopType?.value || values.shopCode || null,
+        ubCode: values.ubCode?.value || values.ubCode || null
       }
+
+      mutate(payload)
     }
   })
 
@@ -109,12 +103,12 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             variant="outlined"
             label="Magazin"
             disableClearable
-            required
+            // required
             onChange={(event, option) => formik.setFieldValue('shopCode', option)}
             value={formik.values.shopCode}
             options={shopCodes || []}
-            error={!!formik.errors.shopCode}
-            helperText={formik.errors.shopCode as string}
+            // error={!!formik.errors.shopCode}
+            // helperText={formik.errors.shopCode as string}
           />
         </Grid>
 
@@ -123,12 +117,12 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             variant="outlined"
             label="Regula"
             disableClearable
-            required
+            // required
             onChange={(event, option) => formik.setFieldValue('shopType', option)}
-            value={formik.values.shopType.value}
+            value={formik.values.shopType?.value}
             options={shopTypes || []}
-            error={!!formik.errors.shopType}
-            helperText={formik.errors.shopType as string}
+            // error={!!formik.errors.shopType}
+            // helperText={formik.errors.shopType as string}
           />
         </Grid>
 
@@ -151,12 +145,12 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             variant="outlined"
             label="Familie"
             disableClearable
-            required
+            // required
             onChange={(event, option) => formik.setFieldValue('famCode', option)}
             value={formik.values.famCode}
             options={metiFamilies || []}
-            error={!!formik.errors.famCode}
-            helperText={formik.errors.famCode as string}
+            // error={!!formik.errors.famCode}
+            // helperText={formik.errors.famCode as string}
           />
         </Grid>
 
@@ -165,12 +159,12 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             variant="outlined"
             label="Subfamilie"
             disableClearable
-            required
+            // required
             onChange={(event, option) => formik.setFieldValue('sfaCode', option)}
             value={formik.values.sfaCode}
             options={metiSubfamilies || []}
-            error={!!formik.errors.sfaCode}
-            helperText={formik.errors.sfaCode as string}
+            // error={!!formik.errors.sfaCode}
+            // helperText={formik.errors.sfaCode as string}
           />
         </Grid>
 
@@ -179,12 +173,12 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             variant="outlined"
             label="Cod UB"
             disableClearable
-            required
+            // required
             onChange={(event, option) => formik.setFieldValue('ubCode', option)}
             value={formik.values.ubCode}
             options={metiUB || []}
-            error={!!formik.errors.ubCode}
-            helperText={formik.errors.ubCode as string}
+            // error={!!formik.errors.ubCode}
+            // helperText={formik.errors.ubCode as string}
           />
         </Grid>
 
@@ -198,9 +192,9 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             label="Cod produs"
             variant="outlined"
             style={{ width: '100%' }}
-            error={!!formik.errors.prodCode}
-            helperText={formik.errors.prodCode as string}
-            required
+            // error={!!formik.errors.prodCode}
+            // helperText={formik.errors.prodCode as string}
+            // required
           />
         </Grid>
 
@@ -209,7 +203,7 @@ const SGRProductsForm: React.FC<SGRProductsProps> = props => {
             <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
           ) : (
             <>
-              <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+              <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
               <Button
                 variant="contained"
                 label={isEdit ? 'Editeaza' : 'Salveaza'}

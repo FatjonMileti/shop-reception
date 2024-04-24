@@ -114,10 +114,10 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
             disableClearable
             required
             onChange={(event, option) => formik.setFieldValue('ruleTypes', option)}
-            value={formik.values.shopType}
+            value={formik.values.ruleTypes}
             options={shopTypes}
-            error={!!formik.errors.shopType}
-            helperText={formik.errors.shopType as string}
+            error={!!formik.errors.ruleTypes}
+            helperText={formik.errors.ruleTypes as string}
           />
         </Grid>
 
@@ -132,7 +132,7 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
           <Button
             variant="contained"
             label={'Salveaza'}

@@ -77,11 +77,11 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
     onSubmit: async (values: any) => {
       const payload = {
         ...values,
-        famCode: values.famCode.value || values.famCode,
-        rayCode: values.rayCode.value || values.rayCode,
-        sfaCode: values.sfaCode.value || values.sfaCode,
-        shopCode: values.shopCode.value || values.shopCode,
-        ubCode: values.ubCode.value || values.ubCode
+        famCode: values.famCode?.value || values.famCode || null,
+        rayCode: values.rayCode?.value || values.rayCode || null,
+        sfaCode: values.sfaCode?.value || values.sfaCode || null,
+        shopCode: values.shopCode?.value || values.shopCode || null,
+        ubCode: values.ubCode?.value || values.ubCode || null
       }
 
       mutate(payload)
@@ -101,12 +101,12 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             variant="outlined"
             label="Magazin"
             disableClearable
-            required
+            // required
             onChange={(event, option) => formik.setFieldValue('shopCode', option)}
             value={formik.values.shopCode}
-            options={shopTypes}
-            error={!!formik.errors.shopCode}
-            helperText={formik.errors.shopCode as string}
+            options={shopTypes || []}
+            // error={!!formik.errors.shopCode}
+            // helperText={formik.errors.shopCode as string}
           />
         </Grid>
 
@@ -118,7 +118,7 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             required
             onChange={(event, option) => formik.setFieldValue('rayCode', option)}
             value={formik.values.rayCode}
-            options={metiRayons}
+            options={metiRayons || []}
             error={!!formik.errors.rayCode}
             helperText={formik.errors.rayCode as string}
           />
@@ -129,12 +129,12 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             variant="outlined"
             label="Familie"
             disableClearable
-            required
+            // required
             onChange={(event, option) => formik.setFieldValue('famCode', option)}
             value={formik.values.famCode}
-            options={metiFamilies}
-            error={!!formik.errors.famCode}
-            helperText={formik.errors.famCode as string}
+            options={metiFamilies || []}
+            // error={!!formik.errors.famCode}
+            // helperText={formik.errors.famCode as string}
           />
         </Grid>
 
@@ -143,12 +143,12 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             variant="outlined"
             label="Subfamilie"
             disableClearable
-            required
+            // required
             onChange={(event, option) => formik.setFieldValue('sfaCode', option)}
             value={formik.values.sfaCode}
-            options={metiSubfamilies}
-            error={!!formik.errors.sfaCode}
-            helperText={formik.errors.sfaCode as string}
+            options={metiSubfamilies || []}
+            // error={!!formik.errors.sfaCode}
+            // helperText={formik.errors.sfaCode as string}
           />
         </Grid>
 
@@ -157,12 +157,12 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             variant="outlined"
             label="Cod UB"
             disableClearable
-            required
+            // required
             onChange={(event, option) => formik.setFieldValue('ubCode', option)}
             value={formik.values.ubCode}
-            options={metiUB}
-            error={!!formik.errors.ubCode}
-            helperText={formik.errors.ubCode as string}
+            options={metiUB || []}
+            // error={!!formik.errors.ubCode}
+            // helperText={formik.errors.ubCode as string}
           />
         </Grid>
 
@@ -176,9 +176,9 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             label="Cod produs"
             variant="outlined"
             style={{ width: '100%' }}
-            error={!!formik.errors.prodCode}
-            helperText={formik.errors.prodCode as string}
-            required
+            // error={!!formik.errors.prodCode}
+            // helperText={formik.errors.prodCode as string}
+            // required
           />
         </Grid>
 
