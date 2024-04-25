@@ -43,7 +43,7 @@ const ProductsGrowthCoefficient = () => {
     ['families', storeFilterValue?.value],
     async () => {
       const result = await makeCoreGetRequest(
-        '/bakery/store/families',
+        '/bakery/store/cadentier/families',
         {
           params: {
             store: storeFilterValue?.value

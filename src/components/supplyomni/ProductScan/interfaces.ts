@@ -21,7 +21,9 @@ export interface Product {
   sold: number
   storeCode: string
   purchaseOptions: PurchaseOptions[]
+  locationId: number
   state?: 'ACTIVE' | 'INACTIVE'
+  locationName?: string
 }
 
 export interface ProductStockResponse {

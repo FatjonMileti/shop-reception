@@ -20,7 +20,7 @@ const CreateClientModal: React.FC<CreateClientModalProps> = props => {
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+          <Button variant="outlined" label="NU" onClick={() => closeModal()} />
           <Button variant="contained" label="DA" onClick={() => onSubmit()} />
         </Grid>
       </Grid>

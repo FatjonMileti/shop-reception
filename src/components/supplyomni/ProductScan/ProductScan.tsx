@@ -39,7 +39,7 @@ const ProductScan = () => {
                     neighboursStock={product.neighboursStock}
                   />
                 ),
-                label: `Stoc depozit (${product.warehouseStock.available} buc)`,
+                label: `Stoc depozit ${product.warehouseStock.locationName} (${product.warehouseStock.available} buc)`,
                 tabIndex: 1
               }
             ]}

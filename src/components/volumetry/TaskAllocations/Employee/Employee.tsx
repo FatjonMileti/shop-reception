@@ -1,37 +1,29 @@
 import { useMemo, useState } from 'react'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, useMediaQuery } from '@mui/material'
 import s from '../TaskAllocations.modules.scss'
-import { getCapsuleColor } from '../helpers'
+import { getCapsuleColor } from './helpers'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
 import { EditAllocationModal } from '../EditAllocationModal'
-import { handleQueryError } from '../../utils'
+import { handleQueryError } from 'utils/helpers'
 import { EmployeeCapsule } from './EmployeeCapsule'
 import { EmployeeProgress } from './EmployeeProgress'
 import { EmployeeActions } from './EmployeeActions'
 import { EmployeeProps } from '../TaskAllocationsDefinitions'
 import { EmployeeIcon } from 'icons'
+import { getTaskCurrentState } from './helpers'
 
 const Employee: React.FC<EmployeeProps> = props => {
   const { employee, task, setShouldRefreshData, setSelectedRowId, hideDetails } = props
 
   const { showNotification } = useNotification()
 
-  const taskCurrentState = useMemo(() => {
-    const isTaskStarted = employee.timerStatus === 'IN_PROGRESS'
-    const isTaskEnded = employee.timerStatus === 'FINISHED'
+  const taskCurrentState = useMemo(() => getTaskCurrentState(employee), [employee.timerStatus])
 
-    const showStartButton = !isTaskStarted && !isTaskEnded
-    const showStopButton = isTaskStarted && !isTaskEnded
-
-    return { isTaskStarted, isTaskEnded, showStartButton, showStopButton }
-  }, [employee.timerStatus])
-
-  const customCapsuleColors = getCapsuleColor(
-    taskCurrentState.isTaskStarted,
-    taskCurrentState.isTaskEnded,
-    employee.progressProportion > 100
+  const customCapsuleColors = useMemo(
+    () => getCapsuleColor(taskCurrentState, employee.progressProportion > 100),
+    [taskCurrentState, employee.progressProportion]
   )
 
   const [isOpenStopTaskModal, setIsOpenStopTaskModal] = useState<boolean>(false)
@@ -44,24 +36,24 @@ const Employee: React.FC<EmployeeProps> = props => {
     setIsOpenStopTaskModal(false)
   }
 
-  const submitStartTask = async () => {
+  const submitStartTask = async status => {
     await makeCorePutRequest(`/volumetry/tasks/${employee.id}`, {
-      action: 'START'
+      action: status
     })
     setSelectedRowId(task.taskTemplateId)
     setShouldRefreshData(true)
   }
 
-  const { isLoading, mutate: handleStartTask } = useMutation(submitStartTask, {
+  const { isLoading, mutate: updateTaskStatus } = useMutation(submitStartTask, {
     onSuccess: res => {
       showNotification({
-        message: `Taskul a fost inceput cu succes!`,
+        message: `Statusul task-ului a fost salvat cu succes.`,
         type: 'success'
       })
     },
-    onError: error =>
-      handleQueryError(error, 'A aparut o eroare la inceperea taskului.', showNotification)
+    onError: error => handleQueryError(error, '', showNotification)
   })
+  const shouldWrapActions = useMediaQuery('(min-width:1145px)')
 
   return (
     <Box>
@@ -72,7 +64,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               <EmployeeCapsule employee={employee} customCapsuleColors={customCapsuleColors} />
             </Grid>
 
-            <Grid item sm={12} md={6}>
+            <Grid item sm={12} md={5}>
               <EmployeeProgress
                 taskCurrentState={taskCurrentState}
                 employee={employee}
@@ -80,10 +72,10 @@ const Employee: React.FC<EmployeeProps> = props => {
               />
             </Grid>
 
-            <Grid item sm={12} md={2}>
+            <Grid item sm={12} md={shouldWrapActions ? 3 : 12}>
               <EmployeeActions
                 taskCurrentState={taskCurrentState}
-                handleStartTask={handleStartTask}
+                updateTaskStatus={updateTaskStatus}
                 openStopTaskModal={openStopTaskModal}
               />
             </Grid>
@@ -96,6 +88,8 @@ const Employee: React.FC<EmployeeProps> = props => {
             setShouldRefreshData={setShouldRefreshData}
             setSelectedRowId={setSelectedRowId}
             hideWorkload
+            isStop
+            minDivision={task.minDivision}
           />
         </>
       ) : (
@@ -112,7 +106,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               <EmployeeCapsule employee={employee} customCapsuleColors={customCapsuleColors} />
             </Grid>
 
-            <Grid item sm={12} md={5}>
+            <Grid item xs={12} sm={12} md={4}>
               <EmployeeProgress
                 taskCurrentState={taskCurrentState}
                 employee={employee}
@@ -120,10 +114,10 @@ const Employee: React.FC<EmployeeProps> = props => {
               />
             </Grid>
 
-            <Grid item sm={12} md={2}>
+            <Grid item xs={12} sm={12} md={shouldWrapActions ? 3 : 12}>
               <EmployeeActions
                 taskCurrentState={taskCurrentState}
-                handleStartTask={handleStartTask}
+                updateTaskStatus={updateTaskStatus}
                 openStopTaskModal={openStopTaskModal}
               />
             </Grid>
@@ -135,6 +129,8 @@ const Employee: React.FC<EmployeeProps> = props => {
             task={task}
             setShouldRefreshData={setShouldRefreshData}
             setSelectedRowId={setSelectedRowId}
+            isStop
+            minDivision={task.minDivision}
           />
         </>
       )}

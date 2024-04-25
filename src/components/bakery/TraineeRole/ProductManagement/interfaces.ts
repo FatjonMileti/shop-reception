@@ -1,4 +1,5 @@
 export interface TableItem {
+  batch: boolean
   appelCodes: string
   clusterMandatory: boolean
   clusterName: string

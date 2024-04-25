@@ -11,11 +11,12 @@ export interface AssignEmployeeProps {
   isModalOpen: boolean
   closeModal: Function
   taskName: string
-  rayonsOrDepartment: string
+  departmentAlias: string
   workloadMeasurementUnit: string
   setShouldRefreshData: Function
   taskTemplateId: string
   setSelectedRowId: Function
+  minDivision: number
 }
 
 export interface TaskCurrentState {
@@ -23,6 +24,9 @@ export interface TaskCurrentState {
   isTaskEnded: boolean
   showStartButton: boolean
   showStopButton: boolean
+  isTaskPaused: boolean
+  showPauseButton: boolean
+  showResumeButton: boolean
 }
 
 export interface EmployeeProps {
@@ -53,7 +57,7 @@ export interface EmployeeCapsuleProps {
 
 export interface EmployeeActionsProps {
   taskCurrentState: TaskCurrentState
-  handleStartTask: Function
+  updateTaskStatus: Function
   openStopTaskModal: Function
 }
 
@@ -70,7 +74,9 @@ export interface EditAllocationModalProps {
   task: any // TODO: To add interface when db schema is defined
   setShouldRefreshData: Function
   setSelectedRowId: Function
+  minDivision: number
   editItem?: any // TODO: To add interface when db schema is defined
   employee?: any // TODO: To add type when db schema is defined
   hideWorkload?: boolean
+  isStop?: boolean
 }

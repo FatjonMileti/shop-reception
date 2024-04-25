@@ -77,7 +77,7 @@ export const columns = [
     align: 'left',
     render: row => (
       <Box>
-        <DescriptionText value={row.fabricationMethod} />      
+        <DescriptionText value={row.fabricationMethod} />
       </Box>
     )
   },
@@ -87,7 +87,18 @@ export const columns = [
     align: 'left'
   },
   {
+    title: 'Lot',
+    field: 'batch',
+    align: 'left',
+    render: (row: TableItem) => (
+      <Box>
+        <IconCell value={row.batch ? 'active' : 'inactive'} />
+      </Box>
+    )
+  },
+  {
     title: 'Obligatoriu',
+    field: 'clusterMandatory',
     align: 'left',
     render: (row: TableItem) => (
       <Box>
@@ -125,7 +136,7 @@ export const columns = [
 export const drawerFilters = (familiesQuery, subfamiliesQuery) => [
   {
     name: 'family',
-    value: '',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
@@ -139,7 +150,7 @@ export const drawerFilters = (familiesQuery, subfamiliesQuery) => [
   },
   {
     name: 'subfamily',
-    value: '',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
@@ -166,5 +177,5 @@ export const drawerFilters = (familiesQuery, subfamiliesQuery) => [
     ),
     type: 'autocomplete',
     label: 'Produs cadentier'
-  },
+  }
 ]

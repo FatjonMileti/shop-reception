@@ -23,7 +23,7 @@ const PdfViewer = (props: PdfViewerProps) => {
   const isXs = useMediaQuery('(max-width:624px)')
 
   useEffect(() => {
-    setScale(isXs ? 0.75 : 1.0)
+    setScale(isXs ? 0.50 : 1.0)
   }, [isXs])
 
   const scanReceipt = () => {

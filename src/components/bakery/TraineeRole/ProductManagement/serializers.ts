@@ -1,6 +1,7 @@
 export const toTableRowItems = items =>
   items.map(item => ({
     appelCodes: item.appelCodes || '',
+    batch: item.batch || null,
     clusterMandatory: item.clusterMandatory || '',
     clusterName: item.clusterName || '',
     eanCodes: item.eanCodes || '',
@@ -11,11 +12,11 @@ export const toTableRowItems = items =>
     id: item.id || '',
     imageUrl: item.imageUrl || '',
     metiCode: item.metiCode || '',
-    minStock: item.minStock || '',
+    minStock: item.minStock || 0,
     newProduct: item.newProduct || '',
     pluCode: item.pluCode || '',
     productName: item.productName || '',
-    provider: item.provider || '',
+    provider: item.suppliers || '',
     scheduleProduct: item.scheduleProduct || '',
     status: item.status || '',
     subfamily: item.subfamily || '',

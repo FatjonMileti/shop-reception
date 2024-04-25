@@ -99,7 +99,6 @@ const IndividualPerson: React.FC<IndividualPersonProps> = ({ selectNewClient }) 
           variant="outlined"
           value={formik.values.email}
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('email', e.target.value)}
-          required
           error={!!formik.errors.email}
           helperText={formik.errors.email as string}
           fullWidth
@@ -160,7 +159,7 @@ const IndividualPerson: React.FC<IndividualPersonProps> = ({ selectNewClient }) 
       </Grid>
 
       <Grid item xs={12} textAlign={'right'}>
-        <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+        <Button variant="contained" label="Salvare" onClick={() => formik.handleSubmit()} />
       </Grid>
     </Grid>
   )

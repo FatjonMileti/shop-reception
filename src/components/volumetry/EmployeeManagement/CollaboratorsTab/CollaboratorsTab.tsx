@@ -1,9 +1,9 @@
-import { Box, CircularProgress, Grid } from '@mui/material'
+import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './CollaboratorsTab.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification, usePermissions } from 'hooks'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import {
@@ -11,18 +11,19 @@ import {
   EmployeeManagementItem,
   ValueLabelInterface
 } from 'components/volumetry/interfaces'
-import { columns } from './helpers'
-import { DeleteCollaborator } from './DeleteCollaborator'
+import { columns, getTableFilterFields } from './helpers'
 import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
-import { Autocomplete, FilterDataSelect, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import {
+  getCollaboratorsTypesOptions,
   getDepartmentsOptions,
   getJobTitlesOptions,
   getLocationsOptions
 } from 'components/volumetry/api'
-import { handleQueryError } from 'components/volumetry/utils'
+import { handleQueryError } from 'utils/helpers'
 import { roles } from '../../helpers'
+import { DeleteConfirmationModal } from 'components/core-ui/DeleteConfirmationModal'
 
 const CollaboratorsTab = () => {
   // TODO: De actualizat cand primim update cu drepturile fiecarui rol
@@ -30,18 +31,18 @@ const CollaboratorsTab = () => {
 
   const [locationsFilterValue, setLocationsFilterValue] = useState<ValueLabelInterface>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
-  const [selectedRow, setSelectedRow] = useState<EmployeeManagementItem>(null)
+  const [selectedRowId, setSelectedRowId] = useState<number>(null)
   const [modal, setModal] = useState<CRUDAction>(null)
 
   const openModal = (action: CRUDAction) => setModal(action)
   const closeModal = () => setModal(null)
 
   const selectRowId = (rowId: number, action: CRUDAction) => {
-    const item = tableItems.find((item: EmployeeManagementItem) => item.id === rowId)
-    setSelectedRow(item)
+    setSelectedRowId(rowId)
     openModal(action)
   }
 
@@ -49,18 +50,26 @@ const CollaboratorsTab = () => {
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification)
-  const { data: jobTitlesOptions, isLoading: isjobTitlesOptionsLoading } =
-    getJobTitlesOptions(showNotification)
+  const { data: collaboratorsTypesOptions, isLoading: isCollaboratorsTypesOptionsLoading } =
+    getCollaboratorsTypesOptions(showNotification)
   const { data: locationsOptions, isLoading: isLocationsLoading } = getLocationsOptions(
     showNotification,
     setLocationsFilterValue,
     canUseCustomFilter
   )
+  const { data: jobTitlesOptions, isLoading: isJobTitlesLoading } =
+    getJobTitlesOptions(showNotification)
 
   const handleFilterChange = value => {
     setLocationsFilterValue(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
+
+  const tableFilters = useMemo(
+    () => getTableFilterFields(departmentsOptions, collaboratorsTypesOptions, jobTitlesOptions),
+    [departmentsOptions, collaboratorsTypesOptions, jobTitlesOptions]
+  )
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -87,44 +96,6 @@ const CollaboratorsTab = () => {
       handleQueryError(error, 'A aparut o eroare la obtinerea colaboratorilor.', showNotification)
     }
   }
-
-  const tableFilterFields = [
-    {
-      name: 'fullName',
-      label: 'Nume',
-      type: 'text',
-      value: '',
-      filter: <Input type="text" name="fullName" label="Nume" variant="outlined" value="" />
-    },
-    {
-      name: 'department',
-      label: 'Departament',
-      type: 'autocomplete',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Departament"
-          options={departmentsOptions}
-          isOptionEqualToValue={(option, value) => option.value === value.value}
-        />
-      )
-    },
-    {
-      name: 'position',
-      label: 'Functie',
-      type: 'autocomplete',
-      value: '',
-      filter: (
-        <Autocomplete
-          variant="outlined"
-          label="Functie"
-          options={jobTitlesOptions}
-          isOptionEqualToValue={(option, value) => option.value === value.value}
-        />
-      )
-    }
-  ]
 
   return (
     <div className={s.mainContainer}>
@@ -159,30 +130,32 @@ const CollaboratorsTab = () => {
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
           jobTitlesOptions={jobTitlesOptions}
-          isjobTitlesOptionsLoading={isjobTitlesOptionsLoading}
         />
-        <DeleteCollaborator
+        <DeleteConfirmationModal
           isModalOpen={modal === 'delete'}
           closeModal={closeModal}
-          itemId={selectedRow?.id}
+          actionUrl={`/volumetry/workers/contractors/:id`}
+          itemId={selectedRowId}
+          content={<Typography>Sunteti sigur ca vreti sa stergeti acest colaborator?</Typography>}
           setShouldRefreshData={setShouldRefreshData}
+          title="Sterge colaborator"
+          deleteLabel="Sterge"
         />
         <CreateEditCollaborator
           isModalOpen={modal === 'edit'}
           closeModal={closeModal}
-          editItem={selectedRow}
+          editItemId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
           jobTitlesOptions={jobTitlesOptions}
-          isjobTitlesOptionsLoading={isjobTitlesOptionsLoading}
         />
 
         {canUseCustomFilter ? (
           locationsFilterValue && (
             <Table
               hideCheckbox
-              orderBy="department"
+              orderBy="genericDepartment"
               order="desc"
               columns={columns}
               items={tableItems}
@@ -191,10 +164,18 @@ const CollaboratorsTab = () => {
               totalCount={totalCount}
               shouldRefreshData={shouldRefreshData}
               setShouldRefreshData={setShouldRefreshData}
-              filters={tableFilterFields}
+              shouldResetPage={shouldResetPage}
+              setShouldResetPage={setShouldResetPage}
+              filters={tableFilters}
+              filtersLabel="Filtreaza"
+              appliedFiltersLabel="Filtre"
+              applyFiltersButtonLabel="Aplica filtre"
+              cancelFiltersButtonLabel="Renunta"
+              filtersButtonLabel="Filtreaza"
+              labelRowsPerPage="Randuri pe pagina:"
               rowActions={[
                 {
-                  label: 'Edit',
+                  label: 'Editeaza',
                   labelColor: 'white',
                   typographyVariant: 'medium',
                   backgroundColor: '#16a085',
@@ -202,7 +183,7 @@ const CollaboratorsTab = () => {
                   onClick: (_e, rowId: number) => selectRowId(rowId, 'edit')
                 },
                 {
-                  label: 'Delete',
+                  label: 'Sterge',
                   labelColor: 'white',
                   typographyVariant: 'medium',
                   backgroundColor: '#d9534f',
@@ -213,7 +194,7 @@ const CollaboratorsTab = () => {
               rowActionsWidth="130px"
               toolbarActions={[
                 {
-                  label: 'Add',
+                  label: 'Adauga',
                   icon: <AddActionIcon />,
                   onClick: () => setModal('create') // TODO: To verify permissions with the BE
                 }
@@ -223,7 +204,7 @@ const CollaboratorsTab = () => {
         ) : (
           <Table
             hideCheckbox
-            orderBy="department"
+            orderBy="genericDepartment"
             order="desc"
             columns={columns}
             items={tableItems}
@@ -232,10 +213,16 @@ const CollaboratorsTab = () => {
             totalCount={totalCount}
             shouldRefreshData={shouldRefreshData}
             setShouldRefreshData={setShouldRefreshData}
-            filters={tableFilterFields}
+            filters={tableFilters}
+            filtersLabel="Filtreaza"
+            appliedFiltersLabel="Filtre"
+            applyFiltersButtonLabel="Aplica filtre"
+            cancelFiltersButtonLabel="Renunta"
+            filtersButtonLabel="Filtreaza"
+            labelRowsPerPage="Randuri pe pagina:"
             rowActions={[
               {
-                label: 'Edit',
+                label: 'Editeaza',
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#16a085',
@@ -243,7 +230,7 @@ const CollaboratorsTab = () => {
                 onClick: (_e, rowId: number) => selectRowId(rowId, 'edit')
               },
               {
-                label: 'Delete',
+                label: 'Sterge',
                 labelColor: 'white',
                 typographyVariant: 'medium',
                 backgroundColor: '#d9534f',
@@ -254,7 +241,7 @@ const CollaboratorsTab = () => {
             rowActionsWidth="130px"
             toolbarActions={[
               {
-                label: 'Add',
+                label: 'Adauga',
                 icon: <AddActionIcon />,
                 onClick: () => setModal('create') // TODO: To verify permissions with the BE
               }

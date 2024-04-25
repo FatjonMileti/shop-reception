@@ -42,7 +42,7 @@ const ImageCell = (props: ImageCellProps) => {
   }
 
   return (
-    <div className={s.container}>
+    <div className={s.container} onClick={e => e.stopPropagation()}>
       <img
         className={cn(s.image, { [s.clickable]: imageUrl })}
         src={imageUrl ?? 'images/default-product-image.svg'}

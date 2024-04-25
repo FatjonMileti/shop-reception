@@ -1,7 +1,7 @@
 export const columns = [
   {
     title: 'Departament',
-    field: 'department',
+    field: 'genericDepartment',
     align: 'left',
     type: 'string'
   },

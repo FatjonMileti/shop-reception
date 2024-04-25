@@ -19,10 +19,7 @@
 }
 
 .pickerContainer {
-  margin-left: 16px;
-
   @media (max-width: 624px) {
-    margin-left: 0px;
     & > div > div {
       width: 100%;
     }
@@ -62,4 +59,8 @@
 
 .hiddenScanner {
   height: 0;
+}
+
+.clearIconAdornment {
+  cursor: pointer;
 }

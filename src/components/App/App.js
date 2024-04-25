@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
 import { Home } from '../Home'
@@ -9,11 +9,18 @@ import { URLS } from 'utils/constants'
 import { Layout } from 'components/Layout'
 import { ThemeProvider } from '@fullscreendigital/carrefour-dex-fe'
 import { createRoute } from './helpers'
-import { makeDesignerGetRequest, makeNotificationsPutRequest } from 'utils/api'
+import { makeDesignerGetRequest, makeCorePutRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
-import { oidcConfig, getFirebaseToken, setFirebaseToken } from 'utils/authService'
+import {
+  oidcConfig,
+  getFirebaseToken,
+  setFirebaseToken,
+  getFirebaseUser,
+  getUserPreferredName,
+  setFirebaseUser
+} from 'utils/authService'
 import { useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
@@ -25,10 +32,11 @@ import { useVolumetryRoutes } from 'components/volumetry/routes'
 import { useBakeryRoutes } from 'components/bakery/routes'
 import { useSupplyOmniRoutes } from 'components/supplyomni/routes'
 import BackButtonTitle from 'components/core-ui/BackButtonTitle/BackButtonTitle'
-import { useMerchandiseRoutes } from '../mobile/routes'
-import { useShopReceptionRoutes } from '../shop-reception/routes'
+import { useMerchandiseRoutes } from '../shop-reception/mobile/routes'
+import { useShopReceptionRoutes } from '../shop-reception/admin/routes'
 import { getFBToken } from 'utils/firebase'
 import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
+import { SnackbarProvider } from 'notistack'
 import 'file-loader?name=firebase-app-compat.js!./firebase-app-compat.js'
 import 'file-loader?name=firebase-messaging-compat.js!./firebase-messaging-compat.js'
 
@@ -52,11 +60,13 @@ const App = () => {
   const [applicationPages, setApplicationPages] = useState([])
   const [applicationModulesPages, setApplicationModulesPages] = useState([])
   const [subdomainId, setSubdomainId] = useState(localStorage.getItem('selectedSubdomainId'))
+  const [allScreensRoutes, setAllScreensRoutes] = useState([])
 
   const [isLoadingAppModules, setIsLoadingAppModules] = useState(false)
   const [hasLoadedAppModules, setHasLoadedAppModules] = useState(false)
   const [isLoadingActivities, setIsLoadingActivities] = useState(false)
   const [hasLoadedActivities, setHasLoadedActivities] = useState(-1) // [~] holds the subdomainId for which the activities were loaded
+  const [isLoadingRoutes, setIsLoadingRoutes] = useState(true)
 
   const [fbToken, setFbToken] = useState(null)
 
@@ -71,12 +81,16 @@ const App = () => {
   useEffect(() => {
     ;(async () => {
       const localToken = getFirebaseToken()
-      if (fbToken && fbToken !== localToken) {
+      const firebaseUser = getFirebaseUser()
+      const loggedUser = getUserPreferredName()
+      // if (fbToken && (fbToken !== localToken || firebaseUser !== loggedUser)) {
+      if (fbToken) {
         try {
-          await makeNotificationsPutRequest('/association', {
+          await makeCorePutRequest('/message-dispatcher/external/association', {
             deviceToken: fbToken
           })
           setFirebaseToken(fbToken)
+          setFirebaseUser(loggedUser)
         } catch (error) {
           console.log(error)
         }
@@ -145,69 +159,106 @@ const App = () => {
     isLoadingActivities
   ])
 
-  const governanceRoutes = useGovernanceRoutes(applicationPages)
-  const volumetryRoutes = useVolumetryRoutes(applicationPages)
-  const bakeryRoutes = useBakeryRoutes(applicationPages)
-  const supplyOmniRoutes = useSupplyOmniRoutes(applicationPages)
-  const merchandiseRoutes = useMerchandiseRoutes(applicationPages)
-  const shopReceptionRoutes = useShopReceptionRoutes(applicationPages)
+  useEffect(() => {
+    ;(async () => {
+      try {
+        const result = await makeDesignerGetRequest('/screens/route-urls')
+        setAllScreensRoutes(result)
+      } catch (error) {
+        showNotification({
+          message: `Error while fetching application pages. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      } finally {
+        setIsLoadingRoutes(false)
+      }
+    })()
+  }, [])
+
+  const governanceRoutes = useGovernanceRoutes(allScreensRoutes)
+  const volumetryRoutes = useVolumetryRoutes(allScreensRoutes)
+  const bakeryRoutes = useBakeryRoutes(allScreensRoutes)
+  const supplyOmniRoutes = useSupplyOmniRoutes(allScreensRoutes)
+  const merchandiseRoutes = useMerchandiseRoutes(allScreensRoutes)
+  const shopReceptionRoutes = useShopReceptionRoutes(allScreensRoutes)
 
   return (
     <AuthProvider {...oidcConfig}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme="light">
-          {((isLoadingAppModules || !hasLoadedAppModules) && (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-            </div>
-          )) || (
-            <Layout modules={modules} setSubdomainId={setSubdomainId}>
-              <BackButtonTitle applicationPages={applicationPages}></BackButtonTitle>
-              <Routes>
-                {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
-
-                {/* private routes */}
-                <Route
-                  path={URLS.AUTH_HOME}
-                  element={
-                    <PrivateRoute
-                      component={Home}
-                      modules={modules}
-                      setSubdomainId={setSubdomainId}
-                    />
+      <SnackbarProvider
+        maxSnack={10}
+        persist
+        anchorOrigin={{
+          horizontal: 'right',
+          vertical: 'top'
+        }}
+      >
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme="light">
+            {((isLoadingAppModules || !hasLoadedAppModules || isLoadingRoutes) && (
+              <div style={{ display: 'flex' }}>
+                <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+              </div>
+            )) || (
+              <Layout modules={modules} setSubdomainId={setSubdomainId}>
+                <BackButtonTitle applicationPages={applicationPages}></BackButtonTitle>
+                <React.Suspense
+                  fallback={
+                    <div style={{ display: 'flex' }}>
+                      <CircularProgress
+                        color="primary"
+                        style={{ margin: '40px auto' }}
+                        disableShrink
+                      />
+                    </div>
                   }
-                />
-                {governanceRoutes}
-                {bakeryRoutes}
-                {volumetryRoutes}
-                {supplyOmniRoutes}
-                {merchandiseRoutes}
-                {shopReceptionRoutes}
-                {applicationModulesPages.map(page =>
-                  createRoute(
-                    {
-                      ...page,
-                      subdomainId,
-                      modules,
-                      applicationPages,
-                      hasLoadedActivities,
-                      isLoadingActivities
-                    },
-                    ServiceDomain
-                  )
-                )}
-                {/* end of private routes */}
+                >
+                  <Routes>
+                    {/* {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />} */}
 
-                <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
-                <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
-                {applicationPages.length && <Route path="*" element={<NotFound />} />}
-              </Routes>
-            </Layout>
-          )}
-        </ThemeProvider>
+                    {/* private routes */}
+                    <Route
+                      path={URLS.AUTH_HOME}
+                      element={
+                        <PrivateRoute
+                          component={Home}
+                          modules={modules}
+                          setSubdomainId={setSubdomainId}
+                        />
+                      }
+                    />
+                    {governanceRoutes}
+                    {bakeryRoutes}
+                    {volumetryRoutes}
+                    {supplyOmniRoutes}
+                    {merchandiseRoutes}
+                    {shopReceptionRoutes}
+                    {applicationModulesPages.map(page =>
+                      createRoute(
+                        {
+                          ...page,
+                          subdomainId,
+                          modules,
+                          applicationPages,
+                          hasLoadedActivities,
+                          isLoadingActivities
+                        },
+                        ServiceDomain
+                      )
+                    )}
+                    {/* end of private routes */}
 
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+                    <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
+                    <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
+                    {applicationPages.length && <Route path="*" element={<NotFound />} />}
+                  </Routes>
+                </React.Suspense>
+              </Layout>
+            )}
+          </ThemeProvider>
+
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </SnackbarProvider>
     </AuthProvider>
   )
 }

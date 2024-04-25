@@ -119,13 +119,15 @@ const ProductManagement = () => {
     setShouldRefreshData(true)
   }
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
+  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters, searchText }) => {
     setIsLoading(true)
     
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/region/store/products',
+          searchText,
+          searchFields: ['name', 'metiCode', 'pluCode', 'familyName'],
           filters: [{ name: 'store', value: storeFilterValue?.value }],
           tableFilters,
           page,

@@ -1,3 +1,4 @@
+import React from 'react'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { Route } from 'react-router-dom'
 import { URLS } from './constants'
@@ -36,6 +37,31 @@ import { ProductionManagementStorePrint } from './StoreManagerRole/ProductionMan
 import { GrowthIndexStore } from './StoreManagerRole/GrowthIndexStore'
 import ReportAndSalesStore from './StoreManagerRole/ReportAndSalesStore/ReportAndSalesStore'
 import { Ingredients } from './Ingredients'
+
+const ProductManagementTraceability = React.lazy(
+  () => import('./Traceability/ProductManagementTraceability/ProductManagementTraceability')
+)
+const  ReceivedProducts  = React.lazy(
+  () => import('./Traceability/ReceivedProducts/ReceivedProducts')
+)
+const FrozenTraceability = React.lazy(
+  () => import('./Traceability/FrozenTraceability/FrozenTraceability')
+)
+const ReportFrozenTraceability = React.lazy(
+  () => import('./Traceability/ReportFrozenTraceability/ReportFrozenTraceability')
+)
+const ReportFrozenTraceabilityPrint = React.lazy(
+  () => import('./Traceability/ReportFrozenTraceabilityPrint/ReportFrozenTraceabilityPrint')
+)
+const OwnProductionTraceability = React.lazy(
+  () => import('./Traceability/OwnProductionTraceability/OwnProductionTraceability')
+)
+const ReportOwnProductionTraceability = React.lazy(
+  () => import('./Traceability/ReportOwnProductionTraceability/ReportOwnProductionTraceability')
+)
+const ReportOwnProductionTraceabilityPrint = React.lazy(
+  () => import('./Traceability/ReportOwnProductionTraceabilityPrint/ReportOwnProductionTraceabilityPrint')
+)
 
 export const useBakeryRoutes = applicationPages => {
   return (
@@ -308,43 +334,204 @@ export const useBakeryRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_GROWTH_REGION}
         element={
-          <PrivateRoute component={GrowthRegion} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={GrowthRegion}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_GROWTH_REGION_PRINT}
         element={
-          <PrivateRoute component={GrowthRegionPrint} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={GrowthRegionPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_GROWTH_INDEX}
         element={
-          <PrivateRoute component={GrowthIndex} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={GrowthIndex}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_GROWTH_INDEX_VIEW}
         element={
-          <PrivateRoute component={GrowthIndexView} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={GrowthIndexView}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_GROWTH_INDEX_PRODUCTS_VIEW}
         element={
-          <PrivateRoute component={GrowthIndexProductsView} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={GrowthIndexProductsView}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_USAGE_REPORT_REGION}
         element={
-          <PrivateRoute component={UsageReportRegion} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={UsageReportRegion}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
       <Route
         path={URLS.AUTH_CADENTIER_SALES_REGION}
         element={
-          <PrivateRoute component={CadentierSalesRegion} applicationPages={applicationPages} checkIsAuthorized />
+          <PrivateRoute
+            component={CadentierSalesRegion}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      {/* traceability operator role */}
+      <Route
+        path={URLS.AUTH_PRODUCT_MANAGEMENT_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={ProductManagementTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_RECEIVED_PRODUCTS_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={ReceivedProducts}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_FROZEN_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={FrozenTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_FROZEN_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={ReportFrozenTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT}
+        element={
+          <PrivateRoute
+            component={ReportFrozenTraceabilityPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_FROZEN_TRACEABILITY_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportFrozenTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportFrozenTraceabilityPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_OWN_PRODUCTION_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={OwnProductionTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceabilityPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceability}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      <Route
+        path={URLS.AUTH_REPORT_OWN_PRODUCTION_TRACEABILITY_PRINT_FORMATOR}
+        element={
+          <PrivateRoute
+            component={ReportOwnProductionTraceabilityPrint}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
         }
       />
     </>

@@ -16,7 +16,7 @@ export const useGovernanceDomains = () => {
     } catch (error) {
       dispatch(GovernanceDomainsActions.setData([]))
       showNotification({
-        message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+        message: `Error while fetching domains dropdown data. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

@@ -42,6 +42,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
   const [tableFilters, setTableFilters] = useState<TableFilters>(defaultTableFilters)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
 
   const [isPrepareOrderModalOpen, setIsPrepareOrderModalOpen] = useState<boolean>(false)
 
@@ -56,11 +57,13 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
   const handleDeliveryOptionFilterChange = (value): void => {
     setSelectedDeliveryOption(value || null)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const handleWithMyOrdersFilterChange = (value): void => {
     setWithMyOrders(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const columnsWithActions = useMemo(() => {
@@ -77,7 +80,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           align: 'left',
           render: row => (
             <Box key={row.id}>
-              {row.deliveryType === STORE_DELIVERY_TYPE && (
+              {row.prepared !== null && (
                 <Switch
                   key={row.id}
                   checked={row.prepared}
@@ -216,6 +219,7 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
                 showSearch
                 counterLabel="Selecteaza tip livrare"
                 noDataFoundLabel="Nici un rezultat"
+                placeholderButton="Selecteaza"
                 options={deliveryTypeOptions}
                 onSelect={handleDeliveryOptionFilterChange}
                 clearable
@@ -237,8 +241,15 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           rowActions={rowActions}
           rowActionsWidth="130px"
           filters={tableFilterInputs}
+          filtersLabel={'Filtre'}
+          appliedFiltersLabel={'Filtre aplicate'}
+          filtersButtonLabel={'Filtrare'}
+          cancelFiltersButtonLabel={'Anulare'}
+          applyFiltersButtonLabel={'Confirma'}
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
+          shouldResetPage={shouldResetPage}
+          setShouldResetPage={setShouldResetPage}
         />
       </Box>
     </div>
