@@ -4,13 +4,34 @@ import { TitleHeader } from '../../TitleHeader'
 import { useNavigate } from 'react-router-dom'
 import { TruckCard } from '../../../admin/Common/TruckCard'
 import { URLS } from '../../constants'
-
-const truckList: any[] = [
-  { id: 1, name: 'Camion 1', description: 'Descriere camion 1' }
-]
+import {useNotification} from "../../../../../hooks";
+import {useQuery} from "react-query";
+import {makeCoreGetRequest} from "../../../../../utils/api";
+import {formatErrorMessage} from "../../../../../utils/formatting";
+import React from "react";
 
 const Delivery = () => {
   const navigate = useNavigate()
+  const { showNotification } = useNotification()
+
+  const { data: truckList, isLoading} = useQuery(
+      'validationTrucks',
+      async () => {
+        return await makeCoreGetRequest('/rm-api/truck/validation/list', null)
+      },
+      {
+        onError: error => {
+          showNotification({
+            message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        }
+      }
+  )
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   let items = [
     <TitleHeader title='VALIDARE LIVRARE' />,
@@ -18,7 +39,7 @@ const Delivery = () => {
       <TruckCard
         key={truck.id}
         onClick={() => {
-          navigate(URLS.AUTH_DELIVERY_DETAIL)
+          navigate(URLS.AUTH_DELIVERY_DETAIL, { state: { truck } })
         }}
         truck={truck}
       />
@@ -26,8 +47,8 @@ const Delivery = () => {
   ]
 
   if(truckList.length === 0){
-    items.push(<Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>nu
-      existǎ camioane de validat</Typography>)
+    items.push(<Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>
+      nu existǎ camioane de validat</Typography>)
   }
 
   return (
