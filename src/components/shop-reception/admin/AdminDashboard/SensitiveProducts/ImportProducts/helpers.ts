@@ -9,10 +9,14 @@ export const getValidationSchema = () =>
       })
     ),
     file: Yup.mixed().required(),
-    ruleTypes: Yup.object().shape({
-      label: Yup.string(),
-      value: Yup.string()
-    })
+    ruleTypes: Yup.array()
+      .of(
+        Yup.object().shape({
+          label: Yup.string(),
+          value: Yup.string()
+        })
+      )
+      .required('Campul este obligatoriu.')
   })
 
 export const getInitialValues = () => {

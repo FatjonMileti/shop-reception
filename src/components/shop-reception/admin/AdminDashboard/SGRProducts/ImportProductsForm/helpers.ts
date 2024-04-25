@@ -11,11 +11,13 @@ export const getValidationSchema = () =>
       )
       .required('Campul este obligatoriu.'),
     file: Yup.mixed(),
-    ruleTypes: Yup.object()
-      .shape({
-        label: Yup.string().required('Campul este obligatoriu.'),
-        value: Yup.string().required('Campul este obligatoriu.')
-      }).nonNullable()
+    ruleTypes: Yup.array()
+      .of(
+        Yup.object().shape({
+          label: Yup.string(),
+          value: Yup.string()
+        })
+      )
       .required('Campul este obligatoriu.')
   })
 

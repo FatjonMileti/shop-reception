@@ -80,7 +80,7 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
       )
       form.append(
         'ruleTypes',
-        new Blob([JSON.stringify(newValues.ruleTypes.value)], { type: 'application/json' })
+        new Blob([JSON.stringify([newValues.ruleTypes.value])], { type: 'application/json' })
       )
       form.append('file', file)
 
@@ -109,16 +109,14 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
         </Grid>
 
         <Grid xs={12} item>
-          <Autocomplete
-            variant="outlined"
+          <FilterDataSelect
+            name="shopCodes"
             label="Regula"
-            disableClearable
-            required
-            onChange={(event, option) => formik.setFieldValue('ruleTypes', option)}
-            value={formik.values.shopType}
             options={shopTypes}
-            error={!!formik.errors.shopType}
-            helperText={formik.errors.shopType as string}
+            onSelect={shops => formik.setFieldValue('ruleTypes', shops)}
+            placeholderButton="Selecteaza"
+            multiSelect={true}
+            showSearch
           />
         </Grid>
 
