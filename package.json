@@ -107,7 +107,8 @@
     "webpack-bundle-analyzer": "^4.7.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.2",
-    "webpack-merge": "^5.7.3"
+    "webpack-merge": "^5.7.3",
+    "workbox-webpack-plugin": "^7.0.0"
   },
   "resolutions": {
     "@types/mime": "3.0.4"
