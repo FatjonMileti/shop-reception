@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
 import { useState } from 'react'
@@ -11,16 +10,16 @@ import { formatErrorMessage } from 'utils/formatting'
 import s from '../../../commonStyles.modules.scss'
 import { Table } from 'components/core-ui/Table'
 import { EditActionIcon } from 'icons'
+import HubsIntervalModal from './HubsIntervalModal/HubsIntervalModal'
 
 const AdminHub = () => {
-  const navigate = useNavigate()
   const { showNotification } = useNotification()
+
   const [tableItems, setTableItems] = useState<AdminHub[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  const [selectedRow, setSelectedRow] = useState<AdminHub>()
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<AdminHub>()
 
   const [modal, setModal] = useState(null)
   const openModal = (action): void => setModal(action)
@@ -28,9 +27,7 @@ const AdminHub = () => {
 
   const selectRow = (rowId: number | string) => {
     const row = tableItems.find(item => item.id === rowId)
-    if (row) {
-      setSelectedRow(row)
-    }
+    row && setSelectedRow(row)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -47,9 +44,7 @@ const AdminHub = () => {
         })
       )
 
-      const responseList = response.list
-
-      setTableItems(toTableRowItems(responseList))
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -74,11 +69,12 @@ const AdminHub = () => {
         editItem={selectedRow}
         isEdit
       />
+      <HubsIntervalModal isOpen={modal === 'interval'} closeModal={closeModal} item={selectedRow} />
       <Table
         hideCheckbox
-        orderBy="code"
+        orderBy="created"
         order="asc"
-        columns={columns(navigate)}
+        columns={columns(setModal, selectRow)}
         items={tableItems}
         fetchData={fetchData}
         isLoading={isLoading}
@@ -106,6 +102,11 @@ const AdminHub = () => {
             onClick: () => openModal('create')
           }
         ]}
+        filtersButtonLabel="Filtre"
+        filtersLabel="Filtre"
+        appliedFiltersLabel="Filtre aplicate"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </div>
   )

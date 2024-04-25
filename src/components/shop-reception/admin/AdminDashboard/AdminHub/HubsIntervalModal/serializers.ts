@@ -1,5 +1,5 @@
-export const toTableRowItems = (items: AdminHubDeliveryInterval[]) =>
-  items.map((item: AdminHubDeliveryInterval) => ({
+export const toTableRowItems = items =>
+  items.map(item => ({
     depositId: item.depositId,
     receiveFromDeposit: item.receiveFromDeposit,
     depositName: item.depositName,

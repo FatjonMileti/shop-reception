@@ -45,9 +45,8 @@ const AdminStoreForm: React.FC<StoreIntervalModalProps> = props => {
       setTableItems(toTableRowItems(response))
       setIsLoading(false)
     } catch (error) {
-      console.log('debug err', error)
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -62,13 +61,13 @@ const AdminStoreForm: React.FC<StoreIntervalModalProps> = props => {
       closeModal()
       formik.resetForm()
       showNotification({
-        message: `Shop interval updated successfully`,
+        message: `Magazinul a fost modificat cu succes.`,
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to add shop interval, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la modificarea datelor. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }

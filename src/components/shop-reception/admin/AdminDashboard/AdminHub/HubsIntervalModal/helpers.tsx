@@ -1,5 +1,62 @@
+import * as Yup from 'yup'
 import { Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableRowItems } from './serializers'
+import dayjs from 'dayjs'
+import { formatPayloadDate } from 'utils/helpers'
+
+export const getValidationSchema = (editItem: AdminStore) =>
+  Yup.object().shape({
+    code: Yup.object().shape({
+      label: Yup.string(),
+      value: Yup.string()
+    }),
+    metiVersion: Yup.object().shape({
+      label: Yup.string().required('Campul este obligatoriu.'),
+      value: Yup.string().required('Campul este obligatoriu.')
+    }),
+    adCode: Yup.string().required(),
+    parentSociety: Yup.object().shape({
+      label: Yup.string().required('Campul este obligatoriu.'),
+      value: Yup.string().required('Campul este obligatoriu.')
+    }),
+    receptionDeviation: Yup.number().required('Campul este obligatoriu.'),
+    sftpIp: Yup.string().required('Campul este obligatoriu.'),
+    sftpPath: Yup.string().required('Campul este obligatoriu.'),
+    depositIds: Yup.array()
+      .of(
+        Yup.object().shape({
+          label: Yup.string().required('Campul este obligatoriu.'),
+          value: Yup.string().required('Campul este obligatoriu.')
+        })
+      )
+      .required('Campul este obligatoriu.'),
+    address: Yup.string().required('Campul este obligatoriu.'),
+    city: Yup.string().required('Campul este obligatoriu.'),
+    town: Yup.string().required('Campul este obligatoriu.'),
+
+    canEditQuantities: Yup.boolean(),
+    canCallReturnTruck: Yup.boolean(),
+    active: Yup.boolean().required('Campul este obligatoriu.')
+  })
+
+export const getInitialValues = (editItem: AdminStore) => {
+  return {
+    id: editItem?.id || null,
+    code: { label: editItem?.metiCode, value: editItem?.metiCode } || '',
+    metiVersion: { label: editItem?.metiVersion, value: editItem?.metiVersion } || '',
+    adCode: editItem?.adCode || '',
+    parentSociety: { label: editItem?.parentSociety, value: editItem?.parentSociety } || '',
+    receptionDeviation: editItem?.receptionDeviation || '',
+    sftpIp: editItem?.sftpIp || '',
+    sftpPath: editItem?.sftpPath || '',
+    address: editItem?.address || '',
+    city: editItem?.city || '',
+    town: editItem?.town || '',
+    canEditQuantities: editItem?.canEditQuantities || false,
+    canCallReturnTruck: editItem?.canCallReturnTruck || false,
+    active: editItem?.active || false
+  }
+}
 
 export const columns = (formik, setTableItems) => [
   {
@@ -7,6 +64,7 @@ export const columns = (formik, setTableItems) => [
     field: 'receiveFromDeposit',
     align: 'left',
     type: 'string',
+    width: '100px',
     render: row => (
       <Checkbox
         checked={row.receiveFromDeposit}
@@ -30,19 +88,22 @@ export const columns = (formik, setTableItems) => [
     title: 'Cod depozit',
     field: 'depositCode',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Nume',
     field: 'depositName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Luni',
     field: 'monday',
     align: 'left',
     type: 'string',
+    width: '100px',
     render: row => (
       <Checkbox
         checked={row.monday}
@@ -67,6 +128,7 @@ export const columns = (formik, setTableItems) => [
     field: 'tuesday',
     align: 'left',
     type: 'string',
+    width: '100px',
     render: row => (
       <Checkbox
         checked={row.tuesday}
@@ -91,6 +153,7 @@ export const columns = (formik, setTableItems) => [
     field: 'wednesday',
     align: 'left',
     type: 'string',
+    width: '100px',
     render: row => (
       <Checkbox
         checked={row.wednesday}
@@ -115,6 +178,7 @@ export const columns = (formik, setTableItems) => [
     field: 'thursday',
     align: 'left',
     type: 'string',
+    width: '100px',
     render: row => (
       <Checkbox
         checked={row.thursday}
@@ -139,6 +203,7 @@ export const columns = (formik, setTableItems) => [
     field: 'friday',
     align: 'left',
     type: 'string',
+    width: '100px',
     render: row => (
       <Checkbox
         checked={row.friday}
@@ -163,6 +228,7 @@ export const columns = (formik, setTableItems) => [
     field: 'saturday',
     align: 'left',
     type: 'string',
+    width: '100px',
     render: row => (
       <Checkbox
         checked={row.saturday}
@@ -187,6 +253,7 @@ export const columns = (formik, setTableItems) => [
     field: 'sunday',
     align: 'left',
     type: 'string',
+    width: '100px',
     render: row => (
       <Checkbox
         checked={row.sunday}
@@ -220,7 +287,7 @@ export const columns = (formik, setTableItems) => [
             if (item.depositId === row.depositId) {
               return {
                 ...item,
-                startInterval: newStartInterval
+                startInterval: formatPayloadDate(newStartInterval)
               }
             }
             return item
@@ -245,7 +312,7 @@ export const columns = (formik, setTableItems) => [
             if (item.depositId === row.depositId) {
               return {
                 ...item,
-                endInterval: newEndInterval
+                endInterval: formatPayloadDate(newEndInterval)
               }
             }
             return item

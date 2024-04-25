@@ -1,16 +1,9 @@
 import { useMemo } from 'react'
-import {
-  Input,
-  Checkbox,
-  Button,
-  Autocomplete,
-  FilterDataSelect
-} from '@fullscreendigital/carrefour-dex-fe'
+import { Input, Checkbox, Button, Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { getInitialValues, getValidationSchema } from './helpers'
-import { useNotification } from 'hooks'
+import { useNotification, useSearchInput } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { CircularProgress, Grid } from '@mui/material'
@@ -38,65 +31,45 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
 
   const { isLoading, mutate } = useMutation(mutateHub, {
     onSuccess: () => {
+      setShouldRefreshData(true)
       closeModal()
+      formik.resetForm()
       showNotification({
-        message: `Hub ${editItem ? 'updated' : 'created'} successfully`,
+        message: `Hubul a fost ${editItem ? 'modificat' : 'creat'} cu succes.`,
         type: 'success'
       })
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to ${
-          editItem ? 'update' : 'create'
-        } shop, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la ${
+          editItem ? 'modificarea' : 'crearea'
+        } hubului. ${formatErrorMessage(res)}`,
         type: 'error'
       })
-    }
-  })
-
-  const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
-  const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
-
-  const formik = useFormik({
-    enableReinitialize: true,
-    validateOnChange: false,
-    initialValues: initialValues,
-    validationSchema: validationSchema,
-    onSubmit: async (values: any, { resetForm }) => {
-      try {
-        mutate(values)
-        setShouldRefreshData(true)
-        resetForm()
-        closeModal()
-      } catch (error) {
-        showNotification({
-          message: `Error while data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
     }
   })
 
   const { data: hubTypes, isLoading: isHubTypesLoading } = useQuery(
     ['hub-types'],
     async () => {
-      const result = await makeCoreGetRequest('/shop-reception/products/types')
+      const result = await makeCoreGetRequest('/shop-reception/hubs/types')
+
       const resultOptions = result.map(
-        (item: string): AutocompleteOption => ({
+        (item: any): AutocompleteOption => ({
           label: item,
           value: item
         })
       )
+
       return resultOptions || []
     },
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching shop types dropdown data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea huburilor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
-      },
-      enabled: isOpen
+      }
     }
   )
 
@@ -104,23 +77,46 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
     ['assigned-users'],
     async () => {
       const result = await makeCoreGetRequest(`/shop-reception/hubs/${editItem.id}/users`)
-      const resultOptions = result.map(
-        (item: string): AutocompleteOption => ({
-          label: item,
-          value: item
-        })
-      )
-      return resultOptions || []
+
+      return result || []
     },
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching assigned users data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea utilizatorilor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },
       enabled: isOpen && typeof editItem !== 'undefined'
     }
+  )
+
+  const initialValues = useMemo(
+    () => getInitialValues(editItem, hubTypes, assignedUsers),
+    [editItem, hubTypes, assignedUsers]
+  )
+  const validationSchema = useMemo(() => getValidationSchema(), [editItem])
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    validateOnChange: false,
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: async values => {
+      const payload = {
+        ...values,
+        type: values.type.value,
+        packagingResponsibleEmails: values.packagingResponsibleEmails.split(';')
+      }
+
+      mutate(payload)
+    }
+  })
+
+  const selectProductSearch = useSearchInput(
+    'name',
+    'deposit-responsible',
+    '/shop-reception/hubs/responsible'
   )
 
   return (
@@ -131,19 +127,6 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
       modalWidth="50%"
     >
       <Grid container spacing={2}>
-        <Grid xs={12} item>
-          {isEdit && (
-            <FormInfoItems
-              items={[
-                {
-                  label: 'Nume:',
-                  name: editItem?.name
-                }
-              ]}
-            />
-          )}
-        </Grid>
-
         <Grid xs={12} item>
           <Input
             type="text"
@@ -187,11 +170,9 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
               label="Tip HUB"
               disableClearable
               required
-              onChange={event =>
-                formik.setFieldValue('type', (event.target as HTMLInputElement).value)
-              }
-              defaultValue={formik.values.type}
-              options={hubTypes}
+              onChange={(event, option) => formik.setFieldValue('type', option)}
+              value={formik.values.type}
+              options={hubTypes || []}
               error={!!formik.errors.type}
               helperText={formik.errors.type as string}
             />
@@ -243,30 +224,33 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
           />
         </Grid>
 
-        {editItem && (
-          <Grid xs={12} item>
-            {isAssignedUsersLoading ? (
-              <div style={{ display: 'flex' }}>
-                <CircularProgress color="primary" disableShrink />
-              </div>
-            ) : (
-              <Autocomplete
-                variant="outlined"
-                label="Utilizatori asignaţi pe hub"
-                disableClearable
-                required
-                onChange={event =>
-                  formik.setFieldValue('users', (event.target as HTMLInputElement).value)
+        <Grid xs={12} item>
+          {isAssignedUsersLoading ? (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" disableShrink />
+            </div>
+          ) : (
+            <Autocomplete
+              {...selectProductSearch}
+              variant="outlined"
+              label="Utilizatori asignaţi pe hub"
+              autoComplete={false}
+              required
+              filterOptions={x => x}
+              multiple
+              onChange={(event, value) => {
+                if (value) {
+                  formik.setFieldValue('users', value)
+                } else {
+                  formik.setFieldValue('users', null)
                 }
-                defaultValue={formik.values.users}
-                multiple
-                options={assignedUsers}
-                error={!!formik.errors.users}
-                helperText={formik.errors.users as string}
-              />
-            )}
-          </Grid>
-        )}
+              }}
+              value={formik.values.users || null}
+              error={!!formik.errors.users}
+              helperText={formik.errors.users as string}
+            />
+          )}
+        </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
           <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
@@ -274,6 +258,7 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
             variant="contained"
             label={isEdit ? 'Editeaza' : 'Salveaza'}
             onClick={() => formik.handleSubmit()}
+            disabled={isLoading}
           />
         </Grid>
       </Grid>

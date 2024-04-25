@@ -29,6 +29,9 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
 
   const { isLoading, mutate } = useMutation(updateSubfamilyValidity, {
     onSuccess: res => {
+      setShouldRefreshData(true)
+      closeModal()
+      formik.resetForm()
       showNotification({
         message: `Datele au fost modificate cu succes.`,
         type: 'success'
@@ -49,9 +52,6 @@ const SubFamilyValidityThresholdForm: React.FC<NewAdminDepositProps> = props => 
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       mutate(values)
-      setShouldRefreshData(true)
-      closeModal()
-      formik.resetForm()
     }
   })
 

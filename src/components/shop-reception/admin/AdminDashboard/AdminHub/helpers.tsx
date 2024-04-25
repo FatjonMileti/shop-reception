@@ -1,9 +1,8 @@
 import { Box } from '@mui/material'
 import { IconCell } from 'components/core-ui/IconCell'
-import { EditActionIcon, ViewActionIcon } from 'icons'
-import { URLS } from '../../constants'
+import { ViewActionIcon } from 'icons'
 
-export const columns = navigate => [
+export const columns = (setModal, selectRow) => [
   {
     title: 'Cod hub',
     field: 'code',
@@ -40,16 +39,22 @@ export const columns = navigate => [
     )
   },
   {
-    title: 'Interval orar',
+    title: 'Intervale orare',
+    field: 'hourlyIntervals',
     align: 'left',
     type: 'string',
+    disableSorting: true,
+    width: '100px',
     render: row => (
-      <span
-        onClick={() => navigate(URLS.AUTH_ADMIN_HUBS_DELIVERY_INTERVAL.replace(':id', row.id))}
+      <div
         style={{ cursor: 'pointer' }}
+        onClick={() => {
+          selectRow(row.id)
+          setModal('interval')
+        }}
       >
         <ViewActionIcon />
-      </span>
+      </div>
     )
   }
 ]
