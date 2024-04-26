@@ -21,7 +21,7 @@ import { AutoCompleteValue, Filter } from '../../../core-ui/Table/TableDefinitio
 import { ImageCell } from '../../../core-ui/ImageCell'
 import { columns, headerItems } from './helpers'
 
-export const ProductManagementTraceability = () => {
+const ProductManagementTraceability = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const [totalCount, setTotalCount] = React.useState<number>(0)
   const [tableItems, setTableItems] = React.useState<ProductManagementItem[]>([])
@@ -220,3 +220,5 @@ export const ProductManagementTraceability = () => {
     </div>
   )
 }
+
+export default ProductManagementTraceability

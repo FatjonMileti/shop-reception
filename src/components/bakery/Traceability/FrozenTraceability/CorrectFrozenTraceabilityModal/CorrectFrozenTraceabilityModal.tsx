@@ -9,8 +9,9 @@ import { formatErrorMessage } from 'utils/formatting'
 import { ProductDetails } from './ProductDetails'
 import { SelectBatch } from './SelectBatch'
 import { useFormik } from 'formik'
-import { getInitialValues, toBatchFormat, validationSchema } from './helpers'
+import { calculateComponentDlc, getInitialValues, toBatchFormat, validationSchema } from './helpers'
 import dayjs from 'dayjs'
+import { AxiosError } from 'axios'
 
 interface CorrectFrozenTraceabilityModalProps {
   isModalOpen: boolean
@@ -41,9 +42,17 @@ export const CorrectFrozenTraceabilityModal = ({
           type: 'success'
         })
       },
-      onError: res => {
+      onError: (res: any) => {
+        if (res?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+          return
+        }
+
         showNotification({
-          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
@@ -54,23 +63,6 @@ export const CorrectFrozenTraceabilityModal = ({
     () => getInitialValues(itemToCorrectQuery?.data),
     [itemToCorrectQuery?.data]
   )
-
-  const addDlcToComponent = item => {
-    if (!item.hasSecondaryDlc) return item
-
-    const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
-
-    return {
-      ...item,
-      dlc: formatPayloadDate(
-        item?.expireDate
-          ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
-            ? dayjs(item?.expireDate)
-            : calculatedDlc
-          : calculatedDlc
-      )
-    }
-  }
 
   const formik = useFormik({
     validateOnChange: false,
@@ -90,8 +82,13 @@ export const CorrectFrozenTraceabilityModal = ({
         conform: values.conform,
         nonComplianceReason: values?.nonComplianceReason || null,
         productDestination: values?.productDestination || null,
-        dlc: values.dlc,
-        traceabilityFrozenList: values.traceabilityFrozenList.map(addDlcToComponent)
+        dlc: values.product?.dlcDays
+          ? formatPayloadDate(dayjs(values.productionDate).add(values.product?.dlcDays, 'days'))
+          : null,
+        traceabilityFrozenList: values.traceabilityFrozenList.map(item => ({
+          ...item,
+          dlc: calculateComponentDlc(item)
+        }))
       }
 
       if (values.traceabilityFrozenList.length === 0) {
@@ -144,15 +141,23 @@ export const CorrectFrozenTraceabilityModal = ({
         )}
         {!itemToCorrectMutation.isLoading && itemToCorrectQuery?.data && (
           <>
-            {
-              [
-                <ProductDetails
-                  onSelectBatch={() => {
-                    setStep(1)
-                  }}
-                  onCancel={cancel}
-                  formik={formik}
-                />,
+            <ProductDetails
+              onSelectBatch={() => {
+                setStep(1)
+              }}
+              onCancel={cancel}
+              formik={formik}
+            />
+
+            {step === 1 && (
+              <Modal
+                isModalOpen={isModalOpen}
+                closeModal={() => {
+                  setStep(0)
+                }}
+                modalTitle="Corectie trasabilitate congelate si ambalaje"
+                modalWidth="50%"
+              >
                 <SelectBatch
                   onContinue={frozenItems => {
                     addNewFrozenItems(frozenItems)
@@ -163,8 +168,8 @@ export const CorrectFrozenTraceabilityModal = ({
                   }}
                   formik={formik}
                 />
-              ][step]
-            }
+              </Modal>
+            )}
           </>
         )}
       </Grid>

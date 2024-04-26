@@ -16,7 +16,8 @@ import {
   toBatchFormat,
   toChargeFormat
 } from '../AddOwnProductionTraceabilityModal/helpers'
-import dayjs from 'dayjs'
+import { calculateComponentDlc } from './helpers'
+import { AxiosError } from 'axios'
 
 interface CorrectOwnProductionTraceabilityModalProps {
   isModalOpen: boolean
@@ -47,9 +48,16 @@ export const CorrectOwnProductionTraceabilityModal = ({
         })
         cancel()
       },
-      onError: res => {
+      onError: (res: any) => {
+        if (res?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+          return
+        }
         showNotification({
-          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
@@ -67,31 +75,6 @@ export const CorrectOwnProductionTraceabilityModal = ({
     validationSchema,
     initialValues,
     onSubmit: async (values: any) => {
-      const addDlcToComponent = item => {
-        if (!item.hasSecondaryDlc) return item
-
-        // charge
-        if (!item.batchId) {
-          return {
-            ...item,
-            dlc: formatPayloadDate(dayjs(item.productionDate).add(item.dlcDays, 'days'))
-          }
-        }
-
-        // batch
-        const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
-        return {
-          ...item,
-          dlc: formatPayloadDate(
-            item?.expireDate
-              ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
-                ? dayjs(item?.expireDate)
-                : calculatedDlc
-              : calculatedDlc
-          )
-        }
-      }
-
       const removeProductionDate = ({ productionDate, ...item }) => item
 
       const payload = {
@@ -108,7 +91,10 @@ export const CorrectOwnProductionTraceabilityModal = ({
         metiCode: values?.product?.metiCode,
         productName: values.product?.name,
         traceabilityProductionList: values?.traceabilityProductionList
-          .map(addDlcToComponent)
+          .map(item => ({
+            ...item,
+            dlc: calculateComponentDlc(item)
+          }))
           .map(removeProductionDate)
       }
 
@@ -255,21 +241,28 @@ export const CorrectOwnProductionTraceabilityModal = ({
         )}
         {!correctItemMutation.isLoading && correctItemQuery?.data && (
           <>
-            {
-              [
-                <ProductDetails
-                  onAddBatch={componentMetiCode => {
-                    setComponentMetiCode(componentMetiCode)
-                    setStep(1)
-                  }}
-                  onAddCharge={componentMetiCode => {
-                    setComponentMetiCode(componentMetiCode)
-                    setStep(2)
-                  }}
-                  onCancel={cancel}
-                  formik={formik}
-                  recipeQuery={recipeQuery}
-                />,
+            <ProductDetails
+              onAddBatch={componentMetiCode => {
+                setComponentMetiCode(componentMetiCode)
+                setStep(1)
+              }}
+              onAddCharge={componentMetiCode => {
+                setComponentMetiCode(componentMetiCode)
+                setStep(2)
+              }}
+              onCancel={cancel}
+              formik={formik}
+              recipeQuery={recipeQuery}
+            />
+            {step === 1 && (
+              <Modal
+                isModalOpen={isModalOpen}
+                closeModal={() => {
+                  setStep(0)
+                }}
+                modalTitle="Corectie trasabilitate productie proprie"
+                modalWidth="50%"
+              >
                 <SelectBatch
                   onContinue={batches => {
                     addNewBatches(batches)
@@ -281,7 +274,19 @@ export const CorrectOwnProductionTraceabilityModal = ({
                   metiCode={formik.values?.metiCode}
                   componentMetiCode={componentMetiCode}
                   productionDate={formik.values.productionDate}
-                />,
+                />
+              </Modal>
+            )}
+
+            {step === 2 && (
+              <Modal
+                isModalOpen={isModalOpen}
+                closeModal={() => {
+                  setStep(0)
+                }}
+                modalTitle="Corectie trasabilitate productie proprie"
+                modalWidth="50%"
+              >
                 <SelectCharge
                   onContinue={charges => {
                     addNewCharges(charges)
@@ -293,8 +298,8 @@ export const CorrectOwnProductionTraceabilityModal = ({
                   componentMetiCode={componentMetiCode}
                   productionDate={formik.values.productionDate}
                 />
-              ][step]
-            }
+              </Modal>
+            )}
           </>
         )}
       </Grid>

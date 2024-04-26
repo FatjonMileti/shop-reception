@@ -99,7 +99,6 @@ const IndividualPerson: React.FC<IndividualPersonProps> = ({ selectNewClient }) 
           variant="outlined"
           value={formik.values.email}
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('email', e.target.value)}
-          required
           error={!!formik.errors.email}
           helperText={formik.errors.email as string}
           fullWidth

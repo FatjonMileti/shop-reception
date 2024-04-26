@@ -96,7 +96,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           variant="outlined"
           helperText={
             error && !value?.county?.value && helperText.includes('required')
-              ? 'Judet is required'
+              ? 'Judetul este obligatoriu.'
               : ''
           }
           required={required}
@@ -125,7 +125,7 @@ const CountyCitySelect = (props: CountyCitySelectProps) => {
           variant="outlined"
           helperText={
             error && !value?.city?.value && helperText.includes('required')
-              ? 'Oras is required'
+              ? 'Orasul este obligatoriu.'
               : ''
           }
           required={required}

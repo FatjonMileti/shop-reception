@@ -5,7 +5,7 @@ import { ProductDetails } from './AddReceivedProduct/ProductDetails'
 import dayjs from 'dayjs'
 import { CloseReason, ReceivedProduct } from './interfaces'
 import { BatchStatus } from '../interfaces'
-import { formatPayloadDate } from '../../../../utils/helpers'
+import { formatBakeryPayloadDate } from 'utils/helpers'
 import { ImageCell } from '../../../core-ui/ImageCell'
 
 export const toTableRowItem = (item: Partial<ReceivedProduct>): ReceivedProduct => ({
@@ -58,7 +58,7 @@ export const columns: Column[] = [
     title: 'Data intrare in raion',
     field: 'entryDate',
     render: row => (
-      <BodyItem name="Data intrare in raion" value={formatPayloadDate(row.entryDate)} />
+      <BodyItem name="Data intrare in raion" value={formatBakeryPayloadDate(row.entryDate)} />
     )
   },
   {
@@ -107,7 +107,7 @@ export const columns: Column[] = [
   },
   {
     field: 'expireDate',
-    render: row => <BodyItem name="Data expirare" value={formatPayloadDate(row.expireDate)} />
+    render: row => <BodyItem name="Data expirare" value={formatBakeryPayloadDate(row.expireDate)} />
   },
   {
     field: 'hasSecondaryDlc',
@@ -152,7 +152,7 @@ export const columns: Column[] = [
     field: 'createdDate',
     render: row => {
       return (
-        <BodyItem name="Data creare linie receptie" value={formatPayloadDate(row.createdDate)} />
+        <BodyItem name="Data creare linie receptie" value={formatBakeryPayloadDate(row.createdDate)} />
       )
     }
   },
@@ -197,7 +197,7 @@ export const columns: Column[] = [
     render: row => (
       <BodyItem
         name="Data verificare trasabilitate"
-        value={<>{formatPayloadDate(row.verifiedDate)}</>}
+        value={formatBakeryPayloadDate(row.verifiedDate)}
       />
     )
   },
@@ -209,7 +209,7 @@ export const columns: Column[] = [
     title: 'Data ultimei modificari',
     field: 'modifiedDate',
     render: row => (
-      <BodyItem name="Data ultimei modificari" value={<>{formatPayloadDate(row.modifiedDate)}</>} />
+      <BodyItem name="Data ultimei modificari" value={formatBakeryPayloadDate(row.modifiedDate)} />
     )
   }
 ]
@@ -219,7 +219,7 @@ export const headerItems: Column[] = [
     title: 'Data intrare in raion',
     field: 'entryDate',
     render: row => (
-      <HeaderItem name="Data intrare in raion" value={formatPayloadDate(row.entryDate)} />
+      <HeaderItem name="Data intrare in raion" value={formatBakeryPayloadDate(row.entryDate)} />
     )
   },
   {

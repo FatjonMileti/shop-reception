@@ -45,7 +45,8 @@ export const toAssignedTasksItem = item => ({
   priorityId: item.priorityId,
   priorityValue: item.priorityValue,
   frequency: item.frequency,
-  employees: [toItemEmployee(item)]
+  employees: [toItemEmployee(item)],
+  minDivision: item.minDivision
 })
 
 export const toItemEmployee = item => ({

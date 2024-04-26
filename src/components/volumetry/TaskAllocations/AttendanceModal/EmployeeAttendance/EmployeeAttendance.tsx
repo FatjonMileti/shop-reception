@@ -13,19 +13,17 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     updateEmployeeTime,
     closeModal,
     handleSubmit,
-    increaseStep,
     isXs,
     formik
   } = props
 
   const submitStep = async () => {
     await handleSubmit()
-    increaseStep()
   }
 
   const columns = useMemo(
-    () => buildColumns({ toggleEmployee, updateEmployeeTime, isXs }),
-    [employees]
+    () => buildColumns({ toggleEmployee, updateEmployeeTime, isXs, formik }),
+    [employees, formik.errors]
   )
 
   const checkSelected = formik.values.employees.some(

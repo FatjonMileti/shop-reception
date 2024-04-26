@@ -1,9 +1,11 @@
 import * as Yup from 'yup'
 import { formatBakeryPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
+import { calculateComponentDlc } from '../CorrectOwnProductionTraceabilityModal/helpers'
 
-export const getInitialValues = recipeQuery => {
+export const getInitialValues = (recipeQuery, product) => {
   return {
+    product,
     productionDate: dayjs(),
     chargeNumber: null,
     productionOperator: null,
@@ -30,56 +32,104 @@ export const validationSchema = Yup.object().shape({
 
   chargeNumber: Yup.number().required('Campul sarja trebuie completat.'),
   productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
-  quantity: Yup.number().required('Campul cantitate trebuie completat').positive('Inserati valoare pozitiva'),
+  quantity: Yup.number()
+    .required('Campul cantitate trebuie completat')
+    .positive('Inserati valoare pozitiva'),
   thermalCondition: Yup.string().nullable(), //.required('Campul stare termica trebuie selectat.'),
   conform: Yup.boolean(),
   nonComplianceReason: Yup.string().when('conform', ([conform], schema) =>
     conform
       ? schema.nullable()
-      : schema
-        .required('Camp obligatoriu')
-        .max(250, 'must be at most 250 characters')
+      : schema.required('Camp obligatoriu').max(250, 'must be at most 250 characters')
   ),
   productDestination: Yup.string().when('conform', ([conform], schema) =>
     conform
       ? schema.nullable()
-      : schema
-        .required('Camp obligatoriu')
-        .max(250, 'must be at most 250 characters')
+      : schema.required('Camp obligatoriu').max(250, 'must be at most 250 characters')
   ),
   traceabilityProductionList: Yup.array().of(
-    Yup.object().shape({
-      batchId: Yup.string(),
-      childTraceabilityId: Yup.string(),
-      componentCode: Yup.number(),
-      componentQuantity: Yup.number(),
-      quantity: Yup.number().required('Cantitate obligatorie').positive('Inserati valoare pozitiva'),
+    Yup.object()
+      .shape({
+        batchId: Yup.string(),
+        childTraceabilityId: Yup.string(),
+        componentCode: Yup.number(),
+        componentQuantity: Yup.number(),
+        quantity: Yup.number()
+          .required('Cantitate obligatorie')
+          .positive('Inserati valoare pozitiva'),
 
-      openingDate: Yup.date().when(
-        ['hasSecondaryDlc', 'batchId', '$productionDate'],
-        ([hasSecondaryDlc, batchId, productionDate], schema) => {
-          if (hasSecondaryDlc && batchId) {
-            if (productionDate) {
-              return schema
-                .required('Data obligatorie')
-                .test(
-                  'notAfterProductionDate',
-                  'Data deschiderii mai mica sau egala cu data productiei',
-                  openingDate => {
-                    return !dayjs(openingDate).isAfter(productionDate, 'date')
-                  }
-                )
+        openingDate: Yup.date().when(
+          ['hasSecondaryDlc', 'batchId', '$productionDate'],
+          ([hasSecondaryDlc, batchId, productionDate], schema) => {
+            if (hasSecondaryDlc && batchId) {
+              if (productionDate) {
+                return schema
+                  .required('Data obligatorie')
+                  .test(
+                    'notAfterProductionDate',
+                    'Data deschiderii mai mica sau egala cu data productiei',
+                    openingDate => {
+                      return !dayjs(openingDate).isAfter(productionDate, 'date')
+                    }
+                  )
+              } else {
+                return schema.required('Data obligatorie')
+              }
             } else {
-              return schema.required('Data obligatorie')
+              return schema.nullable()
             }
-          } else {
-            return schema.nullable()
           }
-        }
-      ),
+        ),
 
-      hasSecondaryDlc: Yup.boolean()
-    })
+        hasSecondaryDlc: Yup.boolean()
+      })
+      .test((component: any, context) => {
+        // not batch
+        if (!component.batchId) {
+          return true
+        }
+
+        const productionDate = context.options.context?.productionDate
+
+        if (!productionDate) {
+          return true
+        }
+
+        if (component?.hasSecondaryDlc && !component?.openingDate) {
+          return true
+        }
+
+        if (!component?.expireDate && !component?.hasSecondaryDlc) {
+          return true
+        }
+
+        const secondaryDlc = calculateComponentDlc(component)
+        const expireDateOrDlc = dayjs(secondaryDlc || component.expireDate)
+
+        const mainProductDlcDays = context.options.context?.product?.dlcDays
+
+        const mainProductProductionDatePlusDlcDays = dayjs(productionDate).add(
+          mainProductDlcDays || 0,
+          'day'
+        )
+
+        if (
+          expireDateOrDlc
+            .endOf('day')
+            .isBefore(mainProductProductionDatePlusDlcDays.endOf('day')) ||
+          (!!component?.expireDate &&
+            !dayjs(component?.expireDate)
+              .endOf('day')
+              .isAfter(mainProductProductionDatePlusDlcDays.endOf('day')))
+        ) {
+          return context.createError({
+            path: `${context.path}.expired`,
+            message: 'Lot expirat'
+          })
+        }
+
+        return true
+      })
   )
 })
 
@@ -103,7 +153,7 @@ export const toChargeFormat = (item, calculatedQuantity) => ({
   quantity: calculatedQuantity,
   productionDate: item.productionDate,
   hasSecondaryDlc: !!item?.product?.dlcDays,
-  dlcDays: item?.product?.dlcDays,
+  dlcDays: item?.product?.dlcDays
 })
 
 export const columns: any[] = [

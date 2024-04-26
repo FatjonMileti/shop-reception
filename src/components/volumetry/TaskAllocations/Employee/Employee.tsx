@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Box, Grid, useMediaQuery } from '@mui/material'
 import s from '../TaskAllocations.modules.scss'
-import { getCapsuleColor } from '../helpers'
+import { getCapsuleColor } from './helpers'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
@@ -21,10 +21,9 @@ const Employee: React.FC<EmployeeProps> = props => {
 
   const taskCurrentState = useMemo(() => getTaskCurrentState(employee), [employee.timerStatus])
 
-  const customCapsuleColors = getCapsuleColor(
-    taskCurrentState.isTaskStarted,
-    taskCurrentState.isTaskEnded,
-    employee.progressProportion > 100
+  const customCapsuleColors = useMemo(
+    () => getCapsuleColor(taskCurrentState, employee.progressProportion > 100),
+    [taskCurrentState, employee.progressProportion]
   )
 
   const [isOpenStopTaskModal, setIsOpenStopTaskModal] = useState<boolean>(false)
@@ -89,6 +88,8 @@ const Employee: React.FC<EmployeeProps> = props => {
             setShouldRefreshData={setShouldRefreshData}
             setSelectedRowId={setSelectedRowId}
             hideWorkload
+            isStop
+            minDivision={task.minDivision}
           />
         </>
       ) : (
@@ -128,6 +129,8 @@ const Employee: React.FC<EmployeeProps> = props => {
             task={task}
             setShouldRefreshData={setShouldRefreshData}
             setSelectedRowId={setSelectedRowId}
+            isStop
+            minDivision={task.minDivision}
           />
         </>
       )}

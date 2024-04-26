@@ -3,7 +3,7 @@ import { formatTime } from 'utils/helpers'
 
 export const buildColumns = ({ toggleEmployee }: { toggleEmployee: Function }) => [
   {
-    title: 'Angajatt',
+    title: 'Angajat',
     field: 'fullName',
     render: (row: any) => (
       <Checkbox
@@ -17,8 +17,16 @@ export const buildColumns = ({ toggleEmployee }: { toggleEmployee: Function }) =
     )
   },
   {
+    title: 'Departament',
+    field: 'genericDepartment',
+    render: row => (
+      <span style={{ display: 'inline-block', lineHeight: '45px' }}>{row.genericDepartment}</span>
+    )
+  },
+  {
     title: 'Ora inceput de tura',
     field: 'shiftStart',
+    collapsible: true,
     render: (row: any) => (
       <span style={{ display: 'inline-block', lineHeight: '45px' }}>
         {formatTime(row.shiftStart)}
@@ -28,6 +36,11 @@ export const buildColumns = ({ toggleEmployee }: { toggleEmployee: Function }) =
   {
     title: 'Ora final de tura',
     field: 'shiftEnd',
-    render: (row: any) => <span>{formatTime(row.shiftEnd)}</span>
+    collapsible: true,
+    render: (row: any) => (
+      <span style={{ display: 'inline-block', lineHeight: '45px' }}>
+        {formatTime(row.shiftEnd)}
+      </span>
+    )
   }
 ]

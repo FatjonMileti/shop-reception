@@ -82,7 +82,6 @@ export interface EmployeeAttendanceProps {
   updateEmployeeTime: Function
   closeModal: Function
   handleSubmit: Function
-  increaseStep: Function
   isXs: boolean
   formik: any
 }
@@ -105,11 +104,10 @@ export interface LocationManagementTableItem {
 
 export interface LocationItem {
   id: string | number
-  name: string
-  regionId: string | number
-  regionName: string
-  categoryId: string | number
-  categoryName: string
+  locationName: string
+  locationCategory: string
+  locationCategoryId: number
+  locationType: string
 }
 
 export interface LocationItemForm {
@@ -125,6 +123,7 @@ export interface EditLocationProps {
   closeModal: Function
   setShouldRefreshData: Function
   editItemId: string | number
+  editItem: LocationItem
 }
 
 export interface Region {

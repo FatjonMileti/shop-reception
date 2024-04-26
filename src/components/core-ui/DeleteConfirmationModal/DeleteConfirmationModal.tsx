@@ -58,7 +58,7 @@ const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={title || 'Delete'}>
       <Grid container spacing={4}>
-        <Grid xs={12} item>
+        <Grid xs={12} item className={s.modalMessage}>
           {content}
         </Grid>
 

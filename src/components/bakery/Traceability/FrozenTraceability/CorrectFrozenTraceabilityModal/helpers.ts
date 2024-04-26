@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
+import { formatPayloadDate } from 'utils/helpers'
 import dayjs from 'dayjs'
 
 export const getInitialValues = editItem => {
@@ -18,6 +18,22 @@ export const getInitialValues = editItem => {
   }
 }
 
+export const calculateComponentDlc = item => {
+  if (!item.hasSecondaryDlc) return undefined
+
+  const secondaryDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
+
+  if (!item?.expireDate) {
+    return formatPayloadDate(secondaryDlc)
+  }
+
+  if (secondaryDlc?.isAfter(dayjs(item?.expireDate))) {
+    return formatPayloadDate(dayjs(item?.expireDate))
+  }
+
+  return formatPayloadDate(secondaryDlc)
+}
+
 export const validationSchema = Yup.object().shape({
   productionDate: Yup.date()
     .max(new Date(), 'Data de productie nu poate fi in viitor.')
@@ -26,22 +42,20 @@ export const validationSchema = Yup.object().shape({
     .test('length', 'must be at most 30 digits', value => value?.toString()?.length <= 30)
     .required('Campul sarja trebuie completat.'),
   productionOperator: Yup.string().nullable(), //.required('Campul operator productie trebuie completat.'),
-  quantity: Yup.number().required('Campul cantitate trebuie completat').positive('Inserati valoare pozitiva'),
+  quantity: Yup.number()
+    .required('Campul cantitate trebuie completat')
+    .positive('Inserati valoare pozitiva'),
   thermalCondition: Yup.string().required('Campul stare termica trebuie selectat.'),
   conform: Yup.boolean(),
   nonComplianceReason: Yup.string().when('conform', ([conform], schema) =>
     conform
       ? schema.nullable()
-      : schema
-        .required('Camp obligatoriu')
-        .max(250, 'must be at most 250 characters')
+      : schema.required('Camp obligatoriu').max(250, 'must be at most 250 characters')
   ),
   productDestination: Yup.string().when('conform', ([conform], schema) =>
     conform
       ? schema.nullable()
-      : schema
-        .required('Camp obligatoriu')
-        .max(250, 'must be at most 250 characters')
+      : schema.required('Camp obligatoriu').max(250, 'must be at most 250 characters')
   ),
   product: Yup.object().required(),
 
@@ -76,6 +90,34 @@ export const validationSchema = Yup.object().shape({
         ),
         // dlc: Yup.string(),
         hasSecondaryDlc: Yup.boolean()
+      })
+      .test((component: any, context) => {
+
+        const productionDate = context.options.context?.productionDate
+
+        if(!productionDate) {
+          return true
+        }
+
+        if(component?.hasSecondaryDlc && !component?.openingDate) {
+          return true
+        }
+
+        if(!component?.expireDate && !component?.hasSecondaryDlc) {
+          return true
+        }
+
+        const secondaryDlc = calculateComponentDlc(component)
+        const expireDateOrDlc =  dayjs(secondaryDlc || component.expireDate)
+
+        if (!expireDateOrDlc?.isAfter(dayjs(productionDate))) {
+          return context.createError({
+            path: `${context.path}.expired`,
+            message: 'Lot expirat'
+          })
+        }
+
+        return true
       })
       .required()
   )

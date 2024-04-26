@@ -29,7 +29,7 @@ import { useLocation } from 'react-router'
 import dayjs from 'dayjs'
 import { productPrintColumns } from '../ReportOwnProductionTraceabilityPrint/helpers'
 
-export const ReportOwnProductionTraceability = () => {
+const ReportOwnProductionTraceability = () => {
   const { showNotification } = useNotification()
   const { pathname } = useLocation()
 
@@ -453,3 +453,5 @@ export const ReportOwnProductionTraceability = () => {
     </div>
   )
 }
+
+export default ReportOwnProductionTraceability
