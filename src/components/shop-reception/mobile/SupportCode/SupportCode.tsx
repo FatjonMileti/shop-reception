@@ -59,6 +59,19 @@ const SupportCode = () => {
   const location = useLocation();
   const id = location.state?.item.id;
 
+  const toggleShowConfirmation = (): void => {
+    setShowConfirmation(!showConfirmation)
+  }
+
+  const toggleIsSearching = (): void => {
+    setIsSearching(!isSearching)
+  }
+
+  const toggleIsFinalizing = (): void => {
+    toggleIsSearching()
+    setIsFinalizing(!isFinalizing)
+  }
+
   const { data: counter, isLoading} = useQuery(
       'counter',
       async () => {
@@ -76,19 +89,6 @@ const SupportCode = () => {
 
   if (isLoading) {
     return <div>Loading...</div>;
-  }
-
-  const toggleShowConfirmation = (): void => {
-    setShowConfirmation(!showConfirmation)
-  }
-
-  const toggleIsSearching = (): void => {
-    setIsSearching(!isSearching)
-  }
-
-  const toggleIsFinalizing = (): void => {
-    toggleIsSearching()
-    setIsFinalizing(!isFinalizing)
   }
 
   const validationSchema = useMemo(() => getValidationSchema(), [])

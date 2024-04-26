@@ -40,7 +40,7 @@ const ReceptionProcessing = () => {
         <TitleHeader title='Procesarea Recepției' />,
         ...truckList.map((item: any, index) => (
           <TruckCard
-            //key={item.id}
+            key={item.id}
             onClick={() => {
               navigate(URLS.AUTH_SUPPORT_CODE, { state: { item } })
             }}

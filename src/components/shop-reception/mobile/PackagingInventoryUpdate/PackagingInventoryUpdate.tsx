@@ -1,11 +1,15 @@
 import { Grid } from '../../Common/Grid'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { useMemo } from 'react'
+import React, {useMemo, useState} from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../utils/formatting'
 import { useNotification } from '../../../../hooks'
 import { TitleHeader } from '../TitleHeader'
+import {useQuery} from "react-query";
+import {makeCoreGetRequest, makeCorePostRequest} from "../../../../utils/api";
+import {IconButton} from "@mui/material";
+import { CameraAlt as CameraIcon } from '@mui/icons-material'
 
 const PackagingInventoryUpdate = () => {
   const { showNotification } = useNotification()
@@ -18,17 +22,62 @@ const PackagingInventoryUpdate = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-
-        const payload = formik.values
-
+        await makeCorePostRequest('/rm-api/support/inventory/save', values);
+        clearFields()
       } catch (error) {
         showNotification({
-          message: `Error while submitting. ${formatErrorMessage(error)}`,
-          type: 'error'
+            message: `Error while submitting. ${formatErrorMessage(error)}`,
+            type: 'error'
         })
       }
     }
   })
+
+  function clearFields() {
+      setSelectedSupportId('')
+      formik.setFieldValue('supportId', null);
+      formik.setFieldValue('quality', 0);
+      formik.setFieldValue('defective', 0);
+  }
+
+  const [selectedSupportId, setSelectedSupportId] = useState(formik.values.supportId || '');
+
+  const { data: supportList, isLoading} = useQuery(
+    'supportList',
+    async () => {
+        return await makeCoreGetRequest('/rm-api/support/all/list', null)
+    },
+    {
+        onError: error => {
+            showNotification({
+                message: `Error while fetching supports. ${formatErrorMessage(error)}`,
+                type: 'error'
+            })
+        }
+    }
+  )
+
+  const { data: shopCode, isLoading: isLoadingShopCode} = useQuery(
+    'shopCode',
+    async () => {
+        const shopCode = await makeCoreGetRequest('/rm-api/getShopCode', null)
+        await formik.setFieldValue('shopCode', Number(shopCode.value));
+
+        return shopCode.value;
+    },
+    {
+        onError: error => {
+            showNotification({
+                message: `Error while fetching supports. ${formatErrorMessage(error)}`,
+                type: 'error'
+            })
+        }
+    }
+  )
+
+  if (isLoading || isLoadingShopCode) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Grid
@@ -41,10 +90,15 @@ const PackagingInventoryUpdate = () => {
           label='Tip suport'
           variant='standard'
           width='100%'
-          value={formik.values.supportType}
-          onChange={event => formik.setFieldValue('supportType', (event.target as HTMLInputElement).value)}
-          error={!!formik.errors.supportType}
-          helperText={formik.errors.supportType as string}
+          value={selectedSupportId}
+          values={supportList.map(support => ({ value: support.id, label: support.name }))}
+          onChange={event => {
+              const selectedValue = (event.target as HTMLInputElement).value;
+              setSelectedSupportId(selectedValue);
+              formik.setFieldValue('supportId', selectedValue);
+          }}
+          error={!!formik.errors.supportId}
+          helperText={formik.errors.supportId as string}
         />,
         <Input
           type='number'
@@ -56,20 +110,28 @@ const PackagingInventoryUpdate = () => {
           error={!!formik.errors.quality}
           helperText={formik.errors.quality as string}
         />,
-        <Input
-          type='number'
-          label='Defecți'
-          variant='standard'
-          width='100%'
-          value={formik.values.defective}
-          onChange={event => formik.setFieldValue('defective', (event.target as HTMLInputElement).value)}
-          error={!!formik.errors.defective}
-          helperText={formik.errors.defective as string}
-        />,
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Input
+            type='number'
+            label='Defecți'
+            variant='standard'
+            width='100%'
+            value={formik.values.defective}
+            onChange={event => formik.setFieldValue('defective', (event.target as HTMLInputElement).value)}
+            error={!!formik.errors.defective}
+            helperText={formik.errors.defective as string}
+          />
+          {formik.values.defective > 0 && (
+            <IconButton onClick={() => {}}>
+              <CameraIcon />
+            </IconButton>
+          )}
+        </div>,
         <Button
           type='button'
           variant='contained'
           label='CONFIRMǍ'
+          style={{ width: '100%' }}
           onClick={() => formik.handleSubmit()}
         />
       ]}
