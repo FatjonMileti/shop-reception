@@ -10,8 +10,8 @@ export const getValidationSchema = (editItem: any) =>
     ),
     hubIdList: Yup.array().of(
       Yup.object().shape({
-        value: Yup.string().required('Campul este obligatoriu.'),
-        label: Yup.string().required('Campul este obligatoriu.')
+        value: Yup.string(),
+        label: Yup.string()
       })
     )
   })

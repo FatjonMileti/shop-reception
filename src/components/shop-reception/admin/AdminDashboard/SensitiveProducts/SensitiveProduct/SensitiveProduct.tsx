@@ -88,7 +88,6 @@ const SensitiveProduct: React.FC<SensitiveProductProps> = props => {
       mutate(payload)
     }
   })
-
   return (
     <Modal
       isModalOpen={isModalOpen}
@@ -104,7 +103,7 @@ const SensitiveProduct: React.FC<SensitiveProductProps> = props => {
             disableClearable
             // required
             onChange={(event, option) => formik.setFieldValue('shopCode', option)}
-            value={formik.values.shopCode}
+            defaultValue={{ value: editItem?.shopType.key, label: editItem?.shopType.value }}
             options={shopTypes || []}
             // error={!!formik.errors.shopCode}
             // helperText={formik.errors.shopCode as string}
@@ -184,7 +183,7 @@ const SensitiveProduct: React.FC<SensitiveProductProps> = props => {
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
           <Button
             variant="contained"
             label={isEdit ? 'Editeaza' : 'Salveaza'}

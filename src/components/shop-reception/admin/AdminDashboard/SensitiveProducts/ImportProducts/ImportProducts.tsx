@@ -111,7 +111,7 @@ const ImportProducts: React.FC<ImportProductsProps> = props => {
 
         <Grid xs={12} item>
           <FilterDataSelect
-            name="shopCodes"
+            name="ruleTypes"
             label="Regula"
             options={shopTypes}
             onSelect={shops => formik.setFieldValue('ruleTypes', shops)}

@@ -6,7 +6,7 @@ export const getValidationSchema = () =>
       Yup.object().shape({
         label: Yup.string(),
         value: Yup.string()
-      })
+      }).required('Campul este obligatoriu.')
     ),
     file: Yup.mixed().required(),
     ruleTypes: Yup.array()

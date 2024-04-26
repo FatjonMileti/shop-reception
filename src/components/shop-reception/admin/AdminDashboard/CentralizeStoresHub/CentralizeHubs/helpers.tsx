@@ -2,7 +2,7 @@ import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
 export const columns = [
   {
-    title: 'Magazin',
+    title: 'Hub',
     field: 'destinationName',
     align: 'left',
     type: 'string'

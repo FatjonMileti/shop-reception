@@ -125,13 +125,13 @@ const EditStore: React.FC<EditStoreProps> = props => {
             variant="outlined"
             label="Huburi"
             disableClearable
-            required
+            // required
             onChange={(event, option) => formik.setFieldValue('hubIdList', option)}
             value={formik.values.hubIdList}
             options={shopsFormData?.hubList || []}
             multiple
-            error={!!formik.errors.hubIdList}
-            helperText={formik.errors.hubIdList as string}
+            // error={!!formik.errors.hubIdList}
+            // helperText={formik.errors.hubIdList as string}
           />
         </Grid>
 
