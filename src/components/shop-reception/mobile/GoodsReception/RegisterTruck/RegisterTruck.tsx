@@ -21,11 +21,7 @@ const RegisterTruck = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-
-        const payload = formik.values
-
         navigate(URLS.AUTH_SUPPORT_CODE)
-
       } catch (error) {
         showNotification({
           message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -55,6 +51,7 @@ const RegisterTruck = () => {
           type='button'
           variant='contained'
           label='PASUL URMǍTOR'
+          style={{width: '100%'}}
           onClick={() => formik.handleSubmit()}
         />
       ]}

@@ -4,22 +4,42 @@ import { TitleHeader } from '../../TitleHeader'
 import { URLS } from '../../constants'
 import { useNavigate } from 'react-router-dom'
 import { TruckCard } from '../../../admin/Common/TruckCard'
-
-const trucks: any[] = [
-  { id: 1, name: 'FD', description: '12-12-2023 14:01' },
-  { id: 2, name: '55', description: '12-12-2023 14:01' },
-  { id: 3, name: '75', description: '12-12-2023 14:01' }
-]
+import {useNotification} from "../../../../../hooks";
+import {useQuery} from "react-query";
+import {makeCoreGetRequest} from "../../../../../utils/api";
+import {formatErrorMessage} from "../../../../../utils/formatting";
+import React from "react";
 
 const ExpenditureProcessing = () => {
   const navigate = useNavigate()
+  const { showNotification } = useNotification()
+
+  const { data: trucks, isLoading} = useQuery(
+      'inProgressTrucks',
+      async () => {
+        return await makeCoreGetRequest('/rm-api/truck/hub/inProcess/list', null)
+      },
+      {
+        onError: error => {
+          showNotification({
+            message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        }
+      }
+  )
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   let items = [
     <TitleHeader title='ÎN PROCESARE EXPEDIȚIE' />,
     ...trucks.map((item: any, index) => (
       <TruckCard
         key={index}
         onClick={() => {
-          navigate(URLS.AUTH_SUPPORT_CODE)
+          navigate(URLS.AUTH_SUPPORT_CODE, { state: { item } })
         }}
         truck={item} />
     ))
