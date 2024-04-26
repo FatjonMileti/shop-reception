@@ -3,18 +3,24 @@ import { AutocompleteOption, EmployeeManagementItem } from 'components/volumetry
 export const toCollaboratorPayload = (
   values: any,
   editItem: any,
-  departmentsOptions: AutocompleteOption[]
+  departmentsOptions: AutocompleteOption[],
+  jobTitlesOptions: AutocompleteOption[]
 ) => {
   return {
     id: values.id,
-
     firstName: values.firstName,
     lastName: values.lastName,
     middleName: values.middleName,
-    email: values.email,
+
     genericDepartmentId: editItem
-      ? departmentsOptions.find(department => department.label === values.genericDepartment.label).value
+      ? departmentsOptions.find(department => department.label === values.genericDepartment.label)
+          .value
       : (values.genericDepartment as AutocompleteOption)?.value,
+
+    jobTitleId: editItem
+      ? jobTitlesOptions.find(jobTitle => jobTitle.label === values.jobTitle.label)?.value
+      : (values.jobTitle as AutocompleteOption)?.value,
+
     workerTypeId: (values.workerType as AutocompleteOption)?.value,
     employer: values.employer
   }

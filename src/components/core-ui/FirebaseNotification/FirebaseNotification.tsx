@@ -33,22 +33,7 @@ const FirebaseNotification = () => {
     })
     .catch(err => console.log('failed: ', err))
 
-  const onClickNotification = (title: string) => {
-    let notifications = JSON.parse(localStorage.getItem('notifications') || '[]')
-
-    const notification = notifications.find(
-      (item: FirebaseNotificationState) => item.title === title
-    )
-
-    if (notification.link) {
-      window.location.replace(notification.link)
-    }
-  }
-
-  const onCloseNotification = (e: any, snackbarId: string, title: string) => {
-    let notifications = JSON.parse(localStorage.getItem('notifications') || '[]')
-    e.stopPropagation()
-
+  const removeNotification = (notifications, title: string, snackbarId: any) => {
     const index = notifications.findIndex(
       (notification: FirebaseNotificationState) => notification.title === title
     )
@@ -61,9 +46,31 @@ const FirebaseNotification = () => {
     closeSnackbar(snackbarId)
   }
 
+  const onClickNotification = (title: string, snackbarId: any) => {
+    let notifications = JSON.parse(localStorage.getItem('notifications') || '[]')
+
+    const notification = notifications.find(
+      (item: FirebaseNotificationState) => item.title === title
+    )
+
+    const link = notification.link
+    removeNotification(notifications, title, snackbarId)
+
+    if (link) {
+      window.location = notification.link
+    }
+  }
+
+  const onCloseNotification = (e: any, snackbarId: string, title: string) => {
+    let notifications = JSON.parse(localStorage.getItem('notifications') || '[]')
+    e.stopPropagation()
+
+    removeNotification(notifications, title, snackbarId)
+  }
+
   const action = (snackbarId: any, title: string) => (
     <div
-      onClick={() => onClickNotification(title)}
+      onClick={() => onClickNotification(title, snackbarId)}
       style={{
         height: '100%',
         left: 0,

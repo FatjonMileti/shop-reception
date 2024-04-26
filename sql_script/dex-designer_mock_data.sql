@@ -107,13 +107,13 @@ VALUES
     (40, 'Vanzarile mele', 'MySales', null, true, 6),
     (41, 'Comenzi achitate', 'PaidOrders', null, true, 6),
     -- Volumetry
-    (42, 'Management Angajati', 'EmployeeManagement', null, true, 7),
+    (42, 'Management angajati', 'EmployeeManagement', null, true, 7),
     (43, 'Management task template-uri', 'ManagementTasks', null, true, 8),
-    (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
-    (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 9),
+    (44, 'Alocare task-uri', 'AssignTasks', null, true, 8),
+    (45, 'Raport de evaluare', 'EmployeeManagement', null, true, 9),
     (46, 'Link-uri rapoarte', 'ReportsVolumetry', null, true, 9),
     (47, 'Task-uri alocate', 'AssignTasks', null, true, 8),
-    (48, 'Status Angajati', 'EmployeeStatus', null, true, 8),
+    (48, 'Status angajati', 'EmployeeStatus', null, true, 8),
     (249, 'Management magazine', 'StoreManagement', null, true, 8),
     (250, 'Management business units', 'CategoryTemplateManagement', null, true, 8),
     -- Shop Reception (Admin)
@@ -345,6 +345,9 @@ VALUES
     (100, 'VOLUMETRY_TASK_ALLOCATOR'),
     (101, 'VOLUMETRY_WORKER'),
     (102, 'VOLUMETRY_TEMPLATE_ADMIN'),
+    (150, 'GG_RO_DEX_VOLUMETRY_TASK_ALLOCATOR'),
+    (151, 'GG_RO_DEX_VOLUMETRY_WORKER'),
+    (152, 'GG_RO_DEX_VOLUMETRY_TEMPLATE_ADMIN'),
     -- Shop Reception
     (200, 'SHOP_RECEPTION_DUMMY_ROLE');
 
@@ -384,6 +387,7 @@ VALUES
     (100, 42),
     (100, 44),
     (100, 46),
+    (100, 47),
     (100, 48),
     -- VOLUMETRY_WORKER
     (101, 47),
@@ -391,6 +395,18 @@ VALUES
     (102, 43),
     (102, 249),
     (102, 250),
+    -- GG_RO_DEX_VOLUMETRY_TASK_ALLOCATOR
+    (150, 42),
+    (150, 44),
+    (150, 46),
+    (150, 47),
+    (150, 48),
+    -- GG_RO_DEX_VOLUMETRY_WORKER
+    (151, 47),
+    -- GG_RO_DEX_VOLUMETRY_TEMPLATE_ADMIN
+    (152, 43),
+    (152, 249),
+    (152, 250),
     -- Shop Reception Admin
     -- SHOP_RECEPTION_DUMMY_ROLE
     (200, 149), (200, 151), (200, 152), (200, 153), (200, 154), (200, 155), (200, 156),

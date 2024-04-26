@@ -6,7 +6,7 @@ export interface CountyCityInterface {
 export interface IndividualPerson {
   name: string
   phone: string
-  email: string
+  email?: string
   address: string
   county: {
     id: string | number
@@ -16,17 +16,14 @@ export interface IndividualPerson {
     id: string | number
     name: string
   }
-  type: string
 }
 
 export interface LegalPerson {
   name: string
   cif: string
-  tradeRegister: string
-  bank: string
-  bankAccount: string
+  companyRegistrationNumber: string
   phone: string
-  email: string
+  email?: string
   address: string
   county: {
     id: string | number
@@ -35,5 +32,6 @@ export interface LegalPerson {
   city: {
     id: string | number
     name: string
-  }
+  },
+  isTaxPayer: boolean
 }

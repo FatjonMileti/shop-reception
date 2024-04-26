@@ -28,8 +28,9 @@ import { get } from 'lodash'
 import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import { debounce } from '@mui/material'
+import dayjs from 'dayjs'
 
-export const ReceivedProducts = () => {
+const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const [totalCount, setTotalCount] = React.useState<number>(0)
   const [tableItems, setTableItems] = React.useState<ReceivedProduct[]>([])
@@ -202,11 +203,11 @@ export const ReceivedProducts = () => {
         totalCount={totalCount}
         isLoading={isLoading}
         filters={drawerFilters}
-        appliedFiltersLabel='Filtre'
-        applyFiltersButtonLabel='Filtrare'
-        filtersLabel='Filtrare'
-        filtersButtonLabel='Filtrare'
-        cancelFiltersButtonLabel='Anuleaza'
+        appliedFiltersLabel="Filtre"
+        applyFiltersButtonLabel="Filtrare"
+        filtersLabel="Filtrare"
+        filtersButtonLabel="Filtrare"
+        cancelFiltersButtonLabel="Anuleaza"
         handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
         handleRemoteData={debounce(fetchData, 500)}
         hasSearchInput
@@ -266,6 +267,16 @@ export const ReceivedProducts = () => {
             typographyVariant: 'medium',
             backgroundColor: '#CC4010',
             onClick: (e, rowId) => {
+              const createdDay = dayjs(tableItems.find(row => row.id === rowId)?.createdDate)
+
+              if (createdDay.endOf('day').isBefore(dayjs().endOf('day'))) {
+                showNotification({
+                  message: 'Nu puteti corecta recepții care nu au fost introduse astazi.',
+                  type: 'error'
+                })
+                return
+              }
+
               setSelectedRowId(rowId)
               setCorrectModalOpen(true)
             },
@@ -292,3 +303,6 @@ export const ReceivedProducts = () => {
     </div>
   )
 }
+
+
+export default ReceivedProducts

@@ -5,7 +5,13 @@ export const getValidationSchema = () =>
     firstName: yup.string().nonNullable().required('Acest camp este obligatoriu.'),
     lastName: yup.string().nonNullable().required('Acest camp este obligatoriu.'),
     middleName: yup.string().optional(),
-    email: yup.string().optional(),
+    jobTitle: yup
+      .object()
+      .shape({
+        label: yup.string().required('Acest camp este obligatoriu.'),
+        value: yup.string().required()
+      })
+      .required('Acest camp este obligatoriu.'),
     genericDepartment: yup
       .object()
       .shape({
@@ -29,12 +35,12 @@ export const getInitialValues = editItem => {
     firstName: editItem?.firstName || '',
     lastName: editItem?.lastName || '',
     middleName: editItem?.middleName || '',
-    email: editItem?.email || '',
+    jobTitle: editItem?.jobTitle ? { label: editItem.jobTitle, value: editItem.jobTitle } : null,
     genericDepartment: editItem?.genericDepartment
       ? { label: editItem.genericDepartment, value: editItem.genericDepartment }
       : null,
     workerType: editItem?.workerType
-      ? { label: editItem.workerType, value: editItem.workerType }
+      ? { label: editItem.workerType, value: editItem.workerTypeId }
       : null,
     employer: editItem?.employer || ''
   }

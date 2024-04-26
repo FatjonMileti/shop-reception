@@ -12,8 +12,8 @@ import { useNotification } from 'hooks'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { getEmployeesOptions } from '../api'
 import { handleQueryError } from 'utils/helpers'
-import * as yup from 'yup'
 import { AssignEmployeeProps } from './TaskAllocationsDefinitions'
+import { getValidationSchema } from './helpers'
 
 const AssignEmployee = (props: AssignEmployeeProps) => {
   const {
@@ -53,34 +53,14 @@ const AssignEmployee = (props: AssignEmployeeProps) => {
       handleQueryError(error, 'A aparut o eroare la asignarea angajatului.', showNotification)
   })
 
-  const divisionValidation = value => {
-    if (!Number.isNaN(value) && parseFloat(value) % minDivision === 0) {
-      return true
-    }
-    return false
-  }
-
-  const validationSchema = yup.object({
-    workerId: yup.number().required('Acest camp este obligatoriu.'),
-    taskTemplateId: yup.number().required('Acest camp este obligatoriu.'),
-    allocatedWorkload: yup
-      .number()
-      .required('Acest camp este obligatoriu.')
-      .test(
-        'is-custom-step',
-        `Valoarea trebuie să fie multiplu de ${minDivision}`,
-        divisionValidation
-      )
-  })
-
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    validationSchema: validationSchema,
+    validationSchema: getValidationSchema(minDivision),
     initialValues: {
       workerId: null,
       taskTemplateId: taskTemplateId,
-      allocatedWorkload: 0
+      allocatedWorkload: 1
     },
     onSubmit: async (values, { resetForm }) => {
       const payload = {

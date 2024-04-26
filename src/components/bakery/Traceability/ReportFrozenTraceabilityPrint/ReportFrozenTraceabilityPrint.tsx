@@ -17,7 +17,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { Icon_v2 } from 'components/core-ui/Icon_v2'
 import { formatBakeryPayloadDate } from '../../../../utils/helpers'
 
-export const ReportFrozenTraceabilityPrint = () => {
+const ReportFrozenTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
   const location = useLocation()
   const search = new URLSearchParams(location.search)
@@ -245,3 +245,5 @@ const PrintButton = ({ onClick }) => {
     </Box>
   )
 }
+
+export default ReportFrozenTraceabilityPrint

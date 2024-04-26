@@ -13,6 +13,8 @@ import { getInitialValues, validationSchema, toBatchFormat } from './helpers'
 import { SelectOrScanProduct } from '../../ReceivedProducts/AddReceivedProduct/SelectOrScanProduct'
 import { Product } from '../../ReceivedProducts/interfaces'
 import dayjs from 'dayjs'
+import { calculateComponentDlc } from '../CorrectFrozenTraceabilityModal/helpers'
+import { AxiosError } from 'axios'
 
 interface AddFrozenTraceabilityModalProps {
   isModalOpen: boolean
@@ -40,9 +42,16 @@ export const AddFrozenTraceabilityModal = ({
           type: 'success'
         })
       },
-      onError: res => {
+      onError: (res: any) => {
+        if (res?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+          return
+        }
         showNotification({
-          message: `Error while trying to add data, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
@@ -50,23 +59,6 @@ export const AddFrozenTraceabilityModal = ({
   )
 
   const initialValues = useMemo(() => getInitialValues(), [])
-
-  const addDlcToComponent = item => {
-    if (!item.hasSecondaryDlc) return item
-
-    const calculatedDlc = dayjs(item.openingDate).add(item.dlcDays, 'days')
-
-    return {
-      ...item,
-      dlc: formatPayloadDate(
-        item?.expireDate
-          ? calculatedDlc?.isAfter(dayjs(item?.expireDate))
-            ? dayjs(item?.expireDate)
-            : calculatedDlc
-          : calculatedDlc
-      )
-    }
-  }
 
   const formik = useFormik({
     validateOnChange: false,
@@ -86,8 +78,13 @@ export const AddFrozenTraceabilityModal = ({
         conform: values.conform,
         nonComplianceReason: values?.nonComplianceReason || null,
         productDestination: values?.productDestination || null,
-        dlc: values.dlc || null,
-        traceabilityFrozenList: values.traceabilityFrozenList.map(addDlcToComponent)
+        dlc: selectedProduct?.dlcDays
+          ? formatPayloadDate(dayjs(values.productionDate).add(selectedProduct?.dlcDays, 'days'))
+          : null,
+        traceabilityFrozenList: values.traceabilityFrozenList.map(item => ({
+          ...item,
+          dlc: calculateComponentDlc(item)
+        }))
       }
 
       if (values.traceabilityFrozenList.length === 0) {
@@ -142,22 +139,35 @@ export const AddFrozenTraceabilityModal = ({
         )}
         {!frozenTraceabilityMutation.isLoading && (
           <>
-            {
-              [
-                <SelectOrScanProduct
-                  setSelectedProduct={setSelectedProduct}
-                  selectedProduct={selectedProduct}
-                  onContinue={() => setStep(1)}
-                  onCancel={cancel}
-                />,
-                <ProductDetails
-                  selectedProduct={selectedProduct}
-                  onSelectBatch={() => {
-                    setStep(2)
-                  }}
-                  onCancel={cancel}
-                  formik={formik}
-                />,
+            {step === 0 && (
+              <SelectOrScanProduct
+                setSelectedProduct={setSelectedProduct}
+                selectedProduct={selectedProduct}
+                onContinue={() => setStep(1)}
+                onCancel={cancel}
+              />
+            )}
+
+            {step > 0 && (
+              <ProductDetails
+                selectedProduct={selectedProduct}
+                onSelectBatch={() => {
+                  setStep(2)
+                }}
+                onCancel={cancel}
+                formik={formik}
+              />
+            )}
+
+            {step === 2 && (
+              <Modal
+                isModalOpen={isModalOpen}
+                closeModal={() => {
+                  setStep(1)
+                }}
+                modalTitle="Adauga trasabilitate congelate si ambalaje"
+                modalWidth="50%"
+              >
                 <SelectBatch
                   selectedProduct={selectedProduct}
                   onContinue={frozenItems => {
@@ -169,8 +179,8 @@ export const AddFrozenTraceabilityModal = ({
                   }}
                   productionDate={formik.values.productionDate}
                 />
-              ][step]
-            }
+              </Modal>
+            )}
           </>
         )}
       </Grid>

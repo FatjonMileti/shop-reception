@@ -1,49 +1,34 @@
-import {
-  EditLocationProps,
-  LocationItem,
-  LocationItemPayload,
-  TaskManagementItem
-} from 'components/volumetry/interfaces'
+import { EditLocationProps, LocationItemPayload } from 'components/volumetry/interfaces'
 import { useNotification } from 'hooks'
-import { ChangeEvent, useMemo } from 'react'
+import { useMemo } from 'react'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useFormik } from 'formik'
 import { Modal } from 'components/core-ui/Modal'
-import { CircularProgress, Grid } from '@mui/material'
-import { Button, Checkbox, Input, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { Grid } from '@mui/material'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { useMutation } from 'react-query'
-import { makeCorePatchRequest, makeCorePutRequest } from 'utils/api'
+import { makeCorePatchRequest } from 'utils/api'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import {
-  getCategoriesOptions,
-  getLocationDetails,
-  getRegionsOptions
-} from 'components/volumetry/api'
+import { getCategoriesOptions, getRegionsOptions } from 'components/volumetry/api'
 import { handleQueryError } from 'utils/helpers'
 import { toLocationPayload } from './serializers'
 import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
 const EditLocation: React.FC<EditLocationProps> = props => {
-  const { isModalOpen, closeModal, editItemId, setShouldRefreshData } = props
+  const { isModalOpen, closeModal, editItem, editItemId, setShouldRefreshData } = props
 
   const { showNotification } = useNotification()
-
-  const { data: editItem, isLoading: isLocationLoading } = getLocationDetails(
-    editItemId,
-    showNotification,
-    isModalOpen
-  )
 
   const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
 
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
   const submitLocation = async (values: LocationItemPayload) => {
-    await makeCorePatchRequest(`/locations/${editItemId}/volumetry-category`, values)
+    await makeCorePatchRequest(`/volumetry/locations/${editItemId}/volumetry-category`, values)
   }
 
-  const { isLoading, mutate } = useMutation(submitLocation, {
+  const { mutate } = useMutation(submitLocation, {
     onSuccess: res => {
       setShouldRefreshData(true)
       closeModal()
@@ -74,11 +59,8 @@ const EditLocation: React.FC<EditLocationProps> = props => {
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle="Editeaza locatie">
       <Grid container spacing={4}>
-        {(isLoading || isLocationLoading) && (
-          <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-        )}
         <Grid xs={12} item>
-          <FormInfoItems items={[{ label: 'Nume:', name: editItem?.categoryName ?? '' }]} />
+          <FormInfoItems items={[{ label: 'Nume:', name: editItem?.locationName ?? '' }]} />
         </Grid>
         <Grid xs={12} item>
           <AsyncAutocomplete

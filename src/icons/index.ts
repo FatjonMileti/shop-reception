@@ -21,6 +21,7 @@ export { default as IngredientsMenu } from './IngredientsMenu'
 export { default as ListVolumetryHome } from './ListVolumetryHome'
 export { default as ReportsVolumetryHome } from './volumetry/ReportsVolumetryHome'
 export { default as ReportsVolumetrySubcategory } from './volumetry/submodules/ReportsVolumetrySubcategory'
+export { default as ReportsVolumetryMenu } from './ReportsVolumetryMenu'
 
 export { default as DailyPresenceSubcategory } from './DailyPresenceSubcategory'
 

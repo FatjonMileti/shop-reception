@@ -1,8 +1,7 @@
-import { formatBakeryPayloadDate, formatPayloadDate } from 'utils/helpers'
+import { formatBakeryPayloadDate } from 'utils/helpers'
 import { BodyItem } from '../ProductManagementTraceability/AccordionTable'
 import { IconCell } from '../../../core-ui/IconCell'
 import { BooleanIcon } from '../../../core-ui/BooleanIcon'
-import { ImageCell } from '../../../core-ui/ImageCell'
 import { ThermalCondition } from 'components/bakery/interfaces'
 import { BatchStatus } from '../interfaces'
 import dayjs from 'dayjs'
@@ -96,14 +95,7 @@ export const columns: any[] = [
   {
     title: 'DLC secundar',
     render: row => (
-      <BodyItem
-        name="DLC secundar"
-        value={
-          row.batch?.hasSecondaryDlc
-            ? formatBakeryPayloadDate(dayjs(row.openingDate).add(row.batch?.dlcDays, 'days'))
-            : ''
-        }
-      />
+      <BodyItem name="DLC secundar" value={row?.dlc ? formatBakeryPayloadDate(row.dlc) : ''} />
     )
   },
   {

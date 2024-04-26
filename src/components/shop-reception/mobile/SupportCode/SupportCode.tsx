@@ -8,6 +8,9 @@ import { useNotification } from '../../../../hooks'
 import { TitleHeader } from '../TitleHeader'
 import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
 import { FlexCenter } from '../../Common/FlexCenter'
+import {useQuery} from "react-query";
+import {makeCoreGetRequest} from "../../../../utils/api";
+import {useLocation} from "react-router-dom";
 
 const options = [
   {
@@ -53,6 +56,27 @@ const SupportCode = () => {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [isFinalizing, setIsFinalizing] = useState<boolean>(false)
+  const location = useLocation();
+  const id = location.state?.item.id;
+
+  const { data: counter, isLoading} = useQuery(
+      'counter',
+      async () => {
+        return await makeCoreGetRequest('/rm-api/support/counter/' + id, null)
+      },
+      {
+        onError: error => {
+          showNotification({
+            message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        }
+      }
+  )
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const toggleShowConfirmation = (): void => {
     setShowConfirmation(!showConfirmation)
@@ -116,6 +140,7 @@ const SupportCode = () => {
       type='button'
       variant='contained'
       label='SCANEAZǍ SUPORT'
+      style={{ width: '100%' }}
       onClick={() => formik.handleSubmit()}
     />
   ]
@@ -144,6 +169,7 @@ const SupportCode = () => {
         type='button'
         variant='contained'
         label='CONFORMITATE SUPORT'
+        style={{ width: '100%' }}
         onClick={toggleShowConfirmation}
       />
     ]
@@ -171,17 +197,19 @@ const SupportCode = () => {
       type='button'
       variant='contained'
       label='ALTE AMBALAJE'
+      style={{ width: '100%' }}
       onClick={null}
     />,
     <Button
       type='button'
       variant='contained'
       label='CONFIRM TIP SUPORT'
+      style={{ width: '100%' }}
       onClick={toggleIsFinalizing}
     />,
     <>
-      <Typography variant='medium' component='p'>Numǎr camion: 56</Typography>
-      <Typography variant='medium' component='p'>Numǎr suporți scanați: 0</Typography>
+      <Typography variant='medium' component='p'>Numǎr camion: {counter.truckNumber}</Typography>
+      <Typography variant='medium' component='p'>Numǎr suporți scanați: {counter.counter}</Typography>
     </>
   ]
 
@@ -192,6 +220,7 @@ const SupportCode = () => {
         variant='contained'
         label='FINALIZEAZĂ'
         size='large'
+        style={{ width: '100%' }}
         onClick={() => formik.handleSubmit()}
       />
     )
