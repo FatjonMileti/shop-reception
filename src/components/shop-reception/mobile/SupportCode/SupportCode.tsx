@@ -52,31 +52,12 @@ const options = [
 ]
 
 const SupportCode = () => {
-  const { showNotification } = useNotification()
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [isFinalizing, setIsFinalizing] = useState<boolean>(false)
+  const { showNotification } = useNotification()
   const location = useLocation();
   const id = location.state?.item.id;
-
-  const { data: counter, isLoading} = useQuery(
-      'counter',
-      async () => {
-        return await makeCoreGetRequest('/rm-api/support/counter/' + id, null)
-      },
-      {
-        onError: error => {
-          showNotification({
-            message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
-            type: 'error'
-          })
-        }
-      }
-  )
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   const toggleShowConfirmation = (): void => {
     setShowConfirmation(!showConfirmation)
@@ -115,6 +96,25 @@ const SupportCode = () => {
       }
     }
   })
+
+  const { data: counter, isLoading} = useQuery(
+      'counter',
+      async () => {
+        return await makeCoreGetRequest('/rm-api/support/counter/' + id, null)
+      },
+      {
+        onError: error => {
+          showNotification({
+            message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        }
+      }
+  )
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   let items = [
     <TitleHeader title='Cod Suport' />,
