@@ -88,7 +88,7 @@ export const drawerFilters = (
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează unitate de masură'
+    label: 'Unitate de masură'
   },
   {
     name: 'rayCode',
@@ -102,7 +102,7 @@ export const drawerFilters = (
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează raion'
+    label: 'Raion'
   },
   {
     name: 'famCode',
@@ -116,7 +116,7 @@ export const drawerFilters = (
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează familie'
+    label: 'Familie'
   },
   {
     name: 'sfaCode',
@@ -130,7 +130,7 @@ export const drawerFilters = (
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează subfamilie'
+    label: 'Subfamilie'
   },
   {
     name: 'hasValidity',
@@ -153,6 +153,6 @@ export const drawerFilters = (
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează prag de valabilitate'
+    label: 'Prag de valabilitate'
   }
 ]
