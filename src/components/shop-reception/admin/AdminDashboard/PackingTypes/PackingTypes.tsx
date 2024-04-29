@@ -2,7 +2,7 @@ import { Table } from '../../../../core-ui/Table'
 import { columns, drawerFilters } from './helpers'
 import { Add as AddIcon, CloudDownload as CloudDownloadIcon } from '@mui/icons-material'
 import { useState } from 'react'
-import { makeCoreGetRequest } from '../../../../../utils/api'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from '../../../../../utils/api'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
@@ -11,6 +11,7 @@ import { PackingTypeForm } from './PackingTypeForm'
 import s from '../../../commonStyles.modules.scss'
 import { EditActionIcon } from 'icons'
 import { useQuery } from 'react-query'
+import { formatAndDownloadResponse } from 'utils/helpers'
 
 const PackingTypes = () => {
   const { showNotification } = useNotification()
@@ -49,7 +50,6 @@ const PackingTypes = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      console.log('debug ', error)
       showNotification({
         message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
@@ -57,25 +57,27 @@ const PackingTypes = () => {
     }
   }
 
-  const {
-    data: file,
-    isLoading: isLoadingFile,
-    refetch: exportFile
-  } = useQuery(
-    ['export-file'],
-    async () => {
-      const result = await makeCoreGetRequest(`/shop-reception/support-types/export`)
-      return result || null
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A aparut o eroare la obtinerea fisierului. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
+  const handleExport = async tableState => {
+    const { filters, order, orderBy } = tableState
+    const url = toTableGETUrl({
+      url: '/shop-reception/support-types/export',
+      tableFilters: filters,
+      order,
+      orderBy
+    })
+
+    try {
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la obtinerea fisierului. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
     }
-  )
+  }
 
   return (
     <div className={s.mainContainer}>
@@ -94,7 +96,7 @@ const PackingTypes = () => {
       <Table
         hideCheckbox
         orderBy="id"
-        order="asc"
+        order="desc"
         columns={columns}
         items={tableItems}
         fetchData={fetchData}
@@ -120,7 +122,7 @@ const PackingTypes = () => {
           {
             label: 'Export',
             icon: <CloudDownloadIcon />,
-            onClick: () => exportFile()
+            onClick: handleExport
           },
           {
             label: 'Tip ambalaj',

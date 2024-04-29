@@ -35,6 +35,9 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
 
   const { isLoading, mutate } = useMutation(createUpdatePackage, {
     onSuccess: res => {
+      formik.resetForm()
+      setShouldRefreshData(true)
+      closeModal()
       showNotification({
         message: `Datele au fost ${isEdit ? 'actualizate' : 'create'} cu succes.`,
         type: 'success'
@@ -42,9 +45,9 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
     },
     onError: res => {
       showNotification({
-        message: `A aparut o eroare la ${isEdit ? 'actualizarea' : 'crearea'} datelor. ${formatErrorMessage(
-          res
-        )}`,
+        message: `A aparut o eroare la ${
+          isEdit ? 'actualizarea' : 'crearea'
+        } datelor. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
@@ -62,9 +65,6 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
         childrenIds: values.childrenIds.map(child => child.value)
       }
       mutate(payload)
-      formik.resetForm()
-      setShouldRefreshData(true)
-      closeModal()
     }
   })
 
@@ -104,6 +104,8 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
             fullWidth
             onChange={(e: any) => formik.setFieldValue('externalCode', e.target.value)}
             value={formik.values.externalCode}
+            error={!!formik.errors.externalCode}
+            helperText={formik.errors.externalCode as string}
           />
         </Grid>
 
@@ -152,6 +154,8 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
             fullWidth
             onChange={(e: any) => formik.setFieldValue('name', e.target.value)}
             value={formik.values.name}
+            error={!!formik.errors.name}
+            helperText={formik.errors.name as string}
           />
         </Grid>
         <Grid item xs={12}>
@@ -208,6 +212,8 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
                     value: formik.values.main
                   }
                 }
+                error={!!formik.errors.main}
+                helperText={formik.errors.main as string}
               />
             </Grid>
             <Grid item xs={12}>
@@ -239,6 +245,7 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
               variant="contained"
               label="Salveaza"
               onClick={() => formik.handleSubmit()}
+              disabled={isLoading}
             />
           </Grid>
         </Grid>

@@ -2,20 +2,27 @@ import * as Yup from 'yup'
 
 export const getValidationSchema = (editItem: PackingType) =>
   Yup.object().shape({
-    externalCode: Yup.string().required(),
+    externalCode: Yup.string()
+      .test('notOnlySpaces', 'Campul trebuie sa contina caractere.', value => {
+        return /\S/.test(value)
+      })
+      .required('Campul este obligatoriu.'),
     alternativeCodes: Yup.array().of(
       Yup.object().shape({
         value: Yup.string(),
         label: Yup.string()
       })
     ),
-
     code: Yup.string().nullable(),
-    name: Yup.string().required(),
-    main: Yup.boolean().required(),
+    name: Yup.string()
+      .test('notOnlySpaces', 'Campul trebuie sa contina caractere.', value => {
+        return /\S/.test(value)
+      })
+      .required('Campul este obligatoriu.'),
+    main: Yup.boolean().required('Campul este obligatoriu.'),
     combined: Yup.boolean(),
-    active: Yup.boolean().required(),
-    returnable: Yup.boolean().required(),
+    active: Yup.boolean().required('Campul este obligatoriu.'),
+    returnable: Yup.boolean().required('Campul este obligatoriu.'),
     childrenIds: Yup.array()
       .of(
         Yup.object().shape({

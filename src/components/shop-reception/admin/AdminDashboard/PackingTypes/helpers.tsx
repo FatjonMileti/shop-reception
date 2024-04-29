@@ -6,14 +6,14 @@ import { IconCell } from 'components/core-ui/IconCell'
 export const columns = [
   {
     title: 'Cod ambalaj',
-    field: 'code',
+    field: 'externalCode',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Coduri suplimentare',
-    field: 'externalCode',
+    field: 'alternativeCodes',
     align: 'left',
     type: 'string'
   },
@@ -53,14 +53,14 @@ export const columns = [
   },
   {
     title: 'Cod de bare generat',
-    field: 'alternativeCodes',
+    field: 'code',
     align: 'left',
     type: 'string',
     disableSorting: true,
     render: row =>
-      row?.alternativeCodes ? (
+      row?.code ? (
         <Barcode
-          value={row?.alternativeCodes}
+          value={row?.code}
           // options={{ displayValue: false }}
           className={s.barcode}
         />
@@ -156,7 +156,7 @@ export const drawerFilters = [
       />
     ),
     type: 'autocomplete',
-    label: 'active'
+    label: 'Activ'
   },
   {
     name: 'returnable',
