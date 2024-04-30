@@ -8,11 +8,11 @@ import { useNotification } from '../../../../hooks'
 import { TitleHeader } from '../TitleHeader'
 import {useQuery} from "react-query";
 import {makeCoreGetRequest, makeCorePostRequest} from "../../../../utils/api";
-import {IconButton} from "@mui/material";
-import { CameraAlt as CameraIcon } from '@mui/icons-material'
+import ImageUpload from "../ImageUpload/ImageUpload";
 
 const PackagingInventoryUpdate = () => {
   const { showNotification } = useNotification()
+  const inputFileRef = React.useRef<HTMLInputElement>()
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -79,6 +79,22 @@ const PackagingInventoryUpdate = () => {
     return <div>Loading...</div>;
   }
 
+  const handleSuccess = (data) => {
+    formik.setFieldValue('defectPictureId', data.id);
+
+    showNotification({
+      message: 'Image uploaded successfully',
+      type: 'success'
+    });
+  };
+
+  const handleError = (error) => {
+    showNotification({
+      message: `Error uploading image: ${error.message}`,
+      type: 'error'
+    });
+  };
+
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
@@ -106,25 +122,27 @@ const PackagingInventoryUpdate = () => {
           variant='standard'
           width='100%'
           value={formik.values.quality}
-          onChange={event => formik.setFieldValue('quality', (event.target as HTMLInputElement).value)}
+          onChange={event => formik.setFieldValue('quality', +(event.target as HTMLInputElement).value)}
           error={!!formik.errors.quality}
           helperText={formik.errors.quality as string}
         />,
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{display: 'flex', alignItems: 'center'}}>
           <Input
-            type='number'
-            label='Defecți'
-            variant='standard'
-            width='100%'
-            value={formik.values.defective}
-            onChange={event => formik.setFieldValue('defective', (event.target as HTMLInputElement).value)}
-            error={!!formik.errors.defective}
-            helperText={formik.errors.defective as string}
+              type='number'
+              label='Defecți'
+              variant='standard'
+              width='100%'
+              value={formik.values.defective}
+              onChange={event => formik.setFieldValue('defective', +(event.target as HTMLInputElement).value)}
+              error={!!formik.errors.defective}
+              helperText={formik.errors.defective as string}
           />
-          {formik.values.defective > 0 && (
-            <IconButton onClick={() => {}}>
-              <CameraIcon />
-            </IconButton>
+          {(formik.values.defective > 0 && +selectedSupportId > 0) && (
+            <ImageUpload
+              uploadUrl={'/rm-api/support/upload/' + selectedSupportId}
+              onSuccess={handleSuccess}
+              onError={handleError}
+            />
           )}
         </div>,
         <Button
