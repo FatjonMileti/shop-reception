@@ -222,6 +222,9 @@ const DLCProducts = () => {
         itemId={`${selectedRow?.id}`}
         content={<Typography>Esti sigur va vrei sa stergi acest produs?</Typography>}
         setShouldRefreshData={setShouldRefreshData}
+        deleteLabel='Sterge'
+        cancelLabel='Anuleaza'
+        succesMessage="Produsul a fost sters cu succes."
       />
       <Table
         hideCheckbox

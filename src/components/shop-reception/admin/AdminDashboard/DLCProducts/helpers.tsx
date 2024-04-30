@@ -60,7 +60,7 @@ export const columns = [
 
 export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamilies, metiUB) => [
   {
-    name: 'shopCode',
+    name: 'shopType',
     value: '',
     filter: (
       <Autocomplete
@@ -71,7 +71,7 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează magazin'
+    label: 'Magazin'
   },
 
   {
@@ -86,7 +86,7 @@ export const drawerFilters = (shopTypes, metiRayons, metiFamilies, metiSubfamili
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează raion'
+    label: 'Raion'
   },
 
   {

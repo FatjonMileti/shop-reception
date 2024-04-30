@@ -103,16 +103,16 @@ export const drawerFilters = (shopCodes, depositOptions, reasonsOptions) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează depozit'
+    label: 'Depozit'
   },
   {
     name: 'date',
     value: '',
     filter: (
-      <DatePicker label="Selecteaza data" variant="outlined" value={dayjs()} onChange={() => {}} />
+      <DatePicker label="Selecteaza data" variant="outlined" value={dayjs()} onChange={() => {}}  />
     ),
     type: 'date',
-    label: 'Selecteaza data'
+    label: 'Data'
   },
   {
     name: 'success',
@@ -129,7 +129,7 @@ export const drawerFilters = (shopCodes, depositOptions, reasonsOptions) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează succes'
+    label: 'Succes'
   },
   {
     name: 'reason',
@@ -157,6 +157,6 @@ export const drawerFilters = (shopCodes, depositOptions, reasonsOptions) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează magazin'
+    label: 'Magazin'
   }
 ]
