@@ -3,7 +3,7 @@ import {makeCorePostRequest} from "../../../../utils/api";
 import {IconButton} from "@mui/material";
 import { CameraAlt as CameraIcon } from '@mui/icons-material';
 
-const ImageUpload = ({ uploadUrl, onSuccess, onError }) => {
+const ImageUpload = ({ uploadUrl, onSuccess, onError, inputId }) => {
     const [imageSelected, setImageSelected] = useState(false);
 
     const handleImageChange = async (e) => {
@@ -29,13 +29,15 @@ const ImageUpload = ({ uploadUrl, onSuccess, onError }) => {
                 setImageSelected(true);
             }
         }
+
+        e.target.value = null;
     };
 
     return (
         <div>
-            <label htmlFor="image-upload" style={{cursor: 'pointer'}}>
+            <label htmlFor={inputId} style={{cursor: 'pointer'}}>
                 <input
-                    id="image-upload"
+                    id={inputId}
                     type="file"
                     accept="image/*"
                     onChange={handleImageChange}
@@ -43,7 +45,7 @@ const ImageUpload = ({ uploadUrl, onSuccess, onError }) => {
                 />
                 <IconButton
                     onClick={() => {
-                        document.getElementById('image-upload').click();
+                        document.getElementById(inputId).click();
                     }}
                     style={{ color: imageSelected ? 'green' : '#0970E6' }}
                 >
