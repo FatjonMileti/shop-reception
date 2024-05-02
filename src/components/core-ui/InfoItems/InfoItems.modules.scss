@@ -1,0 +1,23 @@
+.list {
+  border: 1px solid #E5E5E5;
+  background-color: #F5FAFF;
+  padding: 12px;
+  padding-bottom: 32px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.label {
+  color: #666666;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.value {
+  color: #121212;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: auto;
+  margin-bottom: auto;
+}

@@ -37,6 +37,7 @@ export const URLS = {
   AUTH_BALANCE_PACKAGING_FORM: '/shop-reception/package/balance/:id',
   AUTH_BALANCE_PACKAGING_HISTORY: '/shop-reception/package/balance/history/:id',
   AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS: '/shop-reception/package/storeReturnsDisputes',
+  AUTH_PACKAGING_DISPUTE_OF_STORE_RETURNS: '/shop-reception/package/storeReturnsDisputes/:id',
   AUTH_PACKAGING_TYPES_DIFFERENCES: '/shop-reception/package/typesDifferences',
   AUTH_RETURNED_PACKAGING: '/shop-reception/package/returned',
   AUTH_PACKAGING_COMPLIANCE: '/shop-reception/package/compliance',

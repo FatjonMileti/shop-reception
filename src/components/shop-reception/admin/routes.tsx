@@ -29,6 +29,7 @@ import { ReturnTruckList } from './PackageDashboard/ReturnTruckList'
 import { RollingPackages } from './PackageDashboard/RollingPackages'
 import { BalancePackages } from './PackageDashboard/BalancePackages'
 import { PackagingDisputes } from './PackageDashboard/PackagingDisputes'
+import { PackagingDispute } from './PackageDashboard/PackagingDispute'
 import { PackagingTypesDifferences } from './PackageDashboard/PackagingTypesDifferences'
 import { ReturnedPackaging } from './PackageDashboard/ReturnedPackaging'
 import { PackagingCompliance } from './PackageDashboard/PackagingCompliance'
@@ -336,6 +337,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={PackagingDisputes}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTE_OF_STORE_RETURNS}
+        element={
+          <PrivateRoute
+            component={PackagingDispute}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
