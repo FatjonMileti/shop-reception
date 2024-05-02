@@ -8,11 +8,13 @@ import { useNotification } from "../../../../../../hooks";
 import { TitleHeader } from "../../../TitleHeader";
 import { Container, Grid } from "@mui/material";
 import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../utils/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import ImageUpload from "../../../ImageUpload/ImageUpload";
+import { URLS } from "../../../constants";
 
 const TruckDetail = () => {
+  const navigate = useNavigate()
   const { showNotification } = useNotification();
   let { id } = useParams();
 
@@ -27,6 +29,9 @@ const TruckDetail = () => {
       const payload = { id: +id, ...values };
       try {
         await makeCorePostRequest("/rm-api/truck/approve", payload);
+
+        const item = {id}
+        navigate(URLS.AUTH_SUPPORT_CODE, { state: { item } })
       } catch (error) {
         showNotification({
           message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -84,8 +89,6 @@ const TruckDetail = () => {
     });
   };
 
-  console.log(formik.values);
-  console.log(formik.errors);
   return (
     <Container>
       <Grid container spacing={4}>
@@ -151,7 +154,7 @@ const TruckDetail = () => {
                 label="Aviz/BL"
                 variant="standard"
                 width="100%"
-                value={document.hasNotice}
+                value={document.hasNotice || "none"}
                 values={[
                   {
                     value: "true",
@@ -167,7 +170,9 @@ const TruckDetail = () => {
                   }
                 ]}
                 onChange={event =>
-                  formik.setFieldValue(`documentList[${idx}].hasNotice`, (event.target as HTMLInputElement).value)
+                  {
+                    formik.setFieldValue(`documentList[${idx}].hasNotice`, (event.target as HTMLInputElement).value === "none" ? null : (event.target as HTMLInputElement).value)
+                  }
                 }
                 error={!!formik.errors.documentList && !!formik.errors.documentList[idx]}
                 helperText={!!formik.errors.documentList && !!formik.errors.documentList[idx] ? formik.errors.documentList[idx].hasNotice : ''}
@@ -179,7 +184,7 @@ const TruckDetail = () => {
                 label="Scrisoare de transport/CMR"
                 variant="standard"
                 width="100%"
-                value={document.hasTransportNote}
+                value={document.hasTransportNote || "none"}
                 values={[
                   {
                     value: "true",
@@ -195,7 +200,9 @@ const TruckDetail = () => {
                   }
                 ]}
                 onChange={event =>
-                  formik.setFieldValue(`documentList[${idx}].hasTransportNote`, (event.target as HTMLInputElement).value)
+                  {
+                    formik.setFieldValue(`documentList[${idx}].hasTransportNote`, (event.target as HTMLInputElement).value === "none" ? null : (event.target as HTMLInputElement).value)
+                  }
                 }
                 error={!!formik.errors.documentList && !!formik.errors.documentList[idx]}
                 helperText={!!formik.errors.documentList && !!formik.errors.documentList[idx] ? formik.errors.documentList[idx].hasTransportNote : ''}
@@ -209,7 +216,7 @@ const TruckDetail = () => {
             label="Conformitate termodiagrama"
             variant="standard"
             width="100%"
-            value={formik.values.thermodiagramConform}
+            value={formik.values.thermodiagramConform || "none"}
             values={[
               {
                 value: "true",
@@ -226,8 +233,7 @@ const TruckDetail = () => {
             ]}
             onChange={event =>
               {
-                const value = (event.target as HTMLInputElement).value === "none" ? null : (event.target as HTMLInputElement).value;
-                formik.setFieldValue("thermodiagramConform", value)
+                formik.setFieldValue("thermodiagramConform", (event.target as HTMLInputElement).value === "none" ? null : (event.target as HTMLInputElement).value)
               }
             }
             error={!!formik.errors.thermodiagramConform}
@@ -240,7 +246,6 @@ const TruckDetail = () => {
             inputId='thermodiagram'
           />
         </Grid>
-
         { formik.values.thermodiagramConform === 'false' &&
           <Grid item xs={12}>
             <Input
@@ -257,7 +262,6 @@ const TruckDetail = () => {
             />
           </Grid>
         }
-
         <Grid item xs={12}>
           <Button
             type="submit"
