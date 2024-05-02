@@ -1,7 +1,8 @@
 import { Capsule } from 'components/core-ui/Capsule'
 import s from './TaskAllocations.modules.scss'
 import { Grid, Typography } from '@mui/material'
-import { PriorityColors } from './helpers'
+import { PriorityColors, getPriority } from './helpers'
+import { useMemo } from 'react'
 
 const TaskSummary = ({ item, hideDetails = false }) => {
   // TODO: To add type when db schema is defined
@@ -10,7 +11,6 @@ const TaskSummary = ({ item, hideDetails = false }) => {
     taskName,
     recommendedInterval,
     standardProductivity,
-    priorityId,
     priorityValue,
     frequency,
     allocatedWorkers,
@@ -20,6 +20,8 @@ const TaskSummary = ({ item, hideDetails = false }) => {
     remainingWorkload,
     workloadMeasurementUnit
   } = item
+
+  const priorityId = useMemo(() => getPriority(priorityValue), [priorityValue])
 
   return (
     <Grid container flexDirection="column">
