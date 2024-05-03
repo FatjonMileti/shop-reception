@@ -7,12 +7,14 @@ import { formatErrorMessage } from '../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../hooks'
 import { TitleHeader } from '../../../TitleHeader'
 import {useQuery} from "react-query";
-import {makeCoreGetRequest} from "../../../../../../utils/api";
-import {useLocation} from "react-router-dom";
+import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../utils/api";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Select, MenuItem, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { DeleteActionIcon } from "../../../../../../icons";
+import { URLS } from "../../../constants";
 
 const AddTruckStep2 = () => {
+  const navigate = useNavigate()
   const { showNotification } = useNotification()
   const [selectedBls, setSelectedBls] = useState([]);
   const location = useLocation();
@@ -24,17 +26,26 @@ const AddTruckStep2 = () => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any) => {
-      try {
-        console.log(values);
-      } catch (error) {
-        showNotification({
-          message: `Error while submitting. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
+    onSubmit: async () => {}
   })
+
+  const onSubmit = async (values, navigateTo) => {
+    const ticketIdList = [];
+    try {
+      values.blList.forEach(bl => {
+        ticketIdList.push({id: bl.id});
+      });
+
+      await makeCorePostRequest('/rm-api/truck/saveBlListForTruck', {id: truckId, deliveryTicketList: ticketIdList});
+
+      navigate(navigateTo);
+    } catch (error) {
+      showNotification({
+        message: `Error while submitting. ${formatErrorMessage(error)}`,
+        type: 'error'
+      });
+    }
+  };
 
   //TODO Go back to previous page, send truckId
 
@@ -118,17 +129,17 @@ const AddTruckStep2 = () => {
           type='button'
           variant='contained'
           label='ÎNCEPE RECEPȚIA'
-          onClick={() => formik.handleSubmit()}
+          onClick={() => onSubmit(formik.values, URLS.AUTH_TRUCK_DETAIL.replace(':id', truckId.toString()))}
           style={{ width: '100%' }}
-          // disabled
+          disabled={selectedBls.length === 0}
         />,
         <Button
           type='button'
           variant='contained'
           label='SALVARE CAMION'
-          onClick={() => formik.handleSubmit()}
+          onClick={() => onSubmit(formik.values, URLS.AUTH_LIST_TRUCKS)}
           style={{ width: '100%' }}
-          // disabled
+          disabled={selectedBls.length === 0}
         />
       ]}
       itemsPerRow={1}
