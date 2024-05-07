@@ -74,6 +74,7 @@ const PackagingDispute = () => {
                 showResponsibility={litigation?.showResponsibility}
                 depositUserClassified={litigation?.depositUserClassified}
                 refreshData={refetch}
+                showAccept={litigation?.showAccept}
               />
             ),
             label: 'Detalii',

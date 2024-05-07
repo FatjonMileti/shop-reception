@@ -9,7 +9,14 @@ import { formatErrorMessage } from 'utils/formatting'
 import { useMutation, useQuery } from 'react-query'
 import { toResponsibleOptions } from './serializers'
 
-const Details = ({ list, showMessage, showResponsibility, depositUserClassified, refreshData }) => {
+const Details = ({
+  list,
+  showMessage,
+  showResponsibility,
+  depositUserClassified,
+  refreshData,
+  showAccept
+}) => {
   const { showNotification } = useNotification()
 
   const downloadImages = async (supportId, type) => {
@@ -93,7 +100,8 @@ const Details = ({ list, showMessage, showResponsibility, depositUserClassified,
         showResponsibility,
         depositUserClassified,
         responsibleOptions,
-        updateResponsible
+        updateResponsible,
+        showAccept
       }),
     [responsibleOptions, showMessage, showResponsibility]
   )

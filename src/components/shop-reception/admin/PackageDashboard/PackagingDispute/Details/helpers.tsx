@@ -14,7 +14,8 @@ export const getColumns = ({
   showResponsibility,
   depositUserClassified,
   responsibleOptions,
-  updateResponsible
+  updateResponsible,
+  showAccept
 }) => [
   {
     title: 'Tip ambalaj',
@@ -80,24 +81,28 @@ export const getColumns = ({
         }
       ]
     : []),
-  {
-    title: 'Accepta',
-    field: 'accepted',
-    render: row =>
-      row.canUpload ? (
-        <Input
-          label=""
-          type="select"
-          values={acceptValues}
-          variant="outlined"
-          width="100%"
-          value={row.accepted === true ? 'DA' : row.accepted === false ? 'NU' : ''}
-          onChange={event => updateAccepted({ value: event.target, supportId: row.id })}
-        />
-      ) : (
-        <div>{row.accepted}</div>
-      )
-  },
+  ...(showAccept
+    ? [
+        {
+          title: 'Accepta',
+          field: 'accepted',
+          render: row =>
+            row.canUpload ? (
+              <Input
+                label=""
+                type="select"
+                values={acceptValues}
+                variant="outlined"
+                width="100%"
+                value={row.accepted === true ? 'DA' : row.accepted === false ? 'NU' : ''}
+                onChange={event => updateAccepted({ value: event.target, supportId: row.id })}
+              />
+            ) : (
+              <div>{row.accepted === true ? 'Da' : row.accepted === false ? 'Nu' : ''}</div>
+            )
+        }
+      ]
+    : []),
   ...(showResponsibility
     ? [
         {
