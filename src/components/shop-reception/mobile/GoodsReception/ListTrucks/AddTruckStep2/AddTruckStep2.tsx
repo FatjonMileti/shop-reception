@@ -1,18 +1,22 @@
 import { Grid } from '../../../../Common/Grid'
-import { Button, Input, Table, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import React, { useMemo } from 'react'
+import { Button, Typography } from "@fullscreendigital/carrefour-dex-fe";
+import React, { useMemo, useState } from "react";
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../hooks'
 import { TitleHeader } from '../../../TitleHeader'
-import { columns } from './helpers'
 import {useQuery} from "react-query";
-import {makeCoreGetRequest} from "../../../../../../utils/api";
-import {useLocation} from "react-router-dom";
+import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../utils/api";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Select, MenuItem, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { DeleteActionIcon } from "../../../../../../icons";
+import { URLS } from "../../../constants";
 
 const AddTruckStep2 = () => {
+  const navigate = useNavigate()
   const { showNotification } = useNotification()
+  const [selectedBls, setSelectedBls] = useState([]);
   const location = useLocation();
   const truckId = location.state?.response.id;
 
@@ -22,38 +26,59 @@ const AddTruckStep2 = () => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any) => {
-      try {
-          //TODO handle for submission
-      } catch (error) {
-        showNotification({
-          message: `Error while submitting. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
+    onSubmit: async () => {}
   })
+
+  const onSubmit = async (values, navigateTo) => {
+    const ticketIdList = [];
+    try {
+      values.blList.forEach(bl => {
+        ticketIdList.push({id: bl.id});
+      });
+
+      await makeCorePostRequest('/rm-api/truck/saveBlListForTruck', {id: truckId, deliveryTicketList: ticketIdList});
+
+      navigate(navigateTo);
+    } catch (error) {
+      showNotification({
+        message: `Error while submitting. ${formatErrorMessage(error)}`,
+        type: 'error'
+      });
+    }
+  };
 
   //TODO Go back to previous page, send truckId
 
   const { data: truck, isLoading} = useQuery(
     'truckWithBls',
     async () => {
-        return await makeCoreGetRequest('/rm-api/truck/getTruckCreationDTOWithBls/' + truckId, null)
+      return await makeCoreGetRequest('/rm-api/truck/getTruckCreationDTOWithBls/' + truckId, null)
     },
     {
-        onError: error => {
-            showNotification({
-                message: `Error while fetching truck. ${formatErrorMessage(error)}`,
-                type: 'error'
-            })
-        }
+      onError: error => {
+        showNotification({
+          message: `Error while fetching truck. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
     }
   )
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  const handleSelectChange = event => {
+    const value = event.target.value;
+    formik.setFieldValue('blList', value);
+    setSelectedBls(value);
+  };
+
+  const removeBl = idx => {
+    const newList = formik.values.blList.filter((_, index) => index !== idx);
+    formik.setFieldValue('blList', newList);
+    setSelectedBls(newList);
+  };
 
   return (
     <Grid
@@ -66,42 +91,55 @@ const AddTruckStep2 = () => {
           <Typography variant='medium' component='p'>{truck.truckNumber} / {truck.driverName}</Typography>
           <Typography variant='medium' component='p'>Sigilii {truck.concatenatedSeals}</Typography>
         </>,
-        <Input
-          type='select'
-          label='Adaugǎ bonuri de livrare'
-          variant='standard'
-          width='100%'
-          value={formik.values.registrationNumber}
-          values={[
-            {
-              value: 'none',
-              label: 'DA'
-            }
-          ]}
-          onChange={event => formik.setFieldValue('registrationNumber', (event.target as HTMLInputElement).value)}
-          error={!!formik.errors.registrationNumber}
-          helperText={formik.errors.registrationNumber as string}
-        />,
-        <Table
-          columns={columns}
-          isLoading={false}
-          rows={[]}
-        />,
+        <Typography variant='medium' component='p'>Adauga bonuri livrare</Typography>,
+        <Select
+          sx={{ width: "100%" }}
+          multiple
+          value={formik.values.blList}
+          onChange={handleSelectChange}
+          renderValue={selected => selected.map(item => `${item.externalTicketId}`).join(', ')}
+        >
+          {truck.deliveryTicketList?.map((bl) => (
+            <MenuItem key={bl.id} value={bl}>
+              {bl.externalTicketId} - {bl.depositName}
+            </MenuItem>
+          ))}
+        </Select>,
+        <Table>
+          <TableHead style={{backgroundColor: '#0970E6'}}>
+            <TableRow>
+              <TableCell>External Ticket ID</TableCell>
+              <TableCell>Deposit Name</TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {formik.values.blList.map((bl, index) => (
+              <TableRow key={index}>
+                <TableCell>{bl.externalTicketId}</TableCell>
+                <TableCell>{bl.depositName}</TableCell>
+                <TableCell>
+                  <Button onClick={() => removeBl(index)} label=''><DeleteActionIcon /></Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>,
         <Button
           type='button'
           variant='contained'
           label='ÎNCEPE RECEPȚIA'
-          onClick={() => formik.handleSubmit()}
+          onClick={() => onSubmit(formik.values, URLS.AUTH_TRUCK_DETAIL.replace(':id', truckId.toString()))}
           style={{ width: '100%' }}
-          disabled
+          disabled={selectedBls.length === 0}
         />,
         <Button
           type='button'
           variant='contained'
           label='SALVARE CAMION'
-          onClick={() => formik.handleSubmit()}
+          onClick={() => onSubmit(formik.values, URLS.AUTH_LIST_TRUCKS)}
           style={{ width: '100%' }}
-          disabled
+          disabled={selectedBls.length === 0}
         />
       ]}
       itemsPerRow={1}

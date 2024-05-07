@@ -142,6 +142,7 @@ const PackagingInventoryUpdate = () => {
               uploadUrl={'/rm-api/support/upload/' + selectedSupportId}
               onSuccess={handleSuccess}
               onError={handleError}
+              inputId='defective'
             />
           )}
         </div>,

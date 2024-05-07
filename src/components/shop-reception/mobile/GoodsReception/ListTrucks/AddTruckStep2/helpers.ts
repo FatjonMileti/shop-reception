@@ -15,18 +15,18 @@ export const getValidationSchema = () =>
   })
 
 export const initialValues = {
-  blList: [{ id: '', externalTicketId: '', depositName: '', transportCode: '', date: '' }]
+  blList: []
 }
 
 export const columns: Array<TableHeaderType> = [
   {
     title: 'BL',
-    field: 'warehouseName',
+    field: 'externalTicketId',
     align: 'left'
   },
   {
     title: 'Depozit',
-    field: 'store',
+    field: 'depositName',
     align: 'left'
   }
 ]

@@ -117,6 +117,7 @@ const AddTruck = () => {
       type='button'
       variant='contained'
       label='PASUL URMǍTOR'
+      style={{ width: "100%" }}
       onClick={() => formik.handleSubmit()}
     />
   ]
