@@ -43,3 +43,5 @@ export const getValidationSchema = minDivision =>
           !Number.isNaN(allocatedWorkload) && parseFloat(`${allocatedWorkload}`) % minDivision === 0
       )
   })
+
+export const getPriority = (priorityValue: string) => +priorityValue.substring(0, 1)
