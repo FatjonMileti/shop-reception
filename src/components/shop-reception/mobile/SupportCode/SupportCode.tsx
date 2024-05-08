@@ -9,44 +9,44 @@ import { TitleHeader } from '../TitleHeader'
 import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
 import { FlexCenter } from '../../Common/FlexCenter'
 import {useQuery} from "react-query";
-import {makeCoreGetRequest} from "../../../../utils/api";
+import {makeCoreGetRequest, makeCorePostRequest} from "../../../../utils/api";
 import {useLocation} from "react-router-dom";
 
 const options = [
   {
-    field: 'confirm',
+    field: 'reason',
     label: 'Conform'
   },
   {
-    field: 'confirm',
+    field: 'reason',
     label: 'Infoliere neconforma'
   },
   {
-    field: 'confirm',
+    field: 'reason',
     label: 'Lipsa banda sigilare'
   },
   {
-    field: 'confirm',
+    field: 'reason',
     label: 'Lipsa banda promo'
   },
   {
-    field: 'confirm',
+    field: 'reason',
     label: 'Palet suprainaltat'
   },
   {
-    field: 'confirm',
+    field: 'reason',
     label: 'Constructie defectuoasa'
   },
   {
-    field: 'confirm',
+    field: 'reason',
     label: 'Palet rasturnat asigurat'
   },
   {
-    field: 'confirm',
+    field: 'reason',
     label: 'Palet rasturnat ne-asigurat in camion'
   },
   {
-    field: 'confirm',
+    field: 'reason',
     label: 'Palet lovit'
   }
 ]
@@ -55,6 +55,11 @@ const SupportCode = () => {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [isFinalizing, setIsFinalizing] = useState<boolean>(false)
+  const [supportImageButtonVisible, setSupportImageButtonVisible] = useState<boolean>(false)
+  const [defectImageVisible, setDefectImageVisible] = useState<boolean>(false)
+  const [supportNumber, setSupportNumber] = useState('')
+  const [supportId, setSupportId] = useState(null)
+  const [counter, setCounter] = useState(0)
   const { showNotification } = useNotification()
   const location = useLocation();
   const id = location.state?.item.id;
@@ -64,12 +69,39 @@ const SupportCode = () => {
   }
 
   const toggleIsSearching = (): void => {
-    setIsSearching(!isSearching)
+    makeCorePostRequest('/rm-api/support/scan/' + id, { supportCode: formik.values.supportCode }).then(r => {
+      setSupportNumber(r.supportNumber)
+      setSupportId(r.supportId)
+      formik.setFieldValue('supportTypeId', String(r.supportTypeId))
+    })
+    .catch(error => {
+      console.error('Error updating form values:', error);
+    })
+
+    setIsSearching(true)
   }
 
   const toggleIsFinalizing = (): void => {
-    toggleIsSearching()
-    setIsFinalizing(!isFinalizing)
+    const saveModel =  {supportId, supportTypeId: formik.values.supportTypeId, defectReason: formik.values.reason, pictureIdNonConform: null, pictureIdSupportType: null}
+
+    try {
+      makeCorePostRequest('/rm-api/support/save/' + id, saveModel).then(resp => {
+        const localCounter = resp.counter;
+        if (localCounter > 0) {
+          setCounter(localCounter);
+        }
+
+        setSupportImageButtonVisible(false);
+        setDefectImageVisible(false);
+      });
+
+      setIsFinalizing(true)
+    } catch (error) {
+      showNotification({
+        message: `Error while submitting. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
   }
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
@@ -80,14 +112,7 @@ const SupportCode = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-
-        const payload = formik.values
-
-        showNotification({
-          message: 'codul de suport nu a fost găsit',
-          type: 'warning'
-        })
-
+        await makeCoreGetRequest('/rm-api/support/summary/' + id, null)
       } catch (error) {
         showNotification({
           message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -97,10 +122,13 @@ const SupportCode = () => {
     }
   })
 
-  const { data: counter, isLoading} = useQuery(
+  const { data: truck, isLoading} = useQuery(
       'counter',
       async () => {
-        return await makeCoreGetRequest('/rm-api/support/counter/' + id, null)
+        const truck = await makeCoreGetRequest('/rm-api/support/counter/' + id, null)
+        setCounter(truck.counter)
+
+        return truck;
       },
       {
         onError: error => {
@@ -112,7 +140,22 @@ const SupportCode = () => {
       }
   )
 
-  if (isLoading) {
+  const { data: supportList, isLoading: isLoadingSupports} = useQuery(
+      'supportList',
+      async () => {
+        return await makeCoreGetRequest('/rm-api/support/principal/type', null)
+      },
+      {
+        onError: error => {
+          showNotification({
+            message: `Error while fetching supports. ${formatErrorMessage(error)}`,
+            type: 'error'
+          })
+        }
+      }
+  )
+
+  if (isLoading || isLoadingSupports) {
     return <div>Loading...</div>;
   }
 
@@ -129,9 +172,7 @@ const SupportCode = () => {
         error={!!formik.errors.supportCode}
         helperText={formik.errors.supportCode as string}
       />
-      <IconButton
-        onClick={toggleIsSearching}
-      >
+      <IconButton onClick={toggleIsSearching}>
         <ManageSearchIcon />
       </IconButton>
     </FlexCenter>,
@@ -148,23 +189,30 @@ const SupportCode = () => {
   if (isSearching) {
     items = [
       ...items,
-      <Typography variant='medium' component='p'>Numǎr suport: 46565454516</Typography>,
+      <Typography variant='medium' component='p'>Numǎr suport: {supportNumber}</Typography>,
       <Input
         type='select'
         label='Tip Ambalaj'
         variant='standard'
         width='100%'
-        value={formik.values.registrationNumber}
-        values={[
-          {
-            value: 'none',
-            label: 'Palate'
-          }
-        ]}
-        onChange={event => formik.setFieldValue('registrationNumber', (event.target as HTMLInputElement).value)}
-        error={!!formik.errors.registrationNumber}
-        helperText={formik.errors.registrationNumber as string}
+        value={formik.values.supportTypeId}
+        values={supportList.map(support => ({ value: support.id, label: support.name }))}
+        onChange={event => {
+          setSupportImageButtonVisible(true);
+          formik.setFieldValue("supportTypeId", (event.target as HTMLInputElement).value);
+        }}
+        error={!!formik.errors.supportTypeId}
+        helperText={formik.errors.supportTypeId as string}
       />,
+      (supportImageButtonVisible &&
+        <Button
+          type='button'
+          variant='outlined'
+          label='Adaugă imagine suport neconform'
+          style={{ width: '100%' }}
+          onClick={null}
+        />
+      ),
       <Button
         type='button'
         variant='contained'
@@ -181,13 +229,37 @@ const SupportCode = () => {
         hasPaper={true}
         items={options.map(option =>
           <Checkbox
-            checked={false}
-            onChange={event => formik.setFieldValue(option.field, (event.target as HTMLInputElement).value)}
+            onChange={() => {
+              const set = new Set(formik.values.reason);
+              if (set.has(option.label)) {
+                set.delete(option.label);
+                if (set.size < 1) {
+                  setDefectImageVisible(false);
+                }
+              } else {
+                set.add(option.label);
+                if (set.size >= 1 && option.label !== 'Conform') {
+                  setDefectImageVisible(true);
+                }
+              }
+              formik.setFieldValue(option.field, Array.from(set));
+            }}
             label={option.label}
+            disabled={option.label !== 'Conform' && formik.values.reason.includes('Conform') ||
+              option.label === 'Conform' && formik.values.reason?.length > 0 && !formik.values.reason.includes('Conform')}
           />
         )}
         itemsPerRow={1}
-      />
+      />,
+      (defectImageVisible &&
+        <Button
+          type='button'
+          variant='outlined'
+          label='Adaugă imagine suport neconform'
+          style={{ width: '100%' }}
+          onClick={null}
+        />
+      )
     )
   }
 
@@ -208,8 +280,8 @@ const SupportCode = () => {
       onClick={toggleIsFinalizing}
     />,
     <>
-      <Typography variant='medium' component='p'>Numǎr camion: {counter.truckNumber}</Typography>
-      <Typography variant='medium' component='p'>Numǎr suporți scanați: {counter.counter}</Typography>
+      <Typography variant='medium' component='p'>Numǎr camion: {truck.truckNumber}</Typography>
+      <Typography variant='medium' component='p'>Numǎr suporți scanați: {counter}</Typography>
     </>
   ]
 
