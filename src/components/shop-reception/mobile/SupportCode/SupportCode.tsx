@@ -1,6 +1,6 @@
 import { Grid } from '../../Common/Grid'
 import { Button, Checkbox, Divider, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { useMemo, useState } from 'react'
+import { useMemo, useState } from "react";
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../utils/formatting'
@@ -8,9 +8,11 @@ import { useNotification } from '../../../../hooks'
 import { TitleHeader } from '../TitleHeader'
 import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
 import { FlexCenter } from '../../Common/FlexCenter'
-import {useQuery} from "react-query";
-import {makeCoreGetRequest, makeCorePostRequest} from "../../../../utils/api";
-import {useLocation} from "react-router-dom";
+import { useQuery } from "react-query";
+import { makeCoreGetRequest, makeCorePostRequest } from "../../../../utils/api";
+import { useLocation, useNavigate } from "react-router-dom";
+import AlertModal from "../AlertModal/AlertModal";
+import { URLS } from "../constants";
 
 const options = [
   {
@@ -60,9 +62,83 @@ const SupportCode = () => {
   const [supportNumber, setSupportNumber] = useState('')
   const [supportId, setSupportId] = useState(null)
   const [counter, setCounter] = useState(0)
+  const [isFinalizeModalOpen, setIsFinalizeModalOpen] = useState(false)
+  const [finalizeModalContent, setFinalizeModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [isMoreSupportsModalOpen, setIsMoreSupportsModalOpen] = useState(false)
+  const [moreSupportsModalContent, setMoreSupportsModalContent] = useState({ title: '', description: '', buttons: [] })
   const { showNotification } = useNotification()
-  const location = useLocation();
+  const navigate = useNavigate()
+  const location = useLocation()
+  const validationSchema = useMemo(() => getValidationSchema(), [])
   const id = location.state?.item.id;
+
+  const { data: truck, isLoading} = useQuery(
+    'counter',
+    async () => {
+      const truck = await makeCoreGetRequest('/rm-api/support/counter/' + id, null)
+      setCounter(truck.counter)
+
+      return truck;
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: supportList, isLoading: isLoadingSupports} = useQuery(
+    'supportList',
+    async () => {
+      return await makeCoreGetRequest('/rm-api/support/principal/type', null)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching supports. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  if (isLoading || isLoadingSupports) {
+    return <div>Loading...</div>;
+  }
+
+  const formik = useFormik({
+    enableReinitialize: false,
+    validateOnChange: false,
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: async (values: any) => {
+      const saveModel =  {supportId, supportTypeId: values.supportTypeId, defectReason: values.reason, pictureIdNonConform: null, pictureIdSupportType: null}
+
+      try {
+        makeCorePostRequest('/rm-api/support/save/' + id, saveModel).then(resp => {
+          const localCounter = resp.counter;
+          if (localCounter > 0) {
+            setCounter(localCounter);
+          }
+
+          openMoreSupportsModal();
+          formik.setFieldValue('reason', []);
+          setSupportImageButtonVisible(false);
+          setDefectImageVisible(false);
+        });
+
+        setIsFinalizing(true)
+      } catch (error) {
+        showNotification({
+          message: `Error while submitting. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  })
 
   const toggleShowConfirmation = (): void => {
     setShowConfirmation(!showConfirmation)
@@ -82,20 +158,13 @@ const SupportCode = () => {
   }
 
   const toggleIsFinalizing = (): void => {
-    const saveModel =  {supportId, supportTypeId: formik.values.supportTypeId, defectReason: formik.values.reason, pictureIdNonConform: null, pictureIdSupportType: null}
-
     try {
-      makeCorePostRequest('/rm-api/support/save/' + id, saveModel).then(resp => {
-        const localCounter = resp.counter;
-        if (localCounter > 0) {
-          setCounter(localCounter);
-        }
+      makeCoreGetRequest('/rm-api/support/summary/' + id, null).then(response => {
+        const count = response['counter'];
+        const total = response['total'];
 
-        setSupportImageButtonVisible(false);
-        setDefectImageVisible(false);
+        openFinalizeModal(count, total)
       });
-
-      setIsFinalizing(true)
     } catch (error) {
       showNotification({
         message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -104,60 +173,59 @@ const SupportCode = () => {
     }
   }
 
-  const validationSchema = useMemo(() => getValidationSchema(), [])
-  const formik = useFormik({
-    enableReinitialize: false,
-    validateOnChange: false,
-    initialValues: initialValues,
-    validationSchema: validationSchema,
-    onSubmit: async (values: any) => {
-      try {
-        await makeCoreGetRequest('/rm-api/support/summary/' + id, null)
-      } catch (error) {
-        showNotification({
-          message: `Error while submitting. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  })
-
-  const { data: truck, isLoading} = useQuery(
-      'counter',
-      async () => {
-        const truck = await makeCoreGetRequest('/rm-api/support/counter/' + id, null)
-        setCounter(truck.counter)
-
-        return truck;
-      },
-      {
-        onError: error => {
-          showNotification({
-            message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
-            type: 'error'
-          })
+  const openFinalizeModal = (count, total) => {
+    setFinalizeModalContent({
+      title: '',
+      description: 'Aţi scanat ' + count + ' suporţi din ' + total + ' aşteptaţi.',
+      buttons: [
+        {
+          label: 'Continuă scanarea',
+          onClick: () => setIsFinalizeModalOpen(false),
+          color: 'primary'
+        },
+        {
+          label: 'Am terminat',
+          onClick: () => {
+            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_4.replace(':id', id))
+            setIsFinalizeModalOpen(false);
+          },
+          color: 'secondary'
         }
-      }
-  )
+      ]
+    });
+    setIsFinalizeModalOpen(true);
+  };
 
-  const { data: supportList, isLoading: isLoadingSupports} = useQuery(
-      'supportList',
-      async () => {
-        return await makeCoreGetRequest('/rm-api/support/principal/type', null)
-      },
-      {
-        onError: error => {
-          showNotification({
-            message: `Error while fetching supports. ${formatErrorMessage(error)}`,
-            type: 'error'
-          })
+  const closeFinalizeModal = () => {
+    setIsFinalizeModalOpen(false);
+  };
+
+  const openMoreSupportsModal = () => {
+    setMoreSupportsModalContent({
+      title: 'Există ambalaje secundare pe acest suport?',
+      description: '',
+      buttons: [
+        {
+          label: 'Nu',
+          onClick: () => setIsMoreSupportsModalOpen(false),
+          color: 'primary'
+        },
+        {
+          label: 'Da',
+          onClick: () => {
+            //navigate(URLS.AUTH_SUPPORT_SCAN_STEP_2)
+            setIsMoreSupportsModalOpen(false);
+          },
+          color: 'secondary'
         }
-      }
-  )
+      ]
+    });
+    setIsMoreSupportsModalOpen(true);
+  };
 
-  if (isLoading || isLoadingSupports) {
-    return <div>Loading...</div>;
-  }
+  const closeMoreSupportsModal = () => {
+    setIsMoreSupportsModalOpen(false);
+  };
 
   let items = [
     <TitleHeader title='Cod Suport' />,
@@ -182,7 +250,7 @@ const SupportCode = () => {
       variant='contained'
       label='SCANEAZǍ SUPORT'
       style={{ width: '100%' }}
-      onClick={() => formik.handleSubmit()}
+      onClick={() => console.log('Manual Scan')}
     />
   ]
 
@@ -277,7 +345,17 @@ const SupportCode = () => {
       variant='contained'
       label='CONFIRM TIP SUPORT'
       style={{ width: '100%' }}
-      onClick={toggleIsFinalizing}
+      onClick={() => {
+        formik.handleSubmit();
+      }}
+      disabled={formik.values.reason.length === 0}
+    />,
+    <AlertModal
+      open={isMoreSupportsModalOpen}
+      handleClose={closeMoreSupportsModal}
+      title={moreSupportsModalContent.title}
+      description={moreSupportsModalContent.description}
+      buttons={moreSupportsModalContent.buttons}
     />,
     <>
       <Typography variant='medium' component='p'>Numǎr camion: {truck.truckNumber}</Typography>
@@ -293,7 +371,14 @@ const SupportCode = () => {
         label='FINALIZEAZĂ'
         size='large'
         style={{ width: '100%' }}
-        onClick={() => formik.handleSubmit()}
+        onClick={toggleIsFinalizing}
+      />,
+      <AlertModal
+        open={isFinalizeModalOpen}
+        handleClose={closeFinalizeModal}
+        title={finalizeModalContent.title}
+        description={finalizeModalContent.description}
+        buttons={finalizeModalContent.buttons}
       />
     )
   }
@@ -305,7 +390,7 @@ const SupportCode = () => {
       items={items}
       itemsPerRow={1}
     />
-)
+  )
 }
 
 export default SupportCode

@@ -5,7 +5,7 @@ export const URLS = {
   AUTH_REGISTER_TRUCK: '/shop-reception/mobile/registerTruck',
   AUTH_PROCESSING_SHIPMENT: '/shop-reception/mobile/inProcessingShipment',
   AUTH_SHIPPED_TRUCKS: '/shop-reception/mobile/shippedTrucks',
-  AUTH_SUPPORT_CODE: '/shop-reception/mobile/supportCode',
+  AUTH_SUPPORT_SCAN_STEP_1: '/shop-reception/mobile/supportCode',
   AUTH_ADD_TRUCK: '/shop-reception/mobile/addTruck',
   AUTH_ADD_TRUCK_STEP_2: '/shop-reception/mobile/add-trucks/step-2', // TODO: integrate stepper in parent page and delete
   AUTH_LIST_TRUCKS: '/shop-reception/mobile/trucksList',
@@ -22,12 +22,12 @@ export const URLS = {
   AUTH_DELIVERY_RANDOM_SUPPORT_CONFIRM: '/admin/mobile/delivery/random-support/confirm', // TODO: integrate stepper in parent page and delete
 
   // Goods Return
-  AUTH_EXPECTED_RETURNS: '/shop-reception/mobile/expectedReturns',
-  AUTH_IN_PROGRESS_RETURN: '/shop-reception/mobile/inProgressReturnReception',
-  AUTH_RECORD_RETURN: '/shop-reception/mobile/recordReturn',
-  AUTH_CONTINUE_RETURN: '/shop-reception/mobile/continueReturn',
+  AUTH_EXPECTED_RETURNS: '/shop-reception/mobile/expectedReturns', // HUB expected returns?
+  AUTH_IN_PROGRESS_RETURN: '/shop-reception/mobile/inProgressReturnReception', // HUB in progress returns?
+  AUTH_RECORD_RETURN: '/shop-reception/mobile/recordReturn', // Hub New Return Step 1?
+  AUTH_CONTINUE_RETURN: '/shop-reception/mobile/continueReturn', // Shop in progress returns?
   AUTH_EXPECTED_RETURN_DETAIL: '/shop-reception/mobile/expectedReturnDetails',
-  AUTH_EXPECTED_RETURN_DETAIL_STEP_2: '/admin/mobile/expected-return/detail-step-2', // TODO: integrate stepper in parent page and delete
+  AUTH_EXPECTED_RETURN_DETAIL_STEP_2: '/admin/mobile/expected-return/detail-step-2', // HUB Return Step 2 // TODO: integrate stepper in parent page and delete
   AUTH_EXPECTED_RETURN_DETAIL_STEP_3: '/admin/mobile/expected-return/detail-step-3', // TODO: integrate stepper in parent page and delete
   AUTH_EXPECTED_RETURN_DETAIL_FINAL: '/admin/mobile/expected-return/detail-step-final', // TODO: integrate stepper in parent page and delete
   AUTH_TRUCK_DETAIL: '/shop-reception/mobile/truckDetails/:id',
@@ -41,14 +41,20 @@ export const URLS = {
   AUTH_ORDER_RETURN_TRUCK: '/shop-reception/mobile/truckReturnOrder',
   AUTH_CONFIRM_RETURN_TRUCKS: 'shop-reception/mobile/truckReturnConfirm',
 
-  // ?
+  // Shop Inventory Update
   AUTH_PACKAGING_INVENTORY_UPDATE: '/admin/mobile/packaging-inventory-update',
+
+  // ?
   AUTH_APPROVE_TRUCK: '/admin/mobile/truck/approve',
-  AUTH_TRUCK_STEP_1: '/admin/mobile/truck-step-1',
-  AUTH_TRUCK_STEP_2: '/admin/mobile/truck-step-2',
-  AUTH_TRUCK_STEP_3: '/admin/mobile/truck-step-3',
-  AUTH_TRUCK_STEP_4: '/admin/mobile/truck-step-4',
-  AUTH_TRUCK_STEP_5: '/admin/mobile/truck-step-5',
-  AUTH_TRUCK_STEP_6: '/admin/mobile/truck-step-6',
-  AUTH_TRUCK_STEP_7: '/admin/mobile/truck-step-7'
+
+  // Shop Goods Return
+  AUTH_TRUCK_STEP_1: '/admin/mobile/truck-step-1', // Step 4
+  AUTH_TRUCK_STEP_2: '/admin/mobile/truck-step-2', // Step 3
+  AUTH_TRUCK_STEP_3: '/admin/mobile/truck-step-3', // Step 2
+  AUTH_TRUCK_STEP_4: '/admin/mobile/truck-step-4', // Step 2 (duplicate)
+  AUTH_TRUCK_STEP_5: '/admin/mobile/truck-step-5', // Step 1
+  AUTH_TRUCK_STEP_6: '/admin/mobile/truck-step-6', // Step 4 (duplicate)
+
+  // Shop Goods Reception
+  AUTH_SUPPORT_SCAN_STEP_4: '/admin/mobile/truck-step-7'// Step 4
 }

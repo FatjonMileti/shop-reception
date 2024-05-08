@@ -21,7 +21,7 @@ const RegisterTruck = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        navigate(URLS.AUTH_SUPPORT_CODE)
+        navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1)
       } catch (error) {
         showNotification({
           message: `Error while submitting. ${formatErrorMessage(error)}`,

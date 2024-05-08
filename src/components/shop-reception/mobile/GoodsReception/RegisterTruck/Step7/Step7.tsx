@@ -1,8 +1,11 @@
 import { Grid } from '../../../../Common/Grid'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from '../../../TitleHeader'
+import { useParams } from "react-router-dom";
 
 const Step7 = () => {
+  let { id } = useParams();
+
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
@@ -13,18 +16,21 @@ const Step7 = () => {
           type='button'
           variant='contained'
           label='CAMION GOL'
+          style={{ width: '100%' }}
           onClick={null}
         />,
         <Button
           type='button'
           variant='contained'
           label='RESIGILEAZĂ CAMION'
+          style={{ width: '100%' }}
           onClick={null}
         />,
         <Button
           type='button'
           variant='contained'
           label='RETUR AMBALAJE'
+          style={{ width: '100%' }}
           onClick={null}
           disabled
         />,
