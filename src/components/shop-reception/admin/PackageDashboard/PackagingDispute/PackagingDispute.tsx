@@ -81,7 +81,7 @@ const PackagingDispute = () => {
             tabIndex: 0
           },
           {
-            content: <Images />,
+            content: <Images pictureModels={litigation?.pictureModels} />,
             label: 'Imagini',
             tabIndex: 1
           },

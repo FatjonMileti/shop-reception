@@ -18,8 +18,6 @@ const InfoItems: React.FC<InfoItemsProps> = props => {
 
   const size = useMemo(() => (itemsPerRow ? 12 / itemsPerRow : 12), [itemsPerRow])
 
-  console.log(items)
-
   return (
     <Grid container className={s.list} spacing={4}>
       {items.map((item: Item) => (

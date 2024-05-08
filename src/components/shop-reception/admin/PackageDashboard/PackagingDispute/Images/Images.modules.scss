@@ -1,0 +1,14 @@
+.imgContainer {
+  width: 100%;
+  height: auto;
+  margin-top: 40px;
+  
+  &.clickable {
+    cursor: pointer;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
