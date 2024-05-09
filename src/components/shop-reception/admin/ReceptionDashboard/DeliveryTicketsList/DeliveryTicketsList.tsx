@@ -91,10 +91,10 @@ const DeliveryTicketsList = () => {
   const { data: statusOptions, isLoading: isStatusOptionsLoading } = useQuery(
     ['status'],
     async () => {
-      const data = await makeCoreGetRequest(`/shop-reception/deliveryTicket/status`)
+      const data = await makeCoreGetRequest(`/shop-reception/deliveryTicket/statuses`)
       return data.map(item => ({
-        label: item,
-        value: item
+        label: item.deliveryTicketStatusValue,
+        value: item.deliveryTicketStatus
       }))
     },
     {

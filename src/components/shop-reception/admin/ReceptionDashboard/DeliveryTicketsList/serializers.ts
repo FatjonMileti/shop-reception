@@ -1,16 +1,30 @@
-import { DeliveryTicket } from "./interfaces";
+import { DeliveryTicket } from './interfaces'
 
-export const toTableRowItems = (items: DeliveryTicket[]) => items.map((item: DeliveryTicket) => ({
-  id: item.id,
-  shopCode: item.shopCode || '',
-  depositName: item.depositName || '',
-  externalTicketId: item.externalTicketId || '',
-  status: item.status || '',
-  transportCode: item.transportCode || '',
-  sealCode: item.sealCode || '',
-  truckNumber: item.truckNumber || '',  
-  numberOfSupports: item.numberOfSupports || 0,
-  validatedSupports: item.validatedSupports || 0,
-  created: item.created || '',
-}))
-
+export const toTableRowItems = (items: DeliveryTicket[]) =>
+  items.map((item: DeliveryTicket) => ({
+    id: item.id,
+    createdBy: item.createdBy,
+    created: item.created,
+    lastUpdateBy: item.lastUpdateBy,
+    lastUpdate: item.lastUpdate,
+    externalTicketId: item.externalTicketId,
+    externalShopCode: item.externalShopCode,
+    shopCode: item.shopCode,
+    deliveryType: item.deliveryType,
+    deliveryDate: item.deliveryDate,
+    deliveryHour: item.deliveryHour,
+    expectedDeliveryDate: item.expectedDeliveryDate,
+    transporterCode: item.transporterCode,
+    transportCode: item.transportCode,
+    sealCode: item.sealCode,
+    truckNumber: item.truckNumber,
+    driverCode: item.driverCode,
+    temperature: item.temperature,
+    status: item.status,
+    validatedShopCodes: item.validatedShopCodes,
+    sentShopCodes: item.sentShopCodes,
+    deposit: item.deposit,
+    receptionFile: item.receptionFile,
+    statusValue: item.statusValue,
+    shopCodeName: item.shopCodeName
+  }))

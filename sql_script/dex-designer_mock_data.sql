@@ -274,6 +274,7 @@ VALUES
     (219, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/wrongDestinationSupport/:id', true, 165, false),
     (182, 'Produse necomandate', '', '/shop-reception/reception/nonRecommendedProducts', true, 166, true),
     (183, 'Fisiere meti', '', '/shop-reception/reception/metiFiles', true, 167, true),
+    (221, 'Detalii fisiere meti', '', '/shop-reception/reception/metiFiles/:id', true, 167, false),
     (184, 'Produse cu diferente', '', '/shop-reception/reception/productsDifferences', true, 168, true),
     (185, 'Trasabilitate suport', '', '/shop-reception/reception/trasabilitySupport', true, 169, true),
     (186, 'Lista camioane retur', '', '/shop-reception/package/trucksReturnList', true, 170, true),

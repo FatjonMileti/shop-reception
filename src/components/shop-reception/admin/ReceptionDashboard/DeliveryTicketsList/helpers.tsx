@@ -1,19 +1,23 @@
 import { Autocomplete, DatePicker, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { trimString } from 'components/shop-reception/utils'
 import dayjs from 'dayjs'
 import { formatUIDate } from 'utils/helpers'
 
 export const columns = [
   {
     title: 'Magazin',
-    field: 'shopCode',
+    field: 'shopCodeName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '200px',
+    render: row => trimString(row.shopCodeName, 50)
   },
   {
     title: 'Nume depozit',
-    field: 'depositName',
+    field: 'deposit.name',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    render: row => row.deposit?.name
   },
   {
     title: 'Bon Livrare',
@@ -23,7 +27,7 @@ export const columns = [
   },
   {
     title: 'Status',
-    field: 'status',
+    field: 'statusValue',
     align: 'left',
     type: 'string'
   },
