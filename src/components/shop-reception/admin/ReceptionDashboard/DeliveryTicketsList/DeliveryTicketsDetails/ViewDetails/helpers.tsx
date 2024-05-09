@@ -33,7 +33,7 @@ export const columns = [
     field: 'heterogeneousCode',
     align: 'left',
     type: 'string',
-    width: '120px',
+    width: '150px',
     disableSorting: true
   },
   {
@@ -110,7 +110,8 @@ export const columns = [
     field: 'measureUnit',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '120px'
   },
   {
     title: 'Cantitate asteptata pe suport',

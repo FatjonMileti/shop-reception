@@ -31,7 +31,7 @@ const ViewDetails = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: `/shop-reception/deliveryTicket/details/${id}/info`,
+          url: `/shop-reception/deliveryTicket/details/${id}`,
           tableFilters,
           page,
           rowsPerPage,
@@ -56,11 +56,11 @@ const ViewDetails = () => {
         validatedSupports
       })
 
-      setTableItems(toTableRowItems(response.list))
+      setTableItems(toTableRowItems(response.productSupportModelList))
       setTotalCount(response.page)
       setIsLoading(false)
 
-      const filters = response.list.reduce(
+      const filters = response.productSupportModelList.reduce(
         (acc, current) => {
           return {
             supportCode: [
@@ -102,7 +102,7 @@ const ViewDetails = () => {
       setFilters(filters)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -131,7 +131,7 @@ const ViewDetails = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },
@@ -153,7 +153,7 @@ const ViewDetails = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },

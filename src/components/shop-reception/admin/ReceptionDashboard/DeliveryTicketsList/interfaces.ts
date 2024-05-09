@@ -1,24 +1,84 @@
-export interface DeliveryTicket {
-  id: number | string
-  externalTicketId?: string
-  externalShopCode?: string
-  shopCode: string
+interface Deposit {
+  createdBy: string
   created: string
-  deliveryHour?: string
-  expectedDeliveryDate?: Date
-  transporterCode?: string
+  lastUpdateBy: string
+  lastUpdate: string
+  id: number
+  code: string
+  name: string
+  type: string
+  address: string
+  active: boolean
+  sftpPath: string
+  sftpIp: string
+  verifyFileReception: boolean
+  mondayFileException: any
+  tuesdayFileException: any
+  wednesdayFileException: any
+  thursdayFileException: any
+  fridayFileException: any
+  saturdayFileException: any
+  sundayFileException: boolean
+  maxHoursWithoutFiles: number
+  emails: string
+  validityPercentage: number
+  acceptReturn: boolean
+  office: string
+  bankName: string
+  bankAccount: string
+  capital: string
+  workingPoint: string
+  testDatabaseTermination: string
+  prodDatabaseTermination: string
+  activityCode: string
+  packagingResponsibleEmail: string
+  cif: string
+}
+
+interface ReceptionFile {
+  createdBy: string
+  created: string
+  lastUpdateBy: string
+  lastUpdate: string
+  id: number
+  fileName: string
+  filePath: string
+  depositCode: string
+  success: boolean
+  reason: any
+  cancellationCode: any
+  ticketCode: string
+  shopCodes: string
+  deposit: Deposit
+}
+
+export interface DeliveryTicket {
+  createdBy: string
+  created: string
+  lastUpdateBy: string
+  lastUpdate: string
+  id: number
+  externalTicketId: string
+  externalShopCode: string
+  shopCode: string
+  deliveryType: string
+  deliveryDate: string
+  deliveryHour: string
+  expectedDeliveryDate: string
+  transporterCode: string
   transportCode: string
   sealCode: string
   truckNumber: string
+  driverCode: string
+  temperature: any
   status: string
-  validatedShopCodes?: string
-  sentShopCodes?: string
-  receptionFile?: string
-  depositName: string
-  numberOfSupports: number
-  validatedSupports: number
+  validatedShopCodes: any
+  sentShopCodes: any
+  deposit: Deposit
+  receptionFile: ReceptionFile
+  statusValue: string
+  shopCodeName: string
 }
-
 export interface DeliveryTicketDetails {
   id: number
   externalOrderId: string
