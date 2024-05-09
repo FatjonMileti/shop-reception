@@ -66,6 +66,10 @@ const SupportCode = () => {
   const [finalizeModalContent, setFinalizeModalContent] = useState({ title: '', description: '', buttons: [] })
   const [isMoreSupportsModalOpen, setIsMoreSupportsModalOpen] = useState(false)
   const [moreSupportsModalContent, setMoreSupportsModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [isPriorityProductsModalOpen, setIsPriorityProductsModalOpen] = useState(false)
+  const [priorityProductsModalContent, setPriorityProductsModalContent] = useState({ description: '', listItems: [], buttons: [] })
+  const [isSensitiveAndShortDlcModalOpen, setIsSensitiveAndShortDlcModalOpen] = useState(false)
+  const [sensitiveAndShortDlcModalContent, setSensitiveAndShortDlcModalContent] = useState({ title: '', listItems: [], buttons: [] })
   const { showNotification } = useNotification()
   const navigate = useNavigate()
   const location = useLocation()
@@ -105,10 +109,6 @@ const SupportCode = () => {
     }
   )
 
-  if (isLoading || isLoadingSupports) {
-    return <div>Loading...</div>;
-  }
-
   const formik = useFormik({
     enableReinitialize: false,
     validateOnChange: false,
@@ -124,7 +124,14 @@ const SupportCode = () => {
             setCounter(localCounter);
           }
 
-          openMoreSupportsModal();
+          if (resp.priorityProducts?.length > 0) {
+            showPriorityProducts(resp.priorityProducts, resp.hasSensitiveProducts, resp.hasProductsWithShortDlc, resp.hasSgrProducts, resp.sgrProductsList);
+          } else if (resp.hasSensitiveProducts || resp.hasProductsWithShortDlc || resp.hasSgrProducts) {
+            showSensitiveAndShortDlcInfo(resp.hasSensitiveProducts, resp.hasProductsWithShortDlc, resp.hasSgrProducts, resp.sgrProductsList);
+          } else {
+            openMoreSupportsModal(supportId);
+          }
+
           formik.setFieldValue('reason', []);
           setSupportImageButtonVisible(false);
           setDefectImageVisible(false);
@@ -139,6 +146,10 @@ const SupportCode = () => {
       }
     }
   })
+
+  if (isLoading || isLoadingSupports) {
+    return <div>Loading...</div>;
+  }
 
   const toggleShowConfirmation = (): void => {
     setShowConfirmation(!showConfirmation)
@@ -200,20 +211,102 @@ const SupportCode = () => {
     setIsFinalizeModalOpen(false);
   };
 
-  const openMoreSupportsModal = () => {
+  const showPriorityProducts = (priorityProducts, hasSensitiveProducts, hasProductsWithShortDlc, hasSgrProducts, sgrProducts) => {
+    setPriorityProductsModalContent({
+      description: 'Există produse prioritare pentru vânzare: ',
+      listItems: priorityProducts,
+      buttons: [
+        {
+          label: 'Ok',
+          onClick: () => {
+            if (hasSensitiveProducts || hasProductsWithShortDlc || hasSgrProducts) {
+              showSensitiveAndShortDlcInfo(hasSensitiveProducts, hasProductsWithShortDlc, hasSgrProducts, sgrProducts);
+            } else {
+              openMoreSupportsModal(supportId);
+            }
+
+            setIsPriorityProductsModalOpen(false);
+          },
+          color: 'primary'
+        }
+      ]
+    });
+    setIsPriorityProductsModalOpen(true);
+  }
+
+  const closePriorityProductsModal = () => {
+    setIsPriorityProductsModalOpen(false);
+  };
+
+  const showSensitiveAndShortDlcInfo = (hasSensitiveProducts, hasShortDlcProducts, hasSgrProducts, sgrProducts) => {
+    const conditions = [
+      { condition: hasSensitiveProducts, message: 'produse sensibile' },
+      { condition: hasShortDlcProducts, message: 'produse cu DLC' },
+      { condition: hasSgrProducts, message: 'produse SGR' }
+    ];
+
+    const activeConditions = conditions.filter(c => c.condition);
+    const messages = activeConditions.map(c => c.message);
+
+    let productsMessage = '';
+    if (messages.length > 0) {
+      productsMessage = 'Pe acest suport există ' + messages.join(' şi ') + '!';
+    }
+
+    setSensitiveAndShortDlcModalContent({
+      title: productsMessage,
+      listItems: sgrProducts,
+      buttons: [
+        {
+          label: 'Ok',
+          onClick: () => {
+            openMoreSupportsModal(supportId);
+            setIsSensitiveAndShortDlcModalOpen(false);
+          },
+          color: 'primary'
+        }
+      ]
+    });
+    setIsSensitiveAndShortDlcModalOpen(true);
+  }
+
+  const closeSensitiveAndShortDlcModal = () => {
+    setIsSensitiveAndShortDlcModalOpen(false);
+  };
+
+  const openMoreSupportsModal = (supportId) => {
     setMoreSupportsModalContent({
       title: 'Există ambalaje secundare pe acest suport?',
       description: '',
       buttons: [
         {
           label: 'Nu',
-          onClick: () => setIsMoreSupportsModalOpen(false),
+          onClick: () => {
+            // deleteSecondarySupports();
+
+            formik.setFieldValue('supportCode', '')
+            setSupportId(null)
+            setSupportNumber('')
+
+            setIsMoreSupportsModalOpen(false);
+          },
           color: 'primary'
         },
         {
           label: 'Da',
           onClick: () => {
-            //navigate(URLS.AUTH_SUPPORT_SCAN_STEP_2)
+            formik.setValues({
+              supportCode: '',
+              supportTypeId: '',
+              reason: []
+            })
+            setSupportImageButtonVisible(false);
+            setDefectImageVisible(false);
+            setCounter(null)
+            setSupportId(null)
+            setSupportNumber('')
+
+            //navigate(URLS.AUTH_SUPPORT_SCAN_STEP_3)
             setIsMoreSupportsModalOpen(false);
           },
           color: 'secondary'
@@ -356,6 +449,20 @@ const SupportCode = () => {
       title={moreSupportsModalContent.title}
       description={moreSupportsModalContent.description}
       buttons={moreSupportsModalContent.buttons}
+    />,
+    <AlertModal
+      open={isPriorityProductsModalOpen}
+      handleClose={closePriorityProductsModal}
+      description={priorityProductsModalContent.description}
+      listItems={priorityProductsModalContent.listItems}
+      buttons={priorityProductsModalContent.buttons}
+    />,
+    <AlertModal
+      open={isSensitiveAndShortDlcModalOpen}
+      handleClose={closeSensitiveAndShortDlcModal}
+      title={sensitiveAndShortDlcModalContent.title}
+      listItems={sensitiveAndShortDlcModalContent.listItems}
+      buttons={sensitiveAndShortDlcModalContent.buttons}
     />,
     <>
       <Typography variant='medium' component='p'>Numǎr camion: {truck.truckNumber}</Typography>
