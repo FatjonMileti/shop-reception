@@ -1,4 +1,4 @@
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 import { DownloadIcon } from 'icons'
 
@@ -15,7 +15,8 @@ export const getColumns = ({
   depositUserClassified,
   responsibleOptions,
   updateResponsible,
-  showAccept
+  showAccept,
+  uploadImages
 }) => [
   {
     title: 'Tip ambalaj',
@@ -65,10 +66,16 @@ export const getColumns = ({
     title: 'Imagini magazin',
     field: 'hasShopImages',
     render: row =>
-      row.hasShopImages ? (
+      (false && row.hasShopImages) ? (
         <div onClick={() => downloadImages(row.id, 'shop')}>
           <DownloadIcon />
         </div>
+      ) : (true || row.canUpload) ? (
+        <Button
+          variant="contained"
+          label="Incarca"
+          onClick={() => uploadImages(row.id)}
+        />
       ) : (
         <div />
       )

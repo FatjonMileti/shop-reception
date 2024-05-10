@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { BasicTable, Button } from '@fullscreendigital/carrefour-dex-fe'
 import s from '../../../../commonStyles.modules.scss'
 import { getColumns, getDownloadUrl, toLitigationDataPayload } from './helpers'
@@ -22,6 +23,8 @@ const Details = ({
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState<boolean>(false)
 
   const { showNotification } = useNotification()
+
+  const navigate = useNavigate()
 
   const downloadImages = async (supportId, type) => {
     try {
@@ -99,6 +102,9 @@ const Details = ({
       )
   })
 
+  const uploadImages = rowId =>
+    navigate(`/shop-reception/package/storeReturnsDisputesImages/${rowId}`)
+
   const columns = useMemo(
     () =>
       getColumns({
@@ -109,7 +115,8 @@ const Details = ({
         depositUserClassified,
         responsibleOptions,
         updateResponsible,
-        showAccept
+        showAccept,
+        uploadImages
       }),
     [responsibleOptions, showMessage, showResponsibility]
   )

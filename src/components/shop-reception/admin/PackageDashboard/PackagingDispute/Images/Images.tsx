@@ -21,7 +21,7 @@ const Images = ({ pictureModels }) => {
         const imageResults = await Promise.all(
           pictureModels.map(async picture => {
             if (picture.deleted) {
-              return { ...picture, src: '', title: getImageTitle(picture) }
+              return { ...picture, src: '', title: picture.title || getImageTitle(picture) }
             } else {
               try {
                 const response = await makeCoreGetFileRequest('/shop-reception/pictures/export', {
@@ -34,10 +34,10 @@ const Images = ({ pictureModels }) => {
                 return {
                   ...picture,
                   src: blobUrl,
-                  title: getImageTitle(picture)
+                  title: picture.title || getImageTitle(picture)
                 }
               } catch (e) {
-                return { ...picture, src: '', title: getImageTitle(picture) }
+                return { ...picture, src: '', title: picture.title || getImageTitle(picture) }
               }
             }
           })

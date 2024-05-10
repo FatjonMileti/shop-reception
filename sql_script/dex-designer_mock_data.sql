@@ -281,6 +281,7 @@ VALUES
     (188, 'Sold ambalaje', '', '/shop-reception/package/balance', true, 172, true),
     (189, 'Litigii ambalaje - retur magazine', '', '/shop-reception/package/storeReturnsDisputes', true, 173, true),
     (289, 'Litigiu aviz', '', '/shop-reception/package/storeReturnsDisputes/:id', true, 173, false),
+    (290, 'Dovezi magazin', '', '/shop-reception/package/storeReturnsDisputesImages/:id', true, 173, false),
     (190, 'Diferente tip ambalaj', '', '/shop-reception/package/typesDifferences', true, 174, true),
     (191, 'Ambalaje returnate', '', '/shop-reception/package/returned', true, 175, true),
     (192, 'Conformitate ambalaje', '', '/shop-reception/package/compliance', true, 176, true),
