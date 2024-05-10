@@ -7,11 +7,17 @@ import { makeCoreGetRequest } from "../../../../../../utils/api";
 import { formatErrorMessage } from "../../../../../../utils/formatting";
 import { useNotification } from "../../../../../../hooks";
 import { useState } from "react";
+import AlertModal from "../../../AlertModal/AlertModal";
+import { URLS } from "../../../constants";
 
 const Step7 = () => {
-  const { showNotification } = useNotification()
-  const [infoLoaded, setInfoLoaded] = useState(false)
-  const navigate = useNavigate()
+  const { showNotification } = useNotification();
+  const [infoLoaded, setInfoLoaded] = useState(false);
+  const [isEmptyTruckModalOpen, setIsEmptyTruckModalOpen] = useState(false);
+  const [finalizeEmptyTruckContent, setEmptyTruckModalContent] = useState({ title: '', description: '', buttons: [] });
+  const [isFinalizedTruckModalOpen, setIsFinalizedTruckModalOpen] = useState(false);
+  const [finalizeTruckContent, setFinalizedTruckModalContent] = useState({ title: '', description: '', buttons: [] });
+  const navigate = useNavigate();
   let { id } = useParams();
 
   const { data: manualTruck, isLoading: isLoadingManualTruck} = useQuery(
@@ -23,7 +29,7 @@ const Step7 = () => {
       onSuccess: () => setInfoLoaded(true),
       onError: error => {
         showNotification({
-          message: `Error while fetching supports. ${formatErrorMessage(error)}`,
+          message: `Error while fetching truck. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -38,7 +44,7 @@ const Step7 = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching supports. ${formatErrorMessage(error)}`,
+          message: `Error while fetching truck. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -53,7 +59,7 @@ const Step7 = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
+          message: `Error while fetching truck. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -63,17 +69,98 @@ const Step7 = () => {
   const { data: canReturnToHub, isLoading: isLoadingCanReturnToHub} = useQuery(
     'hubAssigned',
     async () => {
-      return await makeCoreGetRequest('rm-api/truck/exit/confirmHubAssigned', null)
+      return await makeCoreGetRequest('/rm-api/truck/exit/confirmHubAssigned', null)
     },
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching supports. ${formatErrorMessage(error)}`,
+          message: `Error while fetching hub data. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
     }
   )
+
+  const finalizeTruck = (destination) => {
+    try {
+      makeCoreGetRequest('/rm-api/support/finalise/' + id, null).then()
+
+      if (destination === 'home') {
+        navigate('/goodsReception')
+      } else if (destination === 'return') {
+        navigate(URLS.AUTH_TRUCK_STEP_5, { state:
+          {
+            truckNumber: truck.truckNumber,
+            driverName: truck.driverName,
+          }
+        })
+      }
+    }
+    catch (error) {
+      showNotification({
+        message: `Error while finalizing truck. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const openEmptyTruckModal = () => {
+    setEmptyTruckModalContent({
+      title: 'Camionul nu mai conţine suporţi de descărcat în nici o altă destinaţie! Confirmaţi: ',
+      description: '',
+      buttons: [
+        {
+          label: 'Da',
+          onClick: () => {
+            finalizeTruck('home')
+            setIsEmptyTruckModalOpen(false);
+          },
+          color: 'primary'
+        },
+        {
+          label: 'Nu',
+          onClick: () => {
+            setIsEmptyTruckModalOpen(false);
+          },
+          color: 'secondary'
+        }
+      ]
+    });
+    setIsEmptyTruckModalOpen(true);
+  }
+
+  const closeEmptyTruckModal = () => {
+    setIsEmptyTruckModalOpen(false);
+  };
+
+  const openFinalizeTruckModal = () => {
+    setFinalizedTruckModalContent({
+      title: 'Confirmaţi finalizarea recepţiei camionului?',
+      description: '',
+      buttons: [
+        {
+          label: 'Da',
+          onClick: () => {
+            finalizeTruck('home')
+            setIsFinalizedTruckModalOpen(false);
+          },
+          color: 'primary'
+        },
+        {
+          label: 'Nu',
+          onClick: () => {
+            setIsFinalizedTruckModalOpen(false);
+          },
+          color: 'secondary'
+        }
+      ]
+    });
+    setIsFinalizedTruckModalOpen(true);
+  }
+
+  const closeFinalizeTruckModal = () => {
+    setIsFinalizedTruckModalOpen(false);
+  };
 
   if (isLoadingManualTruck || isLoadingTruck || isLoadingCounter || isLoadingCanReturnToHub) {
     return <div>Loading...</div>;
@@ -85,39 +172,54 @@ const Step7 = () => {
       maxWidth='xs'
       items={[
         <TitleHeader title='ÎNREGISTREAZǍ CAMION' />,
-        (manualTruck && !infoLoaded) &&
+        (!manualTruck && infoLoaded) &&
         <Button
           type='button'
           variant='contained'
           label='CAMION GOL'
           style={{ width: '100%' }}
-          onClick={null}
+          onClick={openEmptyTruckModal}
         />,
-        (manualTruck && !infoLoaded) &&
+        (!manualTruck && infoLoaded) &&
         <Button
           type='button'
           variant='contained'
           label='RESIGILEAZĂ CAMION'
           style={{ width: '100%' }}
-          onClick={null}
+          onClick={() => {navigate(URLS.AUTH_TRUCK_STEP_6.replace(':id', id))}
+          }
         />,
-        (manualTruck && !infoLoaded) &&
+        (!manualTruck && infoLoaded && canReturnToHub && (truck.flowType === 'OUT_HUB')) &&
         <Button
           type='button'
           variant='contained'
           label='RETUR AMBALAJE'
           style={{ width: '100%' }}
-          onClick={null}
-          disabled
+          onClick={() => {
+            finalizeTruck('return')
+          }}
         />,
-        (manualTruck && infoLoaded && canReturnToHub && (truck.flowType === 'OUT_HUB')) &&
+        (manualTruck && infoLoaded) &&
         <Button
           type='button'
           variant='contained'
           label='FINALIZEAZĂ CAMION'
           style={{ width: '100%' }}
-          onClick={null}
-          disabled
+          onClick={openFinalizeTruckModal}
+        />,
+        <AlertModal
+          open={isEmptyTruckModalOpen}
+          handleClose={closeEmptyTruckModal}
+          title={finalizeEmptyTruckContent.title}
+          description={finalizeEmptyTruckContent.description}
+          buttons={finalizeEmptyTruckContent.buttons}
+        />,
+        <AlertModal
+          open={isFinalizedTruckModalOpen}
+          handleClose={closeFinalizeTruckModal}
+          title={finalizeTruckContent.title}
+          description={finalizeTruckContent.description}
+          buttons={finalizeTruckContent.buttons}
         />,
         <>
           <Typography variant='medium' component='p'>Numǎr camion: {counter.truckNumber}</Typography>
