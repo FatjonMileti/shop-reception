@@ -10,7 +10,7 @@ import { makeCorePostRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { FileUpload } from 'components/core-ui/FileUpload'
 
-const UploadForm = ({ id, refetchImages }) => {
+const UploadForm = ({ id, refetchImages, uploadModel }) => {
   const { showNotification } = useNotification()
 
   const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +45,7 @@ const UploadForm = ({ id, refetchImages }) => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      comment: null,
+      comment: uploadModel.comment,
       file: null
     },
     validationSchema,

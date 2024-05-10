@@ -45,16 +45,16 @@ const PackagingDispute = () => {
       <InfoItems
         itemsPerRow={3}
         items={[
-          { name: litigation?.depositName, label: 'Depozit:' },
           { name: litigation?.noticeNumber, label: 'Numar aviz magazin:' },
-          { name: formatUIDate(litigation?.noticeDate), label: 'Data aviz magazin:' },
+          { name: litigation?.depositName, label: 'Depozit:' },
+          { name: litigation?.noticeDate, label: 'Data aviz magazin:' },
           { name: litigation?.depositType?.value, label: 'Tip depozit:' },
           { name: litigation?.shopName, label: 'Magazin:' },
           { name: litigation?.shopType, label: 'Tip magazin:' },
           { name: litigation?.hubName, label: 'Via:' },
-          { name: formatUIDate(litigation?.taskDate), label: 'Data task:' },
+          { name: litigation?.taskDate, label: 'Data task:' },
           {
-            name: formatUIDate(litigation?.taskExpirationDate),
+            name: litigation?.taskExpirationDate,
             label: 'Data expirare task magazin:'
           },
           { name: litigation?.taskStatus, label: 'Status:' }

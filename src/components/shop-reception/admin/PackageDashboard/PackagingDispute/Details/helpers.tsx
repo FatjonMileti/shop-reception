@@ -66,16 +66,12 @@ export const getColumns = ({
     title: 'Imagini magazin',
     field: 'hasShopImages',
     render: row =>
-      (false && row.hasShopImages) ? (
+      row.hasShopImages ? (
         <div onClick={() => downloadImages(row.id, 'shop')}>
           <DownloadIcon />
         </div>
-      ) : (true || row.canUpload) ? (
-        <Button
-          variant="contained"
-          label="Incarca"
-          onClick={() => uploadImages(row.id)}
-        />
+      ) : row.canUpload ? (
+        <Button variant="contained" label="Incarca" onClick={() => uploadImages(row.id)} />
       ) : (
         <div />
       )
@@ -126,7 +122,7 @@ export const getColumns = ({
                 onChange={value => updateResponsible({ value: value.value, supportId: row.id })}
               />
             ) : (
-              <div>{row.responsibility || ''}</div>
+              <div>{row.responsibility.value || ''}</div>
             )
         }
       ]
@@ -137,4 +133,4 @@ export const getDownloadUrl = (supportId, type) =>
   `/shop-reception/return-litigation/details/supports/${supportId}/download-archive?type=${type}`
 
 export const toLitigationDataPayload = list =>
-  list.map(item => ({ id: item.id, responsible: item.responsibility }))
+  list.map(item => ({ id: item.id, responsible: item.responsibility.key }))

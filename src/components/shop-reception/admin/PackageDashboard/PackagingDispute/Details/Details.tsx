@@ -138,6 +138,7 @@ const Details = ({
         type: 'success'
       })
       refreshData()
+      closeConfirmationModal()
     },
     onError: error =>
       handleQueryError(error, 'A aparut o eroare la salvarea datelor.', showNotification)

@@ -20,7 +20,7 @@ const PackingDisputeImages = () => {
         const result = await makeCoreGetRequest(
           `/shop-reception/return-litigation/details/supports/${id}/images`
         )
-        return toImagesData(result)
+        return { images: toImagesData(result), uploadModel: result.uploadModel }
       }
       return null
     },
@@ -38,8 +38,12 @@ const PackingDisputeImages = () => {
 
   return (
     <div className={s.mainContainer}>
-      <UploadForm id={id} refetchImages={refetch} />
-      {imageData && <ImagesList images={imageData} />}
+      {imageData && (
+        <>
+          <UploadForm id={id} refetchImages={refetch} uploadModel={imageData.uploadModel} />
+          <ImagesList images={imageData.images} />
+        </>
+      )}
     </div>
   )
 }

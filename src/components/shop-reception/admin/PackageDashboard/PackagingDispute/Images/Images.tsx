@@ -58,7 +58,7 @@ const Images = ({ pictureModels }) => {
 
   return (
     <>
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
         {images.map(image => (
           <Grid item key={`${image.path}-${image.locationName}`} xs={12} sm={6} md={4}>
             <div>{image.title}</div>
