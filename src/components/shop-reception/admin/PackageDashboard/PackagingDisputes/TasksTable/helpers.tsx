@@ -2,7 +2,7 @@ import { Autocomplete, DatePicker, Input } from '@fullscreendigital/carrefour-de
 import { PermissionRoles } from 'components/shop-reception/enums'
 import dayjs from 'dayjs'
 
-export const getColumns = canView => [
+export const getColumns = (canView: boolean, type: string) => [
   {
     title: 'Depozit',
     field: 'depositName',
@@ -48,6 +48,16 @@ export const getColumns = canView => [
         {
           title: 'Data rezolvare task magazin',
           field: 'shopFinaliseTime',
+          align: 'left',
+          type: 'date'
+        }
+      ]
+    : []),
+  ...(type === 'finalised'
+    ? [
+        {
+          title: 'Data rezolvare task depozit',
+          field: 'depositFinaliseTime',
           align: 'left',
           type: 'date'
         }

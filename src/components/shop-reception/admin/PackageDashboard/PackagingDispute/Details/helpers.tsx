@@ -130,4 +130,4 @@ export const getDownloadUrl = (supportId, type) =>
   `/shop-reception/return-litigation/details/supports/${supportId}/download-archive?type=${type}`
 
 export const toLitigationDataPayload = list =>
-  list.map(item => ({ supportId: item.id, responsible: item.responsibility }))
+  list.map(item => ({ id: item.id, responsible: item.responsibility }))

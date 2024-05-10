@@ -119,7 +119,7 @@ const Details = ({
 
   const mutateData = async () => {
     await makeCorePostRequest(
-      `/return-litigation/details/${litigationId}`,
+      `/shop-reception/return-litigation/details/${litigationId}`,
       toLitigationDataPayload(list)
     )
   }
@@ -145,7 +145,12 @@ const Details = ({
           className: s.table
         }}
       />
-      <Button variant="contained" label="Salveaza si trimite" onClick={openConfirmationModal} />
+      <Button
+        variant="contained"
+        label="Salveaza si trimite"
+        onClick={openConfirmationModal}
+        style={{ marginTop: '40px' }}
+      />
       <ConfirmationModal
         isModalOpen={isConfirmationModalOpen}
         closeModal={closeConfirmationModal}
