@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
 import { getImageTitle } from './helpers'
 import { useEffect, useState } from 'react'
-import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
+import { makeCoreGetFileRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { ImageDetails } from './ImageDetails'

@@ -168,44 +168,42 @@ const InProgressTasks = () => {
   }
 
   return (
-    <>
-      <Table
-        hideCheckbox
-        columns={columns}
-        items={tableItems}
-        fetchData={fetchData}
-        isLoading={isLoading}
-        totalCount={totalCount}
-        shouldRefreshData={shouldRefreshData}
-        setShouldRefreshData={setShouldRefreshData}
-        toolbarActions={[
-          {
-            label: 'Export',
-            icon: <DownloadIcon />,
-            onClick: exportFile
+    <Table
+      hideCheckbox
+      columns={columns}
+      items={tableItems}
+      fetchData={fetchData}
+      isLoading={isLoading}
+      totalCount={totalCount}
+      shouldRefreshData={shouldRefreshData}
+      setShouldRefreshData={setShouldRefreshData}
+      toolbarActions={[
+        {
+          label: 'Export',
+          icon: <DownloadIcon />,
+          onClick: exportFile
+        }
+      ]}
+      rowActions={[
+        {
+          label: 'Detalii',
+          labelColor: 'white',
+          typographyVariant: 'medium',
+          backgroundColor: '#16a085',
+          desktopIcon: <ViewActionIcon />,
+          onClick: (e, rowId) => {
+            navigate(`/shop-reception/package/storeReturnsDisputes/${rowId}`)
           }
-        ]}
-        rowActions={[
-          {
-            label: 'Detalii',
-            labelColor: 'white',
-            typographyVariant: 'medium',
-            backgroundColor: '#16a085',
-            desktopIcon: <ViewActionIcon />,
-            onClick: (e, rowId) => {
-              navigate(`/shop-reception/package/storeReturnsDisputes/${rowId}`)
-            }
-          }
-        ]}
-        rowActionsWidth="130px"
-        filters={filters}
-        filtersButtonLabel="Filtre"
-        filtersLabel="Filtre"
-        appliedFiltersLabel="Filtre aplicate"
-        cancelFiltersButtonLabel="Anuleaza"
-        applyFiltersButtonLabel="Aplica"
-      />
-    </>
+        }
+      ]}
+      rowActionsWidth="130px"
+      filters={filters}
+      filtersButtonLabel="Filtre"
+      filtersLabel="Filtre"
+      appliedFiltersLabel="Filtre aplicate"
+      cancelFiltersButtonLabel="Anuleaza"
+      applyFiltersButtonLabel="Aplica"
+    />
   )
 }
 

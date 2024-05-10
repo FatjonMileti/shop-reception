@@ -75,6 +75,7 @@ const PackagingDispute = () => {
                 depositUserClassified={litigation?.depositUserClassified}
                 refreshData={refetch}
                 showAccept={litigation?.showAccept}
+                litigationId={litigation?.id}
               />
             ),
             label: 'Detalii',
@@ -86,7 +87,9 @@ const PackagingDispute = () => {
             tabIndex: 1
           },
           {
-            content: <StatusTraceability />,
+            content: (
+              <StatusTraceability traceabilityReturnTruck={litigation?.traceabilityReturnTruck} />
+            ),
             label: 'Transabilitate status',
             tabIndex: 2
           }
