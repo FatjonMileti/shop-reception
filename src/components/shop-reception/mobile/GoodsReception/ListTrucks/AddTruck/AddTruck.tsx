@@ -24,7 +24,7 @@ const AddTruck = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const response = await makeCorePostRequest('/rm-api/truck/createTruck', values);
+        const response = await makeCorePostRequest('/shop-reception-mobile/truck/createTruck', values);
         navigate(URLS.AUTH_ADD_TRUCK_STEP_2, { state: { response } })
       } catch (error) {
         showNotification({
@@ -39,7 +39,7 @@ const AddTruck = () => {
   const { data: truck, isLoading} = useQuery(
       'truck',
       async () => {
-        return await makeCoreGetRequest('/rm-api/truck/getTruckCreationDTO/' + 'truckId', null)
+        return await makeCoreGetRequest('/shop-reception-mobile/truck/getTruckCreationDTO/' + 'truckId', null)
       },
       {
         onError: error => {

@@ -23,7 +23,7 @@ const Step7 = () => {
   const { data: manualTruck, isLoading: isLoadingManualTruck} = useQuery(
     'manualTruck',
     async () => {
-      return await makeCoreGetRequest('/rm-api/truck/getManualCreatedInfo/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/getManualCreatedInfo/' + id, null)
     },
     {
       onSuccess: () => setInfoLoaded(true),
@@ -39,7 +39,7 @@ const Step7 = () => {
   const { data: truck, isLoading: isLoadingTruck} = useQuery(
     'truck',
     async () => {
-      return await makeCoreGetRequest('/rm-api/truck/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/' + id, null)
     },
     {
       onError: error => {
@@ -54,7 +54,7 @@ const Step7 = () => {
   const { data: counter, isLoading: isLoadingCounter} = useQuery(
     'counter',
     async () => {
-      return await makeCoreGetRequest('/rm-api/support/counter/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/support/counter/' + id, null)
     },
     {
       onError: error => {
@@ -69,7 +69,7 @@ const Step7 = () => {
   const { data: canReturnToHub, isLoading: isLoadingCanReturnToHub} = useQuery(
     'hubAssigned',
     async () => {
-      return await makeCoreGetRequest('/rm-api/truck/exit/confirmHubAssigned', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/exit/confirmHubAssigned', null)
     },
     {
       onError: error => {
@@ -83,7 +83,7 @@ const Step7 = () => {
 
   const finalizeTruck = (destination) => {
     try {
-      makeCoreGetRequest('/rm-api/support/finalise/' + id, null).then()
+      makeCoreGetRequest('/shop-reception-mobile/support/finalise/' + id, null).then()
 
       if (destination === 'home') {
         navigate('/goodsReception')

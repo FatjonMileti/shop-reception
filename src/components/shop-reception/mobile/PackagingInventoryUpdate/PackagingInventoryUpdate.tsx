@@ -22,7 +22,7 @@ const PackagingInventoryUpdate = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        await makeCorePostRequest('/rm-api/support/inventory/save', values);
+        await makeCorePostRequest('/shop-reception-mobile/support/inventory/save', values);
         clearFields()
       } catch (error) {
         showNotification({
@@ -45,7 +45,7 @@ const PackagingInventoryUpdate = () => {
   const { data: supportList, isLoading} = useQuery(
     'supportList',
     async () => {
-        return await makeCoreGetRequest('/rm-api/support/all/list', null)
+        return await makeCoreGetRequest('/shop-reception-mobile/support/all/list', null)
     },
     {
         onError: error => {
@@ -60,7 +60,7 @@ const PackagingInventoryUpdate = () => {
   const { data: shopCode, isLoading: isLoadingShopCode} = useQuery(
     'shopCode',
     async () => {
-        const shopCode = await makeCoreGetRequest('/rm-api/getShopCode', null)
+        const shopCode = await makeCoreGetRequest('/shop-reception-mobile/getShopCode', null)
         await formik.setFieldValue('shopCode', Number(shopCode.value));
 
         return shopCode.value;
@@ -139,7 +139,7 @@ const PackagingInventoryUpdate = () => {
           />
           {(formik.values.defective > 0 && +selectedSupportId > 0) && (
             <ImageUpload
-              uploadUrl={'/rm-api/support/upload/' + selectedSupportId}
+              uploadUrl={'/shop-reception-mobile/support/upload/' + selectedSupportId}
               onSuccess={handleSuccess}
               onError={handleError}
               inputId='defective'
