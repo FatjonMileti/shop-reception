@@ -22,7 +22,7 @@ const ReceptionStatus = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: `/shop-reception/deliveryTicket/details/${id}/traceabilityReception`,
+          url: `/shop-reception/deliveryTicket/details/${id}?tab=traceability_reception`,
           tableFilters,
           page,
           rowsPerPage,
@@ -31,12 +31,12 @@ const ReceptionStatus = () => {
         })
       )
 
-      setTableItems(toTableRowItems(response.list))
+      setTableItems(toTableRowItems(response.traceabilityScanInProcessModelsList))
       setTotalCount(response.page)
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

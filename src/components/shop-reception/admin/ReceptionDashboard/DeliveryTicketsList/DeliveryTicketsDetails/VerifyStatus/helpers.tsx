@@ -1,58 +1,62 @@
+import { formatUIDate } from 'utils/helpers'
+
 export const columns = [
   {
     title: 'Status',
-    field: 'supportStatus',
+    field: 'statusValue',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Tip scanare',
-    field: 'q',
+    field: 'processType',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Contor suporti',
-    field: 'w',
+    field: 'counter',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Numar inmatriculare',
-    field: 'e',
+    field: 'truckNumber',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Creat de',
-    field: 'r',
+    field: 'createdBy',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Data crearii',
-    field: 't',
+    field: 'created',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    render: row => formatUIDate(row.created)
   },
   {
     title: 'Actualizat de',
-    field: 'y',
+    field: 'updatedBy',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Ultima actualizare',
-    field: 'u',
+    field: 'updated',
     align: 'left',
     type: 'string',
-    disableSorting: true
-  },
+    disableSorting: true,
+    render: row => formatUIDate(row.updated)
+  }
 ]

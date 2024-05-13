@@ -1,14 +1,12 @@
-import { DeliveryTicketDetails } from '../../interfaces'
-
-export const toTableRowItems = (items: DeliveryTicketDetails[]) =>
-  items.map((item: DeliveryTicketDetails) => ({
+export const toTableRowItems = items =>
+  items.map(item => ({
     id: item.id,
-    supportStatus: item.supportStatus || '',
-    q: '',
-    w: '',
-    e: '',
-    r: '',
-    t: '',
-    y: '',
-    u: ''
+    statusValue: item.statusValue || '',
+    createdBy: item.createdBy || '',
+    created: item.created || '',
+    updatedBy: item.updatedBy || '',
+    updated: item.updated || '',
+    processType: item.processType || '',
+    counter: item.counter || '',
+    truckNumber: item.truckNumber || ''
   }))

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, redirect, useParams } from 'react-router-dom'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { Table } from 'components/core-ui/Table'
 import { useNotification } from 'hooks'
@@ -12,6 +12,7 @@ import { DeliveryTicketDetails } from '../../interfaces'
 import { useQuery } from 'react-query'
 import { formatAndDownloadResponse } from 'utils/helpers'
 import { columns, drawerFilters } from './helpers'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
 
 const ViewDetails = () => {
   const { showNotification } = useNotification()
@@ -31,7 +32,7 @@ const ViewDetails = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: `/shop-reception/deliveryTicket/details/${id}/info`,
+          url: `/shop-reception/deliveryTicket/details/${id}`,
           tableFilters,
           page,
           rowsPerPage,
@@ -56,11 +57,11 @@ const ViewDetails = () => {
         validatedSupports
       })
 
-      setTableItems(toTableRowItems(response.list))
+      setTableItems(toTableRowItems(response.productSupportModelList))
       setTotalCount(response.page)
       setIsLoading(false)
 
-      const filters = response.list.reduce(
+      const filters = response.productSupportModelList.reduce(
         (acc, current) => {
           return {
             supportCode: [
@@ -102,7 +103,7 @@ const ViewDetails = () => {
       setFilters(filters)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -131,7 +132,7 @@ const ViewDetails = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },
@@ -153,7 +154,7 @@ const ViewDetails = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching file. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       },
@@ -193,6 +194,16 @@ const ViewDetails = () => {
           { label: 'Numarul de suporti ajungi la destinatie:', name: infoData?.validatedSupports }
         ]}
       />
+
+      <Link to={`/shop-reception/reception/metiFiles?ticketExternalId=${id}`}>
+        <Button
+          variant="outlined"
+          onClick={() => {}}
+          label="Fisiere METI"
+          style={{ marginTop: '16px' }}
+        />
+      </Link>
+
       <Table
         hideCheckbox
         columns={columns}
@@ -210,14 +221,13 @@ const ViewDetails = () => {
             label: 'Export',
             icon: <DownloadIcon />,
             onClick: () => exportFiles()
-          },
-
-          {
-            label: 'Fisiere METI',
-            icon: <DownloadIcon />,
-            onClick: () => downloadMetiFiles()
           }
         ]}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </>
   )

@@ -255,20 +255,25 @@ interface SGRProducts {
 
 interface MetiFile {
   id: number
-  deliverySlip: string
-  store: string
-  warehouse: string
-  integrationOperator: string
-  status: string
-  sentFile: string
-  receivedFile: string
-  sentToMeti: string
-  receivedFromMeti: string
-  productsDifferences: string
-  metiProductDifferences: string
-  exportNonIntegratedProducts: string
-  error: boolean
-  forgot: boolean
+  shopCode: string
+  shopName: string
+  depositName: string
+  depositCode: string
+  createdBy: string
+  fileStatus: string
+  ticketExternalId: string
+  receivedFilePath: string
+  sentFilePath: string
+  createdDate: string
+  sentTime: string
+  receivedTime: string
+  hasError: boolean
+  hasDifference: boolean
+  hasMetiDifference: boolean
+  hasRetry: boolean
+  hasNotIntegrated: boolean
+  numberOfSentFiles: number
+  numberOfReceivedFiles: number
 }
 
 interface MetiProduct {

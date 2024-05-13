@@ -253,21 +253,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Selectează cod suport"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
-        ]}
+        options={[]}
       />
     ),
     type: 'autocomplete',
@@ -278,26 +264,7 @@ export const drawerFilters = [
     name: 'productCode',
     value: '',
     filter: (
-      <Autocomplete
-        variant="outlined"
-        label="Selecteaza produs"
-        disableClearable
-        options={[
-          {
-            value: '1',
-            label: '1'
-          },
-
-          {
-            value: '2',
-            label: '2'
-          },
-          {
-            value: '3',
-            label: '3'
-          }
-        ]}
-      />
+      <Autocomplete variant="outlined" label="Selecteaza produs" disableClearable options={[]} />
     ),
     type: 'autocomplete',
     label: 'Selecteaza produs'

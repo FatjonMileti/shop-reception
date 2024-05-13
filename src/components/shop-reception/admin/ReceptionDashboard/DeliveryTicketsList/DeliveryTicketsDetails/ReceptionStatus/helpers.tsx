@@ -1,37 +1,41 @@
+import { formatUIDate } from "utils/helpers";
+
 export const columns = [
   {
     title: 'Status',
-    field: 'supportStatus',
+    field: 'statusValue',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Creat de',
-    field: 'q',
+    field: 'createdBy',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Data crearii',
-    field: 'w',
+    field: 'created',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    render: row => formatUIDate(row.created)
   },
   {
     title: 'Actualizat de',
-    field: 'e',
+    field: 'updatedBy',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Ultima actualizare',
-    field: 'r',
+    field: 'updated',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    render: row => formatUIDate(row.updated)
   }
 ]

@@ -1,7 +1,7 @@
 import { Autocomplete, DatePicker, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Box } from '@mui/material'
 import { IconCell } from 'components/core-ui/IconCell'
-import dayjs from 'dayjs'
+import { Link } from 'react-router-dom'
 import { formatUIDate } from 'utils/helpers'
 
 export const columns = [
@@ -26,14 +26,19 @@ export const columns = [
     field: 'supportCode',
     align: 'left',
     type: 'string',
-    width: '120px'
+    width: '120px',
+    render: row => (
+      <Link to={`/shop-reception/reception/deliverySupportAction/${row.supportCode}`}>
+        {row.supportCode}
+      </Link>
+    )
   },
   {
     title: 'Eticheta suport',
     field: 'heterogeneousCode',
     align: 'left',
     type: 'string',
-    width: '120px',
+    width: '150px',
     disableSorting: true
   },
   {
@@ -54,7 +59,7 @@ export const columns = [
   },
   {
     title: 'Status receptie suport',
-    field: 'supportStatus',
+    field: 'supportStatusValue',
     align: 'left',
     type: 'string',
     width: '120px',
@@ -110,7 +115,8 @@ export const columns = [
     field: 'measureUnit',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '120px'
   },
   {
     title: 'Cantitate asteptata pe suport',
