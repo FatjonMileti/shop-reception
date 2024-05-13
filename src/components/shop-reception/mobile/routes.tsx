@@ -104,7 +104,7 @@ export const useMerchandiseRoutes = applicationPages => {
         }
       />
       <Route
-        path={URLS.AUTH_SUPPORT_CODE}
+        path={URLS.AUTH_SUPPORT_SCAN_STEP_1}
         element={
           <PrivateRoute
             component={SupportCode}
@@ -305,7 +305,7 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route path={URLS.AUTH_TRUCK_STEP_4} element={<Step4 />} />
       <Route path={URLS.AUTH_TRUCK_STEP_5} element={<Step5 />} />
       <Route path={URLS.AUTH_TRUCK_STEP_6} element={<Step6 />} />
-      <Route path={URLS.AUTH_TRUCK_STEP_7} element={<Step7 />} />
+      <Route path={URLS.AUTH_SUPPORT_SCAN_STEP_4} element={<Step7 />} />
 
       {/* TODO: Delete after integration of steppers in parent pages */}
       <Route path={URLS.AUTH_ADD_TRUCK_STEP_2} element={<AddTruckStep2 />} />

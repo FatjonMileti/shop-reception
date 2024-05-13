@@ -31,7 +31,7 @@ const TruckDetail = () => {
         await makeCorePostRequest("/rm-api/truck/approve", payload);
 
         const item = {id}
-        navigate(URLS.AUTH_SUPPORT_CODE, { state: { item } })
+        navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, { state: { item } })
       } catch (error) {
         showNotification({
           message: `Error while submitting. ${formatErrorMessage(error)}`,

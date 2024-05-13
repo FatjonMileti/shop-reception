@@ -27,3 +27,109 @@ export const getDepositTypesOptions = (
     }
   )
 }
+
+export const getShopOptions = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['shop-codes'],
+    async () => {
+      const result = await makeCoreGetRequest('/shop-reception/shops/codes')
+
+      const resultOptions = result.list.map(
+        (item: any): AutocompleteOption => ({
+          label: item.displayName,
+          value: item.code
+        })
+      )
+
+      return resultOptions || []
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea magazinelor.', showNotification)
+    }
+  )
+}
+
+export const getHubOptions = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['hubs'],
+    async () => {
+      const data = await makeCoreGetRequest('/shop-reception/hubs/accessible')
+      return data.map(item => ({
+        label: item.displayName,
+        value: item.id
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea huburilor.', showNotification)
+    }
+  )
+}
+
+export const getSupportTypeOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['hubs'],
+    async () => {
+      const data = await makeCoreGetRequest('/shop-reception/support-flows/support-types')
+      return data.map(item => ({
+        label: item.displayName,
+        value: item.id
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea tipurilor de suport.',
+          showNotification
+        )
+    }
+  )
+}
+
+export const getParentSocietyOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['parent-societies'],
+    async () => {
+      const result = await makeCoreGetRequest('/shop-reception/shops/parent-society')
+      const resultOptions = result.map(
+        (item: string): AutocompleteOption => ({
+          label: item,
+          value: item
+        })
+      )
+      return resultOptions || []
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea societatilor.', showNotification)
+    }
+  )
+}
+
+export const getDepositOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['deposits'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/deposits/accessible`)
+      return data.map(item => ({
+        label: item.displayName,
+        value: item.id
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea depozitelor.', showNotification)
+    }
+  )
+}

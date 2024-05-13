@@ -56,7 +56,7 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching dropdown data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea listei de metode de plata. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -64,21 +64,21 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
   )
 
   const addOrder = async values => {
-    const result = await makeCorePostRequest(`/supply-omni/order`, values)
+    const result = await makeCorePostRequest('/supply-omni/order', values)
     return result
   }
 
   const { isLoading: isLoadingAddOrder, mutate } = useMutation(addOrder, {
     onSuccess: (data: any) => {
       showNotification({
-        message: 'Comanda a fost inregistrata cu success!',
+        message: 'Comanda a fost inregistrata cu success.',
         type: 'success'
       })
       navigate(`/supplyOmni/proformaView/${data?.id}?clientId=${clientId}`)
     },
     onError: res => {
       showNotification({
-        message: `A aparut o eroare! ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la plasarea comenzii. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
@@ -97,7 +97,34 @@ const PaymentMethod: React.FC<PaymentMethodProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      mutate(toOrderPayload(values))
+      createOrder()
+    }
+  })
+
+  const validateOrder = async () => {
+    const result = await makeCorePostRequest(
+      '/supply-omni/cart/product-stock/validation'
+    )
+
+    return result
+  }
+
+  const { mutate: createOrder } = useMutation(validateOrder, {
+    onSuccess: (data: any) => {
+      if (data.isValid) {
+        mutate(toOrderPayload(formik.values))
+      } else {
+        showNotification({
+          message: `A aparut o eroare la validarea comenzii. ${data.message}`,
+          type: 'error'
+        })
+      }
+    },
+    onError: res => {
+      showNotification({
+        message: `A aparut o eroare la validarea comenzii. ${formatErrorMessage(res)}`,
+        type: 'error'
+      })
     }
   })
 

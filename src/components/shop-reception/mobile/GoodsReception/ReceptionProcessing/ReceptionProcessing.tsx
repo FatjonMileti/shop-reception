@@ -42,7 +42,7 @@ const ReceptionProcessing = () => {
           <TruckCard
             key={item.id}
             onClick={() => {
-              navigate(URLS.AUTH_SUPPORT_CODE, { state: { item } })
+              navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, { state: { item } })
             }}
             truck={item}
           />
