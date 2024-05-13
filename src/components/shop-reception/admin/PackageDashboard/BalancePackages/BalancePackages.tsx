@@ -6,7 +6,7 @@ import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { DownloadIcon } from 'icons'
+import { DeleteActionIcon, DownloadIcon, EditActionIcon } from 'icons'
 import { formatAndDownloadResponse } from 'utils/helpers'
 import s from '../../../commonStyles.modules.scss'
 import {
@@ -15,12 +15,16 @@ import {
   getShopOptions,
   getSupportTypeOptions
 } from '../../api'
+import { EditBalancePackage } from './EditBalancePackage'
+import { History } from '@mui/icons-material'
 
 const BalancePackages = () => {
   const [tableItems, setTableItems] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<any>(null)
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
 
   const { showNotification } = useNotification()
 
@@ -81,8 +85,23 @@ const BalancePackages = () => {
     }
   }
 
+  const openModal = () => setIsEditModalOpen(true)
+  const closeModal = () => setIsEditModalOpen(false)
+
+  const selectRow = (rowId: number) => {
+    const row = tableItems.find(item => item.id === rowId)
+    setSelectedRow(row)
+    openModal()
+  }
+
   return (
     <div className={s.mainContainer}>
+      <EditBalancePackage
+        isModalOpen={isEditModalOpen}
+        closeModal={closeModal}
+        editItem={selectedRow}
+        setShouldRefreshData={setShouldRefreshData}
+      />
       <Table
         hideCheckbox
         columns={columns}
@@ -92,6 +111,24 @@ const BalancePackages = () => {
         totalCount={totalCount}
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
+        rowActions={[
+          {
+            label: 'Editeaza',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#16a085',
+            desktopIcon: <EditActionIcon />,
+            onClick: (_e, rowId: number) => selectRow(rowId)
+          },
+          {
+            label: 'Date istorice',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#d9534f',
+            desktopIcon: <History htmlColor='rgb(9, 112, 230)'/>,
+            onClick: (_e, rowId: number) => console.log(rowId)
+          }
+        ]}
         toolbarActions={[
           {
             label: 'Export',

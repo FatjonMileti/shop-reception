@@ -36,20 +36,6 @@ export const columns = [
     field: 'createdDate',
     align: 'left',
     type: 'string'
-  },
-  {
-    title: 'Actualizare sold',
-    field: '',
-    align: 'left',
-    type: 'string',
-    disableSorting: true
-  },
-  {
-    title: 'Istoric sold',
-    field: '',
-    align: 'left',
-    type: 'string',
-    disableSorting: true
   }
 ]
 
