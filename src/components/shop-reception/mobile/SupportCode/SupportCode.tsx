@@ -197,7 +197,7 @@ const SupportCode = () => {
         {
           label: 'Am terminat',
           onClick: () => {
-            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_4.replace(':id', id))
+            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_4.replace(':id', id));
             setIsFinalizeModalOpen(false);
           },
           color: 'secondary'
