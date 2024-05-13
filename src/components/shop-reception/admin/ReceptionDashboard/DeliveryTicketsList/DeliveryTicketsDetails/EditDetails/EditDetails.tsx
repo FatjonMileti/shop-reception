@@ -21,7 +21,7 @@ const EditDetails = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: `/shop-reception/deliveryTicket/details/${id}/edit`,
+          url: `/shop-reception/deliveryTicket/details/${id}?tab=edit`,
           tableFilters,
           page,
           rowsPerPage,
@@ -30,12 +30,12 @@ const EditDetails = () => {
         })
       )
 
-      setTableItems(toTableRowItems(response.list))
+      setTableItems(toTableRowItems(response.traceabilityScanInProcessModelsList))
       setTotalCount(response.page)
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -55,6 +55,11 @@ const EditDetails = () => {
         filters={drawerFilters}
         disableSorting
         disablePagination
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </>
   )

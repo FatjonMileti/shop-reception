@@ -26,5 +26,7 @@ export const toTableRowItems = (items: DeliveryTicket[]) =>
     deposit: item.deposit,
     receptionFile: item.receptionFile,
     statusValue: item.statusValue,
-    shopCodeName: item.shopCodeName
+    shopCodeName: item.shopCodeName,
+    numberOfSupports: item.numberOfSupports,
+    validatedSupports: item.validatedSupports
   }))

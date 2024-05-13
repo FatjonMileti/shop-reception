@@ -78,6 +78,8 @@ export interface DeliveryTicket {
   receptionFile: ReceptionFile
   statusValue: string
   shopCodeName: string
+  numberOfSupports: number
+  validatedSupports: number
 }
 export interface DeliveryTicketDetails {
   id: number
@@ -89,6 +91,7 @@ export interface DeliveryTicketDetails {
   receivedSupportType?: string | null
   secondarySupportType: string
   supportStatus: string
+  supportStatusValue: string
   eanCode: string
   eanReceived: string
   productCode: string

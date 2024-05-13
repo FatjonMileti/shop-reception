@@ -1,5 +1,3 @@
-import { DeliveryTicketDetails } from '../../interfaces'
-
 export const toTableRowItems = items =>
   items.map(item => ({
     id: item.id,
@@ -7,5 +5,8 @@ export const toTableRowItems = items =>
     createdBy: item.createdBy || '',
     created: item.created || '',
     updatedBy: item.updatedBy || '',
-    updated: item.updated || ''
+    updated: item.updated || '',
+    processType: item.processType || '',
+    counter: item.counter || '',
+    truckNumber: item.truckNumber || ''
   }))

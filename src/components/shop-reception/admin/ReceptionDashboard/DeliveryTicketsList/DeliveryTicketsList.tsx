@@ -132,6 +132,11 @@ const DeliveryTicketsList = () => {
         ]}
         rowActionsWidth="130px"
         filters={drawerFilters(shopCodes, depositOptions, statusOptions)}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </div>
   )

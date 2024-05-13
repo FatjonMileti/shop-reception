@@ -10,6 +10,7 @@ export const toTableRowItems = (items: DeliveryTicketDetails[]) =>
     expectedSupportType: item.expectedSupportType || '',
     secondarySupportType: item.secondarySupportType || '',
     supportStatus: item.supportStatus || '',
+    supportStatusValue: item.supportStatusValue,
     eanCode: item.eanCode || '',
     eanReceived: item.eanReceived || '',
     productCode: item.productCode || '',

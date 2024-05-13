@@ -10,21 +10,21 @@ export const columns = [
   },
   {
     title: 'Tip scanare',
-    field: 'q',
+    field: 'processType',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Contor suporti',
-    field: 'w',
+    field: 'counter',
     align: 'left',
     type: 'string',
     disableSorting: true
   },
   {
     title: 'Numar inmatriculare',
-    field: 'e',
+    field: 'truckNumber',
     align: 'left',
     type: 'string',
     disableSorting: true
