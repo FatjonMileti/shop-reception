@@ -23,10 +23,20 @@ const Step5 = () => {
   const location = useLocation()
 
   useEffect(() => {
-    location.state.truckNumber ? formik.setFieldValue('registrationNumber', location.state.truckNumber) : ''
-    location.state.driverName ? formik.setFieldValue('driver', location.state.driverName) : ''
+    const truckNumber = location.state?.truckNumber;
+    const driverName = location.state?.driverName;
 
-    setReadOnly(true);
+    if (truckNumber) {
+      formik.setFieldValue('registrationNumber', truckNumber);
+    }
+
+    if (driverName) {
+      formik.setFieldValue('driver', driverName);
+    }
+
+    if (truckNumber && driverName) {
+      setReadOnly(true);
+    }
   }, [location])
 
   // TODO when navigating back from step 2 set the fields with the correct information
