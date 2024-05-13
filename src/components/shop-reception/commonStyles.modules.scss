@@ -1,14 +1,15 @@
 .mainContainer {
-    margin: 24px;
-  
-    @media (max-width: 624px) {
-      margin: 12px;
-    }
-  
-    & > div {
-      margin: 0;
-    }
+  margin: 24px;
+
+  @media (max-width: 624px) {
+    margin: 12px;
+  }
+
+  &>div {
+    margin: 0;
+  }
 }
+
 .filtersContainer {
   padding: 1rem;
 }
@@ -16,4 +17,8 @@
 .barcode {
   width: 100px;
   height: 100px;
+}
+
+.table {
+  width: 100% !important;
 }

@@ -37,6 +37,9 @@ export const URLS = {
   AUTH_BALANCE_PACKAGING_FORM: '/shop-reception/package/balance/:id',
   AUTH_BALANCE_PACKAGING_HISTORY: '/shop-reception/package/balance/history/:id',
   AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS: '/shop-reception/package/storeReturnsDisputes',
+  AUTH_PACKAGING_DISPUTE_OF_STORE_RETURNS: '/shop-reception/package/storeReturnsDisputes/:id',
+  AUTH_PACKAGING_DISPUTE_OF_STORE_RETURNS_IMAGES:
+    '/shop-reception/package/storeReturnsDisputesImages/:id',
   AUTH_PACKAGING_TYPES_DIFFERENCES: '/shop-reception/package/typesDifferences',
   AUTH_RETURNED_PACKAGING: '/shop-reception/package/returned',
   AUTH_PACKAGING_COMPLIANCE: '/shop-reception/package/compliance',
@@ -45,5 +48,5 @@ export const URLS = {
   AUTH_PACKING_INVENTORY: '/shop-reception/package/packingInventory',
   AUTH_PACKING_INVENTORY_HISTORY: '/shop-reception/package/packingInventoryHistory/:id',
   AUTH_CENTRALIZED_NOTICE: '/shop-reception/package/centralizedNotice',
-  AUTH_TRANSPORT_RESPONSIBLE: '/shop-reception/package/transportResponsible',
+  AUTH_TRANSPORT_RESPONSIBLE: '/shop-reception/package/transportResponsible'
 }
