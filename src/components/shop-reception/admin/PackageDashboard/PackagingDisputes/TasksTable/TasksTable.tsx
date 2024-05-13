@@ -6,10 +6,15 @@ import { toTableRowItems } from './serializers'
 import { useNotification, usePermissions } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { Table } from 'components/core-ui/Table'
-import { useQuery } from 'react-query'
 import { formatAndDownloadResponse } from 'utils/helpers'
 import { DownloadIcon, ViewActionIcon } from 'icons'
 import { useNavigate } from 'react-router-dom'
+import {
+  getDepositOptions,
+  getHubOptions,
+  getParentSocietyOptions,
+  getShopOptions
+} from 'components/shop-reception/admin/api'
 
 const TasksTable = ({ type }) => {
   const [tableItems, setTableItems] = useState<any[]>([])
@@ -25,89 +30,10 @@ const TasksTable = ({ type }) => {
 
   const columns = useMemo(() => getColumns(canView, type), [])
 
-  const { data: depositOptions } = useQuery(
-    ['deposits'],
-    async () => {
-      const data = await makeCoreGetRequest(`/shop-reception/deposits/accessible`)
-      return data.map(item => ({
-        label: item.displayName,
-        value: item.id
-      }))
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A apărut o eroare la obtinerea depozitelor. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const { data: shopOptions } = useQuery(
-    ['shop-codes'],
-    async () => {
-      const result = await makeCoreGetRequest('/shop-reception/shops/codes')
-
-      const resultOptions = result.list.map(
-        (item: any): AutocompleteOption => ({
-          label: item.displayName,
-          value: item.code
-        })
-      )
-
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A aparut o eroare la obtinerea magazinelor. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const { data: parentSocietyOptions } = useQuery(
-    ['parent-societies'],
-    async () => {
-      const result = await makeCoreGetRequest('/shop-reception/shops/parent-society')
-      const resultOptions = result.map(
-        (item: string): AutocompleteOption => ({
-          label: item,
-          value: item
-        })
-      )
-      return resultOptions || []
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A aparut o eroare la obtinerea societatilor. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const { data: hubOptions } = useQuery(
-    ['hubs'],
-    async () => {
-      const data = await makeCoreGetRequest(`/shop-reception/hubs/accessible`)
-      return data.map(item => ({
-        label: item.displayName,
-        value: item.id
-      }))
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A apărut o eroare la obtinerea huburilor. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
-    }
-  )
+  const { data: shopOptions } = getShopOptions(showNotification)
+  const { data: hubOptions } = getHubOptions(showNotification)
+  const { data: depositOptions } = getDepositOptions(showNotification)
+  const { data: parentSocietyOptions } = getParentSocietyOptions(showNotification)
 
   const filters = useMemo(
     () =>
