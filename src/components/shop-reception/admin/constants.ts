@@ -18,6 +18,7 @@ export const URLS = {
 
   // reception dashboard
   AUTH_DELIVERY_SLIPS_LIST: '/shop-reception/reception/deliverySlips',
+  AUTH_DELIVERY_SLIPS_SUPPORT_CODE: '/shop-reception/reception/deliverySupportAction/:id',
   AUTH_DELIVERY_SLIP: '/shop-reception/reception/deliverySlips/:id',
   AUTH_TRUCK_LIST: '/shop-reception/reception/truckList',
   AUTH_TRUCK_DETAIL: '/shop-reception/reception/truckList/:id',

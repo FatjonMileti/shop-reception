@@ -44,6 +44,7 @@ import { BalancePackageHistory } from './PackageDashboard/BalancePackages/Balanc
 import { BalancePackageForm } from './PackageDashboard/BalancePackages/BalancePackageForm'
 import { SeriesNumber } from './AdminDashboard/SeriesNumber'
 import { SGRProducts } from './AdminDashboard/SGRProducts'
+import SupportCode from './ReceptionDashboard/DeliveryTicketsList/DeliveryTicketsDetails/SupportCode/SupportCode'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -204,6 +205,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={DeliveryTicketsList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_SLIPS_SUPPORT_CODE}
+        element={
+          <PrivateRoute
+            component={SupportCode}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

@@ -269,6 +269,7 @@ VALUES
     (177, 'Fisiere receptie infolog', '', '/shop-reception/admin/receptionFiles', true, 161, true),
     (178, 'Administrare produse SGR', '', '/shop-reception/admin/sgrProducts', true, 162, true),
     (179, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips', true, 163, true),
+    (222, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySupportAction/:id', true, 163, false),
     (180, 'Lista camioane marfa', '', '/shop-reception/reception/truckList', true, 164, true),
     (181, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/wrongDestinationSupport', true, 165, true),
     (219, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/wrongDestinationSupport/:id', true, 165, false),

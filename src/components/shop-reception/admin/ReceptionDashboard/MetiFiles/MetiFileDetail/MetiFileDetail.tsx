@@ -1,169 +1,100 @@
-import { Grid } from '../../../../Common/Grid'
-import { TitleHeader } from '../../../Common/TitleHeader'
-import React, { useState } from 'react'
-import { Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { columns } from './helpers'
-import { Table } from '../../../../../core-ui/Table'
+import { Grid } from '@mui/material'
+import s from '../../../../commonStyles.modules.scss'
+import { useState } from 'react'
+import { useNotification } from 'hooks'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { toTableRowItems } from './serializers'
+import { formatErrorMessage } from 'utils/formatting'
+import { columns, drawerFilters } from './helpers'
+import { Table } from 'components/core-ui/Table'
+import { formatAndDownloadResponse } from 'utils/helpers'
+import { DownloadIcon } from 'icons'
 
 const MetiFileDetail = () => {
+  const { showNotification } = useNotification()
+  const { id } = useParams()
+  const location = useLocation()
+  const shopCode = new URLSearchParams(location.search).get('shopCode')
+
   const [tableItems, setTableItems] = useState<MetiFile[]>([])
-  const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [infoItems, setInfoItems] = useState([])
+
+  const fetchData = async () => {
+    setIsLoading(true)
+    try {
+      const response = await makeCoreGetRequest(
+        toTableGETUrl({
+          url: `/shop-reception/metiIntegrationFile/details/${id}?shopCode=${shopCode}`
+        })
+      )
+
+      setTableItems(toTableRowItems(response.productList))
+      setInfoItems(response)
+      setIsLoading(false)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const exportFile = async (tableState, e) => {
+    const { filters, order, orderBy } = tableState
+    const url = toTableGETUrl({
+      url: `/shop-reception/metiIntegrationFile/detailsExport/${id}`,
+      tableFilters: filters,
+      order,
+      orderBy
+    })
+
+    try {
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `Error while download file. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
 
   return (
-    <Grid
-      items={[
-        <TitleHeader title={` Fişier Meti pentru BL 60787, magazin ORADEA2`} />,
-        <Grid
-          items={[
-            <>
-              <Typography variant='mono'>
-                Depozit sursă:
-              </Typography>
-              <Typography variant='medium'>
-                DEPOZIT DEVA APLS
-              </Typography>
-            </>,
-            <>
-              <Typography variant='mono'>
-                Magazin destinatie:
-              </Typography>
-              <Typography variant='medium'>
-                ORADEA2
-              </Typography>
-            </>,
-            <>
-              <Typography variant='mono'>
-                Bon livrare:
-              </Typography>
-              <Typography variant='medium'>
-                60787
-              </Typography>
-            </>,
-            <>
-              <Typography variant='mono'>
-                Status fişier:
-              </Typography>
-              <Typography variant='medium'>
-                Trimis
-              </Typography>
-            </>
-          ]}
-          itemsPerRow={4}
-        />,
-        <Grid
-          items={[
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Cod produs'
-              variant='outlined'
-              style={{ width: '100%' }}
-              value={null}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Nume produs'
-              variant='outlined'
-              style={{ width: '100%' }}
-              value={null}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Comandă de origine'
-              variant='outlined'
-              style={{ width: '100%' }}
-              value={null}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Cod cursă'
-              variant='outlined'
-              style={{ width: '100%' }}
-              value={null}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Comandă METI'
-              variant='outlined'
-              style={{ width: '100%' }}
-              value={null}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Status comandă METI'
-              variant='outlined'
-              style={{ width: '100%' }}
-              value={null}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Selectează cu erori'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează cu erori',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Selectează cu erori'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează cu erori',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Selectează cu diferenţe Meti'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează cu diferenţe Meti',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />
-          ]}
-          itemsPerRow={4}
-        />,
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {
-          }}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          newButton={null}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-        />
-      ]}
-      itemsPerRow={1}
-    />
+    <Grid className={s.mainContainer}>
+      {/* <InfoItems
+        itemsPerRow={3}
+        items={[
+          { name: infoItems.depositName, label: 'Depozit sursa:' },
+          { name: infoItems.shopName, label: 'Magazin destinatie:' },
+          { name: infoItems.ticketExternalId, label: 'Bon livrare:' },
+          { name: infoItems.status, label: 'Status fisier:' }
+        ]}
+      /> */}
+
+      <Table
+        hideCheckbox
+        columns={columns}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+        filters={drawerFilters}
+        toolbarActions={[
+          {
+            label: 'Export',
+            icon: <DownloadIcon />,
+            onClick: exportFile
+          }
+        ]}
+      />
+    </Grid>
   )
 }
 
