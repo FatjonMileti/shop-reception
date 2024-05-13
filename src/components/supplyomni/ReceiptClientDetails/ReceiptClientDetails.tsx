@@ -72,9 +72,7 @@ const ReceiptClientDetails: React.FC = () => {
               <Button
                 label="Genereaza factura"
                 variant="contained"
-                // onClick={() => mutate({ customerId: id, orderId })}
-                onClick={() => console.log('Generate bill is disabled')}
-                disabled
+                onClick={() => mutate({ customerId: id, orderId })}
               />
             )
           }}
