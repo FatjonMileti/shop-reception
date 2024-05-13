@@ -11,6 +11,7 @@ import { columns, drawerFilters } from './helpers'
 import { Table } from 'components/core-ui/Table'
 import { formatAndDownloadResponse } from 'utils/helpers'
 import { DownloadIcon } from 'icons'
+import { InfoItems } from 'components/core-ui/InfoItems'
 
 const MetiFileDetail = () => {
   const { showNotification } = useNotification()
@@ -21,7 +22,7 @@ const MetiFileDetail = () => {
   const [tableItems, setTableItems] = useState<MetiFile[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const [infoItems, setInfoItems] = useState([])
+  const [infoItems, setInfoItems] = useState(null)
 
   const fetchData = async () => {
     setIsLoading(true)
@@ -67,15 +68,15 @@ const MetiFileDetail = () => {
 
   return (
     <Grid className={s.mainContainer}>
-      {/* <InfoItems
+      <InfoItems
         itemsPerRow={3}
         items={[
-          { name: infoItems.depositName, label: 'Depozit sursa:' },
-          { name: infoItems.shopName, label: 'Magazin destinatie:' },
-          { name: infoItems.ticketExternalId, label: 'Bon livrare:' },
-          { name: infoItems.status, label: 'Status fisier:' }
+          { name: infoItems?.depositName, label: 'Depozit sursa:' },
+          { name: infoItems?.shopName, label: 'Magazin destinatie:' },
+          { name: infoItems?.ticketExternalId, label: 'Bon livrare:' },
+          { name: infoItems?.status, label: 'Status fisier:' }
         ]}
-      /> */}
+      />
 
       <Table
         hideCheckbox
