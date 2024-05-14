@@ -4,5 +4,5 @@ export const toTableRowItems = (items: CentralizeStoresHub[]) =>
     destinationId: item.destinationId || null,
     destinationName: item.destinationName || '',
     depositNames: item.depositNames || '',
-    hubNames: item.hubNames || ''
+    hubId: item.hubNames || ''
   }))

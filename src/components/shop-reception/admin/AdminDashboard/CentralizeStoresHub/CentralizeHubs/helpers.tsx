@@ -2,40 +2,43 @@ import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 
 export const columns = [
   {
-    title: 'Hub',
+    title: 'Via Hub',
     field: 'destinationName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    disableSorting:true
   },
   {
     title: 'Livrare marfa din depozit',
     field: 'depositNames',
     align: 'left',
     type: 'string',
-    width: '300px'
+    width: '300px',
+    disableSorting:true
   },
   {
     title: 'Huburi',
-    field: 'hubNames',
+    field: 'hubId',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    disableSorting:true
   }
 ]
 
 export const drawerFilters = (shopCodes, depositOptions, hubsOptions) => [
   {
-    name: 'shopCode',
+    name: 'destinationHubId',
     value: '',
     filter: (
       <Autocomplete
         variant="outlined"
-        label="Selectează magazin"
+        label="Selectează HUB destinatie"
         disableClearable
-        options={shopCodes || []}
+        options={hubsOptions || []}
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează magazin'
+    label: 'Selectează  HUB destinatie'
   },
   {
     name: 'depositId',
@@ -52,7 +55,7 @@ export const drawerFilters = (shopCodes, depositOptions, hubsOptions) => [
     label: 'Selectează depozit'
   },
   {
-    name: 'hubName',
+    name: 'hubId',
     value: '',
     filter: (
       <Autocomplete
