@@ -281,6 +281,7 @@ VALUES
     (186, 'Lista camioane retur', '', '/shop-reception/package/trucksReturnList', true, 170, true),
     (187, 'Rulaj ambalaje', '', '/shop-reception/package/rolling', true, 171, true),
     (188, 'Sold ambalaje', '', '/shop-reception/package/balance', true, 172, true),
+    (288, 'Istoric sold', '', '/shop-reception/package/balance/history/:id', true, 172, false),
     (189, 'Litigii ambalaje - retur magazine', '', '/shop-reception/package/storeReturnsDisputes', true, 173, true),
     (289, 'Litigiu aviz', '', '/shop-reception/package/storeReturnsDisputes/:id', true, 173, false),
     (290, 'Dovezi magazin', '', '/shop-reception/package/storeReturnsDisputesImages/:id', true, 173, false),
