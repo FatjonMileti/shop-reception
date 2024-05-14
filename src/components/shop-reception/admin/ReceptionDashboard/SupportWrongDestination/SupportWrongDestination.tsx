@@ -8,9 +8,8 @@ import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { useNavigate } from 'react-router-dom'
 import s from '../../../commonStyles.modules.scss'
-import { useQuery } from 'react-query'
 import { formatAndDownloadResponse } from 'utils/helpers'
-import { EditActionIcon } from 'icons'
+import { getDepositOptions, getShopOptions } from '../../api'
 
 const SupportWrongDestination = () => {
   const { showNotification } = useNotification()
@@ -20,6 +19,9 @@ const SupportWrongDestination = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
+  const { data: depositOptions } = getDepositOptions(showNotification)
+  const { data: shopOptions } = getShopOptions(showNotification)
+  
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
@@ -34,14 +36,12 @@ const SupportWrongDestination = () => {
         })
       )
 
-      const responseList = response.deliverySupportList
-
-      setTableItems(toTableRowItems(responseList))
+      setTableItems(toTableRowItems(response.deliverySupportList))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -55,7 +55,7 @@ const SupportWrongDestination = () => {
       return formatAndDownloadResponse(response)
     } catch (error) {
       showNotification({
-        message: `Error while downloading file. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -70,21 +70,14 @@ const SupportWrongDestination = () => {
         fetchData={fetchData}
         isLoading={isLoading}
         totalCount={totalCount}
-        newButton={null}
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
-        filters={drawerFilters}
-        // rowActions={[
-        //   {
-        //     label: 'Editeaza',
-        //     labelColor: 'white',
-        //     typographyVariant: 'medium',
-        //     backgroundColor: '#16a085',
-        //     desktopIcon: <EditActionIcon />,
-        //     onClick: (e, rowId) => selectRow(rowId, 'edit')
-        //   },
-        // ]}
-        // rowActionsWidth="130px"
+        filters={drawerFilters(depositOptions, shopOptions)}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </div>
   )

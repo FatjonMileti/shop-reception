@@ -11,7 +11,6 @@ import { useNotification } from 'hooks'
 import s from '../../../../commonStyles.modules.scss'
 import { useParams } from 'react-router'
 import { Grid } from '@mui/material'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 
 const SupportWrongDestinationDetail = () => {
   const { showNotification } = useNotification()
@@ -29,13 +28,14 @@ const SupportWrongDestinationDetail = () => {
   const { isLoading, mutate } = useMutation(updateDetails, {
     onSuccess: res => {
       showNotification({
-        message: `Destination edited successfully`,
+        message: `Modificarile au fost salvate cu succes.`,
         type: 'success'
       })
+      formik.resetForm()
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to update destination, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare la salvarea datelor. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
@@ -55,13 +55,11 @@ const SupportWrongDestinationDetail = () => {
     onSubmit: async (values: any) => {
       const payload = toFormDataPayload(values)
       mutate(payload)
-      formik.resetForm()
     }
   })
 
   return (
     <div className={s.mainContainer}>
-      <FormInfoItems items={[{ name: id, label: 'Rezolva suportul' }]} />
       <Grid container display="flex" flexDirection={'column'} pt={2}>
         <Input
           type="textarea"

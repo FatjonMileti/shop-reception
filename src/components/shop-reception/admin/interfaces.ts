@@ -501,12 +501,14 @@ interface SupportWrongDestination {
   destinationShopName: string
   lastUpdateBy: string
   lastUpdate: string
-  resolved: string
+  resolved: boolean
   resolvingDate: string
   resolvedBy: string
   resolvingComment: string
-  unload: string
   hasAttachment: boolean
+  wrongDestinationResultId: string
+  supportId: string
+  canResolve: boolean
 }
 
 interface UnorderedProducts {

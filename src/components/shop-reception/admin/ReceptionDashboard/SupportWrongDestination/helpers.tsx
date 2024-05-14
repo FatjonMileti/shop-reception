@@ -1,65 +1,75 @@
 import { Autocomplete, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { DownloadIcon, ViewActionIcon } from 'icons'
 import { URLS } from '../../constants'
+import { formatUIDate } from 'utils/helpers'
 
 export const columns = (navigate, downloadFile) => [
   {
     title: 'Cod suport',
     field: 'supportCode',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Nume depozit',
     field: 'depositName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Bon Livrare',
     field: 'externalTicketId',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Comanda livratà',
     field: 'externalOrderId',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Comandǎ emis(Meti)',
     field: 'originalOrderId',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Destinatie dorită',
     field: 'shopName',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Destinatie reala',
     field: 'destinationShopName',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Operator',
     field: 'lastUpdateBy',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Dată scanare',
     field: 'lastUpdate',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Rezolvat',
@@ -79,28 +89,32 @@ export const columns = (navigate, downloadFile) => [
           <ViewActionIcon />
         </span>
       ),
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Datǎ rezolvare',
     field: 'resolvingDate',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Operator rezolvare',
     field: 'resolvedBy',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Comentariu',
     field: 'resolvingComment',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Descarca',
@@ -116,10 +130,11 @@ export const columns = (navigate, downloadFile) => [
       ) : (
         ''
       )
-    }
+    },
+    width: '100px'
   }
 ]
-export const drawerFilters = [
+export const drawerFilters = (depositOptions, shopOptions) => [
   {
     name: 'depositName',
     value: '',
@@ -128,21 +143,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Depozit"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: 'Depozit 1'
-          },
-
-          {
-            value: '2',
-            label: 'Depozit 2'
-          },
-          {
-            value: '3',
-            label: 'Depozit 3'
-          }
-        ]}
+        options={depositOptions || []}
       />
     ),
     type: 'autocomplete',
@@ -157,21 +158,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Destinatie dorita"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: 'Destinatie 1'
-          },
-
-          {
-            value: '2',
-            label: 'Destinatie 2'
-          },
-          {
-            value: '3',
-            label: 'Destinatie 3'
-          }
-        ]}
+        options={shopOptions || []}
       />
     ),
     type: 'autocomplete',
@@ -186,21 +173,7 @@ export const drawerFilters = [
         variant="outlined"
         label="Destinatie reala"
         disableClearable
-        options={[
-          {
-            value: '1',
-            label: 'Destinatie 1'
-          },
-
-          {
-            value: '2',
-            label: 'Destinatie 2'
-          },
-          {
-            value: '3',
-            label: 'Destinatie 3'
-          }
-        ]}
+        options={shopOptions || []}
       />
     ),
     type: 'autocomplete',
