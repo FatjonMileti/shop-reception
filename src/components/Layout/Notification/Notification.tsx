@@ -11,7 +11,7 @@ const Notification = () => {
   const { clearNotification } = useNotification()
 
   const autoHideDuration = useMemo(
-    () => (notification.timeout || notification.type === 'error' ? 10000 : 3000),
+    () => (notification.timeout || notification.type === 'error' ? 15000 : 10000),
     [notification.timeout, notification.type]
   )
 

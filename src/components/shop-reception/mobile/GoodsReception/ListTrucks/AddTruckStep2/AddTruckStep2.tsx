@@ -36,7 +36,7 @@ const AddTruckStep2 = () => {
         ticketIdList.push({id: bl.id});
       });
 
-      await makeCorePostRequest('/rm-api/truck/saveBlListForTruck', {id: truckId, deliveryTicketList: ticketIdList});
+      await makeCorePostRequest('/shop-reception-mobile/truck/saveBlListForTruck', {id: truckId, deliveryTicketList: ticketIdList});
 
       navigate(navigateTo);
     } catch (error) {
@@ -52,7 +52,7 @@ const AddTruckStep2 = () => {
   const { data: truck, isLoading} = useQuery(
     'truckWithBls',
     async () => {
-      return await makeCoreGetRequest('/rm-api/truck/getTruckCreationDTOWithBls/' + truckId, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/getTruckCreationDTOWithBls/' + truckId, null)
     },
     {
       onError: error => {

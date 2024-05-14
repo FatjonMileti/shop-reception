@@ -43,7 +43,6 @@ import { TruckDetail } from './ReceptionDashboard/TruckList/TruckDetail'
 import { SupportWrongDestinationDetail } from './ReceptionDashboard/SupportWrongDestination/SupportWrongDestinationDetail'
 import { PackagingDisputesTimerDetail } from './PackageDashboard/PackagingDisputesTimer/PackagingDisputesTimerDetail'
 import { BalancePackageHistory } from './PackageDashboard/BalancePackages/BalancePackageHistory'
-import { BalancePackageForm } from './PackageDashboard/BalancePackages/BalancePackageForm'
 import { SeriesNumber } from './AdminDashboard/SeriesNumber'
 import { SGRProducts } from './AdminDashboard/SGRProducts'
 import SupportCode from './ReceptionDashboard/DeliveryTicketsList/DeliveryTicketsDetails/SupportCode/SupportCode'
@@ -480,16 +479,6 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={PackagingDisputesTimerDetail}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
-        }
-      />
-      <Route
-        path={URLS.AUTH_BALANCE_PACKAGING_FORM}
-        element={
-          <PrivateRoute
-            component={BalancePackageForm}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

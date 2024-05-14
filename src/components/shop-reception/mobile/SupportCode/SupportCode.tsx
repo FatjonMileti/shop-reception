@@ -79,7 +79,7 @@ const SupportCode = () => {
   const { data: truck, isLoading} = useQuery(
     'counter',
     async () => {
-      const truck = await makeCoreGetRequest('/rm-api/support/counter/' + id, null)
+      const truck = await makeCoreGetRequest('/shop-reception-mobile/support/counter/' + id, null)
       setCounter(truck.counter)
 
       return truck;
@@ -97,7 +97,7 @@ const SupportCode = () => {
   const { data: supportList, isLoading: isLoadingSupports} = useQuery(
     'supportList',
     async () => {
-      return await makeCoreGetRequest('/rm-api/support/principal/type', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/support/principal/type', null)
     },
     {
       onError: error => {
@@ -118,7 +118,7 @@ const SupportCode = () => {
       const saveModel =  {supportId, supportTypeId: values.supportTypeId, defectReason: values.reason, pictureIdNonConform: null, pictureIdSupportType: null}
 
       try {
-        makeCorePostRequest('/rm-api/support/save/' + id, saveModel).then(resp => {
+        makeCorePostRequest('/shop-reception-mobile/support/save/' + id, saveModel).then(resp => {
           const localCounter = resp.counter;
           if (localCounter > 0) {
             setCounter(localCounter);
@@ -156,7 +156,7 @@ const SupportCode = () => {
   }
 
   const toggleIsSearching = (): void => {
-    makeCorePostRequest('/rm-api/support/scan/' + id, { supportCode: formik.values.supportCode }).then(r => {
+    makeCorePostRequest('/shop-reception-mobile/support/scan/' + id, { supportCode: formik.values.supportCode }).then(r => {
       setSupportNumber(r.supportNumber)
       setSupportId(r.supportId)
       formik.setFieldValue('supportTypeId', String(r.supportTypeId))
@@ -170,7 +170,7 @@ const SupportCode = () => {
 
   const toggleIsFinalizing = (): void => {
     try {
-      makeCoreGetRequest('/rm-api/support/summary/' + id, null).then(response => {
+      makeCoreGetRequest('/shop-reception-mobile/support/summary/' + id, null).then(response => {
         const count = response['counter'];
         const total = response['total'];
 
@@ -197,7 +197,7 @@ const SupportCode = () => {
         {
           label: 'Am terminat',
           onClick: () => {
-            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_4.replace(':id', id))
+            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_4.replace(':id', id));
             setIsFinalizeModalOpen(false);
           },
           color: 'secondary'

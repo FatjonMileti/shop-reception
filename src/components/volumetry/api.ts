@@ -221,7 +221,7 @@ export const getPrioritiesOptions = (showNotification: Function) => {
       const result = await makeCoreGetRequest('/volumetry/task-templates/priorities')
 
       const resultOptions = result.map(priority => ({
-        value: priority.value,
+        value: priority.id,
         label: priority.value
       }))
 

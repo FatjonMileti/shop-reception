@@ -19,7 +19,7 @@ const ListTrucks = () => {
   const { data: truckList, isLoading} = useQuery(
       'truckList',
     async () => {
-        return await makeCoreGetRequest('/rm-api/truck/list', null)
+        return await makeCoreGetRequest('/shop-reception-mobile/truck/list', null)
     },
     {
         onError: error => {

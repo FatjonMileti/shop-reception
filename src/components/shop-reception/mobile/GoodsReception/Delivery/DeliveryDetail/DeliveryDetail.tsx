@@ -18,7 +18,7 @@ const DeliveryDetail = () => {
   const { data: truck, isLoading} = useQuery(
     'validationTruck',
     async () => {
-        return await makeCoreGetRequest('/rm-api/integral/truck/deliveryTicketList/' + id, null)
+        return await makeCoreGetRequest('/shop-reception-mobile/integral/truck/deliveryTicketList/' + id, null)
     },
     {
         onError: error => {

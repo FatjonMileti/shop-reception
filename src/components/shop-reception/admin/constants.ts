@@ -35,7 +35,6 @@ export const URLS = {
   AUTH_RETURN_TRUCK_LIST: '/shop-reception/package/trucksReturnList',
   AUTH_ROLLING_PACKAGES: '/shop-reception/package/rolling',
   AUTH_BALANCE_PACKAGING: '/shop-reception/package/balance',
-  AUTH_BALANCE_PACKAGING_FORM: '/shop-reception/package/balance/:id',
   AUTH_BALANCE_PACKAGING_HISTORY: '/shop-reception/package/balance/history/:id',
   AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS: '/shop-reception/package/storeReturnsDisputes',
   AUTH_PACKAGING_DISPUTE_OF_STORE_RETURNS: '/shop-reception/package/storeReturnsDisputes/:id',

@@ -7,7 +7,7 @@ import { useQuery } from "react-query";
 import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../utils/api";
 import { formatErrorMessage } from "../../../../../../utils/formatting";
 import { useNotification } from "../../../../../../hooks";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import ImageUpload from "../../../ImageUpload/ImageUpload";
 
 const Step6 = () => {
@@ -20,7 +20,7 @@ const Step6 = () => {
   const { data: counter, isLoading: isLoadingCounter} = useQuery(
     'counter',
     async () => {
-      return await makeCoreGetRequest('/rm-api/support/counter/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/support/counter/' + id, null)
     },
     {
       onError: error => {
@@ -50,7 +50,7 @@ const Step6 = () => {
     };
 
     try {
-      makeCorePostRequest('/rm-api/truck/save', truck).then(() => navigate('/goodsReception'))
+      makeCorePostRequest('/shop-reception-mobile/truck/save', truck).then(() => navigate('/goodsReception'))
     }
     catch (error) {
       showNotification({
@@ -108,7 +108,7 @@ const Step6 = () => {
               }}
             />
             <ImageUpload
-              uploadUrl={`/rm-api/truck/upload_shop/security/` + id}
+              uploadUrl={`/shop-reception-mobile/truck/upload_shop/security/` + id}
               onSuccess={handleSuccess}
               onError={handleError}
               inputId={`seal${idx}`}
