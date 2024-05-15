@@ -284,7 +284,7 @@ VALUES
     (188, 'Sold ambalaje', '', '/shop-reception/package/balance', true, 172, true),
     (288, 'Istoric sold', '', '/shop-reception/package/balance/history/:id', true, 172, false),
     (389, 'Inventar ambalaje', '', '/shop-reception/package/packingInventory', true, 272, true),
-    (390, 'Istoric inventar', '', 'shop-reception/package/packingInventoryHistory/:id', true, 272, false),
+    (390, 'Istoric inventar', '', '/shop-reception/package/packingInventoryHistory/:id', true, 272, false),
     (189, 'Litigii ambalaje - retur magazine', '', '/shop-reception/package/storeReturnsDisputes', true, 173, true),
     (289, 'Litigiu aviz', '', '/shop-reception/package/storeReturnsDisputes/:id', true, 173, false),
     (290, 'Dovezi magazin', '', '/shop-reception/package/storeReturnsDisputesImages/:id', true, 173, false),

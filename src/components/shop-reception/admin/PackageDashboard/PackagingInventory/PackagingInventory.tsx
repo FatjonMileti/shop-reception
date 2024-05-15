@@ -114,7 +114,7 @@ const PackagingInventory = () => {
   }
 
   const displayHistory = (rowId: number) =>
-    navigate(URLS.AUTH_BALANCE_PACKAGING_HISTORY.replace(':id', `${rowId}`))
+    navigate(URLS.AUTH_PACKING_INVENTORY_HISTORY.replace(':id', `${rowId}`))
 
   return (
     <div className={s.mainContainer}>
