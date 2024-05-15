@@ -83,7 +83,7 @@ const BalancePackages = () => {
       formatAndDownloadResponse(response)
     } catch (error) {
       showNotification({
-        message: `Error while download file. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }

@@ -1,64 +1,69 @@
-import { Grid } from '../../../Common/Grid'
-import { useNavigate } from 'react-router-dom'
+import { useMemo, useState } from 'react'
+import { useNotification } from 'hooks'
 import { Table } from 'components/core-ui/Table'
-import { columns } from './helpers'
-import { useState } from 'react'
-import { makeCoreGetRequest } from 'utils/api'
+import { getColumns, getFilters } from './helpers'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { useNotification } from 'hooks'
-import { TitleHeader } from '../../Common/TitleHeader'
+import { DownloadIcon, EditActionIcon } from 'icons'
+import { formatAndDownloadResponse } from 'utils/helpers'
+import s from '../../../commonStyles.modules.scss'
+import {
+  getHubOptions,
+  getParentSocietyOptions,
+  getShopOptions,
+  getSupportTypeOptions
+} from '../../api'
+import { EditPackagingInventory } from './EditPackagingInventory'
+import { History } from '@mui/icons-material'
 import { URLS } from '../../constants'
-import { EditActionIcon, FileMenu, DownloadIcon } from 'icons'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import { PackagingInventoryUpdateModal} from './PackagingInventoryUpdateModal'
+import { useNavigate } from 'react-router-dom'
 
 const PackagingInventory = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<PackagingInventory[]>([
-    {
-      id: 1,
-      store: "Oradea2",
-      hub: "Carrefour",
-      society: "Palet Chep",
-      supportType: "100",
-      inventoryQualitative: "100",
-      theoreticalBalanceQualitative: "100",
-      defectiveInventory: "5",
-      difference: "-5",
-      finalStockAfterInventory: "105",
-      inventoryManager: "oradea_rec",
-      inventoryDate: "07/02/2024",
-    }
-  ])
-  const [totalCount, setTotalCount] = useState<number>(0)
+  const [tableItems, setTableItems] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<any>(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<PackagingInventory>()
+
   const { showNotification } = useNotification()
 
-  const openEditModal = (rowId: number|string): void => {
-    selectRow(rowId)
-    setIsEditModalOpen(true)
-  }
-  const closeEditModal = (): void => setIsEditModalOpen(false)
+  const navigate = useNavigate()
 
-  const selectRow = (rowId: number|string) => {
-    const row = tableItems.find(item => item.id === rowId)
-    if (row) {
-      setSelectedRow(row)
+  const { data: shopOptions } = getShopOptions(showNotification)
+  const { data: hubOptions } = getHubOptions(showNotification)
+  const { data: supportTypeOptions } = getSupportTypeOptions(showNotification)
+  const { data: parentSocietyOptions } = getParentSocietyOptions(showNotification)
+
+  const filters = useMemo(
+    () => getFilters({ shopOptions, hubOptions, supportTypeOptions, parentSocietyOptions }),
+    [shopOptions, hubOptions, supportTypeOptions, parentSocietyOptions]
+  )
+
+  const columns = useMemo(() => getColumns(downloadImage), [])
+
+  const downloadImage = async id => {
+    try {
+      const response = await makeCoreGetFileRequest(`/shop-reception/pictures/export/${id}`, {
+        responseType: 'blob'
+      })
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la descarcarea imaginii. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
     }
   }
-
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/packagingIntory',
+          url: '/shop-reception/support-inventory',
           tableFilters,
           page,
           rowsPerPage,
@@ -66,138 +71,101 @@ const PackagingInventory = () => {
           orderBy
         })
       )
-
-      const responseList = response.list
-
-      setTableItems(toTableRowItems(responseList))
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
   }
 
+  const exportFile = async (tableState, e) => {
+    const { filters, order, orderBy } = tableState
+    const url = toTableGETUrl({
+      url: '/shop-reception/support-inventories/export',
+      tableFilters: filters,
+      order,
+      orderBy
+    })
+
+    try {
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const openModal = () => setIsEditModalOpen(true)
+  const closeModal = () => setIsEditModalOpen(false)
+
+  const selectRow = (rowId: number) => {
+    const row = tableItems.find(item => item.id === rowId)
+    setSelectedRow(row)
+    openModal()
+  }
+
+  const displayHistory = (rowId: number) =>
+    navigate(URLS.AUTH_BALANCE_PACKAGING_HISTORY.replace(':id', `${rowId}`))
+
   return (
-    <Grid
-      items={[
-        <TitleHeader title='Inventar Ambalaje' />,
-        <Grid
-          hasPaper={true}
-          items={[
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Selectează magazin'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează magazin',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Selectează hub'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează hub',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Selectează suport'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează suport',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Selectează societatea'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează societatea',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-          ]}
-          itemsPerRow={4}
-        />,
-        <PackagingInventoryUpdateModal
-          isModalOpen={isEditModalOpen}
-          closeModal={closeEditModal}
-          setShouldRefreshData={setShouldRefreshData}
-          editItem={selectedRow}
-        />,
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          newButton={null}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          toolbarActions={[
-            {
-              label: 'Export',
-              icon: <DownloadIcon />,
-              onClick: () => null
-            }
-          ]}
-          rowActions={[
-            {
-              label: 'Show',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              desktopIcon: <FileMenu />,
-              onClick: (e, rowId) => {
-                navigate(URLS.AUTH_PACKING_INVENTORY_HISTORY.replace(":id", rowId))
-              }
-            },
-            {
-              label: 'Edit',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              desktopIcon: <EditActionIcon />,
-              onClick: (e, rowId) => {
-                openEditModal(rowId)
-              }
-            }
-          ]}
-          rowActionsWidth='130px'
-        />
-      ]}
-      itemsPerRow={1}
-    />
+    <div className={s.mainContainer}>
+      <EditPackagingInventory
+        isModalOpen={isEditModalOpen}
+        closeModal={closeModal}
+        editItem={selectedRow}
+        setShouldRefreshData={setShouldRefreshData}
+      />
+      <Table
+        hideCheckbox
+        columns={columns}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+        rowActions={[
+          {
+            label: 'Editeaza',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#16a085',
+            desktopIcon: <EditActionIcon />,
+            onClick: (_e, rowId: number) => selectRow(rowId)
+          },
+          {
+            label: 'Date istorice',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#d9534f',
+            desktopIcon: <History htmlColor="rgb(9, 112, 230)" />,
+            onClick: (_e, rowId: number) => displayHistory(rowId)
+          }
+        ]}
+        toolbarActions={[
+          {
+            label: 'Export',
+            icon: <DownloadIcon />,
+            onClick: exportFile
+          }
+        ]}
+        filters={filters}
+        filtersButtonLabel="Filtre"
+        filtersLabel="Filtre"
+        appliedFiltersLabel="Filtre aplicate"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
+      />
+    </div>
   )
 }
 

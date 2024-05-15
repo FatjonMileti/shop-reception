@@ -1,14 +1,16 @@
-export const toTableRowItems = (items: PackagingInventory[]) => items.map((item: PackagingInventory) => ({
-  id: item.id,
-  store: item.store,
-  hub: item.hub,
-  society: item.society,
-  supportType: item.supportType,
-  inventoryQualitative: item.inventoryQualitative,
-  theoreticalBalanceQualitative: item.theoreticalBalanceQualitative,
-  defectiveInventory: item.defectiveInventory,
-  difference: item.difference,
-  finalStockAfterInventory: item.finalStockAfterInventory,
-  inventoryManager: item.inventoryManager,
-  inventoryDate: item.inventoryDate
-}))
+export const toTableRowItems = items =>
+  items.map(item => ({
+    id: item.id,
+    shopName: item.shopName ?? '',
+    hubName: item.hubName ?? '',
+    parentSociety: item.parentSociety ?? '',
+    supportType: item.supportType ?? '',
+    intactNumber: item.intactNumber ?? '',
+    computedIntactNumber: item.computedIntactNumber ?? '',
+    brokenNumber: item.brokenNumber ?? '',
+    defectPictureId: item.defectPictureId ?? '',
+    computedDifference: item.computedDifference ?? '',
+    computedTotalStock: item.computedTotalStock ?? '',
+    createdBy: item.createdBy ?? '',
+    createdDate: item.createdDate ?? ''
+  }))
