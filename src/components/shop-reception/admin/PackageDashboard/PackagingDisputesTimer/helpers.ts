@@ -3,19 +3,22 @@ export const columns = [
     title: 'Tip timer',
     field: 'timerTypeValue',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    disableSorting: true
   },
   {
     title: 'Valoare timer',
     field: 'timerTypeValue',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    disableSorting: true
   },
   {
     title: 'Descrirere timer',
     field: 'timerDescription',
     align: 'left',
     type: 'string',
-    width: '700px'
+    width: '700px',
+    disableSorting: true
   }
 ]
