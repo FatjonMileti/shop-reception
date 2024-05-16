@@ -74,13 +74,13 @@ export const getFilters = ({
     filter: (
       <Autocomplete
         variant="outlined"
-        label="Selecteaza Tip Support"
+        label="Selecteaza Tip Suport"
         options={supportTypeOptions || []}
         multiple
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Tip Support'
+    label: 'Selecteaza Tip Suport'
   },
   {
     name: 'parentSociety',

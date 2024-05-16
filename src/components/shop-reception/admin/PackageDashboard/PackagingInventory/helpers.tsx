@@ -1,79 +1,144 @@
+import { Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { DownloadIcon } from 'icons'
 
-export const columns = [
+export const getColumns = downloadImage => [
   {
     title: 'Magazin',
-    field: 'store',
+    field: 'shopName',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Hub',
-    field: 'hub',
+    title: 'HUB',
+    field: 'hubName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Societate',
-    field: 'society',
+    field: 'parentSociety',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Tip Suport',
+    title: 'Tip suport',
     field: 'supportType',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Calitativ Inventar',
-    field: 'inventoryQualitative',
+    title: 'Inventar Calitativ',
+    field: 'intactNumber',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Calitativ Sold Tearetic',
-    field: 'theoreticalBalanceQualitative',
+    title: 'Sold teoretic Calitativ',
+    field: 'computedIntactNumber',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Defect Inventar',
-    field: 'defectiveInventory',
+    title: 'Inventar Defect',
+    field: 'brokenNumber',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Defect Imagine',
-    field: 'defectiveImage',
+    title: 'Imagine defect',
+    field: 'defectPictureId',
     align: 'left',
-    collapsible: 'true',
-    render: (row) => (
-      <DownloadIcon />
-    ),
+    type: 'string',
+    render: row =>
+      row.defectPictureId ? (
+        <div onClick={() => downloadImage(row.defectPictureId)}>
+          <DownloadIcon />
+        </div>
+      ) : (
+        <div />
+      )
   },
   {
     title: 'Diferenta',
-    field: 'difference',
+    field: 'computedDifference',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Stoc final dupa inventar',
-    field: 'finalStockAfterInventory',
+    field: 'computedTotalStock',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Responsabil inventar',
-    field: 'inventoryManager',
+    field: 'createdBy',
     align: 'left',
     type: 'string'
   },
   {
-    title: 'Dată inventar',
-    field: 'inventoryDate',
+    title: 'Data inventar',
+    field: 'createdDate',
     align: 'left',
     type: 'string'
+  }
+]
+
+export const getFilters = ({
+  shopOptions,
+  hubOptions,
+  supportTypeOptions,
+  parentSocietyOptions
+}) => [
+  {
+    name: 'shopCode',
+    value: undefined,
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Selecteaza magazin"
+        options={shopOptions || []}
+        multiple
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Selecteaza depozit'
+  },
+  {
+    name: 'hubId',
+    value: undefined,
+    filter: (
+      <Autocomplete variant="outlined" label="Selecteaza Hub" options={hubOptions || []} multiple />
+    ),
+    type: 'autocomplete',
+    label: 'Selecteaza Hub'
+  },
+  {
+    name: 'supportTypeId',
+    value: undefined,
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Selecteaza Tip Suport"
+        options={supportTypeOptions || []}
+        multiple
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Selecteaza Tip Suport'
+  },
+  {
+    name: 'parentSociety',
+    value: undefined,
+    filter: (
+      <Autocomplete
+        variant="outlined"
+        label="Selecteaza Societate"
+        options={parentSocietyOptions || []}
+        multiple
+      />
+    ),
+    type: 'autocomplete',
+    label: 'Selecteaza Societate'
   }
 ]
