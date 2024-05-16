@@ -41,7 +41,6 @@ import { CentralizedNotice } from './PackageDashboard/CentralizedNotice'
 import { TransportResponsible } from './PackageDashboard/TransportResponsible'
 import { TruckDetail } from './ReceptionDashboard/TruckList/TruckDetail'
 import { SupportWrongDestinationDetail } from './ReceptionDashboard/SupportWrongDestination/SupportWrongDestinationDetail'
-import { PackagingDisputesTimerDetail } from './PackageDashboard/PackagingDisputesTimer/PackagingDisputesTimerDetail'
 import { BalancePackageHistory } from './PackageDashboard/BalancePackageHistory'
 import { SeriesNumber } from './AdminDashboard/SeriesNumber'
 import { SGRProducts } from './AdminDashboard/SGRProducts'
@@ -468,17 +467,6 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={SupportWrongDestinationDetail}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
-        }
-      />
-
-      <Route
-        path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL}
-        element={
-          <PrivateRoute
-            component={PackagingDisputesTimerDetail}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

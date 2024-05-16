@@ -318,6 +318,7 @@ interface PackagingDispute {
 interface PackagingDisputeTimer {
   id: number
   timerType: string
+  timerTypeValue: string
   timerValue: string
   timerDescription: string
 }
