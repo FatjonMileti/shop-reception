@@ -151,6 +151,7 @@ const PackagingInventory = () => {
             onClick: (_e, rowId: number) => displayHistory(rowId)
           }
         ]}
+        rowActionsWidth="130px"
         toolbarActions={[
           {
             label: 'Export',

@@ -27,7 +27,7 @@ const EditBalancePackage = ({ isModalOpen, closeModal, editItem, setShouldRefres
       })
     },
     onError: error =>
-      handleQueryError(error, 'A aparut o eroare la actualizarea soldului', showNotification)
+      handleQueryError(error, 'A aparut o eroare la actualizarea soldului.', showNotification)
   })
 
   const formik = useFormik({

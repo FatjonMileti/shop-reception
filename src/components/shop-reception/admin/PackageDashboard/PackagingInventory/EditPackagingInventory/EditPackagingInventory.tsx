@@ -11,7 +11,7 @@ import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { makeCorePostRequest } from 'utils/api'
 import { FileUpload } from 'components/core-ui/FileUpload'
 import { ChangeEvent } from 'react'
-import { toFormDataPayload } from 'utils/serializers'
+import { toBlobFormDataPayload, toFormDataPayload } from 'utils/serializers'
 
 const EditPackagingInventory = ({ isModalOpen, closeModal, editItem, setShouldRefreshData }) => {
   const { showNotification } = useNotification()
@@ -19,7 +19,13 @@ const EditPackagingInventory = ({ isModalOpen, closeModal, editItem, setShouldRe
   const uploadImage = async (values: any) => {
     await makeCorePostRequest(
       `/shop-reception/support-inventories/inventory/${editItem.id}`,
-      values
+      values,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data' // Ensure correct content type
+          // 'Content-Type': 'application/json'
+        }
+      }
     )
   }
 
@@ -47,7 +53,8 @@ const EditPackagingInventory = ({ isModalOpen, closeModal, editItem, setShouldRe
     },
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      const payload = toFormDataPayload(values)
+      const payload = toBlobFormDataPayload(values)
+      // const payload = toFormDataPayload(values)
       mutate(payload)
       formik.resetForm()
     }
