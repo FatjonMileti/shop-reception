@@ -1,14 +1,21 @@
 export const URLS = {
-  // Goods Reception
-  AUTH_RECEPTION_PROCESSING: '/shop-reception/mobile/inProcessingReception',
-  AUTH_EXPECTED_TRUCKS: '/shop-reception/mobile/expectedTrucks',
-  AUTH_REGISTER_TRUCK: '/shop-reception/mobile/registerTruck',
-  AUTH_PROCESSING_SHIPMENT: '/shop-reception/mobile/inProcessingShipment',
-  AUTH_SHIPPED_TRUCKS: '/shop-reception/mobile/shippedTrucks',
-  AUTH_SUPPORT_SCAN_STEP_1: '/shop-reception/mobile/supportCode',
-  AUTH_ADD_TRUCK: '/shop-reception/mobile/addTruck',
-  AUTH_ADD_TRUCK_STEP_2: '/shop-reception/mobile/add-trucks/step-2', // TODO: integrate stepper in parent page and delete
-  AUTH_LIST_TRUCKS: '/shop-reception/mobile/trucksList',
+  // Shop Inventory Update
+  AUTH_PACKAGING_INVENTORY_UPDATE: '/admin/mobile/packaging-inventory-update',
+
+  // Shop Goods Reception
+  AUTH_LIST_TRUCKS: '/shop-reception/mobile/trucksList', // List of trucks waiting reception
+  AUTH_TRUCK_DETAIL: '/shop-reception/mobile/truckDetails/:id', // List of trucks waiting reception step 2
+  AUTH_ADD_TRUCK: '/shop-reception/mobile/addTruck', // Add new truck for reception
+  AUTH_ADD_TRUCK_STEP_2: '/shop-reception/mobile/add-trucks/step-2', // Add new truck for reception step 2 // TODO: integrate stepper in parent page and delete
+
+  AUTH_RECEPTION_PROCESSING: '/shop-reception/mobile/inProcessingReception', // Trucks in processing for reception
+
+  AUTH_SUPPORT_SCAN_STEP_1: '/shop-reception/mobile/support-scan/step-1', // Reception Step 1
+  AUTH_SUPPORT_SCAN_STEP_2: '/shop-reception/mobile/support-scan/step-2', // Step 2
+  AUTH_SUPPORT_SCAN_STEP_3: '/shop-reception/mobile/support-scan/step-3', // Shop return step 2 (duplicate) ---> repurposed for scan step 3
+  AUTH_SUPPORT_SCAN_STEP_4: '/shop-reception/mobile/support-scan/step-4', // Step 4
+  AUTH_SUPPORT_SCAN_STEP_5: '/shop-reception/mobile/support-scan/step-5', // Step 5
+
   AUTH_DELIVERY: '/shop-reception/mobile/validateDelivery',
   AUTH_DELIVERY_DETAIL: '/shop-reception/mobile/deliveryDetails',
   AUTH_DELIVERY_COMPLETE_SCAN: '/shop-reception/mobile/deliveryFullScan',
@@ -20,41 +27,57 @@ export const URLS = {
   AUTH_DELIVERY_RANDOM_SUPPORT: '/shop-reception/mobile/randomSupport',
   AUTH_DELIVERY_RANDOM_SUPPORT_FINAL: '/admin/mobile/delivery/random-support/final', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_RANDOM_SUPPORT_CONFIRM: '/admin/mobile/delivery/random-support/confirm', // TODO: integrate stepper in parent page and delete
-
-  // Goods Return
-  AUTH_EXPECTED_RETURNS: '/shop-reception/mobile/expectedReturns', // HUB expected returns?
-  AUTH_IN_PROGRESS_RETURN: '/shop-reception/mobile/inProgressReturnReception', // HUB in progress returns?
-  AUTH_RECORD_RETURN: '/shop-reception/mobile/recordReturn', // Hub New Return Step 1?
-  AUTH_CONTINUE_RETURN: '/shop-reception/mobile/continueReturn', // Shop in progress returns?
-  AUTH_EXPECTED_RETURN_DETAIL: '/shop-reception/mobile/expectedReturnDetails',
-  AUTH_EXPECTED_RETURN_DETAIL_STEP_2: '/admin/mobile/expected-return/detail-step-2', // HUB Return Step 2 // TODO: integrate stepper in parent page and delete
-  AUTH_EXPECTED_RETURN_DETAIL_STEP_3: '/admin/mobile/expected-return/detail-step-3', // TODO: integrate stepper in parent page and delete
-  AUTH_EXPECTED_RETURN_DETAIL_FINAL: '/admin/mobile/expected-return/detail-step-final', // TODO: integrate stepper in parent page and delete
-  AUTH_TRUCK_DETAIL: '/shop-reception/mobile/truckDetails/:id',
-  AUTH_RECORD_RETURN_DETAIL: '/shop-reception/mobile/recordReturnDetails',
-  AUTH_CONTINUE_RETURN_DETAIL: '/shop-reception/mobile/continueReturnDetails',
-  AUTH_CONTINUE_RETURN_DETAIL_2: '/admin/mobile/continue-return/detail-2', // TODO: integrate stepper in parent page and delete
-  AUTH_CONTINUE_RETURN_DETAIL_FINAL: '/admin/mobile/continue-return/detail/final', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_RANDOM_PRODUCT: '/shop-reception/mobile/randomProduct',
   AUTH_DELIVERY_RANDOM_PRODUCT_FINAL: '/admin/mobile/delivery/random-product/final', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_RANDOM_PRODUCT_CONFIRM: '/admin/mobile/delivery/random-product/confirm', // TODO: integrate stepper in parent page and delete
-  AUTH_ORDER_RETURN_TRUCK: '/shop-reception/mobile/truckReturnOrder',
-  AUTH_CONFIRM_RETURN_TRUCKS: 'shop-reception/mobile/truckReturnConfirm',
-
-  // Shop Inventory Update
-  AUTH_PACKAGING_INVENTORY_UPDATE: '/admin/mobile/packaging-inventory-update',
-
-  // ?
-  AUTH_APPROVE_TRUCK: '/admin/mobile/truck/approve',
 
   // Shop Goods Return
-  AUTH_TRUCK_STEP_1: '/admin/mobile/truck-step-1', // Step 4
-  AUTH_TRUCK_STEP_2: '/admin/mobile/truck-step-2', // Step 3
-  AUTH_TRUCK_STEP_3: '/admin/mobile/truck-step-3', // Step 2
-  AUTH_TRUCK_STEP_4: '/admin/mobile/truck-step-4', // Step 2 (duplicate)
-  AUTH_TRUCK_STEP_5: '/admin/mobile/truck-step-5', // Step 1
-  AUTH_TRUCK_STEP_6: '/admin/mobile/truck-step-6', // Step 4 (duplicate)
+  AUTH_RETURN_STEP_1: '/admin/mobile/return-step-1', // Step 1
+  AUTH_RETURN_STEP_2: '/admin/mobile/return-step-2', // Step 2
+  AUTH_RETURN_STEP_3: '/admin/mobile/return-step-3', // Step 3
+  AUTH_RETURN_STEP_4: '/admin/mobile/return-step-4', // Step 4
+  AUTH_RETURN_STEP_5: '/admin/mobile/return-step-5', // Step 5
+  AUTH_CONTINUE_RETURN_TRUCKS: '/shop-reception/mobile/inProgressReturns', // In progress return trucks
 
-  // Shop Goods Reception
-  AUTH_SUPPORT_SCAN_STEP_4: '/admin/mobile/truck-step-7'// Step 4
+
+
+  // HUB Goods Reception
+  AUTH_EXPECTED_TRUCKS: '/shop-reception/mobile/expectedTrucks', // List of trucks waiting reception at the hub
+  AUTH_PROCESSING_SHIPMENT: '/shop-reception/mobile/inProcessingShipment', // List of trucks in processing at hub reception
+  // truck create step 1
+  // truck create step 2
+  // reception step 1
+  // reception step 2
+  // reception step 3
+  // reception step 4
+  // reception step 5
+
+  AUTH_REGISTER_TRUCK: '/shop-reception/mobile/registerTruck', // Hub registration step 1
+  // Hub registration step 2
+  // Hub registration step 3
+  // Hub registered truck list
+  // Hub registered trucks in process
+
+  // HUB Goods Return
+  AUTH_EXPECTED_RETURNS: '/shop-reception/mobile/expectedReturns', // Hub expected trucks for return
+  AUTH_EXPECTED_RETURN_DETAIL: '/shop-reception/mobile/expectedReturnDetails', // return step 1
+  AUTH_EXPECTED_RETURN_DETAIL_STEP_2: '/admin/mobile/expected-return/detail-step-2', // return step 2 // TODO: integrate stepper in parent page and delete
+  AUTH_EXPECTED_RETURN_DETAIL_STEP_3: '/admin/mobile/expected-return/detail-step-3', // return step 3 // TODO: integrate stepper in parent page and delete
+  AUTH_EXPECTED_RETURN_DETAIL_FINAL: '/admin/mobile/expected-return/detail-step-final', // return step 4 // TODO: integrate stepper in parent page and delete
+  AUTH_IN_PROGRESS_RETURN: '/shop-reception/mobile/inProgressReturnReception', // trucks in process of return
+
+  AUTH_RECORD_RETURN: '/shop-reception/mobile/recordReturn', // register a new return
+  AUTH_RECORD_RETURN_DETAIL: '/shop-reception/mobile/recordReturnDetails', // register a new truck for return step 2
+  AUTH_CONTINUE_RETURN_DETAIL: '/shop-reception/mobile/continueReturnDetails', // step 3
+  AUTH_CONTINUE_RETURN_DETAIL_2: '/admin/mobile/continue-return/detail-2', // step 4 // TODO: integrate stepper in parent page and delete
+  AUTH_CONTINUE_RETURN_DETAIL_FINAL: '/admin/mobile/continue-return/detail/final', //step 5 // TODO: integrate stepper in parent page and delete
+  AUTH_CONTINUE_RETURN: '/shop-reception/mobile/continueReturn', // registered returns in process
+
+  // Deposit
+  AUTH_SHIPPED_TRUCKS: '/shop-reception/mobile/shippedTrucks', // Deposit return truck list ?
+  // trucks in process of return
+  // deposit return step 1
+  // deposit return step 2
+  // deposit return step 3
+  // deposit return step 4
 }
