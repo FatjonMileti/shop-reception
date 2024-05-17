@@ -121,7 +121,7 @@ export const getDepositOptions = (showNotification: Function, validateQuery: boo
       const data = await makeCoreGetRequest(`/shop-reception/deposits/accessible`)
       return data.map(item => ({
         label: item.depositName,
-        value: item.depositName
+        value: item.id
       }))
     },
     {
@@ -166,3 +166,26 @@ export const getLocation = (showNotification: Function, validateQuery: boolean =
   )
 }
 
+export const getNonCompliantReasonOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['nonCompliantReasons'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/support-flows/non-compliant-reasons`)
+      return data.map(item => ({
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea motivelor de ne-conformitate.',
+          showNotification
+        )
+    }
+  )
+}
