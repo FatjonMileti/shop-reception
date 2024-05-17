@@ -41,6 +41,7 @@ const ReceiptClientDetails: React.FC = () => {
         message: `Factura a fost generată cu success.`,
         type: 'success'
       })
+      navigate(`/supplyOmni/bills/${orderId}`)
     },
     onError: res => {
       showNotification({
@@ -49,6 +50,10 @@ const ReceiptClientDetails: React.FC = () => {
       })
     }
   })
+
+  const generateBill = () => {
+    mutate({ customerId: id, orderId })
+  }
 
   return (
     <div className={s.container}>
@@ -60,7 +65,7 @@ const ReceiptClientDetails: React.FC = () => {
           buttons={{
             topButton: (
               <Button
-                label="Modifică client"
+                label="Modifica client"
                 variant="contained"
                 onClick={() => {
                   navigate(`/supplyOmni/receiptSelectClient?orderId=${orderId}`)
@@ -72,9 +77,7 @@ const ReceiptClientDetails: React.FC = () => {
               <Button
                 label="Genereaza factura"
                 variant="contained"
-                // onClick={() => mutate({ customerId: id, orderId })}
-                onClick={() => console.log('Generate bill is disabled')}
-                disabled
+                onClick={generateBill}
               />
             )
           }}
