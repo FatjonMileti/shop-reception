@@ -140,6 +140,7 @@ VALUES
     (170, 'Lista camioane retur', 'UsersManagement', null, true, 14),
     (171, 'Rulaj ambalaje', 'UsersManagement', null, true, 14),
     (172, 'Sold ambalaje', 'UsersManagement', null, true, 14),
+    (272, 'Inventar ambalaje', 'UsersManagement', null, true, 14),
     (173, 'Litigii ambalaje - retur magazine', 'UsersManagement', null, true, 14),
     (174, 'Diferente tip ambalaj', 'UsersManagement', null, true, 14),
     (175, 'Ambalaje returnate', 'UsersManagement', null, true, 14),
@@ -282,6 +283,9 @@ VALUES
     (186, 'Lista camioane retur', '', '/shop-reception/package/trucksReturnList', true, 170, true),
     (187, 'Rulaj ambalaje', '', '/shop-reception/package/rolling', true, 171, true),
     (188, 'Sold ambalaje', '', '/shop-reception/package/balance', true, 172, true),
+    (288, 'Istoric sold', '', '/shop-reception/package/balance/history/:id', true, 172, false),
+    (389, 'Inventar ambalaje', '', '/shop-reception/package/packingInventory', true, 272, true),
+    (390, 'Istoric inventar', '', '/shop-reception/package/packingInventoryHistory/:id', true, 272, false),
     (189, 'Litigii ambalaje - retur magazine', '', '/shop-reception/package/storeReturnsDisputes', true, 173, true),
     (289, 'Litigiu aviz', '', '/shop-reception/package/storeReturnsDisputes/:id', true, 173, false),
     (290, 'Dovezi magazin', '', '/shop-reception/package/storeReturnsDisputesImages/:id', true, 173, false),
@@ -354,7 +358,20 @@ VALUES
     (151, 'GG_RO_DEX_VOLUMETRY_WORKER'),
     (152, 'GG_RO_DEX_VOLUMETRY_TEMPLATE_ADMIN'),
     -- Shop Reception
-    (200, 'SHOP_RECEPTION_DUMMY_ROLE');
+    (200, 'GG_RO_HQ_SHOP_RECEPTION_ADMIN');
+    (201, 'GG_RO_HQ_SHOP_RECEPTION_BACKOFFICE');
+    (202, 'GG_RO_HQ_SHOP_RECEPTION_STORE');
+    (203, 'GG_RO_HQ_SHOP_RECEPTION_HUB');
+    (204, 'GG_RO_HQ_SHOP_RECEPTION_DIRECTOR');
+    (205, 'GG_RO_HQ_SHOP_RECEPTION_REGIONAL_OPERATIONS');
+    (206, 'GG_RO_HQ_SHOP_RECEPTION_WAREHOUSE');
+    (207, 'GG_RO_HQ_SHOP_RECEPTION_CG');
+    (208, 'GG_RO_HQ_SHOP_RECEPTION_AMBALAJE');
+
+
+
+
+
 
 -- roles_activities
 INSERT INTO
@@ -417,7 +434,7 @@ VALUES
     (200, 149), (200, 151), (200, 152), (200, 153), (200, 154), (200, 155), (200, 156),
     (200, 157), (200, 158), (200, 159), (200, 160), (200, 161), (200, 162), (200, 163), (200, 164),
     (200, 165), (200, 166), (200, 167), (200, 168), (200, 169), (200, 170), (200, 171), (200, 172),
-    (200, 173), (200, 174), (200, 175), (200, 176), (200, 177),
+    (200, 173), (200, 174), (200, 175), (200, 176), (200, 177), (200, 272),
     -- Shop Reception Mobile
     -- SHOP_RECEPTION_DUMMY_ROLE
     (200, 178), (200, 179), (200, 180), (200, 181), (200, 182), (200, 183), (200, 184), (200, 185),

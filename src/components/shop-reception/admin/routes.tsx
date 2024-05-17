@@ -36,13 +36,12 @@ import { ReturnedPackaging } from './PackageDashboard/ReturnedPackaging'
 import { PackagingCompliance } from './PackageDashboard/PackagingCompliance'
 import { PackagingDisputesTimer } from './PackageDashboard/PackagingDisputesTimer'
 import { PackagingInventory } from './PackageDashboard/PackagingInventory'
-import { PackagingInventoryHistory } from './PackageDashboard/PackagingInventory/PackagingInventoryHistory'
+import { PackagingInventoryHistory } from './PackageDashboard/PackagingInventoryHistory'
 import { CentralizedNotice } from './PackageDashboard/CentralizedNotice'
 import { TransportResponsible } from './PackageDashboard/TransportResponsible'
 import { TruckDetails } from './ReceptionDashboard/TruckList/TruckDetails'
 import { SupportWrongDestinationDetail } from './ReceptionDashboard/SupportWrongDestination/SupportWrongDestinationDetail'
-import { PackagingDisputesTimerDetail } from './PackageDashboard/PackagingDisputesTimer/PackagingDisputesTimerDetail'
-import { BalancePackageHistory } from './PackageDashboard/BalancePackages/BalancePackageHistory'
+import { BalancePackageHistory } from './PackageDashboard/BalancePackageHistory'
 import { SeriesNumber } from './AdminDashboard/SeriesNumber'
 import { SGRProducts } from './AdminDashboard/SGRProducts'
 import SupportCode from './ReceptionDashboard/DeliveryTicketsList/DeliveryTicketsDetails/SupportCode/SupportCode'
@@ -468,17 +467,6 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={SupportWrongDestinationDetail}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
-        }
-      />
-
-      <Route
-        path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL}
-        element={
-          <PrivateRoute
-            component={PackagingDisputesTimerDetail}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

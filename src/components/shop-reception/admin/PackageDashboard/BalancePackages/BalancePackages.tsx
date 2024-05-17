@@ -6,7 +6,7 @@ import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { DeleteActionIcon, DownloadIcon, EditActionIcon } from 'icons'
+import { DownloadIcon, EditActionIcon } from 'icons'
 import { formatAndDownloadResponse } from 'utils/helpers'
 import s from '../../../commonStyles.modules.scss'
 import {
@@ -17,6 +17,8 @@ import {
 } from '../../api'
 import { EditBalancePackage } from './EditBalancePackage'
 import { History } from '@mui/icons-material'
+import { URLS } from '../../constants'
+import { useNavigate } from 'react-router-dom'
 
 const BalancePackages = () => {
   const [tableItems, setTableItems] = useState<any[]>([])
@@ -27,6 +29,8 @@ const BalancePackages = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
 
   const { showNotification } = useNotification()
+
+  const navigate = useNavigate()
 
   const { data: shopOptions } = getShopOptions(showNotification)
   const { data: hubOptions } = getHubOptions(showNotification)
@@ -79,7 +83,7 @@ const BalancePackages = () => {
       formatAndDownloadResponse(response)
     } catch (error) {
       showNotification({
-        message: `Error while download file. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -93,6 +97,9 @@ const BalancePackages = () => {
     setSelectedRow(row)
     openModal()
   }
+
+  const displayHistory = (rowId: number) =>
+    navigate(URLS.AUTH_BALANCE_PACKAGING_HISTORY.replace(':id', `${rowId}`))
 
   return (
     <div className={s.mainContainer}>
@@ -125,8 +132,8 @@ const BalancePackages = () => {
             labelColor: 'white',
             typographyVariant: 'medium',
             backgroundColor: '#d9534f',
-            desktopIcon: <History htmlColor='rgb(9, 112, 230)'/>,
-            onClick: (_e, rowId: number) => console.log(rowId)
+            desktopIcon: <History htmlColor="rgb(9, 112, 230)" />,
+            onClick: (_e, rowId: number) => displayHistory(rowId)
           }
         ]}
         toolbarActions={[

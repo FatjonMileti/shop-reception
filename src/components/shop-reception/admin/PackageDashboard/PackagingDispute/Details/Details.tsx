@@ -35,7 +35,7 @@ const Details = ({
       formatAndDownloadResponse(response)
     } catch (error) {
       showNotification({
-        message: `Error while download file. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la descarcarea imaginilor. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
