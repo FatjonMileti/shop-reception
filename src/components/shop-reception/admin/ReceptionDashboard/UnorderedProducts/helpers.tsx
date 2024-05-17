@@ -125,7 +125,7 @@ export const columns = markAsResolved => [
   }
 ]
 
-export const drawerFilters = (shopCodes, depositOptions) => [
+export const drawerFilters = (shopOptions, depositOptions) => [
   {
     name: 'depositName',
     value: '',
@@ -148,7 +148,7 @@ export const drawerFilters = (shopCodes, depositOptions) => [
         variant="outlined"
         label="Selectează magazin"
         disableClearable
-        options={shopCodes || []}
+        options={shopOptions || []}
       />
     ),
     type: 'autocomplete',
