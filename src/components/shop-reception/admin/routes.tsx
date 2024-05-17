@@ -39,7 +39,7 @@ import { PackagingInventory } from './PackageDashboard/PackagingInventory'
 import { PackagingInventoryHistory } from './PackageDashboard/PackagingInventory/PackagingInventoryHistory'
 import { CentralizedNotice } from './PackageDashboard/CentralizedNotice'
 import { TransportResponsible } from './PackageDashboard/TransportResponsible'
-import { TruckDetail } from './ReceptionDashboard/TruckList/TruckDetail'
+import { TruckDetails } from './ReceptionDashboard/TruckList/TruckDetails'
 import { SupportWrongDestinationDetail } from './ReceptionDashboard/SupportWrongDestination/SupportWrongDestinationDetail'
 import { PackagingDisputesTimerDetail } from './PackageDashboard/PackagingDisputesTimer/PackagingDisputesTimerDetail'
 import { BalancePackageHistory } from './PackageDashboard/BalancePackages/BalancePackageHistory'
@@ -457,7 +457,7 @@ export const useShopReceptionRoutes = applicationPages => {
         path={URLS.AUTH_TRUCK_DETAIL}
         element={
           <PrivateRoute
-            component={TruckDetail}
+            component={TruckDetails}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

@@ -114,10 +114,7 @@ export const getParentSocietyOptions = (
   )
 }
 
-export const getDepositOptions = (
-  showNotification: Function,
-  validateQuery: boolean = true
-) => {
+export const getDepositOptions = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(
     ['deposits'],
     async () => {
@@ -133,3 +130,39 @@ export const getDepositOptions = (
     }
   )
 }
+
+export const getStatusOptions = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['status'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/deliveryTicket/statuses`)
+      return data.map(item => ({
+        label: item.deliveryTicketStatusValue,
+        value: item.deliveryTicketStatus
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea depozitelor.', showNotification)
+    }
+  )
+}
+
+
+export const getLocation = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['location'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/supportTypeFlow`)
+      return data.map(item => ({
+        label: item.deliveryTicketStatusValue,
+        value: item.deliveryTicketStatus
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea locatiilor.', showNotification)
+    }
+  )
+}
+

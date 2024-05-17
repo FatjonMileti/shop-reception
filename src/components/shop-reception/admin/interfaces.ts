@@ -1,22 +1,30 @@
 interface TruckItem {
   id: number
-  store: string
-  hub: string
-  warehouseName: string
-  truckLocation: string
-  registrationNumber: string
-  driverCode: string
-  raceCode: string
+  approvedDate: string
+  approver: string
+  arrivalConform: boolean
+  created: string
+  createdBy: string
+  creationOperator: string
+  depositName: string
+  depositTemperature: number
+  documentsConform: boolean
+  driverName: string
+  etransportStatus: string
+  flowType: string
+  flowTypeValue: string
+  hubName: string
+  manualCreationDate: string
+  sealConform: boolean
   seals: string
-  deliveryReceipts: string
-  complianceDocuments: string
-  thermodiagramConformity: string
-  receptionWithinHours: string
-  sealCompliance: string
+  shopName: string
+  shopTemperature: number
   status: string
-  registrationDate: string
-  registrationOperator: string
-  eTransportStatus: string
+  statusValue: string
+  thermodiagramConform: boolean
+  ticketCodes: string
+  transportCode: string
+  truckNumber: string
 }
 
 interface AdminDeposit {
@@ -261,6 +269,7 @@ interface MetiFile {
   depositCode: string
   createdBy: string
   fileStatus: string
+  fileStatusValue: string
   ticketExternalId: string
   receivedFilePath: string
   sentFilePath: string

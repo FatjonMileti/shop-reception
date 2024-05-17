@@ -7,6 +7,7 @@ export const toTableRowItems = (items: MetiFile[]) =>
     depositCode: item.depositCode || '',
     createdBy: item.createdBy || '',
     fileStatus: item.fileStatus || '',
+    fileStatusValue: item.fileStatusValue,
     ticketExternalId: item.ticketExternalId || '',
     receivedFilePath: item.receivedFilePath || '',
     sentFilePath: item.sentFilePath || '',

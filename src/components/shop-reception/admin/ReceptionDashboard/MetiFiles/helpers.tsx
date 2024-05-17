@@ -51,7 +51,7 @@ export const columns = (
     type: 'string',
     width: '70px',
     disableSorting: true,
-    render: row => row.fileStatus.label
+    render: row => row.fileStatusValue
   },
   {
     title: 'Fișier trimis',

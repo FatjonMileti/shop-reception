@@ -33,7 +33,7 @@ const DifferencesProducts = () => {
         })
       )
 
-      setTableItems(toTableRowItems(response.productWithDifferenceList))
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
