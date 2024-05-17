@@ -8,26 +8,30 @@ export const columns = markAsResolved => [
     title: 'Depozit',
     field: 'depositName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Magazin',
     field: 'shopName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Cod produs',
     field: 'productCode',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Denumire produs',
     field: 'productName',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
 
   {
@@ -35,52 +39,60 @@ export const columns = markAsResolved => [
     field: 'productEan',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Cantitate calitativă',
     field: 'validatedQuantity',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Cantitate defectǎ',
     field: 'brokenQuantity',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Motiv defectiune',
     field: 'defectReason',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Cod support',
     field: 'externalSupportCode',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Bon livrare',
     field: 'deliveryTicketExternalId',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    width: '100px'
   },
   {
     title: 'Datǎ recepție',
     field: 'created',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Operator recepție',
     field: 'createdBy',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Rezolvat',
@@ -101,13 +113,15 @@ export const columns = markAsResolved => [
     title: 'Data rezolvare',
     field: 'updated',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   },
   {
     title: 'Operator rezolvare',
     field: 'lastUpdateBy',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    width: '100px'
   }
 ]
 
