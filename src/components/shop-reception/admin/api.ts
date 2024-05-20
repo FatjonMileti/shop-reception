@@ -50,6 +50,32 @@ export const getShopOptions = (showNotification: Function, validateQuery: boolea
   )
 }
 
+export const getShopTypesOptions = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['shop-types'],
+    async () => {
+      const result = await makeCoreGetRequest('/shop-reception/products/types')
+
+      const resultOptions = result.map(
+        (item: any): AutocompleteOption => ({
+          label: item.value,
+          value: item.key
+        })
+      )
+
+      return resultOptions || []
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea tipurilor de magazine.',
+          showNotification
+        )
+    }
+  )
+}
+
 export const getHubOptions = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(
     ['hubs'],
@@ -131,6 +157,30 @@ export const getDepositOptions = (showNotification: Function, validateQuery: boo
   )
 }
 
+export const getRegionTypesOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['regions'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/regions/accessible`)
+      return data.map(item => ({
+        label: item.name,
+        value: item.id
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea tipurilor de regiuni.',
+          showNotification
+        )
+    }
+  )
+}
+
 export const getStatusOptions = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(
     ['status'],
@@ -147,7 +197,6 @@ export const getStatusOptions = (showNotification: Function, validateQuery: bool
     }
   )
 }
-
 
 export const getLocation = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(

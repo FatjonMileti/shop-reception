@@ -137,6 +137,7 @@ VALUES
     (167, 'Fisiere meti', 'UsersManagement', null, true, 13),
     (168, 'Produse cu diferente', 'UsersManagement', null, true, 13),
     (169, 'Trasabilitate suport', 'UsersManagement', null, true, 13),
+    (195, 'Articole sensibile', 'UsersManagement', null, true, 13),
     (170, 'Lista camioane retur', 'UsersManagement', null, true, 14),
     (171, 'Rulaj ambalaje', 'UsersManagement', null, true, 14),
     (172, 'Sold ambalaje', 'UsersManagement', null, true, 14),
@@ -280,6 +281,7 @@ VALUES
     (221, 'Detalii fisiere meti', '', '/shop-reception/reception/metiFiles/:id', true, 167, false),
     (184, 'Produse cu diferente', '', '/shop-reception/reception/productsDifferences', true, 168, true),
     (185, 'Trasabilitate suport', '', '/shop-reception/reception/trasabilitySupport', true, 169, true),
+    (292, 'Articole sensibile', '', '/shop-reception/reception/sensitiveProducts', true, 195, true),
     (186, 'Lista camioane retur', '', '/shop-reception/package/trucksReturnList', true, 170, true),
     (187, 'Rulaj ambalaje', '', '/shop-reception/package/rolling', true, 171, true),
     (188, 'Sold ambalaje', '', '/shop-reception/package/balance', true, 172, true),
@@ -358,14 +360,14 @@ VALUES
     (151, 'GG_RO_DEX_VOLUMETRY_WORKER'),
     (152, 'GG_RO_DEX_VOLUMETRY_TEMPLATE_ADMIN'),
     -- Shop Reception
-    (200, 'GG_RO_HQ_SHOP_RECEPTION_ADMIN');
-    (201, 'GG_RO_HQ_SHOP_RECEPTION_BACKOFFICE');
-    (202, 'GG_RO_HQ_SHOP_RECEPTION_STORE');
-    (203, 'GG_RO_HQ_SHOP_RECEPTION_HUB');
-    (204, 'GG_RO_HQ_SHOP_RECEPTION_DIRECTOR');
-    (205, 'GG_RO_HQ_SHOP_RECEPTION_REGIONAL_OPERATIONS');
-    (206, 'GG_RO_HQ_SHOP_RECEPTION_WAREHOUSE');
-    (207, 'GG_RO_HQ_SHOP_RECEPTION_CG');
+    (200, 'GG_RO_HQ_SHOP_RECEPTION_ADMIN'),
+    (201, 'GG_RO_HQ_SHOP_RECEPTION_BACKOFFICE'),
+    (202, 'GG_RO_HQ_SHOP_RECEPTION_STORE'),
+    (203, 'GG_RO_HQ_SHOP_RECEPTION_HUB'),
+    (204, 'GG_RO_HQ_SHOP_RECEPTION_DIRECTOR'),
+    (205, 'GG_RO_HQ_SHOP_RECEPTION_REGIONAL_OPERATIONS'),
+    (206, 'GG_RO_HQ_SHOP_RECEPTION_WAREHOUSE'),
+    (207, 'GG_RO_HQ_SHOP_RECEPTION_CG'),
     (208, 'GG_RO_HQ_SHOP_RECEPTION_AMBALAJE');
 
 
@@ -434,7 +436,7 @@ VALUES
     (200, 149), (200, 151), (200, 152), (200, 153), (200, 154), (200, 155), (200, 156),
     (200, 157), (200, 158), (200, 159), (200, 160), (200, 161), (200, 162), (200, 163), (200, 164),
     (200, 165), (200, 166), (200, 167), (200, 168), (200, 169), (200, 170), (200, 171), (200, 172),
-    (200, 173), (200, 174), (200, 175), (200, 176), (200, 177), (200, 272),
+    (200, 173), (200, 174), (200, 175), (200, 176), (200, 177), (200, 272), (200, 195),
     -- Shop Reception Mobile
     -- SHOP_RECEPTION_DUMMY_ROLE
     (200, 178), (200, 179), (200, 180), (200, 181), (200, 182), (200, 183), (200, 184), (200, 185),

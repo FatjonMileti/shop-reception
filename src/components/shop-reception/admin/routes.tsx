@@ -45,6 +45,7 @@ import { BalancePackageHistory } from './PackageDashboard/BalancePackageHistory'
 import { SeriesNumber } from './AdminDashboard/SeriesNumber'
 import { SGRProducts } from './AdminDashboard/SGRProducts'
 import SupportCode from './ReceptionDashboard/DeliveryTicketsList/DeliveryTicketsDetails/SupportCode/SupportCode'
+import { SensitiveArticles } from './ReceptionDashboard/SensitiveArticles'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -477,6 +478,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={BalancePackageHistory}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_SENSITIVE_PRODUCTS}
+        element={
+          <PrivateRoute
+            component={SensitiveArticles}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
