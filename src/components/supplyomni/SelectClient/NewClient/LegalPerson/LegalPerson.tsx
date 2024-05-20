@@ -10,6 +10,7 @@ import { ChangeEvent } from 'react'
 import { initialValues, validationSchema } from './helpers'
 import { CountyCityInterface, LegalPerson } from '../interfaces'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { toLegalPersonPayload } from './serializers'
 
 interface LegalPersonProps {
   selectNewClient: boolean
@@ -52,7 +53,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: LegalPerson) => {
-      mutate(values)
+      mutate(toLegalPersonPayload(values))
     }
   })
 
