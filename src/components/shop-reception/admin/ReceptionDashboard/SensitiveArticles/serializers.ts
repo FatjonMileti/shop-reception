@@ -1,11 +1,20 @@
 export const toTableRowItems = (items: UnorderedProducts[]) =>
   items.map((item: UnorderedProducts) => ({
     id: item.id,
-    dateInfo: item.dateInfo || '',
-    donePercent: item.donePercent || '',
-    idDeliverySupport: item.idDeliverySupport || '',
-    lastUpdate: item.lastUpdate || '',
-    scannedNo: item.scannedNo || '',
+    depositName: item.depositName || '',
     shopName: item.shopName || '',
-    verifiedNo: item.verifiedNo || ''
+    shopCode: item.shopCode || '',
+    productCode: item.productCode || '',
+    productName: item.productName || '',
+    productEan: item.productEan || '',
+    validatedQuantity: item.validatedQuantity || '',
+    brokenQuantity: item.brokenQuantity || '',
+    defectReason: item.defectReason || '',
+    externalSupportCode: item.externalSupportCode || '',
+    deliveryTicketExternalId: item.deliveryTicketExternalId || '',
+    created: item.created || '',
+    createdBy: item.createdBy || '',
+    resolved: item.resolved || false,
+    updated: item.updated || '',
+    lastUpdateBy: item.lastUpdateBy || ''
   }))
