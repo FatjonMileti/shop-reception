@@ -31,7 +31,7 @@ const SupportTradability = () => {
         })
       )
 
-      setTableItems(toTableRowItems(response.list))
+      setTableItems(toTableRowItems(response.supportTraceabilityList))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -46,6 +46,8 @@ const SupportTradability = () => {
   return (
     <div className={s.mainContainer}>
       <Table
+        order="desc"
+        orderBy="id"
         hideCheckbox
         columns={columns}
         items={tableItems}
