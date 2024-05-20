@@ -49,7 +49,6 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-jsbarcode": "^0.4.2",
-    "react-favicon": "^2.0.3",
     "react-pdf": "^7.7.0",
     "react-query": "^3.39.3",
     "react-redux": "^8.1.3",

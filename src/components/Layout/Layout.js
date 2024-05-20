@@ -45,7 +45,7 @@ const Layout = ({ children, modules, setSubdomainId }) => {
       }}
     >
       <Typography variant="light" component="div">
-        <Favicon url="images/favicon.ico" />
+        {/* <Favicon url="images/favicon.ico" /> */}
         <div>
           <Notification />
           <FirebaseNotification />
