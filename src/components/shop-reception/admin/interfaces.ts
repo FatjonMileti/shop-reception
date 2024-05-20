@@ -461,19 +461,31 @@ interface RollingPackages {
 
 interface SupportTradability {
   id: number
-  raceCode: string
-  raceType: string
-  loadingPlace: string
-  uploadDate: string
-  carNumber: string
-  warehouseName: string
+
+  transportCode: string
+  truckType: string
+  flowType: string
+  expeditionDate: string
+  truckNumber: string
+  depositName: string
   driverName: string
   driverPhone: string
   hubName: string
-  storeName: string
-  society: string
-  goodsCategory: string
-  numberOfPallets: number
+  shopName: string
+  parentSociety: string
+  packageCategory: string
+  arrivedSupportsNumber: number
+  supportsNumberReleased: number
+  inHubReleaseDateTime: string
+  inHubPresentationHour: string
+  inHubReleaseHour: string
+  inHubLoadingDateTime: string
+  inHubLoadingHour: string
+  truckNumberHub: string
+  driverNameHub: string
+  loadedSupportsNumber: number
+  inShopReleaseDate: string
+  inShopReleaseHour: string
 }
 
 interface GoodsDeliveryReport {
@@ -523,12 +535,20 @@ interface SupportWrongDestination {
 
 interface UnorderedProducts {
   id: number
-  dateInfo: string
-  donePercent: string
-  idDeliverySupport: string
-  lastUpdate: string
-  scannedNo: number | string
+  depositName: string
   shopName: string
-  verifiedNo: number | string
- 
+  shopCode: string
+  productCode: string
+  productName: string
+  productEan: string
+  validatedQuantity: number | string
+  brokenQuantity: number | string
+  defectReason: string
+  externalSupportCode: string
+  deliveryTicketExternalId: string
+  created: string
+  createdBy: string
+  resolved: boolean
+  updated: string
+  lastUpdateBy: string
 }
