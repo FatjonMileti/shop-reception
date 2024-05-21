@@ -2,18 +2,18 @@ import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/co
 
 export const columns: Array<TableHeaderType> = [
   {
-    title: 'Tip Ambalaje',
-    field: 'packageType',
+    title: 'Numar aviz',
+    field: 'noticeNumber',
     align: 'left'
   },
   {
-    title: '',
-    field: 'title',
+    title: 'Magazin',
+    field: 'shopName',
     align: 'left'
   },
   {
-    title: 'Numǎr Ambalaje',
-    field: 'expect',
+    title: 'Numar stive',
+    field: 'stackNumber',
     align: 'left'
-  }
+  },
 ]
