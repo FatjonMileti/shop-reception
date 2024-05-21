@@ -230,7 +230,7 @@ const Step2 = () => {
         readonly
       />
       <Input
-        type='text'
+        type='number'
         label='Număr ambalaje'
         variant='outlined'
         width='100%'

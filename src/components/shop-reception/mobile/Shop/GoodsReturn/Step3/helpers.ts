@@ -1,4 +1,3 @@
-import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table'
 import * as Yup from "yup"
 
 export const getValidationSchema = () =>
@@ -12,19 +11,5 @@ export const getValidationSchema = () =>
   })
 
 export const initialValues = {
-  supportId: "",
-  supportNumber: 0
+  supportList: []
 }
-
-export const columns: Array<TableHeaderType> = [
-  {
-    title: 'TIP AMBALAJ',
-    field: 'packagingType',
-    align: 'left'
-  },
-  {
-    title: 'CANTITATE',
-    field: 'amount',
-    align: 'center'
-  }
-]
