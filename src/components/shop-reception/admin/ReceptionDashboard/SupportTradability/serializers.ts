@@ -13,8 +13,8 @@ export const toTableRowItems = (items: SupportTradability[]) =>
     shopName: item.shopName || '',
     parentSociety: item.parentSociety || '',
     packageCategory: item.packageCategory || '',
-    arrivedSupportsNumber: item.arrivedSupportsNumber || 0,
-    supportsNumberReleased: item.supportsNumberReleased || 0,
+    arrivedSupportsNumber: item.arrivedSupportsNumber || '',
+    supportsNumberReleased: item.supportsNumberReleased || '',
     inHubReleaseDateTime: item.inHubReleaseDateTime || '',
     inHubPresentationHour: item.inHubPresentationHour || '',
     inHubReleaseHour: item.inHubReleaseHour || '',
@@ -22,7 +22,7 @@ export const toTableRowItems = (items: SupportTradability[]) =>
     inHubLoadingHour: item.inHubLoadingHour || '',
     truckNumberHub: item.truckNumberHub || '',
     driverNameHub: item.driverNameHub || '',
-    loadedSupportsNumber: item.loadedSupportsNumber || 0,
+    loadedSupportsNumber: item.loadedSupportsNumber || '',
     inShopReleaseDate: item.inShopReleaseDate || '',
     inShopReleaseHour: item.inShopReleaseHour || ''
   }))

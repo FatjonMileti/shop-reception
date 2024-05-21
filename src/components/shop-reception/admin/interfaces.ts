@@ -474,8 +474,8 @@ interface SupportTradability {
   shopName: string
   parentSociety: string
   packageCategory: string
-  arrivedSupportsNumber: number
-  supportsNumberReleased: number
+  arrivedSupportsNumber: number | string
+  supportsNumberReleased: number | string
   inHubReleaseDateTime: string
   inHubPresentationHour: string
   inHubReleaseHour: string
@@ -483,7 +483,7 @@ interface SupportTradability {
   inHubLoadingHour: string
   truckNumberHub: string
   driverNameHub: string
-  loadedSupportsNumber: number
+  loadedSupportsNumber: number | string
   inShopReleaseDate: string
   inShopReleaseHour: string
 }

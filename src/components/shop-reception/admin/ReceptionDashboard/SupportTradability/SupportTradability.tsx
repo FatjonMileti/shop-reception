@@ -1,14 +1,21 @@
-import { Grid } from '../../../Common/Grid'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Table } from '../../../../core-ui/Table'
-import { columns } from './helpers'
-import { useState } from 'react'
-import { makeCoreGetRequest } from '../../../../../utils/api'
+import { columns, drawerFilters } from './helpers'
+import { useMemo, useState } from 'react'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from '../../../../../utils/api'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import s from '../../../commonStyles.modules.scss'
+import {
+  getDepositOptions,
+  getHubOptions,
+  getLocation,
+  getParentSocietyOptions,
+  getShopOptions
+} from '../../api'
+import { DownloadIcon } from 'icons'
+import { formatAndDownloadResponse } from 'utils/helpers'
 
 const SupportTradability = () => {
   const [tableItems, setTableItems] = useState<SupportTradability[]>([])
@@ -35,9 +42,41 @@ const SupportTradability = () => {
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
-      console.log('debug', error)
       showNotification({
         message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const { data: shopOptions } = getShopOptions(showNotification)
+  const { data: depositOptions } = getDepositOptions(showNotification)
+  const { data: hubOptions } = getHubOptions(showNotification)
+  const { data: societyOptions } = getParentSocietyOptions(showNotification)
+  const { data: locationOptions } = getLocation(showNotification)
+
+  const filters = useMemo(
+    () => drawerFilters(shopOptions, depositOptions, hubOptions, societyOptions, locationOptions),
+    [shopOptions, depositOptions, hubOptions, societyOptions, locationOptions]
+  )
+
+  const exportFile = async (tableState, e) => {
+    const { filters, order, orderBy } = tableState
+    const url = toTableGETUrl({
+      url: '/shop-reception/supportTraceability/export',
+      tableFilters: filters,
+      order,
+      orderBy
+    })
+
+    try {
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -56,7 +95,20 @@ const SupportTradability = () => {
         totalCount={totalCount}
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
+        toolbarActions={[
+          {
+            label: 'Export',
+            icon: <DownloadIcon />,
+            onClick: exportFile
+          }
+        ]}
         rowActionsWidth="130px"
+        filters={filters}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </div>
   )
