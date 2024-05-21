@@ -2,15 +2,17 @@ import * as Yup from 'yup'
 
 export const getValidationSchema = () =>
   Yup.object().shape({
-    destination: Yup.string().required('Câmpul destinație este obligatoriu'),
-    registrationNumber: Yup.string().required('Numărul de înmatriculare este un câmp necesar'),
-    driver: Yup.string().required('Câmpul șoferului este obligatoriu'),
-    isPackingReturn: Yup.boolean()
+    id: Yup.string().required('Câmpul destinație este obligatoriu'),
+    truckNumber: Yup.string().required('Numărul de înmatriculare este un câmp necesar'),
+    driverName: Yup.string().required('Câmpul șoferului este obligatoriu'),
+    packageReturn: Yup.boolean(),
+    productReturn: Yup.boolean()
   })
 
 export const initialValues = {
-  destination: '',
-  registrationNumber: '',
-  driver: '',
-  isPackingReturn: false
+  id: '',
+  truckNumber: '',
+  driverName: '',
+  packageReturn: true,
+  productReturn: false
 }

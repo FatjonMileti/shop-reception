@@ -14,10 +14,10 @@ import { ExpenditureProcessing } from './Hub/GoodsReception/ExpenditureProcessin
 import { ShippedTrucks } from './Hub/GoodsReception/ShippedTrucks'
 import { ExpectedReturns } from './Hub/GoodsReturn/ExpectedReturns'
 import { InProgressReturn } from './Hub/GoodsReturn/InProgressReturn'
-import { ContinueReturn } from './Hub/GoodsReturn/ContinueReturn'
+import { ContinueReturn } from './Hub/GoodsReturn/RecordReturn/ContinueReturn'
 import { RecordReturn } from './Hub/GoodsReturn/RecordReturn'
 import { SupportScanStep1 } from './Shop/GoodsReception/SupportScanStep1'
-import { RecordReturnDetail } from './Hub/GoodsReturn/RecordReturn/RecordReturnDetail'
+import { RecordReturnStep2 } from './Hub/GoodsReturn/RecordReturn/RecordReturnStep2'
 import { TruckDetail } from './Shop/GoodsReception/ListTrucks/TruckDetail'
 import { AddTruckStep2 } from './Shop/GoodsReception/ListTrucks/AddTruckStep2'
 import { SupportScanStep2 } from './Shop/GoodsReception/SupportScanStep2'
@@ -33,9 +33,9 @@ import { ExpectedReturnDetailStep2 } from './Hub/GoodsReturn/ExpectedReturns/Exp
 import { ExpectedReturnDetailStep3 } from './Hub/GoodsReturn/ExpectedReturns/ExpectedReturnDetailStep3'
 import { ExpectedReturnDetailFinal } from './Hub/GoodsReturn/ExpectedReturns/ExpectedReturnDetailFinal'
 import { DeliveryDetail } from './Shop/GoodsReception/Delivery/DeliveryDetail'
-import { ContinueReturnDetail } from './Hub/GoodsReturn/ContinueReturn/ContinueReturnDetail'
-import { ContinueReturnDetail2 } from './Hub/GoodsReturn/ContinueReturn/ContinueReturnDetail2'
-import { ContinueReturnDetailFinal } from './Hub/GoodsReturn/ContinueReturn/ContinueReturnDetailFinal'
+import { RecordReturnStep3 } from './Hub/GoodsReturn/RecordReturn/RecordReturnStep3'
+import { RecordReturnStep4 } from './Hub/GoodsReturn/RecordReturn/RecordReturnStep4'
+import { RecordReturnStep5 } from './Hub/GoodsReturn/RecordReturn/RecordReturnStep5'
 import { DeliveryCompleteScan } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryCompleteScan'
 import { DeliverySensitiveProducts } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliverySensitiveProducts'
 import { DeliveryRandomSupport } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomSupport'
@@ -256,20 +256,20 @@ export const useMerchandiseRoutes = applicationPages => {
         }
       />
       <Route
-        path={URLS.AUTH_RECORD_RETURN_DETAIL}
+        path={URLS.AUTH_RECORD_RETURN_STEP_2}
         element={
           <PrivateRoute
-            component={RecordReturnDetail}
+            component={RecordReturnStep2}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
         }
       />
       <Route
-        path={URLS.AUTH_CONTINUE_RETURN_DETAIL}
+        path={URLS.AUTH_RECORD_RETURN_STEP_3}
         element={
           <PrivateRoute
-            component={ContinueReturnDetail}
+            component={RecordReturnStep3}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -323,10 +323,10 @@ export const useMerchandiseRoutes = applicationPages => {
         path={URLS.AUTH_EXPECTED_RETURN_DETAIL_FINAL}
         element={<ExpectedReturnDetailFinal />}
       />
-      <Route path={URLS.AUTH_CONTINUE_RETURN_DETAIL_2} element={<ContinueReturnDetail2 />} />
+      <Route path={URLS.AUTH_RECORD_RETURN_STEP_4} element={<RecordReturnStep4 />} />
       <Route
-        path={URLS.AUTH_CONTINUE_RETURN_DETAIL_FINAL}
-        element={<ContinueReturnDetailFinal />}
+        path={URLS.AUTH_RECORD_RETURN_STEP_5}
+        element={<RecordReturnStep5 />}
       />
       <Route
         path={URLS.AUTH_DELIVERY_COMPLETE_SCAN_STEP_1}

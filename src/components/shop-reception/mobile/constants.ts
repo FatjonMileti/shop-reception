@@ -67,10 +67,10 @@ export const URLS = {
   AUTH_IN_PROGRESS_RETURN: '/shop-reception/mobile/inProgressReturnReception', // trucks in process of return
 
   AUTH_RECORD_RETURN: '/shop-reception/mobile/recordReturn', // register a new return
-  AUTH_RECORD_RETURN_DETAIL: '/shop-reception/mobile/recordReturnDetails', // register a new truck for return step 2
-  AUTH_CONTINUE_RETURN_DETAIL: '/shop-reception/mobile/continueReturnDetails', // step 3
-  AUTH_CONTINUE_RETURN_DETAIL_2: '/admin/mobile/continue-return/detail-2', // step 4 // TODO: integrate stepper in parent page and delete
-  AUTH_CONTINUE_RETURN_DETAIL_FINAL: '/admin/mobile/continue-return/detail/final', //step 5 // TODO: integrate stepper in parent page and delete
+  AUTH_RECORD_RETURN_STEP_2: '/shop-reception/mobile/recordReturnDetails', // register a new truck for return step 2
+  AUTH_RECORD_RETURN_STEP_3: '/shop-reception/mobile/continueReturnDetails', // step 3
+  AUTH_RECORD_RETURN_STEP_4: '/admin/mobile/continue-return/detail-2', // step 4 // TODO: integrate stepper in parent page and delete
+  AUTH_RECORD_RETURN_STEP_5: '/admin/mobile/continue-return/detail/final', //step 5 // TODO: integrate stepper in parent page and delete
   AUTH_CONTINUE_RETURN: '/shop-reception/mobile/continueReturn', // registered returns in process
 
   // Deposit

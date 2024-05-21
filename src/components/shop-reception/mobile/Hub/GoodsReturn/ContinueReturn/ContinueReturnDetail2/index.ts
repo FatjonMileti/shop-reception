@@ -1,1 +1,0 @@
-export { default as ContinueReturnDetail2 } from './ContinueReturnDetail2'
