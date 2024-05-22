@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
-import Favicon from 'react-favicon'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 import { ErrorBoundary } from 'components/core-ui'
@@ -45,7 +44,6 @@ const Layout = ({ children, modules, setSubdomainId }) => {
       }}
     >
       <Typography variant="light" component="div">
-        <Favicon url="images/favicon.ico" />
         <div>
           <Notification />
           <FirebaseNotification />
