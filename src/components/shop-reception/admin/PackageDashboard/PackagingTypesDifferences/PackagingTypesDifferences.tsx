@@ -13,7 +13,6 @@ import {
   getDepositOptions,
   getParentSocietyOptions,
   getShopOptions,
-  getNonCompliantReasonOptions,
   getHubOptions,
   getSupportTypeOptions
 } from '../../api'
