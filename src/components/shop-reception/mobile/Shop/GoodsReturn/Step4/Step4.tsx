@@ -8,7 +8,7 @@ import { useQuery } from "react-query";
 import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../utils/api";
 import { formatErrorMessage } from "../../../../../../utils/formatting";
 import { useMemo, useState } from "react";
-import { getValidationSchema, initialValues } from "../Step3/helpers";
+import { getValidationSchema, initialValues } from "./helpers";
 import { useFormik } from "formik";
 import { URLS } from "../../../constants";
 
@@ -27,8 +27,10 @@ const Step4 = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        await makeCorePostRequest('/shop-reception-mobile/truck/exit/saveSupportList/' + id, {});
-        navigate(URLS.AUTH_RETURN_STEP_5, { state: id });
+        const notice = await makeCorePostRequest('/shop-reception-mobile/truck/exit/saveNotice/' + id, values);
+
+        returnTruck.depositOrHubName === 'FURNIZOR CHEP' ? navigate('/goodsReturn')
+          : navigate(URLS.AUTH_RETURN_STEP_5, { state: {id: id, notice: notice} });
       }
       catch (error) {
         showNotification({
@@ -57,10 +59,7 @@ const Step4 = () => {
   const addSealNumberField = () => {
     if (numFields < 3) {
       setNumFields(numFields + 1);
-      formik.values.sealList.map(sealCode => {
-        console.log(sealCode);
-      })
-      // setSealNumbers([...sealNumbers, '']);
+      formik.setFieldValue('sealList', [...formik.values.sealList, ''])
     }
   };
 
@@ -91,22 +90,35 @@ const Step4 = () => {
         <Input
           type='text'
           label='Număr stive'
-          variant='standard'
+          variant='outlined'
+          value={formik.values.stackNumber}
           width='100%'
+          onChange={event => formik.setFieldValue('stackNumber', (event.target as HTMLInputElement).value)}
+          error={!!formik.errors.stackNumber}
+          helperText={formik.errors.stackNumber as string}
         />,
-        formik.values.sealList.map((sealNumber, idx) => (
+        formik.values.sealList.map((sealCode, idx) => (
           <div style={{ display: 'flex', marginTop: '20px' }}>
             <Input
+              key={idx}
               type='text'
               label='Număr sigiliu'
               variant='standard'
+              value={sealCode}
+              onChange={(event) => {
+                const newValues = [...formik.values.sealList];
+                newValues[idx] = (event.target as HTMLInputElement).value;
+                formik.setFieldValue('sealList', newValues)
+              }}
               width='100%'
+              error={!!formik.errors?.sealList?.[idx]}
+              helperText={formik.errors?.sealList?.[idx] as string}
             />
             <ImageUpload
-              uploadUrl={`/shop-reception-mobile/truck/upload_shop/security/` + id}
+              uploadUrl={`/shop-reception-mobile/truck/exit/image/` + id}
               onSuccess={handleSuccess}
               onError={handleError}
-              inputId={`seal${idx}`}
+              inputId={`exitSeal${idx}`}
             />
           </div>
         )),
@@ -114,14 +126,14 @@ const Step4 = () => {
           type='button'
           variant='contained'
           label='ADAUGĂ ALT SIGILIU'
-          onClick={null}
+          onClick={addSealNumberField}
           style={{ width: '100%' }}
         />,
         <Button
           type='button'
           variant='contained'
           label='FINALIZEAZǍ'
-          onClick={null}
+          onClick={() => formik.handleSubmit()}
           style={{ width: '100%' }}
         />
       ]}

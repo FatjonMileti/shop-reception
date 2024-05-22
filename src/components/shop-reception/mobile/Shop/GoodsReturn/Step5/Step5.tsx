@@ -1,9 +1,43 @@
 import { Grid } from '../../../../Common/Grid'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { useNotification } from '../../../../../../hooks'
 import { TitleHeader } from '../../../Common/TitleHeader'
+import { useLocation, useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
+import { makeCorePostRequest } from "../../../../../../utils/api";
+import { formatErrorMessage } from "../../../../../../utils/formatting";
+import { useNotification } from "../../../../../../hooks";
+import { useState } from "react";
 
 const Step5 = () => {
+  const { showNotification } = useNotification();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const id = location.state?.id || '';
+  const notice = location.state?.notice;
+
+  const { data: pdfBlob, isLoading: isLoadingPdf} = useQuery(
+    'pdfBlob',
+    async () => {
+      return await makeCorePostRequest('/shop-reception-mobile/truck/exit/getNoticeAsPdf', {id: notice.id, noticeNumber: notice.code});
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching pdf. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const print = () => {
+    console.log('Here');
+  }
+
+  if (isLoadingPdf) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
@@ -12,29 +46,33 @@ const Step5 = () => {
         <TitleHeader title='COMANDǍ CAMION RETUR' />,
         <Input
           type='text'
-          label='Locație in...'
-          variant='standard'
+          label='Număr aviz'
+          variant='outlined'
           width='100%'
-          value={'HYPER ORADEA2'}
+          value={notice?.code}
           readonly
         />,
         <Input
-          type='select'
-          label='Locație descǎrcare'
-          variant='standard'
+          type='text'
+          label='Seria aviz'
+          variant='outlined'
           width='100%'
-        />,
-        <Input
-          type='number'
-          label='Numǎr stive'
-          variant='standard'
-          width='100%'
+          value={notice?.noticeSeries}
+          readonly
         />,
         <Button
           type='button'
           variant='contained'
-          label='TRANSMITERE COMANDǍ'
-          onClick={}
+          label='PRINTEAZǍ'
+          onClick={() => print()}
+          style={{ width: '100%' }}
+        />,
+        <Button
+          type='button'
+          variant='contained'
+          label='AM TERMINAT'
+          onClick={() => navigate('/GoodsReturn')}
+          style={{ width: '100%' }}
         />
       ]}
       itemsPerRow={1}
