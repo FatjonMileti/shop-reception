@@ -19,5 +19,6 @@ export const toTableRowItems = (items: MetiFile[]) =>
     hasRetry: item.hasRetry,
     hasNotIntegrated: item.hasNotIntegrated,
     numberOfSentFiles: item.numberOfSentFiles,
-    numberOfReceivedFiles: item.numberOfReceivedFiles
+    numberOfReceivedFiles: item.numberOfReceivedFiles,
+    fileStatusValue: item.fileStatusValue
   }))

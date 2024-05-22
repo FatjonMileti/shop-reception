@@ -27,10 +27,14 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
 
   const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const uploadedFile = event?.target.files && event?.target.files[0]
-    if (uploadedFile) {
-      setFile(uploadedFile)
-      formik.setFieldValue('file', uploadedFile)
+
+    if (typeof uploadedFile === 'undefined') {
+      formik.setFieldValue('file', null)
+      return
     }
+    
+    setFile(uploadedFile)
+    formik.setFieldValue('file', uploadedFile)
   }
 
   const importData = async (values: any) => {

@@ -89,7 +89,7 @@ export const drawerFilters = (shopCodes, depositOptions, statusOptions) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează magazin'
+    label: 'Magazin'
   },
 
   {
@@ -104,7 +104,7 @@ export const drawerFilters = (shopCodes, depositOptions, statusOptions) => [
       />
     ),
     type: 'autocomplete',
-    label: 'Selectează depozit'
+    label: 'Depozit'
   },
 
   {
@@ -152,6 +152,6 @@ export const drawerFilters = (shopCodes, depositOptions, statusOptions) => [
       <DatePicker label="Selecteaza data" variant="outlined" value={dayjs()} onChange={() => {}} />
     ),
     type: 'date',
-    label: 'Selecteaza data'
+    label: 'Data'
   }
 ]

@@ -14,6 +14,7 @@ import { Grid } from '@mui/material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { DownloadIcon } from 'icons'
 import { formatAndDownloadResponse } from 'utils/helpers'
+import { getDepositOptions, getShopOptions } from '../../api'
 
 const UnorderedProducts = () => {
   const { showNotification } = useNotification()
@@ -99,47 +100,8 @@ const UnorderedProducts = () => {
     }
   }
 
-  const { data: shopCodes, isLoading: isShopCodesLoading } = useQuery(
-    ['shop-codes'],
-    async () => {
-      const data = await makeCoreGetRequest(`/shop-reception/shops/codes`)
-      return data.list.map(item => ({
-        label: item.displayName,
-        value: item.code
-      }))
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A apărut o eroare la obtinerea tipurilor de magazine. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      }
-    }
-  )
-
-  const { data: depositOptions, isLoading: isDepositOptionsLoading } = useQuery(
-    ['deposits'],
-    async () => {
-      const data = await makeCoreGetRequest(`/shop-reception/deposits/accessible`)
-      return data.map(item => ({
-        label: item.displayName,
-        value: item.id
-      }))
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A apărut o eroare la obtinerea tipurilor de depozite. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      }
-    }
-  )
+  const { data: depositOptions } = getDepositOptions(showNotification)
+  const { data: shopOptions } = getShopOptions(showNotification)
 
   return (
     <div className={s.mainContainer}>
@@ -174,7 +136,12 @@ const UnorderedProducts = () => {
             onClick: exportFile
           }
         ]}
-        filters={drawerFilters(shopCodes, depositOptions)}
+        filters={drawerFilters(shopOptions, depositOptions)}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </div>
   )

@@ -39,12 +39,14 @@ import { PackagingInventory } from './PackageDashboard/PackagingInventory'
 import { PackagingInventoryHistory } from './PackageDashboard/PackagingInventoryHistory'
 import { CentralizedNotice } from './PackageDashboard/CentralizedNotice'
 import { TransportResponsible } from './PackageDashboard/TransportResponsible'
-import { TruckDetail } from './ReceptionDashboard/TruckList/TruckDetail'
+import { TruckDetails } from './ReceptionDashboard/TruckList/TruckDetails'
 import { SupportWrongDestinationDetail } from './ReceptionDashboard/SupportWrongDestination/SupportWrongDestinationDetail'
 import { BalancePackageHistory } from './PackageDashboard/BalancePackageHistory'
 import { SeriesNumber } from './AdminDashboard/SeriesNumber'
 import { SGRProducts } from './AdminDashboard/SGRProducts'
 import SupportCode from './ReceptionDashboard/DeliveryTicketsList/DeliveryTicketsDetails/SupportCode/SupportCode'
+import { SensitiveArticles } from './ReceptionDashboard/SensitiveArticles'
+import { ReturnTruck } from './PackageDashboard/ReturnTruck'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -323,6 +325,16 @@ export const useShopReceptionRoutes = applicationPages => {
         }
       />
       <Route
+        path={URLS.AUTH_RETURN_TRUCK_DETAILS}
+        element={
+          <PrivateRoute
+            component={ReturnTruck}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
         path={URLS.AUTH_ROLLING_PACKAGES}
         element={
           <PrivateRoute
@@ -456,7 +468,7 @@ export const useShopReceptionRoutes = applicationPages => {
         path={URLS.AUTH_TRUCK_DETAIL}
         element={
           <PrivateRoute
-            component={TruckDetail}
+            component={TruckDetails}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -477,6 +489,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={BalancePackageHistory}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_SENSITIVE_PRODUCTS}
+        element={
+          <PrivateRoute
+            component={SensitiveArticles}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

@@ -30,9 +30,11 @@ export const URLS = {
   AUTH_DIFFERENCES_PRODUCTS: '/shop-reception/reception/productsDifferences',
   AUTH_SUPPORT_TRADABILITY: '/shop-reception/reception/trasabilitySupport',
   AUTH_GOODS_DELIVERY_REPORT: '/shop-reception/reception/goodsDeliveryReport',
+  AUTH_SENSITIVE_PRODUCTS: '/shop-reception/reception/sensitiveProducts',
 
   // package
-  AUTH_RETURN_TRUCK_LIST: '/shop-reception/package/trucksReturnList',
+  AUTH_RETURN_TRUCK_LIST: '/shop-reception/package/trucksReturn',
+  AUTH_RETURN_TRUCK_DETAILS: '/shop-reception/package/trucksReturn/:id',
   AUTH_ROLLING_PACKAGES: '/shop-reception/package/rolling',
   AUTH_BALANCE_PACKAGING: '/shop-reception/package/balance',
   AUTH_BALANCE_PACKAGING_HISTORY: '/shop-reception/package/balance/history/:id',

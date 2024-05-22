@@ -50,6 +50,32 @@ export const getShopOptions = (showNotification: Function, validateQuery: boolea
   )
 }
 
+export const getShopTypesOptions = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['shop-types'],
+    async () => {
+      const result = await makeCoreGetRequest('/shop-reception/products/types')
+
+      const resultOptions = result.map(
+        (item: any): AutocompleteOption => ({
+          label: item.value,
+          value: item.key
+        })
+      )
+
+      return resultOptions || []
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea tipurilor de magazine.',
+          showNotification
+        )
+    }
+  )
+}
+
 export const getHubOptions = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(
     ['hubs'],
@@ -114,16 +140,13 @@ export const getParentSocietyOptions = (
   )
 }
 
-export const getDepositOptions = (
-  showNotification: Function,
-  validateQuery: boolean = true
-) => {
+export const getDepositOptions = (showNotification: Function, validateQuery: boolean = true) => {
   return useQuery(
     ['deposits'],
     async () => {
       const data = await makeCoreGetRequest(`/shop-reception/deposits/accessible`)
       return data.map(item => ({
-        label: item.displayName,
+        label: item.depositName,
         value: item.id
       }))
     },
@@ -133,3 +156,134 @@ export const getDepositOptions = (
     }
   )
 }
+
+export const getRegionTypesOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['regions'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/regions/accessible`)
+      return data.map(item => ({
+        label: item.name,
+        value: item.id
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea tipurilor de regiuni.',
+          showNotification
+        )
+    }
+  )
+}
+
+export const getStatusOptions = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['status'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/deliveryTicket/statuses`)
+      return data.map(item => ({
+        label: item.deliveryTicketStatusValue,
+        value: item.deliveryTicketStatus
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea depozitelor.', showNotification)
+    }
+  )
+}
+
+export const getLocation = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['location'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/supportTypeFlow`)
+      return data.map(item => ({
+        label: item.deliveryTicketStatusValue,
+        value: item.deliveryTicketStatus
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea locatiilor.', showNotification)
+    }
+  )
+}
+
+export const getNonCompliantReasonOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['nonCompliantReasons'],
+    async () => {
+      const data = await makeCoreGetRequest('/shop-reception/support-flows/non-compliant-reasons')
+      return data.map(item => ({
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea motivelor de ne-conformitate.',
+          showNotification
+        )
+    }
+  )
+}
+
+export const getReturnTruckTypesOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['returnTruckTypes'],
+    async () => {
+      const data = await makeCoreGetRequest('/shop-reception/return-trucks/types')
+      return data.map(item => ({
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea tipurilor de camion.',
+          showNotification
+        )
+    }
+  )
+}
+
+export const getReturnTruckStatusOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['returnTruckStatuses'],
+    async () => {
+      const data = await makeCoreGetRequest('/shop-reception/return-trucks/status')
+      return data.map(item => ({
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea statusurilor camioanelor.',
+          showNotification
+        )
+    }
+  )
+}
+
