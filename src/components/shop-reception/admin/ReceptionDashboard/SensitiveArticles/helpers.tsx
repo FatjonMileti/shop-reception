@@ -1,5 +1,6 @@
 import { Autocomplete, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
+import { formatUIDate } from 'utils/helpers'
 
 export const columns = [
   {
@@ -14,7 +15,8 @@ export const columns = [
     field: 'dateInfo',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    render: row => formatUIDate(row.dateInfo)
   },
   {
     title: 'Numar articole sensibile receptionate',

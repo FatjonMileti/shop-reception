@@ -1,20 +1,11 @@
-export const toTableRowItems = (items: UnorderedProducts[]) =>
-  items.map((item: UnorderedProducts) => ({
+export const toTableRowItems = (items: SensitiveArticle[]) =>
+  items.map((item: SensitiveArticle) => ({
     id: item.id,
-    depositName: item.depositName || '',
+    dateInfo: item.dateInfo || '',
+    donePercent: item.donePercent || '',
+    idDeliverySupport: item.idDeliverySupport || '',
+    lastUpdate: item.lastUpdate || '',
+    scannedNo: item.scannedNo || '',
     shopName: item.shopName || '',
-    shopCode: item.shopCode || '',
-    productCode: item.productCode || '',
-    productName: item.productName || '',
-    productEan: item.productEan || '',
-    validatedQuantity: item.validatedQuantity || '',
-    brokenQuantity: item.brokenQuantity || '',
-    defectReason: item.defectReason || '',
-    externalSupportCode: item.externalSupportCode || '',
-    deliveryTicketExternalId: item.deliveryTicketExternalId || '',
-    created: item.created || '',
-    createdBy: item.createdBy || '',
-    resolved: item.resolved || false,
-    updated: item.updated || '',
-    lastUpdateBy: item.lastUpdateBy || ''
+    verifiedNo: item.verifiedNo || ''
   }))

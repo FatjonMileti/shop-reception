@@ -15,7 +15,7 @@ import { formatAndDownloadResponse } from 'utils/helpers'
 const SensitiveArticles = () => {
   const { showNotification } = useNotification()
 
-  const [tableItems, setTableItems] = useState<UnorderedProducts[]>([])
+  const [tableItems, setTableItems] = useState<SensitiveArticle[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
