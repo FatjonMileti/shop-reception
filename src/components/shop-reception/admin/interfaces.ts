@@ -27,6 +27,34 @@ interface TruckItem {
   truckNumber: string
 }
 
+interface DeliveryTruck {
+  id: string
+  approveDate: string
+  arrivalConform: boolean
+  deliveredShopCode: string
+  deliveredShopCodeName: string
+  deliveryTicketCreated: string
+  deliveryTickets: string
+  deliveryType: string
+  depositIds: string
+  depositType: string
+  driverName: string
+  expectedDeliveryDate: string
+  flowType: string
+  hubReceived: string
+  hubSent: string
+  sealConform: boolean
+  false
+  shopCode: string
+  shopName: string
+  status: string
+  supportCount: number | string
+  thermodiagramConform: boolean
+  transportCode: string
+  truckCreated: string
+  truckId: number | string
+  truckNumber: string
+}
 interface AdminDeposit {
   id: number
   code: string

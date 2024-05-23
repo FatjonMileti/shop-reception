@@ -138,6 +138,7 @@ VALUES
     (168, 'Produse cu diferente', 'UsersManagement', null, true, 13),
     (169, 'Trasabilitate suport', 'UsersManagement', null, true, 13),
     (195, 'Articole sensibile', 'UsersManagement', null, true, 13),
+    (196, 'Raport livrare marfa', 'UsersManagement', null, true, 13),
     (170, 'Lista camioane retur', 'UsersManagement', null, true, 14),
     (171, 'Rulaj ambalaje', 'UsersManagement', null, true, 14),
     (172, 'Sold ambalaje', 'UsersManagement', null, true, 14),
@@ -282,6 +283,7 @@ VALUES
     (184, 'Produse cu diferente', '', '/shop-reception/reception/productsDifferences', true, 168, true),
     (185, 'Trasabilitate suport', '', '/shop-reception/reception/trasabilitySupport', true, 169, true),
     (292, 'Articole sensibile', '', '/shop-reception/reception/sensitiveProducts', true, 195, true),
+    (293, 'Raport livrare marfa', '', '/shop-reception/reception/deliveryTruckList', true, 196, true),
     (186, 'Lista camioane retur', '', '/shop-reception/package/trucksReturnList', true, 170, true),
     (187, 'Rulaj ambalaje', '', '/shop-reception/package/rolling', true, 171, true),
     (188, 'Sold ambalaje', '', '/shop-reception/package/balance', true, 172, true),
@@ -436,7 +438,7 @@ VALUES
     (200, 149), (200, 151), (200, 152), (200, 153), (200, 154), (200, 155), (200, 156),
     (200, 157), (200, 158), (200, 159), (200, 160), (200, 161), (200, 162), (200, 163), (200, 164),
     (200, 165), (200, 166), (200, 167), (200, 168), (200, 169), (200, 170), (200, 171), (200, 172),
-    (200, 173), (200, 174), (200, 175), (200, 176), (200, 177), (200, 272), (200, 195),
+    (200, 173), (200, 174), (200, 175), (200, 176), (200, 177), (200, 272), (200, 195), (200, 196),
     -- Shop Reception Mobile
     -- SHOP_RECEPTION_DUMMY_ROLE
     (200, 178), (200, 179), (200, 180), (200, 181), (200, 182), (200, 183), (200, 184), (200, 185),

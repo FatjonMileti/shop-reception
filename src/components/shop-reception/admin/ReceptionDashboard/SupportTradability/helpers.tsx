@@ -269,7 +269,7 @@ export const drawerFilters = (
   },
 
   {
-    name: 'uploadDate',
+    name: 'loadingDateStart',
     value: undefined,
     filter: (
       <DatePicker
@@ -283,21 +283,21 @@ export const drawerFilters = (
     label: 'Data incarcare de la'
   },
   {
-    name: '123',
+    name: 'loadingDateEnd',
     value: undefined,
     filter: (
       <DatePicker
-        label="Selecteaza data incarcare pana la"
+        label="Selecteaza data descarcare pana la"
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
       />
     ),
     type: 'date',
-    label: 'Data incarcare pana la'
+    label: 'Data descarcare pana la'
   },
   {
-    name: '123',
+    name: 'hubReleaseDate',
     value: undefined,
     filter: (
       <DatePicker
@@ -311,7 +311,7 @@ export const drawerFilters = (
     label: 'Data descarcare hub'
   },
   {
-    name: '123',
+    name: 'shopReleaseDate',
     value: undefined,
     filter: (
       <DatePicker

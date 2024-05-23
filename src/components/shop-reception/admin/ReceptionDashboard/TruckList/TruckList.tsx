@@ -83,7 +83,6 @@ const TruckList = () => {
         fetchData={fetchData}
         isLoading={isLoading}
         totalCount={totalCount}
-        newButton={null}
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
         toolbarActions={[

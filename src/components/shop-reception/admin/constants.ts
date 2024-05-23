@@ -31,6 +31,7 @@ export const URLS = {
   AUTH_SUPPORT_TRADABILITY: '/shop-reception/reception/trasabilitySupport',
   AUTH_GOODS_DELIVERY_REPORT: '/shop-reception/reception/goodsDeliveryReport',
   AUTH_SENSITIVE_PRODUCTS: '/shop-reception/reception/sensitiveProducts',
+  AUTH_DELIVERY_TRUCK_LIST: '/shop-reception/reception/deliveryTruckList',
 
   // package
   AUTH_RETURN_TRUCK_LIST: '/shop-reception/package/trucksReturnList',

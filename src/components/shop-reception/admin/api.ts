@@ -202,15 +202,55 @@ export const getLocation = (showNotification: Function, validateQuery: boolean =
   return useQuery(
     ['location'],
     async () => {
-      const data = await makeCoreGetRequest(`/shop-reception/supportTypeFlow`)
+      const data = await makeCoreGetRequest(`/shop-reception/truck/supportTypeFlow`)
       return data.map(item => ({
-        label: item.deliveryTicketStatusValue,
-        value: item.deliveryTicketStatus
+        label: item.supportTypeFlowValue,
+        value: item.supportTypeFlow
       }))
     },
     {
       onError: error =>
         handleQueryError(error, 'A aparut o eroare la obtinerea locatiilor.', showNotification)
+    }
+  )
+}
+
+export const geTruckLocation = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['truck-location'],
+    async () => {
+      const data = await makeCoreGetRequest(
+        `/shop-reception/delivery-trucks/support-types-delivery`
+      )
+      return data.map(item => ({
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea locatiilor.', showNotification)
+    }
+  )
+}
+
+export const getArrivalType = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['arrival-type'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/delivery-trucks/delivery-types`)
+      return data.map(item => ({
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea tipurilor de sosire.',
+          showNotification
+        )
     }
   )
 }
