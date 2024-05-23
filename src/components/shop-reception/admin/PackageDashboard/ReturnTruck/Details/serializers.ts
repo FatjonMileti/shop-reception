@@ -12,5 +12,10 @@ export const toTableRowItems = items =>
     conformNoticeNumber: item.conformNoticeNumber ?? '',
     confirmedSupportNumber: item.confirmedSupportNumber ?? '',
     receptionDate: item.receptionDate ?? '',
-    receptionOperator: item.receptionOperator ?? ''
+    receptionOperator: item.receptionOperator ?? '',
+    hubNoticeNumber: item.hubNoticeNumber ?? '',
+    hubExpeditionDate: item.hubExpeditionDate ?? '',
+    hubNoticeConform:
+      item.hubNoticeConform === true ? 'Da' : item.hubNoticeConform === false ? 'Nu' : '',
+    hubConformNoticeNumber: item.hubConformNoticeNumber ?? ''
   }))

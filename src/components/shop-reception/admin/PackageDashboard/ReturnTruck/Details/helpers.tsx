@@ -93,7 +93,7 @@ export const getColumns = isForShop =>
         },
         {
           title: 'Numar nou aviz hub',
-          field: ''
+          field: 'hubConformNoticeNumber'
         },
         {
           title: 'Cantitate descarcata',
