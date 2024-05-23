@@ -262,7 +262,7 @@ export const getNonCompliantReasonOptions = (
   return useQuery(
     ['nonCompliantReasons'],
     async () => {
-      const data = await makeCoreGetRequest(`/shop-reception/support-flows/non-compliant-reasons`)
+      const data = await makeCoreGetRequest('/shop-reception/support-flows/non-compliant-reasons')
       return data.map(item => ({
         label: item.value,
         value: item.key
@@ -278,3 +278,52 @@ export const getNonCompliantReasonOptions = (
     }
   )
 }
+
+export const getReturnTruckTypesOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['returnTruckTypes'],
+    async () => {
+      const data = await makeCoreGetRequest('/shop-reception/return-trucks/types')
+      return data.map(item => ({
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea tipurilor de camion.',
+          showNotification
+        )
+    }
+  )
+}
+
+export const getReturnTruckStatusOptions = (
+  showNotification: Function,
+  validateQuery: boolean = true
+) => {
+  return useQuery(
+    ['returnTruckStatuses'],
+    async () => {
+      const data = await makeCoreGetRequest('/shop-reception/return-trucks/status')
+      return data.map(item => ({
+        label: item.value,
+        value: item.key
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la obtinerea statusurilor camioanelor.',
+          showNotification
+        )
+    }
+  )
+}
+

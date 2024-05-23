@@ -285,6 +285,7 @@ VALUES
     (292, 'Articole sensibile', '', '/shop-reception/reception/sensitiveProducts', true, 195, true),
     (293, 'Raport livrare marfa', '', '/shop-reception/reception/deliveryTruckList', true, 196, true),
     (186, 'Lista camioane retur', '', '/shop-reception/package/trucksReturnList', true, 170, true),
+    (286, 'Detalii camion retur', '', '/shop-reception/package/trucksReturn/:id', true, 170, false),
     (187, 'Rulaj ambalaje', '', '/shop-reception/package/rolling', true, 171, true),
     (188, 'Sold ambalaje', '', '/shop-reception/package/balance', true, 172, true),
     (288, 'Istoric sold', '', '/shop-reception/package/balance/history/:id', true, 172, false),

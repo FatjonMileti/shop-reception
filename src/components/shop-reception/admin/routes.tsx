@@ -47,6 +47,7 @@ import { SGRProducts } from './AdminDashboard/SGRProducts'
 import SupportCode from './ReceptionDashboard/DeliveryTicketsList/DeliveryTicketsDetails/SupportCode/SupportCode'
 import { SensitiveArticles } from './ReceptionDashboard/SensitiveArticles'
 import DeliveryTruckList from './ReceptionDashboard/DeliveryTruckList/DeliveryTruckList'
+import { ReturnTruck } from './PackageDashboard/ReturnTruck'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -319,6 +320,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ReturnTruckList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_RETURN_TRUCK_DETAILS}
+        element={
+          <PrivateRoute
+            component={ReturnTruck}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

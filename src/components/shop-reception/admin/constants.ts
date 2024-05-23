@@ -34,7 +34,8 @@ export const URLS = {
   AUTH_DELIVERY_TRUCK_LIST: '/shop-reception/reception/deliveryTruckList',
 
   // package
-  AUTH_RETURN_TRUCK_LIST: '/shop-reception/package/trucksReturnList',
+  AUTH_RETURN_TRUCK_LIST: '/shop-reception/package/trucksReturn',
+  AUTH_RETURN_TRUCK_DETAILS: '/shop-reception/package/trucksReturn/:id',
   AUTH_ROLLING_PACKAGES: '/shop-reception/package/rolling',
   AUTH_BALANCE_PACKAGING: '/shop-reception/package/balance',
   AUTH_BALANCE_PACKAGING_HISTORY: '/shop-reception/package/balance/history/:id',

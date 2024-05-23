@@ -6,7 +6,6 @@ import s from '../../../commonStyles.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { formatUIDate } from 'utils/helpers'
 import { Tabs } from '@fullscreendigital/carrefour-dex-fe'
 import { Details } from './Details'
 import { Images } from './Images'
@@ -31,7 +30,7 @@ const PackagingDispute = () => {
     {
       onError: error => {
         showNotification({
-          message: `A apărut o eroare la obtinerea detaliilor litigiului. ${formatErrorMessage(
+          message: `A aparut o eroare la obtinerea detaliilor litigiului. ${formatErrorMessage(
             error
           )}`,
           type: 'error'
@@ -90,7 +89,7 @@ const PackagingDispute = () => {
             content: (
               <StatusTraceability traceabilityReturnTruck={litigation?.traceabilityReturnTruck} />
             ),
-            label: 'Transabilitate status',
+            label: 'Trasabilitate status',
             tabIndex: 2
           }
         ]}
