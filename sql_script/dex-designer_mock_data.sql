@@ -302,7 +302,7 @@ VALUES
     -- Shop Reception (Mobile)
     (194, 'In procesare receptie', '', '/shop-reception/mobile/inProcessingReception', true, 178, true),
     (223, 'Actualizare inventar ambalaje', '', '/shop-reception/mobile/packaging-inventory-update', true, 193, true),
-    (195, 'Camioane asteptate', '', '/shop-reception/mobile/expectedTrucks', true, 179, true),
+    (350, 'Camioane asteptate', '', '/shop-reception/mobile/expectedTrucks', true, 179, true),
     (196, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck', true, 180, true),
     (197, 'In procesare expeditie', '', '/shop-reception/mobile/inProcessingShipment', true, 181, true),
     (198, 'Camioane expediate', '', '/shop-reception/mobile/shippedTrucks', true, 182, true),
@@ -468,7 +468,7 @@ VALUES
     -- Shop Reception Mobile
     -- SHOP_RECEPTION_DUMMY_ROLE
     (200, 178), (200, 179), (200, 180), (200, 181), (200, 182), (200, 183), (200, 184), (200, 185),
-    (200, 186), (200, 187), (200, 188), (200, 189), (200, 190);
+    (200, 186), (200, 187), (200, 188), (200, 193), (200, 189), (200, 190);
 
 
 -- reset sequences
