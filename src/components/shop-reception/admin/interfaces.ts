@@ -55,6 +55,23 @@ interface DeliveryTruck {
   truckId: number | string
   truckNumber: string
 }
+
+interface ParentSociety {
+  id: number
+  bankAccount: string
+  bankName: string
+  businessName: string
+  created: string
+  createdBy: string
+  fiscalAddress: string
+  lastUpdate: string
+  lastUpdateBy: string
+  parentSocietyName: string
+  regNumber: string
+  socialCap: string
+  vatId: string
+}
+
 interface AdminDeposit {
   id: number
   code: string
@@ -161,6 +178,17 @@ interface ScanType {
     key: string
     value: string
   }
+}
+
+interface SensitiveArticle {
+  id: string
+  dateInfo: string
+  donePercent: string
+  idDeliverySupport: string
+  lastUpdate: string
+  scannedNo: number | string
+  shopName: string
+  verifiedNo: number | string
 }
 
 interface SensitiveProduct {
