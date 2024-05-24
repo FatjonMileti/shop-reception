@@ -14,11 +14,11 @@ export const buildColumns = ({
 }) => [
   {
     title: 'Angajat',
-    field: 'isPresent',
+    field: 'shouldAllocate',
     render: row => (
       <Checkbox
         edge="start"
-        checked={row.isPresent}
+        checked={row.shouldAllocate}
         onChange={() => toggleEmployee(row)}
         inputProps={{ 'aria-labelledby': `employee-${row.value}` }}
         label={row.fullName}
@@ -51,6 +51,7 @@ export const buildColumns = ({
         title="Selecteaza ora"
         closeButtonLabel="Anuleaza"
         confirmButtonLabel="Confirma"
+        disabled={!row.shouldAllocate}
       />
     )
   },
@@ -72,6 +73,7 @@ export const buildColumns = ({
         title="Selecteaza ora"
         closeButtonLabel="Anuleaza"
         confirmButtonLabel="Confirma"
+        disabled={!row.shouldAllocate}
       />
     )
   }

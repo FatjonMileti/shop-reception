@@ -3,22 +3,24 @@ import dayjs from 'dayjs'
 
 const employeesSchema = Yup.object().shape({
   workerId: Yup.number().required(),
-  isPresent: Yup.boolean(),
-  shiftStart: Yup.date().when('isPresent', ([isPresent], schema) =>
-    isPresent ? schema.required('Acest camp este obligatoriu') : schema.nullable()
+  shouldAllocate: Yup.boolean(),
+  shiftStart: Yup.date().when('shouldAllocate', ([shouldAllocate], schema) =>
+    shouldAllocate ? schema.required('Acest camp este obligatoriu') : schema.nullable()
   ),
-  shiftEnd: Yup.date().when(['isPresent', 'shiftStart'], ([isPresent, shiftStart], schema) =>
-    isPresent
-      ? schema
-          .required('Acest camp este obligatoriu')
-          .test(
-            'notAfterShiftStart',
-            'Ora sfarsit de tura trebuie sa fie dupa cea de inceput de tura',
-            shiftEnd => {
-              return dayjs(shiftEnd).isAfter(shiftStart)
-            }
-          )
-      : schema.nullable()
+  shiftEnd: Yup.date().when(
+    ['shouldAllocate', 'shiftStart'],
+    ([shouldAllocate, shiftStart], schema) =>
+      shouldAllocate
+        ? schema
+            .required('Acest camp este obligatoriu')
+            .test(
+              'notAfterShiftStart',
+              'Ora sfarsit de tura trebuie sa fie dupa cea de inceput de tura',
+              shiftEnd => {
+                return dayjs(shiftEnd).isAfter(shiftStart)
+              }
+            )
+        : schema.nullable()
   )
 })
 

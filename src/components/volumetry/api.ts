@@ -35,7 +35,8 @@ export const getDepartmentsOptions = (
 export const getDepartmentAliasesOptions = (
   showNotification: Function,
   setDefaultOptionCallback?: (defaultValue: ValueLabelInterface) => void,
-  filter?: { filterBy: string; filterValue: string | boolean | number }
+  filter?: { filterBy: string; filterValue: string | boolean | number },
+  showGenericDepartmentId?: boolean
 ) => {
   return useQuery(
     ['departments'],
@@ -47,7 +48,7 @@ export const getDepartmentAliasesOptions = (
       }
 
       const result = await makeCoreGetRequest(url)
-      const resultOptions = toDepartmentAliasesOptions(result)
+      const resultOptions = toDepartmentAliasesOptions(result, showGenericDepartmentId)
 
       if (resultOptions?.length && !!setDefaultOptionCallback) {
         setDefaultOptionCallback(resultOptions[0])
@@ -350,18 +351,16 @@ export const getEmployeesOptions = (showNotification: Function, validateQuery: b
 }
 
 export const getEmployeesAttendance = (
-  departmentId: number | string,
   showNotification: Function,
   validateQuery: boolean = true,
+  genericDepartmentId: number,
   setEmployees: Function
 ) =>
   useQuery(
-    ['employees-attendance', departmentId],
+    ['employees-attendance'],
     async () => {
-      const employees = await makeCoreGetRequest(
-        `/volumetry/workers-schedule?filterBy=departmentAliasId&filterValue=${departmentId}`
-      )
-      const employeesAttendance = toEmployeesAttendance(employees) || []
+      const employees = await makeCoreGetRequest('/volumetry/workers-schedule')
+      const employeesAttendance = toEmployeesAttendance(employees, genericDepartmentId) || []
       setEmployees(employeesAttendance)
     },
     {
@@ -440,7 +439,7 @@ export const getRegionsOptions = (
 export const getCollaborator = (
   itemId: string | number,
   showNotification: Function,
-  isModalOpen: boolean,
+  isModalOpen: boolean
 ) => {
   return useQuery(
     ['collaborator', itemId],

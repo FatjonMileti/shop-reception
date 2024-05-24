@@ -11,10 +11,10 @@ import { EmployeeAttendance } from './EmployeeAttendance'
 import { useMediaQuery } from '@mui/material'
 import { AllocationList } from './AllocationList'
 import { AttendanceModalProps } from 'components/volumetry/interfaces'
-import { validationSchema } from './helpers'
+import {validationSchema } from './helpers'
 
 const AttendanceModal = (props: AttendanceModalProps) => {
-  const { isModalOpen, closeModal, departmentId } = props
+  const { isModalOpen, closeModal, departmentId, genericDepartmentId } = props
   const { showNotification } = useNotification()
 
   const isXs = useMediaQuery('(max-width:624px)')
@@ -35,10 +35,10 @@ const AttendanceModal = (props: AttendanceModalProps) => {
     }
   })
 
-  const { data: employeesShifts, isLoading: isEmployeesLoading } = getEmployeesAttendance(
-    departmentId,
+  const { isLoading: isEmployeesLoading } = getEmployeesAttendance(
     showNotification,
     isModalOpen,
+    genericDepartmentId,
     values =>
       formik.setFieldValue(
         'employees',
@@ -86,7 +86,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
   const toggleEmployee = employee => {
     const newEmployees = formik.values.employees.map(emp =>
       emp.workerId === employee.workerId
-        ? { ...emp, isPresent: !emp.isPresent, shouldAllocate: !emp.isPresent }
+        ? { ...emp, shouldAllocate: !emp.shouldAllocate }
         : emp
     )
     formik.setFieldValue('employees', newEmployees)
@@ -137,7 +137,7 @@ const AttendanceModal = (props: AttendanceModalProps) => {
             formik={formik}
           />,
           <AllocationList
-            employees={formik.values.employees.filter(employee => employee.isPresent)}
+            employees={formik.values.employees.filter(employee => employee.shouldAllocate)}
             toggleEmployee={toggleAllocateEmployee}
             closeModal={resetModal}
             allocateEmployees={allocateEmployees}
