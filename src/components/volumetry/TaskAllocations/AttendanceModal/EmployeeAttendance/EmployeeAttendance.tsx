@@ -26,15 +26,12 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     [employees, formik.errors]
   )
 
-  const checkSelected = formik.values.employees.some(
-    employee => employee.isPresent || employee.shouldAllocate
-  )
+  const checkSelected = formik.values.employees.some(employee => employee.shouldAllocate)
   const selectOrDeselectAll = employees => {
     formik.setFieldValue(
       'employees',
       employees.map(employee => ({
         ...employee,
-        isPresent: checkSelected ? false : true,
         shouldAllocate: checkSelected ? false : true
       }))
     )

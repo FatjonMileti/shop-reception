@@ -22,7 +22,7 @@ import { AttendanceModal } from './AttendanceModal'
 
 const TaskAllocations = () => {
   const { showNotification } = useNotification()
-  const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
+  const [departmentFilterValue, setDepartmentFilterValue] = useState(null)
   const [rows, setRows] = useState([]) // TODO: To add interface when db schema is defined
   const [tableItems, setTableItems] = useState([]) // TODO: To add interface when db schema is defined
   const [totalCount, setTotalCount] = useState<number>(null)
@@ -79,7 +79,7 @@ const TaskAllocations = () => {
   }, [shouldRefreshAllocationsData])
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
-    getDepartmentAliasesOptions(showNotification, setDepartmentFilterValue)
+    getDepartmentAliasesOptions(showNotification, setDepartmentFilterValue, null, true)
 
   const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
@@ -223,6 +223,7 @@ const TaskAllocations = () => {
             isModalOpen={isAttendanceModalOpen}
             closeModal={closeAteendanceModal}
             departmentId={departmentFilterValue.value}
+            genericDepartmentId={departmentFilterValue.genericDepartmentId}
           />
         </>
       )}

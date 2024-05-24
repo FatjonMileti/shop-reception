@@ -1,38 +1,77 @@
-import { Grid } from '../../../../Common/Grid'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { TitleHeader } from '../../../Common/TitleHeader'
+import { Grid } from "../../../../Common/Grid";
+import { Button, Input } from "@fullscreendigital/carrefour-dex-fe";
+import { TitleHeader } from "../../../Common/TitleHeader";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import { makeCorePostRequest } from "../../../../../../utils/api";
 import { formatErrorMessage } from "../../../../../../utils/formatting";
 import { useNotification } from "../../../../../../hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Step5 = () => {
   const { showNotification } = useNotification();
   const location = useLocation();
   const navigate = useNavigate();
+  const [currentUrl, setCurrentUrl] = useState('')
   const id = location.state?.id || '';
   const notice = location.state?.notice;
 
-  const { data: pdfBlob, isLoading: isLoadingPdf} = useQuery(
+  const fetchPdfBlob = async () => {
+    return await makeCorePostRequest('/shop-reception-mobile/truck/exit/getNoticeAsPdf', {
+      id: notice.id,
+      noticeNumber: notice.code
+    }, {
+      responseType: 'blob'
+    });
+  };
+
+  const { data: pdfBlob, isLoading: isLoadingPdf, error } = useQuery(
     'pdfBlob',
-    async () => {
-      return await makeCorePostRequest('/shop-reception-mobile/truck/exit/getNoticeAsPdf', {id: notice.id, noticeNumber: notice.code});
-    },
+    fetchPdfBlob,
     {
       onError: error => {
         showNotification({
           message: `Error while fetching pdf. ${formatErrorMessage(error)}`,
           type: 'error'
-        })
+        });
       }
     }
-  )
+  );
+
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = (e) => {
+        console.error("FileReader error:", e);
+        reject(e);
+      };
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  useEffect(() => {
+    if (pdfBlob) {
+      (async () => {
+        try {
+          const base64Pdf: any = await blobToBase64(pdfBlob);
+          setCurrentUrl(base64Pdf);
+        } catch (error) {
+          console.error("Conversion error:", error);
+          showNotification({
+            message: `Error while converting blob to base64. ${formatErrorMessage(error)}`,
+            type: 'error'
+          });
+        }
+      })();
+    }
+  }, [pdfBlob]);
 
   const print = () => {
-    console.log('Here');
-  }
+    if (currentUrl) {}
+  };
 
   if (isLoadingPdf) {
     return <div>Loading...</div>;
@@ -67,6 +106,19 @@ const Step5 = () => {
           onClick={() => print()}
           style={{ width: '100%' }}
         />,
+        currentUrl && (
+          <object
+            data={currentUrl}
+            type="application/pdf"
+            width="100%"
+            height="500px"
+          >
+            <embed
+              src={currentUrl}
+              type="application/pdf"
+            />
+          </object>
+        ),
         <Button
           type='button'
           variant='contained'

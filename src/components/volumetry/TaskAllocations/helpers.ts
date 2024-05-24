@@ -1,4 +1,5 @@
 import * as yup from 'yup'
+import { AllocatedEmployee } from '../interfaces'
 
 export const getEmployeeGroupName = groupBy => {
   switch (groupBy) {
@@ -45,3 +46,34 @@ export const getValidationSchema = minDivision =>
   })
 
 export const getPriority = (priorityValue: string) => +priorityValue.substring(0, 1)
+
+export const getEmployeesGroupedByDepartment = (employees: AllocatedEmployee[]) =>
+  employees.reduce((acc, employee) => {
+    if (acc[employee.genericDepartmentId]) {
+      acc[employee.genericDepartmentId] = [...acc[employee.genericDepartmentId], employee]
+    } else {
+      acc[employee.genericDepartmentId] = employee
+    }
+
+    return acc
+  }, [])
+
+export const getSortedEmployees = (
+  groupedEmployees: AllocatedEmployee[],
+  genericDepartmentId: number
+) => {
+  const sortedGroupedItems = Object.keys(groupedEmployees)
+    .map(key =>
+      groupedEmployees[key].sort((a, b) => b.shiftCategory.localeCompare(a.shiftCategory))
+    )
+    .flat()
+
+  const firstItems = sortedGroupedItems.filter(
+    item => item.genericDepartmentId === genericDepartmentId
+  )
+  const restItems = sortedGroupedItems.filter(
+    item => item.genericDepartmentId !== genericDepartmentId
+  )
+
+  return [...firstItems, ...restItems]
+}
