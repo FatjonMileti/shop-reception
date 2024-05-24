@@ -2,7 +2,12 @@ import { formatCustomDate, formatPayloadTimeDate } from 'utils/helpers'
 import { Employee } from './Employee'
 import TaskDescription from './TaskDescription'
 import TaskSummary from './TaskSummary'
-import { getEmployeeGroupName } from './helpers'
+import {
+  getEmployeeGroupName,
+  getEmployeesGroupedByDepartment,
+  getSortedEmployees
+} from './helpers'
+import { AllocatedEmployee } from '../interfaces'
 
 export const toDepartmentOptions = data => data.map(item => ({ label: item.name, value: item.id }))
 
@@ -31,18 +36,21 @@ export const toEmployeeFilterItems = items =>
     }))
     .sort((a, b) => b.shiftCategory.localeCompare(a.shiftCategory))
 
-export const toEmployeesAttendance = items =>
-  items
-    .map(item => {
-      return {
-        ...item,
-        isPresent: item.shiftCategory === 'ON_SHIFT',
-        shouldAllocate: item.shiftCategory === 'ON_SHIFT',
-        shiftStart: formatCustomDate(item.shiftStart),
-        shiftEnd: formatCustomDate(item.shiftEnd)
-      }
-    })
-    .sort((a, b) => b.shiftCategory.localeCompare(a.shiftCategory))
+export const toEmployeesAttendance = (items: AllocatedEmployee[], genericDepartmentId: number) => {
+  const groupedItems = getEmployeesGroupedByDepartment(items)
+
+  const result = getSortedEmployees(groupedItems, genericDepartmentId)
+
+  return result.map(item => {
+    return {
+      ...item,
+      shouldAllocate:
+        item.shiftCategory === 'ON_SHIFT' && item.genericDepartmentId === genericDepartmentId,
+      shiftStart: formatCustomDate(item.shiftStart),
+      shiftEnd: formatCustomDate(item.shiftEnd)
+    }
+  })
+}
 
 export const toEmployeesItems = (
   item,
@@ -66,7 +74,7 @@ export const toEmployeesItems = (
 
 export const toEmployeesAttendancePayload = employees =>
   employees
-    .filter(employee => employee.isPresent)
+    .filter(employee => employee.shouldAllocate)
     .map(employee => ({
       workerId: employee.workerId,
       shiftStart: formatPayloadTimeDate(employee.shiftStart),

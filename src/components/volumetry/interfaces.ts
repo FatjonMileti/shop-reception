@@ -58,6 +58,7 @@ export interface Department {
 export interface DepartmentAlias {
   id: number
   alias: string
+  genericDepartmentId?: number
 }
 
 export type CRUDAction = 'create' | 'read' | 'edit' | 'delete'
@@ -73,6 +74,7 @@ export interface AttendanceModalProps {
   isModalOpen: boolean
   closeModal: Function
   departmentId: number | string
+  genericDepartmentId: number
 }
 
 export interface EmployeeAttendanceProps {
@@ -151,4 +153,14 @@ export interface DeleteLocationCategoryProps {
   isModalOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
+}
+
+export interface AllocatedEmployee {
+  fullName: string
+  genericDepartment: string
+  genericDepartmentId: number
+  shiftCategory: string
+  shiftEnd: Date
+  shiftStart: Date
+  workerId: number
 }
