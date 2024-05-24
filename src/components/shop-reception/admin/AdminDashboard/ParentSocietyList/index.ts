@@ -1,0 +1,1 @@
+export { default as ParentSocietyList } from './ParentSocietyList'

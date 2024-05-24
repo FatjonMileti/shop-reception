@@ -48,6 +48,7 @@ import SupportCode from './ReceptionDashboard/DeliveryTicketsList/DeliveryTicket
 import { SensitiveArticles } from './ReceptionDashboard/SensitiveArticles'
 import DeliveryTruckList from './ReceptionDashboard/DeliveryTruckList/DeliveryTruckList'
 import { ReturnTruck } from './PackageDashboard/ReturnTruck'
+import { ParentSocietyList } from './AdminDashboard/ParentSocietyList'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -515,6 +516,18 @@ export const useShopReceptionRoutes = applicationPages => {
           />
         }
       />
+      <Route
+        path={URLS.AUTH_PARENT_SOCIETY_LIST}
+        element={
+          <PrivateRoute
+            component={ParentSocietyList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+
     </>
   )
 }

@@ -15,6 +15,7 @@ export const URLS = {
   AUTH_RECEPTION_FILES_INFO: '/shop-reception/admin/receptionFiles',
   AUTH_SERIES_NUMBER: '/shop-reception/admin/seriesNumber',
   AUTH_SGR_PRODUCTS: '/shop-reception/admin/sgrProducts',
+  AUTH_PARENT_SOCIETY_LIST: '/shop-reception/admin/parentSocietyList',
 
   // reception dashboard
   AUTH_DELIVERY_SLIPS_LIST: '/shop-reception/reception/deliverySlips',
