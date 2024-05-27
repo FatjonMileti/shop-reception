@@ -126,9 +126,9 @@ export const getFilters = ({
   },
   {
     name: 'supportCode',
-    label: 'Cod support',
+    label: 'Cod suport',
     type: 'text',
-    filter: <Input type="text" name="supportCode" label="Cod support" variant="outlined" />
+    filter: <Input type="text" name="supportCode" label="Cod suport" variant="outlined" />
   },
   {
     name: 'ticketNumber',
@@ -162,7 +162,7 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Tip support asteptat'
+    label: 'Tip suport asteptat'
   },
   {
     name: 'supportTypeIdConfirmed',
