@@ -41,7 +41,6 @@ const PackagingCompliance = () => {
   )
 
   const downloadImage = async id => {
-    debugger
     try {
       const response = await makeCoreGetFileRequest(`/shop-reception/pictures/export/${id}`, {
         responseType: 'blob'

@@ -98,11 +98,11 @@ export const getSupportTypeOptions = (
   validateQuery: boolean = true
 ) => {
   return useQuery(
-    ['hubs'],
+    ['support-types'],
     async () => {
       const data = await makeCoreGetRequest('/shop-reception/support-flows/support-types')
       return data.map(item => ({
-        label: item.displayName,
+        label: item.name,
         value: item.id
       }))
     },
