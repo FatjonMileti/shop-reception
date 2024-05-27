@@ -6,11 +6,17 @@ import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
 import React, { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from "react-router-dom";
+import { useNotification } from "../../../../../../../../../hooks";
 
 const DeliveryRandomProductFinal = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { showNotification } = useNotification();
+  const location = useLocation();
   const validationSchema = useMemo(() => getValidationSchema(), [])
+  const support = location.state;
+  console.log(support);
+
   const formik = useFormik({
     enableReinitialize: false,
     validateOnChange: false,
@@ -32,8 +38,8 @@ const DeliveryRandomProductFinal = () => {
           hasPaper={true}
           items={[
             <Typography variant='medium' component='p'>PRODUSE ALEATOR</Typography>,
-            <Typography variant='medium' component='p'>Număr înmatriculare: BA32489</Typography>,
-            <Typography variant='medium' component='p'>Suporți verificați: 0 / 4</Typography>
+            <Typography variant='medium' component='p'>Număr înmatriculare: {support?.truckNumber}</Typography>,
+            <Typography variant='medium' component='p'>Suporți verificați: {support?.supportCounter} / {support?.totalSupportNumber}</Typography>
           ]}
           itemsPerRow={1}
         />,
@@ -41,13 +47,13 @@ const DeliveryRandomProductFinal = () => {
           spacing={1}
           hasPaper={true}
           items={[
-            <Typography variant='medium' component='p'>Etichetă suport: 45745865416</Typography>,
-            <Typography variant='medium' component='p'>Număr suport: 545465</Typography>,
-            <Typography variant='medium' component='p'>Produse verificate: 0</Typography>
+            <Typography variant='medium' component='p'>Etichetă suport: {support.supportCode}</Typography>,
+            <Typography variant='medium' component='p'>Număr suport: {support.supportNumber}</Typography>,
+            <Typography variant='medium' component='p'>Produse verificate: {support.productCounter}</Typography>
           ]}
           itemsPerRow={1}
         />,
-        <>
+        <div style={{ display: 'flex' }}>
           <Input
             type='text'
             label='Cod Produse'
@@ -61,19 +67,21 @@ const DeliveryRandomProductFinal = () => {
           <IconButton>
             <ManageSearchIcon />
           </IconButton>
-        </>,
+        </div>,
         <Divider>SAU</Divider>,
         <Button
           type='button'
           variant='contained'
           label='SCANEAZǍ PRODUSE'
           onClick={null}
+          style={{ width: '100%' }}
         />,
         <Button
           type='button'
           variant='contained'
           label='FINALIZEAZĂ SUPORT'
           onClick={() => formik.submitForm()}
+          style={{ width: '100%' }}
         />
       ]}
       itemsPerRow={1}

@@ -108,7 +108,7 @@ const DeliveryDetail = () => {
           label='SCANARE INTEGRALǍ'
           size='large'
           style={{ width: '100%' }}
-          onClick={() => navigate(URLS.AUTH_DELIVERY_COMPLETE_SCAN)}
+          onClick={() => navigate(URLS.AUTH_DELIVERY_COMPLETE_SCAN, {state: {id}})}
         />,
         <Button
           type='button'
@@ -116,7 +116,7 @@ const DeliveryDetail = () => {
           label='PRODUSE SENSIBILE'
           size='large'
           style={{ width: '100%' }}
-          onClick={() => navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS)}
+          onClick={() => navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS, {state: {id}})}
         />,
         <Button
           type='button'
@@ -124,7 +124,7 @@ const DeliveryDetail = () => {
           label='SUPORT ALEATOR'
           size='large'
           style={{ width: '100%' }}
-          onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_SUPPORT)}
+          onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_SUPPORT, {state: {id}})}
         />,
         <Button
           type='button'
@@ -132,7 +132,7 @@ const DeliveryDetail = () => {
           label='PRODUSE ALEATOR'
           size='large'
           style={{ width: '100%' }}
-          onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT)}
+          onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT, {state: {id}})}
         />,
         <Button
           type='button'
@@ -140,10 +140,10 @@ const DeliveryDetail = () => {
           label='PRODUSE SGR'
           size='large'
           style={{ width: '100%' }}
-          onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT)}
+          onClick={() => navigate(URLS.AUTH_SGR_PRODUCTS)}
         />,
         <div>
-          {truck.deliveryTicketList.map(ticket => (
+          {truck.deliveryTicketList?.map(ticket => (
             <Button
               key={ticket.externalTicketId}
               size="large"
