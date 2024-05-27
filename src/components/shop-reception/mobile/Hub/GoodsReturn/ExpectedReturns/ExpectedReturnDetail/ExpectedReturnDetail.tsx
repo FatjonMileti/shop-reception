@@ -1,19 +1,22 @@
 import { Grid } from '../../../../../Common/Grid'
-import { Button, IconButton, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { useMemo } from 'react'
-import { getValidationSchema, initialValues } from './helpers'
+import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
+import React, { useMemo } from 'react'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../../hooks'
 import { TitleHeader } from '../../../../Common/TitleHeader'
-import { CameraAlt as CameraIcon } from '@mui/icons-material'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from "react-router-dom";
 import { URLS } from '../../../../constants'
-import { FlexCenter } from 'components/shop-reception/Common/FlexCenter'
+import { useQuery } from "react-query";
+import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
+import ImageUpload from "../../../../Common/ImageUpload/ImageUpload";
+import { getValidationSchema, initialValues } from './helpers'
 
 const ExpectedReturnDetail = () => {
   const { showNotification } = useNotification()
+  const location = useLocation();
   const navigate = useNavigate()
+  const truckId = location.state;
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -23,9 +26,27 @@ const ExpectedReturnDetail = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
+        const payload = {
+          "id": truck.id,
+          "truckNumber": truck.truckNumber,
+          "driverName": truck.driverName,
+          "shopNamesAndCodes": truck.shopNamesAndCodes,
+          "sealList": formik.values.sealList,
+          "noticeList": formik.values.noticeList,
+        }
 
-        const payload = formik.values
-        navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2)
+        const resp = await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/verifyNoticeList', formik.values.noticeList, null);
+
+        if (resp.hasNoticeDuplications) {
+          showNotification({
+            message: `${resp.message}`,
+            type: 'error'
+          })
+        } else {
+          await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirmTruck', payload, null);
+          navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2, {state: truckId})
+        }
+
 
       } catch (error) {
         showNotification({
@@ -36,62 +57,103 @@ const ExpectedReturnDetail = () => {
     }
   })
 
+  const { data: truck, isLoading} = useQuery(
+    'getById',
+    async () => {
+      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/getById/' + truckId, null)
+      await formik.setValues({
+        sealList: truck.sealList,
+        noticeList: truck.noticeList
+      })
+      return truck
+    },
+    {
+      initialData: [],
+      onError: error => {
+        showNotification({
+          message: `Error while fetching truck. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+    }
+  )
+
+  const handleSuccess = () => {
+    showNotification({
+      message: 'Image uploaded successfully',
+      type: 'success'
+    });
+  };
+
+  const handleError = (error) => {
+    showNotification({
+      message: `Error uploading image: ${error.message}`,
+      type: 'error'
+    });
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
       maxWidth='xs'
       items={[
-        <TitleHeader title='RETURURI AȘTEPTATE CAMION' />,
+        <TitleHeader title="RETURURI AȘTEPTATE CAMION" />,
         <>
-          <Typography variant='medium' component='p'>IF32KTL / ABCD</Typography>
-          <Typography variant='medium' component='p'>ORADEA2 (25)</Typography>
+          <Typography variant="medium" component="p">{truck.truckNumber} / {truck.driverName}</Typography>
+          <Typography variant="medium" component="p">{truck.shopNamesAndCodes}</Typography>
         </>,
-        <FlexCenter>
-          <Input
-            type='select'
-            label='Confirm Sigiliu'
-            variant='standard'
-            width='100%'
-            value={formik.values.sealNumber}
-            values={[
-              {
-                value: 'none',
-                label: 'DA'
-              }
-            ]}
-            onChange={event => formik.setFieldValue('sealNumber', (event.target as HTMLInputElement).value)}
-            error={!!formik.errors.sealNumber}
-            helperText={formik.errors.sealNumber as string}
-          />
-          <IconButton>
-            <CameraIcon />
-          </IconButton>
-        </FlexCenter>,
-        <FlexCenter>
-          <Input
-            type='select'
-            label='Confirmă Aviz'
-            variant='standard'
-            width='100%'
-            value={formik.values.opinion}
-            values={[
-              {
-                value: 'none',
-                label: 'DA'
-              }
-            ]}
-            onChange={event => formik.setFieldValue('opinion', (event.target as HTMLInputElement).value)}
-            error={!!formik.errors.opinion}
-            helperText={formik.errors.opinion as string}
-          />
-          <IconButton>
-            <CameraIcon />
-          </IconButton>
-        </FlexCenter>,
+        formik.values?.sealList?.map((seal, idx) => (
+          <div style={{ display: "flex", marginTop: "20px" }}>
+            <Input
+              type='select'
+              label={"Confirm sigiliu " + seal.sealCode}
+              variant='standard'
+              width='100%'
+              value={ seal.conform}
+              values={[{value: "true", label: "Da"}, {value: "false", label: "Nu"}]}
+              onChange={event => formik.setFieldValue(`sealList[${idx}].conform`, (event.target as HTMLInputElement).value)}
+              error={!!formik.errors?.sealList?.[idx]?.conform}
+              helperText={formik.errors?.sealList?.[idx]?.conform as string}
+            />,
+            <ImageUpload
+              uploadUrl={`/shop-reception-mobile/truck/hub/upload/return_reception_seal/` + truckId}
+              onSuccess={handleSuccess}
+              onError={handleError}
+              inputId={`seal${idx}`}
+            />
+          </div>
+        )),
+        <Typography variant="regular" component="p">Confirmă număr aviz</Typography>,
+        formik.values?.noticeList?.map((notice, idx) => (
+          <div style={{ display: "flex", marginTop: "20px" }}>
+            <Input
+              type='select'
+              label={"Confirm sigiliu " + notice.shopName}
+              variant='standard'
+              width='100%'
+              value={ notice.correct}
+              values={[{value: "true", label: "Da"}, {value: "false", label: "Nu"}]}
+              onChange={event => formik.setFieldValue(`noticeList[${idx}].correct`, (event.target as HTMLInputElement).value)}
+              error={!!formik.errors?.noticeList?.[idx]?.correct}
+              helperText={formik.errors?.noticeList?.[idx]?.correct as string}
+            />,
+            <ImageUpload
+              uploadUrl={`/shop-reception-mobile/truck/hub/upload/return_reception_seal/` + truckId}
+              onSuccess={handleSuccess}
+              onError={handleError}
+              inputId={`notice${idx}`}
+            />
+          </div>
+        )),
         <Button
-          type='button'
-          variant='contained'
-          label='PASUL URMĂTOR'
+          style={{ width: "100%" }}
+          type="button"
+          variant="contained"
+          label="PASUL URMĂTOR"
           onClick={() => formik.handleSubmit()}
         />
       ]}
