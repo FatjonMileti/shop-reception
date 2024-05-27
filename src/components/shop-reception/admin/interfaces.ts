@@ -55,7 +55,16 @@ interface DeliveryTruck {
   truckId: number | string
   truckNumber: string
 }
-
+interface NoticeSeriesNumber {
+  id: number
+  canEdit: boolean
+  noticeCurrentNumber: number | string
+  noticeMaxNumber: number | string
+  noticeMinNumber: number | string
+  noticeSeries: string
+  parentSociety: string
+  year: number | string
+}
 interface ParentSociety {
   id: number
   bankAccount: string
@@ -291,14 +300,6 @@ interface DLCProducts {
   }
 }
 
-interface SeriesNumber {
-  id: number
-  series: string
-  startInterval: number
-  currentNumber: number
-  year: number
-  society: string
-}
 
 interface ShopType {
   key: string

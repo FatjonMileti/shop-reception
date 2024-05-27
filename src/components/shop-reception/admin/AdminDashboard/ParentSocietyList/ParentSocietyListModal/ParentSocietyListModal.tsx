@@ -64,7 +64,7 @@ const ParentSocietyListModal: React.FC<ParentSocietyListModalProps> = props => {
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={isEdit ? 'Editeaza z' : 'Adauga z'}
+      modalTitle={isEdit ? 'Editeaza societatea' : 'Adauga societate'}
       modalWidth="50%"
     >
       <Grid container spacing={2}>
