@@ -152,6 +152,7 @@ VALUES
     (175, 'Ambalaje returnate', 'UsersManagement', null, true, 14),
     (176, 'Conformitate ambalaje', 'UsersManagement', null, true, 14),
     (177, 'Litigii ambalaje - administrare timer', 'UsersManagement', null, true, 14),
+    (277, 'Aviz centralizator', 'UsersManagement', null, true, 14),
     -- Shop Reception (Mobile)
     (178, 'In procesare receptie', 'UsersManagement', null, true, 15),
     (187, 'Lista camioane', 'UsersManagement', null, true, 15),
@@ -305,6 +306,7 @@ VALUES
     (191, 'Ambalaje returnate', '', '/shop-reception/package/returned', true, 175, true),
     (192, 'Conformitate ambalaje', '', '/shop-reception/package/compliance', true, 176, true),
     (193, 'Litigii ambalaje - administrare timer', '', '/shop-reception/package/timerDisputes', true, 177, true),
+    (393, 'Aviz centralizator', '', '/shop-reception/package/centralizedNotice', true, 277, true),
     -- Shop Reception (Mobile)
     (194, 'In procesare receptie', '', '/shop-reception/mobile/inProcessingReception', true, 178, true),
     (223, 'Actualizare inventar ambalaje', '', '/shop-reception/mobile/packaging-inventory-update', true, 193, true),
@@ -467,10 +469,10 @@ VALUES
     (152, 250),
     -- Shop Reception Admin
     -- GG_RO_HQ_SHOP_RECEPTION_ADMIN
-    (200, 149), (200, 151), (200, 152), (200, 153), (200, 154), (200, 155), (200, 156),
-    (200, 157), (200, 158), (200, 159), (200, 160), (200, 161), (200, 162), (200, 163), (200, 164),
-    (200, 165), (200, 166), (200, 167), (200, 168), (200, 169), (200, 170), (200, 171), (200, 172),
-    (200, 173), (200, 174), (200, 175), (200, 176), (200, 177), (200, 272), (200, 195), (200, 196), 
+    (200, 149), (200, 151), (200, 152), (200, 153), (200, 154), (200, 155), (200, 156), (200, 157),
+    (200, 158), (200, 159), (200, 160), (200, 161), (200, 162), (200, 163), (200, 164), (200, 165),
+    (200, 166), (200, 167), (200, 168), (200, 169), (200, 170), (200, 171), (200, 172), (200, 173),
+    (200, 174), (200, 175), (200, 176), (200, 177), (200, 277), (200, 272), (200, 195), (200, 196),
     (200, 247), (200, 248),
     -- Shop Reception Mobile
     -- GG_RO_HQ_SHOP_RECEPTION_ADMIN
