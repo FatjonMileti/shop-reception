@@ -93,17 +93,17 @@ export const getColumns = (canView: boolean, type: string) => [
 export const getFilters = (depositOptions, hubOptions, shopOptions, parentSocietyOptions) => [
   {
     name: 'depositId',
-    value: '',
+    value: undefined,
     filter: (
-      <Autocomplete variant="outlined" label="Selectează depozit" options={depositOptions || []} />
+      <Autocomplete variant="outlined" label="Selectează depozit" options={depositOptions || []} multiple/>
     ),
     type: 'autocomplete',
     label: 'Selectează depozit'
   },
   {
     name: 'hubId',
-    value: '',
-    filter: <Autocomplete variant="outlined" label="VIA" options={hubOptions || []} />,
+    value: undefined,
+    filter: <Autocomplete variant="outlined" label="VIA" options={hubOptions || []} multiple />,
     type: 'autocomplete',
     label: 'VIA'
   },
@@ -130,9 +130,9 @@ export const getFilters = (depositOptions, hubOptions, shopOptions, parentSociet
   },
   {
     name: 'shopCode',
-    value: '',
+    value: undefined,
     filter: (
-      <Autocomplete variant="outlined" label="Selecteaza magazin" options={shopOptions || []} />
+      <Autocomplete variant="outlined" label="Selecteaza magazin" options={shopOptions || []} multiple/>
     ),
     type: 'autocomplete',
     label: 'Selecteaza magazin'
@@ -167,12 +167,13 @@ export const getFilters = (depositOptions, hubOptions, shopOptions, parentSociet
   },
   {
     name: 'parentSociety',
-    value: '',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selecteaza societate"
-        options={parentSocietyOptions || []}
+        options={parentSocietyOptions || [] }
+        multiple
       />
     ),
     type: 'autocomplete',
