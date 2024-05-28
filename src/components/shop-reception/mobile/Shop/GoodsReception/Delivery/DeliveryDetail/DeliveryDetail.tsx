@@ -140,7 +140,7 @@ const DeliveryDetail = () => {
           label='PRODUSE SGR'
           size='large'
           style={{ width: '100%' }}
-          onClick={() => navigate(URLS.AUTH_SGR_PRODUCTS)}
+          onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT)}
         />,
         <div>
           {truck.deliveryTicketList?.map(ticket => (

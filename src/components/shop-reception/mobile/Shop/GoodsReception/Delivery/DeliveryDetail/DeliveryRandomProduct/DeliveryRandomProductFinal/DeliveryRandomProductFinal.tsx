@@ -47,9 +47,9 @@ const DeliveryRandomProductFinal = () => {
           spacing={1}
           hasPaper={true}
           items={[
-            <Typography variant='medium' component='p'>Etichetă suport: {support.supportCode}</Typography>,
-            <Typography variant='medium' component='p'>Număr suport: {support.supportNumber}</Typography>,
-            <Typography variant='medium' component='p'>Produse verificate: {support.productCounter}</Typography>
+            <Typography variant='medium' component='p'>Etichetă suport: {support?.supportCode}</Typography>,
+            <Typography variant='medium' component='p'>Număr suport: {support?.supportNumber}</Typography>,
+            <Typography variant='medium' component='p'>Produse verificate: {support?.productCounter}</Typography>
           ]}
           itemsPerRow={1}
         />,
