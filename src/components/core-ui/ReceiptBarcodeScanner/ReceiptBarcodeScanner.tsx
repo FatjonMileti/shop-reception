@@ -98,7 +98,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
               value={code}
               type="text"
               variant="outlined"
-              label="Introdu codul bonului"
+              label="Introdu codul de bare al bonului"
               fullWidth
               onChange={event => setCode(event.currentTarget.value)}
               id="receipt-scan-input"
@@ -125,7 +125,7 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
               value={receiptNumber}
               type="text"
               variant="outlined"
-              label="Introdu numarul bonului"
+              label="Introdu numarul bonului (EJTRZ)"
               fullWidth
               onChange={event => setReceiptNumber(event.currentTarget.value)}
               required
