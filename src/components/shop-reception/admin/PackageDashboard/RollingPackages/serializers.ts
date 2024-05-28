@@ -1,19 +1,22 @@
-export const toTableRowItems = (items: RollingPackages[]) => items.map((item: RollingPackages) => ({
-  id: item.id,
-  warehouse: item.warehouse,
-  store: item.store,
-  hub: item.hub,
-  society: item.society,
-  expectedSupportType: item.expectedSupportType,
-  confirmedSupportType: item.confirmedSupportType,
-  truckLocation: item.truckLocation,
-  registrationNumber: item.registrationNumber,
-  supportCode: item.supportCode,
-  deliverySlip: item.deliverySlip,
-  noticeNumber: item.noticeNumber,
-  entry: item.entry,
-  lesire: item.lesire,
-  finalStockAfterInventory: item.finalStockAfterInventory,
-  date: item.date,
-  image: item.image
-}))
+import { formatUIDateTime } from 'utils/helpers'
+
+export const toTableRowItems = items =>
+  items.map(item => ({
+    id: item.id,
+    shopName: item.shopName ?? '',
+    depositName: item.depositName ?? '',
+    receptionHubName: item.hubName ?? '',
+    parentSociety: item.parentSociety ?? '',
+    supportTypeExpected: item.supportTypeExpected ?? '',
+    supportTypeConfirmed: item.supportType ?? '',
+    type: item.type ?? '',
+    truckNumber: item.truckNumber ?? '',
+    supportCode: item.supportCode ?? '',
+    deliveryTicketExternalId: item.ticketNumber ?? '',
+    noticeNumber: item.noticeNumber ?? '',
+    intactNumber: item.intactNumber ?? '',
+    brokenNumber: item.brokenNumber ?? '',
+    difference: item.difference ?? '',
+    created: formatUIDateTime(item.created),
+    pictureId: item.pictureId
+  }))

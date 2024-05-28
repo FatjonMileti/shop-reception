@@ -57,7 +57,7 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza depozit'
+    label: 'Selecteaza magazin'
   },
   {
     name: 'hubId',
