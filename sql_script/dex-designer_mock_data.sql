@@ -133,6 +133,7 @@ VALUES
     (161, 'Fisiere receptie infolog', 'UsersManagement', null, true, 12),
     (162, 'Administrare produse SGR', 'UsersManagement', null, true, 12),
     (247, 'Nomenclator societati', 'UsersManagement', null, true, 12),
+    (248, 'Serie Numar-Aviz', 'UsersManagement', null, true, 12),
     (163, 'Bonuri de livrare', 'UsersManagement', null, true, 13),
     (164, 'Lista camioane marfa', 'UsersManagement', null, true, 13),
     (165, 'Suporti cu destinatie eronata', 'UsersManagement', null, true, 13),
@@ -276,6 +277,7 @@ VALUES
     (177, 'Fisiere receptie infolog', '', '/shop-reception/admin/receptionFiles', true, 161, true),
     (178, 'Administrare produse SGR', '', '/shop-reception/admin/sgrProducts', true, 162, true),
     (247, 'Nomenclator societati', '', '/shop-reception/admin/parentSocietyList', true, 247, true),
+    (248, 'Serie Numar-Aviz', '', '/shop-reception/admin/noticeSeriesNumberList', true, 248, true),
     (179, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips', true, 163, true),
     (222, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySupportAction/:id', true, 163, false),
     (180, 'Lista camioane marfa', '', '/shop-reception/reception/truckList', true, 164, true),
@@ -468,7 +470,8 @@ VALUES
     (200, 149), (200, 151), (200, 152), (200, 153), (200, 154), (200, 155), (200, 156),
     (200, 157), (200, 158), (200, 159), (200, 160), (200, 161), (200, 162), (200, 163), (200, 164),
     (200, 165), (200, 166), (200, 167), (200, 168), (200, 169), (200, 170), (200, 171), (200, 172),
-    (200, 173), (200, 174), (200, 175), (200, 176), (200, 177), (200, 272), (200, 195), (200, 196), (200, 247),
+    (200, 173), (200, 174), (200, 175), (200, 176), (200, 177), (200, 272), (200, 195), (200, 196), 
+    (200, 247), (200, 248),
     -- Shop Reception Mobile
     -- GG_RO_HQ_SHOP_RECEPTION_ADMIN
     (200, 178), (200, 179), (200, 180), (200, 181), (200, 182), (200, 183), (200, 184), (200, 185),

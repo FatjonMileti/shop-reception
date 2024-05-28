@@ -1,5 +1,4 @@
 import * as Yup from 'yup'
-import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table'
 
 export const getValidationSchema = () =>
   Yup.object().shape({

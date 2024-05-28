@@ -4,31 +4,47 @@ import { TitleHeader } from '../../../Common/TitleHeader'
 import { TruckCard } from '../../../../admin/Common/TruckCard'
 import { URLS } from '../../../constants'
 import { useNavigate } from 'react-router-dom'
-
-const trucks: any[] = [
-  { id: 1, name: 'Camion 1', description: 'Descriere camion 1' },
-  { id: 2, name: 'Camion 2', description: 'Descriere camion 2' }
-]
+import { useQuery } from "react-query";
+import { makeCoreGetRequest } from "../../../../../../utils/api";
+import { formatErrorMessage } from "../../../../../../utils/formatting";
+import { useNotification } from "../../../../../../hooks";
+import React from "react";
 
 const InProgressReturn = () => {
   const navigate = useNavigate()
+  const { showNotification } = useNotification()
+
+  const { data, isLoading} = useQuery(
+    'inProgressReturnReception',
+    async () => {
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/in_process', null)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
 
   let items = [
     <TitleHeader title='RETUR ÎN CURS DE RECEPȚIE' />,
-    ...trucks.map((item: any, index) => (
+    data && data.map((item: any, index) => (
       <TruckCard
         key={item.id}
         onClick={() => {
-          navigate(URLS.AUTH_TRUCK_DETAIL.replace(':id', item.id.toString()))
+          navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2, {state: item.id})
         }}
         truck={item}
       />
-    ))
+    )),
+    !data && <Typography variant={"medium"}>Nu există camioane de retur în lucru.</Typography>
   ]
 
-  if (trucks.length === 0) {
-    items.push(<Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>
-      Nu existǎ camioane de retur în lucru.</Typography>)
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
   return (

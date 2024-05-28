@@ -42,13 +42,13 @@ import { TransportResponsible } from './PackageDashboard/TransportResponsible'
 import { TruckDetails } from './ReceptionDashboard/TruckList/TruckDetails'
 import { SupportWrongDestinationDetail } from './ReceptionDashboard/SupportWrongDestination/SupportWrongDestinationDetail'
 import { BalancePackageHistory } from './PackageDashboard/BalancePackageHistory'
-import { SeriesNumber } from './AdminDashboard/SeriesNumber'
 import { SGRProducts } from './AdminDashboard/SGRProducts'
 import SupportCode from './ReceptionDashboard/DeliveryTicketsList/DeliveryTicketsDetails/SupportCode/SupportCode'
 import { SensitiveArticles } from './ReceptionDashboard/SensitiveArticles'
 import DeliveryTruckList from './ReceptionDashboard/DeliveryTruckList/DeliveryTruckList'
 import { ReturnTruck } from './PackageDashboard/ReturnTruck'
 import { ParentSocietyList } from './AdminDashboard/ParentSocietyList'
+import { NoticeSeriesNumberList } from './AdminDashboard/NoticeSeriesNumberList'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -176,16 +176,6 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ReceptionFiles}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
-        }
-      />
-      <Route
-        path={URLS.AUTH_SERIES_NUMBER}
-        element={
-          <PrivateRoute
-            component={SeriesNumber}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -521,6 +511,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ParentSocietyList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_NOTICE_SERIES_NUMBER_LIST}
+        element={
+          <PrivateRoute
+            component={NoticeSeriesNumberList}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

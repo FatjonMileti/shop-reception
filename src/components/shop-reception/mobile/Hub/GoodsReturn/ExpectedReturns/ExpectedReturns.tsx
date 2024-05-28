@@ -10,9 +10,6 @@ import { formatErrorMessage } from "../../../../../../utils/formatting";
 import { useNotification } from "../../../../../../hooks";
 import React from "react";
 
-
-
-
 const ExpectedReturns = () => {
   const navigate = useNavigate()
   const { showNotification } = useNotification()
@@ -32,28 +29,24 @@ const ExpectedReturns = () => {
     }
   )
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-
 
   let items = [
     <TitleHeader title='RETURURI AȘTEPTATE' />,
-    ...truckList.map((item: any, index) => (
+    truckList && truckList.map((item: any, index) => (
       <TruckCard
         key={index}
         onClick={() => {
-          navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL, { state: {item} })
+          navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL, { state: item.id })
         }}
         truck={item}
       />
-    ))
+    )),
+    !truckList && <Typography variant={"medium"}>Nu există camioane de retur în aşteptare.</Typography>
   ]
 
-  if (items.length === 0) {
-    items.push(<Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>
-      Nu existǎ camioane de retur în așteptare.</Typography>)
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
   return (

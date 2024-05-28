@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { URLS } from "../../../../constants";
 import React from 'react';
 import { useQuery } from "react-query";
-import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
+import { makeCoreGetRequest } from "../../../../../../../utils/api";
 import { TableRowType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table";
 import { columns } from "./helpers";
 import { formatErrorMessage } from "../../../../../../../utils/formatting";
@@ -16,7 +16,6 @@ const ContinueReturnDetail = () => {
   const { showNotification } = useNotification();
   const navigate = useNavigate()
   const location = useLocation();
-
   const truckId = location.state;
 
   const { data: CRTruck, isLoading} = useQuery(
