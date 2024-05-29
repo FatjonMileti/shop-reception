@@ -2,7 +2,8 @@ export const getColumns = tableColumns =>
   tableColumns.map((column, index) => ({
     title: column,
     field: index,
-    align: 'left'
+    align: 'left',
+    sticky: index < 4
   }))
 
 const makeObjectFromArray = array => Object.assign({}, array)

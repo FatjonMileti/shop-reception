@@ -7,13 +7,13 @@ export const columns = [
   },
   {
     title: 'Nume',
-    field: 'name',
+    field: 'lastName',
     align: 'left',
     type: 'string'
   },
   {
     title: 'Adresa de mail',
-    field: 'emails',
+    field: 'email',
     align: 'left',
     type: 'string'
   }
