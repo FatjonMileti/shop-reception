@@ -44,7 +44,7 @@ const DeleteConfirmationModal: FC<DeleteConfirmationProps> = props => {
       setShouldRefreshData && setShouldRefreshData(true)
       closeModal()
       showNotification({
-        message: succesMessage,
+        message: succesMessage || 'Data was deleted successfully.',
         type: 'success'
       })
     } catch (error) {
