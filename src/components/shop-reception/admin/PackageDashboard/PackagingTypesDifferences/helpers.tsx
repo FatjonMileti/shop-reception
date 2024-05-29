@@ -114,11 +114,13 @@ export const getFilters = ({
   },
   {
     name: 'depositId',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selecteaza Depozit"
         options={despositOptions || []}
+        multiple
       />
     ),
     type: 'autocomplete',

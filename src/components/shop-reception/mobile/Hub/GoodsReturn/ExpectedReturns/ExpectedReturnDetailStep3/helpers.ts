@@ -1,24 +1,21 @@
-import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table'
+import * as Yup from "yup";
 
-export const columns: Array<TableHeaderType> = [
-  {
-    title: '',
-    field: 'id',
-    align: 'left'
-  },
-  {
-    title: '',
-    field: 'title',
-    align: 'left'
-  },
-  {
-    title: 'CANTITATE',
-    field: 'amount',
-    align: 'left'
-  },
-  {
-    title: '',
-    field: 'action',
-    align: 'left'
-  }
-]
+export const getValidationSchema = () =>
+  Yup.object().shape({
+    supportList: Yup.array().of(
+      Yup.object().shape({
+        id: Yup.number(),
+        supportCode: Yup.string(),
+        supportTypeName: Yup.string(),
+        supportTypeNameAndCode: Yup.string().nullable(),
+        supportNumber: Yup.number(),
+        hasPhoto: Yup.boolean(),
+        confirmedSupportNumber: Yup.number(),
+        }
+      )
+    )
+  })
+
+export const initialValues = {
+  supportList: []
+}
