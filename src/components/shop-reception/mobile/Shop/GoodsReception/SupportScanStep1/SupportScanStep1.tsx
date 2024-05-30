@@ -79,7 +79,7 @@ const SupportScanStep1 = () => {
   const { data: truck, isLoading} = useQuery(
     'counter',
     async () => {
-      const truck = await makeCoreGetRequest('/shop-reception-mobile/support/counter/' + id, null)
+      const truck = await makeCoreGetRequest('/shop-reception-mobile/support/shop/counter/' + id, null)
       setCounter(truck.counter)
 
       return truck;
@@ -97,7 +97,7 @@ const SupportScanStep1 = () => {
   const { data: supportList, isLoading: isLoadingSupports} = useQuery(
     'supportList',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/support/principal/type', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/support/shop/principal/type', null)
     },
     {
       onError: error => {
@@ -118,7 +118,7 @@ const SupportScanStep1 = () => {
       const saveModel =  {supportId, supportTypeId: values.supportTypeId, defectReason: values.reason, pictureIdNonConform: null, pictureIdSupportType: null}
 
       try {
-        makeCorePostRequest('/shop-reception-mobile/support/save/' + id, saveModel).then(resp => {
+        makeCorePostRequest('/shop-reception-mobile/support/shop/save/' + id, saveModel).then(resp => {
           const localCounter = resp.counter;
           if (localCounter > 0) {
             setCounter(localCounter);
@@ -156,7 +156,7 @@ const SupportScanStep1 = () => {
   }
 
   const toggleIsSearching = (): void => {
-    makeCorePostRequest('/shop-reception-mobile/support/scan/' + id, { supportCode: formik.values.supportCode }).then(r => {
+    makeCorePostRequest('/shop-reception-mobile/support/shop/scan/' + id, { supportCode: formik.values.supportCode }).then(r => {
       setSupportNumber(r.supportNumber)
       setSupportId(r.supportId)
       formik.setFieldValue('supportTypeId', String(r.supportTypeId))
@@ -170,7 +170,7 @@ const SupportScanStep1 = () => {
 
   const toggleIsFinalizing = (): void => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/support/summary/' + id, null).then(response => {
+      makeCoreGetRequest('/shop-reception-mobile/support/shop/summary/' + id, null).then(response => {
         const count = response['counter'];
         const total = response['total'];
 
@@ -197,7 +197,7 @@ const SupportScanStep1 = () => {
         {
           label: 'Am terminat',
           onClick: () => {
-            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_4.replace(':id', id));
+            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_4, { state: id });
             setIsFinalizeModalOpen(false);
           },
           color: 'secondary'

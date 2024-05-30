@@ -1,7 +1,7 @@
 import { Grid } from '../../../../Common/Grid'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from '../../../Common/TitleHeader'
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { makeCoreGetRequest } from "../../../../../../utils/api";
 import { formatErrorMessage } from "../../../../../../utils/formatting";
@@ -18,12 +18,14 @@ const SupportScanStep4 = () => {
   const [isFinalizedTruckModalOpen, setIsFinalizedTruckModalOpen] = useState(false);
   const [finalizeTruckContent, setFinalizedTruckModalContent] = useState({ title: '', description: '', buttons: [] });
   const navigate = useNavigate();
-  let { id } = useParams();
+  const location = useLocation()
+  const id = location.state || '';
+  console.log(id);
 
   const { data: manualTruck, isLoading: isLoadingManualTruck} = useQuery(
     'manualTruck',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/getManualCreatedInfo/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/getManualCreatedInfo/' + id, null)
     },
     {
       onSuccess: () => setInfoLoaded(true),
@@ -39,7 +41,7 @@ const SupportScanStep4 = () => {
   const { data: truck, isLoading: isLoadingTruck} = useQuery(
     'truck',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/' + id, null)
     },
     {
       onError: error => {
@@ -54,7 +56,7 @@ const SupportScanStep4 = () => {
   const { data: counter, isLoading: isLoadingCounter} = useQuery(
     'counter',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/support/counter/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/support/shop/counter/' + id, null)
     },
     {
       onError: error => {
@@ -69,7 +71,7 @@ const SupportScanStep4 = () => {
   const { data: canReturnToHub, isLoading: isLoadingCanReturnToHub} = useQuery(
     'hubAssigned',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/exit/confirmHubAssigned', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/confirmHubAssigned', null)
     },
     {
       onError: error => {
@@ -83,15 +85,15 @@ const SupportScanStep4 = () => {
 
   const finalizeTruck = (destination) => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/support/finalise/' + id, null).then()
+      makeCoreGetRequest('/shop-reception-mobile/support/shop/finalise/' + id, null).then()
 
       if (destination === 'home') {
         navigate('/goodsReception')
       } else if (destination === 'return') {
         navigate(URLS.AUTH_RETURN_STEP_1, { state:
           {
-            truckNumber: truck.truckNumber,
-            driverName: truck.driverName,
+            truckNumber: truck?.truckNumber,
+            driverName: truck?.driverName,
           }
         })
       }
@@ -222,8 +224,8 @@ const SupportScanStep4 = () => {
           buttons={finalizeTruckContent.buttons}
         />,
         <>
-          <Typography variant='medium' component='p'>Numǎr camion: {counter.truckNumber}</Typography>
-          <Typography variant='medium' component='p'>Numǎr suporți scanați: {counter.counter}</Typography>
+          <Typography variant='medium' component='p'>Numǎr camion: {counter?.truckNumber}</Typography>
+          <Typography variant='medium' component='p'>Numǎr suporți scanați: {counter?.counter}</Typography>
         </>
       ].filter(Boolean)}
       itemsPerRow={1}

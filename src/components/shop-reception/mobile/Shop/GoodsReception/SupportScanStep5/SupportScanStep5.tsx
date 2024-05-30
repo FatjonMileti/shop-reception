@@ -20,7 +20,7 @@ const SupportScanStep5 = () => {
   const { data: counter, isLoading: isLoadingCounter} = useQuery(
     'counter',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/support/counter/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/support/shop/counter/' + id, null)
     },
     {
       onError: error => {
@@ -50,7 +50,7 @@ const SupportScanStep5 = () => {
     };
 
     try {
-      makeCorePostRequest('/shop-reception-mobile/truck/save', truck).then(() => navigate('/goodsReception'))
+      makeCorePostRequest('/shop-reception-mobile/truck/shop/save', truck).then(() => navigate('/goodsReception'))
     }
     catch (error) {
       showNotification({
@@ -108,7 +108,7 @@ const SupportScanStep5 = () => {
               }}
             />
             <ImageUpload
-              uploadUrl={`/shop-reception-mobile/truck/upload_shop/security/` + id}
+              uploadUrl={`/shop-reception-mobile/truck/shop/upload_shop/security/` + id}
               onSuccess={handleSuccess}
               onError={handleError}
               inputId={`seal${idx}`}

@@ -23,8 +23,9 @@ const PackagingInventoryUpdate = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
+
         await makeCorePostRequest('/shop-reception-mobile/support/shop/inventory/save', values);
-        clearFields()
+        clearFields();
       } catch (error) {
         showNotification({
             message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -33,7 +34,7 @@ const PackagingInventoryUpdate = () => {
       }
     }
   })
-
+  console.log(formik.errors);
   function clearFields() {
       setSelectedSupportId('')
       formik.setFieldValue('supportId', null);
