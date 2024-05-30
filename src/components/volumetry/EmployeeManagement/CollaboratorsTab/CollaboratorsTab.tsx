@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid } from '@mui/material'
+import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import { Table } from 'components/core-ui/Table'
 import s from './CollaboratorsTab.modules.scss'
 import { makeCoreGetRequest } from 'utils/api'
@@ -12,17 +12,18 @@ import {
   ValueLabelInterface
 } from 'components/volumetry/interfaces'
 import { columns, getTableFilterFields } from './helpers'
-import { DeleteCollaborator } from './DeleteCollaborator'
 import { CreateEditCollaborator } from './CreateEditCollaborator'
 import { AddActionIcon, DeleteActionIcon, EditActionIcon } from 'icons'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import {
+  getCollaboratorsTypesOptions,
   getDepartmentsOptions,
   getJobTitlesOptions,
   getLocationsOptions
 } from 'components/volumetry/api'
 import { handleQueryError } from 'utils/helpers'
 import { roles } from '../../helpers'
+import { DeleteConfirmationModal } from 'components/core-ui/DeleteConfirmationModal'
 
 const CollaboratorsTab = () => {
   // TODO: De actualizat cand primim update cu drepturile fiecarui rol
@@ -30,18 +31,18 @@ const CollaboratorsTab = () => {
 
   const [locationsFilterValue, setLocationsFilterValue] = useState<ValueLabelInterface>(null)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tableItems, setTableItems] = useState<EmployeeManagementItem[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
-  const [selectedRow, setSelectedRow] = useState<EmployeeManagementItem>(null)
+  const [selectedRowId, setSelectedRowId] = useState<number>(null)
   const [modal, setModal] = useState<CRUDAction>(null)
 
   const openModal = (action: CRUDAction) => setModal(action)
   const closeModal = () => setModal(null)
 
   const selectRowId = (rowId: number, action: CRUDAction) => {
-    const item = tableItems.find((item: EmployeeManagementItem) => item.id === rowId)
-    setSelectedRow(item)
+    setSelectedRowId(rowId)
     openModal(action)
   }
 
@@ -49,22 +50,25 @@ const CollaboratorsTab = () => {
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
     getDepartmentsOptions(showNotification)
-  const { data: jobTitlesOptions, isLoading: isjobTitlesOptionsLoading } =
-    getJobTitlesOptions(showNotification)
+  const { data: collaboratorsTypesOptions, isLoading: isCollaboratorsTypesOptionsLoading } =
+    getCollaboratorsTypesOptions(showNotification)
   const { data: locationsOptions, isLoading: isLocationsLoading } = getLocationsOptions(
     showNotification,
     setLocationsFilterValue,
     canUseCustomFilter
   )
+  const { data: jobTitlesOptions, isLoading: isJobTitlesLoading } =
+    getJobTitlesOptions(showNotification)
 
   const handleFilterChange = value => {
     setLocationsFilterValue(value)
     setShouldRefreshData(true)
+    setShouldResetPage(true)
   }
 
   const tableFilters = useMemo(
-    () => getTableFilterFields(departmentsOptions, jobTitlesOptions),
-    [departmentsOptions, jobTitlesOptions]
+    () => getTableFilterFields(departmentsOptions, collaboratorsTypesOptions, jobTitlesOptions),
+    [departmentsOptions, collaboratorsTypesOptions, jobTitlesOptions]
   )
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -126,30 +130,32 @@ const CollaboratorsTab = () => {
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
           jobTitlesOptions={jobTitlesOptions}
-          isjobTitlesOptionsLoading={isjobTitlesOptionsLoading}
         />
-        <DeleteCollaborator
+        <DeleteConfirmationModal
           isModalOpen={modal === 'delete'}
           closeModal={closeModal}
-          itemId={selectedRow?.id}
+          actionUrl={`/volumetry/workers/contractors/:id`}
+          itemId={selectedRowId}
+          content={<Typography>Sunteti sigur ca vreti sa stergeti acest colaborator?</Typography>}
           setShouldRefreshData={setShouldRefreshData}
+          title="Sterge colaborator"
+          deleteLabel="Sterge"
         />
         <CreateEditCollaborator
           isModalOpen={modal === 'edit'}
           closeModal={closeModal}
-          editItem={selectedRow}
+          editItemId={selectedRowId}
           setShouldRefreshData={setShouldRefreshData}
           departmentsOptions={departmentsOptions}
           isDepartmentsOptionsLoading={isDepartmentsOptionsLoading}
           jobTitlesOptions={jobTitlesOptions}
-          isjobTitlesOptionsLoading={isjobTitlesOptionsLoading}
         />
 
         {canUseCustomFilter ? (
           locationsFilterValue && (
             <Table
               hideCheckbox
-              orderBy="department"
+              orderBy="genericDepartment"
               order="desc"
               columns={columns}
               items={tableItems}
@@ -158,6 +164,8 @@ const CollaboratorsTab = () => {
               totalCount={totalCount}
               shouldRefreshData={shouldRefreshData}
               setShouldRefreshData={setShouldRefreshData}
+              shouldResetPage={shouldResetPage}
+              setShouldResetPage={setShouldResetPage}
               filters={tableFilters}
               filtersLabel="Filtreaza"
               appliedFiltersLabel="Filtre"
@@ -196,7 +204,7 @@ const CollaboratorsTab = () => {
         ) : (
           <Table
             hideCheckbox
-            orderBy="department"
+            orderBy="genericDepartment"
             order="desc"
             columns={columns}
             items={tableItems}

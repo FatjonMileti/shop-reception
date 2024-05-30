@@ -7,16 +7,10 @@ import { useNotification } from 'hooks'
 import { ChangeEvent } from 'react'
 import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
-import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { handleQueryError } from 'utils/helpers'
 import { EditCurrentTaskTemplateProps } from '../TaskAllocationsDefinitions'
-
-const validationSchema = yup.object({
-  id: yup.string().nonNullable(),
-  workload: yup.number().required('Acest camp este obligatoriu.'),
-  allocatedWorkersNumber: yup.number()
-})
+import { getValidationSchema } from './helpers'
 
 const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
   const { isModalOpen, closeModal, editItem, setShouldRefreshData } = props
@@ -47,7 +41,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
       workload: editItem.totalWorkload,
       allocatedWorkersNumber: editItem.allocatedWorkers
     },
-    validationSchema: validationSchema,
+    validationSchema: getValidationSchema(editItem.minDivision),
     onSubmit: async (values: any) => {
       mutate(values)
       formik.resetForm()
@@ -55,7 +49,7 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
   })
 
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Edit'}>
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal} modalTitle={'Editeaza'}>
       <Grid container spacing={4}>
         {isLoading && (
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -79,6 +73,10 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
             error={!!formik.errors.workload}
             helperText={formik.errors.workload as string}
             required
+            inputProps={{
+              step: editItem.minDivision,
+              min: '0'
+            }}
           />
         </Grid>
 
@@ -93,12 +91,15 @@ const EditCurrentTaskTemplate = (props: EditCurrentTaskTemplateProps) => {
             }
             value={formik.values.allocatedWorkersNumber}
             style={{ width: '100%' }}
+            inputProps={{
+              min: '0'
+            }}
           />
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
-          <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+          <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
         </Grid>
       </Grid>
     </Modal>

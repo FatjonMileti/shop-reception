@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from 'components/core-ui'
 import { Home } from '../Home'
@@ -13,7 +13,14 @@ import { makeDesignerGetRequest, makeCorePutRequest } from 'utils/api'
 import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { toApplicationPages } from './serializers'
 import { AuthProvider } from 'oidc-react'
-import { oidcConfig, getFirebaseToken, setFirebaseToken } from 'utils/authService'
+import {
+  oidcConfig,
+  getFirebaseToken,
+  setFirebaseToken,
+  getFirebaseUser,
+  getUserPreferredName,
+  setFirebaseUser
+} from 'utils/authService'
 import { useNotification } from 'hooks'
 import { toApplicationModulesPages } from 'components/Layout/Sidebar/serializers'
 import { CircularProgress } from '@mui/material'
@@ -29,7 +36,7 @@ import { useMerchandiseRoutes } from '../shop-reception/mobile/routes'
 import { useShopReceptionRoutes } from '../shop-reception/admin/routes'
 import { getFBToken } from 'utils/firebase'
 import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
-import { SnackbarProvider, VariantType, useSnackbar } from 'notistack'
+import { SnackbarProvider } from 'notistack'
 import 'file-loader?name=firebase-app-compat.js!./firebase-app-compat.js'
 import 'file-loader?name=firebase-messaging-compat.js!./firebase-messaging-compat.js'
 import { useLostSalesOpportunitiesRoutes } from 'components/lostSalesOpportunities/routes'
@@ -75,12 +82,16 @@ const App = () => {
   useEffect(() => {
     ;(async () => {
       const localToken = getFirebaseToken()
-      if (fbToken && fbToken !== localToken) {
+      const firebaseUser = getFirebaseUser()
+      const loggedUser = getUserPreferredName()
+      // if (fbToken && (fbToken !== localToken || firebaseUser !== loggedUser)) {
+      if (fbToken) {
         try {
           await makeCorePutRequest('/message-dispatcher/external/association', {
             deviceToken: fbToken
           })
           setFirebaseToken(fbToken)
+          setFirebaseUser(loggedUser)
         } catch (error) {
           console.log(error)
         }
@@ -154,12 +165,13 @@ const App = () => {
       try {
         const result = await makeDesignerGetRequest('/screens/route-urls')
         setAllScreensRoutes(result)
-        setIsLoadingRoutes(false)
       } catch (error) {
         showNotification({
           message: `Error while fetching application pages. ${formatErrorMessage(error)}`,
           type: 'error'
         })
+      } finally {
+        setIsLoadingRoutes(false)
       }
     })()
   }, [])
@@ -191,46 +203,58 @@ const App = () => {
             )) || (
               <Layout modules={modules} setSubdomainId={setSubdomainId}>
                 <BackButtonTitle applicationPages={applicationPages}></BackButtonTitle>
-                <Routes>
-                  {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />}
-
-                  {/* private routes */}
-                  <Route
-                    path={URLS.AUTH_HOME}
-                    element={
-                      <PrivateRoute
-                        component={Home}
-                        modules={modules}
-                        setSubdomainId={setSubdomainId}
+                <React.Suspense
+                  fallback={
+                    <div style={{ display: 'flex' }}>
+                      <CircularProgress
+                        color="primary"
+                        style={{ margin: '40px auto' }}
+                        disableShrink
                       />
-                    }
-                  />
-                  {governanceRoutes}
-                  {bakeryRoutes}
-                  {volumetryRoutes}
-                  {supplyOmniRoutes}
-                  {merchandiseRoutes}
-                  {shopReceptionRoutes}
-                  {lostSalesOpportunitiesRoutes}
-                  {applicationModulesPages.map(page =>
-                    createRoute(
-                      {
-                        ...page,
-                        subdomainId,
-                        modules,
-                        applicationPages,
-                        hasLoadedActivities,
-                        isLoadingActivities
-                      },
-                      ServiceDomain
-                    )
-                  )}
-                  {/* end of private routes */}
+                    </div>
+                  }
+                >
+                  <Routes>
+                    {/* {!applicationPages.length && <Route path="*" element={<LoginOIDC />} />} */}
 
-                  <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
-                  <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
-                  {applicationPages.length && <Route path="*" element={<NotFound />} />}
-                </Routes>
+                    {/* private routes */}
+                    <Route
+                      path={URLS.AUTH_HOME}
+                      element={
+                        <PrivateRoute
+                          component={Home}
+                          modules={modules}
+                          setSubdomainId={setSubdomainId}
+                        />
+                      }
+                    />
+                    {governanceRoutes}
+                    {bakeryRoutes}
+                    {volumetryRoutes}
+                    {supplyOmniRoutes}
+                    {merchandiseRoutes}
+                    {shopReceptionRoutes}
+                    {lostSalesOpportunitiesRoutes}
+                    {applicationModulesPages.map(page =>
+                      createRoute(
+                        {
+                          ...page,
+                          subdomainId,
+                          modules,
+                          applicationPages,
+                          hasLoadedActivities,
+                          isLoadingActivities
+                        },
+                        ServiceDomain
+                      )
+                    )}
+                    {/* end of private routes */}
+
+                    <Route path={URLS.LOGINOIDC} element={<LoginOIDC />} />
+                    <Route path={URLS.LOGOUTOIDC} element={<LogoutOIDC />} />
+                    {applicationPages.length && <Route path="*" element={<NotFound />} />}
+                  </Routes>
+                </React.Suspense>
               </Layout>
             )}
           </ThemeProvider>

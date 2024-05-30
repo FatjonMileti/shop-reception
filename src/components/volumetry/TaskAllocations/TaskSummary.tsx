@@ -1,15 +1,16 @@
 import { Capsule } from 'components/core-ui/Capsule'
 import s from './TaskAllocations.modules.scss'
 import { Grid, Typography } from '@mui/material'
+import { PriorityColors, getPriority } from './helpers'
+import { useMemo } from 'react'
 
 const TaskSummary = ({ item, hideDetails = false }) => {
   // TODO: To add type when db schema is defined
   const {
-    rayonsOrDepartment,
+    departmentAlias,
     taskName,
     recommendedInterval,
     standardProductivity,
-    priorityId,
     priorityValue,
     frequency,
     allocatedWorkers,
@@ -20,11 +21,13 @@ const TaskSummary = ({ item, hideDetails = false }) => {
     workloadMeasurementUnit
   } = item
 
+  const priorityId = useMemo(() => getPriority(priorityValue), [priorityValue])
+
   return (
     <Grid container flexDirection="column">
       <Grid item>
         <Typography className={s.departmentName} fontWeight={700}>
-          {rayonsOrDepartment}
+          {departmentAlias}
         </Typography>
       </Grid>
       <Grid item>
@@ -38,8 +41,8 @@ const TaskSummary = ({ item, hideDetails = false }) => {
           <Capsule
             label="Prioritate"
             value={priorityValue}
-            valueColor={priorityId === 1 && '#D30D1F'}
-            labelColor={priorityId === 1 && 'rgba(211, 13, 31, 0.15)'}
+            valueColor={PriorityColors[priorityId - 1].value}
+            labelColor={PriorityColors[priorityId - 1].label}
           />
         </Grid>
 
@@ -58,7 +61,12 @@ const TaskSummary = ({ item, hideDetails = false }) => {
             </Grid>
 
             <Grid item mt={1} mr={1}>
-              <Capsule label="Volum total" value={totalWorkload} />
+              <Capsule
+                label="Volum total"
+                value={totalWorkload}
+                valueColor={'#004f9b'}
+                labelColor={'#d9e5f0'}
+              />
             </Grid>
             <Grid item mt={1} mr={1}>
               <Capsule label="Volum efectuat" value={completedWorkload} />

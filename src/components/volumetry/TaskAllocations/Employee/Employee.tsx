@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Box, Grid, useMediaQuery } from '@mui/material'
 import s from '../TaskAllocations.modules.scss'
-import { getCapsuleColor } from '../helpers'
+import { getCapsuleColor } from './helpers'
 import { makeCorePutRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
@@ -21,10 +21,9 @@ const Employee: React.FC<EmployeeProps> = props => {
 
   const taskCurrentState = useMemo(() => getTaskCurrentState(employee), [employee.timerStatus])
 
-  const customCapsuleColors = getCapsuleColor(
-    taskCurrentState.isTaskStarted,
-    taskCurrentState.isTaskEnded,
-    employee.progressProportion > 100
+  const customCapsuleColors = useMemo(
+    () => getCapsuleColor(taskCurrentState, employee.progressProportion > 100),
+    [taskCurrentState, employee.progressProportion]
   )
 
   const [isOpenStopTaskModal, setIsOpenStopTaskModal] = useState<boolean>(false)
@@ -52,12 +51,7 @@ const Employee: React.FC<EmployeeProps> = props => {
         type: 'success'
       })
     },
-    onError: error =>
-      handleQueryError(
-        error,
-        'A aparut o eroare la schimbarea statusului taskului.',
-        showNotification
-      )
+    onError: error => handleQueryError(error, '', showNotification)
   })
   const shouldWrapActions = useMediaQuery('(min-width:1145px)')
 
@@ -70,47 +64,7 @@ const Employee: React.FC<EmployeeProps> = props => {
               <EmployeeCapsule employee={employee} customCapsuleColors={customCapsuleColors} />
             </Grid>
 
-            <Grid item sm={12} md={6}>
-              <EmployeeProgress
-                taskCurrentState={taskCurrentState}
-                employee={employee}
-                customCapsuleColors={customCapsuleColors}
-              />
-            </Grid>
-
-            <Grid item sm={12} md={shouldWrapActions ? 12 : 2}>
-              <EmployeeActions
-                taskCurrentState={taskCurrentState}
-                updateTaskStatus={updateTaskStatus}
-                openStopTaskModal={openStopTaskModal}
-              />
-            </Grid>
-          </Grid>
-          <EditAllocationModal
-            isModalOpen={isOpenStopTaskModal}
-            closeModal={closeStopTaskModal}
-            employee={employee}
-            task={task}
-            setShouldRefreshData={setShouldRefreshData}
-            setSelectedRowId={setSelectedRowId}
-            hideWorkload
-          />
-        </>
-      ) : (
-        <>
-          <Grid container spacing={4}>
-            <Grid item sm={12} md={2}>
-              <Box className={s.employeeInfo}>
-                <EmployeeIcon />
-                <p className={s.employeeName}>{employee.workerFullName}</p>
-              </Box>
-            </Grid>
-
-            <Grid item sm={12} md={3}>
-              <EmployeeCapsule employee={employee} customCapsuleColors={customCapsuleColors} />
-            </Grid>
-
-            <Grid item sm={12} md={4}>
+            <Grid item sm={12} md={5}>
               <EmployeeProgress
                 taskCurrentState={taskCurrentState}
                 employee={employee}
@@ -133,6 +87,50 @@ const Employee: React.FC<EmployeeProps> = props => {
             task={task}
             setShouldRefreshData={setShouldRefreshData}
             setSelectedRowId={setSelectedRowId}
+            hideWorkload
+            isStop
+            minDivision={task.minDivision}
+          />
+        </>
+      ) : (
+        <>
+          <Grid container spacing={4}>
+            <Grid item sm={12} md={2}>
+              <Box className={s.employeeInfo}>
+                <EmployeeIcon />
+                <p className={s.employeeName}>{employee.workerFullName}</p>
+              </Box>
+            </Grid>
+
+            <Grid item sm={12} md={3}>
+              <EmployeeCapsule employee={employee} customCapsuleColors={customCapsuleColors} />
+            </Grid>
+
+            <Grid item xs={12} sm={12} md={4}>
+              <EmployeeProgress
+                taskCurrentState={taskCurrentState}
+                employee={employee}
+                customCapsuleColors={customCapsuleColors}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={12} md={shouldWrapActions ? 3 : 12}>
+              <EmployeeActions
+                taskCurrentState={taskCurrentState}
+                updateTaskStatus={updateTaskStatus}
+                openStopTaskModal={openStopTaskModal}
+              />
+            </Grid>
+          </Grid>
+          <EditAllocationModal
+            isModalOpen={isOpenStopTaskModal}
+            closeModal={closeStopTaskModal}
+            employee={employee}
+            task={task}
+            setShouldRefreshData={setShouldRefreshData}
+            setSelectedRowId={setSelectedRowId}
+            isStop
+            minDivision={task.minDivision}
           />
         </>
       )}

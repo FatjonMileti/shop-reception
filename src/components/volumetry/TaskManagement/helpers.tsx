@@ -8,7 +8,6 @@ import { Box } from '@mui/material'
 
 export const buildTableFilterFields = (
   departmentOptions: AutocompleteOption[],
-  categoryOptions: AutocompleteOption[],
   priorityOptions: AutocompleteOption[],
   frequencyOptions: AutocompleteOption[],
   workVolumeOptions: AutocompleteOption[]
@@ -20,8 +19,8 @@ export const buildTableFilterFields = (
     filter: <Input type="text" name="name" label="Nume" variant="outlined" />
   },
   {
-    name: 'genericDepartmentId',
-    label: 'Dapartament',
+    name: 'departmentAliasId',
+    label: 'Departament',
     type: 'autocomplete',
     value: '',
     filter: <Autocomplete label="Departament" variant="outlined" options={departmentOptions} />
@@ -48,22 +47,6 @@ export const buildTableFilterFields = (
     filter: (
       <Autocomplete label="Sursa volum de lucru" variant="outlined" options={workVolumeOptions} />
     )
-  },
-
-  {
-    name: 'volumetryLocationCategoryId',
-    label: 'Categorie',
-    type: 'autocomplete',
-    value: '',
-    filter: <Autocomplete label="Categorie" variant="outlined" options={categoryOptions} />
-  },
-
-  {
-    name: 'isActive',
-    label: 'Stare',
-    type: 'autocomplete',
-    value: '',
-    filter: <Autocomplete label="Stare" variant="outlined" options={STATE_OPTIONS} />
   }
 ]
 
@@ -74,7 +57,7 @@ export const mapToValueLabel = (list): AutocompleteOption[] => {
 export const columns = [
   {
     title: 'Departament / Raioane',
-    field: 'rayonsOrDepartment',
+    field: 'departmentAlias',
     align: 'left',
     type: 'string'
   },
@@ -101,6 +84,14 @@ export const columns = [
     collapsible: true,
     disableSorting: true
   },
+  // {
+  //   title: 'Volum estimat',
+  //   field: 'defaultWorkload',
+  //   align: 'left',
+  //   type: 'string',
+  //   collapsible: true,
+  //   disableSorting: true
+  // },
   {
     title: 'Productivitate standard',
     field: 'standardProductivity',
@@ -124,24 +115,20 @@ export const columns = [
     align: 'left',
     type: 'number',
     collapsible: true
-  },
-  {
-    title: 'Categorie',
-    field: 'volumetryLocationCategory',
-    align: 'left',
-    type: 'string',
-    collapsible: true
-  },
-  {
-    title: 'Activ',
-    field: 'isActive',
-    align: 'left',
-    type: 'string',
-    collapsible: true,
-    render: row => (
-      <Box>
-        <IconCell value={row.isActive ? 'active' : 'inactive'} />
-      </Box>
-    )
   }
 ]
+
+export const toTableRowItems = items =>
+  items.map(item => ({
+    id: item.id || '',
+    departmentAlias: item.departmentAlias || '',
+    name: item.name || '',
+    recommendedTimeInterval: item.recommendedTimeInterval || '',
+    frequency: item.frequency || '',
+    defaultWorkload: item.defaultWorkload || '',
+    standardProductivity: item.standardProductivity || '',
+    workVolumeSource: item.workVolumeSource || '',
+    priority: item.priority || '',
+    volumetryLocationCategory: item.volumetryLocationCategory || '',
+    isActive: item.isActive || ''
+  }))

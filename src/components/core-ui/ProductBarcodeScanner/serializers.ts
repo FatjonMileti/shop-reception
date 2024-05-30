@@ -1,16 +1,6 @@
 export const toProduct = product => {
-  const {
-    id,
-    name,
-    ean,
-    price,
-    internalCode,
-    storeStock,
-    warehouseStock,
-    neighboursStock,
-    storeProductState,
-    warehouseProductState
-  } = product
+  const { id, name, ean, price, internalCode, storeStock, warehouseStock, neighboursStock } =
+    product
 
   return {
     title: name,
@@ -27,7 +17,8 @@ export const toProduct = product => {
       hasBuyback: !!storeStock.purchaseOptions?.length,
       purchaseOptions: storeStock.purchaseOptions,
       isWarehouse: false,
-      state: storeProductState
+      state: storeStock.productState,
+      locationId: storeStock.locationId
     },
     warehouseStock: {
       id,
@@ -35,14 +26,16 @@ export const toProduct = product => {
       currency: 'lei',
       eanCode: ean,
       storeCode: internalCode,
-      available: warehouseStock?.availableQuantity,
-      sold: warehouseStock?.soldQuantity,
-      reserved: warehouseStock?.reservedQuantity,
-      initialStock: warehouseStock?.initialQuantity,
-      hasBuyback: !!warehouseStock?.purchaseOptions?.length,
-      purchaseOptions: warehouseStock?.purchaseOptions,
+      available: warehouseStock[0].availableQuantity,
+      sold: warehouseStock[0].soldQuantity,
+      reserved: warehouseStock[0].reservedQuantity,
+      initialStock: warehouseStock[0].initialQuantity,
+      hasBuyback: !!warehouseStock[0].purchaseOptions?.length,
+      purchaseOptions: warehouseStock[0].purchaseOptions,
       isWarehouse: true,
-      state: warehouseProductState
+      state: warehouseStock[0].productState,
+      locationId: warehouseStock[0].locationId,
+      locationName: warehouseStock[0].locationName
     },
     neighboursStock:
       neighboursStock?.map(stock => ({

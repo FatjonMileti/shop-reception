@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
 import { useNotification } from 'hooks'
 import { useMutation } from 'react-query'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Checkbox, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { CountyCitySelect } from 'components/core-ui/CountyCitySelect'
 import { formatErrorMessage } from 'utils/formatting'
 import { useFormik } from 'formik'
@@ -10,6 +10,7 @@ import { ChangeEvent } from 'react'
 import { initialValues, validationSchema } from './helpers'
 import { CountyCityInterface, LegalPerson } from '../interfaces'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { toLegalPersonPayload } from './serializers'
 
 interface LegalPersonProps {
   selectNewClient: boolean
@@ -52,7 +53,7 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: LegalPerson) => {
-      mutate(values)
+      mutate(toLegalPersonPayload(values))
     }
   })
 
@@ -95,51 +96,20 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
       <Grid item xs={12} md={6}>
         <Input
           type="text"
-          name="tradeRegister"
+          name="companyRegistrationNumber"
           label="Registrul Comertului"
           variant="outlined"
-          value={formik.values.tradeRegister}
+          value={formik.values.companyRegistrationNumber}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onUpdateValues('tradeRegister', e.target.value)
+            onUpdateValues('companyRegistrationNumber', e.target.value)
           }
           required
-          error={!!formik.errors.tradeRegister}
-          helperText={formik.errors.tradeRegister as string}
+          error={!!formik.errors.companyRegistrationNumber}
+          helperText={formik.errors.companyRegistrationNumber as string}
         />
       </Grid>
 
-      <Grid item xs={12} md={6}>
-        <Input
-          type="text"
-          name="bank"
-          label="Banca"
-          variant="outlined"
-          value={formik.values.bank}
-          fullWidth
-          onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('bank', e.target.value)}
-          required
-          error={!!formik.errors.bank}
-          helperText={formik.errors.bank as string}
-        />
-      </Grid>
-
-      <Grid item xs={12} md={6}>
-        <Input
-          type="text"
-          name="bankAccount"
-          label="IBAN"
-          variant="outlined"
-          value={formik.values.bankAccount}
-          fullWidth
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onUpdateValues('bankAccount', e.target.value)
-          }
-          required
-          error={!!formik.errors.bankAccount}
-          helperText={formik.errors.bankAccount as string}
-        />
-      </Grid>
       <Grid item xs={12} md={6}>
         <Input
           type="number"
@@ -164,7 +134,6 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
           value={formik.values.email}
           fullWidth
           onChange={(e: ChangeEvent<HTMLInputElement>) => onUpdateValues('email', e.target.value)}
-          required
           error={!!formik.errors.email}
           helperText={formik.errors.email as string}
         />
@@ -223,8 +192,18 @@ const LegalPerson: React.FC<LegalPersonProps> = ({ selectNewClient }) => {
         />
       </Grid>
 
+      <Grid item xs={12} md={6}>
+        <Checkbox
+          checked={formik.values.isTaxPayer}
+          onChange={event =>
+            formik.setFieldValue('isTaxPayer', (event.target as HTMLInputElement).checked)
+          }
+          label="Platitor de TVA"
+        />
+      </Grid>
+
       <Grid item xs={12} textAlign={'right'}>
-        <Button variant="contained" label="Save" onClick={() => formik.handleSubmit()} />
+        <Button variant="contained" label="Salvare" onClick={() => formik.handleSubmit()} />
       </Grid>
     </Grid>
   )

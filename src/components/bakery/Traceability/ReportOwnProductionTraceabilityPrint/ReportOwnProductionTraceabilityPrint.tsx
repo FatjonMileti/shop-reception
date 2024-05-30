@@ -3,20 +3,21 @@ import styles from './ReportOwnProductionTraceabilityPrint.modules.scss'
 import s from '../../commonStyles.modules.scss'
 import { BasicTable } from '@fullscreendigital/carrefour-dex-fe'
 import React, { useRef } from 'react'
-import { makeCoreGetRequest } from '../../../../utils/api'
-import { toTableGETUrl } from '../../../core-ui/Table/serializers'
 import { batchPrintColumns, chargePrintColumns, productPrintColumns } from './helpers'
 import { useQuery } from 'react-query'
-import { formatErrorMessage } from '../../../../utils/formatting'
-import { useNotification } from '../../../../hooks'
 import { CircularProgress, Grid, IconButton, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { PrintOutlined } from '@mui/icons-material'
 import { useReactToPrint } from 'react-to-print'
-import { Icon_v2 } from '../../../core-ui/Icon_v2'
-import { formatBakeryPayloadDate } from 'utils/helpers'
+import { useNotification } from 'hooks'
+import { makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { formatErrorMessage } from 'utils/formatting'
+import { Icon_v2 } from 'components/core-ui/Icon_v2'
+import { OwnProductionTraceabilityChildren } from './OwnProductionTraceabilityChildren'
+import { formatBakeryPayloadDate } from '../../../../utils/helpers'
 
-export const ReportOwnProductionTraceabilityPrint = () => {
+const ReportOwnProductionTraceabilityPrint = () => {
   let [searchParams] = useSearchParams()
   const location = useLocation()
   const search = new URLSearchParams(location.search)
@@ -37,13 +38,37 @@ export const ReportOwnProductionTraceabilityPrint = () => {
     return filterBy?.split('|').map((name, i) => ({ name, value: filterValue.split('|')[i] })) || []
   }, [])
 
+  const isFormator = location.pathname.includes('/formator')
+
+  const { data: stores } = useQuery(
+    ['store'],
+    async () => {
+      const result = await makeCoreGetRequest('/bakery/store/trainee/all')
+
+      const selectedStores = filterValue.split('|').pop().slice(1, -1).split(';')
+      const stores = result.filter(item => selectedStores.includes(item.id))
+
+      return stores || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: isFormator
+    }
+  )
+
   const reportDataQuery = useQuery(
     ['report-traceability-production'],
     async () => {
       return await makeCoreGetRequest(
         toTableGETUrl({
           url: '/bakery/traceability/production/report',
-          tableFilters
+          tableFilters,
+          page: -1
         })
       )
     },
@@ -57,7 +82,7 @@ export const ReportOwnProductionTraceabilityPrint = () => {
     }
   )
 
-  const selectedColumnsProduct = productPrintColumns.filter(column =>
+  const selectedColumnsProduct = productPrintColumns(true).filter(column =>
     printColumns.includes(column.field)
   )
 
@@ -76,6 +101,8 @@ export const ReportOwnProductionTraceabilityPrint = () => {
       </div>
     )
   }
+
+  const storesNames = stores ? stores.map(store => store.name) : []
 
   return (
     <div className={s.mainContainer} ref={componentRef}>
@@ -104,8 +131,9 @@ export const ReportOwnProductionTraceabilityPrint = () => {
               <b>RAPORT DE PRODUCTIE</b>
             </p>
             <p className={styles.subtitle}>
-              <b>Produse elaborate Cod: RP-05_23.1 </b>
+              <b>Brutarie - Patiserie Produse elaborate Cod: RP-05_23.1 </b>
             </p>
+            {isFormator && <p className={styles.subtitle}>{storesNames.join(', ')}</p>}
           </Grid>
 
           <Grid
@@ -121,6 +149,17 @@ export const ReportOwnProductionTraceabilityPrint = () => {
               alimentare
             </p>
           </Grid>
+
+          <Grid item xs={12} className={styles.dateColumn}>
+            <p>
+              <b>Data:</b>
+              {` ${formatBakeryPayloadDate(
+                tableFilters.find(f => f.name === 'startDate')?.value
+              )} - ${formatBakeryPayloadDate(
+                tableFilters.find(f => f.name === 'endDate')?.value)
+              }`}
+            </p>
+          </Grid>
         </Grid>
 
         <Grid container justifyContent="flex-end">
@@ -128,24 +167,24 @@ export const ReportOwnProductionTraceabilityPrint = () => {
         </Grid>
 
         <Grid container rowSpacing={3}>
-          <Grid item xs={12}>
-            <p className={styles.productName}>{reportDataQuery?.data?.list[0].product.name}</p>
-          </Grid>
-
-          <Grid item xs={12}>
-            <BasicTable
-              columns={selectedColumnsProduct}
-              rows={[reportDataQuery?.data?.list[0]] || []}
-              containerProps={{
-                className: styles.productTableContainer
-              }}
-            />
-          </Grid>
-
           {reportDataQuery?.data?.list.map((product, tpIndex) => {
             return (
               <Grid item xs={12} container rowSpacing={'20px'} className={styles.itemWrapper}>
                 <Grid item xs={12}>
+                  <p className={styles.mainProductName}>{product.product?.name}</p>
+                </Grid>
+
+                <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
+                  <BasicTable
+                    columns={selectedColumnsProduct}
+                    rows={[reportDataQuery?.data?.list[tpIndex]]}
+                    containerProps={{
+                      className: styles.productTableContainer
+                    }}
+                  />
+                </Grid>
+
+                <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
                   <BasicTable
                     columns={selectedColumnsBatch}
                     rows={[product] || []}
@@ -154,7 +193,7 @@ export const ReportOwnProductionTraceabilityPrint = () => {
                     }}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sx={{ padding: '0px 0px 20px !important' }}>
                   <BasicTable
                     columns={selectedColumnsCharge}
                     rows={product.traceabilityProductionList || []}
@@ -163,6 +202,17 @@ export const ReportOwnProductionTraceabilityPrint = () => {
                     }}
                   />
                 </Grid>
+
+                {product.traceabilityProductionList?.map(
+                  (child, index) =>
+                    child.childTraceability && (
+                      <OwnProductionTraceabilityChildren
+                        child={child}
+                        selectedColumnsBatch={selectedColumnsBatch}
+                        selectedColumnsCharge={selectedColumnsCharge}
+                      />
+                    )
+                )}
               </Grid>
             )
           })}
@@ -213,3 +263,5 @@ const PrintButton = ({ onClick }) => {
     </Box>
   )
 }
+
+export default ReportOwnProductionTraceabilityPrint

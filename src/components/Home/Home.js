@@ -22,9 +22,7 @@ const Home = ({ modules, setSubdomainId }) => {
     <div className={s.modulePaper}>
       <Salutation name={username} />
       {isLocationLoading ? (
-        <div style={{ display: 'flex' }}>
-          <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
-        </div>
+        <></>
       ) : (
         <WeatherWidget location={isErrorGettingLocation ? 'Bucuresti' : location} />
       )}

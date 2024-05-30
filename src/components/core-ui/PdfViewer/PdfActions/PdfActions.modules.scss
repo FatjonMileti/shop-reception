@@ -11,6 +11,13 @@
 
   .zoomContainer {
     text-align: center;
+
+    button {
+      @media (max-width: 624px) {
+        min-width: fit-content;
+      }
+    }
+
   }
 
   .buttons button {

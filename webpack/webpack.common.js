@@ -1,6 +1,7 @@
 // const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 const commonPaths = require('./paths')
 const path = require('path')
 
@@ -34,11 +35,22 @@ module.exports = {
   plugins: [
     // new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
+      title: 'DEX PWA',
       template: commonPaths.templatePath,
       inject: 'body'
     }),
+    new WorkboxPlugin.GenerateSW({
+      // these options encourage the ServiceWorkers to get in there fast
+      // and not allow any straggling "old" SWs to hang around
+      clientsClaim: true,
+      skipWaiting: true,
+      maximumFileSizeToCacheInBytes: 65000000
+    }),
     new CopyPlugin({
-      patterns: [{ from: './src/images', to: 'images' }]
+      patterns: [
+        { from: './src/images', to: 'images' },
+        { from: './src/manifest', to: 'manifest' }
+      ]
     }),
     new CopyPlugin({
       patterns: [
@@ -55,12 +67,20 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: './src/static/firebase', to: 'static/firebase/[name][ext]', info: { minimized: true } }
+        {
+          from: './src/static/firebase',
+          to: 'static/firebase/[name][ext]',
+          info: { minimized: true }
+        }
       ]
     }),
     new CopyPlugin({
       patterns: [
-        { from: './src/static/pdfWorker', to: 'static/pdfWorker/[name][ext]', info: { minimized: true } }
+        {
+          from: './src/static/pdfWorker',
+          to: 'static/pdfWorker/[name][ext]',
+          info: { minimized: true }
+        }
       ]
     })
   ],

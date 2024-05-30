@@ -6,8 +6,8 @@ import { useFormik } from 'formik'
 import { correctReceivedProductSchema } from './helper'
 import { useMutation, useQuery } from 'react-query'
 import { ReceivedProduct } from '../interfaces'
-import { makeCoreGetRequest, makeCorePutRequest } from '../../../../../utils/api'
-import { formatErrorMessage } from '../../../../../utils/formatting'
+import { makeCoreGetRequest, makeCorePutRequest } from 'utils/api'
+import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from '../../../../../hooks'
 
 export interface EditReceivedProductRequestData {
@@ -34,6 +34,7 @@ interface EditReceivedProductProps {
   isModalOpen: boolean
   closeModal: () => void
   batchId?: string | number
+  setShouldRefreshData: (should: boolean) => void
 }
 
 export const BATCH_STATUS = {
@@ -57,7 +58,8 @@ const closeReasonOptions = [
 export const EditReceivedProduct = ({
   isModalOpen,
   closeModal,
-  batchId
+  batchId,
+  setShouldRefreshData
 }: EditReceivedProductProps) => {
   const { showNotification } = useNotification()
 
@@ -85,7 +87,7 @@ export const EditReceivedProduct = ({
       receivedProductQuery?.data?.closeReason ||
       receivedProductQuery?.data?.batchStatus === 'CLOSED'
         ? 'OUT_OF_STOCK'
-        : '',
+        : null,
     verified: receivedProductQuery?.data?.verified || false
   }
 
@@ -103,7 +105,7 @@ export const EditReceivedProduct = ({
     async () => {
       const data: EditReceivedProductRequestData = {
         batchStatus: form.values.batchStatus,
-        closeReason: form.values.closeReason,
+        closeReason: form.values.closeReason ?? null,
         verified: form.values.verified
       }
 
@@ -116,6 +118,7 @@ export const EditReceivedProduct = ({
           message: `Product added successfully`,
           type: 'success'
         })
+        setShouldRefreshData(true)
       },
       onError: res => {
         showNotification({
@@ -145,10 +148,11 @@ export const EditReceivedProduct = ({
                   }
                   onChange={(_, value) => {
                     form.setFieldValue('batchStatus', value?.value)
-                    form.setFieldValue(
-                      'closeReason',
-                      value?.value === 'CLOSED' ? 'OUT_OF_STOCK' : ''
-                    )
+                    if (value?.value === BATCH_STATUS.AVAILABLE) {
+                      form.setFieldValue('closeReason', undefined)
+                    } else if (value?.value === BATCH_STATUS.AVAILABLE) {
+                      form.setFieldValue('closeReason', 'OUT_OF_STOCK')
+                    }
                   }}
                   error={!!form.errors.batchStatus}
                   helperText={form.errors.batchStatus as string}
@@ -160,11 +164,10 @@ export const EditReceivedProduct = ({
                 <Autocomplete
                   variant="outlined"
                   label="Motiv inchidere lot"
+                  disabled={form.values.batchStatus === BATCH_STATUS.AVAILABLE}
                   value={
                     closeReasonOptions.find(({ value }) => value === form.values.closeReason) ||
-                    form.values.batchStatus === 'CLOSED'
-                      ? { value: 'OUT_OF_STOCK', label: 'Epuizat' }
-                      : null
+                    null
                   }
                   onChange={(_, value) => {
                     form.setFieldValue('closeReason', value?.value)
@@ -177,7 +180,7 @@ export const EditReceivedProduct = ({
               </Grid>
             </Grid>
 
-            {receivedProductQuery?.data?.createdUser === false && (
+            {receivedProductQuery?.data?.isCreatedUser === false && (
               <Grid item xs={12} style={{ display: 'grid' }}>
                 <RadioButtonGroup
                   label="Bifa Verificare de catre validator Trasabilitate"

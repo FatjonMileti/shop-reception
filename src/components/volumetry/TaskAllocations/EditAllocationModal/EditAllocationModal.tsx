@@ -7,20 +7,11 @@ import { useNotification } from 'hooks'
 import { ChangeEvent, MouseEvent, useMemo } from 'react'
 import { useMutation } from 'react-query'
 import { makeCorePutRequest } from 'utils/api'
-import * as yup from 'yup'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { getFormInitialValues } from './helpers'
+import { getFormInitialValues, validationSchema } from './helpers'
 import { handleQueryError } from 'utils/helpers'
 import { EditAllocationModalProps } from '../TaskAllocationsDefinitions'
 import { TASK_STATUS_ACTIONS } from '../Employee/constants'
-
-const validationSchema = hideWorkload =>
-  yup.object({
-    workload: hideWorkload
-      ? yup.string().nullable()
-      : yup.number().required('Acest camp este obligatoriu.'),
-    comment: yup.string()
-  })
 
 const EditAllocationModal = (props: EditAllocationModalProps) => {
   const {
@@ -31,7 +22,9 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
     setShouldRefreshData,
     setSelectedRowId,
     task,
-    hideWorkload
+    hideWorkload,
+    minDivision,
+    isStop
   } = props
   const { showNotification } = useNotification()
 
@@ -47,6 +40,7 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
       setSelectedRowId(task.taskTemplateId)
       setShouldRefreshData(true)
       closeModal()
+      formik.resetForm()
       showNotification({
         message: editItem ? 'Alocarea a fost editata cu succes' : 'Taskul a fost oprit cu succes',
         type: 'success'
@@ -64,11 +58,10 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
-    initialValues: getFormInitialValues(editItem || employee, hideWorkload),
-    validationSchema: validationSchema(hideWorkload),
-    onSubmit: async (values: any, { resetForm }) => {
+    initialValues: getFormInitialValues(editItem || employee, hideWorkload, isStop),
+    validationSchema: validationSchema(hideWorkload, minDivision, isStop),
+    onSubmit: async (values: any) => {
       mutate(values)
-      resetForm()
     }
   })
 
@@ -96,11 +89,16 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
           <FormInfoItems
             items={[
               { label: 'Task:', name: task?.taskName },
-              { label: 'Departament/Raion:', name: task?.rayonsOrDepartment },
-              !hideWorkload && {
-                label: 'Angajat:',
-                name: employee?.workerFullName
-              }
+              { label: 'Departament/Raion:', name: task?.departmentAlias },
+              hideWorkload
+                ? {
+                    label: 'Volum alocat:',
+                    name: employee?.allocatedWorkload
+                  }
+                : {
+                    label: 'Angajat:',
+                    name: employee?.workerFullName
+                  }
             ]}
           />
         </Grid>
@@ -110,16 +108,43 @@ const EditAllocationModal = (props: EditAllocationModalProps) => {
             <Input
               type="number"
               variant="outlined"
-              name="workload"
-              label="Volum"
-              value={formik.values.workload}
+              name="allocatedWorkload"
+              label="Volum alocat"
+              value={formik.values.allocatedWorkload}
               width="100%"
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                formik.setFieldValue('workload', (event.target as HTMLInputElement).value)
+                formik.setFieldValue('allocatedWorkload', (event.target as HTMLInputElement).value)
               }
-              error={!!formik.errors.workload}
-              helperText={formik.errors.workload as string}
+              error={!!formik.errors.allocatedWorkload}
+              helperText={formik.errors.allocatedWorkload as string}
               required
+              inputProps={{
+                min: '0',
+                step: minDivision
+              }}
+            />
+          </Grid>
+        )}
+
+        {isStop && (
+          <Grid xs={12} item>
+            <Input
+              type="number"
+              variant="outlined"
+              name="performedWorkload"
+              label="Volum efectuat"
+              value={formik.values.performedWorkload}
+              width="100%"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                formik.setFieldValue('performedWorkload', (event.target as HTMLInputElement).value)
+              }
+              error={!!formik.errors.performedWorkload}
+              helperText={formik.errors.performedWorkload as string}
+              required
+              inputProps={{
+                min: '0',
+                step: minDivision
+              }}
             />
           </Grid>
         )}

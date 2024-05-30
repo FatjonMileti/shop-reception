@@ -29,6 +29,7 @@ export interface ReceivedProduct {
   supplier: Supplier;
   entryDate: string;
   expireDate: string;
+  createdDate: string;
   batchName: string;
   hasExpireDate: boolean;
   hasSecondaryDlc: boolean;
@@ -44,7 +45,7 @@ export interface ReceivedProduct {
   verified: boolean;
   imageUrl: string;
   createdBy: string;
-  createdUser: boolean;
+  isCreatedUser: boolean;
 }
 
 export interface SubfamilyItem {
@@ -57,10 +58,6 @@ export interface FamilyItem {
   name: string
 }
 
-export enum BatchStatus {
-  AVAILABLE = 'Disponibil',
-  CLOSED = 'Inchis'
-}
 
 export enum CloseReason {
   OUT_OF_STOCK = 'In afara stocului',

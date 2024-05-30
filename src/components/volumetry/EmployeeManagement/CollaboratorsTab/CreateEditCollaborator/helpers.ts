@@ -2,15 +2,25 @@ import * as yup from 'yup'
 
 export const getValidationSchema = () =>
   yup.object({
-    fullName: yup.string().nonNullable().required('Acest camp este obligatoriu.'),
-    department: yup
+    firstName: yup.string().nonNullable().required('Acest camp este obligatoriu.'),
+    lastName: yup.string().nonNullable().required('Acest camp este obligatoriu.'),
+    middleName: yup.string().optional(),
+    jobTitle: yup
       .object()
       .shape({
         label: yup.string().required('Acest camp este obligatoriu.'),
         value: yup.string().required()
       })
       .required('Acest camp este obligatoriu.'),
-    jobTitle: yup
+    genericDepartment: yup
+      .object()
+      .shape({
+        label: yup.string().required('Acest camp este obligatoriu.'),
+        value: yup.string().required()
+      })
+      .required('Acest camp este obligatoriu.'),
+
+    workerType: yup
       .object()
       .shape({
         label: yup.string().required(),
@@ -22,11 +32,16 @@ export const getValidationSchema = () =>
 
 export const getInitialValues = editItem => {
   return {
-    fullName: editItem?.fullName || '',
-    department: editItem?.department
-      ? { label: editItem.department, value: editItem.department }
-      : null,
+    firstName: editItem?.firstName || '',
+    lastName: editItem?.lastName || '',
+    middleName: editItem?.middleName || '',
     jobTitle: editItem?.jobTitle ? { label: editItem.jobTitle, value: editItem.jobTitle } : null,
+    genericDepartment: editItem?.genericDepartment
+      ? { label: editItem.genericDepartment, value: editItem.genericDepartment }
+      : null,
+    workerType: editItem?.workerType
+      ? { label: editItem.workerType, value: editItem.workerTypeId }
+      : null,
     employer: editItem?.employer || ''
   }
 }

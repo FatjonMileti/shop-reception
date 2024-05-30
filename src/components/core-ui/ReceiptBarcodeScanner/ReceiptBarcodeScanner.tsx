@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { DatePicker, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Paper, Grid, Stack, Box, useMediaQuery } from '@mui/material'
+import { Paper, Grid, Stack, Box, useMediaQuery, InputAdornment } from '@mui/material'
 import { useNotification, useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
@@ -11,11 +11,13 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { formatPayloadDate, isScannerDevice } from 'utils/helpers'
 import { formatErrorMessage } from 'utils/formatting'
 import dayjs from 'dayjs'
+import { CloseMenu } from 'icons'
 
 const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { action } = props
 
   const [code, setCode] = useState('')
+  const [receiptNumber, setReceiptNumber] = useState('')
   const [receiptDate, setReceiptDate] = useState(dayjs())
   const [isVisible, setIsVisible] = useState(false)
   const isXs = useMediaQuery('(max-width:624px)')
@@ -44,12 +46,12 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
         if (action.type === 'PUT') {
           try {
             await makeCorePutRequest(`${action.url}/${id}`, {
-              fiscalTicketId: code,
+              fiscalTicketBarcode: code,
+              fiscalTicketNumber: receiptNumber,
               fiscalTicketDate: formatPayloadDate(receiptDate)
             })
 
             if (action.href) {
-              await destroy()
               navigate(
                 `/supplyOmni/${action.href}?${action.variable}=${id}&clientId=${searchParams.get(
                   'clientId'
@@ -82,23 +84,56 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
     document.getElementById('receipt-scan-input').focus()
   }, [])
 
+  const clearReceipt = () => {
+    setCode('')
+    document.getElementById('receipt-scan-input').focus()
+  }
+
   return (
     <div>
-      <Grid container>
+      <Grid container spacing={4}>
         <Grid xs={12} sm={12} md={6} lg={6} item>
           <div className={s.scannerControlItem} style={{ marginBottom: '16px' }}>
             <Input
               value={code}
               type="text"
               variant="outlined"
-              label="Introdu codul bonului"
+              label="Introdu codul de bare al bonului"
               fullWidth
               onChange={event => setCode(event.currentTarget.value)}
               id="receipt-scan-input"
               required
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment
+                    position="end"
+                    className={s.clearIconAdornment}
+                    onClick={clearReceipt}
+                  >
+                    <CloseMenu fill={'rgba(0, 0, 0, 0.87)'} />
+                  </InputAdornment>
+                )
+              }}
             />
           </div>
         </Grid>
+      </Grid>
+      <Grid container spacing={4}>
+        <Grid xs={12} sm={12} md={6} lg={6} item>
+          <div className={s.scannerControlItem} style={{ marginBottom: '16px' }}>
+            <Input
+              value={receiptNumber}
+              type="text"
+              variant="outlined"
+              label="Introdu numarul bonului (EJTRZ)"
+              fullWidth
+              onChange={event => setReceiptNumber(event.currentTarget.value)}
+              required
+            />
+          </div>
+        </Grid>
+      </Grid>
+      <Grid container spacing={4}>
         <Grid xs={12} sm={12} md={6} lg={6} item>
           <div className={s.pickerContainer} style={{ paddingLeft: 0, marginBottom: '16px' }}>
             <DatePicker
@@ -117,6 +152,8 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             />
           </div>
         </Grid>
+      </Grid>
+      <Grid container spacing={4}>
         <Grid xs={12} sm={12} md={12} lg={12} item>
           <Stack
             sx={{ mt: 1, mb: 3 }}

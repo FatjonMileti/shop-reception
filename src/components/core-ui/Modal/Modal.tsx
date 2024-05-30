@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Box, Grid, Modal as GeneralModal, useMediaQuery } from '@mui/material'
 import { Button, Typography, IconButton } from '@fullscreendigital/carrefour-dex-fe'
-import { Close } from '@mui/icons-material'
+import { Close, West } from '@mui/icons-material'
 import s from './Modal.modules.scss'
 
 const sx = {
@@ -19,7 +19,15 @@ const sx = {
 }
 
 const Modal = props => {
-  const { isModalOpen, closeModal, modalTitle, children, modalWidth = null, onClick } = props
+  const {
+    isModalOpen,
+    closeModal,
+    modalTitle,
+    children,
+    modalWidth = null,
+    onClick,
+    backAction
+  } = props
 
   const isXs = useMediaQuery('(max-width:624px)')
   const isMd = useMediaQuery('(max-width:936px)')
@@ -35,7 +43,7 @@ const Modal = props => {
       <Box
         sx={{
           ...sx,
-          width: isXs ? 'calc(100% - 24px)' : (modalWidth || '30%'),
+          width: isXs ? 'calc(100% - 24px)' : modalWidth || '30%',
           overflow: 'auto'
         }}
       >
@@ -49,6 +57,11 @@ const Modal = props => {
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <Typography component="h2" variant="medium">
+              {backAction && (
+                <IconButton onClick={backAction}>
+                  <West />
+                </IconButton>
+              )}
               <span className={s.modalTitle}>{modalTitle}</span>
             </Typography>
           </Grid>

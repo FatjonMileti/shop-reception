@@ -107,13 +107,15 @@ VALUES
     (40, 'Vanzarile mele', 'MySales', null, true, 6),
     (41, 'Comenzi achitate', 'PaidOrders', null, true, 6),
     -- Volumetry
-    (42, 'Management Angajati', 'EmployeeManagement', null, true, 7),
+    (42, 'Management angajati', 'EmployeeManagement', null, true, 7),
     (43, 'Management task template-uri', 'ManagementTasks', null, true, 8),
-    (44, 'Alocare Task-uri', 'AssignTasks', null, true, 8),
-    (45, 'Raport de Evaluare', 'EmployeeManagement', null, true, 9),
-    (46, 'Raport norme', 'ReportsVolumetry', null, true, 9),
+    (44, 'Alocare task-uri', 'AssignTasks', null, true, 8),
+    (45, 'Raport de evaluare', 'EmployeeManagement', null, true, 9),
+    (46, 'Link-uri rapoarte', 'ReportsVolumetry', null, true, 9),
     (47, 'Task-uri alocate', 'AssignTasks', null, true, 8),
-    (48, 'Status Angajati', 'EmployeeManagement', null, true, 8),
+    (48, 'Status angajati', 'EmployeeStatus', null, true, 8),
+    (249, 'Management magazine', 'StoreManagement', null, true, 8),
+    (250, 'Management business units', 'CategoryTemplateManagement', null, true, 8),
     -- Shop Reception (Admin)
     (149, 'Administrare depozite', 'UsersManagement', null, true, 12),
     (151, 'Administrare huburi', 'UsersManagement', null, true, 12),
@@ -245,10 +247,12 @@ VALUES
     (59, 'Management task template-uri', '', '/volumetry/tasksManagement/taskManagement', true, 43, true),
     (60, 'Alocare task-uri', '', '/volumetry/tasksManagement/taskAllocations', true, 44, true),
     (61, 'Raport de Evaluare', '', '/volumetry/employee/evaluationReports', true, 45, true),
-    (62, 'Raport norme', '', '/volumetry/reports/dailyNorms', true, 46, true),
+    (62, 'Link-uri rapoarte', '', '/volumetry/reports/reportsLinks', true, 46, true),
     (63, 'Task-uri alocate', '', '/volumetry/tasksManagement/assignedTasks', true, 47, true),
     (64, 'Status angajati', '', '/volumetry/employee/allocatedEmployeesStatus', true, 48, true),
     (65, 'Detalii task', '', '/volumetry/tasksManagement/taskAllocation', true, 44, false),
+    (266, 'Management magazine', '', '/volumetry/tasksManagement/locationManagement', true, 249, true),
+    (267, 'Management business units', '', '/volumetry/tasksManagement/locationCategoryManagement', true, 250, true),
     -- Shop Reception (Admin)
     (166, 'Administrare depozite', '', '/shop-reception/admin/deposits', true, 149, true),
     (167, 'Administrare huburi', '', '/shop-reception/admin/hubs', true, 151, true),
@@ -339,6 +343,9 @@ VALUES
     (100, 'VOLUMETRY_TASK_ALLOCATOR'),
     (101, 'VOLUMETRY_WORKER'),
     (102, 'VOLUMETRY_TEMPLATE_ADMIN'),
+    (150, 'GG_RO_DEX_VOLUMETRY_TASK_ALLOCATOR'),
+    (151, 'GG_RO_DEX_VOLUMETRY_WORKER'),
+    (152, 'GG_RO_DEX_VOLUMETRY_TEMPLATE_ADMIN'),
     -- Shop Reception
     (200, 'SHOP_RECEPTION_DUMMY_ROLE');
 
@@ -378,11 +385,26 @@ VALUES
     (100, 42),
     (100, 44),
     (100, 46),
+    (100, 47),
     (100, 48),
     -- VOLUMETRY_WORKER
     (101, 47),
     -- VOLUMETRY_TEMPLATE_ADMIN
     (102, 43),
+    (102, 249),
+    (102, 250),
+    -- GG_RO_DEX_VOLUMETRY_TASK_ALLOCATOR
+    (150, 42),
+    (150, 44),
+    (150, 46),
+    (150, 47),
+    (150, 48),
+    -- GG_RO_DEX_VOLUMETRY_WORKER
+    (151, 47),
+    -- GG_RO_DEX_VOLUMETRY_TEMPLATE_ADMIN
+    (152, 43),
+    (152, 249),
+    (152, 250),
     -- Shop Reception Admin
     -- SHOP_RECEPTION_DUMMY_ROLE
     (200, 149), (200, 151), (200, 152), (200, 153), (200, 154), (200, 155), (200, 156),

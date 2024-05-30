@@ -3,31 +3,23 @@ import { Button, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNotification } from 'hooks'
-import { Dispatch, useState } from 'react'
-import { columns, toBatchFormat } from './helpers'
+import { useState } from 'react'
+import { columns } from './helpers'
 import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
-import { UseQueryResult } from 'react-query'
-import { quantityCalculation } from '../OwnProductionTraceabilityModal/helpers'
-
+import { formatPayloadDate } from '../../../../../utils/helpers'
 interface SelectBatchProps {
-  onContinue: () => void
+  onContinue: (batches: any[]) => void
   onCancel: () => void
-  setSelectedRows: Dispatch<any>
-  selectedRows: any
   metiCode: any
-  componentMetiCode: string
-  formik: any
-  recipeQuery: UseQueryResult<any>
+  componentMetiCode: string | number
+  productionDate: string
 }
 
 export const SelectBatch = ({
   onContinue,
   onCancel,
-  setSelectedRows,
-  selectedRows,
   componentMetiCode,
-  recipeQuery,
-  formik
+  productionDate
 }: SelectBatchProps) => {
   const { showNotification } = useNotification()
 
@@ -35,18 +27,32 @@ export const SelectBatch = ({
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  const [selectedRows, setSelectedRows] = useState<any[]>([])
+
   const fetchData = async (page, rowsPerPage) => {
     try {
       setIsLoading(true)
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/bakery/batch',
+          url: '/bakery/batch/assign',
           page,
           rowsPerPage,
+          order: 'asc',
+          orderBy: encodeURIComponent('expireDate|entryDate'),
           filters: [
             {
               name: 'product.metiCode',
               value: componentMetiCode
+            },
+            {
+              name: 'batchStatus',
+              value: 'AVAILABLE'
+            }
+          ],
+          extraCustomUrlParams: [
+            {
+              name: 'productionDate',
+              value: formatPayloadDate(productionDate)
             }
           ]
         })
@@ -63,20 +69,6 @@ export const SelectBatch = ({
     }
   }
 
-  const onSelectRows = rows => {
-    const batchItem = recipeQuery?.data?.batches?.find(bi => bi.componentCode === componentMetiCode)
-
-    const quantity = quantityCalculation(
-      formik.values.quantity,
-      batchItem?.componentQuantity,
-      recipeQuery?.data?.details?.recipeQuantity
-    )
-
-    const newItems = rows.filter(row => !selectedRows.some(item => item.batchId === row.id))
-    const newRows = [...selectedRows, ...toBatchFormat(newItems, quantity)]
-    setSelectedRows(newRows)
-  }
-
   return (
     <Grid container rowSpacing={3.5}>
       <Grid item xs={12} spacing={2}>
@@ -90,7 +82,7 @@ export const SelectBatch = ({
             isRemote
             columns={columns}
             totalCount={totalCount}
-            selectRows={onSelectRows}
+            selectRows={setSelectedRows}
             rowsPerPage={25}
             rowsPerPageOptions={[25, 50, 100]}
           />
@@ -107,7 +99,7 @@ export const SelectBatch = ({
             size="large"
             variant="contained"
             label="Continua"
-            onClick={onContinue}
+            onClick={() => onContinue(selectedRows)}
             disabled={false}
           />
         </Grid>

@@ -1,23 +1,40 @@
-import { Box, CircularProgress, Grid } from '@mui/material'
-import { Button, Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
+import { useMemo } from 'react'
+import { Box, CircularProgress } from '@mui/material'
+import { Button, FormTable } from '@fullscreendigital/carrefour-dex-fe'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { EmployeeAttendanceProps } from 'components/volumetry/interfaces'
+import { buildColumns } from './helpers'
 
 const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
   const {
     isEmployeesLoading,
     employees,
     toggleEmployee,
-    updateEmplpyeeTime,
+    updateEmployeeTime,
     closeModal,
     handleSubmit,
-    increaseStep,
-    isXs
+    isXs,
+    formik
   } = props
 
   const submitStep = async () => {
     await handleSubmit()
-    increaseStep()
+  }
+
+  const columns = useMemo(
+    () => buildColumns({ toggleEmployee, updateEmployeeTime, isXs, formik }),
+    [employees, formik.errors]
+  )
+
+  const checkSelected = formik.values.employees.some(employee => employee.shouldAllocate)
+  const selectOrDeselectAll = employees => {
+    formik.setFieldValue(
+      'employees',
+      employees.map(employee => ({
+        ...employee,
+        shouldAllocate: checkSelected ? false : true
+      }))
+    )
   }
 
   return isEmployeesLoading ? (
@@ -26,47 +43,14 @@ const EmployeeAttendance = (props: EmployeeAttendanceProps) => {
     </div>
   ) : (
     <Box>
-      <Box style={{ height: '60vh', overflowY: 'scroll' }}>
-        {employees.map(employee => (
-          <Grid container>
-            <Grid item xs={12} md={4}>
-              <Checkbox
-                edge="start"
-                checked={employee.isPresent}
-                onChange={() => toggleEmployee(employee)}
-                inputProps={{ 'aria-labelledby': `employee-${employee.value}` }}
-                label={`${employee.fullName} (${employee.genericDepartment})`}
-                style={
-                  isXs
-                    ? { marginLeft: 0 }
-                    : { lineHeight: '70px', display: 'inline-block', marginLeft: 0 }
-                }
-              />
-            </Grid>
-            <Grid item xs={12} md={4} style={{ paddingRight: '40px' }}>
-              <TimePicker
-                label="Ora inceput de tura"
-                value={employee.shiftStart}
-                onChange={newValue => updateEmplpyeeTime(employee, newValue, 'shiftStart')}
-                required
-                variant="outlined"
-                style={{ width: '100%' }}
-                forceDesktop
-              />
-            </Grid>
-            <Grid item xs={12} md={4} style={{ paddingRight: '40px' }}>
-              <TimePicker
-                label="Ora final de tura"
-                value={employee.shiftEnd}
-                onChange={newValue => updateEmplpyeeTime(employee, newValue, 'shiftEnd')}
-                required
-                variant="outlined"
-                style={{ width: '100%' }}
-                forceDesktop
-              />
-            </Grid>
-          </Grid>
-        ))}
+      <Button
+        variant="contained"
+        label={checkSelected ? 'Debifeaza toti angajatii' : 'Bifeaza toti angajatii'}
+        onClick={() => selectOrDeselectAll(employees)}
+        style={{ marginBottom: '1em' }}
+      />
+      <Box style={{ height: '55vh', overflowY: 'scroll' }}>
+        <FormTable columns={columns} rows={employees} />
       </Box>
       <Box className={s.modalButtons} style={{ width: '50%', float: 'right', marginTop: '20px' }}>
         <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />

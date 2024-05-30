@@ -21,6 +21,9 @@ import {
 import {
   EmployeeManagementSubcategory,
   AssignTasksSubcategory,
+  EmployeeStatusSubcategory,
+  StoreManagementSubcategory,
+  CategoryTemplateManagementSubcategory,
   ManagementTasksSubcategory,
   AssignmentVolumetryHome,
   GroupVolumetryHome,
@@ -91,6 +94,7 @@ import {
   EmployeeManagementMenu,
   ManagementTasksMenu,
   ReportsVolumetryHome,
+  ReportsVolumetryMenu
 } from 'icons'
 
 const IconComponents = {
@@ -117,6 +121,9 @@ const IconComponents = {
   EmployeeManagementSubcategory,
   ManagementTasksSubcategory,
   AssignTasksSubcategory,
+  EmployeeStatusSubcategory,
+  StoreManagementSubcategory,
+  CategoryTemplateManagementSubcategory,
   AssignmentVolumetryHome,
   GroupVolumetryHome,
   TasksVolumetryHome,
@@ -124,6 +131,7 @@ const IconComponents = {
   ManagementTasksHome,
   ReportsVolumetryHome,
   ReportsVolumetrySubcategory,
+  ReportsVolumetryMenu,
   // Menu
   BakeryMenu,
   HomeMenu,

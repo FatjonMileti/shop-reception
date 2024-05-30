@@ -9,7 +9,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { EditActionIcon } from 'icons'
 import { useEffect, useState } from 'react'
 import { makeCoreGetRequest } from 'utils/api'
-import { getDepartmentsOptions } from '../api'
+import { getDepartmentAliasesOptions } from '../api'
 import { ValueLabelInterface } from '../interfaces'
 import { handleQueryError } from 'utils/helpers'
 import { EditCurrentTaskTemplate } from './EditCurrentTaskTemplate'
@@ -22,7 +22,7 @@ import { AttendanceModal } from './AttendanceModal'
 
 const TaskAllocations = () => {
   const { showNotification } = useNotification()
-  const [departmentFilterValue, setDepartmentFilterValue] = useState<ValueLabelInterface>(null)
+  const [departmentFilterValue, setDepartmentFilterValue] = useState(null)
   const [rows, setRows] = useState([]) // TODO: To add interface when db schema is defined
   const [tableItems, setTableItems] = useState([]) // TODO: To add interface when db schema is defined
   const [totalCount, setTotalCount] = useState<number>(null)
@@ -58,7 +58,7 @@ const TaskAllocations = () => {
         const response = await makeCoreGetRequest(
           toTableGETUrl({
             url: '/volumetry/tasks/aggregation/summary',
-            filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }],
+            filters: [{ name: 'departmentAliasId', value: departmentFilterValue.value }],
             tableFilters,
             page,
             rowsPerPage
@@ -79,7 +79,7 @@ const TaskAllocations = () => {
   }, [shouldRefreshAllocationsData])
 
   const { data: departmentsOptions, isLoading: isDepartmentsOptionsLoading } =
-    getDepartmentsOptions(showNotification, setDepartmentFilterValue)
+    getDepartmentAliasesOptions(showNotification, setDepartmentFilterValue, null, true)
 
   const handleDepartmentOptionChange = value => {
     setDepartmentFilterValue(value)
@@ -112,7 +112,7 @@ const TaskAllocations = () => {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/volumetry/tasks/aggregation/summary',
-          filters: [{ name: 'genericDepartmentId', value: departmentFilterValue.value }],
+          filters: [{ name: 'departmentAliasId', value: departmentFilterValue.value }],
           tableFilters,
           page,
           rowsPerPage
@@ -160,7 +160,7 @@ const TaskAllocations = () => {
           </div>
         ) : (
           <>
-            <Grid xs={12} md={6} item style={{ padding: 0 }}>
+            <Grid xs={12} md={6} item className={s.departmentFilterContainer}>
               <FilterDataSelect
                 name="teamMember.domain"
                 defaultSelectedData={departmentFilterValue}
@@ -173,12 +173,7 @@ const TaskAllocations = () => {
                 onSelect={handleDepartmentOptionChange}
               />
             </Grid>
-            <Grid
-              xs={12}
-              md={6}
-              item
-              style={{ padding: 0, paddingRight: '40px', textAlign: 'right' }}
-            >
+            <Grid xs={12} md={6} item className={s.autoAllocateButtonContainer}>
               <Button
                 variant="contained"
                 label="Incepe alocarea automata"
@@ -228,6 +223,7 @@ const TaskAllocations = () => {
             isModalOpen={isAttendanceModalOpen}
             closeModal={closeAteendanceModal}
             departmentId={departmentFilterValue.value}
+            genericDepartmentId={departmentFilterValue.genericDepartmentId}
           />
         </>
       )}

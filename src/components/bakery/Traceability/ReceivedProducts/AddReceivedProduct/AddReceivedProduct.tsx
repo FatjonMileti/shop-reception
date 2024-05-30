@@ -10,6 +10,10 @@ import { makeCorePostRequest } from '../../../../../utils/api'
 import { formatPayloadDate } from '../../../../../utils/helpers'
 import { CircularProgress, Grid } from '@mui/material'
 import { Supplier, Product } from '../interfaces'
+import { useFormik } from 'formik'
+import { productDetailsSchema } from '../helper'
+import dayjs from 'dayjs'
+import { AxiosError } from 'axios'
 
 interface ReceivedProductRequestData {
   productId: string
@@ -23,15 +27,23 @@ interface ReceivedProductRequestData {
   batchQuantity: number
 
   // imageUrl: 'string'
-
   // storeId: string
-
   // batchStatus: 'string'
   // closeReason: 'OUT_OF_STOCK'
-
   // verifiedBy: 'string'
   // verifiedDate: '2024-01-18T11:43:36.604Z'
   // verified: true
+}
+
+const initialValues: ProductDetails = {
+  entryDate: dayjs(),
+  hasExpirationDate: true,
+  expirationDate: null,
+  hasSecondaryDLC: true,
+  secondaryDLC: null,
+  amount: undefined,
+  lot: '',
+  picture: undefined
 }
 
 interface AddReceivedProductProps {
@@ -71,8 +83,8 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddRe
         hasExpireDate: productDetails.hasExpirationDate,
         expireDate: formatPayloadDate(productDetails.expirationDate),
         hasSecondaryDlc: productDetails.hasSecondaryDLC,
-        dlcDays: parseInt(productDetails.secondaryDLC),
-        batchQuantity: parseInt(productDetails.amount),
+        dlcDays: productDetails.secondaryDLC,
+        batchQuantity: productDetails.amount,
         batchName: productDetails.lot
       }
 
@@ -89,6 +101,7 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddRe
         setSelectedProduct(undefined)
         setSelectedSupplier(undefined)
         setStep(0)
+        detailsForm.resetForm()
         if(onSuccess) {
           onSuccess()
         }
@@ -97,14 +110,37 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddRe
           type: 'success'
         })
       },
-      onError: res => {
+      onError: (res: any) => {
+
+        if (res?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+          return
+        }
+
         showNotification({
-          message: `Error while trying add product, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
       }
     }
   )
+
+  const detailsForm = useFormik<ProductDetails>({
+    enableReinitialize: false,
+    validationSchema: productDetailsSchema,
+    validateOnChange: false,
+    initialValues,
+    onSubmit: productDetails => {
+      productMutation.mutate({
+        productDetails,
+        selectedProduct,
+        selectedSupplier
+      })
+    }
+  })
 
   return (
     <Modal
@@ -137,14 +173,8 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddRe
                 <ProductDetails
                   selectedProduct={selectedProduct}
                   selectedSupplier={selectedSupplier}
-                  onContinue={(productDetails: ProductDetails) => {
-                    productMutation.mutate({
-                      productDetails,
-                      selectedProduct,
-                      selectedSupplier
-                    })
-                  }}
                   onCancel={cancel}
+                  form={detailsForm}
                 />
               ][step]
             }

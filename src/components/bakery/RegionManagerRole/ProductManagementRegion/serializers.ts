@@ -11,7 +11,7 @@ export const toTableRowItems = items => items.map(item => ({
     unitBusiness: item.unitBusiness || '',
     enable: item.enable,
     status: item.status || '',
-    provider: item.provider || '',
+    provider: item.suppliers || '',
     fabricationMethod: item.fabricationMethod || '',
     clusterName: item.clusterName || '',
     clusterMandatory: item.clusterMandatory,
@@ -19,4 +19,5 @@ export const toTableRowItems = items => items.map(item => ({
     minStock: item.minStock || 0,
     newProduct: item.newProduct || '',
     imageUrl: item.imageUrl || '',
+    batch: item.batch || null
   }))

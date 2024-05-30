@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography, Grid } from '@mui/material'
+import { Box, CircularProgress, Typography, Grid, useMediaQuery } from '@mui/material'
 import s from './ExistingClient.modules.scss'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Table } from 'components/core-ui/Table'
@@ -63,12 +63,17 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
   }
 
   const openCreateClientTab = (): void => {
-    setSearchParams(prevSearchParams => {
-      const updatedSearchParams = new URLSearchParams(prevSearchParams)
-      updatedSearchParams.set('tab', '1')
-      return updatedSearchParams
-    }, {replace: true})
+    setSearchParams(
+      prevSearchParams => {
+        const updatedSearchParams = new URLSearchParams(prevSearchParams)
+        updatedSearchParams.set('tab', '1')
+        return updatedSearchParams
+      },
+      { replace: true }
+    )
   }
+
+  const isXs = useMediaQuery('(max-width:624px)')
 
   return (
     <>
@@ -87,8 +92,9 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
       )}
 
       <Box className={s.searchPaper}>
-        <Box className={s.searchContainer}>
-          <div>
+        {/* <Box className={s.searchContainer}> */}
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={8} md={9}>
             <Input
               type="text"
               name="name"
@@ -99,22 +105,25 @@ const ExistingClient: React.FC<ExistingClientProps> = ({ selectNewClient }) => {
               fullWidth
               style={{ justifyContent: 'center' }}
             />
-          </div>
-          <Button
-            onClick={() => {
-              if (searchField) {
-                // to avoid initiallly making 2 calls
-                showTable && setShouldRefreshData(true)
-                setShowTable(true)
-              }
-            }}
-            label=""
-            variant="contained"
-            style={{ marginTop: '16px', marginLeft: '16px' }}
-          >
-            <SearchOutlinedIcon /> CAUTA CLIENT
-          </Button>
-        </Box>
+          </Grid>
+          <Grid item xs={12} sm={4} md={3}>
+            <Button
+              onClick={() => {
+                if (searchField) {
+                  // to avoid initiallly making 2 calls
+                  showTable && setShouldRefreshData(true)
+                  setShowTable(true)
+                }
+              }}
+              label=""
+              variant="contained"
+              style={isXs ? {} : { marginTop: '20px' }}
+            >
+              <SearchOutlinedIcon /> CAUTA CLIENT
+            </Button>
+          </Grid>
+        </Grid>
+        {/* </Box> */}
       </Box>
 
       {searchField && showTable ? (

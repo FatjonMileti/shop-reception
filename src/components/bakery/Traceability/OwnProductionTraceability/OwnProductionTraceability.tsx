@@ -5,37 +5,35 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { useNotification } from 'hooks'
-import { debounce } from '@mui/material'
+import { debounce, useMediaQuery } from '@mui/material'
 import { AddActionIcon, EditActionIcon } from 'icons'
 import OwnProductionTraceabilityDescription from './OwnProductionTraceabilityDescription'
-import { OwnProductionTraceabilityModal } from './OwnProductionTraceabilityModal/OwnProductionTraceabilityModal'
+import { AddOwnProductionTraceabilityModal } from './AddOwnProductionTraceabilityModal/AddOwnProductionTraceabilityModal'
 import { EditOwnProductionTraceabilityModal } from './EditOwnProductionTraceabilityModal/EditOwnProductionTraceabilityModal'
 import { handleQueryError } from 'utils/helpers'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
-import { Filter, ValueLabelInterface } from 'components/bakery/interfaces'
+import { ValueLabelInterface } from 'components/bakery/interfaces'
 import { FamilyItem, SubfamilyItem } from '../ReceivedProducts/interfaces'
 import { formatErrorMessage } from 'utils/formatting'
 import { CorrectOwnProductionTraceabilityModal } from './CorrectOwnProductionTraceabilityModal/CorrectOwnProductionTraceabilityModal'
+import { Filter } from '../../../core-ui/Table/TableDefinitions'
+import dayjs from 'dayjs'
 
-const orderBy = 'createdDate'
-const order = 'desc'
-
-export const OwnProductionTraceability = () => {
+const OwnProductionTraceability = () => {
   const { showNotification } = useNotification()
-
 
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [tableData, setTableData] = useState([])
   const [rows, setRows] = useState([])
 
-  const [verifyItem, setVerifyItem] = useState(null)
   const [liveTableFilters, setLiveTableFilters] = useState<Filter[]>([])
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [itemIdToCorrect, setItemIdToCorrect] = useState(null)
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [itemIdToEdit, setItemIdToEdit] = useState<number | undefined>(undefined)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
@@ -47,9 +45,7 @@ export const OwnProductionTraceability = () => {
           searchFields: ['product.name'],
           tableFilters,
           page,
-          rowsPerPage,
-          orderBy,
-          order
+          rowsPerPage
         })
       )
       setRows(toListTableRows(response.list))
@@ -66,12 +62,7 @@ export const OwnProductionTraceability = () => {
   }
   const handleRemoteDetails = async (rowId: string | number) => {
     const data = await fetchProductionItem(rowId)
-    return (
-      <OwnProductionTraceabilityDescription
-        item={data}
-        chargeItem={tableData?.find(td => td.id === rowId)}
-      />
-    )
+    return <OwnProductionTraceabilityDescription item={data} />
   }
 
   const fetchProductionItem = async (rowId: string | number) => {
@@ -95,7 +86,7 @@ export const OwnProductionTraceability = () => {
         filter => filter.name === 'product.subfamily'
       )?.value || []) as any
 
-      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families`, {
         params: {
           subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
         },
@@ -125,7 +116,7 @@ export const OwnProductionTraceability = () => {
       const familyLiveFilterValue = (liveTableFilters.find(
         filter => filter.name === 'product.family'
       )?.value || []) as any
-      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families/subfamilies`, {
         params: {
           family: familyLiveFilterValue.map(({ value }) => value)
         },
@@ -182,12 +173,15 @@ export const OwnProductionTraceability = () => {
     }
   ]
 
+  const isXs = useMediaQuery('(max-width:624px)')
+
   return (
     <div className={s.mainContainer}>
       <>
-        <OwnProductionTraceabilityModal
+        <AddOwnProductionTraceabilityModal
           isModalOpen={isModalOpen}
           closeModal={() => setIsModalOpen(false)}
+          setShouldRefreshData={setShouldRefreshData}
         />
         <CorrectOwnProductionTraceabilityModal
           isModalOpen={!!itemIdToCorrect}
@@ -197,18 +191,24 @@ export const OwnProductionTraceability = () => {
           correctItemQuery={correctItemQuery}
         />
         <EditOwnProductionTraceabilityModal
-          isModalOpen={isEditModalOpen}
-          closeModal={() => setIsEditModalOpen(false)}
-          item={verifyItem}
+          closeModal={() => setItemIdToEdit(undefined)}
+          itemIdToEdit={itemIdToEdit}
+          setShouldRefreshData={setShouldRefreshData}
         />
         <ListTable
           rows={rows}
           handleRemoteData={debounce(fetchData, 500)}
           handleRemoteDetails={handleRemoteDetails}
+          handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
           isLoading={isLoading}
           totalCount={totalCount}
           hasSearchInput
           filters={drawerFilters}
+          appliedFiltersLabel="Filtre"
+          applyFiltersButtonLabel="Filtrare"
+          filtersLabel="Filtrare"
+          filtersButtonLabel="Filtrare"
+          cancelFiltersButtonLabel="Anuleaza"
           toolbarActions={[
             {
               label: 'Adauga',
@@ -225,6 +225,16 @@ export const OwnProductionTraceability = () => {
               typographyVariant: 'medium',
               backgroundColor: '#CC4010',
               onClick: async (e, rowId) => {
+                const createdDay = dayjs(tableData.find(row => row.id === rowId)?.createdDate)
+
+                if (createdDay.endOf('day').isBefore(dayjs().endOf('day'))) {
+                  showNotification({
+                    message: 'Nu puteti corecta trasabilitati care nu au fost introduse astazi.',
+                    type: 'error'
+                  })
+                  return
+                }
+
                 setItemIdToCorrect(rowId)
               },
               desktopIcon: <EditActionIcon />
@@ -235,17 +245,20 @@ export const OwnProductionTraceability = () => {
               typographyVariant: 'medium',
               backgroundColor: '#0970E6',
               onClick: async (e, rowId) => {
-                setIsEditModalOpen(true)
-                setVerifyItem(tableData?.find(data => data.id === rowId))
+                setItemIdToEdit(rowId as number)
               },
               desktopIcon: <EditActionIcon />
             }
           ]}
-          rowActionsWidth="90px"
-          rowsPerPage={25}
-          rowsPerPageOptions={[25, 50, 100]}
+          rowActionsWidth="200px"
+          rowsPerPage={isXs ? 5 : 25}
+          rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
+          setShouldRefreshData={setShouldRefreshData}
+          shouldRefreshData={shouldRefreshData}
         />
       </>
     </div>
   )
 }
+
+export default OwnProductionTraceability

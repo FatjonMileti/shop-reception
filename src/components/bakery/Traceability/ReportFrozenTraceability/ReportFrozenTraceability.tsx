@@ -5,14 +5,13 @@ import {
   ListTable
 } from '@fullscreendigital/carrefour-dex-fe'
 import s from './FrozenTraceability.modules.scss'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toListTableRows } from './serializers'
 import { formatAndDownloadResponse, getPreviousDay, handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
-import { Divider, Grid } from '@mui/material'
-import { EditActionIcon } from 'icons'
+import { Divider, Grid, useMediaQuery } from '@mui/material'
 import FrozenTraceabilityDescription from './FrozenTraceabilityDescription'
 import { TableFiltersType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
 import { useQuery } from 'react-query'
@@ -27,10 +26,11 @@ import { URLS } from '../../constants'
 import { useImmer } from 'use-immer'
 import { batchPrintColumns, productPrintColumns } from '../ReportFrozenTraceabilityPrint/helpers'
 import { useLocation } from 'react-router'
-import { startTransition } from 'react';
-import {debounce} from 'lodash'
+import { startTransition } from 'react'
+import { debounce } from 'lodash'
+import dayjs from 'dayjs'
 
-export const ReportFrozenTraceability = () => {
+const ReportFrozenTraceability = () => {
   const { showNotification } = useNotification()
   const { pathname } = useLocation()
 
@@ -64,7 +64,7 @@ export const ReportFrozenTraceability = () => {
         {
           name: 'endDate',
           value: previousDay
-        },
+        }
       ]
     }
   )
@@ -79,6 +79,7 @@ export const ReportFrozenTraceability = () => {
       return resultOptions || []
     },
     {
+      enabled: isFormator,
       onError: error => {
         showNotification({
           message: `Error while fetching store dropdown data. ${formatErrorMessage(error)}`,
@@ -87,7 +88,6 @@ export const ReportFrozenTraceability = () => {
       }
     }
   )
-
 
   React.useEffect(() => {
     if (storeFilterValue?.length > 0) {
@@ -98,10 +98,13 @@ export const ReportFrozenTraceability = () => {
   const handleRemoteDetails = async (rowId: string | number) => {
     const response = await makeCoreGetRequest(`/bakery/traceability/frozen/${rowId}`)
     const data = await response
-    return <FrozenTraceabilityDescription item={data} chargeItem={tableData?.find(d => d.id === rowId)}/>
+    return (
+      <FrozenTraceabilityDescription
+        item={data}
+        chargeItem={tableData?.find(d => d.id === rowId)}
+      />
+    )
   }
-
-
 
   const fetchData = async (page, rowsPerPage, tableFilters, searchText) => {
     setIsLoading(true)
@@ -118,7 +121,7 @@ export const ReportFrozenTraceability = () => {
           page,
           rowsPerPage,
           searchText,
-          searchFields: ['product.name']
+          searchFields: ['product.name', 'product.metiCode']
         })
       )
 
@@ -133,7 +136,6 @@ export const ReportFrozenTraceability = () => {
         rowsPerPage,
         searchText
       }))
-
     } catch (error) {
       handleQueryError(
         error,
@@ -148,7 +150,7 @@ export const ReportFrozenTraceability = () => {
   const handleStoreFilterChange = (value: ValueLabelInterface[]): void => {
     startTransition(() => {
       setStoreFilterValue(value)
-    });
+    })
   }
 
   const downloadFileQuery = useQuery(
@@ -180,15 +182,20 @@ export const ReportFrozenTraceability = () => {
   )
 
   const families = useQuery(
-    ['families-store', liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value],
+    [
+      'families-store',
+      liveTableFilters.find(filter => filter.name === 'product.subfamily')?.value,
+      storeFilterValue
+    ],
     async () => {
       const subfamilyLiveFilterValue = (liveTableFilters.find(
         filter => filter.name === 'product.subfamily'
       )?.value || []) as AutoCompleteValue[]
 
-      const result = await makeCoreGetRequest(`/bakery/store/families`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families`, {
         params: {
-          subfamily: subfamilyLiveFilterValue.map(({ value }) => value)
+          subfamily: subfamilyLiveFilterValue.map(({ value }) => value),
+          ...(isFormator ? { store: storeFilterValue.map(({ value }) => value) } : {})
         },
         paramsSerializer: { indexes: null }
       })
@@ -201,6 +208,7 @@ export const ReportFrozenTraceability = () => {
       return resultOptions || []
     },
     {
+      enabled: !isFormator || isFormator && !!storeFilterValue?.length,
       onError: error => {
         showNotification({
           message: `Error while fetching families dropdown data. ${formatErrorMessage(error)}`,
@@ -211,14 +219,19 @@ export const ReportFrozenTraceability = () => {
   )
 
   const subfamilies = useQuery(
-    ['subfamilies-store', liveTableFilters.find(filter => filter.name === 'product.family')?.value],
+    [
+      'subfamilies-store',
+      liveTableFilters.find(filter => filter.name === 'product.family')?.value,
+      storeFilterValue
+    ],
     async () => {
       const familyLiveFilterValue = (liveTableFilters.find(
         filter => filter.name === 'product.family'
       )?.value || []) as AutoCompleteValue[]
-      const result = await makeCoreGetRequest(`/bakery/store/families/subfamilies`, {
+      const result = await makeCoreGetRequest(`/bakery/store/traceability/families/subfamilies`, {
         params: {
-          family: familyLiveFilterValue.map(({ value }) => value)
+          family: familyLiveFilterValue.map(({ value }) => value),
+          ...(isFormator ? { store: storeFilterValue.map(({ value }) => value) } : {})
         },
         paramsSerializer: { indexes: null }
       })
@@ -231,6 +244,7 @@ export const ReportFrozenTraceability = () => {
       return resultOptions || []
     },
     {
+      enabled: !isFormator || isFormator && !!storeFilterValue?.length,
       onError: error => {
         showNotification({
           message: `Error while fetching subfamilies dropdown data. ${formatErrorMessage(error)}`,
@@ -239,6 +253,39 @@ export const ReportFrozenTraceability = () => {
       }
     }
   )
+
+  const liveFiltersObject: { [key: string]: string } = useMemo(() => {
+    return liveTableFilters.reduce((acc, item) => {
+      acc[item.name] = item.value
+      return acc
+    }, {})
+  }, [liveTableFilters])
+
+  const minMaxDate = useMemo(() => {
+    const today = dayjs()
+    const minDate = dayjs().subtract(6, 'month')
+    const { startDate, endDate } = liveFiltersObject
+
+    return {
+      startDate: {
+        min: endDate
+          ? dayjs(endDate).subtract(1, 'month').isBefore(minDate)
+            ? minDate
+            : dayjs(endDate).subtract(1, 'month')
+          : minDate,
+
+        max: endDate ? dayjs(endDate) : today
+      },
+      endDate: {
+        min: startDate ? dayjs(startDate) : minDate,
+        max: startDate
+          ? dayjs(startDate).isBefore(today.subtract(1, 'month'))
+            ? dayjs(startDate).add(1, 'month')
+            : today
+          : today
+      }
+    }
+  }, [liveFiltersObject.startDate, liveFiltersObject.endDate])
 
   const drawerFilters: TableFiltersType[] = [
     {
@@ -267,10 +314,13 @@ export const ReportFrozenTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
+          minDate={minMaxDate.startDate.min}
+          maxDate={minMaxDate.startDate.max}
         />
       ),
       type: 'date',
-      label: 'Data inceput productie'
+      label: 'Data inceput productie',
+      required: true
     },
     {
       name: 'endDate',
@@ -281,10 +331,13 @@ export const ReportFrozenTraceability = () => {
           variant="outlined"
           value={previousDay}
           onChange={() => {}}
+          minDate={minMaxDate.endDate.min}
+          maxDate={minMaxDate.endDate.max}
         />
       ),
       type: 'date',
-      label: 'Data sfarsit productie'
+      label: 'Data sfarsit productie',
+      required: true
     },
     {
       name: 'product.family',
@@ -318,6 +371,12 @@ export const ReportFrozenTraceability = () => {
     }
   ]
 
+  const dynamicColumns = React.useMemo(() => {
+    return [...productPrintColumns(isFormator), ...batchPrintColumns]
+  }, [])
+
+  const isXs = useMediaQuery('(max-width:624px)')
+
   return (
     <div className={s.mainContainer}>
       <Grid container>
@@ -349,13 +408,20 @@ export const ReportFrozenTraceability = () => {
         <>
           <PrintModal
             {...tableState}
-            tableFilters={tableState.tableFilters}
+            tableFilters={
+              isFormator
+                ? [
+                    ...tableState.tableFilters,
+                    { name: 'store', value: storeFilterValue.map(store => store.value) }
+                  ]
+                : tableState.tableFilters
+            }
             url={
               isFormator
                 ? URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT_FORMATOR
                 : URLS.AUTH_REPORT_FROZEN_TRACEABILITY_PRINT
             }
-            dynamicColumns={[...productPrintColumns, ...batchPrintColumns]}
+            dynamicColumns={dynamicColumns}
             isModalOpen={isPrintModalOpen}
             closeModal={() => setIsPrintModalOpen(false)}
             toolbarActions={[]}
@@ -367,6 +433,11 @@ export const ReportFrozenTraceability = () => {
             isLoading={isLoading}
             totalCount={totalCount}
             filters={drawerFilters}
+            appliedFiltersLabel='Filtre'
+            applyFiltersButtonLabel='Filtrare'
+            filtersLabel='Filtrare'
+            filtersButtonLabel='Filtrare'
+            cancelFiltersButtonLabel='Anuleaza'
             hasSearchInput
             handleFilterChangeLive={liveFilters => setLiveTableFilters(liveFilters)}
             toolbarActions={[
@@ -386,11 +457,13 @@ export const ReportFrozenTraceability = () => {
               }
             ]}
             rowActionsWidth="90px"
-            rowsPerPage={25}
-            rowsPerPageOptions={[25, 50, 100]}
+            rowsPerPage={isXs ? 5 : 25}
+            rowsPerPageOptions={isXs ? [5, 10, 15] : [25, 50, 100]}
           />
         </>
       )}
     </div>
   )
 }
+
+export default ReportFrozenTraceability

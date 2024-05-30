@@ -15,6 +15,7 @@
   font-size: 12px;
   font-style: normal;
   line-height: 16px;
+  font-family: 'Ubuntu' !important;
 }
 
 .taskName {
@@ -135,4 +136,27 @@
 
 .hidden {
   display: none;
+}
+
+.departmentFilterContainer {
+  padding: 0 !important;
+
+  @media (max-width: 624px) {
+    margin-top: 12px;
+    margin-right: 30px !important;
+  }
+}
+
+.autoAllocateButtonContainer {
+  padding: 0;
+  padding-right: 40px;
+  text-align: right;
+
+  @media (max-width: 624px) {
+    margin-top: 12px;
+  }
+}
+
+.historyIcon {
+  font-size: 16px !important;
 }
