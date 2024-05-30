@@ -66,7 +66,7 @@ const CreateEditCollaborator: React.FC<CreateEditCollaboratorProps> = props => {
     onError: error =>
       handleQueryError(
         error,
-        `Eroare la ${editItemId ? 'editarea' : 'adaugarea colaboratorului.'}`,
+        `Eroare la ${editItemId ? 'editarea colaboratorului.' : 'adaugarea colaboratorului.'}`,
         showNotification
       )
   })
