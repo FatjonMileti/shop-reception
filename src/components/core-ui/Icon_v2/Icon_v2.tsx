@@ -93,8 +93,10 @@ import {
   EmployeeManagementMenu,
   ManagementTasksMenu,
   ReportsVolumetryHome,
-  ReportsVolumetryMenu
+  ReportsVolumetryMenu,
+  NotificationIconMenu
 } from 'icons'
+import { AlertIconHome } from 'icons/outOfShelf'
 
 const IconComponents = {
   // Shared
@@ -154,6 +156,7 @@ const IconComponents = {
   RegionManagerMenu,
   StoreManagerMenu,
   TraceabilityOperatorMenu,
+  NotificationIconMenu,
   //admin
   UsersManagementSubcategory,
   ZonesSubcategory,
@@ -193,7 +196,9 @@ const IconComponents = {
   OwnProductionTraceabilityTOSubcategory,
   ProductManagementTOSubcategory,
   ReceivedProductsTOSubcategory,
-  CarrefourLogoBlackIcon
+  CarrefourLogoBlackIcon,
+  // out of shelf
+  AlertIconHome
 }
 
 export type IconType = 'Menu' | 'Home' | 'Subcategory' | 'Icon'
