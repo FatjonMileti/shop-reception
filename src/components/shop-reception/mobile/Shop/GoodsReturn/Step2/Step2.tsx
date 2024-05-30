@@ -36,7 +36,7 @@ const Step2 = () => {
         showReturnableModal();
       } else {
         try {
-          await makeCorePostRequest('/shop-reception-mobile/truck/exit/supportType/save/' + id, {supportTypeId: values.currentSupportTypeId, supportNumber: values.supportNumber});
+          await makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/supportType/save/' + id, {supportTypeId: values.currentSupportTypeId, supportNumber: values.supportNumber});
 
           setPackageScanned(true);
           setSearchCode('');
@@ -55,7 +55,7 @@ const Step2 = () => {
   const { data: returnTruckModel, isLoading: isLoadingReturnTruck} = useQuery(
     'returnTruckModel',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/exit/getTruckModel/' + id, null);
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getTruckModel/' + id, null);
     },
     {
       onError: error => {
@@ -70,7 +70,7 @@ const Step2 = () => {
   const { data: supportList, isLoading: isLoadingSupports} = useQuery(
     'supportList',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/support/all/list', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/support/shop/all/list', null)
     },
     {
       onError: error => {
@@ -132,7 +132,7 @@ const Step2 = () => {
     if (!searchCode) return;
 
     try {
-      makeCorePostRequest('/shop-reception-mobile/truck/exit/supportType/scan/' + id, searchCode).then(r => {
+      makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/supportType/scan/' + id, { supportTypeCode: searchCode }).then(r => {
         if (!r.scanSuccess) {
 
         } else if (returnTruckModel.depositOrHubName.includes('CHEP') && !r.supportType.includes('CHEP')) {

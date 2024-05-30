@@ -31,7 +31,7 @@ const Step3 = () => {
       }));
 
       try {
-        await makeCorePostRequest('/shop-reception-mobile/truck/exit/saveSupportList/' + id, {supportList});
+        await makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/saveSupportList/' + id, supportList);
         navigate(URLS.AUTH_RETURN_STEP_4, { state: id });
       }
       catch (error) {
@@ -46,7 +46,7 @@ const Step3 = () => {
   const { data: returnTruck, isLoading: isLoadingSupportList} = useQuery(
     'supportListReturn',
     async () => {
-      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/exit/getReturnSupportList/' + id, null);
+      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getReturnSupportList/' + id, null);
 
       await formik.setValues({ supportList: truck.supportList });
       return truck;

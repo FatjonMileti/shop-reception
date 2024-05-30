@@ -57,7 +57,7 @@ const Step1 = () => {
       const hubCode = isChep ? null : returnHub.code;
 
       try {
-        const resp = await makeCorePostRequest('/shop-reception-mobile/truck/exit/save', {
+        const resp = await makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/save', {
           id: truckId,
           truckNumber: values.registrationNumber,
           driverName: values.driver,
@@ -104,7 +104,7 @@ const Step1 = () => {
   const { data: returnHub, isLoading: isLoadingHub} = useQuery(
     'returnHub',
     async () => {
-      const hub = await makeCoreGetRequest('/shop-reception-mobile/truck/exit/getHub', null);
+      const hub = await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getHub', null);
 
       await formik.setFieldValue('returnHub', hub.name)
       return hub;
@@ -122,7 +122,7 @@ const Step1 = () => {
   const { data: depositList, isLoading: isLoadingDeposits} = useQuery(
     'depositList',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/exit/getDepositList', null);
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getDepositList', null);
     },
     {
       onError: error => {
@@ -136,7 +136,7 @@ const Step1 = () => {
 
   const loadReturnTruck = (id) => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/truck/exit/getTruck/' + id, null).then(truck => {
+      makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getTruck/' + id, null).then(truck => {
         formik.setValues({
           destination: truck.depositId,
           registrationNumber: truck.truckNumber,
