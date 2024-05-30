@@ -422,8 +422,8 @@ interface CentralizedNotice {
 interface TransportResponsible {
   id: number
   firstName: string
-  name: string
-  emails: string
+  lastName: string
+  email: string
 }
 
 interface PackagingTypesDifference {

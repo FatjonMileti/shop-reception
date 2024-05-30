@@ -437,7 +437,7 @@ export const useShopReceptionRoutes = applicationPages => {
         }
       />
       <Route
-        path={URLS.AUTH_CENTRALIZED_NOTICE}
+        path={URLS.AUTH_PACKAGING_CENTRALIZED_NOTICE}
         element={
           <PrivateRoute
             component={CentralizedNotice}
