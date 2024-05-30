@@ -120,6 +120,7 @@ export const columns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={!row.receiveFromDeposit}
       />
     )
   },
@@ -145,6 +146,7 @@ export const columns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={!row.receiveFromDeposit}
       />
     )
   },
@@ -170,6 +172,7 @@ export const columns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={!row.receiveFromDeposit}
       />
     )
   },
@@ -195,6 +198,7 @@ export const columns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={!row.receiveFromDeposit}
       />
     )
   },
@@ -220,6 +224,7 @@ export const columns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={!row.receiveFromDeposit}
       />
     )
   },
@@ -245,6 +250,7 @@ export const columns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={!row.receiveFromDeposit}
       />
     )
   },
@@ -270,6 +276,7 @@ export const columns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={!row.receiveFromDeposit}
       />
     )
   },
@@ -287,7 +294,7 @@ export const columns = (formik, setTableItems) => [
             if (item.depositId === row.depositId) {
               return {
                 ...item,
-                startInterval: formatPayloadDate(newStartInterval)
+                startInterval: newStartInterval
               }
             }
             return item
@@ -312,7 +319,7 @@ export const columns = (formik, setTableItems) => [
             if (item.depositId === row.depositId) {
               return {
                 ...item,
-                endInterval: formatPayloadDate(newEndInterval)
+                endInterval: newEndInterval
               }
             }
             return item

@@ -12,6 +12,7 @@ import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { useMutation } from 'react-query'
+import { formatPayloadDate, formatTime } from 'utils/helpers'
 
 interface HubsIntervalModalProps {
   isOpen: boolean
@@ -79,7 +80,12 @@ const HubsIntervalModal: React.FC<HubsIntervalModalProps> = props => {
     validateOnChange: false,
     initialValues: initialValues,
     onSubmit: async (values: any) => {
-      mutate(values)
+      const payload = values.map(value => ({
+        ...value,
+        startInterval: formatTime(value.startInterval),
+        endInterval: formatTime(value.endInterval)
+      }))
+      mutate(payload)
     }
   })
 
