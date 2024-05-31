@@ -16,7 +16,7 @@ const ReceptionProcessing = () => {
   const { data: truckList, isLoading} = useQuery(
     'inProgressTrucks',
     async () => {
-        return await makeCoreGetRequest('/shop-reception-mobile/truck/list/in_progress', null)
+        return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/list/in_progress', null)
     },
     {
         onError: error => {

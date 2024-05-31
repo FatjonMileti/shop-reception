@@ -9,6 +9,7 @@ import { TitleHeader } from '../../Common/TitleHeader'
 import {useQuery} from "react-query";
 import {makeCoreGetRequest, makeCorePostRequest} from "../../../../../utils/api";
 import ImageUpload from "../../Common/ImageUpload/ImageUpload";
+import { getUserInfo } from "../../../../../utils/authService";
 
 const PackagingInventoryUpdate = () => {
   const { showNotification } = useNotification()
@@ -22,8 +23,9 @@ const PackagingInventoryUpdate = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        await makeCorePostRequest('/shop-reception-mobile/support/inventory/save', values);
-        clearFields()
+
+        await makeCorePostRequest('/shop-reception-mobile/support/shop/inventory/save', values);
+        clearFields();
       } catch (error) {
         showNotification({
             message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -32,7 +34,7 @@ const PackagingInventoryUpdate = () => {
       }
     }
   })
-
+  console.log(formik.errors);
   function clearFields() {
       setSelectedSupportId('')
       formik.setFieldValue('supportId', null);
@@ -45,7 +47,7 @@ const PackagingInventoryUpdate = () => {
   const { data: supportList, isLoading} = useQuery(
     'supportList',
     async () => {
-        return await makeCoreGetRequest('/shop-reception-mobile/support/all/list', null)
+        return await makeCoreGetRequest('/shop-reception-mobile/support/shop/all/list', null)
     },
     {
         onError: error => {
@@ -60,7 +62,7 @@ const PackagingInventoryUpdate = () => {
   const { data: shopCode, isLoading: isLoadingShopCode} = useQuery(
     'shopCode',
     async () => {
-        const shopCode = await makeCoreGetRequest('/shop-reception-mobile/getShopCode', null)
+        const shopCode = await makeCoreGetRequest('/shop-reception-mobile/home/getShopCode', null)
         await formik.setFieldValue('shopCode', Number(shopCode.value));
 
         return shopCode.value;
@@ -139,7 +141,7 @@ const PackagingInventoryUpdate = () => {
           />
           {(formik.values.defective > 0 && +selectedSupportId > 0) && (
             <ImageUpload
-              uploadUrl={'/shop-reception-mobile/support/upload/' + selectedSupportId}
+              uploadUrl={'/shop-reception-mobile/support/shop/upload/' + selectedSupportId}
               onSuccess={handleSuccess}
               onError={handleError}
               inputId='defective'

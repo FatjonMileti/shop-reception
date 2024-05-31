@@ -17,7 +17,7 @@ const Step5 = () => {
   const notice = location.state?.notice;
 
   const fetchPdfBlob = async () => {
-    return await makeCorePostRequest('/shop-reception-mobile/truck/exit/getNoticeAsPdf', {
+    return await makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/getNoticeAsPdf', {
       id: notice.id,
       noticeNumber: notice.code
     }, {

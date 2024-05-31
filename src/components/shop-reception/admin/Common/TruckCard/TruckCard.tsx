@@ -16,7 +16,7 @@ const TruckCard: React.FC<TruckCardProp> = (props) => {
       {props.truck.depositOrHubName && <Typography variant="medium" component="p">{props.truck.depositOrHubName}</Typography>}
       {props.truck.seals && <Typography variant='medium' component='p'>Sigiliu (sigilii):  {props.truck.seals}</Typography>}
       {props.truck.ticketNumbers &&<Typography variant="medium" component="p">BL: {props.truck.ticketNumbers}</Typography>}
-      <Typography variant='medium' component='p'>{props.truck.registeredDate || props.truck.loadingDate}</Typography>
+      <Typography variant='medium' component='p'>{props.truck.registeredDate || props.truck.loadingDate || props.truck.created}</Typography>
     </Paper>
   )
 }

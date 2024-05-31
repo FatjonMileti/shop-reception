@@ -17,8 +17,8 @@ const DeliveryRandomProduct = () => {
   const navigate = useNavigate();
   const { showNotification } = useNotification();
   const location = useLocation();
-  const [isSupportScanModalOpen, setIsSupportScanModalOpen] = useState(false)
-  const [supportScanModalContent, setSupportScanModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [isSupportScanModalOpen, setIsSupportScanModalOpen] = useState(false);
+  const [supportScanModalContent, setSupportScanModalContent] = useState({ title: '', description: '', buttons: [] });
   const id = location.state?.id;
 
   const validationSchema = useMemo(() => getValidationSchema(), [])

@@ -27,7 +27,7 @@ const Step4 = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const notice = await makeCorePostRequest('/shop-reception-mobile/truck/exit/saveNotice/' + id, values);
+        const notice = await makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/saveNotice/' + id, values);
 
         returnTruck.depositOrHubName === 'FURNIZOR CHEP' ? navigate('/goodsReturn')
           : navigate(URLS.AUTH_RETURN_STEP_5, { state: {id: id, notice: notice} });
@@ -44,7 +44,7 @@ const Step4 = () => {
   const { data: returnTruck, isLoading: isLoadingTruck} = useQuery(
     'returnTruck',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/exit/getTruckModel/' + id, null);
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getTruckModel/' + id, null);
     },
     {
       onError: error => {
@@ -93,7 +93,7 @@ const Step4 = () => {
           variant='outlined'
           value={formik.values.stackNumber}
           width='100%'
-          onChange={event => formik.setFieldValue('stackNumber', (event.target as HTMLInputElement).value)}
+          onChange={event => formik.setFieldValue('stackNumber', +(event.target as HTMLInputElement).value)}
           error={!!formik.errors.stackNumber}
           helperText={formik.errors.stackNumber as string}
         />,
@@ -115,7 +115,7 @@ const Step4 = () => {
               helperText={formik.errors?.sealList?.[idx] as string}
             />
             <ImageUpload
-              uploadUrl={`/shop-reception-mobile/truck/exit/image/` + id}
+              uploadUrl={`/shop-reception-mobile/truck/shop/exit/image/` + id}
               onSuccess={handleSuccess}
               onError={handleError}
               inputId={`exitSeal${idx}`}

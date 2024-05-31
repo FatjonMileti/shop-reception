@@ -24,7 +24,7 @@ const AddTruck = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const response = await makeCorePostRequest('/shop-reception-mobile/truck/createTruck', values);
+        const response = await makeCorePostRequest('/shop-reception-mobile/truck/shop/createTruck', values);
         navigate(URLS.AUTH_ADD_TRUCK_STEP_2, { state: { response } })
       } catch (error) {
         showNotification({
@@ -59,8 +59,8 @@ const AddTruck = () => {
   const addSealNumberField = () => {
     if (numFields < 3) {
       setNumFields(numFields + 1);
-      formik.setFieldValue('sealNumbers', [
-        ...formik.values.sealNumbers,
+      formik.setFieldValue('sealList', [
+        ...formik.values.sealList,
         { id: numFields + 1, value: '' },
       ]);
     }
@@ -73,36 +73,36 @@ const AddTruck = () => {
       label='Numǎr înmatriculare'
       variant='standard'
       width='100%'
-      value={formik.values.registrationNumber}
-      onChange={event => formik.setFieldValue('registrationNumber', (event.target as HTMLInputElement).value)}
-      error={!!formik.errors.registrationNumber}
-      helperText={formik.errors.registrationNumber as string}
+      value={formik.values.truckNumber}
+      onChange={event => formik.setFieldValue('truckNumber', (event.target as HTMLInputElement).value)}
+      error={!!formik.errors.truckNumber}
+      helperText={formik.errors.truckNumber as string}
     />,
     <Input
       type='text'
       label='Șofer'
       variant='standard'
       width='100%'
-      value={formik.values.driver}
-      onChange={event => formik.setFieldValue('driver', (event.target as HTMLInputElement).value)}
-      error={!!formik.errors.driver}
-      helperText={formik.errors.driver as string}
+      value={formik.values.driverName}
+      onChange={event => formik.setFieldValue('driverName', (event.target as HTMLInputElement).value)}
+      error={!!formik.errors.driverName}
+      helperText={formik.errors.driverName as string}
     />,
-    ...formik.values.sealNumbers.map((field, index) => (
+    ...formik.values.sealList?.map((field, index) => (
         <Input
             key={field.id}
             type='text'
             label={`Număr Sigiliu ${index + 1}`}
             variant='standard'
             width='100%'
-            value={field.value}
+            value={field.code}
             onChange={(event) => {
-              const newValues = [...formik.values.sealNumbers];
-              newValues[index].value = (event.target as HTMLInputElement).value;
-              formik.setFieldValue('sealNumbers', newValues);
+              const newValues = [...formik.values.sealList];
+              newValues[index].code = (event.target as HTMLInputElement).value;
+              formik.setFieldValue('sealList', newValues);
             }}
-            error={!!formik.errors.sealNumbers?.[index]?.value}
-            helperText={formik.errors.sealNumbers?.[index]?.value}
+            error={!!formik.errors.sealList?.[index]?.value}
+            helperText={formik.errors.sealList?.[index]?.value}
         />
     )),
     numFields < 3 && (
