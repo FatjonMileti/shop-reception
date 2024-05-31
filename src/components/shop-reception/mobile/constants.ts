@@ -23,7 +23,8 @@ export const URLS = {
   AUTH_DELIVERY_COMPLETE_SCAN_STEP_2: '/shop-reception/mobile/delivery/full-scan/step-2', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_COMPLETE_SCAN_STEP_3: '/shop-reception/mobile/delivery/full-scan/step-3', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_SENSITIVE_PRODUCTS: '/shop-reception/mobile/sensitiveProducts',
-  AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM: '/shop-reception/mobile/delivery/sensitive-products/confirm', // TODO: integrate stepper in parent page and delete
+  AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM:
+    '/shop-reception/mobile/delivery/sensitive-products/confirm', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_RANDOM_SUPPORT: '/shop-reception/mobile/randomSupport',
   AUTH_DELIVERY_RANDOM_SUPPORT_FINAL: '/shop-reception/mobile/delivery/random-support/final', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_RANDOM_SUPPORT_CONFIRM: '/shop-reception/mobile/delivery/random-support/confirm', // TODO: integrate stepper in parent page and delete
@@ -38,8 +39,6 @@ export const URLS = {
   AUTH_RETURN_STEP_4: '/shop-reception/mobile/return-step-4', // Step 4
   AUTH_RETURN_STEP_5: '/shop-reception/mobile/return-step-5', // Step 5
   AUTH_CONTINUE_RETURN_TRUCKS: '/shop-reception/mobile/inProgressReturns', // In progress return trucks
-
-
 
   // HUB Goods Reception
   AUTH_EXPECTED_TRUCKS: '/shop-reception/mobile/expectedTrucks', // List of trucks waiting reception at the hub
@@ -80,4 +79,14 @@ export const URLS = {
   // deposit return step 2
   // deposit return step 3
   // deposit return step 4
+
+  AUTH_DEPOSIT_EXPECTED_RETURNS: '/shop-reception/mobile/goodsReturnDeposit/expectedReturns',
+  AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_1:
+    '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-1',
+  AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_2:
+    '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-2',
+  AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_3:
+    '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-3',
+  AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_4:
+    '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-4'
 }

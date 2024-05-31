@@ -10,7 +10,7 @@ const ImageUpload = ({ uploadUrl, onSuccess, onError, inputId }) => {
         const file = e.target.files[0];
         if (file) {
             const formData = new FormData();
-            formData.append('image', file);
+            formData.append('photoFile', file);
 
             try {
                 const response = await makeCorePostRequest(uploadUrl, formData, {

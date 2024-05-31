@@ -55,7 +55,8 @@ VALUES
     (15, 'Receptie marfa', 'ProjectTeamGovernance', '/goodsReception', true, 6),
     (16, 'Returnare marfa', 'ProjectTeamGovernance', '/goodsReturn', true, 6),
     (17, 'Receptie marfa HUB', 'ProjectTeamGovernance', '/goodsReceptionHub', true, 6),
-    (18, 'Returnare marfa HUB', 'ProjectTeamGovernance', '/goodsReturnHub', true, 6);
+    (18, 'Returnare marfa HUB', 'ProjectTeamGovernance', '/goodsReturnHub', true, 6),
+    (19, 'Returnare marfa depozit', 'ProjectTeamGovernance', '/goodsReturnDeposit', true, 6);
 
 
 -- activity with submodule id
@@ -169,6 +170,9 @@ VALUES
     (184, 'Retur in curs de receptie', 'UsersManagement', null, true, 18),
     (185, 'Inregistrare retur', 'UsersManagement', null, true, 18),
     (186, 'Continuare retur', 'UsersManagement', null, true, 18),
+    (251, 'Retururi asteptate', 'UsersManagement', null, true, 19),
+    (252, 'Retur in curs de receptie', 'UsersManagement', null, true, 19),
+
     -- Bakery TRACEABILITY OP
     (50, 'Management produse', 'ProductManagementTO', null, true, 11),
     (51, 'Produse receptionate in raion', 'ReceivedProductsTO', null, true, 11),
@@ -357,6 +361,12 @@ VALUES
     (239, 'Înregistrare retur', '', '/shop-reception/mobile/return-step-4', true, 189, false),
     (240, 'Înregistrare retur', '', '/shop-reception/mobile/return-step-5', true, 189, false),
     (241, 'Continuare retur', '', '/shop-reception/mobile/inProgressReturns', true, 190, true),
+    (249, 'Retururi asteptate', '', '/shop-reception/mobile/goodsReturnDeposit/expectedReturns', true, 251, true),
+    (251, 'Retururi asteptate', '', '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-1', true, 251, false),
+    (252, 'Retururi asteptate', '', '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-2', true, 251, false),
+    (253, 'Retururi asteptate', '', '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-3', true, 251, false),
+    (254, 'Retururi asteptate', '', '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-4', true, 251, false),
+    (250, 'Retur in curs de receptie', '', '/shop-reception/mobile/goodsReturnDeposit/returnPendingReception', true, 252, true),
 
     (218, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips/:id', true, 163, false),
     -- Bakery TRACEABILITY-OPERATOR
@@ -475,7 +485,8 @@ VALUES
     (200, 158), (200, 159), (200, 160), (200, 161), (200, 162), (200, 163), (200, 164), (200, 165),
     (200, 166), (200, 167), (200, 168), (200, 169), (200, 170), (200, 171), (200, 172), (200, 173),
     (200, 174), (200, 175), (200, 176), (200, 177), (200, 272), (200, 195), (200, 196), (200, 247),
-    (200, 248), (200, 277), (200, 278),
+    (200, 248), (200, 251), (200, 252), (200, 277), (200, 278),
+
     -- Shop Reception Mobile
     -- GG_RO_HQ_SHOP_RECEPTION_ADMIN
     (200, 178), (200, 179), (200, 180), (200, 181), (200, 182), (200, 183), (200, 184), (200, 185),
