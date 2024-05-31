@@ -52,14 +52,14 @@ export const getEmployeesGroupedByDepartment = (employees: AllocatedEmployee[]) 
     if (acc[employee.genericDepartmentId]) {
       acc[employee.genericDepartmentId] = [...acc[employee.genericDepartmentId], employee]
     } else {
-      acc[employee.genericDepartmentId] = employee
+      acc[employee.genericDepartmentId] = [employee]
     }
 
     return acc
-  }, [])
+  }, {})
 
 export const getSortedEmployees = (
-  groupedEmployees: AllocatedEmployee[],
+  groupedEmployees: any,
   genericDepartmentId: number
 ) => {
   const sortedGroupedItems = Object.keys(groupedEmployees)
