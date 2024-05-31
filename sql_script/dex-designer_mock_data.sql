@@ -25,7 +25,8 @@ VALUES
     (3, 'Supply OMNI Offline', 'SupplyOmni', '/supplyOmni', true),
     (4, 'Volumetry', 'Volumetry', '/volumetry', true),    
     (5, 'Shop Reception Admin', 'DonutLargeTwoTone', '/shopReception', true),
-    (6, 'Shop Reception Mobile', 'DonutLargeTwoTone', '/shopReception/mobile', true);
+    (6, 'Shop Reception Mobile', 'DonutLargeTwoTone', '/shopReception/mobile', true),
+    (7, 'Lost Sales Opportunities', 'DonutLargeTwoTone', '/lostSalesOpportunities', true);
 
 
 -- application submodule with module id
@@ -53,7 +54,9 @@ VALUES
     (14, 'Ambalaje', 'ProjectTeamGovernance', '/package', true, 5),
     -- Shop Reception (Mobile)
     (15, 'Receptie marfa', 'ProjectTeamGovernance', '/goodsReception', true, 6),
-    (16, 'Returnare marfa', 'ProjectTeamGovernance', '/goodsReturn', true, 6);
+    (16, 'Returnare marfa', 'ProjectTeamGovernance', '/goodsReturn', true, 6),
+    -- Lost Sales Opportunities
+    (17, 'Alerte', 'ManagementTasks', '/lostSalesAlerts', true, 7);
 
 
 -- activity with submodule id
@@ -167,7 +170,9 @@ VALUES
     (54, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 11),
     (55, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 11),
     -- Bakery ADMIN p2
-    (56, 'Gestiune ingrediente', 'Ingredients', null, true, 2);
+    (56, 'Gestiune ingrediente', 'Ingredients', null, true, 2),
+    -- Lost Sales Opportunities
+    (57, 'Alerte', 'UsersManagement', null, true, 17);
 
 
 -- screen with activity id (some are first screens)
@@ -318,7 +323,9 @@ VALUES
     (73, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 55, true),
     (74, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 55, false),
     -- Bakery ADMIN p2
-    (80, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 56, true);
+    (80, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 56, true),
+    -- Lost Sales Opportunities
+    (81, 'Alerte', 'Alerte', '/lostSalesOpportunities/alerts', true, 57, true);
 
 -- roles
 INSERT INTO
@@ -414,7 +421,9 @@ VALUES
     -- Shop Reception Mobile
     -- SHOP_RECEPTION_DUMMY_ROLE
     (200, 178), (200, 179), (200, 180), (200, 181), (200, 182), (200, 183), (200, 184), (200, 185),
-    (200, 186), (200, 187), (200, 188), (200, 189), (200, 190);
+    (200, 186), (200, 187), (200, 188), (200, 189), (200, 190),
+    -- Lost Sales Opportunities
+    (100, 57);
 
 
 -- reset sequences

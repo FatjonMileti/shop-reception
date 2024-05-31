@@ -1,20 +1,19 @@
 import { Route } from 'react-router-dom'
 import { URLS } from './constants'
-import { Task, Tasks } from './Tasks'
+import { Alerts } from './Alerts'
+import { PrivateRoute } from 'components/utils/PrivateRoute'
 
 export const useLostSalesOpportunitiesRoutes = applicationPages => {
   return (
     <>
       <Route
-        path={URLS.AUTH_TASKS}
-        // element={<PrivateRoute component={Tasks} applicationPages={applicationPages} />}
-        element={<Tasks />}
+        path={URLS.AUTH_ALERTS}
+        element={<PrivateRoute component={Alerts} applicationPages={applicationPages} />}
       />
-      <Route
+      {/* <Route
         path={URLS.AUTH_TASK}
-        // element={<PrivateRoute component={Task} applicationPages={applicationPages} />}
-        element={<Task />}
-      />
+        element={<PrivateRoute component={Task} applicationPages={applicationPages} />}
+      /> */}
     </>
   )
 }
