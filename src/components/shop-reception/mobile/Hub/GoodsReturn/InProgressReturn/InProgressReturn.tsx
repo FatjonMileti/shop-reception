@@ -35,7 +35,7 @@ const InProgressReturn = () => {
       <TruckCard
         key={item.id}
         onClick={() => {
-          navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2, {state: item.id})
+          navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2}?id=${item.id}`)
         }}
         truck={item}
       />

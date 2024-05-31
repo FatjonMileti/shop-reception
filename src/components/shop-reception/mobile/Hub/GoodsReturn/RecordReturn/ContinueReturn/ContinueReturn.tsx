@@ -10,9 +10,7 @@ import { makeCoreGetRequest } from "../../../../../../../utils/api";
 import { formatErrorMessage } from "../../../../../../../utils/formatting";
 import React from "react";
 
-const trucks: any[] = [
-  { id: 1, name: 'Camion 1', description: 'Descriere camion 1' }
-]
+
 
 const ContinueReturn = () => {
   const navigate = useNavigate()
@@ -43,14 +41,14 @@ const ContinueReturn = () => {
       <TruckCard
         key={truck.id}
         onClick={() => {
-          navigate(URLS.AUTH_RECORD_RETURN_STEP_2, { state: truck.id })
+          navigate(`${URLS.AUTH_RECORD_RETURN_STEP_2}?id=${truck.id }`)
         }}
         truck={truck}
       />
     ))
   ]
 
-  if (trucks.length === 0) {
+  if (truckList.length === 0) {
     items.push(<Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>Nu
       existǎ camioane de retur în lucru.</Typography>)
   }

@@ -8,7 +8,7 @@ import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from "../../../../../../../utils/formatting";
 import { toPayload } from './serializers'
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
 import ImageUpload from "../../../../Common/ImageUpload/ImageUpload";
@@ -18,10 +18,8 @@ const ContinueReturnDetailFinal = () => {
   const navigate = useNavigate()
   const [sealNumbers, setSealNumbers] = useState(['']);
   const [numFields, setNumFields] = useState(1)
-
-  const location = useLocation();
-
-  const id = location.state;
+  const [params] = useSearchParams();
+  const id = params.get('id');
 
   const { data: CRTruck, isLoading} = useQuery(
     'getTruck',
@@ -90,6 +88,8 @@ const ContinueReturnDetailFinal = () => {
     }));
 
     const truck = {
+      "notice": CRTruck.truckNumber,
+      "stackNumber": CRTruck.stackNumber,
       sealList,
     };
 

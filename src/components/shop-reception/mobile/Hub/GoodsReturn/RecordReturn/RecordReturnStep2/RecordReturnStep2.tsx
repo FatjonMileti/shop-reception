@@ -5,7 +5,7 @@ import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from "../../../../../../../utils/formatting";
 import { useNotification } from '../../../../../../../hooks'
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { Select, MenuItem, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { URLS } from "../../../../constants";
@@ -16,11 +16,10 @@ import { DeleteActionIcon } from "../../../../../../../icons";
 
 const RecordReturnDetail = () => {
   const { showNotification } = useNotification();
-  const location = useLocation();
   const navigate = useNavigate();
-
   const [selectedNls, setSelectedNls] = useState([]);
-  const truckId = location.state;
+  const [params] = useSearchParams();
+  const truckId = params.get('id');
 
 
 
@@ -32,8 +31,10 @@ const RecordReturnDetail = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        await makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/saveNoticeList/' + truckId, formik.values.blList, null);
-        navigate(URLS.AUTH_RECORD_RETURN_STEP_3, {state: truckId})
+        const payload = formik.values.blList.map(bl => bl.noticeNumber);
+        await makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/saveNoticeList/' + truckId, payload, null);
+        navigate(`${URLS.AUTH_RECORD_RETURN_STEP_3}?id=${truckId}`)
+
 
       } catch (error) {
         showNotification({
@@ -67,7 +68,7 @@ const RecordReturnDetail = () => {
   const { data: noticeLists, isLoading: isNoticeListsLoading} = useQuery(
     'getNoticeLists',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/getAllNoticeList/', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/getAllNoticeList', null)
     },
     {
       onError: error => {

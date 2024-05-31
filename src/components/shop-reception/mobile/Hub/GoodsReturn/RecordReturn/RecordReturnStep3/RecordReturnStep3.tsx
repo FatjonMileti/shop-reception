@@ -1,7 +1,7 @@
 import { Grid } from '../../../../../Common/Grid'
 import { Table, Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from "../../../../Common/TitleHeader";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { URLS } from "../../../../constants";
 import React from 'react';
 import { useQuery } from "react-query";
@@ -15,8 +15,9 @@ import { useNotification } from "../../../../../../../hooks";
 const ContinueReturnDetail = () => {
   const { showNotification } = useNotification();
   const navigate = useNavigate()
-  const location = useLocation();
-  const truckId = location.state;
+  const [params] = useSearchParams();
+  const truckId = params.get('id')
+
 
   const { data: CRTruck, isLoading} = useQuery(
     'getTruckById',
@@ -49,7 +50,7 @@ const ContinueReturnDetail = () => {
   )
 
   const calculateTotal = (data) => {
-    return data.reduce((sum, item) => sum + parseInt(item.stackNumber, 10), 0)
+    return data.reduce((sum, item) => sum + parseInt(item.truckNumber, 10), 0)
   }
 
   if (isLoading || isNoticeListLoading) {
@@ -86,7 +87,7 @@ const ContinueReturnDetail = () => {
           label='PASUL URMǍTOR'
           style={{width: '100%'}}
           onClick={() => {
-            navigate(URLS.AUTH_RECORD_RETURN_STEP_4, {state: truckId})
+            navigate(`${URLS.AUTH_RECORD_RETURN_STEP_4}?id=${truckId}`)
           }}
         />
       ]}

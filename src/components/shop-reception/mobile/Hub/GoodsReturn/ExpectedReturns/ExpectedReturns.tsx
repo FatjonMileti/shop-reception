@@ -36,7 +36,7 @@ const ExpectedReturns = () => {
       <TruckCard
         key={index}
         onClick={() => {
-          navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL, { state: item.id })
+          navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL}?id=${item.id}`)
         }}
         truck={item}
       />

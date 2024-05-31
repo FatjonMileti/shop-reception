@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../hooks'
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { URLS } from '../../../constants'
 import { useQuery } from "react-query";
 import { TitleHeader } from "../../../Common/TitleHeader";
@@ -16,8 +16,8 @@ import AlertModal from "../../../Common/AlertModal/AlertModal";
 const RecordReturn = () => {
   const navigate = useNavigate()
   const { showNotification } = useNotification()
-  const location = useLocation();
-  const truckId = location.state;
+  const [params] = useSearchParams();
+  const truckId = params.get('id');
   const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false)
   const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] })
 
@@ -62,7 +62,6 @@ const RecordReturn = () => {
     }
   )
 
-
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
     enableReinitialize: false,
@@ -77,11 +76,15 @@ const RecordReturn = () => {
           "driverName": values.driverName,
           "packageReturn": values.packageReturn,
           "productReturn": false,
-          "depositType": null
+          "depositType": null,
+          "depositId": truck.depositId,
+          "noticeNumber": null,
+          "shopName": null,
+          "hubCode": null
         })
 
-        if (resp.success) {
-          navigate(URLS.AUTH_RECORD_RETURN_STEP_2, {state: resp.id})
+        if (resp.id) {
+          navigate(`${URLS.AUTH_RECORD_RETURN_STEP_2}?id=${resp.id}`)
         } else {
           openInvalidTruckNumberModal()
         }
