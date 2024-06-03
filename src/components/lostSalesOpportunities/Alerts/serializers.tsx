@@ -1,12 +1,12 @@
+import { AlertItem } from '../interfaces'
 import { AlertDetails } from './AlertDetails'
 import { AlertSummary } from './AlertSummary'
 
-export const toListTableRows = items => {
+export const toListTableRows = (items: AlertItem[]) => {
   return items.map(item => ({
     id: item.id,
     summary: <AlertSummary item={item} />,
     details: <AlertDetails item={item} />,
-    borderLeftColor: '#0970E6',
-    defaultExpanded: true
+    borderLeftColor: '#0970E6'
   }))
 }

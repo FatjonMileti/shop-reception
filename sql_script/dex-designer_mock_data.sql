@@ -325,7 +325,8 @@ VALUES
     -- Bakery ADMIN p2
     (80, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 56, true),
     -- Lost Sales Opportunities
-    (81, 'Alerte', 'Alerte', '/lostSalesOpportunities/alerts', true, 57, true);
+    (81, 'Alerte', 'Alerte', '/lostSalesOpportunities/alerts', true, 57, true),
+    (82, 'Alerta', 'Alerte', '/lostSalesOpportunities/alerts/:id', true, 57, false);
 
 -- roles
 INSERT INTO

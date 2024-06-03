@@ -1,36 +1,30 @@
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '@mui/material'
-import { Capsule } from 'components/core-ui/Capsule'
+import { Box, Grid, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { SnoozeAlarm } from './SnoozeAlarm'
+import { AlertItem } from 'components/lostSalesOpportunities/interfaces'
 
 interface AlertDetailsProps {
-  item: any
+  item: AlertItem
 }
 
 const AlertDetails: React.FC<AlertDetailsProps> = ({ item }) => {
   const navigate = useNavigate()
-  return (
-    <>
-      <Grid container>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Cod" value={item.articleId} />
-        </Grid>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Cantitate LSO" value={item.lsoQuantity} />
-        </Grid>
-        <Grid item mt={1} mr={1}>
-          <Capsule label="Stoc" value={item.realTimeStock} />
-        </Grid>
-      </Grid>
 
-      {/* <Grid item mt={1} mr={1} alignSelf={'right'}>
+  return (
+    <Grid container>
+      <Grid item xs={12}>
         <Button
           variant="outlined"
           label="Vezi detalii"
-          onClick={() => navigate(`/lostSalesOpportunities/tasks/${item.id}`)}
+          onClick={() => navigate(`/lostSalesOpportunities/alerts/${item.id}`)}
+          style={{ float: 'right', marginRight: '16px' }}
         />
-      </Grid> */}
-    </>
+      </Grid>
+      <Grid item xs={12}>
+        <SnoozeAlarm alertId={item.id} />
+      </Grid>
+    </Grid>
   )
 }
 

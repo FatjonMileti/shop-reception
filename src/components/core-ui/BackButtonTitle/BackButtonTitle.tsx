@@ -38,7 +38,7 @@ const BackButtonTitle = ({ applicationPages }) => {
   }
 
   return shouldShowBackButton ? (
-    <Box sx={{ padding: '24px 24px 0 24px' }}>
+    <Box sx={{ padding: {xs: '24px 24px 0 16px', md: '24px 24px 0 24px' }}}>
       <BackButton text={currentApplicationName} onNavBack={navigateBack}></BackButton>
     </Box>
   ) : null

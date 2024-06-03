@@ -1,4 +1,4 @@
 export const URLS = {
   AUTH_ALERTS: 'lostSalesOpportunities/alerts',
-  // AUTH_TASK: 'lostSalesOpportunities/tasks/:id',
+  AUTH_ALERT: 'lostSalesOpportunities/alerts/:id'
 }
