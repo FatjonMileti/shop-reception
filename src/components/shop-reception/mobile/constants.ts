@@ -88,5 +88,6 @@ export const URLS = {
   AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_3:
     '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-3',
   AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_4:
-    '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-4'
+    '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-4',
+  AUTH_DEPOSIT_PENDING_RETURN : '/shop-reception/mobile/goodsReturnDeposit/returnPendingReception'
 }

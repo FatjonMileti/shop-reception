@@ -53,6 +53,7 @@ import { ExpectedDepositReturnsStep1 } from './Deposit/ExpectedReturns/Step1'
 import { ExpectedDepositReturnsStep2 } from './Deposit/ExpectedReturns/Step2'
 import { ExpectedDepositReturnsStep3 } from './Deposit/ExpectedReturns/Step3'
 import { ExpectedDepositReturnsStep4 } from './Deposit/ExpectedReturns/Step4'
+import { ReturnPendingReception } from './Deposit/ReturnPendingReception'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -352,6 +353,17 @@ export const useMerchandiseRoutes = applicationPages => {
           />
         }
       />
+      <Route
+        path={URLS.AUTH_DEPOSIT_PENDING_RETURN}
+        element={
+          <PrivateRoute
+            component={ReturnPendingReception}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      
 
       {/* ? */}
       <Route path={URLS.AUTH_PACKAGING_INVENTORY_UPDATE} element={<PackagingInventoryUpdate />} />
