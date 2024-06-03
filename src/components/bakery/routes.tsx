@@ -37,11 +37,12 @@ import { ProductionManagementStorePrint } from './StoreManagerRole/ProductionMan
 import { GrowthIndexStore } from './StoreManagerRole/GrowthIndexStore'
 import ReportAndSalesStore from './StoreManagerRole/ReportAndSalesStore/ReportAndSalesStore'
 import { Ingredients } from './Ingredients'
+import ReceivedProductsTest from './Traceability/ReceivedProductsTest/ReceivedProductsTest'
 
 const ProductManagementTraceability = React.lazy(
   () => import('./Traceability/ProductManagementTraceability/ProductManagementTraceability')
 )
-const  ReceivedProducts  = React.lazy(
+const ReceivedProducts = React.lazy(
   () => import('./Traceability/ReceivedProducts/ReceivedProducts')
 )
 const FrozenTraceability = React.lazy(
@@ -60,7 +61,10 @@ const ReportOwnProductionTraceability = React.lazy(
   () => import('./Traceability/ReportOwnProductionTraceability/ReportOwnProductionTraceability')
 )
 const ReportOwnProductionTraceabilityPrint = React.lazy(
-  () => import('./Traceability/ReportOwnProductionTraceabilityPrint/ReportOwnProductionTraceabilityPrint')
+  () =>
+    import(
+      './Traceability/ReportOwnProductionTraceabilityPrint/ReportOwnProductionTraceabilityPrint'
+    )
 )
 
 export const useBakeryRoutes = applicationPages => {
@@ -423,6 +427,11 @@ export const useBakeryRoutes = applicationPages => {
             checkIsAuthorized
           />
         }
+      />
+
+      <Route
+        path={'bakery/traceabilityOperator/received-products-test'}
+        element={<ReceivedProductsTest />}
       />
 
       <Route
