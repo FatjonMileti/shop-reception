@@ -1,15 +1,27 @@
-export const toTableRowItems = (items: AdminStore[]) => items.map((item: AdminStore) => ({
-  id: item.id,
-  storeCode: item.storeCode,
-  name: item.name,
-  storeType: item.storeType,
-  METIVersion: item.METIVersion,
-  adCode: item.adCode,
-  grams: item.grams,
-  region: item.region,
-  ip: item.ip,
-  way: item.way,
-  quantities: item.quantities,
-  active: item.active,
-  hourlyIntervals: item.hourlyIntervals
-}))
+export const toTableRowItems = (items: AdminStore[]) =>
+  items.map((item: AdminStore) => ({
+    id: item.id,
+    metiCode: item.metiCode || '',
+    metiName: item.metiName || '',
+    metiType: item.metiType || '',
+    metiVersion: item.metiVersion || '',
+    adCode: item.adCode || '',
+    receptionDeviation: item.receptionDeviation,
+    regionName: item.regionName || '',
+    sftpIp: item.sftpIp || '',
+    sftpPath: item.sftpPath || '',
+    canEditQuantities: item.canEditQuantities || '',
+    active: item.active,
+    address: item.address || '',
+    city: item.city || '',
+    town: item.town || '',
+    regNumber: item.regNumber || '',
+    CIF: item.CIF || '',
+    office: item.office || '',
+    bankName: item.bankName || '',
+    bankAccount: item.bankAccount || '',
+    capital: item.capital || '',
+    hourlyIntervals: item.hourlyIntervals || 0,
+    canCallReturnTruck: item.canCallReturnTruck || false,
+    parentSociety: item.parentSociety || ''
+  }))

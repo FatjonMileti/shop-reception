@@ -1,19 +1,24 @@
-export const toTableRowItems = (items: DifferencesProduct[]) => items.map((item: DifferencesProduct) => ({
-  id: item.id,
-  deliverySlip: item.deliverySlip,
-  store: item.store,
-  warehouse: item.warehouse,
-  productName: item.productName,
-  homeOrder: item.homeOrder,
-  metiOrder: item.metiOrder,
-  unitOfMeasure: item.unitOfMeasure,
-  expectedQuantity: item.expectedQuantity,
-  qualitativeReceivedQuantity: item.qualitativeReceivedQuantity,
-  defectiveReceivedQuantity: item.defectiveReceivedQuantity,
-  grams: item.grams,
-  inStockQuantity: item.inStockQuantity,
-  difference: item.difference,
-  raceCode: item.raceCode,
-  sentToMeti: item.sentToMeti,
-  integrationOperator: item.integrationOperator
-}))
+export const toTableRowItems = (items: DifferencesProduct[]) =>
+  items.map((item: DifferencesProduct) => ({
+    id: item.id,
+    externalTicketId: item.externalTicketId || '',
+    shopName: item.shopName || '',
+    shopCode: item.shopCode || '',
+    depositName: item.depositName || '',
+    productCode: item.productCode || '',
+    productName: item.productName || '',
+    originalOrderId: item.originalOrderId || '',
+    metiOrderId: item.metiOrderId || '',
+    measureUnit: item.measureUnit || '',
+    transportCode: item.transportCode || '',
+    orderedQuantity: item.orderedQuantity || '',
+    receivedQuantity: item.receivedQuantity || '',
+    brokenQuantity: item.brokenQuantity || '',
+    receptionDeviation: item.receptionDeviation || '',
+    stockQuantity: item.stockQuantity || '',
+    missingQuantity: item.missingQuantity || '',
+    transporterCode: item.transporterCode || '',
+    metiSentDate: item.metiSentDate || '',
+    integrationOperator: item.integrationOperator || '',
+    archivePath: item.archivePath
+  }))

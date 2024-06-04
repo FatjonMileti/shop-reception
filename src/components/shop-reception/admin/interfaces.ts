@@ -1,36 +1,84 @@
 interface TruckItem {
   id: number
-  store: string
-  hub: string
-  warehouseName: string
-  truckLocation: string
-  registrationNumber: string
-  driverCode: string
-  raceCode: string
+  approvedDate: string
+  approver: string
+  arrivalConform: boolean
+  created: string
+  createdBy: string
+  creationOperator: string
+  depositName: string
+  depositTemperature: number
+  documentsConform: boolean
+  driverName: string
+  etransportStatus: string
+  flowType: string
+  flowTypeValue: string
+  hubName: string
+  manualCreationDate: string
+  sealConform: boolean
   seals: string
-  deliveryReceipts: string
-  complianceDocuments: string
-  thermodiagramConformity: string
-  receptionWithinHours: string
-  sealCompliance: string
+  shopName: string
+  shopTemperature: number
   status: string
-  registrationDate: string
-  registrationOperator: string
-  eTransportStatus: string
+  statusValue: string
+  thermodiagramConform: boolean
+  ticketCodes: string
+  transportCode: string
+  truckNumber: string
 }
 
-interface DeliverySlip {
-  id: number
-  store: string
-  warehouseName: string
-  deliverySlip: string
+interface DeliveryTruck {
+  id: string
+  approveDate: string
+  arrivalConform: boolean
+  deliveredShopCode: string
+  deliveredShopCodeName: string
+  deliveryTicketCreated: string
+  deliveryTickets: string
+  deliveryType: string
+  depositIds: string
+  depositType: string
+  driverName: string
+  expectedDeliveryDate: string
+  flowType: string
+  hubReceived: string
+  hubSent: string
+  sealConform: boolean
+  false
+  shopCode: string
+  shopName: string
   status: string
-  seal: string
-  raceCode: string
-  registrationNumber: string
-  expectedSupports: string
-  destinationReachedSupports: string
-  registrationDate: string
+  supportCount: number | string
+  thermodiagramConform: boolean
+  transportCode: string
+  truckCreated: string
+  truckId: number | string
+  truckNumber: string
+}
+interface NoticeSeriesNumber {
+  id: number
+  canEdit: boolean
+  noticeCurrentNumber: number | string
+  noticeMaxNumber: number | string
+  noticeMinNumber: number | string
+  noticeSeries: string
+  parentSociety: string
+  year: number | string
+}
+interface ParentSociety {
+  id: number
+  bankAccount: string
+  bankName: string
+  businessName: string
+  created: string
+  createdBy: string
+  fiscalAddress: string
+  lastUpdate: string
+  lastUpdateBy: string
+  parentSocietyName: string
+  regNumber: string
+  socialCap: string
+  vatId: string
 }
 
 interface AdminDeposit {
@@ -38,98 +86,158 @@ interface AdminDeposit {
   code: string
   name: string
   type: string
+  address: string
+  validityPercentage: number
+  emails: string[]
+  packagingResponsibleEmail: string
+  cif: string
+  office: string
+  bankAccount: string
+  bankName: string
+  workingPoint: string
+  capital: string
   active: boolean
-  validityPercentage?: string | number
-  address?: string
-  emails?: string
+  acceptReturn: boolean
+  depositUsers: string[]
 }
 
 interface AdminHub {
   id: number
-  hubCode: string
+  code: string
   name: string
-  hubType: string
+  type: string
   address: string
-  hourlyIntervals: number
   active: boolean
+  users?: string[]
+  packagingResponsibleEmails?: string[]
+}
+
+interface AdminHubDeliveryInterval {
+  receiveFromDeposit: boolean
+  depositId: number
+  depositName: string
+  depositCode: string
+  monday: boolean
+  tuesday: boolean
+  wednesday: boolean
+  thursday: boolean
+  friday: boolean
+  saturday: boolean
+  sunday: boolean
+  startInterval: string
+  endInterval: string
 }
 
 interface AdminStore {
   id: number
-  storeCode: string
-  name: string
-  storeType: string
-  METIVersion: string
+  metiCode: string
+  metiName: string
+  metiType: string
+  metiVersion: string
   adCode: string
-  grams: number
-  region: string
-  ip: string
-  way: string
-  quantities: string
+  receptionDeviation: number
+  regionName: string
+  sftpIp: string
+  sftpPath: string
+  canEditQuantities: string
   active: boolean
   hourlyIntervals: number
+  address: string
+  city: string
+  town: string
+  regNumber: string
+  CIF: string
+  office: string
+  bankName: string
+  bankAccount: string
+  capital: string
+  parentSociety: string
+  canCallReturnTruck: boolean
 }
 
 interface AdminRegion {
   id: number
-  regionCode: string
+  code: string
   name: string
-  regionManager: string
+  responsible: string
   active: boolean
+  shopIds?: []
 }
 
 interface CentralizeStoresHub {
-  id: number
-  store: string
-  deposit: string
-  hubs: string
+  destinationId: number
+  destinationName: string
+  depositNames: string
+  hubNames: string
 }
 
 interface ScanType {
   id: number
-  storeType: string
-  region: string
-  storeCode: string
-  storeName: string
-  scanType: string
-  startDate: string
-  lastDate: string
   active: boolean
+  start: string
+  end: string
+  shopType: {
+    key: string
+    value: string
+  }
+  regionName: string
+  shopCode: string
+  shopName: string
+  type: {
+    key: string
+    value: string
+  }
+}
+
+interface SensitiveArticle {
+  id: string
+  dateInfo: string
+  donePercent: string
+  idDeliverySupport: string
+  lastUpdate: string
+  scannedNo: number | string
+  shopName: string
+  verifiedNo: number | string
 }
 
 interface SensitiveProduct {
   id: number
-  storeType: string
-  storeCode: string
-  storeName: string
-  district: string
-  family: string
-  subfamily: string
-  UbCode: string
-  productCode: string
+  shopCode: string
+  shopName: string
+  prodName: string
+  ubName: string
+  sfaName: string
+  famName: string
+  rayName: string
+  shopType: {
+    key: string
+    value: string
+  }
 }
 
 interface SubFamilyValidityThreshold {
-  id: number
-  familyCode: string
-  subfamilyCode: string
-  subfamily: string
-  family: string
-  districtCode: string
-  district: string
-  validityThreshold: string
+  id: string
+  sfaCode: string
+  sfaName: string
+  famCode: string
+  famName: string
+  rayCode: string
+  rayName: string
+  validityLimit: number
 }
 
 interface PackingType {
   id: number
-  packagingCode: string
-  additionalCodes: string
+  code: string
+  externalCode: string
   name: string
-  main: string
-  combination: boolean
+  main: boolean
+  combined: boolean
+  missing: boolean
   active: boolean
-  return: boolean
-  generatedBarcode: string
+  alternativeCodes: string
+  returnable: boolean
+  childrenIds?: number[]
 }
 
 interface BalancePackage {
@@ -151,76 +259,99 @@ interface BalancePackage {
 
 interface DifferencesProduct {
   id: number
-  deliverySlip: string
-  store: string
-  warehouse: string
+  externalTicketId: string
+  shopName: string
+  shopCode: string
+  depositName: string
+  productCode: string
   productName: string
-  homeOrder: string
-  metiOrder: string
-  unitOfMeasure: string
-  expectedQuantity: string
-  qualitativeReceivedQuantity: string
-  defectiveReceivedQuantity: string
-  grams: string
-  inStockQuantity: number
-  difference: string
-  raceCode: string
-  sentToMeti: string
+  originalOrderId: string
+  metiOrderId: string
+  measureUnit: string
+  transportCode: string
+  orderedQuantity: number | string
+  receivedQuantity: number | string
+  brokenQuantity: number | string
+  receptionDeviation: number | string
+  stockQuantity: number | string
+  missingQuantity: number | string
+  transporterCode: string
+  metiSentDate: string
   integrationOperator: string
+  archivePath: string
+}
+interface AutocompleteOption {
+  label: string
+  value: string | number
 }
 
 interface DLCProducts {
   id: number
-  storeType: string
-  storeCode: string
-  storeName: string
-  district: string
-  family: string
-  subfamily: string
-  UbCode: string
-  productCode: string
+  shopCode: string
+  shopName: string
+  prodName: string
+  ubName: string
+  sfaName: string
+  famName: string
+  rayName: string
+  shopType: {
+    key: string
+    value: string
+  }
+}
+
+
+interface ShopType {
+  key: string
+  value: string
 }
 
 interface SGRProducts {
   id: number
-  storeType: string
-  storeCode: string
-  storeName: string
-  district: string
-  family: string
-  subfamily: string
-  UbCode: string
-  productCode: string
+  shopCode: string
+  shopName: string
+  prodName: string
+  ubName: string
+  famName: string
+  sfaName: string
+  rayName: string
+  shopType: ShopType[]
 }
 
 interface MetiFile {
   id: number
-  deliverySlip: string
-  store: string
-  warehouse: string
-  integrationOperator: string
-  status: string
-  sentFile: string
-  receivedFile: string
-  sentToMeti: string
-  receivedFromMeti: string
-  productsDifferences: string
-  metiProductDifferences: string
-  exportNonIntegratedProducts: string
-  error: boolean
-  forgot: boolean
+  shopCode: string
+  shopName: string
+  depositName: string
+  depositCode: string
+  createdBy: string
+  fileStatus: string
+  fileStatusValue: string
+  ticketExternalId: string
+  receivedFilePath: string
+  sentFilePath: string
+  createdDate: string
+  sentTime: string
+  receivedTime: string
+  hasError: boolean
+  hasDifference: boolean
+  hasMetiDifference: boolean
+  hasRetry: boolean
+  hasNotIntegrated: boolean
+  numberOfSentFiles: number
+  numberOfReceivedFiles: number
 }
 
 interface MetiProduct {
   id: number
-  productCode: string
-  productName: string
-  measurementUnit: string
-  validDays: string
-  district: string
+  code: string
+  name: string
+  unit: string
+  lifetimeDays: number
+  rayon: string
   family: string
-  subfamily: string
-  subfamilyValidityThreshold: string
+  subFamily: string
+  validityLimit: number
 }
 
 interface PackagingCompliance {
@@ -253,8 +384,46 @@ interface PackagingDispute {
 interface PackagingDisputeTimer {
   id: number
   timerType: string
+  timerTypeValue: string
   timerValue: string
   timerDescription: string
+}
+
+interface PackagingInventory {
+  id: number
+  store: string
+  hub: string
+  society: string
+  supportType: string
+  inventoryQualitative: string
+  theoreticalBalanceQualitative: string
+  defectiveInventory: string
+  difference: string
+  finalStockAfterInventory: string
+  inventoryManager: string
+  inventoryDate: string
+}
+
+interface PackagingInventoryHistory {
+  id: number
+  store: string
+  supportType: string
+  qualitative: string
+  defective: string
+  inventoryManager: string
+  inventoryDate: string
+}
+
+interface CentralizedNotice {
+  id: number
+  inventoryDate: string
+}
+
+interface TransportResponsible {
+  id: number
+  firstName: string
+  lastName: string
+  email: string
 }
 
 interface PackagingTypesDifference {
@@ -274,14 +443,13 @@ interface PackagingTypesDifference {
 
 interface ReceptionFile {
   id: number
-  deliverySlip: string
-  warehouse: string
-  store: string
-  date: string
+  externalTicketId: string
+  depositName: string
+  shopNames: string
+  createdDate: string
   success: string
-  failureReason: string
-  fileDownloaded: string
-  reProcessing: string
+  reason: string
+  reimportAllowed: string
 }
 
 interface ReturnedPackaging {
@@ -350,54 +518,94 @@ interface RollingPackages {
 
 interface SupportTradability {
   id: number
-  raceCode: string
-  raceType: string
-  loadingPlace: string
-  uploadDate: string
-  carNumber: string
-  warehouseName: string
+
+  transportCode: string
+  truckType: string
+  flowType: string
+  expeditionDate: string
+  truckNumber: string
+  depositName: string
   driverName: string
   driverPhone: string
   hubName: string
-  storeName: string
-  society: string
-  goodsCategory: string
-  numberOfPallets: number
+  shopName: string
+  parentSociety: string
+  packageCategory: string
+  arrivedSupportsNumber: number | string
+  supportsNumberReleased: number | string
+  inHubReleaseDateTime: string
+  inHubPresentationHour: string
+  inHubReleaseHour: string
+  inHubLoadingDateTime: string
+  inHubLoadingHour: string
+  truckNumberHub: string
+  driverNameHub: string
+  loadedSupportsNumber: number | string
+  inShopReleaseDate: string
+  inShopReleaseHour: string
+}
+
+interface GoodsDeliveryReport {
+  id: number
+  finalStores: string
+  warehouses: string
+  cargoCategory: string
+  departureHub: string
+  arrivalHub: string
+  raceCode: string
+  truckNumber: string
+  driverName: string
+  deliveryStatus: string
+  location: string
+  estimatedDeliveryDate: string
+  arrivalStoreName: string
+  arrivalStoreCode: string
+  thermodiagramCompliance: string
+  sealCompliance: string
+  arrivalCompliance: string
+  registrationDate: string
+  deliverySlips: string
+  arrivalDate: string
+  supportNumber: string
 }
 
 interface SupportWrongDestination {
   id: number
   supportCode: string
-  warehouseName: string
-  deliverySlip: string
-  orderedDelivered: string
-  orderedIssued: string
-  desiredDestination: string
-  realDestination: string
-  operator: string
-  scanDate: string
-  resolved: string
-  resolvedDate: string
-  resolveOperator: string
-  comment: string
-  unload: string
+  depositName: string
+  externalTicketId: string
+  externalOrderId: string
+  originalOrderId: string
+  shopName: string
+  destinationShopName: string
+  lastUpdateBy: string
+  lastUpdate: string
+  resolved: boolean
+  resolvingDate: string
+  resolvedBy: string
+  resolvingComment: string
+  hasAttachment: boolean
+  wrongDestinationResultId: string
+  supportId: string
+  canResolve: boolean
 }
 
 interface UnorderedProducts {
   id: number
-  warehouse: string
-  store: string
+  depositName: string
+  shopName: string
+  shopCode: string
   productCode: string
   productName: string
   productEan: string
-  qualitativeQuantity: string
-  defectiveQuantity: string
-  failureReason: string
-  supportCode: string
-  deliverySlip: string
-  receptionDate: string
-  receptionOperator: string
-  resolved: string
-  resolvedDate: string
-  resolvedOperator: string
+  validatedQuantity: number | string
+  brokenQuantity: number | string
+  defectReason: string
+  externalSupportCode: string
+  deliveryTicketExternalId: string
+  created: string
+  createdBy: string
+  resolved: boolean
+  updated: string
+  lastUpdateBy: string
 }

@@ -1,46 +1,68 @@
 import { ChangeEvent, useMemo, useState } from 'react'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '../../../../Common/Grid'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toPayload } from './serializers'
-import { FileUpload } from '../../../../../core-ui/FileUpload'
-import { toFormDataPayload } from '../../../../../../utils/serializers'
-import { ModalFormActionButtons } from '../../../Common/ModalFormActionButtons'
+import { AutocompleteOption } from 'components/volumetry/interfaces'
+import { makeCorePostRequest } from 'utils/api'
+import { useMutation } from 'react-query'
+import { Grid } from '@mui/material'
+import { Autocomplete, Button, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
+import { FileUpload } from 'components/core-ui/FileUpload'
+import s from 'components/core-ui/Modal/Modal.modules.scss'
 
 interface NewAdminDepositProps {
   isModalOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
+  shopTypes: AutocompleteOption[]
+  shopCodes: AutocompleteOption[]
 }
 
 const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
-  const { isModalOpen, closeModal, setShouldRefreshData } = props
-  const [uploadedFile, setUploadedFile] = useState(null)
-  const [isFileUploaded, setIsFileUploaded] = useState(false)
+  const { isModalOpen, closeModal, setShouldRefreshData, shopTypes, shopCodes } = props
   const { showNotification } = useNotification()
 
-  const initialValues = useMemo(() => getInitialValues(), [])
-
-  const validationSchema = useMemo(() => getValidationSchema(), [])
+  const [file, setFile] = useState<File | null>(null)
 
   const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    try {
-      const file = event.target.files[0]
-      setUploadedFile(file)
-      setIsFileUploaded(true)
-    } catch (e) {
-      showNotification({
-        message: `Error while adding file. ${formatErrorMessage(e)}`,
-        type: 'error'
-      })
-      setUploadedFile(null)
-      setIsFileUploaded(false)
+    const uploadedFile = event?.target.files && event?.target.files[0]
+    if (uploadedFile) {
+      setFile(uploadedFile)
+      formik.setFieldValue('file', uploadedFile)
     }
   }
+
+  const importData = async (values: any) => {
+    await makeCorePostRequest(`/shop-reception/products/short-dlc/import`, values, {
+      headers: {
+        'Content-Type': 'multipart/form-data' // Ensure correct content type
+      }
+    })
+  }
+
+  const { isLoading, mutate } = useMutation(importData, {
+    onSuccess: res => {
+      showNotification({
+        message: `Datele au fost importate cu succes.`,
+        type: 'success'
+      })
+
+      formik.resetForm()
+      setShouldRefreshData(true)
+      closeModal()
+    },
+    onError: res => {
+      showNotification({
+        message: `A aparut o eroare. ${formatErrorMessage(res)}`,
+        type: 'error'
+      })
+    }
+  })
+
+  const initialValues = useMemo(() => getInitialValues(), [])
+  const validationSchema = useMemo(() => getValidationSchema(), [])
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -48,64 +70,76 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      const payload = toFormDataPayload(values)
-      payload.append('fileObject', uploadedFile)
+      const newValues = { ...values, shopCodes: values.shopCodes.map(shopCode => shopCode.value) }
 
-      try {
-        const payload = toPayload(formik.values)
+      const form = new FormData()
 
-        setShouldRefreshData(true)
-        closeModal()
-        formik.resetForm()
-      } catch (error) {
-        showNotification({
-          message: `Error while data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
-      }
+      form.append(
+        'shopCodes',
+        new Blob([JSON.stringify(newValues.shopCodes)], { type: 'application/json' })
+      )
+      form.append(
+        'ruleTypes',
+        new Blob([JSON.stringify([newValues.ruleTypes.value])], { type: 'application/json' })
+      )
+      form.append('file', file)
+
+      mutate(form)
     }
   })
+
   return (
     <Modal
       isModalOpen={isModalOpen}
       closeModal={closeModal}
-      modalTitle={'Importă produse DLC scurt'}
-      modalWidth='50%'
+      modalTitle={' Importă produse DLC scurt'}
+      modalWidth="50%"
     >
-      <Grid
-        gridContainerStyle={{ margin: 0 }}
-        items={[
-          <Input
-            type='select'
-            value={formik.values.store?.value}
-            onChange={event =>
-              formik.setFieldValue('store', (event.target as HTMLInputElement).value)
-            }
-            label='Magazin'
-            variant='outlined'
-            style={{ width: '100%' }}
-            error={!!formik.errors.store}
-            helperText={formik.errors.store as string}
-            values={[
-              {
-                value: 'AMBIENT',
-                label: 'AMBIENT'
-              }
-            ]}
-            required
-          />,
+      <Grid container spacing={1}>
+        <Grid xs={12} item>
+          <FilterDataSelect
+            name="shopCodes"
+            label="Magazin"
+            options={shopCodes}
+            onSelect={shops => formik.setFieldValue('shopCodes', shops)}
+            placeholderButton="Selecteaza"
+            multiSelect={true}
+            showSearch
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <FilterDataSelect
+            name="shopCodes"
+            label="Regula"
+            options={shopTypes}
+            onSelect={shops => formik.setFieldValue('ruleTypes', shops)}
+            placeholderButton="Selecteaza"
+            multiSelect={true}
+            showSearch
+          />
+        </Grid>
+
+        <Grid xs={12} item>
           <FileUpload
             value={formik.values.file}
-            fileInputProps={{ displayImage: 'https://picsum.photos/seed/picsum/200/150' }}
+            fileInputProps={{
+              displayImage: file
+            }}
             onChange={onFileUpload}
-          />,
-          <ModalFormActionButtons
-            onCancel={() => closeModal()}
-            onSubmit={() => formik.handleSubmit()}
           />
-        ]}
-        itemsPerRow={1}
-      />
+        </Grid>
+
+        <Grid xs={12} item className={s.modalButtons}>
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+          <Button
+            variant="contained"
+            label={'Salveaza'}
+            onClick={() => formik.handleSubmit()}
+            disabled={isLoading}
+          />
+        </Grid>
+      </Grid>
     </Modal>
   )
 }

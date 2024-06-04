@@ -1,11 +1,11 @@
-export const toTableRowItems = (items: ReceptionFile[]) => items.map((item: ReceptionFile) => ({
-  id: item.id,
-  deliverySlip: item.deliverySlip,
-  warehouse: item.warehouse,
-  store: item.store,
-  date: item.date,
-  success: item.success,
-  failureReason: item.failureReason,
-  fileDownloaded: item.fileDownloaded,
-  reProcessing: item.reProcessing
-}))
+export const toTableRowItems = (items: ReceptionFile[]) =>
+  items.map((item: ReceptionFile) => ({
+    id: item.id,
+    externalTicketId: item.externalTicketId,
+    depositName: item.depositName,
+    shopNames: item.shopNames,
+    createdDate: item.createdDate,
+    success: item.success,
+    reason: item.reason,
+    reimportAllowed: item.reimportAllowed
+  }))

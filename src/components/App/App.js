@@ -177,7 +177,7 @@ const App = () => {
 
   const governanceRoutes = useGovernanceRoutes(allScreensRoutes)
   const volumetryRoutes = useVolumetryRoutes(allScreensRoutes)
-  const bakeryRoutes = useBakeryRoutes(allScreensRoutes)
+  // const bakeryRoutes = useBakeryRoutes(allScreensRoutes)
   const supplyOmniRoutes = useSupplyOmniRoutes(allScreensRoutes)
   const merchandiseRoutes = useMerchandiseRoutes(allScreensRoutes)
   const shopReceptionRoutes = useShopReceptionRoutes(allScreensRoutes)
@@ -227,7 +227,7 @@ const App = () => {
                       }
                     />
                     {governanceRoutes}
-                    {bakeryRoutes}
+                    {/* {bakeryRoutes} */}
                     {volumetryRoutes}
                     {supplyOmniRoutes}
                     {merchandiseRoutes}

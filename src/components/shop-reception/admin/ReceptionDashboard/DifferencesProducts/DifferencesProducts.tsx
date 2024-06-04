@@ -1,49 +1,30 @@
-import { Grid } from '../../../Common/Grid'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import s from '../../Common/CommonStyles.modules.scss'
-import { Table } from '../../../../core-ui/Table'
-import { columns } from './helpers'
+import { useNotification } from 'hooks'
+import s from '../../../commonStyles.modules.scss'
 import { useState } from 'react'
-import { makeCoreGetRequest } from '../../../../../utils/api'
-import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
+import { Table } from 'components/core-ui/Table'
+import { columns, drawerFilters } from './helpers'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { formatErrorMessage } from '../../../../../utils/formatting'
-import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../Common/TitleHeader'
+import { formatErrorMessage } from 'utils/formatting'
+import { useQuery } from 'react-query'
+import { formatAndDownloadResponse } from 'utils/helpers'
+import { DownloadIcon } from 'icons'
 
 const DifferencesProducts = () => {
-  const [tableItems, setTableItems] = useState<DifferencesProduct[]>([
-    {
-      id: 1,
-      deliverySlip: '675381',
-      store: 'ORHIDEEA (3)',
-      warehouse: 'DEPOZIT BACAU',
-      productName: 'În procesare',
-      homeOrder: '11111111',
-      metiOrder: '23675467',
-      unitOfMeasure: '1',
-      expectedQuantity: '1',
-      qualitativeReceivedQuantity: '1',
-      defectiveReceivedQuantity: '1',
-      grams: 'ABO2PEK AALTATESCU',
-      inStockQuantity: 2,
-      difference: '1',
-      raceCode: '1',
-      sentToMeti: '1',
-      integrationOperator: '1'
-    }
-  ])
+  const { showNotification } = useNotification()
+  const [tableItems, setTableItems] = useState<DifferencesProduct[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const { showNotification } = useNotification()
+  const [downloadImageId, setDownloadImageId] = useState(null)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/reception-mobile-api/rm-api/truck/list',
+          url: '/shop-reception/productWithDifference',
           tableFilters,
           page,
           rowsPerPage,
@@ -52,9 +33,7 @@ const DifferencesProducts = () => {
         })
       )
 
-      const responseList = response.list
-
-      setTableItems(toTableRowItems(responseList))
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -65,140 +44,116 @@ const DifferencesProducts = () => {
     }
   }
 
+  const { data: shopCodes } = useQuery(
+    ['shop-codes'],
+    async () => {
+      const result = await makeCoreGetRequest('/shop-reception/shops/codes')
+
+      const resultOptions = result.list.map(item => ({
+        label: item.displayName,
+        value: item.code
+      }))
+      return resultOptions || []
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching shop codes dropdown data. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { refetch: refetchDownloadImage } = useQuery(
+    ['download-image'],
+    async () => {
+      setDownloadImageId(null)
+      const url = toTableGETUrl({
+        url: `/shop-reception/productWithDifference/downloadArchive/${downloadImageId}`
+      })
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      return formatAndDownloadResponse(response)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while downloading file. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: downloadImageId === null ? false : true
+    }
+  )
+
+  const handleExport = async (tableState) => {
+    const { filters, order, orderBy } = tableState
+    const url = toTableGETUrl({
+      url: '/shop-reception/productWithDifference/export',
+      tableFilters: filters,
+      order,
+      orderBy
+    })
+
+    try {
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `Error while download file. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const { data: metiRayons } = useQuery(
+    ['meti-rayons'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/products/meti-rayons`)
+      return data.map(item => ({
+        label: item.displayValue,
+        value: item.code
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea raioanelor. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
   return (
-    <Grid
-      items={[
-        <TitleHeader title='Produse cu diferenţe' />,
-        <Grid
-          hasPaper={true}
-          items={[
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Bon livrare'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Magazin'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează magazin',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Depozit'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează depozit',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Cod produs'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Nume produs'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Comandă de origine'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Comandă Meti'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Cod cursâ'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Selecteazǎ datâ'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='select'
-              onChange={event => null
-              }
-              label='Cu poze'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selecteazâ cu poze',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />
-          ]}
-          itemsPerRow={4}
-        />,
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          newButton={null}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            // {
-            //   label: "Adauga",
-            //   icon: <AddIcon />,
-            //   onClick: null
-            // }
-          ]}
-        />
-      ]}
-      itemsPerRow={1}
-    />
+    <div className={s.mainContainer}>
+      <Table
+        hideCheckbox
+        columns={columns(setDownloadImageId)}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+        toolbarActions={[
+          {
+            label: 'Export',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#16a085',
+            desktopIcon: <DownloadIcon />,
+            onClick: handleExport
+          }
+        ]}
+        rowActionsWidth="130px"
+        filters={drawerFilters(shopCodes, metiRayons)}
+      />
+    </div>
   )
 }
 
