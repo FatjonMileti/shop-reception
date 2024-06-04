@@ -1,4 +1,4 @@
-import { Box, Divider } from '@mui/material'
+import { Box } from '@mui/material'
 import { FC, ReactNode } from 'react'
 import s from './InfoBox.modules.scss'
 
@@ -13,7 +13,6 @@ const InfoBox: FC<InfoBoxProps> = props => {
   return (
     <Box className={s.container}>
       <Box className={s.title}>{title}</Box>
-      <Divider />
       <Box className={s.content}>{content}</Box>
     </Box>
   )

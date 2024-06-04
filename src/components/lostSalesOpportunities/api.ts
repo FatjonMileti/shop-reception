@@ -1,7 +1,6 @@
-import { ValueLabelInterface } from 'components/governance/interfaces'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from 'utils/api'
-import { toSnoozeOptions } from './serializers'
+import { toFeedbackReasonsOptions, toSnoozeOptions } from './serializers'
 import { handleQueryError } from 'utils/helpers'
 
 export const getSnoozeOptions = (showNotification: Function) => {
@@ -29,7 +28,6 @@ export const getAlertDetails = (id: string, showNotification: Function) => {
     ['alertDetails'],
     async () => {
       const response = await makeCoreGetRequest(`/lso/alerts/${id}`)
-      debugger
       return response
     },
     {
@@ -37,6 +35,26 @@ export const getAlertDetails = (id: string, showNotification: Function) => {
         handleQueryError(
           error,
           'A aparut o eroare la preluarea detaliilor alertei.',
+          showNotification
+        )
+    }
+  )
+}
+
+export const getFeedbackReasonsOptions = (showNotification: Function) => {
+  return useQuery(
+    ['feedbackReasonsOptions'],
+    async () => {
+      const result = await makeCoreGetRequest('/lso/feedback-reasons')
+      const resultOptions = toFeedbackReasonsOptions(result)
+
+      return resultOptions || []
+    },
+    {
+      onError: error =>
+        handleQueryError(
+          error,
+          'A aparut o eroare la preluarea datelor de optiuni pentru motivele de feedback.',
           showNotification
         )
     }
