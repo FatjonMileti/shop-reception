@@ -1,50 +1,45 @@
-import { Grid } from '../../../Common/Grid'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import { URLS } from '../../constants'
-import { Table } from '../../../../core-ui/Table'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { useState } from 'react'
-import { makeCoreGetRequest } from '../../../../../utils/api'
-import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { formatErrorMessage } from '../../../../../utils/formatting'
-import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../Common/TitleHeader'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { Grid } from '@mui/material'
+import s from '../../../commonStyles.modules.scss'
+import { useQuery } from 'react-query'
+import { formatAndDownloadResponse, formatUIDate } from 'utils/helpers'
+import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
+import { Table } from 'components/core-ui/Table'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 
 const MetiFiles = () => {
-  const [tableItems, setTableItems] = useState<MetiFile[]>([
-    {
-      id: 1,
-      deliverySlip: 'DEPOZIT BACAU',
-      store: 'ORHIDEEA (3)',
-      warehouse: '675381',
-      integrationOperator: '11111111',
-      status: 'În procesare',
-      sentFile: '23675467',
-      receivedFile: 'ABO2PEK AALTATESCU',
-      sentToMeti: '1',
-      receivedFromMeti: '1',
-      productsDifferences: '1',
-      metiProductDifferences: '1',
-      exportNonIntegratedProducts: '1',
-      error: false,
-      forgot: false,
-    }
-  ])
+  const [tableItems, setTableItems] = useState<MetiFile[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams();
+  const ticketExternalId = searchParams.get('ticketExternalId')
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
+
+    const filters = tableFilters.map(filter =>
+      filter.name === 'sentFileDate'
+        ? { name: filter.name, value: formatUIDate(filter.value) }
+        : filter.name === 'receivedFileDate'
+        ? { name: filter.name, value: formatUIDate(filter.value) }
+        : filter.name === 'ticketExternalId' && ticketExternalId
+        ? { name: filter.name, value: filter.value || ticketExternalId }
+        : filter
+    )
+    ticketExternalId  && searchParams.delete('ticketExternalId')
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/reception-mobile-api/rm-api/truck/list',
-          tableFilters,
+          url: '/shop-reception/metiIntegrationFile',
+          tableFilters: filters,
           page,
           rowsPerPage,
           order,
@@ -52,121 +47,143 @@ const MetiFiles = () => {
         })
       )
 
-      const responseList = response.list
+      setTableItems(toTableRowItems(response.metiIntegrationFileList))
 
-      setTableItems(toTableRowItems(responseList))
       setTotalCount(response.page.totalCount)
+      setTotalCount(0)
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const { data: shopCodes, isLoading: isShopCodesLoading } = useQuery(
+    ['shop-codes'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/shops/codes`)
+      return data.list.map(item => ({
+        label: item.displayName,
+        value: item.code
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea tipurilor de magazine. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: statusList, isLoading: isStatusListLoading } = useQuery(
+    ['status-list'],
+    async () => {
+      const data = await makeCoreGetRequest(
+        `/shop-reception/metiIntegrationFile/metiFileStatusList`
+      )
+      return data.map(item => ({
+        label: item,
+        value: item
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea statusurilor. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const downloadSentFile = async id => {
+    try {
+      const response = await makeCoreGetFileRequest(`/metiIntegrationFile/export/${id}`, {
+        responseType: 'blob'
+      })
+      return formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const downloadSentFileHistory = async id => {
+    try {
+      const response = await makeCoreGetFileRequest(`/metiIntegrationFile/history/${id}`, {
+        responseType: 'blob'
+      })
+      return formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const downloadReceivedFile = async id => {
+    try {
+      const response = await makeCoreGetFileRequest(
+        `/metiIntegrationFile/export/${id}?type=receivedFile`,
+        {
+          responseType: 'blob'
+        }
+      )
+      return formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const downloadReceivedFileHistory = async id => {
+    try {
+      const response = await makeCoreGetFileRequest(
+        `/metiIntegrationFile/history/${id}?type=receivedFile`,
+        {
+          responseType: 'blob'
+        }
+      )
+      return formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
   }
 
   return (
-    <Grid
-      items={[
-        <TitleHeader title='Fișiere Meti' />,
-        <Grid
-          hasPaper={true}
-          items={[
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Bon livrare'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Magazin'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează magazin',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Status'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează status',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Erori'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează cu erori',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Diferente'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează cu diferente',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />
-          ]}
-          itemsPerRow={4}
-        />,
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          newButton={null}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActions={[
-            {
-              label: 'Show',
-              labelColor: 'white',
-              typographyVariant: 'medium',
-              backgroundColor: '#16a085',
-              onClick: (e, rowId) => {
-                navigate(URLS.AUTH_METI_FILE_DETAIL.replace(":id", rowId))
-              }
-            }
-          ]}
-          rowActionsWidth='130px'
-        />
-      ]}
-      itemsPerRow={1}
-    />
+    <Grid className={s.mainContainer}>
+      <Table
+        hideCheckbox
+        columns={columns(
+          downloadSentFile,
+          downloadSentFileHistory,
+          downloadReceivedFile,
+          downloadReceivedFileHistory,
+          navigate
+        )}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+        filters={drawerFilters(shopCodes, statusList, ticketExternalId)}
+      />
+    </Grid>
   )
 }
 

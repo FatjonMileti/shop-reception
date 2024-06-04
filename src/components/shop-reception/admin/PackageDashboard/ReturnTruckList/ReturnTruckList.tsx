@@ -1,51 +1,85 @@
-import { Grid } from '../../../Common/Grid'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Table } from '../../../../core-ui/Table'
-import { columns } from './helpers'
-import { Download as DownloadIcon } from '@mui/icons-material'
-import { useState } from 'react'
-import { makeCoreGetRequest } from '../../../../../utils/api'
-import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
+import { useMemo, useState } from 'react'
+import { useNotification } from 'hooks'
+import { Table } from 'components/core-ui/Table'
+import { getColumns, getFilters } from './helpers'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { formatErrorMessage } from '../../../../../utils/formatting'
-import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../Common/TitleHeader'
+import { formatErrorMessage } from 'utils/formatting'
+import { DownloadIcon, ViewActionIcon } from 'icons'
+import { formatAndDownloadResponse, handleQueryError } from 'utils/helpers'
+import s from '../../../commonStyles.modules.scss'
+import {
+  getDepositOptions,
+  getParentSocietyOptions,
+  getShopOptions,
+  getHubOptions,
+  getReturnTruckTypesOptions,
+  getReturnTruckStatusOptions
+} from '../../api'
+import { useNavigate } from 'react-router-dom'
+import { useMutation } from 'react-query'
 
 const ReturnTruckList = () => {
-  const [tableItems, setTableItems] = useState<ReturnTruck[]>([
-    {
-      id: 1,
-      store: 'CRAIOVA (3054)',
-      viaHub: 'DEPOZIT BRAZI NON FOOD',
-      warehouseSupplier: 'DEPOZIT BRAZI NON FOOD',
-      society: '',
-      route: 'PH01DEP',
-      registrationNumber: 'DEPOZITBRA',
-      driveNumber: '3095940',
-      returnPackaging: '',
-      seals: '',
-      shopNotices: '',
-      hubNotices: '',
-      complianceDocuments: '',
-      thermodiagramConformity: '',
-      receptionWithinHours: '',
-      sealCompliance: '',
-      status: '',
-      registrationDate: '25-10-2023',
-      shippingDate: '25-10-2023'
-    }
-  ])
-  const [totalCount, setTotalCount] = useState<number>(0)
+  const [tableItems, setTableItems] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+
   const { showNotification } = useNotification()
+
+  const navigate = useNavigate()
+
+  const { data: shopOptions } = getShopOptions(showNotification)
+  const { data: hubOptions } = getHubOptions(showNotification)
+  const { data: despositOptions } = getDepositOptions(showNotification)
+  const { data: returnTruckTypesOptions } = getReturnTruckTypesOptions(showNotification)
+  const { data: returnTruckStatusOptions } = getReturnTruckStatusOptions(showNotification)
+  const { data: parentSocietyOptions } = getParentSocietyOptions(showNotification)
+
+  const filters = useMemo(
+    () =>
+      getFilters({
+        shopOptions,
+        hubOptions,
+        despositOptions,
+        returnTruckTypesOptions,
+        returnTruckStatusOptions,
+        parentSocietyOptions
+      }),
+    [
+      shopOptions,
+      hubOptions,
+      despositOptions,
+      returnTruckTypesOptions,
+      returnTruckStatusOptions,
+      parentSocietyOptions
+    ]
+  )
+
+  const download = async id => {
+    try {
+      const response = await makeCoreGetFileRequest(`/shop-reception/return-trucks/${id}/print`, {
+        responseType: 'blob'
+      })
+
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la printare. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const columns = useMemo(() => getColumns(download), [])
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/reception-mobile-api/rm-api/truck/list',
+          url: '/shop-reception/return-trucks',
           tableFilters,
           page,
           rowsPerPage,
@@ -53,190 +87,78 @@ const ReturnTruckList = () => {
           orderBy
         })
       )
-
-      const responseList = response.list
-
-      setTableItems(toTableRowItems(responseList))
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const exportFile = async (tableState, e) => {
+    const { filters, order, orderBy } = tableState
+    const url = toTableGETUrl({
+      url: '/shop-reception/return-trucks/export',
+      tableFilters: filters,
+      order,
+      orderBy
+    })
+
+    try {
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la descarcarea fisierului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
   }
 
   return (
-    <Grid
-      items={[
-        <TitleHeader title='Listă camioane retur' />,
-        <Grid
-          hasPaper={true}
-          items={[
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Magazin'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează magazin',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Hub'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează hub',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Depozit / Funizor'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează depozit/funizor',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Traseu'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează traseu',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Numär inmatriculare'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Retur ambalaje'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează retur ambalaje',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Sigiliu'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Aviz magazin'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Status'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează status',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Societatea'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează societatea',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Datǎ inregistrare'
-              variant='outlined'
-              style={{ width: '100%' }}
-              value={'28/11/2023'}
-            />,
-            <Input
-              type='text'
-              onChange={event => null}
-              label='Datǎ expeditie'
-              variant='outlined'
-              style={{ width: '100%' }}
-              value={'28/11/2023'}
-            />
-          ]}
-          itemsPerRow={4}
-        />,
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          newButton={null}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            {
-              label: 'Export',
-              icon: <DownloadIcon />,
-              onClick: null
+    <div className={s.mainContainer}>
+      <Table
+        hideCheckbox
+        columns={columns}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+        toolbarActions={[
+          {
+            label: 'Export',
+            icon: <DownloadIcon />,
+            onClick: exportFile
+          }
+        ]}
+        rowActions={[
+          {
+            label: 'Detalii',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#16a085',
+            desktopIcon: <ViewActionIcon />,
+            onClick: (e, rowId) => {
+              navigate(`/shop-reception/package/trucksReturn/${rowId}`)
             }
-          ]}
-        />
-      ]}
-      itemsPerRow={1}
-    />
+          }
+        ]}
+        rowActionsWidth="130px"
+        filters={filters}
+        filtersButtonLabel="Filtre"
+        filtersLabel="Filtre"
+        appliedFiltersLabel="Filtre aplicate"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
+      />
+    </div>
   )
 }
 

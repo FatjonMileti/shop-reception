@@ -1,47 +1,39 @@
-import { Grid } from '../../../Common/Grid'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Table } from '../../../../core-ui/Table'
-import { columns } from './helpers'
+import { columns, drawerFilters } from './helpers'
 import { useState } from 'react'
-import { makeCoreGetRequest } from '../../../../../utils/api'
-import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { formatErrorMessage } from '../../../../../utils/formatting'
-import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../Common/TitleHeader'
+import sModal from 'components/core-ui/Modal/Modal.modules.scss'
+import s from '../../../commonStyles.modules.scss'
+import { useNotification } from 'hooks'
+import { makeCoreGetFileRequest, makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { formatErrorMessage } from 'utils/formatting'
+import { Table } from 'components/core-ui/Table'
+import { useQuery } from 'react-query'
+import { Modal } from 'components/core-ui/Modal'
+import { Grid } from '@mui/material'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import { DownloadIcon } from 'icons'
+import { formatAndDownloadResponse } from 'utils/helpers'
+import { getDepositOptions, getShopOptions } from '../../api'
 
 const UnorderedProducts = () => {
-  const [tableItems, setTableItems] = useState<UnorderedProducts[]>([
-    {
-      id: 1,
-      warehouse: 'DEPOZIT BACAU',
-      store: 'ORHIDEEA (3)',
-      deliverySlip: '675381',
-      productCode: '675381',
-      productName: '',
-      productEan: '',
-      qualitativeQuantity: '',
-      defectiveQuantity: '',
-      failureReason: '',
-      supportCode: '',
-      receptionDate: '',
-      receptionOperator: '',
-      resolved: 'În procesare',
-      resolvedDate: '24-11-2023 / 14:59',
-      resolvedOperator: ''
-    }
-  ])
+  const { showNotification } = useNotification()
+
+  const [tableItems, setTableItems] = useState<UnorderedProducts[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<UnorderedProducts>()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const { showNotification } = useNotification()
+
+  const closeModal = () => setIsOpen(false)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/reception-mobile-api/rm-api/truck/list',
+          url: '/shop-reception/unexpectedReceptionProduct',
           tableFilters,
           page,
           rowsPerPage,
@@ -50,9 +42,7 @@ const UnorderedProducts = () => {
         })
       )
 
-      const responseList = response.list
-
-      setTableItems(toTableRowItems(responseList))
+      setTableItems(toTableRowItems(response.unexpectedReceptionList))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -63,106 +53,97 @@ const UnorderedProducts = () => {
     }
   }
 
+  const markAsResolved = id => {
+    setSelectedRow(id)
+    setIsOpen(true)
+  }
+
+  const { isLoading: isResolveProductLoading, refetch: resolveProduct } = useQuery(
+    ['resolve-product'],
+    async id => {
+      await makeCoreGetRequest(`/shop-reception/unexpectedReceptionProduct/${selectedRow.id}`)
+      setShouldRefreshData(true)
+      closeModal()
+
+      return
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la rezolvarea produsului. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: false
+    }
+  )
+
+  const exportFile = async (tableState, e) => {
+    const { filters, order, orderBy } = tableState
+    const url = toTableGETUrl({
+      url: '/shop-reception/unexpectedReceptionProduct/export',
+      tableFilters: filters,
+      order,
+      orderBy
+    })
+
+    try {
+      const response = await makeCoreGetFileRequest(url, {
+        responseType: 'blob'
+      })
+      formatAndDownloadResponse(response)
+    } catch (error) {
+      showNotification({
+        message: `Error while download file. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const { data: depositOptions } = getDepositOptions(showNotification)
+  const { data: shopOptions } = getShopOptions(showNotification)
+
   return (
-    <Grid
-      items={[
-        <TitleHeader title='Produse necomandate' />,
-        <Grid
-          items={[
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Depozit'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează depozit',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Magazin'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează magazin',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Cod produs'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Cod suport'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />,
-            <Input
-              type='select'
-              onChange={event => null}
-              label='Rezolvat'
-              variant='outlined'
-              style={{ width: '100%' }}
-              values={[
-                {
-                  label: 'Selectează Rezolvat',
-                  value: 'none'
-                }
-              ]}
-              value={'none'}
-            />,
-            <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Bon livrare'
-              variant='outlined'
-              style={{ width: '100%' }}
-            />
-          ]}
-          itemsPerRow={4}
-        />,
-        <Table
-          hideCheckbox
-          orderBy='role'
-          order='asc'
-          columns={columns}
-          items={tableItems}
-          fetchData={() => {}}
-          isLoading={isLoading}
-          totalCount={totalCount}
-          newButton={null}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-          rowActions={[]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            // {
-            //   label: "Adauga",
-            //   icon: <AddIcon />,
-            //   onClick: null
-            // }
-          ]}
-        />
-      ]}
-      itemsPerRow={1}
-    />
+    <div className={s.mainContainer}>
+      <Modal
+        isModalOpen={isOpen}
+        closeModal={closeModal}
+        modalTitle={`Doriti rezolvarea pentru produsul ${selectedRow?.productName}?`}
+        modalWidth="50%"
+      >
+        <Grid xs={12} item className={sModal.modalButtons}>
+          <Button variant="outlined" label="Nu" onClick={() => closeModal()} />
+          <Button variant="contained" label={'Da'} onClick={() => resolveProduct()} />
+        </Grid>
+      </Modal>
+      <Table
+        hideCheckbox
+        orderBy="id"
+        order="desc"
+        columns={columns(markAsResolved)}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+        rowActions={[]}
+        rowActionsWidth="130px"
+        toolbarActions={[
+          {
+            label: 'Export',
+            icon: <DownloadIcon />,
+            onClick: exportFile
+          }
+        ]}
+        filters={drawerFilters(shopOptions, depositOptions)}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
+      />
+    </div>
   )
 }
 

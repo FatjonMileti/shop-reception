@@ -1,33 +1,26 @@
-import { Grid } from '../../../Common/Grid'
-import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
-import { Add as AddIcon } from '@mui/icons-material'
 import { useState } from 'react'
-import { makeCoreGetRequest } from '../../../../../utils/api'
-import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { formatErrorMessage } from '../../../../../utils/formatting'
-import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../Common/TitleHeader'
 import { AdminRegionForm } from './AdminRegionForm'
+import s from '../../../commonStyles.modules.scss'
+import { AddActionIcon, EditActionIcon } from 'icons'
+import { useNotification } from 'hooks'
+import { makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { formatErrorMessage } from 'utils/formatting'
+import { Table } from 'components/core-ui/Table'
 
 const AdminRegions = () => {
-  const [tableItems, setTableItems] = useState<AdminRegion[]>([
-    {
-      id: 1,
-      regionCode: '1',
-      name: 'Regiune Sorin Panescu',
-      regionManager: 'sorin_panescu',
-      active: true
-    }
-  ])
-  const [totalCount, setTotalCount] = useState<number>(0)
+  const { showNotification } = useNotification()
+
+  const [tableItems, setTableItems] = useState<AdminRegion[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<AdminRegion>()
+
   const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<AdminRegion>()
-  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
-  const { showNotification } = useNotification()
 
   const openNewModal = (): void => setIsNewModalOpen(true)
   const closeNewModal = (): void => setIsNewModalOpen(false)
@@ -40,9 +33,7 @@ const AdminRegions = () => {
 
   const selectRow = (rowId: number | string) => {
     const row = tableItems.find(item => item.id === rowId)
-    if (row) {
-      setSelectedRow(row)
-    }
+    if (row) setSelectedRow(row)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -50,7 +41,7 @@ const AdminRegions = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/reception-mobile-api/rm-api/truck/list',
+          url: '/shop-reception/regions',
           tableFilters,
           page,
           rowsPerPage,
@@ -66,68 +57,62 @@ const AdminRegions = () => {
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
   }
 
   return (
-    <Grid
-      items={[
-        <TitleHeader title='Administrare regiuni' />,
-        <>
-          <AdminRegionForm
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <AdminRegionForm
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            setShouldRefreshData={setShouldRefreshData}
-            editItem={selectedRow}
-            isEdit
-          />
-          <Table
-            hideCheckbox
-            orderBy='role'
-            order='asc'
-            columns={columns}
-            items={tableItems}
-            fetchData={() => {
-            }}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            newButton={{
-              onClick: (): void => {
-                openNewModal()
-              }
-            }}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            rowActions={[
-              {
-                label: 'Edit',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#16a085',
-                onClick: (e, rowId) => openEditModal(rowId)
-              }
-            ]}
-            rowActionsWidth='130px'
-            toolbarActions={[
-              {
-                label: 'Regiune',
-                icon: <AddIcon />,
-                onClick: openNewModal
-              }
-            ]}
-          />
-        </>
-      ]}
-      itemsPerRow={1}
-    />
+    <div className={s.mainContainer}>
+      <AdminRegionForm
+        isModalOpen={isNewModalOpen}
+        closeModal={closeNewModal}
+        setShouldRefreshData={setShouldRefreshData}
+      />
+      <AdminRegionForm
+        isModalOpen={isEditModalOpen}
+        closeModal={closeEditModal}
+        setShouldRefreshData={setShouldRefreshData}
+        editItem={selectedRow}
+        isEdit
+      />
+      <Table
+        hideCheckbox
+        orderBy="code"
+        order="asc"
+        columns={columns}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+        rowActions={[
+          {
+            label: 'Edit',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#16a085',
+            desktopIcon: <EditActionIcon />,
+            onClick: (e, rowId) => openEditModal(rowId)
+          }
+        ]}
+        rowActionsWidth="130px"
+        toolbarActions={[
+          {
+            label: 'Regiune',
+            icon: <AddActionIcon />,
+            onClick: openNewModal
+          }
+        ]}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
+      />
+    </div>
   )
 }
 

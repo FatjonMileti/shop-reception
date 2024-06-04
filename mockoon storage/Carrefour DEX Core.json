@@ -5738,7 +5738,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "shops/types",
+      "endpoint": "products/types",
       "responses": [
         {
           "uuid": "e0fd84ba-6ccc-4e27-8d6d-fa0033614a4c",
@@ -5908,35 +5908,6 @@
       "responseMode": null
     },
     {
-      "uuid": "917b4938-4d96-4708-bdbb-07e38e3b2fc9",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "hubs/types",
-      "responses": [
-        {
-          "uuid": "9dc240f0-a746-4461-9c25-db1ff49f9891",
-          "body": "[\n  \"HUB\", \"HUB2\"\n]",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null
-    },
-    {
       "uuid": "4ef150b5-07b0-476a-abe9-7a3a468b105d",
       "type": "http",
       "documentation": "",
@@ -6004,6 +5975,586 @@
         {
           "uuid": "b45e99a7-7ed3-4d7a-b94b-513f55f9e473",
           "body": "[\n  {\n    \"receiveFromDeposit\": true,\n    \"depositId\": 0,\n    \"depositName\": \"string\",\n    \"depositCode\": \"string\",\n    \"monday\": true,\n    \"tuesday\": true,\n    \"wednesday\": true,\n    \"thursday\": true,\n    \"friday\": true,\n    \"saturday\": true,\n    \"sunday\": true,\n    \"startInterval\": \"string\",\n    \"endInterval\": \"string\"\n  },\n  \n  {\n    \"receiveFromDeposit\": false,\n    \"depositId\": 1,\n    \"depositName\": \"string\",\n    \"depositCode\": \"string\",\n    \"monday\": false,\n    \"tuesday\": true,\n    \"wednesday\": true,\n    \"thursday\": true,\n    \"friday\": true,\n    \"saturday\": true,\n    \"sunday\": true,\n    \"startInterval\": \"string\",\n    \"endInterval\": \"string\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "47283e28-315b-4d50-bd8e-31ed3f922dbd",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "unexpectedReceptionProduct",
+      "responses": [
+        {
+          "uuid": "bdc060ec-3bd3-4eba-9122-876d07e683d0",
+          "body": "{\n  \"unexpectedReceptionList\": [\n    {\n      \"id\": 0,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": true,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    },\n    {\n      \"id\": 1,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": false,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    },\n    {\n      \"id\": 2,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": false,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "56cdb5e9-a53d-4383-bf64-83abee595210",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "unexpectedReceptionProduct/export",
+      "responses": [
+        {
+          "uuid": "6878a7d2-6497-4093-983c-f0e466f1263c",
+          "body": "{\n  \"unexpectedReceptionList\": [\n    {\n      \"id\": 0,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": true,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    },\n    {\n      \"id\": 1,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": false,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    },\n    {\n      \"id\": 2,\n      \"depositName\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"productEan\": \"string\",\n      \"validatedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"defectReason\": \"string\",\n      \"externalSupportCode\": \"string\",\n      \"deliveryTicketExternalId\": \"string\",\n      \"created\": \"string\",\n      \"createdBy\": \"string\",\n      \"resolved\": false,\n      \"updated\": \"string\",\n      \"lastUpdateBy\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "123dc19d-67e4-4ea7-96ba-3eeb679c02f5",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "sensitives",
+      "responses": [
+        {
+          "uuid": "cf81b347-0876-48dd-bf9b-7de664747a0e",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"shopCode\": \"ALL\",\n      \"shopName\": \"string\",\n      \"prodName\": \"string\",\n      \"ubName\": \"string\",\n      \"sfaName\": \"string\",\n      \"famName\": \"string\",\n      \"rayName\": \"string\",\n      \"shopType\": {\n        \"key\": \"ALL\",\n        \"value\": \"string\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "383cf6a2-9fb6-43bf-8f6a-be7bded414fc",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "products/meti-rayons",
+      "responses": [
+        {
+          "uuid": "0ef12f51-adb6-4b1f-89ad-591964d67fc2",
+          "body": "[\n  {\n    \"code\": \"raion\",\n    \"displayValue\": \"raion 1\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "13c1fea6-16c5-41c3-81e5-f702856e30af",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "products/meti-families",
+      "responses": [
+        {
+          "uuid": "997b8abc-76ec-46f2-acf3-c4d7da57dccf",
+          "body": "[\n  {\n    \"code\": \"fam\",\n    \"displayValue\": \"fam 1\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "62a6532e-cfcb-4c04-b11c-02945ac27cbb",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "products/meti-sub-families",
+      "responses": [
+        {
+          "uuid": "8a08f665-153e-4a98-bdc0-082f86b33e5a",
+          "body": "[\n  {\n    \"code\": \"sfam\",\n    \"displayValue\": \"sfam 1\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "6968dd79-03db-4a5a-b525-f9eaec804a68",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "products/meti-ubs",
+      "responses": [
+        {
+          "uuid": "9853c9dd-d262-42e1-b4d5-f36952351b75",
+          "body": "[\n  {\n    \"code\": \"ub\",\n    \"displayValue\": \"ub 1\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "f73df85b-0784-4ac9-88b1-6bdffd9c8304",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "regions",
+      "responses": [
+        {
+          "uuid": "9267e1cb-ec69-4ab0-82d1-f733c5ce3d0a",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"responsible\": \"string\",\n      \"active\": true\n    },\n    {\n      \"id\": 1,\n      \"code\": \"string 2\",\n      \"name\": \"string 2\",\n      \"responsible\": \"string 2\",\n      \"active\": false\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "82d3582e-63bf-4c5d-a5f6-6f262e7dadd2",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "regions/:id/shops",
+      "responses": [
+        {
+          "uuid": "07705fc0-0fec-4d7d-84c7-5e4fff614e40",
+          "body": "[\n  {\n    \"id\": 0,\n    \"metiCode\": \"string\",\n    \"metiName\": \"string\",\n    \"responsible\": \"string\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ea5ffeff-193e-48df-87b7-8b4c01149d1e",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "regions/responsible",
+      "responses": [
+        {
+          "uuid": "b7b9f0f9-1377-402b-87a8-95a30b5b8b2a",
+          "body": "[\n  \"string\", \"string2\", \"string3\"\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "eadade02-a96b-4338-b15a-ba310ff79440",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "short-dlc",
+      "responses": [
+        {
+          "uuid": "2b0a8324-b7bc-4c82-bdad-c9cf14c8b869",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"shopCode\": \"string\",\n      \"shopName\": \"string\",\n      \"prodName\": \"string\",\n      \"ubName\": \"string\",\n      \"sfaName\": \"string\",\n      \"famName\": \"string\",\n      \"rayName\": \"string\",\n      \"shopType\": {\n        \"key\": \"ALL\",\n        \"value\": \"string\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "68506c41-5991-44c1-8458-9523906a1c75",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "scan-types",
+      "responses": [
+        {
+          "uuid": "d0d8b62f-2eef-4f40-ad7c-306fe317b60e",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"active\": true,\n      \"start\": \"2024-03-21\",\n      \"end\": \"2024-03-21\",\n      \"shopType\": {\n        \"key\": \"ALL\",\n        \"value\": \"string\"\n      },\n      \"regionName\": \"string\",\n      \"shopCode\": \"string\",\n      \"shopName\": \"string\",\n      \"type\": {\n        \"key\": \"SENSIBLE_PRODUCTS\",\n        \"value\": \"string\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "9a297d02-2633-48c5-ad09-9c14664a387d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "scan-types/types",
+      "responses": [
+        {
+          "uuid": "b98bd0ce-256f-4ba0-ae69-ecdd7b6554e0",
+          "body": "[\n  {\n    \"key\": \"SENSIBLE_PRODUCTS\",\n    \"value\": \"string\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "a6a275dc-ff71-44ad-8325-babd8e627d7f",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "scan-types/rule-organisation-types",
+      "responses": [
+        {
+          "uuid": "04732389-54a6-45cb-bc08-b9316727fcb3",
+          "body": "[\n  {\n    \"key\": \"ALL\",\n    \"value\": \"string\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "3ea20e9d-3e97-4c4d-b462-2ce5ba9cf669",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "validity-limit",
+      "responses": [
+        {
+          "uuid": "e698d930-0ddd-47ae-9fb1-6396f9d46cb0",
+          "body": "{\n  \"list\": [\n    {\n      \"sfaCode\": \"string\",\n      \"sfaName\": \"string\",\n      \"famCode\": \"string\",\n      \"famName\": \"string\",\n      \"rayCode\": \"string\",\n      \"rayName\": \"string\",\n      \"validityLimit\": 0\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "9bbdde57-ce99-4914-90f0-59556ef142e6",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "meti-products",
+      "responses": [
+        {
+          "uuid": "92e5bfd6-aea3-4594-a3aa-0d9b5d8677d9",
+          "body": "{\n  \"list\": [\n    {\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"lifetimeDays\": 0,\n      \"rayon\": \"string\",\n      \"family\": \"string\",\n      \"subFamily\": \"string\",\n      \"validityLimit\": 0\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ce8f2b92-c79b-4655-afdc-f70f3fe054cb",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "products/measurement-units",
+      "responses": [
+        {
+          "uuid": "e5bb5f7c-83e0-4e24-86cb-30c312891d7d",
+          "body": "[\n  {\n    \"key\": \"string\",\n    \"value\": \"string\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "f03cafa8-b1dc-4ebc-a705-6f29b2b90053",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "productWithDifference",
+      "responses": [
+        {
+          "uuid": "96471dd5-e5a5-4be7-89d0-51bc0567a2bb",
+          "body": "{\n  \"productWithDifferenceList\": [\n    {\n      \"id\": 0,\n      \"externalTicketId\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"depositName\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"originalOrderId\": \"string\",\n      \"metiOrderId\": \"string\",\n      \"measureUnit\": \"string\",\n      \"transportCode\": \"string\",\n      \"orderedQuantity\": 0,\n      \"receivedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"receptionDeviation\": 0,\n      \"stockQuantity\": 0,\n      \"missingQuantity\": 0,\n      \"transporterCode\": \"string\",\n      \"metiSentDate\": \"string\",\n      \"integrationOperator\": \"string\",\n      \"archivePath\": \"string\"\n    }, {\n      \"id\": 1,\n      \"externalTicketId\": \"string\",\n      \"shopName\": \"string\",\n      \"shopCode\": \"string\",\n      \"depositName\": \"string\",\n      \"productCode\": \"string\",\n      \"productName\": \"string\",\n      \"originalOrderId\": \"string\",\n      \"metiOrderId\": \"string\",\n      \"measureUnit\": \"string\",\n      \"transportCode\": \"string\",\n      \"orderedQuantity\": 0,\n      \"receivedQuantity\": 0,\n      \"brokenQuantity\": 0,\n      \"receptionDeviation\": 0,\n      \"stockQuantity\": 0,\n      \"missingQuantity\": 0,\n      \"transporterCode\": \"string\",\n      \"metiSentDate\": \"string\",\n      \"integrationOperator\": \"string\",\n      \"archivePath\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "8634af3e-6b55-47ae-8050-c239119c424d",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "support-types",
+      "responses": [
+        {
+          "uuid": "1ec20705-ec71-4243-94d5-9f5922ec3fc1",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"code\": \"string\",\n      \"externalCode\": \"string\",\n      \"name\": \"string\",\n      \"main\": true,\n      \"combined\": true,\n      \"missing\": true,\n      \"active\": true,\n      \"alternativeCodes\": \"string\",\n      \"returnable\": true\n    },\n     {\n      \"id\": 1,\n      \"code\": \"string2\",\n      \"externalCode\": \"string2\",\n      \"name\": \"string2\",\n      \"main\": true,\n      \"combined\": true,\n      \"missing\": true,\n      \"active\": true,\n      \"alternativeCodes\": \"string2\",\n      \"returnable\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "42c1b8b4-4f4f-4d12-b8cd-a637d4163f00",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shop-reception/deposits",
+      "responses": [
+        {
+          "uuid": "0596408f-9e49-41fc-ac02-b90a2582a578",
+          "body": "{\n  \"list\": [\n    {\n      \"id\": 0,\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"validityPercentage\": 0,\n      \"active\": true\n    }\n  ],\n  \"page\": {\n    \"pageSize\": 10,\n    \"page\": 0,\n    \"totalCount\": 0,\n    \"pageCount\": 1\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -6311,10 +6862,6 @@
     },
     {
       "type": "route",
-      "uuid": "917b4938-4d96-4708-bdbb-07e38e3b2fc9"
-    },
-    {
-      "type": "route",
       "uuid": "4ef150b5-07b0-476a-abe9-7a3a468b105d"
     },
     {
@@ -6324,6 +6871,86 @@
     {
       "type": "route",
       "uuid": "2146dee1-f09f-4a52-bbf8-2af0d0bf2e9b"
+    },
+    {
+      "type": "route",
+      "uuid": "47283e28-315b-4d50-bd8e-31ed3f922dbd"
+    },
+    {
+      "type": "route",
+      "uuid": "56cdb5e9-a53d-4383-bf64-83abee595210"
+    },
+    {
+      "type": "route",
+      "uuid": "123dc19d-67e4-4ea7-96ba-3eeb679c02f5"
+    },
+    {
+      "type": "route",
+      "uuid": "383cf6a2-9fb6-43bf-8f6a-be7bded414fc"
+    },
+    {
+      "type": "route",
+      "uuid": "13c1fea6-16c5-41c3-81e5-f702856e30af"
+    },
+    {
+      "type": "route",
+      "uuid": "62a6532e-cfcb-4c04-b11c-02945ac27cbb"
+    },
+    {
+      "type": "route",
+      "uuid": "6968dd79-03db-4a5a-b525-f9eaec804a68"
+    },
+    {
+      "type": "route",
+      "uuid": "f73df85b-0784-4ac9-88b1-6bdffd9c8304"
+    },
+    {
+      "type": "route",
+      "uuid": "82d3582e-63bf-4c5d-a5f6-6f262e7dadd2"
+    },
+    {
+      "type": "route",
+      "uuid": "ea5ffeff-193e-48df-87b7-8b4c01149d1e"
+    },
+    {
+      "type": "route",
+      "uuid": "eadade02-a96b-4338-b15a-ba310ff79440"
+    },
+    {
+      "type": "route",
+      "uuid": "68506c41-5991-44c1-8458-9523906a1c75"
+    },
+    {
+      "type": "route",
+      "uuid": "9a297d02-2633-48c5-ad09-9c14664a387d"
+    },
+    {
+      "type": "route",
+      "uuid": "a6a275dc-ff71-44ad-8325-babd8e627d7f"
+    },
+    {
+      "type": "route",
+      "uuid": "3ea20e9d-3e97-4c4d-b462-2ce5ba9cf669"
+    },
+    {
+      "type": "route",
+      "uuid": "9bbdde57-ce99-4914-90f0-59556ef142e6"
+    },
+    {
+      "type": "route",
+      "uuid": "ce8f2b92-c79b-4655-afdc-f70f3fe054cb"
+    },
+    {
+      "type": "route",
+      "uuid": "f03cafa8-b1dc-4ebc-a705-6f29b2b90053"
+    },
+    {
+      "type": "route",
+      "uuid": "8634af3e-6b55-47ae-8050-c239119c424d"
+    },
+    {
+      "type": "route",
+      "uuid": "42c1b8b4-4f4f-4d12-b8cd-a637d4163f00"
     }
   ],
   "proxyMode": false,

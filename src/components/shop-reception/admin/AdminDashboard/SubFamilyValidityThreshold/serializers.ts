@@ -1,10 +1,11 @@
-export const toTableRowItems = (items: SubFamilyValidityThreshold[]) => items.map((item: SubFamilyValidityThreshold) => ({
-  id: item.id,
-  subfamilyCode: item.subfamilyCode,
-  familyCode: item.familyCode,
-  subfamily: item.subfamily,
-  family: item.family,
-  districtCode: item.districtCode,
-  district: item.district,
-  validityThreshold: item.validityThreshold
-}))
+export const toTableRowItems = (items: SubFamilyValidityThreshold[]) =>
+  items.map((item: SubFamilyValidityThreshold) => ({
+    id: item.id,
+    sfaCode: item.sfaCode || '',
+    sfaName: item.sfaName || '',
+    famCode: item.famCode || '',
+    famName: item.famName || '',
+    rayCode: item.rayCode || '',
+    rayName: item.rayName || '',
+    validityLimit: item.validityLimit || 0
+  }))

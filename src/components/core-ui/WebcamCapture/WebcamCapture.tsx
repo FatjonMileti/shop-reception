@@ -21,10 +21,10 @@ const WebcamCapture = props => {
     <>
       <Webcam
         audio={false}
-        height={videoConstraints.height || defaultVideoConstraints.height}
+        height={videoConstraints?.height || defaultVideoConstraints.height}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={videoConstraints.width || defaultVideoConstraints.width}
+        width={videoConstraints?.width || defaultVideoConstraints.width}
         videoConstraints={videoConstraints || defaultVideoConstraints}
       />
       <button onClick={capture}>Capture photo</button>
