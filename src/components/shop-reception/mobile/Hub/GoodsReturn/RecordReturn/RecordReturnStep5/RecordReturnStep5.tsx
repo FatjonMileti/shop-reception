@@ -1,14 +1,13 @@
 import { Grid } from '../../../../../Common/Grid'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from "../../../../Common/TitleHeader";
-import { Typography } from "@mui/material";
 import { useNotification } from "../../../../../../../hooks";
 import React, { useMemo, useState } from "react";
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from "../../../../../../../utils/formatting";
 import { toPayload } from './serializers'
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
 import ImageUpload from "../../../../Common/ImageUpload/ImageUpload";
@@ -18,10 +17,8 @@ const ContinueReturnDetailFinal = () => {
   const navigate = useNavigate()
   const [sealNumbers, setSealNumbers] = useState(['']);
   const [numFields, setNumFields] = useState(1)
-
-  const location = useLocation();
-
-  const id = location.state;
+  const [params] = useSearchParams();
+  const id = params.get('id');
 
   const { data: CRTruck, isLoading} = useQuery(
     'getTruck',
@@ -81,15 +78,15 @@ const ContinueReturnDetailFinal = () => {
   })
 
   const saveTruck = () => {
-    const sealList = sealNumbers.map(seal => ({
-      id: null,
-      code: seal,
-      type: null,
-      broken: null,
-      userMessage: null
-    }));
+    const sealList = [];
+
+    sealNumbers.forEach(seal => {
+      sealList.push(seal);
+    });
 
     const truck = {
+      "notice": CRTruck.truckNumber,
+      "stackNumber": CRTruck.stackNumber,
       sealList,
     };
 
@@ -114,9 +111,16 @@ const ContinueReturnDetailFinal = () => {
       maxWidth='xs'
       items={[
         <TitleHeader title='CONTINUARE RETUR CAMION' />,
-        <Typography variant='medium' component='p'>Numǎr camion: {CRTruck.truckNumber ? CRTruck.truckNumber : ''}</Typography>,
-        <Typography variant='medium' component='p'>Destinație: {CRTruck.depositName ? CRTruck.depositName : ''}</Typography>,
-        <Typography variant='medium' component='p'>Numǎr stive: {CRTruck.stackNumber}</Typography>,
+        <Grid
+          spacing={1}
+          hasPaper={true}
+          items={[
+            <Typography variant='medium' component='p'>Numǎr camion: {CRTruck.truckNumber ? CRTruck.truckNumber : ''}</Typography>,
+            <Typography variant='medium' component='p'>Destinație: {CRTruck.depositName ? CRTruck.depositName : ''}</Typography>,
+            <Typography variant='medium' component='p'>Numǎr stive: {CRTruck.stackNumber}</Typography>
+          ]}
+          itemsPerRow={1}
+        />,
         sealNumbers.map((sealNumber, idx) => (
           <div style={{ display: 'flex', marginTop: '20px' }}>
             <Input

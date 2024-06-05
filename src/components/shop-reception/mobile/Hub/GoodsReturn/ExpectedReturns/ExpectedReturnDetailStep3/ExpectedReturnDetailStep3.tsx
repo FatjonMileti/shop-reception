@@ -1,7 +1,7 @@
 import { Grid } from "../../../../../Common/Grid";
 import { Button, Input, Table, Typography } from "@fullscreendigital/carrefour-dex-fe";
 import { TitleHeader } from "../../../../Common/TitleHeader";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { URLS } from "../../../../constants";
 import { useQuery } from "react-query";
 import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
@@ -19,10 +19,11 @@ import AlertModal from "../../../../Common/AlertModal/AlertModal";
 const ExpectedReturnDetailStep3 = () => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
-  const location = useLocation();
   const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false);
   const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] });
-  const { parentId, truckId } = location.state;
+  const [params] = useSearchParams();
+  const  truckId = params.get('truckId');
+  const  parentId = params.get('parentId');
   let imgMessage = "Atasaţi imagini doveditoare! ";
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
@@ -38,18 +39,16 @@ const ExpectedReturnDetailStep3 = () => {
         let showTerminatButton = true;
 
         values.supportList.map((support: any) => {
-          if(!support.hasPhoto && support.confirmedSupportNumber != 0) {
-            console.log('hasPhoto: ', support.supportTypeName)
+          if (!support.hasPhoto && support.confirmedSupportNumber != 0) {
             message += support.supportTypeName + ', ';
             continueSubmit = false;
-            if(!(support.confirmedSupportNumber === 0))  showTerminatButton = false;
+            if (!(support.confirmedSupportNumber === 0)) showTerminatButton = false;
             openInvalidTruckNumberModal(message, showTerminatButton);
           }
         })
 
         showTerminatButton && values.supportList.map((support: any) => {
-          if(support.supportNumber != support.confirmedSupportNumber) {
-            console.log('aaaa: ', support.supportTypeName)
+          if (support.supportNumber != support.confirmedSupportNumber) {
             message += support.supportTypeName + ', ';
             continueSubmit = false;
             openInvalidTruckNumberModal(message, showTerminatButton)
@@ -67,10 +66,10 @@ const ExpectedReturnDetailStep3 = () => {
     }
   })
 
-  const { data: truck, isLoading} = useQuery(
+  const { data: truck, isLoading } = useQuery(
     'RDsupportList',
     async () => {
-      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/supportList/' + truckId  + '?parentId=' + parentId, null)
+      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/supportList/' + truckId + '?parentId=' + parentId, null)
       await formik.setFieldValue("supportList", truck.supportList)
       return truck
     },
@@ -85,7 +84,7 @@ const ExpectedReturnDetailStep3 = () => {
     }
   )
 
-  const { data: allSupportList, isLoading: isSupportListLoading} = useQuery(
+  const { data: allSupportList, isLoading: isSupportListLoading } = useQuery(
     'RDallSupportList',
     async () => {
       return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/allSupportList/' + truckId, null)
@@ -102,31 +101,44 @@ const ExpectedReturnDetailStep3 = () => {
   )
 
   const onContinueSubmit = async () => {
-    await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirmSupportList', formik.values.supportList, null);
-    navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL_FINAL, {state: truckId})
+    const payload = {
+      "parentId": truck.parentId,
+      "truckId": truck.truckId,
+      "truckNumber": truck.truckNumber,
+      "driverName": truck.driverName,
+      "shopNameAndCode": truck.shopNameAndCode,
+      "noticeNumber": truck.noticeNumber,
+      "nextId": truck.nextId,
+      "prevId": truck.prevId,
+      "stackNumber": truck.stackNumber,
+      "rollsNumber": truck.rollsNumber,
+      "supportList": formik.values.supportList,
+    }
+    await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirmSupportList', payload, null);
+    navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_FINAL}?id=${truckId}`)
   }
 
   const openInvalidTruckNumberModal = async (message, showTerminatButton) => {
     showTerminatButton ?
-    setInvalidTruckNumberModalContent({
-      title: 'Atenție!',
-      description: message,
-      buttons: [
-        {
-          label: 'Am terminat',
-          onClick: async () => {
-            await onContinueSubmit();
-            setIsInvalidTruckNumberModalOpen(false);
+      setInvalidTruckNumberModalContent({
+        title: 'Atenție!',
+        description: message,
+        buttons: [
+          {
+            label: 'Am terminat',
+            onClick: async () => {
+              await onContinueSubmit();
+              setIsInvalidTruckNumberModalOpen(false);
+            },
+            color: 'primary'
           },
-          color: 'primary'
-        },
-        {
-          label: 'Mai verific',
-          onClick: () => setIsInvalidTruckNumberModalOpen(false),
-          color: 'primary'
-        },
-      ]
-    }) :  setInvalidTruckNumberModalContent({
+          {
+            label: 'Mai verific',
+            onClick: () => setIsInvalidTruckNumberModalOpen(false),
+            color: 'primary'
+          },
+        ]
+      }) : setInvalidTruckNumberModalContent({
         title: 'Atenție!',
         description: message + imgMessage,
         buttons: [
@@ -214,14 +226,13 @@ const ExpectedReturnDetailStep3 = () => {
     supportTypeName: support.supportTypeName,
     confirmedSupportNumber: support.confirmedSupportNumber,
     hasPhoto: support.hasPhoto,
-    }))
+  }))
 
   const handleSelectChange = event => {
     const value = event.target.value;
     formik.setFieldValue('supportList', value);
   };
 
-  console.info('formik.values: ', formik.values)
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}

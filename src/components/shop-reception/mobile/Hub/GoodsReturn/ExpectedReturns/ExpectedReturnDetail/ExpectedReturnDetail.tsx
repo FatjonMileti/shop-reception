@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../../hooks'
 import { TitleHeader } from '../../../../Common/TitleHeader'
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { URLS } from '../../../../constants'
 import { useQuery } from "react-query";
 import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
@@ -14,9 +14,9 @@ import { getValidationSchema, initialValues } from './helpers'
 
 const ExpectedReturnDetail = () => {
   const { showNotification } = useNotification()
-  const location = useLocation();
   const navigate = useNavigate()
-  const truckId = location.state;
+  const [params] = useSearchParams();
+  const truckId = params.get('id')
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -44,7 +44,7 @@ const ExpectedReturnDetail = () => {
           })
         } else {
           await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirmTruck', payload, null);
-          navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2, {state: truckId})
+          navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2}?id=${truckId}`)
         }
 
 

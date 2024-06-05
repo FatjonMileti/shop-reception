@@ -14,6 +14,6 @@ export const columns: Array<TableHeaderType> = [
   {
     title: 'Număr  ambalaje',
     field: 'supportNumber',
-    align: 'left'
+    align: 'center'
   },
 ]

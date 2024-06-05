@@ -10,6 +10,8 @@ import { InProgressReturnTrucks } from './Shop/GoodsReturn/InProgressReturnTruck
 import { Step5 } from './Shop/GoodsReturn/Step5'
 import { ExpectedTrucks } from './Hub/GoodsReturn/ExpectedTrucks'
 import { RegisterTruck } from './Hub/GoodsReception/RegisterTruck'
+import { RegisterTruckStep2 } from "./Hub/GoodsReception/RegisterTruck/RegisterTruckStep2";
+import { RegisterTruckStep3 } from "./Hub/GoodsReception/RegisterTruck/RegisterTruckStep3";
 import { ExpenditureProcessing } from './Hub/GoodsReception/ExpenditureProcessing'
 import { ShippedTrucks } from './Hub/GoodsReception/ShippedTrucks'
 import { ExpectedReturns } from './Hub/GoodsReturn/ExpectedReturns'
@@ -89,6 +91,26 @@ export const useMerchandiseRoutes = applicationPages => {
           />
         }
       />
+        <Route
+          path={URLS.AUTH_REGISTER_TRUCK_STEP_2}
+          element={
+              <PrivateRoute
+                component={RegisterTruckStep2}
+                applicationPages={applicationPages}
+                checkIsAuthorized
+              />
+          }
+        />
+        <Route
+          path={URLS.AUTH_REGISTER_TRUCK_STEP_3}
+          element={
+              <PrivateRoute
+                component={RegisterTruckStep3}
+                applicationPages={applicationPages}
+                checkIsAuthorized
+              />
+          }
+        />
       <Route
         path={URLS.AUTH_PROCESSING_SHIPMENT}
         element={

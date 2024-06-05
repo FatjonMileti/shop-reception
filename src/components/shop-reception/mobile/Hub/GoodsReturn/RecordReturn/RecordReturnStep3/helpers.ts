@@ -3,7 +3,7 @@ import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/co
 export const columns: Array<TableHeaderType> = [
   {
     title: 'Numar aviz',
-    field: 'noticeNumber',
+    field: 'id',
     align: 'left'
   },
   {

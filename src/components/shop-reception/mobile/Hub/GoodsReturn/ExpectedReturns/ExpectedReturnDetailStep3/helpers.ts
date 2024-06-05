@@ -10,7 +10,7 @@ export const getValidationSchema = () =>
         supportTypeNameAndCode: Yup.string().nullable(),
         supportNumber: Yup.number(),
         hasPhoto: Yup.boolean(),
-        confirmedSupportNumber: Yup.number(),
+        confirmedSupportNumber: Yup.number().min(0),
         }
       )
     )
