@@ -19,8 +19,8 @@ const ContinueReturnDetail = () => {
   const truckId = params.get('id')
 
 
-  const { data: CRTruck, isLoading} = useQuery(
-    'getTruckById',
+  const { data: noticeList, isLoading} = useQuery(
+    'getNoticeList',
     async () => {
       return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/getNoticeList/' + truckId, null)
     },
@@ -34,10 +34,10 @@ const ContinueReturnDetail = () => {
     }
   )
 
-  const { data: noticeList, isLoading: isNoticeListLoading} = useQuery(
+  const { data: CRTruck, isLoading: isNoticeListLoading} = useQuery(
     'CReturnDetails',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/exit/getTruckModel/' + truckId, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getTruckModel/' + truckId, null)
     },
     {
       onError: error => {
@@ -50,7 +50,7 @@ const ContinueReturnDetail = () => {
   )
 
   const calculateTotal = (data) => {
-    return data.reduce((sum, item) => sum + parseInt(item.truckNumber, 10), 0)
+    return data?.reduce((sum, item) => sum + parseInt(item.stackNumber, 10), 0)
   }
 
   if (isLoading || isNoticeListLoading) {
@@ -68,7 +68,7 @@ const ContinueReturnDetail = () => {
           hasPaper={true}
           items={[
             <Typography variant='medium' component='p'>Numǎr camion: {truckId}</Typography>,
-            <Typography variant='medium' component='p'>Destinație: {CRTruck[0].shopName ? CRTruck[0].shopName : ''}</Typography>
+            <Typography variant='medium' component='p'>Destinație: {CRTruck.depositOrHubName ? CRTruck.depositOrHubName : ''}</Typography>
           ]}
           itemsPerRow={1}
         />,

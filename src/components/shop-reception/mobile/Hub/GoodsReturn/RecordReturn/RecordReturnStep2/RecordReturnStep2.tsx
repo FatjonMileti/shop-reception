@@ -31,7 +31,7 @@ const RecordReturnDetail = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const payload = formik.values.blList.map(bl => bl.noticeNumber);
+        const payload = formik.values.blList.map(bl => bl.id);
         await makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/saveNoticeList/' + truckId, payload, null);
         navigate(`${URLS.AUTH_RECORD_RETURN_STEP_3}?id=${truckId}`)
 

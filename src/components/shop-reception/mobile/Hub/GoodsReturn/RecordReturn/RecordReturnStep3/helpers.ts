@@ -8,12 +8,12 @@ export const columns: Array<TableHeaderType> = [
   },
   {
     title: 'Magazin',
-    field: 'depositOrHubName',
+    field: 'shopName',
     align: 'left'
   },
   {
     title: 'Numar stive',
-    field: 'truckNumber',
+    field: 'stackNumber',
     align: 'left'
   },
 ]

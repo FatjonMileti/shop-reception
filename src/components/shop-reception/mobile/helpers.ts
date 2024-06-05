@@ -17,15 +17,15 @@ export const getTitle = () => {
   };
 
   const fetchShopName = async () => {
-    return await makeCoreGetRequest('/shop-reception-mobile/getShopName', null);
+    return await makeCoreGetRequest('/shop-reception-mobile/home/getShopName', null);
   };
 
   const fetchHubName = async () => {
-    return await makeCoreGetRequest('/shop-reception-mobile/getHubName', null);
+    return await makeCoreGetRequest('/shop-reception-mobile/home/getHubName', null);
   };
 
   const fetchDepositName = async () => {
-    return await makeCoreGetRequest('/shop-reception-mobile/getDepositName', null);
+    return await makeCoreGetRequest('/shop-reception-mobile/home/getDepositName', null);
   };
 
   const { data: shopName } = useQuery('getShopName', fetchShopName, {
