@@ -78,7 +78,7 @@ const Alert = () => {
           </Grid>
 
           <Grid item mb={2}>
-            <FormInfoItems items={infoItems} style={{ backgroundColor: '#fff' }} />
+            <FormInfoItems items={infoItems} />
           </Grid>
 
           <Grid item mb={1}>
@@ -110,7 +110,6 @@ const Alert = () => {
                     style={{ width: '100%', marginBottom: '16px' }}
                     error={!!formik.errors.comment}
                     helperText={formik.errors.comment as string}
-                    required
                     rows={3}
                   />
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -122,7 +121,7 @@ const Alert = () => {
                       size="large"
                       sx={{ marginBottom: '16px' }}
                     />
-                    <Button variant="contained" label="Inchide alert" onClick={() => {}} />
+                    <Button variant="contained" label="Salveaza" onClick={() => {}} />
                   </Box>
                 </>
               }

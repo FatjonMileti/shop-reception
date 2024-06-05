@@ -5,6 +5,8 @@ import s from './FormInfoItems.modules.scss'
 interface FormItem {
   label: string
   name: string
+  labelStyle?: any
+  valueStyle?: any
   render?: (item: FormItem) => React.JSX.Element
 }
 
@@ -20,8 +22,10 @@ const FormInfoItems: React.FC<FormInfoItemsProps> = props => {
     <Box className={s.list} style={style}>
       {items.map((item: FormItem) => (
         <Box key={item.name} className={s.item}>
-          <Box className={s.label}>{item.label}</Box>
-          <Box className={s.value} title={item.name}>
+          <Box className={s.label} style={item.labelStyle || {}}>
+            {item.label}
+          </Box>
+          <Box className={s.value} title={item.name} style={item.valueStyle || {}}>
             {item?.render ? item.render(item) : item.name}
           </Box>
         </Box>
