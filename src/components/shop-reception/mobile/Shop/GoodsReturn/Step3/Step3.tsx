@@ -25,7 +25,7 @@ const Step3 = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      const supportList = values.supportList.map(support => ({
+      const supportList = values.supportList?.map(support => ({
         supportTypeId: support.supportTypeId,
         supportNumber: support.supportNumber
       }));
@@ -80,7 +80,7 @@ const Step3 = () => {
           type="number"
           value={rowData.amount}
           onChange={(e) => {
-            const updatedSupportList = formik.values.supportList.map((support: any) => {
+            const updatedSupportList = formik.values.supportList?.map((support: any) => {
               if (support.supportTypeId === rowData.supportTypeId) {
                 return { ...support, supportNumber: (e.target as HTMLInputElement).value };
               }
@@ -94,7 +94,7 @@ const Step3 = () => {
     }
   ]
 
-  const rows = formik.values.supportList.map((support: any) => ({
+  const rows = formik.values.supportList?.map((support: any) => ({
     packagingType: support.supportTypeNameAndCode,
     amount: support.supportNumber,
     supportTypeId: support.supportTypeId

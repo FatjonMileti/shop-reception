@@ -35,7 +35,7 @@ const DeliverySensitiveProducts = () => {
       ]}
       itemsPerRow={1}
     />,
-    ...sensitiveProducts.map((item: any, index) => (
+    ...sensitiveProducts?.map((item: any, index) => (
       <SensitiveProduct onClick={() => {
         navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM)
       }} item={item} />

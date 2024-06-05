@@ -490,7 +490,7 @@ const DeliveryRandomProductFinal = () => {
           variant='outlined'
           width='100%'
           value={formik.values.mark}
-          values={marks.map((mark) => ({ value: mark, label: mark }))}
+          values={marks?.map((mark) => ({ value: mark, label: mark }))}
           onChange={event => {
             console.log(marks);
             formik.setFieldValue("mark", (event.target as HTMLInputElement).value);
@@ -506,7 +506,7 @@ const DeliveryRandomProductFinal = () => {
           variant='outlined'
           width='100%'
           value={formik.values.defectReason}
-          values={defectReasons.map((defect) => ({ value: defect, label: defect }))}
+          values={defectReasons?.map((defect) => ({ value: defect, label: defect }))}
           onChange={event => {
             formik.setFieldValue("defectReason", (event.target as HTMLInputElement).value);
           }}

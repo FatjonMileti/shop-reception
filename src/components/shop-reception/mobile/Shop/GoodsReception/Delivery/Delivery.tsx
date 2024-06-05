@@ -35,7 +35,7 @@ const Delivery = () => {
 
   let items = [
     <TitleHeader title='VALIDARE LIVRARE' />,
-    ...truckList.map((truck: any, index) => (
+    ...truckList?.map((truck: any, index) => (
       <TruckCard
         key={truck.id}
         onClick={() => {
@@ -46,7 +46,7 @@ const Delivery = () => {
     )),
   ]
 
-  if(truckList.length === 0){
+  if(!truckList || truckList.length === 0){
     items.push(<Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>
       nu existǎ camioane de validat</Typography>)
   }

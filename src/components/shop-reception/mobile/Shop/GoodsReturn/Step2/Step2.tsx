@@ -195,7 +195,7 @@ const Step2 = () => {
       label='Cauta tip suport'
       variant='outlined'
       value={formik.values.currentSupportTypeId}
-      values={supportList.map(support => ({ value: support.id, label: support.name }))}
+      values={supportList?.map(support => ({ value: support.id, label: support.name }))}
       onChange={handleSupportTypeChange}
       error={!!formik.errors.supportType}
       helperText={formik.errors.supportType as string}

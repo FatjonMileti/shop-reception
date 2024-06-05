@@ -38,15 +38,17 @@ const ReceptionProcessing = () => {
       maxWidth='xs'
       items={[
         <TitleHeader title='Procesarea Recepției' />,
-        ...truckList?.map((item: any, index) => (
-          <TruckCard
-            key={item.id}
-            onClick={() => {
-              navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, { state: { item } })
-            }}
-            truck={item}
-          />
-        ))
+        ...(truckList?.length > 0
+          ? truckList?.map((item: any) => (
+            <TruckCard
+              key={item.id}
+              onClick={() => {
+                navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, { state: { item } })
+              }}
+              truck={item}
+            />
+          ))
+          : [<div key="no-trucks" style={{ textAlign: "center" }}>Nu există camioane în lucru.</div>])
       ]}
       itemsPerRow={1}
     />
