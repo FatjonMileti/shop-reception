@@ -35,7 +35,7 @@ const ShippedTrucks = () => {
 
   let items = [
     <TitleHeader title='CAMIOANE EXPEDIATE' />,
-    ...trucks.map((item: any, index) => (
+    trucks && trucks.map((item: any, index) => (
       <TruckCard
         key={index}
         onClick={() => {

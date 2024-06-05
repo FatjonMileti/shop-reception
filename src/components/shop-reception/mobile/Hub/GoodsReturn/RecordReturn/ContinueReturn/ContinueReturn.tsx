@@ -37,7 +37,7 @@ const ContinueReturn = () => {
 
   let items = [
     <TitleHeader title='CONTINUARE RETUR' />,
-    ...truckList.map((truck: any, index) => (
+    truckList && truckList.map((truck: any, index) => (
       <TruckCard
         key={truck.id}
         onClick={() => {
