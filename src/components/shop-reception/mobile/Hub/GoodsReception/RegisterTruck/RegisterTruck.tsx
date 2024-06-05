@@ -28,7 +28,7 @@ const RegisterTruck = () => {
       try {
         const letters = '^[A-Za-z0-9]+$';
         if (truckNumber.match(letters)) {
-          const resp = await makeCorePostRequest('/shop-reception-mobile/truck/hub/save', null);
+          const resp = await makeCorePostRequest('/shop-reception-mobile/truck/hub/save', {id: id, truckNumber: truckNumber});
           id = resp.id;
           navigate(`${URLS.AUTH_REGISTER_TRUCK_STEP_2}?id=${id}`)
 

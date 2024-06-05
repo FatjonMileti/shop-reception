@@ -64,12 +64,12 @@ const RegisterTruckStep2 = () => {
   const toggleIsSearching = async () => {
     if (formik.values.supportCode.length > 0) {
       const resp = await makeCorePostRequest('/shop-reception-mobile/support/hub/register/scan/' + id, { supportCode: formik.values.supportCode })
-      resp.scanSuccess && openScanSuccessModal(resp.message)
+      resp.scanSuccess && openScanSuccessModal(resp.message, resp.supportId)
       !resp.scanSuccess && openInvalidScanModal(resp.message)
     }
   }
 
-  const openScanSuccessModal = async (message) => {
+  const openScanSuccessModal = async (message, supportId) => {
     setScanSuccessModalContent({
       title: message,
       buttons: [
@@ -84,7 +84,7 @@ const RegisterTruckStep2 = () => {
         {
           label: 'Urc în camion  confirm',
           onClick: async () => {
-            const resp = await makeCorePostRequest('/shop-reception-mobile/support/hub/addInTruck/' + id, { supportCode: formik.values.supportCode })
+            const resp = await makeCorePostRequest('/shop-reception-mobile/support/hub/addInTruck/' + id, { supportId: supportId } )
             await formik.setFieldValue('supportCode', '')
             setCounter(resp.supportCounter)
             setIsScanSuccessModalOpen(false);

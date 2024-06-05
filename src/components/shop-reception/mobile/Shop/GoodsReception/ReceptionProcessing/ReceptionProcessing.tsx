@@ -38,7 +38,7 @@ const ReceptionProcessing = () => {
       maxWidth='xs'
       items={[
         <TitleHeader title='Procesarea Recepției' />,
-        ...truckList.map((item: any, index) => (
+        ...truckList?.map((item: any, index) => (
           <TruckCard
             key={item.id}
             onClick={() => {

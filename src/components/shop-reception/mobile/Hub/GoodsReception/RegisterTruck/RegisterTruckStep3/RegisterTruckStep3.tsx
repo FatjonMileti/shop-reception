@@ -85,7 +85,6 @@ const RegisterTruckStep3 = () => {
     const truck = {
       "id": data.truckId,
       "shopTemperature": null,
-      "thermodiagramConform": true,
       sealList,
       "documentList": null
     };
@@ -111,7 +110,7 @@ const RegisterTruckStep3 = () => {
       maxWidth='xs'
       items={[
         <TitleHeader title='ÎNREGISTREAZǍ CAMION' />,
-        <Typography variant='medium' component='p'>Număr înmatriculare:: {data.truckNumber}</Typography>,
+        <Typography variant='medium' component='p'>Număr înmatriculare: {data.truckNumber}</Typography>,
         <Typography variant='medium' component='p'>Număr suporți scanaţi: {data.supportCounter}</Typography>,
         sealNumbers.map((seal, idx) => (
           <div style={{ display: 'flex', marginTop: '20px' }}>
@@ -129,7 +128,7 @@ const RegisterTruckStep3 = () => {
               }}
             />
             <ImageUpload
-              uploadUrl={`/shop-reception-mobile/hub/upload/new/` + id}
+              uploadUrl={`/shop-reception-mobile/truck/hub/upload/new/` + id}
               onSuccess={handleSuccess}
               onError={handleError}
               inputId={`seal${idx}`}
