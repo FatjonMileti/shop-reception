@@ -50,6 +50,11 @@ import { DeliveryRandomSupportFinal } from './Shop/GoodsReception/Delivery/Deliv
 import { DeliveryRandomSupportConfirm } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomSupport/DeliveryRandomSupportConfirm'
 import { DeliveryRandomProductFinal } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct/DeliveryRandomProductFinal'
 import { DeliveryRandomProductConfirm } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct/DeliveryRandomProductConfirm'
+import ExpectedDepositReturns from './Deposit/ExpectedReturns/ExpectedDepositReturns'
+import { ExpectedDepositReturnsStep1 } from './Deposit/ExpectedReturns/Step1'
+import { ExpectedDepositReturnsStep2 } from './Deposit/ExpectedReturns/Step2'
+import { ExpectedDepositReturnsStep3 } from './Deposit/ExpectedReturns/Step3'
+import { ExpectedDepositReturnsStep4 } from './Deposit/ExpectedReturns/Step4'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -312,6 +317,58 @@ export const useMerchandiseRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={InProgressReturnTrucks}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+      {/* Deposit return */}
+      <Route
+        path={URLS.AUTH_DEPOSIT_EXPECTED_RETURNS}
+        element={
+          <PrivateRoute
+            component={ExpectedDepositReturns}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_1}
+        element={
+          <PrivateRoute
+            component={ExpectedDepositReturnsStep1}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_2}
+        element={
+          <PrivateRoute
+            component={ExpectedDepositReturnsStep2}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_3}
+        element={
+          <PrivateRoute
+            component={ExpectedDepositReturnsStep3}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_DEPOSIT_EXPECTED_RETURNS_STEP_4}
+        element={
+          <PrivateRoute
+            component={ExpectedDepositReturnsStep4}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

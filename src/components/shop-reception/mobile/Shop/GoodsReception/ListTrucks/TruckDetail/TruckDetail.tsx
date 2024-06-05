@@ -28,7 +28,7 @@ const TruckDetail = () => {
     onSubmit: async (values: any) => {
       const payload = { id: +id, ...values };
       try {
-        await makeCorePostRequest("/shop-reception-mobile/truck/approve", payload);
+        await makeCorePostRequest("/shop-reception-mobile/truck/shop/approve", payload);
 
         const item = {id}
         navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, { state: { item } })
@@ -43,7 +43,7 @@ const TruckDetail = () => {
 
   const { data: truck, isLoading } = useQuery(
     "truck",
-    () => makeCoreGetRequest("/shop-reception-mobile/truck/" + id, null),
+    () => makeCoreGetRequest("/shop-reception-mobile/truck/shop/" + id, null),
     {
       onSuccess: (data: any) => {
         formik.setValues({
@@ -96,7 +96,7 @@ const TruckDetail = () => {
           <TitleHeader title="DETALIU CAMION" />
         </Grid>
         <Grid item xs={12}>
-          {truck.hubName &&
+          {truck?.hubName &&
             <Typography variant="medium" component="p">
               HUB: {truck?.hubName}
             </Typography>
@@ -134,7 +134,7 @@ const TruckDetail = () => {
               helperText={formik.errors.sealList && formik.errors.sealList[index] ? formik.errors.sealList[index].integral : ''}
             />
             <ImageUpload
-              uploadUrl={`/shop-reception-mobile/truck/upload_shop/reception_seal/` + id}
+              uploadUrl={`/shop-reception-mobile/truck/shop/upload_shop/reception_seal/` + id}
               onSuccess={handleSuccess}
               onError={handleError}
               inputId={`seal${index}`}
@@ -240,7 +240,7 @@ const TruckDetail = () => {
             helperText={formik.errors.thermodiagramConform as string}
           />
           <ImageUpload
-            uploadUrl={'/shop-reception-mobile/truck/upload_shop/reception_thermodiagram/' + id}
+            uploadUrl={'/shop-reception-mobile/truck/shop/upload_shop/reception_thermodiagram/' + id}
             onSuccess={handleSuccess}
             onError={handleError}
             inputId='thermodiagram'

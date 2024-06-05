@@ -36,7 +36,7 @@ const AddTruckStep2 = () => {
         ticketIdList.push({id: bl.id});
       });
 
-      await makeCorePostRequest('/shop-reception-mobile/truck/saveBlListForTruck', {id: truckId, deliveryTicketList: ticketIdList});
+      await makeCorePostRequest('/shop-reception-mobile/truck/shop/saveBlListForTruck', {id: truckId, deliveryTicketList: ticketIdList});
 
       navigate(navigateTo);
     } catch (error) {
@@ -52,7 +52,7 @@ const AddTruckStep2 = () => {
   const { data: truck, isLoading} = useQuery(
     'truckWithBls',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/getTruckCreationDTOWithBls/' + truckId, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/getTruckCreationDTOWithBls/' + truckId, null)
     },
     {
       onError: error => {
@@ -88,8 +88,8 @@ const AddTruckStep2 = () => {
         <TitleHeader title='ADAUGǍ CAMION' />,
         <>
           <Typography variant='medium' component='p'>Magazin HYPER ORADEA2</Typography>
-          <Typography variant='medium' component='p'>{truck.truckNumber} / {truck.driverName}</Typography>
-          <Typography variant='medium' component='p'>Sigilii {truck.concatenatedSeals}</Typography>
+          <Typography variant='medium' component='p'>{truck?.truckNumber} / {truck?.driverName}</Typography>
+          <Typography variant='medium' component='p'>Sigilii {truck?.concatenatedSeals}</Typography>
         </>,
         <Typography variant='medium' component='p'>Adauga bonuri livrare</Typography>,
         <Select
@@ -108,8 +108,8 @@ const AddTruckStep2 = () => {
         <Table>
           <TableHead style={{backgroundColor: '#0970E6'}}>
             <TableRow>
-              <TableCell>External Ticket ID</TableCell>
-              <TableCell>Deposit Name</TableCell>
+              <TableCell>BL</TableCell>
+              <TableCell>Depozit</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
