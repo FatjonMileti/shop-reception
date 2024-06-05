@@ -8,7 +8,7 @@ import { ReceptionProcessing } from './Shop/GoodsReception/ReceptionProcessing'
 import { Delivery } from './Shop/GoodsReception/Delivery'
 import { InProgressReturnTrucks } from './Shop/GoodsReturn/InProgressReturnTrucks'
 import { Step5 } from './Shop/GoodsReturn/Step5'
-import { ExpectedTrucks } from './Hub/GoodsReturn/ExpectedTrucks'
+import { ExpectedTrucks } from './Hub/GoodsReception/ExpectedTrucks'
 import { RegisterTruck } from './Hub/GoodsReception/RegisterTruck'
 import { ExpenditureProcessing } from './Hub/GoodsReception/ExpenditureProcessing'
 import { ShippedTrucks } from './Hub/GoodsReception/ShippedTrucks'
@@ -54,6 +54,7 @@ import { ExpectedDepositReturnsStep2 } from './Deposit/ExpectedReturns/Step2'
 import { ExpectedDepositReturnsStep3 } from './Deposit/ExpectedReturns/Step3'
 import { ExpectedDepositReturnsStep4 } from './Deposit/ExpectedReturns/Step4'
 import { ReturnPendingReception } from './Deposit/ReturnPendingReception'
+import { RegisterTruckStep2 } from './Hub/GoodsReception/RegisterTruck/Step2'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -84,6 +85,16 @@ export const useMerchandiseRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={RegisterTruck}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_REGISTER_TRUCK_STEP_2}
+        element={
+          <PrivateRoute
+            component={RegisterTruckStep2}
             applicationPages={applicationPages}
             checkIsAuthorized
           />

@@ -43,6 +43,7 @@ export const URLS = {
   // HUB Goods Reception
   AUTH_EXPECTED_TRUCKS: '/shop-reception/mobile/expectedTrucks', // List of trucks waiting reception at the hub
   AUTH_PROCESSING_SHIPMENT: '/shop-reception/mobile/inProcessingShipment', // List of trucks in processing at hub reception
+  
   // truck create step 1
   // truck create step 2
   // reception step 1
@@ -50,8 +51,9 @@ export const URLS = {
   // reception step 3
   // reception step 4
   // reception step 5
-
+  
   AUTH_REGISTER_TRUCK: '/shop-reception/mobile/registerTruck', // Hub registration step 1
+  AUTH_REGISTER_TRUCK_STEP_2:'/shop-reception/mobile/registerTruck-step-2',
   // Hub registration step 2
   // Hub registration step 3
   // Hub registered truck list
