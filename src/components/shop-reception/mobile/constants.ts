@@ -31,6 +31,7 @@ export const URLS = {
   AUTH_DELIVERY_RANDOM_PRODUCT: '/shop-reception/mobile/randomProduct',
   AUTH_DELIVERY_RANDOM_PRODUCT_FINAL: '/shop-reception/mobile/delivery/random-product/final', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_RANDOM_PRODUCT_CONFIRM: '/shop-reception/mobile/delivery/random-product/confirm', // TODO: integrate stepper in parent page and delete
+  AUTH_SGR_PRODUCTS: '/shop-reception/mobile/sgrProducts',
 
   // Shop Goods Return
   AUTH_RETURN_STEP_1: '/shop-reception/mobile/return-step-1', // Step 1
@@ -56,6 +57,7 @@ export const URLS = {
   AUTH_REGISTER_TRUCK_STEP_2:'/shop-reception/mobile/registerTruck-step-2',
   // Hub registration step 2
   // Hub registration step 3
+  AUTH_REGISTER_TRUCK_STEP_3: '/shop-reception/mobile/registerTruck-step-3', // --------> Hub registration step 3
   // Hub registered truck list
   // Hub registered trucks in process
 

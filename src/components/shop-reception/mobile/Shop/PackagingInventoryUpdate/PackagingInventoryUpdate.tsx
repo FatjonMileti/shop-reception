@@ -23,7 +23,6 @@ const PackagingInventoryUpdate = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-
         await makeCorePostRequest('/shop-reception-mobile/support/shop/inventory/save', values);
         clearFields();
       } catch (error) {
@@ -34,7 +33,7 @@ const PackagingInventoryUpdate = () => {
       }
     }
   })
-  console.log(formik.errors);
+
   function clearFields() {
       setSelectedSupportId('')
       formik.setFieldValue('supportId', null);
@@ -109,7 +108,7 @@ const PackagingInventoryUpdate = () => {
           variant='standard'
           width='100%'
           value={selectedSupportId}
-          values={supportList.map(support => ({ value: support.id, label: support.name }))}
+          values={supportList?.map(support => ({ value: support.id, label: support.name }))}
           onChange={event => {
               const selectedValue = (event.target as HTMLInputElement).value;
               setSelectedSupportId(selectedValue);

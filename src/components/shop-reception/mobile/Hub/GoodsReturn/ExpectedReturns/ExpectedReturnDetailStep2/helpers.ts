@@ -8,7 +8,7 @@ export const getValidationSchema = () =>
           shopCode: Yup.string(),
           shopName: Yup.string(),
           stackNumber: Yup.number(),
-          confirmedStackNumber: Yup.number().required(),
+          confirmedStackNumber: Yup.number().required().min(0),
           rollsNumber: Yup.number(),
           confirmedRollsNumber: Yup.number(),
         }

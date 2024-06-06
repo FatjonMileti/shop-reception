@@ -114,7 +114,7 @@ const AddTruckStep2 = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {formik.values.blList.map((bl, index) => (
+            {formik.values.blList?.map((bl, index) => (
               <TableRow key={index}>
                 <TableCell>{bl.externalTicketId}</TableCell>
                 <TableCell>{bl.depositName}</TableCell>

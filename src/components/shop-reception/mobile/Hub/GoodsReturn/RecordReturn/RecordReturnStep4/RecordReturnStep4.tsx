@@ -1,7 +1,7 @@
 import { Grid } from '../../../../../Common/Grid'
 import { Button, Typography, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from "../../../../Common/TitleHeader";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { URLS } from "../../../../constants";
 import { columns } from './helpers'
 import React from 'react'
@@ -15,9 +15,8 @@ import { TableRowType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/compo
 const ContinueReturnDetail2 = () => {
   const { showNotification } = useNotification();
   const navigate = useNavigate()
-  const location = useLocation();
-
-  const truckId = location.state;
+  const [params] = useSearchParams();
+  const truckId = params.get('id')
 
   const { data: CRTruck, isLoading} = useQuery(
     'TruckById',
@@ -83,7 +82,7 @@ const ContinueReturnDetail2 = () => {
           variant='contained'
           label='PASUL URMǍTOR'
           onClick={() => {
-            navigate(URLS.AUTH_RECORD_RETURN_STEP_5, {state: truckId})
+            navigate(`${URLS.AUTH_RECORD_RETURN_STEP_5}?id=${truckId}`)
           }}
         />
       ]}

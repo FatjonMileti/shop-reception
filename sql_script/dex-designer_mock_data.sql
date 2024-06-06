@@ -319,6 +319,7 @@ VALUES
     (350, 'Camioane asteptate', '', '/shop-reception/mobile/expectedTrucks', true, 179, true),
     (196, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck', true, 180, true),
     (351, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck-step-2', true, 180, false),
+    (259, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck-step-3', true, 180, false),
     (197, 'In procesare expeditie', '', '/shop-reception/mobile/inProcessingShipment', true, 181, true),
     (198, 'Camioane expediate', '', '/shop-reception/mobile/shippedTrucks', true, 182, true),
     (199, 'Retururi asteptare', '', '/shop-reception/mobile/expectedReturns', true, 183, true),

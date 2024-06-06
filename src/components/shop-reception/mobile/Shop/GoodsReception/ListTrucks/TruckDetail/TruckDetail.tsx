@@ -106,7 +106,7 @@ const TruckDetail = () => {
           </Typography>
           {truck?.ticketCodeList.length > 0 &&
             <Typography variant="medium" component="p">
-              Bon livrare: {truck?.ticketCodeList.map((ticket, idx) => (
+              Bon livrare: {truck?.ticketCodeList?.map((ticket, idx) => (
               <React.Fragment key={idx}>
                 {idx > 0 && <span>/</span>}
                 {ticket}
@@ -115,7 +115,7 @@ const TruckDetail = () => {
             </Typography>
           }
         </Grid>
-        {formik.values.sealList.map((seal, index) => (
+        {formik.values.sealList?.map((seal, index) => (
           <Grid key={index} item xs={12} style={{display: 'flex'}}>
             <Input
               type="select"
@@ -141,7 +141,7 @@ const TruckDetail = () => {
             />
           </Grid>
         ))}
-        {formik.values.documentList.map((document, idx) => (
+        {formik.values.documentList?.map((document, idx) => (
           <Grid key={idx} item xs={12} container spacing={3}>
             <Grid item xs={12}>
               <Typography variant="medium" component="p">

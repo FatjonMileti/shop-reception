@@ -39,7 +39,7 @@ const ListTrucks = () => {
     <TitleHeader title='Selecteazǎ Camion' />,
     <Grid
       spacing={1}
-      items={truckList.map((truck: any, index) => (
+      items={truckList?.map((truck: any, index) => (
         <TruckCard
           // key={truck.id}
           onClick={() => {

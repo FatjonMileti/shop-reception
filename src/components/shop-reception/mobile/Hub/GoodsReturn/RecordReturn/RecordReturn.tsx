@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../hooks'
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { URLS } from '../../../constants'
 import { useQuery } from "react-query";
 import { TitleHeader } from "../../../Common/TitleHeader";
@@ -16,8 +16,8 @@ import AlertModal from "../../../Common/AlertModal/AlertModal";
 const RecordReturn = () => {
   const navigate = useNavigate()
   const { showNotification } = useNotification()
-  const location = useLocation();
-  const truckId = location.state;
+  const [params] = useSearchParams();
+  const truckId = params.get('id') || 0;
   const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false)
   const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] })
 
@@ -42,7 +42,7 @@ const RecordReturn = () => {
     async () => {
       const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/exit/getTruck/' + truckId, null)
       await formik.setValues({
-        id: truck.depositId,
+        depositId: truck.depositId,
         truckNumber: truck.truckNumber,
         driverName: truck.driverName,
         packageReturn: truck.packageReturn,
@@ -62,7 +62,6 @@ const RecordReturn = () => {
     }
   )
 
-
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
     enableReinitialize: false,
@@ -70,18 +69,23 @@ const RecordReturn = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
+      const payload = {
+        "id": truckId,
+        "truckNumber": values.truckNumber,
+        "driverName": values.driverName,
+        "packageReturn": values.packageReturn,
+        "productReturn": false,
+        "depositType": null,
+        "depositId": values.depositId,
+        "noticeNumber": null,
+        "shopName": null,
+        "hubCode": null
+      }
       try {
-        const resp = await makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/save', {
-          "id": values.id,
-          "truckNumber": values.truckNumber,
-          "driverName": values.driverName,
-          "packageReturn": values.packageReturn,
-          "productReturn": false,
-          "depositType": null
-        })
+        const resp = await makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/save', payload)
 
-        if (resp.success) {
-          navigate(URLS.AUTH_RECORD_RETURN_STEP_2, {state: resp.id})
+        if (resp.id) {
+          navigate(`${URLS.AUTH_RECORD_RETURN_STEP_2}?id=${resp.id}`)
         } else {
           openInvalidTruckNumberModal()
         }
@@ -94,7 +98,6 @@ const RecordReturn = () => {
       }
     }
   })
-
 
   const openInvalidTruckNumberModal = () => {
     setInvalidTruckNumberModalContent({
@@ -130,11 +133,11 @@ const RecordReturn = () => {
           label='Destinație'
           variant='standard'
           width='100%'
-          value={formik.values.id}
+          value={formik.values.depositId}
           values={depositList?.map(deposit => ({ value: deposit.id, label: deposit.name }))}
-          onChange={event => formik.setFieldValue('id', (event.target as HTMLInputElement).value)}
-          error={!!formik.errors.id}
-          helperText={formik.errors.id as string}
+          onChange={event => formik.setFieldValue('depositId', (event.target as HTMLInputElement).value)}
+          error={!!formik.errors.depositId}
+          helperText={formik.errors.depositId as string}
         />,
         <Input
           type='text'

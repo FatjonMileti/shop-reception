@@ -1,7 +1,7 @@
 import { Grid } from '../../../../../Common/Grid'
 import { Button, Input, Typography, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from '../../../../Common/TitleHeader'
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { URLS } from '../../../../constants';
 import { useQuery } from "react-query";
 import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
@@ -17,10 +17,10 @@ import AlertModal from "../../../../Common/AlertModal/AlertModal";
 const ExpectedReturnDetailStep2 = () => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
-  const location = useLocation();
   const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false);
   const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] });
-  const parentId = location.state;
+  const [params] = useSearchParams();
+  const parentId = params.get('id');
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -70,8 +70,16 @@ const ExpectedReturnDetailStep2 = () => {
 
   const onContinueSubmit = async () => {
     const stackList = formik.values.stackList.map(({id, ...rest }) => rest);
-    await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirmStackList', stackList, null);
-    navigate(URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_3, {state: { truckId: truck.nextTruckId, parentId }})
+    const payload = {
+      "id": truck.id,
+      "truckNumber": truck.truckNumber,
+      "driverName": truck.driverName,
+      "shopNamesAndCodes": truck.shopNamesAndCodes,
+      "stackList": stackList,
+      "nextTruckId": truck.nextTruckId
+    }
+    await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirmStackList', payload, null);
+    navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_3}?truckId=${truck.nextTruckId}&parentId=${parentId}`)
   }
 
 

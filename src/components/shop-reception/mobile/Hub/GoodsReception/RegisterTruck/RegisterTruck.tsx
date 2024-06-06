@@ -1,5 +1,5 @@
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
-import { useMemo } from 'react'
+import React, { useMemo, useState } from "react";
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
@@ -11,8 +11,11 @@ import { formatErrorMessage } from 'utils/formatting'
 import { URLS } from 'components/shop-reception/mobile/constants'
 
 const RegisterTruck = () => {
-  const navigate = useNavigate()
-  const { showNotification } = useNotification()
+  const navigate = useNavigate();
+  const { showNotification } = useNotification();
+  const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false);
+  const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] });
+  let id = 0;
 
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],

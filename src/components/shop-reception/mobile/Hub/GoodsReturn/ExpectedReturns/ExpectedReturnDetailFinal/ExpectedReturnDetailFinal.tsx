@@ -3,7 +3,7 @@ import { Button, Typography, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from '../../../../Common/TitleHeader'
 import { columns } from './helpers'
 import { useNotification } from "../../../../../../../hooks";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
 import { formatErrorMessage } from "../../../../../../../utils/formatting";
@@ -14,11 +14,11 @@ import AlertModal from "../../../../Common/AlertModal/AlertModal";
 
 const ExpectedReturnDetailFinal = () => {
   const { showNotification } = useNotification();
-  const location = useLocation();
   const navigate = useNavigate()
   const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false);
   const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] });
-  const truckId = location.state;
+  const [params] = useSearchParams();
+  const truckId = params.get('id');
 
   const { data, isLoading} = useQuery(
     'getSummaryById',

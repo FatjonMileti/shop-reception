@@ -1,0 +1,1 @@
+export { default as RegisterTruckStep3 } from './RegisterTruckStep3'
