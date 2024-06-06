@@ -1,3 +1,5 @@
+import { ValueLabelInterface } from 'components/governance/interfaces'
+
 export interface AlertItem {
   id: 1
   articleId: string
@@ -10,4 +12,8 @@ export interface AlertItem {
 
 export interface AlertDateInfoProps {
   validHour: string
+}
+
+export interface AlertFormProps {
+  feedbackReasonsOptions: ValueLabelInterface[]
 }

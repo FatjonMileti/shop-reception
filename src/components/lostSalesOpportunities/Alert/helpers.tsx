@@ -1,5 +1,3 @@
-import * as yup from 'yup'
-
 const labelStyle = {
   color: '#052351',
   fontFamily: 'Ubuntu',
@@ -38,8 +36,3 @@ export const getInfoItems = alert => [
     valueStyle
   }
 ]
-
-export const validationSchema = yup.object({
-  feedbackReasonId: yup.string().nonNullable().required(),
-  comment: yup.string()
-})

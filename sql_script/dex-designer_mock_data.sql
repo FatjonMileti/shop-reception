@@ -424,7 +424,9 @@ VALUES
     (205, 'GG_RO_HQ_SHOP_RECEPTION_REGIONAL_OPERATIONS'),
     (206, 'GG_RO_HQ_SHOP_RECEPTION_WAREHOUSE'),
     (207, 'GG_RO_HQ_SHOP_RECEPTION_CG'),
-    (208, 'GG_RO_HQ_SHOP_RECEPTION_AMBALAJE');
+    (208, 'GG_RO_HQ_SHOP_RECEPTION_AMBALAJE'),
+    -- LSO
+    (300, 'GG_RO_DEX_LSO_USER');
 
 
 
@@ -500,7 +502,7 @@ VALUES
     (200, 178), (200, 179), (200, 180), (200, 181), (200, 182), (200, 183), (200, 184), (200, 185),
     (200, 186), (200, 187), (200, 188), (200, 193), (200, 189), (200, 190),
     -- Lost Sales Opportunities
-    (100, 57);
+    (300, 57);
 
 
 -- reset sequences
