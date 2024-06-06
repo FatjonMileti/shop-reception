@@ -235,6 +235,7 @@ export const ProductDetails = ({
                         const file = new File([blob], 'image.JPEG', { type: 'image/png' })
                         form.setFieldValue('picture', file)
                         setIsPictureChanged(true)
+                        setShowPhotoCapture(false)
                       })
                   }}
                   videoConstraints={{ width: 500, height: 400, facingMode: 'environment' }}
