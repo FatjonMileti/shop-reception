@@ -5,7 +5,7 @@
   "endpointPrefix": "8081/core/rest/api/v1/bakery",
   "latency": 0,
   "port": 3001,
-  "hostname": "",
+  "hostname": "designer.dex.be",
   "folders": [],
   "routes": [
     {
@@ -10664,7 +10664,7 @@
   "proxyHost": "",
   "proxyRemovePrefix": false,
   "tlsOptions": {
-    "enabled": false,
+    "enabled": true,
     "type": "CERT",
     "pfxPath": "",
     "certPath": "",
