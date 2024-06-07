@@ -44,16 +44,20 @@ export const URLS = {
   // HUB Goods Reception
   AUTH_EXPECTED_TRUCKS: '/shop-reception/mobile/expectedTrucks', // List of trucks waiting reception at the hub
   AUTH_PROCESSING_SHIPMENT: '/shop-reception/mobile/inProcessingShipment', // List of trucks in processing at hub reception
+  AUTH_EXPECTED_TRUCKS_STEP2: '/shop-reception/mobile/expectedTrucks-step-2',
+  AUTH_EXPECTED_TRUCKS_STEP3: '/shop-reception/mobile/expectedTrucks-step-3',
+  AUTH_EXPECTED_TRUCKS_STEP4: '/shop-reception/mobile/expectedTrucks-step-4',
+  AUTH_EXPECTED_TRUCKS_STEP5: '/shop-reception/mobile/expectedTrucks-step-5',
+  AUTH_EXPECTED_TRUCKS_STEP6: '/shop-reception/mobile/expectedTrucks-step-6',
   
-  // truck create step 1
-  // truck create step 2
+
   // reception step 1
   // reception step 2
   // reception step 3
   // reception step 4
   // reception step 5
   
-  AUTH_REGISTER_TRUCK: '/shop-reception/mobile/registerTruck', // Hub registration step 1
+  AUTH_REGISTER_TRUCK: '/shop-reception/mobile/registerTruck', 
   AUTH_REGISTER_TRUCK_STEP_2:'/shop-reception/mobile/registerTruck-step-2',
   // Hub registration step 2
   // Hub registration step 3

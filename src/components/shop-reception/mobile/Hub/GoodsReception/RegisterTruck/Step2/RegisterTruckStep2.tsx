@@ -51,7 +51,7 @@ const RegisterTruckStep2 = () => {
   )
 
   const saveBlForTruck = async (values: any) => {
-    return await makeCorePostRequest(`/shop-reception-mobile/truck/saveBlListForTruck`, values)
+    return await makeCorePostRequest(`/shop-reception-mobile/truck/shop/saveBlListForTruck`, values)
   }
 
   const { isLoading, mutate } = useMutation(saveBlForTruck, {
@@ -136,7 +136,7 @@ const RegisterTruckStep2 = () => {
             if (!hasTicket) {
               formik.setFieldValue('deliveryTicketList', [
                 ...formik.values.deliveryTicketList,
-                truckBls.deliveryTicketList.find(ticket => ticket.id === option.id)
+                truckBls.deliveryTicketList.find(ticket => ticket.id === option.value)
               ])
             }
           }}
@@ -182,9 +182,10 @@ const RegisterTruckStep2 = () => {
         <Button
           variant="outlined"
           label="Incepe receptia"
-          onClick={() => {}} // TODO: add corect nav
+          onClick={() =>
+            navigate(URLS.AUTH_EXPECTED_TRUCKS_STEP2, { state: { item: { value: truckId } } })
+          }
           style={{ width: '100%' }}
-          disabled={true}
         />
       </Grid>
       <Grid xs={10} item>

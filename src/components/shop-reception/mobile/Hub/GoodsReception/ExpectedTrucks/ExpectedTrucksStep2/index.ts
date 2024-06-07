@@ -1,0 +1,1 @@
+export { default as ExpectedTrucksStep2 } from './ExpectedTrucksStep2'
