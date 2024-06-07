@@ -37,7 +37,6 @@ import { ProductionManagementStorePrint } from './StoreManagerRole/ProductionMan
 import { GrowthIndexStore } from './StoreManagerRole/GrowthIndexStore'
 import ReportAndSalesStore from './StoreManagerRole/ReportAndSalesStore/ReportAndSalesStore'
 import { Ingredients } from './Ingredients'
-import ReceivedProductsTest from './Traceability/ReceivedProductsTest/ReceivedProductsTest'
 
 const ProductManagementTraceability = React.lazy(
   () => import('./Traceability/ProductManagementTraceability/ProductManagementTraceability')
@@ -427,11 +426,6 @@ export const useBakeryRoutes = applicationPages => {
             checkIsAuthorized
           />
         }
-      />
-
-      <Route
-        path={'bakery/traceabilityOperator/received-products-test'}
-        element={<ReceivedProductsTest />}
       />
 
       <Route

@@ -242,14 +242,14 @@ export const ProductDetails = ({
                 />
               </Grid>
             ) : (
-              <Grid item style={{ marginTop: '24px'}}>
+              <Grid item style={{ marginTop: '24px' }}>
                 <IconButton
                   label="Deschide camera"
                   onClick={() => setShowPhotoCapture(true)}
                   startIcon={<ImageIcon />}
                   variant="outlined"
                   // size="large"
-                  style={{ marginRight: '24px'}}
+                  style={{ marginRight: '24px' }}
                 />
                 SAU
                 <IconButton
@@ -260,9 +260,8 @@ export const ProductDetails = ({
                   startIcon={<ImageIcon />}
                   variant="outlined"
                   // size="large"
-                  style={{ marginLeft: '24px'}}
+                  style={{ marginLeft: '24px' }}
                 />
-
                 {!!form.errors.picture && (
                   <p
                     style={{

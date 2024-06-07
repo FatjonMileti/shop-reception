@@ -112,6 +112,8 @@ export const AddReceivedProduct = ({
       formData.append('dto', new Blob([JSON.stringify(data)], { type: 'application/json' }))
 
       const resizedImage = await resizeFile({ file: productDetails.picture })
+      console.log('originalImage', (productDetails.picture.size / (1024 * 1024)).toFixed(5), 'mb')
+      console.log('resizedImage', (resizedImage.size / (1024 * 1024)).toFixed(5), 'mb')
 
       setImage(resizedImage)
       formData.append('fileObject', resizedImage)
