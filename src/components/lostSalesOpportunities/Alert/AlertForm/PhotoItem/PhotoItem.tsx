@@ -1,20 +1,31 @@
-import { Box, FormLabel } from '@mui/material'
-import { DeleteOutline } from '@mui/icons-material'
+import { Box } from '@mui/material'
 import { WebcamCapture } from 'components/core-ui/WebcamCapture'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import { DeleteImageActionIcon, FullscreenImageActionIcon, UploadImageActionIcon } from 'icons'
+import s from './PhotoItem.modules.scss'
 
 const PhotoItem = props => {
-  const { photo, setPhotoValue, setIsPictureChanged, errors } = props
+  const { photo, setPhotoValue, setIsPictureChanged, errors, setShowPhotoCapture } = props
 
   return photo ? (
-    <>
-      <FormLabel>{photo.name}</FormLabel>
-      <Button label="" variant="outlined" size="large" onClick={() => setPhotoValue(undefined)}>
-        <DeleteOutline />
-      </Button>
-    </>
+    <Box className={s.imageContainer}>
+      <img
+        src={URL.createObjectURL(photo)}
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+      />
+      <Box className={s.imageActions}>
+        <Box onClick={() => setShowPhotoCapture(false)} className={s.imageAction}>
+          <UploadImageActionIcon />
+        </Box>
+        <Box onClick={() => setPhotoValue(undefined)} className={s.imageAction}>
+          <DeleteImageActionIcon />
+        </Box>
+        <Box onClick={() => console.log('large')} className={s.imageAction}>
+          <FullscreenImageActionIcon />
+        </Box>
+      </Box>
+    </Box>
   ) : (
-    <>
+    <Box className={s.videoContainer}>
       <WebcamCapture
         onImageCapture={imageSrc => {
           fetch(imageSrc)
@@ -26,6 +37,7 @@ const PhotoItem = props => {
             })
         }}
         videoConstraints={{ width: 300, height: 300, facingMode: 'environment' }}
+        buttonStyle={{ width: '100%', marginBottom: '24px' }}
       />
       {!!errors && (
         <p
@@ -41,7 +53,7 @@ const PhotoItem = props => {
           {errors as string}
         </p>
       )}
-    </>
+    </Box>
   )
 }
 

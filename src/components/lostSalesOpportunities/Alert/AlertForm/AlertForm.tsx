@@ -103,17 +103,31 @@ const AlertForm: React.FC<AlertFormProps> = props => {
           setPhotoValue={value => formik.setFieldValue('photo', value)}
           setIsPictureChanged={setIsPictureChanged}
           errors={formik.errors.photo}
+          setShowPhotoCapture={setShowPhotoCapture}
         />
       ) : (
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <IconButton
-            label="Incarca foto"
-            onClick={() => setShowPhotoCapture(true)}
-            startIcon={<ImageIcon />}
-            variant="outlined"
-            sx={{ marginBottom: '16px' }}
-          />
-        </Box>
+        <>
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <IconButton
+              label="Deschide camera"
+              onClick={() => setShowPhotoCapture(true)}
+              startIcon={<ImageIcon />}
+              variant="outlined"
+              sx={{ marginBottom: '16px' }}
+            />
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <IconButton
+              label="Incarca foto"
+              onClick={() => {
+                inputFileRef?.current?.click()
+              }}
+              startIcon={<ImageIcon />}
+              variant="outlined"
+              sx={{ marginBottom: '16px' }}
+            />
+          </Box>
+        </>
       )}
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Button variant="contained" label="Salveaza" onClick={() => {}} />

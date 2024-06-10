@@ -9,8 +9,20 @@ const defaultVideoConstraints = {
   facingMode: 'environment'
 }
 
-const WebcamCapture = props => {
-  const { onImageCapture, videoConstraints, buttonLabel } = props
+interface VideoConstraints {
+  width: number
+  height: number
+  facingMode: string
+}
+export interface WebcamCaptureProps {
+  onImageCapture: Function
+  videoConstraints?: VideoConstraints
+  buttonLabel?: string
+  buttonStyle?: any
+}
+
+const WebcamCapture = (props: WebcamCaptureProps) => {
+  const { onImageCapture, videoConstraints, buttonLabel, buttonStyle } = props
 
   const webcamRef = useRef(null)
 
@@ -34,6 +46,7 @@ const WebcamCapture = props => {
         onClick={capture}
         startIcon={<ImageIcon />}
         variant="outlined"
+        style={buttonStyle}
       />
     </>
   )
