@@ -465,7 +465,7 @@ const SupportScanStep1 = () => {
       buttons={sensitiveAndShortDlcModalContent.buttons}
     />,
     <>
-      <Typography variant='medium' component='p'>Numǎr camion: {truck.truckNumber}</Typography>
+      <Typography variant='medium' component='p'>Numǎr camion: {truck?.truckNumber}</Typography>
       <Typography variant='medium' component='p'>Numǎr suporți scanați: {counter}</Typography>
     </>
   ]

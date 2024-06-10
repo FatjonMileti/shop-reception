@@ -10,7 +10,6 @@ import { InProgressReturnTrucks } from './Shop/GoodsReturn/InProgressReturnTruck
 import { Step5 } from './Shop/GoodsReturn/Step5'
 import { ExpectedTrucks } from './Hub/GoodsReception/ExpectedTrucks'
 import { RegisterTruck } from './Hub/GoodsReception/RegisterTruck'
-import { RegisterTruckStep2 } from "./Hub/GoodsReception/RegisterTruck/RegisterTruckStep2";
 import { RegisterTruckStep3 } from "./Hub/GoodsReception/RegisterTruck/RegisterTruckStep3";
 import { ExpenditureProcessing } from './Hub/GoodsReception/ExpenditureProcessing'
 import { ShippedTrucks } from './Hub/GoodsReception/ShippedTrucks'
@@ -57,6 +56,11 @@ import { ExpectedDepositReturnsStep3 } from './Deposit/ExpectedReturns/Step3'
 import { ExpectedDepositReturnsStep4 } from './Deposit/ExpectedReturns/Step4'
 import { ReturnPendingReception } from './Deposit/ReturnPendingReception'
 import { RegisterTruckStep2 } from './Hub/GoodsReception/RegisterTruck/Step2'
+import { ExpectedTrucksStep2 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep2'
+import { ExpectedTrucksStep3 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep3'
+import { ExpectedTrucksStep4 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep4'
+import { ExpectedTrucksStep5 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep5'
+import { ExpectedTrucksStep6 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep6'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -77,6 +81,56 @@ export const useMerchandiseRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ExpectedTrucks}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_EXPECTED_TRUCKS_STEP2}
+        element={
+          <PrivateRoute
+            component={ExpectedTrucksStep2}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_EXPECTED_TRUCKS_STEP3}
+        element={
+          <PrivateRoute
+            component={ExpectedTrucksStep3}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_EXPECTED_TRUCKS_STEP4}
+        element={
+          <PrivateRoute
+            component={ExpectedTrucksStep4}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_EXPECTED_TRUCKS_STEP5}
+        element={
+          <PrivateRoute
+            component={ExpectedTrucksStep5}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_EXPECTED_TRUCKS_STEP6}
+        element={
+          <PrivateRoute
+            component={ExpectedTrucksStep6}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -112,7 +166,7 @@ export const useMerchandiseRoutes = applicationPages => {
               />
           }
         />
-      <Route
+      {/* <Route
         path={URLS.AUTH_REGISTER_TRUCK_STEP_2}
         element={
           <PrivateRoute
@@ -121,7 +175,7 @@ export const useMerchandiseRoutes = applicationPages => {
             checkIsAuthorized
           />
         }
-      />
+      /> */}
       <Route
         path={URLS.AUTH_PROCESSING_SHIPMENT}
         element={

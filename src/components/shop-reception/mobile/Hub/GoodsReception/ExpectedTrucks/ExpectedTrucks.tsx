@@ -5,13 +5,13 @@ import { CircularProgress, Grid, Typography } from '@mui/material'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { useNavigate } from 'react-router-dom'
-import { useFormik } from 'formik'
-import { TitleHeader } from 'components/shop-reception/mobile/Common/TitleHeader'
 import { URLS } from 'components/shop-reception/mobile/constants'
+import { useState } from 'react'
 
 const ExpectedTrucks = () => {
   const navigate = useNavigate()
   const { showNotification } = useNotification()
+  const [selectedTruck, setSelectedTruck] = useState(null)
 
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],
@@ -75,9 +75,7 @@ const ExpectedTrucks = () => {
           label={`Selecteaza camion`}
           disableClearable
           options={trucksOptions || []}
-          // onChange={(event, option) =>
-          //   formik.setFieldValue(`sealList[${index}].conform`, toBoolean(option.value))
-          // }
+          onChange={(event, option) => setSelectedTruck(option)}
         />
       </Grid>
 
@@ -85,9 +83,9 @@ const ExpectedTrucks = () => {
         <Button
           variant="contained"
           label="Confirma camion"
-          onClick={() => () => {}}
+          onClick={() => navigate(URLS.AUTH_EXPECTED_TRUCKS_STEP2, { state: { item: selectedTruck } })}
           style={{ width: '100%' }}
-          disabled={true}
+          disabled={selectedTruck === null}
         />
       </Grid>
       <Grid xs={10} item>
