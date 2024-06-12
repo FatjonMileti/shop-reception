@@ -25,6 +25,17 @@ export const toFormDataPayload = (item: { [key: string]: string }) => {
   return formData
 }
 
+export const toBlobFormDataPayload = (item: { [key: string]: string }) => {
+  const formData = Object.keys(item).reduce((formData, key) => {
+    if (key !== 'imageUrl' && item[key]) {
+      formData.append(key, new Blob([JSON.stringify(item[key])], { type: 'application/json' }))
+    }
+    return formData
+  }, new FormData())
+
+  return formData
+}
+
 export const toArrayItemPayload = (item: Filter[]) => {
   let payload = {}
 

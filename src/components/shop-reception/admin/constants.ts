@@ -2,6 +2,7 @@ export const URLS = {
   // admin
   AUTH_ADMIN_DEPOSITS: '/shop-reception/admin/deposits',
   AUTH_ADMIN_HUBS: '/shop-reception/admin/hubs',
+  AUTH_ADMIN_HUBS_DELIVERY_INTERVAL: '/shop-reception/admin/hubs/deliveryInterval/:id',
   AUTH_ADMIN_STORES: '/shop-reception/admin/stores',
   AUTH_ADMIN_REGIONS: '/shop-reception/admin/regions',
   AUTH_CENTRALIZATION_STORES_HUB: '/shop-reception/admin/centralization',
@@ -13,9 +14,12 @@ export const URLS = {
   AUTH_MANAGE_DLC_PRODUCTS: '/shop-reception/admin/shortDlcProducts',
   AUTH_RECEPTION_FILES_INFO: '/shop-reception/admin/receptionFiles',
   AUTH_SGR_PRODUCTS: '/shop-reception/admin/sgrProducts',
+  AUTH_PARENT_SOCIETY_LIST: '/shop-reception/admin/parentSocietyList',
+  AUTH_NOTICE_SERIES_NUMBER_LIST: '/shop-reception/admin/noticeSeriesNumberList',
 
   // reception dashboard
   AUTH_DELIVERY_SLIPS_LIST: '/shop-reception/reception/deliverySlips',
+  AUTH_DELIVERY_SLIPS_SUPPORT_CODE: '/shop-reception/reception/deliverySupportAction/:id',
   AUTH_DELIVERY_SLIP: '/shop-reception/reception/deliverySlips/:id',
   AUTH_TRUCK_LIST: '/shop-reception/reception/truckList',
   AUTH_TRUCK_DETAIL: '/shop-reception/reception/truckList/:id',
@@ -26,17 +30,26 @@ export const URLS = {
   AUTH_METI_FILE_DETAIL: '/shop-reception/reception/metiFiles/:id',
   AUTH_DIFFERENCES_PRODUCTS: '/shop-reception/reception/productsDifferences',
   AUTH_SUPPORT_TRADABILITY: '/shop-reception/reception/trasabilitySupport',
+  AUTH_GOODS_DELIVERY_REPORT: '/shop-reception/reception/goodsDeliveryReport',
+  AUTH_SENSITIVE_PRODUCTS: '/shop-reception/reception/sensitiveProducts',
+  AUTH_DELIVERY_TRUCK_LIST: '/shop-reception/reception/deliveryTruckList',
 
   // package
-  AUTH_RETURN_TRUCK_LIST: '/shop-reception/package/trucksReturnList',
+  AUTH_RETURN_TRUCK_LIST: '/shop-reception/package/trucksReturn',
+  AUTH_RETURN_TRUCK_DETAILS: '/shop-reception/package/trucksReturn/:id',
   AUTH_ROLLING_PACKAGES: '/shop-reception/package/rolling',
   AUTH_BALANCE_PACKAGING: '/shop-reception/package/balance',
-  AUTH_BALANCE_PACKAGING_FORM: '/shop-reception/package/balance/:id',
   AUTH_BALANCE_PACKAGING_HISTORY: '/shop-reception/package/balance/history/:id',
   AUTH_PACKAGING_DISPUTES_OF_STORE_RETURNS: '/shop-reception/package/storeReturnsDisputes',
+  AUTH_PACKAGING_DISPUTE_OF_STORE_RETURNS: '/shop-reception/package/storeReturnsDisputes/:id',
+  AUTH_PACKAGING_DISPUTE_OF_STORE_RETURNS_IMAGES:
+    '/shop-reception/package/storeReturnsDisputesImages/:id',
   AUTH_PACKAGING_TYPES_DIFFERENCES: '/shop-reception/package/typesDifferences',
   AUTH_RETURNED_PACKAGING: '/shop-reception/package/returned',
   AUTH_PACKAGING_COMPLIANCE: '/shop-reception/package/compliance',
   AUTH_PACKAGING_DISPUTES_OF_TIMER_ADMINISTRATION: '/shop-reception/package/timerDisputes',
-  AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL: '/shop-reception/package/timerDisputes/:id'
+  AUTH_PACKAGING_CENTRALIZED_NOTICE: '/shop-reception/package/centralizedNotice',
+  AUTH_PACKING_INVENTORY: '/shop-reception/package/packingInventory',
+  AUTH_PACKING_INVENTORY_HISTORY: '/shop-reception/package/packingInventoryHistory/:id',
+  AUTH_TRANSPORT_RESPONSIBLE: '/shop-reception/package/transportResponsible'
 }

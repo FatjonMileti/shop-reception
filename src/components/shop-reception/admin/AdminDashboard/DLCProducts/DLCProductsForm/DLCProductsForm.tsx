@@ -1,30 +1,73 @@
 import { useMemo } from 'react'
-import { Input } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '../../../../Common/Grid'
+import { Input, Button, Autocomplete } from '@fullscreendigital/carrefour-dex-fe'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toPayload } from './serializers'
-import { ModalFormActionButtons } from '../../../Common/ModalFormActionButtons'
+import s from 'components/core-ui/Modal/Modal.modules.scss'
+import { Grid } from '@mui/material'
+import { makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { useMutation } from 'react-query'
 
-interface NewAdminDepositProps {
-  isModalOpen: boolean
+interface DLCProductsFormProps {
+  isOpen: boolean
   closeModal: Function
   setShouldRefreshData: Function
-  editItem?: DLCProducts
   isEdit?: boolean
+  editItem?: DLCProducts
+  shopTypes: AutocompleteOption[]
+  metiRayons: AutocompleteOption[]
+  metiFamilies: AutocompleteOption[]
+  metiSubfamilies: AutocompleteOption[]
+  metiUB: AutocompleteOption[]
 }
 
-const DLCProductsForm: React.FC<NewAdminDepositProps> = props => {
-  const { isModalOpen, closeModal, editItem, isEdit, setShouldRefreshData } = props
+const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
+  const {
+    isOpen,
+    closeModal,
+    isEdit,
+    editItem,
+    setShouldRefreshData,
+    shopTypes,
+    metiRayons,
+    metiFamilies,
+    metiSubfamilies,
+    metiUB
+  } = props
   const { showNotification } = useNotification()
 
-  const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+  const mutateDlcProduct = async values => {
+    editItem
+      ? await makeCorePutRequest(`/shop-reception/products/short-dlc/${editItem.id}`, values)
+      : await makeCorePostRequest('/shop-reception/products/short-dlc', values)
+  }
 
-  const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
+  const { isLoading, mutate } = useMutation(mutateDlcProduct, {
+    onSuccess: () => {
+      closeModal()
+      showNotification({
+        message: `Produsul a fost ${editItem ? 'actualizat' : 'creat'} cu succes.`,
+        type: 'success'
+      })
+
+      setShouldRefreshData(true)
+      formik.resetForm()
+      closeModal()
+    },
+    onError: res => {
+      showNotification({
+        message: `A aparut o eroare la ${
+          editItem ? 'actualizarea' : 'crearea'
+        } produsului. ${formatErrorMessage(res)}`,
+        type: 'error'
+      })
+    }
+  })
+
+  const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+  const validationSchema = useMemo(() => getValidationSchema(), [editItem])
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -32,134 +75,123 @@ const DLCProductsForm: React.FC<NewAdminDepositProps> = props => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      try {
-        const payload = toPayload(formik.values)
-
-        setShouldRefreshData(true)
-        closeModal()
-        formik.resetForm()
-      } catch (error) {
-        showNotification({
-          message: `Error while data. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
+      const payload = {
+        ...values,
+        famCode: values.famCode?.value || values.famCode || null,
+        rayCode: values.rayCode?.value || values.rayCode || null,
+        sfaCode: values.sfaCode?.value || values.sfaCode || null,
+        shopCode: values.shopCode?.value || values.shopCode || null,
+        ubCode: values.ubCode?.value || values.ubCode || null
       }
+
+      mutate(payload)
     }
   })
 
-  let items = [
-    <Grid
-      gridContainerStyle={{ margin: 0 }}
-      items={[
-        <Input
-          type="select"
-          value={formik.values.storeName}
-          onChange={event =>
-            formik.setFieldValue('storeName', (event.target as HTMLInputElement).value)
-          }
-          label="Magazin"
-          variant="outlined"
-          style={{ width: '100%' }}
-          error={!!formik.errors.storeName}
-          helperText={formik.errors.storeName as string}
-          required
-        />,
-        <Input
-          type="select"
-          value={formik.values.district}
-          onChange={event =>
-            formik.setFieldValue('district', (event.target as HTMLInputElement).value)
-          }
-          label="Raion"
-          variant="outlined"
-          style={{ width: '100%' }}
-          error={!!formik.errors.district}
-          helperText={formik.errors.district as string}
-          required
-        />,
-        <Input
-          type="select"
-          value={formik.values.family}
-          onChange={event =>
-            formik.setFieldValue('family', (event.target as HTMLInputElement).value)
-          }
-          label="Familie"
-          variant="outlined"
-          style={{ width: '100%' }}
-          error={!!formik.errors.family}
-          helperText={formik.errors.family as string}
-          required
-        />,
-        <Input
-          type="select"
-          value={formik.values.subfamily}
-          onChange={event =>
-            formik.setFieldValue('subfamily', (event.target as HTMLInputElement).value)
-          }
-          label="Subfamilie"
-          variant="outlined"
-          style={{ width: '100%' }}
-          error={!!formik.errors.subfamily}
-          helperText={formik.errors.subfamily as string}
-          required
-        />,
-        <Input
-          type="select"
-          value={formik.values.UbCode}
-          onChange={event =>
-            formik.setFieldValue('UbCode', (event.target as HTMLInputElement).value)
-          }
-          label="Cod UB"
-          variant="outlined"
-          style={{ width: '100%' }}
-          error={!!formik.errors.UbCode}
-          helperText={formik.errors.UbCode as string}
-          required
-        />,
-        <Input
-          type="select"
-          value={formik.values.productCode}
-          onChange={event =>
-            formik.setFieldValue('productCode', (event.target as HTMLInputElement).value)
-          }
-          label="Cod Produs"
-          variant="outlined"
-          style={{ width: '100%' }}
-          error={!!formik.errors.productCode}
-          helperText={formik.errors.productCode as string}
-          required
-        />
-      ]}
-      itemsPerRow={2}
-    />,
-    <ModalFormActionButtons
-      onCancel={() => closeModal()}
-      onSubmit={() => formik.handleSubmit()}
-    />
-  ]
-
-  if(isEdit){
-    items.unshift(<FormInfoItems
-      items={[
-        {
-          label: 'Magazin:',
-          name: editItem?.storeName
-        }
-      ]}
-    />)
-  }
   return (
     <Modal
-      isModalOpen={isModalOpen}
+      isModalOpen={isOpen}
       closeModal={closeModal}
-      modalTitle={isEdit ? 'Editare produse cu DLC scurt' : 'Adăugare regulă produse cu DLC scurt'}
+      modalTitle={`${isEdit ? 'Editeaza' : 'Adauga'} regula produse cu DLC scurt`}
       modalWidth="50%"
     >
-      <Grid
-        gridContainerStyle={{ margin: 0 }}
-        items={items}
-        itemsPerRow={1}
-      />
+      <Grid container spacing={2}>
+        <Grid xs={12} item>
+          <Autocomplete
+            variant="outlined"
+            label="Magazin"
+            disableClearable
+            // required
+            onChange={(event, option) => formik.setFieldValue('shopCode', option)}
+            value={formik.values.shopCode}
+            options={shopTypes || []}
+            // error={!!formik.errors.shopCode}
+            // helperText={formik.errors.shopCode as string}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Autocomplete
+            variant="outlined"
+            label="Raion"
+            disableClearable
+            required
+            onChange={(event, option) => formik.setFieldValue('rayCode', option)}
+            value={formik.values.rayCode}
+            options={metiRayons || []}
+            error={!!formik.errors.rayCode}
+            helperText={formik.errors.rayCode as string}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Autocomplete
+            variant="outlined"
+            label="Familie"
+            disableClearable
+            // required
+            onChange={(event, option) => formik.setFieldValue('famCode', option)}
+            value={formik.values.famCode}
+            options={metiFamilies || []}
+            // error={!!formik.errors.famCode}
+            // helperText={formik.errors.famCode as string}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Autocomplete
+            variant="outlined"
+            label="Subfamilie"
+            disableClearable
+            // required
+            onChange={(event, option) => formik.setFieldValue('sfaCode', option)}
+            value={formik.values.sfaCode}
+            options={metiSubfamilies || []}
+            // error={!!formik.errors.sfaCode}
+            // helperText={formik.errors.sfaCode as string}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Autocomplete
+            variant="outlined"
+            label="Cod UB"
+            disableClearable
+            // required
+            onChange={(event, option) => formik.setFieldValue('ubCode', option)}
+            value={formik.values.ubCode}
+            options={metiUB || []}
+            // error={!!formik.errors.ubCode}
+            // helperText={formik.errors.ubCode as string}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            value={formik.values.prodCode}
+            onChange={event =>
+              formik.setFieldValue('prodCode', (event.target as HTMLInputElement).value)
+            }
+            label="Cod produs"
+            variant="outlined"
+            style={{ width: '100%' }}
+            // error={!!formik.errors.prodCode}
+            // helperText={formik.errors.prodCode as string}
+            // required
+          />
+        </Grid>
+
+        <Grid xs={12} item className={s.modalButtons}>
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+          <Button
+            variant="contained"
+            label={isEdit ? 'Editeaza' : 'Salveaza'}
+            onClick={() => formik.handleSubmit()}
+            disabled={isLoading}
+          />
+        </Grid>
+      </Grid>
     </Modal>
   )
 }

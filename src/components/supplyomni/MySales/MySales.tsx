@@ -102,7 +102,7 @@ export const MySales = () => {
         applyFiltersButtonLabel={'Confirma'}
         toolbarActions={[
           {
-            label: 'Download',
+            label: 'Descarca',
             icon: <DownloadIcon />,
             onClick: handleDownload
           }

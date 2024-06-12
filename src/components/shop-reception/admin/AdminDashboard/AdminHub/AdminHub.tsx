@@ -1,52 +1,33 @@
-import { Grid } from '../../../Common/Grid'
-import { useNavigate } from 'react-router-dom'
-import { Table } from '../../../../core-ui/Table'
 import { columns } from './helpers'
 import { Add as AddIcon } from '@mui/icons-material'
 import { useState } from 'react'
-import { makeCoreGetRequest } from '../../../../../utils/api'
-import { toTableGETUrl } from '../../../../core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
-import { formatErrorMessage } from '../../../../../utils/formatting'
-import { useNotification } from '../../../../../hooks'
-import { TitleHeader } from '../../Common/TitleHeader'
 import { AdminHubForm } from './AdminHubForm'
+import { useNotification } from 'hooks'
+import { makeCoreGetRequest } from 'utils/api'
+import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { formatErrorMessage } from 'utils/formatting'
+import s from '../../../commonStyles.modules.scss'
+import { Table } from 'components/core-ui/Table'
+import { EditActionIcon } from 'icons'
+import HubsIntervalModal from './HubsIntervalModal/HubsIntervalModal'
 
 const AdminHub = () => {
-  const navigate = useNavigate()
-  const [tableItems, setTableItems] = useState<AdminHub[]>([
-    {
-      id: 1,
-      hubCode: '100001',
-      name: 'PAXD CEFIN',
-      hubType: 'PAXD',
-      address: 'ION CAMPINEANU |Nr. 1|Arad|Arad',
-      active: true,
-      hourlyIntervals: 75
-    }
-  ])
-  const [totalCount, setTotalCount] = useState<number>(0)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false)
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
-  const [selectedRow, setSelectedRow] = useState<AdminHub>()
-  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
 
-  const openNewModal = (): void => setIsNewModalOpen(true)
-  const closeNewModal = (): void => setIsNewModalOpen(false)
+  const [tableItems, setTableItems] = useState<AdminHub[]>([])
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
+  const [selectedRow, setSelectedRow] = useState<AdminHub>()
 
-  const openEditModal = (rowId: number | string): void => {
-    selectRow(rowId)
-    setIsEditModalOpen(true)
-  }
-  const closeEditModal = (): void => setIsEditModalOpen(false)
+  const [modal, setModal] = useState(null)
+  const openModal = (action): void => setModal(action)
+  const closeModal = () => setModal(null)
 
   const selectRow = (rowId: number | string) => {
     const row = tableItems.find(item => item.id === rowId)
-    if (row) {
-      setSelectedRow(row)
-    }
+    row && setSelectedRow(row)
   }
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -54,7 +35,7 @@ const AdminHub = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/reception-mobile-api/rm-api/truck/list',
+          url: '/shop-reception/hubs',
           tableFilters,
           page,
           rowsPerPage,
@@ -63,9 +44,7 @@ const AdminHub = () => {
         })
       )
 
-      const responseList = response.list
-
-      setTableItems(toTableRowItems(responseList))
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
       setIsLoading(false)
     } catch (error) {
@@ -77,61 +56,59 @@ const AdminHub = () => {
   }
 
   return (
-    <Grid
-      items={[
-        <TitleHeader title='Administrare huburi' />,
-        <>
-          <AdminHubForm
-            isModalOpen={isNewModalOpen}
-            closeModal={closeNewModal}
-            setShouldRefreshData={setShouldRefreshData}
-          />
-          <AdminHubForm
-            isModalOpen={isEditModalOpen}
-            closeModal={closeEditModal}
-            setShouldRefreshData={setShouldRefreshData}
-            editItem={selectedRow}
-            isEdit
-          />
-          <Table
-            hideCheckbox
-            orderBy='role'
-            order='asc'
-            columns={columns}
-            items={tableItems}
-            fetchData={() => {
-            }}
-            isLoading={isLoading}
-            totalCount={totalCount}
-            newButton={{
-              onClick: (): void => {
-                openNewModal()
-              }
-            }}
-            shouldRefreshData={shouldRefreshData}
-            setShouldRefreshData={setShouldRefreshData}
-            rowActions={[
-              {
-                label: 'Edit',
-                labelColor: 'white',
-                typographyVariant: 'medium',
-                backgroundColor: '#16a085',
-                onClick: (e, rowId) => openEditModal(rowId)
-              }
-            ]}
-            rowActionsWidth='130px'
-            toolbarActions={[
-              {
-                label: 'Hub',
-                icon: <AddIcon />,
-                onClick: openNewModal
-              }
-            ]}
-          />
-        </>
-      ]}
-      itemsPerRow={1}
-    />
+    <div className={s.mainContainer}>
+      <AdminHubForm
+        isOpen={modal === 'create'}
+        closeModal={closeModal}
+        setShouldRefreshData={setShouldRefreshData}
+      />
+      <AdminHubForm
+        isOpen={modal === 'update'}
+        closeModal={closeModal}
+        setShouldRefreshData={setShouldRefreshData}
+        editItem={selectedRow}
+        isEdit
+      />
+      <HubsIntervalModal isOpen={modal === 'interval'} closeModal={closeModal} item={selectedRow} />
+      <Table
+        hideCheckbox
+        orderBy="created"
+        order="asc"
+        columns={columns(setModal, selectRow)}
+        items={tableItems}
+        fetchData={fetchData}
+        isLoading={isLoading}
+        totalCount={totalCount}
+        shouldRefreshData={shouldRefreshData}
+        setShouldRefreshData={setShouldRefreshData}
+        rowActions={[
+          {
+            label: 'Edit',
+            labelColor: 'white',
+            typographyVariant: 'medium',
+            backgroundColor: '#16a085',
+            desktopIcon: <EditActionIcon />,
+            onClick: (_, rowId) => {
+              selectRow(rowId)
+              setModal('update')
+            }
+          }
+        ]}
+        rowActionsWidth="130px"
+        toolbarActions={[
+          {
+            label: 'Hub',
+            icon: <AddIcon />,
+            onClick: () => openModal('create')
+          }
+        ]}
+        filtersButtonLabel="Filtre"
+        filtersLabel="Filtre"
+        appliedFiltersLabel="Filtre aplicate"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
+      />
+    </div>
   )
 }
 

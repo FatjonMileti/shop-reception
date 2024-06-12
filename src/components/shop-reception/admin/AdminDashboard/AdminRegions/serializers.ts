@@ -1,7 +1,7 @@
 export const toTableRowItems = (items: AdminRegion[]) => items.map((item: AdminRegion) => ({
   id: item.id,
-  regionCode: item.regionCode,
+  code: item.code,
   name: item.name,
-  regionManager: item.regionManager,
+  responsible: item.responsible,
   active: item.active
 }))

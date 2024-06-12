@@ -1,41 +1,47 @@
 import * as Yup from 'yup'
-import { DEPOSIT_TYPES } from './constants'
 
 export const getValidationSchema = (editItem: AdminDeposit) =>
   Yup.object().shape({
-    code: Yup.string().required(),
-    name: Yup.string().required(),
+    code: Yup.string().required('Campul este obligatoriu.'),
+    name: Yup.string().required('Campul este obligatoriu.'),
     type: Yup.object().shape({
-      label: Yup.string().required('Tip depozit este obligatoriu'),
-      value: Yup.string().required('Tip depozit este obligatoriu')
+      label: Yup.string().required('Campul este obligatoriu.'),
+      value: Yup.string().required('Campul este obligatoriu.')
     }),
-    address: Yup.string().required(),
-    validityPercentage: Yup.string(),
-    emails: Yup.string().required(),
-    active: Yup.boolean().required(),
-    depositUsers: Yup.array().of(
-      Yup.object().shape({
-        label: Yup.string().required('Tip depozit este obligatoriu'),
-        value: Yup.string().required('Tip depozit este obligatoriu')
-      })
-    )
+    address: Yup.string().required('Campul este obligatoriu.'),
+    validityPercentage: Yup.string().required('Campul este obligatoriu.'),
+    emails: Yup.string().required('Campul este obligatoriu.'),
+    packagingResponsibleEmail: Yup.string(),
+    cif: Yup.string().required('Campul este obligatoriu.'),
+    office: Yup.string().required('Campul este obligatoriu.'),
+    bankAccount: Yup.string().required('Campul este obligatoriu.'),
+    bankName: Yup.string().required('Campul este obligatoriu.'),
+    workingPoint: Yup.string().required('Campul este obligatoriu.'),
+    capital: Yup.string().required('Campul este obligatoriu.'),
+    active: Yup.boolean().required('Campul este obligatoriu.'),
+    acceptReturn: Yup.boolean().required('Campul este obligatoriu.'),
+    depositUsers: Yup.array()
+      .of(Yup.string().required('Campul este obligatoriu.'))
+      .required('Campul este obligatoriu.')
   })
 
-export const getInitialValues = editItem => {
+export const getInitialValues = (editItem, depositUsersOptions, depositsOptions) => {
   return {
-    id: editItem?.id ?? null,
-    code: editItem?.code ?? '',
-    name: editItem?.name ?? null,
-    type: editItem
-      ? {
-          value: Object.keys(DEPOSIT_TYPES).find(key => DEPOSIT_TYPES[key] === editItem.type),
-          label: editItem.type
-        }
-      : null,
-    address: editItem?.address ?? null,
-    validityPercentage: editItem?.validityPercentage ?? null,
-    emails: editItem?.emails?.join(';') || null,
-    active: editItem?.active ?? false,
-    depositUsers: editItem ? editItem.depositUsers.map(user => ({ value: user, label: user })) : []
+    code: editItem?.code || '',
+    name: editItem?.name || '',
+    type: editItem ? depositsOptions.filter(item => item.label === editItem.type)[0] : '',
+    address: editItem?.address || '',
+    validityPercentage: editItem?.validityPercentage || 0,
+    emails: editItem ? (editItem?.emails?.toString() || '') : '',
+    packagingResponsibleEmail: editItem?.packagingResponsibleEmail || '',
+    cif: editItem?.cif || '',
+    office: editItem?.office || '',
+    bankAccount: editItem?.bankAccount || '',
+    bankName: editItem?.bankName || '',
+    workingPoint: editItem?.workingPoint || '',
+    capital: editItem?.capital || '',
+    active: editItem?.active || false,
+    acceptReturn: editItem?.acceptReturn || false,
+    depositUsers: editItem ? depositUsersOptions || [] : []
   }
 }

@@ -2,13 +2,17 @@ import { PrivateRoute } from 'components/utils/PrivateRoute'
 import { Route } from 'react-router-dom'
 import { URLS } from './constants'
 import { TruckList } from './ReceptionDashboard/TruckList'
-import { DeliverySlipsList } from './ReceptionDashboard/DeliverySlipsList'
+import {
+  DeliveryTicketsList,
+  DeliveryTicketsDetails
+} from './ReceptionDashboard/DeliveryTicketsList'
 import { SupportWrongDestination } from './ReceptionDashboard/SupportWrongDestination'
 import { UnorderedProducts } from './ReceptionDashboard/UnorderedProducts'
 import { MetiFiles } from './ReceptionDashboard/MetiFiles'
 import { MetiFileDetail } from './ReceptionDashboard/MetiFiles/MetiFileDetail'
 import { DifferencesProducts } from './ReceptionDashboard/DifferencesProducts'
 import { SupportTradability } from './ReceptionDashboard/SupportTradability'
+import { GoodsDeliveryReport } from './ReceptionDashboard/GoodsDeliveryReport'
 import { AdminDeposit } from './AdminDashboard/AdminDeposit'
 import { AdminHub } from './AdminDashboard/AdminHub'
 import { AdminStore } from './AdminDashboard/AdminStore'
@@ -25,17 +29,26 @@ import { ReturnTruckList } from './PackageDashboard/ReturnTruckList'
 import { RollingPackages } from './PackageDashboard/RollingPackages'
 import { BalancePackages } from './PackageDashboard/BalancePackages'
 import { PackagingDisputes } from './PackageDashboard/PackagingDisputes'
+import { PackagingDispute } from './PackageDashboard/PackagingDispute'
+import { PackingDisputeImages } from './PackageDashboard/PackingDisputeImages'
 import { PackagingTypesDifferences } from './PackageDashboard/PackagingTypesDifferences'
 import { ReturnedPackaging } from './PackageDashboard/ReturnedPackaging'
 import { PackagingCompliance } from './PackageDashboard/PackagingCompliance'
 import { PackagingDisputesTimer } from './PackageDashboard/PackagingDisputesTimer'
-import { ShowDeliverySlip } from './ReceptionDashboard/DeliverySlipsList/ShowDeliverySlip'
-import { TruckDetail } from './ReceptionDashboard/TruckList/TruckDetail'
+import { PackagingInventory } from './PackageDashboard/PackagingInventory'
+import { PackagingInventoryHistory } from './PackageDashboard/PackagingInventoryHistory'
+import { CentralizedNotice } from './PackageDashboard/CentralizedNotice'
+import { TransportResponsible } from './PackageDashboard/TransportResponsible'
+import { TruckDetails } from './ReceptionDashboard/TruckList/TruckDetails'
 import { SupportWrongDestinationDetail } from './ReceptionDashboard/SupportWrongDestination/SupportWrongDestinationDetail'
-import { PackagingDisputesTimerDetail } from './PackageDashboard/PackagingDisputesTimer/PackagingDisputesTimerDetail'
-import { BalancePackageHistory } from './PackageDashboard/BalancePackages/BalancePackageHistory'
-import { BalancePackageForm } from './PackageDashboard/BalancePackages/BalancePackageForm'
+import { BalancePackageHistory } from './PackageDashboard/BalancePackageHistory'
 import { SGRProducts } from './AdminDashboard/SGRProducts'
+import SupportCode from './ReceptionDashboard/DeliveryTicketsList/DeliveryTicketsDetails/SupportCode/SupportCode'
+import { SensitiveArticles } from './ReceptionDashboard/SensitiveArticles'
+import DeliveryTruckList from './ReceptionDashboard/DeliveryTruckList/DeliveryTruckList'
+import { ReturnTruck } from './PackageDashboard/ReturnTruck'
+import { ParentSocietyList } from './AdminDashboard/ParentSocietyList'
+import { NoticeSeriesNumberList } from './AdminDashboard/NoticeSeriesNumberList'
 
 export const useShopReceptionRoutes = applicationPages => {
   return (
@@ -185,7 +198,17 @@ export const useShopReceptionRoutes = applicationPages => {
         path={URLS.AUTH_DELIVERY_SLIPS_LIST}
         element={
           <PrivateRoute
-            component={DeliverySlipsList}
+            component={DeliveryTicketsList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_SLIPS_SUPPORT_CODE}
+        element={
+          <PrivateRoute
+            component={SupportCode}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -195,7 +218,7 @@ export const useShopReceptionRoutes = applicationPages => {
         path={URLS.AUTH_DELIVERY_SLIP}
         element={
           <PrivateRoute
-            component={ShowDeliverySlip}
+            component={DeliveryTicketsDetails}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -271,6 +294,16 @@ export const useShopReceptionRoutes = applicationPages => {
           />
         }
       />
+      <Route
+        path={URLS.AUTH_GOODS_DELIVERY_REPORT}
+        element={
+          <PrivateRoute
+            component={GoodsDeliveryReport}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
 
       {/* Package */}
       <Route
@@ -278,6 +311,16 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={ReturnTruckList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_RETURN_TRUCK_DETAILS}
+        element={
+          <PrivateRoute
+            component={ReturnTruck}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -308,6 +351,26 @@ export const useShopReceptionRoutes = applicationPages => {
         element={
           <PrivateRoute
             component={PackagingDisputes}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTE_OF_STORE_RETURNS}
+        element={
+          <PrivateRoute
+            component={PackagingDispute}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_DISPUTE_OF_STORE_RETURNS_IMAGES}
+        element={
+          <PrivateRoute
+            component={PackingDisputeImages}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -354,10 +417,50 @@ export const useShopReceptionRoutes = applicationPages => {
         }
       />
       <Route
+        path={URLS.AUTH_PACKING_INVENTORY}
+        element={
+          <PrivateRoute
+            component={PackagingInventory}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PACKING_INVENTORY_HISTORY}
+        element={
+          <PrivateRoute
+            component={PackagingInventoryHistory}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PACKAGING_CENTRALIZED_NOTICE}
+        element={
+          <PrivateRoute
+            component={CentralizedNotice}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_TRANSPORT_RESPONSIBLE}
+        element={
+          <PrivateRoute
+            component={TransportResponsible}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
         path={URLS.AUTH_TRUCK_DETAIL}
         element={
           <PrivateRoute
-            component={TruckDetail}
+            component={TruckDetails}
             applicationPages={applicationPages}
             checkIsAuthorized
           />
@@ -373,27 +476,6 @@ export const useShopReceptionRoutes = applicationPages => {
           />
         }
       />
-
-      <Route
-        path={URLS.AUTH_PACKAGING_DISPUTES_OF_TIMER_DETAIL}
-        element={
-          <PrivateRoute
-            component={PackagingDisputesTimerDetail}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
-        }
-      />
-      <Route
-        path={URLS.AUTH_BALANCE_PACKAGING_FORM}
-        element={
-          <PrivateRoute
-            component={BalancePackageForm}
-            applicationPages={applicationPages}
-            checkIsAuthorized
-          />
-        }
-      />
       <Route
         path={URLS.AUTH_BALANCE_PACKAGING_HISTORY}
         element={
@@ -404,6 +486,48 @@ export const useShopReceptionRoutes = applicationPages => {
           />
         }
       />
+      <Route
+        path={URLS.AUTH_SENSITIVE_PRODUCTS}
+        element={
+          <PrivateRoute
+            component={SensitiveArticles}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_DELIVERY_TRUCK_LIST}
+        element={
+          <PrivateRoute
+            component={DeliveryTruckList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_PARENT_SOCIETY_LIST}
+        element={
+          <PrivateRoute
+            component={ParentSocietyList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+      <Route
+        path={URLS.AUTH_NOTICE_SERIES_NUMBER_LIST}
+        element={
+          <PrivateRoute
+            component={NoticeSeriesNumberList}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
+
     </>
   )
 }

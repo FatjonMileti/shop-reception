@@ -1,14 +1,14 @@
 import { useMemo } from 'react'
-import { Input, Checkbox } from '@fullscreendigital/carrefour-dex-fe'
-import { Grid } from '../../../../Common/Grid'
+import { Input, Checkbox, Autocomplete, Button } from '@fullscreendigital/carrefour-dex-fe'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
-import { FormInfoItems } from 'components/core-ui/FormInfoItems'
+import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { getInitialValues, getValidationSchema } from './helpers'
-import { useNotification } from 'hooks'
+import { useNotification, useSearchInput } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { toPayload } from './serializers'
-import { ModalFormActionButtons } from '../../../Common/ModalFormActionButtons'
+import { CircularProgress, Grid } from '@mui/material'
+import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
+import { useMutation, useQuery } from 'react-query'
 
 interface NewAdminDepositProps {
   isModalOpen: boolean
@@ -22,8 +22,34 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
   const { isModalOpen, closeModal, isEdit, editItem, setShouldRefreshData } = props
   const { showNotification } = useNotification()
 
-  const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+  const mutateHub = async values => {
+    editItem
+      ? await makeCorePutRequest(`/shop-reception/regions/${editItem.id}`, values)
+      : await makeCorePostRequest('/shop-reception/regions', values)
+  }
 
+  const { isLoading, mutate } = useMutation(mutateHub, {
+    onSuccess: () => {
+      showNotification({
+        message: `Regiunea a fost ${editItem ? 'modificata' : 'creata'} cu succes.`,
+        type: 'success'
+      })
+
+      setShouldRefreshData(true)
+      closeModal()
+      formik.resetForm()
+    },
+    onError: res => {
+      showNotification({
+        message: `A aparut o eroare la ${
+          editItem ? 'modificarea' : 'crearea'
+        } regiunii. ${formatErrorMessage(res)}`,
+        type: 'error'
+      })
+    }
+  })
+
+  const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
   const formik = useFormik({
@@ -31,116 +57,50 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any) => {
+    onSubmit: async (values: any, { resetForm }) => {
       try {
-        const payload = toPayload(formik.values)
-
-        if (isEdit) {
-        } else {
+        const payload = {
+          ...values,
+          shopIds: values.shopIds.map(shopId => shopId.value)
         }
 
-        setShouldRefreshData(true)
-        closeModal()
-        formik.resetForm()
+        mutate(payload)
       } catch (error) {
         showNotification({
-          message: `Error while data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la modificarea datelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
     }
   })
 
-  let items = [
-    <Grid
-      gridContainerStyle={{ margin: 0 }}
-      items={[
-      <Input
-        type="text"
-        value={formik.values.regionCode}
-        onChange={event =>
-          formik.setFieldValue('regionCode', (event.target as HTMLInputElement).value)
-        }
-        label="Cod regiune"
-        variant="outlined"
-        style={{ width: '100%' }}
-        error={!!formik.errors.regionCode}
-        helperText={formik.errors.regionCode as string}
-        required
-      />,
-      <Input
-        type="text"
-        value={formik.values.name}
-        onChange={event =>
-          formik.setFieldValue('name', (event.target as HTMLInputElement).value)
-        }
-        label="Denumire"
-        variant="outlined"
-        style={{ width: '100%' }}
-        error={!!formik.errors.name}
-        helperText={formik.errors.name as string}
-        required
-      />,
-      <Input
-        type="text"
-        value={formik.values.regionManager}
-        onChange={event =>
-          formik.setFieldValue('regionManager', (event.target as HTMLInputElement).value)
-        }
-        label="Responsabil regiune"
-        variant="outlined"
-        style={{ width: '100%' }}
-        error={!!formik.errors.regionManager}
-        helperText={formik.errors.regionManager as string}
-        required
-      />,
-      <Input
-        type="select"
-        value={formik.values.store?.value}
-        onChange={event =>
-          formik.setFieldValue('store', (event.target as HTMLInputElement).value)
-        }
-        label="Magazin"
-        variant="outlined"
-        style={{ width: '100%' }}
-        error={!!formik.errors.store}
-        helperText={formik.errors.store as string}
-        values={[
-          {
-            value: "AMBIENT",
-            label: "AMBIENT"
-          }
-        ]}
-        required
-      />,
-      <Checkbox
-        checked={formik.values.active}
-        defaultChecked={formik.values.active}
-        onChange={event =>
-          formik.setFieldValue('active', (event.target as HTMLInputElement).value)
-        }
-        label="Activ"
-        color={!!formik.errors.active ? 'primary' : 'secondary'}
-      />
-    ]}
-          itemsPerRow={2}
-    />,
-    <ModalFormActionButtons
-      onCancel={() => closeModal()}
-      onSubmit={() => formik.handleSubmit()}
-    />
-  ]
+  const { data: shopTypes, isLoading: isShopTypesLoading } = useQuery(
+    ['shop-types'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/regions/${editItem?.id || 0}/shops`)
+      return data.map(item => ({
+        label: item.metiName,
+        value: item.id
+      }))
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea tipurilor de magazine. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      },
+      enabled: isModalOpen
+    }
+  )
 
-  if(isEdit){
-    items.unshift(<FormInfoItems
-      items={[
-        {
-          label: 'Denumire:',
-          name: editItem?.name
-        }
-      ]}
-    />)
-  }
+  const selectProductSearch = useSearchInput(
+    'name',
+    'region-responsible',
+    '/shop-reception/regions/responsible'
+  )
 
   return (
     <Modal
@@ -149,11 +109,105 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
       modalTitle={isEdit ? 'Editează regiune' : 'Adaugă regiune'}
       modalWidth="50%"
     >
-      <Grid
-        gridContainerStyle={{ margin: 0 }}
-        items={items}
-        itemsPerRow={1}
-      />
+      <Grid container spacing={2}>
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            value={formik.values.code}
+            onChange={event =>
+              formik.setFieldValue('code', (event.target as HTMLInputElement).value)
+            }
+            label="Cod regiune"
+            variant="outlined"
+            style={{ width: '100%' }}
+            error={!!formik.errors.code}
+            helperText={formik.errors.code as string}
+            required
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Input
+            type="text"
+            value={formik.values.name}
+            onChange={event =>
+              formik.setFieldValue('name', (event.target as HTMLInputElement).value)
+            }
+            label="Denumire"
+            variant="outlined"
+            style={{ width: '100%' }}
+            error={!!formik.errors.name}
+            helperText={formik.errors.name as string}
+            required
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Autocomplete
+            {...selectProductSearch}
+            variant="outlined"
+            label="Responsabil regiune"
+            autoComplete={false}
+            required
+            filterOptions={x => x}
+            onChange={(event, value) => {
+              if (value) {
+                formik.setFieldValue('responsible', value)
+              } else {
+                formik.setFieldValue('responsible', null)
+              }
+            }}
+            value={formik.values.responsible || null}
+            error={!!formik.errors.responsible}
+            helperText={formik.errors.responsible as string}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Checkbox
+            checked={formik.values.active}
+            defaultChecked={formik.values.active}
+            onChange={event => formik.setFieldValue('active', !formik.values.active)}
+            label="Activ"
+            color={!!formik.errors.active ? 'primary' : 'secondary'}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          {isShopTypesLoading ? (
+            <div style={{ display: 'flex' }}>
+              <CircularProgress color="primary" disableShrink />
+            </div>
+          ) : (
+            <Autocomplete
+              variant="outlined"
+              label="Magazine"
+              disableClearable
+              onChange={(e: any, option: any) => formik.setFieldValue('shopIds', option)}
+              defaultValue={formik.values.shopIds}
+              options={shopTypes}
+              error={!!formik.errors.shopIds}
+              helperText={formik.errors.shopIds as string}
+              multiple
+            />
+          )}
+        </Grid>
+
+        <Grid xs={12} item className={s.modalButtons}>
+          {isLoading ? (
+            <></>
+          ) : (
+            <>
+              <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+              <Button
+                variant="contained"
+                label={isEdit ? 'Editeaza' : 'Salveaza'}
+                onClick={() => formik.handleSubmit()}
+              />
+            </>
+          )}
+        </Grid>
+      </Grid>
     </Modal>
   )
 }
