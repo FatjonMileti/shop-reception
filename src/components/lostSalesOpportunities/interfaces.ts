@@ -1,4 +1,5 @@
 import { ValueLabelInterface } from 'components/governance/interfaces'
+import { FormikErrors, FormikValues } from 'formik'
 
 export interface AlertItem {
   id: 1
@@ -16,4 +17,27 @@ export interface AlertDateInfoProps {
 
 export interface AlertFormProps {
   feedbackReasonsOptions: ValueLabelInterface[]
+}
+
+export interface PhotoButtonsProps {
+  setShowPhotoCapture: Function
+  setPhoto: Function
+}
+
+export interface PhotoItemProps {
+  photo: File
+  setPhotoValue: Function
+  setIsPictureChanged: Function
+  errors: FormikErrors<FormikValues>
+  setShowPhotoCapture: Function
+}
+
+export interface SnoozeAlarmProps {
+  alertId: number
+  setShouldRefreshData: Function
+}
+
+export interface AlertDetailsProps {
+  item: AlertItem
+  setShouldRefreshData: Function
 }

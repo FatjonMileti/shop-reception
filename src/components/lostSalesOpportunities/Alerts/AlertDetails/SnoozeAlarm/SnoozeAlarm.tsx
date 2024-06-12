@@ -8,11 +8,13 @@ import { makeCorePostRequest } from 'utils/api'
 import { toSnoozeAlertPayload } from './serializers'
 import { useMutation } from 'react-query'
 import { handleQueryError } from 'utils/helpers'
+import { SnoozeAlarmProps } from 'components/lostSalesOpportunities/interfaces'
 
-const SnoozeAlarm = props => {
-  const { alertId } = props
+const SnoozeAlarm: React.FC<SnoozeAlarmProps> = props => {
+  const { alertId, setShouldRefreshData } = props
 
   const [selectedOption, setSelectedOption] = useState(null)
+  const [showSnooze, setShowSnooze] = useState(false)
 
   const { showNotification } = useNotification()
 
@@ -25,7 +27,7 @@ const SnoozeAlarm = props => {
 
   const { isLoading, mutate } = useMutation(updateSnooze, {
     onSuccess: res => {
-      // setShouldRefreshData(true)
+      setShouldRefreshData(true)
       showNotification({
         message: 'Alerta a fost amanata cu succes.',
         type: 'success'
@@ -40,27 +42,39 @@ const SnoozeAlarm = props => {
     </div>
   ) : (
     <Box>
-      <Box className={s.optionsTitle}>Cat timp vrei sa anulezi alarma?</Box>
-      <Box className={s.optionsContainer}>
-        <RadioButtonGroup
-          dotStyle
-          name="snoozeTime"
-          onChange={(e, option) => {
-            setSelectedOption(option)
-          }}
-          value={selectedOption}
-          defaultValue={snoozeOptions[0]}
-          options={snoozeOptions}
-        />
-      </Box>
       <Box>
         <Button
           variant="contained"
           label="Amana alarma"
-          style={{ width: 'calc(100% - 16px)' }}
-          onClick={() => mutate(selectedOption)}
+          style={{ width: 'calc(100% - 16px)', marginTop: '24px' }}
+          onClick={() => setShowSnooze(true)}
         />
       </Box>
+      {showSnooze && (
+        <Box>
+          <Box className={s.optionsTitle}>Cat timp vrei sa anulezi alarma?</Box>
+          <Box className={s.optionsContainer}>
+            <RadioButtonGroup
+              dotStyle
+              name="snoozeTime"
+              onChange={(e, option) => {
+                setSelectedOption(option)
+              }}
+              value={selectedOption}
+              defaultValue={snoozeOptions[0]}
+              options={snoozeOptions}
+            />
+          </Box>
+          <Box>
+            <Button
+              variant="contained"
+              label="Salveaza"
+              style={{ width: 'calc(100% - 16px)' }}
+              onClick={() => mutate(selectedOption)}
+            />
+          </Box>
+        </Box>
+      )}
     </Box>
   )
 }

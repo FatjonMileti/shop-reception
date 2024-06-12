@@ -36,7 +36,7 @@ const Alert = () => {
           </Grid>
 
           <Grid item mb={2}>
-            <AlertDateInfo validHour={alert?.interval} />
+            <AlertDateInfo validHour={alert?.validHour} />
           </Grid>
 
           <Grid item mb={2}>

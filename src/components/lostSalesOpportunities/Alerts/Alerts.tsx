@@ -9,12 +9,12 @@ import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { AlertDateInfo } from '../common/AlertDateInfo'
 
-
 const Alerts = () => {
   const [totalCount, setTotalCount] = useState<number>(null)
   const [rows, setRows] = useState([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [validHour, setValidHour] = useState<string>('')
+  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
   const { showNotification } = useNotification()
 
@@ -30,7 +30,7 @@ const Alerts = () => {
         })
       )
 
-      setRows(toListTableRows(response.list))
+      setRows(toListTableRows(response.list, setShouldRefreshData))
       setTotalCount(response.page.totalCount)
       setValidHour(response.list[0]?.validHour)
       setIsLoading(false)
@@ -53,6 +53,8 @@ const Alerts = () => {
         isLoading={isLoading}
         totalCount={totalCount}
         rowActionsWidth="90px"
+        setShouldRefreshData={setShouldRefreshData}
+        shouldRefreshData={shouldRefreshData}
       />
     </div>
   )

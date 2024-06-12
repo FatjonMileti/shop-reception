@@ -4,20 +4,23 @@ import { validationSchema } from './helpers'
 import { makeCorePostRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import { useNotification } from 'hooks'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { handleQueryError } from 'utils/helpers'
-import { Button, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Box } from '@mui/material'
-import { ChangeEvent, useEffect, useState } from 'react'
-import ImageIcon from '@mui/icons-material/Image'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { PhotoItem } from './PhotoItem'
 import { AlertFormProps } from 'components/lostSalesOpportunities/interfaces'
+import { PhotoButtons } from './PhotoButtons'
+import { toAlertPayload } from './serializers'
 
 const AlertForm: React.FC<AlertFormProps> = props => {
   const { feedbackReasonsOptions } = props
 
   const [isPictureChanged, setIsPictureChanged] = useState(false)
   const [showPhotoCapture, setShowPhotoCapture] = useState(false)
+
+  const { id } = useParams()
 
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
@@ -40,7 +43,7 @@ const AlertForm: React.FC<AlertFormProps> = props => {
   const navigate = useNavigate()
 
   const sendFeedbackReason = async values => {
-    await makeCorePostRequest('/lso/alerts-feedback/', values)
+    await makeCorePostRequest('/lso/alerts-feedback', values)
   }
 
   const { isLoading, mutate } = useMutation(sendFeedbackReason, {
@@ -49,6 +52,7 @@ const AlertForm: React.FC<AlertFormProps> = props => {
         message: 'Feedback-ul a fost trimis cu succes.',
         type: 'success'
       })
+      formik.resetForm()
       navigate('/lostSalesOpportunities/alerts')
     },
     onError: error =>
@@ -59,15 +63,18 @@ const AlertForm: React.FC<AlertFormProps> = props => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      feedbackReasonId: '',
-      comment: ''
+      feedbackReason: '',
+      comment: '',
+      photo: null
     },
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      mutate(values)
-      formik.resetForm()
+      const postValues = await toAlertPayload(values, id)
+      mutate(postValues)
     }
   })
+
+  console.log(formik)
 
   return (
     <>
@@ -76,10 +83,10 @@ const AlertForm: React.FC<AlertFormProps> = props => {
         name="feedbackReasonId"
         label="Motiv predefinit"
         options={feedbackReasonsOptions}
-        onChange={value => formik.setFieldValue('feedbackReasonId', value)}
-        value={formik.values.feedbackReasonId}
-        error={!!formik.errors.feedbackReasonId}
-        helperText={formik.errors.feedbackReasonId as string}
+        onChange={value => formik.setFieldValue('feedbackReason', value)}
+        value={formik.values.feedbackReason}
+        error={!!formik.errors.feedbackReason}
+        helperText={formik.errors.feedbackReason as string}
         required
         style={{ marginBottom: '16px' }}
       />
@@ -102,35 +109,17 @@ const AlertForm: React.FC<AlertFormProps> = props => {
           photo={formik.values.photo}
           setPhotoValue={value => formik.setFieldValue('photo', value)}
           setIsPictureChanged={setIsPictureChanged}
-          errors={formik.errors.photo}
+          errors={formik.errors}
           setShowPhotoCapture={setShowPhotoCapture}
         />
       ) : (
-        <>
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <IconButton
-              label="Deschide camera"
-              onClick={() => setShowPhotoCapture(true)}
-              startIcon={<ImageIcon />}
-              variant="outlined"
-              sx={{ marginBottom: '16px' }}
-            />
-          </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <IconButton
-              label="Incarca foto"
-              onClick={() => {
-                inputFileRef?.current?.click()
-              }}
-              startIcon={<ImageIcon />}
-              variant="outlined"
-              sx={{ marginBottom: '16px' }}
-            />
-          </Box>
-        </>
+        <PhotoButtons
+          setShowPhotoCapture={setShowPhotoCapture}
+          setPhoto={file => formik.setFieldValue('photo', file)}
+        />
       )}
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Button variant="contained" label="Salveaza" onClick={() => {}} />
+        <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
       </Box>
     </>
   )

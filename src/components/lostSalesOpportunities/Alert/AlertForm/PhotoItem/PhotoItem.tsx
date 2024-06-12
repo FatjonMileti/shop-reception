@@ -2,8 +2,9 @@ import { Box } from '@mui/material'
 import { WebcamCapture } from 'components/core-ui/WebcamCapture'
 import { DeleteImageActionIcon, FullscreenImageActionIcon, UploadImageActionIcon } from 'icons'
 import s from './PhotoItem.modules.scss'
+import { PhotoItemProps } from 'components/lostSalesOpportunities/interfaces'
 
-const PhotoItem = props => {
+const PhotoItem: React.FC<PhotoItemProps> = props => {
   const { photo, setPhotoValue, setIsPictureChanged, errors, setShowPhotoCapture } = props
 
   return photo ? (
@@ -16,7 +17,13 @@ const PhotoItem = props => {
         <Box onClick={() => setShowPhotoCapture(false)} className={s.imageAction}>
           <UploadImageActionIcon />
         </Box>
-        <Box onClick={() => setPhotoValue(undefined)} className={s.imageAction}>
+        <Box
+          onClick={() => {
+            setPhotoValue(undefined)
+            setShowPhotoCapture(false)
+          }}
+          className={s.imageAction}
+        >
           <DeleteImageActionIcon />
         </Box>
         <Box onClick={() => console.log('large')} className={s.imageAction}>
@@ -39,7 +46,7 @@ const PhotoItem = props => {
         videoConstraints={{ width: 300, height: 300, facingMode: 'environment' }}
         buttonStyle={{ width: '100%', marginBottom: '24px' }}
       />
-      {!!errors && (
+      {!!errors.photo && (
         <p
           style={{
             color: '#AA0D11',
@@ -50,7 +57,7 @@ const PhotoItem = props => {
             margin: '4px 0 0 14px'
           }}
         >
-          {errors as string}
+          {errors.photo as string}
         </p>
       )}
     </Box>

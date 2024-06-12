@@ -1,14 +1,11 @@
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { Box, Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { SnoozeAlarm } from './SnoozeAlarm'
-import { AlertItem } from 'components/lostSalesOpportunities/interfaces'
+import { AlertDetailsProps } from 'components/lostSalesOpportunities/interfaces'
 
-interface AlertDetailsProps {
-  item: AlertItem
-}
-
-const AlertDetails: React.FC<AlertDetailsProps> = ({ item }) => {
+const AlertDetails: React.FC<AlertDetailsProps> = props => {
+  const { item, setShouldRefreshData } = props
   const navigate = useNavigate()
 
   return (
@@ -18,11 +15,11 @@ const AlertDetails: React.FC<AlertDetailsProps> = ({ item }) => {
           variant="outlined"
           label="Vezi detalii"
           onClick={() => navigate(`/lostSalesOpportunities/alerts/${item.id}`)}
-          style={{ float: 'right', marginRight: '16px' }}
+          style={{ width: 'calc(100% - 16px)' }}
         />
       </Grid>
       <Grid item xs={12}>
-        <SnoozeAlarm alertId={item.id} />
+        <SnoozeAlarm alertId={item.id} setShouldRefreshData={setShouldRefreshData} />
       </Grid>
     </Grid>
   )
