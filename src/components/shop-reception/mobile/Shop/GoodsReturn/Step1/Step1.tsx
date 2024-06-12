@@ -104,7 +104,7 @@ const Step1 = () => {
   const { data: returnHub, isLoading: isLoadingHub} = useQuery(
     'returnHub',
     async () => {
-      const hub = await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getHub', null);
+      const hub = await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/hub', null);
 
       await formik.setFieldValue('returnHub', hub.name)
       return hub;
@@ -122,7 +122,7 @@ const Step1 = () => {
   const { data: depositList, isLoading: isLoadingDeposits} = useQuery(
     'depositList',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getDepositList', null);
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/deposits', null);
     },
     {
       onError: error => {

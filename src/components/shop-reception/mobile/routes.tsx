@@ -10,6 +10,7 @@ import { InProgressReturnTrucks } from './Shop/GoodsReturn/InProgressReturnTruck
 import { Step5 } from './Shop/GoodsReturn/Step5'
 import { ExpectedTrucks } from './Hub/GoodsReception/ExpectedTrucks'
 import { RegisterTruck } from './Hub/GoodsReception/RegisterTruck'
+import { RegisterTruckStep2 } from "./Hub/GoodsReception/RegisterTruck/RegisterTruckStep2";
 import { RegisterTruckStep3 } from "./Hub/GoodsReception/RegisterTruck/RegisterTruckStep3";
 import { ExpenditureProcessing } from './Hub/GoodsReception/ExpenditureProcessing'
 import { ShippedTrucks } from './Hub/GoodsReception/ShippedTrucks'
@@ -55,7 +56,6 @@ import { ExpectedDepositReturnsStep2 } from './Deposit/ExpectedReturns/Step2'
 import { ExpectedDepositReturnsStep3 } from './Deposit/ExpectedReturns/Step3'
 import { ExpectedDepositReturnsStep4 } from './Deposit/ExpectedReturns/Step4'
 import { ReturnPendingReception } from './Deposit/ReturnPendingReception'
-import { RegisterTruckStep2 } from './Hub/GoodsReception/RegisterTruck/Step2'
 import { ExpectedTrucksStep2 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep2'
 import { ExpectedTrucksStep3 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep3'
 import { ExpectedTrucksStep4 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep4'

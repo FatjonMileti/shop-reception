@@ -17,7 +17,7 @@ const Delivery = () => {
   const { data: truckList, isLoading} = useQuery(
       'validationTrucks',
       async () => {
-        return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/validation/list', null)
+        return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/validations', null)
       },
       {
         onError: error => {

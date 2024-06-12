@@ -22,7 +22,7 @@ const DeliveryDetail = () => {
   const { data: truck, isLoading } = useQuery(
     'validationTruck',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/integral/truck/deliveryTicketList/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/integral/truck/delivery-tickets/' + id, null)
     },
     {
       onSuccess: data => {
@@ -74,7 +74,7 @@ const DeliveryDetail = () => {
 
   const sentDeliveryTicketToMeti = (deliveryTicket) => {
     try {
-      makeCorePostRequest('/shop-reception-mobile/metiIntegration/doIntegrate', { deliveryTicketId: deliveryTicket.id }).then(() => {
+      makeCorePostRequest('/shop-reception-mobile/metiIntegration/do-integrate', { deliveryTicketId: deliveryTicket.id }).then(() => {
         queryClient.invalidateQueries('validationTruck').then(() => {});
         // localStorage.removeItem(`myData-${this.truckId}`);
       })

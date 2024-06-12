@@ -19,7 +19,7 @@ const ListTrucks = () => {
   const { data: truckList, isLoading} = useQuery(
       'truckList',
     async () => {
-        return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/list', null)
+        return await makeCoreGetRequest('/shop-reception-mobile/truck/shop', null)
     },
     {
         onError: error => {
@@ -41,7 +41,7 @@ const ListTrucks = () => {
       spacing={1}
       items={truckList?.map((truck: any, index) => (
         <TruckCard
-          // key={truck.id}
+          key={truck.id}
           onClick={() => {
             navigate(URLS.AUTH_TRUCK_DETAIL.replace(':id', truck.id.toString()))
           }}

@@ -46,7 +46,7 @@ const PackagingInventoryUpdate = () => {
   const { data: supportList, isLoading} = useQuery(
     'supportList',
     async () => {
-        return await makeCoreGetRequest('/shop-reception-mobile/support/shop/all/list', null)
+        return await makeCoreGetRequest('/shop-reception-mobile/support/shop/all', null)
     },
     {
         onError: error => {
@@ -61,7 +61,7 @@ const PackagingInventoryUpdate = () => {
   const { data: shopCode, isLoading: isLoadingShopCode} = useQuery(
     'shopCode',
     async () => {
-        const shopCode = await makeCoreGetRequest('/shop-reception-mobile/home/getShopCode', null)
+        const shopCode = await makeCoreGetRequest('/shop-reception-mobile/home/shop-code', null)
         await formik.setFieldValue('shopCode', Number(shopCode.value));
 
         return shopCode.value;
