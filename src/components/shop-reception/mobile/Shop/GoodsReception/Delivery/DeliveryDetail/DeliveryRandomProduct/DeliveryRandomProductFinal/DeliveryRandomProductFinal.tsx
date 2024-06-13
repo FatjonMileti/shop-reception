@@ -62,7 +62,7 @@ const DeliveryRandomProductFinal = () => {
 
   const productScan = () => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scan/' + support.supportId + '/' + formik.values.productCode, null).then(resp => {
+      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scan-by-code/' + support.supportId + '/' + formik.values.productCode, null).then(resp => {
         const scanOk = resp.scanSuccess;
         const mess = resp.errorMessage;
         const scanStatus = resp.scanStatus;
@@ -98,7 +98,7 @@ const DeliveryRandomProductFinal = () => {
 
   const productScanById = (id) => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scanById/' + support.supportId + '/' + id, null).then(resp => {
+      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scan-by-id/' + support.supportId + '/' + formik.values.productId, null).then(resp => {
         const scanOk = resp.scanSuccess;
         const mess = resp.errorMessage;
         const scanStatus = resp.scanStatus;

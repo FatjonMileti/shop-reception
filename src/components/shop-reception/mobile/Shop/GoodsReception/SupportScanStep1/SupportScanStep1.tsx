@@ -156,7 +156,7 @@ const SupportScanStep1 = () => {
   }
 
   const toggleIsSearching = (): void => {
-    makeCorePostRequest('/shop-reception-mobile/support/shop/scan/' + id, { supportCode: formik.values.supportCode }).then(r => {
+    makeCorePostRequest('/shop-reception-mobile/support/shop/scan-by-code/' + id, { supportCode: formik.values.supportCode }).then(r => {
       setSupportNumber(r.supportNumber)
       setSupportId(r.supportId)
       formik.setFieldValue('supportTypeId', String(r.supportTypeId))

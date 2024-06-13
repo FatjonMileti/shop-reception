@@ -32,7 +32,7 @@ const RecordReturnDetail = () => {
     onSubmit: async (values: any) => {
       try {
         const payload = formik.values.blList.map(bl => bl.id);
-        await makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/saveNoticeList/' + truckId, payload, null);
+        await makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/save-notices/' + truckId, payload, null);
         navigate(`${URLS.AUTH_RECORD_RETURN_STEP_3}?id=${truckId}`)
 
 
@@ -48,7 +48,7 @@ const RecordReturnDetail = () => {
   const { data: noticeList, isLoading: isNoticeListLoading} = useQuery(
     'getNoticeListId',
     async () => {
-      const list = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/getNoticeList/' + truckId, null)
+      const list = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/notices/' + truckId, null)
       await formik.setFieldValue('blList', list)
       return list
     },
@@ -68,7 +68,7 @@ const RecordReturnDetail = () => {
   const { data: noticeLists, isLoading: isNoticeListsLoading} = useQuery(
     'getNoticeLists',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/getAllNoticeList', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/all-notices', null)
     },
     {
       onError: error => {

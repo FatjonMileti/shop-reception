@@ -24,7 +24,7 @@ const RecordReturn = () => {
   const { data: depositList, isLoading} = useQuery(
     'recordReturn',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/getDepositAndHubReturnList', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/deposit-and-hub-returns', null)
 
     },
     {
@@ -40,7 +40,7 @@ const RecordReturn = () => {
   const { data: truck, isLoading: truckLoading} = useQuery(
     'recordTruck',
     async () => {
-      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/exit/getTruck/' + truckId, null)
+      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/exit/truck/' + truckId, null)
       await formik.setValues({
         depositId: truck.depositId,
         truckNumber: truck.truckNumber,

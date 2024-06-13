@@ -33,7 +33,7 @@ const ExpectedDepositReturnsStep3 = () => {
     ['support-list-table'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/supportList/${item.id}?parentId=${item.id}`
+        `/shop-reception-mobile/truck/deposit/return/supports/${item.id}?parentId=${item.id}`
       )
       return response || []
     },
@@ -51,7 +51,7 @@ const ExpectedDepositReturnsStep3 = () => {
     ['all-support-list'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/allSupportList/${item.id}`
+        `/shop-reception-mobile/truck/deposit/return/all-supports/${item.id}`
       )
       return response || []
     },
@@ -67,7 +67,7 @@ const ExpectedDepositReturnsStep3 = () => {
 
   const confirmSupportList = async (values: any) => {
     await makeCorePostRequest(
-      `/shop-reception-mobile/truck/deposit/return/confirmSupportList`,
+      `/shop-reception-mobile/truck/deposit/return/confirm-supports`,
       values
     )
   }
@@ -139,7 +139,7 @@ const ExpectedDepositReturnsStep3 = () => {
                 </TableCell>
                 <TableCell>
                   <ImageUpload
-                    uploadUrl={`/shop-reception-mobile/truck/deposit/return/uploadSupport/${item.id}/${supportItem.id}?supportCode=${supportItem.supportCode}`}
+                    uploadUrl={`/shop-reception-mobile/truck/deposit/return/upload-support/${item.id}/${supportItem.id}?supportCode=${supportItem.supportCode}`}
                     onSuccess={() => {
                       showNotification({
                         message: `Imaginea a fost incarcata cu succes.`,

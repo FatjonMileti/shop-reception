@@ -25,7 +25,7 @@ const SupportScanStep4 = () => {
   const { data: manualTruck, isLoading: isLoadingManualTruck} = useQuery(
     'manualTruck',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/getManualCreatedInfo/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/manual-created-info/' + id, null)
     },
     {
       onSuccess: () => setInfoLoaded(true),
@@ -71,7 +71,7 @@ const SupportScanStep4 = () => {
   const { data: canReturnToHub, isLoading: isLoadingCanReturnToHub} = useQuery(
     'hubAssigned',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/confirmHubAssigned', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/confirm-hub-assigned', null)
     },
     {
       onError: error => {

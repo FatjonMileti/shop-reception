@@ -31,7 +31,7 @@ const ExpectedDepositReturnsStep2 = () => {
     ['stack-list'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/stackList/${item.id}`
+        `/shop-reception-mobile/truck/deposit/return/stack-list/${item.id}`
       )
       return response || []
     },
@@ -47,7 +47,7 @@ const ExpectedDepositReturnsStep2 = () => {
 
   const confirmStackList = async (values: any) => {
     await makeCorePostRequest(
-      `/shop-reception-mobile/truck/deposit/return/confirmStackList`,
+      `/shop-reception-mobile/truck/deposit/return/confirm-stacks`,
       values
     )
   }

@@ -132,7 +132,7 @@ const Step2 = () => {
     if (!searchCode) return;
 
     try {
-      makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/supportType/scan/' + id, { supportTypeCode: searchCode }).then(r => {
+      makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/support-type/scan/' + id, { supportTypeCode: searchCode }).then(r => {
         if (!r.scanSuccess) {
 
         } else if (returnTruckModel.depositOrHubName.includes('CHEP') && !r.supportType.includes('CHEP')) {

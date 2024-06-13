@@ -41,7 +41,7 @@ const ExpectedDepositReturnsStep4 = () => {
 
   const finaliseReturn = async () => {
     await makeCorePostRequest(
-      `/shop-reception-mobile/truck/deposit/return/finaliseReturn/${item.id}`
+      `/shop-reception-mobile/truck/deposit/return/finalise-return/${item.id}`
     )
   }
 

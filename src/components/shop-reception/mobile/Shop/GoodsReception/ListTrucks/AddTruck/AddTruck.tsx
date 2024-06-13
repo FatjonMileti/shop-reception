@@ -39,7 +39,7 @@ const AddTruck = () => {
   const { data: truck, isLoading} = useQuery(
       'truck',
       async () => {
-        return await makeCoreGetRequest('/shop-reception-mobile/truck/getTruckCreationDTO/' + 'truckId', null)
+        return await makeCoreGetRequest('/shop-reception-mobile/truck/truck-creation/' + 'truckId', null)
       },
       {
         onError: error => {

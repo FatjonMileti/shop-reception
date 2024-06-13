@@ -23,7 +23,7 @@ const ContinueReturnDetailFinal = () => {
   const { data: CRTruck, isLoading} = useQuery(
     'getTruck',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/getTruck/' + id, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/truck/' + id, null)
     },
     {
       onError: error => {
@@ -91,7 +91,7 @@ const ContinueReturnDetailFinal = () => {
     };
 
     try {
-      makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/saveNotice/' + id, truck).then(() => navigate('/goodsReturn'))
+      makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/save-notice/' + id, truck).then(() => navigate('/goodsReturn'))
     }
     catch (error) {
       showNotification({

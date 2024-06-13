@@ -52,7 +52,8 @@ export const columns = (setModal, selectRow) => [
     field: 'regionName',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    disableSorting: true
   },
   {
     title: 'IP SFTP',
