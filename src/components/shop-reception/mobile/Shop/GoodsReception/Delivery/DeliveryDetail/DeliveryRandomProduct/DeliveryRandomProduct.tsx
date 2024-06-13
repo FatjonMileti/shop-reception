@@ -55,7 +55,11 @@ const DeliveryRandomProduct = () => {
   
   const search = () => {
     try {
-      makeCorePostRequest('/shop-reception-mobile/aleatory/support/scan/' + id, formik.values?.supportCode).then(resp => {
+      makeCorePostRequest('/shop-reception-mobile/aleatory/support/scan/' + id, formik.values?.supportCode, {
+        headers: {
+          'Content-Type': 'text/plain'
+        }
+      }).then(resp => {
         const scanOk = resp.scanSuccess;
         const mess = resp.errorMessage;
 

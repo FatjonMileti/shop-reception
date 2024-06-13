@@ -13,6 +13,7 @@ import { makeCoreGetRequest } from "../../../../../../../../../utils/api";
 import { formatErrorMessage } from "../../../../../../../../../utils/formatting";
 import { DefectReason, Mark, ScanStatus } from "../../../../../../../enums";
 import { TableHeaderType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table";
+import { TextField } from "@mui/material";
 
 const DeliveryRandomProductFinal = () => {
   const navigate = useNavigate();
@@ -455,15 +456,14 @@ const DeliveryRandomProductFinal = () => {
           helperText={formik.errors.bulkProductCode as string}
         />,
         <div style={{ display: 'flex' }}>
-          <Input
-            type='text'
-            label='Cod Produse'
-            variant='standard'
-            width='100%'
+          <TextField
+            label="Cod Produse"
+            variant="standard"
+            fullWidth
             value={formik.values.productCode}
-            onChange={event => formik.setFieldValue('productCode', (event.target as HTMLInputElement).value)}
+            onChange={event => formik.setFieldValue('productCode', event.target.value)}
             error={!!formik.errors.productCode}
-            helperText={formik.errors.productCode as string}
+            helperText={formik.errors.productCode ? String(formik.errors.productCode) : ''}
           />
           <IconButton onClick={() => productScan()}>
             <ManageSearchIcon />
@@ -477,57 +477,64 @@ const DeliveryRandomProductFinal = () => {
           onClick={null}
           style={{ width: '100%' }}
         />,
-        <Table
+        formik.values.productEans &&
+        (<Table
           columns={columns}
           isLoading={false}
           rows={rows}
           disablePagination={true}
           hideCheckbox={true}
-        />,
-        <Input
-          type='select'
-          label='Marca'
-          variant='outlined'
-          width='100%'
-          value={formik.values.mark}
-          values={marks?.map((mark) => ({ value: mark, label: mark }))}
-          onChange={event => {
-            console.log(marks);
-            formik.setFieldValue("mark", (event.target as HTMLInputElement).value);
-            populateDefectReasons((event.target as HTMLInputElement).value);
-          }}
-          disabled={disabled}
-          error={!!formik.errors.mark}
-          helperText={formik.errors.mark as string}
-        />,
-        <Input
-          type='select'
-          label='Motiv'
-          variant='outlined'
-          width='100%'
-          value={formik.values.defectReason}
-          values={defectReasons?.map((defect) => ({ value: defect, label: defect }))}
-          onChange={event => {
-            formik.setFieldValue("defectReason", (event.target as HTMLInputElement).value);
-          }}
-          disabled={disabled}
-          error={!!formik.errors.defectReason}
-          helperText={formik.errors.defectReason as string}
-        />,
-        <Button
+        />),
+        (!!litigation &&
+          <>
+            <Input
+              type='select'
+              label='Marca'
+              variant='outlined'
+              width='100%'
+              value={formik.values.mark}
+              values={marks?.map((mark) => ({ value: mark, label: mark }))}
+              onChange={event => {
+                console.log(marks);
+                formik.setFieldValue("mark", (event.target as HTMLInputElement).value);
+                populateDefectReasons((event.target as HTMLInputElement).value);
+              }}
+              disabled={disabled}
+              error={!!formik.errors.mark}
+              helperText={formik.errors.mark as string}
+            />,
+            <Input
+              type='select'
+              label='Motiv'
+              variant='outlined'
+              width='100%'
+              value={formik.values.defectReason}
+              values={defectReasons?.map((defect) => ({ value: defect, label: defect }))}
+              onChange={event => {
+                formik.setFieldValue("defectReason", (event.target as HTMLInputElement).value);
+              }}
+              disabled={disabled}
+              error={!!formik.errors.defectReason}
+              helperText={formik.errors.defectReason as string}
+            />
+          </>
+        ),
+        formik.values.productEans &&
+        (<Button
           type='button'
           variant='contained'
           label='CONFIRMĂ CANTITĂȚI'
           onClick={() => formik.submitForm()}
           style={{ width: '100%' }}
-        />,
-        <Button
+        />),
+        (!!support?.supportCode || !formik.values.productId) &&
+        (<Button
           type='button'
           variant='contained'
           label='FINALIZEAZĂ SUPORT'
           onClick={() => formik.submitForm()}
           style={{ width: '100%' }}
-        />,
+        />),
         <AlertModal
           open={isSgrProductsModalOpen}
           handleClose={closeSgrProductsModal}

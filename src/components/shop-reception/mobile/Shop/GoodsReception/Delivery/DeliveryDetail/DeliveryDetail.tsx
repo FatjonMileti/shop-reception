@@ -74,7 +74,7 @@ const DeliveryDetail = () => {
 
   const sentDeliveryTicketToMeti = (deliveryTicket) => {
     try {
-      makeCorePostRequest('/shop-reception-mobile/metiIntegration/doIntegrate', { deliveryTicketId: deliveryTicket.id }).then(() => {
+      makeCorePostRequest('/shop-reception-mobile/metiIntegration/do-integrate', { deliveryTicketId: deliveryTicket.id }).then(() => {
         queryClient.invalidateQueries('validationTruck').then(() => {});
         // localStorage.removeItem(`myData-${this.truckId}`);
       })

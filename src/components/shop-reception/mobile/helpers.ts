@@ -3,13 +3,13 @@ import { useQuery } from "react-query";
 import { makeCoreGetRequest } from "../../../utils/api";
 import { formatErrorMessage } from "../../../utils/formatting";
 import { useNotification } from "../../../hooks";
+import { getUserRoles } from "../../../utils/authService";
 
 export const getTitle = () => {
   const { showNotification } = useNotification();
-  const [shouldFetchHubName, setShouldFetchHubName] = useState(false);
-  const [shouldFetchDepositName, setShouldFetchDepositName] = useState(false);
+  const userRoles = getUserRoles()
 
-  const onError = (error) => {
+  const errorHandler = (error) => {
     showNotification({
       message: `${formatErrorMessage(error)}`,
       type: 'error'
@@ -29,32 +29,33 @@ export const getTitle = () => {
   };
 
   const { data: shopName } = useQuery('shop-name', fetchShopName, {
-    enabled: !sessionStorage.getItem("title"),
-    onError,
+    enabled: userRoles?.includes('GG_RO_HQ_SHOP_RECEPTION_STORE') && !sessionStorage.getItem("title"),
+    onError: (error) => errorHandler(error),
     onSuccess: (data) => {
       if (data) {
         sessionStorage.setItem("title", data.value);
-      } else setShouldFetchHubName(true);
+      }
     }
   });
 
+
   const { data: hubName } = useQuery('hub-name', fetchHubName, {
-    enabled: shouldFetchHubName && !sessionStorage.getItem("title"),
-    onError,
+    enabled: userRoles?.includes('GG_RO_HQ_SHOP_RECEPTION_HUB') && !sessionStorage.getItem("title"),
+    onError: (error) => errorHandler(error),
     onSuccess: (data) => {
       if (data) {
         sessionStorage.setItem("title", data.value);
-      } else setShouldFetchDepositName(true);
+      }
     }
   });
 
   const { data: depositName } = useQuery('deposit-name', fetchDepositName, {
-    enabled: shouldFetchDepositName && !sessionStorage.getItem("title"),
-    onError,
+    enabled: userRoles?.includes('GG_RO_HQ_SHOP_RECEPTION_WAREHOUSE') && !sessionStorage.getItem("title"),
+    onError: (error) => errorHandler(error),
     onSuccess: (data) => {
       if (data) {
         sessionStorage.setItem("title", data.value);
-      } else setShouldFetchDepositName(true);
+      }
     }
   });
 

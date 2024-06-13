@@ -27,7 +27,7 @@ const Step4 = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const notice = await makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/saveNotice/' + id, values);
+        const notice = await makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/save-notice/' + id, values);
 
         returnTruck.depositOrHubName === 'FURNIZOR CHEP' ? navigate('/goodsReturn')
           : navigate(URLS.AUTH_RETURN_STEP_5, { state: {id: id, notice: notice} });
@@ -44,7 +44,7 @@ const Step4 = () => {
   const { data: returnTruck, isLoading: isLoadingTruck} = useQuery(
     'returnTruck',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getTruckModel/' + id, null);
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/truck-model/' + id, null);
     },
     {
       onError: error => {

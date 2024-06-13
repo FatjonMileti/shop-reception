@@ -24,7 +24,7 @@ const AddTruck = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const response = await makeCorePostRequest('/shop-reception-mobile/truck/shop/createTruck', values);
+        const response = await makeCorePostRequest('/shop-reception-mobile/truck/shop/create-truck', values);
         navigate(URLS.AUTH_ADD_TRUCK_STEP_2, { state: { response } })
       } catch (error) {
         showNotification({
