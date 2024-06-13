@@ -29,7 +29,6 @@ import { EditReceivedProduct } from './EditReceivedProduct/EditReceivedProduct'
 import { ImageCell } from '../../../core-ui/ImageCell'
 import { debounce } from '@mui/material'
 import dayjs from 'dayjs'
-import { useNavigate } from 'react-router-dom'
 
 const ReceivedProducts = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
@@ -173,13 +172,8 @@ const ReceivedProducts = () => {
 
   const isXs = useMediaQuery('(max-width:624px)')
 
-  const navigate = useNavigate()
-
   return (
     <div className={s.mainContainer}>
-      <div onClick={() => navigate('/bakery/traceabilityOperator/received-products-test')}>
-        Test Link
-      </div>
       <AddReceivedProduct
         isModalOpen={isAddModalOpen}
         closeModal={() => setAddModalOpen(false)}
