@@ -16,7 +16,7 @@ const ExpectedTrucks = () => {
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],
     async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/getHubName`)
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/hub-name`)
       return response || []
     },
     {
@@ -32,7 +32,7 @@ const ExpectedTrucks = () => {
   const { data: trucksOptions, isLoading: isTruckOptionsLoading } = useQuery(
     ['expected-trucks'],
     async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/truck/hub/search/list`)
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/truck/hub/search`)
       const options = response.map(truck => ({
         label: truck.truckNumber,
         value: truck.id

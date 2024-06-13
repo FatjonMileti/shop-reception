@@ -17,18 +17,18 @@ export const getTitle = () => {
   };
 
   const fetchShopName = async () => {
-    return await makeCoreGetRequest('/shop-reception-mobile/home/getShopName', null);
+    return await makeCoreGetRequest('/shop-reception-mobile/home/shop-name', null);
   };
 
   const fetchHubName = async () => {
-    return await makeCoreGetRequest('/shop-reception-mobile/home/getHubName', null);
+    return await makeCoreGetRequest('/shop-reception-mobile/home/hub-name', null);
   };
 
   const fetchDepositName = async () => {
-    return await makeCoreGetRequest('/shop-reception-mobile/home/getDepositName', null);
+    return await makeCoreGetRequest('/shop-reception-mobile/home/deposit-name', null);
   };
 
-  const { data: shopName } = useQuery('getShopName', fetchShopName, {
+  const { data: shopName } = useQuery('shop-name', fetchShopName, {
     enabled: !sessionStorage.getItem("title"),
     onError,
     onSuccess: (data) => {
@@ -38,7 +38,7 @@ export const getTitle = () => {
     }
   });
 
-  const { data: hubName } = useQuery('getHubName', fetchHubName, {
+  const { data: hubName } = useQuery('hub-name', fetchHubName, {
     enabled: shouldFetchHubName && !sessionStorage.getItem("title"),
     onError,
     onSuccess: (data) => {
@@ -48,7 +48,7 @@ export const getTitle = () => {
     }
   });
 
-  const { data: depositName } = useQuery('getDepositName', fetchDepositName, {
+  const { data: depositName } = useQuery('deposit-name', fetchDepositName, {
     enabled: shouldFetchDepositName && !sessionStorage.getItem("title"),
     onError,
     onSuccess: (data) => {

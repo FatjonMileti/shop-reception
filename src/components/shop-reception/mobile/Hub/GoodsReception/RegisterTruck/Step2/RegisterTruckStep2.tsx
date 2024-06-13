@@ -19,7 +19,7 @@ const RegisterTruckStep2 = () => {
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],
     async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/getHubName`)
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/hub-name`)
       return response || []
     },
     {
@@ -36,7 +36,7 @@ const RegisterTruckStep2 = () => {
     ['truck-bls'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/hub/getTruckCreationDTOWithBlsForHub/${truckId}`
+        `/shop-reception-mobile/truck/hub/truck-creation-with-bls-for-hub/${truckId}`
       )
       return response || []
     },
@@ -51,7 +51,7 @@ const RegisterTruckStep2 = () => {
   )
 
   const saveBlForTruck = async (values: any) => {
-    return await makeCorePostRequest(`/shop-reception-mobile/truck/shop/saveBlListForTruck`, values)
+    return await makeCorePostRequest(`/shop-reception-mobile/truck/shop/save-bls-for-truck`, values)
   }
 
   const { isLoading, mutate } = useMutation(saveBlForTruck, {

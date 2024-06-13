@@ -7,7 +7,6 @@ import React, { useMemo } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
-import { columns } from '../../DeliveryCompleteScan/DeliveryCompleteScanStep3/helpers'
 
 const DeliveryRandomSupportConfirm = () => {
   const navigate = useNavigate()
@@ -71,7 +70,7 @@ const DeliveryRandomSupportConfirm = () => {
           onClick={null}
         />,
         <Table
-          columns={columns}
+          columns={[]}
           isLoading={false}
           rows={[]}
           disablePagination={true}

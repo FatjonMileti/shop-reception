@@ -20,7 +20,7 @@ const RegisterTruck = () => {
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],
     async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/getHubName`)
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/hub-name`)
       return response || []
     },
     {
@@ -35,7 +35,7 @@ const RegisterTruck = () => {
 
   const createTruck = async (values: any) => {
     return await makeCorePostRequest(
-      `/shop-reception-mobile/truck/shop/createTruck`,
+      `/shop-reception-mobile/truck/shop/create-truck`,
       values
     )
   }
