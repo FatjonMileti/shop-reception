@@ -34,7 +34,7 @@ const ExpectedTrucksStep4 = () => {
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],
     async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/getHubName`)
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/hub-name`)
       return response || []
     },
     {

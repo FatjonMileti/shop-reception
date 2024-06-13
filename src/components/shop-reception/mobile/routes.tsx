@@ -43,7 +43,6 @@ import { DeliverySensitiveProducts } from './Shop/GoodsReception/Delivery/Delive
 import { DeliveryRandomSupport } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomSupport'
 import { DeliveryCompleteScanStep1 } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryCompleteScan/DeliveryCompleteScanStep1'
 import { DeliveryCompleteScanStep2 } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryCompleteScan/DeliveryCompleteScanStep2'
-import { DeliveryCompleteScanStep3 } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryCompleteScan/DeliveryCompleteScanStep3'
 import { DeliverySensitiveProductsConfirm } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliverySensitiveProducts/DeliverySensitiveProductsConfirm'
 import { DeliveryRandomProduct } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct'
 import { DeliveryRandomSupportFinal } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomSupport/DeliveryRandomSupportFinal'
@@ -491,10 +490,6 @@ export const useMerchandiseRoutes = applicationPages => {
       <Route
         path={URLS.AUTH_DELIVERY_COMPLETE_SCAN_STEP_2}
         element={<DeliveryCompleteScanStep2 />}
-      />
-      <Route
-        path={URLS.AUTH_DELIVERY_COMPLETE_SCAN_STEP_3}
-        element={<DeliveryCompleteScanStep3 />}
       />
       <Route
         path={URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM}

@@ -28,7 +28,7 @@ export const getTitle = () => {
     return await makeCoreGetRequest('/shop-reception-mobile/home/deposit-name', null);
   };
 
-  const { data: shopName } = useQuery('getShopName', fetchShopName, {
+  const { data: shopName } = useQuery('shop-name', fetchShopName, {
     enabled: userRoles?.includes('GG_RO_HQ_SHOP_RECEPTION_STORE') && !sessionStorage.getItem("title"),
     onError: (error) => errorHandler(error),
     onSuccess: (data) => {
@@ -38,7 +38,8 @@ export const getTitle = () => {
     }
   });
 
-  const { data: hubName } = useQuery('getHubName', fetchHubName, {
+
+  const { data: hubName } = useQuery('hub-name', fetchHubName, {
     enabled: userRoles?.includes('GG_RO_HQ_SHOP_RECEPTION_HUB') && !sessionStorage.getItem("title"),
     onError: (error) => errorHandler(error),
     onSuccess: (data) => {
@@ -48,7 +49,7 @@ export const getTitle = () => {
     }
   });
 
-  const { data: depositName } = useQuery('getDepositName', fetchDepositName, {
+  const { data: depositName } = useQuery('deposit-name', fetchDepositName, {
     enabled: userRoles?.includes('GG_RO_HQ_SHOP_RECEPTION_WAREHOUSE') && !sessionStorage.getItem("title"),
     onError: (error) => errorHandler(error),
     onSuccess: (data) => {

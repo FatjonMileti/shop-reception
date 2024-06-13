@@ -1,7 +1,7 @@
 import { Autocomplete, Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
-import { CircularProgress, Grid, Typography } from '@mui/material'
+import { CircularProgress, Divider, Grid, Typography } from '@mui/material'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -26,7 +26,7 @@ const ExpectedTrucksStep3 = () => {
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],
     async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/getHubName`)
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/hub-name`)
       return response || []
     },
     {
@@ -188,6 +188,10 @@ const ExpectedTrucksStep3 = () => {
           onSearchIconClick={() => scanCode(supportCode)}
           width="100%"
         />
+      </Grid>
+
+      <Grid item xs={10}>
+        <Divider>SAU</Divider>
       </Grid>
 
       <Grid xs={10} item>
