@@ -3,14 +3,39 @@ import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { ShoppingCartStepper } from '../../core-ui/ShoppingCartStepper'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest } from 'utils/api'
+import { useNotification } from 'hooks'
+import { formatErrorMessage } from 'utils/formatting'
+import { LEGAL_PERSON_TYPE } from '../constants'
 
 const ReceiptInvoiceFinalized: React.FC = () => {
   const navigate = useNavigate()
+
+  const { showNotification } = useNotification()
+
   const [searchParams] = useSearchParams()
+
   const clientId = searchParams.get('clientId')
   const orderId = searchParams.get('orderId')
+
   const isXs = useMediaQuery('(max-width:624px)')
   const isXXs = useMediaQuery('(max-width:450px)')
+
+  const { data: client, isLoading: isClientLoading } = useQuery(
+    ['client-info'],
+    async () => {
+      return await makeCoreGetRequest(`/supply-omni/client/${clientId}`)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la căutarea produsului. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
 
   // TODO: Move styles external
   return (
@@ -47,6 +72,7 @@ const ReceiptInvoiceFinalized: React.FC = () => {
                   Comanda a fost finalizata!
                 </Typography>
                 <br />
+
                 <Button
                   variant="contained"
                   label="Factura fiscala"

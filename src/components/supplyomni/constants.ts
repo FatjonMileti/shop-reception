@@ -13,3 +13,5 @@ export const URLS = {
   AUTH_BILLS_TABLES: 'supplyOmni/bills',
   AUTH_BILL: 'supplyOmni/bills/:id'
 }
+
+export const LEGAL_PERSON_TYPE = 'B2B'
