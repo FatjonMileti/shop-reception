@@ -59,7 +59,6 @@ export const AddReceivedProduct = ({
   const [step, setStep] = React.useState(0)
   const [selectedProduct, setSelectedProduct] = React.useState<Product | undefined>(undefined)
   const [selectedSupplier, setSelectedSupplier] = React.useState<Supplier | undefined>(undefined)
-  const [image, setImage] = React.useState<File | null>(null)
   const [isPictureChanged, setIsPictureChanged] = React.useState(false)
   const { showNotification } = useNotification()
 
@@ -115,7 +114,6 @@ export const AddReceivedProduct = ({
       console.log('originalImage', (productDetails.picture.size / (1024 * 1024)).toFixed(5), 'mb')
       console.log('resizedImage', (resizedImage.size / (1024 * 1024)).toFixed(5), 'mb')
 
-      setImage(resizedImage)
       formData.append('fileObject', resizedImage)
 
       await makeCorePostRequest('/bakery/batch', formData)

@@ -18,11 +18,12 @@ import { SelectSupplier } from './SelectSupplier'
 import { Product, ReceivedProduct, Supplier } from '../interfaces'
 import { SelectProduct } from './SelectProduct'
 import { useMutation, useQuery } from 'react-query'
-import { formatPayloadDate } from '../../../../../utils/helpers'
+import { formatPayloadDate, resizeFile } from '../../../../../utils/helpers'
 import { makeCoreGetRequest, makeCorePutRequest } from '../../../../../utils/api'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { AxiosError } from 'axios'
+import { WebcamCapture } from 'components/core-ui/WebcamCapture'
 
 interface CorrectReceivedProductRequestData {
   productId: string
@@ -69,8 +70,25 @@ export const CorrectReceivedProduct = ({
   batchId,
   setShouldRefreshData
 }: CorrectReceivedProductProps) => {
+  const [showPhotoCapture, setShowPhotoCapture] = React.useState(false)
+  const [isPictureChanged, setIsPictureChanged] = React.useState(false)
   const inputFileRef = React.useRef<HTMLInputElement>()
   const { showNotification } = useNotification()
+
+  React.useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (isPictureChanged) {
+        event.preventDefault()
+        event.returnValue = 'You have unsaved changes. Are you sure you want to leave?'
+      }
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [isPictureChanged])
 
   const receivedProductQuery = useQuery<ReceivedProduct>(
     ['received-product', batchId],
@@ -122,7 +140,16 @@ export const CorrectReceivedProduct = ({
       }
 
       formData.append('dto', new Blob([JSON.stringify(data)], { type: 'application/json' }))
-      formData.append('fileObject', form.values.picture || null)
+
+      if (form.values.picture) {
+        const resizedImage = await resizeFile({ file: form.values.picture })
+        console.log('originalImage', (form.values.picture.size / (1024 * 1024)).toFixed(5), 'mb')
+        console.log('resizedImage', (resizedImage.size / (1024 * 1024)).toFixed(5), 'mb')
+
+        formData.append('fileObject', resizedImage)
+      } else {
+        formData.append('fileObject', null)
+      }
 
       await makeCorePutRequest(`/bakery/batch/correction/${batchId}`, formData)
     },
@@ -132,10 +159,11 @@ export const CorrectReceivedProduct = ({
         showNotification({
           message: `Product added successfully`,
           type: 'success'
-        });
+        })
         setShouldRefreshData(true)
+        setIsPictureChanged(false)
       },
-      onError: (res: any ) => {
+      onError: (res: any) => {
         if (res?.code === AxiosError.ERR_NETWORK) {
           showNotification({
             message: 'Verificati conexiunea la internet',
@@ -148,7 +176,7 @@ export const CorrectReceivedProduct = ({
           message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
           type: 'error'
         })
-      },
+      }
     }
   )
 
@@ -159,7 +187,7 @@ export const CorrectReceivedProduct = ({
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         ) : (
           <>
-            <Grid item xs={12} container spacing={2} alignItems="flex-end">
+            <Grid item xs={12} container spacing={2}>
               <Grid item container xs={12} spacing={2}>
                 <Grid item xl={3} lg={4} md={6} xs={12}>
                   <Input
@@ -274,7 +302,7 @@ export const CorrectReceivedProduct = ({
                   onChange={e => {
                     const hasSecondaryDLC = e.target.value === 'true'
                     form.setFieldValue('hasSecondaryDLC', hasSecondaryDLC)
-                    if(!hasSecondaryDLC) {
+                    if (!hasSecondaryDLC) {
                       form.setFieldValue('secondaryDLC', null)
                     }
                   }}
@@ -342,7 +370,7 @@ export const CorrectReceivedProduct = ({
                 />
               </Grid>
 
-              <Grid item xl={3} lg={4} md={6} xs={12} spacing={2} container alignItems="center">
+              <Grid item xs={12} spacing={2}>
                 {form.values.picture ? (
                   <>
                     <Grid item>
@@ -359,8 +387,33 @@ export const CorrectReceivedProduct = ({
                       </Button>
                     </Grid>
                   </>
-                ) : (
+                ) : showPhotoCapture ? (
                   <Grid item>
+                    <WebcamCapture
+                      onImageCapture={imageSrc => {
+                        fetch(imageSrc)
+                          .then(res => res.blob())
+                          .then(blob => {
+                            const file = new File([blob], 'image.JPEG', { type: 'image/png' })
+                            form.setFieldValue('picture', file)
+                            setIsPictureChanged(true)
+                            setShowPhotoCapture(false)
+                          })
+                      }}
+                      videoConstraints={{ width: 500, height: 400, facingMode: 'environment' }}
+                    />
+                  </Grid>
+                ) : (
+                  <Grid item style={{ marginTop: '24px' }}>
+                    <IconButton
+                      label="Deschide camera"
+                      onClick={() => setShowPhotoCapture(true)}
+                      startIcon={<ImageIcon />}
+                      variant="outlined"
+                      style={{
+                        marginRight: '24px'
+                      }}
+                    />
                     <IconButton
                       label="Incarca foto"
                       onClick={() => {
@@ -368,8 +421,21 @@ export const CorrectReceivedProduct = ({
                       }}
                       startIcon={<ImageIcon />}
                       variant="outlined"
-                      size="large"
                     />
+                    {!!form.errors.picture && (
+                      <p
+                        style={{
+                          color: '#AA0D11',
+                          fontFamily: 'Ubuntu',
+                          fontWeight: '400',
+                          fontSize: '0.75rem',
+                          lineHeight: '1.66',
+                          margin: '4px 0 0 14px'
+                        }}
+                      >
+                        {form.errors.picture as string}
+                      </p>
+                    )}
                   </Grid>
                 )}
 

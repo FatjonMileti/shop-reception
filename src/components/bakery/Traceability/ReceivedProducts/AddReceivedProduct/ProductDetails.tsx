@@ -248,7 +248,6 @@ export const ProductDetails = ({
                   onClick={() => setShowPhotoCapture(true)}
                   startIcon={<ImageIcon />}
                   variant="outlined"
-                  // size="large"
                   style={{ marginRight: '24px' }}
                 />
                 SAU
@@ -259,8 +258,6 @@ export const ProductDetails = ({
                   }}
                   startIcon={<ImageIcon />}
                   variant="outlined"
-                  // size="large"
-                  style={{ marginLeft: '24px' }}
                 />
                 {!!form.errors.picture && (
                   <p
