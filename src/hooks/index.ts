@@ -1,5 +1,4 @@
 export { default as useNotification } from './useNotification'
-export { default as useScandit } from './useScandit'
 export { default as usePermissions } from './usePermissions'
 export { default as useGovernanceDomains } from './useGovernanceDomains'
 export { default as useGetLocation } from './useGetLocation'

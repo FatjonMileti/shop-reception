@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { DatePicker, IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Paper, Grid, Stack, Box, useMediaQuery, InputAdornment } from '@mui/material'
-import { useNotification, useScandit } from 'hooks'
+import { useNotification } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
 import { makeCorePutRequest } from 'utils/api'
@@ -27,18 +27,6 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
   const { id } = useParams()
 
   const [searchParams] = useSearchParams()
-
-  const onScan = scanResult => {
-    setCode(scanResult.barcodes[0].data)
-    setIsVisible(false)
-  }
-
-  const { run, destroy } = useScandit({ onScan, isVisible })
-  const [isUsingScandit, setIsUsingScandit] = useState(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
-
-  const scanCode = () => {
-    setIsVisible(true)
-  }
 
   const sendReceipt = () => {
     if (code && receiptDate) {
@@ -68,17 +56,6 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
       })()
     }
   }
-
-  useEffect(() => {
-    isScannerDevice(() => {
-      try {
-        run()
-        setIsUsingScandit(true)
-      } catch (error) {
-        console.log(error)
-      }
-    })
-  }, [])
 
   useEffect(() => {
     document.getElementById('receipt-scan-input').focus()
@@ -160,17 +137,6 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
             direction={{ xs: 'column', sm: 'row' }}
             spacing={{ xs: 1, sm: 1, md: 1 }}
           >
-            {/* {isUsingScandit && (
-              <Box sx={!isXs ? {} : { width: '100%' }}>
-                <IconButton
-                  sx={!isXs ? {} : { width: '100%' }}
-                  onClick={scanCode}
-                  label="Scaneaza"
-                  variant="outlined"
-                  startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
-                />
-              </Box>
-            )} */}
             <Box sx={isXs ? { width: '100%' } : { width: '50%' }}>
               <IconButton
                 sx={isXs ? { width: '100%' } : { width: '50%' }}
@@ -181,20 +147,6 @@ const ReceiptBarcodeScanner = (props: ProductBarcodeScannerProps) => {
               />
             </Box>
           </Stack>
-        </Grid>
-        <Grid xs={12} md={12} lg={6} item>
-          <div className={cn({ [s.hiddenScanner]: !isVisible })}>
-            <div
-              id="scandit-barcode-picker"
-              style={{
-                maxWidth: '400px',
-                maxHeight: '400px',
-                visibility: isVisible ? 'visible' : 'hidden',
-                opacity: isVisible ? 1 : 0,
-                marginTop: isVisible ? '16px' : '0'
-              }}
-            />
-          </div>
         </Grid>
       </Grid>
     </div>

@@ -11,7 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 // pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
 pdfjs.GlobalWorkerOptions.workerSrc = 'static/pdfWorker/pdf.worker.min.js'
 
-const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
+const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions, searchParams, isBill }) => {
   const [pdfFile, setPdfFile] = useState(null)
 
   const { showNotification } = useNotification()
@@ -21,7 +21,14 @@ const PDFDocument = ({ pageNumber, scale, setNumPages, id, actions }) => {
       if (id == undefined) return
 
       try {
-        const pdfResult = await makeCoreGetRequest(`${actions.downloadAction.url}/${id}`, {
+        let url = `${actions.downloadAction.url}/${id}`
+        const clientId = searchParams.get('clientId')
+
+        if (isBill && clientId) {
+          url = `${url}/${clientId}`
+        }
+
+        const pdfResult = await makeCoreGetRequest(url, {
           responseType: 'arraybuffer'
         })
         setPdfFile(pdfResult)

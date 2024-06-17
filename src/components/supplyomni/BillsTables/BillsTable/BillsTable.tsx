@@ -29,6 +29,7 @@ import { toTableRowItems } from './serializer'
 import { buildTableFilterInputs } from './utils'
 import { FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { InvoiceActionIcon, ViewActionIcon } from 'icons'
+import { LEGAL_PERSON_TYPE } from 'components/supplyomni/constants'
 
 export const BillsTable: React.FC<BillsTableProps> = props => {
   const { urlResource, tableType } = props
@@ -92,35 +93,48 @@ export const BillsTable: React.FC<BillsTableProps> = props => {
           )
         }
       ]
+    } else if (tableType === TableType.WITH_INVOICE) {
+      return [
+        ...tableColumns,
+        {
+          title: '',
+          field: 'invoice',
+          align: 'left',
+          width: '80px',
+          render: row =>
+            !row.clientType || row.clientType === LEGAL_PERSON_TYPE ? null : (
+              <Box onClick={() => selectRow(row.id, tableType)} style={{ cursor: 'pointer' }}>
+                <ViewActionIcon />
+              </Box>
+            )
+        }
+      ]
     } else {
       return tableColumns
     }
-  }, [])
+  }, [tableItems])
 
   const tableFilterInputs = useMemo(() => buildTableFilterInputs(tableFilters, setTableFilters), [])
 
+  const selectRow = (rowId: number, action: TableType) => {
+    const item = tableItems.find(item => item.id === rowId)
+    setSelectedRow(item)
+    if (action === TableType.WITH_INVOICE) {
+      navigate(`/supplyOmni/bills/${item.id}?clientId=${item.clientId}`)
+    } else if (action === TableType.WITHOUT_INVOICE) {
+      navigate(`/supplyOmni/receiptClientDetails/${item.clientId}?orderId=${item.id}`)
+    }
+  }
+
   const rowActions = useMemo(() => {
-    if (tableType !== TableType.ALL) {
-      const selectRow = (rowId: number, action: TableType) => {
-        const item = tableItems.find(item => item.id === rowId)
-        setSelectedRow(item)
-        if (action === TableType.WITH_INVOICE) {
-          navigate(`/supplyOmni/bills/${item.id}`)
-        } else if (action === TableType.WITHOUT_INVOICE) {
-          navigate(`/supplyOmni/receiptClientDetails/${item.clientId}?orderId=${item.id}`)
-        }
-      }
+    if (tableType === TableType.WITHOUT_INVOICE) {
       const actions = [
         {
-          label:
-            tableType === TableType.WITH_INVOICE
-              ? SHOW_INVOICE_BUTTON_LABEL
-              : GENERATE_INVOICE_BUTTON_LABEL,
+          label: GENERATE_INVOICE_BUTTON_LABEL,
           labelColor: 'white',
           typographyVariant: 'medium',
           backgroundColor: '#0970E6',
-          desktopIcon:
-            tableType === TableType.WITH_INVOICE ? <ViewActionIcon /> : <InvoiceActionIcon />,
+          desktopIcon: <InvoiceActionIcon />,
           onClick: (e, rowId) => selectRow(rowId, tableType)
         }
       ]

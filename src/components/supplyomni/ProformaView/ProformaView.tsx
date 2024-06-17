@@ -79,7 +79,6 @@ const ProformaView = () => {
                 </div>
               ) : (
                 <PdfViewer
-                  proform={proform}
                   isLoading={isLoadingGetProform}
                   actions={{
                     downloadAction: { url: '/supply-omni/order/proforma/pdf', type: 'GET' },

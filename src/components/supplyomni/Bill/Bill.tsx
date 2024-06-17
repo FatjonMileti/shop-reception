@@ -3,6 +3,7 @@ import { PdfViewer } from 'components/core-ui/PdfViewer'
 
 const Bill = () => {
   const isXs = useMediaQuery('(max-width:624px)')
+
   return (
     <Box sx={!isXs ? { margin: '24px' } : { margin: '12px' }}>
       <Paper sx={{ pt: 0, pb: 2, minHeight: '400px' }}>
@@ -13,6 +14,7 @@ const Bill = () => {
               printAction: { url: '/supply-omni/order/invoice/print', type: 'POST' },
               printersAction: { url: '/supply-omni/printer', type: 'GET' }
             }}
+            isBill
           />
         </Box>
       </Paper>
