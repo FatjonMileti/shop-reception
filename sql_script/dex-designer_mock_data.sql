@@ -26,7 +26,7 @@ VALUES
     (4, 'Volumetry', 'Volumetry', '/volumetry', true),    
     (5, 'Shop Reception Admin', 'DonutLargeTwoTone', '/shopReception', true),
     (6, 'Shop Reception Mobile', 'DonutLargeTwoTone', '/shopReception/mobile', true),
-    (7, 'Lost Sales Opportunities', 'DonutLargeTwoTone', '/lostSalesOpportunities', true);
+    (7, 'Lost Sales Opportunities', 'OutOfShelf', '/lostSalesOpportunities', true);
 
 
 -- application submodule with module id
@@ -59,7 +59,7 @@ VALUES
     (18, 'Returnare marfa HUB', 'ProjectTeamGovernance', '/goodsReturnHub', true, 6),
     (19, 'Returnare marfa depozit', 'ProjectTeamGovernance', '/goodsReturnDeposit', true, 6),
     -- Lost Sales Opportunities
-    (20, 'Alerte', 'ManagementTasks', '/lostSalesAlerts', true, 7);
+    (20, 'Alerte', 'AlertIcon', '/lostSalesAlerts', true, 7);
 
 
 -- activity with submodule id
@@ -186,7 +186,8 @@ VALUES
     -- Bakery ADMIN p2
     (56, 'Gestiune ingrediente', 'Ingredients', null, true, 2),
     -- Lost Sales Opportunities
-    (57, 'Alerte', 'UsersManagement', null, true, 20);
+    (57, 'Alerte', 'AlertIcon', null, true, 20),
+    (58, 'Administrare Alerte', 'ManagementTasks', null, true, 20);
 
 
 -- screen with activity id (some are first screens)
@@ -387,7 +388,8 @@ VALUES
     (80, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 56, true),
     -- Lost Sales Opportunities
     (81, 'Alerte', 'Alerte', '/lostSalesOpportunities/alerts', true, 57, true),
-    (82, 'Alerta', 'Alerte', '/lostSalesOpportunities/alerts/:id', true, 57, false);
+    (82, 'Alerta', 'Alerte', '/lostSalesOpportunities/alerts/:id', true, 57, false),
+    (83, 'Administrare Alerte', 'ManagementTasks', '/lostSalesOpportunities/alertManagement', true, 58, true);
 
 -- roles
 INSERT INTO
@@ -502,7 +504,7 @@ VALUES
     (200, 178), (200, 179), (200, 180), (200, 181), (200, 182), (200, 183), (200, 184), (200, 185),
     (200, 186), (200, 187), (200, 188), (200, 193), (200, 189), (200, 190),
     -- Lost Sales Opportunities
-    (300, 57);
+    (300, 57), (300, 58);
 
 
 -- reset sequences
