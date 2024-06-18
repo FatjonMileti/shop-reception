@@ -14,6 +14,7 @@ import { useFormik } from 'formik'
 import { productDetailsSchema } from '../helper'
 import dayjs from 'dayjs'
 import { AxiosError } from 'axios'
+import { useOfflineTool } from '../../../../core-ui/Offline'
 
 interface ReceivedProductRequestData {
   productId: string
@@ -61,6 +62,8 @@ export const AddReceivedProduct = ({
   const [selectedSupplier, setSelectedSupplier] = React.useState<Supplier | undefined>(undefined)
   const [isPictureChanged, setIsPictureChanged] = React.useState(false)
   const { showNotification } = useNotification()
+
+  const offlineTool = useOfflineTool();
 
   React.useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
@@ -117,6 +120,8 @@ export const AddReceivedProduct = ({
       formData.append('fileObject', resizedImage)
 
       await makeCorePostRequest('/bakery/batch', formData)
+
+
     },
     {
       onSuccess: () => {
@@ -134,17 +139,33 @@ export const AddReceivedProduct = ({
           type: 'success'
         })
       },
-      onError: (res: any) => {
-        if (res?.code === AxiosError.ERR_NETWORK) {
+      onError: (err: any) => {
+        if (err?.code === AxiosError.ERR_NETWORK) {
           showNotification({
             message: 'Verificati conexiunea la internet',
             type: 'error'
           })
+
+          // Store offline
+          offlineTool.addOwnTask({
+            type: 'Produse receptionate',
+            data: err.config.data as FormData,
+            url: '/bakery/batch',
+            method: 'post'
+          })
+
+          closeModal()
+          setSelectedProduct(undefined)
+          setSelectedSupplier(undefined)
+          setStep(0)
+          detailsForm.resetForm()
+          setIsPictureChanged(false)
+
           return
         }
 
         showNotification({
-          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(err)}`,
           type: 'error'
         })
       }

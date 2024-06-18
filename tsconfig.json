@@ -11,7 +11,7 @@
     "sourceMap": true,
     // "strict": true,
     "downlevelIteration": true,
-    "lib": ["dom", "es2021", "webworker"]
+    "lib": ["dom", "es2021", "webworker", "dom.iterable"]
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "*/node_modules/"]
