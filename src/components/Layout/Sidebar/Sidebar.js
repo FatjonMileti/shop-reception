@@ -11,6 +11,7 @@ import cn from 'classnames'
 import s from './Sidebar.scss'
 import { Box, Typography } from '@mui/material'
 import { Icon_v2 } from 'components/core-ui/Icon_v2'
+import { useOfflineTool } from '../../core-ui/Offline'
 
 const staticItems = [
   {
@@ -53,6 +54,8 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
   const navigate = useNavigate()
 
   const auth = useAuth()
+
+  const offlineTool = useOfflineTool();
 
   useEffect(() => {
     const handleOutsideClick = event => {
@@ -100,6 +103,7 @@ const Sidebar = ({ isMenuOpen, handleCloseMenu, modules, setSubdomainId }) => {
   const handleLogout = async () => {
     logout()
     localStorage.removeItem('selectedSubdomainId')
+    offlineTool.deleteOwnTasks()
     auth.signOutRedirect()
   }
 
