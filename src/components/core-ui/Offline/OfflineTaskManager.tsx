@@ -155,7 +155,7 @@ export const OfflineTaskManager = ({
           paper: s.paper,
         }}
       >
-        <DialogTitle>List of tasks</DialogTitle>
+        <DialogTitle>Lista in asteptare</DialogTitle>
         <DialogContent
           classes={{
             root: s.content,
@@ -204,7 +204,7 @@ export const OfflineTaskManager = ({
           <DialogActions>
             {tasks.length > 0 && !allSaved && (
               <Button onClick={onSaveClick}>
-                Save All <CheckIcon />
+                Salveaza toate <CheckIcon />
                 {savingAll && (
                   <CircularProgress
                     size={24}
@@ -225,7 +225,7 @@ export const OfflineTaskManager = ({
                 onClick={onClearAllClick}
                 color={allSaved ? "warning" : "error"}
               >
-                Clear all <DeleteIcon />
+                Sterge toate <DeleteIcon />
               </Button>
             )}
           </DialogActions>
