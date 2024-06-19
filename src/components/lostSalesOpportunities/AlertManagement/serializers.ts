@@ -1,8 +1,11 @@
-export const toTableRowItems = (items: any[]) =>
+import { formatUIDateTime } from 'utils/helpers'
+import { AlertManagementItem } from '../interfaces'
+
+export const toTableRowItems = (items: AlertManagementItem[]) =>
   items.map(item => ({
     id: item.id,
     articleId: item.articleId ?? '',
     articleName: item.articleName ?? '',
-    snoozeStart: item.snoozeStart ?? '',
-    snoozeEnd: item.snoozeEnd ?? ''
+    snoozeStart: formatUIDateTime(item.snoozeStart),
+    snoozeEnd: formatUIDateTime(item.snoozeEnd)
   }))

@@ -7,13 +7,19 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { toTableRowItems } from './serializers'
 import { handleQueryError } from 'utils/helpers'
 import { useNotification } from 'hooks'
+import { Typography } from '@fullscreendigital/carrefour-dex-fe'
+import { EditActionIcon } from 'icons'
+import { UnsnoozeAlarmModal } from './UnsnoozeAlarmModal'
+import { AlertManagementItem } from '../interfaces'
 
 const AlertManagement = () => {
-  const [tableItems, setTableItems] = useState<any[]>([])
+  const [tableItems, setTableItems] = useState<AlertManagementItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [shouldResetPage, setShouldResetPage] = useState<boolean>(false)
+  const [selectedRowId, setSelectedRowId] = useState(0)
+  const [isUnsnoozeAlarmModalOpen, setIsUnsnoozeAlarmModalOpen] = useState<boolean>(false)
 
   const { showNotification } = useNotification()
 
@@ -42,23 +48,54 @@ const AlertManagement = () => {
     }
   }
 
+  const openUnsnoozeAlarmModal = (): void => setIsUnsnoozeAlarmModalOpen(true)
+  const closeUnsnoozeAlarmModal = (): void => setIsUnsnoozeAlarmModalOpen(false)
+
+  const selectRowId = (rowId: number) => {
+    setSelectedRowId(rowId)
+    openUnsnoozeAlarmModal()
+  }
+
   return (
     <div className={s.mainContainer}>
-      <Table
-        hideCheckbox
-        orderBy="articleName"
-        order="asc"
-        columns={columns}
-        items={tableItems}
-        fetchData={fetchData}
-        isLoading={isLoading}
-        totalCount={totalCount}
-        shouldRefreshData={shouldRefreshData}
-        setShouldRefreshData={setShouldRefreshData}
-        shouldResetPage={shouldResetPage}
-        setShouldResetPage={setShouldResetPage}
-        labelRowsPerPage="Randuri pe pagina:"
-      />
+      {tableItems.length || isLoading ? (
+        <>
+          <UnsnoozeAlarmModal
+            isModalOpen={isUnsnoozeAlarmModalOpen}
+            closeModal={closeUnsnoozeAlarmModal}
+            id={selectedRowId}
+            setShouldRefreshData={setShouldRefreshData}
+          />
+          <Table
+            hideCheckbox
+            orderBy="articleName"
+            order="asc"
+            columns={columns}
+            items={tableItems}
+            fetchData={fetchData}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            shouldRefreshData={shouldRefreshData}
+            setShouldRefreshData={setShouldRefreshData}
+            shouldResetPage={shouldResetPage}
+            setShouldResetPage={setShouldResetPage}
+            labelRowsPerPage="Randuri pe pagina:"
+            rowActions={[
+              {
+                label: 'Activeaza alarma',
+                labelColor: 'white',
+                typographyVariant: 'medium',
+                backgroundColor: '#0970E6',
+                desktopIcon: <EditActionIcon />,
+                onClick: (e, rowId) => selectRowId(rowId)
+              }
+            ]}
+            rowActionsWidth="160px"
+          />
+        </>
+      ) : (
+        <Typography variant="regular">Nu exista date de afisat.</Typography>
+      )}
     </div>
   )
 }

@@ -10,7 +10,7 @@ import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Box } from '@mui/material'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { PhotoItem } from './PhotoItem'
-import { AlertFormProps } from 'components/lostSalesOpportunities/interfaces'
+import { AlertFormProps, AlertFormValues } from 'components/lostSalesOpportunities/interfaces'
 import { PhotoButtons } from './PhotoButtons'
 import { toAlertPayload } from './serializers'
 
@@ -63,12 +63,12 @@ const AlertForm: React.FC<AlertFormProps> = props => {
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: {
-      feedbackReason: '',
+      feedbackReason: {value: '', label: ''},
       comment: '',
       photo: null
     },
     validationSchema: validationSchema,
-    onSubmit: async (values: any) => {
+    onSubmit: async (values: AlertFormValues) => {
       const postValues = await toAlertPayload(values, id)
       mutate(postValues)
     }

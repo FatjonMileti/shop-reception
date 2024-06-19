@@ -1,4 +1,4 @@
-export const toSnoozeAlertPayload = (alertId, snoozeOptionId) => ({
+export const toSnoozeAlertPayload = (alertId: number, snoozeOptionId: number) => ({
   alertId,
   snoozeOptionId
 })

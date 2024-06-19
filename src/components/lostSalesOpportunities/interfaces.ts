@@ -41,3 +41,21 @@ export interface AlertDetailsProps {
   item: AlertItem
   setShouldRefreshData: Function
 }
+
+export interface AlertSummaryProps {
+  item: AlertItem
+}
+
+export interface AlertManagementItem {
+  id: number
+  articleId: string
+  articleName: string
+  snoozeStart: string
+  snoozeEnd: string
+}
+
+export interface AlertFormValues {
+  feedbackReason: ValueLabelInterface
+  comment: string
+  photo: File
+}

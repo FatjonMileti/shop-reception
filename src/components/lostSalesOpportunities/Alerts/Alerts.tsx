@@ -7,6 +7,7 @@ import { handleQueryError } from 'utils/helpers'
 import { makeCoreGetRequest } from 'utils/api'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { AlertDateInfo } from '../common/AlertDateInfo'
+import { Typography } from '@mui/material'
 
 const Alerts = () => {
   const [totalCount, setTotalCount] = useState<number>(null)
@@ -45,16 +46,21 @@ const Alerts = () => {
 
   return (
     <div className={s.mainContainer}>
-      <AlertDateInfo validHour={validHour} />
-      <ListTable
-        rows={rows}
-        handleRemoteData={fetchData}
-        isLoading={isLoading}
-        totalCount={totalCount}
-        rowActionsWidth="90px"
-        setShouldRefreshData={setShouldRefreshData}
-        shouldRefreshData={shouldRefreshData}
-      />
+      {totalCount !== 0 ? (
+        <>
+          <AlertDateInfo validHour={validHour} />
+          <ListTable
+            rows={rows}
+            handleRemoteData={fetchData}
+            isLoading={isLoading}
+            totalCount={totalCount}
+            setShouldRefreshData={setShouldRefreshData}
+            shouldRefreshData={shouldRefreshData}
+          />
+        </>
+      ) : (
+        <Typography variant="regular">Nu exista date de afisat.</Typography>
+      )}
     </div>
   )
 }

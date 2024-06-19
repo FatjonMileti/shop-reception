@@ -1,11 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 import { Capsule } from 'components/core-ui/Capsule'
 import s from '../Alerts.modules.scss'
-import { AlertItem } from 'components/lostSalesOpportunities/interfaces'
-
-interface AlertSummaryProps {
-  item: AlertItem
-}
+import { AlertSummaryProps } from 'components/lostSalesOpportunities/interfaces'
 
 const AlertSummary: React.FC<AlertSummaryProps> = props => {
   const { item } = props
