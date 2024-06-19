@@ -1,5 +1,5 @@
 import { TitleHeader } from '../../../../../../Common/TitleHeader'
-import { Button, Divider, IconButton, Input, Table, Typography } from "@fullscreendigital/carrefour-dex-fe";
+import { Button, DatePicker, Divider, IconButton, Input, Table, Typography } from "@fullscreendigital/carrefour-dex-fe";
 import { Grid } from '../../../../../../../Common/Grid'
 import { URLS } from '../../../../../../constants'
 import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
@@ -9,16 +9,19 @@ import { useFormik } from 'formik'
 import { useLocation, useNavigate } from "react-router-dom";
 import { useNotification } from "../../../../../../../../../hooks";
 import AlertModal from "../../../../../../Common/AlertModal/AlertModal";
-import { makeCoreGetRequest } from "../../../../../../../../../utils/api";
+import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../../../utils/api";
 import { formatErrorMessage } from "../../../../../../../../../utils/formatting";
 import { DefectReason, Mark, ScanStatus } from "../../../../../../../enums";
 import { TableHeaderType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table";
 import { TextField } from "@mui/material";
+import ImageUpload from "../../../../../../Common/ImageUpload/ImageUpload";
 
 const DeliveryRandomProductFinal = () => {
   const navigate = useNavigate();
   const { showNotification } = useNotification();
   const location = useLocation();
+  const support = location.state;
+
   const [isSgrProductsModalOpen, setIsSgrProductsModalOpen] = useState(false);
   const [sgrProductsModalContent, setSgrProductsModalContent] = useState({ title: '', listItems: [], buttons: [] });
   const [isProductScanModalOpen, setIsProductScanModalOpen] = useState(false);
@@ -29,24 +32,125 @@ const DeliveryRandomProductFinal = () => {
   const [codeAndEanNotPresentModalContent, setCodeAndEanNotPresentModalContent] = useState({ title: '', buttons: [] });
   const [isSgrMessageModalOpen, setIsSgrMessageModalOpen] = useState(false);
   const [sgrMessageModalContent, setSgrMessageModalContent] = useState({ title: '', buttons: [] });
+  const [isConfirmFinaliseSupportModalOpen, setIsConfirmFinaliseSupportModalOpen] = useState(false);
+  const [confirmFinaliseSupportModalContent, setConfirmFinaliseSupportModalContent] = useState({ title: '', buttons: [] });
   const [marks, setMarks] = useState([]);
   const [defectReasons, setDefectReasons] = useState([]);
   const [litigation, setLitigation] = useState(null);
-  const [disabled, setDisabled] = useState(false);
-  const validationSchema = useMemo(() => getValidationSchema(), []);
-  const support = location.state;
-  console.log(support);
+  const [showModificaButton, setShowModificaButton] = useState(false);
+  const [verified, setverified] = useState(0);
+  const [productScanResp, setProductScanResp] = useState<any>()
 
+
+  const validationSchema = useMemo(() => getValidationSchema(), []);
   const formik = useFormik({
     enableReinitialize: false,
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      console.log(values);
-      navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT_CONFIRM)
+
     }
   })
+
+  const onConfirm = () => {
+    const values = formik.values
+
+    let submitDlc = values?.dlc;
+    if (submitDlc && typeof submitDlc === 'object') {
+      submitDlc = submitDlc.toISOString().split('T')[0];
+    }
+
+
+    try {
+      const product = {
+        "id": values.productId,
+        "name": values.productName,
+        "code": values.productCode,
+        "ean": values.productEans,
+        "eanReceived": values.eanReceived,
+        "unit": null,
+        "integral": parseFloat(values.currentConformQuantity) || 0,
+        "broken": parseFloat(values.currentDefectQuantity) || 0,
+        "quantity": values.quantity,
+        "shortDlc": values.shortDlc,
+        "dlc": submitDlc,
+        "defectReason": values.defectReason,
+        "mark": values.mark,
+        "shopReceptionDeviation": values.shopReceptionDeviation,
+        "supportId": support.supportId
+      }
+      makeCorePostRequest(`/shop-reception-mobile/aleatory/product/save`, product).then( resp => {
+        setverified(resp.counter)
+        formik.resetForm
+        }
+      )
+
+    } catch (error) {
+      showNotification({
+        message: `Error while submitting. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const onFinalize = () => {
+    showConfirmFinaliseSupport();
+
+  }
+
+  const doFinalise = () => {
+    try {
+      makeCorePostRequest(`/shop-reception-mobile/aleatory/product/support/close/${support.truckId}`, support.supportId).then(
+        () =>  navigate(URLS.AUTH_DELIVERY_DETAIL)
+      )
+    } catch (error) {
+      showNotification({
+        message: `Error while submitting. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const modifyQuantities = () => {
+    navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT_CONFIRM, {state: {
+        productId: formik.values.productId,
+        supportId: support.supportId,
+        truckId: support.truckId,
+        flow: 'aleatory_product',
+        quantity: formik.values.quantity,
+      }});
+  }
+
+
+
+  const showConfirmFinaliseSupport = () => {
+    setConfirmFinaliseSupportModalContent({
+      title: `Au fost verificate ${verified} produse de pe suport!`,
+      buttons: [
+        {
+          label: 'Mai verific',
+          onClick: () => {
+            setIsConfirmFinaliseSupportModalOpen(false);
+          },
+          color: 'primary'
+        },
+        {
+          label: 'Am terminat',
+          onClick: () => {
+            doFinalise();
+            setIsConfirmFinaliseSupportModalOpen(false);
+          },
+          color: 'primary'
+        },
+      ]
+    });
+    setIsConfirmFinaliseSupportModalOpen(true);
+  }
+
+  const closeConfirmFinaliseSupport = () => {
+    setIsConfirmFinaliseSupportModalOpen(false);
+  }
 
   useEffect(() => {
     if (support?.sgrProductsList?.length !== 0) {
@@ -60,12 +164,21 @@ const DeliveryRandomProductFinal = () => {
     }
   }, [support])
 
-  const productScan = () => {
+  useEffect(() => {
+    if (support?.support?.productCode) {
+      formik.setFieldValue('productCode', support.support.productCode)
+      productScan(support?.support?.supportId, support?.support?.productCode);
+    }
+  }, [support]);
+
+
+  const productScan = (supportId, productCode) => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scan-by-code/' + support.supportId + '/' + formik.values.productCode, null).then(resp => {
+      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scan-by-code/' + supportId + '/' + productCode, null).then(resp => {
         const scanOk = resp.scanSuccess;
         const mess = resp.errorMessage;
         const scanStatus = resp.scanStatus;
+        setShowModificaButton(resp.alreadyScanned)
 
         if (scanOk !== true) {
           formik.setValues({
@@ -85,6 +198,7 @@ const DeliveryRandomProductFinal = () => {
           }
           populateScanInfo(resp);
           formik.setFieldValue('bulkProductCode', '');
+          setProductScanResp(resp)
         }
       })
     }
@@ -102,6 +216,7 @@ const DeliveryRandomProductFinal = () => {
         const scanOk = resp.scanSuccess;
         const mess = resp.errorMessage;
         const scanStatus = resp.scanStatus;
+        setShowModificaButton(resp.alreadyScanned)
 
         if (scanOk !== true) {
           formik.setValues({
@@ -130,6 +245,10 @@ const DeliveryRandomProductFinal = () => {
       })
     }
   }
+
+  useEffect(() => {
+    calculateLitigationType()
+  }, [formik.values.currentConformQuantity, formik.values.currentDefectQuantity, productScanResp])
 
   const calculateLitigationType = () => {
       const currentConformValue = parseFloat(formik.values.currentConformQuantity);
@@ -170,11 +289,6 @@ const DeliveryRandomProductFinal = () => {
         setLitigation(null);
       }
 
-      if (!litigation) {
-        setDisabled(true);
-      } else {
-        setDisabled(false);
-      }
 
       formik.setFieldValue('mark', '');
       formik.setFieldValue('defectReason', '');
@@ -207,6 +321,11 @@ const DeliveryRandomProductFinal = () => {
     }
   }
 
+  useEffect(() => {
+    populateDefectReasons(formik.values.mark)
+  }, [formik.values.mark])
+
+
   const populateScanInfo = (resp) => {
     const dlc = resp.shortDlc ? null : resp.dlc;
     const conform = resp.validated === null ? 0 : resp.validated;
@@ -227,11 +346,25 @@ const DeliveryRandomProductFinal = () => {
       shortDlc: resp.shortDlc,
       defectReason: resp.defectReason,
       mark: resp.mark,
-      currentConformQuantity: 0,
-      currentDefectQuantity: 0,
+      currentConformQuantity: support?.support?.currentConformQuantity || 0,
+      currentDefectQuantity: support?.support?.currentDefectQuantity || 0,
       showDlc: resp.dlc !== null || resp.shortDlc === true
     })
   }
+
+  const handleSuccess = () => {
+    showNotification({
+      message: 'Image uploaded successfully',
+      type: 'success'
+    });
+  };
+
+  const handleError = (error) => {
+    showNotification({
+      message: `${formatErrorMessage(error)}`,
+      type: 'error'
+    });
+  };
 
   const columns: Array<TableHeaderType> = [
     {
@@ -249,7 +382,6 @@ const DeliveryRandomProductFinal = () => {
           value={rowData.qualitative}
           onChange={(e) => {
             formik.setFieldValue('currentConformQuantity', (e.target as HTMLInputElement).value);
-            calculateLitigationType();
           }}
           variant='standard'
         />
@@ -260,15 +392,25 @@ const DeliveryRandomProductFinal = () => {
       field: 'defective',
       align: 'left',
       render: (rowData: any) => (
+        <div style={{ display: "flex" }}>
         <Input
           type="number"
           value={rowData.defective}
           onChange={(e) => {
             formik.setFieldValue('currentDefectQuantity', (e.target as HTMLInputElement).value);
-            calculateLitigationType();
           }}
           variant='standard'
         />
+          {
+            litigation === 2 &&
+            <ImageUpload
+              uploadUrl={`/shop-reception-mobile/integral/upload/${support.supportId}/${formik.values.productId}`}
+              onSuccess={() => handleSuccess()}
+              onError={handleError}
+              inputId={`support${support.supportId}`}
+            />
+          }
+        </div>
       )
     }
   ]
@@ -465,7 +607,7 @@ const DeliveryRandomProductFinal = () => {
             error={!!formik.errors.productCode}
             helperText={formik.errors.productCode ? String(formik.errors.productCode) : ''}
           />
-          <IconButton onClick={() => productScan()}>
+          <IconButton onClick={() => productScan(support.supportId, formik.values.productCode)}>
             <ManageSearchIcon />
           </IconButton>
         </div>,
@@ -495,14 +637,11 @@ const DeliveryRandomProductFinal = () => {
               value={formik.values.mark}
               values={marks?.map((mark) => ({ value: mark, label: mark }))}
               onChange={event => {
-                console.log(marks);
                 formik.setFieldValue("mark", (event.target as HTMLInputElement).value);
-                populateDefectReasons((event.target as HTMLInputElement).value);
               }}
-              disabled={disabled}
               error={!!formik.errors.mark}
               helperText={formik.errors.mark as string}
-            />,
+            />
             <Input
               type='select'
               label='Motiv'
@@ -513,9 +652,15 @@ const DeliveryRandomProductFinal = () => {
               onChange={event => {
                 formik.setFieldValue("defectReason", (event.target as HTMLInputElement).value);
               }}
-              disabled={disabled}
+              disabled={formik.values.mark === ''}
               error={!!formik.errors.defectReason}
               helperText={formik.errors.defectReason as string}
+            />
+            <DatePicker
+              style={{ width: '100%' }}
+              value={formik.values.dlc}
+              onChange={value => formik.setFieldValue('dlc', (value as Date | string))}
+              hidden={!formik.values.showDlc}
             />
           </>
         ),
@@ -524,15 +669,23 @@ const DeliveryRandomProductFinal = () => {
           type='button'
           variant='contained'
           label='CONFIRMĂ CANTITĂȚI'
-          onClick={() => formik.submitForm()}
+          onClick={() => onConfirm()}
           style={{ width: '100%' }}
         />),
-        (!!support?.supportCode || !formik.values.productId) &&
+        showModificaButton &&
+        (<Button
+          type='button'
+          variant='contained'
+          label='Modifică cantităţi'
+          onClick={modifyQuantities}
+          style={{ width: '100%' }}
+        />),
+        (support?.supportCounter > 0) &&
         (<Button
           type='button'
           variant='contained'
           label='FINALIZEAZĂ SUPORT'
-          onClick={() => formik.submitForm()}
+          onClick={() => onFinalize()}
           style={{ width: '100%' }}
         />),
         <AlertModal
@@ -566,7 +719,13 @@ const DeliveryRandomProductFinal = () => {
           handleClose={closeSgrMessage}
           title={sgrMessageModalContent.title}
           buttons={sgrMessageModalContent.buttons}
-        />
+        />,
+        <AlertModal
+          open={isConfirmFinaliseSupportModalOpen}
+          handleClose={closeConfirmFinaliseSupport}
+          title={confirmFinaliseSupportModalContent.title}
+          buttons={confirmFinaliseSupportModalContent.buttons}
+        />,
       ]}
       itemsPerRow={1}
     />

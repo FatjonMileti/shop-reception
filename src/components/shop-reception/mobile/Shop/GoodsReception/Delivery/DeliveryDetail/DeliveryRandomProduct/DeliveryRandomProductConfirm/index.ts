@@ -1,1 +1,1 @@
-export { default as DeliveryRandomProductConfirm } from './DeliveryRandomProductConfirm'
+export { default as DeliveryRandomProductModifica } from './DeliveryRandomProductModifica'

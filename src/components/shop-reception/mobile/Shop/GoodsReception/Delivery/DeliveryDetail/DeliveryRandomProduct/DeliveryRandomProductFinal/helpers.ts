@@ -2,7 +2,7 @@ import * as Yup from 'yup'
 
 export const getValidationSchema = () =>
   Yup.object().shape({
-    productCode: Yup.string().required('Cod Produse este un câmp obligatoriu'),
+    productCode: Yup.string(),
     productName: Yup.string(),
     productEans: Yup.string(),
     productId: Yup.number().nullable(),
