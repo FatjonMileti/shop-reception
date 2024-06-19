@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
@@ -10,6 +10,8 @@ import s from './Layout.scss'
 import { setToken, isAuthenticated } from 'utils/authService'
 import { Notification } from './Notification'
 import { FirebaseNotification } from 'components/core-ui/FirebaseNotification'
+import { OfflineTaskManager } from '../core-ui/Offline'
+import { makeCorePostRequest, makeCorePutRequest } from '../../utils/api'
 
 const Layout = ({ children, modules, setSubdomainId }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -57,7 +59,11 @@ const Layout = ({ children, modules, setSubdomainId }) => {
             />
           )}
           <div className={s.contentWrapper}>
-            <ErrorBoundary>{children}</ErrorBoundary>
+            <ErrorBoundary>
+              <OfflineTaskManager requestHandlers={{post: makeCorePostRequest, put: makeCorePutRequest}}>
+                {children}
+              </OfflineTaskManager>
+            </ErrorBoundary>
           </div>
         </div>
       </Typography>

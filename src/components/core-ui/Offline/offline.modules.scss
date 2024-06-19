@@ -1,0 +1,26 @@
+.taskListItem  {
+  display: flex;
+  column-gap: 16px;
+  border-radius: 4px;
+
+  border: 1px solid gray;
+
+}
+
+.offlineModal {
+  .paper {
+    min-width: 400px;
+    min-height: 224px;
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  .list {
+    display: grid;
+    row-gap: 8px;
+  }
+}
+
