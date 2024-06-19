@@ -198,8 +198,8 @@ const DeliveryRandomProductFinal = () => {
           }
           populateScanInfo(resp);
           formik.setFieldValue('bulkProductCode', '');
-          setProductScanResp(resp)
         }
+        setProductScanResp(resp)
       })
     }
     catch (error) {
@@ -248,6 +248,10 @@ const DeliveryRandomProductFinal = () => {
 
   useEffect(() => {
     calculateLitigationType()
+    if (productScanResp) {
+      formik.setFieldValue("mark", productScanResp?.mark);
+      formik.setFieldValue('defectReason', productScanResp?.defectReason)
+    }
   }, [formik.values.currentConformQuantity, formik.values.currentDefectQuantity, productScanResp])
 
   const calculateLitigationType = () => {
