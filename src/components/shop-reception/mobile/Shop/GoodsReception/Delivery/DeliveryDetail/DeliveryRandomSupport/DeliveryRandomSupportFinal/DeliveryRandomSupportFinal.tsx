@@ -169,7 +169,7 @@ const DeliveryRandomSupportFinal = () => {
       formik.setFieldValue('productCode', support.support?.productCode)
       productScan(support.support?.supportId, support.support?.productCode);
     }
-  }, [support?.support]);
+  }, [support]);
 
   const productScan = (supportId, productCode) => {
     try {
