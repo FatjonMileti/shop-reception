@@ -23,7 +23,7 @@ const GoodsDeliveryReport = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/reception-mobile-api/rm-api/truck/list',
+          url: '/shop-reception-mobile/rm-api/truck/list',
           tableFilters,
           page,
           rowsPerPage,
