@@ -639,8 +639,11 @@ const DeliveryRandomProductFinal = () => {
               label='Marca'
               variant='outlined'
               width='100%'
-              {...formik.getFieldProps('mark')}
+              value={formik.values.mark}
               values={marks?.map((mark) => ({ value: mark, label: mark }))}
+              onChange={event => {
+                formik.setFieldValue("mark", (event.target as HTMLInputElement).value);
+              }}
               error={!!formik.errors.mark}
               helperText={formik.errors.mark as string}
             />
@@ -649,16 +652,20 @@ const DeliveryRandomProductFinal = () => {
               label='Motiv'
               variant='outlined'
               width='100%'
-              {...formik.getFieldProps('defectReason')}
+              value={formik.values.defectReason}
               defaultValue={productScanResp?.defectReason}
               values={defectReasons?.map((defect) => ({ value: defect, label: defect }))}
+              onChange={event => {
+                formik.setFieldValue("defectReason", (event.target as HTMLInputElement).value);
+              }}
               disabled={formik.values.mark === ''}
               error={!!formik.errors.defectReason}
               helperText={formik.errors.defectReason as string}
             />
             <DatePicker
               style={{ width: '100%' }}
-              {...formik.getFieldProps('dlc')}
+              value={formik.values.dlc}
+              onChange={value => formik.setFieldValue('dlc', (value as Date | string))}
               hidden={!formik.values.showDlc}
             />
           </>
