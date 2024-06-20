@@ -173,7 +173,7 @@ const DeliveryRandomSupportFinal = () => {
 
   const productScan = (supportId, productCode) => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scan/' + supportId + '/' + productCode, null).then(resp => {
+      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scan-by-code/' + supportId + '/' + productCode, null).then(resp => {
         const scanOk = resp.scanSuccess;
         const mess = resp.errorMessage;
         const scanStatus = resp.scanStatus;
@@ -212,7 +212,7 @@ const DeliveryRandomSupportFinal = () => {
 
   const productScanById = (id) => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scanById/' + support.supportId + '/' + id, null).then(resp => {
+      makeCoreGetRequest('/shop-reception-mobile/aleatory/product/scan-by-id/' + support.supportId + '/' + id, null).then(resp => {
         const scanOk = resp.scanSuccess;
         const mess = resp.errorMessage;
         const scanStatus = resp.scanStatus;

@@ -83,7 +83,7 @@ const DeliveryRandomSupport = () => {
       openSupportScanModal(mess);
     }
     else {
-      navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT_FINAL, { state: { ...truck, ...resp, support } });
+      navigate(URLS.AUTH_DELIVERY_RANDOM_SUPPORT_FINAL, { state: { ...truck, ...resp, support } });
       formik.setFieldValue('supportCode', '');
     }
   }

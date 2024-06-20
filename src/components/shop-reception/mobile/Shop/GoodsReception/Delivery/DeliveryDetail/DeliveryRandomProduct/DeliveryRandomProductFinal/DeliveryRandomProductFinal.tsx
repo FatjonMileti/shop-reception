@@ -15,6 +15,7 @@ import { DefectReason, Mark, ScanStatus } from "../../../../../../../enums";
 import { TableHeaderType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table";
 import { TextField } from "@mui/material";
 import ImageUpload from "../../../../../../Common/ImageUpload/ImageUpload";
+import dayjs from "dayjs";
 
 const DeliveryRandomProductFinal = () => {
   const navigate = useNavigate();
@@ -347,7 +348,7 @@ const DeliveryRandomProductFinal = () => {
       alreadyScanned: resp.alreadyScanned,
       conform: conform,
       defect: defect,
-      dlc: dlc,
+      dlc: resp.dlc,
       shortDlc: resp.shortDlc,
       defectReason: resp.defectReason,
       mark: resp.mark,
@@ -664,7 +665,7 @@ const DeliveryRandomProductFinal = () => {
             />
             <DatePicker
               style={{ width: '100%' }}
-              value={formik.values.dlc}
+              value={dayjs(formik.values.dlc)}
               onChange={value => formik.setFieldValue('dlc', (value as Date | string))}
               hidden={!formik.values.showDlc}
             />

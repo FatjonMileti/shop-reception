@@ -13,6 +13,7 @@ import { useQuery } from "react-query";
 import { TableHeaderType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table";
 import ImageUpload from "../../../../../../Common/ImageUpload/ImageUpload";
 import { DefectReason, Mark } from "../../../../../../../enums";
+import dayjs from "dayjs";
 
 const DeliveryRandomProductModifica = () => {
   const { showNotification } = useNotification();
@@ -308,7 +309,7 @@ const DeliveryRandomProductModifica = () => {
             />
             <DatePicker
               style={{ width: '100%' }}
-              value={formik.values.dlc}
+              value={dayjs(formik.values.dlc)}
               onChange={value => formik.setFieldValue('dlc', (value as Date | string))}
             />
           </>
