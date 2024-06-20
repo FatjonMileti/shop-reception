@@ -51,10 +51,6 @@ const DeliveryRandomSupport = () => {
     }
   )
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   useEffect(() => {
     if (support?.truckId && support?.supportCode) search(support.truckId, support.supportCode)
   }, [support?.supportCode])
@@ -109,6 +105,10 @@ const DeliveryRandomSupport = () => {
   const closeSupportScanModal = () => {
     setIsSupportScanModalOpen(false);
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Grid

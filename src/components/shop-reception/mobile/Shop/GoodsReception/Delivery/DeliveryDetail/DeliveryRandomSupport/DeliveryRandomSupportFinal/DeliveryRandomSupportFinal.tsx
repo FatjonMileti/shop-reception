@@ -15,6 +15,7 @@ import { TextField } from "@mui/material";
 import AlertModal from "../../../../../../Common/AlertModal/AlertModal";
 import ImageUpload from "../../../../../../Common/ImageUpload/ImageUpload";
 import { URLS } from "../../../../../../constants";
+import dayjs from "dayjs";
 
 const DeliveryRandomSupportFinal = () => {
   const navigate = useNavigate()
@@ -347,12 +348,12 @@ const DeliveryRandomSupportFinal = () => {
       alreadyScanned: resp.alreadyScanned,
       conform: conform,
       defect: defect,
-      dlc: dlc,
+      dlc: resp.dlc,
       shortDlc: resp.shortDlc,
       defectReason: resp.defectReason,
       mark: resp.mark,
-      currentConformQuantity: 0,
-      currentDefectQuantity: 0,
+      currentConformQuantity: support?.support?.currentConformQuantity || 0,
+      currentDefectQuantity: support?.support?.currentDefectQuantity || 0,
       showDlc: resp.dlc !== null || resp.shortDlc === true
     })
   }
@@ -664,7 +665,7 @@ const DeliveryRandomSupportFinal = () => {
             />
             <DatePicker
               style={{ width: '100%' }}
-              value={formik.values.dlc}
+              value={dayjs(formik.values.dlc)}
               onChange={value => formik.setFieldValue('dlc', (value as Date | string))}
               hidden={!formik.values.showDlc}
             />
