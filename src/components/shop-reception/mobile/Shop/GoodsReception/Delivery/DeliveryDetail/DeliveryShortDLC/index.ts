@@ -1,0 +1,1 @@
+export { default as DeliveryShortDLC } from './DeliveryShortDLC'
