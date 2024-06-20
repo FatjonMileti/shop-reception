@@ -250,6 +250,7 @@ const DeliveryRandomProductFinal = () => {
     calculateLitigationType()
     if (productScanResp) {
       formik.setFieldValue("mark", productScanResp?.mark);
+      setDefectReasons([productScanResp?.defectReason]);
       formik.setFieldValue('defectReason', productScanResp?.defectReason)
     }
   }, [formik.values.currentConformQuantity, formik.values.currentDefectQuantity, productScanResp])
@@ -638,11 +639,8 @@ const DeliveryRandomProductFinal = () => {
               label='Marca'
               variant='outlined'
               width='100%'
-              value={formik.values.mark}
+              {...formik.getFieldProps('mark')}
               values={marks?.map((mark) => ({ value: mark, label: mark }))}
-              onChange={event => {
-                formik.setFieldValue("mark", (event.target as HTMLInputElement).value);
-              }}
               error={!!formik.errors.mark}
               helperText={formik.errors.mark as string}
             />
@@ -651,19 +649,16 @@ const DeliveryRandomProductFinal = () => {
               label='Motiv'
               variant='outlined'
               width='100%'
-              value={formik.values.defectReason}
+              {...formik.getFieldProps('defectReason')}
+              defaultValue={productScanResp?.defectReason}
               values={defectReasons?.map((defect) => ({ value: defect, label: defect }))}
-              onChange={event => {
-                formik.setFieldValue("defectReason", (event.target as HTMLInputElement).value);
-              }}
               disabled={formik.values.mark === ''}
               error={!!formik.errors.defectReason}
               helperText={formik.errors.defectReason as string}
             />
             <DatePicker
               style={{ width: '100%' }}
-              value={formik.values.dlc}
-              onChange={value => formik.setFieldValue('dlc', (value as Date | string))}
+              {...formik.getFieldProps('dlc')}
               hidden={!formik.values.showDlc}
             />
           </>
