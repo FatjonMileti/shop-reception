@@ -148,7 +148,7 @@ export const AddReceivedProduct = ({
 
           // Store offline
           offlineTool.addOwnTask({
-            type: 'Produse receptionate',
+            type: `Produse receptionate, ${selectedProduct.name}`,
             data: err.config.data as FormData,
             url: '/bakery/batch',
             method: 'post'

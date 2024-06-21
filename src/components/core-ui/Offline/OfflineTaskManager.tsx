@@ -223,7 +223,7 @@ export const OfflineTaskManager = ({
             {tasks.length > 0 && (
               <Button
                 onClick={onClearAllClick}
-                color={allSaved ? "warning" : "error"}
+                color={allSaved ? "success" : "error"}
               >
                 Sterge toate <DeleteIcon />
               </Button>
