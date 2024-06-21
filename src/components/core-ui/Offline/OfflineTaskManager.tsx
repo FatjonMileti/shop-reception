@@ -54,6 +54,12 @@ export const OfflineTaskManager = ({
       return db.tasks.where("owner").equals(owner).toArray();
     }) || [];
 
+
+  React.useEffect(() => {
+    if(tasks.length === 0) {
+      setShowDialog(false)
+    }
+  }, [tasks.length])
   const allSaved = tasks.length > 0 && tasks.every((task) => task.status.saved);
 
   const notSavedTaskFilter = (task: Task) => !task.status.saved;
@@ -82,6 +88,12 @@ export const OfflineTaskManager = ({
         saved: true,
         failed: false,
       });
+
+      setTimeout(() => {
+        deleteTask(task.id)
+      }, 100)
+
+
     } catch (err) {
       updateTaskStatus(task, {
         ...task.status,
@@ -91,11 +103,13 @@ export const OfflineTaskManager = ({
     }
   };
 
-  const onSaveClick = async () => {
+  const onSaveAllClick = async () => {
     setSavingAll(true);
 
     for (const task of tasks.filter(notSavedTaskFilter)) {
-      await saveTask(task);
+      try {
+        await saveTask(task);
+      } catch(err) { }
     }
 
     setSavingAll(false);
@@ -203,7 +217,7 @@ export const OfflineTaskManager = ({
           </List>
           <DialogActions>
             {tasks.length > 0 && !allSaved && (
-              <Button onClick={onSaveClick}>
+              <Button onClick={onSaveAllClick}>
                 Salveaza toate <CheckIcon />
                 {savingAll && (
                   <CircularProgress
