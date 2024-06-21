@@ -14,9 +14,18 @@ const Home = ({ modules, setSubdomainId }) => {
   const { location, loading: isLocationLoading, error: isErrorGettingLocation } = useGetLocation()
   const username = getUserFirstName()
 
+  const [storedModule, setStoredModule] = useState(null)
   useEffect(() => {
-    setSelectedModule(modules[0])
-  }, [modules])
+    setStoredModule(JSON.parse(sessionStorage.getItem('selectedModule')))
+  }, [])
+  useEffect(() => {
+    if (storedModule) {
+      setSelectedModule(storedModule || modules[0])
+    }
+  }, [storedModule])
+  useEffect(() => {
+    sessionStorage.setItem('selectedModule', JSON.stringify(selectedModule))
+  }, [selectedModule])
 
   return (
     <div className={s.modulePaper}>
