@@ -10,7 +10,7 @@ import s from '../ServiceDomain/ServiceDomain.scss'
 const Home = ({ modules, setSubdomainId }) => {
   const navigate = useNavigate()
 
-  const [selectedModule, setSelectedModule] = useState(null)
+  const [selectedModule, setSelectedModule] = useState(modules[0])
   const { location, loading: isLocationLoading, error: isErrorGettingLocation } = useGetLocation()
   const username = getUserFirstName()
 
