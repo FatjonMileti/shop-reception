@@ -48,7 +48,6 @@ import { DeliveryRandomProduct } from './Shop/GoodsReception/Delivery/DeliveryDe
 import { DeliveryRandomSupportFinal } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomSupport/DeliveryRandomSupportFinal'
 import { DeliveryRandomSupportConfirm } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomSupport/DeliveryRandomSupportConfirm'
 import { DeliveryRandomProductFinal } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct/DeliveryRandomProductFinal'
-import { DeliveryRandomProductConfirm } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct/DeliveryRandomProductConfirm'
 import ExpectedDepositReturns from './Deposit/ExpectedReturns/ExpectedDepositReturns'
 import { ExpectedDepositReturnsStep1 } from './Deposit/ExpectedReturns/Step1'
 import { ExpectedDepositReturnsStep2 } from './Deposit/ExpectedReturns/Step2'
@@ -60,6 +59,8 @@ import { ExpectedTrucksStep3 } from './Hub/GoodsReception/ExpectedTrucks/Expecte
 import { ExpectedTrucksStep4 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep4'
 import { ExpectedTrucksStep5 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep5'
 import { ExpectedTrucksStep6 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep6'
+import DeliveryRandomProductModifica
+  from "./Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct/DeliveryRandomProductConfirm/DeliveryRandomProductModifica";
 import { DeliveryShortDLC } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryShortDLC'
 
 export const useMerchandiseRoutes = applicationPages => {
@@ -460,7 +461,7 @@ export const useMerchandiseRoutes = applicationPages => {
           />
         }
       />
-    
+
 
       {/* ? */}
       <Route path={URLS.AUTH_PACKAGING_INVENTORY_UPDATE} element={<PackagingInventoryUpdate />} />
@@ -521,7 +522,7 @@ export const useMerchandiseRoutes = applicationPages => {
       />
       <Route
         path={URLS.AUTH_DELIVERY_RANDOM_PRODUCT_CONFIRM}
-        element={<DeliveryRandomProductConfirm />}
+        element={<DeliveryRandomProductModifica />}
       />
     </>
   )

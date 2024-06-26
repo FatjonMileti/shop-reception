@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { URLS } from '../../../../../constants'
@@ -19,7 +19,9 @@ const DeliveryRandomProduct = () => {
   const location = useLocation();
   const [isSupportScanModalOpen, setIsSupportScanModalOpen] = useState(false);
   const [supportScanModalContent, setSupportScanModalContent] = useState({ title: '', description: '', buttons: [] });
-  const id = location.state?.id;
+  const support = location.state;
+  const id = location.state?.id || support?.truckId || 0;
+
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -32,7 +34,7 @@ const DeliveryRandomProduct = () => {
         return;
       }
 
-      search();
+     await search(id, formik.values?.supportCode);
     }
   })
 
@@ -42,8 +44,6 @@ const DeliveryRandomProduct = () => {
       return await makeCoreGetRequest('/shop-reception-mobile/integral/truck/summary/' + id, null)
     },
     {
-      onSuccess: data => {
-        console.log(data);},
       onError: error => {
         showNotification({
           message: `Error while fetching truck. ${formatErrorMessage(error)}`,
@@ -52,31 +52,37 @@ const DeliveryRandomProduct = () => {
       }
     }
   )
-  
-  const search = () => {
+
+  useEffect(() => {
+    if (support?.truckId && support?.supportCode) search(support.truckId, support.supportCode)
+  }, [support?.supportCode])
+
+  const search = async (id, supportCode) => {
     try {
-      makeCorePostRequest('/shop-reception-mobile/aleatory/support/scan/' + id, formik.values?.supportCode, {
+      await makeCorePostRequest('/shop-reception-mobile/aleatory/support/scan/' + id, supportCode, {
         headers: {
           'Content-Type': 'text/plain'
         }
-      }).then(resp => {
-        const scanOk = resp.scanSuccess;
-        const mess = resp.errorMessage;
-
-        if (scanOk !== true) {
-          openSupportScanModal(mess);
-        }
-        else {
-          navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT_FINAL, { state: { ...truck, ...resp } });
-          formik.setFieldValue('supportCode', '');
-        }
-      })
+      }).then(handleScanResponse);
     }
     catch (error) {
       showNotification({
         message: `Error while scanning support. ${formatErrorMessage(error)}`,
         type: 'error'
       })
+    }
+  }
+
+  const handleScanResponse = (resp) => {
+    const scanOk = resp.scanSuccess;
+    const mess = resp.errorMessage;
+
+    if (scanOk !== true) {
+      openSupportScanModal(mess);
+    }
+    else {
+      navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT_FINAL, { state: { ...truck, ...resp, support } });
+      formik.setFieldValue('supportCode', '');
     }
   }
 
