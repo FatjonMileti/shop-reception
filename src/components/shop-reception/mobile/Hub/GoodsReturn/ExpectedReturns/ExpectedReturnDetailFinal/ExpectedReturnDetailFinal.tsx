@@ -18,7 +18,7 @@ const ExpectedReturnDetailFinal = () => {
   const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false);
   const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] });
   const [params] = useSearchParams();
-  const truckId = params.get('id');
+  const truckId = Number(params.get('id'));
 
   const { data, isLoading} = useQuery(
     'getSummaryById',
@@ -26,6 +26,7 @@ const ExpectedReturnDetailFinal = () => {
       return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/summary/' + truckId, null)
     },
     {
+      initialData: [],
       onError: error => {
         showNotification({
           message: `Error while fetching truck. ${formatErrorMessage(error)}`,
@@ -74,17 +75,17 @@ const ExpectedReturnDetailFinal = () => {
       items={[
         <TitleHeader title='RETURURI AȘTEPTATE CAMION' />,
         <>
-          <Typography variant='medium' component='p'>{data.truckNumber} / {data.driverName}</Typography>
-          <Typography variant='medium' component='p'>{data.shopNamesAndCodes}</Typography>
+          {data?.truckNumber && <Typography variant="medium" component="p">{data?.truckNumber} / {data?.driverName}</Typography>}
+          <Typography variant='medium' component='p'>{data?.shopNamesAndCodes}</Typography>
         </>,
         <Typography variant='medium' component='h4'>Sumar Recepție Ambalaje</Typography>,
-        <Table
+        !!data?.supportList && (<Table
           columns={columns}
           isLoading={false}
-          rows={data.supportList as TableRowType[]}
+          rows={data?.supportList as TableRowType[]}
           disablePagination={true}
           hideCheckbox={true}
-        />,
+        />),
         <Button
           style={{ width: "100%" }}
           type='button'

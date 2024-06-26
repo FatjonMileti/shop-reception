@@ -16,7 +16,7 @@ const ExpectedReturnDetail = () => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
   const [params] = useSearchParams();
-  const truckId = params.get('id')
+  const truckId = Number(params.get('id'))
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -103,7 +103,7 @@ const ExpectedReturnDetail = () => {
       items={[
         <TitleHeader title="RETURURI AȘTEPTATE CAMION" />,
         <>
-          <Typography variant="medium" component="p">{truck.truckNumber} / {truck.driverName}</Typography>
+          {truck?.truckNumber && truck?.driverName && <Typography variant="medium" component="p">{truck?.truckNumber + "/" + truck?.driverName}</Typography>}
           <Typography variant="medium" component="p">{truck.shopNamesAndCodes}</Typography>
         </>,
         formik.values?.sealList?.map((seal, idx) => (

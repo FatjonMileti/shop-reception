@@ -20,6 +20,7 @@ const ExpectedReturns = () => {
       return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/list', null)
     },
     {
+      initialData: [],
       onError: error => {
         showNotification({
           message: `Error while fetching trucks. ${formatErrorMessage(error)}`,

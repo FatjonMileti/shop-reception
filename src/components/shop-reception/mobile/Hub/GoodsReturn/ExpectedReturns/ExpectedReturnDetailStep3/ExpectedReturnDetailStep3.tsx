@@ -22,8 +22,8 @@ const ExpectedReturnDetailStep3 = () => {
   const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false);
   const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] });
   const [params] = useSearchParams();
-  const  truckId = params.get('truckId');
-  const  parentId = params.get('parentId');
+  const  truckId = Number(params.get('truckId'));
+  const  parentId =Number(params.get('parentId'));
   let imgMessage = "Atasaţi imagini doveditoare! ";
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
@@ -240,8 +240,9 @@ const ExpectedReturnDetailStep3 = () => {
       items={[
         <TitleHeader title='RETURURI AȘTEPTATE CAMION' />,
         <>
-          <Typography variant='medium' component='p'>{truck.truckNumber} / {truck.driverName}</Typography>
-          <Typography variant='medium' component='p'>{truck.shopNameAndCode} - numar aviz {truck.noticeNumber}</Typography>
+          {truck?.truckNumber && <Typography variant="medium" component="p">{truck?.truckNumber} / {truck?.driverName}</Typography>}
+          {truck.shopNameAndCode && <Typography variant="medium" component="p">{truck.shopNameAndCode} - numar
+            aviz {truck.noticeNumber}</Typography>}
         </>,
         <Typography variant='medium' component='h4'>Recepție retur</Typography>,
         <Table

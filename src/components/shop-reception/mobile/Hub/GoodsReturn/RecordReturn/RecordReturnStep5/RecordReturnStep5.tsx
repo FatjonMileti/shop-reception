@@ -115,9 +115,9 @@ const ContinueReturnDetailFinal = () => {
           spacing={1}
           hasPaper={true}
           items={[
-            <Typography variant='medium' component='p'>Numǎr camion: {CRTruck.truckNumber ? CRTruck.truckNumber : ''}</Typography>,
-            <Typography variant='medium' component='p'>Destinație: {CRTruck.depositName ? CRTruck.depositName : ''}</Typography>,
-            <Typography variant='medium' component='p'>Numǎr stive: {CRTruck.stackNumber}</Typography>
+            <Typography variant='medium' component='p'>Numǎr camion: {CRTruck?.truckNumber}</Typography>,
+            <Typography variant='medium' component='p'>Destinație: {CRTruck?.depositName}</Typography>,
+            <Typography variant='medium' component='p'>Numǎr stive: {CRTruck?.stackNumber}</Typography>
           ]}
           itemsPerRow={1}
         />,
