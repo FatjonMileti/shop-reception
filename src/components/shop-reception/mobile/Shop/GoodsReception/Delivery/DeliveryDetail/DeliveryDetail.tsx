@@ -155,7 +155,7 @@ const DeliveryDetail = () => {
           label="PRODUSE SGR"
           size="large"
           style={{ width: '100%' }}
-          onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT)}
+          onClick={() => navigate(URLS.AUTH_DELIVERY_RANDOM_SUPPORT_CONFIRM, {state: {truckId: id}})}
         />,
         <div>
           {truck.deliveryTicketList?.map(ticket => (

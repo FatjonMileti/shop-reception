@@ -49,8 +49,8 @@ const Delivery = () => {
   }
 
   let items = [
-    <TitleHeader title="VALIDARE LIVRARE" />,
-    ...truckList?.map((truck: any, index) => (
+    <TitleHeader title='VALIDARE LIVRARE' />,
+    truckList && truckList?.map((truck: any, index) => (
       <TruckCard
         key={truck.id}
         onClick={() => {
