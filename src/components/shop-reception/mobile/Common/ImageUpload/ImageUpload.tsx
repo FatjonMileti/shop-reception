@@ -1,8 +1,26 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { makeCorePostRequest } from '../../../../../utils/api'
 import { IconButton } from '@mui/material'
 import { CameraAlt as CameraIcon } from '@mui/icons-material'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button } from '@fullscreendigital/carrefour-dex-fe'
+import Resizer from 'react-image-file-resizer'
+
+const resizeFile = (file: Blob): Promise<File> => {
+  return new Promise(resolve => {
+    Resizer.imageFileResizer(
+      file,
+      1000,
+      1000,
+      'JPEG',
+      50,
+      0,
+      (uri: File) => {
+        resolve(uri)
+      },
+      'file'
+    )
+  })
+}
 
 const ImageUpload = ({ uploadUrl, onSuccess, onError, inputId, isButton = false, label = "Adauga imagine" }) => {
   const [imageSelected, setImageSelected] = useState(false)
@@ -11,7 +29,10 @@ const ImageUpload = ({ uploadUrl, onSuccess, onError, inputId, isButton = false,
     const file = e.target.files[0]
     if (file) {
       const formData = new FormData()
-      formData.append('photoFile', file)
+
+      const resizedImage = await resizeFile(file);
+
+      formData.append('photoFile', resizedImage)
 
       try {
         const response = await makeCorePostRequest(uploadUrl, formData, {
