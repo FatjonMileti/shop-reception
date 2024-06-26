@@ -356,6 +356,7 @@ VALUES
     (231, 'Scanare completa livrare', '', '/shop-reception/mobile/delivery/full-scan/step-3', true, 188, false),
     (213, 'Produse sensibile', '', '/shop-reception/mobile/sensitiveProducts', true, 188, false),
     (232, 'Produse sensibile', '', '/shop-reception/mobile/delivery/sensitive-products/confirm', true, 188, false),
+    (260, 'Produse cu DLC scurt', '', '/shop-reception/mobile/short-dlc-products', true, 188, false),
     (214, 'Suport aleatoriu', '', '/shop-reception/mobile/randomSupport', true, 188, false),
     (233, 'Suport aleatoriu', '', '/shop-reception/mobile/delivery/random-support/final', true, 188, false),
     (234, 'Suport aleatoriu', '', '/shop-reception/mobile/delivery/random-support/confirm', true, 188, false),

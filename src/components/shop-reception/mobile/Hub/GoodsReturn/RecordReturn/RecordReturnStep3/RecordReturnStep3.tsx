@@ -22,7 +22,7 @@ const ContinueReturnDetail = () => {
   const { data: noticeList, isLoading} = useQuery(
     'getNoticeList',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/getNoticeList/' + truckId, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/notices/' + truckId, null)
     },
     {
       onError: error => {
@@ -37,7 +37,7 @@ const ContinueReturnDetail = () => {
   const { data: CRTruck, isLoading: isNoticeListLoading} = useQuery(
     'CReturnDetails',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getTruckModel/' + truckId, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/truck-model/' + truckId, null)
     },
     {
       onError: error => {

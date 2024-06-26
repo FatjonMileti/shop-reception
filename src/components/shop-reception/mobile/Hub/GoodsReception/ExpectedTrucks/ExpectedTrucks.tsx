@@ -1,12 +1,12 @@
-import { Autocomplete, Button } from '@fullscreendigital/carrefour-dex-fe'
-import { useQuery } from 'react-query'
-import { makeCoreGetRequest } from 'utils/api'
-import { CircularProgress, Grid, Typography } from '@mui/material'
-import { useNotification } from 'hooks'
-import { formatErrorMessage } from 'utils/formatting'
-import { useNavigate } from 'react-router-dom'
-import { URLS } from 'components/shop-reception/mobile/constants'
-import { useState } from 'react'
+import { Autocomplete, Button } from "@fullscreendigital/carrefour-dex-fe";
+import { useQuery } from "react-query";
+import { makeCoreGetRequest } from "utils/api";
+import { CircularProgress, Grid, Typography } from "@mui/material";
+import { useNotification } from "hooks";
+import { formatErrorMessage } from "utils/formatting";
+import { useNavigate } from "react-router-dom";
+import { URLS } from "components/shop-reception/mobile/constants";
+import { useState } from "react";
 
 const ExpectedTrucks = () => {
   const navigate = useNavigate()
@@ -16,7 +16,7 @@ const ExpectedTrucks = () => {
   const { data: hubName, isLoading: isLoadingHubName } = useQuery(
     ['hub-name'],
     async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/hub-name`)
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/home/hub-name`, null)
       return response || []
     },
     {
@@ -32,13 +32,11 @@ const ExpectedTrucks = () => {
   const { data: trucksOptions, isLoading: isTruckOptionsLoading } = useQuery(
     ['expected-trucks'],
     async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/truck/hub/search`)
-      const options = response.map(truck => ({
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/truck/hub/search`, null)
+      return response?.map(truck => ({
         label: truck.truckNumber,
         value: truck.id
       }))
-
-      return options
     },
     {
       onError: error => {

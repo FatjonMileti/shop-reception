@@ -14,7 +14,7 @@ const ExpectedDepositReturns = () => {
   const { data, isLoading } = useQuery(
     ['deposit-return-list'],
     async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/truck/deposit/return/list`)
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/truck/deposit/return`)
       return response || []
     },
     {

@@ -19,7 +19,7 @@ const ContinueReturn = () => {
   const { data: truckList, isLoading} = useQuery(
     'continueReturnTrunks',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/getInProgress', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/in-progress', null)
     },
     {
       onError: error => {

@@ -35,7 +35,7 @@ const ExpectedReturnDetail = () => {
           "noticeList": formik.values.noticeList,
         }
 
-        const resp = await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/verifyNoticeList', formik.values.noticeList, null);
+        const resp = await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/verify-notices', formik.values.noticeList, null);
 
         if (resp.hasNoticeDuplications) {
           showNotification({
@@ -43,7 +43,7 @@ const ExpectedReturnDetail = () => {
             type: 'error'
           })
         } else {
-          await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirmTruck', payload, null);
+          await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirm-truck', payload, null);
           navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2}?id=${truckId}`)
         }
 
@@ -60,7 +60,7 @@ const ExpectedReturnDetail = () => {
   const { data: truck, isLoading} = useQuery(
     'getById',
     async () => {
-      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/getById/' + truckId, null)
+      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/truck/' + truckId, null)
       await formik.setValues({
         sealList: truck.sealList,
         noticeList: truck.noticeList

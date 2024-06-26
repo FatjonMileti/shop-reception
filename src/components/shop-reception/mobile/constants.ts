@@ -24,7 +24,7 @@ export const URLS = {
   AUTH_DELIVERY_COMPLETE_SCAN_STEP_3: '/shop-reception/mobile/delivery/full-scan/step-3', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_SENSITIVE_PRODUCTS: '/shop-reception/mobile/sensitiveProducts',
   AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM:
-    '/shop-reception/mobile/delivery/sensitive-products/confirm', // TODO: integrate stepper in parent page and delete
+    '/shop-reception/mobile/delivery/sensitive-products/confirm',
   AUTH_DELIVERY_RANDOM_SUPPORT: '/shop-reception/mobile/randomSupport',
   AUTH_DELIVERY_RANDOM_SUPPORT_FINAL: '/shop-reception/mobile/delivery/random-support/final', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_RANDOM_SUPPORT_CONFIRM: '/shop-reception/mobile/delivery/random-support/confirm', // TODO: integrate stepper in parent page and delete
@@ -32,6 +32,7 @@ export const URLS = {
   AUTH_DELIVERY_RANDOM_PRODUCT_FINAL: '/shop-reception/mobile/delivery/random-product/final', // TODO: integrate stepper in parent page and delete
   AUTH_DELIVERY_RANDOM_PRODUCT_CONFIRM: '/shop-reception/mobile/delivery/random-product/confirm', // TODO: integrate stepper in parent page and delete
   AUTH_SGR_PRODUCTS: '/shop-reception/mobile/sgrProducts',
+  AUTH_DELIVERY_SHORT_DLC_PRODUCTS: '/shop-reception/mobile/short-dlc-products',
 
   // Shop Goods Return
   AUTH_RETURN_STEP_1: '/shop-reception/mobile/return-step-1', // Step 1

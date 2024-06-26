@@ -136,7 +136,7 @@ const Step1 = () => {
 
   const loadReturnTruck = (id) => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/getTruck/' + id, null).then(truck => {
+      makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/truck/' + id, null).then(truck => {
         formik.setValues({
           destination: truck.depositId,
           registrationNumber: truck.truckNumber,

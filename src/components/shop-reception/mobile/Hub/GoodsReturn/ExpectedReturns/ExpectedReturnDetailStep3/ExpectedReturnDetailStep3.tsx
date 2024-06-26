@@ -69,7 +69,7 @@ const ExpectedReturnDetailStep3 = () => {
   const { data: truck, isLoading } = useQuery(
     'RDsupportList',
     async () => {
-      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/supportList/' + truckId + '?parentId=' + parentId, null)
+      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/supports/' + truckId + '?parentId=' + parentId, null)
       await formik.setFieldValue("supportList", truck.supportList)
       return truck
     },
@@ -87,7 +87,7 @@ const ExpectedReturnDetailStep3 = () => {
   const { data: allSupportList, isLoading: isSupportListLoading } = useQuery(
     'RDallSupportList',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/allSupportList/' + truckId, null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/all-supports/' + truckId, null)
     },
     {
       initialData: [],
@@ -114,7 +114,7 @@ const ExpectedReturnDetailStep3 = () => {
       "rollsNumber": truck.rollsNumber,
       "supportList": formik.values.supportList,
     }
-    await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirmSupportList', payload, null);
+    await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirm-supports', payload, null);
     navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_FINAL}?id=${truckId}`)
   }
 

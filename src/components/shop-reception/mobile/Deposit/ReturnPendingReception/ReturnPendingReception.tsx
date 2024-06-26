@@ -15,7 +15,7 @@ const ReturnPendingReception = () => {
     ['deposit-pending-return'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/in_process`
+        `/shop-reception-mobile/truck/deposit/return/in-process`
       )
       return response || []
     },

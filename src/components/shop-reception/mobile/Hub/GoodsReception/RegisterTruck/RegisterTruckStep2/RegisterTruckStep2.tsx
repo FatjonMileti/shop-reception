@@ -84,7 +84,7 @@ const RegisterTruckStep2 = () => {
         {
           label: 'Urc în camion  confirm',
           onClick: async () => {
-            const resp = await makeCorePostRequest('/shop-reception-mobile/support/hub/addInTruck/' + id, { supportId: supportId } )
+            const resp = await makeCorePostRequest('/shop-reception-mobile/support/hub/add-in-truck/' + id, { supportId: supportId } )
             await formik.setFieldValue('supportCode', '')
             setCounter(resp.supportCounter)
             setIsScanSuccessModalOpen(false);
@@ -139,7 +139,7 @@ const RegisterTruckStep2 = () => {
       inShopReleaseDate: null,
       inShopReleaseHour: null
     }
-    await makeCorePostRequest('/shop-reception-mobile/supportTraceability', payload)
+    await makeCorePostRequest('/shop-reception-mobile/support-traceability', payload)
     // navigate(URLS.AUTH_REGISTER_TRUCK_STEP_3, { state: { id } })
     navigate(`${URLS.AUTH_REGISTER_TRUCK_STEP_3}?id=${id}`)
   }

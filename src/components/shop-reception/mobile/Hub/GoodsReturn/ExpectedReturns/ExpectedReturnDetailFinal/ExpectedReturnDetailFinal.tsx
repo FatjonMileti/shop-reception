@@ -43,7 +43,7 @@ const ExpectedReturnDetailFinal = () => {
           {
             label: 'Finalizare',
             onClick: async () => {
-              await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/finaliseReturn/' + truckId, null);
+              await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/finalise-return/' + truckId, null);
               setIsInvalidTruckNumberModalOpen(false);
               navigate('/goodsReturn')
             },

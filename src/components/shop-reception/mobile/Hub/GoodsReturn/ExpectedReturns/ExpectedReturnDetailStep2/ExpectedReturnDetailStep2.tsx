@@ -47,7 +47,7 @@ const ExpectedReturnDetailStep2 = () => {
   const { data: truck, isLoading} = useQuery(
     'stackList',
     async () => {
-      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/stackList/' + parentId, null)
+      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/stacks/' + parentId, null)
       const newStackList = truck.stackList.map((stack, index) => ({
         ...stack,
         id: index,
@@ -78,7 +78,7 @@ const ExpectedReturnDetailStep2 = () => {
       "stackList": stackList,
       "nextTruckId": truck.nextTruckId
     }
-    await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirmStackList', payload, null);
+    await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirm-stacks', payload, null);
     navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_3}?truckId=${truck.nextTruckId}&parentId=${parentId}`)
   }
 

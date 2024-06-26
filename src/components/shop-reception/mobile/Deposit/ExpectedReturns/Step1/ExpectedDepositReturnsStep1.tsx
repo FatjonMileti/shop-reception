@@ -22,7 +22,7 @@ const ExpectedDepositReturnsStep1 = () => {
     ['truck'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/getTruckById/${truck.id}`
+        `/shop-reception-mobile/truck/deposit/return/truck/${truck.id}`
       )
       return response || []
     },
@@ -47,10 +47,10 @@ const ExpectedDepositReturnsStep1 = () => {
     }))
 
     await makeCorePostRequest(
-      `/shop-reception-mobile/truck/deposit/return/verifyNoticeList`,
+      `/shop-reception-mobile/truck/deposit/return/verify-notices`,
       payload
     )
-    await makeCorePostRequest(`/shop-reception-mobile/truck/deposit/return/confirmTruck`, values)
+    await makeCorePostRequest(`/shop-reception-mobile/truck/deposit/return/confirm-truck`, values)
   }
 
   const { isLoading, mutate } = useMutation(confirmTruck, {

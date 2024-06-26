@@ -17,7 +17,7 @@ const ExpenditureProcessing = () => {
   const { data: trucks, isLoading } = useQuery(
     'inProgressTrucks',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/inProcess/list', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/in-process', null)
     },
     {
       onError: error => {
@@ -35,7 +35,7 @@ const ExpenditureProcessing = () => {
 
   let items = [
     <TitleHeader title='ÎN PROCESARE EXPEDIȚIE' />,
-    trucks && trucks.map((item: any, index) => (
+    trucks && trucks?.map((item: any, index) => (
       <TruckCard
         key={index}
         onClick={() => {
@@ -45,7 +45,7 @@ const ExpenditureProcessing = () => {
     ))
   ]
 
-  if (trucks.length === 0) {
+  if (!trucks || trucks.length === 0) {
     items.push(
       <Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>
         Nu existǎ camioane în lucru</Typography>

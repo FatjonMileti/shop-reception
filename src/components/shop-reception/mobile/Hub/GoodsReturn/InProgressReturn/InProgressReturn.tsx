@@ -17,7 +17,7 @@ const InProgressReturn = () => {
   const { data, isLoading} = useQuery(
     'inProgressReturnReception',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/in_process', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/in-process', null)
     },
     {
       onError: error => {
