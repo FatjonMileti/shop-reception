@@ -61,6 +61,7 @@ import { ExpectedTrucksStep5 } from './Hub/GoodsReception/ExpectedTrucks/Expecte
 import { ExpectedTrucksStep6 } from './Hub/GoodsReception/ExpectedTrucks/ExpectedTrucksStep6'
 import DeliveryRandomProductModifica
   from "./Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryRandomProduct/DeliveryRandomProductConfirm/DeliveryRandomProductModifica";
+import { DeliveryShortDLC } from './Shop/GoodsReception/Delivery/DeliveryDetail/DeliveryShortDLC'
 
 export const useMerchandiseRoutes = applicationPages => {
   return (
@@ -450,7 +451,17 @@ export const useMerchandiseRoutes = applicationPages => {
           />
         }
       />
-      
+      <Route
+        path={URLS.AUTH_DELIVERY_SHORT_DLC_PRODUCTS}
+        element={
+          <PrivateRoute
+            component={DeliveryShortDLC}
+            applicationPages={applicationPages}
+            checkIsAuthorized
+          />
+        }
+      />
+
 
       {/* ? */}
       <Route path={URLS.AUTH_PACKAGING_INVENTORY_UPDATE} element={<PackagingInventoryUpdate />} />

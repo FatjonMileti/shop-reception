@@ -64,9 +64,13 @@ const DeliverySensitiveProducts = () => {
           xs={10}
           mb={2}
           onClick={() =>
-            navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM, {
-              state: { truck, support }
-            })
+            support.sensitiveProducts === true
+              ? navigate(URLS.AUTH_DELIVERY_SENSITIVE_PRODUCTS_CONFIRM, {
+                  state: { truck, support }
+                })
+              : navigate(URLS.AUTH_DELIVERY_SHORT_DLC_PRODUCTS, {
+                  state: { truck, support }
+                })
           }
         >
           <Paper elevation={3} style={{ padding: '20px' }} onClick={() => {}}>
