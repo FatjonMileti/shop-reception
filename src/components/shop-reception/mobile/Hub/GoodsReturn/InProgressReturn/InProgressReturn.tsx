@@ -20,6 +20,7 @@ const InProgressReturn = () => {
       return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/in-process', null)
     },
     {
+      initialData: [],
       onError: error => {
         showNotification({
           message: `Error while fetching trucks. ${formatErrorMessage(error)}`,

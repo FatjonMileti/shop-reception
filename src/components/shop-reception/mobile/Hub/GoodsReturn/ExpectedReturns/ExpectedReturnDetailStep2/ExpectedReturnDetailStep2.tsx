@@ -20,7 +20,7 @@ const ExpectedReturnDetailStep2 = () => {
   const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false);
   const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] });
   const [params] = useSearchParams();
-  const parentId = params.get('id');
+  const parentId = Number(params.get('id'));
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -154,7 +154,7 @@ const ExpectedReturnDetailStep2 = () => {
       items={[
         <TitleHeader title='RETURURI AȘTEPTATE CAMION' />,
         <>
-          <Typography variant='medium' component='p'>{truck.truckNumber} / {truck.driverName}</Typography>
+          {truck.truckNumber && truck.driverName && <Typography variant="medium" component="p">{truck.truckNumber} / {truck.driverName}</Typography>}
           <Typography variant='medium' component='p'>{truck.shopNamesAndCodes}</Typography>
         </>,
         <Typography variant='medium' component='h4'>Descărcare stive</Typography>,

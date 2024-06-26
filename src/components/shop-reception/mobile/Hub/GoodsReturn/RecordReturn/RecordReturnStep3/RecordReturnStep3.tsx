@@ -16,7 +16,7 @@ const ContinueReturnDetail = () => {
   const { showNotification } = useNotification();
   const navigate = useNavigate()
   const [params] = useSearchParams();
-  const truckId = params.get('id')
+  const truckId = Number(params.get('id'));
 
 
   const { data: noticeList, isLoading} = useQuery(
@@ -25,6 +25,7 @@ const ContinueReturnDetail = () => {
       return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/notices/' + truckId, null)
     },
     {
+      initialData: [],
       onError: error => {
         showNotification({
           message: `Error while fetching truck. ${formatErrorMessage(error)}`,
@@ -68,19 +69,19 @@ const ContinueReturnDetail = () => {
           hasPaper={true}
           items={[
             <Typography variant='medium' component='p'>Numǎr camion: {truckId}</Typography>,
-            <Typography variant='medium' component='p'>Destinație: {CRTruck.depositOrHubName ? CRTruck.depositOrHubName : ''}</Typography>
+            <Typography variant='medium' component='p'>Destinație: {CRTruck?.depositOrHubName}</Typography>
           ]}
           itemsPerRow={1}
         />,
         <Typography variant='medium' component='h4'>Sumar Avize</Typography>,
-        <Table
+        !!noticeList && (<Table
           columns={columns}
           isLoading={false}
           rows={noticeList as TableRowType[]}
           disablePagination={true}
           hideCheckbox={true}
-        />,
-        <Typography variant='medium' component='p'>Total: {calculateTotal(noticeList)}</Typography>,
+        />),
+        !!noticeList && (<Typography variant='medium' component='p'>Total: {calculateTotal(noticeList)}</Typography>),
         <Button
           type='button'
           variant='contained'
