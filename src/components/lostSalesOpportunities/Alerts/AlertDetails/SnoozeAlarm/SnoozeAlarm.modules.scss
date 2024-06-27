@@ -1,0 +1,23 @@
+.optionsTitle {
+  color: #052351;
+  font-family: Ubuntu;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: 18px;
+  margin-top: 24px;
+}
+
+.optionsContainer {
+  span {
+    color: #052351;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Ubuntu;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0.15px;
+  }
+}

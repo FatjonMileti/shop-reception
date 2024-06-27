@@ -39,6 +39,7 @@ import 'file-loader?name=firebase-messaging-sw.js!./firebase-messaging-sw.js'
 import { SnackbarProvider } from 'notistack'
 import 'file-loader?name=firebase-app-compat.js!./firebase-app-compat.js'
 import 'file-loader?name=firebase-messaging-compat.js!./firebase-messaging-compat.js'
+import { useLostSalesOpportunitiesRoutes } from 'components/lostSalesOpportunities/routes'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -181,6 +182,7 @@ const App = () => {
   const supplyOmniRoutes = useSupplyOmniRoutes(allScreensRoutes)
   const merchandiseRoutes = useMerchandiseRoutes(allScreensRoutes)
   const shopReceptionRoutes = useShopReceptionRoutes(allScreensRoutes)
+  const lostSalesOpportunitiesRoutes = useLostSalesOpportunitiesRoutes(allScreensRoutes)
 
   return (
     <AuthProvider {...oidcConfig}>
@@ -232,6 +234,7 @@ const App = () => {
                     {supplyOmniRoutes}
                     {merchandiseRoutes}
                     {shopReceptionRoutes}
+                    {lostSalesOpportunitiesRoutes}
                     {applicationModulesPages.map(page =>
                       createRoute(
                         {

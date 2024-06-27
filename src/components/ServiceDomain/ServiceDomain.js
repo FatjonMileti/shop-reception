@@ -1,7 +1,5 @@
-import { Divider, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import { Box, CircularProgress, Grid, Paper } from '@mui/material'
+import { CircularProgress, Grid } from '@mui/material'
 import BackButton from 'components/core-ui/BackButtonTitle/BackButton/BackButton'
-import { Icon } from 'components/core-ui/Icon'
 import { Icon_v2 } from 'components/core-ui/Icon_v2'
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'

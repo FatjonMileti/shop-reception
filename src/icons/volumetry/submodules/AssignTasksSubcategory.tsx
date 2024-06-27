@@ -24,8 +24,8 @@ const AssignTasksSubcategory: React.FC = () => (
         y2="66.3462"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#0090AA" />
-        <stop offset="1" stop-color="#00768B" />
+        <stop stopColor="#0090AA" />
+        <stop offset="1" stopColor="#00768B" />
       </linearGradient>
     </defs>
   </svg>

@@ -1,0 +1,30 @@
+.container {
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  padding-bottom: 0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 6px;
+}
+
+.title {
+  color: #052351;
+  font-family: 'Ubuntu';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.content {
+  padding: 15px 12px;
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #666666;
+}
