@@ -11,12 +11,9 @@ const PhotoItem: React.FC<PhotoItemProps> = props => {
     <Box className={s.imageContainer}>
       <img
         src={URL.createObjectURL(photo)}
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        style={{ maxWidth: '400px', maxHeight: '400px', objectFit: 'cover' }}
       />
       <Box className={s.imageActions}>
-        <Box onClick={() => setShowPhotoCapture(false)} className={s.imageAction}>
-          <UploadImageActionIcon />
-        </Box>
         <Box
           onClick={() => {
             setPhotoValue(undefined)
@@ -25,9 +22,6 @@ const PhotoItem: React.FC<PhotoItemProps> = props => {
           className={s.imageAction}
         >
           <DeleteImageActionIcon />
-        </Box>
-        <Box onClick={() => console.log('large')} className={s.imageAction}>
-          <FullscreenImageActionIcon />
         </Box>
       </Box>
     </Box>
