@@ -304,5 +304,4 @@ const ReceivedProducts = () => {
   )
 }
 
-
 export default ReceivedProducts

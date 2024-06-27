@@ -8,6 +8,7 @@ import {
   TeamDayOffManagementSubcategory
 } from 'icons/governance'
 import { FolderIcon } from 'icons/shared'
+import { DateIcon } from 'icons/shared'
 import {
   SupplyOmniHome,
   MySalesSubcategory,
@@ -96,11 +97,17 @@ import {
   ReportsVolumetryMenu,
   NotificationIconMenu
 } from 'icons'
-import { AlertIconHome } from 'icons/outOfShelf'
+import {
+  AlertIconHome,
+  AlertIconMenu,
+  AlertIconSubcategory,
+  OutOfShelfMenu
+} from 'icons/outOfShelf'
 
 const IconComponents = {
   // Shared
   FolderIcon,
+  DateIcon,
   // Governance
   ProjectTeamGovernanceHome,
   ProjectTeamGovernanceMenu,
@@ -198,7 +205,10 @@ const IconComponents = {
   ReceivedProductsTOSubcategory,
   CarrefourLogoBlackIcon,
   // out of shelf
-  AlertIconHome
+  AlertIconHome,
+  AlertIconMenu,
+  AlertIconSubcategory,
+  OutOfShelfMenu
 }
 
 export type IconType = 'Menu' | 'Home' | 'Subcategory' | 'Icon'

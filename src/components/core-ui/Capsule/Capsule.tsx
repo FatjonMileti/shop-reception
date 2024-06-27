@@ -1,8 +1,8 @@
 import s from './Capsule.modules.scss'
 
 interface CapsuleProps {
-  label: string
-  value?: string
+  label: string 
+  value?: string | number
   labelColor?: string
   valueColor?: string
   children?: React.ReactNode

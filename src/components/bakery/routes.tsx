@@ -37,7 +37,6 @@ import { ProductionManagementStorePrint } from './StoreManagerRole/ProductionMan
 import { GrowthIndexStore } from './StoreManagerRole/GrowthIndexStore'
 import ReportAndSalesStore from './StoreManagerRole/ReportAndSalesStore/ReportAndSalesStore'
 import { Ingredients } from './Ingredients'
-import ReceivedProductsTest from './Traceability/ReceivedProductsTest/ReceivedProductsTest'
 import ProductManagementTraceability from './Traceability/ProductManagementTraceability/ProductManagementTraceability'
 import ReceivedProducts from './Traceability/ReceivedProducts/ReceivedProducts'
 import FrozenTraceability from './Traceability/FrozenTraceability/FrozenTraceability'
@@ -431,11 +430,6 @@ export const useBakeryRoutes = applicationPages => {
             checkIsAuthorized
           />
         }
-      />
-
-      <Route
-        path={'bakery/traceabilityOperator/received-products-test'}
-        element={<ReceivedProductsTest />}
       />
 
       <Route

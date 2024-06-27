@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { PdfViewerProps } from './PdfViewerDefinitions'
 import { PdfActions } from './PdfActions'
 import { PDFDocument } from './PDFDocument'
@@ -9,11 +9,11 @@ import '!style-loader!css-loader!react-pdf/dist/esm/Page/AnnotationLayer.css'
 import { CircularProgress, useMediaQuery } from '@mui/material'
 
 const PdfViewer = (props: PdfViewerProps) => {
-  const { actions, proform, isLoading } = props
+  const { actions, isLoading, isBill } = props
 
   const { id } = useParams()
 
-  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   // [~] from https://github.com/wojtekmaj/react-pdf#usage
   const [numPages, setNumPages] = useState(null)
@@ -25,10 +25,6 @@ const PdfViewer = (props: PdfViewerProps) => {
   useEffect(() => {
     setScale(isXs ? 0.50 : 1.0)
   }, [isXs])
-
-  const scanReceipt = () => {
-    navigate(`${actions.scanReceiptAction.href}/${id}?clientId=${proform.clientId}`)
-  }
 
   // [~] on back from this page we get called with id=undefined by ..
   return id ? (
@@ -53,6 +49,8 @@ const PdfViewer = (props: PdfViewerProps) => {
             setNumPages={setNumPages}
             id={id}
             actions={actions}
+            searchParams={searchParams}
+            isBill={isBill}
           />
         </div>
       </div>

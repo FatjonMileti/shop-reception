@@ -4,6 +4,7 @@ import { getUserInfo } from './authService'
 import { getCoreBaseUrl } from './api'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { formatErrorMessage } from 'utils/formatting'
+import Resizer from 'react-image-file-resizer'
 
 dayjs.extend(customParseFormat)
 
@@ -204,4 +205,28 @@ export const handleQueryError = (error, message, showNotification) => {
 export const toBoolean = input => {
   if (input === 'true') return true
   if (input === 'false') return false
+}
+
+export const resizeFile = ({
+  file,
+  maxWidth = 300,
+  maxHeight = 300,
+  compressFormat = 'JPEG',
+  quality = 50,
+  outputType = 'file'
+}) => {
+  return new Promise(resolve => {
+    Resizer.imageFileResizer(
+      file,
+      maxWidth,
+      maxHeight,
+      compressFormat,
+      quality,
+      0,
+      uri => {
+        resolve(uri)
+      },
+      outputType
+    )
+  })
 }

@@ -3,7 +3,7 @@ import React from 'react'
 const EmployeeStatusSubcategory: React.FC = () => (
   <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="70" height="70" rx="14.5455" fill="url(#paint0_linear_2242_11384)" />
-    <g clip-path="url(#clip0_2242_11384)">
+    <g clipPath="url(#clip0_2242_11384)">
       <path
         d="M34.9684 44.0472C32.7618 44.0472 30.6182 44.0472 28.4115 44.0472C27.3397 44.0472 27.0245 43.6059 27.1506 42.5971C27.781 39.0034 30.9334 36.2293 34.5901 36.1032C38.436 35.9141 41.8406 38.436 42.7232 42.0927C43.1015 43.6059 42.7232 44.0472 41.2101 44.0472C39.1295 44.0472 37.049 44.0472 34.9684 44.0472Z"
         fill="white"
@@ -32,8 +32,8 @@ const EmployeeStatusSubcategory: React.FC = () => (
         y2="66.9615"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#E5A100" />
-        <stop offset="1" stop-color="#F14B12" />
+        <stop stopColor="#E5A100" />
+        <stop offset="1" stopColor="#F14B12" />
       </linearGradient>
       <clipPath id="clip0_2242_11384">
         <rect width="36" height="36" fill="white" transform="translate(17 17)" />
