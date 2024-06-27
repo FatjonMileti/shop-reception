@@ -35,7 +35,7 @@ const ExpenditureProcessing = () => {
 
   let items = [
     <TitleHeader title='ÎN PROCESARE EXPEDIȚIE' />,
-    trucks && trucks?.map((item: any, index) => (
+    !!trucks && trucks?.map((item: any, index) => (
       <TruckCard
         key={index}
         onClick={() => {

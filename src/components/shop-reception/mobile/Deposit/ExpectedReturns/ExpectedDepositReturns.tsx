@@ -14,7 +14,7 @@ const ExpectedDepositReturns = () => {
   const { data, isLoading } = useQuery(
     ['deposit-return-list'],
     async () => {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/truck/deposit/return`)
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/truck/deposit/return`, null)
       return response || []
     },
     {
@@ -37,7 +37,7 @@ const ExpectedDepositReturns = () => {
 
   return (
     <Grid container spacing={2} justifyContent={'center'}>
-      {data.length === 0 ? (
+      {data?.length === 0 ? (
         <Grid xs={8} item>
           <Typography>Nu exista camioane de retur in lucru.</Typography>
         </Grid>

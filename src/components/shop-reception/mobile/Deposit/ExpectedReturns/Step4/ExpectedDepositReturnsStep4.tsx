@@ -25,7 +25,8 @@ const ExpectedDepositReturnsStep4 = () => {
     ['summary'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/summary/${item.id}`
+        `/shop-reception-mobile/truck/deposit/return/summary/${item.id}`,
+        null
       )
       return response
     },
