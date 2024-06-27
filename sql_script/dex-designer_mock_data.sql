@@ -59,7 +59,7 @@ VALUES
     (18, 'Returnare marfa HUB', 'ProjectTeamGovernance', '/goodsReturnHub', true, 6),
     (19, 'Returnare marfa depozit', 'ProjectTeamGovernance', '/goodsReturnDeposit', true, 6),
     -- Lost Sales Opportunities
-    (20, 'Alerte', 'AlertIcon', '/lostSalesAlerts', true, 7);
+    (20, 'Alerte LSO', 'AlertIcon', '/lostSalesAlerts', true, 7);
 
 
 -- activity with submodule id
@@ -187,7 +187,7 @@ VALUES
     (56, 'Gestiune ingrediente', 'Ingredients', null, true, 2),
     -- Lost Sales Opportunities
     (57, 'Alerte', 'AlertIcon', null, true, 20),
-    (58, 'Administrare Alerte', 'ManagementTasks', null, true, 20);
+    (58, 'Administrare Alerte', 'ManagementAlerts', null, true, 20);
 
 
 -- screen with activity id (some are first screens)
