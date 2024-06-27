@@ -47,30 +47,6 @@ import OwnProductionTraceability from './Traceability/OwnProductionTraceability/
 import ReportOwnProductionTraceability from './Traceability/ReportOwnProductionTraceability/ReportOwnProductionTraceability'
 import ReportOwnProductionTraceabilityPrint from './Traceability/ReportOwnProductionTraceabilityPrint/ReportOwnProductionTraceabilityPrint'
 
-// const ProductManagementTraceability = React.lazy(
-//   () => import('./Traceability/ProductManagementTraceability/ProductManagementTraceability')
-// )
-// const  ReceivedProducts  = React.lazy(
-//   () => import('./Traceability/ReceivedProducts/ReceivedProducts')
-// )
-// const FrozenTraceability = React.lazy(
-//   () => import('./Traceability/FrozenTraceability/FrozenTraceability')
-// )
-// const ReportFrozenTraceability = React.lazy(
-//   () => import('./Traceability/ReportFrozenTraceability/ReportFrozenTraceability')
-// )
-// const ReportFrozenTraceabilityPrint = React.lazy(
-//   () => import('./Traceability/ReportFrozenTraceabilityPrint/ReportFrozenTraceabilityPrint')
-// )
-// const OwnProductionTraceability = React.lazy(
-//   () => import('./Traceability/OwnProductionTraceability/OwnProductionTraceability')
-// )
-// const ReportOwnProductionTraceability = React.lazy(
-//   () => import('./Traceability/ReportOwnProductionTraceability/ReportOwnProductionTraceability')
-// )
-// const ReportOwnProductionTraceabilityPrint = React.lazy(
-//   () => import('./Traceability/ReportOwnProductionTraceabilityPrint/ReportOwnProductionTraceabilityPrint')
-// )
 export const useBakeryRoutes = applicationPages => {
   return (
     <>
@@ -431,11 +407,6 @@ export const useBakeryRoutes = applicationPages => {
             checkIsAuthorized
           />
         }
-      />
-
-      <Route
-        path={'bakery/traceabilityOperator/received-products-test'}
-        element={<ReceivedProductsTest />}
       />
 
       <Route

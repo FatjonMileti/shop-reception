@@ -16,8 +16,8 @@ const CategoryTemplateManagementSubcategory: React.FC = () => (
         y2="70"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FF005C" />
-        <stop offset="1" stop-color="#BD0044" />
+        <stop stopColor="#FF005C" />
+        <stop offset="1" stopColor="#BD0044" />
       </linearGradient>
     </defs>
   </svg>

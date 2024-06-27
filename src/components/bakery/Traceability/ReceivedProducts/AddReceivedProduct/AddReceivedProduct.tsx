@@ -7,13 +7,14 @@ import { useMutation } from 'react-query'
 import { formatErrorMessage } from '../../../../../utils/formatting'
 import { useNotification } from '../../../../../hooks'
 import { makeCorePostRequest } from '../../../../../utils/api'
-import { formatPayloadDate } from '../../../../../utils/helpers'
+import { formatPayloadDate, resizeFile } from '../../../../../utils/helpers'
 import { CircularProgress, Grid } from '@mui/material'
 import { Supplier, Product } from '../interfaces'
 import { useFormik } from 'formik'
 import { productDetailsSchema } from '../helper'
 import dayjs from 'dayjs'
 import { AxiosError } from 'axios'
+import { useOfflineTool } from '../../../../core-ui/Offline'
 
 interface ReceivedProductRequestData {
   productId: string
@@ -51,11 +52,33 @@ interface AddReceivedProductProps {
   closeModal: () => void
   onSuccess?: () => void
 }
-export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddReceivedProductProps) => {
+export const AddReceivedProduct = ({
+  isModalOpen,
+  closeModal,
+  onSuccess
+}: AddReceivedProductProps) => {
   const [step, setStep] = React.useState(0)
   const [selectedProduct, setSelectedProduct] = React.useState<Product | undefined>(undefined)
   const [selectedSupplier, setSelectedSupplier] = React.useState<Supplier | undefined>(undefined)
+  const [isPictureChanged, setIsPictureChanged] = React.useState(false)
   const { showNotification } = useNotification()
+
+  const offlineTool = useOfflineTool();
+
+  React.useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (isPictureChanged) {
+        event.preventDefault()
+        event.returnValue = 'You have unsaved changes. Are you sure you want to leave?'
+      }
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [isPictureChanged])
 
   const cancel = () => {
     closeModal()
@@ -88,12 +111,17 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddRe
         batchName: productDetails.lot
       }
 
-      formData.append('dto',
-        new Blob([JSON.stringify(data)], { type: 'application/json' })
-      )
-      formData.append('fileObject', productDetails.picture)
+      formData.append('dto', new Blob([JSON.stringify(data)], { type: 'application/json' }))
+
+      const resizedImage = await resizeFile({ file: productDetails.picture })
+      console.log('originalImage', (productDetails.picture.size / (1024 * 1024)).toFixed(5), 'mb')
+      console.log('resizedImage', (resizedImage.size / (1024 * 1024)).toFixed(5), 'mb')
+
+      formData.append('fileObject', resizedImage)
 
       await makeCorePostRequest('/bakery/batch', formData)
+
+
     },
     {
       onSuccess: () => {
@@ -102,26 +130,42 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddRe
         setSelectedSupplier(undefined)
         setStep(0)
         detailsForm.resetForm()
-        if(onSuccess) {
+        if (onSuccess) {
           onSuccess()
         }
+        setIsPictureChanged(false)
         showNotification({
           message: `Product added successfully`,
           type: 'success'
         })
       },
-      onError: (res: any) => {
-
-        if (res?.code === AxiosError.ERR_NETWORK) {
+      onError: (err: any) => {
+        if (err?.code === AxiosError.ERR_NETWORK) {
           showNotification({
             message: 'Verificati conexiunea la internet',
             type: 'error'
           })
+
+          // Store offline
+          offlineTool.addOwnTask({
+            type: `Produse receptionate, ${selectedProduct.name}`,
+            data: err.config.data as FormData,
+            url: '/bakery/batch',
+            method: 'post'
+          })
+
+          closeModal()
+          setSelectedProduct(undefined)
+          setSelectedSupplier(undefined)
+          setStep(0)
+          detailsForm.resetForm()
+          setIsPictureChanged(false)
+
           return
         }
 
         showNotification({
-          message: `Exceptie: va rugam incercati, ${formatErrorMessage(res)}`,
+          message: `Exceptie: va rugam incercati, ${formatErrorMessage(err)}`,
           type: 'error'
         })
       }
@@ -175,6 +219,7 @@ export const AddReceivedProduct = ({ isModalOpen, closeModal, onSuccess }: AddRe
                   selectedSupplier={selectedSupplier}
                   onCancel={cancel}
                   form={detailsForm}
+                  setIsPictureChanged={setIsPictureChanged}
                 />
               ][step]
             }

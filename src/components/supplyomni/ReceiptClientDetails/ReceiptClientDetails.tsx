@@ -7,6 +7,7 @@ import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { useMutation, useQuery } from 'react-query'
+import { LEGAL_PERSON_TYPE } from '../constants'
 
 const ReceiptClientDetails: React.FC = () => {
   const navigate = useNavigate()
@@ -41,7 +42,9 @@ const ReceiptClientDetails: React.FC = () => {
         message: `Factura a fost generată cu success.`,
         type: 'success'
       })
-      navigate(`/supplyOmni/bills/${orderId}`)
+      if (client.type !== LEGAL_PERSON_TYPE) {
+        navigate(`/supplyOmni/bills/${orderId}?clientId=${client.id}`)
+      }
     },
     onError: res => {
       showNotification({
@@ -74,11 +77,7 @@ const ReceiptClientDetails: React.FC = () => {
               />
             ),
             bottomButton: (
-              <Button
-                label="Genereaza factura"
-                variant="contained"
-                onClick={generateBill}
-              />
+              <Button label="Genereaza factura" variant="contained" onClick={generateBill} />
             )
           }}
         />

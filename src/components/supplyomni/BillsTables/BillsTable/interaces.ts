@@ -38,6 +38,7 @@ export interface BillModel {
   agentName: string
   clientName: string
   clientId: number
+  clientType: string
   products: ProductModel[]
   deliveryType: string
   status: string

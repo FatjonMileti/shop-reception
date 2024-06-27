@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { IconButton, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { Paper, CircularProgress, useMediaQuery, Box, InputAdornment } from '@mui/material'
-import { useScandit } from 'hooks'
 import { Icon } from 'components/core-ui/Icon'
 import cn from 'classnames'
 import { makeCoreGetRequest } from 'utils/api'
@@ -28,13 +27,11 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
 
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const [productCode, setProductCode] = useState<string>('')
-  const [isUsingScandit, setIsUsingScandit] = useState<boolean>(false) // [~] kept false until we're reasonably sure we're not running on a device with infrared scanner available, like Urovo
 
   const onScan = scanResult => {
     setProductCode(scanResult.barcodes[0].data)
     setIsVisible(false)
   }
-  const { run } = useScandit({ onScan, isVisible })
 
   const scanCode = (): void => {
     setProductCode('')
@@ -64,17 +61,6 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
       refetch()
     }
   }
-
-  useEffect(() => {
-    isScannerDevice(() => {
-      try {
-        run()
-        setIsUsingScandit(true)
-      } catch (error) {
-        console.log(error)
-      }
-    })
-  }, [])
 
   const clearCode = () => {
     setProductCode('')
@@ -115,14 +101,6 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           />
         </div>
         <div className={s.buttonContainer}>
-          {/* {isUsingScandit && (
-            <IconButton
-              onClick={scanCode}
-              label="Scaneaza"
-              variant="outlined"
-              startIcon={<Icon iconName="QrCodeScannerOutlined" tiny={true} fill="primary" />}
-            />
-          )} */}
           <Box style={{ width: '100%' }}>
             <IconButton
               onClick={searchProduct}
@@ -139,18 +117,6 @@ const ProductBarcodeScanner = (props: ProductBarcodeScannerProps) => {
           <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
         </div>
       )}
-      <div className={cn({ [s.hiddenScanner]: !isVisible })}>
-        <div
-          id="scandit-barcode-picker"
-          style={{
-            maxWidth: '400px',
-            maxHeight: '400px',
-            visibility: isVisible ? 'visible' : 'hidden',
-            opacity: isVisible ? 1 : 0,
-            marginTop: isVisible ? '16px' : '0'
-          }}
-        />
-      </div>
     </Paper>
   )
 }

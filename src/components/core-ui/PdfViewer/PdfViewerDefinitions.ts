@@ -18,6 +18,6 @@ export interface Proform {
 
 export interface PdfViewerProps {
   actions: PdfViewerActions
-  proform?: Proform
   isLoading?: boolean
+  isBill?: boolean
 }

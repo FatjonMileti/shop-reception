@@ -25,7 +25,8 @@ VALUES
     (3, 'Supply OMNI Offline', 'SupplyOmni', '/supplyOmni', true),
     (4, 'Volumetry', 'Volumetry', '/volumetry', true),    
     (5, 'Shop Reception Admin', 'DonutLargeTwoTone', '/shopReception', true),
-    (6, 'Shop Reception Mobile', 'DonutLargeTwoTone', '/shopReception/mobile', true);
+    (6, 'Shop Reception Mobile', 'DonutLargeTwoTone', '/shopReception/mobile', true),
+    (7, 'Lost Sales Opportunities', 'OutOfShelf', '/lostSalesOpportunities', true);
 
 
 -- application submodule with module id
@@ -56,7 +57,9 @@ VALUES
     (16, 'Returnare marfa', 'ProjectTeamGovernance', '/goodsReturn', true, 6),
     (17, 'Receptie marfa HUB', 'ProjectTeamGovernance', '/goodsReceptionHub', true, 6),
     (18, 'Returnare marfa HUB', 'ProjectTeamGovernance', '/goodsReturnHub', true, 6),
-    (19, 'Returnare marfa depozit', 'ProjectTeamGovernance', '/goodsReturnDeposit', true, 6);
+    (19, 'Returnare marfa depozit', 'ProjectTeamGovernance', '/goodsReturnDeposit', true, 6),
+    -- Lost Sales Opportunities
+    (20, 'Alerte LSO', 'AlertIcon', '/lostSalesAlerts', true, 7);
 
 
 -- activity with submodule id
@@ -181,7 +184,10 @@ VALUES
     (54, 'Raport trasabilitate congelate', 'FrozenTraceabilityReportTO', null, true, 11),
     (55, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', null, true, 11),
     -- Bakery ADMIN p2
-    (56, 'Gestiune ingrediente', 'Ingredients', null, true, 2);
+    (56, 'Gestiune ingrediente', 'Ingredients', null, true, 2),
+    -- Lost Sales Opportunities
+    (57, 'Alerte', 'AlertIcon', null, true, 20),
+    (58, 'Administrare Alerte', 'ManagementAlerts', null, true, 20);
 
 
 -- screen with activity id (some are first screens)
@@ -387,7 +393,11 @@ VALUES
     (73, 'Raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report', true, 55, true),
     (74, 'Print raport trasabilitate productie proprie', 'OwnProductionTraceabilityReportTO', '/bakery/traceabilityOperator/own-production-traceability-report-print', true, 55, false),
     -- Bakery ADMIN p2
-    (80, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 56, true);
+    (80, 'Gestiune ingrediente', 'Ingredients', '/bakery/admin/ingredients', true, 56, true),
+    -- Lost Sales Opportunities
+    (81, 'Alerte', 'Alerte', '/lostSalesOpportunities/alerts', true, 57, true),
+    (82, 'Alerta', 'Alerte', '/lostSalesOpportunities/alerts/:id', true, 57, false),
+    (83, 'Administrare Alerte', 'ManagementTasks', '/lostSalesOpportunities/alertManagement', true, 58, true);
 
 -- roles
 INSERT INTO
@@ -424,7 +434,9 @@ VALUES
     (205, 'GG_RO_HQ_SHOP_RECEPTION_REGIONAL_OPERATIONS'),
     (206, 'GG_RO_HQ_SHOP_RECEPTION_WAREHOUSE'),
     (207, 'GG_RO_HQ_SHOP_RECEPTION_CG'),
-    (208, 'GG_RO_HQ_SHOP_RECEPTION_AMBALAJE');
+    (208, 'GG_RO_HQ_SHOP_RECEPTION_AMBALAJE'),
+    -- LSO
+    (300, 'GG_RO_DEX_LSO_USER');
 
 
 
@@ -501,7 +513,10 @@ VALUES
     (200, 186), (200, 187), (200, 188), (200, 193), (200, 189), (200, 190),
 
     -- GG_RO_HQ_SHOP_RECEPTION_HUB
-    (203, 179), (203, 180);
+    (203, 179), (203, 180),
+
+    -- Lost Sales Opportunities
+    (300, 57), (300, 58);
 
 
 -- reset sequences

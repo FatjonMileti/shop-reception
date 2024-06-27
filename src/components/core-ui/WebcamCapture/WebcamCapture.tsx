@@ -1,14 +1,28 @@
+import { IconButton } from '@fullscreendigital/carrefour-dex-fe'
 import { useCallback, useRef } from 'react'
 import Webcam from 'react-webcam'
+import ImageIcon from '@mui/icons-material/Image'
 
 const defaultVideoConstraints = {
   width: 1280,
   height: 720,
-  facingMode: 'user'
+  facingMode: 'environment'
 }
 
-const WebcamCapture = props => {
-  const { onImageCapture, videoConstraints } = props
+interface VideoConstraints {
+  width: number
+  height: number
+  facingMode: string
+}
+export interface WebcamCaptureProps {
+  onImageCapture: Function
+  videoConstraints?: VideoConstraints
+  buttonLabel?: string
+  buttonStyle?: any
+}
+
+const WebcamCapture = (props: WebcamCaptureProps) => {
+  const { onImageCapture, videoConstraints, buttonLabel, buttonStyle } = props
 
   const webcamRef = useRef(null)
 
@@ -27,7 +41,13 @@ const WebcamCapture = props => {
         width={videoConstraints?.width || defaultVideoConstraints.width}
         videoConstraints={videoConstraints || defaultVideoConstraints}
       />
-      <button onClick={capture}>Capture photo</button>
+      <IconButton
+        label={buttonLabel || 'Captura foto'}
+        onClick={capture}
+        startIcon={<ImageIcon />}
+        variant="outlined"
+        style={buttonStyle}
+      />
     </>
   )
 }
