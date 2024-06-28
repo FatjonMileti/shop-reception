@@ -21,6 +21,9 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import AlertModal from '../../../Common/AlertModal/AlertModal'
 import { URLS } from '../../../constants'
 import ImageUpload from 'components/shop-reception/mobile/Common/ImageUpload/ImageUpload'
+import { WebcamCapture } from 'components/core-ui/WebcamCapture'
+import { resizeFile } from 'utils/helpers'
+import { CameraAlt as CameraIcon } from '@mui/icons-material'
 
 const options = [
   {
@@ -76,6 +79,7 @@ const SupportScanStep1 = () => {
     description: '',
     buttons: []
   })
+  const [showPhotoCapture, setShowPhotoCapture] = useState(false)
   const [isMoreSupportsModalOpen, setIsMoreSupportsModalOpen] = useState(false)
   const [moreSupportsModalContent, setMoreSupportsModalContent] = useState({
     title: '',
@@ -436,23 +440,25 @@ const SupportScanStep1 = () => {
         helperText={formik.errors.supportTypeId as string}
       />,
       supportImageButtonVisible && (
-        <ImageUpload
-          uploadUrl={`/shop-reception-mobile/support/shop/upload-different-support/${formik.values.supportId}`}
-          onSuccess={() => {
-            showNotification({
-              message: `Imaginea a fost incarcata cu succes.`,
-              type: 'success'
-            })
-          }}
-          onError={() =>
-            showNotification({
-              message: `A aparut o eroare la incarcarea imaginii.`,
-              type: 'error'
-            })
-          }
-          inputId={`image-${formik.values.supportTypeId}`}
-          isButton
-        />
+        <>
+          <ImageUpload
+            uploadUrl={`/shop-reception-mobile/support/shop/upload-different-support/${formik.values.supportId}`}
+            onSuccess={() => {
+              showNotification({
+                message: `Imaginea a fost incarcata cu succes.`,
+                type: 'success'
+              })
+            }}
+            onError={() =>
+              showNotification({
+                message: `A aparut o eroare la incarcarea imaginii.`,
+                type: 'error'
+              })
+            }
+            inputId={`image-${formik.values.supportTypeId}`}
+            isButton
+          />
+        </>
       ),
       <Button
         type="button"
