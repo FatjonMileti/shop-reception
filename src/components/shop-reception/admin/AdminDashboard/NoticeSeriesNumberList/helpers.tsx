@@ -67,8 +67,8 @@ export const drawerFilters = societyOptions => [
   },
   {
     name: 'year',
-    filter: <Input variant="outlined" label="An" type="text" />,
-    type: 'text',
+    filter: <Input variant="outlined" label="An" type="number" />,
+    type: 'number',
     label: 'An'
   }
 ]

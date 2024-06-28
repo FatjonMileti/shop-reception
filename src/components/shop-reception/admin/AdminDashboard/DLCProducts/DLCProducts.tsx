@@ -278,6 +278,7 @@ const DLCProducts = () => {
         appliedFiltersLabel="Filtre"
         cancelFiltersButtonLabel="Anuleaza"
         applyFiltersButtonLabel="Aplica"
+        rowsPerPageOptions={[10, 20, 50]}
       />
     </div>
   )

@@ -81,6 +81,7 @@ const ParentSocietyListModal: React.FC<NoticeSeriesNumberModalProps> = props => 
             options={societyOptions || []}
             error={!!formik.errors.parentSociety}
             helperText={formik.errors.parentSociety as string}
+            disabled={isEdit}
           />
         </Grid>
         <Grid xs={12} item>
@@ -96,6 +97,7 @@ const ParentSocietyListModal: React.FC<NoticeSeriesNumberModalProps> = props => 
             error={!!formik.errors.noticeSeries}
             helperText={formik.errors.noticeSeries as string}
             required
+            disabled={isEdit}
           />
         </Grid>
         <Grid xs={12} item>
@@ -111,6 +113,7 @@ const ParentSocietyListModal: React.FC<NoticeSeriesNumberModalProps> = props => 
             error={!!formik.errors.noticeMinNumber}
             helperText={formik.errors.noticeMinNumber as string}
             required
+            disabled={isEdit}
           />
         </Grid>
         <Grid xs={12} item>
@@ -141,6 +144,7 @@ const ParentSocietyListModal: React.FC<NoticeSeriesNumberModalProps> = props => 
             error={!!formik.errors.year}
             helperText={formik.errors.year as string}
             required
+            disabled={isEdit}
           />
         </Grid>
 

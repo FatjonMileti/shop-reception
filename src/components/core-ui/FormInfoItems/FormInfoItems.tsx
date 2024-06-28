@@ -25,7 +25,7 @@ const FormInfoItems: React.FC<FormInfoItemsProps> = props => {
           <Box className={s.label} style={item.labelStyle || {}}>
             {item.label}
           </Box>
-          <Box className={s.value} title={item.name} style={item.valueStyle || {}}>
+          <Box className={s.value} title={item.name} style={item.valueStyle || {}} sx={{textWrap: 'wrap'}}>
             {item?.render ? item.render(item) : item.name}
           </Box>
         </Box>

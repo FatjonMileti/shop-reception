@@ -8,7 +8,7 @@ export const columns = [
   },
   {
     title: 'Valoare timer',
-    field: 'timerTypeValue',
+    field: 'timerValue',
     align: 'left',
     type: 'string',
     disableSorting: true

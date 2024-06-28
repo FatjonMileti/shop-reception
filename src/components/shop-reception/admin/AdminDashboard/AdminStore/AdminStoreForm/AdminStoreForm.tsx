@@ -67,7 +67,7 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
   const { isLoading, mutate } = useMutation(addShop, {
     onSuccess: () => {
       showNotification({
-        message: `Shop ${isEdit ? 'updated' : 'added'} successfully`,
+        message: `Magazinul a fost ${isEdit ? 'editat' : 'adaugat'} cu succes.`,
         type: 'success'
       })
       closeModal()
@@ -75,7 +75,7 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
     },
     onError: res => {
       showNotification({
-        message: `Error while trying to ${isEdit ? 'edit' : 'add'} shop, ${formatErrorMessage(
+        message: `A aparut o eroare la ${isEdit ? 'editarea' : 'adaugarea'} magazinului. ${formatErrorMessage(
           res
         )}`,
         type: 'error'

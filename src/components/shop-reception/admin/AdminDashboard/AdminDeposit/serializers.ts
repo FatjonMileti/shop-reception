@@ -7,7 +7,7 @@ export const toTableRowItems = items =>
     validityPercentage: item.validityPercentage || '',
     active: item.active || false,
     acceptReturn: item.acceptReturn || false,
-    cif: item.cif || '',
+    CIF: item.cif || '',
     office: item.office || '',
     bankName: item.bankName || '',
     bankAccount: item.bankAccount || '',

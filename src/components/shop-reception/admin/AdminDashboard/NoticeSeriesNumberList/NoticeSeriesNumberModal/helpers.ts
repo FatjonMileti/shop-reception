@@ -18,6 +18,8 @@ export const getInitialValues = editItem => {
     noticeMaxNumber: editItem?.noticeMaxNumber || 0,
     noticeSeries: editItem?.noticeSeries || '',
     year: editItem?.year || 0,
-    parentSociety: {label: editItem?.parentSociety, value: editItem?.parentSociety} || null
+    parentSociety: editItem
+      ? { label: editItem?.parentSociety, value: editItem?.parentSociety }
+      : null
   }
 }

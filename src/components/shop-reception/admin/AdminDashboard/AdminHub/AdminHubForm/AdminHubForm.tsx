@@ -253,7 +253,7 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Cancel" onClick={() => closeModal()} />
+          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
           <Button
             variant="contained"
             label={isEdit ? 'Editeaza' : 'Salveaza'}

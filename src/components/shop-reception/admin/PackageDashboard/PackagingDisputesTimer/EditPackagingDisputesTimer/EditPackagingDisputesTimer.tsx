@@ -67,7 +67,7 @@ const EditPackagingDisputesTimer = ({
           <FormInfoItems
             items={[
               { label: 'Tip timer:', name: editItem?.timerTypeValue },
-              { label: 'Descrirere timer:', name: editItem?.timerDescription }
+              { label: 'Descriere timer:', name: editItem?.timerDescription }
             ]}
           />
         </Grid>

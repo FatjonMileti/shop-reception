@@ -74,7 +74,7 @@ const AdminStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching shop codes dropdown data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -97,7 +97,7 @@ const AdminStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching shops dropdown data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -119,7 +119,7 @@ const AdminStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching versions dropdown data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -141,7 +141,7 @@ const AdminStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching shop types dropdown data. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -163,7 +163,7 @@ const AdminStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching parent societies dropdown data. ${formatErrorMessage(
+          message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(
             error
           )}`,
           type: 'error'
