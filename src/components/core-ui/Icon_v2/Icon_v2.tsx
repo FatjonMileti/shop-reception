@@ -103,6 +103,7 @@ import {
   AlertIconSubcategory,
   OutOfShelfMenu
 } from 'icons/outOfShelf'
+import ManagementAlertsSubcategory from 'icons/outOfShelf/submodules/ManagementAlertsSubcategory'
 
 const IconComponents = {
   // Shared
@@ -208,6 +209,7 @@ const IconComponents = {
   AlertIconHome,
   AlertIconMenu,
   AlertIconSubcategory,
+  ManagementAlertsSubcategory,
   OutOfShelfMenu
 }
 
