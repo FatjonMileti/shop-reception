@@ -51,7 +51,7 @@ const AdminStore = () => {
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
