@@ -157,6 +157,24 @@ export const getDepositOptions = (showNotification: Function, validateQuery: boo
   )
 }
 
+
+export const getDepositNameOptions = (showNotification: Function, validateQuery: boolean = true) => {
+  return useQuery(
+    ['deposits'],
+    async () => {
+      const data = await makeCoreGetRequest(`/shop-reception/deposits/accessible`)
+      return data.map(item => ({
+        label: item.depositName,
+        value: item.depositName
+      }))
+    },
+    {
+      onError: error =>
+        handleQueryError(error, 'A aparut o eroare la obtinerea depozitelor.', showNotification)
+    }
+  )
+}
+
 export const getRegionTypesOptions = (
   showNotification: Function,
   validateQuery: boolean = true

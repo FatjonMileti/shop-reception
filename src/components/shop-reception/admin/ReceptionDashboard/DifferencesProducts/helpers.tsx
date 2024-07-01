@@ -1,5 +1,6 @@
 import { Autocomplete, DatePicker, Input } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
+import { formatUIDate } from 'utils/helpers'
 
 export const columns = downloadImage => [
   {
@@ -103,7 +104,8 @@ export const columns = downloadImage => [
     title: 'Datǎ trimitere către Meti',
     field: 'metiSentDate',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    render: row => formatUIDate(row.metiSentDate)
   },
   {
     title: 'Operator integrare',
@@ -114,6 +116,7 @@ export const columns = downloadImage => [
   {
     title: 'Descarca imagini',
     align: 'left',
+    field: 'archivePath',
     type: 'string',
     render: row =>
       row.archivePath ? (
@@ -127,7 +130,7 @@ export const columns = downloadImage => [
   }
 ]
 
-export const drawerFilters = (shopCodes, metiRayons) => [
+export const drawerFilters = (shopCodes, metiRayons, despositOptions) => [
   {
     name: 'ticketNumber',
     value: '',
@@ -157,7 +160,7 @@ export const drawerFilters = (shopCodes, metiRayons) => [
         variant="outlined"
         label="Selectează depozit"
         disableClearable
-        options={metiRayons || []}
+        options={despositOptions || []}
       />
     ),
     type: 'autocomplete',

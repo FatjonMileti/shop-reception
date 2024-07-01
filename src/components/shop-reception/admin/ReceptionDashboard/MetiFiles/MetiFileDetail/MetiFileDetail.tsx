@@ -74,7 +74,7 @@ const MetiFileDetail = () => {
           { name: infoItems?.depositName, label: 'Depozit sursa:' },
           { name: infoItems?.shopName, label: 'Magazin destinatie:' },
           { name: infoItems?.ticketExternalId, label: 'Bon livrare:' },
-          { name: infoItems?.status, label: 'Status fisier:' }
+          { name: infoItems?.statusValue, label: 'Status fisier:' }
         ]}
       />
 

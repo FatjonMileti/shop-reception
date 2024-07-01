@@ -10,6 +10,7 @@ import { formatErrorMessage } from 'utils/formatting'
 import { useQuery } from 'react-query'
 import { formatAndDownloadResponse } from 'utils/helpers'
 import { DownloadIcon } from 'icons'
+import { getDepositOptions } from '../../api'
 
 const DifferencesProducts = () => {
   const { showNotification } = useNotification()
@@ -18,6 +19,8 @@ const DifferencesProducts = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [downloadImageId, setDownloadImageId] = useState(null)
+
+  const { data: despositOptions } = getDepositOptions(showNotification)
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
@@ -151,7 +154,12 @@ const DifferencesProducts = () => {
           }
         ]}
         rowActionsWidth="130px"
-        filters={drawerFilters(shopCodes, metiRayons)}
+        filters={drawerFilters(shopCodes, metiRayons, despositOptions)}
+        filtersLabel="Filtreaza"
+        filtersButtonLabel="Filtreaza"
+        appliedFiltersLabel="Filtre"
+        cancelFiltersButtonLabel="Anuleaza"
+        applyFiltersButtonLabel="Aplica"
       />
     </div>
   )

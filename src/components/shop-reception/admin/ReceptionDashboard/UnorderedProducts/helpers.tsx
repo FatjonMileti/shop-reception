@@ -2,6 +2,7 @@ import { Autocomplete, DatePicker, Input } from '@fullscreendigital/carrefour-de
 import { Box } from '@mui/material'
 import { IconCell } from 'components/core-ui/IconCell'
 import dayjs from 'dayjs'
+import { formatUIDate } from 'utils/helpers'
 
 export const columns = markAsResolved => [
   {
@@ -85,7 +86,8 @@ export const columns = markAsResolved => [
     field: 'created',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    render: row => formatUIDate(row.created)
   },
   {
     title: 'Operator recepție',
@@ -114,7 +116,8 @@ export const columns = markAsResolved => [
     field: 'updated',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    render: row => formatUIDate(row.updated)
   },
   {
     title: 'Operator rezolvare',

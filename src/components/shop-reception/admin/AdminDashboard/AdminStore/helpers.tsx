@@ -30,7 +30,6 @@ export const columns = (setModal, selectRow) => [
     field: 'metiVersion',
     align: 'left',
     type: 'string',
-    disableSorting: true,
     width: '100px'
   },
   {
@@ -79,7 +78,6 @@ export const columns = (setModal, selectRow) => [
         <IconCell value={row.active ? 'active' : 'inactive'} />
       </Box>
     ),
-    disableSorting: true,
     width: '100px'
   },
   {

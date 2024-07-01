@@ -14,7 +14,7 @@ import { Grid } from '@mui/material'
 import { Button } from '@fullscreendigital/carrefour-dex-fe'
 import { DownloadIcon } from 'icons'
 import { formatAndDownloadResponse } from 'utils/helpers'
-import { getDepositOptions, getShopOptions } from '../../api'
+import { getDepositNameOptions, getShopOptions } from '../../api'
 
 const UnorderedProducts = () => {
   const { showNotification } = useNotification()
@@ -47,7 +47,7 @@ const UnorderedProducts = () => {
       setIsLoading(false)
     } catch (error) {
       showNotification({
-        message: `Error while fetching table data. ${formatErrorMessage(error)}`,
+        message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -100,7 +100,7 @@ const UnorderedProducts = () => {
     }
   }
 
-  const { data: depositOptions } = getDepositOptions(showNotification)
+  const { data: depositOptions } = getDepositNameOptions(showNotification)
   const { data: shopOptions } = getShopOptions(showNotification)
 
   return (

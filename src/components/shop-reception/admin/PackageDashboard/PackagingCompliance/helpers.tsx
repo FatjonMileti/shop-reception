@@ -148,7 +148,6 @@ export const getFilters = ({
         variant="outlined"
         value={currentDate}
         onChange={() => {}}
-        required
       />
     ),
     type: 'date',
@@ -163,7 +162,6 @@ export const getFilters = ({
         variant="outlined"
         value={currentDate}
         onChange={() => {}}
-        required
       />
     ),
     type: 'date',
