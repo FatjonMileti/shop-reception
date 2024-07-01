@@ -57,6 +57,7 @@ export const columns = [
     align: 'left',
     type: 'string',
     disableSorting: true,
+    width: '250px',
     render: row =>
       row?.code ? (
         <Barcode

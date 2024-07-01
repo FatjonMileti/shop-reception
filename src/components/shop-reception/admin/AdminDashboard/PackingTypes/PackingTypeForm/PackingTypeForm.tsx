@@ -156,6 +156,7 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
             value={formik.values.name}
             error={!!formik.errors.name}
             helperText={formik.errors.name as string}
+            required
           />
         </Grid>
         <Grid item xs={12}>
