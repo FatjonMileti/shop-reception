@@ -4,5 +4,6 @@ export const toTableRowItems = (items: AdminHub[]) => items.map((item: AdminHub)
   name: item.name || '',
   type: item.type || '',
   address: item.address || '',
-  active: item.active || false
+  active: item.active || false,
+  packagingResponsibleEmails: item.packagingResponsibleEmails || ''
 }))
