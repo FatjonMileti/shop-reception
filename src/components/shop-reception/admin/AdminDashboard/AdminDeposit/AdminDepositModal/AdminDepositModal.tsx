@@ -119,10 +119,15 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
     '/shop-reception/deposits/responsible'
   )
 
+  const clearModal = () => {
+    formik.resetForm()
+    closeModal()
+  }
+
   return (
     <Modal
       isModalOpen={isModalOpen}
-      closeModal={closeModal}
+      closeModal={clearModal}
       modalTitle={isEdit ? 'Editeaza depozit' : 'Adauga depozit'}
       modalWidth="50%"
     >
@@ -378,7 +383,7 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
           />
         </Grid>
         <Grid xs={12} item className={s.modalButtons}>
-          <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
+          <Button variant="outlined" label="Anuleaza" onClick={clearModal} />
           <Button
             variant="contained"
             label={isEdit ? 'Editeaza' : 'Salveaza'}

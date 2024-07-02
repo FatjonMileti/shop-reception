@@ -23,14 +23,7 @@ export const getValidationSchema = (editItem: AdminDeposit) =>
     active: Yup.boolean().required('Campul este obligatoriu.'),
     acceptReturn: Yup.boolean().required('Campul este obligatoriu.'),
     depositUsers: Yup.array()
-      .of(
-        Yup.object()
-          .shape({
-            label: Yup.string(),
-            value: Yup.string()
-          })
-          .required('Campul este obligatoriu.')
-      )
+      .of(Yup.string().required('Campul este obligatoriu.'))
       .test({
         message: 'Campul este obligatoriu.',
         test: arr => arr.length !== 0
@@ -46,7 +39,7 @@ export const getInitialValues = (editItem, depositUsersOptions, depositsOptions)
     validityPercentage: editItem?.validityPercentage || 0,
     emails: editItem ? editItem?.emails?.toString() || '' : '',
     packagingResponsibleEmail: editItem?.packagingResponsibleEmail || '',
-    cif: editItem?.cif || '',
+    cif: editItem?.CIF || '',
     office: editItem?.office || '',
     bankAccount: editItem?.bankAccount || '',
     bankName: editItem?.bankName || '',
