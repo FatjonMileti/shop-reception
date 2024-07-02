@@ -21,10 +21,10 @@ export const getInitialValues = (editItem, hubTypes, assignedUsers) => {
     ...(editItem?.id && { id: editItem?.id }),
     code: editItem?.code || '',
     name: editItem?.name || '',
-    type: editItem ? hubTypes.filter(item => item.label === editItem.type)[0] : '',
+    type: editItem ? hubTypes.filter(item => item.label === editItem.type)[0] : null,
     active: editItem?.active || false,
     address: editItem?.address || '',
-    users: editItem ? (assignedUsers || []) : [],
-    packagingResponsibleEmails: editItem?.packagingResponsibleEmails || ''
+    users: editItem ? assignedUsers || [] : [],
+    packagingResponsibleEmails: editItem?.packagingResponsibleEmails || null
   }
 }

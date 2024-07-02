@@ -235,7 +235,6 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
               variant="outlined"
               label="Utilizatori asignaţi pe hub"
               autoComplete={false}
-              required
               filterOptions={x => x}
               multiple
               onChange={(event, value) => {
