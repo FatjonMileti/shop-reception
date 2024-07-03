@@ -112,7 +112,7 @@ const SupportScanStep3 = () => {
           />
           {supportTypeList[rowData.id].received != formik.values.supportType[rowData.id].received &&
             <ImageUpload
-              uploadUrl={`/shop-reception-mobile/support/upload/` + rowData.id}
+              uploadUrl={`/shop-reception-mobile/support/shop/upload/` + rowData.id}
               onSuccess={() => handleSuccess(rowData.id)}
               onError={handleError}
               inputId={`support${rowData.id}`}
@@ -176,7 +176,7 @@ const SupportScanStep3 = () => {
 
   const doSaveSupportTypes = (values) => {
     try {
-      makeCorePostRequest(`/shop-reception-mobile/support/list/save/${false}/${truckId}/${supportId}`, values).then(
+      makeCorePostRequest(`/shop-reception-mobile/support/shop//list/save/${false}/${truckId}/${supportId}`, values).then(
         ()  => navigate(URLS.AUTH_SUPPORT_SCAN_STEP_4, {state: truckId })
       );
     } catch (error) {
