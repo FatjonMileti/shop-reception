@@ -4,10 +4,12 @@ export const getValidationSchema = (editItem: AdminDeposit) =>
   Yup.object().shape({
     code: Yup.string().required('Campul este obligatoriu.'),
     name: Yup.string().required('Campul este obligatoriu.'),
-    type: Yup.object().shape({
-      label: Yup.string().required('Campul este obligatoriu.'),
-      value: Yup.string().required('Campul este obligatoriu.')
-    }),
+    type: Yup.object()
+      .shape({
+        label: Yup.string(),
+        value: Yup.string()
+      })
+      .required('Campul este obligatoriu.'),
     address: Yup.string().required('Campul este obligatoriu.'),
     validityPercentage: Yup.string().required('Campul este obligatoriu.'),
     emails: Yup.string().required('Campul este obligatoriu.'),
@@ -22,19 +24,22 @@ export const getValidationSchema = (editItem: AdminDeposit) =>
     acceptReturn: Yup.boolean().required('Campul este obligatoriu.'),
     depositUsers: Yup.array()
       .of(Yup.string().required('Campul este obligatoriu.'))
-      .required('Campul este obligatoriu.')
+      .test({
+        message: 'Campul este obligatoriu.',
+        test: arr => arr.length !== 0
+      })
   })
 
 export const getInitialValues = (editItem, depositUsersOptions, depositsOptions) => {
   return {
     code: editItem?.code || '',
     name: editItem?.name || '',
-    type: editItem ? depositsOptions.filter(item => item.label === editItem.type)[0] : '',
+    type: editItem ? depositsOptions.filter(item => item.label === editItem.type)[0] : null,
     address: editItem?.address || '',
     validityPercentage: editItem?.validityPercentage || 0,
-    emails: editItem ? (editItem?.emails?.toString() || '') : '',
+    emails: editItem ? editItem?.emails?.toString() || '' : '',
     packagingResponsibleEmail: editItem?.packagingResponsibleEmail || '',
-    cif: editItem?.cif || '',
+    cif: editItem?.CIF || '',
     office: editItem?.office || '',
     bankAccount: editItem?.bankAccount || '',
     bankName: editItem?.bankName || '',

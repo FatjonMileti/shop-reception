@@ -109,7 +109,7 @@ interface AdminHub {
   address: string
   active: boolean
   users?: string[]
-  packagingResponsibleEmails?: string[]
+  packagingResponsibleEmails?: string
 }
 
 interface AdminHubDeliveryInterval {
