@@ -149,7 +149,7 @@ const SupportScanStep1 = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        makeCorePostRequest('/shop-reception-mobile/support/save/' + id, values).then(resp => {
+        makeCorePostRequest('/shop-reception-mobile/support/shop/save/' + id, values).then(resp => {
           const localCounter = resp.counter
           if (localCounter > 0) {
             setCounter(localCounter)
