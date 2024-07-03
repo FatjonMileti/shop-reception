@@ -106,7 +106,7 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
       const payload = {
         ...values,
         type: values.type.value,
-        emails: values.emails.split(',')
+        emails: values.emails.split(';')
       }
 
       mutate(payload)

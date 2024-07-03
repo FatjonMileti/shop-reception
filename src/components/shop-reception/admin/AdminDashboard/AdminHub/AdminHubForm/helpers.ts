@@ -1,3 +1,4 @@
+import { isEmail } from 'utils/helpers'
 import * as Yup from 'yup'
 
 export const getValidationSchema = () =>
@@ -13,7 +14,13 @@ export const getValidationSchema = () =>
     active: Yup.boolean().required('Campul este obligatoriu.'),
     address: Yup.string().required('Campul este obligatoriu.'),
     users: Yup.array().of(Yup.string()),
-    packagingResponsibleEmails: Yup.string().required('Campul este obligatoriu.')
+    packagingResponsibleEmails: Yup.string()
+      .required('Campul este obligatoriu.')
+      .test(
+        'emails',
+        'Adrese de email invalide. Separatorul este ;',
+        value => value && value.split(';').every(isEmail)
+      )
   })
 
 export const getInitialValues = (editItem, hubTypes, assignedUsers) => {

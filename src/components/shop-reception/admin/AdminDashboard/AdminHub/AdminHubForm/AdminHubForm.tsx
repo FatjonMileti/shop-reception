@@ -189,7 +189,7 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
                 (event.target as HTMLInputElement).value
               )
             }
-            label="Adresă de email responsabil ambalaje"
+            label="Adrese de email responsabil ambalaje"
             variant="outlined"
             style={{ width: '100%' }}
             error={!!formik.errors.packagingResponsibleEmails}
