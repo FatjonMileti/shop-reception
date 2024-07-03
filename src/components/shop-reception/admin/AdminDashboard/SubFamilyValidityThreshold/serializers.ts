@@ -7,5 +7,5 @@ export const toTableRowItems = (items: SubFamilyValidityThreshold[]) =>
     famName: item.famName || '',
     rayCode: item.rayCode || '',
     rayName: item.rayName || '',
-    validityLimit: item.validityLimit || 0
+    validityLimit: item.validityLimit || ''
   }))

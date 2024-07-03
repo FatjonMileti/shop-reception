@@ -17,7 +17,7 @@ const CentralizeStores = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
-  const [selectedRow, setSelectedRow] = useState<DLCProducts>()
+  const [selectedRow, setSelectedRow] = useState<DLCProducts>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const openUpdateModal = () => setIsOpen(true)
   const closeUpdateModal = () => setIsOpen(false)

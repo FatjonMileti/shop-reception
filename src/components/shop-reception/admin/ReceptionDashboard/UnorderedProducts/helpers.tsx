@@ -210,6 +210,7 @@ export const drawerFilters = (shopOptions, depositOptions) => [
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',

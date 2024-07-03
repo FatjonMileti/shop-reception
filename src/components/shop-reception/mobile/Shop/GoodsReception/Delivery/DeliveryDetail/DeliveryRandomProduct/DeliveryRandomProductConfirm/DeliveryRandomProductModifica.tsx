@@ -1,29 +1,29 @@
 import { TitleHeader } from '../../../../../../Common/TitleHeader'
-import { Button, DatePicker, Input, Table, Typography } from "@fullscreendigital/carrefour-dex-fe";
+import { Button, DatePicker, Input, Table, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { Grid } from '../../../../../../../Common/Grid'
 import { URLS } from '../../../../../../constants'
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
-import { useLocation, useNavigate } from "react-router-dom";
-import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../../../utils/api";
-import { formatErrorMessage } from "../../../../../../../../../utils/formatting";
-import { useNotification } from "../../../../../../../../../hooks";
-import { useQuery } from "react-query";
-import { TableHeaderType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table";
-import ImageUpload from "../../../../../../Common/ImageUpload/ImageUpload";
-import { DefectReason, Mark } from "../../../../../../../enums";
-import dayjs from "dayjs";
+import { useLocation, useNavigate } from 'react-router-dom'
+import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../../../../../utils/api'
+import { formatErrorMessage } from '../../../../../../../../../utils/formatting'
+import { useNotification } from '../../../../../../../../../hooks'
+import { useQuery } from 'react-query'
+import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table'
+import ImageUpload from '../../../../../../Common/ImageUpload/ImageUpload'
+import { DefectReason, Mark } from '../../../../../../../enums'
+import dayjs from 'dayjs'
 
 const DeliveryRandomProductModifica = () => {
-  const { showNotification } = useNotification();
-  const location = useLocation();
-  const queryParams = location.state;
+  const { showNotification } = useNotification()
+  const location = useLocation()
+  const queryParams = location.state
   const navigate = useNavigate()
 
-  const [marks, setMarks] = useState([]);
-  const [defectReasons, setDefectReasons] = useState([]);
-  const [litigation, setLitigation] = useState(null);
+  const [marks, setMarks] = useState([])
+  const [defectReasons, setDefectReasons] = useState([])
+  const [litigation, setLitigation] = useState(null)
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -32,10 +32,9 @@ const DeliveryRandomProductModifica = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-
-      let submitDlc = values?.dlc;
+      let submitDlc = values?.dlc
       if (submitDlc && typeof submitDlc === 'object') {
-        submitDlc = submitDlc.toISOString().split('T')[0];
+        submitDlc = submitDlc.toISOString().split('T')[0]
       }
 
       const payload = {
@@ -53,13 +52,14 @@ const DeliveryRandomProductModifica = () => {
         defectReason: values.defectReason,
         mark: values.mark,
         shopReceptionDeviation: values.shopReceptionDeviation,
-        supportId: values.supportId,
+        supportId: values.supportId
       }
 
       try {
-        makeCorePostRequest(`/shop-reception-mobile/aleatory/product/saveNewQuantities`, payload).then(
-          goBack
-        )
+        makeCorePostRequest(
+          `/shop-reception-mobile/aleatory/product/saveNewQuantities`,
+          payload
+        ).then(goBack)
       } catch (error) {
         showNotification({
           message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -76,30 +76,30 @@ const DeliveryRandomProductModifica = () => {
       supportCode: formik.values.supportCode,
       productCode: formik.values.productEan,
       supportId: formik.values.supportId,
-      currentConformQuantity:formik.values.conformQuantity,
-      currentDefectQuantity:formik.values.defectQuantity
+      currentConformQuantity: formik.values.conformQuantity,
+      currentDefectQuantity: formik.values.defectQuantity
     }
-    queryParams.flow === 'aleatory_product' && navigate(
-      URLS.AUTH_DELIVERY_RANDOM_PRODUCT,
-      {state: state}
-    );
-    queryParams.flow === 'aleatory_support' && navigate(
-      URLS.AUTH_DELIVERY_RANDOM_SUPPORT,
-      {state: state}
-    );
+    queryParams.flow === 'aleatory_product' &&
+      navigate(URLS.AUTH_DELIVERY_RANDOM_PRODUCT, { state: state })
+    queryParams.flow === 'aleatory_support' &&
+      navigate(URLS.AUTH_DELIVERY_RANDOM_SUPPORT, { state: state })
   }
 
-  const {data: productQuantityModification, isLoading } = useQuery(
+  const { data: productQuantityModification, isLoading } = useQuery(
     ['productQuantityModification'],
     async () => {
-      return await makeCoreGetRequest(`/shop-reception-mobile/integral/productQuantityModification/${queryParams.productId}/${queryParams.supportId}/${queryParams.truckId}`, null)
+      return await makeCoreGetRequest(
+        `/shop-reception-mobile/integral/productQuantityModification/${queryParams.productId}/${queryParams.supportId}/${queryParams.truckId}`,
+        null
+      )
     },
     {
       initialData: [],
-      onError: error => showNotification({
-        message: `A aparut o eroare. ${formatErrorMessage(error)}`,
-        type: 'error'
-      }),
+      onError: error =>
+        showNotification({
+          message: `A aparut o eroare. ${formatErrorMessage(error)}`,
+          type: 'error'
+        }),
       onSuccess: (data: any) => {
         formik.setValues(data)
       }
@@ -113,68 +113,73 @@ const DeliveryRandomProductModifica = () => {
   }, [formik.values.conformQuantity, formik.values.defectQuantity])
 
   const calculateLitigationType = () => {
-    const currentConformValue = parseFloat(formik.values.conformQuantity);
-    const currentDefectValue = parseFloat(formik.values.defectQuantity);
-    const currentTotalValue = currentConformValue + currentDefectValue;
+    const currentConformValue = parseFloat(formik.values.conformQuantity)
+    const currentDefectValue = parseFloat(formik.values.defectQuantity)
+    const currentTotalValue = currentConformValue + currentDefectValue
 
-    if (queryParams?.quantity > currentConformValue && queryParams?.quantity === currentTotalValue) {
-      setMarks( [
+    if (
+      queryParams?.quantity > currentConformValue &&
+      queryParams?.quantity === currentTotalValue
+    ) {
+      setMarks([
         Mark.VEGETABLE_FRUIT_QUALITY,
         Mark.EXPIRED,
         Mark.SHORT_TERM,
         Mark.DAMAGED,
         Mark.VEGETABLES_FRUITS,
         Mark.DETERIORATION_A
-      ]);
+      ])
 
-      setLitigation(2);
-    } else if (queryParams?.quantity > currentConformValue && queryParams?.quantity !== currentTotalValue) {
-      setMarks( [
+      setLitigation(2)
+    } else if (
+      queryParams?.quantity > currentConformValue &&
+      queryParams?.quantity !== currentTotalValue
+    ) {
+      setMarks([
         Mark.PALLETS_MERCHANDISE_MISSING,
         Mark.MISSING_CARRIER,
         Mark.QUANTITATIVE_DIFFERENCE
-      ]);
+      ])
 
-      setLitigation(1);
+      setLitigation(1)
     } else if (queryParams?.quantity < currentTotalValue) {
-      setMarks( [
-        Mark.PALLETS_MERCHANDISE_MISSING,
-        Mark.QUANTITATIVE_DIFFERENCE
-      ]);
+      setMarks([Mark.PALLETS_MERCHANDISE_MISSING, Mark.QUANTITATIVE_DIFFERENCE])
 
-      setLitigation(1);
+      setLitigation(1)
     } else if (queryParams?.quantity === currentConformValue) {
-      setLitigation(null);
+      setLitigation(null)
     }
 
-
-    formik.setFieldValue('mark', '');
-    formik.setFieldValue('defectReason', '');
+    formik.setFieldValue('mark', '')
+    formik.setFieldValue('defectReason', '')
   }
 
-  const populateDefectReasons = (selectedMark) => {
+  const populateDefectReasons = selectedMark => {
     if (formik.values.mark) {
-      formik.setFieldValue('defectReason', '');
+      formik.setFieldValue('defectReason', '')
 
       switch (litigation) {
         case 1:
-          setDefectReasons([DefectReason.PROVIDER]);
-          formik.setFieldValue('defectReason', DefectReason.PROVIDER);
-          break;
+          setDefectReasons([DefectReason.PROVIDER])
+          formik.setFieldValue('defectReason', DefectReason.PROVIDER)
+          break
         case 2:
           if (selectedMark === Mark.EXPIRED || selectedMark === Mark.SHORT_TERM) {
-            setDefectReasons([DefectReason.PROVIDER]);
-            formik.setFieldValue('defectReason', DefectReason.PROVIDER);
+            setDefectReasons([DefectReason.PROVIDER])
+            formik.setFieldValue('defectReason', DefectReason.PROVIDER)
           } else if (selectedMark === Mark.VEGETABLE_FRUIT_QUALITY) {
-            setDefectReasons([DefectReason.PROVIDER, DefectReason.SHOP]);
+            setDefectReasons([DefectReason.PROVIDER, DefectReason.SHOP])
           } else if (selectedMark === Mark.DAMAGED) {
-            setDefectReasons([DefectReason.PROVIDER, DefectReason.TRANSPORTER, DefectReason.SHOP]);
-          } else if (selectedMark === Mark.VEGETABLES_FRUITS || selectedMark === Mark.DETERIORATION_A) {
-            setDefectReasons([DefectReason.PROVIDER, DefectReason.TRANSPORTER]);
+            setDefectReasons([DefectReason.PROVIDER, DefectReason.TRANSPORTER, DefectReason.SHOP])
+          } else if (
+            selectedMark === Mark.VEGETABLES_FRUITS ||
+            selectedMark === Mark.DETERIORATION_A
+          ) {
+            setDefectReasons([DefectReason.PROVIDER, DefectReason.TRANSPORTER])
           }
-          break;
+          break
         default:
-          setDefectReasons([]);
+          setDefectReasons([])
       }
     }
   }
@@ -187,15 +192,15 @@ const DeliveryRandomProductModifica = () => {
     showNotification({
       message: 'Image uploaded successfully',
       type: 'success'
-    });
-  };
+    })
+  }
 
-  const handleError = (error) => {
+  const handleError = error => {
     showNotification({
       message: `${formatErrorMessage(error)}`,
       type: 'error'
-    });
-  };
+    })
+  }
 
   const columns: Array<TableHeaderType> = [
     {
@@ -211,10 +216,10 @@ const DeliveryRandomProductModifica = () => {
         <Input
           type="number"
           value={rowData.qualitative}
-          onChange={(e) => {
-            formik.setFieldValue('conformQuantity', (e.target as HTMLInputElement).value);
+          onChange={e => {
+            formik.setFieldValue('conformQuantity', (e.target as HTMLInputElement).value)
           }}
-          variant='standard'
+          variant="standard"
         />
       )
     },
@@ -223,24 +228,23 @@ const DeliveryRandomProductModifica = () => {
       field: 'defective',
       align: 'left',
       render: (rowData: any) => (
-        <div style={{ display: "flex" }}>
+        <div style={{ display: 'flex' }}>
           <Input
             type="number"
             value={rowData.defective}
-            onChange={(e) => {
-              formik.setFieldValue('defectQuantity', (e.target as HTMLInputElement).value);
+            onChange={e => {
+              formik.setFieldValue('defectQuantity', (e.target as HTMLInputElement).value)
             }}
-            variant='standard'
+            variant="standard"
           />
-          {
-            litigation === 2 &&
+          {litigation === 2 && (
             <ImageUpload
               uploadUrl={`/shop-reception-mobile/integral/upload/${queryParams.supportId}/${queryParams.productId}`}
               onSuccess={() => handleSuccess()}
               onError={handleError}
               inputId={`support${queryParams.supportId}`}
             />
-          }
+          )}
         </div>
       )
     }
@@ -257,17 +261,28 @@ const DeliveryRandomProductModifica = () => {
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
-      maxWidth='xs'
+      maxWidth="xs"
       items={[
-        <TitleHeader title='PRODUSE ALEATOR VALIDARE LIVRARE' />,
+        <TitleHeader title="PRODUSE ALEATOR VALIDARE LIVRARE" />,
         <Grid
           spacing={1}
           hasPaper={true}
           items={[
-            <Typography variant='medium' component='p'>PRODUSE ALEATOR</Typography>,
-            <Typography variant='medium' component='p'>Număr înmatriculare: {productQuantityModification?.truckNumber}</Typography>,
-            formik.values?.ticketNumber && <Typography variant='medium' component='p'> BL: {formik.values?.ticketNumber} </Typography>,
-            <Typography variant='medium' component='p'>Etichetă suport: {productQuantityModification?.supportCode}</Typography>
+            <Typography variant="medium" component="p">
+              PRODUSE ALEATOR
+            </Typography>,
+            <Typography variant="medium" component="p">
+              Număr înmatriculare: {productQuantityModification?.truckNumber}
+            </Typography>,
+            formik.values?.ticketNumber && (
+              <Typography variant="medium" component="p">
+                {' '}
+                BL: {formik.values?.ticketNumber}{' '}
+              </Typography>
+            ),
+            <Typography variant="medium" component="p">
+              Etichetă suport: {productQuantityModification?.supportCode}
+            </Typography>
           ]}
           itemsPerRow={1}
         />,
@@ -278,30 +293,30 @@ const DeliveryRandomProductModifica = () => {
           disablePagination={true}
           hideCheckbox={true}
         />,
-        (!!litigation &&
+        !!litigation && (
           <>
             <Input
-              type='select'
-              label='Marca'
-              variant='outlined'
-              width='100%'
+              type="select"
+              label="Marca"
+              variant="outlined"
+              width="100%"
               value={formik.values.mark}
-              values={marks?.map((mark) => ({ value: mark, label: mark }))}
+              values={marks?.map(mark => ({ value: mark, label: mark }))}
               onChange={event => {
-                formik.setFieldValue("mark", (event.target as HTMLInputElement).value);
+                formik.setFieldValue('mark', (event.target as HTMLInputElement).value)
               }}
               error={!!formik.errors.mark}
               helperText={formik.errors.mark as string}
             />
             <Input
-              type='select'
-              label='Motiv'
-              variant='outlined'
-              width='100%'
+              type="select"
+              label="Motiv"
+              variant="outlined"
+              width="100%"
               value={formik.values.defectReason}
-              values={defectReasons?.map((defect) => ({ value: defect, label: defect }))}
+              values={defectReasons?.map(defect => ({ value: defect, label: defect }))}
               onChange={event => {
-                formik.setFieldValue("defectReason", (event.target as HTMLInputElement).value);
+                formik.setFieldValue('defectReason', (event.target as HTMLInputElement).value)
               }}
               disabled={formik.values.mark === ''}
               error={!!formik.errors.defectReason}
@@ -310,21 +325,22 @@ const DeliveryRandomProductModifica = () => {
             <DatePicker
               style={{ width: '100%' }}
               value={dayjs(formik.values.dlc)}
-              onChange={value => formik.setFieldValue('dlc', (value as Date | string))}
+              onChange={value => formik.setFieldValue('dlc', value as Date | string)}
+              adapterLocale="ro"
             />
           </>
         ),
         <Button
-          type='button'
-          variant='contained'
-          label='Anulează'
+          type="button"
+          variant="contained"
+          label="Anulează"
           onClick={() => goBack()}
           style={{ width: '100%' }}
         />,
         <Button
-          type='button'
-          variant='contained'
-          label='Salvează'
+          type="button"
+          variant="contained"
+          label="Salvează"
           onClick={() => formik.handleSubmit()}
           style={{ width: '100%' }}
         />

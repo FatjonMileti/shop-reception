@@ -223,7 +223,7 @@ interface SubFamilyValidityThreshold {
   famName: string
   rayCode: string
   rayName: string
-  validityLimit: number
+  validityLimit: number | string
 }
 
 interface PackingType {

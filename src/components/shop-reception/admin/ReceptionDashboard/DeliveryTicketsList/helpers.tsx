@@ -149,7 +149,13 @@ export const drawerFilters = (shopCodes, depositOptions, statusOptions) => [
     name: 'created',
     value: '',
     filter: (
-      <DatePicker label="Selecteaza data" variant="outlined" value={dayjs()} onChange={() => {}} />
+      <DatePicker
+        label="Selecteaza data"
+        variant="outlined"
+        value={dayjs()}
+        onChange={() => {}}
+        adapterLocale="ro"
+      />
     ),
     type: 'date',
     label: 'Data'

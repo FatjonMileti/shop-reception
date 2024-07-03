@@ -105,6 +105,7 @@ export const drawerFilters = (shopTypesOptions, shopOptions, reportType, regionT
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -119,6 +120,7 @@ export const drawerFilters = (shopTypesOptions, shopOptions, reportType, regionT
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',

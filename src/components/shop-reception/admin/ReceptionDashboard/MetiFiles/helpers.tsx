@@ -61,12 +61,12 @@ export const columns = (
     width: '70px',
     disableSorting: true,
     render: row => {
-      return row.sentFilePath ? (
+      return row.sentFilePath !== null && row.sentFilePath.length > 0 ? (
         <>
           <span onClick={() => downloadSentFile(row.id)} style={{ cursor: 'pointer' }}>
             <DownloadIcon />
           </span>
-          {row.numberOfSentFiles > 1 && (
+          {row.numberOfSentFiles > 0 && (
             <span onClick={() => downloadSentFileHistory(row.id)} style={{ cursor: 'pointer' }}>
               <DownloadIcon />
             </span>
@@ -85,12 +85,12 @@ export const columns = (
     width: '70px',
     disableSorting: true,
     render: row => {
-      return row.receivedFilePath ? (
+      return row.receivedFilePath !== null && row.receivedFilePath.length > 0 ? (
         <>
           <span onClick={() => downloadReceivedFile(row.id)} style={{ cursor: 'pointer' }}>
             <DownloadIcon />
           </span>
-          {row.numberOfReceivedFile > 1 && (
+          {row.numberOfReceivedFile > 0 && (
             <span onClick={() => downloadReceivedFileHistory(row.id)} style={{ cursor: 'pointer' }}>
               <DownloadIcon />
             </span>
@@ -294,6 +294,7 @@ export const drawerFilters = (shopCodes, statusList, ticketExternalId) => [
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -308,6 +309,7 @@ export const drawerFilters = (shopCodes, statusList, ticketExternalId) => [
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',

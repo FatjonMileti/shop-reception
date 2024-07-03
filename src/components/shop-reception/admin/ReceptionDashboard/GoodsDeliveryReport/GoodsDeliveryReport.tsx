@@ -48,15 +48,15 @@ const GoodsDeliveryReport = () => {
   return (
     <Grid
       items={[
-        <TitleHeader title=' Raport livrare marfă' />,
+        <TitleHeader title=" Raport livrare marfă" />,
         <Grid
           hasPaper={true}
           items={[
             <Input
-              type='select'
+              type="select"
               onChange={event => null}
-              label='Niciun magazin sosire selectat'
-              variant='outlined'
+              label="Niciun magazin sosire selectat"
+              variant="outlined"
               style={{ width: '100%' }}
               values={[
                 {
@@ -67,10 +67,10 @@ const GoodsDeliveryReport = () => {
               value={'none'}
             />,
             <Input
-              type='select'
+              type="select"
               onChange={event => null}
-              label='Niciun HUB plecare selectat'
-              variant='outlined'
+              label="Niciun HUB plecare selectat"
+              variant="outlined"
               style={{ width: '100%' }}
               values={[
                 {
@@ -81,10 +81,10 @@ const GoodsDeliveryReport = () => {
               value={'none'}
             />,
             <Input
-              type='select'
+              type="select"
               onChange={event => null}
-              label='Niciun HUB sosire selectat'
-              variant='outlined'
+              label="Niciun HUB sosire selectat"
+              variant="outlined"
               style={{ width: '100%' }}
               values={[
                 {
@@ -95,10 +95,10 @@ const GoodsDeliveryReport = () => {
               value={'none'}
             />,
             <Input
-              type='select'
+              type="select"
               onChange={event => null}
-              label='Selectează depozit'
-              variant='outlined'
+              label="Selectează depozit"
+              variant="outlined"
               style={{ width: '100%' }}
               values={[
                 {
@@ -109,10 +109,10 @@ const GoodsDeliveryReport = () => {
               value={'none'}
             />,
             <Input
-              type='select'
+              type="select"
               onChange={event => null}
-              label='Selectează status'
-              variant='outlined'
+              label="Selectează status"
+              variant="outlined"
               style={{ width: '100%' }}
               values={[
                 {
@@ -123,10 +123,10 @@ const GoodsDeliveryReport = () => {
               value={'none'}
             />,
             <Input
-              type='select'
+              type="select"
               onChange={event => null}
-              label='Selectează locaţie camion'
-              variant='outlined'
+              label="Selectează locaţie camion"
+              variant="outlined"
               style={{ width: '100%' }}
               values={[
                 {
@@ -137,10 +137,10 @@ const GoodsDeliveryReport = () => {
               value={'none'}
             />,
             <Input
-              type='select'
+              type="select"
               onChange={event => null}
-              label='Selectează recepţie în interval orar'
-              variant='outlined'
+              label="Selectează recepţie în interval orar"
+              variant="outlined"
               style={{ width: '100%' }}
               values={[
                 {
@@ -151,10 +151,10 @@ const GoodsDeliveryReport = () => {
               value={'none'}
             />,
             <Input
-              type='select'
+              type="select"
               onChange={event => null}
-              label='Selectează tip sosire'
-              variant='outlined'
+              label="Selectează tip sosire"
+              variant="outlined"
               style={{ width: '100%' }}
               values={[
                 {
@@ -165,56 +165,61 @@ const GoodsDeliveryReport = () => {
               value={'none'}
             />,
             <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Număr înmatriculare'
-              variant='outlined'
+              type="text"
+              onChange={event => null}
+              label="Număr înmatriculare"
+              variant="outlined"
               style={{ width: '100%' }}
             />,
             <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Bon livrare'
-              variant='outlined'
+              type="text"
+              onChange={event => null}
+              label="Bon livrare"
+              variant="outlined"
               style={{ width: '100%' }}
             />,
             <Input
-              type='text'
-              onChange={event => null
-              }
-              label='Cod cursǎ'
-              variant='outlined'
+              type="text"
+              onChange={event => null}
+              label="Cod cursǎ"
+              variant="outlined"
               style={{ width: '100%' }}
             />,
             <DatePicker
               label="Selectează început interval sosire"
-              variant="outlined" value={dayjs()}
+              variant="outlined"
+              value={dayjs()}
               onChange={() => {}}
+              adapterLocale="ro"
             />,
             <DatePicker
               label="Selectează sfârşit interval sosire"
-              variant="outlined" value={dayjs()}
+              variant="outlined"
+              value={dayjs()}
               onChange={() => {}}
+              adapterLocale="ro"
             />,
             <DatePicker
               label="Selectează început interval înregistrare"
-              variant="outlined" value={dayjs()}
+              variant="outlined"
+              value={dayjs()}
               onChange={() => {}}
+              adapterLocale="ro"
             />,
             <DatePicker
               label="Selectează sfârşit interval înregistrare"
-              variant="outlined" value={dayjs()}
+              variant="outlined"
+              value={dayjs()}
               onChange={() => {}}
-            />,
+              adapterLocale="ro"
+            />
           ]}
           itemsPerRow={4}
         />,
         <Table
           hideCheckbox
-          orderBy='role'
-          order='asc'
+          orderBy="role"
+          order="asc"
           columns={columns}
           items={tableItems}
           fetchData={() => {}}
@@ -224,14 +229,16 @@ const GoodsDeliveryReport = () => {
           shouldRefreshData={shouldRefreshData}
           setShouldRefreshData={setShouldRefreshData}
           rowActions={[]}
-          rowActionsWidth='130px'
-          toolbarActions={[
-            // {
-            //   label: "Adauga",
-            //   icon: <AddIcon />,
-            //   onClick: null
-            // }
-          ]}
+          rowActionsWidth="130px"
+          toolbarActions={
+            [
+              // {
+              //   label: "Adauga",
+              //   icon: <AddIcon />,
+              //   onClick: null
+              // }
+            ]
+          }
         />
       ]}
       itemsPerRow={1}

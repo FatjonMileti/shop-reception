@@ -194,6 +194,7 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
             error={!!formik.errors.start}
             value={dayjs(formik.values.start)}
             style={{ width: '100%' }}
+            adapterLocale="ro"
           />
         </Grid>
 
@@ -207,6 +208,7 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
             error={!!formik.errors.end}
             value={dayjs(formik.values.end)}
             style={{ width: '100%' }}
+            adapterLocale="ro"
           />
         </Grid>
 

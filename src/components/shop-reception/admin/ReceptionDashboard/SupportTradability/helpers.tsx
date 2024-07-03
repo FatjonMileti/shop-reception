@@ -277,6 +277,7 @@ export const drawerFilters = (
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -291,6 +292,7 @@ export const drawerFilters = (
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -305,6 +307,7 @@ export const drawerFilters = (
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -319,6 +322,7 @@ export const drawerFilters = (
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',

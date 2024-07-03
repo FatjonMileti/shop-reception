@@ -95,7 +95,12 @@ export const getFilters = (depositOptions, hubOptions, shopOptions, parentSociet
     name: 'depositId',
     value: undefined,
     filter: (
-      <Autocomplete variant="outlined" label="Selectează depozit" options={depositOptions || []} multiple/>
+      <Autocomplete
+        variant="outlined"
+        label="Selectează depozit"
+        options={depositOptions || []}
+        multiple
+      />
     ),
     type: 'autocomplete',
     label: 'Selectează depozit'
@@ -123,6 +128,7 @@ export const getFilters = (depositOptions, hubOptions, shopOptions, parentSociet
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -132,7 +138,12 @@ export const getFilters = (depositOptions, hubOptions, shopOptions, parentSociet
     name: 'shopCode',
     value: undefined,
     filter: (
-      <Autocomplete variant="outlined" label="Selecteaza magazin" options={shopOptions || []} multiple/>
+      <Autocomplete
+        variant="outlined"
+        label="Selecteaza magazin"
+        options={shopOptions || []}
+        multiple
+      />
     ),
     type: 'autocomplete',
     label: 'Selecteaza magazin'
@@ -146,6 +157,7 @@ export const getFilters = (depositOptions, hubOptions, shopOptions, parentSociet
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -160,6 +172,7 @@ export const getFilters = (depositOptions, hubOptions, shopOptions, parentSociet
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -172,7 +185,7 @@ export const getFilters = (depositOptions, hubOptions, shopOptions, parentSociet
       <Autocomplete
         variant="outlined"
         label="Selecteaza societate"
-        options={parentSocietyOptions || [] }
+        options={parentSocietyOptions || []}
         multiple
       />
     ),
