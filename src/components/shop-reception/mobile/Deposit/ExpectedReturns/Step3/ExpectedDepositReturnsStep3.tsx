@@ -33,8 +33,7 @@ const ExpectedDepositReturnsStep3 = () => {
     ['support-list-table'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/supports/${item.id}?parentId=${item.id}`,
-        null
+        `/shop-reception-mobile/truck/deposit/return/supports/${item.id}?parentId=${item.id}`
       )
       return response || []
     },
@@ -52,8 +51,7 @@ const ExpectedDepositReturnsStep3 = () => {
     ['all-support-list'],
     async () => {
       const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/all-supports/${item.id}`,
-        null
+        `/shop-reception-mobile/truck/deposit/return/all-supports/${item.id}`
       )
       return response || []
     },

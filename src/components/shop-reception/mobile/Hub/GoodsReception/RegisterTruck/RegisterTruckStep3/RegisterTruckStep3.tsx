@@ -17,7 +17,7 @@ const RegisterTruckStep3 = () => {
   const [sealNumbers, setSealNumbers] = useState(['']);
   const [numFields, setNumFields] = useState(1)
   const [params] = useSearchParams();
-  const id = Number(params.get('id'));
+  const id = +params.get('id');
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -89,12 +89,15 @@ const RegisterTruckStep3 = () => {
       "documentList": null
     };
 
-      makeCorePostRequest('/shop-reception-mobile/truck/hub/save/seals', truck).then(() => navigate('/goodsReturn')).catch(error => {
-        showNotification({
-          message: `Error while saving truck. ${formatErrorMessage(error)}`,
-          type: 'error'
-        })
+    try {
+      makeCorePostRequest('/shop-reception-mobile/truck/hub/save/seals', truck);
+      navigate('/goodsReturn');
+    } catch (error) {
+      showNotification({
+        message: `Eroare la salvarea camionului. ${formatErrorMessage(error)}`,
+        type: 'error'
       })
+    }
   }
 
   if (isLoading) {
