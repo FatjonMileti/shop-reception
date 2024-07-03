@@ -38,42 +38,33 @@ import { GrowthIndexStore } from './StoreManagerRole/GrowthIndexStore'
 import ReportAndSalesStore from './StoreManagerRole/ReportAndSalesStore/ReportAndSalesStore'
 import { Ingredients } from './Ingredients'
 
-// const ProductManagementTraceability = React.lazy(
-//   () => import('./Traceability/ProductManagementTraceability/ProductManagementTraceability')
-// )
-// const ReceivedProducts = React.lazy(
-//   () => import('./Traceability/ReceivedProducts/ReceivedProducts')
-// )
-// const FrozenTraceability = React.lazy(
-//   () => import('./Traceability/FrozenTraceability/FrozenTraceability')
-// )
-// const ReportFrozenTraceability = React.lazy(
-//   () => import('./Traceability/ReportFrozenTraceability/ReportFrozenTraceability')
-// )
-// const ReportFrozenTraceabilityPrint = React.lazy(
-//   () => import('./Traceability/ReportFrozenTraceabilityPrint/ReportFrozenTraceabilityPrint')
-// )
-// const OwnProductionTraceability = React.lazy(
-//   () => import('./Traceability/OwnProductionTraceability/OwnProductionTraceability')
-// )
-// const ReportOwnProductionTraceability = React.lazy(
-//   () => import('./Traceability/ReportOwnProductionTraceability/ReportOwnProductionTraceability')
-// )
-// const ReportOwnProductionTraceabilityPrint = React.lazy(
-//   () =>
-//     import(
-//       './Traceability/ReportOwnProductionTraceabilityPrint/ReportOwnProductionTraceabilityPrint'
-//     )
-// )
-
-import ProductManagementTraceability from './Traceability/ProductManagementTraceability/ProductManagementTraceability'
-import ReceivedProducts from './Traceability/ReceivedProducts/ReceivedProducts'
-import FrozenTraceability from './Traceability/FrozenTraceability/FrozenTraceability'
-import ReportFrozenTraceability from './Traceability/ReportFrozenTraceability/ReportFrozenTraceability'
-import ReportFrozenTraceabilityPrint from './Traceability/ReportFrozenTraceabilityPrint/ReportFrozenTraceabilityPrint'
-import OwnProductionTraceability from './Traceability/OwnProductionTraceability/OwnProductionTraceability'
-import ReportOwnProductionTraceability from './Traceability/ReportOwnProductionTraceability/ReportOwnProductionTraceability'
-import ReportOwnProductionTraceabilityPrint from './Traceability/ReportOwnProductionTraceabilityPrint/ReportOwnProductionTraceabilityPrint'
+const ProductManagementTraceability = React.lazy(
+  () => import('./Traceability/ProductManagementTraceability/ProductManagementTraceability')
+)
+const ReceivedProducts = React.lazy(
+  () => import('./Traceability/ReceivedProducts/ReceivedProducts')
+)
+const FrozenTraceability = React.lazy(
+  () => import('./Traceability/FrozenTraceability/FrozenTraceability')
+)
+const ReportFrozenTraceability = React.lazy(
+  () => import('./Traceability/ReportFrozenTraceability/ReportFrozenTraceability')
+)
+const ReportFrozenTraceabilityPrint = React.lazy(
+  () => import('./Traceability/ReportFrozenTraceabilityPrint/ReportFrozenTraceabilityPrint')
+)
+const OwnProductionTraceability = React.lazy(
+  () => import('./Traceability/OwnProductionTraceability/OwnProductionTraceability')
+)
+const ReportOwnProductionTraceability = React.lazy(
+  () => import('./Traceability/ReportOwnProductionTraceability/ReportOwnProductionTraceability')
+)
+const ReportOwnProductionTraceabilityPrint = React.lazy(
+  () =>
+    import(
+      './Traceability/ReportOwnProductionTraceabilityPrint/ReportOwnProductionTraceabilityPrint'
+    )
+)
 
 export const useBakeryRoutes = applicationPages => {
   return (
