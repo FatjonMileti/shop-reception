@@ -248,6 +248,7 @@ export const getFilters = ({
         value={currentDate}
         onChange={() => {}}
         required
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -263,6 +264,7 @@ export const getFilters = ({
         value={currentDate}
         onChange={() => {}}
         required
+        adapterLocale="ro"
       />
     ),
     type: 'date',

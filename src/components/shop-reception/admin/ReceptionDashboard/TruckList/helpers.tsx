@@ -181,7 +181,13 @@ export const columns = navigate => [
   }
 ]
 
-export const drawerFilters = (shopOptions, hubOptions, depositOptions, statusOptions, locationOptions) => [
+export const drawerFilters = (
+  shopOptions,
+  hubOptions,
+  depositOptions,
+  statusOptions,
+  locationOptions
+) => [
   {
     name: 'shopCode',
     value: '',
@@ -342,6 +348,7 @@ export const drawerFilters = (shopOptions, hubOptions, depositOptions, statusOpt
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -356,6 +363,7 @@ export const drawerFilters = (shopOptions, hubOptions, depositOptions, statusOpt
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',

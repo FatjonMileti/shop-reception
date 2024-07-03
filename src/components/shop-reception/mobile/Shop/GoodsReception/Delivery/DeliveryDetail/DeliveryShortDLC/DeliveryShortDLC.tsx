@@ -302,6 +302,7 @@ const DeliveryShortDLC = () => {
                     value={dayjs(product.dlc)}
                     variant="outlined"
                     style={{ display: 'flex', justifyContent: 'center' }}
+                    adapterLocale="ro"
                   />
                 </TableCell>
               </>

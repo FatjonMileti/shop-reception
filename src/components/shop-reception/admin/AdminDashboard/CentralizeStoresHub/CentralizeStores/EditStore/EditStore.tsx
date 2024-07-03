@@ -22,10 +22,10 @@ const EditStore: React.FC<EditStoreProps> = props => {
   const { showNotification } = useNotification()
 
   const { data: shopsFormData, isLoading: isLoadingShopsFormData } = useQuery(
-    ['shops-form'],
+    ['shops-form', editItem],
     async () => {
       const data = await makeCoreGetRequest(
-        `/shop-reception/delivery-matrix/shops/${editItem?.destinationId}/form-data`
+        `/shop-reception/delivery-matrix/shops/${editItem?.destinationHubId}/form-data`
       )
       return {
         depositList: data?.depositList.map(deposit => ({
@@ -48,13 +48,13 @@ const EditStore: React.FC<EditStoreProps> = props => {
           type: 'error'
         })
       },
-      enabled: typeof editItem !== 'undefined' && editItem?.destinationId !== null
+      enabled: typeof editItem !== 'undefined' && editItem !== null
     }
   )
 
   const mutateStore = async values => {
     await makeCorePostRequest(
-      `/shop-reception/delivery-matrix/shops/${editItem?.destinationId}`,
+      `/shop-reception/delivery-matrix/shops/${editItem?.destinationHubId}`,
       values
     )
   }

@@ -19,7 +19,7 @@ const MetiFiles = () => {
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const { showNotification } = useNotification()
   const navigate = useNavigate()
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams()
   const ticketExternalId = searchParams.get('ticketExternalId')
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
@@ -34,7 +34,7 @@ const MetiFiles = () => {
         ? { name: filter.name, value: filter.value || ticketExternalId }
         : filter
     )
-    ticketExternalId  && searchParams.delete('ticketExternalId')
+    ticketExternalId && searchParams.delete('ticketExternalId')
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
@@ -104,9 +104,12 @@ const MetiFiles = () => {
 
   const downloadSentFile = async id => {
     try {
-      const response = await makeCoreGetFileRequest(`/metiIntegrationFile/export/${id}`, {
-        responseType: 'blob'
-      })
+      const response = await makeCoreGetFileRequest(
+        `/shop-reception/metiIntegrationFile/export/${id}`,
+        {
+          responseType: 'blob'
+        }
+      )
       return formatAndDownloadResponse(response)
     } catch (error) {
       showNotification({
@@ -118,9 +121,12 @@ const MetiFiles = () => {
 
   const downloadSentFileHistory = async id => {
     try {
-      const response = await makeCoreGetFileRequest(`/metiIntegrationFile/history/${id}`, {
-        responseType: 'blob'
-      })
+      const response = await makeCoreGetFileRequest(
+        `/shop-reception/metiIntegrationFile/history/${id}`,
+        {
+          responseType: 'blob'
+        }
+      )
       return formatAndDownloadResponse(response)
     } catch (error) {
       showNotification({
@@ -133,7 +139,7 @@ const MetiFiles = () => {
   const downloadReceivedFile = async id => {
     try {
       const response = await makeCoreGetFileRequest(
-        `/metiIntegrationFile/export/${id}?type=receivedFile`,
+        `/shop-reception/metiIntegrationFile/export/${id}?type=receivedFile`,
         {
           responseType: 'blob'
         }
@@ -150,7 +156,7 @@ const MetiFiles = () => {
   const downloadReceivedFileHistory = async id => {
     try {
       const response = await makeCoreGetFileRequest(
-        `/metiIntegrationFile/history/${id}?type=receivedFile`,
+        `/shop-reception/metiIntegrationFile/history/${id}?type=receivedFile`,
         {
           responseType: 'blob'
         }

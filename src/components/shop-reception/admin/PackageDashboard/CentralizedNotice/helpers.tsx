@@ -106,6 +106,7 @@ export const getFilters = ({
         value={null}
         onChange={() => {}}
         required
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -121,6 +122,7 @@ export const getFilters = ({
         value={null}
         onChange={() => {}}
         required
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -136,6 +138,7 @@ export const getFilters = ({
         value={null}
         onChange={() => {}}
         required
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -151,6 +154,7 @@ export const getFilters = ({
         value={null}
         onChange={() => {}}
         required
+        adapterLocale="ro"
       />
     ),
     type: 'date',

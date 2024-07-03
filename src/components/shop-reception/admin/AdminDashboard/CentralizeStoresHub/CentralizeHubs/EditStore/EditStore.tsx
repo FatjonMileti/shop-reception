@@ -22,7 +22,7 @@ const EditStore: React.FC<EditStoreProps> = props => {
   const { showNotification } = useNotification()
 
   const { data: shopsFormData, isLoading: isLoadingShopsFormData } = useQuery(
-    ['shops-form'],
+    ['shops-form', editItem],
     async () => {
       const data = await makeCoreGetRequest(
         `/shop-reception/delivery-matrix/hubs/${editItem?.destinationId}/form-data`

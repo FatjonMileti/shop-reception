@@ -145,7 +145,12 @@ export const getFilters = ({
     name: 'depositId',
     value: undefined,
     filter: (
-      <Autocomplete variant="outlined" label="Selecteaza Depozit" options={depositOptions || []} multiple/>
+      <Autocomplete
+        variant="outlined"
+        label="Selecteaza Depozit"
+        options={depositOptions || []}
+        multiple
+      />
     ),
     type: 'autocomplete',
     label: 'Selecteaza Depozit'
@@ -237,6 +242,7 @@ export const getFilters = ({
         value={currentDate}
         onChange={() => {}}
         required
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -252,6 +258,7 @@ export const getFilters = ({
         value={currentDate}
         onChange={() => {}}
         required
+        adapterLocale="ro"
       />
     ),
     type: 'date',

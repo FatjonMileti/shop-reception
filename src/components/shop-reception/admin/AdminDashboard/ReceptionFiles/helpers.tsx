@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import { IconCell } from 'components/core-ui/IconCell'
 import dayjs from 'dayjs'
 import { DownloadIcon } from 'icons'
-import { formatPayloadDate } from 'utils/helpers'
+import { formatPayloadDate, formatUIDate } from 'utils/helpers'
 
 export const columns = (setExportSelectedRowId, selectRow) => [
   {
@@ -32,7 +32,7 @@ export const columns = (setExportSelectedRowId, selectRow) => [
     field: 'createdDate',
     align: 'left',
     type: 'string',
-    render: row => formatPayloadDate(row.createdDate)
+    render: row => formatUIDate(row.createdDate)
   },
   {
     title: 'Succes',
@@ -109,7 +109,13 @@ export const drawerFilters = (shopCodes, depositOptions, reasonsOptions) => [
     name: 'date',
     value: '',
     filter: (
-      <DatePicker label="Selecteaza data" variant="outlined" value={dayjs()} onChange={() => {}}  />
+      <DatePicker
+        label="Selecteaza data"
+        variant="outlined"
+        value={dayjs()}
+        onChange={() => {}}
+        adapterLocale="ro"
+      />
     ),
     type: 'date',
     label: 'Data'

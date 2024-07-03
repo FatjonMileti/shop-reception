@@ -148,6 +148,7 @@ export const getFilters = ({
         variant="outlined"
         value={currentDate}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
@@ -162,6 +163,7 @@ export const getFilters = ({
         variant="outlined"
         value={currentDate}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',

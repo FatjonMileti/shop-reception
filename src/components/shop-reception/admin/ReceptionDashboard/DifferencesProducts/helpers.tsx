@@ -203,6 +203,7 @@ export const drawerFilters = (shopCodes, metiRayons, despositOptions) => [
         variant="outlined"
         value={dayjs()}
         onChange={() => {}}
+        adapterLocale="ro"
       />
     ),
     type: 'date',
