@@ -17,7 +17,7 @@ const RegisterTruckStep3 = () => {
   const [sealNumbers, setSealNumbers] = useState(['']);
   const [numFields, setNumFields] = useState(1)
   const [params] = useSearchParams();
-  const id = params.get('id')
+  const id = +params.get('id');
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -83,18 +83,18 @@ const RegisterTruckStep3 = () => {
     }));
 
     const truck = {
-      "id": data.truckId,
+      "id": data?.truckId,
       "shopTemperature": null,
       sealList,
       "documentList": null
     };
 
     try {
-      makeCorePostRequest('/shop-reception-mobile/truck/hub/save/seals', truck).then(() => navigate('/goodsReturn'))
-    }
-    catch (error) {
+      makeCorePostRequest('/shop-reception-mobile/truck/hub/save/seals', truck);
+      navigate('/goodsReturn');
+    } catch (error) {
       showNotification({
-        message: `Error while saving truck. ${formatErrorMessage(error)}`,
+        message: `Eroare la salvarea camionului. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -110,8 +110,8 @@ const RegisterTruckStep3 = () => {
       maxWidth='xs'
       items={[
         <TitleHeader title='ÎNREGISTREAZǍ CAMION' />,
-        <Typography variant='medium' component='p'>Număr înmatriculare: {data.truckNumber}</Typography>,
-        <Typography variant='medium' component='p'>Număr suporți scanaţi: {data.supportCounter}</Typography>,
+        <Typography variant='medium' component='p'>Număr înmatriculare: {data?.truckNumber}</Typography>,
+        <Typography variant='medium' component='p'>Număr suporți scanaţi: {data?.supportCounter}</Typography>,
         sealNumbers.map((seal, idx) => (
           <div style={{ display: 'flex', marginTop: '20px' }}>
             <Input

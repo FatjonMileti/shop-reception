@@ -21,11 +21,11 @@ export const getInitialValues = (editItem: SGRProducts) => {
   return {
     id: editItem?.id || null,
     shopCode: editItem?.shopCode || null,
-    shopType: editItem?.shopType || null,
     rayCode: editItem?.rayName || null,
     famCode: editItem?.famName || null,
     sfaCode: editItem?.sfaName || null,
     ubCode: editItem?.ubName || null,
-    prodCode: editItem?.prodName || null
+    prodCode: editItem?.prodName || null,
+    shopType: editItem?.shopType || null
   }
 }

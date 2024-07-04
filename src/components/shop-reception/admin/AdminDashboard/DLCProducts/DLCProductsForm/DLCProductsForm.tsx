@@ -21,6 +21,7 @@ interface DLCProductsFormProps {
   metiFamilies: AutocompleteOption[]
   metiSubfamilies: AutocompleteOption[]
   metiUB: AutocompleteOption[]
+  shopCodes: AutocompleteOption[]
 }
 
 const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
@@ -34,7 +35,8 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
     metiRayons,
     metiFamilies,
     metiSubfamilies,
-    metiUB
+    metiUB,
+    shopCodes
   } = props
   const { showNotification } = useNotification()
 
@@ -81,12 +83,50 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
         rayCode: values.rayCode?.value || values.rayCode || null,
         sfaCode: values.sfaCode?.value || values.sfaCode || null,
         shopCode: values.shopCode?.value || values.shopCode || null,
-        ubCode: values.ubCode?.value || values.ubCode || null
+        ubCode: values.ubCode?.value || values.ubCode || null,
+        shopType: values.shopType?.value || null
       }
 
       mutate(payload)
     }
   })
+
+  const metiFamiliesOptions = useMemo(() => {
+    if (formik.values.rayCode?.value) {
+      const options = typeof metiFamilies !== 'undefined' && metiFamilies.filter(
+        family => formik.values.rayCode?.value === family.value.toString().slice(0, 2)
+      )
+
+      return options
+    }
+
+    return []
+  }, [formik.values.rayCode?.value, metiFamilies])
+
+  const metiSubfamiliesOption = useMemo(() => {
+    if (formik.values.famCode?.value) {
+      const options = typeof metiSubfamilies !== 'undefined' && metiSubfamilies.filter(
+        subFamily => formik.values.famCode?.value === subFamily.value.toString().split('_')[0]
+      )
+
+      return options
+    }
+
+    return []
+  }, [formik.values.famCode?.value, metiSubfamilies])
+
+  const ubCodeOptions = useMemo(() => {
+    if (formik.values.sfaCode?.value) {
+      const options = typeof metiUB !== 'undefined' && metiUB.filter(
+        ubCode =>
+          formik.values.sfaCode?.value === ubCode.value.toString().split('_').slice(1).join('_')
+      )
+      return options
+    }
+
+    return []
+  }, [formik.values.sfaCode?.value, metiUB])
+
 
   return (
     <Modal
@@ -96,17 +136,33 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
       modalWidth="50%"
     >
       <Grid container spacing={2}>
-        <Grid xs={12} item>
+      <Grid xs={12} item>
           <Autocomplete
             variant="outlined"
             label="Magazin"
-            disableClearable
-            // required
-            onChange={(event, option) => formik.setFieldValue('shopCode', option)}
-            value={formik.values.shopCode}
+            onChange={(event, option) => {
+              formik.setFieldValue('shopType', null)
+              formik.setFieldValue('shopCode', option)
+            }}
+            defaultValue={editItem && { value: editItem.shopCode, label: editItem.shopCode }}
+            options={shopCodes || []}
+            disabled={formik.values.shopCode === null && formik.values.shopType !== null}
+          />
+        </Grid>
+
+        <Grid xs={12} item>
+          <Autocomplete
+            variant="outlined"
+            label="Regula magazin"
+            onChange={(event, option) => {
+              formik.setFieldValue('shopCode', null)
+              formik.setFieldValue('shopType', option)
+            }}
+            defaultValue={
+              editItem && { value: editItem.shopType.key, label: editItem.shopType.value }
+            }
             options={shopTypes || []}
-            // error={!!formik.errors.shopCode}
-            // helperText={formik.errors.shopCode as string}
+            disabled={formik.values.shopType === null && formik.values.shopCode !== null}
           />
         </Grid>
 
@@ -114,13 +170,17 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
           <Autocomplete
             variant="outlined"
             label="Raion"
-            disableClearable
-            required
-            onChange={(event, option) => formik.setFieldValue('rayCode', option)}
+            onChange={(event, option) => {
+              formik.setFieldValue('rayCode', option)
+              formik.setFieldValue('famCode', null)
+              formik.setFieldValue('sfaCode', null)
+              formik.setFieldValue('ubCode', null)
+            }}
             value={formik.values.rayCode}
             options={metiRayons || []}
             error={!!formik.errors.rayCode}
             helperText={formik.errors.rayCode as string}
+            disabled={formik.values.shopType === null && formik.values.shopCode !== null}
           />
         </Grid>
 
@@ -129,12 +189,13 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             variant="outlined"
             label="Familie"
             disableClearable
-            // required
-            onChange={(event, option) => formik.setFieldValue('famCode', option)}
+            onChange={(event, option) => {
+              formik.setFieldValue('famCode', option)
+              formik.setFieldValue('sfaCode', null)
+              formik.setFieldValue('ubCode', null)
+            }}
             value={formik.values.famCode}
-            options={metiFamilies || []}
-            // error={!!formik.errors.famCode}
-            // helperText={formik.errors.famCode as string}
+            options={metiFamiliesOptions || []}
           />
         </Grid>
 
@@ -143,12 +204,12 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             variant="outlined"
             label="Subfamilie"
             disableClearable
-            // required
-            onChange={(event, option) => formik.setFieldValue('sfaCode', option)}
+            onChange={(event, option) => {
+              formik.setFieldValue('sfaCode', option)
+              formik.setFieldValue('ubCode', null)
+            }}
             value={formik.values.sfaCode}
-            options={metiSubfamilies || []}
-            // error={!!formik.errors.sfaCode}
-            // helperText={formik.errors.sfaCode as string}
+            options={metiSubfamiliesOption || []}
           />
         </Grid>
 
@@ -157,12 +218,9 @@ const DLCProductsForm: React.FC<DLCProductsFormProps> = props => {
             variant="outlined"
             label="Cod UB"
             disableClearable
-            // required
             onChange={(event, option) => formik.setFieldValue('ubCode', option)}
             value={formik.values.ubCode}
-            options={metiUB || []}
-            // error={!!formik.errors.ubCode}
-            // helperText={formik.errors.ubCode as string}
+            options={ubCodeOptions || []}
           />
         </Grid>
 

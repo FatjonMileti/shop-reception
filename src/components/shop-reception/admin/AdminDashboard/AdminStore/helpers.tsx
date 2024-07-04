@@ -48,7 +48,7 @@ export const columns = (setModal, selectRow) => [
   },
   {
     title: 'Regiune',
-    field: 'regionName',
+    field: 'regionNames',
     align: 'left',
     type: 'string',
     width: '100px',

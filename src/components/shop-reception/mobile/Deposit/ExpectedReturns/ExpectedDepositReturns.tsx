@@ -37,7 +37,7 @@ const ExpectedDepositReturns = () => {
 
   return (
     <Grid container spacing={2} justifyContent={'center'}>
-      {data.length === 0 ? (
+      {!data?.length ? (
         <Grid xs={8} item>
           <Typography>Nu exista camioane de retur in lucru.</Typography>
         </Grid>

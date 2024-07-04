@@ -89,6 +89,8 @@ const SensitiveProducts = () => {
     }
   )
 
+  
+
   const { data: shopCodes, isLoading: isShopCodesLoading } = useQuery(
     ['shop-codes'],
     async () => {
@@ -204,6 +206,7 @@ const SensitiveProducts = () => {
         metiFamilies={metiFamilies}
         metiSubfamilies={metiSubfamilies}
         metiUB={metiUB}
+        shopCodes={shopCodes}
       />
       <SensitiveProduct
         isModalOpen={createUpdateModal === 'update'}
@@ -216,6 +219,7 @@ const SensitiveProducts = () => {
         metiUB={metiUB}
         editItem={selectedRow}
         isEdit
+        shopCodes={shopCodes}
       />
 
       <DeleteConfirmationModal

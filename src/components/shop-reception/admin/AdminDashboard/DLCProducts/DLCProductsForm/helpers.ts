@@ -21,6 +21,7 @@ export const getInitialValues = (editItem: DLCProducts) => {
     famCode: editItem?.famName || null,
     sfaCode: editItem?.sfaName || null,
     ubCode: editItem?.ubName || null,
-    prodCode: editItem?.prodName || null
+    prodCode: editItem?.prodName || null,
+    shopType: editItem?.shopType || null
   }
 }

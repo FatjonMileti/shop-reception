@@ -136,7 +136,7 @@ interface AdminStore {
   metiVersion: string
   adCode: string
   receptionDeviation: number
-  regionName: string
+  regionNames: string
   sftpIp: string
   sftpPath: string
   canEditQuantities: string
@@ -209,10 +209,7 @@ interface SensitiveProduct {
   sfaName: string
   famName: string
   rayName: string
-  shopType: {
-    key: string
-    value: string
-  }
+  shopType: ShopType
 }
 
 interface SubFamilyValidityThreshold {
