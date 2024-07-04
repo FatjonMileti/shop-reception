@@ -1,8 +1,6 @@
 import * as Yup from 'yup'
 import { Checkbox, TimePicker } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableRowItems } from './serializers'
-import dayjs from 'dayjs'
-import { formatPayloadDate } from 'utils/helpers'
 
 export const getValidationSchema = (editItem: AdminStore) =>
   Yup.object().shape({
@@ -58,13 +56,10 @@ export const getInitialValues = (editItem: AdminStore) => {
   }
 }
 
-export const columns = (formik, setTableItems) => [
+export const getColumns = (formik, setTableItems) => [
   {
     title: 'Receptioneaza',
     field: 'receiveFromDeposit',
-    align: 'left',
-    type: 'string',
-    width: '100px',
     render: row => (
       <Checkbox
         checked={row.receiveFromDeposit}
@@ -87,23 +82,16 @@ export const columns = (formik, setTableItems) => [
   {
     title: 'Cod depozit',
     field: 'depositCode',
-    align: 'left',
-    type: 'string',
-    width: '100px'
+    render: row => row.depositCode
   },
   {
     title: 'Nume',
     field: 'depositName',
-    align: 'left',
-    type: 'string',
-    width: '100px'
+    render: row => row.depositName
   },
   {
     title: 'Luni',
     field: 'monday',
-    align: 'left',
-    type: 'string',
-    width: '100px',
     render: row => (
       <Checkbox
         checked={row.monday}
@@ -127,9 +115,6 @@ export const columns = (formik, setTableItems) => [
   {
     title: 'Marti',
     field: 'tuesday',
-    align: 'left',
-    type: 'string',
-    width: '100px',
     render: row => (
       <Checkbox
         checked={row.tuesday}
@@ -153,9 +138,6 @@ export const columns = (formik, setTableItems) => [
   {
     title: 'Miercuri',
     field: 'wednesday',
-    align: 'left',
-    type: 'string',
-    width: '100px',
     render: row => (
       <Checkbox
         checked={row.wednesday}
@@ -179,9 +161,6 @@ export const columns = (formik, setTableItems) => [
   {
     title: 'Joi',
     field: 'thursday',
-    align: 'left',
-    type: 'string',
-    width: '100px',
     render: row => (
       <Checkbox
         checked={row.thursday}
@@ -205,9 +184,6 @@ export const columns = (formik, setTableItems) => [
   {
     title: 'Vineri',
     field: 'friday',
-    align: 'left',
-    type: 'string',
-    width: '100px',
     render: row => (
       <Checkbox
         checked={row.friday}
@@ -231,9 +207,6 @@ export const columns = (formik, setTableItems) => [
   {
     title: 'Sambata',
     field: 'saturday',
-    align: 'left',
-    type: 'string',
-    width: '100px',
     render: row => (
       <Checkbox
         checked={row.saturday}
@@ -257,9 +230,6 @@ export const columns = (formik, setTableItems) => [
   {
     title: 'Duminica',
     field: 'sunday',
-    align: 'left',
-    type: 'string',
-    width: '100px',
     render: row => (
       <Checkbox
         checked={row.sunday}
@@ -283,9 +253,6 @@ export const columns = (formik, setTableItems) => [
   {
     title: 'Start',
     field: 'startInterval',
-    align: 'left',
-    type: 'string',
-    width: '200px',
     render: row => (
       <TimePicker
         value={row.startInterval}
@@ -308,9 +275,6 @@ export const columns = (formik, setTableItems) => [
   {
     title: 'Stop',
     field: 'endInterval',
-    align: 'left',
-    type: 'string',
-    width: '200px',
     render: row => (
       <TimePicker
         value={row.endInterval}

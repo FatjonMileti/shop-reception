@@ -1,3 +1,5 @@
+import { formatUITime } from 'utils/helpers'
+
 export const toTableRowItems = items =>
   items.map(item => ({
     depositId: item.depositId,
@@ -11,6 +13,6 @@ export const toTableRowItems = items =>
     friday: item.friday,
     saturday: item.saturday,
     sunday: item.sunday,
-    startInterval: item.startInterval,
-    endInterval: item.endInterval
+    startInterval: formatUITime(item.startInterval),
+    endInterval: formatUITime(item.endInterval)
   }))

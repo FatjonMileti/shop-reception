@@ -122,7 +122,7 @@ export const getColumns = ({
                 onChange={value => updateResponsible({ value: value.value, supportId: row.id })}
               />
             ) : (
-              <div>{row.responsibility.value || ''}</div>
+              <div>{row.responsibility?.value || ''}</div>
             )
         }
       ]

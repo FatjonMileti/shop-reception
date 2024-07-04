@@ -16,7 +16,7 @@ export const columns = (setModal, selectRow) => [
     field: 'metiName',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '200px'
   },
   {
     title: 'Tip Magazin',
@@ -132,7 +132,7 @@ export const columns = (setModal, selectRow) => [
     field: 'office',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '300px'
   },
   {
     title: 'Banca',
