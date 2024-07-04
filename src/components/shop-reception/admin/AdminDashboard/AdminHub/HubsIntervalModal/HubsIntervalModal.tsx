@@ -1,18 +1,18 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
-import { columns } from './helpers'
+import { getColumns } from './helpers'
 import { useNotification } from 'hooks'
-import { Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { Table } from 'components/core-ui/Table'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { toTableGETUrl } from 'components/core-ui/Table/serializers'
+import { Button, FormTable } from '@fullscreendigital/carrefour-dex-fe'
 import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
 import { toTableRowItems } from './serializers'
 import { formatErrorMessage } from 'utils/formatting'
-import { useMutation } from 'react-query'
-import { formatPayloadDate, formatTime } from 'utils/helpers'
+import { useMutation, useQuery } from 'react-query'
+import { formatTime } from 'utils/helpers'
+import { FormTableColoumnInterface } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/FormTable/FormTable'
+import hs from './HubsIntervalModal.modules.scss'
 
 interface HubsIntervalModalProps {
   isOpen: boolean
@@ -24,44 +24,39 @@ const HubsIntervalModal: React.FC<HubsIntervalModalProps> = props => {
   const { isOpen, closeModal, item } = props
   const { showNotification } = useNotification()
   const [tableItems, setTableItems] = useState<any[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [initialValues, setInitialValues] = useState([])
-  const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
 
-  const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
-    setIsLoading(true)
-    try {
-      const response = await makeCoreGetRequest(
-        toTableGETUrl({
-          url: `/shop-reception/hubs/delivery-interval/${item.id}`,
-          tableFilters,
-          page,
-          rowsPerPage,
-          order,
-          orderBy
+  useQuery(
+    ['hubs-delivery-interval'],
+    async () => {
+      const response = await makeCoreGetRequest(`/shop-reception/hubs/delivery-interval/${item.id}`)
+      const values = toTableRowItems(response)
+      setInitialValues(values)
+      setTableItems(values)
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A aparut o eroare la obtinerea intervalelor de livrare. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
         })
-      )
-
-      setInitialValues(response)
-      setTableItems(toTableRowItems(response))
-      setIsLoading(false)
-    } catch (error) {
-      showNotification({
-        message: `A aparut o eroare la obtinerea datelor ${formatErrorMessage(error)}`,
-        type: 'error'
-      })
+      }
     }
-  }
+  )
 
   const addHubInterval = async values => {
-    await makeCorePostRequest(`/shop-reception/hubs/delivery-interval/${item.id}`, values)
+    const data = values.filter(value => value.receiveFromDeposit)
+    if (data) {
+      await makeCorePostRequest(`/shop-reception/hubs/delivery-interval/${item.id}`, data)
+    }
   }
 
   const { isLoading: isMutationLoading, mutate } = useMutation(addHubInterval, {
     onSuccess: () => {
       closeModal()
       formik.resetForm()
-      setShouldRefreshData(true)
       showNotification({
         message: `Hub-ul a fost modificat succes.`,
         type: 'success'
@@ -89,25 +84,22 @@ const HubsIntervalModal: React.FC<HubsIntervalModalProps> = props => {
     }
   })
 
+  const columns: FormTableColoumnInterface[] = useMemo(
+    () => getColumns(formik, setTableItems),
+    [formik, setTableItems]
+  )
+
   return (
     <Modal
       isModalOpen={isOpen}
       closeModal={closeModal}
-      modalTitle={'Intervale orare hub'}
-      modalWidth="80%"
+      modalTitle="Intervale orare hub"
+      modalWidth="95%"
     >
-      <Grid container spacing={2}>
-        <Table
-          hideCheckbox
-          columns={columns(formik, setTableItems)}
-          items={tableItems}
-          fetchData={fetchData}
-          disableSorting
-          disablePagination
-          isLoading={isLoading}
-          shouldRefreshData={shouldRefreshData}
-          setShouldRefreshData={setShouldRefreshData}
-        />
+      <Grid container spacing={2} className={hs.tableGrid}>
+        <Box className={hs.formTableContainer}>
+          <FormTable columns={columns} rows={tableItems} />
+        </Box>
         <Grid xs={12} item className={s.modalButtons}>
           <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
           <Button

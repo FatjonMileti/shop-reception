@@ -69,7 +69,13 @@ const AdminHub = () => {
         editItem={selectedRow}
         isEdit
       />
-      <HubsIntervalModal isOpen={modal === 'interval'} closeModal={closeModal} item={selectedRow} />
+      {selectedRow && (
+        <HubsIntervalModal
+          isOpen={modal === 'interval'}
+          closeModal={closeModal}
+          item={selectedRow}
+        />
+      )}
       <Table
         hideCheckbox
         orderBy="created"
