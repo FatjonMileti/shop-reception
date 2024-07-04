@@ -191,6 +191,9 @@ const GoodsDeliveryReport = () => {
               value={dayjs()}
               onChange={() => {}}
               adapterLocale="ro"
+              modalLabel="Selecteaza data"
+              closeButtonLabel="Anuleaza"
+              confirmButtonLabel="Confirma"
             />,
             <DatePicker
               label="Selectează sfârşit interval sosire"
@@ -198,6 +201,9 @@ const GoodsDeliveryReport = () => {
               value={dayjs()}
               onChange={() => {}}
               adapterLocale="ro"
+              modalLabel="Selecteaza data"
+              closeButtonLabel="Anuleaza"
+              confirmButtonLabel="Confirma"
             />,
             <DatePicker
               label="Selectează început interval înregistrare"
@@ -205,6 +211,9 @@ const GoodsDeliveryReport = () => {
               value={dayjs()}
               onChange={() => {}}
               adapterLocale="ro"
+              modalLabel="Selecteaza data"
+              closeButtonLabel="Anuleaza"
+              confirmButtonLabel="Confirma"
             />,
             <DatePicker
               label="Selectează sfârşit interval înregistrare"
@@ -212,6 +221,9 @@ const GoodsDeliveryReport = () => {
               value={dayjs()}
               onChange={() => {}}
               adapterLocale="ro"
+              modalLabel="Selecteaza data"
+              closeButtonLabel="Anuleaza"
+              confirmButtonLabel="Confirma"
             />
           ]}
           itemsPerRow={4}

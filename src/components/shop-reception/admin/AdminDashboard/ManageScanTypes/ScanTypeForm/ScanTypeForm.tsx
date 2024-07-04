@@ -59,9 +59,9 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
     },
     onError: res => {
       showNotification({
-        message: `A aparut o eroare la ${isEdit ? 'actualizarea' : 'crearea'} datelor. ${formatErrorMessage(
-          res
-        )}`,
+        message: `A aparut o eroare la ${
+          isEdit ? 'actualizarea' : 'crearea'
+        } datelor. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
@@ -195,6 +195,9 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
             value={dayjs(formik.values.start)}
             style={{ width: '100%' }}
             adapterLocale="ro"
+            modalLabel="Selecteaza data"
+            closeButtonLabel="Anuleaza"
+            confirmButtonLabel="Confirma"
           />
         </Grid>
 
@@ -209,6 +212,9 @@ const ScanTypeForm: React.FC<ScanTypeFormProps> = props => {
             value={dayjs(formik.values.end)}
             style={{ width: '100%' }}
             adapterLocale="ro"
+            modalLabel="Selecteaza data"
+            closeButtonLabel="Anuleaza"
+            confirmButtonLabel="Confirma"
           />
         </Grid>
 

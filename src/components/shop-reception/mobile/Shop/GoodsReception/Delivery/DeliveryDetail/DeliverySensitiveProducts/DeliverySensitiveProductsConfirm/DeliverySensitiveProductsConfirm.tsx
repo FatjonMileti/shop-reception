@@ -303,6 +303,9 @@ const DeliverySensitiveProductsConfirm = () => {
                     variant="outlined"
                     style={{ display: 'flex', justifyContent: 'center' }}
                     adapterLocale="ro"
+                    modalLabel="Selecteaza data"
+                    closeButtonLabel="Anuleaza"
+                    confirmButtonLabel="Confirma"
                   />
                 </TableCell>
               </>

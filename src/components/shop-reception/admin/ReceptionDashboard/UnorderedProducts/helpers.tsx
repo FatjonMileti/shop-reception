@@ -211,6 +211,9 @@ export const drawerFilters = (shopOptions, depositOptions) => [
         value={dayjs()}
         onChange={() => {}}
         adapterLocale="ro"
+        modalLabel="Selecteaza data"
+        closeButtonLabel="Anuleaza"
+        confirmButtonLabel="Confirma"
       />
     ),
     type: 'date',

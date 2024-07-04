@@ -194,6 +194,8 @@ const SGRProducts = () => {
         setShouldRefreshData={setShouldRefreshData}
         shopTypes={shopTypes}
         shopCodes={shopCodes}
+        isLoadingShopTypes={isShopTypesLoading}
+        isShopCodesLoading={isShopCodesLoading}
       />
       <SGRProductsForm
         isOpen={createUpdateModal === 'create'}

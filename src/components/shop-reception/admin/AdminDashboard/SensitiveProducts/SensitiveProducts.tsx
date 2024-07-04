@@ -68,7 +68,7 @@ const SensitiveProducts = () => {
     }
   }
 
-  const { data: shopTypes } = useQuery(
+  const { data: shopTypes, isLoading: isLoadingShopTypes } = useQuery(
     ['shop-types'],
     async () => {
       const data = await makeCoreGetRequest(`/shop-reception/products/types`)
@@ -88,8 +88,6 @@ const SensitiveProducts = () => {
       }
     }
   )
-
-  
 
   const { data: shopCodes, isLoading: isShopCodesLoading } = useQuery(
     ['shop-codes'],
@@ -196,6 +194,8 @@ const SensitiveProducts = () => {
         setShouldRefreshData={setShouldRefreshData}
         shopTypes={shopTypes}
         shopCodes={shopCodes}
+        isLoadingShopTypes={isLoadingShopTypes}
+        isShopCodesLoading={isShopCodesLoading}
       />
       <SensitiveProduct
         isModalOpen={createUpdateModal === 'create'}
@@ -229,9 +229,9 @@ const SensitiveProducts = () => {
         itemId={`${selectedRow?.id}`}
         content={<Typography>Esti sigur va vrei sa stergi acest produs?</Typography>}
         setShouldRefreshData={setShouldRefreshData}
-        succesMessage='Produsul a fost sters cu succes.'
-        cancelLabel='Anuleaza'
-        deleteLabel='Sterge'
+        succesMessage="Produsul a fost sters cu succes."
+        cancelLabel="Anuleaza"
+        deleteLabel="Sterge"
       />
       <Table
         hideCheckbox

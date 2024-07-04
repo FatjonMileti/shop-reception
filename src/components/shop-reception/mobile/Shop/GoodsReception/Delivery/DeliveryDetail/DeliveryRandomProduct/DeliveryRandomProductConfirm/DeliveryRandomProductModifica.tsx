@@ -327,6 +327,9 @@ const DeliveryRandomProductModifica = () => {
               value={dayjs(formik.values.dlc)}
               onChange={value => formik.setFieldValue('dlc', value as Date | string)}
               adapterLocale="ro"
+              modalLabel="Selecteaza data"
+              closeButtonLabel="Anuleaza"
+              confirmButtonLabel="Confirma"
             />
           </>
         ),

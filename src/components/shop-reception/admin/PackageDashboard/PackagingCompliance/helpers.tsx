@@ -149,6 +149,9 @@ export const getFilters = ({
         value={currentDate}
         onChange={() => {}}
         adapterLocale="ro"
+        modalLabel="Selecteaza data"
+        closeButtonLabel="Anuleaza"
+        confirmButtonLabel="Confirma"
       />
     ),
     type: 'date',
@@ -164,6 +167,9 @@ export const getFilters = ({
         value={currentDate}
         onChange={() => {}}
         adapterLocale="ro"
+        modalLabel="Selecteaza data"
+        closeButtonLabel="Anuleaza"
+        confirmButtonLabel="Confirma"
       />
     ),
     type: 'date',
