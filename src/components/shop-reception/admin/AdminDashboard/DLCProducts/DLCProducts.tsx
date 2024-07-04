@@ -202,6 +202,7 @@ const DLCProducts = () => {
         metiFamilies={metiFamilies}
         metiSubfamilies={metiSubfamilies}
         metiUB={metiUB}
+        shopCodes={shopCodes}
       />
       <DLCProductsForm
         isOpen={createUpdateModal === 'update'}
@@ -213,6 +214,7 @@ const DLCProducts = () => {
         metiSubfamilies={metiSubfamilies}
         metiUB={metiUB}
         editItem={selectedRow}
+        shopCodes={shopCodes}
         isEdit
       />
       <DeleteConfirmationModal

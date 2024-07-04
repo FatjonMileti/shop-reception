@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
-import { Grid } from '@mui/material'
+import { CircularProgress, Grid } from '@mui/material'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { makeCoreGetRequest, makeCorePatchRequest, makeCorePostRequest } from 'utils/api'
 import { useMutation, useQuery } from 'react-query'
@@ -58,6 +58,25 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
     }
   )
 
+  const { data: regionsOptions, isLoading: isLoadingRegionsOptions } = useQuery(
+    ['regions-options', editItem?.id],
+    async () => {
+      const result = await makeCoreGetRequest(`/shop-reception/regions/${editItem?.id}/shops`)
+      const checkedOptions = result.filter(option => option.isChecked === true)
+      const options = checkedOptions.map(item => ({ label: item.metiName, value: item.metiCode }))
+      return options
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      },
+      enabled: typeof editItem?.id !== 'undefined'
+    }
+  )
+
   const addShop = async values => {
     editItem
       ? await makeCorePatchRequest(`/shop-reception/shops/${editItem.id}`, values)
@@ -75,9 +94,9 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
     },
     onError: res => {
       showNotification({
-        message: `A aparut o eroare la ${isEdit ? 'editarea' : 'adaugarea'} magazinului. ${formatErrorMessage(
-          res
-        )}`,
+        message: `A aparut o eroare la ${
+          isEdit ? 'editarea' : 'adaugarea'
+        } magazinului. ${formatErrorMessage(res)}`,
         type: 'error'
       })
     }
@@ -188,16 +207,27 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
         </Grid>
 
         {editItem && (
-          <Grid xs={12} item>
-            <Input
-              type="text"
-              value={editItem.regionName}
-              label="Regiune"
-              variant="outlined"
-              style={{ width: '100%' }}
-              disabled
-            />
-          </Grid>
+          <>
+            {isLoadingRegionsOptions ? (
+              <Grid xs={12} item>
+                <CircularProgress color="primary"  disableShrink />
+              </Grid>
+            ) : (
+              <Grid xs={12} item>
+                <Autocomplete
+                  variant="outlined"
+                  label="Regiune"
+                  disableClearable
+                  value={regionsOptions}
+                  defaultValue={regionsOptions}
+                  options={[]}
+                  multiple
+                  disabled
+                  loading={isLoadingRegionsOptions}
+                />
+              </Grid>
+            )}
+          </>
         )}
 
         <Grid xs={12} item>

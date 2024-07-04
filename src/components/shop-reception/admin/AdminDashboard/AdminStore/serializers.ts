@@ -7,7 +7,7 @@ export const toTableRowItems = (items: AdminStore[]) =>
     metiVersion: item.metiVersion || '',
     adCode: item.adCode || '',
     receptionDeviation: item.receptionDeviation,
-    regionName: item.regionName || '',
+    regionNames: item.regionNames || '',
     sftpIp: item.sftpIp || '',
     sftpPath: item.sftpPath || '',
     canEditQuantities: item.canEditQuantities || '',
