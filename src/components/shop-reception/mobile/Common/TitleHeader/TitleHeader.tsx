@@ -15,7 +15,7 @@ const TitleHeader: React.FC<TitleHeaderProps> = (props: TitleHeaderProps) => {
         variant="regular"
         style={{ textAlign: 'center', textTransform: 'uppercase' }}
       >
-        Carrefour Operațional
+        Carrefour
       </Typography>
       <Typography
         component="h2"
