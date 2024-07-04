@@ -163,9 +163,7 @@ const AdminStore = () => {
     {
       onError: error => {
         showNotification({
-          message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(
-            error
-          )}`,
+          message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -193,11 +191,13 @@ const AdminStore = () => {
         metiShops={metiShops}
       />
 
-      <StoreIntervalModal
-        isOpen={modal === 'interval'}
-        closeModal={closeModal}
-        item={selectedRow}
-      />
+      {selectedRow && (
+        <StoreIntervalModal
+          isOpen={modal === 'interval'}
+          closeModal={closeModal}
+          item={selectedRow}
+        />
+      )}
       <Table
         hideCheckbox
         orderBy="code"
@@ -236,7 +236,6 @@ const AdminStore = () => {
         appliedFiltersLabel="Filtre aplicate"
         cancelFiltersButtonLabel="Anuleaza"
         applyFiltersButtonLabel="Aplica"
-
       />
     </div>
   )

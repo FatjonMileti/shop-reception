@@ -27,6 +27,8 @@ export const formatPayloadTimeDate = date => (date ? dayjs(date).format('YYYY-MM
 
 export const formatTime = date => (date ? dayjs(date).format('HH:mm') : '')
 
+export const formatUITime = time => (time ? dayjs(time, 'HH:mm') : '')
+
 export const formatCustomDate = date => (date ? dayjs(date) : '')
 
 export const formatUIDateTime = date => (date ? dayjs(date).format('DD/MM/YYYY HH:mm') : '')

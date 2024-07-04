@@ -1,13 +1,13 @@
 import { ChangeEvent, useMemo, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
-import { getInitialValues, getValidationSchema } from './helpers'
+import { getInitialValues } from './helpers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { AutocompleteOption } from 'components/volumetry/interfaces'
 import { makeCorePostRequest } from 'utils/api'
 import { useMutation } from 'react-query'
-import { Grid } from '@mui/material'
+import { CircularProgress, Grid } from '@mui/material'
 import { Autocomplete, Button, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { FileUpload } from 'components/core-ui/FileUpload'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
@@ -18,10 +18,20 @@ interface NewAdminDepositProps {
   setShouldRefreshData: Function
   shopTypes: AutocompleteOption[]
   shopCodes: AutocompleteOption[]
+  isLoadingShopTypes: boolean
+  isShopCodesLoading: boolean
 }
 
 const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
-  const { isModalOpen, closeModal, setShouldRefreshData, shopTypes, shopCodes } = props
+  const {
+    isModalOpen,
+    closeModal,
+    setShouldRefreshData,
+    shopTypes,
+    shopCodes,
+    isLoadingShopTypes,
+    isShopCodesLoading
+  } = props
   const { showNotification } = useNotification()
 
   const [file, setFile] = useState<File | null>(null)
@@ -61,14 +71,15 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
     }
   })
 
-  const initialValues = useMemo(() => getInitialValues(), [])
-  const validationSchema = useMemo(() => getValidationSchema(), [])
+  const initialValues = useMemo(
+    () => getInitialValues(shopCodes, shopTypes),
+    [shopCodes, shopTypes]
+  )
 
   const formik = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
     initialValues: initialValues,
-    validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       const newValues = { ...values, shopCodes: values.shopCodes.map(shopCode => shopCode.value) }
 
@@ -97,27 +108,37 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
     >
       <Grid container spacing={1}>
         <Grid xs={12} item>
-          <FilterDataSelect
-            name="shopCodes"
-            label="Magazin"
-            options={shopCodes}
-            onSelect={shops => formik.setFieldValue('shopCodes', shops)}
-            placeholderButton="Selecteaza"
-            multiSelect={true}
-            showSearch
-          />
+          {isShopCodesLoading ? (
+            <CircularProgress color="primary" disableShrink />
+          ) : (
+            <FilterDataSelect
+              name="shopCodes"
+              label="Magazin"
+              options={shopCodes}
+              defaultSelectedData={shopCodes ? shopCodes[0] : null}
+              onSelect={shops => formik.setFieldValue('shopCodes', shops)}
+              placeholderButton="Selecteaza"
+              multiSelect={true}
+              showSearch
+            />
+          )}
         </Grid>
 
         <Grid xs={12} item>
-          <FilterDataSelect
-            name="shopCodes"
-            label="Regula"
-            options={shopTypes}
-            onSelect={shops => formik.setFieldValue('ruleTypes', shops)}
-            placeholderButton="Selecteaza"
-            multiSelect={true}
-            showSearch
-          />
+          {isLoadingShopTypes ? (
+            <CircularProgress color="primary" disableShrink />
+          ) : (
+            <FilterDataSelect
+              name="shopCodes"
+              label="Regula"
+              options={shopTypes}
+              defaultSelectedData={shopTypes ? shopTypes[0] : null}
+              onSelect={shops => formik.setFieldValue('ruleTypes', shops)}
+              placeholderButton="Selecteaza"
+              multiSelect={true}
+              showSearch
+            />
+          )}
         </Grid>
 
         <Grid xs={12} item>
@@ -136,7 +157,7 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
             variant="contained"
             label={'Salveaza'}
             onClick={() => formik.handleSubmit()}
-            disabled={isLoading}
+            disabled={isLoading || isLoadingShopTypes || isShopCodesLoading}
           />
         </Grid>
       </Grid>

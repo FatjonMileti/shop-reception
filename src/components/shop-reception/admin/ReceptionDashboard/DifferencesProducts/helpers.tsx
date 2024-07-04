@@ -204,6 +204,9 @@ export const drawerFilters = (shopCodes, metiRayons, despositOptions) => [
         value={dayjs()}
         onChange={() => {}}
         adapterLocale="ro"
+        modalLabel="Selecteaza data"
+        closeButtonLabel="Anuleaza"
+        confirmButtonLabel="Confirma"
       />
     ),
     type: 'date',

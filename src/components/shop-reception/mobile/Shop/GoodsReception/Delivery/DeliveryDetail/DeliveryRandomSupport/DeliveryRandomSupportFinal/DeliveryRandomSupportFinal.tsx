@@ -725,6 +725,9 @@ const DeliveryRandomSupportFinal = () => {
               onChange={value => formik.setFieldValue('dlc', value as Date | string)}
               hidden={!formik.values.showDlc}
               adapterLocale="ro"
+              modalLabel="Selecteaza data"
+              closeButtonLabel="Anuleaza"
+              confirmButtonLabel="Confirma"
             />
           </>
         ),

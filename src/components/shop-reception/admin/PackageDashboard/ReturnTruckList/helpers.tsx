@@ -243,6 +243,9 @@ export const getFilters = ({
         onChange={() => {}}
         required
         adapterLocale="ro"
+        modalLabel="Selecteaza data"
+        closeButtonLabel="Anuleaza"
+        confirmButtonLabel="Confirma"
       />
     ),
     type: 'date',
@@ -259,6 +262,9 @@ export const getFilters = ({
         onChange={() => {}}
         required
         adapterLocale="ro"
+        modalLabel="Selecteaza data"
+        closeButtonLabel="Anuleaza"
+        confirmButtonLabel="Confirma"
       />
     ),
     type: 'date',

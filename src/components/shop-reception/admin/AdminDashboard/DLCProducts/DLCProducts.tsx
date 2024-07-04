@@ -66,7 +66,7 @@ const DLCProducts = () => {
     }
   }
 
-  const { data: shopTypes } = useQuery(
+  const { data: shopTypes, isLoading: isLoadingShopTypes } = useQuery(
     ['shop-types'],
     async () => {
       const data = await makeCoreGetRequest(`/shop-reception/products/types`)
@@ -86,7 +86,7 @@ const DLCProducts = () => {
       }
     }
   )
-
+  
   const { data: shopCodes, isLoading: isShopCodesLoading } = useQuery(
     ['shop-codes'],
     async () => {
@@ -192,6 +192,8 @@ const DLCProducts = () => {
         setShouldRefreshData={setShouldRefreshData}
         shopTypes={shopTypes}
         shopCodes={shopCodes}
+        isLoadingShopTypes={isLoadingShopTypes}
+        isShopCodesLoading={isShopCodesLoading}
       />
       <DLCProductsForm
         isOpen={createUpdateModal === 'create'}
