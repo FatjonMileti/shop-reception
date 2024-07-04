@@ -1,19 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useMutation, useQuery } from 'react-query'
-import {
-  CircularProgress,
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
-} from '@mui/material'
-import { formatErrorMessage } from 'utils/formatting'
-import { useNotification } from 'hooks'
-import { Button } from '@fullscreendigital/carrefour-dex-fe'
-import { makeCoreGetRequest, makeCorePostRequest } from 'utils/api'
-import { URLS } from 'components/shop-reception/mobile/constants'
+import { useLocation, useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
+import { CircularProgress, Grid, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { formatErrorMessage } from "utils/formatting";
+import { useNotification } from "hooks";
+import { Button } from "@fullscreendigital/carrefour-dex-fe";
+import { makeCoreGetRequest, makeCorePostRequest } from "utils/api";
 
 const ExpectedDepositReturnsStep4 = () => {
   const location = useLocation()
@@ -24,11 +15,9 @@ const ExpectedDepositReturnsStep4 = () => {
   const { data, isLoading: isLoadingSummary } = useQuery(
     ['summary'],
     async () => {
-      const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/truck/deposit/return/summary/${item.id}`,
-        null
+      return await makeCoreGetRequest(
+        `/shop-reception-mobile/truck/deposit/return/summary/${item.id}`
       )
-      return response
     },
     {
       onError: error => {
