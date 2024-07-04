@@ -20,6 +20,7 @@ const ShippedTrucks = () => {
       return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/registered', null)
     },
     {
+      initialData: [],
       onError: error => {
         showNotification({
           message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
@@ -35,7 +36,7 @@ const ShippedTrucks = () => {
 
   let items = [
     <TitleHeader title='CAMIOANE EXPEDIATE' />,
-    trucks && trucks.map((item: any, index) => (
+    !!trucks && trucks.map((item: any, index) => (
       <TruckCard
         key={index}
         onClick={() => {
@@ -45,7 +46,7 @@ const ShippedTrucks = () => {
     ))
   ]
 
-  if (trucks.length === 0) {
+  if (trucks?.length === 0) {
     items.push(
       <Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>
         Nu existǎ camioane expediate.</Typography>
