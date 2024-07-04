@@ -9,7 +9,7 @@ interface TitleHeaderProps {
 
 const TitleHeader: React.FC<TitleHeaderProps> = (props: TitleHeaderProps) => {
   return (
-    <Grid container spacing={2} justifyContent={'center'}>
+    <div>
       <Typography
         component="h3"
         variant="regular"
@@ -31,7 +31,7 @@ const TitleHeader: React.FC<TitleHeaderProps> = (props: TitleHeaderProps) => {
       >
         {props.title}
       </Typography>
-    </Grid>
+    </div>
   )
 }
 
