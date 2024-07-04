@@ -1,3 +1,4 @@
+import { isEmail } from 'utils/helpers'
 import * as Yup from 'yup'
 
 export const getValidationSchema = (editItem: AdminDeposit) =>
@@ -12,8 +13,24 @@ export const getValidationSchema = (editItem: AdminDeposit) =>
       .required('Campul este obligatoriu.'),
     address: Yup.string().required('Campul este obligatoriu.'),
     validityPercentage: Yup.string().required('Campul este obligatoriu.'),
-    emails: Yup.string().required('Campul este obligatoriu.'),
-    packagingResponsibleEmail: Yup.string(),
+    emails: Yup.string()
+      .required('Campul este obligatoriu.')
+      .test(
+        'emails',
+        'Adrese de email invalide. Separatorul este ;',
+        value => value && value.split(';').every(isEmail)
+      ),
+    packagingResponsibleEmail: Yup.string().test(
+      'responsibleEmail',
+      'Adresa de email pentru responsabil este obligatorie si trebuie sa fie valida.',
+      function (packagingResponsibleEmail) {
+        const acceptReturn = this.resolve(Yup.ref('acceptReturn'))
+        if (acceptReturn) {
+          return isEmail(packagingResponsibleEmail)
+        }
+        return true
+      }
+    ),
     cif: Yup.string().required('Campul este obligatoriu.'),
     office: Yup.string().required('Campul este obligatoriu.'),
     bankAccount: Yup.string().required('Campul este obligatoriu.'),

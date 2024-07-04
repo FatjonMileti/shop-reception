@@ -62,10 +62,17 @@ const RegisterTruckStep2 = () => {
   })
 
   const toggleIsSearching = async () => {
-    if (formik.values.supportCode.length > 0) {
-      const resp = await makeCorePostRequest('/shop-reception-mobile/support/hub/register/scan/' + id, { supportCode: formik.values.supportCode })
-      resp.scanSuccess && openScanSuccessModal(resp.message, resp.supportId)
-      !resp.scanSuccess && openInvalidScanModal(resp.message)
+    try {
+      if (formik.values.supportCode.length > 0) {
+        const resp = await makeCorePostRequest(`/shop-reception-mobile/support/hub/register/scan/${id}`, { supportCode: formik.values.supportCode })
+        resp.scanSuccess && openScanSuccessModal(resp.message, resp.supportId)
+        !resp.scanSuccess && openInvalidScanModal(resp.message)
+      }
+    } catch (error) {
+      showNotification({
+        message: `Eroare la trimitere. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
     }
   }
 
@@ -84,10 +91,17 @@ const RegisterTruckStep2 = () => {
         {
           label: 'Urc în camion  confirm',
           onClick: async () => {
-            const resp = await makeCorePostRequest('/shop-reception-mobile/support/hub/add-in-truck/' + id, { supportId: supportId } )
-            await formik.setFieldValue('supportCode', '')
-            setCounter(resp.supportCounter)
-            setIsScanSuccessModalOpen(false);
+            try {
+              const resp = await makeCorePostRequest(`/shop-reception-mobile/support/hub/add-in-truck/${id}`, { supportId: supportId })
+              formik.resetForm()
+              setCounter(resp.supportCounter)
+              setIsScanSuccessModalOpen(false);
+            } catch (error) {
+              showNotification({
+                message: `Eroare la trimitere. ${formatErrorMessage(error)}`,
+                type: 'error'
+              })
+            }
           },
           color: 'primary'
         },
@@ -133,15 +147,21 @@ const RegisterTruckStep2 = () => {
       inHubReleaseHour: null,
       inHubLoadingDateTime: date,
       inHubLoadingHour: time,
-      truckNumberHub: truck.truckNumber,
+      truckNumberHub: truck?.truckNumber,
       driverName: null,
       loadedSupportsNumber: counter,
       inShopReleaseDate: null,
       inShopReleaseHour: null
     }
+    try {
     await makeCorePostRequest('/shop-reception-mobile/support-traceability', payload)
-    // navigate(URLS.AUTH_REGISTER_TRUCK_STEP_3, { state: { id } })
     navigate(`${URLS.AUTH_REGISTER_TRUCK_STEP_3}?id=${id}`)
+      } catch (error) {
+      showNotification({
+        message: `Eroare la trimitere. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
   }
 
   if (isLoading) {
@@ -179,7 +199,7 @@ const RegisterTruckStep2 = () => {
           onClick={() => handleSubmit()}
         />,
         <>
-          <Typography variant='medium' component='p'>Numǎr camion: {truck.truckNumber}</Typography>
+          <Typography variant='medium' component='p'>Numǎr camion: {truck?.truckNumber}</Typography>
           <Typography variant='medium' component='p'>Numǎr suporți scanați: {counter}</Typography>
         </>,
         <AlertModal
