@@ -56,7 +56,6 @@ const EditPackagingInventory = ({ isModalOpen, closeModal, editItem, setShouldRe
       const payload = toBlobFormDataPayload(values)
       // const payload = toFormDataPayload(values)
       mutate(payload)
-      formik.resetForm()
     }
   })
 
