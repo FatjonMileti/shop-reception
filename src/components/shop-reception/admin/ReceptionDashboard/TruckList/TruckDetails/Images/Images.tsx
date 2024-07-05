@@ -37,7 +37,7 @@ const Images = () => {
   return (
     <div>
       <Grid container>
-        {data.pictureModels.map(image => (
+        {data?.pictureModels.map(image => (
           <Grid item xs={4}>
             <p>{image.type}</p>
             <p>{image.locationName}</p>
