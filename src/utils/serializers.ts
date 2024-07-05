@@ -25,16 +25,22 @@ export const toFormDataPayload = (item: { [key: string]: string }) => {
   return formData
 }
 
-export const toBlobFormDataPayload = (item: { [key: string]: string }) => {
+export const toBlobFormDataPayload = (item: { [key: string]: any }) => {
   const formData = Object.keys(item).reduce((formData, key) => {
-    if (key !== 'imageUrl' && item[key]) {
-      formData.append(key, new Blob([JSON.stringify(item[key])], { type: 'application/json' }))
-    }
-    return formData
-  }, new FormData())
+    const value = item[key];
 
-  return formData
-}
+    if (key === 'file' && value !== null) {
+      formData.append(key, value);
+    }
+    else if (value !== null && value !== undefined) {
+      formData.append(key, new Blob([JSON.stringify(value)], { type: 'application/json' }));
+    }
+
+    return formData;
+  }, new FormData());
+
+  return formData;
+};
 
 export const toArrayItemPayload = (item: Filter[]) => {
   let payload = {}
@@ -50,7 +56,7 @@ export const toTableRowItems = (items, columns) => {
   columns.map(column => {
     items.map((item, index) => {
       let value
-      if(column.isDynamic) {
+      if (column.isDynamic) {
         value = find(item['applicationReportDynamicDtos'], column.find)
         items[index][column.field] = value?.[column.originalField]
       }

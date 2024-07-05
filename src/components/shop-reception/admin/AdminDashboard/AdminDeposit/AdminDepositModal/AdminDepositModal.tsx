@@ -68,7 +68,7 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
     }
   )
 
-  const { data: depositsOptions } = useQuery(
+  const { data: depositsOptions, isLoading: isLoadingDepositOptions } = useQuery(
     ['deposits'],
     async () => {
       const result = await makeCoreGetRequest('/shop-reception/deposits/types')
@@ -175,6 +175,7 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
             options={depositsOptions || []}
             error={!!formik.errors.type}
             helperText={formik.errors.type as string}
+            loading={isLoadingDepositOptions}
           />
         </Grid>
 
