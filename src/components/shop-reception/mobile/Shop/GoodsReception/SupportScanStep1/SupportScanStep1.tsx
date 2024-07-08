@@ -170,6 +170,22 @@ const SupportScanStep1 = () => {
           supportCode: formik.values?.supportCode
         }
       )
+      // const result = {
+      //   counter: null,
+      //   defect: false,
+      //   errorMessage: null,
+      //   mustChoose: null,
+      //   reason: 'PROVIDER',
+      //   scanId: null,
+      //   scanSuccess: true,
+      //   supportId: 8287153,
+      //   supportList: null,
+      //   supportNumber: '12480596000',
+      //   supportTypeId: 24,
+      //   truckId: null,
+      //   truckNumber: null,
+      //   wrongDestination: null
+      // }
       setSupportNumber(result.supportNumber)
       setSupportId(result.supportId)
       setSupportData(result)
@@ -185,10 +201,7 @@ const SupportScanStep1 = () => {
 
   const toggleIsFinalizing = async () => {
     try {
-      const response = await makeCoreGetRequest(
-        `/shop-reception-mobile/support/shop/summary/${id}`,
-        null
-      )
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/support/shop/summary/${id}`)
 
       const count = response['counter']
       const total = response['total']
@@ -501,7 +514,16 @@ const SupportScanStep1 = () => {
       variant="contained"
       label="ALTE AMBALAJE"
       style={{ width: '100%' }}
-      onClick={null}
+      onClick={async () => {
+        await formik.handleSubmit()
+        navigate(URLS.AUTH_SUPPORT_SCAN_STEP_2, {
+          state: {
+            supportType: formik.values.supportTypeId,
+            supportId: formik.values.supportId,
+            truckId: truck.truckId
+          }
+        })
+      }}
     />,
     <Button
       type="button"
@@ -509,7 +531,7 @@ const SupportScanStep1 = () => {
       label="CONFIRM TIP SUPORT"
       style={{ width: '100%' }}
       onClick={() => formik.handleSubmit()}
-      // disabled={formik.values.reason?.length === 0}
+      disabled={formik.values.nonCompliantReasonList?.length === 0}
     />,
     <AlertModal
       open={isMoreSupportsModalOpen}
