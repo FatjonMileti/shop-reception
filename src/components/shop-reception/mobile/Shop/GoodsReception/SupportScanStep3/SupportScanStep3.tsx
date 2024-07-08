@@ -18,7 +18,7 @@ const SupportScanStep3 = () => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
   const location = useLocation()
-  const { supportId, truckId } = location.state;
+  const { supportId, truckId } = location.state || '';
 
   const [isMissingValuesModalOpen, setIsMissingValuesModalOpen] = useState(false)
   const [MissingValuesModalContent, setMissingValuesModalContent] = useState({ title: '', description: '', buttons: [] })
@@ -35,12 +35,16 @@ const SupportScanStep3 = () => {
       let missingValue = false;
       const message = "Există diferențe între cantitatea aşteptată şi cea descărcată pentru ";
       let supportsNotOk = '';
+      let uploaded: boolean[] = [];
+
       values.supportType.forEach(support => {
         if (support.received === null) missingValue = true;
+
         const total = Number(support.received);
         supportTypeList.forEach(st => {
           if (st.id === support.id && st.received !== total) {
             supportsNotOk = supportsNotOk + st.name + ', ';
+            if (support.imageUploaded === false) uploaded.push(false);
           }
         })
       })
@@ -48,9 +52,9 @@ const SupportScanStep3 = () => {
       if (missingValue) {
         openMissingValuesModal();
       } else if (supportsNotOk.length > 0) {
-        showDifferentNumberConfirmation(values.supportType, message + supportsNotOk);
+        showDifferentNumberConfirmation(values.supportType, message + supportsNotOk, uploaded);
       } else {
-        doSaveSupportTypes(values.supportType);
+        await doSaveSupportTypes(values.supportType);
       }
     }
   })
@@ -65,8 +69,11 @@ const SupportScanStep3 = () => {
   const { data: supportTypeList, isLoading } = useQuery(
     'SupportPrincipalTypeId',
     async () => {
-      const support = await makeCoreGetRequest(`/shop-reception-mobile/support/secondary/type?supportId=${supportId}`, null)
-      await formik.setFieldValue("supportType", support)
+      const support = await makeCoreGetRequest(`/shop-reception-mobile/support/shop/secondary/type?supportId=${supportId}`, null)
+      await formik.setFieldValue("supportType", support.map(support => ({
+        ...support,
+        imageUploaded: false
+      })))
       return support
     },
     {
@@ -80,6 +87,8 @@ const SupportScanStep3 = () => {
   }
 
   const handleSuccess = (id) => {
+    formik.setFieldValue(`supportType[${id}].imageUploaded`, true);
+
     showNotification({
       message: 'Image uploaded successfully',
       type: 'success'
@@ -146,25 +155,30 @@ const SupportScanStep3 = () => {
     setIsMissingValuesModalOpen(false);
   };
 
-  const showDifferentNumberConfirmation = (values, message) => {
+  const showDifferentNumberConfirmation = (values, message, imageUploaded) => {
+    const buttons = [
+      {
+        label: 'Mai verific',
+        onClick: () => setIsDifferentNumberModalOpen(false),
+        color: 'primary'
+      }
+    ];
+
+    if (!imageUploaded || imageUploaded.length === 0) {
+      buttons.push({
+        label: 'Am terminat',
+        onClick: () => {
+          setIsDifferentNumberModalOpen(false);
+          doSaveSupportTypes(values);
+        },
+        color: 'primary'
+      });
+    }
+
     setDifferentNumberModalContent({
       title: message,
       description: '',
-      buttons: [
-        {
-          label: 'Mai verific',
-          onClick: () => setIsDifferentNumberModalOpen(false),
-          color: 'primary'
-        },
-        {
-          label: 'Am terminat',
-          onClick: () => {
-            setIsDifferentNumberModalOpen(false);
-            doSaveSupportTypes(values);
-          },
-          color: 'primary'
-        }
-      ]
+      buttons: buttons
     });
     setIsDifferentNumberModalOpen(true)
   }
@@ -173,9 +187,9 @@ const SupportScanStep3 = () => {
     setIsDifferentNumberModalOpen(false);
   };
 
-  const doSaveSupportTypes = (values) => {
+  const doSaveSupportTypes = async (values) => {
     try {
-      makeCorePostRequest(`/shop-reception-mobile/support/shop//list/save/${false}/${truckId}/${supportId}`, values).then(
+      await makeCorePostRequest(`/shop-reception-mobile/support/shop/save/${false}/${truckId}/${supportId}`, values).then(
         ()  => navigate(URLS.AUTH_SUPPORT_SCAN_STEP_4, {state: truckId })
       );
     } catch (error) {

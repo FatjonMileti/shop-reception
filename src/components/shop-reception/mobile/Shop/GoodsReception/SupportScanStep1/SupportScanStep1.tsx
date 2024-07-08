@@ -21,7 +21,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import AlertModal from '../../../Common/AlertModal/AlertModal'
 import { URLS } from '../../../constants'
 import ImageUpload from 'components/shop-reception/mobile/Common/ImageUpload/ImageUpload'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 
 const SupportScanStep1 = () => {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
@@ -213,6 +212,17 @@ const SupportScanStep1 = () => {
     }
   }
 
+  const deleteSecondarySupports = async () => {
+    try {
+      await makeCoreGetRequest(`/shop-reception-mobile/support/shop/secondary/delete?supportId=${supportId}`, null)
+    } catch (error) {
+      showNotification({
+        message: `Error while deleting. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
   const openFinalizeModal = (count, total) => {
     setFinalizeModalContent({
       title: '',
@@ -327,7 +337,7 @@ const SupportScanStep1 = () => {
         {
           label: 'Nu',
           onClick: () => {
-            // deleteSecondarySupports();
+            deleteSecondarySupports();
 
             formik.setFieldValue('supportCode', '')
             setSupportId(null)
@@ -351,7 +361,7 @@ const SupportScanStep1 = () => {
             setSupportId(null)
             setSupportNumber('')
 
-            //navigate(URLS.AUTH_SUPPORT_SCAN_STEP_3)
+            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_3, {state: {truckId: id, supportId: supportId}})
             setIsMoreSupportsModalOpen(false)
           },
           color: 'secondary'
