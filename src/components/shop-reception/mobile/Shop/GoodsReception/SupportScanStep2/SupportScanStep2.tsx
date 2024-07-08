@@ -21,7 +21,6 @@ const SupportScanStep2 = () => {
 
   const location = useLocation()
   const { supportTypeId, supportId, truckId } = location.state
-  console.log(location.state)
   const main = true
 
   const [isMissingValuesModalOpen, setIsMissingValuesModalOpen] = useState(false)

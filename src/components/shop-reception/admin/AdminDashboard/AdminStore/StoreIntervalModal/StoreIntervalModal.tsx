@@ -86,7 +86,6 @@ const AdminStoreForm: React.FC<StoreIntervalModalProps> = props => {
     [formik, setTableItems]
   ) 
 
-  console.log('debug', formik.values)
   return (
     <Modal
       isModalOpen={isOpen}

@@ -8,7 +8,6 @@ import { getUserRoles } from '../../../utils/authService'
 export const getTitle = () => {
   const { showNotification } = useNotification()
   const userRoles = getUserRoles()
-  console.log(sessionStorage.getItem('title'))
 
   const errorHandler = error => {
     showNotification({

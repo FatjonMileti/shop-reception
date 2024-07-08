@@ -12,8 +12,6 @@ const NoticeDescription = ({ item, tableColumns }) => {
 
   const columns = useMemo(() => getColumns(tableColumns), [])
 
-  console.log(rows)
-
   return (
     <Table
       hideCheckbox

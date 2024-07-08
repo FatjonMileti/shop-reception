@@ -152,8 +152,6 @@ const SupportScanStep1 = () => {
     }
   })
 
-  console.log(formik.errors)
-
   if (isLoading || isLoadingSupports) {
     return <div>Loading...</div>
   }
