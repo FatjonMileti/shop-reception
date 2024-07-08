@@ -242,7 +242,6 @@ const DeliveryRandomProductModifica = () => {
               uploadUrl={`/shop-reception-mobile/integral/upload/${queryParams.supportId}/${queryParams.productId}`}
               onSuccess={() => handleSuccess()}
               onError={handleError}
-              inputId={`support${queryParams.supportId}`}
             />
           )}
         </div>

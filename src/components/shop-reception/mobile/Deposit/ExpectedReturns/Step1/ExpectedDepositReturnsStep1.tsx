@@ -126,7 +126,6 @@ const ExpectedDepositReturnsStep1 = () => {
                   type: 'error'
                 })
               }
-              inputId={`seal-${seal?.id}`}
             />
           </Grid>
         </>
@@ -168,7 +167,6 @@ const ExpectedDepositReturnsStep1 = () => {
                   type: 'error'
                 })
               }
-              inputId={`notice-${notice?.id}`}
             />
           </Grid>
 

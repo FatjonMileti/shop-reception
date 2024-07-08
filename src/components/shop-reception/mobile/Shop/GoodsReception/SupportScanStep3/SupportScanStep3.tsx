@@ -115,7 +115,6 @@ const SupportScanStep3 = () => {
               uploadUrl={`/shop-reception-mobile/support/shop/upload/` + rowData.id}
               onSuccess={() => handleSuccess(rowData.id)}
               onError={handleError}
-              inputId={`support${rowData.id}`}
             />}
         </div>
       )

@@ -193,7 +193,6 @@ const DeliverySensitiveProductsConfirm = () => {
                             type: 'error'
                           })
                         }
-                        inputId={`supportCode`}
                       />
                     )}
                   </TableCell>

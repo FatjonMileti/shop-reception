@@ -140,7 +140,6 @@ const ContinueReturnDetailFinal = () => {
               uploadUrl={`/shop-reception-mobile/truck/hub/return/registration/image/` + id + `?notice=false`}
               onSuccess={handleSuccess}
               onError={handleError}
-              inputId={`seal${idx}`}
             />
           </div>
         )),

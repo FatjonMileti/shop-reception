@@ -291,7 +291,6 @@ const ExpectedTrucksStep3 = () => {
                       type: 'error'
                     })
                   }
-                  inputId={`supportCode`}
                 />
               </Grid>
             </>
@@ -314,7 +313,9 @@ const ExpectedTrucksStep3 = () => {
             <Button
               variant="contained"
               label="Confirm tip suport"
-              onClick={() => formik.handleSubmit()}
+              onClick={() => {
+                formik.handleSubmit()
+              }}
               style={{ width: '100%' }}
               disabled={formik.values.defect && isSupportImageUploaded == false}
             />

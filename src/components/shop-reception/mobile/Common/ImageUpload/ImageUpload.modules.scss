@@ -1,0 +1,43 @@
+.imageContainer {
+  max-width: 400px;
+  max-height: 400px;
+  position: relative;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.imageActions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  padding: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.imageAction {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.60);
+}
+
+.videoContainer {
+  width: 100%;
+
+  video {
+    width: 100%;
+  }
+}
+
+.webcamContainer {
+  text-align: center;
+  margin-top: 24px;
+}

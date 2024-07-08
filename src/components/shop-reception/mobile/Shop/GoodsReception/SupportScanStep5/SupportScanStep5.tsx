@@ -111,7 +111,6 @@ const SupportScanStep5 = () => {
               uploadUrl={`/shop-reception-mobile/truck/shop/upload_shop/security/` + id}
               onSuccess={handleSuccess}
               onError={handleError}
-              inputId={`seal${idx}`}
             />
           </div>
         )),

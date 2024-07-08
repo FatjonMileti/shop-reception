@@ -167,7 +167,6 @@ const ExpectedTrucksStep2 = () => {
               type: 'error'
             })
           }
-          inputId={`thermodiagram-img`}
         />
       </Grid>
 

@@ -123,7 +123,6 @@ const ExpectedReturnDetail = () => {
               uploadUrl={`/shop-reception-mobile/truck/hub/upload/return_reception_seal/` + truckId}
               onSuccess={handleSuccess}
               onError={handleError}
-              inputId={`seal${idx}`}
             />
           </div>
         )),
@@ -145,7 +144,6 @@ const ExpectedReturnDetail = () => {
               uploadUrl={`/shop-reception-mobile/truck/hub/upload/return_reception_seal/` + truckId}
               onSuccess={handleSuccess}
               onError={handleError}
-              inputId={`notice${idx}`}
             />
           </div>
         )),

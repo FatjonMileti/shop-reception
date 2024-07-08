@@ -8,7 +8,7 @@ import {
   Typography
 } from '@fullscreendigital/carrefour-dex-fe'
 import { useMemo, useState } from 'react'
-import { getValidationSchema, getInitialValues } from './helpers'
+import { getValidationSchema, getInitialValues, conformOptions } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../hooks'
@@ -21,48 +21,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import AlertModal from '../../../Common/AlertModal/AlertModal'
 import { URLS } from '../../../constants'
 import ImageUpload from 'components/shop-reception/mobile/Common/ImageUpload/ImageUpload'
-import { WebcamCapture } from 'components/core-ui/WebcamCapture'
-import { resizeFile } from 'utils/helpers'
-import { CameraAlt as CameraIcon } from '@mui/icons-material'
-
-const options = [
-  {
-    field: 'reason',
-    label: 'Conform'
-  },
-  {
-    field: 'reason',
-    label: 'Infoliere neconforma'
-  },
-  {
-    field: 'reason',
-    label: 'Lipsa banda sigilare'
-  },
-  {
-    field: 'reason',
-    label: 'Lipsa banda promo'
-  },
-  {
-    field: 'reason',
-    label: 'Palet suprainaltat'
-  },
-  {
-    field: 'reason',
-    label: 'Constructie defectuoasa'
-  },
-  {
-    field: 'reason',
-    label: 'Palet rasturnat asigurat'
-  },
-  {
-    field: 'reason',
-    label: 'Palet rasturnat ne-asigurat in camion'
-  },
-  {
-    field: 'reason',
-    label: 'Palet lovit'
-  }
-]
+import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
 
 const SupportScanStep1 = () => {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
@@ -79,7 +38,6 @@ const SupportScanStep1 = () => {
     description: '',
     buttons: []
   })
-  const [showPhotoCapture, setShowPhotoCapture] = useState(false)
   const [isMoreSupportsModalOpen, setIsMoreSupportsModalOpen] = useState(false)
   const [moreSupportsModalContent, setMoreSupportsModalContent] = useState({
     title: '',
@@ -103,14 +61,12 @@ const SupportScanStep1 = () => {
   const location = useLocation()
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const id = location.state?.item.id
+  const [supportData, setSupportData] = useState(null)
 
   const { data: truck, isLoading } = useQuery(
     'counter',
     async () => {
-      const truck = await makeCoreGetRequest(
-        '/shop-reception-mobile/support/shop/counter/' + id,
-        null
-      )
+      const truck = await makeCoreGetRequest(`/shop-reception-mobile/support/shop/counter/${id}`)
       setCounter(truck.counter)
 
       return truck
@@ -118,7 +74,7 @@ const SupportScanStep1 = () => {
     {
       onError: error => {
         showNotification({
-          message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
+          message: `Error while fetching truck. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
@@ -140,7 +96,7 @@ const SupportScanStep1 = () => {
     }
   )
 
-  const initialValues = useMemo(() => getInitialValues(truck), [truck])
+  const initialValues = useMemo(() => getInitialValues(supportData), [supportData])
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -149,49 +105,54 @@ const SupportScanStep1 = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        makeCorePostRequest('/shop-reception-mobile/support/shop/save/' + id, values).then(resp => {
-          const localCounter = resp.counter
-          if (localCounter > 0) {
-            setCounter(localCounter)
-          }
+        const resp = await makeCorePostRequest(
+          `/shop-reception-mobile/support/shop/save/${id}`,
+          values
+        )
 
-          if (resp.priorityProducts?.length > 0) {
-            showPriorityProducts(
-              resp.priorityProducts,
-              resp.hasSensitiveProducts,
-              resp.hasProductsWithShortDlc,
-              resp.hasSgrProducts,
-              resp.sgrProductsList
-            )
-          } else if (
-            resp.hasSensitiveProducts ||
-            resp.hasProductsWithShortDlc ||
-            resp.hasSgrProducts
-          ) {
-            showSensitiveAndShortDlcInfo(
-              resp.hasSensitiveProducts,
-              resp.hasProductsWithShortDlc,
-              resp.hasSgrProducts,
-              resp.sgrProductsList
-            )
-          } else {
-            openMoreSupportsModal(supportId)
-          }
+        const localCounter = resp.counter
+        if (localCounter > 0) {
+          setCounter(localCounter)
+        }
 
-          formik.setFieldValue('reason', [])
-          setSupportImageButtonVisible(false)
-          setDefectImageVisible(false)
-        })
+        if (resp.priorityProducts?.length > 0) {
+          showPriorityProducts(
+            resp.priorityProducts,
+            resp.hasSensitiveProducts,
+            resp.hasProductsWithShortDlc,
+            resp.hasSgrProducts,
+            resp.sgrProductsList
+          )
+        } else if (
+          resp.hasSensitiveProducts ||
+          resp.hasProductsWithShortDlc ||
+          resp.hasSgrProducts
+        ) {
+          showSensitiveAndShortDlcInfo(
+            resp.hasSensitiveProducts,
+            resp.hasProductsWithShortDlc,
+            resp.hasSgrProducts,
+            resp.sgrProductsList
+          )
+        } else {
+          openMoreSupportsModal(supportId)
+        }
+
+        formik.setFieldValue('reason', [])
+        setSupportImageButtonVisible(false)
+        setDefectImageVisible(false)
 
         setIsFinalizing(true)
       } catch (error) {
         showNotification({
-          message: `Error while submitting. ${formatErrorMessage(error)}`,
+          message: `A aparut o eroare la salvarea datelor. ${formatErrorMessage(error)}`,
           type: 'error'
         })
       }
     }
   })
+
+  console.log(formik.errors)
 
   if (isLoading || isLoadingSupports) {
     return <div>Loading...</div>
@@ -201,35 +162,38 @@ const SupportScanStep1 = () => {
     setShowConfirmation(!showConfirmation)
   }
 
-  const toggleIsSearching = (): void => {
-    makeCorePostRequest('/shop-reception-mobile/support/shop/scan-by-code/' + id, {
-      supportCode: formik.values?.supportCode
-    })
-      .then(r => {
-        setSupportNumber(r.supportNumber)
-        setSupportId(r.supportId)
-        formik.setFieldValue('supportTypeId', String(r.supportTypeId))
-        formik.setFieldValue('supportId', String(r.supportId))
-        formik.setFieldValue('defect', r.defect)
-        formik.setFieldValue('reason', r.reason)
+  const toggleIsSearching = async () => {
+    try {
+      const result = await makeCorePostRequest(
+        `/shop-reception-mobile/support/shop/scan-by-code/${id}`,
+        {
+          supportCode: formik.values?.supportCode
+        }
+      )
+      setSupportNumber(result.supportNumber)
+      setSupportId(result.supportId)
+      setSupportData(result)
+    } catch (error) {
+      showNotification({
+        message: `A aparut o eroare la cautarea codului. ${formatErrorMessage(error)}`,
+        type: 'error'
       })
-      .catch(error => {
-        console.error('Error updating form values:', error)
-      })
+    }
 
     setIsSearching(true)
   }
 
-  const toggleIsFinalizing = (): void => {
+  const toggleIsFinalizing = async () => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/support/shop/summary/' + id, null).then(
-        response => {
-          const count = response['counter']
-          const total = response['total']
-
-          openFinalizeModal(count, total)
-        }
+      const response = await makeCoreGetRequest(
+        `/shop-reception-mobile/support/shop/summary/${id}`,
+        null
       )
+
+      const count = response['counter']
+      const total = response['total']
+
+      openFinalizeModal(count, total)
     } catch (error) {
       showNotification({
         message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -398,12 +362,14 @@ const SupportScanStep1 = () => {
         label="Cod Suport"
         variant="standard"
         width="100%"
+        autoFocus
         value={formik.values?.supportCode}
         onChange={event =>
           formik.setFieldValue('supportCode', (event.target as HTMLInputElement).value)
         }
         error={!!formik.errors.supportCode}
         helperText={formik.errors.supportCode as string}
+        id="scan-input"
       />
       <IconButton onClick={toggleIsSearching}>
         <ManageSearchIcon />
@@ -415,7 +381,7 @@ const SupportScanStep1 = () => {
       variant="contained"
       label="SCANEAZǍ SUPORT"
       style={{ width: '100%' }}
-      onClick={() => console.log('Manual Scan')}
+      onClick={() => document.getElementById('scan-input').focus()}
     />
   ]
 
@@ -455,7 +421,6 @@ const SupportScanStep1 = () => {
                 type: 'error'
               })
             }
-            inputId={`image-${formik.values.supportTypeId}`}
             isButton
           />
         </>
@@ -474,33 +439,34 @@ const SupportScanStep1 = () => {
     items.push(
       <Grid
         hasPaper={true}
-        items={options.map(option => (
+        items={conformOptions.map(option => (
           <Checkbox
             onChange={() => {
-              const set = new Set(formik.values.reason)
-              if (set.has(option.label)) {
-                set.delete(option.label)
+              const set = new Set(formik.values.nonCompliantReasonList)
+              if (set.has(option.value)) {
+                set.delete(option.value)
                 if (set.size < 1) {
                   setDefectImageVisible(false)
                 }
               } else {
-                set.add(option.label)
-                if (set.size >= 1 && option.label !== 'Conform') {
+                set.add(option.value)
+                if (set.size >= 1 && option.value !== 'COMPLIANT') {
                   setDefectImageVisible(true)
                 }
               }
-              formik.setFieldValue(option.field, Array.from(set))
+              formik.setFieldValue('nonCompliantReasonList', Array.from(set))
               formik.setFieldValue(
                 'defect',
-                formik.values.reason?.includes('Conform') ? true : false
+                formik.values.nonCompliantReasonList?.includes('COMPLIANT')
               )
             }}
             label={option.label}
             disabled={
-              (option.label !== 'Conform' && formik.values.reason?.includes('Conform')) ||
-              (option.label === 'Conform' &&
-                formik.values.reason?.length > 0 &&
-                !formik.values.reason?.includes('Conform'))
+              (option.value !== 'COMPLIANT' &&
+                formik.values.nonCompliantReasonList?.includes('COMPLIANT')) ||
+              (option.value === 'COMPLIANT' &&
+                formik.values.nonCompliantReasonList?.length > 0 &&
+                !formik.values.nonCompliantReasonList?.includes('COMPLIANT'))
             }
           />
         ))}
@@ -521,7 +487,6 @@ const SupportScanStep1 = () => {
               type: 'error'
             })
           }
-          inputId={`image-${formik.values.supportId}`}
           isButton
           label="Adauga imagine suport neconform"
         />
@@ -543,10 +508,8 @@ const SupportScanStep1 = () => {
       variant="contained"
       label="CONFIRM TIP SUPORT"
       style={{ width: '100%' }}
-      onClick={() => {
-        formik.handleSubmit()
-      }}
-      disabled={formik.values.reason?.length === 0}
+      onClick={() => formik.handleSubmit()}
+      // disabled={formik.values.reason?.length === 0}
     />,
     <AlertModal
       open={isMoreSupportsModalOpen}

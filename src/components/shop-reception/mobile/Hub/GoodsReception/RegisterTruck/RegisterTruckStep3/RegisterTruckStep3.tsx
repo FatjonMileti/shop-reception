@@ -131,7 +131,6 @@ const RegisterTruckStep3 = () => {
               uploadUrl={`/shop-reception-mobile/truck/hub/upload/new/` + id}
               onSuccess={handleSuccess}
               onError={handleError}
-              inputId={`seal${idx}`}
             />
           </div>
         )),

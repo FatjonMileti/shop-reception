@@ -193,7 +193,6 @@ const DeliveryShortDLC = () => {
                             type: 'error'
                           })
                         }
-                        inputId={`supportCode`}
                       />
                     )}
                   </TableCell>

@@ -132,7 +132,6 @@ const ExpectedTrucksStep6 = () => {
                   type: 'error'
                 })
               }
-              inputId={`sealList-${index}`}
             />
           </Grid>
 

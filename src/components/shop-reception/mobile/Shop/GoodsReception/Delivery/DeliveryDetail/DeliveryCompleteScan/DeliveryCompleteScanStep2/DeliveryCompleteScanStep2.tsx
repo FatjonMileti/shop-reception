@@ -346,7 +346,6 @@ const DeliveryCompleteScanStep2 = () => {
                               type: 'error'
                             })
                           }
-                          inputId={`aleatory-integral-upload`}
                         />
                       </Grid>
                     )}
