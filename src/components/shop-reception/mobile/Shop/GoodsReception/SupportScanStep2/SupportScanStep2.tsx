@@ -270,7 +270,7 @@ const SupportScanStep2 = () => {
     'deleteSecondarySupport',
     async () => {
       return await makeCoreGetRequest(
-        `/shop-reception-mobile/support/secondary/delete?supportId=${supportId}`,
+        `/shop-reception-mobile/support/shop/secondary/delete?supportId=${supportId}`,
         null
       )
     },
