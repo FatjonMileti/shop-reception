@@ -225,6 +225,9 @@ const PackingTypeForm: React.FC<NewAdminDepositProps> = props => {
                 fullWidth
                 onChange={(e: any) => formik.setFieldValue('code', e.target.value)}
                 value={formik.values.code}
+                required
+                error={!!formik.errors.code}
+                helperText={formik.errors.code as string}
               />
             </Grid>
             {formik.values.code?.length > 0 && formik.values.code !== null && (
