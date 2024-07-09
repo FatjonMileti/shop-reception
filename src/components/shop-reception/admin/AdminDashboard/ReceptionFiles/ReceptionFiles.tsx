@@ -85,7 +85,7 @@ const ReceptionFiles = () => {
       const data = await makeCoreGetRequest(`/shop-reception/deposits/accessible`)
       return data.map(item => ({
         label: item.displayName,
-        value: item.id
+        value: item.depositCode
       }))
     },
     {
