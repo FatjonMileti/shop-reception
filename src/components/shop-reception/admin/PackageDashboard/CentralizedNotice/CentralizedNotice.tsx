@@ -59,6 +59,7 @@ const CentralizedNotice = () => {
           'A aparut o eroare la obtinerea datelor pentru tabel.',
           showNotification
         )
+      setIsLoading(false)
     }
   }
 
