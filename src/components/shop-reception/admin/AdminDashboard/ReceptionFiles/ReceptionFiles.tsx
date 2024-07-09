@@ -54,6 +54,7 @@ const ReceptionFiles = () => {
         message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
+      setIsLoading(false)
     }
   }
 
@@ -84,7 +85,7 @@ const ReceptionFiles = () => {
       const data = await makeCoreGetRequest(`/shop-reception/deposits/accessible`)
       return data.map(item => ({
         label: item.displayName,
-        value: item.id
+        value: item.depositCode
       }))
     },
     {

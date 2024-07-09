@@ -119,7 +119,7 @@ const EditPackagingInventory = ({ isModalOpen, closeModal, editItem, setShouldRe
         )}
         <Grid xs={12} item className={s.modalButtons}>
           <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
-          <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} />
+          <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} disabled={isLoading} />
         </Grid>
       </Grid>
     </Modal>

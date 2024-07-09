@@ -1,11 +1,15 @@
 import { formatUIDate } from 'utils/helpers'
+import { statusColorMapping } from '../../helpers'
 
 export const columns = [
   {
     title: 'Status',
     field: 'statusValue',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    render: row => (
+      <div style={{ color: statusColorMapping[row.statusValue] || 'black' }}>{row.statusValue}</div>
+    )
   },
   {
     title: 'Tip scanare',

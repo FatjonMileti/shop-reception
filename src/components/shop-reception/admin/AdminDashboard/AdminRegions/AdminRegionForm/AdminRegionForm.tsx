@@ -49,7 +49,35 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
     }
   })
 
-  const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+
+  const { data: shopTypes, isLoading: isShopTypesLoading, isFetching: isShopTypesFetching } = useQuery(
+    ['shop-types'],
+    async () => {
+      const result = await makeCoreGetRequest(`/shop-reception/regions/${editItem?.id}/shops`)
+      const checkedOptions = result.filter(option => option.isChecked === true)
+      const options = checkedOptions.map(item => ({ label: item.metiName, value: item.id }))
+
+      const allOptions = result.map(item => ({
+        label: item.metiName,
+        value: item.id
+      }))
+      return {selectedOptions: options, allOptions}
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `A apărut o eroare la obtinerea tipurilor de magazine. ${formatErrorMessage(
+            error
+          )}`,
+          type: 'error'
+        })
+      },
+      enabled: isModalOpen
+    }
+  )
+
+
+  const initialValues = useMemo(() => getInitialValues(editItem, shopTypes), [editItem, shopTypes?.selectedOptions])
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
   const formik = useFormik({
@@ -73,28 +101,6 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
       }
     }
   })
-
-  const { data: shopTypes, isLoading: isShopTypesLoading } = useQuery(
-    ['shop-types'],
-    async () => {
-      const data = await makeCoreGetRequest(`/shop-reception/regions/${editItem?.id || 0}/shops`)
-      return data.map(item => ({
-        label: item.metiName,
-        value: item.id
-      }))
-    },
-    {
-      onError: error => {
-        showNotification({
-          message: `A apărut o eroare la obtinerea tipurilor de magazine. ${formatErrorMessage(
-            error
-          )}`,
-          type: 'error'
-        })
-      },
-      enabled: isModalOpen
-    }
-  )
 
   const selectProductSearch = useSearchInput(
     'name',
@@ -174,7 +180,7 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
         </Grid>
 
         <Grid xs={12} item>
-          {isShopTypesLoading ? (
+          {isShopTypesLoading || isShopTypesFetching ? (
             <div style={{ display: 'flex' }}>
               <CircularProgress color="primary" disableShrink />
             </div>
@@ -184,11 +190,11 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
               label="Magazine"
               disableClearable
               onChange={(e: any, option: any) => formik.setFieldValue('shopIds', option)}
-              defaultValue={formik.values.shopIds}
-              options={shopTypes}
               error={!!formik.errors.shopIds}
               helperText={formik.errors.shopIds as string}
               multiple
+              value={formik.values.shopIds}
+              options={shopTypes?.allOptions}
             />
           )}
         </Grid>

@@ -14,6 +14,7 @@ import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/co
 import ImageUpload from '../../../../../../Common/ImageUpload/ImageUpload'
 import { DefectReason, Mark } from '../../../../../../../enums'
 import dayjs from 'dayjs'
+import { CircularProgress } from '@mui/material'
 
 const DeliveryRandomProductModifica = () => {
   const { showNotification } = useNotification()
@@ -106,7 +107,9 @@ const DeliveryRandomProductModifica = () => {
     }
   )
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) {
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
+  }
 
   useEffect(() => {
     calculateLitigationType()

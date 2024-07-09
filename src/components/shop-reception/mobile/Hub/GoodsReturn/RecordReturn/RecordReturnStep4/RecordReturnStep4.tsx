@@ -1,27 +1,30 @@
 import { Grid } from '../../../../../Common/Grid'
 import { Button, Typography, Table } from '@fullscreendigital/carrefour-dex-fe'
-import { TitleHeader } from "../../../../Common/TitleHeader";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { URLS } from "../../../../constants";
+import { TitleHeader } from '../../../../Common/TitleHeader'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { URLS } from '../../../../constants'
 import { columns } from './helpers'
 import React from 'react'
-import { useQuery } from "react-query";
-import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
-import { formatErrorMessage } from "../../../../../../../utils/formatting";
-import { useNotification } from "../../../../../../../hooks";
-import { TableRowType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table";
-
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../../../utils/api'
+import { formatErrorMessage } from '../../../../../../../utils/formatting'
+import { useNotification } from '../../../../../../../hooks'
+import { TableRowType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
+import { CircularProgress } from '@mui/material'
 
 const ContinueReturnDetail2 = () => {
-  const { showNotification } = useNotification();
+  const { showNotification } = useNotification()
   const navigate = useNavigate()
-  const [params] = useSearchParams();
+  const [params] = useSearchParams()
   const truckId = params.get('id')
 
-  const { data: CRTruck, isLoading} = useQuery(
+  const { data: CRTruck, isLoading } = useQuery(
     'TruckById',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/truck/' + truckId, null)
+      return await makeCoreGetRequest(
+        '/shop-reception-mobile/truck/hub/return/registration/truck/' + truckId,
+        null
+      )
     },
     {
       onError: error => {
@@ -29,14 +32,17 @@ const ContinueReturnDetail2 = () => {
           message: `Error while fetching truck. ${formatErrorMessage(error)}`,
           type: 'error'
         })
-      },
+      }
     }
   )
 
-  const { data: supportList, isLoading: supportListLoading} = useQuery(
+  const { data: supportList, isLoading: supportListLoading } = useQuery(
     'SupportList',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/all-supports/' + truckId, null)
+      return await makeCoreGetRequest(
+        '/shop-reception-mobile/truck/hub/return/registration/all-supports/' + truckId,
+        null
+      )
     },
     {
       onError: error => {
@@ -44,43 +50,53 @@ const ContinueReturnDetail2 = () => {
           message: `Error while fetching truck. ${formatErrorMessage(error)}`,
           type: 'error'
         })
-      },
+      }
     }
   )
 
   if (isLoading || supportListLoading) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
-      maxWidth='xs'
+      maxWidth="xs"
       items={[
-        <TitleHeader title='CONTINUARE RETUR CAMION' />,
+        <TitleHeader title="CONTINUARE RETUR CAMION" />,
         <Grid
           spacing={1}
           hasPaper={true}
           items={[
-            <Typography variant="medium" component="p">Numǎr camion: {CRTruck?.truckNumber}</Typography>,
-            <Typography variant='medium' component='p'>Destinație: {CRTruck?.depositName}</Typography>,
-            <Typography variant='medium' component='p'>Numǎr stive: {CRTruck?.stackNumber}</Typography>
+            <Typography variant="medium" component="p">
+              Numǎr camion: {CRTruck?.truckNumber}
+            </Typography>,
+            <Typography variant="medium" component="p">
+              Destinație: {CRTruck?.depositName}
+            </Typography>,
+            <Typography variant="medium" component="p">
+              Numǎr stive: {CRTruck?.stackNumber}
+            </Typography>
           ]}
           itemsPerRow={1}
         />,
-        <Typography variant='medium' component='h4'>Sumar Ambalaje</Typography>,
-        !!supportList && <Table
-          columns={columns}
-          isLoading={false}
-          rows={supportList as TableRowType[]}
-          disablePagination={true}
-          hideCheckbox={true}
-        />,
+        <Typography variant="medium" component="h4">
+          Sumar Ambalaje
+        </Typography>,
+        !!supportList && (
+          <Table
+            columns={columns}
+            isLoading={false}
+            rows={supportList as TableRowType[]}
+            disablePagination={true}
+            hideCheckbox={true}
+          />
+        ),
         <Button
-          style={{width: '100%'}}
-          type='button'
-          variant='contained'
-          label='PASUL URMǍTOR'
+          style={{ width: '100%' }}
+          type="button"
+          variant="contained"
+          label="PASUL URMǍTOR"
           onClick={() => {
             navigate(`${URLS.AUTH_RECORD_RETURN_STEP_5}?id=${truckId}`)
           }}

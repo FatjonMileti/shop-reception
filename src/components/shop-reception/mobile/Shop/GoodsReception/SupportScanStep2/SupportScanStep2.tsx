@@ -13,6 +13,7 @@ import ImageUpload from '../../../Common/ImageUpload/ImageUpload'
 import { useLocation, useNavigate } from 'react-router-dom'
 import AlertModal from '../../../Common/AlertModal/AlertModal'
 import { URLS } from '../../../constants'
+import { CircularProgress } from '@mui/material'
 
 const SupportScanStep2 = () => {
   const { showNotification } = useNotification()
@@ -21,7 +22,6 @@ const SupportScanStep2 = () => {
 
   const location = useLocation()
   const { supportTypeId, supportId, truckId } = location.state
-  console.log(location.state)
   const main = true
 
   const [isMissingValuesModalOpen, setIsMissingValuesModalOpen] = useState(false)
@@ -126,7 +126,7 @@ const SupportScanStep2 = () => {
   )
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   const handleSuccess = id => {
@@ -271,7 +271,7 @@ const SupportScanStep2 = () => {
     'deleteSecondarySupport',
     async () => {
       return await makeCoreGetRequest(
-        `/shop-reception-mobile/support/secondary/delete?supportId=${supportId}`,
+        `/shop-reception-mobile/support/shop/secondary/delete?supportId=${supportId}`,
         null
       )
     },

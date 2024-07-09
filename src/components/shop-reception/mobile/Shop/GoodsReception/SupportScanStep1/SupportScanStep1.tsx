@@ -21,7 +21,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import AlertModal from '../../../Common/AlertModal/AlertModal'
 import { URLS } from '../../../constants'
 import ImageUpload from 'components/shop-reception/mobile/Common/ImageUpload/ImageUpload'
-import { AsyncAutocomplete } from 'components/core-ui/AsyncAutocomplete'
+import { CircularProgress } from '@mui/material'
 
 const SupportScanStep1 = () => {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
@@ -68,6 +68,9 @@ const SupportScanStep1 = () => {
     async () => {
       const truck = await makeCoreGetRequest(`/shop-reception-mobile/support/shop/counter/${id}`)
       setCounter(truck.counter)
+      if (truck.counter > 0) {
+        setIsFinalizing(true)
+      }
 
       return truck
     },
@@ -152,10 +155,8 @@ const SupportScanStep1 = () => {
     }
   })
 
-  console.log(formik.errors)
-
   if (isLoading || isLoadingSupports) {
-    return <div>Loading...</div>
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   const toggleShowConfirmation = (): void => {
@@ -170,22 +171,6 @@ const SupportScanStep1 = () => {
           supportCode: formik.values?.supportCode
         }
       )
-      // const result = {
-      //   counter: null,
-      //   defect: false,
-      //   errorMessage: null,
-      //   mustChoose: null,
-      //   reason: 'PROVIDER',
-      //   scanId: null,
-      //   scanSuccess: true,
-      //   supportId: 8287153,
-      //   supportList: null,
-      //   supportNumber: '12480596000',
-      //   supportTypeId: 24,
-      //   truckId: null,
-      //   truckNumber: null,
-      //   wrongDestination: null
-      // }
       setSupportNumber(result.supportNumber)
       setSupportId(result.supportId)
       setSupportData(result)
@@ -210,6 +195,20 @@ const SupportScanStep1 = () => {
     } catch (error) {
       showNotification({
         message: `Error while submitting. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
+    }
+  }
+
+  const deleteSecondarySupports = async () => {
+    try {
+      await makeCoreGetRequest(
+        `/shop-reception-mobile/support/shop/secondary/delete?supportId=${supportId}`,
+        null
+      )
+    } catch (error) {
+      showNotification({
+        message: `Error while deleting. ${formatErrorMessage(error)}`,
         type: 'error'
       })
     }
@@ -329,7 +328,7 @@ const SupportScanStep1 = () => {
         {
           label: 'Nu',
           onClick: () => {
-            // deleteSecondarySupports();
+            deleteSecondarySupports()
 
             formik.setFieldValue('supportCode', '')
             setSupportId(null)
@@ -353,7 +352,9 @@ const SupportScanStep1 = () => {
             setSupportId(null)
             setSupportNumber('')
 
-            //navigate(URLS.AUTH_SUPPORT_SCAN_STEP_3)
+            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_3, {
+              state: { truckId: id, supportId: supportId }
+            })
             setIsMoreSupportsModalOpen(false)
           },
           color: 'secondary'
@@ -448,8 +449,9 @@ const SupportScanStep1 = () => {
     ]
   }
 
-  if (showConfirmation) {
-    items.push(
+  items = [
+    ...items,
+    <div style={{ display: showConfirmation ? 'block' : 'none', marginBottom: '24px' }}>
       <Grid
         hasPaper={true}
         items={conformOptions.map(option => (
@@ -484,8 +486,8 @@ const SupportScanStep1 = () => {
           />
         ))}
         itemsPerRow={1}
-      />,
-      defectImageVisible && (
+      />
+      <div style={{ display: defectImageVisible ? 'block' : 'none' }}>
         <ImageUpload
           uploadUrl={`/shop-reception-mobile/support/shop/upload-non-conform-support/${formik.values.supportId}`}
           onSuccess={() => {
@@ -503,12 +505,8 @@ const SupportScanStep1 = () => {
           isButton
           label="Adauga imagine suport neconform"
         />
-      )
-    )
-  }
-
-  items = [
-    ...items,
+      </div>
+    </div>,
     <Button
       type="button"
       variant="contained"

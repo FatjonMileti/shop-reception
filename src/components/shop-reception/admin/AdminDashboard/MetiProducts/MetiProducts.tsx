@@ -123,7 +123,7 @@ const MetiProducts = () => {
         orderBy="code"
         order="asc"
         hideCheckbox
-        columns={columns}
+        columns={columns(measurementUnitsOptions)}
         items={tableItems}
         fetchData={fetchData}
         isLoading={isLoading}

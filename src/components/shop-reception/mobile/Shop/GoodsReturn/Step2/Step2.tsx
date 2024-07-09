@@ -12,6 +12,7 @@ import { Fragment, useMemo, useState } from "react";
 import { useFormik } from "formik";
 import AlertModal from "../../../Common/AlertModal/AlertModal";
 import { URLS } from "../../../constants";
+import { CircularProgress } from '@mui/material'
 
 const Step2 = () => {
   const { showNotification } = useNotification()
@@ -21,6 +22,8 @@ const Step2 = () => {
   const [invalidSupportTypeModalContent, setInvalidSupportTypeModalContent] = useState({ title: '', description: '', buttons: [] })
   const [isReturnableModalOpen, setIsReturnableModalOpen] = useState(false)
   const [returnableModalContent, setReturnableModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [isSupportScanModalOpen, setIsSupportScanModalOpen] = useState(false)
+  const [supportScanModalContent, setSupportScanModalContent] = useState({ title: '', description: '', buttons: [] })
   const [packageScanned, setPackageScanned] = useState(false)
   const [searchCode, setSearchCode] = useState('')
   const id = location.state?.id || '';
@@ -83,7 +86,7 @@ const Step2 = () => {
   )
 
   if (isLoadingReturnTruck || isLoadingSupports) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   const showInvalidSupportTypeModal = () => {
@@ -128,13 +131,39 @@ const Step2 = () => {
     setIsReturnableModalOpen(false);
   };
 
+  const showSupportScanModal = () => {
+    setSupportScanModalContent({
+      title: 'Atenție!',
+      description: 'Cod de ambalaj necunoscut!',
+      buttons: [
+        {
+          label: 'Ok',
+          onClick: () => {
+            setSearchCode('');
+            setIsSupportScanModalOpen(false);
+          },
+          color: 'primary'
+        }
+      ]
+    });
+    setIsSupportScanModalOpen(true);
+  }
+
+  const closeSupportScanModal = () => {
+    setIsSupportScanModalOpen(false);
+  };
+
   const supportScan = () => {
     if (!searchCode) return;
 
     try {
-      makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/support-type/scan/' + id, { supportTypeCode: searchCode }).then(r => {
+      makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/support-type/scan/' + id, searchCode, {
+        headers: {
+          'Content-Type': 'text/plain'
+        }
+      }).then(r => {
         if (!r.scanSuccess) {
-
+          showSupportScanModal();
         } else if (returnTruckModel.depositOrHubName.includes('CHEP') && !r.supportType.includes('CHEP')) {
           showInvalidSupportTypeModal();
         } else {
@@ -182,14 +211,23 @@ const Step2 = () => {
         type='text'
         label='Scanează tip ambalaj'
         variant='standard'
+        autoFocus
         value={searchCode}
         onChange={event => setSearchCode((event.target as HTMLInputElement).value)}
         width='100%'
+        id="scan-input"
       />
       <IconButton onClick={supportScan}>
         <ManageSearchIcon />
       </IconButton>
     </div>,
+    <AlertModal
+      open={isSupportScanModalOpen}
+      handleClose={closeSupportScanModal}
+      title={supportScanModalContent.title}
+      description={supportScanModalContent.description}
+      buttons={supportScanModalContent.buttons}
+    />,
     <Input
       type='select'
       label='Cauta tip suport'
@@ -215,7 +253,7 @@ const Step2 = () => {
       type='button'
       variant='contained'
       label='SCANEAZǍ TIP AMBALAJ'
-      onClick={null}
+      onClick={() => document.getElementById('scan-input').focus()}
       style={{ width: '100%' }}
     />,
     formik.values.currentSupportTypeId &&
@@ -262,6 +300,13 @@ const Step2 = () => {
       onClick={() => navigate(URLS.AUTH_RETURN_STEP_3, { state: id })}
       disabled={!packageScanned}
       style={{ width: '100%' }}
+    />,
+    <Button
+      type='button'
+      variant='contained'
+      label='Modifica Date Camion'
+      onClick={() => navigate('/shop-reception/mobile/return-step-1', {state: { truckId: id }})}
+      style={{ width: '100%', marginTop: '15px' }}
     />
   ]
 

@@ -9,6 +9,7 @@ import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../../../ut
 import { formatErrorMessage } from '../../../../../../../utils/formatting'
 import { useState } from 'react'
 import AlertModal from '../../../../Common/AlertModal/AlertModal'
+import { CircularProgress } from '@mui/material'
 
 const DeliveryDetail = () => {
   const navigate = useNavigate()
@@ -96,7 +97,7 @@ const DeliveryDetail = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   return (

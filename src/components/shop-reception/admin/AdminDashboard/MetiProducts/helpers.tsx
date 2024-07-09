@@ -1,6 +1,6 @@
 import { Autocomplete, Input } from '@fullscreendigital/carrefour-dex-fe'
 
-export const columns = [
+export const columns = (measurementUnitsOptions) => [
   {
     title: 'Cod produs',
     field: 'code',
@@ -19,7 +19,8 @@ export const columns = [
     field: 'unit',
     align: 'left',
     type: 'string',
-    disableSorting: true
+    disableSorting: true,
+    render: row => measurementUnitsOptions.find(unit => unit.value === row.unit).label
   },
   {
     title: 'Valabilitate (zile)',

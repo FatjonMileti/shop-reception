@@ -8,7 +8,7 @@ import { makeCoreGetRequest } from '../../../../../../utils/api'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
 import React from 'react'
 import { useNotification } from '../../../../../../hooks'
-import { Typography } from '@mui/material'
+import { CircularProgress, Typography } from '@mui/material'
 
 const ReceptionProcessing = () => {
   const navigate = useNavigate()
@@ -34,7 +34,7 @@ const ReceptionProcessing = () => {
   )
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   if (isError) {

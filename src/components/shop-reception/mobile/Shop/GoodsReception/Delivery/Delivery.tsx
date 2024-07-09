@@ -8,6 +8,7 @@ import { useNotification } from '../../../../../../hooks'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest } from '../../../../../../utils/api'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
+import { CircularProgress } from '@mui/material'
 
 const Delivery = () => {
   const navigate = useNavigate()
@@ -33,7 +34,7 @@ const Delivery = () => {
   )
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   if (isError) {
@@ -49,16 +50,17 @@ const Delivery = () => {
   }
 
   let items = [
-    <TitleHeader title='VALIDARE LIVRARE' />,
-    truckList && truckList?.map((truck: any, index) => (
-      <TruckCard
-        key={truck.id}
-        onClick={() => {
-          navigate(URLS.AUTH_DELIVERY_DETAIL, { state: { truck } })
-        }}
-        truck={truck}
-      />
-    ))
+    <TitleHeader title="VALIDARE LIVRARE" />,
+    truckList &&
+      truckList?.map((truck: any, index) => (
+        <TruckCard
+          key={truck.id}
+          onClick={() => {
+            navigate(URLS.AUTH_DELIVERY_DETAIL, { state: { truck } })
+          }}
+          truck={truck}
+        />
+      ))
   ]
 
   if (!truckList || truckList.length === 0) {
