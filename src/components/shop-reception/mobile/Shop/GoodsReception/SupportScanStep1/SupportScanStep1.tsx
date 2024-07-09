@@ -21,6 +21,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import AlertModal from '../../../Common/AlertModal/AlertModal'
 import { URLS } from '../../../constants'
 import ImageUpload from 'components/shop-reception/mobile/Common/ImageUpload/ImageUpload'
+import { CircularProgress } from '@mui/material'
 
 const SupportScanStep1 = () => {
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false)
@@ -155,7 +156,7 @@ const SupportScanStep1 = () => {
   })
 
   if (isLoading || isLoadingSupports) {
-    return <div>Loading...</div>
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   const toggleShowConfirmation = (): void => {

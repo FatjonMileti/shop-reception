@@ -1,30 +1,42 @@
 import { Grid } from '../../../../Common/Grid'
 import { Button, Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from '../../../Common/TitleHeader'
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { makeCoreGetRequest } from "../../../../../../utils/api";
-import { formatErrorMessage } from "../../../../../../utils/formatting";
-import { useNotification } from "../../../../../../hooks";
-import { useState } from "react";
-import AlertModal from "../../../Common/AlertModal/AlertModal";
-import { URLS } from "../../../constants";
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest } from '../../../../../../utils/api'
+import { formatErrorMessage } from '../../../../../../utils/formatting'
+import { useNotification } from '../../../../../../hooks'
+import { useState } from 'react'
+import AlertModal from '../../../Common/AlertModal/AlertModal'
+import { URLS } from '../../../constants'
+import { CircularProgress } from '@mui/material'
 
 const SupportScanStep4 = () => {
-  const { showNotification } = useNotification();
-  const [infoLoaded, setInfoLoaded] = useState(false);
-  const [isEmptyTruckModalOpen, setIsEmptyTruckModalOpen] = useState(false);
-  const [finalizeEmptyTruckContent, setEmptyTruckModalContent] = useState({ title: '', description: '', buttons: [] });
-  const [isFinalizedTruckModalOpen, setIsFinalizedTruckModalOpen] = useState(false);
-  const [finalizeTruckContent, setFinalizedTruckModalContent] = useState({ title: '', description: '', buttons: [] });
-  const navigate = useNavigate();
+  const { showNotification } = useNotification()
+  const [infoLoaded, setInfoLoaded] = useState(false)
+  const [isEmptyTruckModalOpen, setIsEmptyTruckModalOpen] = useState(false)
+  const [finalizeEmptyTruckContent, setEmptyTruckModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
+  const [isFinalizedTruckModalOpen, setIsFinalizedTruckModalOpen] = useState(false)
+  const [finalizeTruckContent, setFinalizedTruckModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
+  const navigate = useNavigate()
   const location = useLocation()
-  const id = location.state || '';
+  const id = location.state || ''
 
-  const { data: manualTruck, isLoading: isLoadingManualTruck} = useQuery(
+  const { data: manualTruck, isLoading: isLoadingManualTruck } = useQuery(
     'manualTruck',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/manual-created-info/' + id, null)
+      return await makeCoreGetRequest(
+        '/shop-reception-mobile/truck/shop/manual-created-info/' + id,
+        null
+      )
     },
     {
       onSuccess: () => setInfoLoaded(true),
@@ -37,7 +49,7 @@ const SupportScanStep4 = () => {
     }
   )
 
-  const { data: truck, isLoading: isLoadingTruck} = useQuery(
+  const { data: truck, isLoading: isLoadingTruck } = useQuery(
     'truck',
     async () => {
       return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/' + id, null)
@@ -52,7 +64,7 @@ const SupportScanStep4 = () => {
     }
   )
 
-  const { data: counter, isLoading: isLoadingCounter} = useQuery(
+  const { data: counter, isLoading: isLoadingCounter } = useQuery(
     'counter',
     async () => {
       return await makeCoreGetRequest('/shop-reception-mobile/support/shop/counter/' + id, null)
@@ -67,10 +79,13 @@ const SupportScanStep4 = () => {
     }
   )
 
-  const { data: canReturnToHub, isLoading: isLoadingCanReturnToHub} = useQuery(
+  const { data: canReturnToHub, isLoading: isLoadingCanReturnToHub } = useQuery(
     'hubAssigned',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/confirm-hub-assigned', null)
+      return await makeCoreGetRequest(
+        '/shop-reception-mobile/truck/shop/exit/confirm-hub-assigned',
+        null
+      )
     },
     {
       onError: error => {
@@ -82,22 +97,21 @@ const SupportScanStep4 = () => {
     }
   )
 
-  const finalizeTruck = (destination) => {
+  const finalizeTruck = destination => {
     try {
       makeCoreGetRequest('/shop-reception-mobile/support/shop/finalise/' + id, null).then()
 
       if (destination === 'home') {
         navigate('/goodsReception')
       } else if (destination === 'return') {
-        navigate(URLS.AUTH_RETURN_STEP_1, { state:
-          {
+        navigate(URLS.AUTH_RETURN_STEP_1, {
+          state: {
             truckNumber: truck?.truckNumber,
-            driverName: truck?.driverName,
+            driverName: truck?.driverName
           }
         })
       }
-    }
-    catch (error) {
+    } catch (error) {
       showNotification({
         message: `Error while finalizing truck. ${formatErrorMessage(error)}`,
         type: 'error'
@@ -114,25 +128,25 @@ const SupportScanStep4 = () => {
           label: 'Da',
           onClick: () => {
             finalizeTruck('home')
-            setIsEmptyTruckModalOpen(false);
+            setIsEmptyTruckModalOpen(false)
           },
           color: 'primary'
         },
         {
           label: 'Nu',
           onClick: () => {
-            setIsEmptyTruckModalOpen(false);
+            setIsEmptyTruckModalOpen(false)
           },
           color: 'secondary'
         }
       ]
-    });
-    setIsEmptyTruckModalOpen(true);
+    })
+    setIsEmptyTruckModalOpen(true)
   }
 
   const closeEmptyTruckModal = () => {
-    setIsEmptyTruckModalOpen(false);
-  };
+    setIsEmptyTruckModalOpen(false)
+  }
 
   const openFinalizeTruckModal = () => {
     setFinalizedTruckModalContent({
@@ -143,71 +157,76 @@ const SupportScanStep4 = () => {
           label: 'Da',
           onClick: () => {
             finalizeTruck('home')
-            setIsFinalizedTruckModalOpen(false);
+            setIsFinalizedTruckModalOpen(false)
           },
           color: 'primary'
         },
         {
           label: 'Nu',
           onClick: () => {
-            setIsFinalizedTruckModalOpen(false);
+            setIsFinalizedTruckModalOpen(false)
           },
           color: 'secondary'
         }
       ]
-    });
-    setIsFinalizedTruckModalOpen(true);
+    })
+    setIsFinalizedTruckModalOpen(true)
   }
 
   const closeFinalizeTruckModal = () => {
-    setIsFinalizedTruckModalOpen(false);
-  };
+    setIsFinalizedTruckModalOpen(false)
+  }
 
   if (isLoadingManualTruck || isLoadingTruck || isLoadingCounter || isLoadingCanReturnToHub) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
-      maxWidth='xs'
+      maxWidth="xs"
       items={[
-        <TitleHeader title='ÎNREGISTREAZǍ CAMION' />,
-        (!manualTruck && infoLoaded) &&
-        <Button
-          type='button'
-          variant='contained'
-          label='CAMION GOL'
-          style={{ width: '100%' }}
-          onClick={openEmptyTruckModal}
-        />,
-        (!manualTruck && infoLoaded) &&
-        <Button
-          type='button'
-          variant='contained'
-          label='RESIGILEAZĂ CAMION'
-          style={{ width: '100%' }}
-          onClick={() => {navigate(URLS.AUTH_SUPPORT_SCAN_STEP_5.replace(':id', id))}
-          }
-        />,
-        (!manualTruck && infoLoaded && canReturnToHub && (truck.flowType === 'OUT_HUB')) &&
-        <Button
-          type='button'
-          variant='contained'
-          label='RETUR AMBALAJE'
-          style={{ width: '100%' }}
-          onClick={() => {
-            finalizeTruck('return')
-          }}
-        />,
-        (manualTruck && infoLoaded) &&
-        <Button
-          type='button'
-          variant='contained'
-          label='FINALIZEAZĂ CAMION'
-          style={{ width: '100%' }}
-          onClick={openFinalizeTruckModal}
-        />,
+        <TitleHeader title="ÎNREGISTREAZǍ CAMION" />,
+        !manualTruck && infoLoaded && (
+          <Button
+            type="button"
+            variant="contained"
+            label="CAMION GOL"
+            style={{ width: '100%' }}
+            onClick={openEmptyTruckModal}
+          />
+        ),
+        !manualTruck && infoLoaded && (
+          <Button
+            type="button"
+            variant="contained"
+            label="RESIGILEAZĂ CAMION"
+            style={{ width: '100%' }}
+            onClick={() => {
+              navigate(URLS.AUTH_SUPPORT_SCAN_STEP_5.replace(':id', id))
+            }}
+          />
+        ),
+        !manualTruck && infoLoaded && canReturnToHub && truck.flowType === 'OUT_HUB' && (
+          <Button
+            type="button"
+            variant="contained"
+            label="RETUR AMBALAJE"
+            style={{ width: '100%' }}
+            onClick={() => {
+              finalizeTruck('return')
+            }}
+          />
+        ),
+        manualTruck && infoLoaded && (
+          <Button
+            type="button"
+            variant="contained"
+            label="FINALIZEAZĂ CAMION"
+            style={{ width: '100%' }}
+            onClick={openFinalizeTruckModal}
+          />
+        ),
         <AlertModal
           open={isEmptyTruckModalOpen}
           handleClose={closeEmptyTruckModal}
@@ -223,8 +242,12 @@ const SupportScanStep4 = () => {
           buttons={finalizeTruckContent.buttons}
         />,
         <>
-          <Typography variant='medium' component='p'>Numǎr camion: {counter?.truckNumber}</Typography>
-          <Typography variant='medium' component='p'>Numǎr suporți scanați: {counter?.counter}</Typography>
+          <Typography variant="medium" component="p">
+            Numǎr camion: {counter?.truckNumber}
+          </Typography>
+          <Typography variant="medium" component="p">
+            Numǎr suporți scanați: {counter?.counter}
+          </Typography>
         </>
       ].filter(Boolean)}
       itemsPerRow={1}

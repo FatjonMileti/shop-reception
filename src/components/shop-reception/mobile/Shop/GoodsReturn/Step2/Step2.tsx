@@ -12,6 +12,7 @@ import { Fragment, useMemo, useState } from "react";
 import { useFormik } from "formik";
 import AlertModal from "../../../Common/AlertModal/AlertModal";
 import { URLS } from "../../../constants";
+import { CircularProgress } from '@mui/material'
 
 const Step2 = () => {
   const { showNotification } = useNotification()
@@ -85,7 +86,7 @@ const Step2 = () => {
   )
 
   if (isLoadingReturnTruck || isLoadingSupports) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   const showInvalidSupportTypeModal = () => {

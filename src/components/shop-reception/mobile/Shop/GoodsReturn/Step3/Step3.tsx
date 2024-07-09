@@ -11,6 +11,7 @@ import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../utils
 import { formatErrorMessage } from "../../../../../../utils/formatting";
 import { TableHeaderType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table";
 import { URLS } from "../../../constants";
+import { CircularProgress } from '@mui/material';
 
 const Step3 = () => {
   const { showNotification } = useNotification()
@@ -62,7 +63,7 @@ const Step3 = () => {
   )
 
   if (isLoadingSupportList) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   const columns:Array<TableHeaderType> = [

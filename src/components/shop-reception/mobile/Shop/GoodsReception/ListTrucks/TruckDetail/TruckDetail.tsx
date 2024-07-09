@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../../hooks'
 import { TitleHeader } from '../../../../Common/TitleHeader'
-import { Container, Grid } from '@mui/material'
+import { CircularProgress, Container, Grid } from '@mui/material'
 import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../../../utils/api'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
@@ -88,7 +88,7 @@ const TruckDetail = () => {
   )
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   const handleSuccess = () => {

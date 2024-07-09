@@ -1,28 +1,40 @@
-import { Grid } from "../../../../../Common/Grid";
-import { Button, Divider, IconButton, Input, Table, Typography } from "@fullscreendigital/carrefour-dex-fe";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useNotification } from "../../../../../../../hooks";
+import { Grid } from '../../../../../Common/Grid'
+import {
+  Button,
+  Divider,
+  IconButton,
+  Input,
+  Table,
+  Typography
+} from '@fullscreendigital/carrefour-dex-fe'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNotification } from '../../../../../../../hooks'
 import { getValidationSchema, initialValues } from './helpers'
-import React, { useMemo, useState } from "react";
-import { useFormik } from "formik";
-import { formatErrorMessage } from "../../../../../../../utils/formatting";
-import { TitleHeader } from "../../../../Common/TitleHeader";
-import { FlexCenter } from "../../../../../Common/FlexCenter";
-import { ManageSearch as ManageSearchIcon } from "@mui/icons-material";
-import { useQuery } from "react-query";
-import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
-import AlertModal from "../../../../Common/AlertModal/AlertModal";
-import { URLS } from "../../../../constants";
+import React, { useMemo, useState } from 'react'
+import { useFormik } from 'formik'
+import { formatErrorMessage } from '../../../../../../../utils/formatting'
+import { TitleHeader } from '../../../../Common/TitleHeader'
+import { FlexCenter } from '../../../../../Common/FlexCenter'
+import { ManageSearch as ManageSearchIcon } from '@mui/icons-material'
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../../../utils/api'
+import AlertModal from '../../../../Common/AlertModal/AlertModal'
+import { URLS } from '../../../../constants'
+import { CircularProgress } from '@mui/material'
 
 const RegisterTruckStep2 = () => {
-  const navigate = useNavigate();
-  const { showNotification } = useNotification();
+  const navigate = useNavigate()
+  const { showNotification } = useNotification()
   const [counter, setCounter] = useState(0)
-  const [isScanSuccessModalOpen, setIsScanSuccessModalOpen] = useState(false);
-  const [scanSuccessModalContent, setScanSuccessModalContent] = useState({ title: '', buttons: [] });
-  const [isInvalidScanModalOpen, setIsInvalidScanModalOpen] = useState(false);
-  const [invalidScanModalContent, setInvalidScanModalContent] = useState({ title: '', description: '', buttons: [] });
-  const [params] = useSearchParams();
+  const [isScanSuccessModalOpen, setIsScanSuccessModalOpen] = useState(false)
+  const [scanSuccessModalContent, setScanSuccessModalContent] = useState({ title: '', buttons: [] })
+  const [isInvalidScanModalOpen, setIsInvalidScanModalOpen] = useState(false)
+  const [invalidScanModalContent, setInvalidScanModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
+  const [params] = useSearchParams()
   const id = params.get('id')
 
   const { data: truck, isLoading } = useQuery(
@@ -31,7 +43,7 @@ const RegisterTruckStep2 = () => {
       const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/hub/summary/' + id, null)
       setCounter(truck.supportCounter)
 
-      return truck;
+      return truck
     },
     {
       onError: error => {
@@ -51,7 +63,6 @@ const RegisterTruckStep2 = () => {
     validationSchema: validationSchema,
     onSubmit: async () => {
       try {
-
       } catch (error) {
         showNotification({
           message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -64,7 +75,10 @@ const RegisterTruckStep2 = () => {
   const toggleIsSearching = async () => {
     try {
       if (formik.values.supportCode.length > 0) {
-        const resp = await makeCorePostRequest(`/shop-reception-mobile/support/hub/register/scan/${id}`, { supportCode: formik.values.supportCode })
+        const resp = await makeCorePostRequest(
+          `/shop-reception-mobile/support/hub/register/scan/${id}`,
+          { supportCode: formik.values.supportCode }
+        )
         resp.scanSuccess && openScanSuccessModal(resp.message, resp.supportId)
         !resp.scanSuccess && openInvalidScanModal(resp.message)
       }
@@ -84,7 +98,7 @@ const RegisterTruckStep2 = () => {
           label: 'Refuză',
           onClick: () => {
             formik.setFieldValue('supportCode', '')
-            setIsScanSuccessModalOpen(false);
+            setIsScanSuccessModalOpen(false)
           },
           color: 'primary'
         },
@@ -92,10 +106,13 @@ const RegisterTruckStep2 = () => {
           label: 'Urc în camion  confirm',
           onClick: async () => {
             try {
-              const resp = await makeCorePostRequest(`/shop-reception-mobile/support/hub/add-in-truck/${id}`, { supportId: supportId })
+              const resp = await makeCorePostRequest(
+                `/shop-reception-mobile/support/hub/add-in-truck/${id}`,
+                { supportId: supportId }
+              )
               formik.resetForm()
               setCounter(resp.supportCounter)
-              setIsScanSuccessModalOpen(false);
+              setIsScanSuccessModalOpen(false)
             } catch (error) {
               showNotification({
                 message: `Eroare la trimitere. ${formatErrorMessage(error)}`,
@@ -104,13 +121,13 @@ const RegisterTruckStep2 = () => {
             }
           },
           color: 'primary'
-        },
+        }
       ]
-    });
-    setIsScanSuccessModalOpen(true);
-  };
+    })
+    setIsScanSuccessModalOpen(true)
+  }
 
-  const openInvalidScanModal = async (message) => {
+  const openInvalidScanModal = async message => {
     setInvalidScanModalContent({
       title: 'Atenție!',
       description: message,
@@ -119,26 +136,26 @@ const RegisterTruckStep2 = () => {
           label: 'Ok',
           onClick: () => {
             formik.setFieldValue('supportCode', '')
-            setIsInvalidScanModalOpen(false);
+            setIsInvalidScanModalOpen(false)
           },
           color: 'primary'
-        },
+        }
       ]
-    });
-    setIsInvalidScanModalOpen(true);
-  };
+    })
+    setIsInvalidScanModalOpen(true)
+  }
 
   const closeScanSuccessModal = () => {
-    setIsScanSuccessModalOpen(false);
-  };
+    setIsScanSuccessModalOpen(false)
+  }
 
   const closeInvalidScanModal = () => {
-    setIsInvalidScanModalOpen(false);
-  };
+    setIsInvalidScanModalOpen(false)
+  }
 
   const handleSubmit = async () => {
-    let time = new Date().toLocaleTimeString();
-    let date = new Date().toISOString();
+    let time = new Date().toLocaleTimeString()
+    let date = new Date().toISOString()
     const payload = {
       receptionTruckId: id,
       supportsNumber: null,
@@ -154,9 +171,9 @@ const RegisterTruckStep2 = () => {
       inShopReleaseHour: null
     }
     try {
-    await makeCorePostRequest('/shop-reception-mobile/support-traceability', payload)
-    navigate(`${URLS.AUTH_REGISTER_TRUCK_STEP_3}?id=${id}`)
-      } catch (error) {
+      await makeCorePostRequest('/shop-reception-mobile/support-traceability', payload)
+      navigate(`${URLS.AUTH_REGISTER_TRUCK_STEP_3}?id=${id}`)
+    } catch (error) {
       showNotification({
         message: `Eroare la trimitere. ${formatErrorMessage(error)}`,
         type: 'error'
@@ -165,23 +182,25 @@ const RegisterTruckStep2 = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
-      maxWidth='xs'
+      maxWidth="xs"
       items={[
-        <TitleHeader title='ÎNREGISTREAZǍ CAMION' />,
+        <TitleHeader title="ÎNREGISTREAZǍ CAMION" />,
         <FlexCenter>
           <Input
-            type='text'
-            label='Cod Suport'
-            variant='standard'
-            width='100%'
+            type="text"
+            label="Cod Suport"
+            variant="standard"
+            width="100%"
             value={formik.values.supportCode}
-            onChange={event => formik.setFieldValue('supportCode', (event.target as HTMLInputElement).value)}
+            onChange={event =>
+              formik.setFieldValue('supportCode', (event.target as HTMLInputElement).value)
+            }
             error={!!formik.errors.supportCode}
             helperText={formik.errors.supportCode as string}
           />
@@ -191,16 +210,20 @@ const RegisterTruckStep2 = () => {
         </FlexCenter>,
         <Divider>SAU</Divider>,
         <Button
-          type='button'
-          variant='contained'
-          label='Suporți finalizați'
-          size='large'
+          type="button"
+          variant="contained"
+          label="Suporți finalizați"
+          size="large"
           style={{ width: '100%', display: counter === 0 ? 'none' : 'block' }}
           onClick={() => handleSubmit()}
         />,
         <>
-          <Typography variant='medium' component='p'>Numǎr camion: {truck?.truckNumber}</Typography>
-          <Typography variant='medium' component='p'>Numǎr suporți scanați: {counter}</Typography>
+          <Typography variant="medium" component="p">
+            Numǎr camion: {truck?.truckNumber}
+          </Typography>
+          <Typography variant="medium" component="p">
+            Numǎr suporți scanați: {counter}
+          </Typography>
         </>,
         <AlertModal
           open={isScanSuccessModalOpen}

@@ -4,11 +4,11 @@ import { TitleHeader } from '../../../Common/TitleHeader'
 import { URLS } from '../../../constants'
 import { useNavigate } from 'react-router-dom'
 import { TruckCard } from '../../../../admin/Common/TruckCard'
-import { useNotification } from "../../../../../../hooks";
-import { useQuery } from "react-query";
-import { makeCoreGetRequest } from "../../../../../../utils/api";
-import { formatErrorMessage } from "../../../../../../utils/formatting";
-import React from "react";
+import { useNotification } from '../../../../../../hooks'
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest } from '../../../../../../utils/api'
+import { formatErrorMessage } from '../../../../../../utils/formatting'
+import { CircularProgress } from '@mui/material'
 
 const ExpenditureProcessing = () => {
   const navigate = useNavigate()
@@ -30,35 +30,37 @@ const ExpenditureProcessing = () => {
   )
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   let items = [
-    <TitleHeader title='ÎN PROCESARE EXPEDIȚIE' />,
-    !!trucks && trucks?.map((item, index) => (
-      <TruckCard
-        key={index}
-        onClick={() => {
-          navigate(`${URLS.AUTH_REGISTER_TRUCK_STEP_2}?id=${item.id}`)
-        }}
-        truck={item} />
-    ))
+    <TitleHeader title="ÎN PROCESARE EXPEDIȚIE" />,
+    !!trucks &&
+      trucks?.map((item, index) => (
+        <TruckCard
+          key={index}
+          onClick={() => {
+            navigate(`${URLS.AUTH_REGISTER_TRUCK_STEP_2}?id=${item.id}`)
+          }}
+          truck={item}
+        />
+      ))
   ]
 
   if (!trucks || trucks.length === 0) {
     items.push(
-      <Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>
-        Nu existǎ camioane în lucru</Typography>
+      <Typography
+        variant="light"
+        component="p"
+        style={{ textAlign: 'center', textTransform: 'uppercase' }}
+      >
+        Nu existǎ camioane în lucru
+      </Typography>
     )
   }
 
   return (
-    <Grid
-      gridContainerStyle={{ marginTop: '20px' }}
-      maxWidth='xs'
-      items={items}
-      itemsPerRow={1}
-    />
+    <Grid gridContainerStyle={{ marginTop: '20px' }} maxWidth="xs" items={items} itemsPerRow={1} />
   )
 }
 
