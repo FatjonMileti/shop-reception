@@ -37,8 +37,7 @@ const Step5 = () => {
             responseType: 'arraybuffer'
           }
         )
-        
-        
+
         // await makeCoreGetRequest(url, {
         //   responseType: 'arraybuffer'
         // })
@@ -97,7 +96,8 @@ const Step5 = () => {
       ;(async () => {
         try {
           const base64Pdf: any = await blobToBase64(pdfBlob)
-          setCurrentUrl(base64Pdf)
+          const dataUrl = `data:application/pdf;base64,${base64Pdf.split(',')[1]}`
+          setCurrentUrl(dataUrl)
         } catch (error) {
           console.error('Conversion error:', error)
           showNotification({

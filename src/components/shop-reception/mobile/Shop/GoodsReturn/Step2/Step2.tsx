@@ -21,6 +21,8 @@ const Step2 = () => {
   const [invalidSupportTypeModalContent, setInvalidSupportTypeModalContent] = useState({ title: '', description: '', buttons: [] })
   const [isReturnableModalOpen, setIsReturnableModalOpen] = useState(false)
   const [returnableModalContent, setReturnableModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [isSupportScanModalOpen, setIsSupportScanModalOpen] = useState(false)
+  const [supportScanModalContent, setSupportScanModalContent] = useState({ title: '', description: '', buttons: [] })
   const [packageScanned, setPackageScanned] = useState(false)
   const [searchCode, setSearchCode] = useState('')
   const id = location.state?.id || '';
@@ -128,13 +130,39 @@ const Step2 = () => {
     setIsReturnableModalOpen(false);
   };
 
+  const showSupportScanModal = () => {
+    setSupportScanModalContent({
+      title: 'Atenție!',
+      description: 'Cod de ambalaj necunoscut!',
+      buttons: [
+        {
+          label: 'Ok',
+          onClick: () => {
+            setSearchCode('');
+            setIsSupportScanModalOpen(false);
+          },
+          color: 'primary'
+        }
+      ]
+    });
+    setIsSupportScanModalOpen(true);
+  }
+
+  const closeSupportScanModal = () => {
+    setIsSupportScanModalOpen(false);
+  };
+
   const supportScan = () => {
     if (!searchCode) return;
 
     try {
-      makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/support-type/scan/' + id, { supportTypeCode: searchCode }).then(r => {
+      makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/support-type/scan/' + id, searchCode, {
+        headers: {
+          'Content-Type': 'text/plain'
+        }
+      }).then(r => {
         if (!r.scanSuccess) {
-
+          showSupportScanModal();
         } else if (returnTruckModel.depositOrHubName.includes('CHEP') && !r.supportType.includes('CHEP')) {
           showInvalidSupportTypeModal();
         } else {
@@ -190,6 +218,13 @@ const Step2 = () => {
         <ManageSearchIcon />
       </IconButton>
     </div>,
+    <AlertModal
+      open={isSupportScanModalOpen}
+      handleClose={closeSupportScanModal}
+      title={supportScanModalContent.title}
+      description={supportScanModalContent.description}
+      buttons={supportScanModalContent.buttons}
+    />,
     <Input
       type='select'
       label='Cauta tip suport'
