@@ -1,31 +1,38 @@
 import { Grid } from '../../../../Common/Grid'
 import { Button, Checkbox, Input } from '@fullscreendigital/carrefour-dex-fe'
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState } from 'react'
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../hooks'
 
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { URLS } from '../../../constants'
-import { useQuery } from "react-query";
-import { TitleHeader } from "../../../Common/TitleHeader";
-import { makeCoreGetRequest, makeCorePostRequest  } from "../../../../../../utils/api";
-import AlertModal from "../../../Common/AlertModal/AlertModal";
+import { useQuery } from 'react-query'
+import { TitleHeader } from '../../../Common/TitleHeader'
+import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../../utils/api'
+import AlertModal from '../../../Common/AlertModal/AlertModal'
+import { CircularProgress } from '@mui/material'
 
 const RecordReturn = () => {
   const navigate = useNavigate()
   const { showNotification } = useNotification()
-  const [params] = useSearchParams();
-  const truckId = params.get('id') || 0;
+  const [params] = useSearchParams()
+  const truckId = params.get('id') || 0
   const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false)
-  const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
 
-  const { data: depositList, isLoading} = useQuery(
+  const { data: depositList, isLoading } = useQuery(
     'recordReturn',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/return/registration/deposit-and-hub-returns', null)
-
+      return await makeCoreGetRequest(
+        '/shop-reception-mobile/truck/hub/return/registration/deposit-and-hub-returns',
+        null
+      )
     },
     {
       onError: error => {
@@ -37,10 +44,13 @@ const RecordReturn = () => {
     }
   )
 
-  const { data: truck, isLoading: truckLoading} = useQuery(
+  const { data: truck, isLoading: truckLoading } = useQuery(
     'recordTruck',
     async () => {
-      const truck = await makeCoreGetRequest('/shop-reception-mobile/truck/exit/truck/' + truckId, null)
+      const truck = await makeCoreGetRequest(
+        '/shop-reception-mobile/truck/exit/truck/' + truckId,
+        null
+      )
       await formik.setValues({
         depositId: truck.depositId,
         truckNumber: truck.truckNumber,
@@ -49,10 +59,9 @@ const RecordReturn = () => {
         productReturn: truck.productReturn
       })
       return truck
-
     },
     {
-      enabled:!!truckId,
+      enabled: !!truckId,
       onError: error => {
         showNotification({
           message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
@@ -70,26 +79,28 @@ const RecordReturn = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       const payload = {
-        "id": truckId,
-        "truckNumber": values.truckNumber,
-        "driverName": values.driverName,
-        "packageReturn": values.packageReturn,
-        "productReturn": false,
-        "depositType": null,
-        "depositId": values.depositId,
-        "noticeNumber": null,
-        "shopName": null,
-        "hubCode": null
+        id: truckId,
+        truckNumber: values.truckNumber,
+        driverName: values.driverName,
+        packageReturn: values.packageReturn,
+        productReturn: false,
+        depositType: null,
+        depositId: values.depositId,
+        noticeNumber: null,
+        shopName: null,
+        hubCode: null
       }
       try {
-        const resp = await makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/save', payload)
+        const resp = await makeCorePostRequest(
+          '/shop-reception-mobile/truck/hub/return/registration/save',
+          payload
+        )
 
         if (resp.id) {
           navigate(`${URLS.AUTH_RECORD_RETURN_STEP_2}?id=${resp.id}`)
         } else {
           openInvalidTruckNumberModal()
         }
-
       } catch (error) {
         showNotification({
           message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -102,73 +113,82 @@ const RecordReturn = () => {
   const openInvalidTruckNumberModal = () => {
     setInvalidTruckNumberModalContent({
       title: 'Atenție!',
-      description: 'Există deja un camion în curs de înregistrare cu acest număr pentru aceeasi dată!',
+      description:
+        'Există deja un camion în curs de înregistrare cu acest număr pentru aceeasi dată!',
       buttons: [
         {
           label: 'Ok',
           onClick: () => setIsInvalidTruckNumberModalOpen(false),
           color: 'primary'
-        },
+        }
       ]
-    });
-    setIsInvalidTruckNumberModalOpen(true);
-  };
+    })
+    setIsInvalidTruckNumberModalOpen(true)
+  }
 
   const closeInvalidTruckNumberModal = () => {
-    setIsInvalidTruckNumberModalOpen(false);
-  };
+    setIsInvalidTruckNumberModalOpen(false)
+  }
 
   if (isLoading || truckLoading) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
-      maxWidth='xs'
+      maxWidth="xs"
       items={[
-        <TitleHeader title='ÎNREGISTRARE RETUR' />,
+        <TitleHeader title="ÎNREGISTRARE RETUR" />,
         <Input
-          type='select'
-          label='Destinație'
-          variant='standard'
-          width='100%'
+          type="select"
+          label="Destinație"
+          variant="standard"
+          width="100%"
           value={formik.values.depositId}
           values={depositList?.map(deposit => ({ value: deposit.id, label: deposit.name }))}
-          onChange={event => formik.setFieldValue('depositId', (event.target as HTMLInputElement).value)}
+          onChange={event =>
+            formik.setFieldValue('depositId', (event.target as HTMLInputElement).value)
+          }
           error={!!formik.errors.depositId}
           helperText={formik.errors.depositId as string}
         />,
         <Input
-          type='text'
-          label='Numǎr înmatriculare'
-          variant='standard'
-          width='100%'
+          type="text"
+          label="Numǎr înmatriculare"
+          variant="standard"
+          width="100%"
           value={formik.values.truckNumber}
-          onChange={event => formik.setFieldValue('truckNumber', (event.target as HTMLInputElement).value)}
+          onChange={event =>
+            formik.setFieldValue('truckNumber', (event.target as HTMLInputElement).value)
+          }
           error={!!formik.errors.truckNumber}
           helperText={formik.errors.truckNumber as string}
         />,
         <Input
-          type='text'
-          label='Șofer'
-          variant='standard'
-          width='100%'
+          type="text"
+          label="Șofer"
+          variant="standard"
+          width="100%"
           value={formik.values.driverName}
-          onChange={event => formik.setFieldValue('driverName', (event.target as HTMLInputElement).value)}
+          onChange={event =>
+            formik.setFieldValue('driverName', (event.target as HTMLInputElement).value)
+          }
           error={!!formik.errors.driverName}
           helperText={formik.errors.driverName as string}
         />,
         <Checkbox
           checked={formik.values.packageReturn}
-          onChange={event => formik.setFieldValue('packageReturn', (event.target as HTMLInputElement).checked)}
-          label='Retur ambalaje'
+          onChange={event =>
+            formik.setFieldValue('packageReturn', (event.target as HTMLInputElement).checked)
+          }
+          label="Retur ambalaje"
         />,
         <Button
-          style={{width: '100%'}}
-          type='button'
-          variant='contained'
-          label='PASUL URMǍTOR'
+          style={{ width: '100%' }}
+          type="button"
+          variant="contained"
+          label="PASUL URMǍTOR"
           disabled={formik.values.packageReturn === false && formik.values.productReturn === false}
           onClick={() => formik.handleSubmit()}
         />,

@@ -1,14 +1,13 @@
 import { Grid } from '../../../../Common/Grid'
 import { Typography } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from '../../../Common/TitleHeader'
-import { useNotification } from "../../../../../../hooks";
-import { useQuery } from "react-query";
-import { makeCoreGetRequest } from "../../../../../../utils/api";
-import { formatErrorMessage } from "../../../../../../utils/formatting";
-import { TruckCard } from "../../../../admin/Common/TruckCard";
-import React from "react";
-import { URLS } from "../../../constants";
-import { useNavigate } from "react-router-dom";
+import { useNotification } from '../../../../../../hooks'
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest } from '../../../../../../utils/api'
+import { formatErrorMessage } from '../../../../../../utils/formatting'
+import { TruckCard } from '../../../../admin/Common/TruckCard'
+import { useNavigate } from 'react-router-dom'
+import { CircularProgress } from '@mui/material'
 
 const ShippedTrucks = () => {
   const navigate = useNavigate()
@@ -31,35 +30,37 @@ const ShippedTrucks = () => {
   )
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   let items = [
-    <TitleHeader title='CAMIOANE EXPEDIATE' />,
-    !!trucks && trucks.map((item: any, index) => (
-      <TruckCard
-        key={index}
-        onClick={() => {
-          // navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, { state: { item } })
-        }}
-        truck={item} />
-    ))
+    <TitleHeader title="CAMIOANE EXPEDIATE" />,
+    !!trucks &&
+      trucks.map((item: any, index) => (
+        <TruckCard
+          key={index}
+          onClick={() => {
+            // navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, { state: { item } })
+          }}
+          truck={item}
+        />
+      ))
   ]
 
   if (trucks?.length === 0) {
     items.push(
-      <Typography variant='light' component='p' style={{ textAlign: 'center', textTransform: 'uppercase' }}>
-        Nu existǎ camioane expediate.</Typography>
+      <Typography
+        variant="light"
+        component="p"
+        style={{ textAlign: 'center', textTransform: 'uppercase' }}
+      >
+        Nu existǎ camioane expediate.
+      </Typography>
     )
   }
 
   return (
-    <Grid
-      gridContainerStyle={{ marginTop: '20px' }}
-      maxWidth='xs'
-      items={items}
-      itemsPerRow={1}
-    />
+    <Grid gridContainerStyle={{ marginTop: '20px' }} maxWidth="xs" items={items} itemsPerRow={1} />
   )
 }
 

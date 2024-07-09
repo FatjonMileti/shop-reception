@@ -2,28 +2,35 @@ import { Grid } from '../../../../../Common/Grid'
 import { Button, Typography, Table } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from '../../../../Common/TitleHeader'
 import { columns } from './helpers'
-import { useNotification } from "../../../../../../../hooks";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../../utils/api";
-import { formatErrorMessage } from "../../../../../../../utils/formatting";
-import React, { useState } from "react";
-import { TableRowType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table";
-import AlertModal from "../../../../Common/AlertModal/AlertModal";
-
+import { useNotification } from '../../../../../../../hooks'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../../../utils/api'
+import { formatErrorMessage } from '../../../../../../../utils/formatting'
+import React, { useState } from 'react'
+import { TableRowType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table/Table'
+import AlertModal from '../../../../Common/AlertModal/AlertModal'
+import { CircularProgress } from '@mui/material'
 
 const ExpectedReturnDetailFinal = () => {
-  const { showNotification } = useNotification();
+  const { showNotification } = useNotification()
   const navigate = useNavigate()
-  const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false);
-  const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({ title: '', description: '', buttons: [] });
-  const [params] = useSearchParams();
-  const truckId = Number(params.get('id'));
+  const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false)
+  const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
+  const [params] = useSearchParams()
+  const truckId = Number(params.get('id'))
 
-  const { data, isLoading} = useQuery(
+  const { data, isLoading } = useQuery(
     'getSummaryById',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/summary/' + truckId, null)
+      return await makeCoreGetRequest(
+        '/shop-reception-mobile/truck/hub/exit/summary/' + truckId,
+        null
+      )
     },
     {
       initialData: [],
@@ -32,65 +39,78 @@ const ExpectedReturnDetailFinal = () => {
           message: `Error while fetching truck. ${formatErrorMessage(error)}`,
           type: 'error'
         })
-      },
+      }
     }
   )
 
   const openInvalidTruckNumberModal = async () => {
-      setInvalidTruckNumberModalContent({
-        title: 'Confirmaţi finalizarea recepţiei ambalajelor?',
-        description: '',
-        buttons: [
-          {
-            label: 'Finalizare',
-            onClick: async () => {
-              await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/finalise-return/' + truckId, null);
-              setIsInvalidTruckNumberModalOpen(false);
-              navigate('/goodsReturn')
-            },
-            color: 'primary'
+    setInvalidTruckNumberModalContent({
+      title: 'Confirmaţi finalizarea recepţiei ambalajelor?',
+      description: '',
+      buttons: [
+        {
+          label: 'Finalizare',
+          onClick: async () => {
+            await makeCorePostRequest(
+              '/shop-reception-mobile/truck/hub/exit/finalise-return/' + truckId,
+              null
+            )
+            setIsInvalidTruckNumberModalOpen(false)
+            navigate('/goodsReturn')
           },
-          {
-            label: 'Continuă verificarea',
-            onClick: () => setIsInvalidTruckNumberModalOpen(false),
-            color: 'primary'
-          },
-        ]
-      });
-    setIsInvalidTruckNumberModalOpen(true);
-  };
+          color: 'primary'
+        },
+        {
+          label: 'Continuă verificarea',
+          onClick: () => setIsInvalidTruckNumberModalOpen(false),
+          color: 'primary'
+        }
+      ]
+    })
+    setIsInvalidTruckNumberModalOpen(true)
+  }
 
   const closeInvalidTruckNumberModal = () => {
-    setIsInvalidTruckNumberModalOpen(false);
-  };
+    setIsInvalidTruckNumberModalOpen(false)
+  }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
-      maxWidth='xs'
+      maxWidth="xs"
       items={[
-        <TitleHeader title='RETURURI AȘTEPTATE CAMION' />,
+        <TitleHeader title="RETURURI AȘTEPTATE CAMION" />,
         <>
-          {data?.truckNumber && <Typography variant="medium" component="p">{data?.truckNumber} / {data?.driverName}</Typography>}
-          <Typography variant='medium' component='p'>{data?.shopNamesAndCodes}</Typography>
+          {data?.truckNumber && (
+            <Typography variant="medium" component="p">
+              {data?.truckNumber} / {data?.driverName}
+            </Typography>
+          )}
+          <Typography variant="medium" component="p">
+            {data?.shopNamesAndCodes}
+          </Typography>
         </>,
-        <Typography variant='medium' component='h4'>Sumar Recepție Ambalaje</Typography>,
-        !!data?.supportList && (<Table
-          columns={columns}
-          isLoading={false}
-          rows={data?.supportList as TableRowType[]}
-          disablePagination={true}
-          hideCheckbox={true}
-        />),
+        <Typography variant="medium" component="h4">
+          Sumar Recepție Ambalaje
+        </Typography>,
+        !!data?.supportList && (
+          <Table
+            columns={columns}
+            isLoading={false}
+            rows={data?.supportList as TableRowType[]}
+            disablePagination={true}
+            hideCheckbox={true}
+          />
+        ),
         <Button
-          style={{ width: "100%" }}
-          type='button'
-          variant='contained'
-          label='FINALIZEAZĂ'
+          style={{ width: '100%' }}
+          type="button"
+          variant="contained"
+          label="FINALIZEAZĂ"
           onClick={openInvalidTruckNumberModal}
         />,
         <AlertModal

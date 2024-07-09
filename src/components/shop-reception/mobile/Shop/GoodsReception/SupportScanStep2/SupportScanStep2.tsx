@@ -13,6 +13,7 @@ import ImageUpload from '../../../Common/ImageUpload/ImageUpload'
 import { useLocation, useNavigate } from 'react-router-dom'
 import AlertModal from '../../../Common/AlertModal/AlertModal'
 import { URLS } from '../../../constants'
+import { CircularProgress } from '@mui/material'
 
 const SupportScanStep2 = () => {
   const { showNotification } = useNotification()
@@ -125,7 +126,7 @@ const SupportScanStep2 = () => {
   )
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   const handleSuccess = id => {

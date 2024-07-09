@@ -7,6 +7,7 @@ import { makeCorePostRequest } from '../../../../../../utils/api'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../hooks'
 import { useEffect, useState } from 'react'
+import { CircularProgress } from '@mui/material'
 
 const Step5 = () => {
   const { showNotification } = useNotification()
@@ -80,7 +81,7 @@ const Step5 = () => {
   }
 
   if (isLoadingPdf) {
-    return <div>Loading...</div>
+    return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
   return (
