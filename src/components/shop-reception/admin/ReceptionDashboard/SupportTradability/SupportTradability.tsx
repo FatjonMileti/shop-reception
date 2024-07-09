@@ -46,6 +46,7 @@ const SupportTradability = () => {
         message: `A aparut o eroare la obtinerea datelor. ${formatErrorMessage(error)}`,
         type: 'error'
       })
+      setIsLoading(false)
     }
   }
 

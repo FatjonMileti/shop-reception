@@ -6,6 +6,17 @@ import dayjs from 'dayjs'
 import { ViewActionIcon } from 'icons'
 import { formatUIDate } from 'utils/helpers'
 
+export const statusColorMapping = {
+  'Înregistrat': 'orange',
+  'În procesare': 'blue',
+  'Procesat': 'black',
+  'Parțial trimis la meti': 'blue',
+  'Trimis la Meti': 'green',
+  'Resigilat': 'orange',
+  'Expediat din HUB': 'orange',
+  'În procesare în HUB': 'blue'
+}
+
 export const columns = navigate => [
   {
     title: 'Magazin',
@@ -126,10 +137,13 @@ export const columns = navigate => [
   },
   {
     title: 'Status',
-    field: 'statusValue',
+    field: 'status',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    render: row => (
+      <div style={{ color: statusColorMapping[row.statusValue] || 'black' }}>{row.statusValue}</div>
+    )
   },
   {
     title: 'Dată înregistrare',

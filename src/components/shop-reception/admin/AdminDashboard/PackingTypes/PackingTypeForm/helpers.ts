@@ -13,7 +13,7 @@ export const getValidationSchema = (editItem: PackingType) =>
         label: Yup.string()
       })
     ),
-    code: Yup.string().nullable(),
+    code: Yup.string().required('Campul este obligatoriu.'),
     name: Yup.string()
       .test('notOnlySpaces', 'Campul trebuie sa contina caractere.', value => {
         return /\S/.test(value)

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Modal } from 'components/core-ui/Modal'
 import { useFormik } from 'formik'
 import { useNotification } from 'hooks'
-import { Box, Grid } from '@mui/material'
+import { Box, CircularProgress, Grid } from '@mui/material'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { Button, FormTable } from '@fullscreendigital/carrefour-dex-fe'
 import { toTableGETUrl } from 'components/core-ui/Table/serializers'
@@ -26,8 +26,8 @@ const AdminStoreForm: React.FC<StoreIntervalModalProps> = props => {
   const [tableItems, setTableItems] = useState<any[]>([])
   const [initialValues, setInitialValues] = useState([])
 
-  const data = useQuery(
-    ['store-delivery-interval'],
+  const { data, isLoading, isFetching } = useQuery(
+    ['store-delivery-intervals'],
     async () => {
       const response = await makeCoreGetRequest(
         `/shop-reception/shops/delivery-interval/${item.id}`
@@ -44,7 +44,8 @@ const AdminStoreForm: React.FC<StoreIntervalModalProps> = props => {
           )}`,
           type: 'error'
         })
-      }
+      },
+      enabled: isOpen
     }
   )
 
@@ -84,7 +85,7 @@ const AdminStoreForm: React.FC<StoreIntervalModalProps> = props => {
   const columns: FormTableColoumnInterface[] = useMemo(
     () => getColumns(formik, setTableItems),
     [formik, setTableItems]
-  ) 
+  )
 
   return (
     <Modal
@@ -95,7 +96,11 @@ const AdminStoreForm: React.FC<StoreIntervalModalProps> = props => {
     >
       <Grid container spacing={2} className={ss.tableGrid}>
         <Box className={ss.formTableContainer}>
-          <FormTable columns={columns} rows={tableItems} />
+          {isLoading || isFetching ? (
+            <CircularProgress color="primary" disableShrink />
+          ) : (
+            <FormTable columns={columns} rows={tableItems} />
+          )}
         </Box>
 
         <Grid xs={12} item className={s.modalButtons}>
