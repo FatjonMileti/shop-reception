@@ -193,8 +193,6 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
               error={!!formik.errors.shopIds}
               helperText={formik.errors.shopIds as string}
               multiple
-              // value={shopTypes?.selectedOptions}
-              // value={formik.values.shopIds}
               value={formik.values.shopIds}
               options={shopTypes?.allOptions}
             />

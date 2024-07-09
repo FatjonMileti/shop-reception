@@ -16,6 +16,6 @@ export const getInitialValues = (editItem: AdminRegion, shopTypes: any) => {
     name: editItem?.name || null,
     responsible: editItem?.responsible || null,
     active: editItem?.active || false,
-    shopIds: shopTypes?.selectedOptions || [{label: '123', value: '123'}]
+    shopIds: shopTypes?.selectedOptions || []
   }
 }
