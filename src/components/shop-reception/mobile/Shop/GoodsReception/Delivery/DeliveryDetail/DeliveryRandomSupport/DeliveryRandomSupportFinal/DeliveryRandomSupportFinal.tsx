@@ -452,7 +452,6 @@ const DeliveryRandomSupportFinal = () => {
               uploadUrl={`/shop-reception-mobile/integral/upload/${support.supportId}/${formik.values.productId}`}
               onSuccess={() => handleSuccess()}
               onError={handleError}
-              inputId={`support${support.supportId}`}
             />
           )}
         </div>

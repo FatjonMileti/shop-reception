@@ -118,7 +118,6 @@ const Step4 = () => {
               uploadUrl={`/shop-reception-mobile/truck/shop/exit/image/` + id}
               onSuccess={handleSuccess}
               onError={handleError}
-              inputId={`exitSeal${idx}`}
             />
           </div>
         )),

@@ -214,7 +214,6 @@ const ExpectedReturnDetailStep3 = () => {
           uploadUrl={`/shop-reception-mobile/truck/hub/return/registration/image/` + rowData.id + `?notice=false`}
           onSuccess={() => handleSuccess(rowData.id)}
           onError={handleError}
-          inputId={`support${rowData.id}`}
         />
       )
     },

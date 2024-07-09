@@ -220,7 +220,6 @@ const ExpectedTrucksStep4 = () => {
                             type: 'error'
                           })
                         }
-                        inputId={`auxiliary`}
                       />
                     </Grid>
                   </Grid>

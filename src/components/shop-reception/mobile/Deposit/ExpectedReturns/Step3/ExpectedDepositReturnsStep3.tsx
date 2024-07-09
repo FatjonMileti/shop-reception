@@ -153,7 +153,6 @@ const ExpectedDepositReturnsStep3 = () => {
                         type: 'error'
                       })
                     }
-                    inputId={`support-${supportItem?.id}`}
                   />
                 </TableCell>
               </TableRow>

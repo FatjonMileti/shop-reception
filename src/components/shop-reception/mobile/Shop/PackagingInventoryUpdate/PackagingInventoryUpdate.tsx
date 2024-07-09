@@ -143,7 +143,6 @@ const PackagingInventoryUpdate = () => {
               uploadUrl={'/shop-reception-mobile/support/shop/upload/' + selectedSupportId}
               onSuccess={handleSuccess}
               onError={handleError}
-              inputId='defective'
             />
           )}
         </div>,

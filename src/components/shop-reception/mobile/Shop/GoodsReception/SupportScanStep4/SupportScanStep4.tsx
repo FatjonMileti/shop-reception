@@ -20,7 +20,6 @@ const SupportScanStep4 = () => {
   const navigate = useNavigate();
   const location = useLocation()
   const id = location.state || '';
-  console.log(id);
 
   const { data: manualTruck, isLoading: isLoadingManualTruck} = useQuery(
     'manualTruck',

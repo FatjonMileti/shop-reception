@@ -1,89 +1,113 @@
-import { Grid } from "../../../../Common/Grid";
-import { Button, Input, Table } from "@fullscreendigital/carrefour-dex-fe";
-import { TitleHeader } from "../../../Common/TitleHeader";
-import { getValidationSchema, initialValues } from "./helpers";
-import { useFormik } from "formik";
-import React, { useMemo, useState } from "react";
-import { useQuery } from "react-query";
-import { makeCoreGetRequest, makeCorePostRequest } from "../../../../../../utils/api";
-import { formatErrorMessage } from "../../../../../../utils/formatting";
-import { useNotification } from "../../../../../../hooks";
-import { TableHeaderType } from "@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table";
-import ImageUpload from "../../../Common/ImageUpload/ImageUpload";
-import { useLocation, useNavigate } from "react-router-dom";
-import AlertModal from "../../../Common/AlertModal/AlertModal";
-import { URLS } from "../../../constants";
+import { Grid } from '../../../../Common/Grid'
+import { Button, Input, Table } from '@fullscreendigital/carrefour-dex-fe'
+import { TitleHeader } from '../../../Common/TitleHeader'
+import { getValidationSchema, initialValues } from './helpers'
+import { useFormik } from 'formik'
+import { useMemo, useState } from 'react'
+import { useQuery } from 'react-query'
+import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../../utils/api'
+import { formatErrorMessage } from '../../../../../../utils/formatting'
+import { useNotification } from '../../../../../../hooks'
+import { TableHeaderType } from '@fullscreendigital/carrefour-dex-fe/dist/cjs/components/Table'
+import ImageUpload from '../../../Common/ImageUpload/ImageUpload'
+import { useLocation, useNavigate } from 'react-router-dom'
+import AlertModal from '../../../Common/AlertModal/AlertModal'
+import { URLS } from '../../../constants'
 
 const SupportScanStep2 = () => {
   const { showNotification } = useNotification()
+
   const navigate = useNavigate()
+
   const location = useLocation()
-  // const { supportTypeId, supportId, truckId } = location.state;
-  const supportTypeId = "1";
-  const supportId = "111";
-  const truckId = "111";
-  const main = true;
+  const { supportTypeId, supportId, truckId } = location.state
+  const main = true
 
   const [isMissingValuesModalOpen, setIsMissingValuesModalOpen] = useState(false)
-  const [MissingValuesModalContent, setMissingValuesModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [MissingValuesModalContent, setMissingValuesModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
   const [isMandatorySupportModalOpen, setIsMandatorySupportModalOpen] = useState(false)
-  const [MandatorySupportModalContent, setMandatorySupportModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [MandatorySupportModalContent, setMandatorySupportModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
   const [isDifferentNumberModalOpen, setIsDifferentNumberModalOpen] = useState(false)
-  const [DifferentNumberModalContent, setDifferentNumberModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [DifferentNumberModalContent, setDifferentNumberModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
   const [isPriorityProductsModalOpen, setIsPriorityProductsModalOpen] = useState(false)
-  const [PriorityProductsModalContent, setPriorityProductsModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [PriorityProductsModalContent, setPriorityProductsModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
   const [isSensitiveAndShortDlcModalOpen, setIsSensitiveAndShortDlcModalOpen] = useState(false)
-  const [SensitiveAndShortDlcModalContent, setSensitiveAndShortDlcModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [SensitiveAndShortDlcModalContent, setSensitiveAndShortDlcModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
   const [isMoreSupportsConfirmModalOpen, setIsMoreSupportsConfirmModalOpen] = useState(false)
-  const [MoreSupportsConfirmModalContent, setMoreSupportsConfirmModalContent] = useState({ title: '', description: '', buttons: [] })
+  const [MoreSupportsConfirmModalContent, setMoreSupportsConfirmModalContent] = useState({
+    title: '',
+    description: '',
+    buttons: []
+  })
   const [getSecondarySupport, setGetSecondarySupport] = useState(false)
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
+
   const formik = useFormik({
     enableReinitialize: false,
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
-      let totalSupportNumber = 0;
-      let missingValue = false;
-      const message = "Există diferențe între cantitatea aşteptată şi cea descărcată pentru ";
-      let supportsNotOk = '';
+      let totalSupportNumber = 0
+      let missingValue = false
+      const message = 'Există diferențe între cantitatea aşteptată şi cea descărcată pentru '
+      let supportsNotOk = ''
       values.supportType.forEach(support => {
-        if (support.received === null) missingValue = true;
-        const total = Number(support.received);
-        totalSupportNumber += total;
+        missingValue = support.received !== null && support.hasImage
+        const total = Number(support.received)
+        totalSupportNumber += total
         supportTypeList.forEach(st => {
-          if (st.id === support.id && st.received !== total) {
-            supportsNotOk = supportsNotOk + st.name + ', ';
+          if (st.id === support.id && support.received !== null && st.received !== total) {
+            supportsNotOk = supportsNotOk + st.name + ', '
           }
         })
       })
 
       if (missingValue) {
-        openMissingValuesModal();
+        openMissingValuesModal()
       } else if (totalSupportNumber === 0) {
-        openMandatorySupportModal();
-      }  else if (supportsNotOk.length > 0) {
-        showDifferentNumberConfirmation(values.supportType, message + supportsNotOk);
+        openMandatorySupportModal()
+      } else if (supportsNotOk.length > 0) {
+        showDifferentNumberConfirmation(values.supportType, message + supportsNotOk)
       } else {
-        doSaveSupportTypes(values.supportType);
+        doSaveSupportTypes(values.supportType)
       }
     }
   })
 
-  const handleError = (error) => {
+  const handleError = error => {
     showNotification({
       message: `${formatErrorMessage(error)}`,
       type: 'error'
-    });
-  };
+    })
+  }
 
   const { data: supportTypeList, isLoading } = useQuery(
     'SupportPrincipalType',
     async () => {
-      const support = await makeCoreGetRequest('/shop-reception-mobile/support/principal/type', null)
-      await formik.setFieldValue("supportType", support)
+      const support = await makeCoreGetRequest('/shop-reception-mobile/support/shop/principal/type')
+      formik.setFieldValue('supportType', support)
       return support
     },
     {
@@ -92,25 +116,28 @@ const SupportScanStep2 = () => {
       onSuccess: data => {
         data.forEach((p, i) => {
           if (p.id === Number(supportTypeId)) {
-            formik.setFieldValue(`supportType[${i}].received`, 1);
-            p.received = 1;
+            formik.setFieldValue(`supportType[${i}].received`, 1)
+            p.received = 1
           }
         })
-      },
+      }
     }
   )
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
-  const handleSuccess = (id) => {
+  const handleSuccess = id => {
+    const newValues = formik.values.supportType.map(val =>
+      val.id === id ? { ...val, hasImage: true } : val
+    )
+    formik.setFieldValue('supportType', newValues)
     showNotification({
       message: 'Image uploaded successfully',
       type: 'success'
-    });
-  };
-
+    })
+  }
 
   const columns: Array<TableHeaderType> = [
     {
@@ -123,49 +150,71 @@ const SupportScanStep2 = () => {
       field: 'received',
       align: 'center',
       render: (rowData: any) => (
-        <div style={{display: "flex"}}>
-        <Input
-          type="number"
-          value={rowData.received}
-          onChange={(e) => {
-           Number((e.target as HTMLInputElement).value) >= 0 && formik.values.supportType.map((support, idx) => {
-              if (rowData.id === idx) {
-                formik.setFieldValue(`supportType[${idx}].received`, Number((e.target as HTMLInputElement).value))
-              }
-            })
-          }}
-          variant='standard'
-        />
-          {supportTypeList[rowData.id].received != formik.values.supportType[rowData.id].received &&
+        <div>
+          <Input
+            type="number"
+            value={rowData.received}
+            onChange={e => {
+              Number((e.target as HTMLInputElement).value) >= 0 &&
+                formik.values.supportType.map((support, idx) => {
+                  if (rowData.id === idx) {
+                    formik.setFieldValue(
+                      `supportType[${idx}].received`,
+                      Number((e.target as HTMLInputElement).value)
+                    )
+                  }
+                })
+            }}
+            variant="standard"
+          />
+          {supportTypeList[rowData.id].received !=
+            formik.values.supportType[rowData.id].received && (
             <ImageUpload
               uploadUrl={`/shop-reception-mobile/support/shop/upload/` + rowData.id}
               onSuccess={() => handleSuccess(rowData.id)}
               onError={handleError}
-              inputId={`support${rowData.id}`}
-            />}
+            />
+          )}
         </div>
       )
-    },
+    }
   ]
 
   const rows = formik.values.supportType.map((support, index) => ({
     id: index,
     name: support.name,
-    received: support.received,
+    received: support.received
   }))
 
-  const doSaveSupportTypes = (values) => {
+  const doSaveSupportTypes = values => {
     try {
-      makeCorePostRequest(`/shop-reception-mobile/support/shop/list/save/${main}/${truckId}/${supportId}`, values).then(resp => {
+      makeCorePostRequest(
+        `/shop-reception-mobile/support/shop/save/${main}/${truckId}/${supportId}`,
+        values
+      ).then(resp => {
         if (resp.priorityProducts?.length > 0) {
-          showPriorityProducts(resp.priorityProducts, resp.hasSensitiveProducts, resp.hasProductsWithShortDlc, resp.hasSgrProducts, resp.sgrProductsList);
-        }
-        else if (resp.hasSensitiveProducts || resp.hasProductsWithShortDlc || resp.hasSgrProducts) {
-          showSensitiveAndShortDlcInfo(resp.hasSensitiveProducts, resp.hasProductsWithShortDlc, resp.hasSgrProducts, resp.sgrProductsList);
+          showPriorityProducts(
+            resp.priorityProducts,
+            resp.hasSensitiveProducts,
+            resp.hasProductsWithShortDlc,
+            resp.hasSgrProducts,
+            resp.sgrProductsList
+          )
+        } else if (
+          resp.hasSensitiveProducts ||
+          resp.hasProductsWithShortDlc ||
+          resp.hasSgrProducts
+        ) {
+          showSensitiveAndShortDlcInfo(
+            resp.hasSensitiveProducts,
+            resp.hasProductsWithShortDlc,
+            resp.hasSgrProducts,
+            resp.sgrProductsList
+          )
         } else {
-          openMoreSupportsConfirm();
+          openMoreSupportsConfirm()
         }
-      });
+      })
     } catch (error) {
       showNotification({
         message: `Error while submitting. ${formatErrorMessage(error)}`,
@@ -174,75 +223,89 @@ const SupportScanStep2 = () => {
     }
   }
 
-  const showPriorityProducts = (priorityProducts, hasSensitiveProducts, hasProductsWithShortDlc, hasSgrProducts, sgrProducts) => {
-    let productsMessage = '';
+  const showPriorityProducts = (
+    priorityProducts,
+    hasSensitiveProducts,
+    hasProductsWithShortDlc,
+    hasSgrProducts,
+    sgrProducts
+  ) => {
+    let productsMessage = ''
     if (priorityProducts.length > 0) {
       priorityProducts.forEach(mess => {
-        productsMessage = productsMessage + mess + ', ';
-      });
+        productsMessage = productsMessage + mess + ', '
+      })
     }
     setPriorityProductsModalContent({
-      title: "Există produse prioritare pentru vânzare: ",
+      title: 'Există produse prioritare pentru vânzare: ',
       description: productsMessage,
       buttons: [
         {
           label: 'Ok',
           onClick: () => {
             if (hasSensitiveProducts || hasProductsWithShortDlc || hasSgrProducts) {
-              showSensitiveAndShortDlcInfo(hasSensitiveProducts, hasProductsWithShortDlc, hasSgrProducts, sgrProducts);
+              showSensitiveAndShortDlcInfo(
+                hasSensitiveProducts,
+                hasProductsWithShortDlc,
+                hasSgrProducts,
+                sgrProducts
+              )
+            } else {
+              openMoreSupportsConfirm()
             }
-            else {
-              openMoreSupportsConfirm();
-            }
-            setIsPriorityProductsModalOpen(false);
+            setIsPriorityProductsModalOpen(false)
           },
           color: 'primary'
-        },
+        }
       ]
-    });
-    setIsPriorityProductsModalOpen(true);
-  };
+    })
+    setIsPriorityProductsModalOpen(true)
+  }
 
   const closePriorityProducts = () => {
-    setIsPriorityProductsModalOpen(false);
-  };
+    setIsPriorityProductsModalOpen(false)
+  }
 
-  const { data: secondarySupport} = useQuery(
+  const { data: secondarySupport } = useQuery(
     'deleteSecondarySupport',
     async () => {
-      return await makeCoreGetRequest(`/shop-reception-mobile/support/secondary/delete?supportId=${supportId}`, null)
+      return await makeCoreGetRequest(
+        `/shop-reception-mobile/support/shop/secondary/delete?supportId=${supportId}`,
+        null
+      )
     },
     {
       enabled: getSecondarySupport,
       onError: handleError,
-      onSuccess: (data) => {
+      onSuccess: data => {
         if (data) {
-          navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, {state: {item: {id: truckId}}});
+          navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, { state: { item: { id: truckId } } })
         }
-      },
+      }
     }
   )
 
   const openMoreSupportsConfirm = () => {
     setMoreSupportsConfirmModalContent({
-      title: "Adaugă alte ambalaje",
+      title: 'Adaugă alte ambalaje',
       description: '',
       buttons: [
         {
           label: 'Nu',
           onClick: () => {
             setGetSecondarySupport(true)
-            setIsMoreSupportsConfirmModalOpen(false);
+            setIsMoreSupportsConfirmModalOpen(false)
           },
           color: 'primary'
         },
         {
           label: 'Da',
           onClick: () => {
-            setIsMoreSupportsConfirmModalOpen(false);
-            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_3, {state: {
-              supportId,
-              truckId
+            setIsMoreSupportsConfirmModalOpen(false)
+            navigate(URLS.AUTH_SUPPORT_SCAN_STEP_3, {
+              state: {
+                supportId,
+                truckId
               }
             })
           },
@@ -251,45 +314,50 @@ const SupportScanStep2 = () => {
       ]
     })
 
-    setIsMoreSupportsConfirmModalOpen(true);
+    setIsMoreSupportsConfirmModalOpen(true)
   }
 
   const closeMoreSupportsConfirm = () => {
-    setIsMoreSupportsConfirmModalOpen(false);
-  };
+    setIsMoreSupportsConfirmModalOpen(false)
+  }
 
-  const showSensitiveAndShortDlcInfo = (hasSensitiveProducts, hasShortDlcProducts, hasSgrProducts, sgrProducts) => {
-    let productsMessage = "";
+  const showSensitiveAndShortDlcInfo = (
+    hasSensitiveProducts,
+    hasShortDlcProducts,
+    hasSgrProducts,
+    sgrProducts
+  ) => {
+    let productsMessage = ''
     if (hasSensitiveProducts) {
       if (hasShortDlcProducts) {
         if (hasSgrProducts) {
-          productsMessage = "Pe acest suport există produse sensibile, produse SGR şi produse cu DLC!";
+          productsMessage =
+            'Pe acest suport există produse sensibile, produse SGR şi produse cu DLC!'
         } else {
-          productsMessage = "Pe acest suport există produse sensibile şi produse cu DLC!";
+          productsMessage = 'Pe acest suport există produse sensibile şi produse cu DLC!'
         }
       } else {
         if (hasSgrProducts) {
-          productsMessage = "Pe acest suport există produse sensibile şi produse SGR!";
-        }
-        else {
-          productsMessage = "Pe acest suport există produse sensibile!";
+          productsMessage = 'Pe acest suport există produse sensibile şi produse SGR!'
+        } else {
+          productsMessage = 'Pe acest suport există produse sensibile!'
         }
       }
     } else {
       if (hasShortDlcProducts) {
         if (hasSgrProducts) {
-          productsMessage = "Pe acest suport există produse cu DLC şi produse SGR!";
+          productsMessage = 'Pe acest suport există produse cu DLC şi produse SGR!'
         } else {
-          productsMessage = "Pe acest suport există produse cu DLC!";
+          productsMessage = 'Pe acest suport există produse cu DLC!'
         }
       } else {
         if (hasSgrProducts) {
-          productsMessage = "Pe acest suport există produse SGR!";
+          productsMessage = 'Pe acest suport există produse SGR!'
         }
       }
     }
-    let message = "";
-    sgrProducts.forEach((item) => {
+    let message = ''
+    sgrProducts.forEach(item => {
       message += item + ', '
     })
 
@@ -300,57 +368,57 @@ const SupportScanStep2 = () => {
         {
           label: 'Ok',
           onClick: () => {
-            setIsSensitiveAndShortDlcModalOpen(false);
+            setIsSensitiveAndShortDlcModalOpen(false)
             openMoreSupportsConfirm()
           },
           color: 'primary'
-        },
+        }
       ]
-    });
-    setIsSensitiveAndShortDlcModalOpen(true);
-  };
+    })
+    setIsSensitiveAndShortDlcModalOpen(true)
+  }
 
   const closeSensitiveAndShortDlc = () => {
-    setIsSensitiveAndShortDlcModalOpen(false);
-  };
+    setIsSensitiveAndShortDlcModalOpen(false)
+  }
 
   const openMissingValuesModal = () => {
     setMissingValuesModalContent({
       title: 'Atenție!',
-      description: "Vă rugăm să completaţi toate valorile din ecran!",
+      description: 'Va rugam sa completati toate valorile din ecran.',
       buttons: [
         {
           label: 'Ok',
           onClick: () => setIsMissingValuesModalOpen(false),
           color: 'primary'
-        },
+        }
       ]
-    });
-    setIsMissingValuesModalOpen(true);
-  };
+    })
+    setIsMissingValuesModalOpen(true)
+  }
 
   const closeMissingValuesModal = () => {
-    setIsMissingValuesModalOpen(false);
-  };
+    setIsMissingValuesModalOpen(false)
+  }
 
   const openMandatorySupportModal = () => {
     setMandatorySupportModalContent({
       title: 'Atenție!',
-      description: "Tipul de suport este obligatoriu!",
+      description: 'Tipul de suport este obligatoriu!',
       buttons: [
         {
           label: 'Ok',
           onClick: () => setIsMandatorySupportModalOpen(false),
           color: 'primary'
-        },
+        }
       ]
-    });
-    setIsMandatorySupportModalOpen(true);
-  };
+    })
+    setIsMandatorySupportModalOpen(true)
+  }
 
   const closeMandatorySupportModal = () => {
-    setIsMissingValuesModalOpen(false);
-  };
+    setIsMissingValuesModalOpen(false)
+  }
 
   const showDifferentNumberConfirmation = (values, message) => {
     setDifferentNumberModalContent({
@@ -365,26 +433,26 @@ const SupportScanStep2 = () => {
         {
           label: 'Am terminat',
           onClick: () => {
-            setIsDifferentNumberModalOpen(false);
-            doSaveSupportTypes(values);
+            setIsDifferentNumberModalOpen(false)
+            doSaveSupportTypes(values)
           },
           color: 'primary'
         }
       ]
-    });
+    })
     setIsDifferentNumberModalOpen(true)
   }
 
   const closeDifferentNumberConfirmation = () => {
-    setIsDifferentNumberModalOpen(false);
-  };
+    setIsDifferentNumberModalOpen(false)
+  }
 
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
-      maxWidth='xs'
+      maxWidth="xs"
       items={[
-        <TitleHeader title='Cod Suport' />,
+        <TitleHeader title="Cod Suport" />,
         <Table
           columns={columns}
           isLoading={false}
@@ -393,10 +461,10 @@ const SupportScanStep2 = () => {
           hideCheckbox={true}
         />,
         <Button
-          style={{ width: "100%" }}
-          type='button'
-          variant='contained'
-          label='CONFIRMĂ AMBALAJE'
+          style={{ width: '100%' }}
+          type="button"
+          variant="contained"
+          label="Confirma ambalaje"
           onClick={() => formik.handleSubmit()}
         />,
         <AlertModal
@@ -407,11 +475,11 @@ const SupportScanStep2 = () => {
           buttons={MissingValuesModalContent.buttons}
         />,
         <AlertModal
-        open={isMandatorySupportModalOpen}
-        handleClose={closeMandatorySupportModal}
-        title={MandatorySupportModalContent.title}
-        description={MandatorySupportModalContent.description}
-        buttons={MandatorySupportModalContent.buttons}
+          open={isMandatorySupportModalOpen}
+          handleClose={closeMandatorySupportModal}
+          title={MandatorySupportModalContent.title}
+          description={MandatorySupportModalContent.description}
+          buttons={MandatorySupportModalContent.buttons}
         />,
         <AlertModal
           open={isDifferentNumberModalOpen}
