@@ -9,13 +9,13 @@ export const getValidationSchema = (editItem: AdminRegion) =>
     shopIds: Yup.array().optional()
   })
 
-export const getInitialValues = (editItem: AdminRegion) => {
+export const getInitialValues = (editItem: AdminRegion, shopTypes: any) => {
   return {
     id: editItem?.id || null,
     code: editItem?.code || null,
     name: editItem?.name || null,
     responsible: editItem?.responsible || null,
     active: editItem?.active || false,
-    shopIds: editItem?.shopIds || []
+    shopIds: shopTypes?.selectedOptions || [{label: '123', value: '123'}]
   }
 }
