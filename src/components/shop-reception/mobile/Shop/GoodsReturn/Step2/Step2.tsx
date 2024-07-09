@@ -211,9 +211,11 @@ const Step2 = () => {
         type='text'
         label='Scanează tip ambalaj'
         variant='standard'
+        autoFocus
         value={searchCode}
         onChange={event => setSearchCode((event.target as HTMLInputElement).value)}
         width='100%'
+        id="scan-input"
       />
       <IconButton onClick={supportScan}>
         <ManageSearchIcon />
@@ -251,7 +253,7 @@ const Step2 = () => {
       type='button'
       variant='contained'
       label='SCANEAZǍ TIP AMBALAJ'
-      onClick={null}
+      onClick={() => document.getElementById('scan-input').focus()}
       style={{ width: '100%' }}
     />,
     formik.values.currentSupportTypeId &&
@@ -298,6 +300,13 @@ const Step2 = () => {
       onClick={() => navigate(URLS.AUTH_RETURN_STEP_3, { state: id })}
       disabled={!packageScanned}
       style={{ width: '100%' }}
+    />,
+    <Button
+      type='button'
+      variant='contained'
+      label='Modifica Date Camion'
+      onClick={() => navigate('/shop-reception/mobile/return-step-1', {state: { truckId: id }})}
+      style={{ width: '100%', marginTop: '15px' }}
     />
   ]
 
