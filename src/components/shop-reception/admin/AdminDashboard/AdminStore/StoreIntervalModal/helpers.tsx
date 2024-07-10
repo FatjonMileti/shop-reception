@@ -109,6 +109,7 @@ export const getColumns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={row.receiveFromDeposit === false}
       />
     )
   },
@@ -131,6 +132,7 @@ export const getColumns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={row.receiveFromDeposit === false}
       />
     )
   },
@@ -153,6 +155,7 @@ export const getColumns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={row.receiveFromDeposit === false}
       />
     )
   },
@@ -175,6 +178,7 @@ export const getColumns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={row.receiveFromDeposit === false}
       />
     )
   },
@@ -197,6 +201,7 @@ export const getColumns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={row.receiveFromDeposit === false}
       />
     )
   },
@@ -219,6 +224,7 @@ export const getColumns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={row.receiveFromDeposit === false}
       />
     )
   },
@@ -241,6 +247,7 @@ export const getColumns = (formik, setTableItems) => [
           setTableItems(toTableRowItems(updatedValues))
           formik.setValues(updatedValues)
         }}
+        disabled={row.receiveFromDeposit === false}
       />
     )
   },

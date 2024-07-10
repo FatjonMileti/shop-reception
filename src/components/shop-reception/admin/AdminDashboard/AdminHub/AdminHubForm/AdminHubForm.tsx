@@ -6,7 +6,7 @@ import { getInitialValues, getValidationSchema } from './helpers'
 import { useNotification, useSearchInput } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
-import { CircularProgress, Grid } from '@mui/material'
+import { CircularProgress, Grid, createFilterOptions } from '@mui/material'
 import { makeCoreGetRequest, makeCorePostRequest, makeCorePutRequest } from 'utils/api'
 import { useMutation, useQuery } from 'react-query'
 import { AutocompleteOption } from 'components/volumetry/interfaces'
@@ -18,6 +18,8 @@ interface NewAdminDepositProps {
   isEdit?: boolean
   editItem?: AdminHub
 }
+
+const filter = createFilterOptions()
 
 const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
   const { isOpen, closeModal, isEdit, editItem, setShouldRefreshData } = props
@@ -74,7 +76,7 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
   )
 
   const { data: assignedUsers, isLoading: isAssignedUsersLoading } = useQuery(
-    ['assigned-users'],
+    ['assigned-users', isOpen && isEdit],
     async () => {
       const result = await makeCoreGetRequest(`/shop-reception/hubs/${editItem.id}/users`)
 
@@ -225,30 +227,35 @@ const AdminHubForm: React.FC<NewAdminDepositProps> = props => {
         </Grid>
 
         <Grid xs={12} item>
-          {isAssignedUsersLoading ? (
-            <div style={{ display: 'flex' }}>
-              <CircularProgress color="primary" disableShrink />
-            </div>
-          ) : (
-            <Autocomplete
-              {...selectProductSearch}
-              variant="outlined"
-              label="Utilizatori asignaţi pe hub"
-              autoComplete={false}
-              filterOptions={x => x}
-              multiple
-              onChange={(event, value) => {
-                if (value) {
-                  formik.setFieldValue('users', value)
-                } else {
-                  formik.setFieldValue('users', null)
-                }
-              }}
-              value={formik.values.users || null}
-              error={!!formik.errors.users}
-              helperText={formik.errors.users as string}
-            />
-          )}
+          <Autocomplete
+            {...selectProductSearch}
+            variant="outlined"
+            label="Utilizatori asignaţi pe hub"
+            autoComplete={false}
+            multiple
+            loading={isAssignedUsersLoading}
+            value={formik.values.users || null}
+            error={!!formik.errors.users}
+            helperText={formik.errors.users as string}
+            onChange={(event, value) => {
+              const result = value.map(val => {
+                return val.inputValue ? val.inputValue : val
+              })
+              formik.setFieldValue('users', result)
+            }}
+            filterOptions={(options, params) => {
+              const filtered = filter(options, params)
+
+              if (params.inputValue !== '') {
+                filtered.push({
+                  inputValue: params.inputValue,
+                  label: `Adauga utilizator "${params.inputValue}"`
+                })
+              }
+
+              return filtered
+            }}
+          />
         </Grid>
 
         <Grid xs={12} item className={s.modalButtons}>

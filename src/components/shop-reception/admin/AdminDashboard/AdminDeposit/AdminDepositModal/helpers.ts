@@ -43,7 +43,7 @@ export const getValidationSchema = (editItem: AdminDeposit) =>
       .of(Yup.string().required('Campul este obligatoriu.'))
       .test({
         message: 'Campul este obligatoriu.',
-        test: arr => arr.length !== 0
+        test: arr => arr?.length !== 0
       })
   })
 

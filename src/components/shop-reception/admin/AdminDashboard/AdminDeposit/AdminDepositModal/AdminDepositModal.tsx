@@ -50,7 +50,7 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
   })
 
   const { data: depositUsersOptions } = useQuery(
-    ['deposits-users'],
+    ['deposits-users', isModalOpen && isEdit],
     async () => {
       const result = await makeCoreGetRequest(`/shop-reception/deposits/${editItem?.id}/users`)
 
@@ -369,18 +369,28 @@ const AdminDepositModal: React.FC<NewAdminDepositProps> = props => {
             label="Utilizatori asignaţi pe depozit"
             autoComplete={false}
             required
-            filterOptions={x => x}
             multiple
-            onChange={(event, value) => {
-              if (value) {
-                formik.setFieldValue('depositUsers', value)
-              } else {
-                formik.setFieldValue('depositUsers', null)
-              }
-            }}
             value={formik.values.depositUsers || null}
             error={!!formik.errors.depositUsers}
             helperText={formik.errors.depositUsers as string}
+            onChange={(event, value) => {
+              const result = value.map(val => {
+                return val.inputValue ? val.inputValue : val
+              })
+              formik.setFieldValue('depositUsers', result)
+            }}
+            filterOptions={(options, params) => {
+              const filtered = filter(options, params)
+
+              if (params.inputValue !== '') {
+                filtered.push({
+                  inputValue: params.inputValue,
+                  label: `Adauga utilizator "${params.inputValue}"`
+                })
+              }
+
+              return filtered
+            }}
           />
         </Grid>
         <Grid xs={12} item className={s.modalButtons}>
