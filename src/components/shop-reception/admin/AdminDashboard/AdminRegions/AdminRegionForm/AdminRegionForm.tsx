@@ -49,19 +49,21 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
     }
   })
 
-
-  const { data: shopTypes, isLoading: isShopTypesLoading, isFetching: isShopTypesFetching } = useQuery(
+  const {
+    data: shopTypes,
+    isLoading: isShopTypesLoading,
+    isFetching: isShopTypesFetching
+  } = useQuery(
     ['shop-types'],
     async () => {
       const result = await makeCoreGetRequest(`/shop-reception/regions/${editItem?.id}/shops`)
-      const checkedOptions = result.filter(option => option.isChecked === true)
-      const options = checkedOptions.map(item => ({ label: item.metiName, value: item.id }))
 
-      const allOptions = result.map(item => ({
+      const options = result.map(item => ({
         label: item.metiName,
-        value: item.id
+        value: item.id,
+        isChecked: item.isChecked
       }))
-      return {selectedOptions: options, allOptions}
+      return options
     },
     {
       onError: error => {
@@ -76,8 +78,7 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
     }
   )
 
-
-  const initialValues = useMemo(() => getInitialValues(editItem, shopTypes), [editItem, shopTypes?.selectedOptions])
+  const initialValues = useMemo(() => getInitialValues(editItem, shopTypes), [editItem, shopTypes])
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
   const formik = useFormik({
@@ -89,7 +90,7 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
       try {
         const payload = {
           ...values,
-          shopIds: values.shopIds.map(shopId => shopId.value)
+          shopIds: values.shopIds.filter(item => item.isChecked).map(item => item.value)
         }
 
         mutate(payload)
@@ -189,12 +190,23 @@ const AdminRegionForm: React.FC<NewAdminDepositProps> = props => {
               variant="outlined"
               label="Magazine"
               disableClearable
-              onChange={(e: any, option: any) => formik.setFieldValue('shopIds', option)}
+              onChange={(e: any, option: any) => {
+                formik.setFieldValue(
+                  'shopIds',
+                  formik.values.shopIds.map(item =>
+                    item.label == e.target.textContent
+                      ? { ...item, isChecked: !item.isChecked }
+                      : item
+                  )
+                )
+              }}
               error={!!formik.errors.shopIds}
               helperText={formik.errors.shopIds as string}
               multiple
-              value={formik.values.shopIds}
-              options={shopTypes?.allOptions}
+              value={formik.values.shopIds?.filter(
+                item => item.isChecked === true && { label: item.metiName, value: item.id }
+              )}
+              options={formik.values.shopIds}
             />
           )}
         </Grid>
