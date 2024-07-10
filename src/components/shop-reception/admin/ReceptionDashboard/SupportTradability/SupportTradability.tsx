@@ -29,7 +29,7 @@ const SupportTradability = () => {
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
-          url: '/shop-reception/support-traceability',
+          url: '/shop-reception/supportTraceability',
           tableFilters,
           page,
           rowsPerPage,

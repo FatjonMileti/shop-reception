@@ -17,36 +17,49 @@ export const getTitle = () => {
   }
 
   const fetchShopName = async () => {
-    return await makeCoreGetRequest('/shop-reception-mobile/home/shop-name', null)
+    return await makeCoreGetRequest('/shop-reception-mobile/home/shop-name')
   }
 
   const fetchHubName = async () => {
-    return await makeCoreGetRequest('/shop-reception-mobile/home/hub-name', null)
+    return await makeCoreGetRequest('/shop-reception-mobile/home/hub-name')
   }
 
   const fetchDepositName = async () => {
-    return await makeCoreGetRequest('/shop-reception-mobile/home/deposit-name', null)
+    return await makeCoreGetRequest('/shop-reception-mobile/home/deposit-name')
   }
 
   const { data: shopName } = useQuery('shop-name', fetchShopName, {
     enabled: userRoles?.includes('GG_RO_HQ_SHOP_RECEPTION_STORE'),
     onError: error => errorHandler(error),
-    onSuccess: data => {}
+    onSuccess: data => {
+      if (data) {
+        return data
+      }
+    }
   })
 
   const { data: hubName } = useQuery('hub-name', fetchHubName, {
     enabled: userRoles?.includes('GG_RO_HQ_SHOP_RECEPTION_HUB'),
     onError: error => errorHandler(error),
-    onSuccess: data => {}
+    onSuccess: data => {
+      if (data) {
+        return data
+      }
+    }
   })
 
   const { data: depositName } = useQuery('deposit-name', fetchDepositName, {
     enabled: userRoles?.includes('GG_RO_HQ_SHOP_RECEPTION_WAREHOUSE'),
     onError: error => errorHandler(error),
-    onSuccess: data => {}
+    onSuccess: data => {
+      if (data) {
+        return data
+      }
+    }
   })
 
-  return useMemo(() => {
-    return sessionStorage.getItem('title')
-  }, [shopName, hubName, depositName])
+  return useMemo(
+    () => shopName?.value || hubName?.value || depositName?.value,
+    [shopName, hubName, depositName]
+  )
 }
