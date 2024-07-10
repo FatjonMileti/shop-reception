@@ -28,7 +28,9 @@ const SupportScanStep1 = () => {
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [isFinalizing, setIsFinalizing] = useState<boolean>(false)
   const [supportImageButtonVisible, setSupportImageButtonVisible] = useState<boolean>(false)
+  const [supportImageUploaded, setSupportImageUploaded] = useState<boolean>(true)
   const [defectImageVisible, setDefectImageVisible] = useState<boolean>(false)
+  const [defectImageUploaded, setDefectImageUploaded] = useState<boolean>(true)
   const [supportNumber, setSupportNumber] = useState('')
   const [supportId, setSupportId] = useState(null)
   const [counter, setCounter] = useState(0)
@@ -108,10 +110,7 @@ const SupportScanStep1 = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const resp = await makeCorePostRequest(
-          `/shop-reception-mobile/support/shop/save/${id}`,
-          values
-        )
+        const resp = await makeCorePostRequest(`/shop-reception-mobile/support/shop/save/${id}`, values)
 
         const localCounter = resp.counter
         if (localCounter > 0) {
@@ -161,6 +160,7 @@ const SupportScanStep1 = () => {
 
   const toggleShowConfirmation = (): void => {
     setShowConfirmation(!showConfirmation)
+    setDefectImageUploaded(showConfirmation)
   }
 
   const toggleIsSearching = async () => {
@@ -414,6 +414,7 @@ const SupportScanStep1 = () => {
         values={supportList.map(support => ({ value: support.id, label: support.name }))}
         onChange={event => {
           setSupportImageButtonVisible(true)
+          setSupportImageUploaded(false)
           formik.setFieldValue('supportTypeId', (event.target as HTMLInputElement).value)
         }}
         error={!!formik.errors.supportTypeId}
@@ -424,6 +425,7 @@ const SupportScanStep1 = () => {
           <ImageUpload
             uploadUrl={`/shop-reception-mobile/support/shop/upload-different-support/${formik.values.supportId}`}
             onSuccess={() => {
+              setSupportImageUploaded(true);
               showNotification({
                 message: `Imaginea a fost incarcata cu succes.`,
                 type: 'success'
@@ -491,6 +493,7 @@ const SupportScanStep1 = () => {
         <ImageUpload
           uploadUrl={`/shop-reception-mobile/support/shop/upload-non-conform-support/${formik.values.supportId}`}
           onSuccess={() => {
+            setDefectImageUploaded(true)
             showNotification({
               message: `Imaginea a fost incarcata cu succes.`,
               type: 'success'
@@ -507,6 +510,7 @@ const SupportScanStep1 = () => {
         />
       </div>
     </div>,
+    isSearching &&
     <Button
       type="button"
       variant="contained"
@@ -529,29 +533,31 @@ const SupportScanStep1 = () => {
       label="CONFIRM TIP SUPORT"
       style={{ width: '100%' }}
       onClick={() => formik.handleSubmit()}
-      disabled={formik.values.nonCompliantReasonList?.length === 0}
+      disabled={formik.values.nonCompliantReasonList?.length === 0 || !supportImageUploaded || !defectImageUploaded}
     />,
-    <AlertModal
-      open={isMoreSupportsModalOpen}
-      handleClose={closeMoreSupportsModal}
-      title={moreSupportsModalContent.title}
-      description={moreSupportsModalContent.description}
-      buttons={moreSupportsModalContent.buttons}
-    />,
-    <AlertModal
-      open={isPriorityProductsModalOpen}
-      handleClose={closePriorityProductsModal}
-      description={priorityProductsModalContent.description}
-      listItems={priorityProductsModalContent.listItems}
-      buttons={priorityProductsModalContent.buttons}
-    />,
-    <AlertModal
-      open={isSensitiveAndShortDlcModalOpen}
-      handleClose={closeSensitiveAndShortDlcModal}
-      title={sensitiveAndShortDlcModalContent.title}
-      listItems={sensitiveAndShortDlcModalContent.listItems}
-      buttons={sensitiveAndShortDlcModalContent.buttons}
-    />,
+    <>
+      <AlertModal
+        open={isMoreSupportsModalOpen}
+        handleClose={closeMoreSupportsModal}
+        title={moreSupportsModalContent.title}
+        description={moreSupportsModalContent.description}
+        buttons={moreSupportsModalContent.buttons}
+      />
+      <AlertModal
+        open={isPriorityProductsModalOpen}
+        handleClose={closePriorityProductsModal}
+        description={priorityProductsModalContent.description}
+        listItems={priorityProductsModalContent.listItems}
+        buttons={priorityProductsModalContent.buttons}
+      />
+      <AlertModal
+        open={isSensitiveAndShortDlcModalOpen}
+        handleClose={closeSensitiveAndShortDlcModal}
+        title={sensitiveAndShortDlcModalContent.title}
+        listItems={sensitiveAndShortDlcModalContent.listItems}
+        buttons={sensitiveAndShortDlcModalContent.buttons}
+      />
+    </>,
     <>
       <Typography variant="medium" component="p">
         Numǎr camion: {truck?.truckNumber}

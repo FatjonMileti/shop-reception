@@ -15,6 +15,7 @@ import { CircularProgress } from '@mui/material'
 
 const Step1 = () => {
   const { showNotification } = useNotification()
+  const location = useLocation()
   const navigate = useNavigate()
   const [isInProgressModalOpen, setIsInProgressModalOpen] = useState(false)
   const [inProgressModalContent, setInProgressModalContent] = useState({
@@ -25,32 +26,21 @@ const Step1 = () => {
   const [isChep, setIsChep] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [truckId, setTruckId] = useState(0)
-  const location = useLocation()
 
   useEffect(() => {
-    const truckNumber = location.state?.truckNumber
-    const driverName = location.state?.driverName
+    const truckNumber = location.state?.truckNumber;
+    const driverName = location.state?.driverName;
+    const id = location.state?.truckId;
 
-    if (truckNumber) {
-      formik.setFieldValue('registrationNumber', truckNumber)
+    if (id) {
+      loadReturnTruck(id);
+      setTruckId(id);
+      //readOnlyFields = params['hubFlow'];
     }
-
-    if (driverName) {
-      formik.setFieldValue('driver', driverName)
-    }
-
-    if (truckNumber && driverName) {
-      setReadOnly(true)
-    }
+    if (truckNumber) formik.setFieldValue('registrationNumber', truckNumber);
+    if (driverName) formik.setFieldValue('driver', driverName);
+    if (truckNumber && driverName) setReadOnly(true);
   }, [location])
-
-  // TODO when navigating back from step 2 set the fields with the correct information
-  // if (params['truckId'] !== undefined) {
-  //   readOnlyFields = params['hubFlow'];
-  //   truckId = params['truckId'];
-  //   loadReturnTruck(this.savedTruckId);
-  //   loadDepositList(false);
-  // }
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -66,7 +56,7 @@ const Step1 = () => {
           id: truckId,
           truckNumber: values.registrationNumber,
           driverName: values.driver,
-          depositId: values.deposit,
+          depositId: values.destination,
           packageReturn: values.isPackingReturn,
           productReturn: values.isProductReturn,
           depositType: null,

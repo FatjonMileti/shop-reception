@@ -1,5 +1,5 @@
 import { Grid } from '../../../../Common/Grid'
-import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
+import { Button, Input, Typography } from "@fullscreendigital/carrefour-dex-fe";
 import { TitleHeader } from '../../../Common/TitleHeader'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useQuery } from 'react-query'
@@ -90,6 +90,7 @@ const Step5 = () => {
       maxWidth="xs"
       items={[
         <TitleHeader title="COMANDǍ CAMION RETUR" />,
+        <Typography variant='medium' component='p' style={{textAlign: 'center'}}>A fost generat avizul!</Typography>,
         <Input
           type="text"
           label="Număr aviz"

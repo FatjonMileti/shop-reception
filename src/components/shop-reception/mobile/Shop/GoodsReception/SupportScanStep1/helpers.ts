@@ -4,7 +4,7 @@ export const getValidationSchema = () =>
   Yup.object().shape({
     supportCode: Yup.string(),
     supportTypeId: Yup.string().required(),
-    reason: Yup.string(),
+    reason: Yup.string().nullable(),
     defect: Yup.string(),
   })
 
@@ -12,7 +12,7 @@ export const getInitialValues = supportData => ({
   supportCode: supportData?.supportCode || '',
   supportTypeId: supportData?.supportTypeId || '',
   supportId: supportData?.supportId || '',
-  reason: supportData?.reason || '',
+  reason: supportData?.reason || null,
   defect: supportData?.defect || '',
   nonCompliantReasonList: supportData?.nonCompliantReasonList || []
 })
