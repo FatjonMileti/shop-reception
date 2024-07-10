@@ -213,7 +213,7 @@ const SupportScanStep3 = () => {
       await makeCorePostRequest(
         `/shop-reception-mobile/support/shop/save/${false}/${truckId}/${supportId}`,
         values
-      ).then(() => navigate(URLS.AUTH_SUPPORT_SCAN_STEP_4, { state: truckId }))
+      ).then(() => navigate(URLS.AUTH_SUPPORT_SCAN_STEP_1, { state: truckId }))
     } catch (error) {
       showNotification({
         message: `Error while submitting. ${formatErrorMessage(error)}`,

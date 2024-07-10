@@ -107,7 +107,7 @@ const Step4 = () => {
           helperText={formik.errors.stackNumber as string}
         />,
         formik.values.sealList?.map((sealCode, idx) => (
-          <div style={{ display: 'flex', marginTop: '20px' }}>
+          <div>
             <Input
               key={idx}
               type="text"
