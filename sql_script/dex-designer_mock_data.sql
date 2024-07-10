@@ -273,6 +273,7 @@ VALUES
     (65, 'Detalii task', '', '/volumetry/tasksManagement/taskAllocation', true, 44, false),
     (266, 'Management magazine', '', '/volumetry/tasksManagement/locationManagement', true, 249, true),
     (267, 'Management business units', '', '/volumetry/tasksManagement/locationCategoryManagement', true, 250, true),
+
     -- Shop Reception (Admin)
     (166, 'Administrare depozite', '', '/shop-reception/admin/deposits', true, 149, true),
     (167, 'Administrare huburi', '', '/shop-reception/admin/hubs', true, 151, true),
@@ -292,6 +293,8 @@ VALUES
     (248, 'Serie Numar-Aviz', '', '/shop-reception/admin/noticeSeriesNumberList', true, 248, true),
     (179, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips', true, 163, true),
     (222, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySupportAction/:id', true, 163, false),
+    (218, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips/:id', true, 163, false),
+
     (180, 'Lista camioane marfa', '', '/shop-reception/reception/truckList', true, 164, true),
     (291, 'Detalii lista camioane marfa', '', '/shop-reception/reception/truckList/:id', true, 164, false),
     (181, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/wrongDestinationSupport', true, 165, true),
@@ -319,20 +322,11 @@ VALUES
     (193, 'Litigii ambalaje - administrare timer', '', '/shop-reception/package/timerDisputes', true, 177, true),
     (393, 'Aviz centralizator', '', '/shop-reception/package/centralizedNotice', true, 277, true),
     (394, 'Administrare responsabili transport', '', '/shop-reception/package/transportResponsible', true, 278, true),
+
     -- Shop Reception (Mobile)
+    -- store
     (194, 'In procesare receptie', '', '/shop-reception/mobile/inProcessingReception', true, 178, true),
     (223, 'Actualizare inventar ambalaje', '', '/shop-reception/mobile/packaging-inventory-update', true, 193, true),
-    (350, 'Camioane asteptate', '', '/shop-reception/mobile/expectedTrucks', true, 179, true),
-    (352, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-2', true, 179, false),
-    (353, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-3', true, 179, false),
-    (354, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-4', true, 179, false),
-    (355, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-5', true, 179, false),
-    (356, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-6', true, 179, false),
-    (196, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck', true, 180, true),
-    (351, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck-step-2', true, 180, false),
-    (259, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck-step-3', true, 180, false),
-    (197, 'In procesare expeditie', '', '/shop-reception/mobile/inProcessingShipment', true, 181, true),
-    (198, 'Camioane expediate', '', '/shop-reception/mobile/shippedTrucks', true, 182, true),
     (199, 'Retururi asteptare', '', '/shop-reception/mobile/expectedReturns', true, 183, true),
     (243, 'Retururi asteptare', '', '/shop-reception/mobile/expectedReturnDetails', true, 183, false),
     (244, 'Retururi asteptare', '', '/shop-reception/mobile/expected-return/detail-step-2', true, 183, false),
@@ -350,8 +344,6 @@ VALUES
     (205, 'Inregistrare retur', '', '/shop-reception/mobile/recordReturn/step-2', true, 185, false),
     (206, 'Inregistrare retur', '', '/shop-reception/mobile/recordReturn/step-3', true, 185, false),
     (242, 'Inregistrare retur', '', '/shop-reception/mobile/recordReturn/step-5', true, 185, false),
-    (207, 'Adauga camion', '', '/shop-reception/mobile/addTruck', true, 179, false),
-    (224, 'Adauga camion', '', '/shop-reception/mobile/add-trucks/step-2', true, 179, false),
     (208, 'Lista camioane', '', '/shop-reception/mobile/trucksList', true, 187, true),
     (209, 'Detalii camion', '', '/shop-reception/mobile/truckDetails/:id', true, 187, false),
     (210, 'Validare livrare', '', '/shop-reception/mobile/validateDelivery', true, 188, true),
@@ -375,6 +367,23 @@ VALUES
     (239, 'Înregistrare retur', '', '/shop-reception/mobile/return-step-4', true, 189, false),
     (240, 'Înregistrare retur', '', '/shop-reception/mobile/return-step-5', true, 189, false),
     (241, 'Continuare retur', '', '/shop-reception/mobile/inProgressReturns', true, 190, true),
+
+    -- hub - 179, 180, 181, 182
+    (350, 'Camioane asteptate', '', '/shop-reception/mobile/expectedTrucks', true, 179, true),
+    (352, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-2', true, 179, false),
+    (353, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-3', true, 179, false),
+    (354, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-4', true, 179, false),
+    (355, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-5', true, 179, false),
+    (356, 'Receptie camion', '', '/shop-reception/mobile/expectedTrucks-step-6', true, 179, false),
+    (207, 'Adauga camion', '', '/shop-reception/mobile/addTruck', true, 179, false),
+    (224, 'Adauga camion', '', '/shop-reception/mobile/add-trucks/step-2', true, 179, false),
+    (196, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck', true, 180, true),
+    (351, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck-step-2', true, 180, false),
+    (259, 'Inregistreaza camion', '', '/shop-reception/mobile/registerTruck-step-3', true, 180, false),
+    (197, 'In procesare expeditie', '', '/shop-reception/mobile/inProcessingShipment', true, 181, true),
+    (198, 'Camioane expediate', '', '/shop-reception/mobile/shippedTrucks', true, 182, true),
+
+    --deposit - 251, 252
     (249, 'Retururi asteptate', '', '/shop-reception/mobile/goodsReturnDeposit/expectedReturns', true, 251, true),
     (251, 'Retururi asteptate', '', '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-1', true, 251, false),
     (252, 'Retururi asteptate', '', '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-2', true, 251, false),
@@ -382,7 +391,6 @@ VALUES
     (254, 'Retururi asteptate', '', '/shop-reception/mobile/goodsReturnDeposit/expectedReturns/step-4', true, 251, false),
     (250, 'Retur in curs de receptie', '', '/shop-reception/mobile/goodsReturnDeposit/returnPendingReception', true, 252, true),
 
-    (218, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips/:id', true, 163, false),
     -- Bakery TRACEABILITY-OPERATOR
     (67, 'Management produse', 'ProductManagementTO', '/bakery/traceabilityOperator/product-management', true, 50, true),
     (68, 'Produse receptionate in raion', 'ReceivedProductsTO', '/bakery/traceabilityOperator/received-products', true, 51, true),
@@ -437,10 +445,6 @@ VALUES
     (208, 'GG_RO_HQ_SHOP_RECEPTION_AMBALAJE'),
     -- LSO
     (300, 'GG_RO_DEX_LSO_USER');
-
-
-
-
 
 
 -- roles_activities
@@ -514,14 +518,14 @@ VALUES
     (201, 152), (201, 155), (201, 157), (201, 158), (201, 160), (201, 161), (201, 162), -- admin
 
     (201, 163), (201, 164), (201, 165), (201, 166), (201, 167), (201, 168), (201, 169),
-    (201, 195), (201, 196), -- receptie marfa
+    (201, 195), -- receptie marfa
 
     (201, 170), (201, 171), (201, 172), (201, 272), (201, 173),
     (201, 174), (201, 175), (201, 176), (201, 277), -- ambalaje
 
     -- GG_RO_HQ_SHOP_RECEPTION_STORE - receptionist
     (202, 157), (202, 161), -- admin
-    (202, 163), (202, 164), (202, 165), (202, 166), (202, 167), (202, 168), (202, 169), (202, 195), (202, 196), -- receptie marfa
+    (202, 163), (202, 164), (202, 165), (202, 166), (202, 167), (202, 168), (202, 169), (202, 195), -- receptie marfa
 
     -- GG_RO_HQ_SHOP_RECEPTION_HUB
     (203, 149), (203, 151), (203, 152), (203, 153), (203, 154), (203, 155), (203, 156), (203, 157),
@@ -547,12 +551,17 @@ VALUES
 
     -- Shop Reception Mobile
     -- GG_RO_HQ_SHOP_RECEPTION_STORE
-    (202, 178), (202, 179), (202, 180), (202, 181), (202, 182), (202, 183), (202, 184), (202, 185), -- admin
+    (202, 178), (202, 187), (202, 188), (202, 193), (202, 189), (202, 190),
 
-    (202, 186), (202, 187), (202, 188), (202, 193), (202, 189), (202, 190), -- receptie marfa
+    -- GG_RO_HQ_SHOP_RECEPTION_BACKOFFICE
+    (201, 178), (201, 187), (201, 188), (201, 193), (201, 189), (201, 190),
 
-    (202, 170), (202, 171), (202, 172), (202, 272), (202, 173),
-    (202, 174), (202, 175), (202, 176), (202, 277), -- ambalaje
+    -- GG_RO_HQ_SHOP_RECEPTION_HUB
+    (203, 179), (203, 180), (203, 181), (203, 182), (203, 183), (203, 184), (203, 185),
+
+    -- GG_RO_HQ_SHOP_RECEPTION_AMBALAJE
+    (208, 251), (208, 252),
+
 
 
     -- Lost Sales Opportunities
