@@ -18,7 +18,7 @@ const ExpectedReturns = () => {
   const { data: truckList, isLoading } = useQuery(
     'exceptedReturnsTrucks',
     async () => {
-      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit/list', null)
+      return await makeCoreGetRequest('/shop-reception-mobile/truck/hub/exit', null)
     },
     {
       initialData: [],

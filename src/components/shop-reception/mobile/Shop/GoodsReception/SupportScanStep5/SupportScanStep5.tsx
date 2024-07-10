@@ -2,7 +2,7 @@ import { Grid } from '../../../../Common/Grid'
 import { Button, Input } from '@fullscreendigital/carrefour-dex-fe'
 import { TitleHeader } from '../../../Common/TitleHeader'
 import { CircularProgress, Typography } from '@mui/material'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../../utils/api'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
@@ -11,11 +11,13 @@ import { useState } from 'react'
 import ImageUpload from '../../../Common/ImageUpload/ImageUpload'
 
 const SupportScanStep5 = () => {
-  const { showNotification } = useNotification()
-  const navigate = useNavigate()
-  const [sealNumbers, setSealNumbers] = useState([''])
-  const [numFields, setNumFields] = useState(1)
-  let { id } = useParams()
+  const { showNotification } = useNotification();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [sealNumbers, setSealNumbers] = useState(['']);
+  const [numFields, setNumFields] = useState(1);
+  const [uploadedImages, setUploadedImages] = useState([false]);
+  const id = location.state;
 
   const { data: counter, isLoading: isLoadingCounter } = useQuery(
     'counter',
@@ -65,10 +67,15 @@ const SupportScanStep5 = () => {
     if (numFields < 3) {
       setNumFields(numFields + 1)
       setSealNumbers([...sealNumbers, ''])
+      setUploadedImages([...uploadedImages, false])
     }
   }
 
-  const handleSuccess = () => {
+  const handleSuccess = (idx) => {
+    const newUploadedImages = [...uploadedImages]
+    newUploadedImages[idx] = true
+    setUploadedImages(newUploadedImages)
+
     showNotification({
       message: 'Image uploaded successfully',
       type: 'success'
@@ -82,6 +89,8 @@ const SupportScanStep5 = () => {
     })
   }
 
+  const isFinalizable = sealNumbers.every(seal => seal !== '') && uploadedImages.every(img => img);
+
   if (isLoadingCounter) {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
@@ -93,7 +102,7 @@ const SupportScanStep5 = () => {
       items={[
         <TitleHeader title="PROCESAREA RECEPȚIEI" />,
         <Typography variant="medium" component="p">
-          Numǎr înmatriculare: {counter.truckNumber}
+          Numǎr înmatriculare: {counter?.truckNumber}
         </Typography>,
         sealNumbers.map((sealNumber, idx) => (
           <div style={{ display: 'flex', marginTop: '20px' }}>
@@ -111,8 +120,8 @@ const SupportScanStep5 = () => {
               }}
             />
             <ImageUpload
-              uploadUrl={`/shop-reception-mobile/truck/shop/upload_shop/security/` + id}
-              onSuccess={handleSuccess}
+              uploadUrl={`/shop-reception-mobile/truck/shop/upload-shop/security/` + id}
+              onSuccess={() => handleSuccess(idx)}
               onError={handleError}
             />
           </div>
@@ -124,7 +133,7 @@ const SupportScanStep5 = () => {
           onClick={addSealNumberField}
           style={{ width: '100%' }}
         />,
-        sealNumbers[0] !== '' && (
+        isFinalizable && (
           <Button
             type="button"
             variant="contained"

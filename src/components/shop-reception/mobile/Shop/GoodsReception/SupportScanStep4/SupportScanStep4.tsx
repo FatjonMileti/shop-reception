@@ -12,23 +12,23 @@ import { URLS } from '../../../constants'
 import { CircularProgress } from '@mui/material'
 
 const SupportScanStep4 = () => {
-  const { showNotification } = useNotification()
-  const [infoLoaded, setInfoLoaded] = useState(false)
-  const [isEmptyTruckModalOpen, setIsEmptyTruckModalOpen] = useState(false)
+  const { showNotification } = useNotification();
+  const [infoLoaded, setInfoLoaded] = useState(false);
+  const [isEmptyTruckModalOpen, setIsEmptyTruckModalOpen] = useState(false);
   const [finalizeEmptyTruckContent, setEmptyTruckModalContent] = useState({
     title: '',
     description: '',
     buttons: []
-  })
+  });
   const [isFinalizedTruckModalOpen, setIsFinalizedTruckModalOpen] = useState(false)
   const [finalizeTruckContent, setFinalizedTruckModalContent] = useState({
     title: '',
     description: '',
     buttons: []
-  })
-  const navigate = useNavigate()
-  const location = useLocation()
-  const id = location.state || ''
+  });
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = location.state || '';
 
   const { data: manualTruck, isLoading: isLoadingManualTruck } = useQuery(
     'manualTruck',
@@ -203,7 +203,7 @@ const SupportScanStep4 = () => {
             label="RESIGILEAZĂ CAMION"
             style={{ width: '100%' }}
             onClick={() => {
-              navigate(URLS.AUTH_SUPPORT_SCAN_STEP_5.replace(':id', id))
+              navigate(URLS.AUTH_SUPPORT_SCAN_STEP_5, {state: id})
             }}
           />
         ),
