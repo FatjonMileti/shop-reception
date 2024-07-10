@@ -33,6 +33,7 @@ const SupportScanStep1 = () => {
   const [defectImageUploaded, setDefectImageUploaded] = useState<boolean>(true)
   const [supportNumber, setSupportNumber] = useState('')
   const [supportId, setSupportId] = useState(null)
+  const [supportTypeId, setSupportTypeId] = useState(null)
   const [counter, setCounter] = useState(0)
   const [isFinalizeModalOpen, setIsFinalizeModalOpen] = useState(false)
   const [finalizeModalContent, setFinalizeModalContent] = useState({
@@ -62,7 +63,7 @@ const SupportScanStep1 = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const validationSchema = useMemo(() => getValidationSchema(), [])
-  const id = location.state?.item.id
+  const id = location.state?.item?.id || location.state
   const [supportData, setSupportData] = useState(null)
 
   const { data: truck, isLoading } = useQuery(
@@ -140,10 +141,16 @@ const SupportScanStep1 = () => {
           openMoreSupportsModal(supportId)
         }
 
-        formik.setFieldValue('reason', [])
+        //TODO SGR products local storage
+
+        formik.setFieldValue('nonCompliantReasonList', [])
+        setIsSearching(false)
+        setShowConfirmation(false)
+        setSupportImageUploaded(true)
+        setDefectImageUploaded(true)
         setSupportImageButtonVisible(false)
         setDefectImageVisible(false)
-
+        setSupportTypeId(null)
         setIsFinalizing(true)
       } catch (error) {
         showNotification({
@@ -160,7 +167,6 @@ const SupportScanStep1 = () => {
 
   const toggleShowConfirmation = (): void => {
     setShowConfirmation(!showConfirmation)
-    setDefectImageUploaded(showConfirmation)
   }
 
   const toggleIsSearching = async () => {
@@ -173,6 +179,7 @@ const SupportScanStep1 = () => {
       )
       setSupportNumber(result.supportNumber)
       setSupportId(result.supportId)
+      setSupportTypeId(result.supportTypeId)
       setSupportData(result)
     } catch (error) {
       showNotification({
@@ -413,8 +420,14 @@ const SupportScanStep1 = () => {
         value={formik.values.supportTypeId}
         values={supportList.map(support => ({ value: support.id, label: support.name }))}
         onChange={event => {
-          setSupportImageButtonVisible(true)
-          setSupportImageUploaded(false)
+          if ((event.target as HTMLInputElement).value !== supportTypeId) {
+            setSupportImageButtonVisible(true)
+            setSupportImageUploaded(false)
+          } else {
+            setSupportImageButtonVisible(false)
+            setSupportImageUploaded(true)
+          }
+
           formik.setFieldValue('supportTypeId', (event.target as HTMLInputElement).value)
         }}
         error={!!formik.errors.supportTypeId}
@@ -464,18 +477,17 @@ const SupportScanStep1 = () => {
                 set.delete(option.value)
                 if (set.size < 1) {
                   setDefectImageVisible(false)
+                  setDefectImageUploaded(true)
                 }
               } else {
                 set.add(option.value)
                 if (set.size >= 1 && option.value !== 'COMPLIANT') {
                   setDefectImageVisible(true)
+                  setDefectImageUploaded(false)
                 }
               }
               formik.setFieldValue('nonCompliantReasonList', Array.from(set))
-              formik.setFieldValue(
-                'defect',
-                formik.values.nonCompliantReasonList?.includes('COMPLIANT')
-              )
+              formik.setFieldValue('defect', formik.values.nonCompliantReasonList?.includes('COMPLIANT'))
             }}
             label={option.label}
             disabled={
