@@ -17,7 +17,10 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '100px',
-    render: row => formatUIDate(row.dateInfo),
+    render: row =>
+      row.dateInfo.length > 10
+        ? `${formatUIDate(row.dateInfo.split(' - ')[0])} - ${formatUIDate(row.dateInfo.split(' - ')[1])}`
+        : formatUIDate(row.dateInfo),
     disableSorting: true
   },
   {
