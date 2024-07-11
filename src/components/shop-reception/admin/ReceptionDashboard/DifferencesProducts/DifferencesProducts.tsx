@@ -44,6 +44,7 @@ const DifferencesProducts = () => {
         message: `Error while fetching table data. ${formatErrorMessage(error)}`,
         type: 'error'
       })
+      setIsLoading(false)
     }
   }
 

@@ -12,7 +12,7 @@ export const columns = downloadImage => [
   },
   {
     title: 'Magazin',
-    field: 'shopCode',
+    field: 'shopName',
     align: 'left',
     type: 'string',
     render: row => row.shopName
@@ -102,7 +102,7 @@ export const columns = downloadImage => [
   },
   {
     title: 'Datǎ trimitere către Meti',
-    field: 'metiSentDate',
+    field: 'created',
     align: 'left',
     type: 'string',
     render: row => formatUIDate(row.metiSentDate)
