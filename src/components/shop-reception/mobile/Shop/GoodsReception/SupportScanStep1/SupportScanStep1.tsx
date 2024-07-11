@@ -29,9 +29,12 @@ const SupportScanStep1 = () => {
   const [isFinalizing, setIsFinalizing] = useState<boolean>(false)
   const [supportImageButtonVisible, setSupportImageButtonVisible] = useState<boolean>(false)
   const [supportImageUploaded, setSupportImageUploaded] = useState<boolean>(true)
+  const [supportImageId, setSupportImageId] = useState(null)
   const [defectImageVisible, setDefectImageVisible] = useState<boolean>(false)
   const [defectImageUploaded, setDefectImageUploaded] = useState<boolean>(true)
+  const [defectImageId, setDefectImageId] = useState(null)
   const [supportNumber, setSupportNumber] = useState('')
+  const [searchCode, setSearchCode] = useState('')
   const [supportId, setSupportId] = useState(null)
   const [supportTypeId, setSupportTypeId] = useState(null)
   const [counter, setCounter] = useState(0)
@@ -69,7 +72,7 @@ const SupportScanStep1 = () => {
   const { data: truck, isLoading } = useQuery(
     'counter',
     async () => {
-      const truck = await makeCoreGetRequest(`/shop-reception-mobile/support/shop/counter/${id}`)
+      const truck = await makeCoreGetRequest(`/shop-reception-mobile/support/shop/counter/${id}`, null)
       setCounter(truck.counter)
       if (truck.counter > 0) {
         setIsFinalizing(true)
@@ -102,6 +105,38 @@ const SupportScanStep1 = () => {
     }
   )
 
+  const { data: shopCode, isLoading: isLoadingShopCode } = useQuery(
+    'shopCode',
+    async () => {
+      const shopList = await makeCoreGetRequest('/shop-reception-mobile/home/user-shops', null)
+      return shopList[0].shopCode
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching supports. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
+  const { data: depositId, isLoading: isLoadingDepositId } = useQuery(
+    'depositId',
+    async () => {
+      const resp = await makeCoreGetRequest('/shop-reception-mobile/truck/shop/' + id, null)
+      return resp.depositDocumentList[0].depositId
+    },
+    {
+      onError: error => {
+        showNotification({
+          message: `Error while fetching supports. ${formatErrorMessage(error)}`,
+          type: 'error'
+        })
+      }
+    }
+  )
+
   const initialValues = useMemo(() => getInitialValues(supportData), [supportData])
 
   const formik = useFormik({
@@ -111,7 +146,33 @@ const SupportScanStep1 = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const resp = await makeCorePostRequest(`/shop-reception-mobile/support/shop/save/${id}`, values)
+        const difference = {
+          "shopCode": shopCode,
+          "idDeposit": depositId,
+          "idHub": null,
+          "idSupportTypeConfirmed": values.supportTypeId,
+          "idSupportTypeExpected": supportTypeId,
+          "noticeNumber": null,
+          "supportCode": values.supportId,
+          "truckNumber": truck?.truckNumber,
+          "pictureId": supportImageId
+        }
+
+        if (supportTypeId !== values.supportTypeId) await makeCorePostRequest(`/shop-reception-mobile/support-type-diffs`, difference)
+
+        const resp = await makeCorePostRequest(`/shop-reception-mobile/support/shop/save/${id}`, { ...values, defectImageId, supportImageId })
+
+        let existingData = JSON.parse(localStorage.getItem(`myData-${id}`)) || {};
+
+        if (resp.hasSgrProducts) {
+          if (!existingData[searchCode]) {
+            existingData[searchCode] = {
+              sgrProducts: resp.sgrProductsList
+            };
+          }
+
+          localStorage.setItem(`myData-${id}`, JSON.stringify(existingData));
+        }
 
         const localCounter = resp.counter
         if (localCounter > 0) {
@@ -141,8 +202,6 @@ const SupportScanStep1 = () => {
           openMoreSupportsModal(supportId)
         }
 
-        //TODO SGR products local storage
-
         formik.setFieldValue('nonCompliantReasonList', [])
         setIsSearching(false)
         setShowConfirmation(false)
@@ -161,7 +220,7 @@ const SupportScanStep1 = () => {
     }
   })
 
-  if (isLoading || isLoadingSupports) {
+  if (isLoading || isLoadingSupports || isLoadingDepositId || isLoadingShopCode) {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 
@@ -193,7 +252,7 @@ const SupportScanStep1 = () => {
 
   const toggleIsFinalizing = async () => {
     try {
-      const response = await makeCoreGetRequest(`/shop-reception-mobile/support/shop/summary/${id}`)
+      const response = await makeCoreGetRequest(`/shop-reception-mobile/support/shop/summary/${id}`, null)
 
       const count = response['counter']
       const total = response['total']
@@ -385,9 +444,10 @@ const SupportScanStep1 = () => {
         width="100%"
         autoFocus
         value={formik.values?.supportCode}
-        onChange={event =>
-          formik.setFieldValue('supportCode', (event.target as HTMLInputElement).value)
-        }
+        onChange={event => {
+          formik.setFieldValue("supportCode", (event.target as HTMLInputElement).value);
+          setSearchCode((event.target as HTMLInputElement).value);
+        }}
         error={!!formik.errors.supportCode}
         helperText={formik.errors.supportCode as string}
         id="scan-input"
@@ -437,7 +497,8 @@ const SupportScanStep1 = () => {
         <>
           <ImageUpload
             uploadUrl={`/shop-reception-mobile/support/shop/upload-different-support/${formik.values.supportId}`}
-            onSuccess={() => {
+            onSuccess={(response) => {
+              if (response.id) setSupportImageId(response.id);
               setSupportImageUploaded(true);
               showNotification({
                 message: `Imaginea a fost incarcata cu succes.`,
@@ -504,7 +565,8 @@ const SupportScanStep1 = () => {
       <div style={{ display: defectImageVisible ? 'block' : 'none' }}>
         <ImageUpload
           uploadUrl={`/shop-reception-mobile/support/shop/upload-non-conform-support/${formik.values.supportId}`}
-          onSuccess={() => {
+          onSuccess={(response) => {
+            if (response.id) setDefectImageId(response.id);
             setDefectImageUploaded(true)
             showNotification({
               message: `Imaginea a fost incarcata cu succes.`,
@@ -538,6 +600,7 @@ const SupportScanStep1 = () => {
           }
         })
       }}
+      disabled={formik.values.nonCompliantReasonList?.length === 0 || !supportImageUploaded || !defectImageUploaded}
     />,
     <Button
       type="button"
