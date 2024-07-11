@@ -172,6 +172,10 @@ const ManageScanTypes = () => {
         itemId={`${selectedRow?.id}`}
         content={<Typography>Esti sigur va vrei sa stergi acest produs?</Typography>}
         setShouldRefreshData={setShouldRefreshData}
+        succesMessage="Produsul a fost sters cu succes."
+        cancelLabel="Anuleaza"
+        deleteLabel="Sterge"
+        title="Sterge"
       />
       <Table
         hideCheckbox
