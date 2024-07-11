@@ -213,7 +213,7 @@ export const drawerFilters = (
     filter: (
       <Autocomplete
         variant="outlined"
-        label="Niciun magazin de sosire selectat"
+        label="Selecteaza magazin de sosire"
         disableClearable
         options={shopOptions || []}
       />
@@ -227,7 +227,7 @@ export const drawerFilters = (
     filter: (
       <Autocomplete
         variant="outlined"
-        label="Niciun HUB plecare selectat"
+        label="Selecteaza HUB plecare"
         disableClearable
         options={hubOptions || []}
       />
@@ -241,7 +241,7 @@ export const drawerFilters = (
     filter: (
       <Autocomplete
         variant="outlined"
-        label="Niciun HUB sosire selectat"
+        label="Selecteaza HUB sosire"
         disableClearable
         options={hubOptions || []}
       />
@@ -255,7 +255,7 @@ export const drawerFilters = (
     filter: (
       <Autocomplete
         variant="outlined"
-        label="Niciun depozit selectat"
+        label="Selecteaza depozit"
         disableClearable
         options={depositOptions || []}
       />
