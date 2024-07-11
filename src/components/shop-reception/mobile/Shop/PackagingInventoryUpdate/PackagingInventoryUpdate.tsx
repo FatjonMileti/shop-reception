@@ -9,12 +9,10 @@ import { TitleHeader } from '../../Common/TitleHeader'
 import { useQuery } from 'react-query'
 import { makeCoreGetRequest, makeCorePostRequest } from '../../../../../utils/api'
 import ImageUpload from '../../Common/ImageUpload/ImageUpload'
-import { getUserInfo } from '../../../../../utils/authService'
 import { CircularProgress } from '@mui/material'
 
 const PackagingInventoryUpdate = () => {
   const { showNotification } = useNotification()
-  const inputFileRef = React.useRef<HTMLInputElement>()
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -130,7 +128,7 @@ const PackagingInventoryUpdate = () => {
           error={!!formik.errors.quality}
           helperText={formik.errors.quality as string}
         />,
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div>
           <Input
             type="number"
             label="Defecți"

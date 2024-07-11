@@ -121,7 +121,7 @@ const SupportScanStep3 = () => {
       field: 'received',
       align: 'center',
       render: (rowData: any) => (
-        <div style={{ display: 'flex' }}>
+        <div>
           <Input
             type="number"
             value={rowData.received}

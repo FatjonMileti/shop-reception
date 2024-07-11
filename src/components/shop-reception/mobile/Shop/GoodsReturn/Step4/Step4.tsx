@@ -18,6 +18,7 @@ const Step4 = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const [numFields, setNumFields] = useState(1)
+  const [uploadedImages, setUploadedImages] = useState([false])
   const id = location.state || ''
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
@@ -32,6 +33,8 @@ const Step4 = () => {
           '/shop-reception-mobile/truck/shop/exit/save-notice/' + id,
           values
         )
+
+        localStorage.removeItem(`packageScanned-${id}`)
 
         returnTruck.depositOrHubName === 'FURNIZOR CHEP'
           ? navigate('/goodsReturn')
@@ -67,10 +70,15 @@ const Step4 = () => {
     if (numFields < 3) {
       setNumFields(numFields + 1)
       formik.setFieldValue('sealList', [...formik.values.sealList, ''])
+      setUploadedImages([...uploadedImages, false])
     }
   }
 
-  const handleSuccess = () => {
+  const handleSuccess = (idx) => {
+    const newUploadedImages = [...uploadedImages]
+    newUploadedImages[idx] = true
+    setUploadedImages(newUploadedImages)
+
     showNotification({
       message: 'Image uploaded successfully',
       type: 'success'
@@ -83,6 +91,8 @@ const Step4 = () => {
       type: 'error'
     })
   }
+
+  const isFinalizable = formik.values.sealList?.every(seal => seal !== '') && uploadedImages.every(img => img);
 
   if (isLoadingTruck) {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -125,7 +135,7 @@ const Step4 = () => {
             />
             <ImageUpload
               uploadUrl={`/shop-reception-mobile/truck/shop/exit/image/` + id}
-              onSuccess={handleSuccess}
+              onSuccess={() => handleSuccess(idx)}
               onError={handleError}
             />
           </div>
@@ -137,6 +147,7 @@ const Step4 = () => {
           onClick={addSealNumberField}
           style={{ width: '100%' }}
         />,
+        isFinalizable &&
         <Button
           type="button"
           variant="contained"

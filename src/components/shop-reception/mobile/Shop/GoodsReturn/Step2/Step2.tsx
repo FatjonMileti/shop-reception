@@ -18,15 +18,19 @@ const Step2 = () => {
   const { showNotification } = useNotification()
   const location = useLocation()
   const navigate = useNavigate()
+  const id = location.state?.id || '';
+
   const [isInvalidSupportTypeModalOpen, setIsInvalidSupportTypeModalOpen] = useState(false)
   const [invalidSupportTypeModalContent, setInvalidSupportTypeModalContent] = useState({ title: '', description: '', buttons: [] })
   const [isReturnableModalOpen, setIsReturnableModalOpen] = useState(false)
   const [returnableModalContent, setReturnableModalContent] = useState({ title: '', description: '', buttons: [] })
   const [isSupportScanModalOpen, setIsSupportScanModalOpen] = useState(false)
   const [supportScanModalContent, setSupportScanModalContent] = useState({ title: '', description: '', buttons: [] })
-  const [packageScanned, setPackageScanned] = useState(false)
+  const [packageScanned, setPackageScanned] = useState(() => {
+    const saved = localStorage.getItem(`packageScanned-${id}`);
+    return saved !== null ? JSON.parse(saved) : false;
+  });
   const [searchCode, setSearchCode] = useState('')
-  const id = location.state?.id || '';
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -42,6 +46,7 @@ const Step2 = () => {
           await makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/support-type/save/' + id, {supportTypeId: values.currentSupportTypeId, supportNumber: values.supportNumber});
 
           setPackageScanned(true);
+          localStorage.setItem(`packageScanned-${id}`, JSON.stringify(true));
           setSearchCode('');
           await formik.setFieldValue('supportType', '');
           await formik.setFieldValue('currentSupportTypeId', '');
