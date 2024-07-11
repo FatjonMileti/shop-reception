@@ -44,6 +44,7 @@ const SupportWrongDestination = () => {
         message: `A aparut o eroare la obtinerea datelor din tabel. ${formatErrorMessage(error)}`,
         type: 'error'
       })
+      setIsLoading(false)
     }
   }
 
