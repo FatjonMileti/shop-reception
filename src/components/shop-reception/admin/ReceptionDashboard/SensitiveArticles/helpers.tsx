@@ -8,7 +8,8 @@ export const columns = [
     field: 'shopName',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    disableSorting: true
   },
   {
     title: 'Date',
@@ -16,7 +17,8 @@ export const columns = [
     align: 'left',
     type: 'string',
     width: '100px',
-    render: row => formatUIDate(row.dateInfo)
+    render: row => formatUIDate(row.dateInfo),
+    disableSorting: true
   },
   {
     title: 'Numar articole sensibile receptionate',
@@ -31,7 +33,8 @@ export const columns = [
     field: 'verifiedNo',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    disableSorting: true
   },
 
   {
