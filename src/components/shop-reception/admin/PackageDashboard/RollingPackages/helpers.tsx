@@ -139,7 +139,7 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza depozit'
+    label: 'Magazin'
   },
   {
     name: 'hubId',
@@ -148,7 +148,7 @@ export const getFilters = ({
       <Autocomplete variant="outlined" label="Selecteaza Hub" options={hubOptions || []} multiple />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Hub'
+    label: 'Hub'
   },
   {
     name: 'depositId',
@@ -162,7 +162,7 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Depozit'
+    label: 'Depozit'
   },
   {
     name: 'type',
@@ -176,7 +176,7 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Tip'
+    label: 'Tip'
   },
   {
     name: 'supportTypeId',
@@ -190,7 +190,7 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Tip Suport'
+    label: 'Tip Suport'
   },
   {
     name: 'parentSociety',
@@ -204,7 +204,7 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Societate'
+    label: 'Societate'
   },
   {
     name: 'supportCode',
@@ -230,13 +230,13 @@ export const getFilters = ({
     filter: (
       <Autocomplete
         variant="outlined"
-        label="Conformitate suport"
+        label="Selecteaza conformitate suport"
         options={nonCompliantReasonOptions || []}
         multiple
       />
     ),
     type: 'autocomplete',
-    label: 'Status'
+    label: 'Conformitate suport'
   },
   {
     name: 'createdDate',
@@ -255,7 +255,7 @@ export const getFilters = ({
       />
     ),
     type: 'date',
-    label: 'Selecteaza data de la'
+    label: 'Data de la'
   },
   {
     name: 'endedDate',
@@ -274,6 +274,6 @@ export const getFilters = ({
       />
     ),
     type: 'date',
-    label: 'Selecteaza data pana la'
+    label: 'Data pana la'
   }
 ]
