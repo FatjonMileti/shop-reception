@@ -74,13 +74,17 @@ const SupportScanStep2 = () => {
       let missingValue = false
       const message = 'Există diferențe între cantitatea aşteptată şi cea descărcată pentru '
       let supportsNotOk = ''
+      let uploaded: boolean[] = []
+
       values.supportType.forEach(support => {
-        missingValue = support.received !== null && support.hasImage
+        missingValue = support.received !== null
+
         const total = Number(support.received)
         totalSupportNumber += total
         supportTypeList.forEach(st => {
           if (st.id === support.id && support.received !== null && st.received !== total) {
             supportsNotOk = supportsNotOk + st.name + ', '
+            if (support.imageUploaded === false) uploaded.push(false)
           }
         })
       })
@@ -90,7 +94,7 @@ const SupportScanStep2 = () => {
       } else if (totalSupportNumber === 0) {
         openMandatorySupportModal()
       } else if (supportsNotOk.length > 0) {
-        showDifferentNumberConfirmation(values.supportType, message + supportsNotOk)
+        showDifferentNumberConfirmation(values.supportType, message + supportsNotOk, uploaded)
       } else {
         doSaveSupportTypes(values.supportType)
       }
@@ -108,7 +112,10 @@ const SupportScanStep2 = () => {
     'SupportPrincipalType',
     async () => {
       const support = await makeCoreGetRequest('/shop-reception-mobile/support/shop/principal/type')
-      formik.setFieldValue('supportType', support)
+      await formik.setFieldValue('supportType', support.map(support => ({
+        ...support,
+        imageUploaded: false
+      })))
       return support
     },
     {
@@ -130,10 +137,8 @@ const SupportScanStep2 = () => {
   }
 
   const handleSuccess = id => {
-    const newValues = formik.values.supportType.map(val =>
-      val.id === id ? { ...val, hasImage: true } : val
-    )
-    formik.setFieldValue('supportType', newValues)
+    formik.setFieldValue(`supportType[${id}].imageUploaded`, true)
+
     showNotification({
       message: 'Image uploaded successfully',
       type: 'success'
@@ -421,25 +426,30 @@ const SupportScanStep2 = () => {
     setIsMissingValuesModalOpen(false)
   }
 
-  const showDifferentNumberConfirmation = (values, message) => {
+  const showDifferentNumberConfirmation = (values, message, imageUploaded) => {
+    const buttons = [
+      {
+        label: 'Mai verific',
+        onClick: () => setIsDifferentNumberModalOpen(false),
+        color: 'primary'
+      }
+    ]
+
+    if (!imageUploaded || imageUploaded.length === 0) {
+      buttons.push({
+        label: 'Am terminat',
+        onClick: () => {
+          setIsDifferentNumberModalOpen(false)
+          doSaveSupportTypes(values)
+        },
+        color: 'primary'
+      })
+    }
+
     setDifferentNumberModalContent({
       title: message,
       description: '',
-      buttons: [
-        {
-          label: 'Mai verific',
-          onClick: () => setIsDifferentNumberModalOpen(false),
-          color: 'primary'
-        },
-        {
-          label: 'Am terminat',
-          onClick: () => {
-            setIsDifferentNumberModalOpen(false)
-            doSaveSupportTypes(values)
-          },
-          color: 'primary'
-        }
-      ]
+      buttons: buttons
     })
     setIsDifferentNumberModalOpen(true)
   }

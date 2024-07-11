@@ -10,8 +10,8 @@ export const getValidationSchema = () =>
         defect: Yup.number().min(0),
         reason: Yup.string().nullable(),
         received: Yup.number().nullable(),
-        }
-      )
+        imageUploaded: Yup.boolean().default(false)
+      })
     )
   })
 
