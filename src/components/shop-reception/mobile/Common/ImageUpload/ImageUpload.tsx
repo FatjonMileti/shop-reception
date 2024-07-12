@@ -88,9 +88,9 @@ const ImageUpload = ({
         </>
       )}
 
-      <Dialog open={open} onClose={handleClose} maxWidth="sm" style={{ textAlign: 'center' }}>
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth={true} style={{ textAlign: 'center' }}>
         <DialogTitle>Adauga imagine</DialogTitle>
-        <DialogContent style={{ paddingBottom: '0' }}>
+        <DialogContent style={{ paddingBottom: '0', display: 'flex', flexDirection: 'column' }}>
           {showPhotoCapture ? (
             <Box className={s.webcamContainer}>
               <WebcamCapture

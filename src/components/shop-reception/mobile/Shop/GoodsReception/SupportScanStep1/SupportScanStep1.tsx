@@ -209,6 +209,8 @@ const SupportScanStep1 = () => {
         setDefectImageUploaded(true)
         setSupportImageButtonVisible(false)
         setDefectImageVisible(false)
+        setDefectImageId(null)
+        setSupportImageId(null)
         setSupportTypeId(null)
         setIsFinalizing(true)
       } catch (error) {
@@ -248,6 +250,7 @@ const SupportScanStep1 = () => {
     }
 
     setIsSearching(true)
+    setIsFinalizing(false)
   }
 
   const toggleIsFinalizing = async () => {
@@ -544,7 +547,7 @@ const SupportScanStep1 = () => {
                 set.add(option.value)
                 if (set.size >= 1 && option.value !== 'COMPLIANT') {
                   setDefectImageVisible(true)
-                  setDefectImageUploaded(false)
+                  if (!defectImageId) setDefectImageUploaded(false)
                 }
               }
               formik.setFieldValue('nonCompliantReasonList', Array.from(set))
@@ -602,6 +605,7 @@ const SupportScanStep1 = () => {
       }}
       disabled={formik.values.nonCompliantReasonList?.length === 0 || !supportImageUploaded || !defectImageUploaded}
     />,
+    isSearching &&
     <Button
       type="button"
       variant="contained"
