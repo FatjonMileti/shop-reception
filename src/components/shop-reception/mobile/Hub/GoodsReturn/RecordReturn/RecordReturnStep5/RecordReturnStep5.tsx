@@ -18,6 +18,7 @@ const ContinueReturnDetailFinal = () => {
   const navigate = useNavigate()
   const [sealNumbers, setSealNumbers] = useState([''])
   const [numFields, setNumFields] = useState(1)
+  const [uploadedImages, setUploadedImages] = useState([false]);
   const [params] = useSearchParams()
   const id = params.get('id')
 
@@ -43,10 +44,15 @@ const ContinueReturnDetailFinal = () => {
     if (numFields < 3) {
       setNumFields(numFields + 1)
       setSealNumbers([...sealNumbers, ''])
+      setUploadedImages([...uploadedImages, false])
     }
   }
 
-  const handleSuccess = () => {
+  const handleSuccess = (idx) => {
+    const newUploadedImages = [...uploadedImages]
+    newUploadedImages[idx] = true
+    setUploadedImages(newUploadedImages)
+
     showNotification({
       message: 'Image uploaded successfully',
       type: 'success'
@@ -104,6 +110,8 @@ const ContinueReturnDetailFinal = () => {
     }
   }
 
+  const isFinalizable = sealNumbers.every(seal => seal !== '') && uploadedImages.every(img => img);
+
   if (isLoading) {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
@@ -131,7 +139,7 @@ const ContinueReturnDetailFinal = () => {
           itemsPerRow={1}
         />,
         sealNumbers.map((sealNumber, idx) => (
-          <div style={{ display: 'flex', marginTop: '20px' }}>
+          <div>
             <Input
               key={idx}
               type="text"
@@ -146,10 +154,8 @@ const ContinueReturnDetailFinal = () => {
               }}
             />
             <ImageUpload
-              uploadUrl={
-                `/shop-reception-mobile/truck/hub/return/registration/image/` + id + `?notice=false`
-              }
-              onSuccess={handleSuccess}
+              uploadUrl={`/shop-reception-mobile/truck/hub/return/registration/image/` + id + `?notice=false`}
+              onSuccess={() => handleSuccess(idx)}
               onError={handleError}
             />
           </div>
@@ -161,7 +167,7 @@ const ContinueReturnDetailFinal = () => {
           onClick={addSealNumberField}
           style={{ width: '100%' }}
         />,
-        sealNumbers[0] !== '' && (
+        isFinalizable && (
           <Button
             type="button"
             variant="contained"

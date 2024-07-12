@@ -40,7 +40,7 @@ const ContinueReturnDetail2 = () => {
     'SupportList',
     async () => {
       return await makeCoreGetRequest(
-        '/shop-reception-mobile/truck/hub/return/registration/all-supports/' + truckId,
+        '/shop-reception-mobile/truck/hub/return/registration/supports/' + truckId,
         null
       )
     },

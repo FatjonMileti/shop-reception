@@ -33,17 +33,19 @@ const InProgressReturn = () => {
 
   let items = [
     <TitleHeader title="RETUR ÎN CURS DE RECEPȚIE" />,
-    data &&
-      data.map((item: any, index) => (
-        <TruckCard
-          key={item.id}
-          onClick={() => {
-            navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2}?id=${item.id}`)
-          }}
-          truck={item}
-        />
+    data && data.length > 0 && data.map((item: any, index) => (
+      <TruckCard
+        key={item.id}
+        onClick={() => {
+          navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2}?id=${item.id}`)
+        }}
+        truck={item}
+      />
       )),
-    !data && <Typography variant={'medium'}>Nu există camioane de retur în lucru.</Typography>
+    (!data || data.length === 0) &&
+    <Typography variant="light" component="p" style={{ textAlign: 'center', textTransform: 'uppercase' }}>
+      Nu există camioane de retur în lucru.
+    </Typography>
   ]
 
   if (isLoading) {

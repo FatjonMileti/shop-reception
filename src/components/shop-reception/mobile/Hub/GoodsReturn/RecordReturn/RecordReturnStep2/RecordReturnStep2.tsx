@@ -35,14 +35,10 @@ const RecordReturnDetail = () => {
     validateOnChange: false,
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values: any) => {
+    onSubmit: async () => {
       try {
         const payload = formik.values.blList.map(bl => bl.id)
-        await makeCorePostRequest(
-          '/shop-reception-mobile/truck/hub/return/registration/save-notices/' + truckId,
-          payload,
-          null
-        )
+        await makeCorePostRequest('/shop-reception-mobile/truck/hub/return/registration/save-notices/' + truckId, payload)
         navigate(`${URLS.AUTH_RECORD_RETURN_STEP_3}?id=${truckId}`)
       } catch (error) {
         showNotification({
@@ -153,14 +149,6 @@ const RecordReturnDetail = () => {
       style={{ width: '100%' }}
       type="button"
       variant="contained"
-      label="PRINT"
-      size="large"
-      onClick={null}
-    />,
-    <Button
-      style={{ width: '100%' }}
-      type="button"
-      variant="contained"
       label="CONFIRMǍ"
       disabled={formik.values.blList?.length === 0}
       onClick={() => formik.handleSubmit()}
@@ -169,8 +157,8 @@ const RecordReturnDetail = () => {
       style={{ width: '100%' }}
       type="button"
       variant="contained"
-      label="ANULEAZǍ"
-      onClick={() => navigate(URLS.AUTH_RECORD_RETURN, { state: truckId })}
+      label="Modifica Date Camion"
+      onClick={() => navigate(URLS.AUTH_RECORD_RETURN, {state: { truckId: truckId }})}
     />
   ]
 

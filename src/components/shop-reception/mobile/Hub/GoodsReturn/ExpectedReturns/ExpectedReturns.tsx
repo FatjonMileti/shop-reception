@@ -33,19 +33,17 @@ const ExpectedReturns = () => {
 
   let items = [
     <TitleHeader title="RETURURI AȘTEPTATE" />,
-    truckList &&
-      truckList.map((item: any, index) => (
-        <TruckCard
-          key={index}
-          onClick={() => {
-            navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL}?id=${item.id}`)
-          }}
-          truck={item}
-        />
-      )),
-    !truckList && (
-      <Typography variant={'medium'}>Nu există camioane de retur în aşteptare.</Typography>
-    )
+    truckList && truckList.length > 0 && truckList.map((item: any, index) => (
+      <TruckCard
+        key={index}
+        onClick={() => {
+          navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL}?id=${item.id}`)
+        }}
+        truck={item}
+      />
+    )),
+    (!truckList || truckList.length === 0) &&
+    (<Typography variant="light" component="p" style={{ textAlign: 'center', textTransform: 'uppercase' }}>Nu există camioane de retur în aşteptare.</Typography>)
   ]
 
   if (isLoading) {
