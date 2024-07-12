@@ -20,6 +20,7 @@ interface NewAdminDepositProps {
   metiVersions: AutocompleteOption[]
   parentSocieties: AutocompleteOption[]
   metiShops: AutocompleteOption[]
+  setShouldRefreshData: Function
 }
 
 const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
@@ -31,21 +32,25 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
     shopCodes,
     metiVersions,
     parentSocieties,
-    metiShops
+    metiShops,
+    setShouldRefreshData
   } = props
   const { showNotification } = useNotification()
 
   const { data: depositsOptions } = useQuery(
     ['deposits'],
     async () => {
-      const result = await makeCoreGetRequest('/shop-reception/deposits/accessible')
-
-      const resultOptions = result.map(
-        (item: any): AutocompleteOption => ({
-          label: item.displayName,
-          value: item.id
-        })
+      const result = await makeCoreGetRequest(
+        isEdit
+          ? `/shop-reception/shops/${editItem?.metiCode}/deposits`
+          : `/shop-reception/deposits/accessible`
       )
+
+      const resultOptions = result.map((item: any): any => ({
+        label: item.displayName,
+        value: item.id,
+        isChecked: item.isChecked
+      }))
       return resultOptions || []
     },
     {
@@ -54,7 +59,8 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
           message: `${formatErrorMessage(error)}`,
           type: 'error'
         })
-      }
+      },
+      enabled: isOpen
     }
   )
 
@@ -91,6 +97,7 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
       })
       closeModal()
       formik.resetForm()
+      setShouldRefreshData(true)
     },
     onError: res => {
       showNotification({
@@ -102,7 +109,10 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
     }
   })
 
-  const initialValues = useMemo(() => getInitialValues(editItem), [editItem])
+  const initialValues = useMemo(
+    () => getInitialValues(editItem, depositsOptions),
+    [editItem, depositsOptions]
+  )
   const validationSchema = useMemo(() => getValidationSchema(editItem), [editItem])
 
   const formik = useFormik({
@@ -113,7 +123,8 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
     onSubmit: async (values: any) => {
       const payload = {
         ...values,
-        depositIds: values.depositIds.map(item => item.value),
+        // depositIds: values.depositIds.map(item => item.value),
+        depositIds: values.depositIds.filter(item => item.isChecked).map(item => item.value),
         code: values.code.value,
         metiVersion: values.metiVersion.value,
         parentSociety: values.parentSociety.value
@@ -121,7 +132,6 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
       mutate(payload)
     }
   })
-
   return (
     <Modal
       isModalOpen={isOpen}
@@ -210,7 +220,7 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
           <>
             {isLoadingRegionsOptions ? (
               <Grid xs={12} item>
-                <CircularProgress color="primary"  disableShrink />
+                <CircularProgress color="primary" disableShrink />
               </Grid>
             ) : (
               <Grid xs={12} item>
@@ -263,13 +273,23 @@ const AdminStoreForm: React.FC<NewAdminDepositProps> = props => {
         </Grid>
 
         <Grid xs={12} item>
-          <AsyncAutocomplete
+          <Autocomplete
             variant="outlined"
-            name="depositIds"
             label="Returnare ambalaje"
-            value={formik.values.depositIds}
-            options={depositsOptions || []}
-            onChange={value => formik.setFieldValue('depositIds', value)}
+            value={formik.values.depositIds?.filter(
+              item => item.isChecked === true && { label: item.displayName, value: item.id }
+            )}
+            options={formik.values.depositIds}
+            onChange={(e: any) => {
+              formik.setFieldValue(
+                'depositIds',
+                formik.values.depositIds.map(item =>
+                  item.label == e.target.textContent
+                    ? { ...item, isChecked: !item.isChecked }
+                    : item
+                )
+              )
+            }}
             error={!!formik.errors.depositIds}
             helperText={formik.errors.depositIds as string}
             required

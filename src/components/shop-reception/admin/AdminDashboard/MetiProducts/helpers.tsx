@@ -20,7 +20,7 @@ export const columns = (measurementUnitsOptions) => [
     align: 'left',
     type: 'string',
     disableSorting: true,
-    render: row => measurementUnitsOptions.find(unit => unit.value === row.unit).label
+    render: row => measurementUnitsOptions?.find(unit => unit.value === row.unit).label
   },
   {
     title: 'Valabilitate (zile)',

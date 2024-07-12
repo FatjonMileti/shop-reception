@@ -60,7 +60,7 @@ const EditPackagingInventory = ({ isModalOpen, closeModal, editItem, setShouldRe
   })
 
   const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files[0]
+    const file = event?.target?.files[0]
     formik.setFieldValue('file', file)
   }
 

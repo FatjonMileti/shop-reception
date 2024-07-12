@@ -37,13 +37,14 @@ const Images = () => {
   return (
     <div>
       <Grid container>
-        {data?.pictureModels.map(image => (
-          <Grid item xs={4}>
-            <p>{image.type}</p>
-            <p>{image.locationName}</p>
-            <img src={image.path} width={200} height={200} />
-          </Grid>
-        ))}
+        {typeof data?.pictureModels !== 'undefined' &&
+          data?.pictureModels.map(image => (
+            <Grid item xs={4}>
+              <p>{image.type}</p>
+              <p>{image.locationName}</p>
+              <img src={image.path} width={200} height={200} />
+            </Grid>
+          ))}
       </Grid>
     </div>
   )

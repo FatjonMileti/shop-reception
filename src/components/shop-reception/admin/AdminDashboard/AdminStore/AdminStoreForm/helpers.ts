@@ -41,7 +41,7 @@ export const getValidationSchema = (editItem: AdminStore) =>
     active: Yup.boolean().required('Campul este obligatoriu.')
   })
 
-export const getInitialValues = (editItem: AdminStore) => {
+export const getInitialValues = (editItem: AdminStore, depositsOptions: AutocompleteOption[]) => {
   return {
     id: editItem?.id || null,
     code: editItem ? { label: editItem?.metiCode, value: editItem?.metiCode } : null,
@@ -58,6 +58,7 @@ export const getInitialValues = (editItem: AdminStore) => {
     town: editItem?.town || '',
     canEditQuantities: editItem?.canEditQuantities || false,
     canCallReturnTruck: editItem?.canCallReturnTruck || false,
-    active: editItem?.active || false
+    active: editItem?.active || false,
+    depositIds: depositsOptions || []
   }
 }

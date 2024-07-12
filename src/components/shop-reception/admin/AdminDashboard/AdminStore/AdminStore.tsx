@@ -179,6 +179,7 @@ const AdminStore = () => {
         metiVersions={metiVersions}
         parentSocieties={parentSocieties}
         metiShops={metiShops}
+        setShouldRefreshData={setShouldRefreshData}
       />
       <AdminStoreForm
         isOpen={modal === 'update'}
@@ -189,6 +190,7 @@ const AdminStore = () => {
         metiVersions={metiVersions}
         parentSocieties={parentSocieties}
         metiShops={metiShops}
+        setShouldRefreshData={setShouldRefreshData}
       />
 
       {selectedRow && (

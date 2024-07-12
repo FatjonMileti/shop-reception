@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { statusColorMapping } from '../../helpers'
 
 export const columns = [
   {
@@ -19,7 +20,10 @@ export const columns = [
   {
     title: 'Status recepţie suport',
     field: 'supportStatusValue',
-    type: 'string'
+    type: 'string',
+    render: row => (
+      <div style={{ color: statusColorMapping[row.statusValue] || 'black' }}>{row.supportStatusValue}</div>
+    )
   },
   {
     title: 'Bon livrare',
