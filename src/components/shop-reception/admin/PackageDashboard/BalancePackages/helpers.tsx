@@ -57,7 +57,7 @@ export const getFilters = ({
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza magazin'
+    label: 'Magazin'
   },
   {
     name: 'hubId',
@@ -66,21 +66,21 @@ export const getFilters = ({
       <Autocomplete variant="outlined" label="Selecteaza Hub" options={hubOptions || []} multiple />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Hub'
+    label: 'Hub'
   },
   {
-    name: 'supportTypeId',
+    name: 'supportType',
     value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
-        label="Selecteaza Tip Suport"
+        label="Selecteaza tip Suport"
         options={supportTypeOptions || []}
         multiple
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Tip Suport'
+    label: 'Tip Suport'
   },
   {
     name: 'parentSociety',
@@ -88,12 +88,12 @@ export const getFilters = ({
     filter: (
       <Autocomplete
         variant="outlined"
-        label="Selecteaza Societate"
+        label="Selecteaza societate"
         options={parentSocietyOptions || []}
         multiple
       />
     ),
     type: 'autocomplete',
-    label: 'Selecteaza Societate'
+    label: 'Societate'
   }
 ]

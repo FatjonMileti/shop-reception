@@ -14,7 +14,10 @@ export const statusColorMapping = {
   'Trimis la Meti': 'green',
   'Resigilat': 'orange',
   'Expediat din HUB': 'orange',
-  'În procesare în HUB': 'blue'
+  'În procesare în HUB': 'blue',
+  'Succes': 'green',
+  'Lipsește': 'red',
+  'În așteptare': 'black',
 }
 
 export const columns = navigate => [
