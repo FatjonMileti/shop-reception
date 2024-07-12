@@ -1,12 +1,12 @@
 import { Grid } from '../../../../Common/Grid'
 import { Button, Checkbox, Input } from '@fullscreendigital/carrefour-dex-fe'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from "react";
 import { getValidationSchema, initialValues } from './helpers'
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../hooks'
 
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { URLS } from '../../../constants'
 import { useQuery } from 'react-query'
 import { TitleHeader } from '../../../Common/TitleHeader'
@@ -16,15 +16,25 @@ import { CircularProgress } from '@mui/material'
 
 const RecordReturn = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const { showNotification } = useNotification()
-  const [params] = useSearchParams()
-  const truckId = params.get('id') || 0
+  const [truckId, setTruckId] = useState(0)
   const [isInvalidTruckNumberModalOpen, setIsInvalidTruckNumberModalOpen] = useState(false)
   const [InvalidTruckNumberModalContent, setInvalidTruckNumberModalContent] = useState({
     title: '',
     description: '',
     buttons: []
   })
+
+  useEffect(() => {
+    const id = location.state?.truckId;
+
+    console.log(location.state);
+    if (id) {
+      loadReturnTruck(id);
+      setTruckId(id);
+    }
+  }, [location])
 
   const { data: depositList, isLoading } = useQuery(
     'recordReturn',
@@ -44,32 +54,24 @@ const RecordReturn = () => {
     }
   )
 
-  const { data: truck, isLoading: truckLoading } = useQuery(
-    'recordTruck',
-    async () => {
-      const truck = await makeCoreGetRequest(
-        '/shop-reception-mobile/truck/exit/truck/' + truckId,
-        null
-      )
-      await formik.setValues({
-        depositId: truck.depositId,
-        truckNumber: truck.truckNumber,
-        driverName: truck.driverName,
-        packageReturn: truck.packageReturn,
-        productReturn: truck.productReturn
-      })
-      return truck
-    },
-    {
-      enabled: !!truckId,
-      onError: error => {
-        showNotification({
-          message: `Error while fetching trucks. ${formatErrorMessage(error)}`,
-          type: 'error'
+  const loadReturnTruck = id => {
+    try {
+      makeCoreGetRequest(`/shop-reception-mobile/truck/hub/exit/truck/${id}`, null).then(truck => {
+        formik.setValues({
+          depositId: truck.depositId,
+          truckNumber: truck.truckNumber,
+          driverName: truck.driverName,
+          packageReturn: truck.packageReturn,
+          productReturn: truck.productReturn
         })
-      }
+      })
+    } catch (error) {
+      showNotification({
+        message: `Error while fetching truck. ${formatErrorMessage(error)}`,
+        type: 'error'
+      })
     }
-  )
+  }
 
   const validationSchema = useMemo(() => getValidationSchema(), [])
   const formik = useFormik({
@@ -130,7 +132,7 @@ const RecordReturn = () => {
     setIsInvalidTruckNumberModalOpen(false)
   }
 
-  if (isLoading || truckLoading) {
+  if (isLoading) {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
   }
 

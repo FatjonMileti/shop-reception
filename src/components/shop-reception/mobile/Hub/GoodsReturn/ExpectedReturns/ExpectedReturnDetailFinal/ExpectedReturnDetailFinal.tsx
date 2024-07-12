@@ -51,12 +51,19 @@ const ExpectedReturnDetailFinal = () => {
         {
           label: 'Finalizare',
           onClick: async () => {
-            await makeCorePostRequest(
-              '/shop-reception-mobile/truck/hub/exit/finalise-return/' + truckId,
-              null
-            )
-            setIsInvalidTruckNumberModalOpen(false)
-            navigate('/goodsReturn')
+            try {
+              await makeCorePostRequest(
+                '/shop-reception-mobile/truck/hub/exit/finalise-return/' + truckId,
+                null
+              )
+              setIsInvalidTruckNumberModalOpen(false)
+              navigate('/goodsReturn')
+            } catch (error) {
+              showNotification({
+                message: `Error while finalizing return. ${formatErrorMessage(error)}`,
+                type: 'error'
+              })
+            }
           },
           color: 'primary'
         },

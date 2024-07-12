@@ -39,8 +39,7 @@ const ContinueReturn = () => {
 
   let items = [
     <TitleHeader title="CONTINUARE RETUR" />,
-    !!truckList &&
-      truckList.map((truck: any, index) => (
+    !!truckList && truckList.map((truck: any, index) => (
         <TruckCard
           key={truck.id}
           onClick={() => {
@@ -51,7 +50,7 @@ const ContinueReturn = () => {
       ))
   ]
 
-  if (!truckList) {
+  if (!truckList || truckList.length == 0) {
     items.push(
       <Typography
         variant="light"

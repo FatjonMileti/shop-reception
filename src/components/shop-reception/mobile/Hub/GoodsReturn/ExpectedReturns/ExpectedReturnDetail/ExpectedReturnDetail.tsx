@@ -123,7 +123,7 @@ const ExpectedReturnDetail = () => {
           </Typography>
         </>,
         formik.values?.sealList?.map((seal, idx) => (
-          <div style={{ display: 'flex', marginTop: '20px' }}>
+          <div>
             <Input
               type="select"
               label={'Confirm sigiliu ' + seal.sealCode}
@@ -143,7 +143,6 @@ const ExpectedReturnDetail = () => {
               error={!!formik.errors?.sealList?.[idx]?.conform}
               helperText={formik.errors?.sealList?.[idx]?.conform as string}
             />
-            ,
             <ImageUpload
               uploadUrl={`/shop-reception-mobile/truck/hub/upload/return_reception_seal/` + truckId}
               onSuccess={handleSuccess}
@@ -155,7 +154,7 @@ const ExpectedReturnDetail = () => {
           Confirmă număr aviz
         </Typography>,
         formik.values?.noticeList?.map((notice, idx) => (
-          <div style={{ display: 'flex', marginTop: '20px' }}>
+          <div>
             <Input
               type="select"
               label={'Confirm sigiliu ' + notice.shopName}
@@ -175,7 +174,6 @@ const ExpectedReturnDetail = () => {
               error={!!formik.errors?.noticeList?.[idx]?.correct}
               helperText={formik.errors?.noticeList?.[idx]?.correct as string}
             />
-            ,
             <ImageUpload
               uploadUrl={`/shop-reception-mobile/truck/hub/upload/return_reception_seal/` + truckId}
               onSuccess={handleSuccess}
