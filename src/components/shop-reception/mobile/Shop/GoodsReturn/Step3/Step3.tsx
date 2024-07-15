@@ -101,6 +101,10 @@ const Step3 = () => {
     supportTypeId: support.supportTypeId
   }));
 
+  const hasEmptySupportNumber = (supportList) => {
+    return supportList?.some(support => !support.supportNumber);
+  }
+
   return (
     <Grid
       gridContainerStyle={{ marginTop: '20px' }}
@@ -124,6 +128,7 @@ const Step3 = () => {
           label='CONFIRMǍ AMBALAJE'
           onClick={() => formik.handleSubmit()}
           style={{ width: '100%' }}
+          disabled={hasEmptySupportNumber(formik.values.supportList)}
         />
       ]}
       itemsPerRow={1}

@@ -35,7 +35,7 @@ const Step1 = () => {
     if (id) {
       loadReturnTruck(id);
       setTruckId(id);
-      //readOnlyFields = params['hubFlow'];
+      //TODO readOnlyFields = params['hubFlow'];
     }
     if (truckNumber) formik.setFieldValue('registrationNumber', truckNumber);
     if (driverName) formik.setFieldValue('driver', driverName);
@@ -131,9 +131,17 @@ const Step1 = () => {
     }
   )
 
+  useEffect(() => {
+    if (depositList?.length === 1) {
+      const singleDeposit = depositList[0];
+      formik.setFieldValue('destination', singleDeposit.id);
+      checkIfChep(singleDeposit.id);
+    }
+  }, [depositList]);
+
   const loadReturnTruck = id => {
     try {
-      makeCoreGetRequest('/shop-reception-mobile/truck/shop/exit/truck/' + id, null).then(truck => {
+      makeCoreGetRequest(`/shop-reception-mobile/truck/shop/exit/truck/${id}`, null).then(truck => {
         formik.setValues({
           destination: truck.depositId,
           registrationNumber: truck.truckNumber,
@@ -180,7 +188,7 @@ const Step1 = () => {
           error={!!formik.errors.destination}
           helperText={formik.errors.destination as string}
         />,
-        returnHub && (
+        returnHub && !isChep && (
           <Input
             type="text"
             label="VIA"

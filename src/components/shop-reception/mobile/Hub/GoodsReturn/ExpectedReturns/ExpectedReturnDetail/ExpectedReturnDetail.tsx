@@ -1,6 +1,6 @@
 import { Grid } from '../../../../../Common/Grid'
 import { Button, Input, Typography } from '@fullscreendigital/carrefour-dex-fe'
-import React, { useMemo } from 'react'
+import React, { useEffect, useState } from "react";
 import { useFormik } from 'formik'
 import { formatErrorMessage } from '../../../../../../../utils/formatting'
 import { useNotification } from '../../../../../../../hooks'
@@ -17,14 +17,18 @@ const ExpectedReturnDetail = () => {
   const { showNotification } = useNotification()
   const navigate = useNavigate()
   const [params] = useSearchParams()
+  const [uploadedSealImages, setUploadedSealImages] = useState([])
+  const [uploadedNoticeImages, setUploadedNoticeImages] = useState([])
   const truckId = Number(params.get('id'))
 
-  const validationSchema = useMemo(() => getValidationSchema(), [])
+  const [sealList, setSealList] = useState([])
+  const [noticeList, setNoticeList] = useState([])
+  const [canProceed, setCanProceed] = useState(false)
+
   const formik = useFormik({
     enableReinitialize: false,
     validateOnChange: false,
     initialValues: initialValues,
-    validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
         const payload = {
@@ -32,15 +36,11 @@ const ExpectedReturnDetail = () => {
           truckNumber: truck.truckNumber,
           driverName: truck.driverName,
           shopNamesAndCodes: truck.shopNamesAndCodes,
-          sealList: formik.values.sealList,
-          noticeList: formik.values.noticeList
+          sealList: sealList,
+          noticeList: noticeList
         }
 
-        const resp = await makeCorePostRequest(
-          '/shop-reception-mobile/truck/hub/exit/verify-notices',
-          formik.values.noticeList,
-          null
-        )
+        const resp = await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/verify-notices', noticeList)
 
         if (resp.hasNoticeDuplications) {
           showNotification({
@@ -48,11 +48,7 @@ const ExpectedReturnDetail = () => {
             type: 'error'
           })
         } else {
-          await makeCorePostRequest(
-            '/shop-reception-mobile/truck/hub/exit/confirm-truck',
-            payload,
-            null
-          )
+          await makeCorePostRequest('/shop-reception-mobile/truck/hub/exit/confirm-truck', payload)
           navigate(`${URLS.AUTH_EXPECTED_RETURN_DETAIL_STEP_2}?id=${truckId}`)
         }
       } catch (error) {
@@ -71,10 +67,8 @@ const ExpectedReturnDetail = () => {
         '/shop-reception-mobile/truck/hub/exit/truck/' + truckId,
         null
       )
-      await formik.setValues({
-        sealList: truck.sealList,
-        noticeList: truck.noticeList
-      })
+      setSealList(truck.sealList.map(seal => ({ ...seal, imageUploaded: false })))
+      setNoticeList(truck.noticeList.map(notice => ({ ...notice, imageUploaded: false })))
       return truck
     },
     {
@@ -88,7 +82,26 @@ const ExpectedReturnDetail = () => {
     }
   )
 
-  const handleSuccess = () => {
+  const handleSuccess = (index, type) => {
+    if (type === 'seal') {
+      let updatedSealImages = [...uploadedSealImages]
+      updatedSealImages[index] = true
+      setUploadedSealImages(updatedSealImages)
+      setSealList(prevState => {
+        const updatedList = [...prevState]
+        updatedList[index].imageUploaded = true
+        return updatedList
+      })
+    } else {
+      let updatedNoticeImages = [...uploadedNoticeImages]
+      updatedNoticeImages[index] = true
+      setUploadedNoticeImages(updatedNoticeImages)
+      setNoticeList(prevState => {
+        const updatedList = [...prevState]
+        updatedList[index].imageUploaded = true
+        return updatedList
+      })
+    }
     showNotification({
       message: 'Image uploaded successfully',
       type: 'success'
@@ -101,6 +114,13 @@ const ExpectedReturnDetail = () => {
       type: 'error'
     })
   }
+
+  useEffect(() => {
+    const allSealsValid = sealList.every(seal => (seal.conform === true ? seal.imageUploaded : true))
+    const allNoticesValid = noticeList.every(notice => (notice.correct === true ? notice.imageUploaded : true))
+
+    setCanProceed(allSealsValid && allNoticesValid)
+  }, [sealList, noticeList])
 
   if (isLoading) {
     return <CircularProgress color="primary" style={{ margin: '40px auto' }} disableShrink />
@@ -122,8 +142,8 @@ const ExpectedReturnDetail = () => {
             {truck.shopNamesAndCodes}
           </Typography>
         </>,
-        formik.values?.sealList?.map((seal, idx) => (
-          <div>
+        sealList.map((seal, idx) => (
+          <div key={idx}>
             <Input
               type="select"
               label={'Confirm sigiliu ' + seal.sealCode}
@@ -134,18 +154,15 @@ const ExpectedReturnDetail = () => {
                 { value: 'true', label: 'Da' },
                 { value: 'false', label: 'Nu' }
               ]}
-              onChange={event =>
-                formik.setFieldValue(
-                  `sealList[${idx}].conform`,
-                  (event.target as HTMLInputElement).value
-                )
-              }
-              error={!!formik.errors?.sealList?.[idx]?.conform}
-              helperText={formik.errors?.sealList?.[idx]?.conform as string}
+              onChange={event => {
+                const updatedSealList = [...sealList]
+                updatedSealList[idx].conform = (event.target as HTMLInputElement).value === 'true';
+                setSealList(updatedSealList)
+              }}
             />
             <ImageUpload
               uploadUrl={`/shop-reception-mobile/truck/hub/upload/return_reception_seal/` + truckId}
-              onSuccess={handleSuccess}
+              onSuccess={() => handleSuccess(idx, 'seal')}
               onError={handleError}
             />
           </div>
@@ -153,11 +170,11 @@ const ExpectedReturnDetail = () => {
         <Typography variant="regular" component="p">
           Confirmă număr aviz
         </Typography>,
-        formik.values?.noticeList?.map((notice, idx) => (
-          <div>
+        noticeList.map((notice, idx) => (
+          <div key={idx}>
             <Input
               type="select"
-              label={'Confirm sigiliu ' + notice.shopName}
+              label={'Confirm aviz ' + notice.shopName}
               variant="standard"
               width="100%"
               value={notice.correct}
@@ -165,29 +182,28 @@ const ExpectedReturnDetail = () => {
                 { value: 'true', label: 'Da' },
                 { value: 'false', label: 'Nu' }
               ]}
-              onChange={event =>
-                formik.setFieldValue(
-                  `noticeList[${idx}].correct`,
-                  (event.target as HTMLInputElement).value
-                )
-              }
-              error={!!formik.errors?.noticeList?.[idx]?.correct}
-              helperText={formik.errors?.noticeList?.[idx]?.correct as string}
+              onChange={event => {
+                const updatedNoticeList = [...noticeList]
+                updatedNoticeList[idx].correct = (event.target as HTMLInputElement).value === 'true';
+                setNoticeList(updatedNoticeList)
+              }}
             />
             <ImageUpload
-              uploadUrl={`/shop-reception-mobile/truck/hub/upload/return_reception_seal/` + truckId}
-              onSuccess={handleSuccess}
+              uploadUrl={`/shop-reception-mobile/truck/hub/upload/return_reception_notice/` + truckId}
+              onSuccess={() => handleSuccess(idx, 'notice')}
               onError={handleError}
             />
           </div>
         )),
-        <Button
-          style={{ width: '100%' }}
-          type="button"
-          variant="contained"
-          label="PASUL URMĂTOR"
-          onClick={() => formik.handleSubmit()}
-        />
+        canProceed && (
+          <Button
+            style={{ width: '100%' }}
+            type="button"
+            variant="contained"
+            label="PASUL URMĂTOR"
+            onClick={() => formik.handleSubmit()}
+          />
+        )
       ]}
       itemsPerRow={1}
     />

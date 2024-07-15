@@ -29,10 +29,7 @@ const Step4 = () => {
     validationSchema: validationSchema,
     onSubmit: async (values: any) => {
       try {
-        const notice = await makeCorePostRequest(
-          '/shop-reception-mobile/truck/shop/exit/save-notice/' + id,
-          values
-        )
+        const notice = await makeCorePostRequest('/shop-reception-mobile/truck/shop/exit/save-notice/' + id, values)
 
         localStorage.removeItem(`packageScanned-${id}`)
 
@@ -154,6 +151,7 @@ const Step4 = () => {
           label="FINALIZEAZǍ"
           onClick={() => formik.handleSubmit()}
           style={{ width: '100%' }}
+          disabled={formik.isSubmitting}
         />
       ]}
       itemsPerRow={1}
