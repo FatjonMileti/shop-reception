@@ -158,9 +158,6 @@ VALUES
     (283, 'Produse necomandate (istoric)', 'UsersManagement', null, true, 22),
     (284, 'Fisiere meti (istoric)', 'UsersManagement', null, true, 22),
     (285, 'Produse cu diferente (istoric)', 'UsersManagement', null, true, 22),
-    (286, 'Trasabilitate suport (istoric)', 'UsersManagement', null, true, 22),
-    (287, 'Articole sensibile (istoric)', 'UsersManagement', null, true, 22),
-    (288, 'Raport livrare marfa (istoric)', 'UsersManagement', null, true, 22),
     -- "Ambalaje" section
     (170, 'Lista camioane retur', 'UsersManagement', null, true, 14),
     (171, 'Rulaj ambalaje', 'UsersManagement', null, true, 14),
@@ -337,9 +334,6 @@ VALUES
     (408, 'Fisiere meti', '', '/shop-reception/reception/history/metiFiles', true, 284, true),
     (409, 'Detalii fisiere meti', '', '/shop-reception/reception/history/metiFiles/:id', true, 284, false),
     (410, 'Produse cu diferente', '', '/shop-reception/reception/history/productsDifferences', true, 285, true),
-    (411, 'Trasabilitate suport', '', '/shop-reception/reception/history/trasabilitySupport', true, 286, true),
-    (412, 'Articole sensibile', '', '/shop-reception/reception/history/sensitiveProducts', true, 287, true),
-    (413, 'Raport livrare marfa', '', '/shop-reception/reception/history/deliveryTruckList', true, 288, true),
     -- "Ambalaje" section
     (186, 'Lista camioane retur', '', '/shop-reception/package/trucksReturn', true, 170, true),
     (286, 'Detalii camion retur', '', '/shop-reception/package/trucksReturn/:id', true, 170, false),
@@ -559,8 +553,7 @@ VALUES
 
     -- rapoarte istorice
     (200, 280), (200, 281), (200, 282), (200, 283),
-    (200, 284), (200, 285), (200, 286), (200, 287),
-    (200, 288),
+    (200, 284), (200, 285),
 
     -- GG_RO_HQ_SHOP_RECEPTION_BACKOFFICE - store manager
     -- admin
@@ -579,8 +572,7 @@ VALUES
 
     -- rapoarte istorice
     (201, 280), (201, 281), (201, 282), (201, 283),
-    (201, 284), (201, 285), (201, 286), (201, 287),
-    (201, 288),
+    (201, 284), (201, 285),
 
     -- GG_RO_HQ_SHOP_RECEPTION_STORE - receptionist
     -- admin
@@ -598,8 +590,7 @@ VALUES
 
     -- rapoarte istorice
     (202, 280), (202, 281), (202, 282), (202, 283),
-    (202, 284), (202, 285), (202, 286), (202, 287),
-    (202, 288),
+    (202, 284), (202, 285),
 
     -- GG_RO_HQ_SHOP_RECEPTION_HUB
     -- admin
@@ -621,8 +612,7 @@ VALUES
 
     -- rapoarte istorice
     (203, 280), (203, 281), (203, 282), (203, 283),
-    (203, 284), (203, 285), (203, 286), (203, 287),
-    (203, 288),
+    (203, 284), (203, 285),
 
     -- GG_RO_HQ_SHOP_RECEPTION_AMBALAJE - depozit
     -- admin
@@ -640,8 +630,7 @@ VALUES
 
     -- rapoarte istorice
     (208, 280), (208, 281), (208, 282), (208, 283),
-    (208, 284), (208, 285), (208, 286), (208, 287),
-    (208, 288),
+    (208, 284), (208, 285),
 
     -- GG_RO_HQ_SHOP_RECEPTION_REGIONAL_OPERATIONS
     -- admin
@@ -661,8 +650,7 @@ VALUES
 
     -- rapoarte istorice
     (205, 280), (205, 281), (205, 282), (205, 283),
-    (205, 284), (205, 285), (205, 286), (205, 287),
-    (205, 288),
+    (205, 284), (205, 285),
 
     -- GG_RO_HQ_SHOP_RECEPTION_CG
     -- admin
@@ -682,8 +670,7 @@ VALUES
 
     -- rapoarte istorice
     (207, 280), (207, 281), (207, 282), (207, 283),
-    (207, 284), (207, 285), (207, 286), (207, 287),
-    (207, 288),
+    (207, 284), (207, 285),
 
     -- Shop Reception Mobile
     -- GG_RO_HQ_SHOP_RECEPTION_STORE
