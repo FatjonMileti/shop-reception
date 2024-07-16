@@ -9,7 +9,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { formatErrorMessage } from 'utils/formatting'
 import { Table } from 'components/core-ui/Table'
 import { getDepositOptions, getHubOptions, getLocation, getShopOptions, getStatusOptions } from '../../api'
-import { formatAndDownloadResponse } from 'utils/helpers'
+import { formatAndDownloadResponse, formatUIDate } from 'utils/helpers'
 import { DownloadIcon } from 'icons'
 
 const TruckList = () => {
@@ -29,11 +29,19 @@ const TruckList = () => {
 
   const fetchData = async ({ page, rowsPerPage, order, orderBy, tableFilters }) => {
     setIsLoading(true)
+    const filters = tableFilters.map(filter =>
+      filter.name === 'start'
+        ? { name: filter.name, value: formatUIDate(filter.value) }
+        : filter.name === 'end'
+        ? { name: filter.name, value: formatUIDate(filter.value) }
+        : filter
+    )
+    
     try {
       const response = await makeCoreGetRequest(
         toTableGETUrl({
           url: '/shop-reception/truck',
-          tableFilters,
+          tableFilters: filters,
           page,
           rowsPerPage,
           order,
