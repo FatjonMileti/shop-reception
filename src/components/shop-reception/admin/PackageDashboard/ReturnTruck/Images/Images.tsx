@@ -40,7 +40,7 @@ const Images = ({ id }) => {
   useEffect(() => {
     ;(async () => {
       try {
-        const imageResults = await Promise.all(
+        const imageResults = typeof pictureModels !== 'undefined' ? await Promise.all(
           pictureModels.map(async picture => {
             if (picture.deleted) {
               return { ...picture, src: '', title: picture.title || getImageTitle(picture) }
@@ -63,7 +63,7 @@ const Images = ({ id }) => {
               }
             }
           })
-        )
+        ): []
 
         setImages(imageResults)
       } catch (error) {

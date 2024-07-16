@@ -311,9 +311,9 @@ VALUES
     (247, 'Nomenclator societati', '', '/shop-reception/admin/parentSocietyList', true, 247, true),
     (248, 'Serie Numar-Aviz', '', '/shop-reception/admin/noticeSeriesNumberList', true, 248, true),
     -- "Receptie marfa" section
-    (179, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips', true, 163, true),
+    (179, 'Bonuri de livrare', '', '/shop-reception/reception/deliveryTicket', true, 163, true),
     (222, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySupportAction/:id', true, 163, false),
-    (218, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips/:id', true, 163, false),
+    (218, 'Bonuri de livrare', '', '/shop-reception/reception/deliveryTicket/:id', true, 163, false),
     (180, 'Lista camioane marfa', '', '/shop-reception/reception/truckList', true, 164, true),
     (291, 'Detalii lista camioane marfa', '', '/shop-reception/reception/truckList/:id', true, 164, false),
     (181, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/wrongDestinationSupport', true, 165, true),
@@ -326,9 +326,9 @@ VALUES
     (292, 'Articole sensibile', '', '/shop-reception/reception/sensitiveProducts', true, 195, true),
     (293, 'Raport livrare marfa', '', '/shop-reception/reception/deliveryTruckList', true, 196, true),
     -- "Rapoarte istorice" section
-    (400, 'Bonuri de livrare', '', '/shop-reception/reception/history/deliverySlips', true, 280, true),
+    (400, 'Bonuri de livrare', '', '/shop-reception/reception/history/deliveryTicket', true, 280, true),
     (401, 'Bonuri de livrare', '', '/shop-reception/reception/history/deliverySupportAction/:id', true, 280, false),
-    (402, 'Bonuri de livrare', '', '/shop-reception/reception/history/deliverySlips/:id', true, 280, false),
+    (402, 'Bonuri de livrare', '', '/shop-reception/reception/history/deliveryTicket/:id', true, 280, false),
     (403, 'Lista camioane marfa', '', '/shop-reception/reception/history/truckList', true, 281, true),
     (404, 'Detalii lista camioane marfa', '', '/shop-reception/reception/history/truckList/:id', true, 281, false),
     (405, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/history/wrongDestinationSupport', true, 282, true),

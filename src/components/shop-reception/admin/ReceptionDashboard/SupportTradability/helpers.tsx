@@ -5,7 +5,7 @@ import { formatUIDate } from 'utils/helpers'
 export const columns = [
   {
     title: 'Cod cursǎ',
-    field: 'loadedSupportsNumber',
+    field: 'transportCode',
     align: 'left',
     type: 'string',
     width: '100px'
@@ -242,7 +242,7 @@ export const drawerFilters = (
     label: 'Societate'
   },
   {
-    name: 'truckNumber',
+    name: 'truckNumberDeposit',
     filter: <Input variant="outlined" label="Numar masina_DEPOZIT" type="text" />,
     type: 'text',
     label: 'Numar masina depozit'
@@ -254,7 +254,7 @@ export const drawerFilters = (
     label: 'Numar masina hub'
   },
   {
-    name: 'flowType',
+    name: 'typeFlow',
     value: undefined,
     filter: (
       <Autocomplete

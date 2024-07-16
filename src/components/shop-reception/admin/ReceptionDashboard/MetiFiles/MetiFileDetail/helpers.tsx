@@ -77,8 +77,7 @@ export const columns = [
     field: 'dlc',
     align: 'left',
     type: 'string',
-    width: '70px',
-    render: row => formatUIDate(row.dlc)
+    width: '70px'
   },
   {
     title: 'Lot',

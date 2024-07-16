@@ -1,6 +1,6 @@
 import { Autocomplete, DatePicker } from '@fullscreendigital/carrefour-dex-fe'
 import dayjs from 'dayjs'
-import { formatUIDate } from 'utils/helpers'
+import { formatUIDate, getCurrentDate } from 'utils/helpers'
 
 export const columns = [
   {
@@ -12,7 +12,7 @@ export const columns = [
     disableSorting: true
   },
   {
-    title: 'Date',
+    title: 'Data',
     field: 'dateInfo',
     align: 'left',
     type: 'string',
@@ -49,6 +49,8 @@ export const columns = [
     width: '100px'
   }
 ]
+
+const currentDate = getCurrentDate()
 
 export const drawerFilters = (shopTypesOptions, shopOptions, reportType, regionTypes) => [
   {
@@ -104,7 +106,7 @@ export const drawerFilters = (shopTypesOptions, shopOptions, reportType, regionT
   },
   {
     name: 'start',
-    value: undefined,
+    value: currentDate,
     filter: (
       <DatePicker
         label="Selecteaza data inceput"
@@ -122,7 +124,7 @@ export const drawerFilters = (shopTypesOptions, shopOptions, reportType, regionT
   },
   {
     name: 'end',
-    value: undefined,
+    value: currentDate,
     filter: (
       <DatePicker
         label="Selecteaza data sfarsit"

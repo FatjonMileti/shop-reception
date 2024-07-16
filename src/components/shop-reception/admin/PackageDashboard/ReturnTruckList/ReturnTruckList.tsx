@@ -88,7 +88,7 @@ const ReturnTruckList = () => {
         })
       )
       setTableItems(toTableRowItems(response.list))
-      setTotalCount(response.page.totalCount)
+      setTotalCount(response.page?.totalCount || 0)
       setIsLoading(false)
     } catch (error) {
       showNotification({

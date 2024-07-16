@@ -47,10 +47,11 @@ export const columns = navigate => [
   },
   {
     title: 'Locaţie camion',
-    field: 'flowTypeValue',
+    field: 'flowType',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    render: row => row.flowTypeValue
   },
   {
     title: 'Număr înmatriculare',
@@ -61,7 +62,7 @@ export const columns = navigate => [
   },
   {
     title: 'Cod şofer',
-    field: 'truckNumber',
+    field: 'driverName',
     align: 'left',
     type: 'string',
     width: '100px'
@@ -168,7 +169,8 @@ export const columns = navigate => [
     field: 'etransportStatus',
     align: 'left',
     type: 'string',
-    width: '100px'
+    width: '100px',
+    disableSorting: true
   },
 
   {

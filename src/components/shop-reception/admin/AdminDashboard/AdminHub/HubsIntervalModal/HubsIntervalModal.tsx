@@ -19,6 +19,7 @@ interface HubsIntervalModalProps {
   closeModal: Function
   item: any
 }
+const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
 const HubsIntervalModal: React.FC<HubsIntervalModalProps> = props => {
   const { isOpen, closeModal, item } = props
@@ -89,6 +90,19 @@ const HubsIntervalModal: React.FC<HubsIntervalModalProps> = props => {
     [formik, setTableItems]
   )
 
+  const isSaveEnabled = formik.values
+    .filter(value => value.receiveFromDeposit)
+    .every(value => {
+      const anyDayTrue = days.some(day => value[day] === true)
+      if (anyDayTrue) {
+        return (
+          typeof value.startInterval?.$d !== 'undefined' &&
+          typeof value.endInterval?.$d !== 'undefined'
+        )
+      }
+      return false
+    })
+
   return (
     <Modal
       isModalOpen={isOpen}
@@ -106,7 +120,7 @@ const HubsIntervalModal: React.FC<HubsIntervalModalProps> = props => {
             variant="contained"
             label={'Salveaza'}
             onClick={() => formik.handleSubmit()}
-            disabled={isMutationLoading}
+            disabled={isMutationLoading || !isSaveEnabled}
           />
         </Grid>
       </Grid>

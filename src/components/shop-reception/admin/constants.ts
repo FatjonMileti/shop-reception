@@ -18,9 +18,9 @@ export const URLS = {
   AUTH_NOTICE_SERIES_NUMBER_LIST: '/shop-reception/admin/noticeSeriesNumberList',
 
   // reception dashboard
-  AUTH_DELIVERY_SLIPS_LIST: '/shop-reception/reception/deliverySlips',
+  AUTH_DELIVERY_SLIPS_LIST: '/shop-reception/reception/deliveryTicket',
   AUTH_DELIVERY_SLIPS_SUPPORT_CODE: '/shop-reception/reception/deliverySupportAction/:id',
-  AUTH_DELIVERY_SLIP: '/shop-reception/reception/deliverySlips/:id',
+  AUTH_DELIVERY_SLIP: '/shop-reception/reception/deliveryTicket/:id',
   AUTH_TRUCK_LIST: '/shop-reception/reception/truckList',
   AUTH_TRUCK_DETAIL: '/shop-reception/reception/truckList/:id',
   AUTH_SUPPORT_WRONG_DESTINATION: '/shop-reception/reception/wrongDestinationSupport',

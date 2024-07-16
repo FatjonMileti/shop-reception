@@ -209,13 +209,13 @@ export const drawerFilters = (
 ) => [
   {
     name: 'deliveredShopCodeName',
-    value: '',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selecteaza magazin de sosire"
-        disableClearable
         options={shopOptions || []}
+        multiple
       />
     ),
     type: 'autocomplete',
@@ -223,13 +223,13 @@ export const drawerFilters = (
   },
   {
     name: 'hubSent',
-    value: '',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selecteaza HUB plecare"
-        disableClearable
         options={hubOptions || []}
+        multiple
       />
     ),
     type: 'autocomplete',
@@ -237,13 +237,13 @@ export const drawerFilters = (
   },
   {
     name: 'hubReceived',
-    value: '',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selecteaza HUB sosire"
-        disableClearable
         options={hubOptions || []}
+        multiple
       />
     ),
     type: 'autocomplete',
@@ -251,13 +251,13 @@ export const drawerFilters = (
   },
   {
     name: 'depositId',
-    value: '',
+    value: undefined,
     filter: (
       <Autocomplete
         variant="outlined"
         label="Selecteaza depozit"
-        disableClearable
         options={depositOptions || []}
+        multiple
       />
     ),
     type: 'autocomplete',

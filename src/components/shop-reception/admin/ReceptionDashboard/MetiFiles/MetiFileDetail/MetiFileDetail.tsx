@@ -19,7 +19,7 @@ const MetiFileDetail = () => {
   const location = useLocation()
   const shopCode = new URLSearchParams(location.search).get('shopCode')
 
-  const [tableItems, setTableItems] = useState<MetiFile[]>([])
+  const [tableItems, setTableItems] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [shouldRefreshData, setShouldRefreshData] = useState<boolean>(false)
   const [infoItems, setInfoItems] = useState(null)

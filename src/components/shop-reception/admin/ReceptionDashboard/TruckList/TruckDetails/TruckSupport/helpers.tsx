@@ -32,7 +32,7 @@ export const columns = [
     field: 'ticketExternalId',
     type: 'string',
     render: row => (
-      <Link to={`/shop-reception/reception/deliverySlips/${row.ticketId}`}>
+      <Link to={`/shop-reception/reception/deliveryTicket/${row.ticketId}`}>
         {row.ticketExternalId}
       </Link>
     )

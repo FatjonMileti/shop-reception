@@ -7,6 +7,7 @@ import { toTableGETUrl } from 'components/core-ui/Table/serializers'
 import { useNotification } from 'hooks'
 import { formatErrorMessage } from 'utils/formatting'
 import { getColumns } from './helpers'
+import { toTableRowItems } from './serializers'
 
 const BalancePackageHistory = () => {
   const [tableItems, setTableItems] = useState<any[]>([])
@@ -34,7 +35,7 @@ const BalancePackageHistory = () => {
         })
       )
 
-      setTableItems(response.list)
+      setTableItems(toTableRowItems(response.list))
       setTotalCount(response.page.totalCount)
 
       if (response.list.length && response.list[0].forShop) {
