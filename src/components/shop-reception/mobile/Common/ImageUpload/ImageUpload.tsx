@@ -1,12 +1,16 @@
-import { useRef, useState } from "react";
-import { makeCorePostRequest } from '../../../../../utils/api';
-import { Box, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { CameraAlt as CameraIcon } from '@mui/icons-material';
-import { Button, IconButton } from '@fullscreendigital/carrefour-dex-fe';
-import { WebcamCapture } from 'components/core-ui/WebcamCapture';
-import ImageIcon from '@mui/icons-material/Image';
-import s from './ImageUpload.modules.scss';
-import { resizeFile } from "../../../../../utils/helpers";
+import { useRef, useState } from 'react'
+import { makeCorePostRequest } from '../../../../../utils/api'
+import { Box, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
+import { CameraAlt as CameraIcon } from '@mui/icons-material'
+import { Button, IconButton } from '@fullscreendigital/carrefour-dex-fe'
+import { WebcamCapture } from 'components/core-ui/WebcamCapture'
+import ImageIcon from '@mui/icons-material/Image'
+import s from './ImageUpload.modules.scss'
+import { resizeFile } from '../../../../../utils/helpers'
+import { useOfflineTool } from 'components/core-ui/Offline'
+import { AxiosError } from 'axios'
+import { formatErrorMessage } from 'utils/formatting'
+import { useNotification } from 'hooks'
 
 const ImageUpload = ({
   uploadUrl,
@@ -16,47 +20,66 @@ const ImageUpload = ({
   label = 'Adauga imagine',
   btnStyle = {}
 }) => {
-  const [imageSelected, setImageSelected] = useState(false);
-  const [showPhotoCapture, setShowPhotoCapture] = useState(false);
-  const [file, setFile] = useState(null);
-  const [open, setOpen] = useState(false);
+  const { showNotification } = useNotification()
+  const offlineTool = useOfflineTool()
+  const [imageSelected, setImageSelected] = useState(false)
+  const [showPhotoCapture, setShowPhotoCapture] = useState(false)
+  const [file, setFile] = useState(null)
+  const [open, setOpen] = useState(false)
 
-  const inputFileRef = useRef<HTMLInputElement>();
+  const inputFileRef = useRef<HTMLInputElement>()
 
   const handleClickOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-    setShowPhotoCapture(false);
-  };
+    setOpen(false)
+    setShowPhotoCapture(false)
+  }
 
   const saveFile = async (file: File): Promise<void> => {
-    setShowPhotoCapture(false);
+    setShowPhotoCapture(false)
 
     try {
-      const resizedFile = await resizeFile({ file }) as Blob;
+      const resizedFile = (await resizeFile({ file })) as Blob
 
-      const formData = new FormData();
-      formData.append('photoFile', resizedFile);
+      const formData = new FormData()
+      formData.append('photoFile', resizedFile)
 
       const response = await makeCorePostRequest(uploadUrl, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      });
+      })
       if (onSuccess) {
-        setFile(file);
-        onSuccess(response);
-        handleClose();
+        setFile(file)
+        onSuccess(response)
+        handleClose()
       }
-    } catch (error) {
+    } catch (err) {
       if (onError) {
-        onError(error);
+        if (err?.code === AxiosError.ERR_NETWORK) {
+          showNotification({
+            message: 'Verificati conexiunea la internet',
+            type: 'error'
+          })
+
+          // Store offline
+          offlineTool.addOwnTask({
+            type: `Adauga imagine`,
+            data: err.config.data as FormData,
+            url: uploadUrl,
+            method: 'post'
+          })
+
+          return
+        }
+
+        onError(err)
       }
     }
-  };
+  }
 
   return (
     <div>
@@ -88,7 +111,13 @@ const ImageUpload = ({
         </>
       )}
 
-      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth={true} style={{ textAlign: 'center' }}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth="sm"
+        fullWidth={true}
+        style={{ textAlign: 'center' }}
+      >
         <DialogTitle>Adauga imagine</DialogTitle>
         <DialogContent style={{ paddingBottom: '0', display: 'flex', flexDirection: 'column' }}>
           {showPhotoCapture ? (
@@ -99,9 +128,9 @@ const ImageUpload = ({
                   fetch(imageSrc)
                     .then(res => res.blob())
                     .then(async blob => {
-                      const file = new File([blob], 'image.JPEG', { type: 'image/png' });
-                      await saveFile(file);
-                    });
+                      const file = new File([blob], 'image.JPEG', { type: 'image/png' })
+                      await saveFile(file)
+                    })
                 }}
                 videoConstraints={{ width: 300, height: 300, facingMode: 'environment' }}
               />
@@ -131,7 +160,7 @@ const ImageUpload = ({
                 accept="image/*"
                 onChange={e => {
                   if (e.target.files) {
-                    saveFile(e.currentTarget.files[0]);
+                    saveFile(e.currentTarget.files[0])
                   }
                 }}
               />
@@ -139,13 +168,13 @@ const ImageUpload = ({
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} label=''>
+          <Button onClick={handleClose} label="">
             Cancel
           </Button>
         </DialogActions>
       </Dialog>
     </div>
-  );
-};
+  )
+}
 
-export default ImageUpload;
+export default ImageUpload

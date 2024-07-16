@@ -11,10 +11,13 @@ import { useNotification } from 'hooks'
 import s from '../../../../commonStyles.modules.scss'
 import { useParams } from 'react-router'
 import { Grid } from '@mui/material'
+import { useOfflineTool } from 'components/core-ui/Offline'
+import { AxiosError } from 'axios'
 
 const SupportWrongDestinationDetail = () => {
   const { showNotification } = useNotification()
   const { id } = useParams()
+  const offlineTool = useOfflineTool()
 
   const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files[0]
@@ -33,9 +36,25 @@ const SupportWrongDestinationDetail = () => {
       })
       formik.resetForm()
     },
-    onError: res => {
+    onError: (err: any) => {
+      if (err?.code === AxiosError.ERR_NETWORK) {
+        showNotification({
+          message: 'Verificati conexiunea la internet',
+          type: 'error'
+        })
+
+        // Store offline
+        offlineTool.addOwnTask({
+          type: `Suporti cu destinatie eronata`,
+          data: err.config.data as FormData,
+          url: `/shop-reception/wrongDestination/form/${id}`,
+          method: 'post'
+        })
+
+        return
+      }
       showNotification({
-        message: `A aparut o eroare la salvarea datelor. ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare. ${formatErrorMessage(err)}`,
         type: 'error'
       })
     }

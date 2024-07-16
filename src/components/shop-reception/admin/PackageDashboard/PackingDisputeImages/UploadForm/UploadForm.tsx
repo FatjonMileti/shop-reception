@@ -9,10 +9,13 @@ import { useNotification } from 'hooks'
 import { makeCorePostRequest } from 'utils/api'
 import { formatErrorMessage } from 'utils/formatting'
 import { FileUpload } from 'components/core-ui/FileUpload'
+import { useOfflineTool } from 'components/core-ui/Offline'
+import { AxiosError } from 'axios'
 
 const UploadForm = ({ id, refetchImages, uploadModel }) => {
   const { showNotification } = useNotification()
-
+  const offlineTool = useOfflineTool()
+  
   const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files[0]
     formik.setFieldValue('file', file)
@@ -33,9 +36,25 @@ const UploadForm = ({ id, refetchImages, uploadModel }) => {
       })
       refetchImages()
     },
-    onError: res => {
+    onError: (err: any) => {
+      if (err?.code === AxiosError.ERR_NETWORK) {
+        showNotification({
+          message: 'Verificati conexiunea la internet',
+          type: 'error'
+        })
+
+        // Store offline
+        offlineTool.addOwnTask({
+          type: `Produse cu DLC scurt`,
+          data: err.config.data as FormData,
+          url: `/shop-reception/return-litigation/details/supports/${id}/images`,
+          method: 'post'
+        })
+
+        return
+      }
       showNotification({
-        message: `Error while trying to update destination, ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare. ${formatErrorMessage(err)}`,
         type: 'error'
       })
     }

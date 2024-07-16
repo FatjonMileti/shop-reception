@@ -22,7 +22,9 @@ export const columns = [
     field: 'supportStatusValue',
     type: 'string',
     render: row => (
-      <div style={{ color: statusColorMapping[row.statusValue] || 'black' }}>{row.supportStatusValue}</div>
+      <div style={{ color: statusColorMapping[row.supportStatusValue] || 'black' }}>
+        {row.supportStatusValue}
+      </div>
     )
   },
   {

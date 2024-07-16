@@ -11,6 +11,8 @@ import { CircularProgress, Grid } from '@mui/material'
 import { Autocomplete, Button, FilterDataSelect } from '@fullscreendigital/carrefour-dex-fe'
 import { FileUpload } from 'components/core-ui/FileUpload'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
+import { useOfflineTool } from 'components/core-ui/Offline'
+import { AxiosError } from 'axios'
 
 interface NewAdminDepositProps {
   isModalOpen: boolean
@@ -33,6 +35,7 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
     isShopCodesLoading
   } = props
   const { showNotification } = useNotification()
+  const offlineTool = useOfflineTool()
 
   const [file, setFile] = useState<File | null>(null)
 
@@ -63,9 +66,27 @@ const ImportProductsForm: React.FC<NewAdminDepositProps> = props => {
       setShouldRefreshData(true)
       closeModal()
     },
-    onError: res => {
+    onError: (err: any) => {
+      if (err?.code === AxiosError.ERR_NETWORK) {
+        showNotification({
+          message: 'Verificati conexiunea la internet',
+          type: 'error'
+        })
+
+        // Store offline
+        offlineTool.addOwnTask({
+          type: `Produse cu DLC scurt`,
+          data: err.config.data as FormData,
+          url: `/shop-reception/products/short-dlc/import`,
+          method: 'post'
+        })
+
+        closeModal()
+
+        return
+      }
       showNotification({
-        message: `A aparut o eroare. ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare. ${formatErrorMessage(err)}`,
         type: 'error'
       })
     }

@@ -10,6 +10,8 @@ import { FileUpload } from 'components/core-ui/FileUpload'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { makeCorePostRequest } from 'utils/api'
 import { useMutation } from 'react-query'
+import { useOfflineTool } from 'components/core-ui/Offline'
+import { AxiosError } from 'axios'
 
 interface SGRProductsProps {
   isModalOpen: boolean
@@ -32,7 +34,8 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
     isShopCodesLoading
   } = props
   const { showNotification } = useNotification()
-
+  const offlineTool = useOfflineTool()
+  
   const [file, setFile] = useState<File | null>(null)
 
   const onFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -66,9 +69,27 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
       setShouldRefreshData(true)
       closeModal()
     },
-    onError: res => {
+    onError: (err: any) => {
+      if (err?.code === AxiosError.ERR_NETWORK) {
+        showNotification({
+          message: 'Verificati conexiunea la internet',
+          type: 'error'
+        })
+
+        // Store offline
+        offlineTool.addOwnTask({
+          type: `Produse cu SGR`,
+          data: err.config.data as FormData,
+          url: `/shop-reception/products/sgr/import`,
+          method: 'post'
+        })
+
+        closeModal()
+
+        return
+      }
       showNotification({
-        message: `A aparut o eroare la importul datelor. ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare. ${formatErrorMessage(err)}`,
         type: 'error'
       })
     }

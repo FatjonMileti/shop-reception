@@ -17,7 +17,7 @@ export const statusColorMapping = {
   'În procesare în HUB': 'blue',
   'Succes': 'green',
   'Lipsește': 'red',
-  'În așteptare': 'black',
+  'În aşteptare': 'black',
 }
 
 export const columns = navigate => [

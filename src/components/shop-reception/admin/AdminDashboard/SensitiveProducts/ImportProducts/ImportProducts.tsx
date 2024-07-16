@@ -11,6 +11,8 @@ import { makeCorePostRequest } from 'utils/api'
 import { useMutation } from 'react-query'
 import s from 'components/core-ui/Modal/Modal.modules.scss'
 import { FileUpload } from 'components/core-ui/FileUpload'
+import { useOfflineTool } from 'components/core-ui/Offline'
+import { AxiosError } from 'axios'
 
 interface ImportProductsProps {
   isModalOpen: boolean
@@ -33,6 +35,7 @@ const ImportProducts: React.FC<ImportProductsProps> = props => {
     isShopCodesLoading
   } = props
   const { showNotification } = useNotification()
+  const offlineTool = useOfflineTool()
 
   const [file, setFile] = useState<File | null>(null)
 
@@ -63,9 +66,27 @@ const ImportProducts: React.FC<ImportProductsProps> = props => {
       setShouldRefreshData(true)
       closeModal()
     },
-    onError: res => {
+    onError: (err: any) => {
+      if (err?.code === AxiosError.ERR_NETWORK) {
+        showNotification({
+          message: 'Verificati conexiunea la internet',
+          type: 'error'
+        })
+
+        // Store offline
+        offlineTool.addOwnTask({
+          type: `Produse sensibile`,
+          data: err.config.data as FormData,
+          url: `/shop-reception/products/sensitives/import`,
+          method: 'post'
+        })
+
+        closeModal()
+
+        return
+      }
       showNotification({
-        message: `A aparut o eroare la importul datelor. ${formatErrorMessage(res)}`,
+        message: `A aparut o eroare. ${formatErrorMessage(err)}`,
         type: 'error'
       })
     }

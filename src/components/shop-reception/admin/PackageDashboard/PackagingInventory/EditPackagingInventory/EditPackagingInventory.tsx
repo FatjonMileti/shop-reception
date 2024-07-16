@@ -12,9 +12,13 @@ import { makeCorePostRequest } from 'utils/api'
 import { FileUpload } from 'components/core-ui/FileUpload'
 import { ChangeEvent } from 'react'
 import { toBlobFormDataPayload, toFormDataPayload } from 'utils/serializers'
+import { useOfflineTool } from 'components/core-ui/Offline'
+import { AxiosError } from 'axios'
 
 const EditPackagingInventory = ({ isModalOpen, closeModal, editItem, setShouldRefreshData }) => {
   const { showNotification } = useNotification()
+
+  const offlineTool = useOfflineTool()
 
   const uploadImage = async (values: any) => {
     await makeCorePostRequest(
@@ -39,8 +43,25 @@ const EditPackagingInventory = ({ isModalOpen, closeModal, editItem, setShouldRe
         type: 'success'
       })
     },
-    onError: error =>
-      handleQueryError(error, 'A aparut o eroare la actualizarea inventarului.', showNotification)
+    onError: (err: any) => {
+      if (err?.code === AxiosError.ERR_NETWORK) {
+        showNotification({
+          message: 'Verificati conexiunea la internet',
+          type: 'error'
+        })
+
+        // Store offline
+        offlineTool.addOwnTask({
+          type: `Inventar ambalaje`,
+          data: err.config.data as FormData,
+          url: `/shop-reception/support-inventories/inventory/${editItem.id}`,
+          method: 'post'
+        })
+
+        closeModal()
+
+        return
+    }}
   })
 
   const formik = useFormik({
@@ -119,7 +140,12 @@ const EditPackagingInventory = ({ isModalOpen, closeModal, editItem, setShouldRe
         )}
         <Grid xs={12} item className={s.modalButtons}>
           <Button variant="outlined" label="Anuleaza" onClick={() => closeModal()} />
-          <Button variant="contained" label="Salveaza" onClick={() => formik.handleSubmit()} disabled={isLoading} />
+          <Button
+            variant="contained"
+            label="Salveaza"
+            onClick={() => formik.handleSubmit()}
+            disabled={isLoading}
+          />
         </Grid>
       </Grid>
     </Modal>

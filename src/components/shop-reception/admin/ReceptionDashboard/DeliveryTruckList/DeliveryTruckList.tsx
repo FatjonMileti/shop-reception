@@ -99,7 +99,7 @@ const DeliveryTruckList = () => {
         shouldRefreshData={shouldRefreshData}
         setShouldRefreshData={setShouldRefreshData}
         toolbarActions={
-          totalCount >= 10000
+          totalCount < 10000
             ? [
                 {
                   label: 'Export',
