@@ -52,6 +52,7 @@ VALUES
     (12, 'Administrare', 'ProjectTeamGovernance', '/admin', true, 5),
     (13, 'Receptie marfa', 'ProjectTeamGovernance', '/reception', true, 5),
     (14, 'Ambalaje', 'ProjectTeamGovernance', '/package', true, 5),
+    (22, 'Rapoarte istorice (mai vechi de 2 luni)', 'ProjectTeamGovernance', '/historical', true, 5),
     -- Shop Reception (Mobile)
     (15, 'Receptie marfa', 'ProjectTeamGovernance', '/goodsReception', true, 6),
     (16, 'Returnare marfa', 'ProjectTeamGovernance', '/goodsReturn', true, 6),
@@ -150,6 +151,16 @@ VALUES
     (169, 'Trasabilitate suport', 'UsersManagement', null, true, 13),
     (195, 'Articole sensibile', 'UsersManagement', null, true, 13),
     (196, 'Raport livrare marfa', 'UsersManagement', null, true, 13),
+    -- "Rapoarte istorice" section
+    (280, 'Bonuri de livrare (istoric)', 'UsersManagement', null, true, 22),
+    (281, 'Lista camioane marfa (istoric)', 'UsersManagement', null, true, 22),
+    (282, 'Suporti cu destinatie eronata (istoric)', 'UsersManagement', null, true, 22),
+    (283, 'Produse necomandate (istoric)', 'UsersManagement', null, true, 22),
+    (284, 'Fisiere meti (istoric)', 'UsersManagement', null, true, 22),
+    (285, 'Produse cu diferente (istoric)', 'UsersManagement', null, true, 22),
+    (286, 'Trasabilitate suport (istoric)', 'UsersManagement', null, true, 22),
+    (287, 'Articole sensibile (istoric)', 'UsersManagement', null, true, 22),
+    (288, 'Raport livrare marfa (istoric)', 'UsersManagement', null, true, 22),
     -- "Ambalaje" section
     (170, 'Lista camioane retur', 'UsersManagement', null, true, 14),
     (171, 'Rulaj ambalaje', 'UsersManagement', null, true, 14),
@@ -314,6 +325,21 @@ VALUES
     (185, 'Trasabilitate suport', '', '/shop-reception/reception/trasabilitySupport', true, 169, true),
     (292, 'Articole sensibile', '', '/shop-reception/reception/sensitiveProducts', true, 195, true),
     (293, 'Raport livrare marfa', '', '/shop-reception/reception/deliveryTruckList', true, 196, true),
+    -- "Rapoarte istorice" section
+    (400, 'Bonuri de livrare', '', '/shop-reception/reception/history/deliverySlips', true, 280, true),
+    (401, 'Bonuri de livrare', '', '/shop-reception/reception/history/deliverySupportAction/:id', true, 280, false),
+    (402, 'Bonuri de livrare', '', '/shop-reception/reception/history/deliverySlips/:id', true, 280, false),
+    (403, 'Lista camioane marfa', '', '/shop-reception/reception/history/truckList', true, 281, true),
+    (404, 'Detalii lista camioane marfa', '', '/shop-reception/reception/history/truckList/:id', true, 281, false),
+    (405, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/history/wrongDestinationSupport', true, 282, true),
+    (406, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/history/wrongDestinationSupport/:id', true, 282, false),
+    (407, 'Produse necomandate', '', '/shop-reception/reception/history/nonRecommendedProducts', true, 283, true),
+    (408, 'Fisiere meti', '', '/shop-reception/reception/history/metiFiles', true, 284, true),
+    (409, 'Detalii fisiere meti', '', '/shop-reception/reception/history/metiFiles/:id', true, 284, false),
+    (410, 'Produse cu diferente', '', '/shop-reception/reception/history/productsDifferences', true, 285, true),
+    (411, 'Trasabilitate suport', '', '/shop-reception/reception/history/trasabilitySupport', true, 286, true),
+    (412, 'Articole sensibile', '', '/shop-reception/reception/history/sensitiveProducts', true, 287, true),
+    (413, 'Raport livrare marfa', '', '/shop-reception/reception/history/deliveryTruckList', true, 288, true),
     -- "Ambalaje" section
     (186, 'Lista camioane retur', '', '/shop-reception/package/trucksReturn', true, 170, true),
     (286, 'Detalii camion retur', '', '/shop-reception/package/trucksReturn/:id', true, 170, false),
@@ -531,6 +557,11 @@ VALUES
     (200, 272), (200, 247), (200, 248), (200, 277),
     (200, 278),
 
+    -- rapoarte istorice
+    (200, 280), (200, 281), (200, 282), (200, 283),
+    (200, 284), (200, 285), (200, 286), (200, 287),
+    (200, 288),
+
     -- GG_RO_HQ_SHOP_RECEPTION_BACKOFFICE - store manager
     -- admin
     (201, 152), (201, 155), (201, 157), (201, 158),
@@ -546,6 +577,11 @@ VALUES
     (201, 173), (201, 174), (201, 175), (201, 176),
     (201, 277),
 
+    -- rapoarte istorice
+    (201, 280), (201, 281), (201, 282), (201, 283),
+    (201, 284), (201, 285), (201, 286), (201, 287),
+    (201, 288),
+
     -- GG_RO_HQ_SHOP_RECEPTION_STORE - receptionist
     -- admin
     (202, 157), (202, 161),
@@ -559,6 +595,11 @@ VALUES
     (202, 170), (202, 171), (202, 172), (202, 272),
     (202, 173), (202, 174), (202, 175), (202, 176),
     (202, 277),
+
+    -- rapoarte istorice
+    (202, 280), (202, 281), (202, 282), (202, 283),
+    (202, 284), (202, 285), (202, 286), (202, 287),
+    (202, 288),
 
     -- GG_RO_HQ_SHOP_RECEPTION_HUB
     -- admin
@@ -578,6 +619,11 @@ VALUES
     (203, 272), (203, 247), (203, 248), (203, 277),
     (203, 278),
 
+    -- rapoarte istorice
+    (203, 280), (203, 281), (203, 282), (203, 283),
+    (203, 284), (203, 285), (203, 286), (203, 287),
+    (203, 288),
+
     -- GG_RO_HQ_SHOP_RECEPTION_AMBALAJE - depozit
     -- admin
     (208, 149), (208, 151), (208, 152), (208, 154),
@@ -592,6 +638,10 @@ VALUES
     (208, 174), (208, 175), (208, 176), (208, 272),
     (208, 248), (208, 277), (208, 278),
 
+    -- rapoarte istorice
+    (208, 280), (208, 281), (208, 282), (208, 283),
+    (208, 284), (208, 285), (208, 286), (208, 287),
+    (208, 288),
 
     -- GG_RO_HQ_SHOP_RECEPTION_REGIONAL_OPERATIONS
     -- admin
@@ -609,6 +659,10 @@ VALUES
     (205, 174), (205, 175), (205, 176), (205, 172),
     (205, 277),
 
+    -- rapoarte istorice
+    (205, 280), (205, 281), (205, 282), (205, 283),
+    (205, 284), (205, 285), (205, 286), (205, 287),
+    (205, 288),
 
     -- GG_RO_HQ_SHOP_RECEPTION_CG
     -- admin
@@ -625,6 +679,11 @@ VALUES
     (207, 170), (207, 171), (207, 272), (207, 173),
     (207, 174), (207, 175), (207, 176), (207, 172),
     (207, 277),
+
+    -- rapoarte istorice
+    (207, 280), (207, 281), (207, 282), (207, 283),
+    (207, 284), (207, 285), (207, 286), (207, 287),
+    (207, 288),
 
     -- Shop Reception Mobile
     -- GG_RO_HQ_SHOP_RECEPTION_STORE
