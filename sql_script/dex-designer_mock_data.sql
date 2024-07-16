@@ -58,6 +58,7 @@ VALUES
     (17, 'Receptie marfa HUB', 'ProjectTeamGovernance', '/goodsReceptionHub', true, 6),
     (18, 'Returnare marfa HUB', 'ProjectTeamGovernance', '/goodsReturnHub', true, 6),
     (19, 'Returnare marfa depozit', 'ProjectTeamGovernance', '/goodsReturnDeposit', true, 6),
+    (21, 'Actualizare inventar ambalaje', 'ProjectTeamGovernance', '/goodsReception', true, 6),
     -- Lost Sales Opportunities
     (20, 'Alerte LSO', 'AlertIcon', '/lostSalesAlerts', true, 7);
 
@@ -123,6 +124,7 @@ VALUES
     (249, 'Management magazine', 'StoreManagement', null, true, 8),
     (250, 'Management business units', 'CategoryTemplateManagement', null, true, 8),
     -- Shop Reception (Admin)
+    -- "Administrare" section
     (149, 'Administrare depozite', 'UsersManagement', null, true, 12),
     (151, 'Administrare huburi', 'UsersManagement', null, true, 12),
     (152, 'Administrare magazine', 'UsersManagement',null, true, 12),
@@ -138,6 +140,7 @@ VALUES
     (162, 'Administrare produse SGR', 'UsersManagement', null, true, 12),
     (247, 'Nomenclator societati', 'UsersManagement', null, true, 12),
     (248, 'Serie Numar-Aviz', 'UsersManagement', null, true, 12),
+    -- "Receptie marfa" section
     (163, 'Bonuri de livrare', 'UsersManagement', null, true, 13),
     (164, 'Lista camioane marfa', 'UsersManagement', null, true, 13),
     (165, 'Suporti cu destinatie eronata', 'UsersManagement', null, true, 13),
@@ -147,6 +150,7 @@ VALUES
     (169, 'Trasabilitate suport', 'UsersManagement', null, true, 13),
     (195, 'Articole sensibile', 'UsersManagement', null, true, 13),
     (196, 'Raport livrare marfa', 'UsersManagement', null, true, 13),
+    -- "Ambalaje" section
     (170, 'Lista camioane retur', 'UsersManagement', null, true, 14),
     (171, 'Rulaj ambalaje', 'UsersManagement', null, true, 14),
     (172, 'Sold ambalaje', 'UsersManagement', null, true, 14),
@@ -159,10 +163,13 @@ VALUES
     (277, 'Aviz centralizator', 'UsersManagement', null, true, 14),
     (278, 'Responsabili transport', 'UsersManagement', null, true, 14),
     -- Shop Reception (Mobile)
+    -- "Receptie marfa" section
     (178, 'In procesare receptie', 'UsersManagement', null, true, 15),
     (187, 'Lista camioane', 'UsersManagement', null, true, 15),
     (188, 'Validare livrare', 'UsersManagement', null, true, 15),
-    (193, 'Actualizare inventar ambalaje', 'UsersManagement', null, true, 15),
+    -- "Actualizare inventar" section
+    (193, 'Actualizare inventar ambalaje', 'UsersManagement', null, true, 21),
+    -- "Retur ambalaje" section
     (189, 'Înregistrare retur', 'UsersManagement', null, true, 16),
     (190, 'Continuare retur', 'UsersManagement', null, true, 16),
     (179, 'Camioane asteptate', 'UsersManagement', null, true, 17),
@@ -275,6 +282,7 @@ VALUES
     (267, 'Management business units', '', '/volumetry/tasksManagement/locationCategoryManagement', true, 250, true),
 
     -- Shop Reception (Admin)
+    -- "Administrare" section
     (166, 'Administrare depozite', '', '/shop-reception/admin/deposits', true, 149, true),
     (167, 'Administrare huburi', '', '/shop-reception/admin/hubs', true, 151, true),
     (220, 'Administrare huburi', '', '/shop-reception/admin/hubs/deliveryInterval/:id', true, 151, false),
@@ -291,10 +299,10 @@ VALUES
     (178, 'Administrare produse SGR', '', '/shop-reception/admin/sgrProducts', true, 162, true),
     (247, 'Nomenclator societati', '', '/shop-reception/admin/parentSocietyList', true, 247, true),
     (248, 'Serie Numar-Aviz', '', '/shop-reception/admin/noticeSeriesNumberList', true, 248, true),
+    -- "Receptie marfa" section
     (179, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips', true, 163, true),
     (222, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySupportAction/:id', true, 163, false),
     (218, 'Bonuri de livrare', '', '/shop-reception/reception/deliverySlips/:id', true, 163, false),
-
     (180, 'Lista camioane marfa', '', '/shop-reception/reception/truckList', true, 164, true),
     (291, 'Detalii lista camioane marfa', '', '/shop-reception/reception/truckList/:id', true, 164, false),
     (181, 'Suporti cu destinatie eronata', '', '/shop-reception/reception/wrongDestinationSupport', true, 165, true),
@@ -306,6 +314,7 @@ VALUES
     (185, 'Trasabilitate suport', '', '/shop-reception/reception/trasabilitySupport', true, 169, true),
     (292, 'Articole sensibile', '', '/shop-reception/reception/sensitiveProducts', true, 195, true),
     (293, 'Raport livrare marfa', '', '/shop-reception/reception/deliveryTruckList', true, 196, true),
+    -- "Ambalaje" section
     (186, 'Lista camioane retur', '', '/shop-reception/package/trucksReturn', true, 170, true),
     (286, 'Detalii camion retur', '', '/shop-reception/package/trucksReturn/:id', true, 170, false),
     (187, 'Rulaj ambalaje', '', '/shop-reception/package/rolling', true, 171, true),
@@ -505,64 +514,137 @@ VALUES
     (152, 250),
     -- Shop Reception Admin
     -- GG_RO_HQ_SHOP_RECEPTION_ADMIN
-    (200, 149), (200, 151), (200, 152), (200, 153), (200, 154), (200, 155), (200, 156), (200, 157),
-    (200, 158), (200, 159), (200, 160), (200, 161), (200, 162), -- admin
-    (200, 163), (200, 164), (200, 165),
+    -- admin
+    (200, 149), (200, 151), (200, 152), (200, 153),
+    (200, 154), (200, 155), (200, 156), (200, 157),
+    (200, 158), (200, 159), (200, 160), (200, 161),
+    (200, 162),
 
-    (200, 166), (200, 167), (200, 168), (200, 169), (200, 195), (200, 196), -- receptie marfa
+    -- receptie marfa
+    (200, 163), (200, 164), (200, 165), (200, 166),
+    (200, 167), (200, 168), (200, 169), (200, 195),
+    (200, 196),
 
-    (200, 170), (200, 171), (200, 172), (200, 173), (200, 174), (200, 175), (200, 176), (200, 177), (200, 272), (200, 247),
-    (200, 248), (200, 277), (200, 278), -- ambalaje
+    -- ambalaje
+    (200, 170), (200, 171), (200, 172), (200, 173),
+    (200, 174), (200, 175), (200, 176), (200, 177),
+    (200, 272), (200, 247), (200, 248), (200, 277),
+    (200, 278),
 
     -- GG_RO_HQ_SHOP_RECEPTION_BACKOFFICE - store manager
-    (201, 152), (201, 155), (201, 157), (201, 158), (201, 160), (201, 161), (201, 162), -- admin
+    -- admin
+    (201, 152), (201, 155), (201, 157), (201, 158),
+    (201, 160), (201, 161), (201, 162),
 
-    (201, 163), (201, 164), (201, 165), (201, 166), (201, 167), (201, 168), (201, 169),
-    (201, 195), -- receptie marfa
+    -- receptie marfa
+    (201, 163), (201, 164), (201, 165), (201, 166),
+    (201, 167), (201, 168), (201, 169), (201, 195),
+    (201, 196),
 
-    (201, 170), (201, 171), (201, 172), (201, 272), (201, 173),
-    (201, 174), (201, 175), (201, 176), (201, 277), -- ambalaje
+    -- ambalaje
+    (201, 170), (201, 171), (201, 172), (201, 272),
+    (201, 173), (201, 174), (201, 175), (201, 176),
+    (201, 277),
 
     -- GG_RO_HQ_SHOP_RECEPTION_STORE - receptionist
-    (202, 157), (202, 161), -- admin
-    (202, 163), (202, 164), (202, 165), (202, 166), (202, 167), (202, 168), (202, 169), (202, 195), -- receptie marfa
+    -- admin
+    (202, 157), (202, 161),
+
+    -- receptie marfa
+    (202, 163), (202, 164), (202, 165), (202, 166),
+    (202, 167), (202, 168), (202, 169), (202, 195),
+    (202, 196),
+
+    -- ambalaje
+    (202, 170), (202, 171), (202, 172), (202, 272),
+    (202, 173), (202, 174), (202, 175), (202, 176),
+    (202, 277),
 
     -- GG_RO_HQ_SHOP_RECEPTION_HUB
-    (203, 149), (203, 151), (203, 152), (203, 153), (203, 154), (203, 155), (203, 156), (203, 157),
-    (203, 158), (203, 159), (203, 160), (203, 161), (203, 162), -- admin
-    (203, 163), (203, 164), (203, 165),
+    -- admin
+    (203, 149), (203, 151), (203, 152), (203, 153),
+    (203, 154), (203, 155), (203, 156), (203, 157),
+    (203, 158), (203, 159), (203, 160), (203, 161),
+    (203, 162),
 
-    (203, 166), (203, 167), (203, 168), (203, 169), (203, 195), (203, 196), -- receptie marfa
+    -- receptie marfa
+    (203, 163), (203, 164), (203, 165), (203, 166),
+    (203, 167), (203, 168), (203, 169), (203, 195),
+    (203, 196),
 
-    (203, 170), (203, 171), (203, 172), (203, 173), (203, 174), (203, 175), (203, 176), (203, 177), (203, 272), (203, 247),
-    (203, 248), (203, 277), (203, 278), -- ambalaje
+    -- ambalaje
+    (203, 170), (203, 171), (203, 172), (203, 173),
+    (203, 174), (203, 175), (203, 176), (203, 177),
+    (203, 272), (203, 247), (203, 248), (203, 277),
+    (203, 278),
 
     -- GG_RO_HQ_SHOP_RECEPTION_AMBALAJE - depozit
-    (208, 149), (208, 151), (208, 152), (208, 154), (208, 157),
-    (208, 160), (208, 161), (208, 162), -- admin
+    -- admin
+    (208, 149), (208, 151), (208, 152), (208, 154),
+    (208, 157), (208, 160), (208, 161), (208, 162),
 
-    (208, 163), (208, 164), (208, 165),
+    -- receptie marfa
+    (208, 163), (208, 164), (208, 165), (208, 167),
+    (208, 168), (208, 169), (208, 195), (208, 196),
 
-    (208, 167), (208, 168), (208, 169), (208, 195), (208, 196), -- receptie marfa
+    -- ambalaje
+    (208, 170), (208, 171), (208, 172), (208, 173),
+    (208, 174), (208, 175), (208, 176), (208, 272),
+    (208, 248), (208, 277), (208, 278),
 
-    (208, 170), (208, 171), (208, 172), (208, 173), (208, 174), (208, 175), (208, 176), (208, 272), (208, 247),
-    (208, 248), (208, 277), (208, 278), -- ambalaje
 
+    -- GG_RO_HQ_SHOP_RECEPTION_REGIONAL_OPERATIONS
+    -- admin
+    (205, 152), (205, 153), (205, 154), (205, 155),
+    (205, 156), (205, 157), (205, 158), (205, 160),
+    (205, 161), (205, 162),
+
+    -- receptie marfa
+    (205, 163), (205, 164), (205, 165), (205, 166),
+    (205, 167), (205, 168), (205, 169), (205, 195),
+    (205, 196),
+
+    -- ambalaje
+    (205, 170), (205, 171), (205, 272), (205, 173),
+    (205, 174), (205, 175), (205, 176), (205, 172),
+    (205, 277),
+
+
+    -- GG_RO_HQ_SHOP_RECEPTION_CG
+    -- admin
+    (207, 149), (207, 152), (207, 153), (207, 154),
+    (207, 155), (207, 156), (207, 157), (207, 158),
+    (207, 159), (207, 160), (207, 161), (207, 162),
+
+    -- receptie marfa
+    (207, 163), (207, 164), (207, 165), (207, 166),
+    (207, 167), (207, 168), (207, 169), (207, 195),
+    (207, 196),
+
+    -- ambalaje
+    (207, 170), (207, 171), (207, 272), (207, 173),
+    (207, 174), (207, 175), (207, 176), (207, 172),
+    (207, 277),
 
     -- Shop Reception Mobile
     -- GG_RO_HQ_SHOP_RECEPTION_STORE
-    (202, 178), (202, 187), (202, 188), (202, 193), (202, 189), (202, 190),
+    (202, 178), (202, 187), (202, 188), (202, 193),
+    (202, 189), (202, 190),
 
     -- GG_RO_HQ_SHOP_RECEPTION_BACKOFFICE
-    (201, 178), (201, 187), (201, 188), (201, 193), (201, 189), (201, 190),
+    (201, 178), (201, 187), (201, 188), (201, 193),
+    (201, 189), (201, 190),
 
     -- GG_RO_HQ_SHOP_RECEPTION_HUB
-    (203, 179), (203, 180), (203, 181), (203, 182), (203, 183), (203, 184), (203, 185),
+    (203, 179), (203, 180), (203, 181), (203, 182),
+    (203, 183), (203, 184), (203, 185),
 
     -- GG_RO_HQ_SHOP_RECEPTION_AMBALAJE
     (208, 251), (208, 252),
 
 
+    -- GG_RO_HQ_SHOP_RECEPTION_REGIONAL_OPERATIONS
+    -- GG_RO_HQ_SHOP_RECEPTION_CG
 
     -- Lost Sales Opportunities
     (300, 57), (300, 58);
