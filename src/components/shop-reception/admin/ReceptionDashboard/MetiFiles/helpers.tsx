@@ -23,7 +23,7 @@ export const columns = (
   },
   {
     title: 'Magazin',
-    field: 'shopName',
+    field: 'shopCode',
     align: 'left',
     type: 'string',
     width: '100px'

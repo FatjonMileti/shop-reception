@@ -6,7 +6,7 @@ import { formatUIDate } from 'utils/helpers'
 export const columns = [
   {
     title: 'Magazin',
-    field: 'shopCodeName',
+    field: 'shopCode',
     align: 'left',
     type: 'string',
     width: '200px',

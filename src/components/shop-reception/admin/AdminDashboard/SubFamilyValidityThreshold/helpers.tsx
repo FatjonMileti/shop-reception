@@ -9,9 +9,10 @@ export const columns = [
   },
   {
     title: 'Sub familie',
-    field: 'sfaName',
+    field: 'name',
     align: 'left',
-    type: 'string'
+    type: 'string',
+    render: row => row.sfaName
   },
   {
     title: 'Familie',
