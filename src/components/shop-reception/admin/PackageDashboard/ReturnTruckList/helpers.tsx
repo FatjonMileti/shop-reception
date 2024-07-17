@@ -109,8 +109,8 @@ export const getColumns = printNotice => [
 ]
 
 const packageReturnOptions = [
-  { value: 'Da', label: 'Da' },
-  { value: 'Nu', label: 'Nu' }
+  { value: 'true', label: 'Da' },
+  { value: 'false', label: 'Nu' }
 ]
 
 const currentDate = getCurrentDate()

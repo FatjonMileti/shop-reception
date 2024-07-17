@@ -182,7 +182,7 @@ const ImportProductsForm: React.FC<SGRProductsProps> = props => {
             variant="contained"
             label={'Salveaza'}
             onClick={() => formik.handleSubmit()}
-            disabled={isLoading || isLoadingShopTypes || isShopCodesLoading}
+            disabled={isLoading || isLoadingShopTypes || isShopCodesLoading || file === null}
           />
         </Grid>
       </Grid>
